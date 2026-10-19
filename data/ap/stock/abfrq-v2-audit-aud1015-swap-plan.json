@@ -1,0 +1,31 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "ABFRQ",
+ "sourceSetName": "AP Calculus AB — Free-Response Practice",
+ "sourceVersionNo": 1,
+ "generatedBy": "scripts/audit/ap-aud1015-csa-calc-build.py (external audit 2026-10-15 confirmed fixes)",
+ "note": "Each swap replaces a published candidate with a corrected copy (stem/premise/reference-wording fix only; the key answer is unchanged). New candidates are in data/ap/stock/supp-aud1015-items.json and must be loaded (review_env_ready) before the preview. Slots are found by removeKey.",
+ "swapCount": 1,
+ "verifierViolations": [],
+ "swaps": [
+  {
+   "section": "ap_frq_b",
+   "position": 1,
+   "removeKey": "s1a-final:ap_calculus_ab-f02-k1",
+   "addKey": "supp-aud1015-final:ap_calculus_ab-f02-k906",
+   "reason": "external audit 2026-10-15 AP-014",
+   "remove": {
+    "unit": 5,
+    "skill": "3.E",
+    "shared": false,
+    "type": "5.9"
+   },
+   "add": {
+    "unit": 5,
+    "skill": "3.E",
+    "shared": false,
+    "type": "5.9"
+   }
+  }
+ ]
+}

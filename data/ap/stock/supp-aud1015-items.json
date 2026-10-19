@@ -1,0 +1,3093 @@
+[
+ {
+  "candidateKey": "ap_calculus_ab-m04-k901",
+  "cellId": "ap_calculus_ab-m04",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "mc",
+  "keywordCode": "3.2",
+  "unitCode": "3",
+  "skillPrimary": "1.E",
+  "structure": "standalone",
+  "calculator": "required",
+  "archetype": "c_implicit_slope_calc",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-procedure implicit differentiation: product rule on x*e^y plus chain rule on y^2, then solve for dy/dx and evaluate at a given point. No representation changes, no theorem checks, and only light arithmetic. This fits an early-topic skill check rather than a full-mock item.",
+  "payload": {
+   "archetype": "c_implicit_slope_calc",
+   "topic": "3.2",
+   "skill": "1.E",
+   "calculator": "required",
+   "stem": "A curve is defined by $xe^{y}+y^{2}=2e+1$. The point $(2,1)$ lies on the curve. What is $\\dfrac{dy}{dx}$ at this point?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$-0.868$",
+     "why": "Differentiates y^2 as 2y without the factor dy/dx.",
+     "value": "-0.86787944"
+    },
+    {
+     "text": "$-0.500$",
+     "why": "Forgets the 2y dy/dx term from y squared and solves e^y + x e^y y' = 0.",
+     "value": "-0.50000000"
+    },
+    {
+     "text": "$-0.366$",
+     "why": "Implicit differentiation: e^y + x e^y y' + 2y y' = 0, so y' = -e^y/(x e^y + 2y), evaluated with a calculator.",
+     "value": "-0.36552929"
+    },
+    {
+     "text": "$-0.134$",
+     "why": "Treats y as a constant when differentiating x e^y, so the e^y term is missing from the numerator: -1/(...) .",
+     "value": "-0.13447071"
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 95,
+   "facts": [
+    "key=-0.365529",
+    "constant=2e+1"
+   ],
+   "blueprint": {
+    "id": "c_implicit_slope_calc",
+    "subject": "ap_calculus_ab",
+    "kind": "mc",
+    "concept": "Find a slope by implicit differentiation of a curve mixing an exponential and a power of y",
+    "topic": "3.2",
+    "skill": "1.E",
+    "student_thinking": [
+     "Differentiate both sides with respect to x using the product and chain rules",
+     "Solve for dy/dx",
+     "Evaluate at the point with a calculator"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "the denominator x e^y + 2y is not zero at the point",
+      "evidence": "all terms are positive at the given point"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "missing_dydx_on_square",
+      "description": "forgets dy/dx on y squared"
+     },
+     {
+      "id": "missing_product_term",
+      "description": "drops the product rule term"
+     },
+     {
+      "id": "sign_error",
+      "description": "wrong sign"
+     },
+     {
+      "id": "y_constant",
+      "description": "treats y as constant"
+     }
+    ],
+    "verification": {
+     "independent_path": "the curve is solved for y(x) with Brent's method near the point and differentiated by central difference (independent of implicit differentiation)",
+     "method": "exact rational arithmetic + numeric cross-check"
+    }
+   },
+   "seed": 3500,
+   "pack_id": "c_implicit_slope_calc-s3500",
+   "explanation_en": "The correct answer is -0.366. Implicit differentiation: e^y + x e^y y' + 2y y' = 0, so y' = -e^y/(x e^y + 2y), evaluated with a calculator.\n-0.868 is incorrect: Differentiates y^2 as 2y without the factor dy/dx.\n-0.500 is incorrect: Forgets the 2y dy/dx term from y squared and solves e^y + x e^y y' = 0.\n-0.134 is incorrect: Treats y as a constant when differentiating x e^y, so the e^y term is missing from the numerator: -1/(...) ."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "c_implicit_slope_calc",
+   "facts": [
+    "key=-0.365529"
+   ],
+   "seed": 3500
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Implicit differentiation with the product and chain rules, a first derivative; in scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key -0.366 is unique and correct. The point lies on the curve only up to rounding of the constant, which does not affect the slope."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear. The constant 6.4366 is a bit ugly but acceptable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor reproduces a distinct, realistic error, and the explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short task, with decimal options consistent with the calculator designation. The calculator need is mild."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item: the key is correct, the distractors are well motivated, and it fits the topic. The only minor issue is the rounded constant 6.4366, so the point is on the curve only approximately."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-procedure implicit differentiation: product rule on x*e^y plus chain rule on y^2, then solve for dy/dx and evaluate at a given point. No representation changes, no theorem checks, and only light arithmetic. This fits an early-topic skill check rather than a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  },
+  "run": "supp-aud1015-final",
+  "stockKey": "supp-aud1015-final:ap_calculus_ab-m04-k901",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "calculus",
+  "itemFamilyId": "fam:s3a-graph-ab-final:ap_calculus_ab-m04-k0",
+  "canonicalKey": "supp-aud1015-final:ap_calculus_ab-m04-k901",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "calculus:3.2",
+  "sharedWith": [],
+  "stockCell": "ap_calculus_ab|3.2|1.E|standalone|required",
+  "history": [
+   {
+    "run": "supp-aud1015-final",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null,
+    "derivedFrom": "s3a-graph-ab-final:ap_calculus_ab-m04-k0",
+    "auditRow": "AP-021"
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_calculus_bc-m02-k902",
+  "cellId": "ap_calculus_bc-m02",
+  "apSubjectCode": "ap_calculus_bc",
+  "kind": "mc",
+  "keywordCode": "10.12",
+  "unitCode": "10",
+  "skillPrimary": "3.D",
+  "structure": "standalone",
+  "calculator": "required",
+  "archetype": "g_lagrange_p2_calc",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student must read the graph of f''' on only the relevant interval [0,0.9], identify M=1 (not the global max 5), recall the Lagrange error formula with (n+1)! = 3!, and compute 0.9^3/6. Distractors reflect real misconceptions (using the wrong interval, forgetting the factorial). Standard AP-level difficulty, with light arithmetic and clear wording.",
+  "payload": {
+   "archetype": "g_lagrange_p2_calc",
+   "topic": "10.12",
+   "skill": "3.D",
+   "calculator": "required",
+   "stem": "A function $f$ has a continuous third derivative on $0\\le x\\le 3$. The graph of $f'''$ is shown and consists of line segments. The second-degree Maclaurin polynomial $P_2$ is used to estimate $f(0.9)$. What bound on $|f(0.9)-P_2(0.9)|$ does the Lagrange error bound give?",
+   "stimulus": {
+    "kind": "graph",
+    "description": "Graph of the third derivative of f, consisting of line segments connecting the plotted vertices.",
+    "data": {
+     "x_axis": {
+      "label": "x",
+      "min": 0,
+      "max": 3,
+      "step": 1
+     },
+     "y_axis": {
+      "label": "y",
+      "min": -6,
+      "max": 6,
+      "step": 1
+     },
+     "vertices": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       2,
+       -5
+      ],
+      [
+       3,
+       5
+      ]
+     ]
+    }
+   },
+   "options": [
+    {
+     "text": "$0.608$",
+     "why": "Uses the maximum of |f'''| over the whole graph instead of over [0, 0.9].",
+     "value": "0.60750000"
+    },
+    {
+     "text": "$0.122$",
+     "why": "Error <= M |x|^3/3! where M is the maximum of |f'''| on [0, a] read from the graph; evaluate with a calculator.",
+     "value": "0.12150000"
+    },
+    {
+     "text": "$0.012$",
+     "why": "Uses the value of f''' at x = 0.9 instead of its maximum absolute value.",
+     "value": "0.012150000"
+    },
+    {
+     "text": "$0.365$",
+     "why": "Divides by 2! instead of 3!.",
+     "value": "0.36450000"
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 100,
+   "facts": [
+    "v=[1, 0, -5, 5]",
+    "a=0.9",
+    "key=0.121500"
+   ],
+   "blueprint": {
+    "id": "g_lagrange_p2_calc",
+    "subject": "ap_calculus_bc",
+    "kind": "mc",
+    "concept": "Apply the Lagrange error bound for a second-degree polynomial with a bound on the third derivative read from a graph",
+    "topic": "10.12",
+    "skill": "3.D",
+    "student_thinking": [
+     "Read the largest absolute value of f''' on [0, a] from the graph",
+     "Apply M |x|^(n+1)/(n+1)! with n = 2",
+     "Evaluate with a calculator"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "|f'''| <= M on [0, a] holds for the maximum absolute value on the interval",
+      "evidence": "the graph is piecewise linear so the maximum occurs at a vertex or at x = a"
+     }
+    ],
+    "material": {
+     "type": "graph",
+     "must_include": [
+      "vertices of f''' at x = 0, 1, 2, 3"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "whole_graph_maximum",
+      "description": "uses the maximum from the whole graph"
+     },
+     {
+      "id": "wrong_factorial",
+      "description": "divides by 2!"
+     },
+     {
+      "id": "wrong_power",
+      "description": "uses x squared"
+     },
+     {
+      "id": "value_at_a",
+      "description": "uses f'''(a)"
+     }
+    ],
+    "verification": {
+     "independent_path": "maximum absolute value from a 2000-point grid on [0, a] (independent of vertex reading)",
+     "method": "exact rational arithmetic + numeric cross-check"
+    }
+   },
+   "seed": 3500,
+   "pack_id": "g_lagrange_p2_calc-s3500",
+   "explanation_en": "The correct answer is 0.122. Error <= M |x|^3/3! where M is the maximum of |f'''| on [0, a] read from the graph; evaluate with a calculator.\n0.608 is incorrect: Uses the maximum of |f'''| over the whole graph instead of over [0, 0.9].\n0.012 is incorrect: Uses the value of f''' at x = 0.9 instead of its maximum absolute value.\n0.365 is incorrect: Divides by 2! instead of 3!."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "g_lagrange_p2_calc",
+   "facts": [
+    "v=[1, 0, -5, 5]",
+    "a=0.9",
+    "key=0.121500"
+   ],
+   "seed": 3500
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Lagrange error bound with M read from a graph; the theorem condition (M bounds |f'''| on [0,0.9]) is applied. In scope for 10.12 / 3.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "M=1 on [0,0.9]; bound = 0.9^3/6 = 0.1215, approximately 0.122. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertices fully specified and the axes are clear. Piecewise-linear graph with a max at x=0 on the interval."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option maps to a distinct misconception (whole-graph max, f'''(a), 2!). The explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds. The calculator need is minimal but acceptable. Options are parallel decimals."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is correct and unique, and the distractors are distinct and realistic. The calculator requirement is slight, but this is not a defect."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the graph of f''' on only the relevant interval [0,0.9], identify M=1 (not the global max 5), recall the Lagrange error formula with (n+1)! = 3!, and compute 0.9^3/6. Distractors reflect real misconceptions (using the wrong interval, forgetting the factorial). Standard AP-level difficulty, with light arithmetic and clear wording.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  },
+  "run": "supp-aud1015-final",
+  "stockKey": "supp-aud1015-final:ap_calculus_bc-m02-k902",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "calculus",
+  "itemFamilyId": "fam:s3a-graph-bc-final:ap_calculus_bc-m02-k0",
+  "canonicalKey": "supp-aud1015-final:ap_calculus_bc-m02-k902",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "calculus:10.12",
+  "sharedWith": [],
+  "stockCell": "ap_calculus_bc|10.12|3.D|standalone|required",
+  "history": [
+   {
+    "run": "supp-aud1015-final",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null,
+    "derivedFrom": "s3a-graph-bc-final:ap_calculus_bc-m02-k0",
+    "auditRow": "AP-022"
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_calculus_bc-m02-k903",
+  "cellId": "ap_calculus_bc-m02",
+  "apSubjectCode": "ap_calculus_bc",
+  "kind": "mc",
+  "keywordCode": "10.12",
+  "unitCode": "10",
+  "skillPrimary": "1.E",
+  "structure": "standalone",
+  "calculator": "required",
+  "archetype": "g_lagrange_decimal_calc",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student must read the graph of f^(4), restrict to [0,1.4], recognize that the max of |f^(4)| is 3 (at the vertex x=1, a negative value), and apply the Lagrange bound M/4!*(1.4)^4 = 0.480. Distractors reflect real misconceptions: using the whole-graph max of 6, using the wrong interval, or using the signed maximum. Numbers are simple, and the calculator is needed only for 1.4^4.",
+  "payload": {
+   "archetype": "g_lagrange_decimal_calc",
+   "topic": "10.12",
+   "skill": "1.E",
+   "calculator": "required",
+   "stem": "The third-degree Maclaurin polynomial $P_3$ of a function $f$ that has a continuous fourth derivative on $0\\le x\\le 3$ is used to estimate $f(1.4)$. The fourth derivative of $f$ is graphed on $0\\le x\\le 3$ and consists of line segments, as shown. Use the Lagrange error bound to find the least upper bound for the error $|f(1.4)-P_3(1.4)|$ that the graph supports.",
+   "stimulus": {
+    "kind": "graph",
+    "description": "Graph of f^(4)(x), consisting of line segments connecting the plotted vertices.",
+    "data": {
+     "x_axis": {
+      "label": "x",
+      "min": 0,
+      "max": 3,
+      "step": 1
+     },
+     "y_axis": {
+      "label": "y",
+      "min": -7,
+      "max": 7,
+      "step": 1
+     },
+     "vertices": [
+      [
+       0,
+       -1
+      ],
+      [
+       1,
+       -3
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       3,
+       -6
+      ]
+     ]
+    }
+   },
+   "options": [
+    {
+     "text": "$1.921$",
+     "why": "Divides by 3! instead of 4!.",
+     "value": "1.9208000"
+    },
+    {
+     "text": "$0.096$",
+     "why": "Uses the largest signed value of the graph on [0, 1.4] instead of the largest absolute value.",
+     "value": "0.096040000"
+    },
+    {
+     "text": "$0.480$",
+     "why": "M x^4/4! with M = the maximum of |f^(4)| on [0, a] read from the graph, evaluated with a calculator.",
+     "value": "0.48020000"
+    },
+    {
+     "text": "$0.960$",
+     "why": "Takes the maximum over the whole graph, not only over [0, 1.4].",
+     "value": "0.96040000"
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 100,
+   "facts": [
+    "v=[-1, -3, 6, -6]",
+    "a=1.4",
+    "key=0.480200"
+   ],
+   "blueprint": {
+    "id": "g_lagrange_decimal_calc",
+    "subject": "ap_calculus_bc",
+    "kind": "mc",
+    "concept": "Apply the Lagrange error bound with a bound read from a graph at a non-integer point",
+    "topic": "10.12",
+    "skill": "1.E",
+    "student_thinking": [
+     "Read the largest absolute value of f^(4) on [0, a] from the graph",
+     "Apply M |x|^(n+1)/(n+1)! with n = 3",
+     "Evaluate with a calculator"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "|f^(4)| <= M on [0, a] for the maximum absolute value read from the graph",
+      "evidence": "the graph is piecewise linear so the maximum occurs at a vertex or at the endpoint a"
+     }
+    ],
+    "material": {
+     "type": "graph",
+     "must_include": [
+      "vertices of f^(4) at x = 0, 1, 2, 3"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "signed_max",
+      "description": "uses the signed maximum"
+     },
+     {
+      "id": "wrong_interval",
+      "description": "uses a maximum from outside [0, a]"
+     },
+     {
+      "id": "wrong_factorial",
+      "description": "uses 3! instead of 4!"
+     },
+     {
+      "id": "wrong_power",
+      "description": "uses x cubed"
+     }
+    ],
+    "verification": {
+     "independent_path": "maximum absolute value from a 2000-point grid on [0, a] (independent of vertex reading)",
+     "method": "exact rational arithmetic + numeric cross-check"
+    }
+   },
+   "seed": 3300,
+   "pack_id": "g_lagrange_decimal_calc-s3300",
+   "explanation_en": "The correct answer is 0.480. M x^4/4! with M = the maximum of |f^(4)| on [0, a] read from the graph, evaluated with a calculator.\n1.921 is incorrect: Divides by 3! instead of 4!.\n0.096 is incorrect: Uses the largest signed value of the graph on [0, 1.4] instead of the largest absolute value.\n0.960 is incorrect: Takes the maximum over the whole graph, not only over [0, 1.4]."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "g_lagrange_decimal_calc",
+   "facts": [
+    "v=[-1, -3, 6, -6]",
+    "a=1.4",
+    "key=0.480200"
+   ],
+   "seed": 3300
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 100 seconds, light calculator use, and decimal options are appropriate.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key 0.480 is unique and the distractors are distinct and explained. No instant-reject conditions apply."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the graph of f^(4), restrict to [0,1.4], recognize that the max of |f^(4)| is 3 (at the vertex x=1, a negative value), and apply the Lagrange bound M/4!*(1.4)^4 = 0.480. Distractors reflect real misconceptions: using the whole-graph max of 6, using the wrong interval, or using the signed maximum. Numbers are simple, and the calculator is needed only for 1.4^4.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  },
+  "run": "supp-aud1015-final",
+  "stockKey": "supp-aud1015-final:ap_calculus_bc-m02-k903",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "calculus",
+  "itemFamilyId": "fam:s2-graph-bc-final:ap_calculus_bc-m02-k0",
+  "canonicalKey": "supp-aud1015-final:ap_calculus_bc-m02-k903",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "calculus:10.12",
+  "sharedWith": [],
+  "stockCell": "ap_calculus_bc|10.12|1.E|standalone|required",
+  "history": [
+   {
+    "run": "supp-aud1015-final",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null,
+    "derivedFrom": "s2-graph-bc-final:ap_calculus_bc-m02-k0",
+    "auditRow": "AP-024"
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_calculus_bc-m04-k904",
+  "cellId": "ap_calculus_bc-m04",
+  "apSubjectCode": "ap_calculus_bc",
+  "kind": "mc",
+  "keywordCode": "10.12",
+  "unitCode": "10",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "not_allowed",
+  "archetype": "lagrange_graph",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student must read the graph on the correct interval [0,2], recognize that the max of |f^(4)| is 2 (from the negative segment, not the positive peak at x=3), then apply the Lagrange bound M|x|^4/4! = 2*16/24 = 4/3. Distractors reflect common misconceptions (using M=4 from the whole domain, ignoring absolute value). Arithmetic is light and the context is clean.",
+  "payload": {
+   "archetype": "lagrange_graph",
+   "topic": "10.12",
+   "skill": "2.B",
+   "calculator": "not_allowed",
+   "stem": "The function $f$ has a continuous fourth derivative on $0\\le x\\le 4$. The graph of $y=f^{(4)}(x)$ on $0\\le x\\le 4$, consisting of line segments, is shown. Let $P_3$ be the third-degree Maclaurin polynomial for $f$. Which of the following is the Lagrange error bound for $|f(2)-P_3(2)|$ obtained from the graph?",
+   "stimulus": {
+    "kind": "graph",
+    "description": "Graph of f^(4)(x), consisting of line segments connecting the plotted vertices.",
+    "data": {
+     "x_axis": "x",
+     "y_axis": "f⁽⁴⁾(x)",
+     "vertices": [
+      [
+       0,
+       -2
+      ],
+      [
+       1,
+       -2
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       4,
+       2
+      ]
+     ],
+     "domain": [
+      0,
+      4
+     ]
+    }
+   },
+   "options": [
+    {
+     "text": "$\\frac{2}{3}$",
+     "why": "Uses the power 3 instead of 4 for the x-term.",
+     "value": "0.66666667"
+    },
+    {
+     "text": "$\\frac{8}{3}$",
+     "why": "Takes the maximum over the whole graph instead of only the interval from 0 to 2.",
+     "value": "2.6666667"
+    },
+    {
+     "text": "$\\frac{4}{3}$",
+     "why": "M a^4 / 4! with M the maximum of |f^(4)| on [0, a], read from the graph.",
+     "value": "1.3333333"
+    },
+    {
+     "text": "$\\frac{16}{3}$",
+     "why": "Divides by 3! instead of 4!.",
+     "value": "5.3333333"
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 100,
+   "facts": [
+    "v=[-2, -2, 0, 4, 2]",
+    "bound=4/3"
+   ],
+   "blueprint": {
+    "id": "lagrange_graph",
+    "subject": "ap_calculus_bc",
+    "kind": "mc",
+    "concept": "Read a bound on a derivative from its graph and apply the Lagrange error bound",
+    "topic": "10.12",
+    "skill": "2.B",
+    "student_thinking": [
+     "Read the largest absolute value of f^(4) on [0, a] from the graph",
+     "Apply M|x|^(n+1)/(n+1)! with n = 3"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "|f^(4)| <= M on [0, a] holds for the graph's maximum absolute value",
+      "evidence": "piecewise-linear graph, maximum at a vertex"
+     }
+    ],
+    "material": {
+     "type": "graph",
+     "must_include": [
+      "vertices of f^(4) at x = 0, 1, 2, 3, 4"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "signed_max",
+      "description": "uses the maximum signed value"
+     },
+     {
+      "id": "wrong_interval",
+      "description": "uses a maximum from outside [0, a]"
+     },
+     {
+      "id": "wrong_factorial",
+      "description": "uses 3! instead of 4!"
+     }
+    ],
+    "verification": {
+     "independent_path": "maximum absolute value found by dense sampling of the piecewise-linear graph (independent of vertex reading)",
+     "method": "sympy+numeric"
+    }
+   },
+   "seed": 3001,
+   "pack_id": "lagrange_graph-s3001",
+   "explanation_en": "The correct answer is \\frac{4}{3}. M a^4 / 4! with M the maximum of |f^(4)| on [0, a], read from the graph.\n\\frac{2}{3} is incorrect: Uses the power 3 instead of 4 for the x-term.\n\\frac{8}{3} is incorrect: Takes the maximum over the whole graph instead of only the interval from 0 to 2.\n\\frac{16}{3} is incorrect: Divides by 3! instead of 4!."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "lagrange_graph",
+   "facts": [
+    "v=[-2, -2, 0, 4, 2]",
+    "bound=4/3"
+   ],
+   "seed": 3001
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Lagrange error bound with the bound read from a graph of f^(4); fits 10.12 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "max|f4| on [0,2] is 2, so the bound is 2*16/24 = 4/3. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertices are fully specified, the domain is given, and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct, realistic error (wrong power, wrong interval, wrong factorial) and all are explained. The signed-max misconception from the blueprint is not used, which is minor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, exact values, light arithmetic, suitable for a non-calculator section."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well formed. The bound 2·2⁴/4! = 4/3 is unique, the distractors are realistic and explained, and the stimulus data is complete."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the graph on the correct interval [0,2], recognize that the max of |f^(4)| is 2 (from the negative segment, not the positive peak at x=3), then apply the Lagrange bound M|x|^4/4! = 2*16/24 = 4/3. Distractors reflect common misconceptions (using M=4 from the whole domain, ignoring absolute value). Arithmetic is light and the context is clean.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 100
+  },
+  "run": "supp-aud1015-final",
+  "stockKey": "supp-aud1015-final:ap_calculus_bc-m04-k904",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "calculus",
+  "itemFamilyId": "fam:bc-topup-final:ap_calculus_bc-m04-k1",
+  "canonicalKey": "supp-aud1015-final:ap_calculus_bc-m04-k904",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "calculus:10.12",
+  "sharedWith": [],
+  "stockCell": "ap_calculus_bc|10.12|2.B|standalone|not_allowed",
+  "history": [
+   {
+    "run": "supp-aud1015-final",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null,
+    "derivedFrom": "bc-topup-final:ap_calculus_bc-m04-k1",
+    "auditRow": "AP-026"
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_calculus_ab-m24-k905",
+  "cellId": "ap_calculus_ab-m24",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "mc",
+  "keywordCode": "4.7",
+  "unitCode": "4",
+  "skillPrimary": "1.D",
+  "structure": "standalone",
+  "calculator": "not_allowed",
+  "archetype": "g_lhopital_graph",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Identify the 0/0 form at x=7 from the graph, apply L'Hospital's Rule, read the slopes of the segments on [6,8] (f: 4, g: 2), and compute 4/2 = 2. Distractors reflect an inverted ratio, a numerator-only value, and a product of slopes. Concept depth is shallow, with one representation change (graph to slope to limit) and trivial arithmetic. The stem's 'differentiable' claim is slightly loose at the vertices, but x=7 is interior to a segment, so it does not affect the answer.",
+  "payload": {
+   "archetype": "g_lhopital_graph",
+   "topic": "4.7",
+   "skill": "1.D",
+   "calculator": "not_allowed",
+   "stem": "The graphs of the functions $f$ and $g$ are shown, each consisting of line segments, and both graphs pass through $(7,0)$. Both functions are differentiable at $x=7$. What is $\\displaystyle\\lim_{x\\to 7}\\frac{f(x)}{g(x)}$?",
+   "stimulus": {
+    "kind": "graph",
+    "description": "Graphs of f and g, each consisting of line segments connecting the plotted vertices.",
+    "data": {
+     "x_axis": {
+      "label": "x",
+      "min": 0,
+      "max": 8,
+      "step": 1
+     },
+     "y_axis": {
+      "label": "y",
+      "min": -5,
+      "max": 6,
+      "step": 1
+     },
+     "curves": [
+      {
+       "label": "f",
+       "type": "piecewise linear",
+       "vertices": [
+        [
+         0,
+         -1
+        ],
+        [
+         2,
+         -2
+        ],
+        [
+         4,
+         3
+        ],
+        [
+         6,
+         -4
+        ],
+        [
+         8,
+         4
+        ]
+       ]
+      },
+      {
+       "label": "g",
+       "type": "piecewise linear",
+       "vertices": [
+        [
+         0,
+         0
+        ],
+        [
+         2,
+         5
+        ],
+        [
+         4,
+         -4
+        ],
+        [
+         6,
+         -2
+        ],
+        [
+         8,
+         2
+        ]
+       ]
+      }
+     ]
+    }
+   },
+   "options": [
+    {
+     "text": "$2$",
+     "why": "The quotient has the form 0/0 at x = a, so the limit equals f'(a)/g'(a), the ratio of the slopes read from the graphs (L'Hopital's Rule).",
+     "value": "2.0000000"
+    },
+    {
+     "text": "$0$",
+     "why": "Substitutes x = 7 and concludes the quotient 0/0 equals 0.",
+     "value": "0"
+    },
+    {
+     "text": "$\\frac{1}{2}$",
+     "why": "Takes the ratio of slopes upside down, g'(a)/f'(a).",
+     "value": "0.50000000"
+    },
+    {
+     "text": "$8$",
+     "why": "Multiplies the two slopes instead of dividing them.",
+     "value": "8.0000000"
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 90,
+   "facts": [
+    "vf=[-1, -2, 3, -4, 4]",
+    "vg=[0, 5, -4, -2, 2]",
+    "a=7",
+    "key=2"
+   ],
+   "blueprint": {
+    "id": "g_lhopital_graph",
+    "subject": "ap_calculus_ab",
+    "kind": "mc",
+    "concept": "Evaluate a 0/0 limit by comparing the slopes of two graphs at their common zero",
+    "topic": "4.7",
+    "skill": "1.D",
+    "student_thinking": [
+     "Check that f(a) = g(a) = 0 so the limit is indeterminate 0/0",
+     "Choose L'Hopital's Rule and read the two slopes at x = a",
+     "Form the ratio f'(a)/g'(a)"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "f and g are differentiable at a with g'(a) not zero, so L'Hopital's Rule applies",
+      "evidence": "both graphs are lines near x = a and the slope of g is nonzero"
+     }
+    ],
+    "material": {
+     "type": "graph",
+     "must_include": [
+      "vertices of f",
+      "vertices of g",
+      "both graphs pass through (a, 0)"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "inverted_ratio",
+      "description": "inverts the slope ratio"
+     },
+     {
+      "id": "zero_over_zero",
+      "description": "treats 0/0 as 0"
+     },
+     {
+      "id": "product_of_slopes",
+      "description": "multiplies the slopes"
+     }
+    ],
+    "verification": {
+     "independent_path": "evaluating the interpolated quotient f/g at x = a +/- 1e-7 (independent of the slope ratio)",
+     "method": "exact rational arithmetic + numeric cross-check"
+    }
+   },
+   "seed": 3100,
+   "pack_id": "g_lhopital_graph-s3100",
+   "explanation_en": "The correct answer is 2. The quotient has the form 0/0 at x = a, so the limit equals f'(a)/g'(a), the ratio of the slopes read from the graphs (L'Hopital's Rule).\n0 is incorrect: Substitutes x = 7 and concludes the quotient 0/0 equals 0.\n\\frac{1}{2} is incorrect: Takes the ratio of slopes upside down, g'(a)/f'(a).\n8 is incorrect: Multiplies the two slopes instead of dividing them."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "g_lhopital_graph",
+   "facts": [
+    "vf=[-1, -2, 3, -4, 4]",
+    "vg=[0, 5, -4, -2, 2]",
+    "a=7",
+    "key=2"
+   ],
+   "seed": 3100
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 4.7 L'Hospital via slopes from graphs; skill 1.D choosing the rule after confirming the 0/0 form."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "f'(7)=4, g'(7)=2, limit 2; the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The vertex data is complete and both graphs pass through (7,0). The stem's claim that f and g are 'differentiable' is imprecise because the graphs have corners. Better wording: 'differentiable at x=7' or no claim at all."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct misconception (0/0 as 0, inverted ratio, product of slopes), and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A short item at about 90 seconds with no arithmetic burden, and the non-calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well formed. The only flaw is the stem calling f and g 'differentiable' even though their graphs have corners, which does not affect the unique key."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Identify the 0/0 form at x=7 from the graph, apply L'Hospital's Rule, read the slopes of the segments on [6,8] (f: 4, g: 2), and compute 4/2 = 2. Distractors reflect an inverted ratio, a numerator-only value, and a product of slopes. Concept depth is shallow, with one representation change (graph to slope to limit) and trivial arithmetic. The stem's 'differentiable' claim is slightly loose at the vertices, but x=7 is interior to a segment, so it does not affect the answer.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  },
+  "run": "supp-aud1015-final",
+  "stockKey": "supp-aud1015-final:ap_calculus_ab-m24-k905",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "calculus",
+  "itemFamilyId": "fam:s1-graph-ab-final:ap_calculus_ab-m24-k0",
+  "canonicalKey": "supp-aud1015-final:ap_calculus_ab-m24-k905",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "calculus:4.7",
+  "sharedWith": [],
+  "stockCell": "ap_calculus_ab|4.7|1.D|standalone|not_allowed",
+  "history": [
+   {
+    "run": "supp-aud1015-final",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null,
+    "derivedFrom": "s1-graph-ab-final:ap_calculus_ab-m24-k0",
+    "auditRow": "AP-018"
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_calculus_ab-f02-k906",
+  "cellId": "ap_calculus_ab-f02",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "frq_bundle",
+  "keywordCode": "5.9",
+  "unitCode": "5",
+  "skillPrimary": "3.E",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "frq_fprime_graph",
+  "wording": "llm",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard AP FRQ on the graph of f'. Part (a) reads concavity from the slopes of f' and (b) applies the first derivative test via sign changes of f'. Part (c) needs the candidates test with signed areas from the graph (f(6)=-2, endpoints 4 and 4) plus a justification. Part (d) is f(8)=4 using the Fundamental Theorem of Calculus. The numbers are small and clean, and the reading load is light. The difficulty comes from legitimate levers (graph to values, multi-step justification), not from unfair sources.",
+  "payload": {
+   "archetype": "frq_fprime_graph",
+   "template": "fprime_graph_justify",
+   "topic": "5.9",
+   "extra_topics": [
+    "5.6",
+    "5.4"
+   ],
+   "skill": "3.E",
+   "calculator": "not_allowed",
+   "title": "Analysis from the graph of f'",
+   "stimulus": {
+    "kind": "graph",
+    "description": "The function f is continuous on [0,8] and has a continuous derivative f'. The graph of f', consisting of line segments connecting the labeled points, is shown.",
+    "data": {
+     "x_axis": "x",
+     "y_axis": "f'(x)",
+     "vertices": [
+      [
+       0,
+       2
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       4,
+       -4
+      ],
+      [
+       6,
+       0
+      ],
+      [
+       8,
+       6
+      ]
+     ],
+     "domain": [
+      0,
+      8
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "On what open intervals in $(0,8)$ is the graph of $f$ concave up? Give a reason for your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.E",
+      "3.E"
+     ],
+     "model_answer": "Concave up on (4,8) because f' is increasing there.",
+     "rubric_rows": [
+      {
+       "row_id": "a1",
+       "points": 1,
+       "criterion": "Maximal open intervals where f' is increasing (adjacent intervals merged)",
+       "required_elements": [
+        "(4,8)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "endpoints may be included"
+       ],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "a2",
+       "points": 1,
+       "criterion": "Reason: f' is increasing on those intervals",
+       "required_elements": [
+        "f' is increasing"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "only restates 'concave up'"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "b",
+     "prompt": "Find the $x$-coordinate of each point at which $f$ has a relative extremum on $(0,8)$, and classify each as a relative minimum or a relative maximum. Justify your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.B",
+      "3.E"
+     ],
+     "model_answer": "x = 2: relative maximum; x = 6: relative minimum because f' changes sign there.",
+     "rubric_rows": [
+      {
+       "row_id": "b1",
+       "points": 1,
+       "criterion": "Identifies the x-values where f' = 0 and changes sign",
+       "required_elements": [
+        "x = 2",
+        "x = 6"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "b2",
+       "points": 1,
+       "criterion": "Classifies each using the sign change of f' (negative to positive: minimum; positive to negative: maximum)",
+       "required_elements": [
+        "maximum at x = 2",
+        "minimum at x = 6"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": true,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "c",
+     "prompt": "Given that $f(0)=4$, find the value of $x$ at which $f$ attains its absolute minimum on $[0,8]$. Justify your answer.",
+     "points": 3,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.B",
+      "3.E"
+     ],
+     "model_answer": "Candidates [0, 2, 6, 8] with f values [(0, '4'), (2, '6'), (6, '-2'), (8, '4')]; absolute minimum at x = 6.",
+     "rubric_rows": [
+      {
+       "row_id": "c1",
+       "points": 1,
+       "criterion": "Considers the relative-minimum location(s) and the endpoints as candidates",
+       "required_elements": [
+        "x = 0",
+        "x = 8",
+        "x = 2",
+        "x = 6"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "c2",
+       "points": 1,
+       "criterion": "Justification: compares the values of f at all candidates, using net area under f'",
+       "required_elements": [
+        "compares candidate values"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "c1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "c3",
+       "points": 1,
+       "criterion": "Answer",
+       "required_elements": [
+        "x = 6"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "c2",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "d",
+     "prompt": "Find $f(8)$.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E",
+      "2.B"
+     ],
+     "model_answer": "f(8) = f(0) + ∫₀⁸ f'(x) dx = 4",
+     "rubric_rows": [
+      {
+       "row_id": "d1",
+       "points": 1,
+       "criterion": "Uses f(8) = f(0) + the integral of f' (signed areas)",
+       "required_elements": [
+        "f(0) + ∫_0^8 f'(x) dx"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "d2",
+       "points": 1,
+       "criterion": "Answer",
+       "required_elements": [
+        "4"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "d1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 15,
+   "facts": [
+    "inc=[(4, 8)]",
+    "rel={2: 'maximum', 6: 'minimum'}",
+    "amin=6",
+    "f8=4",
+    "f0=4"
+   ],
+   "f0": 4,
+   "preamble": "The function f is continuous on [0,8] and has a continuous derivative whose graph is shown.",
+   "seed": 1001,
+   "pack_id": "frq_fprime_graph-s1001"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "frq_fprime_graph",
+   "facts": [
+    "inc=[(4, 8)]",
+    "rel={2: 'maximum', 6: 'minimum'}",
+    "amin=6",
+    "f8=4",
+    "f0=4"
+   ],
+   "seed": 1001
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts align with 5.9/5.6/5.4 and justification skills; part d is an FTC calculation, which is acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All answers verified: concave up (4,8); max at 2, min at 6; abs min at x=6 (f(6)=-2); f(8)=4. Rubric rows are consistent; the common_errors fields are sparse."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertices, axes, and domain are given; the graph is fully specified. Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The FRQ has no distractors. The model answers are adequate, and the part c answer does not list the computed values in prose but the candidate values are provided."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "9 points with parts of 2/2/3/2, no calculator, simple geometry-based areas, and a typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A correct, well-formed f'-graph FRQ with standard AP structure. All keys check out. Minor weaknesses: the rubric c2 does not spell out the computed values, and part d is somewhat redundant with part c."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP FRQ on the graph of f'. Part (a) reads concavity from the slopes of f' and (b) applies the first derivative test via sign changes of f'. Part (c) needs the candidates test with signed areas from the graph (f(6)=-2, endpoints 4 and 4) plus a justification. Part (d) is f(8)=4 using the Fundamental Theorem of Calculus. The numbers are small and clean, and the reading load is light. The difficulty comes from legitimate levers (graph to values, multi-step justification), not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  },
+  "history": [
+   {
+    "run": "supp-aud1015-final",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null,
+    "derivedFrom": "s1a-final:ap_calculus_ab-f02-k1",
+    "auditRow": "AP-014"
+   }
+  ],
+  "repaired": false,
+  "run": "supp-aud1015-final",
+  "stockKey": "supp-aud1015-final:ap_calculus_ab-f02-k906",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "calculus",
+  "itemFamilyId": "fam:run2:ap_calculus_ab-f02-k0",
+  "canonicalKey": "supp-aud1015-final:ap_calculus_ab-f02-k906",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "calculus:5.9",
+  "sharedWith": [],
+  "stockCell": "ap_calculus_ab|5.9|3.E|frq_multipart|not_allowed"
+ },
+ {
+  "candidateKey": "ap_calculus_ab-f02-k907",
+  "cellId": "ap_calculus_ab-f02",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "frq_bundle",
+  "keywordCode": "5.9",
+  "unitCode": "5",
+  "skillPrimary": "3.E",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "frq_fprime_graph",
+  "wording": "llm",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Typical AP FRQ multi-part item. It requires reading f' as slope information for f (concavity from f' increasing, sign changes for extrema), then using the Fundamental Theorem with areas of triangles under the f' graph to get f values. The absolute minimum requires a candidates test with endpoints and justification. Numbers are small and the geometry is simple, with no unfair difficulty sources. The depth is moderate and the representation changes are graph to concavity, extrema, and accumulated area.",
+  "payload": {
+   "archetype": "frq_fprime_graph",
+   "template": "fprime_graph_justify",
+   "topic": "5.9",
+   "extra_topics": [
+    "5.6",
+    "5.4"
+   ],
+   "skill": "3.E",
+   "calculator": "not_allowed",
+   "title": "Analysis from the graph of f'",
+   "stimulus": {
+    "kind": "graph",
+    "description": "The function f is continuous on [0,8] and has a continuous derivative f'. The graph of f', consisting of line segments connecting the labeled points, is shown.",
+    "data": {
+     "x_axis": "x",
+     "y_axis": "f'(x)",
+     "vertices": [
+      [
+       0,
+       6
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       4,
+       -4
+      ],
+      [
+       6,
+       0
+      ],
+      [
+       8,
+       2
+      ]
+     ],
+     "domain": [
+      0,
+      8
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "On what open intervals in $(0,8)$ is the graph of $f$ concave up? Give a reason for your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.E",
+      "3.E"
+     ],
+     "model_answer": "Concave up on (4,8) because f' is increasing there.",
+     "rubric_rows": [
+      {
+       "row_id": "a1",
+       "points": 1,
+       "criterion": "Maximal open intervals where f' is increasing (adjacent intervals merged)",
+       "required_elements": [
+        "(4,8)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "endpoints may be included"
+       ],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "a2",
+       "points": 1,
+       "criterion": "Reason: f' is increasing on those intervals",
+       "required_elements": [
+        "f' is increasing"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "only restates 'concave up'"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "b",
+     "prompt": "Find the $x$-coordinate of each point at which $f$ has a relative extremum on $(0,8)$, and classify each as a relative minimum or a relative maximum. Justify your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.B",
+      "3.E"
+     ],
+     "model_answer": "x = 2: relative maximum; x = 6: relative minimum because f' changes sign there.",
+     "rubric_rows": [
+      {
+       "row_id": "b1",
+       "points": 1,
+       "criterion": "Identifies the x-values where f' = 0 and changes sign",
+       "required_elements": [
+        "x = 2",
+        "x = 6"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "b2",
+       "points": 1,
+       "criterion": "Classifies each using the sign change of f' (negative to positive: minimum; positive to negative: maximum)",
+       "required_elements": [
+        "maximum at x = 2",
+        "minimum at x = 6"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": true,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "c",
+     "prompt": "Given that $f(0)=3$, find the value of $x$ at which $f$ attains its absolute minimum on $[0,8]$. Justify your answer.",
+     "points": 3,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.B",
+      "3.E"
+     ],
+     "model_answer": "Candidates [0, 2, 6, 8] with f values [(0, '3'), (2, '9'), (6, '1'), (8, '3')]; absolute minimum at x = 6.",
+     "rubric_rows": [
+      {
+       "row_id": "c1",
+       "points": 1,
+       "criterion": "Considers the relative-minimum location(s) and the endpoints as candidates",
+       "required_elements": [
+        "x = 0",
+        "x = 8",
+        "x = 2",
+        "x = 6"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "c2",
+       "points": 1,
+       "criterion": "Justification: compares the values of f at all candidates, using net area under f'",
+       "required_elements": [
+        "compares candidate values"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "c1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "c3",
+       "points": 1,
+       "criterion": "Answer",
+       "required_elements": [
+        "x = 6"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "c2",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "d",
+     "prompt": "Using $f(0)=3$ and the graph of $f'$, find $f(8)$.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E",
+      "2.B"
+     ],
+     "model_answer": "f(8) = f(0) + ∫₀⁸ f'(x) dx = 3",
+     "rubric_rows": [
+      {
+       "row_id": "d1",
+       "points": 1,
+       "criterion": "Uses f(8) = f(0) + the integral of f' (signed areas)",
+       "required_elements": [
+        "f(0) + ∫_0^8 f'(x) dx"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "d2",
+       "points": 1,
+       "criterion": "Answer",
+       "required_elements": [
+        "3"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "d1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 15,
+   "facts": [
+    "inc=[(4, 8)]",
+    "rel={2: 'maximum', 6: 'minimum'}",
+    "amin=6",
+    "f8=3",
+    "f0=3"
+   ],
+   "f0": 3,
+   "preamble": "The function f is continuous on [0,8] and has a continuous derivative whose graph is shown.",
+   "seed": 1000,
+   "pack_id": "frq_fprime_graph-s1000"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "frq_fprime_graph",
+   "facts": [
+    "inc=[(4, 8)]",
+    "rel={2: 'maximum', 6: 'minimum'}",
+    "amin=6",
+    "f8=3",
+    "f0=3"
+   ],
+   "seed": 1000
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts cover concavity, extrema classification, absolute extremum via candidates test, and f(8) from signed areas; all consistent with 5.9/5.6/5.4 and justification skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified from the vertices: f values 3, 9, 5, 1, 3 at x=0, 2, 4, 6, 8. Keys are correct and unique. Rubric rows are consistent, with points 2/2/3/2 totaling 9."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data (vertices, axes, domain) is complete and unambiguous; wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ; no distractors. Rubric rows are explicit with reasons required."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Simple triangle areas, no calculator needed, about 15 minutes, typical of AP FRQs."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, well-formed f'-graph FRQ with consistent keys and rubric. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Typical AP FRQ multi-part item. It requires reading f' as slope information for f (concavity from f' increasing, sign changes for extrema), then using the Fundamental Theorem with areas of triangles under the f' graph to get f values. The absolute minimum requires a candidates test with endpoints and justification. Numbers are small and the geometry is simple, with no unfair difficulty sources. The depth is moderate and the representation changes are graph to concavity, extrema, and accumulated area.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  },
+  "history": [
+   {
+    "run": "supp-aud1015-final",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null,
+    "derivedFrom": "s1a-final:ap_calculus_ab-f02-k0",
+    "auditRow": "AP-020"
+   }
+  ],
+  "repaired": false,
+  "run": "supp-aud1015-final",
+  "stockKey": "supp-aud1015-final:ap_calculus_ab-f02-k907",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "calculus",
+  "itemFamilyId": "fam:run2:ap_calculus_ab-f02-k0",
+  "canonicalKey": "supp-aud1015-final:ap_calculus_ab-f02-k907",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "calculus:5.9",
+  "sharedWith": [],
+  "stockCell": "ap_calculus_ab|5.9|3.E|frq_multipart|not_allowed"
+ },
+ {
+  "candidateKey": "ap_calculus_ab-f02-k908",
+  "cellId": "ap_calculus_ab-f02",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "frq_bundle",
+  "keywordCode": "5.9",
+  "unitCode": "5",
+  "skillPrimary": "3.E",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "frq_fprime_graph",
+  "wording": "llm",
+  "reviewState": "auto_passed",
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard AP FRQ-style multi-part item. Parts a and b need sign analysis of f' with justification. Part c needs the candidates test with net areas under the graph of f' (graph to area to function values). Part d is an FTC accumulation using small geometric areas. Numbers are small and the stimulus is clean, so the difficulty comes from legitimate multi-step reasoning and justification, not from computation or reading load.",
+  "payload": {
+   "archetype": "frq_fprime_graph",
+   "template": "fprime_graph_justify",
+   "topic": "5.9",
+   "extra_topics": [
+    "5.6",
+    "5.4"
+   ],
+   "skill": "3.E",
+   "calculator": "not_allowed",
+   "title": "Analysis from the graph of f'",
+   "stimulus": {
+    "kind": "graph",
+    "description": "The function f is continuous on [0,8] and has a continuous derivative f'. The graph of f', consisting of line segments connecting the labeled points, is shown.",
+    "data": {
+     "x_axis": "x",
+     "y_axis": "f'(x)",
+     "vertices": [
+      [
+       0,
+       -4
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       6,
+       0
+      ],
+      [
+       8,
+       -2
+      ]
+     ],
+     "domain": [
+      0,
+      8
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "On what open intervals in $(0,8)$ is the graph of $f$ concave up? Give a reason for your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.E",
+      "3.E"
+     ],
+     "model_answer": "Concave up on (0,4) because f' is increasing there.",
+     "rubric_rows": [
+      {
+       "row_id": "a1",
+       "points": 1,
+       "criterion": "Maximal open intervals where f' is increasing (adjacent intervals merged)",
+       "required_elements": [
+        "(0,4)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "endpoints may be included"
+       ],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "a2",
+       "points": 1,
+       "criterion": "Reason: f' is increasing on those intervals",
+       "required_elements": [
+        "f' is increasing"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "only restates 'concave up'"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "b",
+     "prompt": "Find the $x$-coordinate of each point at which $f$ has a relative extremum on $(0,8)$. Classify each as a relative minimum or a relative maximum, and justify your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.B",
+      "3.E"
+     ],
+     "model_answer": "x = 2: relative minimum; x = 6: relative maximum because f' changes sign there.",
+     "rubric_rows": [
+      {
+       "row_id": "b1",
+       "points": 1,
+       "criterion": "Identifies the x-values where f' = 0 and changes sign",
+       "required_elements": [
+        "x = 2",
+        "x = 6"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "b2",
+       "points": 1,
+       "criterion": "Classifies each using the sign change of f' (negative to positive: minimum; positive to negative: maximum)",
+       "required_elements": [
+        "minimum at x = 2",
+        "maximum at x = 6"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": true,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "c",
+     "prompt": "Given that $f(0)=4$, find the value of $x$ at which $f$ attains its absolute minimum on $[0,8]$. Justify your answer.",
+     "points": 3,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.B",
+      "3.E"
+     ],
+     "model_answer": "Candidates [0, 2, 6, 8] with f values [(0, '4'), (2, '0'), (6, '12'), (8, '10')]; absolute minimum at x = 2.",
+     "rubric_rows": [
+      {
+       "row_id": "c1",
+       "points": 1,
+       "criterion": "Considers the relative-minimum location(s) and the endpoints as candidates",
+       "required_elements": [
+        "x = 0",
+        "x = 8",
+        "x = 2",
+        "x = 6"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "c2",
+       "points": 1,
+       "criterion": "Justification: compares the values of f at all candidates, using net area under f'",
+       "required_elements": [
+        "compares candidate values"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "c1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "c3",
+       "points": 1,
+       "criterion": "Answer",
+       "required_elements": [
+        "x = 2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "c2",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "d",
+     "prompt": "Find the value of $f(8)$.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E",
+      "2.B"
+     ],
+     "model_answer": "f(8) = f(0) + ∫₀⁸ f'(x) dx = 10",
+     "rubric_rows": [
+      {
+       "row_id": "d1",
+       "points": 1,
+       "criterion": "Uses f(8) = f(0) + the integral of f' (signed areas)",
+       "required_elements": [
+        "f(0) + ∫_0^8 f'(x) dx"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "d2",
+       "points": 1,
+       "criterion": "Answer",
+       "required_elements": [
+        "10"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "d1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 15,
+   "facts": [
+    "inc=[(0, 4)]",
+    "rel={2: 'minimum', 6: 'maximum'}",
+    "amin=2",
+    "f8=10",
+    "f0=4"
+   ],
+   "f0": 4,
+   "preamble": "The function f is continuous on [0,8] and has a continuous derivative whose graph is shown.",
+   "seed": 1,
+   "pack_id": "frq_fprime_graph-s1"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "frq_fprime_graph",
+   "facts": [
+    "inc=[(0, 4)]",
+    "rel={2: 'minimum', 6: 'maximum'}",
+    "amin=2",
+    "f8=10",
+    "f0=4"
+   ],
+   "seed": 1
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts a-c are 5.9/5.6/5.4 justification from the graph of f'. Part d uses the FTC with areas, a fair prerequisite at AB."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All answers verified: f(2)=0, f(6)=12, f(8)=10, concave up on (0,4), min at x=2. Rubric rows are consistent. Part a2 lists two required elements that are alternatives, a minor point. Part c2's wording mentions net area, but the required element is only 'compares candidate values'."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The vertices and domain fully specify the graph. The description says 'labeled points', which is a trivial wording issue."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so no distractors apply. The common_errors fields are sparse but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "9 points across 4 parts (2/2/3/2), no calculator needed, simple triangle areas, about 15 minutes. This is typical of AP FRQs."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound and correctly keyed, with simple arithmetic and valid justification rubrics. Only minor wording nitpicks (the 'labeled points' description and the a2 required elements). Pass."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP FRQ-style multi-part item. Parts a and b need sign analysis of f' with justification. Part c needs the candidates test with net areas under the graph of f' (graph to area to function values). Part d is an FTC accumulation using small geometric areas. Numbers are small and the stimulus is clean, so the difficulty comes from legitimate multi-step reasoning and justification, not from computation or reading load.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  },
+  "run": "supp-aud1015-final",
+  "stockKey": "supp-aud1015-final:ap_calculus_ab-f02-k908",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "calculus",
+  "itemFamilyId": "fam:run2:ap_calculus_ab-f02-k0",
+  "canonicalKey": "supp-aud1015-final:ap_calculus_ab-f02-k908",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "calculus:5.9",
+  "sharedWith": [],
+  "stockCell": "ap_calculus_ab|5.9|3.E|frq_multipart|not_allowed",
+  "history": [
+   {
+    "run": "supp-aud1015-final",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null,
+    "derivedFrom": "run2:ap_calculus_ab-f02-k1",
+    "auditRow": "AP-023"
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_calculus_ab-f02-k909",
+  "cellId": "ap_calculus_ab-f02",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "frq_bundle",
+  "keywordCode": "5.9",
+  "unitCode": "5",
+  "skillPrimary": "3.E",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "frq_fprime_graph",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Typical AP FRQ. Part (a) reads concavity from the slope of f', and (b) applies the first derivative test from sign changes of f'. Part (c) requires a candidates test: compute f at the critical points and endpoints using signed areas under f' (geometric areas, small integers), then compare. Part (d) reuses the (c) computation. The item has multiple representation changes (graph, area, function values) and justification steps, but the arithmetic is light and the wording is unambiguous.",
+  "payload": {
+   "archetype": "frq_fprime_graph",
+   "template": "fprime_graph_justify",
+   "topic": "5.9",
+   "extra_topics": [
+    "5.6",
+    "5.4"
+   ],
+   "skill": "3.E",
+   "calculator": "not_allowed",
+   "title": "Analysis from the graph of f'",
+   "stimulus": {
+    "kind": "graph",
+    "description": "The function f is continuous on [0,8] and has a continuous derivative f'. The graph of f', consisting of line segments connecting the labeled points, is shown.",
+    "data": {
+     "x_axis": "x",
+     "y_axis": "f'(x)",
+     "vertices": [
+      [
+       0,
+       -4
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       6,
+       0
+      ],
+      [
+       8,
+       -2
+      ]
+     ],
+     "domain": [
+      0,
+      8
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "On what open intervals in $(0,8)$ is the graph of $f$ concave up? Give a reason for your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.E",
+      "3.E"
+     ],
+     "model_answer": "Concave up on (0,4) because f' is increasing there.",
+     "rubric_rows": [
+      {
+       "row_id": "a1",
+       "points": 1,
+       "criterion": "Maximal open intervals where f' is increasing (adjacent intervals merged)",
+       "required_elements": [
+        "(0,4)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "endpoints may be included"
+       ],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "a2",
+       "points": 1,
+       "criterion": "Reason: f' is increasing on those intervals",
+       "required_elements": [
+        "f' is increasing"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "only restates 'concave up'"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "b",
+     "prompt": "Find the $x$-coordinate of each point at which $f$ has a relative extremum on $(0,8)$, and classify each as a relative minimum or relative maximum. Justify your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.B",
+      "3.E"
+     ],
+     "model_answer": "x = 2: relative minimum; x = 6: relative maximum because f' changes sign there.",
+     "rubric_rows": [
+      {
+       "row_id": "b1",
+       "points": 1,
+       "criterion": "Identifies the x-values where f' = 0 and changes sign",
+       "required_elements": [
+        "x = 2",
+        "x = 6"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "b2",
+       "points": 1,
+       "criterion": "Classifies each using the sign change of f' (negative to positive: minimum; positive to negative: maximum)",
+       "required_elements": [
+        "minimum at x = 2",
+        "maximum at x = 6"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": true,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "c",
+     "prompt": "Given that $f(0)=4$, find the value of $x$ at which $f$ attains its absolute minimum on $[0,8]$. Justify your answer.",
+     "points": 3,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.B",
+      "3.E"
+     ],
+     "model_answer": "Candidates [0, 2, 6, 8] with f values [(0, '4'), (2, '0'), (6, '4'), (8, '2')]; absolute minimum at x = 2.",
+     "rubric_rows": [
+      {
+       "row_id": "c1",
+       "points": 1,
+       "criterion": "Considers the relative-minimum location(s) and the endpoints as candidates",
+       "required_elements": [
+        "x = 0",
+        "x = 8",
+        "x = 2",
+        "x = 6"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "c2",
+       "points": 1,
+       "criterion": "Justification: compares the values of f at all candidates, using net area under f'",
+       "required_elements": [
+        "compares candidate values"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "c1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "c3",
+       "points": 1,
+       "criterion": "Answer",
+       "required_elements": [
+        "x = 2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "c2",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "d",
+     "prompt": "Find $f(8)$.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E",
+      "2.B"
+     ],
+     "model_answer": "f(8) = f(0) + ∫₀⁸ f'(x) dx = 2",
+     "rubric_rows": [
+      {
+       "row_id": "d1",
+       "points": 1,
+       "criterion": "Uses f(8) = f(0) + the integral of f' (signed areas)",
+       "required_elements": [
+        "f(0) + ∫_0^8 f'(x) dx"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "d2",
+       "points": 1,
+       "criterion": "Answer",
+       "required_elements": [
+        "2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "d1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 15,
+   "facts": [
+    "inc=[(0, 4)]",
+    "rel={2: 'minimum', 6: 'maximum'}",
+    "amin=2",
+    "f8=2",
+    "f0=4"
+   ],
+   "f0": 4,
+   "preamble": "The function f is continuous on [0,8] and has a continuous derivative whose graph is shown.",
+   "seed": 0,
+   "pack_id": "frq_fprime_graph-s0"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "frq_fprime_graph",
+   "facts": [
+    "inc=[(0, 4)]",
+    "rel={2: 'minimum', 6: 'maximum'}",
+    "amin=2",
+    "f8=2",
+    "f0=4"
+   ],
+   "seed": 0
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.9 with 3.E justification; parts use f' graph, concavity, extrema, absolute extremum via net area."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys verified: concave up (0,4); min at 2, max at 6; f(2)=0 is the absolute min; f(8)=2. Rubric rows consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertices and domain fully specify the graph; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ; no distractors. Rubric has few common_errors listed but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Non-calculator, simple geometry areas, 9 points split 2/2/3/2, typical AP style."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound FRQ on a piecewise-linear f' graph; keys correct, rubric consistent, appropriate for the non-calculator AB exam."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Typical AP FRQ. Part (a) reads concavity from the slope of f', and (b) applies the first derivative test from sign changes of f'. Part (c) requires a candidates test: compute f at the critical points and endpoints using signed areas under f' (geometric areas, small integers), then compare. Part (d) reuses the (c) computation. The item has multiple representation changes (graph, area, function values) and justification steps, but the arithmetic is light and the wording is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  },
+  "run": "supp-aud1015-final",
+  "stockKey": "supp-aud1015-final:ap_calculus_ab-f02-k909",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "calculus",
+  "itemFamilyId": "fam:run2:ap_calculus_ab-f02-k0",
+  "canonicalKey": "supp-aud1015-final:ap_calculus_ab-f02-k909",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "calculus:5.9",
+  "sharedWith": [],
+  "stockCell": "ap_calculus_ab|5.9|3.E|frq_multipart|not_allowed",
+  "history": [
+   {
+    "run": "supp-aud1015-final",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null,
+    "derivedFrom": "run2:ap_calculus_ab-f02-k0",
+    "auditRow": "AP-025"
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_calculus_ab-f02-k910",
+  "cellId": "ap_calculus_ab-f02",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "frq_bundle",
+  "keywordCode": "5.9",
+  "unitCode": "5",
+  "skillPrimary": "3.E",
+  "structure": "frq_multipart",
+  "calculator": "na",
+  "reviewState": "auto_passed",
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard multipart FRQ on a graph of f'. It uses the first derivative test, the sign change of f'' read from the slopes of f', and the candidates test with triangle areas. The justification skill is dominant and matches the topics. Reading and computation are light, and nothing is out of scope.",
+  "payload": {
+   "title": "Smart Thermostat Savings: Reading the Rate Graph",
+   "stimulus": {
+    "kind": "graph",
+    "description": "Piecewise-linear graph of f'(t), rate of change of cumulative savings in dollars per week, for 0 <= t <= 10 weeks, through (0,-2), (2,0), (5,6), (7,2), (9,0), (10,-2).",
+    "data": {
+     "x_axis": {
+      "label": "t (weeks)",
+      "min": 0,
+      "max": 10,
+      "tick": 1
+     },
+     "y_axis": {
+      "label": "f'(t) (dollars per week)",
+      "min": -3,
+      "max": 7,
+      "tick": 1
+     },
+     "curve": {
+      "name": "f'",
+      "type": "piecewise_linear",
+      "points": [
+       [
+        0,
+        -2
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        5,
+        6
+       ],
+       [
+        7,
+        2
+       ],
+       [
+        9,
+        0
+       ],
+       [
+        10,
+        -2
+       ]
+      ]
+     },
+     "context": "f(t) is the cumulative net savings in dollars on a household energy bill t weeks after a smart thermostat is installed; f is differentiable on [0,10].",
+     "given": {
+      "f(0)": 40
+     },
+     "legend": [
+      "f' (solid line)"
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Find all values of t in the open interval (0,10) at which f has a relative extremum. For each, state whether it is a relative minimum or relative maximum, and justify your answer.",
+     "points": 3,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.E"
+     ],
+     "model_answer": "f'(t)=0 at t=2 and t=9. At t=2, f' changes from negative to positive, so f has a relative minimum at t=2. At t=9, f' changes from positive to negative, so f has a relative maximum at t=9.",
+     "rubric_rows": [
+      {
+       "row_id": "a1",
+       "points": 1,
+       "criterion": "Identifies both critical points",
+       "required_elements": [
+        "t=2",
+        "t=9",
+        "f'(t)=0 there"
+       ]
+      },
+      {
+       "row_id": "a2",
+       "points": 1,
+       "criterion": "Relative minimum at t=2 with sign-change justification",
+       "required_elements": [
+        "t=2 minimum",
+        "f' changes negative to positive"
+       ]
+      },
+      {
+       "row_id": "a3",
+       "points": 1,
+       "criterion": "Relative maximum at t=9 with sign-change justification",
+       "required_elements": [
+        "t=9 maximum",
+        "f' changes positive to negative"
+       ]
+      }
+     ]
+    },
+    {
+     "label": "b",
+     "prompt": "Find the t-coordinate of each point of inflection of the graph of f on (0,10). Give a reason for your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.E"
+     ],
+     "model_answer": "t=5. f'' is positive on (0,5) because f' is increasing, and negative on (5,7) because f' is decreasing, so f'' changes sign at t=5 (f' has its maximum there). No other sign change of f'' occurs: f' is increasing on (0,5) and decreasing on (5,10).",
+     "rubric_rows": [
+      {
+       "row_id": "b1",
+       "points": 1,
+       "criterion": "Identifies t=5 only",
+       "required_elements": [
+        "t=5"
+       ],
+       "common_errors": [
+        "Also lists t=2 or t=9 (zeros of f')"
+       ]
+      },
+      {
+       "row_id": "b2",
+       "points": 1,
+       "criterion": "Justifies using change in sign of f'' (f' changes from increasing to decreasing)",
+       "required_elements": [
+        "f' increasing then decreasing at t=5",
+        "f'' changes sign"
+       ],
+       "requires_row_id": "b1"
+      }
+     ]
+    },
+    {
+     "label": "c",
+     "prompt": "Find the absolute minimum value of f on the closed interval [0,10]. Justify your answer.",
+     "points": 3,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "3.E"
+     ],
+     "model_answer": "Candidates: the endpoints t=0 and t=10 and the critical points t=2 and t=9. f(2)=40+int_0^2 f' = 40-2=38. f(9)=38+9+8+2=57. f(10)=57-1=56. f(0)=40. The smallest is f(2)=38, so the absolute minimum value is 38 dollars.",
+     "rubric_rows": [
+      {
+       "row_id": "c1",
+       "points": 1,
+       "criterion": "Setup: considers endpoints and critical points as candidates",
+       "required_elements": [
+        "candidates t=0,2,9,10"
+       ]
+      },
+      {
+       "row_id": "c2",
+       "points": 1,
+       "criterion": "Computes candidate values using f(0)+area under f'",
+       "required_elements": [
+        "f(2)=38",
+        "f(9)=57 or f(10)=56"
+       ],
+       "alt_solutions": [
+        "Any correct set of areas -2, 9, 8, 2, -1"
+       ],
+       "requires_row_id": "c1"
+      },
+      {
+       "row_id": "c3",
+       "points": 1,
+       "criterion": "Answer 38 with comparison of candidates",
+       "required_elements": [
+        "38",
+        "compares values"
+       ],
+       "requires_row_id": "c2",
+       "units_row": true
+      }
+     ]
+    },
+    {
+     "label": "d",
+     "prompt": "On which open interval(s) is f both decreasing and concave down? Give a reason.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.E"
+     ],
+     "model_answer": "(9,10). There f'(t)<0 so f is decreasing, and f' is decreasing so f''<0 and f is concave down. On (0,2), f is decreasing but f' is increasing, so f is concave up.",
+     "rubric_rows": [
+      {
+       "row_id": "d1",
+       "points": 1,
+       "criterion": "Interval (9,10) with reason using signs of f' and f''",
+       "required_elements": [
+        "(9,10)",
+        "f'<0",
+        "f' decreasing"
+       ]
+      }
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 15,
+   "design_note": "Household energy context with an f' graph given as data; tests justification via sign charts of f' and f'', and the candidates test using areas. Part (c) is hand-computable with triangles and trapezoids, and keeps to topics 5.4, 5.6 and 5.9.",
+   "calculator_part": "not_allowed",
+   "template": "fprime_graph_justify",
+   "verification_code": "import json\npts=[(0,-2),(2,0),(5,6),(7,2),(9,0),(10,-2)]\ndef area(a,b):\n    return (b[0]-a[0])*(a[1]+b[1])/2\n# split segments at zeros are already vertices\nA=[area(pts[i],pts[i+1]) for i in range(5)]\nf={0:40}\nf[2]=40+A[0]+0\nf[2]=40+A[0]\nf[5]=f[2]+A[1]\nf[7]=f[5]+A[2]\nf[9]=f[7]+A[3]\nf[10]=f[9]+A[4]\nslopes=[(pts[i+1][1]-pts[i][1])/(pts[i+1][0]-pts[i][0]) for i in range(5)]\nok_c=(f[2]==38 and f[9]==57 and f[10]==56 and min(f[0],f[2],f[9],f[10])==38)\nok_b=slopes==[1,2,-2,-1,-2]\nprint(json.dumps({\"checks\":[{\"part\":\"a\",\"pass\":True,\"detail\":\"zeros at 2 (-to+), 9 (+to-)\"},{\"part\":\"b\",\"pass\":ok_b,\"detail\":str(slopes)},{\"part\":\"c\",\"pass\":ok_c,\"detail\":str(f)},{\"part\":\"d\",\"pass\":True,\"detail\":\"(9,10)\"}],\"conceptual_parts\":[\"a\",\"d\"]}))"
+  },
+  "verification": {
+   "conceptualOnly": false,
+   "solverAgrees": true
+  },
+  "review": {
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ; rubric lists the common error of listing t=2 or t=9 as inflection points. Adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Hand-computable areas, 9 points, about 15 minutes, no calculator needed."
+   },
+   "instant_reject": [],
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified: f(2)=38, f(5)=47, f(7)=55, f(9)=57, f(10)=56. The absolute minimum is 38. Parts (a), (b), and (d) are correct, and t=7 is correctly not an inflection point. The rubric is consistent. Minor sloppiness in the model answer's candidate list, which names t=2 twice."
+   },
+   "resembles_known_exam_item": false,
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle combines 5.4, 5.6, and 5.9 with a justification emphasis (3.E), which fits the stated scope."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The data gives axes, ranges, ticks, all vertices of the piecewise-linear f', and f(0)=40. It is complete and the wording is clear."
+   },
+   "summary": "The item is correct, complete, and suitable. I verified the key by computing the areas under f' (f(2)=38, f(10)=56) and the slope signs of f'. The only blemish is a sloppy candidate list in the part (c) model answer, which does not change the key or the rubric. I recommend acceptance."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multipart FRQ on a graph of f'. It uses the first derivative test, the sign change of f'' read from the slopes of f', and the candidates test with triangle areas. The justification skill is dominant and matches the topics. Reading and computation are light, and nothing is out of scope.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  },
+  "gateOverride": "v2-legacy-revalidated-2026-10-09",
+  "run": "supp-aud1015-final",
+  "stockKey": "supp-aud1015-final:ap_calculus_ab-f02-k910",
+  "pipeline": "llm_v1",
+  "validation": "auto_passed",
+  "gateVersion": "v2-legacy-revalidated-2026-10-09",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "calculus",
+  "itemFamilyId": "fam:run1:ap_calculus_ab-f02-k5",
+  "canonicalKey": "supp-aud1015-final:ap_calculus_ab-f02-k910",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "calculus:5.9",
+  "sharedWith": [],
+  "stockCell": "ap_calculus_ab|5.9|3.E|frq_multipart|na",
+  "history": [
+   {
+    "run": "supp-aud1015-final",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null,
+    "derivedFrom": "run1:ap_calculus_ab-f02-k5",
+    "auditRow": "AP-015"
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_calculus_ab-f03-k911",
+  "cellId": "ap_calculus_ab-f03",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "frq_bundle",
+  "keywordCode": "7.6",
+  "unitCode": "7",
+  "skillPrimary": "1.E",
+  "structure": "frq_multipart",
+  "calculator": "na",
+  "reviewState": "auto_passed",
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard multipart FRQ on separable differential equations. Part a is slope evaluation plus noting that the slope is undefined at y=0. Part b is separation, integration and a cube root. Part c uses the initial condition. Part d checks that y never equals 0, using the discriminant of x^2+x+8. All of it is in scope, with light computation and no ambiguity. The domain justification in part d needs some conceptual care but is a typical exam item.",
+  "payload": {
+   "title": "Separable equation with cubic denominator",
+   "stimulus": {
+    "kind": "text",
+    "description": "Differential equation dy/dx = (2x+1)/(3y^2) with initial condition y(0)=2.",
+    "data": {
+     "equation": "dy/dx = (2x+1)/(3y^2)",
+     "initial_condition": {
+      "x": 0,
+      "y": 2
+     },
+     "points_for_slope": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       -1
+      ],
+      [
+       0,
+       0
+      ]
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Consider the differential equation $\\frac{dy}{dx}=\\frac{2x+1}{3y^2}$. Find the slope at each of the points $(0,1)$ and $(1,-1)$. Then explain what happens to the slope at $(0,0)$ and what this means for a slope field drawn there.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E"
+     ],
+     "model_answer": "At (0,1): 1/3. At (1,-1): 3/3 = 1. At (0,0) the denominator is 0, so the slope is undefined (there is no finite slope); no slope segment is drawn there.",
+     "rubric_rows": [
+      {
+       "row_id": "a1",
+       "points": 1,
+       "criterion": "Both slopes computed correctly",
+       "required_elements": [
+        "1/3 at (0,1)",
+        "1 at (1,-1)"
+       ],
+       "requires_both": true,
+       "requires_numbers": true,
+       "alt_solutions": []
+      },
+      {
+       "row_id": "a2",
+       "points": 1,
+       "criterion": "States slope undefined at (0,0) because denominator is 0",
+       "required_elements": [
+        "undefined",
+        "3y^2 = 0"
+       ],
+       "alt_solutions": [
+        "no segment drawn / no finite slope"
+       ]
+      }
+     ]
+    },
+    {
+     "label": "b",
+     "prompt": "Use separation of variables to find the general solution, writing $y$ in terms of $x$ and a constant.",
+     "points": 3,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E"
+     ],
+     "model_answer": "3y^2 dy = (2x+1) dx; y^3 = x^2 + x + C; y = (x^2 + x + C)^(1/3).",
+     "rubric_rows": [
+      {
+       "row_id": "b1",
+       "points": 1,
+       "criterion": "Separates variables correctly",
+       "required_elements": [
+        "3y^2 dy = (2x+1) dx"
+       ]
+      },
+      {
+       "row_id": "b2",
+       "points": 1,
+       "criterion": "Antiderivatives of both sides with a constant C",
+       "required_elements": [
+        "y^3",
+        "x^2 + x + C"
+       ],
+       "common_errors": [
+        "omitting +C",
+        "putting C on both sides unsimplified is fine"
+       ]
+      },
+      {
+       "row_id": "b3",
+       "points": 1,
+       "criterion": "Solves for y",
+       "required_elements": [
+        "y = (x^2 + x + C)^(1/3)"
+       ],
+       "requires_row_id": "b2",
+       "alt_solutions": [
+        "y = cube root of (x^2+x+C)"
+       ]
+      }
+     ]
+    },
+    {
+     "label": "c",
+     "prompt": "Find the particular solution $y=f(x)$ with $f(0)=2$.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E"
+     ],
+     "model_answer": "8 = C, so y = (x^2 + x + 8)^(1/3).",
+     "rubric_rows": [
+      {
+       "row_id": "c1",
+       "points": 1,
+       "criterion": "Uses the initial condition to find C",
+       "required_elements": [
+        "C = 8"
+       ],
+       "requires_row_id": "b2"
+      },
+      {
+       "row_id": "c2",
+       "points": 1,
+       "criterion": "States particular solution",
+       "required_elements": [
+        "y = (x^2 + x + 8)^(1/3)"
+       ],
+       "requires_row_id": "c1"
+      }
+     ]
+    },
+    {
+     "label": "d",
+     "prompt": "Determine the largest interval on which your particular solution from part (c) is a valid solution of the differential equation. Justify your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.E"
+     ],
+     "model_answer": "The differential equation requires y ≠ 0. Since x^2+x+8 has discriminant 1-32 < 0, it is always positive, so y > 0 for all x. The solution is valid on (-infinity, infinity).",
+     "rubric_rows": [
+      {
+       "row_id": "d1",
+       "points": 1,
+       "criterion": "Identifies condition y ≠ 0 and shows x^2+x+8 > 0 for all x",
+       "required_elements": [
+        "y not 0",
+        "x^2+x+8 > 0 (discriminant negative or completed square (x+1/2)^2+31/4)"
+       ]
+      },
+      {
+       "row_id": "d2",
+       "points": 1,
+       "criterion": "Concludes interval is all real numbers",
+       "required_elements": [
+        "(-infinity, infinity)"
+       ],
+       "requires_row_id": "d1"
+      }
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 15,
+   "calculator_part": "not_allowed",
+   "template": "differential_equation",
+   "design_note": "Abstract text-only DE; integrates slope evaluation (7.3/7.4 idea of slope field and undefined slopes), separation (7.6), and domain justification via the y not 0 condition.",
+   "verification_code": "import json, sympy as sp\nx,y,C=sp.symbols('x y C')\nf=(2*x+1)/(3*y**2)\ns1=f.subs({x:0,y:1}); s2=f.subs({x:1,y:-1})\nCv=sp.solve(sp.Eq(2**3,0+0+C),C)[0]\ndisc=1-4*8\nchecks=[{\"part\":\"a\",\"pass\":bool(s1==sp.Rational(1,3) and s2==1),\"detail\":\"slopes\"},\n{\"part\":\"b\",\"pass\":bool(sp.simplify(sp.diff(x**2+x+C,x)-(2*x+1))==0),\"detail\":\"d/dx y^3 check\"},\n{\"part\":\"c\",\"pass\":bool(Cv==8),\"detail\":\"C=8\"},\n{\"part\":\"d\",\"pass\":bool(disc<0),\"detail\":\"discriminant negative\"}]\nyy=(x**2+x+8)**sp.Rational(1,3)\nchecks[2][\"pass\"]=checks[2][\"pass\"] and sp.simplify(sp.diff(yy,x)-f.subs(y,yy))==0\nprint(json.dumps({\"checks\":checks,\"conceptual_parts\":[]}))"
+  },
+  "verification": {
+   "conceptualOnly": false,
+   "solverAgrees": true
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Slope evaluation, separation of variables, initial condition, and domain check fit 7.6/7.3/7.4 with 1.E dominant."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All answers verified: 1/3, 1, undefined; y^3=x^2+x+C; C=8; all reals. Rubric consistent. Minor: (a) allows 'no segment or vertical' hedge."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Equation, initial condition and points fully specified. Text-only, clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ; rubric rows are clear with alternatives. Little discussion of common errors, but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "9 points, ~15 min, no calculator, light arithmetic. Part (d) is somewhat easy but fine."
+   },
+   "instant_reject": [],
+   "resembles_known_exam_item": false,
+   "summary": "Correct, well-scoped multipart FRQ on separable equations and slope-field reasoning. Only minor looseness in (a)'s accepted explanation at (0,0). Acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multipart FRQ on separable differential equations. Part a is slope evaluation plus noting that the slope is undefined at y=0. Part b is separation, integration and a cube root. Part c uses the initial condition. Part d checks that y never equals 0, using the discriminant of x^2+x+8. All of it is in scope, with light computation and no ambiguity. The domain justification in part d needs some conceptual care but is a typical exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  },
+  "gateOverride": "v2-legacy-revalidated-2026-10-09",
+  "run": "supp-aud1015-final",
+  "stockKey": "supp-aud1015-final:ap_calculus_ab-f03-k911",
+  "pipeline": "llm_v1",
+  "validation": "auto_passed",
+  "gateVersion": "v2-legacy-revalidated-2026-10-09",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "calculus",
+  "itemFamilyId": "fam:run1:ap_calculus_ab-f03-k2",
+  "canonicalKey": "supp-aud1015-final:ap_calculus_ab-f03-k911",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "calculus:7.6",
+  "sharedWith": [],
+  "stockCell": "ap_calculus_ab|7.6|1.E|frq_multipart|na",
+  "history": [
+   {
+    "run": "supp-aud1015-final",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null,
+    "derivedFrom": "run1:ap_calculus_ab-f03-k2",
+    "auditRow": "AP-016"
+   }
+  ]
+ }
+]
