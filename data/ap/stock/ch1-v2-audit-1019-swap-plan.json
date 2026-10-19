@@ -1,0 +1,33 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "CH1",
+ "sourceSetName": "AP Chemistry — Practice Exam 1",
+ "sourceVersionNo": 1,
+ "generatedBy": "scripts/audit/ap-audit-typefix-1019-plans.ts (type-level fix of external audit 2026-10-15, docs/audits/ap-type-defect-scan-20261019.md)",
+ "note": "Swaps use removeKey (positions resolve from the live set). Apply after the candidates in data/ap/stock/supp-fix1019-items.json are loaded, converted, render/screen-verified and review_env_ready. Each candidate is a copy of the published item with only the student-visible setup (title) corrected; the answer key is unchanged.",
+ "swapCount": 1,
+ "verifierViolations": [],
+ "requiresConvertedCandidates": [
+  "fix1019:ap_chemistry-tf05-k0"
+ ],
+ "swaps": [
+  {
+   "section": "ap_frq",
+   "removeKey": "chem-s2-f4:ap_chemistry-f03-k0",
+   "addKey": "fix1019:ap_chemistry-tf05-k0",
+   "reason": "type fix b: CH1 FRQ3 (chf_long_kinetics) the temperature 310 K was only in the invisible description; the title now states it",
+   "remove": {
+    "unit": null,
+    "skill": null,
+    "shared": false,
+    "type": "chf_long_kinetics"
+   },
+   "add": {
+    "unit": null,
+    "skill": null,
+    "shared": false,
+    "type": "chf_long_kinetics"
+   }
+  }
+ ]
+}

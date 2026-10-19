@@ -1,0 +1,220 @@
+{
+ "generatedAt": "2026-10-19T20:23:19.889Z",
+ "universe": "data/ap/stock/supp-fix1019-items.json",
+ "all": {
+  "total": 11,
+  "pass": 11,
+  "fail": 0,
+  "notApplicable": 0
+ },
+ "results": [
+  {
+   "key": "fix1019:ap_biology-tf01-k0",
+   "contentHash": "ab0b51683d3f52af7feba51049b7ef2cb4ae2a3f8cfffe91accf1205d17bf93a",
+   "subject": "ap_biology",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 9개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Growth factor concentration (ng/mL), Mean percent of cells in mitosis (percent of cells) ± 2SE and 4 rows."
+  },
+  {
+   "key": "fix1019:ap_biology-tf02-k0",
+   "contentHash": "6633a025705ab21625452e5ae4f95562083675d1aaf7d9a3c12f807505e15c6d",
+   "subject": "ap_biology",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 9개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Generations of selective breeding, Mean number of bristles per fly (bristles) ± 2SE and 4 rows."
+  },
+  {
+   "key": "fix1019:ap_biology-tf03-k0",
+   "contentHash": "51747cd1f257e3af3897b6d4b76d8251a0635c5528d572df2570dfd1ceb7800a",
+   "subject": "ap_biology",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 7개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Drug concentration, Mean percent of cells in mitosis (percent of cells) ± 2SE and 3 rows."
+  },
+  {
+   "key": "fix1019:ap_biology-tf04-k0",
+   "contentHash": "0c3abb40bad73daacb94bdfba750a5f80a4b2fe503a7735f15a3912c07cf7d93",
+   "subject": "ap_biology",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 7개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Age of the mice, Mean percent of eggs with an abnormal number of chromosomes (percent of eggs) ± 2SE and 3 rows."
+  },
+  {
+   "key": "fix1019:ap_chemistry-tf05-k0",
+   "contentHash": "a1f711e51a49f26995130457b264ebba39b31574ea57868ba819dfcebe71130a",
+   "subject": "ap_chemistry",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 12개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Time (s), [A] (M) and 6 rows."
+  },
+  {
+   "key": "fix1019:ap_chemistry-tf06-k0",
+   "contentHash": "d9bd93aebfdb8e94cf4bbc4823d0483602dc3416d5735b94225acffa81605bdd",
+   "subject": "ap_chemistry",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 12개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Time (s), [A] (M) and 6 rows."
+  },
+  {
+   "key": "fix1019:ap_microeconomics-tf07-k0",
+   "contentHash": "93fc5f122a4304005bb8943694afff4fadbb3baabde1aa20c88173f8ff33e813",
+   "subject": "ap_microeconomics",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "table",
+   "renderType": "ap_table",
+   "need": "required",
+   "needReason": "표의 숫자 11개가 본문에 없음 — 표가 있어야 풀림",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "table_no_title",
+     "message": "표에 제목이 없습니다."
+    }
+   ],
+   "alt": "Table with columns Workers, Total product (chairs) and 6 rows."
+  },
+  {
+   "key": "fix1019:ap_statistics-tf08-k0",
+   "contentHash": "76cc95aff951531c37da7cb961be988c25bb6856d8220aae07c19cff1152c4cf",
+   "subject": "ap_statistics",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "stat_chart",
+   "renderType": "ap_stat_chart:scatter",
+   "need": "required",
+   "needReason": "본문이 그림·출력을 가리키고 값은 그림에서 읽어야 함(통계 차트)",
+   "status": "pass",
+   "issues": [],
+   "alt": "Exam score versus hours of study. Scatterplot of 18 points. Horizontal axis: Hours of study. Vertical axis: Exam score. Line: y = 4.81x + 46.47."
+  },
+  {
+   "key": "fix1019:ap_statistics-tf09-k0",
+   "contentHash": "663228110dc1fa8d5cbb3a3c08377fdee8e43bf1a3f30e98e1801778ec1ddce4",
+   "subject": "ap_statistics",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "stat_chart",
+   "renderType": "ap_stat_chart:scatter",
+   "need": "required",
+   "needReason": "본문이 그림·출력을 가리키고 값은 그림에서 읽어야 함(통계 차트)",
+   "status": "pass",
+   "issues": [],
+   "alt": "Exam score versus hours of study. Scatterplot of 16 points. Horizontal axis: Hours of study. Vertical axis: Exam score. Line: y = 5.2x + 44.47."
+  },
+  {
+   "key": "fix1019:ap_calculus_ab-tf11-k0",
+   "contentHash": "90e72e2e2490577ab0c863c93cf1c1e572fdaaf6249e53b640d1bc3246e98521",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:calc_function_or_derivative",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_range_derived",
+     "message": "축 범위(min/max)가 없어 점 목록에서 유도했습니다(생성기가 범위를 줘야 함)."
+    }
+   ],
+   "alt": "Graph of curve. Horizontal axis: x, 0 to 8. Vertical axis: f'(x), -5 to 5."
+  },
+  {
+   "key": "fix1019:ap_calculus_ab-tf12-k0",
+   "contentHash": "9b2b1d068b166ac8c625cdb778c99ea9d4ac1cce616e398416f8bf8925a8d6d0",
+   "subject": "ap_calculus_ab",
+   "kind": "frq_bundle",
+   "validation": "auto_passed",
+   "stimKind": "graph",
+   "renderType": "ap_graph:calc_function_or_derivative",
+   "need": "required",
+   "needReason": "본문이 그래프를 가리키고 값은 그림에서 읽어야 함",
+   "status": "pass",
+   "issues": [
+    {
+     "level": "warn",
+     "code": "axis_range_derived",
+     "message": "축 범위(min/max)가 없어 점 목록에서 유도했습니다(생성기가 범위를 줘야 함)."
+    }
+   ],
+   "alt": "Graph of curve. Horizontal axis: x, 0 to 8. Vertical axis: f'(x), -5 to 5."
+  }
+ ]
+}

@@ -430,7 +430,9 @@ def _describe(rng, fam, arch, stim=True, topic="4.5", skill="4.A"):
         ds.append(Opt(text, False, f"{why.rstrip('.')}. For instance, {_lit_s(tests[k])} returns {actual[k]}, but this description would give {_pyfmt(fn(tests[k]))}.", None))
     shown = cls
     p = pack(arch, topic, skill, "not_allowed", "x", key, ds, rng, stimulus=(code_stim(shown) if stim else None), est=85, facts=[f"family={fam}", f"tests={len(tests)}"])
-    p["stem"] = "Which of the following best describes the value returned by the method mystery?" if True else ""
+    # 외부 검수 2026-10-15 AP-041: 최대 원소 위치를 돌려주는 코드는 빈 리스트에서 의미가 없다 — 전제를 문항에 쓴다(코드가 index 0 을 '가장 큰 값의 위치' 초기값으로 쓰는 가족).
+    pre = {"list_best": "Assume that list contains at least one element. "}.get(fam, "")
+    p["stem"] = pre + "Which of the following best describes the value returned by the method mystery?"
     mis = [(f"m{i + 1}", o["why"]) for i, o in enumerate([o for j, o in enumerate(p["options"]) if j != p["key_index"]])]
     p["blueprint"] = mc_blueprint(arch, SUB, topic, skill, "not_allowed", "describe the behavior of a code segment", "work out what the loop computes and compare with each description", [("the key description holds on every test input run through the JDK", "javac+java test run"), ("each distractor description fails on at least one input", "java test run")], mis, "javac+java runs the method on 5 or more inputs; each English description has a Python predicate that must agree (key) or disagree (distractors)",
                                   material={"type": "code", "must_include": ["the code segment"]}, method="javac+java + python predicates", extra={"judgment_demand": "generalize from code to an English description"})

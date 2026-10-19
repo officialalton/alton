@@ -200,7 +200,7 @@ def g_lhopital_graph(rng):
         raise ValueError("independent_check_failed")
     ds = [("Takes the ratio of slopes upside down, g'(a)/f'(a).", 1 / key), ("Substitutes x = %d and concludes the quotient 0/0 equals 0." % a, Fr(0)), ("Multiplies the two slopes instead of dividing them.", sf * sg), ("Subtracts the slopes instead of forming their ratio.", sf - sg)]
     pool = opts(ds, key, fx)
-    stem = f"The graphs of the differentiable functions $f$ and $g$ are shown, each consisting of line segments, and both graphs pass through $({a},0)$. What is $\\displaystyle\\lim_{{x\\to {a}}}\\frac{{f(x)}}{{g(x)}}$?"
+    stem = f"The graphs of the functions $f$ and $g$ are shown, each consisting of line segments, and both graphs pass through $({a},0)$. Both functions are differentiable at $x={a}$. What is $\\displaystyle\\lim_{{x\\to {a}}}\\frac{{f(x)}}{{g(x)}}$?"
     k = Opt(fx(key), True, "The quotient has the form 0/0 at x = a, so the limit equals f'(a)/g'(a), the ratio of the slopes read from the graphs (L'Hopital's Rule).", key)
     bpr = bp("g_lhopital_graph", "4.7", "1.D", "not_allowed", "Evaluate a 0/0 limit by comparing the slopes of two graphs at their common zero",
              ["Check that f(a) = g(a) = 0 so the limit is indeterminate 0/0", "Choose L'Hopital's Rule and read the two slopes at x = a", "Form the ratio f'(a)/g'(a)"],

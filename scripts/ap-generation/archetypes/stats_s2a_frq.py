@@ -120,6 +120,7 @@ def stfrq_q2_regression(rng):
     a_, b_ = round(a, 2), round(b, 2); r2_ = round(r2, 2)
     i = rng.randrange(3, n - 3); x0 = float(x[i]); y0 = float(y[i])
     yh = a_ + b_ * x0; resid = y0 - yh
+    # 참고답이 말하는 "자료의 범위"는 실제로 뽑힌 x 의 최솟값·최댓값이다(명목 범위 xr 은 뽑힌 표본에 10 이 없을 수 있다 — 독립 풀이 검증 2026-10-19 에서 발견).
     xo = c["xr"][1] + rng.randint(4, 8)
     while a_ + b_ * xo <= 1 and xo > c["xr"][1] + 1:
         xo -= 1
@@ -146,7 +147,7 @@ def stfrq_q2_regression(rng):
              [R("D1", f"States that {int(round(r2_ * 100))}% (the proportion {r2_}) of the variation in the response is accounted for by the linear relationship", [f"{int(round(r2_ * 100))}%", "variation"], nums=True, err=["says the line passes through that percent of the points", "says the response changes by that percent"]),
               R("D2", "Uses the context (names both variables)", ["in context"], requires="D1")]),
         part("E", f"A researcher uses the regression line to predict the {c['y'].split(' (')[0]} when $x = {xo}$. Is this prediction reliable? Explain.", 1, "explain", ["4.D"],
-             f"No. ${xo}$ is outside the range of the data ({c['xr'][0]} to {c['xr'][1]}), so this is extrapolation and the linear pattern may not continue.",
+             f"No. ${xo}$ is outside the range of the data ({int(x.min())} to {int(x.max())}), so this is extrapolation and the linear pattern may not continue.",
              [R("E1", "States that the prediction is not reliable because the value is outside the range of the data (extrapolation)", ["extrapolation", "outside the range of the data"], err=["says it is reliable because r squared is large"])]),
     ]
     for pt, tc in zip(parts, [["5.3"], ["5.4"], ["5.4"], ["5.5"], ["5.3"]]):

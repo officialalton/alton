@@ -109,7 +109,7 @@ def lagrange_graph(rng):
     for w_, k in ds:
         if k not in used and k != 0: used.add(k); pool.append(Opt(fmt(k), False, w_, k))
     if len(pool) < 3: raise ValueError("not_enough_distractors")
-    stem = f"The function $f$ has derivatives of all orders. The graph of $y=f^{{(4)}}(x)$ on $0\\le x\\le 4$, consisting of line segments, is shown. Let $P_3$ be the third-degree Maclaurin polynomial for $f$. Which of the following is the Lagrange error bound for $|f({a})-P_3({a})|$ obtained from the graph?"
+    stem = f"The function $f$ has a continuous fourth derivative on $0\\le x\\le 4$. The graph of $y=f^{{(4)}}(x)$, consisting of line segments, is shown. Let $P_3$ be the third-degree Maclaurin polynomial for $f$. Which of the following is the Lagrange error bound for $|f({a})-P_3({a})|$ obtained from the graph?"
     key = Opt(fmt(key_v), True, "M a^4 / 4! with M the maximum of |f^(4)| on [0, a], read from the graph.", key_v)
     bp = _bp("lagrange_graph", "10.12", "2.B", "Read a bound on a derivative from its graph and apply the Lagrange error bound", ["Read the largest absolute value of f^(4) on [0, a] from the graph", "Apply M|x|^(n+1)/(n+1)! with n = 3"],
              [("|f^(4)| <= M on [0, a] holds for the graph's maximum absolute value", "piecewise-linear graph, maximum at a vertex")], [("signed_max", "uses the maximum signed value"), ("wrong_interval", "uses a maximum from outside [0, a]"), ("wrong_factorial", "uses 3! instead of 4!")],

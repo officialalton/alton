@@ -4,6 +4,7 @@
 from bio_common import *  # noqa: F401,F403
 from calc_ab_frq import row, part
 from bp import frq_blueprint
+from frq_visible import setup_title
 
 REF_NOTE = "ALTON reference answer for self-review — not official AP scoring"
 NOTE = "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
@@ -151,6 +152,7 @@ def _mk_q1(sc):
     def f(rng):
         p = _q1(rng, sc)
         p["stimulus"]["description"] = sc["intro"].format(n=sc["n"]) + " " + p["stimulus"]["description"]
+        p["title"] = setup_title(sc["intro"].format(n=sc["n"]))  # 실험 소개는 표 스펙에 실리지 않는 description 에만 있었다 — 학생이 보는 제목에 완전한 문장으로 둔다
         return p
     f.__name__ = f"bif_q1_{sc['key']}"
     f.__module__ = __name__
@@ -169,7 +171,7 @@ Q2_SCEN = [
          C_prompt="(i) Using your plotted data, estimate the molarity of sucrose at which there would be no net movement of water into or out of the potato cores. (ii) State a null hypothesis for the investigation.",
          D_prompt="The investigation is repeated with sodium chloride (NaCl), which ionizes into two ions, instead of sucrose, using the same molarities. Predict how the percent change in mass at 0.4 M would differ from that in 0.4 M sucrose, and justify your prediction.",
          D_pred="The cores would lose more mass (or gain less) in 0.4 M NaCl than in 0.4 M sucrose.", D_pred_elem="The cores in NaCl would show a lower (more negative) percent change in mass than the cores in sucrose at the same molarity", D_pred_alts=["more water would leave the cores in NaCl", "the mass would decrease more in NaCl"], D_pred_errs=["predicts an identical change because the molarity is the same", "predicts a gain in mass larger than in sucrose"],
-         D_just="NaCl ionizes into two ions, so the solute concentration (and so the solute potential, Ψ_S = -iCRT with i = 2) is greater and the water potential of the solution is lower.", D_just_elem="NaCl ionizes into two particles, so the solution has more solute particles and a lower water potential than sucrose", D_just_alts=["the ionization constant i is 2 for NaCl so the solute potential is more negative", "more dissolved particles lower the water potential, so more water leaves the cores"], D_just_errs=["says NaCl is not a solute", "says the molarity is the only factor that matters"]),
+         D_just="NaCl ionizes into two ions, so the solute concentration is greater, which makes the solute potential (Ψ_S = -iCRT with i = 2) lower (more negative) and the water potential of the solution lower.", D_just_elem="NaCl ionizes into two particles, so the solution has more solute particles and a lower water potential than sucrose", D_just_alts=["the ionization constant i is 2 for NaCl so the solute potential is more negative", "more dissolved particles lower the water potential, so more water leaves the cores"], D_just_errs=["says NaCl is not a solute", "says the molarity is the only factor that matters"]),
     dict(key="enzymetemp", topic="3.2", extra=["3.1"], intro="A student measures the rate at which an enzyme converts its substrate to product at six temperatures. Each value is the mean of repeated trials.",
          x=["10", "20", "30", "40", "50", "60"], xl="Temperature (°C)", yl="Rate of reaction (µmol of product per minute)", yunit="", gen=lambda r: (lambda opt: [round(100 * math.exp(-((t - opt) / 14.0) ** 2), 0) for t in (10, 20, 30, 40, 50, 60)])(r.choice([28, 30, 32])), plot_type="line",
          A_prompt="Describe how the structure of an enzyme allows it to catalyze a reaction of a specific substrate.", A_ans="The active site of the enzyme has a shape and chemistry complementary to the substrate, so only that substrate binds and the reaction is catalyzed by lowering the activation energy.",
@@ -281,7 +283,7 @@ def _q2(rng, sc):
           [R("D1", "Makes a reasonable prediction", sc["D_pred_elem"], sc["D_pred_alts"], sc["D_pred_errs"], "claim"), R("D2", "Justifies the prediction with biological reasoning", sc["D_just_elem"], sc["D_just_alts"], sc["D_just_errs"], "justification", requires="D1")]),
     ]
     arch = f"bif_q2_{key}"
-    return _finish(arch, "bio_q2_graphing", sc["topic"], sc["extra"], "4.A", f"Results with graphing: {sc['intro'][:40]}", stim, parts, 9, 24, facts, ev, "Construct a graph from a table, analyze it, and predict with justification",
+    return _finish(arch, "bio_q2_graphing", sc["topic"], sc["extra"], "4.A", setup_title(sc["intro"]), stim, parts, 9, 24, facts, ev, "Construct a graph from a table, analyze it, and predict with justification",
                    ["Explain a concept from the scenario", "Construct a labeled, scaled, plotted graph", "Use the data to calculate or estimate", "Predict and justify a change"], [("Data pairs for six or seven values of the independent variable", "the table gives all of the data to be plotted")], {"type": "experiment_table", "must_include": ["independent variable values", "dependent variable values"]},
                    "values read back from the generating data (percent change, interpolation, slope, plateau)", "construct, read, and extend a graph")
 
@@ -435,10 +437,11 @@ def bif_q5_replication(rng):
     stim = strand_stim("Two parental DNA strands at a replication fork (the fork moves toward the " + fork + " side)", ("Top template strand", t_l, t_r, list(top)), ("Bottom template strand", b_l, b_r, list(bot)))
     stim["description"] = f"The diagram shows the two parental template strands at a replication fork that is moving toward the {fork} side of the diagram."
     stim["data"]["fork_direction"] = fork
+    fork_sentence = f"The replication fork is moving toward the {fork} side of the diagram."  # 분기점 진행 방향이 있어야 선도 가닥 주형이 하나로 정해진다(외부 검수 AP-001) — 그림 설명이 아니라 학생이 보는 제목과 파트 A 에 둔다
     lead = "top" if lead_top else "bottom"; lag = "bottom" if lead_top else "top"
     seq_txt = "".join(new_top)
     parts = [
-        P("A", "Identify which template strand (top or bottom) is used to make the leading strand.", "explain", ["2.A"], ["6.2"], f"The {lead} template strand is used to make the leading strand.",
+        P("A", f"{fork_sentence} Identify which template strand (top or bottom) is used to make the leading strand.", "explain", ["2.A"], ["6.2"], f"The {lead} template strand is used to make the leading strand.",
           [R("A1", "Identifies the template strand for the leading strand", f"States that the {lead} template strand is the template for the continuously made leading strand", [f"the {lead} strand's new strand is made continuously toward the fork", f"leading strand template: {lead}"], [f"names the {lag} strand", "names both strands"], "claim")]),
         P("B", "Explain why the new strand made on the other template strand is made in short fragments.", "explain", ["2.B"], ["6.2"], "DNA polymerase adds nucleotides only to the 3' end of a growing strand, so on the template whose new strand is made away from the fork, synthesis must be restarted in short Okazaki fragments as the fork opens.",
           [R("B1", "Explains that synthesis only occurs in the 5' to 3' direction away from the fork on the lagging template", "DNA polymerase adds nucleotides only to the 3' end, so that new strand runs away from the fork and is made in fragments", ["synthesis is always 5' to 3' and the lagging strand must be made in pieces as the fork opens", "the strand grows away from the fork, so it is made in Okazaki fragments"], ["says DNA polymerase works in both directions", "says the lagging strand is made in fragments because it has no primer"], "claim")]),
@@ -447,7 +450,7 @@ def bif_q5_replication(rng):
         P("D", "Explain how the top template strand and the new strand that you wrote in part C illustrate that DNA replication is semiconservative.", "explain", ["2.C"], ["6.2"], "The new strand is paired with the original template strand, so the resulting DNA molecule contains one original strand and one newly made strand, which is what semiconservative replication means.",
           [R("D1", "Relates the pairing of the new strand with its template to semiconservative replication", "The new strand pairs with the original top template strand, so each new DNA molecule has one old strand and one new strand", ["each daughter molecule keeps one parental strand and gains one new strand", "the template stays in the new molecule, paired with the strand made from it"], ["says the two parental strands stay together in one molecule", "says the new molecule is made entirely of new nucleotides"], "justification")]),
     ]
-    return _finish("bif_q5_replication", "bio_q5_model", "6.2", ["6.1"], "2.B", "Analyzing a model of DNA replication", stim, parts, 4, 10, [f"top={top}", f"left3={left3}", f"fork={fork}", f"lead={lead}"], [],
+    return _finish("bif_q5_replication", "bio_q5_model", "6.2", ["6.1"], "2.B", f"Analyzing a model of DNA replication at a fork that moves toward the {fork} side of the diagram", stim, parts, 4, 10, [f"top={top}", f"left3={left3}", f"fork={fork}", f"lead={lead}"], [],
                    "Analyze a diagram of a replication fork", ["Identify the leading strand template", "Explain Okazaki fragments", "Represent the new strand with polarity", "Relate the structure of DNA to copying"], [("Template strands labeled 5' and 3' and the fork direction", "the diagram and the sentence give the polarity and fork direction")], {"type": "diagram", "must_include": ["template strands", "5' and 3' ends", "fork direction"]},
                    "synthesis direction derived from each template's polarity and the fork direction, checked from both templates; the new strand is the reverse-labeled complement", "read a model and represent a new strand")
 
@@ -585,7 +588,7 @@ def _q6(rng, sc):
         P("D", sc["D_prompt"], "explain", ["6.D"], [sc["topic"]], sc["D_ans"], [R("D1", "Connects the results to a larger biological principle with an explanation", sc["D_elem"], sc["D_alts"], sc["D_errs"], "justification")]),
     ]
     arch = f"bif_q6_{sc['key']}"
-    return _finish(arch, "bio_q6_data", sc["topic"], [], "4.B", f"Data analysis: {sc['dv']}", stim, parts, 4, 10, [f"means={means}", f"se={se}", f"pct={pct:.4f}", f"levels={L}"], [_ev("B", "percent change", pct, max(0.2, abs(pct) * 0.01), "%")],
+    return _finish(arch, "bio_q6_data", sc["topic"], [], "4.B", setup_title(sc["intro"].format(n=n)), stim, parts, 4, 10, [f"means={means}", f"se={se}", f"pct={pct:.4f}", f"levels={L}"], [_ev("B", "percent change", pct, max(0.2, abs(pct) * 0.01), "%")],
                    f"Analyze a table of means with ±2SE: {sc['dv']}", ["Describe the pattern", "Calculate a percent change", "Evaluate a claim with ±2SE ranges", "Relate the result to a biological principle"], [("Means with ±2SE for the same number of replicates at each level", "the table gives mean ± 2SE and n")], {"type": "experiment_table", "must_include": ["levels", "mean ± 2SE", "n"]},
                    "percent change and ±2SE overlap recomputed from the displayed values", "describe, calculate, evaluate with ±2SE, and explain",
                    experiment={"fictional": True, "design": "experimental", "independent_variables": [sc["cond"]], "dependent_variable": sc["dv"], "controls": [], "control_not_applicable": "levels of one condition are compared and every other condition is held constant", "replicates_per_group": n, "measurement": {"variable": sc["dv"], "unit": sc["unit"]},

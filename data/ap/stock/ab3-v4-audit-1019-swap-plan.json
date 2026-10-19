@@ -1,0 +1,34 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "AB3",
+ "sourceSetName": "AP Calculus AB — Practice Exam 3",
+ "sourceVersionNo": 3,
+ "generatedBy": "scripts/audit/ap-audit-typefix-1019-plans.ts (type-level fix of external audit 2026-10-15, docs/audits/ap-type-defect-scan-20261019.md)",
+ "note": "Each swap replaces a published candidate with a corrected copy (reference wording only; key answer unchanged). New candidates are in data/ap/stock/supp-fix1019-items.json and must be loaded (review_env_ready) before the preview. Slots are found by removeKey. Verified by scripts/audit/ap-typefix-1019-verify.ts.",
+ "swapCount": 1,
+ "verifierViolations": [],
+ "requiresConvertedCandidates": [
+  "fix1019:ap_calculus_ab-tf12-k0"
+ ],
+ "swaps": [
+  {
+   "section": "ap_frq_b",
+   "position": 2,
+   "removeKey": "run2:ap_calculus_ab-f02-k2",
+   "addKey": "fix1019:ap_calculus_ab-tf12-k0",
+   "reason": "type fix d: FRQ-B (frq_fprime_graph family) the reference equated 'f' increasing' with strict f'' > 0 although f' has corner points; the reason row now only asks for f' increasing (same correction as audited AP-014/020/023/025)",
+   "remove": {
+    "unit": 5,
+    "skill": "3.E",
+    "shared": false,
+    "type": "5.9"
+   },
+   "add": {
+    "unit": 5,
+    "skill": "3.E",
+    "shared": false,
+    "type": "5.9"
+   }
+  }
+ ]
+}

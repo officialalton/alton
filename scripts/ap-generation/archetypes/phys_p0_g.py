@@ -366,7 +366,9 @@ def ph_evid_collision_data(rng):
         # 독립 경로: 질량중심 속도와 반발 계수로 최종 속도를 다시 구하고 운동량 보존·반발 계수를 검사
         vcm = m1 * v1 / (m1 + m2); w1 = vcm - e * (v1 - vcm); w2 = vcm + e * m1 / m2 * (v1 - vcm); agree(u1, w1, 1e-9, "u1"); agree(u2, w2, 1e-9, "u2")
         p0 = m1 * v1; p1 = m1 * u1 + m2 * u2; agree(p0, p1, 1e-9, "p"); K0 = 0.5 * m1 * v1 ** 2; K1 = 0.5 * m1 * u1 ** 2 + 0.5 * m2 * u2 ** 2
-        if m1 != m2 and abs(u1) > 0.05 and K0 - K1 > -1e-9 and (elastic or K0 - K1 > 0.1 * K0):
+        # 외부 검수 2026-10-15 AP-058: 학생에게 보이는 속도는 {:.3g} 로 반올림된 값이다. 보이는 값으로 운동량·운동에너지를 다시 계산해도 보기의 값과 같도록 두 속도가 3자리 유효숫자로 정확히 표현되는 경우만 쓴다.
+        exact3 = abs(u1 - float(f"{u1:.3g}")) < 1e-9 and abs(u2 - float(f"{u2:.3g}")) < 1e-9
+        if exact3 and m1 != m2 and abs(u1) > 0.05 and K0 - K1 > -1e-9 and (elastic or K0 - K1 > 0.1 * K0):
             break
     stem = (f"On a frictionless track, cart A of mass ${m1:g}\\text{{ kg}}$ moves at ${v1:g}\\text{{ m/s}}$ toward cart B of mass ${m2:g}\\text{{ kg}}$, which is at rest. After the collision cart A moves at ${u1:.3g}\\text{{ m/s}}$ and cart B moves at ${u2:.3g}\\text{{ m/s}}$ (positive values are in the original direction of cart A). "
             "Which of the following is best supported by the data?")
