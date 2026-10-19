@@ -265,7 +265,7 @@ const frqx = (k: string) => ({ type: stock[k].payload.template ?? stock[k].paylo
 void sw;
 plan("WH1", "AP World History: Modern — Practice Exam 1", 1, "Corrected copies of the WH1 candidates named in the 2026-10-15 external audit (AP-079..086). Batch 'audit-wuel' must be loaded first. sourceVersionNo is the version the WH1 draft was saved as (1); if WH1 was published at another version, the admin 'new version' flow copies the then-published version and these removeKey slots must still match.", [
   ["ap_mc", "wh-m1:ap_world_history-w202-k0", mcx("wh-m1:ap_world_history-w202-k0")],
-  ["ap_frq", "wh-f1:ap_world_history-wh1_saq1-k0", frqx("wh-f1:ap_world_history-wh1_saq1-k0")],
+  ["ap_saq", "wh-f1:ap_world_history-wh1_saq1-k0", frqx("wh-f1:ap_world_history-wh1_saq1-k0")],
   ["ap_frq", "wh-f4:ap_world_history-wh1_dbq-k0", frqx("wh-f4:ap_world_history-wh1_dbq-k0")],
   ["ap_frq", "wh-f4:ap_world_history-wh1_leq-k0", frqx("wh-f4:ap_world_history-wh1_leq-k0")],
 ]);
@@ -274,7 +274,7 @@ plan("WH2", "AP World History: Modern — Practice Exam 2", 1, "Corrected copies
   ["ap_mc", "wh-m1:ap_world_history-w205-k0", mcx("wh-m1:ap_world_history-w205-k0")],
   ["ap_mc", "wh-m1:ap_world_history-w111-k0", mcx("wh-m1:ap_world_history-w111-k0")],
   ["ap_mc", "wh-m1:ap_world_history-w211-k0", mcx("wh-m1:ap_world_history-w211-k0")],
-  ["ap_frq", "wh-f1:ap_world_history-wh2_saq1-k0", frqx("wh-f1:ap_world_history-wh2_saq1-k0")],
+  ["ap_saq", "wh-f1:ap_world_history-wh2_saq1-k0", frqx("wh-f1:ap_world_history-wh2_saq1-k0")],
   ["ap_frq", "wh-f1:ap_world_history-wh2_dbq-k0", frqx("wh-f1:ap_world_history-wh2_dbq-k0")],
   ["ap_frq", "wh-f2:ap_world_history-wh2_leq-k0", frqx("wh-f2:ap_world_history-wh2_leq-k0")],
 ]);
