@@ -1,0 +1,33 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "PH3",
+ "sourceSetName": "AP Physics 1 — Practice Exam 1",
+ "sourceVersionNo": 1,
+ "generatedBy": "scripts/audit/ap-audit-fix-1015-plans.ts (external audit 2026-10-15, docs/audits/ap-external-audit-20261015-confirmed-fixes.csv)",
+ "note": "Swaps use removeKey (positions resolve from the live set). Apply after the candidates in data/ap/stock/supp-fix1015-items.json are loaded, converted, render/screen-verified and review_env_ready.",
+ "swapCount": 1,
+ "verifierViolations": [],
+ "requiresConvertedCandidates": [
+  "fix1015:ap_physics_1-fx58-k0"
+ ],
+ "swaps": [
+  {
+   "section": "ap_mc",
+   "removeKey": "phys-s3-a:ap_physics_1-m24-k0",
+   "addKey": "fix1015:ap_physics_1-fx58-k0",
+   "reason": "AP-058 MC26: displayed speeds now exact (0.2 and 0.4 m/s): p = 1 kg m/s, K falls from 0.5 J to 0.18 J",
+   "remove": {
+    "unit": 4,
+    "skill": "3.C",
+    "shared": false,
+    "type": ""
+   },
+   "add": {
+    "unit": 4,
+    "skill": "3.C",
+    "shared": false,
+    "type": ""
+   }
+  }
+ ]
+}

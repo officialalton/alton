@@ -1,0 +1,71 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "BI2",
+ "sourceSetName": "AP Biology — Practice Exam 2",
+ "sourceVersionNo": 5,
+ "generatedBy": "scripts/audit/ap-audit-fix-1015-plans.ts (external audit 2026-10-15, docs/audits/ap-external-audit-20261015-confirmed-fixes.csv)",
+ "note": "Swaps use removeKey (positions resolve from the live set). Apply after the candidates in data/ap/stock/supp-fix1015-items.json are loaded, converted, render/screen-verified and review_env_ready.",
+ "swapCount": 3,
+ "verifierViolations": [],
+ "requiresConvertedCandidates": [
+  "fix1015:ap_biology-fx02-k0",
+  "fix1015:ap_biology-fx10-k0",
+  "fix1015:ap_biology-fx12-k0"
+ ],
+ "swaps": [
+  {
+   "section": "ap_frq",
+   "removeKey": "bio-s2-frq:ap_biology-f21-k0",
+   "addKey": "fix1015:ap_biology-fx02-k0",
+   "reason": "AP-001 (P1) FRQ5 A/B: replication-fork direction was not visible to students; now stated",
+   "remove": {
+    "unit": null,
+    "skill": null,
+    "shared": false,
+    "type": "bio_q5_model"
+   },
+   "add": {
+    "unit": null,
+    "skill": null,
+    "shared": false,
+    "type": "bio_q5_model"
+   }
+  },
+  {
+   "section": "ap_frq",
+   "removeKey": "bio-v3a:ap_biology-f04-k0",
+   "addKey": "fix1015:ap_biology-fx10-k0",
+   "reason": "AP-010 FRQ2: truncated experiment introduction; title is now the complete setup",
+   "remove": {
+    "unit": null,
+    "skill": null,
+    "shared": false,
+    "type": "bio_q2_graphing"
+   },
+   "add": {
+    "unit": null,
+    "skill": null,
+    "shared": false,
+    "type": "bio_q2_graphing"
+   }
+  },
+  {
+   "section": "ap_mc",
+   "removeKey": "bio-v2a:ap_biology-m31-k2",
+   "addKey": "fix1015:ap_biology-fx12-k0",
+   "reason": "AP-012 MC22 (population set): 'stops changing' vs 798 -> 800; now 'changes very little'",
+   "remove": {
+    "unit": 8,
+    "skill": "4.B",
+    "shared": true,
+    "type": ""
+   },
+   "add": {
+    "unit": 8,
+    "skill": "4.B",
+    "shared": true,
+    "type": ""
+   }
+  }
+ ]
+}

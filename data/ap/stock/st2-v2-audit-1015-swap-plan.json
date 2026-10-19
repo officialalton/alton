@@ -1,0 +1,90 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "ST2",
+ "sourceSetName": "AP Statistics — Practice Exam 2",
+ "sourceVersionNo": 1,
+ "generatedBy": "scripts/audit/ap-audit-fix-1015-plans.ts (external audit 2026-10-15, docs/audits/ap-external-audit-20261015-confirmed-fixes.csv)",
+ "note": "Swaps use removeKey (positions resolve from the live set). Apply after the candidates in data/ap/stock/supp-fix1015-items.json are loaded, converted, render/screen-verified and review_env_ready.",
+ "swapCount": 4,
+ "verifierViolations": [],
+ "requiresConvertedCandidates": [
+  "fix1015:ap_statistics-fx04-k0",
+  "fix1015:ap_statistics-fx05-k0",
+  "stats-s3b-a:ap_statistics-m03-k1",
+  "stats-s3b-a:ap_statistics-m04-k1"
+ ],
+ "swaps": [
+  {
+   "section": "ap_mc",
+   "removeKey": "stats-s3-a:ap_statistics-m10-k1",
+   "addKey": "fix1015:ap_statistics-fx04-k0",
+   "reason": "AP-004 (P1) MC23: homogeneity and independence nulls were equivalent options",
+   "remove": {
+    "unit": 3,
+    "skill": 2,
+    "shared": false,
+    "type": ""
+   },
+   "add": {
+    "unit": 3,
+    "skill": 2,
+    "shared": false,
+    "type": ""
+   }
+  },
+  {
+   "section": "ap_mc",
+   "removeKey": "stats-s3b-d:ap_statistics-m05-k0",
+   "addKey": "fix1015:ap_statistics-fx05-k0",
+   "reason": "same equivalent-null defect in the sibling chi-square setup item (MC28)",
+   "remove": {
+    "unit": 3,
+    "skill": 2,
+    "shared": false,
+    "type": ""
+   },
+   "add": {
+    "unit": 3,
+    "skill": 2,
+    "shared": false,
+    "type": ""
+   }
+  },
+  {
+   "section": "ap_mc",
+   "removeKey": "stats-s3b-a:ap_statistics-m03-k0",
+   "addKey": "stats-s3b-a:ap_statistics-m03-k1",
+   "reason": "AP-070 MC7: identical to ST1 MC7 (household survey); same task with a different scenario (gym members)",
+   "remove": {
+    "unit": 1,
+    "skill": 1,
+    "shared": false,
+    "type": ""
+   },
+   "add": {
+    "unit": 1,
+    "skill": 1,
+    "shared": false,
+    "type": ""
+   }
+  },
+  {
+   "section": "ap_mc",
+   "removeKey": "stats-s3b-a:ap_statistics-m04-k0",
+   "addKey": "stats-s3b-a:ap_statistics-m04-k1",
+   "reason": "AP-070 MC8: identical to ST1 MC8 (employee SRS); same task with a different scenario (apartment cluster sample)",
+   "remove": {
+    "unit": 1,
+    "skill": 2,
+    "shared": false,
+    "type": ""
+   },
+   "add": {
+    "unit": 1,
+    "skill": 2,
+    "shared": false,
+    "type": ""
+   }
+  }
+ ]
+}
