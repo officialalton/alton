@@ -46,7 +46,7 @@ async function brainstorm(client: Anthropic, subject: string, n: number, avoid: 
     const sys = lit ? `You write one-sentence story premises for excerpts in a digital SAT Reading and Writing question bank. Output ONLY a JSON array of ${k} strings, in the SAME ORDER as the numbered constraints given. Each premise (20-40 words) names a protagonist with a distinctive, setting-appropriate name (NEVER use Marisol, Mara, Mira, Marguerite, Maren, Ines, Halvorsen, Okafor, Varga, Dana), the situation, and the quiet tension. Do NOT write workplace-wrongdoing, whistleblower, fraud, corruption, institutional-pressure or ethics-dilemma stories. Every premise must be clearly different in plot, not just in setting.` : `You propose passage topics for a digital SAT Reading and Writing question bank. Output ONLY a JSON array of ${k} strings. Each string is ONE specific, concrete, mutually distinct topic (a named phenomenon/person/event/study/work plus the angle, 8-20 words), not a broad theme. Cover a wide spread of sub-areas, regions and eras. Real, verifiable subject matter only (fiction: invented premises).`;
     const cons = lit ? Array.from({ length: k }, (_, i) => `${i + 1}. setting: ${pick(LIT_SETTINGS)}; mood: ${pick(LIT_MOODS)}; central situation: ${pick(LIT_SITUATIONS)}`).join("\n") : "";
     const user = lit ? `Constraints:\n${cons}\nAlready used premises (do not repeat or paraphrase): ${[...used, ...seeds].slice(-60).join(" | ")}` : `Subject: ${DESC[subject]}.\nDo NOT use or resemble these already-overused topics: ${avoid.slice(0, 220).join("; ")}.\nAlready chosen (avoid repeating or paraphrasing): ${[...used, ...seeds].slice(-120).join(" | ")}`;
-    const r = await client.messages.create({ model: "claude-haiku-4-5", max_tokens: 3500, temperature: 1, system: sys, messages: [{ role: "user", content: user }] });
+    const t0 = Date.now(); const r = await client.messages.create({ model: "claude-haiku-4-5", max_tokens: 3500, temperature: 1, system: sys, messages: [{ role: "user", content: user }] }, { timeout: 120000 }); console.error(`[brainstorm ${subject}] ${seeds.length}/${n} call ${Date.now() - t0}ms out ${r.usage.output_tokens}`);
     usd += (r.usage.input_tokens * 1 + r.usage.output_tokens * 5) / 1e6;
     const t = r.content.map((b) => (b.type === "text" ? b.text : "")).join(""); const m = t.match(/\[[\s\S]*\]/); if (!m) continue;
     for (const x of JSON.parse(m[0]) as string[]) if (typeof x === "string" && x.length > 12 && !seeds.includes(x)) seeds.push(x);
@@ -59,7 +59,7 @@ async function main() {
   const subjects = (arg("--subjects") ?? SUBJECTS.join(",")).split(",");
   const out = arg("--out")!; mkdirSync(out, { recursive: true });
   const factor = Number(arg("--factor-scale") ?? 1);
-  const classified = JSON.parse(readFileSync("data/mock-exam-generation/rw-topics-20261008/classified.json", "utf-8")) as Record<string, { subject: string; cluster: string }>;
+  const classified = JSON.parse(readFileSync("data/mock-exam-generation/rw-topics-20261015/classified.json", "utf-8")) as Record<string, { subject: string; cluster: string }>;
   const bySubj = new Map<string, Map<string, number>>(); const allCl = new Map<string, number>();
   for (const v of Object.values(classified)) { const m = bySubj.get(v.subject) ?? bySubj.set(v.subject, new Map()).get(v.subject)!; m.set(v.cluster, (m.get(v.cluster) ?? 0) + 1); allCl.set(v.cluster, (allCl.get(v.cluster) ?? 0) + 1); }
   const topAvoid = [...allCl].filter(([, n]) => n >= 4).sort((a, b) => b[1] - a[1]).map(([k]) => k.replace(/-/g, " "));

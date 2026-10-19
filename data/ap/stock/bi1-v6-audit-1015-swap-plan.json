@@ -1,0 +1,52 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "BI1",
+ "sourceSetName": "AP Biology — Practice Exam 1",
+ "sourceVersionNo": 5,
+ "generatedBy": "scripts/audit/ap-audit-fix-1015-plans.ts (external audit 2026-10-15, docs/audits/ap-external-audit-20261015-confirmed-fixes.csv)",
+ "note": "Swaps use removeKey (positions resolve from the live set). Apply after the candidates in data/ap/stock/supp-fix1015-items.json are loaded, converted, render/screen-verified and review_env_ready.",
+ "swapCount": 2,
+ "verifierViolations": [],
+ "requiresConvertedCandidates": [
+  "fix1015:ap_biology-fx06-k0",
+  "fix1015:ap_biology-fx08-k0"
+ ],
+ "swaps": [
+  {
+   "section": "ap_frq",
+   "removeKey": "bio-p1-b:ap_biology-f02-k0",
+   "addKey": "fix1015:ap_biology-fx06-k0",
+   "reason": "AP-006 FRQ2 D: more ions make solute potential lower (more negative), not greater; title completed",
+   "remove": {
+    "unit": null,
+    "skill": null,
+    "shared": false,
+    "type": "bio_q2_graphing"
+   },
+   "add": {
+    "unit": null,
+    "skill": null,
+    "shared": false,
+    "type": "bio_q2_graphing"
+   }
+  },
+  {
+   "section": "ap_frq",
+   "removeKey": "bio-v3a:ap_biology-f06-k0",
+   "addKey": "fix1015:ap_biology-fx08-k0",
+   "reason": "AP-008 FRQ3 C/D: UV doses stated as nonlethal; conditional prediction accepted",
+   "remove": {
+    "unit": null,
+    "skill": null,
+    "shared": false,
+    "type": "bio_q3_investigation"
+   },
+   "add": {
+    "unit": null,
+    "skill": null,
+    "shared": false,
+    "type": "bio_q3_investigation"
+   }
+  }
+ ]
+}

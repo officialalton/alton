@@ -1,0 +1,117 @@
+[D-cross] 후보 697 · 생성 claude-opus-5-5 · 검수 fable+opus · 추정(동기) $51.84 · 구간 누적 $0.00 / 상한 $60
+[batch gen] 제출 msgbatch_01EDjFWExgoMLCkqUce4VfpX (697건, 시도 1)
+[batch gen] {"processing":697,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":697,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":697,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":697,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":697,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":697,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":697,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":697,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] 완료 성공 697/697, 이번 비용 $11.4926, 누적 $11.49
+[batch review-fable] 제출 msgbatch_01RLeUEbWtgETRJtU7KkLH2t (1296건, 시도 1)
+[batch review-fable] {"processing":1296,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":1296,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":1296,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":1296,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":1296,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":1296,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":1296,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":1296,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":1296,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":1296,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":1296,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":1296,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":1296,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":1296,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":1296,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":1296,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":1296,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":1296,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":1296,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":1296,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":1296,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":1296,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":1296,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] 완료 성공 1296/1296, 이번 비용 $28.2768, 누적 $39.77
+[batch review-opus] 제출 msgbatch_013TvaxRQDZEvQxMAGdQfJDM (1296건, 시도 1)
+[batch review-opus] {"processing":1296,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-opus] {"processing":1296,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-opus] {"processing":1296,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-opus] {"processing":1296,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-opus] {"processing":1296,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-opus] {"processing":1296,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-opus] {"processing":1296,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-opus] 완료 성공 1296/1296, 이번 비용 $8.7395, 누적 $48.51
+{
+ "sat_rw": {
+  "cand": 697,
+  "genFail": 0,
+  "formatFail": 3,
+  "detPass": 648,
+  "crossScored": 648,
+  "correct": {
+   "agree": 608,
+   "of": 648,
+   "fablePass": 613,
+   "opusPass": 583
+  },
+  "compliance": {
+   "agree": 647,
+   "of": 648,
+   "fablePass": 646,
+   "opusPass": 645
+  },
+  "hardFit": {
+   "agree": 551,
+   "of": 648,
+   "fablePass": 539,
+   "opusPass": 476
+  },
+  "adoptedBoth": 401,
+  "adoptedOneOnly": 124,
+  "yieldBoth": 0.575,
+  "costUsd": 48.509,
+  "costPerAdoptedBoth": 0.121,
+  "fableOnlyPass": 104,
+  "opusOnlyPass": 20
+ },
+ "sat_math": {
+  "cand": 0,
+  "genFail": 0,
+  "formatFail": 0,
+  "detPass": 0,
+  "crossScored": 0,
+  "correct": {
+   "agree": 0,
+   "of": 0,
+   "fablePass": 0,
+   "opusPass": 0
+  },
+  "compliance": {
+   "agree": 0,
+   "of": 0,
+   "fablePass": 0,
+   "opusPass": 0
+  },
+  "hardFit": {
+   "agree": 0,
+   "of": 0,
+   "fablePass": 0,
+   "opusPass": 0
+  },
+  "adoptedBoth": 0,
+  "adoptedOneOnly": 0,
+  "yieldBoth": 0,
+  "costUsd": 0,
+  "costPerAdoptedBoth": null,
+  "fableOnlyPass": 0,
+  "opusOnlyPass": 0
+ },
+ "adoptedHardFableRule": {
+  "total": 476,
+  "rw": 476,
+  "math": 0,
+  "correctBothRequired": true
+ }
+}

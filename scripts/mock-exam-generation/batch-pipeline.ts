@@ -352,12 +352,12 @@ async function cross() {
   writeFileSync(path.join(dir, "candidates.json"), JSON.stringify(cands));
   const led = ledger(dir);
   // 추정(동기 단가): 앞선 실측 — Opus 생성 약 $0.034/후보, Fable 검수 약 $0.105/후보, Opus 검수 약 $0.03/후보(결정론 통과 약 85%)
-  const est = cands.length * 0.034 + cands.length * 0.85 * (0.105 + 0.03);
+  const est = (cands.length * 0.034 + cands.length * 0.85 * (0.105 + 0.03)) / (flag("--batch") ? 2 : 1);
   console.log(`[D-cross] 후보 ${cands.length} · 생성 ${genModel} · 검수 fable+opus · 추정(동기) $${est.toFixed(2)} · 구간 누적 $${led.spent().toFixed(2)} / 상한 $${budget}`);
   if (led.spent() + est > budget * 1.15) throw new Error("추정이 상한을 크게 넘음 — 실행하지 않음");
   if (flag("--dry")) return;
   const genReqs: BatchReq[] = cands.map((c) => ({ custom_id: c.cid, params: { model: genModel, ...think(genModel), max_tokens: c.system === "sat_math" ? 5000 : 4500, system: [{ type: "text", text: genSystem(c), cache_control: SYS_CACHE }], tools: [genTool(c)], tool_choice: { type: "auto" }, messages: [{ role: "user", content: `후보 ${c.idx + 1}번. 같은 지시로 만든 다른 후보와 소재·수치가 겹치지 않게 새로 창작하라.${AVOID_MSG}${c.seed ? ` 소재(반드시 이 소재로 지문을 쓴다): ${c.seed}.` : ""}${c.targetLetter ? ` 정답(correct_letter)은 반드시 ${c.targetLetter} 위치에 놓아라(선택지 순서를 그에 맞게 구성).` : ""} 문항 1개를 반드시 problem 도구 호출로 제출하라(텍스트 답변 금지).` }] } }));
-  const genRes = await runBatch({ dir, name: "gen", requests: genReqs, budgetUsd: budget, estimateUsd: cands.length * 0.017, sync: true });
+  const genRes = await runBatch({ dir, name: "gen", requests: genReqs, budgetUsd: budget, estimateUsd: cands.length * 0.017, sync: !flag("--batch") });
   const gens = new Map<string, { c: Cand; g: Gen; det: { issues: string[]; mathVerify: string | null } }>();
   for (const c of cands) {
     const r = genRes.get(c.cid); const g = r ? (toolInput(r) as unknown as Gen | null) : null;
@@ -373,7 +373,7 @@ async function cross() {
   const passDet = [...gens.values()].filter((x) => x.det.issues.length === 0);
   for (const rv of REVIEWERS) {
     const reqs = passDet.flatMap(({ c, g }) => [blindReq(rv.model, c.cid, c.skill, g), c.difficulty && c.difficulty !== "hard" ? levelAuditReq(rv.model, c, g) : auditReq(rv.model, c, g, recipesFor(c.skill).find((r) => r.id === c.recipeId) ?? null)]);
-    await runBatch({ dir, name: `review-${rv.key}`, requests: reqs, budgetUsd: budget, estimateUsd: passDet.length * (rv.key === "fable" ? 0.0525 : 0.015), sync: true });
+    await runBatch({ dir, name: `review-${rv.key}`, requests: reqs, budgetUsd: budget, estimateUsd: passDet.length * (rv.key === "fable" ? 0.0525 : 0.015), sync: !flag("--batch") });
   }
   crossReport(dir);
 }

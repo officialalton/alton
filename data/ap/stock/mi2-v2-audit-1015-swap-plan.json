@@ -1,0 +1,33 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "MI2",
+ "sourceSetName": "AP Microeconomics — Practice Exam 2",
+ "sourceVersionNo": 1,
+ "generatedBy": "scripts/audit/ap-audit-fix-1015-plans.ts (external audit 2026-10-15, docs/audits/ap-external-audit-20261015-confirmed-fixes.csv)",
+ "note": "Swaps use removeKey (positions resolve from the live set). Apply after the candidates in data/ap/stock/supp-fix1015-items.json are loaded, converted, render/screen-verified and review_env_ready.",
+ "swapCount": 1,
+ "verifierViolations": [],
+ "requiresConvertedCandidates": [
+  "fix1015:ap_microeconomics-fx01-k0"
+ ],
+ "swaps": [
+  {
+   "section": "ap_mc",
+   "removeKey": "micro-p2-a:ap_microeconomics-m32-k0",
+   "addKey": "fix1015:ap_microeconomics-fx01-k0",
+   "reason": "AP-002 (P1) MC56: marginal cost $26 is now stated in the question text",
+   "remove": {
+    "unit": 6,
+    "skill": "2.C",
+    "shared": false,
+    "type": ""
+   },
+   "add": {
+    "unit": 6,
+    "skill": "2.C",
+    "shared": false,
+    "type": ""
+   }
+  }
+ ]
+}

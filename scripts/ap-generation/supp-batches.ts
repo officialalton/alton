@@ -22,6 +22,10 @@ export const SUPP_BATCHES: { run: string; file: string }[] = [
   { run: "supp-r3b2-ab-final", file: "supp-r3b2-items.json" },
   { run: "supp-r3c-ab-final", file: "supp-r3c-items.json" },
   { run: "supp-r3c2-ab-final", file: "supp-r3c2-items.json" },
+  // 2026-10-15 외부 AP 전체 검수 확정 수정본(scripts/audit/ap-audit-fix-1015.ts): 후보 복제본이라 run 디렉터리는 없다.
+  { run: "fix1015", file: "supp-fix1015-items.json" },
+  // 2026-10-15 외부 AP 감사 확정 수정 — Calculus 11행의 수정본(원본 후보는 그대로, 교체안이 옛 키 -> 새 키)
+  { run: "supp-aud1015-final", file: "supp-aud1015-items.json" },
 ];
 
 /** 디스크에 실제로 있는 보강 배치 파일 이름(확장자 없음). */
@@ -102,3 +106,7 @@ export const ushItemNames = (): string[] => {
   const dir = path.resolve(process.cwd(), "data/ap/stock");
   return existsSync(dir) ? readdirSync(dir).filter((f) => USH_ITEM_FILE_RE.test(f)).map((f) => f.replace(/\.json$/, "")).sort() : [];
 };
+
+/** AP 외부 검수 수정본 배치(data/ap/stock/audit-wuel-items.json, 2026-10-15). 고정 파일 하나. */
+export const auditWuelItemNames = (): string[] =>
+  existsSync(path.resolve(process.cwd(), "data/ap/stock/audit-wuel-items.json")) ? ["audit-wuel-items"] : [];

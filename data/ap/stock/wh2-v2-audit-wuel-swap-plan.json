@@ -1,0 +1,118 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "WH2",
+ "sourceSetName": "AP World History: Modern — Practice Exam 2",
+ "sourceVersionNo": 1,
+ "generatedBy": "scripts/ap-generation/audit-wuel-build.ts (external audit 2026-10-15)",
+ "note": "Corrected copies of the WH2 candidates named in the 2026-10-15 external audit (AP-087..095). Batch 'audit-wuel' must be loaded first. See the WH1 plan note about sourceVersionNo.",
+ "swapCount": 7,
+ "verifierViolations": [],
+ "swaps": [
+  {
+   "section": "ap_mc",
+   "removeKey": "wh-p1:ap_world_history-w108-k0",
+   "addKey": "audit-wuel:ap_world_history-w108-k0",
+   "tier": "required",
+   "reason": "AP-093: population table was shown twice (set_intro markdown + stimulus table); body now points to the single table",
+   "remove": {
+    "kind": "mc_set",
+    "items": 3
+   },
+   "add": {
+    "kind": "mc_set",
+    "items": 3,
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_mc",
+   "removeKey": "wh-m1:ap_world_history-w205-k0",
+   "addKey": "audit-wuel:ap_world_history-w205-k0",
+   "tier": "required",
+   "reason": "AP-091+AP-092(MC20): MC18: image description/alt now includes the 2 feet 7 inches heading the key relies on; MC20: removed 'EXTRA: ' authoring marker from the stem",
+   "remove": {
+    "kind": "mc_set",
+    "items": 4
+   },
+   "add": {
+    "kind": "mc_set",
+    "items": 4,
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_mc",
+   "removeKey": "wh-m1:ap_world_history-w111-k0",
+   "addKey": "audit-wuel:ap_world_history-w111-k0",
+   "tier": "required",
+   "reason": "AP-092(MC42): removed 'EXTRA. ' authoring marker from the stem",
+   "remove": {
+    "kind": "mc_set",
+    "items": 3
+   },
+   "add": {
+    "kind": "mc_set",
+    "items": 3,
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_mc",
+   "removeKey": "wh-m1:ap_world_history-w211-k0",
+   "addKey": "audit-wuel:ap_world_history-w211-k0",
+   "tier": "required",
+   "reason": "AP-094: source context said Order No. 1 came a few days after the abdication; it was issued March 1 (O.S.), the day before Nicholas II abdicated (March 2 O.S.)",
+   "remove": {
+    "kind": "mc_set",
+    "items": 3
+   },
+   "add": {
+    "kind": "mc_set",
+    "items": 3,
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_frq",
+   "removeKey": "wh-f1:ap_world_history-wh2_saq1-k0",
+   "addKey": "audit-wuel:ap_world_history-wh2_saq1-k0",
+   "tier": "required",
+   "reason": "AP-095: part B window is 1839-1900: the Boxer Protocol (1901) is outside it; the note now accepts only the 1899-1900 Uprising and the 1900 foreign intervention, with the Protocol credited only as a stated later consequence of those 1900 events",
+   "remove": {
+    "type": "saq1"
+   },
+   "add": {
+    "type": "saq1",
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_frq",
+   "removeKey": "wh-f1:ap_world_history-wh2_dbq-k0",
+   "addKey": "audit-wuel:ap_world_history-wh2_dbq-k0",
+   "tier": "required",
+   "reason": "AP-087: high sample: complexity point not earned (annotation described a 6-level response) -> 6/7",
+   "remove": {
+    "type": "dbq"
+   },
+   "add": {
+    "type": "dbq",
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_frq",
+   "removeKey": "wh-f2:ap_world_history-wh2_leq-k0",
+   "addKey": "audit-wuel:ap_world_history-wh2_leq-k0",
+   "tier": "required",
+   "reason": "AP-088+AP-089+AP-090: high sample: removed the 'just short of top level' clause that contradicted the 6/6 header; 6/6 kept; mid sample: header and annotations reconciled to thesis 1 + evidence 1 + analysis 1 = 3; low sample: annotations now credit the change-and-continuity framing (analysis 1) that the header gave; no complexity",
+   "remove": {
+    "type": "leq"
+   },
+   "add": {
+    "type": "leq",
+    "sameCell": true
+   }
+  }
+ ]
+}

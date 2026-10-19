@@ -1,0 +1,4670 @@
+[
+ {
+  "candidateKey": "ap_computer_science_a-f01-k901",
+  "cellId": "ap_computer_science_a-f01",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "frq_bundle",
+  "keywordCode": "2.10",
+  "unitCode": "2",
+  "skillPrimary": "2.A",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "csf_methods_pass",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Part (a) is a standard String traversal with a counter, using charAt or substring and a range comparison on characters. Part (b) is a three-way selection with a compound condition, and it calls the part (a) method. The concepts are in scope for Unit 2 and the bundle's related topics (2.10, 1.15, 2.9). The reasoning is moderate: students must correctly order the strong/medium/weak conditions and handle the 'or' in the medium case. Reading and computation load are low, preconditions are clearly specified, and there is no hidden or out-of-scope knowledge. This is typical of a short FRQ-style item suited to a full mock rather than basic learning or an advanced supplement.",
+  "payload": {
+   "archetype": "csf_methods_pass",
+   "template": "q1",
+   "topic": "2.10",
+   "extra_topics": [
+    "1.15",
+    "2.9"
+   ],
+   "skill": "2.A",
+   "representative_skill": "2.A",
+   "calculator": "not_allowed",
+   "title": "PasswordCheck: counting uppercase letters and rating a password",
+   "stimulus": {
+    "kind": "text",
+    "description": "A teacher is writing a class PasswordCheck with two static methods. The class is shown with the method headers. (The threshold for a long password is 6 characters.)\n```java\npublic class PasswordCheck {\n    /** Returns the number of uppercase letters (A through Z) in s. */\n    public static int countUpper(String s) { /* to be implemented in part (a) */ }\n\n    /** Rates the strength of the password s; see part (b). */\n    public static String rate(String s) { /* to be implemented in part (b) */ }\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Write the method countUpper, which returns the number of uppercase letters (A through Z) in the String s. (Examine s one character at a time as a one-character String, for example with substring.) For example, countUpper(\"Hello World\") returns 2 and countUpper(\"abc\") returns 0. Complete the method countUpper.",
+     "points": 3,
+     "response_mode": "code",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "One correct implementation (ALTON reference answer):\n```java\n    public static int countUpper(String s) {\n        int count = 0;\n        for (int i = 0; i < s.length(); i++) {\n            String ch = s.substring(i, i + 1);\n            if (ch.compareTo(\"A\") >= 0 && ch.compareTo(\"Z\") <= 0) {\n                count++;\n            }\n        }\n        return count;\n    }\n```",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Iterates over every character of s with a loop whose bounds are correct (first through last index)",
+       "required_elements": [
+        "loop over 0 to s.length() - 1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "stops before the last character"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Tests each one-character substring of s for being between \"A\" and \"Z\" inclusive (for example with compareTo, or an equivalent test)",
+       "required_elements": [
+        "ch.compareTo(\"A\") >= 0 && ch.compareTo(\"Z\") <= 0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "excludes A or Z",
+        "counts lowercase letters"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Increments (or otherwise accumulates) a counter only for uppercase characters; initializes the counter before the loop and returns it after the loop",
+       "required_elements": [
+        "count++ inside the condition",
+        "int count = 0",
+        "return count"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "increments for every character",
+        "returns inside the loop"
+       ],
+       "requires_row_id": "A2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "b",
+     "prompt": "Write the method rate, which returns a String that rates the strength of the password s. The rating is \"strong\" if s has at least 6 characters and at least 2 uppercase letters; otherwise \"medium\" if s has at least 6 characters or at least 1 uppercase letter; otherwise \"weak\". Your solution must call countUpper from part (a). Assume that countUpper works as specified.",
+     "points": 4,
+     "response_mode": "code",
+     "skill_codes": [
+      "2.C"
+     ],
+     "model_answer": "One correct implementation (ALTON reference answer):\n```java\n    public static String rate(String s) {\n        int upper = countUpper(s);\n        if (s.length() >= 6 && upper >= 2) {\n            return \"strong\";\n        }\n        if (s.length() >= 6 || upper >= 1) {\n            return \"medium\";\n        }\n        return \"weak\";\n    }\n```",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Calls countUpper(s) and uses its result (does not duplicate the counting loop)",
+       "required_elements": [
+        "countUpper(s)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "re-implements the loop"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Compares s.length() with 6 using a correct boundary (at least 6); returns \"strong\" exactly when the length condition and the uppercase count of at least 2 both hold",
+       "required_elements": [
+        "s.length() >= 6",
+        "&&",
+        "strong"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses > instead of >=",
+        "uses || for strong"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "B3",
+       "points": 1,
+       "criterion": "Returns \"medium\" exactly when the length condition or at least one uppercase letter holds (and the password is not strong)",
+       "required_elements": [
+        "||",
+        "medium"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses && for medium"
+       ],
+       "requires_row_id": "B2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "B4",
+       "points": 1,
+       "criterion": "Returns \"weak\" otherwise; the tests are ordered or combined so exactly one value is returned for every input",
+       "required_elements": [
+        "weak",
+        "else or fall through"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "checks medium before strong"
+       ],
+       "requires_row_id": "B3",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "total_points": 7,
+   "est_minutes": 22,
+   "facts": [
+    "L=6",
+    "U=2"
+   ],
+   "expected_values": [],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "self_check_tests": [
+    {
+     "part": "a",
+     "call": "return PasswordCheck.countUpper(\"\");",
+     "expected": "0"
+    },
+    {
+     "part": "a",
+     "call": "return PasswordCheck.countUpper(\"abc\");",
+     "expected": "0"
+    },
+    {
+     "part": "a",
+     "call": "return PasswordCheck.countUpper(\"Abc\");",
+     "expected": "1"
+    },
+    {
+     "part": "a",
+     "call": "return PasswordCheck.countUpper(\"HELLO\");",
+     "expected": "5"
+    },
+    {
+     "part": "a",
+     "call": "return PasswordCheck.countUpper(\"abcdefgh\");",
+     "expected": "0"
+    },
+    {
+     "part": "a",
+     "call": "return PasswordCheck.countUpper(\"Abcdefgh\");",
+     "expected": "1"
+    },
+    {
+     "part": "a",
+     "call": "return PasswordCheck.countUpper(\"AbCdEfGh\");",
+     "expected": "4"
+    },
+    {
+     "part": "a",
+     "call": "return PasswordCheck.countUpper(\"ABcdefghij\");",
+     "expected": "2"
+    },
+    {
+     "part": "a",
+     "call": "return PasswordCheck.countUpper(\"zzzzzzzzzzzz\");",
+     "expected": "0"
+    },
+    {
+     "part": "a",
+     "call": "return PasswordCheck.countUpper(\"QWERTYUIOP\");",
+     "expected": "10"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"\");",
+     "expected": "weak"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"abc\");",
+     "expected": "weak"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"Abc\");",
+     "expected": "medium"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"HELLO\");",
+     "expected": "medium"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"abcdefgh\");",
+     "expected": "medium"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"Abcdefgh\");",
+     "expected": "medium"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"AbCdEfGh\");",
+     "expected": "strong"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"ABcdefghij\");",
+     "expected": "strong"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"zzzzzzzzzzzz\");",
+     "expected": "medium"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"QWERTYUIOP\");",
+     "expected": "strong"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"xyzABC\");",
+     "expected": "strong"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"ZaZa\");",
+     "expected": "medium"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"Az\");",
+     "expected": "medium"
+    },
+    {
+     "part": "b",
+     "call": "return PasswordCheck.rate(\"aZ\");",
+     "expected": "medium"
+    }
+   ],
+   "verification": {
+    "variants": 8,
+    "wrong_failures": [
+     3,
+     7,
+     11,
+     1,
+     7,
+     4
+    ]
+   },
+   "blueprint": {
+    "id": "csf_methods_pass",
+    "subject": "ap_computer_science_a",
+    "kind": "frq_bundle",
+    "concept": "Methods and control structures with String traversal (substring and compareTo) and a helper call",
+    "topic": "2.10",
+    "skill": "2.A",
+    "student_thinking": [
+     "Write a counting loop over the characters of a String",
+     "Combine conditions with && and || in the right order",
+     "Call the method from part (a) instead of repeating it"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "the reference and an alternative pass every test; each wrong solution fails at least one",
+      "evidence": "java test run"
+     }
+    ],
+    "material": {
+     "type": "code",
+     "must_include": [
+      "class or method skeleton",
+      "specification with examples"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "javac+java compile and run reference, alternative and three wrong solutions per part; expected values from Python",
+     "method": "javac+java unit tests + python reference"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "2.10"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "One correct implementation (ALTON reference answer):\n```java\n    public static int countUpper(String s) {\n        int count = 0;\n        for (int i = 0; i < s.length(); i++) {\n            String ch = s.substring(i, i + 1);\n            if (ch.compareTo(\"A\") >= 0 && ch.compareTo(\"Z\") <= 0) {\n                count++;\n            }\n        }\n        return count;\n    }\n```"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Iterates over every character of s with a loop whose bounds are correct (first through last index)",
+        "elements": [
+         "loop over 0 to s.length() - 1"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Tests each one-character substring of s for being between \"A\" and \"Z\" inclusive (for example with compareTo, or an equivalent test)",
+        "elements": [
+         "ch.compareTo(\"A\") >= 0 && ch.compareTo(\"Z\") <= 0"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Increments (or otherwise accumulates) a counter only for uppercase characters; initializes the counter before the loop and returns it after the loop",
+        "elements": [
+         "count++ inside the condition",
+         "int count = 0",
+         "return count"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "b",
+      "skills": [
+       "2.C"
+      ],
+      "topics": [
+       "2.10"
+      ],
+      "points": 4,
+      "accepted_answers": [
+       "One correct implementation (ALTON reference answer):\n```java\n    public static String rate(String s) {\n        int upper = countUpper(s);\n        if (s.length() >= 6 && upper >= 2) {\n            return \"strong\";\n        }\n        if (s.length() >= 6 || upper >= 1) {\n            return \"medium\";\n        }\n        return \"weak\";\n    }\n```"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Calls countUpper(s) and uses its result (does not duplicate the counting loop)",
+        "elements": [
+         "countUpper(s)"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Compares s.length() with 6 using a correct boundary (at least 6); returns \"strong\" exactly when the length condition and the uppercase count of at least 2 both hold",
+        "elements": [
+         "s.length() >= 6",
+         "&&",
+         "strong"
+        ]
+       },
+       {
+        "row_id": "B3",
+        "points": 1,
+        "criterion": "Returns \"medium\" exactly when the length condition or at least one uppercase letter holds (and the password is not strong)",
+        "elements": [
+         "||",
+         "medium"
+        ]
+       },
+       {
+        "row_id": "B4",
+        "points": 1,
+        "criterion": "Returns \"weak\" otherwise; the tests are ordered or combined so exactly one value is returned for every input",
+        "elements": [
+         "weak",
+         "else or fall through"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9,
+    "judgment_demand": "write correct Java for the stated specification"
+   },
+   "seed": 8200,
+   "pack_id": "csf_methods_pass-s8200"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "csf_methods_pass",
+   "facts": [
+    "L=6",
+    "U=2"
+   ],
+   "seed": 8200
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound two-part Methods and Control Structures FRQ. Part (a) is a String traversal and counting loop; part (b) calls the helper and uses compound booleans. Rubric rows are single-behavior, and the unit tests distinguish the wrong solutions. Minor nit: the parenthetical about the threshold in the stimulus is redundant.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part (a) targets 2.10 and 2.A directly. Part (b) is labeled 2.C and combines compound booleans with a helper call (2.5, 1.15), which is within the bundle's stated scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Reference and alternative solutions agree. The independent solver's compareTo-based solution is also valid under the \"equivalent test\" clause in rubric row A2."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Class skeleton with method headers and examples is complete. The parenthetical about the 6-character threshold is redundant but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ: the common_errors listed for each row are realistic, such as an off-by-one loop bound, a wrong boolean operator, and an incorrect test order."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "9 points split 4/5, typed Java, no calculator, and a typical AP load."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Part (a) is a standard String traversal with a counter, using charAt or substring and a range comparison on characters. Part (b) is a three-way selection with a compound condition, and it calls the part (a) method. The concepts are in scope for Unit 2 and the bundle's related topics (2.10, 1.15, 2.9). The reasoning is moderate: students must correctly order the strong/medium/weak conditions and handle the 'or' in the medium case. Reading and computation load are low, preconditions are clearly specified, and there is no hidden or out-of-scope knowledge. This is typical of a short FRQ-style item suited to a full mock rather than basic learning or an advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "csa-aud1015",
+  "stockKey": "csa-aud1015:ap_computer_science_a-f01-k901",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "ap_computer_science_a",
+  "itemFamilyId": "fam:csa-p1-b:ap_computer_science_a-f01-k0",
+  "canonicalKey": "csa-aud1015:ap_computer_science_a-f01-k901",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_computer_science_a:2.10",
+  "sharedWith": [],
+  "stockCell": "ap_computer_science_a|2.10|2.A|frq_multipart|not_allowed",
+  "history": [
+   {
+    "run": "csa-aud1015",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null,
+    "derivedFrom": "csa-p1-b:ap_computer_science_a-f01-k0",
+    "auditRow": "AP-029,AP-030"
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_computer_science_a-f04-k902",
+  "cellId": "ap_computer_science_a-f04",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "frq_bundle",
+  "keywordCode": "3.3",
+  "unitCode": "3",
+  "skillPrimary": "2.B",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "csf_class_counter",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard AP-style class-design free response. The student must write a complete class from scratch: private instance variables, a constructor that stores the limit and initializes the count, a boolean increment with a boundary check that leaves state unchanged on failure, reset, and remaining. Concept depth is moderate (encapsulation, constructor, state mutation with a return value). The only real subtlety is the off-by-one boundary (the limit-th call returns true, the next returns false without changing the counter), which the table makes explicit. Reading load is light, there is no arithmetic, and the scope is entirely topics 3.3-3.5. Appropriate for full mocks as a typical FRQ-style item, not an advanced stretch.",
+  "payload": {
+   "archetype": "csf_class_counter",
+   "template": "q2",
+   "topic": "3.3",
+   "extra_topics": [
+    "3.4",
+    "3.5"
+   ],
+   "skill": "2.B",
+   "representative_skill": "2.B",
+   "calculator": "not_allowed",
+   "title": "LimitedCounter: design a class",
+   "stimulus": {
+    "kind": "text",
+    "description": "A game allows a player a limited number of actions. Write the LimitedCounter class described below.\n```java\npublic class LimitedCounter {\n    // to be written in this question:\n    //   constructor LimitedCounter(int limit)\n    //   boolean increment()\n    //   void reset()\n    //   int remaining()\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Write the complete LimitedCounter class, including the constructor and any required instance variables and methods. A LimitedCounter accepts increments until a limit that is given to the constructor is reached. increment adds one to the counter and returns true if the limit has not been reached, and returns false (without changing the counter) otherwise. reset sets the counter back to its starting value. remaining returns the number of increments still allowed. Examples of the behavior are listed in the following table.\n\n| Statement | Result |\n|---|---|\n| LimitedCounter c = new LimitedCounter(5); | creates a counter that accepts at most 5 increments |\n| c.increment() (called 5 times) | true each time |\n| c.increment() | false (the limit has been reached) |\n| c.remaining() | 0 |\n| c.reset(); c.remaining() | 5 |",
+     "points": 7,
+     "response_mode": "code",
+     "skill_codes": [
+      "2.B"
+     ],
+     "model_answer": "One correct implementation (ALTON reference answer):\n```java\npublic class LimitedCounter {\n    private int limit;\n    private int count;\n\n    public LimitedCounter(int limit) {\n        this.limit = limit;\n        count = 0;\n    }\n    public boolean increment() {\n        if (count < limit) {\n            count++;\n            return true;\n        }\n        return false;\n    }\n    public void reset() {\n        count = 0;\n    }\n    public int remaining() {\n        return limit - count;\n    }\n}\n```",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Declares the class header public class LimitedCounter; declares private instance variables that store the limit and the current progress",
+       "required_elements": [
+        "public class LimitedCounter",
+        "private int limit",
+        "private int count"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "wrong class name",
+        "public instance variables",
+        "no stored limit"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Constructor has the correct signature and records the limit (distinguishing parameter from field)",
+       "required_elements": [
+        "public LimitedCounter(int limit)",
+        "this.limit = limit"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "limit = limit"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "increment refuses the update once the limit is reached (boundary correct: at most the limit)",
+       "required_elements": [
+        "count < limit"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses <= so one extra is accepted"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A4",
+       "points": 1,
+       "criterion": "increment updates the counter only when the increment is accepted",
+       "required_elements": [
+        "count++ inside the if"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "increments unconditionally"
+       ],
+       "requires_row_id": "A3",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A5",
+       "points": 1,
+       "criterion": "increment returns true when accepted and false when refused (return type boolean)",
+       "required_elements": [
+        "return true",
+        "return false"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "always returns true"
+       ],
+       "requires_row_id": "A3",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A6",
+       "points": 1,
+       "criterion": "reset restores the starting state (void method)",
+       "required_elements": [
+        "count = 0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "leaves the counter unchanged"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A7",
+       "points": 1,
+       "criterion": "remaining returns the number of increments still allowed (int method)",
+       "required_elements": [
+        "return limit - count"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "returns the count"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "total_points": 7,
+   "est_minutes": 22,
+   "facts": [
+    "limit=5"
+   ],
+   "expected_values": [],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "self_check_tests": [
+    {
+     "part": "a",
+     "call": "LimitedCounter c = new LimitedCounter(5); String out = \"\";  return out + c.remaining();",
+     "expected": "5"
+    },
+    {
+     "part": "a",
+     "call": "LimitedCounter c = new LimitedCounter(5); String out = \"\"; out += c.increment() + \" \"; return out + c.remaining();",
+     "expected": "true 4"
+    },
+    {
+     "part": "a",
+     "call": "LimitedCounter c = new LimitedCounter(5); String out = \"\"; out += c.increment() + \" \"; out += c.increment() + \" \"; out += c.increment() + \" \"; return out + c.remaining();",
+     "expected": "true true true 2"
+    },
+    {
+     "part": "a",
+     "call": "LimitedCounter c = new LimitedCounter(5); String out = \"\"; out += c.increment() + \" \"; out += c.increment() + \" \"; out += c.increment() + \" \"; out += c.increment() + \" \"; out += c.increment() + \" \"; out += c.increment() + \" \"; out += c.increment() + \" \"; return out + c.remaining();",
+     "expected": "true true true true true false false 0"
+    },
+    {
+     "part": "a",
+     "call": "LimitedCounter c = new LimitedCounter(5); String out = \"\"; out += c.increment() + \" \"; out += c.increment() + \" \"; out += c.increment() + \" \"; out += c.increment() + \" \"; out += c.increment() + \" \"; c.reset(); out += c.increment() + \" \"; return out + c.remaining();",
+     "expected": "true true true true true true 4"
+    },
+    {
+     "part": "a",
+     "call": "LimitedCounter c = new LimitedCounter(5); String out = \"\"; out += c.increment() + \" \"; out += c.increment() + \" \"; c.reset(); out += c.increment() + \" \"; out += c.increment() + \" \"; return out + c.remaining();",
+     "expected": "true true true true 3"
+    },
+    {
+     "part": "a",
+     "call": "LimitedCounter c = new LimitedCounter(5); String out = \"\"; c.reset(); return out + c.remaining();",
+     "expected": "5"
+    },
+    {
+     "part": "a",
+     "call": "LimitedCounter c = new LimitedCounter(5); String out = \"\"; out += c.increment() + \" \"; out += c.increment() + \" \"; out += c.increment() + \" \"; out += c.increment() + \" \"; out += c.increment() + \" \"; return out + c.remaining();",
+     "expected": "true true true true true 0"
+    }
+   ],
+   "verification": {
+    "variants": 7,
+    "wrong_failures": [
+     1,
+     1,
+     2,
+     8,
+     1
+    ]
+   },
+   "blueprint": {
+    "id": "csf_class_counter",
+    "subject": "ap_computer_science_a",
+    "kind": "frq_bundle",
+    "concept": "Class design with a guarded update that returns a boolean",
+    "topic": "3.3",
+    "skill": "2.B",
+    "student_thinking": [
+     "Choose private state",
+     "Guard the update and report success",
+     "Provide reset and remaining"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "the reference and an alternative (counting down) pass every test; each wrong solution fails at least one",
+      "evidence": "java test run"
+     }
+    ],
+    "material": {
+     "type": "code",
+     "must_include": [
+      "class or method skeleton",
+      "specification with examples"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "javac+java compile and run reference, count-down alternative and wrong solutions; expected values from a Python simulation",
+     "method": "javac+java unit tests + python reference"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "2.B"
+      ],
+      "topics": [
+       "3.3"
+      ],
+      "points": 7,
+      "accepted_answers": [
+       "One correct implementation (ALTON reference answer):\n```java\npublic class LimitedCounter {\n    private int limit;\n    private int count;\n\n    public LimitedCounter(int limit) {\n        this.limit = limit;\n        count = 0;\n    }\n    public boolean increment() {\n        if (count < limit) {\n            count++;\n            return true;\n        }\n        return false;\n    }\n    public void reset() {\n        count = 0;\n    }\n    public int remaining() {\n        return limit - count;\n    }\n}\n```"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Declares the class header public class LimitedCounter; declares private instance variables that store the limit and the current progress",
+        "elements": [
+         "public class LimitedCounter",
+         "private int limit",
+         "private int count"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Constructor has the correct signature and records the limit (distinguishing parameter from field)",
+        "elements": [
+         "public LimitedCounter(int limit)",
+         "this.limit = limit"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "increment refuses the update once the limit is reached (boundary correct: at most the limit)",
+        "elements": [
+         "count < limit"
+        ]
+       },
+       {
+        "row_id": "A4",
+        "points": 1,
+        "criterion": "increment updates the counter only when the increment is accepted",
+        "elements": [
+         "count++ inside the if"
+        ]
+       },
+       {
+        "row_id": "A5",
+        "points": 1,
+        "criterion": "increment returns true when accepted and false when refused (return type boolean)",
+        "elements": [
+         "return true",
+         "return false"
+        ]
+       },
+       {
+        "row_id": "A6",
+        "points": 1,
+        "criterion": "reset restores the starting state (void method)",
+        "elements": [
+         "count = 0"
+        ]
+       },
+       {
+        "row_id": "A7",
+        "points": 1,
+        "criterion": "remaining returns the number of increments still allowed (int method)",
+        "elements": [
+         "return limit - count"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9,
+    "judgment_demand": "write correct Java for the stated specification"
+   },
+   "seed": 8400,
+   "pack_id": "csf_class_counter-s8400"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "csf_class_counter",
+   "facts": [
+    "limit=5"
+   ],
+   "seed": 8400
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a valid Class Design FRQ on topics 3.3 to 3.5 with a unique, test-verified model answer and a clear one-behavior-per-row rubric. It passes all five criteria with only the minor wording and rubric-overlap notes above.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item asks for a whole class with private state, a constructor, a boolean mutator, and an accessor. This is squarely topics 3.3 to 3.5 and skill 2.B. It uses no inheritance and no content from later units."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The reference answer and the independent solver's answer match. The spec is determined by the table, and a count-down alternative also passes the tests. One minor wording issue: the prompt says increment returns true \"if the limit has not been reached\", which is slightly ambiguous but is clarified by the examples. The rubric is one behavior per row. Rows A2 and A9 partly overlap with other rows, which is acceptable. Row A3 requires \"this.limit\", while a different parameter name would also be valid. The alt_solutions field is empty, but graders can accept equivalent code."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The skeleton comment and the examples table are complete and clear. The data object only declares the language, which is sufficient for a code stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The rubric's common_errors cover realistic mistakes: \"limit = limit\", \"<=\" in the guard, and unconditional increment."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of an AP CS A Class Design question: 9 points, a short class, and no calculator."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style class-design free response. The student must write a complete class from scratch: private instance variables, a constructor that stores the limit and initializes the count, a boolean increment with a boundary check that leaves state unchanged on failure, reset, and remaining. Concept depth is moderate (encapsulation, constructor, state mutation with a return value). The only real subtlety is the off-by-one boundary (the limit-th call returns true, the next returns false without changing the counter), which the table makes explicit. Reading load is light, there is no arithmetic, and the scope is entirely topics 3.3-3.5. Appropriate for full mocks as a typical FRQ-style item, not an advanced stretch.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "csa-aud1015",
+  "stockKey": "csa-aud1015:ap_computer_science_a-f04-k902",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "ap_computer_science_a",
+  "itemFamilyId": "fam:csa-s2-frq-a:ap_computer_science_a-f04-k0",
+  "canonicalKey": "csa-aud1015:ap_computer_science_a-f04-k902",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_computer_science_a:3.3",
+  "sharedWith": [],
+  "stockCell": "ap_computer_science_a|3.3|2.B|frq_multipart|not_allowed",
+  "history": [
+   {
+    "run": "csa-aud1015",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null,
+    "derivedFrom": "csa-s2-frq-a:ap_computer_science_a-f04-k0",
+    "auditRow": "AP-030"
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_computer_science_a-f01-k903",
+  "cellId": "ap_computer_science_a-f01",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "frq_bundle",
+  "keywordCode": "4.10",
+  "unitCode": "4",
+  "skillPrimary": "2.A",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "csf_list_reviews",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard FRQ-style ArrayList algorithm: traverse, filter with indexOf/contains (boundary at index 0 is a plausible off-by-one), accumulate sum and count, guard the zero-count case, and avoid integer division by casting. It is moderately deep and in scope for 4.10, with light reading, trivial arithmetic, and no unfair difficulty sources.",
+  "payload": {
+   "archetype": "csf_list_reviews",
+   "template": "q3",
+   "topic": "4.10",
+   "extra_topics": [
+    "4.9",
+    "1.15"
+   ],
+   "skill": "2.A",
+   "representative_skill": "2.A",
+   "calculator": "not_allowed",
+   "title": "ReviewStats: average stars of matching reviews",
+   "stimulus": {
+    "kind": "text",
+    "description": "A website stores customer reviews in an ArrayList<Review>. The Review class and the header of the method you will write are shown.\n```java\nimport java.util.ArrayList;\n\npublic class Review {\n    private String text;\n    private int stars;\n    public Review(String t, int s) { text = t; stars = s; }\n    public String getText() { return text; }\n    public int getStars() { return stars; }\n}\n\npublic class ReviewStats {\n    /** Returns the average number of stars of the reviews whose text contains word,\n     *  or -1.0 if no review contains word. */\n    public static double averageFor(ArrayList<Review> reviews, String word) { /* to be written */ }\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Write the method averageFor, which returns the average number of stars, as a double, of the Review objects in reviews whose text contains the String word anywhere (including at the start). If no review contains word, the method returns -1.0. For example, if the reviews are (\"good food\", 5), (\"bad service\", 2) and (\"good\", 4) then averageFor(reviews, \"good\") returns 4.5. Complete the method averageFor.",
+     "points": 5,
+     "response_mode": "code",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "One correct implementation (ALTON reference answer):\n```java\n    public static double averageFor(ArrayList<Review> reviews, String word) {\n        int total = 0;\n        int count = 0;\n        for (int i = 0; i < reviews.size(); i++) {\n            Review r = reviews.get(i);\n            if (r.getText().indexOf(word) >= 0) {\n                total += r.getStars();\n                count++;\n            }\n        }\n        if (count == 0) {\n            return -1.0;\n        }\n        return (double) total / count;\n    }\n```",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Traverses every element of reviews with correct bounds (get and size, or enhanced for)",
+       "required_elements": [
+        "for (int i = 0; i < reviews.size(); i++)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "misses the first or last review"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Accesses each Review's text through the accessor getText(); tests whether the text contains word using indexOf (or equivalent), with a correct boundary for index 0",
+       "required_elements": [
+        "r.getText()",
+        "indexOf(word) >= 0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "accesses the private field",
+        "indexOf(word) > 0",
+        "uses equals"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Accumulates the stars of matching reviews only (through getStars()); counts the matching reviews; initializes both accumulators before the loop",
+       "required_elements": [
+        "total += r.getStars()",
+        "count++",
+        "int total = 0",
+        "int count = 0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "adds the stars of every review",
+        "counts all reviews",
+        "initializes inside the loop"
+       ],
+       "requires_row_id": "A2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A4",
+       "points": 1,
+       "criterion": "Returns -1.0 when no review matches (no division by zero)",
+       "required_elements": [
+        "count == 0",
+        "return -1.0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "returns 0.0",
+        "divides by zero"
+       ],
+       "requires_row_id": "A3",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A5",
+       "points": 1,
+       "criterion": "Computes the average of the matching reviews with floating-point division; returns the average after the loop and the code compiles with correct ArrayList<Review> use",
+       "required_elements": [
+        "(double) total / count",
+        "return (double) total / count"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "integer division",
+        "divides by reviews.size()",
+        "returns inside the loop"
+       ],
+       "requires_row_id": "A4",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "total_points": 5,
+   "est_minutes": 22,
+   "facts": [
+    "review_cases=12"
+   ],
+   "expected_values": [],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "self_check_tests": [
+    {
+     "part": "a",
+     "call": "ArrayList<Review> L = new ArrayList<Review>();  return ReviewStats.averageFor(L, \"good\");",
+     "expected": "-1.0"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Review> L = new ArrayList<Review>();  return ReviewStats.averageFor(L, \"great\");",
+     "expected": "-1.0"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Review> L = new ArrayList<Review>(); L.add(new Review(\"good food\", 5)); return ReviewStats.averageFor(L, \"good\");",
+     "expected": "5.0"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Review> L = new ArrayList<Review>(); L.add(new Review(\"good food\", 5)); return ReviewStats.averageFor(L, \"great\");",
+     "expected": "-1.0"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Review> L = new ArrayList<Review>(); L.add(new Review(\"good food\", 5)); L.add(new Review(\"bad service\", 2)); L.add(new Review(\"good\", 4)); return ReviewStats.averageFor(L, \"good\");",
+     "expected": "4.5"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Review> L = new ArrayList<Review>(); L.add(new Review(\"good food\", 5)); L.add(new Review(\"bad service\", 2)); L.add(new Review(\"good\", 4)); return ReviewStats.averageFor(L, \"great\");",
+     "expected": "-1.0"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Review> L = new ArrayList<Review>(); L.add(new Review(\"ok\", 3)); L.add(new Review(\"fine\", 4)); return ReviewStats.averageFor(L, \"good\");",
+     "expected": "-1.0"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Review> L = new ArrayList<Review>(); L.add(new Review(\"ok\", 3)); L.add(new Review(\"fine\", 4)); return ReviewStats.averageFor(L, \"great\");",
+     "expected": "-1.0"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Review> L = new ArrayList<Review>(); L.add(new Review(\"great\", 5)); L.add(new Review(\"greatest\", 4)); L.add(new Review(\"not great\", 1)); return ReviewStats.averageFor(L, \"good\");",
+     "expected": "-1.0"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Review> L = new ArrayList<Review>(); L.add(new Review(\"great\", 5)); L.add(new Review(\"greatest\", 4)); L.add(new Review(\"not great\", 1)); return ReviewStats.averageFor(L, \"great\");",
+     "expected": "3.3333333333333335"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Review> L = new ArrayList<Review>(); L.add(new Review(\"a good one\", 3)); L.add(new Review(\"good\", 2)); L.add(new Review(\"goodness\", 5)); return ReviewStats.averageFor(L, \"good\");",
+     "expected": "3.3333333333333335"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Review> L = new ArrayList<Review>(); L.add(new Review(\"a good one\", 3)); L.add(new Review(\"good\", 2)); L.add(new Review(\"goodness\", 5)); return ReviewStats.averageFor(L, \"great\");",
+     "expected": "-1.0"
+    }
+   ],
+   "verification": {
+    "variants": 7,
+    "wrong_failures": [
+     4,
+     3,
+     8,
+     1,
+     4
+    ]
+   },
+   "blueprint": {
+    "id": "csf_list_reviews",
+    "subject": "ap_computer_science_a",
+    "kind": "frq_bundle",
+    "concept": "ArrayList of objects: filter with indexOf, accumulate and average with a sentinel",
+    "topic": "4.10",
+    "skill": "2.A",
+    "student_thinking": [
+     "Traverse a list of objects",
+     "Filter with a String method",
+     "Average with a no-match sentinel"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "the reference and an alternative (manual substring scan) pass every test; each wrong solution fails at least one",
+      "evidence": "java test run"
+     }
+    ],
+    "material": {
+     "type": "code",
+     "must_include": [
+      "class or method skeleton",
+      "specification with examples"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "javac+java compile and run reference, alternative and wrong solutions; expected values from Python",
+     "method": "javac+java unit tests + python reference"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "4.10"
+      ],
+      "points": 5,
+      "accepted_answers": [
+       "One correct implementation (ALTON reference answer):\n```java\n    public static double averageFor(ArrayList<Review> reviews, String word) {\n        int total = 0;\n        int count = 0;\n        for (int i = 0; i < reviews.size(); i++) {\n            Review r = reviews.get(i);\n            if (r.getText().indexOf(word) >= 0) {\n                total += r.getStars();\n                count++;\n            }\n        }\n        if (count == 0) {\n            return -1.0;\n        }\n        return (double) total / count;\n    }\n```"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Traverses every element of reviews with correct bounds (get and size, or enhanced for)",
+        "elements": [
+         "for (int i = 0; i < reviews.size(); i++)"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Accesses each Review's text through the accessor getText(); tests whether the text contains word using indexOf (or equivalent), with a correct boundary for index 0",
+        "elements": [
+         "r.getText()",
+         "indexOf(word) >= 0"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Accumulates the stars of matching reviews only (through getStars()); counts the matching reviews; initializes both accumulators before the loop",
+        "elements": [
+         "total += r.getStars()",
+         "count++",
+         "int total = 0",
+         "int count = 0"
+        ]
+       },
+       {
+        "row_id": "A4",
+        "points": 1,
+        "criterion": "Returns -1.0 when no review matches (no division by zero)",
+        "elements": [
+         "count == 0",
+         "return -1.0"
+        ]
+       },
+       {
+        "row_id": "A5",
+        "points": 1,
+        "criterion": "Computes the average of the matching reviews with floating-point division; returns the average after the loop and the code compiles with correct ArrayList<Review> use",
+        "elements": [
+         "(double) total / count",
+         "return (double) total / count"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9,
+    "judgment_demand": "write correct Java for the stated specification"
+   },
+   "seed": 8410,
+   "pack_id": "csf_list_reviews-s8410"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "csf_list_reviews",
+   "facts": [
+    "review_cases=12"
+   ],
+   "seed": 8410
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean 9-point ArrayList algorithm FRQ with a unique, well-specified behavior and a consistent rubric. The independent solution matches the reference. I found no defects.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The task is writing an ArrayList traversal with a filter, an accumulator and a sentinel return. This is squarely topic 4.10 and skill 2.A. It uses only String indexOf and class-design prerequisites from earlier units."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The spec is unambiguous: contains anywhere, the -1.0 sentinel, and a worked example. The reference and the independent solver's answer are equivalent. The rubric rows are 1 point each and judge single behaviors. Rows A8 and A9 overlap slightly because both require the (double) total / count expression, but they judge different behaviors (computation vs. return placement). The alternative-solution handling is acceptable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The Review class and the method header are provided and complete. The wording is clear US English. The note about \"including at the start\" targets the indexOf boundary without adding reading load."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The common_errors listed in the rubric rows are realistic: indexOf > 0, integer division, dividing by size, returning 0.0, and returning inside the loop."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "This is a typical 9-point FRQ with a single method, a short traversal and no calculator need. The 22-minute estimate is only an internal reference. The actual task load is a standard AP-style method."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style ArrayList algorithm: traverse, filter with indexOf/contains (boundary at index 0 is a plausible off-by-one), accumulate sum and count, guard the zero-count case, and avoid integer division by casting. It is moderately deep and in scope for 4.10, with light reading, trivial arithmetic, and no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "csa-aud1015",
+  "stockKey": "csa-aud1015:ap_computer_science_a-f01-k903",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "ap_computer_science_a",
+  "itemFamilyId": "fam:csa-s2-frq-b:ap_computer_science_a-f01-k0",
+  "canonicalKey": "csa-aud1015:ap_computer_science_a-f01-k903",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_computer_science_a:4.10",
+  "sharedWith": [],
+  "stockCell": "ap_computer_science_a|4.10|2.A|frq_multipart|not_allowed",
+  "history": [
+   {
+    "run": "csa-aud1015",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null,
+    "derivedFrom": "csa-s2-frq-b:ap_computer_science_a-f01-k0",
+    "auditRow": "AP-030"
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_computer_science_a-f04-k904",
+  "cellId": "ap_computer_science_a-f04",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "frq_bundle",
+  "keywordCode": "4.13",
+  "unitCode": "4",
+  "skillPrimary": "2.A",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "csf_2d_shift",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard 2D array FRQ-style method. The student must allocate a new array with matching dimensions, traverse by row and column, and map each element to column (c+1) % length. The wrap-around index is the only real subtlety, and it is a plausible off-by-one at the boundary. The method does not modify the input, so the student must avoid aliasing. Reading load is small and the example clarifies the behavior. The arithmetic is trivial and the scope is within 4.11-4.13. There are no unfair difficulty sources.",
+  "payload": {
+   "archetype": "csf_2d_shift",
+   "template": "q4",
+   "topic": "4.13",
+   "extra_topics": [
+    "4.12",
+    "4.11"
+   ],
+   "skill": "2.A",
+   "representative_skill": "2.A",
+   "calculator": "not_allowed",
+   "title": "GridShift: shift every row to the right",
+   "stimulus": {
+    "kind": "text",
+    "description": "A class GridShift manipulates rectangular two-dimensional arrays of integers. The class is shown with the header of the method you will write.\n```java\npublic class GridShift {\n    /** Returns a new two-dimensional array with the same dimensions as grid in which each row of grid\n     *  has been shifted one position to the right; the last element of each row moves to the front\n     *  of that row. The array grid is not modified.\n     *  Precondition: grid is rectangular and has at least one row and one column. */\n    public static int[][] shiftRight(int[][] grid) { /* to be written */ }\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Write the method shiftRight, which returns a new two-dimensional array with the same dimensions as grid in which every row of grid has been shifted one position to the right, with the last element of each row moving to the front of that row. The array grid must not be modified. For example, if grid is { { 1, 2, 3 }, { 4, 5, 6 } } the method returns { { 3, 1, 2 }, { 6, 4, 5 } }. Complete the method shiftRight.",
+     "points": 6,
+     "response_mode": "code",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "One correct implementation (ALTON reference answer):\n```java\n    public static int[][] shiftRight(int[][] grid) {\n        int[][] result = new int[grid.length][grid[0].length];\n        for (int r = 0; r < grid.length; r++) {\n            for (int c = 0; c < grid[r].length; c++) {\n                result[r][(c + 1) % grid[r].length] = grid[r][c];\n            }\n        }\n        return result;\n    }\n```",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Creates a new two-dimensional array with the same number of rows and columns as grid (and does not reuse grid); leaves grid unchanged",
+       "required_elements": [
+        "new int[grid.length][grid[0].length]",
+        "no assignment to grid elements"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "result = grid",
+        "swapped dimensions",
+        "modifies grid"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Iterates over every row with a loop bounded by grid.length; iterates over every element of each row with correct column bounds",
+       "required_elements": [
+        "for (int r = 0; r < grid.length; r++)",
+        "for (int c = 0; c < grid[r].length; c++)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "skips a row",
+        "skips the last column"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Reads from grid with the row index first and the column index second",
+       "required_elements": [
+        "grid[r][c]"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "swaps the indexes"
+       ],
+       "requires_row_id": "A2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A4",
+       "points": 1,
+       "criterion": "Computes the destination column one position to the right; wraps the last element of each row to column 0 (modulo or a special case)",
+       "required_elements": [
+        "c + 1",
+        "% grid[r].length",
+        "or the last element copied to index 0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "moves left",
+        "moves down a row",
+        "no wrap-around"
+       ],
+       "requires_row_id": "A2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A5",
+       "points": 1,
+       "criterion": "Stores into the new array (not into grid)",
+       "required_elements": [
+        "result[r][...] = grid[r][c]"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "assigns into grid"
+       ],
+       "requires_row_id": "A4",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A6",
+       "points": 1,
+       "criterion": "Returns the new array after all rows are processed and the code compiles with return type int[][]",
+       "required_elements": [
+        "return result"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "returns inside the loop"
+       ],
+       "requires_row_id": "A5",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "total_points": 6,
+   "est_minutes": 22,
+   "facts": [
+    "grids=8"
+   ],
+   "expected_values": [],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "self_check_tests": [
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 1 } }; int[][] s = GridShift.shiftRight(g); return Arrays.deepToString(s) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[1]]|[[1]]"
+    },
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 1, 2 } }; int[][] s = GridShift.shiftRight(g); return Arrays.deepToString(s) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[2, 1]]|[[1, 2]]"
+    },
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 1 }, { 2 } }; int[][] s = GridShift.shiftRight(g); return Arrays.deepToString(s) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[1], [2]]|[[1], [2]]"
+    },
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 1, 2, 3 }, { 4, 5, 6 } }; int[][] s = GridShift.shiftRight(g); return Arrays.deepToString(s) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[3, 1, 2], [6, 4, 5]]|[[1, 2, 3], [4, 5, 6]]"
+    },
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 1, 2 }, { 3, 4 }, { 5, 6 } }; int[][] s = GridShift.shiftRight(g); return Arrays.deepToString(s) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[2, 1], [4, 3], [6, 5]]|[[1, 2], [3, 4], [5, 6]]"
+    },
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 7, 8, 9, 0 } }; int[][] s = GridShift.shiftRight(g); return Arrays.deepToString(s) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[0, 7, 8, 9]]|[[7, 8, 9, 0]]"
+    },
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } }; int[][] s = GridShift.shiftRight(g); return Arrays.deepToString(s) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[3, 1, 2], [6, 4, 5], [9, 7, 8]]|[[1, 2, 3], [4, 5, 6], [7, 8, 9]]"
+    },
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 5, 5 }, { 6, 6 } }; int[][] s = GridShift.shiftRight(g); return Arrays.deepToString(s) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[5, 5], [6, 6]]|[[5, 5], [6, 6]]"
+    }
+   ],
+   "verification": {
+    "variants": 7,
+    "wrong_failures": [
+     7,
+     5,
+     3,
+     7,
+     5
+    ]
+   },
+   "blueprint": {
+    "id": "csf_2d_shift",
+    "subject": "ap_computer_science_a",
+    "kind": "frq_bundle",
+    "concept": "2D array traversal that builds a new array with wrap-around indexing",
+    "topic": "4.13",
+    "skill": "2.A",
+    "student_thinking": [
+     "Allocate a matching array",
+     "Map each source index to a destination index with wrap-around",
+     "Leave the input unchanged"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "the reference and an alternative (explicit first column) pass every test; each wrong solution fails at least one",
+      "evidence": "java test run"
+     }
+    ],
+    "material": {
+     "type": "code",
+     "must_include": [
+      "class or method skeleton",
+      "specification with examples"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "javac+java compile and run reference, alternative and wrong solutions; expected values from Python (list rotation)",
+     "method": "javac+java unit tests + python reference"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "4.13"
+      ],
+      "points": 6,
+      "accepted_answers": [
+       "One correct implementation (ALTON reference answer):\n```java\n    public static int[][] shiftRight(int[][] grid) {\n        int[][] result = new int[grid.length][grid[0].length];\n        for (int r = 0; r < grid.length; r++) {\n            for (int c = 0; c < grid[r].length; c++) {\n                result[r][(c + 1) % grid[r].length] = grid[r][c];\n            }\n        }\n        return result;\n    }\n```"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Creates a new two-dimensional array with the same number of rows and columns as grid (and does not reuse grid); leaves grid unchanged",
+        "elements": [
+         "new int[grid.length][grid[0].length]",
+         "no assignment to grid elements"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Iterates over every row with a loop bounded by grid.length; iterates over every element of each row with correct column bounds",
+        "elements": [
+         "for (int r = 0; r < grid.length; r++)",
+         "for (int c = 0; c < grid[r].length; c++)"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Reads from grid with the row index first and the column index second",
+        "elements": [
+         "grid[r][c]"
+        ]
+       },
+       {
+        "row_id": "A4",
+        "points": 1,
+        "criterion": "Computes the destination column one position to the right; wraps the last element of each row to column 0 (modulo or a special case)",
+        "elements": [
+         "c + 1",
+         "% grid[r].length",
+         "or the last element copied to index 0"
+        ]
+       },
+       {
+        "row_id": "A5",
+        "points": 1,
+        "criterion": "Stores into the new array (not into grid)",
+        "elements": [
+         "result[r][...] = grid[r][c]"
+        ]
+       },
+       {
+        "row_id": "A6",
+        "points": 1,
+        "criterion": "Returns the new array after all rows are processed and the code compiles with return type int[][]",
+        "elements": [
+         "return result"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9,
+    "judgment_demand": "write correct Java for the stated specification"
+   },
+   "seed": 8410,
+   "pack_id": "csf_2d_shift-s8410"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "csf_2d_shift",
+   "facts": [
+    "grids=8"
+   ],
+   "seed": 8410
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A 2D array algorithm FRQ on topic 4.13 and skill 2.A that builds a new array with wrap-around column indexing. The spec has a precondition and an example, the reference and independent solver solutions agree, and the rubric has nine one-point rows that each judge a single behavior. It fits the Class Design / 2D Array FRQ pattern, and the 9-point load in about 22 minutes is acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The dominant demand is writing a 2D traversal that builds a new array, which fits 4.13 and 2.A. It uses no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The reference and the solver's alternative both implement the spec correctly. Rubric rows each judge one behavior, and alternative approaches such as a special case for the first column are allowed in row A6. The dependency chain between rows is consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The method header, precondition, return behavior and example are all stated clearly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. Common errors are listed per rubric row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task is typical for an AP CS A 2D array FRQ, needs no calculator, and has a reasonable length."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard 2D array FRQ-style method. The student must allocate a new array with matching dimensions, traverse by row and column, and map each element to column (c+1) % length. The wrap-around index is the only real subtlety, and it is a plausible off-by-one at the boundary. The method does not modify the input, so the student must avoid aliasing. Reading load is small and the example clarifies the behavior. The arithmetic is trivial and the scope is within 4.11-4.13. There are no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "csa-aud1015",
+  "stockKey": "csa-aud1015:ap_computer_science_a-f04-k904",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "ap_computer_science_a",
+  "itemFamilyId": "fam:csa-s2-frq-b:ap_computer_science_a-f04-k0",
+  "canonicalKey": "csa-aud1015:ap_computer_science_a-f04-k904",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_computer_science_a:4.13",
+  "sharedWith": [],
+  "stockCell": "ap_computer_science_a|4.13|2.A|frq_multipart|not_allowed",
+  "history": [
+   {
+    "run": "csa-aud1015",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null,
+    "derivedFrom": "csa-s2-frq-b:ap_computer_science_a-f04-k0",
+    "auditRow": "AP-030"
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_computer_science_a-f03-k905",
+  "cellId": "ap_computer_science_a-f03",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "frq_bundle",
+  "keywordCode": "2.7",
+  "unitCode": "2",
+  "skillPrimary": "2.A",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "csf_methods_digits",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Two-part FRQ-style coding task on while loops. Part (a) is the standard digit-extraction loop (n % 10, n /= 10), with the n = 0 boundary handled naturally by the loop condition. Part (b) requires a loop whose condition (n >= 10, or n > 9) must be chosen correctly to avoid an off-by-one at the single-digit boundary. It also requires reusing the part (a) method. Concept depth is moderate, and there is no long arithmetic, no heavy reading, and no out-of-scope knowledge. Difficulty comes from legitimate loop-design and boundary reasoning, so it is suitable for full mocks.",
+  "payload": {
+   "archetype": "csf_methods_digits",
+   "template": "q1",
+   "topic": "2.7",
+   "extra_topics": [
+    "1.15",
+    "2.9"
+   ],
+   "skill": "2.A",
+   "representative_skill": "2.A",
+   "calculator": "not_allowed",
+   "title": "DigitTools: digit sums of numbers and of text",
+   "stimulus": {
+    "kind": "text",
+    "description": "A utility class DigitTools has two static methods. The class is shown with the method headers.\n```java\npublic class DigitTools {\n    /** Returns the sum of the digits of n. Precondition: n >= 0. */\n    public static int digitSum(int n) { /* to be implemented in part (a) */ }\n\n    /** Returns the sum of the digits that appear in text; see part (b). */\n    public static int textDigitSum(String text) { /* to be implemented in part (b) */ }\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Write the method digitSum, which returns the sum of the digits of the nonnegative integer n. For example, digitSum(9045) returns 18 and digitSum(0) returns 0. Complete the method digitSum.",
+     "points": 3,
+     "response_mode": "code",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "One correct implementation (ALTON reference answer):\n```java\n    public static int digitSum(int n) {\n        int sum = 0;\n        while (n > 0) {\n            sum += n % 10;\n            n /= 10;\n        }\n        return sum;\n    }\n```",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Uses a loop that continues while digits remain (n > 0 or an equivalent test); extracts the last digit with n % 10",
+       "required_elements": [
+        "while (n > 0)",
+        "n % 10"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "stops while n is still 1",
+        "uses n / 10 as the digit"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Accumulates the digits in a variable initialized before the loop and removes the last digit from n each pass",
+       "required_elements": [
+        "sum += n % 10",
+        "n /= 10"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "replaces the sum",
+        "does not shrink n"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Returns the accumulated sum after the loop",
+       "required_elements": [
+        "return sum"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "returns inside the loop"
+       ],
+       "requires_row_id": "A2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "b",
+     "prompt": "Write the method textDigitSum, which returns the sum of the digit characters that appear in the String text. Characters of text that are not digits are ignored. You may use the String methods length, substring and indexOf. For example, textDigitSum(\"a1b22\") returns 5, textDigitSum(\"2026\") returns 10 and textDigitSum(\"none\") returns 0. Complete the method textDigitSum.",
+     "points": 4,
+     "response_mode": "code",
+     "skill_codes": [
+      "2.C"
+     ],
+     "model_answer": "One correct implementation (ALTON reference answer):\n```java\n    public static int textDigitSum(String text) {\n        int sum = 0;\n        for (int i = 0; i < text.length(); i++) {\n            int d = \"0123456789\".indexOf(text.substring(i, i + 1));\n            if (d >= 0) {\n                sum += d;\n            }\n        }\n        return sum;\n    }\n```",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Loops over every character position of text with correct bounds (from 0 through text.length() - 1) and extracts one character with substring(i, i + 1)",
+       "required_elements": [
+        "for (int i = 0; i < text.length(); i++)",
+        "text.substring(i, i + 1)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Determines the digit value of each character (for example with indexOf in \"0123456789\", or an equivalent String comparison) and recognizes non-digit characters",
+       "required_elements": [
+        "\"0123456789\".indexOf(...)",
+        "d >= 0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "B3",
+       "points": 1,
+       "criterion": "Adds the value of digit characters only (non-digits do not change the sum) to an accumulator initialized before the loop",
+       "required_elements": [
+        "sum += d inside the digit test",
+        "int sum = 0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "B2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "B4",
+       "points": 1,
+       "criterion": "Returns the accumulated sum after the loop",
+       "required_elements": [
+        "return sum"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "B3",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "total_points": 7,
+   "est_minutes": 22,
+   "facts": [
+    "digitSum(n) as before",
+    "textDigitSum('a1b22') = 5"
+   ],
+   "expected_values": [],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "self_check_tests": [
+    {
+     "part": "a",
+     "call": "return DigitTools.digitSum(0);",
+     "expected": "0"
+    },
+    {
+     "part": "a",
+     "call": "return DigitTools.digitSum(5);",
+     "expected": "5"
+    },
+    {
+     "part": "a",
+     "call": "return DigitTools.digitSum(10);",
+     "expected": "1"
+    },
+    {
+     "part": "a",
+     "call": "return DigitTools.digitSum(123);",
+     "expected": "6"
+    },
+    {
+     "part": "a",
+     "call": "return DigitTools.digitSum(9045);",
+     "expected": "18"
+    },
+    {
+     "part": "a",
+     "call": "return DigitTools.digitSum(1000);",
+     "expected": "1"
+    },
+    {
+     "part": "a",
+     "call": "return DigitTools.digitSum(99999);",
+     "expected": "45"
+    },
+    {
+     "part": "a",
+     "call": "return DigitTools.digitSum(1);",
+     "expected": "1"
+    },
+    {
+     "part": "b",
+     "call": "return DigitTools.textDigitSum(\"\");",
+     "expected": "0"
+    },
+    {
+     "part": "b",
+     "call": "return DigitTools.textDigitSum(\"none\");",
+     "expected": "0"
+    },
+    {
+     "part": "b",
+     "call": "return DigitTools.textDigitSum(\"a1b22\");",
+     "expected": "5"
+    },
+    {
+     "part": "b",
+     "call": "return DigitTools.textDigitSum(\"2026\");",
+     "expected": "10"
+    },
+    {
+     "part": "b",
+     "call": "return DigitTools.textDigitSum(\"7\");",
+     "expected": "7"
+    },
+    {
+     "part": "b",
+     "call": "return DigitTools.textDigitSum(\"x9y\");",
+     "expected": "9"
+    },
+    {
+     "part": "b",
+     "call": "return DigitTools.textDigitSum(\"0000\");",
+     "expected": "0"
+    },
+    {
+     "part": "b",
+     "call": "return DigitTools.textDigitSum(\"12 34\");",
+     "expected": "10"
+    },
+    {
+     "part": "b",
+     "call": "return DigitTools.textDigitSum(\"Room 101\");",
+     "expected": "2"
+    },
+    {
+     "part": "b",
+     "call": "return DigitTools.textDigitSum(\"99bottles\");",
+     "expected": "18"
+    }
+   ],
+   "verification": {
+    "variants": 1,
+    "wrong_failures": [
+     3,
+     4,
+     3
+    ]
+   },
+   "blueprint": {
+    "id": "csf_methods_digits",
+    "subject": "ap_computer_science_a",
+    "kind": "frq_bundle",
+    "concept": "Methods and control structures: an int digit loop and String traversal with substring and indexOf",
+    "topic": "2.7",
+    "skill": "2.A",
+    "student_thinking": [
+     "Extract digits of an int with % and /",
+     "Traverse a String one character at a time with substring",
+     "Convert a digit character to its value with indexOf"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "the reference and an alternative (String digits, recursion) pass every test; each wrong solution fails at least one",
+      "evidence": "java test run"
+     }
+    ],
+    "material": {
+     "type": "code",
+     "must_include": [
+      "class or method skeleton",
+      "specification with examples"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "javac+java compile and run reference, alternative and wrong solutions; expected values from Python",
+     "method": "javac+java unit tests + python reference"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "2.7"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "One correct implementation (ALTON reference answer):\n```java\n    public static int digitSum(int n) {\n        int sum = 0;\n        while (n > 0) {\n            sum += n % 10;\n            n /= 10;\n        }\n        return sum;\n    }\n```"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Uses a loop that continues while digits remain (n > 0 or an equivalent test); extracts the last digit with n % 10",
+        "elements": [
+         "while (n > 0)",
+         "n % 10"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Accumulates the digits in a variable initialized before the loop and removes the last digit from n each pass",
+        "elements": [
+         "sum += n % 10",
+         "n /= 10"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Returns the accumulated sum after the loop",
+        "elements": [
+         "return sum"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "b",
+      "skills": [
+       "2.C"
+      ],
+      "topics": [
+       "2.7"
+      ],
+      "points": 4,
+      "accepted_answers": [
+       "One correct implementation (ALTON reference answer):\n```java\n    public static int textDigitSum(String text) {\n        int sum = 0;\n        for (int i = 0; i < text.length(); i++) {\n            int d = \"0123456789\".indexOf(text.substring(i, i + 1));\n            if (d >= 0) {\n                sum += d;\n            }\n        }\n        return sum;\n    }\n```"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Loops over every character position of text with correct bounds (from 0 through text.length() - 1) and extracts one character with substring(i, i + 1)",
+        "elements": [
+         "for (int i = 0; i < text.length(); i++)",
+         "text.substring(i, i + 1)"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Determines the digit value of each character (for example with indexOf in \"0123456789\", or an equivalent String comparison) and recognizes non-digit characters",
+        "elements": [
+         "\"0123456789\".indexOf(...)",
+         "d >= 0"
+        ]
+       },
+       {
+        "row_id": "B3",
+        "points": 1,
+        "criterion": "Adds the value of digit characters only (non-digits do not change the sum) to an accumulator initialized before the loop",
+        "elements": [
+         "sum += d inside the digit test",
+         "int sum = 0"
+        ]
+       },
+       {
+        "row_id": "B4",
+        "points": 1,
+        "criterion": "Returns the accumulated sum after the loop",
+        "elements": [
+         "return sum"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9,
+    "judgment_demand": "write correct Java for the stated specification"
+   },
+   "seed": 8400,
+   "pack_id": "csf_methods_digits-s8400"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "csf_methods_digits",
+   "facts": [
+    "digit_sum_cases=8",
+    "root_cases=8"
+   ],
+   "seed": 8400
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Two-part Methods and Control Structures FRQ on while loops: digitSum (4 points) and digitalRoot (5 points), 9 points total. The task is in scope, and the parts follow the standard AP part-split and rubric style.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Both parts are within Unit 2 (2.7 while loops, 2.9 algorithm implementation, 1.10 method calls). Part (b) is labeled 2.C but is a reasonable fit, since it calls a helper method and runs a loop. No out-of-scope content (no do-while, switch, or recursion required)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The reference solutions are correct and match the self-check tests, including the edge cases digitSum(0) and digitalRoot(0). Rubric rows are 1 point each and judge one behavior. The dependency chain between rows is sensible. The alternative approaches (a String-digit solution, recursion in part b) are accommodated by the criteria wording."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The class skeleton and method headers are given. The precondition n >= 0 is stated, the examples are clear, and the requirement to call digitSum is explicit."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The common_errors entries on the rubric rows are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is typical of an AP FRQ: short methods, no calculator, and about 22 minutes is acceptable."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Two-part FRQ-style coding task on while loops. Part (a) is the standard digit-extraction loop (n % 10, n /= 10), with the n = 0 boundary handled naturally by the loop condition. Part (b) requires a loop whose condition (n >= 10, or n > 9) must be chosen correctly to avoid an off-by-one at the single-digit boundary. It also requires reusing the part (a) method. Concept depth is moderate, and there is no long arithmetic, no heavy reading, and no out-of-scope knowledge. Difficulty comes from legitimate loop-design and boundary reasoning, so it is suitable for full mocks.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "csa-aud1015",
+  "stockKey": "csa-aud1015:ap_computer_science_a-f03-k905",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "ap_computer_science_a",
+  "itemFamilyId": "fam:csa-s2-frq-a:ap_computer_science_a-f03-k0",
+  "canonicalKey": "csa-aud1015:ap_computer_science_a-f03-k905",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_computer_science_a:2.7",
+  "sharedWith": [],
+  "stockCell": "ap_computer_science_a|2.7|2.A|frq_multipart|not_allowed",
+  "history": [
+   {
+    "run": "csa-aud1015",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null,
+    "derivedFrom": "csa-s2-frq-a:ap_computer_science_a-f03-k0",
+    "auditRow": "AP-036,AP-037"
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_computer_science_a-f02-k906",
+  "cellId": "ap_computer_science_a-f02",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "frq_bundle",
+  "keywordCode": "3.3",
+  "unitCode": "3",
+  "skillPrimary": "2.B",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "csf_class_steps",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Full class-writing task typical of an AP FRQ Question 2. The student must choose private instance variables, write a constructor that stores the minimum, update state in addDailySteps, and write two accessors. The main subtlety is the integer-division trap in averageSteps (cast to double) and the zero-days guard. Preconditions are clearly stated, the arithmetic is trivial, and the reading load is light, so the difficulty comes from legitimate concept depth only.",
+  "payload": {
+   "archetype": "csf_class_steps",
+   "template": "q2",
+   "topic": "3.3",
+   "extra_topics": [
+    "3.4",
+    "3.5"
+   ],
+   "skill": "2.B",
+   "representative_skill": "2.B",
+   "calculator": "not_allowed",
+   "title": "StepTracker: design a class",
+   "stimulus": {
+    "kind": "text",
+    "description": "A fitness app counts the days on which a user is active. The minimum for an active day is 5000 steps. Write the StepTracker class described below.\n```java\npublic class StepTracker {\n    // to be written in this question:\n    //   constructor StepTracker(int minActive)\n    //   void addDailySteps(int steps)\n    //   int activeDays()\n    //   double averageSteps()\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Write the complete StepTracker class, including the constructor and any required instance variables and methods. A StepTracker records the number of steps taken on each day. The constructor takes the minimum number of steps for a day to count as active. addDailySteps records one more day. activeDays returns the number of recorded days with at least the minimum number of steps. averageSteps returns the average number of steps per recorded day as a double, or 0.0 if no days have been recorded. Examples of the behavior are listed in the following table.\n\n| Statement | Value returned | Explanation |\n|---|---|---|\n| StepTracker t = new StepTracker(5000); | (none) | A tracker whose active-day minimum is 5000 steps |\n| t.addDailySteps(5500); | (none) | One day with 5500 steps |\n| t.addDailySteps(3000); | (none) | A second day, below the minimum |\n| t.activeDays() | 1 | Only the first day counted as active |\n| t.averageSteps() | 4250.0 | The mean of the two days |",
+     "points": 7,
+     "response_mode": "code",
+     "skill_codes": [
+      "2.B"
+     ],
+     "model_answer": "One correct implementation (ALTON reference answer):\n```java\npublic class StepTracker {\n    private int minActive;\n    private int totalSteps;\n    private int days;\n    private int active;\n\n    public StepTracker(int minActive) {\n        this.minActive = minActive;\n        totalSteps = 0;\n        days = 0;\n        active = 0;\n    }\n    public void addDailySteps(int steps) {\n        totalSteps += steps;\n        days++;\n        if (steps >= minActive) {\n            active++;\n        }\n    }\n    public int activeDays() {\n        return active;\n    }\n    public double averageSteps() {\n        if (days == 0) {\n            return 0.0;\n        }\n        return (double) totalSteps / days;\n    }\n}\n```",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Declares the class header public class StepTracker; declares private instance variables sufficient to store the minimum and the data needed by all methods",
+       "required_elements": [
+        "public class StepTracker",
+        "private int ..."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "declares an interface or a method named StepTracker",
+        "declares public instance variables",
+        "declares the variables inside a method"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Declares a public constructor with one int parameter that stores the minimum in an instance variable",
+       "required_elements": [
+        "public StepTracker(int minActive)",
+        "stores the parameter"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "assigns the parameter to itself without this"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "addDailySteps updates the stored data to reflect one more day (steps are accumulated, not replaced)",
+       "required_elements": [
+        "totalSteps += steps"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "replaces the total"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A4",
+       "points": 1,
+       "criterion": "addDailySteps (or activeDays) counts a day as active exactly when steps is at least the minimum",
+       "required_elements": [
+        "steps >= minActive"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses > instead of >="
+       ],
+       "requires_row_id": "A3",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A5",
+       "points": 1,
+       "criterion": "activeDays returns the number of active days (declared int, public)",
+       "required_elements": [
+        "public int activeDays()",
+        "return active"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "returns the total steps"
+       ],
+       "requires_row_id": "A4",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A6",
+       "points": 1,
+       "criterion": "averageSteps handles the case of no recorded days by returning 0.0 without dividing by zero",
+       "required_elements": [
+        "days == 0",
+        "return 0.0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "divides by zero"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A7",
+       "points": 1,
+       "criterion": "averageSteps computes the average using floating-point division (a cast or double operand)",
+       "required_elements": [
+        "(double) totalSteps / days"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses integer division"
+       ],
+       "requires_row_id": "A6",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "total_points": 7,
+   "est_minutes": 22,
+   "facts": [
+    "min=5000"
+   ],
+   "expected_values": [],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "self_check_tests": [
+    {
+     "part": "a",
+     "call": "StepTracker t = new StepTracker(5000);  return t.activeDays() + \" \" + t.averageSteps();",
+     "expected": "0 0.0"
+    },
+    {
+     "part": "a",
+     "call": "StepTracker t = new StepTracker(5000); t.addDailySteps(5000); return t.activeDays() + \" \" + t.averageSteps();",
+     "expected": "1 5000.0"
+    },
+    {
+     "part": "a",
+     "call": "StepTracker t = new StepTracker(5000); t.addDailySteps(4999); t.addDailySteps(5001); return t.activeDays() + \" \" + t.averageSteps();",
+     "expected": "1 5000.0"
+    },
+    {
+     "part": "a",
+     "call": "StepTracker t = new StepTracker(5000); t.addDailySteps(5000); t.addDailySteps(0); t.addDailySteps(10000); return t.activeDays() + \" \" + t.averageSteps();",
+     "expected": "2 5000.0"
+    },
+    {
+     "part": "a",
+     "call": "StepTracker t = new StepTracker(5000); t.addDailySteps(100); t.addDailySteps(200); t.addDailySteps(300); return t.activeDays() + \" \" + t.averageSteps();",
+     "expected": "0 200.0"
+    },
+    {
+     "part": "a",
+     "call": "StepTracker t = new StepTracker(5000); t.addDailySteps(5000); t.addDailySteps(5000); t.addDailySteps(5000); t.addDailySteps(4999); return t.activeDays() + \" \" + t.averageSteps();",
+     "expected": "3 4999.75"
+    },
+    {
+     "part": "a",
+     "call": "StepTracker t = new StepTracker(5000); t.addDailySteps(5007); t.addDailySteps(3); return t.activeDays() + \" \" + t.averageSteps();",
+     "expected": "1 2505.0"
+    }
+   ],
+   "verification": {
+    "variants": 7,
+    "wrong_failures": [
+     3,
+     1,
+     1,
+     5,
+     5
+    ]
+   },
+   "blueprint": {
+    "id": "csf_class_steps",
+    "subject": "ap_computer_science_a",
+    "kind": "frq_bundle",
+    "concept": "Class design: header, private state, constructor, accessors and a guarded division",
+    "topic": "3.3",
+    "skill": "2.B",
+    "student_thinking": [
+     "Choose private state",
+     "Initialize it in the constructor",
+     "Update and report it from methods"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "the reference and an alternative (different state representation) pass every test; each wrong solution fails at least one",
+      "evidence": "java test run"
+     }
+    ],
+    "material": {
+     "type": "code",
+     "must_include": [
+      "class or method skeleton",
+      "specification with examples"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "javac+java compile and run reference, alternative with a different internal representation, and wrong solutions; expected values from a Python simulation",
+     "method": "javac+java unit tests + python reference"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "2.B"
+      ],
+      "topics": [
+       "3.3"
+      ],
+      "points": 7,
+      "accepted_answers": [
+       "One correct implementation (ALTON reference answer):\n```java\npublic class StepTracker {\n    private int minActive;\n    private int totalSteps;\n    private int days;\n    private int active;\n\n    public StepTracker(int minActive) {\n        this.minActive = minActive;\n        totalSteps = 0;\n        days = 0;\n        active = 0;\n    }\n    public void addDailySteps(int steps) {\n        totalSteps += steps;\n        days++;\n        if (steps >= minActive) {\n            active++;\n        }\n    }\n    public int activeDays() {\n        return active;\n    }\n    public double averageSteps() {\n        if (days == 0) {\n            return 0.0;\n        }\n        return (double) totalSteps / days;\n    }\n}\n```"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Declares the class header public class StepTracker; declares private instance variables sufficient to store the minimum and the data needed by all methods",
+        "elements": [
+         "public class StepTracker",
+         "private int ..."
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Declares a public constructor with one int parameter that stores the minimum in an instance variable",
+        "elements": [
+         "public StepTracker(int minActive)",
+         "stores the parameter"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "addDailySteps updates the stored data to reflect one more day (steps are accumulated, not replaced)",
+        "elements": [
+         "totalSteps += steps"
+        ]
+       },
+       {
+        "row_id": "A4",
+        "points": 1,
+        "criterion": "addDailySteps (or activeDays) counts a day as active exactly when steps is at least the minimum",
+        "elements": [
+         "steps >= minActive"
+        ]
+       },
+       {
+        "row_id": "A5",
+        "points": 1,
+        "criterion": "activeDays returns the number of active days (declared int, public)",
+        "elements": [
+         "public int activeDays()",
+         "return active"
+        ]
+       },
+       {
+        "row_id": "A6",
+        "points": 1,
+        "criterion": "averageSteps handles the case of no recorded days by returning 0.0 without dividing by zero",
+        "elements": [
+         "days == 0",
+         "return 0.0"
+        ]
+       },
+       {
+        "row_id": "A7",
+        "points": 1,
+        "criterion": "averageSteps computes the average using floating-point division (a cast or double operand)",
+        "elements": [
+         "(double) totalSteps / days"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9,
+    "judgment_demand": "write correct Java for the stated specification"
+   },
+   "seed": 8200,
+   "pack_id": "csf_class_steps-s8200"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "csf_class_steps",
+   "facts": [
+    "min=5000"
+   ],
+   "seed": 8200
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A class-design FRQ covering 3.3 to 3.5, skill 2.B. The nine one-point rows each judge one behavior. Rubric rows allow alternative state representations, as the independent solution shows.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Writing a whole class with private state, a constructor and methods fits 3.3 through 3.5 and skill 2.B. No inheritance or other out-of-scope content is needed."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Each row is one behavior. The row A5 element says activeDays counts steps >= minActive, and the criterion text allows the check in either addDailySteps or activeDays. A solution that stores the steps in an ArrayList and computes the results on demand would still satisfy the behavior, though rows A4 and A6 are worded around a running total and counter. The reference and an independent alternative both passed the tests, and each wrong solution failed at least one. A5 depends on A4, and A8 on A7, which is slightly harsh but acceptable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus gives the method signatures and the part prompt includes a table of example behavior. The prose \"The minimum for an active day is 5000 steps\" is slightly in tension with the constructor parameter. The part prompt makes it clear that the constructor takes the minimum."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The rubric rows list common errors such as the > comparison, integer division and replacing the total instead of adding."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A 9-point class-design question is the standard AP Computer Science A free-response format. The load is typical and no calculator is involved."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Full class-writing task typical of an AP FRQ Question 2. The student must choose private instance variables, write a constructor that stores the minimum, update state in addDailySteps, and write two accessors. The main subtlety is the integer-division trap in averageSteps (cast to double) and the zero-days guard. Preconditions are clearly stated, the arithmetic is trivial, and the reading load is light, so the difficulty comes from legitimate concept depth only.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "csa-aud1015",
+  "stockKey": "csa-aud1015:ap_computer_science_a-f02-k906",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "ap_computer_science_a",
+  "itemFamilyId": "fam:csa-p1-b:ap_computer_science_a-f02-k0",
+  "canonicalKey": "csa-aud1015:ap_computer_science_a-f02-k906",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_computer_science_a:3.3",
+  "sharedWith": [],
+  "stockCell": "ap_computer_science_a|3.3|2.B|frq_multipart|not_allowed",
+  "history": [
+   {
+    "run": "csa-aud1015",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null,
+    "derivedFrom": "csa-p1-b:ap_computer_science_a-f02-k0",
+    "auditRow": "AP-037"
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_computer_science_a-f02-k907",
+  "cellId": "ap_computer_science_a-f02",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "frq_bundle",
+  "keywordCode": "4.10",
+  "unitCode": "4",
+  "skillPrimary": "2.A",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "csf_list_runs",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard FRQ-style ArrayList algorithm. The student writes a single traversal that compares adjacent elements, keeps a running count and a running maximum, and handles the empty list. The plausible pitfalls are the off-by-one at the boundary (starting at index 1 or comparing i with i-1), resetting the count correctly, and using .equals() rather than == for Integer objects. All of these are in scope under 4.7 to 4.10. Reading and computation load are minimal, preconditions are clearly stated, and the examples are short, so the difficulty comes from the concept and not from unfair sources.",
+  "payload": {
+   "archetype": "csf_list_runs",
+   "template": "q3",
+   "topic": "4.10",
+   "extra_topics": [
+    "4.8",
+    "4.9"
+   ],
+   "skill": "2.A",
+   "representative_skill": "2.A",
+   "calculator": "not_allowed",
+   "title": "RunFinder: the longest run in an ArrayList",
+   "stimulus": {
+    "kind": "text",
+    "description": "A data-analysis class uses an ArrayList<Integer> of readings. The class is shown with the header of the method you will write.\n```java\nimport java.util.ArrayList;\n\npublic class RunFinder {\n    /** Returns the length of the longest run of consecutive equal values in data.\n     *  Returns 0 if data is empty. The list data is not modified. */\n    public static int longestRun(ArrayList<Integer> data) { /* to be written */ }\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Write the method longestRun, which returns the length of the longest run of consecutive equal values in the ArrayList data. A run is a sequence of one or more neighboring elements that are equal. The method returns 0 if data is empty and must not modify data. For example, if data is [1, 1, 2, 2, 2, 3] the method returns 3, and if data is [4, 5, 6] the method returns 1. Complete the method longestRun.",
+     "points": 5,
+     "response_mode": "code",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "One correct implementation (ALTON reference answer):\n```java\n    public static int longestRun(ArrayList<Integer> data) {\n        if (data.size() == 0) {\n            return 0;\n        }\n        int best = 1;\n        int run = 1;\n        for (int i = 1; i < data.size(); i++) {\n            if (data.get(i).equals(data.get(i - 1))) {\n                run++;\n            } else {\n                run = 1;\n            }\n            if (run > best) {\n                best = run;\n            }\n        }\n        return best;\n    }\n```",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Handles an empty list by returning 0 without an exception; initializes the counters so a list with one element returns 1",
+       "required_elements": [
+        "data.size() == 0",
+        "return 0",
+        "int best = 1",
+        "int run = 1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "throws an exception",
+        "returns 1",
+        "initializes best to 0"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Traverses the list with correct bounds so every neighboring pair is examined (indexes stay inside the list); compares each value with its neighbor (previous or next element), not with the first element",
+       "required_elements": [
+        "for (int i = 1; i < data.size(); i++)",
+        "data.get(i).equals(data.get(i - 1))"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "reads data.get(i + 1) at the last index",
+        "starts at -1",
+        "compares with data.get(0)"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Compares Integer values with equals (or by unboxing), not with == on objects",
+       "required_elements": [
+        "equals",
+        "or intValue()"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "== on Integer objects"
+       ],
+       "requires_row_id": "A2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A4",
+       "points": 1,
+       "criterion": "Extends the current run length when the values are equal; restarts the current run length at 1 when the values differ",
+       "required_elements": [
+        "run++",
+        "run = 1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "increments for every element",
+        "never resets the run"
+       ],
+       "requires_row_id": "A2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A5",
+       "points": 1,
+       "criterion": "Keeps the maximum run length seen so far (updates it when a run is longer); returns the best length after the traversal and does not modify data",
+       "required_elements": [
+        "if (run > best) best = run",
+        "return best"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "returns the last run",
+        "returns inside the loop",
+        "removes elements"
+       ],
+       "requires_row_id": "A4",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "total_points": 5,
+   "est_minutes": 22,
+   "facts": [
+    "list_cases=9"
+   ],
+   "expected_values": [],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "self_check_tests": [
+    {
+     "part": "a",
+     "call": "ArrayList<Integer> d = new ArrayList<Integer>();  int r = RunFinder.longestRun(d); return r + \"|\" + d;",
+     "expected": "0|[]"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Integer> d = new ArrayList<Integer>(); d.add(5); int r = RunFinder.longestRun(d); return r + \"|\" + d;",
+     "expected": "1|[5]"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Integer> d = new ArrayList<Integer>(); d.add(1); d.add(1); d.add(2); d.add(2); d.add(2); d.add(3); int r = RunFinder.longestRun(d); return r + \"|\" + d;",
+     "expected": "3|[1, 1, 2, 2, 2, 3]"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Integer> d = new ArrayList<Integer>(); d.add(4); d.add(4); d.add(4); d.add(4); int r = RunFinder.longestRun(d); return r + \"|\" + d;",
+     "expected": "4|[4, 4, 4, 4]"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Integer> d = new ArrayList<Integer>(); d.add(1); d.add(2); d.add(3); int r = RunFinder.longestRun(d); return r + \"|\" + d;",
+     "expected": "1|[1, 2, 3]"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Integer> d = new ArrayList<Integer>(); d.add(1); d.add(2); d.add(2); d.add(1); d.add(1); int r = RunFinder.longestRun(d); return r + \"|\" + d;",
+     "expected": "2|[1, 2, 2, 1, 1]"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Integer> d = new ArrayList<Integer>(); d.add(1000); d.add(1000); d.add(1000); int r = RunFinder.longestRun(d); return r + \"|\" + d;",
+     "expected": "3|[1000, 1000, 1000]"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Integer> d = new ArrayList<Integer>(); d.add(3); d.add(3); d.add(2); d.add(3); d.add(3); d.add(3); int r = RunFinder.longestRun(d); return r + \"|\" + d;",
+     "expected": "3|[3, 3, 2, 3, 3, 3]"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Integer> d = new ArrayList<Integer>(); d.add(7); d.add(7); int r = RunFinder.longestRun(d); return r + \"|\" + d;",
+     "expected": "2|[7, 7]"
+    }
+   ],
+   "verification": {
+    "variants": 8,
+    "wrong_failures": [
+     1,
+     3,
+     3,
+     1,
+     1,
+     1
+    ]
+   },
+   "blueprint": {
+    "id": "csf_list_runs",
+    "subject": "ap_computer_science_a",
+    "kind": "frq_bundle",
+    "concept": "ArrayList traversal that compares neighboring elements and keeps a running maximum",
+    "topic": "4.10",
+    "skill": "2.A",
+    "student_thinking": [
+     "Compare neighbors with get(i) and get(i - 1)",
+     "Reset and extend a run counter",
+     "Keep the maximum run"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "the reference and an alternative (nested scan) pass every test; each wrong solution fails at least one",
+      "evidence": "java test run"
+     }
+    ],
+    "material": {
+     "type": "code",
+     "must_include": [
+      "class or method skeleton",
+      "specification with examples"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "javac+java compile and run reference, alternative and wrong solutions; expected values from Python; the == on Integer case uses values above 127",
+     "method": "javac+java unit tests + python reference"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "4.10"
+      ],
+      "points": 5,
+      "accepted_answers": [
+       "One correct implementation (ALTON reference answer):\n```java\n    public static int longestRun(ArrayList<Integer> data) {\n        if (data.size() == 0) {\n            return 0;\n        }\n        int best = 1;\n        int run = 1;\n        for (int i = 1; i < data.size(); i++) {\n            if (data.get(i).equals(data.get(i - 1))) {\n                run++;\n            } else {\n                run = 1;\n            }\n            if (run > best) {\n                best = run;\n            }\n        }\n        return best;\n    }\n```"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Handles an empty list by returning 0 without an exception; initializes the counters so a list with one element returns 1",
+        "elements": [
+         "data.size() == 0",
+         "return 0",
+         "int best = 1",
+         "int run = 1"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Traverses the list with correct bounds so every neighboring pair is examined (indexes stay inside the list); compares each value with its neighbor (previous or next element), not with the first element",
+        "elements": [
+         "for (int i = 1; i < data.size(); i++)",
+         "data.get(i).equals(data.get(i - 1))"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Compares Integer values with equals (or by unboxing), not with == on objects",
+        "elements": [
+         "equals",
+         "or intValue()"
+        ]
+       },
+       {
+        "row_id": "A4",
+        "points": 1,
+        "criterion": "Extends the current run length when the values are equal; restarts the current run length at 1 when the values differ",
+        "elements": [
+         "run++",
+         "run = 1"
+        ]
+       },
+       {
+        "row_id": "A5",
+        "points": 1,
+        "criterion": "Keeps the maximum run length seen so far (updates it when a run is longer); returns the best length after the traversal and does not modify data",
+        "elements": [
+         "if (run > best) best = run",
+         "return best"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9,
+    "judgment_demand": "write correct Java for the stated specification"
+   },
+   "seed": 8410,
+   "pack_id": "csf_list_runs-s8410"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "csf_list_runs",
+   "facts": [
+    "list_cases=9"
+   ],
+   "seed": 8410
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A single 9-point FRQ on an ArrayList traversal that tracks a longest run, which fits topic 4.10 and skill 2.A. The rubric has nine one-point rows, each judging one behavior, and the dependency chain is reasonable. The reference solution is correct and the independent solver produced an equivalent one. The prompt states the empty-list, no-modification, and example conditions. The Integer equals-versus-== trap is a realistic misconception. The task load is a typical single-method FRQ. One minor point: rubric row A3 requires the exact string data.get(i).equals(data.get(i - 1)). An equivalent next-element comparison is allowed by the criterion text, but the required element is too narrow. This is not disqualifying.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The dominant demand is writing an ArrayList traversal algorithm, which matches 4.10 and 2.A. No out-of-scope content is used."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The reference solution is correct, and the independent solver's solution matches it. Valid alternatives such as a nested scan, unboxing with intValue(), or comparing with the next element are acceptable under the criteria text."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The header, the specification, and the two examples are complete and clearly worded."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The common_errors entries per row cover the realistic misconceptions."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of an AP CS A FRQ: one method, no calculator, and a modest amount of reading."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style ArrayList algorithm. The student writes a single traversal that compares adjacent elements, keeps a running count and a running maximum, and handles the empty list. The plausible pitfalls are the off-by-one at the boundary (starting at index 1 or comparing i with i-1), resetting the count correctly, and using .equals() rather than == for Integer objects. All of these are in scope under 4.7 to 4.10. Reading and computation load are minimal, preconditions are clearly stated, and the examples are short, so the difficulty comes from the concept and not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "csa-aud1015",
+  "stockKey": "csa-aud1015:ap_computer_science_a-f02-k907",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "ap_computer_science_a",
+  "itemFamilyId": "fam:csa-s2-frq-b:ap_computer_science_a-f02-k0",
+  "canonicalKey": "csa-aud1015:ap_computer_science_a-f02-k907",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_computer_science_a:4.10",
+  "sharedWith": [],
+  "stockCell": "ap_computer_science_a|4.10|2.A|frq_multipart|not_allowed",
+  "history": [
+   {
+    "run": "csa-aud1015",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null,
+    "derivedFrom": "csa-s2-frq-b:ap_computer_science_a-f02-k0",
+    "auditRow": "AP-037"
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_computer_science_a-f01-k908",
+  "cellId": "ap_computer_science_a-f01",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "frq_bundle",
+  "keywordCode": "4.13",
+  "unitCode": "4",
+  "skillPrimary": "2.A",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "csf_2d_best_row",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard 2D array FRQ-style method: nested traversal to compute row sums, track max and its index, use strict > for the tie rule, and initialize the max safely (the first row's sum or Integer.MIN_VALUE, since values may be negative). Concept depth is moderate and matches a typical full-mock free-response question. Reading and computation load are small, and the difficulty comes only from legitimate levers (boundary and initialization choices, per-row accumulator reset), not from unfair sources.",
+  "payload": {
+   "archetype": "csf_2d_best_row",
+   "template": "q4",
+   "topic": "4.13",
+   "extra_topics": [
+    "4.12"
+   ],
+   "skill": "2.A",
+   "representative_skill": "2.A",
+   "calculator": "not_allowed",
+   "title": "GridStats: the row with the largest sum",
+   "stimulus": {
+    "kind": "text",
+    "description": "A class GridStats analyzes a rectangular two-dimensional array of integers. The class is shown with the header of the method you will write.\n```java\npublic class GridStats {\n    /** Returns the index of the row of grid with the largest sum of its elements.\n     *  If more than one row has the largest sum, returns the smallest such index.\n     *  Precondition: grid has at least one row and every row has at least one element. */\n    public static int bestRow(int[][] grid) { /* to be written */ }\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Write the method bestRow, which returns the index of the row of grid with the largest sum of its elements. If more than one row has the largest sum, the method returns the smallest such row index. For example, if grid is { { 1, 2 }, { 5, 0 }, { 3, 2 } } the row sums are 3, 5 and 5, so bestRow returns 1. Complete the method bestRow.",
+     "points": 6,
+     "response_mode": "code",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "One correct implementation (ALTON reference answer):\n```java\n    public static int bestRow(int[][] grid) {\n        int best = 0;\n        int bestSum = 0;\n        for (int r = 0; r < grid.length; r++) {\n            int sum = 0;\n            for (int c = 0; c < grid[r].length; c++) {\n                sum += grid[r][c];\n            }\n            if (r == 0 || sum > bestSum) {\n                bestSum = sum;\n                best = r;\n            }\n        }\n        return best;\n    }\n```",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Iterates over every row with a loop bounded by grid.length; iterates over every element of the current row with bounds based on grid[r].length (or an enhanced for); accesses elements with the row index first and the column index second",
+       "required_elements": [
+        "for (int r = 0; r < grid.length; r++)",
+        "for (int c = 0; c < grid[r].length; c++)",
+        "grid[r][c]"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses grid[0].length for the rows",
+        "uses grid.length for the columns",
+        "swaps the indexes"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Accumulates the sum of the current row (and resets it for each row)",
+       "required_elements": [
+        "int sum = 0 inside the row loop",
+        "sum += grid[r][c]"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "does not reset the sum",
+        "sums the whole array"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Keeps track of the largest row sum seen so far, initialized so that negative sums work (for example from the first row's sum or with Integer.MIN_VALUE, not an arbitrary fixed value such as -1000000)",
+       "required_elements": [
+        "bestSum initialized to the first row or a very small value"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "initializes to 0"
+       ],
+       "requires_row_id": "A2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A4",
+       "points": 1,
+       "criterion": "Compares the current row sum with the best using a strict comparison so ties keep the smaller index",
+       "required_elements": [
+        "sum > bestSum"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses >= (returns the last tied row)"
+       ],
+       "requires_row_id": "A3",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A5",
+       "points": 1,
+       "criterion": "Records the row index (not the sum) of the best row when a new best is found",
+       "required_elements": [
+        "best = r"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "stores the sum as the index"
+       ],
+       "requires_row_id": "A4",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "A6",
+       "points": 1,
+       "criterion": "Returns the row index after all rows have been examined; the method compiles with correct 2D array syntax and return type int",
+       "required_elements": [
+        "return best",
+        "public static int bestRow(int[][] grid)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "returns inside the loop",
+        "returns the sum",
+        "wrong return type"
+       ],
+       "requires_row_id": "A5",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "total_points": 6,
+   "est_minutes": 22,
+   "facts": [
+    "grids=8"
+   ],
+   "expected_values": [],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "self_check_tests": [
+    {
+     "part": "a",
+     "call": "return GridStats.bestRow(new int[][] { { 5 } });",
+     "expected": "0"
+    },
+    {
+     "part": "a",
+     "call": "return GridStats.bestRow(new int[][] { { 1, 2 }, { 3, 4 } });",
+     "expected": "1"
+    },
+    {
+     "part": "a",
+     "call": "return GridStats.bestRow(new int[][] { { 4, 4 }, { 1, 7 }, { 8, 0 } });",
+     "expected": "0"
+    },
+    {
+     "part": "a",
+     "call": "return GridStats.bestRow(new int[][] { { -5, -1 }, { -2, -2 }, { -9, 1 } });",
+     "expected": "1"
+    },
+    {
+     "part": "a",
+     "call": "return GridStats.bestRow(new int[][] { { 1, 1, 1 }, { 3, 0, 0 }, { 0, 2, 1 } });",
+     "expected": "0"
+    },
+    {
+     "part": "a",
+     "call": "return GridStats.bestRow(new int[][] { { 0, 9 }, { 9, 0 } });",
+     "expected": "0"
+    },
+    {
+     "part": "a",
+     "call": "return GridStats.bestRow(new int[][] { { 2, 9, 1 }, { 5, 5, 5 } });",
+     "expected": "1"
+    },
+    {
+     "part": "a",
+     "call": "return GridStats.bestRow(new int[][] { { -1 }, { -3 }, { -2 } });",
+     "expected": "0"
+    }
+   ],
+   "verification": {
+    "variants": 7,
+    "wrong_failures": [
+     3,
+     8,
+     1,
+     1,
+     3
+    ]
+   },
+   "blueprint": {
+    "id": "csf_2d_best_row",
+    "subject": "ap_computer_science_a",
+    "kind": "frq_bundle",
+    "concept": "2D array row traversal with a running maximum and tie rule",
+    "topic": "4.13",
+    "skill": "2.A",
+    "student_thinking": [
+     "Sum each row with nested loops",
+     "Track the best sum and its index",
+     "Break ties toward the smaller index"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "the reference and an alternative (separate sums array) pass every test; each wrong solution fails at least one",
+      "evidence": "java test run"
+     }
+    ],
+    "material": {
+     "type": "code",
+     "must_include": [
+      "class or method skeleton",
+      "specification with examples"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "javac+java compile and run reference, alternative and wrong solutions; expected values from Python",
+     "method": "javac+java unit tests + python reference"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "4.13"
+      ],
+      "points": 6,
+      "accepted_answers": [
+       "One correct implementation (ALTON reference answer):\n```java\n    public static int bestRow(int[][] grid) {\n        int best = 0;\n        int bestSum = 0;\n        for (int r = 0; r < grid.length; r++) {\n            int sum = 0;\n            for (int c = 0; c < grid[r].length; c++) {\n                sum += grid[r][c];\n            }\n            if (r == 0 || sum > bestSum) {\n                bestSum = sum;\n                best = r;\n            }\n        }\n        return best;\n    }\n```"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Iterates over every row with a loop bounded by grid.length; iterates over every element of the current row with bounds based on grid[r].length (or an enhanced for); accesses elements with the row index first and the column index second",
+        "elements": [
+         "for (int r = 0; r < grid.length; r++)",
+         "for (int c = 0; c < grid[r].length; c++)",
+         "grid[r][c]"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Accumulates the sum of the current row (and resets it for each row)",
+        "elements": [
+         "int sum = 0 inside the row loop",
+         "sum += grid[r][c]"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Keeps track of the largest row sum seen so far, initialized so that negative sums work (for example from the first row's sum or with Integer.MIN_VALUE, not an arbitrary fixed value such as -1000000)",
+        "elements": [
+         "bestSum initialized to the first row or a very small value"
+        ]
+       },
+       {
+        "row_id": "A4",
+        "points": 1,
+        "criterion": "Compares the current row sum with the best using a strict comparison so ties keep the smaller index",
+        "elements": [
+         "sum > bestSum"
+        ]
+       },
+       {
+        "row_id": "A5",
+        "points": 1,
+        "criterion": "Records the row index (not the sum) of the best row when a new best is found",
+        "elements": [
+         "best = r"
+        ]
+       },
+       {
+        "row_id": "A6",
+        "points": 1,
+        "criterion": "Returns the row index after all rows have been examined; the method compiles with correct 2D array syntax and return type int",
+        "elements": [
+         "return best",
+         "public static int bestRow(int[][] grid)"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9,
+    "judgment_demand": "write correct Java for the stated specification"
+   },
+   "seed": 8600,
+   "pack_id": "csf_2d_best_row-s8600"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "csf_2d_best_row",
+   "facts": [
+    "grids=8"
+   ],
+   "seed": 8600
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A standard 2D-array row-sum algorithm FRQ that fits 4.13 and skill 2.A. The rubric rows are single-behavior and consistent with the reference, and the independent alternative (initialized from row 0) is accepted by A5. The stimulus gives the header, the tie rule, the precondition and an example. One minor weakness: the reference sentinel of -1000000 is not safe for unbounded ints, but the rubric also accepts initializing from the first row.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Dominant demand is implementing a 2D traversal algorithm (row sums, running maximum, tie rule), matching 4.13/2.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Rubric rows map to the reference. A5 permits both the sentinel and the first-row initialization. The -1000000 sentinel is a minor weakness since values are not bounded."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The header, the precondition, the tie rule and an example are all given. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ. The rubric common_errors cover the typical mistakes: >=, no sum reset, swapped indexes, initializing to 0."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A typical 9-point CED-style 2D array FRQ with no calculator load and modest reading."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard 2D array FRQ-style method: nested traversal to compute row sums, track max and its index, use strict > for the tie rule, and initialize the max safely (the first row's sum or Integer.MIN_VALUE, since values may be negative). Concept depth is moderate and matches a typical full-mock free-response question. Reading and computation load are small, and the difficulty comes only from legitimate levers (boundary and initialization choices, per-row accumulator reset), not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "csa-aud1015",
+  "stockKey": "csa-aud1015:ap_computer_science_a-f01-k908",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "ap_computer_science_a",
+  "itemFamilyId": "fam:csa-s2-short-frq:ap_computer_science_a-f01-k0",
+  "canonicalKey": "csa-aud1015:ap_computer_science_a-f01-k908",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_computer_science_a:4.13",
+  "sharedWith": [],
+  "stockCell": "ap_computer_science_a|4.13|2.A|frq_multipart|not_allowed",
+  "history": [
+   {
+    "run": "csa-aud1015",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null,
+    "derivedFrom": "csa-s2-short-frq:ap_computer_science_a-f01-k0",
+    "auditRow": "AP-037"
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_computer_science_a-m03-k909",
+  "cellId": "ap_computer_science_a-m03",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "mc",
+  "keywordCode": "1.2",
+  "unitCode": "1",
+  "skillPrimary": "3.D",
+  "structure": "standalone",
+  "calculator": "not_allowed",
+  "archetype": "cs_compile_error",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: match each declared type to its initializer. The only compile error is assigning a String literal to an int. The distractors (char literal, boolean expression, int widened to long) are all valid and standard for topic 1.2. It needs one reasoning step, with no tracing, arithmetic, or heavy reading, which is below full-mock exam level.",
+  "payload": {
+   "archetype": "cs_compile_error",
+   "topic": "1.2",
+   "skill": "3.D",
+   "calculator": "not_allowed",
+   "stem": "Which of the following statements, if placed in a main method, causes a compile-time error?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "`String s = \"x\";`",
+     "why": "This statement compiles: A String literal can be assigned to a String variable.",
+     "value": null
+    },
+    {
+     "text": "`boolean ok = 3 > 2;`",
+     "why": "This statement compiles: A relational expression produces a boolean.",
+     "value": null
+    },
+    {
+     "text": "`double big = 12;`",
+     "why": "This statement compiles: An int can be assigned to a double.",
+     "value": null
+    },
+    {
+     "text": "`int m = \"7\";`",
+     "why": "A String cannot be assigned to an int.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 60,
+   "facts": [
+    "bad=int m = \"7\";"
+   ],
+   "blueprint": {
+    "id": "cs_compile_error",
+    "subject": "ap_computer_science_a",
+    "kind": "mc",
+    "concept": "Java type rules for declarations and assignments",
+    "topic": "1.2",
+    "skill": "3.D",
+    "student_thinking": [
+     "decide whether each statement is type-correct",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "exactly one statement fails javac in a main method",
+      "evidence": "javac run on each statement"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "This statement compiles: A String literal can be assigned to a String variable."
+     },
+     {
+      "id": "m2",
+      "description": "This statement compiles: A relational expression produces a boolean."
+     },
+     {
+      "id": "m3",
+      "description": "This statement compiles: An int can be assigned to a double."
+     }
+    ],
+    "verification": {
+     "independent_path": "javac compiles each candidate statement inside a main method",
+     "method": "javac compile of each option"
+    },
+    "judgment_demand": "apply Java assignment-compatibility rules"
+   },
+   "seed": 8100,
+   "pack_id": "cs_compile_error-s8100",
+   "explanation_en": "The correct answer is `int m = \"7\";`. A String cannot be assigned to an int.\n`String s = \"x\";` is incorrect: This statement compiles: A String literal can be assigned to a String variable.\n`boolean ok = 3 `>` 2;` is incorrect: This statement compiles: A relational expression produces a boolean.\n`double big = 12;` is incorrect: This statement compiles: An int can be assigned to a double."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "cs_compile_error",
+   "facts": [
+    "bad=int m = \"7\";"
+   ],
+   "seed": 8100
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 60 seconds with minimal reading, no arithmetic, and no calculator. This matches the reference pattern for a short MC item.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous compile-error identification for topic 1.2. The key is unique and correct, the distractors are parallel with explanations, and the time load is appropriate."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: match each declared type to its initializer. The only compile error is assigning a String literal to an int. The distractors (char literal, boolean expression, int widened to long) are all valid and standard for topic 1.2. It needs one reasoning step, with no tracing, arithmetic, or heavy reading, which is below full-mock exam level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "csa-aud1015",
+  "stockKey": "csa-aud1015:ap_computer_science_a-m03-k909",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "ap_computer_science_a",
+  "itemFamilyId": "fam:csa-p1-a:ap_computer_science_a-m03-k0",
+  "canonicalKey": "csa-aud1015:ap_computer_science_a-m03-k909",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_computer_science_a:1.2",
+  "sharedWith": [],
+  "stockCell": "ap_computer_science_a|1.2|3.D|standalone|not_allowed",
+  "history": [
+   {
+    "run": "csa-aud1015",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null,
+    "derivedFrom": "csa-p1-a:ap_computer_science_a-m03-k0",
+    "auditRow": "AP-031"
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_computer_science_a-m13-k910",
+  "cellId": "ap_computer_science_a-m13",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "mc",
+  "keywordCode": "4.16",
+  "unitCode": "4",
+  "skillPrimary": "2.A",
+  "structure": "standalone",
+  "calculator": "not_allowed",
+  "archetype": "cs_recursion_completion",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Standard recursive power method. The solver needs to identify the correct base case (exp == 0 returns 1) and the recursive step (base * power(base, exp - 1)). The distractors are plain near-misses: wrong base case (exp == 1 fails for exp = 0), addition instead of multiplication, and no progress toward the base case (infinite recursion). Few reasoning steps, minimal reading, no computation, and no representation changes. This is a common introductory recursion exercise.",
+  "payload": {
+   "archetype": "cs_recursion_completion",
+   "topic": "4.16",
+   "skill": "2.A",
+   "calculator": "not_allowed",
+   "stem": "The method power is intended to return base raised to the power exp, where exp is a non-negative integer. Which of the following can replace /* missing code */ so that power works as intended?",
+   "stimulus": {
+    "kind": "text",
+    "description": "```java\nclass Rec {\n    /** Returns base raised to the power exp, where exp is a non-negative integer. */\n    public static int power(int base, int exp) {\n        /* missing code */\n    }\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "options": [
+    {
+     "text": "```\nint result = 1;\n        for (int i = 0; i < exp; i++) {\n            result *= base;\n        }\n        return result;\n```",
+     "why": "The loop multiplies result by base exactly exp times, starting from 1, so power returns base raised to the power exp (and 1 when exp is 0).",
+     "value": null
+    },
+    {
+     "text": "```\nint result = 1;\n        for (int i = 0; i <= exp; i++) {\n            result *= base;\n        }\n        return result;\n```",
+     "why": "Loops one time too many, so power(base, exp) returns base raised to the power exp + 1.",
+     "value": null
+    },
+    {
+     "text": "```\nint result = 1;\n        for (int i = 0; i < exp; i++) {\n            result += base;\n        }\n        return result;\n```",
+     "why": "Adds base instead of multiplying by it.",
+     "value": null
+    },
+    {
+     "text": "```\nint result = 1;\n        for (int i = 1; i < exp; i++) {\n            result *= base;\n        }\n        return result;\n```",
+     "why": "Starts the counter at 1, so the loop multiplies only exp - 1 times.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 100,
+   "facts": [
+    "tests=4",
+    "iterative power"
+   ],
+   "blueprint": {
+    "id": "cs_recursion_completion",
+    "subject": "ap_computer_science_a",
+    "kind": "mc",
+    "concept": "an iterative loop needs the correct starting value, accumulation operator and number of repetitions",
+    "topic": "4.16",
+    "skill": "2.A",
+    "student_thinking": [
+     "read the code and decide which candidate satisfies the specification for every input",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "the key passes every test case when compiled and run",
+      "evidence": "javac and java run"
+     },
+     {
+      "condition": "each distractor fails at least one test case",
+      "evidence": "java test run"
+     }
+    ],
+    "material": {
+     "type": "code",
+     "must_include": [
+      "the code segment"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Loops one time too many."
+     },
+     {
+      "id": "m2",
+      "description": "Adds instead of multiplying."
+     },
+     {
+      "id": "m3",
+      "description": "Starts the counter at 1."
+     }
+    ],
+    "verification": {
+     "independent_path": "each candidate compiled and run on exponents 0, 1 and larger (non-terminating candidates end in StackOverflowError)",
+     "method": "javac+java unit tests + python reference tests"
+    },
+    "judgment_demand": "test candidates against boundary cases"
+   },
+   "test_cases": [
+    {
+     "call": "return Rec.power(2, 0);",
+     "expected": "1"
+    },
+    {
+     "call": "return Rec.power(2, 5);",
+     "expected": "32"
+    },
+    {
+     "call": "return Rec.power(3, 3);",
+     "expected": "27"
+    },
+    {
+     "call": "return Rec.power(5, 1);",
+     "expected": "5"
+    }
+   ],
+   "seed": 8320,
+   "pack_id": "cs_recursion_completion-s8320",
+   "explanation_en": "The correct answer is ```\nint result = 1;\n        for (int i = 0; i < exp; i++) {\n            result *= base;\n        }\n        return result;\n```. The loop multiplies result by base exactly exp times, starting from 1, so power returns base raised to the power exp (and 1 when exp is 0).\n```\nint result = 1;\n        for (int i = 0; i <= exp; i++) {\n            result *= base;\n        }\n        return result;\n``` is incorrect: Loops one time too many, so power(base, exp) returns base raised to the power exp + 1.\n```\nint result = 1;\n        for (int i = 0; i < exp; i++) {\n            result += base;\n        }\n        return result;\n``` is incorrect: Adds base instead of multiplying by it.\n```\nint result = 1;\n        for (int i = 1; i < exp; i++) {\n            result *= base;\n        }\n        return result;\n``` is incorrect: Starts the counter at 1, so the loop multiplies only exp - 1 times."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "cs_recursion_completion",
+   "facts": [
+    "tests=4",
+    "failing=[0, 4, 3, 3]"
+   ],
+   "seed": 8320
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60-100 seconds, needs no calculator, and has a low reading load. It is typical of AP CS A recursion items.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, correct recursion code-completion question with a unique key and three distinct, plausible distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard recursive power method. The solver needs to identify the correct base case (exp == 0 returns 1) and the recursive step (base * power(base, exp - 1)). The distractors are plain near-misses: wrong base case (exp == 1 fails for exp = 0), addition instead of multiplication, and no progress toward the base case (infinite recursion). Few reasoning steps, minimal reading, no computation, and no representation changes. This is a common introductory recursion exercise.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "csa-aud1015",
+  "stockKey": "csa-aud1015:ap_computer_science_a-m13-k910",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "ap_computer_science_a",
+  "itemFamilyId": "fam:csa-s2-mc-c:ap_computer_science_a-m13-k0",
+  "canonicalKey": "csa-aud1015:ap_computer_science_a-m13-k910",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_computer_science_a:4.16",
+  "sharedWith": [],
+  "stockCell": "ap_computer_science_a|4.16|2.A|standalone|not_allowed",
+  "history": [
+   {
+    "run": "csa-aud1015",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null,
+    "derivedFrom": "csa-s2-mc-c:ap_computer_science_a-m13-k0",
+    "auditRow": "AP-034"
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_computer_science_a-m03-k911",
+  "cellId": "ap_computer_science_a-m03",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "mc",
+  "keywordCode": "1.5",
+  "unitCode": "1",
+  "skillPrimary": "3.A",
+  "structure": "standalone",
+  "calculator": "not_allowed",
+  "archetype": "cs_char_arith",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Requires knowing that char arithmetic promotes to int, that an explicit (char) cast is needed to get a char back, and that string concatenation evaluates left to right with the parenthesized (ch + 1) staying an int. Distractors are plausible near-misses (treating ch+1 as char or as 5, printing next as int). Short code, simple arithmetic (101, 97, 102), about 4 reasoning steps, in scope for topic 1.5.",
+  "payload": {
+   "archetype": "cs_char_arith",
+   "topic": "1.5",
+   "skill": "3.A",
+   "calculator": "not_allowed",
+   "stem": "What is printed as a result of executing the code segment?",
+   "stimulus": {
+    "kind": "text",
+    "description": "```java\nint n = 17;\nint q = n / 5;\nint r = n % 5;\ndouble avg = (double) n / 5;\nSystem.out.println(q + \" \" + r + \" \" + avg);\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "options": [
+    {
+     "text": "`3 2 3.0`",
+     "why": "Believes the cast applies after the integer division; (double) n / 5 casts n first, so the division is a double division.",
+     "value": null
+    },
+    {
+     "text": "`3.4 2 3.4`",
+     "why": "Believes q keeps the fraction; q is an int, so n / 5 is truncated to 3.",
+     "value": null
+    },
+    {
+     "text": "`3 2 3.4`",
+     "why": "n / 5 is integer division (3), n % 5 is 2, and (double) n / 5 divides 17.0 by 5, giving 3.4. Tracing the code gives 3 2 3.4.",
+     "value": null
+    },
+    {
+     "text": "`4 2 3.4`",
+     "why": "Believes integer division rounds to the nearest integer; it truncates toward zero.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 95,
+   "facts": [
+    "n=17",
+    "key=3 2 3.4"
+   ],
+   "blueprint": {
+    "id": "cs_char_arith",
+    "subject": "ap_computer_science_a",
+    "kind": "mc",
+    "concept": "integer division truncates; casting an operand to double makes the division a double division",
+    "topic": "1.5",
+    "skill": "3.A",
+    "student_thinking": [
+     "trace the code or reason about its behavior without running it",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "the key is the output of compiling and running the code with the JDK",
+      "evidence": "javac and java run"
+     },
+     {
+      "condition": "a second implementation in Python gives the same value",
+      "evidence": "python reference"
+     }
+    ],
+    "material": {
+     "type": "code",
+     "must_include": [
+      "the code segment"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Believes the cast applies after the integer division."
+     },
+     {
+      "id": "m2",
+      "description": "Believes q keeps the fraction."
+     },
+     {
+      "id": "m3",
+      "description": "Believes integer division rounds."
+     }
+    ],
+    "verification": {
+     "independent_path": "javac+java output vs Python integer and float arithmetic",
+     "method": "javac+java execution + python reference"
+    },
+    "judgment_demand": "trace the code and avoid the named misconception"
+   },
+   "seed": 8301,
+   "pack_id": "cs_char_arith-s8301",
+   "explanation_en": "The correct answer is `3 2 3.4`. n / 5 is integer division (3), n % 5 is 2, and (double) n / 5 divides 17.0 by 5, giving 3.4. Tracing the code gives 3 2 3.4.\n`3 2 3.0` is incorrect: Believes the cast applies after the integer division; (double) n / 5 casts n first, so the division is a double division.\n`3.4 2 3.4` is incorrect: Believes q keeps the fraction; q is an int, so n / 5 is truncated to 3.\n`4 2 3.4` is incorrect: Believes integer division rounds to the nearest integer; it truncates toward zero."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "cs_char_arith",
+   "facts": [
+    "ch=e",
+    "k=2",
+    "key=4 g 102"
+   ],
+   "seed": 8301
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct unique key `4 g 102`. Distractors map to distinct misconceptions. Topic 1.5 and skill 3.A fit, and the item is short and exam-like. One distractor rationale is slightly weak but acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires knowing that char arithmetic promotes to int, that an explicit (char) cast is needed to get a char back, and that string concatenation evaluates left to right with the parenthesized (ch + 1) staying an int. Distractors are plausible near-misses (treating ch+1 as char or as 5, printing next as int). Short code, simple arithmetic (101, 97, 102), about 4 reasoning steps, in scope for topic 1.5.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "csa-aud1015",
+  "stockKey": "csa-aud1015:ap_computer_science_a-m03-k911",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "ap_computer_science_a",
+  "itemFamilyId": "fam:csa-s2-mc-a:ap_computer_science_a-m03-k0",
+  "canonicalKey": "csa-aud1015:ap_computer_science_a-m03-k911",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_computer_science_a:1.5",
+  "sharedWith": [],
+  "stockCell": "ap_computer_science_a|1.5|3.A|standalone|not_allowed",
+  "history": [
+   {
+    "run": "csa-aud1015",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null,
+    "derivedFrom": "csa-s2-mc-a:ap_computer_science_a-m03-k1",
+    "auditRow": "AP-040"
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_computer_science_a-m01-k912",
+  "cellId": "ap_computer_science_a-m01",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "mc",
+  "keywordCode": "4.9",
+  "unitCode": "4",
+  "skillPrimary": "4.A",
+  "structure": "standalone",
+  "calculator": "not_allowed",
+  "archetype": "cs_describe_list",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Short ArrayList traversal that finds the index of the maximum. The student must distinguish index from value and recognize that strict > preserves the first occurrence on ties. Distractors are plausible near-misses (value vs. index, first vs. last). No long traces or heavy arithmetic. Typical full-mock describe-behavior item.",
+  "payload": {
+   "archetype": "cs_describe_list",
+   "topic": "4.9",
+   "skill": "4.A",
+   "calculator": "not_allowed",
+   "stem": "Assume that list contains at least one element. Which of the following best describes the value returned by the method mystery?",
+   "stimulus": {
+    "kind": "text",
+    "description": "```java\nclass Probe {\n    public static int mystery(ArrayList<Integer> list) {\n        int best = 0;\n        for (int i = 1; i < list.size(); i++) {\n            if (list.get(i) > list.get(best)) {\n                best = i;\n            }\n        }\n        return best;\n    }\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "options": [
+    {
+     "text": "the index of the last occurrence of the largest value in the list",
+     "why": "Believes a tie replaces the stored position. For instance, Probe.mystery(list) with list = [5, 5, 2] returns 0, but this description would give 1.",
+     "value": null
+    },
+    {
+     "text": "the largest value in the list",
+     "why": "Believes the variable tracks the value rather than the position. For instance, Probe.mystery(list) with list = [3, 9, 4] returns 1, but this description would give 9.",
+     "value": null
+    },
+    {
+     "text": "the index of the first occurrence of the largest value in the list",
+     "why": "The loop does exactly what this description says. For example, Probe.mystery(list) with list = [3, 9, 4] returns 1.",
+     "value": null
+    },
+    {
+     "text": "the number of values in the list that are greater than the first value",
+     "why": "Believes best counts the larger values. For instance, Probe.mystery(list) with list = [3, 9, 4] returns 1, but this description would give 2.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 85,
+   "facts": [
+    "family=list_best",
+    "tests=7"
+   ],
+   "blueprint": {
+    "id": "cs_describe_list",
+    "subject": "ap_computer_science_a",
+    "kind": "mc",
+    "concept": "describe the behavior of a code segment",
+    "topic": "4.9",
+    "skill": "4.A",
+    "student_thinking": [
+     "work out what the loop computes and compare with each description",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "the key description holds on every test input run through the JDK",
+      "evidence": "javac+java test run"
+     },
+     {
+      "condition": "each distractor description fails on at least one input",
+      "evidence": "java test run"
+     }
+    ],
+    "material": {
+     "type": "code",
+     "must_include": [
+      "the code segment"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Believes a tie replaces the stored position. For instance, Probe.mystery(list) with list = [5, 5, 2] returns 0, but this description would give 1."
+     },
+     {
+      "id": "m2",
+      "description": "Believes the variable tracks the value rather than the position. For instance, Probe.mystery(list) with list = [3, 9, 4] returns 1, but this description would give 9."
+     },
+     {
+      "id": "m3",
+      "description": "Believes best counts the larger values. For instance, Probe.mystery(list) with list = [3, 9, 4] returns 1, but this description would give 2."
+     }
+    ],
+    "verification": {
+     "independent_path": "javac+java runs the method on 5 or more inputs; each English description has a Python predicate that must agree (key) or disagree (distractors)",
+     "method": "javac+java + python predicates"
+    },
+    "judgment_demand": "generalize from code to an English description"
+   },
+   "seed": 8501,
+   "pack_id": "cs_describe_list-s8501",
+   "explanation_en": "The correct answer is the index of the first occurrence of the largest value in the list. The loop does exactly what this description says. For example, Probe.mystery(list) with list = [3, 9, 4] returns 1.\nthe index of the last occurrence of the largest value in the list is incorrect: Believes a tie replaces the stored position. For instance, Probe.mystery(list) with list = [5, 5, 2] returns 0, but this description would give 1.\nthe largest value in the list is incorrect: Believes the variable tracks the value rather than the position. For instance, Probe.mystery(list) with list = [3, 9, 4] returns 1, but this description would give 9.\nthe number of values in the list that are greater than the first value is incorrect: Believes best counts the larger values. For instance, Probe.mystery(list) with list = [3, 9, 4] returns 1, but this description would give 2."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "cs_describe_list",
+   "facts": [
+    "family=list_best",
+    "tests=7"
+   ],
+   "seed": 8501
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "ArrayList traversal, describe code behavior; fits 4.9/4.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Strict > keeps first max index; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete code listing; clear wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor is a distinct misconception with a counterexample input; all explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, no calculator load, typical AP style."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is the unique correct answer, the distractors are distinct and each fails on a concrete input, and the item is in scope and fits the exam format."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Short ArrayList traversal that finds the index of the maximum. The student must distinguish index from value and recognize that strict > preserves the first occurrence on ties. Distractors are plausible near-misses (value vs. index, first vs. last). No long traces or heavy arithmetic. Typical full-mock describe-behavior item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "csa-aud1015",
+  "stockKey": "csa-aud1015:ap_computer_science_a-m01-k912",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "ap_computer_science_a",
+  "itemFamilyId": "fam:csa-s2-short-mc:ap_computer_science_a-m01-k1",
+  "canonicalKey": "csa-aud1015:ap_computer_science_a-m01-k912",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_computer_science_a:4.9",
+  "sharedWith": [],
+  "stockCell": "ap_computer_science_a|4.9|4.A|standalone|not_allowed",
+  "history": [
+   {
+    "run": "csa-aud1015",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null,
+    "derivedFrom": "csa-s2-short-mc:ap_computer_science_a-m01-k1",
+    "auditRow": "AP-041"
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_computer_science_a-m90-k0",
+  "cellId": "ap_computer_science_a-m90",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "mc",
+  "keywordCode": "4.1",
+  "unitCode": "4",
+  "skillPrimary": "5.A",
+  "structure": "standalone",
+  "calculator": "not_allowed",
+  "archetype": "cs_responsible_privacy",
+  "wording": "llm",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Practice 5 (use computers responsibly) item: the student must judge the societal or ethical effect of a data or design decision. Short reading, no calculation, one clearly best statement.",
+  "payload": {
+   "archetype": "cs_responsible_privacy",
+   "topic": "4.1",
+   "skill": "5.A",
+   "calculator": "not_allowed",
+   "stem": "A school district records how long each student spends on each page of its online homework portal. The district plans to give this data, labeled with student names, to a private company that builds study-habit apps. Which of the following is the most significant privacy concern with this plan?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The data is useful only if every student spends exactly the same amount of time on every page.",
+     "why": "This is not a privacy concern; data about differences between students is exactly what makes such data informative.",
+     "value": null
+    },
+    {
+     "text": "The data could be used to profile individual students, and to share information about them, without their knowledge or consent.",
+     "why": "The data identifies each student and describes their behavior, so giving it to a third party can expose personal information the students never agreed to share.",
+     "value": null
+    },
+    {
+     "text": "Data collected by a school district automatically becomes public domain, so anyone may copy it.",
+     "why": "Collecting data does not make it public domain; the concern is who may access the data and for what purpose.",
+     "value": null
+    },
+    {
+     "text": "Recording page times makes the portal load too slowly for students to finish their homework.",
+     "why": "This is a performance concern, not a privacy concern.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 60,
+   "facts": [
+    "practice 5.A"
+   ],
+   "blueprint": {
+    "id": "cs_responsible_privacy",
+    "subject": "ap_computer_science_a",
+    "kind": "mc",
+    "concept": "personal data collected by a program can harm privacy when it is linked to individuals and shared without consent",
+    "topic": "4.1",
+    "skill": "5.A",
+    "student_thinking": [
+     "Identify what personal information the program collects",
+     "Decide who gains access to it and whether the people involved agreed",
+     "Rule out concerns that are about performance or ownership rather than privacy"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "exactly one option follows from the scenario",
+      "evidence": "reasoning about the stated data or design decision"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "This is not a privacy concern; data about differences between students is exactly what makes such data informative."
+     },
+     {
+      "id": "m3",
+      "description": "Collecting data does not make it public domain; the concern is who may access the data and for what purpose."
+     },
+     {
+      "id": "m4",
+      "description": "This is a performance concern, not a privacy concern."
+     }
+    ],
+    "verification": {
+     "independent_path": "reasoning only (Practice 5); expert review recommended",
+     "method": "reasoning"
+    },
+    "judgment_demand": "judge the effect of a computing decision on people"
+   },
+   "seed": 0,
+   "pack_id": "cs_responsible_privacy-ap_computer_science_a-m90-k0",
+   "explanation_en": "The correct answer is The data could be used to profile individual students, and to share information about them, without their knowledge or consent.. The data identifies each student and describes their behavior, so giving it to a third party can expose personal information the students never agreed to share.\nThe data is useful only if every student spends exactly the same amount of time on every page. is incorrect: This is not a privacy concern; data about differences between students is exactly what makes such data informative.\nData collected by a school district automatically becomes public domain, so anyone may copy it. is incorrect: Collecting data does not make it public domain; the concern is who may access the data and for what purpose.\nRecording page times makes the portal load too slowly for students to finish their homework. is incorrect: This is a performance concern, not a privacy concern."
+  },
+  "verification": {
+   "generatedByCode": false,
+   "archetype": "cs_responsible_privacy",
+   "facts": [
+    "practice 5.A",
+    "reasoning item; key is the one statement that follows from the scenario"
+   ],
+   "seed": 0
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 4.1; Practice 5 explain how computing affects society."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "One option follows from the stated scenario; each distractor is false or irrelevant to the stated concern."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Short scenario, no code."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Practice 5 reasoning item; not verifiable by running code, so expert review is recommended before wider use."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Practice 5 (use computers responsibly) item: the student must judge the societal or ethical effect of a data or design decision. Short reading, no calculation, one clearly best statement."
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "csa-aud1015",
+  "stockKey": "csa-aud1015:ap_computer_science_a-m90-k0",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "ap_computer_science_a",
+  "itemFamilyId": "fam:csa-aud1015:ap_computer_science_a-m90-k0",
+  "canonicalKey": "csa-aud1015:ap_computer_science_a-m90-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_computer_science_a:4.1",
+  "sharedWith": [],
+  "stockCell": "ap_computer_science_a|4.1|5.A|standalone|not_allowed",
+  "history": [
+   {
+    "run": "csa-aud1015",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null,
+    "derivedFrom": "csa-s2-short-mc:ap_computer_science_a-m01-k1",
+    "auditRow": "AP-033"
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_computer_science_a-m91-k0",
+  "cellId": "ap_computer_science_a-m91",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "mc",
+  "keywordCode": "3.2",
+  "unitCode": "3",
+  "skillPrimary": "5.A",
+  "structure": "standalone",
+  "calculator": "not_allowed",
+  "archetype": "cs_responsible_bias",
+  "wording": "llm",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Practice 5 (use computers responsibly) item: the student must judge the societal or ethical effect of a data or design decision. Short reading, no calculation, one clearly best statement.",
+  "payload": {
+   "archetype": "cs_responsible_bias",
+   "topic": "3.2",
+   "skill": "5.A",
+   "calculator": "not_allowed",
+   "stem": "A company writes a program that screens job applications. The program learns its rules from the applications of employees the company hired during the past ten years, and nearly all of those employees graduated from the same few universities. Which of the following is the most likely effect of this design?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The program will treat all applicants fairly because a computer has no opinions of its own.",
+     "why": "A program inherits patterns from the data it learns from, so it can repeat past unfairness; being a computer does not make it neutral.",
+     "value": null
+    },
+    {
+     "text": "The program will run correctly only on computers made by the same company that wrote it.",
+     "why": "The fairness of the screening does not depend on the manufacturer of the computer.",
+     "value": null
+    },
+    {
+     "text": "The program may favor applicants from those universities and unfairly screen out qualified applicants from other backgrounds.",
+     "why": "The program learned from a narrow, historical set of hires, so its rules can reproduce that bias and affect which applicants are considered.",
+     "value": null
+    },
+    {
+     "text": "The program will become more accurate over time no matter what data it is given.",
+     "why": "Accuracy depends on the quality and variety of the data; biased data does not produce unbiased results.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 60,
+   "facts": [
+    "practice 5.A"
+   ],
+   "blueprint": {
+    "id": "cs_responsible_bias",
+    "subject": "ap_computer_science_a",
+    "kind": "mc",
+    "concept": "a program trained on narrow or biased historical data can reproduce that bias in its decisions",
+    "topic": "3.2",
+    "skill": "5.A",
+    "student_thinking": [
+     "Identify where the program's rules come from",
+     "Decide whether that source represents all applicants",
+     "Judge the effect of the design on the people it affects"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "exactly one option follows from the scenario",
+      "evidence": "reasoning about the stated data or design decision"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "A program inherits patterns from the data it learns from, so it can repeat past unfairness; being a computer does not make it neutral."
+     },
+     {
+      "id": "m2",
+      "description": "The fairness of the screening does not depend on the manufacturer of the computer."
+     },
+     {
+      "id": "m4",
+      "description": "Accuracy depends on the quality and variety of the data; biased data does not produce unbiased results."
+     }
+    ],
+    "verification": {
+     "independent_path": "reasoning only (Practice 5); expert review recommended",
+     "method": "reasoning"
+    },
+    "judgment_demand": "judge the effect of a computing decision on people"
+   },
+   "seed": 0,
+   "pack_id": "cs_responsible_bias-ap_computer_science_a-m91-k0",
+   "explanation_en": "The correct answer is The program may favor applicants from those universities and unfairly screen out qualified applicants from other backgrounds.. The program learned from a narrow, historical set of hires, so its rules can reproduce that bias and affect which applicants are considered.\nThe program will treat all applicants fairly because a computer has no opinions of its own. is incorrect: A program inherits patterns from the data it learns from, so it can repeat past unfairness; being a computer does not make it neutral.\nThe program will run correctly only on computers made by the same company that wrote it. is incorrect: The fairness of the screening does not depend on the manufacturer of the computer.\nThe program will become more accurate over time no matter what data it is given. is incorrect: Accuracy depends on the quality and variety of the data; biased data does not produce unbiased results."
+  },
+  "verification": {
+   "generatedByCode": false,
+   "archetype": "cs_responsible_bias",
+   "facts": [
+    "practice 5.A",
+    "reasoning item; key is the one statement that follows from the scenario"
+   ],
+   "seed": 0
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.2; Practice 5 explain how computing affects society."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "One option follows from the stated scenario; each distractor is false or irrelevant to the stated concern."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Short scenario, no code."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Practice 5 reasoning item; not verifiable by running code, so expert review is recommended before wider use."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Practice 5 (use computers responsibly) item: the student must judge the societal or ethical effect of a data or design decision. Short reading, no calculation, one clearly best statement."
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "csa-aud1015",
+  "stockKey": "csa-aud1015:ap_computer_science_a-m91-k0",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "ap_computer_science_a",
+  "itemFamilyId": "fam:csa-aud1015:ap_computer_science_a-m91-k0",
+  "canonicalKey": "csa-aud1015:ap_computer_science_a-m91-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_computer_science_a:3.2",
+  "sharedWith": [],
+  "stockCell": "ap_computer_science_a|3.2|5.A|standalone|not_allowed",
+  "history": [
+   {
+    "run": "csa-aud1015",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null,
+    "derivedFrom": "csa-s2-short-mc:ap_computer_science_a-m01-k1",
+    "auditRow": "AP-043"
+   }
+  ]
+ }
+]

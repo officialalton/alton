@@ -1,0 +1,52 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "CH2",
+ "sourceSetName": "AP Chemistry — Practice Exam 2",
+ "sourceVersionNo": 1,
+ "generatedBy": "scripts/audit/ap-audit-fix-1015-plans.ts (external audit 2026-10-15, docs/audits/ap-external-audit-20261015-confirmed-fixes.csv)",
+ "note": "Swaps use removeKey (positions resolve from the live set). Apply after the candidates in data/ap/stock/supp-fix1015-items.json are loaded, converted, render/screen-verified and review_env_ready.",
+ "swapCount": 2,
+ "verifierViolations": [],
+ "requiresConvertedCandidates": [
+  "fix1015:ap_chemistry-fx27-k0",
+  "chem-p1-a2:ap_chemistry-m21-k0"
+ ],
+ "swaps": [
+  {
+   "section": "ap_mc",
+   "removeKey": "chem-p1-a2:ap_chemistry-m18-k0",
+   "addKey": "fix1015:ap_chemistry-fx27-k0",
+   "reason": "AP-027 CH1 MC39 = CH2 MC38: CH2 now asks the reversed calorimetry-error question (higher magnitude)",
+   "remove": {
+    "unit": 6,
+    "skill": "2.E",
+    "shared": false,
+    "type": ""
+   },
+   "add": {
+    "unit": 6,
+    "skill": "2.E",
+    "shared": false,
+    "type": ""
+   }
+  },
+  {
+   "section": "ap_mc",
+   "removeKey": "chem-p1-a:ap_chemistry-m21-k1",
+   "addKey": "chem-p1-a2:ap_chemistry-m21-k0",
+   "reason": "AP-027 CH1 MC49/50 = CH2 MC48/49 (titration-curve set): CH2 gets the other seed of the same set type, with different data",
+   "remove": {
+    "unit": 8,
+    "skill": "5.D",
+    "shared": true,
+    "type": ""
+   },
+   "add": {
+    "unit": 8,
+    "skill": "5.D",
+    "shared": true,
+    "type": ""
+   }
+  }
+ ]
+}
