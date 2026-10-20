@@ -26,6 +26,8 @@ const SUPP = ["b1", "b2ab", "b2bc", "b3ab", "b3bc", "b4ab", "b5bc", "b6ab"];
 
 export const STOCK_BATCHES: StockBatch[] = [
   ...GRAPH.map(([f, b]): StockBatch => ({ id: `graph-${f}`, title: `그래프 배치 ${f} (${b})`, itemsFile: `graph-${f}-items.json`, loadLabel: `${b}-2026-10-09`, supplement: true, passKeysFile: `graph-${f}-pass-keys.json`, evidenceFile: "evidence-graph-s1s3.json" })),
+  // 2026-10-19 MI3 가 쓰는 기존 run1 후보 18건(이미 적재됨·화면 증거 보유, 변환만 안 됨) — 렌더·화면 기록과 변환만 한다.
+  { id: "micro-mi3-base", title: "AP Microeconomics MI3 기존 run1 후보 18건 (이미 적재, 검증 기록·변환만)", itemsFile: null, loadLabel: null, supplement: false, passKeysFile: "micro-mi3-base-pass-keys.json", evidenceFile: "evidence-2026-10-09c.json" },
   { id: "siblings", title: "형제 21건 (이미 적재, 검증 기록만)", itemsFile: null, loadLabel: null, supplement: false, passKeysFile: "v1v45-siblings-keys.json", evidenceFile: "evidence-v1v45-siblings.json" },
   ...SUPP.map((n): StockBatch => ({ id: `supp-${n}`, title: `보강 배치 ${n}`, itemsFile: `supp-${n}-items.json`, loadLabel: `supp-${n}-2026-10-09`, supplement: true, passKeysFile: `supp-${n}-pass-keys.json`, evidenceFile: "evidence-supp.json" })),
   // 2026-10-12 예비 보충 2차(docs/ap/reserve-topup-2.md): 두 배치가 한 증거 파일을 공유한다.
