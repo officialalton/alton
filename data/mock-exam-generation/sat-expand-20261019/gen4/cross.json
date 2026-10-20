@@ -1,0 +1,285 @@
+{
+ "summary": {
+  "sat_rw": {
+   "cand": 7,
+   "genFail": 0,
+   "formatFail": 0,
+   "detPass": 6,
+   "crossScored": 6,
+   "correct": {
+    "agree": 5,
+    "of": 6,
+    "fablePass": 6,
+    "opusPass": 5
+   },
+   "compliance": {
+    "agree": 6,
+    "of": 6,
+    "fablePass": 6,
+    "opusPass": 6
+   },
+   "hardFit": {
+    "agree": 6,
+    "of": 6,
+    "fablePass": 6,
+    "opusPass": 6
+   },
+   "adoptedBoth": 5,
+   "adoptedOneOnly": 1,
+   "yieldBoth": 0.714,
+   "costUsd": 0.479,
+   "costPerAdoptedBoth": 0.096,
+   "fableOnlyPass": 1,
+   "opusOnlyPass": 0
+  },
+  "sat_math": {
+   "cand": 0,
+   "genFail": 0,
+   "formatFail": 0,
+   "detPass": 0,
+   "crossScored": 0,
+   "correct": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "compliance": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "hardFit": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "adoptedBoth": 0,
+   "adoptedOneOnly": 0,
+   "yieldBoth": 0,
+   "costUsd": 0,
+   "costPerAdoptedBoth": null,
+   "fableOnlyPass": 0,
+   "opusOnlyPass": 0
+  },
+  "adoptedHardFableRule": {
+   "total": 5,
+   "rw": 5,
+   "math": 0,
+   "correctBothRequired": true
+  }
+ },
+ "items": [
+  {
+   "cid": "sq-boundaries-m-000",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "검산: 빈칸 앞 \"Jiro ... watched in horror as ... rolled down the slope toward the sacred pond\"는 완전한 독립절, 빈칸 뒤는 분사구 \"standing frozen beside the torii gate\" + 주절 \"he could do nothing but listen...\"으로 역시 독립절이다. 세미콜론(A)이 유일하게 규범적이다. B는 comma splice, C는 융합문(특히 \"pond standing frozen\"으로 읽혀 매력적 오답), D는 \"so\" 뒤 불필요한 쉼표. 한국어·영어 해설 모두 A를 일관되게 뒷받침하며 글자 참조가 선택지와 일치하고 한글 혼입 없음. 난이도: 긴 동격구와 도입 분사구를 거쳐 두 번째 절의 독립성을 판단해야 하므로 medium 적합. 참고사항(수정 불요): D의 \", so, [도입 분사구], he could\"는 일부 문체 지침(예: 시카고)에서 접속사 뒤 삽입구 양쪽 쉼표를 허용하므로 엄격히는 약간의 논쟁 여지가 있으나, SAT 관례상 접속사 뒤 쉼표는 오류로 취급되어 출제 기준에는 부합한다. 저작권 의심 없음, 사실 오류 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답이 둘이 될 수 있다. A(세미콜론)도 맞고, D(\", so, [삽입 분사구], he...\")도 문법적으로 옳으며 의미상 인과 관계도 자연스럽다. D를 확실한 오답으로 만들어야 한다. 예를 들어 D를 \", standing,\"으로 바꾸거나 등위접속사가 없는 다른 형태로 바꾸는 방법이 있다.",
+    "issue": "D를 배제하는 해설 논리가 틀렸다. \"so, standing frozen beside the torii gate, he could...\"에서 so 뒤의 쉼표는 불필요한 쉼표가 아니다. 이 쉼표는 gate 뒤의 쉼표와 짝을 이루어 삽입된 분사구를 감싸므로 표준 영어 규범에 맞는다. 따라서 D도 정답이 될 수 있다.한국어 해설과 같은 잘못된 논리로 D를 배제한다. \"so\" 뒤의 쉼표는 삽입된 분사구를 감싸는 한 쌍의 쉼표 중 앞쪽 쉼표이다."
+   },
+   "cost": 0.0956428
+  },
+  {
+   "cid": "sq-boundaries-m-001",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "검산: 빈칸 앞 'Alemayehu poured the first round of coffee, the strong abol ... eldest guest'는 독립절+동격어구로 완결되고, 빈칸 뒤 'The envelope, its stamps faded ..., lay unopened ...'도 독립절이므로 마침표(B)가 유일하게 올바름. A는 comma splice, C는 run-on, D는 and 뒤 불필요한 쉼표로 오답. 긴 동격어구 때문에 A가 동격을 닫는 쉼표처럼 보이고 D는 접속사가 있어 부분적으로 그럴듯하므로 medium에 적합. 한·영 해설 모두 B를 일관되게 지지하며 글자 참조 일치, 영어 자연스럽고 한글 없음. 선택지 C의 선행 공백은 '문장부호 없음'을 나타내는 표기로 허용 범위.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "긴 동격어구와 삽입 수식어 때문에 절 경계를 찾기가 어려워 medium 수준에 맞다. A는 쉼표가 동격어구를 닫는 것처럼 보여 그럴듯한 오답이다. 반면 D(', and,')는 쉽게 배제되어 오답으로서의 힘이 약하다.",
+    "issue": ""
+   },
+   "cost": 0.0782948
+  },
+  {
+   "cid": "sq-boundaries-m-002",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞은 독립절+절대구(her hands ... wrapped ... for warmth), 빈칸 뒤는 'when' 부사절이 선행하는 독립절(Linh saw ...)이므로 세미콜론(C)이 유일하게 적합. A는 comma splice, B는 융합문(when절이 앞 문장에 붙어도 'Linh saw'가 접속 없이 남음), D는 접속부사 then으로 인한 comma splice. 해설 한·영 모두 정답 및 선택지 참조 일치, 한글 혼입 없음. 절대구와 다중 쉼표로 독립절 경계를 식별해야 하므로 두 단계 판단이 필요해 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "긴 절대구와 앞에 놓인 when 부사절 때문에 두 번째 독립절의 시작 지점을 찾아야 한다. 두 단계 판단이 필요해 medium에 맞는다. 오답 A와 B는 그럴듯한 함정이다.",
+    "issue": "B 설명의 '융합문' 판정은 엄밀하지 않다. 'when ... steam'이 앞 절에 붙는 종속절로 읽힐 수 있기 때문이다. 다만 그렇게 읽으면 뒤의 'Linh saw' 절이 접속어 없이 남아 결국 비문이 되므로 결론에는 영향이 없다."
+   },
+   "cost": 0.0768538
+  },
+  {
+   "cid": "sq-boundaries-m-003",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 Duchess 뒤 대시로 연 긴 삽입구(having eaten…, dozed…, and stopped cold… she liked)를 같은 부호인 대시로 닫아야 본동사 watched와 연결됨 — D 정답 검산 확인. A(쉼표)는 삽입구 닫기처럼 보이는 그럴듯한 오답, B(세미콜론)는 주어-동사 분리, C는 무부호로 동사 충돌. 한국어·영어 해설 모두 D를 일관되게 뒷받침하고 글자 참조 일치, 영어 자연스럽고 한글 없음. 삽입구가 길어 앞의 여는 대시를 되짚어 확인해야 하므로 두 단계 판단이 필요한 medium에 적합. 원창작 지문으로 저작권 의심 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "삽입구 안에 쉼표 목록과 'whenever' 종속절이 길게 들어 있어서 여는 대시를 놓치기 쉽고, 그래서 오답 A가 그럴듯해 보인다. medium 난이도에 맞는다.",
+    "issue": ""
+   },
+   "cost": 0.0634628
+  },
+  {
+   "cid": "sq-boundaries-m-004",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "빈칸 앞은 삽입 관계절을 포함한 완전한 독립절, 뒤는 전치사구가 앞에 놓인 독립절(Levan had promised)이므로 세미콜론(A)이 유일하게 적합함을 직접 확인. B는 comma splice, C는 run-on(또한 \"sheepfold in a careful hand\"로 오독 유도), D는 which가 기능할 자리가 없어 비문. 긴 삽입절과 도치된 전치사구 때문에 절 경계 파악에 두 단계 판단이 필요해 medium에 적합. 한·영 해설 모두 정답 및 선택지 글자와 일치하고 자연스러움. 선택지 C의 앞 공백 두 칸은 사소한 표기 문제로 판정에 영향 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "긴 삽입절과 도입 전치사구 때문에 절 경계를 찾으려면 두 단계 판단이 필요하다. B와 C는 그럴듯한 오답이다. D는 비교적 쉽게 배제된다.",
+    "issue": "\">\n"
+   },
+   "cost": 0.0755478
+  },
+  {
+   "cid": "sq-boundaries-m-005",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "검산: 'Professor Aksel ... ladled ... and gave the three fishermen his final lesson'은 독립절, 빈칸 뒤 'the proper temperature ... was the exact moment ...'도 독립절(삽입구 'he said' 포함)이며 앞 절의 lesson 내용을 설명하므로 콜론(B)이 적절. A는 comma splice, C는 세미콜론 뒤 'that' 명사절로 단편, D는 run-on. 한국어·영어 해설 모두 B를 일관되게 뒷받침하며 글자 참조 일치, 영어 해설에 한글 없음. 난이도: 긴 비필수 관계절과 삽입구 'he said'를 넘어 절 경계를 파악한 뒤 콜론 기능을 적용하는 두 단계 판단이 필요하고, C가 그럴듯한 오답으로 기능하므로 medium에 적합. 사소: D 선택지 앞 공백이 두 칸이나 의미상 '무부호' 선택지로 이해 가능.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 B가 맞다. 'he said'가 삽입구로 들어가 있어 독립절 여부를 판단하기 조금 까다롭고, 긴 관계절 때문에 문장을 훑어 읽는 수험생은 헷갈릴 수 있다. 오답 C는 세미콜론+that 형태가 약간 쉽게 걸러진다.",
+    "issue": ""
+   },
+   "cost": 0.06994779999999999
+  },
+  {
+   "cid": "sq-boundaries-m-006",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.0194058
+  }
+ ]
+}
