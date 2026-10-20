@@ -230,5 +230,120 @@
   "verifiedBy": [
    "the model volume is checked against the closed form of the integral, the derivative by central difference, and the two locations by a 100001-point grid sign sca"
   ]
+ },
+ {
+  "id": "frq_x4_cycloid_exact",
+  "template": "cycloid_exact",
+  "topic": "9.1",
+  "extraTopics": [
+   "9.2",
+   "9.3"
+  ],
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "parts": "a A curve is defined by the parametric equations $x(t)=2(t-\\si (2) / b For $0<t<2\\pi$, find the value of $t$ at which the curve has (2) / c Find the value of $\\dfrac{d^2y}{dx^2}$ at $t=\\dfrac{\\pi}{2}$ (2) / d Find the length of the portion of the curve from $t=0$ to $t (3)",
+  "points": 9,
+  "verifiedBy": [
+   "finite-difference slope and second derivative of the sampled curve and scipy quad of the speed over [0, pi] (independent of the symbolic derivative and the half"
+  ]
+ },
+ {
+  "id": "frq_x4_improper_arctan_calc",
+  "template": "improper_arctan_calc",
+  "topic": "6.13",
+  "extraTopics": [
+   "8.3",
+   "5.6"
+  ],
+  "skill": "1.E",
+  "calculator": "required",
+  "parts": "a A pollutant is released into a lake at the rate $r(t)=\\dfrac (3) / b Find the amount of pollutant released during the first $2$ h (2) / c At what time $t$ is the rate of release equal to half of its (2) / d At what time $t>0$ is the rate of release decreasing most ra (2)",
+  "points": 9,
+  "verifiedBy": [
+   "scipy quad to infinity and over [0, T], and a bounded minimization of r'(t) (independent of the arctangent antiderivative and of solving r''(t) = 0)"
+  ]
+ },
+ {
+  "id": "frq_x4_rose_exact",
+  "template": "rose_exact",
+  "topic": "9.8",
+  "extraTopics": [
+   "9.7",
+   "9.9"
+  ],
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "parts": "a The graph of the polar curve $r=4\\sin(2\\theta)$ for $0\\le\\th (3) / b Find $\\dfrac{dr}{d\\theta}$ at $\\theta=\\dfrac{\\pi}{6}$. Is th (2) / c Find the value of $\\theta$ in $\\left(0,\\dfrac{\\pi}{2}\\right) (2) / d Let $R$ be the region inside the petal and outside the circl (2)",
+  "points": 9,
+  "verifiedBy": [
+   "scipy quad of each polar area integral, a central difference of r, and a 500 x 500 grid count of the region outside the circle (independent of the symbolic inte"
+  ]
+ },
+ {
+  "id": "frq_x4_series_classify",
+  "template": "series_four_tests",
+  "topic": "10.3",
+  "extraTopics": [
+   "10.2",
+   "10.7",
+   "10.8",
+   "10.9"
+  ],
+  "skill": "3.D",
+  "calculator": "not_allowed",
+  "parts": "a Determine whether the series $\\displaystyle\\sum_{n=1}^{\\inft (2) / b Show that the series $\\displaystyle\\sum_{n=1}^{\\infty}\\dfrac (2) / c Does the series $\\displaystyle\\sum_{n=1}^{\\infty}\\dfrac{(-1) (3) / d Determine whether the series $\\displaystyle\\sum_{n=1}^{\\inft (2)",
+  "points": 9,
+  "verifiedBy": [
+   "partial sums of 200000 terms for the telescoping series, the size of the general term at n = 10^8, the term ratio at n = 120, and absolute partial sums at 10^3 "
+  ]
+ },
+ {
+  "id": "frq_x4_series_estimate_calc",
+  "template": "series_estimate_calc",
+  "topic": "10.6",
+  "extraTopics": [
+   "10.4",
+   "10.7",
+   "10.10"
+  ],
+  "skill": "3.D",
+  "calculator": "required",
+  "parts": "a Consider the series $\\displaystyle\\sum_{n=1}^{\\infty}\\dfrac{ (2) / b The alternating series $\\displaystyle\\sum_{n=1}^{\\infty}\\dfr (2) / c Let $R_N=\\displaystyle\\sum_{n=N+1}^{\\infty}\\dfrac{1}{n^2+3}$ (3) / d Determine whether the series $\\displaystyle\\sum_{n=1}^{\\inft (2)",
+  "points": 9,
+  "verifiedBy": [
+   "400000-term partial sums for the alternating series, a 600000-term remainder sum compared with the integral bound, and the term ratio at n = 10^6 (independent o"
+  ]
+ },
+ {
+  "id": "frq_x4_taylor_table_lagrange",
+  "template": "taylor_table_lagrange",
+  "topic": "10.11",
+  "extraTopics": [
+   "10.12",
+   "5.7"
+  ],
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "parts": "a A function $f$ has derivatives of all orders. The table give (2) / b Use $P_3$ to approximate $f\\left(2+\\dfrac{1}{2}\\right)$. (2) / c Use the Lagrange error bound to find an upper bound for $\\le (3) / d Does $f$ have a relative maximum, a relative minimum, or nei (2)",
+  "points": 9,
+  "verifiedBy": [
+   "the polynomial is expanded with sympy and its derivatives at the center are compared with the table (independent of the factorial formula)"
+  ]
+ },
+ {
+  "id": "frq_x4_velocity_vector_calc",
+  "template": "velocity_vector_position_calc",
+  "topic": "9.5",
+  "extraTopics": [
+   "9.4",
+   "9.6"
+  ],
+  "skill": "1.E",
+  "calculator": "required",
+  "parts": "a A particle moves in the $xy$-plane so that its velocity vect (2) / b Find the position $\\bigl(x(3),y(3)\\bigr)$ of the particle at (3) / c For $0<t<3$, find the time at which the particle is moving h (2) / d Find the total distance traveled by the particle from $t=0$ (2)",
+  "points": 9,
+  "verifiedBy": [
+   "central difference of the speed at t = 1, scipy quad of each component, Brent root of y'(t), and a 30001-point Simpson rule for the distance (independent of the"
+  ]
  }
 ]
