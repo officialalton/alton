@@ -915,6 +915,396 @@
   ]
  },
  {
+  "id": "ch_n_arrhenius_ratio",
+  "topic": "5.7",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "ln(k2/k1) formula vs the ratio of two explicit Arrhenius exponentials"
+  ],
+  "misconceptions": [
+   "Reverses T1 and T2 so that the rate constant decreases.",
+   "Uses the activation energy in kJ without converting to J.",
+   "Uses the difference of the temperatures instead of the difference of the reciprocals."
+  ]
+ },
+ {
+  "id": "ch_n_buffer_after_acid",
+  "topic": "8.9",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact-fraction ratio vs logs of moles"
+  ],
+  "misconceptions": [
+   "Adds the strong acid to the conjugate base instead of subtracting it.",
+   "Ignores the added strong acid and uses the original ratio.",
+   "Inverts the ratio of base to acid."
+  ]
+ },
+ {
+  "id": "ch_n_calorimetry_direction",
+  "topic": "6.3",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 6.3 and 6.4"
+  ],
+  "misconceptions": [
+   "The temperature change of the solution does show the direction of the heat flow.",
+   "An endothermic process has a positive \u0394H.",
+   "An exothermic process raises the temperature of the solution."
+  ]
+ },
+ {
+  "id": "ch_n_catalyst_profile",
+  "topic": "5.6",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 5.6"
+  ],
+  "misconceptions": [
+   "A catalyst is not consumed, and the claim about energy is wrong for a different reason.",
+   "A rate can increase because more collisions are effective, with no change in the average kinetic energy.",
+   "Binding a catalyst does not raise the temperature of the sample."
+  ]
+ },
+ {
+  "id": "ch_n_empirical_formula",
+  "topic": "1.3",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "mole ratio by exact fractions vs smallest-integer search over subscripts"
+  ],
+  "misconceptions": [
+   "Swaps the subscripts of the two elements after converting to moles.",
+   "Adds one to a subscript after rounding the mole ratio incorrectly.",
+   "Uses the mass percents as if they were the ratio of atoms, without converting each mass to moles."
+  ]
+ },
+ {
+  "id": "ch_n_entropy_rank",
+  "topic": "9.2",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 9.2"
+  ],
+  "misconceptions": [
+   "Two gases from a solid is a large increase.",
+   "Forming a gas increases the entropy.",
+   "A solid producing a gas increases the entropy."
+  ]
+ },
+ {
+  "id": "ch_n_entropy_reaction",
+  "topic": "9.2",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sum over products minus reactants vs the signed sum of coefficient times entropy"
+  ],
+  "misconceptions": [
+   "Forgets to multiply each standard entropy by its coefficient.",
+   "Adds all of the standard entropies of the reactants and products.",
+   "Subtracts the products from the reactants."
+  ]
+ },
+ {
+  "id": "ch_n_galvanic_flow",
+  "topic": "9.8",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 9.8 and 9.9"
+  ],
+  "misconceptions": [
+   "Anions move toward the anode to balance the positive charge produced there.",
+   "Electrons leave the anode through the external wire.",
+   "Reduction occurs at the cathode."
+  ]
+ },
+ {
+  "id": "ch_n_gas_density",
+  "topic": "3.4",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "d = PM/RT vs bisection on d RT / M = P"
+  ],
+  "misconceptions": [
+   "Uses 22.4 L/mol regardless of the conditions.",
+   "Leaves out the pressure and uses only M divided by RT.",
+   "Inverts the expression, dividing RT by PM."
+  ]
+ },
+ {
+  "id": "ch_n_gas_stoich_volume",
+  "topic": "4.4",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "PV = nRT solved directly vs bisection on the pressure balance"
+  ],
+  "misconceptions": [
+   "Uses 22.4 L/mol for the molar volume at the stated conditions.",
+   "Doubles the moles of CO2 for the two moles of product in the equation.",
+   "Uses the mass of CaCO3 as the moles of gas."
+  ]
+ },
+ {
+  "id": "ch_n_gibbs_hs",
+  "topic": "9.3",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "\u0394H \u2212 T\u0394S vs \u0394H minus the product found by root solving"
+  ],
+  "misconceptions": [
+   "Adds the entropy term instead of subtracting it.",
+   "Uses the entropy change in J/(mol K) without converting to kJ.",
+   "Uses the Celsius temperature in place of kelvins."
+  ]
+ },
+ {
+  "id": "ch_n_halfway_titration_ph",
+  "topic": "8.5",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "Henderson-Hasselbalch with exact fractions vs the log of the mole ratio"
+  ],
+  "misconceptions": [
+   "Uses the pH of a neutral solution.",
+   "Uses the pH of the starting weak acid solution.",
+   "Reports the pKa itself, which applies only at the half-equivalence point."
+  ]
+ },
+ {
+  "id": "ch_n_heat_phase_change",
+  "topic": "6.5",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sum of three terms vs the same total built stage by stage"
+  ],
+  "misconceptions": [
+   "Leaves out the warming of the ice to 0 degrees Celsius.",
+   "Uses only the heat needed to melt the ice.",
+   "Leaves out the heat of fusion."
+  ]
+ },
+ {
+  "id": "ch_n_isotope_abundance",
+  "topic": "1.2",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solve of the weighted average vs the direct difference ratio"
+  ],
+  "misconceptions": [
+   "Takes the average of the two isotopic masses as the abundance weight.",
+   "Uses the lighter mass divided by the average mass.",
+   "Divides the average mass by the mass of the lighter isotope."
+  ]
+ },
+ {
+  "id": "ch_n_k_from_equilibrium",
+  "topic": "7.4",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fractions vs float powers"
+  ],
+  "misconceptions": [
+   "Leaves out the coefficient exponents.",
+   "Puts the reactants in the numerator and the products in the denominator.",
+   "Adds the concentrations of the reactants in the denominator."
+  ]
+ },
+ {
+  "id": "ch_n_ksp_from_solubility",
+  "topic": "7.11",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy rational powers vs float product"
+  ],
+  "misconceptions": [
+   "Multiplies the molar solubility by the number of ions instead of raising it to the power.",
+   "Squares the molar solubility regardless of the formula.",
+   "Leaves out the stoichiometric factors in the ion concentrations."
+  ]
+ },
+ {
+  "id": "ch_n_limiting_mass",
+  "topic": "4.5",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "smaller of two mole ratios vs a stepwise product comparison"
+  ],
+  "misconceptions": [
+   "Adds the masses of the two reactants.",
+   "Uses the reactant that is in excess to find the product mass.",
+   "Forgets to convert moles of product to grams."
+  ]
+ },
+ {
+  "id": "ch_n_molarity_mass",
+  "topic": "3.7",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "moles from sympy solve of n M = m vs exact formula mass by a flat parser"
+  ],
+  "misconceptions": [
+   "Multiplies the moles by the volume in liters instead of dividing.",
+   "Divides the mass by the volume in mL and the molar mass.",
+   "Uses the mass of solute divided by the volume in liters without converting grams to moles."
+  ]
+ },
+ {
+  "id": "ch_n_mole_fraction_pressure",
+  "topic": "3.5",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "Dalton's law by bisection on the mole-fraction equation vs the direct product"
+  ],
+  "misconceptions": [
+   "Uses the ratio of the moles of the two gases without the total.",
+   "Uses the mole fraction of the other gas.",
+   "Divides the moles of the gas by the total pressure."
+  ]
+ },
+ {
+  "id": "ch_n_oxidation_number",
+  "topic": "4.9",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 4.9"
+  ],
+  "misconceptions": [
+   "The species that is reduced acts as the oxidizing agent.",
+   "An increase in oxidation number is oxidation.",
+   "Forming a bond does not define oxidation; the oxidation number of chlorine decreases."
+  ]
+ },
+ {
+  "id": "ch_n_particulate_solution",
+  "topic": "3.8",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 3.8"
+  ],
+  "misconceptions": [
+   "The bonds within ethanol are not broken when it dissolves.",
+   "Ethanol is miscible with water and mixes at the particle level.",
+   "Ethanol is a molecular compound that does not dissociate into ions."
+  ]
+ },
+ {
+  "id": "ch_n_percent_yield",
+  "topic": "4.5",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact-fraction theoretical yield vs a stepwise float calculation"
+  ],
+  "misconceptions": [
+   "Forgets to multiply by 100 and reports the fraction.",
+   "Divides the theoretical yield by the actual yield.",
+   "Compares the actual mass of product with the mass of the reactant that was used."
+  ]
+ },
+ {
+  "id": "ch_n_ph_strong_base",
+  "topic": "8.2",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "14 + log[OH-] vs pOH then 14 minus pOH"
+  ],
+  "misconceptions": [
+   "Uses the concentration of the base as the hydronium concentration.",
+   "Subtracts the pOH from 7 instead of 14.",
+   "Takes the concentration of hydroxide to equal the concentration of the base, ignoring the two hydroxide ions per formula unit."
+  ]
+ },
+ {
+  "id": "ch_n_polarity_molecule",
+  "topic": "2.7",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 2.7"
+  ],
+  "misconceptions": [
+   "Carbon is more electronegative than hydrogen, and the dipoles of CO2 point in opposite directions.",
+   "Each oxygen atom in CO2 has two lone pairs and the bonds are polar.",
+   "The C=O bonds are also polar; the difference is the shape and not the polarity of the individual bonds."
+  ]
+ },
+ {
+  "id": "ch_n_rate_law_concept",
+  "topic": "5.2",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 5.2"
+  ],
+  "misconceptions": [
+   "The data give the order only in that reactant, not the overall order.",
+   "Zero order would leave the rate unchanged.",
+   "Second order would quadruple the rate."
+  ]
+ },
+ {
+  "id": "ch_n_second_order_time",
+  "topic": "5.4",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "1/[A] = 1/[A]0 + kt solved directly vs bisection on the concentration curve"
+  ],
+  "misconceptions": [
+   "Subtracts the concentrations and divides by the rate constant.",
+   "Divides the final concentration by the rate constant.",
+   "Uses the first-order integrated rate law."
+  ]
+ },
+ {
   "id": "ch_needed_dh",
   "topic": "6.4",
   "skill": "5.A",
@@ -987,6 +1377,411 @@
    "Writes a precipitate formula that does not balance the ion charges.",
    "Includes spectator ions, which do not take part in the net change.",
    "Leaves the equation unbalanced in charge and atoms."
+  ]
+ },
+ {
+  "id": "ch_o_acid_base_type",
+  "topic": "4.3",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "HF is the acid, not its conjugate base.",
+   "Water acts as the base here.",
+   "H3O\u207a is the conjugate acid of water."
+  ]
+ },
+ {
+  "id": "ch_o_bond_enthalpy_concept",
+  "topic": "6.8",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "\u0394H is a difference of the two energies and is not their sum.",
+   "The values are subtracted.",
+   "The sign is reversed, because bond formation releases the larger energy."
+  ]
+ },
+ {
+  "id": "ch_o_bond_order_length",
+  "topic": "2.4",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The triple bond has the highest energy.",
+   "Bond energy increases with the bond order.",
+   "Shorter bonds of a higher order are stronger."
+  ]
+ },
+ {
+  "id": "ch_o_buffer_concept",
+  "topic": "8.9",
+  "skill": "4.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "This would raise the pH further.",
+   "A base is neutralized by an acid and not by its conjugate base.",
+   "A\u207b does not react with a base."
+  ]
+ },
+ {
+  "id": "ch_o_cell_justify",
+  "topic": "9.9",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "E decreases but not necessarily to a negative value.",
+   "The potential E depends on the reaction quotient Q.",
+   "More product makes the forward reaction less favorable."
+  ]
+ },
+ {
+  "id": "ch_o_collision_model",
+  "topic": "5.7",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The masses are the same, so the number of atoms is the same.",
+   "The temperatures are the same.",
+   "The activation energy is the same for the same reaction."
+  ]
+ },
+ {
+  "id": "ch_o_conductivity_claim",
+  "topic": "2.1",
+  "skill": "6.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "A molecular solid is soft and a poor conductor.",
+   "Network solids are hard and brittle and generally do not conduct.",
+   "Ionic solids do not conduct in the solid state and are brittle."
+  ]
+ },
+ {
+  "id": "ch_o_conj_pair",
+  "topic": "8.1",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The species has an incorrect formula for a conjugate.",
+   "H3PO4 has two more protons.",
+   "PO4\u00b3\u207b is the conjugate base of HPO4\u00b2\u207b."
+  ]
+ },
+ {
+  "id": "ch_o_curve_features",
+  "topic": "8.5",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The pH rises when a base is added.",
+   "A buffer region is present only for weak acids.",
+   "That happens for a weak acid and a strong base."
+  ]
+ },
+ {
+  "id": "ch_o_energy_diagram",
+  "topic": "6.6",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The reverse reaction also has a barrier.",
+   "The two activation energies differ by the value of \u0394H.",
+   "The barrier from the lower-energy side is larger."
+  ]
+ },
+ {
+  "id": "ch_o_gas_question",
+  "topic": "3.4",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The question assumes a result that the experiment is designed to test.",
+   "Color is not a relevant variable.",
+   "A change in volume would also change the pressure."
+  ]
+ },
+ {
+  "id": "ch_o_hess_logic",
+  "topic": "6.9",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The first step absorbs energy.",
+   "The second step is not reversed.",
+   "The signs must be included."
+  ]
+ },
+ {
+  "id": "ch_o_hydrate_procedure",
+  "topic": "1.3",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "Calcium carbonate does not release a gas with a base.",
+   "Both calcium carbonate and sand are insoluble, so they are not separated by water.",
+   "Neither compound melts at these conditions, and sand would not lose mass."
+  ]
+ },
+ {
+  "id": "ch_o_ice_concentration",
+  "topic": "7.6",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy quadratic solve vs bisection on the equilibrium condition"
+  ],
+  "misconceptions": [
+   "Ignores the loss of N2O4 and solves (2x)\u00b2 = K c\u2080.",
+   "Uses the starting concentration of N2O4 as the equilibrium concentration of NO2.",
+   "Uses x instead of 2x for the concentration of the product."
+  ]
+ },
+ {
+  "id": "ch_o_imf_justify",
+  "topic": "3.1",
+  "skill": "6.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "Both molecules are nonpolar, so neither has a dipole to explain the difference.",
+   "Neither contains an O\u2013H, N\u2013H or F\u2013H bond.",
+   "Both have the same molar mass."
+  ]
+ },
+ {
+  "id": "ch_o_isotope_question",
+  "topic": "1.2",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "PES does not give crystal structure.",
+   "A PES spectrum does not give a mass.",
+   "Average atomic mass comes from a mass spectrum."
+  ]
+ },
+ {
+  "id": "ch_o_ka_strength",
+  "topic": "8.3",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "A\u207b can accept a proton, so it is a base.",
+   "The Kb of the conjugate base depends on the Ka of its acid.",
+   "The conjugate pairs have opposite trends."
+  ]
+ },
+ {
+  "id": "ch_o_lewis_choice",
+  "topic": "2.5",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "Carbon is the central atom of the ion.",
+   "The charge of \u22122 must be shown on the atoms.",
+   "This gives 24 electrons but a formal charge distribution that does not equal the \u22122 charge of the ion."
+  ]
+ },
+ {
+  "id": "ch_o_mechanism_step",
+  "topic": "5.5",
+  "skill": "4.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "NO is a product that is not consumed in a later step.",
+   "CO is a reactant and not an intermediate.",
+   "NO2 is a reactant overall and it is regenerated; it acts as a catalyst, not an intermediate."
+  ]
+ },
+ {
+  "id": "ch_o_mixture_error",
+  "topic": "1.4",
+  "skill": "2.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "A wet sand mass makes the calculated percent of salt too low.",
+   "Water does not evaporate fast enough to be neglected and the mass reading includes it.",
+   "The added water increases, not decreases, the measured mass."
+  ]
+ },
+ {
+  "id": "ch_o_net_ionic",
+  "topic": "4.2",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The sulfate ions are in the precipitate.",
+   "Barium ions are in the precipitate.",
+   "These ions form the precipitate BaSO4."
+  ]
+ },
+ {
+  "id": "ch_o_periodic_predict",
+  "topic": "1.7",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "An atom becomes an ion by gaining electrons, not by changing its protons.",
+   "S\u00b2\u207b has two more electrons than S.",
+   "The nuclear charge does not change."
+  ]
+ },
+ {
+  "id": "ch_o_precip_claim",
+  "topic": "4.2",
+  "skill": "6.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "A reaction between ions does not produce a new element.",
+   "There is no heat source, and a precipitate is the cause of the cloudiness.",
+   "Sodium chloride is soluble."
+  ]
+ },
+ {
+  "id": "ch_o_redox_agent",
+  "topic": "4.9",
+  "skill": "4.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "Sn\u2074\u207a is the oxidized product.",
+   "Fe\u00b2\u207a is the reduced product.",
+   "Fe\u00b3\u207a gains electrons, so it is the oxidizing agent."
+  ]
+ },
+ {
+  "id": "ch_o_separation_procedure",
+  "topic": "3.9",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "Neither iron nor sand is a liquid, so there is nothing to distill.",
+   "The melting points are far above laboratory temperatures.",
+   "Neither component dissolves in water."
+  ]
+ },
+ {
+  "id": "ch_o_spontaneity_justify",
+  "topic": "9.3",
+  "skill": "6.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "At high T, \u2212T\u0394S can make \u0394G negative.",
+   "At low T the positive \u0394H dominates.",
+   "A positive \u0394H opposes spontaneity at low T."
+  ]
+ },
+ {
+  "id": "ch_o_vsepr_shape",
+  "topic": "2.6",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The bonded atoms are two, and they define a linear arrangement.",
+   "T-shaped molecules have two lone pairs and three bonded atoms.",
+   "A bent shape requires lone pairs that are not placed symmetrically."
   ]
  },
  {
@@ -1605,6 +2400,36 @@
   ]
  },
  {
+  "id": "chs_calorimeter_dissolve_set_q1",
+  "topic": "6.4",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact decimal product vs root solve of the heat balance"
+  ],
+  "misconceptions": [
+   "Uses the final temperature in place of the temperature change.",
+   "Uses the sign of the heat released by the reaction instead of the heat gained by the solution.",
+   "Uses only the mass of water and leaves out the mass of the salt."
+  ]
+ },
+ {
+  "id": "chs_calorimeter_dissolve_set_q2",
+  "topic": "6.4",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact decimal product vs root solve of the heat balance"
+  ],
+  "misconceptions": [
+   "Reports the heat of the solution in kilojoules rather than per mole of salt.",
+   "Divides by the mass in grams instead of the moles of salt.",
+   "Gives the heat gained by the solution per mole without changing its sign."
+  ]
+ },
+ {
   "id": "chs_equilibrium_set_q1",
   "topic": "7.3",
   "skill": "5.F",
@@ -1632,6 +2457,36 @@
    "Reports B0 + x (the amount of A that reacted) instead of the equilibrium concentration of B.",
    "Reports the equilibrium concentration of A.",
    "Uses the initial concentration of B."
+  ]
+ },
+ {
+  "id": "chs_gibbs_temperature_set_q1",
+  "topic": "9.3",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "least squares of \u0394G\u00b0 against T vs the two-point slope"
+  ],
+  "misconceptions": [
+   "Forgets to convert kJ to J.",
+   "Divides a single value of \u0394G\u00b0 by its temperature.",
+   "Reports \u0394S\u00b0 with the right magnitude but the wrong sign."
+  ]
+ },
+ {
+  "id": "chs_gibbs_temperature_set_q2",
+  "topic": "9.3",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "least squares of \u0394G\u00b0 against T vs the two-point slope"
+  ],
+  "misconceptions": [
+   "Takes the \u0394G\u00b0 at 300 K as \u0394H\u00b0.",
+   "Subtracts the T\u0394S\u00b0 term from \u0394G\u00b0 instead of adding it.",
+   "Takes the \u0394G\u00b0 at 500 K as \u0394H\u00b0."
   ]
  },
  {
