@@ -19,7 +19,8 @@ def pes_coulomb_table_set(rng):
     q0 = math.sqrt(Fs[0] * 1e-3 * (rs[0] * 1e-2) ** 2 / K) * 1e9
     agree(q0, qn, 1e-9, "q")
     k1, d1 = num_opts(qn, [("Uses $r$ in centimeters without converting.", math.sqrt(Fs[0] * 1e-3 * rs[0] ** 2 / K) * 1e9), ("Uses the force in millinewtons as if it were in newtons.", math.sqrt(Fs[0] * (rs[0] * 1e-2) ** 2 / K) * 1e9), ("Takes $r$ as the radius of each sphere and uses $2r$ as the separation.", 2 * qn), ("Uses half of the separation in the formula.", qn / 2)], "", fmt=FU(U_NC))
-    k2, d2 = num_opts(Fnew, [("Scales the force as $1/r$.", Fs[1] * rs[1] / rnew), ("Scales the force inversely with $r^3$.", Fs[1] * (rs[1] / rnew) ** 3), ("Uses the force at $r=10\\text{ cm}$ unchanged.", Fs[0]), ("Scales linearly with the distance.", Fs[1] * rnew / rs[1])], "", fmt=FU(U_MN))
+    F20 = Fs[1]
+    k2, d2 = num_opts(Fnew, [("Scales the $20\\text{ cm}$ entry as $1/r$.", F20 * 20.0 / rnew), ("Scales the $20\\text{ cm}$ entry as $1/r^3$.", F20 * (20.0 / rnew) ** 3), ("Takes the force to stay equal to the $20\\text{ cm}$ entry.", F20), ("Takes the force to stay equal to the $10\\text{ cm}$ entry.", Fs[0])], "", fmt=FU(U_MN))
     rows = [[f"{r:g}", f"{f:.3g}"] for r, f in zip(rs, Fs)]
     stim = table_stimulus("Force between two identical charged spheres at several separations", "Separation of the centers r (cm)", rows, "Force F (mN)")
     qs = [("What is the charge on each sphere?", k1, d1, "q1", f"$F=kq^2/r^2$ gives $q=r\\sqrt{{F/k}}={sig(qn)}\\text{{ nC}}$."),
@@ -102,7 +103,7 @@ def pes_vr_graph_set(rng):
     stim = dense_graph_stim("Electric potential versus distance from the point charge", Vf, 10.0, 60.0, gaxis("Distance r (cm)", 10, 60, 10), gaxis("Potential V (V)", 0, ymax, step), n=101)
     k1, d1 = num_opts(Qn, [("Uses the distance in centimeters without converting.", V0 * r0 / K * 1e9), ("Uses $V r^2/k$.", V0 * (r0 * 1e-2) ** 2 / K * 1e9), ("Divides the potential by $kr$, $V/(kr)$, which is not a field.", V0 / (K * r0 * 1e-2) * 1e9), ("Uses the potential at $r=10\\text{ cm}$ with the distance $20\\text{ cm}$.", 2 * V0 * r0 * 1e-2 / K * 1e9)], "", fmt=FU(U_NC))
     k2, d2 = num_opts(E0, [("Uses $V/r$ with the distance in centimeters.", V0 / r0), ("Uses the slope with the wrong sign convention, $2V/r$.", 2 * V0 / (r0 * 1e-2)), ("Multiplies the potential by the distance, $Vr$.", V0 * r0 * 1e-2), ("Halves the field by dividing by $2r$, $V/(2r)$.", V0 / (2 * r0 * 1e-2))], "", fmt=FU(U_NCC))
-    qs = [("What is the magnitude of the point charge?", k1, d1, "q1", f"At $r=20\\text{{ cm}}$ the graph gives $V={sig(V0)}\\text{{ V}}$, so $Q=Vr/k={sig(Qn)}\\text{{ nC}}$."),
+    qs = [("Using the value of the potential at $r=20\\text{ cm}$, what is the magnitude of the point charge?", k1, d1, "q1", f"At $r=20\\text{{ cm}}$ the graph gives $V={sig(V0)}\\text{{ V}}$, so $Q=Vr/k={sig(Qn)}\\text{{ nC}}$."),
           ("What is the magnitude of the electric field at $r=20\\text{ cm}$?", k2, d2, "q2", f"For a point charge $E=kQ/r^2=V/r={sig(E0)}\\text{{ N/C}}$ (minus the slope of the graph).")]
     items = _qitems("pes_vr_graph_set", [("9.2", "2.A"), ("9.2", "2.B")], qs, rng, [f"Qn={Qn}"], MAT_GRAPH("axis labels with units"), "Two questions about the potential graph of a point charge", ["Read the potential at the given distance from the graph", "Use $V=kQ/r$ for the charge and $E=V/r$ for the field"],
                     [("the source is a single point charge in vacuum", "the shared description states a single point charge")], "the charge and the field are recomputed from the closed forms and a numerical derivative of the plotted curve", ["representation_reading", "law_selection"])

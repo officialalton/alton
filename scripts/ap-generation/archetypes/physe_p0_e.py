@@ -146,7 +146,7 @@ def pe_rl_initial_final(rng):
     key, ds = num_opts(I, wr, "", fmt=FU(U_A))
     stem = f"A battery of emf ${e:g}\\text{{ V}}$ and negligible internal resistance is connected through a switch to a resistor $R_1={R1:g}\\,\\Omega$ in series with a parallel combination of an ideal inductor and a resistor $R_2={R2:g}\\,\\Omega$. There is no current before the switch is closed. What is the current supplied by the battery {when}?"
     return MQ("pe_rl_initial_final", "13.5", "2.B", stem, key, ds, rng, "An inductor opposes a sudden change in current, acting like an open circuit at first and like a wire in steady state", ["Decide how the inductor behaves at the stated time", "Apply Ohm's law to the resulting circuit"],
-              "the time-dependent current is recomputed by integrating the circuit equations to short and long times", f"The battery current {when} is ${sig(I)}\\text{{ A}}$.", [f"e={e}", f"R1={R1}", f"R2={R2}", f"when={when}"], est=95, judg=["law_selection", "justification"])
+              "the time-dependent current is recomputed by integrating the circuit equations to short and long times", (f"Just after the switch is closed the current in the inductor is still zero (it cannot change instantly), so the inductor acts like an open circuit and the current flows through $R_1$ and $R_2$ in series: $I=\\varepsilon/(R_1+R_2)={sig(I)}\\text{{ A}}$." if when.startswith("just") else f"After a very long time the inductor has no voltage across it and acts like a wire, bypassing $R_2$, so only $R_1$ limits the current: $I=\\varepsilon/R_1={sig(I)}\\text{{ A}}$."), [f"e={e}", f"R1={R1}", f"R2={R2}", f"when={when}"], est=95, judg=["law_selection", "justification"])
 
 
 @retry_sep

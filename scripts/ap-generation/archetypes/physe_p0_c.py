@@ -286,7 +286,7 @@ def pe_rc_initial_final_current(rng):
     key, ds = num_opts(I, [(w, v) for w, v in wr], "", fmt=FU(U_A))
     stem = f"A battery of emf ${e:g}\\text{{ V}}$ and negligible internal resistance is connected in series with a resistor $R_1={R1:g}\\,\\Omega$ and a parallel combination of a resistor $R_2={R2:g}\\,\\Omega$ and an initially uncharged capacitor. What is the current supplied by the battery {when}?"
     return MQ("pe_rc_initial_final_current", "11.8", "2.B", stem, key, ds, rng, "An uncharged capacitor acts like a wire at first and like an open circuit in steady state", ["Decide how the capacitor behaves at the stated time", "Apply Ohm's law to the resulting circuit"],
-              "the time-dependent current is recomputed by integrating the circuit equation to short and long times", f"The battery current {when} is ${sig(I)}\\text{{ A}}$.", [f"e={e}", f"R1={R1}", f"R2={R2}", f"when={when}"], est=95, judg=["law_selection", "justification"])
+              "the time-dependent current is recomputed by integrating the circuit equation to short and long times", (f"Just after the switch is closed the uncharged capacitor has zero voltage and acts like a wire, bypassing $R_2$, so only $R_1$ limits the current: $I=\\varepsilon/R_1={sig(I)}\\text{{ A}}$." if when.startswith("just") else f"After a very long time no current flows into the capacitor, so the current flows through $R_1$ and $R_2$ in series: $I=\\varepsilon/(R_1+R_2)={sig(I)}\\text{{ A}}$."), [f"e={e}", f"R1={R1}", f"R2={R2}", f"when={when}"], est=95, judg=["law_selection", "justification"])
 
 
 @retry_sep

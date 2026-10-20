@@ -720,21 +720,6 @@
   ]
  },
  {
-  "id": "pe_cap_energy",
-  "topic": "10.3",
-  "skill": "2.B",
-  "calculator": "allowed",
-  "stimulus": "none",
-  "verifiedBy": [
-   "the stored energy is recomputed by integrating $q\\,dq/C$ from zero to the final charge"
-  ],
-  "misconceptions": [
-   "Uses $\\tfrac12C^2V$.",
-   "Uses $\\tfrac12QV^2$ with $Q=CV$.",
-   "Uses $\\tfrac12CV$."
-  ]
- },
- {
   "id": "pe_cap_network",
   "topic": "10.3",
   "skill": "2.B",
@@ -1885,7 +1870,7 @@
   ],
   "misconceptions": [
    "Believes charge jumps from the rod to the electroscope without contact.",
-   "Assumes the electroscope was charged before the rod approached.",
+   "Reverses the direction in which the electrons move and thinks oppositely charged leaves attract each other.",
    "Believes that charge moves in a conductor only on contact."
   ]
  },
@@ -1977,21 +1962,6 @@
    "Uses the force $kq^2/r_0^2$ in place of the energy.",
    "Gives all the energy to one particle, $\\sqrt{2kq^2/(mr_0)}$.",
    "Uses $kq^2/(mr_0)$ without the square root."
-  ]
- },
- {
-  "id": "pe_electron_deflection",
-  "topic": "9.3",
-  "skill": "2.B",
-  "calculator": "allowed",
-  "stimulus": "none",
-  "verifiedBy": [
-   "an RK4 integration of the transverse motion recomputes the deflection"
-  ],
-  "misconceptions": [
-   "Uses the proton mass.",
-   "Uses $\\tfrac12(eE/m)(L/v_0)$, forgetting to square the time.",
-   "Leaves out the factor $\\tfrac12$ in the kinematic equation."
   ]
  },
  {
@@ -2229,9 +2199,9 @@
    "the stored energy is recomputed from the charge at the stated time"
   ],
   "misconceptions": [
-   "Takes the energy as the fraction of the charge times the final energy, $(1-e^{-n})\\,\\tfrac12C\\varepsilon^2$ with the voltage not squared.",
+   "Uses $\\tfrac12CV_C$ without squaring the capacitor voltage.",
    "Uses the final stored energy, $\\tfrac12C\\varepsilon^2$.",
-   "Uses $(1-e^{-n})$ without squaring in the energy."
+   "Uses $(1-e^{-n})$ as the fraction of the final energy, without squaring the voltage factor."
   ]
  },
  {
@@ -2520,6 +2490,681 @@
   ]
  },
  {
+  "id": "pe_field_square_center",
+  "topic": "8.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the net field is recomputed as a vector sum with numpy using the corner coordinates"
+  ],
+  "misconceptions": [
+   "Adds the magnitudes of the four fields, ignoring their directions and signs.",
+   "Uses the side length $a$ as the distance from each corner.",
+   "Counts only the field of the first listed charge."
+  ]
+ },
+ {
+  "id": "pe_field_quarter_arc",
+  "topic": "8.4",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy integrates the components; a Simpson integration recomputes both components"
+  ],
+  "misconceptions": [
+   "Adds the two component magnitudes instead of combining them as perpendicular vectors, $4kQ/(\\pi R^2)$.",
+   "Uses the chord length as the distance, $kQ/(\\sqrt2R)^2$.",
+   "Gives only one component of the field, $2kQ/(\\pi R^2)$."
+  ]
+ },
+ {
+  "id": "pe_flux_line_charge_cylinder",
+  "topic": "8.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the flux is recomputed as the field $2k\\lambda/R$ times the curved area (the end faces carry no flux)"
+  ],
+  "misconceptions": [
+   "Leaves out the length, $\\lambda/\\varepsilon_0$.",
+   "Divides by $4\\pi\\varepsilon_0$ as well, $\\lambda L/(4\\pi\\varepsilon_0)$.",
+   "Uses the area of the curved surface times the field at the wrong distance of $1\\text{ m}$, $2k\\lambda\\cdot2\\pi RL$ with $R$ in centimeters."
+  ]
+ },
+ {
+  "id": "pe_gauss_slab",
+  "topic": "8.6",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the enclosed charge for the pillbox is recomputed and the field from Gauss's law is compared with the closed form"
+  ],
+  "misconceptions": [
+   "Uses $\\rho d/(2\\varepsilon_0)$ with $d$ in centimeters.",
+   "Doubles the field, $\\rho d/\\varepsilon_0$.",
+   "Uses half of the thickness, $\\rho d/(4\\varepsilon_0)$."
+  ]
+ },
+ {
+  "id": "pe_ring_center_oscillation",
+  "topic": "8.3",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the exact equation of motion for a small displacement recomputes the period"
+  ],
+  "misconceptions": [
+   "Doubles the restoring force, $\\omega^2=2kQq/(mR^3)$.",
+   "Forgets the factor $2\\pi$, $T=1/\\omega$.",
+   "Uses $R^2$ in place of $R^3$ in the restoring force."
+  ]
+ },
+ {
+  "id": "pe_plates_particle_time",
+  "topic": "8.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the equation of motion recomputes the time"
+  ],
+  "misconceptions": [
+   "Uses twice the distance over the acceleration, $2d/a$.",
+   "Uses $d/a$ as the time.",
+   "Uses $\\sqrt{d/a}$, leaving out the factor 2."
+  ]
+ },
+ {
+  "id": "pe_flux_nonuniform_cube",
+  "topic": "8.5",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the net flux is recomputed by integrating $\\vec E\\cdot d\\vec A$ over each face numerically"
+  ],
+  "misconceptions": [
+   "Uses the field at the center of the cube, $aL/2$, over one face only.",
+   "Reports the flux times $4\\pi\\varepsilon_0$ instead of $\\varepsilon_0$.",
+   "Counts the flux through two faces, $2aL^3\\varepsilon_0$."
+  ]
+ },
+ {
+  "id": "pe_work_bring_third_charge",
+  "topic": "9.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the work is recomputed as the sum of $kq_iq_3/r_i$ over the fixed charges"
+  ],
+  "misconceptions": [
+   "Uses the separation $d$ instead of $d/2$ as the distance to each charge.",
+   "Counts only the charge at $x=0$.",
+   "Counts only the charge at $x=d$."
+  ]
+ },
+ {
+  "id": "pe_sphere_surface_release_speed",
+  "topic": "9.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the motion confirms the energy balance between the surface and a distant point"
+  ],
+  "misconceptions": [
+   "Forgets the square root, $2qV/m$.",
+   "Leaves out the factor 2 in the kinetic energy, $\\sqrt{qV/m}$.",
+   "Uses $kQ/R^2$, the field, in place of the potential."
+  ]
+ },
+ {
+  "id": "pe_field_from_potential_2d",
+  "topic": "9.2",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy takes the partial derivatives; central finite differences recompute them"
+  ],
+  "misconceptions": [
+   "Adds the magnitudes of the components, $|E_x|+|E_y|$.",
+   "Uses only the $y$-component.",
+   "Reports the potential at the point."
+  ]
+ },
+ {
+  "id": "pe_force_from_potential_energy",
+  "topic": "9.1",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy differentiates $U$; a central finite difference recomputes the derivative"
+  ],
+  "misconceptions": [
+   "Reports the potential energy itself at the point.",
+   "Omits the minus sign in $F=-dU/dx$.",
+   "Differentiates only the first term."
+  ]
+ },
+ {
+  "id": "pe_plates_potential_position",
+  "topic": "9.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the potential is recomputed by integrating the uniform field from the negative plate"
+  ],
+  "misconceptions": [
+   "Uses the potential measured from the other plate, $V-Ex$.",
+   "Uses the potential difference of the plates as the potential everywhere.",
+   "Uses $E$ in place of the potential."
+  ]
+ },
+ {
+  "id": "pe_two_fixed_charges_speed",
+  "topic": "9.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the speed is recomputed from the difference of the summed pair energies"
+  ],
+  "misconceptions": [
+   "Leaves out the factor 2 in the kinetic energy.",
+   "Uses the initial potential energy as if it were the change.",
+   "Uses only the charge $q_1$ in the potential energy."
+  ]
+ },
+ {
+  "id": "pe_shell_potential_inside_claim",
+  "topic": "9.2",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the potential at several interior points is recomputed numerically by integrating the zero interior field from the surface"
+  ],
+  "misconceptions": [
+   "Believes the potential depends on the distance to the center even where the field is zero.",
+   "Believes the potential exists only where there is charge.",
+   "Believes that a zero field implies a zero potential."
+  ]
+ },
+ {
+  "id": "pe_uniform_sphere_center_potential",
+  "topic": "9.2",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy integrates the interior field; a Simpson integration recomputes the potential difference"
+  ],
+  "misconceptions": [
+   "Integrates the interior field with the wrong power, $kQ/R+kQ/(3R)$.",
+   "Uses $kQ/(2R)$.",
+   "Uses the point-charge form at the center, $kQ/(R/2)$."
+  ]
+ },
+ {
+  "id": "pe_ring_potential_difference_speed",
+  "topic": "9.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the speed is recomputed from the numerically summed ring potentials at the two points"
+  ],
+  "misconceptions": [
+   "Leaves out the factor 2 in the kinetic energy.",
+   "Uses the potential at the axial point only.",
+   "Uses the potential at the center only, as if the final potential were zero."
+  ]
+ },
+ {
+  "id": "pe_proton_eV_energy",
+  "topic": "9.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the energy is recomputed in joules and converted to electron-volts"
+  ],
+  "misconceptions": [
+   "Divides by the charge number.",
+   "Converts to joules and reports it as keV.",
+   "Ignores the charge number, $V$ in keV."
+  ]
+ },
+ {
+  "id": "pe_cap_battery_separation_energy",
+  "topic": "10.3",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the energy is recomputed from $\\tfrac12CV^2$ with the capacitance for each separation"
+  ],
+  "misconceptions": [
+   "Uses the inverse square of the factor.",
+   "Assumes the energy is unchanged because the voltage is fixed.",
+   "Uses the factor $f$ for the energy, as if the energy grew with the separation."
+  ]
+ },
+ {
+  "id": "pe_cap_network_charge",
+  "topic": "10.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy solves the charge-conservation and voltage equations for the network"
+  ],
+  "misconceptions": [
+   "Splits the charge of the parallel pair in inverse proportion to the capacitances.",
+   "Takes the whole network charge as the charge on $C_2$.",
+   "Splits the charge of the parallel pair equally."
+  ]
+ },
+ {
+  "id": "pe_spheres_connected_potential",
+  "topic": "10.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy solves the linear system of equal potentials and total charge"
+  ],
+  "misconceptions": [
+   "Averages the two initial potentials.",
+   "Uses the potential of sphere 1 before the connection, $kQ_1/R_1$.",
+   "Uses the total charge on the larger sphere only, $k(Q_1+Q_2)/R_2$."
+  ]
+ },
+ {
+  "id": "pe_cap_dielectric_field",
+  "topic": "10.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the field is recomputed from the fixed plate charge and the reduced capacitance"
+  ],
+  "misconceptions": [
+   "Multiplies the field by $\\kappa$.",
+   "Uses the field without the dielectric, $V/d$.",
+   "Divides by $\\kappa$ three times, $E_0/\\kappa^3$."
+  ]
+ },
+ {
+  "id": "pe_cap_dielectric_removed_charge",
+  "topic": "10.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the charge on the capacitor is recomputed before and after the removal"
+  ],
+  "misconceptions": [
+   "Takes the final charge with the dielectric, $\\kappa C_0V$, as the change.",
+   "Takes the charge change as $C_0V$.",
+   "Uses $(1-1/\\kappa)\\,C_0V$."
+  ]
+ },
+ {
+  "id": "pe_electrons_per_second",
+  "topic": "11.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the number per second is recomputed as the charge passing in one second divided by $e$"
+  ],
+  "misconceptions": [
+   "Uses the current in milliamperes as amperes.",
+   "Divides the charge by $e$ twice, $I/e^2$, in units of $10^{19}$.",
+   "Multiplies by the charge instead of dividing, $I\\,e$ in electrons per second."
+  ]
+ },
+ {
+  "id": "pe_wire_stretched_resistance",
+  "topic": "11.3",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the resistance is recomputed from $R=\\rho L/A$ with the new length and area for sample values"
+  ],
+  "misconceptions": [
+   "Uses the inverse of the length factor.",
+   "Uses the inverse of the square of the length factor.",
+   "Uses the length factor only."
+  ]
+ },
+ {
+  "id": "pe_bridge_balance",
+  "topic": "11.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the two junction potentials are recomputed from the divider formulas and compared"
+  ],
+  "misconceptions": [
+   "Uses $R_1R_2/R_3$.",
+   "Uses $R_1R_3/R_2$.",
+   "Adds the resistances of the other three, $R_1+R_2+R_3$."
+  ]
+ },
+ {
+  "id": "pe_bulbs_series_parallel_power",
+  "topic": "11.4",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the two battery powers are recomputed from the equivalent resistances"
+  ],
+  "misconceptions": [
+   "Uses the inverse of the number of bulbs.",
+   "Takes the powers as equal.",
+   "Uses the number of bulbs only."
+  ]
+ },
+ {
+  "id": "pe_current_division",
+  "topic": "11.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the branch current is recomputed from the common voltage across the pair"
+  ],
+  "misconceptions": [
+   "Splits the current equally.",
+   "Divides in proportion to the resistances, as if they were in series, $I\\,R_1/(R_1+R_2)$.",
+   "Uses $I\\,R_2/R_1$."
+  ]
+ },
+ {
+  "id": "pe_loop_point_potential",
+  "topic": "11.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the node potential is recomputed by solving the loop equation with signs and walking around the loop"
+  ],
+  "misconceptions": [
+   "Uses the emf of battery 2.",
+   "Ignores the drop in $R_1$ and reports the emf of battery 1.",
+   "Adds the drop instead of subtracting it, $\\varepsilon_1+IR_1$."
+  ]
+ },
+ {
+  "id": "pe_rc_two_caps_series",
+  "topic": "11.8",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the charging equation with the equivalent capacitance recomputes the charge and the voltage"
+  ],
+  "misconceptions": [
+   "Uses the time constant with only $C_1$.",
+   "Uses the sum of the capacitances for the time constant.",
+   "Assumes the voltage is divided equally between the capacitors."
+  ]
+ },
+ {
+  "id": "pe_rc_time_to_fraction",
+  "topic": "11.8",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a bisection root finder recomputes the time at which the charging curve reaches the fraction"
+  ],
+  "misconceptions": [
+   "Uses one time constant.",
+   "Multiplies the time constant by the fraction, $RC\\,f$.",
+   "Uses the base-10 logarithm, $-RC\\log_{10}(1-f)$."
+  ]
+ },
+ {
+  "id": "pe_internal_resistance_two_loads",
+  "topic": "11.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy solves the two linear equations for the emf and the internal resistance"
+  ],
+  "misconceptions": [
+   "Uses $(e-V_2)/V_2$ without the load resistance.",
+   "Treats the second terminal voltage as the emf and uses $(V_2-V_1)/I_2$.",
+   "Takes $e-V_1$ as the internal resistance in ohms."
+  ]
+ },
+ {
+  "id": "pe_short_circuit_claim",
+  "topic": "11.5",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the bulb powers before and after are recomputed with a series-circuit calculation"
+  ],
+  "misconceptions": [
+   "Believes that the added branch takes current away from the other bulb and not from the parallel one.",
+   "Believes that an easier parallel path increases the current in the bulb it bypasses.",
+   "Believes an ideal battery delivers a fixed current."
+  ]
+ },
+ {
+  "id": "pe_current_density_field",
+  "topic": "11.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the field is recomputed as the potential drop per unit length, $IR/L$"
+  ],
+  "misconceptions": [
+   "Uses the diameter in place of the area, $\\rho I/d$.",
+   "Uses the diameter as the radius for the area.",
+   "Leaves out the area, using $\\rho I$."
+  ]
+ },
+ {
+  "id": "pe_beam_deflection_angle",
+  "topic": "12.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the path through the field region recomputes the exit angle"
+  ],
+  "misconceptions": [
+   "Reports the ratio $L/r$ in radians as degrees.",
+   "Uses the cosine, $\\arccos(L/r)$.",
+   "Uses the tangent, $\\arctan(L/r)$."
+  ]
+ },
+ {
+  "id": "pe_loop_rotate_work",
+  "topic": "12.1",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy integrates the torque; a Simpson integration recomputes the work"
+  ],
+  "misconceptions": [
+   "Uses the side length in place of the area.",
+   "Uses the energy difference with $\\cos90^\\circ$, $NIAB$.",
+   "Leaves out the number of turns."
+  ]
+ },
+ {
+  "id": "pe_perpendicular_wires_field",
+  "topic": "12.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the net field is recomputed as the norm of the vector sum with numpy"
+  ],
+  "misconceptions": [
+   "Subtracts the two magnitudes.",
+   "Adds the two magnitudes, $B_1+B_2$.",
+   "Uses the sum of the currents in one formula, $\\mu_0(I_1+I_2)/(2\\pi d)$ doubled."
+  ]
+ },
+ {
+  "id": "pe_closed_loop_force_claim",
+  "topic": "12.1",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the force and torque on each side are recomputed numerically and summed"
+  ],
+  "misconceptions": [
+   "Believes that zero net force implies zero torque.",
+   "Believes the force on each side vanishes unless the plane is perpendicular to the field.",
+   "Adds the magnitudes of the side forces and ignores their directions."
+  ]
+ },
+ {
+  "id": "pe_electron_orbit_field",
+  "topic": "12.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the field is recomputed by integrating the Biot-Savart contributions around the equivalent current loop"
+  ],
+  "misconceptions": [
+   "Uses the diameter for the radius.",
+   "Uses $\\mu_0I/R$.",
+   "Uses the current as $e$ per orbit without the frequency, $\\mu_0e/(2R)$."
+  ]
+ },
+ {
+  "id": "pe_toroid_field_ratio",
+  "topic": "12.4",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the ratio is recomputed from the closed form at the two radii"
+  ],
+  "misconceptions": [
+   "Assumes the field is uniform across the toroid.",
+   "Uses the ratio of the radii the other way, $r_o/r_i$.",
+   "Uses the square of the ratio, $(r_i/r_o)^2$."
+  ]
+ },
+ {
+  "id": "pe_sliding_rod_changing_field",
+  "topic": "13.2",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy differentiates the flux; a central finite difference recomputes the derivative"
+  ],
+  "misconceptions": [
+   "Uses the flux itself, $B\\,L\\,x$.",
+   "Includes only the motional term, $BLv$.",
+   "Includes only the changing-field term, $L\\,x\\,dB/dt$."
+  ]
+ },
+ {
+  "id": "pe_coil_removed_charge",
+  "topic": "13.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the charge is recomputed by numerically integrating the current for several removal speeds, which give the same total"
+  ],
+  "misconceptions": [
+   "Uses the side length in place of the area.",
+   "Leaves out the number of turns.",
+   "Multiplies by the resistance, $NBAR$."
+  ]
+ },
+ {
+  "id": "pe_rl_inductor_power",
+  "topic": "13.5",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the power is recomputed two ways, $LI\\,dI/dt$ and $\\varepsilon I-I^2R$"
+  ],
+  "misconceptions": [
+   "Uses the power supplied by the battery, $\\varepsilon I$.",
+   "Uses the power in the resistor, $I^2R$.",
+   "Uses $\\tfrac12LI^2$, the stored energy, in watts."
+  ]
+ },
+ {
+  "id": "pe_lc_energy_fraction",
+  "topic": "13.6",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the oscillator recomputes the two energies at the stated time"
+  ],
+  "misconceptions": [
+   "Uses $\\sin(\\phi/2)^2$.",
+   "Takes the fraction to be the fraction of the period.",
+   "Gives the fraction in the capacitor instead."
+  ]
+ },
+ {
+  "id": "pe_solenoid_energy",
+  "topic": "13.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the energy is recomputed as $\\tfrac12LI^2$ with the solenoid's inductance"
+  ],
+  "misconceptions": [
+   "Uses $B/(2\\mu_0)$ times the volume.",
+   "Omits the factor of one half in the energy density, $B^2/\\mu_0$.",
+   "Uses the length in centimeters in the volume."
+  ]
+ },
+ {
+  "id": "pe_eddy_current_claim",
+  "topic": "13.3",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the induced force on a falling dipole is recomputed in a simple numerical model of a loop and a falling magnet"
+  ],
+  "misconceptions": [
+   "Believes the induced currents attract the magnet instead of opposing its motion.",
+   "Believes the induced force is equal to the weight from the very start of the fall.",
+   "Believes that induction requires the conductor to be magnetic."
+  ]
+ },
+ {
   "id": "pes_vx_graph_set_q1",
   "topic": "9.2",
   "skill": "2.B",
@@ -2724,9 +3369,9 @@
    "the charge and the new force are recomputed from Coulomb's law"
   ],
   "misconceptions": [
-   "Scales the force as $1/r$.",
-   "Scales linearly with the distance.",
-   "Scales the force inversely with $r^3$."
+   "Scales the $20\\text{ cm}$ entry as $1/r$.",
+   "Takes the force to stay equal to the $10\\text{ cm}$ entry.",
+   "Scales the $20\\text{ cm}$ entry as $1/r^3$."
   ]
  },
  {
@@ -2847,6 +3492,66 @@
    "Uses $V/r$ with the distance in centimeters.",
    "Uses the slope with the wrong sign convention, $2V/r$.",
    "Multiplies the potential by the distance, $Vr$."
+  ]
+ },
+ {
+  "id": "pes_ohm_table_set_q1",
+  "topic": "11.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the resistance is recomputed from every row and the power from $V^2/R$"
+  ],
+  "misconceptions": [
+   "Uses the product $VI$ with the current in milliamperes.",
+   "Uses $V/I$ with the current in milliamperes, so the result is 1000 times too small.",
+   "Uses $I/V$ in milliamperes per volt."
+  ]
+ },
+ {
+  "id": "pes_ohm_table_set_q2",
+  "topic": "11.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the resistance is recomputed from every row and the power from $V^2/R$"
+  ],
+  "misconceptions": [
+   "Uses $VI$ with the current from the first row.",
+   "Uses $V^2$ without dividing by $R$.",
+   "Uses $I^2R$ with the current from the table row at $10\\text{ V}$."
+  ]
+ },
+ {
+  "id": "pes_solenoid_graph_set_q1",
+  "topic": "12.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the slope and the field are recomputed from $B=\\mu_0nI$"
+  ],
+  "misconceptions": [
+   "Uses $B=2\\pi\\mu_0nI$.",
+   "Solves $B=\\mu_0nI/(2\\pi)$, the long-wire formula, for $n$.",
+   "Uses $B=2\\mu_0nI$."
+  ]
+ },
+ {
+  "id": "pes_solenoid_graph_set_q2",
+  "topic": "12.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the slope and the field are recomputed from $B=\\mu_0nI$"
+  ],
+  "misconceptions": [
+   "Uses the current in the slope without the proportionality, $\\text{slope}+I$.",
+   "Uses the field at the largest plotted current.",
+   "Halves the correct field."
   ]
  }
 ]

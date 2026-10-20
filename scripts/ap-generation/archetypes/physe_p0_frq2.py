@@ -48,7 +48,7 @@ def pef_mr_kirchhoff(rng):
 # ======================= MR (10): 전류 밀도가 변하는 도선의 자기장 =======================
 def pef_mr_wire_ampere(rng):
     for _ in forever():
-        J0 = pick(rng, [1.0, 2.0, 4.0]) * 1e5; Rm = pick(rng, [2.0, 4.0]) * 1e-3; fr = pick(rng, [0.5, 0.75]); r = fr * Rm
+        J0 = pick(rng, [1.0, 2.0, 4.0]) * 1e5; Rm = pick(rng, [2.0, 4.0]) * 1e-3; fr = pick(rng, [0.25, 0.4]); r = fr * Rm
         s = sp.symbols("s", positive=True)
         Ienc = float(sp.integrate(J0 * s / Rm * 2 * sp.pi * s, (s, 0, r))); B = MU0 * Ienc / (2 * math.pi * r) * 1e6
         agree(Ienc, simpson(lambda x: J0 * x / Rm * 2 * math.pi * x, 0, r, 4001), 1e-8, "Ienc")
@@ -57,7 +57,7 @@ def pef_mr_wire_ampere(rng):
         break
     stim = {"kind": "text", "description": f"A long straight cylindrical wire of radius $R={Rm * 1e3:g}\\text{{ mm}}$ carries a current along its axis. The current density depends on the distance $r$ from the axis as $J(r)=J_0r/R$, where $J_0={J0 / 1e5:g}\\times10^{{5}}\\text{{ A/m}}^{{2}}$. Use {MUP}.", "data": {}}
     parts = [
-        part("A", "On the diagram of the cross-section of the wire (shown as a circle, with the current out of the page), draw a circular Amperian loop of radius $r<R$ and draw an arrow showing the direction of the magnetic field on the loop.", 3, "diagram", ["1.A"],
+        part("A", "Draw a diagram of the cross-section of the wire as a circle with the current out of the page. On it draw a circular Amperian loop of radius $r<R$ concentric with the wire and an arrow showing the direction of the magnetic field on the loop.", 3, "diagram", ["1.A"],
              "A circle concentric with the wire inside its boundary, with the field arrow tangent to the circle and pointing counterclockwise for a current out of the page.",
              [R("A1", "diagram", "Draws a circular loop concentric with the wire and inside its boundary ($r<R$)", ["concentric loop of radius r < R"], err=["draws the loop off-center or outside the wire"]),
               R("A2", "diagram", "Draws the field arrow tangent to the loop (perpendicular to the radius)", ["tangent arrow"], err=["draws a radial arrow"]),
@@ -71,7 +71,7 @@ def pef_mr_wire_ampere(rng):
              f"$B=\\mu_0J_0r^2/(3R)\\approx{B:.1f}\\,\\mu\\text{{T}}$.",
              [R("C1", "numeric", "Substitutes the values (with the radii in meters) into the expression from part B", ["substitution in SI units"], requires="B3", nums=True, err=["leaves the radii in millimeters"]),
               R("C2", "numeric", f"Obtains about {B:.1f} with units of microteslas (accept any value within 2 percent)", [f"{B:.1f}", "microteslas"], requires="C1", nums=True, units=True)]),
-        part("D", "By what factor does the magnitude of the field change if the distance from the axis is doubled (still inside the wire)? Justify your answer.", 2, "explain", ["2.D", "3.B"],
+        part("D", "By what factor does the magnitude of the field change if the distance from the axis is doubled to $2r$ (which is still inside the wire)? Justify your answer.", 2, "explain", ["2.D", "3.B"],
              f"The field increases by a factor of 4, because $B\\propto r^2$ inside this wire (the enclosed current grows as $r^3$ while the loop length grows as $r$); at $2r$ the field is about ${B2:.1f}\\,\\mu\\text{{T}}$.",
              [R("D1", "numeric", "States that the field increases by a factor of 4", ["factor of 4", "increases"], nums=True, err=["states that the field doubles", "states that the field decreases as $1/r$"]),
               R("D2", "justification", "Justifies with $B=\\mu_0J_0r^2/(3R)$ (proportional to $r^2$) or with the enclosed current scaling as $r^3$ and the circumference as $r$", ["B proportional to r^2"], requires="D1", err=["argues with the $1/r$ law for the exterior of a wire"])]),
@@ -187,14 +187,14 @@ def pef_lab_resistivity(rng):
              [R("C1", "graph", "Axes are labeled with quantities and units and the scale fills most of the grid", ["axis labels", "units", "scale"], err=["scale uses less than half the grid"]),
               R("C2", "graph", "Plots the five points $(L,R)$ accurately", ["points plotted"], nums=True),
               R("C3", "graph", "Draws a straight best-fit line through the trend of the points", ["best-fit line"], err=["connects the dots"])]),
-        part("D", "Use the best-fit line to determine the resistivity of the wire material. Show your work.", 3, "calculate", ["2.B", "2.D"],
-             f"The slope is $\\rho/A\\approx{slope:.2f}\\,\\Omega/\\text{{m}}$ with $A=\\pi(d/2)^2={A * 1e6:.4f}\\text{{ mm}}^2$, so $\\rho=\\text{{slope}}\\cdot A\\approx{rho_est:.3g}\\,\\Omega\\cdot\\text{{m}}$.",
+        part("D", "Use the best-fit line to determine the resistivity of the wire material in micro-ohm-meters ($1\\,\\mu\\Omega\\cdot\\text{m}=10^{-6}\\,\\Omega\\cdot\\text{m}$). Show your work.", 3, "calculate", ["2.B", "2.D"],
+             f"The slope is $\\rho/A\\approx{slope:.2f}\\,\\Omega/\\text{{m}}$ with $A=\\pi(d/2)^2={A * 1e6:.4f}\\text{{ mm}}^2$, so $\\rho=\\text{{slope}}\\cdot A\\approx{rho_est * 1e6:.3f}\\,\\mu\\Omega\\cdot\\text{{m}}$.",
              [R("D1", "numeric", f"Calculates the slope of the best-fit line using two points on the line (about {slope:.2f} ohms per meter; accept any value within 5 percent)", [f"{slope:.2f}"], requires="C3", nums=True, err=["uses data points rather than points on the line"]),
               R("D2", "expression", "Relates the slope to $\\rho$: $\\rho=\\text{slope}\\cdot A$ with $A=\\pi d^2/4$ and the diameter converted to meters", ["rho = slope A", "A = pi d^2 / 4"], err=["uses the diameter as the radius in the area"]),
-              R("D3", "numeric", f"Obtains $\\rho$ of about {rho_est:.3g} with units of ohm-meters (accept any value consistent with the student's own slope from D1)", [f"{rho_est:.3g}", "ohm meters"], alt=["a value of rho consistent with the student's own slope from D1"], nums=True, units=True)]),
+              R("D3", "numeric", f"Obtains $\\rho$ of about {rho_est * 1e6:.3f} with units of micro-ohm-meters (accept any value consistent with the student's own slope from D1)", [f"{rho_est * 1e6:.3f}", "micro-ohm meters"], alt=["a value of rho consistent with the student's own slope from D1"], nums=True, units=True)]),
     ]
     return _pack("pef_lab_resistivity", "lab", "11.3", ["11.2", "11.4"], "3.A", "Experiment: resistivity from resistance versus length", stim, parts, 10, 27, [f"dmm={dmm}", f"rho={rho}", f"slope={slope:.5f}", f"rho_est={rho_est:.6g}", f"Rs={Rs}"],
-                 [_ev("D", "slope", slope, 0.05 * slope, "ohm/m"), _ev("D", "resistivity", rho_est, 0.06 * rho, "ohm m")],
+                 [_ev("D", "slope", slope, 0.05 * slope, "ohm/m"), _ev("D", "resistivity", rho_est * 1e6, 0.06 * rho * 1e6, "micro-ohm m")],
                  ("Designing an experiment and analyzing resistance data to extract the resistivity from the slope of R versus L", ["Describe how the resistance and the length are measured and the length is varied", "Plot R versus L as a straight line", "Use the slope and the wire's cross-sectional area to determine the resistivity"],
                   [("the generated resistances follow $R=\\rho L/A$ with a small random error so the fitted resistivity is within six percent of the generating value", "the code rejects a seed whose fitted resistivity differs from the generating value by more than six percent")], {"type": "table", "must_include": ["length", "resistance"]},
                   "the slope is recomputed from the normal equations with numpy linalg.solve and compared with polyfit; the fitted resistivity is compared with the generating value"),
@@ -244,7 +244,7 @@ def pef_lab_magnetic_force(rng):
 # ======================= QQT (8): 대전된 구 껍질의 내부와 외부 =======================
 def pef_qqt_shell_field(rng):
     for _ in forever():
-        Rc = pick(rng, [5.0, 10.0, 20.0]); Qn = pick(rng, [4.0, 6.0, 8.0, 12.0]); Rm = Rc * 1e-2
+        Rc = pick(rng, [20.0, 30.0]); Qn = pick(rng, [2.0, 3.0, 4.0]); Rm = Rc * 1e-2
         Eout = K * Qn * 1e-9 / Rm ** 2; Eout2 = K * Qn * 1e-9 / (2 * Rm) ** 2
         break
     stim = {"kind": "text", "description": f"A thin spherical shell of radius $R={Rc:g}\\text{{ cm}}$ carries a charge $Q={Qn:g}\\text{{ nC}}$ spread uniformly over its surface. The shell is nonconducting and in vacuum. Use {KP}.", "data": {}}

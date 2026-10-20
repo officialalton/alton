@@ -33,7 +33,7 @@ d("AP Physics C: Electricity and Magnetism archetypes (Python generators, 3 seed
 
   it("registers the single and set archetypes covering all 6 units (8-13), and the guide JSON lists the same ids", () => {
     expect(r.status).toBe(0);
-    expect(out.names.length).toBeGreaterThanOrEqual(179); // 1차 저작: 단독 121 + 2문항 세트 6(이후 라운드가 더한다)
+    expect(out.names.length).toBeGreaterThanOrEqual(224); // 1차 저작: 단독 121 + 2문항 세트 6(이후 라운드가 더한다)
     const ids = physicsCEmGuide.archetypes.map((a) => a.id);
     const expected = out.names.flatMap((n) => flat(n).slice(0, out.packs[n][0].items ? 2 : 1).map((q) => q.archetype));
     expect(ids).toEqual(expected);
@@ -60,7 +60,7 @@ d("AP Physics C: Electricity and Magnetism archetypes (Python generators, 3 seed
   });
 
   it("registers the FRQ scenarios, an equal number per type, with weights MR 10 / TBR 12 / LAB 10 / QQT 8 and passes the FRQ gates", () => {
-    expect(out.frq.length).toBeGreaterThanOrEqual(16);
+    expect(out.frq.length).toBeGreaterThanOrEqual(20);
     const w: Record<string, number> = { mr: 10, tbr: 12, lab: 10, qqt: 8 };
     const perType: Record<string, Set<string>> = {};
     const fails: { n: string; reasons: string[] }[] = [];

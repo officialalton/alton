@@ -109,11 +109,11 @@ def pe_charge_sharing_three(rng):
 
 @retry_sep
 def pe_induced_charge_claim(rng):
-    key, ds = sentence_options("The leaves repel more, because the charged rod pushes electrons from the knob toward the leaves of the neutral electroscope, so the leaves gain the same sign of charge as the rod.", "In charging by induction, the rod's field redistributes conduction electrons; electrons move away from a negative rod toward the leaves (or toward the knob for a positive rod, leaving the leaves positive).",
+    key, ds = sentence_options("The leaves repel more, because the negative rod pushes conduction electrons from the knob down to the leaves of the neutral electroscope, so the leaves gain extra negative charge and repel each other.", "In charging by induction the rod's field redistributes the electroscope's own electrons; a negative rod drives electrons away from the knob toward the leaves, which then carry the same sign as the rod.",
                                [("The leaves stay as they are, because the rod does not touch the electroscope and so no charge can move within it.", "Believes that charge moves in a conductor only on contact."),
-                                ("The leaves repel more, because the charged rod transfers some of its own charge to the electroscope through the air.", "Believes charge jumps from the rod to the electroscope without contact."),
-                                ("The leaves fall together, because the rod's charge cancels the charge that was on the leaves.", "Assumes the electroscope was charged before the rod approached.")])
-    stem = "A neutral electroscope has a metal knob connected by a rod to two thin metal leaves that hang together. A charged rod is brought near the knob without touching it. Which statement describes what happens to the leaves and gives the best reason?"
+                                ("The leaves repel more, because the negative rod transfers some of its own charge to the electroscope through the air.", "Believes charge jumps from the rod to the electroscope without contact."),
+                                ("The leaves fall together, because the negative rod pulls electrons up into the knob and the leaves become positive and attract each other.", "Reverses the direction in which the electrons move and thinks oppositely charged leaves attract each other.")])
+    stem = "A neutral electroscope has a metal knob connected by a rod to two thin metal leaves that hang together. A negatively charged rod is brought near the knob without touching it. Which statement describes what happens to the leaves and gives the best reason?"
     return MQ("pe_induced_charge_claim", "8.2", "3.B", stem, key, ds, rng, "A charged object near a conductor redistributes the conductor's free charges without transferring charge", ["Describe how the rod's field moves charge in the electroscope", "Relate the charge on the leaves to the leaves' repulsion"],
               "the charge on the leaves is recomputed with a two-region charge-bookkeeping model of induced separation", "", ["claim"], est=80, judg=["justification"], cond=[("the electroscope is a conductor and starts neutral", "the stem states a neutral electroscope")])
 
@@ -162,7 +162,8 @@ def pe_pe_square_four(rng):
         if abs(U) > 0.05:
             break
     key, ds = signed_opts(U * 1e3, [("Counts only the four sides, leaving out the two diagonals.", K * (q * 1e-6) ** 2 / a * (4 if sgn == "all positive" else -4) * 1e3), ("Counts the diagonals at the distance $a$.", K * (q * 1e-6) ** 2 / a * ((4 + 2) if sgn == "all positive" else (-4 + 2)) * 1e3), ("Uses $kq_iq_j/r^2$ for each pair.", sum(K * sg[i] * sg[j] * (q * 1e-6) ** 2 / math.dist(pos[i], pos[j]) ** 2 for i in range(4) for j in range(i + 1, 4)) * 1e3 * 1e-3), ("Counts each pair twice.", 2 * U * 1e3)], "", fmt=FU(U_MJ))
-    stem = f"Four point charges of magnitude ${q:g}\\,\\mu\\text{{C}}$ are fixed at the corners of a square of side ${a * 100:g}\\text{{ cm}}$. The charges are {sgn} (in the alternating case the signs alternate around the square). What is the total electric potential energy of the system, with zero energy at infinite separation?" + KUSE
+    sgtxt = "All four charges are positive." if sgn == "all positive" else "Going around the square the signs alternate: $+$, $-$, $+$, $-$."
+    stem = f"Four point charges of magnitude ${q:g}\\,\\mu\\text{{C}}$ are fixed at the corners of a square of side ${a * 100:g}\\text{{ cm}}$. {sgtxt} What is the total electric potential energy of the system, with zero energy at infinite separation?" + KUSE
     return MQ("pe_pe_square_four", "9.1", "2.B", stem, key, ds, rng, "The energy of a collection sums over every pair once, including the diagonals", ["List the six pairs: four sides and two diagonals", "Add $kq_iq_j/r_{ij}$ with signs"],
               "the pair energies are summed by a double loop over the corner coordinates", f"The four sides and the two diagonals give $U={sig(U * 1e3)}\\text{{ mJ}}$.", [f"q={q}", f"a={a}", f"sgn={sgn}"], est=100)
 
@@ -236,7 +237,7 @@ def pe_concentric_shells_potential(rng):
               "the potential is recomputed as the integral of the field from infinity inward with the enclosed charge in each region", f"$V=kq_1/R_1+kq_2/R_2={sig(V)}\\text{{ V}}$.", [f"q1={q1}", f"q2={q2}", f"R1={R1}", f"R2={R2}"], est=100)
 
 
-STAGE_U9_B = ["pe_pe_square_four", "pe_potential_disk_axis", "pe_potential_rod_axis", "pe_two_particles_release", "pe_electron_deflection", "pe_concentric_shells_potential"]
+STAGE_U9_B = ["pe_pe_square_four", "pe_potential_disk_axis", "pe_potential_rod_axis", "pe_two_particles_release", "pe_concentric_shells_potential"]
 
 
 # ---------------- 단원 10 ----------------

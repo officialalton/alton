@@ -352,9 +352,11 @@ def pe_cap_dielectric_factor(rng):
     else:
         wr = [("Uses the battery-connected result, in which the charge rises.", kap), ("Believes the charge falls because the capacitance rises.", 1 / kap), ("Applies the factor $\\kappa$ twice.", kap ** 2), ("Uses the factor $\\kappa+1$.", kap + 1)]
     key, ds = num_opts(f, wr, "", fmt=lambda v: "$" + sig(v) + "$ times the original")
+    why_f = (f"With the battery connected, $V$ stays fixed while $C\\to\\kappa C$, so $Q=CV$ and $U=\\tfrac12CV^2$ both grow by the factor ${sig(kap)}$." if bat else
+             (f"With the battery disconnected, $Q$ stays fixed while $C\\to\\kappa C$, so $U=Q^2/(2C)$ falls by the factor ${sig(kap)}$." if en else f"With the battery disconnected the free charge on the plates cannot change, so the charge stays at ${sig(1.0)}$ times its original value even though $C\\to\\kappa C$."))
     stem = f"A parallel-plate capacitor with vacuum between its plates is {conn}. A dielectric slab with constant $\\kappa={kap:g}$ is inserted so that it completely fills the space between the plates. By what factor does {q} change?"
     return MQ("pe_cap_dielectric_factor", "10.4", "2.C", stem, key, ds, rng, "A dielectric multiplies the capacitance by $\\kappa$; what stays fixed depends on whether the battery is connected", ["Identify the fixed quantity: $V$ with a battery, $Q$ when isolated", "Apply $C\\to\\kappa C$ to $Q=CV$ or $U=\\tfrac12Q^2/C$"],
-              "the charge and the energy are recomputed for both cases from $Q=CV$ and $U=\\tfrac12CV^2$", f"With the capacitor {conn}, {q} changes by a factor of ${sig(f)}$.", [f"kap={kap}", f"conn={conn}", f"q={q}"], est=90, judg=["law_selection", "proportional_reasoning"])
+              "the charge and the energy are recomputed for both cases from $Q=CV$ and $U=\\tfrac12CV^2$", why_f, [f"kap={kap}", f"conn={conn}", f"q={q}"], est=90, judg=["law_selection", "proportional_reasoning"])
 
 
 @retry_sep
@@ -410,4 +412,4 @@ def pe_cap_work_separate(rng):
               "the work is recomputed as the difference of $Q^2/(2C)$ before and after", f"$U_0=\\tfrac12CV^2$ and $U=fU_0$, so $W=(f-1)U_0={sig(W)}\\,\\mu\\text{{J}}$.", [f"C={C}", f"V={V}", f"f={f}"], est=95)
 
 
-STAGE_U10 = ["pe_shell_induced_charge", "pe_conductor_field_claim", "pe_connected_spheres_charge", "pe_connected_spheres_field_ratio", "pe_cap_parallel_value", "pe_cap_energy", "pe_cap_network", "pe_cap_shared_charge", "pe_cap_dielectric_factor", "pe_cap_separation_energy", "pe_cap_partial_dielectric", "pe_cap_coax", "pe_cap_work_separate"]
+STAGE_U10 = ["pe_shell_induced_charge", "pe_conductor_field_claim", "pe_connected_spheres_charge", "pe_connected_spheres_field_ratio", "pe_cap_parallel_value", "pe_cap_network", "pe_cap_shared_charge", "pe_cap_dielectric_factor", "pe_cap_separation_energy", "pe_cap_partial_dielectric", "pe_cap_coax", "pe_cap_work_separate"]
