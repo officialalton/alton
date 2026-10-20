@@ -1,0 +1,55 @@
+{
+ "runs": [
+  "bio-b34e-mc"
+ ],
+ "rows": 24,
+ "passed": 7,
+ "rejected": 17,
+ "passRate": 0.292,
+ "mc": {
+  "rows": 24,
+  "passed": 7,
+  "passRate": 0.292
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "6": 1,
+  "7": 6
+ },
+ "skillsPassed": {
+  "1.B": 7
+ },
+ "figPassed": {
+  "none": 7
+ },
+ "figAll": {
+  "none": 24
+ },
+ "figPassRate": {
+  "none": "7/24"
+ },
+ "renderTypesPassed": {
+  "none": 7
+ },
+ "archetypesPassed": {
+  "bi_p_gene_regulation_concept": 1,
+  "bi_p_selection_pattern": 3,
+  "bi_p_reproductive_isolation": 3
+ },
+ "archetypesAll": {
+  "bi_p_gene_regulation_concept": 6,
+  "bi_p_selection_pattern": 6,
+  "bi_p_reproductive_isolation": 6,
+  "bi_p_allele_frequency_graph": 6
+ },
+ "failedArchetypes": [
+  "bi_p_allele_frequency_graph"
+ ],
+ "costUsd": {
+  "bio-b34e-mc": 1.0979
+ }
+}

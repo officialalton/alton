@@ -1,0 +1,336 @@
+{
+ "schema": "ap-screen-evidence/v3",
+ "generator": "playwright",
+ "limitations": "Automated screen check (Playwright): covers display, input, answer/explanation exposure and clipping only. It does NOT verify graph meaning, figure correctness, or naturalness of wording \u2014 that still needs human review.",
+ "generatedAt": "2026-10-20T04:26:46.140Z",
+ "entries": [
+  {
+   "candidate_key": "bio-b34e-mc:ap_biology-m01-k2",
+   "checker_kind": "automated",
+   "content_hash": "52111f13b42a3f1cbc47aa0f910e09a18bdf8a009883b036dc91101913b9dc1e",
+   "problem_version_id": "d1f8dec6-5195-44de-aad4-db547801403b",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/bio-b34r2/bio-b34e-mc_ap_biology-m01-k2-390x844.jpg",
+   "timestamp": "2026-10-20T04:26:40.009Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "bio-b34e-mc:ap_biology-m02-k2",
+   "checker_kind": "automated",
+   "content_hash": "4ce0536489a688af777674fcba7c87955347677e17180b346dd4f2b41c62c043",
+   "problem_version_id": "1fa5b726-4dd7-4697-a991-7d73b4c3e7ba",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/bio-b34r2/bio-b34e-mc_ap_biology-m02-k2-390x844.jpg",
+   "timestamp": "2026-10-20T04:26:40.367Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "bio-b34e-mc:ap_biology-m03-k5",
+   "checker_kind": "automated",
+   "content_hash": "a84c3be1cc4e4d9652006d2283df501e816a5f95487d68a8c1cee4aeb92bdf49",
+   "problem_version_id": "165d855f-59b4-45e4-9c33-7a9d88b8d96f",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/bio-b34r2/bio-b34e-mc_ap_biology-m03-k5-390x844.jpg",
+   "timestamp": "2026-10-20T04:26:40.734Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "bio-b34f-mc:ap_biology-m01-k1",
+   "checker_kind": "automated",
+   "content_hash": "d81fc0dd90e68271d443da37c90849408572f2631653ab3c1747f1b4cdce7869",
+   "problem_version_id": "f46c35b9-76c7-4da1-9045-184fc9d74fac",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/bio-b34r2/bio-b34f-mc_ap_biology-m01-k1-390x844.jpg",
+   "timestamp": "2026-10-20T04:26:41.109Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "bio-b34e-mc:ap_biology-m01-k2",
+   "checker_kind": "automated",
+   "content_hash": "52111f13b42a3f1cbc47aa0f910e09a18bdf8a009883b036dc91101913b9dc1e",
+   "problem_version_id": "d1f8dec6-5195-44de-aad4-db547801403b",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/bio-b34r2/bio-b34e-mc_ap_biology-m01-k2-1280x800.jpg",
+   "timestamp": "2026-10-20T04:26:43.447Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "bio-b34e-mc:ap_biology-m02-k2",
+   "checker_kind": "automated",
+   "content_hash": "4ce0536489a688af777674fcba7c87955347677e17180b346dd4f2b41c62c043",
+   "problem_version_id": "1fa5b726-4dd7-4697-a991-7d73b4c3e7ba",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/bio-b34r2/bio-b34e-mc_ap_biology-m02-k2-1280x800.jpg",
+   "timestamp": "2026-10-20T04:26:43.813Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "bio-b34e-mc:ap_biology-m03-k5",
+   "checker_kind": "automated",
+   "content_hash": "a84c3be1cc4e4d9652006d2283df501e816a5f95487d68a8c1cee4aeb92bdf49",
+   "problem_version_id": "165d855f-59b4-45e4-9c33-7a9d88b8d96f",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/bio-b34r2/bio-b34e-mc_ap_biology-m03-k5-1280x800.jpg",
+   "timestamp": "2026-10-20T04:26:44.172Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "bio-b34f-mc:ap_biology-m01-k1",
+   "checker_kind": "automated",
+   "content_hash": "d81fc0dd90e68271d443da37c90849408572f2631653ab3c1747f1b4cdce7869",
+   "problem_version_id": "f46c35b9-76c7-4da1-9045-184fc9d74fac",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/bio-b34r2/bio-b34f-mc_ap_biology-m01-k1-1280x800.jpg",
+   "timestamp": "2026-10-20T04:26:44.552Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "4/4 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  }
+ ]
+}

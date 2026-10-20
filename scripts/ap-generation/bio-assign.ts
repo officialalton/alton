@@ -194,7 +194,11 @@ function main() {
   const log = (s: string) => console.error(s);
   const blocked = new Set<string>(); for (const f of arg("--block-file").split(",").filter(Boolean)) for (const st of (JSON.parse(readFileSync(f, "utf-8")) as { sets: { mcA?: string[]; frqA?: string[] }[] }).sets) for (const k of [...(st.mcA ?? []), ...(st.frqA ?? [])]) blocked.add(k);
   const disjoint = !has("--allow-shared-structure");
-  const blockedArchetypes = new Set<string>(arg("--block-archetypes") ? (JSON.parse(readFileSync(arg("--block-archetypes"), "utf-8")) as string[]) : []); // 공개 세트가 쓴 원형(풀이 틀)은 재고·가상 칸 모두에서 제외
+  const blockedArchetypes = new Set<string>(arg("--block-archetypes") ? (JSON.parse(readFileSync(arg("--block-archetypes"), "utf-8")) as string[]) : []);
+  // --block-keys <json>: 원격 SELECT 로 읽은 현재 공개 세트의 실제 문항 키(+ 변환 안 된 키). 이 키와 그 원형(풀이 틀)을 모두 막는다.
+  if (arg("--block-keys")) { const bk = new Set(JSON.parse(readFileSync(arg("--block-keys"), "utf-8")) as string[]); for (const c of pool0) if (bk.has(c.key) || c.members.some((m) => bk.has((m as { key?: string }).key ?? ""))) { blocked.add(c.key); } for (const k of bk) blocked.add(k); }
+  // --block-arch-keys <json>: 현재 공개 세트의 키. 이 키가 쓴 원형(풀이 틀)을 재고·가상 칸 모두에서 막는다.
+  if (arg("--block-arch-keys")) { const pk = new Set(JSON.parse(readFileSync(arg("--block-arch-keys"), "utf-8")) as string[]); for (const c of pool0) if (pk.has(c.key)) { blocked.add(c.key); blockedArchetypes.add(c.archetype); } } // 공개 세트가 쓴 원형(풀이 틀)은 재고·가상 칸 모두에서 제외
   let m: ReturnType<typeof solveBioSets>;
   if (!has("--sequential")) m = solveBioSets(ids, pool, { timeMs: TIME, log, preferExamPrep: has("--prefer-exam-prep"), minExamPrep: Number(arg("--min-exam-prep", "0")) || undefined, blocked, disjoint, frqSpread: has("--frq-spread"), forbid, blockedArchetypes });
   else { // 순차: BI1 을 최적으로 푼 뒤 그 문항·구조를 막고 BI2 를 푼다

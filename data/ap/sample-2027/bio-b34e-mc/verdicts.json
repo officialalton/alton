@@ -1,0 +1,1378 @@
+[
+ {
+  "key": "ap_biology-m01-k0",
+  "cellId": "ap_biology-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Allolactose, which the cell makes from lactose, binds the lac repressor and causes an allosteric shape change. The repressor then lets go of the operator, so RNA polymerase can transcribe the genes.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": ""
+   },
+   "notes": "The item can be answered in about 65 seconds, requires no calculation, and has a typical reading load.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: it has a unique key, distinct distractors, and a suitable length. It fails on scope because lac operon repressor regulation is covered by topic 6.5, not 6.3 (Transcription and RNA Processing), so the topic label does not match the content."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept explanation of lac operon induction: lactose (allolactose) binds the repressor, causing a conformational change that releases it from the operator so RNA polymerase can transcribe. Requires choosing the correct mechanism and rejecting misconceptions (DNA sequence change, promoter binding, ATP signaling). No data, calculation, or representation change; short reading. Note the content aligns more with 6.5 (regulation) than 6.3 (transcription/RNA processing), a topic-tag mismatch but still within Unit 6 scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m01-k1",
+  "cellId": "ap_biology-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Same genome; differential gene expression via cell-specific transcription factors explains it. Other options contradict same-genes premise or are implausible.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "D"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is too easy and close to rote recall. It is weakly discriminating because the distractors are implausible and the stem gives away the answer. The topic label 6.3 is a loose fit, since the item is really about 6.5/6.6 regulation of gene expression.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the distractors are weak. Two of them contradict the stem's own premise, and the other is implausible. The item is also easy and sits closer to 6.5/6.6 than to 6.3. I fail it on distractor quality and exam suitability."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item with no data. The student must recognize that identical genomes imply the difference lies in regulation of transcription, and reject three common misconceptions (gene location, missing ribosomes, gene deletion). Short stem, no calculation, no representation changes. Fits foundational concept explanation rather than full-mock difficulty. Note: the content aligns more with 6.5/6.6 than 6.3, a minor topic-tag mismatch that does not raise difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m01-k2",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Activator bound to the enhancer helps recruit and assemble the transcription machinery at the promoter. If it can't bind, only basal transcription is left, so the rate falls a lot.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 65 seconds, has a light reading load, and needs no calculation. Its format is typical of AP Biology multiple choice.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound concept-explanation question on enhancer and transcription factor function. It has a unique key, distinct misconception-based distractors and an appropriate time load, and it passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item on how a transcription factor and enhancer regulate transcription. Students predict the effect of a loss-of-binding mutation and reject three named misconceptions: the factor acting at the ribosome, the promoter alone being sufficient, and the enhancer binding RNA polymerase. There is no data, no calculation, and little reading. Reasoning is short (about 2-3 steps) and sits at the core CED level. It suits foundational practice more than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m01-k3",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "Activator bound to the enhancer helps recruit and stabilize the transcription machinery at the promoter. If it can't bind, transcription drops to a low basal rate.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 seconds to answer, needs no calculation and has a typical AP reading load.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean 1.B concept application on 6.3. Its key is unique, its distractors are distinct and well explained, and it is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step concept application: a transcription factor that cannot bind the enhancer leads to reduced transcription. No data, no calculation, one representation. Distractors are mildly tempting misconceptions (the promoter alone is sufficient; transcription factors act in translation; enhancer binds RNA polymerase) but are rejected with one idea. Appropriate for foundational learning rather than full-mock depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m01-k4",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Activator bound to the enhancer helps recruit/stabilize the transcription machinery at the promoter; if it can't bind, transcription drops to a low basal level.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "B"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound concept-explanation MC. The key is unique and each distractor encodes a distinct misconception, with a matching explanation. No stimulus is needed. The item is in scope and its timing is suitable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step concept item: predict that loss of transcription factor binding to an enhancer lowers transcription rate. No data, no calculation, short stem. Distractors target clear misconceptions (the factor acting at the ribosome, the promoter alone being sufficient, the enhancer binding RNA polymerase directly). It requires recognizing one governing relationship (the role of the transcription factor in assembling the transcription machinery) with minimal reasoning and no representation changes. It sits at the recall/application level and is not at full-mock exam difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m01-k5",
+  "cellId": "ap_biology-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "Allolactose, an isomer made from lactose, binds the lac repressor and changes its shape (allosteric change). The repressor then lets go of the operator, so RNA polymerase can transcribe the genes. The other choices are wrong: lactose does not change the DNA sequence, it does not bind the promoter, and ATP does not switch the genes on.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well built, but the topic tag is wrong: the lac operon belongs to 6.5, not 6.3. It therefore fails the scope/skill criterion.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "The item is labeled 6.3 (Transcription and RNA Processing), but the lac operon repressor/inducer mechanism is the CED topic 6.5 (Regulation of Gene Expression). Skill 1.B (explain a concept) fits. The topic mismatch fails scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is the unique correct answer. The lactose/allolactose-repressor mechanism is accurate."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear. The mention of glucose scarcity is a minor extra condition but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (a sequence change, binding to the promoter, an energy supply), and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 65 seconds, typical reading load, no calculation."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item on inducible operon regulation (lactose as inducer inactivating the repressor). Requires recalling one mechanism and rejecting three common misconceptions (DNA sequence change, direct promoter binding, ATP signaling). No data, calculation, or representation change. Short reading load. Appropriate as foundational concept explanation rather than full-mock exam-level reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m02-k0",
+  "cellId": "ap_biology-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Predators remove both extremes, so the intermediate phenotype is favored. That is stabilizing selection: the mean stays at medium fur and the variance gets smaller.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 65 seconds, needs no calculation and has a light reading load. It is typical of AP Biology multiple choice.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean concept-application item on stabilizing selection. It has a unique key, distinct misconception distractors and appropriate length. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept application: recognize that selection against both phenotypic extremes produces stabilizing selection and a narrower phenotypic range. Distractors reflect common misconceptions (directional vs. disruptive selection, selection creating new alleles), but the item needs only one reasoning step, has no data or representation changes, and uses minimal reading and no computation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m02-k1",
+  "cellId": "ap_biology-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Both extremes are favored and intermediates are selected against, which is disruptive selection. Over time small- and large-beaked birds become more common than medium-beaked birds.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "D"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard disruptive selection concept item. The key is unique and correct, and each distractor encodes a distinct misconception. The item needs no stimulus and takes about 60 seconds.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Selection patterns fit 7.4 and the 1.B concept-explanation skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only D is consistent with both extremes being favored and medium disfavored."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem is complete and needs no stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option is explained specifically and accurately."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short reading load, no arithmetic, appropriate for the exam."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: the learner must recognize that the intermediate phenotype has lower fitness while both extremes have higher fitness, which is disruptive selection. There is no data, no calculation, and one short scenario. The distractors map to common misconceptions (directional or stabilizing selection, and the idea that individual genes being fixed prevents population change), but rejecting them takes only one reasoning step. This is foundational recall and application, below full-mock exam depth. The topic fit is closer to 7.2 than 7.4, though this does not affect difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m02-k2",
+  "cellId": "ap_biology-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Dark beetles get eaten less often, so they survive and reproduce more. That is directional selection, and it moves the population's average color toward dark.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directional selection applied to a concrete case; fits Unit 7 selection and concept explanation (1.B)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is uniquely defensible; the other options contradict the stem."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. The stem is clear, and heritability of color is implicit but standard."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (equal fitness, disruptive selection, acquired change), each explained; option lengths are parallel."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 65 seconds, low reading load, no calculation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, simple concept-application MC on directional selection with a unique key and distinct distractors. The only weakness is a minor unstated heritability assumption."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step application of directional selection to a concrete, classic scenario. Distractors are common misconceptions (no selection, disruptive selection, individual acquired change), but recognizing the correct pattern requires little reasoning, no data interpretation, and no calculation. Suitable for foundational concept checks rather than full-mock discrimination.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m02-k3",
+  "cellId": "ap_biology-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "resembles_known_exam_item"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "Predation favors dark beetles on dark bark, so directional selection moves the mean color toward dark.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Labeled 7.4 Population Genetics but tests selection pattern (directional selection), which belongs to 7.1/7.2; no allele frequency or gene pool content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the unique defensible answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear (heritability implied)."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Rationales just restate the stem and do not name distinct misconceptions; option D is a Lamarckian idea not named; the correct option is the only one using precise technical terms."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Essentially the peppered moth industrial melanism scenario reskinned with beetles; weak distractors are easy to dismiss."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": true,
+   "summary": "The key is correct, but the item is mis-assigned to topic 7.4 (it tests selection pattern from 7.1/7.2). It is a reskinned peppered moth scenario, and its distractor rationales are generic and do not name misconceptions. Fail."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step concept identification: differential predation on a heritable trait leads to directional selection. No data, no calculation, short stem. Distractors are standard misconceptions (equal predation, disruptive selection, Lamarckian individual change), which are easy to reject. Well suited to introductory learning rather than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m02-k4",
+  "cellId": "ap_biology-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "Predators eat dark beetles less often, so dark beetles survive and reproduce more. That is directional selection, and it moves the mean color toward dark.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 seconds, needs no calculation, and has a light reading load.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, standalone directional-selection question with a unique key, distinct distractors and a short, suitable exam load. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step conceptual item: darker bark leads to differential predation, so the dark phenotype is favored and the mean shifts darker (directional selection). Distractors test named misconceptions (no selection, disruptive selection, individuals acquiring color changes), but the correct answer is identifiable with one reasoning link and no data, calculation, or representation change. The short concrete scenario is allowed for practice 1, with minimal reading load. This is a foundational level of concept depth, below typical full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m02-k5",
+  "cellId": "ap_biology-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Predators remove both extremes and medium-colored mice survive best. That is stabilizing selection: the mean stays at medium and variation shrinks.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "D"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Selection patterns fit 7.4; applying the concept to a case fits 1.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Stabilizing selection is the unique defensible answer; the other three each contradict the stem."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions (creating alleles, directional, disruptive); each is explained accurately."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 65 s, no arithmetic, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean concept-application MC on stabilizing selection with a unique key and distinct misconception-based distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks students to recognize stabilizing selection from a short scenario with no data, then reject three misconceptions: selection creating alleles, directional selection, and disruptive selection. It takes about two reasoning steps (identify which phenotypes are removed, then map to the mode of selection) with no calculation and no representation changes. It is within CED scope and clearly worded. It is a straightforward concept-application item, below full-mock depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m03-k0",
+  "cellId": "ap_biology-m03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_exam_suitability",
+   "resembles_known_exam_item"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "Prezygotic (temporal) isolation",
+     "brief_reasoning": "The two species breed at different times of year, so they never mate and no zygotes form. That makes it temporal isolation, which is a kind of prezygotic isolation.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": true,
+   "summary": "The item is correct, in scope, and has sound distractors. I fail it on exam suitability because it is a near-recall, stock textbook scenario.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 7.10 reproductive barriers. Applying prezygotic versus postzygotic isolation to a concrete case fits skill 1.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Temporal isolation is prezygotic. The key is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor has a specific, accurate rationale. The geographic option is rejected because the species share a pond. The postzygotic options are rejected because no zygotes form."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item is a very standard textbook example (frogs breeding in different seasons) and is close to vocabulary classification, so it is low in rigor and recognizable as a common example. Timing and calculator load are fine."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-step classification of a clearly described scenario (temporal isolation = prezygotic barrier). Distractors are common misconceptions (geographic vs. same pond; postzygotic outcomes not supported by the scenario). No data, calculation, or representation change; low reading load. Suitable for initial learning of reproductive isolation rather than full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m03-k1",
+  "cellId": "ap_biology-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Because the two species use different pollinators, pollen never moves between them, so fertilization can't happen. That makes this prezygotic isolation, specifically mechanical or behavioral isolation through the pollinators.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "D"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 seconds, has a short stem, and requires no calculation. Calculator designation is not an issue.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean and passes all criteria. It has a single unambiguous key and three distinct, well-explained misconception distractors. It is suitable for AP Biology topic 7.10 at skill 1.B."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-step application of a single concept: no zygote forms because pollen is never transferred, so the isolation is prezygotic. The distractors (postzygotic hybrid fitness, postzygotic seed inviability, allopatric speciation despite the shared region) can each be rejected with one fact from the stem. There is no data, calculation, or representation change, and the reading load is minimal. This is below full-mock exam-prep depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_biology-m03-k2",
+  "cellId": "ap_biology-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "A zygote forms and grows into a mule, but the mule is sterile. That is reduced hybrid fertility, which is a form of postzygotic isolation.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "Postzygotic isolation (hybrid sterility)"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 7.10 speciation / reproductive isolation. Applying the prezygotic vs. postzygotic concept to a concrete case fits skill 1.B and the item's scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the only defensible answer: a hybrid zygote forms and is sterile, which is postzygotic isolation. The \"no isolation\" option is wrong because the sterile mule blocks gene flow. Both prezygotic options are contradicted by the stem, since mating and fertilization occurred."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear. Minor grammar slip: \"produce an offspring\"."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option encodes a distinct misconception: producing offspring means no isolation, fertilization failed, or mating means prezygotic. The explanation covers each one. Option B's rationale is accurate. The correct option is slightly longer, but only by a few words."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Takes about 60 seconds, needs no calculation, and has low reading load. The mule example is a very common textbook case. The item applies a concept to a situation rather than matching vocabulary alone."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A sound, simple concept-application item on postzygotic isolation (hybrid sterility). The key is unique, the distractors are distinct and explained, and the item is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Classic mule example; the student must recognize that a zygote forms (so isolation is postzygotic) and that the hybrid is sterile. Two short reasoning steps, no data, no calculation. Distractors target the misconceptions that offspring means no isolation and that mating means prezygotic isolation. This is a concrete scenario, not bare vocabulary matching, but the concept is low-depth and commonly memorized, so it fits foundational learning more than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m03-k3",
+  "cellId": "ap_biology-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Postzygotic isolation (hybrid sterility)",
+     "brief_reasoning": "Fertilization happens and a zygote forms, but the hybrid mule is sterile. That is reduced hybrid fertility, which is a postzygotic barrier.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 7.10 reproductive isolation applied to a concrete case; skill 1.B concept explanation via classification with justification. In scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Postzygotic (hybrid sterility) is the unique defensible answer. Mating and fertilization both occur, so the prezygotic options are wrong, and sterility means gene flow does not occur, so 'no isolation' is wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem gives all necessary facts and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor targets a distinct misconception (no isolation if offspring form; fertilization failure; mating barrier). The explanation addresses every wrong option. Some rationales are terse, and the 'sperm and egg do not fuse' rationale is accurate. The explanation text has a minor double-period formatting glitch."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, low reading load, no calculation. The calculator designation is irrelevant but consistent with the subject policy. The option lengths are parallel, so there is no giveaway."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unambiguous 7.10 item that applies the prezygotic/postzygotic distinction to the mule case. The key is unique, the distractors encode distinct misconceptions, and the load is appropriate. Passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-step concept application: recognize that a hybrid formed but sterile indicates postzygotic isolation (hybrid sterility). Concrete familiar scenario, no data or calculation. Distractors target common misconceptions (offspring means no isolation; mating means prezygotic), but the item requires only a single governing relationship, making it foundational rather than full-mock level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m03-k4",
+  "cellId": "ap_biology-m03",
+  "passed": false,
+  "reasons": [
+   "resembles_known_exam_item"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "Postzygotic isolation (hybrid sterility)",
+     "brief_reasoning": "The sperm and egg do fuse, so a zygote forms and grows into a mule. The mule can't reproduce, which is hybrid sterility. That is a postzygotic barrier.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": true,
+   "summary": "The item is a clean concept-application question on prezygotic versus postzygotic barriers, using the horse-donkey-mule case. The key (postzygotic, hybrid sterility) is the unique correct answer, and all four options are parallel and a similar length. The stimulus is correctly empty. Each distractor's rationale names a distinct misconception. It is within 7.10 and skill 1.B, and the 60-second time is appropriate. The mule scenario is a very common textbook example, which is acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits 7.10 and skill 1.B: it applies the pre/postzygotic classification to a concrete case."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Postzygotic (hybrid sterility) is unique. The mule forms, so fertilization and mating both occurred and the barrier acts after the zygote forms."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and self-contained."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a specific rationale. The rationale for option A is slightly terse but accurate. The distractors encode distinct errors: no isolation because offspring exist, fusion failure, and mating-behavior barrier."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short reading load, no calculation, about 60 seconds. Typical of AP Biology."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step application of the prezygotic vs. postzygotic distinction to a short, concrete scenario (horse x donkey = sterile mule). Distractors are easy to reject: a hybrid forms and mating occurs, so the barrier is not prezygotic. No data, calculation, or representation change. Concept depth is shallow and reasoning is minimal, so it is better suited to basic learning than to full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m03-k5",
+  "cellId": "ap_biology-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Different breeding seasons means temporal isolation. That is a prezygotic barrier, so no zygotes are formed.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "D"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Applies prezygotic/postzygotic classification to a concrete case; fits 7.10 and 1.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Temporal isolation is prezygotic; D is the unique defensible answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option encodes a distinct misconception, and the explanation addresses each. The key is slightly longer, but only marginally."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, low reading load, no calculation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous application of reproductive isolation to a frog breeding-season scenario. It has a unique key and distinct distractors, and it is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: identify temporal (prezygotic) reproductive isolation from a brief concrete scenario. Requires one reasoning step, i.e., recognizing that different breeding times prevent zygote formation, and rejecting the geographic and postzygotic distractors, which are contradicted by the stem (same pond; no mating occurs). No data, no calculation, minimal reading. This is below the typical full-mock exam_prep level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m04-k0",
+  "cellId": "ap_biology-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_stimulus",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "The allele frequency goes up from 0.10 and levels off around 0.90, so the allele became common. The y-axis shows allele frequency, not how many beetles there are.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "The topic is 7.3 Artificial Selection, but nothing in the item involves human-directed selection. It is a generic allele-frequency trend description with no breeding or selection context. The skill 2.A is nominally targeted, but the 'visual' is only narrated in the stem, so the student does not actually describe a visual representation."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Option C adds the claim that 'the allele became common in the population'. This is an interpretation, and it goes beyond a pure description of the data. The key is roughly defensible, but the mixed describe/interpret wording is weak."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stimulus kind is 'none' with empty data, but the stem refers to a graph. The graph is only described in words, so no machine-readable data exists to render a figure. This is a wrong or missing stimulus for a skill that requires reading a visual."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The distractors are trivially wrong because they contradict the verbal description in the stem. They encode no realistic misconception, and the stimulus is absent. Distractor B (population size) is the only slightly realistic one. The rationales merely restate the stem."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item is a trivial restatement of the stem, so it has no real judgment demand. The longest option is the key, a mild giveaway. It is not at AP level."
+   },
+   "instant_reject": [
+    "wrong_stimulus"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Reject. The graph is described only in the stem and no stimulus data exists. The item has no artificial-selection content. The distractors contradict the stem, so the item is trivial and not AP level."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The stem already gives a verbal description of the graph. The student only needs to identify the trend (allele frequency rises from 0.10, then plateaus near 0.90) and reject distractors that reverse the trend, confuse allele frequency with population size, or claim no change. There is one reasoning step, no calculation, and almost no representation change. The item is a straightforward test of skill 2.A at a foundational level and is not hard for unfair reasons.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m04-k1",
+  "cellId": "ap_biology-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_stimulus",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Resistant percent goes from 1% to 85%, and the steepest rise is between days 2 and 4. That means the increase was not the same each day, the share killed went down, and nothing decreased.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "D"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "wrong_stimulus"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item refers to a line graph, but the stimulus is empty (\"none\"), so the visual cannot be rendered. The stem also gives away the answer. The scenario is antibiotic resistance, which is natural selection rather than artificial selection (7.3). Distractor B is weakly justified, and the correct option is the longest.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Antibiotic resistance is natural selection, not artificial selection (7.3). Skill 2.A needs a real visual to describe."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is defensible given the stem text."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stem says \"a line graph shows\" but the stimulus data is empty. The stem text already describes the answer."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Option B's rationale is weak. The correct option is the longest and most detailed."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item is trivial because the stem restates the key, and no graph is shown."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Skill 2.A item that asks for a trend description. The stem already states the trend (rise from 1 to 85 percent, steepest between days 2 and 4), so the student only matches options to that description. There is no calculation and no application of selection concepts beyond a quick check of the distractors. The correct option nearly restates the stem, and the distractors are easy to reject: a constant daily change contradicts the steepest-increase statement, and a decrease contradicts the rising line. Option B needs only a brief inference about resistant versus killed bacteria. This is a low-depth, single-step item suited to basic learning rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m04-k2",
+  "cellId": "ap_biology-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_stimulus",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "The mean went from 9.2 mm to 10.1 mm, and the error bars don't overlap, so the increase is bigger than the variation the error bars show. A is wrong because it describes individual birds changing; selection acts on the population, not on single beaks. B and D contradict the data.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "The topic is 7.3 Artificial Selection, but the item is a natural-selection drought scenario (finch beak depth after a drought). No human-directed breeding appears, so the topic concept is never required. Skill 2.A (describe a visual representation) is only nominally met because no visual is provided."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the only defensible answer. A is an individual-growth misconception, B contradicts the non-overlapping error bars, and D contradicts the means (9.2 vs 10.1)."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The item is about a bar graph, but the stimulus kind is 'none' and the data object is empty. No graph can be rendered, and the data is described only in prose. The error bar sizes are not given; they are only said not to overlap. The blueprint archetype is 'allele frequency graph', but the item is about beak depth."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option encodes a distinct misconception, and the rationales are specific. Option C is the longest option but not by more than a few words."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "A graph item with no graph is not exam-like. The question is trivially answerable from the numbers in the stem, so it adds no visual-reading demand. The phrase 'by more than the variation shown by the error bars' is imprecise, since non-overlapping error bars do not mean the difference exceeds the variation."
+   },
+   "instant_reject": [
+    "wrong_stimulus"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Fail. The item is labeled as a graph-description item, but it has no stimulus and an empty data object, so the visual cannot be rendered. The scenario is natural selection, not artificial selection (7.3). The key is correct, but the item does not meet the scope and stimulus criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks students to read two bar heights and interpret non-overlapping error bars, then choose the accurate description. It requires one short reasoning step (compare 9.2 vs 10.1, note the error bars do not overlap) and rejects simple misconceptions (the Lamarckian individual-growth idea, misreading error bars, reversed direction). There is no calculation, the reading load is minimal, and the concept depth is shallow. It is below typical full-mock difficulty. It is also only loosely aligned to topic 7.3, since the drought scenario is natural rather than artificial selection, but the difficulty is fair and not inflated by unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_biology-m04-k3",
+  "cellId": "ap_biology-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_stimulus",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The mean went from 9.2 mm to 10.1 mm, so it rose. The error bars don't overlap, which means the rise is bigger than the variation they show. B is wrong because the data are about the population mean, not about any one bird's beak growing. C and D contradict the data.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "A"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": ""
+   },
+   "notes": "The item describes a graph in words instead of showing one, which is unsuitable for a visual-representation skill item. The load and timing themselves are fine.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "wrong_stimulus",
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but there is no rendered graph (stimulus none and empty), the error bar type is unspecified, and the drought finch scenario is natural selection rather than topic 7.3 artificial selection. The item fails."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The student compares two stated bar heights (9.2 vs 10.1 mm) and applies one idea: non-overlapping error bars indicate a real difference. There is no calculation and little reading, and the distractors are plainly wrong (a reversed direction, a claim that the means are equal, and an individual-growth misconception). This is a single-step visual-description task. Alignment issue: the scenario is drought-driven natural selection (7.2), not artificial selection (7.3), and the graph is only described in text rather than shown, so the item may need revision for topic fit. Neither issue makes the item harder.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m04-k4",
+  "cellId": "ap_biology-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_stimulus",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "The mean went from 9.2 mm to 10.1 mm, and the error bars don't overlap, so the rise is bigger than the variation the error bars show. A is a misconception: populations change, individual birds' beaks don't. C and D contradict the data.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Labeled 7.3 Artificial Selection, but the context is a drought, which is natural selection. No human-directed selection appears. The skill 2.A (describe a visual) is not really tested because the graph is not provided."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique defensible answer given the stated values and non-overlapping error bars."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stem refers to a bar graph, but the stimulus kind is none and its data is empty. The graph is not specified or renderable, and the error-bar sizes are not given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions (individual vs population change, misreading error bars, reversed direction), and each is explained."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "A graph item with no graph is not typical of the exam. The task is trivially easy because the numbers are in the stem, and the distractors are obviously wrong."
+   },
+   "instant_reject": [
+    "wrong_stimulus"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item fails because the drought finch context is natural selection rather than artificial selection (7.3). The stem describes a bar graph that is never supplied as a stimulus, so the visual-representation skill is not assessed. The key and distractors are sound, but the item is too easy and structurally off-pattern."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks students to read a described bar graph with two means and non-overlapping error bars and pick the accurate description. It takes one comparison (10.1 > 9.2) and one idea about error bars. The distractors are a simple misconception (individual growth), a misreading of error bars, and a reversed direction. Concept depth is shallow and there is almost no computation or reading. It is suited to basic learning rather than full-mock exam prep. The stem describes a graph rather than showing one, and the content (drought and natural selection) does not match the stated topic 7.3, but neither inflates difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m04-k5",
+  "cellId": "ap_biology-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_stimulus",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "The graph shows allele frequency, not population size. It rises from 0.10 and levels off near 0.90, so the allele became common.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Nothing about artificial selection (7.3); beetle allele-frequency trend with no human selection. Skill 2.A is not genuinely tested because the stem narrates the graph, so no visual is read."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is the unique correct description given the stem."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stem refers to a graph, but the stimulus kind is none with empty data. No renderable graph exists, and the stem gives the whole trend in words."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Distractors contradict the stem text and are trivially rejected. Rationales restate the line. The correct option is the longest and adds an interpretive clause."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The answer is given away in the stem, so the item has no real graph-reading demand. It is unlike official items that supply a figure."
+   },
+   "instant_reject": [
+    "wrong_stimulus"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Fails: the stem references a graph that is not supplied (empty stimulus data), the content is not artificial selection, and the stem gives away the answer, so no visual is read."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Students only need to describe a trend (increase then plateau) from a verbally described line graph and pick the matching option. There is no calculation and no application of selection concepts. The distractors are clearly wrong: one mislabels the variable, one reverses the trend, and one claims no change. This is a single-step graph-description item, below the depth expected on a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ }
+]

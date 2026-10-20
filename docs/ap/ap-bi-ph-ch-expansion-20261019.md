@@ -59,3 +59,10 @@ CHEM_BLOCK_ARCH=<JSON> CHEM_DUMMY=1 npx tsx scripts/ap-generation/chem-assign.ts
 - exam_prep 비율 하락(Bio 27 %/18 %, Phys 55 %/52 %)은 위 규칙의 대가다. Bio 새 개념·표 읽기형이 `basic_learning` 으로 라벨되는 경우가 많다.
 - 새 FRQ 3개 시나리오(TBR 엘리베이터·QQT 위성·LAB 경사면 g)의 채점 행은 이전 시나리오와 같은 구조지만 사람 검수는 없다(모델 검증).
 - `data/ap/sample-2027/ledger.json` 은 항목 합집합(at·note·usd)으로 병합해야 한다.
+
+## 7. Biology BI3/BI4 재배정 r2 (2026-10-20, 코디네이터 지시)
+
+- 원인: 관리자 화면 초안 저장이 BI3·BI4 가 게시 중인 Biology 1·2 와 문항이 겹친다고 막았다. 공개 세트가 새 버전으로 교체돼 내가 재구성한 사용 키(과거 구성)와 달랐다. 겹친 키: BI3 `bio-s2-mc-a:ap_biology-m06-k0`, `bio-s2-mc-b:ap_biology-m09-k0`; BI4 `bio-s2-mc-a:ap_biology-m68-k0`, `bio-s2-mc-a:ap_biology-m41-k0`; 변환 안 된 `run1:ap_biology-c023-k3`.
+- 원격 읽기 전용 SELECT(`supabase db query --linked`, 쓰기 없음): 게시 중인 Practice Exam 1·2 의 `mock_exam_set_items` + `problems.ap_candidate_key` = 키 120개(세트 키 포함), `ap_candidate_items.problem_id is null` 인 Biology 후보 847개(변환 안 됨)를 막는 키로 만들었다. 공개 세트가 쓴 키의 원형은 재고·가상 칸 모두 제외.
+- `bio-assign.ts` 신규 옵션 `--block-keys`(막을 문항 키), `--block-arch-keys`(그 키가 쓴 원형을 막음). 새 공개 구성 기준으로 풀면 가상 4칸(단원6×P1 1, 단원7×P1 2, 단원7×P2 1)이 남아, 새 원형 4개(`bio_p0_p.py`: 유전자 조절·자연선택 유형·생식적 격리·대립유전자 빈도 막대 그래프)를 써서 새 배치 `bio-b34e`(통과 7)·`bio-b34f`(통과 1)를 만들었다(적재된 b34a~d 배치는 변경 없음). 비용 $1.41.
+- 재배정 `data/ap/stock/exact-assign-bio-bi3-bi4-r2.json`: 가상 0·검증 위반 0·게시 키와 겹침 0, BI3 exam_prep 13/60, BI4 11/60, Practice 공식 범위 안. 새 문항 4개 화면 증거(390·1280) `evidence-bio-b34r2.json` 8건 0 실패. 이전 보고서 `exact-assign-bio-bi3-bi4.json` 은 폐기(관리자 화면에서는 r2 로 다시 적재).

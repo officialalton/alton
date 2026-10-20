@@ -1,0 +1,41 @@
+{
+ "run": "bio-b34e-mc",
+ "subject": "ap_biology",
+ "generatedAt": "2026-10-20T04:17:10.245Z",
+ "totalCostUsd": 0.76,
+ "newSpendSinceBaseline": 1.1,
+ "cap": 50,
+ "calls": 72,
+ "candidates": 24,
+ "mcCandidates": 24,
+ "frqCandidates": 0,
+ "passedAll": 9,
+ "adopted": 3,
+ "mcAdopted": 3,
+ "frqAdopted": 0,
+ "reserve": 6,
+ "yield": 0.125,
+ "costPerAdopted": 0.254,
+ "callsPerAdopted": 24,
+ "duplicateRejected": 3,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 0,
+  "template": 24
+ },
+ "rejectionReasons": {
+  "criterion_failed_scope_skill": 9,
+  "criterion_failed_distractor_explanation": 5,
+  "criterion_failed_exam_suitability": 9,
+  "reference_pattern_mismatch": 7,
+  "duplicate_gate_near_duplicate": 3,
+  "resembles_known_exam_item": 3,
+  "criterion_failed_key_scoring": 1,
+  "criterion_failed_stimulus_expression": 6,
+  "instant_reject_wrong_stimulus": 6,
+  "instant_reject_missing_condition": 1
+ },
+ "unfilledCells": [
+  "ap_biology-m04"
+ ]
+}
