@@ -1,7 +1,7 @@
 export { STUDENT_TERMS_VERSION } from "@/lib/free-member-signup";
 
 /** Public legal pages (/privacy, /terms). Keep LEGAL_LAST_UPDATED in step with STUDENT_TERMS_VERSION. */
-export const LEGAL_LAST_UPDATED = "October 6, 2026";
+export const LEGAL_LAST_UPDATED = "October 19, 2026";
 export const COMPANY_NAME = "Alton Education LLC";
 export const CONTACT_EMAIL = "official@alton.education";
 /** Company notice address printed on customer and teacher agreements. */
