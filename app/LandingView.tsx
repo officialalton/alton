@@ -190,7 +190,7 @@ export default function LandingView({ dest, availability = EMPTY_AVAILABILITY }:
         </section>
       </main>
 
-      <PublicFooter />
+      <PublicFooter showInsights={dest.showInsights} />
     </div>
   );
 }

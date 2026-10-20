@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
+import { OG_IMAGES } from "@/lib/site-url";
 import { CtaButton, PageHero, Prose, PublicPage } from "@/app/components/public/PublicShell";
-import { resolveLandingDestinations } from "@/lib/landing/cta";
-import { loadLandingViewer } from "@/lib/landing/viewer";
+import { loadPublicDest } from "@/lib/landing/public-dest";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/about" },
   title: "About ALTON",
   description: "ALTON Education helps students in the US and Korea prepare for the SAT and AP with free practice tools and premium online tutoring.",
-  openGraph: { title: "About ALTON", description: "ALTON Education helps students in the US and Korea prepare for the SAT and AP with free practice tools and premium online tutoring." },
+  openGraph: { images: OG_IMAGES, title: "About ALTON", description: "ALTON Education helps students in the US and Korea prepare for the SAT and AP with free practice tools and premium online tutoring." },
 };
 
 export default async function AboutPage() {
-  const dest = resolveLandingDestinations(await loadLandingViewer());
+  const dest = await loadPublicDest();
   return (
     <PublicPage dest={dest}>
       <PageHero eyebrow="ABOUT ALTON" title="One brand, one login, one learning history" />
