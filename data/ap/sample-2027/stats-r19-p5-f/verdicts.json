@@ -1,0 +1,510 @@
+[
+ {
+  "key": "ap_statistics-f01-k0",
+  "cellId": "ap_statistics-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Explanatory: treatment received (new medicine or placebo), categorical. Response: minutes of pain relief, quantitative.",
+     "final_answer": "Explanatory = treatment type (categorical); Response = minutes of pain relief (quantitative)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Number the 132 patients from 1 to 132. Use a random number generator to pick 66 different numbers. Those patients get the new medicine and the other 66 get a placebo that looks identical. Patients are not told which one they received. Record each patient's minutes of pain relief and compare the two groups. Blinding is used so that patients' expectations (the placebo effect) affect both groups equally, so any difference can be credited to the medicine.",
+     "final_answer": "Randomly assign 66 patients to the medicine and 66 to an identical-looking placebo; patients don't know their group. Blinding keeps expectations or the placebo effect from biasing reported relief.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "(6+5+2)/66 = 13/66 = 0.197",
+     "final_answer": "19.7%",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "There is a single peak at 20-30 minutes and the distribution is slightly skewed right. The 33rd and 34th values are both in the 20-30 bin, so that bin holds the median. Values range from 0 to 70 minutes.",
+     "final_answer": "For the 66 patients who got the medicine, minutes of pain relief has one peak and is somewhat skewed to the right. The median is in the 20–30 minute class. Values range from between 0 and 10 minutes up to between 60 and 70 minutes, so the range is at most 70 minutes, and most patients fall between 20 and 40 minutes.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "The question names a population and a quantitative variable that varies from patient to patient.",
+     "final_answer": "What is the typical number of hours that patients at this clinic wait before their appointment, and how much do wait times vary from patient to patient?",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle is well scoped for Q1 (multi-focus, with a skill 1.A part and ten 1-point rows), but the key and rubric for parts D and E have problems that make fair scoring unreliable, so I recommend fixing them before use.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts map reasonably to topics 1.2, 1.13, 1.5, 1.6 and 1.10. Part E assesses skill 1.A and part A assesses variable classification. The skill labels are acceptable for a multi-focus Q1."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Three problems.\n\n1. Part E, row E1 requires \"patients at a clinic\", but the prompt asks about patients at \"the clinic\". This is a minor wording issue.\n\n2. Part E, rows E2 and E3 are largely redundant. E2 requires a near-verbatim restatement of the prompt, and E3 is vague (\"anticipates variability\"). The model answer, \"What is the typical number of hours...\", is only marginally a statistical question. Grading is unreliable.\n\n3. Part D, row D2 awards the spread point for citing the range of classes. The model answer's \"class ending at 70\" is loose, and a response giving only a center or only a spread is hard to score consistently. The median-class claim is correct (cumulative frequency is 14 through the 10-20 class and 37 through the 20-30 class, so the 33rd and 34th values fall in 20-30).\n\nPart A's \"type of pill\" wording is acceptable. Part C is correct (13/66 = 19.7%)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The histogram data are complete, with bins, counts, axis titles and units. The counts sum to 66, which matches the 66 in part C. Part A says 132 patients, and the histogram shows only the treatment group of 66. This is consistent but needs the reader to infer that the study is the same one. Part C states the rounding convention."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ, so there are no distractors. The common_errors lists are present and reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is suitable for about 22 minutes. The calculator is barely needed, which is acceptable."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item covering variable types, completely randomized design with blinding, a percent read from a histogram, a distribution description (shape, median class, spread) and writing a valid investigative question. Each part uses standard Unit 1 skills with modest reasoning, light computation (13/66) and no out-of-scope content, which fits a full-mock exam-prep item rather than basic recall or an advanced extension.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_statistics-f01-k1",
+  "cellId": "ap_statistics-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Explanatory variable: treatment received (new medicine or placebo), categorical. Response variable: minutes of pain relief, quantitative.",
+     "final_answer": "Explanatory: treatment type (new medicine vs placebo), categorical. Response: minutes of pain relief, quantitative.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Number the 114 patients from 1 to 114. Use a random number generator to pick 57 unique numbers; those patients get the new medicine and the other 57 get a placebo that looks the same. Patients are not told which one they got. Then compare minutes of pain relief between the groups. Blinding stops patients' expectations (the placebo effect) from affecting the pain relief they report, so differences can be credited to the medicine.",
+     "final_answer": "Randomly assign 57 patients to the medicine and 57 to an identical-looking placebo, with patients unaware of their group. Blinding keeps expectations from biasing reported relief.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "(6+5+1)/57 = 12/57 ≈ 21.05%",
+     "final_answer": "21.1%",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Shape: unimodal and slightly skewed right, with the peak in the 20–30 bin. Center: the median (29th value) is in the 20–30 minute class. Spread: values run from 0–10 up to 60–70 minutes, so the range is about 50–70 minutes, and most patients fall between 10 and 50 minutes.",
+     "final_answer": "For the 57 treated patients, minutes of pain relief are unimodal and slightly skewed right. The median falls in the 20–30 minute class. Values range from 0 to 70 minutes (range about 50–70 minutes), with most between 10 and 50 minutes.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "The question names a population (patients at this clinic) and a quantitative variable (wait time in hours). Wait times vary from patient to patient, so answering it requires collecting and analyzing data.",
+     "final_answer": "What is the typical number of hours that patients at this clinic wait before their appointment?",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Fails on stimulus coherence: Part A describes a planned study of 114 patients, while Parts C and D use data from a completed treatment group of 57 patients, and the text never links the two studies. Part D's spread row is also weak, and E3 packs two required elements into one row. The histogram data and the 21.1% key are fine.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part E is a valid skill 1.A task, and the other parts are within Unit 1 and match their own skills."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The 12/57 = 21.1% key and the median class (20-30) are correct. The D2 spread row ('range of the classes') is loose, and E3 combines two elements."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The histogram is complete, and its bins sum to 57. The planned study in A/B and the observed data in C/D are not explicitly the same study, and the 114-to-57 link is left for the student to infer."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load fits about 22 minutes and the 10-point structure."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item covering variable types, completely randomized design with blinding, a percent from a histogram (12/57 = 21.1%), shape/center/spread description (median in the 20-30 bin, skewed right), and writing an investigative question. Each part is routine and in scope for Unit 1, but the item requires several written responses and a representation read, which fits a full mock. The bin counts sum to 57 and match the stated n. The arithmetic is minimal and the wording is clear.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_statistics-f01-k2",
+  "cellId": "ap_statistics-f01",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:B:flagged",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Explanatory variable: treatment (plant food vs water), categorical. Response: hours of growth toward light, quantitative.",
+     "final_answer": "Explanatory: type of treatment (new plant food or plain water), categorical. Response: hours of growth toward light, quantitative.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Number the plants 1-118 and randomly pick 59 for plant food; the other 59 get water. Keep all other conditions the same. Plants can't be blinded, so blind the people watering and measuring (coded liquids that look alike) to avoid bias.",
+     "final_answer": "Randomly assign 59 plants to plant food and 59 to water using a random number generator; keep other conditions constant; record hours. Blind the caretakers and measurers with coded liquids so their expectations can't bias care or measurement.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "Plants cannot be blinded because they have no expectations. Blinding only makes sense for the people giving the treatment or measuring the results."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "(10+3)/59 = 0.2203",
+     "final_answer": "22.0%",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Bins add to 59. The median is the 30th value; running totals are 4, 14, 30, so it falls in 10-15.",
+     "final_answer": "Roughly symmetric, unimodal (maybe slightly right-skewed), no clear outliers. The median is in the 10-15 hour class. Hours run from about 0-5 up to 25-30 (range about 25-30 hours), and most plants grew 10-20 hours.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Names the population and the variable, and the answer varies from plant to plant.",
+     "final_answer": "What is the typical number of flowers produced per plant by the plants in this greenhouse? (Population: all plants in the greenhouse; variable: number of flowers per plant.)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "wrong_key"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Fails: part D key (right skew, single peak) contradicts the histogram, which is essentially symmetric with tied top bins; part B requires blinding plants, which is conceptually invalid.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts map to the stated topics and skills for a multi-focus Q1, and part E assesses 1.A."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part D key says unimodal with peak in 10-15 and skewed right, but the bins 16 and 16 tie and the distribution is roughly symmetric (4,10,16,16,10,3,0). The rubric would mark correct 'symmetric' answers wrong. Part B asks for plants to be blinded, which is not meaningful."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Part B wording 'plants are blinded' is conceptually invalid. The common_errors mention 'type of pill', a leftover from another context."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The rubric common_errors are generic and partly from a different context."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "A flawed blinding premise and an incorrect shape key make it unsuitable for the exam as written."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Five-part free-response item covering core Unit 1 skills: identifying explanatory/response variables and their types, describing a blinded completely randomized design, a simple histogram calculation (13/59 = 22.0%), describing shape/center class/spread in context, and writing a valid investigative question. Each part needs one to two reasoning steps (e.g., locating the median class via cumulative counts). Computation is light and the reading load is moderate. It matches the typical AP FRQ difficulty for mock exams, not basic recall and not beyond-scope extension.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_statistics-f02-k0",
+  "cellId": "ap_statistics-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Look at the scatterplot pattern and the highlighted point.",
+     "final_answer": "The association is strong, negative and linear: more training goes with fewer errors (r = -0.878). The point (9, 13.6) is an outlier far above the pattern, since others with about 9 hours made about 6-7 errors.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "The slope is -1.05.",
+     "final_answer": "For each additional hour of training, the predicted number of errors in a week decreases by about 1.05.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "yhat = 17.41 - 1.05(9) = 7.96; residual = 13.6 - 7.96.",
+     "final_answer": "Residual = 5.64 errors. The point is above the line.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Compare slopes and r values with and without the point.",
+     "final_answer": "The slope barely changes (-1.05 to -1.07, slightly steeper). The correlation becomes much stronger (r from -0.878 to -0.991). The outlier mainly weakened the correlation.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Standard interpretation of r^2.",
+     "final_answer": "About 77.1% of the variation in weekly errors is explained by the linear relationship with hours of training.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Acceptable 10-point multi-part regression FRQ with ten 1-point rows. Data and stimulus are consistent, and the key values are correct. Minor weaknesses: the D2 rubric reasoning (scatter) differs from the model answer's reasoning (little influence on the slope), the D1 row requires restating numbers the prompt already gives, and the E2 row is vague.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part stays within Units 5.1-5.5 and is judged against its own skill; the B, D and E interpretation parts fit target skill 4.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are correct. D2's stated reason (outlier increased scatter) differs from the model answer's reason (little influence on the slope), but both are valid. E2 is vaguely worded."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Scatter data include axis titles, 10 points, the fit line and the highlighted index, all consistent with the part prompts."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to a free-response item."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "10 points over five 2-point parts, light calculator load and brief context; this fits the Statistics FRQ standard."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ-style item covering core Unit 5 skills: describing a scatterplot (direction, form, strength, outlier), interpreting slope, computing a residual (17.41 - 1.05*9 = 7.96; 13.6 - 7.96 = 5.64, above the line), comparing slope and r with and without an influential point, and interpreting r^2. Each part is a routine, in-scope task with short reading and simple arithmetic. The main demands are accurate contextual interpretation and the link between the outlier and the change in r, which is typical of exam practice. It is not basic one-step recall because it spans five parts and several representations, and it is not advanced because no new concepts or heavy reasoning are required.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_statistics-f02-k1",
+  "cellId": "ap_statistics-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Negative, linear, strong; outlier at (8,14.6) with far more errors than predicted.",
+     "final_answer": "Strong, negative, linear association: more training hours go with fewer errors. The point (8, 14.6) is an outlier, well above the pattern.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Slope -1.02",
+     "final_answer": "For each additional hour of training, the predicted number of weekly errors decreases by about 1.02.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "yhat=16.81-8.16=8.65; residual=14.6-8.65",
+     "final_answer": "Residual = 5.95 errors; the point is above the line.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Slope -1.02 to -1.04 barely changes; |r| goes from 0.871 to 0.993",
+     "final_answer": "The slope barely changes (slightly steeper, -1.02 to -1.04), but the correlation becomes much stronger (r from -0.871 to -0.993). The point is a y-outlier near the middle of x, so it has little influence on the slope but weakens r.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "standard",
+     "final_answer": "About 75.8% of the variation in weekly errors is explained by the linear relationship with hours of training.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The content is correct and in scope, but the rubric for part D is inconsistent with its model answer and chained in a way that double-penalizes students. D2's stated reason (the outlier increased scatter) differs from the model answer's middle-of-x reasoning, and D1 demands specific numbers that the prompt already supplies. E2 is vague.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topics 5.1-5.5 are covered and each part fits its own skill. No deleted topics appear."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part D row D2's criterion (outlier increased scatter) does not match the model answer's reasoning (near the middle of x, little influence on slope). D1 requires numbers that the prompt provides and is also meaning-based, which is contradictory. D2 requires D1, so one slip loses both points. Row E2 (\"in context\") is vague, and B2 stacks several elements."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The scatter data are complete: axis titles, points, fit line and highlight."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so distractors are not applicable; common errors are listed per row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for a 22-minute, 10-point FRQ, and calculator use is minimal and consistent with \"allowed\"."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Five short, standard Unit 5 parts: describe a scatterplot with an outlier, interpret the slope, compute one residual, compare slope and r with and without an influential point, and interpret r-squared. Each part needs one to three reasoning steps, with a modest link from the outlier to its effect on r versus slope. Computation is a single easy residual, the numbers are given and consistently rounded, and nothing is out of scope or ambiguous. This is typical AP free-response level and suitable for full mocks.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_statistics-f02-k2",
+  "cellId": "ap_statistics-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Strong, positive, linear association between age and repair cost. One clear outlier at (8, 33.7): its repair cost is much higher than the other machines of similar age.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Strong, positive, linear association. One outlier at (8 years, $3,370) sits well above the pattern of the other points."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Slope is 2.27 hundred dollars per year.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "For each additional year of age, the predicted repair cost goes up by about 2.27 hundred dollars ($227)."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Predicted cost: ŷ = 4.98 + 2.27(8) = 23.14. Residual = 33.7 − 23.14 = 10.56.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Residual ≈ 10.56 hundred dollars (about $1,056). The point is above the line."
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The point's x-value of 8 is close to the mean x of 7.2, so it has little leverage on the slope. Its large residual, though, weakens the correlation.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "The slope drops only slightly, from 2.27 to 2.18, so it barely changes. The correlation rises from 0.901 to 0.996, so the linear association becomes much stronger without the outlier."
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "r² is the share of variation in y explained by the linear model.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "About 81.3% of the variation in repair cost is explained by the linear relationship with machine age."
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound structure, but the rubric has problems. D2 requires an explanation (\"because the outlier increased scatter\") that the prompt of part D never asks for. E2 and B2 are padding rows that award a point for context or units alone, splitting one interpretation into two points. Fix D2 by asking why in the prompt or dropping the reason from the row, and merge the context/units points into the main interpretation rows.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All parts are in Unit 5 scope. Parts B, D and E assess 4.D, and parts A and C are 4.A and 3.B, which fits mixed-skill FRQs. No inference for a slope."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "D2 requires a reason the prompt never requests. E2 and B2 are context-only rows that duplicate E1 and B1. The numeric key (residual 10.56) is correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The scatter data are complete, with axes, units, fit line and highlight index 9 matching (8, 33.7). Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is appropriate for about 22 minutes, and the calculator use is minimal and consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part free-response item covering standard Unit 5 skills: describing a scatterplot (direction, form, strength, outlier), interpreting slope, computing one residual (predicted 4.98+2.27*8=23.14; residual 33.7-23.14=10.56, above the line), comparing slope and r with and without an outlier, and interpreting r-squared. Each part is a routine AP-style task with light computation. Moving between graph, equation, and verbal interpretation adds some reasoning. The item has no heavy reading, no ambiguity, and no out-of-scope content, which fits a full-mock FRQ rather than basic learning or an advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_statistics-f03-k0",
+  "cellId": "ap_statistics-f03",
+  "passed": false,
+  "reasons": [
+   "part_B_calculation_without_answer_row"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_statistics-f03-k1",
+  "cellId": "ap_statistics-f03",
+  "passed": false,
+  "reasons": [
+   "part_B_calculation_without_answer_row"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_statistics-f03-k2",
+  "cellId": "ap_statistics-f03",
+  "passed": false,
+  "reasons": [
+   "part_B_calculation_without_answer_row"
+  ],
+  "soft": []
+ }
+]

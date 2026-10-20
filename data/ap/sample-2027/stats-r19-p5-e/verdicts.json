@@ -1,0 +1,489 @@
+[
+ {
+  "key": "ap_statistics-m01-k0-q1",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "yhat=15.97-0.97*8=8.21; residual=14.6-8.21=6.39",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "6.39 errors"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Residual calculation from given line: Topic 5.4, Skill 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "15.97-0.97*8=8.21; 14.6-8.21=6.39. Unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Scatter data complete with axis titles, points, fit line, highlight index matching (8,14.6). Rounding stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions: sign reversal, intercept omitted (gives 22.36), predicted value reported. All explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, light arithmetic, typical of the AP exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key 6.39 is correct and unique, the stimulus is complete, and each distractor reflects a distinct misconception. The stimulus is somewhat redundant but harmless."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item takes two sequential steps: substitute x=8 into the line to get the predicted value 8.21, then subtract it from the observed 14.6 to get the residual 6.39. This is a direct application of residual = actual - predicted. It falls under the rubric's 2-or-fewer-steps criterion for basic_learning, not the 3 steps required for exam_prep. Distractors (sign error, the predicted value itself, adding the values) are standard but do not add steps. Reading and arithmetic are light.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k0-q2",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "r=-0.84 means a negative, moderately strong linear association. The highlighted point at (8, 14.6) has a residual of about +6.4, so it sits far from the pattern and is an outlier.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Describing direction, form and an unusual point in a scatterplot fits 5.1 and skill 4.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is the unique correct answer: the association is negative and linear, and the highlighted point has a residual of about +6.4, so it is an outlier."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The data object gives axis titles, all 10 points, the fit line and the highlighted index, so it is complete. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions (outlier missed, curved form, reversed direction), and the explanation addresses each one. The reversed-direction option is weak because the stem gives r = -0.84, but it is still acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60-90 seconds, needs no calculation, and has a short parallel set of options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique and correct, the stimulus data are complete, the distractors are distinct, and the load is appropriate for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct description of a scatterplot (direction, form, strength, unusual point) using the plot and the given r. Distractors are clearly wrong on direction, form, or outlier status. No computation and minimal reading; this is a foundational skill check for topic 5.1.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k0-q3",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "Correlation increases in strength; slope changes very little",
+     "brief_reasoning": "The point's x = 8 is close to the mean x of 7.6, so it has low leverage and the slope barely changes. Its residual of about +6.4 is very large, so removing it strengthens r.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 100 seconds. The stimulus is needed, the options are short and parallel, and the calculator load is minimal.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a valid, standard low-leverage outlier question with a unique key and distinct distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks for an outlier with low leverage (x near the mean) and its effect on r and slope. This takes about two reasoning steps with two parallel conclusions, and no calculation. By the rubric (fewer than 3 steps), it is basic_learning, though it is conceptually a standard outlier/influence question. Nothing about it is unfair.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k1-q1",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "yhat=67.98-2.07*21=24.51; residual=40-24.51=15.49",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "15.49 minutes"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Residual computation from given line; matches 5.4/3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "67.98-2.07*21=24.51; 40-24.51=15.49 unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Scatter data has titles, points, fit line, highlight at (21,40) matching the stem. Rounding stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions; the 83.47 explanation is vague (omitting the intercept gives a prediction of -43.47, so 40-(-43.47)=83.47) but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, light arithmetic, calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean residual item. Only a minor imprecision in the explanation of the 83.47 distractor. Pass."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Two-step routine: compute predicted value 67.98 - 2.07(21) = 24.51, then residual = 40 - 24.51 = 15.49. Single core concept (residual = actual - predicted) with light arithmetic. Distractors target sign error and using the prediction or the raw sum. Falls under the 2-or-fewer-steps rubric for basic_learning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k1-q2",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "Melting time decreases as temperature increases, so the trend is negative and linear, and r = -0.75 is moderately strong. The point (21, 40) sits far above the pattern of the other nine points, so it is an outlier.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Describing direction, form, strength and an unusual point in a scatterplot fits topic 5.1 and skill 4.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option B is the only one that is correct. The other nine points follow a negative linear pattern, and (21,40) is far above the line."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The scatter data has axis titles with units, all points, the fit line and a highlight index. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are a reversed direction, a curved form and a missed outlier. The explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 90 seconds and needs no arithmetic. It is slightly easy because the sign of r gives the direction."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean and well scoped. The key is unique, the stimulus is complete, and the distractors are distinct. It is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student reads a scatterplot and matches direction (negative), form (linear), strength (r = -0.75, moderate) and the highlighted outlier to the correct description. Only the core description vocabulary is needed, with no computation. Distractors differ on direction, form and outlier presence, so this is a straightforward recognition item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k1-q3",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "Correlation increases in strength; slope changes very little",
+     "brief_reasoning": "The point is at x=21, close to the mean temperature of 20.9, so it has low leverage and the slope barely changes. Its residual is large (40 vs about 24.5 predicted), so removing it makes the correlation stronger.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Outlier leverage/influence on r and slope, topic 5.2, skill 4.D interpretation."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique correct option; consistent with data (x=21 near mean 20.9, large residual)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Scatter data complete with axes, units, fit line, highlighted point."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct wrong combinations; each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, reasoning-based, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item: removing a low-leverage, large-residual point strengthens r and barely changes the slope. The key is unique and the stimulus data are complete."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item takes 2 sequential steps and combines two closely related concepts (outlier, leverage and influence). The rubric sets 2 or fewer steps as basic_learning, with exam_prep needing at least 3. The student judges that x=21 is near the mean of x, so leverage is low and the slope barely changes. The student then judges that removing a large-residual point strengthens the correlation. There is no arithmetic and the reading load is low. The wrong options are not very deep traps.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k2-q1",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "yhat=54.87-1.63*16=28.79; residual=13.4-28.79=-15.39",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "-15.39 minutes"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Residual calculation from given line, topic 5.4 and skill 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Predicted 28.79, residual -15.39; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Scatter data complete with axes, titles, fit line and highlighted index matching the stem. Plot is somewhat redundant but not misleading."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (sign reversed, intercept left out, predicted value reported); verified 39.48 arises from omitting the intercept. All wrong options explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, light arithmetic, rounding stated."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean residual-calculation item with distinct distractors and an adequate stimulus. Passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Two sequential steps: compute the predicted value at x=16 (28.79), then residual = actual - predicted = 13.4 - 28.79 = -15.39. This is below the 3-step threshold for exam_prep. Distractors include the predicted value, the reversed sign, and a wrong-sum option. Arithmetic is light and the stem is short, so there are no unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k2-q2",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "Negative slope, r=-0.84; highlighted point residual about -15.4, far below the pattern, so it is an outlier.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Scatterplot description with an unusual observation; fits topic 5.1 and skill 4.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Negative direction, linear form, and the highlighted point has a residual of about -15 from the line, so it is an outlier. Option A is the unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The data include axis titles with units, the points, the fit line and a highlighted index. The stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors map to distinct misconceptions: reversed direction, missed outlier, curved form. Each is explained, though the wording is somewhat generic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick read of a plot, no arithmetic, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item. The key is unique and verified against the data. The distractors are distinct and the stimulus is complete. Minor looseness in \"moderately strong\" for r = -0.84 does not create ambiguity."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard description of a scatterplot (direction, form, strength, unusual point) using the plot and given r. Requires recognizing negative direction, linear form, moderate-strong r, and spotting the highlighted point as an outlier (13.4 vs about 28.6 at a similar x). No computation; short stem; distractors are clearly wrong on direction, outlier presence, or form. This is foundational skill 4.A for topic 5.1.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k2-q3",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "The point is close to the average temperature (18 °C), so it has low leverage, but its residual of about −15.4 is large. Removing it makes the correlation stronger, and the recalculated slope is about −1.77 versus −1.63, a small change.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Outlier leverage and influence on r and slope; Unit 5 scope, interpretation of a result (4.D)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the unique defensible answer: r strengthens from -0.84 to -0.99 and the slope changes about 8%."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The scatter data has axis titles, points, fit line, and highlight index; the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors cover distinct wrong combinations and each is explained; the explanations are somewhat repetitive but adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short reading, no arithmetic, about 60-110 seconds; typical of AP items."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item on the effect of removing a low-leverage outlier; the key is unique and the stimulus is complete, with only minor repetitiveness in the distractor rationales."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item takes 2 steps: recognize the highlighted point as a vertical outlier, then see that its mid-range x-value gives low leverage and little influence on the slope. Removing it strengthens r and barely changes the slope. By the rubric, 2 or fewer steps means basic_learning, even though two concepts (outlier, influence) are involved. There is no arithmetic, the stem is short, and the scatterplot is simple to read, so no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ }
+]

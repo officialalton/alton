@@ -1,0 +1,931 @@
+[
+ {
+  "key": "ap_statistics-f01-k0",
+  "cellId": "ap_statistics-f01",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:D:numeric"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Units are the 36 students; response is memory test score.",
+     "final_answer": "(i) The 36 students; (ii) score on the memory test (points).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Blocking controls variability due to grade level.",
+     "final_answer": "(i) Grade level may be associated with memory scores; blocking groups similar students so variability from grade is accounted for, making the treatment comparison more precise. (ii) Separate students into grade 11 and grade 12 blocks. Within each block, number the students, use a random number generator to select half (without repeats) for Music; the rest get Silence. Then compare treatments within each block.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "66.6-63.5",
+     "final_answer": "3.1 points",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Compare means and SDs.",
+     "final_answer": "Center: the Music group's mean memory score (66.6 points) is 3.1 points higher than the Silence group's (63.5 points). Spread: the Silence group's scores vary more (SD 3.4 points vs 2.1 points), so Music scores are more consistent.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Names a population and a variable that changes from student to student.",
+     "final_answer": "What is the typical (mean) number of hours of sleep that students at this school get on a school night, and how much does it vary from student to student?",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The multi-focus Q1 bundle is sound. Keys are unique, rubric rows are consistent, the stimulus is complete, and the scope and load match the AP Statistics FRQ standard.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part fits its own skill and topic (1.13, 1.7, 1.9, 1.10). Part E assesses 1.A as required. All content is Unit 1."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Ten 1-point rows over five parts. Answers are consistent with the table, and the independent solver matched every part."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data is complete (treatment, n, mean, SD, note) and belongs to the same study as Parts C and D. Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ with no options. The rubric rows list common errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for a Q1 multi-focus question in about 22 minutes. Part E's prompt spells out the required features, which is slightly leading but acceptable."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item is a multi-part Unit 1 review covering experimental units and response variable, purpose of blocking and random assignment within blocks, a single subtraction (66.6 - 63.5 = 3.1), a center and spread comparison in context, and writing an investigative question. Each part tests a single standard concept at recall or direct-application level. The reasoning is short, with one representation (a small table) and minimal computation. Reading load is modest, and the 3-point part E is open-ended but only needs a population, a variable, and variability named. There is no unusual depth, so it suits basic learning rather than full-mock exam prep. The difficulty does not come from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_statistics-f01-k1",
+  "cellId": "ap_statistics-f01",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:B:flagged,D:numeric",
+   "criterion_failed_stimulus_expression"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Units are the things treatments are applied to; response is what's measured.",
+     "final_answer": "(i) The 60 tomato plants. (ii) Each plant's height in cm after eight weeks.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Sunlight probably affects growth, so blocking by bench controls for it.",
+     "final_answer": "(i) Sunny and shady benches probably grow plants differently. Blocking puts plants with similar light together, which removes that variation from the comparison. This makes it easier to see a real fertilizer effect. (ii) Inside each block, number the plants and use a random number generator (or draw slips) to pick half of them for Fertilizer A. The rest of that block get Fertilizer B. Do this separately for the sunny and shady benches.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The problem never says how many plants are on each bench, so I can't give exact counts per block. Also, the Part C table only lists results by treatment, not by block."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "72.3 - 68.5 = 3.8",
+     "final_answer": "3.8 cm",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Compare the means for center and the SDs for spread.",
+     "final_answer": "Center: Fertilizer A plants had a higher mean height after eight weeks (72.3 cm) than Fertilizer B plants (68.5 cm), about 3.8 cm taller on average. Spread: Fertilizer A heights varied less (SD 2.8 cm) than Fertilizer B heights (SD 5 cm), so A plant heights were more consistent.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "The question needs a population, a variable, and an answer that comes from data that vary.",
+     "final_answer": "Among all tomato plants in this greenhouse, what is the typical (mean) number of tomatoes a plant produces in a growing season, and how much does that number vary from plant to plant? Population: tomato plants in the greenhouse. Variable: the number of tomatoes each plant produces.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Valid multi-focus Q1 with ten 1-point rows and a 1.A part (E). The main weakness is the stimulus: the table reports results by treatment only, although the stem describes blocking by bench and never explains how the table relates to that design. Part C also uses lowercase \"fertilizer a/b\" in the prompt and rubric, which is a minor wording defect.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part E assesses 1.A directly. The other parts (2.A, 2.B, 3.B, 4.A) are in Unit 1 scope and acceptable for a multi-focus Q1."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Rows are consistent and each is worth 1 point, totaling 10. Part E accepts any valid question that names a population and a variable. Part B row B1 could be graded more strictly, but the keys are defensible."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The table has complete columns and units. However, the sample size per treatment is 30 with no description of how blocks are split, and the solver flagged ambiguity about the number of plants per bench. The stimulus also reports no block-level data, so the table is only loosely tied to the blocked design. Lowercase \"fertilizer a/b\" in Part C and in the rubric is a minor defect."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item. The rubric lists common errors for each row, which is adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for an AP Statistics Q1 and the calculator is not needed, though it is allowed."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Multi-part free-response item that stays within Unit 1 scope. It covers identifying experimental units and the response variable, explaining blocking and random assignment within blocks, a single subtraction (72.3 - 68.5 = 3.8), a center and spread comparison from a small table, and writing an investigative question. Each part is a standard, recall-level application of a single concept, with no long arithmetic, no ambiguity and little reading. Part E is open-ended, but it only requires naming a population, a variable and variability. This is closer to basic learning than to full-mock exam level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_statistics-f01-k2",
+  "cellId": "ap_statistics-f01",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:D:numeric",
+   "criterion_failed_stimulus_expression"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Experimental units: the 60 students. Response variable: each student's score on the memory test (in points).",
+     "ambiguous_or_flawed": false,
+     "final_answer": "(i) The 60 students; (ii) score on the memory test (points)"
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Blocking by grade controls for grade level, a variable that may affect memory scores. Comparing treatments within each grade removes that variation, so the treatment comparison is more precise. Within each grade, number the students, then use a random number generator to put half of them in Music and the other half in Silence.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "(i) Blocking accounts for variation in scores caused by grade level, which makes the comparison of Music and Silence more precise. (ii) Separate the students into grade 11 and grade 12. Within each grade, give each student a number and randomly pick half of them (for example, with a random number generator or by drawing names from a hat) for Music. The rest of that grade gets Silence."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "68.6 − 65.5 = 3.1",
+     "ambiguous_or_flawed": false,
+     "final_answer": "3.1 points"
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Center: the Music mean (68.6) is 3.1 points higher than the Silence mean (65.5). Spread: the Music SD (3) is smaller than the Silence SD (4.8), so scores vary less in the Music group.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "The Music group's mean memory score (68.6 points) is 3.1 points higher than the Silence group's (65.5 points). Music scores are also less spread out: their SD is 3 points, compared with 4.8 points for Silence."
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "A valid question names the population (students at the school) and a variable that differs from student to student (hours of sleep on a school night), and it can be answered by collecting data.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "How many hours of sleep do students at this school typically get on a school night?"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound 10-point multi-focus Q1 with a valid skill 1.A part, but the stimulus has a context inconsistency that a strict reviewer should fail. Only a few elements need checking.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part is judged against its own skill: units/response (2.A), blocking (2.B), a difference of means (3.B), comparing center and spread (4.A), and an investigative question (1.A). The topics are all Unit 1 and in scope. Part E addresses 1.A directly."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The rubric has ten 1-point rows, and the keys are unique and consistent. Part E has a minor risk: E1 requires \"students at the school\", but the stem never names the school, so it is not obvious whether any school population qualifies. E3's \"anticipates variability\" is subjective. Part D reads \"more variable for silence\" correctly."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The table is complete (columns, rows, units). However, it reports results (means and SDs) for an experiment that Part A/B describes as only planned (\"plans an experiment\", \"decides to block\"). The table gives no results by grade block, even though blocking is the design. The tense mismatch is a flaw in the stimulus. The stimulus is also not used in Parts A, B or E, and Part E is a different context (sleep) from the experiment, which is acceptable for a multi-focus Q1. Part E's prompt also nearly gives away the rubric (it names the population, the variable and the variability requirement)."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The common_errors listed per row are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for about 22 minutes. The only calculation is a simple subtraction, so the calculator is largely unnecessary, which is acceptable."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Multi-part FRQ-style item on standard Unit 1 content: identifying experimental units and response variable, purpose of blocking and random assignment within blocks, a one-step subtraction (68.6 - 65.5 = 3.1), comparing center and spread in context, and writing a valid investigative question. Each part is a routine, single-concept recall or application task. The only reading is a small two-row table. No calculation beyond one subtraction, and no condition checking or multi-step linking of results to claims. The final part is open-ended but has an explicit checklist (population, variable, variability). The item is on the easy side for AP practice, so it fits basic learning rather than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_statistics-f02-k0",
+  "cellId": "ap_statistics-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "instant_reject_missing_condition"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Equation: ŷ = 1.76 + 0.97x. Intercept: on a day with a high of 0°C, the model predicts about 1.76 hundred bottles (176 bottles) sold. Whether that means anything depends on whether 0°C is inside the range of the data. The 30 days probably did not include highs near 0°C, so this is likely extrapolation and may not be meaningful.",
+     "final_answer": "ŷ = 1.76 + 0.97x, where ŷ is predicted sales in hundreds of bottles. At 0°C the predicted sales are 1.76 hundred bottles. This is likely not meaningful, because 0°C is probably outside the observed temperatures (extrapolation).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Prediction: ŷ = 1.76 + 0.97(19) = 20.19. Residual = actual − predicted = 15.6 − 20.19 = −4.59.",
+     "final_answer": "Predicted sales are 20.19 hundred bottles (about 2019 bottles). The residual is −4.59 hundred bottles: actual sales were about 459 bottles fewer than the model predicted for a 19°C day.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "S is the standard deviation of the residuals.",
+     "final_answer": "Actual bottled water sales typically differ from the sales predicted by the regression line by about 4.55 hundred bottles (about 455 bottles).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "r = √0.36 = 0.6. The sign is positive because the slope (0.97) is positive.",
+     "final_answer": "r = 0.60. The linear relationship is positive and of moderate strength.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "A clear curved (U-shaped) pattern in the residuals means a line does not capture the relationship.",
+     "final_answer": "No. The U-shaped pattern shows the relationship is curved, not linear, so a linear model is not appropriate. A nonlinear model would fit better.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Part A asks whether the intercept is meaningful, but the stem gives no range of temperatures. The model answer hedges (\"meaningful only if x=0 lies within the range\"), so the question is unanswerable as posed. Mixed rubric rows are also sloppy: A1 is a pure reading row marked meaning_based, and row C2 (units) is largely redundant with C1. Part D's \"moderately strong\" for r=0.6 is a borderline label, and the rubric accepts \"strength matches r\" loosely. Part E's justification is nearly given in the prompt (the U-shape is described), so skill demand is low. Part E also invites mention of a nonlinear model, which is out of scope. The conditional intercept answer is the main defect, so I fail key/scoring and stimulus completeness. Fix by giving the observed temperature range (e.g., 12 to 35 degrees Celsius) so the student can conclude the intercept is an extrapolation and not meaningful.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Content stays within Unit 5 and the parts are labeled with their own skills. Parts B and D are skill 3.B calculations. Part E mentions no nonlinear modeling in the rubric."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part A has no unique defensible answer to \"whether it has a meaningful interpretation\" because the data range is not given. The key hedges conditionally, so a student cannot be scored definitively either way. Row A1 (writing the equation) is a trivial reading row."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stimulus omits the range of the x-values (minimum and maximum temperature), which is necessary for the part A question. The output also lacks the SE, t, and p columns, which is acceptable. Part E describes a residual plot in words only, which is fine."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ, so there are no distractors. The rubric lists common errors for each row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for a 22-minute FRQ and the calculator use is minimal."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Typical AP-style multi-part regression FRQ. It requires reading computer output, writing the LSRL, interpreting the intercept and its meaningfulness, predicting and computing a residual with interpretation, interpreting S, getting r from R-Sq with the sign taken from the slope, and judging linearity from a described U-shaped residual plot. Each part is standard, but together they require several interpretations in context and one linking step (sign of r from slope, curvature implies the linear model is inappropriate). Arithmetic is minimal and clean (1.76+0.97*19=20.19; residual -4.59; r=0.60). Wording is clear, there are no out-of-scope topics, and no inference for slope is needed. This suits a full mock exam rather than basic learning, and it is not advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_statistics-f02-k1",
+  "cellId": "ap_statistics-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Use the coefficients from the output. The intercept is the predicted sales when spending is 0.",
+     "final_answer": "(i) predicted sales = 11.92 + 2.13(advertising spending). (ii) A store that spends $0 on advertising is predicted to sell 11.92 thousand units. This is meaningful only if $0 in spending falls within, or near, the range of the data. It is probably extrapolation, so it may not be meaningful.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "11.92 + 2.13(4) = 20.44, so residual = 22.6 − 20.44 = 2.16.",
+     "final_answer": "(i) 20.44 thousand units. (ii) The residual is 2.16 thousand units. This store's actual sales were 2.16 thousand units higher than the line predicts for $4 thousand in advertising.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "S is the standard deviation of the residuals.",
+     "final_answer": "Actual sales typically differ from the sales predicted by advertising spending by about 1.98 thousand units.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "r = √0.81 = 0.9. The slope is positive, so r is positive.",
+     "final_answer": "r = 0.90. There is a strong, positive linear relationship between advertising spending and sales.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "A curved pattern in the residuals means the relationship is not linear.",
+     "final_answer": "No. The U-shaped pattern shows curvature, so a linear model is not appropriate even though R² is high. A nonlinear model would fit better.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Fails. Part A asks whether the intercept is meaningful, but gives no range for x and the model answer hedges conditionally, so the verdict cannot be determined. The stimulus output lacks proper column labeling. The rubric splits rows artificially (C1/C2, E1/E2) into near-duplicates, which does not match an authentic 10-row, 4-5 part structure.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All parts are within Unit 5; parts B and D are 3.B calculations, with 4.D in parts A, C and E."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part A requires a verdict on meaningfulness of the intercept but the range of x is not provided; the model answer is a conditional hedge and the rubric rewards it, so the row is not cleanly scorable. Rows C2 and E2 duplicate C1 and E1."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The output has no header for the second section and no x-range is given. The residual plot is described only in words (acceptable)."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to the FRQ; the rubric lists common errors per row."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Five uniform 2-point parts with artificially split rows deviate from the official structure."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item on reading regression computer output, using only in-scope Unit 5 content: equation and intercept interpretation, prediction and residual, interpreting S, getting r from R-Sq with the sign from the slope, and reading a residual-plot pattern. Each part is a standard skill with short arithmetic (11.92+2.13*4=20.44; residual 2.16; r=+0.9). Difficulty comes from breadth and from interpreting in context, such as the S interpretation, the sign of r, and the U-shape residual-pattern justification. There is no long computation, ambiguity, heavy reading, or out-of-scope knowledge, so this suits a full mock rather than being advanced.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_statistics-f02-k2",
+  "cellId": "ap_statistics-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "From the output: intercept -1.35, slope 1.34.",
+     "final_answer": "(i) predicted sales = -1.35 + 1.34(temperature), where sales are in hundreds of bottles and temperature is the daily high in °C. (ii) At a high of 0°C, predicted sales are -1.35 hundred bottles. Sales can't be negative, and 0°C is probably outside the range of the data, so the intercept has no meaningful interpretation.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "-1.35 + 1.34(26) = 33.49; residual = actual - predicted = 37.5 - 33.49 = 4.01.",
+     "final_answer": "(i) 33.49 hundred bottles (about 3,349 bottles). (ii) Residual = 4.01 hundred bottles. Actual sales were about 401 bottles more than the line predicted for a 26°C day.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "S is the standard deviation of the residuals.",
+     "final_answer": "Actual bottled water sales typically differ from the sales predicted by the line using daily high temperature by about 2.88 hundred bottles (about 288 bottles).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "r = √0.81 = 0.9. The sign is positive because the slope is positive.",
+     "final_answer": "r = 0.90. The linear relationship is strong and positive: higher daily temperatures go with higher sales.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "A curved pattern in the residuals means the relationship is not linear.",
+     "final_answer": "No. The clear U-shaped pattern shows the line systematically underpredicts at low and high temperatures and overpredicts in the middle. That means the relationship is curved, so a linear model is not appropriate, even though R² is high.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound 10-point output-reading FRQ with five 2-point parts. Values are consistent: 33.49, 4.01 and r = 0.9. The only weakness is Part A(ii), which asks whether the intercept is meaningful when no range for x is given, so the model answer has to hedge. The rubric tolerates that.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts fit topics 5.2-5.4 and the skills 4.D and 3.B. No out-of-scope content (no inference for slope, no transformations)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are correct. A2 is slightly under-determined because the range of x is not given, but the hedged answer and the alternative solution cover reasonable responses."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The output data are complete (coefficients, S, R-Sq). The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ. The common_errors listed per row are realistic (slope/intercept swap, S read as the slope or as r², residual sign reversed)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The workload is typical for a 22-minute FRQ, calculator use is minimal, and the 10 points are split into ten 1-point rows."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part free-response item reading standard regression output. It covers the line equation, intercept interpretation, prediction and residual, interpretation of S, r from R-Sq with the sign taken from the slope, and a residual plot pattern check. Each part is a standard AP skill with 1-2 steps, so together they resemble a full-mock FRQ rather than a single-concept drill. Arithmetic is light (-1.35+1.34*26 = 33.49; residual 4.01; r = +sqrt(0.81) = 0.90). Reading load is modest and the context is relevant. The main difficulty levers are choosing the sign of r, interpreting the residual and S in context, and judging linearity from a residual plot, all in scope.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_statistics-f03-k0",
+  "cellId": "ap_statistics-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Use the mean of the paired differences (after minus before) as the parameter. The program 'improves' scores only if this mean is positive, so the test is one-sided.",
+     "final_answer": "H0: μ_d = 0; Ha: μ_d > 0, where μ_d is the true mean difference (after minus before) in vocabulary quiz scores for all students at the school who use the app for a month.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Random: the 20 students were randomly selected. 10% rule: 20 ≤ 0.10(600) = 60. Normality: n = 20 is less than 30, but the dotplot of differences is roughly symmetric with no outliers, so the t procedure is reasonable.",
+     "final_answer": "All three conditions are met: random sample; 20 ≤ 10% of 600 = 60; dotplot of differences is roughly symmetric with no outliers.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Matched-pairs t-test for a mean difference. Standard error = 6.1/√20 ≈ 1.364. t = 1.7/1.364 ≈ 1.25 with df = 19. One-sided P-value = P(t > 1.25) ≈ 0.114.",
+     "final_answer": "Paired t-test: t ≈ 1.25, df = 19, P-value ≈ 0.11",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The P-value (≈ 0.11) is greater than α = 0.05, so we fail to reject H0.",
+     "final_answer": "Because the P-value ≈ 0.11 is greater than 0.05, we fail to reject H0. There is not convincing evidence that a month of using the vocabulary app increases mean vocabulary quiz scores for students at this school.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A standard matched-pairs t test FRQ with 10 one-point rubric rows over 4 parts. The key is verified and the independent solver agrees. The conditions in part B follow the CED wording, and the setup is internally consistent. The context is a single study used by all parts, and the stimulus is complete as text. Part C carries the 3.E skill; the other parts each assess their own skills.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 4.5 and skill 3.E are the focus in part C (procedure, t statistic, P-value). Parts A, B and D use related skills from topics 4.4 and 4.5, which is allowed. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "t is about 1.246 and the one-sided P-value is about 0.1139, so the decision is to fail to reject at alpha 0.05. The rubric rows are consistent, with dependencies chained correctly. The total is 10 points."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives n, the mean and SD of the differences, the shape of the dotplot, the population size and alpha. This is sufficient, and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so distractors do not apply. The rubric rows list sensible common errors (a two-sample test, doubling the P-value, accepting H0)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for an AP Statistics FRQ of about 22 minutes. A calculator is needed for the P-value, and the calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "This is a standard, fully scaffolded matched-pairs t test. Parts A to D walk through the usual steps in order: hypotheses, conditions, test statistic and P-value, then conclusion. Summary statistics are given, so the arithmetic is light: t = 1.7/(6.1/sqrt(20)) is about 1.25, with df = 19 and a P-value of about 0.11. Conditions are routine: random sample, n = 20 below 10% of 600, and a roughly symmetric dotplot with no outliers. No procedure choice is hidden beyond recognizing the paired design, which the stimulus states directly. The only extra step is linking the P-value to the alpha comparison and the context conclusion. This is a typical learning-level item for topic 4.5 rather than a full-mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_statistics-f03-k1",
+  "cellId": "ap_statistics-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Let μ_d be the true mean difference (before − after) in 400 m times, in seconds, for all runners in the league. A positive difference means the runner got faster.",
+     "final_answer": "H0: μ_d = 0; Ha: μ_d > 0, where μ_d is the true mean difference (before − after) in 400 m time for all runners in the league.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Random: the 18 runners were randomly selected. 10% condition: 18 is less than 10% of 400 (40), so independence is reasonable. Normal: n = 18 is under 30, but the dotplot of differences is roughly symmetric with no outliers, so the t procedure is reasonable.",
+     "final_answer": "All three conditions are met: random sample; 18 < 0.10(400) = 40; the dotplot of differences is roughly symmetric with no outliers.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Standard error = 3.6/√18 ≈ 0.8485, so t = 1.9/0.8485 ≈ 2.24 with df = 17. The one-sided P-value is P(t > 2.24) ≈ 0.019.",
+     "final_answer": "Paired (matched-pairs) t-test for a mean difference: t ≈ 2.24, df = 17, P-value ≈ 0.019.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Because the P-value (≈ 0.019) is less than α = 0.05, reject H0.",
+     "final_answer": "Reject H0. Because P ≈ 0.019 < 0.05, there is convincing evidence that the true mean difference (before − after) in 400 m times is greater than 0. In other words, the program reduces the mean 400 m time for runners in the league.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a standard, correct matched-pairs t test FRQ worth 10 points. It is within Unit 4 scope. The stimulus is complete, the key is unique, and the rubric rows are consistent. The load is appropriate for a 22-minute FRQ.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part C is the target skill 3.E on topic 4.5. Parts A, B, and D use related topic 4.4 skills, which is allowed for the bundle. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "t = 2.24, df = 17, one-sided P-value about 0.0194. The solver agrees. The decision to reject is robust at α = 0.05."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus contains all needed values: n, the mean and standard deviation of the differences, the random selection, the dotplot description, N of about 400, and α. The empty data object is acceptable for a text-only stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable, because this is a free-response item. The rubric rows list common errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of an AP Statistics FRQ, the calculator use is minimal, and the 10-point structure matches the Statistics standard."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard 4-part AP FRQ on a matched-pairs t test. It requires defining the parameter and hypotheses, checking the random, 10%, and normality conditions, computing t of about 2.24 with df 17 and a P-value of about 0.019, and writing a contextual conclusion. Concept depth is moderate, the arithmetic is a single short calculation, and the context is minimal. All content is in Unit 4 scope. Difficulty comes from the multi-part structure and the required communication, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_statistics-f03-k2",
+  "cellId": "ap_statistics-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Parameter: μ_d is the true mean difference (after minus before) in vocabulary quiz scores for all students at the school who use the app for a month.",
+     "final_answer": "H0: μ_d = 0; Ha: μ_d > 0, where μ_d = true mean difference (after − before) in quiz score for students at this school",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Random: the students were randomly selected. 10% condition: 14 ≤ 0.10(600) = 60, so the observations are close enough to independent. Normal: n = 14 is small, but the dotplot of differences is roughly symmetric with no outliers, so the t procedure is reasonable.",
+     "final_answer": "Random sample; 14 < 10% of 600; dotplot of differences is roughly symmetric with no outliers, so the conditions are met",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Procedure: one-sample t test for a mean difference (paired t test). SE = 2.4/√14 ≈ 0.641, so t = 1.8/0.641 ≈ 2.81. With df = 13, the one-sided P-value is about 0.007.",
+     "final_answer": "Paired t test; t ≈ 2.81, df = 13, P-value ≈ 0.007",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Because P ≈ 0.007 < α = 0.05, reject H0.",
+     "final_answer": "Since the P-value (≈0.007) is less than α = 0.05, we reject H0. There is convincing evidence that the true mean quiz score after a month of using the app is higher than before, for students at this school. (This study had no control group, so we cannot say for sure that the app caused the improvement.)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard matched-pairs t test FRQ with 10 one-point rows across 4 parts. The key is consistent and the solver agrees. The parts are scoped to topics 4.4 and 4.5, and part C is the 3.E target. No unpooled or out-of-scope content appears.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A (hypotheses, 4.4) and part B (conditions, 4.4) are prerequisite skills. Part C is the 3.E target, and part D is the conclusion (4.G). All are within Unit 4."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "t is about 2.81 and the one-sided P-value is about 0.0074, with df = 13. The decision at α = 0.05 is clear, and the rubric rows are consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives n, the mean, the standard deviation, the dotplot description, the population size and α. It is complete. The data object is empty, but no figure is needed because the dotplot is described in words."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The rubric rows list plausible common errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for about 22 minutes. The calculator is allowed, and the rounding is tolerant."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard textbook matched-pairs t test with summary statistics already given as differences. Parts follow the routine four-step template: hypotheses, conditions (random sample, n=14 with a roughly symmetric dotplot, 10% check with 14 < 60), t = 1.8/(2.4/sqrt14) approx 2.81 with df=13 and P approx 0.007, then a conclusion in context. There is no procedure selection, no computer output to read, and no tricky interpretation. Computation is a single short calculation plus a calculator t-cdf. Wording is clear and the context is minimal. The item is scoped to Unit 4 and the conclusion makes no causal overreach beyond the stated random sample. It is a good fit for foundational practice rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_statistics-f04-k0",
+  "cellId": "ap_statistics-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "z=(39-41)/4=-0.5, P(Z<-0.5)=0.3085",
+     "final_answer": "≈0.309",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "mean of x̄ = μ = 41; SD = 4/√25 = 0.8",
+     "final_answer": "Mean 41 hours, SD 0.8 hours",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "z=(39-41)/0.8=-2.5, P≈0.0062. This is much smaller than 0.309 because sample means vary less than individual values (SD 0.8 vs 4).",
+     "final_answer": "≈0.006; smaller than 0.309 because averaging reduces variability",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "42 ± 2.064(4/5) = 42 ± 1.6512",
+     "final_answer": "(40.35, 43.65) hours",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "40 lies outside the interval (40.35, 43.65), so 40 is not a plausible value for the mean at the 5% level",
+     "final_answer": "Yes, it gives convincing evidence that the mean is not 40 hours (the interval suggests it is higher)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Integrated 10-point FRQ with five 2-point parts, each with two 1-point rows. Keys are correct and the solver agreed on every part. It stays within Unit 2 and the related Unit 4 topics (4.1-4.3 are listed as legitimate). Part A (3.C) is a standard normal-probability task. Each part is judged against its own skill: B is 3.D, C is 4.C, D is 3.E and E is 4.F.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A matches the target skill 3.C. Parts B-E carry their own skills and topics, which is acceptable for a mixed-skill FRQ."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All values are correct. Rubric rows are consistent, and the dependent rows (A2, D2, E2) have sensible prerequisites. Part E's 'convincing evidence' conclusion follows from the interval and is supported by random sampling. The conditions for the t interval (random sample, n = 25 with a normal population per the report) are given, and the item does not ask students to check them."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives the population mean and standard deviation, the sample statistics and t*. Rounding is stated in the parts that need it. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so distractors do not apply. The common_errors lists in the rubric rows are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of about 22 minutes. The calculator is allowed and the arithmetic is light."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ. Requires distinguishing the distribution of one value from the sampling distribution of the mean, computing normal probabilities, explaining why the two probabilities differ, building a t-interval with t* given, and using the interval to judge a claim. Each step is routine and arithmetic is short with rounding stated. Difficulty comes from concept integration and the compare/explain parts, not from heavy reading or computation.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_statistics-f04-k1",
+  "cellId": "ap_statistics-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "z = (501-503)/8 = -0.25, so P(X<501) = 0.4013.",
+     "final_answer": "0.401",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "The mean of x̄ equals μ = 503 g. Its SD is σ/√n = 8/√16 = 2 g. x̄ is normal because the population is normal.",
+     "final_answer": "mean 503 g, SD 2 g",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "z = (501-503)/2 = -1, so P(x̄<501) = 0.1587. This is smaller than 0.401 because sample means vary less than single bags (SD 2 g instead of 8 g). A value 2 g below the mean is a full SD below for x̄ but only 0.25 SD below for one bag.",
+     "final_answer": "≈0.159, smaller than 0.401 because x̄ has less variability (SD 2 vs 8)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "502 ± 2.093·8/√20 = 502 ± 3.744. Assumes a random sample and n=20 is less than 10% of a large run. The manufacturer says the population is roughly normal, but the inspector doesn't rely on that, so the normality of the sample data would ideally be checked.",
+     "final_answer": "(498.26, 505.74) grams",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "500 lies inside the interval, so it is a plausible value for the mean.",
+     "final_answer": "No. 500 g is within (498.26, 505.74), so there is not convincing evidence that the mean differs from 500 g.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Integrated 10-point FRQ with five 2-point parts, each split into two 1-point rows. Keys are correct and unique. Part A fits 2.11/3.C; parts B-E are covered by the declared 2.12/4.x span. Minor weakness: no normality check is requested for the t interval, though the model answer does not require one.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A is the core 2.11 / 3.C task. Parts B to E use 4.1 to 4.3 and 2.12, which the bundle explicitly spans."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are correct and unique. Rubric rows are consistent with the prompts and rounding is stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete: population model, sample statistics and t* are all given. The normality condition for the t interval is not explicitly addressed, a minor weakness."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ; rubric common_errors are given."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Ten 1-point rows over five parts, about 22 minutes, calculator allowed. Load is typical of an AP Statistics FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Five short parts with standard procedures: a normal probability for one value, the mean and SD of the sampling distribution, a normal probability for a sample mean with a comparison explanation, a one-sample t interval, and an interval-based conclusion. Each part needs one or two steps. The main discriminators are choosing between the SD of an individual value and the SD of the sample mean, explaining the effect of sample size on variability, and linking the interval to a claim. Numbers are small and rounding is specified. The stimulus is concise and has no out-of-scope content. The setup is slightly unusual because the interval uses the inspector's sample while the earlier parts use the manufacturer's model, but it is clearly stated.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_statistics-f04-k2",
+  "cellId": "ap_statistics-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "z = (39−41)/4 = −0.5, and P(Z < −0.5) ≈ 0.3085.",
+     "final_answer": "0.309",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "The mean of x̄ equals μ = 41. Its standard deviation is σ/√n = 4/√25 = 0.8.",
+     "final_answer": "Mean = 41 hours, SD = 0.8 hours",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "z = (39−41)/0.8 = −2.5, and P(Z < −2.5) ≈ 0.0062. This is much smaller than 0.309 because sample means vary less than single batteries (0.8 < 4). A mean of 25 batteries being as far below 41 as 39 is much less likely than one battery lasting under 39 hours.",
+     "final_answer": "≈0.006, which is much smaller than 0.309 because x̄ has a smaller SD (0.8 vs 4)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Use a one-sample t interval: 41.5 ± 2.093 × 3/√20. The standard error is 3/√20 ≈ 0.6708, so the margin of error is 2.093 × 0.6708 ≈ 1.404. Conditions: the sample is random, and the population is approximately normal.",
+     "final_answer": "(40.10, 42.90) hours",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "The value 40 is not in the interval (40.10, 42.90), and every value in the interval is above 40. So at the 5% significance level, 40 is not a plausible value for the mean.",
+     "final_answer": "Yes. 40 is outside the interval, so there is convincing evidence that the mean differs from 40 hours (it appears to be greater).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Coherent integrated FRQ with ten 1-point rows over five parts. Keys are correct and verified, rounding is stated, and the stimulus is complete. Each part fits its own topic and skill, and the load is typical for a 22-minute question.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts span 2.11, 4.1, 2.12, 4.2 and 4.3, each matched to its own skill. This is allowed for the bundle."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are unique and consistent with the solver. Rubric rows are properly split, with dependencies stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives the population model, sample statistics and t* value. Rounding is stated in parts A and D."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ with common errors listed per row; not applicable to MC distractors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Calculator use is appropriate, the arithmetic load is light, and the time estimate is reasonable."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ-style item. It covers a normal probability for one value, the sampling distribution of the mean, a comparison of the two probabilities, a t interval with t* provided, and an interval-based conclusion. Each step is routine and short, and the item asks for several skills, including an explanation of why the two probabilities differ and a conclusion from the interval. This suits a full mock exam. Arithmetic is light, reading is modest, and the wording is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ }
+]

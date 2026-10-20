@@ -1,0 +1,60 @@
+{
+ "runs": [
+  "chem-ch3-frq"
+ ],
+ "rows": 21,
+ "passed": 8,
+ "rejected": 13,
+ "passRate": 0.381,
+ "mc": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "frq": {
+  "rows": 21,
+  "passed": 8,
+  "passRate": 0.381
+ },
+ "unitsPassed": {},
+ "skillsPassed": {},
+ "figPassed": {
+  "text": 5,
+  "table": 3
+ },
+ "figAll": {
+  "text": 18,
+  "table": 3
+ },
+ "figPassRate": {
+  "text": "5/18",
+  "table": "3/3"
+ },
+ "renderTypesPassed": {
+  "text": 5,
+  "ap_table": 3
+ },
+ "archetypesPassed": {
+  "chf_long_buffer": 1,
+  "chf_long_calorimetry": 1,
+  "chf_short_massspec": 3,
+  "chf_short_solution": 2,
+  "chf_short_neutral": 1
+ },
+ "archetypesAll": {
+  "chf_long_buffer": 3,
+  "chf_long_ksp": 3,
+  "chf_long_calorimetry": 3,
+  "chf_short_massspec": 3,
+  "chf_short_gas_mix": 3,
+  "chf_short_solution": 3,
+  "chf_short_neutral": 3
+ },
+ "failedArchetypes": [
+  "chf_long_ksp",
+  "chf_short_gas_mix"
+ ],
+ "costUsd": {
+  "chem-ch3-frq": 0.8431
+ }
+}

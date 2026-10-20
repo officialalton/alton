@@ -36,7 +36,7 @@ d("AP Chemistry P0 archetypes (Python generators, 2 seeds each)", () => {
   it("registers the singles and the 3 two-item sets, covers all 9 units, and the guide JSON lists the same ids", () => {
     expect(r.status).toBe(0);
     expect(out.names.filter((n) => n.startsWith("ch_")).length).toBeGreaterThanOrEqual(90);
-    expect(out.names.filter((n) => n.startsWith("chs_"))).toHaveLength(3);
+    expect(out.names.filter((n) => n.startsWith("chs_"))).toHaveLength(5);
     const ids = chemistryGuide.archetypes.map((a) => a.id);
     const expected = out.names.flatMap((n) => flat(n).slice(0, out.packs[n][0].items ? 2 : 1).map((q) => q.archetype));
     expect(ids).toEqual(expected);
@@ -70,8 +70,8 @@ d("AP Chemistry P0 archetypes (Python generators, 2 seeds each)", () => {
     expect(diagrams).toBeGreaterThanOrEqual(5);
   });
 
-  it("registers the 7 FRQ types (3 long x 10 + 4 short x 4 = 46 points) and passes the FRQ gates", () => {
-    expect([...out.frq].sort()).toEqual(["chf_long_kinetics", "chf_long_thermo", "chf_long_titration", "chf_short_bonding", "chf_short_equilibrium", "chf_short_pes", "chf_short_stoich"]);
+  it("registers the 14 FRQ types (two forms of 3 long x 10 + 4 short x 4 = 46 points) and passes the FRQ gates", () => {
+    expect([...out.frq].sort()).toEqual(["chf_long_buffer", "chf_long_calorimetry", "chf_long_kinetics", "chf_long_ksp", "chf_long_thermo", "chf_long_titration", "chf_short_bonding", "chf_short_equilibrium", "chf_short_gas_mix", "chf_short_massspec", "chf_short_neutral", "chf_short_pes", "chf_short_solution", "chf_short_stoich"]);
     const w: Record<string, number> = { long: 10, short: 4 };
     let total = 0;
     for (const n of out.frq) for (const p of out.frqPacks[n]) {
@@ -81,7 +81,7 @@ d("AP Chemistry P0 archetypes (Python generators, 2 seeds each)", () => {
       expect({ n, reasons: [...gateFrq("ap_chemistry", p, skills, { requirePartTopics: false }), ...calibrateFrq(p, "ap_chemistry")] }).toEqual({ n, reasons: [] });
     }
     for (const n of out.frq) total += out.frqPacks[n][0].total_points;
-    expect(total).toBe(46);
+    expect(total).toBe(92); // 두 벌(각 46점)
   });
 
   it("the Python suite (determinism, no duplicate structures, numeric truth, figure checks, skill/unit range ILP) passes", () => {

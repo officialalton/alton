@@ -1,0 +1,492 @@
+[
+ {
+  "key": "ap_statistics-m01-k0-q1",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Predicted value = 14.21 + 1.834(12) = 36.218. Residual = 42.3 - 36.218 = 6.08.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "6.08"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Residual calculation from a given line, matching 5.4 and skill 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Predicted 36.218, residual 6.082 rounds to 6.08. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete with columns, units and rows. The stem states the rounding."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception: predicted value reported, intercept left out (20.29), and sign reversed. The explanation covers each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, light arithmetic, calculator allowed and consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, clear and well suited to the target topic and skill, with well-motivated distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item takes 2 steps: predict y-hat at x=12 (36.22), then compute residual = actual - predicted = 42.3 - 36.22 = 6.08. This is a single direct skill with light arithmetic and one source. It does not reach the 3-step threshold for exam_prep. The distractors (predicted value, sign error) test definition recall rather than added reasoning depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k0-q2",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "76.57 minutes; extrapolation, not reliable",
+     "brief_reasoning": "14.21+1.834(34)=76.57; 34 km exceeds max observed 28 km, so extrapolation.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Prediction from the least-squares line plus an extrapolation judgment fits topic 5.3 and skill 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "14.21+1.834(34)=76.57, and 34 lies outside the observed range of 5 to 28, so the key is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with titled columns and units. The two-decimal rounding is evident from the options."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The 2x2 design of value error versus reliability error gives distinct misconceptions, and the explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light arithmetic, about 60-100 seconds, calculator allowed, parallel options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean prediction and extrapolation item with a unique key and well-motivated distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item takes two steps: substitute x=34 into the line to get 76.57, then see that 34 is outside the data range of 5 to 28, so the prediction is an extrapolation. It combines two concepts, but with only 2 steps and light arithmetic it does not meet the exam_prep rubric (at least 3 steps). The distractors differ only by the arithmetic slip (62.36) and the range judgment, which makes the item a direct check of prediction and extrapolation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k0-q3",
+  "cellId": "ap_statistics-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "Correlation increases in strength, slope increases",
+     "brief_reasoning": "The point at (28, 54.1) has high leverage and a large negative residual (about -11.5), which pulls the slope down. Recalculating without it gives r ≈ 0.96 (up from 0.87) and slope ≈ 2.77 (up from 1.834).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Influential point / effect on r and slope is Unit 5 content; interpreting the effect fits 4.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique answer among exhaustive combinations; verified: r 0.87 to 0.96, slope 1.834 to 2.769."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table complete with titles, units, 9 rows; the stem gives the original line and r."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Wrong-option explanations only say 'does not match the recalculated values' and cite numbers not in the stem; they do not name distinct misconceptions or give the leverage/residual reasoning (the point lies below the line, so removing it strengthens r and steepens the slope). The key explanation merely restates numbers."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Reasonable load with a calculator allowed or by conceptual reasoning; typical AP style."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound in scope, key, and stimulus, but the distractor explanations are generic numeric restatements rather than distinct named misconceptions with reasoning. Fails on the distractor/explanation criterion."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single core concept: effect of removing a high-leverage point that lies below the trend. The student identifies that (28, 54.1) is far from the other x-values and below the pattern, so removing it raises r and raises the slope. This takes 2 steps, below the 3-step minimum for exam_prep. There is no computation, and the table and stem are short.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k1-q1",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "-0.29",
+     "brief_reasoning": "yhat=18.5-0.334(18)=12.488; residual=12.2-12.488=-0.29",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Residual calculation from given line and table; fits 5.4 / 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Predicted 12.488, residual -0.288 rounds to -0.29; unique answer. Using the rounded 12.49 gives the same result."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data complete with column labels, units, title; rounding stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct misconception (predicted value, sign reversal, intercept omitted: 12.2+6.012=18.21); all are explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, light arithmetic, appropriate load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean residual item with plausible distractors and a complete table stimulus; passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Two sequential steps: compute the predicted value from the given line (12.488), then subtract it from the observed value (12.2 - 12.488 = -0.29). The item tests one core skill, residual = actual - predicted. Distractors cover the predicted value (12.49), the sign error (0.29), and a different value (18.21). The rubric sets basic_learning at 2 or fewer steps, so exam_prep is not met. Arithmetic is light, the stimulus is short, and nothing is hard for unfair reasons.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k1-q2",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "1.80 °C, extrapolation, not reliable",
+     "brief_reasoning": "18.5-0.334(50)=1.80; 50 is outside the observed range 10-41, so extrapolation.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Prediction from the line plus an extrapolation judgment, which fits 5.3 and skill 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is unique: 1.80 and extrapolation. 50 is outside the range 10-41."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with labeled columns, units and nine rows. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The options form a 2x2 grid of value error by reliability error. Each distractor is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, with light arithmetic and an appropriate calculator designation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique, the stimulus is complete, and the distractors encode distinct errors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Two sequential steps: substitute x=50 into the line (18.5 - 16.7 = 1.80), then compare 50 to the observed range (10 to 41) to identify extrapolation. Light arithmetic, one table, a standard concept pairing. Distractors differ only by arithmetic sign error or by misjudging the range. Does not reach the 3-step threshold for exam_prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k1-q3",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "Correlation increases in strength, slope increases in size",
+     "brief_reasoning": "(41,7.4) is a high-leverage point lying above the line's trend (predicted 4.8), flattening the slope and weakening r. Without it, the remaining points fall steeply (slope ≈ -0.6) and fit a tighter pattern.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Influential point effect on r and slope; Unit 5, interpretation skill fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique answer among exhaustive 2x2 combinations; solver agrees."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table complete with title, units, columns; stem clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor is a distinct wrong combination; explanation covers each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 110 s, calculator allowed, typical load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound MC on the effect of removing a high-leverage point on r and the slope; unique key, complete table, distinct distractors."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recognition of a high-leverage point and its effect on r and slope. The generator counts 2 sequential steps, below the 3-step threshold for exam_prep, so the rubric gives basic_learning. Short stem, one small table, no arithmetic. The answer is option 4: removing the far-right point makes the remaining data more linear and steeper.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k2-q1",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Predicted value = 16.77 + 1.746(12) = 37.722. Residual = 37.1 − 37.722 = −0.62.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "-0.62"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Residual calculation from a given line, matching topic 5.4 and skill 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Predicted 37.722; residual -0.622 rounds to -0.62. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has columns, rows and a title. The rounding convention is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The sign-reversal, predicted-value and intercept-omitted distractors are distinct. 16.15 is verified as 37.1 - 20.952. The explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short task with light arithmetic. Calculator use is allowed and consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean. The key, the distractors and the rounding all check out, and it fits topic 5.4 and skill 3.B."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Two sequential steps: substitute x=12 into the given line to get 37.722, then compute residual = observed - predicted = 37.1 - 37.72 = -0.62. This is a single core concept (residual = actual - predicted) with light arithmetic and one data source. By the rubric, 2 or fewer steps means basic_learning. Distractors (sign flip, predicted value, unrelated number) are plausible but do not add reasoning depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k2-q2",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "ŷ=16.77+1.746(36)=79.63; 36 km lies outside the observed 5–30 km range, so extrapolation.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "79.63 minutes, unreliable (extrapolation)"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Prediction from line and extrapolation judgment, in scope for 5.3 and skill 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "16.77+1.746*36=79.63; 36 is outside the 5-30 range. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data is complete, with title, columns and rows. Rounding is not stated, but the options are specific values."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The options form a 2x2 of value error by judgment error, each with a distinct misconception. The explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, light arithmetic, calculator allowed, appropriate load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and suitable. The key is unique, the stimulus is complete, and the distractors encode distinct errors. The only minor points are the unneeded r value and the unstated rounding convention, which do not harm the item."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item takes two steps: plug x = 36 into the line to get 79.63, then compare 36 to the observed range of 5 to 30 and identify extrapolation. It combines two concepts but needs only two steps, so by the rubric (2 or fewer steps) it is basic_learning. The arithmetic is light and the reading is short. Only one distractor (62.86 with a within-range claim) survives a partial check, and the two distractors with 62.86 come from a plausible slip, not a trick.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k2-q3",
+  "cellId": "ap_statistics-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "Correlation increases in strength and slope increases",
+     "brief_reasoning": "(30,58.9) is a high-leverage point far below the line (predicted 69.15, residual about -10.25). It flattens the slope and weakens the linear pattern, so removing it raises both the slope and r.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Influential point effect on r and slope; Unit 5 topic; interpretation of a change fits 4.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique correct combination; the four options are exhaustive. The verified values support option 4."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has titled columns with units and complete rows. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The wrong-option explanations only restate that the numbers don't match; they name no misconception (e.g., a high-leverage point always strengthens r, or an outlier always lowers the slope). They give no conceptual reasoning."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Feasible in about 110 seconds with a calculator or by leverage and residual reasoning. The options are short and parallel."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well scoped, with a complete table stimulus. It fails only on distractor explanations, which just contrast numbers and do not name distinct misconceptions or give conceptual reasoning. Fail when unsure."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student identifies the point at 30 km as a high-leverage point below the trend, then reasons that removing it raises r and the slope. This is a single concept (influential point effect) with 2 counted steps, below the 3-step threshold for exam_prep. No arithmetic and minimal reading; a conceptual item with a mild distractor structure.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ }
+]

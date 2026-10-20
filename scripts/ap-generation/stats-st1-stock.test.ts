@@ -13,7 +13,7 @@ describe("ST1 first full Statistics set from the committed stock", () => {
     const r = out[0];
     expect(r.singles).toHaveLength(36); expect(r.sets).toHaveLength(2); expect(r.frq).toHaveLength(4);
     expect(r.virtual).toHaveLength(0); expect(r.virtualSets).toHaveLength(0); expect(r.frqVirtual).toHaveLength(0);
-    expect(res.obj).toBe(0); // 단원 목표 10/9/9/7/7 과 스킬 목표 4/10/14/14 를 정확히 맞춘다
+    expect(Math.abs(res.obj)).toBe(0); // 단원 목표 10/9/9/7/7 과 스킬 목표 4/10/14/14 를 정확히 맞춘다
   });
   it("the saved assembled report matches the same assignment (new file under data/ap/stock/assembled)", () => {
     const rep = JSON.parse(readFileSync("data/ap/stock/assembled/stats-st1-s2b.json", "utf-8")) as { sets: { id: string; mcA: string[]; frqA: string[]; virtual: unknown[]; virtualSets: unknown[]; frqVirtual: unknown[] }[] };

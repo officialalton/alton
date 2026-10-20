@@ -126,7 +126,8 @@ async function main() {
   const round6 = flag("--round6"); // 라운드 6: data/audit/2026-10-15-r6-patches.json(새 AP 9과목×2회차 외부 감사 결과) 만 대상.
   const round4 = flag("--round4"); // 라운드 4: data/audit/2026-10-13-r4-patches.json(금액 $ 이스케이프 + Micro 한계비용 지문) 만 대상.
   const { patches: base, overrides } = loadPatches({ includeScan: !flag("--no-scan"), round: round6 ? 6 : round5 ? 5 : round4 ? 4 : round3 ? 3 : round2 ? 2 : 1 });
-  let patches = [...base, ...(flag("--no-ap") || round2 || round3 || round4 || round5 || round6 ? [] : buildApPatches())];
+  const custom = arg("--patches"); // 임의 패치 파일({patches:[...]}) 만 대상(예: data/audit/2026-10-20-rw-distractor-patches.json). 이 경우 기본 목록·AP 패치는 제외.
+  let patches = custom ? rd<SatList>(custom).patches : [...base, ...(flag("--no-ap") || round2 || round3 || round4 || round5 || round6 ? [] : buildApPatches())];
   const only = arg("--only")?.split(",");
   if (only) patches = patches.filter((p) => only.includes(p.id));
   const inFile = arg("--readout-in");

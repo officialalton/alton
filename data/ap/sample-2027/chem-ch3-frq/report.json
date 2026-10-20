@@ -1,0 +1,40 @@
+{
+ "run": "chem-ch3-frq",
+ "subject": "ap_chemistry",
+ "generatedAt": "2026-10-20T07:34:33.167Z",
+ "totalCostUsd": 0.84,
+ "newSpendSinceBaseline": 0.84,
+ "cap": 50,
+ "calls": 54,
+ "candidates": 21,
+ "mcCandidates": 0,
+ "frqCandidates": 21,
+ "passedAll": 8,
+ "adopted": 5,
+ "mcAdopted": 0,
+ "frqAdopted": 5,
+ "reserve": 3,
+ "yield": 0.238,
+ "costPerAdopted": 0.169,
+ "callsPerAdopted": 10.8,
+ "duplicateRejected": 3,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 0,
+  "template": 21
+ },
+ "rejectionReasons": {
+  "criterion_failed_stimulus_expression": 1,
+  "duplicate_gate_near_duplicate": 3,
+  "solver_disagrees": 3,
+  "criterion_failed_key_scoring": 2,
+  "instant_reject_missing_condition": 1,
+  "resembles_known_exam_item": 2,
+  "criterion_failed_exam_suitability": 2,
+  "bundle_ref": 3
+ },
+ "unfilledCells": [
+  "ap_chemistry-f02",
+  "ap_chemistry-f05"
+ ]
+}

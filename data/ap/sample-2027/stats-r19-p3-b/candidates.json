@@ -1,0 +1,2625 @@
+[
+ {
+  "candidateKey": "ap_statistics-m01-k0",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "2.8",
+  "unitCode": "2",
+  "skillPrimary": "3.C",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "st_set_pd_table_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step item: interpret 'at least 3' and add two table probabilities (0.08 + 0.22 = 0.30). Distractors reflect common slips: only X=4, the complement P(X<=2), and only X=3. It involves no multi-step reasoning, no representation change beyond reading a small table, and trivial arithmetic. It is appropriate for introductory understanding of discrete probability distributions rather than full-mock exam depth.",
+  "payload": {
+   "archetype": "st_set_pd_table",
+   "topic": "2.8",
+   "skill": "3.C",
+   "calculator": "allowed",
+   "set_intro": "A delivery company records the number of late deliveries that a truck makes in one day. Let $X$ be the number of late deliveries for a randomly selected truck. The probability distribution of $X$ is shown in the table.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Probability distribution of X, the number of late deliveries in a day",
+    "data": {
+     "chart": "table",
+     "data": {
+      "columns": [
+       "x",
+       "P(X = x)"
+      ],
+      "rows": [
+       [
+        "0",
+        "0.39"
+       ],
+       [
+        "1",
+        "0.13"
+       ],
+       [
+        "2",
+        "0.18"
+       ],
+       [
+        "3",
+        "0.08"
+       ],
+       [
+        "4",
+        "0.22"
+       ]
+      ]
+     },
+     "title": "Probability distribution of X (late deliveries)"
+    }
+   },
+   "items": [
+    {
+     "archetype": "st_set_pd_table_q1",
+     "topic": "2.8",
+     "skill": "3.C",
+     "stem": "What is the probability that $X$ is at least $3$? (Give the answer as a decimal rounded to two decimal places.)",
+     "options": [
+      {
+       "text": "$0.22$",
+       "why": "Leaves out the value $3$ itself, which is included in the event (at least $3$).",
+       "value": "0.22000000"
+      },
+      {
+       "text": "$0.70$",
+       "why": "Gives the probability of the complement of the event.",
+       "value": "0.70000000"
+      },
+      {
+       "text": "$0.08$",
+       "why": "Gives only the probability that $X = 3$ instead of the probability of at least $3$.",
+       "value": "0.080000000"
+      },
+      {
+       "text": "$0.30$",
+       "why": "The probability of at least $3$ adds the probabilities of the values that satisfy the event: $0.30$.",
+       "value": "0.30000000"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is $0.30$. The probability of at least $3$ adds the probabilities of the values that satisfy the event: $0.30$.\n$0.22$ is incorrect: Leaves out the value $3$ itself, which is included in the event (at least $3$).\n$0.70$ is incorrect: Gives the probability of the complement of the event.\n$0.08$ is incorrect: Gives only the probability that $X = 3$ instead of the probability of at least $3$.",
+     "est_seconds": 80,
+     "blueprint": {
+      "id": "st_set_pd_table_q1",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find the probability of an event for a discrete random variable from its distribution table",
+      "topic": "2.8",
+      "skill": "3.C",
+      "student_thinking": [
+       "Identify the values of $X$ that satisfy the event, including or excluding the boundary value correctly",
+       "Add the probabilities of those values from the table"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Find the probability of an event for a discrete random variable from its distribution tabl",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "boundary_excluded",
+        "description": "Leaves out the value $3$ itself, which is included in the event (at least $3$)."
+       },
+       {
+        "id": "complement_given",
+        "description": "Gives the probability of the complement of the event."
+       },
+       {
+        "id": "single_value",
+        "description": "Gives only the probability that $X = 3$ instead of the probability of at least $3$."
+       }
+      ],
+      "verification": {
+       "independent_path": "the probability is recomputed by adding the table entries and by the complement rule",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "calculated_value_decision",
+       "procedure_choice"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_pd_table_q2",
+     "topic": "2.9",
+     "skill": "3.D",
+     "stem": "What is the mean (expected value) of $X$? (Give the answer as a decimal rounded to two decimal places.)",
+     "options": [
+      {
+       "text": "$1.61$",
+       "why": "The mean is the sum of each value times its probability: $1.61$.",
+       "value": "1.6100000"
+      },
+      {
+       "text": "$0.00$",
+       "why": "Reports the most likely value of $X$, which is the mode and not the mean.",
+       "value": "0"
+      },
+      {
+       "text": "$5.09$",
+       "why": "Weights the squares of the values by their probabilities, which is the mean of $X^2$.",
+       "value": "5.0900000"
+      },
+      {
+       "text": "$2.00$",
+       "why": "Averages the possible values $0$ through $4$ without weighting them by their probabilities.",
+       "value": "2.0000000"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is $1.61$. The mean is the sum of each value times its probability: $1.61$.\n$0.00$ is incorrect: Reports the most likely value of $X$, which is the mode and not the mean.\n$5.09$ is incorrect: Weights the squares of the values by their probabilities, which is the mean of $X^2$.\n$2.00$ is incorrect: Averages the possible values $0$ through $4$ without weighting them by their probabilities.",
+     "est_seconds": 85,
+     "blueprint": {
+      "id": "st_set_pd_table_q2",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find the mean of a discrete random variable from its probability distribution",
+      "topic": "2.9",
+      "skill": "3.D",
+      "student_thinking": [
+       "Multiply each value of $X$ by its probability",
+       "Add the products and distinguish the result from the unweighted average, the mode and the mean of the squares"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Find the mean of a discrete random variable from its probability distribution",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "unweighted_mean",
+        "description": "Averages the possible values $0$ through $4$ without weighting them by their probabilities."
+       },
+       {
+        "id": "mode_not_mean",
+        "description": "Reports the most likely value of $X$, which is the mode and not the mean."
+       },
+       {
+        "id": "mean_of_squares",
+        "description": "Weights the squares of the values by their probabilities, which is the mean of $X^2$."
+       }
+      ],
+      "verification": {
+       "independent_path": "the mean is recomputed from the table and from a synthetic population of 10000 individuals",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "interpretation"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_pd_table_q3",
+     "topic": "2.9",
+     "skill": "4.D",
+     "stem": "The standard deviation of $X$ is $1.58$ late deliveries. Which of the following is the correct interpretation of the standard deviation in this context?",
+     "options": [
+      {
+       "text": "A typical value of $X$ is about $1.58$ away from the mean of $1.61$ late deliveries.",
+       "why": "The standard deviation measures the typical distance of the values of the variable from its mean.",
+       "value": null
+      },
+      {
+       "text": "No truck has a number of late deliveries that differs from the mean by more than $1.58$.",
+       "why": "Treats the standard deviation as the largest possible distance from the mean; values can be farther away.",
+       "value": null
+      },
+      {
+       "text": "The mean number of late deliveries per truck is $1.58$.",
+       "why": "Confuses the standard deviation with the mean; they are different summaries of the distribution.",
+       "value": null
+      },
+      {
+       "text": "The average of the squared distances of the values from the mean is $1.58$.",
+       "why": "Describes the variance; the standard deviation is the square root of that average.",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is A typical value of $X$ is about $1.58$ away from the mean of $1.61$ late deliveries.. The standard deviation measures the typical distance of the values of the variable from its mean.\nNo truck has a number of late deliveries that differs from the mean by more than $1.58$. is incorrect: Treats the standard deviation as the largest possible distance from the mean; values can be farther away.\nThe mean number of late deliveries per truck is $1.58$. is incorrect: Confuses the standard deviation with the mean; they are different summaries of the distribution.\nThe average of the squared distances of the values from the mean is $1.58$. is incorrect: Describes the variance; the standard deviation is the square root of that average.",
+     "est_seconds": 80,
+     "blueprint": {
+      "id": "st_set_pd_table_q3",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Interpret the standard deviation of a discrete random variable in context",
+      "topic": "2.9",
+      "skill": "4.D",
+      "student_thinking": [
+       "Recall that the standard deviation describes the typical distance of the values from the mean",
+       "Reject statements that treat it as a maximum, as a mean or as a variance"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Interpret the standard deviation of a discrete random variable in context",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "max_deviation",
+        "description": "Treats the standard deviation as the largest possible distance from the mean; values can be farther away."
+       },
+       {
+        "id": "sd_as_mean",
+        "description": "Confuses the standard deviation with the mean; they are different summaries of the distribution."
+       },
+       {
+        "id": "variance_not_sd",
+        "description": "Describes the variance; the standard deviation is the square root of that average."
+       }
+      ],
+      "verification": {
+       "independent_path": "the standard deviation is recomputed from the table and from a synthetic population; the stated value equals it to two decimals",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "interpretation",
+       "claim_justification"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 245,
+   "facts": [
+    "pr=[0.39, 0.13, 0.18, 0.08, 0.22]"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_set_pd_table_q1",
+   "facts": [
+    "pr=[0.39, 0.13, 0.18, 0.08, 0.22]"
+   ],
+   "seed": 10500
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Topic 2.8 probability from a discrete distribution table; skill 3.C fits."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Table sums to 1; P(X>=3)=0.30 unique correct answer."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table data complete with title, columns, rows; rounding stated."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct misconceptions (boundary excluded, complement, single value); each explained. Key explanation is thin but acceptable."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Quick, light reading, appropriate load."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Correct, clean, simple item with a valid table and distinct distractors; passes all criteria."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Direct mean of a discrete RV from a table; fits 2.9 and 3.D."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Mean = 1.61; probabilities sum to 1; unique answer."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table data complete with title and column labels; rounding stated."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Mode (0.00), mean of squares (5.09), unweighted average (2.00) are distinct, realistic misconceptions; all explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short, light arithmetic, calculator allowed, typical AP MC load."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Correct, clean, in-scope item with a unique key and well-motivated distractors; passes all criteria."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "The item takes about 80 seconds, has a light reading load, and has four parallel options.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "A clean interpretation item on the SD of a discrete random variable. The key is unique and the distractors are distinct. Passes all criteria."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single-step item: interpret 'at least 3' and add two table probabilities (0.08 + 0.22 = 0.30). Distractors reflect common slips: only X=4, the complement P(X<=2), and only X=3. It involves no multi-step reasoning, no representation change beyond reading a small table, and trivial arithmetic. It is appropriate for introductory understanding of discrete probability distributions rather than full-mock exam depth.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 30
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "The item asks for the mean of a discrete random variable from a 5-row table. It needs one direct application of the formula sum x*P(x), with light arithmetic (result 1.61). The counted 2 steps and single source fall below the exam_prep rubric threshold of 3 steps. Distractors are simple (0.00, 5.09 as a sum of x or similar, 2.00 as the median or midpoint), so no extra reasoning is needed.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept item: identify the correct interpretation of the standard deviation of a discrete random variable among named misinterpretations (maximum deviation, mean, variance). The mean of 1.61 is verified consistent with the table (variance about 2.50, SD about 1.58), and the student does not need to compute anything. Reading and computation load are minimal and the table is simple, so this is a straightforward recognition of the standard definition.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 1,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 40
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_statistics-m01-k1",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "2.8",
+  "unitCode": "2",
+  "skillPrimary": "3.C",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "st_set_pd_table_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step discrete probability: read the table and add P(3) + P(4) = 0.46. The only conceptual demand is interpreting 'at least'. Distractors are P(X=3), P(X=4), and the complement. Minimal reading, trivial arithmetic, no representation change beyond reading the table.",
+  "payload": {
+   "archetype": "st_set_pd_table",
+   "topic": "2.8",
+   "skill": "3.C",
+   "calculator": "allowed",
+   "set_intro": "A software team records the number of serious bugs that testers find in one module. Let $X$ be the number of serious bugs for a randomly selected module. The probability distribution of $X$ is shown in the table.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Probability distribution of X, the number of serious bugs in a module",
+    "data": {
+     "chart": "table",
+     "data": {
+      "columns": [
+       "x",
+       "P(X = x)"
+      ],
+      "rows": [
+       [
+        "0",
+        "0.28"
+       ],
+       [
+        "1",
+        "0.12"
+       ],
+       [
+        "2",
+        "0.14"
+       ],
+       [
+        "3",
+        "0.38"
+       ],
+       [
+        "4",
+        "0.08"
+       ]
+      ]
+     },
+     "title": "Probability distribution of X (serious bugs)"
+    }
+   },
+   "items": [
+    {
+     "archetype": "st_set_pd_table_q1",
+     "topic": "2.8",
+     "skill": "3.C",
+     "stem": "What is the probability that $X$ is at least $3$? (Give the answer as a decimal rounded to two decimal places.)",
+     "options": [
+      {
+       "text": "$0.38$",
+       "why": "Gives only the probability that $X = 3$ instead of the probability of at least $3$.",
+       "value": "0.38000000"
+      },
+      {
+       "text": "$0.08$",
+       "why": "Leaves out the value $3$ itself, which is included in the event (at least $3$).",
+       "value": "0.080000000"
+      },
+      {
+       "text": "$0.46$",
+       "why": "The probability of at least $3$ adds the probabilities of the values that satisfy the event: $0.46$.",
+       "value": "0.46000000"
+      },
+      {
+       "text": "$0.54$",
+       "why": "Gives the probability of the complement of the event.",
+       "value": "0.54000000"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is $0.46$. The probability of at least $3$ adds the probabilities of the values that satisfy the event: $0.46$.\n$0.38$ is incorrect: Gives only the probability that $X = 3$ instead of the probability of at least $3$.\n$0.08$ is incorrect: Leaves out the value $3$ itself, which is included in the event (at least $3$).\n$0.54$ is incorrect: Gives the probability of the complement of the event.",
+     "est_seconds": 80,
+     "blueprint": {
+      "id": "st_set_pd_table_q1",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find the probability of an event for a discrete random variable from its distribution table",
+      "topic": "2.8",
+      "skill": "3.C",
+      "student_thinking": [
+       "Identify the values of $X$ that satisfy the event, including or excluding the boundary value correctly",
+       "Add the probabilities of those values from the table"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Find the probability of an event for a discrete random variable from its distribution tabl",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "boundary_excluded",
+        "description": "Leaves out the value $3$ itself, which is included in the event (at least $3$)."
+       },
+       {
+        "id": "complement_given",
+        "description": "Gives the probability of the complement of the event."
+       },
+       {
+        "id": "single_value",
+        "description": "Gives only the probability that $X = 3$ instead of the probability of at least $3$."
+       }
+      ],
+      "verification": {
+       "independent_path": "the probability is recomputed by adding the table entries and by the complement rule",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "calculated_value_decision",
+       "procedure_choice"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_pd_table_q2",
+     "topic": "2.9",
+     "skill": "3.D",
+     "stem": "What is the mean (expected value) of $X$? (Give the answer as a decimal rounded to two decimal places.)",
+     "options": [
+      {
+       "text": "$2.00$",
+       "why": "Averages the possible values $0$ through $4$ without weighting them by their probabilities.",
+       "value": "2.0000000"
+      },
+      {
+       "text": "$5.38$",
+       "why": "Weights the squares of the values by their probabilities, which is the mean of $X^2$.",
+       "value": "5.3800000"
+      },
+      {
+       "text": "$3.00$",
+       "why": "Reports the most likely value of $X$, which is the mode and not the mean.",
+       "value": "3.0000000"
+      },
+      {
+       "text": "$1.86$",
+       "why": "The mean is the sum of each value times its probability: $1.86$.",
+       "value": "1.8600000"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is $1.86$. The mean is the sum of each value times its probability: $1.86$.\n$2.00$ is incorrect: Averages the possible values $0$ through $4$ without weighting them by their probabilities.\n$5.38$ is incorrect: Weights the squares of the values by their probabilities, which is the mean of $X^2$.\n$3.00$ is incorrect: Reports the most likely value of $X$, which is the mode and not the mean.",
+     "est_seconds": 85,
+     "blueprint": {
+      "id": "st_set_pd_table_q2",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find the mean of a discrete random variable from its probability distribution",
+      "topic": "2.9",
+      "skill": "3.D",
+      "student_thinking": [
+       "Multiply each value of $X$ by its probability",
+       "Add the products and distinguish the result from the unweighted average, the mode and the mean of the squares"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Find the mean of a discrete random variable from its probability distribution",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "unweighted_mean",
+        "description": "Averages the possible values $0$ through $4$ without weighting them by their probabilities."
+       },
+       {
+        "id": "mode_not_mean",
+        "description": "Reports the most likely value of $X$, which is the mode and not the mean."
+       },
+       {
+        "id": "mean_of_squares",
+        "description": "Weights the squares of the values by their probabilities, which is the mean of $X^2$."
+       }
+      ],
+      "verification": {
+       "independent_path": "the mean is recomputed from the table and from a synthetic population of 10000 individuals",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "interpretation"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_pd_table_q3",
+     "topic": "2.9",
+     "skill": "4.D",
+     "stem": "The standard deviation of $X$ is $1.39$ serious bugs. Which of the following is the correct interpretation of the standard deviation in this context?",
+     "options": [
+      {
+       "text": "The mean number of serious bugs per module is $1.39$.",
+       "why": "Confuses the standard deviation with the mean; they are different summaries of the distribution.",
+       "value": null
+      },
+      {
+       "text": "A typical value of $X$ is about $1.39$ away from the mean of $1.86$ serious bugs.",
+       "why": "The standard deviation measures the typical distance of the values of the variable from its mean.",
+       "value": null
+      },
+      {
+       "text": "No module has a number of serious bugs that differs from the mean by more than $1.39$.",
+       "why": "Treats the standard deviation as the largest possible distance from the mean; values can be farther away.",
+       "value": null
+      },
+      {
+       "text": "The average of the squared distances of the values from the mean is $1.39$.",
+       "why": "Describes the variance; the standard deviation is the square root of that average.",
+       "value": null
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is A typical value of $X$ is about $1.39$ away from the mean of $1.86$ serious bugs.. The standard deviation measures the typical distance of the values of the variable from its mean.\nThe mean number of serious bugs per module is $1.39$. is incorrect: Confuses the standard deviation with the mean; they are different summaries of the distribution.\nNo module has a number of serious bugs that differs from the mean by more than $1.39$. is incorrect: Treats the standard deviation as the largest possible distance from the mean; values can be farther away.\nThe average of the squared distances of the values from the mean is $1.39$. is incorrect: Describes the variance; the standard deviation is the square root of that average.",
+     "est_seconds": 80,
+     "blueprint": {
+      "id": "st_set_pd_table_q3",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Interpret the standard deviation of a discrete random variable in context",
+      "topic": "2.9",
+      "skill": "4.D",
+      "student_thinking": [
+       "Recall that the standard deviation describes the typical distance of the values from the mean",
+       "Reject statements that treat it as a maximum, as a mean or as a variance"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Interpret the standard deviation of a discrete random variable in context",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "max_deviation",
+        "description": "Treats the standard deviation as the largest possible distance from the mean; values can be farther away."
+       },
+       {
+        "id": "sd_as_mean",
+        "description": "Confuses the standard deviation with the mean; they are different summaries of the distribution."
+       },
+       {
+        "id": "variance_not_sd",
+        "description": "Describes the variance; the standard deviation is the square root of that average."
+       }
+      ],
+      "verification": {
+       "independent_path": "the standard deviation is recomputed from the table and from a synthetic population; the stated value equals it to two decimals",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "interpretation",
+       "claim_justification"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 245,
+   "facts": [
+    "pr=[0.28, 0.12, 0.14, 0.38, 0.08]"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_set_pd_table_q1",
+   "facts": [
+    "pr=[0.28, 0.12, 0.14, 0.38, 0.08]"
+   ],
+   "seed": 10501
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Reading a discrete probability distribution table and computing P(X>=3) fits topic 2.8 and skill 3.C."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Probabilities sum to 1. P(X>=3)=0.38+0.08=0.46 is the unique correct option."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table data is complete, with title, columns and rows. The stem states the rounding convention and the wording is clear."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "The three distractors are distinct misconceptions: single value, boundary excluded, complement. Each is explained. The key explanation is thin but acceptable."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 80 seconds, no heavy arithmetic. Very easy but acceptable."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is a sound, easy MC on a discrete distribution table. The key is correct and unique, and the distractors are distinct and explained."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Mean of a discrete RV from a table: exactly topic 2.9 / skill 3.D."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Probabilities sum to 1; mean 1.86 is unique and correct. Distractors 2.00, 3.00, 5.38 verified as wrong."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table data complete with title, column labels, and values; rounding stated."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct realistic misconceptions (unweighted mean, mode, mean of squares); each wrong option explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 85 seconds, light arithmetic, calculator allowed, short parallel numeric options."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Sound, standard item. The key of 1.86 is correct and unique, and the distractors are distinct and verified. The stimulus is complete and the load is appropriate. Accept."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Interpreting the SD of a discrete random variable is squarely topic 2.9, skill 4.D."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "B is the unique correct interpretation. Mean 1.86 and SD about 1.39 verified; probabilities sum to 1."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table data is complete, with title, columns and rows. The stem is clear."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct named misconceptions (mean, maximum deviation, variance). Each wrong option is explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 80 seconds, with no arithmetic needed. Options are parallel and similar in length."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is a clean interpretation question on the SD of a discrete random variable. The key is unique and verified, the distractors are distinct, and the load is appropriate. It passes."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single-step discrete probability: read the table and add P(3) + P(4) = 0.46. The only conceptual demand is interpreting 'at least'. Distractors are P(X=3), P(X=4), and the complement. Minimal reading, trivial arithmetic, no representation change beyond reading the table.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 30
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept item: compute E(X) = sum of x*P(x) from one table. Two sequential steps (multiply, then sum), light arithmetic, and one source. This falls under the rubric's basic_learning cutoff of 2 or fewer steps and a single concept. The distractors are a plain sum of x-values and a few other wrong results, with no deeper reasoning needed.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 0,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept item: recognize the correct interpretation of the standard deviation of a discrete random variable. The SD and mean are given or easily checked (mean 1.86, SD about 1.386). Distractors are standard misinterpretations (confusing SD with the mean, a maximum deviation, or the variance). It needs no computation and only one reasoning step, so it suits foundational learning more than a full mock.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_statistics-m01-k2",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "2.8",
+  "unitCode": "2",
+  "skillPrimary": "3.C",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "st_set_pd_table_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: read a small discrete distribution table and add two probabilities for P(X ≤ 1) = 0.28. Distractors correspond to P(X=1), P(X=0), and the complement. One or two reasoning steps, trivial arithmetic, minimal reading, no unfair difficulty sources.",
+  "payload": {
+   "archetype": "st_set_pd_table",
+   "topic": "2.8",
+   "skill": "3.C",
+   "calculator": "allowed",
+   "set_intro": "A software team records the number of serious bugs that testers find in one module. Let $X$ be the number of serious bugs for a randomly selected module. The probability distribution of $X$ is shown in the table.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Probability distribution of X, the number of serious bugs in a module",
+    "data": {
+     "chart": "table",
+     "data": {
+      "columns": [
+       "x",
+       "P(X = x)"
+      ],
+      "rows": [
+       [
+        "0",
+        "0.17"
+       ],
+       [
+        "1",
+        "0.11"
+       ],
+       [
+        "2",
+        "0.16"
+       ],
+       [
+        "3",
+        "0.30"
+       ],
+       [
+        "4",
+        "0.26"
+       ]
+      ]
+     },
+     "title": "Probability distribution of X (serious bugs)"
+    }
+   },
+   "items": [
+    {
+     "archetype": "st_set_pd_table_q1",
+     "topic": "2.8",
+     "skill": "3.C",
+     "stem": "What is the probability that $X$ is at most $1$? (Give the answer as a decimal rounded to two decimal places.)",
+     "options": [
+      {
+       "text": "$0.11$",
+       "why": "Gives only the probability that $X = 1$ instead of the probability of at most $1$.",
+       "value": "0.11000000"
+      },
+      {
+       "text": "$0.72$",
+       "why": "Gives the probability of the complement of the event.",
+       "value": "0.72000000"
+      },
+      {
+       "text": "$0.17$",
+       "why": "Leaves out the value $1$ itself, which is included in the event (at most $1$).",
+       "value": "0.17000000"
+      },
+      {
+       "text": "$0.28$",
+       "why": "The probability of at most $1$ adds the probabilities of the values that satisfy the event: $0.28$.",
+       "value": "0.28000000"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is $0.28$. The probability of at most $1$ adds the probabilities of the values that satisfy the event: $0.28$.\n$0.11$ is incorrect: Gives only the probability that $X = 1$ instead of the probability of at most $1$.\n$0.72$ is incorrect: Gives the probability of the complement of the event.\n$0.17$ is incorrect: Leaves out the value $1$ itself, which is included in the event (at most $1$).",
+     "est_seconds": 80,
+     "blueprint": {
+      "id": "st_set_pd_table_q1",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find the probability of an event for a discrete random variable from its distribution table",
+      "topic": "2.8",
+      "skill": "3.C",
+      "student_thinking": [
+       "Identify the values of $X$ that satisfy the event, including or excluding the boundary value correctly",
+       "Add the probabilities of those values from the table"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Find the probability of an event for a discrete random variable from its distribution tabl",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "boundary_excluded",
+        "description": "Leaves out the value $1$ itself, which is included in the event (at most $1$)."
+       },
+       {
+        "id": "complement_given",
+        "description": "Gives the probability of the complement of the event."
+       },
+       {
+        "id": "single_value",
+        "description": "Gives only the probability that $X = 1$ instead of the probability of at most $1$."
+       }
+      ],
+      "verification": {
+       "independent_path": "the probability is recomputed by adding the table entries and by the complement rule",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "calculated_value_decision",
+       "procedure_choice"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_pd_table_q2",
+     "topic": "2.9",
+     "skill": "3.D",
+     "stem": "What is the mean (expected value) of $X$? (Give the answer as a decimal rounded to two decimal places.)",
+     "options": [
+      {
+       "text": "$2.00$",
+       "why": "Averages the possible values $0$ through $4$ without weighting them by their probabilities.",
+       "value": "2.0000000"
+      },
+      {
+       "text": "$7.61$",
+       "why": "Weights the squares of the values by their probabilities, which is the mean of $X^2$.",
+       "value": "7.6100000"
+      },
+      {
+       "text": "$2.37$",
+       "why": "The mean is the sum of each value times its probability: $2.37$.",
+       "value": "2.3700000"
+      },
+      {
+       "text": "$3.00$",
+       "why": "Reports the most likely value of $X$, which is the mode and not the mean.",
+       "value": "3.0000000"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is $2.37$. The mean is the sum of each value times its probability: $2.37$.\n$2.00$ is incorrect: Averages the possible values $0$ through $4$ without weighting them by their probabilities.\n$7.61$ is incorrect: Weights the squares of the values by their probabilities, which is the mean of $X^2$.\n$3.00$ is incorrect: Reports the most likely value of $X$, which is the mode and not the mean.",
+     "est_seconds": 85,
+     "blueprint": {
+      "id": "st_set_pd_table_q2",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find the mean of a discrete random variable from its probability distribution",
+      "topic": "2.9",
+      "skill": "3.D",
+      "student_thinking": [
+       "Multiply each value of $X$ by its probability",
+       "Add the products and distinguish the result from the unweighted average, the mode and the mean of the squares"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Find the mean of a discrete random variable from its probability distribution",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "unweighted_mean",
+        "description": "Averages the possible values $0$ through $4$ without weighting them by their probabilities."
+       },
+       {
+        "id": "mode_not_mean",
+        "description": "Reports the most likely value of $X$, which is the mode and not the mean."
+       },
+       {
+        "id": "mean_of_squares",
+        "description": "Weights the squares of the values by their probabilities, which is the mean of $X^2$."
+       }
+      ],
+      "verification": {
+       "independent_path": "the mean is recomputed from the table and from a synthetic population of 10000 individuals",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "interpretation"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_pd_table_q3",
+     "topic": "2.9",
+     "skill": "4.D",
+     "stem": "The standard deviation of $X$ is $1.41$ serious bugs. Which of the following is the correct interpretation of the standard deviation in this context?",
+     "options": [
+      {
+       "text": "A typical value of $X$ is about $1.41$ away from the mean of $2.37$ serious bugs.",
+       "why": "The standard deviation measures the typical distance of the values of the variable from its mean.",
+       "value": null
+      },
+      {
+       "text": "The average of the squared distances of the values from the mean is $1.41$.",
+       "why": "Describes the variance; the standard deviation is the square root of that average.",
+       "value": null
+      },
+      {
+       "text": "No module has a number of serious bugs that differs from the mean by more than $1.41$.",
+       "why": "Treats the standard deviation as the largest possible distance from the mean; values can be farther away.",
+       "value": null
+      },
+      {
+       "text": "The mean number of serious bugs per module is $1.41$.",
+       "why": "Confuses the standard deviation with the mean; they are different summaries of the distribution.",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is A typical value of $X$ is about $1.41$ away from the mean of $2.37$ serious bugs.. The standard deviation measures the typical distance of the values of the variable from its mean.\nThe average of the squared distances of the values from the mean is $1.41$. is incorrect: Describes the variance; the standard deviation is the square root of that average.\nNo module has a number of serious bugs that differs from the mean by more than $1.41$. is incorrect: Treats the standard deviation as the largest possible distance from the mean; values can be farther away.\nThe mean number of serious bugs per module is $1.41$. is incorrect: Confuses the standard deviation with the mean; they are different summaries of the distribution.",
+     "est_seconds": 80,
+     "blueprint": {
+      "id": "st_set_pd_table_q3",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Interpret the standard deviation of a discrete random variable in context",
+      "topic": "2.9",
+      "skill": "4.D",
+      "student_thinking": [
+       "Recall that the standard deviation describes the typical distance of the values from the mean",
+       "Reject statements that treat it as a maximum, as a mean or as a variance"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Interpret the standard deviation of a discrete random variable in context",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "max_deviation",
+        "description": "Treats the standard deviation as the largest possible distance from the mean; values can be farther away."
+       },
+       {
+        "id": "sd_as_mean",
+        "description": "Confuses the standard deviation with the mean; they are different summaries of the distribution."
+       },
+       {
+        "id": "variance_not_sd",
+        "description": "Describes the variance; the standard deviation is the square root of that average."
+       }
+      ],
+      "verification": {
+       "independent_path": "the standard deviation is recomputed from the table and from a synthetic population; the stated value equals it to two decimals",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "interpretation",
+       "claim_justification"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 245,
+   "facts": [
+    "pr=[0.17, 0.11, 0.16, 0.3, 0.26]"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_set_pd_table_q1",
+   "facts": [
+    "pr=[0.17, 0.11, 0.16, 0.3, 0.26]"
+   ],
+   "seed": 10502
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Reading a discrete probability distribution and computing P(X<=1) fits 2.8 / 3.C."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Table sums to 1; P(X<=1)=0.17+0.11=0.28 is unique."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table data complete with title, columns, rows; rounding stated."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct misconceptions, each explained. Key rationale is slightly vague but acceptable."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 60-80 seconds, minimal reading, calculator not needed but harmless."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "A correct, clean, easy item. The table is a valid distribution, the key is unique, and the distractors are distinct and each explained."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Mean of a discrete random variable from a table; matches topic 2.9 and skill 3.D."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "2.37 is unique; the other options are clearly distinct and wrong. Rounding to two decimals is stated."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table data is complete, with columns, rows, and title; probabilities sum to 1. The stem says 'shown in the table' and the table is provided."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Distractors encode three distinct misconceptions (unweighted mean, mean of squares, mode). The explanation addresses each wrong option. The key's 'why' is slightly terse but acceptable."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Quick, light arithmetic, calculator allowed; about 85 seconds is typical."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is clean: the key of 2.37 is correct and unique, the table is complete, and the distractors are distinct. It fits topic 2.9 and skill 3.D."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Interpreting SD of a discrete random variable; fits 2.9 and 4.D."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Mean 2.37 and SD 1.41 verified; A is the unique correct interpretation."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table is complete with columns, rows, title; probabilities sum to 1."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct named misconceptions; each wrong option explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 80 seconds, no calculation needed, four parallel sentence options."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Sound, clean interpretation item. The key is unique and correct, the table is complete, and the distractors are distinct misconceptions. Accept."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept item: read a small discrete distribution table and add two probabilities for P(X ≤ 1) = 0.28. Distractors correspond to P(X=1), P(X=0), and the complement. One or two reasoning steps, trivial arithmetic, minimal reading, no unfair difficulty sources.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 30
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Direct application of the expected value formula to a single probability table: multiply each x by its probability and sum. Counted steps are 2, below the 3-step threshold for exam_prep, and it uses one core concept with light arithmetic. Distractors (2.00 unweighted mean, 7.61 sum of x*P(x)^... style error, 3.00 median/mode-like) are plausible but do not add reasoning depth. No unfair difficulty sources.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept interpretation of the standard deviation of a discrete random variable. The mean and SD are consistent with the table (mean 2.37, SD about 1.41), so no calculation is needed. The student only has to pick the standard \"typical distance from the mean\" wording over the distractors: variance, a maximum deviation, and the mean. There is little reading or computation load and no representation change beyond reading the table.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 1,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_statistics-m02-k0",
+  "cellId": "ap_statistics-m02",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.4",
+  "unitCode": "5",
+  "skillPrimary": "3.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "st_set_reg_leverage_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "set_item_2:criterion_failed_distractor_explanation; set_item_3:criterion_failed_distractor_explanation; set_item_3:resembles_known_exam_item; criterion_failed_distractor_explanation; resembles_known_exam_item",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Two steps: compute the predicted weight at x=10 (3.13 + 0.418*10 = 7.31), then subtract it from the actual weight (6.4 - 7.31 = -0.91). Only one real concept is tested (residual = actual - predicted), with a single table lookup and light arithmetic. This falls under the rubric's basic_learning bound of 2 or fewer steps. The distractors (7.31 as the predicted value, 0.91 as a sign error) are plausible but do not add required reasoning steps.",
+  "payload": {
+   "archetype": "st_set_reg_leverage",
+   "topic": "5.4",
+   "skill": "3.B",
+   "calculator": "allowed",
+   "set_intro": "A veterinarian records the age and the weight of nine randomly selected puppies of the same breed. The table shown gives the data. The least-squares regression line for all nine observations is $\\hat{y} = 3.13 + 0.418x$, where $x$ is the age and $\\hat{y}$ is the predicted weight, and the correlation is $r = 0.9$.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Data on age and weight",
+    "data": {
+     "chart": "table",
+     "data": {
+      "columns": [
+       "Age (weeks)",
+       "Weight (kg)"
+      ],
+      "rows": [
+       [
+        "5",
+        "5.1"
+       ],
+       [
+        "6",
+        "5"
+       ],
+       [
+        "8",
+        "6.5"
+       ],
+       [
+        "10",
+        "6.4"
+       ],
+       [
+        "11",
+        "6.7"
+       ],
+       [
+        "14",
+        "11.2"
+       ],
+       [
+        "15",
+        "10.1"
+       ],
+       [
+        "17",
+        "11.5"
+       ],
+       [
+        "24",
+        "11.9"
+       ]
+      ]
+     },
+     "title": "Age and weight of nine observations"
+    }
+   },
+   "items": [
+    {
+     "archetype": "st_set_reg_leverage_q1",
+     "topic": "5.4",
+     "skill": "3.B",
+     "stem": "What is the residual for the observation with age equal to $10$ weeks? (Use the given line and round to two decimal places.)",
+     "options": [
+      {
+       "text": "$0.91$",
+       "why": "Subtracts in the wrong order; the residual is the actual value minus the predicted value.",
+       "value": "0.91000000"
+      },
+      {
+       "text": "$7.31$",
+       "why": "Reports the predicted value instead of the residual.",
+       "value": "7.3100000"
+      },
+      {
+       "text": "$-0.91$",
+       "why": "The residual is the actual value minus the predicted value: $6.4 - (7.31) = -0.91$.",
+       "value": "-0.91000000"
+      },
+      {
+       "text": "$2.22$",
+       "why": "Leaves the intercept out of the predicted value before subtracting.",
+       "value": "2.2200000"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is $-0.91$. The residual is the actual value minus the predicted value: $6.4 - (7.31) = -0.91$.\n$0.91$ is incorrect: Subtracts in the wrong order; the residual is the actual value minus the predicted value.\n$7.31$ is incorrect: Reports the predicted value instead of the residual.\n$2.22$ is incorrect: Leaves the intercept out of the predicted value before subtracting.",
+     "est_seconds": 90,
+     "blueprint": {
+      "id": "st_set_reg_leverage_q1",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Calculate a residual for an observation from the table and the given line",
+      "topic": "5.4",
+      "skill": "3.B",
+      "student_thinking": [
+       "Find the predicted value from the line for the observation's x",
+       "Subtract the predicted value from the actual value"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Calculate a residual for an observation from the table and the given line",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "sign_reversed",
+        "description": "Subtracts in the wrong order; the residual is the actual value minus the predicted value."
+       },
+       {
+        "id": "intercept_left_out",
+        "description": "Leaves the intercept out of the predicted value before subtracting."
+       },
+       {
+        "id": "prediction_not_residual",
+        "description": "Reports the predicted value instead of the residual."
+       }
+      ],
+      "verification": {
+       "independent_path": "the predicted value and the residual are recomputed from the given coefficients and the table row",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_reg_leverage_q2",
+     "topic": "5.3",
+     "skill": "3.B",
+     "stem": "The line is used to predict the weight of a puppy whose age is $7$ weeks. Which of the following statements is correct?",
+     "options": [
+      {
+       "text": "The predicted weight is $6.06$ kilograms, and this prediction is reasonable, because the age of $7$ weeks is within the range of the age values in the data, so the line is used between observed values.",
+       "why": "Substituting $7$ gives $6.06$; the prediction is reasonable because $7$ is inside the observed range of $5$ to $24.8$.",
+       "value": null
+      },
+      {
+       "text": "The predicted weight is $2.93$ kilograms, and this prediction is reasonable, because the age of $7$ weeks is within the range of the age values in the data, so the line is used between observed values.",
+       "why": "Leaves the intercept out when substituting into the line, so the value is only the slope times the given value.",
+       "value": null
+      },
+      {
+       "text": "The predicted weight is $6.06$ kilograms, and this prediction is not reliable, because the age of $7$ weeks is outside the range of the age values in the data, so the prediction is an extrapolation.",
+       "why": "Gets the predicted value right but misjudges its reliability: $7$ is within the range of the data.",
+       "value": null
+      },
+      {
+       "text": "The predicted weight is $2.93$ kilograms, and this prediction is not reliable, because the age of $7$ weeks is outside the range of the age values in the data, so the prediction is an extrapolation.",
+       "why": "Leaves the intercept out of the prediction and also misjudges the reliability of the prediction.",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is The predicted weight is $6.06$ kilograms, and this prediction is reasonable, because the age of $7$ weeks is within the range of the age values in the data, so the line is used between observed values.. Substituting $7$ gives $6.06$; the prediction is reasonable because $7$ is inside the observed range of $5$ to $24.8$.\nThe predicted weight is $2.93$ kilograms, and this prediction is reasonable, because the age of $7$ weeks is within the range of the age values in the data, so the line is used between observed values. is incorrect: Leaves the intercept out when substituting into the line, so the value is only the slope times the given value.\nThe predicted weight is $6.06$ kilograms, and this prediction is not reliable, because the age of $7$ weeks is outside the range of the age values in the data, so the prediction is an extrapolation. is incorrect: Gets the predicted value right but misjudges its reliability: $7$ is within the range of the data.\nThe predicted weight is $2.93$ kilograms, and this prediction is not reliable, because the age of $7$ weeks is outside the range of the age values in the data, so the prediction is an extrapolation. is incorrect: Leaves the intercept out of the prediction and also misjudges the reliability of the prediction.",
+     "est_seconds": 100,
+     "blueprint": {
+      "id": "st_set_reg_leverage_q2",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Predict a response from the line and judge whether the prediction is an extrapolation",
+      "topic": "5.3",
+      "skill": "3.B",
+      "student_thinking": [
+       "Substitute the given value into the line, including both the intercept and the slope term",
+       "Compare the value with the range of the data to decide whether the prediction is an extrapolation"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Predict a response from the line and judge whether the prediction is an extrapolation",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "reliability_reversed",
+        "description": "Gets the predicted value right but misjudges its reliability: $7$ is within the range of the data."
+       },
+       {
+        "id": "intercept_left_out",
+        "description": "Leaves the intercept out when substituting into the line, so the value is only the slope times the given value."
+       },
+       {
+        "id": "intercept_left_out_and_reversed",
+        "description": "Leaves the intercept out of the prediction and also misjudges the reliability of the prediction."
+       }
+      ],
+      "verification": {
+       "independent_path": "the prediction is recomputed from the given line and the range is read from the table, so the reliability follows from whether the value exceeds the largest observed x",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "claim_justification"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_reg_leverage_q3",
+     "topic": "5.2",
+     "skill": "4.D",
+     "stem": "The observation with the largest age is removed, and the least-squares line and the correlation are recalculated from the other eight observations. Which of the following describes the change?",
+     "options": [
+      {
+       "text": "The correlation would increase in strength and the slope would increase in size.",
+       "why": "With the last observation removed, $|r|$ changes from $0.90$ to $0.95$ and the size of the slope changes from $0.418$ to $0.587$.",
+       "value": null
+      },
+      {
+       "text": "The correlation would increase in strength and the slope would decrease in size.",
+       "why": "Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (increase and decrease).",
+       "value": null
+      },
+      {
+       "text": "The correlation would decrease in strength and the slope would increase in size.",
+       "why": "Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (decrease and increase).",
+       "value": null
+      },
+      {
+       "text": "The correlation would decrease in strength and the slope would decrease in size.",
+       "why": "Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (decrease and decrease).",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is The correlation would increase in strength and the slope would increase in size.. With the last observation removed, $|r|$ changes from $0.90$ to $0.95$ and the size of the slope changes from $0.418$ to $0.587$.\nThe correlation would increase in strength and the slope would decrease in size. is incorrect: Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (increase and decrease).\nThe correlation would decrease in strength and the slope would increase in size. is incorrect: Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (decrease and increase).\nThe correlation would decrease in strength and the slope would decrease in size. is incorrect: Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (decrease and decrease).",
+     "est_seconds": 110,
+     "blueprint": {
+      "id": "st_set_reg_leverage_q3",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Judge how removing a high-leverage observation changes the correlation and the slope",
+      "topic": "5.2",
+      "skill": "4.D",
+      "student_thinking": [
+       "Notice that the last observation lies far to the right of the other observations and away from their trend",
+       "Decide how removing it changes the strength of the correlation and the size of the slope, and match both changes to one option"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Judge how removing a high-leverage observation changes the correlation and the slope",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "change_increase_decrease",
+        "description": "Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (increase and decrease)."
+       },
+       {
+        "id": "change_decrease_increase",
+        "description": "Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (decrease and increase)."
+       },
+       {
+        "id": "change_decrease_decrease",
+        "description": "Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (decrease and decrease)."
+       }
+      ],
+      "verification": {
+       "independent_path": "the line and correlation are recomputed with and without the last observation by two methods and the four combinations of changes are exhaustive, so one is true",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "interpretation",
+       "claim_justification",
+       "representation_reading"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 300,
+   "facts": [
+    "a=3.13",
+    "b=0.418",
+    "r=0.9"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_set_reg_leverage_q1",
+   "facts": [
+    "a=3.13",
+    "b=0.418",
+    "r=0.9"
+   ],
+   "seed": 10500
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Residual calculation from a given line, which fits topic 5.4 and skill 3.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "-0.91 is the unique correct answer: 6.4-7.31."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table data are complete and rounding is stated. The extra r=0.9 is unneeded but harmless."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "The three distractors encode distinct misconceptions (sign reversed, predicted value reported, intercept omitted), and each wrong option is explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 60-90 seconds with light arithmetic, consistent with a calculator-allowed Statistics MC."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "A clean residual item with a correct key, distinct distractors and a complete table. The unused r=0.9 is a minor extra. Pass."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Prediction plus extrapolation check fits 5.3 / 3.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Key A is unique: 6.06 and 7 is within 5-24."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table data are complete with title and columns. r=0.9 is unused extra info, which is minor."
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": "Explanation states the observed range as 5 to 24.8, but the table maximum is 24, which is a factual error. The 'outside the range' distractors are trivially rejected by looking at the table."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short and calculator use is light. The item is easy but within the typical range."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The key is correct and the item is in scope. It fails only on the explanation, which gives the data range as 5 to 24.8 when the table maximum is 24. That should be corrected. The item is also very easy, and r=0.9 is unused."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Influential point effect on r and slope; in Unit 5 scope, interpretation of results."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Key A is the unique correct combination (r up, slope up) per verified values."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table has labeled columns with units and a title; complete."
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": "All three wrong-option explanations are identical boilerplate ('does not match the recalculated values') and name no distinct misconception (e.g., thinking removing an outlier weakens r, or that an influential point increases slope). Does not explain why each is wrong."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Time and load typical; calculator use is reasonable."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": true,
+    "summary": "The item is sound in scope, key, and stimulus. It fails on distractor explanations, which are generic boilerplate with no distinct misconceptions. It also closely mirrors a released AP item about removing the last observation from a nine-point age/weight table and its effect on r and slope."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Two steps: compute the predicted weight at x=10 (3.13 + 0.418*10 = 7.31), then subtract it from the actual weight (6.4 - 7.31 = -0.91). Only one real concept is tested (residual = actual - predicted), with a single table lookup and light arithmetic. This falls under the rubric's basic_learning bound of 2 or fewer steps. The distractors (7.31 as the predicted value, 0.91 as a sign error) are plausible but do not add required reasoning steps.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Two sequential steps: compute the predicted value 3.13 + 0.418(7) ≈ 6.06, then check that 7 lies within the observed age range of 5 to 24 to judge interpolation versus extrapolation. This is below the exam_prep threshold of 3 steps. The arithmetic is light, the wording is clear, and the stem is short. No unfair difficulty sources.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "The item tests one concept, how removing a high-leverage point affects r and the slope. It takes 2 steps: locate the point relative to the line, then reason about its effect. That is below the rubric's threshold of 3 steps and 2 combined concepts for exam_prep. There is no arithmetic and the reading load is short, so none of the difficulty comes from unfair sources.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 75
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_statistics-m02-k1",
+  "cellId": "ap_statistics-m02",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.4",
+  "unitCode": "5",
+  "skillPrimary": "3.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "st_set_reg_leverage_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_key_scoring; criterion_failed_distractor_explanation; criterion_failed_exam_suitability; instant_reject_multiple_correct; reference_pattern_mismatch; set_item_1:criterion_failed_key_scoring; set_item_1:criterion_failed_distractor_explanation; set_item_1:criterion_failed_exam_suitability; set_item_1:instant_reject_multiple_correct; set_item_1:reference_pattern_mismatch; set_item_2:criterion_failed_distractor_explanation; set_item_3:criterion_failed_distractor_explanation",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "The item takes two steps: plug x=15 into the given line to get 15.215, then compute residual = actual - predicted = 15 - 15.215 = -0.215, which rounds to -0.22. This is a single core skill (residual calculation) with light arithmetic. It does not reach the 3-step threshold for exam_prep. The distractors cover the sign error and reporting the predicted value or another quantity, but the item remains a direct application of the residual definition.",
+  "payload": {
+   "archetype": "st_set_reg_leverage",
+   "topic": "5.4",
+   "skill": "3.B",
+   "calculator": "allowed",
+   "set_intro": "A hiker records the elevation and the temperature at nine randomly selected points along a mountain trail. The table shown gives the data. The least-squares regression line for all nine observations is $\\hat{y} = 21.17 - 0.397x$, where $x$ is the elevation and $\\hat{y}$ is the predicted temperature, and the correlation is $r = -0.92$.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Data on elevation and temperature",
+    "data": {
+     "chart": "table",
+     "data": {
+      "columns": [
+       "Elevation (hundreds of meters)",
+       "Temperature (degrees Celsius)"
+      ],
+      "rows": [
+       [
+        "7",
+        "20.9"
+       ],
+       [
+        "9",
+        "17.5"
+       ],
+       [
+        "14",
+        "16.9"
+       ],
+       [
+        "15",
+        "15"
+       ],
+       [
+        "16",
+        "14.4"
+       ],
+       [
+        "19",
+        "12"
+       ],
+       [
+        "21",
+        "11.8"
+       ],
+       [
+        "26",
+        "8"
+       ],
+       [
+        "41",
+        "7.1"
+       ]
+      ]
+     },
+     "title": "Elevation and temperature of nine observations"
+    }
+   },
+   "items": [
+    {
+     "archetype": "st_set_reg_leverage_q1",
+     "topic": "5.4",
+     "skill": "3.B",
+     "stem": "What is the residual for the observation with elevation equal to $15$ hundred meters? (Use the given line and round to two decimal places.)",
+     "options": [
+      {
+       "text": "$0.22$",
+       "why": "Subtracts in the wrong order; the residual is the actual value minus the predicted value.",
+       "value": "0.22000000"
+      },
+      {
+       "text": "$-0.22$",
+       "why": "The residual is the actual value minus the predicted value: $15 - (15.22) = -0.22$.",
+       "value": "-0.22000000"
+      },
+      {
+       "text": "$15.22$",
+       "why": "Reports the predicted value instead of the residual.",
+       "value": "15.220000"
+      },
+      {
+       "text": "$20.95$",
+       "why": "Leaves the intercept out of the predicted value before subtracting.",
+       "value": "20.950000"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is $-0.22$. The residual is the actual value minus the predicted value: $15 - (15.22) = -0.22$.\n$0.22$ is incorrect: Subtracts in the wrong order; the residual is the actual value minus the predicted value.\n$15.22$ is incorrect: Reports the predicted value instead of the residual.\n$20.95$ is incorrect: Leaves the intercept out of the predicted value before subtracting.",
+     "est_seconds": 90,
+     "blueprint": {
+      "id": "st_set_reg_leverage_q1",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Calculate a residual for an observation from the table and the given line",
+      "topic": "5.4",
+      "skill": "3.B",
+      "student_thinking": [
+       "Find the predicted value from the line for the observation's x",
+       "Subtract the predicted value from the actual value"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Calculate a residual for an observation from the table and the given line",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "sign_reversed",
+        "description": "Subtracts in the wrong order; the residual is the actual value minus the predicted value."
+       },
+       {
+        "id": "intercept_left_out",
+        "description": "Leaves the intercept out of the predicted value before subtracting."
+       },
+       {
+        "id": "prediction_not_residual",
+        "description": "Reports the predicted value instead of the residual."
+       }
+      ],
+      "verification": {
+       "independent_path": "the predicted value and the residual are recomputed from the given coefficients and the table row",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_reg_leverage_q2",
+     "topic": "5.3",
+     "skill": "3.B",
+     "stem": "The line is used to predict the temperature of a point whose elevation is $8$ hundred meters. Which of the following statements is correct?",
+     "options": [
+      {
+       "text": "The predicted temperature is $-3.18$ degrees Celsius, and this prediction is not reliable, because the elevation of $8$ hundred meters is outside the range of the elevation values in the data, so the prediction is an extrapolation.",
+       "why": "Leaves the intercept out of the prediction and also misjudges the reliability of the prediction.",
+       "value": null
+      },
+      {
+       "text": "The predicted temperature is $17.99$ degrees Celsius, and this prediction is not reliable, because the elevation of $8$ hundred meters is outside the range of the elevation values in the data, so the prediction is an extrapolation.",
+       "why": "Gets the predicted value right but misjudges its reliability: $8$ is within the range of the data.",
+       "value": null
+      },
+      {
+       "text": "The predicted temperature is $-3.18$ degrees Celsius, and this prediction is reasonable, because the elevation of $8$ hundred meters is within the range of the elevation values in the data, so the line is used between observed values.",
+       "why": "Leaves the intercept out when substituting into the line, so the value is only the slope times the given value.",
+       "value": null
+      },
+      {
+       "text": "The predicted temperature is $17.99$ degrees Celsius, and this prediction is reasonable, because the elevation of $8$ hundred meters is within the range of the elevation values in the data, so the line is used between observed values.",
+       "why": "Substituting $8$ gives $17.99$; the prediction is reasonable because $8$ is inside the observed range of $7$ to $41.6$.",
+       "value": null
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is The predicted temperature is $17.99$ degrees Celsius, and this prediction is reasonable, because the elevation of $8$ hundred meters is within the range of the elevation values in the data, so the line is used between observed values.. Substituting $8$ gives $17.99$; the prediction is reasonable because $8$ is inside the observed range of $7$ to $41.6$.\nThe predicted temperature is $-3.18$ degrees Celsius, and this prediction is not reliable, because the elevation of $8$ hundred meters is outside the range of the elevation values in the data, so the prediction is an extrapolation. is incorrect: Leaves the intercept out of the prediction and also misjudges the reliability of the prediction.\nThe predicted temperature is $17.99$ degrees Celsius, and this prediction is not reliable, because the elevation of $8$ hundred meters is outside the range of the elevation values in the data, so the prediction is an extrapolation. is incorrect: Gets the predicted value right but misjudges its reliability: $8$ is within the range of the data.\nThe predicted temperature is $-3.18$ degrees Celsius, and this prediction is reasonable, because the elevation of $8$ hundred meters is within the range of the elevation values in the data, so the line is used between observed values. is incorrect: Leaves the intercept out when substituting into the line, so the value is only the slope times the given value.",
+     "est_seconds": 100,
+     "blueprint": {
+      "id": "st_set_reg_leverage_q2",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Predict a response from the line and judge whether the prediction is an extrapolation",
+      "topic": "5.3",
+      "skill": "3.B",
+      "student_thinking": [
+       "Substitute the given value into the line, including both the intercept and the slope term",
+       "Compare the value with the range of the data to decide whether the prediction is an extrapolation"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Predict a response from the line and judge whether the prediction is an extrapolation",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "reliability_reversed",
+        "description": "Gets the predicted value right but misjudges its reliability: $8$ is within the range of the data."
+       },
+       {
+        "id": "intercept_left_out",
+        "description": "Leaves the intercept out when substituting into the line, so the value is only the slope times the given value."
+       },
+       {
+        "id": "intercept_left_out_and_reversed",
+        "description": "Leaves the intercept out of the prediction and also misjudges the reliability of the prediction."
+       }
+      ],
+      "verification": {
+       "independent_path": "the prediction is recomputed from the given line and the range is read from the table, so the reliability follows from whether the value exceeds the largest observed x",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "claim_justification"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_reg_leverage_q3",
+     "topic": "5.2",
+     "skill": "4.D",
+     "stem": "The observation with the largest elevation is removed, and the least-squares line and the correlation are recalculated from the other eight observations. Which of the following describes the change?",
+     "options": [
+      {
+       "text": "The correlation would increase in strength and the slope would decrease in size.",
+       "why": "Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (increase and decrease).",
+       "value": null
+      },
+      {
+       "text": "The correlation would decrease in strength and the slope would increase in size.",
+       "why": "Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (decrease and increase).",
+       "value": null
+      },
+      {
+       "text": "The correlation would increase in strength and the slope would increase in size.",
+       "why": "With the last observation removed, $|r|$ changes from $0.92$ to $0.98$ and the size of the slope changes from $0.397$ to $0.632$.",
+       "value": null
+      },
+      {
+       "text": "The correlation would decrease in strength and the slope would decrease in size.",
+       "why": "Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (decrease and decrease).",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is The correlation would increase in strength and the slope would increase in size.. With the last observation removed, $|r|$ changes from $0.92$ to $0.98$ and the size of the slope changes from $0.397$ to $0.632$.\nThe correlation would increase in strength and the slope would decrease in size. is incorrect: Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (increase and decrease).\nThe correlation would decrease in strength and the slope would increase in size. is incorrect: Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (decrease and increase).\nThe correlation would decrease in strength and the slope would decrease in size. is incorrect: Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (decrease and decrease).",
+     "est_seconds": 110,
+     "blueprint": {
+      "id": "st_set_reg_leverage_q3",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Judge how removing a high-leverage observation changes the correlation and the slope",
+      "topic": "5.2",
+      "skill": "4.D",
+      "student_thinking": [
+       "Notice that the last observation lies far to the right of the other observations and away from their trend",
+       "Decide how removing it changes the strength of the correlation and the size of the slope, and match both changes to one option"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Judge how removing a high-leverage observation changes the correlation and the slope",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "change_increase_decrease",
+        "description": "Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (increase and decrease)."
+       },
+       {
+        "id": "change_decrease_increase",
+        "description": "Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (decrease and increase)."
+       },
+       {
+        "id": "change_decrease_decrease",
+        "description": "Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (decrease and decrease)."
+       }
+      ],
+      "verification": {
+       "independent_path": "the line and correlation are recomputed with and without the last observation by two methods and the four combinations of changes are exhaustive, so one is true",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "interpretation",
+       "claim_justification",
+       "representation_reading"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 300,
+   "facts": [
+    "a=21.17",
+    "b=-0.397",
+    "r=-0.92"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_set_reg_leverage_q1",
+   "facts": [
+    "a=21.17",
+    "b=-0.397",
+    "r=-0.92"
+   ],
+   "seed": 10501
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "A rounding tie at 0.215 is poor exam practice. The table is mostly irrelevant, since only one row is used.",
+    "key_scoring": {
+     "pass": false,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": false,
+     "notes": ""
+    },
+    "instant_reject": [
+     "multiple_correct"
+    ],
+    "matches_reference_pattern": false,
+    "resembles_known_exam_item": false,
+    "summary": "The residual is exactly -0.215, a tie at the rounding digit, so the key -0.22 is not uniquely defensible. The explanation also relies on an intermediate rounded prediction. Fail."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Prediction from line plus extrapolation judgment fits 5.3/3.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "21.17-0.397*8=17.994≈17.99; 8 is within 7-41, so the key (reasonable, interpolation) is unique."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table has title, column labels and units; complete. Rounding of the prediction (2 decimals) is evident from the options."
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": "Explanation states the observed range as 7 to 41.6, but the data maximum is 41. Factual inconsistency in the rationale. Distractors otherwise encode distinct errors (intercept omitted, reliability reversed)."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Light arithmetic, about 100 seconds; options are long but parallel. The key is the same format as the distractors, with no extra giveaway."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound: the key 17.99 with interpolation is unique and correct, and the table is complete. The explanation misstates the data range as 7 to 41.6 when the maximum is 41, which should be fixed. Fail only on that rationale error."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Influential point effect on r and slope; Unit 5, interpretation skill fits."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Key C unique; options exhaustive over the 2x2 combinations; solver agrees."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table has title, labeled columns with units, and complete data."
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": "All three wrong-option explanations are the same boilerplate sentence restating the true result; none names a distinct misconception (e.g., thinking an off-trend high-leverage point strengthens r, or that removing any point weakens r). The explanation does not teach why each is wrong."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short, one dominant skill, calculator optional."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Content and key are sound, but the distractor rationales are generic boilerplate rather than distinct named misconceptions, so the distractor/explanation criterion fails."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "The item takes two steps: plug x=15 into the given line to get 15.215, then compute residual = actual - predicted = 15 - 15.215 = -0.215, which rounds to -0.22. This is a single core skill (residual calculation) with light arithmetic. It does not reach the 3-step threshold for exam_prep. The distractors cover the sign error and reporting the predicted value or another quantity, but the item remains a direct application of the residual definition.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "The item takes two steps: substitute x = 8 into the line to get 17.99, then check that 8 lies within the observed range of 7 to 41, so the prediction is an interpolation. The two concepts are a predicted value and extrapolation. The rubric requires at least 3 steps for exam_prep, so this item fits basic_learning. Arithmetic is light, the stem is short, and there are no unfair difficulty sources.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Item requires recognizing a high-leverage point and reasoning about how its removal changes r and slope magnitude. The counted structure is 2 steps and 2 concepts, below the 3-step threshold for exam_prep. No arithmetic, short stem, no unfair sources.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 75
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_statistics-m02-k2",
+  "cellId": "ap_statistics-m02",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.4",
+  "unitCode": "5",
+  "skillPrimary": "3.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "st_set_reg_leverage_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "set_item_2:criterion_failed_distractor_explanation; set_item_3:criterion_failed_distractor_explanation; criterion_failed_distractor_explanation",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Two sequential steps: compute the predicted value from the given line (16.98), then subtract it from the observed value (17.1 - 16.98 = 0.12). Only one core concept (the residual definition) is applied. This is below the exam_prep threshold of 3 steps. Distractors are the sign error and the predicted value itself. Arithmetic is light and the wording is clear, so no unfair sources.",
+  "payload": {
+   "archetype": "st_set_reg_leverage",
+   "topic": "5.4",
+   "skill": "3.B",
+   "calculator": "allowed",
+   "set_intro": "A hiker records the elevation and the temperature at nine randomly selected points along a mountain trail. The table shown gives the data. The least-squares regression line for all nine observations is $\\hat{y} = 21.71 - 0.43x$, where $x$ is the elevation and $\\hat{y}$ is the predicted temperature, and the correlation is $r = -0.95$.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Data on elevation and temperature",
+    "data": {
+     "chart": "table",
+     "data": {
+      "columns": [
+       "Elevation (hundreds of meters)",
+       "Temperature (degrees Celsius)"
+      ],
+      "rows": [
+       [
+        "5",
+        "20.4"
+       ],
+       [
+        "7",
+        "20.3"
+       ],
+       [
+        "10",
+        "17.8"
+       ],
+       [
+        "11",
+        "17.1"
+       ],
+       [
+        "15",
+        "14.9"
+       ],
+       [
+        "18",
+        "12.7"
+       ],
+       [
+        "19",
+        "13.1"
+       ],
+       [
+        "29",
+        "5.7"
+       ],
+       [
+        "44",
+        "5.2"
+       ]
+      ]
+     },
+     "title": "Elevation and temperature of nine observations"
+    }
+   },
+   "items": [
+    {
+     "archetype": "st_set_reg_leverage_q1",
+     "topic": "5.4",
+     "skill": "3.B",
+     "stem": "What is the residual for the observation with elevation equal to $11$ hundred meters? (Use the given line and round to two decimal places.)",
+     "options": [
+      {
+       "text": "$0.12$",
+       "why": "The residual is the actual value minus the predicted value: $17.1 - (16.98) = 0.12$.",
+       "value": "0.12000000"
+      },
+      {
+       "text": "$-0.12$",
+       "why": "Subtracts in the wrong order; the residual is the actual value minus the predicted value.",
+       "value": "-0.12000000"
+      },
+      {
+       "text": "$21.83$",
+       "why": "Leaves the intercept out of the predicted value before subtracting.",
+       "value": "21.830000"
+      },
+      {
+       "text": "$16.98$",
+       "why": "Reports the predicted value instead of the residual.",
+       "value": "16.980000"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is $0.12$. The residual is the actual value minus the predicted value: $17.1 - (16.98) = 0.12$.\n$-0.12$ is incorrect: Subtracts in the wrong order; the residual is the actual value minus the predicted value.\n$21.83$ is incorrect: Leaves the intercept out of the predicted value before subtracting.\n$16.98$ is incorrect: Reports the predicted value instead of the residual.",
+     "est_seconds": 90,
+     "blueprint": {
+      "id": "st_set_reg_leverage_q1",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Calculate a residual for an observation from the table and the given line",
+      "topic": "5.4",
+      "skill": "3.B",
+      "student_thinking": [
+       "Find the predicted value from the line for the observation's x",
+       "Subtract the predicted value from the actual value"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Calculate a residual for an observation from the table and the given line",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "sign_reversed",
+        "description": "Subtracts in the wrong order; the residual is the actual value minus the predicted value."
+       },
+       {
+        "id": "intercept_left_out",
+        "description": "Leaves the intercept out of the predicted value before subtracting."
+       },
+       {
+        "id": "prediction_not_residual",
+        "description": "Reports the predicted value instead of the residual."
+       }
+      ],
+      "verification": {
+       "independent_path": "the predicted value and the residual are recomputed from the given coefficients and the table row",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_reg_leverage_q2",
+     "topic": "5.3",
+     "skill": "3.B",
+     "stem": "The line is used to predict the temperature of a point whose elevation is $54$ hundred meters. Which of the following statements is correct?",
+     "options": [
+      {
+       "text": "The predicted temperature is $-1.51$ degrees Celsius, and this prediction is reasonable, because the elevation of $54$ hundred meters is within the range of the elevation values in the data, so the line is used between observed values.",
+       "why": "Gets the predicted value right but misjudges its reliability: $54$ is outside the range of the data.",
+       "value": null
+      },
+      {
+       "text": "The predicted temperature is $-23.22$ degrees Celsius, and this prediction is reasonable, because the elevation of $54$ hundred meters is within the range of the elevation values in the data, so the line is used between observed values.",
+       "why": "Leaves the intercept out of the prediction and also misjudges the reliability of the prediction.",
+       "value": null
+      },
+      {
+       "text": "The predicted temperature is $-1.51$ degrees Celsius, and this prediction is not reliable, because the elevation of $54$ hundred meters is outside the range of the elevation values in the data, so the prediction is an extrapolation.",
+       "why": "Substituting $54$ gives $-1.51$; the prediction is not reliable because $54$ is beyond the observed range of $5$ to $44.6$.",
+       "value": null
+      },
+      {
+       "text": "The predicted temperature is $-23.22$ degrees Celsius, and this prediction is not reliable, because the elevation of $54$ hundred meters is outside the range of the elevation values in the data, so the prediction is an extrapolation.",
+       "why": "Leaves the intercept out when substituting into the line, so the value is only the slope times the given value.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is The predicted temperature is $-1.51$ degrees Celsius, and this prediction is not reliable, because the elevation of $54$ hundred meters is outside the range of the elevation values in the data, so the prediction is an extrapolation.. Substituting $54$ gives $-1.51$; the prediction is not reliable because $54$ is beyond the observed range of $5$ to $44.6$.\nThe predicted temperature is $-1.51$ degrees Celsius, and this prediction is reasonable, because the elevation of $54$ hundred meters is within the range of the elevation values in the data, so the line is used between observed values. is incorrect: Gets the predicted value right but misjudges its reliability: $54$ is outside the range of the data.\nThe predicted temperature is $-23.22$ degrees Celsius, and this prediction is reasonable, because the elevation of $54$ hundred meters is within the range of the elevation values in the data, so the line is used between observed values. is incorrect: Leaves the intercept out of the prediction and also misjudges the reliability of the prediction.\nThe predicted temperature is $-23.22$ degrees Celsius, and this prediction is not reliable, because the elevation of $54$ hundred meters is outside the range of the elevation values in the data, so the prediction is an extrapolation. is incorrect: Leaves the intercept out when substituting into the line, so the value is only the slope times the given value.",
+     "est_seconds": 100,
+     "blueprint": {
+      "id": "st_set_reg_leverage_q2",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Predict a response from the line and judge whether the prediction is an extrapolation",
+      "topic": "5.3",
+      "skill": "3.B",
+      "student_thinking": [
+       "Substitute the given value into the line, including both the intercept and the slope term",
+       "Compare the value with the range of the data to decide whether the prediction is an extrapolation"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Predict a response from the line and judge whether the prediction is an extrapolation",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "reliability_reversed",
+        "description": "Gets the predicted value right but misjudges its reliability: $54$ is outside the range of the data."
+       },
+       {
+        "id": "intercept_left_out",
+        "description": "Leaves the intercept out when substituting into the line, so the value is only the slope times the given value."
+       },
+       {
+        "id": "intercept_left_out_and_reversed",
+        "description": "Leaves the intercept out of the prediction and also misjudges the reliability of the prediction."
+       }
+      ],
+      "verification": {
+       "independent_path": "the prediction is recomputed from the given line and the range is read from the table, so the reliability follows from whether the value exceeds the largest observed x",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "claim_justification"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_reg_leverage_q3",
+     "topic": "5.2",
+     "skill": "4.D",
+     "stem": "The observation with the largest elevation is removed, and the least-squares line and the correlation are recalculated from the other eight observations. Which of the following describes the change?",
+     "options": [
+      {
+       "text": "The correlation would increase in strength and the slope would decrease in size.",
+       "why": "Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (increase and decrease).",
+       "value": null
+      },
+      {
+       "text": "The correlation would decrease in strength and the slope would decrease in size.",
+       "why": "Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (decrease and decrease).",
+       "value": null
+      },
+      {
+       "text": "The correlation would decrease in strength and the slope would increase in size.",
+       "why": "Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (decrease and increase).",
+       "value": null
+      },
+      {
+       "text": "The correlation would increase in strength and the slope would increase in size.",
+       "why": "With the last observation removed, $|r|$ changes from $0.95$ to $1.00$ and the size of the slope changes from $0.430$ to $0.622$.",
+       "value": null
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is The correlation would increase in strength and the slope would increase in size.. With the last observation removed, $|r|$ changes from $0.95$ to $1.00$ and the size of the slope changes from $0.430$ to $0.622$.\nThe correlation would increase in strength and the slope would decrease in size. is incorrect: Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (increase and decrease).\nThe correlation would decrease in strength and the slope would decrease in size. is incorrect: Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (decrease and decrease).\nThe correlation would decrease in strength and the slope would increase in size. is incorrect: Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (decrease and increase).",
+     "est_seconds": 110,
+     "blueprint": {
+      "id": "st_set_reg_leverage_q3",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Judge how removing a high-leverage observation changes the correlation and the slope",
+      "topic": "5.2",
+      "skill": "4.D",
+      "student_thinking": [
+       "Notice that the last observation lies far to the right of the other observations and away from their trend",
+       "Decide how removing it changes the strength of the correlation and the size of the slope, and match both changes to one option"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Judge how removing a high-leverage observation changes the correlation and the slope",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "change_increase_decrease",
+        "description": "Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (increase and decrease)."
+       },
+       {
+        "id": "change_decrease_increase",
+        "description": "Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (decrease and increase)."
+       },
+       {
+        "id": "change_decrease_decrease",
+        "description": "Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (decrease and decrease)."
+       }
+      ],
+      "verification": {
+       "independent_path": "the line and correlation are recomputed with and without the last observation by two methods and the four combinations of changes are exhaustive, so one is true",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "interpretation",
+       "claim_justification",
+       "representation_reading"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 300,
+   "facts": [
+    "a=21.71",
+    "b=-0.43",
+    "r=-0.95"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_set_reg_leverage_q1",
+   "facts": [
+    "a=21.71",
+    "b=-0.43",
+    "r=-0.95"
+   ],
+   "seed": 10502
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Residual computation from given line and table; fits 5.4 / 3.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Predicted 16.98, residual 0.12; unique correct answer."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table has title, column labels with units, nine rows; the needed row is present. Rounding stated."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor maps to a distinct error; 21.83 arises from omitting the intercept (17.1+4.73). Explanation wording for it is slightly terse but valid."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 60-90 seconds, light arithmetic, calculator designation fine."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Correct, clean residual item with complete table and distinct distractors; acceptable."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Prediction and extrapolation, topic 5.3, skill 3.B. In scope."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "-1.51 and extrapolation, since 54 > 44. Unique key."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table is complete, with titled columns, units and nine rows."
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": "The explanation states the data range is 5 to 44.6, but the table maximum is 44. This is a factual error in the rationale shown to students."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Light load, about 100 seconds."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound: the key is correct and unique, and the distractors are distinct. The explanation misstates the data range as 5 to 44.6 when the table maximum is 44. This should be fixed before use."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Influential point effect on r and slope is in Unit 5 scope and fits interpretation/claim reasoning."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Key D is consistent with supplied values and independent solver; unique among the four exhaustive combinations."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table complete with labels and units; wording clear. Minor: explanation states |r| = 1.00, which is a rounding of ~0.995 and misleading."
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": "Distractor explanations are generic templates that name no misconception and give no reasoning; no explanation of why the point flattens the line (positive residual, high leverage). Distractors do not encode distinct named misconceptions."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Load and time are typical for an AP item; synthetic near-perfect linear data and r = 1.00 claim are slightly unrealistic."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The content and key are sound, but the distractor explanations are generic templates with no named misconceptions or reasoning. The explanation also overstates |r| as 1.00. Fails the distractor/explanation criterion."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Two sequential steps: compute the predicted value from the given line (16.98), then subtract it from the observed value (17.1 - 16.98 = 0.12). Only one core concept (the residual definition) is applied. This is below the exam_prep threshold of 3 steps. Distractors are the sign error and the predicted value itself. Arithmetic is light and the wording is clear, so no unfair sources.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "The item takes two steps: plug x=54 into the given line to get -1.51, then compare 54 with the data range (max 44) to identify extrapolation. This is a standard, direct application of prediction and the extrapolation concept, with light arithmetic and a short stem. It falls under the rubric's 2-or-fewer steps criterion, so it fits basic_learning rather than exam_prep.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "The item takes 2 sequential steps (identify the high-leverage point, then judge its effect on r and slope) and applies one core idea, influential points. This meets the basic_learning criterion of 2 or fewer steps. It needs no arithmetic and has a short stem, and the wording is clear. One distractor survives the first step, but the item does not reach the 3-step requirement for exam_prep.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 75
+   }
+  ]
+ }
+]

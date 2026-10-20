@@ -1,0 +1,840 @@
+[
+ {
+  "key": "ap_statistics-m01-k0-q1",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "P(A)+P(B)-P(A and B)=0.39+0.49-0.17=0.710",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "0.710"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Addition rule from joint table; fits 2.4 and 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0.39+0.49-0.17=0.710; unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data complete, consistent totals, rounding stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct realistic errors; explanation covers each. Minor misconception id/description mismatch in metadata only."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, light arithmetic, appropriate."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean, suitable item; passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item is a direct application of the addition rule using values read from a joint table: 0.39 + 0.49 - 0.17 = 0.71. It has 2 counted steps, below the 3 required for exam_prep. The arithmetic is light and the reading load is low. Only one distractor survives the first step and fails later. No unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k0-q2",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "P(B|A)=P(A and B)/P(A)=0.17/0.39≈0.436",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "0.436"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Conditional probability from a joint table; matches topic 2.6 and skill 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0.17/0.39=0.436 is the unique correct option; the other three are distinct values."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data is complete and consistent, with row/column totals and labels. The stem defines events A and B, and rounding is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct named misconception (reversed conditional, joint probability, unconditional probability), and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, one dominant skill, minimal arithmetic, calculator designation consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean standard conditional probability item. All criteria pass."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-step conditional probability from a joint table: P(B|A)=0.17/0.39≈0.436. Distractors reflect common errors (reversed conditioning, joint probability, marginal probability). Minimal reading and computation, with no extra reasoning layer.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k0-q3",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "P(not A and not B) = P(40 or older and no flu shot) = 0.29",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "0.290"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Union/complement of two events from a joint table; calculation fits 3.C and topic 2.7. Minor: the answer is directly readable as a table cell, reducing demand on the union rule."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "P(A)=0.39, P(B)=0.49, P(A∩B)=0.17, union 0.71, neither 0.29; the table cell confirms it. Unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete with row/column labels and totals; events A and B defined in the stem; rounding stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "0.12 = 1-P(A)-P(B); 0.71 = union; 0.83 = 1-P(A and B). Each is a distinct named misconception and the explanation addresses each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, light arithmetic, parallel numeric options, calculator designation harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clear, well-formed item with distinct distractors. The only weakness is that the key can be read directly from a table cell, which slightly weakens the union-rule demand but does not make the item invalid."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item takes 2 sequential steps: find P(A or B) with the addition rule, then apply the complement. The answer can also be read directly from the table cell for 40 or older with no flu shot, which is 0.29. This is below the exam_prep threshold of 3 steps. The distractors 0.71 and 0.83 come from stopping after the union or from a misapplied rule. Reading and arithmetic are light, and neither is an unfair source of difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k1-q1",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "P(A)+P(B)-P(A and B)=0.61+0.47-0.26=0.820",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "0.820"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60-85 seconds, has light arithmetic, and has parallel numeric options.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, clean, and in scope, with distinct distractors and a complete table stimulus. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Read P(A), P(B) and P(A and B) from the joint table, then apply the addition rule: 0.61 + 0.47 - 0.26 = 0.82. This is a single concept (addition rule) with only 2 required steps, so it falls under the basic_learning rubric. Arithmetic is light and the stem is short, so no unfair sources are present.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k1-q2",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "P(B|A)=P(A and B)/P(A)=0.26/0.61≈0.426",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "0.426"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Conditional probability from joint table; calculation skill 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0.26/0.61=0.426 unique; rounding stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table complete with labels, totals, title; consistent with stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, one step, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean: the key is unique, the distractors encode distinct misconceptions, the table is complete, and the load is appropriate."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step conditional probability from a joint table: 0.26/0.61 = 0.426. Distractors are the joint probability, the reversed conditional, and the marginal. Minimal reading and computation; it tests only recall of the formula and reading the table correctly.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k1-q3",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "P(neither A nor B) = P(grade 10 and plays no sport) = 0.18. Check: 1 - (0.61 + 0.47 - 0.26) = 0.18.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "0.180"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Union/complement probability from a joint table fits 2.7 and 3.C. The answer can be read directly from a single cell, so the task is slightly easy but acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0.180 is unique and correct: 1-(0.61+0.47-0.26)=0.18, which matches the table cell."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data is complete, with the title, row and column labels, and totals. Rounding is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are 0.74 (not both), 0.82 (union) and -0.08 (overlap removed twice). Each is a distinct misconception, and the explanation covers all three."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task takes about 60-90 seconds with light arithmetic and a standard four-option format."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, clear and on topic. The only weakness is that the answer is a direct cell read, which makes it easy, but this is acceptable. Pass."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item needs 2 sequential steps: P(A or B) = 0.61 + 0.47 - 0.26 = 0.82, then the complement 1 - 0.82 = 0.18. It uses a single table, two basic concepts (addition rule, complement rule) and light arithmetic. The answer can also be read straight from the Grade 10 / no-sport cell. This is below the exam_prep threshold of at least 3 steps and 2 or more combined concepts, so it fits basic_learning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k2-q1",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "P(A)+P(B)-P(A and B)=0.43+0.70-0.32=0.81; equivalently 1-0.19.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "0.810"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Addition rule from a joint table; fits 2.4 / 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0.81 is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete with headers and totals; rounding is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained; the explanation covers all wrong options."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-85 seconds, light arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean. The key (0.810) is unique and the distractors are distinct and explained. The stimulus is complete and the item is exam-suitable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept application of the addition rule using values read directly from a joint table: 0.43 + 0.70 - 0.32 = 0.81. Only 2 required steps, below the 3-step threshold for exam_prep. Distractors (0.68, 0.32, 1.13) reflect common errors, but the item stays at the basic level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k2-q2",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "P(B|A)=P(A and B)/P(A)=0.32/0.43≈0.744",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "0.744"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Conditional probability from a joint table; matches topic 2.6 and skill 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0.32/0.43=0.744 is the unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete and the totals are consistent. The rounding convention is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors map to distinct misconceptions (ignoring the condition, reversing the conditional, giving the joint probability), and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short task with a light reading and calculation load, typical of the AP exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, clear and well suited to the exam. The key is unique, the distractors encode distinct misconceptions, and the table is complete."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step application of P(B|A)=P(A and B)/P(A) using values read directly from a joint probability table. Distractors are standard confusions (marginal, reversed conditional, joint). Little reading, one simple division, no extra reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k2-q3",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Neither A nor B = grade 10 and no sport = 0.19 (equivalently 1 - P(A∪B) = 1 - (0.43+0.70-0.32) = 0.19).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "0.190"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Union/complement from joint table fits 2.7 and 3.C; light demand."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0.19 is unique: the table cell and 1-P(A or B) agree. Other options each map to a distinct error."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data complete with headers, totals sum to 1.00; rounding stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions, all explained. The negative probability -0.130 is an implausible distractor, a minor weakness."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds, minimal reading, appropriate load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean item. The answer 0.190 is unique and verified against the table. The only weakness is the implausible negative-probability distractor, which is minor."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The answer is the Grade 10/no-sport cell, 0.19. It can also be found with the addition rule (P(A or B) = 0.81) followed by the complement. The counted structure has only 2 steps and 2 concepts, which is below the exam_prep threshold of 3 steps. The arithmetic is light and the reading load is low. Distractors are the union value 0.81, a negative value from a misapplied rule, and 0.68.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m02-k0-q1",
+  "cellId": "ap_statistics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "6.21 errors",
+     "brief_reasoning": "Predicted = 16.48 - 1.01(9) = 7.39. Residual = 13.6 - 7.39 = 6.21.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Residual computation from a given line fits topic 5.4 and skill 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Predicted 7.39, residual 6.21; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Scatter data complete with axis titles, points, fit line and highlighted index matching (9,13.6). Rounding stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct realistic misconceptions: sign reversal, intercept omitted, predicted value reported. Each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds, light arithmetic, one skill, four parallel numeric options with units."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, correct residual-calculation MC item with complete stimulus data and distinct distractors. Passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Compute the predicted value from the given line (16.48 - 1.01*9 = 7.39), then subtract from the observed value (13.6 - 7.39 = 6.21). This is two steps applying a single residual-calculation skill. The distractors (predicted value, sign-error slope, reversed sign) are common misconceptions but do not add reasoning steps. Per the rubric, 2 or fewer steps means basic_learning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m02-k0-q2",
+  "cellId": "ap_statistics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Moderately strong negative linear association; highlighted point is an outlier",
+     "brief_reasoning": "r=-0.85 negative; at x=9 predicted 7.39 vs 13.6, residual ≈6.2, far larger than other residuals.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.1 scatterplot description (direction, form, unusual point); skill 4.A fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key A unique: negative trend, highlighted point (9,13.6) far above the others at similar x. B wrong direction, C misses outlier, D curvature unsupported."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Scatter data complete with axis titles, points, fit line and highlight index. Stem wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, parallel format, each wrong option explained. The explanation's 'above or below' is slightly vague but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds, no arithmetic, typical AP stimulus-based MC. Calculator not needed but designation allowed is acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, standard scatterplot-description item with a unique key and distinct distractors. The stimulus data are complete, and nothing here is a reject condition."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept scatterplot description: identify negative direction, linear form, and one clearly visible outlier (9, 13.6) well above the other points near x=9. Distractors (positive direction, no unusual points, curved) are easily eliminated by reading the graph and r = -0.85. No computation or heavy reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m02-k0-q3",
+  "cellId": "ap_statistics-m02",
+  "passed": false,
+  "reasons": [
+   "difficulty_signals_concepts"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_statistics-m02-k1-q1",
+  "cellId": "ap_statistics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "yhat=55.02-1.53*24=18.30; residual=34.6-18.30=16.30",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "16.30 minutes"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Residual from given line: direct 5.4/3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "16.30 is correct and unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Scatter data complete with titles, units, points, fit line and highlight. The plot is not strictly needed, since the stem gives the coordinates."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct error (predicted value, sign reversed, intercept dropped), and the explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, light arithmetic, rounding stated, calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope and well formed, with distinct distractors. The only minor concern is that the plotted points do not exactly match the stated least-squares line, which does not change the key because the stem says to use the given line."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item takes two steps: compute the predicted value from the line (18.30), then subtract it from the actual value (34.6 - 18.30 = 16.30). It uses one source and one core skill, residual = actual - predicted. That is 2 steps, which is under the 3-step threshold for exam_prep. The distractors (sign error, predicted value) are plausible but do not add reasoning depth. Arithmetic is light and the reading load is low.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m02-k1-q2",
+  "cellId": "ap_statistics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "Moderately strong negative linear association; highlighted point is an outlier",
+     "brief_reasoning": "r=-0.84 means a negative association. The line predicts 18.3 min at 24°C, so the observed 34.6 min gives a residual of about +16.3, far from the pattern.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Describing direction, form and an unusual point in a scatterplot fits topic 5.1 and skill 4.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is the unique correct answer. The negative trend is clear and the highlighted point has a residual of about +16 from the line."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The data include axis titles with units, all 10 points, the fit line and the highlight index. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Reversed direction, curved form and missed outlier are distinct misconceptions, and every wrong option is explained. The options are parallel in length and format."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "This is a quick read with no calculation, typical of an AP MC item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. Option D is uniquely correct, the distractors encode distinct misconceptions, the stimulus data are complete, and the task load is appropriate."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step description of a scatterplot: identify negative direction from the slope and r, recognize moderately strong linear form, and note the highlighted point as an outlier. Distractors are clearly wrong (positive direction, curved, no unusual points). Minimal reading and no computation. This is a core 5.1 skill with one small additional step of noting the unusual point.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_statistics-m02-k1-q3",
+  "cellId": "ap_statistics-m02",
+  "passed": false,
+  "reasons": [
+   "difficulty_signals_concepts"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_statistics-m02-k2-q1",
+  "cellId": "ap_statistics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "yhat=63.47-1.87*24=18.59; residual=34.6-18.59=16.01",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "16.01 minutes"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Residual calculation from a given line fits topic 5.4 and skill 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "yhat=18.59, residual=16.01. The key is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Scatter data are complete, with axis titles, points, fit line and highlight. The highlighted point matches the stem. Rounding is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct errors: reversed sign, predicted value reported, and intercept left out. The explanation covers each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A short one-step item of about 90 seconds with light arithmetic and parallel options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean residual item that meets all five criteria. The scatterplot is not strictly needed, but it does no harm."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Two sequential steps: compute the predicted value from the line (18.59), then subtract it from the actual value (34.6 - 18.59 = 16.01). Single concept family (residual = actual - predicted), one source, light arithmetic. This falls under the rubric's 2-or-fewer-steps threshold for basic_learning. Distractors include the predicted value, the sign-flipped residual, and the sum of the line's terms.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m02-k2-q2",
+  "cellId": "ap_statistics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "The slope is negative and r = -0.86, so the association is a moderately strong negative linear one. The highlighted point (24, 34.6) sits about 16 minutes above the predicted value of about 18.6, which makes it an outlier.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Describing direction, form, and an unusual point in a scatterplot fits topic 5.1 and skill 4.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is unique. The highlighted point is about 16 minutes above the line, and the trend is negative and linear."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The data include axis titles with units, all points, the fit line, and the highlight, and match the stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions (curved form, reversed direction, missed outlier), and the explanation addresses each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60-90 seconds and has a light reading load. The calculator designation is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean and the key is unique. The distractors are distinct, and the stimulus is complete. I found no blocking issues."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student describes direction, form, and strength from a scatterplot, using the given r and slope as support. They also identify one clearly separated outlier. Concept depth is shallow, and the distractors are straightforward (wrong direction, curved form, or no unusual points). No computation is needed, and reading load is low.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m02-k2-q3",
+  "cellId": "ap_statistics-m02",
+  "passed": false,
+  "reasons": [
+   "difficulty_signals_concepts"
+  ],
+  "soft": []
+ }
+]
