@@ -3,7 +3,7 @@
 // 제품 용어(앱 전체 통일): Practice Tests / Mistake Notebook / Vocabulary Builder / Study Materials.
 
 export const NAV_ITEMS = [
-  { label: "Practice Tests", href: "/practice-tests" },
+  { label: "Free Practice Tests", href: "/practice-tests" },
   { label: "Learning Tools", href: "/learning-tools" },
   { label: "Premium Tutoring", href: "/premium-tutoring" },
   { label: "About ALTON", href: "/about" },
@@ -90,7 +90,7 @@ export const FINAL_CTA = {
 } as const;
 
 export const FOOTER_LINKS = [
-  { label: "Practice Tests", href: "/practice-tests" },
+  { label: "Free Practice Tests", href: "/practice-tests" },
   { label: "Learning Tools", href: "/learning-tools" },
   { label: "Premium Tutoring", href: "/premium-tutoring" },
   { label: "About ALTON", href: "/about" },
