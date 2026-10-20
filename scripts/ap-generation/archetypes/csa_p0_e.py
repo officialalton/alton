@@ -56,21 +56,12 @@ def cs_string_concat_prec(rng):
               path="javac+java output vs Python str() joins", kwhy=f"a + b is evaluated first as the int {a + b}; once the String \"-\" is reached each + joins text, so c and d are written one after the other: {py}.", facts=[f"key={py}"])
 
 
-# ======================= 1.5 char 산술 (3.A) =======================
-@retry_any
-def cs_char_arith(rng):
-    ch = pick(rng, list("bcdefghij")); k = rng.randint(2, 5)
-    code = f"char ch = '{ch}';\nint n = ch - 'a';\nchar next = (char) (ch + {k});\nSystem.out.println(n + \" \" + next + \" \" + (ch + 1));"
-    py = f"{ord(ch) - 97} {chr(ord(ch) + k)} {ord(ch) + 1}"
-    muts = [{"why": "Believes ch + 1 is still a char, so the next letter is printed.", "swap": ("(ch + 1)", "(char) (ch + 1)")},
-            {"why": "Counts the position of the letter from 1 instead of 0.", "swap": ("ch - 'a';", "ch - 'a' + 1;")},
-            {"why": "Believes the cast is not needed and prints the numeric code of the shifted letter.", "swap": (f"char next = (char) (ch + {k});", f"int next = ch + {k};")},
-            {"why": "Believes a char behaves like the number of its position in the alphabet.", "swap": ("(ch + 1)", "(n + 1)")}]
-    return mk(rng, "cs_char_arith", "1.5", "3.A", STEM_OUT, code, muts=muts, py=py, concept="char arithmetic yields an int; a cast converts the code back to a char",
-              path="javac+java output vs Python ord() and chr()", kwhy=f"'{ch}' - 'a' is {ord(ch) - 97}; the cast turns the code {ord(ch) + k} back into the letter {chr(ord(ch) + k)}; ch + 1 is an int, {ord(ch) + 1}.", facts=[f"ch={ch}", f"k={k}", f"key={py}"])
+# 2026-10-19 cs_char_arith 퇴역(백로그 B1): 1.5 는 cs_casting_range·cs_int_overflow 가 다룬다.
 
 
 # ======================= 1.5 int 오버플로 (3.A) =======================
+
+
 @retry_any
 def cs_int_overflow(rng):
     k = rng.randint(1, 9)

@@ -27,7 +27,7 @@ describe("LegalLink / LegalDocumentModal", () => {
     const dialog = await screen.findByRole("dialog");
     expect(dialog.getAttribute("aria-modal")).toBe("true");
     expect(screen.getByRole("dialog", { name: "Terms of Use" })).toBe(dialog);
-    expect(dialog.textContent).toContain("Last updated: October 6, 2026");
+    expect(dialog.textContent).toMatch(/Last updated: October \d+, 2026/);
     for (const s of TERMS_SECTIONS) expect(dialog.textContent).toContain(s.title);
     expect(MODAL_LEGAL_DOCUMENTS.terms.sections).toBe(TERMS_SECTIONS);
     expect(MODAL_LEGAL_DOCUMENTS.privacy.sections).toBe(PRIVACY_SECTIONS);

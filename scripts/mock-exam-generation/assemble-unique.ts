@@ -13,6 +13,7 @@
 // 소재 상한(2026-10-08): --topics rw-topics.ts 가 만든 topics.json [--max-per-module 1 --max-per-exam 2 --max-family-per-exam 4]. 상한은 하드 제약, 후보가 없을 때만 풀고 report.topicRelaxed 에 기록.
 // 실행: npx tsx scripts/mock-exam-generation/assemble-unique.ts --dump d.json --weights w.json --keep "SAT Practice Test 1,..." --n 6 [--first-index 4] [--fit] [--out dir]
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { sortModuleOfficial } from "../../lib/mock-exam/official-order";
 import { DEFAULT_TOPIC_CAPS, TopicLedger, subjectExcess, capViolations, type TopicCaps, type TopicMap } from "./rw-topics-lib";
 import { buildTargetCells, difficultyAllowedForModule, mstModulePlans, type EligibleProblem, type ProblemDifficulty } from "../../lib/mock-exam/assemble";
 
@@ -139,7 +140,10 @@ export function planUnique(pool: EligibleProblem[], W: Weights, n: number, keptC
   for (let s = 0; s < n; s++) { const offs: Record<string, number> = { rw: 0, math: 0 }; const items: PlanItem[] = [];
     for (const mod of mstModulePlans(true)) {
       const arr = slots.filter((sl) => sl.set === s && sl.mod === mod || (sl.set === s && sl.mod.key === mod.key && sl.mod.route === mod.route)).flatMap((sl) => chosen.get(sl) ?? []);
-      arr.sort((a, b) => rank[a.difficulty] - rank[b.difficulty] || a.problemId.localeCompare(b.problemId));
+      // 공식 순서(lib/mock-exam/official-order.ts): R&W 영역 블록, Math skill 평균 위치, 같은 skill 안 난이도 오름차순(동률은 problemId)
+      arr.sort((a, b) => a.problemId.localeCompare(b.problemId));
+      const ordered = sortModuleOfficial(mod.section === "rw" ? "rw" : "math", arr.map((c) => ({ c, skill: c.skillCode, difficulty: c.difficulty }))).map((x) => x.c);
+      arr.splice(0, arr.length, ...ordered);
       arr.forEach((it, i) => items.push({ versionId: it.problemVersionId, position: i + 1 + offs[mod.section], problemId: it.problemId, moduleKey: mod.key, route: mod.route, section: mod.section, skill: it.skillCode ?? null, difficulty: it.difficulty, domain: it.satDomain, format: it.format ?? "mc", group: it.similarityGroup ?? null }));
       offs[mod.section] += arr.length; }
     sets.push(items); }

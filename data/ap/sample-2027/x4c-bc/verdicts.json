@@ -1,0 +1,1649 @@
+[
+ {
+  "key": "ap_calculus_bc-m01-k0",
+  "cellId": "ap_calculus_bc-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Sum of |(-1)^n/n^2| = sum 1/n^2 is a p-series with p=2>1, so it converges, which means the original series converges absolutely.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "The series converges absolutely."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits 10.9 and 3.D: apply the definition of absolute convergence with the p-series test."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key A is unique and correct: sum 1/n^2 converges, so the series converges absolutely, which excludes conditional convergence."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear and the notation is standard."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has its own explanation and encodes a distinct misconception: confusing conditional with absolute, thinking alternation implies divergence, and claiming no conclusion. The 'cannot be determined' option is weaker but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short and non-calculator, with a typical multiple-choice format. It is slightly easy, but acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a correct, clean absolute-versus-conditional classification with a unique key and distinct distractors, and it is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step recognition: the absolute-value series is a p-series with p=2>1, so it converges and the series converges absolutely. No computation or representation changes. The distractors only probe the misconception that alternating series are conditionally convergent. This is a foundational check of the absolute vs. conditional definition, below full-mock depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m01-k1",
+  "cellId": "ap_calculus_bc-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "By the alternating series test, the series converges because 1/sqrt(n) decreases to 0. The absolute series, the sum of 1/n^(1/2), is a p-series with p = 1/2 ≤ 1, so it diverges. Therefore the series converges conditionally.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "The series converges conditionally."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 10.9 classification of an alternating p-series by AST and p-series test; dominant skill is applying tests with justification. In scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Series converges by AST (1/sqrt(n) decreasing to 0) and absolute series is a divergent p-series with p=1/2, so conditional is the unique correct answer. Only one option is true."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and the expression is well formed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors map to distinct misconceptions (divergence from absolute divergence, absolute from AST, no classification). The explanation addresses each wrong option. The option 'cannot be determined' is a weak distractor but acceptable. The option lengths are similar, though the key is slightly longer than the others, which is a minor giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-95 seconds, no calculator needed, typical of AP multiple choice."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A standard, correct conditional-convergence classification item with a unique key and plausible distractors. It is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Canonical alternating p-series (p=1/2). Requires applying the alternating series test and the p-series test to |a_n|, then concluding conditional convergence. Two routine checks, no computation, minimal reading, no representation changes. It is a standard textbook example, so it suits foundational practice more than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m02-k0",
+  "cellId": "ap_calculus_bc-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Error bound = first omitted term b5 = 1/(125+2) = 1/127",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "1/127"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Direct application of the Alternating Series Error Bound, in scope for 10.10 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is 1/127, the first omitted term a_5. The hypotheses hold (alternating, decreasing, limit 0). Distractor values were verified as distinct and wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions (difference of terms, skipped term, sum of omitted terms), and the explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item suits a non-calculator exam: it takes about 100 seconds, uses exact fractional options, and needs no heavy arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean. The key 1/127 is the first omitted term and is unique, the distractors are plausible and distinct, and the load is appropriate for a non-calculator item. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct application of the Alternating Series Error Bound: verify terms decrease to 0 and take the first omitted term a_5 = 1/(5^3+2) = 1/127. Single procedure, trivial arithmetic, no representation changes. Distractors (a_6 = 1/218, partial-sum-like fractions) target off-by-one and misconception errors but do not add depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m02-k1",
+  "cellId": "ap_calculus_bc-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Error bounded by first omitted term a5 = 1/(25+2) = 1/27; terms decrease to 0 so the bound applies.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "1/27"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Direct application of the Alternating Series Error Bound; fits 10.10 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key 1/27 = a_5 is unique and correct; the series meets the hypotheses (positive, decreasing, limit 0)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the wording is clear and the exact fraction options are parallel."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are a_4, a_4 - a_5, and a_6, each a distinct misconception; the explanation addresses every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Fast non-calculator item with simple exact arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and well constructed; no issues found."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-procedure application of the Alternating Series Error Bound: the bound is the first omitted term a_5 = 1/(25+2) = 1/27. The hypotheses (positive, decreasing, limit 0) are obvious. There is one representation and minimal arithmetic. Distractors target common slips (using a_4 or a_6, or an unrelated value).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m03-k0",
+  "cellId": "ap_calculus_bc-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "The limit is 3, so the series converges.",
+     "brief_reasoning": "a_n/b_n=(3n^4+2n^3)/(n^4+3)→3, which is finite and positive. Σ1/n^2 converges (p=2), so by the limit comparison test Σa_n converges.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Direct limit comparison test with p-series; fits 10.6 and 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Limit is 3, series converges; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors cover inverted ratio, infinite limit and wrong conclusion; each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculator, light algebra."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope and well suited to the exam. The key is unique and the distractors are distinct and explained. No issues found."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct limit comparison with a given comparison series: compute a rational-function limit via leading terms (3), recognize the p-series with p=2 converges, and conclude. Single procedure, no choice among tests, no hypothesis subtleties beyond positivity. Distractors are standard but the item is routine.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m03-k1",
+  "cellId": "ap_calculus_bc-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "a_n/b_n=(2n^4+2n^3)/(n^4+2)→2, which is finite and positive. Σ1/n^2 converges (p=2), so Σa_n converges by the limit comparison test.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "The limit is 2, so the series converges."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Limit comparison test, topic 10.6, procedure application."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique correct answer A; limit 2, p-series converges."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct plausible misconceptions; all options explained, though B and C explanations are somewhat generic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculator, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, straightforward limit comparison item with a unique correct key and realistic distractors. It is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The comparison series b_n is given. The student computes a rational-function limit (leading terms give 2), recalls that the p-series with p=2 converges, and applies the limit comparison test with a finite positive limit. There is no choice of procedure and no hypothesis beyond a positive finite limit. The distractors cover common misconceptions (wrong limit, wrong conclusion), but the item is a routine single-procedure application.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m04-k0",
+  "cellId": "ap_calculus_bc-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "653/990",
+     "brief_reasoning": "1000x-10x=659.59..-6.59..=653, x=653/990; gcd=1",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Geometric series applied to a repeating decimal; fits 10.2 and 2.C (re-express as a fraction)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "653/990 is correct and in lowest terms. All four options are distinct values, so the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. Stem is clear, standard notation."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors map to the listed misconceptions: wrong denominator, forgetting the subtraction, wrong ratio. The explanation addresses each wrong option. The 653/999 rationale is slightly vague, which is minor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, no calculator needed, small numbers, exact-form options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and suitable. The key 653/990 is unique, the distractors reflect realistic errors, and it is an appropriate non-calculator task for 10.2 and skill 2.C."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must split the decimal into a non-repeating part and a repeating part, model the repeating part as a geometric series (a = 0.059, r = 0.01), sum it, and combine fractions, then check for lowest terms. Distractors capture common misconceptions (wrong denominator, wrong numerator). Concept is standard for 10.2, with a few steps and modest arithmetic, appropriate for a full mock.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m04-k1",
+  "cellId": "ap_calculus_bc-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "0.1444... = 1/10 + 4/90 = 13/90. A repeating block of '44' is the same as a repeating '4'.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "13/90"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Repeating decimal to fraction via geometric series; fits 10.2 and 2.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0.1444...=13/90 is the unique correct option; distractors are distinct values."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a plausible error and is explained. The wording of option 1's rationale is slightly loose but correct."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Small numbers, no calculator, and a typical time load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and suitable. The key is 13/90, the distractors are distinct and realistic, and it is a standard 10.2 skill with a light load."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must split 0.1(44 repeating) into a non-repeating part 1/10 plus a geometric series with first term 0.044 and ratio 0.01, sum it with a/(1-r), add, and simplify to 13/90. The offset repeating block adds a step beyond the basic 0.\\overline{44} case, and distractors target common misplacement of the repeat. The arithmetic is small and the wording is clear, and the item stays within BC scope and skill 2.C (decimal -> series -> fraction).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m05-k0",
+  "cellId": "ap_calculus_bc-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "634/1215",
+     "brief_reasoning": "Integrate 1-2x^2+2x^4 from 0 to 2/3: 2/3 - 16/81 + 64/1215 = 634/1215.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Term-by-term integration of a given Maclaurin series; fits 10.15 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "634/1215 verified by hand; unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Stem is self-contained and unambiguous; no stimulus is needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors map to distinct misconceptions (no division, evaluating the polynomial, extra term); the explanation covers each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Reasonable fraction arithmetic for a non-calculator item; exact-form options; about 105 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and well constructed, with a unique key and distinct distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must pick the first three nonzero terms (simplify 4x^4/2 to 2x^4), integrate term by term, and evaluate at 2/3 with fraction arithmetic (810 - 240 + 64 over 1215 = 634/1215). It is standard AP-style procedural work with a modest computation load and plausible distractors (two terms, four terms), with no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m05-k1",
+  "cellId": "ap_calculus_bc-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Integrate 1-2x^2+2x^4 from 0 to 1/2: 1/2-1/12+1/80=103/240",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "103/240"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Term-by-term integration of a given Maclaurin series; fits 10.15 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "103/240 is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are distinct and plausible, and each wrong option is explained. The 5/16 description is slightly loose but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Appropriate time and load for a non-calculator item; options are exact fractions."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope and suitable. The key 103/240 is verified and the distractors are plausible and explained."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student simplifies the given series terms (4x^4/2 = 2x^4), integrates term by term, and evaluates at 1/2 using fractions with a common denominator of 240. Procedural and in scope for 10.15/skill 1.E. Distractors reflect plausible errors such as truncating early or mishandling coefficients. Arithmetic is modest and not ugly.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m06-k0",
+  "cellId": "ap_calculus_bc-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "f'''(2)/3! = -2, so f'''(2) = -12",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "-12"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 10.11 (Taylor polynomial coefficients) is the dominant demand: reading f'''(2) from the coefficient. Skill 2.C is satisfied by re-expressing the polynomial form as a derivative value. No later-unit content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key -12 is unique: -2 · 3! = -12. Distractors -2, -1/3, and -6 are all distinct and incorrect."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The polynomial is fully given in the stem and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode realistic misconceptions: omitting the factorial, dividing instead of multiplying, and using k instead of k!. The explanation addresses each wrong option. The -1/3 option is a little awkward but still plausible. The 'wrong_term' misconception listed in the blueprint is not represented, which is a minor point."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is short, takes about 60-90 seconds, needs no calculator, and has exact-form options. It is a typical AP-style item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean, standard item. The key -12 is unique and correct, the distractors are distinct and tied to real misconceptions, and the load is appropriate for a non-calculator MC item."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step recall/application: coefficient of (x-2)^3 equals f'''(2)/3!, so f'''(2) = -2*6 = -12. Distractors reflect common factorial misconceptions (omitting the factorial, dividing instead of multiplying, using 3 instead of 3!), but the item requires no multi-step reasoning, minimal computation, and only one representation change.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m06-k1",
+  "cellId": "ap_calculus_bc-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Coefficient of (x-1)^2 equals f''(1)/2! = -5, so f''(1) = -10.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "-10"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reading f''(a) from Taylor coefficient; fits 10.11 and 2.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "-10 is unique correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions; all wrong options explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculator, typical of AP."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a correct, clean standalone MC on reading f''(a) from a Taylor polynomial. The only weakness is that the \"6\" distractor rationale is slightly loose."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step application of the Taylor coefficient formula c_n = f^(n)(a)/n!: the (x-1)^2 coefficient -5 gives f''(1) = -5*2! = -10. Distractors target common misconceptions (omitting factorial, dividing by 2, using the cubic coefficient times 3!). No heavy computation, reading, or unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_calculus_bc-f01-k0",
+  "cellId": "ap_calculus_bc-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "dy/dx=sin t/(1-cos t)=1 at π/2; point (π-2,2)",
+     "final_answer": "dy/dx=1; y-2=x-(π-2)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "sin t=0, 1-cos t≠0 → t=π",
+     "final_answer": "t=π, (2π, 4)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "d2y/dx2 = -1/(8 sin^4(t/2)) = -1/2",
+     "final_answer": "-1/2; concave down since d²y/dx²<0",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "speed=4 sin(t/2); integral 0..π =8",
+     "final_answer": "8",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The cycloid FRQ is correct and in scope. The answers are 1, (2π, 4), -1/2 (concave down), and 8. The point values (2/2/2/3) are valid, and there is no calculator need. Minor blemishes: rubric row b1 requires a dx/dt ≠ 0 check that the prompt does not request, and rubric row d2 still carries a template leftover (\"2a sin(t/2)\") in its criterion text.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "I verified all four parts independently. Row b1 asks for an unrequested dx/dt check, and the d2 criterion text has a template artifact. Neither affects correctness."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard 4-part parametric FRQ: dy/dx and tangent line, horizontal tangent, second derivative via quotient rule with concavity justification, and arc length using a supplied half-angle identity. All numbers are clean (dy/dx=1, t=pi, d2y/dx2=-1/2, length=8). The multiple procedures and the second-derivative quotient-rule step make it a typical exam-level item, but there is no unfair load.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_calculus_bc-f01-k1",
+  "cellId": "ap_calculus_bc-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "dy/dx = sin t/(1 − cos t) = 1 at t = π/2; the point is (π/2 − 1, 1).",
+     "final_answer": "dy/dx = 1; tangent line y − 1 = x − (π/2 − 1), i.e. y = x + 2 − π/2",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "sin t = 0 gives t = π, and dx/dt = 2 ≠ 0 there.",
+     "final_answer": "t = π; point (π, 2)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "d²y/dx² = −1/(1 − cos t)², which equals −1 at t = π/2.",
+     "final_answer": "d²y/dx² = −1; concave down because d²y/dx² < 0",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "The speed is 2sin(t/2), and its integral from 0 to π is 4.",
+     "final_answer": "4",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The cycloid FRQ is correct, in scope for 9.1-9.3, and the right size for 9 points in about 15 minutes with no calculator. Minor cosmetic issues: the stimulus data keep a leftover \"1(...)\" coefficient, rubric row d2 has an \"a\" typo, duplicate required elements appear in two rows, and no alternate equivalent forms are listed for the tangent line.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts a and b are 9.1, part c is 9.2, and part d is 9.3, all within the allowed bundle. Each part's skill is reasonable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All four parts are correct and unambiguous. Part b checks dx/dt ≠ 0, and part d is valid because sin(t/2) ≥ 0 on [0, π]."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus data show \"1(t - sin t)\", a template artifact, but the prompts are clear and self-contained."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 2/2/2/3 point split is typical, answers are exact, and no calculator is needed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part parametric FRQ: dy/dx and tangent line, horizontal tangent with a denominator check, d2y/dx2 via the quotient rule, and arc length using a supplied half-angle identity. Numbers are clean and the reading load is low. The difficulty comes from procedure chaining, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 10,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_calculus_bc-f02-k0",
+  "cellId": "ap_calculus_bc-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Antiderivative 10 arctan(t/3), limit gives 10·π/2",
+     "final_answer": "5π ≈ 15.708 kg (converges)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "10(π/2 − arctan(5/3)) = 10 arctan(3/5)",
+     "final_answer": "≈5.404 kg, about 34.4% of total",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "Antiderivative 15 ln(t²+9) → ∞; also 30t/(t²+9) ≥ 15/t for t≥3, and ∫15/t diverges",
+     "final_answer": "Diverges",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "Antiderivative −30/(t+3), so the total is 30/3 = 10 kg, which is less than 5π",
+     "final_answer": "10 kg; the first release puts in more (5π ≈ 15.71 kg)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A correct, in-scope 6.13 FRQ with 9 points over four parts. The keys are right and the solver agrees. Minor weaknesses: the c2 rubric requires exact phrases and lists no alternative solutions, and the calculator is only lightly needed.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All four parts are improper-integral evaluation or convergence work; parts b and d add light interpretation."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are correct. The c2 rubric is phrase-rigid and has no alternative solutions, such as a comparison argument."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus data is complete and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ. The model answers are adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is about 15 minutes for 9 points, which is typical. The calculator is used only for decimal values."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ on improper integrals. Parts use arctan, ln via u-substitution, and a power-rule tail. Students must choose among procedures, handle limits, and compare convergent and divergent cases. Numbers are clean, wording is clear, and everything is in scope. The difficulty comes from legitimate levers (procedure choice, extra step, divergence check), not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_calculus_bc-f02-k1",
+  "cellId": "ap_calculus_bc-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Antiderivative (20/3)arctan(t/3); limit gives (20/3)(π/2).",
+     "final_answer": "10π/3 ≈ 10.472 kg (converges)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "(20/3)(π/2−π/4)=5π/3; ratio 1/2.",
+     "final_answer": "5π/3 ≈ 5.236 kg; 50%",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "Antiderivative 10 ln(t²+9) → ∞ as t→∞ (or compare to 10/t for large t).",
+     "final_answer": "Diverges",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "∫0^∞ 20/(t+3)^2 dt = 20/3; 10π/3 > 20/3.",
+     "final_answer": "20/3 ≈ 6.667 kg; first release puts more",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The 4-part, 9-point improper integral FRQ is in scope for 6.13, and its keys are correct and match the independent solver. Minor issues only: the b1 criterion text omits the hour count, and the phrase-based row c2 is slightly rigid. Passes.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item on improper integrals. It uses an arctan antiderivative with limits, a tail-integral percent, a divergence check via a log antiderivative or comparison with 1/t, and a comparison of two convergent totals. Each part is a standard BC procedure with clean numbers (10π/3, 5π/3, 20/3). The extra steps are choosing the right method per part and interpreting the results, with no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 9,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_calculus_bc-f03-k0",
+  "cellId": "ap_calculus_bc-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "A = (1/2)∫_0^{π/2} 16 sin²(2θ) dθ = 8·(π/4)",
+     "final_answer": "(1/2)∫_0^{π/2} (4 sin 2θ)² dθ = 2π",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "dr/dθ = 8cos(2θ) = 8cos(π/3) = 4. Since r = 2√3 > 0 and dr/dθ > 0, r is increasing.",
+     "final_answer": "dr/dθ = 4; the distance is increasing because r > 0 and dr/dθ > 0",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "r is greatest when sin(2θ) = 1, so 2θ = π/2 and θ = π/4. Then r = 4.",
+     "final_answer": "θ = π/4; greatest distance = 4",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "(1/2)∫(16sin²2θ − 4) dθ = ∫(2 − 4cos4θ) dθ from π/12 to 5π/12 = 2π/3 − [sin4θ] = 2π/3 + √3",
+     "final_answer": "(1/2)∫_{π/12}^{5π/12} (16 sin²2θ − 4) dθ = 2π/3 + √3",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle is a coherent 9-point polar FRQ (3/2/2/2 points). The answers 2π, dr/dθ = 4 with the distance increasing, θ = π/4 with greatest distance 4, and √3 + 2π/3 are correct and match the independent solver.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part a covers polar area (9.8). Parts b and c cover polar derivatives (9.7). Part d covers the area between polar curves (9.9). All stay within Unit 9 and apply rules and procedures. Each part is judged against its own skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are unique and correct. The rubric rows are consistent, with dependency chains that are sensible. Part b's reason, that the distance is increasing because dr/dθ > 0, is valid since r = 2√3 > 0 at π/6, though the rubric does not state that r > 0 explicitly. The farthest-point answer in part c is fine because r ≥ 0 on the interval."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus gives the equation and the interval, which is enough. The wording is clear, and part d supplies the intersection angles."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response bundle, so there are no distractors. The rubric rows are adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The work is non-calculator with exact values, which fits the exam. The load is about 15 minutes, and the parts are typical of AP FRQs."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part polar FRQ: area of a petal with a half-angle identity, dr/dθ with a sign interpretation, maximizing r, and area between two polar curves. Each part uses procedures from the unit in scope, and the exact values are friendly. Part d adds an extra step (subtracting the circle's area), which suits a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_calculus_bc-f03-k1",
+  "cellId": "ap_calculus_bc-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "(1/2)∫0^{π/2}(2sin2θ)^2 dθ = 2∫sin^2 2θ dθ = π/2",
+     "final_answer": "Area = (1/2)∫_0^{π/2} 4sin^2(2θ) dθ = π/2",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "dr/dθ=4cos2θ=2 at π/6; r=√3>0 and dr/dθ>0 so distance increasing",
+     "final_answer": "dr/dθ = 2; increasing, since r>0 and dr/dθ>0",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "dr/dθ=0 at θ=π/4, r=2 max",
+     "final_answer": "θ=π/4, distance 2",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "(1/2)∫(4sin^2 2θ−1)dθ = (1/2)[θ − ½ sin4θ] from π/12 to 5π/12 = π/6+√3/4",
+     "final_answer": "(1/2)∫_{π/12}^{5π/12}(4sin^2(2θ)−1)dθ = π/6 + √3/4",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clear 9-point polar FRQ. Parts (a) and (d) are 9.8/9.9 area setups, and (b) and (c) are 9.7 content within the allowed related topics. The answers are exact and unique. Minor looseness: the part (b) rubric does not require stating r > 0 (the distance is |r|), the part (c) key does not justify that the critical point is a maximum, and common_errors are empty. None of these is disqualifying.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Mixes 9.7, 9.8 and 9.9 as the bundle allows. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are correct and unique. The part (b) justification could mention r > 0 but is not wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus gives the curve and interval. Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This criterion is essentially not applicable to an FRQ; no scoring guidance for common errors is given, which is minor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Non-calculator, exact values, and a reasonable load for about 15 minutes."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style polar item. It requires setting up polar area integrals, applying a double-angle identity, using dr/dθ together with the sign of r to judge distance, maximizing r, and finding the area between two polar curves. All numbers are clean and the standard angles are in scope. The multi-part structure and the sign-of-r reasoning make it appropriate for a full mock. It is not a basic one-step skill, and it is not beyond the exam's range.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_calculus_bc-f04-k0",
+  "cellId": "ap_calculus_bc-f04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "lim (n+2)/(2n+1)=1/2≠0, so diverges by nth-term test",
+     "final_answer": "Diverges (nth-term test, limit 1/2)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "1/(n(n+3))=(1/3)(1/n-1/(n+3)); telescopes to (1/3)(1+1/2+1/3)",
+     "final_answer": "Converges; sum = 11/18",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "AST: 1/√n decreasing to 0, converges; Σ1/√n p-series p=1/2 diverges",
+     "final_answer": "Converges conditionally",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "Ratio 4/(n+1)→0<1",
+     "final_answer": "Converges (ratio test)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The mathematics and keys are correct and the content is in scope. The presentation is weaker. The stimulus data strings are ambiguous and redundant, the rubric has little room for alternative tests, and four unrelated series with a hint in (b) deviates from the reference FRQ pattern. A fix to the stimulus formatting and rubric alternatives is needed.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All four parts fall within Unit 10 content: the nth-term test, a telescoping series, the Alternating Series Test with absolute versus conditional convergence, and the Ratio Test. The bundle is allowed to span these topics. Each part applies a test and justifies it, which fits skill 3.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are correct: (a) diverges because the limit is 1/2; (b) the sum is (1/3)(1+1/2+1/3)=11/18; (c) conditionally convergent; (d) converges by the Ratio Test. The rubric rows are consistent with the model answers. Weaknesses: row c1 lists \"limit 0\" and \"decreasing\" but not \"alternating\", and the rubric allows no alternative tests, such as comparison or integral for the divergence of Σ1/√n in c3. Row d2 should also accept the limit-less-than-1 reasoning."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stimulus data are plain-text strings such as \"(-1)^n/n^1/2\", which is ambiguous as written, though the part prompts typeset the series properly. The stimulus object duplicates the prompts and adds nothing. Part (b) gives the partial-fractions hint, which reduces the demand. The \"Show that it converges\" wording in (b) is somewhat loose."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so distractors do not apply. The common_errors lists are empty and no misconceptions are documented."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is about 15 minutes for 9 points, with no calculator needed and simple numbers. Four unrelated series in one FRQ is atypical of AP FRQs, which are usually context-driven, but this is acceptable. The topic 10.3 is the stated label, yet only 2 of the 9 points assess the nth-term test."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four standard Unit 10 justifications: nth-term test (limit 1/2), telescoping via partial fractions with a hint (sum 11/18), alternating series test plus p-series for conditional convergence, and ratio test for 4^n/n!. Each needs one recognizable procedure and a short justification, so the set suits a full mock. Part (b) adds a few steps (partial fractions, partial sums, limit) and (c) needs two tests, but the arithmetic is small and the wording is clear. The 1/2 and 11/18 values come out cleanly. Everything is in BC scope with no extra reading load.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 9,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_calculus_bc-f04-k1",
+  "cellId": "ap_calculus_bc-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "lim (n+1)/(2n+1)=1/2≠0, so diverges by nth-term test.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Diverges (terms approach 1/2, not 0)"
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "1/(n(n+3))=(1/3)(1/n-1/(n+3)); telescoping partial sums S_N=(1/3)(1+1/2+1/3-1/(N+1)-1/(N+2)-1/(N+3)) -> 11/18.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Converges; sum = 11/18"
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "|a_n|=1/n^{1/3} is a p-series with p=1/3≤1, so it diverges. 1/n^{1/3} decreases to 0, so the series converges by the alternating series test. Therefore it converges conditionally.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Converges conditionally"
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "Ratio test: a_{n+1}/a_n = 2/(n+1) -> 0 < 1, so it converges (the sum is e^2-1).",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Converges (ratio test, limit 0)"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "All four parts are correct: (a) diverges by the nth-term test, (b) sums to 11/18, (c) converges conditionally, (d) converges by the Ratio Test. Scope, rubric structure, point split (2/2/3/2) and load fit the AP Calculus BC FRQ pattern. Minor weakness: the stimulus writes \"n^1/3\" ambiguously, but the part prompts restate each series in full LaTeX.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus text is terse (\"n^1/3\" is ambiguous, no index limits), but the part prompts give the full LaTeX forms."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four standard series-test tasks with clean numbers: nth-term test, partial-fraction telescoping (the hint is given), absolute vs conditional convergence (p-series plus alternating series test hypotheses), and the ratio test. Each part is a routine application, but the set requires choosing among tests and checking theorem hypotheses, which fits full-mock exam level. Part (b) carries the heaviest bookkeeping, but it is modest.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 10,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_calculus_bc-f05-k0",
+  "cellId": "ap_calculus_bc-f05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "For n ≥ 1, 0 < 1/(n^2+3) < 1/n^2, and Σ1/n^2 is a p-series with p = 2 > 1, so it converges. By the Direct Comparison Test, the series converges.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Converges, by direct comparison with the convergent p-series Σ1/n^2."
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "S_8 = 1/4 − 1/7 + 1/12 − 1/19 + 1/28 − 1/39 + 1/52 − 1/67 ≈ 0.152223. The terms decrease to 0, so the error is at most the first omitted term: |S − S_8| ≤ a_9 = 1/(81+3) = 1/84.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "S_8 ≈ 0.152; |S − S_8| ≤ 1/84 ≈ 0.0119"
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "f(x) = 1/(x^2+3) is positive and decreasing for x ≥ 1, so for each n, f(n) ≤ ∫ from n−1 to n of f(x) dx. Adding these for n = N+1, N+2, … gives R_N ≤ ∫ from N to ∞ of f(x) dx. The integral equals (1/√3)(π/2 − arctan(N/√3)). Setting this below 0.01 gives N > 99.99. Check: N = 99 gives about 0.01010, and N = 100 gives about 0.0099990.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "N = 100"
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "Use the Limit Comparison Test with Σ1/n^2: [(n+1)/(n^3+3)] ÷ (1/n^2) = (n^3+n^2)/(n^3+3) → 1. The limit is finite and positive, and Σ1/n^2 converges (p = 2 > 1), so this series also converges.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Converges, by limit comparison with Σ1/n^2."
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "All four parts are in Unit 10 scope with consistent keys and rubric rows, and the independent solver agrees on every part. The 2/2/3/2 point split matches the official 9-point grain, and the calculator need is genuine (S_8 and solving for N). The only fragile point is that N = 100 gives 0.009999 against the 0.01 threshold, but the key is correct.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part FRQ-style item spanning comparison test, alternating series error bound, integral-test remainder, and limit comparison. Each part uses a standard AP BC procedure with hypotheses to verify (positive, decreasing, limit to 0). Part (c) is the deepest: it requires justifying the remainder bound via an integral and then solving an arctan inequality with a calculator. Numbers are modest and wording is clear. Overall this is typical full-mock difficulty and not an advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_calculus_bc-f05-k1",
+  "cellId": "ap_calculus_bc-f05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "0<1/(n^2+2)<1/n^2, and sum 1/n^2 converges (p=2), so by Direct Comparison the series converges.",
+     "final_answer": "Converges (direct comparison with p-series 1/n^2)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "S8=1/3-1/6+1/11-1/18+1/27-1/38+1/51-1/66≈0.2172. Terms decrease to 0, so the error is at most the 9th term, 1/83.",
+     "final_answer": "S8≈0.2172; |S-S8|≤1/83≈0.0120",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "f(x)=1/(x^2+2) is positive and decreasing, so each term is at most the integral of f over [n-1,n]; summing gives R_N ≤ integral from N to ∞. That integral = (1/√2)arctan(√2/N). N=99 gives ≈0.0101; N=100 gives ≈0.009999<0.01.",
+     "final_answer": "N=100",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "Limit comparison with 1/n^2: the limit of the ratio is 1, which is finite and positive. Sum 1/n^2 converges, so this series converges.",
+     "final_answer": "Converges (limit comparison with 1/n^2)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "All four parts are correct and in Unit 10 scope. S_8 ≈ 0.2172, the error bound is 1/83, N = 100 for part (c), and the limit comparison gives 1. The point split of 2/2/3/2 matches the official grain, and the calculator is used genuinely in parts (b) and (c).",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The parts span 10.6, 10.10 and 10.4 with justification-heavy tasks, which fits the bundle."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are unique and verified. The rubric rows are consistent and have dependencies."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete. The generic \"c\" in a1's required element is minor sloppiness."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for about 15 minutes, and the calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four standard Unit 10 justification tasks (direct comparison, alternating series error bound, integral-test remainder bound with hypothesis checks, limit comparison). Part c adds multiple steps and a sum-to-integral-to-inequality representation change. Arithmetic is light, wording is clear, and everything is in scope, so the difficulty comes from legitimate sources and fits a full-mock FRQ.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_calculus_bc-f06-k0",
+  "cellId": "ap_calculus_bc-f06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Coefficients f^(k)(2)/k!: 4, 0, 4, -1.",
+     "final_answer": "P3(x)=4+4(x-2)^2-(x-2)^3",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "4+4(1/4)-1/8",
+     "final_answer": "f(2.5)≈39/8=4.875",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "Bound = max|f^(4)|/4! * (1/2)^4 = 24/24 * 1/16",
+     "final_answer": "1/16",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "f'(2)=0 and f''(2)=8>0, so by the Second Derivative Test f has a relative minimum at x=2.",
+     "final_answer": "Relative minimum",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The 9-point FRQ (2/2/3/2) is correct and in scope. The independent solver matched all four keys, and the numbers are clean for a no-calculator exam. The Lagrange condition on [2, 3] is stated and covers x = 2.5. The bundle legitimately spans topics 10.11, 10.12 and 5.7.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part item with clean numbers: build P3 from a table (divide by factorials), evaluate at 2.5, apply the Lagrange error bound with M=24 (24/4! * (1/2)^4 = 1/16), and use f'(2)=0, f''(2)=8>0 for a relative minimum. Each part is a standard procedure from topics 10.11/10.12/5.7. Difficulty comes from combining procedures and getting the factorial and exponent right, not from heavy computation or reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 330
+  }
+ },
+ {
+  "key": "ap_calculus_bc-f06-k1",
+  "cellId": "ap_calculus_bc-f06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Coefficients f^(k)(1)/k!: 4, 0, 2, -1",
+     "final_answer": "P3(x) = 4 + 2(x-1)^2 - (x-1)^3",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "4 + 2(1/4) - 1/8",
+     "final_answer": "f(1.5) ≈ 35/8 = 4.375",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "Bound is max|f^(4)|/4! times (1/2)^4 = 48/24 · 1/16",
+     "final_answer": "Error ≤ 1/8 = 0.125",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "f'(1)=0 and f''(1)=4>0",
+     "final_answer": "Relative minimum at x=1, because f'(1)=0 and f''(1)=4>0",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and consistent. The table is complete, the rubric rows sum to the part points (2/2/3/2 = 9), and the parts fit their own topics and skills. The load suits a roughly 15-minute no-calculator FRQ. The only minor note is that equivalent forms in row c2 should be accepted.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts a and b target 1.E on topic 10.11. Part c covers 10.12 and part d covers 5.7, as the bundle intends."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All four answers check out: 4+2(x-1)^2-(x-1)^3, 35/8, 1/8, and a relative minimum. The rubric rows are consistent with the point values."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data is complete. The fourth-derivative bound and its interval are stated in part a."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The arithmetic is light and exact, with no calculator needed. The load is typical of an AP BC FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four routine procedures chained: build P3 from a table of derivatives (divide by factorials), evaluate at x=1.5, apply the Lagrange error bound with the given M=48 (48/4! * (1/2)^4 = 1/8), and apply the Second Derivative Test using f'(1)=0 and f''(1)=4>0. Numbers are small and friendly. Concept depth is moderate and typical of an AP FRQ. Minimal representation change (table to polynomial to value), no tricky notation or heavy reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_calculus_bc-f07-k0",
+  "cellId": "ap_calculus_bc-f07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "a(t)=<2t-4, 0.5e^{t/2}>; a(1)=<-2,0.824>. v(1)=<-3,-1.351>; v·a≈4.89>0 so speed increasing.",
+     "final_answer": "a(1)=<-2, 0.5e^0.5>≈<-2, 0.824> m/s^2; speed increasing since v(1)·a(1)≈4.89>0",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "x(3)=1+∫0^3(t^2-4t)dt=-8; y(3)=2+∫0^3(e^{t/2}-3)dt=2e^1.5-9≈-0.037",
+     "final_answer": "(-8, 2e^1.5-9) ≈ (-8, -0.037) m",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "dy/dt=0: e^{t/2}=3, t=2ln3; dx/dt≈-3.96≠0",
+     "final_answer": "t=2ln3≈2.197 s",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "∫0^3 sqrt((t^2-4t)^2+(e^{t/2}-3)^2)dt, estimated by hand with Simpson's rule (step 0.5)",
+     "final_answer": "≈10.05 m",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard BC vector-motion FRQ, 9 points in 4 parts. All keys check out: a(1) = <-2, 0.824>, v·a = 4.887 > 0, position (-8, -0.037), t = 2 ln 3 = 2.197, and distance about 10.04 (my Simpson estimate of 10.05 is consistent). Everything is in Unit 9 scope, and the calculator use is justified.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topics 9.4, 9.5 and 9.6 are all in scope, and the skill demands match each part."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys verified. The rubric rows are consistent and the dependencies are sensible. The horizontal-tangent time is the only root in (0, 3), and x' is nonzero there."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The velocity vector and initial position are given, so the data is complete. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable: this is a free-response item with no distractors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "9 points in about 15 minutes with a calculator, which is typical of an AP BC FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP BC vector-motion FRQ. It combines acceleration, a speed-increasing check (v·a sign), integration with an initial position, a horizontal-tangent condition (y'=0), and a speed integral for distance. Each step is routine and in scope. The numbers are clean and the calculator is used only for definite integrals and evaluations. Difficulty comes from multi-step coordination, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_calculus_bc-f07-k1",
+  "cellId": "ap_calculus_bc-f07",
+  "passed": false,
+  "reasons": [
+   "resembles_known_exam_item"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "a(t)=<2t-3, (1/2)e^{t/2}>, so a(1)=<-1, 0.5e^{0.5}> ≈ <-1, 0.824>. v(1)=<-2, e^{0.5}-3> ≈ <-2, -1.351>. v·a ≈ 2 - 1.114 = 0.886 > 0, so the speed is increasing.",
+     "final_answer": "a(1) ≈ <-1, 0.824> m/s²; speed is increasing because v(1)·a(1) ≈ 0.886 > 0",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "x(3) = 3 + ∫0^3 (t²-3t) dt = 3 + (9 - 13.5) = -1.5. y(3) = 1 + ∫0^3 (e^{t/2}-3) dt = 1 + 2(e^{1.5}-1) - 9 = 2e^{1.5} - 10 ≈ -1.037.",
+     "final_answer": "(x(3), y(3)) ≈ (-1.5, -1.037) m",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "Horizontal motion needs dy/dt = 0 and dx/dt ≠ 0. e^{t/2} = 3 gives t = 2 ln 3 ≈ 2.197, and dx/dt = t(t-3) ≠ 0 at that time.",
+     "final_answer": "t = 2 ln 3 ≈ 2.197 s",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "Distance = ∫0^3 sqrt((t²-3t)² + (e^{t/2}-3)²) dt, evaluated with Simpson's rule (step 0.25).",
+     "final_answer": "≈ 5.968 m",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": true,
+   "summary": "The item is a standard 9-point BC vector-motion FRQ (2/3/2/2) covering topics 9.4, 9.5 and 9.6, and it passes all five criteria. Answers were not re-derived, per instructions. The independent solver reached the same answers, apart from a distance of 5.968 against the key's 5.969, which comes from its coarse Simpson step. Calculator use is appropriate for the numerical integrals.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part targets its own skill and topic. The dominant demand in part b is integrating a velocity vector from an initial position, which is topic 9.5. Parts a, c and d are legitimate related topics (9.4 and 9.6). Nothing is out of scope: no 3-D vectors, no cross products, no polar arc length."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are consistent with the independent solver. Part c has a unique answer in 0<t<3, and x'≠0 there, so the horizontal-tangent condition holds. The rubric rows are consistent and carry sensible dependencies. The part c rubric does not require checking x'≠0, which is acceptable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus gives v(t) and the initial position, which is complete. The wording is clear and the units are stated (meters per second)."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so distractors do not apply. The model answers are adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is about 15 minutes with 9 points, which is typical. The numbers are clean and the calculator is needed for the integrals. The calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part BC vector-motion FRQ. It combines acceleration, speed-change reasoning via the sign of v·a, component integration with an initial condition, a horizontal-tangent condition, and a calculator arc-length integral. Each step uses routine procedures with clean numbers, so the difficulty comes from the number of steps and the variety of procedures, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ }
+]

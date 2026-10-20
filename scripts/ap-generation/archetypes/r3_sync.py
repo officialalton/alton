@@ -39,7 +39,7 @@ for n in mc_names:
         continue
     bp = p["blueprint"]
     by[n] = {"id": n, "topic": p["topic"], "skill": p["skill"], "calculator": p["calculator"], "stimulus": "graph" if bp["material"]["type"] == "graph" else ("table" if bp["material"]["type"] == "table" else "none"),
-             "verifiedBy": [bp["verification"]["independent_path"]], "misconceptions": [m["description"] for m in bp["misconceptions"]], "bc": False}
+             "verifiedBy": [bp["verification"]["independent_path"]], "misconceptions": [m["description"] for m in bp["misconceptions"]], "bc": bp.get("subject") == "ap_calculus_bc"}
 GJ.write_text(json.dumps(sorted(by.values(), key=lambda a: a["id"]), indent=1, ensure_ascii=False) + "\n")
 fr = []
 for n in frq_names:
