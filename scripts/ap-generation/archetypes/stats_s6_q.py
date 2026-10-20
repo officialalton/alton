@@ -383,8 +383,8 @@ def st_n5_interpolation_choice(rng):
     key = (f"The prediction for $x = {inside}$, because ${inside}$ is between the smallest and the largest values of $x$ in the data.", f"The data have values of $x$ from ${c['lo']}$ to ${c['hi']}$, and a prediction inside that range is an interpolation, which is the most reliable kind.")
     wr = [(f"The prediction for $x = {near}$, because it is only a little beyond the largest value of $x$ in the data.", f"${near}$ is outside the range of the data (${c['lo']}$ to ${c['hi']}$), so the prediction is an extrapolation, even though it is close to the range.", "slightly_outside", None, 1),
           (f"The prediction for $x = {far}$, because the line is a least-squares line that fits all of the data.", "A good fit within the range of the data does not show that the line continues to hold far outside the range.", "least_squares_fits_all", None, 2),
-          (f"The prediction for $x = {below}$, because the correlation is close to $1$.", f"${below}$ is below the smallest value of $x$ in the data, and a strong correlation within the range does not make predictions outside it reliable.", "strong_r_outside", None, 1)]
-    stem = f"A least-squares line $\\hat y = {a} {sg} {abs(b):g}x$ predicts {c['y']} from {c['x']}, using data with $x$ from ${c['lo']}$ to ${c['hi']}$ {c['unit']} and a correlation close to $1$. A researcher considers predictions for $x = {inside}$, $x = {near}$, $x = {far}$ and $x = {below}$. Which prediction is the most reliable, and why?"
+          (f"The prediction for $x = {below}$, because the linear association is strong.", f"${below}$ is below the smallest value of $x$ in the data, and a strong correlation within the range does not make predictions outside it reliable.", "strong_r_outside", None, 1)]
+    stem = f"A least-squares line $\\hat y = {a} {sg} {abs(b):g}x$ predicts {c['y']} from {c['x']}, using data with $x$ from ${c['lo']}$ to ${c['hi']}$ {c['unit']} and a strong linear association. A researcher considers predictions for $x = {inside}$, $x = {near}$, $x = {far}$ and $x = {below}$. Which prediction is the most reliable, and why?"
     return mc("st_n5_interpolation_choice", "5.3", "4.D", "Choose the prediction that is not an extrapolation and reject reasons based on closeness, fit or correlation", ["Compare each value of x with the range of the data", "Choose the value inside the range and reject values outside it whatever the reason given"],
               key, wr, rng, stem, "exactly one of the four values lies inside the stated range of the data and each wrong option gives a different reason", ["claim_justification", "condition_check"], est=85, facts=[f"inside={inside}"])
 
@@ -418,3 +418,5 @@ STAGE_SINGLES = ["st_n5_phat_varies", "st_n5_phat_normal_cond", "st_n5_hyp_from_
 
 # P5 첫 런에서 반려된 원형(정의 암기 문항 교체, 단위 문구, 반복된 오답 근거)을 고쳐 다시 돌린다
 STAGE_FIX = ["st_n5_data_for_difference", "st_n5_slope_units", "st_n5_interpolation_choice"]
+
+STAGE_FIX2 = ["st_n5_interpolation_choice"]
