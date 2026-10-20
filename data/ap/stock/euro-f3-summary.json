@@ -1,0 +1,394 @@
+{
+ "run": "euro-f3",
+ "generatedAt": "2026-10-20",
+ "passed": [
+  "euro-f3:ap_european_history-eu1_saq1-k0",
+  "euro-f3:ap_european_history-eu1_dbq-k0",
+  "euro-f3:ap_european_history-eu2_saq2-k0",
+  "euro-f3:ap_european_history-eu2_dbq-k0",
+  "euro-f3:ap_european_history-eu2_leq-k0"
+ ],
+ "rejected": [
+  {
+   "__rejected": true,
+   "specId": "eu1_saq2",
+   "reason": "sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate; fact_inaccurate; fact_misdescribes_source"
+  },
+  {
+   "__rejected": true,
+   "specId": "eu2_saq3",
+   "reason": "sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate; fact_misdescribes_source"
+  }
+ ],
+ "audit": [
+  {
+   "id": "eu1_saq1",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "eu1_saq1",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "eu1_saq1",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 1,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "contested:The claim that the 1968 invasion made the Cold War in Europe more tense is at best contested and presented as settled. W"
+     ]
+    },
+    {
+     "k": 1,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 2,
+     "total": 1,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:Not all Warsaw Pact members participated. The August 1968 invasion was carried out by five Warsaw Pact states (USSR, Pol",
+      "inaccurate:Overstated. The invading forces occupied the country militarily, but the Soviet attempt to install a collaborationist 'w"
+     ]
+    },
+    {
+     "k": 3,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 4,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 5,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 6,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 7,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 8,
+     "total": 1,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:Oversimplifies what happened. The invading Warsaw Pact forces did not assume administrative control of Czechoslovakia; D"
+     ]
+    },
+    {
+     "k": 9,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 10,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 11,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 1
+  },
+  {
+   "id": "eu1_saq2",
+   "tier": "high",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "eu1_saq2",
+   "tier": "mid",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "eu1_saq2",
+   "tier": "low",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "eu1_dbq",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 7,
+     "spread": 1,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "eu1_dbq",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 1,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "eu1_dbq",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "eu2_saq2",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "eu2_saq2",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "eu2_saq2",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "eu2_saq3",
+   "tier": "high",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "eu2_saq3",
+   "tier": "mid",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "eu2_saq3",
+   "tier": "low",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "eu2_dbq",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 7,
+     "spread": 1,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "eu2_dbq",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 1,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 2,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 3,
+     "total": 2,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The documents and the prompt's period begin in 1762 with Rousseau's Emile, which is itself a major Enlightenment text, a"
+     ]
+    },
+    {
+     "k": 4,
+     "total": 4,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 5,
+     "total": 3,
+     "spread": 1,
+     "flagged": true,
+     "flags": [
+      "misdescribes_source:The WSPU motto 'Deeds, not Words' was adopted at the organization's founding in 1903, not in 1914. Pankhurst's 1914 memo"
+     ]
+    }
+   ],
+   "chosen": 4
+  },
+  {
+   "id": "eu2_dbq",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 1,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "eu2_leq",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 6,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "eu2_leq",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 4,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "eu2_leq",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  }
+ ]
+}

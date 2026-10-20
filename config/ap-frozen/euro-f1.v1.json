@@ -9,8 +9,6 @@
  "hardStopCumulativeUsd": 640,
  "myTotalCapUsd": 44,
  "stages": [
-  "frq-gen",
-  "frq-fact",
   "frq-samples",
   "frq-grade",
   "frq-fact2",
@@ -47,14 +45,19 @@
   "data/ap/euro-sources/registry.json"
  ],
  "expected": {
-  "hash": ""
+  "hash": "2297c014e5c9"
  },
  "frq": [
-  "eu1_saq1",
-  "eu1_saq2",
   "eu1_saq3",
-  "eu1_dbq",
   "eu1_leq"
  ],
- "sampleCands": 3
+ "sampleCands": 12,
+ "resample": {
+  "eu1_leq": [
+   "low:12"
+  ],
+  "eu1_saq3": [
+   "high:6"
+  ]
+ }
 }

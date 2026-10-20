@@ -6,7 +6,7 @@ import path from "node:path";
 import { checkEssayReference, parseSamples, proposedHeading } from "../../lib/ap-generation/essay-reference-check";
 
 const ROOT = path.resolve(__dirname, "../..");
-const SUBJECTS = ["ap_world_history", "ap_us_history", "ap_english_literature", "ap_english_language"];
+const SUBJECTS = ["ap_world_history", "ap_european_history", "ap_us_history", "ap_english_literature", "ap_english_language"];
 const outArg = process.argv.indexOf("--out");
 const OUT = path.resolve(ROOT, outArg > 0 ? process.argv[outArg + 1] : "data/audit/essay-reference-scan-20261019.json");
 

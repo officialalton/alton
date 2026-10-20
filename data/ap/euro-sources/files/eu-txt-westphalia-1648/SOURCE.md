@@ -1,7 +1,7 @@
-# Treaty of Westphalia (Treaty of Osnabruck), articles LXIV-LXV (excerpt on the rights of the Imperial States)
+# Treaty of Westphalia (Treaty of Munster), articles LXIV-LXV (excerpt on the rights of the Imperial States)
 
 - id: eu-txt-westphalia-1648
-- author: The Holy Roman Emperor, the Imperial States, Sweden and their allies (peace of 24 October 1648; seventeenth-century English translation)
+- author: The Holy Roman Emperor, France and their allies (treaty of Munster, 24 October 1648; seventeenth-century English translation)
 - year: 1648 (October 24)
 - repository: Avalon Project, Yale Law School (transcription)
 - url: https://avalon.law.yale.edu/17th_century/westphal.asp

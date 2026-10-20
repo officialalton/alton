@@ -1,0 +1,246 @@
+[
+ {
+  "spec": {
+   "id": "e205",
+   "exam": "EU2",
+   "unit": 3,
+   "stim": "primary_text",
+   "theme": "The rights of the German states in the Peace of Westphalia",
+   "sources": [
+    {
+     "id": "eu-txt-westphalia-1648",
+     "context": "The Holy Roman Emperor, France and their allies agreed to this treaty (the Treaty of Munster) in October 1648; together with a second treaty it ended the Thirty Years' War in Germany, and this is an English translation."
+    }
+   ],
+   "skills": [
+    "1.B",
+    "2.B",
+    "5.B"
+   ],
+   "nItems": 3,
+   "seed": 1205
+  },
+  "items": [
+   {
+    "skill": "1.B",
+    "topic": "3.6",
+    "stem": "The provisions in the excerpt best reflect which of the following developments in the Holy Roman Empire after 1648?",
+    "options": [
+     {
+      "text": "The decentralization of political authority, as individual princes held sovereign powers within their own territories",
+      "is_key": true,
+      "label": "key",
+      "why": "The article confirms each state's free exercise of territorial right and its freedom to make foreign alliances, so the treaty left real power with the princes and kept the emperor weak."
+     },
+     {
+      "text": "The adoption of a single official confession for the entire Empire, enforced by the emperor and the imperial courts in each territory",
+      "is_key": false,
+      "label": "reversal",
+      "why": "Westphalia confirmed religious pluralism, recognizing Catholicism, Lutheranism and Calvinism, and it left church matters to the territorial rulers. It did not impose one faith across the Empire."
+     },
+     {
+      "text": "The creation of a unified German national state whose princes surrendered their lands to a parliament",
+      "is_key": false,
+      "label": "wrong_period",
+      "why": "German unification came in 1871 under Prussian leadership, more than two centuries after this treaty kept the German states separate."
+     },
+     {
+      "text": "The centralization of imperial power, as the Habsburg emperor gained the right to direct the foreign policy of every German state",
+      "is_key": false,
+      "label": "reversal",
+      "why": "This is the opposite of what happened. The excerpt lets the states make their own alliances with outside powers, so the emperor did not control their foreign policy."
+     }
+    ],
+    "facts": [
+     "The Peace of Westphalia (1648) confirmed the territorial sovereignty of the German princes within the Holy Roman Empire.",
+     "The 1648 settlement recognized Calvinism alongside Catholicism and Lutheranism in the Empire."
+    ],
+    "design": {
+     "source_fixed_first": true,
+     "key_evidence_in_source": "The article guarantees the states' territorial rights and their freedom to form alliances with foreign powers, which shows political power spread out among the princes.",
+     "evidence_quote": "free exercise of Territorial Right, as well Ecclesiastick, as Politick Lordships"
+    },
+    "est_seconds": 60,
+    "key_index": 0,
+    "det": [],
+    "extra": false
+   },
+   {
+    "skill": "2.B",
+    "topic": "3.6",
+    "stem": "France's participation in the agreement described in the excerpt is best explained by which of the following French goals?",
+    "options": [
+     {
+      "text": "Securing access to Baltic trade routes and German ports, which France received as its main territorial gains",
+      "is_key": false,
+      "label": "misattributed",
+      "why": "Sweden gained the Baltic lands, including western Pomerania. France's gains lay in Alsace and Lorraine (the bishoprics of Metz, Toul and Verdun)."
+     },
+     {
+      "text": "Keeping the German lands divided so that the Habsburg emperor could not threaten France's eastern frontier",
+      "is_key": true,
+      "label": "key",
+      "why": "France, which the context line names as a party, had fought the Habsburgs. Guaranteeing the princes' liberties and their right to foreign alliances kept the Empire weak and gave France possible allies inside it."
+     },
+     {
+      "text": "Gaining the support of the German princes for the Bourbon claim to the Spanish throne after the death of Charles II",
+      "is_key": false,
+      "label": "wrong_period",
+      "why": "Charles II of Spain died in 1700, so the succession question belongs to the War of the Spanish Succession, not to 1648."
+     },
+     {
+      "text": "Restoring Catholic unity across the Empire by helping the emperor suppress the Lutheran and Calvinist princes of northern Germany",
+      "is_key": false,
+      "label": "reversal",
+      "why": "Under Richelieu, Catholic France backed the Protestant powers against the Habsburgs, and it did so for reasons of state, not religious unity."
+     }
+    ],
+    "facts": [
+     "France under Richelieu entered the Thirty Years' War against the Habsburgs in 1635, despite being a Catholic power.",
+     "Under the 1648 settlement France gained lands in Alsace and confirmation of Metz, Toul and Verdun, while Sweden gained western Pomerania."
+    ],
+    "design": {
+     "source_fixed_first": true,
+     "key_evidence_in_source": "The context line names France as a party to the treaty, and the article lets the German states make alliances with foreign powers, which served French interests.",
+     "evidence_quote": "it shall be free perpetually to each of the States of the Empire, to make Alliances with Strangers"
+    },
+    "est_seconds": 70,
+    "key_index": 1,
+    "det": [],
+    "extra": false
+   },
+   {
+    "skill": "5.B",
+    "topic": "3.6",
+    "stem": "The rights confirmed in the excerpt most directly contributed to which of the following developments in the eighteenth century?",
+    "options": [
+     {
+      "text": "The establishment of a parliamentary monarchy in Britain in which Parliament controlled taxation and the standing army",
+      "is_key": false,
+      "label": "unrelated_development",
+      "why": "Britain's constitutional settlement grew out of English conflicts and the Glorious Revolution, not out of the rights of the German states."
+     },
+     {
+      "text": "The unification of the German states into an empire led by Prussia after victory over France",
+      "is_key": false,
+      "label": "wrong_period",
+      "why": "This happened in 1871, in the nineteenth century, not the eighteenth."
+     },
+     {
+      "text": "The emperor's success in turning the Empire into a centralized absolute monarchy ruled from Vienna with a single army",
+      "is_key": false,
+      "label": "reversal",
+      "why": "The Empire stayed decentralized until it was dissolved in 1806. The Habsburgs built up absolutism in their hereditary lands, not across the Empire."
+     },
+     {
+      "text": "The rise of Brandenburg-Prussia as a power able to wage war against the Habsburg monarchy",
+      "is_key": true,
+      "label": "key",
+      "why": "Because the treaty secured the princes' independence, a state like Brandenburg-Prussia could build its own army and foreign policy. Frederick II later seized Silesia from Austria in 1740."
+     }
+    ],
+    "facts": [
+     "Frederick II of Prussia invaded Habsburg Silesia in 1740, which began the War of the Austrian Succession.",
+     "The Holy Roman Empire was dissolved in 1806."
+    ],
+    "design": {
+     "source_fixed_first": true,
+     "key_evidence_in_source": "The article's guarantee that the princes would not be molested in their rights and could make alliances let German states such as Brandenburg-Prussia act as independent powers.",
+     "evidence_quote": "they never can or ought to be molested therein by any whomsoever upon any manner of pretence"
+    },
+    "est_seconds": 60,
+    "key_index": 3,
+    "det": [],
+    "extra": false
+   },
+   {
+    "skill": "4.A",
+    "topic": "3.1",
+    "stem": "Which of the following earlier developments most directly shaped the excerpt's concern that the princes' rights never be molested?",
+    "options": [
+     {
+      "text": "Habsburg efforts during the Thirty Years' War to impose imperial and Catholic authority on the princes",
+      "is_key": true,
+      "label": "key",
+      "why": "Ferdinand II's victories and his Edict of Restitution of 1629 threatened the princes' lands and liberties. The treaty's guarantees were meant to prevent such imperial encroachment in the future."
+     },
+     {
+      "text": "The German Peasants' War, in which rural rebels demanded relief from serfdom and from burdens imposed by lords",
+      "is_key": false,
+      "label": "true_but_not_responsive",
+      "why": "The revolt was real, but it took place in 1524-1525 and threatened lords from below. The treaty was protecting princes from the emperor."
+     },
+     {
+      "text": "The English Parliament's conflict with Charles I over taxation, which ended with the king's trial and execution",
+      "is_key": false,
+      "label": "unrelated_development",
+      "why": "This was an English constitutional conflict, and the execution came in January 1649, after the treaty. It did not shape the rights of the German princes."
+     },
+     {
+      "text": "Louis XIV's seizure of territories along the Rhine through the reunions and the War of the League of Augsburg",
+      "is_key": false,
+      "label": "wrong_period",
+      "why": "The reunions and the War of the League of Augsburg came in the 1680s and 1690s, after the treaty was signed."
+     }
+    ],
+    "facts": [
+     "Emperor Ferdinand II issued the Edict of Restitution in 1629, ordering the return of church lands secularized since 1552.",
+     "Charles I of England was executed in January 1649."
+    ],
+    "design": {
+     "source_fixed_first": true,
+     "key_evidence_in_source": "The article's stated aim of preventing future differences, and its promise that no one may molest the princes' rights, respond to the imperial overreach of the war.",
+     "evidence_quote": "to prevent for the future any Differences arising in the Politick State"
+    },
+    "est_seconds": 60,
+    "key_index": 0,
+    "det": [],
+    "extra": true
+   },
+   {
+    "skill": "3.A",
+    "topic": "3.6",
+    "stem": "Which of the following best describes a limit the excerpt places on the rights of the states of the Empire?",
+    "options": [
+     {
+      "text": "States were barred from making any alliance with foreign powers in order to preserve the public peace",
+      "is_key": false,
+      "label": "reversal",
+      "why": "The excerpt explicitly allows alliances with strangers, meaning foreign powers. The public peace is mentioned only as something those alliances may not violate."
+     },
+     {
+      "text": "States could govern secular affairs freely but lost all authority over church matters in their own territories",
+      "is_key": false,
+      "label": "reversal",
+      "why": "The excerpt confirms the states' territorial rights in church matters as well as political ones."
+     },
+     {
+      "text": "States could ally with foreign powers only if the alliances did not target the emperor or the Empire",
+      "is_key": true,
+      "label": "key",
+      "why": "The excerpt allows alliances with outside powers on the condition that they are not directed against the emperor, the Empire or the public peace."
+     },
+     {
+      "text": "States could make foreign alliances only after receiving written approval from the emperor and the electors",
+      "is_key": false,
+      "label": "unsupported_by_source",
+      "why": "The excerpt sets no approval process. It calls the right to make alliances free and perpetual."
+     }
+    ],
+    "facts": [
+     "The Peace of Westphalia (1648) allowed the German princes to conclude alliances with foreign powers as long as the alliances were not directed against the emperor or the Empire."
+    ],
+    "design": {
+     "source_fixed_first": true,
+     "key_evidence_in_source": "The proviso attached to the alliance right limits alliances directed against the emperor and the Empire and keeps the princes' oath to them in force.",
+     "evidence_quote": "provided, nevertheless, such Alliances be not against the Emperor, and the Empire, nor against the Publick Peace"
+    },
+    "est_seconds": 50,
+    "key_index": 2,
+    "det": [],
+    "extra": true
+   }
+  ],
+  "setViolations": []
+ }
+]

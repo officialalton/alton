@@ -32,8 +32,8 @@ export function euroRegistryViolations(sources: EuroRegistrySource[], root = "da
 }
 
 export const credit = (s: RegistrySource) => `${s.author}, ${s.year}. ${s.repository}. Reuse: ${s.reuse_basis}. ${s.modified}.`;
-export const TYPE_LABEL: Record<string, string> = { primary_text: "primary source", secondary_text: "secondary source", political_cartoon: "political cartoon", photograph: "photograph", map: "map", print: "print", painting: "painting", statistic_table: "table" };
-export const KIND_FOR: Record<string, UshSource["kind"]> = { primary_text: "primary_text", secondary_text: "secondary_text", statistic_table: "table", political_cartoon: "image", photograph: "image", map: "image", print: "image", painting: "image" };
+export const TYPE_LABEL: Record<string, string> = { primary_text: "primary source", secondary_text: "secondary source", political_cartoon: "political cartoon", political_poster: "poster", photograph: "photograph", map: "map", print: "print", painting: "painting", statistic_table: "table" };
+export const KIND_FOR: Record<string, UshSource["kind"]> = { primary_text: "primary_text", secondary_text: "secondary_text", statistic_table: "table", political_cartoon: "image", political_poster: "image", photograph: "image", map: "image", print: "image", painting: "image" };
 export const isImage = (s: RegistrySource) => Boolean(s.public_path);
 export const isTable = (s: RegistrySource) => Boolean(s.table);
 

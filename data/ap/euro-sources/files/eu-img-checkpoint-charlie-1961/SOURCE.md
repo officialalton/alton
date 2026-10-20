@@ -2,7 +2,7 @@
 
 - id: eu-img-checkpoint-charlie-1961
 - author: U.S. Army photo
-- year: 1961 (June 15)
+- year: 1961
 - repository: Wikimedia Commons (file page records the source institution and public-domain tag)
 - url: https://commons.wikimedia.org/wiki/File:US_Army_tank_at_Checkpoint_Charlie_in_1961.jpg
 - call number: U.S. Army (army.mil image, as recorded on the Commons file page)

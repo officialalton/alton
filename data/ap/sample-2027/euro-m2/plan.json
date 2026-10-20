@@ -1,0 +1,112 @@
+{
+ "specs": [
+  {
+   "id": "e205",
+   "exam": "EU2",
+   "unit": 3,
+   "stim": "primary_text",
+   "theme": "The rights of the German states in the Peace of Westphalia",
+   "sources": [
+    {
+     "id": "eu-txt-westphalia-1648",
+     "context": "Representatives of the Holy Roman Empire, Sweden and the German states agreed to the treaties of October 1648, which ended the Thirty Years' War in Germany; this is an English translation of the text."
+    }
+   ],
+   "skills": [
+    "1.B",
+    "2.B",
+    "5.B"
+   ],
+   "nItems": 3,
+   "seed": 1205
+  },
+  {
+   "id": "e213",
+   "exam": "EU2",
+   "unit": 7,
+   "stim": "paired_text",
+   "theme": "The Dual Alliance of 1879 and the Entente Cordiale of 1904",
+   "sources": [
+    {
+     "id": "eu-txt-dualalliance-1879",
+     "context": "Germany and Austria-Hungary signed this treaty on October 7, 1879, and kept its text secret at the time."
+    },
+    {
+     "id": "eu-txt-entente-1904",
+     "context": "Britain and France signed this declaration on April 8, 1904, and published it; secret articles signed the same day were not made public."
+    }
+   ],
+   "skills": [
+    "3.C",
+    "4.A",
+    "5.A"
+   ],
+   "nItems": 3,
+   "seed": 1213
+  }
+ ],
+ "summary": {
+  "sets": 36,
+  "items": 110,
+  "byExam": {
+   "EU1": {
+    "sets": 18,
+    "items": 55,
+    "units": {
+     "1": 6,
+     "2": 6,
+     "3": 6,
+     "4": 6,
+     "5": 6,
+     "6": 6,
+     "7": 6,
+     "8": 6,
+     "9": 7
+    },
+    "stim": {
+     "primary_text": 8,
+     "image": 2,
+     "secondary_text": 5,
+     "paired_text": 2,
+     "quantitative": 1
+    },
+    "skillCats": {
+     "1": 7,
+     "2": 8,
+     "3": 18,
+     "4": 11,
+     "5": 11
+    }
+   },
+   "EU2": {
+    "sets": 18,
+    "items": 55,
+    "units": {
+     "1": 6,
+     "2": 6,
+     "3": 6,
+     "4": 6,
+     "5": 6,
+     "6": 6,
+     "7": 6,
+     "8": 6,
+     "9": 7
+    },
+    "stim": {
+     "primary_text": 7,
+     "secondary_text": 6,
+     "paired_text": 2,
+     "quantitative": 1,
+     "image": 2
+    },
+    "skillCats": {
+     "1": 7,
+     "2": 8,
+     "3": 16,
+     "4": 12,
+     "5": 12
+    }
+   }
+  }
+ }
+}

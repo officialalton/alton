@@ -8,6 +8,6 @@
 - call number: 
 - rights statement: Document published 1907; the Avalon Project transcription makes no copyright claim on the text.
 - reuse basis: public domain (published before 1929)
-- modified: excerpted (1 segment); whitespace normalized; no wording changed; the transcription's '\emdash' formatting code replaced by a dash
+- modified: excerpted (1 segment); whitespace normalized; no wording changed; a formatting code in the transcription replaced by a dash
 - retrieved: 2026-10-20
 - sha256: 704417f119cd9f2227638c57809a9e377ebe3d4828f9a87c84ae9b3f8bc8bb63 (excerpt segments joined with ' [...] ' (UTF-8))
