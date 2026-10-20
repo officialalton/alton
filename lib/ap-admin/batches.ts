@@ -46,6 +46,8 @@ export const STOCK_BATCHES: StockBatch[] = [
   { id: "stats-s3b", title: "AP Statistics S3-b (ST2 부족분: 단독 34 + 회귀 세트 3 + FRQ 5)", itemsFile: "stats-s3b-items.json", loadLabel: "stats-s3b-2026-10-13", supplement: true, passKeysFile: "stats-s3b-pass-keys.json", evidenceFile: "evidence-stats-s3b.json" },
   // 2026-10-19 AP Statistics 추가 라운드 — 연습 시험 3(ST3 정확 배정: data/ap/stock/exact-assign-stats-st3-p3.json, 설계표 design-table-stats-st3.json). 새 틀의 단독 36 + 공유 세트 2 + FRQ 4(기존 공개 세트와 겹침 0). 동결 구성 stats-r19-p3-a~g.
   { id: "stats-r19-p3", title: "AP Statistics 추가 라운드 연습 시험 3 (단독 36 + 공유 세트 2 + FRQ 4)", itemsFile: "stats-r19-p3-items.json", loadLabel: "stats-r19-p3-2026-10-19", supplement: true, passKeysFile: "stats-r19-p3-pass-keys.json", evidenceFile: "evidence-stats-r19-p3.json" },
+  // 2026-10-20 AP Statistics 추가 라운드 — 연습 시험 4(ST4 정확 배정: data/ap/stock/exact-assign-stats-st4-p4.json, 설계표 design-table-stats-st4.json). 동결 구성 stats-r19-p4-a~e.
+  { id: "stats-r19-p4", title: "AP Statistics 추가 라운드 연습 시험 4 (단독 36 + 공유 세트 2 + FRQ 4)", itemsFile: "stats-r19-p4-items.json", loadLabel: "stats-r19-p4-2026-10-20", supplement: true, passKeysFile: "stats-r19-p4-pass-keys.json", evidenceFile: "evidence-stats-r19-p4.json" },
   // 2026-10-13 AP Physics 1 P1-a(docs/ap/physics1-p1a-report.md): 단독 20 + 세트 1 원형 x 후보 2 = 44문항 후보, 통과 18(단독만; 세트 0, 선택지 그림 0). 한 증거 파일.
   { id: "phys-p1a", title: "AP Physics 1 P1-a (MC 파일럿, 통과 18)", itemsFile: "phys-p1a-items.json", loadLabel: "phys-p1a-2026-10-13", supplement: true, passKeysFile: "phys-p1a-pass-keys.json", evidenceFile: "evidence-phys-p1a.json" },
   // 2026-10-13 AP Physics 1 P1-a v2 재검증(docs/ap/physics1-groundwork.md §14): 같은 22칸 x 후보 2(수정된 원형·해설·그림 설명 포함), 첫 통과 30/44(68%). 세 배치(p1a2·p1b·s2)가 한 증거 파일을 공유한다.

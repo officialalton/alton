@@ -1,0 +1,1469 @@
+[
+ {
+  "candidateKey": "ap_statistics-m01-k0",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "3.15",
+  "unitCode": "3",
+  "skillPrimary": "3.E",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n_chisq_stat",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Direct computation of the chi-square statistic for a 2x2 table: find expected counts from the marginal totals, then sum (O-E)^2/E. This is one procedure with no condition check, interpretation or linking to a claim. The answer is 3.19, and the distractors are plausible slips. Arithmetic is moderate but calculator-friendly and fair.",
+  "payload": {
+   "archetype": "st_n_chisq_stat",
+   "topic": "3.15",
+   "skill": "3.E",
+   "calculator": "allowed",
+   "stem": "The table shown gives the observed counts for a chi-square test of independence in a random sample. What is the value of the chi-square statistic? (Compute the expected counts from the row and column totals and round the statistic to two decimal places.)",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Observed counts for a new therapy",
+    "data": {
+     "chart": "two_way",
+     "data": {
+      "rowHeader": "Treatment",
+      "rowLabels": [
+       "Group 1",
+       "Group 2"
+      ],
+      "colLabels": [
+       "Improved",
+       "Did not improve"
+      ],
+      "cells": [
+       [
+        38,
+        46
+       ],
+       [
+        19,
+        43
+       ]
+      ]
+     },
+     "title": "Observed counts"
+    }
+   },
+   "options": [
+    {
+     "text": "$3.19$",
+     "why": "The expected counts are row total times column total divided by the grand total, $32.79$, $51.21$, $24.21$ and $37.79$, and the sum of $(O - E)^2/E$ over the four cells is $3.19$.",
+     "value": "3.1900000"
+    },
+    {
+     "text": "$108.39$",
+     "why": "Adds the squared differences without dividing each by its expected count.",
+     "value": "108.39000"
+    },
+    {
+     "text": "$3.36$",
+     "why": "Divides each squared difference by the observed count instead of the expected count.",
+     "value": "3.3600000"
+    },
+    {
+     "text": "$1.79$",
+     "why": "Takes the square root of the chi-square statistic, which is not the statistic that is compared with the chi-square distribution.",
+     "value": "1.7900000"
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 105,
+   "facts": [
+    "cells=[[38, 46], [19, 43]]"
+   ],
+   "blueprint": {
+    "id": "st_n_chisq_stat",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Compute the chi-square statistic from observed and expected counts",
+    "topic": "3.15",
+    "skill": "3.E",
+    "student_thinking": [
+     "Find the expected count of each cell from the row and column totals",
+     "Divide each squared difference by its expected count and add the four results"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Compute the chi-square statistic from observed and expected counts",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "two_way",
+     "must_include": [
+      "the displayed values"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "no_division_by_expected",
+      "description": "Adds the squared differences without dividing each by its expected count."
+     },
+     {
+      "id": "divides_by_observed",
+      "description": "Divides each squared difference by the observed count instead of the expected count."
+     },
+     {
+      "id": "square_root_taken",
+      "description": "Takes the square root of the chi-square statistic, which is not the statistic that is compared with the chi-square distribution."
+     }
+    ],
+    "verification": {
+     "independent_path": "the statistic is recomputed with scipy's chi-square contingency routine without continuity correction",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "calculated_value_decision",
+     "representation_reading"
+    ]
+   },
+   "seed": 20700,
+   "pack_id": "st_n_chisq_stat-s20700",
+   "explanation_en": "The correct answer is $3.19$. The expected counts are row total times column total divided by the grand total, $32.79$, $51.21$, $24.21$ and $37.79$, and the sum of $(O - E)^2/E$ over the four cells is $3.19$.\n$108.39$ is incorrect: Adds the squared differences without dividing each by its expected count.\n$3.36$ is incorrect: Divides each squared difference by the observed count instead of the expected count.\n$1.79$ is incorrect: Takes the square root of the chi-square statistic, which is not the statistic that is compared with the chi-square distribution."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n_chisq_stat",
+   "facts": [
+    "cells=[[38, 46], [19, 43]]"
+   ],
+   "seed": 20700
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Chi-square statistic for independence, Topic 3.15 and skill 3.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Expected counts 32.79, 51.21, 24.21 and 37.79 give a statistic of about 3.19. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The two-way table data are complete with labels, and the stem states the rounding."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions (no division by expected, divide by observed, square root) and the explanation covers each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Calculator allowed, about 105 seconds, short reading load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean chi-square statistic computation with a correct unique key and distinct misconception distractors, and it passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct computation of the chi-square statistic for a 2x2 table: find expected counts from the marginal totals, then sum (O-E)^2/E. This is one procedure with no condition check, interpretation or linking to a claim. The answer is 3.19, and the distractors are plausible slips. Arithmetic is moderate but calculator-friendly and fair.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m01-k1",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "3.15",
+  "unitCode": "3",
+  "skillPrimary": "3.E",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n_chisq_stat",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Direct computation of the chi-square statistic for a 2x2 table, which is calculator-friendly. The procedure is stated, the rounding is specified, and the numbers are small. The task is to find expected counts and sum (O-E)^2/E, with no condition checking or interpretation. Distractors are plausible, such as an arithmetic slip or an unnormalized sum.",
+  "payload": {
+   "archetype": "st_n_chisq_stat",
+   "topic": "3.15",
+   "skill": "3.E",
+   "calculator": "allowed",
+   "stem": "The table shown gives the observed counts for a chi-square test of independence in a random sample. What is the value of the chi-square statistic? (Compute the expected counts from the row and column totals and round the statistic to two decimal places.)",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Observed counts for the way of purchase",
+    "data": {
+     "chart": "two_way",
+     "data": {
+      "rowHeader": "Purchase type",
+      "rowLabels": [
+       "Online",
+       "In store"
+      ],
+      "colLabels": [
+       "Returned",
+       "Kept"
+      ],
+      "cells": [
+       [
+        52,
+        19
+       ],
+       [
+        46,
+        32
+       ]
+      ]
+     },
+     "title": "Observed counts"
+    }
+   },
+   "options": [
+    {
+     "text": "$1.83$",
+     "why": "Takes the square root of the chi-square statistic, which is not the statistic that is compared with the chi-square distribution.",
+     "value": "1.8300000"
+    },
+    {
+     "text": "$3.51$",
+     "why": "Divides each squared difference by the observed count instead of the expected count.",
+     "value": "3.5100000"
+    },
+    {
+     "text": "$3.36$",
+     "why": "The expected counts are row total times column total divided by the grand total, $46.70$, $24.30$, $51.30$ and $26.70$, and the sum of $(O - E)^2/E$ over the four cells is $3.36$.",
+     "value": "3.3600000"
+    },
+    {
+     "text": "$112.45$",
+     "why": "Adds the squared differences without dividing each by its expected count.",
+     "value": "112.45000"
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 105,
+   "facts": [
+    "cells=[[52, 19], [46, 32]]"
+   ],
+   "blueprint": {
+    "id": "st_n_chisq_stat",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Compute the chi-square statistic from observed and expected counts",
+    "topic": "3.15",
+    "skill": "3.E",
+    "student_thinking": [
+     "Find the expected count of each cell from the row and column totals",
+     "Divide each squared difference by its expected count and add the four results"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Compute the chi-square statistic from observed and expected counts",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "two_way",
+     "must_include": [
+      "the displayed values"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "no_division_by_expected",
+      "description": "Adds the squared differences without dividing each by its expected count."
+     },
+     {
+      "id": "divides_by_observed",
+      "description": "Divides each squared difference by the observed count instead of the expected count."
+     },
+     {
+      "id": "square_root_taken",
+      "description": "Takes the square root of the chi-square statistic, which is not the statistic that is compared with the chi-square distribution."
+     }
+    ],
+    "verification": {
+     "independent_path": "the statistic is recomputed with scipy's chi-square contingency routine without continuity correction",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "calculated_value_decision",
+     "representation_reading"
+    ]
+   },
+   "seed": 20701,
+   "pack_id": "st_n_chisq_stat-s20701",
+   "explanation_en": "The correct answer is $3.36$. The expected counts are row total times column total divided by the grand total, $46.70$, $24.30$, $51.30$ and $26.70$, and the sum of $(O - E)^2/E$ over the four cells is $3.36$.\n$1.83$ is incorrect: Takes the square root of the chi-square statistic, which is not the statistic that is compared with the chi-square distribution.\n$3.51$ is incorrect: Divides each squared difference by the observed count instead of the expected count.\n$112.45$ is incorrect: Adds the squared differences without dividing each by its expected count."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n_chisq_stat",
+   "facts": [
+    "cells=[[52, 19], [46, 32]]"
+   ],
+   "seed": 20701
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Chi-square statistic from a two-way table; topic 3.15, skill 3.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "3.36 is unique and correct; the distractor values correspond to their stated errors."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data are complete with labels, header and title; rounding is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions; each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Calculator allowed, light reading load, about 105 s."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, correct chi-square statistic item with plausible distractors and a complete stimulus."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct computation of the chi-square statistic for a 2x2 table, which is calculator-friendly. The procedure is stated, the rounding is specified, and the numbers are small. The task is to find expected counts and sum (O-E)^2/E, with no condition checking or interpretation. Distractors are plausible, such as an arithmetic slip or an unnormalized sum.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m01-k2",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "3.15",
+  "unitCode": "3",
+  "skillPrimary": "3.E",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n_chisq_stat",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Standard 2x2 chi-square statistic computation from a given table. Needs expected counts from the margins and summing four terms, with no condition checks, interpretation, or procedure choice. Calculator use makes the arithmetic manageable. Key is about 4.81, which is option D. Distractors are plausible errors such as using observed counts or a wrong formula.",
+  "payload": {
+   "archetype": "st_n_chisq_stat",
+   "topic": "3.15",
+   "skill": "3.E",
+   "calculator": "allowed",
+   "stem": "The table shown gives the observed counts for a chi-square test of independence in a random sample. What is the value of the chi-square statistic? (Compute the expected counts from the row and column totals and round the statistic to two decimal places.)",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Observed counts for the way of purchase",
+    "data": {
+     "chart": "two_way",
+     "data": {
+      "rowHeader": "Purchase type",
+      "rowLabels": [
+       "Online",
+       "In store"
+      ],
+      "colLabels": [
+       "Returned",
+       "Kept"
+      ],
+      "cells": [
+       [
+        42,
+        26
+       ],
+       [
+        34,
+        44
+       ]
+      ]
+     },
+     "title": "Observed counts"
+    }
+   },
+   "options": [
+    {
+     "text": "$174.38$",
+     "why": "Adds the squared differences without dividing each by its expected count.",
+     "value": "174.38000"
+    },
+    {
+     "text": "$2.19$",
+     "why": "Takes the square root of the chi-square statistic, which is not the statistic that is compared with the chi-square distribution.",
+     "value": "2.1900000"
+    },
+    {
+     "text": "$4.99$",
+     "why": "Divides each squared difference by the observed count instead of the expected count.",
+     "value": "4.9900000"
+    },
+    {
+     "text": "$4.81$",
+     "why": "The expected counts are row total times column total divided by the grand total, $35.40$, $32.60$, $40.60$ and $37.40$, and the sum of $(O - E)^2/E$ over the four cells is $4.81$.",
+     "value": "4.8100000"
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 105,
+   "facts": [
+    "cells=[[42, 26], [34, 44]]"
+   ],
+   "blueprint": {
+    "id": "st_n_chisq_stat",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Compute the chi-square statistic from observed and expected counts",
+    "topic": "3.15",
+    "skill": "3.E",
+    "student_thinking": [
+     "Find the expected count of each cell from the row and column totals",
+     "Divide each squared difference by its expected count and add the four results"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Compute the chi-square statistic from observed and expected counts",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "two_way",
+     "must_include": [
+      "the displayed values"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "no_division_by_expected",
+      "description": "Adds the squared differences without dividing each by its expected count."
+     },
+     {
+      "id": "divides_by_observed",
+      "description": "Divides each squared difference by the observed count instead of the expected count."
+     },
+     {
+      "id": "square_root_taken",
+      "description": "Takes the square root of the chi-square statistic, which is not the statistic that is compared with the chi-square distribution."
+     }
+    ],
+    "verification": {
+     "independent_path": "the statistic is recomputed with scipy's chi-square contingency routine without continuity correction",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "calculated_value_decision",
+     "representation_reading"
+    ]
+   },
+   "seed": 20702,
+   "pack_id": "st_n_chisq_stat-s20702",
+   "explanation_en": "The correct answer is $4.81$. The expected counts are row total times column total divided by the grand total, $35.40$, $32.60$, $40.60$ and $37.40$, and the sum of $(O - E)^2/E$ over the four cells is $4.81$.\n$174.38$ is incorrect: Adds the squared differences without dividing each by its expected count.\n$2.19$ is incorrect: Takes the square root of the chi-square statistic, which is not the statistic that is compared with the chi-square distribution.\n$4.99$ is incorrect: Divides each squared difference by the observed count instead of the expected count."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n_chisq_stat",
+   "facts": [
+    "cells=[[42, 26], [34, 44]]"
+   ],
+   "seed": 20702
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Chi-square statistic for independence, on target for 3.15 and skill 3.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "4.81 is correct and unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with row and column labels and a stated rounding convention."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception and the explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A 2x2 table with a calculator allowed fits the time and load of a typical item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean chi-square statistic item with a complete stimulus, valid distractors and appropriate load."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard 2x2 chi-square statistic computation from a given table. Needs expected counts from the margins and summing four terms, with no condition checks, interpretation, or procedure choice. Calculator use makes the arithmetic manageable. Key is about 4.81, which is option D. Distractors are plausible errors such as using observed counts or a wrong formula.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m02-k0",
+  "cellId": "ap_statistics-m02",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "3.4",
+  "unitCode": "3",
+  "skillPrimary": "4.G",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n_ci_claim_threshold",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "The item asks whether a given CI that contains 0.5 supports a majority claim. The student only needs to check whether 0.5 is in the interval and see that it is a plausible value. There is no computation, no procedure choice, and the conditions are stated as met. The distractors are standard misconceptions: relying on the point estimate, treating most of the interval as enough, and assuming a 95% level always gives convincing evidence. This is a one-step application of the core concept of justifying a claim from an interval, which suits the basic learning level rather than a full mock.",
+  "payload": {
+   "archetype": "st_n_ci_claim_threshold",
+   "topic": "3.4",
+   "skill": "4.G",
+   "calculator": "allowed",
+   "stem": "A random sample of $500$ voters is used to find a $95\\%$ confidence interval for the proportion of all voters who support a proposal. The sample proportion is $0.52$, and the conditions for inference are met. The interval is $(0.476,\\ 0.564)$. Does the interval provide convincing evidence for the claim that a majority of all voters support the proposal?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Yes, because the sample proportion $0.52$ is greater than $0.5$.",
+     "why": "Judges the claim from the sample proportion alone; the interval shows how far the population proportion can be from the sample proportion.",
+     "value": null
+    },
+    {
+     "text": "No, because the interval $(0.476,\\ 0.564)$ includes values on both sides of $0.5$, so $0.5$ is a plausible value.",
+     "why": "An interval that includes the value leaves it plausible, so the claim that the proportion is greater than that value is not supported.",
+     "value": null
+    },
+    {
+     "text": "Yes, because most of the values in the interval $(0.476,\\ 0.564)$ are greater than $0.5$.",
+     "why": "The claim is justified only if all of the plausible values satisfy it; most of them is not enough.",
+     "value": null
+    },
+    {
+     "text": "Yes, because a $95\\%$ interval always provides convincing evidence for a claim about a proportion.",
+     "why": "An interval supports a claim only when the value in the claim is not a plausible value; the confidence level alone does not decide this.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 100,
+   "facts": [
+    "mode=straddle",
+    "n=500"
+   ],
+   "blueprint": {
+    "id": "st_n_ci_claim_threshold",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Justify a one-sided claim about a proportion from a confidence interval",
+    "topic": "3.4",
+    "skill": "4.G",
+    "student_thinking": [
+     "Compare the whole interval with the threshold in the claim",
+     "State whether the claim is justified: only when every value in the interval satisfies it"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Justify a one-sided claim about a proportion from a confidence interval",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "sample_proportion_only",
+      "description": "Judges the claim from the sample proportion alone; the interval shows how far the population proportion can be from the sample proportion."
+     },
+     {
+      "id": "most_values_above",
+      "description": "The claim is justified only if all of the plausible values satisfy it; most of them is not enough."
+     },
+     {
+      "id": "level_always_supports",
+      "description": "An interval supports a claim only when the value in the claim is not a plausible value; the confidence level alone does not decide this."
+     }
+    ],
+    "verification": {
+     "independent_path": "the interval is recomputed from the sample proportion and the sample size and the cases keep the threshold at least 0.005 outside or inside the interval",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "claim_justification",
+     "interpretation"
+    ]
+   },
+   "seed": 20700,
+   "pack_id": "st_n_ci_claim_threshold-s20700",
+   "explanation_en": "The correct answer is No, because the interval $(0.476,\\ 0.564)$ includes values on both sides of $0.5$, so $0.5$ is a plausible value.. An interval that includes the value leaves it plausible, so the claim that the proportion is greater than that value is not supported.\nYes, because the sample proportion $0.52$ is greater than $0.5$. is incorrect: Judges the claim from the sample proportion alone; the interval shows how far the population proportion can be from the sample proportion.\nYes, because most of the values in the interval $(0.476,\\ 0.564)$ are greater than $0.5$. is incorrect: The claim is justified only if all of the plausible values satisfy it; most of them is not enough.\nYes, because a $95\\%$ interval always provides convincing evidence for a claim about a proportion. is incorrect: An interval supports a claim only when the value in the claim is not a plausible value; the confidence level alone does not decide this."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n_ci_claim_threshold",
+   "facts": [
+    "mode=straddle",
+    "n=500"
+   ],
+   "seed": 20700
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly targets justifying a claim from a proportion CI (3.4, 4.G)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique defensible answer: 0.5 lies inside the interval."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear, with conditions stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions; the explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short and fast to read, no arithmetic needed, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, correct item with a unique key and distinct distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks whether a given CI that contains 0.5 supports a majority claim. The student only needs to check whether 0.5 is in the interval and see that it is a plausible value. There is no computation, no procedure choice, and the conditions are stated as met. The distractors are standard misconceptions: relying on the point estimate, treating most of the interval as enough, and assuming a 95% level always gives convincing evidence. This is a one-step application of the core concept of justifying a claim from an interval, which suits the basic learning level rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m02-k1",
+  "cellId": "ap_statistics-m02",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "3.4",
+  "unitCode": "3",
+  "skillPrimary": "4.G",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n_ci_claim_threshold",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: check whether 0.4 lies inside the given interval and pick the correct justification among three common misconceptions. No computation is needed, and the reading load is short. It takes one reasoning step linking the interval to the claim.",
+  "payload": {
+   "archetype": "st_n_ci_claim_threshold",
+   "topic": "3.4",
+   "skill": "4.G",
+   "calculator": "allowed",
+   "stem": "A random sample of $200$ customers is used to find a $95\\%$ confidence interval for the proportion of all customers who prefer the new recipe. The sample proportion is $0.42$, and the conditions for inference are met. The interval is $(0.352,\\ 0.488)$. Does the interval provide convincing evidence for the claim that more than $40\\%$ of all customers prefer the new recipe?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Yes, because a $95\\%$ interval always provides convincing evidence for a claim about a proportion.",
+     "why": "An interval supports a claim only when the value in the claim is not a plausible value; the confidence level alone does not decide this.",
+     "value": null
+    },
+    {
+     "text": "Yes, because most of the values in the interval $(0.352,\\ 0.488)$ are greater than $0.4$.",
+     "why": "The claim is justified only if all of the plausible values satisfy it; most of them is not enough.",
+     "value": null
+    },
+    {
+     "text": "No, because the interval $(0.352,\\ 0.488)$ includes values on both sides of $0.4$, so $0.4$ is a plausible value.",
+     "why": "An interval that includes the value leaves it plausible, so the claim that the proportion is greater than that value is not supported.",
+     "value": null
+    },
+    {
+     "text": "Yes, because the sample proportion $0.42$ is greater than $0.4$.",
+     "why": "Judges the claim from the sample proportion alone; the interval shows how far the population proportion can be from the sample proportion.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 100,
+   "facts": [
+    "mode=straddle",
+    "n=200"
+   ],
+   "blueprint": {
+    "id": "st_n_ci_claim_threshold",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Justify a one-sided claim about a proportion from a confidence interval",
+    "topic": "3.4",
+    "skill": "4.G",
+    "student_thinking": [
+     "Compare the whole interval with the threshold in the claim",
+     "State whether the claim is justified: only when every value in the interval satisfies it"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Justify a one-sided claim about a proportion from a confidence interval",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "sample_proportion_only",
+      "description": "Judges the claim from the sample proportion alone; the interval shows how far the population proportion can be from the sample proportion."
+     },
+     {
+      "id": "most_values_above",
+      "description": "The claim is justified only if all of the plausible values satisfy it; most of them is not enough."
+     },
+     {
+      "id": "level_always_supports",
+      "description": "An interval supports a claim only when the value in the claim is not a plausible value; the confidence level alone does not decide this."
+     }
+    ],
+    "verification": {
+     "independent_path": "the interval is recomputed from the sample proportion and the sample size and the cases keep the threshold at least 0.005 outside or inside the interval",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "claim_justification",
+     "interpretation"
+    ]
+   },
+   "seed": 20701,
+   "pack_id": "st_n_ci_claim_threshold-s20701",
+   "explanation_en": "The correct answer is No, because the interval $(0.352,\\ 0.488)$ includes values on both sides of $0.4$, so $0.4$ is a plausible value.. An interval that includes the value leaves it plausible, so the claim that the proportion is greater than that value is not supported.\nYes, because a $95\\%$ interval always provides convincing evidence for a claim about a proportion. is incorrect: An interval supports a claim only when the value in the claim is not a plausible value; the confidence level alone does not decide this.\nYes, because most of the values in the interval $(0.352,\\ 0.488)$ are greater than $0.4$. is incorrect: The claim is justified only if all of the plausible values satisfy it; most of them is not enough.\nYes, because the sample proportion $0.42$ is greater than $0.4$. is incorrect: Judges the claim from the sample proportion alone; the interval shows how far the population proportion can be from the sample proportion."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n_ci_claim_threshold",
+   "facts": [
+    "mode=straddle",
+    "n=200"
+   ],
+   "seed": 20701
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly targets justifying a claim from a proportion CI (3.4, 4.G); no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Interval contains 0.4, so the claim is not supported; C is the unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete with sample, n, p-hat, conditions, interval, and claim."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions; each wrong option is explained. Minor cosmetic double period in the explanation text."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no arithmetic burden, typical AP length."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, well-formed item. The key is unique and correct, the distractors are distinct misconceptions, and it is in scope and has an appropriate load. It passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: check whether 0.4 lies inside the given interval and pick the correct justification among three common misconceptions. No computation is needed, and the reading load is short. It takes one reasoning step linking the interval to the claim.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m02-k2",
+  "cellId": "ap_statistics-m02",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "3.4",
+  "unitCode": "3",
+  "skillPrimary": "4.G",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n_ci_claim_threshold",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step justification: the interval lies entirely above 0.4, so 0.4 is not a plausible value and the claim is supported. The interval, sample proportion and conditions are all given, so there is no computation and little reading. The distractors are simple misconceptions about intervals, so the item checks core understanding of topic 3.4 without added complexity.",
+  "payload": {
+   "archetype": "st_n_ci_claim_threshold",
+   "topic": "3.4",
+   "skill": "4.G",
+   "calculator": "allowed",
+   "stem": "A random sample of $200$ customers is used to find a $95\\%$ confidence interval for the proportion of all customers who prefer the new recipe. The sample proportion is $0.48$, and the conditions for inference are met. The interval is $(0.411,\\ 0.549)$. Does the interval provide convincing evidence for the claim that more than $40\\%$ of all customers prefer the new recipe?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "No, because the sample proportion $0.48$ is not equal to $0.4$.",
+     "why": "The sample proportion never has to equal the value in the claim; the interval shows which population proportions are plausible.",
+     "value": null
+    },
+    {
+     "text": "Yes, because every value in the interval $(0.411,\\ 0.549)$ is greater than $0.4$, so $0.4$ is not a plausible value.",
+     "why": "A claim that the proportion is greater than a value is supported when the whole interval lies above that value, so the value itself is not plausible.",
+     "value": null
+    },
+    {
+     "text": "No, because a confidence level of $95\\%$ is too low to support any claim about a proportion.",
+     "why": "A $95\\%$ interval is commonly used to support claims; the claim is judged by comparing the interval with the value.",
+     "value": null
+    },
+    {
+     "text": "No, because the interval $(0.411,\\ 0.549)$ is not centered at $0.4$.",
+     "why": "An interval is not required to be centered at the value in the claim; what matters is whether the value is inside the interval.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 100,
+   "facts": [
+    "mode=above",
+    "n=200"
+   ],
+   "blueprint": {
+    "id": "st_n_ci_claim_threshold",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Justify a one-sided claim about a proportion from a confidence interval",
+    "topic": "3.4",
+    "skill": "4.G",
+    "student_thinking": [
+     "Compare the whole interval with the threshold in the claim",
+     "State whether the claim is justified: only when every value in the interval satisfies it"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Justify a one-sided claim about a proportion from a confidence interval",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "centered_at_value",
+      "description": "An interval is not required to be centered at the value in the claim; what matters is whether the value is inside the interval."
+     },
+     {
+      "id": "level_too_low",
+      "description": "A $95\\%$ interval is commonly used to support claims; the claim is judged by comparing the interval with the value."
+     },
+     {
+      "id": "must_equal",
+      "description": "The sample proportion never has to equal the value in the claim; the interval shows which population proportions are plausible."
+     }
+    ],
+    "verification": {
+     "independent_path": "the interval is recomputed from the sample proportion and the sample size and the cases keep the threshold at least 0.005 outside or inside the interval",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "claim_justification",
+     "interpretation"
+    ]
+   },
+   "seed": 20702,
+   "pack_id": "st_n_ci_claim_threshold-s20702",
+   "explanation_en": "The correct answer is Yes, because every value in the interval $(0.411,\\ 0.549)$ is greater than $0.4$, so $0.4$ is not a plausible value.. A claim that the proportion is greater than a value is supported when the whole interval lies above that value, so the value itself is not plausible.\nNo, because the sample proportion $0.48$ is not equal to $0.4$. is incorrect: The sample proportion never has to equal the value in the claim; the interval shows which population proportions are plausible.\nNo, because a confidence level of $95\\%$ is too low to support any claim about a proportion. is incorrect: A $95\\%$ interval is commonly used to support claims; the claim is judged by comparing the interval with the value.\nNo, because the interval $(0.411,\\ 0.549)$ is not centered at $0.4$. is incorrect: An interval is not required to be centered at the value in the claim; what matters is whether the value is inside the interval."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n_ci_claim_threshold",
+   "facts": [
+    "mode=above",
+    "n=200"
+   ],
+   "seed": 20702
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.4 / skill 4.G: justify a one-sided claim from a one-proportion confidence interval. No later-unit content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique correct answer: the whole interval lies above 0.40. The other options give false reasons."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. The stem gives n, the sample proportion, the interval, and that conditions are met. Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (must equal, level too low, must be centered). The explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, no arithmetic, short reading load, typical of an AP item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean and passes all five criteria. It tests one skill, has a unique key, and its distractors encode distinct misconceptions."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step justification: the interval lies entirely above 0.4, so 0.4 is not a plausible value and the claim is supported. The interval, sample proportion and conditions are all given, so there is no computation and little reading. The distractors are simple misconceptions about intervals, so the item checks core understanding of topic 3.4 without added complexity.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m03-k0",
+  "cellId": "ap_statistics-m03",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.3",
+  "unitCode": "5",
+  "skillPrimary": "4.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n_extrapolation",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single core concept: recognizing extrapolation beyond the data range (x=34 vs 0-15) and choosing the correct interpretation among standard misconceptions (high r implies reliability, least-squares implies reliability, prediction impossible). Optional quick plug-in; the negative prediction is a further cue. Little reading or computation, no representation changes.",
+  "payload": {
+   "archetype": "st_n_extrapolation",
+   "topic": "5.3",
+   "skill": "4.D",
+   "calculator": "allowed",
+   "stem": "A least-squares regression line for predicting the number of cups of hot chocolate sold from the temperature, in degrees Celsius is $\\hat y = 94.5 - 3.84x$, based on data for which $x$ ranges from $0$ to $15$, with $r = -0.91$. A researcher uses the line to predict number of cups when $x = 34$. Which of the following statements about the prediction is correct?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The prediction of $-36.1$ is reliable, because the correlation of $0.91$ is close to $1$.",
+     "why": "A strong correlation within the range of the data does not make predictions outside that range reliable.",
+     "value": null
+    },
+    {
+     "text": "The prediction of $-36.1$ is an extrapolation, because $34$ is outside the range of the data, so the linear pattern may not continue and the prediction may be unreliable.",
+     "why": "Predictions for values of the explanatory variable outside the range of the data assume that the linear pattern continues, which the data cannot confirm.",
+     "value": null
+    },
+    {
+     "text": "The prediction of $-36.1$ is reliable, because the line is the least-squares line, which has the smallest sum of squared residuals.",
+     "why": "The least-squares property describes the fit to the observed data, not the behavior of the relationship outside the data.",
+     "value": null
+    },
+    {
+     "text": "The prediction cannot be made, because a regression line can only be used for the values of $x$ that appear in the data set.",
+     "why": "A prediction can be calculated for any value of $x$; the issue is that it is unreliable outside the range of the data.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 90,
+   "facts": [
+    "xn=34"
+   ],
+   "blueprint": {
+    "id": "st_n_extrapolation",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Judge a prediction outside the range of the data",
+    "topic": "5.3",
+    "skill": "4.D",
+    "student_thinking": [
+     "Compare the value of x with the range of the data",
+     "Conclude that the prediction is an extrapolation and reject reasons based on the correlation or the least-squares property"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Judge a prediction outside the range of the data",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "r_makes_reliable",
+      "description": "A strong correlation within the range of the data does not make predictions outside that range reliable."
+     },
+     {
+      "id": "least_squares_makes_reliable",
+      "description": "The least-squares property describes the fit to the observed data, not the behavior of the relationship outside the data."
+     },
+     {
+      "id": "cannot_calculate",
+      "description": "A prediction can be calculated for any value of $x$; the issue is that it is unreliable outside the range of the data."
+     }
+    ],
+    "verification": {
+     "independent_path": "each context gives the range of the data and a value of x outside it, so the prediction is an extrapolation in every case",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "claim_justification",
+     "interpretation",
+     "condition_check"
+    ]
+   },
+   "seed": 20700,
+   "pack_id": "st_n_extrapolation-s20700",
+   "explanation_en": "The correct answer is The prediction of $-36.1$ is an extrapolation, because $34$ is outside the range of the data, so the linear pattern may not continue and the prediction may be unreliable.. Predictions for values of the explanatory variable outside the range of the data assume that the linear pattern continues, which the data cannot confirm.\nThe prediction of $-36.1$ is reliable, because the correlation of $0.91$ is close to $1$. is incorrect: A strong correlation within the range of the data does not make predictions outside that range reliable.\nThe prediction of $-36.1$ is reliable, because the line is the least-squares line, which has the smallest sum of squared residuals. is incorrect: The least-squares property describes the fit to the observed data, not the behavior of the relationship outside the data.\nThe prediction cannot be made, because a regression line can only be used for the values of $x$ that appear in the data set. is incorrect: A prediction can be calculated for any value of $x$; the issue is that it is unreliable outside the range of the data."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n_extrapolation",
+   "facts": [
+    "xn=34"
+   ],
+   "seed": 20700
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Extrapolation judgment within 5.3, interpretation of a result against a claim (4.D)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is unique correct; prediction -36.06 rounds to -36.1; 34 is outside 0-15."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. Minor wording: missing comma after 'Celsius', and option A says 0.91 while r=-0.91 (magnitude)."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions; explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, light reading, calculator not needed beyond a trivial computation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. Its key is unique and correct, its distractors encode distinct misconceptions, and it is in scope for 5.3 and skill 4.D. Only trivial wording blemishes remain."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single core concept: recognizing extrapolation beyond the data range (x=34 vs 0-15) and choosing the correct interpretation among standard misconceptions (high r implies reliability, least-squares implies reliability, prediction impossible). Optional quick plug-in; the negative prediction is a further cue. Little reading or computation, no representation changes.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m03-k1",
+  "cellId": "ap_statistics-m03",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.3",
+  "unitCode": "5",
+  "skillPrimary": "4.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n_extrapolation",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single core concept: recognizing extrapolation (x=36 outside 1 to 15). Students choose among named misinterpretations (least-squares property or high r implies reliability; the line cannot be used outside the data). Minimal computation (14.1+0.89*36=46.14), short reading, one reasoning step, no representation changes. This is a standard introductory check of understanding, not a full-mock level multi-step item.",
+  "payload": {
+   "archetype": "st_n_extrapolation",
+   "topic": "5.3",
+   "skill": "4.D",
+   "calculator": "allowed",
+   "stem": "A least-squares regression line for predicting the hourly wage, in dollars from the number of years of experience is $\\hat y = 14.1 + 0.89x$, based on data for which $x$ ranges from $1$ to $15$, with $r = 0.91$. A researcher uses the line to predict wage when $x = 36$. Which of the following statements about the prediction is correct?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The prediction of $46.1$ is reliable, because the line is the least-squares line, which has the smallest sum of squared residuals.",
+     "why": "The least-squares property describes the fit to the observed data, not the behavior of the relationship outside the data.",
+     "value": null
+    },
+    {
+     "text": "The prediction of $46.1$ is an extrapolation, because $36$ is outside the range of the data, so the linear pattern may not continue and the prediction may be unreliable.",
+     "why": "Predictions for values of the explanatory variable outside the range of the data assume that the linear pattern continues, which the data cannot confirm.",
+     "value": null
+    },
+    {
+     "text": "The prediction cannot be made, because a regression line can only be used for the values of $x$ that appear in the data set.",
+     "why": "A prediction can be calculated for any value of $x$; the issue is that it is unreliable outside the range of the data.",
+     "value": null
+    },
+    {
+     "text": "The prediction of $46.1$ is reliable, because the correlation of $0.91$ is close to $1$.",
+     "why": "A strong correlation within the range of the data does not make predictions outside that range reliable.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 90,
+   "facts": [
+    "xn=36"
+   ],
+   "blueprint": {
+    "id": "st_n_extrapolation",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Judge a prediction outside the range of the data",
+    "topic": "5.3",
+    "skill": "4.D",
+    "student_thinking": [
+     "Compare the value of x with the range of the data",
+     "Conclude that the prediction is an extrapolation and reject reasons based on the correlation or the least-squares property"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Judge a prediction outside the range of the data",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "r_makes_reliable",
+      "description": "A strong correlation within the range of the data does not make predictions outside that range reliable."
+     },
+     {
+      "id": "least_squares_makes_reliable",
+      "description": "The least-squares property describes the fit to the observed data, not the behavior of the relationship outside the data."
+     },
+     {
+      "id": "cannot_calculate",
+      "description": "A prediction can be calculated for any value of $x$; the issue is that it is unreliable outside the range of the data."
+     }
+    ],
+    "verification": {
+     "independent_path": "each context gives the range of the data and a value of x outside it, so the prediction is an extrapolation in every case",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "claim_justification",
+     "interpretation",
+     "condition_check"
+    ]
+   },
+   "seed": 20701,
+   "pack_id": "st_n_extrapolation-s20701",
+   "explanation_en": "The correct answer is The prediction of $46.1$ is an extrapolation, because $36$ is outside the range of the data, so the linear pattern may not continue and the prediction may be unreliable.. Predictions for values of the explanatory variable outside the range of the data assume that the linear pattern continues, which the data cannot confirm.\nThe prediction of $46.1$ is reliable, because the line is the least-squares line, which has the smallest sum of squared residuals. is incorrect: The least-squares property describes the fit to the observed data, not the behavior of the relationship outside the data.\nThe prediction cannot be made, because a regression line can only be used for the values of $x$ that appear in the data set. is incorrect: A prediction can be calculated for any value of $x$; the issue is that it is unreliable outside the range of the data.\nThe prediction of $46.1$ is reliable, because the correlation of $0.91$ is close to $1$. is incorrect: A strong correlation within the range of the data does not make predictions outside that range reliable."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n_extrapolation",
+   "facts": [
+    "xn=36"
+   ],
+   "seed": 20701
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Extrapolation judgment in 5.3, interpretation of result, in scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B unique correct; 46.14 rounds to 46.1; 36 outside 1-15."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem complete. Slightly awkward 'in dollars from' phrasing but clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained; the key is slightly longer but not a giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds, minimal arithmetic, typical AP style."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound extrapolation item with a unique key and distinct distractors, suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single core concept: recognizing extrapolation (x=36 outside 1 to 15). Students choose among named misinterpretations (least-squares property or high r implies reliability; the line cannot be used outside the data). Minimal computation (14.1+0.89*36=46.14), short reading, one reasoning step, no representation changes. This is a standard introductory check of understanding, not a full-mock level multi-step item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m03-k2",
+  "cellId": "ap_statistics-m03",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.3",
+  "unitCode": "5",
+  "skillPrimary": "4.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n_extrapolation",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item on recognizing extrapolation. The student compares x=30 to the data range 0-15 and picks the correct statement from standard distractors (least-squares optimality, high r, 'cannot be made'). The prediction is given in the options, so no real computation is needed. The wording is clear and the reading load is short. It tests recognition of a core idea, not multi-step reasoning.",
+  "payload": {
+   "archetype": "st_n_extrapolation",
+   "topic": "5.3",
+   "skill": "4.D",
+   "calculator": "allowed",
+   "stem": "A least-squares regression line for predicting the number of cups of hot chocolate sold from the temperature, in degrees Celsius is $\\hat y = 95.4 - 3.62x$, based on data for which $x$ ranges from $0$ to $15$, with $r = -0.88$. A researcher uses the line to predict number of cups when $x = 30$. Which of the following statements about the prediction is correct?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The prediction of $-13.2$ is reliable, because the line is the least-squares line, which has the smallest sum of squared residuals.",
+     "why": "The least-squares property describes the fit to the observed data, not the behavior of the relationship outside the data.",
+     "value": null
+    },
+    {
+     "text": "The prediction of $-13.2$ is an extrapolation, because $30$ is outside the range of the data, so the linear pattern may not continue and the prediction may be unreliable.",
+     "why": "Predictions for values of the explanatory variable outside the range of the data assume that the linear pattern continues, which the data cannot confirm.",
+     "value": null
+    },
+    {
+     "text": "The prediction cannot be made, because a regression line can only be used for the values of $x$ that appear in the data set.",
+     "why": "A prediction can be calculated for any value of $x$; the issue is that it is unreliable outside the range of the data.",
+     "value": null
+    },
+    {
+     "text": "The prediction of $-13.2$ is reliable, because the correlation of $0.88$ is close to $1$.",
+     "why": "A strong correlation within the range of the data does not make predictions outside that range reliable.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 90,
+   "facts": [
+    "xn=30"
+   ],
+   "blueprint": {
+    "id": "st_n_extrapolation",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Judge a prediction outside the range of the data",
+    "topic": "5.3",
+    "skill": "4.D",
+    "student_thinking": [
+     "Compare the value of x with the range of the data",
+     "Conclude that the prediction is an extrapolation and reject reasons based on the correlation or the least-squares property"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Judge a prediction outside the range of the data",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "r_makes_reliable",
+      "description": "A strong correlation within the range of the data does not make predictions outside that range reliable."
+     },
+     {
+      "id": "least_squares_makes_reliable",
+      "description": "The least-squares property describes the fit to the observed data, not the behavior of the relationship outside the data."
+     },
+     {
+      "id": "cannot_calculate",
+      "description": "A prediction can be calculated for any value of $x$; the issue is that it is unreliable outside the range of the data."
+     }
+    ],
+    "verification": {
+     "independent_path": "each context gives the range of the data and a value of x outside it, so the prediction is an extrapolation in every case",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "claim_justification",
+     "interpretation",
+     "condition_check"
+    ]
+   },
+   "seed": 20702,
+   "pack_id": "st_n_extrapolation-s20702",
+   "explanation_en": "The correct answer is The prediction of $-13.2$ is an extrapolation, because $30$ is outside the range of the data, so the linear pattern may not continue and the prediction may be unreliable.. Predictions for values of the explanatory variable outside the range of the data assume that the linear pattern continues, which the data cannot confirm.\nThe prediction of $-13.2$ is reliable, because the line is the least-squares line, which has the smallest sum of squared residuals. is incorrect: The least-squares property describes the fit to the observed data, not the behavior of the relationship outside the data.\nThe prediction cannot be made, because a regression line can only be used for the values of $x$ that appear in the data set. is incorrect: A prediction can be calculated for any value of $x$; the issue is that it is unreliable outside the range of the data.\nThe prediction of $-13.2$ is reliable, because the correlation of $0.88$ is close to $1$. is incorrect: A strong correlation within the range of the data does not make predictions outside that range reliable."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n_extrapolation",
+   "facts": [
+    "xn=30"
+   ],
+   "seed": 20702
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Extrapolation judgment fits topic 5.3 and the interpretation skill; stays within Unit 5."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique correct option; the others give invalid reasons. The predicted value -13.2 is correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem is self-contained. Minor flaw: option D says correlation 0.88 while the stem gives r = -0.88; this should say -0.88 or 'strength of'. The stem also lacks a comma after 'Celsius'."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (least-squares property, cannot calculate, strong r), each explained. Option B is somewhat longer than the others, which is a mild cue."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds, minimal arithmetic, typical AP style."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound with a unique key and distinct distractors. The only flaw is the sign mismatch in option D (0.88 versus r = -0.88), which should be fixed, so I passed it with that note."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item on recognizing extrapolation. The student compares x=30 to the data range 0-15 and picks the correct statement from standard distractors (least-squares optimality, high r, 'cannot be made'). The prediction is given in the options, so no real computation is needed. The wording is clear and the reading load is short. It tests recognition of a core idea, not multi-step reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ }
+]
