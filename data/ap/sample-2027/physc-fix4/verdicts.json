@@ -1,0 +1,1356 @@
+[
+ {
+  "key": "ap_physics_c_mechanics-m01-k0",
+  "cellId": "ap_physics_c_mechanics-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The slope of the force-versus-extension data is about 118.6 N/m, so the spring constant is about 118 N/m.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "118 N/m"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Hooke's law constant from table data; Unit 2 topic 2.8, skill 2.B fit."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Key 118 N/m is correct and unique among options, but 'determined from all of the data' does not specify the method (best-fit line through origin vs. endpoint slope); stem should name the method."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table with labeled extension and force columns is complete and consistent with the stem."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Distractors are weak: 29.6 and 593 are obvious non-slopes, and 0.00845 is labeled N/m although its unit is m/N. The key explanation is circular and shows no computation."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short table-reading task, calculator allowed, load is appropriate for the time."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct and in scope, but the stem does not specify the slope-fitting method, and the distractors and explanations are weak (a unit-mislabeled option and a circular key explanation). Fails key_scoring and distractor_explanation; no instant-reject condition applies."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: apply F = kx to tabulated data and find the slope or average F/x (~118 N/m). One representation change (table to slope), few reasoning steps, simple arithmetic, and well-separated distractors that allow estimation. The wording is clear. It is more routine than a typical AP full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m01-k1",
+  "cellId": "ap_physics_c_mechanics-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Least-squares slope of F vs x = 2.974/0.025 ≈ 119 N/m",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "119 N/m"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key of 119 N/m is the unique closest option, since fits with and without an intercept give 118.96 and 120.17 N/m. The stem does not name a fitting method, which is a minor ambiguity. The distractors are weak: two are dimensionally nonsensical (a force and an N·m product), and the explanation for the key is circular. The item is fails on distractor quality and explanation.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item targets spring constant from force-extension data, which fits topic 2.8 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is the closest option. A least-squares slope with an intercept gives 118.96 N/m, and a fit through the origin gives 120.2 N/m. The stem does not specify the method."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with labels and five rows. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Two distractors are unit-mismatched giveaways: 29.7 is a force, and 7.42 is an N·m product that is not a plausible student error for a slope. The explanation for the key just restates that the slope is the slope, with no pathway shown. Few realistic misconceptions are encoded."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The time and load are typical of the exam, and the calculator use is appropriate."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept Hooke's law item. The student reads a table and finds the slope of F vs x (or averages F/x ratios, all about 120 N/m). The options are far apart, so a rough estimate picks the answer (119 N/m). There is no multi-step reasoning, there are no representation changes beyond reading the table, and the reading load is minimal.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m01-k2",
+  "cellId": "ap_physics_c_mechanics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Slope of F vs x: (30.3-6.11)/(0.25-0.05)=121 N/m; least-squares fit gives about 121 N/m as well.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "121 N/m"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Short, calculator allowed, light reading load.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Acceptable item: slope from a Hooke's law table with a unique key of 121 N/m. Minor issues are the vague fitting method in \"from all of the data\" and the unit mismatch in the 7.58 distractor."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single concept: Hooke's law, F = kx. The student reads a table and finds the slope (about 121 N/m) from the force-extension data, e.g. by a best-fit line or by averaging F/x ratios. The ratios (122.2, 119.1, 118.3, 120.2, 121.2) are all near 121, so the answer is recognizable. The distractors are the inverse (0.00826), a mean of F values over x values mis-scaled (606 is about 30.3/0.05), and 7.58 (an arithmetic slip). There are only 2-3 reasoning steps, with one representation change (table to slope). Computation is light, with five data pairs and no unit conversion. The item uses standard wording and no outside knowledge, so nothing makes it unfairly hard. It is a routine, introductory-level skill.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m02-k0",
+  "cellId": "ap_physics_c_mechanics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "+30(0.4) - 25(0.5) = 12 - 12.5 = -0.5 N·m",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "-0.500 N·m"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Net torque from two forces, signed sum; fits topic 5.3 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "+12 - 12.5 = -0.5 N·m; key index 3 is unique and correct. Sign convention stated in the stem."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear, with directions and sign convention given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (net force times sum of arms, sign reversal, wrong lever arm); explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, calculator-light, typical load for an AP MC item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, unambiguous net-torque item with a stated sign convention and distinct distractors. Passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept torque calculation: compute two torques (12 and -12.5 N·m) using the sign convention supplied in the stem and sum them to get -0.5 N·m. Few steps, simple arithmetic, no representation change, short reading. Suitable for foundational practice rather than full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m02-k1",
+  "cellId": "ap_physics_c_mechanics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Net torque = +30(0.4) - 10(0.3) = 12 - 3 = 9.00 N·m",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "9.00 N·m"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Torque as signed sum, Unit 5 topic 5.3, skill 2.B calculation. In scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "9.00 N·m is unique and correct given the stated sign convention."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the geometry is fully described in the stem with perpendicular forces and signs stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct distractors with explanations. The m3 distractor is somewhat contrived but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, clean, calculator-neutral arithmetic, about 60-100 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, unambiguous, in-scope net-torque item with four value options and explained distractors. It is easy, but it meets the acceptance criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: compute two torques with r×F, apply the given sign convention, and sum them (12 - 3 = 9 N·m). The stem gives the sign convention, so there is no ambiguity. It has no graph or diagram translation, no proportional reasoning, and only simple arithmetic.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m02-k2",
+  "cellId": "ap_physics_c_mechanics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "τ = (20)(0.2) − (10)(0.8) = 4 − 8 = −4 N·m",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "-4.00 N·m"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Net torque as signed sum, topic 5.3, skill 2.B fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "-4.00 N·m is unique and correct given the stated sign convention."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear, with the sign convention stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, and the explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, easy item; about 60-100 s; calculator irrelevant but allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, unambiguous, in-scope simple net-torque item with distinct distractors; acceptable although low in difficulty."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept torque calculation: tau = rF for two perpendicular forces, with sign convention supplied in the stem. Net = +4 - 8 = -4 N·m. No representation change, minimal reading, trivial arithmetic, so it is a straightforward recall-and-apply item suited to basic learning rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m03-k0",
+  "cellId": "ap_physics_c_mechanics-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Integral of 12e^{-t/2} from 0 to infinity = 12*2 = 24 m",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "24.0 m"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Integrating exponential velocity to get displacement; topic 1.2, skill 2.B. Allowed function type."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "24 m is unique and correct; velocity is positive so distance equals displacement."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. Stem is clear with units. Explanation uses undefined tau and v0 symbols but this is minor."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct plausible errors, each explained. The 6.00 m rationale's 'wrong units' wording is slightly sloppy but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 s, light load, calculator use trivial. Fairly easy but acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope, clean item with a unique key and distinct distractors. Minor wording issues in the explanation (undefined tau, 'wrong units' phrasing) do not justify rejection."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: displacement is the integral of velocity. Requires integrating an exponential from 0 to infinity (12*2 = 24 m). No representation change, minimal reading, trivial arithmetic. Distractors correspond to common slips in the exponent factor.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m03-k1",
+  "cellId": "ap_physics_c_mechanics-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "∫0^∞ 8e^{-t/3} dt = 24 m",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "24.0 m"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Integrating velocity to get displacement with an exponential function; fits topic 1.2 and skill 2.B. Only exponential calculus is used."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The integral from 0 to infinity of 8e^{-t/3} is 24 m. Velocity is always positive, so distance equals displacement. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. The stem is clear and gives v(t) with units explicitly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions: v0/tau, a missing tau factor, and a truncated upper limit. The explanation covers each wrong option. The 'wrong units' phrasing is slightly awkward."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, short stem, calculator allowed, no needless arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean improper-integral displacement problem with a unique, correct key, distinct distractors and typical exam load. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-step improper integral of an exponential velocity function gives 8*3 = 24 m. There is no representation change, the reading load is minimal, the arithmetic is trivial, and the wording is unambiguous. It tests the core idea that displacement is the integral of velocity, with simple distractors (v0, v0/tau, and similar). This suits foundational practice rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m03-k2",
+  "cellId": "ap_physics_c_mechanics-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The integral from 0 to infinity of 6e^(-t/3) dt is 6*3 = 18 m.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "18.0 m"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Integrating exponential velocity for displacement; core topic 1.2, skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "18.0 m is unique; v>0 so distance equals displacement."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained. Minor: the 2.00 m explanation refers to τ and v0 undefined in the stem, and the 90 m error is slightly contrived."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, one-step, calculator allowed, typical load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, concise item with a unique correct key and distinct distractors; passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: integrate an exponential velocity from 0 to infinity to get displacement (18 m). Needs one integration and an improper limit, with trivial arithmetic and short wording. Distractors reflect common errors (dividing by 3 instead of multiplying, truncating the limit at t=3). Fits a core, early-unit skill check rather than a multi-step exam-level challenge.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m04-k0-q1",
+  "cellId": "ap_physics_c_mechanics-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Area under F-x: 24+8-4=28 J",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "28.0 J"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Work as signed area under F-x graph; fits topic 3.2 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Signed areas 24+8-4=28 J; the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Axes, labels, and vertices fully specify the graph; the stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (averaging force values, stopping at the zero crossing, F0*x), each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short and typical load; the calculator is not needed but is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean. The key of 28 J is the unique answer, the graph data are complete, and the distractors are distinct and explained."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: net work equals the area under the F-x graph. It needs a rectangle plus two triangles, one with negative sign, with small integer arithmetic. The wording is clear and the key is unambiguous (28 J). The distractors are plausible, e.g. ignoring the negative area gives 32 J. This is below full-mock exam depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m04-k0-q2",
+  "cellId": "ap_physics_c_mechanics-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Net work (area) increases while F>0, i.e., until x=5 m; beyond, F<0 reduces KE.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "5.00 m"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Work-energy theorem from the signed area under F(x). It is mainly representation reading, but acceptable for skill 3.C as a justified claim."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "KE is maximum where net force changes from positive to negative, at x=5 m. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph data is complete: axes with units and vertices. The stem states net force and a frictionless surface."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions and each is explained. Options are parallel in format."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no arithmetic, typical AP load. Calculator designation is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound with a unique key, a complete graph, and distinct distractors. It is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: KE change equals area under the F-x graph, so KE is maximal where net force crosses zero from positive to negative (x=5 m). It requires reading one graph and one reasoning link, with no calculation. Distractors target common misconceptions (max force ends at 3 m, endpoint 7 m), but the conceptual depth is modest and suited to initial learning of the work-energy theorem rather than a full-mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m04-k1-q1",
+  "cellId": "ap_physics_c_mechanics-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Work = area under F-x: 4*3=12, +0.5*1*4=2, -0.5*1*4=-2, total 12 J",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "12.0 J"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Work as signed area under F-x graph; fits 3.2 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "12 J is unique: 12+2-2."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertices and axes fully specify the graph; stem clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct error and is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, light arithmetic, calculator allowed is fine."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean graph-area work item with distinct distractors; passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Work equals the area under the F-x graph. The graph splits into a rectangle (12 J) and two triangles (+2 J, -2 J) that cancel, giving 12 J. This is a single-concept graph read with trivial arithmetic and a simple sign consideration, with no extra linking step or proportional reasoning. It fits foundational practice better than a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m04-k1-q2",
+  "cellId": "ap_physics_c_mechanics-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Net force stays positive until x=4 m, so work keeps adding KE up to there. Past 4 m the force is negative and KE drops. So KE is greatest at 4 m.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "4.00 m"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Work-energy theorem with F-x graph; justification from representation. In scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "KE maximal at x=4 m where net force changes sign; unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data complete with labels, units, vertices; net force stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained; the midpoint distractor is weak but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Appropriate time and load; no arithmetic needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, correct item: kinetic energy peaks where net force crosses zero (4 m). Stimulus complete, distractors distinct, suitable load."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single concept: work-energy theorem applied to an F-x graph. The solver must see that KE keeps increasing while net force is positive and is maximum where the force crosses zero (x = 4 m). No calculation is needed; the cumulative area is only read qualitatively. Distractors (5 m, 3 m, 2.5 m) target the common misconceptions of picking the end point or the point where the force starts to decrease. The reading load is minimal and the stem is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m04-k2-q1",
+  "cellId": "ap_physics_c_mechanics-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Signed area: 24+4-2=26 J",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "26.0 J"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Work as signed area under F-x graph; topic 3.2, skill 2.B fit."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "26 J is unique and correct: 24+4-2."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data complete with axes, labels, units, and vertices; net force stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct misconceptions (ignoring sign, F0*x, averaging points); each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 s, light arithmetic, calculator allowed and consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean work-from-graph question with a correct key, a complete stimulus, and distinct distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Work as area under F-x graph: rectangle 24 J + triangle 4 J - triangle 2 J = 26 J. One concept, a graph read, and a sign trap on the negative area. Simple arithmetic and short wording. Fits a typical full-mock item rather than a basic-learning or advanced one.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m04-k2-q2",
+  "cellId": "ap_physics_c_mechanics-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "4.00 m",
+     "brief_reasoning": "Net force is positive until x=4 m and negative after it. Kinetic energy is 28 J at x=4 m and 26 J at x=5 m, so it is greatest at x=4 m.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Short reading task, no arithmetic burden, options are parallel position values.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean and passes all five criteria. It is a standard F-x graph question on where KE is greatest, with a unique key and distinct distractors."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: apply the work-energy theorem (KE is the area under the F-x graph). KE increases while the net force is positive and is maximal where the force crosses zero (x = 4 m). It needs no calculation, only a qualitative graph read plus one link from the sign of the force to the KE trend. The distractors are plausible, e.g. 3 m where the force starts to drop or 5 m as the endpoint, but they are easily ruled out.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m05-k0-q1",
+  "cellId": "ap_physics_c_mechanics-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "T=2 s, so ω=π rad/s. vmax=1 m/s, so A=vmax/ω=1/π≈0.318 m.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "0.318 m"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reads vmax and T from a v-t graph, then uses vmax = Aω with ω = 2π/T. This fits topic 7.3 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "vmax = 1 m/s and T = 2 s, so A = 1/π ≈ 0.318 m. The key is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph data are complete, with labeled axes and units, one full period, and a clean sinusoid. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct errors: dropping the 2π, multiplying vmax by T, and computing the maximum acceleration instead of the amplitude. The explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 90-105 s, with a short graph read and one calculation. The calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The graph gives vmax = 1 m/s and T = 2 s, so A = 0.318 m, which is the unique key. The distractors are distinct and each is explained. All five criteria pass."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read v_max (1 m/s) and period (2 s) from a velocity-time graph, recognize that v_max = A*omega, compute omega = 2*pi/T, and solve for A = 1/pi = 0.318 m. This involves one representation translation (graph to equation) and a short computational pathway with plausible distractors (pi, 2, 0.5). Reading and arithmetic loads are light, so the difficulty comes from legitimate sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m05-k0-q2",
+  "cellId": "ap_physics_c_mechanics-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "T=2 s so ω=π rad/s; a_max=ω·v_max=π(1)=3.14 m/s^2",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "3.14 m/s^2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reads vmax and T from a v-t graph, then uses a_max=vmax*omega. Fits 7.3 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "v=sin(pi t), omega=pi, a_max=pi=3.14 m/s^2. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph data is complete, with axes, units, a full period and a clear sinusoid. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (amplitude reported, wrong formula, extra factor of omega) and every wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, one graph read plus one formula, calculator allowed, no needless arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well-formed: a v-t graph gives T=2 s and vmax=1 m/s, so a_max=pi=3.14 m/s^2, and the distractors encode distinct errors."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Read v_max = 1 m/s and T = 2 s from the velocity-time graph, compute omega = 2*pi/T = pi rad/s, then a_max = omega*v_max = 3.14 m/s^2. One graph read and a short single-pathway calculation; distractors reflect common slips (dividing by omega, using omega^2). Fits introductory SHM representation skill and is not a full-mock-level multi-step item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m05-k1-q1",
+  "cellId": "ap_physics_c_mechanics-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "vmax=1 m/s, T=1 s, ω=2π rad/s, A=vmax/ω=0.159 m",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "0.159 m"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 7.3, reads T and vmax from v-t graph and applies vmax=A*omega. Fits 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "vmax=1 m/s, T=1 s, A=1/(2π)=0.159 m. Unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data complete with labeled axes with units, one full period, sinusoidal samples; vmax and T readable from gridlines."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained. Minor: 6.28 m option is described as maximum acceleration though it carries units of m."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 105 s, light calculation, calculator allowed, typical load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item: correct unique key 0.159 m, graph supports the question, distractors encode distinct errors. Minor unit inconsistency in one distractor rationale only."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Read v_max = 1.0 m/s and T = 1.0 s from the graph, compute omega = 2*pi/T, then A = v_max/omega = 0.159 m. This is a single-concept item with one representation read and simple arithmetic. It is a straightforward application of v_max = A*omega, suited to basic learning of SHM graphs rather than a full-mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m05-k1-q2",
+  "cellId": "ap_physics_c_mechanics-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "T=1 s so ω=2π; a_max=ω v_max=2π(1)=6.28 m/s^2",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "6.28 m/s^2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 7.3 representation reading plus a_max = omega*v_max; fits skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The graph is v = sin(2*pi*t), so T = 1 s and v_max = 1 m/s. a_max = 2*pi = 6.28 m/s^2, a unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph data are complete, with labeled axes and units and one full period. The stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct factor error and each is explained. The wording for the 39.5 option is slightly awkward but understandable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Single-step reading and computation of about 100 s, consistent with the calculator designation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, the graph supports the question, the distractors are distinct, and the item is in scope. Pass."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Read T = 1 s and v_max = 1 m/s from the velocity-time graph, compute ω = 2π/T, then a_max = ω·v_max = 6.28 m/s². There is one graph read and one short formula chain with trivial arithmetic. The distractors reflect standard errors (using v_max directly, f instead of ω, ω² factor). The item is straightforward and fits introductory practice rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m05-k2-q1",
+  "cellId": "ap_physics_c_mechanics-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "T=4 s so ω=π/2 rad/s; A=vmax/ω=0.6/1.571=0.382 m",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "0.382 m"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reads vmax and T from a v-t graph and applies v_max = A*omega with omega = 2*pi/T. This is squarely topic 7.3 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A = 0.6/(pi/2) = 0.382 m is unique. The graph is a sine with peak 0.6 at t=1 and period 4."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph data is complete with labeled axes and units. It shows one full period, and the peak falls on gridlines."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are distinct: wrong omega (pi/T), v*T, and the maximum acceleration. Each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is short, needs one calculation, and is consistent with calculator use."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item with a unique key, a complete graph, and distinct misconception-based distractors. Passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student reads the peak velocity (0.6 m/s) and the period (4 s) from a velocity-time graph, computes omega = 2*pi/T, and then uses v_max = A*omega to get A = 0.382 m. This needs a graph-to-equation translation and a short multi-step calculation. The arithmetic is simple, and the distractors reflect plausible errors such as using v_max*omega, v_max*T/(2*pi) with the wrong T, or dividing by the wrong factor.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m05-k2-q2",
+  "cellId": "ap_physics_c_mechanics-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "T=4 s so ω=π/2 rad/s. v_max=0.6 m/s. a_max=ω·v_max≈0.942 m/s².",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "0.942 m/s^2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reads v_max and T from a v-t graph, then applies a_max = v_max*omega. This is Topic 7.3 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The graph is a sine with v_max=0.6 and T=4. a_max = 0.6*pi/2 = 0.942 m/s^2, so the key is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Axes are labeled with units, one full period is shown, and the scale allows exact reading of 0.6 m/s and 4 s."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct errors (extra factor of omega, v/(2 pi T), amplitude reported as acceleration). Explanations cover each option, though tersely."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, calculator-friendly, about 100 s, with one clear representation read."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item. The key of 0.942 m/s^2 is verified from the graph (v_max=0.6 m/s, T=4 s). The distractors are distinct, and scope and load are appropriate."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Read v_max = 0.6 m/s and T = 4 s from a clean sinusoidal velocity graph, compute omega = 2*pi/T, then a_max = omega*v_max = 0.942 m/s^2. Single governing relation, one graph reading, minimal arithmetic. Distractors reflect common slips (omega squared, using frequency instead of omega).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-f01-k0",
+  "cellId": "ap_physics_c_mechanics-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Measure m with a balance. Release m from rest and find a with a motion detector (slope of v-t) or from a=2d/t². Vary m with slotted masses (0.05 to 0.25 kg). Do repeated trials and average, or fit v-t, to reduce uncertainty.",
+     "final_answer": "Measure m and a for each mass, vary m with slotted masses, repeat and average trials",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "1/a = 1/g + (I/(gR²))(1/m)",
+     "final_answer": "Vertical: 1/a; horizontal: 1/m; slope = I/(gR²)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Points (1/m, 1/a): (20,1.645),(10,0.875),(6.67,0.616),(5,0.485),(4,0.407). The best-fit line has slope ≈0.0774 kg·s²/m and intercept ≈0.097 s²/m.",
+     "final_answer": "Linear plot of 1/a (s²/m) vs 1/m (kg⁻¹), slope ≈0.077 kg·s²/m",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "I = slope·g·R² = 0.0774×9.8×0.01",
+     "final_answer": "I ≈ 7.6×10⁻³ kg·m²",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound 10-point experimental design and analysis bundle on a falling mass driving a disk. Linearization 1/a vs 1/m, slope I/(gR^2), and I of about 0.0076 kg·m^2 are consistent. The only weakness is that A1 names only the distance-and-time method and could be read as rejecting a motion detector, which is minor. Scope is acceptable and load is reasonable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.6 with 5.4 and 2.5, and the design/linearization focus matches 3.A. Parts C and D use graphing and calculation skills, which is acceptable for this bundle type."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are consistent with the data and the slope units are correct. The A1 row should accept a motion detector but lists no alternative, which is a minor rubric gap."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with labels, units and five rows. R is given. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so distractors do not apply. Common errors are listed for the key rows."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 27 minutes for 10 points is reasonable for an experimental design question. Calculator use is appropriate."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part lab-design item matching the AP Physics C FRQ lab style. Requires choosing the governing relation, linearizing a = mg/(m + I/R^2) to 1/a vs 1/m, plotting with a chosen scale, and extracting I from the slope (slope = I/(gR^2)). Concept depth is moderate and the reasoning chain is short but multi-part. Arithmetic is limited to five reciprocals and one slope with 3-sig-fig data, and the wording is clear with low reading load. No out-of-scope content.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-f01-k1",
+  "cellId": "ap_physics_c_mechanics-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Equipment: the disk on its frictionless axle, a light string wrapped around the rim, a set of known slotted masses with a hanger, a balance, and a motion detector (or a photogate on the pulley/disk, or a meterstick and stopwatch). Procedure: (1) Measure m with the balance and hang it from the string. (2) Release it from rest. (3) Record its position against time with the motion detector and take a as the slope of the velocity–time graph. If using a meterstick and stopwatch instead, time the fall through a measured height h and use a = 2h/t². (4) Change the independent variable by adding masses to the hanger, using at least 5 values of m, and repeat. To reduce uncertainty in a: do several trials for each mass and average them, or fit the slope of the v–t graph over many data points rather than using a single timing.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Use a balance to measure m. Release m from rest and measure a with a motion detector (slope of the v–t graph), or use a = 2h/t² from a timed fall through height h. Change m by adding known masses. Reduce uncertainty by averaging several trials for each mass, or by fitting the slope of the v–t graph."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Invert the equation: 1/a = 1/g + (I/(gR²))·(1/m). This is a straight line in 1/m.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Vertical axis: 1/a (s²/m). Horizontal axis: 1/m (kg⁻¹). Slope = I/(gR²) and intercept = 1/g."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Transformed points (1/m in kg⁻¹, 1/a in s²/m): (20, 1.626), (10, 0.862), (6.67, 0.608), (5, 0.486), (4, 0.411). Best-fit line: slope ≈ 0.076 kg·s²/m, intercept ≈ 0.105 s²/m.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Plot 1/a (s²/m) from 0 to 1.8 against 1/m (kg⁻¹) from 0 to 22. The points lie on a straight line; the best-fit line has slope ≈ 0.076 kg·s²/m and intercept ≈ 0.10 s²/m."
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Slope from points on the line: (1.626 − 0.411)/(20 − 4) ≈ 0.076 kg·s²/m. Then I = slope × g × R² = 0.076 × 9.8 × 0.01 ≈ 7.5×10⁻³ kg·m².",
+     "ambiguous_or_flawed": false,
+     "final_answer": "I ≈ 7.5×10⁻³ kg·m²"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A coherent experimental design and analysis FRQ on a disk with a falling mass. The data are complete and consistent with a = mg/(m + I/R^2). The linearization (1/a vs 1/m), the slope (about 0.076) and I (about 0.0075 kg·m^2) are verified and independently reproduced. The rubric is consistent, with a tolerance and a consistency-with-own-slope allowance. Scope fits topic 5.6 and skill 3.A, and the 10-point weight matches the Experimental Design and Analysis type.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The dominant demand is experimental design and analysis of rotational dynamics, within Unit 5. No out-of-scope content appears."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Rows are consistent. D1 accepts any value within 8%, and D3 accepts a value consistent with the student's own slope. A2 is strict, but it is explicit."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data, R, and the no-slip and frictionless-axle assumptions are all given. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not an MC item. The rubric lists common errors, such as plotting a versus m and using I = slope/(gR^2)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is reasonable for a 10-point lab FRQ. A calculator is appropriate."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "This is a standard AP Physics C lab-style free-response item in the form of a multi-part experimental design and analysis question. Part A asks for a procedure (equipment, how the independent variable is varied, one way to reduce uncertainty in a). Part B requires linearizing a = mg/(m+I/R^2), for example plotting 1/a against 1/m, which gives 1/a = (I/(gR^2))(1/m) + 1/g. Part C is a plot with a chosen scale and a best-fit line. Part D extracts I from the slope. The concepts are core: Newton's second law for translation and rotation, linearization, and graph analysis. The arithmetic is short with rounded data. The reading load is modest. The reasoning steps are moderate, and the representation changes are table to transformed variables to graph to slope to I. Nothing is out of scope, and the difficulty does not come from unfair sources.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 7,
+   "representation_changes": 4,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-f01-k2",
+  "cellId": "ap_physics_c_mechanics-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Equipment: the disk on its axle, string, a set of hanging masses, a balance, and a motion sensor (or a meter stick and stopwatch, or photogates). First measure m on the balance. Release the mass from rest. Measure its position against time with the motion sensor and take a from the slope of the v–t graph, or measure the fall distance d and time t and use a = 2d/t². To change the independent variable, swap in masses from 0.05 kg to 0.25 kg in 0.05 kg steps. To reduce uncertainty, do several trials for each mass and average them, and use a long fall distance.",
+     "final_answer": "Measure m with a balance. Release from rest and find a with a motion sensor (slope of v–t), or with a = 2d/t². Vary m from 0.05 to 0.25 kg. Repeat the trials and average.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Rearranging gives 1/a = 1/g + (I/(gR²))(1/m), which is linear in 1/m.",
+     "final_answer": "Plot 1/a (s²/m) on the vertical axis and 1/m (kg⁻¹) on the horizontal axis. The slope equals I/(gR²).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Points (1/m, 1/a): (20, 1.131), (10, 0.617), (6.67, 0.436), (5, 0.355), (4, 0.302). The best-fit line has slope ≈ 0.0519 and intercept ≈ 0.094 s²/m.",
+     "final_answer": "The plot of 1/a against 1/m is linear. The best-fit line has slope ≈ 0.052 kg·s²/m and intercept ≈ 0.094 s²/m.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "I = slope × g × R² = 0.0519 × 9.8 × 0.01",
+     "final_answer": "I ≈ 5.1×10⁻³ kg·m²",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a coherent experimental design and analysis FRQ on rotational Newton's second law, with a correct linearization and consistent rubric and values.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.6 with design (3.A) in Part A and linearization and analysis in the other parts. Mixed skills across parts are acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The 1/a versus 1/m linearization is correct. The slope of about 0.052 gives I of about 0.0051 kg·m². The rubric rows and tolerances are consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has full data and the stimulus states the assumptions (frictionless axle, light string, no slip)."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The rubric lists common errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is typical for a 10-point experimental design FRQ, with a calculator allowed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "This is a standard AP Physics C lab-style free-response item with four parts. Part A asks for a procedure (equipment, how to vary m, a way to reduce uncertainty in a). Part B requires choosing a linearization: from a = mg/(m + I/R^2), plot 1/a against 1/m, which gives slope I/(gR^2) and intercept 1/g. Part C asks the student to plot the data and draw a best-fit line. Part D requires reading the slope off the line and solving I = slope*g*R^2, using the given R = 0.1 m. The reasoning is moderate: one algebraic linearization, one graph construction, and one slope-to-I step. The governing law is given in the prompt, so there is no need to derive it. Arithmetic is light (five data points and one slope calculation) and the reading load is modest. Nothing is out of scope, and the wording is unambiguous. The skill 3.A procedure design is handled in a short part A. The item is full-mock appropriate and not advanced.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ }
+]

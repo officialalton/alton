@@ -1,0 +1,474 @@
+[
+ {
+  "key": "ap_statistics-f01-k0",
+  "cellId": "ap_statistics-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Explanatory variable: which treatment the patient gets (new medicine or placebo). Response variable: minutes of pain relief.",
+     "final_answer": "Explanatory variable: the treatment received (new medicine or placebo), which is categorical. Response variable: the number of minutes of pain relief, which is quantitative.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Randomly split the 130 patients into two groups of 65, give identical-looking pills and compare the results.",
+     "final_answer": "Number the patients 1 to 130. Use a random number generator to pick 65 different numbers; those patients get the new medicine and the other 65 get a placebo that looks, tastes and is given exactly like the medicine. Patients are not told which one they received. Record each patient's minutes of pain relief and compare the mean (or median) minutes for the two groups. Blinding is used because pain relief is self-reported: if patients knew which treatment they got, their expectations could change the relief they report (the placebo effect). Blinding means any difference between the groups can be put down to the medicine itself.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The bins add up to 65 patients. The 20–25 and 25–30 bins hold 10 + 4 = 14 patients, and 14/65 = 0.2154 (assuming each bin includes its left endpoint).",
+     "final_answer": "21.5%",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Running totals are 2, 14, 35, so the 33rd value (the median of 65) falls in the 10–15 class. The tallest bar is 10–15, with a longer tail to the right. Every value lies between 0 and 30.",
+     "final_answer": "For the 65 patients who got the new medicine, minutes of pain relief have one peak and are slightly skewed to the right. The peak is the 10–15 minute class. The median is also in the 10–15 minute class, so a typical patient got about 10 to 15 minutes of relief. Values run from the 0–5 class to the 25–30 class, so the range is at most 30 minutes. There are no apparent outliers.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "A good question names a population, names a variable that differs from patient to patient, and asks about the distribution or a typical value.",
+     "final_answer": "What is the typical number of hours that patients at this clinic wait before their appointment? This names the population (patients at this clinic) and the variable (hours each patient waits before the appointment). Wait times vary from patient to patient, so the question can be answered by collecting wait times for a sample of patients and analyzing them.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The multi-focus Q1 has 10 one-point rows over 5 parts. Part E assesses 1.A for 3 points, and the other parts assess their own skills. The histogram counts sum to 65, 14/65 = 21.5% is correct, and the median class is 10-15. The parts are somewhat over-scaffolded, but the item is acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part E targets 1.A (a valid investigative question). Parts A-D cover the related topics 1.2, 1.13, 1.5 and 1.6, all within Unit 1."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys check out: the histogram counts sum to 65, 14/65 = 21.5%, and the median class is 10-15. The rubric rows are consistent with the model answers and sum to 10."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The histogram data has axis titles, bins and counts, so it is complete. The wording is clear. The 130 planned patients versus the 65 earlier patients are distinguished in the stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no options. The common_errors listed in each row are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of a 22-minute Q1. The calculation is trivial, and the prompts are explicit, so the item is a little over-scaffolded but acceptable."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item covering routine Unit 1 skills: identifying explanatory and response variables, describing a completely randomized design with blinding, computing a percent from histogram counts (14/65 = 21.5%), describing shape, median class and range from a histogram, and writing a valid investigative question. Each part is standard and low-depth, but the item requires several written responses and moving between a histogram, a design description and a question. The computation is minimal and the context is clear, so this is typical full-mock material.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_statistics-f01-k1",
+  "cellId": "ap_statistics-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Explanatory variable = the treatment, new medicine or placebo. Response variable = the minutes of pain relief.",
+     "final_answer": "Explanatory variable: the treatment received (new medicine or placebo), which is categorical. Response variable: the number of minutes of pain relief, which is quantitative.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "brief_reasoning": "Use random assignment into two groups of 55, with placebo pills that look the same as the medicine.",
+     "final_answer": "Number the patients 1–110. Use a random number generator to pick 55 different numbers; those patients get the new medicine and the other 55 get a placebo pill that looks identical. Record each patient's minutes of pain relief and compare the two groups. Patients are not told which pill they got. Blinding is used so that patients' expectations (the placebo effect) affect both groups equally. Any difference in reported pain relief can then be credited to the medicine, not to knowing which treatment they received.",
+     "ambiguous_or_flawed": false,
+     "item": "B"
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The bins at 20 minutes or more hold 10+4+1 = 15 patients. 15/55 = 0.2727, about 27.3%.",
+     "final_answer": "27.3%",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The cumulative counts are 3, 11, 28, so the 28th of 55 values (the median) is in the 10–15 bin. The peak is at 10–15 and the tail stretches to the right.",
+     "final_answer": "The distribution of minutes of pain relief for the 55 treated patients is unimodal and slightly skewed right. It peaks in the 10–15 minute class and has a tail out to 30–35 minutes. The median, a typical value, falls in the 10–15 minute class. Values range from the 0–5 class to the 30–35 class, so the range is at most about 35 minutes.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "The question names a population and a quantitative variable that varies from patient to patient, and it asks for a summary value, so data must be collected to answer it.",
+     "final_answer": "For patients at this clinic, what is the typical (mean) number of hours a patient waits before an appointment?",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The multi-focus Q1 has 10 one-point rows across 5 parts, and each part is judged against its own skill. Histogram counts sum to 55 and the key values (27.3%, median class 10-15) are correct. The stimulus is complete and belongs to the same context. Part E assesses 1.A with a valid investigative question. Minor wording looseness in B and E3 is acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts span topics 1.2, 1.5, 1.6, 1.13 and 1.10, as is normal for a multi-focus Q1. Part E addresses skill 1.A directly. Nothing from later units appears."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The answer keys are consistent with the histogram data. Part C: 15/55 = 27.3%. Part D: the median is in the 10-15 class and the shape is right-skewed, which is defensible. The rubric rows are split into 1-point meaning-based rows."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The histogram data is complete (axis titles, bins, counts), and the frequencies total 55, matching the stem. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so the distractors criterion does not apply in the MC sense. The common_errors listed per row are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for a Statistics Q1 of about 22 minutes. The calculator use is minimal and the designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item covering standard Unit 1 skills: identifying variable types, describing a completely randomized blinded design, reading a histogram (percent at least 20 = 15/55 = 27.3%, median class 10-15), describing shape/center/spread in context, and writing a valid investigative question. Each part is a routine application with low computation and modest reading; the breadth of parts and the need to write in context make it suitable for full mocks rather than basic learning. No unfair difficulty sources.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_statistics-f01-k2",
+  "cellId": "ap_statistics-f01",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:B:flagged",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "instant_reject_wrong_key"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Treatment assigned (plant food or water) is the explanatory variable; hours of growth toward light is the response.",
+     "final_answer": "Explanatory variable: the treatment (new plant food or plain water), which is categorical. Response variable: the number of hours of growth toward the light, which is quantitative.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Number the plants 1–126 and use a random number generator to pick 63 unique numbers; those plants get the plant food and the other 63 get plain water that looks the same. The person who records growth should not know which plant got which liquid.",
+     "final_answer": "Randomly assign 63 plants to the plant food and 63 to plain water that looks identical, then compare the mean hours of growth. A plant has no awareness, so it can't actually be 'blinded'. What matters is that whoever applies the liquids and measures the growth doesn't know the assignments, so their expectations can't bias the measurements.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "Blinding the plants makes no sense because plants have no expectations. Only the people handling and measuring the plants can be blinded, which also makes the 'placebo' wording odd."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "(10+4+1)/63 = 15/63 = 0.238",
+     "final_answer": "23.8%",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The counts are 6, 10, 16, 16, 10, 4, 1, so the cumulative counts are 6, 16, 32. The median is the 32nd value, which falls in the 20–30 class.",
+     "final_answer": "For the 63 treated plants, hours of growth toward the light are roughly symmetric and mound-shaped, with a slight skew to the right and a single peak at 20–40 hours. The median is in the 20–30 hour class. Values run from the 0–10 class up to the 60–70 class, so the range is at most about 70 hours.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "The question needs a population, a variable, and data that vary from plant to plant.",
+     "final_answer": "What is the typical number of flowers produced per plant by the plants in this greenhouse this season, and how much does that number vary from plant to plant? (Population: all plants in the greenhouse. Variable: number of flowers per plant.)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "wrong_key"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Fails on key and scoring. Part B asks to blind plants, which is conceptually invalid. Part D's key (unimodal peak at 20-30, skewed right) contradicts the tied bars at 16 and the near-symmetric shape. The context wording is also inconsistent (placebo, pill).",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle spans the allowed topics and includes a valid-investigative-question part (1.A), which fits the multi-focus Q1 structure."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part B requires blinding 'the plants', which is not meaningful because plants have no expectations; the rubric B2 rewards expectations of 'individuals'. Part D key says unimodal with peak at 20-30 and skewed right, but bins 20-30 and 30-40 tie at 16 (no unique peak), and the distribution is nearly symmetric (mean about 29), so the shape key is not uniquely defensible. The independent solver also described the shape as roughly symmetric and flagged B."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Histogram data is complete (axes, bins, counts). However, the title says 'placebo-controlled' with plants being blinded, which is an incoherent context; the common_errors text mentions 'type of pill', a leftover from another context."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not an MC item; common_errors lists are present, though one refers to a pill context that does not match."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Load is typical for a 22-minute, 10-point Q1."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Five short, routine parts: identify variables and their types, describe a completely randomized design with blinding, compute a simple percent from histogram counts (15/63), describe shape, median class and spread from a histogram, and write an investigative question. Each part uses a single standard skill with minimal reasoning and light computation. The data are consistent (the counts sum to 63). No unfair difficulty sources.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_statistics-f02-k0",
+  "cellId": "ap_statistics-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "X is binomial with n=10 and p=0.35. P(X≥3) = 1 − [P(0)+P(1)+P(2)] = 1 − (0.01346+0.07249+0.17565) = 1 − 0.26160.",
+     "final_answer": "X ~ Binomial(n=10, p=0.35); P(X≥3) ≈ 0.738",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Mean of p̂ = p = 0.35. SD = sqrt(0.35·0.65/200) ≈ 0.0337. The sample is random and 200 is less than 10% of a large county. np = 70 ≥ 10 and n(1−p) = 130 ≥ 10, so the sampling distribution is approximately normal.",
+     "final_answer": "Mean = 0.35, SD ≈ 0.0337; approximately normal because np=70 ≥ 10 and n(1−p)=130 ≥ 10",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "z = (0.4 − 0.35)/0.03373 ≈ 1.48, so P(Z > 1.48) ≈ 0.069.",
+     "final_answer": "≈ 0.069",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "p̂ = 128/400 = 0.32. SE = sqrt(0.32·0.68/400) ≈ 0.02332. Margin = 1.96·0.02332 ≈ 0.0457, so the interval is 0.32 ± 0.0457.",
+     "final_answer": "(0.274, 0.366)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "0.5 is not inside the interval (0.274, 0.366), so 0.5 is not a plausible value for p. Meaning of 95% confidence: if many random samples were taken and an interval built from each, about 95% of those intervals would contain the true proportion.",
+     "final_answer": "Yes. 0.5 lies outside (0.274, 0.366), so this is convincing evidence against the reporter's claim. 95% confidence means about 95% of intervals made this way would capture the true proportion of supporters.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Ten 1-point rows over five parts, about 22 minutes, each part consistent with its own skill. Keys are unique and consistent with the rubric. Minor looseness: some rows bundle two elements, and part E uses \"convincing evidence\" for an interval. Passes.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Five routine parts, each a single standard procedure: binomial complement probability, sampling-distribution mean/SD with a normality condition check, a normal-area calculation, a one-proportion z-interval, and an interval-based conclusion with confidence-level interpretation. No single part is deep, but the multi-part chain (binomial -> sampling distribution -> normal area -> interval -> claim evaluation) requires choosing among procedures, checking conditions, and linking a result to a claim, which fits full-mock FRQ difficulty. Reading is short and numbers are clean; calculator use is modest with rounding specified. Scope note: parts D and E use confidence-interval inference, which the Unit 2 scope lists as out of scope (Units 3-4), though the bundle is declared to span 3.2-3.4; consider moving D-E to a Unit 3-4 bundle. This is a scope/alignment concern, not a source of added difficulty.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_statistics-f02-k1",
+  "cellId": "ap_statistics-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "X ~ Binomial(n=8, p=0.35). P(X≥5) = P(5)+P(6)+P(7)+P(8) = 0.0808+0.0217+0.0033+0.0002",
+     "final_answer": "X is binomial with n=8 and p=0.35; P(X≥5) ≈ 0.106",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Mean = p = 0.35. SD = sqrt(0.35·0.65/250) ≈ 0.0302. np = 87.5 and n(1−p) = 162.5 are both at least 10, so the distribution is approximately normal. The sample is also less than 10% of a large county, so independence is reasonable.",
+     "final_answer": "Mean = 0.35, SD ≈ 0.0302; approximately normal because 87.5 ≥ 10 and 162.5 ≥ 10",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "z = (0.39 − 0.35)/0.03017 ≈ 1.33, so P(p̂ > 0.39) = P(Z > 1.33) ≈ 0.092",
+     "final_answer": "≈ 0.092",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "p̂ = 111/300 = 0.37. SE = sqrt(0.37·0.63/300) ≈ 0.02787. Margin of error = 1.96 × 0.02787 ≈ 0.0546",
+     "final_answer": "(0.315, 0.425)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "0.5 is not inside the interval (0.315, 0.425), so 0.5 is not a plausible value. Interpretation of the confidence level: if many random samples of 300 were taken and a 95% interval was built from each one, about 95% of those intervals would capture the true proportion.",
+     "final_answer": "Yes, this is convincing evidence against the claim, because 0.5 lies outside the 95% interval (0.315, 0.425). 95% confidence means that about 95% of intervals built this way would capture the true proportion of voters who support the bond.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Integrated 10-point FRQ with five 2-point parts, each matched to its own topic and skill. The keys are correct and agree with the solver, and the rubric rows are consistent. Rounding is stated, the stimulus is complete, and the load is typical of a Question 4.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part matches its own topic and skill. Part A is binomial (2.10, 3.C), B and C are the sampling distribution of p-hat (3.2), D is a one-sample z interval (3.3), and E is a claim judged by the interval plus the confidence-level interpretation (3.4). No deleted topics appear.</scope_skill_notes>\n<parameter name=\"key_scoring_notes\">Keys 0.106, 0.0302, 1.33 with 0.092, and (0.315, 0.425) are correct. The rows are 1-point rows with sensible dependencies. Part C rounds to 0.092 whether or not z is rounded first."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives the population proportion and the sample sizes. The wording is clear and rounding is stated in every calculation part."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so the distractor criterion does not apply. Common errors are listed in each rubric row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is about 22 minutes and a calculator is allowed and appropriate. The format matches the standard Statistics Question 4."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item that mirrors a full AP mock question. It covers a binomial tail probability, the mean and SD of p-hat with a normality check, a normal-approximation probability, a one-sample z-interval and an interpretation linking the interval to a claim. Each part is standard and takes 2-4 steps. No part uses long arithmetic, and all rounding is specified. The only extra reasoning is the link from the interval to the claim in part E. The CI in parts D and E stretches the stated Unit 2 scope into inference, but it is a routine, scaffolded use. The item suits a full mock but is not an advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 12,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_statistics-f02-k2",
+  "cellId": "ap_statistics-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "X ~ Binomial(n=12, p=0.45). P(X≤4) ≈ 0.000766+0.007523+0.033853+0.092327+0.169965 = 0.3044, so P(X≥5) = 1 − 0.3044 ≈ 0.696.",
+     "final_answer": "X ~ Binomial(12, 0.45); P(X ≥ 5) ≈ 0.696",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "brief_reasoning": "Mean = p = 0.45. SD = sqrt(0.45·0.55/250) ≈ 0.0315. Normal check: np = 112.5 ≥ 10 and n(1−p) = 137.5 ≥ 10. The sample is also less than 10% of a large population, so the SD formula applies.",
+     "final_answer": "Mean = 0.45, SD ≈ 0.0315; approximately normal because np = 112.5 and n(1−p) = 137.5 are both at least 10",
+     "item": "B",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "z = (0.5 − 0.45)/0.03146 ≈ 1.59, so P(Z > 1.59) ≈ 0.056.",
+     "final_answer": "≈ 0.056",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "p̂ = 188/400 = 0.47. SE = sqrt(0.47·0.53/400) ≈ 0.02496. Margin of error = 1.96 × 0.02496 ≈ 0.0489. Interval: 0.47 ± 0.0489.",
+     "final_answer": "(0.421, 0.519)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "0.5 lies inside the interval (0.421, 0.519), so 0.5 is a plausible value for the population proportion. Confidence level: if we took many random samples of 400 and built a 95% interval from each, about 95% of those intervals would capture the true proportion.",
+     "final_answer": "No. Since 0.5 is inside the 95% interval, the data do not give convincing evidence against the claim. About 95% of intervals built this way would capture the true proportion of customers who return an item.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The 10-point, five-part structure and the context are fine, but the scoring rubric has consistency problems, so I fail the item on key/scoring. Parts A and C match the target skill 3.C and the stated values are correct. Parts B, D and E are labeled 3.D, 3.E and 4.F, which is acceptable for a multi-focus question.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A and C fit skill 3.C, and topics 2.10 and 3.2 through 3.4 are in the bundle scope. No deleted topics appear. Inference for a proportion (part D) lies in Unit 3, but the bundle explicitly spans those topics."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Rubric row problems:\n1. Row B1 combines two things in one point: the mean (0.45) and the standard deviation (0.0315).\n2. Row C2 requires the answer 0.056, but a student who uses the unrounded SD gets a slightly different z. The rubric gives no numeric tolerance for rows A2, B1, C1 or C2, so a correct 0.0315 versus 0.03146 could be marked inconsistently.\n3. Row E1 combines the comparison, the conclusion and the context into one point. Row E2 requires E1, so a student with a correct interpretation but a flawed E1 loses both points.\n4. In part A, the dependency of A2 on A1 would penalize a student who computes 0.696 correctly but omits naming the distribution.\n5. Part B's rubric does not require checking the 10% condition, which is acceptable here because the stem says a large population."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "A text-only stimulus is adequate. The wording is clear, and rounding is stated wherever decimals are requested."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The rubric lists plausible common errors for each row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load of about 22 minutes and 10 points matches the Statistics FRQ standard, and calculator use is appropriate."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item with five routine parts: binomial P(X>=5) via calculator, mean and SD of p-hat with a normality check, a normal-approximation probability, a one-sample z interval, and an interpretation linking the interval to a claim and to the confidence level. Each part is standard AP-level and needs only calculator-friendly computation with clear rounding instructions. The difficulty comes from sequencing several procedures and interpreting results, not from heavy arithmetic or reading. Part D (confidence interval) belongs to Unit 4, so it is slightly outside the stated Unit 2 scope, though the bundle is said to span related topics. This is appropriate for a full mock exam rather than basic learning.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 720
+  }
+ }
+]

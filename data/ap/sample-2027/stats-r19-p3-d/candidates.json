@@ -1,0 +1,2332 @@
+[
+ {
+  "candidateKey": "ap_statistics-m01-k0",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.1",
+  "unitCode": "1",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n_stat_vs_nonstat",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Recognizing a statistical question (one that anticipates variability in data) versus a deterministic, arithmetic, or opinion question. Single core concept, very short stem, no computation, and distractors are clearly non-statistical. Foundational topic 1.1 skill, below full-mock difficulty.",
+  "payload": {
+   "archetype": "st_n_stat_vs_nonstat",
+   "topic": "1.1",
+   "skill": "1.A",
+   "calculator": "allowed",
+   "stem": "A teacher asks students to write a question that requires a statistical investigation. Which of the following questions does so?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "If each of 4 walkers takes 8,000 steps in a day, how many steps do the walkers take altogether?",
+     "why": "It is answered by a fixed calculation with the given numbers, so no data have to be collected and analyzed.",
+     "value": null
+    },
+    {
+     "text": "How much do the daily numbers of steps vary among the adult residents of a city?",
+     "why": "It asks about a variable that takes different values for different individuals in a population, so it is answered by collecting and analyzing data.",
+     "value": null
+    },
+    {
+     "text": "Is a brisk walk a nobler form of exercise than a swim?",
+     "why": "It asks for a moral or aesthetic judgment, which no data on a measured variable can settle.",
+     "value": null
+    },
+    {
+     "text": "How many days are there in a leap year?",
+     "why": "It has a single factual answer that can be looked up, so no variability among individuals is anticipated.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 60,
+   "facts": [],
+   "blueprint": {
+    "id": "st_n_stat_vs_nonstat",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Recognize a question that anticipates variability and can be answered with data",
+    "topic": "1.1",
+    "skill": "1.A",
+    "student_thinking": [
+     "Ask of each question whether its answer would be the same every time or would vary among the individuals studied",
+     "Keep only the question about a measurable variable across a population and reject lookups, fixed calculations and opinions"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Recognize a question that anticipates variability and can be answered with data",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "lookup",
+      "description": "It has a single factual answer that can be looked up, so no variability among individuals is anticipated."
+     },
+     {
+      "id": "arithmetic",
+      "description": "It is answered by a fixed calculation with the given numbers, so no data have to be collected and analyzed."
+     },
+     {
+      "id": "opinion",
+      "description": "It asks for a moral or aesthetic judgment, which no data on a measured variable can settle."
+     }
+    ],
+    "verification": {
+     "independent_path": "every context pairs one question about a varying measurement with a lookup, a fixed calculation and an opinion, written and checked by hand",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "claim_justification",
+     "interpretation"
+    ]
+   },
+   "seed": 10700,
+   "pack_id": "st_n_stat_vs_nonstat-s10700",
+   "explanation_en": "The correct answer is How much do the daily numbers of steps vary among the adult residents of a city?. It asks about a variable that takes different values for different individuals in a population, so it is answered by collecting and analyzing data.\nIf each of 4 walkers takes 8,000 steps in a day, how many steps do the walkers take altogether? is incorrect: It is answered by a fixed calculation with the given numbers, so no data have to be collected and analyzed.\nIs a brisk walk a nobler form of exercise than a swim? is incorrect: It asks for a moral or aesthetic judgment, which no data on a measured variable can settle.\nHow many days are there in a leap year? is incorrect: It has a single factual answer that can be looked up, so no variability among individuals is anticipated."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n_stat_vs_nonstat",
+   "facts": [],
+   "seed": 10700
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 45-60 seconds with minimal reading, needs no calculation, and its difficulty is appropriate for an introductory topic.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean, simple item on recognizing a statistical question. The key is unique, the distractors are distinct, and the item is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Recognizing a statistical question (one that anticipates variability in data) versus a deterministic, arithmetic, or opinion question. Single core concept, very short stem, no computation, and distractors are clearly non-statistical. Foundational topic 1.1 skill, below full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m01-k1",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.1",
+  "unitCode": "1",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n_stat_vs_nonstat",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recognition: the student must identify the question that anticipates variability in data (option D) versus a subjective opinion, a fact lookup, and a deterministic calculation. One reasoning step, no computation, short reading, no representation changes. Fits introductory topic 1.1 / skill 1.A.",
+  "payload": {
+   "archetype": "st_n_stat_vs_nonstat",
+   "topic": "1.1",
+   "skill": "1.A",
+   "calculator": "allowed",
+   "stem": "A teacher asks students to write a question that requires a statistical investigation. Which of the following questions does so?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Is the smell of rye bread more beautiful than the smell of wheat bread?",
+     "why": "It asks for a moral or aesthetic judgment, which no data on a measured variable can settle.",
+     "value": null
+    },
+    {
+     "text": "What is the legal minimum weight for a loaf of bread sold in the state, according to the state's regulations?",
+     "why": "It has a single factual answer that can be looked up, so no variability among individuals is anticipated.",
+     "value": null
+    },
+    {
+     "text": "If each of 12 loaves weighs 500 grams, what is the total weight of the loaves?",
+     "why": "It is answered by a fixed calculation with the given numbers, so no data have to be collected and analyzed.",
+     "value": null
+    },
+    {
+     "text": "How much do the weights of the loaves produced by a bakery on one day vary?",
+     "why": "It asks about a variable that takes different values for different individuals in a population, so it is answered by collecting and analyzing data.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 60,
+   "facts": [],
+   "blueprint": {
+    "id": "st_n_stat_vs_nonstat",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Recognize a question that anticipates variability and can be answered with data",
+    "topic": "1.1",
+    "skill": "1.A",
+    "student_thinking": [
+     "Ask of each question whether its answer would be the same every time or would vary among the individuals studied",
+     "Keep only the question about a measurable variable across a population and reject lookups, fixed calculations and opinions"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Recognize a question that anticipates variability and can be answered with data",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "lookup",
+      "description": "It has a single factual answer that can be looked up, so no variability among individuals is anticipated."
+     },
+     {
+      "id": "arithmetic",
+      "description": "It is answered by a fixed calculation with the given numbers, so no data have to be collected and analyzed."
+     },
+     {
+      "id": "opinion",
+      "description": "It asks for a moral or aesthetic judgment, which no data on a measured variable can settle."
+     }
+    ],
+    "verification": {
+     "independent_path": "every context pairs one question about a varying measurement with a lookup, a fixed calculation and an opinion, written and checked by hand",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "claim_justification",
+     "interpretation"
+    ]
+   },
+   "seed": 10701,
+   "pack_id": "st_n_stat_vs_nonstat-s10701",
+   "explanation_en": "The correct answer is How much do the weights of the loaves produced by a bakery on one day vary?. It asks about a variable that takes different values for different individuals in a population, so it is answered by collecting and analyzing data.\nIs the smell of rye bread more beautiful than the smell of wheat bread? is incorrect: It asks for a moral or aesthetic judgment, which no data on a measured variable can settle.\nWhat is the legal minimum weight for a loaf of bread sold in the state, according to the state's regulations? is incorrect: It has a single factual answer that can be looked up, so no variability among individuals is anticipated.\nIf each of 12 loaves weighs 500 grams, what is the total weight of the loaves? is incorrect: It is answered by a fixed calculation with the given numbers, so no data have to be collected and analyzed."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n_stat_vs_nonstat",
+   "facts": [],
+   "seed": 10701
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly targets topic 1.1 and skill 1.A: recognizing a question that anticipates variability and requires a statistical investigation. No later-unit content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is the only question about a varying measurable variable across a population. A is an opinion, B is a lookup, and C is a fixed calculation. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and none is given. The wording is clear US English."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (opinion, lookup, fixed arithmetic) and the explanation addresses every wrong option. The key is the longest option, but only mildly so, and the parallel question format keeps the length cue negligible."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, minimal reading, no calculator needed (calculator allowed is harmless). This is typical of the CED sample items for 1.A."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, single-skill 1.A question with a unique key, distinct distractors tied to named misconceptions, and appropriate time and reading load. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recognition: the student must identify the question that anticipates variability in data (option D) versus a subjective opinion, a fact lookup, and a deterministic calculation. One reasoning step, no computation, short reading, no representation changes. Fits introductory topic 1.1 / skill 1.A.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m02-k0",
+  "cellId": "ap_statistics-m02",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.11",
+  "unitCode": "1",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n_plan_unbiased",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Student recognizes the SRS plan among voluntary response, convenience, and judgment sampling. Single-concept recognition, no computation, short stem, one reasoning step. Directly assesses topic 1.11 / skill 2.B at an introductory level.",
+  "payload": {
+   "archetype": "st_n_plan_unbiased",
+   "topic": "1.11",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "A researcher wants to estimate the proportion of households with a vegetable garden among the 480 households in a village and has a complete list of the households. The sample size will be $50$. Which of the following plans is most likely to give an estimate that is not biased?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Post the survey on the village's website and use the answers of the households that choose to respond.",
+     "why": "Volunteers or respondents who choose to reply can differ from the whole population, so the estimate can be biased.",
+     "value": null
+    },
+    {
+     "text": "Survey the first $50$ households that the researcher meets while walking along the main street.",
+     "why": "Selecting the individuals who are easiest to reach leaves out the others and tends to give a biased estimate.",
+     "value": null
+    },
+    {
+     "text": "Number the households on the list from $1$ to $480$, use a random number generator to choose $50$ different numbers, and survey those households.",
+     "why": "Every individual on the complete list has the same chance of being chosen, so the sample tends to represent the whole population.",
+     "value": null
+    },
+    {
+     "text": "Ask the village council to choose $50$ households that it considers typical of the village.",
+     "why": "Selecting individuals that someone considers typical introduces the chooser's judgment and does not give every individual a chance.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 80,
+   "facts": [
+    "N=480",
+    "n=50"
+   ],
+   "blueprint": {
+    "id": "st_n_plan_unbiased",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Choose the sampling plan that gives every individual a chance and avoids selection bias",
+    "topic": "1.11",
+    "skill": "2.B",
+    "student_thinking": [
+     "Compare how each plan chooses the individuals and who could be left out",
+     "Select the plan that uses chance with a complete list and reject plans driven by volunteering, convenience or judgment"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Choose the sampling plan that gives every individual a chance and avoids selection bias",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "voluntary",
+      "description": "Volunteers or respondents who choose to reply can differ from the whole population, so the estimate can be biased."
+     },
+     {
+      "id": "convenience",
+      "description": "Selecting the individuals who are easiest to reach leaves out the others and tends to give a biased estimate."
+     },
+     {
+      "id": "judgment",
+      "description": "Selecting individuals that someone considers typical introduces the chooser's judgment and does not give every individual a chance."
+     }
+    ],
+    "verification": {
+     "independent_path": "each context lists one random-selection plan on a complete list and three plans with named selection problems, written and checked by hand",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "claim_justification",
+     "procedure_choice"
+    ]
+   },
+   "seed": 10700,
+   "pack_id": "st_n_plan_unbiased-s10700",
+   "explanation_en": "The correct answer is Number the households on the list from $1$ to $480$, use a random number generator to choose $50$ different numbers, and survey those households.. Every individual on the complete list has the same chance of being chosen, so the sample tends to represent the whole population.\nPost the survey on the village's website and use the answers of the households that choose to respond. is incorrect: Volunteers or respondents who choose to reply can differ from the whole population, so the estimate can be biased.\nSurvey the first $50$ households that the researcher meets while walking along the main street. is incorrect: Selecting the individuals who are easiest to reach leaves out the others and tends to give a biased estimate.\nAsk the village council to choose $50$ households that it considers typical of the village. is incorrect: Selecting individuals that someone considers typical introduces the chooser's judgment and does not give every individual a chance."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n_plan_unbiased",
+   "facts": [
+    "N=480",
+    "n=50"
+   ],
+   "seed": 10700
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Choosing a random sampling plan that avoids bias is squarely Topic 1.11 and skill 2.B. Everything is in Unit 1 scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only the numbered list with random number generator is a random sample from the complete frame. The other three plans are voluntary response, convenience and judgment samples. The key is unique. The wording 'most likely to give an estimate that is not biased' is slightly awkward but clear."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem gives the population size, the complete list and the sample size. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct named misconception: voluntary response, convenience, and judgment. The explanation addresses each wrong option. The key is the longest option, a mild length cue, but it is acceptable given the detail an SRS plan needs."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60-80 seconds, needs no calculation, and is typical of AP Statistics multiple-choice items."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, standard sampling-method question. It has a unique key, three distinct misconception distractors, and appropriate scope and load. I recommend acceptance."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student recognizes the SRS plan among voluntary response, convenience, and judgment sampling. Single-concept recognition, no computation, short stem, one reasoning step. Directly assesses topic 1.11 / skill 2.B at an introductory level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m02-k1",
+  "cellId": "ap_statistics-m02",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.11",
+  "unitCode": "1",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n_plan_unbiased",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: recognize that only the simple random sample from the roster avoids bias, versus convenience, judgment-based, and voluntary-response plans. No computation, a short stem, one reasoning step, and no representation changes. This is a standard introductory question on random sampling.",
+  "payload": {
+   "archetype": "st_n_plan_unbiased",
+   "topic": "1.11",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "A researcher wants to estimate the mean number of hikes per year of a member among the 360 members of a hiking club and has the membership roster. The sample size will be $40$. Which of the following plans is most likely to give an estimate that is not biased?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Ask the $40$ members who arrive first at the next club meeting.",
+     "why": "Selecting the individuals who are easiest to reach leaves out the others and tends to give a biased estimate.",
+     "value": null
+    },
+    {
+     "text": "Ask $40$ members whom the club president knows to be frequent hikers.",
+     "why": "Selecting individuals that someone considers typical introduces the chooser's judgment and does not give every individual a chance.",
+     "value": null
+    },
+    {
+     "text": "Send an e-mail to all members and use the first $40$ replies.",
+     "why": "Volunteers or respondents who choose to reply can differ from the whole population, so the estimate can be biased.",
+     "value": null
+    },
+    {
+     "text": "Assign each member a number from the roster, select $40$ different numbers at random, and ask those members.",
+     "why": "Every individual on the complete list has the same chance of being chosen, so the sample tends to represent the whole population.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 80,
+   "facts": [
+    "N=360",
+    "n=40"
+   ],
+   "blueprint": {
+    "id": "st_n_plan_unbiased",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Choose the sampling plan that gives every individual a chance and avoids selection bias",
+    "topic": "1.11",
+    "skill": "2.B",
+    "student_thinking": [
+     "Compare how each plan chooses the individuals and who could be left out",
+     "Select the plan that uses chance with a complete list and reject plans driven by volunteering, convenience or judgment"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Choose the sampling plan that gives every individual a chance and avoids selection bias",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "voluntary",
+      "description": "Volunteers or respondents who choose to reply can differ from the whole population, so the estimate can be biased."
+     },
+     {
+      "id": "convenience",
+      "description": "Selecting the individuals who are easiest to reach leaves out the others and tends to give a biased estimate."
+     },
+     {
+      "id": "judgment",
+      "description": "Selecting individuals that someone considers typical introduces the chooser's judgment and does not give every individual a chance."
+     }
+    ],
+    "verification": {
+     "independent_path": "each context lists one random-selection plan on a complete list and three plans with named selection problems, written and checked by hand",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "claim_justification",
+     "procedure_choice"
+    ]
+   },
+   "seed": 10701,
+   "pack_id": "st_n_plan_unbiased-s10701",
+   "explanation_en": "The correct answer is Assign each member a number from the roster, select $40$ different numbers at random, and ask those members.. Every individual on the complete list has the same chance of being chosen, so the sample tends to represent the whole population.\nAsk the $40$ members who arrive first at the next club meeting. is incorrect: Selecting the individuals who are easiest to reach leaves out the others and tends to give a biased estimate.\nAsk $40$ members whom the club president knows to be frequent hikers. is incorrect: Selecting individuals that someone considers typical introduces the chooser's judgment and does not give every individual a chance.\nSend an e-mail to all members and use the first $40$ replies. is incorrect: Volunteers or respondents who choose to reply can differ from the whole population, so the estimate can be biased."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n_plan_unbiased",
+   "facts": [
+    "N=360",
+    "n=40"
+   ],
+   "seed": 10701
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60-80 seconds, involves no calculation and has a light reading load. It is typical of AP Statistics multiple-choice items.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean, standard sampling-method item. Its key is unique and its distractors map to distinct named biases. It fits the scope, the skill and the exam format."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: recognize that only the simple random sample from the roster avoids bias, versus convenience, judgment-based, and voluntary-response plans. No computation, a short stem, one reasoning step, and no representation changes. This is a standard introductory question on random sampling.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m03-k0",
+  "cellId": "ap_statistics-m03",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.12",
+  "unitCode": "1",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n_bias_direction",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recognition of sampling bias from a convenience sample. The stem gives the direction of the bias, so the student only picks the matching option and rejects the misconceptions that chance selection or a large n removes bias. There is no computation, one reasoning step, and no representation change.",
+  "payload": {
+   "archetype": "st_n_bias_direction",
+   "topic": "1.12",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "To estimate the proportion of adults in the city who own a laptop, a researcher interviews $400$ adults selected at the checkout counters of a computer store. Shoppers at a computer store are more likely to own a laptop than other adults in the city. Which of the following statements about the estimates from this plan is correct?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "There is no bias, because the adults are chosen by chance from those who check out.",
+     "why": "Choosing by chance among the individuals who happen to be available does not remove the bias, because those who are available differ from the whole population.",
+     "value": null
+    },
+    {
+     "text": "The estimates will tend to be too small, because shoppers at a computer store are less likely to own a laptop than other adults in the city, and only those shoppers can be selected.",
+     "why": "Reverses the direction: the stated difference between the sampled group and the population pushes the estimates the other way.",
+     "value": null
+    },
+    {
+     "text": "The estimates will tend to be too large, because shoppers at a computer store are more likely to own a laptop than other adults in the city, and only those shoppers can be selected.",
+     "why": "The sampled individuals are not representative of the population, and the stated difference shows which way the estimates are pushed.",
+     "value": null
+    },
+    {
+     "text": "There is no bias, because a sample of $400$ is large.",
+     "why": "A large sample does not remove bias from a flawed way of selecting individuals; it only makes the biased estimate more precise.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 85,
+   "facts": [
+    "dirn=high"
+   ],
+   "blueprint": {
+    "id": "st_n_bias_direction",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Decide the direction of the bias that a flawed way of selecting individuals produces",
+    "topic": "1.12",
+    "skill": "2.B",
+    "student_thinking": [
+     "Compare the people who can be selected with the whole population on the variable being estimated",
+     "Use the stated difference to decide whether the estimates are pushed up or down, and reject claims that chance within the available group or a large sample removes bias"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Decide the direction of the bias that a flawed way of selecting individuals produces",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "direction_reversed",
+      "description": "Reverses the direction: the stated difference between the sampled group and the population pushes the estimates the other way."
+     },
+     {
+      "id": "chance_within_biased_frame",
+      "description": "Choosing by chance among the individuals who happen to be available does not remove the bias, because those who are available differ from the whole population."
+     },
+     {
+      "id": "size_fixes_bias",
+      "description": "A large sample does not remove bias from a flawed way of selecting individuals; it only makes the biased estimate more precise."
+     }
+    ],
+    "verification": {
+     "independent_path": "each scenario states how the sampled group differs from the population, so the direction of the bias follows from the statement",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "claim_justification",
+     "interpretation"
+    ]
+   },
+   "seed": 10700,
+   "pack_id": "st_n_bias_direction-s10700",
+   "explanation_en": "The correct answer is The estimates will tend to be too large, because shoppers at a computer store are more likely to own a laptop than other adults in the city, and only those shoppers can be selected.. The sampled individuals are not representative of the population, and the stated difference shows which way the estimates are pushed.\nThere is no bias, because the adults are chosen by chance from those who check out. is incorrect: Choosing by chance among the individuals who happen to be available does not remove the bias, because those who are available differ from the whole population.\nThe estimates will tend to be too small, because shoppers at a computer store are less likely to own a laptop than other adults in the city, and only those shoppers can be selected. is incorrect: Reverses the direction: the stated difference between the sampled group and the population pushes the estimates the other way.\nThere is no bias, because a sample of $400$ is large. is incorrect: A large sample does not remove bias from a flawed way of selecting individuals; it only makes the biased estimate more precise."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n_bias_direction",
+   "facts": [
+    "dirn=high"
+   ],
+   "seed": 10700
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key (C) is the unique correct answer. The distractors each reflect a distinct misconception, and the item is short and in scope for topic 1.12. The stem is fairly easy because it gives the direction of the difference, and the 2.B skill alignment is loose, but neither is disqualifying.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recognition of sampling bias from a convenience sample. The stem gives the direction of the bias, so the student only picks the matching option and rejects the misconceptions that chance selection or a large n removes bias. There is no computation, one reasoning step, and no representation change.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m03-k1",
+  "cellId": "ap_statistics-m03",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.12",
+  "unitCode": "1",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n_bias_direction",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item on undercoverage and sampling frame bias. The student identifies that the frame (rewards members) differs from the population and that members stay more nights, so estimates are too large. Distractors are the standard misconceptions (large n removes bias, random selection removes bias) plus a direction-reversed option. There is no computation, the reading is short, and the setup is direct.",
+  "payload": {
+   "archetype": "st_n_bias_direction",
+   "topic": "1.12",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "To estimate the mean number of nights per year that adults in the region spend in hotels, a researcher interviews $300$ adults selected from a list of members of a luxury hotel's rewards program. Members of the rewards program stay in hotels more nights per year, on average, than other adults in the region. Which of the following statements about the estimates from this plan is correct?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "There is no bias, because a sample of $300$ is large.",
+     "why": "A large sample does not remove bias from a flawed way of selecting individuals; it only makes the biased estimate more precise.",
+     "value": null
+    },
+    {
+     "text": "There is no bias, because the adults are chosen by chance from those on the list.",
+     "why": "Choosing by chance among the individuals who happen to be available does not remove the bias, because those who are available differ from the whole population.",
+     "value": null
+    },
+    {
+     "text": "The estimates will tend to be too small, because members of the rewards program stay in hotels fewer nights per year than other adults in the region, and only members can be selected.",
+     "why": "Reverses the direction: the stated difference between the sampled group and the population pushes the estimates the other way.",
+     "value": null
+    },
+    {
+     "text": "The estimates will tend to be too large, because members of the rewards program stay in hotels more nights per year than other adults in the region, and only members can be selected.",
+     "why": "The sampled individuals are not representative of the population, and the stated difference shows which way the estimates are pushed.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 85,
+   "facts": [
+    "dirn=high"
+   ],
+   "blueprint": {
+    "id": "st_n_bias_direction",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Decide the direction of the bias that a flawed way of selecting individuals produces",
+    "topic": "1.12",
+    "skill": "2.B",
+    "student_thinking": [
+     "Compare the people who can be selected with the whole population on the variable being estimated",
+     "Use the stated difference to decide whether the estimates are pushed up or down, and reject claims that chance within the available group or a large sample removes bias"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Decide the direction of the bias that a flawed way of selecting individuals produces",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "direction_reversed",
+      "description": "Reverses the direction: the stated difference between the sampled group and the population pushes the estimates the other way."
+     },
+     {
+      "id": "chance_within_biased_frame",
+      "description": "Choosing by chance among the individuals who happen to be available does not remove the bias, because those who are available differ from the whole population."
+     },
+     {
+      "id": "size_fixes_bias",
+      "description": "A large sample does not remove bias from a flawed way of selecting individuals; it only makes the biased estimate more precise."
+     }
+    ],
+    "verification": {
+     "independent_path": "each scenario states how the sampled group differs from the population, so the direction of the bias follows from the statement",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "claim_justification",
+     "interpretation"
+    ]
+   },
+   "seed": 10701,
+   "pack_id": "st_n_bias_direction-s10701",
+   "explanation_en": "The correct answer is The estimates will tend to be too large, because members of the rewards program stay in hotels more nights per year than other adults in the region, and only members can be selected.. The sampled individuals are not representative of the population, and the stated difference shows which way the estimates are pushed.\nThere is no bias, because a sample of $300$ is large. is incorrect: A large sample does not remove bias from a flawed way of selecting individuals; it only makes the biased estimate more precise.\nThere is no bias, because the adults are chosen by chance from those on the list. is incorrect: Choosing by chance among the individuals who happen to be available does not remove the bias, because those who are available differ from the whole population.\nThe estimates will tend to be too small, because members of the rewards program stay in hotels fewer nights per year than other adults in the region, and only members can be selected. is incorrect: Reverses the direction: the stated difference between the sampled group and the population pushes the estimates the other way."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n_bias_direction",
+   "facts": [
+    "dirn=high"
+   ],
+   "seed": 10701
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean undercoverage-bias question. The key (too large) is the only defensible answer, because the frame includes only rewards members, who stay more nights than other adults. The distractors encode three distinct misconceptions: a large sample size fixes bias, random selection within the frame removes bias, and the direction is reversed. The item is short, fits the 60-100 second window, and needs no calculator. No stimulus is needed.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item tests topic 1.12 (potential problems with sampling). Its dominant demand is judging how a flawed selection method biases an estimate, which fits skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is option D (index 3). Only members can be selected and members stay more nights, so the estimates tend to be too large. The other three options are each clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The item needs no stimulus. The wording is clear, and the stem gives the one fact needed to decide the direction of the bias."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The wrong options correspond to the named misconceptions: size fixes bias, chance within a biased frame removes bias, and reversed direction. The explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Reading load is light and no arithmetic is needed. The calculator designation is consistent, although a calculator is not actually used."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item on undercoverage and sampling frame bias. The student identifies that the frame (rewards members) differs from the population and that members stay more nights, so estimates are too large. Distractors are the standard misconceptions (large n removes bias, random selection removes bias) plus a direction-reversed option. There is no computation, the reading is short, and the setup is direct.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m04-k0",
+  "cellId": "ap_statistics-m04",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "2.4",
+  "unitCode": "2",
+  "skillPrimary": "3.C",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n_union_complement",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Two sequential steps: apply the addition rule to get P(dog or cat)=0.65, then take the complement to get 0.35. This meets the rubric's 2-or-fewer-steps criterion for basic_learning, even though two concepts are combined. Arithmetic is light and the stem is short. Distractors are 0.65 (stops after step 1), 0.13 and 0.24 (misuse of the overlap).",
+  "payload": {
+   "archetype": "st_n_union_complement",
+   "topic": "2.4",
+   "skill": "3.C",
+   "calculator": "allowed",
+   "stem": "Among the households in a town, $36\\%$ have a dog, $40\\%$ have a cat, and $11\\%$ do both. One is selected at random. What is the probability that the selected one does neither? (Probabilities are given to two decimal places.)",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$0.13$",
+     "why": "Adds the overlap instead of subtracting it when finding the probability of at least one event, so the probability of neither comes out too small.",
+     "value": "0.13000000"
+    },
+    {
+     "text": "$0.24$",
+     "why": "Subtracts the two probabilities from $1$ without adding back the overlap that was counted twice.",
+     "value": "0.24000000"
+    },
+    {
+     "text": "$0.65$",
+     "why": "Stops at the probability of at least one event and does not take the complement.",
+     "value": "0.65000000"
+    },
+    {
+     "text": "$0.35$",
+     "why": "The probability of at least one is $0.36 + 0.40 - 0.11 = 0.65$, and the probability of neither is $1 - 0.65 = 0.35$.",
+     "value": "0.35000000"
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 80,
+   "facts": [
+    "a=0.36",
+    "b=0.4",
+    "both=0.11"
+   ],
+   "blueprint": {
+    "id": "st_n_union_complement",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Find the probability of neither event from the addition rule for two events that overlap",
+    "topic": "2.4",
+    "skill": "3.C",
+    "student_thinking": [
+     "Use the addition rule with the overlap to find the probability of at least one of the two events",
+     "Take the complement of that probability to find the probability of neither"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Find the probability of neither event from the addition rule for two events that overlap",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "overlap_ignored",
+      "description": "Subtracts the two probabilities from $1$ without adding back the overlap that was counted twice."
+     },
+     {
+      "id": "complement_missed",
+      "description": "Stops at the probability of at least one event and does not take the complement."
+     },
+     {
+      "id": "overlap_added",
+      "description": "Adds the overlap instead of subtracting it when finding the probability of at least one event, so the probability of neither comes out too small."
+     }
+    ],
+    "verification": {
+     "independent_path": "the probability of neither is recomputed by counting a synthetic population of 1000 with the stated overlaps",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "calculated_value_decision"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Use the addition rule with the overlap to find the probability of at least one of the two events",
+     "Take the complement of that probability to find the probability of neither"
+    ],
+    "concepts": [
+     "addition rule for overlapping events",
+     "complement rule"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "$0.24$": 1,
+     "$0.65$": 2,
+     "$0.13$": 1
+    },
+    "arithmetic": "light"
+   },
+   "seed": 10700,
+   "pack_id": "st_n_union_complement-s10700",
+   "explanation_en": "The correct answer is $0.35$. The probability of at least one is $0.36 + 0.40 - 0.11 = 0.65$, and the probability of neither is $1 - 0.65 = 0.35$.\n$0.13$ is incorrect: Adds the overlap instead of subtracting it when finding the probability of at least one event, so the probability of neither comes out too small.\n$0.24$ is incorrect: Subtracts the two probabilities from $1$ without adding back the overlap that was counted twice.\n$0.65$ is incorrect: Stops at the probability of at least one event and does not take the complement."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n_union_complement",
+   "facts": [
+    "a=0.36",
+    "b=0.4",
+    "both=0.11"
+   ],
+   "seed": 10700
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Addition and complement rules fit topic 2.4 and skill 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0.35 is correct and unique; each distractor value is computed from a distinct error."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions, all explained; options are parallel in length and format."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, light arithmetic, four options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean item on addition and complement rules; the distractors map to distinct errors. Accept."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Two sequential steps: apply the addition rule to get P(dog or cat)=0.65, then take the complement to get 0.35. This meets the rubric's 2-or-fewer-steps criterion for basic_learning, even though two concepts are combined. Arithmetic is light and the stem is short. Distractors are 0.65 (stops after step 1), 0.13 and 0.24 (misuse of the overlap).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m04-k1",
+  "cellId": "ap_statistics-m04",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "2.4",
+  "unitCode": "2",
+  "skillPrimary": "3.C",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n_union_complement",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "The item takes two sequential steps: the addition rule for overlapping events (0.46 + 0.41 - 0.09 = 0.78), then the complement (1 - 0.78 = 0.22). That is below the exam_prep threshold of at least 3 steps. The distractor 0.78 is the first-step result, so it is a plausible wrong answer. Reading and arithmetic are light by design and are not unfair sources.",
+  "payload": {
+   "archetype": "st_n_union_complement",
+   "topic": "2.4",
+   "skill": "3.C",
+   "calculator": "allowed",
+   "stem": "Among the students at a college, $46\\%$ are enrolled in a biology course, $41\\%$ are enrolled in a chemistry course, and $9\\%$ do both. One is selected at random. What is the probability that the selected one does neither? (Probabilities are given to two decimal places.)",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$0.78$",
+     "why": "Stops at the probability of at least one event and does not take the complement.",
+     "value": "0.78000000"
+    },
+    {
+     "text": "$0.13$",
+     "why": "Subtracts the two probabilities from $1$ without adding back the overlap that was counted twice.",
+     "value": "0.13000000"
+    },
+    {
+     "text": "$0.04$",
+     "why": "Adds the overlap instead of subtracting it when finding the probability of at least one event, so the probability of neither comes out too small.",
+     "value": "0.040000000"
+    },
+    {
+     "text": "$0.22$",
+     "why": "The probability of at least one is $0.46 + 0.41 - 0.09 = 0.78$, and the probability of neither is $1 - 0.78 = 0.22$.",
+     "value": "0.22000000"
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 80,
+   "facts": [
+    "a=0.46",
+    "b=0.41",
+    "both=0.09"
+   ],
+   "blueprint": {
+    "id": "st_n_union_complement",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Find the probability of neither event from the addition rule for two events that overlap",
+    "topic": "2.4",
+    "skill": "3.C",
+    "student_thinking": [
+     "Use the addition rule with the overlap to find the probability of at least one of the two events",
+     "Take the complement of that probability to find the probability of neither"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Find the probability of neither event from the addition rule for two events that overlap",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "overlap_ignored",
+      "description": "Subtracts the two probabilities from $1$ without adding back the overlap that was counted twice."
+     },
+     {
+      "id": "complement_missed",
+      "description": "Stops at the probability of at least one event and does not take the complement."
+     },
+     {
+      "id": "overlap_added",
+      "description": "Adds the overlap instead of subtracting it when finding the probability of at least one event, so the probability of neither comes out too small."
+     }
+    ],
+    "verification": {
+     "independent_path": "the probability of neither is recomputed by counting a synthetic population of 1000 with the stated overlaps",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "calculated_value_decision"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Use the addition rule with the overlap to find the probability of at least one of the two events",
+     "Take the complement of that probability to find the probability of neither"
+    ],
+    "concepts": [
+     "addition rule for overlapping events",
+     "complement rule"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "$0.13$": 1,
+     "$0.78$": 2,
+     "$0.04$": 1
+    },
+    "arithmetic": "light"
+   },
+   "seed": 10701,
+   "pack_id": "st_n_union_complement-s10701",
+   "explanation_en": "The correct answer is $0.22$. The probability of at least one is $0.46 + 0.41 - 0.09 = 0.78$, and the probability of neither is $1 - 0.78 = 0.22$.\n$0.78$ is incorrect: Stops at the probability of at least one event and does not take the complement.\n$0.13$ is incorrect: Subtracts the two probabilities from $1$ without adding back the overlap that was counted twice.\n$0.04$ is incorrect: Adds the overlap instead of subtracting it when finding the probability of at least one event, so the probability of neither comes out too small."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n_union_complement",
+   "facts": [
+    "a=0.46",
+    "b=0.41",
+    "both=0.09"
+   ],
+   "seed": 10701
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Addition and complement rules, topic 2.4, calculating a probability (3.C)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0.46+0.41-0.09=0.78; 1-0.78=0.22. Unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and the rounding convention is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, and the explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-80 seconds, light arithmetic, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean standalone MC item. The key is unique, the distractors reflect distinct misconceptions, and the load is appropriate."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item takes two sequential steps: the addition rule for overlapping events (0.46 + 0.41 - 0.09 = 0.78), then the complement (1 - 0.78 = 0.22). That is below the exam_prep threshold of at least 3 steps. The distractor 0.78 is the first-step result, so it is a plausible wrong answer. Reading and arithmetic are light by design and are not unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m05-k0",
+  "cellId": "ap_statistics-m05",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "2.10",
+  "unitCode": "2",
+  "skillPrimary": "2.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n_binomial_scenario",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Standard recognition of binomial conditions (fixed n, independence, two outcomes, constant p). Each option needs one quick check: the first has no fixed n, the second samples without replacement from a small population, the third is correct, and the fourth is a quantitative mean. No computation and short reading. Distinguishing the geometric-type option only requires noticing that n is not fixed; it does not require geometric content.",
+  "payload": {
+   "archetype": "st_n_binomial_scenario",
+   "topic": "2.10",
+   "skill": "2.A",
+   "calculator": "allowed",
+   "stem": "For which of the following is the random variable described a binomial random variable?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "An inspector tests light bulbs chosen at random from a very large shipment in which $4\\%$ are defective until the first defective bulb is found, and counts the bulbs tested.",
+     "why": "The number of trials is not fixed in advance; the variable counts trials until the first success.",
+     "value": null
+    },
+    {
+     "text": "An inspector chooses $20$ bulbs one at a time, without replacement, from a box of exactly $24$ bulbs of which $9$ are defective, and counts the defective bulbs.",
+     "why": "The sample is a large part of a small box, so removing a bulb changes the probability for the next one and the trials are not independent.",
+     "value": null
+    },
+    {
+     "text": "A quality inspector tests $20$ light bulbs chosen at random from a very large shipment in which $4\\%$ of the bulbs are defective, and counts the defective bulbs.",
+     "why": "The number of trials is fixed, each trial has two outcomes with the same probability, and the trials are independent, so the count of successes is a binomial random variable.",
+     "value": null
+    },
+    {
+     "text": "An inspector tests $20$ bulbs chosen at random from a very large shipment and records the number of hours that each bulb lasts, then reports the mean lifetime.",
+     "why": "The variable is a measured lifetime rather than a count of successes in a fixed number of independent trials with two outcomes.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 90,
+   "facts": [
+    "n=20",
+    "m=24"
+   ],
+   "blueprint": {
+    "id": "st_n_binomial_scenario",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Recognize the conditions that make a count a binomial random variable",
+    "topic": "2.10",
+    "skill": "2.A",
+    "student_thinking": [
+     "Check each description for a fixed number of trials, two outcomes, a constant probability and independence",
+     "Keep the description that meets every condition and reject those that count trials to a first success, sample a small group without replacement or measure a quantity"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Recognize the conditions that make a count a binomial random variable",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "not_binomial_0",
+      "description": "The number of trials is not fixed in advance; the variable counts trials until the first success."
+     },
+     {
+      "id": "not_binomial_1",
+      "description": "The sample is a large part of a small box, so removing a bulb changes the probability for the next one and the trials are not independent."
+     },
+     {
+      "id": "not_binomial_2",
+      "description": "The variable is a measured lifetime rather than a count of successes in a fixed number of independent trials with two outcomes."
+     }
+    ],
+    "verification": {
+     "independent_path": "each family lists one scenario that meets all four binomial conditions and three that each break exactly one condition, written and checked by hand",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "condition_check",
+     "claim_justification"
+    ]
+   },
+   "seed": 10700,
+   "pack_id": "st_n_binomial_scenario-s10700",
+   "explanation_en": "The correct answer is A quality inspector tests $20$ light bulbs chosen at random from a very large shipment in which $4\\%$ of the bulbs are defective, and counts the defective bulbs.. The number of trials is fixed, each trial has two outcomes with the same probability, and the trials are independent, so the count of successes is a binomial random variable.\nAn inspector tests light bulbs chosen at random from a very large shipment in which $4\\%$ are defective until the first defective bulb is found, and counts the bulbs tested. is incorrect: The number of trials is not fixed in advance; the variable counts trials until the first success.\nAn inspector chooses $20$ bulbs one at a time, without replacement, from a box of exactly $24$ bulbs of which $9$ are defective, and counts the defective bulbs. is incorrect: The sample is a large part of a small box, so removing a bulb changes the probability for the next one and the trials are not independent.\nAn inspector tests $20$ bulbs chosen at random from a very large shipment and records the number of hours that each bulb lasts, then reports the mean lifetime. is incorrect: The variable is a measured lifetime rather than a count of successes in a fixed number of independent trials with two outcomes."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n_binomial_scenario",
+   "facts": [
+    "n=20",
+    "m=24"
+   ],
+   "seed": 10700
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.10 binomial conditions. Skill 2.A (identify information to answer a question) fits loosely, since the student identifies which scenario has the needed features. Option A describes a geometric-type scenario but is only used as a distractor; the item does not ask students to work with the geometric distribution."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only C meets all binomial conditions. A has no fixed number of trials. B samples 20 of 24 without replacement, so the trials are clearly dependent. D is a measured lifetime. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear and the options are parallel scenarios."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor breaks a distinct condition (fixed n, independence, two outcomes) and each is explained. The correct option is longer than the others, but only slightly, so this is a minor length cue."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, no calculation, and a typical AP reading load. The calculator designation is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound binomial-conditions item with a unique key and distinct distractors, suitable for the exam. The only caveat is the loose fit to skill 2.A and the correct option being slightly longer than the others."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard recognition of binomial conditions (fixed n, independence, two outcomes, constant p). Each option needs one quick check: the first has no fixed n, the second samples without replacement from a small population, the third is correct, and the fourth is a quantitative mean. No computation and short reading. Distinguishing the geometric-type option only requires noticing that n is not fixed; it does not require geometric content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m05-k1",
+  "cellId": "ap_statistics-m05",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "2.10",
+  "unitCode": "2",
+  "skillPrimary": "2.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n_binomial_scenario",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Item asks the student to identify which scenario meets the binomial conditions (binary outcomes, fixed n, independence, constant p). Each distractor fails one clear condition: sampling without replacement from a small population, a points total rather than a count of successes, and a count of trials until a miss (the geometric setup). The correct option is a textbook binomial setup. It needs no computation and little reading, and it takes one pass of checking conditions against each option.",
+  "payload": {
+   "archetype": "st_n_binomial_scenario",
+   "topic": "2.10",
+   "skill": "2.A",
+   "calculator": "allowed",
+   "stem": "For which of the following is the random variable described a binomial random variable?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "A coach draws $12$ players one at a time, without replacement, from a team of $24$ players of whom $9$ are starters, and counts the starters drawn.",
+     "why": "Sampling a large part of a small group without replacement makes the probability change from draw to draw.",
+     "value": null
+    },
+    {
+     "text": "A player takes $12$ shots, some from the free-throw line worth $1$ point and some from the three-point line worth $3$ points, and the coach adds the points to get a total score.",
+     "why": "The variable is a total of point values from different kinds of shots rather than a count of successes with two outcomes per trial.",
+     "value": null
+    },
+    {
+     "text": "A basketball player keeps shooting free throws, making each one with probability $0.7$ independently of the others, until she misses, and the coach counts the shots she takes.",
+     "why": "The number of trials is not fixed in advance.",
+     "value": null
+    },
+    {
+     "text": "A basketball player takes $12$ free throws in a practice, making each one with probability $0.7$ independently of the other shots, and the coach counts the number that she makes.",
+     "why": "The number of trials is fixed, each trial has two outcomes with the same probability, and the trials are independent, so the count of successes is a binomial random variable.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 90,
+   "facts": [
+    "n=12",
+    "m=24"
+   ],
+   "blueprint": {
+    "id": "st_n_binomial_scenario",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Recognize the conditions that make a count a binomial random variable",
+    "topic": "2.10",
+    "skill": "2.A",
+    "student_thinking": [
+     "Check each description for a fixed number of trials, two outcomes, a constant probability and independence",
+     "Keep the description that meets every condition and reject those that count trials to a first success, sample a small group without replacement or measure a quantity"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Recognize the conditions that make a count a binomial random variable",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "not_binomial_0",
+      "description": "The number of trials is not fixed in advance."
+     },
+     {
+      "id": "not_binomial_1",
+      "description": "Sampling a large part of a small group without replacement makes the probability change from draw to draw."
+     },
+     {
+      "id": "not_binomial_2",
+      "description": "The variable is a total of point values from different kinds of shots rather than a count of successes with two outcomes per trial."
+     }
+    ],
+    "verification": {
+     "independent_path": "each family lists one scenario that meets all four binomial conditions and three that each break exactly one condition, written and checked by hand",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "condition_check",
+     "claim_justification"
+    ]
+   },
+   "seed": 10701,
+   "pack_id": "st_n_binomial_scenario-s10701",
+   "explanation_en": "The correct answer is A basketball player takes $12$ free throws in a practice, making each one with probability $0.7$ independently of the other shots, and the coach counts the number that she makes.. The number of trials is fixed, each trial has two outcomes with the same probability, and the trials are independent, so the count of successes is a binomial random variable.\nA coach draws $12$ players one at a time, without replacement, from a team of $24$ players of whom $9$ are starters, and counts the starters drawn. is incorrect: Sampling a large part of a small group without replacement makes the probability change from draw to draw.\nA player takes $12$ shots, some from the free-throw line worth $1$ point and some from the three-point line worth $3$ points, and the coach adds the points to get a total score. is incorrect: The variable is a total of point values from different kinds of shots rather than a count of successes with two outcomes per trial.\nA basketball player keeps shooting free throws, making each one with probability $0.7$ independently of the others, until she misses, and the coach counts the shots she takes. is incorrect: The number of trials is not fixed in advance."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n_binomial_scenario",
+   "facts": [
+    "n=12",
+    "m=24"
+   ],
+   "seed": 10701
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Recognizing binomial conditions (BINS) is squarely topic 2.10. Option C (count trials until first miss) is geometric but is used only as a non-example for the fixed-n condition, not as geometric content to compute; this is a mild concern but acceptable. Skill label 2.A is loosely matched, but identifying the needed conditions is reasonable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is the unique binomial scenario. A: 12 of 24 without replacement, 50% of the population, so trials are not independent and p changes. B: total points, not a count of successes. C: number of trials is random."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. Wording is clear. Option A does not state the 10% condition explicitly, but 12 of 24 clearly violates it."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor breaks a distinct condition, and the explanation addresses each wrong option. The correct option is slightly longer, but this is not a significant giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds, no calculation, typical of AP style. The stem is short and standard."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unambiguous binomial-conditions recognition item with a unique key and distinct misconceptions in the distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Item asks the student to identify which scenario meets the binomial conditions (binary outcomes, fixed n, independence, constant p). Each distractor fails one clear condition: sampling without replacement from a small population, a points total rather than a count of successes, and a count of trials until a miss (the geometric setup). The correct option is a textbook binomial setup. It needs no computation and little reading, and it takes one pass of checking conditions against each option.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m06-k0",
+  "cellId": "ap_statistics-m06",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.7",
+  "unitCode": "1",
+  "skillPrimary": "3.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n_linear_transform",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "The item tests the effect of a linear transformation on mean and SD: mean = 1.5*80+8 = 128, SD = 1.5*9 = 13.5. There are two short, largely independent steps, one for the mean and one for the SD. Only one standard rule is needed, namely that adding a constant does not change spread. This falls under the rubric's minimum of 3 required steps for exam_prep, so it is basic_learning. The distractors reflect common misconceptions (forgetting the shift, adding 8 to the SD, not scaling the SD), not extra reasoning depth.",
+  "payload": {
+   "archetype": "st_n_linear_transform",
+   "topic": "1.7",
+   "skill": "3.B",
+   "calculator": "allowed",
+   "stem": "The mean of 24 quiz scores is $80$ points and the standard deviation is $9$ points. Then a teacher multiplies each score by $1.5$ and then adds $8$ points. Which of the following gives the mean and the standard deviation of the new values?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "mean $120$ points, standard deviation $13.5$ points",
+     "why": "Forgets to add the constant to the mean.",
+     "value": null
+    },
+    {
+     "text": "mean $128$ points, standard deviation $9$ points",
+     "why": "Leaves the standard deviation unchanged, but multiplying by a constant multiplies the spread by that constant.",
+     "value": null
+    },
+    {
+     "text": "mean $128$ points, standard deviation $21.5$ points",
+     "why": "Adds the constant to the standard deviation, but adding a constant does not change the spread.",
+     "value": null
+    },
+    {
+     "text": "mean $128$ points, standard deviation $13.5$ points",
+     "why": "Multiplying by a multiplies the mean and the standard deviation by a, and adding b shifts the mean by b but does not change the spread.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 80,
+   "facts": [
+    "a=1.5",
+    "b=8"
+   ],
+   "blueprint": {
+    "id": "st_n_linear_transform",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Find the mean and standard deviation after multiplying by a constant and adding a constant",
+    "topic": "1.7",
+    "skill": "3.B",
+    "student_thinking": [
+     "Apply both the multiplication and the addition to the mean",
+     "Recognize that only the multiplication changes the standard deviation"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Find the mean and standard deviation after multiplying by a constant and adding a constant",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "shift_ignored",
+      "description": "Forgets to add the constant to the mean."
+     },
+     {
+      "id": "shift_changes_spread",
+      "description": "Adds the constant to the standard deviation, but adding a constant does not change the spread."
+     },
+     {
+      "id": "scale_ignored",
+      "description": "Leaves the standard deviation unchanged, but multiplying by a constant multiplies the spread by that constant."
+     }
+    ],
+    "verification": {
+     "independent_path": "the new mean and spread are recomputed from two synthetic values whose mean and standard deviation equal the given summary",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "calculated_value_decision",
+     "interpretation"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Apply both the multiplication and the addition to the mean",
+     "Recognize that only the multiplication changes the standard deviation"
+    ],
+    "concepts": [
+     "effect of a linear change on a mean",
+     "effect of a linear change on a standard deviation"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "mean $120$ points, standard deviation $13.5$ points": 1,
+     "mean $128$ points, standard deviation $21.5$ points": 2,
+     "mean $128$ points, standard deviation $9$ points": 2
+    },
+    "arithmetic": "light"
+   },
+   "seed": 10700,
+   "pack_id": "st_n_linear_transform-s10700",
+   "explanation_en": "The correct answer is mean $128$ points, standard deviation $13.5$ points. Multiplying by a multiplies the mean and the standard deviation by a, and adding b shifts the mean by b but does not change the spread.\nmean $120$ points, standard deviation $13.5$ points is incorrect: Forgets to add the constant to the mean.\nmean $128$ points, standard deviation $9$ points is incorrect: Leaves the standard deviation unchanged, but multiplying by a constant multiplies the spread by that constant.\nmean $128$ points, standard deviation $21.5$ points is incorrect: Adds the constant to the standard deviation, but adding a constant does not change the spread."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n_linear_transform",
+   "facts": [
+    "a=1.5",
+    "b=8"
+   ],
+   "seed": 10700
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Linear transformation effects on mean and SD are core 1.7 content; skill 3.B calculation fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Mean 128, SD 13.5 is uniquely correct; the other options each have an error."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear with units."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct, realistic misconceptions; each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, light arithmetic, typical of AP style."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, standard item on linear transformations of mean and SD. The key is unique and correct, and the distractors are distinct and explained. No issues found."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item tests the effect of a linear transformation on mean and SD: mean = 1.5*80+8 = 128, SD = 1.5*9 = 13.5. There are two short, largely independent steps, one for the mean and one for the SD. Only one standard rule is needed, namely that adding a constant does not change spread. This falls under the rubric's minimum of 3 required steps for exam_prep, so it is basic_learning. The distractors reflect common misconceptions (forgetting the shift, adding 8 to the SD, not scaling the SD), not extra reasoning depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m06-k1",
+  "cellId": "ap_statistics-m06",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.7",
+  "unitCode": "1",
+  "skillPrimary": "3.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n_linear_transform",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Standard linear-transformation item: new mean = 3(126)+10 = 388; new SD = 3(16) = 48. Two independent applications of a single rule set, with only 2 steps (below the 3-step exam_prep threshold) and no carried result between steps. Short stem, light arithmetic, one source.",
+  "payload": {
+   "archetype": "st_n_linear_transform",
+   "topic": "1.7",
+   "skill": "3.B",
+   "calculator": "allowed",
+   "stem": "The mean of 20 lengths of rope pieces is $126$ centimeters and the standard deviation is $16$ centimeters. Then a worker records each length on a new scale that is $3$ times the old scale plus $10$ centimeters. Which of the following gives the mean and the standard deviation of the new values?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "mean $388$ centimeters, standard deviation $58$ centimeters",
+     "why": "Adds the constant to the standard deviation, but adding a constant does not change the spread.",
+     "value": null
+    },
+    {
+     "text": "mean $388$ centimeters, standard deviation $16$ centimeters",
+     "why": "Leaves the standard deviation unchanged, but multiplying by a constant multiplies the spread by that constant.",
+     "value": null
+    },
+    {
+     "text": "mean $378$ centimeters, standard deviation $48$ centimeters",
+     "why": "Forgets to add the constant to the mean.",
+     "value": null
+    },
+    {
+     "text": "mean $388$ centimeters, standard deviation $48$ centimeters",
+     "why": "Multiplying by a multiplies the mean and the standard deviation by a, and adding b shifts the mean by b but does not change the spread.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 80,
+   "facts": [
+    "a=3",
+    "b=10"
+   ],
+   "blueprint": {
+    "id": "st_n_linear_transform",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Find the mean and standard deviation after multiplying by a constant and adding a constant",
+    "topic": "1.7",
+    "skill": "3.B",
+    "student_thinking": [
+     "Apply both the multiplication and the addition to the mean",
+     "Recognize that only the multiplication changes the standard deviation"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Find the mean and standard deviation after multiplying by a constant and adding a constant",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "shift_ignored",
+      "description": "Forgets to add the constant to the mean."
+     },
+     {
+      "id": "shift_changes_spread",
+      "description": "Adds the constant to the standard deviation, but adding a constant does not change the spread."
+     },
+     {
+      "id": "scale_ignored",
+      "description": "Leaves the standard deviation unchanged, but multiplying by a constant multiplies the spread by that constant."
+     }
+    ],
+    "verification": {
+     "independent_path": "the new mean and spread are recomputed from two synthetic values whose mean and standard deviation equal the given summary",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "calculated_value_decision",
+     "interpretation"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Apply both the multiplication and the addition to the mean",
+     "Recognize that only the multiplication changes the standard deviation"
+    ],
+    "concepts": [
+     "effect of a linear change on a mean",
+     "effect of a linear change on a standard deviation"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "mean $378$ centimeters, standard deviation $48$ centimeters": 1,
+     "mean $388$ centimeters, standard deviation $58$ centimeters": 2,
+     "mean $388$ centimeters, standard deviation $16$ centimeters": 2
+    },
+    "arithmetic": "light"
+   },
+   "seed": 10701,
+   "pack_id": "st_n_linear_transform-s10701",
+   "explanation_en": "The correct answer is mean $388$ centimeters, standard deviation $48$ centimeters. Multiplying by a multiplies the mean and the standard deviation by a, and adding b shifts the mean by b but does not change the spread.\nmean $388$ centimeters, standard deviation $58$ centimeters is incorrect: Adds the constant to the standard deviation, but adding a constant does not change the spread.\nmean $388$ centimeters, standard deviation $16$ centimeters is incorrect: Leaves the standard deviation unchanged, but multiplying by a constant multiplies the spread by that constant.\nmean $378$ centimeters, standard deviation $48$ centimeters is incorrect: Forgets to add the constant to the mean."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n_linear_transform",
+   "facts": [
+    "a=3",
+    "b=10"
+   ],
+   "seed": 10701
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Linear transformation effects on mean and SD fit topic 1.7 and skill 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Mean 388 and SD 48 are unique to option D."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions; the explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, light arithmetic, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, correct item with a unique key and distinct distractors; it passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard linear-transformation item: new mean = 3(126)+10 = 388; new SD = 3(16) = 48. Two independent applications of a single rule set, with only 2 steps (below the 3-step exam_prep threshold) and no carried result between steps. Short stem, light arithmetic, one source.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m07-k0",
+  "cellId": "ap_statistics-m07",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "3.1",
+  "unitCode": "3",
+  "skillPrimary": "2.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n_estimator_compare",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "The item needs two steps: find the unbiased estimators (mean equals 0.4, so C and D), then pick the one with the smaller spread (D). That is 2 steps, below the 3-step exam_prep threshold, even though it combines bias and variability. It reads one simple table with no arithmetic, and the distractors are standard (largest spread, smallest spread but biased, unbiased but more variable).",
+  "payload": {
+   "archetype": "st_n_estimator_compare",
+   "topic": "3.1",
+   "skill": "2.D",
+   "calculator": "allowed",
+   "stem": "The true value of the proportion of all voters in a city who support a measure is $0.4$. A researcher compares four estimators by simulating $2000$ samples for each and computing the estimate from every sample. The table shown gives the mean and the standard deviation of the estimates for each estimator. Which estimator is best for estimating the true value?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Mean and standard deviation of the estimates from 2000 simulated samples",
+    "data": {
+     "chart": "table",
+     "data": {
+      "columns": [
+       "Estimator",
+       "Mean of the estimates",
+       "Standard deviation of the estimates"
+      ],
+      "rows": [
+       [
+        "Estimator A",
+        "$0.45$",
+        "$0.02$"
+       ],
+       [
+        "Estimator B",
+        "$0.36$",
+        "$0.08$"
+       ],
+       [
+        "Estimator C",
+        "$0.40$",
+        "$0.06$"
+       ],
+       [
+        "Estimator D",
+        "$0.40$",
+        "$0.04$"
+       ]
+      ]
+     },
+     "title": "Results of 2000 simulated samples for each estimator"
+    }
+   },
+   "options": [
+    {
+     "text": "Estimator B, because its sampling distribution has the largest spread and so covers the most possible values.",
+     "why": "Treats a larger spread as an advantage; more variability means estimates that are farther from the parameter more often.",
+     "value": null
+    },
+    {
+     "text": "Estimator A, because it has the smallest spread of all the estimators.",
+     "why": "Considers variability alone; the center of this sampling distribution is not at the true value, so the estimator is biased.",
+     "value": null
+    },
+    {
+     "text": "Estimator C, because the center of its sampling distribution is at the true value.",
+     "why": "Considers bias alone; another estimator is also centered at the true value and has less variability.",
+     "value": null
+    },
+    {
+     "text": "Estimator D, because the center of its sampling distribution is at the true value and its spread is the smallest among the estimators that are centered there.",
+     "why": "An estimator that is unbiased has a sampling distribution centered at the parameter, and among unbiased estimators the one with the least variability is best.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 95,
+   "facts": [
+    "theta=0.4"
+   ],
+   "blueprint": {
+    "id": "st_n_estimator_compare",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Choose the best estimator from the center and spread of its simulated sampling distribution",
+    "topic": "3.1",
+    "skill": "2.D",
+    "student_thinking": [
+     "Compare the center of each sampling distribution with the true value to find the unbiased estimators",
+     "Among the unbiased estimators choose the one with the smallest spread and reject choices based on only one of the two properties"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Choose the best estimator from the center and spread of its simulated sampling distributio",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "the displayed values"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "variability_only",
+      "description": "Considers variability alone; the center of this sampling distribution is not at the true value, so the estimator is biased."
+     },
+     {
+      "id": "bias_only",
+      "description": "Considers bias alone; another estimator is also centered at the true value and has less variability."
+     },
+     {
+      "id": "spread_good",
+      "description": "Treats a larger spread as an advantage; more variability means estimates that are farther from the parameter more often."
+     }
+    ],
+    "verification": {
+     "independent_path": "the unbiased estimators are found by comparing each mean with the true value and the best one has the smallest standard deviation among them; the biased estimator with the smallest spread is deliberately included",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "representation_reading",
+     "claim_justification",
+     "interpretation"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Compare the center of each sampling distribution with the true value to find the unbiased estimators",
+     "Among the unbiased estimators choose the one with the smallest spread and reject choices based on only one of the two properties"
+    ],
+    "concepts": [
+     "bias of an estimator",
+     "variability of an estimator"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "Estimator A, because it has the smallest spread of all the estimators.": 1,
+     "Estimator C, because the center of its sampling distribution is at the true value.": 2,
+     "Estimator B, because its sampling distribution has the largest spread and so covers the most possible values.": 1
+    },
+    "arithmetic": "none"
+   },
+   "seed": 10700,
+   "pack_id": "st_n_estimator_compare-s10700",
+   "explanation_en": "The correct answer is Estimator D, because the center of its sampling distribution is at the true value and its spread is the smallest among the estimators that are centered there.. An estimator that is unbiased has a sampling distribution centered at the parameter, and among unbiased estimators the one with the least variability is best.\nEstimator B, because its sampling distribution has the largest spread and so covers the most possible values. is incorrect: Treats a larger spread as an advantage; more variability means estimates that are farther from the parameter more often.\nEstimator A, because it has the smallest spread of all the estimators. is incorrect: Considers variability alone; the center of this sampling distribution is not at the true value, so the estimator is biased.\nEstimator C, because the center of its sampling distribution is at the true value. is incorrect: Considers bias alone; another estimator is also centered at the true value and has less variability."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n_estimator_compare",
+   "facts": [
+    "theta=0.4"
+   ],
+   "seed": 10700
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.1 estimators: bias and variability from simulated sampling distributions. Dominant demand is on target; no later-unit content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is the unique best: C and D are both centered at 0.40, D has smaller SD. A is biased (0.45) and B is biased and highly variable. Even by MSE, D is best, so the key is robust."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete with title, columns, and values. Stem states true value and the simulation setup clearly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (large spread good, variability only, bias only). The explanation addresses every wrong option. The key option is slightly longer than the others, but that is a minor giveaway risk."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, no arithmetic, one table, and four options. This is typical of AP Statistics, and the calculator designation is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean estimator-comparison item with a unique key (D), distinct distractor misconceptions, a complete table, and appropriate load. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item needs two steps: find the unbiased estimators (mean equals 0.4, so C and D), then pick the one with the smaller spread (D). That is 2 steps, below the 3-step exam_prep threshold, even though it combines bias and variability. It reads one simple table with no arithmetic, and the distractors are standard (largest spread, smallest spread but biased, unbiased but more variable).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m07-k1",
+  "cellId": "ap_statistics-m07",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "3.1",
+  "unitCode": "3",
+  "skillPrimary": "2.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n_estimator_compare",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Student checks which estimators have mean equal to the true value (B and D), then picks the one with smaller spread (B). Only 2 sequential steps from a single small table, with no arithmetic. This is below the rubric threshold of 3 steps for exam_prep, even though two concepts (bias and variability) are combined.",
+  "payload": {
+   "archetype": "st_n_estimator_compare",
+   "topic": "3.1",
+   "skill": "2.D",
+   "calculator": "allowed",
+   "stem": "The true value of the mean number of hours that all students at a school sleep on a school night is $7.2$. A researcher compares four estimators by simulating $1000$ samples for each and computing the estimate from every sample. The table shown gives the mean and the standard deviation of the estimates for each estimator. Which estimator is best for estimating the true value?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Mean and standard deviation of the estimates from 1000 simulated samples",
+    "data": {
+     "chart": "table",
+     "data": {
+      "columns": [
+       "Estimator",
+       "Mean of the estimates",
+       "Standard deviation of the estimates"
+      ],
+      "rows": [
+       [
+        "Estimator A",
+        "$6.8$",
+        "$0.6$"
+       ],
+       [
+        "Estimator B",
+        "$7.2$",
+        "$0.3$"
+       ],
+       [
+        "Estimator C",
+        "$6.4$",
+        "$0.2$"
+       ],
+       [
+        "Estimator D",
+        "$7.2$",
+        "$0.4$"
+       ]
+      ]
+     },
+     "title": "Results of 1000 simulated samples for each estimator"
+    }
+   },
+   "options": [
+    {
+     "text": "Estimator C, because it has the smallest spread of all the estimators.",
+     "why": "Considers variability alone; the center of this sampling distribution is not at the true value, so the estimator is biased.",
+     "value": null
+    },
+    {
+     "text": "Estimator D, because the center of its sampling distribution is at the true value.",
+     "why": "Considers bias alone; another estimator is also centered at the true value and has less variability.",
+     "value": null
+    },
+    {
+     "text": "Estimator B, because the center of its sampling distribution is at the true value and its spread is the smallest among the estimators that are centered there.",
+     "why": "An estimator that is unbiased has a sampling distribution centered at the parameter, and among unbiased estimators the one with the least variability is best.",
+     "value": null
+    },
+    {
+     "text": "Estimator A, because its sampling distribution has the largest spread and so covers the most possible values.",
+     "why": "Treats a larger spread as an advantage; more variability means estimates that are farther from the parameter more often.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 95,
+   "facts": [
+    "theta=7.2"
+   ],
+   "blueprint": {
+    "id": "st_n_estimator_compare",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Choose the best estimator from the center and spread of its simulated sampling distribution",
+    "topic": "3.1",
+    "skill": "2.D",
+    "student_thinking": [
+     "Compare the center of each sampling distribution with the true value to find the unbiased estimators",
+     "Among the unbiased estimators choose the one with the smallest spread and reject choices based on only one of the two properties"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Choose the best estimator from the center and spread of its simulated sampling distributio",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "the displayed values"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "variability_only",
+      "description": "Considers variability alone; the center of this sampling distribution is not at the true value, so the estimator is biased."
+     },
+     {
+      "id": "bias_only",
+      "description": "Considers bias alone; another estimator is also centered at the true value and has less variability."
+     },
+     {
+      "id": "spread_good",
+      "description": "Treats a larger spread as an advantage; more variability means estimates that are farther from the parameter more often."
+     }
+    ],
+    "verification": {
+     "independent_path": "the unbiased estimators are found by comparing each mean with the true value and the best one has the smallest standard deviation among them; the biased estimator with the smallest spread is deliberately included",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "representation_reading",
+     "claim_justification",
+     "interpretation"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Compare the center of each sampling distribution with the true value to find the unbiased estimators",
+     "Among the unbiased estimators choose the one with the smallest spread and reject choices based on only one of the two properties"
+    ],
+    "concepts": [
+     "bias of an estimator",
+     "variability of an estimator"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "Estimator C, because it has the smallest spread of all the estimators.": 1,
+     "Estimator D, because the center of its sampling distribution is at the true value.": 2,
+     "Estimator A, because its sampling distribution has the largest spread and so covers the most possible values.": 1
+    },
+    "arithmetic": "none"
+   },
+   "seed": 10701,
+   "pack_id": "st_n_estimator_compare-s10701",
+   "explanation_en": "The correct answer is Estimator B, because the center of its sampling distribution is at the true value and its spread is the smallest among the estimators that are centered there.. An estimator that is unbiased has a sampling distribution centered at the parameter, and among unbiased estimators the one with the least variability is best.\nEstimator C, because it has the smallest spread of all the estimators. is incorrect: Considers variability alone; the center of this sampling distribution is not at the true value, so the estimator is biased.\nEstimator D, because the center of its sampling distribution is at the true value. is incorrect: Considers bias alone; another estimator is also centered at the true value and has less variability.\nEstimator A, because its sampling distribution has the largest spread and so covers the most possible values. is incorrect: Treats a larger spread as an advantage; more variability means estimates that are farther from the parameter more often."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n_estimator_compare",
+   "facts": [
+    "theta=7.2"
+   ],
+   "seed": 10701
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.1 estimators, bias and variability from simulated sampling distributions; dominant demand fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique best: unbiased and smallest SD among unbiased. A and C biased, D has larger spread than B."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete with title, columns, and rows. Wording is clear. The true value is stated in the stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (variability only, bias only, larger spread is good). Each wrong option is explained. The key is the longest option, a slight cue."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short read, no arithmetic, about 60-95 seconds. Calculator not needed but harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, correct estimator-comparison item with a unique key and distinct distractors. The only flaw is minor: the key is the longest option."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student checks which estimators have mean equal to the true value (B and D), then picks the one with smaller spread (B). Only 2 sequential steps from a single small table, with no arithmetic. This is below the rubric threshold of 3 steps for exam_prep, even though two concepts (bias and variability) are combined.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ }
+]

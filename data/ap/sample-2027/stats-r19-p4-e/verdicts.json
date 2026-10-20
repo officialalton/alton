@@ -1,0 +1,233 @@
+[
+ {
+  "key": "ap_statistics-f01-k0",
+  "cellId": "ap_statistics-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Get a list of all freshmen and a separate list of all seniors. Give each student on each list a number. Use a random number generator to pick 50 different numbers from each list, ignoring repeats. Survey those 100 students.",
+     "final_answer": "Split the students into two strata, freshmen and seniors. Number each student within each stratum, then use a random number generator to pick 50 different freshmen and 50 different seniors, ignoring repeats.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Only 35% of the students sent the survey back, and supporters were more likely to send it back. So supporters make up a bigger share of the returned surveys than they do of the whole sample.",
+     "final_answer": "The people who answered are not representative of the sample, because supporters answered more often than opponents. Supporters are overrepresented, so the percent who support a later start will be too high: the bias is upward (an overestimate).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "52/80 = 0.65",
+     "final_answer": "65.0%",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Freshmen: 52/80 = 65.0%. Seniors: 51/120 = 42.5%.",
+     "final_answer": "65.0% of freshmen chose Support, compared with 42.5% of seniors. That is 22.5 percentage points higher for freshmen. Freshmen supported a later start time more than seniors did.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "The question names the population and the variable, and the answer changes from student to student.",
+     "final_answer": "Example: \"What is the typical number of minutes that students at this high school spend commuting to and from school each day?\" The population is all students at this school. The variable is daily commuting time in minutes, which varies from student to student.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Well-formed 10-point multi-focus Q1. All parts are in Unit 1 scope, the keys are unique, the table is complete, the rubric rows are meaning-based with listed common errors, and the load is appropriate for about 22 minutes. The only soft spot is that part E's stem spells out its rubric elements, which makes the task somewhat prescriptive.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item bundles routine Unit 1 skills. Part A describes a stratified random sample, Part B explains nonresponse bias and its direction, Part C is one simple percent (52/80 = 65.0%), Part D compares two percents (65.0% vs 42.5%), and Part E asks the student to write an investigative question. Each part needs only one or two steps and no more than one change of representation, from the table to percents. The computation is minimal and the reading load is modest. The concepts are introductory, and no part asks the student to choose among procedures or to carry out a multi-step argument. It suits basic learning and is below full-mock exam level.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_statistics-f01-k1",
+  "cellId": "ap_statistics-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Get separate lists of all freshmen and all seniors. Give each student on a list a number. Use a random number generator to pick 50 different numbers from each list, ignoring repeats. The chosen students make up the sample.",
+     "final_answer": "Make a list of all freshmen and a list of all seniors, number each list, and use a random number generator to pick 50 different students from each list (skip repeats). Together they form the stratified sample of 100.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Supporters are more likely to return the survey, so they make up too large a share of the replies. The sample proportion who support will likely be higher than the true proportion.",
+     "final_answer": "Only about 35% respond, and those who respond are more likely to be supporters. The returned surveys will over-represent support, so the estimated proportion who support a later start time will be biased upward (it will overestimate true support).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "39/60 = 0.65",
+     "final_answer": "65.0%",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Freshmen: 39/60 = 65.0%. Seniors: 56/150 ≈ 37.3%.",
+     "final_answer": "65.0% of freshmen chose Support, compared with about 37.3% of seniors. That is about 27.7 percentage points higher for freshmen.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "The question names the population and the variable, and it calls for collecting data that vary from student to student.",
+     "final_answer": "What is the typical (mean) number of minutes per day that students at this high school spend commuting to and from school? Population: all students at this school. Variable: daily commute time in minutes.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part matches its own topic and skill. Part E targets skill 1.A, topic 1.10. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The percents are correct and the table totals are consistent. There are ten 1-point rows, and the row dependencies are sensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data is complete, with columns, rows, and a note naming the question and the sampling design. It belongs to the same study context as part C."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so no distractors apply. The rubric lists common errors and alternative answers for each row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for a multi-focus Question 1 at about 22 minutes. The arithmetic is minimal. Part B gives the direction of the response difference in the stem, which makes B2 easier but still valid."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. It is a well-formed 10-point multi-focus Question 1 with a 3-point part on a valid investigative question (skill 1.A). Part B is slightly scaffolded because the stem states the direction of the response difference, but this does not affect the keys."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Five-part FRQ-style item covering standard Unit 1 skills: describing stratified random sampling, explaining nonresponse bias with direction, computing and comparing percents from a small two-row table, and writing a valid investigative question naming population and variable. Each part is a single routine concept with short reading and trivial computation (39/60 = 65.0%, 56/150 = 37.3%). The difficulty comes from breadth and from writing clear explanations in context, not from heavy computation or reading, so it suits full mocks.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_statistics-f01-k2",
+  "cellId": "ap_statistics-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Get a list of all renters and a list of all homeowners. Number each list. Use a random number generator to pick 50 different numbers from each list, ignoring repeats. Survey those 100 residents.",
+     "final_answer": "Make separate numbered lists of renters and homeowners, then randomly choose 50 distinct residents from each list with a random number generator.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Library users return the survey more often and also tend to favor a new branch. So the people who respond overrepresent those in favor. The sample proportion who favor will likely be higher than the true population proportion.",
+     "final_answer": "Respondents are mostly library users, who tend to favor a new branch, so the survey would overestimate the percent who favor it (bias upward).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "54/80 = 0.675",
+     "final_answer": "67.5%",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Renters: 54/80 = 67.5%. Homeowners: 50/120 ≈ 41.7%.",
+     "final_answer": "67.5% of renters favored the new branch, compared with about 41.7% of homeowners. That is about 25.8 percentage points higher for renters.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "The question names a population (adult residents of the city) and a numerical variable (books borrowed per year) that varies from person to person.",
+     "final_answer": "What is the typical number of library books borrowed last year by adult residents of the city, and how much does this number vary among residents?",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The 10-point multi-focus Q1 passes all criteria. Part E assesses skill 1.A, with rows for population, variable and variability. The table in parts C and D belongs to the same city context. The computations are correct (54/80 = 67.5%, 50/120 ≈ 41.7%). The nonresponse direction in part B is unambiguous because the stem states the relationship. The independent solver agreed on every part.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part E targets 1.A with rows for population, variable and variability. Other parts cover related topics 1.3, 1.4, 1.11 and 1.12, which is acceptable for a multi-focus Q1. Nothing is out of scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are correct and the rubric rows are consistent. Meaning-based rows allow equivalent wording. Row D2 depends on D1, which is reasonable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete, with counts and totals that sum correctly (54+21+5 = 80, 50+48+22 = 120). The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The rubric rows list common errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is about 22 minutes, calculator use is minimal, and the 10 points match the Statistics FRQ standard."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item covering stratified sampling description, nonresponse bias direction, converting table counts to percents, comparing groups, and writing a valid investigative question. Each part is a standard Unit 1 skill with modest reasoning (bias direction needs one linking step; the comparison needs proportions rather than counts). Computation is trivial (54/80, 50/120), the reading load is moderate and appropriate, and all content is in scope. This is more than basic recall but not extended or advanced reasoning, so it is suitable for a full mock.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ }
+]

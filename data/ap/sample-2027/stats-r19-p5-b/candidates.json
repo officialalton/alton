@@ -1,0 +1,2553 @@
+[
+ {
+  "candidateKey": "ap_statistics-m01-k0",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "2.4",
+  "unitCode": "2",
+  "skillPrimary": "3.C",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "st_set_joint_table_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "The item is a direct application of the addition rule using values read from a joint table: 0.39 + 0.49 - 0.17 = 0.71. It has 2 counted steps, below the 3 required for exam_prep. The arithmetic is light and the reading load is low. Only one distractor survives the first step and fails later. No unfair difficulty sources.",
+  "payload": {
+   "archetype": "st_set_joint_table",
+   "topic": "2.4",
+   "skill": "3.C",
+   "calculator": "allowed",
+   "set_intro": "A clinic records the age group of a randomly selected patient and whether the patient has a flu shot. The table shown gives the probability of each combination. Let $A$ be the event that the selected individual is under 40, and let $B$ be the event that the individual has a flu shot.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Joint probabilities",
+    "data": {
+     "chart": "table",
+     "data": {
+      "columns": [
+       "",
+       "Has a flu shot",
+       "Has no flu shot",
+       "Total"
+      ],
+      "rows": [
+       [
+        "Under 40",
+        "0.17",
+        "0.22",
+        "0.39"
+       ],
+       [
+        "40 or older",
+        "0.32",
+        "0.29",
+        "0.61"
+       ],
+       [
+        "Total",
+        "0.49",
+        "0.51",
+        "1.00"
+       ]
+      ]
+     },
+     "title": "Joint probability table"
+    }
+   },
+   "items": [
+    {
+     "archetype": "st_set_joint_table_q1",
+     "topic": "2.4",
+     "skill": "3.C",
+     "stem": "What is $P(A \\text{ or } B)$? (Give the answer as a decimal rounded to three decimal places.)",
+     "options": [
+      {
+       "text": "$0.710$",
+       "why": "$P(A \\text{ or } B) = P(A) + P(B) - P(A \\text{ and } B) = 0.39 + 0.49 - 0.17 = 0.710$.",
+       "value": "0.71000000"
+      },
+      {
+       "text": "$0.880$",
+       "why": "Adds $P(A)$ and $P(B)$ without subtracting $P(A \\text{ and } B)$, which counts the overlap twice.",
+       "value": "0.88000000"
+      },
+      {
+       "text": "$0.830$",
+       "why": "Gives the probability that the two events do not both occur, which is not the probability of at least one.",
+       "value": "0.83000000"
+      },
+      {
+       "text": "$0.170$",
+       "why": "Gives $P(A \\text{ and } B)$, the probability that both events occur, instead of at least one.",
+       "value": "0.17000000"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is $0.710$. $P(A \\text{ or } B) = P(A) + P(B) - P(A \\text{ and } B) = 0.39 + 0.49 - 0.17 = 0.710$.\n$0.880$ is incorrect: Adds $P(A)$ and $P(B)$ without subtracting $P(A \\text{ and } B)$, which counts the overlap twice.\n$0.830$ is incorrect: Gives the probability that the two events do not both occur, which is not the probability of at least one.\n$0.170$ is incorrect: Gives $P(A \\text{ and } B)$, the probability that both events occur, instead of at least one.",
+     "est_seconds": 85,
+     "blueprint": {
+      "id": "st_set_joint_table_q1",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find the probability that at least one of two events occurs from a joint probability table",
+      "topic": "2.4",
+      "skill": "3.C",
+      "student_thinking": [
+       "Read $P(A)$, $P(B)$ and $P(A \\text{ and } B)$ from the table",
+       "Apply the addition rule with the overlap subtracted"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Find the probability that at least one of two events occurs from a joint probability table",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "overlap_counted_twice",
+        "description": "Adds $P(A)$ and $P(B)$ without subtracting $P(A \\text{ and } B)$, which counts the overlap twice."
+       },
+       {
+        "id": "both_not_either",
+        "description": "Gives $P(A \\text{ and } B)$, the probability that both events occur, instead of at least one."
+       },
+       {
+        "id": "not_both",
+        "description": "Gives the probability that the two events do not both occur, which is not the probability of at least one."
+       }
+      ],
+      "verification": {
+       "independent_path": "the union probability is recomputed from the addition rule and from the table cells",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_joint_table_q2",
+     "topic": "2.6",
+     "skill": "3.C",
+     "stem": "What is $P(B \\mid A)$, the probability that $B$ occurs given that $A$ occurs? (Give the answer as a decimal rounded to three decimal places.)",
+     "options": [
+      {
+       "text": "$0.347$",
+       "why": "Divides by $P(B)$ instead of by $P(A)$, which gives $P(A \\mid B)$.",
+       "value": "0.34700000"
+      },
+      {
+       "text": "$0.436$",
+       "why": "$P(B \\mid A) = P(A \\text{ and } B)/P(A) = 0.17/0.39 = 0.436$.",
+       "value": "0.43600000"
+      },
+      {
+       "text": "$0.170$",
+       "why": "Gives the joint probability without dividing by the probability of the given event.",
+       "value": "0.17000000"
+      },
+      {
+       "text": "$0.490$",
+       "why": "Gives the unconditional probability $P(B)$, which ignores the given event.",
+       "value": "0.49000000"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is $0.436$. $P(B \\mid A) = P(A \\text{ and } B)/P(A) = 0.17/0.39 = 0.436$.\n$0.347$ is incorrect: Divides by $P(B)$ instead of by $P(A)$, which gives $P(A \\mid B)$.\n$0.170$ is incorrect: Gives the joint probability without dividing by the probability of the given event.\n$0.490$ is incorrect: Gives the unconditional probability $P(B)$, which ignores the given event.",
+     "est_seconds": 85,
+     "blueprint": {
+      "id": "st_set_joint_table_q2",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find a conditional probability from a joint probability table",
+      "topic": "2.6",
+      "skill": "3.C",
+      "student_thinking": [
+       "Identify the given event and read the joint probability and the probability of the given event",
+       "Divide the joint probability by the probability of the given event"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Find a conditional probability from a joint probability table",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "reversed_conditional",
+        "description": "Divides by $P(B)$ instead of by $P(A)$, which gives $P(A \\mid B)$."
+       },
+       {
+        "id": "joint_not_conditional",
+        "description": "Gives the joint probability without dividing by the probability of the given event."
+       },
+       {
+        "id": "ignores_condition",
+        "description": "Gives the unconditional probability $P(B)$, which ignores the given event."
+       }
+      ],
+      "verification": {
+       "independent_path": "the conditional probability is recomputed from the joint probability and the marginal probability",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_joint_table_q3",
+     "topic": "2.7",
+     "skill": "3.C",
+     "stem": "What is the probability that neither $A$ nor $B$ occurs? (Give the answer as a decimal rounded to three decimal places.)",
+     "options": [
+      {
+       "text": "$0.290$",
+       "why": "The probability of at least one of $A$ and $B$ is $0.710$, so the probability that neither occurs is $1 - 0.710 = 0.290$, which is also the table entry for 'not $A$ and not $B$'.",
+       "value": "0.29000000"
+      },
+      {
+       "text": "$0.120$",
+       "why": "Subtracts $P(A)$ and $P(B)$ from $1$ without adding back the overlap, which removes the overlap twice.",
+       "value": "0.12000000"
+      },
+      {
+       "text": "$0.710$",
+       "why": "Gives the probability that at least one event occurs instead of the probability that neither occurs.",
+       "value": "0.71000000"
+      },
+      {
+       "text": "$0.830$",
+       "why": "Gives the probability that the two events do not both occur, which is larger than the probability that neither occurs.",
+       "value": "0.83000000"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is $0.290$. The probability of at least one of $A$ and $B$ is $0.710$, so the probability that neither occurs is $1 - 0.710 = 0.290$, which is also the table entry for 'not $A$ and not $B$'.\n$0.120$ is incorrect: Subtracts $P(A)$ and $P(B)$ from $1$ without adding back the overlap, which removes the overlap twice.\n$0.710$ is incorrect: Gives the probability that at least one event occurs instead of the probability that neither occurs.\n$0.830$ is incorrect: Gives the probability that the two events do not both occur, which is larger than the probability that neither occurs.",
+     "est_seconds": 90,
+     "blueprint": {
+      "id": "st_set_joint_table_q3",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find the probability that neither of two events occurs from a joint probability table",
+      "topic": "2.7",
+      "skill": "3.C",
+      "student_thinking": [
+       "Find the probability that at least one event occurs",
+       "Take the complement to find the probability that neither occurs"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Find the probability that neither of two events occurs from a joint probability table",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "union_not_neither",
+        "description": "Gives the probability that at least one event occurs instead of the probability that neither occurs."
+       },
+       {
+        "id": "overlap_removed_twice",
+        "description": "Subtracts $P(A)$ and $P(B)$ from $1$ without adding back the overlap, which removes the overlap twice."
+       },
+       {
+        "id": "not_both",
+        "description": "Gives the probability that the two events do not both occur, which is larger than the probability that neither occurs."
+       }
+      ],
+      "verification": {
+       "independent_path": "the probability is recomputed as the complement of the union and compared with the table cell for neither",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "representation_reading"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 260,
+   "facts": [
+    "pr=[0.17, 0.22, 0.32, 0.29]"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_set_joint_table_q1",
+   "facts": [
+    "pr=[0.17, 0.22, 0.32, 0.29]"
+   ],
+   "seed": 30500
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Addition rule from joint table; fits 2.4 and 3.C."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "0.39+0.49-0.17=0.710; unique."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table data complete, consistent totals, rounding stated."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct realistic errors; explanation covers each. Minor misconception id/description mismatch in metadata only."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short, light arithmetic, appropriate."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Correct, clean, suitable item; passes all criteria."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Conditional probability from a joint table; matches topic 2.6 and skill 3.C."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "0.17/0.39=0.436 is the unique correct option; the other three are distinct values."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table data is complete and consistent, with row/column totals and labels. The stem defines events A and B, and rounding is stated."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor encodes a distinct named misconception (reversed conditional, joint probability, unconditional probability), and the explanation addresses each one."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short, one dominant skill, minimal arithmetic, calculator designation consistent."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Correct, clean standard conditional probability item. All criteria pass."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Union/complement of two events from a joint table; calculation fits 3.C and topic 2.7. Minor: the answer is directly readable as a table cell, reducing demand on the union rule."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "P(A)=0.39, P(B)=0.49, P(A∩B)=0.17, union 0.71, neither 0.29; the table cell confirms it. Unique answer."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table is complete with row/column labels and totals; events A and B defined in the stem; rounding stated."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "0.12 = 1-P(A)-P(B); 0.71 = union; 0.83 = 1-P(A and B). Each is a distinct named misconception and the explanation addresses each."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short, light arithmetic, parallel numeric options, calculator designation harmless."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Correct, clear, well-formed item with distinct distractors. The only weakness is that the key can be read directly from a table cell, which slightly weakens the union-rule demand but does not make the item invalid."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "The item is a direct application of the addition rule using values read from a joint table: 0.39 + 0.49 - 0.17 = 0.71. It has 2 counted steps, below the 3 required for exam_prep. The arithmetic is light and the reading load is low. Only one distractor survives the first step and fails later. No unfair difficulty sources.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "One-step conditional probability from a joint table: P(B|A)=0.17/0.39≈0.436. Distractors reflect common errors (reversed conditioning, joint probability, marginal probability). Minimal reading and computation, with no extra reasoning layer.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "The item takes 2 sequential steps: find P(A or B) with the addition rule, then apply the complement. The answer can also be read directly from the table cell for 40 or older with no flu shot, which is 0.29. This is below the exam_prep threshold of 3 steps. The distractors 0.71 and 0.83 come from stopping after the union or from a misapplied rule. Reading and arithmetic are light, and neither is an unfair source of difficulty.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_statistics-m01-k1",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "2.4",
+  "unitCode": "2",
+  "skillPrimary": "3.C",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "st_set_joint_table_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Read P(A), P(B) and P(A and B) from the joint table, then apply the addition rule: 0.61 + 0.47 - 0.26 = 0.82. This is a single concept (addition rule) with only 2 required steps, so it falls under the basic_learning rubric. Arithmetic is light and the stem is short, so no unfair sources are present.",
+  "payload": {
+   "archetype": "st_set_joint_table",
+   "topic": "2.4",
+   "skill": "3.C",
+   "calculator": "allowed",
+   "set_intro": "A school records the grade level of a randomly selected student and whether the student plays a sport. The table shown gives the probability of each combination. Let $A$ be the event that the selected individual is in grade 9, and let $B$ be the event that the individual plays a sport.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Joint probabilities",
+    "data": {
+     "chart": "table",
+     "data": {
+      "columns": [
+       "",
+       "Plays a sport",
+       "Plays no sport",
+       "Total"
+      ],
+      "rows": [
+       [
+        "Grade 9",
+        "0.26",
+        "0.35",
+        "0.61"
+       ],
+       [
+        "Grade 10",
+        "0.21",
+        "0.18",
+        "0.39"
+       ],
+       [
+        "Total",
+        "0.47",
+        "0.53",
+        "1.00"
+       ]
+      ]
+     },
+     "title": "Joint probability table"
+    }
+   },
+   "items": [
+    {
+     "archetype": "st_set_joint_table_q1",
+     "topic": "2.4",
+     "skill": "3.C",
+     "stem": "What is $P(A \\text{ or } B)$? (Give the answer as a decimal rounded to three decimal places.)",
+     "options": [
+      {
+       "text": "$0.740$",
+       "why": "Gives the probability that the two events do not both occur, which is not the probability of at least one.",
+       "value": "0.74000000"
+      },
+      {
+       "text": "$1.080$",
+       "why": "Adds $P(A)$ and $P(B)$ without subtracting $P(A \\text{ and } B)$, which counts the overlap twice.",
+       "value": "1.0800000"
+      },
+      {
+       "text": "$0.260$",
+       "why": "Gives $P(A \\text{ and } B)$, the probability that both events occur, instead of at least one.",
+       "value": "0.26000000"
+      },
+      {
+       "text": "$0.820$",
+       "why": "$P(A \\text{ or } B) = P(A) + P(B) - P(A \\text{ and } B) = 0.61 + 0.47 - 0.26 = 0.820$.",
+       "value": "0.82000000"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is $0.820$. $P(A \\text{ or } B) = P(A) + P(B) - P(A \\text{ and } B) = 0.61 + 0.47 - 0.26 = 0.820$.\n$0.740$ is incorrect: Gives the probability that the two events do not both occur, which is not the probability of at least one.\n$1.080$ is incorrect: Adds $P(A)$ and $P(B)$ without subtracting $P(A \\text{ and } B)$, which counts the overlap twice.\n$0.260$ is incorrect: Gives $P(A \\text{ and } B)$, the probability that both events occur, instead of at least one.",
+     "est_seconds": 85,
+     "blueprint": {
+      "id": "st_set_joint_table_q1",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find the probability that at least one of two events occurs from a joint probability table",
+      "topic": "2.4",
+      "skill": "3.C",
+      "student_thinking": [
+       "Read $P(A)$, $P(B)$ and $P(A \\text{ and } B)$ from the table",
+       "Apply the addition rule with the overlap subtracted"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Find the probability that at least one of two events occurs from a joint probability table",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "overlap_counted_twice",
+        "description": "Adds $P(A)$ and $P(B)$ without subtracting $P(A \\text{ and } B)$, which counts the overlap twice."
+       },
+       {
+        "id": "both_not_either",
+        "description": "Gives $P(A \\text{ and } B)$, the probability that both events occur, instead of at least one."
+       },
+       {
+        "id": "not_both",
+        "description": "Gives the probability that the two events do not both occur, which is not the probability of at least one."
+       }
+      ],
+      "verification": {
+       "independent_path": "the union probability is recomputed from the addition rule and from the table cells",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_joint_table_q2",
+     "topic": "2.6",
+     "skill": "3.C",
+     "stem": "What is $P(B \\mid A)$, the probability that $B$ occurs given that $A$ occurs? (Give the answer as a decimal rounded to three decimal places.)",
+     "options": [
+      {
+       "text": "$0.426$",
+       "why": "$P(B \\mid A) = P(A \\text{ and } B)/P(A) = 0.26/0.61 = 0.426$.",
+       "value": "0.42600000"
+      },
+      {
+       "text": "$0.260$",
+       "why": "Gives the joint probability without dividing by the probability of the given event.",
+       "value": "0.26000000"
+      },
+      {
+       "text": "$0.553$",
+       "why": "Divides by $P(B)$ instead of by $P(A)$, which gives $P(A \\mid B)$.",
+       "value": "0.55300000"
+      },
+      {
+       "text": "$0.470$",
+       "why": "Gives the unconditional probability $P(B)$, which ignores the given event.",
+       "value": "0.47000000"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is $0.426$. $P(B \\mid A) = P(A \\text{ and } B)/P(A) = 0.26/0.61 = 0.426$.\n$0.260$ is incorrect: Gives the joint probability without dividing by the probability of the given event.\n$0.553$ is incorrect: Divides by $P(B)$ instead of by $P(A)$, which gives $P(A \\mid B)$.\n$0.470$ is incorrect: Gives the unconditional probability $P(B)$, which ignores the given event.",
+     "est_seconds": 85,
+     "blueprint": {
+      "id": "st_set_joint_table_q2",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find a conditional probability from a joint probability table",
+      "topic": "2.6",
+      "skill": "3.C",
+      "student_thinking": [
+       "Identify the given event and read the joint probability and the probability of the given event",
+       "Divide the joint probability by the probability of the given event"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Find a conditional probability from a joint probability table",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "reversed_conditional",
+        "description": "Divides by $P(B)$ instead of by $P(A)$, which gives $P(A \\mid B)$."
+       },
+       {
+        "id": "joint_not_conditional",
+        "description": "Gives the joint probability without dividing by the probability of the given event."
+       },
+       {
+        "id": "ignores_condition",
+        "description": "Gives the unconditional probability $P(B)$, which ignores the given event."
+       }
+      ],
+      "verification": {
+       "independent_path": "the conditional probability is recomputed from the joint probability and the marginal probability",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_joint_table_q3",
+     "topic": "2.7",
+     "skill": "3.C",
+     "stem": "What is the probability that neither $A$ nor $B$ occurs? (Give the answer as a decimal rounded to three decimal places.)",
+     "options": [
+      {
+       "text": "$0.740$",
+       "why": "Gives the probability that the two events do not both occur, which is larger than the probability that neither occurs.",
+       "value": "0.74000000"
+      },
+      {
+       "text": "$0.820$",
+       "why": "Gives the probability that at least one event occurs instead of the probability that neither occurs.",
+       "value": "0.82000000"
+      },
+      {
+       "text": "$0.180$",
+       "why": "The probability of at least one of $A$ and $B$ is $0.820$, so the probability that neither occurs is $1 - 0.820 = 0.180$, which is also the table entry for 'not $A$ and not $B$'.",
+       "value": "0.18000000"
+      },
+      {
+       "text": "$-0.080$",
+       "why": "Subtracts $P(A)$ and $P(B)$ from $1$ without adding back the overlap, which removes the overlap twice.",
+       "value": "-0.080000000"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is $0.180$. The probability of at least one of $A$ and $B$ is $0.820$, so the probability that neither occurs is $1 - 0.820 = 0.180$, which is also the table entry for 'not $A$ and not $B$'.\n$0.740$ is incorrect: Gives the probability that the two events do not both occur, which is larger than the probability that neither occurs.\n$0.820$ is incorrect: Gives the probability that at least one event occurs instead of the probability that neither occurs.\n$-0.080$ is incorrect: Subtracts $P(A)$ and $P(B)$ from $1$ without adding back the overlap, which removes the overlap twice.",
+     "est_seconds": 90,
+     "blueprint": {
+      "id": "st_set_joint_table_q3",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find the probability that neither of two events occurs from a joint probability table",
+      "topic": "2.7",
+      "skill": "3.C",
+      "student_thinking": [
+       "Find the probability that at least one event occurs",
+       "Take the complement to find the probability that neither occurs"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Find the probability that neither of two events occurs from a joint probability table",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "union_not_neither",
+        "description": "Gives the probability that at least one event occurs instead of the probability that neither occurs."
+       },
+       {
+        "id": "overlap_removed_twice",
+        "description": "Subtracts $P(A)$ and $P(B)$ from $1$ without adding back the overlap, which removes the overlap twice."
+       },
+       {
+        "id": "not_both",
+        "description": "Gives the probability that the two events do not both occur, which is larger than the probability that neither occurs."
+       }
+      ],
+      "verification": {
+       "independent_path": "the probability is recomputed as the complement of the union and compared with the table cell for neither",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "representation_reading"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 260,
+   "facts": [
+    "pr=[0.26, 0.35, 0.21, 0.18]"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_set_joint_table_q1",
+   "facts": [
+    "pr=[0.26, 0.35, 0.21, 0.18]"
+   ],
+   "seed": 30501
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "The item takes about 60-85 seconds, has light arithmetic, and has parallel numeric options.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is correct, clean, and in scope, with distinct distractors and a complete table stimulus. It passes all five criteria."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Conditional probability from joint table; calculation skill 3.C."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "0.26/0.61=0.426 unique; rounding stated."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table complete with labels, totals, title; consistent with stem."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct misconceptions, each explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short, one step, typical AP load."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is correct and clean: the key is unique, the distractors encode distinct misconceptions, the table is complete, and the load is appropriate."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Union/complement probability from a joint table fits 2.7 and 3.C. The answer can be read directly from a single cell, so the task is slightly easy but acceptable."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "0.180 is unique and correct: 1-(0.61+0.47-0.26)=0.18, which matches the table cell."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table data is complete, with the title, row and column labels, and totals. Rounding is stated."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "The distractors are 0.74 (not both), 0.82 (union) and -0.08 (overlap removed twice). Each is a distinct misconception, and the explanation covers all three."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "The task takes about 60-90 seconds with light arithmetic and a standard four-option format."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is correct, clear and on topic. The only weakness is that the answer is a direct cell read, which makes it easy, but this is acceptable. Pass."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Read P(A), P(B) and P(A and B) from the joint table, then apply the addition rule: 0.61 + 0.47 - 0.26 = 0.82. This is a single concept (addition rule) with only 2 required steps, so it falls under the basic_learning rubric. Arithmetic is light and the stem is short, so no unfair sources are present.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-step conditional probability from a joint table: 0.26/0.61 = 0.426. Distractors are the joint probability, the reversed conditional, and the marginal. Minimal reading and computation; it tests only recall of the formula and reading the table correctly.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 40
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "The item needs 2 sequential steps: P(A or B) = 0.61 + 0.47 - 0.26 = 0.82, then the complement 1 - 0.82 = 0.18. It uses a single table, two basic concepts (addition rule, complement rule) and light arithmetic. The answer can also be read straight from the Grade 10 / no-sport cell. This is below the exam_prep threshold of at least 3 steps and 2 or more combined concepts, so it fits basic_learning.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_statistics-m01-k2",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "2.4",
+  "unitCode": "2",
+  "skillPrimary": "3.C",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "st_set_joint_table_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept application of the addition rule using values read directly from a joint table: 0.43 + 0.70 - 0.32 = 0.81. Only 2 required steps, below the 3-step threshold for exam_prep. Distractors (0.68, 0.32, 1.13) reflect common errors, but the item stays at the basic level.",
+  "payload": {
+   "archetype": "st_set_joint_table",
+   "topic": "2.4",
+   "skill": "3.C",
+   "calculator": "allowed",
+   "set_intro": "A school records the grade level of a randomly selected student and whether the student plays a sport. The table shown gives the probability of each combination. Let $A$ be the event that the selected individual is in grade 9, and let $B$ be the event that the individual plays a sport.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Joint probabilities",
+    "data": {
+     "chart": "table",
+     "data": {
+      "columns": [
+       "",
+       "Plays a sport",
+       "Plays no sport",
+       "Total"
+      ],
+      "rows": [
+       [
+        "Grade 9",
+        "0.32",
+        "0.11",
+        "0.43"
+       ],
+       [
+        "Grade 10",
+        "0.38",
+        "0.19",
+        "0.57"
+       ],
+       [
+        "Total",
+        "0.70",
+        "0.30",
+        "1.00"
+       ]
+      ]
+     },
+     "title": "Joint probability table"
+    }
+   },
+   "items": [
+    {
+     "archetype": "st_set_joint_table_q1",
+     "topic": "2.4",
+     "skill": "3.C",
+     "stem": "What is $P(A \\text{ or } B)$? (Give the answer as a decimal rounded to three decimal places.)",
+     "options": [
+      {
+       "text": "$0.680$",
+       "why": "Gives the probability that the two events do not both occur, which is not the probability of at least one.",
+       "value": "0.68000000"
+      },
+      {
+       "text": "$0.320$",
+       "why": "Gives $P(A \\text{ and } B)$, the probability that both events occur, instead of at least one.",
+       "value": "0.32000000"
+      },
+      {
+       "text": "$1.130$",
+       "why": "Adds $P(A)$ and $P(B)$ without subtracting $P(A \\text{ and } B)$, which counts the overlap twice.",
+       "value": "1.1300000"
+      },
+      {
+       "text": "$0.810$",
+       "why": "$P(A \\text{ or } B) = P(A) + P(B) - P(A \\text{ and } B) = 0.43 + 0.70 - 0.32 = 0.810$.",
+       "value": "0.81000000"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is $0.810$. $P(A \\text{ or } B) = P(A) + P(B) - P(A \\text{ and } B) = 0.43 + 0.70 - 0.32 = 0.810$.\n$0.680$ is incorrect: Gives the probability that the two events do not both occur, which is not the probability of at least one.\n$0.320$ is incorrect: Gives $P(A \\text{ and } B)$, the probability that both events occur, instead of at least one.\n$1.130$ is incorrect: Adds $P(A)$ and $P(B)$ without subtracting $P(A \\text{ and } B)$, which counts the overlap twice.",
+     "est_seconds": 85,
+     "blueprint": {
+      "id": "st_set_joint_table_q1",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find the probability that at least one of two events occurs from a joint probability table",
+      "topic": "2.4",
+      "skill": "3.C",
+      "student_thinking": [
+       "Read $P(A)$, $P(B)$ and $P(A \\text{ and } B)$ from the table",
+       "Apply the addition rule with the overlap subtracted"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Find the probability that at least one of two events occurs from a joint probability table",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "overlap_counted_twice",
+        "description": "Adds $P(A)$ and $P(B)$ without subtracting $P(A \\text{ and } B)$, which counts the overlap twice."
+       },
+       {
+        "id": "both_not_either",
+        "description": "Gives $P(A \\text{ and } B)$, the probability that both events occur, instead of at least one."
+       },
+       {
+        "id": "not_both",
+        "description": "Gives the probability that the two events do not both occur, which is not the probability of at least one."
+       }
+      ],
+      "verification": {
+       "independent_path": "the union probability is recomputed from the addition rule and from the table cells",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_joint_table_q2",
+     "topic": "2.6",
+     "skill": "3.C",
+     "stem": "What is $P(B \\mid A)$, the probability that $B$ occurs given that $A$ occurs? (Give the answer as a decimal rounded to three decimal places.)",
+     "options": [
+      {
+       "text": "$0.700$",
+       "why": "Gives the unconditional probability $P(B)$, which ignores the given event.",
+       "value": "0.70000000"
+      },
+      {
+       "text": "$0.457$",
+       "why": "Divides by $P(B)$ instead of by $P(A)$, which gives $P(A \\mid B)$.",
+       "value": "0.45700000"
+      },
+      {
+       "text": "$0.320$",
+       "why": "Gives the joint probability without dividing by the probability of the given event.",
+       "value": "0.32000000"
+      },
+      {
+       "text": "$0.744$",
+       "why": "$P(B \\mid A) = P(A \\text{ and } B)/P(A) = 0.32/0.43 = 0.744$.",
+       "value": "0.74400000"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is $0.744$. $P(B \\mid A) = P(A \\text{ and } B)/P(A) = 0.32/0.43 = 0.744$.\n$0.700$ is incorrect: Gives the unconditional probability $P(B)$, which ignores the given event.\n$0.457$ is incorrect: Divides by $P(B)$ instead of by $P(A)$, which gives $P(A \\mid B)$.\n$0.320$ is incorrect: Gives the joint probability without dividing by the probability of the given event.",
+     "est_seconds": 85,
+     "blueprint": {
+      "id": "st_set_joint_table_q2",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find a conditional probability from a joint probability table",
+      "topic": "2.6",
+      "skill": "3.C",
+      "student_thinking": [
+       "Identify the given event and read the joint probability and the probability of the given event",
+       "Divide the joint probability by the probability of the given event"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Find a conditional probability from a joint probability table",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "reversed_conditional",
+        "description": "Divides by $P(B)$ instead of by $P(A)$, which gives $P(A \\mid B)$."
+       },
+       {
+        "id": "joint_not_conditional",
+        "description": "Gives the joint probability without dividing by the probability of the given event."
+       },
+       {
+        "id": "ignores_condition",
+        "description": "Gives the unconditional probability $P(B)$, which ignores the given event."
+       }
+      ],
+      "verification": {
+       "independent_path": "the conditional probability is recomputed from the joint probability and the marginal probability",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_joint_table_q3",
+     "topic": "2.7",
+     "skill": "3.C",
+     "stem": "What is the probability that neither $A$ nor $B$ occurs? (Give the answer as a decimal rounded to three decimal places.)",
+     "options": [
+      {
+       "text": "$-0.130$",
+       "why": "Subtracts $P(A)$ and $P(B)$ from $1$ without adding back the overlap, which removes the overlap twice.",
+       "value": "-0.13000000"
+      },
+      {
+       "text": "$0.680$",
+       "why": "Gives the probability that the two events do not both occur, which is larger than the probability that neither occurs.",
+       "value": "0.68000000"
+      },
+      {
+       "text": "$0.190$",
+       "why": "The probability of at least one of $A$ and $B$ is $0.810$, so the probability that neither occurs is $1 - 0.810 = 0.190$, which is also the table entry for 'not $A$ and not $B$'.",
+       "value": "0.19000000"
+      },
+      {
+       "text": "$0.810$",
+       "why": "Gives the probability that at least one event occurs instead of the probability that neither occurs.",
+       "value": "0.81000000"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is $0.190$. The probability of at least one of $A$ and $B$ is $0.810$, so the probability that neither occurs is $1 - 0.810 = 0.190$, which is also the table entry for 'not $A$ and not $B$'.\n$-0.130$ is incorrect: Subtracts $P(A)$ and $P(B)$ from $1$ without adding back the overlap, which removes the overlap twice.\n$0.680$ is incorrect: Gives the probability that the two events do not both occur, which is larger than the probability that neither occurs.\n$0.810$ is incorrect: Gives the probability that at least one event occurs instead of the probability that neither occurs.",
+     "est_seconds": 90,
+     "blueprint": {
+      "id": "st_set_joint_table_q3",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find the probability that neither of two events occurs from a joint probability table",
+      "topic": "2.7",
+      "skill": "3.C",
+      "student_thinking": [
+       "Find the probability that at least one event occurs",
+       "Take the complement to find the probability that neither occurs"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Find the probability that neither of two events occurs from a joint probability table",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "union_not_neither",
+        "description": "Gives the probability that at least one event occurs instead of the probability that neither occurs."
+       },
+       {
+        "id": "overlap_removed_twice",
+        "description": "Subtracts $P(A)$ and $P(B)$ from $1$ without adding back the overlap, which removes the overlap twice."
+       },
+       {
+        "id": "not_both",
+        "description": "Gives the probability that the two events do not both occur, which is larger than the probability that neither occurs."
+       }
+      ],
+      "verification": {
+       "independent_path": "the probability is recomputed as the complement of the union and compared with the table cell for neither",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "representation_reading"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 260,
+   "facts": [
+    "pr=[0.32, 0.11, 0.38, 0.19]"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_set_joint_table_q1",
+   "facts": [
+    "pr=[0.32, 0.11, 0.38, 0.19]"
+   ],
+   "seed": 30502
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Addition rule from a joint table; fits 2.4 / 3.C."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "0.81 is unique and correct."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table is complete with headers and totals; rounding is stated."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct misconceptions, each explained; the explanation covers all wrong options."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 60-85 seconds, light arithmetic."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is correct and clean. The key (0.810) is unique and the distractors are distinct and explained. The stimulus is complete and the item is exam-suitable."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Conditional probability from a joint table; matches topic 2.6 and skill 3.C."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "0.32/0.43=0.744 is the unique correct option."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table data are complete and the totals are consistent. The rounding convention is stated."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "The three distractors map to distinct misconceptions (ignoring the condition, reversing the conditional, giving the joint probability), and each is explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short task with a light reading and calculation load, typical of the AP exam."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is correct, clear and well suited to the exam. The key is unique, the distractors encode distinct misconceptions, and the table is complete."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Union/complement from joint table fits 2.7 and 3.C; light demand."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "0.19 is unique: the table cell and 1-P(A or B) agree. Other options each map to a distinct error."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table data complete with headers, totals sum to 1.00; rounding stated."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Distinct misconceptions, all explained. The negative probability -0.130 is an implausible distractor, a minor weakness."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 60-90 seconds, minimal reading, appropriate load."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Correct, clean item. The answer 0.190 is unique and verified against the table. The only weakness is the implausible negative-probability distractor, which is minor."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept application of the addition rule using values read directly from a joint table: 0.43 + 0.70 - 0.32 = 0.81. Only 2 required steps, below the 3-step threshold for exam_prep. Distractors (0.68, 0.32, 1.13) reflect common errors, but the item stays at the basic level.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-step application of P(B|A)=P(A and B)/P(A) using values read directly from a joint probability table. Distractors are standard confusions (marginal, reversed conditional, joint). Little reading, one simple division, no extra reasoning.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "The answer is the Grade 10/no-sport cell, 0.19. It can also be found with the addition rule (P(A or B) = 0.81) followed by the complement. The counted structure has only 2 steps and 2 concepts, which is below the exam_prep threshold of 3 steps. The arithmetic is light and the reading load is low. Distractors are the union value 0.81, a negative value from a misapplied rule, and 0.68.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_statistics-m02-k0",
+  "cellId": "ap_statistics-m02",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.4",
+  "unitCode": "5",
+  "skillPrimary": "3.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "st_set_scatter_outlier_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "set_item_3:difficulty_signals_concepts; difficulty_signals_concepts",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Compute the predicted value from the given line (16.48 - 1.01*9 = 7.39), then subtract from the observed value (13.6 - 7.39 = 6.21). This is two steps applying a single residual-calculation skill. The distractors (predicted value, sign-error slope, reversed sign) are common misconceptions but do not add reasoning steps. Per the rubric, 2 or fewer steps means basic_learning.",
+  "payload": {
+   "archetype": "st_set_scatter_outlier",
+   "topic": "5.4",
+   "skill": "3.B",
+   "calculator": "allowed",
+   "set_intro": "A manager records the number of hours that each of ten employees trained and the number of errors that each made in a week. The scatterplot shown displays the data, with the least-squares line $\\hat{y} = 16.48 - 1.01x$ for all $10$ observations and $r = -0.85$. One employee is highlighted: its training time is $9$ hours and its number of errors is $13.6$ errors.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Scatterplot of number of errors versus training time",
+    "data": {
+     "chart": "scatter",
+     "data": {
+      "xTitle": "Hours of training",
+      "yTitle": "Errors in a week",
+      "points": [
+       [
+        2,
+        14.1
+       ],
+       [
+        5,
+        10.7
+       ],
+       [
+        7,
+        9.8
+       ],
+       [
+        8,
+        6.4
+       ],
+       [
+        9,
+        6.3
+       ],
+       [
+        11,
+        4.4
+       ],
+       [
+        12,
+        3.1
+       ],
+       [
+        13,
+        3.4
+       ],
+       [
+        14,
+        2.1
+       ],
+       [
+        9,
+        13.6
+       ]
+      ],
+      "fitLine": {
+       "slope": -1.01,
+       "intercept": 16.48
+      },
+      "highlights": [
+       {
+        "index": 9
+       }
+      ]
+     },
+     "title": "Number of errors versus training time"
+    }
+   },
+   "items": [
+    {
+     "archetype": "st_set_scatter_outlier_q1",
+     "topic": "5.4",
+     "skill": "3.B",
+     "stem": "What is the residual of the highlighted observation? (Use the given line and round to two decimal places.)",
+     "options": [
+      {
+       "text": "$22.69$ errors",
+       "why": "Leaves the intercept out of the predicted value before subtracting.",
+       "value": "22.690000"
+      },
+      {
+       "text": "$7.39$ errors",
+       "why": "Reports the predicted value instead of the residual.",
+       "value": "7.3900000"
+      },
+      {
+       "text": "$6.21$ errors",
+       "why": "The residual is the actual value minus the predicted value: $13.6 - (7.39) = 6.21$.",
+       "value": "6.2100000"
+      },
+      {
+       "text": "$-6.21$ errors",
+       "why": "Subtracts in the wrong order; the residual is the actual value minus the predicted value.",
+       "value": "-6.2100000"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is $6.21$ errors. The residual is the actual value minus the predicted value: $13.6 - (7.39) = 6.21$.\n$22.69$ errors is incorrect: Leaves the intercept out of the predicted value before subtracting.\n$7.39$ errors is incorrect: Reports the predicted value instead of the residual.\n$-6.21$ errors is incorrect: Subtracts in the wrong order; the residual is the actual value minus the predicted value.",
+     "est_seconds": 90,
+     "blueprint": {
+      "id": "st_set_scatter_outlier_q1",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Calculate the residual of the highlighted point from the given line",
+      "topic": "5.4",
+      "skill": "3.B",
+      "student_thinking": [
+       "Find the predicted value from the line at the highlighted value of x",
+       "Subtract the predicted value from the actual value"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Calculate the residual of the highlighted point from the given line",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "sign_reversed",
+        "description": "Subtracts in the wrong order; the residual is the actual value minus the predicted value."
+       },
+       {
+        "id": "intercept_left_out",
+        "description": "Leaves the intercept out of the predicted value before subtracting."
+       },
+       {
+        "id": "prediction_not_residual",
+        "description": "Reports the predicted value instead of the residual."
+       }
+      ],
+      "verification": {
+       "independent_path": "the predicted value and the residual are recomputed from the given coefficients and the stated coordinates",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_scatter_outlier_q2",
+     "topic": "5.1",
+     "skill": "4.A",
+     "stem": "Which of the following best describes the association in the scatterplot?",
+     "options": [
+      {
+       "text": "There is a moderately strong negative linear association, and the highlighted observation is an outlier that lies far from the pattern of the other observations.",
+       "why": "The points trend in the negative direction along a line with $r = -0.85$, and the highlighted point lies far above or below the line.",
+       "value": null
+      },
+      {
+       "text": "There is a moderately strong positive linear association, and the highlighted observation is an outlier that lies far from the pattern of the other observations.",
+       "why": "Gives the wrong direction: the points trend the other way as the horizontal variable increases.",
+       "value": null
+      },
+      {
+       "text": "There is a moderately strong negative linear association with no unusual observations.",
+       "why": "The highlighted observation lies far from the pattern of the others, so it is an unusual observation.",
+       "value": null
+      },
+      {
+       "text": "There is a curved association, and the highlighted observation is the point where the curve bends.",
+       "why": "The other points follow a straight-line pattern with no bend; the highlighted point is an outlier.",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is There is a moderately strong negative linear association, and the highlighted observation is an outlier that lies far from the pattern of the other observations.. The points trend in the negative direction along a line with $r = -0.85$, and the highlighted point lies far above or below the line.\nThere is a moderately strong positive linear association, and the highlighted observation is an outlier that lies far from the pattern of the other observations. is incorrect: Gives the wrong direction: the points trend the other way as the horizontal variable increases.\nThere is a moderately strong negative linear association with no unusual observations. is incorrect: The highlighted observation lies far from the pattern of the others, so it is an unusual observation.\nThere is a curved association, and the highlighted observation is the point where the curve bends. is incorrect: The other points follow a straight-line pattern with no bend; the highlighted point is an outlier.",
+     "est_seconds": 90,
+     "blueprint": {
+      "id": "st_set_scatter_outlier_q2",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Describe the association in a scatterplot and recognize an unusual observation",
+      "topic": "5.1",
+      "skill": "4.A",
+      "student_thinking": [
+       "Read the direction and the form of the pattern of the points",
+       "Notice the observation that lies far from the pattern and include it in the description"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Describe the association in a scatterplot and recognize an unusual observation",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "direction_reversed",
+        "description": "Gives the wrong direction: the points trend the other way as the horizontal variable increases."
+       },
+       {
+        "id": "outlier_missed",
+        "description": "The highlighted observation lies far from the pattern of the others, so it is an unusual observation."
+       },
+       {
+        "id": "curved_form",
+        "description": "The other points follow a straight-line pattern with no bend; the highlighted point is an outlier."
+       }
+      ],
+      "verification": {
+       "independent_path": "the direction follows the sign of the correlation and the outlier lies at least 0.55 times the range of the trend away from the line",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "interpretation"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_scatter_outlier_q3",
+     "topic": "5.2",
+     "skill": "4.D",
+     "stem": "The highlighted observation is removed, and the least-squares line and the correlation are recalculated from the other observations. Which of the following describes the change?",
+     "options": [
+      {
+       "text": "The correlation would increase in strength and the slope would change very little.",
+       "why": "Without the highlighted point $|r|$ changes from $0.85$ to $0.98$, while the slope changes from $-1.01$ to $-1.01$, a change of only about $0\\%$.",
+       "value": null
+      },
+      {
+       "text": "The correlation would increase in strength and the slope would change a lot.",
+       "why": "Does not match the recalculated values: the slope goes from $-1.01$ to $-1.01$, a change of only about $0\\%$, because the highlighted point is near the middle of the values of $x$ and has little leverage.",
+       "value": null
+      },
+      {
+       "text": "The correlation would decrease in strength and the slope would change a lot.",
+       "why": "Does not match the recalculated values: the strength of the correlation goes from $|r| = 0.85$ to $0.98$, which is an increase, not a decrease and the slope goes from $-1.01$ to $-1.01$, a change of only about $0\\%$, because the highlighted point is near the middle of the values of $x$ and has little leverage.",
+       "value": null
+      },
+      {
+       "text": "The correlation would decrease in strength and the slope would change very little.",
+       "why": "Does not match the recalculated values: the strength of the correlation goes from $|r| = 0.85$ to $0.98$, which is an increase, not a decrease.",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is The correlation would increase in strength and the slope would change very little.. Without the highlighted point $|r|$ changes from $0.85$ to $0.98$, while the slope changes from $-1.01$ to $-1.01$, a change of only about $0\\%$.\nThe correlation would increase in strength and the slope would change a lot. is incorrect: Does not match the recalculated values: the slope goes from $-1.01$ to $-1.01$, a change of only about $0\\%$, because the highlighted point is near the middle of the values of $x$ and has little leverage.\nThe correlation would decrease in strength and the slope would change a lot. is incorrect: Does not match the recalculated values: the strength of the correlation goes from $|r| = 0.85$ to $0.98$, which is an increase, not a decrease and the slope goes from $-1.01$ to $-1.01$, a change of only about $0\\%$, because the highlighted point is near the middle of the values of $x$ and has little leverage.\nThe correlation would decrease in strength and the slope would change very little. is incorrect: Does not match the recalculated values: the strength of the correlation goes from $|r| = 0.85$ to $0.98$, which is an increase, not a decrease.",
+     "est_seconds": 110,
+     "blueprint": {
+      "id": "st_set_scatter_outlier_q3",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Judge how removing an outlier with little leverage changes the correlation and the slope",
+      "topic": "5.2",
+      "skill": "4.D",
+      "student_thinking": [
+       "Notice that the highlighted point is far from the line but near the middle of the values of x",
+       "Decide that removing it strengthens the correlation but leaves the slope almost unchanged and match both to one option"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Judge how removing an outlier with little leverage changes the correlation and the slope",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "change_increase_a",
+        "description": "Does not match the recalculated values: the slope goes from $-1.01$ to $-1.01$, a change of only about $0\\%$, because the highlighted point is near the middle of the values of $x$ and has little leverage."
+       },
+       {
+        "id": "change_decrease_a",
+        "description": "Does not match the recalculated values: the strength of the correlation goes from $|r| = 0.85$ to $0.98$, which is an increase, not a decrease and the slope goes from $-1.01$ to $-1.01$, a change of only about $0\\%$, because the highlighted point is near the middle of the values of $x$ and has little leverage."
+       },
+       {
+        "id": "change_decrease_very",
+        "description": "Does not match the recalculated values: the strength of the correlation goes from $|r| = 0.85$ to $0.98$, which is an increase, not a decrease."
+       }
+      ],
+      "verification": {
+       "independent_path": "the line and correlation are recomputed with and without the highlighted point and the slope changes by under 12 percent while the correlation strengthens by at least 0.06",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "interpretation",
+       "claim_justification",
+       "representation_reading"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 290,
+   "facts": [
+    "a=16.48",
+    "b=-1.01",
+    "r=-0.85"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_set_scatter_outlier_q1",
+   "facts": [
+    "a=16.48",
+    "b=-1.01",
+    "r=-0.85"
+   ],
+   "seed": 30500
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Residual computation from a given line fits topic 5.4 and skill 3.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Predicted 7.39, residual 6.21; unique correct option."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Scatter data complete with axis titles, points, fit line and highlighted index matching (9,13.6). Rounding stated."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct realistic misconceptions: sign reversal, intercept omitted, predicted value reported. Each is explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 60-90 seconds, light arithmetic, one skill, four parallel numeric options with units."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Clean, correct residual-calculation MC item with complete stimulus data and distinct distractors. Passes all criteria."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Topic 5.1 scatterplot description (direction, form, unusual point); skill 4.A fits."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Key A unique: negative trend, highlighted point (9,13.6) far above the others at similar x. B wrong direction, C misses outlier, D curvature unsupported."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Scatter data complete with axis titles, points, fit line and highlight index. Stem wording clear."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct misconceptions, parallel format, each wrong option explained. The explanation's 'above or below' is slightly vague but acceptable."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 60-90 seconds, no arithmetic, typical AP stimulus-based MC. Calculator not needed but designation allowed is acceptable."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "A clean, standard scatterplot-description item with a unique key and distinct distractors. The stimulus data are complete, and nothing here is a reject condition."
+   },
+   null
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Compute the predicted value from the given line (16.48 - 1.01*9 = 7.39), then subtract from the observed value (13.6 - 7.39 = 6.21). This is two steps applying a single residual-calculation skill. The distractors (predicted value, sign-error slope, reversed sign) are common misconceptions but do not add reasoning steps. Per the rubric, 2 or fewer steps means basic_learning.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 0,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept scatterplot description: identify negative direction, linear form, and one clearly visible outlier (9, 13.6) well above the other points near x=9. Distractors (positive direction, no unusual points, curved) are easily eliminated by reading the graph and r = -0.85. No computation or heavy reading.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   null
+  ]
+ },
+ {
+  "candidateKey": "ap_statistics-m02-k1",
+  "cellId": "ap_statistics-m02",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.4",
+  "unitCode": "5",
+  "skillPrimary": "3.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "st_set_scatter_outlier_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "set_item_3:difficulty_signals_concepts; difficulty_signals_concepts",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "The item takes two steps: compute the predicted value from the line (18.30), then subtract it from the actual value (34.6 - 18.30 = 16.30). It uses one source and one core skill, residual = actual - predicted. That is 2 steps, which is under the 3-step threshold for exam_prep. The distractors (sign error, predicted value) are plausible but do not add reasoning depth. Arithmetic is light and the reading load is low.",
+  "payload": {
+   "archetype": "st_set_scatter_outlier",
+   "topic": "5.4",
+   "skill": "3.B",
+   "calculator": "allowed",
+   "set_intro": "A scientist records the temperature of ten rooms of a building and the number of minutes that a sample of ice needs to melt in each room. The scatterplot shown displays the data, with the least-squares line $\\hat{y} = 55.02 - 1.53x$ for all $10$ observations and $r = -0.84$. One room is highlighted: its temperature is $24$ degrees Celsius and its melting time is $34.6$ minutes.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Scatterplot of melting time versus temperature",
+    "data": {
+     "chart": "scatter",
+     "data": {
+      "xTitle": "Temperature (degrees Celsius)",
+      "yTitle": "Melting time (minutes)",
+      "points": [
+       [
+        12,
+        36.9
+       ],
+       [
+        15,
+        31.6
+       ],
+       [
+        17,
+        27.5
+       ],
+       [
+        18,
+        23.6
+       ],
+       [
+        24,
+        17.3
+       ],
+       [
+        26,
+        12.6
+       ],
+       [
+        27,
+        14.2
+       ],
+       [
+        28,
+        6.4
+       ],
+       [
+        29,
+        9
+       ],
+       [
+        24,
+        34.6
+       ]
+      ],
+      "fitLine": {
+       "slope": -1.53,
+       "intercept": 55.02
+      },
+      "highlights": [
+       {
+        "index": 9
+       }
+      ]
+     },
+     "title": "Melting time versus temperature"
+    }
+   },
+   "items": [
+    {
+     "archetype": "st_set_scatter_outlier_q1",
+     "topic": "5.4",
+     "skill": "3.B",
+     "stem": "What is the residual of the highlighted observation? (Use the given line and round to two decimal places.)",
+     "options": [
+      {
+       "text": "$18.30$ minutes",
+       "why": "Reports the predicted value instead of the residual.",
+       "value": "18.300000"
+      },
+      {
+       "text": "$-16.30$ minutes",
+       "why": "Subtracts in the wrong order; the residual is the actual value minus the predicted value.",
+       "value": "-16.300000"
+      },
+      {
+       "text": "$16.30$ minutes",
+       "why": "The residual is the actual value minus the predicted value: $34.6 - (18.30) = 16.30$.",
+       "value": "16.300000"
+      },
+      {
+       "text": "$71.32$ minutes",
+       "why": "Leaves the intercept out of the predicted value before subtracting.",
+       "value": "71.320000"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is $16.30$ minutes. The residual is the actual value minus the predicted value: $34.6 - (18.30) = 16.30$.\n$18.30$ minutes is incorrect: Reports the predicted value instead of the residual.\n$-16.30$ minutes is incorrect: Subtracts in the wrong order; the residual is the actual value minus the predicted value.\n$71.32$ minutes is incorrect: Leaves the intercept out of the predicted value before subtracting.",
+     "est_seconds": 90,
+     "blueprint": {
+      "id": "st_set_scatter_outlier_q1",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Calculate the residual of the highlighted point from the given line",
+      "topic": "5.4",
+      "skill": "3.B",
+      "student_thinking": [
+       "Find the predicted value from the line at the highlighted value of x",
+       "Subtract the predicted value from the actual value"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Calculate the residual of the highlighted point from the given line",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "sign_reversed",
+        "description": "Subtracts in the wrong order; the residual is the actual value minus the predicted value."
+       },
+       {
+        "id": "intercept_left_out",
+        "description": "Leaves the intercept out of the predicted value before subtracting."
+       },
+       {
+        "id": "prediction_not_residual",
+        "description": "Reports the predicted value instead of the residual."
+       }
+      ],
+      "verification": {
+       "independent_path": "the predicted value and the residual are recomputed from the given coefficients and the stated coordinates",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_scatter_outlier_q2",
+     "topic": "5.1",
+     "skill": "4.A",
+     "stem": "Which of the following best describes the association in the scatterplot?",
+     "options": [
+      {
+       "text": "There is a moderately strong positive linear association, and the highlighted observation is an outlier that lies far from the pattern of the other observations.",
+       "why": "Gives the wrong direction: the points trend the other way as the horizontal variable increases.",
+       "value": null
+      },
+      {
+       "text": "There is a curved association, and the highlighted observation is the point where the curve bends.",
+       "why": "The other points follow a straight-line pattern with no bend; the highlighted point is an outlier.",
+       "value": null
+      },
+      {
+       "text": "There is a moderately strong negative linear association with no unusual observations.",
+       "why": "The highlighted observation lies far from the pattern of the others, so it is an unusual observation.",
+       "value": null
+      },
+      {
+       "text": "There is a moderately strong negative linear association, and the highlighted observation is an outlier that lies far from the pattern of the other observations.",
+       "why": "The points trend in the negative direction along a line with $r = -0.84$, and the highlighted point lies far above or below the line.",
+       "value": null
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is There is a moderately strong negative linear association, and the highlighted observation is an outlier that lies far from the pattern of the other observations.. The points trend in the negative direction along a line with $r = -0.84$, and the highlighted point lies far above or below the line.\nThere is a moderately strong positive linear association, and the highlighted observation is an outlier that lies far from the pattern of the other observations. is incorrect: Gives the wrong direction: the points trend the other way as the horizontal variable increases.\nThere is a curved association, and the highlighted observation is the point where the curve bends. is incorrect: The other points follow a straight-line pattern with no bend; the highlighted point is an outlier.\nThere is a moderately strong negative linear association with no unusual observations. is incorrect: The highlighted observation lies far from the pattern of the others, so it is an unusual observation.",
+     "est_seconds": 90,
+     "blueprint": {
+      "id": "st_set_scatter_outlier_q2",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Describe the association in a scatterplot and recognize an unusual observation",
+      "topic": "5.1",
+      "skill": "4.A",
+      "student_thinking": [
+       "Read the direction and the form of the pattern of the points",
+       "Notice the observation that lies far from the pattern and include it in the description"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Describe the association in a scatterplot and recognize an unusual observation",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "direction_reversed",
+        "description": "Gives the wrong direction: the points trend the other way as the horizontal variable increases."
+       },
+       {
+        "id": "outlier_missed",
+        "description": "The highlighted observation lies far from the pattern of the others, so it is an unusual observation."
+       },
+       {
+        "id": "curved_form",
+        "description": "The other points follow a straight-line pattern with no bend; the highlighted point is an outlier."
+       }
+      ],
+      "verification": {
+       "independent_path": "the direction follows the sign of the correlation and the outlier lies at least 0.55 times the range of the trend away from the line",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "interpretation"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_scatter_outlier_q3",
+     "topic": "5.2",
+     "skill": "4.D",
+     "stem": "The highlighted observation is removed, and the least-squares line and the correlation are recalculated from the other observations. Which of the following describes the change?",
+     "options": [
+      {
+       "text": "The correlation would decrease in strength and the slope would change a lot.",
+       "why": "Does not match the recalculated values: the strength of the correlation goes from $|r| = 0.84$ to $0.98$, which is an increase, not a decrease and the slope goes from $-1.53$ to $-1.64$, a change of only about $7\\%$, because the highlighted point is near the middle of the values of $x$ and has little leverage.",
+       "value": null
+      },
+      {
+       "text": "The correlation would increase in strength and the slope would change a lot.",
+       "why": "Does not match the recalculated values: the slope goes from $-1.53$ to $-1.64$, a change of only about $7\\%$, because the highlighted point is near the middle of the values of $x$ and has little leverage.",
+       "value": null
+      },
+      {
+       "text": "The correlation would decrease in strength and the slope would change very little.",
+       "why": "Does not match the recalculated values: the strength of the correlation goes from $|r| = 0.84$ to $0.98$, which is an increase, not a decrease.",
+       "value": null
+      },
+      {
+       "text": "The correlation would increase in strength and the slope would change very little.",
+       "why": "Without the highlighted point $|r|$ changes from $0.84$ to $0.98$, while the slope changes from $-1.53$ to $-1.64$, a change of only about $7\\%$.",
+       "value": null
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is The correlation would increase in strength and the slope would change very little.. Without the highlighted point $|r|$ changes from $0.84$ to $0.98$, while the slope changes from $-1.53$ to $-1.64$, a change of only about $7\\%$.\nThe correlation would decrease in strength and the slope would change a lot. is incorrect: Does not match the recalculated values: the strength of the correlation goes from $|r| = 0.84$ to $0.98$, which is an increase, not a decrease and the slope goes from $-1.53$ to $-1.64$, a change of only about $7\\%$, because the highlighted point is near the middle of the values of $x$ and has little leverage.\nThe correlation would increase in strength and the slope would change a lot. is incorrect: Does not match the recalculated values: the slope goes from $-1.53$ to $-1.64$, a change of only about $7\\%$, because the highlighted point is near the middle of the values of $x$ and has little leverage.\nThe correlation would decrease in strength and the slope would change very little. is incorrect: Does not match the recalculated values: the strength of the correlation goes from $|r| = 0.84$ to $0.98$, which is an increase, not a decrease.",
+     "est_seconds": 110,
+     "blueprint": {
+      "id": "st_set_scatter_outlier_q3",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Judge how removing an outlier with little leverage changes the correlation and the slope",
+      "topic": "5.2",
+      "skill": "4.D",
+      "student_thinking": [
+       "Notice that the highlighted point is far from the line but near the middle of the values of x",
+       "Decide that removing it strengthens the correlation but leaves the slope almost unchanged and match both to one option"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Judge how removing an outlier with little leverage changes the correlation and the slope",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "change_increase_a",
+        "description": "Does not match the recalculated values: the slope goes from $-1.53$ to $-1.64$, a change of only about $7\\%$, because the highlighted point is near the middle of the values of $x$ and has little leverage."
+       },
+       {
+        "id": "change_decrease_a",
+        "description": "Does not match the recalculated values: the strength of the correlation goes from $|r| = 0.84$ to $0.98$, which is an increase, not a decrease and the slope goes from $-1.53$ to $-1.64$, a change of only about $7\\%$, because the highlighted point is near the middle of the values of $x$ and has little leverage."
+       },
+       {
+        "id": "change_decrease_very",
+        "description": "Does not match the recalculated values: the strength of the correlation goes from $|r| = 0.84$ to $0.98$, which is an increase, not a decrease."
+       }
+      ],
+      "verification": {
+       "independent_path": "the line and correlation are recomputed with and without the highlighted point and the slope changes by under 12 percent while the correlation strengthens by at least 0.06",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "interpretation",
+       "claim_justification",
+       "representation_reading"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 290,
+   "facts": [
+    "a=55.02",
+    "b=-1.53",
+    "r=-0.84"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_set_scatter_outlier_q1",
+   "facts": [
+    "a=55.02",
+    "b=-1.53",
+    "r=-0.84"
+   ],
+   "seed": 30501
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Residual from given line: direct 5.4/3.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "16.30 is correct and unique."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Scatter data complete with titles, units, points, fit line and highlight. The plot is not strictly needed, since the stem gives the coordinates."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor maps to a distinct error (predicted value, sign reversed, intercept dropped), and the explanation covers every wrong option."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short, light arithmetic, rounding stated, calculator allowed."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is correct, in scope and well formed, with distinct distractors. The only minor concern is that the plotted points do not exactly match the stated least-squares line, which does not change the key because the stem says to use the given line."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Describing direction, form and an unusual point in a scatterplot fits topic 5.1 and skill 4.A."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Option D is the unique correct answer. The negative trend is clear and the highlighted point has a residual of about +16 from the line."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The data include axis titles with units, all 10 points, the fit line and the highlight index. The wording is clear."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Reversed direction, curved form and missed outlier are distinct misconceptions, and every wrong option is explained. The options are parallel in length and format."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "This is a quick read with no calculation, typical of an AP MC item."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound. Option D is uniquely correct, the distractors encode distinct misconceptions, the stimulus data are complete, and the task load is appropriate."
+   },
+   null
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "The item takes two steps: compute the predicted value from the line (18.30), then subtract it from the actual value (34.6 - 18.30 = 16.30). It uses one source and one core skill, residual = actual - predicted. That is 2 steps, which is under the 3-step threshold for exam_prep. The distractors (sign error, predicted value) are plausible but do not add reasoning depth. Arithmetic is light and the reading load is low.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-step description of a scatterplot: identify negative direction from the slope and r, recognize moderately strong linear form, and note the highlighted point as an outlier. Distractors are clearly wrong (positive direction, curved, no unusual points). Minimal reading and no computation. This is a core 5.1 skill with one small additional step of noting the unusual point.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 40
+   },
+   null
+  ]
+ },
+ {
+  "candidateKey": "ap_statistics-m02-k2",
+  "cellId": "ap_statistics-m02",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.4",
+  "unitCode": "5",
+  "skillPrimary": "3.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "st_set_scatter_outlier_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "set_item_3:difficulty_signals_concepts; difficulty_signals_concepts",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Two sequential steps: compute the predicted value from the line (18.59), then subtract it from the actual value (34.6 - 18.59 = 16.01). Single concept family (residual = actual - predicted), one source, light arithmetic. This falls under the rubric's 2-or-fewer-steps threshold for basic_learning. Distractors include the predicted value, the sign-flipped residual, and the sum of the line's terms.",
+  "payload": {
+   "archetype": "st_set_scatter_outlier",
+   "topic": "5.4",
+   "skill": "3.B",
+   "calculator": "allowed",
+   "set_intro": "A scientist records the temperature of ten rooms of a building and the number of minutes that a sample of ice needs to melt in each room. The scatterplot shown displays the data, with the least-squares line $\\hat{y} = 63.47 - 1.87x$ for all $10$ observations and $r = -0.86$. One room is highlighted: its temperature is $24$ degrees Celsius and its melting time is $34.6$ minutes.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Scatterplot of melting time versus temperature",
+    "data": {
+     "chart": "scatter",
+     "data": {
+      "xTitle": "Temperature (degrees Celsius)",
+      "yTitle": "Melting time (minutes)",
+      "points": [
+       [
+        13,
+        37.5
+       ],
+       [
+        19,
+        27.1
+       ],
+       [
+        20,
+        26.4
+       ],
+       [
+        23,
+        16.7
+       ],
+       [
+        24,
+        15.9
+       ],
+       [
+        25,
+        15.2
+       ],
+       [
+        28,
+        8.7
+       ],
+       [
+        29,
+        7.4
+       ],
+       [
+        30,
+        6.7
+       ],
+       [
+        24,
+        34.6
+       ]
+      ],
+      "fitLine": {
+       "slope": -1.87,
+       "intercept": 63.47
+      },
+      "highlights": [
+       {
+        "index": 9
+       }
+      ]
+     },
+     "title": "Melting time versus temperature"
+    }
+   },
+   "items": [
+    {
+     "archetype": "st_set_scatter_outlier_q1",
+     "topic": "5.4",
+     "skill": "3.B",
+     "stem": "What is the residual of the highlighted observation? (Use the given line and round to two decimal places.)",
+     "options": [
+      {
+       "text": "$-16.01$ minutes",
+       "why": "Subtracts in the wrong order; the residual is the actual value minus the predicted value.",
+       "value": "-16.010000"
+      },
+      {
+       "text": "$18.59$ minutes",
+       "why": "Reports the predicted value instead of the residual.",
+       "value": "18.590000"
+      },
+      {
+       "text": "$16.01$ minutes",
+       "why": "The residual is the actual value minus the predicted value: $34.6 - (18.59) = 16.01$.",
+       "value": "16.010000"
+      },
+      {
+       "text": "$79.48$ minutes",
+       "why": "Leaves the intercept out of the predicted value before subtracting.",
+       "value": "79.480000"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is $16.01$ minutes. The residual is the actual value minus the predicted value: $34.6 - (18.59) = 16.01$.\n$-16.01$ minutes is incorrect: Subtracts in the wrong order; the residual is the actual value minus the predicted value.\n$18.59$ minutes is incorrect: Reports the predicted value instead of the residual.\n$79.48$ minutes is incorrect: Leaves the intercept out of the predicted value before subtracting.",
+     "est_seconds": 90,
+     "blueprint": {
+      "id": "st_set_scatter_outlier_q1",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Calculate the residual of the highlighted point from the given line",
+      "topic": "5.4",
+      "skill": "3.B",
+      "student_thinking": [
+       "Find the predicted value from the line at the highlighted value of x",
+       "Subtract the predicted value from the actual value"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Calculate the residual of the highlighted point from the given line",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "sign_reversed",
+        "description": "Subtracts in the wrong order; the residual is the actual value minus the predicted value."
+       },
+       {
+        "id": "intercept_left_out",
+        "description": "Leaves the intercept out of the predicted value before subtracting."
+       },
+       {
+        "id": "prediction_not_residual",
+        "description": "Reports the predicted value instead of the residual."
+       }
+      ],
+      "verification": {
+       "independent_path": "the predicted value and the residual are recomputed from the given coefficients and the stated coordinates",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_scatter_outlier_q2",
+     "topic": "5.1",
+     "skill": "4.A",
+     "stem": "Which of the following best describes the association in the scatterplot?",
+     "options": [
+      {
+       "text": "There is a curved association, and the highlighted observation is the point where the curve bends.",
+       "why": "The other points follow a straight-line pattern with no bend; the highlighted point is an outlier.",
+       "value": null
+      },
+      {
+       "text": "There is a moderately strong positive linear association, and the highlighted observation is an outlier that lies far from the pattern of the other observations.",
+       "why": "Gives the wrong direction: the points trend the other way as the horizontal variable increases.",
+       "value": null
+      },
+      {
+       "text": "There is a moderately strong negative linear association, and the highlighted observation is an outlier that lies far from the pattern of the other observations.",
+       "why": "The points trend in the negative direction along a line with $r = -0.86$, and the highlighted point lies far above or below the line.",
+       "value": null
+      },
+      {
+       "text": "There is a moderately strong negative linear association with no unusual observations.",
+       "why": "The highlighted observation lies far from the pattern of the others, so it is an unusual observation.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is There is a moderately strong negative linear association, and the highlighted observation is an outlier that lies far from the pattern of the other observations.. The points trend in the negative direction along a line with $r = -0.86$, and the highlighted point lies far above or below the line.\nThere is a curved association, and the highlighted observation is the point where the curve bends. is incorrect: The other points follow a straight-line pattern with no bend; the highlighted point is an outlier.\nThere is a moderately strong positive linear association, and the highlighted observation is an outlier that lies far from the pattern of the other observations. is incorrect: Gives the wrong direction: the points trend the other way as the horizontal variable increases.\nThere is a moderately strong negative linear association with no unusual observations. is incorrect: The highlighted observation lies far from the pattern of the others, so it is an unusual observation.",
+     "est_seconds": 90,
+     "blueprint": {
+      "id": "st_set_scatter_outlier_q2",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Describe the association in a scatterplot and recognize an unusual observation",
+      "topic": "5.1",
+      "skill": "4.A",
+      "student_thinking": [
+       "Read the direction and the form of the pattern of the points",
+       "Notice the observation that lies far from the pattern and include it in the description"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Describe the association in a scatterplot and recognize an unusual observation",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "direction_reversed",
+        "description": "Gives the wrong direction: the points trend the other way as the horizontal variable increases."
+       },
+       {
+        "id": "outlier_missed",
+        "description": "The highlighted observation lies far from the pattern of the others, so it is an unusual observation."
+       },
+       {
+        "id": "curved_form",
+        "description": "The other points follow a straight-line pattern with no bend; the highlighted point is an outlier."
+       }
+      ],
+      "verification": {
+       "independent_path": "the direction follows the sign of the correlation and the outlier lies at least 0.55 times the range of the trend away from the line",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "interpretation"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_scatter_outlier_q3",
+     "topic": "5.2",
+     "skill": "4.D",
+     "stem": "The highlighted observation is removed, and the least-squares line and the correlation are recalculated from the other observations. Which of the following describes the change?",
+     "options": [
+      {
+       "text": "The correlation would increase in strength and the slope would change a lot.",
+       "why": "Does not match the recalculated values: the slope goes from $-1.87$ to $-1.90$, a change of only about $2\\%$, because the highlighted point is near the middle of the values of $x$ and has little leverage.",
+       "value": null
+      },
+      {
+       "text": "The correlation would decrease in strength and the slope would change very little.",
+       "why": "Does not match the recalculated values: the strength of the correlation goes from $|r| = 0.86$ to $0.99$, which is an increase, not a decrease.",
+       "value": null
+      },
+      {
+       "text": "The correlation would decrease in strength and the slope would change a lot.",
+       "why": "Does not match the recalculated values: the strength of the correlation goes from $|r| = 0.86$ to $0.99$, which is an increase, not a decrease and the slope goes from $-1.87$ to $-1.90$, a change of only about $2\\%$, because the highlighted point is near the middle of the values of $x$ and has little leverage.",
+       "value": null
+      },
+      {
+       "text": "The correlation would increase in strength and the slope would change very little.",
+       "why": "Without the highlighted point $|r|$ changes from $0.86$ to $0.99$, while the slope changes from $-1.87$ to $-1.90$, a change of only about $2\\%$.",
+       "value": null
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is The correlation would increase in strength and the slope would change very little.. Without the highlighted point $|r|$ changes from $0.86$ to $0.99$, while the slope changes from $-1.87$ to $-1.90$, a change of only about $2\\%$.\nThe correlation would increase in strength and the slope would change a lot. is incorrect: Does not match the recalculated values: the slope goes from $-1.87$ to $-1.90$, a change of only about $2\\%$, because the highlighted point is near the middle of the values of $x$ and has little leverage.\nThe correlation would decrease in strength and the slope would change very little. is incorrect: Does not match the recalculated values: the strength of the correlation goes from $|r| = 0.86$ to $0.99$, which is an increase, not a decrease.\nThe correlation would decrease in strength and the slope would change a lot. is incorrect: Does not match the recalculated values: the strength of the correlation goes from $|r| = 0.86$ to $0.99$, which is an increase, not a decrease and the slope goes from $-1.87$ to $-1.90$, a change of only about $2\\%$, because the highlighted point is near the middle of the values of $x$ and has little leverage.",
+     "est_seconds": 110,
+     "blueprint": {
+      "id": "st_set_scatter_outlier_q3",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Judge how removing an outlier with little leverage changes the correlation and the slope",
+      "topic": "5.2",
+      "skill": "4.D",
+      "student_thinking": [
+       "Notice that the highlighted point is far from the line but near the middle of the values of x",
+       "Decide that removing it strengthens the correlation but leaves the slope almost unchanged and match both to one option"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Judge how removing an outlier with little leverage changes the correlation and the slope",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "change_increase_a",
+        "description": "Does not match the recalculated values: the slope goes from $-1.87$ to $-1.90$, a change of only about $2\\%$, because the highlighted point is near the middle of the values of $x$ and has little leverage."
+       },
+       {
+        "id": "change_decrease_a",
+        "description": "Does not match the recalculated values: the strength of the correlation goes from $|r| = 0.86$ to $0.99$, which is an increase, not a decrease and the slope goes from $-1.87$ to $-1.90$, a change of only about $2\\%$, because the highlighted point is near the middle of the values of $x$ and has little leverage."
+       },
+       {
+        "id": "change_decrease_very",
+        "description": "Does not match the recalculated values: the strength of the correlation goes from $|r| = 0.86$ to $0.99$, which is an increase, not a decrease."
+       }
+      ],
+      "verification": {
+       "independent_path": "the line and correlation are recomputed with and without the highlighted point and the slope changes by under 12 percent while the correlation strengthens by at least 0.06",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "interpretation",
+       "claim_justification",
+       "representation_reading"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 290,
+   "facts": [
+    "a=63.47",
+    "b=-1.87",
+    "r=-0.86"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_set_scatter_outlier_q1",
+   "facts": [
+    "a=63.47",
+    "b=-1.87",
+    "r=-0.86"
+   ],
+   "seed": 30502
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Residual calculation from a given line fits topic 5.4 and skill 3.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "yhat=18.59, residual=16.01. The key is unique and correct."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Scatter data are complete, with axis titles, points, fit line and highlight. The highlighted point matches the stem. Rounding is stated."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "The three distractors encode distinct errors: reversed sign, predicted value reported, and intercept left out. The explanation covers each one."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "A short one-step item of about 90 seconds with light arithmetic and parallel options."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Correct, clean residual item that meets all five criteria. The scatterplot is not strictly needed, but it does no harm."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Describing direction, form, and an unusual point in a scatterplot fits topic 5.1 and skill 4.A."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "The key is unique. The highlighted point is about 16 minutes above the line, and the trend is negative and linear."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The data include axis titles with units, all points, the fit line, and the highlight, and match the stem."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "The distractors encode distinct misconceptions (curved form, reversed direction, missed outlier), and the explanation addresses each."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "The item takes about 60-90 seconds and has a light reading load. The calculator designation is harmless."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is clean and the key is unique. The distractors are distinct, and the stimulus is complete. I found no blocking issues."
+   },
+   null
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Two sequential steps: compute the predicted value from the line (18.59), then subtract it from the actual value (34.6 - 18.59 = 16.01). Single concept family (residual = actual - predicted), one source, light arithmetic. This falls under the rubric's 2-or-fewer-steps threshold for basic_learning. Distractors include the predicted value, the sign-flipped residual, and the sum of the line's terms.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Student describes direction, form, and strength from a scatterplot, using the given r and slope as support. They also identify one clearly separated outlier. Concept depth is shallow, and the distractors are straightforward (wrong direction, curved form, or no unusual points). No computation is needed, and reading load is low.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   null
+  ]
+ }
+]

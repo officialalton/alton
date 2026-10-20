@@ -3,7 +3,7 @@
  "version": 1,
  "generatedBy": "lib/ap-exam/tex-corrections-gen.test.ts (AP_TEX_CORR_WRITE=1)",
  "note": "변환 전 해설(explanation_en)의 sha256 에 묶인 교정 문안. 적용은 관리자 'AP 설명 수정 새 버전'(미리보기→확인→실행)만. before 해시가 DB 와 다르면 건드리지 않는다.",
- "count": 321,
+ "count": 336,
  "entries": [
   {
    "candidateKey": "bc-topup-final:ap_calculus_bc-f01-k0",
@@ -238,6 +238,78 @@
    "beforeSha256": "c0c1276d677a8f05e393088bac681c1149a2eab2054139bde627a7108fc9c46c",
    "afterSha256": "77e02d19a206bfa8015ab3fd4ccd94cae88b795dc7546fe4be82e08175bcd223",
    "after": "The correct answer is 5.0 hours. There are 10,000 resistant cells at the start. The surviving sensitive cells number 9,999,900. The resistant cells double each generation, so they outnumber 9,999,900 after 10 generations, because 10,000 x $2^{10}$ = 10,240,000. With a doubling time of 30 minutes, this takes 10 x 30/60 = 5 hours.\n500 hours is incorrect: Treats the ratio of surviving sensitive cells to resistant cells as the number of generations.\n4.5 hours is incorrect: Rounds the number of generations down, so the resistant cells have not yet outnumbered the surviving sensitive cells.\n8.5 hours is incorrect: Ignores the antibiotic and waits for the resistant cells to outnumber the original sensitive population."
+  },
+  {
+   "candidateKey": "chem-ch3-frq:ap_chemistry-f01-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "60e6ee8272d7b6b769d660102e86651aa8d878e4d3147c6160d9cbcb7a184122",
+   "afterSha256": "d77275ad5deb25150da6f84f10df35e0522fa92802d15cfb4722541bd7183b28",
+   "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(A) [2 pt] pH = pK_a + log([A⁻]/[HA]) = 3.75 + log(0.15/0.2) = 3.63.\n   - 1 pt: Writes pH = pK_a + log([A⁻]/[HA]) with the base in the numerator\n   - 1 pt: Calculates the pH (about 3.63)\n(B) [3 pt] The strong acid converts A⁻ to HA: A⁻ = 0.12 mol, HA = 0.23 mol; pH = 3.75 + log(0.12/0.23) = 3.47.\n   - 1 pt: Subtracts the added acid from the moles of A⁻ (0.12 mol)\n   - 1 pt: Adds the added acid to the moles of HA (0.23 mol)\n   - 1 pt: Calculates the new pH (about 3.47)\n(C) [2 pt] log([A⁻]/[HA]) = 0.30, so [A⁻]/[HA] = 1.995 and n(A⁻) = 0.399 mol.\n   - 1 pt: Finds the ratio of base to acid, $10^{0.30}$ (about 2.00)\n   - 1 pt: Multiplies by the moles of acid to get about 0.399 mol\n(D) [2 pt] The conjugate base A⁻ reacts with the added H⁺ to form HA, so the amount of H⁺ that remains free is small and the ratio [A⁻]/[HA] changes only a little.\n   - 1 pt: Identifies the conjugate base A⁻ as the species that reacts with the added H⁺ to form the weak acid\n   - 1 pt: Justifies that the ratio [A⁻]/[HA] changes only slightly, so the pH changes only slightly, because both components are present in large amounts compared with the added acid\n(E) [1 pt] The pH does not change, because the ratio [A⁻]/[HA] is unchanged by dilution; the buffer capacity decreases.\n   - 1 pt: States that the pH is unchanged and justifies it with the unchanged ratio of the concentrations of A⁻ and HA"
+  },
+  {
+   "candidateKey": "chem-ch3-frq2:ap_chemistry-f01-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "1dd1711129bd6cd822609c5e983d86203863c7e4cc0e83b1855628539415bf13",
+   "afterSha256": "372b009a19f881ed50075e1e9209a11c519b142a4d35f8b31822caea04b0d7f0",
+   "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(A) [2 pt] K_sp = $[Mg²⁺]^1$$[OH⁻]^2$; with s mol/L dissolved, $(1s)^1$$(2s)^2$ = K_sp, so s = 1.12 × 10⁻⁴ M.\n   - 1 pt: Writes K_sp = $[Mg²⁺]^1$$[OH⁻]^2$ with the coefficients as exponents\n   - 1 pt: Calculates the molar solubility (about 1.1 × 10⁻⁴ M)\n(B) [3 pt] After mixing, each concentration is halved: [Mg²⁺] = 1.0 × 10⁻³ M and [OH⁻] = 5.0 × 10⁻⁷ M. Q = 2.5 × 10⁻¹⁶, which is less than K_sp, so no precipitate forms.\n   - 1 pt: States that the concentrations are halved on mixing equal volumes\n   - 1 pt: Calculates Q (about 2.5 × 10⁻¹⁶) from the diluted concentrations\n   - 1 pt: Compares Q with K_sp and concludes that no precipitate forms\n(C) [2 pt] With [OH⁻] = 0.02 M, $(1s)^1$$(0.02)^2$ = K_sp gives s = 1.4 × 10⁻⁸ M.\n   - 1 pt: Sets up K_sp with [OH⁻] equal to the common-ion concentration (0.02 M) and ignores the small amount that dissolves\n   - 1 pt: Calculates the molar solubility (about 1.4 × 10⁻⁸ M)\n(D) [2 pt] The solubility is lower in the solution with the common ion: the added ion shifts the dissolution equilibrium toward the solid (Le Châtelier), so less of the salt dissolves.\n   - 1 pt: States that the solubility is lower in the solution that contains the common ion\n   - 1 pt: Justifies with the shift of the dissolution equilibrium toward the solid when the concentration of the common ion is increased (or Q greater than K_sp for the pure-water saturation)\n(E) [1 pt] The statement is incorrect: K_sp depends only on temperature, and the added ion changes the concentrations, not the constant.\n   - 1 pt: States that the statement is incorrect and justifies that K_sp is a constant at a given temperature"
+  },
+  {
+   "candidateKey": "chem-ch3-frq2:ap_chemistry-f01-k2",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "86ebd7cbcd99fb56d1fe90acdced834a5d899f3eebe39213917351f40753fbd0",
+   "afterSha256": "0a9681070e3d6ded8d8352bf5fcd84bb415569389fdcb027dc39921d9d0213a4",
+   "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(A) [2 pt] K_sp = $[Ag⁺]^2$$[CrO4²⁻]^1$; with s mol/L dissolved, $(2s)^2$$(1s)^1$ = K_sp, so s = 6.50 × 10⁻⁵ M.\n   - 1 pt: Writes K_sp = $[Ag⁺]^2$$[CrO4²⁻]^1$ with the coefficients as exponents\n   - 1 pt: Calculates the molar solubility (about 6.5 × 10⁻⁵ M)\n(B) [3 pt] After mixing, each concentration is halved: [Ag⁺] = 1.0 × 10⁻³ M and [CrO4²⁻] = 1.0 × 10⁻⁷ M. Q = 1.00 × 10⁻¹³, which is less than K_sp, so no precipitate forms.\n   - 1 pt: States that the concentrations are halved on mixing equal volumes\n   - 1 pt: Calculates Q (about 1.00 × 10⁻¹³) from the diluted concentrations\n   - 1 pt: Compares Q with K_sp and concludes that no precipitate forms\n(C) [2 pt] With [CrO4²⁻] = 0.05 M, $(2s)^2$$(0.05)^1$ = K_sp gives s = 2.3 × 10⁻⁶ M.\n   - 1 pt: Sets up K_sp with [CrO4²⁻] equal to the common-ion concentration (0.05 M) and ignores the small amount that dissolves\n   - 1 pt: Calculates the molar solubility (about 2.3 × 10⁻⁶ M)\n(D) [2 pt] The solubility is lower in the solution with the common ion: the added ion shifts the dissolution equilibrium toward the solid (Le Châtelier), so less of the salt dissolves.\n   - 1 pt: States that the solubility is lower in the solution that contains the common ion\n   - 1 pt: Justifies with the shift of the dissolution equilibrium toward the solid when the concentration of the common ion is increased (or Q greater than K_sp for the pure-water saturation)\n(E) [1 pt] The statement is incorrect: K_sp depends only on temperature, and the added ion changes the concentrations, not the constant.\n   - 1 pt: States that the statement is incorrect and justifies that K_sp is a constant at a given temperature"
+  },
+  {
+   "candidateKey": "chem-ch3-mc:ap_chemistry-m23-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "25c8536566229e17391fdeac98ef1b7b91f0b3dcbc7945cb2b2ac725644158b4",
+   "afterSha256": "6921a07abc4481e637b95229bf9641925b90bd2f5ecf630c61ab4489e8bbccaa",
+   "after": "The correct answer is $6.25$. K_c = $[Z]^2$ / ($[X]^1$$[Y]^1$) = $(0.5)^2$ / ($(0.1)^1$$(0.4)^1$) = 6.25.\n$0.500$ is incorrect: Adds the concentrations of the reactants in the denominator.\n$12.5$ is incorrect: Leaves out the coefficient exponents.\n$0.160$ is incorrect: Puts the reactants in the numerator and the products in the denominator."
+  },
+  {
+   "candidateKey": "chem-ch3-mc:ap_chemistry-m23-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "6517f9e5b147059e26c8a812dc22e30c09641f204f555d478bd8c394357d08b9",
+   "afterSha256": "ab11c67e00f632edbe0cb0fd61eadd980aefca79835fc51553db2050efeb1c66",
+   "after": "The correct answer is $5.12$. K_c = $[Z]^2$ / ($[X]^1$$[Y]^1$) = $(0.8)^2$ / ($(0.5)^1$$(0.25)^1$) = 5.12.\n$6.40$ is incorrect: Leaves out the coefficient exponents.\n$0.195$ is incorrect: Puts the reactants in the numerator and the products in the denominator.\n$12.8$ is incorrect: Multiplies the coefficients by the concentrations instead of using them as exponents."
+  },
+  {
+   "candidateKey": "chem-ch3-mc:ap_chemistry-m23-k2",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "86fc53b3fee8c62bb2c7b404d867f49af2689255d2b6983c2ca1550de0cd5b14",
+   "afterSha256": "f79ea2d61dc3bf96fd9dec60ccccb19e15aeb51ab7b8f9cfa513b491aea90ad9",
+   "after": "The correct answer is $40.0$. K_c = $[Z]^2$ / ($[X]^2$$[Y]^1$) = $(0.2)^2$ / ($(0.1)^2$$(0.1)^1$) = 40.0.\n$0.200$ is incorrect: Adds the concentrations of the reactants in the denominator.\n$20.0$ is incorrect: Leaves out the coefficient exponents.\n$0.0250$ is incorrect: Puts the reactants in the numerator and the products in the denominator."
+  },
+  {
+   "candidateKey": "chem-ch3-mc:ap_chemistry-m24-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "54e49b245e7ccd877d1780c7473ea760e09498b7bb9568af7ff9b18a1234a53d",
+   "afterSha256": "2ff90e41d45af875a85b0e9f5f3b8f80921187e6fe902db4876eedb3b180f8df",
+   "after": "The correct answer is $8.79 × 10⁻¹⁵$. Each mole dissolves to give 1 mol of cation and 2 mol of anion, so Ksp = $(1s)^1$$(2s)^2$ = 8.79 × 10⁻¹⁵.\n$1.69 × 10⁻¹⁰$ is incorrect: Squares the molar solubility regardless of the formula.\n$1.30 × 10⁻⁵$ is incorrect: Takes Ksp to equal the molar solubility.\n$2.20 × 10⁻¹⁵$ is incorrect: Leaves out the stoichiometric factors in the ion concentrations."
+  },
+  {
+   "candidateKey": "chem-ch3-mc:ap_chemistry-m24-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "f9c8ebcfb5db36dd6d866701967c68163ebc3e2d1331b8921c7e112972581693",
+   "afterSha256": "0bed0d39c8de2d9ce2e52f735ff72a19a934fa24e5a1f4dd30917e99c9682de1",
+   "after": "The correct answer is $3.20 × 10⁻¹¹$. Each mole dissolves to give 1 mol of cation and 2 mol of anion, so Ksp = $(1s)^1$$(2s)^2$ = 3.20 × 10⁻¹¹.\n$6.00 × 10⁻⁴$ is incorrect: Multiplies the molar solubility by the number of ions instead of raising it to the power.\n$4.00 × 10⁻⁸$ is incorrect: Squares the molar solubility regardless of the formula.\n$2.00 × 10⁻⁴$ is incorrect: Takes Ksp to equal the molar solubility."
+  },
+  {
+   "candidateKey": "chem-ch3-mc:ap_chemistry-m24-k2",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "d44f492ea7a16b07d095df475c7b5ee8d2b1e9440928270c749b42f64538fb60",
+   "afterSha256": "64ae5bf7fc6ab7d3c829cda81d85e502de214882bc1802913898a6702964a676",
+   "after": "The correct answer is $3.20 × 10⁻¹¹$. Each mole dissolves to give 1 mol of cation and 2 mol of anion, so Ksp = $(1s)^1$$(2s)^2$ = 3.20 × 10⁻¹¹.\n$2.00 × 10⁻⁴$ is incorrect: Takes Ksp to equal the molar solubility.\n$6.00 × 10⁻⁴$ is incorrect: Multiplies the molar solubility by the number of ions instead of raising it to the power.\n$8.00 × 10⁻¹²$ is incorrect: Leaves out the stoichiometric factors in the ion concentrations."
   },
   {
    "candidateKey": "chem-p1-a2:ap_chemistry-m05-k0",
@@ -2999,6 +3071,54 @@
    "beforeSha256": "4f472295d7eb606a972ac5ab599ea40037ce25aebf8630372663b8e68be12355",
    "afterSha256": "1bebad3a6f450d5093a11eaa2297a34e94722a2729adc0bb09b77b98bb4a36ab",
    "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(a) [3 pt] Differentiating implicitly: 2x + 2(y + x dy/dx) + 4y dy/dx = 0, so dy/dx = -(2x + 2y)/(2x + 4y).\n   - 1 pt: Differentiates $x^2$ and the product xy correctly (product rule)\n   - 1 pt: Differentiates the $y^2$ term with the chain rule\n   - 1 pt: Isolates dy/dx to reach the stated expression\n(b) [2 pt] Slope -1; y - 0 = -1(x - -2).\n   - 1 pt: Slope at the point (answer)\n   - 1 pt: Tangent line equation in point-slope form\n(c) [2 pt] Horizontal tangent when 2x + 2y = 0, i.e. y = -2x/2; the points are (-2, 2), (2, -2).\n   - 1 pt: Sets the numerator of dy/dx equal to zero (2x + 2y = 0)\n   - 1 pt: Substitutes into the curve equation and finds the points (answer)\n(d) [2 pt] Normal slope = 1; y - 0 = 1(x - -2).\n   - 1 pt: Normal slope is the negative reciprocal of the tangent slope (answer)\n   - 1 pt: Equation of the normal line in point-slope form"
+  },
+  {
+   "candidateKey": "x4c-bc-final:ap_calculus_bc-f01-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "3ee8f2142c786f4590db3235886524a08e55a862df45d9832c6cd503eeabc850",
+   "afterSha256": "209dac2e93bd6146228c88148f81c26a81417abb3919be371770eccf9bcd214d",
+   "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(a) [2 pt] $\\dfrac{dy}{dx}=\\dfrac{\\sin t}{1-\\cos t}=1$ at $t=\\frac{\\pi}{2}$; the point is $\\left(-2 + \\pi,2\\right)$, so $y-2=x-(-2 + \\pi)$.\n   - 1 pt: dy/dx = (dy/dt)/(dx/dt) at t = π/2 (value 1)\n   - 1 pt: Tangent line through the point (x(π/2), y(π/2))\n(b) [2 pt] $\\dfrac{dy}{dt}=2\\sin t=0$ at $t=\\pi$, where $\\dfrac{dx}{dt}=2(1-\\cos\\pi)=4\\ne0$. The point is $(2 \\pi,4)$.\n   - 1 pt: Solves dy/dt = 0 on the interval and checks dx/dt is not 0\n   - 1 pt: Coordinates of the point\n(c) [2 pt] $\\dfrac{d^2y}{dx^2}=\\dfrac{\\frac{d}{dt}\\left(dy/dx\\right)}{dx/dt}=-\\dfrac{1}{2(1-\\cos t)^2}$, which equals $- \\frac{1}{2}$ at $t=\\frac{\\pi}{2}$. It is negative, so the curve is concave down.\n   - 1 pt: Value of d2y/dx2 at t = π/2\n   - 1 pt: Gives the reason: concave down because the second derivative is negative\n(d) [3 pt] $\\sqrt{(x')^2+(y')^2}=2\\sqrt{2-2\\cos t}=4\\sin\\dfrac{t}{2}$ on $[0,\\pi]$, so the length is $\\int_0^{\\pi}4\\sin\\dfrac{t}{2}\\,dt=8$.\n   - 1 pt: Integral of sqrt($(x')^2$ + $(y')^2$) from 0 to π (setup)\n   - 1 pt: Simplifies the integrand to 2a sin(t/2) using the half-angle identity\n   - 1 pt: Value of the length"
+  },
+  {
+   "candidateKey": "x4c-bc-final:ap_calculus_bc-f02-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "089b5c341b1a37fad5ca648906f056ec4fe55121b16e6e5bcf448ebfd095890e",
+   "afterSha256": "fbb04c7dac4885d59fe752f1b80dc5c73a2739a36980187e867ecb7bdc9acecb",
+   "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(a) [3 pt] $\\displaystyle\\int_0^{\\infty}\\dfrac{30}{t^2+9}\\,dt=\\lim_{b\\to\\infty}\\dfrac{30}{3}\\arctan\\dfrac{b}{3}=\\dfrac{30}{3}\\cdot\\dfrac{\\pi}{2}=15.708$ kilograms.\n   - 1 pt: Writes the improper integral as a limit\n   - 1 pt: Antiderivative (m/c) arctan(t/c)\n   - 1 pt: Value (converges)\n(b) [2 pt] $\\displaystyle\\int_{5}^{\\infty}r(t)\\,dt=\\dfrac{30}{3}\\left(\\dfrac{\\pi}{2}-\\arctan\\dfrac{5}{3}\\right)=5.404$ kilograms, which is 34.4% of the total.\n   - 1 pt: Amount released after the first hours (value)\n   - 1 pt: Percent of the total (value)\n(c) [2 pt] $\\displaystyle\\int_0^{b}\\dfrac{30t}{t^2+9}\\,dt=\\dfrac{30}{2}\\ln\\left(b^2+9\\right)-\\dfrac{30}{2}\\ln 9$, which grows without bound as $b\\to\\infty$, so the integral diverges.\n   - 1 pt: Antiderivative (m/2) ln($t^2$ + $c^2$) and the limit as b approaches infinity (setup)\n   - 1 pt: Gives the reason for divergence: the logarithm grows without bound\n(d) [2 pt] $\\displaystyle\\int_0^{\\infty}\\dfrac{30}{(t+3)^2}\\,dt=\\dfrac{30}{3}=10.000$ kilograms. The first release gives 15.708 kilograms, which is larger, so the first release puts more pollutant into the lake.\n   - 1 pt: Total of the second release (value)\n   - 1 pt: Gives the reason for the comparison: the first release total is larger"
+  },
+  {
+   "candidateKey": "x4c-bc-final:ap_calculus_bc-f02-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "ef5d312a64442676b47ea565a30c6a41064be982c0a2656b2921194be7676967",
+   "afterSha256": "61b3128657bc188d11e64d339d45e56f44a2095b55042a97170278c138d76042",
+   "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(a) [3 pt] $\\displaystyle\\int_0^{\\infty}\\dfrac{20}{t^2+9}\\,dt=\\lim_{b\\to\\infty}\\dfrac{20}{3}\\arctan\\dfrac{b}{3}=\\dfrac{20}{3}\\cdot\\dfrac{\\pi}{2}=10.472$ kilograms.\n   - 1 pt: Writes the improper integral as a limit\n   - 1 pt: Antiderivative (m/c) arctan(t/c)\n   - 1 pt: Value (converges)\n(b) [2 pt] $\\displaystyle\\int_{3}^{\\infty}r(t)\\,dt=\\dfrac{20}{3}\\left(\\dfrac{\\pi}{2}-\\arctan\\dfrac{3}{3}\\right)=5.236$ kilograms, which is 50.0% of the total.\n   - 1 pt: Amount released after the first hours (value)\n   - 1 pt: Percent of the total (value)\n(c) [2 pt] $\\displaystyle\\int_0^{b}\\dfrac{20t}{t^2+9}\\,dt=\\dfrac{20}{2}\\ln\\left(b^2+9\\right)-\\dfrac{20}{2}\\ln 9$, which grows without bound as $b\\to\\infty$, so the integral diverges.\n   - 1 pt: Antiderivative (m/2) ln($t^2$ + $c^2$) and the limit as b approaches infinity (setup)\n   - 1 pt: Gives the reason for divergence: the logarithm grows without bound\n(d) [2 pt] $\\displaystyle\\int_0^{\\infty}\\dfrac{20}{(t+3)^2}\\,dt=\\dfrac{20}{3}=6.667$ kilograms. The first release gives 10.472 kilograms, which is larger, so the first release puts more pollutant into the lake.\n   - 1 pt: Total of the second release (value)\n   - 1 pt: Gives the reason for the comparison: the first release total is larger"
+  },
+  {
+   "candidateKey": "x4c-bc-final:ap_calculus_bc-f03-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "bfc562c8da7f09e46e8fc51005263a04aa978b7bf92bc9c25417d4106c120c66",
+   "afterSha256": "3122a2c6aacb3012aa755655f769244b6f4972c7eb5f466b760fe1b4f138ef47",
+   "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(a) [3 pt] Area $=\\dfrac12\\int_0^{\\pi/2}\\left(4\\sin2\\theta\\right)^2d\\theta=2 \\pi$.\n   - 1 pt: Area integrand (1/2) $r^2$ (setup)\n   - 1 pt: Limits of integration 0 and π/2 (setup)\n   - 1 pt: Exact value of the area\n(b) [2 pt] $\\dfrac{dr}{d\\theta}=8\\cos2\\theta$, which is $4$ at $\\theta=\\frac{\\pi}{6}$. It is positive, so the distance from the origin is increasing.\n   - 1 pt: Value of dr/dθ at π/6\n   - 1 pt: Gives the reason: increasing, because dr/dθ is positive\n(c) [2 pt] $\\dfrac{dr}{d\\theta}=8\\cos2\\theta=0$ at $\\theta=\\dfrac{\\pi}{4}$, where $r=4$.\n   - 1 pt: Sets dr/dθ = 0 and solves\n   - 1 pt: Greatest distance\n(d) [2 pt] Area of $R=\\dfrac12\\int_{\\pi/12}^{5\\pi/12}\\left[(4\\sin2\\theta)^2-\\left(2\\right)^2\\right]d\\theta=\\sqrt{3} + \\frac{2 \\pi}{3}$.\n   - 1 pt: Integral with outer curve squared minus inner curve squared and limits π/12 and 5π/12 (setup)\n   - 1 pt: Exact value of the area"
+  },
+  {
+   "candidateKey": "x4c-bc-final:ap_calculus_bc-f05-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "df8601f64ef9da15d48258370a1a07e5ffdd1e4c08385a504cbeb62337624c73",
+   "afterSha256": "9558ddc88e48810cfbef7f80d5e2666288999b62fe49808bf14a04b7c2589d27",
+   "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(a) [2 pt] For $n\\ge1$, $0<\\dfrac{1}{n^2+3}<\\dfrac{1}{n^2}$ and $\\sum\\dfrac{1}{n^2}$ is a $p$-series with $p=2>1$, so the series converges by the Direct Comparison Test.\n   - 1 pt: Compares the terms with those of the p-series sum 1/$n^2$: positive terms bounded above by 1/$n^2$\n   - 1 pt: Gives the conclusion that the series converges, supported by the comparison\n(b) [2 pt] $S_8=0.152$ and $|S-S_8|\\le a_9=\\dfrac{1}{81+3}=0.0119$.\n   - 1 pt: Partial sum S_8 (value)\n   - 1 pt: Error bound is the first omitted term a_9 (value)\n(c) [3 pt] Because $\\dfrac{1}{x^2+3}$ is positive and decreasing, $R_N\\le\\int_N^{\\infty}\\dfrac{dx}{x^2+3}=\\dfrac{1}{\\sqrt{3}}\\left(\\dfrac{\\pi}{2}-\\arctan\\dfrac{N}{\\sqrt{3}}\\right)$, which is less than $0.01$ first for $N=100$.\n   - 1 pt: Uses that the function is positive and decreasing so the tail is bounded by the improper integral from N\n   - 1 pt: Evaluates the improper integral with an arctangent antiderivative\n   - 1 pt: Least integer N (value)\n(d) [2 pt] $\\displaystyle\\lim_{n\\to\\infty}\\dfrac{(n+1)/(n^3+3)}{1/n^2}=1$, which is positive and finite, and $\\sum\\dfrac{1}{n^2}$ converges, so the series converges by the Limit Comparison Test.\n   - 1 pt: Limit of the ratio with 1/$n^2$ equals 1\n   - 1 pt: Gives the reason for the conclusion: converges, by limit comparison with the convergent p-series"
+  },
+  {
+   "candidateKey": "x4c-bc-final:ap_calculus_bc-f05-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "ec74bda511187210a1c74ce49716333bbd3b5428b9a1bd016c48f3cbd0b010cb",
+   "afterSha256": "009352f1ed42e5b3b38a28e6b6cc07d47a3ac67232b119c8790eb16a40cb1656",
+   "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(a) [2 pt] For $n\\ge1$, $0<\\dfrac{1}{n^2+2}<\\dfrac{1}{n^2}$ and $\\sum\\dfrac{1}{n^2}$ is a $p$-series with $p=2>1$, so the series converges by the Direct Comparison Test.\n   - 1 pt: Compares the terms with those of the p-series sum 1/$n^2$: positive terms bounded above by 1/$n^2$\n   - 1 pt: Gives the conclusion that the series converges, supported by the comparison\n(b) [2 pt] $S_8=0.217$ and $|S-S_8|\\le a_9=\\dfrac{1}{81+2}=0.0120$.\n   - 1 pt: Partial sum S_8 (value)\n   - 1 pt: Error bound is the first omitted term a_9 (value)\n(c) [3 pt] Because $\\dfrac{1}{x^2+2}$ is positive and decreasing, $R_N\\le\\int_N^{\\infty}\\dfrac{dx}{x^2+2}=\\dfrac{1}{\\sqrt{2}}\\left(\\dfrac{\\pi}{2}-\\arctan\\dfrac{N}{\\sqrt{2}}\\right)$, which is less than $0.01$ first for $N=100$.\n   - 1 pt: Uses that the function is positive and decreasing so the tail is bounded by the improper integral from N\n   - 1 pt: Evaluates the improper integral with an arctangent antiderivative\n   - 1 pt: Least integer N (value)\n(d) [2 pt] $\\displaystyle\\lim_{n\\to\\infty}\\dfrac{(n+1)/(n^3+2)}{1/n^2}=1$, which is positive and finite, and $\\sum\\dfrac{1}{n^2}$ converges, so the series converges by the Limit Comparison Test.\n   - 1 pt: Limit of the ratio with 1/$n^2$ equals 1\n   - 1 pt: Gives the reason for the conclusion: converges, by limit comparison with the convergent p-series"
   }
  ]
 }

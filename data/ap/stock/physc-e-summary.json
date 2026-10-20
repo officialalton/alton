@@ -1,0 +1,52 @@
+{
+ "runs": [
+  "physc-fix2"
+ ],
+ "rows": 33,
+ "passed": 30,
+ "rejected": 3,
+ "passRate": 0.909,
+ "singles": {
+  "candidates": 33
+ },
+ "unitsPassed": {
+  "1": 11,
+  "2": 3,
+  "3": 6,
+  "4": 6,
+  "6": 4
+ },
+ "figPassed": {
+  "none": 27,
+  "graph": 3
+ },
+ "figAll": {
+  "none": 30,
+  "graph": 3
+ },
+ "figPassRate": {
+  "none": "27/30",
+  "graph": "3/3"
+ },
+ "renderTypesPassed": {
+  "none": 26,
+  "ap_graph:phys_line": 3,
+  "text": 1
+ },
+ "archetypesPassed": {
+  "pc_xt_avg_vs_inst_claim": 3,
+  "pc_two_cars_catch_up": 3,
+  "pc_rank_impulse_bounce": 3,
+  "pc_vt_sine_displacement": 2,
+  "pc_rain_on_car": 3,
+  "pc_conical_pendulum_period": 3,
+  "pc_block_drop_spring_compression": 3,
+  "pc_power_from_position": 3,
+  "pc_perp_collision_speed": 3,
+  "pcs_torque_graph_set_q1": 3,
+  "pcf_qqt_orbit_energy": 1
+ },
+ "costUsd": {
+  "physc-fix2": 1.0873
+ }
+}

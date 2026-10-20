@@ -1,0 +1,601 @@
+{
+ "difficultyAudit": {
+  "declared": 38,
+  "structuralExamPrep": 8,
+  "judgeExamPrep": 8,
+  "agreement": {
+   "agree": 38
+  },
+  "singlesExamPrepShare": 0.1,
+  "disagreements": []
+ },
+ "runs": [
+  "stats-r19-p3-a",
+  "stats-r19-p3-b",
+  "stats-r19-p3-c",
+  "stats-r19-p3-d",
+  "stats-r19-p3-e",
+  "stats-r19-p3-f",
+  "stats-r19-p3-g"
+ ],
+ "rows": 116,
+ "passed": 92,
+ "rejected": 24,
+ "exactDuplicates": 0,
+ "singles": {
+  "candidates": 89,
+  "passed": 80
+ },
+ "sets": {
+  "candidates": 9,
+  "passed": 4,
+  "questionsInPassedSets": 12
+ },
+ "frq": {
+  "candidates": 18,
+  "passed": 8
+ },
+ "uniquePassedItems": 100,
+ "structureFamilies": 42,
+ "itemFamilyIds": 42,
+ "perUnit": {
+  "1": 23,
+  "2": 23,
+  "3": 21,
+  "4": 14,
+  "5": 11
+ },
+ "perSkillCategory": {
+  "1": 7,
+  "2": 28,
+  "3": 29,
+  "4": 28
+ },
+ "rejectionReasons": [
+  {
+   "key": "stats-r19-p3-a:ap_statistics-m02-k0",
+   "reason": "criterion_failed_key_scoring"
+  },
+  {
+   "key": "stats-r19-p3-a:ap_statistics-m05-k0",
+   "reason": "criterion_failed_stimulus_expression; criterion_failed_exam_suitability"
+  },
+  {
+   "key": "stats-r19-p3-a:ap_statistics-m05-k1",
+   "reason": "criterion_failed_stimulus_expression"
+  },
+  {
+   "key": "stats-r19-p3-a:ap_statistics-m08-k1",
+   "reason": "criterion_failed_distractor_explanation"
+  },
+  {
+   "key": "stats-r19-p3-a:ap_statistics-m09-k0",
+   "reason": "criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability; reference_pattern_mismatch"
+  },
+  {
+   "key": "stats-r19-p3-a:ap_statistics-m11-k1",
+   "reason": "criterion_failed_distractor_explanation"
+  },
+  {
+   "key": "stats-r19-p3-a:ap_statistics-m16-k1",
+   "reason": "criterion_failed_key_scoring; criterion_failed_distractor_explanation; instant_reject_multiple_correct; reference_pattern_mismatch"
+  },
+  {
+   "key": "stats-r19-p3-a:ap_statistics-m17-k0",
+   "reason": "solver_disagrees:The stem says 2000 simulated samples, but the table title says 1000. The answer (A) is the same either way.; criterion_failed_stimulus_expression"
+  },
+  {
+   "key": "stats-r19-p3-a:ap_statistics-m17-k1",
+   "reason": "solver_disagrees:The stem says 2000 samples were simulated for each estimator, but the table title and description say 1000. This contradiction doesn't change the answer (D).; criterion_failed_stimulus_expression; criterion_failed_exam_suitability; instant_reject_wrong_stimulus; reference_pattern_mismatch"
+  },
+  {
+   "key": "stats-r19-p3-b:ap_statistics-m02-k0",
+   "reason": "set_item_2:criterion_failed_distractor_explanation; set_item_3:criterion_failed_distractor_explanation; set_item_3:resembles_known_exam_item; criterion_failed_distractor_explanation; resembles_known_exam_item"
+  },
+  {
+   "key": "stats-r19-p3-b:ap_statistics-m02-k1",
+   "reason": "criterion_failed_key_scoring; criterion_failed_distractor_explanation; criterion_failed_exam_suitability; instant_reject_multiple_correct; reference_pattern_mismatch; set_item_1:criterion_failed_key_scoring; set_item_1:criterion_failed_distractor_explanation; set_item_1:criterion_failed_exam_suitability; set_item_1:instant_reject_multiple_correct; set_item_1:reference_pattern_mismatch; set_item_2:criterion_failed_distractor_explanation; set_item_3:criterion_failed_distractor_explanation"
+  },
+  {
+   "key": "stats-r19-p3-b:ap_statistics-m02-k2",
+   "reason": "set_item_2:criterion_failed_distractor_explanation; set_item_3:criterion_failed_distractor_explanation; criterion_failed_distractor_explanation"
+  },
+  {
+   "key": "stats-r19-p3-c:ap_statistics-f01-k0",
+   "reason": "solver_disagrees:D:numeric"
+  },
+  {
+   "key": "stats-r19-p3-c:ap_statistics-f01-k1",
+   "reason": "solver_disagrees:B:flagged,D:numeric; criterion_failed_stimulus_expression"
+  },
+  {
+   "key": "stats-r19-p3-c:ap_statistics-f01-k2",
+   "reason": "solver_disagrees:D:numeric; criterion_failed_stimulus_expression"
+  },
+  {
+   "key": "stats-r19-p3-c:ap_statistics-f02-k0",
+   "reason": "criterion_failed_key_scoring; criterion_failed_stimulus_expression; instant_reject_missing_condition"
+  },
+  {
+   "key": "stats-r19-p3-c:ap_statistics-f02-k1",
+   "reason": "criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_exam_suitability; instant_reject_missing_condition; reference_pattern_mismatch"
+  },
+  {
+   "key": "stats-r19-p3-c:ap_statistics-f04-k2",
+   "reason": "duplicate_gate_near_duplicate"
+  },
+  {
+   "key": "stats-r19-p3-e:ap_statistics-m01-k0",
+   "reason": "set_item_3:criterion_failed_distractor_explanation; criterion_failed_distractor_explanation"
+  },
+  {
+   "key": "stats-r19-p3-e:ap_statistics-m01-k2",
+   "reason": "set_item_3:criterion_failed_distractor_explanation; criterion_failed_distractor_explanation"
+  },
+  {
+   "key": "stats-r19-p3-f:ap_statistics-f01-k0",
+   "reason": "duplicate_gate_near_duplicate"
+  },
+  {
+   "key": "stats-r19-p3-f:ap_statistics-f01-k1",
+   "reason": "duplicate_gate_near_duplicate"
+  },
+  {
+   "key": "stats-r19-p3-f:ap_statistics-f02-k1",
+   "reason": "duplicate_gate_near_duplicate"
+  },
+  {
+   "key": "stats-r19-p3-f:ap_statistics-f02-k2",
+   "reason": "duplicate_gate_near_duplicate"
+  }
+ ],
+ "costs": {
+  "stats-r19-p3-a": {
+   "byStage": {
+    "difficulty": 0.5285,
+    "review": 1.1084,
+    "review2": 0.1335,
+    "review4": 0.0633,
+    "solve": 0.4778
+   },
+   "total": 2.3115
+  },
+  "stats-r19-p3-b": {
+   "byStage": {
+    "difficulty": 0.1433,
+    "review": 0.2656,
+    "review2": 0.0277,
+    "solve": 0.2164
+   },
+   "total": 0.653
+  },
+  "stats-r19-p3-c": {
+   "byStage": {
+    "difficulty": 0.1017,
+    "review": 0.3088,
+    "solve": 0.224
+   },
+   "total": 0.6345
+  },
+  "stats-r19-p3-d": {
+   "byStage": {
+    "difficulty": 0.0934,
+    "review": 0.1792,
+    "review2": 0.0284,
+    "review4": 0.025,
+    "solve": 0.0803
+   },
+   "total": 0.4063
+  },
+  "stats-r19-p3-e": {
+   "byStage": {
+    "difficulty": 0.0728,
+    "review": 0.1391,
+    "solve": 0.1123
+   },
+   "total": 0.3242
+  },
+  "stats-r19-p3-f": {
+   "byStage": {
+    "difficulty": 0.0487,
+    "review": 0.1659,
+    "solve": 0.1146
+   },
+   "total": 0.3292
+  },
+  "stats-r19-p3-g": {
+   "byStage": {
+    "difficulty": 0.0226,
+    "review": 0.0406,
+    "review2": 0.029,
+    "review4": 0.0129,
+    "solve": 0.0184
+   },
+   "total": 0.1235
+  }
+ },
+ "totalUsd": 4.7822,
+ "lookAlikeClustersWithExistingStock": 0,
+ "lookAlikeClustersContainingBatch": [
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m01-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m01-k0",
+    "stats-r19-p3-a:ap_statistics-m01-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m02-k1",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m02-k1",
+    "stats-r19-p3-d:ap_statistics-m01-k0",
+    "stats-r19-p3-d:ap_statistics-m01-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m03-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m03-k0",
+    "stats-r19-p3-a:ap_statistics-m03-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m04-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m04-k0",
+    "stats-r19-p3-a:ap_statistics-m04-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m06-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m06-k0",
+    "stats-r19-p3-a:ap_statistics-m06-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m07-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m07-k0",
+    "stats-r19-p3-a:ap_statistics-m07-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m08-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m08-k0",
+    "stats-r19-p3-d:ap_statistics-m02-k0",
+    "stats-r19-p3-d:ap_statistics-m02-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m09-k1",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m09-k1",
+    "stats-r19-p3-d:ap_statistics-m03-k0",
+    "stats-r19-p3-d:ap_statistics-m03-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m10-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m10-k0",
+    "stats-r19-p3-a:ap_statistics-m10-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m11-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m11-k0",
+    "stats-r19-p3-d:ap_statistics-m04-k0",
+    "stats-r19-p3-d:ap_statistics-m04-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m12-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m12-k0",
+    "stats-r19-p3-a:ap_statistics-m12-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m13-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m13-k0",
+    "stats-r19-p3-a:ap_statistics-m13-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m14-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m14-k0",
+    "stats-r19-p3-a:ap_statistics-m14-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m15-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m15-k0",
+    "stats-r19-p3-a:ap_statistics-m15-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m16-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m16-k0",
+    "stats-r19-p3-d:ap_statistics-m05-k0",
+    "stats-r19-p3-d:ap_statistics-m05-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m18-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m18-k0",
+    "stats-r19-p3-a:ap_statistics-m18-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m19-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m19-k0",
+    "stats-r19-p3-a:ap_statistics-m19-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m20-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m20-k0",
+    "stats-r19-p3-a:ap_statistics-m20-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m21-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m21-k0",
+    "stats-r19-p3-a:ap_statistics-m21-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m22-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m22-k0",
+    "stats-r19-p3-a:ap_statistics-m22-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m23-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m23-k0",
+    "stats-r19-p3-a:ap_statistics-m23-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m24-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m24-k0",
+    "stats-r19-p3-a:ap_statistics-m24-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m25-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m25-k0",
+    "stats-r19-p3-a:ap_statistics-m25-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m26-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m26-k0",
+    "stats-r19-p3-a:ap_statistics-m26-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m27-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m27-k0",
+    "stats-r19-p3-a:ap_statistics-m27-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m28-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m28-k0",
+    "stats-r19-p3-a:ap_statistics-m28-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m29-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m29-k0",
+    "stats-r19-p3-a:ap_statistics-m29-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m30-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m30-k0",
+    "stats-r19-p3-a:ap_statistics-m30-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m31-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m31-k0",
+    "stats-r19-p3-a:ap_statistics-m31-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m32-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m32-k0",
+    "stats-r19-p3-a:ap_statistics-m32-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m33-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m33-k0",
+    "stats-r19-p3-a:ap_statistics-m33-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m34-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m34-k0",
+    "stats-r19-p3-a:ap_statistics-m34-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m35-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m35-k0",
+    "stats-r19-p3-a:ap_statistics-m35-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-a:ap_statistics-m36-k0",
+   "keys": [
+    "stats-r19-p3-a:ap_statistics-m36-k0",
+    "stats-r19-p3-a:ap_statistics-m36-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-b:ap_statistics-m01-k0",
+   "keys": [
+    "stats-r19-p3-b:ap_statistics-m01-k0",
+    "stats-r19-p3-b:ap_statistics-m01-k1",
+    "stats-r19-p3-b:ap_statistics-m01-k2"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-d:ap_statistics-m06-k0",
+   "keys": [
+    "stats-r19-p3-d:ap_statistics-m06-k0",
+    "stats-r19-p3-d:ap_statistics-m06-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p3-d:ap_statistics-m07-k0",
+   "keys": [
+    "stats-r19-p3-d:ap_statistics-m07-k0",
+    "stats-r19-p3-d:ap_statistics-m07-k1",
+    "stats-r19-p3-g:ap_statistics-m01-k0",
+    "stats-r19-p3-g:ap_statistics-m01-k1",
+    "stats-r19-p3-g:ap_statistics-m01-k2"
+   ],
+   "reasons": [
+    "family"
+   ]
+  }
+ ],
+ "lookAlikeComparedAgainst": "403 existing auto_passed MC (all subjects incl. the S1 pilot) + 84 S2-a items"
+}

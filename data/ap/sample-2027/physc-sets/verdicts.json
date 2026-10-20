@@ -1,0 +1,1643 @@
+[
+ {
+  "key": "ap_physics_c_mechanics-m01-k0-q1",
+  "cellId": "ap_physics_c_mechanics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "W = ∫0^2 3x^2 dx = 8 J (area under curve)",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "8.00 J"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Work as integral of a polynomial force; matches 3.2 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "8 J is unique and correct; the distractor values match their described misconceptions."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data is complete and consistent with F=3x^2. The description uses a generic 'cx^2' while the stem gives c=3, which is minor."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct, realistic misconceptions; explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, low arithmetic load, typical of the AP exam; the 1 kg mass is unneeded but harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound, simple work-integral question with a correct key, distinct distractors and a consistent graph. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-step application of W = integral of F dx for a simple polynomial force. The graph just confirms the given function. Distractors reflect common errors (endpoint force, F times d). Minimal arithmetic and reading load; fits introductory work-as-integral learning rather than a full-mock level item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m01-k0-q2",
+  "cellId": "ap_physics_c_mechanics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "W=∫3x²dx from 0 to 2 = 8 J = ½(1)v², v=4 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "4.00 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Work as integral of position-dependent force plus work-energy theorem; fits 3.2 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "W=8 J, v=4.00 m/s; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data is complete with labeled axes and sampled curve consistent with 3x^2; the stem also gives F(x) explicitly, so the graph is redundant but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (F*x as work, missing factor of two, missing square root); each is explained and each numeric value matches its stated error."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, light arithmetic, calculator designation consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope and well constructed. The key of 4.00 m/s is unique, and the distractors encode distinct misconceptions that match their stated errors."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: apply the work-energy theorem, integrate a simple power function (3x^2 from 0 to 2 gives 8 J), then solve for speed. The function is given explicitly, so the graph is redundant. There are few reasoning steps and little arithmetic; the distractors map to common slips such as a missing 1/2 or reporting v^2.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m01-k1-q1",
+  "cellId": "ap_physics_c_mechanics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Work = area under F-x curve = ∫0^4 3x^2 dx = x^3 from 0 to 4 = 64 J",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "64.0 J"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Work as the integral of a position-dependent force. This is in scope for topic 3.2 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "64 J is the unique correct answer. The other options come from distinct errors."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph data match F = 3x², the axes are labeled with units, and the stem states the function. Minor: the description uses a generic c, and the mass and 'from rest' are extraneous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions (averaging forces, final force times distance, wrong power), and the explanation covers each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds of work, with a simple integral and calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is correct and unique, the distractors are distinct, and the graph is consistent with the stem. The only flaws are the extraneous mass and 'from rest' wording and a generic c in the graph description, none of which affect validity."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The task is to integrate a given polynomial force, F = 3x^2, from 0 to 4 m, which gives W = x^3 = 64 J. The function is stated in the stem, so the graph adds no real representation work. The arithmetic is trivial and there is one core step. Mass and rest are distractors. This is a direct application of work as the integral of force.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m01-k1-q2",
+  "cellId": "ap_physics_c_mechanics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "W=∫3x²dx from 0 to 4 = 64 J; v=sqrt(2W/m)=sqrt(128)=11.3 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "11.3 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Work as integral of position-dependent force plus work-energy theorem; fits topic 3.2 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "W=64 J, v=sqrt(128)=11.3 m/s; unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data complete with labeled axes and units; consistent with F=3x^2. The graph is redundant with the given formula but not misleading."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (W/m, missing factor 2, F_final*d), each verified numerically and explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 s, simple arithmetic, calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean. The key of 11.3 m/s is the unique answer, the distractors encode distinct errors, and it is within scope. The graph is slightly redundant with the formula given in the stem, but this is not a reason to reject."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: integrate a simple polynomial force (W = 64 J) and apply the work-energy theorem to get v = sqrt(128) ≈ 11.3 m/s. The function is given explicitly, so the graph adds nothing to decode. Short arithmetic, few steps; distractors reflect common slips (forgetting the factor of 2, using v = sqrt(W)).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m01-k2-q1",
+  "cellId": "ap_physics_c_mechanics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "W = ∫0^4 2x^2 dx = (2/3)(64) = 42.7 J",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "42.7 J"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Work as integral of a polynomial force, 3.2/2.B, in scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "42.67 J is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data match F=2x^2, axes labeled with units, range to 32 N. Stem also gives the formula, so the graph is redundant but consistent."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option maps to a distinct misconception (wrong power, average of endpoints, final force times distance). The first rationale is vaguely worded and uses symbols (c, X) not in the stem; the explanation is thin but covers every option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, calculator allowed, simple arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope, clean item. Minor weakness: vague wording of the first distractor rationale and the redundant graph. Pass."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: integrate a given polynomial force over position to get work. The formula is given explicitly and the graph is redundant. It takes one integration step with trivial arithmetic. Distractors reflect common errors (F*x, triangle-area approximation). It tests core understanding of work as an integral, below full-mock complexity.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m01-k2-q2",
+  "cellId": "ap_physics_c_mechanics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "W = ∫0^4 2x^2 dx = 128/3 J. Then v = sqrt(2W/m) = sqrt(85.33) ≈ 9.24 m/s.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "9.24 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Work as integral of position-dependent force plus work-energy theorem; fits topic 3.2 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "W=128/3 J, v=sqrt(2W/m)=9.24 m/s; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data consistent with F=2x^2 (32 N at 4 m); axes labeled with units; stem states the force explicitly and the starting conditions clearly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named errors (W/m, missing factor of 2, missing square root); explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 90 seconds, light calculator load, parallel numeric options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean item. It integrates F=2x^2 to get W and applies the work-energy theorem, and the graph is consistent with the stem. The distractors are distinct and realistic."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard work-energy item: integrate a polynomial force over 0 to 4 m to get 42.67 J, then apply the work-energy theorem to get v = 9.24 m/s. It requires choosing the governing law, doing one polynomial integral, and solving for speed. Distractors reflect typical errors (reporting W, reporting v^2). The graph is supplementary and the arithmetic is light.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m02-k0-q1",
+  "cellId": "ap_physics_c_mechanics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "v=dx/dt=6t^2-30t+24; at t=3: 54-90+24=-12 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "-12.0 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Differentiate a cubic and evaluate at t=3; fits 1.2 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "v=6t^2-30t+24 gives -12 m/s at t=3; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data are complete and consistent with x(t); axes cover the full range."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (x/t, position instead of velocity, acceleration); each wrong option is explained. The 'average velocity' label for x/t is slightly loose but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short task, calculator use is fine, and the load is typical. The graph is not essential to the answer, which is a minor weakness."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and has well-built distractors. The only weakness is that the graph is not needed to answer the question."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single polynomial derivative, then substitute t=3 s: v = 6t^2 - 30t + 24 = -12 m/s. The graph is redundant because x(t) is given. Only one concept and short arithmetic are needed.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m02-k0-q2",
+  "cellId": "ap_physics_c_mechanics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "x(1)=11 m, x(4)=-16 m, so displacement = -16-11 = -27 m",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "-27.0 m"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Displacement from a given position function; fits 1.2 and 2.B at low demand. The at-rest information is unnecessary."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "x(1)=11, x(4)=-16, displacement -27 m. Key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data is consistent with the function, with correct axes and a range that covers the values. The stem is self-contained."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are distinct. The explanation for 27.0 m ('absolute value as a distance with the wrong sign') is loosely worded. The -9.00 m option is average velocity but carries units of m."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, within the time budget, calculator allowed, no needless arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and acceptable. Minor issues are the redundant at-rest clause, a loosely worded rationale for the 27.0 m option, and the unit mismatch on the -9.00 m distractor. These do not make it fail."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Displacement is x(4) - x(1). Evaluating the given polynomial at two times (or reading the graph) gives -16 - 11 = -27 m. The stem supplies the rest times, so no derivative is required. There is one concept, two simple substitutions, and distractors based on sign error or a single position value.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m02-k1-q1",
+  "cellId": "ap_physics_c_mechanics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "v=dx/dt=6t^2-30t+24; v(2)=24-60+24=-12 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "-12.0 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Derivative of a polynomial position function evaluated at one time; fits topic 1.2 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "v(2) = -12 m/s is the unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph data are consistent with x(t) and the axis ranges cover all values. The graph is redundant, since the function is given in the stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has an explanation. The 24.0 option's 'differentiates only the cubic term' coincides numerically with the constant term of v(t), so the misconception is slightly loose but still plausible."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short and simple, with a calculator allowed. Low difficulty but acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and in scope. The key of -12 m/s is unique, the graph data match the function, and the distractors are plausible. The graph is redundant and the explanation for the 24.0 option is slightly loose, but neither is disqualifying."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step differentiation of a polynomial followed by substitution at t=2 s gives v=-12 m/s. The graph is redundant since x(t) is given explicitly. There is no multi-step reasoning or representation translation needed. This is a core topic 1.2 skill check suited to basic learning rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m02-k1-q2",
+  "cellId": "ap_physics_c_mechanics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "x(1)=11 m, x(4)=-16 m, displacement=-27 m",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "-27.0 m"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Displacement from a position function is Topic 1.2; the 2.B fit is weak but acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "x(1)=11, x(4)=-16, so displacement is -27 m. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph data are consistent with x(t) and complete; the graph is redundant because the stem gives the function."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct error and is explained. The description of 27.0 m as a 'distance with the wrong sign' is imprecise because the actual distance is 38 m, but it is acceptable as a sign-error distractor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, parallel value options and a low reading load. The demand is low, since the rest times are not needed, but it is acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, unique key (-27 m). The item is low-demand and the graph is redundant, but it is acceptable for Topic 1.2."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The positions at t=1 and t=4 are evaluated from the given polynomial (or read off the graph), then subtracted to get displacement. The rest times are provided, so no derivative needs to be solved. The distractors are the individual positions and the magnitude of the displacement, which test whether displacement is distinguished from position. This is a one-concept, short-path item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m02-k2-q1",
+  "cellId": "ap_physics_c_mechanics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "v=dx/dt=6t^2-42t+60; v(1)=24 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "24.0 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Derivative of a polynomial position function evaluated at a time; fits topic 1.2 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "v(1)=24 m/s is the unique correct answer; the other options are distinct wrong values."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph data match x(t) (x(1)=41, x(2)=52). The axes are complete. The graph is redundant but consistent."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception and the explanation covers every wrong option. The -30 option carries velocity units although the quantity is an acceleration, which is acceptable for a misconception distractor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short and calculator-appropriate, with parallel numeric options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean derivative-evaluation question whose key (24 m/s) is correct and unique. The distractors are distinct and plausible, and the graph is consistent with the function. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step differentiation of a polynomial followed by substitution at t=1 s. The graph is supplementary because x(t) is given explicitly. The distractors (position value 41, sign error, arithmetic slip) test basic understanding of velocity as dx/dt. Concept depth, reasoning steps, and computation are all minimal.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m02-k2-q2",
+  "cellId": "ap_physics_c_mechanics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "x(5)-x(2)=25-52=-27 m",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "-27.0 m"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60–95 seconds, needs little calculation, and the calculator designation is consistent.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean. The graph is consistent with the function and the distractors are distinct. The task is simple but acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Displacement is x(5) - x(2) = 25 - 52 = -27 m. Both values can be read from the graph or computed from the given polynomial. The stem supplies the turning times, so no differentiation is needed. The item checks the displacement concept and sign with one subtraction.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m03-k0-q1",
+  "cellId": "ap_physics_c_mechanics-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Impulse = ∫ from 0 to 0.04 of 10 sin(πt/0.04) dt = 10·(2·0.04/π) = 0.8/π ≈ 0.255 N·s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "0.255 N·s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Impulse as integral of sine force; in scope for 4.2/2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "2cT/π = 0.2546 N·s; unique key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data complete with labeled axes and units; function stated in stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions, all explained; the c and T symbols in the explanations are undefined in the stem, which is a minor wording issue."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical load, calculator allowed, short."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item: correct unique key, in scope, with a complete graph and distinct distractors. The only issue is the undefined c and T in the distractor text."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step definite integral of a sine force over one half-period to get impulse (0.8/pi = 0.255 N·s). The graph and formula agree, so there is no real representation translation. Distractors correspond to triangle-area and peak-times-width shortcuts. Computation is light, there is no extra reading load, and the setup is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m03-k0-q2",
+  "cellId": "ap_physics_c_mechanics-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Impulse = ∫10 sin(πt/0.04)dt from 0 to 0.04 = 0.8/π ≈ 0.2546 N·s. Average force = impulse / 0.04 s = 20/π ≈ 6.37 N.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "6.37 N"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Impulse as integral of F dt, then average force; sine form; fits 4.2 / 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Average force = 20/pi = 6.37 N; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Function given in stem; graph data complete with labeled axes and units; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (peak, half the peak, impulse over twice the duration), and all are explained. The explanation uses an undefined symbol c, which is a minor flaw."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 s, simple setup, calculator allowed, short parallel numeric options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key 6.37 N is correct and unique, the scope fits, and the distractors are distinct and explained. The only flaw is the undefined symbol c in the explanation."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires recognizing that impulse is the integral of force over time and that average force is impulse divided by contact time. The sine integral is within the allowed calculus scope and yields 20/pi, about 6.37 N. Distractors correspond to the peak force, half the peak, and 10/pi. Arithmetic is short and the wording is unambiguous, so the difficulty comes from the concept and not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m03-k1-q1",
+  "cellId": "ap_physics_c_mechanics-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "J = ∫F dt = 20·(0.2/π)·[−cos]_0^π = 20·0.2·2/π = 8/π ≈ 2.55 N·s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "2.55 N·s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Impulse as the integral of a sine force over time; fits topic 4.2 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "J = 8/pi = 2.546 N·s; the key is unique and the other options are distinct values."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph data is complete, with labeled axes and units, and is consistent with the stem function. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has an explanation and encodes a distinct slip. The pi*c*T/2 option is a weaker misconception but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, calculator allowed, no needless arithmetic, options parallel."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and well formed. The key 2.55 N·s follows from the integral of the sine force, and the graph is consistent with the stem. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Impulse is the integral of force over time. The student must set up the sine integral with the right limits and evaluate it (8/pi = 2.55 N·s), using the graph to confirm the setup. Distractors reflect plausible errors: a triangle-area estimate and a missing factor of 2. The calculus stays within scope (sine), the reading load is low, and the arithmetic is short.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m03-k1-q2",
+  "cellId": "ap_physics_c_mechanics-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Impulse = ∫F dt = 20*(2*0.2/π)=8/π N·s; divide by 0.2 s gives 40/π ≈ 12.7 N.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "12.7 N"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Impulse as integral of sine force, then average force; fits 4.2 / 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "40/pi = 12.73 N is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data complete with labeled axes and units, consistent with the stem function. Explanation uses undefined symbol c, minor."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained; the explanation is terse but covers all wrong options."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical load, calculator allowed, single step reasoning."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope item with a consistent graph and distinct distractors. The only flaw is the undefined symbol c in the explanation, which is minor."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires recognizing that average force = impulse/time, integrating a sine function over a half period (in scope), and dividing by the contact time. Distractors target common errors (midpoint, a missing factor of 2, the peak value). The graph and the function are redundant, and the computation is light. This is a standard multi-step AP C item, not a basic one-step recall item and not advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m03-k2-q1",
+  "cellId": "ap_physics_c_mechanics-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "J = ∫0^0.02 10 sin(πt/0.02) dt = 10·2·0.02/π = 0.127 N·s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "0.127 N·s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Impulse as integral of a sine force; Unit 4.2, skill 2.B. Calculus stays within sine."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "J = 2cT/pi = 0.1273 N·s; unique correct option, index 1."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data matches F(t) with peak 10 N at 0.01 s; axes labeled with units and ranges fit."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named errors; explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Single integral, calculator allowed, about 100 s; the graph is redundant with the stated function but harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, well formed and has good distractors, so it passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: impulse is the integral of force over time. Student integrates one sine function over a half period (or recognizes the area under the graph). Few steps, light reading, trivial arithmetic. Distractors reflect common errors (triangle area, missing factor of 2). The graph and the function are redundant, so there is little representation translation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m03-k2-q2",
+  "cellId": "ap_physics_c_mechanics-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Impulse J = ∫10 sin(πt/0.02) dt from 0 to 0.02 = 10·(0.04/π) ≈ 0.1273 N·s. Average force = J/Δt = 0.1273/0.02 ≈ 6.37 N.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "6.37 N"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Impulse integral then average force; fits 4.2 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "6.37 N is correct and unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data is complete and consistent with the stem function. Minor: the explanation uses an undefined symbol c."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained, though briefly."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Appropriate load and time; calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item. The key is verified, the distractors are distinct, and the scope is correct. The only flaw is the undefined 'c' in the explanation, which is minor."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Requires recognizing that average force = impulse/time, integrating a half-period sine (a standard integral), and dividing by the contact time. The graph and formula are redundant, and the arithmetic is short. Distractors (peak, half-peak, half of the correct value) target common errors. The stem is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m04-k0-q1",
+  "cellId": "ap_physics_c_mechanics-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Turning points where U=E=1 J occur at x=±0.100 m, so amplitude is 0.100 m (U=100x^2, k=200 N/m).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "0.100 m"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Energy graph of an SHM oscillator, turning point read. Topic 7.4 in scope; the skill is mostly a representation read with a light calculation."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "U=100x^2, so U=E=1 J at x=±0.100 m. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph data is complete: axes with units, U curve vertices, and the E line at 1 J."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors 0.005 (E/k) and 0.01 (2E/k) are traceable to k=200 N/m. The 1.00 m distractor (energy treated as a length) is weak. The explanations are acceptable but not strong."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick item with a typical reading load. The 0.5 kg mass is unused but harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound, with a correct unique key and a complete graph. The distractors are somewhat weak but traceable, so I pass it."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single graph read: find the turning point where the total energy line E = 1 J meets the U curve, at x = ±0.10 m. No calculation is needed, and the mass is an unused distractor. It tests the concept that amplitude is where KE = 0 (E = U), with one representation read and no multi-step reasoning. It is too simple for a full mock at the AP C level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m04-k0-q2",
+  "cellId": "ap_physics_c_mechanics-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "At x = 0, U = 0, so KE = E = 1 J. Then ½(0.5 kg)v² = 1 J, which gives v = 2.00 m/s.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "2.00 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 7.4, energy read from U-x graph, fits skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "v = sqrt(2E/m) = 2.00 m/s is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data are complete and consistent with the stem (U = 400x^2, E = 1 J)."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The 40.0 m/s rationale ('amplitude times k/m') does not produce 40 (0.15 x 1600 = 240), so the explanation is wrong and the distractor is not a coherent misconception."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical load and time."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key and stimulus are correct and the item is suitable, but the 40.0 m/s distractor's stated misconception does not reproduce its value, so the explanation for that option is inaccurate. Fail on the distractor/explanation criterion."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Read E = 1 J from the graph and note that all of it is kinetic at x = 0 (U = 0). Then apply (1/2)mv^2 = E to get v = 2.00 m/s. This is one governing law, one graph reading, and trivial arithmetic. The distractors are common slips (dropped 1/2, inverted formula), which do not make the item deeper.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m04-k1-q1",
+  "cellId": "ap_physics_c_mechanics-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The amplitude is where U equals E. Here U = 100x² equals 1 J at x = ±0.100 m.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "0.100 m"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": ""
+   },
+   "notes": "The item is too trivial for the skill, and the unused mass and the stray blueprint reference to a second question (speed) make it a poor fit for the exam. The time load is fine.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key and graph are correct, but the item is a pure graph read with weak distractors that have vague rationales, and it does not exercise the 2.B computation skill."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The amplitude is found by reading the turning point where the U curve meets the E line (U = E = 1 J), which gives x = 0.100 m. This takes one graph-reading step and requires only the concept that the speed is zero at the turning points. No k calculation or other arithmetic is needed, and the mass is a distractor. The distractor 0.0707 m comes from a half-energy misconception.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m04-k1-q2",
+  "cellId": "ap_physics_c_mechanics-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "At x=0, U=0 so KE=E=1 J; v=sqrt(2KE/m)=sqrt(1)=1.00 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "1.00 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Energy of SHM, read E and U from the graph, apply energy conservation. In scope for topic 7.4 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "E = 1 J and U(0) = 0, so v = sqrt(2E/m) = 1.00 m/s. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Axes, units, U curve and E line are complete and consistent with the stem (U = 100x², E = 1 J)."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "'Amplitude times k/m' and 'sqrt(2E)·m' are contrived, formula-reverse-engineered errors rather than realistic named misconceptions. Only the sqrt(E/m) distractor is realistic. The key is also the only 'clean' value."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short task, reasonable load, calculator use consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key, stimulus and scope are fine, but two of the three distractor rationales are unrealistic, contrived errors, so the distractor criterion fails."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item. Read E = 1 J from the graph, recognize max speed occurs at x = 0 where U = 0, then apply ½mv² = E to get v = 1.00 m/s. One graph read and one short calculation; the distractors reflect common errors (missing factor of 2, wrong energy value). No heavy arithmetic, ambiguity, or out-of-scope content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m04-k2-q1",
+  "cellId": "ap_physics_c_mechanics-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The amplitude is where U = E. The E line at 0.25 J crosses the U curve at x = ±0.1 m, so A = 0.100 m.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "0.100 m"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Item is a direct read of the turning point from the graph; no computational pathway, so skill 2.B (calculate with units) is barely exercised. Mass given is unused."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "U=25x^2, E=0.25 J gives A=0.100 m; unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data complete with labeled axes with units, U curve, and E line."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Distractors derive from formulas requiring k that a student reading the graph never uses; they are implausible for a graph-reader and the rationales are generic (2E/k, E/k with 'wrong power'). Explanations exist for each wrong option though."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, calculator-free in practice, time reasonable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the stimulus is complete, but the item is a trivial graph read that barely exercises the calculation skill 2.B. The distractors are weak and unlikely to attract students who read the graph. Failing on scope/skill fit and distractor quality."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Amplitude is read directly from the graph where U equals E (x = ±0.10 m). It needs one concept (turning points) and one graph read, with no real computation. The mass given in the stem is not needed.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m04-k2-q2",
+  "cellId": "ap_physics_c_mechanics-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "At x=0, U=0, so KE=E=0.25 J. Then v=sqrt(2E/m)=sqrt(2*0.25/0.5)=1.00 m/s.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "1.00 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Energy of SHO; read E from graph, use KE=E at equilibrium. Fits 7.4 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "U=25x^2, E=0.25 J, v=sqrt(2E/m)=1.00 m/s. Unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data complete with axes, U curve, E line; E=0.25 on a gridline. Mass given in stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor reproduces a distinct stated error (sqrt(2E)*m=0.354, E/m=0.5, A*k/m=10); explanation covers all."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 60-100 s, minimal arithmetic, calculator allowed, value options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean item: the key of 1.00 m/s is unique and the stimulus is complete. The distractors encode distinct errors and the load is appropriate. Passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Read E = 0.25 J from the graph, note U = 0 at x = 0 so K_max = E, then solve (1/2)mv^2 = E for v = 1.00 m/s. This is one concept (energy conservation in SHM), one graph read, and a short computation with clean numbers. Distractors match common slips such as dropping the factor of 2 or halving E.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m05-k0-q1",
+  "cellId": "ap_physics_c_mechanics-m05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "14.7 m/s",
+     "brief_reasoning": "The speed curve levels off toward about 14.7 m/s (it is 14.66 m/s at t = 9 s). This fits v = vt(1 - e^(-t/τ)) with vt = 14.7 m/s and τ = 1.5 s. Check: vt = gτ = 9.8 × 1.5 = 14.7 m/s.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": ""
+   },
+   "notes": "Time and reading load are low, and the options are clean values. The item is easy, with essentially a single step.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the stimulus is complete, but the item only asks the student to read the plateau off a graph. It does not require the calculation pathway that skill 2.B targets, so it fails on skill fit."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: terminal speed is the asymptote of the speed-time graph. It requires one graph read and no real computation. Distractors include the half value, the speed at t = tau, and a doubled value. Little reasoning is needed, which is below full-mock exam level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m05-k0-q2",
+  "cellId": "ap_physics_c_mechanics-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "2.00 kg/s",
+     "brief_reasoning": "Terminal speed ≈14.7 m/s, so b = mg/v_t = (3)(9.8)/14.7 = 2.00 kg/s. The time constant m/b = 1.5 s also fits: v(1.5 s) = 0.632 × 14.7 ≈ 9.29 m/s.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Terminal speed from the graph plus force balance, squarely on topic 2.9 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "b = mg/v_t = 2.00 kg/s. The curve is consistent with a time constant of 1.5 s. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph data are complete with labeled axes and units. The y-axis ticks (multiples of 3.675) are unusual but the plateau near 14.7 is still readable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconception distractors, each explained. The options are parallel in form."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical load for one MC item, about 105 seconds. No needless arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The unique key of 2.00 kg/s follows from reading the plateau as terminal speed and applying bv_t = mg. The distractors are distinct, and the only blemish is the odd y-axis tick spacing, which does not block reading the plateau."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single concept: at terminal speed mg = bv_T. The student reads the plateau speed (~14.7 m/s) from the graph and computes b = 3(9.8)/14.7 = 2.00 kg/s. There are only a few reasoning steps, with one graph read and simple arithmetic. The distractors reflect common slips (using mg, or multiplying by the time constant).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m05-k1-q1",
+  "cellId": "ap_physics_c_mechanics-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The curve levels off just below 5.87 m/s. The model v = vt(1 − e^(−t/τ)) fits the data with vt = 5.88 m/s and τ = vt/g = 0.6 s: at t = 0.6 s it gives 0.632 × 5.88 = 3.72 m/s, which matches the graph.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "5.88 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Terminal speed from a v-t graph with linear drag is squarely topic 2.9. The dominant demand is representation reading, a light fit for 2.B, but acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The plateau is 5.88 m/s, which is consistent with m = 3 kg, b = 5 kg/s and tau = 0.6 s. The other options are clearly distinct from the key, so the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Axes are labeled with units, the vertices are complete, and the y-axis ticks include 2.94 and 5.88. The stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are the doubled value, the value at t = tau, and half the plateau. The explanation addresses each wrong option, though briefly."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is quick to answer, requires no calculator, and has a typical option format."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: it asks for the terminal speed read from a speed-time graph, the data are consistent with the stem, and the key is unique. It is easy and leans on representation reading more than calculation, but this is acceptable for the topic."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The student identifies the terminal speed as the asymptote of the speed-time graph (about 5.88 m/s) and matches it to an option. This takes one graph reading and one concept (terminal speed is where drag balances weight), with no heavy computation. The distractors at 2x and 0.5x the true value test conceptual misreadings but add little difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m05-k1-q2",
+  "cellId": "ap_physics_c_mechanics-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "5.00 kg/s",
+     "brief_reasoning": "Terminal speed is about 5.88 m/s, so b = mg/v_t = 29.4/5.88 = 5.00 kg/s. Check: tau = m/b = 0.6 s, and v(0.6) = 3.717 m/s matches the graph.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Terminal speed from the graph plateau, then force balance bv_t=mg. This is topic 2.9 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "b=mg/v_t=5.00 kg/s is unique. Plateau is about 5.88 m/s and the other options are far off."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph has labeled axes with units and a consistent curve. Y ticks at multiples of 1.47 put the plateau exactly on the 4th tick (5.88), so it is readable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions are encoded, and each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 105 s, calculator allowed, light reading load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. It has a unique key, a consistent graph, distinct distractors and an appropriate load. I found no blocking issues."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Read terminal speed (~5.88 m/s) from the graph, set mg = b*v_t, and compute b = 3(9.8)/5.88 = 5.0 kg/s. This is one governing law, one graph reading, and simple arithmetic. Distractors correspond to mg alone, a reciprocal, and the time constant. The item is a straightforward application of linear drag with no extra reasoning layers.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m05-k2-q1",
+  "cellId": "ap_physics_c_mechanics-m05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "4.90 m/s",
+     "brief_reasoning": "The speed levels off near 4.89 m/s and is still approaching 4.90. The data fit v=4.9(1-e^{-2t}), for example v(1)=4.237.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.9 fits. Skill 2.B is only weakly exercised because the task is mostly a graph read, but this is acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "4.90 is the unique value consistent with the asymptote of the plotted data. The graph shows about 4.89 at t = 3 s, and only one option is near that."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The data are complete. The y-axis max of 6.125 with step 1.225 is an odd scale, but it is usable."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The 'doubles the plateau' rationale for 9.8 is weak because 9.8 is more naturally g. The '2τ' rationale uses an undefined τ. The explanations are thin."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Time and reading load are fine, though the item is easy and the calculator is not needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and in scope, but it is a simple graph read that barely exercises skill 2.B. Two distractor rationales are weak: 9.8 is more naturally g than \"double the plateau\", and \"2τ\" uses an undefined τ. The y-axis scale is odd. Marginal pass on the criteria, with the distractor-explanation criterion failed."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The student reads the asymptotic speed (about 4.9 m/s) from a v-t graph for linear drag. The distractors are the t = 1 s value (4.24), double the asymptote (9.80, which is g with no drag) and half of it (2.45). One representation read and one concept (terminal speed is the asymptote) are needed. There is no real computation. Optionally, a check with mg = bv_t using the initial slope of g gives the same result.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-m05-k2-q2",
+  "cellId": "ap_physics_c_mechanics-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Terminal speed ~4.9 m/s; b=mg/vt=9.8/4.9=2.00 kg/s; consistent with tau=m/b=0.5 s (v(0.5)=0.632*4.9=3.097).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "2.00 kg/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 90 to 105 seconds, needs one graph reading and one division, and the calculator designation is consistent.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean terminal-speed question. The key is unique and the distractors are distinct. The only blemish is the odd y-axis tick spacing, which does not affect answerability."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The student reads the terminal speed (~4.9 m/s) from the graph and applies mg = bv_t to get b = 2.0 kg/s. This takes one governing law, one graph read, and trivial arithmetic. The distractors are plausible misconceptions (using g or v_t as b).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ }
+]

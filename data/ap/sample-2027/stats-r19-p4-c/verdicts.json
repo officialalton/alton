@@ -1,0 +1,953 @@
+[
+ {
+  "key": "ap_statistics-f01-k0",
+  "cellId": "ap_statistics-f01",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:B:flagged",
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Get separate lists (sampling frames) of all renters and all homeowners in the city. Number each list, say renters 1 to N_R and homeowners 1 to N_H. Use a random number generator to pick 50 different numbers from each list, ignoring repeats. Survey the 100 residents chosen.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Make a list of renters and a list of homeowners, number each one, and randomly pick 50 different people from each list (random number generator, ignore repeats)."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "The 35% who send the survey back may differ from the 65% who don't. People with strong opinions, such as library supporters who care about the issue, are more likely to respond. If so, the percent in favor would be overestimated. The data don't actually tell us which way the bias goes, so the direction has to be assumed.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "Nothing in the item fixes the direction of the bias. Any direction with a sound argument should get credit.",
+     "final_answer": "People who respond probably feel more strongly than those who don't (for example, library supporters), so the survey would likely overestimate the percent in favor."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "52/100 = 0.52",
+     "ambiguous_or_flawed": false,
+     "final_answer": "52.0%"
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Homeowners: 69/180 ≈ 38.3%. Renters: 52/100 = 52.0%.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "52.0% of renters chose Favor, compared with about 38.3% of homeowners. That is about 13.7 percentage points higher for renters."
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "The question names a population (adult residents of the city) and a variable (number of library books borrowed last year). The answer varies from person to person, so data must be collected and analyzed.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "What is the typical (mean) number of library books borrowed in the past year by adult residents of this city?"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Part B asks for the direction of nonresponse bias, which the stimulus does not determine. The model answer commits to overestimating while the rubric accepts any direction, so the key and rubric are inconsistent. Part E's rubric rows are tied to specific model-answer phrasing and may penalize valid alternative populations. Parts A, C and D are sound.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The parts match their own topics (1.11, 1.12, 1.3, 1.4, 1.10) and skills. The target skill 1.A is assessed in Part E."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part B's direction is not determined by the stimulus. The model answer claims overestimation, but the opposite direction is equally defensible, and the rubric row B2 does not fix a direction. The prompt should ask for a plausible direction with justification, or the rubric should state that any justified direction earns credit. Part E rows E1 and E2 are phrased narrowly around the model answer wording."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with counts and totals, and belongs to the same study context as the parts that use it."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to a free-response item. The rubric common_errors entries are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of an AP Statistics Question 1: 10 points over 5 parts in about 22 minutes, with modest arithmetic."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Five short parts, each testing one standard Unit 1 skill: describing a stratified random sample, explaining nonresponse bias, computing and comparing percents from a small two-row table, and writing a valid investigative question. Each part takes one or two reasoning steps and uses only a single division. The context is short and nothing is out of scope. Part B's direction of bias is somewhat open-ended but can be answered with a justified reason.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_statistics-f01-k1",
+  "cellId": "ap_statistics-f01",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:B:flagged",
+   "criterion_failed_key_scoring",
+   "instant_reject_missing_condition"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Get separate lists of all freshmen and all seniors. Number the students on each list. Use a random number generator to pick 50 different numbers from each list, ignoring repeats. Survey those 100 students.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Make separate numbered lists of all freshmen and all seniors. Use a random number generator to pick 50 different freshmen and 50 different seniors, skipping repeats, and survey those 100 students."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Only 35% replied. The students who choose to reply may feel differently from those who don't. For example, students who strongly want a later start may be more motivated to return the survey. That would make the sample support percent higher than the true percent. The data given cannot show which direction the bias actually goes.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The stimulus gives no basis for a single direction of bias. Overestimating and underestimating support can both be defended, depending on who is assumed to reply.",
+     "final_answer": "The 35% who reply may differ from those who don't. If students who strongly support a later start are more likely to reply, the survey would overestimate the proportion who support it."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "35/60 = 0.5833",
+     "ambiguous_or_flawed": false,
+     "final_answer": "58.3%"
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Freshmen: 35/60 ≈ 58.3%. Seniors: 49/120 ≈ 40.8%.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "About 58.3% of freshmen chose Support, compared with about 40.8% of seniors. That is roughly 17.5 percentage points higher for freshmen."
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "The question names a population, a quantitative variable and a summary that requires collecting data that vary from student to student.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "What is the typical number of minutes per day that students at this high school spend commuting to and from school?"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Fails on Part B: the prompt demands a direction of nonresponse bias that the stem does not determine. The model answer hedges (\"support or oppose\") and the rubric does not score a direction. The independent solver flagged the same ambiguity. The other parts are acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The parts map to topics 1.10-1.12, 1.3 and 1.4 and to skills 1.A, 2.B, 3.B and 4.A. No out-of-scope content appears. Part E targets 1.A as required."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part B asks to \"state the direction of the bias\", but nothing in the stem determines a direction. The model answer hedges with \"overestimate the percentage who support or who oppose\", which is not a direction for support. Rubric row B2 only requires naming over-represented answers, so it does not score the direction the prompt demands. The independent solver flagged the ambiguity. Parts A, C, D and E are fine; E's rows are somewhat redundant and E3 is hard to score consistently."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete (columns, rows, totals, note). It belongs to the same school context and is used by parts C and D."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ. The rubric lists common errors for each row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for a 22-minute Question 1, and calculator use is minimal and consistent with the designation. The Part B problem is a key defect, not a load issue."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part free-response item typical of an AP Statistics FRQ. It covers stratified random sampling description, nonresponse bias with direction, a simple percent calculation (35/60 = 58.3%), a comparison of percents (58.3% vs 40.8%), and writing a valid investigative question. Each part is a standard Unit 1 skill with modest reasoning, and the arithmetic is minimal. The reading load is light, and the direction-of-bias reasoning plus the comparison in context supply the main depth. This fits a full-mock target rather than basic recall or advanced extension.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_statistics-f01-k2",
+  "cellId": "ap_statistics-f01",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:B:flagged",
+   "criterion_failed_key_scoring",
+   "criterion_failed_distractor_explanation",
+   "instant_reject_wrong_key"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Stratify by grade, then take a simple random sample within each stratum.",
+     "final_answer": "Get a list of all freshmen and a list of all seniors. Number the students on each list (freshmen 1 to N_F, seniors 1 to N_S). Use a random number generator to pick 50 different numbers from each list, ignoring repeats. Survey the 50 freshmen and 50 seniors whose numbers were picked.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Only 35% replied, so the people who answered chose to answer. Their opinions may differ from the 65% who did not reply. For example, students who strongly want a later start may be more motivated to send the survey back. Nothing in the problem tells us which direction is correct.",
+     "final_answer": "With 65% not replying, the people who answered may not represent the sample. Students with strong feelings, such as those eager for a later start, are more likely to return the survey. If so, the estimated percent who support a later start would be too high (overestimated).",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The given information does not set the direction of the bias. Students who oppose the change could just as plausibly be the ones who reply. Any direction should be accepted if it is justified."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "55/80 = 0.6875",
+     "final_answer": "68.8%",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Freshmen: 55/80 = 68.8%. Seniors: 55/150 = 36.7%.",
+     "final_answer": "In the earlier survey, 68.8% of freshmen supported a later start, compared with only 36.7% of seniors. That is about 32 percentage points higher for freshmen, even though both groups had 55 students answer \"Support.\"",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "The question must name the population and the variable, and the variable must change from student to student.",
+     "final_answer": "\"What is the typical (mean) number of minutes that students at this high school spend commuting to and from school each day?\" The population is all students at the high school. The variable is daily commuting time in minutes, which varies from student to student.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "wrong_key"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Two key problems. Part B asks for the direction of the bias, but the model answer says \"overestimate support or oppose\", which is no direction, and rubric B2 does not score a direction. Part D's model answer says the counts are smaller for seniors, but the table shows equal Support counts (55 and 55). Fix these before use.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts map to topics 1.10-1.12, 1.3 and 1.4, which is appropriate. Part E assesses skill 1.A directly."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part B: the prompt demands a direction, but the key is non-directional and the rubric does not require one. Part D: the model answer states \"counts are smaller for the seniors\", which is false, since both Support counts are 55."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data is complete, with columns, rows, totals and notes."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "As a free-response item it has common-error lists, but the model answer in D contains a false statement about the counts, and B's direction is unresolved."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Load is typical for a 22-minute multi-focus Q1."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item covering standard Unit 1 skills: describing stratified random selection, explaining nonresponse bias and its direction, computing and comparing percents from a two-row table, and writing a valid investigative question. Each part needs only 1-2 reasoning steps. Computation is trivial (55/80, 55/150). The table is small and the context is brief. The breadth across five parts and the need for precise communication make it suitable for a full mock rather than basic learning, but it is not advanced.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_statistics-f02-k0",
+  "cellId": "ap_statistics-f02",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:C:numeric",
+   "criterion_failed_key_scoring",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "instant_reject_missing_condition"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "x̄=8, ȳ=55.2875, Sxx=76, Sxy=500.2, so b=6.5816 and a=2.6349.",
+     "final_answer": "Predicted time = 2.63 + 6.58(distance); slope 6.58, intercept 2.63",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Slope interpretation in context.",
+     "final_answer": "For each extra kilometer run, the predicted time to finish the session goes up by about 6.58 minutes.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Predicted value 2.635 + 6.5816(9) = 61.87, so residual = 61.1 − 61.87.",
+     "final_answer": "Residual ≈ −0.77 minutes; the session is below the line.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Standard r² interpretation.",
+     "final_answer": "About 99% of the variation in session time is explained by the linear relationship with distance run.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "2.635 + 6.5816(15) ≈ 101.36. But 15 km is outside the data range of 2–12 km.",
+     "final_answer": "About 101.36 minutes. This prediction should not be fully trusted because it is an extrapolation beyond the observed distances (2–12 km), and the linear pattern may not continue.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "wrong_key",
+    "missing_condition"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Fails on key and scoring: the stated residual (-0.75) and prediction (101.33) rely on using rounded coefficients, which the prompt never instructs. Technology-based values (-0.77, 101.36) differ, and the rubric has no tolerance. Fix by instructing use of the rounded equation or by accepting both values.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts cover 5.3-5.5 with appropriate skills; in scope."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Residual in C and prediction in E depend on whether rounded or unrounded coefficients are used. Unrounded gives -0.77 and 101.36; key gives -0.75 and 101.33 with rubric rows requiring exactly those values and no tolerance. The prompt never says to use the rounded coefficients, so the key is not uniquely defensible. The independent solver got different values."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete. D gives r^2 as 0.99 but the key says 99.0%, which is inconsistent precision."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ; common errors are listed in the rubric rows."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Load is appropriate, but the rounding convention for later parts is unstated, so students using calculator-stored values lose points unfairly."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style multi-part regression item: technology-based LSRL from a small table, slope interpretation, residual with sign interpretation, r-squared interpretation, and an extrapolation judgment. All content is in Unit 5 scope. Each part is routine, but the combination of several interpretation tasks with a link from result to claim (extrapolation trust) matches the depth of a full mock FRQ rather than a single-skill learning exercise. Reading and computation are light, since the calculator handles the regression and only simple prediction arithmetic remains.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_statistics-f02-k1",
+  "cellId": "ap_statistics-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Sxx=42, Sxy=-47.35, b=-1.1274, a=13.0607",
+     "final_answer": "ŷ = 13.06 - 1.13x (slope -1.13, intercept 13.06)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "slope meaning",
+     "final_answer": "For each additional year of age, predicted resale value decreases by about 1.13 hundred dollars (~$113).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "pred 6.30; 5.9-6.30",
+     "final_answer": "Residual ≈ -0.40 hundred dollars (about -$40); below the line.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "standard interpretation",
+     "final_answer": "About 98.1% of the variation in resale value is explained by the linear relationship with age.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "13.0607-1.1274*11",
+     "final_answer": "≈0.66 hundred dollars (~$66); not trustworthy because age 11 is outside the 1–8 year data range (extrapolation).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Coherent 10-point FRQ on regression (topics 5.3, 5.4, 5.5). The key is consistent, and the rounded-coefficient residual and prediction fall within the stated tolerances of the unrounded values. The table is complete and the parts share one context. Calculator use is appropriate. Minor overlap between rows B1 and B2, and strict wording in E2, are acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A and C use the prerequisite skill 3.B. Parts B, D and E assess interpretation (4.D). All content is in scope and nothing from deleted topics appears."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key matches the solver's coefficients. The residual and prediction differ slightly (-0.38 vs -0.40; 0.63 vs 0.66) only because of rounding. The model answer uses the rounded coefficients, and the tolerances cover both."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has all 8 observations with labeled columns and units. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ. The rubric rows list common errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 22 minutes, 10 one-point rows, and calculator use is justified."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Five routine parts covering core Unit 5 skills: calculator regression, slope interpretation, residual, r-squared interpretation, extrapolation. Each part is a single standard step with clean data and no procedure selection or condition checking. Multiple parts and the need for correct contextual interpretation (including the residual's sign and the extrapolation caveat) make it appropriate as a mock-exam FRQ rather than purely introductory practice. It is not advanced, since there are no multi-step linkages or unusual representations.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_statistics-f02-k2",
+  "cellId": "ap_statistics-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Sxx=42, Sxy=-47.9, b=-1.1405, a=7.95+1.1405*4.5",
+     "final_answer": "ŷ = 13.08 − 1.14x (slope −1.14, intercept 13.08)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "slope meaning",
+     "final_answer": "For each additional year of age, predicted resale value decreases by about 1.14 hundred dollars ($114) on average.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "ŷ(3)=9.66; 9.2−9.66",
+     "final_answer": "Residual ≈ −0.46 hundred dollars (≈ −$46); laptop is below the line.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "r^2 meaning",
+     "final_answer": "About 95.7% of the variation in resale value is explained by the linear relationship with age.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "13.08−1.1405*11",
+     "final_answer": "ŷ ≈ 0.54 hundred dollars (≈ $54); not trustworthy because age 11 is extrapolation beyond the 1–8 year data range.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is in scope and well formed, but the rubric has scoring weaknesses (rounding in parts C and E, and rows that cannot be scored as written), so the key and scoring criterion fails.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts span topics 5.3, 5.4 and 5.5 as permitted. Parts A and C assess skill 3.B and parts B, D and E assess 4.D, which is acceptable because each part is judged against its own skill. There are no deleted topics."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Rounding problem. The unrounded slope is -1.1405 and the intercept is about 13.083. Using the rounded coefficients, the residual is -0.46 and the prediction at x = 11 is 0.54. Using the unrounded coefficients, the prediction at x = 11 is about 0.54 and the residual at x = 3 is about -0.46, so the rounding effect appears small. The rubric has no tolerance (numeric_tolerance is null), so a student who uses the unrounded line and gets, for example, -0.4617 or 0.5385 is not covered.\n\nRows that cannot be scored as written:\n- D2 (\"names both variables\") has required element \"in context\", which is vague.\n- B2 bundles units, context and the word \"predicted\", which are three separate ideas in one point.\n- E2 requires both the word \"extrapolation\" and the phrase \"outside the range of the data\", which is over-prescriptive for a meaning-based explanation.\n- Part E is labeled skill 4.D, but E1 is a pure calculation.\n\nPart D also leaves the question of whether \"explained by the linear relationship\" must mention the word \"linear\".\n\nBecause these scoring ambiguities could mis-score valid student responses, I am failing the key and scoring criterion."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with eight observations, column labels and units. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. Common errors are listed per row and are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of a roughly 22-minute FRQ, and the calculator is used for the regression. The 10 points are split into 2/2/2/2/2 across five parts with ten 1-point rows, which is consistent with the standard."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style multi-part regression item: calculator LSRL from a table, slope interpretation, residual, r-squared interpretation, and extrapolation judgment. Each part is routine and well within Unit 5 scope. Difficulty comes from needing to interpret in context and link results to claims, not from heavy computation or reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_statistics-f03-k0",
+  "cellId": "ap_statistics-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "This is a one-sided test because the teacher asks whether the new method gives a higher mean score.",
+     "final_answer": "H0: μ_N − μ_S = 0; Ha: μ_N − μ_S > 0. Here μ_N is the true mean final exam score for all students taught with the new method, and μ_S is the true mean final exam score for all students taught with the standard method.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Check the standard conditions for a two-sample t procedure.",
+     "final_answer": "Random: the problem says both samples are independent random samples. Independence: each sample is less than 10% of its population (34 and 35 students). Normality: both samples are 30 or more, and the boxplots are roughly symmetric with no outliers, so the sampling distribution of x̄_N − x̄_S is approximately normal.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Standard error: SE = √(11.7²/34 + 10.3²/35) = √(4.0262 + 3.0311) ≈ 2.657. Test statistic: t = (81.2 − 74)/2.657 ≈ 2.71. Welch degrees of freedom ≈ 65.4.",
+     "final_answer": "Procedure: two-sample t-test for a difference in means. Test statistic: t ≈ 2.71, with df ≈ 65.4. P-value = P(t > 2.71) ≈ 0.004.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The P-value is less than the significance level.",
+     "final_answer": "Because the P-value (about 0.004) is less than α = 0.05, we reject H0. There is convincing statistical evidence that the true mean final exam score for the new method is higher than for the standard method.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a standard two-sample t test FRQ with 10 one-point rubric rows over four parts. It is in scope for Unit 4, and the key is consistent with the solver's answers (t about 2.71, P about 0.0043).",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part C is the 3.E target (procedure, t statistic, P-value, topic 4.10). Parts A, B and D cover related Unit 4 topics (4.9, 4.7), as the bundle allows. No pooled t, slope, or ANOVA content appears."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is unique and consistent with the solver. The one-sided alternative follows from the stem's claim, and the values t = 2.71 and P = 0.0043 are verified. The rubric rows are consistent. The dependency chain in C and D is reasonable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives the sample sizes, means, standard deviations, a description of the boxplots, the 10% condition, and alpha. The data object is empty, but no figure is needed because the boxplots are described in words. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The rubric rows list plausible common errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load fits roughly 22 minutes, with a calculator used for the two-sample t test. Part B's model answer says the sample sizes are \"about 30 or close to it\", which is slightly loose but acceptable. The boxplot description supports the normality check."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ on a two-sample t test (unpooled), within Unit 4 scope. It requires defining parameters and hypotheses, checking random, 10% and normality conditions (large samples plus symmetric boxplots), computing t and the P-value with technology, and linking the P-value to alpha to reach a contextual conclusion. Each step is routine, the arithmetic is light, the context is short and clear, and no unfair difficulty sources are present.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_statistics-f03-k1",
+  "cellId": "ap_statistics-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Define μA = true mean battery life (hours) of all Brand A batteries and μB = true mean battery life (hours) of all Brand B batteries. H0: μA − μB = 0. Ha: μA − μB > 0.",
+     "final_answer": "H0: μA = μB; Ha: μA > μB, where μA and μB are the true mean battery lives (hours) of Brand A and Brand B batteries",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Random: the samples are independent random samples. 10% condition: each sample is less than 10% of its population, so observations are independent. Normal: both samples are smaller than 30 (25 and 27), but the boxplots are roughly symmetric with no outliers, so the t procedure is reasonable.",
+     "final_answer": "Random and independent samples; each sample under 10% of its population; boxplots roughly symmetric with no outliers, so the t procedure is reasonable even though n < 30",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Procedure: two-sample t test for a difference in means. SE = sqrt(5.4²/25 + 3.9²/27) ≈ 1.315. t = (40 − 38)/1.315 ≈ 1.52. Welch degrees of freedom ≈ 43.4. One-sided P-value ≈ 0.068.",
+     "final_answer": "Two-sample t test: t ≈ 1.52, df ≈ 43.4, P-value ≈ 0.068",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The P-value (≈ 0.068) is greater than α = 0.05, so we fail to reject H0.",
+     "final_answer": "Because the P-value ≈ 0.068 > 0.05, we fail to reject H0. There is not convincing evidence that Brand A batteries last longer on average than Brand B batteries.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Acceptable two-sample t test FRQ. Values t≈1.52 and P≈0.068 are correct and match the solver. Minor flaws: the typo \"brand a\" in the stimulus, and a loose B model answer claiming n is about 30 (25 and 27) with a rubric row that allows sample sizes as a normality justification.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is correct. The B2 rubric allowing \"or the sample sizes\" is slightly problematic for n<30, and the model answer's \"about 30\" is loose."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The typo \"brand a\" and the inconsistent capitalization should be fixed. Otherwise the stimulus is complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP FRQ-style two-sample t test (unpooled) with four routine parts: hypotheses, conditions, test statistic and P-value, and conclusion. The conditions are mostly given in the stimulus (independent random samples, 10%, roughly symmetric boxplots), so verification is straightforward. The computation is a single SE and t statistic with technology for df and P-value, and there is no long arithmetic. The conclusion links the P-value (about 0.068) to alpha = 0.05 and fails to reject, with no borderline ambiguity. The task is a typical full-mock item rather than a first-exposure learning item, and it needs no extension beyond the scope.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_statistics-f03-k2",
+  "cellId": "ap_statistics-f03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Let μ_A be the true mean battery life (in hours) of all Brand A batteries and μ_B the true mean battery life of all Brand B batteries. The question asks whether A lasts longer, so the alternative is one-sided.",
+     "final_answer": "H0: μ_A − μ_B = 0; Ha: μ_A − μ_B > 0. Here μ_A and μ_B are the true mean battery lives (hours) of all Brand A and all Brand B batteries.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Check randomness, independence and normality for each sample.",
+     "final_answer": "Random: both samples are independent random samples. Independence: each sample is less than 10% of its population (28 < 10% of Brand A batteries; 25 < 10% of Brand B). Normal: both samples are fairly small (28 and 25, near or under 30), but the boxplots are roughly symmetric with no outliers, so a t procedure is reasonable.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Standard error SE = sqrt(4.4²/28 + 4.9²/25) = sqrt(1.6518) ≈ 1.285. Test statistic t = (45.6 − 43)/1.285 ≈ 2.02. Welch degrees of freedom ≈ 48.6. One-sided P-value ≈ 0.024.",
+     "final_answer": "Two-sample t-test for μ_A − μ_B. t ≈ 2.02, df ≈ 48.6, P-value ≈ 0.024.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "P-value ≈ 0.024 is less than α = 0.05, so reject H0.",
+     "final_answer": "Because the P-value (≈ 0.024) is less than α = 0.05, we reject H0. There is convincing statistical evidence that the true mean battery life of Brand A batteries is greater than that of Brand B batteries.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Content and numbers are fine (t about 2.02, P about 0.0243, one-sided, within Unit 4). Two defects: the stem has a lowercase \"brand a\" typo, and the part B model answer claims the sample sizes (28 and 25) are \"about 30\", which is a flawed normality justification. B2's required elements also omit the sample-size alternative that the criterion allows. Fix the typo and the B justification, then it would pass.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part C targets 3.E (two-sample t test) and the other parts fit their own skills. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part B model answer's sample-size justification is imprecise (25 and 28 are below 30), and B2's criterion and required elements are inconsistent. Parts A, C and D keys are correct."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Stem has \"brand a\" lowercase inconsistency. Otherwise complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ with common errors listed per row; acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "10 points in about 22 minutes, calculator allowed, typical load."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "This is a standard four-part free-response item on a two-sample t test (unpooled), the core of topic 4.10. It covers hypotheses, conditions, test statistic and P-value, and a conclusion in context. Each part follows a routine AP FRQ template. Concept depth is moderate, with no unusual twists. The calculation is short: t = 2.6/sqrt(4.4^2/28 + 4.9^2/25), which is about 1.99, with df of about 48 and a P-value of about 0.026. The conditions are given in the stimulus (random samples, boxplots roughly symmetric, 10% condition), so verifying them is mostly restating them. The multi-part format and the link from P-value to conclusion suit a full mock exam rather than basic learning. It is not advanced, since no extra reasoning layers or unusual representations appear.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_statistics-f04-k0",
+  "cellId": "ap_statistics-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "There are 60 customers under 30, and 31 of them prefer online. 31/60 = 0.517.",
+     "final_answer": "0.517",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "The table has 3 rows and 3 columns, so df = (3-1)(3-1) = 4.",
+     "final_answer": "H0: Age group and shopping preference are independent (no association) among customers. Ha: Age group and shopping preference are not independent (they are associated). df = 4.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Expected count = (row total × column total)/grand total = 60×137/300 = 27.4. The smallest expected count is 60×73/300 = 14.6.",
+     "final_answer": "The expected count is 27.4. Every expected count is at least 5 (the smallest is 14.6), so the large counts condition is met.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Expected counts: 27.4, 14.6, 18 for the under-30 row; 54.8, 29.2, 36 for each of the other two rows. Adding (O-E)^2/E over all 9 cells gives about 14.47. With df = 4, the P-value is about 0.006.",
+     "final_answer": "χ² ≈ 14.47, df = 4, P-value ≈ 0.0059",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "The P-value, 0.0059, is less than α = 0.05, so we reject H0.",
+     "final_answer": "Because the P-value (about 0.006) is less than 0.05, we reject H0. There is convincing evidence that age group and shopping preference are associated among customers.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Passes. The table data are complete and consistent, the keys are correct and match the independent solver, and the rubric has 10 one-point rows across 5 parts. Minor flaw: the model answers say \"customers of a retail chain\", but the stem never names that population.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle legitimately spans topics 2.6, 3.14 and 3.15. Each part matches its own skill: conditional probability, hypotheses and df, expected count and condition check, statistic and P-value, and conclusion."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are correct and the solver agrees. The rubric rows are consistent, with dependencies set sensibly. The population is not defined in the stem, so the \"population\" wording in B1 and E2 relies on an unstated context."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The two-way table has headers, labels and all nine cell counts, and it belongs to the same context as the parts that use it."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common_errors listed in the rubric rows are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is about 22 minutes with a calculator allowed, which is typical for an AP Statistics FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item. Part A is a basic conditional probability read from a two-way table. Parts B to E form the standard chi-square test of independence sequence: hypotheses and df, expected count with large counts check, calculator statistic and P-value, and a conclusion in context. Each step is routine and procedural, the data are small, and the wording is unambiguous. The difficulty comes from sequencing several procedures and moving between the table, probability and test, not from long arithmetic or heavy reading.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_statistics-f04-k1",
+  "cellId": "ap_statistics-f04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "instant_reject_missing_condition"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "20/60",
+     "final_answer": "0.333",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "3x3 table",
+     "final_answer": "H0: class and music activity are independent (no association); Ha: they are associated. df = 4",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "60*56/260; smallest expected count",
+     "final_answer": "Expected = 12.92; all expected counts ≥ 12.9 > 5, so the condition is met",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Sum of (O-E)^2/E",
+     "final_answer": "chi-square ≈ 10.72, df = 4, P ≈ 0.030",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "P < 0.05",
+     "final_answer": "P ≈ 0.030 < 0.05, so reject H0: convincing evidence that class and music activity are associated",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The structure is sound: ten 1-point rows over five parts, and the calculator use is appropriate. However, the key for parts B and E requires a conclusion about \"the population of students at a large high school\", and the stimulus never defines any population or school. The stem says only \"a random sample of 260 students\". The rubric rows B1 and E2 therefore demand context the student cannot know, so the item fails on stimulus completeness and key consistency. A fix is to state the population (for example, all students at a particular high school) in the stem.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The topics 2.6, 3.14 and 3.15 are legitimately spanned, and each part is judged against its own skill."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Rows B1 and E2 require \"in the population\", but the population is never specified in the stem, so the key is not fully supported by the stimulus."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The sampled population is not identified, though the key refers to a large high school. The stimulus is otherwise complete: the table has labels and all cell counts."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ; the common errors listed in the rubric rows are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is typical of an AP Statistics FRQ, at about 22 minutes, and calculator use is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Five-part FRQ-style item on one 3x3 table: conditional probability, hypotheses and df, expected count with large counts check, calculator chi-square and P-value, and a conclusion in context. Each part is a standard, well-scaffolded procedure with small integer data, with no ambiguity or heavy reading. The load comes from chaining several routine steps, which suits a full mock exam rather than first-time learning.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_statistics-f04-k2",
+  "cellId": "ap_statistics-f04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "instant_reject_missing_condition"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "22/60",
+     "final_answer": "0.367",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Independence test, df=(3-1)(3-1)",
+     "final_answer": "H0: class and music activity are independent (no association) among students; Ha: they are associated. df = 4",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "60*85/240; min expected 60*49/240=12.25",
+     "final_answer": "Expected = 21.25; smallest expected count is 12.25 ≥ 5, so large counts condition met",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Sum of (O-E)^2/E over 9 cells, df=4",
+     "final_answer": "χ² ≈ 6.76, P-value ≈ 0.149",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "P > 0.05",
+     "final_answer": "Since P ≈ 0.149 > 0.05, fail to reject H0; there is not convincing evidence of an association between class and music activity among students.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The arithmetic checks out, but the stem never names the population. The model answers in parts B and E refer to \"students at a large high school\", which the student cannot see in the stem or the table. The rubric rows for the large counts check (C2) and the P-value (D2) are also loosely specified and need tolerance or required-element wording fixed.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts match their own skills and the related topics 2.6, 3.14 and 3.15. Only part A covers topic 2.6."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The key relies on a population (\"a large high school\") that the stem does not define. Row C2 does not require showing that the smallest expected count is at least 5. Row D2 requires 0.1493 with no stated tolerance, so a student answering 0.149 could lose the point."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The table data are complete. The context lacks the population and sampling description needed for the hypotheses and the conclusion. The stem also does not ask for the random and independence conditions."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no MC distractors. The rubric common_errors entries are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Time, load and calculator use are typical for an AP Statistics FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Five-part FRQ-style item built from routine steps: conditional probability from a two-way table, chi-square hypotheses and df, an expected count with a large counts check, technology output, and a conclusion justified by the P-value. Each step is standard with no twist, and the 3x3 table is small. Together the parts give a moderate reasoning chain suited to a full mock. Note that chi-square inference lies outside the stated Unit 2 scope, though the bundle is said to span 3.14 and 3.15. The difficulty is not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ }
+]
