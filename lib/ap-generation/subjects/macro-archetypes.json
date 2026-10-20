@@ -316,9 +316,9 @@
   ],
   "misconceptions": [
    "A consumer good is a current-account item, not a financial asset.",
-   "Private transactions are recorded in the balance of payments.",
-   "Goods bought from abroad are imports.",
-   "The car purchase itself is a current-account import."
+   "The car purchase itself is recorded in the current account.",
+   "Goods bought from abroad are imports, not exports.",
+   "Private transactions with foreigners are recorded in the balance of payments."
   ],
   "bc": false
  },
@@ -573,7 +573,7 @@
    "The two changes move net exports in opposite directions.",
    "Relative prices expressed in a common currency affect trade.",
    "This is the effect of a depreciation, not an appreciation.",
-   "A depreciation lowers the foreign price of U.S. goods and raises net exports."
+   "A depreciation lowers the foreign price of the nation's goods and raises net exports."
   ],
   "bc": false
  },
@@ -912,8 +912,8 @@
   "misconceptions": [
    "A larger supply of dollars lowers their value; the interest rate effect points the same way.",
    "Interest rates affect international capital flows and the exchange rate.",
-   "Lower rates make U.S. assets less attractive.",
-   "A weaker dollar makes U.S. goods cheaper abroad."
+   "Lower rates make domestic assets less attractive.",
+   "A weaker dollar makes domestic goods cheaper abroad."
   ],
   "bc": false
  },
@@ -1026,13 +1026,13 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "fixed vetted statement"
+   "fixed vetted statements; wrong options are the opposite action or a monetary tool"
   ],
   "misconceptions": [
-   "A balanced increase still raises AD somewhat and does not target the gap well; the standard answer is a deficit-financed expansion.",
-   "Cutting purchases lowers AD directly, working against the tax cut.",
-   "This is contractionary and would widen the gap.",
-   "A smaller money supply raises interest rates and is a monetary, not fiscal, action."
+   "Higher transfers raise household income and aggregate demand.",
+   "This is a monetary action that lowers interest rates and raises aggregate demand.",
+   "Higher purchases raise aggregate demand and add to inflation.",
+   "Lower taxes raise disposable income and aggregate demand."
   ],
   "bc": false
  },
@@ -1118,6 +1118,278 @@
    "A shift of a curve in the graph is not a movement along a fixed curve.",
    "Gets the direction of the shift backward.",
    "Names the wrong curve; the graph shows the other curve shifting."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_g_ad_move_along_graph",
+  "topic": "3.1",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "exact fractions on the plotted line vs numpy interpolation at the labeled points"
+  ],
+  "misconceptions": [
+   "A lower domestic price level makes domestic goods cheaper relative to foreign goods, which raises net exports.",
+   "A change in the price level moves the economy along AD; a shift needs a change in a determinant like confidence.",
+   "A change in aggregate supply shifts AS and does not explain a movement along the AD curve.",
+   "Higher government purchases shift the whole AD curve; the graph shows a move along one curve."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_g_ad_multiplier_graph",
+  "topic": "3.2",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "exact fractions vs sympy solution of the multiplier equation"
+  ],
+  "misconceptions": [
+   "Subtracts one from the multiplier.",
+   "Divides the change in government purchases by the multiplier.",
+   "Reports the spending multiplier instead of the MPC.",
+   "Reports the change in real GDP in billions of dollars."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_g_bond_price_table",
+  "topic": "4.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact price = payment / rate on every table row vs the stated prices"
+  ],
+  "misconceptions": [
+   "A fixed payment is worth less, not more, when the market interest rate rises.",
+   "The table gives the price at each rate with no default risk; the change is caused by the interest rate itself.",
+   "This reads the table backward: the higher interest rate goes with the lower price.",
+   "The payment is fixed, but its attractiveness depends on market interest rates, so the price changes."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_g_cross_price_table",
+  "topic": "1.4",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "sign of the least-squares slope (numpy) vs exact fraction slope between end rows"
+  ],
+  "misconceptions": [
+   "The direction in the table identifies complements; the other label would need the opposite direction.",
+   "Demand for tennis balls changes even though its own price is fixed, so the price of tennis rackets matters for demand.",
+   "An inferior good is defined by its response to income, not by a response to another good's price.",
+   "A change in the price of a related good shifts the whole demand curve for tennis balls; it is not a movement along it."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_g_cyclical_unemp_graph",
+  "topic": "2.3",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "exact subtraction vs numpy comparison of the plotted point with the dashed line"
+  ],
+  "misconceptions": [
+   "Cyclical unemployment is only the part of unemployment above or below the natural rate, not the whole rate.",
+   "Cyclical unemployment is the actual rate minus the natural rate; reversing the subtraction reverses the sign and the conclusion.",
+   "The size is right, but unemployment below the natural rate goes with output above potential, not the reverse.",
+   "Full employment means unemployment equals the natural rate; a positive rate alone does not show that."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_g_debt_balance_table",
+  "topic": "5.4",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact running sum of balances vs numpy cumulative sum equals the debt column"
+  ],
+  "misconceptions": [
+   "The debt was highest in Year 2, after the second deficit was added.",
+   "A smaller deficit still adds to the debt, so the debt rose in Year 2.",
+   "The table shows the debt falling in those years, since each surplus reduced it.",
+   "Each year's change in the debt equals that year's balance, which was not the same in each year."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_g_deposit_rounds_table",
+  "topic": "4.4",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact geometric sum fraction vs sympy infinite series"
+  ],
+  "misconceptions": [
+   "Reports the total increase in deposits, which includes the original deposit.",
+   "Starts the geometric process from the round 3 loan.",
+   "Adds only the three loans shown in the table.",
+   "Multiplies the original deposit by the required reserve ratio."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_g_exports_imports_lines",
+  "topic": "6.5",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "exact subtraction of the plotted values vs numpy elementwise difference"
+  ],
+  "misconceptions": [
+   "Imports are subtracted from aggregate demand because that spending goes to foreign producers.",
+   "Net exports change when exports and imports rise by different amounts.",
+   "These values are exports, which rose; net exports also subtract imports.",
+   "Imports grew faster than exports, so net exports fell rather than rose."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_g_fx_line_graph",
+  "topic": "6.5",
+  "skill": "1.D",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "exact reciprocal comparison vs plotted first and last values"
+  ],
+  "misconceptions": [
+   "Needing fewer dollars to buy a euro means the dollar gained value, which is appreciation.",
+   "A stronger dollar tends to lower exports and raise imports.",
+   "The euro depreciated, which makes the United States more expensive for European tourists.",
+   "A stronger dollar makes imports cheaper for American buyers."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_g_gdp_peak_trough",
+  "topic": "2.7",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "exact fraction of the labeled values vs numpy max/min of the plotted series"
+  ],
+  "misconceptions": [
+   "Reports the dollar decline in billions as if it were a percent.",
+   "Divides the decline by the number of years between P and T.",
+   "Measures the decline from the first year's level rather than from the peak.",
+   "Divides the decline by the trough level instead of the peak level."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_g_growth_sources_table",
+  "topic": "5.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact per-worker fractions vs numpy division of the table columns"
+  ],
+  "misconceptions": [
+   "Real GDP per worker also depends on the number of workers, which grew faster than real GDP.",
+   "The capital stock is the same in both years; the fall in output per worker comes from more workers sharing it.",
+   "This reverses the years: capital per worker and output per worker both fell from Year 1 to Year 2.",
+   "A constant capital stock with more workers lowers output per worker."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_g_phillips_shift_graph",
+  "topic": "5.2",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "exact line equations of the two SRPCs at the natural rate vs the plotted vertices"
+  ],
+  "misconceptions": [
+   "The LRPC is at the same unemployment rate at both points, so the natural rate did not change.",
+   "A change in productivity growth is not shown by these curves, and the natural rate stays the same at both points.",
+   "This reverses the direction of the change in expected inflation shown by the move from A to B.",
+   "Points A and B have the same unemployment rate, so this is not a movement along one short-run curve."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_g_price_control_graph",
+  "topic": "1.6",
+  "skill": "1.D",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "exact fractions on the plotted lines vs sympy solution at the controlled price"
+  ],
+  "misconceptions": [
+   "The size of the gap is the difference between the two quantities, not the quantity on one side of the market.",
+   "The quantity actually traded is the smaller of the two quantities, 40 units, so it falls below the equilibrium quantity.",
+   "With 40 supplied and 60 demanded, the shortage, not the surplus, results.",
+   "The gap is measured between the quantities supplied and demanded at the controlled price, not from the equilibrium quantity."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_g_price_index_line",
+  "topic": "2.4",
+  "skill": "1.D",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "exact yearly percent changes vs numpy diff of the plotted index"
+  ],
+  "misconceptions": [
+   "A rise of 2 points on a base of 200 is 1 percent, not 2 percent.",
+   "A steadily rising index means positive inflation; price stability would show a nearly flat index.",
+   "The yearly increases are getting larger, so inflation rises rather than falls.",
+   "The index rises by a different amount each year, so the inflation rate changes."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_g_real_rate_lines",
+  "topic": "4.2",
+  "skill": "1.C",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "exact subtraction vs numpy argmin of the elementwise difference"
+  ],
+  "misconceptions": [
+   "The real rate in Year 4 is 6 - 2 = 4 percent, which is higher than the lowest real rate.",
+   "Year 3 has the lowest nominal rate, but its real rate is 4 percent, which is higher than the lowest value.",
+   "The real rate in Year 2 is 6 - 3 = 3 percent, which is higher than the lowest real rate.",
+   "Year 6 has the highest inflation rate, but its real rate is 3 percent, which is higher than the lowest value."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_g_stabilizer_table",
+  "topic": "3.9",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact fractions vs sympy rationals on revenue minus purchases"
+  ],
+  "misconceptions": [
+   "Tax revenue falls, not rises, when real GDP falls, so the balance moves toward a smaller surplus or a larger deficit.",
+   "The table shows the same government purchases in all three years, so purchases did not cause the change.",
+   "Tax revenue is not fixed; it fell by $50 billion, which is a share of the fall in real GDP.",
+   "The balance equals revenue minus purchases, and revenue changed with real GDP."
   ],
   "bc": false
  },
@@ -2084,7 +2356,7 @@
   ],
   "misconceptions": [
    "A lower rate raises the quantity of funds demanded for investment.",
-   "Foreign saving adds to loanable funds supplied in the U.S. market.",
+   "Foreign saving adds to loanable funds supplied in the domestic market.",
    "A larger supply lowers the equilibrium rate.",
    "The real rate is determined in the loanable funds market."
   ],
@@ -3681,10 +3953,10 @@
    "fixed vetted scenario; wrong options reverse a link in the chain"
   ],
   "misconceptions": [
-   "Foreign savers respond to higher U.S. interest rates.",
+   "Foreign savers respond to higher domestic interest rates.",
    "Greater demand for dollar assets increases the demand for dollars.",
-   "Higher interest rates make U.S. assets more attractive to foreign lenders.",
-   "A stronger dollar makes U.S. goods more expensive abroad and lowers net exports."
+   "Higher interest rates make domestic assets more attractive to foreign lenders.",
+   "A stronger dollar makes domestic goods more expensive abroad and lowers net exports."
   ],
   "bc": false
  },

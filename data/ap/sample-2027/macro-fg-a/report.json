@@ -1,0 +1,33 @@
+{
+ "run": "macro-fg-a",
+ "subject": "ap_macroeconomics",
+ "generatedAt": "2026-10-20T06:00:29.441Z",
+ "totalCostUsd": 1.58,
+ "newSpendSinceBaseline": 1.7,
+ "cap": 50,
+ "calls": 144,
+ "candidates": 48,
+ "mcCandidates": 48,
+ "frqCandidates": 0,
+ "passedAll": 44,
+ "adopted": 16,
+ "mcAdopted": 16,
+ "frqAdopted": 0,
+ "reserve": 28,
+ "yield": 0.333,
+ "costPerAdopted": 0.099,
+ "callsPerAdopted": 9,
+ "duplicateRejected": 1,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 0,
+  "template": 48
+ },
+ "rejectionReasons": {
+  "criterion_failed_exam_suitability": 2,
+  "reference_pattern_mismatch": 2,
+  "criterion_failed_distractor_explanation": 2,
+  "duplicate_gate_near_duplicate": 1
+ },
+ "unfilledCells": []
+}
