@@ -281,6 +281,8 @@ end $rb30$;
 `);
   writeFileSync(path.join(OUT, "manifest_30.json"), JSON.stringify({ files: files30, report: rep30 }, null, 1));
   console.log(JSON.stringify({ files: files30, report: rep30 }));
+  process.exit(0);
+}
 
 // ══ 11: 'in terms of π' 보기 패치(E1019-P*) + 수동 패치(E1019-M*) 를 새 세트 버전 초안으로 반영(이미 초안이 있는 세트는 건너뜀 — 먼저 그 초안을 공개/폐기) — `SAT_11=1 npx tsx scripts/prod-open/sat-expand-sql.ts` (원격은 읽기 SELECT 만, 08 적용 후 기준) ══
 if (process.env.SAT_11) {
