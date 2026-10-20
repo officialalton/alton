@@ -11,8 +11,8 @@ def cap(s):
 
 # ======================= Q1. 블록 실험 설계와 두 처리 집단 비교 (1.13 / 1.A) =======================
 Q1_CTX = [
-    dict(units="tomato plants", u1="plant", factor="fertilizer", trt=("Fertilizer A", "Fertilizer B"), block="the greenhouse bench (sunny or shady)", resp="height after eight weeks", unit="centimeters", pop="tomato plants in the greenhouse", fvar="the number of tomatoes that each plant produces", fq="What is the typical number of tomatoes that a tomato plant in the greenhouse produces?", bvar="amount of sunlight"),
-    dict(units="students", u1="student", factor="study condition", trt=("Music", "Silence"), block="grade level (grade 11 or grade 12)", resp="score on a memory test", unit="points", pop="students at the school", fvar="the number of hours of sleep that students get on a school night", fq="What is the typical number of hours of sleep that students at the school get on a school night?", bvar="grade level"),
+    dict(units="tomato plants", u1="plant", factor="fertilizer", trt=("Fertilizer A", "Fertilizer B"), t0="Fertilizer A", t1="Fertilizer B", block="the greenhouse bench (sunny or shady)", resp="height after eight weeks", unit="centimeters", pop="tomato plants in the greenhouse", fvar="the number of tomatoes that each plant produces", fq="What is the typical number of tomatoes that a tomato plant in the greenhouse produces?", bvar="amount of sunlight"),
+    dict(units="students", u1="student", factor="study condition", trt=("Music", "Silence"), t0="music", t1="silence", block="grade level (grade 11 or grade 12)", resp="score on a memory test", unit="points", pop="students at the school", fvar="the number of hours of sleep that students get on a school night", fq="What is the typical number of hours of sleep that students at the school get on a school night?", bvar="grade level"),
 ]
 
 
@@ -28,7 +28,7 @@ def stfrq_n3_q1_block(rng):
     diff = round(m1 - m2, 1)
     # 독립 경로: 분수 계산
     agree(float(Fr(str(m1)) - Fr(str(m2))), diff, name="diff"); agree(s2 / s1, round(s2 / s1, 6), name="ratio")
-    stim = {"kind": "table", "description": f"Summary of the {c['resp']} for each treatment group.", "data": {"columns": ["Treatment", "Number of " + c["units"], f"Mean ({c['unit']})", f"Standard deviation ({c['unit']})"], "rows": [[c["trt"][0], str(n), f"{m1:g}", f"{s1:g}"], [c["trt"][1], str(n), f"{m2:g}", f"{s2:g}"]], "notes": f"Results for the two treatment groups of {N} {c['units']}."}}
+    stim = {"kind": "table", "description": f"Summary of the {c['resp']} for each treatment group.", "data": {"columns": ["Treatment", "Number of " + c["units"], f"Mean ({c['unit']})", f"Standard deviation ({c['unit']})"], "rows": [[c["trt"][0], str(n), f"{m1:g}", f"{s1:g}"], [c["trt"][1], str(n), f"{m2:g}", f"{s2:g}"]], "notes": f"Results for the two treatment groups of {N} {c['units']}, with the blocks combined."}}
     parts = [
         part("A", f"A researcher plans an experiment to compare two {c['factor']}s, {c['trt'][0]} and {c['trt'][1]}, using ${N}$ {c['units']}. The researcher will record the {c['resp']} of each {c['u1']}. Identify (i) the experimental units and (ii) the response variable.", 2, "explain", ["2.A"],
              f"(i) The experimental units are the ${N}$ {c['units']}. (ii) The response variable is the {c['resp']} ({c['unit']}).",
@@ -38,13 +38,13 @@ def stfrq_n3_q1_block(rng):
              f"(i) Blocking groups {c['units']} that are alike in {c['bvar']}, so the treatments are compared within similar units and variability due to {c['bvar']} is removed from the comparison. (ii) Within each block separately, randomly assign half of the {c['units']} to {c['trt'][0]} and the other half to {c['trt'][1]}, for example by drawing names or using random numbers.",
              [R("B1", f"Explains that blocking compares the treatments among similar units so that variability due to the blocking variable ({c['bvar']}) does not hide or confuse the effect of the treatments", ["compares similar units", "controls variability from the blocking variable"], alt=["each treatment appears in every block so the blocking variable cannot explain a difference"], err=["says blocking makes the sample random", "says blocking removes the need for random assignment"]),
               R("B2", "Describes random assignment carried out separately within each block, with about half of the units in each block receiving each treatment", ["random assignment within each block", "half of each block to each treatment"], alt=["shuffle the names in each block and give the first half one treatment"], err=["randomly assigns across all units ignoring the blocks", "assigns the treatments by choice of the units"])]),
-        part("C", f"The table shown gives the mean {c['resp']} of each treatment group. Calculate the difference in the means, {c['trt'][0].lower()} minus {c['trt'][1].lower()}.", 1, "calculate", ["3.B"],
+        part("C", f"The table shown gives the results for each treatment group, with the blocks combined. Calculate the difference in the mean {c['resp']}, {c['t0']} minus {c['t1']}.", 1, "calculate", ["3.B"],
              f"${m1:g} - {m2:g} = {diff:g}$ {c['unit']}.",
              [R("C1", f"Calculates the difference in the means (answer {diff:g} {c['unit']}, with the subtraction in the stated order)", [f"{diff:g}"], nums=True, err=["subtracts in the opposite order", "divides instead of subtracts"])]),
         part("D", f"Compare the distributions of the {c['resp']} for the two treatment groups, using the means and the standard deviations in the table. Your comparison should address both center and spread, in context.", 2, "explain", ["4.A"],
-             f"The mean {c['resp']} is about ${diff:g}$ {c['unit']} greater for {c['trt'][0].lower()} (${m1:g}$) than for {c['trt'][1].lower()} (${m2:g}$). The responses under {c['trt'][1].lower()} are more variable: the standard deviation is ${s2:g}$ {c['unit']}, compared with ${s1:g}$ {c['unit']} for {c['trt'][0].lower()}.",
-             [R("D1", f"Compares the centers in context: the mean {c['resp']} is greater for {c['trt'][0].lower()} than for {c['trt'][1].lower()}", [f"{m1:g}", f"{m2:g}", "greater for " + c["trt"][0].lower()], nums=True, err=["compares the groups without naming the response or the treatments", "reverses the direction of the difference"]),
-              R("D2", f"Compares the spreads in context: the standard deviation is greater for {c['trt'][1].lower()} (${s2:g}$) than for {c['trt'][0].lower()} (${s1:g}$), so its responses are more variable", [f"{s2:g}", f"{s1:g}", "more variable for " + c["trt"][1].lower()], nums=True, err=["says the group with the greater mean is more variable", "interprets the standard deviation as the center"])]),
+             f"The mean {c['resp']} is about ${diff:g}$ {c['unit']} greater for {c['t0']} (${m1:g}$) than for {c['t1']} (${m2:g}$). The responses under {c['t1']} are more variable: the standard deviation is ${s2:g}$ {c['unit']}, compared with ${s1:g}$ {c['unit']} for {c['t0']}.",
+             [R("D1", f"Compares the centers in context: the mean {c['resp']} is greater for {c['t0']} than for {c['t1']}", [f"{m1:g}", f"{m2:g}", "greater for " + c["trt"][0].lower()], nums=True, err=["compares the groups without naming the response or the treatments", "reverses the direction of the difference"]),
+              R("D2", f"Compares the spreads in context: the standard deviation is greater for {c['t1']} (${s2:g}$) than for {c['t0']} (${s1:g}$), so its responses are more variable", [f"{s2:g}", f"{s1:g}", "more variable for " + c["trt"][1].lower()], nums=True, err=["says the group with the greater mean is more variable", "interprets the standard deviation as the center"])]),
         part("E", f"The researcher also wants to study {c['fvar']} among the {c['pop']}. State a valid investigative question about this topic that requires a statistical investigation. Your question should name the population of interest, name the variable that would be measured, and be answerable by collecting and analyzing data that vary from individual to individual.", 3, "explain", ["1.A"],
              f"For example: {c['fq']}",
              [R("E1", f"Names the population of interest (the {c['pop']})", [c["pop"]], err=["names only the sample or one individual"]),
@@ -54,7 +54,7 @@ def stfrq_n3_q1_block(rng):
     for pt, tc in zip(parts, [["1.13"], ["1.13"], ["1.7"], ["1.9"], ["1.10"]]):
         pt["topic_codes"] = tc
     return frq_pack("stfrq_n3_q1_block", "q1_multifocus", "1.10", ["1.7", "1.9", "1.13"], "1.A", f"A blocked experiment comparing two {c['factor']}s for {c['units']}", stim, parts, 22,
-                    [f"n={n}", f"m1={m1}", f"m2={m2}", f"s1={s1}", f"s2={s2}"], [ev("C", "difference of means", diff, 0.01), ev("D", "ratio of standard deviations", s2 / s1, 0.02)],
+                    [f"n={n}", f"m1={m1}", f"m2={m2}", f"s1={s1}", f"s2={s2}"], [ev("C", "difference of means", diff, 0.01)],
                     ("A multi-focus question combining experimental units and response, the purpose and randomization of blocking, a difference of group means, a comparison of two distributions by center and spread and a valid investigative question",
                      ["Identify the experimental units and the response variable", "Explain blocking and random assignment within blocks", "Compare two groups by center and spread from summary statistics", "Write a valid investigative question"],
                      [("blocking compares treatments within similar units and the random assignment is done within each block", "the stem names the blocking variable and the table gives the group summaries")], {"type": "table", "must_include": ["group means", "group standard deviations"]},
@@ -64,17 +64,18 @@ def stfrq_n3_q1_block(rng):
 
 # ======================= Q2. 컴퓨터 출력으로 보는 회귀 (5.4 / 4.D) =======================
 Q2_CTX = [
-    dict(x="monthly advertising spending (thousands of dollars)", y="monthly sales (thousands of units)", xs="advertising spending", ys="sales", xu="thousand dollars", yu="thousand units", xr=(2, 14), a=(8, 20), b=(1.4, 3.2), s=(1.5, 3.0), units="stores", ex="a store whose monthly advertising spending is"),
-    dict(x="daily high temperature (degrees Celsius)", y="daily sales of bottled water (hundreds of bottles)", xs="daily high temperature", ys="bottled water sales", xu="degrees Celsius", yu="hundred bottles", xr=(10, 34), a=(-3, 4), b=(0.9, 1.7), s=(2.5, 5.0), units="days", ex="a day whose high temperature is"),
+    dict(x="monthly advertising spending (thousands of dollars)", y="monthly sales (thousands of units)", xs="advertising spending", ys="sales", xu="thousand dollars", yu="thousand units", xr=(3, 14), a=(8, 20), b=(1.4, 3.2), s=(1.5, 3.0), units="stores", ex="a store whose monthly advertising spending is"),
+    dict(x="daily high temperature (degrees Celsius)", y="daily sales of bottled water (hundreds of bottles)", xs="daily high temperature", ys="bottled water sales", xu="degrees Celsius", yu="hundred bottles", xr=(12, 34), a=(-3, 4), b=(0.9, 1.7), s=(2.5, 5.0), units="days", ex="a day whose high temperature is"),
 ]
 
 
 def stfrq_n3_q2_output(rng):
     c = pick(rng, Q2_CTX)
     for _ in forever():
-        n = pick(rng, [18, 22, 26, 30]); a = round(rng.uniform(*c["a"]), 2); b = round(rng.uniform(*c["b"]), 2); r = pick(rng, [0.6, 0.7, 0.8, 0.9]); r2 = round(r * r * 100, 1)
+        n = pick(rng, [18, 22, 26, 30]); a = round(rng.uniform(*c["a"]), 2); b = round(rng.uniform(*c["b"]), 2); r = pick(rng, [0.7, 0.8, 0.9]); r2 = round(r * r * 100, 1)
         s = round(rng.uniform(*c["s"]), 2)
-        x0 = rng.randint(c["xr"][0] + 2, c["xr"][1] - 2); yh = a + b * x0
+        lo = c["xr"][0]; hi = c["xr"][1]
+        x0 = rng.randint(lo + 2, hi - 2); yh = a + b * x0
         resid = round(pick(rng, [-1, 1]) * rng.uniform(0.8, 2.2) * s, 1)
         y0 = round(yh + resid, 1); resid_act = round(y0 - yh, 2)
         if abs(resid_act) >= 0.5 * s:
@@ -82,37 +83,36 @@ def stfrq_n3_q2_output(rng):
     agree(math.sqrt(r2 / 100), r, tol=1e-6, name="r")
     out = {"title": f"Regression Analysis: {c['ys'].capitalize()} versus {c['xs']}", "sections": [{"columns": ["Predictor", "Coef"], "rows": [["Constant", f"{a:.2f}"], [c["xs"].capitalize(), f"{b:.2f}"]]}, {"columns": ["S", "R-Sq"], "rows": [[f"{s:.2f}", f"{r2:.1f}%"]]}]}
     stim = {"kind": "stat_chart", "description": f"Computer output for a least-squares regression of {c['ys']} on {c['xs']}.", "data": {"chart": "output", "output": out}}
-    lo = (resid_act < 0)
-    sgn = "+" if a >= 0 else "-"
+    lo_ = (resid_act < 0)
     parts = [
-        part("A", f"A researcher uses data from ${n}$ {c['units']} to model the relationship between {c['xs']} ($x$, in {c['xu']}) and {c['ys']} ($y$, in {c['yu']}). The computer output shown gives the results of a least-squares regression. (i) Write the equation of the least-squares regression line. (ii) Interpret the $y$-intercept of the line in context, and say whether it has a meaningful interpretation.", 2, "explain", ["4.D"],
-             f"(i) $\\hat y = {a:.2f} + {b:.2f}x$ (using the constant {a:.2f} and the coefficient {b:.2f}). (ii) When the {c['xs']} is $0$, the predicted {c['ys']} is {a:.2f} {c['yu']}; this is meaningful only if $x = 0$ lies within the range of the data, because otherwise it is an extrapolation.",
+        part("A", f"A researcher uses data from ${n}$ {c['units']} to model the relationship between {c['xs']} ($x$, in {c['xu']}) and {c['ys']} ($y$, in {c['yu']}). The values of $x$ in the data range from ${lo}$ to ${hi}$ {c['xu']}. The computer output shown gives the results of a least-squares regression. (i) Write the equation of the least-squares regression line. (ii) Interpret the $y$-intercept of the line in context, and explain whether this interpretation is meaningful.", 3, "explain", ["4.D"],
+             f"(i) $\\hat y = {a:.2f} + {b:.2f}x$. (ii) When the {c['xs']} is $0$, the predicted {c['ys']} is {a:.2f} {c['yu']}. This is not meaningful, because $0$ is outside the range of the data ({lo} to {hi} {c['xu']}), so the interpretation would be an extrapolation.",
              [R("A1", f"Writes the equation with the intercept {a:.2f} and the slope {b:.2f}, in the form $\\hat y = {a:.2f} + {b:.2f}x$", [f"{a:.2f}", f"{b:.2f}"], nums=True, err=["swaps the intercept and the slope", "omits the hat on the predicted value"]),
-              R("A2", f"Interprets the intercept as the predicted {c['ys']} when the {c['xs']} equals $0$ and comments on whether $0$ is within the range of the data", ["predicted value when x is 0", "meaningful only if 0 is within the range of the data"], alt=["says that the intercept is the predicted value at zero and that it may not be meaningful when zero is not a possible or observed value of x"], err=["interprets the intercept as the change in y per unit of x", "says the intercept is always meaningful"])]),
+              R("A2", f"Interprets the intercept as the predicted {c['ys']} when the {c['xs']} equals $0$", ["predicted value when x is 0"], err=["interprets the intercept as the change in y per unit of x"]),
+              R("A3", f"Explains that the interpretation is not meaningful because $0$ is outside the range of the data ({lo} to {hi}), so it is an extrapolation", ["0 is outside the range of the data", "extrapolation"], alt=["zero is not a value of x that was observed so the intercept only anchors the line"], err=["says the intercept is meaningful because it is in the output"])]),
         part("B", f"The regression line is used for {c['ex']} ${x0}$ {c['xu']}. (i) Calculate the predicted {c['ys']}. (ii) The actual {c['ys']} for one such {c['units'][:-1]} was ${y0:g}$ {c['yu']}. Calculate the residual and interpret it in context.", 2, "calculate", ["3.B"],
-             f"(i) $\\hat y = {a:.2f} + {b:.2f}({x0}) = {yh:.2f}$. (ii) Residual = ${y0:g} - {yh:.2f} = {resid_act:.2f}$; the actual {c['ys']} was {abs(resid_act):.2f} {c['yu']} {'below' if lo else 'above'} the value predicted by the line.",
+             f"(i) $\\hat y = {a:.2f} + {b:.2f}({x0}) = {yh:.2f}$. (ii) Residual = ${y0:g} - {yh:.2f} = {resid_act:.2f}$; the actual {c['ys']} was {abs(resid_act):.2f} {c['yu']} {'below' if lo_ else 'above'} the value predicted by the line.",
              [R("B1", f"Calculates the predicted value (answer {yh:.2f})", [f"{yh:.2f}"], nums=True, err=["uses the slope as the intercept"]),
-              R("B2", f"Calculates the residual as actual minus predicted (answer {resid_act:.2f}) and says that the actual value is {'below' if lo else 'above'} the prediction", [f"{resid_act:.2f}", "below" if lo else "above"], requires="B1", nums=True, err=["subtracts in the wrong order", "gives the residual without interpreting its sign"])]),
-        part("C", f"The output gives $S = {s:.2f}$. Interpret the value of $S$ in the context of the data.", 2, "explain", ["4.D"],
+              R("B2", f"Calculates the residual as actual minus predicted (answer {resid_act:.2f}) and says that the actual value is {'below' if lo_ else 'above'} the prediction", [f"{resid_act:.2f}", "below" if lo_ else "above"], requires="B1", nums=True, err=["subtracts in the wrong order", "gives the residual without interpreting its sign"])]),
+        part("C", f"The output gives $S = {s:.2f}$. Interpret the value of $S$ in the context of the data.", 1, "explain", ["4.D"],
              f"The actual {c['ys']} values typically differ from the values predicted by the regression line by about {s:.2f} {c['yu']}.",
-             [R("C1", f"States that $S$ ({s:.2f}) is the typical size (about the typical distance) of the residuals, that is, of the differences between actual and predicted values", [f"{s:.2f}", "typical size of the prediction errors"], nums=True, err=["says S is the slope", "says S is the percent of variation explained"]),
-              R("C2", f"Gives the interpretation in context with units (the {c['ys']} in {c['yu']}, predicted from the {c['xs']})", ["in context", c["yu"]], requires="C1", err=["omits the units or the context"])]),
+             [R("C1", f"States that $S$ ({s:.2f} {c['yu']}) is the typical size of the differences between the actual and the predicted {c['ys']}, that is, of the residuals", [f"{s:.2f}", "typical size of the prediction errors"], nums=True, err=["says S is the slope", "says S is the percent of variation explained"])]),
         part("D", f"Use the output to find the correlation coefficient $r$ between {c['xs']} and {c['ys']}, and describe the direction and strength of the linear relationship.", 2, "calculate", ["3.B"],
-             f"$r = +\\sqrt{{{r2 / 100:.3f}}} = {r}$, because the slope is {'positive' if b > 0 else 'negative'}. This is a {'strong' if r >= 0.8 else 'moderately strong'} positive linear relationship.",
+             f"$r = +\\sqrt{{{r2 / 100:.2f}}} = {r}$, because the slope is positive. This is a {'strong' if r >= 0.8 else 'moderately strong'} positive linear relationship.",
              [R("D1", f"Calculates $r$ as the square root of $R^2$ with the sign of the slope (answer $r = {r}$)", [f"{r}"], nums=True, err=["reports r squared as the correlation", "gives the wrong sign"]),
-              R("D2", "Describes the relationship as positive linear with a strength that matches the value of $r$", ["positive", "strength"], requires="D1", nums=True, err=["describes the strength with the percent explained instead of r"])]),
+              R("D2", "Describes the relationship as positive and linear with a strength that matches the value of $r$", ["positive", "strength"], requires="D1", nums=True, err=["describes the strength with the percent explained instead of r"])]),
         part("E", f"A residual plot for the regression shows a clear U-shaped pattern: the residuals are positive for the smallest and largest values of {c['xs']} and negative in the middle. Does the residual plot support the use of a linear model for these data? Justify your answer.", 2, "explain", ["4.D"],
              "No. A residual plot for an appropriate linear model shows no pattern; the U-shaped pattern shows that the relationship is curved, so a linear model is not appropriate.",
              [R("E1", "States that the residual plot does not support a linear model", ["not appropriate"], err=["says a large r squared shows the model is appropriate"]),
               R("E2", "Justifies the answer by the curved (U-shaped) pattern in the residuals, whereas an appropriate linear model leaves residuals with no pattern", ["curved pattern in the residuals", "no pattern expected"], requires="E1", err=["justifies with the correlation alone"])]),
     ]
-    for pt, tc in zip(parts, [["5.3"], ["5.4"], ["5.4"], ["5.2"], ["5.4"]]):
+    for pt, tc in zip(parts, [["5.5"], ["5.4"], ["5.4"], ["5.2"], ["5.4"]]):
         pt["topic_codes"] = tc
-    return frq_pack("stfrq_n3_q2_output", "q2_regression", "5.4", ["5.2", "5.3"], "4.D", f"Regression of {c['ys']} on {c['xs']}: reading computer output", stim, parts, 22,
+    return frq_pack("stfrq_n3_q2_output", "q2_regression", "5.4", ["5.2", "5.5"], "4.D", f"Regression of {c['ys']} on {c['xs']}: reading computer output", stim, parts, 22,
                     [f"a={a}", f"b={b}", f"s={s}", f"r2={r2}", f"x0={x0}"], [ev("B", "predicted value", yh, 0.02), ev("B", "residual", resid_act, 0.02), ev("D", "correlation", r, 0.005)],
-                    ("Read a regression output: equation and intercept, a prediction and its residual, the meaning of S, the correlation from R-squared and the sign of the slope, and a judgment from a residual pattern",
-                     ["Write the line and interpret the intercept", "Compute a prediction and a residual and interpret S", "Find r from R-squared and the slope sign and judge the model from the residual pattern"],
-                     [("the intercept, S, R-squared and the slope sign are all read from the output", "the output block shows the coefficients, S and R-squared")], {"type": "computer_output", "must_include": ["coefficients", "S", "R-Sq"]},
+                    ("Read a regression output: equation and intercept with the range of the data, a prediction and its residual, the meaning of S, the correlation from R-squared and the slope sign, and a judgment from a residual pattern",
+                     ["Write the line and judge whether the intercept is meaningful from the range of x", "Compute a prediction and a residual and interpret S", "Find r from R-squared and the slope sign and judge the model from the residual pattern"],
+                     [("the intercept, S, R-squared and the slope sign are all read from the output and the range of x is stated", "the output block shows the coefficients, S and R-squared and the stem gives the range of the data")], {"type": "computer_output", "must_include": ["coefficients", "S", "R-Sq"]},
                      "the prediction and the residual are recomputed from the coefficients and r is recomputed from R-squared by a square root, checked to be a one-decimal value"),
                     ["interpretation", "representation_reading", "claim_justification"])
 
@@ -221,3 +221,6 @@ def stfrq_n3_q4_clt(rng):
 
 
 STAGE_FRQ = ["stfrq_n3_q1_block", "stfrq_n3_q2_output", "stfrq_n3_q3_matched", "stfrq_n3_q4_clt"]
+
+# P3 첫 FRQ 런에서 반려된 Q1·Q2 를 고쳐 다시 돌린다
+STAGE_FIXFRQ = ["stfrq_n3_q1_block", "stfrq_n3_q2_output"]
