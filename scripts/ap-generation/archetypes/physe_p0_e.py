@@ -103,7 +103,7 @@ def pe_solenoid_inductance(rng):
         N = pick(rng, [200, 400, 500, 1000]); Lc = pick(rng, [10.0, 20.0, 25.0, 50.0]); Acm = pick(rng, [2.0, 4.0, 5.0, 10.0])
         L = MU0 * N ** 2 * Acm * 1e-4 / (Lc * 1e-2) * 1e3
         break
-    key, ds = num_opts(L, [("Uses $\\mu_0NA/\\ell$, with a single factor of $N$.", MU0 * N * Acm * 1e-4 / (Lc * 1e-2) * 1e3), ("Uses the area in square centimeters without converting.", MU0 * N ** 2 * Acm / (Lc * 1e-2) * 1e3), ("Uses the length in centimeters without converting.", MU0 * N ** 2 * Acm * 1e-4 / Lc * 1e3), ("Uses $\\mu_0N^2\\ell/A$.", MU0 * N ** 2 * (Lc * 1e-2) / (Acm * 1e-4) * 1e3 * 1e-4)], "", fmt=FU(U_MH))
+    key, ds = num_opts(L, [("Uses $\\mu_0NA/\\ell$, with a single factor of $N$.", MU0 * N * Acm * 1e-4 / (Lc * 1e-2) * 1e3), ("Uses the area in square centimeters without converting.", MU0 * N ** 2 * Acm / (Lc * 1e-2) * 1e3), ("Uses the length in centimeters without converting.", MU0 * N ** 2 * Acm * 1e-4 / Lc * 1e3), ("Uses $\\mu_0N^2\\ell/A$.", MU0 * N ** 2 * (Lc * 1e-2) / (Acm * 1e-4) * 1e3)], "", fmt=FU(U_MH))
     stem = f"A long air-filled solenoid has ${N}$ turns, a length of ${Lc:g}\\text{{ cm}}$ and a cross-sectional area of ${Acm:g}\\text{{ cm}}^{{2}}$. What is its self-inductance?" + MUUSE
     return MQ("pe_solenoid_inductance", "13.4", "2.A", stem, key, ds, rng, "Self-inductance is the flux linkage per unit current", ["Find the field $\\mu_0nI$ and the flux linkage $N\\,BA$", "Divide the flux linkage by the current $I$"],
               "the inductance is recomputed from the flux linkage $N\\Phi/I$", f"$L=N\\Phi/I=\\mu_0N^2A/\\ell={sig(L)}\\text{{ mH}}$.", [f"N={N}", f"Lc={Lc}", f"Acm={Acm}"], est=85, judg=["symbolic_reasoning"])
@@ -145,7 +145,7 @@ def pe_rl_initial_final(rng):
     wr = [("Takes the inductor as a short circuit at the start, so the current is $\\varepsilon/R_1$." if when.startswith("just") else "Takes the inductor as an open circuit in steady state, so the current is $\\varepsilon/(R_1+R_2)$.", e / R1 if when.startswith("just") else e / (R1 + R2)), ("Uses only $R_2$.", e / R2), ("Uses the parallel combination of the resistors.", e / (R1 * R2 / (R1 + R2))), ("Says the current is zero.", 0.0)]
     key, ds = num_opts(I, wr, "", fmt=FU(U_A))
     stem = f"A battery of emf ${e:g}\\text{{ V}}$ and negligible internal resistance is connected through a switch to a resistor $R_1={R1:g}\\,\\Omega$ in series with a parallel combination of an ideal inductor and a resistor $R_2={R2:g}\\,\\Omega$. There is no current before the switch is closed. What is the current supplied by the battery {when}?"
-    return MQ("pe_rl_initial_final", "13.5", "2.C", stem, key, ds, rng, "An inductor opposes a sudden change in current, acting like an open circuit at first and like a wire in steady state", ["Decide how the inductor behaves at the stated time", "Apply Ohm's law to the resulting circuit"],
+    return MQ("pe_rl_initial_final", "13.5", "2.B", stem, key, ds, rng, "An inductor opposes a sudden change in current, acting like an open circuit at first and like a wire in steady state", ["Decide how the inductor behaves at the stated time", "Apply Ohm's law to the resulting circuit"],
               "the time-dependent current is recomputed by integrating the circuit equations to short and long times", f"The battery current {when} is ${sig(I)}\\text{{ A}}$.", [f"e={e}", f"R1={R1}", f"R2={R2}", f"when={when}"], est=95, judg=["law_selection", "justification"])
 
 
@@ -156,7 +156,7 @@ def pe_inductor_energy(rng):
         U = 0.5 * L * I * I * 1e3
         agree(U, simpson(lambda s: L * s, 0, I, 2001) * 1e3, 1e-8, "U")
         break
-    key, ds = num_opts(U, [("Omits the factor of one half, $LI^2$.", L * I * I * 1e3), ("Uses $\\tfrac12LI$.", 0.5 * L * I * 1e3), ("Uses $\\tfrac12L^2I$.", 0.5 * L * L * I * 1e3), ("Uses $\\tfrac12 I^2/L$.", 0.5 * I * I / L * 1e-3)], "", fmt=FU(U_MJ))
+    key, ds = num_opts(U, [("Omits the factor of one half, $LI^2$.", L * I * I * 1e3), ("Uses $\\tfrac12LI$.", 0.5 * L * I * 1e3), ("Uses $\\tfrac12L^2I$.", 0.5 * L * L * I * 1e3), ("Uses $\\tfrac12LI^3$.", 0.5 * L * I ** 3 * 1e3)], "", fmt=FU(U_MJ))
     stem = f"A ${L * 1e3:g}\\text{{ mH}}$ inductor carries a steady current of ${I:g}\\text{{ A}}$. How much energy is stored in its magnetic field?"
     return MQ("pe_inductor_energy", "13.4", "2.B", stem, key, ds, rng, "The energy stored in an inductor is $\\tfrac12LI^2$", ["Identify the inductance and the current", "Evaluate $U=\\tfrac12LI^2$"],
               "the energy is recomputed by integrating $L\\,i\\,di$ from zero to the final current", f"$U=\\tfrac12LI^2={sig(U)}\\text{{ mJ}}$.", [f"L={L}", f"I={I}"], est=60)

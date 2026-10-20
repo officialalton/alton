@@ -56,7 +56,7 @@ def SCI(v, utex="", n=3):
 
 
 def FS(utex, n=3):
-    return lambda v: SCI(v, utex, n)
+    return lambda v: QU(v, utex, n) if (v == 0 or 0.01 <= abs(v) < 1e5) else SCI(v, utex, n)
 
 
 def pbp(arch, topic, skill, concept, thinking, cond, mis, path, material, judgment, method="sympy symbolic + independent numeric path"):

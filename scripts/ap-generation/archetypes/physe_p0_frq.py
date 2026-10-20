@@ -88,7 +88,7 @@ def pef_mr_rc_circuit(rng):
               R("D2", "justification", "Justifies with $q_{final}=C\\varepsilon$ (independent of $R$) and $t_{1/2}=RC\\ln2$ (proportional to $R$)", ["q_final = C epsilon", "time proportional to R"], requires="D1", err=["argues only that a larger resistance slows the current without relating it to the time constant"])]),
     ]
     return _pack("pef_mr_rc_circuit", "mr", "11.8", ["11.2", "10.3"], "2.A", "Charging a capacitor through a resistor", stim, parts, 10, 22, [f"e={e}", f"Rk={Rk}", f"Cu={Cu}", f"n={n}", f"q={q:.4f}", f"thalf={thalf:.4f}"],
-                 [_ev("C", "charge", q, 0.02 * q + 0.1, "microcoulombs"), _ev("D", "time to half charge", thalf, 0.02 * thalf + 0.05, "ms")],
+                 [_ev("C", "charge", q, 0.02 * q + 0.1, "microcoulombs"), _ev("D", "factor by which the time to reach half of the final charge changes", 2.0, 0.05, "")],
                  ("Representing an RC circuit, deriving the charging law with the loop rule, calculating the charge at a time, and predicting the effect of doubling the resistance", ["Draw the circuit with the voltmeter in parallel with the capacitor", "Derive the charge as a function of time", "Predict the effect of doubling R on the final charge and the time scale"],
                   [("the battery is ideal and the capacitor starts uncharged", "the stimulus states an ideal battery and an uncharged capacitor")], {"type": "text", "must_include": ["the emf", "the resistance", "the capacitance"]},
                   "an RK4 integration of the loop equation recomputes the charge and the time to reach half of the final charge; sympy solves the differential equation"),
@@ -223,7 +223,7 @@ def pef_lab_capacitor_gap(rng):
         e0 = slope * 1e-12 * 1e-3 / A
         if abs(e0 - EPS0) / EPS0 < 0.06:
             break
-    stim = {"kind": "table", "description": f"A student measures the capacitance $C$ of a parallel-plate capacitor with vacuum between its two identical square plates of total area $A={Acm:g}\\text{{ cm}}^{{2}}$ at several plate separations $d$.", "data": {"x_label": "Plate separation d (mm)", "y_label": "Capacitance C (pF)", "rows": [[d, c_] for d, c_ in zip(ds_, Cs)]}}
+    stim = {"kind": "table", "description": f"A student measures the capacitance $C$ of a parallel-plate capacitor with vacuum between its two identical square plates, each of area $A={Acm:g}\\text{{ cm}}^{{2}}$ at several plate separations $d$.", "data": {"x_label": "Plate separation d (mm)", "y_label": "Capacitance C (pF)", "rows": [[d, c_] for d, c_ in zip(ds_, Cs)]}}
     stim["data"]["notes"] = [stim["description"]]
     parts = [
         part("A", "Describe an experimental procedure to collect the data for the capacitance as a function of the plate separation. Include the equipment and the measurements, how the independent variable is changed, and one way to reduce the uncertainty in the separation.", 3, "design", ["3.A", "2.B"],
@@ -246,7 +246,7 @@ def pef_lab_capacitor_gap(rng):
               R("D3", "numeric", f"Obtains $\\varepsilon_0$ of about {e0:.3g} with units of farads per meter (accept any value consistent with the student's own slope from D1)", [f"{e0:.3g}", "F/m"], alt=["a value of epsilon_0 consistent with the student's own slope from D1"], nums=True, units=True)]),
     ]
     return _pack("pef_lab_capacitor_gap", "lab", "10.3", ["10.1", "8.6"], "3.A", "Experiment: permittivity of free space from a parallel-plate capacitor", stim, parts, 10, 27, [f"Acm={Acm}", f"slope={slope:.5f}", f"e0={e0:.6g}", f"Cs={Cs}"],
-                 [_ev("D", "slope", slope, 0.05 * slope, "pF*mm"), _ev("D", "permittivity of free space", e0 * 1e12, 0.08 * EPS0 * 1e12, "pF/m")],
+                 [_ev("D", "slope", slope, 0.05 * slope, "pF*mm"), _ev("D", "permittivity of free space", e0, 0.08 * EPS0, "F/m")],
                  ("Designing an experiment and linearizing capacitance data to extract the permittivity of free space from the slope of C versus 1/d", ["Describe how the separation is set and the capacitance is measured", "Linearize $C=\\varepsilon_0A/d$ and plot C versus 1/d", "Use the slope and the plate area to determine epsilon_0"],
                   [("the generated capacitances follow $C=\\varepsilon_0A/d$ with a small random error so the fitted permittivity is within six percent of the generating value", "the code rejects a seed whose fitted permittivity differs from the generating value by more than six percent")], {"type": "table", "must_include": ["plate separation", "capacitance"]},
                   "the slope is recomputed from the normal equations with numpy linalg.solve and compared with polyfit; the fitted permittivity is compared with the generating value"),
@@ -261,7 +261,7 @@ def pef_qqt_closest_approach(rng):
         agree(rmin, bisect(lambda s: K * Zq * QE / s - 0.5 * MP * v * v, 1e-18, 1.0), 1e-9, "r")
         break
     r2 = K * (2 * Zq) * QE / (0.5 * MP * v * v)
-    stim = {"kind": "text", "description": f"A proton moves directly toward the center of a fixed nucleus of charge $+{Z}e$ (treated as a point charge) from a very large distance with speed $v={v / 1e6:g}\\times10^{{6}}\\text{{ m/s}}$. Use {KP}, $e=1.60\\times10^{{-19}}\\text{{ C}}$ and $m_p=1.67\\times10^{{-27}}\\text{{ kg}}$.", "data": {}}
+    stim = {"kind": "text", "description": f"A proton moves directly toward the center of a fixed nucleus of charge $+Ze$ with $Z={Z}$ (treated as a point charge) from a very large distance with speed $v={v / 1e6:g}\\times10^{{6}}\\text{{ m/s}}$. Use {KP}, $e=1.60\\times10^{{-19}}\\text{{ C}}$ and $m_p=1.67\\times10^{{-27}}\\text{{ kg}}$.", "data": {}}
     parts = [
         part("A", "A student claims that if the proton's initial speed is doubled, the distance of closest approach to the nucleus is cut in half. Do you agree or disagree with the claim? Justify your answer using conservation of energy.", 3, "explain", ["3.B", "3.C"],
              "Disagree. At the turning point all of the initial kinetic energy $\\tfrac12mv^2$ has become electric potential energy $kq_1q_2/r$, so $r\\propto1/v^2$ and doubling the speed cuts the distance to one quarter.",
@@ -279,7 +279,7 @@ def pef_qqt_closest_approach(rng):
               R("C2", "justification", "Justifies with $r_{min}=2kZe^2/(m_pv^2)$ (directly proportional to the nuclear charge)", ["r proportional to Z"], requires="C1", err=["argues only that a stronger repulsion keeps the proton farther away"])]),
     ]
     return _pack("pef_qqt_closest_approach", "qqt", "9.3", ["9.1", "8.1"], "3.B", "Closest approach of a proton to a nucleus", stim, parts, 8, 16, [f"Z={Z}", f"v={v}", f"rmin={rmin:.6g}", f"r2={r2:.6g}"],
-                 [_ev("B", "distance of closest approach", rmin * 1e15, 0.02 * rmin * 1e15 + 0.01, "fm")],
+                 [_ev("B", "distance of closest approach", rmin, 0.02 * rmin, "m")],
                  ("Using conservation of energy to decide how the distance of closest approach depends on the speed and the nuclear charge", ["Equate the initial kinetic energy with the potential energy at the turning point", "Derive and evaluate the distance", "Predict the effect of a larger nuclear charge"],
                   [("only the electric force acts and the nucleus stays fixed", "the stimulus states a fixed point nucleus and only the electric force")], {"type": "text", "must_include": ["the nuclear charge", "the proton speed"]},
                   "a bisection root finder solves the energy balance for the turning point and recomputes the distance"),

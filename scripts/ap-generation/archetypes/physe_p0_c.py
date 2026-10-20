@@ -42,7 +42,7 @@ def pe_resistance_geometry(rng):
         break
     f = fl / fd ** 2
     key, ds = num_opts(f, [("Uses the diameter factor, not its square, $\\ell/d$.", fl / fd), ("Treats resistance as inversely proportional to length.", fd ** 2 / fl), ("Multiplies the length factor by the diameter factor.", fl * fd), ("Ignores the change in diameter.", float(fl))], "", fmt=lambda v: "$" + sig(v) + "R$")
-    stem = f"A cylindrical wire of resistance $R$ is drawn out and remade as a wire of the same material whose length is ${fl}$ times as long and whose diameter is ${fd}$ times as large (a different wire, not the same volume of metal). What is the resistance of the new wire?"
+    stem = f"A cylindrical wire has resistance $R$. A second cylindrical wire is made of the same material, has a length ${fl}$ times as long as the first wire and a diameter ${fd}$ times as large. What is the resistance of the second wire?"
     return MQ("pe_resistance_geometry", "11.3", "2.D", stem, key, ds, rng, "Resistance varies as length over cross-sectional area, which is proportional to the diameter squared", ["Write $R=\\rho L/A$ with $A\\propto d^2$", "Apply the factors"],
               "the resistance ratio is recomputed from $R=\\rho L/(\\pi d^2/4)$ for sample values", f"$R\\propto L/d^2$, so the new resistance is $({fl}/{fd}^2)R={sig(f)}R$.", [f"fl={fl}", f"fd={fd}"], est=65)
 
@@ -285,7 +285,7 @@ def pe_rc_initial_final_current(rng):
     wr = [("Takes the capacitor as an open circuit at the start, so the current is $\\varepsilon/(R_1+R_2)$." if when.startswith("just") else "Takes the capacitor as a short circuit in steady state, so the current is $\\varepsilon/R_1$.", e / (R1 + R2) if when.startswith("just") else e / R1), ("Uses only $R_2$.", e / R2), ("Uses the parallel combination of the resistors.", e / (R1 * R2 / (R1 + R2))), ("Says the current is zero.", 0.0)]
     key, ds = num_opts(I, [(w, v) for w, v in wr], "", fmt=FU(U_A))
     stem = f"A battery of emf ${e:g}\\text{{ V}}$ and negligible internal resistance is connected in series with a resistor $R_1={R1:g}\\,\\Omega$ and a parallel combination of a resistor $R_2={R2:g}\\,\\Omega$ and an initially uncharged capacitor. What is the current supplied by the battery {when}?"
-    return MQ("pe_rc_initial_final_current", "11.8", "2.C", stem, key, ds, rng, "An uncharged capacitor acts like a wire at first and like an open circuit in steady state", ["Decide how the capacitor behaves at the stated time", "Apply Ohm's law to the resulting circuit"],
+    return MQ("pe_rc_initial_final_current", "11.8", "2.B", stem, key, ds, rng, "An uncharged capacitor acts like a wire at first and like an open circuit in steady state", ["Decide how the capacitor behaves at the stated time", "Apply Ohm's law to the resulting circuit"],
               "the time-dependent current is recomputed by integrating the circuit equation to short and long times", f"The battery current {when} is ${sig(I)}\\text{{ A}}$.", [f"e={e}", f"R1={R1}", f"R2={R2}", f"when={when}"], est=95, judg=["law_selection", "justification"])
 
 

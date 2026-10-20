@@ -18,8 +18,8 @@ def pe_coulomb_scaling(rng):
         if a != b:
             break
     f = a * b / d ** 2
-    key, ds = num_opts(f, [("Multiplies the force by the separation factor instead of dividing by its square.", a * b * d ** 2), ("Divides by the separation factor, not by its square.", a * b / d),
-                           ("Applies the inverse-square law to the separation but adds the two charge factors instead of multiplying them.", (a + b) / d ** 2), ("Multiplies by the separation factor squared in the numerator.", a * b * d), ("Ignores the charge on the second sphere.", a / d ** 2)], "", fmt=_FF)
+    key, ds = num_opts(f, [("Multiplies the force by the square of the separation factor instead of dividing by it.", a * b * d ** 2), ("Divides by the separation factor, not by its square.", a * b / d),
+                           ("Applies the inverse-square law to the separation but adds the two charge factors instead of multiplying them.", (a + b) / d ** 2), ("Multiplies by the separation factor instead of dividing by its square.", a * b * d), ("Ignores the charge on the second sphere.", a / d ** 2)], "", fmt=_FF)
     stem = f"Two small charged spheres separated by a distance $r$ exert electric forces of magnitude $F$ on each other. The charge on sphere 1 is multiplied by ${a}$, the charge on sphere 2 is multiplied by ${b}$, and the separation is multiplied by ${d}$. What is the new magnitude of the force on each sphere?"
     return MQ("pe_coulomb_scaling", "8.1", "2.D", stem, key, ds, rng, "Coulomb's law scales with the product of the charges and the inverse square of the separation", ["Write the force as proportional to $q_1q_2/r^2$", "Multiply the factors for each quantity"],
               "the force ratio is recomputed numerically from Coulomb's law for sample charges and separations", f"$F\\propto q_1q_2/r^2$, so the new force is $\\dfrac{{{a}\\cdot{b}}}{{{d}^2}}F={sig(f)}F$.", [f"a={a}", f"b={b}", f"d={d}"], est=70)
@@ -165,7 +165,7 @@ def pe_field_two_charges_midpoint(rng):
     s1 = "+" if q1 > 0 else "-"; s2 = "+" if q2 > 0 else "-"
     stem = f"A point charge ${s1}{abs(q1):g}\\text{{ nC}}$ is fixed at $x=0$ and a point charge ${s2}{abs(q2):g}\\text{{ nC}}$ is fixed at $x={d:g}\\text{{ m}}$. What is the $x$-component of the electric field at the midpoint $x={h:g}\\text{{ m}}$?" + KUSE
     return MQ("pe_field_two_charges_midpoint", "8.3", "2.B", stem, key, ds, rng, "The net field is the vector sum of the fields of each charge", ["Find the direction and magnitude of each field at the midpoint", "Add the signed components"],
-              "the signed components are recomputed with unit vectors pointing away from each source", f"At the midpoint $E_x=k(q_1-q_2)/(d/2)^2={sig(E)}\\text{{ N/C}}$, because the field of the charge at $x=d$ points toward $-x$ when it is positive.", [f"q1={q1}", f"q2={q2}", f"d={d}"], est=100, judg=["law_selection", "vector_reasoning"])
+              "the signed components are recomputed with unit vectors pointing away from each source", f"The charge at $x=0$ contributes $E_x={sig(only1)}\\text{{ N/C}}$ and the charge at $x={d:g}\\text{{ m}}$ contributes $E_x={sig(only2)}\\text{{ N/C}}$ (each field points away from a positive charge and toward a negative one), so the net is ${sig(E)}\\text{{ N/C}}$.", [f"q1={q1}", f"q2={q2}", f"d={d}"], est=100, judg=["law_selection", "vector_reasoning"])
 
 
 @retry_sep

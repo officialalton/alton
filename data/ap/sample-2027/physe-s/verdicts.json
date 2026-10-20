@@ -1,0 +1,1150 @@
+[
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m01-k0-q1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Ex = -dV/dx; slope from x=1 to 3 m is (10-70)/2 = -30 V/m, so Ex = +30 V/m.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "30.0 V/m"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The charge, mass and release details are leftover from a two-part blueprint and add needless reading load. The stem is not self-contained as a single clean question.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the topic fits. The item fails on exam suitability because the stem carries unused particle data left over from a two-question blueprint. It also fails on distractors because no option encodes the sign error. Revise by removing the unused particle information and adding -30 V/m as a distractor."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: read the correct linear segment (x=1 to 3) from the V-x graph, compute the slope (-30 V/m), and apply E = -dV/dx to get +30 V/m. The sign is the only subtle step. The charge and mass are unused distractors with minimal reading burden. The arithmetic is trivial.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m01-k0-q2",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "13.4 m/s",
+     "brief_reasoning": "KE = qΔV = 3e-6*60 = 1.8e-4 J; v = sqrt(2KE/m) = sqrt(180) ≈ 13.4 m/s",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Energy conservation with potential read from a graph; fits 9.3 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified: v = sqrt(2*3e-6*60/2e-6) = 13.4 m/s; unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph vertices, axes and units are complete; the stem is clear and states that only the electric force acts."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (missing square root, wrong start point, missing factor 2), each reproduces its stated value, and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, light arithmetic, calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, complete and well-distracted, and it fits topic 9.3 and skill 2.B. I recommend accepting it."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single governing law (energy conservation, qΔV = ½mv²). Requires reading two potential values off the graph, converting μC and mg to SI units, and a short calculation. There is no calculus and little reading load, and the arithmetic is clean. The distractors are plausible slips (v² not square-rooted, missing factor of 2).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m01-k1-q1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Ex=-dV/dx; slope between x=1 and 3 is (20-50)/2=-15 V/m, so Ex=+15 V/m.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "15.0 V/m"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The extraneous particle information (2 µC, 5 mg, released from rest) is irrelevant to the field question and adds reading load. It reflects a stem that was cut from a two-question set without cleanup.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key (+15 V/m) is correct and the topic fits. The stem, however, carries leftover, irrelevant particle details (charge, mass, release from rest) from a removed speed question. This adds reading load and deviates from the one-dominant-skill reference pattern, so the item should be revised before use."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the correct linear segment from the V-x graph (x=2 m lies on the 1-3 m segment), compute the slope (-15 V/m), and apply E = -dV/dx to get +15 V/m. The sign convention is the main conceptual hurdle, and the extraneous particle data is a mild distractor. Arithmetic is trivial and the wording is unambiguous. This is an easy-end mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m01-k1-q2",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "instant_reject_missing_condition"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "4.90 m/s",
+     "brief_reasoning": "ΔKE = qΔV = 2e-6*(50-20)=6e-5 J; v=sqrt(2*6e-5/5e-6)=sqrt(24)=4.90 m/s",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "Minor: x=1 is a potential maximum (kink), so the initial force direction isn't defined. The stem assumes the particle reaches x=3."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Time and load are typical, and the calculator designation is consistent.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The numeric key of 4.90 m/s is correct. The release point x=1 m is the potential maximum, where the force direction is undefined and the particle could move away from x=3, so the stem lacks a condition guaranteeing motion toward +x. Fail as a missing condition; releasing the particle on a slope or stating the direction would fix it."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Read V at x=1 and x=3 from a piecewise graph, apply conservation of energy qΔV = ½mv², handle μC and mg unit conversions, and compute v = 4.90 m/s. One governing law, a graph read, a unit conversion, and light arithmetic. Typical of a mock-exam item and not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m02-k0-q1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m02",
+  "passed": false,
+  "reasons": [
+   "blueprint:set:set_spans_units_8+9"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m02-k0-q2",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m02",
+  "passed": false,
+  "reasons": [
+   "blueprint:set:set_spans_units_8+9"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m02-k1-q1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m02",
+  "passed": false,
+  "reasons": [
+   "blueprint:set:set_spans_units_8+9"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m02-k1-q2",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m02",
+  "passed": false,
+  "reasons": [
+   "blueprint:set:set_spans_units_8+9"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m03-k0-q1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "At t=0 the uncharged capacitor has no voltage across it, so emf = I0·R = 3 mA × 5 kΩ = 15.0 V. The data decay exponentially with τ = 40 ms, which is consistent.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "15.0 V"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "RC charging initial condition with table reading; in scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "15 V = I0R is unique; table consistent with tau=40 ms."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table complete with labels and units; circuit fully described."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors map to distinct table-derived errors; each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, typical load; calculator allowed is fine."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key of 15 V follows uniquely from the t=0 current, the distractors are distinct and explained, and the load is appropriate. It is on the easy side, and the blueprint's thinking steps mention a 1/e step the item does not need."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single concept: at t=0 the uncharged capacitor acts as a wire, so emf = I0*R = 3 mA * 5 kOhm = 15 V. Requires reading the t=0 entry of the table and one multiplication with a unit conversion (mA*kOhm gives V). The rest of the table is extra data that is consistent with tau about 40 ms but is not needed. Few reasoning steps, minimal reading and computation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m03-k0-q2",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "8.00 μF",
+     "brief_reasoning": "I = 3e^(-t/τ): 1.82/3 = e^(-0.5), so τ = 40 ms. Then C = τ/R = 0.04/5000 = 8 μF.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "RC charging, extract tau from table, C=tau/R. Fits 11.8 and 2.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Data follow I=3e^(-t/40ms); 8.00 uF is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table has labels, units, rows; stem gives R, uncharged C, ideal battery."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct misconception and is explained; the 2tau and 3tau ones are plausible via the 80 ms and 120 ms rows."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, calculator allowed, little arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean item; table consistent with tau=40 ms; distractors map to distinct misreadings of tau."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must recognize I = I0 e^(-t/RC) for charging, read I0 from the table, pick a data point and extract tau (about 40 ms) using a natural log, then apply C = tau/R with a unit conversion. This takes a few steps with one representation change (table to expression). The arithmetic is light and the data is self-consistent. The wording is unambiguous, so the difficulty comes from legitimate sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 100
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m03-k1-q1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "At t=0 the uncharged capacitor has no voltage, so emf = I0*R = 2 mA * 1 kOhm = 2.00 V.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "2.00 V"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a valid and correct RC charging-current question. The key of 2.00 V follows from I0·R at t = 0, the table is internally consistent, and the distractors are distinct and explained. It is an easy item but acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Requires recognizing that an uncharged capacitor acts as a short at t=0, so emf = I0*R. Read I0 = 2 mA from the table's first row and multiply by 1 kΩ. Extra table rows are distractors; no time constant or exponential fitting is needed. Minimal computation and a single reasoning step.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m03-k1-q2",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "10.0 μF",
+     "brief_reasoning": "I drops to 1/e of I0 (0.736/2=0.368) at t=10 ms, so tau=RC=10 ms; C=10 ms/1 kΩ=10 μF.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The table is consistent with I = 2e^(-t/10 ms) and the key of 10.0 μF is unique and correct. The distractors encode distinct misconceptions, and the item is a short, suitable AP-style MC on RC charging.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item reads a table and applies τ = RC to the charging current, which fits topic 11.8. The skill label 2.A is a slightly loose fit for a table read, but acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The current falls to I0/e at 10 ms, so τ = 10 ms and C = 10 μF."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has labeled columns and consistent data, and the circuit is fully described in the stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a distinct misconception and an explanation. The explanations are terse but present."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, calculator allowed, minimal arithmetic."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must choose the RC charging current model I = I0 e^{-t/RC}, translate tabular data into a time constant (recognizing I/I0 = 1/e at 10 ms or using a log), and then compute C = tau/R. The data are consistent and the arithmetic is light. Distractors reflect real misconceptions such as confusing the half-life with the time constant. Moderate depth appropriate for a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m04-k0-q1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "emf = A dB/dt = 0.09 m^2 × 0.25 T/s = 22.5 mV",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "22.5 mV"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Target skill 2.A is deriving a symbolic expression, but the item is a numeric slope-reading and substitution task (representation reading and law selection). It fits topic 13.2 but not the tagged skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The slope is 0.25 T/s and the area is 0.09 m^2, so the emf is 22.5 mV. The key is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph vertices and axes are complete. The loop is fixed and the field is uniform and perpendicular, as the stem says. The resistor sentence is unnecessary for the emf and adds a little reading load."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a distinct named error and the explanation covers all three. The cm^2 distractor is slightly loose, and the 'divide by 4 s' distractor is somewhat arbitrary, but both are acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60-95 seconds, has light arithmetic, and is calculator-neutral."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the stimulus is complete. The item fails because it assesses numeric graph reading rather than the tagged skill 2.A (deriving a symbolic expression). Fail when unsure, so overall it fails on skill fit."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: read the slope of the B-t graph on the 0-2 s segment (0.25 T/s), compute the area (0.09 m^2), and apply Faraday's law, emf = A dB/dt = 22.5 mV. The resistance is a distractor. There are no multi-step derivations, and the arithmetic is simple. It is suitable for foundational practice rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m04-k0-q2",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Q = A·ΔB/R = 0.09 × 0.5 / 2 = 0.0225 C = 22.5 mC",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "22.5 mC"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The time and load are appropriate for a calculator-allowed item.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The physics and key are correct, but the explanations for the distractors 11.2 mC and 67.5 mC do not match their numeric values, so the distractor encoding fails."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept Faraday's law item. Read the graph for the change in B, compute the change in flux through the 0.09 m^2 loop, find emf and current, then multiply by time (or use q = change in flux / R). Few steps, simple arithmetic, clear wording. The distractors correspond to common slips (forgetting the area, a factor of 2, using the wrong interval).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m04-k1-q1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "dB/dt=0.1 T/s over 0-2 s; A=0.01 m^2; emf=1.00 mV",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "1.00 mV"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key 1.00 mV is correct, but the item has several flaws. The resistor sentence is irrelevant leftover text from a two-question blueprint. The task is a slope read plus A·dB/dt, which is a weak fit to the derive-a-symbolic-expression skill 2.A. The 10000 mV distractor is an obvious outlier and the 0.500 mV rationale is contrived. The options are not ordered. The item should be revised.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "The topic fits 13.2, but the task is reading a slope and multiplying by an area. It does not require deriving a symbolic expression, so the fit to 2.A is weak."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key of 1.00 mV is unique and correct: dB/dt = 0.1 T/s and A = 0.01 m²."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The graph data are renderable. The resistance statement is irrelevant to the question, which adds reading load and signals a leftover from the blueprint's second question about charge."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The 0.500 mV rationale (dividing by 4 s) is contrived and not tied to the graph. The 10000 mV option is an obvious outlier, and the options are not in order."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is quick. The extraneous resistor sentence is a defect."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single application of Faraday's law: read the slope from the graph (0.1 T/s), convert cm to m for the area (0.01 m^2), and multiply to get 1.00 mV. There are only a few reasoning steps and the arithmetic is trivial. The resistance is an unused distractor. The item is a one-step law application with minimal representation change.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m04-k1-q2",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Q=ΔΦ/R = (0.2 T)(0.01 m^2)/0.5 Ω = 4.00 mC",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "4.00 mC"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Faraday's law with charge from the flux change; fits 13.3 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "q=ΔΦ/R=4.00 mC is the unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data are complete and the stem is clear. The 4-6 s segment is unused except to support one distractor."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The explanations for 2.00 mC and 12.0 mC do not match their values. The current is 4 mA, so 'end-of-segment current times 1 s' gives 4 mC (not 2 mC), and 'current times 6 s' gives 24 mC (not 12 mC). The distractors do not encode the stated misconceptions."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Time and load are appropriate."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key (4.00 mC) is correct and the item is in scope. However, two distractor rationales are numerically inconsistent with their options: 2.00 mC would not result from end-of-segment current times 1 s, and 12.0 mC would not result from current times 6 s. Fail on distractor encoding and explanation."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept Faraday's law item: read the slope from a linear B-t graph, compute the emf with A = 0.01 m^2, apply Ohm's law, and multiply by time (or use q = ΔΦ/R). The arithmetic is short, with no nonlinear flux and no extra claim step. The graph read is simple.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m05-k0-q1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Slope Q/V = 40 µC / 10 V = 4.00 µF",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "4.00 µF"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is short, the arithmetic is trivial, and the options are parallel values with units. The calculator designation is consistent.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, correct slope-reading question on capacitance, with plausible distractors and a complete graph specification. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step item: read the slope of a linear Q-V graph and apply C = Q/V. There is one representation change (graph to equation), minimal arithmetic (40/10), and a clear stem. Distractors reflect common errors (inverted slope, raw Q, area under the graph), but the concept depth and the number of reasoning steps are low.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m05-k0-q2",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Energy = area under Q-V line = 1/2 QV = 1/2(40 µC)(10 V) = 200 µJ",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "200 µJ"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Capacitor energy from a Q-V graph; the slope or the area under the line gives the answer. Fits topic 10.3 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "U = 1/2 QV = 200 µJ is the unique correct answer and matches key_index 2."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph is a line from (0,0) to (10 V, 40 µC) with labeled axes and units. The data is complete and the stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors cover the 1/2CV, QV (missing the one half) and charge-as-energy errors. The explanations are brief, and the 'charge as energy' one is a weak misconception, but each wrong option is addressed."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A one-step reading of the graph, about 95 s, with a light calculator load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is correct and unique, the graph is complete, and the distractors are acceptable, though the 'charge as energy' misconception is weak and the explanations are brief."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item. The student reads the endpoint from a linear Q-V graph and applies U = 1/2 QV, or finds C from the slope and uses 1/2 CV^2, to get 200 µJ. The numbers are clean and the arithmetic is minimal. The wording is unambiguous and the reading load is low. The distractors target common errors such as dropping the 1/2 or misreading units, but the item has no multi-step linkage or proportional reasoning beyond one graph read.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m05-k1-q1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "C = slope of Q vs V = 200 µC / 20 V = 10.0 µF",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "10.0 µF"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Short, clear, and about 60-95 seconds. Calculator use is minimal.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clear and well-formed slope-reading item with distinct distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step item: read the endpoint of a linear Q-V graph and apply C = Q/V (slope). The arithmetic is trivial (200/20), reading load is minimal, and there is only one representation change (graph to value). Distractors are the unit-slip and inversion errors. It is appropriate for introductory concept checks, not for full-mock exam-level difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m05-k1-q2",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "U = area under the Q-V graph = ½QV = ½(200 µC)(20 V) = 2000 µJ",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "2000 µJ"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Capacitor energy from a Q-V graph; topic 10.3 and skill 2.B fit."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key of 2000 µJ is unique; the linear graph gives C = 10 µF and U = ½QV = 2000 µJ."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph data gives axes, units, ranges and endpoints. The stem states an ideal capacitor charged from zero."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (charge as energy, QV without ½, ½CV), all with the same format; the explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, one dominant skill, with no heavy arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. It is a clean, unambiguous capacitor-energy item with a complete graph specification and distinct distractors."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Reading a linear Q-V graph, choosing U = 1/2 QV (area under the graph) or computing C then 1/2 CV^2, and doing simple arithmetic. Distractors include QV without the 1/2. The concept is standard, the wording is clear, and the arithmetic is minimal.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m06-k0-q1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "B(R)=1000 µT at R=2 mm; I=2πRB/μ0=10 A",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "10.0 A"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Ampère's law with a graph read; fits 12.4 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B(R)=1000 µT gives I=10 A; unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data complete and consistent with 1/r falloff outside; axes labeled with units."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions with values consistent with their descriptions; each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, one-step, calculator allowed, appropriate load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean graph-reading Ampère's law item. The key of 10.0 A is correct, the stimulus is complete, and the distractors are distinct and explained."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Read the peak field (1000 µT at r = 2 mm, the wire surface) from the graph, convert units, choose Ampère's law outside the wire (B = μ0 I/(2πr)), and solve for I = 10 A. It needs a graph-to-formula translation, a unit conversion, and a check that the right region is used. The arithmetic is short and clean, and the wording is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m06-k0-q2",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "B(R)=1000µT at R=2mm gives I=10 A. The enclosed current scales as r², so (1/2)² × 10 A = 2.5 A. Ampère's law at r=1mm (B=500µT) gives the same 2.5 A.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "2.50 A"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Ampère's law with uniform current density; graph read to get total current, then area scaling. Fits 12.4 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Peak 1000 µT at 2 mm gives I=10 A; enclosed at R/2 is 2.5 A. Unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data is complete, with labeled axes and units and a peak at r=2 mm. The symbol R is not defined in the stem, but the radius is given as 2 mm, so it is inferable. Minor wording flaw."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (cube, linear, whole current), each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, calculator use is light, and the graph read is appropriate."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key of 2.50 A is correct, the graph supports the question, and the distractors are distinct and explained. The only issue is the undefined symbol R in the stem, which is a minor, recoverable flaw. Acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must read the graph and apply Ampère's law with cylindrical symmetry. They either read B at r = 1 mm (500 µT) and compute I_enc = 2πrB/μ0 = 2.5 A, or find the total current from B(R) and scale by (r/R)^2. The conversions from mm and µT are simple and the arithmetic is clean. The distractors correspond to plausible errors (total current, linear scaling). This is a standard AP C E&M level item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m06-k1-q1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "40.0 A",
+     "brief_reasoning": "I = 2πrB/μ0 = 2π(0.004 m)(2.0e-3 T)/(4π×10^-7 T·m/A) = 40 A. The point r = 8 mm, B = 1000 µT gives the same result.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Ampère's law with cylindrical symmetry plus a graph read; fits 12.4 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The peak is 2000 µT at r = 4 mm, so I = 2πRB/μ0 = 40 A. The outside branch of the graph is consistent. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data is complete with labeled axes and units. The stem gives the radius, μ0, and the uniform current."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions are encoded, and the explanation covers each wrong option. The 40000 A value is a plausible unit-slip result."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 s, one law and one reading step, minimal arithmetic, and a calculator is allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well formed. The key of 40 A follows from reading the peak field at the wire's surface and applying Ampère's law. The distractors are distinct and each is explained."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the peak field at r = R = 4 mm from the graph (2000 µT), choose Ampère's law for a cylindrically symmetric current, convert mm and µT to SI, and solve I = 2πRB/μ0 = 40 A. This takes a graph read, a law choice and unit conversions, with clean arithmetic and unambiguous wording. Distractors map to plausible errors (factor of 2, π handling, unit prefix).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m06-k1-q2",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "B(R)=2000 µT at R=4 mm gives I=40 A; uniform current density so I_enc(R/2)=I/4=10 A (consistent with B(2mm)=1000 µT).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "10.0 A"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Ampère's law with uniform current density, graph reading, proportional area scaling; fits 12.4 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "I=2πRB/μ0=40 A, enclosed at R/2 is 10 A; unique, consistent with the graph (1000 µT at 2 mm)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data complete and consistent. Minor: R is used in the question but never explicitly defined (only 'radius 4 mm' given), though inferable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option is explained and distinct. Some (the (1/2)^(3/2) one) are contrived rather than natural misconceptions, but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 s, calculator allowed, light arithmetic, single dominant skill."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item with a unique key of 10.0 A. Minor concerns: R is not explicitly defined in the stem, and some distractors are contrived. Passes on balance."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Read B at r=2 mm from the graph (1000 µT), then apply Ampère's law I = 2πrB/μ0 to get 10 A. This takes one governing law, one graph read, and simple arithmetic. The distractors match common errors (factor of 2, square root, total current). Little reasoning beyond direct substitution.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ }
+]

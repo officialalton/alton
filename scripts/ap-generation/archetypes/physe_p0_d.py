@@ -314,5 +314,5 @@ def pe_ampere_loop_value(rng):
               "the enclosed currents are summed with signs and multiplied by the permeability", f"$\\oint\\vec B\\cdot d\\vec l=\\mu_0I_{{enc}}={sig(val)}\\,\\mu\\text{{T}}\\cdot\\text{{m}}$.", [f"cur={cur}", f"inc={inc}"], est=90, judg=["law_selection"])
 
 
-STAGE_U12 = ["pe_force_charge_field", "pe_cyclotron_radius", "pe_velocity_selector", "pe_mass_radius_ratio", "pe_helix_pitch", "pe_force_on_wire", "pe_force_parallel_wires", "pe_bsl_long_wire", "pe_bs_loop_center", "pe_bs_arc_center", "pe_bs_loop_axis", "pe_ampere_wire_inside", "pe_ampere_nonuniform_J", "pe_ampere_coax",
+STAGE_U12 = ["pe_force_charge_field", "pe_velocity_selector", "pe_mass_radius_ratio", "pe_helix_pitch", "pe_force_on_wire", "pe_force_parallel_wires", "pe_bs_loop_center", "pe_bs_arc_center", "pe_bs_loop_axis", "pe_ampere_wire_inside", "pe_ampere_nonuniform_J", "pe_ampere_coax",
              "pe_solenoid_field", "pe_toroid_field", "pe_two_wires_zero_field", "pe_field_direction_claim", "pe_loop_torque", "pe_magnetic_work_claim", "pe_loop_near_wire_force", "pe_ampere_loop_value"]

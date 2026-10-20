@@ -283,7 +283,7 @@ def pe_connected_spheres_field_ratio(rng):
     for _ in forever():
         r1 = pick(rng, [1.0, 2.0, 3.0]); r2 = pick(rng, [4.0, 6.0, 9.0]); ratio = r2 / r1
         break
-    key, ds = num_opts(ratio, [("Takes the fields as equal, because the potentials are equal.", 1.0), ("Takes the ratio of the radii the wrong way, $r_1/r_2$.", r1 / r2), ("Takes the ratio of the squares of the radii, $(r_2/r_1)^2$.", (r2 / r1) ** 2), ("Takes the ratio of the charges, $r_1/r_2$ squared inverted.", (r1 / r2) ** 2)], "", fmt=lambda v: "$" + sig(v) + "$")
+    key, ds = num_opts(ratio, [("Takes the fields as equal, because the potentials are equal.", 1.0), ("Takes the ratio of the radii the wrong way, $r_1/r_2$.", r1 / r2), ("Takes the ratio of the squares of the radii, $(r_2/r_1)^2$.", (r2 / r1) ** 2), ("Takes the ratio of the squares of the radii the wrong way, $(r_1/r_2)^2$.", (r1 / r2) ** 2)], "", fmt=lambda v: "$" + sig(v) + "$")
     stem = f"Two conducting spheres of radii $r_1={r1:g}\\text{{ cm}}$ and $r_2={r2:g}\\text{{ cm}}$ are far apart and joined by a thin wire. In equilibrium, what is the ratio $E_1/E_2$ of the electric field magnitude just outside the surface of sphere 1 to that just outside sphere 2?"
     return MQ("pe_connected_spheres_field_ratio", "10.2", "2.C", stem, key, ds, rng, "At equal potential the surface field is inversely proportional to the radius", ["Set the two potentials equal", "Compare the surface fields $kq/r^2$"],
               "the field ratio is recomputed from the charges that give equal potentials", f"$V=kq/r$ equal gives $E=V/r$, so $E_1/E_2=r_2/r_1={sig(ratio)}$.", [f"r1={r1}", f"r2={r2}"], est=85, judg=["law_selection", "proportional_reasoning"])
@@ -308,7 +308,7 @@ def pe_cap_energy(rng):
         U = 0.5 * C * 1e-6 * V ** 2 * 1e6
         agree(U, simpson(lambda s: s / (C * 1e-6) * 1e6, 0, C * 1e-6 * V, 2001), 1e-6, "U")
         break
-    key, ds = num_opts(U, [("Omits the factor of one half, $CV^2$.", C * V ** 2), ("Uses $\\tfrac12CV$.", 0.5 * C * V), ("Uses $\\tfrac12C^2V$.", 0.5 * C ** 2 * V), ("Uses $QV$ with $Q=CV$, then halves the voltage.", C * V * V / 4)], "", fmt=FU(U_UJ))
+    key, ds = num_opts(U, [("Omits the factor of one half, $CV^2$.", C * V ** 2), ("Uses $\\tfrac12CV$.", 0.5 * C * V), ("Uses $\\tfrac12C^2V$.", 0.5 * C ** 2 * V), ("Uses $\\tfrac12QV^2$ with $Q=CV$.", 0.5 * C * V ** 3)], "", fmt=FU(U_UJ))
     stem = f"A ${C:g}\\,\\mu\\text{{F}}$ capacitor is charged by a ${V:g}\\text{{ V}}$ battery and then disconnected. How much energy is stored in the capacitor?"
     return MQ("pe_cap_energy", "10.3", "2.B", stem, key, ds, rng, "The energy stored in a capacitor is $\\tfrac12CV^2$", ["Identify the capacitance and the voltage", "Evaluate $U=\\tfrac12CV^2$"],
               "the stored energy is recomputed by integrating $q\\,dq/C$ from zero to the final charge", f"$U=\\tfrac12CV^2=\\tfrac12({C:g}\\times10^{{-6}})({V:g})^2={sig(U)}\\,\\mu\\text{{J}}$.", [f"C={C}", f"V={V}"], est=60)
@@ -346,12 +346,12 @@ def pe_cap_dielectric_factor(rng):
     bat = conn.startswith("connected"); en = q == "the energy stored"
     f = kap if bat else (1 / kap if en else 1.0)
     if bat:
-        wr = [("Believes the quantity falls, as if the charge were fixed.", 1 / kap), ("Believes the quantity cannot change.", 1.0), ("Applies the factor $\\kappa$ twice.", kap ** 2), ("Applies the inverse of the factor twice.", 1 / kap ** 2)]
+        wr = [("Believes the quantity falls, as if the charge were fixed.", 1 / kap), ("Believes the quantity cannot change.", 1.0), ("Applies the factor $\\kappa$ twice.", kap ** 2), ("Uses the factor $\\kappa+1$.", kap + 1)]
     elif en:
-        wr = [("Uses the battery-connected result, in which the energy rises.", kap), ("Believes the energy cannot change because the charge is fixed.", 1.0), ("Applies the inverse of the factor twice.", 1 / kap ** 2), ("Applies the factor $\\kappa$ twice.", kap ** 2)]
+        wr = [("Uses the battery-connected result, in which the energy rises.", kap), ("Believes the energy cannot change because the charge is fixed.", 1.0), ("Applies the factor $\\kappa$ twice.", kap ** 2), ("Uses the factor $1/(\\kappa+1)$.", 1 / (kap + 1))]
     else:
-        wr = [("Uses the battery-connected result, in which the charge rises.", kap), ("Believes the charge falls because the capacitance rises.", 1 / kap), ("Applies the factor $\\kappa$ twice.", kap ** 2), ("Applies the inverse of the factor twice.", 1 / kap ** 2)]
-    key, ds = num_opts(f, wr, "", fmt=lambda v: ("$" + sig(v) + "$ times the original") if abs(v - 1.0) > 1e-9 else "It is unchanged")
+        wr = [("Uses the battery-connected result, in which the charge rises.", kap), ("Believes the charge falls because the capacitance rises.", 1 / kap), ("Applies the factor $\\kappa$ twice.", kap ** 2), ("Uses the factor $\\kappa+1$.", kap + 1)]
+    key, ds = num_opts(f, wr, "", fmt=lambda v: "$" + sig(v) + "$ times the original")
     stem = f"A parallel-plate capacitor with vacuum between its plates is {conn}. A dielectric slab with constant $\\kappa={kap:g}$ is inserted so that it completely fills the space between the plates. By what factor does {q} change?"
     return MQ("pe_cap_dielectric_factor", "10.4", "2.C", stem, key, ds, rng, "A dielectric multiplies the capacitance by $\\kappa$; what stays fixed depends on whether the battery is connected", ["Identify the fixed quantity: $V$ with a battery, $Q$ when isolated", "Apply $C\\to\\kappa C$ to $Q=CV$ or $U=\\tfrac12Q^2/C$"],
               "the charge and the energy are recomputed for both cases from $Q=CV$ and $U=\\tfrac12CV^2$", f"With the capacitor {conn}, {q} changes by a factor of ${sig(f)}$.", [f"kap={kap}", f"conn={conn}", f"q={q}"], est=90, judg=["law_selection", "proportional_reasoning"])
