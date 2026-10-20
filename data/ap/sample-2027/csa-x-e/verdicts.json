@@ -1,0 +1,330 @@
+[
+ {
+  "key": "ap_computer_science_a-m01-k0",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "The loop looks at each one-character substring of s and adds 1 to n each time it equals c, so the method returns how many times c appears in s.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Target skill 4.B is describing the initial conditions (preconditions) needed for code to work. The item asks for the postcondition and gives the precondition in the comment, so students never reason about initial conditions. The topic 2.10 fit is fine, but the skill fit is off."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is the unique correct description of the returned value. B, C and D are each clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The code is complete and compilable, and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are distinct (position vs. count, non-matches, boolean) and each is explained. B and D are somewhat easy to eliminate from the return type."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, short code, no calculator load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well formed, but it assesses the postcondition rather than the target skill 4.B (describing the initial conditions needed), so it fails the scope/skill criterion and I recommend revising it to ask about the precondition (for example, what must be true of c or s for the method to work)."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard count-occurrences String loop (substring(i,i+1).equals(c) with n++). Student identifies the pattern and picks the matching postcondition. Distractors are easily eliminated: return type is int (rules out boolean), and n++ occurs on a match (rules out the non-match count), with no early return (rules out first-index). The code is short, with no tricky boundary, aliasing, or arithmetic subtleties, so it suits introductory practice more than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m01-k1",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The loop goes through every index of s. Each time the one-character substring at that index equals c, n goes up by 1. So the method returns how many times c occurs in s.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "A"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Target skill 4.B is describing initial conditions (preconditions), but the stem asks for the postcondition, which is a description of what the code returns. The precondition is already given in the Javadoc, so the item does not assess describing initial conditions."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the unique correct answer. Given the stated precondition, the method counts occurrences of c in s."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The code is complete, compilable and clear, and the precondition is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option encodes a distinct misconception and all are explained. B and D are easily eliminated by the return type and by the loop continuing after a match, so the item is fairly easy."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, light reading, no calculator, one dominant demand."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is technically correct, with a unique key, clean code and fair distractors. It assesses the postcondition rather than the target skill 4.B (describing initial conditions), so I fail it on scope/skill fit. A rewrite asking which precondition is needed, for example what must be true of c or s for the method to work as intended, would fix this."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single for loop with a substring/equals check and a counter. The student only needs to recognize the standard count-occurrences pattern and eliminate three clearly distinct distractors (boolean, non-matches, index). Concept depth is shallow, the trace is minimal, and the precondition is explicit. This fits early-learning recognition of a string algorithm and its postcondition rather than full-mock exam difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m01-k2",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The loop checks each one-character substring against c and adds 1 to n each time they're equal, so the method returns how many times c appears in s.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "A"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Option A is the unique correct answer, and the code and precondition are complete and clear. The item fits the 2.10 string-algorithm topic and the 4.B documentation skill. The distractors are slightly weak (C is eliminated by the return type alone), but the explanation covers each wrong option. It is acceptable overall.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single standard String traversal with a counter, using substring(i, i+1).equals(c). The student only needs to recognize the count-occurrences pattern and match it to a postcondition. The distractors are easy to rule out: a boolean return, an inverse count, and an indexOf-style return value. The precondition is stated explicitly, so there is no ambiguity. There is no tracing, arithmetic, or boundary subtlety.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m02-k0",
+  "cellId": "ap_computer_science_a-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "count is not 0.",
+     "brief_reasoning": "Integer division throws ArithmeticException only when the divisor is 0. MIN_VALUE/-1 overflows silently instead of throwing. So the weakest condition is count != 0.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Preconditions for a method (4.B) tied to a method signature and body in Unit 1. Integer division and ArithmeticException are in scope. No later-unit content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only count != 0 prevents the exception. MIN_VALUE / -1 overflows silently rather than throwing, so count != 0 is exactly the weakest sufficient condition. 'Divisible' and 'total > 0' do not guarantee safety. 'count > 0' is sufficient but stronger. Unique key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Short, complete code. The stem defines weakest precondition clearly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception: remainder, irrelevance of total, over-restrictive condition. The explanation covers every wrong option. Option lengths are similar."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-80 seconds, no calculator, short options, typical of the AP exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, correct precondition item with a unique key and distinct distractors. It is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single concept: integer division throws ArithmeticException only when the divisor is 0. The student must recognize that \"count is not 0\" is the weakest sufficient precondition and reject the more restrictive \"count > 0\" and the irrelevant total-based and divisibility conditions. The choice among near-miss candidates adds slight subtlety, but the item has very few steps, no computation, and minimal reading. It suits early learning of method preconditions rather than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m02-k1",
+  "cellId": "ap_computer_science_a-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "count is not 0.",
+     "brief_reasoning": "In Java, integer division throws ArithmeticException only when the divisor is 0. Integer.MIN_VALUE / -1 overflows without throwing. So count != 0 is enough on its own and is the least restrictive choice. 'count > 0' also prevents the exception but rules out negative counts that work fine. The other two options neither prevent division by zero nor are required.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Preconditions on a method signature (1.9, 4.B); in scope for Unit 1."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "count != 0 is the unique weakest sufficient condition; MIN_VALUE / -1 does not throw."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The short code is complete and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (too strong, remainder confusion, irrelevant total); each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, no arithmetic, typical AP style."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item with a unique key, distinct distractors, and a short, appropriate load. It is a generic precondition question, not a copy of a released item. Accept."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Single-concept item: integer division throws ArithmeticException only when the divisor is 0, so the weakest precondition is count != 0. The difficulty lever is choosing among near-miss candidates (count > 0 is sufficient but stronger than needed; divisibility and total > 0 are irrelevant). Minimal reading, no computation, in Unit 1 scope, and the answer is unambiguous. It is more than recall because the student must reason about \"weakest\" versus \"sufficient\" conditions.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m02-k2",
+  "cellId": "ap_computer_science_a-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "count is not 0.",
+     "brief_reasoning": "Integer division only throws ArithmeticException when the divisor is zero. Negative values and non-exact division do not throw, so count != 0 is the weakest condition that prevents an exception.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Preconditions for a method (4.B) on a method signature/body in Unit 1; dominant skill is the target."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "count != 0 is the unique weakest precondition guaranteeing no exception; count>0 is stronger; total conditions irrelevant; divisibility does not exclude count==0."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete compilable code; clear stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions; each option explained. D's explanation is slightly incomplete but valid."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no arithmetic, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound precondition item with a unique key (count is not 0), distinct distractors, and appropriate AP load."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single concept: int division throws ArithmeticException only when the divisor is 0. The student must then pick the least restrictive precondition among near-miss options (count > 0 is sufficient but stronger; total conditions are irrelevant). There is no computation and the code is minimal. The \"weakest precondition\" wording adds slight conceptual depth, but the item is mostly direct recall and application for skill 4.B.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ }
+]

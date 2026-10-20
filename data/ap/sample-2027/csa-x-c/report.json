@@ -1,0 +1,40 @@
+{
+ "run": "csa-x-c",
+ "subject": "ap_computer_science_a",
+ "generatedAt": "2026-10-20T03:27:23.568Z",
+ "totalCostUsd": 0.34,
+ "newSpendSinceBaseline": 0.39,
+ "cap": 50,
+ "calls": 36,
+ "candidates": 15,
+ "mcCandidates": 15,
+ "frqCandidates": 0,
+ "passedAll": 4,
+ "adopted": 3,
+ "mcAdopted": 3,
+ "frqAdopted": 0,
+ "reserve": 1,
+ "yield": 0.2,
+ "costPerAdopted": 0.113,
+ "callsPerAdopted": 12,
+ "duplicateRejected": 5,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 0,
+  "template": 15
+ },
+ "rejectionReasons": {
+  "duplicate_gate_near_duplicate": 5,
+  "criterion_failed_key_scoring": 2,
+  "criterion_failed_stimulus_expression": 3,
+  "criterion_failed_distractor_explanation": 3,
+  "criterion_failed_exam_suitability": 3,
+  "instant_reject_missing_condition": 2,
+  "reference_pattern_mismatch": 3,
+  "key_much_longer": 3
+ },
+ "unfilledCells": [
+  "ap_computer_science_a-m04",
+  "ap_computer_science_a-m05"
+ ]
+}

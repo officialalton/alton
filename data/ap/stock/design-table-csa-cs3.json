@@ -1,0 +1,1691 @@
+{
+ "generatedAt": "2026-10-20",
+ "subject": "ap_computer_science_a",
+ "report": "data/ap/stock/exact-assign-csa-cs3.json",
+ "published": "data/ap/stock/exact-assign-csa-cs1-cs2.json",
+ "summary": {
+  "items": 45,
+  "publishedCompared": 88,
+  "archetypeSharedWithPublished": 0,
+  "familySharedWithPublished": 0,
+  "maxNearestSimilarity": 0.636,
+  "siblingsInsideNewSet": 0,
+  "unitCounts": {
+   "1": 8,
+   "2": 14,
+   "3": 6,
+   "4": 17
+  },
+  "stimulusCounts": {
+   "text": 44,
+   "none": 1
+  }
+ },
+ "items": [
+  {
+   "position": 1,
+   "set": "CS3",
+   "key": "csa-x-a:ap_computer_science_a-m04-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "1",
+    "topic": "1.9",
+    "concept": "trace nested static method calls from the inside out"
+   },
+   "function": {
+    "skill": "3.C",
+    "response": "multiple choice",
+    "judgment": "trace the code and avoid the named misconception"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "trace the code or reason about its behavior without running it",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "javac+java return value vs Python composition"
+   },
+   "duplication": {
+    "archetype": "cs_method_chain_calls",
+    "family": "fam:csa-x-a:ap_computer_science_a-m04-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-p1-a:ap_computer_science_a-m15-k1",
+    "nearest_similarity": 0.444,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 2,
+   "set": "CS3",
+   "key": "csa-x-a:ap_computer_science_a-m07-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "1",
+    "topic": "1.4",
+    "concept": "definite assignment: a local variable must be assigned on every path before use"
+   },
+   "function": {
+    "skill": "3.D",
+    "response": "multiple choice",
+    "judgment": "separate the true statement from the named misconceptions"
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "read the code and decide which statement about it is true",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "javac compile of every option"
+   },
+   "duplication": {
+    "archetype": "cs_uninitialized_use",
+    "family": "fam:csa-x-a:ap_computer_science_a-m07-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-p1-a:ap_computer_science_a-m03-k0",
+    "nearest_similarity": 0.407,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 3,
+   "set": "CS3",
+   "key": "csa-x-a:ap_computer_science_a-m08-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "1",
+    "topic": "1.11",
+    "concept": "ceiling division with int arithmetic"
+   },
+   "function": {
+    "skill": "2.A",
+    "response": "multiple choice",
+    "judgment": "test candidates against boundary cases"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "read the code and decide which candidate satisfies the specification for every input",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "each candidate compiled and run on boundary counts vs Python ceil"
+   },
+   "duplication": {
+    "archetype": "cs_ceil_pages_completion",
+    "family": "fam:csa-x-a:ap_computer_science_a-m08-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-s2-mc-a:ap_computer_science_a-m12-k1",
+    "nearest_similarity": 0.457,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 4,
+   "set": "CS3",
+   "key": "csa-x-b:ap_computer_science_a-m01-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "1",
+    "topic": "1.3",
+    "concept": "remainder and quotient of a negative int in Java"
+   },
+   "function": {
+    "skill": "3.A",
+    "response": "multiple choice",
+    "judgment": "trace the code and avoid the named misconception"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "trace the code or reason about its behavior without running it",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "javac+java output vs Python truncating division"
+   },
+   "duplication": {
+    "archetype": "cs_mod_negative_trace",
+    "family": "fam:csa-x-b:ap_computer_science_a-m01-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-s2-mc-c:ap_computer_science_a-m15-k1",
+    "nearest_similarity": 0.538,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 5,
+   "set": "CS3",
+   "key": "csa-x-b:ap_computer_science_a-m02-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "1",
+    "topic": "1.6",
+    "concept": "compound assignment applies an implicit cast back to the variable's type"
+   },
+   "function": {
+    "skill": "3.A",
+    "response": "multiple choice",
+    "judgment": "trace the code and avoid the named misconception"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "trace the code or reason about its behavior without running it",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "javac+java output vs Python truncation after each step"
+   },
+   "duplication": {
+    "archetype": "cs_compound_mixed_types",
+    "family": "fam:csa-x-b:ap_computer_science_a-m02-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-s2-mc-a:ap_computer_science_a-m01-k1",
+    "nearest_similarity": 0.467,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 6,
+   "set": "CS3",
+   "key": "csa-x-b:ap_computer_science_a-m03-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "1",
+    "topic": "1.15",
+    "concept": "indexOf and substring combine to split a String around a match"
+   },
+   "function": {
+    "skill": "3.C",
+    "response": "multiple choice",
+    "judgment": "trace the code and avoid the named misconception"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "trace the code or reason about its behavior without running it",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "javac+java output vs Python slicing"
+   },
+   "duplication": {
+    "archetype": "cs_substring_index_trace",
+    "family": "fam:csa-x-b:ap_computer_science_a-m03-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-s2-mc-a:ap_computer_science_a-m01-k1",
+    "nearest_similarity": 0.389,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 7,
+   "set": "CS3",
+   "key": "csa-x-b:ap_computer_science_a-m16-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "1",
+    "topic": "1.2",
+    "concept": "distinguish compile-time, run-time, and logic errors"
+   },
+   "function": {
+    "skill": "3.D",
+    "response": "multiple choice",
+    "judgment": "separate the true statement from the named misconceptions"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "read the code and decide which statement about it is true",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "javac compile and java run of the segment"
+   },
+   "duplication": {
+    "archetype": "cs_error_kind",
+    "family": "fam:csa-x-b:ap_computer_science_a-m16-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-s2-mc-c:ap_computer_science_a-m06-k1",
+    "nearest_similarity": 0.242,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 8,
+   "set": "CS3",
+   "key": "csa-x-e:ap_computer_science_a-m02-k1",
+   "kind": "mc",
+   "content": {
+    "unit": "1",
+    "topic": "1.9",
+    "concept": "a precondition names the inputs for which the method works"
+   },
+   "function": {
+    "skill": "4.B",
+    "response": "multiple choice",
+    "judgment": "separate the true statement from the named misconceptions"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "read the code and decide which statement about it is true",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "java runs on zero, positive, and negative divisors"
+   },
+   "duplication": {
+    "archetype": "cs_precondition_division",
+    "family": "fam:csa-x-e:ap_computer_science_a-m02-k1",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-s2-mc-b:ap_computer_science_a-m05-k1",
+    "nearest_similarity": 0.25,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 9,
+   "set": "CS3",
+   "key": "csa-x-a:ap_computer_science_a-m16-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.9",
+    "concept": "track the maximum while extracting digits"
+   },
+   "function": {
+    "skill": "2.A",
+    "response": "multiple choice",
+    "judgment": "test candidates against boundary cases"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "read the code and decide which candidate satisfies the specification for every input",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "each candidate compiled and run on a set of ints vs Python max digit"
+   },
+   "duplication": {
+    "archetype": "cs_largest_digit_completion",
+    "family": "fam:csa-x-a:ap_computer_science_a-m16-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-s2-mc-a:ap_computer_science_a-m22-k0",
+    "nearest_similarity": 0.591,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 10,
+   "set": "CS3",
+   "key": "csa-x-a:ap_computer_science_a-m17-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.9",
+    "concept": "count the values of d for which n % d is 0"
+   },
+   "function": {
+    "skill": "2.A",
+    "response": "multiple choice",
+    "judgment": "test candidates against boundary cases"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "read the code and decide which candidate satisfies the specification for every input",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "each candidate compiled and run on a set of ints vs Python divisor count"
+   },
+   "duplication": {
+    "archetype": "cs_count_divisors_completion",
+    "family": "fam:csa-x-a:ap_computer_science_a-m17-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-s2-mc-b:ap_computer_science_a-m05-k1",
+    "nearest_similarity": 0.636,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 11,
+   "set": "CS3",
+   "key": "csa-x-a:ap_computer_science_a-m18-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.10",
+    "concept": "build a new String from the characters that pass a test"
+   },
+   "function": {
+    "skill": "2.A",
+    "response": "multiple choice",
+    "judgment": "test candidates against boundary cases"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "read the code and decide which candidate satisfies the specification for every input",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "each candidate compiled and run on Strings vs Python replace"
+   },
+   "duplication": {
+    "archetype": "cs_remove_char_completion",
+    "family": "fam:csa-x-a:ap_computer_science_a-m18-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-p1-a:ap_computer_science_a-m08-k0",
+    "nearest_similarity": 0.615,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 12,
+   "set": "CS3",
+   "key": "csa-x-a:ap_computer_science_a-m19-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.7",
+    "concept": "stop a while loop at a sentinel while keeping the index in bounds"
+   },
+   "function": {
+    "skill": "2.A",
+    "response": "multiple choice",
+    "judgment": "test candidates against boundary cases"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "read the code and decide which candidate satisfies the specification for every input",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "each candidate compiled and run on arrays vs Python slice sum"
+   },
+   "duplication": {
+    "archetype": "cs_sum_until_negative_completion",
+    "family": "fam:csa-x-a:ap_computer_science_a-m19-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-s2-mc-c:ap_computer_science_a-m02-k0",
+    "nearest_similarity": 0.5,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 13,
+   "set": "CS3",
+   "key": "csa-x-b:ap_computer_science_a-m04-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.7",
+    "concept": "a while loop with a sentinel condition stops before processing the sentinel"
+   },
+   "function": {
+    "skill": "3.A",
+    "response": "multiple choice",
+    "judgment": "trace the code and avoid the named misconception"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "trace the code or reason about its behavior without running it",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "javac+java output vs Python loop"
+   },
+   "duplication": {
+    "archetype": "cs_while_sentinel_trace",
+    "family": "fam:csa-x-b:ap_computer_science_a-m04-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-s2-mc-a:ap_computer_science_a-m01-k1",
+    "nearest_similarity": 0.438,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 14,
+   "set": "CS3",
+   "key": "csa-x-b:ap_computer_science_a-m05-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.8",
+    "concept": "accumulate values that satisfy a remainder condition"
+   },
+   "function": {
+    "skill": "3.A",
+    "response": "multiple choice",
+    "judgment": "trace the code and avoid the named misconception"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "trace the code or reason about its behavior without running it",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "javac+java output vs Python comprehension"
+   },
+   "duplication": {
+    "archetype": "cs_loop_accumulate_cond",
+    "family": "fam:csa-x-b:ap_computer_science_a-m05-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-s2-mc-a:ap_computer_science_a-m01-k1",
+    "nearest_similarity": 0.467,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 15,
+   "set": "CS3",
+   "key": "csa-x-b:ap_computer_science_a-m07-k1",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.7",
+    "concept": "reverse the digits of an int with remainder and integer division"
+   },
+   "function": {
+    "skill": "3.A",
+    "response": "multiple choice",
+    "judgment": "trace the code and avoid the named misconception"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "trace the code or reason about its behavior without running it",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "javac+java output vs Python string reversal"
+   },
+   "duplication": {
+    "archetype": "cs_digit_reverse_trace",
+    "family": "fam:csa-x-b:ap_computer_science_a-m07-k1",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-s2-mc-a:ap_computer_science_a-m01-k1",
+    "nearest_similarity": 0.412,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 16,
+   "set": "CS3",
+   "key": "csa-x-b:ap_computer_science_a-m08-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.11",
+    "concept": "count pairs of distinct values with nested loops"
+   },
+   "function": {
+    "skill": "3.A",
+    "response": "multiple choice",
+    "judgment": "trace the code and avoid the named misconception"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "trace the code or reason about its behavior without running it",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "javac+java output vs Python double comprehension"
+   },
+   "duplication": {
+    "archetype": "cs_nested_loop_pairs_trace",
+    "family": "fam:csa-x-b:ap_computer_science_a-m08-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-s2-mc-a:ap_computer_science_a-m01-k1",
+    "nearest_similarity": 0.412,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 17,
+   "set": "CS3",
+   "key": "csa-x-c:ap_computer_science_a-m01-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.9",
+    "concept": "call a boolean helper method inside a loop to count the values that satisfy it"
+   },
+   "function": {
+    "skill": "2.C",
+    "response": "multiple choice",
+    "judgment": "test candidates against boundary cases"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "read the code and decide which candidate satisfies the specification for every input",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "each candidate compiled and run on ranges vs Python prime count"
+   },
+   "duplication": {
+    "archetype": "cs_helper_prime_count_completion",
+    "family": "fam:csa-x-c:ap_computer_science_a-m01-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-p1-a:ap_computer_science_a-m07-k0",
+    "nearest_similarity": 0.552,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 18,
+   "set": "CS3",
+   "key": "csa-x-c:ap_computer_science_a-m02-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.7",
+    "concept": "use a helper method in a while loop condition to search upward"
+   },
+   "function": {
+    "skill": "2.C",
+    "response": "multiple choice",
+    "judgment": "test candidates against boundary cases"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "read the code and decide which candidate satisfies the specification for every input",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "each candidate compiled and run on start values vs Python search"
+   },
+   "duplication": {
+    "archetype": "cs_helper_digit_match_completion",
+    "family": "fam:csa-x-c:ap_computer_science_a-m02-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-s2-mc-b:ap_computer_science_a-m08-k0",
+    "nearest_similarity": 0.412,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 19,
+   "set": "CS3",
+   "key": "csa-x-d:ap_computer_science_a-m01-k1",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.10",
+    "concept": "a precondition states what must hold on entry for the method to work"
+   },
+   "function": {
+    "skill": "4.B",
+    "response": "multiple choice",
+    "judgment": "separate the true statement from the named misconceptions"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "read the code and decide which statement about it is true",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "java runs on a failing and a working call"
+   },
+   "duplication": {
+    "archetype": "cs_precondition_string",
+    "family": "fam:csa-x-d:ap_computer_science_a-m01-k1",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-s2-mc-c:ap_computer_science_a-m04-k0",
+    "nearest_similarity": 0.2,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 20,
+   "set": "CS3",
+   "key": "csa-x-d:ap_computer_science_a-m02-k1",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.9",
+    "concept": "a postcondition states what the returned value means"
+   },
+   "function": {
+    "skill": "4.B",
+    "response": "multiple choice",
+    "judgment": "separate the true statement from the named misconceptions"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "read the code and decide which statement about it is true",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "java runs on several inputs vs Python integer division"
+   },
+   "duplication": {
+    "archetype": "cs_postcondition_loop",
+    "family": "fam:csa-x-d:ap_computer_science_a-m02-k1",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-p1-a:ap_computer_science_a-m19-k1",
+    "nearest_similarity": 0.255,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 21,
+   "set": "CS3",
+   "key": "csa-x-e:ap_computer_science_a-m01-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.10",
+    "concept": "a postcondition states what the returned value means"
+   },
+   "function": {
+    "skill": "4.B",
+    "response": "multiple choice",
+    "judgment": "separate the true statement from the named misconceptions"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "read the code and decide which statement about it is true",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "java runs on several Strings vs Python count"
+   },
+   "duplication": {
+    "archetype": "cs_postcondition_char_count",
+    "family": "fam:csa-x-e:ap_computer_science_a-m01-k2",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-p1-a:ap_computer_science_a-m09-k0",
+    "nearest_similarity": 0.333,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 22,
+   "set": "CS3",
+   "key": "csa-s2-mc-a:ap_computer_science_a-m17-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.5",
+    "concept": "describe the behavior of an instance method that depends on object state"
+   },
+   "function": {
+    "skill": "4.A",
+    "response": "multiple choice",
+    "judgment": "generalize from code to an English description"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "work out what the method computes for the objects built in the tests and compare with each description",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "javac+java runs the method after several record sequences; each English description has a Python predicate that must agree (key) or disagree (distractors)"
+   },
+   "duplication": {
+    "archetype": "cs_class_describe",
+    "family": "fam:csa-s2-mc-a:ap_computer_science_a-m17-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-p1-a:ap_computer_science_a-m19-k1",
+    "nearest_similarity": 0.4,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 23,
+   "set": "CS3",
+   "key": "csa-s2-mc-a:ap_computer_science_a-m18-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.5",
+    "concept": "a method that guards a state change and reports success"
+   },
+   "function": {
+    "skill": "2.B",
+    "response": "multiple choice",
+    "judgment": "test candidates against boundary cases"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "read the code and decide which candidate satisfies the specification for every input",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "each candidate compiled into the class and run on boundary purchases (exact balance, too much, repeated)"
+   },
+   "duplication": {
+    "archetype": "cs_class_state_completion",
+    "family": "fam:csa-s2-mc-a:ap_computer_science_a-m18-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-s2-mc-a:ap_computer_science_a-m22-k0",
+    "nearest_similarity": 0.464,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 24,
+   "set": "CS3",
+   "key": "csa-s2-mc-a:ap_computer_science_a-m20-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.3",
+    "concept": "access rules and signatures when a client uses a class"
+   },
+   "function": {
+    "skill": "3.D",
+    "response": "multiple choice",
+    "judgment": "apply Java access, static and constructor rules"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "decide whether each statement respects the constructor, access and static rules of Box",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "javac compiles each candidate statement inside a main method next to the class"
+   },
+   "duplication": {
+    "archetype": "cs_compile_error_calls",
+    "family": "fam:csa-s2-mc-a:ap_computer_science_a-m20-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-p1-a:ap_computer_science_a-m03-k0",
+    "nearest_similarity": 0.545,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 25,
+   "set": "CS3",
+   "key": "csa-x-a:ap_computer_science_a-m09-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.4",
+    "concept": "instance variables receive default values (0, 0.0, false, null) when no initializer is given"
+   },
+   "function": {
+    "skill": "3.B",
+    "response": "multiple choice",
+    "judgment": "trace the code and avoid the named misconception"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "trace the code or reason about its behavior without running it",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "javac+java return value vs known default values"
+   },
+   "duplication": {
+    "archetype": "cs_default_values_trace",
+    "family": "fam:csa-x-a:ap_computer_science_a-m09-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-s2-mc-c:ap_computer_science_a-m03-k1",
+    "nearest_similarity": 0.353,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 26,
+   "set": "CS3",
+   "key": "csa-x-a:ap_computer_science_a-m40-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.5",
+    "concept": null
+   },
+   "function": {
+    "skill": "3.B",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": null,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": null,
+    "verification": null
+   },
+   "duplication": {
+    "archetype": "css_shelf_set",
+    "family": "fam:csa-x-a:ap_computer_science_a-m40-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": null,
+    "nearest_similarity": 0,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 27,
+   "set": "CS3",
+   "key": "csa-x-a:ap_computer_science_a-m23-k1",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.5",
+    "concept": "shift array elements and keep the saved first element"
+   },
+   "function": {
+    "skill": "2.A",
+    "response": "multiple choice",
+    "judgment": "test candidates against boundary cases"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "read the code and decide which candidate satisfies the specification for every input",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "each candidate compiled and run on arrays vs Python rotation"
+   },
+   "duplication": {
+    "archetype": "cs_array_shift_left_completion",
+    "family": "fam:csa-x-a:ap_computer_science_a-m23-k1",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-s2-mc-c:ap_computer_science_a-m04-k0",
+    "nearest_similarity": 0.5,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 28,
+   "set": "CS3",
+   "key": "csa-x-a:ap_computer_science_a-m26-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.10",
+    "concept": "insert into an ArrayList while traversing from the back so the unvisited indexes are not disturbed"
+   },
+   "function": {
+    "skill": "2.A",
+    "response": "multiple choice",
+    "judgment": "test candidates against boundary cases"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "read the code and decide which candidate satisfies the specification for every input",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "each candidate compiled and run on lists vs Python duplication"
+   },
+   "duplication": {
+    "archetype": "cs_arraylist_double_completion",
+    "family": "fam:csa-x-a:ap_computer_science_a-m26-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-p1-a:ap_computer_science_a-m18-k0",
+    "nearest_similarity": 0.424,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 29,
+   "set": "CS3",
+   "key": "csa-x-a:ap_computer_science_a-m29-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.13",
+    "concept": "traverse one column of a 2D array with the row index varying"
+   },
+   "function": {
+    "skill": "2.A",
+    "response": "multiple choice",
+    "judgment": "test candidates against boundary cases"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "read the code and decide which candidate satisfies the specification for every input",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "each candidate compiled and run on arrays vs Python column max"
+   },
+   "duplication": {
+    "archetype": "cs_2d_col_max_completion",
+    "family": "fam:csa-x-a:ap_computer_science_a-m29-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-p1-a:ap_computer_science_a-m17-k0",
+    "nearest_similarity": 0.533,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 30,
+   "set": "CS3",
+   "key": "csa-x-a:ap_computer_science_a-m32-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.16",
+    "concept": "count the calls of a tree-recursive method"
+   },
+   "function": {
+    "skill": "3.C",
+    "response": "multiple choice",
+    "judgment": "trace the code and avoid the named misconception"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "trace the code or reason about its behavior without running it",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "javac+java return value vs Python recursion with a counter"
+   },
+   "duplication": {
+    "archetype": "cs_recursion_calls_count",
+    "family": "fam:csa-x-a:ap_computer_science_a-m32-k2",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-s2-mc-a:ap_computer_science_a-m01-k1",
+    "nearest_similarity": 0.211,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 31,
+   "set": "CS3",
+   "key": "csa-x-a:ap_computer_science_a-m33-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.17",
+    "concept": "a recursive method that peels one digit per call"
+   },
+   "function": {
+    "skill": "3.C",
+    "response": "multiple choice",
+    "judgment": "trace the code and avoid the named misconception"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "trace the code or reason about its behavior without running it",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "javac+java return value vs Python digit sum"
+   },
+   "duplication": {
+    "archetype": "cs_recursion_digit_sum_trace",
+    "family": "fam:csa-x-a:ap_computer_science_a-m33-k2",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-p1-a:ap_computer_science_a-m15-k1",
+    "nearest_similarity": 0.455,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 32,
+   "set": "CS3",
+   "key": "csa-x-a:ap_computer_science_a-m34-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.9",
+    "concept": "a precondition states what must be true for the method to run correctly"
+   },
+   "function": {
+    "skill": "4.B",
+    "response": "multiple choice",
+    "judgment": "separate the true statement from the named misconceptions"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "read the code and decide which statement about it is true",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "java runs on an empty, a one-element, and a three-element list"
+   },
+   "duplication": {
+    "archetype": "cs_precondition_list",
+    "family": "fam:csa-x-a:ap_computer_science_a-m34-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-s2-short-mc:ap_computer_science_a-m01-k1",
+    "nearest_similarity": 0.195,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 33,
+   "set": "CS3",
+   "key": "csa-x-a:ap_computer_science_a-m35-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.12",
+    "concept": "a postcondition states what the method returns or changes"
+   },
+   "function": {
+    "skill": "4.B",
+    "response": "multiple choice",
+    "judgment": "separate the true statement from the named misconceptions"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "read the code and decide which statement about it is true",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "java run on a 3x2 and a 1x1 array"
+   },
+   "duplication": {
+    "archetype": "cs_postcondition_2d",
+    "family": "fam:csa-x-a:ap_computer_science_a-m35-k2",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-p1-a:ap_computer_science_a-m19-k1",
+    "nearest_similarity": 0.314,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 34,
+   "set": "CS3",
+   "key": "csa-x-b:ap_computer_science_a-m09-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.4",
+    "concept": "count runs of equal adjacent values by counting changes"
+   },
+   "function": {
+    "skill": "3.B",
+    "response": "multiple choice",
+    "judgment": "trace the code and avoid the named misconception"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "trace the code or reason about its behavior without running it",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "javac+java output vs Python scan"
+   },
+   "duplication": {
+    "archetype": "cs_array_count_runs_trace",
+    "family": "fam:csa-x-b:ap_computer_science_a-m09-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-s2-mc-a:ap_computer_science_a-m01-k1",
+    "nearest_similarity": 0.467,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 35,
+   "set": "CS3",
+   "key": "csa-x-b:ap_computer_science_a-m10-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.4",
+    "concept": "an enhanced for loop variable is a copy of a primitive element, so assigning to it does not change the array"
+   },
+   "function": {
+    "skill": "3.B",
+    "response": "multiple choice",
+    "judgment": "trace the code and avoid the named misconception"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "trace the code or reason about its behavior without running it",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "javac+java output vs Python sum"
+   },
+   "duplication": {
+    "archetype": "cs_enhanced_for_trace",
+    "family": "fam:csa-x-b:ap_computer_science_a-m10-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-s2-mc-a:ap_computer_science_a-m01-k1",
+    "nearest_similarity": 0.389,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 36,
+   "set": "CS3",
+   "key": "csa-x-b:ap_computer_science_a-m11-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.8",
+    "concept": "ArrayList set replaces, add(index, value) inserts, remove(index) shifts the later elements"
+   },
+   "function": {
+    "skill": "3.B",
+    "response": "multiple choice",
+    "judgment": "trace the code and avoid the named misconception"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "trace the code or reason about its behavior without running it",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "javac+java output vs Python list operations"
+   },
+   "duplication": {
+    "archetype": "cs_arraylist_set_vs_add_trace",
+    "family": "fam:csa-x-b:ap_computer_science_a-m11-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-s2-mc-a:ap_computer_science_a-m01-k1",
+    "nearest_similarity": 0.438,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 37,
+   "set": "CS3",
+   "key": "csa-x-b:ap_computer_science_a-m12-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.8",
+    "concept": "swap two ArrayList elements with get, set, and a temporary variable"
+   },
+   "function": {
+    "skill": "3.B",
+    "response": "multiple choice",
+    "judgment": "trace the code and avoid the named misconception"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "trace the code or reason about its behavior without running it",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "javac+java output vs Python swap"
+   },
+   "duplication": {
+    "archetype": "cs_arraylist_swap_trace",
+    "family": "fam:csa-x-b:ap_computer_science_a-m12-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-s2-mc-c:ap_computer_science_a-m15-k1",
+    "nearest_similarity": 0.538,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 38,
+   "set": "CS3",
+   "key": "csa-x-b:ap_computer_science_a-m13-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.12",
+    "concept": "row-major traversal that tracks the largest row sum and its row index"
+   },
+   "function": {
+    "skill": "3.B",
+    "response": "multiple choice",
+    "judgment": "trace the code and avoid the named misconception"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "trace the code or reason about its behavior without running it",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "javac+java output vs Python row sums"
+   },
+   "duplication": {
+    "archetype": "cs_2d_row_sum_trace",
+    "family": "fam:csa-x-b:ap_computer_science_a-m13-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-s2-mc-a:ap_computer_science_a-m01-k1",
+    "nearest_similarity": 0.389,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 39,
+   "set": "CS3",
+   "key": "csa-x-b:ap_computer_science_a-m14-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.14",
+    "concept": "a sequential search stops at the first match; the number of comparisons is the index plus one"
+   },
+   "function": {
+    "skill": "3.A",
+    "response": "multiple choice",
+    "judgment": "trace the code and avoid the named misconception"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "trace the code or reason about its behavior without running it",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "javac+java output vs Python index"
+   },
+   "duplication": {
+    "archetype": "cs_linear_search_comparisons",
+    "family": "fam:csa-x-b:ap_computer_science_a-m14-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-s2-mc-a:ap_computer_science_a-m01-k1",
+    "nearest_similarity": 0.5,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 40,
+   "set": "CS3",
+   "key": "csa-x-b:ap_computer_science_a-m15-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.15",
+    "concept": "insertion sort shifts larger values right and inserts the current value"
+   },
+   "function": {
+    "skill": "3.A",
+    "response": "multiple choice",
+    "judgment": "trace the code and avoid the named misconception"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "trace the code or reason about its behavior without running it",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "javac+java output vs Python insertion sort passes"
+   },
+   "duplication": {
+    "archetype": "cs_insertion_sort_pass_trace",
+    "family": "fam:csa-x-b:ap_computer_science_a-m15-k2",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-p1-a:ap_computer_science_a-m13-k1",
+    "nearest_similarity": 0.579,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 41,
+   "set": "CS3",
+   "key": "csa-x-c:ap_computer_science_a-m03-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.4",
+    "concept": "call a helper method on each element in an enhanced for loop"
+   },
+   "function": {
+    "skill": "2.C",
+    "response": "multiple choice",
+    "judgment": "test candidates against boundary cases"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "read the code and decide which candidate satisfies the specification for every input",
+     "compare the result with each option and rule out the named misconceptions"
+    ],
+    "verification": "each candidate compiled and run on arrays vs Python count"
+   },
+   "duplication": {
+    "archetype": "cs_helper_array_count_completion",
+    "family": "fam:csa-x-c:ap_computer_science_a-m03-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-s2-mc-b:ap_computer_science_a-m05-k1",
+    "nearest_similarity": 0.6,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 42,
+   "set": "CS3",
+   "key": "csa-s2-frq-a:ap_computer_science_a-f01-k0",
+   "kind": "frq_bundle",
+   "content": {
+    "unit": "2",
+    "topic": "2.8",
+    "concept": "Methods and control structures: adjacent-element comparison in a String and building a String"
+   },
+   "function": {
+    "skill": "2.A",
+    "response": "free response",
+    "judgment": "write correct Java for the stated specification"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": null,
+    "parts": 2
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Compare neighbors without going out of bounds",
+     "Build a String by selective concatenation"
+    ],
+    "verification": "javac+java compile and run reference, alternative and wrong solutions; expected values from Python"
+   },
+   "duplication": {
+    "archetype": "csf_methods_runs",
+    "family": "fam:csa-s2-frq-a:ap_computer_science_a-f01-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-s2-frq-b:ap_computer_science_a-f02-k0",
+    "nearest_similarity": 0.255,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 43,
+   "set": "CS3",
+   "key": "csa-s2-frq-a:ap_computer_science_a-f05-k0",
+   "kind": "frq_bundle",
+   "content": {
+    "unit": "3",
+    "topic": "3.3",
+    "concept": "Class design: private state for two quantities, mutators and two query methods with a three-way result"
+   },
+   "function": {
+    "skill": "2.B",
+    "response": "free response",
+    "judgment": "write correct Java for the stated specification"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": null,
+    "parts": 1
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Choose private state",
+     "Update it from mutators",
+     "Report a decision from the state"
+    ],
+    "verification": "javac+java compile and run reference, array-based alternative and wrong solutions; expected values from a Python simulation"
+   },
+   "duplication": {
+    "archetype": "csf_class_scoreboard",
+    "family": "fam:csa-s2-frq-a:ap_computer_science_a-f05-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-p1-b:ap_computer_science_a-f02-k0",
+    "nearest_similarity": 0.348,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 44,
+   "set": "CS3",
+   "key": "csa-p1-b:ap_computer_science_a-f03-k0",
+   "kind": "frq_bundle",
+   "content": {
+    "unit": "4",
+    "topic": "4.10",
+    "concept": "ArrayList traversal with two passes, a floating-point average and building a new list"
+   },
+   "function": {
+    "skill": "2.A",
+    "response": "free response",
+    "judgment": "write correct Java for the stated specification"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": null,
+    "parts": 1
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Traverse an ArrayList with get and size",
+     "Compute an average without losing the fraction",
+     "Build a new list without changing the input"
+    ],
+    "verification": "javac+java compile and run reference, alternative (enhanced for + cross-multiplication) and wrong solutions; expected values from Python"
+   },
+   "duplication": {
+    "archetype": "csf_list_above",
+    "family": "fam:csa-p1-b:ap_computer_science_a-f03-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-s2-frq-b:ap_computer_science_a-f02-k0",
+    "nearest_similarity": 0.391,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 45,
+   "set": "CS3",
+   "key": "csa-s2-frq-b:ap_computer_science_a-f05-k0",
+   "kind": "frq_bundle",
+   "content": {
+    "unit": "4",
+    "topic": "4.13",
+    "concept": "2D array traversal with a combined row and column boundary test"
+   },
+   "function": {
+    "skill": "2.A",
+    "response": "free response",
+    "judgment": "write correct Java for the stated specification"
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": null,
+    "parts": 1
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Visit every element with nested loops",
+     "Test the row and the column boundaries",
+     "Count each element once"
+    ],
+    "verification": "javac+java compile and run reference, alternative and wrong solutions; expected values from Python"
+   },
+   "duplication": {
+    "archetype": "csf_2d_border",
+    "family": "fam:csa-s2-frq-b:ap_computer_science_a-f05-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "csa-s2-frq-b:ap_computer_science_a-f04-k0",
+    "nearest_similarity": 0.333,
+    "siblings_in_new_set": 0
+   }
+  }
+ ]
+}

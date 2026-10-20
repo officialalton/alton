@@ -9,7 +9,8 @@ function codeifyOperators(e: string): string {
   return e.split("\n").map((ln) => {
     if (/^\s*```/.test(ln)) { open = !open; return ln; }
     if (open) return ln;
-    return ln.replace(/(?<!`)(<=|>=)(?!`)/g, "`$1`").replace(/(?<=\s)([<>])(?=\s)/g, "`$1`");
+    // 이미 한 줄 코드(`…`)로 감싼 구간 안의 연산자는 건드리지 않는다(백틱이 중첩되어 `<` 가 글자로 보인다 — 2026-10-19).
+    return ln.split(/(`[^`\n]*`)/).map((seg, i) => (i % 2 === 1 ? seg : seg.replace(/(?<!`)(<=|>=)(?!`)/g, "`$1`").replace(/(?<=\s)([<>])(?=\s)/g, "`$1`"))).join("");
   }).join("\n");
 }
 

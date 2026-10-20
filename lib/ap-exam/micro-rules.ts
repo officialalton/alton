@@ -24,6 +24,7 @@ export const MICRO_FRQ_PROFILES: Record<string, MicroFrqProfile> = {
   mif_short_elasticity: { points: 5, graph: 0, assertion: 1, explain: 1, numeric: 3 },
   mif_short_externality: { points: 5, graph: 2, assertion: 0, explain: 2, numeric: 1 },
   mif_short_labor: { points: 5, graph: 0, assertion: 1, explain: 2, numeric: 2 },
+  mif_short_shutdown: { points: 5, graph: 0, assertion: 1, explain: 2, numeric: 2 },
   mif_short_mc: { points: 5, graph: 3, assertion: 1, explain: 1, numeric: 0 },
   mif_short_trade: { points: 5, graph: 1, assertion: 1, explain: 1, numeric: 2 },
 };

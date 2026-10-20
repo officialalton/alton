@@ -3,7 +3,7 @@
  "version": 1,
  "generatedBy": "lib/ap-exam/tex-corrections-gen.test.ts (AP_TEX_CORR_WRITE=1)",
  "note": "변환 전 해설(explanation_en)의 sha256 에 묶인 교정 문안. 적용은 관리자 'AP 설명 수정 새 버전'(미리보기→확인→실행)만. before 해시가 DB 와 다르면 건드리지 않는다.",
- "count": 318,
+ "count": 321,
  "entries": [
   {
    "candidateKey": "bc-topup-final:ap_calculus_bc-f01-k0",
@@ -366,6 +366,30 @@
    "beforeSha256": "51e5ef602f5a948cd7b8022c13c54416ba40777575dd912497b03e68b35040f0",
    "afterSha256": "a8f8792af9391972b0638668ba6acd325a281695dee04ee4e4f73d50ef7ad469",
    "after": "The correct answer is 3,550. HHI = $45^2$ + $30^2$ + $25^2$ = 3550.\n1183 is incorrect: Uses the average of the squared shares.\n100 is incorrect: Adds the market shares (always 100) instead of squaring them.\n10,000 is incorrect: Squares the sum of the shares.\n2,025 is incorrect: Squares only the largest firm's share."
+  },
+  {
+   "candidateKey": "micro-s5-b:ap_microeconomics-m20-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "707437c3cfb768c813db807cb1492fbceb36bc1fae35d9cfa57347ba70773582",
+   "afterSha256": "5c713cbd0b3d09c35be46d4601ed01291016d8c5156ac1557c31eceb03d8c5c7",
+   "after": "The correct answer is 600. The merged firm's share is 35, so the index changes by $(20+15)^2$ - $20^2$ - $15^2$ = 600.\n35 is incorrect: Adds the two shares, reporting the merged firm's share rather than a change in the index.\n300 is incorrect: Multiplies the two shares but forgets the factor of 2 in $(a + b)^2$ - $a^2$ - $b^2.$\n3,350 is incorrect: Reports the new HHI after the merger instead of the increase.\n1,225 is incorrect: Squares the merged firm's share and treats that as the change, without removing the two original squared shares."
+  },
+  {
+   "candidateKey": "micro-s5-b:ap_microeconomics-m20-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "ff4a499618e365d3ab6ebe596b77299950aceb33c3aa5a57ecdb9db118523a2c",
+   "afterSha256": "791ecf88254cea5612dcb04628ae9b438fa6169989c9d34f3f98035e51729db9",
+   "after": "The correct answer is 1,000. The merged firm's share is 45, so the index changes by $(25+20)^2$ - $25^2$ - $20^2$ = 1000.\n45 is incorrect: Adds the two shares, reporting the merged firm's share rather than a change in the index.\n3,250 is incorrect: Reports the new HHI after the merger instead of the increase.\n2,025 is incorrect: Squares the merged firm's share and treats that as the change, without removing the two original squared shares.\n500 is incorrect: Multiplies the two shares but forgets the factor of 2 in $(a + b)^2$ - $a^2$ - $b^2.$"
+  },
+  {
+   "candidateKey": "micro-s5-b:ap_microeconomics-m20-k2",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "d189b5810dfbcc6748867d70a19d126a10748a84a919e5ebd5667745ef65752e",
+   "afterSha256": "16c11ad92d54e5630e0bba7d9d57870c7f665dd2ac5729ddaaba703343c6abe4",
+   "after": "The correct answer is 1,000. The merged firm's share is 45, so the index changes by $(25+20)^2$ - $25^2$ - $20^2$ = 1000.\n3,250 is incorrect: Reports the new HHI after the merger instead of the increase.\n45 is incorrect: Adds the two shares, reporting the merged firm's share rather than a change in the index.\n2,025 is incorrect: Squares the merged firm's share and treats that as the change, without removing the two original squared shares.\n500 is incorrect: Multiplies the two shares but forgets the factor of 2 in $(a + b)^2$ - $a^2$ - $b^2.$"
   },
   {
    "candidateKey": "phys-s2-d:ap_physics_1-f03-k0",

@@ -1,0 +1,1055 @@
+[
+ {
+  "candidateKey": "ap_microeconomics-m01-k0",
+  "cellId": "ap_microeconomics-m01",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "1.1",
+  "unitCode": "1",
+  "skillPrimary": "1.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_concept_scenario_id",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_scope_skill; criterion_failed_stimulus_expression; criterion_failed_exam_suitability; instant_reject_out_of_scope_knowledge; reference_pattern_mismatch",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step concept identification: recognize the law of demand (higher price, smaller quantity demanded, substitution to the bus). No computation, no graph or table, minimal reading. Distractors (law of supply, price ceiling, income effect only, shift in bus demand with no change in quantity of parking demanded) are clearly wrong on basic definitions. The stem nearly gives away the answer by mentioning substitutes. Note also a possible alignment issue: the item tests the law of demand rather than scarcity (topic 1.1), and the bakery detail is irrelevant context.",
+  "payload": {
+   "archetype": "mi_concept_scenario_id",
+   "topic": "1.1",
+   "skill": "1.B",
+   "calculator": "allowed",
+   "stem": "After a city doubles the price of parking downtown, shoppers switch to the bus, and a bakery sells a bit fewer loaves to shoppers. Which concept best describes why parking demand falls when its price rises?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The law of demand: at a higher price, consumers buy a smaller quantity and look for substitutes such as the bus.",
+     "why": "A higher price lowers the quantity demanded, and substitutes (bus rides) make the response larger.",
+     "value": null
+    },
+    {
+     "text": "The law of supply: producers offer a smaller quantity at a higher price.",
+     "why": "The law of supply describes sellers' behavior, not shoppers' reaction to a price increase.",
+     "value": null
+    },
+    {
+     "text": "The income effect only, because shoppers have less money after the higher parking price.",
+     "why": "A price change affects quantity demanded through both substitution and income effects; the question points to switching to substitutes.",
+     "value": null
+    },
+    {
+     "text": "Price ceilings, because the city controls the price of parking.",
+     "why": "A price ceiling holds a price below equilibrium; here the city raises the price.",
+     "value": null
+    },
+    {
+     "text": "An increase in demand for the bus that is caused by the parking price, with no change in the quantity of parking demanded.",
+     "why": "The quantity of parking demanded falls along the demand curve; this option ignores the movement.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 60,
+   "facts": [
+    "variant=After a city doubles the price of parkin"
+   ],
+   "blueprint": {
+    "id": "mi_concept_scenario_id",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "identify scarcity or the law of demand from a short scenario",
+    "topic": "1.1",
+    "skill": "1.B",
+    "student_thinking": [
+     "Identify the economic model that applies: identify scarcity or the law of demand from a short scenario",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "The law of supply describes sellers' behavior, not shoppers' reaction to a price increase."
+     },
+     {
+      "id": "m2",
+      "description": "A price change affects quantity demanded through both substitution and income effects; the question points to switching to substitutes."
+     },
+     {
+      "id": "m3",
+      "description": "A price ceiling holds a price below equilibrium; here the city raises the price."
+     },
+     {
+      "id": "m4",
+      "description": "The quantity of parking demanded falls along the demand curve; this option ignores the movement."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted scenarios; the key names the concept the scenario illustrates",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "identify the concept from the features of the scenario"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: identify scarcity or the law of demand from a short scenario",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_concept_scenario_id",
+     "explanation_assumptions_id": "mi_concept_scenario_id"
+    }
+   },
+   "seed": 32500,
+   "pack_id": "mi_concept_scenario_id-s32500",
+   "explanation_en": "The correct answer is The law of demand: at a higher price, consumers buy a smaller quantity and look for substitutes such as the bus.. A higher price lowers the quantity demanded, and substitutes (bus rides) make the response larger.\nThe law of supply: producers offer a smaller quantity at a higher price. is incorrect: The law of supply describes sellers' behavior, not shoppers' reaction to a price increase.\nThe income effect only, because shoppers have less money after the higher parking price. is incorrect: A price change affects quantity demanded through both substitution and income effects; the question points to switching to substitutes.\nPrice ceilings, because the city controls the price of parking. is incorrect: A price ceiling holds a price below equilibrium; here the city raises the price.\nAn increase in demand for the bus that is caused by the parking price, with no change in the quantity of parking demanded. is incorrect: The quantity of parking demanded falls along the demand curve; this option ignores the movement."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_concept_scenario_id",
+   "facts": [
+    "variant=After a city doubles the price of parkin"
+   ],
+   "seed": 32500
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Law of demand belongs to Unit 2, not Topic 1.1 Scarcity (scarcity, opportunity cost, tradeoffs). The item tests content outside the topic and Unit 1 scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the unique defensible answer."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stem says 'parking demand falls' when it means quantity demanded falls, a conceptual imprecision. The bakery clause is irrelevant and adds reading load."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a distinct misconception and an explanation. The key is the longest option, a mild giveaway."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The stem's demand versus quantity demanded wording conflicts with option E's premise. The extraneous bakery detail is unneeded."
+   },
+   "instant_reject": [
+    "out_of_scope_knowledge"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is unique, but the item tests the law of demand (Unit 2) under Topic 1.1 Scarcity, so it is out of scope. The stem also conflates demand with quantity demanded and carries an irrelevant bakery clause."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step concept identification: recognize the law of demand (higher price, smaller quantity demanded, substitution to the bus). No computation, no graph or table, minimal reading. Distractors (law of supply, price ceiling, income effect only, shift in bus demand with no change in quantity of parking demanded) are clearly wrong on basic definitions. The stem nearly gives away the answer by mentioning substitutes. Note also a possible alignment issue: the item tests the law of demand rather than scarcity (topic 1.1), and the bakery detail is irrelevant context.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m01-k1",
+  "cellId": "ap_microeconomics-m01",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "1.1",
+  "unitCode": "1",
+  "skillPrimary": "1.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_concept_scenario_id",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step concept identification: a limited resource with two competing uses forces a choice, which is the definition of scarcity. No stimulus, no computation, and minimal reading. Distractors (shortage, comparative advantage, market failure, diminishing marginal utility) are standard misconceptions that are easily ruled out once the definitions are known. This is suitable for introductory learning rather than full-mock exam prep.",
+  "payload": {
+   "archetype": "mi_concept_scenario_id",
+   "topic": "1.1",
+   "skill": "1.B",
+   "calculator": "allowed",
+   "stem": "A town has one vacant lot. The council can use it for a playground or for a parking garage but not both. Which basic economic concept does the council's situation best illustrate?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "A shortage, because the quantity of parking demanded exceeds the quantity supplied at the current price.",
+     "why": "A shortage is a market imbalance at a given price; the council's problem is a limited resource with competing uses.",
+     "value": null
+    },
+    {
+     "text": "Comparative advantage, because the council must specialize in one of the two uses.",
+     "why": "Comparative advantage concerns lower opportunity costs of producers, not a choice between two uses of one resource.",
+     "value": null
+    },
+    {
+     "text": "A market failure, because the lot is not being sold in a competitive market.",
+     "why": "A market failure is an inefficient market outcome; the situation describes a choice under limited resources.",
+     "value": null
+    },
+    {
+     "text": "Diminishing marginal utility, because the lot's value falls with each additional use.",
+     "why": "Nothing in the situation involves the falling value of additional units of one good.",
+     "value": null
+    },
+    {
+     "text": "Scarcity, because the limited resource (land) cannot satisfy both wants, so the council must choose.",
+     "why": "A fixed amount of land with competing uses is a direct example of scarcity, which forces a choice.",
+     "value": null
+    }
+   ],
+   "key_index": 4,
+   "est_seconds": 60,
+   "facts": [
+    "variant=A town has one vacant lot. The council c"
+   ],
+   "blueprint": {
+    "id": "mi_concept_scenario_id",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "identify scarcity or the law of demand from a short scenario",
+    "topic": "1.1",
+    "skill": "1.B",
+    "student_thinking": [
+     "Identify the economic model that applies: identify scarcity or the law of demand from a short scenario",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "A shortage is a market imbalance at a given price; the council's problem is a limited resource with competing uses."
+     },
+     {
+      "id": "m2",
+      "description": "Comparative advantage concerns lower opportunity costs of producers, not a choice between two uses of one resource."
+     },
+     {
+      "id": "m3",
+      "description": "A market failure is an inefficient market outcome; the situation describes a choice under limited resources."
+     },
+     {
+      "id": "m4",
+      "description": "Nothing in the situation involves the falling value of additional units of one good."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted scenarios; the key names the concept the scenario illustrates",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "identify the concept from the features of the scenario"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: identify scarcity or the law of demand from a short scenario",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_concept_scenario_id",
+     "explanation_assumptions_id": "mi_concept_scenario_id"
+    }
+   },
+   "seed": 32501,
+   "pack_id": "mi_concept_scenario_id-s32501",
+   "explanation_en": "The correct answer is Scarcity, because the limited resource (land) cannot satisfy both wants, so the council must choose.. A fixed amount of land with competing uses is a direct example of scarcity, which forces a choice.\nA shortage, because the quantity of parking demanded exceeds the quantity supplied at the current price. is incorrect: A shortage is a market imbalance at a given price; the council's problem is a limited resource with competing uses.\nComparative advantage, because the council must specialize in one of the two uses. is incorrect: Comparative advantage concerns lower opportunity costs of producers, not a choice between two uses of one resource.\nA market failure, because the lot is not being sold in a competitive market. is incorrect: A market failure is an inefficient market outcome; the situation describes a choice under limited resources.\nDiminishing marginal utility, because the lot's value falls with each additional use. is incorrect: Nothing in the situation involves the falling value of additional units of one good."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_concept_scenario_id",
+   "facts": [
+    "variant=A town has one vacant lot. The council c"
+   ],
+   "seed": 32501
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly targets scarcity identification from a scenario (1.1, 1.B)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Scarcity is the unique defensible answer; opportunity cost is not offered as an option, and the other four are clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Four distinct, realistic misconceptions (shortage, comparative advantage, market failure, diminishing marginal utility); each is explained. Length difference is minor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, five options, no calculation, typical AP style."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, simple scarcity-identification item with a unique key and plausible distractors. It is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step concept identification: a limited resource with two competing uses forces a choice, which is the definition of scarcity. No stimulus, no computation, and minimal reading. Distractors (shortage, comparative advantage, market failure, diminishing marginal utility) are standard misconceptions that are easily ruled out once the definitions are known. This is suitable for introductory learning rather than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m01-k2",
+  "cellId": "ap_microeconomics-m01",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "1.1",
+  "unitCode": "1",
+  "skillPrimary": "1.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_concept_scenario_id",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step concept identification from a one-sentence scenario. The correct answer is the textbook definition of scarcity (limited resource, must choose). The distractors are distinct Unit 1 or nearby terms that a student with basic vocabulary can rule out. There is no computation, no graph or table, and no multi-step reasoning. This fits foundational learning and is too easy for a full mock exam.",
+  "payload": {
+   "archetype": "mi_concept_scenario_id",
+   "topic": "1.1",
+   "skill": "1.B",
+   "calculator": "allowed",
+   "stem": "A town has one vacant lot. The council can use it for a playground or for a parking garage but not both. Which basic economic concept does the council's situation best illustrate?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Diminishing marginal utility, because the lot's value falls with each additional use.",
+     "why": "Nothing in the situation involves the falling value of additional units of one good.",
+     "value": null
+    },
+    {
+     "text": "Scarcity, because the limited resource (land) cannot satisfy both wants, so the council must choose.",
+     "why": "A fixed amount of land with competing uses is a direct example of scarcity, which forces a choice.",
+     "value": null
+    },
+    {
+     "text": "A shortage, because the quantity of parking demanded exceeds the quantity supplied at the current price.",
+     "why": "A shortage is a market imbalance at a given price; the council's problem is a limited resource with competing uses.",
+     "value": null
+    },
+    {
+     "text": "Comparative advantage, because the council must specialize in one of the two uses.",
+     "why": "Comparative advantage concerns lower opportunity costs of producers, not a choice between two uses of one resource.",
+     "value": null
+    },
+    {
+     "text": "A market failure, because the lot is not being sold in a competitive market.",
+     "why": "A market failure is an inefficient market outcome; the situation describes a choice under limited resources.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 60,
+   "facts": [
+    "variant=A town has one vacant lot. The council c"
+   ],
+   "blueprint": {
+    "id": "mi_concept_scenario_id",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "identify scarcity or the law of demand from a short scenario",
+    "topic": "1.1",
+    "skill": "1.B",
+    "student_thinking": [
+     "Identify the economic model that applies: identify scarcity or the law of demand from a short scenario",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Nothing in the situation involves the falling value of additional units of one good."
+     },
+     {
+      "id": "m2",
+      "description": "A shortage is a market imbalance at a given price; the council's problem is a limited resource with competing uses."
+     },
+     {
+      "id": "m3",
+      "description": "Comparative advantage concerns lower opportunity costs of producers, not a choice between two uses of one resource."
+     },
+     {
+      "id": "m4",
+      "description": "A market failure is an inefficient market outcome; the situation describes a choice under limited resources."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted scenarios; the key names the concept the scenario illustrates",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "identify the concept from the features of the scenario"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: identify scarcity or the law of demand from a short scenario",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_concept_scenario_id",
+     "explanation_assumptions_id": "mi_concept_scenario_id"
+    }
+   },
+   "seed": 32502,
+   "pack_id": "mi_concept_scenario_id-s32502",
+   "explanation_en": "The correct answer is Scarcity, because the limited resource (land) cannot satisfy both wants, so the council must choose.. A fixed amount of land with competing uses is a direct example of scarcity, which forces a choice.\nDiminishing marginal utility, because the lot's value falls with each additional use. is incorrect: Nothing in the situation involves the falling value of additional units of one good.\nA shortage, because the quantity of parking demanded exceeds the quantity supplied at the current price. is incorrect: A shortage is a market imbalance at a given price; the council's problem is a limited resource with competing uses.\nComparative advantage, because the council must specialize in one of the two uses. is incorrect: Comparative advantage concerns lower opportunity costs of producers, not a choice between two uses of one resource.\nA market failure, because the lot is not being sold in a competitive market. is incorrect: A market failure is an inefficient market outcome; the situation describes a choice under limited resources."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_concept_scenario_id",
+   "facts": [
+    "variant=A town has one vacant lot. The council c"
+   ],
+   "seed": 32502
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly tests identifying scarcity from a scenario (1.1, 1.B). No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Scarcity is the unique defensible answer. Opportunity cost is not offered; the other options clearly do not fit."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Four distinct, plausible misconceptions (diminishing marginal utility, shortage, comparative advantage, market failure). Each is explained. The key is slightly longer, but the other options are similarly long."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, five options, no calculation, low reading load. Calculator designation is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unambiguous concept-identification item with a unique key and plausible distractors. It is appropriate for topic 1.1 and skill 1.B."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step concept identification from a one-sentence scenario. The correct answer is the textbook definition of scarcity (limited resource, must choose). The distractors are distinct Unit 1 or nearby terms that a student with basic vocabulary can rule out. There is no computation, no graph or table, and no multi-step reasoning. This fits foundational learning and is too easy for a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m02-k0",
+  "cellId": "ap_microeconomics-m02",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "1.4",
+  "unitCode": "1",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_absolute_vs_comparative",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept conceptual item distinguishing absolute from comparative advantage using the classic lawyer/assistant scenario. No calculation or graph is needed. Students identify that opportunity cost, not speed, determines who should specialize. Distractors map to common misconceptions (confusing absolute and comparative advantage, assuming the faster worker should do everything). Skill 2.B is only lightly engaged, since the explanation rests on essentially one variable (opportunity cost) plus a contrast with absolute advantage. This is more of a foundational check than a full-mock item.",
+  "payload": {
+   "archetype": "mi_absolute_vs_comparative",
+   "topic": "1.4",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "A skilled lawyer is also the fastest typist in her office. She hires an assistant to type her documents even though she types faster than the assistant. Which statement best explains why this decision is efficient?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "She has a comparative advantage in legal work, because the opportunity cost of an hour spent typing (the legal work she gives up) is greater than the assistant's.",
+     "why": "Specializing where the opportunity cost is lowest raises total output even if she has an absolute advantage in both tasks.",
+     "value": null
+    },
+    {
+     "text": "She has an absolute advantage in legal work only, because she is better at law than the assistant.",
+     "why": "The lawyer is faster at typing too, so she has an absolute advantage in both tasks; the efficient choice rests on opportunity cost.",
+     "value": null
+    },
+    {
+     "text": "She has a comparative advantage in typing, because she types faster than the assistant.",
+     "why": "Typing faster shows an absolute advantage; the assistant's opportunity cost of typing is lower.",
+     "value": null
+    },
+    {
+     "text": "The decision is efficient only if the assistant is paid less than the lawyer earns for one hour of legal work.",
+     "why": "The decision is efficient whenever the opportunity cost of her typing time exceeds the assistant's, which does not depend on a particular wage comparison alone.",
+     "value": null
+    },
+    {
+     "text": "The decision is inefficient, because she could do both tasks faster herself.",
+     "why": "Doing both tasks herself would give up the more valuable legal work, so total output would be lower.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 60,
+   "facts": [
+    "variant=A skilled lawyer is also the fastest typ"
+   ],
+   "blueprint": {
+    "id": "mi_absolute_vs_comparative",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "gains from trade rest on comparative advantage even when one party has an absolute advantage in everything",
+    "topic": "1.4",
+    "skill": "2.B",
+    "student_thinking": [
+     "Identify the economic model that applies: gains from trade rest on comparative advantage even when one party has an absolute advantage in everything",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "The lawyer is faster at typing too, so she has an absolute advantage in both tasks; the efficient choice rests on opportunity cost."
+     },
+     {
+      "id": "m2",
+      "description": "Typing faster shows an absolute advantage; the assistant's opportunity cost of typing is lower."
+     },
+     {
+      "id": "m3",
+      "description": "The decision is efficient whenever the opportunity cost of her typing time exceeds the assistant's, which does not depend on a particular wage comparison alone."
+     },
+     {
+      "id": "m4",
+      "description": "Doing both tasks herself would give up the more valuable legal work, so total output would be lower."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted scenarios; the key explains the gain with opportunity cost, not absolute cost",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "separate absolute from comparative advantage and explain the gain"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: gains from trade rest on comparative advantage even when one party has an absolute advantage in everything",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_absolute_vs_comparative",
+     "explanation_assumptions_id": "mi_absolute_vs_comparative"
+    }
+   },
+   "seed": 32500,
+   "pack_id": "mi_absolute_vs_comparative-s32500",
+   "explanation_en": "The correct answer is She has a comparative advantage in legal work, because the opportunity cost of an hour spent typing (the legal work she gives up) is greater than the assistant's.. Specializing where the opportunity cost is lowest raises total output even if she has an absolute advantage in both tasks.\nShe has an absolute advantage in legal work only, because she is better at law than the assistant. is incorrect: The lawyer is faster at typing too, so she has an absolute advantage in both tasks; the efficient choice rests on opportunity cost.\nShe has a comparative advantage in typing, because she types faster than the assistant. is incorrect: Typing faster shows an absolute advantage; the assistant's opportunity cost of typing is lower.\nThe decision is efficient only if the assistant is paid less than the lawyer earns for one hour of legal work. is incorrect: The decision is efficient whenever the opportunity cost of her typing time exceeds the assistant's, which does not depend on a particular wage comparison alone.\nThe decision is inefficient, because she could do both tasks faster herself. is incorrect: Doing both tasks herself would give up the more valuable legal work, so total output would be lower."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_absolute_vs_comparative",
+   "facts": [
+    "variant=A skilled lawyer is also the fastest typ"
+   ],
+   "seed": 32500
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is about 60 seconds, needs no calculation, and has five parallel option sentences with no length giveaway.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, standard question on comparative advantage versus absolute advantage. It has a unique key and explained distractors. Option D is slightly arguable but is eliminated by \"only if\"."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept conceptual item distinguishing absolute from comparative advantage using the classic lawyer/assistant scenario. No calculation or graph is needed. Students identify that opportunity cost, not speed, determines who should specialize. Distractors map to common misconceptions (confusing absolute and comparative advantage, assuming the faster worker should do everything). Skill 2.B is only lightly engaged, since the explanation rests on essentially one variable (opportunity cost) plus a contrast with absolute advantage. This is more of a foundational check than a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m02-k1",
+  "cellId": "ap_microeconomics-m02",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "1.4",
+  "unitCode": "1",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_absolute_vs_comparative",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recognition item: gains from trade come from comparative advantage (lower opportunity cost), not absolute advantage. No computation, graph, or table. Short stem, standard misconception distractors. One reasoning step to reject absolute-advantage reasoning and select the opportunity-cost explanation. Fits introductory learning of topic 1.4 rather than full-mock exam prep. Little multi-variable explanation, so skill 2.B is only lightly engaged.",
+  "payload": {
+   "archetype": "mi_absolute_vs_comparative",
+   "topic": "1.4",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "Country X can produce both cars and wheat using fewer resources than Country Z can, so X has an absolute advantage in both goods. Which statement correctly explains whether trade between X and Z can still benefit both countries?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "No, because Country X can make everything more cheaply and would gain nothing from trade.",
+     "why": "Confuses absolute advantage with comparative advantage; gains come from differences in opportunity cost.",
+     "value": null
+    },
+    {
+     "text": "Yes, because each country should produce the good for which its absolute cost of production is lowest.",
+     "why": "Specialization is based on the lowest opportunity cost, not the lowest absolute resource cost.",
+     "value": null
+    },
+    {
+     "text": "No, because trade is beneficial only when each country has an absolute advantage in a different good.",
+     "why": "Absolute advantage in different goods is not required; comparative advantage is enough.",
+     "value": null
+    },
+    {
+     "text": "Yes, but only Country Z gains, because the country with the absolute advantage gives up nothing.",
+     "why": "Country X also gains by concentrating on the good for which its opportunity cost is lower and importing the other.",
+     "value": null
+    },
+    {
+     "text": "Yes, because gains from trade depend on comparative advantage: each country should specialize in the good for which its opportunity cost is lower.",
+     "why": "Even a country with an absolute advantage in everything has a lower opportunity cost in only one good, so both can gain by specializing and trading.",
+     "value": null
+    }
+   ],
+   "key_index": 4,
+   "est_seconds": 60,
+   "facts": [
+    "variant=Country X can produce both cars and whea"
+   ],
+   "blueprint": {
+    "id": "mi_absolute_vs_comparative",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "gains from trade rest on comparative advantage even when one party has an absolute advantage in everything",
+    "topic": "1.4",
+    "skill": "2.B",
+    "student_thinking": [
+     "Identify the economic model that applies: gains from trade rest on comparative advantage even when one party has an absolute advantage in everything",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Confuses absolute advantage with comparative advantage; gains come from differences in opportunity cost."
+     },
+     {
+      "id": "m2",
+      "description": "Specialization is based on the lowest opportunity cost, not the lowest absolute resource cost."
+     },
+     {
+      "id": "m3",
+      "description": "Absolute advantage in different goods is not required; comparative advantage is enough."
+     },
+     {
+      "id": "m4",
+      "description": "Country X also gains by concentrating on the good for which its opportunity cost is lower and importing the other."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted scenarios; the key explains the gain with opportunity cost, not absolute cost",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "separate absolute from comparative advantage and explain the gain"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: gains from trade rest on comparative advantage even when one party has an absolute advantage in everything",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_absolute_vs_comparative",
+     "explanation_assumptions_id": "mi_absolute_vs_comparative"
+    }
+   },
+   "seed": 32501,
+   "pack_id": "mi_absolute_vs_comparative-s32501",
+   "explanation_en": "The correct answer is Yes, because gains from trade depend on comparative advantage: each country should specialize in the good for which its opportunity cost is lower.. Even a country with an absolute advantage in everything has a lower opportunity cost in only one good, so both can gain by specializing and trading.\nNo, because Country X can make everything more cheaply and would gain nothing from trade. is incorrect: Confuses absolute advantage with comparative advantage; gains come from differences in opportunity cost.\nYes, because each country should produce the good for which its absolute cost of production is lowest. is incorrect: Specialization is based on the lowest opportunity cost, not the lowest absolute resource cost.\nNo, because trade is beneficial only when each country has an absolute advantage in a different good. is incorrect: Absolute advantage in different goods is not required; comparative advantage is enough.\nYes, but only Country Z gains, because the country with the absolute advantage gives up nothing. is incorrect: Country X also gains by concentrating on the good for which its opportunity cost is lower and importing the other."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_absolute_vs_comparative",
+   "facts": [
+    "variant=Country X can produce both cars and whea"
+   ],
+   "seed": 32501
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 1.4 absolute vs comparative advantage; explaining the outcome fits skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "E is the unique defensible answer. The stem does not state that opportunity costs differ, but this is a standard assumption and does not make any other option defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions and the explanation covers each wrong option. The correct option is longer than the others, a slight length cue."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60 seconds, has five options, and puts no calculator load on students."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a sound conceptual item with a unique correct answer. The only weakness is that the stem leaves unstated that opportunity costs differ, which is a standard assumption."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recognition item: gains from trade come from comparative advantage (lower opportunity cost), not absolute advantage. No computation, graph, or table. Short stem, standard misconception distractors. One reasoning step to reject absolute-advantage reasoning and select the opportunity-cost explanation. Fits introductory learning of topic 1.4 rather than full-mock exam prep. Little multi-variable explanation, so skill 2.B is only lightly engaged.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m02-k2",
+  "cellId": "ap_microeconomics-m02",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "1.4",
+  "unitCode": "1",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_absolute_vs_comparative",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recall/recognition: gains from trade rest on comparative advantage (lower opportunity cost), not absolute advantage. No stimulus, no computation, one reasoning step, and distractors are common misconceptions. The item is clear and in scope, but it is too shallow for a full-mock exam_prep item and only weakly addresses skill 2.B's multiple-variable explanation.",
+  "payload": {
+   "archetype": "mi_absolute_vs_comparative",
+   "topic": "1.4",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "Country X can produce both cars and wheat using fewer resources than Country Z can, so X has an absolute advantage in both goods. Which statement correctly explains whether trade between X and Z can still benefit both countries?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Yes, but only Country Z gains, because the country with the absolute advantage gives up nothing.",
+     "why": "Country X also gains by concentrating on the good for which its opportunity cost is lower and importing the other.",
+     "value": null
+    },
+    {
+     "text": "Yes, because gains from trade depend on comparative advantage: each country should specialize in the good for which its opportunity cost is lower.",
+     "why": "Even a country with an absolute advantage in everything has a lower opportunity cost in only one good, so both can gain by specializing and trading.",
+     "value": null
+    },
+    {
+     "text": "No, because Country X can make everything more cheaply and would gain nothing from trade.",
+     "why": "Confuses absolute advantage with comparative advantage; gains come from differences in opportunity cost.",
+     "value": null
+    },
+    {
+     "text": "Yes, because each country should produce the good for which its absolute cost of production is lowest.",
+     "why": "Specialization is based on the lowest opportunity cost, not the lowest absolute resource cost.",
+     "value": null
+    },
+    {
+     "text": "No, because trade is beneficial only when each country has an absolute advantage in a different good.",
+     "why": "Absolute advantage in different goods is not required; comparative advantage is enough.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 60,
+   "facts": [
+    "variant=Country X can produce both cars and whea"
+   ],
+   "blueprint": {
+    "id": "mi_absolute_vs_comparative",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "gains from trade rest on comparative advantage even when one party has an absolute advantage in everything",
+    "topic": "1.4",
+    "skill": "2.B",
+    "student_thinking": [
+     "Identify the economic model that applies: gains from trade rest on comparative advantage even when one party has an absolute advantage in everything",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Country X also gains by concentrating on the good for which its opportunity cost is lower and importing the other."
+     },
+     {
+      "id": "m2",
+      "description": "Confuses absolute advantage with comparative advantage; gains come from differences in opportunity cost."
+     },
+     {
+      "id": "m3",
+      "description": "Specialization is based on the lowest opportunity cost, not the lowest absolute resource cost."
+     },
+     {
+      "id": "m4",
+      "description": "Absolute advantage in different goods is not required; comparative advantage is enough."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted scenarios; the key explains the gain with opportunity cost, not absolute cost",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "separate absolute from comparative advantage and explain the gain"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: gains from trade rest on comparative advantage even when one party has an absolute advantage in everything",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_absolute_vs_comparative",
+     "explanation_assumptions_id": "mi_absolute_vs_comparative"
+    }
+   },
+   "seed": 32502,
+   "pack_id": "mi_absolute_vs_comparative-s32502",
+   "explanation_en": "The correct answer is Yes, because gains from trade depend on comparative advantage: each country should specialize in the good for which its opportunity cost is lower.. Even a country with an absolute advantage in everything has a lower opportunity cost in only one good, so both can gain by specializing and trading.\nYes, but only Country Z gains, because the country with the absolute advantage gives up nothing. is incorrect: Country X also gains by concentrating on the good for which its opportunity cost is lower and importing the other.\nNo, because Country X can make everything more cheaply and would gain nothing from trade. is incorrect: Confuses absolute advantage with comparative advantage; gains come from differences in opportunity cost.\nYes, because each country should produce the good for which its absolute cost of production is lowest. is incorrect: Specialization is based on the lowest opportunity cost, not the lowest absolute resource cost.\nNo, because trade is beneficial only when each country has an absolute advantage in a different good. is incorrect: Absolute advantage in different goods is not required; comparative advantage is enough."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_absolute_vs_comparative",
+   "facts": [
+    "variant=Country X can produce both cars and whea"
+   ],
+   "seed": 32502
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard comparative-advantage conceptual item. B is the unique best answer and the distractors map to distinct misconceptions. The stem does not state that opportunity costs differ, and the skill demand is mostly conceptual recall, but both are minor issues.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 1.4 fits. The 2.B demand is light but acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique defensible key. The stem omits that opportunity costs differ, but this is a standard implicit assumption."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a distinct misconception and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, no calculation, five options."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall/recognition: gains from trade rest on comparative advantage (lower opportunity cost), not absolute advantage. No stimulus, no computation, one reasoning step, and distractors are common misconceptions. The item is clear and in scope, but it is too shallow for a full-mock exam_prep item and only weakly addresses skill 2.B's multiple-variable explanation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ }
+]
