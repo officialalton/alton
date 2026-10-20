@@ -1,0 +1,4289 @@
+[
+ {
+  "key": "ap_precalculus-f01-k0",
+  "cellId": "ap_precalculus-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "f(2) = 4·4 + 5 = 21",
+     "final_answer": "21",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Set 4·2^x + 5 = 40, so 2^x = 8.75 and x = log2(8.75) ≈ 3.129. This is ≥ 0, so it is in the domain.",
+     "final_answer": "f^{-1}(40) = log2(35/4) ≈ 3.129",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Set 3f(x) − 2 = 90, so f(x) = 92/3. Then 4·2^x = 77/3, so 2^x = 77/12 and x = log2(77/12) ≈ 2.682. This is the only solution, since f is increasing.",
+     "final_answer": "x = log2(77/12) ≈ 2.682",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "2^x grows without bound as x increases, so f(x) → ∞. A function that grows without bound cannot level off at a horizontal line. The line y = 5 is approached only as x → −∞, which is outside the domain x ≥ 0.",
+     "final_answer": "No. As x → ∞, 4·2^x + 5 → ∞, so f does not approach any finite value and has no horizontal asymptote.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable. The key values are verified by the independent solver, the domain is stated, the rubric rows are consistent, and the scope and load are appropriate. Part A is very easy but harmless.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four short parts: evaluate f(2); solve for the inverse value via 2^x=8.75 using a log or calculator solve; compose g(f(x)) and solve an exponential equation; judge the end behavior and asymptote of an exponential on a restricted domain. Each part is a standard procedure, and the only conceptual traps are the restricted domain (the y=5 asymptote does not apply as x increases) and keeping track of the composition. The numbers are clean and the reading load is light, so this is typical of a full mock-exam item rather than a basic or advanced one.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_precalculus-f01-k1",
+  "cellId": "ap_precalculus-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "f(2) = 4(1.44) + 5 = 10.76",
+     "final_answer": "10.76",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "4·1.2^x + 5 = 60 gives 1.2^x = 13.75, so x = ln(13.75)/ln(1.2) ≈ 14.376",
+     "final_answer": "f^{-1}(60) ≈ 14.376",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "3f(x) − 2 = 120 gives f(x) = 122/3. Then 1.2^x = 8.91667, so x = ln(8.91667)/ln(1.2) ≈ 12.000. f is increasing, so this is the only solution.",
+     "final_answer": "x ≈ 12.000 (the only solution)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The base 1.2 is greater than 1, so 4·1.2^x grows without bound as x increases. That means f(x) also increases without bound, so it does not approach any constant. (The asymptote y = 5 only applies as x decreases, which is outside the domain x ≥ 0.)",
+     "final_answer": "No. f increases without bound as x → ∞, so there is no horizontal asymptote in that direction.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The mathematics and key are correct and the stimulus is complete. The item fails only on strict skill labeling, because parts B and C are tagged with skills 1 and 2 even though they are computational.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "The item is in scope for Unit 2 and for topics 2.8, 2.3 and 2.13, and parts A to C are procedural. However, parts B and C are labeled skills 1 and 2 although they are purely computational. Part D is labeled skill 3, which is acceptable at part level. The skill labeling is not clean, so this criterion fails (a strict call)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All answers are confirmed by the independent solver. The part C solution is unique because f is increasing, and the rubric rows are consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus is complete: both functions and the domain are given, and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The model answers and rubric rows are adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The calculator use is appropriate and the load is reasonable for a 6-point part."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part item covering evaluation, inverse value via a logarithmic solve, composition then an exponential solve, and an asymptote justification that requires attention to the domain and end behavior. Each part needs one or two conceptual steps and short calculator work, with no long arithmetic and no ambiguity. This matches typical full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_precalculus-f01-k2",
+  "cellId": "ap_precalculus-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "4(1.728)+5",
+     "final_answer": "11.912",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "1.2^x=13.75, x=ln13.75/ln1.2",
+     "final_answer": "x≈14.376",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "f(x)=116/3, 1.2^x=101/12, x=ln(101/12)/ln1.2; f increasing so unique",
+     "final_answer": "x≈11.684",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Base 1.2>1 so 1.2^x grows without bound; f(x)→∞ as x→∞",
+     "final_answer": "No; f increases without bound, so there is no horizontal asymptote as x→∞",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Valid 6-point calculator FRQ on an exponential function, its inverse value and a composition. Keys are correct and unique, the domain condition is stated, and the rubric rows are consistent and 1 point each.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits topic 2.8 with related topics 2.3, 2.7 and 2.13. No calculus content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Values verified; solution to C is unique since f is increasing; rubric rows are consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Functions and domain fully specified in text."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ; the common errors listed are minimal but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light load, calculator use is appropriate, and the point structure is typical."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four short parts covering evaluation, an inverse value via a log or calculator solve, a composition followed by an exponential equation, and end behavior with a domain restriction. Each part takes one or two steps with standard techniques, and the domain-restriction trap in D is the single conceptual lever. Reading and arithmetic are light, and the content stays within Unit 2 scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_precalculus-f02-k0",
+  "cellId": "ap_precalculus-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "30+25ln10",
+     "final_answer": "L(9) ≈ 87.565 points",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(L(7)-L(1))/6 = 25ln4/6",
+     "final_answer": "≈5.776 points per hour; from t=1 to t=7 hours, the score increases on average by about 5.776 points per hour of study.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "ln(t+1)=2.64, t=e^2.64-1",
+     "final_answer": "t ≈ 13.013 hours",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "decreasing AROC over equal-length intervals",
+     "final_answer": "The score keeps increasing as study hours increase, but at a decreasing rate (L is concave down): each extra hour adds fewer points.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Computations are correct. The D1 rubric row requires the specific values 8.664 and 3.596, which the prompt never asks students to compute, so a correct qualitative answer would lose the point. Fix by asking students to compute and compare the two average rates, or by dropping the numbers from the required elements.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.14 logarithmic model with evaluation, average rate of change, solving, and rate behavior. No calculus. In scope."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Parts A-C are correct. D1 requires numbers not requested in the prompt, and is marked requires_numbers false while listing numeric required elements, so scoring is inconsistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus fully specifies L(t) and the domain."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to FRQ; the rubric has no common errors listed."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Calculator load and time are appropriate, and the 6-point structure matches the official type."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part log-modeling free-response item. It covers evaluation, average rate of change with a units interpretation, solving a log equation, and a concavity interpretation. Each part needs one to three steps, uses calculator-friendly numbers and a short context, and has no unfair difficulty sources. This matches typical exam-level work, with the interpretation and equation-solving parts above basic recall.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_precalculus-f02-k1",
+  "cellId": "ap_precalculus-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "40+12ln5",
+     "final_answer": "L(4) ≈ 59.313 points",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(L(7)-L(1))/6 = 12ln4/6 = 2ln4",
+     "final_answer": "≈ 2.773 points per hour. Between 1 and 7 hours of study, the score goes up by about 2.773 points per hour on average.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "ln(t+1)=33/12=2.75, so t=e^2.75 - 1",
+     "final_answer": "t ≈ 14.643 hours",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Rate of change is smaller over the later equal-length interval",
+     "final_answer": "The score keeps rising as study hours increase, but it rises at a decreasing rate, so each extra hour adds fewer points.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is mathematically sound and in scope. The Part D rubric demands numeric rates the prompt never asks for, and B2 is phrase-rigid, so I fail key/scoring narrowly. The rubric needs to be aligned with the prompts.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The topic is 2.14 with 1.2 average rate of change. Each part uses its own skill, and the content is in scope for unit 2."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part D's rubric requires the numbers 4.159 and 1.726, but the prompt does not ask the student to compute them, so a correct conceptual answer could be denied the point. B2 requires the exact phrase \"average increase\" and does not require the interval to be mentioned. Parts A-C are fine."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The model is fully specified with its domain, and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to FRQ."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light, the calculator use is appropriate and the parts are standard."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Typical AP-style multi-part log-model item: evaluate the function, compute an average rate of change and interpret it with units, solve a log equation by exponentiating or with a calculator intersection, and reason about concavity from comparing average rates of change. Each part needs only one or two steps, and the numbers are short. The difficulty comes from allowed levers (interpretation with units, the inverse step, the concavity idea), not from arithmetic or reading load. This suits a full mock exam rather than basic learning or advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_precalculus-f02-k2",
+  "cellId": "ap_precalculus-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "20+12ln7",
+     "final_answer": "L(6) ≈ 43.351 points",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(L(7)-L(1))/6 = 12ln4/6 = 2ln4",
+     "final_answer": "≈2.773 points per hour; on average, from t=1 to t=7 hours of study, the score goes up by about 2.773 points for each extra hour of study.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "ln(t+1)=33/12=2.75, so t=e^2.75 - 1",
+     "final_answer": "t ≈ 14.643 hours",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Average rates of change get smaller over equal-length intervals",
+     "final_answer": "The score keeps going up as study hours increase, but it goes up more and more slowly (each extra hour adds fewer points).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The mathematics and keys are correct (43.351, 2.773, 14.643, and the decreasing-rate conclusion), and the content is in scope for 2.14, 2.11 and 1.2. The problems are the scoring rows and the format. Rubric rows are too rigid for the free-response format, and the item is a 6-point, 4-part bundle rather than the 9-point reference grain.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "In scope: evaluating a log model, average rate of change, solving a log equation, and describing concavity from average rates. Part D's skill code \"3\" differs from the bundle's skill 1, but each part is judged against its own skill, so this is acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All numeric keys are correct. Rubric weaknesses: row D1 requires the exact numbers 4.159 and 1.726 even though the prompt never asks the student to compute them, and its requires_numbers flag is false, which is inconsistent. Row B2 requires the literal phrases \"points per hour\" and \"average increase\", which is too rigid. Row C2 carries units_row true but has no unit requirement in its elements. In row C1, \"L(t)=53\" as a required element is too narrow, since equivalent setups such as 20+12ln(t+1)=53 should also earn the point."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus is clear and complete. The data object is empty, which is acceptable for a text-only stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to free response. The common_errors lists are empty."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The calculator load is appropriate. The bundle is 6 points across 4 parts with 1/2/2/1 grain, which is lighter than the 9-point reference grain. The task is also a very standard sequence of routine steps. Part D awards the point only if the specific rate values appear, which is unfair because the prompt does not ask for them."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four routine parts on a single log model: evaluate, average rate of change with a units interpretation, solve a log equation by exponentiating, and interpret decreasing rate of change. Each part needs one or two steps. Computation is light, the wording is clear, and nothing is out of scope. This matches a typical AP Precalculus calculator-active FRQ.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_precalculus-f03-k0",
+  "cellId": "ap_precalculus-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "f(6)=102.0367, f(2)=9.72; (102.0367-9.72)/4",
+     "final_answer": "≈23.079",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "g>f for smaller x; single intersection found by calculator",
+     "final_answer": "x≈13.151",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Exponential growth eventually outpaces any polynomial; after the only intersection f-g stays positive and increasing",
+     "final_answer": "f(x) > g(x)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "f(2)=9.72; g(9.72)=3(918.330)+4",
+     "final_answer": "≈2758.990",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Valid calculator-required FRQ comparing an exponential and a polynomial function. The single intersection at x≈13.151 is consistent with g>f at small x, the key values agree with the independent solver, and the rubric rows are 1-point with sensible dependencies. Scope fits topic 2.6 with 2.7, 1.4 and 2.3 evaluation skills.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four short parts testing average rate of change, calculator intersection of an exponential and a cubic, a justified end-behavior comparison, and a composition. Each step is standard and within Unit 2 scope. The calculator is used for intersection and evaluation, and the numbers are modest and rounded. The justification in C requires one conceptual idea (exponential eventually outgrows polynomial). This fits a full mock exam without being supplementary-level.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 360
+  }
+ },
+ {
+  "key": "ap_precalculus-f03-k1",
+  "cellId": "ap_precalculus-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "f(2)=8.45, f(6)≈24.134; (24.134-8.45)/4",
+     "final_answer": "≈3.921",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "f-g changes sign near 2.231 and 14.128",
+     "final_answer": "x≈2.231 and x≈14.128",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Exponential growth by constant factor 1.3 eventually outpaces quadratic, whose growth factor tends to 1; after the last intersection f stays above g",
+     "final_answer": "f(x) > g(x)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "f(2)=8.45; g(8.45)=71.4025+4",
+     "final_answer": "75.4025",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Values check out (ARC 3.921, intersections 2.231 and 14.128, g(f(2))=75.4025). The justification in part C is correct. Rubric rows are consistent and the item fits the 6-point graphing-calculator free-response format. Minor: row C2 is somewhat vague and g is written with an odd \"1x^2\".",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard 4-part calculator FRQ: average rate of change, finding two intersections of exponential and quadratic (needs a good window), justifying long-run exponential dominance, and a simple composition. Each part is routine, but the intersection step and the justification add moderate depth. Reading and arithmetic are light and the wording is clear.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_precalculus-f03-k2",
+  "cellId": "ap_precalculus-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "(f(6)-f(2))/4 = (24.134-8.45)/4",
+     "final_answer": "≈3.921",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Solve 5·1.3^x = x^3+4 graphically: f>g at 0, g>f at 2, crossings found",
+     "final_answer": "x ≈ 1.507 and x ≈ 34.283",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Exponential growth (constant factor 1.3 per unit) eventually outpaces cubic growth whose factor ((x+1)/x)^3 → 1; after last intersection at 34.283 f stays above g",
+     "final_answer": "f(x) > g(x)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "f(2)=8.45; g(8.45)=8.45^3+4",
+     "final_answer": "≈607.351",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, unambiguous calculator FRQ comparing an exponential and a cubic function. Keys verified and consistent with the rubric rows. Scope fits topic 2.6 plus related topics, with a 1/2/2/1 point split.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.6 with 1.4 and 2.3 (composition); skill mix is fine per part."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Two intersections 1.507 and 34.283; f>g beyond the last one. Rubric rows consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Functions and domain stated; \"1x^3\" is slightly odd but clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to FRQ."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Calculator use is appropriate; load is modest."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four short parts: average rate of change, finding two intersections with a calculator (must choose a window to catch both the small and the large crossing), long-run comparison of exponential vs cubic growth with justification, and a simple composition. Each part uses one or two steps and in-scope Unit 2 skills; the calculator work is modest and the wording is clear, so this fits a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_precalculus-f04-k0",
+  "cellId": "ap_precalculus-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "D(1)=31, D(4)=112; (112-31)/3=27",
+     "final_answer": "27 cm/hr; between t=1 and t=4 hours the depth rises on average 27 cm per hour",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "D'=0 at t=2+√10≈5.162; D=20(3+√10)≈123.246; endpoints 8 and 85 are smaller",
+     "final_answer": "Max depth ≈123.246 cm at t≈5.162 hours",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Solve D(t)=86: roots ≈2.890 and ≈6.978 in [0,7]; D(7)=85<86",
+     "final_answer": "2.890 < t < 6.978 hours",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct cubic-model FRQ: ARC 27, max 123.246 at t=5.162, and D>86 on (2.890, 6.978) all check out. Rubric rows are 1-point, calculator use is appropriate, and the stimulus is complete.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Polynomial model analysis with a calculator fits topics 1.14, 1.4 and 1.2; no calculus is required."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are unique and verified. Minor: B2 is flagged as a units row but its criterion mentions no units."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The function, domain and calculator note are all stated; wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ; common errors are noted for part A."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Calculator load is typical and the task load is reasonable for 6 points."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Three routine calculator tasks on a cubic model: average rate of change with units and interpretation, maximum on an interval, and solving D(t)>86 via intersections. Each part uses one standard technique, and the reading load is small. The near-boundary value D(7)=85 needs a careful graph reading but no long arithmetic. This matches a typical AP free-response style item.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_precalculus-f04-k1",
+  "cellId": "ap_precalculus-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "D(1)=25, D(4)=88; (88-25)/3=21",
+     "final_answer": "21 cm/hr; on average the depth increases 21 cm per hour from t=1 to t=4 hours",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "D'=0 at t=2+2√2; D=48+32√2; endpoints D(0)=8, D(8)=-24",
+     "final_answer": "Max depth ≈ 93.255 cm (48+32√2) at t ≈ 4.828 hours",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Solve D(t)=65 numerically: roots t≈2.724, 6.497; D>65 between",
+     "final_answer": "2.724 < t < 6.497",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The cubic depth model is fully specified, and the answers (21, 93.25 at 4.828, and 2.724 < t < 6.497) are correct and match the independent solver. The scope is topic 1.14 with calculator use, the rubric rows are consistent, and the load is typical for a calculator FRQ.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard calculator-active FRQ: AROC with units interpretation, calculator maximum, and intersection-based inequality solved as an interval. Each part needs one or two steps and a representation choice (graph vs. table/equation). Short stimulus, no heavy arithmetic, no out-of-scope content. Fits full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_precalculus-f04-k2",
+  "cellId": "ap_precalculus-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "D(1)=26, D(4)=80; (80-26)/3=18",
+     "final_answer": "18 cm/hr: between t=1 and t=4 hours the depth increases on average 18 cm per hour",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "D'=0 at t=(6+sqrt76)/4≈3.679; D≈81.409; endpoints 4 and -14",
+     "final_answer": "About 81.409 cm at t≈3.679 hours",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Solve -2t^3+9t^2+15t+4=57; roots ≈2.113 and 4.931",
+     "final_answer": "(2.113, 4.931)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct and well-scoped cubic modeling FRQ. Values verified: ARC 18, max 81.41 at t≈3.679, and D>57 on (2.113, 4.931). Minor realism issue: depth is negative at t=6, which does not affect the answers.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "In scope for Unit 1: average rate of change and calculator use on a polynomial model (topics 1.2, 1.4, 1.14), with no calculus."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are verified. The rubric rows match the model answers, each part has a single answer, and the tolerances are reasonable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The function and domain are fully stated in the text, and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A 6-point calculator FRQ with typical load and a consistent calculator designation."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Three standard calculator-based parts on a cubic model: average rate of change with a units interpretation, finding a maximum, and solving an inequality by graph intersection. Each part needs one technique choice and a calculator step. Arithmetic is light, reading is short, and the scope is within Unit 1 (1.14, 1.4, 1.2). The item is typical of a free-response question in a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_precalculus-f05-k0",
+  "cellId": "ap_precalculus-f05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "C(1)=11, C(5)=175/9; (175/9-11)/4=19/9",
+     "final_answer": "19/9 ≈ 2.111 milligrams per liter per hour",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "30t+25=20.4(t+4) → 9.6t=56.6",
+     "final_answer": "t ≈ 5.896 hours",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Ratio of leading coefficients 30/1",
+     "final_answer": "30 mg/L; over the long run the concentration levels off near 30 mg/L, getting closer and closer to it without going above it",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The mathematics is correct and in scope for rational models in Unit 1, but the format deviates from the official free-response structure.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Average rate of change, solving a rational equation with the calculator, and horizontal asymptote meaning all fit topics 1.14, 1.7 and 1.2. No calculus content is used. Part C's wording \"approaches as t increases without bound\" is acceptable and is not a limit notation."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All three answers match the independent solver. The solution is unique on t>=0. Two rubric issues: B2 is marked units_row=true although it checks only a numeric value, and the A1/B2 tolerance specs are inconsistent (±0.001 vs ±0.01). Part C's interpretation row requires the phrases \"long-run concentration\" and \"milligrams per liter\", which is slightly rigid. The bundle has 3 parts of 2 points each."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The model and domain are fully stated in the stem and the wording is clear. The data object is empty, which is acceptable for a text-only stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The rubric lists no common errors."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The official non-periodic modeling FRQ is a 6-point question with 1-point rubric rows. It typically includes a regression, a model-choice justification, or a reasonableness assessment. This item is three routine calculator evaluations with no model construction, no regression and no justification. Part C is not a calculator task. Under the stated Function Concepts FRQ type, the demand is too light and does not fit the pattern. The parts are also all 2 points, with no variety in point values."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Three routine on-scope tasks on one rational model: average rate of change from function values, solving C(t)=20.4 by calculator intersection or algebra, and reading the horizontal asymptote with a contextual interpretation. Requires choosing the right technique and moving among equation, graph or table, and context, but each step is short with light arithmetic and little reading. This matches typical free-response-style exam practice rather than introductory or advanced work.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 400
+  }
+ },
+ {
+  "key": "ap_precalculus-f05-k1",
+  "cellId": "ap_precalculus-f05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "C(1)=55/3, C(5)=235/7; (235/7-55/3)/4=80/21",
+     "final_answer": "80/21 ≈ 3.810 milligrams per liter per hour",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "45t+10=34.8(t+2) → 10.2t=59.6",
+     "final_answer": "t ≈ 5.843 hours",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Ratio of the leading coefficients is 45/1",
+     "final_answer": "45 mg/L. As time goes on, the concentration gets closer and closer to 45 mg/L but never reaches it.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The math is correct, but the item does not target the stated topic (model construction) or skill (multiple representations). It is a routine evaluate, solve and read-the-asymptote task on a given rational model, so I fail it on scope and skill fit.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Topic 1.14 (model construction) and skill 2 (multiple representations) are not really assessed. The model is given, and the tasks are evaluation, a calculator solve, and reading the horizontal asymptote, all from one symbolic representation. No construction, regression or representation switching is required."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The values are correct and unique (80/21, 5.843, 45). Row B2 is flagged as a units row although it only scores the value. The C2 rubric requires literal phrases, which is somewhat rigid."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and clear. The empty data object is fine for a text-only stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light and typical, and the calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Three standard Unit 1 tasks on a single rational model: average rate of change from function values (with units), solving C(t)=34.8 via algebra or calculator intersection, and identifying the horizontal asymptote and interpreting it in context. Each part needs one or two steps and a switch between equation, graph and contextual meaning. Arithmetic is light and the wording is unambiguous, so it suits a full mock rather than basic learning or advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_precalculus-f05-k2",
+  "cellId": "ap_precalculus-f05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "C(1)=7.5, C(5)=13.75; (13.75-7.5)/4=1.5625",
+     "final_answer": "1.5625 mg/L per hour (about 1.563)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "20t+10=14.4(t+3) gives 5.6t=33.2, so t=5.929",
+     "final_answer": "t ≈ 5.929 hours",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The ratio of the leading coefficients is 20/1 = 20, which gives a horizontal asymptote at C = 20.",
+     "final_answer": "20 mg/L. As time goes on, the concentration gets closer and closer to 20 mg/L but never reaches it.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is in scope and well formed, but the Part A key of 1.562 is a truncation of 1.5625 and conflicts with standard rounding (1.563). The rubric needs to be corrected to accept 1.563 (or 1.5625) before use.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item fits topic 1.14, with average rate of change, solving by calculator and horizontal asymptote meaning. All of these are in Unit 1 scope and need no calculus."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part A: the exact value is 1.5625. The model answer and the required element give 1.562 (truncation), but three-decimal rounding gives 1.563. The model answer is inconsistent with the expected value and with standard rounding, and the rubric elements and tolerance do not match. Part B's units_row flag is set to true on a row that requires no units, a minor inconsistency. The Part C interpretation row accepts only specific phrases and is somewhat rigid."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The function and domain are fully specified. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. It lists no common errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light and calculator use is appropriate."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Three standard parts on one rational model: average rate of change from the equation with units, solving C(t)=14.4 (calculator intersection or simple algebra), and horizontal asymptote with contextual interpretation. Each part needs one or two steps, switching between equation, graph/table and context. Arithmetic is light and the wording is clear, so the difficulty is typical of a full mock FRQ item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_precalculus-f06-k0",
+  "cellId": "ap_precalculus-f06",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Least-squares cubic fit via orthogonal polynomials",
+     "final_answer": "C(t) ≈ 0.589t^3 − 2.817t^2 + 9.271t + 40.498",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "C(8) evaluated",
+     "final_answer": "≈235.76 hundred visitors",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "C'(t) has negative discriminant, so C is increasing; maximum at endpoint t=8",
+     "final_answer": "Maximum ≈235.76 hundred visitors at t = 8 weeks",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Small residuals with no pattern mean a good fit; curved quadratic residuals mean the quadratic misses part of the data's shape",
+     "final_answer": "Cubic model is more appropriate",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Part A and B are fine, but Part C is degenerate (the cubic is increasing, so the max is just the endpoint t=8, duplicating Part B, with ambiguous wording \"greatest number of visitors in a week\"). Part D gives the conclusion in the stem and provides no residual data, so the justification is a giveaway. Part D's skill (3) also diverges from the target skill 2. Overall weak as an exam item.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Part C tests only evaluation at an endpoint; Part D is a justification part with the answer given in the stem and does not exercise skill 2."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are correct and verified, but the Part C rubric does not require recognizing monotonicity."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Part D refers to residuals that are not provided; Part C wording (\"greatest number of visitors in a week\") is ambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable for FRQ; rubric rows are consistent."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Redundant parts B and C and a giveaway part D make the task load unrepresentative of AP FRQs."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part calculator FRQ in topic 1.14. Students run cubic regression on a table, evaluate the model, find the maximum on a closed interval (an endpoint, since the data are increasing and convex), and justify model choice from residual patterns. Each step is routine, but the chain across table, equation, graph and residual representations suits a full mock. Concept depth is moderate, with no out-of-scope content or unfair arithmetic.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_precalculus-f06-k1",
+  "cellId": "ap_precalculus-f06",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:A:numeric,B:numeric,C:flagged",
+   "criterion_failed_scope_skill",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Least-squares cubic fit on t = 0 to 7, done by hand with centered u = t − 3.5 and the normal equations, then expanded back into powers of t. Not checked on a calculator.",
+     "final_answer": "C(t) = -0.106t^3 + 2.300t^2 - 7.816t + 35.194",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Substitute t = 8 into C: -54.385 + 147.228 - 62.526 + 35.194 = 65.51.",
+     "final_answer": "About 65.51 hundred visitors",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Set C'(t) = 0. The critical points are t ≈ 1.97 (a local minimum) and t ≈ 12.47, which is outside [0, 8]. So the maximum is at an endpoint: C(8) ≈ 65.51, which is larger than C(0) ≈ 35.19.",
+     "final_answer": "The maximum is about 65.51 hundred visitors, at t = 8 weeks.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The wording 'greatest number of visitors in a week' is unclear. I read it as the maximum value of C on [0, 8]."
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The cubic residuals are small with no pattern, so the cubic fits the data well. The curved quadratic residuals show a systematic pattern the quadratic does not capture.",
+     "final_answer": "Use the cubic model: its residuals are small and random, while the quadratic's curved residuals show it misses the trend.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The cubic regression key looks correct, but the item has a redundant Part C (endpoint maximum equal to Part B's value), an answer-giving Part D with the wrong skill, ambiguous wording, and unflagged extrapolation to t=8. I recommend rejecting it for scope and exam-suitability weaknesses.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Part D is a justification task (skill 3) whose answer is given in the stem. Part C is trivial (endpoint maximum) and duplicates Part B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The stated cubic key checks against the data (C(7) is about 61.6), so it is probably correct. The solver's different coefficients are likely a hand-calculation error. Part C's key is an endpoint maximum at t=8, so it duplicates Part B."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The table is complete, but the calculator note is embedded in the stimulus description. Part C's wording \"greatest number of visitors in a week\" is ambiguous. t=8 extrapolates beyond the data (the table ends at t=7) without any comment."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to this FRQ. There are no distractors."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Redundant points in Parts B and C. In Part D the stem hands the student the residual information, so the answer is given away and the part earns a point for restating the stem."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style regression item. Students must run cubic regression on a table, evaluate the model, find the maximum on a closed interval (the endpoint t=8 exceeds the local max near t=2, which is the key conceptual step), and justify model choice from residual patterns. All of it is in Unit 1 scope, with a table, equation, graph and residual representations. Reading is light, and the calculator does the heavy computation with no long hand arithmetic.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_precalculus-f06-k2",
+  "cellId": "ap_precalculus-f06",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Least-squares cubic fit, solved by hand with the time shifted to u = t - 3.5.",
+     "final_answer": "C(t) = -0.368t^3 + 1.677t^2 + 6.721t + 39.976",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Evaluate C(8) using the unrounded coefficients.",
+     "final_answer": "About 12.69 hundred visitors",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "C'=0 at t≈4.417, where C' changes from + to -; C there is 70.67, higher than both endpoint values (39.98 and 12.69).",
+     "final_answer": "About 70.67 hundred visitors at t ≈ 4.417 weeks",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The cubic's residuals are small and random, so it fits well; the quadratic's curved residuals show it misses part of the data's shape.",
+     "final_answer": "Cubic",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Parts A-C are correct and verified. Part D is a weak 1-point add-on: the stem states the residual patterns and the rubric requires the exact phrase \"residuals show no pattern\", so the answer is given away and the scoring is fragile. Failing on key/scoring only for Part D.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A-C fit topic 1.14 and skill 2. Part D is tagged skill 3 and is only weakly tied to the target skill."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Parts A-C keys are fine and verified. Part D's rubric requires specific wording and rewards restating the stem; scoring is brittle. Part D is tagged skill 3, off the target skill 2."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete. The wording \"greatest number of visitors in a week\" is slightly awkward."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Load is reasonable for a 6-point calculator FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part regression item in the style of the free-response section. It requires cubic regression on a table, evaluation of the model, locating a maximum on a graph or table, and justifying model choice from residuals. Each step is a standard calculator use or a single conceptual judgment, with no heavy arithmetic, ambiguity or out-of-scope content. The multiple representations (table, equation, graph, residuals) match the target skill and the topic scope.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_precalculus-f07-k0",
+  "cellId": "ap_precalculus-f07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Exponential regression via ln C linear fit: slope -0.10958, intercept 4.39677.",
+     "final_answer": "a ≈ 81.188, b ≈ 0.896; E(t)=81.188(0.896)^t",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "81.188*0.896^10",
+     "final_answer": "≈27.14 mg/L",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "b^t=0.5, t=ln2/0.10958",
+     "final_answer": "≈6.325 weeks",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Growth factor <1",
+     "final_answer": "Each week the concentration is multiplied by 0.896, so it drops about 10.4% of the previous week's value. The model never reaches 0; it only approaches 0 as t increases.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard exponential regression FRQ with prediction, half-life, and interpretation of the base. Values are verified and the part skills are appropriate. Minor flaws: the title and description are redundant, and D2 is chained to D1 in the rubric even though the two ideas are independent.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topics 2.5 and 2.6 are in scope and no calculus is involved."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Values verified. D2 requiring D1 is a minor over-dependency."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete. The calculator statement is repeated in the title and the description."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is appropriate for a calculator-required FRQ, and the 6 points match the stated format."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part exponential modeling task: calculator regression, evaluation, solving a^b^t = half of initial value, and interpreting the base b and the horizontal asymptote. Each step is routine for AP Precalculus Unit 2, but the full sequence across table, equation, and verbal representations matches full-mock exam-level practice. Reading and arithmetic loads are small, and nothing is out of scope.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_precalculus-f07-k1",
+  "cellId": "ap_precalculus-f07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "I fit a straight line to ln C against t. The slope was -0.24300 and the intercept was 4.59254, so a = e^4.59254 and b = e^-0.243.",
+     "final_answer": "E(t) ≈ 98.744·(0.784)^t, so a ≈ 98.744 and b ≈ 0.784",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "E(10) = 98.744·0.78427^10 = e^(4.59254 - 2.42996) ≈ 8.69.",
+     "final_answer": "About 8.69 mg/L",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Solve b^t = 0.5: t = ln 2 / 0.24300 ≈ 2.853.",
+     "final_answer": "About 2.85 weeks",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The growth factor is b = 0.784, which is less than 1. Each week the concentration is multiplied by 0.784, so it drops by about 21.6% of the previous week's amount. Because a·b^t > 0 for every t, the value only gets closer and closer to 0.",
+     "final_answer": "Each week the concentration is about 78.4% of the week before, so it falls by about 21.6% per week (exponential decay). The model never reaches 0. It only approaches 0, which acts as a horizontal asymptote.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A sound exponential regression and interpretation FRQ with verified keys and a consistent rubric. The only concerns are minor: the D2 dependency on D1 and the title wording. Pass.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Regression, prediction, half-life solve, and base interpretation all sit in topic 2.5. Each part is judged against its own skill, so the skill-3 explanation in Part D is fine."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All numeric keys were verified independently (a≈98.744, b≈0.784, E(10)≈8.69, t≈2.85). The rubric rows are consistent. Minor issue: D2 depends on D1 (requires_row_id), although the asymptote reasoning is independent of the base interpretation, so a student could be penalized twice.</key_scoring_notes>\n<parameter name=\"stimulus_expression_notes\">The table is complete, with labels, units, and 7 data rows. The title duplicates the description and embeds the calculator note in the title, which is a minor wording flaw."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ. Common_errors lists are empty, which is a minor gap."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "6 points with 1-point rows, a graphing calculator is used for the regression, and the task load is typical of the AP non-periodic modeling FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part exponential modeling FRQ. Requires calculator exponential regression, evaluating the model, solving an exponential equation for a half-life (independent of a), and interpreting the base as a percent change per week plus the asymptote behavior. Each part needs only one or two steps, the reading load is short, and the arithmetic is rounded and calculator-based. The difficulty comes from legitimate levers (representation choice, regression use, interpreting a feature), not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_precalculus-f07-k2",
+  "cellId": "ap_precalculus-f07",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Regressing ln C on t gives slope ≈ -0.24642 and intercept ≈ 4.60225. Exponentiating gives a and b.",
+     "final_answer": "E(t) ≈ 99.708·(0.782)^t, with a ≈ 99.708 and b ≈ 0.782",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "E(8) = 99.708·e^(-0.24642·8) ≈ 99.708·0.13927",
+     "final_answer": "About 13.886 mg/L (≈13.9 mg/L)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Solve b^t = 0.5, so t = ln 2 / 0.24642",
+     "final_answer": "About 2.813 weeks",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "b = 0.782 is the weekly growth factor. Since 0 < b < 1, the model shows exponential decay.",
+     "final_answer": "Each week the concentration is multiplied by 0.782, so it is about 78.2% of the previous week's level. That means it drops by about 21.8% per week. Because a·b^t > 0 for every t, the model says the concentration gets closer and closer to 0 but never actually reaches 0.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Content is in scope and the numbers check out, but the bundle deviates from the official FRQ structure and has a rubric weakness, so it fails on key/scoring and exam suitability.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Exponential regression, prediction, half-life and interpretation of the base fit topics 2.5 and 2.6. Part D is skill 3 (interpretation), which is acceptable because each part is judged against its own skill. No calculus content."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Numeric keys are consistent with the independent solver. Rubric problems: (1) Part A row A1 gives tolerance ±0.01 around a=99.708, which is tight but acceptable. (2) Row D1 requires both \"multiplied by b\" and \"percent decrease\" in one 1-point row, so it is a compound criterion. (3) Row D2 requires the response to say \"approaches 0\" and also gives a justification, but the dependency on D1 (requires_row_id) is unwarranted, because a student could earn D2 independently. (4) Part C's rubric says units_row true without a separate units element. (5) Part B's prediction at t=8 is an extrapolation beyond the data, and the item does not ask for any comment on that. These weaken scoring consistency."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete (t, C values, labels, units). The title and description duplicate the sentence \"A graphing calculator is required for these questions\", and the title reads as a caption, not a title. Minor."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ, so there are no distractors. The common_errors lists are empty, so no anticipated misconceptions are given for the scorer."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The AP Precalculus FRQ types are fixed at 6 points with 1-point rows. This item totals 6 points, but Part A has 2 points and Part D has 2 points, so its rows are not clearly the standard 1-point-per-row grain per part. It is labeled as a non-periodic modeling bundle, yet it has no model-validation part (e.g., residuals), which the official non-periodic modeling FRQ typically includes. The Part C and Part D tasks are minor and uneven. It is a plausible but not tightly matched format."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Typical AP Precalculus calculator FRQ on exponential modeling. Students must run exponential regression from a table, evaluate the model, solve an exponential equation for the half-life (using logs or a calculator intersection), and interpret the base b as a weekly decay factor, including the horizontal asymptote at 0. Each step is standard and in scope, with light computation (the calculator handles the regression) and short reading. The difficulty comes from choosing representations and from interpretation, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_precalculus-f08-k0",
+  "cellId": "ap_precalculus-f08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Least-squares fit of ln S on t: slope 0.34063, intercept 4.4906.",
+     "final_answer": "E(t) ≈ 89.176·(1.406)^t",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "E(9)=89.176·1.40583^9",
+     "final_answer": "≈1912.7 thousand",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "t=ln(1376/89.176)/ln(1.40583)",
+     "final_answer": "t ≈ 8.03 months",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Linear residuals go +,-,+, a curved pattern rather than random scatter, so the data are concave up. Successive month-to-month ratios are roughly constant (about 1.36 to 1.45), which suggests exponential growth.",
+     "final_answer": "Exponential model is more appropriate",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable: a calculator-required exponential regression bundle with parts of 2, 1, 1 and 2 points, which fits the official FRQ grain. All numeric answers were verified by the independent solver.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.5 regression, prediction, inverse use and model comparison. This is in scope and has no calculus. Part D is labeled skill 3, which is a mix of skills across parts, and the official FRQ format allows that."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The values of a, b, E(9) and t match the independent solver. Part D's key is defensible: the residual pattern is positive-negative-positive, which indicates curvature. The D2 rubric lists the required elements \"residual pattern\" and \"constant factor\" together. Accepting either justification, as the criterion text says, should be made explicit in the rubric."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and its labels are clear. The title text is redundant, but it does no harm. Part D describes the residuals in words instead of showing them, which is acceptable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The model answers are adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical: 6 points with a calculator and short responses. The calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part calculator item: exponential regression, prediction, solving for t, and justifying model choice from a residual pattern. Each part is a single standard technique or one conceptual step (U-shaped residuals imply a non-linear model). All of it is in Unit 2 scope. The reading load is low, the data are given to rounded values, and no part relies on long arithmetic or ambiguous wording. This matches a typical AP-style mock item.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_precalculus-f08-k1",
+  "cellId": "ap_precalculus-f08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Regressing ln S on t gives slope 0.16719 and intercept 3.69397, so a = e^3.69397 and b = e^0.16719.",
+     "final_answer": "E(t) = 40.204(1.182)^t, so a ≈ 40.204 and b ≈ 1.182",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "E(9) = 40.204·e^(9·0.16719) ≈ 40.204·4.503.",
+     "final_answer": "About 181.0 thousand subscribers",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Solve 40.204·b^t = 324: t = ln(324/40.204)/0.16719 ≈ 2.0868/0.16719.",
+     "final_answer": "t ≈ 12.48 months",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The residuals of L follow a pattern: positive at the ends and negative in the middle. This means the data curve upward (are concave up) and a straight line misses that curvature. The ratios between consecutive values stay roughly constant, about 1.14 to 1.23, which is the sign of exponential growth.",
+     "final_answer": "The exponential model is more appropriate. The linear residuals show a clear curved pattern rather than random scatter, and the data have roughly constant growth ratios.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound 6-point calculator FRQ on exponential regression, prediction, solving, and model comparison via residuals. Keys were code-verified; the solver's a=40.204 differs slightly from the key's 40.164, most likely a hand-arithmetic slip in the solver. Minor flaw: row D2 lists both 'residual pattern' and 'constant factor' as required elements although the criterion says 'or'; scorers should accept either. Overall acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The items fit topic 2.5 and the related topics 2.6 and 1.14. Each part is judged against its own skill. There is no calculus content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Regression values are code-verified. Row D2's required_elements list both justifications while the criterion says 'or'; this is a minor inconsistency, and either justification should earn the point."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is fully specified with labels and 7 rows. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The model answers are adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is typical of an AP Precalculus Part A free-response question. A graphing calculator is required and designated consistently."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ-style item on topic 2.5. It requires a calculator exponential regression, evaluating the model, solving an exponential equation via intersection or logarithms, and justifying model choice from a residual pattern (positive-negative-positive indicates curvature, so linear is inappropriate). Each step is routine on its own, but combining several representations (table, equation, residuals) fits a full mock. No heavy arithmetic, ambiguity, or out-of-scope content.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_precalculus-f08-k2",
+  "cellId": "ap_precalculus-f08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Linear regression on ln S vs t: slope 0.220425, intercept 3.700478",
+     "final_answer": "a ≈ 40.467, b ≈ 1.247; E(t)=40.467(1.247)^t",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "E(8)=e^(5.463878)",
+     "final_answer": "≈ 236.0 thousand subscribers",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Solve 40.467(1.247)^t=448",
+     "final_answer": "t ≈ 10.908 months",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Linear residuals show a curved (+,−,+) pattern, meaning the data are concave up; successive ratios are roughly constant (~1.21–1.29).",
+     "final_answer": "Exponential is more appropriate: the linear residuals form a curved pattern, and the data grow by a roughly constant factor each month.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard exponential regression, prediction, solving, and model-choice FRQ. The keys are verified, the tolerances cover rounded-parameter use, and the load is appropriate for a calculator-required FRQ of 6 points. Minor issues: D2 says \"or\" in its criterion but requires both elements, units_row is flagged on C without a separate units row, and the title duplicates the calculator sentence.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.5 with regression, prediction, and model validation using residuals, all in Unit 2 scope. Each part fits its own skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The values a=40.467, b=1.247, E(8)≈236.0, and t≈10.91 are confirmed by the solver. The tolerances cover results from the rounded model. The D2 required elements list both \"residual pattern\" and \"constant factor\" while the criterion says \"or\", a minor inconsistency."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is fully specified, with 7 points and clear labels. The wording is clear. The title redundantly repeats the calculator note."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so distractors do not apply; the model answers are adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The calculator is required and consistent. The task load is reasonable for 6 points."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part FRQ-style item covering standard Unit 2 skills: exponential regression from a table, evaluating the model, solving an exponential equation with a calculator, and justifying model choice from a residual pattern. Each part uses one routine technique, with a modest amount of reading. No long arithmetic, ambiguity or out-of-scope content. This matches typical full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_precalculus-f09-k0",
+  "cellId": "ap_precalculus-f09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Regress H on ln t: Sxx≈5.97726, Sxy≈40.69802",
+     "final_answer": "a ≈ 8.355, b ≈ 6.809; L(t)=8.355+6.809 ln t",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "8.354857+6.808805 ln25",
+     "final_answer": "≈30.272 feet",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "ln t=(33-8.354857)/6.808805≈3.6196",
+     "final_answer": "t ≈ 37.323 years",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Residuals negative, positive, negative mean the data are concave down; growth per year shrinks",
+     "final_answer": "The linear model's residual pattern (−,+,−) shows the data are concave down: the height increases at a decreasing rate (about 4.7 ft from year 1 to 2 vs about 0.6 ft/yr from year 12 to 16). A line assumes constant growth, but a logarithmic model is increasing and concave down, so it fits this pattern and leaves residuals with no clear pattern.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a calculator-required log regression FRQ (regression, prediction, equation solving, model justification) that fits topic 2.14. The data table is complete and the independent solver confirms every key value. Rubric rows are 1 point each. Part D's two rows are plausible, with D2 dependent on D1.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The dominant demand is logarithmic regression and its interpretation (2.14). Part D asks for justification, but its tag is acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The values match the solver and the expected_values. The 0.01 tolerance on a and b is acceptable. The wording of the D rubric elements is loose but workable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has 7 rows with labeled columns, so the data are complete. The title duplicates the description text, which is a minor issue."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no options. The model answer explains the reasoning in Part D."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is typical for a calculator-required FRQ. The 6 total points with 1-point rubric rows fit the stated format."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ on log regression: run LnReg on table data, evaluate the model, solve a + b ln t = 33 by inverse or intersection, and interpret a residual pattern as showing curvature. All steps are in Unit 2 scope. Difficulty comes from choosing the right representation and calculator technique, not from long arithmetic or heavy reading. Wording is clear and the context is minimal.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_precalculus-f09-k1",
+  "cellId": "ap_precalculus-f09",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "I regressed H on ln t using least squares: b = Sxy/Sxx ≈ 19.0515/5.9773 ≈ 3.187, and a = ȳ − b·x̄ ≈ 16.957 − 3.187(1.618) ≈ 11.800.",
+     "final_answer": "a ≈ 11.800, b ≈ 3.187, so L(t) = 11.800 + 3.187 ln t",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "L(25) = 11.800 + 3.187·ln 25 ≈ 11.800 + 3.187(3.2189) ≈ 22.060.",
+     "final_answer": "About 22.06 feet",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Solve 11.800 + 3.187 ln t = 24. This gives ln t ≈ 12.200/3.187 ≈ 3.8276, so t = e^3.8276 ≈ 45.95.",
+     "final_answer": "t ≈ 45.95 years (about 46 years)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The residual pattern (negative, then positive, then negative) is curved, not random. That means the data are concave down: the tree grows quickly at first and then more slowly, so the rate of change is decreasing. A line has a constant rate of change and misses this curve. A logarithmic model increases at a decreasing rate, so it matches the concave-down shape, and its residuals would be expected to show no clear pattern.",
+     "final_answer": "The linear model's residuals form a curved pattern, which means the data are concave down. Height increases at a decreasing rate, which matches a logarithmic model, not a line with a constant rate of change.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The math is correct and in scope. Weaknesses are the rubric rows (D1/D2 element logic, a units row in C with no units element) and a thin Part D that is essentially given away. Failing on caution.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The topic fits: log regression, prediction, solving, and model justification are all 2.14 content. Part D is labeled skill 3, which is acceptable for a mixed-skill FRQ."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The numeric keys are fine. The rubric has problems, though. Part C asks for a time but lists units_row true with no separate units element. The D1 required elements read like alternatives (\"rate of change decreases\", \"growth slows\") but have no alt_solutions or either/or logic. The D2 elements (\"residuals are curved\", \"linear model does not capture the curvature\") are vague and tied to the prompt wording. Part D's premise (the linear residual pattern) is stated rather than computed, so the reasoning is low-demand. The prediction at t=25 and the solve at 24 ft extrapolate well beyond the data (t=16 is the largest), and the item never asks about reasonableness. That is a missed validation step, though not an error."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and its spec is clear. The title and description repeat \"A graphing calculator is required for these questions\" awkwardly, and the title is just the description text."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The common_errors lists are empty."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The bundle has four types of 6 points and is not in the official 6-point FRQ structure: it mixes a 2-point regression part, two 1-point parts, and a 2-point explanation. The official calculator-FRQ rows are 1 point each, and the 2-point part A is split into two rows, which is fine. Estimated time of 17 minutes is only an internal reference. The wording of D, which states the residual pattern and asks for an explanation, is fairly easy."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Typical AP Precalculus free-response style item on logarithmic regression. It requires calculator LnReg entry, evaluating the model, solving a log equation (calculator intersection or algebra), and interpreting a residual pattern to justify the model choice. Each part is one or two steps and tests allowed levers: choosing the representation, using regression correctly, and reading residual structure. Reading and computation are light, the data are small and rounded, and the wording is unambiguous. The residual explanation is the main conceptual step.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_precalculus-f09-k2",
+  "cellId": "ap_precalculus-f09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "I regressed H on ln t by least squares: Sxx≈5.9773, Sxy≈18.3358, so b≈3.0676 and a≈11.9795.",
+     "final_answer": "a ≈ 11.980, b ≈ 3.068, so L(t) = 11.980 + 3.068 ln t",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "L(20) = 11.9795 + 3.0676·ln 20 ≈ 21.169",
+     "final_answer": "About 21.17 feet",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Solve 11.9795 + 3.0676 ln t = 23: ln t ≈ 3.5926, so t ≈ e^3.5926 ≈ 36.33",
+     "final_answer": "t ≈ 36.33 years",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The linear residuals go negative, then positive, then negative. That pattern means the data bend downward (concave down), which a straight line can't follow. The tree grows quickly at first and then more slowly, and a logarithmic model behaves the same way: it increases at a decreasing rate. So its residuals should be scattered with no pattern.",
+     "final_answer": "The linear residuals form a curved pattern (−, +, −), so the data are concave down: the tree grows fast early and then more slowly. A logarithmic model increases at a decreasing rate, so it matches this shape and should leave residuals with no pattern. That makes it more appropriate than a linear model.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria: the keys, the table and the load all hold up. Part D's rubric needs minor tightening before use.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item fits topic 2.14: log regression, prediction, solving with the model, and model justification via residuals. Part D's skill code is 3, but the bundle mixes skills across parts, and this is acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys for A to C are verified and the solver agrees. In Part D, the D2 required elements list 'residuals are curved', which is a reasonable paraphrase. D2 depends on D1, which is acceptable. Part D's wording could invite a model that merely restates the stem's residual pattern, but it still has a defensible rubric."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is fully specified, with 7 rows and labeled axes. The title repeats the calculator sentence, which is redundant but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to this FRQ. The rubric rows are clear, with numeric tolerances."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of a calculator-required FRQ with 6 points. Part D asks for a justification, which is normal. The est_minutes of 17 is only an internal reference."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP Precalculus free-response style item on logarithmic regression. Part A uses calculator LnReg, B evaluates the model, C solves a+b ln t = 23 via intersection or algebra, D interprets residual pattern (curved residuals indicate linear model is a poor fit; concave-down, increasing data with decreasing rate of change fits a log model). It requires moving between table, equation and residual interpretation, with one conceptual step in D. Arithmetic is calculator-based with rounded values, the reading load is low, and the wording is clear and in scope. This is typical full-mock difficulty, not basic and not advanced.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_precalculus-f10-k0",
+  "cellId": "ap_precalculus-f10",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Least squares fit with centered t",
+     "final_answer": "Q(t) = -4.776t^2 + 29.350t + 4.326",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Evaluate model at 2.75",
+     "final_answer": "about 48.919 m",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Vertex t=-b/(2a)",
+     "final_answer": "Max height about 49.416 m at t about 3.073 s",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Positive root of Q(t)=0",
+     "final_answer": "t about 6.289 s",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Mathematically sound and verified. Concerns: A2 bundles two values into one point, the ground-hit time extrapolates well beyond the data (acceptable under \"according to the model\"), and the load is slightly heavy. Failing on exam suitability on a strict reading.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Quadratic regression, evaluation, vertex and root of a fitted model are within topic 1.14 and skill 2."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys verified. Tolerances are reasonable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete. The title contains a stray calculator sentence."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The 17-minute estimate for a 6-point item is heavier than typical. Part D extrapolates far beyond the data range. Row A2 bundles two coefficients into one point, which makes scoring awkward."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part quadratic regression task: run regression from a table, evaluate the model, find the vertex (max height/time), and solve Q(t)=0 choosing the physically relevant root. Requires moving among table, equation, and graph with calculator use. Concepts are in scope and standard; the only conceptual step is picking the positive root. Arithmetic is calculator-based and reading load is low, so it is typical exam-level difficulty rather than basic or advanced.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_precalculus-f10-k1",
+  "cellId": "ap_precalculus-f10",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Least-squares quadratic fit computed with u = t − 1.5 (Σu²=7, Σu⁴=12.25, Σh=67.3, Σuh=0.4, Σu²h=35.4), then expanded back to t.",
+     "final_answer": "Q(t) ≈ −6.076t² + 18.286t + 1.933",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Substituted t = 2.75 into the model.",
+     "final_answer": "Q(2.75) ≈ 6.268 m",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Vertex at t = −b/(2a).",
+     "final_answer": "Maximum ≈ 15.691 m at t ≈ 1.505 s",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Positive root of Q(t) = 0.",
+     "final_answer": "t ≈ 3.112 s",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. It is a 6-point calculator FRQ on quadratic regression, prediction, vertex and zero, all within Unit 1 scope. The independent solver's values match the key, and the 7-row data table fully supports the questions.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Quadratic regression, model use, vertex and root are squarely in topic 1.14. No calculus content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All answers are unique and match the solver's. The tolerances are reasonable. Part B's unit is handled in the rubric row, and C2 depends on C1 appropriately."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with labels and units. The title and description carry a stray sentence about a graphing calculator, which is minor."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so distractors do not apply. The rubric rows are clear."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of a calculator-active FRQ part. The rubric rows are 1-point rows, consistent with the Part A format."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part free-response item on quadratic regression from a table. Students run regression on 7 points, evaluate the model, find the vertex for the maximum height and time, and solve Q(t)=0 choosing the physically valid root. Each part is a standard calculator step with one conceptual decision, such as interpreting the vertex or picking the positive root. The context is brief and the rounding is specified. The difficulty comes from legitimate sources: moving between table, equation and graph, and using the calculator correctly. This fits a full mock exam, though it is not especially deep.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_precalculus-f10-k2",
+  "cellId": "ap_precalculus-f10",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Least-squares quadratic fit, centered at t=1.5.",
+     "final_answer": "Q(t) = -6.105t^2 + 18.243t + 2.090",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Q(2.75)",
+     "final_answer": "about 6.091 m",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Vertex: t=-b/(2a)",
+     "final_answer": "Greatest height about 15.719 m at t ≈ 1.494 s",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Positive root of Q(t)=0",
+     "final_answer": "t ≈ 3.099 s",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The math and keys are sound, but the item deviates from the AP free-response format and has stimulus wording flaws, so it is not ready for exam use.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Quadratic regression, prediction, vertex and zero of a fitted model fit topic 1.14 and skill 2. No calculus content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are consistent with the solver. The C2 height 15.72 depends on C1 per the rubric (requires_row_id), which is acceptable. D requests units, but the rubric row D1 asks only for the time value. The A2 tolerance of ±0.01 is looser than the A1 tolerance of ±0.002, which is inconsistent."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The table description and title include the leaked instruction \"A graphing calculator is required for these questions\", which is a generator artifact. The title is a sentence fragment. The table data is complete. Part D should say to give the answer to three decimal places."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no distractors. The rubric has no common_errors, which is acceptable."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item is a single 6-point bundle of 4 parts with 2/1/2/1 points, which does not match the APPrecalc FRQ pattern of 6 points in parts with 1-point rows. The 1-point rubric rows are fine. The parts are mostly calculator button-pushing, which is a low-depth demand. The estimated 17 minutes is high for 6 points. The context (ball thrown upward) is a very standard scenario. The part-A rubric bundles b and c into one row, and the question for part A is a procedural regression."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part quadratic modeling task: regression from a table, evaluation, vertex via calculator, and solving Q(t)=0 (choosing the positive root in context). Needs correct calculator use and a few representation changes (table, equation, graph features), but each step is routine with low reading and computation load. Fits a full-mock FRQ-style item and is not conceptually advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_precalculus-f11-k0",
+  "cellId": "ap_precalculus-f11",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Amplitude = 99.8 - 98.6 = 1.2; lowest = 98.6 - 1.2.",
+     "final_answer": "Amplitude 1.2°F; lowest temperature 97.4°F",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "a=1.2, b=2π/24=π/12, c=18 (time of the maximum), d=98.6.",
+     "final_answer": "T(t)=1.2cos((π/12)(t−18))+98.6",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "(π/12)(24−18)=π/2 and cos(π/2)=0, so T = 98.6.",
+     "final_answer": "98.6°F",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Need cos((π/12)(t−18))=0.5, so (π/12)(t−18)=±π/3, which gives t−18=±4.",
+     "final_answer": "t=14 hours (2 PM) and t=22 hours (10 PM)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Mathematically correct and in scope. The B2 rubric row demands exactly \"(t-18)\" with no alternative solutions, so equivalent valid cosine forms with a different shift c, or a sine form, would be wrongly denied. The rubric needs alt_solutions or an equivalence-based criterion.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits topic 3.7 and the related topics 3.5 and 3.6 at skill 1. No calculus."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part B is not unique: other valid forms exist, such as c = -6 or a negative amplitude with c = 6. B2 requires \"(t-18)\" with empty alt_solutions, so the rubric is too rigid."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Text stimulus is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to free response."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Reasonable load, no calculator needed, exact values."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part sinusoidal modeling: read amplitude/midline/period from context, build a cosine model, evaluate at a special angle, and solve a trig equation with special angles over one period. Numbers are clean and no calculator is needed. The hardest step is part D, which requires the two solutions of cos(theta) = 1/2 and a check against the interval. Typical of an AP free-response question, above basic learning but not beyond exam scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_precalculus-f11-k1",
+  "cellId": "ap_precalculus-f11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Amplitude = max − midline = 99.8 − 99 = 0.8. Minimum = midline − amplitude = 99 − 0.8 = 98.2.",
+     "final_answer": "Amplitude 0.8°F; lowest temperature 98.2°F",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "a = 0.8. b = 2π/24 = π/12. The maximum is at t = 16, so with cosine c = 16. The midline gives d = 99.",
+     "final_answer": "T(t) = 0.8cos((π/12)(t − 16)) + 99",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "At t = 22, the angle is (π/12)(22 − 16) = π/2. cos(π/2) = 0, so T = 99.",
+     "final_answer": "99°F",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Set T = 99.4, so cos((π/12)(t − 16)) = 0.5. Then (π/12)(t − 16) = ±π/3, so t − 16 = ±4. This gives t = 12 and t = 20. Adding or subtracting 24 puts the other solutions outside 0 to 24.",
+     "final_answer": "t = 12 hours (noon) and t = 20 hours (8 PM)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. Every part has a unique correct answer, and the independent solver reached the same values. The text stimulus gives the maximum, its time, the period and the midline, which is everything the parts need. The \"first 24 hours\" window in Part D makes t=12 and t=20 the only solutions. Rows are 1-point and consistent, and the no-calculator work uses exact angles (π/3, π/2).",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item covers sinusoidal modeling (topic 3.7), with 3.5 and 3.10 in the equation and evaluation parts. It requires no calculus. The dominant demand is procedural and symbolic fluency."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are correct: amplitude 0.8, minimum 98.2, T(t)=0.8cos(π/12(t-16))+99, T(22)=99, and solutions t=12 and t=20. The rubric rows are consistent with the model answers. The total is 6 points (1+2+1+2), and the part point values vary across parts."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus is complete and clearly worded, and an empty data object is acceptable for a text-only stimulus. Part B asks for the cosine form, so the answer is unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The rubric rows are adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is reasonable for a non-calculator periodic-context FRQ, with no needless arithmetic."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part sinusoidal modeling item with clean numbers. It requires reading amplitude and midline, building a cosine model with period and phase, evaluating at a special angle, and solving a trig equation with two solutions in one period. Each step is standard and uses special angles, with no heavy arithmetic or reading. This is typical of full-mock free-response practice.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_precalculus-f11-k2",
+  "cellId": "ap_precalculus-f11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Amplitude = 98.8-98 = 0.8; min = 98-0.8",
+     "final_answer": "Amplitude 0.8°F; lowest temperature 97.2°F",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "a=0.8, b=2π/24=π/12, max at c=17, d=98",
+     "final_answer": "T(t)=0.8cos((π/12)(t-17))+98",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "(π/12)(6)=π/2, cos=0",
+     "final_answer": "98°F",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "cos((π/12)(t-17))=1/2 → t-17=±4 (mod 24)",
+     "final_answer": "t = 13 hours and t = 21 hours",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, unique answers in all four parts (amplitude 0.8 and minimum 97.2; the cosine model; T(23)=98; t=13 and 21). Exact-angle work fits no-calculator use, and the 6-point split with 1-point rubric rows fits the periodic-modeling FRQ type. Minor looseness in the D1 rubric element (c left unspecified), but the item is acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item is on topic 3.7 and its related topics. Procedural fluency dominates and the angles are exact."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys were verified. Part D has exactly two solutions in [0,24). The D1 required element leaves c unspecified, which is a minor looseness."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and clearly worded; an empty data object is fine for text."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common_errors lists are empty, which is acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is 6 points over four parts with no calculator needed, and the reading and computation load is reasonable."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part sinusoidal modeling item. Requires extracting amplitude and minimum from max and midline, building a cosine model with period-to-b conversion and a phase shift from the max location, evaluating at a special angle, and solving a trig equation (cos = 1/2) with two solutions in one period. Each step uses standard special-angle values and simple arithmetic, with low reading load. It is typical of exam-level free-response modeling and goes beyond a basic single-skill exercise, but it needs no extended reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_precalculus-f12-k0",
+  "cellId": "ap_precalculus-f12",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Amplitude = (17-9)/2 = 4. Midline = (17+9)/2 = 13.",
+     "final_answer": "Amplitude 4 hours; midline d = 13",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "b = 2π/12 = π/6. The sine reaches its maximum when b(t-c) = π/2, so t - c = 3 at t = 7. That gives c = 4.",
+     "final_answer": "d(t) = 4 sin((π/6)(t-4)) + 13",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "The math works, but the context is odd: t=7 is October 1, which is not when a northern town has its longest day. This does not change any answer."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "d(5) = 4 sin(π/6) + 13 = 4(1/2) + 13 = 15.",
+     "final_answer": "15 hours",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Solve 4 sin((π/6)(t-4)) + 13 = 15, so sin((π/6)(t-4)) = 1/2. On 0≤t<12, (π/6)(t-4) runs from -2π/3 up to (but not including) 4π/3. In that interval the solutions are π/6 and 5π/6, giving t = 5 and t = 9.",
+     "final_answer": "t = 5 and t = 9",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The math and keys are correct and unique: amplitude 4, midline 13, d(t)=4sin(pi/6(t-4))+13, d(5)=15, and t=5 and 9. The scope fits 3.7 with 3.5/3.6. The problem is the stimulus: t=0 is March 1, so the longest day at t=7 is October 1, which contradicts the stated northern-town context. Part D1's rubric element also uses a symbolic c, which is sloppy. Failing on stimulus realism under the fail-when-unsure policy.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Within Unit 3 (3.7, 3.5, 3.6). Parts B and D carry the target skill; A and C are lighter."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys verified and unique. B2 is well defined because the prompt says c is the smallest nonnegative value. The D1 required element uses a symbolic c, which is minor."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Scenario is physically inconsistent: with t measured from March 1, a maximum at t=7 is October 1, not near the northern summer solstice. A shift of about 3.7 months, or a different start date, would fix it. The data object is empty, but the text is fully specified."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ with no options; no common errors are listed in the rubric, which is acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Exact-value, no-calculator, 6 points with 1-point rows. Load is typical."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard sinusoidal context model: amplitude and midline from extremes, phase shift from the max location, evaluation at a special angle, and a trig equation on a restricted interval. It requires a few conceptual steps (the sine-vs-max phase shift, tracking the interval of the argument to avoid missing or adding solutions). Arithmetic is clean and the reading load is short, so it suits a full mock exam rather than basic learning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 400
+  }
+ },
+ {
+  "key": "ap_precalculus-f12-k1",
+  "cellId": "ap_precalculus-f12",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Amplitude = (13-9)/2 = 2. Midline = (13+9)/2 = 11.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Amplitude 2 hours; midline d = 11"
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "b = 2π/12 = π/6. Sine reaches its maximum when b(t-c) = π/2, so 7 - c = 3 and c = 4.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "d(t) = 2 sin((π/6)(t-4)) + 11"
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "d(5) = 2 sin(π/6) + 11 = 2(1/2) + 11 = 12.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "12 hours"
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Need sin((π/6)(t-4)) = 1/2, so (π/6)(t-4) = π/6 or 5π/6 (plus multiples of 2π). That gives t-4 = 1 or 5, so t = 5 or t = 9 in [0,12).",
+     "ambiguous_or_flawed": false,
+     "final_answer": "t = 5 and t = 9"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The sinusoidal daylight model works out by hand with exact values (amplitude 2, midline 11, b = π/6, c = 4, d(5) = 12, solutions t = 5 and t = 9). The answers are unique and the rubric rows are consistent. Minor issues: the units of t (months) are only implied, and rubric row D1 is slightly redundant. Neither is serious enough to fail the item.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part sinusoidal modeling: amplitude/midline, phase shift from a maximum (sine needs c=4), evaluation at a special angle, and solving sin=1/2 on a bounded interval. Requires a few conceptual steps but only special-angle arithmetic and short reading. Typical full-mock difficulty with no unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_precalculus-f12-k2",
+  "cellId": "ap_precalculus-f12",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Amplitude = (14-8)/2 = 3. Midline = (14+8)/2 = 11.",
+     "final_answer": "Amplitude 3 hours; midline d = 11",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "b = 2π/12 = π/6. The maximum happens when b(7-c) = π/2, so 7-c = 3 and c = 4.",
+     "final_answer": "d(t) = 3 sin((π/6)(t-4)) + 11",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "d(5) = 3 sin(π/6) + 11 = 3(1/2) + 11 = 12.5.",
+     "final_answer": "12.5 hours",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Solve sin((π/6)(t-4)) = 1/2. For 0 ≤ t < 12, the angle runs from -2π/3 up to (not including) 4π/3, so it equals π/6 or 5π/6. That gives t = 5 or t = 9.",
+     "final_answer": "t = 5 and t = 9",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "The math works, but the setting is unrealistic: a maximum at t=7 (October) does not fit a northern town. This does not affect the answers."
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The math is correct and verified: amplitude 3, midline 11, d(t)=3sin(pi/6(t-4))+11, d(5)=12.5, and solutions t=5 and t=9. The item is in scope for 3.7 with exact, no-calculator work. One minor issue: a maximum at t=7 (October) is unrealistic for a northern town, but this does not affect the answers.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item fits topic 3.7 and the related topics 3.5 and 3.6, and it relies on procedural fluency with exact angles."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The answers are unique. c=4 is the smallest nonnegative shift. The rubric rows are consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete. The context is slightly unrealistic, since the longest day falls in October for a northern town."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ. The rubric lists no common errors, which is a minor omission."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is reasonable for a no-calculator FRQ, with exact values throughout."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part sinusoidal modeling: amplitude and midline from the max and min, b from the period, and the phase shift from the max location. It then evaluates at a special angle and solves sin θ = 1/2 for two solutions in one period. The numbers are clean and no calculator is needed. The only real conceptual steps are the phase shift from the max and finding the second solution, and both fit the allowed levers.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 400
+  }
+ },
+ {
+  "key": "ap_precalculus-f13-k0",
+  "cellId": "ap_precalculus-f13",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "radius gives amplitude, center gives midline, revolution time gives period",
+     "final_answer": "Amplitude 40 ft; midline h=45 ft; period 30 min",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "starts at minimum so a=-40; b=2π/30",
+     "final_answer": "h(t) = -40cos(πt/15) + 45",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "-40cos(π/3)+45 = -20+45",
+     "final_answer": "25 feet",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "cos(πt/15)=-1/2 → πt/15=2π/3, 4π/3",
+     "final_answer": "t = 10 and t = 20 minutes",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, unique answers; exact-value, no-calculator work in Unit 3 sinusoidal modeling. Minor rubric weaknesses: B2 is needlessly dependent on B1, and equivalent forms such as pi/15 are not listed as alternatives.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All parts stay in Unit 3 (3.7, 3.5, 3.6) and the dominant demand is procedural fluency."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The answers are verified and unique. The B2 dependency on B1 is unnecessary, and alt_solutions should list pi*t/15 as an equivalent form."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and clear and needs no figure."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no distractors; the model answers show the work."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light, the values are exact, and the item is no-calculator, consistent with a Modeling a Periodic Context FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part sinusoidal modeling item. It requires recognizing the negative cosine from the lowest-point start, computing b = 2π/30, evaluating at a special angle, and solving a trig equation on a restricted domain with unit-circle values. Arithmetic is light and the wording is clear. This is typical full-mock difficulty and goes beyond basic recall.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_precalculus-f13-k1",
+  "cellId": "ap_precalculus-f13",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Amplitude=radius, midline=center height, period=18",
+     "final_answer": "Amplitude 25 ft; midline h=28 ft; period 18 min",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Starts at minimum so a=-25, b=2π/18",
+     "final_answer": "h(t) = -25cos(πt/9) + 28",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "cos(π/3)=1/2, 28-12.5",
+     "final_answer": "15.5 feet",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "cos(πt/9)=-1/2 → πt/9=2π/3, 4π/3",
+     "final_answer": "t = 6 and t = 12 minutes",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The Ferris wheel FRQ is correct, in scope, fully specified, suitable for a no-calculator setting, and passes all criteria.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A-D cover sinusoidal modeling (3.7), evaluation at exact angles, and solving a trig equation (3.5/3.6), all in Unit 3 scope. Skill 1 (procedural and symbolic fluency) fits. No calculus content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are unique and correct: amplitude 25, midline 28, period 18; h(t) = -25cos(2πt/18) + 28; h(3) = 15.5; the equation cos = -1/2 gives t = 6 and 12 on [0,18). The independent solver agrees. Rubric rows are 1 point each and total 6. A common equivalent form such as -25cos(πt/9)+28 should be accepted by the B2 row. The B2 criterion lists '2*pi/18' as the required element, which graders should treat as equivalent to π/9."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem gives the radius, center height, period and starting position, which is everything needed. The text-only stimulus has an empty data object, and that is appropriate because no figure is rendered. The wording is clear. Part B says to use the cosine form, so a negative amplitude is expected."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common error of using a positive cosine is noted in row B1."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for a no-calculator periodic-modeling FRQ. All values are exact and computable by hand: cos(π/3) = 1/2 and the equation cos = -1/2. The 6 points in four parts with 1-point rows fit the stated format."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part sinusoidal modeling item. It requires reading amplitude, midline and period from context, and recognizing the negative cosine for a start at the minimum. It also requires b = 2π/18, evaluation at a special angle, and a trig equation with two solutions in one period. Each step is routine and the numbers are clean, but the combined reasoning and the sign and phase decision fit full-mock level rather than basic learning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_precalculus-f13-k2",
+  "cellId": "ap_precalculus-f13",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "radius gives amplitude; center height gives midline; revolution time is period",
+     "final_answer": "Amplitude 25 ft, midline h=28 ft, period 24 minutes",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "starts at minimum so a=-25; b=2π/24",
+     "final_answer": "h(t) = -25cos(πt/12) + 28",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "cos(π/3)=1/2, 28-12.5",
+     "final_answer": "15.5 feet",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "cos(πt/12)=-1/2 gives πt/12=2π/3, 4π/3",
+     "final_answer": "t = 8 and t = 16 minutes",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, exact-value periodic modeling FRQ with 1-point rubric rows totaling 6, no calculator needed. The answers are unique and consistent with the stem.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.7 sinusoidal modeling with exact angles; procedural fluency fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All answers verified: h(0)=3, h(4)=15.5, t=8 and 16. Rubric rows are consistent. A minor point is that B1 elements may not match an equivalent written form such as 28-25cos."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete: radius, center height, period and start position are all given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so distractors are not applicable. The common error of using a positive cosine is noted."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is typical for a no-calculator periodic-context FRQ, and the values are exact."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard sinusoidal modeling from context. Needs the sign of a for a minimum start, b = 2pi/period, evaluation at a special angle, and a trig equation with two solutions in one period. All values are special angles with light arithmetic, and the scope and wording are clear.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 270
+  }
+ },
+ {
+  "key": "ap_precalculus-f14-k0",
+  "cellId": "ap_precalculus-f14",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Released from 10 cm below rest, oscillates about rest position.",
+     "final_answer": "Amplitude 10 cm; midline d=0",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "a=10 (starts at max, downward positive), b=2π/12=π/6.",
+     "final_answer": "d(t)=10cos(πt/6)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "10cos(π/4)=5√2.",
+     "final_answer": "5√2 cm (below rest)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "cos(πt/6)=1/2 → πt/6=π/3 → t=2.",
+     "final_answer": "t=2 seconds",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Math is correct and the key is unique: amplitude 10, midline 0, d(t)=10cos(πt/6), d(1.5)=5√2, first time d=5 is t=2. The task is no-calculator with exact values, in scope for topic 3.7 (with 3.5 and 3.6 for the equation part), and uses procedural fluency throughout. Minor issues: the D1 rubric element is generic rather than item-specific, and B2 would reject an equivalent negative-b form even though the stem allows it. Neither changes the key.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Sinusoidal modeling and an exact-angle trigonometric equation. All content is within Unit 3, with no calculus. Procedural fluency is the dominant skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are correct and unique given the stem. The rubric rows are 1-point and consistent with the model answers. The D1 element text is generic, and a negative-b equivalent form would be missed by B2, but both are minor."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stem fully specifies the context (starting displacement, period, sign convention). The empty data object is fine because no figure or table is needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. Common errors are not listed, but that is acceptable for this format."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Exact values only, so hand computation works with no calculator. The task load is light and the 6-point total matches the fixed free-response grain."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four short parts on one sinusoidal context: amplitude/midline, b=2π/12, evaluating cos(π/4), solving cos=1/2 for the first positive t. All use standard unit-circle values with no heavy arithmetic. The multi-part structure and the context-to-equation translation make it suitable for a full mock rather than basic learning, but nothing is advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_precalculus-f14-k1",
+  "cellId": "ap_precalculus-f14",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:D:numeric",
+   "criterion_failed_key_scoring",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Released from 6 cm below rest, so the maximum displacement is 6 and the motion is centered on rest position.",
+     "final_answer": "Amplitude 6 cm; midline d = 0",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "a = 6 since d(0) = 6 with downward positive; b = 2π/4 = π/2.",
+     "final_answer": "d(t) = 6cos(πt/2)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "6cos(π/4) = 6·√2/2",
+     "final_answer": "3√2 cm (below rest position)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "cos(πt/2) = 1/2 gives πt/2 = π/3, so t = 2/3",
+     "final_answer": "t = 2/3 s",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The mathematics is correct and in scope, but Part D's key and rubric use a decimal (0.666667) in a no-calculator item and the rubric refers to an undefined P. The key should be the exact value 2/3 and the rubric wording should be fixed.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part D key and rubric require the decimal 0.666667 in a no-calculator item. The exact answer 2/3 should be the key. The D1 rubric element uses an undefined symbol P. Equivalent exact forms (e.g. 3√2) in Part C should be explicitly accepted."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "A no-calculator item with a six-digit decimal answer is inconsistent with the calculator designation. The task load is otherwise typical."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part sinusoidal modeling item. Students read amplitude and midline from context, find b from the period, choose a positive cosine because the displacement starts at its maximum, evaluate at a special angle (pi/4), and solve cos(theta)=1/2 for the first positive solution. Each step is standard and in scope, with exact values and no heavy computation. The conceptual demands are the sign and phase choice and picking the first solution. That is more than a one-step basic-learning item but well short of advanced extension.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_precalculus-f14-k2",
+  "cellId": "ap_precalculus-f14",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:D:numeric",
+   "criterion_failed_key_scoring",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Starts at max 4 below rest, oscillates about rest position.",
+     "final_answer": "Amplitude 4 cm; midline d=0",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "a=4, b=2π/4=π/2.",
+     "final_answer": "d(t)=4cos(πt/2)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "4cos(π/4)=2√2.",
+     "final_answer": "2√2 cm (below rest)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "cos(πt/2)=1/2, πt/2=π/3.",
+     "final_answer": "t=2/3 s",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The mathematics is sound, but the no-calculator key for part D is a six-digit decimal instead of the exact 2/3, and the rubric rows omit equivalent forms (pi/2, 2*sqrt(2), 2/3). It fails key/scoring and exam suitability until the key and alternatives are fixed.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Math is correct, but the rubric for D requires the decimal 0.666667 in a no-calculator part; the exact value 2/3 should be the key. Rubric rows list no alt_solutions: pi/2 for B, 2*sqrt(2) for C, and 2/3 for D are equivalent and would be wrongly rejected under strict matching. The D1 element 'cos(2 pi t / P) = 1/2' uses a generic P and is not tied to this item's equation."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "A decimal answer in a no-calculator FRQ is inconsistent with the designation (exact answers required). Part A is trivial."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard sinusoidal context modeling: read amplitude/midline, find b from the period, evaluate at a special angle (pi/4), and solve cos(pi t/2)=1/2 for the first positive time. Requires several procedural steps across context, equation, and unit-circle values, but the numbers are clean and the scope is appropriate. Suitable for a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_precalculus-f15-k0",
+  "cellId": "ap_precalculus-f15",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Midline (21+9)/2=15; amplitude (21-9)/2=6; half period 6 h so period 12 h",
+     "final_answer": "Midline d=15 ft, amplitude 6 ft, period 12 hours",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Maximum at t=4, so use cosine with c=4; b=2π/12=π/6",
+     "final_answer": "d(t)=6cos((π/6)(t-4))+15",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "6cos(π/2)+15=15",
+     "final_answer": "15 feet",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "cos((π/6)(t-4))=1/2 gives t-4=±2+12n; in [0,12], t=2 and t=6",
+     "final_answer": "t=2 hours and t=6 hours",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, unique answers; exact-form, no-calculator work; 6 points in 1-point rows; within unit 3 scope. Minor note: part B rubric does not list equivalent phase shifts (c = 16 or c = -8), but the answer is otherwise fine.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topics 3.7, 3.5, 3.6 are covered with procedural fluency; all content is in scope for unit 3."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified midline 15, amplitude 6, period 12, d(7)=15, and t=2 and 6 in [0,12]. Part B alternative cosine shifts are not listed, which is a minor weakness."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus fully specifies the high and low tides; wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Hand-computable exact values; load is typical of a no-calculator periodic-context FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard sinusoidal modeling item. Features come from max/min (midline 15, amplitude 6, period 12), then the cosine model with phase shift 4, evaluation at t=7, and a solve with a special angle (cos = 1/2). It uses several connected steps and a context-to-equation representation change, but there is no heavy computation or reading, and no ambiguity.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_precalculus-f15-k1",
+  "cellId": "ap_precalculus-f15",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:D:flagged",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Midline is (22+14)/2 = 18. Amplitude is (22-14)/2 = 4. High to low takes 6 hours, so the period is 12 hours.",
+     "final_answer": "Midline d=18 ft; amplitude 4 ft; period 12 hours",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "b = 2π/12 = π/6. The cosine peaks at the high tide, so c = 2.",
+     "final_answer": "d(t)=4cos((π/6)(t-2))+18",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "d(5) = 4cos(π/2) + 18 = 4(0) + 18 = 18.",
+     "final_answer": "18 feet",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Set d = 20, so cos((π/6)(t-2)) = 1/2. Then (π/6)(t-2) = ±π/3 + 2πn, so t = 2 ± 2 + 12n. This gives t = 0, 4 and 12 in [0,12].",
+     "final_answer": "t = 4 hours is the only time strictly inside (0,12). If both endpoints are counted, the times are t = 0, 4 and 12 hours. Either way it is not exactly two.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The prompt asks for two times, but d = 20 happens at t = 0, 4 and 12. That is three times on the closed interval [0,12] and one time on the open interval (0,12). No reading of 'first 12 hours' gives exactly two."
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "wrong_key",
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Reject: Part D says there are two times with depth 20 ft in the first 12 hours, but t=0, 4 and 12 all satisfy it (three on [0,12], one on (0,12)), so the key is not unique and the interval condition is missing. Parts A-C are correct.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Content fits Unit 3 sinusoidal modeling and symbolic fluency."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part D asks for 'the two times' in the first 12 hours at which d=20, but d(t)=20 at t=0, 4 and 12. On the closed interval [0,12] there are three solutions, on the open interval only one. The key (0 and 4) is not uniquely defensible. Part B rubric also lacks alternative equivalent forms (c=14, sine form)."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The interval in Part D is ambiguous: 'first 12 hours after midnight' does not state whether the endpoints are included, and the claim of exactly two times is false under either reading."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not an MC item; no distractors apply. Rubric lists no common errors."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Load is reasonable, but the structure is 6 points as 2/2/1/1 with a flawed final part, so it is not exam-ready."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Routine sinusoidal modeling: midline, amplitude and period read from max and min, then the cosine form, an evaluation at a special angle, and a standard cos θ = 1/2 equation. Arithmetic is small and uses integers. Reasoning is short and the context is brief. Part D has an ambiguity: the interval endpoints are not specified, so 'two times' could be {0, 4} or {4, 12}, or three times if the interval is closed. The prompt should state the interval explicitly, for example 0 ≤ t < 12. The ambiguity does not make the item harder, but it should be fixed before use.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_precalculus-f15-k2",
+  "cellId": "ap_precalculus-f15",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Midline (16+8)/2=12; amplitude (16-8)/2=4; going from high to low tide takes half a period, so period=2*6=12 h.",
+     "final_answer": "Midline y=12 ft, amplitude 4 ft, period 12 hours",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "b=2π/12=π/6. The cosine has its maximum at t=3, so c=3.",
+     "final_answer": "d(t)=4cos((π/6)(t−3))+12",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "d(6)=4cos(π/2)+12=12.",
+     "final_answer": "12 feet",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Need cos((π/6)(t−3))=1/2, so (π/6)(t−3)=±π/3+2πn. That gives t−3=±2+12n, so t=1 or t=5 for 0≤t≤12.",
+     "final_answer": "t=1 hour and t=5 hours (1 AM and 5 AM)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and fully determined by the stem. The no-calculator values are exact, the rubric rows are 1 point each and consistent with the model answers, and the task load is typical.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Sinusoidal context modeling (3.7) with an exact trigonometric equation (3.5). It stays within Unit 3 and fits procedural fluency."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The answers (12, 4, 12 hours, 4cos(π/6(t−3))+12, 12 ft, t = 1 and 5) are unique and verified. Rows are consistent with the model answers."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus fully specifies the high and low tide times and depths. An empty data object is acceptable for a text-only stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable for a free-response item; no options are present."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 6 points are split 2/2/1/1, all values are exact, and no calculator is needed. The load is reasonable for a no-calculator periodic-context free-response item."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part sinusoidal modeling: find midline, amplitude and period from high/low tide data, build a cosine model, evaluate it, and solve a trig equation using a special angle (cos = 1/2). Concepts are standard for Unit 3. The main conceptual steps are recognizing that the high-to-low interval is half a period and finding all solutions within the 12-hour window. Arithmetic is light and uses exact values, with no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_precalculus-f16-k0",
+  "cellId": "ap_precalculus-f16",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "3^(3x+1)=3^10 so 3x+1=10",
+     "final_answer": "x=3",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(x-1)(x-2)=6 -> x^2-3x-4=0 -> x=4 or -1; -1 is not in the domain (need x>2); check: ln3+ln2=ln6",
+     "final_answer": "x=4",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Swap x and y and solve: (x-4)/3=e^(2y-1), so 2y-1=ln((x-4)/3)",
+     "final_answer": "f^{-1}(x) = (1 + ln((x-4)/3))/2, x>4",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "All three parts are correct, exact, and in scope for topic 2.13 (with 2.8/2.10 for the inverse). The rubric rows are 1-point rows, and the task fits the no-calculator Symbolic Manipulations format. The only weaknesses are minor: row B2 does not explicitly require rejecting x = -1, and the C2 required elements are format-dependent, so a grader would need to accept equivalent forms.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The dominant demand is procedural and symbolic fluency in solving exponential and logarithmic equations and finding an inverse. There is no calculus."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys verified: x=3, x=4, and the inverse (1/2)(ln((x-4)/3)+1). The rubric rows are consistent with the model answers."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "A text-only stimulus is adequate. The parts are fully specified and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The calculator designation is consistent (no calculator), the answers are exact, and the load is reasonable. Recognizing 59049 as 3^10 is a mild hand computation."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Three standard procedural tasks: combine powers and match bases (needs 59049 = 3^10), solve a log equation with a quadratic and reject the extraneous root via the domain, and find an inverse of an exponential function. Each part needs 3-4 routine steps with one conceptual check (domain). Reading is minimal and the arithmetic is light, so this suits a full mock exam rather than basic learning.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 10,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_precalculus-f16-k1",
+  "cellId": "ap_precalculus-f16",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Divide by 5: 2^{2x}=4=2^2, so 2x=2.",
+     "final_answer": "x = 1",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Combine the logs: (x-2)(x-4)=3, so x^2-6x+5=0 and x=1 or x=5. The domain needs x>4, so x=1 is rejected. Check x=5: ln3+ln1=ln3.",
+     "final_answer": "x = 5",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Swap x and y and solve: (x-4)/3=e^{2y-1}, so 2y-1=ln((x-4)/3). The domain of the inverse is x>4.",
+     "final_answer": "f^{-1}(x) = (1 + ln((x-4)/3))/2, for x>4",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "All three parts are correct, exact, no-calculator and in Unit 2 scope. The rubric rows are consistent 1-point rows and the item is a reasonable 6-point symbolic-manipulation FRQ.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Three standard procedural parts: an exponential equation solved by matching bases, a log equation that needs combining logs, solving a quadratic and a domain check, and finding an inverse of a transformed exponential. The only conceptual step is rejecting the extraneous root by the log domain. The arithmetic is minimal and the reading load is low, so the difficulty comes only from legitimate sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 10,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_precalculus-f16-k2",
+  "cellId": "ap_precalculus-f16",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "2^{2x}=16=2^4, so 2x=4",
+     "final_answer": "x=2",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(x-2)(x-4)=3 gives x^2-6x+5=0, so x=1 or 5; x=1 makes the log arguments negative; x=5 gives ln3+ln1=ln3",
+     "final_answer": "x=5",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Swap x and y: x-1=3e^{2y-1}, so 2y-1=ln((x-1)/3)",
+     "final_answer": "f^{-1}(x) = (1 + ln((x-1)/3))/2, for x>1",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "All three parts are correct, exact-form, and in scope for topic 2.13 (with 2.8 and 2.12 for the inverse), using skill 1. The domain check in B and the inverse in C are sound. The only weakness is that row C2 lists literal elements (ln, +1, /2), so graders should accept equivalent forms of the inverse. This is minor.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Procedural and symbolic fluency on exponential and logarithmic equations and on finding an inverse. No calculus content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A: x=2. B: x=5, with x=1 rejected because it is outside the domain x>4. C: the inverse is correct. Rubric rows are 1 point each. C2's required elements are rigid, so equivalent forms of the inverse should be accepted."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text-only stimulus is adequate because the parts contain all the needed information. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common_errors lists are empty, which is acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "All parts are doable by hand without a calculator. The load is reasonable for a 6-point symbolic manipulation FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Three standard procedural tasks with clean numbers: solving an exponential equation by isolating and matching bases, solving a log equation with a quadratic and rejecting an extraneous root via the domain, and finding an inverse of an exponential function. The only conceptual lever is the log domain check, and the inverse takes several algebraic steps. No unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 10,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 330
+  }
+ },
+ {
+  "key": "ap_precalculus-f17-k0",
+  "cellId": "ap_precalculus-f17",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "3*3^(x-1)=3^x=81=3^4",
+     "final_answer": "x=4",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "x(x-1)=56, (x-8)(x+7)=0; x=-7 not in domain (need x>1); x=8 works: log3 8+log3 7=log3 56",
+     "final_answer": "x=8",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "power and quotient rules",
+     "final_answer": "ln(x^2/y)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "swap x and y, then solve: log3(y-1)=(x-2)/3",
+     "final_answer": "g^{-1}(x)=3^{(x-2)/3}+1",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "All four parts are mathematically correct and in scope for topic 2.13 and skill 1. The set is no-calculator with exact answers, and the rubric rows are 1-point rows summing to 6. Minor wording quirks (the \"1 ln y\" form and the \"y^1\" element in Part C) do not affect correctness.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All parts are symbolic fluency within Unit 2: exponential equation, logarithmic equation with domain check, log properties, inverse function."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified A: x=4. B: x=8, with x=-7 rejected by the domain. C: ln(x^2/y). D: g^-1(x)=3^((x-2)/3)+1. The Part C rubric element \"ln(x^2/y^1)\" is slightly awkward but acceptable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Text-only stimulus with empty data is fine because the stem is fully specified. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to free response; the domain-rejection row covers the key misconception."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Reasonable load for a no-calculator symbolic item. Slightly long at 16 estimated minutes, but time is not penalized."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four short procedural parts: solving an exponential equation by combining powers, solving a log equation with a quadratic and a domain check, condensing logs, and finding the inverse of a log function. Each uses standard techniques with small numbers. The only conceptual step is rejecting the extraneous root. This is typical AP-level fluency practice suited to a full mock, with no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 400
+  }
+ },
+ {
+  "key": "ap_precalculus-f17-k1",
+  "cellId": "ap_precalculus-f17",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "2^{x-1}=2 so x-1=1",
+     "final_answer": "x=2",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "x(x-2)=8, x=4 or -2; -2 not in domain (x>2); x=4 gives log2(4)+log2(2)=3=log2 8",
+     "final_answer": "x=4",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "power and quotient rules",
+     "final_answer": "ln(x^3/y^2)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "swap and solve: x=2log2(y-1)+2 gives y=2^{(x-2)/2}+1",
+     "final_answer": "g^{-1}(x)=2^{(x-2)/2}+1",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "All four parts have unique, correct answers (x=2, x=4, ln(x^3/y^2), 2^((x-2)/2)+1). Each part is Unit 2 symbolic fluency with exact, hand-computable answers. The rubric is consistent, with 1-point rows. The only weakness is that equivalent forms are not listed as alternatives; the item is acceptable overall.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Exponential equation, log equation with a domain check, log properties and an inverse are all in scope for topic 2.13 and related topics, and all assess procedural fluency."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The answers were verified: x=2; x=4 (x=-2 rejected since the logarithm arguments must be positive); ln(x^3/y^2); g^{-1}(x)=2^((x-2)/2)+1. The rubric rows are consistent and dependent rows are properly linked."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is adequate because the stem is self-contained. The wording is clear and states no calculator and exact answers."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to a free-response item; no misconceptions are listed, which is acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light with no calculator needed, which is consistent with a no-calculator symbolic manipulation free-response item."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four short procedural parts covering 2.13, 2.12, 2.8 and 2.10: solve an exponential equation, solve a log equation with a domain check that rejects x=-2, combine logs with the power and quotient rules, and find an inverse by swapping variables and converting the log. Each part is standard and uses small numbers. The domain check in B and the inverse in D add moderate depth, which fits a full mock rather than basic learning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_precalculus-f17-k2",
+  "cellId": "ap_precalculus-f17",
+  "passed": false,
+  "reasons": [
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Divide both sides by 5: 2^(x-1)=2, so x-1=1.",
+     "final_answer": "x = 2",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Combine the logs: x(x-2)=48, so x^2-2x-48=0 and (x-8)(x+6)=0. x=-6 is rejected because it is not in the domain. x=8 works because 8>0 and 8-2>0.",
+     "final_answer": "x = 8",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Use the power rule, then the quotient rule.",
+     "final_answer": "ln(x^3 / y^2)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Swap x and y, then solve: (x-2)/3 = log2(y-1).",
+     "final_answer": "g^{-1}(x) = 2^{(x-2)/3} + 1",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable. All four parts are in scope for Unit 2 and test procedural fluency, the answers are exact and unique, and a solver independently reached the same answers. The 6-point total with 1-point rubric rows matches the Symbolic Manipulations type. Minor concern: part C's rubric accepts only the form ln(x^3/y^2), which is fine because equivalent forms are normally accepted.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A to D cover solving exponential and logarithmic equations (2.13), logarithm properties (2.12), and the inverse of a logarithmic function (2.8 and 2.10). The dominant skill throughout is procedural and symbolic fluency. There is no calculus content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are unique and correct. For A, x=2. For B, x=8, with -6 rejected by the domain. For C, ln(x^3/y^2). For D, 2^((x-2)/3)+1. The rubric rows are consistent and each depends correctly on the preceding row where needed."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus is text only and states that no calculator is allowed and exact answers are required. Each part is self-contained and clearly worded in US English."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so distractors do not apply. The model answers show the working for each part."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The workload is modest, all computations are by hand, and the calculator designation is consistent. Part B's domain check is a reasonable conceptual step."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four routine procedural parts (exponential equation, log equation with domain check, combining logs, inverse of a log function). Each needs 1-4 steps with light arithmetic. The only conceptual step is rejecting the extraneous root in B. This is typical exam-level fluency, suitable for a full mock, and not purely introductory.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 10,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_precalculus-f18-k0",
+  "cellId": "ap_precalculus-f18",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Factor by grouping: 2(x-1)(x^2+9)",
+     "final_answer": "x=1, x=3i, x=-3i",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Leading term 2x^3",
+     "final_answer": "As x→∞, p(x)→∞; as x→-∞, p(x)→-∞",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Sign chart with critical values -2 (included) and 2 (excluded)",
+     "final_answer": "(-∞,-2] ∪ (2,∞)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "p=2(x-1)(x^2+9); x^2+9≥9>0 has no real zeros, so only x=1",
+     "final_answer": "x^2+9 is never zero for real x, so the only real zero is x=1",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Math is correct and in scope. The stimulus wording has template artifacts (\"x-(-2)\", \"x-(2)\", \"x-(1)\"), and Part C's rubric refers to \"the zero and the vertical asymptote\" for a rational expression that is never connected to p. Part D largely repeats what Part A already shows. Failing on expression clarity.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topics 1.5, 1.8 in Unit 1 scope; no calculus content, and the end-behavior notation is standard for the course."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys verified: zeros 1, ±3i; end behavior correct; inequality solution (-∞,-2]∪(2,∞) correct."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Awkward notation like x-(-2) and x-(2), and an undefined connection between the inequality in part C and p; the rubric wording in C1 is unanchored."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ, so no options; the rubric rows are consistent with the model answers."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Load is reasonable for a no-calculator FRQ with 6 points."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four short parts, all in Unit 1 scope. A: factor by grouping to 2(x-1)(x^2+9), then find the complex zeros ±3i. B: end behavior from a positive leading coefficient and odd degree. C: a rational inequality needing a sign chart and exclusion of x=2 (one conceptual step, the domain). D: explain that x^2+9>0 for all real x, so the only real zero is 1. The arithmetic is trivial and the reading load is light. The difficulty comes from technique choice and a few conceptual steps, which is typical for a full-mock free-response item. It is not just a basic recall question, and it is not beyond exam level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_precalculus-f18-k1",
+  "cellId": "ap_precalculus-f18",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Factor by grouping: (x-3)(x^2+1)",
+     "final_answer": "x = 3, i, -i",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Leading term x^3, odd degree, positive coefficient",
+     "final_answer": "As x→∞, p(x)→∞; as x→-∞, p(x)→-∞",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Critical values -1 (excluded) and 3 (included); sign analysis",
+     "final_answer": "(-∞, -1) ∪ [3, ∞)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "p=(x-3)(x^2+1); x^2+1≥1>0 for all real x, so only x=3 makes p zero; other zeros ±i are nonreal",
+     "final_answer": "Since x^2+1>0 for every real x, the only real zero is x=3; the remaining zeros ±i are nonreal.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The mathematics is correct and in scope: the factorization, zeros, end behavior and rational inequality all check out. The bundle fits the 6-point no-calculator format. Minor issues are the template artifacts in the wording (\"x-(3)\"), the inequality being unrelated to p, and Part D partly repeating Part A.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part fits topic 1.5 or its related topics and its own skill. The no-calculator exact work is appropriate."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are correct and unique. The rubric rows are consistent with the model answers."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus is complete. The wording has template artifacts such as \"x-(3)\" and \"1(x-(3))\", which are clumsy but unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no distractors. The rubric rows are acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is reasonable for 6 points and the calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Each part is routine: grouping factorization with complex zeros, leading-term end behavior, a sign-chart rational inequality (endpoint inclusion/exclusion is the key conceptual step), and a short justification. The breadth across four parts and the algebraic and symbolic fluency required fit a full-mock free-response item. The arithmetic is trivial and the wording is clear, so the difficulty is fair.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_precalculus-f18-k2",
+  "cellId": "ap_precalculus-f18",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Factor by grouping: (x-3)(x^2+1).",
+     "final_answer": "x=3, x=i, x=-i",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Leading term x^3 with positive coefficient.",
+     "final_answer": "As x→∞, p(x)→∞; as x→-∞, p(x)→-∞",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Critical points -1 (included) and 1 (excluded); a sign chart gives a positive quotient outside [-1,1].",
+     "final_answer": "(-∞,-1] ∪ (1,∞)",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "Odd wording 'x-(-1)' over 'x-(1)' looks like a filled-in template, and it doesn't use p, but it can still be solved."
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "p=(x-3)(x^2+1), and x^2+1≥1>0 for every real x, so the only real zero comes from x-3=0. The other two zeros, ±i, are nonreal.",
+     "final_answer": "Since x^2+1>0 for all real x, p(x)=0 only when x=3, so p has exactly one real zero.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The math is correct, but the item is an incoherent bundle. The part C inequality is unrelated to p and belongs to a different topic, and the notation shows template artifacts. Fail on scope, expression, and exam suitability.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Part C is a rational inequality unrelated to p and belongs to topic 1.8 rather than 1.5. Parts B and D carry skills 2 and 3, so the bundle is not centered on the target skill 1 and topic 1.5."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All answers are correct and unique. The part C row C1 is loosely checkable from its required elements."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Wording is awkward (\"x-(3)\", \"x-(-1)\", \"1i\", \"1(x-(3))\"), which shows template artifacts. Part C has no link to p, so the stimulus does not support a coherent problem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to FRQ; no distractors."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Four disjointed parts do not fit any of the four official FRQ types. The unconnected inequality and the unnatural notation make it unsuitable as an exam item."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four short parts at AP level: factor by grouping to (x-3)(x^2+1) and find complex zeros; state end behavior of an odd-degree cubic with positive leading coefficient; solve a simple rational inequality by sign analysis, excluding the undefined point x=1; justify the single real zero from the factorization. All techniques are in Unit 1 scope, the arithmetic is minimal, the wording is clear, and no out-of-scope content is needed. Multiple representations (symbolic, complex, interval notation) and a few conceptual steps make it suitable for a full mock rather than basic learning, but it is not beyond standard exam difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_precalculus-f19-k0",
+  "cellId": "ap_precalculus-f19",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:C:numeric",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "f=(x-1)(x-2)/((x-2)(x-3))",
+     "final_answer": "Zero x=1; vertical asymptote x=3; hole at x=2",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(2-1)/(2-3)",
+     "final_answer": "-1",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "x-2=3x-9",
+     "final_answer": "x=7/2",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "(x-2)(x+4)=x^2+2x-8, remainder 6",
+     "final_answer": "g(x)=x+4+6/(x-2)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The mathematics is correct and in scope, but the item does not fit the official format for a no-calculator Symbolic Manipulations FRQ, so it fails on exam suitability.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All four parts test procedural and symbolic fluency on topics 1.8-1.11. They cover factoring, holes and asymptotes, a rational equation, and division by a linear divisor. All are in scope for Unit 1."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All answers are correct and unique: zero 1, vertical asymptote 3, hole at x=2, hole y-value -1, x=7/2, and g(x)=x+4+6/(x-2). Rubric rows are consistent with the model answers. Part C solves (x-2)/(x-3)=3, which is not the original f, but the part is stated clearly and stands on its own."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus is complete and the wording is clear. The notation \"x-(1)\" appears in the model answers, where it looks like a template artifact. The Part C equation is not tied to f, so it reads as a disconnected sub-task."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The rubric lists no common errors, but that does not affect correctness."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item is a bundle of four unrelated mini-tasks, with Part C disconnected from f. It is built from 2/1/1/2 point parts, which is not the official structure of a Symbolic Manipulations FRQ, where each part is a 1-point row in a single coherent context. The estimated 16 minutes also looks long for 6 points. Part A awards 2 points for work that is really three separate answers."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four short procedural parts: factor and cancel to classify zero, VA and hole; evaluate the reduced form at the hole; solve a simple rational equation; divide by a linear divisor. The numbers are small, the reading load is light and everything is in scope. The only conceptual step is distinguishing the hole from the asymptote. This is typical of a routine full-mock fluency item, at the easier end.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_precalculus-f19-k1",
+  "cellId": "ap_precalculus-f19",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "f=(x-3)(x+3)/((x+2)(x+3)) = (x-3)/(x+2) for x≠-3",
+     "final_answer": "Zero x=3; vertical asymptote x=-2; hole at x=-3",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(-3-3)/(-3+2)=6",
+     "final_answer": "6",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "x-2=2x+4 gives x=-6; check: -8/-4=2, and x≠-2",
+     "final_answer": "x=-6",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Long division: quotient 2x+1, remainder 2",
+     "final_answer": "g(x)=2x+1+2/(x-3)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "All four parts verified correct by hand. In scope for Unit 1 (topics 1.8-1.11), exact and hand-computable, with a fair 2/1/1/2 point split. Minor awkward notation such as x-(-3) in the model answer and rubric elements, but nothing disqualifying.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "All four parts are routine procedures: factor and cancel to find zero, VA and hole; evaluate the reduced function at the hole; solve a simple rational equation that reduces to a linear one; divide by a linear divisor with small integers. Each part takes one or two steps with no conceptual twists, short reading, and small arithmetic. This is suitable for basic skill practice rather than a full-mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_precalculus-f19-k2",
+  "cellId": "ap_precalculus-f19",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:B:numeric",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "f=(x-4)(x+2)/((x-3)(x+2)), so the (x+2) factor cancels",
+     "final_answer": "Zero x=4; vertical asymptote x=3; hole at x=-2",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Simplified f=(x-4)/(x-3); at x=-2 this is (-6)/(-5)",
+     "final_answer": "6/5",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "x-1=2(x-3) gives x=5, and x=5 is not excluded (x≠3)",
+     "final_answer": "x=5",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Long division gives quotient 2x+4 with remainder 2",
+     "final_answer": "g(x)=2x+4+2/(x-3)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The mathematics is correct and in scope, but the item is a stitched-together bundle with unrelated parts and artifact-laden notation. It does not match the reference pattern for AP free-response structure, so I recommend revision.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Content is within Unit 1: holes, zeros and asymptotes, solving a rational equation, and division by a linear divisor. The skill is procedural and symbolic fluency, and every part fits it."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are correct and unique. Rubric rows are consistent, and the reference answers match the independent solver. One concern: the A1 required elements are written as \"(x-4)(x--2)\", which is fragile for matching, but the correct factorization is clear."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stem text is clear, but the data object is empty and the item bundles unrelated sub-tasks. Part C introduces a new, unrelated rational equation. The model answers show awkward artifacts such as \"x-(4)\", \"x-(-2)\" and \"x-(1)\", which are unclean notation."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so distractors do not apply. The rubric lists no common errors, which is acceptable for this format."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The scoring does not fit the fixed AP free-response types, which have 6 points in 1-point rows. It is a 6-point bundle of disconnected sub-tasks (parts A, B, C and D) without a single context, and its parts are not a natural AP no-calculator symbolic-manipulation question. Part C is disconnected from f, and part D uses an unrelated g. The estimated 16 minutes is only an internal reference and is not penalized. The part point grains of 2, 1, 1 and 2 are acceptable in themselves."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Routine procedural fluency: factor and cancel to find the zero, asymptote and hole, evaluate the reduced form, solve a simple rational equation, and divide by a linear divisor. Each part is one short standard technique, with small numbers and no conceptual traps beyond excluding x=3.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_precalculus-f20-k0",
+  "cellId": "ap_precalculus-f20",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:A:numeric"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "final_answer": "-√2/2",
+     "brief_reasoning": "3π/4 is in quadrant II and its reference angle is π/4, so cosine is negative.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "final_answer": "x = 0, 2π/3, 4π/3",
+     "brief_reasoning": "(2cos x+1)(cos x-1)=0, so cos x=-1/2 or cos x=1.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "final_answer": "(2, 2√3)",
+     "brief_reasoning": "x=4cos(π/3)=2, y=4sin(π/3)=2√3",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, exact-answer, no-calculator symbolic manipulation FRQ. Parts A, B and C are consistent with the rubric rows and the key. The independent solver agreed on all three parts.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "All three parts are standard procedural skills. A is a unit-circle value. B is a quadratic in cos x that factors as (2cos x+1)(cos x-1), giving x=0, 2π/3, 4π/3. C is a direct polar-to-rectangular conversion giving (2, 2√3). Each part needs one technique and little arithmetic. This is well below full-mock difficulty, though it fits as a fluency check across 3.3, 3.10 and 3.13.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_precalculus-f20-k1",
+  "cellId": "ap_precalculus-f20",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:A:numeric",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "The reference angle is π/6 and sine is positive in quadrant II, so the value is 1/2.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "1/2"
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "The equation factors as (2cos x+1)(cos x−1)=0, so cos x=−1/2 or cos x=1.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "x = 0, 2π/3, 4π/3"
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "x = 4cos(2π/3) = −2 and y = 4sin(2π/3) = 2√3.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "(−2, 2√3)"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The mathematics, keys, and rubric are correct and in scope. However, the bundle is a disconnected set of three short procedural tasks rather than an official-style 6-point no-calculator FRQ with a shared context and builds-on structure. Part A is trivial recall, so the bundle does not match the reference pattern. I am failing exam suitability.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A (3.3 unit circle value), Part B (3.10 factoring and solving a trig equation), Part C (3.13 polar-to-rectangular) are all in Unit 3 and procedural. This matches the stated bundle span of 3.10, 3.3 and 3.13."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are correct. The solutions 0, 2π/3, 4π/3 are complete on [0, 2π). The rubric rows are consistent and dependencies are sensible. One weakness is that row B2 requires only \"0\", and no row requires both that the solution set is complete or that the solutions are stated with correct conditions. Point A1 for a single recall is fine."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem is clear, specifies exact answers and radians, and no calculator. The data object is empty, which is acceptable for a text-only item."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so distractors do not apply. The rubric has no common_errors listed, which is a minor gap."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The task is too small for the format. A no-calculator FRQ in AP Precalculus is 6 points, but it consists of one question with several unrelated parts (a 1-point recall, a 3-point equation, a 2-point conversion). Real FRQ Part B items are single-context, with parts that build on one another. Here the three parts share no context and Part A is a pure one-step recall of a standard value, so the bundle reads like three separate short items. The estimated 16 minutes is also high for the actual load, which is closer to 6-8 minutes. The overall structure deviates from the official FRQ pattern, which mixes skills across parts within a context."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Three standard procedural parts: a unit-circle value, a quadratic-in-cosine equation solved by factoring with the correct solution set on [0, 2pi), and a polar-to-rectangular conversion. Each needs routine technique with minimal arithmetic; the main demand is accuracy across several short steps, including remembering x=0 and both quadrants for cos x = -1/2. This suits a full-mock fluency item rather than a purely introductory one.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_precalculus-f20-k2",
+  "cellId": "ap_precalculus-f20",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:A:numeric"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "final_answer": "-√3/2",
+     "brief_reasoning": "Third quadrant, reference angle π/6",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "final_answer": "x = 0, 2π/3, 4π/3",
+     "brief_reasoning": "(2cos x+1)(cos x-1)=0 gives cos x = 1 or cos x = -1/2",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "final_answer": "(-2, 2√3)",
+     "brief_reasoning": "x = 4cos(2π/3) = -2, y = 4sin(2π/3) = 2√3",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope, exact-answer no-calculator symbolic manipulation FRQ with consistent 1-point rubric rows. Minor: dependent rows could penalize unfactored correct solutions.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Three short procedural parts. A: reference-angle evaluation of cos(7π/6). B: factor a quadratic in cos x, then solve cos x = 1 and cos x = -1/2 on [0, 2π), with attention to the interval endpoint. C: polar to rectangular conversion using x = r cos θ and y = r sin θ. Each part needs a standard technique with exact values and no long arithmetic. The wording is clear and everything is in scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ }
+]

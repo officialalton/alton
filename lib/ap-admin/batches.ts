@@ -234,9 +234,26 @@ export const STOCK_BATCHES: StockBatch[] = [
   // 2026-10-19 에세이 참고답 점수·설명 충돌 점검기(lib/ap-generation/essay-reference-check.ts) 교체 후보: EngLit fa2(LT2) low 샘플 헤딩 3/6→2/6. 새 버전 계획: data/ap/stock/lt2-v5-audit-score1019-swap-plan.json (scripts/ap-generation/audit-score1019-build.ts)
   { id: "audit-score1019", title: "AP 참고답 점수·설명 정정 (English Literature FRQ 1)", itemsFile: "audit-score1019-items.json", loadLabel: "audit-score1019-2026-10-19", supplement: true, passKeysFile: "audit-score1019-pass-keys.json", evidenceFile: "evidence-lt.json" },
   { id: "supp-aud1015b", title: "AP 외부 검수 수정본 (Calculus AB FRQ B 교정 복제 2건)", itemsFile: "supp-aud1015b-items.json", loadLabel: "supp-aud1015b-2026-10-19", supplement: true, passKeysFile: "supp-aud1015b-pass-keys.json", evidenceFile: "evidence-aud1015.json" },
+  // 2026-10-20 AP Precalculus 신규 과목(docs/ap/precalculus-groundwork.md): MC 1차(원형 94·후보 282) / 2차(원형 115·후보 345) / FRQ(시나리오 단위 후보). 증거는 격리 스택(PORT_OFFSET=600)에서 한 파일. 정확 배정: data/ap/stock/exact-assign-pre-pc1-pc4.json. 시드 SQL·마이그레이션 620 적용·공개(AP_PENDING_PUBLIC_SUBJECTS 해제)는 총괄.
+  { id: "pre-a", title: "AP Precalculus pre-a (MC 1차: 원형 94 x 후보 3)", itemsFile: "pre-a-items.json", loadLabel: "pre-a-2026-10-20", supplement: true, passKeysFile: "pre-a-pass-keys.json", evidenceFile: "evidence-pre.json" },
+  { id: "pre-b", title: "AP Precalculus pre-b (MC 2차: 원형 115 x 후보 3)", itemsFile: "pre-b-items.json", loadLabel: "pre-b-2026-10-20", supplement: true, passKeysFile: "pre-b-pass-keys.json", evidenceFile: "evidence-pre.json" },
+  { id: "pre-f", title: "AP Precalculus pre-f (FRQ 시나리오 4유형)", itemsFile: "pre-f-items.json", loadLabel: "pre-f-2026-10-20", supplement: true, passKeysFile: "pre-f-pass-keys.json", evidenceFile: "evidence-pre.json" },
+  // 2026-10-20 AP Physics C: Electricity and Magnetism(docs/ap/physics-c-em-groundwork.md): 원형 4라운드 + 검토 반영 재생성. 한 증거 파일(evidence-physe.json)을 공유한다. EM1–EM5 정확 배정: data/ap/stock/exact-assign-physe-em1-em5.json
+  { id: "physe-a", title: "AP Physics C: E&M physe-a (MC 단독 1차) (통과·증거 90)", itemsFile: "physe-a-items.json", loadLabel: "physe-a-2026-10-20", supplement: true, passKeysFile: "physe-a-pass-keys.json", evidenceFile: "evidence-physe.json" },
+  { id: "physe-s", title: "AP Physics C: E&M physe-s (2문항 세트 1차) (통과·증거 6)", itemsFile: "physe-s-items.json", loadLabel: "physe-s-2026-10-20", supplement: true, passKeysFile: "physe-s-pass-keys.json", evidenceFile: "evidence-physe.json" },
+  { id: "physe-f", title: "AP Physics C: E&M physe-f (FRQ 1차) (통과·증거 4)", itemsFile: "physe-f-items.json", loadLabel: "physe-f-2026-10-20", supplement: true, passKeysFile: "physe-f-pass-keys.json", evidenceFile: "evidence-physe.json" },
+  { id: "physe-b", title: "AP Physics C: E&M physe-b (2차 저작) (통과·증거 42)", itemsFile: "physe-b-items.json", loadLabel: "physe-b-2026-10-20", supplement: true, passKeysFile: "physe-b-pass-keys.json", evidenceFile: "evidence-physe.json" },
+  { id: "physe-fix1", title: "AP Physics C: E&M physe-fix1 (1차 검토 반영) (통과·증거 11)", itemsFile: "physe-fix1-items.json", loadLabel: "physe-fix1-2026-10-20", supplement: true, passKeysFile: "physe-fix1-pass-keys.json", evidenceFile: "evidence-physe.json" },
+  { id: "physe-c", title: "AP Physics C: E&M physe-c (3차 저작) (통과·증거 32)", itemsFile: "physe-c-items.json", loadLabel: "physe-c-2026-10-20", supplement: true, passKeysFile: "physe-c-pass-keys.json", evidenceFile: "evidence-physe.json" },
+  { id: "physe-fix2", title: "AP Physics C: E&M physe-fix2 (2차 검토 반영) (통과·증거 13)", itemsFile: "physe-fix2-items.json", loadLabel: "physe-fix2-2026-10-20", supplement: true, passKeysFile: "physe-fix2-pass-keys.json", evidenceFile: "evidence-physe.json" },
+  { id: "physe-d", title: "AP Physics C: E&M physe-d (4차 저작(3.C·2.C·2.D)) (통과·증거 25)", itemsFile: "physe-d-items.json", loadLabel: "physe-d-2026-10-20", supplement: true, passKeysFile: "physe-d-pass-keys.json", evidenceFile: "evidence-physe.json" },
+  { id: "physe-fix3", title: "AP Physics C: E&M physe-fix3 (3차 검토 반영(lab·MR)) (통과·증거 10)", itemsFile: "physe-fix3-items.json", loadLabel: "physe-fix3-2026-10-20", supplement: true, passKeysFile: "physe-fix3-pass-keys.json", evidenceFile: "evidence-physe.json" },
+  // 2026-10-20 AP Physics C: Mechanics(docs/ap/physics-c-mechanics-groundwork.md): 원형 4라운드 + 검토 반영 재생성. 한 증거 파일(evidence-physc.json, 1168항목)을 공유한다. PM1–PM5 정확 배정: data/ap/stock/exact-assign-physc-pm1-pm5.json
+  ...([["a", "MC 단독 1차", 186], ["s", "2문항 세트 1차", 9], ["f", "FRQ 1차", 4], ["c", "1차 검토 반영", 86], ["d", "2차 저작", 67], ["e", "2차 검토 반영", 30], ["g", "3차 저작", 91], ["i", "3차 검토 반영", 1], ["h", "4차 저작", 69], ["k", "4차 검토 반영", 14], ["m", "5차 검토 반영", 1]] as const)
+    .map(([f, what, n]): StockBatch => ({ id: `physc-${f}`, title: `AP Physics C: Mechanics physc-${f} (${what}) (통과 ${n})`, itemsFile: `physc-${f}-items.json`, loadLabel: `physc-${f}-2026-10-20`, supplement: true, passKeysFile: `physc-${f}-pass-keys.json`, evidenceFile: "evidence-physc.json" })),
 ];
 
-export const batchById = (id: string): StockBatch => {
+export const batchById =(id: string): StockBatch => {
   const b = STOCK_BATCHES.find((x) => x.id === id);
   if (!b) throw new Error(`알 수 없는 배치: ${id}`);
   return b;

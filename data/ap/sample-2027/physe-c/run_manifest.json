@@ -1,0 +1,47 @@
+{
+ "run": "physe-c",
+ "subject": "ap_physics_c_electricity_and_magnetism",
+ "generatorCommit": "f89400c68",
+ "gateVersion": "v2-code-first-final-2026-10-08",
+ "reviewerPromptHash": "e86dc7f450eb",
+ "difficultyPromptHash": "9bda2250d42c",
+ "flags": {
+  "flatReview": true,
+  "subjectNotes": true,
+  "requireBlueprint": true,
+  "legacyItems": false,
+  "repair": false
+ },
+ "arm": "frozen v1-physe-c",
+ "parserHash": "7528bbe8cdfc",
+ "models": {
+  "gen": "claude-sonnet-5-5",
+  "solve": "claude-opus-5-5",
+  "review": "claude-sonnet-5-5",
+  "difficulty": "claude-sonnet-5-5",
+  "spot": "claude-fable-5-1"
+ },
+ "policy": {
+  "firstCandidatesPerCell": 1,
+  "repairLimit": 1,
+  "codeChecksBeforeLlm": true,
+  "independentVerification": true,
+  "templateStop": {
+   "window": 4,
+   "maxSameReason": 2
+  },
+  "denominator": "first_candidates",
+  "manifestFile": "run_manifest.json"
+ },
+ "seeds": {
+  "first": [
+   34000
+  ],
+  "note": "seed0 = first seed tried per archetype; packs.json records pack_id = archetype-sSEED"
+ },
+ "frozenAt": "2026-10-20T22:05:25.233Z",
+ "generatorHash": "83da4651ce30",
+ "frozenConfig": "config/ap-frozen/physe-c.v1.json@v1-physe-c",
+ "validity": "valid",
+ "repairDefinition": "none (repair not run in this round)"
+}

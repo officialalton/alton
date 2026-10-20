@@ -1,0 +1,53 @@
+{
+ "runs": [
+  "physe-d"
+ ],
+ "rows": 30,
+ "passed": 27,
+ "rejected": 3,
+ "passRate": 0.9,
+ "singles": {
+  "candidates": 30
+ },
+ "unitsPassed": {
+  "8": 4,
+  "9": 2,
+  "10": 6,
+  "11": 4,
+  "12": 5,
+  "13": 6
+ },
+ "figPassed": {
+  "none": 27
+ },
+ "figAll": {
+  "none": 30
+ },
+ "figPassRate": {
+  "none": "27/30"
+ },
+ "renderTypesPassed": {
+  "ap_table": 10,
+  "none": 17
+ },
+ "archetypesPassed": {
+  "pe_data_force_distance_claim": 2,
+  "pe_compare_sphere_fields": 2,
+  "pe_scale_electric_energy": 2,
+  "pe_data_gap_capacitance_claim": 2,
+  "pe_compare_cap_energies": 2,
+  "pe_scale_capacitance_geometry": 2,
+  "pe_data_rc_claim": 2,
+  "pe_data_iv_claim": 2,
+  "pe_data_force_current_length_claim": 1,
+  "pe_compare_wire_forces": 2,
+  "pe_scale_magnetic_force": 2,
+  "pe_data_current_decay_claim": 1,
+  "pe_compare_induced_emfs": 2,
+  "pe_scale_inductance": 2,
+  "pe_scale_generator_emf": 1
+ },
+ "costUsd": {
+  "physe-d": 0.849
+ }
+}

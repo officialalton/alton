@@ -1,0 +1,3002 @@
+[
+ {
+  "id": "pre_arcsin_context_calc",
+  "topic": "3.9",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "inverse sine closed form versus brentq root finding of sin(theta) minus the ratio"
+  ],
+  "misconceptions": [
+   "Uses the tangent of the ratio: $\\tan^{-1}(h/L)$.",
+   "Reports the ratio itself.",
+   "Uses the cosine of the ratio: $\\cos^{-1}(h/L)$."
+  ]
+ },
+ {
+  "id": "pre_arctan_context_calc",
+  "topic": "3.9",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "inverse tangent closed form versus brentq root finding of tan(theta) minus the ratio"
+  ],
+  "misconceptions": [
+   "Uses $\\arctan(d/h)$.",
+   "Uses $\\arcsin(h/d)$-like ratio incorrectly, $\\sin^{-1}(h/\\sqrt{h^2+d^2})$ with the hypotenuse replaced by $d$.",
+   "Reports the angle in degrees instead of radians."
+  ]
+ },
+ {
+  "id": "pre_avg_cost_min_calc",
+  "topic": "1.14",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "closed-form x = sqrt(c/a) versus bounded numerical minimization"
+  ],
+  "misconceptions": [
+   "Sets the fixed-cost term $\\dfrac{300}{x}$ equal to the constant term $35$ and solves for $x$.",
+   "Reports the least average cost $C(7.75)\\approx112.46$ dollars instead of the number of units.",
+   "Sets the linear term $5x$ equal to the fixed-cost term $\\dfrac{300}{x}$ but forgets to take the square root of $x^2$."
+  ]
+ },
+ {
+  "id": "pre_avg_roc_expression",
+  "topic": "1.3",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy simplification versus numerical difference quotient at sample values"
+  ],
+  "misconceptions": [
+   "Does not divide the constant factor: reports the difference without dividing by $h$.",
+   "Forgets the term $h$ left after dividing: reports only the derivative-like part.",
+   "Squares only the first term: expands $(a+h)^2$ as $a^2+h^2$."
+  ]
+ },
+ {
+  "id": "pre_avg_roc_table",
+  "topic": "1.2",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact rational arithmetic versus numpy evaluation of the generating polynomial at the endpoints"
+  ],
+  "misconceptions": [
+   "Reports the change in the output values without dividing by the change in the inputs.",
+   "Averages the two output values.",
+   "Subtracts in the opposite order in the numerator only, which reverses the sign."
+  ]
+ },
+ {
+  "id": "pre_comp_context",
+  "topic": "2.7",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of the composition at a sample time"
+  ],
+  "misconceptions": [
+   "Multiplies the two functions instead of composing them.",
+   "Forgets to square the factor $r$ inside the parentheses.",
+   "Composes in the wrong order."
+  ]
+ },
+ {
+  "id": "pre_comp_expression",
+  "topic": "2.7",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy substitution versus numerical evaluation of f(g(x)) at a test input"
+  ],
+  "misconceptions": [
+   "Adds $f(x)$ and $g(x)$ instead of composing them.",
+   "Evaluates the composition in the wrong order, $g(f(x))$ instead of $f(g(x))$.",
+   "Multiplies $f(x)$ and $g(x)$ instead of composing them."
+  ]
+ },
+ {
+  "id": "pre_comp_numeric",
+  "topic": "2.7",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy substitution in both orders"
+  ],
+  "misconceptions": [
+   "Squares only the constant in the inner function.",
+   "Evaluates $g(f(x))$ in the wrong order.",
+   "Evaluates $f(x)\\cdot g(x)$."
+  ]
+ },
+ {
+  "id": "pre_comp_table",
+  "topic": "2.7",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "direct table lookups in code in both orders"
+  ],
+  "misconceptions": [
+   "Adds $f(a)$ and $g(a)$.",
+   "Multiplies $f(a)$ and $g(a)$.",
+   "Takes $f(a)$ only."
+  ]
+ },
+ {
+  "id": "pre_complex_zero_conjugate",
+  "topic": "1.5",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy roots of the expanded polynomial contain both the given zero and its conjugate"
+  ],
+  "misconceptions": [
+   "Swaps the real and imaginary parts of the given zero.",
+   "Negates the real part $1$ instead of the imaginary part.",
+   "Negates both the real part and the imaginary part."
+  ]
+ },
+ {
+  "id": "pre_complex_zero_count",
+  "topic": "1.5",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy roots of the expanded polynomial count the nonreal zeros"
+  ],
+  "misconceptions": [
+   "Counts only the real zeros.",
+   "Counts distinct factors instead of zeros with multiplicity.",
+   "Adds one extra zero for the leading coefficient."
+  ]
+ },
+ {
+  "id": "pre_compound_interest_calc",
+  "topic": "2.5",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "floating point evaluation versus exact rational arithmetic evaluated to fifteen digits"
+  ],
+  "misconceptions": [
+   "Divides the rate by $n$ but does not multiply the exponent by $n$.",
+   "Uses simple interest.",
+   "Compounds once per year instead of $n$ times."
+  ]
+ },
+ {
+  "id": "pre_continuous_growth_calc",
+  "topic": "2.14",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "closed form ln(multiplier)/r versus brentq root finding"
+  ],
+  "misconceptions": [
+   "Divides the multiplier by the rate.",
+   "Uses $\\log_{10}$ without dividing by $r\\log_{10} e$.",
+   "Uses $\\ln(\\text{multiplier})\\cdot r$."
+  ]
+ },
+ {
+  "id": "pre_cos_min_value_calc",
+  "topic": "3.12",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "dense numerical minimum versus the closed form negative square root of a squared plus b squared"
+  ],
+  "misconceptions": [
+   "Uses the negative of the larger coefficient, $-5$.",
+   "Reports the greatest value $+6.403$ instead of the least.",
+   "Adds the coefficients, $4+5$, and uses the negative of that sum, $-9$."
+  ]
+ },
+ {
+  "id": "pre_csc_undefined",
+  "topic": "3.11",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of the denominator near the claimed values"
+  ],
+  "misconceptions": [
+   "Uses only every other zero.",
+   "Uses the zeros of both sine and cosine.",
+   "Uses the zeros of the other function."
+  ]
+ },
+ {
+  "id": "pre_cubic_regression_calc",
+  "topic": "1.14",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "table",
+  "verifiedBy": [
+   "numpy polyfit versus exact normal equations solved with sympy rational arithmetic"
+  ],
+  "misconceptions": [
+   "Uses a linear regression model.",
+   "Averages the two nearest data values, which ignores the model.",
+   "Uses a quadratic regression model instead of a cubic model."
+  ]
+ },
+ {
+  "id": "pre_decibel_calc",
+  "topic": "2.14",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "floating-point logarithm versus sympy logarithm to fifteen digits"
+  ],
+  "misconceptions": [
+   "Omits the factor of 10.",
+   "Divides by $I_0$ after taking the logarithm.",
+   "Uses the natural logarithm."
+  ]
+ },
+ {
+  "id": "pre_double_angle_equation",
+  "topic": "3.12",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical substitution of every claimed solution and a scan for any other solution"
+  ],
+  "misconceptions": [
+   "Adds a value that is not a solution because of an error in the double-angle identity.",
+   "Keeps only the solutions where cos x equals 0 and misses the solutions of $2\\sinx=1$.",
+   "Divides both sides by cos x, which loses the solutions where it equals 0."
+  ]
+ },
+ {
+  "id": "pre_double_angle_value",
+  "topic": "3.12",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of sin 2\u03b8 or cos 2\u03b8 at the angle with the given sine"
+  ],
+  "misconceptions": [
+   "Uses $\\cos 2\\theta=\\cos^2\\theta+\\sin^2\\theta$.",
+   "Uses $\\cos 2\\theta=2\\cos\\theta$.",
+   "Squares the cosine value only."
+  ]
+ },
+ {
+  "id": "pre_doubling_time_calc",
+  "topic": "2.13",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "closed form ln(target ratio)/r versus brentq root finding"
+  ],
+  "misconceptions": [
+   "Uses the common logarithm of $2.5$ but forgets that the exponent is $e^{0.047t}$, dividing $\\log_{10}(2.5)$ by $0.047$.",
+   "Solves $e^{0.047t}=2.5$ by dividing $2.5$ by the rate $0.047$ with no logarithm.",
+   "Divides the rate $0.047$ by $\\ln 2.5$ instead of $\\ln 2.5$ by the rate."
+  ]
+ },
+ {
+  "id": "pre_even_odd_table",
+  "topic": "1.12",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "pairwise comparison of the generating values in numpy for equality and negation"
+  ],
+  "misconceptions": [
+   "Concludes that the table shows neither symmetry although the outputs follow a symmetry pattern.",
+   "Calls the table consistent with an even function although some opposite inputs have different outputs.",
+   "Thinks one table can follow both symmetry patterns at once."
+  ]
+ },
+ {
+  "id": "pre_exp_asymptote_transform",
+  "topic": "2.3",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of g at very negative inputs and at x=0 with exact fractions"
+  ],
+  "misconceptions": [
+   "Reports the horizontal asymptote.",
+   "Evaluates with the wrong direction of the horizontal shift.",
+   "Forgets the vertical stretch."
+  ]
+ },
+ {
+  "id": "pre_exp_avg_roc_calc",
+  "topic": "2.2",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "floating point evaluation versus exact rational arithmetic evaluated to fifteen digits"
+  ],
+  "misconceptions": [
+   "Divides the final output by the interval length.",
+   "Reports the change in output without dividing by the interval length.",
+   "Reports the instantaneous-style estimate using the growth factor: $(b-1)f(t_1)$."
+  ]
+ },
+ {
+  "id": "pre_exp_context_double",
+  "topic": "2.5",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact integer evaluation versus repeated doubling"
+  ],
+  "misconceptions": [
+   "Adds $P_0$ once for each doubling period.",
+   "Multiplies by $m$ instead of doubling $m$ times.",
+   "Doubles once for every unit of time rather than every 5 units."
+  ]
+ },
+ {
+  "id": "pre_exp_continuous_triple",
+  "topic": "2.5",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of the exponential model"
+  ],
+  "misconceptions": [
+   "Uses the elapsed time as the exponent of 2.",
+   "Treats the exponent as $m$ rather than $2^m$.",
+   "Uses $e^m$ in place of $2^m$."
+  ]
+ },
+ {
+  "id": "pre_exp_decay_fraction",
+  "topic": "2.5",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fraction evaluation of N0 times (1/2)^m versus repeated halving"
+  ],
+  "misconceptions": [
+   "Halves once for every year, 18 times, instead of once every 6 years.",
+   "Divides the initial amount by the number of half-lives, 3, instead of halving 3 times.",
+   "Subtracts the number of half-lives, 3, from the initial amount."
+  ]
+ },
+ {
+  "id": "pre_exp_equation_exact",
+  "topic": "2.13",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "substitution of the solution back into the exponential expression"
+  ],
+  "misconceptions": [
+   "Adds the constant instead of subtracting.",
+   "Divides the exponent by the base instead of equating exponents.",
+   "Equates the base to the right side."
+  ]
+ },
+ {
+  "id": "pre_exp_equiv_base",
+  "topic": "2.4",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of both expressions at a non-integer input"
+  ],
+  "misconceptions": [
+   "Treats the reciprocal as a negative sign.",
+   "Puts the variable in the denominator of the exponent.",
+   "Ignores the reciprocal."
+  ]
+ },
+ {
+  "id": "pre_exp_equiv_form",
+  "topic": "2.4",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of both forms at a non-integer input"
+  ],
+  "misconceptions": [
+   "Multiplies the base $3$ by the coefficient $2$ of $x$ instead of raising $3$ to the power $2$.",
+   "Replaces $3^{2}$ by the exponent $2$ when splitting off the constant, giving the factor $3\\cdot 2$.",
+   "Adds $3^{2}$ to $3$ instead of multiplying."
+  ]
+ },
+ {
+  "id": "pre_exp_graph_equation",
+  "topic": "2.3",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "the plotted values come from the stated equation; two plotted points are recomputed from each option"
+  ],
+  "misconceptions": [
+   "Reverses the sign of the vertical shift.",
+   "Uses the wrong base.",
+   "Reverses growth and decay: uses the reciprocal of the factor."
+  ]
+ },
+ {
+  "id": "pre_exp_identify_decay",
+  "topic": "2.3",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical comparison of consecutive outputs of each function"
+  ],
+  "misconceptions": [
+   "Treats a negative coefficient on a growth function as decay in the base.",
+   "Thinks every function with base greater than 1 decays.",
+   "Thinks growth functions with a vertical shift decay."
+  ]
+ },
+ {
+  "id": "pre_exp_inequality",
+  "topic": "2.13",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation on each side of the boundary value"
+  ],
+  "misconceptions": [
+   "Ignores the horizontal shift in the exponent.",
+   "Reverses the inequality as if the base were between 0 and 1.",
+   "Subtracts the shift with the wrong sign."
+  ]
+ },
+ {
+  "id": "pre_exp_intersect_exp_calc",
+  "topic": "2.6",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "closed form with logarithms versus brentq root finding"
+  ],
+  "misconceptions": [
+   "Reports the common value of the two models at the intersection.",
+   "Divides the initial values without using logarithms of the bases.",
+   "Uses $\\ln(a_1/a_2)/\\ln(b_2/b_1)$ with the ratio inverted."
+  ]
+ },
+ {
+  "id": "pre_exp_inverse_log",
+  "topic": "2.10",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical composition of the proposed inverse with f returns the input"
+  ],
+  "misconceptions": [
+   "Forgets to divide by the vertical stretch.",
+   "Applies the vertical shift after the logarithm.",
+   "Divides the logarithm instead of the argument."
+  ]
+ },
+ {
+  "id": "pre_exp_linear_cross_calc",
+  "topic": "2.6",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a sign-change scan with brentq refinement of every crossing"
+  ],
+  "misconceptions": [
+   "Reports the value of the functions at the crossing.",
+   "Reports the first crossing instead of the last.",
+   "Solves $a\\cdot b^t=mt$ ignoring the constant."
+  ]
+ },
+ {
+  "id": "pre_exp_param_meaning",
+  "topic": "2.5",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of N at t = 0 and t = 1 confirms the interpretation"
+  ],
+  "misconceptions": [
+   "Confuses the initial value with the doubling value.",
+   "Reads the initial value as a rate of change.",
+   "Reads the initial value as a percent change."
+  ]
+ },
+ {
+  "id": "pre_exp_percent_factor",
+  "topic": "2.3",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical comparison of the model with repeated percent changes over three years"
+  ],
+  "misconceptions": [
+   "Models percent change as a constant additive change.",
+   "Reverses growth and decay.",
+   "Uses the rate itself as the factor instead of one plus or minus the rate."
+  ]
+ },
+ {
+  "id": "pre_exp_regression_b_calc",
+  "topic": "2.5",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "table",
+  "verifiedBy": [
+   "least squares of ln y on t with the normal equations versus numpy polyfit on ln y"
+  ],
+  "misconceptions": [
+   "Reports the linear regression slope.",
+   "Reports the value of $a$ in the regression.",
+   "Reports the percent change per time unit."
+  ]
+ },
+ {
+  "id": "pre_exp_regression_calc",
+  "topic": "2.5",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "table",
+  "verifiedBy": [
+   "least squares of ln y on t solved with the normal equations versus numpy polyfit on ln y"
+  ],
+  "misconceptions": [
+   "Averages the first and last data values $81.6$ and $14.2$.",
+   "Multiplies the last data value $14.2$ by the growth factor $b\\approx0.751$ only once.",
+   "Uses a linear regression model, which gives $-24.17$ at $t=9$, instead of an exponential model."
+  ]
+ },
+ {
+  "id": "pre_exp_solve_calc",
+  "topic": "2.13",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "closed form with logarithms versus brentq root finding"
+  ],
+  "misconceptions": [
+   "Uses $\\log_b k$ without dividing by $a$.",
+   "Divides $k$ by $a$ and then by $b$ instead of using a logarithm.",
+   "Takes the natural logarithm of $b$ in the numerator."
+  ]
+ },
+ {
+  "id": "pre_exp_sse_calc",
+  "topic": "2.6",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "table",
+  "verifiedBy": [
+   "a direct loop versus a vectorized numpy sum"
+  ],
+  "misconceptions": [
+   "Sums the residuals without squaring them.",
+   "Squares each residual but divides by the number of data points.",
+   "Squares the sum of the residuals."
+  ]
+ },
+ {
+  "id": "pre_exp_table_next",
+  "topic": "2.3",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact rational evaluation of a*b^5 versus repeated multiplication of the last table value"
+  ],
+  "misconceptions": [
+   "Multiplies $f(3)=3/4$ by the growth factor only once, which gives $f(4)$ instead of $f(5)$.",
+   "Doubles $f(3)=3/4$.",
+   "Adds the last change -3/4 twice to $f(3)=3/4$ instead of multiplying by the growth factor twice."
+  ]
+ },
+ {
+  "id": "pre_exp_threshold_calc",
+  "topic": "2.13",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "closed form with logarithms versus brentq root finding"
+  ],
+  "misconceptions": [
+   "Divides the threshold by the initial value and then by the factor.",
+   "Treats the decay as linear, losing the same amount each year.",
+   "Subtracts the threshold from the initial value and divides by $1-b$."
+  ]
+ },
+ {
+  "id": "pre_exp_through_points",
+  "topic": "2.3",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "evaluation of the proposed function at both given inputs"
+  ],
+  "misconceptions": [
+   "Uses the output ratio as the base without taking the root.",
+   "Uses the second output as the base.",
+   "Multiplies the base by the input gap."
+  ]
+ },
+ {
+  "id": "pre_exp_transform_describe",
+  "topic": "2.3",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "image points of two sample points are computed under the transformation"
+  ],
+  "misconceptions": [
+   "Reverses the direction of the vertical translation.",
+   "Swaps the horizontal and vertical translation amounts.",
+   "Reverses the direction of the horizontal translation."
+  ]
+ },
+ {
+  "id": "pre_exp_two_points",
+  "topic": "2.3",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "solving a and b symbolically with sympy versus repeated multiplication from the given point"
+  ],
+  "misconceptions": [
+   "Extends linearly using the average rate of change.",
+   "Finds the growth factor as the difference of the outputs instead of the ratio.",
+   "Takes the growth factor as the ratio $y_2/y_1$ even though the inputs are two apart."
+  ]
+ },
+ {
+  "id": "pre_exp_vs_poly_calc",
+  "topic": "2.6",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a sign-change scan of E minus P over a long interval with brentq refinement of each crossing"
+  ],
+  "misconceptions": [
+   "Reports the first crossing $t\\approx1.326$ instead of the last one.",
+   "Reports the common value $E(t)\\approx23173.2$ at the crossing instead of the time.",
+   "Replaces the power function $4t^{3}$ by the line $4t$ and solves $E(t)=4t$."
+  ]
+ },
+ {
+  "id": "pre_geom_context_term",
+  "topic": "2.1",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "recursive multiplication of the salary year by year versus the closed formula"
+  ],
+  "misconceptions": [
+   "Models the percent raise as an additive change.",
+   "Uses the exponent $n$ instead of $n-1$.",
+   "Uses an exponent that is too large by two."
+  ]
+ },
+ {
+  "id": "pre_geom_index_calc",
+  "topic": "2.1",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "direct term-by-term evaluation versus the logarithm formula"
+  ],
+  "misconceptions": [
+   "Gives the index one too large.",
+   "Gives the index one too small, where the term is still below the target.",
+   "Uses the common ratio as the index."
+  ]
+ },
+ {
+  "id": "pre_half_life_calc",
+  "topic": "2.5",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "closed form ln(1/2)/ln b versus brentq root finding"
+  ],
+  "misconceptions": [
+   "Uses $\\log_{10}$ without dividing by $\\log_{10} b$.",
+   "Reports half of the initial amount as the time.",
+   "Divides 0.5 by the decay rate $1-b$."
+  ]
+ },
+ {
+  "id": "pre_inverse_context",
+  "topic": "2.8",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical check that C applied to the inverse's value returns the given Celsius temperature"
+  ],
+  "misconceptions": [
+   "Reads the inverse as a rate of change.",
+   "Reads the inverse as the original function.",
+   "Confuses an inverse function with a reciprocal."
+  ]
+ },
+ {
+  "id": "pre_inverse_domain_range",
+  "topic": "2.8",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a numeric one-to-one stand-in function confirms that inverse maps the range interval onto the domain interval"
+  ],
+  "misconceptions": [
+   "Keeps the domain and range of $f$ unchanged.",
+   "Negates the intervals instead of swapping them.",
+   "Uses the range of $f$ for both."
+  ]
+ },
+ {
+  "id": "pre_inverse_eval_calc",
+  "topic": "2.8",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "brentq root finding versus a hand-written bisection"
+  ],
+  "misconceptions": [
+   "Divides $k$ by $f$'s leading coefficient only.",
+   "Takes the cube root of $k$ only.",
+   "Evaluates $f(k)$ instead of $f^{-1}(k)$."
+  ]
+ },
+ {
+  "id": "pre_inverse_expression",
+  "topic": "2.8",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "composition f of the inverse evaluated numerically returns the input"
+  ],
+  "misconceptions": [
+   "Swaps $x$ and $y$ but forgets to solve for $y$ correctly: keeps the denominator signs unchanged.",
+   "Takes the reciprocal of $f(x)$ instead of the inverse.",
+   "Interchanges numerator and denominator coefficients without the sign changes."
+  ]
+ },
+ {
+  "id": "pre_inverse_table",
+  "topic": "2.8",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "direct table lookup in both directions in code"
+  ],
+  "misconceptions": [
+   "Takes the reciprocal $1/f(1)=1/2$ of the output.",
+   "Reports the output 2 itself.",
+   "Reads $f(2)=4$ instead of finding the input whose output is 2."
+  ]
+ },
+ {
+  "id": "pre_inverse_trig_range",
+  "topic": "3.9",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of the inverse function on sample inputs at the boundaries"
+  ],
+  "misconceptions": [
+   "Reports the range of the inverse function as its domain.",
+   "Uses one full period as the domain.",
+   "This is the domain of $\\arctan$, not of $\\arccos$."
+  ]
+ },
+ {
+  "id": "pre_inverse_trig_value",
+  "topic": "3.9",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy exact inverse evaluation versus numpy floating-point evaluation"
+  ],
+  "misconceptions": [
+   "Reports the angle with the opposite sign.",
+   "Assumes that $arc^{-1}$ undoes $sin$ for every angle and reports the original angle $\\frac{5 \\pi}{4}$, which is outside the range $\\left[-\\dfrac{\\pi}{2}, \\dfrac{\\pi}{2}\\right]$ of the inverse.",
+   "Reports the complement of the correct angle."
+  ]
+ },
+ {
+  "id": "pre_inverse_value_formula",
+  "topic": "2.8",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "substitution of the result into f recovers the given output"
+  ],
+  "misconceptions": [
+   "Takes the reciprocal of $f(y)$.",
+   "Evaluates $f(y)$ instead of $f^{-1}(y)$.",
+   "Subtracts $b$ and forgets to divide by $a$."
+  ]
+ },
+ {
+  "id": "pre_ivt_zero_guarantee",
+  "topic": "1.4",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "sign comparison of consecutive outputs computed independently in numpy"
+  ],
+  "misconceptions": [
+   "Doubles the number of sign changes.",
+   "Counts the sign changes of the whole table instead of the stated interval.",
+   "Adds two to the correct count."
+  ]
+ },
+ {
+  "id": "pre_line_point_slope",
+  "topic": "1.3",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "evaluation of the proposed expression at both given inputs"
+  ],
+  "misconceptions": [
+   "Uses the second point's $y$ but the first point's $x$ in the wrong way: $m(x-x_1)+y_2$.",
+   "Reverses the order of subtraction in the slope.",
+   "Uses the reciprocal of the slope."
+  ]
+ },
+ {
+  "id": "pre_linear_vs_exp_table",
+  "topic": "2.2",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "numpy diff and ratio arrays of the generating values"
+  ],
+  "misconceptions": [
+   "Increasing outputs do not make the data quadratic: the ratios show the actual pattern.",
+   "The differences 10, 30, 90, 270 are not all equal, so this model does not fit.",
+   "The direction of change does not rule out either model; the pattern of differences or ratios does."
+  ]
+ },
+ {
+  "id": "pre_ln_exp_inverse_identity",
+  "topic": "2.10",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of both expressions at a test input"
+  ],
+  "misconceptions": [
+   "Drops the constant term.",
+   "Takes the logarithm of the exponent: $\\ln(c x+d)$ instead of canceling.",
+   "Multiplies the exponent by $e$."
+  ]
+ },
+ {
+  "id": "pre_log_change_base",
+  "topic": "2.12",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of both expressions"
+  ],
+  "misconceptions": [
+   "Replaces the quotient of logarithms by their difference.",
+   "Inverts the quotient in the change-of-base formula.",
+   "Divides by the base instead of by its logarithm."
+  ]
+ },
+ {
+  "id": "pre_log_combine",
+  "topic": "2.12",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of both expressions at test values"
+  ],
+  "misconceptions": [
+   "Turns the difference into a product.",
+   "Treats the difference as a quotient of logarithms.",
+   "Turns the difference of logarithms into a difference inside."
+  ]
+ },
+ {
+  "id": "pre_log_eq_numeric_calc",
+  "topic": "2.13",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the quadratic formula after exponentiating versus brentq root finding"
+  ],
+  "misconceptions": [
+   "Divides $e^k$ by $c$.",
+   "Solves $x(x+c)=k$.",
+   "Solves $\\ln x=k$ only."
+  ]
+ },
+ {
+  "id": "pre_log_equation_extraneous",
+  "topic": "2.13",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "substituting each root back into the original logarithmic equation exposes the extraneous one"
+  ],
+  "misconceptions": [
+   "Includes the extraneous solution as the answer.",
+   "Sets each factor equal to the right side separately.",
+   "Adds the roots instead of selecting the valid one."
+  ]
+ },
+ {
+  "id": "pre_log_equation_simple",
+  "topic": "2.13",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "substitution of the solution into the logarithmic expression"
+  ],
+  "misconceptions": [
+   "Drops the coefficient of $x$.",
+   "Forgets to subtract the constant before dividing.",
+   "Multiplies the base by the exponent instead of raising it."
+  ]
+ },
+ {
+  "id": "pre_log_evaluate",
+  "topic": "2.9",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact evaluation with sympy log simplification versus floating-point logarithms"
+  ],
+  "misconceptions": [
+   "Treats $\\log_{2}\\left(\\dfrac{1}{4}\\right)$ as $2$ instead of $-2$, giving $4+2=6$.",
+   "Reverses the sign of the whole result, giving $-2$.",
+   "Reports only the first logarithm, $\\log_{2}\\left(16\\right)=4$."
+  ]
+ },
+ {
+  "id": "pre_log_expand",
+  "topic": "2.12",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of both sides at a test point"
+  ],
+  "misconceptions": [
+   "Adds $1\\ln z$ although $z^{1}$ is in the denominator, which requires subtraction.",
+   "Multiplies the logarithms of $x^{3}$ and $y$ instead of adding them.",
+   "Replaces the exponent 1/3 on $y$ by 3."
+  ]
+ },
+ {
+  "id": "pre_log_graph_equation",
+  "topic": "2.11",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "the plotted values come from the stated equation; points are recomputed for each option"
+  ],
+  "misconceptions": [
+   "Uses the wrong base.",
+   "Reverses the direction of the horizontal shift.",
+   "Reverses the direction of the vertical shift."
+  ]
+ },
+ {
+  "id": "pre_log_graph_features",
+  "topic": "2.11",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of g near the boundary and at the claimed intercept"
+  ],
+  "misconceptions": [
+   "Uses the vertical shift.",
+   "Reverses the sign of the horizontal shift.",
+   "Includes the boundary where the logarithm is undefined."
+  ]
+ },
+ {
+  "id": "pre_log_model_reach_calc",
+  "topic": "2.14",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "closed form with the exponential versus brentq root finding"
+  ],
+  "misconceptions": [
+   "Solves $B\\ln t=k$ and forgets the constant $A$.",
+   "Divides $k$ by $B$ without using the exponential.",
+   "Uses the common logarithm instead of the natural logarithm."
+  ]
+ },
+ {
+  "id": "pre_log_property_true",
+  "topic": "2.12",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical counterexamples show each false statement fails"
+  ],
+  "misconceptions": [
+   "Treats the logarithm of a product as the product of logarithms.",
+   "Treats a quotient of logarithms as the logarithm of a difference.",
+   "Treats the logarithm of a sum as the sum of logarithms."
+  ]
+ },
+ {
+  "id": "pre_log_regression_b_calc",
+  "topic": "2.14",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "table",
+  "verifiedBy": [
+   "normal equations for the regression of y on ln x versus numpy polyfit"
+  ],
+  "misconceptions": [
+   "Reports the value of $a$ instead of $b$.",
+   "Reports the slope of the linear regression of $y$ on $x$.",
+   "Uses $\\log_{10}$ so that the coefficient is $b/\\ln 10$."
+  ]
+ },
+ {
+  "id": "pre_log_regression_calc",
+  "topic": "2.14",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "table",
+  "verifiedBy": [
+   "normal equations for the regression of y on ln x versus numpy polyfit"
+  ],
+  "misconceptions": [
+   "Evaluates the model at $x=20$ instead of $x=25$.",
+   "Evaluates the logarithmic model at the last data input $x=16$.",
+   "Uses a linear regression model, which gives $67.00$ at $x=25$, instead of a logarithmic model."
+  ]
+ },
+ {
+  "id": "pre_log_scale_ratio_calc",
+  "topic": "2.14",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational exponent evaluated to fifteen digits versus floating-point exponentiation"
+  ],
+  "misconceptions": [
+   "Uses $1.5(M_2-M_1)$ without exponentiating.",
+   "Divides the magnitudes.",
+   "Uses $10^{M_2-M_1}$ without the factor 1.5."
+  ]
+ },
+ {
+  "id": "pre_log_solve_base",
+  "topic": "2.9",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "substitution of the solution into the logarithmic expression"
+  ],
+  "misconceptions": [
+   "Subtracts the logarithm value from the argument.",
+   "Divides the argument by the logarithm value.",
+   "Uses the logarithm value as the base."
+  ]
+ },
+ {
+  "id": "pre_log_transform_describe",
+  "topic": "2.11",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of g near the asymptote and at two further inputs"
+  ],
+  "misconceptions": [
+   "Uses the vertical shift as the asymptote.",
+   "Misreads the effect of the sign in front of the logarithm.",
+   "Reverses the direction of the horizontal shift."
+  ]
+ },
+ {
+  "id": "pre_log_two_logs_equal",
+  "topic": "2.13",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "substitution of the solution into both logarithms"
+  ],
+  "misconceptions": [
+   "Adds the constants.",
+   "Subtracts the constants in the wrong order.",
+   "Forgets that the variable terms are on both sides: divides by $p$."
+  ]
+ },
+ {
+  "id": "pre_log_value_fraction",
+  "topic": "2.9",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact evaluation with sympy log versus floating-point logarithms"
+  ],
+  "misconceptions": [
+   "Reports the negative of the exponent.",
+   "Reports the index of the root.",
+   "Reports the base."
+  ]
+ },
+ {
+  "id": "pre_log_vs_line_solve_calc",
+  "topic": "2.13",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a sign-change scan with brentq refinement versus a dense grid"
+  ],
+  "misconceptions": [
+   "Solves $a\\ln x=mx$ ignoring both constants.",
+   "Reports the smaller intersection.",
+   "Reports the output at the larger intersection."
+  ]
+ },
+ {
+  "id": "pre_model_domain_limit",
+  "topic": "1.13",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of the model at the boundary values"
+  ],
+  "misconceptions": [
+   "Chooses the interval to the right of the larger zero.",
+   "Chooses the interval to the left of the smaller zero.",
+   "Ignores that the quadratic is negative outside its zeros."
+  ]
+ },
+ {
+  "id": "pre_model_select_context",
+  "topic": "1.13",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "numpy diff at successive orders against the generating polynomial's degree"
+  ],
+  "misconceptions": [
+   "The data are already fit by constant second differences 2, 2, 2, 2, so a cubic model is not needed.",
+   "The first differences 2, 4, 6, 8, 10 are not constant, so the data are not linear.",
+   "Increasing without bound does not identify a rational function; polynomial differences are constant at some order."
+  ]
+ },
+ {
+  "id": "pre_nth_max_time_calc",
+  "topic": "3.7",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the closed form 2 pi (n-1)/b versus a scan of the model for local maxima"
+  ],
+  "misconceptions": [
+   "Reports the time of the 3th minimum, $(2n-1)\\pi/b=9.240$.",
+   "Reports the time of the 3th maximum counting the one at $t=0$ as none: $2\\pi n/b=11.088$.",
+   "Uses $\\pi/b$ as the period, giving $3.696$."
+  ]
+ },
+ {
+  "id": "pre_open_box_calc",
+  "topic": "1.14",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "roots of the derivative polynomial versus a dense grid maximum"
+  ],
+  "misconceptions": [
+   "Maximizes $x(24-x)(34-x)$, which removes only one side width $x$ from each dimension instead of $2x$.",
+   "Maximizes only the factor $x(24-2x)$ and ignores the reduction of the other dimension.",
+   "Reports the greatest volume $V(4.62)\\approx1688.4$ cubic inches instead of the side length."
+  ]
+ },
+ {
+  "id": "pre_period_from_rate",
+  "topic": "3.7",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical check that h repeats after the computed period"
+  ],
+  "misconceptions": [
+   "Uses the period as the value of b.",
+   "Uses pi over the period for b, which gives a period twice as long.",
+   "Uses revolutions per minute as the period."
+  ]
+ },
+ {
+  "id": "pre_periodic_model_eval_calc",
+  "topic": "3.7",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "floating-point evaluation versus sympy evaluation to fifteen digits"
+  ],
+  "misconceptions": [
+   "Evaluates the cosine in degree mode, giving $90.0$.",
+   "Uses the sine of the same argument instead of the cosine, giving $60.5$.",
+   "Forgets the shift by $14$ hours and evaluates the cosine at $t=9$."
+  ]
+ },
+ {
+  "id": "pre_ph_scale_calc",
+  "topic": "2.14",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "floating-point logarithm versus sympy logarithm to fifteen digits"
+  ],
+  "misconceptions": [
+   "Multiplies pH by ten.",
+   "Uses $1/\\text{pH}$.",
+   "Forgets the negative sign in the exponent."
+  ]
+ },
+ {
+  "id": "pre_polar_convert",
+  "topic": "3.13",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy exact conversion versus numpy floating-point conversion back to the original coordinates"
+  ],
+  "misconceptions": [
+   "Uses $r=x^2+y^2$ instead of its square root.",
+   "Adds $\\pi$ to the correct angle, which points in the opposite direction.",
+   "Adds the coordinates to get $r$ instead of using $\\sqrt{x^2+y^2}$."
+  ]
+ },
+ {
+  "id": "pre_polar_distance_trend",
+  "topic": "3.15",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical finite differences of r over each interval decide whether it is monotonic increasing"
+  ],
+  "misconceptions": [
+   "On $0<\\theta<\\pi$, $r$ both increases and decreases, so the distance is not increasing on the whole interval.",
+   "On $\\pi<\\theta<2\\pi$, $r$ both increases and decreases, so the distance is not increasing on the whole interval.",
+   "On $\\dfrac{\\pi}{2}<\\theta<2\\pi$, $r$ both increases and decreases, so the distance is not increasing on the whole interval."
+  ]
+ },
+ {
+  "id": "pre_polar_equivalent_point",
+  "topic": "3.13",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "conversion of every option to rectangular coordinates compared with the original"
+  ],
+  "misconceptions": [
+   "Adds a quarter turn, $\\pi/2$, instead of a half turn, $\\pi$, to the angle.",
+   "Changes both the sign of $r$ and the angle, which returns to the original direction with the wrong sign of $r$.",
+   "Ignores the negative sign of $r=-3$ and keeps the angle $\\frac{2 \\pi}{3}$."
+  ]
+ },
+ {
+  "id": "pre_polar_max_r",
+  "topic": "3.14",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "dense numerical evaluation of r over 0 to 2 pi"
+  ],
+  "misconceptions": [
+   "Reports $|b|-a$.",
+   "Reports the coefficient $b$ as the maximum.",
+   "Reports the constant $a$ as the maximum."
+  ]
+ },
+ {
+  "id": "pre_polar_max_y_calc",
+  "topic": "3.14",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "bounded numerical optimization versus a dense grid maximum"
+  ],
+  "misconceptions": [
+   "Reports the $x$-coordinate at the point of greatest height.",
+   "Reports the angle at which the maximum occurs.",
+   "Reports the greatest value of $r$ instead of the greatest $y$-coordinate."
+  ]
+ },
+ {
+  "id": "pre_polar_petals",
+  "topic": "3.14",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a dense numerical evaluation of r over 0 to 2 pi gives the maximum |r| and a sign-change count of r gives the petal structure"
+  ],
+  "misconceptions": [
+   "Divides the coefficient by the multiplier of the angle, $3/5$.",
+   "Doubles the coefficient, reporting $6$.",
+   "Uses the multiplier $5$ of the angle as the greatest distance."
+  ]
+ },
+ {
+  "id": "pre_polar_point_rect_calc",
+  "topic": "3.13",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "floating-point evaluation versus sympy evaluation to fifteen digits"
+  ],
+  "misconceptions": [
+   "Evaluates the trigonometric function in degree mode, giving $6.992$.",
+   "Swaps cosine and sine, giving $2.345$.",
+   "Reports the other rectangular coordinate with the opposite sign, $-2.345$."
+  ]
+ },
+ {
+  "id": "pre_polar_r_zero_calc",
+  "topic": "3.14",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "inverse cosine closed form versus brentq root finding"
+  ],
+  "misconceptions": [
+   "Solves $\\cos\\theta=0.500$ with the wrong sign.",
+   "Reports the value $r(0)=6$.",
+   "Uses degrees: $\\cos^{-1}(-0.500)$ in degree mode gives $120.0$."
+  ]
+ },
+ {
+  "id": "pre_polar_roc_calc",
+  "topic": "3.15",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "floating-point evaluation versus sympy evaluation to fifteen digits"
+  ],
+  "misconceptions": [
+   "Reports the average of the endpoint values of $r$.",
+   "Evaluates the trigonometric function in degree mode.",
+   "Reports the change in $r$ without dividing by the change in $\\theta$."
+  ]
+ },
+ {
+  "id": "pre_polar_symmetry",
+  "topic": "3.14",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical comparison of r at the related angles"
+  ],
+  "misconceptions": [
+   "Thinks no symmetry test succeeds although $r(-\\theta)=r(\\theta)$.",
+   "Tests the wrong symmetry: $r(\\pi-\\theta)=a-b\\cos\\theta$, which is not equal to $r(\\theta)$.",
+   "Tests $r(\\theta+\\pi)=a-b\\cos\\theta$, which is not equal to $r(\\theta)$ unless $b=0$."
+  ]
+ },
+ {
+  "id": "pre_polar_to_rect_curve",
+  "topic": "3.14",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sampled points of the polar equation converted to rectangular coordinates satisfy the claimed Cartesian equation"
+  ],
+  "misconceptions": [
+   "Reads $r\\cos\\theta=k$ instead.",
+   "Uses sine's circle instead of cosine's.",
+   "Confuses $r=k\\cos\\theta$ with $r=k$."
+  ]
+ },
+ {
+  "id": "pre_polar_to_rect_equation",
+  "topic": "3.13",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "points sampled from the polar equation satisfy the claimed rectangular equation"
+  ],
+  "misconceptions": [
+   "Treats $r=4\\cos\\theta$ as $r\\cos\\theta=4$, which is a different curve.",
+   "Squares the radius instead of multiplying both sides by $r$.",
+   "Replaces $r\\cos\\theta$ by $y$ instead of $x$ when multiplying by $r$."
+  ]
+ },
+ {
+  "id": "pre_polar_x_extreme_calc",
+  "topic": "3.14",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "bounded numerical optimization on several brackets versus a dense grid maximum"
+  ],
+  "misconceptions": [
+   "Reports $a$, the value of $r$ at $\\theta=0$.",
+   "Reports the greatest value of $r$.",
+   "Reports the least $x$-coordinate instead."
+  ]
+ },
+ {
+  "id": "pre_polar_zero_angles",
+  "topic": "3.14",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of r at the claimed angles"
+  ],
+  "misconceptions": [
+   "Sets the cosine itself equal to zero instead of $r$.",
+   "Solves $\\cos\\theta$ equal to the opposite value.",
+   "Reports a single related angle."
+  ]
+ },
+ {
+  "id": "pre_poly_avg_roc_calc",
+  "topic": "1.4",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy evaluation versus numpy polyval at both endpoints"
+  ],
+  "misconceptions": [
+   "Divides the output at the right endpoint $p(0.7)$ by the right endpoint.",
+   "Averages the two output values $p(-1.5)$ and $p(0.7)$.",
+   "Reports the change in the outputs $p(0.7)-p(-1.5)$ without dividing by the length $2.2$ of the interval."
+  ]
+ },
+ {
+  "id": "pre_poly_build_from_zeros",
+  "topic": "1.5",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy roots of the expanded polynomial reproduce the stated zeros with multiplicity"
+  ],
+  "misconceptions": [
+   "Uses a factor $(x-1)(x+1)$ for the nonreal zeros $\\pm 1i$.",
+   "Uses a single factor for the double zero.",
+   "Uses opposite signs for the real zeros."
+  ]
+ },
+ {
+  "id": "pre_poly_degree_from_roc_pattern",
+  "topic": "1.4",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "numpy diff at each order for the generating values"
+  ],
+  "misconceptions": [
+   "Uses sign changes instead of the pattern of differences.",
+   "Treats the first differences as constant although they are not.",
+   "Assumes monotone change implies exponential growth or decay."
+  ]
+ },
+ {
+  "id": "pre_poly_degree_table",
+  "topic": "1.4",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "sympy evaluates the generating polynomial; numpy diff finds the level at which the differences become constant"
+  ],
+  "misconceptions": [
+   "Takes the wrong number of differences.",
+   "Stops at the wrong level of differences, misidentifying the degree.",
+   "Gets the degree right but reads the sign of the constant difference wrongly."
+  ]
+ },
+ {
+  "id": "pre_poly_division_quotient",
+  "topic": "1.11",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy polynomial division versus numerical evaluation of both forms"
+  ],
+  "misconceptions": [
+   "Drops the remainder term.",
+   "Puts the remainder over the wrong denominator.",
+   "Uses the opposite sign for the remainder."
+  ]
+ },
+ {
+  "id": "pre_poly_end_behavior",
+  "topic": "1.6",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy leading term versus numerical evaluation of p at plus and minus 10^4"
+  ],
+  "misconceptions": [
+   "Applies the wrong parity of the degree.",
+   "Thinks the function approaches the x-axis at both ends.",
+   "Reverses the sign of the leading coefficient."
+  ]
+ },
+ {
+  "id": "pre_poly_end_behavior_factored",
+  "topic": "1.6",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of p at plus and minus 10^3"
+  ],
+  "misconceptions": [
+   "Reverses the behavior at both ends.",
+   "Reverses the behavior as $x$ decreases without bound only.",
+   "Reverses the behavior as $x$ increases without bound only."
+  ]
+ },
+ {
+  "id": "pre_poly_equation_from_graph",
+  "topic": "1.4",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "the plotted values come from the factored form; the sign and zeros are rechecked numerically"
+  ],
+  "misconceptions": [
+   "Uses the opposite sign for every zero.",
+   "Uses the wrong sign for the leading coefficient.",
+   "Uses the wrong sign for the leading coefficient and for every zero."
+  ]
+ },
+ {
+  "id": "pre_poly_even_odd_expression",
+  "topic": "1.12",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of f at 1.7 and -1.7"
+  ],
+  "misconceptions": [
+   "Concludes neither even nor odd without checking f(-x).",
+   "Calls the function even by looking only at the highest exponent.",
+   "Thinks that symmetry about the y-axis and the origin can both hold for a nonzero function."
+  ]
+ },
+ {
+  "id": "pre_poly_increasing_interval_graph",
+  "topic": "1.4",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "the derivative of the plotted cubic changes sign at the two turning points, computed with numpy roots"
+  ],
+  "misconceptions": [
+   "Confuses the sign of the function values with the direction of the graph.",
+   "Reverses increasing and decreasing on every interval.",
+   "Assumes a cubic polynomial is increasing everywhere."
+  ]
+ },
+ {
+  "id": "pre_poly_ineq_intervals",
+  "topic": "1.4",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sign evaluation of the product at interval midpoints"
+  ],
+  "misconceptions": [
+   "Treats the outer zeros as the endpoints of a single interval.",
+   "Reverses the sign: reports where the polynomial is negative.",
+   "Reports a single interval between the two larger zeros."
+  ]
+ },
+ {
+  "id": "pre_poly_local_max_calc",
+  "topic": "1.4",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy critical points of the derivative versus a dense brute-force maximum near the turning point"
+  ],
+  "misconceptions": [
+   "Reports the $x$-coordinate of the relative minimum.",
+   "Reports the $y$-intercept.",
+   "Reports the relative minimum value instead."
+  ]
+ },
+ {
+  "id": "pre_poly_min_degree_graph",
+  "topic": "1.4",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "the plotted polynomial's derivative has n-1 real roots, computed with numpy"
+  ],
+  "misconceptions": [
+   "Doubles the number of turning points to get 6.",
+   "Takes the number of turning points, 3, as the degree, although a polynomial of degree 3 has at most 2 turning points.",
+   "Adds one too many to the least possible degree, 5, by counting an extra turning point."
+  ]
+ },
+ {
+  "id": "pre_poly_multiplicity_graph",
+  "topic": "1.4",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "the plotted values come from the factored form; a sign check on both sides of the zero confirms crossing or touching"
+  ],
+  "misconceptions": [
+   "Confuses a zero of a polynomial with a vertical asymptote of a rational function.",
+   "Links crossing the axis to even multiplicity instead of odd multiplicity.",
+   "Links touching the axis to odd multiplicity instead of even multiplicity."
+  ]
+ },
+ {
+  "id": "pre_poly_regression_sse_calc",
+  "topic": "1.14",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact normal equations in sympy rational arithmetic and a direct sum of squares"
+  ],
+  "misconceptions": [
+   "Uses the quadratic model's residuals instead of the linear model's.",
+   "Squares the sum of the absolute residuals.",
+   "Sums the residuals without squaring them."
+  ]
+ },
+ {
+  "id": "pre_poly_roc_sign_calc",
+  "topic": "1.4",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "floating-point evaluation versus exact rational arithmetic to fifteen digits"
+  ],
+  "misconceptions": [
+   "Reports the change in outputs without dividing by the length of the interval.",
+   "Reports the value at the left endpoint.",
+   "Averages the two output values."
+  ]
+ },
+ {
+  "id": "pre_poly_sign_graph",
+  "topic": "1.4",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "sign evaluation of the plotted function at interval midpoints"
+  ],
+  "misconceptions": [
+   "Reports the interval between the outer zeros regardless of the sign.",
+   "Reports where the graph is below the x-axis instead of above.",
+   "Reports everything to the left of the last zero."
+  ]
+ },
+ {
+  "id": "pre_poly_symmetry_graph",
+  "topic": "1.12",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "numerical comparison of p(x) with p(-x) at sample points of the plotted function"
+  ],
+  "misconceptions": [
+   "Thinks sign changes rule out symmetry.",
+   "Thinks zeros on both sides imply both symmetries.",
+   "Confuses y-axis symmetry with origin symmetry."
+  ]
+ },
+ {
+  "id": "pre_poly_touch_zero_expr",
+  "topic": "1.4",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a sign evaluation just left and right of each zero"
+  ],
+  "misconceptions": [
+   "Thinks a graph can only cross the axis at its zeros.",
+   "Reports the zeros with odd multiplicity, where the graph crosses the axis.",
+   "Treats every zero as a point where the graph touches the axis."
+  ]
+ },
+ {
+  "id": "pre_poly_value_threshold_calc",
+  "topic": "1.14",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the quadratic formula for both intersections versus a sign-change scan"
+  ],
+  "misconceptions": [
+   "Reports the earlier time at which the value equals the threshold.",
+   "Reports the later time at which the value equals the threshold.",
+   "Reports the maximum value."
+  ]
+ },
+ {
+  "id": "pre_poly_zero_between_calc",
+  "topic": "1.4",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy roots of the coefficients versus a sign-change scan with brentq refinement"
+  ],
+  "misconceptions": [
+   "Reports the left endpoint of the interval where the sign changes.",
+   "Reports the right endpoint of the interval where the sign changes.",
+   "Reports the $y$-intercept."
+  ]
+ },
+ {
+  "id": "pre_poly_zero_calc",
+  "topic": "1.4",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy roots of the coefficient list versus a sign-change scan with brentq refinement"
+  ],
+  "misconceptions": [
+   "Uses the coefficient of $x^2$ as a zero.",
+   "Reports the sum of the three zeros.",
+   "Reports the middle zero."
+  ]
+ },
+ {
+  "id": "pre_pythagorean_value",
+  "topic": "3.12",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation at an angle in the given quadrant with the given cosine"
+  ],
+  "misconceptions": [
+   "Reports the sign-reversed value $-\\frac{576}{625}$.",
+   "Uses $\\sin^2\\theta=1-\\cos\\theta=\\frac{1}{25}$ without squaring the cosine.",
+   "Uses $\\sin\\theta=\\frac{7}{25}$ instead of $\\sin^2\\theta$."
+  ]
+ },
+ {
+  "id": "pre_quad_leading_from_table",
+  "topic": "1.3",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "sympy solves the three equations from the table for a, b and c"
+  ],
+  "misconceptions": [
+   "Uses the opposite sign.",
+   "Uses the second difference itself as the leading coefficient.",
+   "Uses the first difference divided by the step."
+  ]
+ },
+ {
+  "id": "pre_quad_model_from_roots",
+  "topic": "1.14",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "evaluation of the proposed expression at the midpoint and at both zeros"
+  ],
+  "misconceptions": [
+   "Uses the wrong leading coefficient: $h/w$.",
+   "Places the vertex at the first zero.",
+   "Uses a positive leading coefficient although the maximum height is positive."
+  ]
+ },
+ {
+  "id": "pre_quad_other_zero",
+  "topic": "1.3",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "midpoint formula versus a numerical quadratic built from the two zeros"
+  ],
+  "misconceptions": [
+   "Uses the opposite of the first zero as the other zero.",
+   "Subtracts the first zero from the axis value only once.",
+   "Adds twice the axis value to the first zero instead of reflecting it."
+  ]
+ },
+ {
+  "id": "pre_quad_regression_calc",
+  "topic": "1.14",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "table",
+  "verifiedBy": [
+   "numpy polyfit versus exact normal equations solved with sympy rational arithmetic"
+  ],
+  "misconceptions": [
+   "Evaluates the quadratic model at the last data point's input.",
+   "Uses a linear regression model instead of a quadratic model.",
+   "Extends the final data value by the average change in the table."
+  ]
+ },
+ {
+  "id": "pre_quad_regression_vertex_calc",
+  "topic": "1.14",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact normal equations in sympy rational arithmetic and the vertex formula -b/2a"
+  ],
+  "misconceptions": [
+   "Uses the average of the first and last times.",
+   "Uses $b/2a$ without the negative sign.",
+   "Reports the maximum value of the model instead of the time."
+  ]
+ },
+ {
+  "id": "pre_quad_second_diff_missing",
+  "topic": "1.3",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "sympy evaluates the generating quadratic; numpy diff confirms constant second differences"
+  ],
+  "misconceptions": [
+   "Subtracts the output change instead of adding it.",
+   "Repeats the previous output value.",
+   "Adds the second difference once instead of twice when extending the first differences."
+  ]
+ },
+ {
+  "id": "pre_quad_vertex_standard",
+  "topic": "1.3",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "completing the square versus numerical evaluation near the vertex"
+  ],
+  "misconceptions": [
+   "Uses the $y$-intercept as the $y$-coordinate of the vertex.",
+   "Uses the opposite sign for the vertex's $x$-coordinate.",
+   "Uses the opposite sign for the vertex's $y$-coordinate."
+  ]
+ },
+ {
+  "id": "pre_quadrant_sign",
+  "topic": "3.11",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "unit-circle sample angle in the identified quadrant evaluated numerically"
+  ],
+  "misconceptions": [
+   "Reverses only the sign of the secant relative to the cosine.",
+   "Reverses only the sign of the cosecant relative to the sine.",
+   "Uses the opposite of the product of the signs of sine and cosine for the tangent."
+  ]
+ },
+ {
+  "id": "pre_quadratic_complex_zeros",
+  "topic": "1.5",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy roots of the coefficient list reproduce the conjugate pair"
+  ],
+  "misconceptions": [
+   "Does not take the square root of the discriminant correctly.",
+   "Reverses the sign of the real part.",
+   "Uses $-b/a$ instead of $-b/2a$ for the real part."
+  ]
+ },
+ {
+  "id": "pre_quartic_zero_count_calc",
+  "topic": "1.4",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy roots with the real parts of near-real roots versus a sign-change scan of the graph"
+  ],
+  "misconceptions": [
+   "Counts one fewer.",
+   "Counts only the negative zeros.",
+   "Uses the degree of the polynomial as the number of zeros."
+  ]
+ },
+ {
+  "id": "pre_radian_conversion",
+  "topic": "3.1",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of the conversion"
+  ],
+  "misconceptions": [
+   "Uses 360 over pi as the conversion factor.",
+   "Inverts the fraction before converting.",
+   "Uses 90 over pi as the conversion factor."
+  ]
+ },
+ {
+  "id": "pre_rational_build_from_features",
+  "topic": "1.10",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a numerical check at points near each feature verifies the zero, the asymptote and the removable discontinuity"
+  ],
+  "misconceptions": [
+   "Omits the common factor, so the graph has no hole.",
+   "Exchanges the roles of the zero and the vertical asymptote.",
+   "Uses the opposite sign for every root."
+  ]
+ },
+ {
+  "id": "pre_rational_context_asymptote",
+  "topic": "1.14",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of the model at large inputs"
+  ],
+  "misconceptions": [
+   "Reads the fixed term as growing with the input.",
+   "Reads the constant term as the long-run value.",
+   "Thinks a rational function with a variable denominator approaches zero."
+  ]
+ },
+ {
+  "id": "pre_rational_end_behavior",
+  "topic": "1.7",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of f at x = 10^6 confirms the limiting value"
+  ],
+  "misconceptions": [
+   "Thinks the x-axis is always the asymptote.",
+   "Inverts the ratio of leading coefficients.",
+   "Thinks equal degrees give no horizontal asymptote."
+  ]
+ },
+ {
+  "id": "pre_rational_equation_solve",
+  "topic": "1.8",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "substitution of the solution into the original expression"
+  ],
+  "misconceptions": [
+   "Reports the value that makes the denominator zero.",
+   "Cross-multiplies but forgets to distribute $c$ over the denominator.",
+   "Solves with the wrong sign for $b$: $x-b$ instead of $x+b$."
+  ]
+ },
+ {
+  "id": "pre_rational_features",
+  "topic": "1.9",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy cancel on the factored form versus numerical evaluation of f near each x-value"
+  ],
+  "misconceptions": [
+   "Uses the opposite sign of the factor's root.",
+   "Gives the location of a different feature of the graph than the one requested.",
+   "Gives the location of the third feature, mixing up which factor produces which feature."
+  ]
+ },
+ {
+  "id": "pre_rational_hole_y",
+  "topic": "1.10",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational evaluation of the reduced function versus numerical evaluation of f at x = h + 10^-7"
+  ],
+  "misconceptions": [
+   "Evaluates the reduced function $\\dfrac{x - 1}{x - 3}$ at $x=0$ instead of at $x=4$.",
+   "Reverses the sign of the correct value of the reduced function.",
+   "Evaluates only the reduced denominator $x - 3$ at the hole."
+  ]
+ },
+ {
+  "id": "pre_rational_inequality",
+  "topic": "1.8",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a sign table built from the factored form is checked against numerical evaluation at interval midpoints"
+  ],
+  "misconceptions": [
+   "Excludes the zero of the numerator even though the inequality allows equality.",
+   "Reverses the sign: reports where the expression is negative.",
+   "Treats the two critical values as the endpoints of one interval without testing signs."
+  ]
+ },
+ {
+  "id": "pre_rational_intersection_calc",
+  "topic": "1.9",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "roots of the cleared-denominator quadratic versus a sign-change scan of f minus g"
+  ],
+  "misconceptions": [
+   "Reports the location of the vertical asymptote.",
+   "Reports the $y$-coordinate of the intersection.",
+   "Reports the other intersection point's $x$-coordinate."
+  ]
+ },
+ {
+  "id": "pre_rational_long_division",
+  "topic": "1.11",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy apart versus evaluation of both forms at a test value"
+  ],
+  "misconceptions": [
+   "Uses the opposite sign for the remainder.",
+   "Drops the remainder term.",
+   "Puts the remainder over the wrong denominator, $x+d$."
+  ]
+ },
+ {
+  "id": "pre_rational_near_asymptote_calc",
+  "topic": "1.7",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "closed form from clearing the denominator versus brentq root finding"
+  ],
+  "misconceptions": [
+   "Divides the constant term by the tolerance.",
+   "Solves $f(x)=\\epsilon$ instead of $|f(x)-a|=\\epsilon$.",
+   "Solves $|f(x)-a|=\\epsilon$ for the wrong sign of the difference."
+  ]
+ },
+ {
+  "id": "pre_rational_threshold_calc",
+  "topic": "1.14",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "closed form from clearing the denominator versus direct evaluation at consecutive integers"
+  ],
+  "misconceptions": [
+   "Reports one more than the correct integer.",
+   "Divides the threshold by the horizontal asymptote.",
+   "Reports the largest integer below the boundary instead of the smallest at or above it."
+  ]
+ },
+ {
+  "id": "pre_rational_va_behavior",
+  "topic": "1.9",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of f at the asymptote plus and minus 10^-5"
+  ],
+  "misconceptions": [
+   "Thinks $f(x)$ approaches 0 near $x=1$, but the denominator approaches 0 so $f$ is unbounded.",
+   "Reverses the sign of the numerator, which is negative near the asymptote, so both limits have the wrong sign.",
+   "Treats the exponent 1 of the denominator as even, which makes the signs on the two sides the same when they should not be."
+  ]
+ },
+ {
+  "id": "pre_rational_va_hole_count",
+  "topic": "1.10",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy cancel counts the zeros before and after cancellation"
+  ],
+  "misconceptions": [
+   "Reports none because the function is a quotient.",
+   "Counts both zeros of the numerator as holes.",
+   "Adds the horizontal asymptote to the count."
+  ]
+ },
+ {
+  "id": "pre_rational_xint_calc",
+  "topic": "1.8",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy roots of the numerator versus a sign-change scan of f"
+  ],
+  "misconceptions": [
+   "Reports the horizontal asymptote.",
+   "Reports the other zero.",
+   "Reports the $y$-intercept."
+  ]
+ },
+ {
+  "id": "pre_rational_zero_count",
+  "topic": "1.8",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy roots of the numerator versus the denominator roots"
+  ],
+  "misconceptions": [
+   "Counts both numerator and denominator zeros.",
+   "Reports zero zeros because the function has asymptotes.",
+   "Counts the zeros of the denominator as zeros of the function."
+  ]
+ },
+ {
+  "id": "pre_remainder_theorem",
+  "topic": "1.11",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy polynomial division versus direct evaluation of p(k)"
+  ],
+  "misconceptions": [
+   "Reports $p(k)$ with the sign reversed.",
+   "Evaluates $p(-k)$ instead of $p(k)$.",
+   "Reports the value of the quotient at $x=k$."
+  ]
+ },
+ {
+  "id": "pre_roc_behavior_table",
+  "topic": "1.2",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "successive differences computed twice: exact integer subtraction versus numpy diff and second diff"
+  ],
+  "misconceptions": [
+   "Reverses whether the outputs rise or fall.",
+   "Reverses the trend in the rate of change.",
+   "Reverses both the direction of the outputs and the trend in the rate of change."
+  ]
+ },
+ {
+  "id": "pre_roc_quadratic_symmetric",
+  "topic": "1.3",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational arithmetic versus the closed form a times the sum of the endpoints minus twice the vertex abscissa"
+  ],
+  "misconceptions": [
+   "Reports the change $q(6)-q(0)=36$ without dividing by the interval length 6.",
+   "Averages the two output values $q(0)$ and $q(6)$.",
+   "Uses the leading coefficient 3 as the average rate of change."
+  ]
+ },
+ {
+  "id": "pre_roc_unit_interpretation",
+  "topic": "1.2",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "recomputation of the average rate from sample endpoint values consistent with the stated rate"
+  ],
+  "misconceptions": [
+   "Reports the rate as the total change over the interval.",
+   "Reverses the direction of the change indicated by the sign.",
+   "Uses the wrong starting time for the interval."
+  ]
+ },
+ {
+  "id": "pre_sec_csc_cot_value",
+  "topic": "3.11",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy exact evaluation versus the reciprocal of the floating-point value"
+  ],
+  "misconceptions": [
+   "Reports the reciprocal with the opposite sign.",
+   "Swaps to the other reciprocal function.",
+   "Reports the value of the corresponding function, cos, sin or tan, instead of its reciprocal."
+  ]
+ },
+ {
+  "id": "pre_sec_range",
+  "topic": "3.11",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of g on a dense grid away from the asymptotes"
+  ],
+  "misconceptions": [
+   "Shifts the boundary values by one.",
+   "Uses the range of the matching sine or cosine function scaled by 2 and shifted by 0.",
+   "Thinks the function takes all real values because it has vertical asymptotes."
+  ]
+ },
+ {
+  "id": "pre_semilog_model",
+  "topic": "2.15",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "slope and intercept computed numerically from the base-10 logarithms of the two outputs"
+  ],
+  "misconceptions": [
+   "Uses the wrong growth factor.",
+   "Swaps the initial value and the growth factor.",
+   "Uses the output at $x=1$ as the initial value."
+  ]
+ },
+ {
+  "id": "pre_seq_formula_identify",
+  "topic": "2.1",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "evaluation of the formula at n = 1 to 4 reproduces the terms"
+  ],
+  "misconceptions": [
+   "Writes a geometric formula for an arithmetic sequence.",
+   "Uses n instead of n-1.",
+   "Swaps the first term and the common difference."
+  ]
+ },
+ {
+  "id": "pre_seq_type_term",
+  "topic": "2.1",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "recursive generation of the terms versus the closed formula"
+  ],
+  "misconceptions": [
+   "Multiplies the first term by $r\\cdot n$.",
+   "Uses $a_1 r^{n}$ instead of $a_1 r^{n-1}$.",
+   "Adds the common ratio repeatedly as if the sequence were arithmetic."
+  ]
+ },
+ {
+  "id": "pre_sin_arccos_value",
+  "topic": "3.9",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of the composition using floating-point inverse cosine"
+  ],
+  "misconceptions": [
+   "Reports the sine instead of the tangent.",
+   "Reports the cosine instead of the tangent.",
+   "Reports the reciprocal, the cotangent."
+  ]
+ },
+ {
+  "id": "pre_sin_avg_roc_calc",
+  "topic": "3.4",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "floating-point evaluation versus sympy evaluation to fifteen digits"
+  ],
+  "misconceptions": [
+   "Evaluates the sine in degree mode, giving $0.139$.",
+   "Reports the change $h(3.5)-h(1)$ without dividing by the elapsed time $2.5$.",
+   "Averages the two heights $h(1)$ and $h(3.5)$."
+  ]
+ },
+ {
+  "id": "pre_sin_cos_shift_equiv",
+  "topic": "3.12",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of both expressions at test values"
+  ],
+  "misconceptions": [
+   "Uses $\\cos(x-\\pi/2)=-\\cos x$.",
+   "Uses $\\cos(x-\\pi/2)=\\sin 2x$.",
+   "Uses $\\cos(x-\\pi/2)=-\\sin x$."
+  ]
+ },
+ {
+  "id": "pre_sin_graph_reading",
+  "topic": "3.4",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "numerical maximum, minimum and period of the plotted function"
+  ],
+  "misconceptions": [
+   "Reports the difference between the maximum and the minimum.",
+   "Reports the maximum value.",
+   "Reports the midline value."
+  ]
+ },
+ {
+  "id": "pre_sin_max_time_calc",
+  "topic": "3.7",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "closed form c plus pi over 2b versus a dense grid maximum"
+  ],
+  "misconceptions": [
+   "Reports the time of the first minimum, $0.5+3\\pi/(2\\cdot 1.2)$, instead of the first maximum.",
+   "Reports the greatest height $H=12$ meters instead of the time.",
+   "Forgets to add the horizontal shift $0.5$ and reports $\\pi/(2\\cdot 1.2)$."
+  ]
+ },
+ {
+  "id": "pre_sin_rate_time_calc",
+  "topic": "3.10",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "inverse sine closed form versus brentq root finding on the first quarter period"
+  ],
+  "misconceptions": [
+   "Uses degrees for the inverse sine.",
+   "Forgets to divide by the angular frequency.",
+   "Reports the second time the model equals the value in the first period."
+  ]
+ },
+ {
+  "id": "pre_sin_solve_calc",
+  "topic": "3.10",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "inverse sine closed form for every solution in the interval versus a sign-change scan with brentq refinement"
+  ],
+  "misconceptions": [
+   "Reports the second solution $x\\approx1.249$ instead of the smallest positive one.",
+   "Forgets the vertical shift $-2$ and solves $5\\sin(2x)=1$.",
+   "Uses the opposite target value, solving $f(x)=-5$."
+  ]
+ },
+ {
+  "id": "pre_sin_transform_describe",
+  "topic": "3.6",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical maximum, minimum and period of g over one cycle"
+  ],
+  "misconceptions": [
+   "Multiplies $2\\pi$ by $B=3$ instead of dividing, giving a period of $6 \\pi$.",
+   "Multiplies the shift $\\frac{\\pi}{6}$ by $B=3$ as if the argument were $Bx-h$.",
+   "Reverses the sign of the vertical shift, using the midline $y=1$."
+  ]
+ },
+ {
+  "id": "pre_sinusoid_context_value",
+  "topic": "3.7",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy exact evaluation versus numpy floating-point evaluation"
+  ],
+  "misconceptions": [
+   "Forgets the vertical shift.",
+   "Uses the cosine instead of the sine of the angle.",
+   "Doubles the amplitude."
+  ]
+ },
+ {
+  "id": "pre_sinusoid_duration_calc",
+  "topic": "3.10",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "closed form from the inverse sine versus a sign-change scan with brentq refinement"
+  ],
+  "misconceptions": [
+   "Reports the time spent below $65$ degrees, $24-8.72$.",
+   "Reports the first crossing time $t\\approx4.64$ instead of the duration.",
+   "Reports the later crossing time $t\\approx13.36$ instead of the duration."
+  ]
+ },
+ {
+  "id": "pre_sinusoid_equation_from_table",
+  "topic": "3.6",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "evaluation of the proposed expression at each table input"
+  ],
+  "misconceptions": [
+   "Uses the period as the value of b.",
+   "Chooses the wrong parent function for the starting value.",
+   "Uses a negative amplitude although the function first increases."
+  ]
+ },
+ {
+  "id": "pre_sinusoid_from_graph",
+  "topic": "3.6",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "the plotted values are generated from the stated equation and the extreme values are checked numerically"
+  ],
+  "misconceptions": [
+   "Uses the maximum value as the amplitude.",
+   "Chooses the wrong parent function for the starting point.",
+   "Uses the period as the value of B."
+  ]
+ },
+ {
+  "id": "pre_sinusoid_params",
+  "topic": "3.5",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical maximum, minimum and period of the plotted function over one cycle"
+  ],
+  "misconceptions": [
+   "Ignores the vertical shift.",
+   "Uses the amplitude as the midline.",
+   "Reverses the sign of the vertical shift."
+  ]
+ },
+ {
+  "id": "pre_sinusoid_phase_shift",
+  "topic": "3.6",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical comparison of g at the shifted input with the parent function"
+  ],
+  "misconceptions": [
+   "Divides the constant by $2B$ and then by $2$ again.",
+   "Uses the constant $\\frac{\\pi}{2}$ from the argument as the shift without dividing by $B=3$.",
+   "Divides $\\pi$ instead of $\\frac{\\pi}{2}$ by $B=3$."
+  ]
+ },
+ {
+  "id": "pre_sinusoid_table_params",
+  "topic": "3.5",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "numpy max and min of the generating function over one period"
+  ],
+  "misconceptions": [
+   "Reports the maximum value $23$.",
+   "Reports the amplitude $8$.",
+   "Reports the difference $23-7=16$ between the maximum and the minimum."
+  ]
+ },
+ {
+  "id": "pre_solution_count_calc",
+  "topic": "1.4",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy roots of p minus q versus a sign-change scan over a wide interval"
+  ],
+  "misconceptions": [
+   "Uses the degree of $p$.",
+   "Counts only the positive solutions.",
+   "Counts one extra intersection."
+  ]
+ },
+ {
+  "id": "pre_sse_models_calc",
+  "topic": "2.6",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "table",
+  "verifiedBy": [
+   "a direct loop in plain Python versus a vectorized numpy sum for both models"
+  ],
+  "misconceptions": [
+   "Sums the residuals of $E$ without squaring them, giving about $3.229$.",
+   "Squares each residual of $E$ but divides the sum by the 6 data points.",
+   "Uses the residuals of the linear model $L$, which fits worse, giving $8.315$."
+  ]
+ },
+ {
+  "id": "pre_tan_asymptote",
+  "topic": "3.8",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of the tangent expression just beside the claimed asymptote"
+  ],
+  "misconceptions": [
+   "Multiplies $\\pi/2$ by $B=1$ instead of dividing.",
+   "Sets the argument equal to $\\pi$ instead of $\\pi/2$, which gives a zero of the tangent rather than an asymptote.",
+   "Reports the next asymptote instead of the smallest positive one."
+  ]
+ },
+ {
+  "id": "pre_tan_context_calc",
+  "topic": "3.8",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "floating-point tangent versus sympy tangent evaluated to fifteen digits"
+  ],
+  "misconceptions": [
+   "Uses the sine instead of the tangent.",
+   "Uses the cosine instead of the tangent.",
+   "Evaluates the tangent in degree mode."
+  ]
+ },
+ {
+  "id": "pre_tan_from_sin",
+  "topic": "3.2",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation at an angle in the given quadrant with the same sine"
+  ],
+  "misconceptions": [
+   "Reports the cosine value instead of the requested function.",
+   "Uses the wrong sign for the quadrant.",
+   "Uses the reciprocal."
+  ]
+ },
+ {
+  "id": "pre_tan_model_solve_calc",
+  "topic": "3.8",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "inverse tangent closed form versus brentq root finding"
+  ],
+  "misconceptions": [
+   "Forgets to divide by $w$.",
+   "Uses degrees for the inverse tangent.",
+   "Uses the inverse sine of the ratio."
+  ]
+ },
+ {
+  "id": "pre_tan_period",
+  "topic": "3.8",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical check that g(x + period) equals g(x) at sample points"
+  ],
+  "misconceptions": [
+   "Uses $\\pi/(2B)=\\pi$, the distance from a zero to an asymptote.",
+   "Uses $2\\pi/B=4 \\pi$, the period of sine and cosine.",
+   "Multiplies $\\pi$ by $B=\\frac{1}{2}$ instead of dividing, giving $\\frac{\\pi}{2}$."
+  ]
+ },
+ {
+  "id": "pre_transform_domain_range",
+  "topic": "1.12",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "endpoint images computed by direct evaluation of the transformation on the stated endpoints"
+  ],
+  "misconceptions": [
+   "Ignores the vertical stretch or reflection when finding the range.",
+   "Forgets the vertical shift.",
+   "Shifts the domain in the wrong direction."
+  ]
+ },
+ {
+  "id": "pre_transform_graph_equation",
+  "topic": "1.12",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "the plotted values come from the stated equation; the shifted center point is rechecked"
+  ],
+  "misconceptions": [
+   "Reverses the direction of the vertical shift.",
+   "Reverses the direction of the horizontal shift.",
+   "Reverses both shifts."
+  ]
+ },
+ {
+  "id": "pre_transform_point",
+  "topic": "1.12",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the image point is computed by evaluating g at the transformed input using a numeric stand-in for f that passes through the given point"
+  ],
+  "misconceptions": [
+   "Applies the vertical shift before the vertical stretch.",
+   "Shifts horizontally in the wrong direction.",
+   "Ignores the horizontal shift."
+  ]
+ },
+ {
+  "id": "pre_transform_reflect_describe",
+  "topic": "1.12",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "image points of two sample points are computed numerically for the transformation"
+  ],
+  "misconceptions": [
+   "Treats the added constant as a horizontal translation.",
+   "Confuses a reflection across the y-axis with a reflection across the x-axis.",
+   "Reverses the direction of the vertical translation."
+  ]
+ },
+ {
+  "id": "pre_trig_angle_sum_exact",
+  "topic": "3.12",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy exact expansion versus numpy floating-point evaluation of the combined angle"
+  ],
+  "misconceptions": [
+   "Keeps only the first product of the identity.",
+   "Uses the wrong sign between the two products in the identity.",
+   "Uses $\\sin(a\\pm b)=\\sin a\\pm\\sin b$."
+  ]
+ },
+ {
+  "id": "pre_trig_avg_roc_exact",
+  "topic": "3.4",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy exact evaluation versus numpy floating-point evaluation"
+  ],
+  "misconceptions": [
+   "Divides by the sum $\\frac{5 \\pi}{6}$ of the endpoints instead of the difference.",
+   "Divides the change in the angle by the change in the function values, the reciprocal.",
+   "Reports the change in the function values, $- \\frac{1}{2}$, without dividing by $\\frac{\\pi}{6}$."
+  ]
+ },
+ {
+  "id": "pre_trig_equation_sets",
+  "topic": "3.10",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solveset on the interval versus substitution of each answer into the equation numerically"
+  ],
+  "misconceptions": [
+   "Finds only the first solution and misses the second solution in the interval.",
+   "Uses the complementary angles $\\pi/2-x$ of the solutions.",
+   "Solves $\\cosx=\\frac{1}{2}$, the opposite value, instead of $\\cosx=- \\frac{1}{2}$."
+  ]
+ },
+ {
+  "id": "pre_trig_equation_sum_calc",
+  "topic": "3.10",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "inverse function closed form for every solution versus a sign-change scan with brentq refinement"
+  ],
+  "misconceptions": [
+   "Solves $5\\cos\\theta=1$ ignoring the multiplier $3$ of the angle and reports its greatest solution.",
+   "Reports the smallest solution $\\theta\\approx0.456$ instead of the greatest.",
+   "Reports the second-greatest solution $\\theta\\approx4.645$."
+  ]
+ },
+ {
+  "id": "pre_trig_identity",
+  "topic": "3.12",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of both expressions at two test values"
+  ],
+  "misconceptions": [
+   "Uses the sine of a sum.",
+   "Uses a product of cosines.",
+   "Uses the difference formula, with the opposite sign."
+  ]
+ },
+ {
+  "id": "pre_trig_inequality_interval",
+  "topic": "3.10",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical sign tests at the midpoints of the intervals"
+  ],
+  "misconceptions": [
+   "Includes the endpoints even though the inequality is strict.",
+   "Reports the solution set of the reversed inequality.",
+   "Reports only the last interval after the second solution."
+  ]
+ },
+ {
+  "id": "pre_trig_intersection_calc",
+  "topic": "3.10",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a sign-change scan with brentq refinement versus a dense grid minimum of the absolute difference"
+  ],
+  "misconceptions": [
+   "Reports the $y$-coordinate $1.035$ of the first intersection instead of its $x$-coordinate.",
+   "Reports the second intersection $x\\approx0.901$ instead of the first.",
+   "Reverses the sign of the constant, solving $3\\sin(3x)=0.3x-1$."
+  ]
+ },
+ {
+  "id": "pre_trig_quadratic_equation",
+  "topic": "3.10",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical substitution of every solution into the original equation"
+  ],
+  "misconceptions": [
+   "Solves $\\cos x=\\frac{1}{2}$ instead of $\\cos x=- \\frac{1}{2}$ for the first factor.",
+   "Solves $\\cos x=1$ instead of $\\cos x=-1$ for the second factor.",
+   "Finds only the solutions of $\\cos x=-1$ and misses the solutions of $\\cos x=- \\frac{1}{2}$."
+  ]
+ },
+ {
+  "id": "pre_trig_solution_count",
+  "topic": "3.10",
+  "skill": "2",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a dense sign-change scan of the function minus the constant over the interval"
+  ],
+  "misconceptions": [
+   "Counts four solutions per period, one in each quadrant.",
+   "Counts the solutions in one period only.",
+   "Uses $k$ as the count, forgetting that each period has two solutions."
+  ]
+ },
+ {
+  "id": "pre_trig_two_curves_calc",
+  "topic": "3.10",
+  "skill": "1",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a sign-change scan with brentq refinement versus a dense grid minimum of the absolute difference"
+  ],
+  "misconceptions": [
+   "Reports the number of intersections, 4, instead of an $x$-value.",
+   "Reports the second intersection $x\\approx1.732$ instead of the first.",
+   "Reports the $y$-coordinate $0.949$ of the first intersection."
+  ]
+ },
+ {
+  "id": "pre_trig_zero_count_calc",
+  "topic": "3.10",
+  "skill": "2",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a dense sign-change scan of the difference over the interval"
+  ],
+  "misconceptions": [
+   "Counts the maxima of the sine curve in the interval.",
+   "Excludes the solution at $x=0$.",
+   "Counts one extra solution."
+  ]
+ },
+ {
+  "id": "pre_unit_circle_coords",
+  "topic": "3.2",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical cosine and sine of the angle give the coordinates on the unit circle"
+  ],
+  "misconceptions": [
+   "Uses the wrong sign for the y-coordinate.",
+   "Uses the wrong sign for the x-coordinate.",
+   "Swaps the cosine and sine coordinates."
+  ]
+ },
+ {
+  "id": "pre_unit_circle_value",
+  "topic": "3.3",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy exact trigonometric evaluation versus numpy floating-point evaluation of the same angle"
+  ],
+  "misconceptions": [
+   "Uses the value for the complementary reference angle.",
+   "Reports the value with the opposite sign: the sign for the quadrant is wrong.",
+   "Uses the reciprocal-side value: swaps the roles of the two coordinates."
+  ]
+ },
+ {
+  "id": "pre_vertex_form_max",
+  "topic": "1.3",
+  "skill": "1",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "completing the square versus numpy polyval at the vertex abscissa"
+  ],
+  "misconceptions": [
+   "Reports the initial value $h(0)$.",
+   "Reports the time at which the maximum occurs.",
+   "Reports the leading coefficient."
+  ]
+ }
+]
