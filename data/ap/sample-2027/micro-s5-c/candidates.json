@@ -1,0 +1,2609 @@
+[
+ {
+  "candidateKey": "ap_microeconomics-m01-k0",
+  "cellId": "ap_microeconomics-m01",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "5.2",
+  "unitCode": "5",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_labor_forces_both_shift",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student must identify the direction of two simultaneous shifts in a competitive labor market (supply left, demand right) and combine them: the wage unambiguously rises while the employment change is indeterminate. This requires one comparative-statics step with two effects and no calculation. It is a standard AP-style multiple-variable interpretation item, and the distractors target common errors such as a single-curve shift or a wrong wage direction. The wording is clear and the model assumption (competitive factor market) is stated, so nothing makes it unfairly hard.",
+  "payload": {
+   "archetype": "mi_labor_forces_both_shift",
+   "topic": "5.2",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "In a competitive labor market, a union convinces some workers to retire early, which reduces the number of workers willing to work at every wage, while at the same time higher demand for the product raises the marginal revenue product of labor. Which statement describes the effect on the equilibrium wage and employment?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Employment falls and the wage is indeterminate, because the shifts push the wage in opposite directions.",
+     "why": "Both shifts raise the wage, so the wage is determinate; employment is the indeterminate variable.",
+     "value": null
+    },
+    {
+     "text": "The wage rises and employment falls, because labor supply is the only curve that shifts.",
+     "why": "Labor demand also shifts right, which offsets the fall in employment.",
+     "value": null
+    },
+    {
+     "text": "The wage rises, but the change in employment is indeterminate, because labor supply shifts left and labor demand shifts right.",
+     "why": "A leftward supply shift and a rightward demand shift both raise the wage; employment falls with the supply shift and rises with the demand shift, so its change depends on the sizes.",
+     "value": null
+    },
+    {
+     "text": "The wage falls and employment is indeterminate, because fewer workers lower the wage.",
+     "why": "Fewer workers raise, not lower, the wage when supply shifts left.",
+     "value": null
+    },
+    {
+     "text": "Employment rises and the wage rises, because demand for the product increased.",
+     "why": "Ignores the supply decrease; a smaller labor force reduces the quantity of labor supplied at each wage.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 60,
+   "facts": [
+    "variant=In a competitive labor market, a union c"
+   ],
+   "blueprint": {
+    "id": "mi_labor_forces_both_shift",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "simultaneous shifts in labor demand and labor supply: one variable is determinate, the other is not",
+    "topic": "5.2",
+    "skill": "2.B",
+    "student_thinking": [
+     "Identify the economic model that applies: simultaneous shifts in labor demand and labor supply: one variable is determinate, the other is not",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Both shifts raise the wage, so the wage is determinate; employment is the indeterminate variable."
+     },
+     {
+      "id": "m2",
+      "description": "Labor demand also shifts right, which offsets the fall in employment."
+     },
+     {
+      "id": "m3",
+      "description": "Fewer workers raise, not lower, the wage when supply shifts left."
+     },
+     {
+      "id": "m4",
+      "description": "Ignores the supply decrease; a smaller labor force reduces the quantity of labor supplied at each wage."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted scenarios; the key applies the double-shift rule to wage and employment",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "combine the two shifts and decide which variable is determinate"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: simultaneous shifts in labor demand and labor supply: one variable is determinate, the other is not",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_labor_forces_both_shift",
+     "explanation_assumptions_id": "mi_labor_forces_both_shift"
+    }
+   },
+   "seed": 32000,
+   "pack_id": "mi_labor_forces_both_shift-s32000",
+   "explanation_en": "The correct answer is The wage rises, but the change in employment is indeterminate, because labor supply shifts left and labor demand shifts right.. A leftward supply shift and a rightward demand shift both raise the wage; employment falls with the supply shift and rises with the demand shift, so its change depends on the sizes.\nEmployment falls and the wage is indeterminate, because the shifts push the wage in opposite directions. is incorrect: Both shifts raise the wage, so the wage is determinate; employment is the indeterminate variable.\nThe wage rises and employment falls, because labor supply is the only curve that shifts. is incorrect: Labor demand also shifts right, which offsets the fall in employment.\nThe wage falls and employment is indeterminate, because fewer workers lower the wage. is incorrect: Fewer workers raise, not lower, the wage when supply shifts left.\nEmployment rises and the wage rises, because demand for the product increased. is incorrect: Ignores the supply decrease; a smaller labor force reduces the quantity of labor supplied at each wage."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_labor_forces_both_shift",
+   "facts": [
+    "variant=In a competitive labor market, a union c"
+   ],
+   "seed": 32000
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.2: simultaneous shifts in labor demand and labor supply. Skill 2.B (combining multiple variables to explain an outcome) fits well. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Supply left and demand right (MRP up) both raise the wage; employment is indeterminate. Option C is the unique correct answer. The union only reduces supply via early retirement, which is clear."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. The stem is complete and clearly worded, and the shift directions are unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor reflects a distinct misconception (wrong determinate variable, ignoring a shift, wrong wage direction, ignoring supply). The explanation addresses every wrong option. Option C is slightly longer, but the lengths are similar across options and not a significant giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, five options, no calculation. Typical of AP Micro. The calculator designation is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, unambiguous double-shift item with a unique key, distinct distractors, and appropriate scope and load. Passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must identify the direction of two simultaneous shifts in a competitive labor market (supply left, demand right) and combine them: the wage unambiguously rises while the employment change is indeterminate. This requires one comparative-statics step with two effects and no calculation. It is a standard AP-style multiple-variable interpretation item, and the distractors target common errors such as a single-curve shift or a wrong wage direction. The wording is clear and the model assumption (competitive factor market) is stated, so nothing makes it unfairly hard.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m01-k1",
+  "cellId": "ap_microeconomics-m01",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "5.2",
+  "unitCode": "5",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_labor_forces_both_shift",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student must identify the competitive labor market model, map each event to a shift (technology raises MRP so demand shifts right; more residents shift supply right), and combine the two shifts: employment rises for sure, wage is indeterminate. This is a standard double-shift comparative-statics step with no calculation. It is appropriate for full mocks and is neither introductory nor beyond the exam's scope. Distractors target common errors (misdirected shift, assuming a determinate wage, cancellation).",
+  "payload": {
+   "archetype": "mi_labor_forces_both_shift",
+   "topic": "5.2",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "Two things happen at once in a competitive labor market for warehouse workers: a new scanning technology raises each worker's marginal product, and a wave of new residents increases the number of people willing to work at every wage. Which statement describes the effect on the equilibrium wage and employment?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Employment is indeterminate, but the wage rises, because demand and supply shift in opposite directions.",
+     "why": "Both curves shift right, so employment rises with certainty and the wage is the indeterminate variable.",
+     "value": null
+    },
+    {
+     "text": "The wage rises and employment rises, because greater productivity always raises wages.",
+     "why": "Ignores the supply shift; more workers put downward pressure on the wage.",
+     "value": null
+    },
+    {
+     "text": "The wage falls and employment falls, because more workers compete for the same jobs.",
+     "why": "Ignores the demand shift and mislabels employment; both shifts raise employment.",
+     "value": null
+    },
+    {
+     "text": "Neither the wage nor employment changes, because the two shifts cancel each other out.",
+     "why": "The shifts offset only in the wage in special cases; both increase the quantity of labor employed.",
+     "value": null
+    },
+    {
+     "text": "Employment rises, but the change in the wage is indeterminate, because labor demand shifts right and labor supply shifts right at the same time.",
+     "why": "Higher productivity shifts labor demand right (wage up, employment up) and more workers shifts labor supply right (wage down, employment up); employment rises for sure, the wage depends on which shift is larger.",
+     "value": null
+    }
+   ],
+   "key_index": 4,
+   "est_seconds": 60,
+   "facts": [
+    "variant=Two things happen at once in a competiti"
+   ],
+   "blueprint": {
+    "id": "mi_labor_forces_both_shift",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "simultaneous shifts in labor demand and labor supply: one variable is determinate, the other is not",
+    "topic": "5.2",
+    "skill": "2.B",
+    "student_thinking": [
+     "Identify the economic model that applies: simultaneous shifts in labor demand and labor supply: one variable is determinate, the other is not",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Both curves shift right, so employment rises with certainty and the wage is the indeterminate variable."
+     },
+     {
+      "id": "m2",
+      "description": "Ignores the supply shift; more workers put downward pressure on the wage."
+     },
+     {
+      "id": "m3",
+      "description": "Ignores the demand shift and mislabels employment; both shifts raise employment."
+     },
+     {
+      "id": "m4",
+      "description": "The shifts offset only in the wage in special cases; both increase the quantity of labor employed."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted scenarios; the key applies the double-shift rule to wage and employment",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "combine the two shifts and decide which variable is determinate"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: simultaneous shifts in labor demand and labor supply: one variable is determinate, the other is not",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_labor_forces_both_shift",
+     "explanation_assumptions_id": "mi_labor_forces_both_shift"
+    }
+   },
+   "seed": 32001,
+   "pack_id": "mi_labor_forces_both_shift-s32001",
+   "explanation_en": "The correct answer is Employment rises, but the change in the wage is indeterminate, because labor demand shifts right and labor supply shifts right at the same time.. Higher productivity shifts labor demand right (wage up, employment up) and more workers shifts labor supply right (wage down, employment up); employment rises for sure, the wage depends on which shift is larger.\nEmployment is indeterminate, but the wage rises, because demand and supply shift in opposite directions. is incorrect: Both curves shift right, so employment rises with certainty and the wage is the indeterminate variable.\nThe wage rises and employment rises, because greater productivity always raises wages. is incorrect: Ignores the supply shift; more workers put downward pressure on the wage.\nThe wage falls and employment falls, because more workers compete for the same jobs. is incorrect: Ignores the demand shift and mislabels employment; both shifts raise employment.\nNeither the wage nor employment changes, because the two shifts cancel each other out. is incorrect: The shifts offset only in the wage in special cases; both increase the quantity of labor employed."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_labor_forces_both_shift",
+   "facts": [
+    "variant=Two things happen at once in a competiti"
+   ],
+   "seed": 32001
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 60 seconds, no arithmetic, five options, typical of AP style.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item with a unique correct key and clear wording. Distractors are plausible and each is explained. The only weakness is that the correct option is longer than the others."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must identify the competitive labor market model, map each event to a shift (technology raises MRP so demand shifts right; more residents shift supply right), and combine the two shifts: employment rises for sure, wage is indeterminate. This is a standard double-shift comparative-statics step with no calculation. It is appropriate for full mocks and is neither introductory nor beyond the exam's scope. Distractors target common errors (misdirected shift, assuming a determinate wage, cancellation).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m01-k2",
+  "cellId": "ap_microeconomics-m01",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "5.2",
+  "unitCode": "5",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_labor_forces_both_shift",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Requires classifying two events as a factor demand shift (higher MRP from technology) and a factor supply shift (more workers), then combining them: employment rises, wage change is ambiguous. Standard double-shift comparative statics with no computation, clear wording, and plausible distractors (cancel-out, always-wage-rises, wrong indeterminate variable). Fits the skill 2.B explanation of an outcome with multiple contributing variables.",
+  "payload": {
+   "archetype": "mi_labor_forces_both_shift",
+   "topic": "5.2",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "Two things happen at once in a competitive labor market for warehouse workers: a new scanning technology raises each worker's marginal product, and a wave of new residents increases the number of people willing to work at every wage. Which statement describes the effect on the equilibrium wage and employment?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Employment rises, but the change in the wage is indeterminate, because labor demand shifts right and labor supply shifts right at the same time.",
+     "why": "Higher productivity shifts labor demand right (wage up, employment up) and more workers shifts labor supply right (wage down, employment up); employment rises for sure, the wage depends on which shift is larger.",
+     "value": null
+    },
+    {
+     "text": "Neither the wage nor employment changes, because the two shifts cancel each other out.",
+     "why": "The shifts offset only in the wage in special cases; both increase the quantity of labor employed.",
+     "value": null
+    },
+    {
+     "text": "Employment is indeterminate, but the wage rises, because demand and supply shift in opposite directions.",
+     "why": "Both curves shift right, so employment rises with certainty and the wage is the indeterminate variable.",
+     "value": null
+    },
+    {
+     "text": "The wage falls and employment falls, because more workers compete for the same jobs.",
+     "why": "Ignores the demand shift and mislabels employment; both shifts raise employment.",
+     "value": null
+    },
+    {
+     "text": "The wage rises and employment rises, because greater productivity always raises wages.",
+     "why": "Ignores the supply shift; more workers put downward pressure on the wage.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 60,
+   "facts": [
+    "variant=Two things happen at once in a competiti"
+   ],
+   "blueprint": {
+    "id": "mi_labor_forces_both_shift",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "simultaneous shifts in labor demand and labor supply: one variable is determinate, the other is not",
+    "topic": "5.2",
+    "skill": "2.B",
+    "student_thinking": [
+     "Identify the economic model that applies: simultaneous shifts in labor demand and labor supply: one variable is determinate, the other is not",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "The shifts offset only in the wage in special cases; both increase the quantity of labor employed."
+     },
+     {
+      "id": "m2",
+      "description": "Both curves shift right, so employment rises with certainty and the wage is the indeterminate variable."
+     },
+     {
+      "id": "m3",
+      "description": "Ignores the demand shift and mislabels employment; both shifts raise employment."
+     },
+     {
+      "id": "m4",
+      "description": "Ignores the supply shift; more workers put downward pressure on the wage."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted scenarios; the key applies the double-shift rule to wage and employment",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "combine the two shifts and decide which variable is determinate"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: simultaneous shifts in labor demand and labor supply: one variable is determinate, the other is not",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_labor_forces_both_shift",
+     "explanation_assumptions_id": "mi_labor_forces_both_shift"
+    }
+   },
+   "seed": 32002,
+   "pack_id": "mi_labor_forces_both_shift-s32002",
+   "explanation_en": "The correct answer is Employment rises, but the change in the wage is indeterminate, because labor demand shifts right and labor supply shifts right at the same time.. Higher productivity shifts labor demand right (wage up, employment up) and more workers shifts labor supply right (wage down, employment up); employment rises for sure, the wage depends on which shift is larger.\nNeither the wage nor employment changes, because the two shifts cancel each other out. is incorrect: The shifts offset only in the wage in special cases; both increase the quantity of labor employed.\nEmployment is indeterminate, but the wage rises, because demand and supply shift in opposite directions. is incorrect: Both curves shift right, so employment rises with certainty and the wage is the indeterminate variable.\nThe wage falls and employment falls, because more workers compete for the same jobs. is incorrect: Ignores the demand shift and mislabels employment; both shifts raise employment.\nThe wage rises and employment rises, because greater productivity always raises wages. is incorrect: Ignores the supply shift; more workers put downward pressure on the wage."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_labor_forces_both_shift",
+   "facts": [
+    "variant=Two things happen at once in a competiti"
+   ],
+   "seed": 32002
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.2 double shift in labor demand and supply; skill 2.B combined effects."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the unique correct answer: employment rises, wage indeterminate."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is clear and complete, five options."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions; every wrong option explained. Option B's rationale is slightly awkward but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, no arithmetic, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound conceptual MC on simultaneous labor demand and supply shifts. The key is unique and the distractors are distinct. No issues found."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires classifying two events as a factor demand shift (higher MRP from technology) and a factor supply shift (more workers), then combining them: employment rises, wage change is ambiguous. Standard double-shift comparative statics with no computation, clear wording, and plausible distractors (cancel-out, always-wage-rises, wrong indeterminate variable). Fits the skill 2.B explanation of an outcome with multiple contributing variables.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m02-k0",
+  "cellId": "ap_microeconomics-m02",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "5.3",
+  "unitCode": "5",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_input_price_effect",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single comparative-statics step: a fall in the price of a complementary input shifts labor demand rightward, through a higher MRP of cooks and an output effect. No computation or graph is needed. The concept is core to topic 5.2/5.3 (determinants of factor demand), and distractors test common confusions (movement along vs. shift, substitute vs. complement, wage unchanged). The two contributing variables (MP effect and output effect) give modest skill 2.B depth, but the item is a standard recognition-level question.",
+  "payload": {
+   "archetype": "mi_input_price_effect",
+   "topic": "5.3",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "A restaurant uses cooks and ovens together, and the two inputs are complements in production. The price of ovens falls. Holding the wage constant, which statement correctly describes the effect on the restaurant's demand for cooks?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The quantity of cooks demanded decreases along the labor demand curve, because ovens cost less.",
+     "why": "A change in another input's price shifts the whole curve; it is not a movement along the curve.",
+     "value": null
+    },
+    {
+     "text": "The demand for cooks decreases, because lower costs of ovens reduce the restaurant's output.",
+     "why": "Lower input costs raise the profit-maximizing output.",
+     "value": null
+    },
+    {
+     "text": "The demand for cooks increases, because cheaper ovens raise the marginal product of cooks and the restaurant expands output.",
+     "why": "When inputs are complements, a cheaper partner input raises the productivity of labor and the scale of output, so labor demand shifts right.",
+     "value": null
+    },
+    {
+     "text": "The demand for cooks is unaffected, because the wage has not changed.",
+     "why": "A change in the price of a complementary input shifts labor demand even if the wage is unchanged.",
+     "value": null
+    },
+    {
+     "text": "The demand for cooks decreases, because the restaurant substitutes ovens for cooks.",
+     "why": "Treats complements as substitutes.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 60,
+   "facts": [
+    "variant=A restaurant uses cooks and ovens togeth"
+   ],
+   "blueprint": {
+    "id": "mi_input_price_effect",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "the price of a substitute or complementary input shifts labor demand through substitution and output effects",
+    "topic": "5.3",
+    "skill": "2.B",
+    "student_thinking": [
+     "Identify the economic model that applies: the price of a substitute or complementary input shifts labor demand through substitution and output effects",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "A change in another input's price shifts the whole curve; it is not a movement along the curve."
+     },
+     {
+      "id": "m2",
+      "description": "Lower input costs raise the profit-maximizing output."
+     },
+     {
+      "id": "m3",
+      "description": "A change in the price of a complementary input shifts labor demand even if the wage is unchanged."
+     },
+     {
+      "id": "m4",
+      "description": "Treats complements as substitutes."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted scenarios; the key combines the substitution and output effects",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "separate the substitution effect from the output effect and decide the net direction"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: the price of a substitute or complementary input shifts labor demand through substitution and output effects",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_input_price_effect",
+     "explanation_assumptions_id": "mi_input_price_effect"
+    }
+   },
+   "seed": 32000,
+   "pack_id": "mi_input_price_effect-s32000",
+   "explanation_en": "The correct answer is The demand for cooks increases, because cheaper ovens raise the marginal product of cooks and the restaurant expands output.. When inputs are complements, a cheaper partner input raises the productivity of labor and the scale of output, so labor demand shifts right.\nThe quantity of cooks demanded decreases along the labor demand curve, because ovens cost less. is incorrect: A change in another input's price shifts the whole curve; it is not a movement along the curve.\nThe demand for cooks decreases, because lower costs of ovens reduce the restaurant's output. is incorrect: Lower input costs raise the profit-maximizing output.\nThe demand for cooks is unaffected, because the wage has not changed. is incorrect: A change in the price of a complementary input shifts labor demand even if the wage is unchanged.\nThe demand for cooks decreases, because the restaurant substitutes ovens for cooks. is incorrect: Treats complements as substitutes."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_input_price_effect",
+   "facts": [
+    "variant=A restaurant uses cooks and ovens togeth"
+   ],
+   "seed": 32000
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 60 seconds, five options, no arithmetic, and the options are parallel in form and length.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean conceptual item with a unique key and distinct distractors. The scope is at the 5.2/5.3 boundary but acceptable. Pass."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single comparative-statics step: a fall in the price of a complementary input shifts labor demand rightward, through a higher MRP of cooks and an output effect. No computation or graph is needed. The concept is core to topic 5.2/5.3 (determinants of factor demand), and distractors test common confusions (movement along vs. shift, substitute vs. complement, wage unchanged). The two contributing variables (MP effect and output effect) give modest skill 2.B depth, but the item is a standard recognition-level question.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m02-k1",
+  "cellId": "ap_microeconomics-m02",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "5.3",
+  "unitCode": "5",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_input_price_effect",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Requires recognizing that a fall in the price of a substitute input shifts factor demand (not a movement along the curve) and weighing two opposing effects, substitution and output. Conceptual only, with no computation and little reading. Distractors reflect common misconceptions, and the item stays within Unit 5 scope. Moderate depth fits a full-mock exam item rather than basic recall.",
+  "payload": {
+   "archetype": "mi_input_price_effect",
+   "topic": "5.3",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "A restaurant can make meals with either cooks or automated kitchen machines, and the two are substitutes in production. The price of the automated machines falls sharply. Holding the wage constant, which statement correctly describes the effect on the restaurant's demand for cooks?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The demand for cooks decreases by the full amount, because the output effect never matters.",
+     "why": "Ignores the output effect that partly offsets the substitution effect.",
+     "value": null
+    },
+    {
+     "text": "The demand for cooks increases, because the restaurant is producing more meals.",
+     "why": "Reports only the output effect and ignores the substitution of machines for cooks.",
+     "value": null
+    },
+    {
+     "text": "The demand for cooks is unaffected, because labor demand depends only on the wage.",
+     "why": "Labor demand also depends on the prices of other inputs and on the product price.",
+     "value": null
+    },
+    {
+     "text": "The quantity of cooks demanded increases along the same labor demand curve, because machines are cheaper.",
+     "why": "A change in another input's price shifts the labor demand curve rather than moving along it.",
+     "value": null
+    },
+    {
+     "text": "The restaurant substitutes machines for cooks, which tends to decrease the demand for cooks, though the larger output it can now afford works in the opposite direction.",
+     "why": "A cheaper substitute input lowers demand for labor through the substitution effect, partly offset by an output effect when lower costs raise production.",
+     "value": null
+    }
+   ],
+   "key_index": 4,
+   "est_seconds": 60,
+   "facts": [
+    "variant=A restaurant can make meals with either "
+   ],
+   "blueprint": {
+    "id": "mi_input_price_effect",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "the price of a substitute or complementary input shifts labor demand through substitution and output effects",
+    "topic": "5.3",
+    "skill": "2.B",
+    "student_thinking": [
+     "Identify the economic model that applies: the price of a substitute or complementary input shifts labor demand through substitution and output effects",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Ignores the output effect that partly offsets the substitution effect."
+     },
+     {
+      "id": "m2",
+      "description": "Reports only the output effect and ignores the substitution of machines for cooks."
+     },
+     {
+      "id": "m3",
+      "description": "Labor demand also depends on the prices of other inputs and on the product price."
+     },
+     {
+      "id": "m4",
+      "description": "A change in another input's price shifts the labor demand curve rather than moving along it."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted scenarios; the key combines the substitution and output effects",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "separate the substitution effect from the output effect and decide the net direction"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: the price of a substitute or complementary input shifts labor demand through substitution and output effects",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_input_price_effect",
+     "explanation_assumptions_id": "mi_input_price_effect"
+    }
+   },
+   "seed": 32001,
+   "pack_id": "mi_input_price_effect-s32001",
+   "explanation_en": "The correct answer is The restaurant substitutes machines for cooks, which tends to decrease the demand for cooks, though the larger output it can now afford works in the opposite direction.. A cheaper substitute input lowers demand for labor through the substitution effect, partly offset by an output effect when lower costs raise production.\nThe demand for cooks decreases by the full amount, because the output effect never matters. is incorrect: Ignores the output effect that partly offsets the substitution effect.\nThe demand for cooks increases, because the restaurant is producing more meals. is incorrect: Reports only the output effect and ignores the substitution of machines for cooks.\nThe demand for cooks is unaffected, because labor demand depends only on the wage. is incorrect: Labor demand also depends on the prices of other inputs and on the product price.\nThe quantity of cooks demanded increases along the same labor demand curve, because machines are cheaper. is incorrect: A change in another input's price shifts the labor demand curve rather than moving along it."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_input_price_effect",
+   "facts": [
+    "variant=A restaurant can make meals with either "
+   ],
+   "seed": 32001
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.3 factor demand shifts from a substitute input's price, with substitution and output effects. Skill 2.B (several contributing variables) fits. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "E is the only option that correctly describes both effects. The stem says the two inputs are substitutes in production and that the wage is held constant. Option E says the substitution effect 'tends to decrease' demand and the output effect works in the opposite direction, so it makes no claim about the net direction. Option A says the full decrease with the output effect never mattering, which is wrong. Option B reports only the output effect. Option C ignores other input prices. Option D confuses a shift with a movement along the curve. One small weakness: the stem asks for the effect and the key leaves the net direction open, but this is the standard textbook treatment and E is still the unique correct statement."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is self-contained, clear, and in US English. The model assumptions (substitutes, wage constant) are stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (ignoring the output effect, ignoring the substitution effect, labor demand depends only on the wage, movement along the curve versus a shift). The explanation addresses every wrong option. Option E is longer than the others, which is a mild length cue, but the other options are also sentence-length."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60 seconds, needs no calculation, and has five options as expected. A calculator is allowed but not needed, which is acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean conceptual MC on how a substitute input's price change shifts labor demand. The key is unique and the distractors map to distinct misconceptions. The one weakness is that the key leaves the net direction open, which I judged acceptable. I recommend passing it."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires recognizing that a fall in the price of a substitute input shifts factor demand (not a movement along the curve) and weighing two opposing effects, substitution and output. Conceptual only, with no computation and little reading. Distractors reflect common misconceptions, and the item stays within Unit 5 scope. Moderate depth fits a full-mock exam item rather than basic recall.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m02-k2",
+  "cellId": "ap_microeconomics-m02",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "5.3",
+  "unitCode": "5",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_input_price_effect",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_key_scoring; criterion_failed_distractor_explanation; criterion_failed_exam_suitability; instant_reject_multiple_correct; instant_reject_missing_condition; reference_pattern_mismatch",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept comparative-statics item: a fall in the price of a substitute input creates a substitution effect (lowers labor demand) and an output effect (raises it). No calculation or graph is needed, and the reading load is minimal. The distractors target standard misconceptions (movement along the curve vs. a shift, ignoring the output effect, wage-only dependence). It is a clean conceptual check, with only mild two-effect reasoning, and its difficulty does not come from unfair sources.",
+  "payload": {
+   "archetype": "mi_input_price_effect",
+   "topic": "5.3",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "A restaurant can make meals with either cooks or automated kitchen machines, and the two are substitutes in production. The price of the automated machines falls sharply. Holding the wage constant, which statement correctly describes the effect on the restaurant's demand for cooks?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The restaurant substitutes machines for cooks, which tends to decrease the demand for cooks, though the larger output it can now afford works in the opposite direction.",
+     "why": "A cheaper substitute input lowers demand for labor through the substitution effect, partly offset by an output effect when lower costs raise production.",
+     "value": null
+    },
+    {
+     "text": "The quantity of cooks demanded increases along the same labor demand curve, because machines are cheaper.",
+     "why": "A change in another input's price shifts the labor demand curve rather than moving along it.",
+     "value": null
+    },
+    {
+     "text": "The demand for cooks decreases by the full amount, because the output effect never matters.",
+     "why": "Ignores the output effect that partly offsets the substitution effect.",
+     "value": null
+    },
+    {
+     "text": "The demand for cooks is unaffected, because labor demand depends only on the wage.",
+     "why": "Labor demand also depends on the prices of other inputs and on the product price.",
+     "value": null
+    },
+    {
+     "text": "The demand for cooks increases, because the restaurant is producing more meals.",
+     "why": "Reports only the output effect and ignores the substitution of machines for cooks.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 60,
+   "facts": [
+    "variant=A restaurant can make meals with either "
+   ],
+   "blueprint": {
+    "id": "mi_input_price_effect",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "the price of a substitute or complementary input shifts labor demand through substitution and output effects",
+    "topic": "5.3",
+    "skill": "2.B",
+    "student_thinking": [
+     "Identify the economic model that applies: the price of a substitute or complementary input shifts labor demand through substitution and output effects",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "A change in another input's price shifts the labor demand curve rather than moving along it."
+     },
+     {
+      "id": "m2",
+      "description": "Ignores the output effect that partly offsets the substitution effect."
+     },
+     {
+      "id": "m3",
+      "description": "Labor demand also depends on the prices of other inputs and on the product price."
+     },
+     {
+      "id": "m4",
+      "description": "Reports only the output effect and ignores the substitution of machines for cooks."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted scenarios; the key combines the substitution and output effects",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "separate the substitution effect from the output effect and decide the net direction"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: the price of a substitute or complementary input shifts labor demand through substitution and output effects",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_input_price_effect",
+     "explanation_assumptions_id": "mi_input_price_effect"
+    }
+   },
+   "seed": 32002,
+   "pack_id": "mi_input_price_effect-s32002",
+   "explanation_en": "The correct answer is The restaurant substitutes machines for cooks, which tends to decrease the demand for cooks, though the larger output it can now afford works in the opposite direction.. A cheaper substitute input lowers demand for labor through the substitution effect, partly offset by an output effect when lower costs raise production.\nThe quantity of cooks demanded increases along the same labor demand curve, because machines are cheaper. is incorrect: A change in another input's price shifts the labor demand curve rather than moving along it.\nThe demand for cooks decreases by the full amount, because the output effect never matters. is incorrect: Ignores the output effect that partly offsets the substitution effect.\nThe demand for cooks is unaffected, because labor demand depends only on the wage. is incorrect: Labor demand also depends on the prices of other inputs and on the product price.\nThe demand for cooks increases, because the restaurant is producing more meals. is incorrect: Reports only the output effect and ignores the substitution of machines for cooks."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_input_price_effect",
+   "facts": [
+    "variant=A restaurant can make meals with either "
+   ],
+   "seed": 32002
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The time and reading load are fine. But an AP item should not rely on an unresolved net-effect ambiguity, and the key is a hedged \"tends to\" statement that depends on an unstated assumption.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "multiple_correct",
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The stem never says which effect dominates, so the net change in labor demand is indeterminate. Option E (demand increases from the output effect) is arguably also correct, and key A hedges on direction. Fail for multiple defensible answers and a missing condition."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept comparative-statics item: a fall in the price of a substitute input creates a substitution effect (lowers labor demand) and an output effect (raises it). No calculation or graph is needed, and the reading load is minimal. The distractors target standard misconceptions (movement along the curve vs. a shift, ignoring the output effect, wage-only dependence). It is a clean conceptual check, with only mild two-effect reasoning, and its difficulty does not come from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-f01-k0",
+  "cellId": "ap_microeconomics-f01",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "frq_bundle",
+  "keywordCode": "3.6",
+  "unitCode": "3",
+  "skillPrimary": "2.C",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "mif_short_shutdown",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard AP-style perfect competition item. Students must derive marginal cost from a total variable cost table (a representation change), apply MR=MC with P=19 to find Q=3, compute economic loss (TR 57 - TC 63 = -6), compare TR to TVC (or P to AVC) for the shutdown decision, explain why producing minimizes loss relative to the fixed cost loss of $21, and describe long-run exit due to economic losses. Concepts are core to topic 3.6 and span 3.4 and 3.7. Arithmetic is short with whole numbers, wording is unambiguous, and the reading load is low. The multi-part chain is moderate in depth, appropriate for a full mock.",
+  "payload": {
+   "archetype": "mif_short_shutdown",
+   "template": "short_shutdown",
+   "topic": "3.6",
+   "extra_topics": [
+    "3.4",
+    "3.7"
+   ],
+   "skill": "2.C",
+   "calculator": "allowed",
+   "title": "Total variable cost of producing ceramic mugs per day for one firm in a perfectly competitive market where the price is $19 per unit. The firm's total fixed cost is $21 per day",
+   "stimulus": {
+    "kind": "table",
+    "description": "Total variable cost of producing ceramic mugs per day for one firm in a perfectly competitive market where the price is $19 per unit. The firm's total fixed cost is $21 per day.",
+    "data": {
+     "columns": [
+      "Quantity",
+      "Total variable cost (dollars)"
+     ],
+     "rows": [
+      [
+       "0",
+       "$0"
+      ],
+      [
+       "1",
+       "$10"
+      ],
+      [
+       "2",
+       "$24"
+      ],
+      [
+       "3",
+       "$42"
+      ],
+      [
+       "4",
+       "$64"
+      ],
+      [
+       "5",
+       "$90"
+      ],
+      [
+       "6",
+       "$120"
+      ]
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Calculate the quantity that maximizes the firm's profit in the short run.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "2.C"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Produce while the marginal cost of the next unit is at most the price of $19; the marginal cost of unit 3 is $18 and of unit 4 is $22, so the firm produces 3 units.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Profit-maximizing quantity (answer)",
+       "required_elements": [
+        "Compares the price with marginal cost from the changes in total variable cost and chooses the last unit whose marginal cost does not exceed the price (the answer is correct)",
+        "3"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "price equals marginal cost",
+        "produce until marginal cost would exceed the price"
+       ],
+       "common_errors": [
+        "picks the quantity with the lowest average variable cost",
+        "produces the largest quantity in the table"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "3.6"
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Calculate the firm's economic profit or loss at that quantity.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "2.C"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Total revenue = $19 x 3 = $57; total cost = $21 + $42 = $63; the firm has a loss of $6.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Loss (answer)",
+       "required_elements": [
+        "Subtracts total fixed cost plus total variable cost from total revenue to get a loss (the answer is correct)",
+        "6"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "revenue minus total cost",
+        "total revenue less fixed and variable cost"
+       ],
+       "common_errors": [
+        "leaves out the fixed cost",
+        "reports total revenue as the profit"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "3.4"
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Should the firm produce in the short run or shut down? Identify your choice.",
+     "points": 1,
+     "response_mode": "identify",
+     "skill_codes": [
+      "3.A"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. It should keep producing in the short run, because total revenue exceeds total variable cost (the price is above average variable cost), so the firm loses less than the fixed cost it would lose by shutting down.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Chooses to keep producing",
+       "required_elements": [
+        "States that the firm should keep producing rather than shut down"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "operate in the short run",
+        "stay open"
+       ],
+       "common_errors": [
+        "says the firm should shut down because it has a loss"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "3.6"
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Explain why your answer to part (C) is correct for the short run even though the firm has an economic loss.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. The fixed cost of $21 must be paid whether the firm operates or not, so shutting down would lose $21; by operating, revenue covers all the variable cost with $15 left over to cover part of the fixed cost, so the loss is only $6.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Explains with revenue covering variable cost and fixed cost being sunk",
+       "required_elements": [
+        "States that revenue covers variable cost, with something left over toward the fixed cost, so operating loses less than shutting down, where the whole fixed cost is lost"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "the fixed cost is sunk in the short run",
+        "price is above average variable cost"
+       ],
+       "common_errors": [
+        "says the firm earns a profit",
+        "says the fixed cost can be avoided by shutting down in the short run"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "3.6"
+     ]
+    },
+    {
+     "label": "E",
+     "prompt": "If the price stays at this level, describe what will happen to the number of firms in this industry in the long run and explain why.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.B"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Firms exit the industry, because in the long run all costs are avoidable and a firm earning a loss would leave; exit reduces market supply and raises the price until firms earn zero economic profit.",
+     "rubric_rows": [
+      {
+       "row_id": "E1",
+       "points": 1,
+       "criterion": "Explains exit until zero economic profit",
+       "required_elements": [
+        "States that firms leave the industry in the long run because of economic losses, which raises the price toward the level where economic profit is zero"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "market supply decreases and the price rises",
+        "fixed costs are avoidable in the long run"
+       ],
+       "common_errors": [
+        "says new firms enter the industry",
+        "says the number of firms stays the same because firms earn normal profit"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "3.7"
+     ]
+    }
+   ],
+   "total_points": 5,
+   "est_minutes": 12,
+   "facts": [
+    "P=19",
+    "F=21",
+    "mc=[10, 14, 18, 22, 26, 30]",
+    "tvc=[0, 10, 24, 42, 64, 90, 120]",
+    "q*=3",
+    "loss=6",
+    "good=ceramic mugs"
+   ],
+   "context": "shutdown",
+   "blueprint": {
+    "id": "mif_short_shutdown",
+    "subject": "ap_microeconomics",
+    "kind": "frq_bundle",
+    "concept": "Profit-maximizing quantity from marginal cost, economic loss, the shutdown rule, and long-run exit",
+    "topic": "3.6",
+    "skill": "2.C",
+    "student_thinking": [
+     "Find marginal cost from total variable cost",
+     "Compare revenue with total cost and with variable cost",
+     "Reason about sunk fixed cost and long-run exit"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Competitive output market with the price and the fixed cost stated in the table title",
+      "evidence": "stated in the stimulus description"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "total variable cost",
+      "price",
+      "fixed cost"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "argmax of total profit across quantities vs last unit with marginal cost at most the price",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "2.C"
+      ],
+      "topics": [
+       "3.6"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Produce while the marginal cost of the next unit is at most the price of $19; the marginal cost of unit 3 is $18 and of unit 4 is $22, so the firm produces 3 units."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Profit-maximizing quantity (answer)",
+        "elements": [
+         "Compares the price with marginal cost from the changes in total variable cost and chooses the last unit whose marginal cost does not exceed the price (the answer is correct)",
+         "3"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "2.C"
+      ],
+      "topics": [
+       "3.4"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Total revenue = $19 x 3 = $57; total cost = $21 + $42 = $63; the firm has a loss of $6."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Loss (answer)",
+        "elements": [
+         "Subtracts total fixed cost plus total variable cost from total revenue to get a loss (the answer is correct)",
+         "6"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "3.A"
+      ],
+      "topics": [
+       "3.6"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. It should keep producing in the short run, because total revenue exceeds total variable cost (the price is above average variable cost), so the firm loses less than the fixed cost it would lose by shutting down."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Chooses to keep producing",
+        "elements": [
+         "States that the firm should keep producing rather than shut down"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "3.6"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. The fixed cost of $21 must be paid whether the firm operates or not, so shutting down would lose $21; by operating, revenue covers all the variable cost with $15 left over to cover part of the fixed cost, so the loss is only $6."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Explains with revenue covering variable cost and fixed cost being sunk",
+        "elements": [
+         "States that revenue covers variable cost, with something left over toward the fixed cost, so operating loses less than shutting down, where the whole fixed cost is lost"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "E",
+      "skills": [
+       "2.B"
+      ],
+      "topics": [
+       "3.7"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Firms exit the industry, because in the long run all costs are avoidable and a firm earning a loss would leave; exit reduces market supply and raises the price until firms earn zero economic profit."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "E1",
+        "points": 1,
+        "criterion": "Explains exit until zero economic profit",
+        "elements": [
+         "States that firms leave the industry in the long run because of economic losses, which raises the price toward the level where economic profit is zero"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 5,
+    "model": {
+     "initial_state": "price taker selling at $19 with total fixed cost $21",
+     "changed_conditions": [
+      "the long run (exit)"
+     ],
+     "held_constant": [
+      "costs",
+      "price"
+     ],
+     "checks": [
+      "profit-maximizing quantity",
+      "loss",
+      "shutdown choice",
+      "exit"
+     ],
+     "key_assumptions_id": "shutdown-rule",
+     "explanation_assumptions_id": "shutdown-rule"
+    }
+   },
+   "seed": 32000,
+   "pack_id": "mif_short_shutdown-s32000"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mif_short_shutdown",
+   "facts": [
+    "P=19",
+    "F=21",
+    "mc=[10, 14, 18, 22, 26, 30]",
+    "tvc=[0, 10, 24, 42, 64, 90, 120]",
+    "q*=3",
+    "loss=6",
+    "good=ceramic mugs"
+   ],
+   "seed": 32000
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Short FRQ with five 1-point parts. Key values are verified: q=3, loss $6, keep producing, and exit in the long run. The table data is complete, and the price and fixed cost are stated in the description. Rubric rows are consistent with the model answers, and the parts match the topics in scope.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topics 3.6, 3.4 and 3.7 are all in scope. Each part is judged against its own skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The profit-maximizing quantity is unique (profit is -6 at q=3, versus -7 at q=2 and -9 at q=4). The shutdown and exit answers are consistent with the data."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete. The title duplicates the description, which is a minor cosmetic issue."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so the common_errors listed in the rubric rows serve in place of distractors, and they are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light, with a small table and simple arithmetic. It fits the short FRQ format."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style perfect competition item. Students must derive marginal cost from a total variable cost table (a representation change), apply MR=MC with P=19 to find Q=3, compute economic loss (TR 57 - TC 63 = -6), compare TR to TVC (or P to AVC) for the shutdown decision, explain why producing minimizes loss relative to the fixed cost loss of $21, and describe long-run exit due to economic losses. Concepts are core to topic 3.6 and span 3.4 and 3.7. Arithmetic is short with whole numbers, wording is unambiguous, and the reading load is low. The multi-part chain is moderate in depth, appropriate for a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-f01-k1",
+  "cellId": "ap_microeconomics-f01",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "frq_bundle",
+  "keywordCode": "3.6",
+  "unitCode": "3",
+  "skillPrimary": "2.C",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "mif_short_shutdown",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard AP FRQ-style perfect competition item. The student derives MC from a TVC table, applies MR = MC (P = MC) to find Q = 4, computes the loss (TR 80 - TC 89 = -$9), compares P to AVC to decide to produce, explains that the loss is smaller than the fixed cost, and reasons about long-run exit because P < ATC. All numbers are small integers. There are a few linked steps and one table-to-MC representation change, but no unfair difficulty. This is typical of full-mock difficulty, above pure basic recall and well below advanced.",
+  "payload": {
+   "archetype": "mif_short_shutdown",
+   "template": "short_shutdown",
+   "topic": "3.6",
+   "extra_topics": [
+    "3.4",
+    "3.7"
+   ],
+   "skill": "2.C",
+   "calculator": "allowed",
+   "title": "Total variable cost of producing ceramic mugs per day for one firm in a perfectly competitive market where the price is $20 per unit. The firm's total fixed cost is $31 per day",
+   "stimulus": {
+    "kind": "table",
+    "description": "Total variable cost of producing ceramic mugs per day for one firm in a perfectly competitive market where the price is $20 per unit. The firm's total fixed cost is $31 per day.",
+    "data": {
+     "columns": [
+      "Quantity",
+      "Total variable cost (dollars)"
+     ],
+     "rows": [
+      [
+       "0",
+       "$0"
+      ],
+      [
+       "1",
+       "$10"
+      ],
+      [
+       "2",
+       "$23"
+      ],
+      [
+       "3",
+       "$39"
+      ],
+      [
+       "4",
+       "$58"
+      ],
+      [
+       "5",
+       "$80"
+      ],
+      [
+       "6",
+       "$105"
+      ]
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Calculate the quantity that maximizes the firm's profit in the short run.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "2.C"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Produce while the marginal cost of the next unit is at most the price of $20; the marginal cost of unit 4 is $19 and of unit 5 is $22, so the firm produces 4 units.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Profit-maximizing quantity (answer)",
+       "required_elements": [
+        "Compares the price with marginal cost from the changes in total variable cost and chooses the last unit whose marginal cost does not exceed the price (the answer is correct)",
+        "4"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "price equals marginal cost",
+        "produce until marginal cost would exceed the price"
+       ],
+       "common_errors": [
+        "picks the quantity with the lowest average variable cost",
+        "produces the largest quantity in the table"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "3.6"
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Calculate the firm's economic profit or loss at that quantity.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "2.C"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Total revenue = $20 x 4 = $80; total cost = $31 + $58 = $89; the firm has a loss of $9.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Loss (answer)",
+       "required_elements": [
+        "Subtracts total fixed cost plus total variable cost from total revenue to get a loss (the answer is correct)",
+        "9"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "revenue minus total cost",
+        "total revenue less fixed and variable cost"
+       ],
+       "common_errors": [
+        "leaves out the fixed cost",
+        "reports total revenue as the profit"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "3.4"
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Should the firm produce in the short run or shut down? Identify your choice.",
+     "points": 1,
+     "response_mode": "identify",
+     "skill_codes": [
+      "3.A"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. It should keep producing in the short run, because total revenue exceeds total variable cost (the price is above average variable cost), so the firm loses less than the fixed cost it would lose by shutting down.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Chooses to keep producing",
+       "required_elements": [
+        "States that the firm should keep producing rather than shut down"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "operate in the short run",
+        "stay open"
+       ],
+       "common_errors": [
+        "says the firm should shut down because it has a loss"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "3.6"
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Explain why your answer to part (C) is correct for the short run even though the firm has an economic loss.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. The fixed cost of $31 must be paid whether the firm operates or not, so shutting down would lose $31; by operating, revenue covers all the variable cost with $22 left over to cover part of the fixed cost, so the loss is only $9.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Explains with revenue covering variable cost and fixed cost being sunk",
+       "required_elements": [
+        "States that revenue covers variable cost, with something left over toward the fixed cost, so operating loses less than shutting down, where the whole fixed cost is lost"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "the fixed cost is sunk in the short run",
+        "price is above average variable cost"
+       ],
+       "common_errors": [
+        "says the firm earns a profit",
+        "says the fixed cost can be avoided by shutting down in the short run"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "3.6"
+     ]
+    },
+    {
+     "label": "E",
+     "prompt": "If the price stays at this level, describe what will happen to the number of firms in this industry in the long run and explain why.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.B"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Firms exit the industry, because in the long run all costs are avoidable and a firm earning a loss would leave; exit reduces market supply and raises the price until firms earn zero economic profit.",
+     "rubric_rows": [
+      {
+       "row_id": "E1",
+       "points": 1,
+       "criterion": "Explains exit until zero economic profit",
+       "required_elements": [
+        "States that firms leave the industry in the long run because of economic losses, which raises the price toward the level where economic profit is zero"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "market supply decreases and the price rises",
+        "fixed costs are avoidable in the long run"
+       ],
+       "common_errors": [
+        "says new firms enter the industry",
+        "says the number of firms stays the same because firms earn normal profit"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "3.7"
+     ]
+    }
+   ],
+   "total_points": 5,
+   "est_minutes": 12,
+   "facts": [
+    "P=20",
+    "F=31",
+    "mc=[10, 13, 16, 19, 22, 25]",
+    "tvc=[0, 10, 23, 39, 58, 80, 105]",
+    "q*=4",
+    "loss=9",
+    "good=ceramic mugs"
+   ],
+   "context": "shutdown",
+   "blueprint": {
+    "id": "mif_short_shutdown",
+    "subject": "ap_microeconomics",
+    "kind": "frq_bundle",
+    "concept": "Profit-maximizing quantity from marginal cost, economic loss, the shutdown rule, and long-run exit",
+    "topic": "3.6",
+    "skill": "2.C",
+    "student_thinking": [
+     "Find marginal cost from total variable cost",
+     "Compare revenue with total cost and with variable cost",
+     "Reason about sunk fixed cost and long-run exit"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Competitive output market with the price and the fixed cost stated in the table title",
+      "evidence": "stated in the stimulus description"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "total variable cost",
+      "price",
+      "fixed cost"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "argmax of total profit across quantities vs last unit with marginal cost at most the price",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "2.C"
+      ],
+      "topics": [
+       "3.6"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Produce while the marginal cost of the next unit is at most the price of $20; the marginal cost of unit 4 is $19 and of unit 5 is $22, so the firm produces 4 units."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Profit-maximizing quantity (answer)",
+        "elements": [
+         "Compares the price with marginal cost from the changes in total variable cost and chooses the last unit whose marginal cost does not exceed the price (the answer is correct)",
+         "4"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "2.C"
+      ],
+      "topics": [
+       "3.4"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Total revenue = $20 x 4 = $80; total cost = $31 + $58 = $89; the firm has a loss of $9."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Loss (answer)",
+        "elements": [
+         "Subtracts total fixed cost plus total variable cost from total revenue to get a loss (the answer is correct)",
+         "9"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "3.A"
+      ],
+      "topics": [
+       "3.6"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. It should keep producing in the short run, because total revenue exceeds total variable cost (the price is above average variable cost), so the firm loses less than the fixed cost it would lose by shutting down."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Chooses to keep producing",
+        "elements": [
+         "States that the firm should keep producing rather than shut down"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "3.6"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. The fixed cost of $31 must be paid whether the firm operates or not, so shutting down would lose $31; by operating, revenue covers all the variable cost with $22 left over to cover part of the fixed cost, so the loss is only $9."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Explains with revenue covering variable cost and fixed cost being sunk",
+        "elements": [
+         "States that revenue covers variable cost, with something left over toward the fixed cost, so operating loses less than shutting down, where the whole fixed cost is lost"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "E",
+      "skills": [
+       "2.B"
+      ],
+      "topics": [
+       "3.7"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Firms exit the industry, because in the long run all costs are avoidable and a firm earning a loss would leave; exit reduces market supply and raises the price until firms earn zero economic profit."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "E1",
+        "points": 1,
+        "criterion": "Explains exit until zero economic profit",
+        "elements": [
+         "States that firms leave the industry in the long run because of economic losses, which raises the price toward the level where economic profit is zero"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 5,
+    "model": {
+     "initial_state": "price taker selling at $20 with total fixed cost $31",
+     "changed_conditions": [
+      "the long run (exit)"
+     ],
+     "held_constant": [
+      "costs",
+      "price"
+     ],
+     "checks": [
+      "profit-maximizing quantity",
+      "loss",
+      "shutdown choice",
+      "exit"
+     ],
+     "key_assumptions_id": "shutdown-rule",
+     "explanation_assumptions_id": "shutdown-rule"
+    }
+   },
+   "seed": 32001,
+   "pack_id": "mif_short_shutdown-s32001"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mif_short_shutdown",
+   "facts": [
+    "P=20",
+    "F=31",
+    "mc=[10, 13, 16, 19, 22, 25]",
+    "tvc=[0, 10, 23, 39, 58, 80, 105]",
+    "q*=4",
+    "loss=9",
+    "good=ceramic mugs"
+   ],
+   "seed": 32001
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. The table is a complete data specification, and the keys are unique. Part A: MC is 10, 13, 16, 19, 22, 25, so the profit-maximizing quantity is 4. Part B: the loss is $9. Part C: the firm keeps producing. The rubric rows split into answer and explanation. The five 1-point parts fit the short-FRQ grain, and each is judged on its own skill. The parts cover topics 3.6, 3.4 and 3.7, which are in scope, with no calculus or isoquant content. The load is light and a calculator is allowed.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All parts are within Unit 3 (3.4, 3.6, 3.7). Each part matches its own labeled skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique answers: Q=4 (MC 19 at the 4th unit, 22 at the 5th), loss $9 (revenue 80, cost 89), keep producing since revenue 80 exceeds TVC 58, and exit in the long run. Part A's wording \"at most the price\" is fine, because no unit has MC exactly equal to $20."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has columns and rows, and the price and fixed cost are stated in the description. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no options. The rubric lists common errors per row, such as omitting fixed cost, and treating the loss as a reason to shut down."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of a short FRQ: five 1-point parts, simple arithmetic, and a calculator is allowed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP FRQ-style perfect competition item. The student derives MC from a TVC table, applies MR = MC (P = MC) to find Q = 4, computes the loss (TR 80 - TC 89 = -$9), compares P to AVC to decide to produce, explains that the loss is smaller than the fixed cost, and reasons about long-run exit because P < ATC. All numbers are small integers. There are a few linked steps and one table-to-MC representation change, but no unfair difficulty. This is typical of full-mock difficulty, above pure basic recall and well below advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-f01-k2",
+  "cellId": "ap_microeconomics-f01",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "frq_bundle",
+  "keywordCode": "3.6",
+  "unitCode": "3",
+  "skillPrimary": "2.C",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "mif_short_shutdown",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard FRQ-style perfect competition item. Students derive MC from a TVC table, apply MR=MC to find Q=5, compute economic loss (TR 105 - TC 117 = -$12), compare P to AVC ($16) for the shutdown decision, explain the loss-minimizing logic (loss of $12 vs fixed cost loss of $37), and apply the long-run exit rule (P < ATC of $23.40). Arithmetic is small and clean, wording is unambiguous, and all content is in Unit 3 scope. Depth comes from chaining several concepts, not from unfair sources.",
+  "payload": {
+   "archetype": "mif_short_shutdown",
+   "template": "short_shutdown",
+   "topic": "3.6",
+   "extra_topics": [
+    "3.4",
+    "3.7"
+   ],
+   "skill": "2.C",
+   "calculator": "allowed",
+   "title": "Total variable cost of producing phone cases per day for one firm in a perfectly competitive market where the price is $21 per unit. The firm's total fixed cost is $37 per day",
+   "stimulus": {
+    "kind": "table",
+    "description": "Total variable cost of producing phone cases per day for one firm in a perfectly competitive market where the price is $21 per unit. The firm's total fixed cost is $37 per day.",
+    "data": {
+     "columns": [
+      "Quantity",
+      "Total variable cost (dollars)"
+     ],
+     "rows": [
+      [
+       "0",
+       "$0"
+      ],
+      [
+       "1",
+       "$12"
+      ],
+      [
+       "2",
+       "$26"
+      ],
+      [
+       "3",
+       "$42"
+      ],
+      [
+       "4",
+       "$60"
+      ],
+      [
+       "5",
+       "$80"
+      ],
+      [
+       "6",
+       "$102"
+      ]
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Calculate the quantity that maximizes the firm's profit in the short run.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "2.C"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Produce while the marginal cost of the next unit is at most the price of $21; the marginal cost of unit 5 is $20 and of unit 6 is $22, so the firm produces 5 units.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Profit-maximizing quantity (answer)",
+       "required_elements": [
+        "Compares the price with marginal cost from the changes in total variable cost and chooses the last unit whose marginal cost does not exceed the price (the answer is correct)",
+        "5"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "price equals marginal cost",
+        "produce until marginal cost would exceed the price"
+       ],
+       "common_errors": [
+        "picks the quantity with the lowest average variable cost",
+        "produces the largest quantity in the table"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "3.6"
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Calculate the firm's economic profit or loss at that quantity.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "2.C"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Total revenue = $21 x 5 = $105; total cost = $37 + $80 = $117; the firm has a loss of $12.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Loss (answer)",
+       "required_elements": [
+        "Subtracts total fixed cost plus total variable cost from total revenue to get a loss (the answer is correct)",
+        "12"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "revenue minus total cost",
+        "total revenue less fixed and variable cost"
+       ],
+       "common_errors": [
+        "leaves out the fixed cost",
+        "reports total revenue as the profit"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "3.4"
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Should the firm produce in the short run or shut down? Identify your choice.",
+     "points": 1,
+     "response_mode": "identify",
+     "skill_codes": [
+      "3.A"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. It should keep producing in the short run, because total revenue exceeds total variable cost (the price is above average variable cost), so the firm loses less than the fixed cost it would lose by shutting down.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Chooses to keep producing",
+       "required_elements": [
+        "States that the firm should keep producing rather than shut down"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "operate in the short run",
+        "stay open"
+       ],
+       "common_errors": [
+        "says the firm should shut down because it has a loss"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "3.6"
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Explain why your answer to part (C) is correct for the short run even though the firm has an economic loss.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. The fixed cost of $37 must be paid whether the firm operates or not, so shutting down would lose $37; by operating, revenue covers all the variable cost with $25 left over to cover part of the fixed cost, so the loss is only $12.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Explains with revenue covering variable cost and fixed cost being sunk",
+       "required_elements": [
+        "States that revenue covers variable cost, with something left over toward the fixed cost, so operating loses less than shutting down, where the whole fixed cost is lost"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "the fixed cost is sunk in the short run",
+        "price is above average variable cost"
+       ],
+       "common_errors": [
+        "says the firm earns a profit",
+        "says the fixed cost can be avoided by shutting down in the short run"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "3.6"
+     ]
+    },
+    {
+     "label": "E",
+     "prompt": "If the price stays at this level, describe what will happen to the number of firms in this industry in the long run and explain why.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.B"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Firms exit the industry, because in the long run all costs are avoidable and a firm earning a loss would leave; exit reduces market supply and raises the price until firms earn zero economic profit.",
+     "rubric_rows": [
+      {
+       "row_id": "E1",
+       "points": 1,
+       "criterion": "Explains exit until zero economic profit",
+       "required_elements": [
+        "States that firms leave the industry in the long run because of economic losses, which raises the price toward the level where economic profit is zero"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "market supply decreases and the price rises",
+        "fixed costs are avoidable in the long run"
+       ],
+       "common_errors": [
+        "says new firms enter the industry",
+        "says the number of firms stays the same because firms earn normal profit"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "3.7"
+     ]
+    }
+   ],
+   "total_points": 5,
+   "est_minutes": 12,
+   "facts": [
+    "P=21",
+    "F=37",
+    "mc=[12, 14, 16, 18, 20, 22]",
+    "tvc=[0, 12, 26, 42, 60, 80, 102]",
+    "q*=5",
+    "loss=12",
+    "good=phone cases"
+   ],
+   "context": "shutdown",
+   "blueprint": {
+    "id": "mif_short_shutdown",
+    "subject": "ap_microeconomics",
+    "kind": "frq_bundle",
+    "concept": "Profit-maximizing quantity from marginal cost, economic loss, the shutdown rule, and long-run exit",
+    "topic": "3.6",
+    "skill": "2.C",
+    "student_thinking": [
+     "Find marginal cost from total variable cost",
+     "Compare revenue with total cost and with variable cost",
+     "Reason about sunk fixed cost and long-run exit"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Competitive output market with the price and the fixed cost stated in the table title",
+      "evidence": "stated in the stimulus description"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "total variable cost",
+      "price",
+      "fixed cost"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "argmax of total profit across quantities vs last unit with marginal cost at most the price",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "2.C"
+      ],
+      "topics": [
+       "3.6"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Produce while the marginal cost of the next unit is at most the price of $21; the marginal cost of unit 5 is $20 and of unit 6 is $22, so the firm produces 5 units."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Profit-maximizing quantity (answer)",
+        "elements": [
+         "Compares the price with marginal cost from the changes in total variable cost and chooses the last unit whose marginal cost does not exceed the price (the answer is correct)",
+         "5"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "2.C"
+      ],
+      "topics": [
+       "3.4"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Total revenue = $21 x 5 = $105; total cost = $37 + $80 = $117; the firm has a loss of $12."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Loss (answer)",
+        "elements": [
+         "Subtracts total fixed cost plus total variable cost from total revenue to get a loss (the answer is correct)",
+         "12"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "3.A"
+      ],
+      "topics": [
+       "3.6"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. It should keep producing in the short run, because total revenue exceeds total variable cost (the price is above average variable cost), so the firm loses less than the fixed cost it would lose by shutting down."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Chooses to keep producing",
+        "elements": [
+         "States that the firm should keep producing rather than shut down"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "3.6"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. The fixed cost of $37 must be paid whether the firm operates or not, so shutting down would lose $37; by operating, revenue covers all the variable cost with $25 left over to cover part of the fixed cost, so the loss is only $12."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Explains with revenue covering variable cost and fixed cost being sunk",
+        "elements": [
+         "States that revenue covers variable cost, with something left over toward the fixed cost, so operating loses less than shutting down, where the whole fixed cost is lost"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "E",
+      "skills": [
+       "2.B"
+      ],
+      "topics": [
+       "3.7"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Firms exit the industry, because in the long run all costs are avoidable and a firm earning a loss would leave; exit reduces market supply and raises the price until firms earn zero economic profit."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "E1",
+        "points": 1,
+        "criterion": "Explains exit until zero economic profit",
+        "elements": [
+         "States that firms leave the industry in the long run because of economic losses, which raises the price toward the level where economic profit is zero"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 5,
+    "model": {
+     "initial_state": "price taker selling at $21 with total fixed cost $37",
+     "changed_conditions": [
+      "the long run (exit)"
+     ],
+     "held_constant": [
+      "costs",
+      "price"
+     ],
+     "checks": [
+      "profit-maximizing quantity",
+      "loss",
+      "shutdown choice",
+      "exit"
+     ],
+     "key_assumptions_id": "shutdown-rule",
+     "explanation_assumptions_id": "shutdown-rule"
+    }
+   },
+   "seed": 32002,
+   "pack_id": "mif_short_shutdown-s32002"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mif_short_shutdown",
+   "facts": [
+    "P=21",
+    "F=37",
+    "mc=[12, 14, 16, 18, 20, 22]",
+    "tvc=[0, 12, 26, 42, 60, 80, 102]",
+    "q*=5",
+    "loss=12",
+    "good=phone cases"
+   ],
+   "seed": 32002
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Verified: MC 12-22, q=5 is the unique profit maximizer, loss of $12 versus a $37 shutdown loss, so the firm keeps producing, and exit follows in the long run. The 5-point short-FRQ grain is acceptable, and the rubric rows are consistent and meaning-based.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The parts stay within topics 3.4, 3.6, and 3.7."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All answers are unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, and the price and fixed cost are stated in the description."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "N/A for FRQ; the rubric lists common errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light and typical of a short FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style perfect competition item. Students derive MC from a TVC table, apply MR=MC to find Q=5, compute economic loss (TR 105 - TC 117 = -$12), compare P to AVC ($16) for the shutdown decision, explain the loss-minimizing logic (loss of $12 vs fixed cost loss of $37), and apply the long-run exit rule (P < ATC of $23.40). Arithmetic is small and clean, wording is unambiguous, and all content is in Unit 3 scope. Depth comes from chaining several concepts, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ }
+]

@@ -3,7 +3,7 @@
  "version": 1,
  "generatedBy": "lib/ap-exam/tex-corrections-gen.test.ts (AP_TEX_CORR_WRITE=1)",
  "note": "변환 전 해설(explanation_en)의 sha256 에 묶인 교정 문안. 적용은 관리자 'AP 설명 수정 새 버전'(미리보기→확인→실행)만. before 해시가 DB 와 다르면 건드리지 않는다.",
- "count": 295,
+ "count": 305,
  "entries": [
   {
    "candidateKey": "bc-topup-final:ap_calculus_bc-f01-k0",
@@ -366,6 +366,30 @@
    "beforeSha256": "51e5ef602f5a948cd7b8022c13c54416ba40777575dd912497b03e68b35040f0",
    "afterSha256": "a8f8792af9391972b0638668ba6acd325a281695dee04ee4e4f73d50ef7ad469",
    "after": "The correct answer is 3,550. HHI = $45^2$ + $30^2$ + $25^2$ = 3550.\n1183 is incorrect: Uses the average of the squared shares.\n100 is incorrect: Adds the market shares (always 100) instead of squaring them.\n10,000 is incorrect: Squares the sum of the shares.\n2,025 is incorrect: Squares only the largest firm's share."
+  },
+  {
+   "candidateKey": "micro-s5-b:ap_microeconomics-m20-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "707437c3cfb768c813db807cb1492fbceb36bc1fae35d9cfa57347ba70773582",
+   "afterSha256": "5c713cbd0b3d09c35be46d4601ed01291016d8c5156ac1557c31eceb03d8c5c7",
+   "after": "The correct answer is 600. The merged firm's share is 35, so the index changes by $(20+15)^2$ - $20^2$ - $15^2$ = 600.\n35 is incorrect: Adds the two shares, reporting the merged firm's share rather than a change in the index.\n300 is incorrect: Multiplies the two shares but forgets the factor of 2 in $(a + b)^2$ - $a^2$ - $b^2.$\n3,350 is incorrect: Reports the new HHI after the merger instead of the increase.\n1,225 is incorrect: Squares the merged firm's share and treats that as the change, without removing the two original squared shares."
+  },
+  {
+   "candidateKey": "micro-s5-b:ap_microeconomics-m20-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "ff4a499618e365d3ab6ebe596b77299950aceb33c3aa5a57ecdb9db118523a2c",
+   "afterSha256": "791ecf88254cea5612dcb04628ae9b438fa6169989c9d34f3f98035e51729db9",
+   "after": "The correct answer is 1,000. The merged firm's share is 45, so the index changes by $(25+20)^2$ - $25^2$ - $20^2$ = 1000.\n45 is incorrect: Adds the two shares, reporting the merged firm's share rather than a change in the index.\n3,250 is incorrect: Reports the new HHI after the merger instead of the increase.\n2,025 is incorrect: Squares the merged firm's share and treats that as the change, without removing the two original squared shares.\n500 is incorrect: Multiplies the two shares but forgets the factor of 2 in $(a + b)^2$ - $a^2$ - $b^2.$"
+  },
+  {
+   "candidateKey": "micro-s5-b:ap_microeconomics-m20-k2",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "d189b5810dfbcc6748867d70a19d126a10748a84a919e5ebd5667745ef65752e",
+   "afterSha256": "16c11ad92d54e5630e0bba7d9d57870c7f665dd2ac5729ddaaba703343c6abe4",
+   "after": "The correct answer is 1,000. The merged firm's share is 45, so the index changes by $(25+20)^2$ - $25^2$ - $20^2$ = 1000.\n3,250 is incorrect: Reports the new HHI after the merger instead of the increase.\n45 is incorrect: Adds the two shares, reporting the merged firm's share rather than a change in the index.\n2,025 is incorrect: Squares the merged firm's share and treats that as the change, without removing the two original squared shares.\n500 is incorrect: Multiplies the two shares but forgets the factor of 2 in $(a + b)^2$ - $a^2$ - $b^2.$"
   },
   {
    "candidateKey": "phys-s2-d:ap_physics_1-f03-k0",
@@ -2268,6 +2292,62 @@
    "beforeSha256": "1fb137c448cb96169ad4e4362f1162c32cb5aba2c4a4d9e5848a64d963c98f81",
    "afterSha256": "81fe534552189cae7a927ff59992b3310c5d4070c31efa4064a3300d18b39d1c",
    "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(a) [3 pt] Area = (1/2) ∫_$0^{π/2}$ $(3 + 1 cos θ)^2$ dθ = 10.461.\n   - 1 pt: Area integrand (1/2) $r^2$ (setup)\n   - 1 pt: Limits of integration 0 and π/2 (setup)\n   - 1 pt: Answer (value)\n(b) [2 pt] dr/dθ = -1 sin θ = -0.866 at θ = π/3: the distance from the origin to the point is decreasing as theta increases.\n   - 1 pt: Value of dr/dθ at π/3 (value)\n   - 1 pt: Interpretation: the distance from the origin is decreasing as theta increases (meaning)\n(c) [2 pt] dy/dx = (r' sin θ + r cos θ)/(r' cos θ - r sin θ) = -0.289 at θ = π/3.\n   - 1 pt: Uses dy/dx = (dy/dθ)/(dx/dθ) with x = r cos θ and y = r sin θ (setup)\n   - 1 pt: Answer (slope value)\n(d) [2 pt] y = r sin θ is greatest where dy/dθ = r' sin θ + r cos θ = 0, at θ = 1.286, giving y = 3.149.\n   - 1 pt: Sets dy/dθ = r' sin θ + r cos θ equal to zero (setup)\n   - 1 pt: Answer: the greatest y-coordinate (value)"
+  },
+  {
+   "candidateKey": "supp-aud1015-final:ap_calculus_ab-f02-k912",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "fba25e15dbbfb61ee63524918650ab27b89bac99928d6c515526bbd7e18fc724",
+   "afterSha256": "6d4c997e8be2adac8a6a23dc22adc1e625c45f8113926e066e225c23d323570f",
+   "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(a) [3 pt] f'(t)=0 at t=2 and t=9. At t=2, f' changes from negative to positive, so f has a relative minimum at t=2. At t=9, f' changes from positive to negative, so f has a relative maximum at t=9.\n   - 1 pt: Identifies both critical points\n   - 1 pt: Relative minimum at t=2 with sign-change justification\n   - 1 pt: Relative maximum at t=9 with sign-change justification\n(b) [2 pt] t=5. f'' is positive on (0,5) because f' is increasing, and negative on (5,7) because f' is decreasing, so f'' changes sign at t=5 (f' has its maximum there). No other sign change of f'' occurs: f' is increasing on (0,5) and decreasing on (5,10).\n   - 1 pt: Identifies t=5 only\n   - 1 pt: Justifies using change in sign of f'' (f' changes from increasing to decreasing)\n(c) [3 pt] Candidates: the endpoints t=0 and t=10 and the critical points t=2 and t=9. f(2)=40+int_$0^2$ f' = 40-2=38. f(9)=38+9+8+2=57. f(10)=57-1=56. f(0)=40. The smallest is f(2)=38, so the absolute minimum value is 38 dollars.\n   - 1 pt: Setup: considers endpoints and critical points as candidates\n   - 1 pt: Computes candidate values using f(0)+area under f'\n   - 1 pt: Answer 38 with comparison of candidates\n(d) [1 pt] (9,10). There f'(t)<0 so f is decreasing, and f' is decreasing so f''<0 and f is concave down. On (0,2), f is decreasing but f' is increasing, so f is concave up.\n   - 1 pt: Interval (9,10) with reason using signs of f' and f''"
+  },
+  {
+   "candidateKey": "supp-aud1015-final:ap_calculus_ab-f03-k913",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "d9ebda8195c6ad9cb8b9141927f5e30db1f4c4d28c55454258a5fc1375fcec06",
+   "afterSha256": "e71339298f45058dead2a1108ad7117dcb300b9cab0c333a5a3d41188a17fbf8",
+   "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(a) [2 pt] At (0,1): 1/3. At (1,-1): 3/3 = 1. At (0,0) the denominator is 0, so the slope is undefined (there is no finite slope); no slope segment is drawn there.\n   - 1 pt: Both slopes computed correctly\n   - 1 pt: States slope undefined at (0,0) because denominator is 0\n(b) [3 pt] $3y^2$ dy = (2x+1) dx; $y^3$ = $x^2$ + x + C; y = $(x^2 + x + C)^{1/3}$.\n   - 1 pt: Separates variables correctly\n   - 1 pt: Antiderivatives of both sides with a constant C\n   - 1 pt: Solves for y\n(c) [2 pt] 8 = C, so y = $(x^2 + x + 8)^{1/3}$.\n   - 1 pt: Uses the initial condition to find C\n   - 1 pt: States particular solution\n(d) [2 pt] The differential equation requires y ≠ 0. Since $x^2$+x+8 has discriminant 1-32 < 0, it is always positive, so y > 0 for all x. The solution is valid on (-infinity, infinity).\n   - 1 pt: Identifies condition y ≠ 0 and shows $x^2$+x+8 > 0 for all x\n   - 1 pt: Concludes interval is all real numbers"
+  },
+  {
+   "candidateKey": "supp-aud1015-final:ap_calculus_ab-m04-k901",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "985790ced22aa65c42923def60c223c2b7546f39a77ce819f590bd75cee684e7",
+   "afterSha256": "d0950350919186df162ab64aac2386ef68cd284a2ae9cd0126c7326357275857",
+   "after": "The correct answer is -0.366. Implicit differentiation: $e^y$ + x $e^y$ y' + 2y y' = 0, so y' = -$e^y$/(x $e^y$ + 2y), evaluated with a calculator.\n-0.868 is incorrect: Differentiates $y^2$ as 2y without the factor dy/dx.\n-0.500 is incorrect: Forgets the 2y dy/dx term from y squared and solves $e^y$ + x $e^y$ y' = 0.\n-0.134 is incorrect: Treats y as a constant when differentiating x $e^y$, so the $e^y$ term is missing from the numerator: -1/(...) ."
+  },
+  {
+   "candidateKey": "supp-aud1015-final:ap_calculus_ab-m24-k905",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "76b1b9979232265008e045076ed4ff263203857ee92191257d2eedf3deb87a9c",
+   "afterSha256": "2d6cc7451b35a2395f7092e9e98c1e1edb6a4604cba6c464883136b0eaf84cbd",
+   "after": "The correct answer is 2. The quotient has the form 0/0 at x = a, so the limit equals f'(a)/g'(a), the ratio of the slopes read from the graphs (L'Hopital's Rule).\n0 is incorrect: Substitutes x = 7 and concludes the quotient 0/0 equals 0.\n$\\frac{1}{2}$ is incorrect: Takes the ratio of slopes upside down, g'(a)/f'(a).\n8 is incorrect: Multiplies the two slopes instead of dividing them."
+  },
+  {
+   "candidateKey": "supp-aud1015-final:ap_calculus_bc-m02-k902",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "177366d61105c39201ab04e290f778e67e181e359a1e8aafcb8587813625a802",
+   "afterSha256": "1ab22be49cc0ce66a4e0d59b4a2bc30d6e8ff58e25bee304983e27164e4a20b3",
+   "after": "The correct answer is 0.122. $Error \\le M$ $|x|^3$/3! where M is the maximum of |f'''| on [0, a] read from the graph; evaluate with a calculator.\n0.608 is incorrect: Uses the maximum of |f'''| over the whole graph instead of over [0, 0.9].\n0.012 is incorrect: Uses the value of f''' at x = 0.9 instead of its maximum absolute value.\n0.365 is incorrect: Divides by 2! instead of 3!."
+  },
+  {
+   "candidateKey": "supp-aud1015-final:ap_calculus_bc-m02-k903",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "d9b5259ca42e623bdf26e930697db5acf4fab2e2f15c411717d844433ac05584",
+   "afterSha256": "cc8cd99704e7f7119ed016e810ba17a428410bf7a6c3abd4d0c6f0642b874a22",
+   "after": "The correct answer is 0.480. M $x^4$/4! with M = the maximum of |$f^{4}$| on [0, a] read from the graph, evaluated with a calculator.\n1.921 is incorrect: Divides by 3! instead of 4!.\n0.096 is incorrect: Uses the largest signed value of the graph on [0, 1.4] instead of the largest absolute value.\n0.960 is incorrect: Takes the maximum over the whole graph, not only over [0, 1.4]."
+  },
+  {
+   "candidateKey": "supp-aud1015-final:ap_calculus_bc-m04-k904",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "819cc4cd7eda0d4dad0bc0ea73e2223d6209310e5cdcf93b6a38852578fee315",
+   "afterSha256": "0135f1f102f6dc5f1be0d1e951371c16db1d9e372df412c8f228007fa6a8198d",
+   "after": "The correct answer is $\\frac{4}{3}$. M $a^4$ / 4! with M the maximum of |$f^{4}$| on [0, a], read from the graph.\n$\\frac{2}{3}$ is incorrect: Uses the power 3 instead of 4 for the x-term.\n$\\frac{8}{3}$ is incorrect: Takes the maximum over the whole graph instead of only the interval from 0 to 2.\n$\\frac{16}{3}$ is incorrect: Divides by 3! instead of 4!."
   },
   {
    "candidateKey": "supp-b1-bc-final:ap_calculus_bc-m01-k0",

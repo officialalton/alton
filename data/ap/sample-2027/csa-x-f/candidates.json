@@ -1,0 +1,880 @@
+[
+ {
+  "candidateKey": "ap_computer_science_a-m01-k0",
+  "cellId": "ap_computer_science_a-m01",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "mc",
+  "keywordCode": "3.5",
+  "unitCode": "3",
+  "skillPrimary": "3.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "not_allowed",
+  "archetype": "css_shelf_set_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Short 3-call trace of a simple method with one if/else. The only subtlety is that a rejected batch is not partially stored and a later smaller put still fits. There is no aliasing, scope trick, or heavy arithmetic. Distractors correspond to plausible misreadings (ignoring the capacity check, partial fill). It is fair and in scope for 3.5.",
+  "payload": {
+   "archetype": "css_shelf_set",
+   "topic": "3.5",
+   "skill": "3.B",
+   "calculator": "not_allowed",
+   "set_intro": "Consider the following Shelf class, which keeps track of the items stored on a shelf of limited capacity and the items that did not fit.",
+   "stimulus": {
+    "kind": "text",
+    "description": "```java\nclass Shelf {\n    private int capacity;\n    private int stock;\n    private int rejected;\n\n    public Shelf(int capacity) {\n        this.capacity = capacity;\n        stock = 0;\n        rejected = 0;\n    }\n\n    public void put(int n) {\n        if (stock + n <= capacity) {\n            stock += n;\n        } else {\n            rejected += n;\n        }\n    }\n    public int getStock() { return stock; }\n    public int getRejected() { return rejected; }\n    // other methods not shown\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "items": [
+    {
+     "archetype": "css_shelf_set_q1",
+     "topic": "3.5",
+     "skill": "3.B",
+     "stem": "What is printed as a result of executing the following code segment?\n```java\nShelf s = new Shelf(12);\ns.put(5);\ns.put(8);\ns.put(3);\nSystem.out.println(s.getStock() + \" \" + s.getRejected());\n```",
+     "options": [
+      {
+       "text": "`16 11`",
+       "why": "Believes a rejected batch is also added to the stock.",
+       "value": null
+      },
+      {
+       "text": "`12 11`",
+       "why": "Believes an item batch that does not fit is partly stored, filling the shelf to capacity.",
+       "value": null
+      },
+      {
+       "text": "`8 8`",
+       "why": "A batch is stored only when it fits within the capacity 12; the stock is 8 and the items of rejected batches total 8. Tracing the code gives 8 8.",
+       "value": null
+      },
+      {
+       "text": "`8 1`",
+       "why": "Believes the rejected count is the number of rejected batches, not the number of items.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is `8 8`. A batch is stored only when it fits within the capacity 12; the stock is 8 and the items of rejected batches total 8. Tracing the code gives 8 8.\n`16 11` is incorrect: Believes a rejected batch is also added to the stock.\n`12 11` is incorrect: Believes an item batch that does not fit is partly stored, filling the shelf to capacity.\n`8 1` is incorrect: Believes the rejected count is the number of rejected batches, not the number of items.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "css_shelf_set_q1",
+      "subject": "ap_computer_science_a",
+      "kind": "mc",
+      "concept": "trace object state through put calls that are accepted or rejected",
+      "topic": "3.5",
+      "skill": "3.B",
+      "student_thinking": [
+       "trace the code or reason about its behavior without running it",
+       "compare the result with each option and rule out the named misconceptions"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "not_allowed",
+      "key_conditions": [
+       {
+        "condition": "the key is the output of compiling and running the code with the JDK",
+        "evidence": "javac and java run"
+       },
+       {
+        "condition": "a second implementation in Python gives the same value",
+        "evidence": "python reference"
+       }
+      ],
+      "material": {
+       "type": "code",
+       "must_include": [
+        "the code segment"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Believes a rejected batch is also added to the stock."
+       },
+       {
+        "id": "m2",
+        "description": "Believes an item batch that does not fit is partly stored, filling the shelf to capacity."
+       },
+       {
+        "id": "m3",
+        "description": "Believes the rejected count is the number of rejected batches, not the number of items."
+       }
+      ],
+      "verification": {
+       "independent_path": "javac+java output vs Python simulation",
+       "method": "javac+java execution + python reference"
+      },
+      "judgment_demand": "trace the code and avoid the named misconception"
+     }
+    },
+    {
+     "archetype": "css_shelf_set_q2",
+     "topic": "3.5",
+     "skill": "2.C",
+     "stem": "The Shelf class needs a method percentFull that returns the whole-number percent of the capacity that is currently filled with stock (for example, 41 when 5 of 12 places are filled). Which of the following implementations works as intended?",
+     "options": [
+      {
+       "text": "```\npublic int percentFull() {\n        return 100 * (stock / capacity);\n    }\n```",
+       "why": "Divides the two ints first, which gives 0 until the shelf is full.",
+       "value": null
+      },
+      {
+       "text": "```\npublic int percentFull() {\n        return 100 * stock / rejected;\n    }\n```",
+       "why": "Divides by the rejected count, which is zero when nothing was rejected, causing an ArithmeticException.",
+       "value": null
+      },
+      {
+       "text": "```\npublic int percentFull() {\n        return 100 * stock / capacity;\n    }\n```",
+       "why": "The multiplication happens before the integer division, so the whole-number percent is not rounded down to 0.",
+       "value": null
+      },
+      {
+       "text": "```\npublic int percentFull() {\n        return 100 - 100 * stock / capacity;\n    }\n```",
+       "why": "Computes the percent that is empty, not the percent that is full.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is ```\npublic int percentFull() {\n        return 100 * stock / capacity;\n    }\n```. The multiplication happens before the integer division, so the whole-number percent is not rounded down to 0.\n```\npublic int percentFull() {\n        return 100 * (stock / capacity);\n    }\n``` is incorrect: Divides the two ints first, which gives 0 until the shelf is full.\n```\npublic int percentFull() {\n        return 100 * stock / rejected;\n    }\n``` is incorrect: Divides by the rejected count, which is zero when nothing was rejected, causing an ArithmeticException.\n```\npublic int percentFull() {\n        return 100 - 100 * stock / capacity;\n    }\n``` is incorrect: Computes the percent that is empty, not the percent that is full.",
+     "est_seconds": 100,
+     "blueprint": {
+      "id": "css_shelf_set_q2",
+      "subject": "ap_computer_science_a",
+      "kind": "mc",
+      "concept": "write a method that combines two instance variables and uses integer arithmetic correctly",
+      "topic": "3.5",
+      "skill": "2.C",
+      "student_thinking": [
+       "read the code and decide which candidate satisfies the specification for every input",
+       "compare the result with each option and rule out the named misconceptions"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "not_allowed",
+      "key_conditions": [
+       {
+        "condition": "the key passes every test case when compiled and run",
+        "evidence": "javac and java run"
+       },
+       {
+        "condition": "each distractor fails at least one test case",
+        "evidence": "java test run"
+       }
+      ],
+      "material": {
+       "type": "code",
+       "must_include": [
+        "the code segment"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Divides the two ints first, which gives 0 until the shelf is full."
+       },
+       {
+        "id": "m2",
+        "description": "Divides by the rejected count, which is zero when nothing was rejected, causing an ArithmeticException."
+       },
+       {
+        "id": "m3",
+        "description": "Computes the percent that is empty, not the percent that is full."
+       }
+      ],
+      "verification": {
+       "independent_path": "each candidate compiled into the class and run on shelves with different contents",
+       "method": "javac+java unit tests + python reference tests"
+      },
+      "judgment_demand": "test candidates against boundary cases"
+     }
+    }
+   ],
+   "set_size": 2,
+   "est_seconds": 195,
+   "facts": [
+    "cap=12",
+    "batches=5,8,3",
+    "key=8 8"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "css_shelf_set_q1",
+   "facts": [
+    "cap=12",
+    "batches=5,8,3",
+    "key=8 8"
+   ],
+   "seed": 36000
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Tracing object state through a written method with a conditional; fits 3.5/3.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Output 8 8 is unique and correct."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Complete class and code segment; clear wording."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Distractor 12 11 does not cleanly follow from its stated misconception (partial fill would not give rejected 11), and 16 11 is loosely motivated. Still distinct and plausible; explanation covers each option."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 90 seconds, short code, no arithmetic burden."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The key 8 8 is correct and unique, and the item is in scope, short, and clearly stated. Distractor rationales for 12 11 and 16 11 are slightly loose but not disqualifying."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Writing a method with correct integer arithmetic using instance variables; fits 3.5 / 2.C."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Only option C yields 41 for 5 of 12 and is correct on all boundary cases; others fail."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Complete compilable class; clear wording."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Distractors map to distinct misconceptions (early integer division, wrong variable, complement); each is explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short, typical load, no calculator needed."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Sound item: unique key (100 * stock / capacity), distinct misconception-based distractors, appropriate scope and load."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Short 3-call trace of a simple method with one if/else. The only subtlety is that a rejected batch is not partially stored and a later smaller put still fits. There is no aliasing, scope trick, or heavy arithmetic. Distractors correspond to plausible misreadings (ignoring the capacity check, partial fill). It is fair and in scope for 3.5.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 4,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 75
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept item: choose the method body that computes a whole-number percent. It requires recognizing integer-division truncation and left-to-right evaluation (100 * stock / capacity vs 100 * (stock / capacity)). The other distractors use the wrong field or compute the complement, so they are easy to eliminate. The code is short, the arithmetic is trivial, and there is only one representation. This is a legitimate integer-division lever, not an unfair source.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_computer_science_a-m01-k1",
+  "cellId": "ap_computer_science_a-m01",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "mc",
+  "keywordCode": "3.5",
+  "unitCode": "3",
+  "skillPrimary": "3.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "not_allowed",
+  "archetype": "css_shelf_set_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Short trace of three calls to a simple conditional method. Only subtleties are the <= boundary (stock reaches exactly capacity) and that the full n is added to rejected rather than the overflow amount. Distractors map to these misconceptions. Low load, in scope for 3.5.",
+  "payload": {
+   "archetype": "css_shelf_set",
+   "topic": "3.5",
+   "skill": "3.B",
+   "calculator": "not_allowed",
+   "set_intro": "Consider the following Shelf class, which keeps track of the items stored on a shelf of limited capacity and the items that did not fit.",
+   "stimulus": {
+    "kind": "text",
+    "description": "```java\nclass Shelf {\n    private int capacity;\n    private int stock;\n    private int rejected;\n\n    public Shelf(int capacity) {\n        this.capacity = capacity;\n        stock = 0;\n        rejected = 0;\n    }\n\n    public void put(int n) {\n        if (stock + n <= capacity) {\n            stock += n;\n        } else {\n            rejected += n;\n        }\n    }\n    public int getStock() { return stock; }\n    public int getRejected() { return rejected; }\n    // other methods not shown\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "items": [
+    {
+     "archetype": "css_shelf_set_q1",
+     "topic": "3.5",
+     "skill": "3.B",
+     "stem": "What is printed as a result of executing the following code segment?\n```java\nShelf s = new Shelf(10);\ns.put(5);\ns.put(5);\ns.put(6);\nSystem.out.println(s.getStock() + \" \" + s.getRejected());\n```",
+     "options": [
+      {
+       "text": "`10 1`",
+       "why": "Believes the rejected count is the number of rejected batches, not the number of items.",
+       "value": null
+      },
+      {
+       "text": "`16 6`",
+       "why": "Believes a rejected batch is also added to the stock.",
+       "value": null
+      },
+      {
+       "text": "`5 11`",
+       "why": "Believes a batch that exactly fills the shelf is rejected.",
+       "value": null
+      },
+      {
+       "text": "`10 6`",
+       "why": "A batch is stored only when it fits within the capacity 10; the stock is 10 and the items of rejected batches total 6. Tracing the code gives 10 6.",
+       "value": null
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is `10 6`. A batch is stored only when it fits within the capacity 10; the stock is 10 and the items of rejected batches total 6. Tracing the code gives 10 6.\n`10 1` is incorrect: Believes the rejected count is the number of rejected batches, not the number of items.\n`16 6` is incorrect: Believes a rejected batch is also added to the stock.\n`5 11` is incorrect: Believes a batch that exactly fills the shelf is rejected.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "css_shelf_set_q1",
+      "subject": "ap_computer_science_a",
+      "kind": "mc",
+      "concept": "trace object state through put calls that are accepted or rejected",
+      "topic": "3.5",
+      "skill": "3.B",
+      "student_thinking": [
+       "trace the code or reason about its behavior without running it",
+       "compare the result with each option and rule out the named misconceptions"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "not_allowed",
+      "key_conditions": [
+       {
+        "condition": "the key is the output of compiling and running the code with the JDK",
+        "evidence": "javac and java run"
+       },
+       {
+        "condition": "a second implementation in Python gives the same value",
+        "evidence": "python reference"
+       }
+      ],
+      "material": {
+       "type": "code",
+       "must_include": [
+        "the code segment"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Believes the rejected count is the number of rejected batches, not the number of items."
+       },
+       {
+        "id": "m2",
+        "description": "Believes a rejected batch is also added to the stock."
+       },
+       {
+        "id": "m3",
+        "description": "Believes a batch that exactly fills the shelf is rejected."
+       }
+      ],
+      "verification": {
+       "independent_path": "javac+java output vs Python simulation",
+       "method": "javac+java execution + python reference"
+      },
+      "judgment_demand": "trace the code and avoid the named misconception"
+     }
+    },
+    {
+     "archetype": "css_shelf_set_q2",
+     "topic": "3.5",
+     "skill": "2.C",
+     "stem": "The Shelf class needs a method percentFull that returns the whole-number percent of the capacity that is currently filled with stock (for example, 41 when 5 of 12 places are filled). Which of the following implementations works as intended?",
+     "options": [
+      {
+       "text": "```\npublic int percentFull() {\n        return 100 * (stock / capacity);\n    }\n```",
+       "why": "Divides the two ints first, which gives 0 until the shelf is full.",
+       "value": null
+      },
+      {
+       "text": "```\npublic int percentFull() {\n        return stock * 100 / capacity + rejected;\n    }\n```",
+       "why": "Adds the rejected count to the percentage, which is not part of how full the shelf is.",
+       "value": null
+      },
+      {
+       "text": "```\npublic int percentFull() {\n        return 100 * stock / capacity;\n    }\n```",
+       "why": "The multiplication happens before the integer division, so the whole-number percent is not rounded down to 0.",
+       "value": null
+      },
+      {
+       "text": "```\npublic int percentFull() {\n        return 100 - 100 * stock / capacity;\n    }\n```",
+       "why": "Computes the percent that is empty, not the percent that is full.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is ```\npublic int percentFull() {\n        return 100 * stock / capacity;\n    }\n```. The multiplication happens before the integer division, so the whole-number percent is not rounded down to 0.\n```\npublic int percentFull() {\n        return 100 * (stock / capacity);\n    }\n``` is incorrect: Divides the two ints first, which gives 0 until the shelf is full.\n```\npublic int percentFull() {\n        return stock * 100 / capacity + rejected;\n    }\n``` is incorrect: Adds the rejected count to the percentage, which is not part of how full the shelf is.\n```\npublic int percentFull() {\n        return 100 - 100 * stock / capacity;\n    }\n``` is incorrect: Computes the percent that is empty, not the percent that is full.",
+     "est_seconds": 100,
+     "blueprint": {
+      "id": "css_shelf_set_q2",
+      "subject": "ap_computer_science_a",
+      "kind": "mc",
+      "concept": "write a method that combines two instance variables and uses integer arithmetic correctly",
+      "topic": "3.5",
+      "skill": "2.C",
+      "student_thinking": [
+       "read the code and decide which candidate satisfies the specification for every input",
+       "compare the result with each option and rule out the named misconceptions"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "not_allowed",
+      "key_conditions": [
+       {
+        "condition": "the key passes every test case when compiled and run",
+        "evidence": "javac and java run"
+       },
+       {
+        "condition": "each distractor fails at least one test case",
+        "evidence": "java test run"
+       }
+      ],
+      "material": {
+       "type": "code",
+       "must_include": [
+        "the code segment"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Divides the two ints first, which gives 0 until the shelf is full."
+       },
+       {
+        "id": "m2",
+        "description": "Adds the rejected count to the percentage, which is not part of how full the shelf is."
+       },
+       {
+        "id": "m3",
+        "description": "Computes the percent that is empty, not the percent that is full."
+       }
+      ],
+      "verification": {
+       "independent_path": "each candidate compiled into the class and run on shelves with different contents",
+       "method": "javac+java unit tests + python reference tests"
+      },
+      "judgment_demand": "test candidates against boundary cases"
+     }
+    }
+   ],
+   "set_size": 2,
+   "est_seconds": 195,
+   "facts": [
+    "cap=10",
+    "batches=5,5,6",
+    "key=10 6"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "css_shelf_set_q1",
+   "facts": [
+    "cap=10",
+    "batches=5,5,6",
+    "key=10 6"
+   ],
+   "seed": 36001
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "A short trace of about 90 seconds, with no calculator needed.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is correct and clean. It is a short trace of the object state with a boundary case at exactly the capacity and distinct distractors."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "The item can be done in about 60-100 seconds, needs no calculator, and has a light reading load.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is a clean, valid method-writing question on integer-division order. It has a unique key, plausible distractors, and an appropriate load."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Short trace of three calls to a simple conditional method. Only subtleties are the <= boundary (stock reaches exactly capacity) and that the full n is added to rejected rather than the overflow amount. Distractors map to these misconceptions. Low load, in scope for 3.5.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 4,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must write/choose a correct method body, recognizing that integer division order matters: 100 * stock / capacity multiplies before dividing (500/12=41), while stock/capacity first truncates to 0. Distractors are plausible near-misses (premature division, unrelated field added, complement percent). Short code, small arithmetic, in-scope for 3.5 and skill 2.C.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 75
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_computer_science_a-m01-k2",
+  "cellId": "ap_computer_science_a-m01",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "mc",
+  "keywordCode": "3.5",
+  "unitCode": "3",
+  "skillPrimary": "3.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "not_allowed",
+  "archetype": "css_shelf_set_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Short trace of three calls to a simple method with one if/else on instance variables. The only subtlety is that the whole rejected amount (3) is added rather than just the overflow (1), which is a mild conceptual check. There is no aliasing, shadowing, or long computation, so it fits an introductory check of writing and tracing methods.",
+  "payload": {
+   "archetype": "css_shelf_set",
+   "topic": "3.5",
+   "skill": "3.B",
+   "calculator": "not_allowed",
+   "set_intro": "Consider the following Shelf class, which keeps track of the items stored on a shelf of limited capacity and the items that did not fit.",
+   "stimulus": {
+    "kind": "text",
+    "description": "```java\nclass Shelf {\n    private int capacity;\n    private int stock;\n    private int rejected;\n\n    public Shelf(int capacity) {\n        this.capacity = capacity;\n        stock = 0;\n        rejected = 0;\n    }\n\n    public void put(int n) {\n        if (stock + n <= capacity) {\n            stock += n;\n        } else {\n            rejected += n;\n        }\n    }\n    public int getStock() { return stock; }\n    public int getRejected() { return rejected; }\n    // other methods not shown\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "items": [
+    {
+     "archetype": "css_shelf_set_q1",
+     "topic": "3.5",
+     "skill": "3.B",
+     "stem": "What is printed as a result of executing the following code segment?\n```java\nShelf s = new Shelf(10);\ns.put(3);\ns.put(6);\ns.put(3);\nSystem.out.println(s.getStock() + \" \" + s.getRejected());\n```",
+     "options": [
+      {
+       "text": "`9 1`",
+       "why": "Believes the rejected count is the number of rejected batches, not the number of items.",
+       "value": null
+      },
+      {
+       "text": "`10 3`",
+       "why": "Believes an item batch that does not fit is partly stored, filling the shelf to capacity.",
+       "value": null
+      },
+      {
+       "text": "`9 3`",
+       "why": "A batch is stored only when it fits within the capacity 10; the stock is 9 and the items of rejected batches total 3. Tracing the code gives 9 3.",
+       "value": null
+      },
+      {
+       "text": "`12 3`",
+       "why": "Believes a rejected batch is also added to the stock.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is `9 3`. A batch is stored only when it fits within the capacity 10; the stock is 9 and the items of rejected batches total 3. Tracing the code gives 9 3.\n`9 1` is incorrect: Believes the rejected count is the number of rejected batches, not the number of items.\n`10 3` is incorrect: Believes an item batch that does not fit is partly stored, filling the shelf to capacity.\n`12 3` is incorrect: Believes a rejected batch is also added to the stock.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "css_shelf_set_q1",
+      "subject": "ap_computer_science_a",
+      "kind": "mc",
+      "concept": "trace object state through put calls that are accepted or rejected",
+      "topic": "3.5",
+      "skill": "3.B",
+      "student_thinking": [
+       "trace the code or reason about its behavior without running it",
+       "compare the result with each option and rule out the named misconceptions"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "not_allowed",
+      "key_conditions": [
+       {
+        "condition": "the key is the output of compiling and running the code with the JDK",
+        "evidence": "javac and java run"
+       },
+       {
+        "condition": "a second implementation in Python gives the same value",
+        "evidence": "python reference"
+       }
+      ],
+      "material": {
+       "type": "code",
+       "must_include": [
+        "the code segment"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Believes the rejected count is the number of rejected batches, not the number of items."
+       },
+       {
+        "id": "m2",
+        "description": "Believes an item batch that does not fit is partly stored, filling the shelf to capacity."
+       },
+       {
+        "id": "m3",
+        "description": "Believes a rejected batch is also added to the stock."
+       }
+      ],
+      "verification": {
+       "independent_path": "javac+java output vs Python simulation",
+       "method": "javac+java execution + python reference"
+      },
+      "judgment_demand": "trace the code and avoid the named misconception"
+     }
+    },
+    {
+     "archetype": "css_shelf_set_q2",
+     "topic": "3.5",
+     "skill": "2.C",
+     "stem": "The Shelf class needs a method percentFull that returns the whole-number percent of the capacity that is currently filled with stock (for example, 41 when 5 of 12 places are filled). Which of the following implementations works as intended?",
+     "options": [
+      {
+       "text": "```\npublic int percentFull() {\n        return 100 - 100 * stock / capacity;\n    }\n```",
+       "why": "Computes the percent that is empty, not the percent that is full.",
+       "value": null
+      },
+      {
+       "text": "```\npublic int percentFull() {\n        return 100 * stock / capacity;\n    }\n```",
+       "why": "The multiplication happens before the integer division, so the whole-number percent is not rounded down to 0.",
+       "value": null
+      },
+      {
+       "text": "```\npublic int percentFull() {\n        return 100 * (stock / capacity);\n    }\n```",
+       "why": "Divides the two ints first, which gives 0 until the shelf is full.",
+       "value": null
+      },
+      {
+       "text": "```\npublic int percentFull() {\n        return stock * 100 / capacity + rejected;\n    }\n```",
+       "why": "Adds the rejected count to the percentage, which is not part of how full the shelf is.",
+       "value": null
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is ```\npublic int percentFull() {\n        return 100 * stock / capacity;\n    }\n```. The multiplication happens before the integer division, so the whole-number percent is not rounded down to 0.\n```\npublic int percentFull() {\n        return 100 - 100 * stock / capacity;\n    }\n``` is incorrect: Computes the percent that is empty, not the percent that is full.\n```\npublic int percentFull() {\n        return 100 * (stock / capacity);\n    }\n``` is incorrect: Divides the two ints first, which gives 0 until the shelf is full.\n```\npublic int percentFull() {\n        return stock * 100 / capacity + rejected;\n    }\n``` is incorrect: Adds the rejected count to the percentage, which is not part of how full the shelf is.",
+     "est_seconds": 100,
+     "blueprint": {
+      "id": "css_shelf_set_q2",
+      "subject": "ap_computer_science_a",
+      "kind": "mc",
+      "concept": "write a method that combines two instance variables and uses integer arithmetic correctly",
+      "topic": "3.5",
+      "skill": "2.C",
+      "student_thinking": [
+       "read the code and decide which candidate satisfies the specification for every input",
+       "compare the result with each option and rule out the named misconceptions"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "not_allowed",
+      "key_conditions": [
+       {
+        "condition": "the key passes every test case when compiled and run",
+        "evidence": "javac and java run"
+       },
+       {
+        "condition": "each distractor fails at least one test case",
+        "evidence": "java test run"
+       }
+      ],
+      "material": {
+       "type": "code",
+       "must_include": [
+        "the code segment"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Computes the percent that is empty, not the percent that is full."
+       },
+       {
+        "id": "m2",
+        "description": "Divides the two ints first, which gives 0 until the shelf is full."
+       },
+       {
+        "id": "m3",
+        "description": "Adds the rejected count to the percentage, which is not part of how full the shelf is."
+       }
+      ],
+      "verification": {
+       "independent_path": "each candidate compiled into the class and run on shelves with different contents",
+       "method": "javac+java unit tests + python reference tests"
+      },
+      "judgment_demand": "test candidates against boundary cases"
+     }
+    }
+   ],
+   "set_size": 2,
+   "est_seconds": 195,
+   "facts": [
+    "cap=10",
+    "batches=3,6,3",
+    "key=9 3"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "css_shelf_set_q1",
+   "facts": [
+    "cap=10",
+    "batches=3,6,3",
+    "key=9 3"
+   ],
+   "seed": 36002
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Traces object state via a method in a class; fits 3.5/3.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Output 9 3 is unique and correct."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Complete compilable class and driver code; clear wording."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Distinct misconceptions; each wrong option explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short trace, typical load, no calculator."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Correct, clean tracing item on a method with a conditional; key 9 3 verified; distractors are plausible and distinct."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Writing a method combining instance variables with integer arithmetic; fits 3.5 / 2.C."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "B is the unique correct option; A, C, D each fail tests."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Complete compilable class; wording clear."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct misconceptions; each wrong option explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 60-100 seconds, standard AP format, no arithmetic burden."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound. The key (100 * stock / capacity) is unique, and the distractors cover the empty-percent, early integer division and extra-term errors. No instant-reject conditions apply."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Short trace of three calls to a simple method with one if/else on instance variables. The only subtlety is that the whole rejected amount (3) is added rather than just the overflow (1), which is a mild conceptual check. There is no aliasing, shadowing, or long computation, so it fits an introductory check of writing and tracing methods.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 4,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single concept: writing a simple accessor-style method with integer division order of operations. The student must see that 100 * stock / capacity multiplies before dividing, so it gives 41 for 5 of 12, while 100 * (stock / capacity) truncates to 0 first. The other distractors are clearly wrong (100 minus the percent; adding rejected). Few reasoning steps, one quick arithmetic check (500/12 = 41), no heavy reading, and no unfair difficulty sources.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   }
+  ]
+ }
+]

@@ -1,0 +1,703 @@
+[
+ {
+  "key": "ap_computer_science_a-m01-k0",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "if (isPrime(n)) { count++; }",
+     "brief_reasoning": "You only add to count when the current n is prime. B tests count instead of n, and isPrime(0) breaks the precondition. C counts the non-primes. D stores the value of n instead of counting.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.9 helper call inside a counting loop; skill 2.C code completion; no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the unique correct completion; B, C, D each fail tests."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code is complete with preconditions stated; data variant java_code, language java."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct realistic misconceptions; parallel options; explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, low reading load, no calculator or arithmetic burden."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, standard code-completion item. The key is unique and the distractors are distinct and realistic. The load is typical for AP CSA, and no instant-reject conditions apply."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard count-with-condition pattern using a provided helper. Student only needs to recognize that the loop variable n should be passed to isPrime and count incremented when true. Distractors (wrong argument, negation, assignment instead of increment) are straightforward near-misses requiring no tracing or computation. No unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m01-k1",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Each n in the range should be tested with isPrime(n), and count should go up by 1 when it is prime. Option A tests count instead of n, and count can be 0 or 1, which breaks the n >= 2 precondition. Option B counts the composite numbers instead of the primes. Option C sets count to the last prime found rather than counting the primes.",
+     "choice_index": 3,
+     "final_answer": "if (isPrime(n)) { count++; }",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The reading load is short and the task fits about 100 seconds. No calculator is needed.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean code-completion question with a unique key, distinct distractors and appropriate length. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step completion of a standard count-with-condition loop using a provided helper. Distractors are clearly wrong (wrong variable, negated condition, assignment instead of increment). No tracing, arithmetic, or subtle boundary issues; the isPrime body is irrelevant to the answer.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m01-k2",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Each n from lo to hi gets checked with isPrime(n), and count goes up by 1 for each prime. Option A checks count, not n. Option B adds an extra n++, so it skips numbers. Option D sets count to n instead of adding 1.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "if (isPrime(n)) { count++; }"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Calling a boolean helper inside a counting loop fits 2.9 and 2.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only option C is correct. A tests count, which can violate the isPrime precondition and gives wrong counts. B skips values. D assigns instead of counting."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The code is complete with preconditions stated. The multi-line formatting of option B is a minor rendering concern."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception and the explanation covers all three."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short reading load, no arithmetic, typical AP code-completion style."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. The key is unique and correct, the distractors are distinct and realistic, and the load is appropriate for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Straightforward use of a provided helper method inside a for loop with a counter. The correct choice requires passing the loop variable n to isPrime and incrementing count. Distractors are clear near-misses (wrong argument, extra n++ that skips values, assigning count = n). No tracing of isPrime internals is needed, and there is no arithmetic or heavy reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m02-k0",
+  "cellId": "ap_computer_science_a-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "while (digitSum(n) != 9) { n++; }",
+     "brief_reasoning": "The loop must check every value, going up by 1, until the digit sum equals 9. Option B stops too early when the digit sum is above 9 (for example, 19). Option A skips values. Option D has the condition reversed.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.7 while loop with helper call; skill 2.C procedural abstraction. In scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only n++ with != 9 is correct; each distractor fails a boundary case."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code complete, preconditions stated, clear wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions; every wrong option explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short code, parallel options, about 100 seconds, no arithmetic burden."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound code-completion item with a unique key and realistic distractors; passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must understand the helper's contract and choose the correct while-loop condition and step among near-miss candidates (step of 2 skips values, '< 9' stops at digit sums over 9 such as 19, '== 9' is inverted). It requires conceptual loop reasoning and a few quick mental checks of the distractors, with no long traces, heavy reading, or out-of-scope content. This is typical of a full-mock multiple-choice item, not a basic recall question.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m02-k1",
+  "cellId": "ap_computer_science_a-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "while (digitSum(n) != 9) { n++; }",
+     "brief_reasoning": "D checks each value in order and stops at the first digit sum of 9. A stops early when the digit sum is over 9 (start 19 returns 19). B skips values (start 10 misses 18). C ignores digitSum.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "A while loop with a helper call in the condition, searching upward; this is Topic 2.7 and a code-writing skill (2.C)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is the only option that is correct for all start >= 0. A fails for start 91, B skips values, and C ignores digitSum."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The code is complete and compilable, and the precondition is stated. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (< versus !=, wrong step, wrong variable tested), and the explanation covers each one. The correct option is not noticeably longer than the others."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, with no calculator needed and little reading load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean code-completion item with a unique key and three distractors that each fail on a specific input. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Choose the correct while-loop completion among near-miss candidates. It requires understanding that the loop continues while the digit sum is not 9, that n must step by 1 to avoid skipping values, and that the helper must be used. The distractors (< 9, += 2, n != 9) each reflect a plausible condition or step error. It needs only brief tracing with small values, uses a short code stimulus, and has no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m02-k2",
+  "cellId": "ap_computer_science_a-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "while (digitSum(n) != 8) { n++; }",
+     "brief_reasoning": "You need to keep adding 1 to n for as long as its digit sum is not 8. Choice A has the condition reversed. Choice B checks n itself, not its digit sum. Choice C adds 2 each time, so it skips values.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "While loop with a helper call in the condition; fits 2.7 and 2.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is unique. A is inverted, B tests the wrong quantity, and C skips matches (for example, at start=28)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete code with preconditions stated; clear wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct realistic misconceptions; each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical AP length and load; no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key is unique, the distractors are distinct, and it fits the topic and skill."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: write a while loop that uses a helper method call in its condition. The correct choice (loop while digitSum(n) != 8, increment by 1) needs about two reasoning steps. The distractors are plausible but easily eliminated: the negated condition, ignoring the helper, and skipping values with a step of 2. No long traces or arithmetic, a short code stimulus, and only one representation (code to behavior). This fits the introductory level for 2.7, not full-mock exam_prep depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m03-k0",
+  "cellId": "ap_computer_science_a-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Increment count only when multiple(v) is true.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "if (multiple(v)) { count++; }"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Enhanced for traversal with helper call; fits 4.4 / 2.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the unique correct completion; others fail tests."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete compilable code, clear spec and precondition."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical time and load; no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, correct helper-method array traversal completion item with a unique key and distinct distractors."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: complete an enhanced-for counting loop by calling a given boolean helper. The correct choice follows from recognizing the standard count-if pattern. The distractors (count += v, negated condition, extra unconditional increment) are easily eliminated with one mental check each. There is no tracing, no boundary subtlety, and no representation change, so it is well below typical full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m03-k1",
+  "cellId": "ap_computer_science_a-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Each element that multiple() says is a multiple of 4 should add 1 to the count. Choice A counts the non-multiples, B adds up the values, and C overwrites count.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "if (multiple(v)) { count++; }"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The code is short and the task is a standard AP-style code completion that takes about 60-100 seconds. It has four options and requires no arithmetic or calculator.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous helper-method code-completion question on array traversal, with a unique key and plausible distractors. It is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Short enhanced-for traversal with a simple helper call. The student must recognize that counting requires an if on multiple(v) with count++. Distractors (negated condition, count += v, count = v) are common near-misses but are quickly eliminated without tracing. No arithmetic, aliasing, or boundary subtleties; minimal reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m03-k2",
+  "cellId": "ap_computer_science_a-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Count should go up by 1 only when multiple(v) is true. Option A adds 1 extra for every element, B adds the value itself, and D replaces count with the value.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "if (multiple(v)) { count++; }"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Array traversal with helper call, matches 4.4 / 2.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique correct option; others fail tests."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code complete, preconditions clear. Option A's multi-line formatting is slightly awkward."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions, each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, low reading load, no calculator need."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique, the distractors are distinct and each is explained, and the scope and length fit the reference pattern."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step completion: recognize that an enhanced for loop calling a helper with a conditional count++ is the correct counting pattern. Distractors (extra unconditional increment, count += v, count = v) are clearly wrong on inspection. No tracing, boundary, aliasing, or casting subtleties; short code and minimal reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m04-k0",
+  "cellId": "ap_computer_science_a-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "s has at least two characters.",
+     "brief_reasoning": "substring(0,2) throws if length < 2. If s has at least two characters, it can't be null, so this condition is enough. The ten-character option also works, but it rules out more inputs than needed, so it isn't the weakest.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Precondition for substring in a string method fits 2.10 / 4.B."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Key A is correct (length >= 2 is the weakest). However, option D (at least ten characters) also guarantees no exception, and the options B and C are not valid preconditions at all; the stem asks for the weakest among conditions that guarantee no exception, so only A and D qualify, and uniqueness depends on the weakest-ness comparison. This is defensible but A and D both 'guarantee' the result."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Options B, C, D refer to 'every String argument' / 'the String arguments' (plural), but the method takes a single parameter s. The wording is a template leftover and is confusing. Option A uses s, while the others do not, so the parallel form is broken."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Distractors B and C are obviously irrelevant (not about length) and are easily eliminated. The explanation for D says 'one per argument', which is incoherent for a one-parameter method. The explanations are loosely tied to the code."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Plural 'arguments' wording does not match the code, and the length differences between options give away the key. This is not at AP quality."
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Fail: the options B, C, D talk about multiple 'arguments' while the method has one parameter, which is an expression defect. D also guarantees no exception, so the item relies on the 'weakest' comparison. The distractors are weak and partly irrelevant, and the explanation text for D is incoherent."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single concept: substring(0, 2) requires length >= 2. The student identifies the minimal precondition. Distractors are mostly irrelevant (letters only, different arguments), and the only near miss is the stronger 'at least ten characters' condition, which is sufficient but not weakest. The code is a one-line method, with no tracing or computation. It is a fair item that fits well with skill 4.B but is too direct for full-mock exam_prep difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m04-k1",
+  "cellId": "ap_computer_science_a-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "substring(0,2) needs s non-null and length >= 2. Option D is the weakest of the choices that guarantees this. It assumes s is not null, which is the usual implied convention.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "s has at least two characters."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Preconditions for a String method (substring) match 2.10 and skill 4.B."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The stem asks for a condition that guarantees no exception. A null s throws a NullPointerException, so 'at least two characters' only guarantees it if s is non-null. The item never states that s is non-null, which is an unspecified precondition. Option D is still the best choice among the four, but the stem's 'guarantees' wording is strictly not satisfied."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The method has one parameter s, but options A, B and C refer to 'every String argument' and 'the String arguments are different from each other', as if there were several arguments. This mismatch is confusing and unclear. The option wording is not parallel (A to C are about arguments, D is about s)."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Distractors B and C are weak and implausible: B is a non-sequitur about multiple arguments that the method does not take, and C ('at least ten') is not the weakest condition but is still a sufficient one. The explanation for C says 'Two characters (or one per argument)', which is incoherent. Also, A and C are stronger than needed, but they do not guarantee anything that D does not."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Time and load are fine, but the flaws above (the null issue and the multiple-argument wording) make it unsuitable as written."
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Rejected. The item has an unspecified null precondition. The options also refer to multiple 'String arguments' although the method has a single parameter s, and distractors B and C are poorly formed and their explanations are incoherent."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: substring(0,2) requires length >= 2. Distractors are clearly irrelevant (letters only, distinct strings) or stronger than needed (ten characters). Only one short reasoning step, no tracing or computation, and the code is a one-line method. Mild subtlety in recognizing 'weakest' precondition, but well within basic understanding of substring bounds.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m04-k2",
+  "cellId": "ap_computer_science_a-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "substring(0,2) needs s.length() >= 2. Requiring at least two characters is enough and is weaker than requiring ten. Options 0 and 1 do not guarantee the length.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "s has at least two characters."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The wording is awkward and the item is too easy. The incoherent options make it unlike an official AP item.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the options mention multiple \"String arguments\" for a one-parameter method. Two distractors are nonsensical, and the ten-character option is a giveaway. The item needs rewriting with plausible near-miss preconditions, such as length > 2, length >= 1, or non-null only."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-line substring(0,2) call; the solver only needs to know that substring(0,2) requires length >= 2, then choose the least restrictive sufficient condition over near-miss distractors (ten characters is sufficient but not weakest; letters-only and different-arguments are irrelevant). Minimal reading, no computation, no representation changes. Fits skill 4.B at an introductory level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 35
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m05-k0",
+  "cellId": "ap_computer_science_a-m05",
+  "passed": false,
+  "reasons": [
+   "key_much_longer"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_computer_science_a-m05-k1",
+  "cellId": "ap_computer_science_a-m05",
+  "passed": false,
+  "reasons": [
+   "key_much_longer"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_computer_science_a-m05-k2",
+  "cellId": "ap_computer_science_a-m05",
+  "passed": false,
+  "reasons": [
+   "key_much_longer"
+  ],
+  "soft": []
+ }
+]
