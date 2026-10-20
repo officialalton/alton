@@ -73,4 +73,4 @@ CHEM_BLOCK_ARCH=<JSON> CHEM_DUMMY=1 npx tsx scripts/ap-generation/chem-assign.ts
 - 새 저작: 단독 원형 60(`chem_p0_n/o/q.py`: 계산 18 + 고정 문장 은행 42), 2문항 세트 2(`chem_p0_p.py`: 커피컵 열량계 표, ΔG° 대 T 표), FRQ 시나리오 7(`chem_p0_frq3.py`: 긴 완충 용액·용해도곱·열량계와 헤스, 짧은 질량 분석·기체 혼합물·용액 농도·강산 강염기). 첫 생성에서 반려된 원인은 거의 주제 코드 오류(예 VSEPR 을 2.6 으로 표기, 5.7 로 표기한 아레니우스는 범위 밖)와 한 원형 안에 여러 주제 장면을 섞은 것이었다 — 고치고 다시 생성했다.
 - 생성(유료): `config/ap-frozen/chem-ch3-{mc,mcr2,frq,frq2}.v1.json`, 후보 MC 216+84·FRQ 21+8, 통과 113·42·8·5. 비용 약 $10.6(MC $6.83 + $2.57, FRQ $0.84 + $0.38).
 - 배정 `data/ap/stock/exact-assign-chem-ch3.json`: 단독 56 + 세트 2 + FRQ 7, 가상 0, 독립 검증 위반 0, 게시 키·원형과 겹침 0, 한 시험 안 원형 중복 0, exam_prep 17/60. 배치 `chem-c3a/c3b/c3f/c3g`(통과 키는 이 배정에 쓰인 64개만 남겼다).
-- 남은 일: 화면 증거(`evidence-chem-ch3.json`) — 격리 스택 시작이 Docker Desktop 정지로 막혔다.
+- 화면 증거 `evidence-chem-ch3.json`(격리 스택 PORT_OFFSET=100): 140건(후보 70개, 390·1280). 시드 변환에서 `ch_o_isotope_question` m51-k0 가 선택지의 "as shown" 때문에 그림 없는 지문으로 거부됐고, 라이브러리 `ch_percent_yield` m63-k2 는 "%" 를 \\text 안에 쓴 원시 TeX 가 화면에 보여 증거가 거부돼 둘 다 배정에서 뺐다. 대체 5개(m12-k0, m33-k2, m40-k2, m64-k1)는 증거를 새로 만들었다. 화면 증거를 요구한 최종 배정: 가상 0, 위반 0, 게시 키·원형과 겹침 0, 증거 없는 키 0.
