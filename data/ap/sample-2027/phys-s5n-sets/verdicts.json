@@ -1,0 +1,1309 @@
+[
+ {
+  "key": "ap_physics_1-m01-k0-q1",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The area under the F-t graph equals the impulse. The triangle from 0 to 1 s gives 2 N·s and the trapezoid from 1 to 4 s gives 18 N·s, so the total is 20 N·s.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "20.0 N s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 90 seconds, needs little arithmetic, and has a typical AP load.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and suitable. The only flaws are the unused mass and speed in the stem and the key explanation calling the first piece a trapezoid when it is a triangle."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single concept: impulse equals area under the F-t graph. The solver splits the area into a triangle (2 N s) and a trapezoid (18 N s) and sums them to 20 N s. Mass and initial speed are unused distractors. Arithmetic is small and exact, wording is clear, and there is one graph-to-number representation change. Fits an introductory impulse practice item rather than a full-mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k0-q2",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Impulse = area under F-t = 2 + 18 = 20 N·s; Δv = 20/2 = 10 m/s; v = 2+10 = 12 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "12.0 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 95 seconds, one area computation and one law, and the options are parallel numeric values.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, complete and suitable. Its key of 12 m/s is verified and its distractors are distinct and explained."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing the impulse-momentum theorem, reading a piecewise force-time graph, and finding the area as a triangle plus a trapezoid (2 + 18 = 20 N·s). Then Δv = J/m = 10 m/s and vf = 2 + 10 = 12 m/s. Arithmetic is small and clean, and the wording is unambiguous. Distractors map to realistic errors: omitting the mass, using only the trapezoid, or omitting the initial speed. This is a typical multi-step AP Physics 1 exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k1-q1",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Area under F-t: (4+9)/2*3=19.5, (9+5)/2*2=14, total 33.5 N s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "33.5 N s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The task load is typical. The mass and initial speed are unused extraneous givens left over from a paired second question, which adds minor reading load.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound, with a correct unique key and distinct distractors. The only flaw is minor: the stem gives the mass and initial speed, which this standalone question does not use."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Impulse equals the area under the F-t graph. The student splits it into two trapezoids (19.5 + 14 = 33.5 N s) and ignores the distractor mass and initial speed. The concept is core, the arithmetic is short, and the wording is clear. This is a typical mid-level exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k1-q2",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Impulse = area = 19.5+14 = 33.5 N·s; Δv = 8.375 m/s; v = 2 + 8.375 = 10.375 m/s ≈ 10.4 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "10.4 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Impulse as area under F-t graph plus impulse-momentum theorem; fits 4.2 / 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Area 33.5 N s, v = 2 + 8.375 = 10.375 ≈ 10.4 m/s; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data complete with axes, labels and vertices; stem states net force and the positive direction."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor reproduces a distinct, realistic error; all three verified numerically; the explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical load, calculator allowed, about 95 s."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key is correct and unique, the graph is complete, and the distractors are distinct and verified. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing the impulse-momentum theorem, reading the area under a force-time graph (two trapezoids), converting impulse to a change in velocity, and adding the initial speed. The distractor 8.38 m/s catches students who omit the initial momentum. The arithmetic is short and the wording is unambiguous. The depth and number of steps fit a full-mock item rather than basic learning.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k2-q1",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Impulse = area under F-t: 5+19.5+16.5=41 N s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "41.0 N s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Impulse as area under F-t graph, topic 4.2, skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Area = 5+19.5+16.5 = 41 N s; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph vertices, axes with labels and units, and net-force condition are all given. Mass and initial speed are unneeded but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (largest force times total time, summed force values, first segment only), each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 s, calculator allowed, modest arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key of 41 N s is the unique correct answer, the graph data are complete, the distractors are distinct, and the load is typical for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Impulse equals the area under the F-t graph. The student reads the vertices and sums three trapezoid areas (5 + 19.5 + 16.5 = 41.0 N s). There is one representation change (graph to number) and simple arithmetic. The mass and initial speed are extraneous, giving a mild distraction. Concept depth is low, and the item fits basic learning of topic 4.2 rather than a full-mock exam-level multi-step problem.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k2-q2",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The area under F–t is 5 + 19.5 + 16.5 = 41 N·s, so Δv = 41/2 = 20.5 m/s. Adding the initial 3 m/s gives v = 23.5 m/s.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "23.5 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Impulse as area under F-t graph plus impulse-momentum theorem; topic 4.2, skill 2.B. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Area = 5+19.5+16.5 = 41 N s; v = 3+20.5 = 23.5 m/s. Unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data has labeled axes with units, ranges and vertices. The stem states net force along the motion direction."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "All three distractors reproduce from the stated misconceptions (56/2+3=31; 20.5; 47/4=11.75). The explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, calculator allowed, modest arithmetic, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clear and in scope. The key and distractors check out and the item has a standard AP load. Pass."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must choose the impulse-momentum theorem, find the area under a non-constant force-time graph using three trapezoid segments (the graph begins at a nonzero force), convert impulse to change in velocity using mass, and add the initial speed. Arithmetic is short and clean (5 + 19.5 + 16.5 = 41 N·s; 41/2 = 20.5; plus 3 = 23.5 m/s). Distractors target common slips such as omitting the initial speed. Wording is clear and the content is in scope.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_physics_1-m02-k0-q1",
+  "cellId": "ap_physics_1-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "alpha = tau/I = 7/4 = 1.75 rad/s^2",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "1.75 rad/s^2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Applies alpha = tau/I with a torque read from a graph, which fits topic 5.6 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "alpha = 7/4 = 1.75 rad/s^2 is the unique answer. The graph is read at t = 3 s, the net torque is stated, and the axle is frictionless."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The data are complete: labeled axes with units and vertices (0,0), (3,7), (4,9). The value 7 falls between y-ticks but is readable from the vertex."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions, and each wrong option is explained. The average-torque value 4.625/4 = 1.156 matches the option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A short item of about 60 to 90 seconds with minimal arithmetic. The calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, simple item. The key 1.75 rad/s^2 is unique, the stimulus data are complete, and the distractors are distinct and explained. The only minor issue is a blueprint note about a second area question that the stem does not ask."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step application of Newton's second law in rotational form (alpha = tau/I). The only representation work is reading one value from a graph at a labeled vertex (t=3 s, torque = 7 N m). No multi-step reasoning, unit conversion, or heavy arithmetic. Distractors reflect simple errors (omitting I, inverting the ratio).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_1-m02-k0-q2",
+  "cellId": "ap_physics_1-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Angular impulse equals the area under the torque–time graph: 10.5 + 8 = 18.5 N·m·s. Dividing by I = 4 kg·m² gives ω = 4.625 rad/s.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "4.62 rad/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Solution depends on angular impulse = change in angular momentum (area under torque-time graph), which belongs to later Unit 5 topics (5.7/5.8), not Newton's second law in rotational form (5.6). Item does not primarily assess tau = I alpha."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Area = 10.5 + 8 = 18.5; /4 = 4.625 rad/s. Key unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertices fully specify the graph; y-axis max 11 with step 2 is slightly odd but data complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor has a distinct, explained misconception."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Time and calculator load are reasonable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The arithmetic and key are correct, but the item relies on angular impulse and angular momentum (area under the torque-time graph), which is not the 5.6 topic of tau = I alpha. It fails the scope criterion."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing the rotational impulse-momentum / Newton's 2nd law in rotational form with a time-varying torque, reading a piecewise-linear graph, computing the area as a triangle plus a trapezoid, then dividing by I. Distractors map to plausible errors (final torque only, area to 3 s only). The arithmetic is light and the wording is clear. The difficulty comes from the representation change and multi-step reasoning, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_physics_1-m02-k1-q1",
+  "cellId": "ap_physics_1-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "At t=3 s the net torque is 9 N m. Angular acceleration = torque / moment of inertia = 9/2 = 4.50 rad/s^2.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "4.50 rad/s^2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Applies alpha = tau/I with a value read from a graph; fits topic 5.6 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "tau(3) = 9 N m, so alpha = 4.5 rad/s^2. The key is unique. The 3.35 distractor equals 6.7/2, consistent with its rationale."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The vertices fully specify the graph and the axes are labeled with units. The y-axis step of 2 means the peak at 9 falls between ticks, which is a minor readability issue."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct error and the explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The reading and calculation load is light and typical for AP Physics 1."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A sound, simple item. Reading tau = 9 N m from the graph at t = 3 s gives alpha = 4.50 rad/s^2, and the distractors are distinct. The only weakness is that the y-axis ticks step by 2, so the peak at 9 falls between ticks."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single graph read (torque = 9 N m at t=3 s) followed by one application of Newton's second law for rotation, alpha = tau/I = 4.5 rad/s^2. Arithmetic is trivial, reading load is low, and the wording is unambiguous. Distractors reflect common errors (not dividing by I, multiplying by I). The graph is a mild representation read, but there are no extra reasoning steps such as integrating the graph or linking to kinematics.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_1-m02-k1-q2",
+  "cellId": "ap_physics_1-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The area under the graph is 19.5 + 14 = 33.5 N·m·s. This equals the angular momentum because the wheel starts at rest. ω = 33.5/2 = 16.75 ≈ 16.8 rad/s.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "16.8 rad/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Torque-time graph area divided by I; uses Newton's second law in rotational form integrated over time (angular impulse), a mild extension but within Unit 5. Dominant skill is a calculation with a representation read."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Areas 19.5 + 14 = 33.5; 33.5/2 = 16.75 ≈ 16.8 rad/s. Unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertices, axis labels and ranges are complete. Frictionless fixed axle and net torque are stated. The y-axis max of 11 with step 2 is slightly odd, but the vertices are specified."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor matches a distinct misconception (peak torque times time over I, forgetting to divide by I, final torque over I), and the explanation covers each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 s, calculator-friendly, single graph, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key is verified, the distractors are distinct, and the load is appropriate. The only caveats are a slight stretch toward angular impulse and an unusual y-axis tick choice."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must recognize that torque varies with time, so constant-alpha kinematics fails. They must use the area under the torque-time graph (angular impulse, equal to I times the change in omega) and then divide by I. Two trapezoid areas (19.5 and 14) give 33.5 N m s, and 33.5/2 = 16.75 rad/s, which is about 16.8. Distractors reflect skipping the division by I, misreading the graph, and using alpha at a single point. Arithmetic is light and the graph reading is clean.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_physics_1-m02-k2-q1",
+  "cellId": "ap_physics_1-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Read the graph at t = 7 s: net torque = 6 N·m. Then α = τ/I = 6/2 = 3.00 rad/s².",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "3.00 rad/s^2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is a short single-step reading with a division. Time and calculator load are typical of the exam.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, valid use of α = τ/I with a graph reading. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step application of Newton's second law for rotation: read the torque at t=7 s from the graph (6 N m) and divide by I=2 kg m^2 to get 3.00 rad/s^2. The only added demand is a simple graph read; the distractors reflect inverted or missing-division errors. There is no multi-step reasoning, no integration of the graph, and the arithmetic is trivial.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_1-m02-k2-q2",
+  "cellId": "ap_physics_1-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Area under the torque-time graph = 5 + 19.5 + 16.5 = 41 N·m·s, which equals the angular momentum since the wheel starts at rest. ω = 41/2 = 20.5 rad/s.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "20.5 rad/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 95 seconds, calculator allowed, light arithmetic, typical AP load.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key of 20.5 rad/s is verified, the graph is complete, the distractors are distinct, and the load is appropriate. It is acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must recognize that angular acceleration varies, so angular speed comes from the area under the net torque-time graph divided by I (angular impulse-momentum form of Newton's 2nd law). Requires reading the graph, summing three trapezoid areas (5 + 19.5 + 16.5 = 41 N m s), and dividing by I = 2 kg m^2 to get 20.5 rad/s. Arithmetic is short and clean; wording is unambiguous; no out-of-scope content. Difficulty comes from choosing the governing approach and translating the graph, which are allowed levers.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_physics_1-m03-k0-q1",
+  "cellId": "ap_physics_1-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Slope of P vs depth ≈12.36 kPa/m = ρg → ρ≈12360/9.8≈1260 kg/m³",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "1260 kg/m^3"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 8.2: gauge pressure P=rho g d. The dominant demand is selecting the law and calculating the density with units. Fits skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Every row gives about 1260 kg/m^3 with g=9.8. The key is the unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has labeled depth and gauge pressure columns with units, the data are complete and consistent, and the stem is clear. The open tank and constant density are stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct error (omitted g, unit conversion, multiplied instead of divided), and the explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, one table read and one division. The calculator is allowed and the load is typical of the exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean item on gauge pressure at depth. The key is unique, the distractors are distinct, and the stimulus is complete. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-law application (P = rho*g*h) with one table read and one kPa-to-Pa conversion; one division, clear wording, no extra reasoning link. Straightforward core-skill item, below typical full-mock complexity.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_1-m03-k0-q2",
+  "cellId": "ap_physics_1-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Gauge pressure rises linearly with depth, about 12.35 kPa per m, so at 12 m it is about 148 kPa. Adding atmospheric pressure (101 kPa) gives 249 kPa absolute.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "249 kPa"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Gauge vs absolute pressure at depth, table reading plus proportional extension; fits 8.2 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "P/d is about 12.35 kPa/m, so 12 m gives about 148 kPa gauge, and adding 101 kPa gives 249 kPa. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table has labels and rows; atmospheric pressure is given in the stem; fluid at rest is implied."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct, realistic errors (squared ratio, omitted atmospheric pressure, no extension), each explained. The explanation mentions rho g h without stating a density, which is a minor flaw."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, light arithmetic, calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item with a correct, unique key and distinct distractors. It is within scope and has a reasonable load. The explanation's reference to rho g h without a given density is a cosmetic flaw only."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student reads a table, recognizes gauge pressure is proportional to depth (P = rho*g*h, about 12.3 kPa/m), scales to 12 m (about 148 kPa), then adds atmospheric pressure to get absolute pressure (about 249 kPa). Concepts are core to topic 8.2, arithmetic is simple, reading load is minimal, and the distractors target the common error of omitting atmospheric pressure. Not enough layered reasoning for full-mock exam_prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_1-m03-k1-q1",
+  "cellId": "ap_physics_1-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Gauge pressure P = ρgh, so the slope of P versus h equals ρg. Slope ≈ 8.82 kPa/m = 8820 Pa/m. Dividing by g = 9.8 m/s² gives ρ = 900 kg/m³.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "900 kg/m^3"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 8.2 gauge pressure rho*g*d, with a table read and unit conversion. Fits skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "900 kg/m^3 is the unique answer; all rows are consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete, with labels and units. The stem is clear. The standard g assumption is acceptable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct computational error. I checked that 180, 8820 and 0.900 reproduce from the stated errors. The explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, calculator allowed, with a typical load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A sound, clear item with a unique key and distinct, well-explained distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single governing law (P_gauge = rho*g*h) applied to one table row, with a kPa to Pa conversion and one division. Distractors reflect unit-conversion and ratio slips. There is little reasoning depth beyond selecting the formula, so it suits basic learning rather than a full-mock exam-prep item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_1-m03-k1-q2",
+  "cellId": "ap_physics_1-m03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Gauge pressure rises linearly at about 8.82 kPa/m (44.1/5), so at 10 m the gauge pressure is about 88.2 kPa. Adding atmospheric pressure: 101 + 88.2 ≈ 189 kPa.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "189 kPa"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The time and calculator load are typical, and the arithmetic is light.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound in scope, key and stimulus. The one flaw is that the explanation uses ρgh/1000 without showing that density comes from the table. That should be tightened, but it does not affect the key."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the table, recognize the linear gauge pressure vs depth relationship (P = rho*g*d), extrapolate to 10 m using the slope (about 8.8 kPa/m), and then add atmospheric pressure to convert gauge to absolute. Distractors map to plausible errors (forgetting to add P_atm, using the 5 m value, doubling error). Arithmetic is light, wording is clear, and all content is within Unit 8 scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m03-k2-q1",
+  "cellId": "ap_physics_1-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "1000 kg/m^3",
+     "brief_reasoning": "Slope P/h = 9.8 kPa/m = ρg, so ρ = 9800/9.8 = 1000 kg/m^3.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 8.2 pressure at depth; calculating density from a table with a kPa-to-Pa conversion fits skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "rho = P/(g d) = 1000 kg/m^3 for every row; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table has labeled depth and gauge pressure columns with consistent linear data; the open tank, liquid at rest and standard g are clear. The stem does not say 'at rest' explicitly, but the model assumptions are standard."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct error (missing unit conversion, wrong operation P*d/g, omitting g) and the explanation covers all three. The 36000 distractor requires a conversion, which is minor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A single-step calculation with one unit conversion, about 60-100 seconds; the calculator is allowed and consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unambiguous item with a unique key and distinct distractors. It is appropriate in scope and load."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: apply P = rho*g*h to one row (or the slope) of a table, with one kPa-to-Pa conversion and clean numbers (19.6 kPa / (9.8 x 2.0 m) = 1000 kg/m^3). Only about 2 reasoning steps, and the table read is trivial. Distractors target the unit conversion (1.000 vs 1000) and the g-multiplication or omission errors. Note an item-quality concern: options A (1.000) and C (1000) are formatted confusingly and could be read as the same value, so the options should be revised, but this does not make the item harder.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_1-m03-k2-q2",
+  "cellId": "ap_physics_1-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Gauge pressure rises 9.8 kPa per meter. At 15 m: 9.8 × 15 = 147 kPa gauge. Add 101 kPa atmospheric to get 248 kPa absolute.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "248 kPa"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Gauge vs absolute pressure at depth, topic 8.2; multi-step calculation fits 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Slope 9.8 kPa/m, 147 gauge + 101 = 248 kPa. Unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table complete with labels and units; proportional data; open tank and constant density stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, all explained; options parallel."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Reasonable load (~100 s), calculator allowed consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound on all five criteria. The key (248 kPa) is unique, the table is complete, and the distractors are distinct and explained."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the table, recognize gauge pressure is linear in depth (P = rho*g*h, slope 9.8 kPa/m), extrapolate to 15 m (147 kPa), then add atmospheric pressure to get absolute pressure (248 kPa). Requires choosing the governing relation and distinguishing gauge from absolute pressure; arithmetic is short and the wording is unambiguous. The distractor 147 kPa targets the common error of omitting atmospheric pressure.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m04-k0-q1",
+  "cellId": "ap_physics_1-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "From 4 s to 8 s the angular speed stays at 4 rad/s, so the angular acceleration is 0. Since net torque = I × alpha, the net torque is 0.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Applies tau=I*alpha with slope reading of an angular speed graph and justifies a claim; fits 5.1/3.B, no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The segment from 4 s to 8 s is flat, so alpha=0 and net torque is zero. C is the unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph data have labeled axes with units and complete vertices. The note that the wheel always rotates in the same direction removes sign ambiguity. Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions. Option D's 2 N m matches the first-segment torque. The explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Roughly 85 seconds, no needless arithmetic, one dominant skill, calculator designation consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. It is a clean, unambiguous graph-reading and justification item with a unique key and distinct distractors."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student reads a flat segment of an omega-t graph, concludes alpha = 0, and applies net torque = I*alpha to get zero net torque. The distractors target common misconceptions (motion requires torque, sign confusion, reusing the earlier segment's torque). There is one governing law, one representation read, and no computation. It is a foundational check on the concept, so it fits basic_learning rather than a full-mock exam_prep item. Wording is clear and the context is minimal.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_1-m04-k0-q2",
+  "cellId": "ap_physics_1-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "28 rad",
+     "brief_reasoning": "Area under ω-t: triangle 0.5*4*4=8, rectangle 4*4=16, triangle 0.5*2*4=4; total 28 rad.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable. The key of 28 rad is unique and correct. The graph data are complete and show ω ≥ 0, so the angle equals the area under the graph. The distractors map to distinct misconceptions. The moment of inertia is an unneeded detail but harmless. Minor note: the 0 rad option is weak.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Rotational kinematics from an ω-t graph; the claim-and-justification demand fits skill 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The area is 8 + 16 + 4 = 28 rad. Only one option is correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph vertices and axes are complete. The same-direction condition is implied by ω ≥ 0 on the graph. The moment of inertia is extraneous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option names a distinct misconception and the explanation addresses all three. The 0 rad option is implausible but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Takes about 90 seconds, needs little arithmetic, and the calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The student must recognize that angular displacement equals the area under the ω-t graph, then sum a triangle (8), a rectangle (16) and a triangle (4) to get 28 rad. This is a single concept with one representation read and simple integer arithmetic. The distractors target common misconceptions: constant-speed segment only, max speed times total time, and area confused with slope. The moment of inertia is an extraneous detail but adds little reading load. Overall this is a direct application of the rotational kinematics definition, suitable for basic learning rather than a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_1-m04-k1-q1",
+  "cellId": "ap_physics_1-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Between 2 and 6 s the angular speed stays at 4 rad/s, so the angular acceleration is zero. Since net torque = I times alpha, the net torque is zero.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "D"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Slope reading plus tau=I alpha justification; Unit 5 content, claim/justification fits 3.B. Topic 5.1 is slightly stretched by tau=I alpha but within unit scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is the unique correct answer. Option B's 2 N m matches the first-segment slope of 2 rad/s^2 with I = 1 kg m^2."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph vertices and axes are complete with units; I and the rotation direction are given in the stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions; all wrong options are explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, no arithmetic burden, calculator designation consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique, the stimulus is complete, the distractors are distinct, and the load is appropriate. The only weakness is that tau=I alpha sits slightly outside topic 5.1, but it is still within Unit 5 scope."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-step conceptual application: read a flat segment of an omega-t graph, conclude alpha = 0, and apply tau_net = I*alpha to claim zero net torque. Distractors target standard misconceptions (motion requires torque, flat means negative, same as previous segment). No arithmetic, minimal reading, in scope. Tests recognition of the governing law and graph slope rather than multi-step reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_1-m04-k1-q2",
+  "cellId": "ap_physics_1-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "29 rad",
+     "brief_reasoning": "Area under the ω–t graph: 4 + 16 + 9 = 29 rad",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Area under omega-t graph gives angle; fits 5.1 and claim/justification skill 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "29 rad is the unique correct value (4+16+9). Graph shows only nonnegative omega so direction is unambiguous."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data complete with axes, units, vertices. The key_conditions mention a statement about direction that is not in the stem, but nonnegative omega implies it."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained. The 0.222 slope value is somewhat contrived but still encodes slope-vs-area confusion."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 s, simple arithmetic. Moment of inertia given in the stem is irrelevant extra information, a minor blemish."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope graph-area item with a complete stimulus and distinct distractors. Minor flaws: the unused moment of inertia in the stem and a contrived slope distractor value. Acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must recognize that angular displacement equals the area under the omega-t graph and sum a triangle, rectangle and trapezoid (4+16+9=29 rad) with small integers. Distractors target common misconceptions (constant segment only, max speed times time, slope). The moment of inertia is an unused detail but adds minimal reading load. It is a standard graph-to-quantity item with a modest multi-step area computation, suited to full mocks and not trivially basic.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m04-k2-q1",
+  "cellId": "ap_physics_1-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Between 4 s and 8 s the angular speed stays at 6 rad/s, so α = 0 and τ = Iα = 0.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "Net torque is zero"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Rotational kinematics linked to net torque via tau=I*alpha; claim plus justification fits 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Zero slope from 4 to 8 s gives alpha=0 and net torque 0; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data complete with labeled axes, units and vertices; wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (negative sign from no rise, carrying over the earlier torque of 6 N m, torque needed to maintain speed); each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-85 s, no arithmetic burden, calculator designation consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound claim-and-justification question with a unique key, a complete graph and distinct distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student reads a flat segment of an angular speed vs. time graph, recognizes alpha = 0, and applies net torque = I*alpha to conclude zero net torque. Distractors target common misconceptions (torque needed to maintain motion, flat line means negative, reuse of earlier segment value). Single law, one representation read, no calculation needed, short wording, no out-of-scope content or ambiguity.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_1-m04-k2-q2",
+  "cellId": "ap_physics_1-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Area under the ω-t graph: 12+24+12 = 48 rad",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "48 rad"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Rotational kinematics, angle from the area under an ω-t graph; justification claim fits 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The areas 12+24+12 = 48 rad. Unique correct option. The graph shows ω ≥ 0, so the angle equals the area."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph vertices fully specify the figure, and the axes are labeled with units. The same-direction condition is not stated but is implied by ω ≥ 0 on the graph. The moment of inertia given in the stem is irrelevant."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions: using the maximum ω for the whole time, using only the constant segment, and confusing slope with angle. Each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, light arithmetic, calculator designation consistent. The extra moment of inertia is slight reading load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct and clean item. Minor flaws: the irrelevant I = 4 kg m² and the same-direction condition left unstated (implied by the graph). It passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Students must recognize that angular displacement is the area under the omega-t graph and sum a triangle, a rectangle and a trapezoid with simple integer values (12+24+12=48 rad). Distractors map to common misconceptions (max speed times time, constant-speed segment only, slope). The given moment of inertia is an unused detail, but it adds little reading load. This is a single-concept item on rotational kinematics with minimal computation, so it fits basic learning rather than a full-mock exam-prep item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ }
+]

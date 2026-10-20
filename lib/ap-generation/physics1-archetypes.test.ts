@@ -30,9 +30,9 @@ d("AP Physics 1 P0 archetypes (Python generators, 3 seeds each)", () => {
   const out = (r.status === 0 ? JSON.parse(r.stdout) : { names: [], frq: [], packs: {}, frqPacks: {}, frq2: [], frq2Packs: {} }) as { names: string[]; frq: string[]; packs: Record<string, Pk[]>; frqPacks: Record<string, FrqPack[]>; frq2: string[]; frq2Packs: Record<string, FrqPack[]> };
   const flat = (n: string) => out.packs[n].flatMap((p) => (p.items ?? [p]).map((q) => ({ ...q, stimulus: q.stimulus ?? p.stimulus })));
 
-  it("registers 135 single archetypes + 5 sets covering all 8 units, and the guide JSON lists the same ids", () => {
+  it("registers 186 single archetypes + 9 sets covering all 8 units, and the guide JSON lists the same ids", () => {
     expect(r.status).toBe(0);
-    expect(out.names).toHaveLength(140);
+    expect(out.names).toHaveLength(195); // 2026-10-19 PH5·PH6 새 원형: 단독 +51, 세트 +4
     const ids = physicsGuide.archetypes.map((a) => a.id);
     const expected = out.names.flatMap((n) => flat(n).slice(0, out.packs[n][0].items ? 2 : 1).map((q) => q.archetype));
     expect(ids).toEqual(expected);

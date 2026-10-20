@@ -1,0 +1,952 @@
+[
+ {
+  "key": "ap_macroeconomics-f01-k0",
+  "cellId": "ap_macroeconomics-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Graph: vertical axis = exchange rate (foreign currency per ora), horizontal axis = quantity of ora. Downward-sloping demand for ora (D), upward-sloping supply of ora (S), intersecting at ER1 and Q1.",
+     "final_answer": "FX market for ora with downward D and upward S; ER1 and Q1 marked at the intersection",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Higher interest rates in Brevonia raise the return on Brevonian assets compared with foreign assets, so more financial capital flows in.",
+     "final_answer": "Net financial capital inflows increase",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Foreigners need more ora to buy Brevonian assets, so demand for ora shifts right (D1 to D2). Brevonians may also supply fewer ora, because the shift toward Brevonian assets reduces their purchases of foreign assets.",
+     "final_answer": "Demand for ora shifts right; ER2 is above ER1 (the ora appreciates)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "When the ora appreciates, Brevonian goods cost more for foreign buyers, so they buy fewer of them.",
+     "final_answer": "Exports decrease, because the stronger ora makes Brevonian goods more expensive for foreigners",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Net exports = exports - imports. Year 1: 700 - 640 = 60. Year 2: 620 - 680 = -60.",
+     "final_answer": "Year 1: +$60 billion; Year 2: -$60 billion",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "F",
+     "brief_reasoning": "Higher interest rates reduce investment and interest-sensitive consumption. Net exports also fall, from +$60 billion to -$60 billion. Both effects reduce aggregate demand: AD shifts left, so short-run real GDP falls and the price level falls too.",
+     "final_answer": "Real GDP decreases in the short run. Higher rates cut investment and consumption, and lower net exports reduce AD further, so AD shifts left and output falls.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a 10-point long FRQ in the standard AP Macroeconomics format. The parts cover graphing the foreign exchange market, capital inflows, a currency shift, the effect on exports, a net exports calculation, and the effect on aggregate demand. The ample-reserves context is stated and consistent with the administered-rate framing. The keys are unique and defensible, and the rubric rows are consistent with the model answers. The graph in part A is described fully enough to draw, with axes and curves specified. Part C is scored against the student's own part A graph, which is normal for AP. The table data is complete. Part F relies on the stated direction of net exports and the interest-rate effect, which is acceptable. The task load fits the 10-point, 25-minute grain.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The dominant demand is the foreign exchange market for the ora (6.4) with a draw-a-graph task. The other parts draw on related topics 6.3, 6.5, 6.6 and 4.6, all within Unit 6 or earlier."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The answers are unique and consistent with the rubric rows. Part C accepts either a rightward demand shift or a leftward supply shift. Part E's values of 60 and -60 are correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, and the notes state the floating exchange rate, the ample-reserves banking system and the central bank's rate increase. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item with no distractors. Each rubric row lists common errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of an AP long FRQ. The arithmetic is trivial, and the calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part AP FRQ on one governing model (the foreign exchange market). Students must draw a labeled graph, shift demand for the ora right after higher interest rates raise net capital inflows, and conclude the ora appreciates and exports fall. They then compute net exports with two simple subtractions and combine two effects on aggregate demand (interest-sensitive spending down, net exports down). No long arithmetic, no ambiguity, and the scope stays within Unit 6 plus basic AD. This is typical full-mock difficulty, neither basic recall nor an advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f01-k1",
+  "cellId": "ap_macroeconomics-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "FX market for kes: vertical axis exchange rate (e.g., $ or foreign currency per kes), horizontal axis quantity of kes; downward-sloping demand for kes, upward-sloping supply of kes; intersection gives ER1 and Q1.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Graph with axes 'Exchange rate (foreign currency per kes)' and 'Quantity of kes', D_kes downward, S_kes upward, equilibrium ER1, Q1."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Higher domestic interest rates raise relative return on Orlandian assets.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Net financial capital inflows increase."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Foreigners demand more kes to buy Orlandian assets (and Orlandians supply fewer kes); demand for kes shifts right, kes appreciates.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Demand for kes shifts right; ER2 higher than ER1 (kes appreciates), quantity increases."
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Appreciation makes Orlandian goods more expensive to foreigners.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Exports decrease, because the appreciated kes makes Orlandian goods relatively more expensive for foreign buyers."
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "NX = X − M.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Year 1: $600 − $560 = $40 billion; Year 2: $520 − $620 = −$100 billion."
+    },
+    {
+     "item": "F",
+     "brief_reasoning": "Higher interest rates reduce interest-sensitive consumption and investment; appreciation lowers net exports; both reduce AD.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Real GDP decreases: higher interest rates cut investment and interest-sensitive consumption, and the kes appreciation lowers net exports (from $40B to −$100B). Both shift AD left, so short-run real output falls (along with the price level)."
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Content is correct and the keys are unique. The table is used only for a trivial subtraction in part E and does not connect to the graph parts. The stem does not state that other factors are held constant. The 4.A target skill carries only 2 of 10 points.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All parts are within Unit 6 and the related topics, and each is judged against its own skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are defensible and the rubric rows are consistent; the demand-right and supply-left alternatives in part C are valid."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The table is complete, but it is weakly integrated: it feeds only part E. The stem does not state that other factors are held constant."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The rubric lists common errors for each part."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Six parts for 10 points is plausible. However, the data and graph are disconnected, and the 4.A graphing carries only 4 of 10 points."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part AP Macro FRQ. Requires drawing an FX market graph, one comparative-statics shift (higher interest rates raise capital inflows, raising demand for kes and causing appreciation), linking appreciation to lower exports, a simple net exports calculation (40 and -100), and combining two effects on short-run real GDP (investment falls and net exports fall, so AD and real GDP decrease). Concepts are in scope for Unit 6, arithmetic is minimal, and reading is light. Depth and representation switching (graph, table, verbal) fit a full mock rather than basic learning, but nothing is advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f01-k2",
+  "cellId": "ap_macroeconomics-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "FX market for ora: vertical axis exchange rate (e.g., $ or foreign currency per ora), horizontal axis quantity of ora; downward-sloping demand for ora, upward-sloping supply of ora; intersection ER1, Q1.",
+     "final_answer": "Correctly labeled FX graph with D_ora, S_ora, ER1, Q1",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Higher interest rates relative to abroad attract foreign financial capital.",
+     "final_answer": "Net financial capital inflows increase",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Foreign investors demand more ora (and residents supply fewer ora), so demand for ora shifts right; ora appreciates.",
+     "final_answer": "Demand for ora shifts right; ER2 above ER1 (ora appreciates)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Appreciated ora makes Kestria's goods more expensive to foreign buyers.",
+     "final_answer": "Exports decrease",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "NX = X − M. Year 1: 600−580=20. Year 2: 520−600=−80.",
+     "final_answer": "Year 1: $20 billion; Year 2: −$80 billion",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "F",
+     "brief_reasoning": "Higher interest rates reduce interest-sensitive investment and consumption, so AD falls; appreciation lowers net exports, which reduces AD further. Lower AD means real GDP falls in the short run.",
+     "final_answer": "Real GDP decreases: lower investment/consumption plus lower net exports both shift AD left",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle is a coherent 10-point long FRQ on topics 6.3-6.6 and 4.6, and every part has a defensible key. The graphing parts (A, C) fit skill 4.A. The remaining parts use related skills, which the guidance allows. The direction of the exchange rate is clear because the stimulus states the ample-reserves, floating-rate setting and the higher administered rates. The rubric rows are consistent, and F2 is correctly made dependent on F1.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A and C draw and shift the foreign exchange market for the ora. Parts B, D, E and F cover related topics 6.6, 6.5, 6.5 and 4.6. The skill labels vary across parts, which is acceptable. No content from later units appears."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are unique and defensible. Net exports are 20 in Year 1 and -80 in Year 2. Capital inflows rise, demand for the ora shifts right, the ora appreciates, exports fall, and AD falls. Rubric rows are meaning-based, and the alternative answers (supply shifting left) are valid."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has labeled columns, units in billions of dollars, and a note giving the policy change and the currency name. The graph is student-drawn, so no figure data is needed. The wording is clear. One minor point: the vertical axis is described as foreign currency per ora, which is fine."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no options. The rubric lists realistic common errors per row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for a long FRQ, with 10 points in about 25 minutes. The only arithmetic is simple subtraction. The calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ in the style of a full-mock AP Macro item on unit 6 content. It requires drawing and labeling a foreign exchange market graph, doing one comparative-statics shift (higher interest rates raise financial capital inflows, so demand for the ora rises and the ora appreciates), and linking this to exports and net exports. Part E is a simple subtraction. Part F combines two opposing effects on real GDP: higher interest rates reduce investment and consumption, and lower net exports reduce aggregate demand. All of this is within the stated scope. Reading is light and the arithmetic is trivial. Difficulty comes from the graph, the chain of reasoning, and combining effects, not from unfair sources. One minor wrinkle is that the data (exports fell from 600 to 520) are consistent with appreciation, so they fit the intended model. This is standard exam-level work and not advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f02-k0",
+  "cellId": "ap_macroeconomics-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Real GDP = nominal / (deflator/100) = 225,000/1.25",
+     "final_answer": "$180,000",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(125-100)/100 x 100",
+     "final_answer": "25%",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Year 1: 150,000/120 = $1,250; Year 2: 180,000/132 ≈ $1,363.64",
+     "final_answer": "Increased (from $1,250 to about $1,364), because real GDP grew 20% while population grew only 10%.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Inflation was higher than expected, so the real interest rate was lower than planned and the loan was repaid in dollars worth less.",
+     "final_answer": "The bank lost.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Nominal GDP can rise just because prices rise. Real GDP removes price changes, so it measures changes in actual output.",
+     "final_answer": "Real GDP adjusts for changes in the price level, so it shows actual changes in the quantity of goods and services produced.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The content and keys are correct and in scope. The item deviates from the official short-FRQ grain (five uniform 1-point parts with no 2- or 3-point part), the population units are unspecified in the table, and part E is a recall-only question. I am failing it on stimulus completeness and format pattern.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part is judged against its own skill. The items fit Unit 2 topics 2.6, 2.4, 2.2 and 2.5. The calculations and interpretations are appropriate for the unit, and nothing is out of scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Real GDP of 180,000, inflation of 25 percent, per capita real GDP rising from 1,250 to about 1,364, and the lender losing are all correct and unique. In part D, the stem says the bank expected no inflation, so the lender-loses answer follows. Part D's rubric is consistent. The rubric for part C requires only the direction and the reason, which is acceptable."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The table data is complete (columns and rows), but the units for Population are missing. The table does not say whether the figure is in thousands or millions, and this matters for interpreting per capita values. The model answer's per capita figures (1,250 and 1,363.64) are shown without units. Also, \"Year 1 = 100\" is in the column header, which is fine. The table is otherwise clear. Missing population units is a minor but real completeness gap."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. Common errors are listed in each rubric row and are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light, and about 12 minutes is generous for five 1-point parts. The calculator designation is consistent. However, the format is five 1-point parts, which does not match an official short FRQ (5 points with parts of 1-3 points mixing graphing, calculation and explanation). Parts D (3.A) and E (1.D) also have thin demand, and part E is a pure recall definition."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Five-part FRQ on core Unit 2 content (real vs. nominal GDP, deflator, inflation rate, real GDP per capita, and the cost of unanticipated inflation for lenders). Each part needs one short step. A: real GDP = 225,000/1.25 = 180,000. B: inflation rate = 25%, read directly from the deflator. C: real GDP per capita rises from 1,250 to about 1,364, so the student must chain the part A result with the population data and compare. D: conceptual, the lender loses on a fixed-rate loan when inflation is unanticipated. E: conceptual, real GDP removes price changes. The numbers are clean and the reading load is light. The mild integration across parts, plus the move between table data, calculation, and verbal explanation, fits a full-mock FRQ rather than a pure basic-learning drill. It is not advanced, since no multi-effect or novel reasoning is needed. All content is in scope for Unit 2 and no chain-weighting is required.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f02-k1",
+  "cellId": "ap_macroeconomics-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Real GDP = Nominal GDP / (deflator/100) = 180,000/(120/100) = 150,000",
+     "final_answer": "$150,000",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(120-100)/100 x 100 = 20%",
+     "final_answer": "20%",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Year 1: 120,000/200 = $600 per person. Year 2: 150,000/200 = $750 per person. Real output went up and population did not change.",
+     "final_answer": "Increased (from $600 to $750)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Inflation was not expected, so the real interest rate turned out lower than planned. The loan is repaid with dollars that buy less.",
+     "final_answer": "The bank lost",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Nominal GDP can go up just because prices rise. Real GDP removes price changes, so it shows the actual change in the quantity of goods and services produced.",
+     "final_answer": "Real GDP adjusts for price level changes (inflation), isolating changes in actual output",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is accurate and well scoped, but the rubric for part C has a scoring flaw, so key and scoring fail. It is a 5-point short FRQ with five 1-point parts that mix calculation and explanation, which matches the short-FRQ grain. Population is constant at 200, so real GDP per capita rises from 600 to 750 and \"real GDP grew faster than the population\" is true, but the rubric does not say how the justification should be judged. Part C asks for direction plus an explanation, and the single required element merges both, so a response that states the direction with a vague reason (such as \"real GDP rose\") is ambiguous to score. Part E is generic and could be answered with a single phrase.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item covers topics 2.6, 2.4, 2.2 and 2.5, all within Unit 2, and the parts assess varied skills, which is acceptable for a bundle."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The numeric keys are correct (150,000; 20%; per capita up from 600 to 750; lender loses). The flaw is in part C. The rubric requires \"increased because real GDP grew faster than the population,\" but the population is unchanged, so a student who says \"real GDP rose while population stayed constant\" is correct yet does not match the wording. The rubric lists alt_solutions that cover this only loosely. Part D also depends on the stated assumption that the loan was made expecting no inflation, which is stated in the prompt, so that part is fine. Overall the key is defensible, but the part C rubric wording is slightly misaligned with the data, so I fail on caution."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete with labeled columns and values. The header states that Year 1 = 100 for the deflator. Units for nominal GDP are given in dollars."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The rubric lists common errors for each part, which is adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light (about 12 minutes estimated, simple arithmetic), and calculator use is consistent with the designation."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Five short parts on real vs nominal GDP, deflator-based inflation, real GDP per capita, and the effect of unexpected inflation on a fixed-rate lender. The numbers are clean (180,000/1.2 = 150,000; 20% inflation; 600 to 750 per capita). Part C chains parts A and the population data, and part D requires conceptual transfer to inflation costs. The item is in scope for Unit 2 and uses no unfair difficulty sources, so it fits a typical AP FRQ in a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f02-k2",
+  "cellId": "ap_macroeconomics-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Real GDP = nominal / deflator ×100 = 150,000/125×100",
+     "final_answer": "$120,000",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(125-100)/100×100",
+     "final_answer": "25%",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Year1 real GDP per capita 100,000/200=500; Year2 120,000/200=600",
+     "final_answer": "Increased, from $500 to $600 per person, because real GDP grew while population stayed the same",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Unexpected inflation lowers the real value of the money repaid, so the bank's real interest rate came out below what it expected",
+     "final_answer": "The bank lost",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Nominal GDP rises when prices rise even if output doesn't change; real GDP holds prices constant",
+     "final_answer": "Real GDP takes out the effect of price changes, so it measures changes in the actual amount of goods and services produced",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Answers are correct and unambiguous (120,000; 25%; per capita 500 to 600; lender loses). The stimulus table has no units for GDP or population, which fails stimulus completeness. The five 1-point parts depart from the official short-FRQ grain of parts worth 1-3 points that mix graphing, calculation and explanation.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All parts are in Unit 2 scope. Parts are judged on their own skills; D is skill 3.A on topic 2.5, which is acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Every key is unique and defensible. Rubric rows are consistent with the model answers."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The table lacks units for GDP and population (persons or thousands, currency), which makes the per capita values underspecified. The base year is stated in the deflator header."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to this free-response item. The listed common errors are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Task load is light and calculator use is minimal. The 1/1/1/1/1 point split with no graphing or multi-point part is thin against the official short-FRQ format."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ with clean numbers. A and B are single calculations (real GDP = 120,000; inflation = 25%). C chains real GDP with per capita reasoning (600 vs 500, so it increased). D applies the unexpected-inflation effect on lenders (the bank loses). E is a conceptual explanation of why real GDP is used. The concepts are core Unit 2 material and each step is short. Depth is moderate, which suits full mock exams rather than basic learning or advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f03-k0",
+  "cellId": "ap_macroeconomics-f03",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:A:numeric"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "40 bicycles / 120 laptops = 1/3 bicycle per laptop",
+     "final_answer": "1/3 bicycle per laptop (40/120)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "A's cost is 1/3 bicycle, which is lower than B's 0.75 bicycle",
+     "final_answer": "Country A",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Draw a straight-line PPC from (0 laptops, 40 bicycles) to (120 laptops, 0 bicycles). The new curve, PPC2, pivots outward along the bicycle axis to 80 bicycles and keeps the laptop intercept at 120.",
+     "final_answer": "Original PPC: intercepts at 40 bicycles and 120 laptops. New PPC2: intercepts at 80 bicycles and 120 laptops (it rotates outward on the bicycle axis).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Specialization by comparative advantage, then trade at terms between the two countries' opportunity costs",
+     "final_answer": "Country A specializes in laptops and Country B specializes in bicycles. They trade at terms between 1/3 and 3/4 bicycle per laptop (for example, 1 laptop for 1/2 bicycle). Each country then gets goods at a lower cost than producing them itself, so each can consume beyond its own PPC.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The 5-point short FRQ (parts of 1/1/2/1) fits the official short-FRQ format. Each part is judged against its own skill and rubric rows. The numbers are consistent: A's opportunity cost of laptops is 1/3 and B's is 0.75, so Country A has the comparative advantage in laptops. The Part C pivot to 80 bicycles is correct. The table is complete. Stating that the PPCs are straight lines resolves the ambiguity. Part A's rubric accepts equivalent forms (fraction, decimal, with units), which covers 0.33 versus 1/3.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All parts stay within topics 1.3 and 1.2 (opportunity cost, comparative advantage, PPC shifts, gains from trade). Each part is judged against its own skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are unique and correct. The rubric rows match the model answers and accept equivalent wordings. Part A's 0.33 is rounded, but the rubric accepts the fraction form."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table gives labeled columns, the maximum outputs, and the linear-PPC assumption. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no distractors. The rubric's common_errors entries (inverting the ratio, naming Country B, using absolute advantage) are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The workload is light and fits the short-FRQ format. The calculation is a single division."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ on topics 1.2 and 1.3. It needs identification of the comparative advantage model, a one-step opportunity cost calculation from a table (A: 1/3 bicycle per laptop; B: 3/4), a comparison to pick the comparative advantage holder, a table-to-graph conversion with one comparative-statics shift (bicycle intercept doubles to 80, laptop intercept stays at 120), and a conceptual explanation of gains from trade. The arithmetic is simple, the reading load is light, the wording is unambiguous, and everything is in scope. The difficulty comes from legitimate levers (reading a table before computing, one calculation, one shift, graph drawing) rather than unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f03-k1",
+  "cellId": "ap_macroeconomics-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Opportunity cost = 60 soybeans / 80 corn",
+     "final_answer": "0.75 units of soybeans per unit of corn (60/80)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "B's opportunity cost of corn = 30/60 = 0.5 soybeans, which is lower than A's 0.75",
+     "final_answer": "Country B",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Straight-line PPC with corn on the x-axis and soybeans on the y-axis. Doubling soybean output pivots the curve outward along the soybean axis only.",
+     "final_answer": "PPC1: a straight line from 60 soybeans (vertical intercept) to 80 corn (horizontal intercept). PPC2: a straight line from 120 soybeans to 80 corn. It pivots out from the corn intercept, which stays the same.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Each country specializes in the good it can produce at a lower opportunity cost, then they trade at terms between their opportunity costs.",
+     "final_answer": "Country B specializes in corn (opportunity cost 0.5 soybeans, versus 0.75 for A). Country A specializes in soybeans (opportunity cost 1.33 corn, versus 2 for B). They trade at terms between 0.5 and 0.75 soybeans per corn, for example 1 corn for 0.6 soybeans. This lets each country consume combinations outside its own PPC, so both gain.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Short FRQ with four parts worth 1/1/2/1 points on opportunity cost, comparative advantage, a PPC pivot, and gains from trade. The keys are correct and unique, the table is complete, and the rubric is consistent. The load is appropriate for a short FRQ.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topics 1.3 and 1.2 are in scope, and each part fits its own skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are 0.75, Country B, intercepts 80/60 with the new soybean intercept at 120, and the specialization-and-trade explanation. The rubric rows match the keys."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete, with the straight-line PPC assumption and the all-resources-to-one-good condition stated. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ. Common errors are listed in the rubric rows."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 5-point short FRQ grain matches the official format, and the load is light, with minimal calculation."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Typical AP FRQ on comparative advantage. Part A is a single division (60/80 = 0.75). Part B requires comparing opportunity costs across both countries (0.75 vs 0.5, so Country B has the advantage in corn). Part C needs a table-to-graph representation change with a one-sided PPC shift (soybean intercept 60 to 120, corn intercept unchanged). Part D is a conceptual explanation of specialization and mutually beneficial terms of trade. The numbers are clean, the wording is unambiguous, the PPC is stated as linear, and everything is in scope for Unit 1, so the difficulty comes from concept depth and not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f03-k2",
+  "cellId": "ap_macroeconomics-f03",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:A:numeric",
+   "criterion_failed_key_scoring",
+   "instant_reject_wrong_key"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Country A gives up 30 soybeans to make 80 corn, so 30/80 = 0.375 soybeans per unit of corn.",
+     "final_answer": "0.375 (3/8) unit of soybeans per unit of corn (30 soybeans ÷ 80 corn)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Country A gives up 0.375 soybeans per unit of corn. Country B gives up 30/60 = 0.5. A's cost is lower, so A has the comparative advantage.",
+     "final_answer": "Country A",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The original PPC is a straight line from 30 soybeans on the vertical axis to 80 corn on the horizontal axis. If only soybean output doubles, the soybean intercept moves to 60. The corn intercept stays at 80, so the line pivots outward around that point.",
+     "final_answer": "Corn on the horizontal axis, soybeans on the vertical axis. PPC1 is a straight line from (0, 30 soybeans) to (80 corn, 0). PPC2 is a straight line from (0, 60 soybeans) to (80 corn, 0). The corn intercept does not move, so the curve pivots outward.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Each country should specialize in the good it makes at a lower opportunity cost, then trade at a price between the two countries' costs.",
+     "final_answer": "Country A should specialize in corn, where its opportunity cost is lower. Country B should specialize in soybeans, where its opportunity cost is lower (2 corn per soybean versus 2.67 for A). They then trade at terms between 0.375 and 0.5 soybeans per unit of corn. This lets each country consume a combination of goods beyond its own PPC, so total output and consumption rise for both.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "wrong_key"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is well scoped and well formed, but Part A's rubric requires the rounded value 0.38 with no tolerance, although the exact answer is 0.375 (3/8). Equivalent exact answers could be unfairly penalized, so the key and scoring need correction.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topics 1.3 and 1.2 are in scope. Part A uses skill 1.C, B uses 1.B, C uses graphing skills, and D uses 2.A. Each part is judged against its own skill, so mixing skills is acceptable."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part A's key is 0.38, but 30/80 = 0.375 exactly. Rounding to 0.38 is a needless rounding choice. The rubric requires \"0.38\" as a required element and gives no numeric tolerance, so a student answering 0.375 or 3/8 could be marked wrong even though that answer is more precise. The key should accept 3/8 or 0.375, and the 0.38 requirement should be dropped. Part B's explanation uses 0.38 versus 0.5, which carries the same rounding issue. The other parts are fine. Part C is a 2-point drawing task. Part D's single point says \"specializes and trades, consuming beyond the PPC,\" which is acceptable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with straight-line PPCs stated in the description. The title and description are the same text, which is a minor redundancy."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common errors listed in the rubric rows are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 5-point short FRQ grain is appropriate. The load is reasonable. The only concern is the rounding of 0.375 to 0.38, which adds an unneeded stringency."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part FRQ on comparative advantage and the PPC. It needs a table-to-opportunity-cost computation (30/80 vs 30/60), a comparison of ratios, a drawn PPC with a one-step technology shift (the soybean intercept doubles to 60), and a short explanation of gains from trade. The concepts are core Unit 1 and the arithmetic is simple. Moderate reasoning and representation changes make it typical full-mock material, not basic recall and not advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f04-k0",
+  "cellId": "ap_macroeconomics-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "0.25 × $800M = $200M",
+     "final_answer": "$200 million",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "$260M − $200M = $60M",
+     "final_answer": "$60 million",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Money multiplier = 1/0.25 = 4; 4 × $60M = $240M",
+     "final_answer": "$240 million",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Banks may hold excess reserves rather than lend all, and the public may hold some loan proceeds as currency rather than deposits, reducing deposit expansion.",
+     "final_answer": "Banks may keep some excess reserves and/or borrowers may hold cash (currency leakage), so the realized multiplier is smaller than 4.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Buying bonds increases bank reserves.",
+     "final_answer": "Buy government bonds (securities) on the open market.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle passes all five criteria and has no instant-reject conditions. It is a coherent short FRQ of five 1-point parts: required reserves, excess reserves, maximum money creation, a leakage explanation, and an open-market purchase.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A-C fit skill 3.C on topic 4.4. Part D is an explanation (skill 1.D) and part E is an open-market action (skill 2.A, topic 4.6). The bundle explicitly spans 4.4 and 4.6. The balance sheet uses only reserves, loans, and deposits, which is within scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Each part has one defensible answer: 200, 60, 240, a leakage explanation, and a bond purchase. The stem for part C states the assumptions needed for the maximum expansion (all excess reserves lent, no currency held). The balance sheet balances only if total assets equal liabilities, which it does at 800 on each side. The rubric rows are consistent with the model answers, and alternative wordings are listed."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete: columns, rows, the 25 percent reserve ratio in the notes, and a limited-reserves economy stated in the description. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ format, so there are no distractors. Common errors are listed per row, such as dividing deposits by the ratio or selling bonds."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light: simple arithmetic, a short table, and about 12 minutes. This is typical of a short FRQ, and the calculator designation is consistent with it."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Core 4.4/4.6 content with a single small balance-sheet table. A: 25% x 800 = 200. B: 260 - 200 = 60. C: money multiplier 1/0.25 = 4, so 60 x 4 = 240. D is a standard recall explanation (currency leakage or banks holding excess reserves). E is a one-step identification (buy bonds). Each part is one short calculation or a recall step, with clean numbers, minimal reading, and no ambiguity. The parts scaffold one another, so the item suits introductory practice rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f04-k1",
+  "cellId": "ap_macroeconomics-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "0.20 x $1,000M = $200M",
+     "final_answer": "$200 million",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "$300M - $200M = $100M",
+     "final_answer": "$100 million",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Money multiplier = 1/0.20 = 5; 5 x $100M = $500M",
+     "final_answer": "$500 million",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Banks may hold excess reserves instead of lending all of them, and the public may hold some currency rather than depositing it, so the actual multiplier is smaller.",
+     "final_answer": "Banks may keep excess reserves and/or people hold cash, so less is redeposited and the multiplier is smaller than 1/rr.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Buying bonds adds to bank reserves.",
+     "final_answer": "Buy government bonds (securities) on the open market",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The five-part short FRQ is in scope for topics 4.4 and 4.6, and each part has a single defensible answer. The balance sheet shows only reserves, loans, and deposits, which stays inside the scope limit. The table and its notes fully specify the 20 percent required reserve ratio. The arithmetic is simple and the 5 points match the short-FRQ grain. Part C states the assumptions (all excess reserves lent, no currency held), so 500 is unambiguous. Part D (1.D) and part E (2.A) assess different skills, which is fine for a bundle. The rubric rows are meaning-based and accept valid alternative wordings.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part fits topic 4.4 or 4.6. Parts A-C assess skill 3.C. Parts D and E assess other skills, which is acceptable in a mixed-skill bundle."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The answers are 200, 100, 500, leakages (excess reserves held by banks or currency held by the public), and buying government bonds. Each is unique. The rubric rows are consistent with the model answers."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete, with columns, rows, and a note stating the 20 percent required reserve ratio. The wording is clear and the economy is labeled as limited-reserves."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response bundle, so there are no distractors. The rubric rows list plausible common errors, such as dividing instead of multiplying and selling bonds instead of buying."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light and about right for a short FRQ. No tedious arithmetic is needed. The calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ-style item on required/excess reserves and the money multiplier. Requires reading a simple balance sheet, computing required reserves, excess reserves, and the maximum money creation via the simple multiplier (one calculation each, round numbers), plus a conceptual explanation of leakages and recall of the open-market purchase. Concept depth is moderate and the steps are sequential but short; there are no representation changes beyond table to numbers. Scope is limited to reserves, loans, and deposits as allowed. Appropriate for a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f04-k2",
+  "cellId": "ap_macroeconomics-f04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_exam_suitability",
+   "instant_reject_multiple_correct",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "0.20 × $500 deposits",
+     "final_answer": "$100 million",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "$200 actual reserves − $100 required",
+     "final_answer": "$100 million",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Money multiplier = 1/0.20 = 5; 5 × $100 = $500",
+     "final_answer": "$500 million",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Leakages: banks may hold excess reserves, and the public may hold currency instead of depositing it, which lowers the real multiplier.",
+     "final_answer": "Banks may keep some excess reserves rather than lending all of them, and borrowers/the public may hold some loan proceeds as cash, so less money is redeposited and the actual multiplier is smaller than 1/rr.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Buying bonds adds to bank reserves",
+     "final_answer": "Buy government bonds (securities) on the open market",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "multiple_correct"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The content is in scope with a clear table, but I recommend rejection. Part C is ambiguous, since the money supply could mean total deposits ($1,000 million) or the change ($500 million). Parts A, B and E are very low-demand 1-point items, so the 1/1/1/1/1 structure departs from the short-FRQ pattern.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topics 4.4 and 4.6 are in scope and each part is judged on its own skill. Parts A-C fit skill 3.C, D fits 1.D, and E fits 2.A. The content is appropriate."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part C is ambiguous about what \"increase in the money supply\" means. The stem says banks lend out all excess reserves and the public holds no currency, and the money supply is deposits. Lending out the $100 million of excess reserves makes the maximum increase in deposits $100 x 5 = $500 million. That treats the $100 million of excess reserves as the initial injection, but the balance sheet is already in the state where the $500 million of existing deposits have only $100 million required. Total deposits can reach 200/0.2 = $1,000 million, which is an increase of $500 million. So $500 million is consistent, but the model answer's logic (\"excess reserves x multiplier\") is the standard one and is acceptable. The risk is that the rubric accepts only 500, while a student might reasonably answer in terms of total money supply ($1,000 million), and the stem does not say \"change\". Part D's rubric states the reason as \"leakages reduce the multiplier\". It accepts either bank excess reserves or public currency, and this is fine. Part E is fine."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and clear: the reserve ratio is in the notes, the limited-reserves economy is stated, and the units are given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ with no distractors. The common errors listed are plausible. Part D's common_errors entry \"says banks lend required reserves\" is vague."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The 5 points are split as 1/1/1/1/1, which departs from the reference pattern of short FRQ parts worth 1-3 points mixing graphing, calculation and explanation. Parts A and B are trivial single-step calculations, and part E is a pure recall item with no setup or justification. The estimated 12 minutes is also high for the task load. The task is tolerable but thin."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style multi-part FRQ on bank reserves and the money multiplier. Students read a simple balance sheet, then chain required reserves, excess reserves, and the maximum money creation via the multiplier (1/0.2 = 5, times $100M = $500M). Parts D and E add short conceptual recall (currency holdings or excess reserves held as leakages; central bank buys bonds). All numbers are clean, wording is unambiguous, and the content is within Unit 4 scope. The chained dependency of parts A to C and the mix of calculation and explanation put it above basic definitional learning, but there are no advanced or multi-model demands.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ }
+]

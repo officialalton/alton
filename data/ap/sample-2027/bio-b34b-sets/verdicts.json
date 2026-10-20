@@ -1,0 +1,472 @@
+[
+ {
+  "key": "ap_biology-m01-k0-q1",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "q = (2*257 + 286)/2000 = 800/2000 = 0.40",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "0.40"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 65 seconds, a short stem, one calculation, and parallel numeric options. Calculator use is consistent.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean: a single allele-counting calculation with a unique key, a complete table, distinct distractors with explanations, and appropriate exam load."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks for allele frequency from genotype counts, which a student can get by direct allele counting: (286 + 2×257)/2000 = 0.40. It needs one table read and one short calculation. The only trap is the choice between direct counting and the q² shortcut, which would wrongly assume equilibrium. The distractors are 0.26 (q² misread), 0.60 (frequency of A) and 0.80 (allele count not divided by 2). Concept depth and step count are low, so this suits foundational practice more than full-mock exam prep. The wording is clear and the numbers are small, so the difficulty does not come from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m01-k0-q2",
+  "cellId": "ap_biology-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "480",
+     "brief_reasoning": "p(A)=(2·457+286)/2000=0.6, q=0.4; 2pq=0.48; 0.48×1000=480 heterozygotes expected.",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "References a 'previous question', but the allele frequencies can be calculated from the table."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The dangling reference to a previous question makes the item unsuitable as a standalone exam item. The calculation load itself is fine.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item fails because the stem depends on a nonexistent \"previous question\" for the allele frequencies, so it is not self-contained. The key of 480 is otherwise correct, but the explanation is boilerplate."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read genotype counts, derive allele frequencies (p=0.6, q=0.4), apply 2pq from the formula sheet, and convert the frequency to a count (480). The arithmetic is clean and short and the content is in scope. Distractors target the frequency-vs-count confusion and mixing up p², q² and 2pq. Minor flaw: the stem refers to 'the previous question', but the needed values can be recomputed from the table, so this does not make the item unfairly hard.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_biology-m01-k0-q3",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "p=(914+286)/2000=0.6, q=0.4; expected Aa=2(0.6)(0.4)(1000)=480; observed 286 < 480, so heterozygote deficit, not in HWE.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Table reading plus one HW calculation; fits 7.5 and 4.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "p=0.6, expected Aa=480 vs 286 observed; C unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data complete; the 480 is derived from the table using the formula sheet."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a specific accurate rationale; D is weak but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, calculator allowed, light reading load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique and verified, the stimulus is complete, and it fits topic 7.5 and skill 4.B."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the genotype table, compute p and q from counts, apply 2pq to get the expected heterozygotes, and compare with the observed count. This is one formula-sheet calculation with clean numbers and distractors based on common misconceptions. It is typical of a full-mock AP Biology item and is not advanced.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_biology-m01-k0-q4",
+  "cellId": "ap_biology-m01",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:Stem asks which condition was violated; option C states the condition (random mating) while B states the violation (nonrandom mating). Both defensibly refer to the same answer.",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "p=0.6,q=0.4; expected 360/480/160 vs observed 457/286/257: excess homozygotes, deficit heterozygotes -> nonrandom mating (inbreeding).",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "Stem asks which condition was violated; option C states the condition (random mating) while B states the violation (nonrandom mating). Both defensibly refer to the same answer."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Hardy-Weinberg conditions applied to genotype data; fits 7.5 and roughly 6.E (cause inference)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique defensible answer: p=0.6, q=0.4, homozygote excess and heterozygote deficit imply nonrandom mating."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete with genotype counts summing to 1000. The stem does not say whether the alleles are neutral or whether the sample is representative, but it is acceptable."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Distractors A, C and D are written as conditions that are met, so they are not violations at all and are trivially eliminated. They are not parallel to B, which is written as a violation. Misconceptions are thin and not distinct, and B is the longest option. The explanation is accurate but generic."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The timing is fine, but the option structure is a giveaway and the distractors are weak for an AP-quality item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key (nonrandom mating) is correct and unique, but the distractors are non-parallel. A, C and D describe satisfied conditions rather than violations, so they are trivially eliminated, and B stands out as the only option phrased as a violation. Fail on distractor quality; the options should be rewritten as parallel candidate violations (for example small population size, gene flow, selection, nonrandom mating)."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Students must derive allele frequencies from genotype counts (p=0.6, q=0.4), compute expected HW genotype counts, compare them with the observed counts, recognize the heterozygote deficit, and link it to nonrandom mating while rejecting the other conditions. The item uses one formula-sheet calculation with round numbers, reads a simple table, and applies the concept to a concrete situation. Option B partly leaks the answer by describing the effect on homozygotes, but the item still requires the data comparison. No heavy reading, long arithmetic, ambiguity, or out-of-scope content.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_biology-m01-k1-q1",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "a alleles = 2*87+125 = 299 out of 1000 → 0.299 ≈ 0.30",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "0.30"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 65 seconds and needs one simple calculation, which a calculator allows. It has a short stem and four parallel numeric options.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean allele-counting calculation with a unique key and distinct distractors, and it is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single allele-counting calculation from a small table: (125 + 2×87)/1000 = 0.299 ≈ 0.30. Requires reading the table and recognizing that allele frequency differs from genotype frequency (distractors 0.17, 0.25 and 0.60 reflect genotype-frequency or A-allele errors). No Hardy-Weinberg equilibrium assumption or multi-step reasoning is needed. The arithmetic is short, and the wording is clear and unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m01-k1-q2",
+  "cellId": "ap_biology-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "p(A) = (2×288+125)/1000 = 0.701 and q(a) = 0.299. The expected heterozygote frequency is 2pq ≈ 0.419, and 0.419 × 500 ≈ 210 individuals.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "210"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "A standalone exam item cannot refer to a 'previous question'. The options are mixed in format, and the key is more precise than the distractors.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item fails because the stem relies on 'the allele frequencies found in the previous question', which is not given. The calculation (p=0.701, q=0.299, 2pqN≈210) is correct and in scope, but the item is incomplete as a standalone question. The explanation is also generic."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must convert genotype counts from a table into allele frequencies (p ≈ 0.70, q ≈ 0.30), then apply the Hardy-Weinberg formula 2pq and scale by population size to get an expected count (~210). This is one formula-sheet proportional calculation chain with small, clean numbers, and the distractors (0.42 as a frequency rather than a count, 105 as half) target realistic errors. The reference to \"the previous question\" slightly weakens standalone clarity, but the data needed are in the table, so it is not an unfair source of difficulty.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_biology-m01-k1-q3",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "p=701/1000=0.701, q=0.299; expected Aa=2pq*500≈210; observed 125 < expected, so not in HWE.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Hardy-Weinberg calculation from genotype counts to compare observed vs expected heterozygotes; fits 7.5 and data description."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "p=0.701, q=0.299, expected Aa about 210 vs observed 125; A is the unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete: genotype counts totaling 500, clear stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct errors (wrong direction, wrong applicability, no deviation); each is explained, though the explanations are brief."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, calculator allowed, light arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope Hardy-Weinberg table item with a unique key and distinct distractors. Passes."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the genotype table, convert counts to allele frequencies (p about 0.70, q about 0.30), apply 2pq with N=500 to get about 210 expected heterozygotes, and compare with the observed 125 to judge equilibrium. This is a typical multi-step Hardy-Weinberg data-interpretation item with one formula-sheet calculation. The numbers are modest, the wording is clear, and the distractors target real misconceptions such as the direction of the difference and the idea that H-W applies only to dominant alleles. The difficulty comes from the concept, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_biology-m01-k1-q4",
+  "cellId": "ap_biology-m01",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:The stem asks which condition was violated, and that condition is random mating, which is option D. Option C names the violation (nonrandom mating) rather than the condition, so C and D can both be defended.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_distractor_explanation",
+   "instant_reject_multiple_correct",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "p=0.701, q=0.299; expected roughly 246/210/45 vs observed 288/125/87. Too few heterozygotes and too many homozygotes, which points to nonrandom mating (inbreeding).",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The stem asks which condition was violated, and that condition is random mating, which is option D. Option C names the violation (nonrandom mating) rather than the condition, so C and D can both be defended."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Hardy-Weinberg conditions applied to genotype data; cause inference is acceptable for 6.E."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Option D (random mating) is the condition whose violation is observed, so D can be read as the violated condition; C names the violation. Key is not uniquely defensible given the stem 'which condition is violated'."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete and consistent with the stem; 500 individuals sum correctly."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Rationale for D claims random mating 'is not a violation', which contradicts the data and makes D ambiguous. Options are not parallel (conditions vs violation)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Time and load are typical; calculator use optional."
+   },
+   "instant_reject": [
+    "multiple_correct"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The data support nonrandom mating, but the stem asks which condition was violated and option D names that condition (random mating) while C names the violation. Two options are defensible and the D rationale is flawed, so the item needs rewording with parallel options."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the genotype table, compute allele frequencies (p ≈ 0.70, q ≈ 0.30), derive expected Hardy-Weinberg genotype counts, and compare them to the observed counts. The heterozygote deficit with excess homozygotes points to nonrandom mating (inbreeding). Distractors test the other conditions (mutation, population size, random mating). Arithmetic is short and uses the formula-sheet equation, with no out-of-scope content and clear wording.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ }
+]

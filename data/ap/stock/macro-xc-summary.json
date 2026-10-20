@@ -1,0 +1,67 @@
+{
+ "runs": [
+  "macro-x-c"
+ ],
+ "rows": 36,
+ "passed": 8,
+ "rejected": 28,
+ "passRate": 0.222,
+ "mc": {
+  "rows": 36,
+  "passed": 8,
+  "passRate": 0.222
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "4": 1,
+  "5": 7
+ },
+ "skillsPassed": {
+  "2.A": 3,
+  "2.B": 4,
+  "3.B": 1
+ },
+ "figPassed": {
+  "none": 8
+ },
+ "figAll": {
+  "none": 36
+ },
+ "figPassRate": {
+  "none": "8/36"
+ },
+ "renderTypesPassed": {
+  "none": 8
+ },
+ "archetypesPassed": {
+  "ma_money_neutral_explain": 1,
+  "ma_anticipated_inflation": 1,
+  "ma_debt_service_budget": 1,
+  "ma_growth_without_inflation": 1,
+  "ma_deficit_growth_chain": 1,
+  "ma_supply_shock_phillips": 1,
+  "ma_productivity_boost_effects": 1,
+  "ma_saving_increase_effect": 1
+ },
+ "archetypesAll": {
+  "ma_money_neutral_explain": 4,
+  "ma_anticipated_inflation": 4,
+  "ma_debt_service_budget": 4,
+  "ma_growth_without_inflation": 4,
+  "ma_deficit_growth_chain": 4,
+  "ma_supply_shock_phillips": 4,
+  "ma_productivity_boost_effects": 4,
+  "ma_fed_buys_bonds_fx": 4,
+  "ma_saving_increase_effect": 4
+ },
+ "failedArchetypes": [
+  "ma_fed_buys_bonds_fx"
+ ],
+ "costUsd": {
+  "macro-x-c": 1.163
+ }
+}

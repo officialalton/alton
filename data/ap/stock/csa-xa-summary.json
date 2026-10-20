@@ -1,0 +1,139 @@
+{
+ "runs": [
+  "csa-x-a"
+ ],
+ "rows": 120,
+ "passed": 75,
+ "rejected": 45,
+ "passRate": 0.625,
+ "mc": {
+  "rows": 120,
+  "passed": 75,
+  "passRate": 0.625
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "1": 16,
+  "2": 24,
+  "3": 4,
+  "4": 31
+ },
+ "skillsPassed": {
+  "3.A": 20,
+  "3.C": 15,
+  "3.D": 3,
+  "2.A": 11,
+  "3.B": 21,
+  "4.B": 3,
+  "4.A": 2
+ },
+ "figPassed": {
+  "text": 71,
+  "none": 4
+ },
+ "figAll": {
+  "text": 114,
+  "none": 6
+ },
+ "figPassRate": {
+  "text": "71/114",
+  "none": "4/6"
+ },
+ "renderTypesPassed": {
+  "text": 71,
+  "none": 4
+ },
+ "archetypesPassed": {
+  "cs_mod_negative_trace": 3,
+  "cs_compound_mixed_types": 2,
+  "cs_pass_by_value_prim": 1,
+  "cs_method_chain_calls": 2,
+  "cs_substring_index_trace": 3,
+  "cs_uninitialized_use": 3,
+  "cs_ceil_pages_completion": 2,
+  "cs_default_values_trace": 1,
+  "cs_while_sentinel_trace": 2,
+  "cs_bool_equiv_expr": 1,
+  "cs_loop_equiv_while": 3,
+  "cs_loop_accumulate_cond": 3,
+  "cs_string_count_pattern": 1,
+  "cs_digit_reverse_trace": 2,
+  "cs_largest_digit_completion": 1,
+  "cs_count_divisors_completion": 1,
+  "cs_remove_char_completion": 3,
+  "cs_sum_until_negative_completion": 1,
+  "cs_nested_loop_pairs_trace": 3,
+  "cs_grade_branches_trace": 2,
+  "cs_array_count_runs_trace": 2,
+  "cs_array_shift_left_completion": 1,
+  "cs_enhanced_for_trace": 3,
+  "cs_arraylist_set_vs_add_trace": 3,
+  "cs_arraylist_double_completion": 1,
+  "cs_arraylist_swap_trace": 3,
+  "cs_2d_row_sum_trace": 3,
+  "cs_2d_col_max_completion": 1,
+  "cs_linear_search_comparisons": 3,
+  "cs_insertion_sort_pass_trace": 1,
+  "cs_recursion_calls_count": 1,
+  "cs_recursion_digit_sum_trace": 1,
+  "cs_precondition_list": 2,
+  "cs_postcondition_2d": 1,
+  "cs_describe_row_ends": 1,
+  "cs_describe_first_min": 1,
+  "css_adjacent_set": 1,
+  "css_above_mean_set": 3,
+  "css_shelf_set": 3
+ },
+ "archetypesAll": {
+  "cs_mod_negative_trace": 3,
+  "cs_compound_mixed_types": 3,
+  "cs_pass_by_value_prim": 3,
+  "cs_method_chain_calls": 3,
+  "cs_substring_index_trace": 3,
+  "cs_error_kind": 3,
+  "cs_uninitialized_use": 3,
+  "cs_ceil_pages_completion": 3,
+  "cs_default_values_trace": 3,
+  "cs_while_sentinel_trace": 3,
+  "cs_bool_equiv_expr": 3,
+  "cs_loop_equiv_while": 3,
+  "cs_loop_accumulate_cond": 3,
+  "cs_string_count_pattern": 3,
+  "cs_digit_reverse_trace": 3,
+  "cs_largest_digit_completion": 3,
+  "cs_count_divisors_completion": 3,
+  "cs_remove_char_completion": 3,
+  "cs_sum_until_negative_completion": 3,
+  "cs_nested_loop_pairs_trace": 3,
+  "cs_grade_branches_trace": 3,
+  "cs_array_count_runs_trace": 3,
+  "cs_array_shift_left_completion": 3,
+  "cs_enhanced_for_trace": 3,
+  "cs_arraylist_set_vs_add_trace": 3,
+  "cs_arraylist_double_completion": 3,
+  "cs_arraylist_swap_trace": 3,
+  "cs_2d_row_sum_trace": 3,
+  "cs_2d_col_max_completion": 3,
+  "cs_linear_search_comparisons": 3,
+  "cs_insertion_sort_pass_trace": 3,
+  "cs_recursion_calls_count": 3,
+  "cs_recursion_digit_sum_trace": 3,
+  "cs_precondition_list": 3,
+  "cs_postcondition_2d": 3,
+  "cs_describe_row_ends": 3,
+  "cs_describe_first_min": 3,
+  "css_adjacent_set": 3,
+  "css_above_mean_set": 3,
+  "css_shelf_set": 3
+ },
+ "failedArchetypes": [
+  "cs_error_kind"
+ ],
+ "costUsd": {
+  "csa-x-a": 4.1922
+ }
+}

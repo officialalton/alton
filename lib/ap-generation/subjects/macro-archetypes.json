@@ -1,5 +1,22 @@
 [
  {
+  "id": "ma_absolute_vs_comparative",
+  "topic": "1.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenario; the key explains the gain with opportunity cost"
+  ],
+  "misconceptions": [
+   "Country A also gains by specializing where its opportunity cost is lower.",
+   "Absolute advantage in different goods is not required for gains from trade.",
+   "Confuses absolute advantage with comparative advantage.",
+   "Specialization follows the lowest opportunity cost, not the lowest absolute resource use."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_ad_determinants",
   "topic": "3.1",
   "skill": "3.A",
@@ -13,6 +30,23 @@
    "Predicts a leftward shift of short-run aggregate supply; the event changes spending, not production costs.",
    "Predicts a rightward shift of aggregate demand, but the event reduces spending at every price level.",
    "Treats the event as a change in the price level, which moves the economy along the AD curve; the event itself is a determinant that shifts the curve."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_ad_shift_events",
+  "topic": "3.1",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted statements; each wrong option is a movement along AD, a supply shock, or a leftward shift"
+  ],
+  "misconceptions": [
+   "A change in production costs shifts short-run aggregate supply, not aggregate demand.",
+   "Higher taxes reduce disposable income and shift aggregate demand to the left.",
+   "A change in the price level moves along the curve instead of shifting it.",
+   "A stronger currency lowers net exports and shifts aggregate demand to the left."
   ],
   "bc": false
  },
@@ -153,6 +187,23 @@
   "bc": false
  },
  {
+  "id": "ma_anticipated_inflation",
+  "topic": "5.2",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenario; wrong options credit anticipated inflation with real output or redistribution"
+  ],
+  "misconceptions": [
+   "Contracts that include expected inflation keep their real value.",
+   "Some costs of inflation remain even when it is expected.",
+   "Anticipated inflation does not raise real output.",
+   "That redistribution is caused by unexpected inflation."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_appreciation_calc",
   "topic": "6.2",
   "skill": "2.C",
@@ -251,6 +302,23 @@
    "Says the nominal interest rate would not change, but it would decrease. The market interest rate falls when previously issued bond prices rise.",
    "Says the nominal interest rate would increase, but it would decrease. The market interest rate falls when previously issued bond prices rise.",
    "Says the price of previously issued bonds would not change, but it would increase. Bond prices and interest rates move in opposite directions: Lower interest rates raise the price of previously issued bonds."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_bop_account_entries",
+  "topic": "6.1",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenario; wrong options misclassify the transaction"
+  ],
+  "misconceptions": [
+   "A consumer good is a current-account item, not a financial asset.",
+   "Private transactions are recorded in the balance of payments.",
+   "Goods bought from abroad are imports.",
+   "The car purchase itself is a current-account import."
   ],
   "bc": false
  },
@@ -408,6 +476,23 @@
   "bc": false
  },
  {
+  "id": "ma_cross_rate_numeric",
+  "topic": "6.2",
+  "skill": "1.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fraction vs sympy rational"
+  ],
+  "misconceptions": [
+   "Multiplies the euros by the yen per dollar without converting through dollars.",
+   "Divides the euros by the yen per dollar.",
+   "Multiplies the amount by the euros per dollar only.",
+   "Multiplies the euros by the euros per dollar and then by the yen per dollar."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_crowding_concept",
   "topic": "5.5",
   "skill": "1.A",
@@ -476,6 +561,23 @@
   "bc": false
  },
  {
+  "id": "ma_currency_strength_compare",
+  "topic": "6.5",
+  "skill": "1.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted statement; wrong options reverse or equate the two effects"
+  ],
+  "misconceptions": [
+   "The two changes move net exports in opposite directions.",
+   "Relative prices expressed in a common currency affect trade.",
+   "This is the effect of a depreciation, not an appreciation.",
+   "A depreciation lowers the foreign price of U.S. goods and raises net exports."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_cycle_indicators",
   "topic": "2.7",
   "skill": "1.A",
@@ -506,6 +608,23 @@
    "Reports the natural rate minus twice the actual rate.",
    "Reports the natural rate.",
    "Reverses the subtraction, giving the negative of the correct value."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_debt_burden_concept",
+  "topic": "5.4",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted statement; wrong options overstate or deny the burden"
+  ],
+  "misconceptions": [
+   "Much government debt is held by domestic residents, so interest on that part stays in the economy.",
+   "The effect depends on interest rates, crowding out, and how the borrowed funds were used.",
+   "Governments normally roll over (refinance) their debt rather than repaying it all at once.",
+   "Financing the debt with money creation causes inflation, which is a cost."
   ],
   "bc": false
  },
@@ -544,6 +663,23 @@
   "bc": false
  },
  {
+  "id": "ma_debt_service_budget",
+  "topic": "5.4",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenario; wrong options deny the claim on future budgets"
+  ],
+  "misconceptions": [
+   "Borrowing does not raise tax revenue by itself.",
+   "Part of the debt is held by the public and by foreigners, which requires interest payments.",
+   "A larger debt does not lower interest payments.",
+   "Deficits and debt do not automatically lower inflation."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_deficit_debt",
   "topic": "5.4",
   "skill": "3.C",
@@ -557,6 +693,40 @@
    "Reports the deficit or surplus as the new debt.",
    "Subtracts tax revenue from the starting debt.",
    "Adds spending to the debt."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_deficit_growth_chain",
+  "topic": "5.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenario; wrong options break a link in the chain"
+  ],
+  "misconceptions": [
+   "Government borrowing competes with firms for loanable funds.",
+   "Crowding out reduces the capital stock available for growth.",
+   "A higher rate reduces the quantity of funds demanded for investment.",
+   "Investment adds to the capital stock and affects growth."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_deficit_in_recession",
+  "topic": "3.9",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenario; wrong options credit new laws or rate changes"
+  ],
+  "misconceptions": [
+   "Lower interest rates do not raise tax revenue; falling incomes lower it.",
+   "Tax rates stay the same; revenue falls because the tax base shrinks.",
+   "Changes in purchases require a decision by Congress.",
+   "Open market purchases change reserves and interest rates; they do not change the deficit directly."
   ],
   "bc": false
  },
@@ -663,6 +833,23 @@
   "bc": false
  },
  {
+  "id": "ma_excess_reserves_calc",
+  "topic": "4.4",
+  "skill": "1.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fraction vs sympy rational"
+  ],
+  "misconceptions": [
+   "Reports total reserves without subtracting required reserves.",
+   "Subtracts total reserves from deposits.",
+   "Applies the reserve ratio to total reserves instead of deposits.",
+   "Reports the bank's required reserves rather than its excess reserves."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_exchange_calc",
   "topic": "6.2",
   "skill": "1.C",
@@ -676,6 +863,23 @@
    "Divides the foreign price by the exchange rate twice.",
    "Divides the exchange rate by the foreign price.",
    "Reports the foreign price as the dollar price."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_expected_inflation_shift",
+  "topic": "5.2",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenario; wrong options reverse the shift or confuse a shift with a movement"
+  ],
+  "misconceptions": [
+   "A change in expectations shifts the curve rather than moving along it.",
+   "The long-run Phillips curve stays at the natural rate of unemployment.",
+   "Higher expectations shift the curve up, not down.",
+   "Expected inflation is a determinant of actual inflation along a short-run Phillips curve."
   ],
   "bc": false
  },
@@ -697,6 +901,40 @@
   "bc": false
  },
  {
+  "id": "ma_fed_buys_bonds_fx",
+  "topic": "4.6",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenario; wrong options reverse the exchange rate or net export effect"
+  ],
+  "misconceptions": [
+   "A larger supply of dollars lowers their value; the interest rate effect points the same way.",
+   "Interest rates affect international capital flows and the exchange rate.",
+   "Lower rates make U.S. assets less attractive.",
+   "A weaker dollar makes U.S. goods cheaper abroad."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_fed_tools_compare",
+  "topic": "4.6",
+  "skill": "1.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted statement; each wrong option reverses the direction of a tool"
+  ],
+  "misconceptions": [
+   "A higher discount rate makes borrowing from the Fed more costly, so it discourages borrowing.",
+   "A higher required ratio reduces the share of deposits banks can lend.",
+   "Bond sales take reserves out of the banking system as buyers pay the Fed.",
+   "A lower ratio raises the multiplier because 1/rr increases."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_financial_assets",
   "topic": "4.1",
   "skill": "1.D",
@@ -710,6 +948,23 @@
    "A bond must be sold, and its price can change, so it is less liquid than cash.",
    "A stock must be sold first, which takes time and can involve a loss, so it is less liquid than cash.",
    "The penalty makes the certificate less liquid than cash."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_first_bank_loan",
+  "topic": "4.4",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fraction vs sympy rational"
+  ],
+  "misconceptions": [
+   "Reports the largest eventual change in the money supply from the whole banking system.",
+   "Multiplies the deposit by the reserve ratio twice.",
+   "Reports the whole deposit as available to lend.",
+   "Divides the deposit by one minus the reserve ratio."
   ],
   "bc": false
  },
@@ -744,6 +999,40 @@
    "Multiplies the gap by the MPC.",
    "Uses the tax multiplier MPC/(1 - MPC) to divide the gap.",
    "Multiplies the gap by the multiplier instead of dividing by it."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_fiscal_lags",
+  "topic": "3.8",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options misattribute the lag or deny that policy affects demand"
+  ],
+  "misconceptions": [
+   "A temporary change in demand does not reduce potential output.",
+   "Self-correction takes time; the problem is a mismatch in timing.",
+   "Government purchases raise aggregate demand once they are made.",
+   "Spending adds to demand regardless of when taxes were collected."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_fiscal_policy_compare",
+  "topic": "3.8",
+  "skill": "1.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted statement"
+  ],
+  "misconceptions": [
+   "A balanced increase still raises AD somewhat and does not target the gap well; the standard answer is a deficit-financed expansion.",
+   "Cutting purchases lowers AD directly, working against the tax cut.",
+   "This is contractionary and would widen the gap.",
+   "A smaller money supply raises interest rates and is a monetary, not fiscal, action."
   ],
   "bc": false
  },
@@ -918,6 +1207,23 @@
   "bc": false
  },
  {
+  "id": "ma_gdp_inclusion_cases",
+  "topic": "2.1",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted cases; each wrong option is a used good, transfer, financial asset, or intermediate good"
+  ],
+  "misconceptions": [
+   "Unpaid household production is not traded in a market and is not counted.",
+   "A transfer payment is not payment for current production.",
+   "A used car was counted in the year it was produced; the dealer's margin is the only current service.",
+   "Sugar is an intermediate good whose value is included in the price of the cakes."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_gdp_limits",
   "topic": "2.2",
   "skill": "1.D",
@@ -1003,6 +1309,23 @@
   "bc": false
  },
  {
+  "id": "ma_growth_policy_choice",
+  "topic": "5.7",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted statement; wrong options are demand-side or distorting policies"
+  ],
+  "misconceptions": [
+   "Protection tends to reduce competition and innovation and does not raise productivity by itself.",
+   "Price controls distort production and can reduce output.",
+   "Money growth raises prices but not potential output.",
+   "A higher minimum wage does not raise the economy's productive capacity."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_growth_sources",
   "topic": "5.6",
   "skill": "1.A",
@@ -1033,6 +1356,23 @@
    "More capital goods raise future capacity.",
    "Reverses both the current and the long-run effects.",
    "Ignores the opportunity cost along the PPC."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_growth_without_inflation",
+  "topic": "5.7",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenario; wrong options are demand-side or distorting policies"
+  ],
+  "misconceptions": [
+   "Higher purchases raise demand and can add to inflation.",
+   "Lower rates stimulate demand in the short run but do not raise potential output.",
+   "Rapid money growth raises prices, not long-run output.",
+   "Price controls distort markets and do not raise potential output."
   ],
   "bc": false
  },
@@ -1581,6 +1921,23 @@
   "bc": false
  },
  {
+  "id": "ma_hyperinflation_cause",
+  "topic": "5.3",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenario; wrong options name real-side or opposite-direction causes"
+  ],
+  "misconceptions": [
+   "Movements in the natural rate do not explain price doubling every month.",
+   "A smaller money supply would lower, not raise, the price level.",
+   "Faster real output growth would reduce, not raise, inflation for a given money growth.",
+   "Higher potential output would tend to lower prices."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_income_approach",
   "topic": "2.1",
   "skill": "1.C",
@@ -1632,6 +1989,23 @@
   "bc": false
  },
  {
+  "id": "ma_inflation_vs_price_level",
+  "topic": "2.4",
+  "skill": "1.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenario"
+  ],
+  "misconceptions": [
+   "Deflation is a negative inflation rate; 3 percent is still positive.",
+   "With positive inflation in both years, prices are higher than two years ago.",
+   "A fall in the inflation rate is not a fall in the price level; that would be deflation (negative inflation).",
+   "Money still loses purchasing power at a positive inflation rate, only more slowly."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_inflation_winners",
   "topic": "2.5",
   "skill": "3.A",
@@ -1645,6 +2019,74 @@
    "Confuses the fixed nominal rate with a fixed real burden.",
    "Reverses the effect; inflation reduces the real value of fixed nominal debt.",
    "A higher real income for the bank is the opposite of a gain for the family."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_inflationary_gap_adjust",
+  "topic": "3.7",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenario; wrong options reverse the wage response or shift the wrong curve"
+  ],
+  "misconceptions": [
+   "Potential output does not rise because actual output exceeds it.",
+   "A rightward shift in AD would widen the gap.",
+   "An inflationary gap puts upward pressure on wages, not downward.",
+   "Prices and wages adjust upward in an inflationary gap, which eliminates the gap."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_interest_on_debt",
+  "topic": "5.4",
+  "skill": "1.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "integer arithmetic vs sympy"
+  ],
+  "misconceptions": [
+   "Reports the interest payments alone.",
+   "Applies the interest rate to the primary balance.",
+   "Reports the debt as the deficit.",
+   "Reports the primary balance alone."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_lend_excess_reserves_effect",
+  "topic": "4.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenario; wrong options confuse lending with removing money from the system"
+  ],
+  "misconceptions": [
+   "The bank creates a new deposit that did not exist before.",
+   "Required reserves rise with the new checkable deposit.",
+   "Making a loan does not destroy reserves; it creates a deposit.",
+   "The new spending financed by the loan tends to raise aggregate demand."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_lf_capital_inflow",
+  "topic": "4.7",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenario; wrong options reverse the rate or investment effect"
+  ],
+  "misconceptions": [
+   "A lower rate raises the quantity of funds demanded for investment.",
+   "Foreign saving adds to loanable funds supplied in the U.S. market.",
+   "A larger supply lowers the equilibrium rate.",
+   "The real rate is determined in the loanable funds market."
   ],
   "bc": false
  },
@@ -1717,6 +2159,40 @@
   "bc": false
  },
  {
+  "id": "ma_lfpr_calc",
+  "topic": "2.3",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fraction vs float ratio"
+  ],
+  "misconceptions": [
+   "Divides the number of unemployed by the labor force, which is the unemployment rate.",
+   "Divides the number unemployed by the population.",
+   "Divides the number employed by the labor force.",
+   "Divides the labor force by the population, which is the participation rate."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_longrun_phillips_why",
+  "topic": "5.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenario; wrong options keep a permanent trade-off"
+  ],
+  "misconceptions": [
+   "The long-run Phillips curve is vertical at the natural rate.",
+   "Persistent money growth leads to higher, not lower, inflation.",
+   "Money growth does not change potential output or the natural rate in the long run.",
+   "The natural rate depends on structural factors, not on the money supply."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_lr_adjust",
   "topic": "3.7",
   "skill": "3.A",
@@ -1747,6 +2223,23 @@
    "Self-adjustment shifts SRAS, not AD, so the price level moves the other way.",
    "Gets the shift right but the price-level change backward; moving SRAS along AD changes the price level in the opposite direction to its shift.",
    "Point E is not long-run equilibrium; wages adjust over time."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_lras_potential_events",
+  "topic": "3.4",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted statement; wrong options are temporary or demand-side events"
+  ],
+  "misconceptions": [
+   "Higher spending shifts aggregate demand, not potential output.",
+   "A movement along SRAS is not a shift of LRAS.",
+   "A temporary change in input prices shifts short-run aggregate supply.",
+   "A temporary wage change shifts SRAS, not the economy's potential output."
   ],
   "bc": false
  },
@@ -1836,6 +2329,23 @@
   "bc": false
  },
  {
+  "id": "ma_monetary_lags",
+  "topic": "4.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenario; wrong options deny the link or reverse the direction"
+  ],
+  "misconceptions": [
+   "Lower rates raise spending; the problem is timing, not direction.",
+   "Fiscal policy also has lags, and monetary policy is useful because it can be changed quickly.",
+   "The central bank can change interest rates; the issue is the delay before spending responds.",
+   "The money supply and interest rates are linked; the delay concerns the spending response."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_monetary_policy_gap",
   "topic": "4.6",
   "skill": "2.A",
@@ -1870,6 +2380,23 @@
   "bc": false
  },
  {
+  "id": "ma_money_demand_shift_factors",
+  "topic": "4.5",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted statements; wrong options are movements along the curve or supply changes"
+  ],
+  "misconceptions": [
+   "A change in supply shifts the supply curve, not demand.",
+   "A fall in the price level decreases the demand for money; it does not increase it.",
+   "A change in the interest rate moves along the curve and does not shift it.",
+   "A higher return on bonds lowers money demand at each interest rate."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_money_functions",
   "topic": "4.3",
   "skill": "1.B",
@@ -1900,6 +2427,23 @@
    "The natural rate is not changed by money growth.",
    "Money growth does not raise potential output in the long run.",
    "The long-run real rate is determined by saving and investment, not money growth."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_money_growth_numeric",
+  "topic": "5.3",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "integer arithmetic vs sympy"
+  ],
+  "misconceptions": [
+   "Reports output growth as the inflation rate.",
+   "Reports the money growth rate as the inflation rate, ignoring output growth.",
+   "Adds output growth to money growth.",
+   "Subtracts money growth from output growth."
   ],
   "bc": false
  },
@@ -1955,6 +2499,23 @@
   "bc": false
  },
  {
+  "id": "ma_money_neutral_explain",
+  "topic": "5.3",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenario; wrong options give money real long-run effects"
+  ],
+  "misconceptions": [
+   "With output and velocity fixed, a larger money supply must raise the price level.",
+   "In the long run the real interest rate is set by saving and investment, not the money supply.",
+   "In the long run real output is set by resources and technology, not by money.",
+   "The scenario holds velocity constant."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_money_vs_lf",
   "topic": "4.7",
   "skill": "1.D",
@@ -2002,6 +2563,23 @@
    "Reports the marginal propensity to save.",
    "Uses MPC/(1 - MPC) instead of 1/(1 - MPC).",
    "Uses 1/MPC instead of 1/(1 - MPC)."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_mpc_mps_data",
+  "topic": "3.2",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fraction vs sympy rational"
+  ],
+  "misconceptions": [
+   "Reports the initial increase in spending without any multiplier effect.",
+   "Uses the multiplier MPC / (1 - MPC) rather than 1 / (1 - MPC).",
+   "Uses the multiplier 1 / MPC instead of 1 / MPS.",
+   "Uses the marginal propensity to save as the multiplier."
   ],
   "bc": false
  },
@@ -2074,6 +2652,23 @@
   "bc": false
  },
  {
+  "id": "ma_multiplier_rounds",
+  "topic": "3.2",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fraction vs sympy geometric sum"
+  ],
+  "misconceptions": [
+   "Adds only the induced rounds and leaves out the first round.",
+   "Reports the full eventual multiplier effect rather than the total after the stated number of rounds.",
+   "Counts only the initial government spending.",
+   "Multiplies the initial spending by the number of rounds."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_ncf_identity",
   "topic": "6.6",
   "skill": "1.C",
@@ -2125,6 +2720,23 @@
   "bc": false
  },
  {
+  "id": "ma_nx_identity",
+  "topic": "2.1",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact subtraction vs sympy"
+  ],
+  "misconceptions": [
+   "Adds the three components to GDP instead of subtracting them.",
+   "Reverses the sign by subtracting GDP from the sum of the three components.",
+   "Adds consumption, investment, and government purchases and reports their sum.",
+   "Subtracts only consumption from GDP."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_omo_effects",
   "topic": "4.6",
   "skill": "3.A",
@@ -2155,6 +2767,23 @@
    "A short-run cost change does not change the natural rate by itself.",
    "Describes a negative supply shock.",
    "Supply shocks shift the SRPC even when AD does not shift."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_phillips_compare",
+  "topic": "5.2",
+  "skill": "1.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted statement; wrong options swap or misshape the curves"
+  ],
+  "misconceptions": [
+   "The long-run curve is vertical, not downward sloping.",
+   "The short-run curve slopes downward because expectations are temporarily fixed.",
+   "This reverses the two curves.",
+   "Neither curve has these shapes."
   ],
   "bc": false
  },
@@ -2227,6 +2856,40 @@
   "bc": false
  },
  {
+  "id": "ma_phillips_tradeoff_table",
+  "topic": "5.2",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "difference of table values vs sympy subtraction"
+  ],
+  "misconceptions": [
+   "Reports the initial unemployment rate.",
+   "Reports the change in unemployment for a one-step move only.",
+   "Reports the final unemployment rate rather than the change.",
+   "Adds the unemployment rates at the two points."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_phillips_unemp_below_natural",
+  "topic": "5.2",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenario; wrong options reverse the shift or move the long-run curve"
+  ],
+  "misconceptions": [
+   "Wage pressure and expectations shift the short-run curve.",
+   "The long-run curve is vertical at the natural rate and does not shift with this event.",
+   "Higher wages raise costs and inflation.",
+   "Lower unemployment along the curve is associated with higher, not equal, inflation."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_policy_choice_why",
   "topic": "3.8",
   "skill": "2.B",
@@ -2240,6 +2903,23 @@
    "Higher transfers raise disposable income, shift AD to the right, and raise the deficit.",
    "Lower tax rates raise consumption, shift AD to the right, and raise the deficit, which would add to inflationary pressure.",
    "A monetary policy action, not a fiscal one."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_policy_for_data",
+  "topic": "4.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options choose the opposite action or a tool that moves the wrong way"
+  ],
+  "misconceptions": [
+   "A lower ratio raises lending and the money multiplier.",
+   "A lower discount rate makes borrowing easier and encourages lending.",
+   "Lower rates raise aggregate demand and add to inflation.",
+   "A larger money supply tends to raise prices in the short and long run."
   ],
   "bc": false
  },
@@ -2274,6 +2954,23 @@
    "This combination gives real GDP a decrease and interest rates an indeterminate change, which does not match the goal.",
    "This combination gives real GDP an increase and interest rates an indeterminate change, which does not match the goal.",
    "Ignores that fiscal and monetary policy shift aggregate demand and change interest rates."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_policy_goal_conflict",
+  "topic": "5.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenario; wrong options deny or reverse the trade-off"
+  ],
+  "misconceptions": [
+   "Lower demand reduces inflation pressure.",
+   "Higher interest rates raise unemployment in the short run.",
+   "Higher demand raises prices, which raises inflation.",
+   "The long-run curve is vertical; the trade-off exists in the short run."
   ],
   "bc": false
  },
@@ -2380,6 +3077,23 @@
   "bc": false
  },
  {
+  "id": "ma_price_control_effects",
+  "topic": "1.6",
+  "skill": "1.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; each wrong sentence reverses the quantity effect or ignores that a control binds only on one side of equilibrium"
+  ],
+  "misconceptions": [
+   "A binding floor prevents the price from falling to equilibrium.",
+   "The quantity traded is limited by the smaller quantity demanded, which falls.",
+   "A higher price reduces the quantity demanded.",
+   "A floor below equilibrium is not binding and has no effect."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_price_index_basket",
   "topic": "2.4",
   "skill": "1.C",
@@ -2393,6 +3107,23 @@
    "Reports the change in cost in dollars.",
    "Divides Year 1 cost by Year 2 cost.",
    "Reports the Year 2 index instead of the percent change."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_productivity_boost_effects",
+  "topic": "5.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenario; wrong options shift demand or deny the supply effect"
+  ],
+  "misconceptions": [
+   "Higher productivity raises output rather than reducing it.",
+   "Technology raises potential output.",
+   "The technology shifts aggregate supply, which lowers the price level.",
+   "The technology shifts supply, not demand."
   ],
   "bc": false
  },
@@ -2465,6 +3196,23 @@
   "bc": false
  },
  {
+  "id": "ma_real_nominal_compare",
+  "topic": "2.6",
+  "skill": "1.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted numbers; the key subtracts inflation from nominal growth"
+  ],
+  "misconceptions": [
+   "Real GDP is measured at constant prices, but its growth is computed after removing price changes from nominal GDP.",
+   "Real growth equals nominal growth minus inflation, which is not zero here.",
+   "Inflation is subtracted from nominal growth to find real growth.",
+   "The nominal increase of 3 percent partly offsets the price increase."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_real_rate",
   "topic": "4.2",
   "skill": "1.C",
@@ -2499,6 +3247,23 @@
   "bc": false
  },
  {
+  "id": "ma_real_rate_projects",
+  "topic": "4.2",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "count of returns above the real rate vs sympy subtraction"
+  ],
+  "misconceptions": [
+   "Compares the returns with the nominal interest rate instead of the real rate.",
+   "Compares the returns with the sum of the nominal rate and expected inflation.",
+   "Compares the returns with expected inflation alone.",
+   "Funds every project with a positive return."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_real_wage",
   "topic": "2.5",
   "skill": "2.C",
@@ -2529,6 +3294,57 @@
    "Higher prices alone do not reduce real output.",
    "Treats nominal growth as real growth.",
    "Population is not needed to compare real GDP over time."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_related_goods_id",
+  "topic": "1.4",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted pairs with a sign rule"
+  ],
+  "misconceptions": [
+   "A change in the price of a related good shifts the demand for coffee.",
+   "A change in the price of a related good shifts the whole demand curve for coffee.",
+   "Complements move opposite to the other good's price.",
+   "Inferior goods are defined by the response to income, not to a related good's price."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_saving_increase_effect",
+  "topic": "4.7",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenario; wrong options reverse the rate or investment effect"
+  ],
+  "misconceptions": [
+   "A lower rate raises the quantity of funds demanded.",
+   "Saving is the source of loanable funds.",
+   "More saving lowers the equilibrium rate.",
+   "More saving means less consumption in the short run."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_saving_investment_numeric",
+  "topic": "5.5",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "integer arithmetic vs sympy"
+  ],
+  "misconceptions": [
+   "Subtracts the extra deficit twice.",
+   "Reports the original level of investment.",
+   "Reports the drop in government saving instead of investment.",
+   "Adds the extra deficit to investment."
   ],
   "bc": false
  },
@@ -2584,6 +3400,23 @@
   "bc": false
  },
  {
+  "id": "ma_sras_shift_events",
+  "topic": "3.3",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted statement; wrong options confuse AD with SRAS or LRAS"
+  ],
+  "misconceptions": [
+   "Higher costs reduce, not raise, short-run aggregate supply.",
+   "A change in wages shifts short-run supply; potential output changes only with resources or technology.",
+   "Higher production costs shift aggregate supply, not aggregate demand.",
+   "The curve itself shifts when costs change."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_sras_slope",
   "topic": "3.3",
   "skill": "1.A",
@@ -2618,6 +3451,23 @@
   "bc": false
  },
  {
+  "id": "ma_stabilizer_vs_discretionary",
+  "topic": "3.9",
+  "skill": "1.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted statement; wrong options reverse the definitions"
+  ],
+  "misconceptions": [
+   "Automatic stabilizers need no new legislation.",
+   "During a recession tax revenue falls and benefits rise, so automatic stabilizers move the budget toward deficit.",
+   "This reverses the two definitions.",
+   "Both are fiscal policy tools that affect the budget balance."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_stagflation",
   "topic": "3.6",
   "skill": "1.B",
@@ -2631,6 +3481,23 @@
    "Describes a favorable supply shock.",
    "Describes the effect of a demand-driven expansion, not stagflation.",
    "A leftward AD shift lowers the price level."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_stagflation_dilemma",
+  "topic": "3.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted statement; wrong options say there is no trade-off"
+  ],
+  "misconceptions": [
+   "Contractionary policy lowers AD, which lowers real GDP.",
+   "Policy can shift AD; it does not reverse the supply shock.",
+   "Raising AD raises the price level.",
+   "Without an offsetting change, the economy self-corrects only slowly as wages and prices adjust."
   ],
   "bc": false
  },
@@ -2652,6 +3519,23 @@
   "bc": false
  },
  {
+  "id": "ma_supply_self_correction",
+  "topic": "3.7",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted statement; wrong options reverse the wage response"
+  ],
+  "misconceptions": [
+   "The self-correction works through the supply side, not by a shift in AD.",
+   "A gap does not change potential output.",
+   "High unemployment puts downward pressure on wages.",
+   "Self-correction lowers the price level while real GDP rises toward potential."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_supply_shift",
   "topic": "1.5",
   "skill": "1.B",
@@ -2665,6 +3549,23 @@
    "Predicts a rightward shift of demand, but the event does not change buyers' incomes, tastes, expectations, related-good prices, or numbers.",
    "Predicts a rightward shift of supply, but the event does not change sellers' costs, technology, taxes, or the number of sellers.",
    "Predicts a leftward shift of demand, but the event does not change buyers' incomes, tastes, expectations, related-good prices, or numbers."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_supply_shock_phillips",
+  "topic": "5.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenario; wrong options give the wrong direction or confuse a shift with a movement"
+  ],
+  "misconceptions": [
+   "The supply shock raises both unemployment and inflation, which is a shift, not a movement.",
+   "A temporary supply shock does not shift the long-run curve.",
+   "Higher costs raise inflation.",
+   "A cost increase that spreads through the economy raises inflation."
   ],
   "bc": false
  },
@@ -2703,6 +3604,23 @@
   "bc": false
  },
  {
+  "id": "ma_tax_vs_spending_compare",
+  "topic": "3.2",
+  "skill": "1.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted statement; wrong options reverse the comparison or ignore saving"
+  ],
+  "misconceptions": [
+   "The size of the deficit change does not equal the size of the effect on spending.",
+   "Both are fiscal policies that change aggregate demand.",
+   "Households spend only the MPC share of the extra disposable income.",
+   "A tax cut raises disposable income and, with a positive MPC, raises spending."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_trade_explain",
   "topic": "6.5",
   "skill": "2.B",
@@ -2733,6 +3651,40 @@
    "Sets the price above Country B's opportunity cost, so Country B would lose by importing.",
    "Multiplies the two opportunity costs instead of choosing a value between them.",
    "Sets the price equal to Country B's opportunity cost, so Country B gains nothing from trading."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_trade_vs_budget_deficit",
+  "topic": "6.1",
+  "skill": "1.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted statement; wrong options swap or merge the two concepts"
+  ],
+  "misconceptions": [
+   "They measure different flows and can move independently.",
+   "Both definitions are reversed; these describe a trade surplus and a budget surplus.",
+   "This swaps the two definitions.",
+   "Neither is a measure of the debt or of its interest."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_twin_deficits",
+  "topic": "5.5",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenario; wrong options reverse a link in the chain"
+  ],
+  "misconceptions": [
+   "Foreign savers respond to higher U.S. interest rates.",
+   "Greater demand for dollar assets increases the demand for dollars.",
+   "Higher interest rates make U.S. assets more attractive to foreign lenders.",
+   "A stronger dollar makes U.S. goods more expensive abroad and lowers net exports."
   ],
   "bc": false
  },
@@ -2801,6 +3753,23 @@
    "Counts only the first stage.",
    "Adds only the two middle stages.",
    "Adds the sales at all four stages, which double counts the intermediate goods."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_velocity_solve",
+  "topic": "5.3",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fraction vs sympy"
+  ],
+  "misconceptions": [
+   "Multiplies money by real output instead of velocity.",
+   "Divides the money supply by velocity and real output.",
+   "Reports nominal GDP as the price level.",
+   "Divides real output by the product of money and velocity."
   ],
   "bc": false
  }

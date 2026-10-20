@@ -1,0 +1,328 @@
+[
+ {
+  "key": "ap_computer_science_a-m01-k0-q1",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "put(5) makes stock 5. put(8) is rejected because 5 + 8 = 13 > 12, so rejected is 8. put(3) makes stock 8. Output: 8 8.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "8 8"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Tracing object state through a written method with a conditional; fits 3.5/3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Output 8 8 is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete class and code segment; clear wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractor 12 11 does not cleanly follow from its stated misconception (partial fill would not give rejected 11), and 16 11 is loosely motivated. Still distinct and plausible; explanation covers each option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, short code, no arithmetic burden."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key 8 8 is correct and unique, and the item is in scope, short, and clearly stated. Distractor rationales for 12 11 and 16 11 are slightly loose but not disqualifying."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Short 3-call trace of a simple method with one if/else. The only subtlety is that a rejected batch is not partially stored and a later smaller put still fits. There is no aliasing, scope trick, or heavy arithmetic. Distractors correspond to plausible misreadings (ignoring the capacity check, partial fill). It is fair and in scope for 3.5.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m01-k0-q2",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "100*stock/capacity multiplies before integer division: 500/12=41. A gives 0 due to stock/capacity truncating first; B divides by rejected; D gives the empty percent.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Writing a method with correct integer arithmetic using instance variables; fits 3.5 / 2.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only option C yields 41 for 5 of 12 and is correct on all boundary cases; others fail."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete compilable class; clear wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors map to distinct misconceptions (early integer division, wrong variable, complement); each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, typical load, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item: unique key (100 * stock / capacity), distinct misconception-based distractors, appropriate scope and load."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: choose the method body that computes a whole-number percent. It requires recognizing integer-division truncation and left-to-right evaluation (100 * stock / capacity vs 100 * (stock / capacity)). The other distractors use the wrong field or compute the complement, so they are easy to eliminate. The code is short, the arithmetic is trivial, and there is only one representation. This is a legitimate integer-division lever, not an unfair source.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m01-k1-q1",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "put(5): stock 5; put(5): 10<=10, stock 10; put(6): 16>10, rejected 6. Prints 10 6.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "10 6"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "A short trace of about 90 seconds, with no calculator needed.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean. It is a short trace of the object state with a boundary case at exactly the capacity and distinct distractors."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Short trace of three calls to a simple conditional method. Only subtleties are the <= boundary (stock reaches exactly capacity) and that the full n is added to rejected rather than the overflow amount. Distractors map to these misconceptions. Low load, in scope for 3.5.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m01-k1-q2",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "100*stock/capacity multiplies before integer division: 500/12=41. A truncates stock/capacity to 0 first; B adds rejected; D computes percent empty.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item can be done in about 60-100 seconds, needs no calculator, and has a light reading load.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, valid method-writing question on integer-division order. It has a unique key, plausible distractors, and an appropriate load."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must write/choose a correct method body, recognizing that integer division order matters: 100 * stock / capacity multiplies before dividing (500/12=41), while stock/capacity first truncates to 0. Distractors are plausible near-misses (premature division, unrelated field added, complement percent). Short code, small arithmetic, in-scope for 3.5 and skill 2.C.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m01-k2-q1",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "put(3): stock 3; put(6): 3+6=9 is at most 10, so stock 9; put(3): 9+3=12 is over 10, so rejected 3. Prints 9 3.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "9 3"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Traces object state via a method in a class; fits 3.5/3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Output 9 3 is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete compilable class and driver code; clear wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions; each wrong option explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short trace, typical load, no calculator."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean tracing item on a method with a conditional; key 9 3 verified; distractors are plausible and distinct."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Short trace of three calls to a simple method with one if/else on instance variables. The only subtlety is that the whole rejected amount (3) is added rather than just the overflow (1), which is a mild conceptual check. There is no aliasing, shadowing, or long computation, so it fits an introductory check of writing and tracing methods.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m01-k2-q2",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "100*stock/capacity multiplies first, so integer division truncates correctly: 500/12 = 41. Option C gives 0 because stock/capacity is computed first. Option A gives the empty percent. Option D wrongly adds rejected.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Writing a method combining instance variables with integer arithmetic; fits 3.5 / 2.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique correct option; A, C, D each fail tests."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete compilable class; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions; each wrong option explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-100 seconds, standard AP format, no arithmetic burden."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key (100 * stock / capacity) is unique, and the distractors cover the empty-percent, early integer division and extra-term errors. No instant-reject conditions apply."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single concept: writing a simple accessor-style method with integer division order of operations. The student must see that 100 * stock / capacity multiplies before dividing, so it gives 41 for 5 of 12, while 100 * (stock / capacity) truncates to 0 first. The other distractors are clearly wrong (100 minus the percent; adding rejected). Few reasoning steps, one quick arithmetic check (500/12 = 41), no heavy reading, and no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ }
+]

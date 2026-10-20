@@ -108,7 +108,7 @@ class TestIndependentPath(unittest.TestCase):
 class TestMcArchetypes(unittest.TestCase):
     def test_library_size(self):
         self.assertGreaterEqual(len(MC), 80)  # 2026-10-13: 두 번 풀 모의고사(겹침 0)용으로 약 34개 구조 추가
-        self.assertEqual(len(SETS), 4)
+        self.assertEqual(len(SETS), 7)  # 4 + 3 sets added for CS3 (2026-10-19, csa_p0_x4.py)
 
     def test_deterministic(self):
         for n in MC + SETS:
@@ -326,7 +326,7 @@ class TestPaidRunPlan(unittest.TestCase):
     def test_mc_batches_plus_pilot_cover_the_whole_library_once(self):
         pilot = R.CSA_STAGES["csa_p1_a"]
         batches = [R.CSA_STAGES[f"csa_s2_mc_{x}"] for x in "abc"]
-        allx = pilot + [n for b in batches for n in b]
+        allx = pilot + [n for b in batches for n in b] + sorted(set(R.CSA_STAGES["csa_x_a"] + R.CSA_STAGES["csa_x_c"] + R.CSA_STAGES["csa_x_e"]))  # CS3 신규 원형(2026-10-19)
         self.assertEqual(len(allx), len(set(allx)), "배치끼리 원형이 겹친다")
         self.assertEqual(sorted(allx), sorted(MC + SETS))
         for b in batches:

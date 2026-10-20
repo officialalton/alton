@@ -1,0 +1,35 @@
+{
+ "run": "micro-s5-d",
+ "subject": "ap_microeconomics",
+ "generatedAt": "2026-10-20T02:57:58.597Z",
+ "totalCostUsd": 0.16,
+ "newSpendSinceBaseline": 0.2,
+ "cap": 50,
+ "calls": 18,
+ "candidates": 6,
+ "mcCandidates": 6,
+ "frqCandidates": 0,
+ "passedAll": 4,
+ "adopted": 2,
+ "mcAdopted": 2,
+ "frqAdopted": 0,
+ "reserve": 2,
+ "yield": 0.333,
+ "costPerAdopted": 0.082,
+ "callsPerAdopted": 9,
+ "duplicateRejected": 1,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 0,
+  "template": 6
+ },
+ "rejectionReasons": {
+  "criterion_failed_scope_skill": 1,
+  "criterion_failed_stimulus_expression": 1,
+  "criterion_failed_exam_suitability": 1,
+  "instant_reject_out_of_scope_knowledge": 1,
+  "reference_pattern_mismatch": 1,
+  "duplicate_gate_near_duplicate": 1
+ },
+ "unfilledCells": []
+}

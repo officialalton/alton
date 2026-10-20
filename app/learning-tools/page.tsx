@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
+import { OG_IMAGES } from "@/lib/site-url";
 import { CtaButton, PageHero, Prose, PublicPage } from "@/app/components/public/PublicShell";
-import { resolveLandingDestinations } from "@/lib/landing/cta";
-import { loadLandingViewer } from "@/lib/landing/viewer";
+import { loadPublicDest } from "@/lib/landing/public-dest";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/learning-tools" },
   title: "Learning Tools — ALTON",
   description: "Review results, keep a mistake notebook, build your vocabulary and use free study materials, all in one ALTON account.",
-  openGraph: { title: "Learning Tools — ALTON", description: "Review results, keep a mistake notebook, build your vocabulary and use free study materials, all in one ALTON account." },
+  openGraph: { images: OG_IMAGES, title: "Learning Tools — ALTON", description: "Review results, keep a mistake notebook, build your vocabulary and use free study materials, all in one ALTON account." },
 };
 
 export default async function LearningToolsPage() {
-  const dest = resolveLandingDestinations(await loadLandingViewer());
+  const dest = await loadPublicDest();
   return (
     <PublicPage dest={dest}>
       <PageHero

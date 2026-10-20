@@ -1,0 +1,293 @@
+[
+ {
+  "key": "ap_biology-m01-k0",
+  "cellId": "ap_biology-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Glucose turned up in the beaker but starch did not. So glucose can cross the membrane and starch cannot, which fits glucose being a small molecule and starch a large one.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "D"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Target skill 3.C (identify variables/controls/procedures) is not assessed. The item only asks for a conclusion from results, which is data interpretation, so the dominant demand is the wrong skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is the unique defensible answer given the stem."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The wrong options are plausible and each is explained. The rationales for A and C mostly restate the result rather than naming distinct misconceptions."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item is very easy and does not require any experimental-design reasoning. The stem is a generic dialysis lab result with no control or variable to identify, so it is not typical of 3.C items."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the wording is clean, but the item assesses interpreting results rather than skill 3.C (identifying variables, controls or procedures). Rejected for skill mismatch and an exam-suitability shortfall."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step inference from one qualitative result (glucose detected outside, starch not) to size-based selective permeability. No data table, calculation, or representation change. Distractors are straightforward. The wording is clear and the content is in scope, but the item is too simple for a full mock exam. It also asks for a conclusion rather than for identifying variables or controls, so it fits skill 3.C only loosely.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_biology-m01-k1",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Tubing filled only with water, set up and tested the same way, is a negative control. A positive test in its beaker water would point to contamination or the tubing, not diffusion. A has no membrane, and B and D change other variables.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Identifying the control in a membrane permeability experiment fits 2.4 and skill 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is the standard negative control and the best answer. A could be argued as a positive control for the tests, but it is weaker."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "B and D rationales are accurate. The rationale for A is slightly imprecise because a no-tubing beaker could serve as a positive control for the tests, but it is acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculation, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Acceptable item. C is the best control and the other options introduce other variables or lack the membrane. Option A's rationale is slightly imprecise but does not create a second correct answer."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept experimental design item: identify the control that keeps the procedure the same while omitting the tested solutes. Text-only, short, no calculation. Distractors each change a different variable (remove tubing, change concentration, change temperature), so elimination takes only a few steps. Fits skill 3.C and the Unit 2 scope without unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m01-k2",
+  "cellId": "ap_biology-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_distractor_explanation",
+   "instant_reject_multiple_correct"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "A negative control is tubing filled with water only, set up and tested the same way. It shows that any starch or glucose detected in the beaker came from the solution inside the tubing and not from the tubing itself or the test. Choice A changes temperature and C changes concentration, so both are added variables. Choice D removes the membrane, so it is not a matched control.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The reading load is short and the time is typical. There is no arithmetic.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [
+    "multiple_correct"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Option D is arguably also a valid control, and the stem does not say what the control must rule out. The key is therefore not unique, and the distractor rationales are weak. Reject."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step conceptual identification of a negative control in a simple dialysis tubing experiment. No data, calculation or representation change. Distractors vary a different variable (temperature, concentration) or remove the membrane, so the correct answer is reachable with basic understanding of controls. Wording is clear and short, with no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m01-k3",
+  "cellId": "ap_biology-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Glucose turned up in the beaker water and starch did not. That means glucose crossed the membrane and starch did not, so the membrane separates them by molecule size.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "A"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the item tests interpretation of results rather than skill 3.C (identifying variables and controls). The distractors are trivial opposites and the item is too easy. Reject.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Target skill is 3.C (identify variables and controls). The stem asks only for a conclusion from results, which is a data-interpretation skill. No variable, control, or procedure is identified."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is the unique correct answer. Glucose was detected outside the tubing and starch was not."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem omits the test reagents and treats \"not detected\" as proof of impermeability."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Distractors are trivial opposites, each rejected by restating one stem fact. They do not encode distinct named misconceptions, and the explanation only restates the stem."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Very easy, close to recall of a textbook dialysis-tubing demonstration, and it does not test the target skill."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step inference from a simple observation (glucose detected outside, starch not) in the standard dialysis-tubing scenario. There is no calculation and no data representation to interpret. The distractors are directly contradicted by the stated results. The item barely addresses the stated skill of identifying variables and controls.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_biology-m01-k4",
+  "cellId": "ap_biology-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Glucose turned up in the beaker water but starch did not. So glucose got through the membrane and starch was held back, which means the membrane is selective by molecule size.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "A"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Target skill is 3.C (identify experimental procedures: variables, controls). The stem only asks for a conclusion from results, which is data interpretation (closer to 4.C/5.x). No variable, control, or procedure is identified. The blueprint concept mentions choosing controls, but the item does not test it. The topic 2.4 fit is fine, but the skill fit fails."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the unique defensible answer. Glucose is detected outside and starch is not, so glucose crossed and starch did not."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete. The test methods (e.g., Benedict's, iodine) are not named, but this is acceptable."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Each wrong option is refuted only by restating the result. The listed 'misconceptions' (m1-m3) are just observation restatements, not named, distinct student misconceptions. Options B and D are trivially contradicted by the data, and C is a weak distractor. The explanation text is awkward ('Glucose... membrane.. Only...')."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "This is a very low-demand item that is solved by directly reading the stem. It lacks the judgment load of an AP item. It also resembles the standard dialysis-tubing textbook scenario, and the skill demanded does not match the label."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the item does not assess skill 3.C. It asks for a conclusion from results rather than identifying variables or controls. Its distractors are trivial restatements of the data rather than distinct misconceptions. Fail on skill fit and distractor quality. Rewrite to ask which control or variable is needed, e.g., a tubing bag with water only, or what the independent variable is."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step inference from a simple qualitative result (glucose detected outside, starch not) to a conclusion about size-based selective permeability. No data table, calculation, or representation change. Distractors are straightforward, and none requires rejecting a subtle misconception. The item barely engages the experimental-design skill of identifying variables or controls and mostly tests recall of the dialysis tubing concept.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ }
+]
