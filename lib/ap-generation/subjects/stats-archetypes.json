@@ -2163,5 +2163,635 @@
    "Model B's residual plot has no pattern, which supports a linear model; only Model A's residual plot shows a problem.",
    "A straight-line model can be inappropriate; the residual plot shows whether the line describes the relationship."
   ]
+ },
+ {
+  "id": "st_n5_claim_to_question",
+  "topic": "1.10",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each claim is paired with one question about a measured comparison and three questions that fail by asking about reasons, an individual or a judgment"
+  ],
+  "misconceptions": [
+   "It asks about a reason or an attitude rather than about a measured variable that can be compared between the groups.",
+   "It asks about one individual, so there is no population and no variability to study.",
+   "It asks for a judgment of value that data cannot settle."
+  ]
+ },
+ {
+  "id": "st_n5_population_defined",
+  "topic": "1.1",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each context pairs one question with a defined population against a vague-population question, an individual question and a lookup question"
+  ],
+  "misconceptions": [
+   "The population is not specified: everyone in every place is not one population that a single investigation can describe.",
+   "It asks about one individual, so there is no population and no variability to study.",
+   "It has a single factual answer that can be looked up, so no variability among individuals is anticipated."
+  ]
+ },
+ {
+  "id": "st_n5_quantitative_question",
+  "topic": "1.2",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each context pairs one question about a numerical measurement with three questions answered with categories"
+  ],
+  "misconceptions": [
+   "Its answer is based on a categorical variable with the responses yes or no, which is summarized by proportions.",
+   "Its answer is based on a categorical variable with several named categories, which is summarized by proportions.",
+   "Its answer is based on a categorical variable with two named categories, which is summarized by proportions."
+  ]
+ },
+ {
+  "id": "st_n5_rel_freq_table",
+  "topic": "1.3",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the percents sum to 100 and the three wrong statements are the named slips"
+  ],
+  "misconceptions": [
+   "Names the category with the second largest percent as the most common category.",
+   "Adds the largest percent to the third largest instead of the second largest.",
+   "Gives the percent of the remaining categories instead of the two most common categories."
+  ]
+ },
+ {
+  "id": "st_n5_freq_table_mean",
+  "topic": "1.7",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the mean is recomputed from the expanded list of individual values"
+  ],
+  "misconceptions": [
+   "Averages the listed values without weighting them by the frequencies.",
+   "Reports the median of the data instead of the mean.",
+   "Reports the most frequent value, which is the mode, instead of the mean."
+  ]
+ },
+ {
+  "id": "st_n5_shape_from_stats",
+  "topic": "1.6",
+  "skill": "4.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each statement is checked against the rule that the mean lies on the side of the tail relative to the median"
+  ],
+  "misconceptions": [
+   "Reverses the direction of the skew; the mean is pulled toward the long tail, not away from it.",
+   "A symmetric distribution has a mean about equal to its median; here they differ.",
+   "The mean and the median of a distribution with one peak can differ when it is skewed; the number of peaks is not decided by these two values."
+  ]
+ },
+ {
+  "id": "st_n5_hist_gap",
+  "topic": "1.5",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the generated counts have exactly two empty classes and a heavy left cluster, so the gap and the side with most observations are unambiguous"
+  ],
+  "misconceptions": [
+   "The classes with no bar have a frequency of zero, which shows that no observation fell in them.",
+   "The bars to the right of the gap are short; most of the observations are to the left of the gap.",
+   "The bars on the left are much taller than the bars on the right, so the distribution is not symmetric."
+  ]
+ },
+ {
+  "id": "st_n5_undercoverage",
+  "topic": "1.12",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each frame excludes one stated group, so the undercoverage and the direction of the bias follow from the frame"
+  ],
+  "misconceptions": [
+   "The excluded individuals are never selected, so they cannot be selected more often.",
+   "Equal chances within the list do not make up for the individuals who are not on the list.",
+   "A larger sample from the same list still leaves out the same individuals, so the bias remains."
+  ]
+ },
+ {
+  "id": "st_n5_why_stratify",
+  "topic": "1.11",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each context pairs the guaranteed representation of each group with three misconceptions about chance, volunteers and sample size"
+  ],
+  "misconceptions": [
+   "Chance is still used to select individuals within each group; the groups are only the strata.",
+   "Volunteers within a group are a voluntary response sample, which is biased whatever the strata are.",
+   "The total sample size is fixed by the researcher; stratifying only decides how the individuals are allocated to the groups."
+  ]
+ },
+ {
+  "id": "st_n5_control_group",
+  "topic": "1.13",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each context pairs the purpose of a control group with three claims that belong to other design features"
+  ],
+  "misconceptions": [
+   "Representing a population depends on how the individuals are selected, not on having a control group.",
+   "A control group does not replace random assignment; both are needed to compare the treatments fairly.",
+   "A control group does not guarantee that no other variable has an effect; random assignment tends to balance other variables between the groups."
+  ]
+ },
+ {
+  "id": "st_n5_rv_linear",
+  "topic": "2.9",
+  "skill": "3.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the mean and standard deviation of Y are recomputed from two values of X placed one standard deviation from the mean"
+  ],
+  "misconceptions": [
+   "Forgets the flat fee in the mean.",
+   "Adds the flat fee to the standard deviation, but adding a constant does not change the spread.",
+   "Does not multiply by the rate: the mean and standard deviation of the cost use the rate as a factor of $X$."
+  ]
+ },
+ {
+  "id": "st_n5_independent_or",
+  "topic": "2.7",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the probability is recomputed with the complement of both events failing"
+  ],
+  "misconceptions": [
+   "Gives the probability that both events happen instead of at least one.",
+   "Gives the probability that the two events do not both happen, which is not the same as at least one happening.",
+   "Averages the two probabilities, which is not a rule for combining events."
+  ]
+ },
+ {
+  "id": "st_n5_normal_between",
+  "topic": "2.11",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the probability is recomputed with math.erf and with scipy's normal cdf"
+  ],
+  "misconceptions": [
+   "Gives the area to the left of the upper value without removing the area to the left of the lower value.",
+   "Gives the probability outside the two values instead of between them.",
+   "Adds the two cumulative areas instead of subtracting them."
+  ]
+ },
+ {
+  "id": "st_n5_sim_trial",
+  "topic": "2.3",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each family pairs the correct trial with a wrong quantity, a trial that is too small and a different event"
+  ],
+  "misconceptions": [
+   "Records a quantity that is not the event of interest, so the proportion of trials with the event cannot be found.",
+   "One trial represents only a single person or shot, not the whole situation described in the probability.",
+   "Records the event 'all' instead of 'at least' the stated number, so it estimates the probability of a different event."
+  ]
+ },
+ {
+  "id": "st_n5_independence_table",
+  "topic": "2.7",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the table is generated either with equal conditional proportions or with proportions that differ by at least 0.12"
+  ],
+  "misconceptions": [
+   "Both rows having some of each outcome does not show independence; the proportions have to be equal.",
+   "Different row totals do not decide independence; the conditional proportions do.",
+   "The count depends on the size of the row; the proportions are different, so the events are not independent."
+  ]
+ },
+ {
+  "id": "st_n5_xbar_shape_n",
+  "topic": "2.12",
+  "skill": "4.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each context pairs the correct comparison with statements that leave the shape or the spread unchanged or reverse the spread"
+  ],
+  "misconceptions": [
+   "The shape becomes closer to normal as the sample size increases, and the standard deviation of the sample mean decreases.",
+   "A larger sample size gives a smaller, not a larger, standard deviation of the sample mean.",
+   "The shape also changes: with a large sample size the distribution of the sample mean is close to normal even for a skewed population."
+  ]
+ },
+ {
+  "id": "st_n5_phat_varies",
+  "topic": "3.1",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each context pairs the sampling variability explanation with three misconceptions about errors, a changed parameter and size"
+  ],
+  "misconceptions": [
+   "Random samples are expected to give different values; a difference does not show that a sample was selected incorrectly.",
+   "The population proportion is fixed for the population; the difference comes from the sampling variability of the statistic.",
+   "A larger value of a statistic is not more accurate; its closeness to the parameter depends on chance and on the sample size."
+  ]
+ },
+ {
+  "id": "st_n5_phat_normal_cond",
+  "topic": "3.2",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exactly one option satisfies both large counts and the three others each fail at least one"
+  ],
+  "misconceptions": [
+   "$np = 6$ and $n(1-p) = 14$, and at least one of them is less than $10$, so the sampling distribution of $\\hat p$ is not approximately normal.",
+   "$np = 24$ and $n(1-p) = 6$, and at least one of them is less than $10$, so the sampling distribution of $\\hat p$ is not approximately normal.",
+   "$np = 2$ and $n(1-p) = 38$, and at least one of them is less than $10$, so the sampling distribution of $\\hat p$ is not approximately normal."
+  ]
+ },
+ {
+  "id": "st_n5_hyp_from_claim",
+  "topic": "3.5",
+  "skill": "2.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each claim wording fixes the direction of the alternative, and the wrong options use a statistic, the claim's direction or the equality in the alternative"
+  ],
+  "misconceptions": [
+   "States the hypotheses with the sample proportion; hypotheses are about the population proportion.",
+   "Puts the alternative in the same direction as the claim; a researcher who tests the claim looks for evidence that the proportion is higher than claimed.",
+   "Puts the equality in the alternative hypothesis; the null hypothesis must contain the equality."
+  ]
+ },
+ {
+  "id": "st_n5_interval_or_test",
+  "topic": "3.3",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each context pairs the goal with one of the two one-proportion procedures and two procedures that do not fit one sample"
+  ],
+  "misconceptions": [
+   "The goal is to decide about a claimed value, which is the purpose of a test, not of an interval.",
+   "There is one sample and one population, not two independent samples to compare.",
+   "There is one categorical variable with two outcomes in one sample, not two variables whose association is studied."
+  ]
+ },
+ {
+  "id": "st_n5_pvalue_from_z",
+  "topic": "3.7",
+  "skill": "3.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the P-value is recomputed with math.erf and with scipy's normal survival function for the stated alternative"
+  ],
+  "misconceptions": [
+   "Uses the wrong number of tails for the alternative hypothesis.",
+   "Gives the area on the opposite side of the test statistic from the alternative hypothesis.",
+   "Gives the area to the left of $|z|$, which is not a tail area of the test."
+  ]
+ },
+ {
+  "id": "st_n5_margin_error_p",
+  "topic": "3.3",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the margin of error is recomputed with a critical value from bisection on the normal cdf and compared with scipy"
+  ],
+  "misconceptions": [
+   "Leaves out the square root in the standard error, which makes the margin of error far too small.",
+   "Uses the critical value for $90\\%$ confidence, about $1.645$, instead of about $1.960$.",
+   "Doubles the margin of error, as if the interval width were the margin of error."
+  ]
+ },
+ {
+  "id": "st_n5_pooled_phat",
+  "topic": "3.13",
+  "skill": "3.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the pooled proportion is recomputed from the total successes and total sizes and the three wrong values are the named slips"
+  ],
+  "misconceptions": [
+   "Averages the two sample proportions without weighting them by the sample sizes.",
+   "Gives the difference of the sample proportions, which is the numerator of the test statistic and not the pooled proportion.",
+   "Divides the combined number of successes by the size of the first sample only."
+  ]
+ },
+ {
+  "id": "st_n5_ci_two_sided",
+  "topic": "3.4",
+  "skill": "4.G",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the null value is generated clearly inside or clearly outside the recomputed interval"
+  ],
+  "misconceptions": [
+   "The sample proportion almost never equals the null value; the decision depends on whether the null value is inside the interval.",
+   "An interval is not required to be centered at the null value; what matters is whether the null value is inside.",
+   "Failing to reject does not prove that the null value is true; it only shows that the value is plausible."
+  ]
+ },
+ {
+  "id": "st_n5_two_prop_conclusion",
+  "topic": "3.13",
+  "skill": "4.G",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the P-value is recomputed from the test statistic and the cases near 0.05 are excluded"
+  ],
+  "misconceptions": [
+   "A test gives convincing evidence or a lack of it, not proof of the alternative or of the null hypothesis.",
+   "Reverses the decision rule: a P-value below the significance level is evidence against the null hypothesis.",
+   "A P-value is not the probability that the null hypothesis is true."
+  ]
+ },
+ {
+  "id": "st_n5_t_features",
+  "topic": "4.2",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the critical values are recomputed by numerical integration of the t density and the statements are checked against them"
+  ],
+  "misconceptions": [
+   "A smaller sample gives fewer degrees of freedom and heavier tails, so the critical value is larger, not smaller.",
+   "The critical value depends on the degrees of freedom as well as on the confidence level.",
+   "A t distribution is more spread out than the normal distribution, so its critical values are larger."
+  ]
+ },
+ {
+  "id": "st_n5_diff_means_param",
+  "topic": "4.6",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each option names a different quantity; only the difference of the two population means is the parameter estimated by the difference of the sample means"
+  ],
+  "misconceptions": [
+   "This is the value of the statistic computed from the samples, not the parameter that it estimates.",
+   "Combining the two populations estimates one overall mean, not the difference between the two means.",
+   "The sample sizes are features of the study and are not a population parameter."
+  ]
+ },
+ {
+  "id": "st_n5_why_matched",
+  "topic": "4.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each context pairs the removal of variability with three misconceptions about representation, randomization and sample size"
+  ],
+  "misconceptions": [
+   "Representing a population depends on how the individuals are selected, not on pairing.",
+   "A cause-and-effect conclusion still needs random assignment within each pair, here of the order or of the treatment.",
+   "The two measurements in a pair are not independent, so pairing does not give twice as many independent observations."
+  ]
+ },
+ {
+  "id": "st_n5_paired_t_list",
+  "topic": "4.5",
+  "skill": "3.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the statistic is recomputed with scipy's one-sample t test applied to the differences"
+  ],
+  "misconceptions": [
+   "Divides the mean difference by the standard deviation without dividing the standard deviation by the square root of the sample size.",
+   "Divides the standard deviation by $n$ instead of by the square root of $n$ in the standard error.",
+   "Uses the population formula of the standard deviation, dividing by $n$ instead of $n - 1$, for a sample."
+  ]
+ },
+ {
+  "id": "st_n5_sample_size_mean",
+  "topic": "4.2",
+  "skill": "3.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the sample size is recomputed from the critical value by bisection and scipy and rounded up"
+  ],
+  "misconceptions": [
+   "Rounds the calculated sample size down, which gives a margin of error slightly larger than the stated value.",
+   "Leaves out the square: the sample size is the square of $z^*\\sigma/m$.",
+   "Doubles the margin of error in the denominator, as if the margin were half of the width of the interval."
+  ]
+ },
+ {
+  "id": "st_n5_ci_mean_interpret",
+  "topic": "4.3",
+  "skill": "4.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each option differs from the key by one named defect: individuals, the sample mean or future sample means"
+  ],
+  "misconceptions": [
+   "The interval is for the population mean, not for the individual values in the sample.",
+   "The sample mean is known from the sample; the interval is about the population mean.",
+   "The interval from one sample does not give the range of future sample means; different samples give different intervals."
+  ]
+ },
+ {
+  "id": "st_n5_paired_conclusion",
+  "topic": "4.5",
+  "skill": "4.G",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the P-value is recomputed with scipy and by numerical integration of the t density and the cases near 0.05 are excluded"
+  ],
+  "misconceptions": [
+   "A test is about the population mean difference, not about every individual, and failing to reject does not show that the difference is exactly zero.",
+   "Reverses the decision rule: a P-value below the significance level is evidence against the null hypothesis.",
+   "Compares the test statistic with the significance level; the P-value is what is compared with $\\alpha$."
+  ]
+ },
+ {
+  "id": "st_n5_missing_residual",
+  "topic": "5.4",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the missing residual is recomputed as the negative of the sum of the five given residuals"
+  ],
+  "misconceptions": [
+   "Gives the value with the opposite sign; the residuals must add to $0$, not to the missing value.",
+   "Gives a value whose absolute value is too large, so the six residuals would not add to $0$.",
+   "Gives half of the needed value, so the six residuals would not add to $0$."
+  ]
+ },
+ {
+  "id": "st_n5_slope_units",
+  "topic": "5.5",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the new slope is recomputed from a synthetic data set whose x values are multiplied by the conversion factor"
+  ],
+  "misconceptions": [
+   "The relationship is the same, but the slope is measured per unit of x, so it changes when the unit changes.",
+   "Multiplies by the conversion factor instead of dividing by it; one new unit of x is larger or smaller than one old unit in the opposite way.",
+   "The direction of the relationship does not change with the units, so the sign of the slope is unchanged."
+  ]
+ },
+ {
+  "id": "st_n5_interpolation_choice",
+  "topic": "5.3",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exactly one of the four values lies inside the stated range of the data"
+  ],
+  "misconceptions": [
+   "$14$ is outside the range of the data ($1$ to $10$), so the prediction is an extrapolation.",
+   "$15$ is outside the range of the data ($1$ to $10$), so the prediction is an extrapolation.",
+   "$22$ is outside the range of the data ($1$ to $10$), so the prediction is an extrapolation."
+  ]
+ },
+ {
+  "id": "st_n5_corr_compare",
+  "topic": "5.2",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each family lists three correlations with one negative value farther from zero than the largest positive one or a clearly strongest value"
+  ],
+  "misconceptions": [
+   "The order of the list does not show strength; the size of the correlation does.",
+   "A correlation close to $0$ shows a weak linear relationship, not a strong one.",
+   "The order of a list does not show strength."
+  ]
+ },
+ {
+  "id": "st_set_joint_table_q1",
+  "topic": "2.4",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the union probability is recomputed from the addition rule and from the table cells"
+  ],
+  "misconceptions": [
+   "Adds $P(A)$ and $P(B)$ without subtracting $P(A \\text{ and } B)$, which counts the overlap twice.",
+   "Gives $P(A \\text{ and } B)$, the probability that both events occur, instead of at least one.",
+   "Gives the probability that the two events do not both occur, which is not the probability of at least one."
+  ]
+ },
+ {
+  "id": "st_set_joint_table_q2",
+  "topic": "2.6",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the conditional probability is recomputed from the joint probability and the marginal probability"
+  ],
+  "misconceptions": [
+   "Divides by $P(B)$ instead of by $P(A)$, which gives $P(A \\mid B)$.",
+   "Gives the joint probability without dividing by the probability of the given event.",
+   "Gives the unconditional probability $P(B)$, which ignores the given event."
+  ]
+ },
+ {
+  "id": "st_set_joint_table_q3",
+  "topic": "2.7",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the probability is recomputed as the complement of the union and compared with the table cell for neither"
+  ],
+  "misconceptions": [
+   "Gives the probability that at least one event occurs instead of the probability that neither occurs.",
+   "Subtracts $P(A)$ and $P(B)$ from $1$ without adding back the overlap, which removes the overlap twice.",
+   "Gives the probability that the two events do not both occur, which is larger than the probability that neither occurs."
+  ]
+ },
+ {
+  "id": "st_set_scatter_outlier_q1",
+  "topic": "5.4",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the predicted value and the residual are recomputed from the given coefficients and the stated coordinates"
+  ],
+  "misconceptions": [
+   "Subtracts in the wrong order; the residual is the actual value minus the predicted value.",
+   "Leaves the intercept out of the predicted value before subtracting.",
+   "Reports the predicted value instead of the residual."
+  ]
+ },
+ {
+  "id": "st_set_scatter_outlier_q2",
+  "topic": "5.1",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the direction follows the sign of the correlation and the outlier lies at least 0.55 times the range of the trend away from the line"
+  ],
+  "misconceptions": [
+   "Gives the wrong direction: the points trend the other way as the horizontal variable increases.",
+   "The highlighted observation lies far from the pattern of the others, so it is an unusual observation.",
+   "The other points follow a straight-line pattern with no bend; the highlighted point is an outlier."
+  ]
+ },
+ {
+  "id": "st_set_scatter_outlier_q3",
+  "topic": "5.2",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the line and correlation are recomputed with and without the highlighted point and the slope changes by under 12 percent while the correlation strengthens by at least 0.06"
+  ],
+  "misconceptions": [
+   "Does not match the recalculated values: the slope goes from $-1.93$ to $-1.93$, a change of only about $0\\%$, because the highlighted point is near the middle of the values of $x$ and has little leverage.",
+   "Does not match the recalculated values: the strength of the correlation goes from $|r| = 0.85$ to $0.99$, which is an increase, not a decrease and the slope goes from $-1.93$ to $-1.93$, a change of only about $0\\%$, because the highlighted point is near the middle of the values of $x$ and has little leverage.",
+   "Does not match the recalculated values: the strength of the correlation goes from $|r| = 0.85$ to $0.99$, which is an increase, not a decrease."
+  ]
  }
 ]
