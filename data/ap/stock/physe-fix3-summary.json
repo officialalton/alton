@@ -1,0 +1,46 @@
+{
+ "runs": [
+  "physe-fix3"
+ ],
+ "rows": 20,
+ "passed": 10,
+ "rejected": 10,
+ "passRate": 0.5,
+ "singles": {
+  "candidates": 20
+ },
+ "unitsPassed": {
+  "9": 1,
+  "10": 2,
+  "11": 4,
+  "12": 2,
+  "13": 1
+ },
+ "figPassed": {
+  "none": 10
+ },
+ "figAll": {
+  "none": 20
+ },
+ "figPassRate": {
+  "none": "10/20"
+ },
+ "renderTypesPassed": {
+  "ap_table": 7,
+  "text": 3
+ },
+ "archetypesPassed": {
+  "pes_ohm_table_set_q1": 1,
+  "pef_lab_rc_time_constant": 2,
+  "pef_lab_capacitor_gap": 1,
+  "pef_lab_resistivity": 1,
+  "pef_lab_magnetic_force": 1,
+  "pef_lab_rl_decay": 1,
+  "pef_mr_wire_ampere": 1,
+  "pef_mr_capacitor_dielectric": 1,
+  "pef_qqt_closest_approach": 1
+ },
+ "costUsd": {
+  "physe-fix3": 1.1456
+ }
+}

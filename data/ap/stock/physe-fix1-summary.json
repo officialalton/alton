@@ -1,0 +1,53 @@
+{
+ "runs": [
+  "physe-fix1"
+ ],
+ "rows": 32,
+ "passed": 15,
+ "rejected": 17,
+ "passRate": 0.469,
+ "singles": {
+  "candidates": 32
+ },
+ "unitsPassed": {
+  "8": 4,
+  "9": 1,
+  "10": 3,
+  "11": 3,
+  "13": 4
+ },
+ "figPassed": {
+  "none": 11,
+  "graph": 4
+ },
+ "figAll": {
+  "none": 26,
+  "graph": 6
+ },
+ "figPassRate": {
+  "none": "11/26",
+  "graph": "4/6"
+ },
+ "renderTypesPassed": {
+  "none": 9,
+  "ap_graph:phys_line": 4,
+  "text": 1,
+  "ap_table": 1
+ },
+ "archetypesPassed": {
+  "pe_coulomb_scaling": 2,
+  "pe_field_two_charges_midpoint": 1,
+  "pe_connected_spheres_field_ratio": 2,
+  "pe_resistance_geometry": 2,
+  "pe_solenoid_inductance": 1,
+  "pe_inductor_energy": 1,
+  "pes_vx_graph_set_q1": 1,
+  "pes_gauss_er_set_q1": 1,
+  "pes_bt_graph_set_q1": 2,
+  "pef_mr_rc_circuit": 1,
+  "pef_lab_capacitor_gap": 1
+ },
+ "costUsd": {
+  "physe-fix1": 1.3597
+ }
+}

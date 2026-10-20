@@ -14,9 +14,9 @@ const arg = (n: string, d = "") => { const i = process.argv.indexOf(n); return i
 const has = (n: string) => process.argv.includes(n);
 export type PhysVirtual = { set: string; part: "A"; unit: number };
 export type PhysResult = { id: string; singles: PhysItem[]; sets: PhysItem[]; frq: PhysItem[]; virtual: PhysVirtual[]; virtualSets: number[]; frqVirtual: { set: string; part: "A"; native: false; type: string }[] };
-/** 과목: 기본 Physics 1. `PHYS_SUBJECT=ap_physics_c_mechanics` 이면 7단원·C: Mechanics 단원 비중으로 푼다(2026-10-20). */
+/** 과목: 기본 Physics 1. `PHYS_SUBJECT=ap_physics_c_mechanics` 이면 7단원·C: Mechanics 단원 비중으로, `ap_physics_c_electricity_and_magnetism` 이면 6단원(8–13)·E&M 단원·스킬 비중으로 푼다(2026-10-20). */
 export const PHYS_SUBJECT = process.env.PHYS_SUBJECT ?? "ap_physics_1";
-const UNITS = Object.keys(physFullTarget(PHYS_SUBJECT).units).map(Number); const SKILLS = Object.keys(physSkillBounds());
+const UNITS = Object.keys(physFullTarget(PHYS_SUBJECT).units).map(Number); const SKILLS = Object.keys(physSkillBounds(PHYS_SUBJECT));
 const SINGLES_PER_SET = PHYS_MC_COUNT - PHYS_SET_COUNT * PHYS_SET_SIZE;
 
 export function solvePhysSets(ids: string[], items: PhysItem[], o: { timeMs: number; log?: (s: string) => void; blocked?: Set<string>; preferExamPrep?: boolean; skillWeight?: number; hardSkills?: boolean; cost?: (c: PhysItem) => number }) {
@@ -39,7 +39,7 @@ export function solvePhysSets(ids: string[], items: PhysItem[], o: { timeMs: num
   for (const j of du.values()) obj[j] = 1; for (const j of dk.values()) obj[j] = o.skillWeight ?? 0.5;
   if (o.preferExamPrep) usable.forEach((c) => ids.forEach((_, s) => { obj[x(c, s)] += -0.01 * (c.exam ?? 0); }));
   if (o.cost) usable.forEach((c) => ids.forEach((_, s) => { obj[x(c, s)] += o.cost!(c); }));
-  const uB = physUnitBounds(PHYS_SUBJECT), kB = physSkillBounds();
+  const uB = physUnitBounds(PHYS_SUBJECT), kB = physSkillBounds(PHYS_SUBJECT);
   usable.forEach((c) => cons.push({ coef: ids.map((_, s) => [x(c, s), 1] as [number, number]), sense: "<=", rhs: 1 }));
   ids.forEach((_, s) => {
     cons.push({ coef: [...mcSingles.map((c) => [x(c, s), 1] as [number, number]), ...UNITS.map((u) => [vs.get(`${s}|${u}`)!, 1] as [number, number])], sense: "=", rhs: SINGLES_PER_SET });
@@ -119,7 +119,7 @@ export function toReportSet(r: PhysResult) {
 
 export function skillSummary(r: PhysResult) {
   const c: Record<string, number> = {}; for (const it of [...r.singles, ...r.sets]) for (const m of it.members) c[m.skill] = (c[m.skill] ?? 0) + 1;
-  return { counts: c, warnings: physSkillWarnings(buildPhysOrder(r)) };
+  return { counts: c, warnings: physSkillWarnings(buildPhysOrder(r), PHYS_SUBJECT) };
 }
 
 function main() {

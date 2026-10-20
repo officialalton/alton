@@ -229,6 +229,16 @@ export const STOCK_BATCHES: StockBatch[] = [
   { id: "pre-a", title: "AP Precalculus pre-a (MC 1차: 원형 94 x 후보 3)", itemsFile: "pre-a-items.json", loadLabel: "pre-a-2026-10-20", supplement: true, passKeysFile: "pre-a-pass-keys.json", evidenceFile: "evidence-pre.json" },
   { id: "pre-b", title: "AP Precalculus pre-b (MC 2차: 원형 115 x 후보 3)", itemsFile: "pre-b-items.json", loadLabel: "pre-b-2026-10-20", supplement: true, passKeysFile: "pre-b-pass-keys.json", evidenceFile: "evidence-pre.json" },
   { id: "pre-f", title: "AP Precalculus pre-f (FRQ 시나리오 4유형)", itemsFile: "pre-f-items.json", loadLabel: "pre-f-2026-10-20", supplement: true, passKeysFile: "pre-f-pass-keys.json", evidenceFile: "evidence-pre.json" },
+  // 2026-10-20 AP Physics C: Electricity and Magnetism(docs/ap/physics-c-em-groundwork.md): 원형 4라운드 + 검토 반영 재생성. 한 증거 파일(evidence-physe.json)을 공유한다. EM1–EM5 정확 배정: data/ap/stock/exact-assign-physe-em1-em5.json
+  { id: "physe-a", title: "AP Physics C: E&M physe-a (MC 단독 1차) (통과·증거 90)", itemsFile: "physe-a-items.json", loadLabel: "physe-a-2026-10-20", supplement: true, passKeysFile: "physe-a-pass-keys.json", evidenceFile: "evidence-physe.json" },
+  { id: "physe-s", title: "AP Physics C: E&M physe-s (2문항 세트 1차) (통과·증거 6)", itemsFile: "physe-s-items.json", loadLabel: "physe-s-2026-10-20", supplement: true, passKeysFile: "physe-s-pass-keys.json", evidenceFile: "evidence-physe.json" },
+  { id: "physe-f", title: "AP Physics C: E&M physe-f (FRQ 1차) (통과·증거 4)", itemsFile: "physe-f-items.json", loadLabel: "physe-f-2026-10-20", supplement: true, passKeysFile: "physe-f-pass-keys.json", evidenceFile: "evidence-physe.json" },
+  { id: "physe-b", title: "AP Physics C: E&M physe-b (2차 저작) (통과·증거 42)", itemsFile: "physe-b-items.json", loadLabel: "physe-b-2026-10-20", supplement: true, passKeysFile: "physe-b-pass-keys.json", evidenceFile: "evidence-physe.json" },
+  { id: "physe-fix1", title: "AP Physics C: E&M physe-fix1 (1차 검토 반영) (통과·증거 11)", itemsFile: "physe-fix1-items.json", loadLabel: "physe-fix1-2026-10-20", supplement: true, passKeysFile: "physe-fix1-pass-keys.json", evidenceFile: "evidence-physe.json" },
+  { id: "physe-c", title: "AP Physics C: E&M physe-c (3차 저작) (통과·증거 32)", itemsFile: "physe-c-items.json", loadLabel: "physe-c-2026-10-20", supplement: true, passKeysFile: "physe-c-pass-keys.json", evidenceFile: "evidence-physe.json" },
+  { id: "physe-fix2", title: "AP Physics C: E&M physe-fix2 (2차 검토 반영) (통과·증거 13)", itemsFile: "physe-fix2-items.json", loadLabel: "physe-fix2-2026-10-20", supplement: true, passKeysFile: "physe-fix2-pass-keys.json", evidenceFile: "evidence-physe.json" },
+  { id: "physe-d", title: "AP Physics C: E&M physe-d (4차 저작(3.C·2.C·2.D)) (통과·증거 25)", itemsFile: "physe-d-items.json", loadLabel: "physe-d-2026-10-20", supplement: true, passKeysFile: "physe-d-pass-keys.json", evidenceFile: "evidence-physe.json" },
+  { id: "physe-fix3", title: "AP Physics C: E&M physe-fix3 (3차 검토 반영(lab·MR)) (통과·증거 10)", itemsFile: "physe-fix3-items.json", loadLabel: "physe-fix3-2026-10-20", supplement: true, passKeysFile: "physe-fix3-pass-keys.json", evidenceFile: "evidence-physe.json" },
 ];
 
 export const batchById = (id: string): StockBatch => {
