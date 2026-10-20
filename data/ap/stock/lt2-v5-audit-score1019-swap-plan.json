@@ -1,0 +1,26 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "LT2",
+ "sourceSetName": "AP English Literature — Practice Exam 2",
+ "sourceVersionNo": 4,
+ "generatedBy": "scripts/ap-generation/audit-score1019-build.ts (essay reference checker 2026-10-19)",
+ "note": "Batch 'audit-score1019' must be loaded first. Heading-only correction; sample essays and rubric unchanged. sourceVersionNo is the version after lt2-v4-audit-wuel; the admin new-version flow copies whatever is published and the removeKey slot must still match.",
+ "swapCount": 1,
+ "verifierViolations": [],
+ "swaps": [
+  {
+   "section": "ap_frq",
+   "removeKey": "englit-p1-b:ap_english_literature-fa2-k0",
+   "addKey": "audit-score1019:ap_english_literature-fa2-k0",
+   "tier": "required",
+   "reason": "Reference low sample scored 3/6 with thesis 1 while its explanation says the thesis point is not earned; heading now 2/6 (thesis 0, evidence 2, sophistication 0)",
+   "remove": {
+    "type": "q2"
+   },
+   "add": {
+    "type": "q2",
+    "sameCell": true
+   }
+  }
+ ]
+}

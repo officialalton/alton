@@ -207,6 +207,8 @@ export const STOCK_BATCHES: StockBatch[] = [
   // 2026-10-15 외부 AP 검수 확정 수정 — CSA(FRQ 배점 7·7·5·6, 범위 밖 문항 교체, Practice 5 2문항) 14건과 Calculus AB·BC(전제·문구) 11건의 수정본. 한 증거 파일(evidence-aud1015.json)을 공유한다. 새 버전 계획: data/ap/stock/ab1-v5-, ab3-v3-, abfrq-v2-, bc1-v5-, bc2-v3-, bc3-v2-, csa1-v2-, csa2-v3-audit-aud1015-swap-plan.json (scripts/audit/ap-aud1015-csa-calc-build.py)
   { id: "csa-aud1015", title: "AP 외부 검수 수정본 (Computer Science A, FRQ 8 + MC 4 + Practice 5 신규 2)", itemsFile: "csa-aud1015-items.json", loadLabel: "csa-aud1015-2026-10-15", supplement: true, passKeysFile: "csa-aud1015-pass-keys.json", evidenceFile: "evidence-aud1015.json" },
   { id: "supp-aud1015-final", title: "AP 외부 검수 수정본 (Calculus AB·BC, 11건)", itemsFile: "supp-aud1015-items.json", loadLabel: "supp-aud1015-final-2026-10-15", supplement: true, passKeysFile: "supp-aud1015-pass-keys.json", evidenceFile: "evidence-aud1015.json" },
+  // 2026-10-19 에세이 참고답 점수·설명 충돌 점검기(lib/ap-generation/essay-reference-check.ts) 교체 후보: EngLit fa2(LT2) low 샘플 헤딩 3/6→2/6. 새 버전 계획: data/ap/stock/lt2-v5-audit-score1019-swap-plan.json (scripts/ap-generation/audit-score1019-build.ts)
+  { id: "audit-score1019", title: "AP 참고답 점수·설명 정정 (English Literature FRQ 1)", itemsFile: "audit-score1019-items.json", loadLabel: "audit-score1019-2026-10-19", supplement: true, passKeysFile: "audit-score1019-pass-keys.json", evidenceFile: "evidence-lt.json" },
   { id: "supp-aud1015b", title: "AP 외부 검수 수정본 (Calculus AB FRQ B 교정 복제 2건)", itemsFile: "supp-aud1015b-items.json", loadLabel: "supp-aud1015b-2026-10-19", supplement: true, passKeysFile: "supp-aud1015b-pass-keys.json", evidenceFile: "evidence-aud1015.json" },
 ];
 
