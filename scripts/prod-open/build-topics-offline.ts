@@ -5,6 +5,7 @@
 // DB 는 읽기 전용(problem_versions.passage). 키는 출력하지 않는다.
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
+import { spawnSync } from "node:child_process";
 import { createClient } from "@supabase/supabase-js";
 import { RW_DOMAINS } from "../mock-exam-generation/assemble-unique";
 import { passageHash } from "../mock-exam-generation/rw-topics-lib";
@@ -15,7 +16,7 @@ type Cls = { subject: string; cluster: string; family: string };
 
 async function main() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL, key = process.env.SUPABASE_SECRET_KEY;
-  if (!url || !key) throw new Error("NEXT_PUBLIC_SUPABASE_URL / SUPABASE_SECRET_KEY 필요");
+  const viaCli = !url || !key; // 키가 없으면 `supabase db query --linked`(읽기 SELECT)로 지문을 읽는다
   const dump = JSON.parse(readFileSync(path.resolve(arg("--dump")!), "utf-8"));
   const classified = JSON.parse(readFileSync(path.join(CLASS_DIR, "classified.json"), "utf-8")) as Record<string, Cls>;
   const canon = JSON.parse(readFileSync(path.join(CLASS_DIR, "canon.json"), "utf-8")) as { cluster: Record<string, string>; family: Record<string, string> };
@@ -24,13 +25,22 @@ async function main() {
   const rwIds = new Set<string>(dump.problems.filter((p: any) => RW_DOMAINS.includes(p.sat_domain) && p.status === "confirmed" && !p.archived_at).map((p: any) => p.id));
   for (const it of dump.items) if (RW_DOMAINS.includes(it.sat_domain)) rwIds.add(it.problem_id);
 
-  const db = createClient(url, key, { auth: { persistSession: false } });
   const passages = new Map<string, string>();
-  for (let from = 0; ; from += 1000) {
-    const { data, error } = await db.from("problem_versions").select("problem_id,passage").eq("status", "published").order("id").range(from, from + 999);
-    if (error) throw new Error(error.message);
-    for (const v of data ?? []) if (rwIds.has(v.problem_id) && v.passage) passages.set(v.problem_id, v.passage);
-    if ((data ?? []).length < 1000) break;
+  if (viaCli) {
+    const ids = [...rwIds];
+    for (let i = 0; i < ids.length; i += 400) {
+      const r = spawnSync("supabase", ["db", "query", "--linked", `select coalesce(jsonb_agg(t),'[]'::jsonb) as j from (select problem_id, passage from problem_versions where status='published' and problem_id = any (array[${ids.slice(i, i + 400).map((x) => `'${x}'`).join(",")}]::uuid[])) t`], { encoding: "utf-8", maxBuffer: 1 << 30 });
+      if (r.status !== 0) throw new Error((r.stderr || r.stdout).slice(0, 300));
+      for (const v of JSON.parse(r.stdout.slice(r.stdout.indexOf("{"), r.stdout.lastIndexOf("}") + 1)).rows[0].j) if (v.passage) passages.set(v.problem_id, v.passage);
+    }
+  } else {
+    const db = createClient(url!, key!, { auth: { persistSession: false } });
+    for (let from = 0; ; from += 1000) {
+      const { data, error } = await db.from("problem_versions").select("problem_id,passage").eq("status", "published").order("id").range(from, from + 999);
+      if (error) throw new Error(error.message);
+      for (const v of data ?? []) if (rwIds.has(v.problem_id) && v.passage) passages.set(v.problem_id, v.passage);
+      if ((data ?? []).length < 1000) break;
+    }
   }
   for (const it of dump.items) if (rwIds.has(it.problem_id) && !passages.has(it.problem_id) && it.content_snapshot?.passage) passages.set(it.problem_id, it.content_snapshot.passage);
 
