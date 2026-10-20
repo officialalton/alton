@@ -235,9 +235,12 @@ export const STOCK_BATCHES: StockBatch[] = [
   { id: "physe-fix2", title: "AP Physics C: E&M physe-fix2 (2차 검토 반영) (통과·증거 13)", itemsFile: "physe-fix2-items.json", loadLabel: "physe-fix2-2026-10-20", supplement: true, passKeysFile: "physe-fix2-pass-keys.json", evidenceFile: "evidence-physe.json" },
   { id: "physe-d", title: "AP Physics C: E&M physe-d (4차 저작(3.C·2.C·2.D)) (통과·증거 25)", itemsFile: "physe-d-items.json", loadLabel: "physe-d-2026-10-20", supplement: true, passKeysFile: "physe-d-pass-keys.json", evidenceFile: "evidence-physe.json" },
   { id: "physe-fix3", title: "AP Physics C: E&M physe-fix3 (3차 검토 반영(lab·MR)) (통과·증거 10)", itemsFile: "physe-fix3-items.json", loadLabel: "physe-fix3-2026-10-20", supplement: true, passKeysFile: "physe-fix3-pass-keys.json", evidenceFile: "evidence-physe.json" },
+  // 2026-10-20 AP Physics C: Mechanics(docs/ap/physics-c-mechanics-groundwork.md): 원형 4라운드 + 검토 반영 재생성. 한 증거 파일(evidence-physc.json, 1168항목)을 공유한다. PM1–PM5 정확 배정: data/ap/stock/exact-assign-physc-pm1-pm5.json
+  ...([["a", "MC 단독 1차", 186], ["s", "2문항 세트 1차", 9], ["f", "FRQ 1차", 4], ["c", "1차 검토 반영", 86], ["d", "2차 저작", 67], ["e", "2차 검토 반영", 30], ["g", "3차 저작", 91], ["i", "3차 검토 반영", 1], ["h", "4차 저작", 69], ["k", "4차 검토 반영", 14], ["m", "5차 검토 반영", 1]] as const)
+    .map(([f, what, n]): StockBatch => ({ id: `physc-${f}`, title: `AP Physics C: Mechanics physc-${f} (${what}) (통과 ${n})`, itemsFile: `physc-${f}-items.json`, loadLabel: `physc-${f}-2026-10-20`, supplement: true, passKeysFile: `physc-${f}-pass-keys.json`, evidenceFile: "evidence-physc.json" })),
 ];
 
-export const batchById = (id: string): StockBatch => {
+export const batchById =(id: string): StockBatch => {
   const b = STOCK_BATCHES.find((x) => x.id === id);
   if (!b) throw new Error(`알 수 없는 배치: ${id}`);
   return b;

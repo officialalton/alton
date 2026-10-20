@@ -3,7 +3,8 @@
 // 공개(publish)는 이 화면에 없다. 저장 상태는 항상 draft.
 import { verifyAssignment, type SetResult, type Spec } from "../../scripts/ap-generation/exact-assign";
 import { loadPool, type Item } from "../../scripts/ap-generation/assign-pool";
-import { apSectionLayout } from "../ap-exam/layouts";
+import { AP_SUBJECT_NAME, apSectionLayout } from "../ap-exam/layouts";
+import { SET_PREFIX_SUBJECT, SET_ID_RE, subjectOfSetIdOrNull, subjectOfSetId, isPhysSubject } from "./set-prefix";
 import { planStatsDraftSet } from "./assemble-stats-draft";
 import { planPhysDraftSet } from "./assemble-phys-draft";
 import { planChemDraftSet } from "./assemble-chem-draft";
@@ -40,12 +41,9 @@ export type PoolRow = {
 export type FullSetUsage = { id: string; name: string; status: string; problemIds: string[]; candidateKeys: string[]; label?: string };
 
 /** 세트 ID 접두 → AP 과목. 모르는 접두는 AB 로 가정하지 않고 거부한다(2026-10-12: 통계 등 새 과목이 AB 로 오판되던 문제). */
-export const SET_PREFIX_SUBJECT: Record<string, string> = { AB: "ap_calculus_ab", BC: "ap_calculus_bc", ST: "ap_statistics", PH: "ap_physics_1", CH: "ap_chemistry", MI: "ap_microeconomics", MA: "ap_macroeconomics", PS: "ap_psychology", CS: "ap_computer_science_a", BI: "ap_biology", EL: "ap_english_language", LT: "ap_english_literature", US: "ap_us_history", WH: "ap_world_history" };
-export const SET_ID_RE = /^(AB|BC|ST|PH|CH|MI|MA|PS|CS|BI|EL|LT|US|WH)\d$/;
-export const subjectOfSetIdOrNull = (id: string): string | null => SET_PREFIX_SUBJECT[id.slice(0, 2)] ?? null;
-export function subjectOfSetId(id: string): string { const s = subjectOfSetIdOrNull(id); if (!s) throw new Error(`알 수 없는 세트 ID 접두: ${id}`); return s; }
-const SUBJECT_TITLE: Record<string, string> = { ap_calculus_ab: "AP Calculus AB", ap_calculus_bc: "AP Calculus BC", ap_statistics: "AP Statistics", ap_physics_1: "AP Physics 1", ap_chemistry: "AP Chemistry", ap_microeconomics: "AP Microeconomics", ap_macroeconomics: "AP Macroeconomics", ap_psychology: "AP Psychology", ap_computer_science_a: "AP Computer Science A", ap_biology: "AP Biology", ap_english_language: "AP English Language", ap_us_history: "AP U.S. History", ap_world_history: "AP World History: Modern", ap_english_literature: "AP English Literature" };
-export const defaultDraftName = (setId: string) => `${SUBJECT_TITLE[subjectOfSetId(setId)]} — Practice Exam ${setId.slice(2)}`;
+/** 단일 소스는 ./set-prefix.ts(새 과목은 거기에 한 줄 추가). 표시 이름은 AP_SUBJECT_NAME. */
+export { SET_PREFIX_SUBJECT, SET_ID_RE, subjectOfSetIdOrNull, subjectOfSetId };
+export const defaultDraftName = (setId: string) => `${AP_SUBJECT_NAME[subjectOfSetId(setId)]} — Practice Exam ${setId.slice(2)}`;
 
 let poolCache: Item[] | null = null;
 /** 구조 묶음(structure-groups.json) 기준 문항군까지 반영한 화면 증거 보유 재고. 프로세스당 한 번만 계산한다. */
@@ -77,7 +75,7 @@ export function planDraftSet(o: {
     const sp = planStatsDraftSet({ setId: o.setId, keys: o.keys, hasVirtual: o.hasVirtual, name, pool: o.pool, existingFullSets: o.existingFullSets, subject, stock: o.statsStock });
     return { ...sp, problems: [...problems, ...sp.problems], ok: problems.length === 0 && sp.ok };
   }
-  if (subjectKnown === "ap_physics_1" && SET_ID_RE.test(o.setId)) { // 물리: 2문항 공유 세트·FRQ 4유형(MR/TBR/LAB/QQT) 구조는 전용 계획기가 독립 검증한다
+  if (subjectKnown && isPhysSubject(subjectKnown) && SET_ID_RE.test(o.setId)) { // 물리(Physics 1·C: Mechanics·C: E&M): 2문항 공유 세트·FRQ 4유형(MR/TBR/LAB/QQT) 구조는 전용 계획기가 독립 검증한다
     const pp = planPhysDraftSet({ setId: o.setId, keys: o.keys, hasVirtual: o.hasVirtual, name, pool: o.pool, existingFullSets: o.existingFullSets, subject, stock: o.physStock });
     return { ...pp, problems: [...problems, ...pp.problems], ok: problems.length === 0 && pp.ok };
   }
@@ -121,6 +119,8 @@ export function planDraftSet(o: {
     const lp = planLtDraftSet({ setId: o.setId, keys: o.keys, hasVirtual: o.hasVirtual, name, pool: o.pool, existingFullSets: o.existingFullSets, subject, stock: o.ltStock });
     return { ...lp, problems: [...problems, ...lp.problems], ok: problems.length === 0 && lp.ok };
   }
+  // 아래 일반 경로는 미적분 AB/BC 전용이다. 접두만 등록되고 전용 조립기가 없는 과목을 AB 규칙으로 검증하지 않는다.
+  if (subjectKnown && subjectKnown !== "ap_calculus_ab" && subjectKnown !== "ap_calculus_bc") problems.push(`${subjectKnown} 전용 조립기가 연결되지 않았습니다(assemble-draft.ts 분기 추가 필요).`);
   if (o.hasVirtual) problems.push("이 배정에는 가상 문항(재고에 없는 칸)이 있어 저장하지 않습니다.");
   for (const k of Object.keys(SECTION) as (keyof SetKeys)[]) if (g(k).length !== need[SECTION[k]]) problems.push(`공식 구성 불일치 ${SECTION[k]}: ${g(k).length}/${need[SECTION[k]]}`);
   const all = (Object.keys(SECTION) as (keyof SetKeys)[]).flatMap((k) => g(k).map((key) => ({ key, sec: k })));
