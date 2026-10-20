@@ -7,14 +7,16 @@
 //   --prefer-keys <보고서.json,..>: 그 보고서의 문항을 재사용하면 보너스(기존 PH1/PH2 초안과 겹침을 늘려 변경량 최소화).
 import { readFileSync, writeFileSync } from "node:fs";
 import { solveMip, type Cons } from "../../lib/ap-exam/ilp";
-import { PHYS_FRQ_TEMPLATES, PHYS_MC_COUNT, PHYS_SET_COUNT, PHYS_SET_SIZE, physSkillBounds, physSkillWarnings, physUnitBounds, verifyPhysFullComposition, PHYS_FULL_TARGET, type PhysSetItem } from "../../lib/ap-exam/full-set-rules";
+import { PHYS_FRQ_TEMPLATES, PHYS_MC_COUNT, PHYS_SET_COUNT, PHYS_SET_SIZE, physSkillBounds, physSkillWarnings, physUnitBounds, verifyPhysFullComposition, physFullTarget, type PhysSetItem } from "../../lib/ap-exam/full-set-rules";
 import { loadPhysPool, type PhysItem } from "./phys-pool";
 
 const arg = (n: string, d = "") => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : d; };
 const has = (n: string) => process.argv.includes(n);
 export type PhysVirtual = { set: string; part: "A"; unit: number };
 export type PhysResult = { id: string; singles: PhysItem[]; sets: PhysItem[]; frq: PhysItem[]; virtual: PhysVirtual[]; virtualSets: number[]; frqVirtual: { set: string; part: "A"; native: false; type: string }[] };
-const UNITS = [1, 2, 3, 4, 5, 6, 7, 8]; const SKILLS = Object.keys(physSkillBounds());
+/** 과목: 기본 Physics 1. `PHYS_SUBJECT=ap_physics_c_mechanics` 이면 7단원·C: Mechanics 단원 비중으로 푼다(2026-10-20). */
+export const PHYS_SUBJECT = process.env.PHYS_SUBJECT ?? "ap_physics_1";
+const UNITS = Object.keys(physFullTarget(PHYS_SUBJECT).units).map(Number); const SKILLS = Object.keys(physSkillBounds());
 const SINGLES_PER_SET = PHYS_MC_COUNT - PHYS_SET_COUNT * PHYS_SET_SIZE;
 
 export function solvePhysSets(ids: string[], items: PhysItem[], o: { timeMs: number; log?: (s: string) => void; blocked?: Set<string>; preferExamPrep?: boolean; skillWeight?: number; hardSkills?: boolean; cost?: (c: PhysItem) => number }) {
@@ -37,7 +39,7 @@ export function solvePhysSets(ids: string[], items: PhysItem[], o: { timeMs: num
   for (const j of du.values()) obj[j] = 1; for (const j of dk.values()) obj[j] = o.skillWeight ?? 0.5;
   if (o.preferExamPrep) usable.forEach((c) => ids.forEach((_, s) => { obj[x(c, s)] += -0.01 * (c.exam ?? 0); }));
   if (o.cost) usable.forEach((c) => ids.forEach((_, s) => { obj[x(c, s)] += o.cost!(c); }));
-  const uB = physUnitBounds(), kB = physSkillBounds();
+  const uB = physUnitBounds(PHYS_SUBJECT), kB = physSkillBounds();
   usable.forEach((c) => cons.push({ coef: ids.map((_, s) => [x(c, s), 1] as [number, number]), sense: "<=", rhs: 1 }));
   ids.forEach((_, s) => {
     cons.push({ coef: [...mcSingles.map((c) => [x(c, s), 1] as [number, number]), ...UNITS.map((u) => [vs.get(`${s}|${u}`)!, 1] as [number, number])], sense: "=", rhs: SINGLES_PER_SET });
@@ -45,7 +47,7 @@ export function solvePhysSets(ids: string[], items: PhysItem[], o: { timeMs: num
     for (const u of UNITS) {
       const co: [number, number][] = [...mcSingles.filter((c) => c.members[0].unit === u).map((c) => [x(c, s), 1] as [number, number]), ...mcSets.map((c) => [x(c, s), c.members.filter((m) => m.unit === u).length] as [number, number]).filter(([, v]) => v > 0), [vs.get(`${s}|${u}`)!, 1], [vset.get(`${s}|${u}`)!, PHYS_SET_SIZE]];
       cons.push({ coef: co, sense: ">=", rhs: uB[String(u)].min }); cons.push({ coef: co, sense: "<=", rhs: uB[String(u)].max });
-      const t = PHYS_FULL_TARGET.units[String(u)]; const d = du.get(`${s}|${u}`)!;
+      const t = physFullTarget(PHYS_SUBJECT).units[String(u)]; const d = du.get(`${s}|${u}`)!;
       cons.push({ coef: [...co, [d, -1]], sense: "<=", rhs: t }); cons.push({ coef: [...co.map(([j, v]) => [j, -v] as [number, number]), [d, -1]], sense: "<=", rhs: -t });
     }
     for (const k of SKILLS) { // 스킬: 실제 문항만 센다(가상 문항의 스킬은 정해지지 않음). 범위 중앙값에서의 이탈 벌점(차단 아님)
@@ -94,7 +96,7 @@ export function verifyPhysAssignment(res: PhysResult[], blocked: Set<string> = n
   for (const r of res) {
     const mc = buildPhysOrder(r);
     const frqItems: PhysSetItem[] = [...r.frq.map((c, i) => ({ kind: "frq" as const, unit: null, skill: null, candidateKey: c.key, position: i + 1 })), ...r.frqVirtual.map((v, i) => ({ kind: "frq" as const, unit: null, skill: null, candidateKey: null, position: r.frq.length + i + 1 }))];
-    for (const v of verifyPhysFullComposition([...mc, ...frqItems])) bad.push(`${r.id}: ${v}`);
+    for (const v of verifyPhysFullComposition([...mc, ...frqItems], PHYS_SUBJECT)) bad.push(`${r.id}: ${v}`);
     const keys = [...r.singles, ...r.sets, ...r.frq];
     const fams = [...r.singles, ...r.sets].map((c) => c.fam); if (new Set(fams).size !== fams.length) bad.push(`${r.id}: 문항군 중복`);
     const ffams = r.frq.map((c) => c.fam); if (new Set(ffams).size !== ffams.length) bad.push(`${r.id}: FRQ 문항군 중복`);
@@ -112,7 +114,7 @@ export function toReportSet(r: PhysResult) {
   const blocks = [...r.singles.map((c) => ({ unit: c.members[0].unit, key: c.key })), ...r.sets.map((c) => ({ unit: c.members[0].unit, key: c.key }))].sort((a, b) => a.unit - b.unit || a.key.localeCompare(b.key));
   for (const b of blocks) if (!seen.has(b.key)) { seen.add(b.key); mcKeys.push(b.key); }
   const frqKeys = [...PHYS_FRQ_TEMPLATES].map((t) => r.frq.find((c) => c.frqType === t)?.key).filter((k): k is string => !!k);
-  return { id: r.id, mcA: mcKeys, mcB: [] as string[], virtual: r.virtual, virtualSets: r.virtualSets, frqA: frqKeys, frqB: [] as string[], frqVirtual: r.frqVirtual, subject: "ap_physics_1" };
+  return { id: r.id, mcA: mcKeys, mcB: [] as string[], virtual: r.virtual, virtualSets: r.virtualSets, frqA: frqKeys, frqB: [] as string[], frqVirtual: r.frqVirtual, subject: PHYS_SUBJECT };
 }
 
 export function skillSummary(r: PhysResult) {

@@ -25,6 +25,7 @@ export const NOT_ASSESSED_MC: Record<string, string[]> = {
   ap_chemistry: ["3.A", "3.B", "3.C"], // AP Chemistry CED(2024) Exam Information p.207: Practice 3 은 MC 에서 평가하지 않는다
   ap_world_history: ["6.A", "6.B", "6.C", "6.D"], // CED Exam Information p.199: MC 는 논증(Skill 6)을 명시적으로 평가하지 않는다
   ap_us_history: ["6.A", "6.B", "6.C", "6.D"], // CED p.501: MC 는 논증(Skill 6)을 명시적으로 평가하지 않는다
+  ap_physics_c_mechanics: ["1.A", "1.B", "1.C", "3.A"], // Physics 1·2 와 같은 CED 표(C: Mechanics 자체 CED 전문은 못 읽음 — 공개 전 재확인)
   ap_physics_2: ["1.A", "1.B", "1.C", "3.A"], // CED(2026) Exam Information: Practice 1 과 3.A 는 MC 에서 평가하지 않는다(Physics 1 과 동일)
   ap_physics_c_electricity_and_magnetism: ["1.A", "1.B", "1.C", "3.A"], // 같은 CED 표
   ap_european_history: ["6.A", "6.B", "6.C", "6.D"], // CED(2026): US·World 와 같은 역사 스킬 체계, MC 는 논증(Skill 6)을 명시적으로 평가하지 않는다(확인: Euro CED 스킬 표)
@@ -167,7 +168,7 @@ export function gateFrq(subject: string, p: FrqPack, skills: Set<string>, opts: 
   if (total !== p.total_points) r.push(`total_points_${total}_vs_${p.total_points}`);
   // 번들 대표 스킬은 어떤 파트의 평가 스킬이어야 하지만, 모든 파트가 같을 필요는 없다(공식 FRQ 는 파트별 스킬이 다르다).
   if (p.representative_skill && !p.parts.some((x) => x.skill_codes.includes(p.representative_skill!))) r.push("representative_skill_not_assessed_by_any_part");
-  if (subject !== "ap_biology" && p.est_minutes > (subject === "ap_psychology" ? 45 : subject === "ap_microeconomics" || subject === "ap_macroeconomics" || subject === "ap_physics_1" || subject === "ap_chemistry" || subject === "ap_computer_science_a" ? 32 : subject === "ap_statistics" ? 25 : 20)) r.push("est_minutes_too_long"); // Bio 의 시간은 점수 비례 내부 추정(참고용)이라 반려 사유로 쓰지 않는다
+  if (subject !== "ap_biology" && p.est_minutes > (subject === "ap_psychology" ? 45 : subject === "ap_microeconomics" || subject === "ap_macroeconomics" || subject === "ap_physics_1" || subject === "ap_physics_c_mechanics" || subject === "ap_chemistry" || subject === "ap_computer_science_a" ? 32 : subject === "ap_statistics" ? 25 : 20)) r.push("est_minutes_too_long"); // Bio 의 시간은 점수 비례 내부 추정(참고용)이라 반려 사유로 쓰지 않는다
   if (!(p.stimulus.kind && p.stimulus.description)) r.push("missing_stimulus");
   return [...new Set(r)];
 }
@@ -228,7 +229,7 @@ export const PSYCH_FRQ_PROFILE: Record<string, { points: number; parts: [number,
 };
 export function calibrateFrq(p: FrqPack, subject = "ap_calculus_ab"): string[] {
   const r: string[] = [];
-  const prof = subject === "ap_psychology" ? (PSYCH_FRQ_PROFILE[p.template] ?? { points: -1, parts: [99, 99] as [number, number], rowsPerPart: [99, 99] as [number, number], minutes: [0, 0] as [number, number] }) : subject === "ap_chemistry" ? (CHEMISTRY_FRQ_PROFILE[p.template] ?? { points: -1, parts: [99, 99] as [number, number], rowsPerPart: [99, 99] as [number, number], minutes: [0, 0] as [number, number] }) : subject === "ap_physics_1" ? (PHYSICS_FRQ_PROFILE[p.template] ?? { points: -1, parts: [99, 99] as [number, number], rowsPerPart: [99, 99] as [number, number], minutes: [0, 0] as [number, number] }) : subject === "ap_statistics" ? STATS_PROFILE : subject === "ap_computer_science_a" ? (CSA_FRQ_PROFILE[p.template] ?? { points: -1, parts: [99, 99] as [number, number], rowsPerPart: [99, 99] as [number, number], minutes: [0, 0] as [number, number] }) : (subject === "ap_microeconomics" || subject === "ap_macroeconomics") ? (p.total_points >= 10 ? MICRO_PROFILE.long : MICRO_PROFILE.short) : subject === "ap_biology" ? (p.total_points >= 9 ? BIO_PROFILE.long : BIO_PROFILE.short) : p.total_points >= 9 ? REFERENCE_PROFILE.frq9 : REFERENCE_PROFILE.frq4;
+  const prof = subject === "ap_psychology" ? (PSYCH_FRQ_PROFILE[p.template] ?? { points: -1, parts: [99, 99] as [number, number], rowsPerPart: [99, 99] as [number, number], minutes: [0, 0] as [number, number] }) : subject === "ap_chemistry" ? (CHEMISTRY_FRQ_PROFILE[p.template] ?? { points: -1, parts: [99, 99] as [number, number], rowsPerPart: [99, 99] as [number, number], minutes: [0, 0] as [number, number] }) : (subject === "ap_physics_1" || subject === "ap_physics_c_mechanics") ? (PHYSICS_FRQ_PROFILE[p.template] ?? { points: -1, parts: [99, 99] as [number, number], rowsPerPart: [99, 99] as [number, number], minutes: [0, 0] as [number, number] }) : subject === "ap_statistics" ? STATS_PROFILE : subject === "ap_computer_science_a" ? (CSA_FRQ_PROFILE[p.template] ?? { points: -1, parts: [99, 99] as [number, number], rowsPerPart: [99, 99] as [number, number], minutes: [0, 0] as [number, number] }) : (subject === "ap_microeconomics" || subject === "ap_macroeconomics") ? (p.total_points >= 10 ? MICRO_PROFILE.long : MICRO_PROFILE.short) : subject === "ap_biology" ? (p.total_points >= 9 ? BIO_PROFILE.long : BIO_PROFILE.short) : p.total_points >= 9 ? REFERENCE_PROFILE.frq9 : REFERENCE_PROFILE.frq4;
   if (p.total_points !== prof.points) r.push("reference_points_mismatch");
   if (p.parts.length < prof.parts[0] || p.parts.length > prof.parts[1]) r.push("reference_part_count_out_of_range");
   if (subject !== "ap_biology" && (p.est_minutes < prof.minutes[0] || p.est_minutes > prof.minutes[1])) r.push("reference_time_out_of_range");

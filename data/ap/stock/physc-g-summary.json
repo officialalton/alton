@@ -1,0 +1,79 @@
+{
+ "runs": [
+  "physc-g"
+ ],
+ "rows": 108,
+ "passed": 91,
+ "rejected": 17,
+ "passRate": 0.843,
+ "singles": {
+  "candidates": 108
+ },
+ "unitsPassed": {
+  "1": 11,
+  "2": 23,
+  "3": 18,
+  "4": 9,
+  "5": 7,
+  "6": 11,
+  "7": 12
+ },
+ "figPassed": {
+  "none": 88,
+  "graph": 3
+ },
+ "figAll": {
+  "none": 105,
+  "graph": 3
+ },
+ "figPassRate": {
+  "none": "88/105",
+  "graph": "3/3"
+ },
+ "renderTypesPassed": {
+  "none": 85,
+  "ap_graph:phys_line": 3,
+  "text": 3
+ },
+ "archetypesPassed": {
+  "pc_toss_from_platform_apex": 3,
+  "pc_plane_crosswind": 2,
+  "pc_circular_kinematics_accel": 3,
+  "pc_xt_quartic_minimum": 3,
+  "pc_crate_pull_angle": 3,
+  "pc_table_hanging_friction": 3,
+  "pc_exp_force_velocity": 3,
+  "pc_circle_bottom_tension": 3,
+  "pc_turntable_radius": 3,
+  "pc_field_zero_point": 2,
+  "pc_drag_half_terminal_time": 3,
+  "pc_com_planar_distance": 3,
+  "pc_power_constant_force_scaling": 3,
+  "pc_coaster_rank": 2,
+  "pc_spring_speed_equilibrium": 3,
+  "pc_bounce_height": 3,
+  "pc_inverse_square_force": 3,
+  "pc_work_fx_graph_signed": 3,
+  "pc_cart_rain_momentum": 3,
+  "pc_wall_bounce_force": 2,
+  "pc_newton_cradle_claim": 1,
+  "pc_ke_momentum_ratio": 3,
+  "pc_rolling_contact_velocity": 2,
+  "pc_flywheel_force_spinup": 3,
+  "pc_atwood_massive_pulley": 2,
+  "pc_rod_swing_end_speed": 2,
+  "pc_rolling_ke_fraction": 2,
+  "pc_angular_momentum_orbit_ratio": 3,
+  "pc_brake_turns": 3,
+  "pc_physical_pendulum_disk": 2,
+  "pc_shm_equal_energy_position": 3,
+  "pc_shm_vmax_from_period": 3,
+  "pc_shm_series_springs_period": 3,
+  "pcf_mr_ramp_friction": 1,
+  "pcf_tbr_spring_energy_graph": 1,
+  "pcf_qqt_skater": 1
+ },
+ "costUsd": {
+  "physc-g": 4.2564
+ }
+}
