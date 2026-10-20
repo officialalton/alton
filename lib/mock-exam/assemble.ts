@@ -6,6 +6,8 @@
 // V1은 적응형이 아니다: 시험 시작 뒤 난이도를 바꾸지 않고, 조립 시점에 영역·난이도
 // 비중에 맞춰 고정된 문항 목록을 만든다(제품 오너 확정 지시, 사양 1절).
 
+import { sortModuleOfficial } from "./official-order";
+
 export type ExamSection = "rw" | "math";
 export type ProblemDifficulty = "easy" | "medium" | "hard";
 export type DifficultyTier = "foundation" | "standard" | "advanced";
@@ -264,12 +266,9 @@ export function difficultyAllowedForModule(plan: MstModulePlan, difficulty: Prob
  * 정렬한다(실전 SAT처럼 쉬운 문항부터). 동일 난이도 안에서는 problemId 순(결정적).
  */
 export function orderSectionItems(items: EligibleProblem[], section: ExamSection): AssembledItem[] {
-  const difficultyRank: Record<ProblemDifficulty, number> = { easy: 0, medium: 1, hard: 2 };
-  const sorted = [...items].sort((a, b) => {
-    const rankDiff = difficultyRank[a.difficulty] - difficultyRank[b.difficulty];
-    if (rankDiff !== 0) return rankDiff;
-    return a.problemId.localeCompare(b.problemId);
-  });
+  // 공식 순서(official-order.ts): R&W 영역 블록 / Math skill 평균 위치, 같은 skill 안 난이도 오름차순, 동률은 problemId(결정적).
+  const byId = [...items].sort((x, y) => x.problemId.localeCompare(y.problemId));
+  const sorted = sortModuleOfficial(section, byId.map((it) => ({ it, skill: it.skillCode, difficulty: it.difficulty }))).map((x) => x.it);
   return sorted.map((item, index) => ({ ...item, section, position: index + 1 }));
 }
 
