@@ -3,7 +3,7 @@ import { runMeetingCalendarResyncBatch } from "@/lib/consultation/meeting-calend
 import { runConsultationCalendarResyncBatch } from "@/lib/consultation/calendar-sync";
 
 // 미팅(meeting_requests)·첫 상담(consultations) Calendar 동기화 실패(google_sync_status='failed') 재시도 백스톱 — 한 크론에서 둘 다 처리(경로명은 호환을 위해 유지) — 하루 1회만(vercel.json).
-// Vercel Hobby는 하루 1회보다 잦은 크론이 있으면 배포 자체가 실패한다. fail-closed: CRON_SECRET이 없으면 503.
+// (2026-10-19 Vercel Pro 전환 — 매시 정각 실행. Hobby였을 때는 하루 1회보다 잦은 크론이 있으면 배포 자체가 실패했다.) fail-closed: CRON_SECRET이 없으면 503.
 // 실제 Google 호출은 CALENDAR_SYNC_ALLOW_REAL_CALLS=true 일 때만 — 꺼져 있으면 아무 행도 claim 하지 않는다.
 export async function GET(request: Request) {
   const secret = process.env.CRON_SECRET;

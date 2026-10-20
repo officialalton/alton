@@ -20,9 +20,15 @@ const UNITS = [1, 2, 3, 4, 5, 6, 7, 8]; const PRACTICES = [1, 2, 3, 4, 5, 6];
 const unitOf = (topic: string) => Number(String(topic).split(".")[0]); const practiceOf = (skill: string) => Number(String(skill).split(".")[0]);
 const guideRows = biologyGuide.archetypes as { id: string; topic: string; skill: string }[];
 /** 후보가 모두 반려되고 고치지 못한 원형은 여기에 적어 가상 칸 계획에서 뺀다(첫 유료 라운드 전에는 비어 있다). */
-export const EXCLUDED_ARCHETYPES = new Set<string>([]);
+export const EXCLUDED_ARCHETYPES = new Set<string>([
+  // 2026-10-19 bio-b34-mc: 후보 3개가 모두 반려된 원형(가상 칸 계획에서 뺀다)
+  "bi_bar_biomass", "bi_chemiosmosis", "bi_community_interaction", "bi_cyclin_graph", "bi_dna_structure", "bi_graph_pcr_cycles", "bi_hw_conditions", "bi_hypothesis_signal", "bi_n_respirometer_table", "bi_new_investigation_selection", "bi_procedure_choice_dna", "bi_respiration_concept", "bi_selection_data_table", "bi_signal_steps", "bi_testcross", "bi_z_pcr_cycles_predict",
+  // 2026-10-19 bio-b34b: 후보 전부 반려
+  "bi_organism_response_data", "bis_hw_set",
+]);
 /** 라이브러리 단독 원형(원형 id = 구조). 가상 단독 문항은 이 원형 중 하나를 쓰고, 같은 원형은 시험당·(기본) 전체에서 최대 한 번 쓴다. */
 export const LIB_SINGLES = guideRows.filter((g) => !g.id.startsWith("bis_") && !EXCLUDED_ARCHETYPES.has(g.id)).map((g) => ({ id: g.id, topic: g.topic, unit: unitOf(g.topic), practice: practiceOf(g.skill), skill: g.skill, key: g.id }));
+if (process.env.BIO_DUMMY) for (let u = 1; u <= 8; u++) for (const pr of [1, 2, 3, 4, 5, 6]) for (let k = 0; k < 3; k++) LIB_SINGLES.push({ id: `dummy_u${u}p${pr}_${k}`, topic: `${u}.1`, unit: u, practice: pr, skill: `${pr}.A`, key: `dummy_u${u}p${pr}_${k}` }); // 분석용: 새로 써야 할 (단원, Practice) 칸을 센다
 /** 2문항 세트 원형(bis_*_q1/q2 를 합친 것). */
 export const LIB_SETS = [...new Set(guideRows.filter((g) => g.id.startsWith("bis_")).map((g) => g.id.replace(/_q\d+$/, "")))].filter((id) => !EXCLUDED_ARCHETYPES.has(id)).map((id) => { const m = guideRows.filter((g) => g.id.startsWith(`${id}_q`)); return { id, unit: unitOf(m[0].topic), members: m.map((g) => ({ unit: unitOf(g.topic), practice: practiceOf(g.skill), skill: g.skill })), key: id }; });
 /** FRQ 시나리오(유형당 4개): 가상 FRQ 는 이 시나리오 중 하나. */
@@ -188,10 +194,11 @@ function main() {
   const log = (s: string) => console.error(s);
   const blocked = new Set<string>(); for (const f of arg("--block-file").split(",").filter(Boolean)) for (const st of (JSON.parse(readFileSync(f, "utf-8")) as { sets: { mcA?: string[]; frqA?: string[] }[] }).sets) for (const k of [...(st.mcA ?? []), ...(st.frqA ?? [])]) blocked.add(k);
   const disjoint = !has("--allow-shared-structure");
+  const blockedArchetypes = new Set<string>(arg("--block-archetypes") ? (JSON.parse(readFileSync(arg("--block-archetypes"), "utf-8")) as string[]) : []); // 공개 세트가 쓴 원형(풀이 틀)은 재고·가상 칸 모두에서 제외
   let m: ReturnType<typeof solveBioSets>;
-  if (!has("--sequential")) m = solveBioSets(ids, pool, { timeMs: TIME, log, preferExamPrep: has("--prefer-exam-prep"), minExamPrep: Number(arg("--min-exam-prep", "0")) || undefined, blocked, disjoint, frqSpread: has("--frq-spread"), forbid });
+  if (!has("--sequential")) m = solveBioSets(ids, pool, { timeMs: TIME, log, preferExamPrep: has("--prefer-exam-prep"), minExamPrep: Number(arg("--min-exam-prep", "0")) || undefined, blocked, disjoint, frqSpread: has("--frq-spread"), forbid, blockedArchetypes });
   else { // 순차: BI1 을 최적으로 푼 뒤 그 문항·구조를 막고 BI2 를 푼다
-    const out: BioResult[] = []; let res = { status: "optimal", obj: 0, nodes: 0, x: [0] } as unknown as ReturnType<typeof solveBioSets>["res"]; const bl = new Set(blocked); const blArch = new Set<string>();
+    const out: BioResult[] = []; let res = { status: "optimal", obj: 0, nodes: 0, x: [0] } as unknown as ReturnType<typeof solveBioSets>["res"]; const bl = new Set(blocked); const blArch = new Set<string>(blockedArchetypes);
     for (const id of ids) {
       const one = solveBioSets([id], pool, { timeMs: TIME, log, preferExamPrep: has("--prefer-exam-prep"), minExamPrep: Number(arg("--min-exam-prep", "0")) || undefined, blocked: bl, blockedArchetypes: blArch, disjoint });
       out.push(...one.out); res = { ...one.res, obj: (res.obj ?? 0) + one.res.obj, nodes: (res.nodes ?? 0) + one.res.nodes, status: one.res.status } as typeof res;

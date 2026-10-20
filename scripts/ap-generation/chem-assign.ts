@@ -25,6 +25,10 @@ export const LIB_SINGLES = guideRows.filter((g) => !g.id.startsWith("chs_") && !
 /** 2문항 세트 원형(chs_*_q1/q2 를 합친 것): 가상 세트는 이 중 하나를 시험당 최대 한 번 쓴다. */
 export const LIB_SETS = [...new Set(guideRows.filter((g) => g.id.startsWith("chs_")).map((g) => g.id.replace(/_q\d+$/, "")))].map((id) => { const m = guideRows.filter((g) => g.id.startsWith(`${id}_q`)); return { id, unit: unitOf(m[0].topic), practices: m.map((g) => practiceOf(g.skill)), key: id }; });
 
+// 분석용(2026-10-19): CHEM_BLOCK_ARCH=<원형 id JSON 배열> 이면 공개 세트가 쓴 원형을 가상 칸에서 빼고, CHEM_DUMMY=1 이면 단원×Practice 칸마다 가상 "새 원형" 3개를 더해 새로 써야 할 칸 수를 센다.
+if (process.env.CHEM_BLOCK_ARCH) { const bl = new Set<string>(JSON.parse(readFileSync(process.env.CHEM_BLOCK_ARCH, "utf-8")) as string[]); for (let i = LIB_SINGLES.length - 1; i >= 0; i--) if (bl.has(LIB_SINGLES[i].id)) LIB_SINGLES.splice(i, 1); for (let i = LIB_SETS.length - 1; i >= 0; i--) if (bl.has(LIB_SETS[i].id)) LIB_SETS.splice(i, 1); }
+if (process.env.CHEM_DUMMY) for (let u = 1; u <= 9; u++) for (let k = 0; k < 2; k++) LIB_SETS.push({ id: `dummyset_u${u}_${k}`, unit: u, practices: [4, 5], key: `dummyset_u${u}_${k}` });
+if (process.env.CHEM_DUMMY) for (let u = 1; u <= 9; u++) for (let pr = 1; pr <= 6; pr++) for (let k = 0; k < 4; k++) LIB_SINGLES.push({ id: `dummy_u${u}p${pr}_${k}`, topic: `${u}.1`, unit: u, practice: pr, key: `dummy_u${u}p${pr}_${k}` });
 export function solveChemSets(ids: string[], items: ChemItem[], o: { timeMs: number; log?: (s: string) => void; blocked?: Set<string>; preferExamPrep?: boolean; cost?: (c: ChemItem) => number }) {
   const blocked = o.blocked ?? new Set<string>();
   const usable = items.filter((c) => !blocked.has(c.key) && (c.kind === "frq" ? (CHEM_FRQ_TYPES as readonly string[]).includes(c.frqType) : c.shared ? c.members.length === CHEM_SET_SIZE : c.members.length === 1) && (c.kind === "frq" || c.members.every((m) => PRACTICES.includes(practiceOf(m.skill)))));

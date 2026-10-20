@@ -1,4 +1,4 @@
-// Terms of Use and Privacy Policy content (English, Alton Education LLC, effective October 6, 2026).
+// Terms of Use and Privacy Policy content (English, Alton Education LLC, effective October 19, 2026).
 // Authoritative source: docs/contracts/terms-of-use-en.md and privacy-policy-en.md. A drift test
 // (lib/legal/site-documents.test.ts) fails if any source paragraph is missing from this content.
 // Inline markup: **bold** and [label](href).

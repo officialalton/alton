@@ -1,6 +1,6 @@
 # Privacy Policy
 
-Alton Education LLC | Effective October 6, 2026
+Alton Education LLC | Effective October 19, 2026
 
 ALTON is operated by Alton Education LLC, a United States company ("ALTON," "we," "us"). We provide an online SAT and AP practice platform, premium one-on-one tutoring, and educational consulting for middle and high school students. This policy explains what personal information we collect through the ALTON website and student, parent/guardian, teacher and consultant portals, how we use it, and the choices you have.
 

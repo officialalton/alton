@@ -1,0 +1,291 @@
+[
+ {
+  "key": "ap_physics_1-f01-k0",
+  "cellId": "ap_physics_1-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Equipment: a low-friction cart and track, a motion sensor at the top of the track, a protractor or inclinometer, a meter stick, and blocks to raise one end. Set the angle, either with the inclinometer or by measuring the height h and track length L and using sinθ = h/L. Release the cart from rest and record its velocity-time graph. The acceleration is the slope of that graph. Repeat at least 3 trials at each angle and average them. Change the angle by adding blocks to raise the track end, and test at least 5 angles. To reduce uncertainty in the angle, use a long track and measure h and L with a meter stick rather than reading a small protractor, or use a digital inclinometer and average several readings.",
+     "final_answer": "Measure a at each angle with a motion sensor, change θ by raising the track end, and reduce the angle uncertainty by finding θ from sinθ = h/L on a long track (or a digital inclinometer).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "With friction negligible, the cart's acceleration is a = g sinθ, so a plotted against sinθ is a straight line through the origin with slope g.",
+     "final_answer": "Vertical axis: a (m/s²). Horizontal axis: sinθ (no units). The slope equals g.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The points (sinθ, a) are (0.174, 1.69), (0.259, 2.50), (0.342, 3.30), (0.423, 4.15), (0.500, 4.84). They lie on a straight line through about the origin. Suggested scale: sinθ from 0 to 0.55 and a from 0 to 5.5 m/s².",
+     "final_answer": "Plot a (m/s²) against sinθ and draw the best-fit line, which passes close to the origin.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Read two points from the best-fit line, for example (0.20, 1.95) and (0.50, 4.87). Slope = (4.87 − 1.95)/(0.50 − 0.20) ≈ 9.7 m/s². A least-squares fit gives 9.74 m/s².",
+     "final_answer": "g ≈ 9.7 m/s²",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A standard incline experiment: design, linearize, plot, and extract g. The rubric rows are consistent with the data and the tolerances match. The independent solver agrees. No instant-reject condition applies.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits topic 2.5 and skill 3.A. Parts C and D use prerequisite analysis skills."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Slope of about 9.74 is consistent with the data. The D1 tolerance of 5% matches expected_values. Weights total 10, as required for this type."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and clear. The description is duplicated in the notes, a minor redundancy."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ. Common errors are listed in the rubric rows."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is typical of an experimental design FRQ. A calculator is allowed and the arithmetic is light."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP Physics 1 lab-design and analysis item. The student must choose the governing law (Newton's second law on an incline, a = g sinθ), design a procedure, linearize by plotting a versus sinθ, build a graph from a table, and extract g from the slope. All of this is within the 2.5/1.2/2.7 scope. Arithmetic is limited to five sine values and one slope with rounded data. The wording is clear, and the frictionless assumption is stated in part B. No out-of-scope content or unfair difficulty sources.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 1080
+  }
+ },
+ {
+  "key": "ap_physics_1-f01-k1",
+  "cellId": "ap_physics_1-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Use a low-friction track, a cart, a motion sensor at the top end, a protractor or inclinometer, and a meterstick. Set the angle by raising one end of the track with blocks. Release the cart from rest and record a from the slope of the v–t graph. Change the height to change θ. To reduce angle uncertainty, measure the rise h and track length L and use θ = arcsin(h/L), or use a digital inclinometer. Repeat trials and average.",
+     "final_answer": "Raise one end of the track to set θ. Measure θ using h and L (sinθ = h/L). Release the cart from rest, get a from the motion sensor's v–t slope, and repeat for each angle.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "With negligible friction, a = g sinθ.",
+     "final_answer": "Plot a (vertical) against sinθ (horizontal). The slope equals g.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The sinθ values are 0.174, 0.259, 0.342, 0.423, 0.500, with a = 1.715, 2.549, 3.397, 4.17, 5.01 m/s². The points lie on a straight line through roughly the origin.",
+     "final_answer": "Plot a (m/s²) against sinθ (unitless) using points (0.174,1.715), (0.259,2.549), (0.342,3.397), (0.423,4.17), (0.500,5.01), then draw a best-fit line through about the origin.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Slope from points on the line: (5.01−1.715)/(0.500−0.174) ≈ 10.1. A least-squares fit gives about 9.9–10.",
+     "final_answer": "g ≈ 9.9 m/s² (about 9.8–10.1 m/s²)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Content is sound and in scope, but D1 depends on the graph row C3 and checks \"two points on the line\", which a hand-drawn line makes hard to score. The reference g of about 10.1 sits about 2.6% above 9.8, and the independent solver got about 9.9 to 10.1 depending on method. The tolerances absorb this, but the scoring is fragile.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.5 on an incline with a design task matches skill 3.A. Parts C and D use other skills, which is acceptable because each part is judged on its own skill codes."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "D1 requires row C3, so a poor line costs two points. The 5% and 8% tolerances are tight against both a least-squares fit (about 9.9) and the endpoint slope (about 10.1). The reference answer of 10.1 overshoots 9.8, which could mislead students toward a wrong sense of correctness."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to free response; common errors are listed in the rubric."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 10-point total matches the Experimental Design and Analysis weight, and the task load is plausible. The calculator allowance is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP Physics 1 lab-design and data-analysis FRQ on Newton's second law on an incline. Students must choose a = g sinθ, linearize (a vs sinθ), plot a best-fit line with an appropriate scale, and extract g from the slope. Concept depth is core Unit 2 content. Difficulty comes from allowed levers (governing law choice, table-to-graph representation change, slope interpretation). Arithmetic is light (five sine values, one slope), the wording is clear, and no out-of-scope content is involved. This is a good fit for a full mock exam.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ },
+ {
+  "key": "ap_physics_1-f01-k2",
+  "cellId": "ap_physics_1-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Equipment: a low-friction track, a cart, a motion sensor at the top end, a protractor or meter stick, and blocks to prop up the track. Change the angle by raising one end. Find the angle as θ = arcsin(h/L), using the measured height h and track length L. Release the cart from rest and record velocity against time; the slope of that graph is a. Do several trials at each angle and average them. To reduce angle uncertainty, use a long track and measure the heights at both ends with a meter stick, or use a digital inclinometer.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Change θ by raising one end of the track. Measure the angle with sinθ = h/L. Get a from the slope of the motion sensor's v–t graph, averaging repeated trials. Using a long L and careful height measurements lowers the angle uncertainty."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "With negligible friction, a = g sinθ. So plot a against sinθ; the line goes through the origin and its slope is g.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Vertical axis: a (m/s²). Horizontal axis: sinθ (no units). Slope = g."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Points (sinθ, a): (0.174, 1.704), (0.259, 2.562), (0.342, 3.382), (0.423, 4.132), (0.500, 4.923). These lie on a straight line through roughly the origin.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Plot a (m/s²) from 0 to 5 against sinθ from 0 to 0.5. The best-fit line passes near the origin with slope about 9.8 m/s²."
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Least-squares slope = 9.81 m/s², and the intercept is about 0. For example, using two points on the line, (0.10, 0.99) and (0.50, 4.92), the slope is 3.93/0.40 ≈ 9.8 m/s².",
+     "ambiguous_or_flawed": false,
+     "final_answer": "g ≈ 9.8 m/s²"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a standard incline experiment with design, linearization, plot and slope parts. The key is sound: the data follow a = g sinθ with a slope of about 9.81. The rubric rows are consistent, and the 10-point total matches the Experimental Design and Analysis weight. Minor issues are the null numeric_tolerance on D1 and the duplicated stimulus note, neither of which affects correctness.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part is on target for 2.5 and 3.A (design, linearize, analyze). There is no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The slope of about 9.81 m/s^2 is consistent with a = g sinθ. Rubric rows are consistent, and alternatives are accepted in A3 and D3. The tolerance for D1 is given in the text rather than in the numeric_tolerance field; this is minor."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has labels, units and five rows, so the data are complete. The notes field duplicates the description, which is harmless. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to a free-response item. Common errors are listed on some rubric rows."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 10-point total matches the Experimental Design and Analysis weight. The task load is typical for hand-plotting and a slope calculation, and a calculator is allowed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item is a standard AP Physics 1 experimental-design and linearization task. Students must (1) write a procedure with equipment, how the angle is varied, and a way to reduce angle uncertainty. (2) They apply Newton's second law to the incline to get a = g sin(theta), so the plot is a vs sin(theta). (3) They convert the angles to sin(theta) values, plot them, and draw a best-fit line. (4) They read the slope as g. The data are clean (slope about 9.8 m/s^2), the arithmetic is five sine evaluations and one slope calculation with short numbers, and the wording is clear and in scope for Unit 2 with no banned content. Difficulty comes from choosing the governing law, translating a table into a linearized graph, and reading the slope, which are all allowed levers. The multi-part length is moderate but not excessive.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_1-f01-k3",
+  "cellId": "ap_physics_1-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Equipment: a low-friction cart and track, a motion sensor at the top of the track connected to a data logger, a protractor or angle sensor, a meter stick, and a stand or blocks to raise one end. Procedure: raise one end of the track and set the angle θ. You can find the angle with sinθ = h/L, where h is the measured height of the raised end and L is the track length. Release the cart from rest. The motion sensor records the cart's velocity over time, and the slope of the velocity–time graph gives the acceleration a. Change the angle by changing the height of the raised end, and repeat for about 5 angles from 10° to 30°, doing several trials at each angle and averaging. To reduce the uncertainty in the angle: use a long track and measure h and L with a meter stick, then calculate θ = arcsin(h/L). This is more precise than reading a protractor. A digital inclinometer also works.",
+     "final_answer": "Measure θ (from h and L with sinθ = h/L) and measure a (slope of the motion sensor's v–t graph). Change the height of the raised end to change θ, and repeat trials at each angle. To reduce angle uncertainty, use a long track and measure h and L precisely.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "With negligible friction, a = g sinθ. So plotting a against sinθ gives a straight line through the origin with slope g.",
+     "final_answer": "Vertical axis: a (m/s²). Horizontal axis: sinθ (no units). Slope = g.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The points (sinθ, a) are: (0.174, 1.729), (0.259, 2.549), (0.342, 3.408), (0.423, 4.155), (0.500, 4.900). They lie on a straight line through the origin.",
+     "final_answer": "Plot a (m/s²) on the vertical axis from 0 to 5 and sinθ on the horizontal axis from 0 to 0.5. The points are (0.174, 1.73), (0.259, 2.55), (0.342, 3.41), (0.423, 4.16), (0.500, 4.90). Draw the best-fit straight line, which goes through about the origin with a slope of about 9.85 m/s².",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Take two points on the best-fit line. For example, slope ≈ (4.90 − 1.72)/(0.500 − 0.174) ≈ 9.8 m/s². A least-squares fit through the origin gives 9.85 m/s². Because the slope equals g, g ≈ 9.8 m/s².",
+     "final_answer": "g ≈ 9.8 m/s² (slope of the best-fit line ≈ 9.85 m/s²)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item has no instant-reject condition, but it fails on key/scoring and exam suitability. Row A2 awards a point for \"same cart and same track\", which the prompt never asks for. Row D1 is chained to C3, so a student who misses C3 is penalized twice. The reference slope (9.74) differs from the independent solver's (9.85), though the 5% tolerance covers both. At an estimated 27 minutes with hand plotting, the task load is heavy.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A and B fit skill 3.A. Parts C and D are graphing and slope calculation (1.B, 2.D), which is acceptable within the bundle. The 10-point weight matches the Experimental Design and Analysis type."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Row A2 requires \"same cart and track\", but the prompt asks only for equipment, measurements, how the independent variable is changed, and one way to reduce angle uncertainty. Row D1 depends on C3, so an earlier graphing error is penalized again. The reference slope of 9.74 versus the solver's 9.85 is covered by the 5% tolerance."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The data table is complete and the wording is clear. The stimulus text is duplicated in notes, which is minor."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ. The rubric's common-error entries are thin, with none for A2 or A3."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The estimated 27 minutes is heavy because part C requires plotting five points by hand. The design part (A) is generic."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "This is a standard AP Physics 1 lab-design and linearization item. The student must apply Newton's second law along an incline (a = g sinθ), design a procedure, choose a linearized plot (a vs sinθ), then plot and read the slope. The reasoning is multi-step but routine, and each step is within Unit 2 scope. The representation changes are a table of angles to sinθ values, then to a graph, then to a slope. The data are clean (a = 9.8 sinθ) and need only five sinθ values and one slope calculation, so the arithmetic is light. The reading load is modest and the wording is unambiguous. Difficulty comes from the intended levers: choosing the governing law, linearizing, and experimental design. This matches a full-mock lab free-response question.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ }
+]

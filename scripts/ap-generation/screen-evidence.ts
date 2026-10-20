@@ -35,7 +35,7 @@ async function login(page: Page, email: string) {
   await page.getByLabel("Email").fill(email);
   await page.getByLabel("Password").fill(PW!);
   await page.getByRole("button", { name: "Log in", exact: true }).click();
-  await page.waitForURL((u) => !u.pathname.startsWith("/login"), { timeout: 30_000 });
+  await page.waitForURL((u) => !u.pathname.startsWith("/login"), { timeout: process.env.AP_EV_SLOW ? 120_000 : 30_000 });
 }
 
 async function checkItem(page: Page, r: Row, shot: string): Promise<Record<ScreenCheckName, ScreenCheck>> {
@@ -129,6 +129,7 @@ async function main() {
       const ctx = await browser.newContext({ viewport: { width: vp.w, height: vp.h }, hasTouch: vp.mobile, isMobile: vp.mobile });
       await ctx.addInitScript("window.__name = (f) => f;"); // tsx(esbuild) 가 넣는 헬퍼가 page.evaluate 안에서 없어 실패하는 것 방지
       const page = await ctx.newPage();
+      if (process.env.AP_EV_SLOW) { page.setDefaultNavigationTimeout(180_000); page.setDefaultTimeout(90_000); } // 호스트 부하가 높을 때(2026-10-19 load average 25+): 기본 30 s 이동 시간 제한이 자주 걸린다
       await login(page, email);
       await page.goto(`${BASE}/student/mock-exam/${attempt}`);
       const pending: { setItemId: string; entry: ScreenEntry }[] = [];

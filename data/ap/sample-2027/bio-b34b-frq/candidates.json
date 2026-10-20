@@ -1,0 +1,1277 @@
+[
+ {
+  "candidateKey": "ap_biology-f01-k0",
+  "cellId": "ap_biology-f01",
+  "apSubjectCode": "ap_biology",
+  "kind": "frq_bundle",
+  "keywordCode": "8.2",
+  "unitCode": "8",
+  "skillPrimary": "2.B",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "bif_q5_pyramid",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "The item uses a simple three-bar chart with round numbers (10000, 1000, 100). Part A is a single division to get 10%. Part B asks for a standard explanation: energy is lost as heat through respiration, as waste, and to decomposers. Part C applies the same 10% to get 10 kcal and adds a bar, which is a light graph-extension step. Part D asks for a conceptual link between one-way energy flow and nutrient cycling. Each part is one or two steps, and the reading load is minimal. The concepts are core 8.2 content with no misconception traps or multi-variable reasoning. This is more of a foundational check than a full-mock exam item. The only representation change is reading the bar chart and then drawing a new bar.",
+  "payload": {
+   "archetype": "bif_q5_pyramid",
+   "template": "bio_q5_model",
+   "topic": "8.2",
+   "extra_topics": [
+    "8.5"
+   ],
+   "skill": "2.B",
+   "representative_skill": "2.B",
+   "calculator": "allowed",
+   "title": "Analyzing an energy bar graph",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Energy available at three trophic levels of an ecosystem (primary and secondary refer to primary and secondary consumers)",
+    "data": {
+     "chart": "bar",
+     "data": {
+      "categories": [
+       "Producers",
+       "Primary",
+       "Secondary"
+      ],
+      "series": [
+       {
+        "name": "Energy (kcal)",
+        "values": [
+         10000,
+         1000,
+         100
+        ]
+       }
+      ],
+      "xTitle": "Trophic level",
+      "yTitle": "Energy available (kcal per year)"
+     },
+     "title": "Energy available at three trophic levels"
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Calculate the percent of the energy at the producer level that is transferred to the primary consumers.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "1000 / 10000 x 100 = 10%.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Gives the correct percent transfer (answer)",
+       "required_elements": [
+        "10"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the wrong values from the table or an incorrect formula"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±1",
+       "units_row": false,
+       "kind": "numeric",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "8.2"
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Explain where the energy that is not transferred to the next trophic level goes.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.B"
+     ],
+     "model_answer": "Much of the energy is lost as heat during cellular respiration and is used for the organism's own metabolism, and some is not eaten or is in waste.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Explains that most of the energy is lost as heat or used in the organism's metabolism",
+       "required_elements": [
+        "Most of the energy is lost as heat from metabolic processes or used by the organisms, and some remains in uneaten parts or waste"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "released as heat during cellular respiration",
+        "used by the organism for its own life processes or left in waste and dead material"
+       ],
+       "common_errors": [
+        "says the energy is destroyed",
+        "says the energy is transferred to the producers"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "8.2"
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Using the same percent of energy transferred, determine the energy available to tertiary consumers, and represent it by adding a fourth bar to the bar chart.",
+     "points": 1,
+     "response_mode": "draw",
+     "skill_codes": [
+      "2.D"
+     ],
+     "model_answer": "100 x 10/100 = 10 kcal per year, shown as a fourth bar much shorter than the third bar.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Gives the correct energy for the next level and draws a bar of the correct relative height (value)",
+       "required_elements": [
+        "10"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the wrong values from the table or an incorrect formula"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±0.5",
+       "units_row": false,
+       "kind": "numeric",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "8.2"
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Explain how the pattern shown by the bar chart is consistent with the statement that energy flows through ecosystems while matter is recycled.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.C"
+     ],
+     "model_answer": "Energy decreases at each level as heat is lost and cannot be reused by producers, so ecosystems need a constant input of energy, while the matter in the molecules is recycled by decomposers.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Connects the decrease in energy at each level to a one-way flow with an outside source, while matter is recycled",
+       "required_elements": [
+        "Energy is lost as heat at each level and not reused, so an ecosystem needs constant energy input, while matter is recycled"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "energy is lost as heat so a continuous energy input is required",
+        "decomposers return matter to producers but heat cannot be recaptured"
+       ],
+       "common_errors": [
+        "says energy is recycled by decomposers",
+        "says matter is lost from ecosystems at each level"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "8.2"
+     ]
+    }
+   ],
+   "total_points": 4,
+   "est_minutes": 10,
+   "facts": [
+    "lev=[10000, 1000.0, 100.00000000000001]",
+    "pct=10",
+    "next=10.000000000000002"
+   ],
+   "expected_values": [
+    {
+     "part": "A",
+     "quantity": "percent transferred",
+     "value": 10,
+     "unit": "%",
+     "tolerance": 1
+    },
+    {
+     "part": "C",
+     "quantity": "energy to tertiary consumers",
+     "value": 10.000000000000002,
+     "unit": "kcal per year",
+     "tolerance": 0.5000000000000001
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "bif_q5_pyramid",
+    "subject": "ap_biology",
+    "kind": "frq_bundle",
+    "concept": "Analyze an energy bar graph",
+    "topic": "8.2",
+    "skill": "2.B",
+    "student_thinking": [
+     "Calculate the percent transferred",
+     "Explain energy loss",
+     "Represent the next level",
+     "Relate to energy flow and matter cycling"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "A bar graph of energy at three trophic levels with a constant transfer efficiency",
+      "evidence": "the bars give the energy at each level"
+     }
+    ],
+    "material": {
+     "type": "diagram",
+     "must_include": [
+      "trophic levels",
+      "energy values"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "percent transfer from the bar heights vs the generating efficiency",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "8.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "1000 / 10000 x 100 = 10%."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Gives the correct percent transfer (answer)",
+        "elements": [
+         "10"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "2.B"
+      ],
+      "topics": [
+       "8.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "Much of the energy is lost as heat during cellular respiration and is used for the organism's own metabolism, and some is not eaten or is in waste."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Explains that most of the energy is lost as heat or used in the organism's metabolism",
+        "elements": [
+         "Most of the energy is lost as heat from metabolic processes or used by the organisms, and some remains in uneaten parts or waste"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "2.D"
+      ],
+      "topics": [
+       "8.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "100 x 10/100 = 10 kcal per year, shown as a fourth bar much shorter than the third bar."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Gives the correct energy for the next level and draws a bar of the correct relative height (value)",
+        "elements": [
+         "10"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "2.C"
+      ],
+      "topics": [
+       "8.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "Energy decreases at each level as heat is lost and cannot be reused by producers, so ecosystems need a constant input of energy, while the matter in the molecules is recycled by decomposers."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Connects the decrease in energy at each level to a one-way flow with an outside source, while matter is recycled",
+        "elements": [
+         "Energy is lost as heat at each level and not reused, so an ecosystem needs constant energy input, while matter is recycled"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 4,
+    "judgment_demand": "calculate, explain, and extend an energy bar graph",
+    "code_first": true
+   },
+   "seed": 11500,
+   "pack_id": "bif_q5_pyramid-s11500"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bif_q5_pyramid",
+   "facts": [
+    "lev=[10000, 1000.0, 100.00000000000001]",
+    "pct=10",
+    "next=10.000000000000002"
+   ],
+   "seed": 11500
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean 4-point short FRQ on energy flow. The keys are unambiguous, the stimulus data are complete, and the rubric accepts equivalent wordings. The only weakness is that the Part C rubric row does not separately check the drawn bar.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle stays within 8.2 (energy transfer between trophic levels, heat loss, energy flow versus matter cycling). Part B is the 2.B explanation. Parts A and C are data and representation parts, which are legitimate in a short FRQ Q5. Part D connects the model to a larger principle, as the Q5-D purpose requires."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All four keys are unique and defensible. 1000/10000 = 10%, and the next level is 10 kcal. Part B accepts alternative phrasings (heat, respiration, uneaten parts, waste). Part D requires heat loss, one-way energy flow with a constant input, and matter recycling. Part C asks for both the value and a drawn bar, but the rubric row checks only the value (10). That is a minor gap, but the drawn bar is still implied by the criterion text."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The bar chart data are complete (categories, values, axis titles). The note that \"primary\" and \"secondary\" refer to consumers is clear. Part C says \"tertiary consumers\" without a chart category, which is acceptable because the student adds the fourth bar. The wording is clear US English."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no distractors. The rubric rows list common errors (energy destroyed, energy recycled, matter lost), which serves the same purpose."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The workload fits a 4-point short FRQ in about 10 minutes. The only arithmetic is a simple percent, and the calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item uses a simple three-bar chart with round numbers (10000, 1000, 100). Part A is a single division to get 10%. Part B asks for a standard explanation: energy is lost as heat through respiration, as waste, and to decomposers. Part C applies the same 10% to get 10 kcal and adds a bar, which is a light graph-extension step. Part D asks for a conceptual link between one-way energy flow and nutrient cycling. Each part is one or two steps, and the reading load is minimal. The concepts are core 8.2 content with no misconception traps or multi-variable reasoning. This is more of a foundational check than a full-mock exam item. The only representation change is reading the bar chart and then drawing a new bar.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "candidateKey": "ap_biology-f01-k1",
+  "cellId": "ap_biology-f01",
+  "apSubjectCode": "ap_biology",
+  "kind": "frq_bundle",
+  "keywordCode": "8.2",
+  "unitCode": "8",
+  "skillPrimary": "2.B",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "bif_q5_pyramid",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_exam_suitability",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "The item uses round numbers and one simple percent calculation (5000/50000 = 10%). Part B is a standard recall explanation (heat from respiration, waste, uneaten parts). Part C is a single extrapolation (500 x 10% = 50 kcal) plus adding a bar, which is a light representation change. Part D is a conceptual link between one-way energy flow and matter cycling. Each part takes one or two steps, with low reading and computation load. This suits foundational practice better than full-mock exam prep.",
+  "payload": {
+   "archetype": "bif_q5_pyramid",
+   "template": "bio_q5_model",
+   "topic": "8.2",
+   "extra_topics": [
+    "8.5"
+   ],
+   "skill": "2.B",
+   "representative_skill": "2.B",
+   "calculator": "allowed",
+   "title": "Analyzing an energy bar graph",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Energy available at three trophic levels of an ecosystem (primary and secondary refer to primary and secondary consumers)",
+    "data": {
+     "chart": "bar",
+     "data": {
+      "categories": [
+       "Producers",
+       "Primary",
+       "Secondary"
+      ],
+      "series": [
+       {
+        "name": "Energy (kcal)",
+        "values": [
+         50000,
+         5000,
+         500
+        ]
+       }
+      ],
+      "xTitle": "Trophic level",
+      "yTitle": "Energy available (kcal per year)"
+     },
+     "title": "Energy available at three trophic levels"
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Calculate the percent of the energy at the producer level that is transferred to the primary consumers.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "5000 / 50000 x 100 = 10%.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Gives the correct percent transfer (answer)",
+       "required_elements": [
+        "10"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the wrong values from the table or an incorrect formula"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±1",
+       "units_row": false,
+       "kind": "numeric",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "8.2"
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Explain where the energy that is not transferred to the next trophic level goes.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.B"
+     ],
+     "model_answer": "Much of the energy is lost as heat during cellular respiration and is used for the organism's own metabolism, and some is not eaten or is in waste.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Explains that most of the energy is lost as heat or used in the organism's metabolism",
+       "required_elements": [
+        "Most of the energy is lost as heat from metabolic processes or used by the organisms, and some remains in uneaten parts or waste"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "released as heat during cellular respiration",
+        "used by the organism for its own life processes or left in waste and dead material"
+       ],
+       "common_errors": [
+        "says the energy is destroyed",
+        "says the energy is transferred to the producers"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "8.2"
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Using the same percent of energy transferred, determine the energy available to tertiary consumers, and represent it by adding a fourth bar to the bar chart.",
+     "points": 1,
+     "response_mode": "draw",
+     "skill_codes": [
+      "2.D"
+     ],
+     "model_answer": "500 x 10/100 = 50 kcal per year, shown as a fourth bar much shorter than the third bar.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Gives the correct energy for the next level and draws a bar of the correct relative height (value)",
+       "required_elements": [
+        "50"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the wrong values from the table or an incorrect formula"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±2.5",
+       "units_row": false,
+       "kind": "numeric",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "8.2"
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Explain how the pattern shown by the bar chart is consistent with the statement that energy flows through ecosystems while matter is recycled.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.C"
+     ],
+     "model_answer": "Energy decreases at each level as heat is lost and cannot be reused by producers, so ecosystems need a constant input of energy, while the matter in the molecules is recycled by decomposers.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Connects the decrease in energy at each level to a one-way flow with an outside source, while matter is recycled",
+       "required_elements": [
+        "Energy is lost as heat at each level and not reused, so an ecosystem needs constant energy input, while matter is recycled"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "energy is lost as heat so a continuous energy input is required",
+        "decomposers return matter to producers but heat cannot be recaptured"
+       ],
+       "common_errors": [
+        "says energy is recycled by decomposers",
+        "says matter is lost from ecosystems at each level"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "8.2"
+     ]
+    }
+   ],
+   "total_points": 4,
+   "est_minutes": 10,
+   "facts": [
+    "lev=[50000, 5000.0, 500.0000000000001]",
+    "pct=10",
+    "next=50.00000000000001"
+   ],
+   "expected_values": [
+    {
+     "part": "A",
+     "quantity": "percent transferred",
+     "value": 10,
+     "unit": "%",
+     "tolerance": 1
+    },
+    {
+     "part": "C",
+     "quantity": "energy to tertiary consumers",
+     "value": 50.00000000000001,
+     "unit": "kcal per year",
+     "tolerance": 2.5000000000000004
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "bif_q5_pyramid",
+    "subject": "ap_biology",
+    "kind": "frq_bundle",
+    "concept": "Analyze an energy bar graph",
+    "topic": "8.2",
+    "skill": "2.B",
+    "student_thinking": [
+     "Calculate the percent transferred",
+     "Explain energy loss",
+     "Represent the next level",
+     "Relate to energy flow and matter cycling"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "A bar graph of energy at three trophic levels with a constant transfer efficiency",
+      "evidence": "the bars give the energy at each level"
+     }
+    ],
+    "material": {
+     "type": "diagram",
+     "must_include": [
+      "trophic levels",
+      "energy values"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "percent transfer from the bar heights vs the generating efficiency",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "8.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "5000 / 50000 x 100 = 10%."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Gives the correct percent transfer (answer)",
+        "elements": [
+         "10"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "2.B"
+      ],
+      "topics": [
+       "8.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "Much of the energy is lost as heat during cellular respiration and is used for the organism's own metabolism, and some is not eaten or is in waste."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Explains that most of the energy is lost as heat or used in the organism's metabolism",
+        "elements": [
+         "Most of the energy is lost as heat from metabolic processes or used by the organisms, and some remains in uneaten parts or waste"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "2.D"
+      ],
+      "topics": [
+       "8.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "500 x 10/100 = 50 kcal per year, shown as a fourth bar much shorter than the third bar."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Gives the correct energy for the next level and draws a bar of the correct relative height (value)",
+        "elements": [
+         "50"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "2.C"
+      ],
+      "topics": [
+       "8.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "Energy decreases at each level as heat is lost and cannot be reused by producers, so ecosystems need a constant input of energy, while the matter in the molecules is recycled by decomposers."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Connects the decrease in energy at each level to a one-way flow with an outside source, while matter is recycled",
+        "elements": [
+         "Energy is lost as heat at each level and not reused, so an ecosystem needs constant energy input, while matter is recycled"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 4,
+    "judgment_demand": "calculate, explain, and extend an energy bar graph",
+    "code_first": true
+   },
+   "seed": 11501,
+   "pack_id": "bif_q5_pyramid-s11501"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bif_q5_pyramid",
+   "facts": [
+    "lev=[50000, 5000.0, 500.0000000000001]",
+    "pct=10",
+    "next=50.00000000000001"
+   ],
+   "seed": 11501
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a correct, clear 4-point bundle on energy flow, and the keys are sound. It is weak on exam suitability. Only one part assesses the target skill, and the part purposes diverge somewhat from the Q5 pattern: A is a calculation rather than a description, and part C's drawn bar is not an explicit rubric element. I fail it on exam suitability, with no instant-reject condition.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle stays within 8.2 energy flow. Part B explains the relationship between model characteristics and fits 2.B. Part A is a calculation, C is representation, and D relates the model to a larger principle. All are legitimate in a Q5-style bundle."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are unique and verified. A is 10% and C is 50 kcal per year. The B and D rubric rows list reasonable alternative phrasings. Part C is worth 1 point but asks for both the value and the drawn bar, while the rubric row mainly requires the number 50. The bar-height element is not an explicit required element, so scoring is slightly under-specified."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus data are complete: categories, values, axis titles and units. The chart description says 'kcal' while the y-axis says 'kcal per year', a minor inconsistency. The note that primary and secondary mean consumers is helpful. Part C asks the student to draw a fourth bar, which is feasible on paper. The 50-kcal bar will be barely visible on a linear axis."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common_errors listed (energy destroyed, energy recycled, matter lost) are realistic misconceptions."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The official Q5 structure is four 1-point parts, A-D, with A describe, B explain, C represent, and D relate to a principle. This bundle deviates in two ways. Part A is a calculation, whereas Q5 A should describe characteristics of the visual. Part D, on energy flow versus matter cycling, is tagged 2.C, and the CED treats 2.C as a different skill from the Q5 D purpose of relating the model to a larger principle. The data-reading load is trivially low, and part A can be done from the chart with no biology. The item is thin on the target skill, with only B truly assessing 2.B. The scoring is mostly acceptable, but the pattern fit is only moderate."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item uses round numbers and one simple percent calculation (5000/50000 = 10%). Part B is a standard recall explanation (heat from respiration, waste, uneaten parts). Part C is a single extrapolation (500 x 10% = 50 kcal) plus adding a bar, which is a light representation change. Part D is a conceptual link between one-way energy flow and matter cycling. Each part takes one or two steps, with low reading and computation load. This suits foundational practice better than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "candidateKey": "ap_biology-f01-k2",
+  "cellId": "ap_biology-f01",
+  "apSubjectCode": "ap_biology",
+  "kind": "frq_bundle",
+  "keywordCode": "8.2",
+  "unitCode": "8",
+  "skillPrimary": "2.B",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "bif_q5_pyramid",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_stimulus_expression",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Four-part short FRQ on trophic energy transfer. A requires one percent calculation from the chart. B requires explaining energy loss as heat from respiration, waste and unconsumed parts. C requires applying the 15% rate (1125 x 0.15 ≈ 169 kcal) and plotting a new bar. D requires linking one-way energy loss to recycled matter. Concept depth is moderate, there is a chart-to-number-to-chart shift, and reading and arithmetic are light. This is typical of AP mock FRQ difficulty and is not hard for unfair reasons.",
+  "payload": {
+   "archetype": "bif_q5_pyramid",
+   "template": "bio_q5_model",
+   "topic": "8.2",
+   "extra_topics": [
+    "8.5"
+   ],
+   "skill": "2.B",
+   "representative_skill": "2.B",
+   "calculator": "allowed",
+   "title": "Analyzing an energy bar graph",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Energy available at three trophic levels of an ecosystem (primary and secondary refer to primary and secondary consumers)",
+    "data": {
+     "chart": "bar",
+     "data": {
+      "categories": [
+       "Producers",
+       "Primary",
+       "Secondary"
+      ],
+      "series": [
+       {
+        "name": "Energy (kcal)",
+        "values": [
+         50000,
+         7500,
+         1125
+        ]
+       }
+      ],
+      "xTitle": "Trophic level",
+      "yTitle": "Energy available (kcal per year)"
+     },
+     "title": "Energy available at three trophic levels"
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Calculate the percent of the energy at the producer level that is transferred to the primary consumers.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "7500 / 50000 x 100 = 15%.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Gives the correct percent transfer (answer)",
+       "required_elements": [
+        "15"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the wrong values from the table or an incorrect formula"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±1",
+       "units_row": false,
+       "kind": "numeric",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "8.2"
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Explain where the energy that is not transferred to the next trophic level goes.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.B"
+     ],
+     "model_answer": "Much of the energy is lost as heat during cellular respiration and is used for the organism's own metabolism, and some is not eaten or is in waste.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Explains that most of the energy is lost as heat or used in the organism's metabolism",
+       "required_elements": [
+        "Most of the energy is lost as heat from metabolic processes or used by the organisms, and some remains in uneaten parts or waste"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "released as heat during cellular respiration",
+        "used by the organism for its own life processes or left in waste and dead material"
+       ],
+       "common_errors": [
+        "says the energy is destroyed",
+        "says the energy is transferred to the producers"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "8.2"
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Using the same percent of energy transferred, determine the energy available to tertiary consumers, and represent it by adding a fourth bar to the bar chart.",
+     "points": 1,
+     "response_mode": "draw",
+     "skill_codes": [
+      "2.D"
+     ],
+     "model_answer": "1125 x 15/100 = 168.75 kcal per year, shown as a fourth bar much shorter than the third bar.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Gives the correct energy for the next level and draws a bar of the correct relative height (value)",
+       "required_elements": [
+        "168.75"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the wrong values from the table or an incorrect formula"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "±8.4",
+       "units_row": false,
+       "kind": "numeric",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "8.2"
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Explain how the pattern shown by the bar chart is consistent with the statement that energy flows through ecosystems while matter is recycled.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.C"
+     ],
+     "model_answer": "Energy decreases at each level as heat is lost and cannot be reused by producers, so ecosystems need a constant input of energy, while the matter in the molecules is recycled by decomposers.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Connects the decrease in energy at each level to a one-way flow with an outside source, while matter is recycled",
+       "required_elements": [
+        "Energy is lost as heat at each level and not reused, so an ecosystem needs constant energy input, while matter is recycled"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "energy is lost as heat so a continuous energy input is required",
+        "decomposers return matter to producers but heat cannot be recaptured"
+       ],
+       "common_errors": [
+        "says energy is recycled by decomposers",
+        "says matter is lost from ecosystems at each level"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification",
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "8.2"
+     ]
+    }
+   ],
+   "total_points": 4,
+   "est_minutes": 10,
+   "facts": [
+    "lev=[50000, 7500.0, 1125.0]",
+    "pct=15",
+    "next=168.75"
+   ],
+   "expected_values": [
+    {
+     "part": "A",
+     "quantity": "percent transferred",
+     "value": 15,
+     "unit": "%",
+     "tolerance": 1
+    },
+    {
+     "part": "C",
+     "quantity": "energy to tertiary consumers",
+     "value": 168.75,
+     "unit": "kcal per year",
+     "tolerance": 8.4375
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "bif_q5_pyramid",
+    "subject": "ap_biology",
+    "kind": "frq_bundle",
+    "concept": "Analyze an energy bar graph",
+    "topic": "8.2",
+    "skill": "2.B",
+    "student_thinking": [
+     "Calculate the percent transferred",
+     "Explain energy loss",
+     "Represent the next level",
+     "Relate to energy flow and matter cycling"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "A bar graph of energy at three trophic levels with a constant transfer efficiency",
+      "evidence": "the bars give the energy at each level"
+     }
+    ],
+    "material": {
+     "type": "diagram",
+     "must_include": [
+      "trophic levels",
+      "energy values"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "percent transfer from the bar heights vs the generating efficiency",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "8.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "7500 / 50000 x 100 = 15%."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Gives the correct percent transfer (answer)",
+        "elements": [
+         "15"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "2.B"
+      ],
+      "topics": [
+       "8.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "Much of the energy is lost as heat during cellular respiration and is used for the organism's own metabolism, and some is not eaten or is in waste."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Explains that most of the energy is lost as heat or used in the organism's metabolism",
+        "elements": [
+         "Most of the energy is lost as heat from metabolic processes or used by the organisms, and some remains in uneaten parts or waste"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "2.D"
+      ],
+      "topics": [
+       "8.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "1125 x 15/100 = 168.75 kcal per year, shown as a fourth bar much shorter than the third bar."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Gives the correct energy for the next level and draws a bar of the correct relative height (value)",
+        "elements": [
+         "168.75"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "2.C"
+      ],
+      "topics": [
+       "8.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "Energy decreases at each level as heat is lost and cannot be reused by producers, so ecosystems need a constant input of energy, while the matter in the molecules is recycled by decomposers."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Connects the decrease in energy at each level to a one-way flow with an outside source, while matter is recycled",
+        "elements": [
+         "Energy is lost as heat at each level and not reused, so an ecosystem needs constant energy input, while matter is recycled"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 4,
+    "judgment_demand": "calculate, explain, and extend an energy bar graph",
+    "code_first": true
+   },
+   "seed": 11502,
+   "pack_id": "bif_q5_pyramid-s11502"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bif_q5_pyramid",
+   "facts": [
+    "lev=[50000, 7500.0, 1125.0]",
+    "pct=15",
+    "next=168.75"
+   ],
+   "seed": 11502
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound in content and fit. It fails on stimulus and expression because of small wording and data inconsistencies, including the stray \"table\" reference and a drawing requirement that is not checked in the rubric.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle fits Q5 (Analyze a Model or Visual) on topic 8.2. Part A calculates, part B explains energy loss, part C represents the next level, and part D relates the model to the principle that energy flows while matter is recycled. The topic is required throughout."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys of 15% and 168.75 kcal are consistent, and the ±1 and ±8.4 tolerances are reasonable. Part C is one point for the value and the drawn bar, and the rubric row checks only the number 168.75. The row names a bar of correct relative height but lists no required element for it, so the drawing is effectively unscored. The part-D rubric row is clear about the central idea, and part D adds no new measure."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stimulus data has a title, categories, values, and axis titles, which is complete. Part B refers to a \"table\" in the common_errors text, but the stimulus is a bar chart. The series name \"Energy (kcal)\" differs from the y-axis title \"kcal per year\", a minor inconsistency. Part C asks students to add a bar, but a tertiary label is never provided in the stimulus. This is minor, but the inconsistencies reduce clarity."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response bundle with no distractors. The common_errors listed in the rubric rows are plausible, such as saying energy is destroyed or recycled."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light, with four 1-point parts and a simple calculation. The calculator designation is consistent. The structure follows the short-FRQ format for Q5 (parts A to D)."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part short FRQ on trophic energy transfer. A requires one percent calculation from the chart. B requires explaining energy loss as heat from respiration, waste and unconsumed parts. C requires applying the 15% rate (1125 x 0.15 ≈ 169 kcal) and plotting a new bar. D requires linking one-way energy loss to recycled matter. Concept depth is moderate, there is a chart-to-number-to-chart shift, and reading and arithmetic are light. This is typical of AP mock FRQ difficulty and is not hard for unfair reasons.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ }
+]
