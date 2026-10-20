@@ -1,0 +1,1145 @@
+[
+ {
+  "key": "ap_calculus_bc-m01-k0",
+  "cellId": "ap_calculus_bc-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "speed=sqrt(16t^2+4(t^2-1)^2)=2(t^2+1); integral 0 to 2 = 28/3",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "28/3"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Arc length/total distance for parametric motion, procedural."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Speed = 2t^2+2, integral = 28/3; unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Chord, no-root, and speed-at-endpoint distractors verified to match their stated errors; the explanation covers each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Exact-form options, no calculator, reasonable time."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean item with a perfect-square speed; distractors are realistic and explained."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard BC arc-length problem: find x' and y', form speed squared, recognize the perfect square 4(t^2+1)^2, then integrate 2(t^2+1) from 0 to 2 to get 28/3. It takes about 4 steps, and the perfect-square recognition is the main hurdle. Numbers are small and there is no heavy reading. Distractors reflect plausible errors such as integrating the squared speed or making an arithmetic slip.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m01-k1",
+  "cellId": "ap_calculus_bc-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Speed = sqrt(4t^2+(t^2-1)^2) = t^2+1; integral 0 to 3 = 12",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "12"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parametric total distance via integral of speed; applies a rule/procedure, in scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "12 is unique; speed t^2+1 is positive so distance equals the integral."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete. The redundant parentheses around y(t) are a minor style issue."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are chord length 3√13, speed at t=3 (10), and no-root 348/5; all verified and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, exact values, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well aligned with topic 9.3. The key is 12, the distractors reflect distinct misconceptions, and the explanation covers each wrong option. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Differentiate x and y, form speed, recognize 4t^2+(t^2-1)^2=(t^2+1)^2 perfect square, integrate t^2+1 from 0 to 3 to get 12. Standard BC parametric arc length with a clean algebraic simplification; no ugly arithmetic, clear wording, in-scope content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m02-k0",
+  "cellId": "ap_calculus_bc-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "-2<t<2",
+     "brief_reasoning": "d2y/dx2 = -2(t^2+4)/(t^2-4)^3 > 0 iff t^2<4",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Second derivative of parametric curve and concavity test; in scope for 9.2, applies the d2y/dx2 > 0 test."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified d2y/dx2 = -2(t^2+4)/(t^2-4)^3; positive iff |t|<2. Key unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are distinct and plausible: the sign of dy/dx, the sign of dx/dt (t>2), and d2y/dt2. The rationale for option 3 is a little weak (it does not name the dx/dt misconception), but it still explains why the option is wrong."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, exact-form options, manageable algebra, non-calculator."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and suitable. The key is unique, the distractors are plausible, and the load is typical for AP. The only flaw is a minor weakness in the rationale for the t>2 distractor."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires dy/dx, then differentiating with respect to t and dividing by dx/dt (a common misconception is omitting the division), then a sign analysis of -2(t^2+4)/(t^2-4)^3 and attention to where dx/dt = 0. This is a multi-step but standard parametric second-derivative concavity item with clean algebra and distractors built on common errors.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m02-k1",
+  "cellId": "ap_calculus_bc-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "d2y/dx2 = -6(t^2+1)/(t^2-1)^3 > 0 iff t^2<1",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "-1<t<1"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Second derivative of parametric equations and concavity; in scope for 9.2, with the sign test as the justification."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "d2y/dx2 = -6(t^2+1)/(t^2-1)^3 > 0 iff -1<t<1. The key is unique, and the t=±1 exclusions are handled."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear; the '-1t' coefficient is a minor stylistic blemish."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Options A and B encode distinct misconceptions. The explanation for C is slightly muddled, but each wrong option is addressed."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Roughly 100 seconds of work, no calculator, exact forms."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope item with a unique key and reasonable distractors. The wording of the explanation for option C is slightly weak, but the item is acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Needs dy/dx, then the derivative of dy/dx with respect to t divided by dx/dt, followed by a sign analysis that accounts for the points where x'=0. The multi-step procedure is standard for AP BC. The arithmetic is simple and the wording is clear. The distractors correspond to common errors such as omitting the division by x' or mishandling the sign.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m03-k0",
+  "cellId": "ap_calculus_bc-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Since cos t = x/4 and sin t = y/2, and cos²t + sin²t = 1, we get x²/16 + y²/4 = 1. As t runs from 0 to 2π, the whole ellipse is traced.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "x^2/16 + y^2/4 = 1"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Eliminating the parameter is a representation change (2.C) within 9.1 parametric curves; no later-unit content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key B is unique and correct; the full period covers the whole ellipse."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions (unsquared amplitudes, swapped denominators, wrong sign); each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, no calculator needed, exact short options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, correct parameter-elimination question with a unique key and well-motivated distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard parameter elimination using cos^2+sin^2=1: solve cos t = x/4 and sin t = y/2, then square and add to get x^2/16 + y^2/4 = 1. One representation change with a short reasoning chain. Distractors cover predictable errors (unsquared coefficients, swapped axes, hyperbola sign). Clear wording, trivial arithmetic, in scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m03-k1",
+  "cellId": "ap_calculus_bc-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "cos t = x/2 and sin t = y/4, so (x/2)^2 + (y/4)^2 = 1, which gives x^2/4 + y^2/16 = 1. Because t runs from 0 to 2π, the curve traces the whole ellipse.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "x^2/4 + y^2/16 = 1"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Eliminating the parameter is a 9.1 skill and re-expresses parametric equations as a Cartesian equation (2.C). No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key A is the unique correct equation. The full period gives the whole ellipse. B, C and D each fail."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear and the domain is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (wrong sign, unsquared amplitudes, swapped denominators), each explained. The blueprint's 'circle' misconception is not used as an option, which is harmless."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-85 seconds, no calculator, short parallel exact options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, standard parameter-elimination item with a unique correct key, distinct distractors and typical exam load. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One representation change (parametric to Cartesian) via cos^2 t + sin^2 t = 1. Two short steps, simple numbers, and a short stem. Distractors target common errors: sign, coefficients instead of squares, and swapped denominators. This is a standard introductory 9.1 exercise.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m04-k0",
+  "cellId": "ap_calculus_bc-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "2",
+     "brief_reasoning": "dy/dt=-2sin2t=0 at t=0,π/2,π,3π/2,2π. dx/dt=-sin t is also 0 at t=0,π,2π, where the slope limit is 4cos t=±4, so these are not horizontal. That leaves t=π/2 and 3π/2.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Horizontal tangents of a parametric curve, including the 0/0 case; fits 9.1."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key 2 is unique: t=π/2 and 3π/2. At t=0, π, 2π the slope is ±4. Parabola y=2x²-1 confirms this."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors map to the listed misconceptions. The 0 rationale is slightly loose. The key's why text contains the full solution. Option order is 0,2,4,3 and the values are formatted as '2.0000000'; minor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is reasonable for a non-calculator MC item, about 2 minutes."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and in scope. The 0/0 handling at t=0, π, 2π is a good difficulty lever. Only minor cosmetic issues with option ordering and value formatting."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires computing dy/dt and dx/dt, factoring, and recognizing that zeros of dy/dt where dx/dt is also zero (t=0, pi, 2pi) are not horizontal tangents. Checking this hypothesis, with a misconception-rich option set (4 and 3 count the sin t = 0 zeros), is typical of an AP exam item. Computation is light and the reading load is minimal.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m04-k1",
+  "cellId": "ap_calculus_bc-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "3",
+     "brief_reasoning": "dy/dt=-4sin t cos t, dx/dt=cos t. sin t=0 gives t=0,π,2π with dx/dt≠0. At cos t=0, dy/dx→-4sin t=±4, not horizontal. So there are 3 t-values.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parametric horizontal tangents, within topic 9.1; requires checking dx/dt and simplifying dy/dx. Acceptable fit for 2.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "3 is unique: t=0, pi, 2pi horizontal; at pi/2, 3pi/2 slope is -4 sin t = ∓4, not horizontal."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors map to plausible misconceptions: counting all dy/dt zeros, the both-zero points, dropping an endpoint. The explanation covers each wrong option. Option 4 is somewhat arbitrary."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Non-calculator, exact, about 2 minutes, reasonable load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct with a unique key of 3. It tests horizontal tangents of a parametric curve, including the check at points where both derivatives vanish. The distractors are reasonable, and the item is suitable for a non-calculator section."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Needs dy/dt zeros, a check of dx/dt, and resolution of the 0/0 case at t=pi/2 and 3pi/2 (simplify dy/dx = -4 sin t). The distractor 5 targets the common misconception of counting only dy/dt = 0. Clean numbers, low reading load, in-scope BC Unit 9 content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m05-k0",
+  "cellId": "ap_calculus_bc-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "0.862",
+     "brief_reasoning": "Minimize speed^2; derivative gives 4t^3-6t^2+8t-5=0, root t≈0.862; speed ≈2.18, smaller than at the endpoints and at t=1.5.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Planar motion, speed minimization with calculator; fits 9.6 and 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The cubic 4t^3-6t^2+8t-5=0 has a unique real root, about 0.862, in [0,4]. The key is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. The stem is complete and unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are two endpoints and the y'=0 time. Each is explained. Somewhat basic but valid."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Calculator use is appropriate and the load is typical."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and in scope. The key 0.862 is verified as the unique critical point and the minimum, and the distractors are reasonable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must form the speed function from the velocity components, find its minimum on a closed interval by solving a cubic derivative equation with a calculator, and justify against the endpoints. The distractors are misconception-based (the endpoints, and the time when v_y = 0). The reading load is short and the numbers are clean, so the item is a typical calculator-active exam item.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m05-k1",
+  "cellId": "ap_calculus_bc-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "1.000",
+     "brief_reasoning": "Speed^2 derivative gives (t-1)(t^2-5t+7)=0, so t=1 is the only critical point. Speed^2 is 2 at t=1, 13 at t=0 and 29 at t=4, so the minimum is at t=1.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 9.6 speed minimization on an interval; calculator use is appropriate."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "S'=4(t-1)(t^2-5t+7); unique critical point t=1; S(1)=2, S(0)=13, S(4)=29. Key unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Endpoints and y'=0 are distinct realistic errors; all wrong options are explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Clean numbers, a single calculator-minimization step, and time appropriate for the AP exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, well-formed, and suitable. Key t=1 verified as the unique minimizer of speed on [0,4]."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must form the speed (or speed squared), differentiate, solve a cubic that simplifies neatly to (t-2)^3 = -1 using a calculator, and compare against endpoints. The distractor t=1.5 (where vy=0) and the endpoints are misconception-based. Numbers are clean and the wording is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m06-k0",
+  "cellId": "ap_calculus_bc-m06",
+  "passed": false,
+  "reasons": [
+   "blueprint:misconceptions_missing",
+   "wording_missing"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_calculus_bc-m06-k1",
+  "cellId": "ap_calculus_bc-m06",
+  "passed": false,
+  "reasons": [
+   "blueprint:misconceptions_missing",
+   "wording_missing"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_calculus_bc-m07-k0",
+  "cellId": "ap_calculus_bc-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "One petal is traced for θ from 0 to π/2. Area = (1/2)∫₀^{π/2} 9sin²(2θ)dθ = (9/2)(π/4) = 9π/8.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "9π/8"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 9.8 polar area of one petal; procedural skill 1.E; no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "9π/8 is correct and unique; the other options are verifiably wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors map to distinct misconceptions (all petals, no 1/2, r not squared); explanations are accurate and cover each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, exact-form options, appropriate for a non-calculator item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and well constructed. The key 9π/8 is unique, and the distractors are distinct and accurately explained."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard single-petal polar area: find petal bounds (0 to pi/2), set up (1/2)∫r^2 dθ, use the half-angle identity, and evaluate. Clean numbers and no extra reading. Distractors reflect typical errors (missing 1/2, wrong bounds).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m07-k1",
+  "cellId": "ap_calculus_bc-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "One petal runs from θ = 0 to π/4. Area = ½∫4sin²(4θ)dθ over [0, π/4] = 2·(π/8) = π/4.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "π/4"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Polar area of one petal, topic 9.8, procedural skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "π/4 is correct and unique; all petals are congruent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors reflect realistic misconceptions. The rationale for 1/2 is slightly imprecise: ∫r alone gives 1, and ½∫r gives 1/2. This is a minor issue."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Non-calculator with exact options and a typical time load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and suitable. The only flaw is a slightly loose rationale for the 1/2 distractor, which does not affect the key."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires determining the petal interval [0, pi/4] for r=2sin(4θ), setting up (1/2)∫r^2 dθ, applying the power-reducing identity, and evaluating. Several reasoning steps, but numbers are clean and the scope is standard for topic 9.8. Distractors reflect plausible misconceptions (wrong interval, missing 1/2).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m08-k0",
+  "cellId": "ap_calculus_bc-m08",
+  "passed": false,
+  "reasons": [
+   "blueprint:misconceptions_missing",
+   "wording_missing"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_calculus_bc-m08-k1",
+  "cellId": "ap_calculus_bc-m08",
+  "passed": false,
+  "reasons": [
+   "blueprint:misconceptions_missing",
+   "wording_missing"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_calculus_bc-m09-k0",
+  "cellId": "ap_calculus_bc-m09",
+  "passed": false,
+  "reasons": [
+   "blueprint:misconceptions_missing",
+   "wording_missing"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_calculus_bc-m09-k1",
+  "cellId": "ap_calculus_bc-m09",
+  "passed": false,
+  "reasons": [
+   "blueprint:misconceptions_missing",
+   "wording_missing"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_calculus_bc-m10-k0",
+  "cellId": "ap_calculus_bc-m10",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "r^2=6r cos θ gives x^2+y^2=6x, which is (x-3)^2+y^2=9: center (3,0), radius 3, traced once for 0≤θ≤π.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "B"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 90 seconds, no calculator needed, short parallel options.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, correct polar-to-Cartesian MC with a unique key and distinct distractors. It is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single representation change (polar to Cartesian/graph) using the standard r^2 = x^2 + y^2 and r cos(theta) = x conversion plus completing the square. The answer is (x-3)^2 + y^2 = 9, a circle centered at (3,0) with radius 3, which is option B. The distractors are misconception-based: wrong center axis, radius confused with the coefficient 6, and center at the origin. Computation and reading load are minimal, and the concept is foundational for 9.7.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m10-k1",
+  "cellId": "ap_calculus_bc-m10",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "Circle center (0,1) radius 1",
+     "brief_reasoning": "Multiply by r: x^2+y^2=2y, so x^2+(y-1)^2=1.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Polar-to-Cartesian conversion fits 9.7 and skill 2.C, with no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique correct answer: center (0,1), radius 1. The domain 0 to pi gives the full circle."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors map to distinct misconceptions (swapped trig, diameter as radius, constant radius at origin). The explanation covers every option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds, no calculator, exact-form options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and suitable for the exam. It has a unique key and distractors that reflect distinct misconceptions, and the explanation addresses each one."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single standard conversion from polar to Cartesian: multiply by r, substitute x^2+y^2=2y, complete the square to get center (0,1) and radius 1. One representation change and a few steps with trivial arithmetic. The distractors cover common misconceptions (swapped axes, radius equal to the coefficient, origin-centered circle), but the item is a routine recall of a standard polar graph. The fully worked solution is about 3 steps.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m11-k0",
+  "cellId": "ap_calculus_bc-m11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "v(1)=<3,3> right/up; a(1)=<-2,-4>; v·a=-18<0 so speed decreasing.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "A"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 9.6 motion with vectors; speed change via v·a is a justification-type application."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique correct answer A; checked by hand: v(1)=<3,3>, a(1)=<-2,-4>, v·a=-18."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculator, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope, clean MC item with well-motivated distractors; passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires evaluating v(1) to get direction, differentiating to get a(1), and using the sign of v·a to decide whether speed is increasing or decreasing. Numbers are small and the wording is clear. The speed-versus-velocity-direction distinction is a standard BC misconception, which makes this suitable for a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m11-k1",
+  "cellId": "ap_calculus_bc-m11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "v(1)=<-2,-3> left/down; a(1)=<1,2>; v·a=-8<0 so speed decreasing.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 9.6 velocity/acceleration; v·a test applied; no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "v(1)=<-2,-3>, a(1)=<1,2>, v·a=-8; key C unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions; all wrong options explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light arithmetic, no calculator, typical MC load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope item with a unique key and well-motivated distractors. Acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires evaluating v(1), interpreting the component signs as direction, differentiating to get a(1), and applying the v·a sign test for speed. Small numbers, short stem, and misconception-rich distractors. This is a typical mock-exam multi-step conceptual item with no unfair difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m12-k0",
+  "cellId": "ap_calculus_bc-m12",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "(r(3)-r(1))/2 = (<21,54>-<3,2>)/2 = <9,26>",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "<9, 26>"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Average velocity vector for a vector-valued function; topic 9.4, procedural skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key <9,26> is unique and correct; all distractors are distinct and wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct misconception (endpoint-velocity average, midpoint velocity, position average); explanation covers each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, light arithmetic, no calculator needed, exact-form options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean, in-scope MC item with well-motivated distractors. Passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-procedure item: evaluate the position vector at t=1 and t=3, subtract, divide by 2. Answer is <9,26>. Small numbers, no representation changes, and the distractors reflect common misconceptions, such as averaging endpoint velocities to get <9,30>. This is direct application of the average rate of change to a vector-valued function.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m12-k1",
+  "cellId": "ap_calculus_bc-m12",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "(r(3)-r(1))/2 = (<21,54>-<5,2>)/2 = <8,26>",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "<8, 26>"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Average velocity of a vector-valued function; topic 9.4, skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key <8,26> is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors map to distinct misconceptions (no division, endpoint velocity average, midpoint velocity). Explanations cover each option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, simple numbers, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean item. The key is unique and the distractors encode distinct misconceptions. It is in scope and appropriate for a non-calculator exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Average velocity is the change in position divided by the elapsed time. Evaluate r(1) and r(3), subtract, and divide by 2, with small numbers. There is one concept, about 3 steps, and no representation changes. The distractors are reasonable (skipping the division, or averaging the endpoint velocities), but the item stays at the level of applying a single definition.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m13-k0",
+  "cellId": "ap_calculus_bc-m13",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "x=5+[2t^2+t]_0^2=15; y=2+4ln(3)",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "(15, 2+4ln3)"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Integrating velocity vector with initial position, topic 9.5, rule application."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique correct answer (15, 2+4ln3)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem complete, initial condition given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions; each wrong option explained. Option D rationale is loosely worded but plausible."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Non-calculator, exact options, ~100s."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, standard item with a unique key and reasonable distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct component-wise integration of a velocity vector with an initial position. One polynomial integral and one 1/(t+1) integral, then add initial conditions. Clean numbers, no representation changes, and distractors reflect common misconceptions (dropping the initial position, using velocity instead of position). This is a routine single-concept procedure.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m13-k1",
+  "cellId": "ap_calculus_bc-m13",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "x=6+∫0^2(2t+3)dt=6+10=16; y=3+∫0^2 4/(t+1)dt=3+4ln3",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "(16, 3+4ln3)"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Integrating velocity components plus initial position; fits 9.5/1.E, non-calculator."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key (16, 3+4ln3) is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Clear stem, no stimulus needed."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Option A's stated rationale does not produce its value: using -1/(t+1)^2 over [0,2] gives 3+32/9 (or 8/9-type values), not 3+8/3. The explanation is inaccurate and the distractor does not encode the described misconception."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Appropriate load and time."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound and the key is correct, but the explanation for distractor A is wrong: the described error (using -1/(t+1)^2 as the antiderivative) would not yield 3+8/3. Fail on the distractor-explanation criterion."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Integrate each component of the velocity vector over [0,2] and add the initial position. Requires the ln antiderivative for 4/(t+1) and correct use of the initial condition. Distractors target common errors (dropping the initial position, wrong antiderivative). Numbers are small and the wording is clear. This is a standard mock-exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ }
+]

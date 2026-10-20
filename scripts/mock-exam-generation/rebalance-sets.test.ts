@@ -100,3 +100,30 @@ describe("generationNeed", () => {
     expect(r.swaps.some((s) => s.oldProblemId === inSet && s.reason === "archived_problem")).toBe(true);
   });
 });
+
+describe("문학 상한 (2026-10-19)", () => {
+  const litOf = (items: { section: string; problemId: string }[], topics: TopicMap) => items.filter((i) => i.section === "rw" && topics.get(i.problemId)?.subject === "literature_fiction").length;
+  it("litSets 에 지정한 게시 세트만 문학을 litTarget 까지 비문학으로 교체하고(lit_excess), 새 세트는 litMax 를 넘지 않는다", () => {
+    const { dump, topics } = synth();
+    const before1 = litOf(dump.items.filter((i: any) => i.exam_set_id === "set1").map((i: any) => ({ section: i.section, problemId: i.problem_id })), topics);
+    expect(before1).toBeGreaterThan(8);
+    const r = rebalance(dump, W, topics, { ...opts, litMax: 8, litTarget: 6, litSets: new Set(["SAT Practice Test 1"]) });
+    const lit = (name: string) => litOf(r.finalSets.find((x) => x.name === name)!.items, topics);
+    expect(lit("SAT Practice Test 1")).toBe(6);
+    expect(r.swaps.some((x) => x.reason === "lit_excess" && x.setName !== "SAT Practice Test 1")).toBe(false); // 지정하지 않은 세트는 문학 교체 대상이 아니다
+    const litSwaps = r.swaps.filter((s) => s.reason === "lit_excess");
+    expect(litSwaps.length).toBe(before1 - 6);
+    for (const s of litSwaps) { expect(s.setName).toBe("SAT Practice Test 1"); expect(s.status).not.toBe("NO_REPLACEMENT"); expect(s.newSubject).not.toBe("literature_fiction"); expect(s.sameSkill).toBe(true); }
+    for (const name of ["SAT Practice Test 3", "SAT Practice Test 4"]) expect(lit(name)).toBeLessThanOrEqual(8);
+    expect(r.litRelaxed).toEqual([]);
+    for (const s of r.perSet) expect(s.capViolations).toEqual([]);
+    const ids = allItems(r).map((i) => i.problemId); expect(new Set(ids).size).toBe(ids.length);
+  });
+  it("비문학 재고가 모자라면 NO_REPLACEMENT 로 남기고(생성 필요량), 새 세트는 litRelaxed 에 기록한다", () => {
+    const { dump, topics } = synth();
+    for (const [id, t] of topics) if (t.subject !== "literature_fiction" && !dump.items.some((i: any) => i.problem_id === id)) topics.set(id, { ...t, subject: "literature_fiction" }); // 재고를 전부 문학으로
+    const r = rebalance(dump, W, topics, { ...opts, litMax: 8, litTarget: 6, litSets: new Set(["SAT Practice Test 1"]) });
+    expect(r.swaps.some((s) => s.reason === "lit_excess" && s.status === "NO_REPLACEMENT")).toBe(true);
+    expect(r.litRelaxed.length).toBeGreaterThan(0);
+  });
+});

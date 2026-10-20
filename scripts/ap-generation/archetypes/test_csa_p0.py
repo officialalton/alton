@@ -1,6 +1,6 @@
 """AP Computer Science A P0 원형 테스트(무료: 네트워크·DB·LLM 없음, JDK 필요). unittest 기반 — `python -m unittest test_csa_p0` 또는 pytest. Vitest 래퍼: lib/ap-generation/csa-archetypes.test.ts.
 검사: 실행기 안전(컴파일 오류·예외·시간 초과·금지 API·캐시) / 시드 결정성 / 선택지 구조 / 코드 안전(달러·밑줄) / 독립 경로 불일치 시 폐기 / 화면에 보이는 코드를 다시 실행해 정답과 대조 /
-FRQ 구조(9점·행 1점·모범·대안 통과, 오답 실패) / 단원·Practice 범위 정수계획."""
+FRQ 구조(Q1 7·Q2 7·Q3 5·Q4 6점·행 1점·모범·대안 통과, 오답 실패) / 단원·Practice 범위 정수계획."""
 import json, os, random, re, sys, unittest
 import csa_java as J
 import csa_common as CC
@@ -20,7 +20,7 @@ SEEDS = int(os.environ.get("CSA_SEEDS", 2))
 STATEMENT_MODE = ["cs_int_division_expr", "cs_casting_range", "cs_compound_assign", "cs_string_methods", "cs_math_class", "cs_while_trace", "cs_nested_loops_count", "cs_arraylist_ops", "cs_array_traverse",
                   "cs_arraylist_remove_loop", "cs_2d_traverse", "cs_binary_search", "cs_selection_sort_pass", "cs_if_nesting",
                   # 2026-10-13 두 번째 풀 모의고사용 새 구조(csa_p0_e·f): 화면 코드가 곧 실행 문장인 것
-                  "cs_assign_swap_bug", "cs_string_concat_prec", "cs_char_arith", "cs_int_overflow", "cs_string_equals_compare", "cs_for_iter_count", "cs_boolean_expr_trace", "cs_else_if_chain", "cs_nested_triangle", "cs_halving_count", "cs_scope_trace", "cs_arraylist_insert_remove"]
+                  "cs_assign_swap_bug", "cs_string_concat_prec", "cs_int_overflow", "cs_string_equals_compare", "cs_for_iter_count", "cs_boolean_expr_trace", "cs_else_if_chain", "cs_nested_triangle", "cs_halving_count", "cs_scope_trace", "cs_arraylist_insert_remove"]
 
 
 def items(pack):
@@ -108,7 +108,7 @@ class TestIndependentPath(unittest.TestCase):
 class TestMcArchetypes(unittest.TestCase):
     def test_library_size(self):
         self.assertGreaterEqual(len(MC), 80)  # 2026-10-13: 두 번 풀 모의고사(겹침 0)용으로 약 34개 구조 추가
-        self.assertEqual(len(SETS), 4)
+        self.assertEqual(len(SETS), 7)  # 4 + 3 sets added for CS3 (2026-10-19, csa_p0_x4.py)
 
     def test_deterministic(self):
         for n in MC + SETS:
@@ -218,8 +218,8 @@ class TestFrq(unittest.TestCase):
         for n in FRQ:
             for p in packs(n, 1):
                 with self.subTest(n):
-                    self.assertEqual(p["total_points"], 9)
-                    self.assertEqual(sum(x["points"] for x in p["parts"]), 9)
+                    self.assertEqual(p["total_points"], {"q1": 7, "q2": 7, "q3": 5, "q4": 6}[p["template"]])
+                    self.assertEqual(sum(x["points"] for x in p["parts"]), p["total_points"])
                     for part in p["parts"]:
                         self.assertEqual(sum(r["points"] for r in part["rubric_rows"]), part["points"])
                         self.assertTrue(all(r["points"] == 1 and r["required_elements"] for r in part["rubric_rows"]))
@@ -237,9 +237,9 @@ class TestFrq(unittest.TestCase):
 
     def test_part_split_matches_official_shape(self):
         for n in ("csf_methods_pass", "csf_methods_leap", "csf_methods_digits"):
-            self.assertEqual([x["points"] for x in packs(n, 1)[0]["parts"]], [4, 5])
+            self.assertEqual([x["points"] for x in packs(n, 1)[0]["parts"]], [3, 4])
         for n in ("csf_class_steps", "csf_list_above", "csf_2d_best_row", "csf_class_scoreboard", "csf_class_stock", "csf_list_runs", "csf_list_remove_short", "csf_2d_border", "csf_2d_transpose"):
-            self.assertEqual([x["points"] for x in packs(n, 1)[0]["parts"]], [9])
+            self.assertEqual([x["points"] for x in packs(n, 1)[0]["parts"]], [{"q2": 7, "q3": 5, "q4": 6}[packs(n, 1)[0]["template"]]])
 
     def test_model_answers_compile(self):
         for n in FRQ:
@@ -326,7 +326,7 @@ class TestPaidRunPlan(unittest.TestCase):
     def test_mc_batches_plus_pilot_cover_the_whole_library_once(self):
         pilot = R.CSA_STAGES["csa_p1_a"]
         batches = [R.CSA_STAGES[f"csa_s2_mc_{x}"] for x in "abc"]
-        allx = pilot + [n for b in batches for n in b]
+        allx = pilot + [n for b in batches for n in b] + sorted(set(R.CSA_STAGES["csa_x_a"] + R.CSA_STAGES["csa_x_c"] + R.CSA_STAGES["csa_x_e"]))  # CS3 신규 원형(2026-10-19)
         self.assertEqual(len(allx), len(set(allx)), "배치끼리 원형이 겹친다")
         self.assertEqual(sorted(allx), sorted(MC + SETS))
         for b in batches:
@@ -365,7 +365,8 @@ class TestPaidRunPlanConfigs(unittest.TestCase):
             self.assertIn("perCellCapUsd", cfg["_budget_estimate"]); self.assertIn("perCellUsd", cfg["_budget_estimate"])
             self.assertIn(cfg["archetypeList"], R.CSA_STAGES)
             if not row["step"].startswith("csa-s2-short"):
-                cells = len(R.CSA_STAGES[cfg["archetypeList"]]); weighted = cells + sum(1 for n in R.CSA_STAGES[cfg["archetypeList"]] if n.startswith("css_"))
+                retired = 1 if row["step"] == "csa-s2-mc-a" else 0  # cs_char_arith(2026-10-19 퇴역)는 이미 실행된 이 단계의 기록에는 22칸으로 남는다
+                cells = len(R.CSA_STAGES[cfg["archetypeList"]]) + retired; weighted = cells + sum(1 for n in R.CSA_STAGES[cfg["archetypeList"]] if n.startswith("css_"))
                 self.assertEqual(weighted if row["kind"] == "mc" else cells, row["cells_weighted"], row["step"])
         seeds = [json.load(open(os.path.join(self.CFG, r["step"] + ".template.json")))["seed0"] for r in plan["steps"]]
         self.assertEqual(len(seeds), len(set(seeds)))

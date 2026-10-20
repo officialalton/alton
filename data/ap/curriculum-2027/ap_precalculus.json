@@ -1,0 +1,1688 @@
+{
+  "schemaVersion": 1,
+  "subject": {
+    "apCode": "ap_precalculus",
+    "name": "AP Precalculus",
+    "family": "precalculus",
+    "edition": "ced-2027",
+    "cedVersion": "AP Precalculus CED (effective Fall 2026; exam: 42 MC = Part A 29/65 min no calculator + Part B 13/40 min graphing calculator; 4 FRQ = Part A 2/35 min calculator + Part B 2/35 min no calculator)",
+    "examYear": 2027,
+    "sourceUrl": "https://apcentral.collegeboard.org/media/pdf/ap-precalculus-course-and-exam-description.pdf",
+    "officialTopicCodes": true,
+    "designNotes": "Units 1-3 only (Polynomial and Rational; Exponential and Logarithmic; Trigonometric and Polar), the units assessed on the exam. Unit 4 (Functions Involving Parameters, Vectors, and Matrices, 14 topics) is 'not assessed on the AP Exam' per the CED and is excluded; pacing is given in weeks, not class periods. Exam (read 2026-10-20, CED effective Fall 2026): 2 h 55 min; Section I 42 MC (62.5%): Part A 29 questions 65 min no calculator (43.75%), Part B 13 questions 40 min graphing calculator required (18.75%); Section II 4 FRQ, each 6 points, scored analytically, equal weight: Part A 2 questions 35 min graphing calculator required (FRQ 1 Function Concepts, FRQ 2 Modeling a Non-Periodic Context), Part B 2 questions 35 min no calculator (FRQ 3 Modeling a Periodic Context, FRQ 4 Symbolic Manipulations). Hybrid digital. Exam weighting for practices: Procedural and Symbolic Fluency 35-50%, Multiple Representations 20-30%, Communication and Reasoning 30-40% (whole-exam, not recorded as MC/FRQ-specific weights). MC function-type weights: general functions 15-25%, polynomial/rational 20-25%, exponential/logarithmic 20-30%, trigonometric/polar 30-35%. Topic titles of 1.2, 1.3, 1.8, 1.10, 1.12, 1.13, 2.1, 2.2, 2.4, 2.6, 2.8, 2.10, 2.13-2.15, 3.3, 3.7, 3.9, 3.13, 3.14 are not all verified word-for-word against the extracted text. Skills are the three mathematical practices at practice level. Per-topic and per-sub-keyword skills are an ALTON editorial mapping (one skill per sub-keyword chosen by kind and content), not the CED's per-topic suggested skills. Sub-keywords, kinds, requires and estLessons are ALTON editorial designs, not CED content. Topic titles are the CED's where read from the CED course-at-a-glance; where the extracted text was truncated they are close paraphrases."
+  },
+  "skills": [
+    {
+      "code": "1",
+      "category": "Mathematical Practices",
+      "label": "Procedural and Symbolic Fluency"
+    },
+    {
+      "code": "2",
+      "category": "Mathematical Practices",
+      "label": "Multiple Representations"
+    },
+    {
+      "code": "3",
+      "category": "Mathematical Practices",
+      "label": "Communication and Reasoning"
+    }
+  ],
+  "weights": [
+    {
+      "axis": "unit",
+      "code": "1",
+      "section": "mc",
+      "min": 30,
+      "max": 40,
+      "source": "AP Precalculus CED (effective Fall 2026), Exam Weighting for the Multiple-Choice Section"
+    },
+    {
+      "axis": "unit",
+      "code": "2",
+      "section": "mc",
+      "min": 25,
+      "max": 40,
+      "source": "AP Precalculus CED (effective Fall 2026), Exam Weighting for the Multiple-Choice Section"
+    },
+    {
+      "axis": "unit",
+      "code": "3",
+      "section": "mc",
+      "min": 30,
+      "max": 35,
+      "source": "AP Precalculus CED (effective Fall 2026), Exam Weighting for the Multiple-Choice Section"
+    }
+  ],
+  "units": [
+    {
+      "code": "1",
+      "title": "Polynomial and Rational Functions",
+      "officialClassPeriods": "6–8 weeks",
+      "topics": [
+        {
+          "code": "1.1",
+          "title": "Change in Tandem",
+          "scope": "both",
+          "skills": [
+            "3",
+            "2"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.1#1",
+              "label": "Covarying quantities and how they change together",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.1#2",
+              "label": "Describing relationships in tables and graphs",
+              "kind": "representation",
+              "skills": [
+                "2"
+              ],
+              "requires": [
+                "1.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.2",
+          "title": "Rates of Change",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "1.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.2#1",
+              "label": "Average rate of change over an interval",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.2#2",
+              "label": "Comparing rates across intervals",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "1.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.3",
+          "title": "Rates of Change in Linear and Quadratic Functions",
+          "scope": "both",
+          "skills": [
+            "3"
+          ],
+          "requires": [
+            "1.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.3#1",
+              "label": "Constant versus changing rates",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.3#2",
+              "label": "Quadratic rate of change and concavity",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [
+                "1.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.4",
+          "title": "Polynomial Functions and Rates of Change",
+          "scope": "both",
+          "skills": [
+            "3",
+            "2"
+          ],
+          "requires": [
+            "1.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.4#1",
+              "label": "Degree and number of turning points",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.4#2",
+              "label": "Increasing and decreasing behavior",
+              "kind": "representation",
+              "skills": [
+                "2"
+              ],
+              "requires": [
+                "1.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.5",
+          "title": "Polynomial Functions and Complex Zeros",
+          "scope": "both",
+          "skills": [
+            "3"
+          ],
+          "requires": [
+            "1.4"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.5#1",
+              "label": "Zeros, factors and multiplicity",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.5#2",
+              "label": "Complex conjugate zeros",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [
+                "1.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.6",
+          "title": "Polynomial Functions and End Behavior",
+          "scope": "both",
+          "skills": [
+            "3",
+            "2"
+          ],
+          "requires": [
+            "1.5"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.6#1",
+              "label": "Leading term and end behavior",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.6#2",
+              "label": "Matching graphs to polynomial equations",
+              "kind": "representation",
+              "skills": [
+                "2"
+              ],
+              "requires": [
+                "1.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.7",
+          "title": "Rational Functions and End Behavior",
+          "scope": "both",
+          "skills": [
+            "3",
+            "1"
+          ],
+          "requires": [
+            "1.6"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.7#1",
+              "label": "Horizontal asymptotes and end behavior of rational functions",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.7#2",
+              "label": "Comparing degrees of numerator and denominator",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "1.7#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.8",
+          "title": "Rational Functions and Zeros",
+          "scope": "both",
+          "skills": [
+            "1",
+            "3"
+          ],
+          "requires": [
+            "1.7"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.8#1",
+              "label": "Zeros of rational functions",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.8#2",
+              "label": "Domain restrictions and zeros",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [
+                "1.8#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.9",
+          "title": "Rational Functions and Vertical Asymptotes",
+          "scope": "both",
+          "skills": [
+            "1",
+            "3"
+          ],
+          "requires": [
+            "1.8"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.9#1",
+              "label": "Locating vertical asymptotes",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.9#2",
+              "label": "Holes versus vertical asymptotes",
+              "kind": "misconception",
+              "skills": [
+                "3"
+              ],
+              "requires": [
+                "1.9#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.10",
+          "title": "Rational Functions and Holes",
+          "scope": "both",
+          "skills": [
+            "3",
+            "1"
+          ],
+          "requires": [
+            "1.9"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.10#1",
+              "label": "Removable discontinuities and holes",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.10#2",
+              "label": "Simplifying to find hole coordinates",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "1.10#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.11",
+          "title": "Equivalent Representations of Polynomial and Rational Expressions",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "1.10"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.11#1",
+              "label": "Rewriting expressions in factored and expanded form",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.11#2",
+              "label": "Polynomial long division and slant asymptotes",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "1.11#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.12",
+          "title": "Transformations of Functions",
+          "scope": "both",
+          "skills": [
+            "3",
+            "2"
+          ],
+          "requires": [
+            "1.11"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.12#1",
+              "label": "Vertical and horizontal shifts and dilations",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.12#2",
+              "label": "Reflections and function notation",
+              "kind": "representation",
+              "skills": [
+                "2"
+              ],
+              "requires": [
+                "1.12#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.13",
+          "title": "Function Model Selection and Assumption Articulation",
+          "scope": "both",
+          "skills": [
+            "1",
+            "3"
+          ],
+          "requires": [
+            "1.12"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.13#1",
+              "label": "Choosing a model type from context and data",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.13#2",
+              "label": "Stating assumptions behind a model",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [
+                "1.13#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.14",
+          "title": "Function Model Construction and Application",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "1.13"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.14#1",
+              "label": "Building polynomial and rational models",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.14#2",
+              "label": "Interpreting a model in context",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "1.14#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "2",
+      "title": "Exponential and Logarithmic Functions",
+      "officialClassPeriods": "6–9 weeks",
+      "topics": [
+        {
+          "code": "2.1",
+          "title": "Change in Arithmetic and Geometric Sequences",
+          "scope": "both",
+          "skills": [
+            "3"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.1#1",
+              "label": "Arithmetic versus geometric sequences",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.1#2",
+              "label": "Linear and exponential growth patterns",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [
+                "2.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.2",
+          "title": "Change in Linear and Exponential Functions",
+          "scope": "both",
+          "skills": [
+            "1",
+            "2"
+          ],
+          "requires": [
+            "2.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.2#1",
+              "label": "Equal differences versus equal ratios",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.2#2",
+              "label": "Identifying linear or exponential from a table",
+              "kind": "representation",
+              "skills": [
+                "2"
+              ],
+              "requires": [
+                "2.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.3",
+          "title": "Exponential Functions",
+          "scope": "both",
+          "skills": [
+            "3",
+            "1"
+          ],
+          "requires": [
+            "2.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.3#1",
+              "label": "Initial value and growth or decay factor",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.3#2",
+              "label": "Writing exponential function rules",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "2.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.4",
+          "title": "Exponential Function Manipulation",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "2.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.4#1",
+              "label": "Rewriting exponential expressions",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.4#2",
+              "label": "Properties of exponents in function rules",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "2.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.5",
+          "title": "Exponential Function Context and Data Modeling",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "2.4"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.5#1",
+              "label": "Fitting exponential models to data",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.5#2",
+              "label": "Interpreting parameters in context",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "2.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.6",
+          "title": "Competing Function Model Validation",
+          "scope": "both",
+          "skills": [
+            "1",
+            "2"
+          ],
+          "requires": [
+            "2.5"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.6#1",
+              "label": "Comparing linear, quadratic and exponential models",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.6#2",
+              "label": "Residuals and model fit",
+              "kind": "representation",
+              "skills": [
+                "2"
+              ],
+              "requires": [
+                "2.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.7",
+          "title": "Composition of Functions",
+          "scope": "both",
+          "skills": [
+            "1",
+            "3"
+          ],
+          "requires": [
+            "2.6"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.7#1",
+              "label": "Evaluating f(g(x)) from tables and graphs",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.7#2",
+              "label": "Domain of composite functions",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [
+                "2.7#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.8",
+          "title": "Inverse Functions",
+          "scope": "both",
+          "skills": [
+            "3",
+            "1"
+          ],
+          "requires": [
+            "2.7"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.8#1",
+              "label": "Inverse relations and one-to-one functions",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.8#2",
+              "label": "Finding and verifying inverses",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "2.8#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.9",
+          "title": "Logarithmic Expressions",
+          "scope": "both",
+          "skills": [
+            "3",
+            "1"
+          ],
+          "requires": [
+            "2.8"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.9#1",
+              "label": "Logarithms as inverses of exponentials",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.9#2",
+              "label": "Evaluating logarithmic expressions",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "2.9#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.10",
+          "title": "Inverses of Exponential Functions",
+          "scope": "both",
+          "skills": [
+            "2",
+            "3"
+          ],
+          "requires": [
+            "2.9"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.10#1",
+              "label": "Graphs of exponential and logarithmic inverses",
+              "kind": "representation",
+              "skills": [
+                "2"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.10#2",
+              "label": "Reflection across y = x",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [
+                "2.10#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.11",
+          "title": "Logarithmic Functions",
+          "scope": "both",
+          "skills": [
+            "3",
+            "2"
+          ],
+          "requires": [
+            "2.10"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.11#1",
+              "label": "Domain, range and asymptote of log functions",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.11#2",
+              "label": "Transformations of logarithmic graphs",
+              "kind": "representation",
+              "skills": [
+                "2"
+              ],
+              "requires": [
+                "2.11#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.12",
+          "title": "Logarithmic Function Manipulation",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "2.11"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.12#1",
+              "label": "Product, quotient and power rules",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.12#2",
+              "label": "Change of base",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "2.12#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.13",
+          "title": "Exponential and Logarithmic Equations and Inequalities",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "2.12"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.13#1",
+              "label": "Solving equations by taking logarithms",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.13#2",
+              "label": "Solving exponential inequalities",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "2.13#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.14",
+          "title": "Logarithmic Function Context and Data Modeling",
+          "scope": "both",
+          "skills": [
+            "1",
+            "2"
+          ],
+          "requires": [
+            "2.13"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.14#1",
+              "label": "Log models for data that span many scales",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.14#2",
+              "label": "Linearizing exponential data with logs",
+              "kind": "representation",
+              "skills": [
+                "2"
+              ],
+              "requires": [
+                "2.14#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.15",
+          "title": "Semi-log Plots",
+          "scope": "both",
+          "skills": [
+            "2",
+            "3"
+          ],
+          "requires": [
+            "2.14"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.15#1",
+              "label": "Reading semi-log plots",
+              "kind": "representation",
+              "skills": [
+                "2"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.15#2",
+              "label": "Exponential data appears linear on a semi-log scale",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [
+                "2.15#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "3",
+      "title": "Trigonometric and Polar Functions",
+      "officialClassPeriods": "7–10 weeks",
+      "topics": [
+        {
+          "code": "3.1",
+          "title": "Periodic Phenomena",
+          "scope": "both",
+          "skills": [
+            "3",
+            "2"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.1#1",
+              "label": "Period, amplitude and midline in periodic contexts",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.1#2",
+              "label": "Recognizing periodic data",
+              "kind": "representation",
+              "skills": [
+                "2"
+              ],
+              "requires": [
+                "3.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.2",
+          "title": "Sine, Cosine, and Tangent",
+          "scope": "both",
+          "skills": [
+            "3",
+            "1"
+          ],
+          "requires": [
+            "3.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.2#1",
+              "label": "Right triangle and unit circle definitions",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.2#2",
+              "label": "Radian measure and angle conversion",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "3.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.3",
+          "title": "Sine and Cosine Function Values",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "3.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.3#1",
+              "label": "Exact values at special angles",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.3#2",
+              "label": "Using the unit circle to evaluate",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "3.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.4",
+          "title": "Sine and Cosine Function Graphs",
+          "scope": "both",
+          "skills": [
+            "2",
+            "1"
+          ],
+          "requires": [
+            "3.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.4#1",
+              "label": "Graph features of sine and cosine",
+              "kind": "representation",
+              "skills": [
+                "2"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.4#2",
+              "label": "Sketching one period of a trigonometric graph",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "3.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.5",
+          "title": "Sinusoidal Functions",
+          "scope": "both",
+          "skills": [
+            "1",
+            "2"
+          ],
+          "requires": [
+            "3.4"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.5#1",
+              "label": "Writing sinusoidal functions with amplitude, period and shift",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.5#2",
+              "label": "Sinusoidal parameters from a graph",
+              "kind": "representation",
+              "skills": [
+                "2"
+              ],
+              "requires": [
+                "3.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.6",
+          "title": "Sinusoidal Function Transformations",
+          "scope": "both",
+          "skills": [
+            "3",
+            "1"
+          ],
+          "requires": [
+            "3.5"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.6#1",
+              "label": "Phase shift and vertical shift",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.6#2",
+              "label": "Effect of parameters on graph",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "3.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.7",
+          "title": "Sinusoidal Function Context and Data Modeling",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "3.6"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.7#1",
+              "label": "Modeling tides, daylight and Ferris wheels",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.7#2",
+              "label": "Regression with sinusoidal models",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "3.7#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.8",
+          "title": "The Tangent Function",
+          "scope": "both",
+          "skills": [
+            "2",
+            "3"
+          ],
+          "requires": [
+            "3.7"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.8#1",
+              "label": "Graph and asymptotes of tangent",
+              "kind": "representation",
+              "skills": [
+                "2"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.8#2",
+              "label": "Period and domain of tangent",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [
+                "3.8#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.9",
+          "title": "Inverse Trigonometric Functions",
+          "scope": "both",
+          "skills": [
+            "3",
+            "1"
+          ],
+          "requires": [
+            "3.8"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.9#1",
+              "label": "Restricted domains for inverse trig functions",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.9#2",
+              "label": "Evaluating inverse trig values",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "3.9#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.10",
+          "title": "Trigonometric Equations and Inequalities",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "3.9"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.10#1",
+              "label": "Solving equations on an interval",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.10#2",
+              "label": "General solutions with periodicity",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "3.10#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.11",
+          "title": "The Secant, Cosecant, and Cotangent Functions",
+          "scope": "both",
+          "skills": [
+            "3",
+            "2"
+          ],
+          "requires": [
+            "3.10"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.11#1",
+              "label": "Reciprocal trigonometric functions",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.11#2",
+              "label": "Graphs of secant, cosecant and cotangent",
+              "kind": "representation",
+              "skills": [
+                "2"
+              ],
+              "requires": [
+                "3.11#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.12",
+          "title": "Equivalent Representations of Trigonometric Functions",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "3.11"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.12#1",
+              "label": "Pythagorean identities",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.12#2",
+              "label": "Sum and double-angle identities",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "3.12#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.13",
+          "title": "Trigonometry and Polar Coordinates",
+          "scope": "both",
+          "skills": [
+            "1",
+            "2"
+          ],
+          "requires": [
+            "3.12"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.13#1",
+              "label": "Converting between polar and rectangular coordinates",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.13#2",
+              "label": "Plotting points in the polar plane",
+              "kind": "representation",
+              "skills": [
+                "2"
+              ],
+              "requires": [
+                "3.13#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.14",
+          "title": "Polar Function Graphs",
+          "scope": "both",
+          "skills": [
+            "2",
+            "1"
+          ],
+          "requires": [
+            "3.13"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.14#1",
+              "label": "Graphs of polar functions such as circles and roses",
+              "kind": "representation",
+              "skills": [
+                "2"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.14#2",
+              "label": "Reading features from polar graphs",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "3.14#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.15",
+          "title": "Rates of Change in Polar Functions",
+          "scope": "both",
+          "skills": [
+            "3",
+            "1"
+          ],
+          "requires": [
+            "3.14"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.15#1",
+              "label": "Interpreting rates of change of r with θ",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.15#2",
+              "label": "Increasing and decreasing distance from the origin",
+              "kind": "skill",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "3.15#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

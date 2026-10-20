@@ -1,0 +1,336 @@
+[
+ {
+  "key": "ap_microeconomics-m01-k0",
+  "cellId": "ap_microeconomics-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_out_of_scope_knowledge",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A — the law of demand",
+     "brief_reasoning": "A higher parking price lowers the quantity of parking demanded, which is a movement along the demand curve. Shoppers also switch to substitutes such as the bus. B describes supply, not demand. C says only the income effect, which ignores the substitution effect. D is wrong because no price ceiling is involved. E is wrong because the quantity of parking demanded does change.",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "Minor wording issue: the stem says 'parking demand falls,' but strictly it is the quantity demanded that falls. The correct answer is still clear."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Law of demand belongs to Unit 2, not Topic 1.1 Scarcity (scarcity, opportunity cost, tradeoffs). The item tests content outside the topic and Unit 1 scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the unique defensible answer."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stem says 'parking demand falls' when it means quantity demanded falls, a conceptual imprecision. The bakery clause is irrelevant and adds reading load."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a distinct misconception and an explanation. The key is the longest option, a mild giveaway."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The stem's demand versus quantity demanded wording conflicts with option E's premise. The extraneous bakery detail is unneeded."
+   },
+   "instant_reject": [
+    "out_of_scope_knowledge"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is unique, but the item tests the law of demand (Unit 2) under Topic 1.1 Scarcity, so it is out of scope. The stem also conflates demand with quantity demanded and carries an irrelevant bakery clause."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step concept identification: recognize the law of demand (higher price, smaller quantity demanded, substitution to the bus). No computation, no graph or table, minimal reading. Distractors (law of supply, price ceiling, income effect only, shift in bus demand with no change in quantity of parking demanded) are clearly wrong on basic definitions. The stem nearly gives away the answer by mentioning substitutes. Note also a possible alignment issue: the item tests the law of demand rather than scarcity (topic 1.1), and the bakery detail is irrelevant context.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_microeconomics-m01-k1",
+  "cellId": "ap_microeconomics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Land is limited and can't meet both wants, so the council has to choose between them. That is scarcity.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 4,
+     "final_answer": "Scarcity"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly targets scarcity identification from a scenario (1.1, 1.B)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Scarcity is the unique defensible answer; opportunity cost is not offered as an option, and the other four are clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Four distinct, realistic misconceptions (shortage, comparative advantage, market failure, diminishing marginal utility); each is explained. Length difference is minor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, five options, no calculation, typical AP style."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, simple scarcity-identification item with a unique key and plausible distractors. It is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step concept identification: a limited resource with two competing uses forces a choice, which is the definition of scarcity. No stimulus, no computation, and minimal reading. Distractors (shortage, comparative advantage, market failure, diminishing marginal utility) are standard misconceptions that are easily ruled out once the definitions are known. This is suitable for introductory learning rather than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_microeconomics-m01-k2",
+  "cellId": "ap_microeconomics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "Scarcity",
+     "brief_reasoning": "There's only one lot and it can't serve both uses, so the council has to choose. That makes this a case of scarcity (and of opportunity cost).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly tests identifying scarcity from a scenario (1.1, 1.B). No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Scarcity is the unique defensible answer. Opportunity cost is not offered; the other options clearly do not fit."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Four distinct, plausible misconceptions (diminishing marginal utility, shortage, comparative advantage, market failure). Each is explained. The key is slightly longer, but the other options are similarly long."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, five options, no calculation, low reading load. Calculator designation is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unambiguous concept-identification item with a unique key and plausible distractors. It is appropriate for topic 1.1 and skill 1.B."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step concept identification from a one-sentence scenario. The correct answer is the textbook definition of scarcity (limited resource, must choose). The distractors are distinct Unit 1 or nearby terms that a student with basic vocabulary can rule out. There is no computation, no graph or table, and no multi-step reasoning. This fits foundational learning and is too easy for a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_microeconomics-m02-k0",
+  "cellId": "ap_microeconomics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "She types faster, but an hour she spends typing costs her an hour of legal work, which is worth more than what the assistant gives up for that hour. So she has the comparative advantage in law, and the assistant has it in typing.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is about 60 seconds, needs no calculation, and has five parallel option sentences with no length giveaway.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, standard question on comparative advantage versus absolute advantage. It has a unique key and explained distractors. Option D is slightly arguable but is eliminated by \"only if\"."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept conceptual item distinguishing absolute from comparative advantage using the classic lawyer/assistant scenario. No calculation or graph is needed. Students identify that opportunity cost, not speed, determines who should specialize. Distractors map to common misconceptions (confusing absolute and comparative advantage, assuming the faster worker should do everything). Skill 2.B is only lightly engaged, since the explanation rests on essentially one variable (opportunity cost) plus a contrast with absolute advantage. This is more of a foundational check than a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_microeconomics-m02-k1",
+  "cellId": "ap_microeconomics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 4,
+     "final_answer": "E",
+     "brief_reasoning": "Whether trade helps both sides depends on comparative advantage, meaning lower opportunity cost, not on absolute advantage. Unless the two countries have identical opportunity costs, each one has a comparative advantage in some good.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 1.4 absolute vs comparative advantage; explaining the outcome fits skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "E is the unique defensible answer. The stem does not state that opportunity costs differ, but this is a standard assumption and does not make any other option defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions and the explanation covers each wrong option. The correct option is longer than the others, a slight length cue."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60 seconds, has five options, and puts no calculator load on students."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a sound conceptual item with a unique correct answer. The only weakness is that the stem leaves unstated that opportunity costs differ, which is a standard assumption."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recognition item: gains from trade come from comparative advantage (lower opportunity cost), not absolute advantage. No computation, graph, or table. Short stem, standard misconception distractors. One reasoning step to reject absolute-advantage reasoning and select the opportunity-cost explanation. Fits introductory learning of topic 1.4 rather than full-mock exam prep. Little multi-variable explanation, so skill 2.B is only lightly engaged.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_microeconomics-m02-k2",
+  "cellId": "ap_microeconomics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Gains from trade come from comparative advantage (lower opportunity cost), not absolute advantage. Both countries can gain as long as their opportunity costs differ.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "B"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard comparative-advantage conceptual item. B is the unique best answer and the distractors map to distinct misconceptions. The stem does not state that opportunity costs differ, and the skill demand is mostly conceptual recall, but both are minor issues.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 1.4 fits. The 2.B demand is light but acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique defensible key. The stem omits that opportunity costs differ, but this is a standard implicit assumption."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a distinct misconception and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, no calculation, five options."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall/recognition: gains from trade rest on comparative advantage (lower opportunity cost), not absolute advantage. No stimulus, no computation, one reasoning step, and distractors are common misconceptions. The item is clear and in scope, but it is too shallow for a full-mock exam_prep item and only weakly addresses skill 2.B's multiple-variable explanation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ }
+]

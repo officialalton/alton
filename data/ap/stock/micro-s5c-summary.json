@@ -1,0 +1,55 @@
+{
+ "runs": [
+  "micro-s5-c"
+ ],
+ "rows": 9,
+ "passed": 7,
+ "rejected": 2,
+ "passRate": 0.778,
+ "mc": {
+  "rows": 6,
+  "passed": 4,
+  "passRate": 0.667
+ },
+ "frq": {
+  "rows": 3,
+  "passed": 3,
+  "passRate": 1
+ },
+ "unitsPassed": {
+  "5": 4
+ },
+ "skillsPassed": {
+  "2.B": 4
+ },
+ "figPassed": {
+  "none": 4,
+  "table": 3
+ },
+ "figAll": {
+  "none": 6,
+  "table": 3
+ },
+ "figPassRate": {
+  "none": "4/6",
+  "table": "3/3"
+ },
+ "renderTypesPassed": {
+  "none": 4,
+  "ap_table": 3
+ },
+ "archetypesPassed": {
+  "mi_labor_forces_both_shift": 2,
+  "mi_input_price_effect": 2,
+  "mif_short_shutdown": 3
+ },
+ "archetypesAll": {
+  "mi_labor_forces_both_shift": 3,
+  "mi_input_price_effect": 3,
+  "mif_short_shutdown": 3
+ },
+ "failedArchetypes": [],
+ "costUsd": {
+  "micro-s5-c": 0.3061
+ }
+}

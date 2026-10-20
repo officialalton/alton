@@ -394,3 +394,15 @@ BC 전용 용어(series/converge/Taylor/Maclaurin/parametric/polar/vector/Euler/
 | frq_closest_point | closest_point_to_curve_calc | 5.10 | 3.E | required | a A drone flies along the path $y=\ln x$ for $0.5\le x\le 8$, (2) / b Find the value of $x$ for which the drone is closest to the (3) / c At the point |
 | frq_ftc_chain_limit | accumulation_function_variable_limit | 6.4 | 1.E | not_allowed | a Let $H$ be the function defined by $H(x)=\int_0^{x^2}\left(e (2) / b Write an equation for the line tangent to the curve $y=H(x)$ (2) / c Find the $ |
 | frq_region_bisect | region_bisecting_line_calc | 8.4 | 1.E | required | a Let $R$ be the region in the first quadrant enclosed by the (2) / b Find the area of $R$. Show the setup for your calculation. (2) / c The vertical  |
+
+예비 3차(R3, 2026-10-12) FRQ 템플릿:
+
+| id | template | topic | skill | calculator | parts |
+|---|---|---|---|---|---|
+| frq_x4_cycloid_exact | cycloid_exact | 9.1 | 1.E | not_allowed | a A curve is defined by the parametric equations $x(t)=2(t-\si (2) / b For $0<t<2\pi$, find the value of $t$ at which the curve has (2) / c Find the v |
+| frq_x4_improper_arctan_calc | improper_arctan_calc | 6.13 | 1.E | required | a A pollutant is released into a lake at the rate $r(t)=\dfrac (3) / b Find the amount of pollutant released during the first $2$ h (2) / c At what ti |
+| frq_x4_rose_exact | rose_exact | 9.8 | 1.E | not_allowed | a The graph of the polar curve $r=4\sin(2\theta)$ for $0\le\th (3) / b Find $\dfrac{dr}{d\theta}$ at $\theta=\dfrac{\pi}{6}$. Is th (2) / c Find the v |
+| frq_x4_series_classify | series_four_tests | 10.3 | 3.D | not_allowed | a Determine whether the series $\displaystyle\sum_{n=1}^{\inft (2) / b Show that the series $\displaystyle\sum_{n=1}^{\infty}\dfrac (2) / c Does the s |
+| frq_x4_series_estimate_calc | series_estimate_calc | 10.6 | 3.D | required | a Consider the series $\displaystyle\sum_{n=1}^{\infty}\dfrac{ (2) / b The alternating series $\displaystyle\sum_{n=1}^{\infty}\dfr (2) / c Let $R_N=\ |
+| frq_x4_taylor_table_lagrange | taylor_table_lagrange | 10.11 | 1.E | not_allowed | a A function $f$ has derivatives of all orders. The table give (2) / b Use $P_3$ to approximate $f\left(2+\dfrac{1}{2}\right)$. (2) / c Use the Lagran |
+| frq_x4_velocity_vector_calc | velocity_vector_position_calc | 9.5 | 1.E | required | a A particle moves in the $xy$-plane so that its velocity vect (2) / b Find the position $\bigl(x(3),y(3)\bigr)$ of the particle at (3) / c For $0<t<3 |

@@ -25,9 +25,14 @@ export const NOT_ASSESSED_MC: Record<string, string[]> = {
   ap_chemistry: ["3.A", "3.B", "3.C"], // AP Chemistry CED(2024) Exam Information p.207: Practice 3 은 MC 에서 평가하지 않는다
   ap_world_history: ["6.A", "6.B", "6.C", "6.D"], // CED Exam Information p.199: MC 는 논증(Skill 6)을 명시적으로 평가하지 않는다
   ap_us_history: ["6.A", "6.B", "6.C", "6.D"], // CED p.501: MC 는 논증(Skill 6)을 명시적으로 평가하지 않는다
+  ap_physics_2: ["1.A", "1.B", "1.C", "3.A"], // CED(2026) Exam Information: Practice 1 과 3.A 는 MC 에서 평가하지 않는다(Physics 1 과 동일)
+  ap_physics_c_electricity_and_magnetism: ["1.A", "1.B", "1.C", "3.A"], // 같은 CED 표
+  ap_european_history: ["6.A", "6.B", "6.C", "6.D"], // CED(2026): US·World 와 같은 역사 스킬 체계, MC 는 논증(Skill 6)을 명시적으로 평가하지 않는다(확인: Euro CED 스킬 표)
+  ap_us_government_and_politics: ["5"], // CED(2026) Exam Information: 논증(Skill Category 5)은 MC 에서 평가하지 않는다
+  ap_computer_science_principles: ["6.A", "6.B", "6.C"], // CED: Practice 6 은 MC 에서 평가하지 않는다
   ap_psychology: ["4.A", "4.B"], // AP Psychology CED(Fall 2025) Exam Information p.148: MC 는 Practice 1-3 만 평가한다(Practice 4 논증은 FRQ 전용)
 };
-export const OPTION_COUNT: Record<string, number> = { ap_calculus_ab: 4, ap_biology: 4, ap_microeconomics: 5, ap_macroeconomics: 5, ap_psychology: 4, ap_us_history: 4, ap_world_history: 4, ap_statistics: 4, ap_physics_1: 4, ap_chemistry: 4, ap_computer_science_a: 4 };
+export const OPTION_COUNT: Record<string, number> = { ap_calculus_ab: 4, ap_biology: 4, ap_microeconomics: 5, ap_macroeconomics: 5, ap_psychology: 4, ap_us_history: 4, ap_world_history: 4, ap_statistics: 4, ap_physics_1: 4, ap_chemistry: 4, ap_computer_science_a: 4, ap_physics_2: 4, ap_physics_c_mechanics: 4, ap_physics_c_electricity_and_magnetism: 4, ap_environmental_science: 4, ap_us_government_and_politics: 4, ap_comparative_government_and_politics: 4, ap_human_geography: 5, ap_computer_science_principles: 4, ap_european_history: 4, ap_precalculus: 4 };
 /** 수식 구분자 규칙이 적용되는 수학·통계 과목(달러 기호가 통화인 Micro 는 제외). 통계는 정수·확률·통계량을 모두 $...$ 안에 쓴다. */
 const MATH_SUBJECT = /^ap_(calculus|statistics|physics|chemistry|biology)/;
 
@@ -215,15 +220,15 @@ export const PHYSICS_FRQ_PROFILE: Record<string, { points: number; parts: [numbe
 export const CHEMISTRY_FRQ_PROFILE: Record<string, { points: number; parts: [number, number]; rowsPerPart: [number, number]; minutes: [number, number] }> = {
   long: { points: 10, parts: [4, 6], rowsPerPart: [1, 3], minutes: [18, 30] }, short: { points: 4, parts: [3, 4], rowsPerPart: [1, 2], minutes: [6, 12] },
 };
-/** Computer Science A(2027): FRQ 4문항(메서드·제어문 / 클래스 설계 / ArrayList / 2D 배열) 각 9점(공식 고정, 채점 지침 2025). 문항별 시간은 공식 미공표 — 90분/4 = 약 22분(내부 추정). Q1 은 파트 a/b 두 개, Q2~Q4 는 한 덩어리로 쓰는 코드라 파트 1개에 채점 행 최대 9개. 채점 행은 1점 단위. */
-export const CSA_FRQ_PROFILE = { points: 9, parts: [1, 3] as [number, number], rowsPerPart: [1, 9] as [number, number], minutes: [18, 26] as [number, number] };
+/** Computer Science A(2027): FRQ 4문항(메서드·제어문 / 클래스 설계 / ArrayList / 2D 배열) 배점 Q1 7·Q2 7·Q3 5·Q4 6 = 25점(공식, 채점 지침 2025). 문항별 시간은 공식 미공표 — 90분/4 = 약 22분(내부 추정). Q1 은 파트 a/b 두 개, Q2~Q4 는 한 덩어리로 쓰는 코드라 파트 1개에 채점 행 최대 7개. 채점 행은 1점 단위. */
+export const CSA_FRQ_PROFILE: Record<string, { points: number; parts: [number, number]; rowsPerPart: [number, number]; minutes: [number, number] }> = Object.fromEntries(([["q1", 7], ["q2", 7], ["q3", 5], ["q4", 6]] as [string, number][]).map(([t, points]) => [t, { points, parts: [1, 3] as [number, number], rowsPerPart: [1, points] as [number, number], minutes: [18, 26] as [number, number] }]));
 /** Psychology(CED Fall 2025 p.147-149): FRQ 2문항 — Article Analysis(AAQ, 25분 = 읽기 10 + 쓰기 15, 7점, 파트 A-F) · Evidence-Based(EBQ, 45분 = 읽기 15 + 쓰기 30, 7점, 파트 A·B(i)·B(ii)·C(i)·C(ii)). 시간 범위는 공식 시간에 맞춘 내부 값. */
 export const PSYCH_FRQ_PROFILE: Record<string, { points: number; parts: [number, number]; rowsPerPart: [number, number]; minutes: [number, number] }> = {
   aaq: { points: 7, parts: [6, 6], rowsPerPart: [1, 2], minutes: [20, 25] }, ebq: { points: 7, parts: [5, 5], rowsPerPart: [1, 2], minutes: [35, 45] },
 };
 export function calibrateFrq(p: FrqPack, subject = "ap_calculus_ab"): string[] {
   const r: string[] = [];
-  const prof = subject === "ap_psychology" ? (PSYCH_FRQ_PROFILE[p.template] ?? { points: -1, parts: [99, 99] as [number, number], rowsPerPart: [99, 99] as [number, number], minutes: [0, 0] as [number, number] }) : subject === "ap_chemistry" ? (CHEMISTRY_FRQ_PROFILE[p.template] ?? { points: -1, parts: [99, 99] as [number, number], rowsPerPart: [99, 99] as [number, number], minutes: [0, 0] as [number, number] }) : subject === "ap_physics_1" ? (PHYSICS_FRQ_PROFILE[p.template] ?? { points: -1, parts: [99, 99] as [number, number], rowsPerPart: [99, 99] as [number, number], minutes: [0, 0] as [number, number] }) : subject === "ap_statistics" ? STATS_PROFILE : subject === "ap_computer_science_a" ? CSA_FRQ_PROFILE : (subject === "ap_microeconomics" || subject === "ap_macroeconomics") ? (p.total_points >= 10 ? MICRO_PROFILE.long : MICRO_PROFILE.short) : subject === "ap_biology" ? (p.total_points >= 9 ? BIO_PROFILE.long : BIO_PROFILE.short) : p.total_points >= 9 ? REFERENCE_PROFILE.frq9 : REFERENCE_PROFILE.frq4;
+  const prof = subject === "ap_psychology" ? (PSYCH_FRQ_PROFILE[p.template] ?? { points: -1, parts: [99, 99] as [number, number], rowsPerPart: [99, 99] as [number, number], minutes: [0, 0] as [number, number] }) : subject === "ap_chemistry" ? (CHEMISTRY_FRQ_PROFILE[p.template] ?? { points: -1, parts: [99, 99] as [number, number], rowsPerPart: [99, 99] as [number, number], minutes: [0, 0] as [number, number] }) : subject === "ap_physics_1" ? (PHYSICS_FRQ_PROFILE[p.template] ?? { points: -1, parts: [99, 99] as [number, number], rowsPerPart: [99, 99] as [number, number], minutes: [0, 0] as [number, number] }) : subject === "ap_statistics" ? STATS_PROFILE : subject === "ap_computer_science_a" ? (CSA_FRQ_PROFILE[p.template] ?? { points: -1, parts: [99, 99] as [number, number], rowsPerPart: [99, 99] as [number, number], minutes: [0, 0] as [number, number] }) : (subject === "ap_microeconomics" || subject === "ap_macroeconomics") ? (p.total_points >= 10 ? MICRO_PROFILE.long : MICRO_PROFILE.short) : subject === "ap_biology" ? (p.total_points >= 9 ? BIO_PROFILE.long : BIO_PROFILE.short) : p.total_points >= 9 ? REFERENCE_PROFILE.frq9 : REFERENCE_PROFILE.frq4;
   if (p.total_points !== prof.points) r.push("reference_points_mismatch");
   if (p.parts.length < prof.parts[0] || p.parts.length > prof.parts[1]) r.push("reference_part_count_out_of_range");
   if (subject !== "ap_biology" && (p.est_minutes < prof.minutes[0] || p.est_minutes > prof.minutes[1])) r.push("reference_time_out_of_range");

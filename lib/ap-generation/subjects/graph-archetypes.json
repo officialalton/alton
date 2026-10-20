@@ -2483,6 +2483,581 @@
   "bc": false
  },
  {
+  "id": "c_x4_abs_cond_classify",
+  "topic": "10.9",
+  "skill": "3.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "partial sums of the absolute terms up to 10^3 and 10^5 terms and the size of the 10^5-th term (independent of the p-series reasoning)"
+  ],
+  "misconceptions": [
+   "confuses conditional with absolute",
+   "thinks alternation implies divergence",
+   "claims no conclusion"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_alt_error_bound_value",
+  "topic": "10.10",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the partial sum of 200000 terms compared with S_4 shows the true error lies between 0.4 a_5 and a_5 (independent of the bound formula)"
+  ],
+  "misconceptions": [
+   "uses the last term a_4",
+   "uses a_6 and skips a term",
+   "adds omitted terms a_5 + a_6",
+   "subtracts neighboring terms"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_arclength_exact",
+  "topic": "8.13",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "scipy quad of sqrt(1 + x) over [0, b] (independent of the substitution antiderivative)"
+  ],
+  "misconceptions": [
+   "forgets the root",
+   "reports y(b) - y(0)",
+   "straight-line distance",
+   "drops the lower limit term"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_euler_table_de",
+  "topic": "7.5",
+  "skill": "2.C",
+  "calculator": "not_allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "each candidate equation is iterated exactly three times with rational arithmetic and compared with the table (independent of testing by inspection)"
+  ],
+  "misconceptions": [
+   "matches y_1 only",
+   "fails at the second step",
+   "wrong dependence on x or y"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_geom_sum_equation",
+  "topic": "10.2",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the partial sum of 4000 terms at the solution is compared with the target sum (independent of the algebra)"
+  ],
+  "misconceptions": [
+   "sets the ratio to 1/m",
+   "sets the ratio to m",
+   "wrong sign in the denominator",
+   "forgets the reciprocal"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_improper_converges_choice",
+  "topic": "6.13",
+  "skill": "3.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "log-variable quadrature of each integral to two cutoffs (1e8 and 1e16 for infinity, 1e-8 and 1e-16 for 0) shows which values stabilize (independent of the antiderivative)"
+  ],
+  "misconceptions": [
+   "divergent at infinity with p <= 1",
+   "divergent at zero with p >= 1",
+   "uses the wrong inequality for the type"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_integral_test_log_p",
+  "topic": "10.4",
+  "skill": "3.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical quadrature of the transformed integral over [ln start, 10^4] and [ln start, 10^8] at p = 1.5, 1 and 0.5 shows bounded versus unbounded growth (independent of the antiderivative)"
+  ],
+  "misconceptions": [
+   "includes p = 1",
+   "uses p > 0",
+   "reverses the inequality",
+   "requires p > 2"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_limit_comparison_value",
+  "topic": "10.6",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the ratio a_n/b_n is evaluated numerically at n = 10^6 (independent of the algebraic limit)"
+  ],
+  "misconceptions": [
+   "positive finite limit but concludes divergence",
+   "uses zero limit",
+   "inverts the ratio",
+   "infinite limit"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_logistic_max_rate",
+  "topic": "7.9",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a 20001-point grid search of r P (1 - P/K) over 0 < P < K (independent of the vertex formula)"
+  ],
+  "misconceptions": [
+   "reports r times K",
+   "reports the population P = K/2",
+   "reports rK/2",
+   "reports the carrying capacity"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_maclaurin_compose",
+  "topic": "10.14",
+  "skill": "2.C",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the three-term polynomial and the exact function agree to within the size of the next term at x = 0.05 (independent of the symbolic series)"
+  ],
+  "misconceptions": [
+   "forgets the power-of-x factor",
+   "drops the alternating signs",
+   "forgets b^k in each term",
+   "divides by exponent instead of factorial"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_nth_term_test",
+  "topic": "10.3",
+  "skill": "3.B",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the general term of each series is evaluated numerically at n = 10^7; only the key stays far from 0 (independent of the symbolic limits)"
+  ],
+  "misconceptions": [
+   "terms go to 0 but the series diverges",
+   "terms go to 0 and the series converges",
+   "terms go to 0 yet the series diverges by comparison"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_p_series_range",
+  "topic": "10.5",
+  "skill": "1.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the sum of terms n = N+1..2N at N = 10^5 is compared at the boundary exponent and half a unit above it (independent of the limit comparison)"
+  ],
+  "misconceptions": [
+   "uses p > 1",
+   "includes p = k+1",
+   "adds one extra to the threshold",
+   "uses p > 0"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_param_arclen_square",
+  "topic": "9.3",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "scipy quad of hypot(x'(t), y'(t)) over [0, b] (independent of the perfect-square simplification)"
+  ],
+  "misconceptions": [
+   "omits the square root",
+   "straight-line distance",
+   "adds component speeds",
+   "reports the speed"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_param_concave_t",
+  "topic": "9.2",
+  "skill": "3.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "finite-difference d2y/dx2 from the sampled parametric curve at representative t in each region (independent of the closed form)"
+  ],
+  "misconceptions": [
+   "uses dx/dt",
+   "uses dy/dt",
+   "uses dy/dx",
+   "uses the second derivative with respect to t"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_param_eliminate",
+  "topic": "9.1",
+  "skill": "2.C",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "five sample parameter values are substituted into each option's equation; only the key is satisfied at every sample (independent of the algebra)"
+  ],
+  "misconceptions": [
+   "swaps a and b",
+   "forgets to square",
+   "adds the squares",
+   "wrong sign"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_param_hor_tangent_count",
+  "topic": "9.1",
+  "skill": "2.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numeric slopes y'(t)/x'(t) on both sides of each zero of dy/dt (independent of the symbolic simplification)"
+  ],
+  "misconceptions": [
+   "counts all zeros of dy/dt",
+   "drops endpoints",
+   "counts the shared zeros",
+   "counts vertical tangents"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_param_min_speed_calc",
+  "topic": "9.6",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "bounded scalar minimization of the squared speed checked against a 40001-point grid search (independent of setting the derivative to zero)"
+  ],
+  "misconceptions": [
+   "uses y' = 0",
+   "uses x' = 0",
+   "uses the vertex of x'",
+   "reports an endpoint"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_param_point_time_calc",
+  "topic": "9.6",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "bisection root of x(t) and a central finite difference of y over x at that root (independent of the derivative formulas)"
+  ],
+  "misconceptions": [
+   "uses the other root",
+   "reports the reciprocal dx/dy",
+   "reports dy/dt alone",
+   "reports the y-coordinate",
+   "multiplies derivatives"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_partial_sum_table",
+  "topic": "10.1",
+  "skill": "2.B",
+  "calculator": "not_allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "the term list is rebuilt by cumulative summation of the generated terms and compared with the table differences (independent of the table subtraction)"
+  ],
+  "misconceptions": [
+   "reports S_k",
+   "adds partial sums",
+   "subtracts in reverse",
+   "subtracts partial sums two apart"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_parts_ln_exact",
+  "topic": "6.11",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "scipy quad of x^n ln x over [1, e] (independent of the parts antiderivative)"
+  ],
+  "misconceptions": [
+   "drops the second parts term",
+   "wrong sign at the lower limit",
+   "denominator not squared",
+   "loses the coefficient n"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_polar_area_petal",
+  "topic": "9.8",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "scipy quad of (1/2) r^2 over the petal interval (independent of the symbolic integration)"
+  ],
+  "misconceptions": [
+   "forgets 1/2",
+   "integrates over a full period",
+   "uses half the interval",
+   "integrates r"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_polar_between_setup",
+  "topic": "9.9",
+  "skill": "1.C",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "Cartesian grid count of lattice cells with a < r < a(1+cos(theta)) compared with the value of the key integral (independent of the setup)"
+  ],
+  "misconceptions": [
+   "reverses the subtraction",
+   "uses 0 to pi",
+   "uses -pi to pi",
+   "subtracts radii",
+   "drops the factor 1/2"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_polar_inner_loop_calc",
+  "topic": "9.8",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "shoelace area of the polygon through 20001 sampled points of the inner loop (independent of the integral)"
+  ],
+  "misconceptions": [
+   "area between loops",
+   "full revolution",
+   "doubles the area",
+   "drops the factor 1/2",
+   "wrong limits"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_polar_to_cartesian",
+  "topic": "9.7",
+  "skill": "2.C",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "polar points (r cos(theta), r sin(theta)) at four angles are tested against the distance to the claimed center (independent of completing the square)"
+  ],
+  "misconceptions": [
+   "reads r = 2c as constant radius",
+   "swaps sin and cos",
+   "doubles center and radius",
+   "uses the diameter"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_radius_from_known_points",
+  "topic": "10.13",
+  "skill": "3.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "geometric power series with radius R on a grid are tested numerically at both points: the radii consistent with the data fill (d1, d2], and each wrong option is contradicted by one such series"
+  ],
+  "misconceptions": [
+   "sets R to the distance of convergence",
+   "sets R to the distance of divergence",
+   "turns the lower bound into an upper bound",
+   "turns the upper bound into a lower bound"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_ratio_inconclusive",
+  "topic": "10.8",
+  "skill": "3.B",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numeric ratio of consecutive terms at n = 120 for each series (independent of the symbolic limits)"
+  ],
+  "misconceptions": [
+   "limit greater than 1 decides",
+   "limit 0 decides",
+   "limit below 1 decides"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_repeating_decimal",
+  "topic": "10.2",
+  "skill": "2.C",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "long division of the fraction produces the same first 14 digits as the repeating decimal (independent of the geometric series)"
+  ],
+  "misconceptions": [
+   "ignores the shift by one place",
+   "does not shift the repeating part",
+   "forgets to subtract",
+   "uses one 9"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_series_derivative_closed",
+  "topic": "10.15",
+  "skill": "2.C",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the partial sum of 400 terms of the differentiated series is compared with each option at three sample points (independent of the geometric-series sum)"
+  ],
+  "misconceptions": [
+   "uses the wrong sign or ratio",
+   "misses or adds a power of x",
+   "gives f instead of f'",
+   "differentiates again"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_series_integral_estimate",
+  "topic": "10.15",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "scipy quad of the three-term polynomial over [0, b] (independent of the term-by-term antiderivatives)"
+  ],
+  "misconceptions": [
+   "uses only two terms",
+   "evaluates instead of integrating",
+   "adds a fourth term",
+   "forgets the new exponent"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_speed_up_dot",
+  "topic": "9.6",
+  "skill": "3.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "central difference of the speed sqrt(x'^2 + y'^2) at the given time (independent of the dot product)"
+  ],
+  "misconceptions": [
+   "reverses increasing/decreasing",
+   "uses a_x for direction",
+   "uses a_y for direction"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_taylor_deriv_from_poly",
+  "topic": "10.11",
+  "skill": "2.C",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the k-th derivative of the polynomial itself is evaluated at x = a with sympy (independent of the coefficient-factorial rule)"
+  ],
+  "misconceptions": [
+   "forgets the factorial",
+   "multiplies by k instead of k!",
+   "divides instead of multiplying",
+   "reads the wrong coefficient"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_taylor_ln_calc",
+  "topic": "10.11",
+  "skill": "1.E",
+  "calculator": "required",
+  "stimulus": "none",
+  "verifiedBy": [
+   "central finite differences of ln at the center build the polynomial (independent of the symbolic derivatives)"
+  ],
+  "misconceptions": [
+   "adds a degree-4 term",
+   "omits factorials",
+   "wrong sign in second-degree term",
+   "gives ln of the point"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_vec_avg_velocity",
+  "topic": "9.4",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "difference quotient of the numerically evaluated position components over the interval (independent of the sympy substitution)"
+  ],
+  "misconceptions": [
+   "evaluates velocity at the midpoint",
+   "forgets the division",
+   "averages positions",
+   "averages endpoint velocities"
+  ],
+  "bc": true
+ },
+ {
+  "id": "c_x4_vec_position_from_velocity",
+  "topic": "9.5",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "scipy quad of each velocity component over [0, 2] plus the initial coordinates (independent of the symbolic antiderivatives)"
+  ],
+  "misconceptions": [
+   "forgets the initial position",
+   "evaluates the velocity",
+   "adds the initial position to one coordinate",
+   "integrates 1/(t+1) incorrectly"
+  ],
+  "bc": true
+ },
+ {
   "id": "c_x_sec_derivative_calc",
   "topic": "2.10",
   "skill": "1.C",
@@ -4117,5 +4692,89 @@
    "ignores the inner radius"
   ],
   "bc": false
+ },
+ {
+  "id": "g_x4_autonomous_limit_graph",
+  "topic": "7.9",
+  "skill": "2.D",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "small-step Euler integration of the interpolated f from the starting value to t = 400 (independent of reading signs from the graph)"
+  ],
+  "misconceptions": [
+   "reports the unstable equilibrium",
+   "reports the starting value",
+   "reports a value where f is not 0",
+   "claims unbounded growth"
+  ],
+  "bc": true
+ },
+ {
+  "id": "g_x4_euler_autonomous_graph",
+  "topic": "7.5",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "Euler iteration repeated with the interpolated graph function (independent of reading integer vertices)"
+  ],
+  "misconceptions": [
+   "stops after the first step",
+   "reuses the first slope",
+   "doubles the second slope",
+   "reports a slope",
+   "reports the initial value"
+  ],
+  "bc": true
+ },
+ {
+  "id": "g_x4_motion_direction_graphs",
+  "topic": "9.6",
+  "skill": "2.B",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "values of the interpolated graphs at t = a computed numerically (independent of reading the plotted vertices)"
+  ],
+  "misconceptions": [
+   "wrong horizontal direction",
+   "wrong vertical direction",
+   "both directions reversed"
+  ],
+  "bc": true
+ },
+ {
+  "id": "g_x4_partial_sum_term_graph",
+  "topic": "10.1",
+  "skill": "2.B",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "difference of the interpolated graph heights at n = k and n = k - 1 (independent of reading the vertices)"
+  ],
+  "misconceptions": [
+   "reports the height S_k itself",
+   "reverses the subtraction",
+   "adds the two heights",
+   "subtracts heights two steps apart"
+  ],
+  "bc": true
+ },
+ {
+  "id": "g_x4_speed_increasing_graphs",
+  "topic": "9.6",
+  "skill": "3.D",
+  "calculator": "not_allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "central difference of hypot(x'(t), y'(t)) built from the interpolated graphs at each time (independent of the product x'x'' + y'y'')"
+  ],
+  "misconceptions": [
+   "uses the sign of x'' alone",
+   "thinks speed falls when a component falls",
+   "uses the sign of a velocity component"
+  ],
+  "bc": true
  }
 ]

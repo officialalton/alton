@@ -11,13 +11,14 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { assertGroupLimits, assertUnique, buildCandidates, buildSlots, demandVsSupply, feasibleN, planUnique, RW_DOMAINS, type PlanItem, type Weights } from "./assemble-unique";
 import { DEFAULT_TOPIC_CAPS, SUBJECTS, TARGET_MIX, capViolations, countBy, rwPaths, subjectExcess, type CapViolation, type TopicCaps, type TopicMap } from "./rw-topics-lib";
+import { reorderSetModulesOfficial } from "../../lib/mock-exam/official-order";
 import type { EligibleProblem } from "../../lib/mock-exam/assemble";
 
-export type RebalanceOpts = { caps: TopicCaps; maxShared: number; groupCap: number; total: number; firstIndex?: number; allowSkillFallback: boolean; mix: Record<string, number>; mixTol: number; relaxFormat: boolean; excludeProblems?: ReadonlySet<string> };
+export type RebalanceOpts = { caps: TopicCaps; maxShared: number; groupCap: number; total: number; firstIndex?: number; allowSkillFallback: boolean; mix: Record<string, number>; mixTol: number; relaxFormat: boolean; excludeProblems?: ReadonlySet<string>; /** 문학(literature_fiction) 상한: 게시 세트의 문학이 litMax 를 넘으면 litTarget 까지 비문학으로 교체(reason lit_excess), 새 세트는 litMax 가 하드 상한. */ litMax?: number; litTarget?: number; /** 지정하면 이 이름의 게시 세트만 문학 교체 대상(오너가 지정한 세트). */ litSets?: ReadonlySet<string> };
 export const DEFAULT_OPTS: RebalanceOpts = { caps: DEFAULT_TOPIC_CAPS, maxShared: 15, groupCap: Infinity, total: 13, allowSkillFallback: true, mix: TARGET_MIX, mixTol: 0.02, relaxFormat: false };
 
 export type SetItem = PlanItem & { itemId: string | null; section: string; m1Eligible?: boolean; m2LowerEligible?: boolean; m2HigherEligible?: boolean };
-export type Reason = "archived_problem" | "no_published_version" | "duplicate_in_collection" | "topic_cap";
+export type Reason = "archived_problem" | "no_published_version" | "duplicate_in_collection" | "topic_cap" | "lit_excess";
 export type Swap = { setId: string; setName: string; itemId: string | null; section: string; position: number; moduleKey: string; route: string | null; domain: string; skill: string | null; difficulty: string; format: string;
   reason: Reason; oldProblemId: string; oldVersionId: string; oldCluster: string | null; newProblemId: string | null; newVersionId: string | null; newSkill: string | null; newCluster: string | null; newSubject: string | null; sameSkill: boolean; status: "ok" | "skill_fallback" | "NO_REPLACEMENT" };
 
@@ -76,11 +77,11 @@ export function rebalance(dump0: any, W: Weights, topics: TopicMap, o: Rebalance
   };
 
   /** 한 세트의 한 문항을 교체. 같은 칸(영역·난이도·형식) 후보 중 하드 필터를 통과한 것에서 같은 skill 우선, 없을 때만 fallback. */
-  const replaceOne = (w: Work, idx: number, reason: Reason, mustReduce: boolean): boolean => {
+  const replaceOne = (w: Work, idx: number, reason: Reason, mustReduce: boolean, extra: { nonLit?: boolean; noWorse?: boolean } = {}): boolean => {
     const it = w.items[idx]; const sg = groupMap.get(w.id)!; const others = [...groupMap.keys()].filter((k) => k !== w.id);
     const rwItems = rwView(w.items); const isRw = it.section === "rw"; const ri = rwItems.indexOf(it);
     const baseViol = isRw ? excessOf(capViolations(rwItems, topics, o.caps)) : 0;
-    const base = pool.filter((c) => !taken.has(c.problemId) && c.satDomain === it.domain && c.difficulty === it.difficulty && c.format === it.format && (!isRw || topics.has(c.problemId)));
+    const base = pool.filter((c) => !taken.has(c.problemId) && c.satDomain === it.domain && c.difficulty === it.difficulty && c.format === it.format && (!isRw || topics.has(c.problemId)) && (!extra.nonLit || topics.get(c.problemId)?.subject !== "literature_fiction"));
     const ok = base.filter((c) => {
       if (c.similarityGroup && c.similarityGroup !== it.group && sg.has(c.similarityGroup)) return false;
       if (c.similarityGroup && c.similarityGroup !== it.group) for (const x of others) { const cur = shared(w.id, x); if (groupMap.get(x)!.has(c.similarityGroup) && cur + 1 > Math.max(o.maxShared, cur)) return false; }
@@ -91,7 +92,7 @@ export function rebalance(dump0: any, W: Weights, topics: TopicMap, o: Rebalance
         const sc = countBy(rwItems.filter((_, j) => j !== ri), (x) => topics.get(x.problemId)?.subject); sx = Math.round(subjectExcess(sc, rwItems.length - 1, topics.get(c.problemId)!.subject, o.mix) * 100); }
       return { c, nv, key: [nv, c.skillCode === it.skill ? 0 : 1, sx, -slackOf(c), c.exposureCount ?? 0] as number[] };
     };
-    const scored = ok.map(score).filter((s) => !mustReduce || s.nv < baseViol);
+    const scored = ok.map(score).filter((s) => (!mustReduce || s.nv < baseViol) && (!extra.noWorse || s.nv <= baseViol));
     const sameSkill = scored.filter((s) => s.c.skillCode === it.skill);
     const poolPick = sameSkill.length ? sameSkill : o.allowSkillFallback ? scored : [];
     poolPick.sort((a, b) => { for (let i = 0; i < a.key.length; i++) if (a.key[i] !== b.key[i]) return a.key[i] - b.key[i]; return a.c.problemId < b.c.problemId ? -1 : 1; });
@@ -108,6 +109,32 @@ export function rebalance(dump0: any, W: Weights, topics: TopicMap, o: Rebalance
   // 1) 강제 교체(보관 문제·게시 버전 없음·중복)
   const unresolvedForced: { setName: string; position: number; problemId: string; reason: Reason }[] = [];
   for (const w of work) for (let idx = 0; idx < w.items.length; idx++) { const r = forcedReason(w.items[idx]); if (!r) continue; if (!replaceOne(w, idx, r, false)) unresolvedForced.push({ setName: w.name, position: w.items[idx].position, problemId: w.items[idx].problemId, reason: r }); }
+  // 1.5) 문학 과다 세트: 문학(literature_fiction) 문항을 비문학으로 교체해 litTarget 까지 줄인다(같은 영역·난이도·형식 칸, 소재 상한을 악화시키지 않는 교체만).
+  //      교체 우선순위: 같은 skill 비문학 재고가 있는 문학 문항 → 같은 칸 재고만 있는 문항 → 재고 없음(쉬운 것부터: 생성 비용이 낮다). 재고가 없으면 NO_REPLACEMENT 로 남겨 생성 필요량이 된다.
+  if (o.litMax !== undefined) {
+    const isLit = (it: SetItem) => topics.get(it.problemId)?.subject === "literature_fiction";
+    const target = o.litTarget ?? o.litMax;
+    for (const w of work) {
+      const litCount = () => rwView(w.items).filter(isLit).length;
+      if (litCount() <= o.litMax || (o.litSets && !o.litSets.has(w.name))) continue;
+      const tried = new Set<SetItem>(); const toRemove = litCount() - target; let removed = 0, pending = 0;
+      while (removed + pending < toRemove) {
+        const lits = rwView(w.items).filter((i) => isLit(i) && !tried.has(i));
+        if (!lits.length) break;
+        const skillLits = countBy(lits, (i) => i.skill);
+        const rank = (it: SetItem) => {
+          const free = pool.filter((c) => !taken.has(c.problemId) && c.satDomain === it.domain && c.difficulty === it.difficulty && c.format === it.format && topics.get(c.problemId) && topics.get(c.problemId)!.subject !== "literature_fiction");
+          const sameSkill = free.some((c) => c.skillCode === it.skill);
+          return [sameSkill ? 0 : free.length ? 1 : it.difficulty === "easy" ? 2 : it.difficulty === "medium" ? 3 : 4, -(skillLits.get(it.skill ?? "") ?? 0), it.position];
+        };
+        lits.sort((a, b) => { const ra = rank(a), rb = rank(b); for (let i = 0; i < ra.length; i++) if (ra[i] !== rb[i]) return ra[i] - rb[i]; return 0; });
+        const it = lits[0]; tried.add(it); const hadFree = rank(it)[0] < 2; const n0 = swaps.length;
+        if (replaceOne(w, w.items.indexOf(it), "lit_excess", false, { nonLit: true, noWorse: true })) removed++;
+        else if (hadFree) swaps.length = n0; // 재고는 있었지만 그룹·소재 제약에 막힘 — 다른 문항을 시도한다
+        else pending++;
+      }
+    }
+  }
   // 2) 소재 상한 수리(위반 수가 줄어드는 교체만; 위반이 가장 많은 세트부터)
   const unresolvedTopic = new Map<string, CapViolation[]>();
   const order = [...work].sort((a, b) => capViolations(rwView(b.items), topics, o.caps).length - capViolations(rwView(a.items), topics, o.caps).length);
@@ -141,8 +168,8 @@ export function rebalance(dump0: any, W: Weights, topics: TopicMap, o: Rebalance
   const poolNew = pool.filter((c) => !taken.has(c.problemId));
   const shortAtRequested = demandVsSupply(poolNew, buildSlots(W, newCount, o.relaxFormat));
   const feas = newCount ? feasibleN(poolNew, W, newCount, o.relaxFormat) : 0;
-  const planN = shortAtRequested.length === 0 ? newCount : feas;
-  const plan = planN > 0 ? planUnique(poolNew, W, planN, keptCov, o.relaxFormat, { maxShared: o.maxShared, groupCap: o.groupCap, keptGroups, topics, topicCaps: o.caps, subjectMix: o.mix }) : null;
+  const planN = shortAtRequested.length === 0 || process.argv.includes("--force-plan") ? newCount : feas; // --force-plan: 재고가 모자라도 요청 수만큼 계획해 failures·litRelaxed 로 부족 칸을 본다(생성 필요량 산정용)
+  const plan = planN > 0 ? planUnique(poolNew, W, planN, keptCov, o.relaxFormat, { maxShared: o.maxShared, groupCap: o.groupCap, keptGroups, topics, topicCaps: o.caps, subjectMix: o.mix, litCap: o.litMax }) : null;
   const newSets: PlanItem[][] = plan?.sets ?? [];
   const keptIds = new Set<string>(used); for (const id of taken) keptIds.add(id);
   // 사본(수리 안 한 세트 포함)이 쓰는 문항은 used 에 이미 있다. 새 세트는 used·taken 어디와도 겹치면 안 된다.
@@ -150,6 +177,8 @@ export function rebalance(dump0: any, W: Weights, topics: TopicMap, o: Rebalance
   // 4) 사본 문항을 현재 게시 버전으로 맞춘다
   const versionBumped: { setName: string; position: number; problemId: string; from: string; to: string }[] = [];
   for (const w of work) for (const it of w.items) { const cv = V.get(it.problemId)?.id; if (cv && cv !== it.versionId) { versionBumped.push({ setName: w.name, position: it.position, problemId: it.problemId, from: it.versionId, to: cv }); it.versionId = cv; } }
+  // 4.5) 바뀐 사본은 모듈 안 순서를 공식 순서로 다시 맞춘다(교체로 skill 이 바뀌어 순서가 깨질 수 있다).
+  for (const w of work) if (swaps.some((s) => s.setId === w.id) || versionBumped.some((b) => b.setName === w.name)) w.items = reorderSetModulesOfficial(w.items);
 
   // 5) 최종 컬렉션 검증·통계
   const finalSets: { name: string; kind: "unchanged" | "copy" | "new"; items: PlanItem[] }[] = [
@@ -188,7 +217,7 @@ export function rebalance(dump0: any, W: Weights, topics: TopicMap, o: Rebalance
   void poolLeftIds;
   const planRwFinal = finalSets.flatMap((s) => s.items).filter((i) => i.section === "rw"); const leftRw = poolLeft.filter((c) => RW_DOMAINS.includes(c.satDomain));
   (sh as any).sensitivity = [0, 0.02, 0.04, 0.06].map((t) => ({ mixTol: t, items: generationNeed(planRwFinal, leftRw, topics, { mix: o.mix, mixTol: t }).totalItemsCellLevel }));
-  return { opts: o, pubSets: pubSets.map((s: any) => s.name), newCount, plannedNew: planN, firstIndex, work, swaps, versionBumped, unresolvedForced, unresolvedTopic: Object.fromEntries(unresolvedTopic), before, after, newSets, newPlanFailures: plan?.failures ?? [], topicRelaxed: plan?.topicRelaxed ?? [], shortfallsAtRequestedNew: shortAtRequested, finalSets, perSet, dupAcross, groupErrors, groupPreExisting, missingCells, remainingViolations, poolLeft: poolLeft.length, poolInitial: pool.length, generation: sh, unclassifiedPool: pool.filter((c) => RW_DOMAINS.includes(c.satDomain) && !topics.has(c.problemId)).length };
+  return { opts: o, pubSets: pubSets.map((s: any) => s.name), newCount, plannedNew: planN, firstIndex, work, swaps, versionBumped, unresolvedForced, unresolvedTopic: Object.fromEntries(unresolvedTopic), before, after, newSets, newPlanFailures: plan?.failures ?? [], topicRelaxed: plan?.topicRelaxed ?? [], litRelaxed: plan?.litRelaxed ?? [], shortfallsAtRequestedNew: shortAtRequested, finalSets, perSet, dupAcross, groupErrors, groupPreExisting, missingCells, remainingViolations, poolLeft: poolLeft.length, poolInitial: pool.length, generation: sh, unclassifiedPool: pool.filter((c) => RW_DOMAINS.includes(c.satDomain) && !topics.has(c.problemId)).length };
 }
 
 /** 목표 과목 구성을 만족하려면 (skill x 난이도) 칸마다 과목별로 몇 문항을 더 만들어야 하는지.
@@ -220,7 +249,7 @@ function writeOutputs(r: ReturnType<typeof rebalance>, out: string) {
   w("new-sets.json", r.newSets); w("new-sets-meta.json", { names: r.newSets.map((_, i) => `SAT Practice Test ${r.firstIndex + i}`), firstIndex: r.firstIndex });
   w("shortfall.json", r.generation);
   w("plan-report.json", { opts: { ...r.opts, groupCap: Number.isFinite(r.opts.groupCap) ? r.opts.groupCap : null }, pubSets: r.pubSets, newRequested: r.newCount, newPlanned: r.plannedNew, swaps: r.swaps.length, byReason: Object.fromEntries([...countBy(r.swaps, (s) => s.reason)]), skillFallbacks: r.swaps.filter((s) => s.status === "skill_fallback").length, noReplacement: r.swaps.filter((s) => s.status === "NO_REPLACEMENT"),
-    versionBumped: r.versionBumped.length, duplicatesAcrossAllSets: r.dupAcross.length, groupErrors: r.groupErrors, groupPreExisting: r.groupPreExisting, missingCells: r.missingCells, newPlanFailures: r.newPlanFailures, topicRelaxedInNewSets: r.topicRelaxed, shortfallsAtRequestedNew: r.shortfallsAtRequestedNew, remainingViolations: r.remainingViolations, perSet: r.perSet, poolInitial: r.poolInitial, poolLeft: r.poolLeft, unclassifiedPool: r.unclassifiedPool });
+    versionBumped: r.versionBumped.length, duplicatesAcrossAllSets: r.dupAcross.length, groupErrors: r.groupErrors, groupPreExisting: r.groupPreExisting, missingCells: r.missingCells, newPlanFailures: r.newPlanFailures, topicRelaxedInNewSets: r.topicRelaxed, litRelaxedInNewSets: r.litRelaxed, shortfallsAtRequestedNew: r.shortfallsAtRequestedNew, remainingViolations: r.remainingViolations, perSet: r.perSet, poolInitial: r.poolInitial, poolLeft: r.poolLeft, unclassifiedPool: r.unclassifiedPool });
 }
 
 function reportMd(r: ReturnType<typeof rebalance>, meta: { dumpAt: string; ledger?: string }) {
@@ -260,8 +289,13 @@ async function main() {
   _topics = arg("--topics") ? asTopicMap(JSON.parse(readFileSync(arg("--topics")!, "utf-8"))) : new Map();
   const o: RebalanceOpts = { ...DEFAULT_OPTS, caps: { perModule: Number(arg("--max-per-module") ?? DEFAULT_TOPIC_CAPS.perModule), perExam: Number(arg("--max-per-exam") ?? DEFAULT_TOPIC_CAPS.perExam), familyPerExam: Number(arg("--max-family-per-exam") ?? DEFAULT_TOPIC_CAPS.familyPerExam) },
     maxShared: Number(arg("--max-shared-groups") ?? 15), groupCap: arg("--group-cap") ? Number(arg("--group-cap")) : Infinity, total: Number(arg("--total") ?? 13), firstIndex: arg("--first-index") ? Number(arg("--first-index")) : undefined, allowSkillFallback: !process.argv.includes("--strict-skill"), mixTol: Number(arg("--mix-tol") ?? 0.02), relaxFormat: process.argv.includes("--relax-format"), excludeProblems: arg("--exclude-problems") ? new Set<string>(JSON.parse(readFileSync(arg("--exclude-problems")!, "utf-8"))) : undefined };
+  if (arg("--lit-max")) { o.litMax = Number(arg("--lit-max")); o.litTarget = Number(arg("--lit-target") ?? o.litMax); }
+  if (arg("--lit-sets")) o.litSets = new Set(arg("--lit-sets")!.split(","));
+  if (arg("--lit-pct")) { const L = Number(arg("--lit-pct")); const rest = 100 - TARGET_MIX.literature_fiction; o.mix = Object.fromEntries(Object.entries(TARGET_MIX).map(([k, v]) => [k, k === "literature_fiction" ? L : (v * (100 - L)) / rest])); }
+  // 초안 세트를 "해제"한 것으로 보고 계획한다(문항이 재고로 돌아감). 예: --release-sets "SAT Practice Test 27,SAT Practice Test 28" — 원격 적용은 해당 초안을 먼저 삭제하는 SQL 이 맡는다.
+  if (arg("--release-sets")) { const names = new Set(arg("--release-sets")!.split(",")); for (const st of dump.sets) if (names.has(st.name) && st.status === "draft") st.archived_at = st.archived_at ?? "released"; }
   const r = rebalance(dump, W, _topics, o); const out = arg("--out") ?? "data/mock-exam-generation/rebalance-20261008"; writeOutputs(r, out);
   const rep = arg("--report"); if (rep) { mkdirSync(path.dirname(rep), { recursive: true }); writeFileSync(rep, reportMd(r, { dumpAt: arg("--dump-label") ?? arg("--dump")!, ledger: arg("--ledger-note") })); }
-  console.log(JSON.stringify({ swaps: r.swaps.length, byReason: Object.fromEntries(countBy(r.swaps, (s) => s.reason)), skillFallbacks: r.swaps.filter((s) => s.status === "skill_fallback").length, noReplacement: r.swaps.filter((s) => s.status === "NO_REPLACEMENT").length, newPlanned: r.plannedNew, newRequested: r.newCount, dupAcross: r.dupAcross.length, groupErrors: r.groupErrors.length, missingCells: r.missingCells.length, remainingViolationSets: r.remainingViolations.length, genItemsCellLevel: r.generation.totalItemsCellLevel, out }, null, 1));
+  console.log(JSON.stringify({ swaps: r.swaps.length, byReason: Object.fromEntries(countBy(r.swaps, (s) => s.reason)), skillFallbacks: r.swaps.filter((s) => s.status === "skill_fallback").length, noReplacement: r.swaps.filter((s) => s.status === "NO_REPLACEMENT").length, newPlanned: r.plannedNew, newRequested: r.newCount, litRelaxed: r.litRelaxed.length, dupAcross: r.dupAcross.length, groupErrors: r.groupErrors.length, missingCells: r.missingCells.length, remainingViolationSets: r.remainingViolations.length, genItemsCellLevel: r.generation.totalItemsCellLevel, out }, null, 1));
 }
 if (process.argv[1]?.endsWith("rebalance-sets.ts")) main().catch((e) => { console.error(e); process.exit(1); });

@@ -14,6 +14,7 @@ const CALC = [
   s("ap_frq_a", "frq", "Section II, Part A: Free Response (calculator)", 30, 2, "allowed"),
   s("ap_frq_b", "frq", "Section II, Part B: Free Response (no calculator)", 60, 4, "not_allowed"),
 ];
+const PHYS_42 = [s("ap_mc", "mc", "Section I: Multiple Choice", 85, 42, "allowed", 4), s("ap_frq", "frq", "Section II: Free Response", 95, 4, "allowed")];
 export const AP_LAYOUTS: Record<string, ApSection[]> = {
   ap_calculus_ab: CALC,
   ap_calculus_bc: CALC,
@@ -33,6 +34,30 @@ export const AP_LAYOUTS: Record<string, ApSection[]> = {
   ap_world_history: [s("ap_mc", "mc", "Section I, Part A: Multiple Choice", 55, 55, "na", 4), s("ap_saq", "frq", "Section I, Part B: Short Answer", 40, 3, "na"), s("ap_frq", "frq", "Section II: Document-Based Question and Long Essay", 100, 2, "na")],
   ap_us_history: [s("ap_mc", "mc", "Section I, Part A: Multiple Choice", 55, 55, "na", 4), s("ap_saq", "frq", "Section I, Part B: Short Answer", 40, 3, "na"), s("ap_frq", "frq", "Section II: Document-Based Question and Long Essay", 100, 2, "na")],
   ap_psychology: [s("ap_mc", "mc", "Section I: Multiple Choice", 90, 75, "na", 4), s("ap_frq", "frq", "Section II: Free Response (Article Analysis + Evidence-Based)", 70, 2, "na")],
+  // ── 2026-10-20 추가 10과목(출처·검증 수준: data/ap/curriculum-2027/<code>.json designNotes, docs/ap/new-subjects-plan-2026-10-20.md) ──
+  // Physics 2 · Physics C: E&M — CED(Fall 2026 판) Exam Overview: MC 42 / 85분, FRQ 4(MR 10·TBR 12·EDA 10·QQT 8점) / 95분, 계산기 두 섹션 허용. Physics C: Mechanics 는 CED 전문을 읽지 못해 동일 형식을 인용(VERIFY).
+  ap_physics_2: PHYS_42,
+  ap_physics_c_mechanics: PHYS_42,
+  ap_physics_c_electricity_and_magnetism: PHYS_42,
+  // Environmental Science — AP Central 시험 페이지: 완전 디지털, MC 80 / 90분, FRQ 3 / 70분, 계산기 허용. 선택지 수 4는 UNVERIFIED.
+  ap_environmental_science: [s("ap_mc", "mc", "Section I: Multiple Choice", 90, 80, "allowed", 4), s("ap_frq", "frq", "Section II: Free Response", 70, 3, "allowed")],
+  // US Gov — CED(2026): MC 55 / 80분, FRQ 4 (개념 적용 3점·정량 분석 4점·SCOTUS 비교 4점·논증 에세이 6점) / 100분. 계산기 언급 없음.
+  ap_us_government_and_politics: [s("ap_mc", "mc", "Section I: Multiple Choice", 80, 55, "na", 4), s("ap_frq", "frq", "Section II: Free Response", 100, 4, "na")],
+  // Comparative Gov — CED(2026): MC 55 / 60분, FRQ 4 (개념 4점·정량 5점·비교 5점·논증 5점) / 90분. 계산기 언급 없음.
+  ap_comparative_government_and_politics: [s("ap_mc", "mc", "Section I: Multiple Choice", 60, 55, "na", 4), s("ap_frq", "frq", "Section II: Free Response", 90, 4, "na")],
+  // Human Geography — CED(posted 2020) + AP Central 시험 페이지: 완전 디지털, MC 60 / 60분, FRQ 3(각 7점) / 75분. 선택지 수 5는 게시된 CED 샘플 근거(2027 확인 필요).
+  ap_human_geography: [s("ap_mc", "mc", "Section I: Multiple Choice", 60, 60, "na", 5), s("ap_frq", "frq", "Section II: Free Response", 75, 3, "na")],
+  // CS Principles — CED(2023) Exam Overview: MC 70 / 120분(4지선다, 다중 선택 8문항 포함), 작성형 2문항(WR1·2a·2b·2c) / 60분. Create 수행평가(9시간+, 30%)는 시험 당일 레이아웃 밖이다.
+  ap_computer_science_principles: [s("ap_mc", "mc", "Section I: Multiple Choice", 120, 70, "na", 4), s("ap_frq", "frq", "Section II: Written Response (about your Create performance task)", 60, 2, "na")],
+  // European History — CED(2026): MC 55 / 55분, SAQ 3 / 40분, DBQ 60분(읽기 15 포함) + LEQ 40분 = 100분. 계산기 없음. 완전 디지털.
+  ap_european_history: [s("ap_mc", "mc", "Section I, Part A: Multiple Choice", 55, 55, "na", 4), s("ap_saq", "frq", "Section I, Part B: Short Answer", 40, 3, "na"), s("ap_frq", "frq", "Section II: Document-Based Question and Long Essay", 100, 2, "na")],
+  // Precalculus — CED(effective Fall 2026): MC 42 (파트 A 29·65분 계산기 불가 / 파트 B 13·40분 그래핑 필수), FRQ 4 (파트 A 2·35분 계산기 / 파트 B 2·35분 불가, 각 6점).
+  ap_precalculus: [
+    s("ap_mc_a", "mc", "Section I, Part A: Multiple Choice (no calculator)", 65, 29, "not_allowed", 4),
+    s("ap_mc_b", "mc", "Section I, Part B: Multiple Choice (graphing calculator required)", 40, 13, "required", 4),
+    s("ap_frq_a", "frq", "Section II, Part A: Free Response (graphing calculator required)", 35, 2, "required"),
+    s("ap_frq_b", "frq", "Section II, Part B: Free Response (no calculator)", 35, 2, "not_allowed"),
+  ],
 };
 
 export function apSectionLayout(subject: string): ApSection[] {
@@ -52,6 +77,58 @@ export const AP_SUBJECT_NAME: Record<string, string> = {
   ap_calculus_ab: "AP Calculus AB", ap_calculus_bc: "AP Calculus BC", ap_biology: "AP Biology", ap_microeconomics: "AP Microeconomics",
   ap_macroeconomics: "AP Macroeconomics", ap_statistics: "AP Statistics", ap_chemistry: "AP Chemistry", ap_physics_1: "AP Physics 1",
   ap_computer_science_a: "AP Computer Science A", ap_english_language: "AP English Language", ap_english_literature: "AP English Literature", ap_psychology: "AP Psychology", ap_us_history: "AP U.S. History", ap_world_history: "AP World History: Modern",
+  ap_physics_2: "AP Physics 2", ap_physics_c_mechanics: "AP Physics C: Mechanics", ap_physics_c_electricity_and_magnetism: "AP Physics C: Electricity and Magnetism",
+  ap_environmental_science: "AP Environmental Science", ap_us_government_and_politics: "AP United States Government and Politics",
+  ap_comparative_government_and_politics: "AP Comparative Government and Politics", ap_human_geography: "AP Human Geography",
+  ap_computer_science_principles: "AP Computer Science Principles", ap_european_history: "AP European History", ap_precalculus: "AP Precalculus",
+};
+
+/** 2026-10-20 추가 10과목 중 아직 공개 과목 페이지·/practice-tests 목록에 노출하지 않는 과목(세트 공개 전). 세트를 공개할 때 총괄이 이 목록에서 뺀다. */
+export const AP_PENDING_PUBLIC_SUBJECTS: readonly string[] = [
+  "ap_physics_2", "ap_physics_c_mechanics", "ap_physics_c_electricity_and_magnetism", "ap_environmental_science", "ap_us_government_and_politics",
+  "ap_comparative_government_and_politics", "ap_human_geography", "ap_computer_science_principles", "ap_european_history", "ap_precalculus",
+];
+export const isApPublicSubject = (code: string) => !AP_PENDING_PUBLIC_SUBJECTS.includes(code);
+
+/** 신규 10과목 FRQ(서술형) 유형 — 공식 CED 의 문항 유형 이름·배점. points=null 은 이 조사에서 공식 값을 확인하지 못한 항목이다(지어내지 않는다). */
+export type ApFrqType = { key: string; label: string; points: number | null };
+const PHYS_FRQ = (mr: number | null, tbr: number | null, eda: number | null, qqt: number | null): ApFrqType[] => [
+  { key: "mr", label: "Mathematical Routines", points: mr }, { key: "tbr", label: "Translation Between Representations", points: tbr },
+  { key: "eda", label: "Experimental Design and Analysis", points: eda }, { key: "qqt", label: "Qualitative/Quantitative Translation", points: qqt },
+];
+export const AP_NEW_SUBJECT_FRQ_TYPES: Record<string, ApFrqType[]> = {
+  ap_physics_2: PHYS_FRQ(10, 12, 10, 8),
+  ap_physics_c_electricity_and_magnetism: PHYS_FRQ(10, 12, 10, 8),
+  ap_physics_c_mechanics: PHYS_FRQ(null, null, null, null),
+  ap_environmental_science: [
+    { key: "design", label: "Design an investigation", points: null }, { key: "data", label: "Analyze and interpret quantitative data", points: null },
+    { key: "calc", label: "Analyze an environmental problem using calculations", points: null },
+  ],
+  ap_us_government_and_politics: [
+    { key: "concept", label: "Concept Application", points: 3 }, { key: "quant", label: "Quantitative Analysis", points: 4 },
+    { key: "scotus", label: "SCOTUS Comparison", points: 4 }, { key: "argument", label: "Argument Essay", points: 6 },
+  ],
+  ap_comparative_government_and_politics: [
+    { key: "conceptual", label: "Conceptual Analysis", points: 4 }, { key: "quant", label: "Quantitative Analysis", points: 5 },
+    { key: "comparative", label: "Comparative Analysis", points: 5 }, { key: "argument", label: "Argument Essay", points: 5 },
+  ],
+  ap_human_geography: [
+    { key: "frq1", label: "Free response without stimulus", points: 7 }, { key: "frq2", label: "Free response with one stimulus", points: 7 },
+    { key: "frq3", label: "Free response with two stimuli", points: 7 },
+  ],
+  ap_computer_science_principles: [
+    { key: "wr1", label: "Written Response 1", points: null }, { key: "wr2a", label: "Written Response 2(a)", points: null },
+    { key: "wr2b", label: "Written Response 2(b)", points: null }, { key: "wr2c", label: "Written Response 2(c)", points: null },
+  ],
+  ap_european_history: [
+    { key: "saq_secondary", label: "Short answer: secondary source", points: 3 }, { key: "saq_primary", label: "Short answer: primary source", points: 3 },
+    { key: "saq_nontext", label: "Short answer: primary or secondary non-text source", points: 3 },
+    { key: "dbq", label: "Document-Based Question", points: 7 }, { key: "leq", label: "Long Essay Question", points: 6 },
+  ],
+  ap_precalculus: [
+    { key: "frq1", label: "Function Concepts", points: 6 }, { key: "frq2", label: "Modeling a Non-Periodic Context", points: 6 },
+    { key: "frq3", label: "Modeling a Periodic Context", points: 6 }, { key: "frq4", label: "Symbolic Manipulations", points: 6 },
+  ],
 };
 
 /** 라벨이 요구하는 섹션(조립이 채워야 할 섹션). */

@@ -1,0 +1,61 @@
+{
+ "generatedAt": "2026-10-19",
+ "fixes": [
+  {
+   "candidateKey": "ap_english_literature-fa3-k0",
+   "run": "englit-p1-b",
+   "subject": "ap_english_literature",
+   "template": "q3",
+   "inAssignedSet": true,
+   "replacements": [
+    {
+     "from": "Sample essay (low; scored 3/6: thesis 1, evidence 2, sophistication 0)",
+     "to": "Sample essay (low; scored 2/6: thesis 0, evidence 2, sophistication 0)"
+    }
+   ],
+   "note": "heading-only correction; also update verification.sample_totals if present and re-check band order"
+  },
+  {
+   "candidateKey": "ap_us_history-leq_1-k0",
+   "run": "ush-p1-b",
+   "subject": "ap_us_history",
+   "template": "leq",
+   "inAssignedSet": true,
+   "replacements": [
+    {
+     "from": "Sample response, low score (3/6; Thesis/claim 0, Contextualization 0, Evidence 2, Analysis and reasoning 1):",
+     "to": "Sample response, low score (2/6; Thesis/claim 0, Contextualization 0, Evidence 1, Analysis and reasoning 1):"
+    }
+   ],
+   "note": "heading-only correction; also update verification.sample_totals if present and re-check band order"
+  },
+  {
+   "candidateKey": "ap_us_history-leq_3-k0",
+   "run": "ush-p1-b",
+   "subject": "ap_us_history",
+   "template": "leq",
+   "inAssignedSet": true,
+   "replacements": [
+    {
+     "from": "Sample response, middle score (5/6; Thesis/claim 1, Contextualization 1, Evidence 2, Analysis and reasoning 1):",
+     "to": "Sample response, middle score (3/6; Thesis/claim 1, Contextualization 0, Evidence 1, Analysis and reasoning 1):"
+    }
+   ],
+   "note": "heading-only correction; also update verification.sample_totals if present and re-check band order"
+  },
+  {
+   "candidateKey": "ap_world_history-wh2_leq-k0",
+   "run": "wh-f2",
+   "subject": "ap_world_history",
+   "template": "leq",
+   "inAssignedSet": true,
+   "replacements": [
+    {
+     "from": "Sample response, middle score (4/6; Thesis/claim 1, Contextualization 0, Evidence 2, Analysis and reasoning 1):",
+     "to": "Sample response, middle score (3/6; Thesis/claim 1, Contextualization 0, Evidence 1, Analysis and reasoning 1):"
+    }
+   ],
+   "note": "heading-only correction; also update verification.sample_totals if present and re-check band order"
+  }
+ ]
+}
