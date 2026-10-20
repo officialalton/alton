@@ -1,0 +1,1756 @@
+{
+  "schemaVersion": 1,
+  "subject": {
+    "apCode": "ap_physics_c_electricity_and_magnetism",
+    "name": "AP Physics C: Electricity and Magnetism",
+    "family": "physics_c_electricity_and_magnetism",
+    "edition": "ced-2027",
+    "cedVersion": "AP Physics C: Electricity and Magnetism CED (Course Framework V.1, (c)2026; 2027 exam: 42 MC/85 min, 4 FRQ/95 min)",
+    "examYear": 2027,
+    "sourceUrl": "https://apcentral.collegeboard.org/media/pdf/ap-physics-c-electricity-and-magnetism-course-and-exam-description.pdf",
+    "officialTopicCodes": true,
+    "designNotes": "6 units numbered 8-13 in the CED (continuing the AP Physics C: Mechanics numbering 1-7). Unit weights, topic codes/titles, class periods, skill weights and exam format are from the posted CED (read 2026-10-20). Exam: hybrid digital; Section I 42 MC, 85 min, 50%; Section II 4 FRQ, 95 min, 50% (Mathematical Routines 10 pts, Translation Between Representations 12 pts, Experimental Design and Analysis 10 pts, Qualitative/Quantitative Translation 8 pts; 40 pts total). Four-function, scientific or graphing calculator allowed on both sections. Calculus-based; Practice 2 MC weighting (2.A 25-30%) is higher than the algebra-based courses. Per-topic and per-sub-keyword skills are an ALTON editorial mapping (one skill per sub-keyword chosen by kind and content), not the CED's per-topic suggested skills. Sub-keywords, kinds, requires and estLessons are ALTON editorial designs, not CED content. Topic titles are the CED's where read from the CED course-at-a-glance; where the extracted text was truncated they are close paraphrases."
+  },
+  "skills": [
+    {
+      "code": "1.A",
+      "category": "Creating Representations",
+      "label": "Create diagrams, tables, charts, or schematics to represent physical situations."
+    },
+    {
+      "code": "1.B",
+      "category": "Creating Representations",
+      "label": "Create quantitative graphs with appropriate scales and units, including plotting data."
+    },
+    {
+      "code": "1.C",
+      "category": "Creating Representations",
+      "label": "Create qualitative sketches of graphs that represent features of a model or the behavior of a physical system."
+    },
+    {
+      "code": "2.A",
+      "category": "Mathematical Routines",
+      "label": "Derive a symbolic expression from known quantities by selecting and following a logical mathematical pathway."
+    },
+    {
+      "code": "2.B",
+      "category": "Mathematical Routines",
+      "label": "Calculate or estimate an unknown quantity with units from known quantities, by selecting and following a logical computational pathway."
+    },
+    {
+      "code": "2.C",
+      "category": "Mathematical Routines",
+      "label": "Compare physical quantities between two or more scenarios or at different times and locations in a single scenario."
+    },
+    {
+      "code": "2.D",
+      "category": "Mathematical Routines",
+      "label": "Predict new values or factors of change of physical quantities using functional dependence between variables."
+    },
+    {
+      "code": "3.A",
+      "category": "Scientific Questioning and Argumentation",
+      "label": "Create experimental procedures that are appropriate for a given scientific question."
+    },
+    {
+      "code": "3.B",
+      "category": "Scientific Questioning and Argumentation",
+      "label": "Apply an appropriate law, definition, theoretical relationship, or model to make a claim."
+    },
+    {
+      "code": "3.C",
+      "category": "Scientific Questioning and Argumentation",
+      "label": "Justify or support a claim using evidence from experimental data, physical representations, or physical principles or laws."
+    }
+  ],
+  "weights": [
+    {
+      "axis": "unit",
+      "code": "8",
+      "section": "mc",
+      "min": 15,
+      "max": 25,
+      "source": "AP Physics C: Electricity and Magnetism CED (Course Framework V.1, (c)2026), Exam Weighting for the Multiple-Choice Section"
+    },
+    {
+      "axis": "unit",
+      "code": "9",
+      "section": "mc",
+      "min": 10,
+      "max": 20,
+      "source": "AP Physics C: Electricity and Magnetism CED (Course Framework V.1, (c)2026), Exam Weighting for the Multiple-Choice Section"
+    },
+    {
+      "axis": "unit",
+      "code": "10",
+      "section": "mc",
+      "min": 10,
+      "max": 15,
+      "source": "AP Physics C: Electricity and Magnetism CED (Course Framework V.1, (c)2026), Exam Weighting for the Multiple-Choice Section"
+    },
+    {
+      "axis": "unit",
+      "code": "11",
+      "section": "mc",
+      "min": 15,
+      "max": 25,
+      "source": "AP Physics C: Electricity and Magnetism CED (Course Framework V.1, (c)2026), Exam Weighting for the Multiple-Choice Section"
+    },
+    {
+      "axis": "unit",
+      "code": "12",
+      "section": "mc",
+      "min": 10,
+      "max": 20,
+      "source": "AP Physics C: Electricity and Magnetism CED (Course Framework V.1, (c)2026), Exam Weighting for the Multiple-Choice Section"
+    },
+    {
+      "axis": "unit",
+      "code": "13",
+      "section": "mc",
+      "min": 10,
+      "max": 20,
+      "source": "AP Physics C: Electricity and Magnetism CED (Course Framework V.1, (c)2026), Exam Weighting for the Multiple-Choice Section"
+    },
+    {
+      "axis": "skill",
+      "code": "2.A",
+      "section": "mc",
+      "min": 25,
+      "max": 30,
+      "source": "AP Physics C: Electricity and Magnetism CED, Exam Information: Exam Weighting by Science Practice"
+    },
+    {
+      "axis": "skill",
+      "code": "2.B",
+      "section": "mc",
+      "min": 20,
+      "max": 25,
+      "source": "AP Physics C: Electricity and Magnetism CED, Exam Information: Exam Weighting by Science Practice"
+    },
+    {
+      "axis": "skill",
+      "code": "2.C",
+      "section": "mc",
+      "min": 10,
+      "max": 15,
+      "source": "AP Physics C: Electricity and Magnetism CED, Exam Information: Exam Weighting by Science Practice"
+    },
+    {
+      "axis": "skill",
+      "code": "2.D",
+      "section": "mc",
+      "min": 10,
+      "max": 15,
+      "source": "AP Physics C: Electricity and Magnetism CED, Exam Information: Exam Weighting by Science Practice"
+    },
+    {
+      "axis": "skill",
+      "code": "3.B",
+      "section": "mc",
+      "min": 15,
+      "max": 25,
+      "source": "AP Physics C: Electricity and Magnetism CED, Exam Information: Exam Weighting by Science Practice"
+    },
+    {
+      "axis": "skill",
+      "code": "3.C",
+      "section": "mc",
+      "min": 5,
+      "max": 10,
+      "source": "AP Physics C: Electricity and Magnetism CED, Exam Information: Exam Weighting by Science Practice"
+    },
+    {
+      "axis": "skill",
+      "code": "Creating Representations",
+      "section": "frq",
+      "min": 20,
+      "max": 35,
+      "source": "AP Physics C: Electricity and Magnetism CED, Exam Information: Exam Weighting by Science Practice"
+    },
+    {
+      "axis": "skill",
+      "code": "Mathematical Routines",
+      "section": "frq",
+      "min": 40,
+      "max": 45,
+      "source": "AP Physics C: Electricity and Magnetism CED, Exam Information: Exam Weighting by Science Practice"
+    },
+    {
+      "axis": "skill",
+      "code": "Scientific Questioning and Argumentation",
+      "section": "frq",
+      "min": 30,
+      "max": 35,
+      "source": "AP Physics C: Electricity and Magnetism CED, Exam Information: Exam Weighting by Science Practice"
+    }
+  ],
+  "units": [
+    {
+      "code": "8",
+      "title": "Electric Charges, Fields, and Gauss's Law",
+      "officialClassPeriods": "~12–24",
+      "topics": [
+        {
+          "code": "8.1",
+          "title": "Electric Charge and Electric Force",
+          "scope": "both",
+          "skills": [
+            "2.A",
+            "2.B",
+            "2.D"
+          ],
+          "requires": [],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "8.1#1",
+              "label": "Coulomb's law as a vector sum",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.1#2",
+              "label": "Superposition of forces from several charges",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "8.1#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.1#3",
+              "label": "Inverse-square scaling when separation changes",
+              "kind": "skill",
+              "skills": [
+                "2.D"
+              ],
+              "requires": [
+                "8.1#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.2",
+          "title": "Conservation of Electric Charge and the Process of Charging",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.C",
+            "3.C"
+          ],
+          "requires": [
+            "8.1"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "8.2#1",
+              "label": "Charging by induction and conduction",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.2#2",
+              "label": "Charge redistribution between touching conductors",
+              "kind": "skill",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [
+                "8.2#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.2#3",
+              "label": "Conservation of net charge in a closed system",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "8.2#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.3",
+          "title": "Electric Fields",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "1.C",
+            "2.B"
+          ],
+          "requires": [
+            "8.2"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "8.3#1",
+              "label": "Field of a point charge and superposition",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.3#2",
+              "label": "Sketching field lines for simple configurations",
+              "kind": "representation",
+              "skills": [
+                "1.C"
+              ],
+              "requires": [
+                "8.3#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.3#3",
+              "label": "Force on a charge from a given field",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "8.3#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.4",
+          "title": "Electric Fields of Charge Distributions",
+          "scope": "both",
+          "skills": [
+            "2.A",
+            "3.B"
+          ],
+          "requires": [
+            "8.3"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "8.4#1",
+              "label": "Integrating dq over a line or ring",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.4#2",
+              "label": "Field along the axis of a charged ring",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "8.4#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.4#3",
+              "label": "Symmetry arguments to cancel components",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "8.4#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.5",
+          "title": "Electric Flux",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.B",
+            "1.A"
+          ],
+          "requires": [
+            "8.4"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "8.5#1",
+              "label": "Flux as the surface integral of E·dA",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.5#2",
+              "label": "Flux through a surface at an angle to the field",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "8.5#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.5#3",
+              "label": "Net flux from field line counting",
+              "kind": "representation",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [
+                "8.5#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.6",
+          "title": "Gauss's Law",
+          "scope": "both",
+          "skills": [
+            "2.A",
+            "3.C"
+          ],
+          "requires": [
+            "8.5"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "8.6#1",
+              "label": "Choosing a Gaussian surface from symmetry",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.6#2",
+              "label": "Field of spherical, cylindrical and planar charge",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "8.6#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.6#3",
+              "label": "Enclosed charge versus charge outside the surface",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "8.6#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "9",
+      "title": "Electric Potential",
+      "officialClassPeriods": "~10–20",
+      "topics": [
+        {
+          "code": "9.1",
+          "title": "Electric Potential Energy",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.B",
+            "1.C"
+          ],
+          "requires": [],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "9.1#1",
+              "label": "Potential energy of a system of point charges",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.1#2",
+              "label": "Work needed to assemble charges",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "9.1#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.1#3",
+              "label": "Potential energy graphs versus separation",
+              "kind": "representation",
+              "skills": [
+                "1.C"
+              ],
+              "requires": [
+                "9.1#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "9.2",
+          "title": "Electric Potential",
+          "scope": "both",
+          "skills": [
+            "2.A",
+            "1.A"
+          ],
+          "requires": [
+            "9.1"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "9.2#1",
+              "label": "Potential from a point charge and by integration",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.2#2",
+              "label": "Relating field and potential, E = -dV/dx",
+              "kind": "concept",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "9.2#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.2#3",
+              "label": "Equipotential surfaces",
+              "kind": "representation",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [
+                "9.2#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "9.3",
+          "title": "Conservation of Electric Energy",
+          "scope": "both",
+          "skills": [
+            "2.A",
+            "2.B",
+            "3.B"
+          ],
+          "requires": [
+            "9.2"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "9.3#1",
+              "label": "Energy conservation for a charge moving between potentials",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.3#2",
+              "label": "Escape and closest-approach speeds",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "9.3#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.3#3",
+              "label": "Kinetic and potential energy exchange",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "9.3#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "10",
+      "title": "Conductors and Capacitors",
+      "officialClassPeriods": "~8–16",
+      "topics": [
+        {
+          "code": "10.1",
+          "title": "Electrostatics with Conductors",
+          "scope": "both",
+          "skills": [
+            "3.B"
+          ],
+          "requires": [],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "10.1#1",
+              "label": "Field is zero inside a conductor in equilibrium",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "10.1#2",
+              "label": "Charge resides on the surface",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "10.1#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "10.1#3",
+              "label": "Induced charge on a conducting shell",
+              "kind": "skill",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "10.1#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "10.2",
+          "title": "Redistribution of Charge between Conductors",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.B",
+            "2.C"
+          ],
+          "requires": [
+            "10.1"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "10.2#1",
+              "label": "Equal potential after connecting conductors",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "10.2#2",
+              "label": "Final charges on connected spheres",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "10.2#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "10.2#3",
+              "label": "Charge sharing and conservation",
+              "kind": "skill",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [
+                "10.2#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "10.3",
+          "title": "Capacitors",
+          "scope": "both",
+          "skills": [
+            "2.A",
+            "2.B",
+            "3.B"
+          ],
+          "requires": [
+            "10.2"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "10.3#1",
+              "label": "Capacitance from geometry by integrating the field",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "10.3#2",
+              "label": "Capacitors in series and parallel",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "10.3#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "10.3#3",
+              "label": "Energy stored in the electric field",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "10.3#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "10.4",
+          "title": "Dielectrics",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.D",
+            "2.C"
+          ],
+          "requires": [
+            "10.3"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "10.4#1",
+              "label": "Dielectric constant and induced polarization",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "10.4#2",
+              "label": "Effect of a dielectric at fixed charge or fixed voltage",
+              "kind": "skill",
+              "skills": [
+                "2.D"
+              ],
+              "requires": [
+                "10.4#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "10.4#3",
+              "label": "Partially filled capacitors",
+              "kind": "skill",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [
+                "10.4#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "11",
+      "title": "Electric Circuits",
+      "officialClassPeriods": "~12–24",
+      "topics": [
+        {
+          "code": "11.1",
+          "title": "Electric Current",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "1.B"
+          ],
+          "requires": [],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "11.1#1",
+              "label": "Current as charge flow and current density",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.1#2",
+              "label": "Current from a charge-versus-time graph",
+              "kind": "representation",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "11.1#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.1#3",
+              "label": "Charge carriers and drift speed",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "11.1#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "11.2",
+          "title": "Simple Circuits",
+          "scope": "both",
+          "skills": [
+            "3.A",
+            "3.B",
+            "1.A"
+          ],
+          "requires": [
+            "11.1"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "11.2#1",
+              "label": "Meters in a circuit and their ideal behavior",
+              "kind": "skill",
+              "skills": [
+                "3.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.2#2",
+              "label": "Series and parallel current and voltage rules",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "11.2#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.2#3",
+              "label": "Circuit diagrams from verbal descriptions",
+              "kind": "representation",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [
+                "11.2#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "11.3",
+          "title": "Resistance, Resistivity, and Ohm's Law",
+          "scope": "both",
+          "skills": [
+            "2.A",
+            "1.B"
+          ],
+          "requires": [
+            "11.2"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "11.3#1",
+              "label": "Resistance from resistivity and geometry",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.3#2",
+              "label": "Non-uniform conductors",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "11.3#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.3#3",
+              "label": "Interpreting I-V characteristics",
+              "kind": "representation",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "11.3#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "11.4",
+          "title": "Electric Power",
+          "scope": "both",
+          "skills": [
+            "2.A",
+            "2.B",
+            "3.B"
+          ],
+          "requires": [
+            "11.3"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "11.4#1",
+              "label": "Power in resistors and sources",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.4#2",
+              "label": "Energy dissipated over time",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "11.4#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.4#3",
+              "label": "Internal resistance of a battery",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "11.4#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "11.5",
+          "title": "Compound Direct Current Circuits",
+          "scope": "both",
+          "skills": [
+            "2.B",
+            "2.C"
+          ],
+          "requires": [
+            "11.4"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "11.5#1",
+              "label": "Reducing resistor networks",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.5#2",
+              "label": "Changes to brightness when a switch closes",
+              "kind": "skill",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [
+                "11.5#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.5#3",
+              "label": "Equivalent resistance of symmetric networks",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "11.5#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "11.6",
+          "title": "Kirchhoff's Loop Rule",
+          "scope": "both",
+          "skills": [
+            "2.A",
+            "3.B",
+            "3.C"
+          ],
+          "requires": [
+            "11.5"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "11.6#1",
+              "label": "Setting up loop equations with sign conventions",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.6#2",
+              "label": "Potential differences around a closed path",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "11.6#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.6#3",
+              "label": "Choosing loop direction consistently",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "11.6#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "11.7",
+          "title": "Kirchhoff's Junction Rule",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.B",
+            "3.C"
+          ],
+          "requires": [
+            "11.6"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "11.7#1",
+              "label": "Current conservation at nodes",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.7#2",
+              "label": "Solving multi-loop circuits for branch currents",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "11.7#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.7#3",
+              "label": "Sign of an unknown current",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "11.7#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "11.8",
+          "title": "Resistor-Capacitor (RC) Circuits",
+          "scope": "both",
+          "skills": [
+            "2.A",
+            "1.C",
+            "2.D"
+          ],
+          "requires": [
+            "11.7"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "11.8#1",
+              "label": "Differential equation for charging an RC circuit",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.8#2",
+              "label": "Exponential charge and current versus time",
+              "kind": "representation",
+              "skills": [
+                "1.C"
+              ],
+              "requires": [
+                "11.8#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.8#3",
+              "label": "Time constant and half-time",
+              "kind": "skill",
+              "skills": [
+                "2.D"
+              ],
+              "requires": [
+                "11.8#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "12",
+      "title": "Magnetic Fields and Electromagnetism",
+      "officialClassPeriods": "~10–20",
+      "topics": [
+        {
+          "code": "12.1",
+          "title": "Magnetic Fields",
+          "scope": "both",
+          "skills": [
+            "1.A",
+            "3.B",
+            "3.C"
+          ],
+          "requires": [],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "12.1#1",
+              "label": "Field of magnets and field-line drawings",
+              "kind": "representation",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "12.1#2",
+              "label": "Net field from multiple sources",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "12.1#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "12.1#3",
+              "label": "Magnetic force does no work on a charge",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "12.1#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "12.2",
+          "title": "Magnetism and Moving Charges",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.B"
+          ],
+          "requires": [
+            "12.1"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "12.2#1",
+              "label": "Lorentz force on a moving charge",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "12.2#2",
+              "label": "Radius and period in a uniform field",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "12.2#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "12.2#3",
+              "label": "Velocity selector and mass spectrometer",
+              "kind": "skill",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "12.2#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "12.3",
+          "title": "Magnetic Fields of Current-Carrying Wires and the Biot-Savart Law",
+          "scope": "both",
+          "skills": [
+            "2.A",
+            "3.B"
+          ],
+          "requires": [
+            "12.2"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "12.3#1",
+              "label": "Biot-Savart integral for simple geometries",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "12.3#2",
+              "label": "Field at the center of a loop and along its axis",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "12.3#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "12.3#3",
+              "label": "Force between parallel wires",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "12.3#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "12.4",
+          "title": "Ampère's Law",
+          "scope": "both",
+          "skills": [
+            "2.A",
+            "3.C"
+          ],
+          "requires": [
+            "12.3"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "12.4#1",
+              "label": "Choosing an Amperian loop from symmetry",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "12.4#2",
+              "label": "Field of a long wire, solenoid and toroid",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "12.4#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "12.4#3",
+              "label": "Enclosed current versus total current",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "12.4#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "13",
+      "title": "Electromagnetic Induction",
+      "officialClassPeriods": "~10–20",
+      "topics": [
+        {
+          "code": "13.1",
+          "title": "Magnetic Flux",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.B",
+            "2.A"
+          ],
+          "requires": [],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "13.1#1",
+              "label": "Flux through loops and coils",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "13.1#2",
+              "label": "Flux when area or angle changes",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "13.1#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "13.1#3",
+              "label": "Flux of a non-uniform field by integration",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "13.1#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "13.2",
+          "title": "Electromagnetic Induction",
+          "scope": "both",
+          "skills": [
+            "2.A",
+            "3.B"
+          ],
+          "requires": [
+            "13.1"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "13.2#1",
+              "label": "Faraday's law and induced emf",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "13.2#2",
+              "label": "Motional emf of a rod on rails",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "13.2#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "13.2#3",
+              "label": "Direction of induced current by Lenz's law",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "13.2#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "13.3",
+          "title": "Induced Currents and Fields",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.C"
+          ],
+          "requires": [
+            "13.2"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "13.3#1",
+              "label": "Eddy currents and magnetic braking",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "13.3#2",
+              "label": "Induced electric fields from changing flux",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "13.3#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "13.3#3",
+              "label": "Induced current in a loop leaving a field region",
+              "kind": "skill",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [
+                "13.3#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "13.4",
+          "title": "Inductance",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.A"
+          ],
+          "requires": [
+            "13.3"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "13.4#1",
+              "label": "Self-inductance and energy in an inductor",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "13.4#2",
+              "label": "Inductance of a solenoid",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "13.4#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "13.4#3",
+              "label": "Back emf opposing current change",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "13.4#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "13.5",
+          "title": "Circuits with Resistors and Inductors (RL)",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.D",
+            "2.C"
+          ],
+          "requires": [
+            "13.4"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "13.5#1",
+              "label": "Current growth in an RL circuit",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "13.5#2",
+              "label": "Time constant τ = L/R",
+              "kind": "skill",
+              "skills": [
+                "2.D"
+              ],
+              "requires": [
+                "13.5#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "13.5#3",
+              "label": "Behavior at t = 0 and t → ∞",
+              "kind": "skill",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [
+                "13.5#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "13.6",
+          "title": "Circuits with Capacitors and Inductors (LC)",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.A",
+            "1.C"
+          ],
+          "requires": [
+            "13.5"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "13.6#1",
+              "label": "Energy oscillating between capacitor and inductor",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "13.6#2",
+              "label": "Angular frequency of LC oscillations",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "13.6#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "13.6#3",
+              "label": "Charge and current graphs in an LC circuit",
+              "kind": "representation",
+              "skills": [
+                "1.C"
+              ],
+              "requires": [
+                "13.6#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -4,7 +4,7 @@ vi.mock("next/cache", () => ({ unstable_cache: <T,>(fn: T) => fn }));
 vi.mock("@/lib/supabase-admin", () => ({ createAdminClient: () => { throw new Error("no db"); } }));
 
 import { allSubjectSlugs, apSlug, getPublicSetsBySubject, getSubjectMeta, groupPublicSets, subjectCodeFromSlug } from "./subjects";
-import { AP_SUBJECT_NAME } from "@/lib/ap-exam/layouts";
+import { AP_PENDING_PUBLIC_SUBJECTS, AP_SUBJECT_NAME } from "@/lib/ap-exam/layouts";
 
 describe("subject slugs", () => {
   it("maps ap codes to ap-* slugs and back; rejects unknown or malformed", () => {
@@ -16,7 +16,7 @@ describe("subject slugs", () => {
   });
   it("covers 14 AP subjects plus SAT, all resolvable with units for AP", () => {
     const slugs = allSubjectSlugs();
-    expect(slugs).toHaveLength(Object.keys(AP_SUBJECT_NAME).length + 1);
+    expect(slugs).toHaveLength(Object.keys(AP_SUBJECT_NAME).length - AP_PENDING_PUBLIC_SUBJECTS.length + 1);
     expect(slugs).toHaveLength(15);
     for (const s of slugs) {
       const m = getSubjectMeta(s)!;
@@ -24,6 +24,14 @@ describe("subject slugs", () => {
       expect(m.rows.length).toBeGreaterThan(0);
       expect(m.faq.length).toBeGreaterThanOrEqual(2);
       if (m.kind === "ap") expect(m.units.length).toBeGreaterThan(0);
+    }
+  });
+  it("subjects added 2026-10-20 stay hidden (404, not listed) until their sets are published", () => {
+    expect(AP_PENDING_PUBLIC_SUBJECTS).toHaveLength(10);
+    for (const code of AP_PENDING_PUBLIC_SUBJECTS) {
+      expect(AP_SUBJECT_NAME[code], code).toBeTruthy();
+      expect(subjectCodeFromSlug(apSlug(code)), code).toBeNull();
+      expect(allSubjectSlugs()).not.toContain(apSlug(code));
     }
   });
   it("calculus AB exposes official exam structure and unit weights", () => {

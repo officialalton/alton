@@ -32,6 +32,17 @@ const BY_SUBJECT: Record<string, SubjectToolsConfig> = {
   ap_psychology: { calculatorTabs: [], reference: null },
   ap_world_history: { calculatorTabs: [], reference: null }, // 계산기·참조 시트 없음(CED)
   ap_us_history: { calculatorTabs: [], reference: null }, // 계산기·참조 시트 없음(CED)
+  // 2026-10-20 추가 10과목. 참조 패널은 과목별 ALTON 자체 문구가 아직 없어 null(Physics 1 패널을 재사용하지 않는다) — docs/ap/new-subjects-plan-2026-10-20.md 의 후속 항목.
+  ap_physics_2: { calculatorTabs: ["scientific"], reference: null }, // CED: 계산기 허용, 공식 식 시트는 Bluebook 제공
+  ap_physics_c_mechanics: { calculatorTabs: ["scientific"], reference: null },
+  ap_physics_c_electricity_and_magnetism: { calculatorTabs: ["scientific"], reference: null }, // CED: 사칙·공학용·그래핑 허용
+  ap_environmental_science: { calculatorTabs: ["scientific"], reference: null }, // AP Central: 계산기 허용(종류 UNVERIFIED), 참조 정보는 Bluebook 에만 제공
+  ap_us_government_and_politics: { calculatorTabs: [], reference: null },
+  ap_comparative_government_and_politics: { calculatorTabs: [], reference: null },
+  ap_human_geography: { calculatorTabs: [], reference: null },
+  ap_computer_science_principles: { calculatorTabs: [], reference: null }, // Exam Reference Sheet 는 후속(자체 문구 필요)
+  ap_european_history: { calculatorTabs: [], reference: null },
+  ap_precalculus: { calculatorTabs: ["desmos"], reference: null }, // 파트 B 그래핑 계산기 필수(CED); 파트 A·FRQ 파트 B 는 계산기 불가 — 파트별 제어는 후속
 };
 
 export function subjectToolsConfig(apSubject: string | null | undefined): SubjectToolsConfig {
