@@ -1,0 +1,1606 @@
+{
+ "set": "PS3",
+ "report": "data/ap/stock/exact-assign-psych-ps3.json",
+ "generatedBy": "scripts/ap-generation/new6-design-table.ts",
+ "note": "내용=토픽, 기능=스킬, 표현=자료 형태, 추론=난이도 판정기 라벨·풀이 단계, 중복=원형·문항군. 정답 유일성: 파이프라인의 독립 풀이(Opus·Sonnet)+검토+패널 기록은 각 후보 verification/review 에 있다.",
+ "rows": [
+  {
+   "key": "psych-hard-a:ap_psychology-m04-k0",
+   "kind": "mc",
+   "archetype": "ps_hd_c_nervous_system",
+   "family": "fam:psych-hard-a:ap_psychology-m04-k0",
+   "duplicateOf": null,
+   "content": [
+    "1.2"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 3
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-hard-a:ap_psychology-m06-k1",
+   "kind": "mc",
+   "archetype": "ps_hd_c_sensation_process",
+   "family": "fam:psych-hard-a:ap_psychology-m06-k0",
+   "duplicateOf": null,
+   "content": [
+    "1.6"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-hard-d:ap_psychology-m02-k1",
+   "kind": "mc",
+   "archetype": "ps_hd_c_lobe_function",
+   "family": "fam:psych-hard-d:ap_psychology-m02-k0",
+   "duplicateOf": null,
+   "content": [
+    "1.4"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m20-k0",
+   "kind": "mc",
+   "archetype": "ps_r_sensation_variables",
+   "family": "fam:psych-p2-mc:ap_psychology-m20-k0",
+   "duplicateOf": null,
+   "content": [
+    "1.6"
+   ],
+   "function": [
+    "2.B"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m26-k0",
+   "kind": "mc",
+   "archetype": "ps_u1_ans_somatic",
+   "family": "fam:psych-p2-mc:ap_psychology-m26-k0",
+   "duplicateOf": null,
+   "content": [
+    "1.2"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m27-k0",
+   "kind": "mc",
+   "archetype": "ps_u1_aphasia",
+   "family": "fam:psych-p2-mc:ap_psychology-m27-k0",
+   "duplicateOf": null,
+   "content": [
+    "1.4"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m31-k0",
+   "kind": "mc",
+   "archetype": "ps_u1_brainstem_cerebellum",
+   "family": "fam:psych-p2-mc:ap_psychology-m31-k0",
+   "duplicateOf": null,
+   "content": [
+    "1.4"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m40-k0",
+   "kind": "mc",
+   "archetype": "ps_u1_limbic",
+   "family": "fam:psych-p2-mc:ap_psychology-m40-k0",
+   "duplicateOf": null,
+   "content": [
+    "1.4"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m48-k0",
+   "kind": "mc",
+   "archetype": "ps_u1_sleep_disorders",
+   "family": "fam:psych-p2-mc:ap_psychology-m48-k0",
+   "duplicateOf": null,
+   "content": [
+    "1.5"
+   ],
+   "function": [
+    "1.B"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m49-k1",
+   "kind": "mc",
+   "archetype": "ps_u1_split_brain",
+   "family": "fam:psych-p2-mc:ap_psychology-m49-k1",
+   "duplicateOf": null,
+   "content": [
+    "1.4"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m51-k1",
+   "kind": "mc",
+   "archetype": "ps_u1_synesthesia_interaction",
+   "family": "fam:psych-p2-mc:ap_psychology-m51-k1",
+   "duplicateOf": null,
+   "content": [
+    "1.6"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m53-k0",
+   "kind": "mc",
+   "archetype": "ps_u1_tolerance",
+   "family": "fam:psych-p2-mc:ap_psychology-m53-k0",
+   "duplicateOf": null,
+   "content": [
+    "1.3"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m54-k0",
+   "kind": "mc",
+   "archetype": "ps_u1_touch_pain",
+   "family": "fam:psych-p2-mc:ap_psychology-m54-k0",
+   "duplicateOf": null,
+   "content": [
+    "1.6"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m55-k1",
+   "kind": "mc",
+   "archetype": "ps_u1_twin_design",
+   "family": "fam:psych-p2-mc:ap_psychology-m55-k1",
+   "duplicateOf": null,
+   "content": [
+    "1.1"
+   ],
+   "function": [
+    "2.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m56-k1",
+   "kind": "mc",
+   "archetype": "ps_u1_weber_adaptation",
+   "family": "fam:psych-p2-mc:ap_psychology-m56-k1",
+   "duplicateOf": null,
+   "content": [
+    "1.6"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p1-a:ap_psychology-m35-k0",
+   "kind": "mc",
+   "archetype": "pss_u2_spacing_spanish_q1",
+   "family": "fam:psych-p1-a:ap_psychology-m35-k0",
+   "duplicateOf": null,
+   "content": [
+    "2.4",
+    "2.4",
+    "2.4"
+   ],
+   "function": [
+    "1.A",
+    "2.B",
+    "3.B"
+   ],
+   "representation": "table",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    },
+    {
+     "label": "basic_learning",
+     "steps": 1
+    },
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m10-k0",
+   "kind": "mc",
+   "archetype": "ps_r_ethics_intelligence",
+   "family": "fam:psych-p2-mc:ap_psychology-m10-k0",
+   "duplicateOf": null,
+   "content": [
+    "2.8"
+   ],
+   "function": [
+    "2.D"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m14-k0",
+   "kind": "mc",
+   "archetype": "ps_r_opdef_creativity",
+   "family": "fam:psych-p2-mc:ap_psychology-m14-k0",
+   "duplicateOf": null,
+   "content": [
+    "2.2"
+   ],
+   "function": [
+    "2.C"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m63-k0",
+   "kind": "mc",
+   "archetype": "ps_u2_decision_traps",
+   "family": "fam:psych-p2-mc:ap_psychology-m63-k0",
+   "duplicateOf": null,
+   "content": [
+    "2.2"
+   ],
+   "function": [
+    "1.B"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m64-k0",
+   "kind": "mc",
+   "archetype": "ps_u2_dependent_memory",
+   "family": "fam:psych-p2-mc:ap_psychology-m64-k0",
+   "duplicateOf": null,
+   "content": [
+    "2.6"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m66-k0",
+   "kind": "mc",
+   "archetype": "ps_u2_encoding_design",
+   "family": "fam:psych-p2-mc:ap_psychology-m66-k0",
+   "duplicateOf": null,
+   "content": [
+    "2.4"
+   ],
+   "function": [
+    "2.B"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m67-k0",
+   "kind": "mc",
+   "archetype": "ps_u2_encoding_strategies",
+   "family": "fam:psych-p2-mc:ap_psychology-m67-k0",
+   "duplicateOf": null,
+   "content": [
+    "2.4"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m74-k0",
+   "kind": "mc",
+   "archetype": "ps_u2_memory_accuracy",
+   "family": "fam:psych-p2-mc:ap_psychology-m74-k0",
+   "duplicateOf": null,
+   "content": [
+    "2.7"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m80-k0",
+   "kind": "mc",
+   "archetype": "ps_u2_retrieval_practice",
+   "family": "fam:psych-p2-mc:ap_psychology-m80-k0",
+   "duplicateOf": null,
+   "content": [
+    "2.6"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m84-k0",
+   "kind": "mc",
+   "archetype": "ps_u2_test_quality",
+   "family": "fam:psych-p2-mc:ap_psychology-m84-k0",
+   "duplicateOf": null,
+   "content": [
+    "2.8"
+   ],
+   "function": [
+    "1.B"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p4-mc:ap_psychology-m05-k0",
+   "kind": "mc",
+   "archetype": "pss_u2_eyewitness_speed_q1",
+   "family": "fam:psych-p4-mc:ap_psychology-m05-k0",
+   "duplicateOf": null,
+   "content": [
+    "2.7",
+    "2.7",
+    "2.7"
+   ],
+   "function": [
+    "1.A",
+    "2.B",
+    "3.C"
+   ],
+   "representation": "table",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    },
+    {
+     "label": "basic_learning",
+     "steps": 2
+    },
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p1-a:ap_psychology-m12-k0",
+   "kind": "mc",
+   "archetype": "ps_u3_operant_basics",
+   "family": "fam:psych-p1-a:ap_psychology-m12-k0",
+   "duplicateOf": null,
+   "content": [
+    "3.8"
+   ],
+   "function": [
+    "3.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p1-a:ap_psychology-m14-k0",
+   "kind": "mc",
+   "archetype": "ps_u3_cross_longitudinal",
+   "family": "fam:psych-p1-a:ap_psychology-m14-k0",
+   "duplicateOf": null,
+   "content": [
+    "3.1"
+   ],
+   "function": [
+    "2.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p1-a:ap_psychology-m15-k0",
+   "kind": "mc",
+   "archetype": "ps_r_ethics_conditioning",
+   "family": "fam:psych-p1-a:ap_psychology-m15-k0",
+   "duplicateOf": null,
+   "content": [
+    "3.7"
+   ],
+   "function": [
+    "2.D"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p1-a:ap_psychology-m32-k0",
+   "kind": "mc",
+   "archetype": "ps_data_conditioning",
+   "family": "fam:psych-p1-a:ap_psychology-m32-k0",
+   "duplicateOf": null,
+   "content": [
+    "3.7"
+   ],
+   "function": [
+    "3.A"
+   ],
+   "representation": "table",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m100-k0",
+   "kind": "mc",
+   "archetype": "ps_u3_language_stages",
+   "family": "fam:psych-p2-mc:ap_psychology-m100-k0",
+   "duplicateOf": null,
+   "content": [
+    "3.5"
+   ],
+   "function": [
+    "1.B"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m102-k0",
+   "kind": "mc",
+   "archetype": "ps_u3_peers_adolescence",
+   "family": "fam:psych-p2-mc:ap_psychology-m102-k0",
+   "duplicateOf": null,
+   "content": [
+    "3.6"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m103-k0",
+   "kind": "mc",
+   "archetype": "ps_u3_piaget_early",
+   "family": "fam:psych-p2-mc:ap_psychology-m103-k0",
+   "duplicateOf": null,
+   "content": [
+    "3.4"
+   ],
+   "function": [
+    "1.B"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m12-k1",
+   "kind": "mc",
+   "archetype": "ps_r_hypothesis_sample_random",
+   "family": "fam:psych-p2-mc:ap_psychology-m12-k1",
+   "duplicateOf": null,
+   "content": [
+    "3.8"
+   ],
+   "function": [
+    "2.B"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m16-k1",
+   "kind": "mc",
+   "archetype": "ps_r_random_assignment",
+   "family": "fam:psych-p2-mc:ap_psychology-m16-k1",
+   "duplicateOf": null,
+   "content": [
+    "3.6"
+   ],
+   "function": [
+    "2.B"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m24-k0",
+   "kind": "mc",
+   "archetype": "ps_stat_range_mode",
+   "family": "fam:psych-p2-mc:ap_psychology-m24-k0",
+   "duplicateOf": null,
+   "content": [
+    "3.8"
+   ],
+   "function": [
+    "3.B"
+   ],
+   "representation": "table",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m91-k0",
+   "kind": "mc",
+   "archetype": "ps_u3_classical_processes",
+   "family": "fam:psych-p2-mc:ap_psychology-m91-k0",
+   "duplicateOf": null,
+   "content": [
+    "3.7"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m94-k0",
+   "kind": "mc",
+   "archetype": "ps_u3_erikson",
+   "family": "fam:psych-p2-mc:ap_psychology-m94-k0",
+   "duplicateOf": null,
+   "content": [
+    "3.6"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m95-k0",
+   "kind": "mc",
+   "archetype": "ps_u3_helpless_superstition",
+   "family": "fam:psych-p2-mc:ap_psychology-m95-k0",
+   "duplicateOf": null,
+   "content": [
+    "3.8"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m96-k0",
+   "kind": "mc",
+   "archetype": "ps_u3_identity_clock",
+   "family": "fam:psych-p2-mc:ap_psychology-m96-k0",
+   "duplicateOf": null,
+   "content": [
+    "3.6"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m98-k0",
+   "kind": "mc",
+   "archetype": "ps_u3_insight_latent",
+   "family": "fam:psych-p2-mc:ap_psychology-m98-k0",
+   "duplicateOf": null,
+   "content": [
+    "3.9"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-hard-a:ap_psychology-m19-k0",
+   "kind": "mc",
+   "archetype": "ps_hd_c_social_influence",
+   "family": "fam:psych-hard-a:ap_psychology-m19-k0",
+   "duplicateOf": null,
+   "content": [
+    "4.3"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-hard-a:ap_psychology-m21-k0",
+   "kind": "mc",
+   "archetype": "ps_hd_c_personality_chain",
+   "family": "fam:psych-hard-a:ap_psychology-m21-k0",
+   "duplicateOf": null,
+   "content": [
+    "4.5"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-hard-a:ap_psychology-m22-k0",
+   "kind": "mc",
+   "archetype": "ps_hd_c_motivation_chain",
+   "family": "fam:psych-hard-a:ap_psychology-m22-k0",
+   "duplicateOf": null,
+   "content": [
+    "4.6"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-hard-c3:ap_psychology-m04-k1",
+   "kind": "mc",
+   "archetype": "ps_hd_c_group_influence",
+   "family": "fam:psych-hard-c3:ap_psychology-m04-k0",
+   "duplicateOf": null,
+   "content": [
+    "4.3"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p1-a:ap_psychology-m20-k0",
+   "kind": "mc",
+   "archetype": "ps_r_deception_debrief",
+   "family": "fam:psych-p1-a:ap_psychology-m20-k0",
+   "duplicateOf": null,
+   "content": [
+    "4.3"
+   ],
+   "function": [
+    "2.D"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m05-k1",
+   "kind": "mc",
+   "archetype": "ps_r_attribution_blind",
+   "family": "fam:psych-p2-mc:ap_psychology-m05-k1",
+   "duplicateOf": null,
+   "content": [
+    "4.1"
+   ],
+   "function": [
+    "2.B"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m08-k0",
+   "kind": "mc",
+   "archetype": "ps_r_emotion_ethics",
+   "family": "fam:psych-p2-mc:ap_psychology-m08-k0",
+   "duplicateOf": null,
+   "content": [
+    "4.7"
+   ],
+   "function": [
+    "2.D"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m112-k0",
+   "kind": "mc",
+   "archetype": "ps_u4_belief_dissonance",
+   "family": "fam:psych-p2-mc:ap_psychology-m112-k0",
+   "duplicateOf": null,
+   "content": [
+    "4.2"
+   ],
+   "function": [
+    "1.B"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m118-k0",
+   "kind": "mc",
+   "archetype": "ps_u4_facilitation_consensus",
+   "family": "fam:psych-p2-mc:ap_psychology-m118-k0",
+   "duplicateOf": null,
+   "content": [
+    "4.3"
+   ],
+   "function": [
+    "1.B"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m123-k1",
+   "kind": "mc",
+   "archetype": "ps_u4_lewin_conflict",
+   "family": "fam:psych-p2-mc:ap_psychology-m123-k1",
+   "duplicateOf": null,
+   "content": [
+    "4.6"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m124-k0",
+   "kind": "mc",
+   "archetype": "ps_u4_norms_influence",
+   "family": "fam:psych-p2-mc:ap_psychology-m124-k0",
+   "duplicateOf": null,
+   "content": [
+    "4.3"
+   ],
+   "function": [
+    "1.B"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m125-k0",
+   "kind": "mc",
+   "archetype": "ps_u4_person_perception",
+   "family": "fam:psych-p2-mc:ap_psychology-m125-k0",
+   "duplicateOf": null,
+   "content": [
+    "4.1"
+   ],
+   "function": [
+    "1.B"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m129-k0",
+   "kind": "mc",
+   "archetype": "ps_u4_stereotypes_prejudice",
+   "family": "fam:psych-p2-mc:ap_psychology-m129-k0",
+   "duplicateOf": null,
+   "content": [
+    "4.2"
+   ],
+   "function": [
+    "1.B"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m15-k1",
+   "kind": "mc",
+   "archetype": "ps_r_personality_design",
+   "family": "fam:psych-p2-mc:ap_psychology-m15-k1",
+   "duplicateOf": null,
+   "content": [
+    "4.5"
+   ],
+   "function": [
+    "2.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-r19-sets:ap_psychology-m01-k0",
+   "kind": "mc",
+   "archetype": "pss_u4_dissonance_pay_q1",
+   "family": "fam:psych-r19-sets:ap_psychology-m01-k0",
+   "duplicateOf": null,
+   "content": [
+    "4.2",
+    "4.2",
+    "4.2"
+   ],
+   "function": [
+    "1.A",
+    "2.B",
+    "3.C"
+   ],
+   "representation": "table",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 3
+    },
+    {
+     "label": "basic_learning",
+     "steps": 2
+    },
+    {
+     "label": "exam_prep",
+     "steps": 3
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p1-a:ap_psychology-m21-k0",
+   "kind": "mc",
+   "archetype": "ps_u5_gas",
+   "family": "fam:psych-p1-a:ap_psychology-m21-k0",
+   "duplicateOf": null,
+   "content": [
+    "5.1"
+   ],
+   "function": [
+    "1.B"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p1-a:ap_psychology-m22-k0",
+   "kind": "mc",
+   "archetype": "ps_u5_anxiety",
+   "family": "fam:psych-p1-a:ap_psychology-m22-k0",
+   "duplicateOf": null,
+   "content": [
+    "5.4"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p1-a:ap_psychology-m23-k0",
+   "kind": "mc",
+   "archetype": "ps_u5_psychotherapies",
+   "family": "fam:psych-p1-a:ap_psychology-m23-k0",
+   "duplicateOf": null,
+   "content": [
+    "5.5"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p1-a:ap_psychology-m24-k1",
+   "kind": "mc",
+   "archetype": "ps_u5_schizophrenia",
+   "family": "fam:psych-p1-a:ap_psychology-m24-k0",
+   "duplicateOf": null,
+   "content": [
+    "5.4"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p1-a:ap_psychology-m28-k0",
+   "kind": "mc",
+   "archetype": "ps_stat_outlier",
+   "family": "fam:psych-p1-a:ap_psychology-m28-k0",
+   "duplicateOf": null,
+   "content": [
+    "5.1"
+   ],
+   "function": [
+    "3.B"
+   ],
+   "representation": "table",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 3
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m131-k1",
+   "kind": "mc",
+   "archetype": "ps_u5_behavior_therapies",
+   "family": "fam:psych-p2-mc:ap_psychology-m131-k0",
+   "duplicateOf": null,
+   "content": [
+    "5.5"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m133-k1",
+   "kind": "mc",
+   "archetype": "ps_u5_culture_bound",
+   "family": "fam:psych-p2-mc:ap_psychology-m133-k0",
+   "duplicateOf": null,
+   "content": [
+    "5.4"
+   ],
+   "function": [
+    "1.B"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m135-k1",
+   "kind": "mc",
+   "archetype": "ps_u5_dissociative_trauma_eating",
+   "family": "fam:psych-p2-mc:ap_psychology-m135-k1",
+   "duplicateOf": null,
+   "content": [
+    "5.4"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m137-k0",
+   "kind": "mc",
+   "archetype": "ps_u5_models_disorder",
+   "family": "fam:psych-p2-mc:ap_psychology-m137-k0",
+   "duplicateOf": null,
+   "content": [
+    "5.3"
+   ],
+   "function": [
+    "1.B"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m138-k0",
+   "kind": "mc",
+   "archetype": "ps_u5_mood_disorders",
+   "family": "fam:psych-p2-mc:ap_psychology-m138-k0",
+   "duplicateOf": null,
+   "content": [
+    "5.4"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p2-mc:ap_psychology-m22-k1",
+   "kind": "mc",
+   "archetype": "ps_r_therapy_ethics",
+   "family": "fam:psych-p2-mc:ap_psychology-m22-k1",
+   "duplicateOf": null,
+   "content": [
+    "5.5"
+   ],
+   "function": [
+    "2.D"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p4-mc:ap_psychology-m06-k0",
+   "kind": "mc",
+   "archetype": "ps_r_casestudy_confidential",
+   "family": "fam:psych-p4-mc:ap_psychology-m06-k0",
+   "duplicateOf": null,
+   "content": [
+    "5.3"
+   ],
+   "function": [
+    "2.D"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p4-mc:ap_psychology-m08-k0",
+   "kind": "mc",
+   "archetype": "ps_r_replication",
+   "family": "fam:psych-p4-mc:ap_psychology-m08-k0",
+   "duplicateOf": null,
+   "content": [
+    "5.2"
+   ],
+   "function": [
+    "2.C"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p1-b:ap_psychology-f04-k0",
+   "kind": "frq_bundle",
+   "archetype": "psf_aaq_mindfulness",
+   "family": "fam:psych-p1-b:ap_psychology-f04-k0",
+   "duplicateOf": null,
+   "content": [
+    "5.1"
+   ],
+   "function": [
+    "2.A"
+   ],
+   "representation": "table",
+   "reasoning": [
+    {
+     "label": "exam_prep",
+     "steps": 4
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "psych-p3-frq:ap_psychology-f02-k0",
+   "kind": "frq_bundle",
+   "archetype": "psf_ebq_spacing",
+   "family": "fam:psych-p3-frq:ap_psychology-f02-k0",
+   "duplicateOf": null,
+   "content": [
+    "2.4"
+   ],
+   "function": [
+    "4.B"
+   ],
+   "representation": "table",
+   "reasoning": [
+    {
+     "label": "exam_prep",
+     "steps": 5
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  }
+ ]
+}

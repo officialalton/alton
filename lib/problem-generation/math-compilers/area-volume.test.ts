@@ -104,3 +104,15 @@ describe("renderAreaVolumeProblem — 렌더링과 그림 검증", () => {
     }
   });
 });
+
+describe("'in terms of π' 문항은 보기를 전부 π 형식으로 낸다(2026-10-19)", () => {
+  it("원기둥 부피(반지름·지름)는 정답과 모든 오답이 π 로 끝난다(200회)", () => {
+    for (const kind of ["cylinder_volume_radius", "cylinder_volume_diameter"] as const) {
+      for (let i = 0; i < 100; i++) {
+        const m = generateAreaVolumeModel({ difficulty: "medium", questionKind: kind });
+        expect(m.correctAnswer.endsWith("π")).toBe(true);
+        for (const d of m.distractors) expect(d.value.endsWith("π")).toBe(true);
+      }
+    }
+  });
+});

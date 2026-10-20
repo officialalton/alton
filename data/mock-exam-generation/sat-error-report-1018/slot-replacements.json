@@ -1,0 +1,1858 @@
+{
+ "generatedAt": "2026-10-19",
+ "generator": "scripts/prod-open/gen-slot-replacements.ts",
+ "note": "오류 신고 수동 교체 칸별 새 문항(컴파일러, 그래프·식 중복 없음). entries[].rec 는 import.ts 입력 레코드.",
+ "count": 20,
+ "entries": [
+  {
+   "slot": {
+    "name": "SAT Practice Test 1",
+    "position": 11,
+    "versionId": "e91970cd-a23c-4e64-ab56-f949187aa92b",
+    "problemId": "0348cbbb-56c1-42b0-b2ef-0ec15b3f2e5d",
+    "skill": "nonlinear_equations_systems",
+    "format": "mc",
+    "difficulty": "medium",
+    "moduleKey": "math_m1",
+    "route": null
+   },
+   "rec": {
+    "gid": "e1018-t1-math_m1-11",
+    "runId": "sat-error-report-1018",
+    "skill": "nonlinear_equations_systems",
+    "domain": "advanced_math",
+    "examSystem": "sat_math",
+    "difficulty": "medium",
+    "format": "mc",
+    "createdVia": "compiler",
+    "subpattern": "linear_quadratic_intersection",
+    "problem": {
+     "format": "mc",
+     "figure": {
+      "type": "plane",
+      "axes": {
+       "x": {
+        "min": -9,
+        "max": 9
+       },
+       "y": {
+        "min": -318,
+        "max": 104
+       }
+      },
+      "objects": [
+       {
+        "id": "q",
+        "kind": "function",
+        "fn": "quadratic",
+        "params": [
+         -2,
+         -12,
+         1
+        ]
+       },
+       {
+        "id": "l",
+        "kind": "line",
+        "slope": -6,
+        "intercept": 1
+       }
+      ],
+      "grid": true
+     },
+     "passage": "The graphs of a quadratic function and a linear function are shown in the xy-plane below.\n\nHow many points of intersection do the two graphs shown have?",
+     "stimulus": "The graphs of a quadratic function and a linear function are shown in the xy-plane below.",
+     "question": "How many points of intersection do the two graphs shown have?",
+     "needsFigure": false,
+     "options": [
+      "Two intersection points",
+      "Infinitely many intersection points",
+      "One intersection point",
+      "No intersection points"
+     ],
+     "correctIndex": 0,
+     "answers": null,
+     "statements": null,
+     "explanation": "그래프의 두 곡선은 y = -2x² - 12x + 1, y = -6x + 1이다. 두 식을 같다고 놓으면 -2x² - 12x + 1 = -6x + 1이고, 정리하면 -2x² - 6x = 0이다. 판별식은 B² - 4AC = -6² - 4×-2×0 = 36이다. 0보다 크므로 서로 다른 두 교점을 갖는다. 따라서 Two intersection points이다.",
+     "explanationEn": "The two graphs are y = -2x² - 12x + 1 and y = -6x + 1. Setting the two expressions equal gives -2x² - 12x + 1 = -6x + 1, which simplifies to -2x² - 6x = 0. The discriminant is B² - 4AC = -6² - 4×-2×0 = 36. Since it is greater than 0, there are two distinct intersection points. So the answer is Two intersection points.",
+     "difficulty": "medium",
+     "distractorRationales": [
+      {
+       "index": 2,
+       "plausible_because": "같은 연립에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 두 식에서 계산되었다.",
+       "why_wrong": "판별식이 0이 아닌데 0이라고 착각했다.",
+       "kind": "condition_ignored"
+      },
+      {
+       "index": 3,
+       "plausible_because": "같은 연립에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 두 식에서 계산되었다.",
+       "why_wrong": "판별식이 음수가 아닌데 음수라고 착각해 교점이 없다고 답했다.",
+       "kind": "condition_ignored"
+      },
+      {
+       "index": 1,
+       "plausible_because": "같은 연립에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 두 식에서 계산되었다.",
+       "why_wrong": "직선과 포물선이 항상 여러 점에서 만난다고 잘못 일반화했다 — 포물선과 직선은 무수히 많은 점에서 만날 수 없다.",
+       "kind": "other"
+      }
+     ],
+     "difficultyRationale": "",
+     "design": null,
+     "subpattern": "linear_quadratic_intersection"
+    },
+    "quality": {
+     "contract": {
+      "ok": true,
+      "issues": []
+     },
+     "estimatedDifficulty": "medium",
+     "requestedDifficulty": "medium",
+     "difficultyReasons": [],
+     "distractors": [],
+     "independentReview": {
+      "pickedIndex": null,
+      "pickedAnswer": null,
+      "agrees": true,
+      "confidence": "high",
+      "flags": []
+     },
+     "needsReview": false,
+     "needsReviewReasons": [],
+     "calibrated": false,
+     "reviewedAt": "2026-10-19T23:55:28.988Z"
+    }
+   }
+  },
+  {
+   "slot": {
+    "name": "SAT Practice Test 1",
+    "position": 15,
+    "versionId": "c7d4cf59-a816-49e0-a99d-35fe2c1f4ef9",
+    "problemId": "26335249-5f1f-44cf-8c46-fbe6a6c47c95",
+    "skill": "linear_equations_two_var",
+    "format": "mc",
+    "difficulty": "medium",
+    "moduleKey": "math_m1",
+    "route": null
+   },
+   "rec": {
+    "gid": "e1018-t1-math_m1-15",
+    "runId": "sat-error-report-1018",
+    "skill": "linear_equations_two_var",
+    "domain": "algebra",
+    "examSystem": "sat_math",
+    "difficulty": "medium",
+    "format": "mc",
+    "createdVia": "compiler",
+    "subpattern": "intersection_x",
+    "problem": {
+     "format": "mc",
+     "figure": null,
+     "passage": "The solution to the system of equations shown is (x, y).\n\ny = -3x + 3\ny = 4x - 4\n\nWhat is the x-coordinate of the solution to the system of equations shown?",
+     "stimulus": "The solution to the system of equations shown is (x, y).\n\ny = -3x + 3\ny = 4x - 4",
+     "question": "What is the x-coordinate of the solution to the system of equations shown?",
+     "needsFigure": false,
+     "options": [
+      "0",
+      "8",
+      "-1",
+      "1"
+     ],
+     "correctIndex": 3,
+     "answers": null,
+     "statements": null,
+     "explanation": "두 식의 우변이 같으므로 -3x + 3 = 4x - 4이다. 양변에서 정리하면 (-7)x = -7이므로 x = -7 ÷ (-7) = 1이다. 이를 y = -3x + 3에 대입하면 y = -3 × 1 + 3 = 0이다. 따라서 x좌표는 1이다.",
+     "explanationEn": "Since the right-hand sides are equal, -3x + 3 = 4x - 4. Rearranging gives (-7)x = -7, so x = -7 ÷ (-7) = 1. Substituting into y = -3x + 3 gives y = -3 × 1 + 3 = 0. So the x-coordinate is 1.",
+     "difficulty": "medium",
+     "distractorRationales": [
+      {
+       "index": 2,
+       "plausible_because": "계산 과정의 실제 오류 경로에서 나온 값이라 얼핏 보면 그럴듯하다.",
+       "matches": "같은 두 식에서 계산되었다.",
+       "why_wrong": "부호를 반대로 계산했다.",
+       "kind": "sign_error"
+      },
+      {
+       "index": 0,
+       "plausible_because": "계산 과정의 실제 오류 경로에서 나온 값이라 얼핏 보면 그럴듯하다.",
+       "matches": "같은 두 식에서 계산되었다.",
+       "why_wrong": "묻는 좌표가 아니라 다른 좌표값을 답으로 골랐다.",
+       "kind": "condition_ignored"
+      },
+      {
+       "index": 1,
+       "plausible_because": "계산 과정의 실제 오류 경로에서 나온 값이라 얼핏 보면 그럴듯하다.",
+       "matches": "같은 두 식에서 계산되었다.",
+       "why_wrong": "두 식의 절편 차를 answer에 그대로 더해 계산했다(소거 과정 오류).",
+       "kind": "formula_misuse"
+      }
+     ],
+     "difficultyRationale": "",
+     "design": null,
+     "subpattern": "intersection_x"
+    },
+    "quality": {
+     "contract": {
+      "ok": true,
+      "issues": []
+     },
+     "estimatedDifficulty": "medium",
+     "requestedDifficulty": "medium",
+     "difficultyReasons": [],
+     "distractors": [],
+     "independentReview": {
+      "pickedIndex": null,
+      "pickedAnswer": null,
+      "agrees": true,
+      "confidence": "high",
+      "flags": []
+     },
+     "needsReview": false,
+     "needsReviewReasons": [],
+     "calibrated": false,
+     "reviewedAt": "2026-10-19T23:55:28.990Z"
+    }
+   }
+  },
+  {
+   "slot": {
+    "name": "SAT Practice Test 1",
+    "position": 25,
+    "versionId": "df92ff98-b808-497b-a7a9-2dbc1d99d850",
+    "problemId": "282a5540-30ac-485d-a874-ff56ae38d3f7",
+    "skill": "nonlinear_equations_systems",
+    "format": "mc",
+    "difficulty": "easy",
+    "moduleKey": "math_m2",
+    "route": "lower"
+   },
+   "rec": {
+    "gid": "e1018-t1-math_m2-25",
+    "runId": "sat-error-report-1018",
+    "skill": "nonlinear_equations_systems",
+    "domain": "advanced_math",
+    "examSystem": "sat_math",
+    "difficulty": "easy",
+    "format": "mc",
+    "createdVia": "compiler",
+    "subpattern": "irrational_sum_of_roots",
+    "problem": {
+     "format": "mc",
+     "figure": null,
+     "passage": "Consider the equation shown.\n\n$x^2 - 8x - 38 = 0$\n\nWhat is the sum of the solutions to the equation shown?",
+     "stimulus": "Consider the equation shown.\n\n$x^2 - 8x - 38 = 0$",
+     "question": "What is the sum of the solutions to the equation shown?",
+     "needsFigure": false,
+     "options": [
+      "38",
+      "-8",
+      "8",
+      "-38"
+     ],
+     "correctIndex": 2,
+     "answers": null,
+     "statements": null,
+     "explanation": "판별식 D = b² - 4ac = 216는 완전제곱수가 아니므로 두 근은 무리수다. 하지만 근의 합은 항상 유리수인 -b/a로 구할 수 있다: -(-8)/1 = 8. 근을 직접 구해 더할 필요가 없다.",
+     "explanationEn": "The discriminant D = b² - 4ac = 216 is not a perfect square, so the two roots are irrational. But the sum of the roots is always the rational value -b/a: -(-8)/1 = 8. There is no need to compute the individual roots.",
+     "difficulty": "easy",
+     "distractorRationales": [
+      {
+       "index": 1,
+       "plausible_because": "같은 방정식에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 방정식에서 계산되었다.",
+       "why_wrong": "합 공식의 부호를 반대로 계산했다(-b/a가 아니라 b/a).",
+       "kind": "sign_error"
+      },
+      {
+       "index": 3,
+       "plausible_because": "같은 방정식에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 방정식에서 계산되었다.",
+       "why_wrong": "근의 합 대신 근의 곱(c/a)을 답으로 썼다.",
+       "kind": "condition_ignored"
+      },
+      {
+       "index": 0,
+       "plausible_because": "같은 방정식에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 방정식에서 계산되었다.",
+       "why_wrong": "근의 곱 공식(c/a)과 헷갈리면서 부호까지 반대로 썼다.",
+       "kind": "condition_ignored"
+      }
+     ],
+     "difficultyRationale": "",
+     "design": null,
+     "subpattern": "irrational_sum_of_roots"
+    },
+    "quality": {
+     "contract": {
+      "ok": true,
+      "issues": []
+     },
+     "estimatedDifficulty": "medium",
+     "requestedDifficulty": "medium",
+     "difficultyReasons": [],
+     "distractors": [],
+     "independentReview": {
+      "pickedIndex": null,
+      "pickedAnswer": null,
+      "agrees": true,
+      "confidence": "high",
+      "flags": []
+     },
+     "needsReview": false,
+     "needsReviewReasons": [],
+     "calibrated": false,
+     "reviewedAt": "2026-10-19T23:55:29.010Z"
+    }
+   }
+  },
+  {
+   "slot": {
+    "name": "SAT Practice Test 1",
+    "position": 30,
+    "versionId": "688f37e4-12dc-4225-8be7-a43795a8db68",
+    "problemId": "f36a34c0-e737-4b4a-be6f-c181aba3d62b",
+    "skill": "nonlinear_functions",
+    "format": "spr",
+    "difficulty": "easy",
+    "moduleKey": "math_m2",
+    "route": "lower"
+   },
+   "rec": null
+  },
+  {
+   "slot": {
+    "name": "SAT Practice Test 10",
+    "position": 44,
+    "versionId": "7b65acf4-61fe-47f0-a628-aeb77ac7892f",
+    "problemId": "da5643a5-36bb-463c-a549-158bc845e481",
+    "skill": "nonlinear_equations_systems",
+    "format": "spr",
+    "difficulty": "medium",
+    "moduleKey": "math_m2",
+    "route": "lower"
+   },
+   "rec": {
+    "gid": "e1018-t10-math_m2-44",
+    "runId": "sat-error-report-1018",
+    "skill": "nonlinear_equations_systems",
+    "domain": "advanced_math",
+    "examSystem": "sat_math",
+    "difficulty": "medium",
+    "format": "spr",
+    "createdVia": "compiler",
+    "subpattern": "linear_quadratic_intersection",
+    "problem": {
+     "format": "spr",
+     "figure": {
+      "type": "plane",
+      "axes": {
+       "x": {
+        "min": -9,
+        "max": 9
+       },
+       "y": {
+        "min": -220,
+        "max": 94
+       }
+      },
+      "objects": [
+       {
+        "id": "q",
+        "kind": "function",
+        "fn": "quadratic",
+        "params": [
+         -2,
+         -1,
+         -13
+        ]
+       },
+       {
+        "id": "l",
+        "kind": "line",
+        "slope": 7,
+        "intercept": -5
+       }
+      ],
+      "grid": true
+     },
+     "passage": "The graphs of a quadratic function and a linear function are shown in the xy-plane below.\n\nWhat is the x-coordinate of the intersection point of the two graphs shown?",
+     "stimulus": "The graphs of a quadratic function and a linear function are shown in the xy-plane below.",
+     "question": "What is the x-coordinate of the intersection point of the two graphs shown?",
+     "needsFigure": false,
+     "options": null,
+     "correctIndex": null,
+     "answers": [
+      "-2"
+     ],
+     "statements": null,
+     "explanation": "그래프의 두 곡선은 y = -2x² - x - 13, y = 7x - 5이다. 두 식을 같다고 놓으면 -2x² - x - 13 = 7x - 5이고, 정리하면 -2x² - 8x - 8 = 0이다. 이 식은 (x + 2)² = 0 형태로 인수분해되어 중근 x = -2을 갖는다(직선이 포물선에 한 점에서 접한다). 따라서 교점의 x좌표는 -2이다.",
+     "explanationEn": "The two graphs are y = -2x² - x - 13 and y = 7x - 5. Setting the two expressions equal gives -2x² - x - 13 = 7x - 5, which simplifies to -2x² - 8x - 8 = 0. This factors as (x + 2)² = 0, a repeated root x = -2 (the line is tangent to the parabola at one point). So the x-coordinate of the intersection point is -2.",
+     "difficulty": "medium",
+     "distractorRationales": [
+      {
+       "index": 2,
+       "plausible_because": "같은 연립에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 두 식에서 계산되었다.",
+       "why_wrong": "교점의 x좌표 부호를 반대로 계산했다.",
+       "kind": "sign_error"
+      },
+      {
+       "index": 3,
+       "plausible_because": "같은 연립에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 두 식에서 계산되었다.",
+       "why_wrong": "x좌표 대신 직선의 기울기 m을 답으로 썼다(다른 변수를 답했다).",
+       "kind": "condition_ignored"
+      },
+      {
+       "index": 0,
+       "plausible_because": "같은 연립에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 두 식에서 계산되었다.",
+       "why_wrong": "x좌표 대신 직선의 y절편 k를 답으로 썼다.",
+       "kind": "condition_ignored"
+      }
+     ],
+     "difficultyRationale": "",
+     "design": null,
+     "subpattern": "linear_quadratic_intersection"
+    },
+    "quality": {
+     "contract": {
+      "ok": true,
+      "issues": []
+     },
+     "estimatedDifficulty": "medium",
+     "requestedDifficulty": "medium",
+     "difficultyReasons": [],
+     "distractors": [],
+     "independentReview": {
+      "pickedIndex": null,
+      "pickedAnswer": null,
+      "agrees": true,
+      "confidence": "high",
+      "flags": []
+     },
+     "needsReview": false,
+     "needsReviewReasons": [],
+     "calibrated": false,
+     "reviewedAt": "2026-10-19T23:55:29.010Z"
+    }
+   }
+  },
+  {
+   "slot": {
+    "name": "SAT Practice Test 12",
+    "position": 64,
+    "versionId": "d8b1b03a-5ccf-4baa-91a2-96933b696031",
+    "problemId": "3552314b-2c6f-47bc-bb47-a5c422b74836",
+    "skill": "systems_linear",
+    "format": "spr",
+    "difficulty": "hard",
+    "moduleKey": "math_m2",
+    "route": "higher"
+   },
+   "rec": {
+    "gid": "e1018-t12-math_m2-64",
+    "runId": "sat-error-report-1018",
+    "skill": "systems_linear",
+    "domain": "algebra",
+    "examSystem": "sat_math",
+    "difficulty": "hard",
+    "format": "spr",
+    "createdVia": "compiler",
+    "subpattern": "intersection_x",
+    "problem": {
+     "format": "spr",
+     "figure": null,
+     "passage": "The solution to the system of equations shown is (x, y).\n\ny = 6x - 8\ny = 5x - 7\n\nWhat is the x-coordinate of the solution to the system of equations shown?",
+     "stimulus": "The solution to the system of equations shown is (x, y).\n\ny = 6x - 8\ny = 5x - 7",
+     "question": "What is the x-coordinate of the solution to the system of equations shown?",
+     "needsFigure": false,
+     "options": null,
+     "correctIndex": null,
+     "answers": [
+      "1"
+     ],
+     "statements": null,
+     "explanation": "두 식의 우변이 같으므로 6x - 8 = 5x - 7이다. 양변에서 정리하면 (1)x = 1이므로 x = 1 ÷ (1) = 1이다. 이를 y = 6x - 8에 대입하면 y = 6 × 1 - 8 = -2이다. 따라서 x좌표는 1이다.",
+     "explanationEn": "Since the right-hand sides are equal, 6x - 8 = 5x - 7. Rearranging gives (1)x = 1, so x = 1 ÷ (1) = 1. Substituting into y = 6x - 8 gives y = 6 × 1 - 8 = -2. So the x-coordinate is 1.",
+     "difficulty": "hard",
+     "distractorRationales": [
+      {
+       "index": 1,
+       "plausible_because": "계산 과정의 실제 오류 경로에서 나온 값이라 얼핏 보면 그럴듯하다.",
+       "matches": "같은 두 식에서 계산되었다.",
+       "why_wrong": "부호를 반대로 계산했다.",
+       "kind": "sign_error"
+      },
+      {
+       "index": 3,
+       "plausible_because": "계산 과정의 실제 오류 경로에서 나온 값이라 얼핏 보면 그럴듯하다.",
+       "matches": "같은 두 식에서 계산되었다.",
+       "why_wrong": "묻는 좌표가 아니라 다른 좌표값을 답으로 골랐다.",
+       "kind": "condition_ignored"
+      },
+      {
+       "index": 0,
+       "plausible_because": "계산 과정의 실제 오류 경로에서 나온 값이라 얼핏 보면 그럴듯하다.",
+       "matches": "같은 두 식에서 계산되었다.",
+       "why_wrong": "묻는 좌표가 아니라 다른 좌표값을 답으로 골랐다. 그 값의 부호까지 반대로 계산했다.",
+       "kind": "sign_error"
+      }
+     ],
+     "difficultyRationale": "",
+     "design": null,
+     "subpattern": "intersection_x"
+    },
+    "quality": {
+     "contract": {
+      "ok": true,
+      "issues": []
+     },
+     "estimatedDifficulty": "medium",
+     "requestedDifficulty": "medium",
+     "difficultyReasons": [],
+     "distractors": [],
+     "independentReview": {
+      "pickedIndex": null,
+      "pickedAnswer": null,
+      "agrees": true,
+      "confidence": "high",
+      "flags": []
+     },
+     "needsReview": false,
+     "needsReviewReasons": [],
+     "calibrated": false,
+     "reviewedAt": "2026-10-19T23:55:29.011Z"
+    }
+   }
+  },
+  {
+   "slot": {
+    "name": "SAT Practice Test 2",
+    "position": 4,
+    "versionId": "9b81b900-eaaa-4d22-9446-88f3b21690a6",
+    "problemId": "4a18c43d-cc47-49dd-b902-528df04c7d35",
+    "skill": "linear_inequalities",
+    "format": "spr",
+    "difficulty": "easy",
+    "moduleKey": "math_m1",
+    "route": null
+   },
+   "rec": null
+  },
+  {
+   "slot": {
+    "name": "SAT Practice Test 2",
+    "position": 20,
+    "versionId": "8ac3febf-a7d7-41a9-af3e-a8ed18295ecd",
+    "problemId": "80b24752-57c3-440b-b22b-68f3dfab69f5",
+    "skill": "nonlinear_equations_systems",
+    "format": "mc",
+    "difficulty": "medium",
+    "moduleKey": "math_m1",
+    "route": null
+   },
+   "rec": {
+    "gid": "e1018-t2-math_m1-20",
+    "runId": "sat-error-report-1018",
+    "skill": "nonlinear_equations_systems",
+    "domain": "advanced_math",
+    "examSystem": "sat_math",
+    "difficulty": "medium",
+    "format": "mc",
+    "createdVia": "compiler",
+    "subpattern": "linear_quadratic_intersection",
+    "problem": {
+     "format": "mc",
+     "figure": {
+      "type": "plane",
+      "axes": {
+       "x": {
+        "min": -9,
+        "max": 9
+       },
+       "y": {
+        "min": -61,
+        "max": 105
+       }
+      },
+      "objects": [
+       {
+        "id": "q",
+        "kind": "function",
+        "fn": "quadratic",
+        "params": [
+         2,
+         0,
+         -76
+        ]
+       },
+       {
+        "id": "l",
+        "kind": "line",
+        "slope": -4,
+        "intercept": -6
+       }
+      ],
+      "grid": true
+     },
+     "passage": "The graphs of a quadratic function and a linear function are shown in the xy-plane below.\n\nHow many points of intersection do the two graphs shown have?",
+     "stimulus": "The graphs of a quadratic function and a linear function are shown in the xy-plane below.",
+     "question": "How many points of intersection do the two graphs shown have?",
+     "needsFigure": false,
+     "options": [
+      "One intersection point",
+      "Two intersection points",
+      "Infinitely many intersection points",
+      "No intersection points"
+     ],
+     "correctIndex": 1,
+     "answers": null,
+     "statements": null,
+     "explanation": "그래프의 두 곡선은 y = 2x² - 76, y = -4x - 6이다. 두 식을 같다고 놓으면 2x² - 76 = -4x - 6이고, 정리하면 2x² + 4x - 70 = 0이다. 판별식은 B² - 4AC = 4² - 4×2×-70 = 576이다. 0보다 크므로 서로 다른 두 교점을 갖는다. 따라서 Two intersection points이다.",
+     "explanationEn": "The two graphs are y = 2x² - 76 and y = -4x - 6. Setting the two expressions equal gives 2x² - 76 = -4x - 6, which simplifies to 2x² + 4x - 70 = 0. The discriminant is B² - 4AC = 4² - 4×2×-70 = 576. Since it is greater than 0, there are two distinct intersection points. So the answer is Two intersection points.",
+     "difficulty": "medium",
+     "distractorRationales": [
+      {
+       "index": 0,
+       "plausible_because": "같은 연립에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 두 식에서 계산되었다.",
+       "why_wrong": "판별식이 0이 아닌데 0이라고 착각했다.",
+       "kind": "condition_ignored"
+      },
+      {
+       "index": 3,
+       "plausible_because": "같은 연립에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 두 식에서 계산되었다.",
+       "why_wrong": "판별식이 음수가 아닌데 음수라고 착각해 교점이 없다고 답했다.",
+       "kind": "condition_ignored"
+      },
+      {
+       "index": 2,
+       "plausible_because": "같은 연립에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 두 식에서 계산되었다.",
+       "why_wrong": "직선과 포물선이 항상 여러 점에서 만난다고 잘못 일반화했다 — 포물선과 직선은 무수히 많은 점에서 만날 수 없다.",
+       "kind": "other"
+      }
+     ],
+     "difficultyRationale": "",
+     "design": null,
+     "subpattern": "linear_quadratic_intersection"
+    },
+    "quality": {
+     "contract": {
+      "ok": true,
+      "issues": []
+     },
+     "estimatedDifficulty": "medium",
+     "requestedDifficulty": "medium",
+     "difficultyReasons": [],
+     "distractors": [],
+     "independentReview": {
+      "pickedIndex": null,
+      "pickedAnswer": null,
+      "agrees": true,
+      "confidence": "high",
+      "flags": []
+     },
+     "needsReview": false,
+     "needsReviewReasons": [],
+     "calibrated": false,
+     "reviewedAt": "2026-10-19T23:55:29.011Z"
+    }
+   }
+  },
+  {
+   "slot": {
+    "name": "SAT Practice Test 2",
+    "position": 23,
+    "versionId": "b69899ab-bb34-4287-b935-c08ca5bd771c",
+    "problemId": "34f4d4b2-bf3a-4140-b8c9-2062a4d7881f",
+    "skill": "nonlinear_equations_systems",
+    "format": "mc",
+    "difficulty": "easy",
+    "moduleKey": "math_m2",
+    "route": "lower"
+   },
+   "rec": {
+    "gid": "e1018-t2-math_m2-23",
+    "runId": "sat-error-report-1018",
+    "skill": "nonlinear_equations_systems",
+    "domain": "advanced_math",
+    "examSystem": "sat_math",
+    "difficulty": "easy",
+    "format": "mc",
+    "createdVia": "compiler",
+    "subpattern": "root",
+    "problem": {
+     "format": "mc",
+     "figure": null,
+     "passage": "Consider the equation shown.\n\n$x^2 + 3x - 4 = 0$\n\nWhat is the larger solution to the equation shown?",
+     "stimulus": "Consider the equation shown.\n\n$x^2 + 3x - 4 = 0$",
+     "question": "What is the larger solution to the equation shown?",
+     "needsFigure": false,
+     "options": [
+      "1",
+      "4",
+      "-1",
+      "-4"
+     ],
+     "correctIndex": 0,
+     "answers": null,
+     "statements": null,
+     "explanation": "x² + 3x - 4 = (x + 4)(x - 1)로 인수분해되므로 근은 -4, 1이다. 더 큰 값은 1이다.",
+     "explanationEn": "x² + 3x - 4 factors as (x + 4)(x - 1), so the solutions are -4 and 1. The larger value is 1.",
+     "difficulty": "easy",
+     "distractorRationales": [
+      {
+       "index": 3,
+       "plausible_because": "같은 방정식에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 방정식에서 계산되었다.",
+       "why_wrong": "더 큰 근이 아니라 작은 근을 답으로 골랐다.",
+       "kind": "condition_ignored"
+      },
+      {
+       "index": 2,
+       "plausible_because": "같은 방정식에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 방정식에서 계산되었다.",
+       "why_wrong": "인수분해 후 부호를 반대로 계산했다(x-r이 아니라 x+r로 착각).",
+       "kind": "sign_error"
+      },
+      {
+       "index": 1,
+       "plausible_because": "같은 방정식에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 방정식에서 계산되었다.",
+       "why_wrong": "작은 근의 부호까지 반대로 계산했다.",
+       "kind": "sign_error"
+      }
+     ],
+     "difficultyRationale": "",
+     "design": null,
+     "subpattern": "root"
+    },
+    "quality": {
+     "contract": {
+      "ok": true,
+      "issues": []
+     },
+     "estimatedDifficulty": "medium",
+     "requestedDifficulty": "medium",
+     "difficultyReasons": [],
+     "distractors": [],
+     "independentReview": {
+      "pickedIndex": null,
+      "pickedAnswer": null,
+      "agrees": true,
+      "confidence": "high",
+      "flags": []
+     },
+     "needsReview": false,
+     "needsReviewReasons": [],
+     "calibrated": false,
+     "reviewedAt": "2026-10-19T23:55:29.024Z"
+    }
+   }
+  },
+  {
+   "slot": {
+    "name": "SAT Practice Test 2",
+    "position": 26,
+    "versionId": "a39f72e6-eff9-4388-ad0f-0f655853a6b2",
+    "problemId": "59145e71-c343-4f59-a57c-e07007c87ba3",
+    "skill": "nonlinear_functions",
+    "format": "mc",
+    "difficulty": "easy",
+    "moduleKey": "math_m2",
+    "route": "lower"
+   },
+   "rec": {
+    "gid": "e1018-t2-math_m2-26",
+    "runId": "sat-error-report-1018",
+    "skill": "nonlinear_functions",
+    "domain": "advanced_math",
+    "examSystem": "sat_math",
+    "difficulty": "easy",
+    "format": "mc",
+    "createdVia": "compiler",
+    "subpattern": "vertex_y",
+    "problem": {
+     "format": "mc",
+     "figure": {
+      "type": "plane",
+      "axes": {
+       "x": {
+        "min": -2,
+        "max": 10
+       },
+       "y": {
+        "min": -36,
+        "max": 10
+       }
+      },
+      "objects": [
+       {
+        "id": "f",
+        "kind": "function",
+        "fn": "quadratic",
+        "params": [
+         -1,
+         8,
+         -11
+        ],
+        "label": "f"
+       }
+      ],
+      "grid": true
+     },
+     "passage": "The graph of y = f(x), a parabola, is shown in the xy-plane below.\n\nWhat is the y-coordinate of the vertex of the graph of f in the xy-plane?",
+     "stimulus": "The graph of y = f(x), a parabola, is shown in the xy-plane below.",
+     "question": "What is the y-coordinate of the vertex of the graph of f in the xy-plane?",
+     "needsFigure": false,
+     "options": [
+      "-4",
+      "-5",
+      "4",
+      "5"
+     ],
+     "correctIndex": 3,
+     "answers": null,
+     "statements": null,
+     "explanation": "그래프의 꼭짓점을 읽으면 y좌표는 5이다.",
+     "explanationEn": "Reading the vertex of the graph, its y-coordinate is 5.",
+     "difficulty": "easy",
+     "distractorRationales": [
+      {
+       "index": 1,
+       "plausible_because": "같은 함수에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 함수에서 계산되었다.",
+       "why_wrong": "꼭짓점의 y좌표 부호를 반대로 계산했다.",
+       "kind": "sign_error"
+      },
+      {
+       "index": 2,
+       "plausible_because": "같은 함수에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 함수에서 계산되었다.",
+       "why_wrong": "x좌표와 y좌표를 서로 바꿔 답했다.",
+       "kind": "condition_ignored"
+      },
+      {
+       "index": 0,
+       "plausible_because": "같은 함수에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 함수에서 계산되었다.",
+       "why_wrong": "x좌표와 y좌표를 바꾸고 부호까지 반대로 계산했다.",
+       "kind": "sign_error"
+      }
+     ],
+     "difficultyRationale": "",
+     "design": null,
+     "subpattern": "vertex_y"
+    },
+    "quality": {
+     "contract": {
+      "ok": true,
+      "issues": []
+     },
+     "estimatedDifficulty": "medium",
+     "requestedDifficulty": "medium",
+     "difficultyReasons": [],
+     "distractors": [],
+     "independentReview": {
+      "pickedIndex": null,
+      "pickedAnswer": null,
+      "agrees": true,
+      "confidence": "high",
+      "flags": []
+     },
+     "needsReview": false,
+     "needsReviewReasons": [],
+     "calibrated": false,
+     "reviewedAt": "2026-10-19T23:55:29.044Z"
+    }
+   }
+  },
+  {
+   "slot": {
+    "name": "SAT Practice Test 2",
+    "position": 39,
+    "versionId": "77eb0072-80bd-40d7-a7a3-7829eb03c139",
+    "problemId": "923bc69f-c8f4-4db2-b71b-222ca8808713",
+    "skill": "systems_linear",
+    "format": "mc",
+    "difficulty": "medium",
+    "moduleKey": "math_m2",
+    "route": "lower"
+   },
+   "rec": {
+    "gid": "e1018-t2-math_m2-39",
+    "runId": "sat-error-report-1018",
+    "skill": "systems_linear",
+    "domain": "algebra",
+    "examSystem": "sat_math",
+    "difficulty": "medium",
+    "format": "mc",
+    "createdVia": "compiler",
+    "subpattern": "intercept",
+    "problem": {
+     "format": "mc",
+     "figure": null,
+     "passage": "Consider the system of equations shown.\n\ny = -2x - 3\ny = -x - 2\n\nWhat is the y-intercept of the line represented by the first equation shown?",
+     "stimulus": "Consider the system of equations shown.\n\ny = -2x - 3\ny = -x - 2",
+     "question": "What is the y-intercept of the line represented by the first equation shown?",
+     "needsFigure": false,
+     "options": [
+      "-3",
+      "3",
+      "-2",
+      "2"
+     ],
+     "correctIndex": 0,
+     "answers": null,
+     "statements": null,
+     "explanation": "첫 번째 식(y = -2x - 3)의 형태에서 상수항이 y절편이므로 y절편은 -3이다.",
+     "explanationEn": "In the first equation (y = -2x - 3), the constant term is the y-intercept, so the y-intercept is -3.",
+     "difficulty": "medium",
+     "distractorRationales": [
+      {
+       "index": 1,
+       "plausible_because": "계산 과정의 실제 오류 경로에서 나온 값이라 얼핏 보면 그럴듯하다.",
+       "matches": "같은 두 식에서 계산되었다.",
+       "why_wrong": "부호를 반대로 계산했다.",
+       "kind": "sign_error"
+      },
+      {
+       "index": 2,
+       "plausible_because": "계산 과정의 실제 오류 경로에서 나온 값이라 얼핏 보면 그럴듯하다.",
+       "matches": "같은 두 식에서 계산되었다.",
+       "why_wrong": "첫 번째 식이 아니라 두 번째 식의 y절편을 답으로 골랐다.",
+       "kind": "condition_ignored"
+      },
+      {
+       "index": 3,
+       "plausible_because": "계산 과정의 실제 오류 경로에서 나온 값이라 얼핏 보면 그럴듯하다.",
+       "matches": "같은 두 식에서 계산되었다.",
+       "why_wrong": "첫 번째 식이 아니라 두 번째 식의 y절편을 답으로 골랐다. 그 값의 부호까지 반대로 계산했다.",
+       "kind": "sign_error"
+      }
+     ],
+     "difficultyRationale": "",
+     "design": null,
+     "subpattern": "intercept"
+    },
+    "quality": {
+     "contract": {
+      "ok": true,
+      "issues": []
+     },
+     "estimatedDifficulty": "medium",
+     "requestedDifficulty": "medium",
+     "difficultyReasons": [],
+     "distractors": [],
+     "independentReview": {
+      "pickedIndex": null,
+      "pickedAnswer": null,
+      "agrees": true,
+      "confidence": "high",
+      "flags": []
+     },
+     "needsReview": false,
+     "needsReviewReasons": [],
+     "calibrated": false,
+     "reviewedAt": "2026-10-19T23:55:29.044Z"
+    }
+   }
+  },
+  {
+   "slot": {
+    "name": "SAT Practice Test 2",
+    "position": 56,
+    "versionId": "8fb75c7a-dbed-4fae-b102-16552bb352ef",
+    "problemId": "d19bdb5a-b445-48d4-bc58-5409d7363f94",
+    "skill": "nonlinear_equations_systems",
+    "format": "mc",
+    "difficulty": "medium",
+    "moduleKey": "math_m2",
+    "route": "higher"
+   },
+   "rec": {
+    "gid": "e1018-t2-math_m2-56",
+    "runId": "sat-error-report-1018",
+    "skill": "nonlinear_equations_systems",
+    "domain": "advanced_math",
+    "examSystem": "sat_math",
+    "difficulty": "medium",
+    "format": "mc",
+    "createdVia": "compiler",
+    "subpattern": "irrational_sum_of_roots",
+    "problem": {
+     "format": "mc",
+     "figure": null,
+     "passage": "Consider the equation shown.\n\n$2x^2 - 8x - 72 = 0$\n\nWhat is the sum of the solutions to the equation shown?",
+     "stimulus": "Consider the equation shown.\n\n$2x^2 - 8x - 72 = 0$",
+     "question": "What is the sum of the solutions to the equation shown?",
+     "needsFigure": false,
+     "options": [
+      "8",
+      "4",
+      "-36",
+      "-4"
+     ],
+     "correctIndex": 1,
+     "answers": null,
+     "statements": null,
+     "explanation": "판별식 D = b² - 4ac = 640는 완전제곱수가 아니므로 두 근은 무리수다. 하지만 근의 합은 항상 유리수인 -b/a로 구할 수 있다: -(-8)/2 = 4. 근을 직접 구해 더할 필요가 없다.",
+     "explanationEn": "The discriminant D = b² - 4ac = 640 is not a perfect square, so the two roots are irrational. But the sum of the roots is always the rational value -b/a: -(-8)/2 = 4. There is no need to compute the individual roots.",
+     "difficulty": "medium",
+     "distractorRationales": [
+      {
+       "index": 0,
+       "plausible_because": "같은 방정식에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 방정식에서 계산되었다.",
+       "why_wrong": "합 공식(-b/a)에서 a로 나누는 것을 잊고 -b를 그대로 답으로 썼다.",
+       "kind": "formula_misuse"
+      },
+      {
+       "index": 3,
+       "plausible_because": "같은 방정식에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 방정식에서 계산되었다.",
+       "why_wrong": "합 공식의 부호를 반대로 계산했다(-b/a가 아니라 b/a).",
+       "kind": "sign_error"
+      },
+      {
+       "index": 2,
+       "plausible_because": "같은 방정식에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 방정식에서 계산되었다.",
+       "why_wrong": "근의 합 대신 근의 곱(c/a)을 답으로 썼다.",
+       "kind": "condition_ignored"
+      }
+     ],
+     "difficultyRationale": "",
+     "design": null,
+     "subpattern": "irrational_sum_of_roots"
+    },
+    "quality": {
+     "contract": {
+      "ok": true,
+      "issues": []
+     },
+     "estimatedDifficulty": "medium",
+     "requestedDifficulty": "medium",
+     "difficultyReasons": [],
+     "distractors": [],
+     "independentReview": {
+      "pickedIndex": null,
+      "pickedAnswer": null,
+      "agrees": true,
+      "confidence": "high",
+      "flags": []
+     },
+     "needsReview": false,
+     "needsReviewReasons": [],
+     "calibrated": false,
+     "reviewedAt": "2026-10-19T23:55:29.054Z"
+    }
+   }
+  },
+  {
+   "slot": {
+    "name": "SAT Practice Test 3",
+    "position": 4,
+    "versionId": "d92b8191-1d45-47bd-bfba-cea1e0848ab0",
+    "problemId": "42d81e80-83ae-4484-8f2a-ea35bc58240e",
+    "skill": "nonlinear_equations_systems",
+    "format": "spr",
+    "difficulty": "easy",
+    "moduleKey": "math_m1",
+    "route": null
+   },
+   "rec": {
+    "gid": "e1018-t3-math_m1-4",
+    "runId": "sat-error-report-1018",
+    "skill": "nonlinear_equations_systems",
+    "domain": "advanced_math",
+    "examSystem": "sat_math",
+    "difficulty": "easy",
+    "format": "spr",
+    "createdVia": "compiler",
+    "subpattern": "linear_quadratic_intersection",
+    "problem": {
+     "format": "spr",
+     "figure": {
+      "type": "plane",
+      "axes": {
+       "x": {
+        "min": -9,
+        "max": 9
+       },
+       "y": {
+        "min": -446,
+        "max": 74
+       }
+      },
+      "objects": [
+       {
+        "id": "q",
+        "kind": "function",
+        "fn": "quadratic",
+        "params": [
+         -2,
+         20,
+         -44
+        ]
+       },
+       {
+        "id": "l",
+        "kind": "line",
+        "slope": 2,
+        "intercept": -4
+       }
+      ],
+      "grid": true
+     },
+     "passage": "The graphs of a quadratic function and a linear function are shown in the xy-plane below.\n\nWhat is the sum of the x-coordinates of the two intersection points of the graphs shown?",
+     "stimulus": "The graphs of a quadratic function and a linear function are shown in the xy-plane below.",
+     "question": "What is the sum of the x-coordinates of the two intersection points of the graphs shown?",
+     "needsFigure": false,
+     "options": null,
+     "correctIndex": null,
+     "answers": [
+      "9"
+     ],
+     "statements": null,
+     "explanation": "그래프의 두 곡선은 y = -2x² + 20x - 44, y = 2x - 4이다. 두 식을 같다고 놓으면 -2x² + 20x - 44 = 2x - 4이고, 정리하면 -2x² + 18x - 40 = 0이다. 이 식의 두 근은 4, 5이며, 두 근의 합은 -B/A = -(18)/-2 = 9이다(개별 교점을 따로 구하지 않아도 된다).",
+     "explanationEn": "The two graphs are y = -2x² + 20x - 44 and y = 2x - 4. Setting the two expressions equal gives -2x² + 20x - 44 = 2x - 4, which simplifies to -2x² + 18x - 40 = 0. The two roots are 4 and 5, and their sum is -B/A = -(18)/-2 = 9 (no need to find each intersection point separately).",
+     "difficulty": "easy",
+     "distractorRationales": [
+      {
+       "index": 1,
+       "plausible_because": "같은 연립에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 두 식에서 계산되었다.",
+       "why_wrong": "두 교점 중 하나의 x좌표만 답으로 쓰고, 합을 구하라는 조건을 놓쳤다.",
+       "kind": "condition_ignored"
+      },
+      {
+       "index": 2,
+       "plausible_because": "같은 연립에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 두 식에서 계산되었다.",
+       "why_wrong": "두 교점 중 다른 하나의 x좌표만 답으로 썼다.",
+       "kind": "condition_ignored"
+      },
+      {
+       "index": 0,
+       "plausible_because": "같은 연립에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 두 식에서 계산되었다.",
+       "why_wrong": "근의 합 공식 -B/a에서 부호를 반대로 계산했다.",
+       "kind": "sign_error"
+      }
+     ],
+     "difficultyRationale": "",
+     "design": null,
+     "subpattern": "linear_quadratic_intersection"
+    },
+    "quality": {
+     "contract": {
+      "ok": true,
+      "issues": []
+     },
+     "estimatedDifficulty": "medium",
+     "requestedDifficulty": "medium",
+     "difficultyReasons": [],
+     "distractors": [],
+     "independentReview": {
+      "pickedIndex": null,
+      "pickedAnswer": null,
+      "agrees": true,
+      "confidence": "high",
+      "flags": []
+     },
+     "needsReview": false,
+     "needsReviewReasons": [],
+     "calibrated": false,
+     "reviewedAt": "2026-10-19T23:55:29.055Z"
+    }
+   }
+  },
+  {
+   "slot": {
+    "name": "SAT Practice Test 3",
+    "position": 6,
+    "versionId": "4901952e-5191-4278-8484-ea16aaccdcf1",
+    "problemId": "892046e9-bd40-4bb4-be75-874398db8483",
+    "skill": "nonlinear_functions",
+    "format": "mc",
+    "difficulty": "easy",
+    "moduleKey": "math_m1",
+    "route": null
+   },
+   "rec": {
+    "gid": "e1018-t3-math_m1-6",
+    "runId": "sat-error-report-1018",
+    "skill": "nonlinear_functions",
+    "domain": "advanced_math",
+    "examSystem": "sat_math",
+    "difficulty": "easy",
+    "format": "mc",
+    "createdVia": "compiler",
+    "subpattern": "vertex_x",
+    "problem": {
+     "format": "mc",
+     "figure": {
+      "type": "plane",
+      "axes": {
+       "x": {
+        "min": -8,
+        "max": 4
+       },
+       "y": {
+        "min": -36,
+        "max": 10
+       }
+      },
+      "objects": [
+       {
+        "id": "f",
+        "kind": "function",
+        "fn": "quadratic",
+        "params": [
+         -1,
+         -4,
+         1
+        ],
+        "label": "f"
+       }
+      ],
+      "grid": true
+     },
+     "passage": "The graph of y = f(x), a parabola, is shown in the xy-plane below.\n\nWhat is the x-coordinate of the vertex of the graph of f in the xy-plane?",
+     "stimulus": "The graph of y = f(x), a parabola, is shown in the xy-plane below.",
+     "question": "What is the x-coordinate of the vertex of the graph of f in the xy-plane?",
+     "needsFigure": false,
+     "options": [
+      "5",
+      "-5",
+      "2",
+      "-2"
+     ],
+     "correctIndex": 3,
+     "answers": null,
+     "statements": null,
+     "explanation": "그래프의 꼭짓점을 읽으면 x좌표는 -2이다.",
+     "explanationEn": "Reading the vertex of the graph, its x-coordinate is -2.",
+     "difficulty": "easy",
+     "distractorRationales": [
+      {
+       "index": 2,
+       "plausible_because": "같은 함수에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 함수에서 계산되었다.",
+       "why_wrong": "꼭짓점의 x좌표는 h가 아니라 -h라고 착각해 부호를 반대로 계산했다.",
+       "kind": "sign_error"
+      },
+      {
+       "index": 0,
+       "plausible_because": "같은 함수에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 함수에서 계산되었다.",
+       "why_wrong": "x좌표와 y좌표를 서로 바꿔 답했다.",
+       "kind": "condition_ignored"
+      },
+      {
+       "index": 1,
+       "plausible_because": "같은 함수에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 함수에서 계산되었다.",
+       "why_wrong": "x좌표와 y좌표를 바꾸고 부호까지 반대로 계산했다.",
+       "kind": "sign_error"
+      }
+     ],
+     "difficultyRationale": "",
+     "design": null,
+     "subpattern": "vertex_x"
+    },
+    "quality": {
+     "contract": {
+      "ok": true,
+      "issues": []
+     },
+     "estimatedDifficulty": "medium",
+     "requestedDifficulty": "medium",
+     "difficultyReasons": [],
+     "distractors": [],
+     "independentReview": {
+      "pickedIndex": null,
+      "pickedAnswer": null,
+      "agrees": true,
+      "confidence": "high",
+      "flags": []
+     },
+     "needsReview": false,
+     "needsReviewReasons": [],
+     "calibrated": false,
+     "reviewedAt": "2026-10-19T23:55:29.056Z"
+    }
+   }
+  },
+  {
+   "slot": {
+    "name": "SAT Practice Test 3",
+    "position": 10,
+    "versionId": "cbe61697-62c8-4159-ba69-494a901b0cbe",
+    "problemId": "6a5df53a-7fca-4407-8e1c-9701e23a51ab",
+    "skill": "nonlinear_equations_systems",
+    "format": "spr",
+    "difficulty": "medium",
+    "moduleKey": "math_m1",
+    "route": null
+   },
+   "rec": {
+    "gid": "e1018-t3-math_m1-10",
+    "runId": "sat-error-report-1018",
+    "skill": "nonlinear_equations_systems",
+    "domain": "advanced_math",
+    "examSystem": "sat_math",
+    "difficulty": "medium",
+    "format": "spr",
+    "createdVia": "compiler",
+    "subpattern": "product_of_roots",
+    "problem": {
+     "format": "spr",
+     "figure": null,
+     "passage": "Consider the equation shown.\n\n$x^2 - 8x + 7 = 0$\n\nWhat is the product of the solutions to the equation shown?",
+     "stimulus": "Consider the equation shown.\n\n$x^2 - 8x + 7 = 0$",
+     "question": "What is the product of the solutions to the equation shown?",
+     "needsFigure": false,
+     "options": null,
+     "correctIndex": null,
+     "answers": [
+      "7"
+     ],
+     "statements": null,
+     "explanation": "x² - 8x + 7 = (x - 7)(x - 1)로 인수분해되므로 근은 7, 1이다. 두 근의 곱은 c = 7이다.",
+     "explanationEn": "x² - 8x + 7 factors as (x - 7)(x - 1), so the solutions are 7 and 1. The product of the solutions is c = 7.",
+     "difficulty": "medium",
+     "distractorRationales": [
+      {
+       "index": 1,
+       "plausible_because": "같은 방정식에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 방정식에서 계산되었다.",
+       "why_wrong": "근의 곱 공식(c)의 부호를 반대로 계산했다.",
+       "kind": "sign_error"
+      },
+      {
+       "index": 2,
+       "plausible_because": "같은 방정식에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 방정식에서 계산되었다.",
+       "why_wrong": "근의 곱 대신 근의 합에 관련된 값(-b)을 답으로 썼다.",
+       "kind": "condition_ignored"
+      },
+      {
+       "index": 3,
+       "plausible_because": "같은 방정식에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 방정식에서 계산되었다.",
+       "why_wrong": "두 근을 곱하지 않고 빼서 계산했다.",
+       "kind": "formula_misuse"
+      }
+     ],
+     "difficultyRationale": "",
+     "design": null,
+     "subpattern": "product_of_roots"
+    },
+    "quality": {
+     "contract": {
+      "ok": true,
+      "issues": []
+     },
+     "estimatedDifficulty": "medium",
+     "requestedDifficulty": "medium",
+     "difficultyReasons": [],
+     "distractors": [],
+     "independentReview": {
+      "pickedIndex": null,
+      "pickedAnswer": null,
+      "agrees": true,
+      "confidence": "high",
+      "flags": []
+     },
+     "needsReview": false,
+     "needsReviewReasons": [],
+     "calibrated": false,
+     "reviewedAt": "2026-10-19T23:55:29.066Z"
+    }
+   }
+  },
+  {
+   "slot": {
+    "name": "SAT Practice Test 3",
+    "position": 27,
+    "versionId": "364658fa-7ad1-4fa7-92a2-7f3cd4408ae1",
+    "problemId": "bc82ea9c-6adc-448a-9635-f99107d88df1",
+    "skill": "nonlinear_functions",
+    "format": "mc",
+    "difficulty": "easy",
+    "moduleKey": "math_m2",
+    "route": "lower"
+   },
+   "rec": {
+    "gid": "e1018-t3-math_m2-27",
+    "runId": "sat-error-report-1018",
+    "skill": "nonlinear_functions",
+    "domain": "advanced_math",
+    "examSystem": "sat_math",
+    "difficulty": "easy",
+    "format": "mc",
+    "createdVia": "compiler",
+    "subpattern": "vertex_y",
+    "problem": {
+     "format": "mc",
+     "figure": {
+      "type": "plane",
+      "axes": {
+       "x": {
+        "min": -7,
+        "max": 5
+       },
+       "y": {
+        "min": 0,
+        "max": 46
+       }
+      },
+      "objects": [
+       {
+        "id": "f",
+        "kind": "function",
+        "fn": "quadratic",
+        "params": [
+         1,
+         2,
+         6
+        ],
+        "label": "f"
+       }
+      ],
+      "grid": true
+     },
+     "passage": "The graph of y = f(x), a parabola, is shown in the xy-plane below.\n\nWhat is the y-coordinate of the vertex of the graph of f in the xy-plane?",
+     "stimulus": "The graph of y = f(x), a parabola, is shown in the xy-plane below.",
+     "question": "What is the y-coordinate of the vertex of the graph of f in the xy-plane?",
+     "needsFigure": false,
+     "options": [
+      "1",
+      "-5",
+      "5",
+      "-1"
+     ],
+     "correctIndex": 2,
+     "answers": null,
+     "statements": null,
+     "explanation": "그래프의 꼭짓점을 읽으면 y좌표는 5이다.",
+     "explanationEn": "Reading the vertex of the graph, its y-coordinate is 5.",
+     "difficulty": "easy",
+     "distractorRationales": [
+      {
+       "index": 1,
+       "plausible_because": "같은 함수에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 함수에서 계산되었다.",
+       "why_wrong": "꼭짓점의 y좌표 부호를 반대로 계산했다.",
+       "kind": "sign_error"
+      },
+      {
+       "index": 3,
+       "plausible_because": "같은 함수에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 함수에서 계산되었다.",
+       "why_wrong": "x좌표와 y좌표를 서로 바꿔 답했다.",
+       "kind": "condition_ignored"
+      },
+      {
+       "index": 0,
+       "plausible_because": "같은 함수에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 함수에서 계산되었다.",
+       "why_wrong": "x좌표와 y좌표를 바꾸고 부호까지 반대로 계산했다.",
+       "kind": "sign_error"
+      }
+     ],
+     "difficultyRationale": "",
+     "design": null,
+     "subpattern": "vertex_y"
+    },
+    "quality": {
+     "contract": {
+      "ok": true,
+      "issues": []
+     },
+     "estimatedDifficulty": "medium",
+     "requestedDifficulty": "medium",
+     "difficultyReasons": [],
+     "distractors": [],
+     "independentReview": {
+      "pickedIndex": null,
+      "pickedAnswer": null,
+      "agrees": true,
+      "confidence": "high",
+      "flags": []
+     },
+     "needsReview": false,
+     "needsReviewReasons": [],
+     "calibrated": false,
+     "reviewedAt": "2026-10-19T23:55:29.079Z"
+    }
+   }
+  },
+  {
+   "slot": {
+    "name": "SAT Practice Test 3",
+    "position": 30,
+    "versionId": "3782c084-1cfa-44af-abf3-5615a75c57d0",
+    "problemId": "e5bec92c-0eb1-4c2c-b656-23d593a7a8f3",
+    "skill": "nonlinear_equations_systems",
+    "format": "mc",
+    "difficulty": "easy",
+    "moduleKey": "math_m2",
+    "route": "lower"
+   },
+   "rec": {
+    "gid": "e1018-t3-math_m2-30",
+    "runId": "sat-error-report-1018",
+    "skill": "nonlinear_equations_systems",
+    "domain": "advanced_math",
+    "examSystem": "sat_math",
+    "difficulty": "easy",
+    "format": "mc",
+    "createdVia": "compiler",
+    "subpattern": "sum_of_roots",
+    "problem": {
+     "format": "mc",
+     "figure": null,
+     "passage": "Consider the equation shown.\n\n$x^2 - 9x + 20 = 0$\n\nWhat is the sum of the solutions to the equation shown?",
+     "stimulus": "Consider the equation shown.\n\n$x^2 - 9x + 20 = 0$",
+     "question": "What is the sum of the solutions to the equation shown?",
+     "needsFigure": false,
+     "options": [
+      "-9",
+      "9",
+      "1",
+      "20"
+     ],
+     "correctIndex": 1,
+     "answers": null,
+     "statements": null,
+     "explanation": "x² - 9x + 20 = (x - 5)(x - 4)로 인수분해되므로 근은 5, 4이다. 두 근의 합은 -b = +9 이므로 9이다.",
+     "explanationEn": "x² - 9x + 20 factors as (x - 5)(x - 4), so the solutions are 5 and 4. The sum of the solutions is -b = +9, so the answer is 9.",
+     "difficulty": "easy",
+     "distractorRationales": [
+      {
+       "index": 0,
+       "plausible_because": "같은 방정식에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 방정식에서 계산되었다.",
+       "why_wrong": "근의 합이 -b라는 공식에서 부호를 반대로 계산했다.",
+       "kind": "sign_error"
+      },
+      {
+       "index": 3,
+       "plausible_because": "같은 방정식에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 방정식에서 계산되었다.",
+       "why_wrong": "근의 합 대신 근의 곱(c)을 답으로 썼다.",
+       "kind": "condition_ignored"
+      },
+      {
+       "index": 2,
+       "plausible_because": "같은 방정식에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 방정식에서 계산되었다.",
+       "why_wrong": "두 근을 더하지 않고 빼서 계산했다.",
+       "kind": "formula_misuse"
+      }
+     ],
+     "difficultyRationale": "",
+     "design": null,
+     "subpattern": "sum_of_roots"
+    },
+    "quality": {
+     "contract": {
+      "ok": true,
+      "issues": []
+     },
+     "estimatedDifficulty": "medium",
+     "requestedDifficulty": "medium",
+     "difficultyReasons": [],
+     "distractors": [],
+     "independentReview": {
+      "pickedIndex": null,
+      "pickedAnswer": null,
+      "agrees": true,
+      "confidence": "high",
+      "flags": []
+     },
+     "needsReview": false,
+     "needsReviewReasons": [],
+     "calibrated": false,
+     "reviewedAt": "2026-10-19T23:55:29.089Z"
+    }
+   }
+  },
+  {
+   "slot": {
+    "name": "SAT Practice Test 3",
+    "position": 56,
+    "versionId": "7982fc06-cb34-4dbf-a073-89b305209d5d",
+    "problemId": "c087a2e0-3492-4819-a4f9-4576779f468c",
+    "skill": "linear_inequalities",
+    "format": "mc",
+    "difficulty": "medium",
+    "moduleKey": "math_m2",
+    "route": "higher"
+   },
+   "rec": {
+    "gid": "e1018-t3-math_m2-56",
+    "runId": "sat-error-report-1018",
+    "skill": "linear_inequalities",
+    "domain": "algebra",
+    "examSystem": "sat_math",
+    "difficulty": "medium",
+    "format": "mc",
+    "createdVia": "compiler",
+    "subpattern": "point_in_solution",
+    "problem": {
+     "format": "mc",
+     "figure": null,
+     "passage": "Consider the inequality shown.\n\n$y < 4x - 1$\n\nWhich of the following points is a solution to the inequality shown?",
+     "stimulus": "Consider the inequality shown.\n\n$y < 4x - 1$",
+     "question": "Which of the following points is a solution to the inequality shown?",
+     "needsFigure": false,
+     "options": [
+      "(6, -4)",
+      "(1, 3)",
+      "(-3, 6)",
+      "(-2, 5)"
+     ],
+     "correctIndex": 0,
+     "answers": null,
+     "statements": null,
+     "explanation": "경계선 y = 4x - 1 (경계선 제외)을 기준으로, y 값이 경계선의 값보다 작다 쪽이 해 영역이다. (6, -4)를 대입하면 조건을 만족하므로 정답이다.",
+     "explanationEn": "Relative to the boundary line y = 4x - 1 (boundary excluded), the solution region is where the y-value is less than the boundary's value. Substituting (6, -4) satisfies the condition, so it is the correct answer.",
+     "difficulty": "medium",
+     "distractorRationales": [
+      {
+       "index": 3,
+       "plausible_because": "경계선 위 또는 반대편의 실제 점이라 얼핏 보면 해로 보일 수 있다.",
+       "matches": "같은 부등식에서 골랐다.",
+       "why_wrong": "부등호의 방향을 반대로 적용해 해 영역 밖의 점을 답으로 골랐다.",
+       "kind": "sign_error"
+      },
+      {
+       "index": 2,
+       "plausible_because": "경계선 위 또는 반대편의 실제 점이라 얼핏 보면 해로 보일 수 있다.",
+       "matches": "같은 부등식에서 골랐다.",
+       "why_wrong": "부등호의 방향을 반대로 적용해 해 영역 밖의 점을 답으로 골랐다.",
+       "kind": "sign_error"
+      },
+      {
+       "index": 1,
+       "plausible_because": "경계선 위 또는 반대편의 실제 점이라 얼핏 보면 해로 보일 수 있다.",
+       "matches": "같은 부등식에서 골랐다.",
+       "why_wrong": "경계선 위의 점이라 부등호가 등호를 포함하지 않아 해가 아니다.",
+       "kind": "condition_ignored"
+      }
+     ],
+     "difficultyRationale": "",
+     "design": null,
+     "subpattern": "point_in_solution"
+    },
+    "quality": {
+     "contract": {
+      "ok": true,
+      "issues": []
+     },
+     "estimatedDifficulty": "medium",
+     "requestedDifficulty": "medium",
+     "difficultyReasons": [],
+     "distractors": [],
+     "independentReview": {
+      "pickedIndex": null,
+      "pickedAnswer": null,
+      "agrees": true,
+      "confidence": "high",
+      "flags": []
+     },
+     "needsReview": false,
+     "needsReviewReasons": [],
+     "calibrated": false,
+     "reviewedAt": "2026-10-19T23:55:29.089Z"
+    }
+   }
+  },
+  {
+   "slot": {
+    "name": "SAT Practice Test 7",
+    "position": 56,
+    "versionId": "7b678ac1-4290-440d-b2da-716babe006a3",
+    "problemId": "76aab8aa-a535-48c8-bbaf-6ffb53db0bff",
+    "skill": "nonlinear_equations_systems",
+    "format": "spr",
+    "difficulty": "medium",
+    "moduleKey": "math_m2",
+    "route": "higher"
+   },
+   "rec": {
+    "gid": "e1018-t7-math_m2-56",
+    "runId": "sat-error-report-1018",
+    "skill": "nonlinear_equations_systems",
+    "domain": "advanced_math",
+    "examSystem": "sat_math",
+    "difficulty": "medium",
+    "format": "spr",
+    "createdVia": "compiler",
+    "subpattern": "irrational_product_of_roots",
+    "problem": {
+     "format": "spr",
+     "figure": null,
+     "passage": "Consider the equation shown.\n\n$x^2 + 4x - 76 = 0$\n\nWhat is the product of the solutions to the equation shown?",
+     "stimulus": "Consider the equation shown.\n\n$x^2 + 4x - 76 = 0$",
+     "question": "What is the product of the solutions to the equation shown?",
+     "needsFigure": false,
+     "options": null,
+     "correctIndex": null,
+     "answers": [
+      "-76"
+     ],
+     "statements": null,
+     "explanation": "판별식 D = b² - 4ac = 320는 완전제곱수가 아니므로 두 근은 무리수다. 하지만 근의 곱은 항상 유리수인 c/a로 구할 수 있다: -76/1 = -76. 근을 직접 구해 곱할 필요가 없다.",
+     "explanationEn": "The discriminant D = b² - 4ac = 320 is not a perfect square, so the two roots are irrational. But the product of the roots is always the rational value c/a: -76/1 = -76. There is no need to compute the individual roots.",
+     "difficulty": "medium",
+     "distractorRationales": [
+      {
+       "index": 1,
+       "plausible_because": "같은 방정식에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 방정식에서 계산되었다.",
+       "why_wrong": "곱 공식의 부호를 반대로 계산했다(c/a가 아니라 -c/a).",
+       "kind": "sign_error"
+      },
+      {
+       "index": 3,
+       "plausible_because": "같은 방정식에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 방정식에서 계산되었다.",
+       "why_wrong": "근의 곱 대신 근의 합(-b/a)을 답으로 썼다.",
+       "kind": "condition_ignored"
+      },
+      {
+       "index": 0,
+       "plausible_because": "같은 방정식에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 방정식에서 계산되었다.",
+       "why_wrong": "근의 합 공식(-b/a)과 헷갈리면서 부호까지 반대로 썼다.",
+       "kind": "condition_ignored"
+      }
+     ],
+     "difficultyRationale": "",
+     "design": null,
+     "subpattern": "irrational_product_of_roots"
+    },
+    "quality": {
+     "contract": {
+      "ok": true,
+      "issues": []
+     },
+     "estimatedDifficulty": "medium",
+     "requestedDifficulty": "medium",
+     "difficultyReasons": [],
+     "distractors": [],
+     "independentReview": {
+      "pickedIndex": null,
+      "pickedAnswer": null,
+      "agrees": true,
+      "confidence": "high",
+      "flags": []
+     },
+     "needsReview": false,
+     "needsReviewReasons": [],
+     "calibrated": false,
+     "reviewedAt": "2026-10-19T23:55:29.102Z"
+    }
+   }
+  },
+  {
+   "slot": {
+    "name": "SAT Practice Test 8",
+    "position": 55,
+    "versionId": "4669e785-69d2-4310-8360-dd470c68d532",
+    "problemId": "9a17830a-a456-4f8d-8eda-edd4007c1801",
+    "skill": "nonlinear_equations_systems",
+    "format": "spr",
+    "difficulty": "medium",
+    "moduleKey": "math_m2",
+    "route": "higher"
+   },
+   "rec": {
+    "gid": "e1018-t8-math_m2-55",
+    "runId": "sat-error-report-1018",
+    "skill": "nonlinear_equations_systems",
+    "domain": "advanced_math",
+    "examSystem": "sat_math",
+    "difficulty": "medium",
+    "format": "spr",
+    "createdVia": "compiler",
+    "subpattern": "linear_quadratic_intersection",
+    "problem": {
+     "format": "spr",
+     "figure": null,
+     "passage": "Consider the system of equations shown.\n\n$y = -2x^2 - 5x - 11$\n$y = 7x + 7$\n\nWhat is the x-coordinate of the intersection point of the graphs of the equations shown?",
+     "stimulus": "Consider the system of equations shown.\n\n$y = -2x^2 - 5x - 11$\n$y = 7x + 7$",
+     "question": "What is the x-coordinate of the intersection point of the graphs of the equations shown?",
+     "needsFigure": false,
+     "options": null,
+     "correctIndex": null,
+     "answers": [
+      "-3"
+     ],
+     "statements": null,
+     "explanation": "두 식을 같다고 놓으면 -2x² - 5x - 11 = 7x + 7이고, 정리하면 -2x² - 12x - 18 = 0이다. 이 식은 (x + 3)² = 0 형태로 인수분해되어 중근 x = -3을 갖는다(직선이 포물선에 한 점에서 접한다). 따라서 교점의 x좌표는 -3이다.",
+     "explanationEn": "Setting the two expressions equal gives -2x² - 5x - 11 = 7x + 7, which simplifies to -2x² - 12x - 18 = 0. This factors as (x + 3)² = 0, a repeated root x = -3 (the line is tangent to the parabola at one point). So the x-coordinate of the intersection point is -3.",
+     "difficulty": "medium",
+     "distractorRationales": [
+      {
+       "index": 0,
+       "plausible_because": "같은 연립에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 두 식에서 계산되었다.",
+       "why_wrong": "교점의 x좌표 부호를 반대로 계산했다.",
+       "kind": "sign_error"
+      },
+      {
+       "index": 3,
+       "plausible_because": "같은 연립에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 두 식에서 계산되었다.",
+       "why_wrong": "x좌표 대신 직선의 기울기 m을 답으로 썼다(다른 변수를 답했다).",
+       "kind": "condition_ignored"
+      },
+      {
+       "index": 2,
+       "plausible_because": "같은 연립에서 나올 수 있는 실제 계산 오류다.",
+       "matches": "같은 두 식에서 계산되었다.",
+       "why_wrong": "두 식을 같다고 놓고 정리하지 않은 채, 이차식의 x계수를 그대로 답으로 썼다.",
+       "kind": "formula_misuse"
+      }
+     ],
+     "difficultyRationale": "",
+     "design": null,
+     "subpattern": "linear_quadratic_intersection"
+    },
+    "quality": {
+     "contract": {
+      "ok": true,
+      "issues": []
+     },
+     "estimatedDifficulty": "medium",
+     "requestedDifficulty": "medium",
+     "difficultyReasons": [],
+     "distractors": [],
+     "independentReview": {
+      "pickedIndex": null,
+      "pickedAnswer": null,
+      "agrees": true,
+      "confidence": "high",
+      "flags": []
+     },
+     "needsReview": false,
+     "needsReviewReasons": [],
+     "calibrated": false,
+     "reviewedAt": "2026-10-19T23:55:29.110Z"
+    }
+   }
+  }
+ ]
+}
