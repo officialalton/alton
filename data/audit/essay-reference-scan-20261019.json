@@ -1,0 +1,171 @@
+{
+ "generatedAt": "2026-10-19",
+ "checked": 59,
+ "bySubject": {
+  "ap_world_history": {
+   "checked": 16,
+   "withViolations": 1
+  },
+  "ap_us_history": {
+   "checked": 18,
+   "withViolations": 2
+  },
+  "ap_english_literature": {
+   "checked": 13,
+   "withViolations": 2
+  },
+  "ap_english_language": {
+   "checked": 12,
+   "withViolations": 0
+  }
+ },
+ "flagged": 5,
+ "violations": [
+  {
+   "candidateKey": "ap_english_literature-fa2-k0",
+   "run": "englit-p1-b",
+   "subject": "ap_english_literature",
+   "template": "q2",
+   "source": "data/ap/stock/lt-p1b-items.json",
+   "inAssignedSet": true,
+   "violations": [
+    {
+     "code": "expl_denies_but_full",
+     "band": "low",
+     "detail": "bullet \"The author uses different literary elements to sh… says the thesis point is not earned, but thesis is 1/1",
+     "fix": "lower thesis to 0 (total 2/6), or rewrite the explanation to say the point is earned",
+     "proposal": {
+      "area": "thesis",
+      "from": 1,
+      "to": 0,
+      "total": 2
+     },
+     "proposedHeading": {
+      "from": "Sample essay (low; scored 3/6: thesis 1, evidence 2, sophistication 0)",
+      "to": "Sample essay (low; scored 2/6: thesis 0, evidence 2, sophistication 0)"
+     }
+    }
+   ]
+  },
+  {
+   "candidateKey": "ap_english_literature-fa3-k0",
+   "run": "englit-p1-b",
+   "subject": "ap_english_literature",
+   "template": "q3",
+   "source": "data/ap/stock/lt-p1b-items.json",
+   "inAssignedSet": true,
+   "violations": [
+    {
+     "code": "expl_denies_but_full",
+     "band": "low",
+     "detail": "bullet \"The Helmer house protects her but it also traps h… says the thesis point is not earned, but thesis is 1/1",
+     "fix": "lower thesis to 0 (total 2/6), or rewrite the explanation to say the point is earned",
+     "proposal": {
+      "area": "thesis",
+      "from": 1,
+      "to": 0,
+      "total": 2
+     },
+     "proposedHeading": {
+      "from": "Sample essay (low; scored 3/6: thesis 1, evidence 2, sophistication 0)",
+      "to": "Sample essay (low; scored 2/6: thesis 0, evidence 2, sophistication 0)"
+     }
+    }
+   ]
+  },
+  {
+   "candidateKey": "ap_us_history-leq_1-k0",
+   "run": "ush-p1-b",
+   "subject": "ap_us_history",
+   "template": "leq",
+   "source": "data/ap/stock/ush-p1b-items.json",
+   "inAssignedSet": true,
+   "violations": [
+    {
+     "code": "expl_denies_but_full",
+     "band": "low",
+     "detail": "bullet \"The government passed new amendments after the wa… says the evidence point is not earned, but Evidence is 2/2",
+     "fix": "lower Evidence to 1 (total 2/6), or rewrite the explanation to say the point is earned",
+     "proposal": {
+      "area": "Evidence",
+      "from": 2,
+      "to": 1,
+      "total": 2
+     },
+     "proposedHeading": {
+      "from": "Sample response, low score (3/6; Thesis/claim 0, Contextualization 0, Evidence 2, Analysis and reasoning 1):",
+      "to": "Sample response, low score (2/6; Thesis/claim 0, Contextualization 0, Evidence 1, Analysis and reasoning 1):"
+     }
+    }
+   ]
+  },
+  {
+   "candidateKey": "ap_us_history-leq_3-k0",
+   "run": "ush-p1-b",
+   "subject": "ap_us_history",
+   "template": "leq",
+   "source": "data/ap/stock/ush-p1b-items.json",
+   "inAssignedSet": true,
+   "violations": [
+    {
+     "code": "expl_denies_but_full",
+     "band": "mid",
+     "detail": "bullet \"In the early colonial period, England was buildin… says the context point is not earned, but Contextualization is 1/1",
+     "fix": "lower Contextualization to 0 (total 4/6), or rewrite the explanation to say the point is earned",
+     "proposal": {
+      "area": "Contextualization",
+      "from": 1,
+      "to": 0,
+      "total": 4
+     },
+     "proposedHeading": {
+      "from": "Sample response, middle score (5/6; Thesis/claim 1, Contextualization 1, Evidence 2, Analysis and reasoning 1):",
+      "to": "Sample response, middle score (4/6; Thesis/claim 1, Contextualization 0, Evidence 2, Analysis and reasoning 1):"
+     }
+    },
+    {
+     "code": "expl_earns_n_mismatch",
+     "band": "mid",
+     "detail": "bullet \"Many Irish people came to the United States becau… says \"earns 1 of 2\" but Evidence is 2",
+     "fix": "set Evidence to 1 (total 4/6), or rewrite the explanation",
+     "proposal": {
+      "area": "Evidence",
+      "from": 2,
+      "to": 1,
+      "total": 4
+     },
+     "proposedHeading": {
+      "from": "Sample response, middle score (5/6; Thesis/claim 1, Contextualization 1, Evidence 2, Analysis and reasoning 1):",
+      "to": "Sample response, middle score (4/6; Thesis/claim 1, Contextualization 1, Evidence 1, Analysis and reasoning 1):"
+     }
+    }
+   ]
+  },
+  {
+   "candidateKey": "ap_world_history-wh2_leq-k0",
+   "run": "wh-f2",
+   "subject": "ap_world_history",
+   "template": "leq",
+   "source": "data/ap/stock/wh-f2-items.json",
+   "inAssignedSet": true,
+   "violations": [
+    {
+     "code": "expl_earns_n_mismatch",
+     "band": "mid",
+     "detail": "bullet \"Indian soldiers who worked for the British East I… says \"earns 1 of 2\" but Evidence is 2",
+     "fix": "set Evidence to 1 (total 3/6), or rewrite the explanation",
+     "proposal": {
+      "area": "Evidence",
+      "from": 2,
+      "to": 1,
+      "total": 3
+     },
+     "proposedHeading": {
+      "from": "Sample response, middle score (4/6; Thesis/claim 1, Contextualization 0, Evidence 2, Analysis and reasoning 1):",
+      "to": "Sample response, middle score (3/6; Thesis/claim 1, Contextualization 0, Evidence 1, Analysis and reasoning 1):"
+     }
+    }
+   ]
+  }
+ ]
+}

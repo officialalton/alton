@@ -78,12 +78,12 @@ d("AP Computer Science A P0 archetypes (Python generators run against the JDK, 2
     expect(converted).toBeGreaterThanOrEqual(out.names.length);
   });
 
-  it("registers the 4 official FRQ types (9 points each, 36 total) and passes the FRQ gates", () => {
+  it("registers the 4 official FRQ types (7/7/5/6 points, 25 total) and passes the FRQ gates", () => {
     const byTemplate: Record<string, number> = {};
     let total = 0;
     for (const n of out.frq) for (const p of out.frqPacks[n]) {
       byTemplate[p.template] = (byTemplate[p.template] ?? 0) + 1;
-      expect(p.total_points).toBe(CSA_FRQ_PROFILE.points);
+      expect(p.total_points).toBe(CSA_FRQ_PROFILE[p.template].points);
       expect(validateBlueprint(p.blueprint, { skills, topicUnit: topicUnit as Map<string, string> }).map((x) => x.code)).toEqual([]);
       expect(gateGuideFrq(csaGuide, p)).toEqual([]);
       expect({ n, reasons: [...gateFrq("ap_computer_science_a", p, skills, { requirePartTopics: false }), ...calibrateFrq(p, "ap_computer_science_a")] }).toEqual({ n, reasons: [] });
@@ -96,7 +96,7 @@ d("AP Computer Science A P0 archetypes (Python generators run against the JDK, 2
     }
     expect(byTemplate).toEqual({ q1: 4, q2: 4, q3: 4, q4: 4 });
     for (const t of ["q1", "q2", "q3", "q4"]) total += out.frqPacks[out.frq.find((n) => out.frqPacks[n][0].template === t)!][0].total_points;
-    expect(total).toBe(36);
+    expect(total).toBe(25);
     expect(csaGuide.frqTemplates.map((t) => t.id).sort()).toEqual([...out.frq].sort());
   });
 
@@ -126,6 +126,6 @@ describe("csaGuide and exam configuration", () => {
   it("wording rules mention the code-safety notation and the 9-point FRQ structure", () => {
     const w = csaWordingRules();
     expect(w).toMatch(/fenced code block/);
-    expect(w).toMatch(/9 points each/);
+    expect(w).toMatch(/7\/7\/5\/6 points/);
   });
 });
