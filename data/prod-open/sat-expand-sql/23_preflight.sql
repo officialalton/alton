@@ -4,4 +4,4 @@
 select p.id as problem_id, pv.version_no, pv.quality->'auditFix'->>'patch' as patch, pv.figure is null as no_figure, pv.figure_checked,
   (select count(*) from problem_versions v where v.problem_id = p.id and v.status in ('draft', 'in_review')) as inflight_versions,
   (select string_agg(distinct s.name || ' (' || s.status || ')', ', ') from mock_exam_set_items i join mock_exam_sets s on s.id = i.exam_set_id where i.problem_id = p.id and s.status in ('published', 'draft')) as used_in
-from problems p join problem_versions pv on pv.id = p.published_version_id where p.id::text ~ '^(3cdc0ad5|4cc47e7c|e90ca1b1|9977438d|e1f8fcfb|f59b7f57|d1e251f0)' order by p.id;
+from problems p join problem_versions pv on pv.id = p.published_version_id where p.id::text ~ '^(3cdc0ad5|4cc47e7c|e90ca1b1|9977438d|e1f8fcfb|f59b7f57|d1e251f0|7ddfae40)' order by p.id;

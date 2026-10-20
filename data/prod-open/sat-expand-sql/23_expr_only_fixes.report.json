@@ -1,7 +1,7 @@
 {
- "count": 3,
+ "count": 4,
  "tally": {
-  "apply": 3
+  "apply": 4
  },
  "reviewed": [
   "E1019-M011",
@@ -47,6 +47,18 @@
    "why": "지문 정정: 단가 $6$·$3$ 을 통화 표시(\\$6·\\$3)로(수식 렌더링으로 단위가 사라짐)",
    "currentPatch": "E1019-M016",
    "figure_checked": false
+  },
+  {
+   "patch": "E1019-X004",
+   "problemId": "7ddfae40-f506-48b2-a2c2-fd8dab606f30",
+   "set": "T2 m2#38",
+   "fields": [
+    "passage",
+    "figure"
+   ],
+   "why": "경계 사례 정리: 식이 지문에 이미 있어 그림 삭제(계산 문항), 소개 문장 삭제, 벽/바닥 공간 서술 통일",
+   "currentPatch": "R5-F-S06",
+   "figure_checked": true
   }
  ]
 }

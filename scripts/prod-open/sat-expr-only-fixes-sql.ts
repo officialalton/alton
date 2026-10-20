@@ -3,7 +3,7 @@
 //   산출: 23_expr_only_fixes.sql · 99_expr_only_rollback.sql · 23_preflight.sql · 23_verify.sql · 23_expr_only_fixes.report.json
 // 확인 결과(원격 현재 공개 버전 읽기 SELECT, 독립 풀이로 정답 재계산): 7건 모두 그림이 없고(figure=null) 지문에 필요한 식이 다 있으며 정답 키가 맞다.
 //   figure_checked=false 는 그림 없는 버전의 기본값이다(관리자 편집기도 그림이 있을 때만 true 로 저장) — 정정 대상이 아니다.
-//   다만 해설 오류 3건을 새 problem_version 으로 정정한다(E1019-X*):
+//   다만 해설 오류 3건과 (A4) T2 m2#38 그림 중복 1건을 새 problem_version 으로 정정한다(E1019-X*):
 //   - M012(4cc47e7c) 보기 D(150) 해설이 "고정비를 두 번 더함"인데 그러면 165 가 된다 → 25(3+3)=150(시간을 두 배로 착각)으로, 보기 A(70) 해설도 구체화(25+45).
 //   - M014(9977438d) 보기 5 해설이 앞뒤가 맞지 않는 서술 → "x=2.5 일 때 2x=5 에서 멈춤"으로.
 //   - M016(f59b7f57) 지문의 단가 $6$·$3$ 이 통화 표시 없는 수식으로 렌더링 → \$6·\$3.
@@ -23,7 +23,7 @@ function dbRows<T = any>(sql: string): T[] {
   const o = r.stdout; return (JSON.parse(o.slice(o.indexOf("{"), o.lastIndexOf("}") + 1)) as { rows: T[] }).rows;
 }
 
-type Cur = { passage: string | null; question: string | null; explanation: string | null; explanation_en: string | null };
+type Cur = { passage: string | null; question: string | null; explanation: string | null; explanation_en: string | null; figure?: unknown };
 const once = (s: string | null, re: RegExp, to: string, what: string) => { if (!s || !re.test(s)) throw new Error(`패치 대상 문장을 찾지 못함: ${what}`); return s.replace(re, to); };
 const SPECS: { prefix: string; set: string; why: string; next: (c: Cur) => Partial<Cur> }[] = [
   { prefix: "4cc47e7c", set: "T1 m2#28", why: "해설 정정: 보기 D(150)는 25(3+3)(시간을 두 배로), 보기 A(70)는 25+45(곱셈 없이 더함)",
@@ -40,6 +40,13 @@ const SPECS: { prefix: string; set: string; why: string; next: (c: Cur) => Parti
     }) },
   { prefix: "f59b7f57", set: "T21 m2#30", why: "지문 정정: 단가 $6$·$3$ 을 통화 표시(\\$6·\\$3)로(수식 렌더링으로 단위가 사라짐)",
     next: (c) => ({ passage: once(c.passage, /sells for \$6\$ and each pepper seedling sells for \$3\$/, "sells for \\$6 and each pepper seedling sells for \\$3", "M016 price") }) },
+  // A4(SAT Test 2 m2#38 경계 사례): 그림은 경계선 두 개(x=5, 8x+15y=240)뿐이고 지문이 같은 두 식을 그대로 줘서 그림이 읽을 거리를 더하지 않는다(음영 없음). 계산 문항으로 보고 그림과 그 소개 문장을 뺀다.
+  // 지문의 "벽 공간/바닥 공간"을 합산 상한 240 에 묶는 서술도 모순이라 "공간"으로 통일한다. 정답((6, 10))·보기는 불변: (4,12) x<5, (6,14) 258>240, (10,15) 305>240.
+  { prefix: "7ddfae40", set: "T2 m2#38", why: "경계 사례 정리: 식이 지문에 이미 있어 그림 삭제(계산 문항), 소개 문장 삭제, 벽/바닥 공간 서술 통일",
+    next: (c) => ({
+      passage: once(once(once(c.passage, / The graph shows the boundary lines \$x = 5\$ and \$8x \+ 15y = 240\$\./, "", "T2 m2#38 graph sentence"), /requires 8 square feet of wall space/, "requires 8 square feet of space", "wall"), /requires 15 square feet of floor space/, "requires 15 square feet of space", "floor"),
+      figure: null,
+    }) },
 ];
 
 const ids = dbRows<{ id: string }>(`select id from problems where id::text ~ '^(${SPECS.map((s) => s.prefix).join("|")})'`).map((r) => r.id);
@@ -74,11 +81,11 @@ writeFileSync(path.join(OUT, "23_preflight.sql"), `${HDR("preflight for 23 (SELE
 select p.id as problem_id, pv.version_no, pv.quality->'auditFix'->>'patch' as patch, pv.figure is null as no_figure, pv.figure_checked,
   (select count(*) from problem_versions v where v.problem_id = p.id and v.status in ('draft', 'in_review')) as inflight_versions,
   (select string_agg(distinct s.name || ' (' || s.status || ')', ', ') from mock_exam_set_items i join mock_exam_sets s on s.id = i.exam_set_id where i.problem_id = p.id and s.status in ('published', 'draft')) as used_in
-from problems p join problem_versions pv on pv.id = p.published_version_id where p.id::text ~ '^(3cdc0ad5|4cc47e7c|e90ca1b1|9977438d|e1f8fcfb|f59b7f57|d1e251f0)' order by p.id;
+from problems p join problem_versions pv on pv.id = p.published_version_id where p.id::text ~ '^(3cdc0ad5|4cc47e7c|e90ca1b1|9977438d|e1f8fcfb|f59b7f57|d1e251f0|7ddfae40)' order by p.id;
 `);
 writeFileSync(path.join(OUT, "23_verify.sql"), `${HDR("verify after 23 (SELECT only): the 3 problems are on E1019-X* versions; the other 4 expression-only problems are unchanged")}
 select p.id as problem_id, pv.version_no, pv.quality->'auditFix'->>'patch' as patch, pv.figure is null as no_figure,
-  pv.explanation_en ~ 'adding the flat fee twice' as stale_m012_d, pv.explanation_en ~ 'miscalculating' as stale_m014_5, pv.passage ~ 'sells for \\$6\\$' as stale_m016_price
+  pv.explanation_en ~ 'adding the flat fee twice' as stale_m012_d, pv.explanation_en ~ 'miscalculating' as stale_m014_5, pv.passage ~ 'sells for \\$6\\$' as stale_m016_price, pv.passage ~ 'boundary lines' as stale_t2_m2_38
 from problems p join problem_versions pv on pv.id = p.published_version_id where p.id = any (${idList}) order by 3;
 select count(*) as expr_only_still_figureless from problems p join problem_versions pv on pv.id = p.published_version_id where p.id::text ~ '^(3cdc0ad5|4cc47e7c|e90ca1b1|9977438d|e1f8fcfb|f59b7f57|d1e251f0)' and pv.figure is null;
 `);
