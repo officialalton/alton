@@ -1,0 +1,1467 @@
+[
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m01-k0-q1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "V/I = 2 V / 0.020 A = 100 Ω, the same for every row.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "100 Ω"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 11.3 Ohm's law from a table with a mA to A conversion; on target for 2.B, though low demand."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "R = V/I = 100 ohm in every row; the key is unique. The ohmic condition is implied by the proportional data."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has labels, units and 5 rows and is complete; the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors each encode a distinct error and are explained. The 44 ohm distractor (sum of voltage and current in the 4 V, 40 mA row) is a weak, arbitrary misconception but stated."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 to 90 seconds, four parallel numeric options, calculator allowed, no extra reading load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, simple Ohm's-law table item with a unique key of 100 ohm and distinct distractors; it passes all criteria, with minor weakness in the 44 ohm distractor and low difficulty."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-step application of Ohm's law, R = V/I, using a linear table of data and a single mA-to-A unit conversion. The data are consistent, so any row gives 100 ohms. There is minimal reasoning and little computation, which fits foundational practice rather than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m01-k0-q2",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "R=V/I=2V/0.020A=100 Ω; P=V^2/R=400/100=4.00 W",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "4.00 W"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Ohm's law from a table plus P=V^2/R; fits 11.4 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "R=100 ohm, P=4.00 W unique; ohmic assumption stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table has labels and complete rows; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor has a distinct rationale; the 0.200 W one is loosely worded but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, calculator-friendly, typical load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, the table and stem are complete, and the distractors encode distinct errors. The item is suitable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Read the table to find that V/I is constant (R = 100 ohm), converting mA to A, then apply P = V^2/R at 20 V to get 4.00 W. This is one concept (Ohm's law and the power formula) with a short, clean computation and one unit conversion. Distractors reflect common errors such as skipping the mA conversion. It is straightforward and suits foundational practice rather than full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m01-k1-q1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "R=V/I=2 V/0.100 A=20.0 Ω, constant for all rows.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "20.0 Ω"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Ohm's law from a table, in scope for 11.3 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique key: R = 20.0 ohm from every row."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete. The stem does not state that the resistor is ohmic, but the constant V/I ratio makes that clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The 4.00 ohm rationale ('smallest voltage with the largest current') gives 2/0.5 = 4 only if 500 mA is converted to 0.5 A. The explanation is vague and does not match the value cleanly. The other distractors are fine."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, light reading and arithmetic load, calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope and suitable for the exam. The only defect is the loosely justified 4.00 ohm distractor rationale, and the stem omits the ohmic statement that the blueprint expected."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step application of Ohm's law (R = V/I) using any row of a clearly linear table, with one mA-to-A unit conversion. Minimal concept depth, trivial arithmetic, no multi-step reasoning or representation changes beyond reading a table. Difficulty comes from no unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m01-k1-q2",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "R=V/I=2/0.100=20 Ω; P=V^2/R=400/20=20 W",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "20.0 W"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 11.4 power with Ohm's law from a table; skill 2.B fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "R=20 ohm, P=20 W; unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table complete with labeled columns and units; ohmic assumption stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct errors (wrong row current, V/R unit confusion); all explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 s, light arithmetic, calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item: R from the table, P=V^2/R=20 W; key unique; distractors reasonable and explained."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Read the table to find R = V/I = 20 ohm (needs mA to A conversion; ratio is constant, so ohmic), then apply P = V^2/R = 20 W. Single-concept Ohm's law and power with simple arithmetic and a short stem. Distractors correspond to unit-conversion or formula slips. Below typical full-mock depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m02-k0",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "0.201 mJ",
+     "brief_reasoning": "B=μ0 nI=1.005e-3 T; u=B²/2μ0=0.402 J/m³; V=5e-4 m³; U=2.01e-4 J",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Energy density of a solenoid field, topic 13.4, skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0.201 mJ is correct and unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem is complete; no stimulus is needed."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The 10.1 mJ distractor does not follow from the stated error. Using ℓ in cm in the volume gives 20.1 mJ (or another value), not 10.1 mJ. The explanation is misleading."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Appropriate time and calculator load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item is well scoped. The 10.1 mJ distractor's stated misconception (length in cm in the volume) does not reproduce that value, so the distractor explanation is inaccurate. Fail on distractor quality."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Single-concept item requiring B of a solenoid, magnetic energy density B^2/(2 mu0), and multiplication by volume, plus unit conversions from cm and cm^2. Modest multi-step reasoning with light arithmetic and clear wording; typical of a full-mock calculation item.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 100
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m02-k1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "n=400/m, B=2.51e-4 T, u=B^2/2μ0=0.0251 J/m^3, V=5e-4 m^3, U=1.26e-5 J",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "0.0126 mJ"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The time and calculator load are appropriate.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item is suitable, but the 0.628 mJ distractor does not follow from its stated misconception (cm used in the volume), so the distractor explanation is inaccurate. Fail on that criterion."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept routine: find n, then B = mu0 n I, then u = B^2/(2 mu0), then multiply by volume. Requires unit conversions (cm to m, cm^2 to m^2) and a few sequential plug-in steps. Distractors are factor-of-2 and similar slips. Numbers are clean, reading is short, and no representation translation is needed. This is a straightforward learning-level application rather than a full-mock exam-style item.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-f01-k0",
+  "cellId": "ap_physics_c_electricity_and_magnetism-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Equipment: DC supply of about 6 V, the capacitor, a 10 kΩ resistor, a two-way switch, a voltmeter or data logger (high input resistance) across the capacitor, and a timer. Charge the capacitor fully, then flip the switch to discharge it through R and start timing at the same moment. The independent variable (time) is controlled by recording V at fixed 10 ms intervals; a data logger with a set sampling rate is best because 10 ms is too fast to read by hand. To reduce uncertainty, repeat the discharge several times and average V at each time. Also use a high-resistance voltmeter so it does not load the circuit.",
+     "final_answer": "Use a data logger with a high-resistance voltmeter across the capacitor, a switch to change from charging to discharging, sampling every 10 ms from t=0 at the switch; repeat trials and average.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Taking the natural log gives ln V = ln V0 − t/(RC). This is a straight line with slope −1/(RC).",
+     "final_answer": "Vertical axis: ln V. Horizontal axis: t. Slope = −1/(RC).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "ln V values: 1.798, 1.597, 1.397, 1.200, 1.002, 0.808 at t = 0 to 50 ms. These fall on a straight line with slope about −0.0198 per ms.",
+     "final_answer": "Plot ln(V/1 V) on the vertical axis, from 0.8 to 1.8, against t in ms on the horizontal axis, from 0 to 50. The points (0,1.80), (10,1.60), (20,1.40), (30,1.20), (40,1.00), (50,0.81) are linear. Best-fit line: slope about −19.8 s⁻¹, intercept about 1.80.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Slope = (0.808−1.798)/(0.050 s) = −19.8 s⁻¹. So RC = 1/19.8 = 0.0505 s, and C = 0.0505 s / 10⁴ Ω.",
+     "final_answer": "C ≈ 5.0×10⁻⁶ F (5.0 μF)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The data are consistent with the keyed slope (-0.0198 per ms) and C of about 5.05 μF. The item is in scope and well designed with multiple parts at different skills. Minor issues: D3 says \"about 5.1\" while the expected value is 5.05, and D1 states a 5% tolerance without a numeric_tolerance field. Neither changes the correct answer.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Linearizing an RC discharge and designing the measurement fits topic 11.8 and skill 3.A. The calculus is limited to exponential and logarithm."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The values were checked against the table. The slope -0.0198 per ms and C of about 5.05 μF are correct. The alternative solutions are valid, and D3 accepts a value consistent with the student's own slope."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with labels, units, R and the setup described."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no distractors. Common errors are listed in the rubric rows."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is reasonable for a 10-point experimental design FRQ, and a calculator is allowed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part AP lab-style FRQ on RC discharge. It needs a procedure design, linearization (ln V vs t, slope = -1/RC), plotting 6 points, and a slope-to-C calculation. Concepts are in scope and routine for the exam. The calculation is modest (6 logs, one slope), and the wording is clear. Difficulty comes from legitimate lab-skill reasoning and representation changes, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-f01-k1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Standard procedure",
+     "final_answer": "Equipment: a DC supply of about 12 V, the capacitor, the 50 kΩ resistor, a two-way switch, a high-resistance digital voltmeter (or a voltage sensor with a data logger) and a stopwatch. Charge the capacitor fully. Then flip the switch to discharge it through R and start timing at the same moment. The independent variable is time: read V across the capacitor at fixed 10 ms intervals. Intervals this short need a data logger or sensor with automatic timed sampling. To reduce uncertainty, repeat the discharge several times and average V at each time. Also use a voltmeter whose resistance is much larger than R so it does not change the discharge.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Take the natural log of both sides: ln V = ln V0 - t/RC",
+     "final_answer": "Plot ln V on the vertical axis and t on the horizontal axis. The line has slope = -1/(RC).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Computed ln V for each reading",
+     "final_answer": "The points (t in ms, ln V) are (0, 2.471), (10, 2.367), (20, 2.304), (30, 2.167), (40, 2.103), (50, 1.998). Use a vertical axis for ln(V/1 V) from 1.95 to 2.50 and a horizontal axis for t from 0 to 50 ms. The best-fit line is about ln V = 2.48 - 0.0094t, with t in ms.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Slope -1/RC = -9.4 s^-1, so RC = 0.106 s and C = 0.106/(5×10^4 Ω)",
+     "final_answer": "C ≈ 2.1×10^-6 F (2.1 μF)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The 10-point Experimental Design and Analysis bundle is coherent: design, linearize, plot, and extract C from the slope of ln V versus t. The data are consistent with the keys. The only defect is a trivial rounding difference in the point (0, 2.470) versus 2.471, which is within tolerance. No instant-reject conditions apply.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part is judged against its own skill and rubric rows. The content is within 11.8 and the related topics 10.3 and 11.3."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The slope of about -0.0094 per ms and C of about 2.13 μF are consistent. The rubric alternatives and the D1 dependence on C3 are valid."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data, R, and the 10 ms interval are all given, and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item with no distractors. Common errors are listed in the rubric rows."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 10-point total matches the CED weight for Experimental Design and Analysis. The calculator is allowed and the load is typical of the AP exam."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP Physics C E&M lab-style free-response item on RC discharge. It requires designing a procedure (circuit, switch, timing, voltmeter), linearizing V = V0 e^(-t/RC) by plotting ln V against t, plotting and fitting the data, and extracting C from the slope (slope = -1/RC). The concept is core to topic 11.8 and the multi-step linearization and graphing sequence is typical of a full-mock lab question. The arithmetic is light: six data points, and the logs and slope can be done with a calculator at modest precision. The reading load is moderate (a multi-part prompt), and the stimulus is a clean, unambiguous table. No out-of-scope content is needed. The difficulty comes from the representation changes (table to ln V to graph to slope to C) and from the experimental design reasoning, not from unfair sources.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-f02-k0",
+  "cellId": "ap_physics_c_electricity_and_magnetism-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Use a capacitance meter (or LCR meter) connected to parallel plates mounted on insulating supports. Set d with insulating spacers or a micrometer stage and measure it with calipers. Vary d step by step and record C at each gap. Reduce uncertainty in d by measuring the gap at several points around the plates and averaging, keeping the plates parallel and repeating readings.",
+     "final_answer": "Capacitance meter with adjustable plate gap; vary d using spacers or a micrometer; measure d with calipers at several points and average.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "C = (ε0A)(1/d), so C against 1/d is a straight line with slope ε0A.",
+     "final_answer": "Vertical axis: C. Horizontal axis: 1/d. Slope = ε0A.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "1/d values are 1000, 667, 500, 333 and 250 m^-1; C values are 346.98, 237.66, 176.78, 117.5 and 88.43 pF. The points are nearly linear and pass close to the origin.",
+     "final_answer": "Plot C (pF) against 1/d (m^-1) and draw a straight best-fit line through the points, close to the origin.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Least-squares slope ≈ 0.346 pF·m = 3.46e-13 F·m. Dividing by A = 0.0400 m² gives ε0 ≈ 8.65e-12 F/m.",
+     "final_answer": "ε0 ≈ 8.6–8.7 × 10^-12 F/m (about 8.65e-12 C²/(N·m²))",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The capacitor lab bundle is sound: the data are consistent with C = ε0A/d, and the slope (about 346 pF·mm) and ε0 (about 8.65e-12 F/m) check out. The rubric rows are coherent, the total is the fixed 10 points for Experimental Design and Analysis, and the parts fit their tagged skills. Minor notes: part C's rubric wording is vague but standard for AP graphing rows, and the tolerances for D1 and D3 differ slightly (5% versus about 8%) without contradicting each other.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 10.3 with skill 3.A fits: procedure, linearization and slope analysis, with no content from later units."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Slope and ε0 are verified. Row D1 requires C3, which is consistent. The tolerances (5% on slope, about 8% on ε0) differ slightly but do not conflict."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table with the plate area given is complete. Part B supplies the formula. The model answer for C uses mm^-1 for 1/d, which is consistent with the slope in pF·mm."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so the distractor criterion is not applicable. Common errors are noted on several rows."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load of about 27 minutes for 10 points is typical for a lab-design FRQ, and a calculator is appropriate for the slope calculation."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style lab free-response item on a core topic. The student designs a procedure, linearizes C = eps0*A/d by plotting C vs 1/d, plots the data, and extracts eps0 from the slope with unit conversions (pF to F, cm^2 to m^2). The concepts are shallow and the arithmetic is light, but the multi-part format and the mix of procedure, graph and slope analysis fit a full mock rather than basic learning. Nothing is out of scope and the wording is unambiguous.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-f02-k1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Use parallel square plates on insulating supports. Set d with calibrated insulating spacers or a micrometer screw and measure it with calipers. Record C with a capacitance (LCR) meter at each d. Reduce uncertainty by measuring d at several points (corners) and averaging, repeating trials, using precision spacers, and subtracting the stray/lead capacitance.",
+     "final_answer": "Capacitance meter with short leads; vary d using spacers or a micrometer and measure it with calipers; record C at each d; average d measured at the corners and repeat trials to reduce uncertainty.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Since C = ε0·A·(1/d), a graph of C against 1/d is a straight line with slope ε0·A.",
+     "final_answer": "Vertical axis: C; horizontal axis: 1/d (slope = ε0·A)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Points (1/d in m^-1, C in pF): (1000, 357.4), (667, 232.8), (500, 174.7), (333, 118.1), (250, 90.0). These are close to linear. Least-squares fit gives slope ≈ 0.356 pF·m and intercept ≈ −1.3 pF.",
+     "final_answer": "Plot C (pF) against 1/d (m^-1); best-fit line slope ≈ 0.356 pF·m, intercept ≈ 0",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "ε0 = slope/A = 3.56e-13 F·m ÷ 0.0400 m².",
+     "final_answer": "ε0 ≈ 8.9 × 10^-12 F/m",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The experimental-design FRQ on capacitance versus plate separation is coherent and complete. The data are consistent with the stated area, and the slope and ε0 keys are consistent with them. The rubric is gradable and the points sum to 10. Minor nits: the model answer says \"air\" where the stem says vacuum, and the slope and ε0 tolerances differ slightly.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A directly assesses experimental procedure design (3.A). Parts B to D cover linearization, graphing and slope analysis, which are acceptable for this bundle."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The slope of about 356 pF·mm and ε0 of about 8.9e-12 F/m check out. The alternate-solution wording accepts a student's own slope. The rubric rows are consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has labels, units and five rows. The area is given, and the stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The rubric lists common errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of an AP lab FRQ, and a calculator is appropriate for the slope calculation."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP Physics C E&M lab-style free-response item with four parts. It tests choosing the governing law C = ε0A/d and linearizing it (C vs 1/d), then using the slope to find ε0 (unit conversions: cm² to m², mm to m, pF to F). Part A asks for an experimental procedure with equipment, measurements and one way to reduce separation uncertainty. Part C needs a plotted graph with a chosen scale. Reasoning is multi-step but each step is routine, and the arithmetic is light with clean data. Reading load is modest and the wording is unambiguous. This matches the exam_prep target for full mocks and is not an advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-f03-k0",
+  "cellId": "ap_physics_c_electricity_and_magnetism-f03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Wire is taped along a metre rule, with one fixed contact and one sliding clip. Measure V and I with a voltmeter and ammeter (or use an ohmmeter) at L = 0.2 to 1.0 m. To reduce uncertainty: use a small current to avoid heating, repeat readings (including with the current reversed) and average, and subtract the lead resistance.",
+     "final_answer": "Set the length with a metre rule and sliding contact; find R = V/I at each length; use a low current, repeat and average readings, and correct for the leads.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "R = (ρ/A)L, so a graph of R against L is linear with slope ρ/A.",
+     "final_answer": "Vertical axis: R (Ω); horizontal axis: L (m). The slope equals ρ/A.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Plot the five points on axes of 0 to 1.0 m and 0 to 2.5 Ω. The best-fit line passes near the origin with a slope of about 2.50 Ω/m.",
+     "final_answer": "Linear graph through the origin with slope ≈ 2.50 Ω/m",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Least-squares slope = 2.497 Ω/m. A = π(0.25e-3 m)² = 1.963e-7 m². ρ = slope × A = 4.90e-7 Ω·m.",
+     "final_answer": "ρ ≈ 0.49 µΩ·m",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The physics and the data are sound and the independent solver agrees, but the scoring has defects. D1 requires a slope from points on the student's own line and depends on C3, while the key only gives a data-derived value. C2 requires accurate plotting with no tolerance. A1 bundles two elements in one row. Failed on key/scoring because I was unsure.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item fits topic 11.3 with 11.2 and 11.4 as related topics. Each part matches its own tagged skill. Part A is design, B and C are representation and graphing, and D is calculation."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "D1 depends on the student's drawn line (C3), but the key is the least-squares slope; the 5% tolerance covers this only loosely. C2 has requires_numbers with no tolerance. A1 combines resistance determination and length measurement in one row, so partial responses are ambiguous. A3 accepts \"longer range of lengths\", which does not clearly reduce uncertainty in R."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete with labels, units, five data rows and the diameter. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable, because this is a free-response item. The common_errors fields are present."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for a 10-point experimental design FRQ. A calculator is allowed and used only for the slope and area."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP Physics C E&M lab free-response on R = rho L/A. It requires designing a procedure, linearizing, plotting a best-fit line, and extracting rho from the slope. It needs one law (R = rho L/A), one area computation (A = pi d^2/4 with a mm-to-m conversion), and a slope calculation, with clean, short numbers. The reasoning chain is moderate (procedure, linearization, graph, slope to rho), and the table-to-graph-to-slope translation is a legitimate representation change. The reading load is modest, the arithmetic is light, and the wording is clear and within Unit 11 scope. This is typical mock-exam difficulty rather than basic recall, and it is not especially advanced.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-f03-k1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Use an ohmmeter, or a voltmeter and ammeter, to measure R at several lengths L measured with a meter stick.",
+     "final_answer": "Tape the resistance wire along a meter stick. Connect it in series with a power supply (or cell), an ammeter and a switch, and put a voltmeter across the part of the wire between a fixed clip and a sliding clip (crocodile clip). Change the length by moving the sliding clip to L = 0.2, 0.4, 0.6, 0.8 and 1.0 m, reading L from the meter stick each time. Record V and I and work out R = V/I (or read R directly from an ohmmeter). To reduce uncertainty in R: keep the current small and close the switch only briefly so the wire does not heat up and change its resistance, and repeat each reading and average the results (or subtract the resistance of the leads, measured at zero length).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "R = (ρ/A)L, so a graph of R against L is a straight line with slope ρ/A.",
+     "final_answer": "Vertical axis: resistance R (Ω). Horizontal axis: length L (m). The slope equals ρ/A, so ρ = slope × A, where A = πd²/4.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The points lie close to a straight line. The best-fit line has a slope of about 2.54 Ω/m and an intercept of about −0.02 Ω.",
+     "final_answer": "Plot R (Ω) on the vertical axis from 0 to 2.6 Ω and L (m) on the horizontal axis from 0 to 1.0 m, with scales that fill most of the grid. Mark the five points. Draw a straight best-fit line through them that passes close to the origin; its slope is about 2.54 Ω/m.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The least-squares slope is 2.54 Ω/m. The area is A = π(0.25×10⁻³ m)² = 1.96×10⁻⁷ m², so ρ = 2.54 × 1.96×10⁻⁷ ≈ 4.99×10⁻⁷ Ω·m.",
+     "final_answer": "ρ ≈ 0.50 μΩ·m (about 5.0×10⁻⁷ Ω·m)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard resistivity lab bundle with a design part, a linearization part, a graphing part and a slope-analysis part. It is 10 points and in scope for 11.3. The data are consistent with R = ρL/A, the rubric rows are coherent, and the solver agreed with the key. No instant-reject conditions apply.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part matches its own tagged skill and the topic is Unit 11 resistivity."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The slope of 2.54 Ω/m and ρ of about 0.499 μΩ·m are consistent with the solver. The D1 dependence on C3 is fine."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete with labels, units and the diameter."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no options. The common errors are listed in the rubric rows."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Load is on the heavy side (about 27 min estimated) but acceptable. Calculator use is consistent with the allowed designation."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP Physics C E&M lab-style free-response item on R = rho L/A. It requires designing a measurement procedure, linearizing the relation (R vs L), plotting and fitting the data, and extracting rho from the slope with the cross-sectional area A = pi d^2/4 and a micro-ohm-meter unit conversion. The concepts are in scope and the reasoning steps are moderate. Arithmetic is light, the data are clean and roughly linear, and the wording is unambiguous. It is a typical full-mock experimental design and analysis question rather than a basic single-concept check or an advanced extension.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-f04-k0",
+  "cellId": "ap_physics_c_electricity_and_magnetism-f04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Equipment: a DC power supply with a rheostat (variable resistor) and an ammeter in series with the wire. A fixed length L = 10 cm of the wire sits between the poles of a magnet, and the magnet rests on an electronic balance. First zero the balance or record its reading with I = 0. Then change the current using the rheostat (or the supply voltage) in steps of 1 A, reading the current on the ammeter. Find the force from the change in the balance reading: F = Δm·g. To reduce uncertainty, repeat each reading several times (including with the current reversed) and average, or wait for the reading to settle. Turn the current off between readings so the wire does not heat up.",
+     "final_answer": "Wire carrying current I from a supply with a rheostat and ammeter, placed in the magnet on a balance. Vary I with the rheostat, find F = Δm·g from the balance, and repeat and average readings to reduce uncertainty.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Since F = (LB)I, a graph of F against I is a straight line through the origin with slope LB.",
+     "final_answer": "Vertical axis: F (N or mN). Horizontal axis: I (A). Slope = BL.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Plot the five points with I from 0 to 5 A on the horizontal axis and F from 0 to 200 mN on the vertical axis. Draw a best-fit line through the origin with a slope of about 40 mN/A.",
+     "final_answer": "Axes labelled F (mN), 0–200, and I (A), 0–5. The points lie on a straight line through about (0, 0) and (5 A, 200 mN), with slope ≈ 40 mN/A.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Using two points on the line, slope = (200 − 0) mN / (5 − 0) A = 40 mN/A = 0.040 N/A. Then B = slope / L = 0.040 / 0.10 = 0.40 T.",
+     "final_answer": "B ≈ 0.40 T",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item is in scope and its physics is sound, but it fails on rubric consistency and exam load. Parts B and C hand the answer over, and the bundle is a 10-point experimental design item with an unusual structure.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The topic is on target: the force on a current-carrying wire, F = ILB. Parts A and B assess skill 3.A, though B is trivial because the stem gives F = ILB. Part C is graphing (skill 1.B) and part D is analysis (skill 2.D), and these are tagged as such."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The slope of about 40 mN/A and B of about 0.400 T are consistent. Several rubric problems remain. Part A awards a point for 'change only the current', which is a soft element. A3 accepts 'more sensitive balance', and reversing the current is described in a way that does not fit a force reading taken as a change in balance reading. D1 requires 'two points on the line' and has no numeric tolerance in the data, since the 5 percent is only in the text. D1 also depends on C3, but the rows do not make the dependency explicit. Part C gives 3 points for plotting, which is mostly routine. Part B gives away the F versus I plot, because the stem states F = ILB and asks for the quantities to plot. Also, the 3-point setup in A has no stated limit on what counts as an adequate procedure."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete: current, force, and L = 10 cm. The setup is clear. The stem does not say whether the data have a y-intercept, so the line through the origin in B and D is not justified by the stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common_errors entries are minimal and partly empty."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The estimated time is 27 minutes for a 10-point item, which is heavy. The CED weights Experimental Design and Analysis at 10 points, but a 3-point graph-plotting part and a 1-point part with a given equation make the point distribution diffuse and not typical of the AP exam. Parts B and C are largely mechanical."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "This is a standard AP Physics C E&M lab-style free-response item on F = ILB. The concept is direct and in scope (magnetic force on a current-carrying wire). The four parts ask for a procedure, linearization (F vs I, slope = LB), a plotted graph with a best-fit line, and slope-based determination of B (about 0.40 T, with L converted from 10 cm to 0.10 m and F from mN to N). The data are nearly linear with 3-5 digit values, but the slope only needs about 2 significant figures, so the arithmetic is light. Difficulty comes from legitimate levers: designing a procedure, choosing the plotted quantities, translating the table into a graph and slope, and a unit conversion. The wording is unambiguous and the reading load is modest. Reasoning depth is moderate (about 5 steps), appropriate for a full mock rather than basic learning or an advanced supplement.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-f04-k1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Set up the magnet on a digital balance and clamp the wire segment above it, rigidly and horizontal, at right angles to B, so the wire does not touch the magnet. Connect the wire in series with a DC power supply, a rheostat and an ammeter. With I = 0, tare the balance. Use the rheostat or supply to set I to 1, 2, 3, 4 and 5 A, reading the ammeter each time. Record the change in the balance reading Δm and work out F = Δm·g. Measure L with a ruler. To reduce uncertainty, repeat each reading (including with the current reversed) and average, and switch off between readings so the wire does not heat up.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Wire clamped above a magnet sitting on a tared balance, in a circuit with a supply, rheostat and ammeter. Change I with the rheostat, record I and Δm, and use F = Δm·g. Repeat and average readings (including with the current reversed) to reduce uncertainty."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "F = (LB)I, so a graph of F against I is a straight line through the origin with slope LB.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Vertical axis: F (mN). Horizontal axis: I (A). Slope = LB."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Plot the five points with I from 0 to 5 A and F from 0 to about 210 mN. The best-fit line is roughly F = 40.7I (mN), passing close to the origin.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Axes labeled F (mN) against I (A). The five points lie close to a straight line through about the origin, with slope ≈ 40.7 mN/A."
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Least-squares slope = 40.7 mN/A = 0.0407 N/A. B = slope/L = 0.0407/0.10 = 0.41 T.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "B ≈ 0.41 T"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard Experimental Design and Analysis bundle (10 points) on the magnetic force on a wire. The design part, the linearization part, the graph part and the slope-to-B part are consistent with the rubric and the data. I verified the slope of about 40.73 mN/A and B of about 0.407 T. The setup is fully described, and parts are tagged with their own skills. Part B is light because it gives F=ILB, but this is acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 12.1 magnetic force on a wire. Part A is a genuine 3.A design task, and the other parts support it with analysis."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The slope of 40.73 and B of 0.407 T are consistent. Rubric rows are 1 point each and totals sum to 10. Alternative uncertainty-reduction methods are accepted."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has labels, units and rows, and the geometry is fully described in words."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable for an FRQ; the common errors listed in the rubric are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for a lab FRQ, and the calculator is appropriate."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "This is a standard linearization lab built on F = ILB. Part A asks for a routine procedure with a balance, a variable power supply or rheostat, an ammeter, and repeated trials. Part B asks for F versus I with slope LB, which is one reasoning step. Part C is a plot of five nearly linear points. Part D takes the slope of about 40 mN/A, converts it to N/A with one unit conversion, and divides by L = 0.10 m to get B of about 0.40 T. The concept depth is shallow, with only one governing law and no competing models. The data are clean, the arithmetic is short, and the reading load is low. The wording is clear and the model assumptions are stated, so the difficulty does not come from unfair sources. The question is fully scaffolded, and no step requires the student to choose a law or compare representations beyond a table and a graph.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 720
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-f05-k0",
+  "cellId": "ap_physics_c_electricity_and_magnetism-f05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Equipment: battery, the 200 Ω resistor, the inductor, a switch (or a quick way to swap the battery for a short wire), a current sensor or ammeter in series, and a data logger. Measurements: (1) Connect the battery, resistor, inductor and current sensor in series. Wait until the current stops changing. (2) Start the decay by throwing the switch so the battery is replaced by the short wire; the current then flows only through L and R. Start the logger timing at that moment, triggered by the switch. (3) Record I every 2 ms (or more often) until the current is close to zero. Reducing uncertainty: repeat the decay several times and average the current at each time. A sensor with a higher sampling rate and finer resolution also helps.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Build the series circuit (battery, R, L, current sensor) with a switch. Wait for a steady current, then throw the switch to short out the battery and start the decay. Log I against t every 2 ms with a data logger. Repeat several runs and average the readings to reduce uncertainty."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Taking the natural log gives ln I = ln I0 − (R/L)t. This is a straight line with slope −R/L.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Vertical axis: ln(I) (I in mA). Horizontal axis: t (in s or ms). The slope equals −R/L."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Values of ln(I/mA) at t = 0, 2, 4, 6, 8, 10 ms: 4.585, 3.612, 2.604, 1.601, 0.604, −0.394. These points lie on a straight line.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Plot ln(I/mA) on the vertical axis from −0.5 to 5 against t (ms) on the horizontal axis from 0 to 10. The points fall on a straight line of slope about −0.50 per ms. Draw the best-fit line through them."
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Slope = (−0.394 − 4.585)/(0.010 s) ≈ −498 s⁻¹, about −500 s⁻¹. Since slope = −R/L, L = R/|slope| = 200 Ω / 500 s⁻¹ = 0.40 H.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "L ≈ 0.40 H"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a coherent 10-point experimental design and analysis bundle on RL decay. It covers procedure, linearization, graphing and slope analysis, and the data support L of about 0.40 H. The solver agrees with the key. The rubric rows are consistent and accept alternatives. Only trivial issues remain (ln of a quantity with units, a 0.001 rounding difference in one ln value).",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 13.5 RL decay, with design and linearization matching skill 3.A. Each part is judged against its own tagged skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Slope and L are consistent with the data. The rubric accepts alternatives and student-consistent values. Row dependencies are valid."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with the circuit, R and the sampling interval stated. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common errors listed in the rubric are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 10-point weight matches Experimental Design and Analysis. The calculator load is light and the calculator is allowed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "A standard AP-style lab-design and analysis question on RL decay. Students must write a procedure (equipment, switching, repeated trials to reduce uncertainty), linearize the exponential to ln I versus t, plot the data with a chosen scale, and use the slope (about -500 s^-1) to find L = -R/slope, about 0.4 H. The concepts are in scope. The arithmetic is limited to six natural-log values and one slope, and the wording is unambiguous. Difficulty comes from the multi-part structure and the representation changes (table to ln-I graph to slope to L), not from unfair sources.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-f05-k1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-f05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Connect the battery, a switch, the 200 Ω resistor and the inductor in series, with a current sensor (or ammeter) in series and attached to a data logger. Wait until the current is steady. Then throw the switch so the battery is replaced by a short wire, and start recording at t = 0. Record I every 2 ms with the logger. To reduce uncertainty, repeat several trials and average the readings at each time, or use a high-sampling-rate sensor with a suitable range.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Series RL circuit with a current sensor and data logger. Reach steady current, throw the switch to short out the battery, record I every 2 ms, and repeat trials and average."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Taking ln of both sides gives ln I = ln I0 − (R/L)t, which is a straight line.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Plot ln(I) on the vertical axis and t on the horizontal axis. The slope is −R/L."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "ln(I/mA) values: 3.92, 2.90, 1.90, 0.91, −0.07, −1.11 at t = 0, 2, 4, 6, 8, 10 ms. These points lie on a straight line.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Plot ln(I/mA) from about −1.2 to 4 against t from 0 to 10 ms. The points fall on a straight line with slope about −0.50 per ms."
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Slope = (−1.11 − 3.92)/(10 ms) = −0.503 ms⁻¹ = −503 s⁻¹. Since slope = −R/L, L = R/503 s⁻¹ = 200/503 ≈ 0.40 H.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "L ≈ 0.40 H"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The physics and data are sound and independently solvable. However, the bundle totals 10 points with the Experimental Design weight at 10, which matches the CED weighting. Rubric row D1 depends on C3 (a graph line drawn on paper) while requiring a numeric slope, and the rubric accepts 5 percent tolerance while the expected slope tolerance is 0.025 (5 percent), which is fine. The key problem is the fixed 0.400 H \"about\" with L tolerance 0.032 (8 percent), which is looser than the 5 percent slope tolerance, so the scoring is internally inconsistent. Part C's graphing and part D's computation duplicate the same slope work, and 27 estimated minutes with a hand-graphing part is heavy. Part A's rubric lets a student earn A3 by \"using a data logger with a high sampling rate\", which is a weak uncertainty-reduction row. The item is more of a standard lab write-up than a differentiated 3.A task.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The topic and the skill are appropriate. Linearizing the decay and finding L from the slope is on target for 13.5."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The L tolerance of 0.032 H (8 percent) is inconsistent with the 5 percent slope acceptance in D1. D1 also requires C3 even though the numeric slope can be computed independently of a drawn line. The \"any one earns the point\" row A3 is permissive."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete: R is given, the time interval is given, and the units are given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no distractors. The common-error notes are minimal."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The load is heavy: a design write-up, a hand-drawn graph with six logarithms, and a slope calculation, estimated at 27 minutes. The graph part and the calculation part overlap in effort."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style lab free response on RL decay. Students must design a procedure, linearize by plotting ln I versus t, build a graph, and use the slope (-R/L) to get L (about 0.4 H). Concepts are core to topic 13.5. The multi-part structure and representation changes are typical of an exam item. The arithmetic is limited to a few natural logs and one slope. The wording is clear and nothing is out of scope.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-f06-k0",
+  "cellId": "ap_physics_c_electricity_and_magnetism-f06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Diagram: the wire is a circle with dots showing current out of the page. Draw a dashed concentric circle of radius r<R inside it as the Amperian loop. By the right-hand rule, B is tangent to the loop and points counterclockwise.",
+     "final_answer": "Concentric dashed circle of radius r inside the wire, with B tangent to it and pointing counterclockwise (seen with current out of the page)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Enclosed current: I_enc = ∫0^r (J0 r'/R)(2πr' dr') = 2πJ0 r^3/(3R). Ampère's law gives B(2πr) = μ0 I_enc, so B = μ0 J0 r^2/(3R).",
+     "final_answer": "B = μ0 J0 r^2 / (3R)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "B = (4π×10^-7)(2×10^5)(10^-3)^2 / (3 × 4×10^-3) ≈ 2.09×10^-5 T.",
+     "final_answer": "≈ 20.9 μT (about 21 μT)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "B is proportional to r^2: the enclosed current grows as r^3 and the loop length grows as r. So doubling r multiplies B by 2^2 = 4.",
+     "final_answer": "It increases by a factor of 4",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. It is a clean Ampère's-law problem with a nonuniform current density, and its parts fit their own skills and rubric rows.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 12.4 fits. Part B tests skill 2.A directly through integrating the current density and applying Ampère's law. The J(r) used is polynomial, which is within scope. Parts A (diagram), C (calculation) and D (scaling) match their own tagged skills."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key B = mu0 J0 r^2/(3R) is unique, and the independent solver reproduced it. Part C gives 20.9 uT and Part D gives a factor of 4. The rubric rows chain correctly through requires_row_id. The total is 3+3+2+2 = 10 points, which matches the weight for Mathematical Routines."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem gives R, J0, the J(r) law and mu0. This is enough to rebuild the setup. The current direction is stated in Part A, and the wording is clear. The empty data object is acceptable for a text-only stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so it has no distractors. Each rubric row lists a common error, such as r^2 instead of r^3 or a missing 2 pi."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of an AP Physics C: E&M free-response question. The calculator is allowed, and the arithmetic is light."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP C E&M FRQ on Ampère's law with nonuniform current density. It needs the right-hand-rule diagram, a polynomial integral for the enclosed current, B = mu0 J0 r^2/(3R), a clean numeric evaluation (about 2.1 uT), and a proportional-reasoning step (B scales as r^2, so a factor of 4). Difficulty comes from concept selection and the integral setup, not from arithmetic, wording, or reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-f06-k1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-f06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Circle of radius R with a dot at the centre (current out of the page). Draw a dashed concentric circle of radius r<R as the Amperian loop. By the right-hand rule, B is tangent to the loop and points counterclockwise.",
+     "final_answer": "Concentric dashed loop; B tangent, counterclockwise",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "The current enclosed is I = ∫0^r (J0 r'/R)·2πr' dr' = 2πJ0 r^3/(3R). Ampère's law gives B·2πr = μ0·I.",
+     "final_answer": "B = μ0 J0 r^2/(3R)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "B = (4π×10^-7)(1×10^5)(5×10^-4)^2/(3×2×10^-3) = 5.24×10^-6 T",
+     "final_answer": "≈5.2 μT",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "B is proportional to r^2. When r doubles, the enclosed current grows by 8 and the loop length grows by 2, so B grows by 8/2 = 4.",
+     "final_answer": "Increases by a factor of 4",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, well-scoped Ampère's law FRQ with a nonuniform current density. The derivation, numeric value (5.24 μT) and scaling (factor of 4) are consistent with the rubric. The stimulus is complete in text. The rubric rows are consistent and the task load is reasonable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style FRQ on Ampère's law with a nonuniform current density. It requires choosing Ampère's law, integrating J(r) over the area enclosed (polynomial integral), solving for B, substituting numbers, and a proportional-reasoning step (B proportional to r^2, so a factor of 4). It also includes a diagram representation with right-hand-rule direction. The concept depth and number of steps fit a full mock exam. The arithmetic is light, the wording is clear, and the scope is within Unit 12.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-f07-k0",
+  "cellId": "ap_physics_c_electricity_and_magnetism-f07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Draw two horizontal plates with + charges on the top plate and − charges on the bottom. Draw evenly spaced parallel field lines across the gap pointing down, from + to −. Before insertion, E0 = V0/d = 12 V ÷ 0.004 m = 3000 V/m. The charge is fixed and the dielectric polarizes, which partly cancels the field. After insertion, E is one quarter of E0, so draw one quarter as many lines in the gap, still pointing down.",
+     "final_answer": "Field lines are uniform and point down, from the + plate to the − plate. After the dielectric is inserted, the line density drops to 1/4 of its earlier value.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Without the dielectric, C0 = ε0A/d, so the charge is Q = ε0AV0/d. The battery is disconnected, so Q stays fixed. With the dielectric, C = κε0A/d. Then U = Q²/(2C) = (ε0AV0/d)² ÷ (2κε0A/d) = ε0AV0²/(2κd).",
+     "final_answer": "C = κε0A/d; U = ε0AV0²/(2κd)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "C0 = 8.85×10⁻¹² × 0.02 ÷ 0.004 = 4.425×10⁻¹¹ F = 44.25 pF. With κ = 4, C = 177 pF. U = C0V0²/(2κ) = 44.25×10⁻¹² × 144 ÷ 8 = 7.97×10⁻¹⁰ J.",
+     "final_answer": "C ≈ 177 pF; U ≈ 0.80 nJ",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Q is fixed, so V = Q/C drops by a factor of κ. The gap d is unchanged, so E = V/d also drops by κ. The field goes from 3000 V/m to 750 V/m. Physically, the bound charges on the dielectric's surfaces partly cancel the field from the free charge on the plates.",
+     "final_answer": "E/E0 = 1/κ = 1/4 (3000 V/m → 750 V/m)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is physically correct and in scope for 10.4. The 3/3/2/2 weights sum to the 10-point Mathematical Routines total. The model answers and numeric keys are consistent with the stem. Minor issues: a mildly odd rubric dependency in A3, Part D overlapping Part A3, and a passing mention of induced charge, which does not shift the demand into out-of-scope bound-charge content.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part B is a clean 2.A derivation, and the other parts are tagged to their own skills. The reference to the dielectric's induced charge in the Part D model answer is only explanatory and is not required by the rubric."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are unique and consistent with the stem, and the isolated-capacitor condition is stated. The tolerance in the expected values matches the 2 percent in row C1. Row A3's dependency on A1 is awkward but harmless."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and the wording is clear. The empty data object is acceptable for a text-only stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no multiple-choice distractors. Each rubric row lists a plausible common error."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is typical: one diagram, one symbolic derivation, a short calculation and a comparison. Part D partly repeats the reasoning from Part A3, which is mild redundancy."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard isolated-capacitor dielectric problem. The governing laws are direct: C = κε0A/d, Q conserved, U = Q^2/2C, E = V/d or E = E0/κ. Part A is a simple field-line sketch with a qualitative density change. Part B takes about three short symbolic steps. Part C is a single substitution with clean numbers (about 177 pF and 0.64 nJ). Part D is a one-step ratio of 1/κ. Reading load is light, there are few representation changes, and the arithmetic is short. The topic spans 10.4, 10.3 and 8.6 and stays within the unit scope. The item is a routine application of core concepts, so it suits initial learning rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-f07-k1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-f07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Field lines are straight, evenly spaced and run from the positive top plate down to the negative bottom plate. Because the battery is disconnected, Q stays fixed. Polarization of the dielectric induces bound surface charges that partly cancel the free charge, so the net field is cut to E0/κ.",
+     "final_answer": "Uniform, evenly spaced field lines point downward from the + top plate to the − bottom plate, with a little fringing at the edges. After the dielectric goes in, the density of field lines in the gap falls to 1/3 of its original value (only 1/3 as many lines per unit area).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Before insertion, C0 = ε0A/d and Q = ε0AV0/d. With the slab, C = κε0A/d. The charge is unchanged, so U = Q²/(2C) = (ε0AV0/d)²/(2κε0A/d).",
+     "final_answer": "C = κε0A/d; U = ε0 A V0²/(2κd)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "C0 = (8.85e-12)(0.01)/(0.004) = 22.1 pF, so C = 3 × 22.1 = 66.4 pF. Before insertion, U0 = ½(22.1 pF)(12 V)² = 1.59 nJ. After insertion, U = U0/3 = 0.531 nJ.",
+     "final_answer": "C ≈ 66.4 pF; U ≈ 0.53 nJ",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Q is constant and C increases by κ, so V = Q/C falls to V0/3. Since E = V/d and d is unchanged, E falls by the same factor. Physically, induced bound charges partly cancel the free charge. Before insertion E0 = 12/0.004 = 3000 V/m; after, E = 1000 V/m.",
+     "final_answer": "E/E0 = 1/κ = 1/3, i.e. the field drops from 3000 V/m to 1000 V/m",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle is a coherent 10-point Mathematical Routines FRQ on an isolated capacitor with a dielectric. Values match the independent solver (66.4 pF, 0.531 nJ, field ratio 1/3). The rubric has minor flaws: A3 depends on A1, and D2's required elements omit the alternative justification path. Neither is serious enough to fail the item.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts fit topic 10.4, with 10.3 and 8.6 as related topics. Part B is the target 2.A derivation. The qualitative mention of induced charge in D is not a bound-charge or polarization-vector treatment."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are unique and consistent with the solver. Minor: A3 requires A1, which is odd, and D2's required_elements list only one of the two accepted justifications."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem is complete: A, d, V, kappa and the constants are given, and the battery is disconnected before insertion. Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no options. Common errors are listed per row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for AP Physics C, with simple arithmetic and a calculator allowed."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard dielectric-with-battery-removed item. Governing relations are C = kappa*eps0*A/d, Q fixed, and U = Q^2/(2C). Part B needs a short symbolic derivation: Q = C0*V0, then U = Q^2/(2*kappa*C0) = C0*V0^2/(2*kappa). Part A is a simple field-line sketch with a one-line claim about line density. Part C is a short calculation, with C = 22.1 pF and U about 0.53 nJ. Part D is a proportional-reasoning ratio, E/E0 = 1/kappa. The scope is narrow and the numbers are clean. Reading load is light and no out-of-scope knowledge is needed.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-f08-k0",
+  "cellId": "ap_physics_c_electricity_and_magnetism-f08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "½m v² = kZe²/r_min, so r_min ∝ 1/v². Doubling v makes r_min one quarter of the original, not one half.",
+     "final_answer": "Disagree: the distance becomes 1/4 of the original",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Initial KE = PE at closest approach: r = 2kZe²/(m_p v²) = 2(9e9)(3)(1.6e-19)²/(1.67e-27·6.4e13) ≈ 1.29e-14 m",
+     "final_answer": "r = 2kZe²/(m_p v²) ≈ 12.9 fm (about 13 fm)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "r ∝ Z when KE is the same. Doubling Z from 3 to 6 doubles r_min.",
+     "final_answer": "Twice the original, about 25.9 fm",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The three-part energy-conservation bundle is correct and in scope for 9.3, 9.1 and 8.1. The keys are consistent with the rubric rows, and the 8-point weight matches the Qualitative/Quantitative Translation type. Minor issues: the 2 percent tolerance in B3 appears only in the criterion text, and C1 is tagged numeric for a qualitative claim. The stem could also state explicitly that only the electric force acts.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The parts match their tagged skills: argumentation in A, derivation and calculation in B, and proportional prediction in C. Everything is within Unit 9."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are unique and correct. The rubric rows are consistent, and the dependency chain between rows is sensible. The numeric_tolerance field in B3 is null, although the 2 percent tolerance is stated in the criterion text."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and gives the constants. It could state explicitly that only the electric force acts, but this is a standard assumption."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The rubric common_errors name realistic misconceptions: halving the distance, r ∝ 1/v, omitting the factor of 2, and using the force instead of the energy. The model answers explain the reasoning."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for an 8-point free-response item, with a calculator allowed and light arithmetic."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard conservation-of-energy setup (KE converts to PE at turning point). Part A tests inverse-square proportional reasoning to refute a claim, Part B is a short derivation plus one numeric evaluation with a unit conversion to fm, and Part C is a linear proportional prediction. Concepts are in scope and the arithmetic is short, so this suits a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-f08-k1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-f08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Use conservation of energy: the starting kinetic energy ½mv² all turns into potential energy kZe²/r at closest approach, so r ∝ 1/v². If the speed doubles, the kinetic energy goes up 4 times, so r drops to 1/4 of its value, not 1/2.",
+     "final_answer": "Disagree. r = 2kZe²/(m_p v²) ∝ 1/v², so doubling v makes the closest-approach distance 1/4 of the original, not 1/2.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Set ½m_p v² = kZe²/r and solve: r = 2kZe²/(m_p v²) = 9.216e-28 / 1.0688e-13 ≈ 8.6e-15 m.",
+     "final_answer": "r = 2kZe²/(m_p v²) ≈ 8.6 fm (8.6×10⁻¹⁵ m)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "With the same kinetic energy, r ∝ Z. Going from Z = 2 to Z = 4 doubles r, and the proton has to stop farther away.",
+     "final_answer": "Twice the original distance, about 17 fm",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, well-scoped conservation-of-energy closest-approach bundle. Keys verified: r = 8.62 fm, r ∝ 1/v² (so the claim is wrong), r ∝ Z (so the distance doubles). Rubric rows are consistent, and the stem is complete. Minor formatting nit in the Part C model answer (\"1.72e-14 m\").",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Single governing law (conservation of energy, KE converts to kq1q2/r at turning point). Part A needs proportional reasoning (r ∝ 1/v², so doubling v quarters r and the claim is wrong), Part B is a short symbolic derivation and a one-step numeric evaluation (about 8.6 fm), and Part C is a proportional prediction (r ∝ Z, so r doubles). Moderate depth, few steps, light arithmetic and low reading load. This matches the typical full-mock FRQ level and is not basic recall or an extension beyond scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ }
+]
