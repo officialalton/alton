@@ -1,0 +1,58 @@
+import type { ArchetypeSpec, FrqTemplateSpec, SubjectGuide } from "./types";
+import { physicsGuide } from "./physics1";
+import physicsCEmArchetypes from "./physics-c-em-archetypes.json";
+
+// AP Physics C: Electricity and Magnetism(2027, 6단원 번호 8–13, 미적분 기반) 생성 가이드 — 본문: docs/ap/physics-c-em-groundwork.md. 구조·검증 방식은 Physics 1·C: Mechanics 가이드와 같고
+// 단원 6개·가우스 법칙 적분·연속 전하 분포·RC·RL 미분 방정식·패러데이 법칙의 미분이 다르다. 수치·키·그림 자료는 Python 원형(scripts/ap-generation/archetypes/physe_p0_*.py)이 계산하고 sympy 기호 풀이와
+// numpy 수치 적분·중심 차분·RK4·이분법·선형계로 이중 계산한다. 원형 목록의 원천은 `registry.py guide-physe`.
+// 시험 형식(MC 42문항/85분, FRQ 4문항/95분, FRQ 배점 MR 10·TBR 12·실험 설계·분석 10·QQT 8)은 AP Central CED(Course Framework V.1, 2026)에서 직접 확인했다.
+
+export const physicsCEmGuide: SubjectGuide = {
+  ...physicsGuide,
+  subject: "ap_physics_c_electricity_and_magnetism",
+  guideDoc: "docs/ap/physics-c-em-groundwork.md",
+  examStructure: "2027 (CED Course Framework V.1): MC 42 questions/85 min (single-answer, four options, discrete questions and shared-stimulus sets), 50%; FRQ 4 questions/95 min, 50% — Mathematical Routines 10 points, Translation Between Representations 12, Experimental Design and Analysis 10, Qualitative/Quantitative Translation 8 (40 total). Calculus-based. Four-function, scientific and graphing calculators are allowed on both sections. Delivery is hybrid: questions in Bluebook, FRQ answers handwritten on paper.",
+  units: [
+    { unit: "8", title: "Electric Charges, Fields, and Gauss's Law", mcWeight: [15, 25], inScope: ["Coulomb's law, superposition of forces from point charges", "conservation of charge and charging by conduction and induction", "electric field of point charges and of continuous distributions found by integration (ring, rod, disk, arc)", "electric flux through a surface", "Gauss's law with spherical, cylindrical and planar symmetry, including nonuniform charge densities by integration"], outOfScope: ["electric dipoles beyond the field of two point charges", "Gauss's law without symmetry", "multipole expansions"] },
+    { unit: "9", title: "Electric Potential", mcWeight: [10, 20], inScope: ["electric potential energy of point-charge systems", "electric potential of point charges and continuous distributions, zero at infinity", "potential difference as the line integral of the field and the field as the negative gradient of the potential in one dimension", "equipotentials", "conservation of energy for a charged particle in an electric field"], outOfScope: ["potential of nonsymmetric distributions requiring double integrals", "relativistic motion"] },
+    { unit: "10", title: "Conductors and Capacitors", mcWeight: [10, 15], inScope: ["electrostatics of conductors: zero field inside, charge on the surface, induced charge on shells", "redistribution of charge between connected conductors at equal potential", "capacitance of parallel-plate, spherical and cylindrical capacitors", "capacitors in series and parallel and the energy stored", "dielectrics with the battery connected or removed"], outOfScope: ["polarization vectors and bound charge", "time-dependent behavior (covered in unit 11)"] },
+    { unit: "11", title: "Electric Circuits", mcWeight: [15, 25], inScope: ["current, current density and drift speed", "resistance, resistivity and Ohm's law including a resistivity that varies along the conductor", "electric power", "series, parallel and compound direct-current circuits", "Kirchhoff's loop and junction rules", "resistor-capacitor circuits: charging, discharging, time constant, initial and steady-state behavior"], outOfScope: ["alternating-current circuits", "semiconductors and nonohmic models beyond a given graph or table", "Thevenin and Norton equivalents"] },
+    { unit: "12", title: "Magnetic Fields and Electromagnetism", mcWeight: [10, 20], inScope: ["magnetic force on a moving charge and on a current-carrying wire", "circular and helical motion in a uniform magnetic field, velocity selector", "magnetic field of a current from the Biot-Savart law (wire, arc, loop)", "Ampère's law with cylindrical symmetry, solenoids and toroids, including nonuniform current density", "forces between parallel currents"], outOfScope: ["magnetic materials and magnetization", "displacement current", "Biot-Savart integrals without a closed form"] },
+    { unit: "13", title: "Electromagnetic Induction", mcWeight: [10, 20], inScope: ["magnetic flux and Faraday's law including a flux that changes nonlinearly with time", "motional emf and the force on a rod or loop moving in a field", "Lenz's law and induced fields and currents", "self-inductance and the energy stored in an inductor", "RL circuits: growth and decay of current, initial and steady-state behavior", "LC oscillations and their energy"], outOfScope: ["alternating-current power transmission", "mutual-inductance networks", "displacement current and Maxwell's equations in differential form"] },
+  ],
+  archetypes: physicsCEmArchetypes as ArchetypeSpec[],
+  frqTemplates: [
+    { id: "pef_mr_ring_field", template: "mr", topic: "8.4", extraTopics: ["8.3", "8.1"], skill: "2.A", calculator: "allowed", parts: "A field-vector diagram(3) / B derivation by integration(3) / C numeric(2) / D justified prediction(2)", points: 10, verifiedBy: ["numpy integrates the axial component of the field of the ring elements around the angle; sympy confirms the closed form"] },
+    { id: "pef_mr_rc_circuit", template: "mr", topic: "11.8", extraTopics: ["11.2", "10.3"], skill: "2.A", calculator: "allowed", parts: "A circuit diagram(3) / B loop-rule derivation(3) / C numeric(2) / D justified prediction(2)", points: 10, verifiedBy: ["an RK4 integration of the loop equation recomputes the charge and the time to reach half of the final charge"] },
+    { id: "pef_tbr_gauss_er", template: "tbr", topic: "8.6", extraTopics: ["8.3", "9.2"], skill: "1.C", calculator: "allowed", parts: "A E-r graph(4) / B Gauss derivation(3) / C potential difference(3) / D prediction(2)", points: 12, verifiedBy: ["sympy integrates the interior field; a Simpson integration recomputes the potential difference"] },
+    { id: "pef_tbr_rl_current", template: "tbr", topic: "13.5", extraTopics: ["13.4", "11.2"], skill: "1.C", calculator: "allowed", parts: "A I-t graph(4) / B loop-rule derivation(3) / C numeric(3) / D prediction(2)", points: 12, verifiedBy: ["an RK4 integration of the loop equation recomputes the current and its initial rate of change"] },
+    { id: "pef_lab_rc_time_constant", template: "lab", topic: "11.8", extraTopics: ["10.3", "11.3"], skill: "3.A", calculator: "allowed", parts: "A procedure(3) / B linearization(1) / C plot(3) / D slope and capacitance(3)", points: 10, verifiedBy: ["normal equations recompute the slope of ln V versus t; the fitted capacitance is compared with the generating value within eight percent"] },
+    { id: "pef_lab_capacitor_gap", template: "lab", topic: "10.3", extraTopics: ["10.1", "8.6"], skill: "3.A", calculator: "allowed", parts: "A procedure(3) / B linearization(1) / C plot(3) / D slope and permittivity(3)", points: 10, verifiedBy: ["normal equations recompute the slope of C versus 1/d; the fitted permittivity is compared with the generating value within six percent"] },
+    { id: "pef_qqt_closest_approach", template: "qqt", topic: "9.3", extraTopics: ["9.1", "8.1"], skill: "3.B", calculator: "allowed", parts: "A claim and justification(3) / B derivation and value(3) / C prediction(2)", points: 8, verifiedBy: ["a bisection root finder solves the energy balance for the turning point"] },
+    { id: "pef_qqt_motional_emf", template: "qqt", topic: "13.3", extraTopics: ["13.2", "11.4"], skill: "3.B", calculator: "allowed", parts: "A claim and justification(3) / B derivation and force(3) / C power prediction(2)", points: 8, verifiedBy: ["the force is recomputed from the power balance F v = emf^2 / R"] },
+  ] as FrqTemplateSpec[],
+  notation: ["every number with a unit is written $12.3\\text{ m/s}$; symbols and expressions are inside $...$", "SI units, with microcoulombs, nanocoulombs, microfarads, millitesla and similar prefixes written in the stem; constants used in the solution ($k=9.0\\times10^{9}\\text{ N}\\cdot\\text{m}^2/\\text{C}^2$, $\\varepsilon_0=8.85\\times10^{-12}$, $\\mu_0=4\\pi\\times10^{-7}\\text{ T}\\cdot\\text{m/A}$, $e=1.60\\times10^{-19}\\text{ C}$) are stated in the stem when needed", "three significant figures in options and answers unless the data have fewer; data given to two or three significant figures", "charge, field, flux and current functions are given explicitly in the stem and use only polynomial, exponential, sine and cosine forms", "vectors in one dimension carry a sign with a stated positive direction; circuit connections are described completely in words or by the stated figure"],
+  difficultyBanned: ["long or unrounded arithmetic", "ambiguous wording or unstated model assumptions", "optics, thermodynamics, mechanics-only content or modern physics (not in the course)", "calculus techniques beyond polynomial, exponential, sine and cosine functions of one variable", "irrelevant context or extra reading load", "reproducing a College Board sample item scenario"],
+  bannedTerms: [
+    { pattern: "\\b(refraction|diffraction|thermodynamic|heat engine|sound wave|fluid pressure|buoyant|photon|nuclear|quantum)\\b", why: "optics, thermodynamics, fluids and modern physics are not in the Physics C: Electricity and Magnetism course" },
+    { pattern: "AP\\s*[345]|level 5|score of [345]", why: "never label items by AP score level" },
+  ],
+  acceptExamples: [
+    { title: "calculus step with a named misconception (2.A)", text: "A rod has a charge distribution along its length; the field at a point on its axis requires integrating the field of each element, and the wrong options use the point-charge formula at the near end, the center or the far end." },
+    { title: "scaling prediction (2.D)", text: "The charging time of an RC circuit when the resistance is multiplied by 3 and the capacitance is divided by 2." },
+  ],
+  rejectExamples: [
+    { title: "plug-in only", text: "Calculate the force between two charges of 2 nC separated by 3 cm.", reason: "calculation only with no law selection or representation reading" },
+    { title: "out-of-scope content", text: "Find the angle of refraction of a light ray entering water.", reason: "optics is not in the course" },
+  ],
+};
+
+export function physicsCEmWordingRules(): string {
+  const g = physicsCEmGuide;
+  return [
+    `SUBJECT GUIDE (${g.guideDoc}). Exam structure: ${g.examStructure}`,
+    `Notation: ${g.notation.join("; ")}.`,
+    `Calculator and style rules: ${g.calculatorRules.join("; ")}.`,
+    `Never use: ${g.difficultyBanned.join("; ")}.`,
+  ].join("\n");
+}
