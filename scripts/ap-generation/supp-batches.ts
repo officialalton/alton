@@ -116,6 +116,12 @@ export const whItemNames = (): string[] => {
   const dir = path.resolve(process.cwd(), "data/ap/stock");
   return existsSync(dir) ? readdirSync(dir).filter((f) => WH_ITEM_FILE_RE.test(f)).map((f) => f.replace(/\.json$/, "")).sort() : [];
 };
+/** AP European History 재고 파일(data/ap/stock/euro-<배치>-items.json, 2026-10-20). */
+export const EURO_ITEM_FILE_RE = /^euro-[a-z0-9]+(?:-[a-z0-9]+)*-items\.json$/;
+export const euroItemNames = (): string[] => {
+  const dir = path.resolve(process.cwd(), "data/ap/stock");
+  return existsSync(dir) ? readdirSync(dir).filter((f) => EURO_ITEM_FILE_RE.test(f)).map((f) => f.replace(/\.json$/, "")).sort() : [];
+};
 export const ushItemNames = (): string[] => {
   const dir = path.resolve(process.cwd(), "data/ap/stock");
   return existsSync(dir) ? readdirSync(dir).filter((f) => USH_ITEM_FILE_RE.test(f)).map((f) => f.replace(/\.json$/, "")).sort() : [];

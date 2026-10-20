@@ -1,0 +1,60 @@
+{
+ "version": "v1-euro-f2",
+ "run": "euro-f2",
+ "batch": "euro-f2",
+ "gate": "euro-f2-2026-10-20",
+ "subject": "ap_european_history",
+ "mode": "frq",
+ "capUsd": 12,
+ "hardStopCumulativeUsd": 640,
+ "myTotalCapUsd": 44,
+ "stages": [
+  "frq-gen",
+  "frq-fact",
+  "frq-samples",
+  "frq-grade",
+  "frq-fact2",
+  "frq-finalize"
+ ],
+ "extra": 2,
+ "models": {
+  "gen": "claude-opus-5-5",
+  "solvers": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5"
+  ],
+  "panel": "claude-fable-5-1",
+  "sampleHigh": "claude-opus-5-5",
+  "sampleLow": "claude-sonnet-5-5",
+  "graders": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5"
+  ],
+  "fact": "claude-fable-5-1"
+ },
+ "effort": "low",
+ "genEffort": "medium",
+ "generatorFiles": [
+  "scripts/ap-generation/euro-pipeline.ts",
+  "scripts/ap-generation/euro-build.ts",
+  "scripts/ap-generation/euro-real-frq-gates.ts",
+  "lib/ap-generation/euro-prompts.ts",
+  "lib/ap-generation/euro-plan.ts",
+  "lib/ap-generation/euro-real-gates.ts",
+  "lib/ap-generation/euro-frq.ts",
+  "lib/ap-generation/subjects/europeanhistory.ts",
+  "lib/ap-exam/euro-rules.ts",
+  "data/ap/euro-sources/registry.json"
+ ],
+ "expected": {
+  "hash": ""
+ },
+ "frq": [
+  "eu2_saq1",
+  "eu2_saq2",
+  "eu2_saq3",
+  "eu2_dbq",
+  "eu2_leq"
+ ],
+ "sampleCands": 3
+}
