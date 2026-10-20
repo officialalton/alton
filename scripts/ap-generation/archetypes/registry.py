@@ -31,7 +31,8 @@ STATS_STAGES = {}
 for _m in _ST:
     for _n in dir(_m):
         if _n.startswith("STAGE_"):
-            STATS_STAGES[_m.__name__.rsplit("_", 1)[0] + "_" + _n[6:].lower()] = list(getattr(_m, _n))  # stats_s1_l.STAGE_L -> stats_s1_l
+            _k = _m.__name__.rsplit("_", 1)[0] + "_" + _n[6:].lower()  # stats_s1_l.STAGE_L -> stats_s1_l
+            STATS_STAGES[_k] = STATS_STAGES.get(_k, []) + [x for x in getattr(_m, _n) if x not in STATS_STAGES.get(_k, [])]  # 같은 이름의 목록은 이어 붙인다(2026-10-19: 연습 시험 3~5 의 단독 원형이 여러 모듈)
 STATS_STAGES["stats_s1_all"] = STATS_STAGES.get("stats_s1_l", []) + STATS_STAGES.get("stats_s1_m", []) + STATS_STAGES.get("stats_s1_h", [])  # 위험 L→M→H 순서
 STATS_STAGES["stats_s2a_all"] = STATS_STAGES.get("stats_s2a_singles", []) + STATS_STAGES.get("stats_s2a_sets", [])
 STATS_STAGES["stats_all"] = list(dict.fromkeys(STATS_STAGES["stats_s1_all"] + STATS_STAGES.get("stats_s2a_singles", []) + STATS_STAGES.get("stats_s2a_sets", []) + STATS_STAGES.get("stats_s2b_singles", []) + STATS_STAGES.get("stats_s3_singles", [])))  # S2-b 단독 목록에는 S2-a 에서 고친 원형 이름이 겹치므로 중복 제거  # 가이드 JSON(stats-archetypes.json)의 원천 순서

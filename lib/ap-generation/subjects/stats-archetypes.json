@@ -903,5 +903,635 @@
    "states the hypothesis about the sample",
    "uses the number of cells minus one"
   ]
+ },
+ {
+  "id": "st_n_iq_table_vars",
+  "topic": "1.10",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "each context lists exactly three recorded variables and four questions, of which exactly one uses only recorded variables for a population"
+  ],
+  "misconceptions": [
+   "It needs a variable that was not recorded, so the table cannot be used to answer it.",
+   "It asks about one individual rather than a population, so no variability is studied.",
+   "It asks for a judgment of value that data on these variables cannot settle."
+  ]
+ },
+ {
+  "id": "st_n_stat_vs_nonstat",
+  "topic": "1.1",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "every context pairs one question about a varying measurement with a lookup, a fixed calculation and an opinion, written and checked by hand"
+  ],
+  "misconceptions": [
+   "It has a single factual answer that can be looked up, so no variability among individuals is anticipated.",
+   "It is answered by a fixed calculation with the given numbers, so no data have to be collected and analyzed.",
+   "It asks for a preference or judgment, which data on a measured variable cannot settle."
+  ]
+ },
+ {
+  "id": "st_n_question_design_match",
+  "topic": "1.10",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each question is paired with one of three design types by whether it asks about an imposed treatment, a comparison of existing groups, or a single proportion"
+  ],
+  "misconceptions": [
+   "A sample survey cannot show that a treatment causes a change because no treatment is imposed on the individuals.",
+   "Comparing individuals who chose their own groups leaves other differences between the groups that can explain the result.",
+   "A well-designed random sample answers questions about a population without measuring everyone, and a census is not required."
+  ]
+ },
+ {
+  "id": "st_n_cat_compare_totals",
+  "topic": "1.3",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the generator accepts a case only if the larger count is in the group with the smaller relative frequency, and recomputes both fractions exactly"
+  ],
+  "misconceptions": [
+   "Compares counts although the two groups have different totals; the groups have to be compared by relative frequency.",
+   "Having the same categories does not make the relative frequencies equal; they are different in the table.",
+   "Uses the larger group total as if it raised the percentage; the percentage is the count divided by the group's own total."
+  ]
+ },
+ {
+  "id": "st_n_linear_transform",
+  "topic": "1.7",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the new mean and spread are recomputed from two synthetic values whose mean and standard deviation equal the given summary"
+  ],
+  "misconceptions": [
+   "Forgets to add the constant to the mean.",
+   "Adds the constant to the standard deviation, but adding a constant does not change the spread.",
+   "Leaves the standard deviation unchanged, but multiplying by a constant multiplies the spread by that constant."
+  ]
+ },
+ {
+  "id": "st_n_hist_shape_center",
+  "topic": "1.6",
+  "skill": "4.C",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the shape of the generated counts is verified from midpoint data: the number of peaks and the comparison of the grouped mean with the grouped median must agree with the intended shape"
+  ],
+  "misconceptions": [
+   "The bars do not have this pattern: the histogram shows a distribution that is bimodal, with two separate peaks.",
+   "The bars do not have this pattern: the histogram shows a distribution that is bimodal, with two separate peaks.",
+   "The bars do not have this pattern: the histogram shows a distribution that is bimodal, with two separate peaks."
+  ]
+ },
+ {
+  "id": "st_n_cumulative_table",
+  "topic": "1.8",
+  "skill": "4.C",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "class counts are generated first and the cumulative values are derived; the interval share is recomputed from the class counts directly"
+  ],
+  "misconceptions": [
+   "Reports the cumulative relative frequency up to the upper value without removing the observations at or below the lower value.",
+   "Adds the two cumulative relative frequencies instead of subtracting them.",
+   "Gives the proportion of observations above 50, which lies outside the stated interval."
+  ]
+ },
+ {
+  "id": "st_n_plan_unbiased",
+  "topic": "1.11",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each context lists one random-selection plan on a complete list and three plans with named selection problems, written and checked by hand"
+  ],
+  "misconceptions": [
+   "Volunteers or respondents who choose to reply can differ from the whole population, so the estimate can be biased.",
+   "Selecting the individuals who are easiest to reach leaves out the others and tends to give a biased estimate.",
+   "Selecting individuals that someone considers typical introduces the chooser's judgment and does not give every individual a chance."
+  ]
+ },
+ {
+  "id": "st_n_bias_direction",
+  "topic": "1.12",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each scenario states how the sampled group differs from the population, so the direction of the bias follows from the statement"
+  ],
+  "misconceptions": [
+   "Reverses the direction: the individuals who are sampled differ in the opposite way from the one stated.",
+   "Honest answers do not remove selection bias, which comes from who is sampled and not from how the sampled people answer.",
+   "A large sample does not remove bias from a flawed way of selecting individuals; it only makes the biased estimate more precise."
+  ]
+ },
+ {
+  "id": "st_n_factorial_units",
+  "topic": "1.13",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the number of treatments is the product of the numbers of levels, and the sum, the reversed roles and the response measurements are the named wrong readings"
+  ],
+  "misconceptions": [
+   "Adds the numbers of levels; a treatment is a combination of one level of each factor.",
+   "Reverses the roles: the units receive the treatments and the combinations of levels are the treatments.",
+   "The measurements are values of the response variable; the experimental units are the individuals that receive the treatments."
+  ]
+ },
+ {
+  "id": "st_n_union_complement",
+  "topic": "2.4",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the probability of neither is recomputed by counting a synthetic population of 1000 with the stated overlaps"
+  ],
+  "misconceptions": [
+   "Subtracts the two probabilities from $1$ without adding back the overlap that was counted twice.",
+   "Stops at the probability of at least one event and does not take the complement.",
+   "Treats the events as independent and finds the probability that they do not both happen."
+  ]
+ },
+ {
+  "id": "st_n_me_independent",
+  "topic": "2.5",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the probability of both is recomputed and tested against 0 and against the product; each case is generated so that exactly one statement is true"
+  ],
+  "misconceptions": [
+   "States that the events are mutually exclusive, but the probability of both is not $0$.",
+   "States that the events are neither, but the probabilities show that one of the two properties holds.",
+   "The probability of both is determined by the addition rule from the three given probabilities, so both properties can be decided."
+  ]
+ },
+ {
+  "id": "st_n_game_expected",
+  "topic": "2.9",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the expected net result is recomputed with exact fractions from the table and must equal a value with two decimal places"
+  ],
+  "misconceptions": [
+   "Treats the expected value as the outcome of each play, but it is only the long-run average of the net results.",
+   "Uses the mean prize without subtracting the cost of playing.",
+   "Treats the expected value as a guaranteed total, but the total for any number of plays varies around its expected value."
+  ]
+ },
+ {
+  "id": "st_n_sim_dotplot_tail",
+  "topic": "2.3",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the simulated counts are generated with numpy's binomial sampler and the tail count is recomputed from the raw draws"
+  ],
+  "misconceptions": [
+   "Uses only the trials that had exactly 8 instead of at least 8.",
+   "Uses the trials with fewer than 8 instead of at least 8.",
+   "Also counts the trials that had exactly 7, an off-by-one error in the boundary of the event."
+  ]
+ },
+ {
+  "id": "st_n_normal_cutoff",
+  "topic": "2.11",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the z-score is found by bisection on the normal cdf and the cutoff is also computed with scipy's inverse normal function"
+  ],
+  "misconceptions": [
+   "Uses the correct z-score on the wrong side of the mean.",
+   "Uses the proportion as if it were a z-score.",
+   "Doubles the standard deviation distance, as if the cutoff were for both tails."
+  ]
+ },
+ {
+  "id": "st_n_binomial_scenario",
+  "topic": "2.10",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each family lists one scenario that meets all four binomial conditions and three that each break exactly one condition, written and checked by hand"
+  ],
+  "misconceptions": [
+   "The number of trials is not fixed in advance.",
+   "Sampling a large part of a small group without replacement makes the probability change from draw to draw.",
+   "The variable is a total of point values rather than a count of successes with two possible outcomes per trial."
+  ]
+ },
+ {
+  "id": "st_n_estimator_compare",
+  "topic": "3.1",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the unbiased estimators are found by comparing each mean with the true value and the best one has the smallest standard deviation among them; the biased estimator with the smallest spread is deliberately included"
+  ],
+  "misconceptions": [
+   "Considers variability alone; the center of this sampling distribution is not at the true value, so the estimator is biased.",
+   "Considers bias alone; another estimator is also centered at the true value and has less variability.",
+   "Treats a larger spread as an advantage; more variability means estimates that are farther from the parameter more often."
+  ]
+ },
+ {
+  "id": "st_n_prop_ci_compute",
+  "topic": "3.3",
+  "skill": "3.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the interval is recomputed with a critical value from bisection on the normal cdf and compared with scipy's inverse normal function"
+  ],
+  "misconceptions": [
+   "Uses the critical value for $90\\%$ confidence, about $1.645$, instead of about $1.960$.",
+   "Leaves out the square root in the standard error, which makes the margin of error far too small.",
+   "Uses the critical value for $99\\%$ confidence, about $2.576$, instead of about $1.960$."
+  ]
+ },
+ {
+  "id": "st_n_param_statistic",
+  "topic": "3.1",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each option pairs a quantity with a name; exactly one pairing assigns the population proportion to the parameter and the sample proportion to the statistic"
+  ],
+  "misconceptions": [
+   "Reverses the two terms: the value computed from the sample is the statistic.",
+   "The sample size is a feature of the study, not the unknown population proportion that is being estimated.",
+   "The proportion in the sample is the statistic itself; the parameter is the proportion in the whole population."
+  ]
+ },
+ {
+  "id": "st_n_hyp_two_prop",
+  "topic": "3.12",
+  "skill": "2.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each option differs from the key by exactly one named defect: the direction, the use of statistics, or a two-sided alternative"
+  ],
+  "misconceptions": [
+   "The alternative hypothesis points in the direction opposite to the researcher's suspicion.",
+   "States the hypotheses with sample proportions; hypotheses are about the population proportions, not the statistics.",
+   "Uses a two-sided alternative although the researcher suspects a difference in one specific direction."
+  ]
+ },
+ {
+  "id": "st_n_sim_pvalue",
+  "topic": "3.6",
+  "skill": "4.G",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the simulated counts come from numpy's binomial sampler and the tail count is recomputed from the raw draws; cases within 0.012 of 0.05 are excluded"
+  ],
+  "misconceptions": [
+   "Counts the simulated values on the wrong side of the observed value, which is the opposite tail from the alternative hypothesis.",
+   "Finds the P-value correctly but reverses the decision rule: a P-value below the significance level is evidence against the null hypothesis.",
+   "Interprets the P-value as the probability that the null hypothesis is true; it is the probability of results at least this extreme if the null hypothesis is true."
+  ]
+ },
+ {
+  "id": "st_n_me_tradeoff",
+  "topic": "3.3",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the critical values come from bisection on the normal cdf and from scipy, and the combined factor is recomputed from both"
+  ],
+  "misconceptions": [
+   "Divides by $2$ instead of by $\\sqrt{2}$ when the sample size changes; the margin of error is proportional to $1/\\sqrt{n}$.",
+   "Accounts only for the change in the confidence level and ignores the change in the sample size.",
+   "Accounts only for the change in the sample size and ignores the change in the confidence level."
+  ]
+ },
+ {
+  "id": "st_n_cond_two_prop",
+  "topic": "3.10",
+  "skill": "4.E",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "exactly one of the four counts is generated below 10 and the check confirms that it is the only one; the random and 10 percent conditions are stated in the stem"
+  ],
+  "misconceptions": [
+   "The $10\\%$ condition requires each sample to be less than $10\\%$ of its population, which is true when the population is much larger than the samples.",
+   "Comparing two groups is the purpose of the procedure; the condition asks that the two samples be independent of each other, which random samples from separate groups are.",
+   "The sample sizes are large, but the large counts condition is about the counts of successes and failures in each group, and one count is too small."
+  ]
+ },
+ {
+  "id": "st_n_two_prop_z",
+  "topic": "3.13",
+  "skill": "3.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the statistic is recomputed from the counts with a one-line formula and compared with the value built from the pooled proportion step by step"
+  ],
+  "misconceptions": [
+   "Uses the two separate sample proportions in the standard error; a test of equal proportions uses the pooled proportion.",
+   "Uses $1/(n_1+n_2)$ in place of $1/n_1 + 1/n_2$ inside the standard error.",
+   "Leaves out the square root when dividing by the standard error, which divides by the variance instead."
+  ]
+ },
+ {
+  "id": "st_n_chisq_expected",
+  "topic": "3.15",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the expected count is recomputed with scipy's chi-square contingency routine and compared with the row-total-times-column-total formula"
+  ],
+  "misconceptions": [
+   "Divides the row total by the number of columns, which assumes that every column is equally likely; the expected count uses the column total.",
+   "Uses the total of a different row; the expected count for a cell uses the totals of its own row and its own column.",
+   "Reports the observed count in the cell; the expected count is what the null hypothesis predicts."
+  ]
+ },
+ {
+  "id": "st_n_se_change",
+  "topic": "4.1",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the new standard deviation is recomputed from sigma over the square root of the stated new sample size and equals the target"
+  ],
+  "misconceptions": [
+   "Multiplies the sample size by $3$, but the standard deviation of the sample mean is divided by only $\\sqrt{3}$ when $n$ is multiplied by $3$.",
+   "The standard deviation of the sample mean depends on the sample size, not on the size of the population when the population is large.",
+   "Multiplies the sample size by $3$ twice too often; that would divide the standard deviation by $9$ rather than by $3$."
+  ]
+ },
+ {
+  "id": "st_n_t_interval_compute",
+  "topic": "4.2",
+  "skill": "3.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the t critical value comes from numerical integration of the t density and from scipy, and the interval is recomputed from the summary statistics"
+  ],
+  "misconceptions": [
+   "Uses the normal critical value $1.960$ instead of the $t$ critical value for the stated degrees of freedom, which makes the interval too narrow.",
+   "Divides $s$ by $n$ instead of by $\\sqrt{n}$ in the standard error.",
+   "Uses the $t$ critical value for $90\\%$ confidence instead of for $95\\%$ confidence."
+  ]
+ },
+ {
+  "id": "st_n_hyp_paired",
+  "topic": "4.4",
+  "skill": "2.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each option differs from the key by one named defect: the sign of the alternative, the two-sample parameters, or a statistic in the hypotheses"
+  ],
+  "misconceptions": [
+   "Reverses the direction of the alternative: with the differences defined as with insole minus without insole, the suspicion corresponds to the other sign.",
+   "Writes hypotheses for two independent samples, but the same individuals were measured twice, so the parameter is the mean of the differences.",
+   "States the hypotheses with a sample mean difference; hypotheses are about the population mean difference."
+  ]
+ },
+ {
+  "id": "st_n_t_table",
+  "topic": "4.5",
+  "skill": "4.G",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the critical values are recomputed with scipy's inverse t function and the test statistic lies strictly between two adjacent critical values, so the P-value range is unique"
+  ],
+  "misconceptions": [
+   "Doubles the tail probabilities as for a two-sided test although the alternative hypothesis is one-sided.",
+   "Finds the P-value range correctly but reverses the decision: a P-value below $0.05$ leads to rejecting $H_0$.",
+   "Uses the lower tail probability, which is the area on the wrong side of the test statistic for this alternative hypothesis."
+  ]
+ },
+ {
+  "id": "st_n_diff_means_sd",
+  "topic": "4.6",
+  "skill": "3.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the standard deviation is recomputed from the sum of the two variances of the sample means"
+  ],
+  "misconceptions": [
+   "Adds the two standard deviations of the sample means; for independent samples the variances add, and the standard deviation is the square root of their sum.",
+   "Combines the two samples as if they came from one population, dividing the total variance by the total sample size.",
+   "Reports the variance of the difference of the sample means instead of its standard deviation, which needs the square root."
+  ]
+ },
+ {
+  "id": "st_n_method_from_table",
+  "topic": "4.4",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "each context pairs a stated question with a table layout; the paired layout has individuals in rows and the independent layout has unrelated observations in each column"
+  ],
+  "misconceptions": [
+   "The data layout shows measurements of different individuals in each column, so there are no pairs to take differences of.",
+   "There are two sets of measurements to compare, not one set compared with a fixed value.",
+   "The data are quantitative measurements, and a chi-square test is for counts of categorical variables."
+  ]
+ },
+ {
+  "id": "st_n_practical",
+  "topic": "4.10",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the P-value is recomputed from the stated difference, an assumed standard deviation and the sample sizes and is below 0.01, so the two readings of significance are separated"
+  ],
+  "misconceptions": [
+   "A small P-value does not mean that the difference is large; with very large samples even tiny differences give small P-values.",
+   "Whether a result is statistically significant depends on the P-value, which here is small; the size of the difference is not the criterion.",
+   "Large random samples give more precise estimates, not less trustworthy ones."
+  ]
+ },
+ {
+  "id": "st_n_scatter_describe",
+  "topic": "5.1",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the strength class is decided by the sample correlation computed two ways, with strong above 0.9 and weak between 0.2 and 0.55 so that no case is borderline"
+  ],
+  "misconceptions": [
+   "Gives the wrong direction: as the horizontal variable increases the vertical variable tends to decrease.",
+   "Gives the wrong strength: the correlation of $-0.54$ and the spread of the points show a weak relationship.",
+   "Describes a curved form, but the points follow a straight-line pattern with no bend."
+  ]
+ },
+ {
+  "id": "st_n_corr_changes",
+  "topic": "5.2",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "simulated standardized data show that a linear change of units and an exchange of the two variables leave the correlation equal to machine precision"
+  ],
+  "misconceptions": [
+   "Believes that the correlation depends on the units; it is unchanged by linear changes of units because it is based on standardized values.",
+   "Confuses a change in the roles or units with a change in the direction of the association; the sign of the correlation is unchanged.",
+   "The correlation does not depend on the standard deviations of the variables, so no such requirement is needed."
+  ]
+ },
+ {
+  "id": "st_n_line_from_stats",
+  "topic": "5.3",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the slope is recomputed from simulated standardized data with the same correlation and the intercept from the point of means"
+  ],
+  "misconceptions": [
+   "Uses $r(s_x/s_y)$ for the slope, inverting the ratio of standard deviations.",
+   "Adds $b\\bar x$ to $\\bar y$ for the intercept instead of subtracting it.",
+   "Uses $s_y/s_x$ for the slope and leaves out the correlation."
+  ]
+ },
+ {
+  "id": "st_n_intercept_meaning",
+  "topic": "5.5",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each context states the range of the data, so whether zero is within it decides which interpretation is correct"
+  ],
+  "misconceptions": [
+   "Interprets the intercept as the slope; the amount of change in the prediction per unit of $x$ is the slope.",
+   "Treats the predicted value as the actual value of every individual; the line gives a prediction, which differs from individual values by residuals.",
+   "Confuses the intercept with the coefficient of determination, which measures the percent of variation explained."
+  ]
+ },
+ {
+  "id": "st_set_pd_table_q1",
+  "topic": "2.8",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the probability is recomputed by adding the table entries and by the complement rule"
+  ],
+  "misconceptions": [
+   "Leaves out the value $2$ itself, which is included in the event (at most $2$).",
+   "Gives the probability of the complement of the event.",
+   "Gives only the probability that $X = 2$ instead of the probability of at most $2$."
+  ]
+ },
+ {
+  "id": "st_set_pd_table_q2",
+  "topic": "2.9",
+  "skill": "3.D",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the mean is recomputed from the table and from a synthetic population of 10000 individuals"
+  ],
+  "misconceptions": [
+   "Averages the possible values $0$ through $4$ without weighting them by their probabilities.",
+   "Reports the most likely value of $X$, which is the mode and not the mean.",
+   "Weights the squares of the values by their probabilities, which is the mean of $X^2$."
+  ]
+ },
+ {
+  "id": "st_set_pd_table_q3",
+  "topic": "2.9",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the standard deviation is recomputed from the table and from a synthetic population; the stated value equals it to two decimals"
+  ],
+  "misconceptions": [
+   "Treats the standard deviation as the largest possible distance from the mean; values can be farther away.",
+   "Confuses the standard deviation with the mean; they are different summaries of the distribution.",
+   "Describes the variance; the standard deviation is the square root of that average."
+  ]
+ },
+ {
+  "id": "st_set_reg_leverage_q1",
+  "topic": "5.4",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the predicted value and the residual are recomputed from the given coefficients and the table row"
+  ],
+  "misconceptions": [
+   "Subtracts in the wrong order; the residual is the actual value minus the predicted value.",
+   "Leaves the intercept out of the predicted value before subtracting.",
+   "Reports the predicted value instead of the residual."
+  ]
+ },
+ {
+  "id": "st_set_reg_leverage_q2",
+  "topic": "5.3",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the prediction is recomputed from the given line and the range is read from the table, so the reliability follows from whether the value exceeds the largest observed x"
+  ],
+  "misconceptions": [
+   "Gets the predicted value right but misjudges its reliability: $54$ is outside the range of the data.",
+   "Swaps the roles of the intercept and the slope when substituting into the line.",
+   "Swaps the roles of the intercept and the slope and also misjudges the reliability of the prediction."
+  ]
+ },
+ {
+  "id": "st_set_reg_leverage_q3",
+  "topic": "5.2",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the line and correlation are recomputed with and without the last observation by two methods and the four combinations of changes are exhaustive, so one is true"
+  ],
+  "misconceptions": [
+   "Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (increase and decrease).",
+   "Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (decrease and increase).",
+   "Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (decrease and decrease)."
+  ]
  }
 ]
