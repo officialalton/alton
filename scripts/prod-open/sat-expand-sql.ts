@@ -55,7 +55,7 @@ function buildImport(recs: Rec[]) {
     const keyErr = r.format === "mc" ? answerKeyError(g.options ?? null, g.correctIndex ?? null) : null;
     const gateErr = draftBankGateError({ examSystem: r.examSystem, usageScope: "mock_exam", passage: stimulus, question, options: g.options ?? null, statements: g.statements ?? null, explanationEn: g.explanationEn ?? null });
     const matErr = materialBlocker(judgeMaterialNeed({ examSystem: r.examSystem, skillCode: r.skill, text: composeProblemText(stimulus, question) }), g.figure ?? null);
-    if (keyErr ?? gateErr ?? matErr) { rejected.push(`${r.gid}: 게이트 거절`); continue; }
+    if (keyErr ?? gateErr ?? matErr) { rejected.push(`${r.gid}: 게이트 거절 ${String(keyErr ?? gateErr ?? matErr).slice(0, 120)}`); continue; }
     const fullText = composeProblemText(stimulus, question);
     const contentIssues = checkContent({ format: r.format, passage: fullText, options: g.options ?? null, correctIndex: g.correctIndex ?? null, explanation: g.explanation, answers: g.answers ?? null, statements: g.statements ?? null, skillCode: r.skill, figure: g.figure ?? null });
     const figureCheck = checkFigure(g.figure ?? null, fullText, g.options ?? null, g.correctIndex ?? null);

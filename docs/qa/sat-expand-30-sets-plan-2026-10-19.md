@@ -1,8 +1,8 @@
 # SAT Practice Test 1..13 통합 재조정 (dry-run, 2026-10-08)
 
-생성: `scripts/mock-exam-generation/rebalance-sets.ts` (DB 접근 없음, 원격 쓰기 없음). 덤프: tmp/bank-dump-sat30/dump.json. 
+생성: `scripts/mock-exam-generation/rebalance-sets.ts` (DB 접근 없음, 원격 쓰기 없음). 덤프: tmp/proj4/dump.json. 
 
-상한: 모듈당 cluster 1, 54문항 경로당 2, 비문학 family 4. 유사문항 그룹 공유 <= 15. 게시 세트 26개(T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26), 새 세트 요청 4개(T27~), 계획 0개.
+상한: 모듈당 cluster 1, 54문항 경로당 2, 비문학 family 4. 유사문항 그룹 공유 <= 15. 게시 세트 26개(T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26), 새 세트 요청 4개(T27~), 계획 4개.
 
 ## 1. 교체 요약
 
@@ -51,21 +51,7 @@
 - 유사문항 그룹 한도 새 위반: 없음; 수리 전부터 넘던 쌍(늘리지 않음): SAT Practice Test 6 / SAT Practice Test 7 share 17 groups (before 17, limit 15)
 - 30 skill x 3 난이도 칸 누락: 없음
 - 새 세트 조립 실패: 없음; 소재 상한 완화로 들어간 새 세트 문항 0건
-- 재고: 시작 미사용 1441 → 남음 1440. 미분류(소재 없음) R&W 재고 0건(소재 제약 계산에서 제외 또는 무제한 취급).
-
-새 세트 요청 수 기준 칸 부족:
-
-| 영역 | 난이도 | 형식 | 수요 | 공급 | 부족 |
-|---|---|---|---|---|---|
-| rw_craft_structure | easy | any | 24 | 9 | 15 |
-| rw_craft_structure | medium | any | 60 | 6 | 54 |
-| rw_expression_ideas | easy | any | 16 | 2 | 14 |
-| rw_expression_ideas | hard | any | 8 | 3 | 5 |
-| rw_expression_ideas | medium | any | 36 | 8 | 28 |
-| rw_information_ideas | medium | any | 60 | 6 | 54 |
-| rw_standard_english | easy | any | 16 | 7 | 9 |
-| rw_standard_english | hard | any | 8 | 5 | 3 |
-| rw_standard_english | medium | any | 60 | 3 | 57 |
+- 재고: 시작 미사용 1662 → 남음 1073. 미분류(소재 없음) R&W 재고 0건(소재 제약 계산에서 제외 또는 무제한 취급).
 
 ## 3. 세트별 R&W 과목 구성과 상위 소재 (최종)
 
@@ -97,6 +83,10 @@
 | SAT Practice Test 24 | unchanged | 21 (26%) | 12 (15%) | 9 (11%) | 11 (14%) | 5 (6%) | 10 (12%) | 4 (5%) | 4 (5%) | 5 (6%) | fiction-victorian-pastiche×2, lave-situated-learning×1, fiction-reunion×1, swiss-pocket-watches×1 | 0 |
 | SAT Practice Test 25 | unchanged | 23 (28%) | 9 (11%) | 10 (12%) | 8 (10%) | 7 (9%) | 11 (14%) | 4 (5%) | 3 (4%) | 6 (7%) | fiction-rural-isolation×1, tenement-reform×1, recycled-plastic-bridges×1, bernstein-language-codes×1 | 0 |
 | SAT Practice Test 26 | unchanged | 23 (28%) | 10 (12%) | 8 (10%) | 10 (12%) | 5 (6%) | 12 (15%) | 5 (6%) | 2 (2%) | 6 (7%) | fiction-ice-climbing×1, mantis-shrimp-vision×1, fiction-supernatural-encounter×1, total-institutions×1 | 0 |
+| SAT Practice Test 27 | new | 34 (42%) | 9 (11%) | 8 (10%) | 6 (7%) | 3 (4%) | 7 (9%) | 3 (4%) | 6 (7%) | 5 (6%) | fiction-mountain-expedition×1, fiction-coffee-ceremony-departure×1, immigration-and-democracy×1, kangaroo-rat-kidneys×1 | 0 |
+| SAT Practice Test 28 | new | 35 (43%) | 9 (11%) | 8 (10%) | 6 (7%) | 3 (4%) | 7 (9%) | 4 (5%) | 5 (6%) | 4 (5%) | colonial-encounter×1, fiction-intellectual-humility×1, fiction-literary-debate×1, fiction-fairy-redemption×1 | 0 |
+| SAT Practice Test 29 | new | 38 (47%) | 7 (9%) | 8 (10%) | 5 (6%) | 3 (4%) | 7 (9%) | 2 (2%) | 6 (7%) | 5 (6%) | self-healing-concrete×1, vauvenargues×1, fiction-flatland-satire×1, fiction-impoverished-family-portrait×1 | 0 |
+| SAT Practice Test 30 | new | 40 (49%) | 7 (9%) | 9 (11%) | 4 (5%) | 3 (4%) | 7 (9%) | 2 (2%) | 5 (6%) | 4 (5%) | danish-colonization-heath×1, poetry-winter-nature×1, fiction-lost-love×1, fiction-character-portrait×1 | 0 |
 
 목표(%): literature_fiction 22, humanities 14, social_science 13, history_civics 12, economics_business 8, science_life 11, science_earth_space 7, science_physical 8, technology 5
 
@@ -137,63 +127,63 @@
 
 ## 5. 목표 과목 구성을 위한 추가 생성 필요량 (R&W)
 
-전제: 13세트 R&W 문항 2106건, 과목별 하한 = (목표% - 2pp) x 칸 수요. 공급 = 최종 계획에 쓰인 문항 + 남은 미사용 재고(분류된 것만). 칸 단위로 부족분을 계산하고 과목별 합계만 올림한다. 생성된 문항은 과다 과목(문학 등) 문항을 대체한다.
+전제: 13세트 R&W 문항 2430건, 과목별 하한 = (목표% - 2pp) x 칸 수요. 공급 = 최종 계획에 쓰인 문항 + 남은 미사용 재고(분류된 것만). 칸 단위로 부족분을 계산하고 과목별 합계만 올림한다. 생성된 문항은 과다 과목(문학 등) 문항을 대체한다.
 
-허용오차 민감도(추가 생성 총량): 0pp → 519건, 2pp → 317건, 4pp → 170건, 6pp → 87건.
+허용오차 민감도(추가 생성 총량): 0pp → 473건, 2pp → 220건, 4pp → 69건, 6pp → 24건.
 
-**칸 단위 추정 총 317건** — 채택 기준 $0.22/건 ≈ $69.74, hard 비중이 높으면 $0.5/건 ≈ $158.5.
+**칸 단위 추정 총 220건** — 채택 기준 $0.22/건 ≈ $48.4, hard 비중이 높으면 $0.5/건 ≈ $110.
 
 과목별(칸 단위 합계):
 
 | 과목 | 추가 생성 | 전역 하한 | 전역 공급 | 전역 부족 |
 |---|---|---|---|---|
-| literature_fiction | 112 | 421 | 712 | 0 |
-| humanities | 36 | 252 | 271 | 0 |
-| social_science | 35 | 231 | 223 | 8 |
-| history_civics | 22 | 210 | 249 | 0 |
-| economics_business | 19 | 126 | 142 | 0 |
-| science_life | 19 | 189 | 306 | 0 |
-| science_earth_space | 21 | 105 | 146 | 0 |
-| science_physical | 42 | 126 | 103 | 23 |
-| technology | 11 | 63 | 141 | 0 |
+| literature_fiction | 34 | 486 | 826 | 0 |
+| humanities | 34 | 291 | 296 | 0 |
+| social_science | 29 | 267 | 257 | 10 |
+| history_civics | 27 | 242 | 263 | 0 |
+| economics_business | 18 | 145 | 156 | 0 |
+| science_life | 22 | 218 | 317 | 0 |
+| science_earth_space | 18 | 121 | 157 | 0 |
+| science_physical | 32 | 145 | 129 | 16 |
+| technology | 6 | 72 | 153 | 0 |
 
 skill x 난이도 칸별 추가 생성 (상위 40; 전체는 shortfall.json):
 
 | 칸 | 수요 | 추가 | 과목별 |
 |---|---|---|---|
-| central_ideas_details|medium | 314 | 93 | humanities 18, social_science 15, history_civics 11, economics_business 10, science_life 12, science_earth_space 11, science_physical 14, technology 5 |
-| text_structure_purpose|medium | 194 | 37 | humanities 5, social_science 9, history_civics 5, economics_business 4, science_life 5, science_earth_space 3, science_physical 7, technology 2 |
-| boundaries|medium | 195 | 29 | literature_fiction 21, humanities 5, social_science 1, economics_business 1, science_physical 2 |
-| form_structure_sense|medium | 195 | 20 | literature_fiction 20 |
-| rhetorical_synthesis|medium | 117 | 17 | literature_fiction 13, social_science 1, economics_business 1, science_physical 4 |
-| transitions|medium | 117 | 17 | literature_fiction 16, social_science 1 |
-| boundaries|easy | 52 | 8 | literature_fiction 6, humanities 3, history_civics 1 |
-| words_in_context|medium | 171 | 8 | history_civics 2, science_physical 7 |
-| text_structure_purpose|easy | 67 | 6 | humanities 1, social_science 2, economics_business 2, science_earth_space 3, science_physical 2, technology 1 |
-| form_structure_sense|easy | 52 | 6 | literature_fiction 6, science_physical 1 |
-| cross_text_connections|easy | 22 | 6 | literature_fiction 4, humanities 1, science_physical 2 |
-| transitions|easy | 52 | 6 | literature_fiction 6 |
+| central_ideas_details|medium | 370 | 78 | humanities 15, social_science 11, history_civics 11, economics_business 9, science_life 12, science_earth_space 9, science_physical 13, technology 2 |
+| text_structure_purpose|medium | 240 | 19 | humanities 5, history_civics 4, economics_business 1, science_life 5, science_earth_space 1, science_physical 4, technology 1 |
+| boundaries|medium | 228 | 15 | literature_fiction 2, humanities 5, social_science 4, economics_business 3, science_physical 3 |
+| transitions|medium | 135 | 8 | literature_fiction 6, social_science 2, science_physical 1 |
+| boundaries|easy | 58 | 7 | literature_fiction 5, humanities 1, history_civics 1 |
+| central_ideas_details|easy | 56 | 7 | social_science 3, science_life 3, science_earth_space 1, science_physical 1, technology 1 |
+| text_structure_purpose|easy | 78 | 7 | humanities 2, social_science 2, history_civics 1, economics_business 1, science_earth_space 1, science_physical 2 |
+| rhetorical_synthesis|medium | 135 | 7 | social_science 3, economics_business 2, science_physical 3 |
+| text_structure_purpose|hard | 32 | 6 | humanities 2, social_science 1, history_civics 2, economics_business 1, science_life 1 |
 | inferences|easy | 34 | 6 | literature_fiction 4, humanities 2, social_science 1, science_physical 1 |
-| rhetorical_synthesis|easy | 52 | 5 | literature_fiction 4, social_science 1, economics_business 1 |
+| words_in_context|easy | 75 | 5 | humanities 1, social_science 1, history_civics 1, economics_business 1, science_life 1, science_earth_space 1, science_physical 1 |
+| cross_text_connections|easy | 27 | 5 | literature_fiction 4, science_life 1, science_physical 1 |
 | command_of_evidence_quant|medium | 11 | 5 | literature_fiction 3, humanities 2, social_science 1, history_civics 2 |
-| rhetorical_synthesis|hard | 26 | 5 | literature_fiction 1, humanities 2, social_science 2, economics_business 1, science_physical 1 |
-| transitions|hard | 26 | 5 | literature_fiction 3, history_civics 1, economics_business 1, science_earth_space 1, science_physical 1, technology 1 |
-| words_in_context|easy | 67 | 4 | humanities 1, social_science 2, economics_business 1, science_life 2, science_earth_space 1, science_physical 2 |
-| inferences|medium | 27 | 4 | literature_fiction 2, economics_business 1, science_earth_space 1, science_physical 1, technology 1 |
-| inferences|hard | 17 | 4 | literature_fiction 2, science_earth_space 1, science_physical 2, technology 1 |
+| inferences|hard | 19 | 5 | literature_fiction 2, science_earth_space 1, science_physical 2, technology 1 |
+| transitions|hard | 27 | 5 | literature_fiction 2, history_civics 1, economics_business 1, science_earth_space 1, science_physical 1, technology 1 |
+| cross_text_connections|hard | 30 | 4 | literature_fiction 1, social_science 1, science_earth_space 1, science_physical 2 |
+| rhetorical_synthesis|hard | 33 | 4 | literature_fiction 2, social_science 1, history_civics 1, science_physical 1 |
 | command_of_evidence_text|easy | 24 | 4 | literature_fiction 3, science_earth_space 2 |
-| cross_text_connections|medium | 25 | 3 | literature_fiction 1, social_science 1, science_earth_space 1, science_physical 1 |
-| command_of_evidence_text|medium | 38 | 3 | literature_fiction 3 |
+| words_in_context|medium | 182 | 3 | humanities 1, history_civics 2 |
+| inferences|medium | 29 | 3 | economics_business 1, science_earth_space 1, science_physical 1, technology 1 |
+| form_structure_sense|medium | 222 | 3 | history_civics 3 |
 | command_of_evidence_quant|easy | 6 | 3 | literature_fiction 2, history_civics 1, science_physical 1, technology 1 |
-| boundaries|hard | 26 | 3 | social_science 1, history_civics 2, science_earth_space 1 |
-| form_structure_sense|hard | 26 | 3 | economics_business 1, science_life 1, science_physical 1, technology 1 |
-| text_structure_purpose|hard | 26 | 3 | humanities 2, history_civics 1, economics_business 1, science_life 1 |
-| words_in_context|hard | 26 | 3 | humanities 2, science_life 1, science_physical 1 |
-| cross_text_connections|hard | 26 | 3 | literature_fiction 1, science_earth_space 1, science_physical 2 |
+| central_ideas_details|hard | 19 | 3 | social_science 2, history_civics 1, economics_business 1, technology 1 |
+| boundaries|hard | 31 | 3 | literature_fiction 1, social_science 1, history_civics 2, science_earth_space 1 |
+| form_structure_sense|hard | 29 | 3 | social_science 1, economics_business 1, science_life 1, technology 1 |
+| words_in_context|hard | 28 | 3 | humanities 2, social_science 1, science_life 1, science_physical 1 |
 | command_of_evidence_quant|hard | 3 | 3 | literature_fiction 1, humanities 1, social_science 1, history_civics 1, economics_business 1, science_physical 1, technology 1 |
-| central_ideas_details|easy | 40 | 2 | social_science 1, science_life 1, technology 1 |
-| central_ideas_details|hard | 16 | 2 | social_science 1, history_civics 1, technology 1 |
-| command_of_evidence_text|hard | 16 | 1 | science_earth_space 1 |
+| form_structure_sense|easy | 62 | 2 | literature_fiction 1, science_physical 1 |
+| rhetorical_synthesis|easy | 60 | 2 | social_science 1, economics_business 1 |
+| cross_text_connections|medium | 28 | 2 | social_science 1, science_earth_space 1, science_physical 1 |
+| command_of_evidence_text|hard | 19 | 2 | humanities 1, science_earth_space 1 |
+| transitions|easy | 60 | 1 | social_science 1 |
+| command_of_evidence_text|medium | 40 | 1 | literature_fiction 1 |
 
 ## 6. 적용 순서 제안(총괄)
 

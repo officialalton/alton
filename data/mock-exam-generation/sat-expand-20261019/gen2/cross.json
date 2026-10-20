@@ -1,0 +1,3757 @@
+{
+ "summary": {
+  "sat_rw": {
+   "cand": 118,
+   "genFail": 0,
+   "formatFail": 0,
+   "detPass": 112,
+   "crossScored": 112,
+   "correct": {
+    "agree": 105,
+    "of": 112,
+    "fablePass": 107,
+    "opusPass": 102
+   },
+   "compliance": {
+    "agree": 112,
+    "of": 112,
+    "fablePass": 112,
+    "opusPass": 112
+   },
+   "hardFit": {
+    "agree": 79,
+    "of": 112,
+    "fablePass": 91,
+    "opusPass": 74
+   },
+   "adoptedBoth": 59,
+   "adoptedOneOnly": 36,
+   "yieldBoth": 0.5,
+   "costUsd": 8.216,
+   "costPerAdoptedBoth": 0.139,
+   "fableOnlyPass": 27,
+   "opusOnlyPass": 9
+  },
+  "sat_math": {
+   "cand": 0,
+   "genFail": 0,
+   "formatFail": 0,
+   "detPass": 0,
+   "crossScored": 0,
+   "correct": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "compliance": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "hardFit": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "adoptedBoth": 0,
+   "adoptedOneOnly": 0,
+   "yieldBoth": 0,
+   "costUsd": 0,
+   "costPerAdoptedBoth": null,
+   "fableOnlyPass": 0,
+   "opusOnlyPass": 0
+  },
+  "adoptedHardFableRule": {
+   "total": 82,
+   "rw": 82,
+   "math": 0,
+   "correctBothRequired": true
+  }
+ },
+ "items": [
+  {
+   "cid": "sv-inferences-m-000",
+   "skill": "inferences",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 A는 '울타리 논쟁에 몰두' + '머리 위 열매를 한 번도 보지 않음'이라는 두 정보를 연결해야 도출되는 추론으로 타당함. B(콩 그늘)와 D(규정 낭독)는 지문의 세부에 근거한 부분 정답형 오답이라 비교가 필요하고, C는 지문과 모순되지만 토마토를 언급해 그럴듯함. 지문은 원작 인용 흔적 없는 창작 각색으로 보임. 해설의 \"몇 시간씩/for hours\" 표현만 지문의 \"an hour\"와 미세하게 다름.",
+    "issue": "사소한 과장: 지문은 \"stand beneath it for an hour\"(한 시간)라고 했는데 해설은 \"몇 시간씩/for hours\"라고 서술함. 논리에는 영향 없음.\"for hours\" is a slight overstatement of the text's \"for an hour\"; otherwise accurate, natural, and consistent with the Korean explanation. No Korean characters."
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "울타리 다툼과 아무도 올려다보지 않은 토마토라는 두 단서를 연결해야 A가 나옴. B와 D는 지문 세부(콩 그늘, 규약 낭독)에 기대고 있어 그럴듯함. C는 비교적 쉽게 배제됨. 중간 난이도에 적합함.",
+    "issue": "사소한 부정확성: 지문은 토마토 아래에 '한 시간' 서 있었다고 하는데 해설은 '몇 시간씩'이라고 함. 결론에는 영향 없음.'for hours'는 지문의 'for an hour'를 약간 과장함. 사소한 문제임."
+   },
+   "cost": 0.0759616
+  },
+  {
+   "cid": "sv-inferences-m-001",
+   "skill": "inferences",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 B는 '아버지가 그물을 빛에 비춰 살핌' → '비욘이 직접 그물을 들어 올림'이라는 두 장면의 연결과 'yet'의 대조(양은 줄었으나 눈을 얻음)를 읽어야 도출되어 medium에 적합. A·D는 '3분의 1도 못 미침'으로 배제되고, C는 지문의 분위기·결과와 어긋남. 다만 A는 '아버지가 그날 매듭을 묶었다'는 전제 자체가 지문에 없어 다소 약한 오답. 창작 지문으로 저작권 문제 없음.",
+    "issue": "C에 대한 설명이 약간 과장됨: 지문은 '고르지 않게 당긴 곳마다' 틈이 생겼다고 할 뿐 오전 매듭 '대부분'이 불량이었다고 명시하지는 않음. 다만 '~했음에도(yet)'의 긍정적 전환과 후회라는 정서가 맞지 않는다는 점으로도 배제 가능하므로 정답 판단에는 영향 없음."
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "B는 아버지가 그물을 빛에 비춰 살핀 장면과 비욘이 칸마다 옆 칸과 비교한 장면을 연결해야 고를 수 있으므로 타당한 추론입니다. A와 D는 비교적 쉽게 배제되고, C는 그럴듯한 오답입니다. medium 난이도의 하한선 수준입니다.",
+    "issue": "C를 '모순'이라고 한 것은 약간 과장입니다. 지문은 고르지 않게 당긴 매듭에서 틈이 생겼다고만 하고, 대부분의 매듭이 불량이었다고는 하지 않습니다. C를 배제하는 더 정확한 근거는 이 선택지가 지문에서 뒷받침되지 않는다는 점과, 비욘이 오전 작업을 버린 것이 아니라 매듭을 풀었다는 점입니다. 사소한 문제입니다.한국어 해설과 같은 문제가 있습니다. C를 'contradicts'라고 한 것은 약간 과장입니다."
+   },
+   "cost": 0.0874886
+  },
+  {
+   "cid": "sv-command_of_evidence_text-m-002",
+   "skill": "command_of_evidence_text",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [
+    "contract:contract_answer_leak",
+    "answer_leak:질문의 주체·수치를 정답만 반복(정답 1개 고유 일치, 오답 0)"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.019623599999999998
+  },
+  {
+   "cid": "sv-command_of_evidence_text-m-003",
+   "skill": "command_of_evidence_text",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "Marchetti의 주장은 (1) 낡은 상태 = 오랜 헌신의 증거, (2) 그 헌신이 Lucien과 직접 연결, 두 조건으로 구성됨. D만이 두 조건을 모두 충족(여러 해에 걸친 날짜 메모 + Lucien 추천 구절에 대한 응답). A는 '오해 깨달음'이라는 부분적 근거가 있으나 책 상태의 의미를 설명하지 못하고, C는 책의 내력(오랜 소유)을 주지만 Lucien과의 연결을 끊음. B는 Lucien의 해석을 뒷받침하는 쪽. 오답 2개가 부분적 근거를 가지므로 medium에 적합. 한국어·영어 해설 결론 및 선택지 참조 일치, 영어 자연스럽고 한글 없음. 가상 소설 발췌로 저작권 우려 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "두 조건(오랜 헌신 + Lucien과의 연결)을 모두 확인해야 하는 구조임. A와 C는 일부 근거만 갖춘 오답이어서 medium 난이도에 맞음. 정답 D가 유일하게 두 조건을 모두 충족함.",
+    "issue": "C 해설은 약간 과장됨(다른 가게에서 샀다는 사실이 연결을 부정하진 않음). 다만 결론은 타당함."
+   },
+   "cost": 0.0855006
+  },
+  {
+   "cid": "sv-cross_text_connections-m-004",
+   "skill": "cross_text_connections",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "Text 2 explicitly concedes the checkpoints \"have earned their praise\" and then argues the city \"takes its shape from Keller's errand,\" directly contradicting Text 1's \"pretext\" claim—A is the only choice capturing both the concession and the rebuttal. B is a strong partial-credit distractor (brother does matter, but \"letter is incidental\" reverses Text 2's thesis); C inverts the concession; D is unsupported but surface-plausible. Korean and English explanations match in conclusion and letter references, with no Hangul in the English version. Fictional novel/author, no copyright concern. Two-step reasoning (identify concession + identify counterclaim) suits medium.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "too_easy",
+     "eliminated:2"
+    ],
+    "note": "정답 A는 타당하다. 그러나 부분적으로 맞는 근거를 가진 오답은 B 하나뿐이다. C는 Text 2 첫 문장(\"earned their praise\")과 정면으로 모순되고, D는 두 지문 어디에도 근거가 없어 훑어 읽어도 바로 걸러진다. 'medium' 기준인 '오답 3개 중 최소 2개가 부분적으로 맞는 근거를 가질 것'을 충족하지 못한다.",
+    "issue": "'brother'를 '오빠'로 옮겨 손위 남자 형제로 한정했지만 원문에는 근거가 없다. 판정에는 영향이 없는 사소한 문제다."
+   },
+   "cost": 0.0797836
+  },
+  {
+   "cid": "sv-cross_text_connections-m-005",
+   "skill": "cross_text_connections",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "Text 2는 결말(계승의 선물)과 '침묵 묘사는 Youssef의 불안을 반영'이라는 두 근거로 Amrani의 해고 해석을 반박하므로, 견습생의 관점을 작품의 판단으로 혼동했다는 B가 정확히 대응됨. A(작별 해석 수용), C(미해결), D(불경기 무영향)는 모두 Text 2와 모순되거나 근거 없음. 가상의 작가·작품·비평가로 저작권 문제 없음. 두 텍스트의 관점 차이를 연결해야 하므로 medium 적합. 해설 한·영 모두 일관되고 글자 참조 정확.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "B는 Text 2의 마지막 문장(침묵 묘사=Youssef의 불안 반영)과 결말 근거를 결합해야 도출됨. A·C는 부분 근거가 있는 그럴듯한 오답이고, D는 비교적 약하지만 말은 됨. medium에 적합.",
+    "issue": ""
+   },
+   "cost": 0.0831236
+  },
+  {
+   "cid": "sv-boundaries-m-006",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞 \"He stood ... stopped noticing\"은 관계절·수식어가 길게 붙은 하나의 독립절이고, 뒤 \"it was ... own\"도 독립절이므로 세미콜론(C)이 유일한 정답. A는 comma splice, B는 and 뒤 쉼표로 위치 오류, D는 run-on(단, \"noticing it was...\"가 명사절처럼 읽혀 유혹적임). 긴 문장 구조에서 절 경계를 찾아야 하고 A·D가 부분적 근거를 가지므로 medium에 적합. 한·영 해설 모두 정답 및 선택지 참조가 일치하고 오류 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "관계절이 길어 절의 경계가 가려지고, 뒤 절의 삽입구 쉼표가 A를 그럴듯하게 만든다. 그래서 중간 난이도에 대체로 맞는다. 다만 B와 D는 비교적 쉽게 배제된다.",
+    "issue": "\"두 독립절을 연결하려면 세미콜론이 필요하다\"는 표현은 지나치게 단정적이다(쉼표+등위접속사나 마침표도 가능하다). 그래도 이 선택지들 안에서는 결론이 옳다.\"you need a semicolon\"도 한국어 해설처럼 단정적이지만 결론과 선택지 글자 참조는 한국어 해설과 일치한다."
+   },
+   "cost": 0.0837368
+  },
+  {
+   "cid": "sv-boundaries-m-007",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "검산: 'Eduardo ... did something no one at the depot would have predicted'는 완전한 독립절, 'he walked ... and asked ...'도 독립절이며 앞 절의 '예측 못 한 일'을 구체화하므로 콜론(D)이 적절. A는 comma splice, B는 세미콜론+and 비표준, C는 run-on. 긴 삽입 동격구와 부사절이 주절 경계 파악을 요구해 두 단계 판단이 필요하며, A·B가 부분적 타당성을 갖는 오답으로 기능하므로 medium 적합. 한·영 해설 결론 및 선택지 참조 일치, 영어 자연스럽고 한글 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "긴 동격구 때문에 주절의 구조를 다시 파악해야 하고, 그다음 콜론의 설명 기능을 확인해야 하는 두 단계 판단이 필요해 medium 난이도에 맞다. B(세미콜론+and)를 비표준으로 본 해설은 엄밀히 따지면 논란의 여지가 있지만 SAT 관례에는 부합한다. 다만 뒤 절이 앞 절을 구체화한다는 점에서 콜론이 가장 적절하다는 근거를 덧붙이면 더 좋겠다.",
+    "issue": ""
+   },
+   "cost": 0.0741058
+  },
+  {
+   "cid": "sv-boundaries-m-008",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 \"The newest game\"과 동사 \"required\" 사이에 긴 삽입 수식어(분사구 + 동격구 + 관계절)가 끼어 있고, 삽입은 쉼표로 열렸으므로 쉼표로 닫는 A가 유일한 정답. B는 닫는 부호 누락, C는 세미콜론 앞이 독립절이 아님, D는 여는 부호(쉼표)와 닫는 부호(대시)가 불일치. 한국어·영어 해설 모두 같은 결론과 글자 참조를 가지며 정확하고 자연스러움. 긴 삽입구 속 중첩 구조를 추적해야 하므로 medium에 적합. 지문은 창작 원문으로 저작권 우려 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어-동사 사이에 긴 삽입구(분사구+동격구+관계절)가 있어 짝 쉼표를 찾아야 하는 2단계 판단이 필요하다. 표준 medium 수준이다. 엄밀히 보면 삽입 요소는 'invented' 앞의 쉼표로 열리지만, 해설이 동격구 기준으로 설명해도 결론은 같다.",
+    "issue": ""
+   },
+   "cost": 0.0785508
+  },
+  {
+   "cid": "sv-boundaries-m-009",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞뒤 모두 독립절(앞 절은 동격구 삽입, 뒤 절은 분사구 삽입으로 구조 파악에 한 단계 더 필요). 세미콜론(B)만 적법. A는 comma splice, C는 fused sentence, D는 \"and\" 뒤 불필요한 쉼표. 한국어·영어 해설 모두 B를 일관되게 뒷받침하며 글자 참조 일치. 삽입구 때문에 절 경계를 정독해야 하고 A·D가 부분적으로 타당해 보여 medium에 부합. 창작 지문으로 저작권 문제 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "Standard comma splice/semicolon item. The appositive adds a bit of distraction, and D is a plausible distractor, so the medium level fits. It may lean slightly easy because C is clearly wrong.",
+    "issue": ""
+   },
+   "cost": 0.0666428
+  },
+  {
+   "cid": "sv-boundaries-m-010",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "'Now, as Sora coiled ... repaint' is a long introductory subordinate clause (with an internal 'about...' series that invites misreading it as independent); the main clause is 'Jin said nothing'. Only a comma (C) correctly separates them. A and B require an independent clause before the mark; D's ', and' leaves the 'as' clause with no main clause. Both explanations match the answer and letter references and are accurate; English is natural with no Hangul. Two-step judgment (identify clause type despite length/internal commas, then apply punctuation rule) suits medium.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "'Now, as ... repaint'라는 긴 종속절이 있고, 그 안에 about 병렬 구문이 들어가 있어서 종속절이 어디서 끝나는지 파악하기 어렵습니다. 그래서 훑어 읽으면 세미콜론이나 콜론을 고르는 오답을 유도하므로 medium 난이도에 적합합니다. D도 'and'가 있으니 그럴듯해 보이는 오답입니다.",
+    "issue": ""
+   },
+   "cost": 0.0715388
+  },
+  {
+   "cid": "sv-boundaries-m-011",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [
+    "contract:contract_format",
+    "contract:contract_rw_options",
+    "contract:contract_option_empty"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.0184398
+  },
+  {
+   "cid": "sv-boundaries-m-012",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "지문·형식·난이도 자체는 적합하나, 선택지 C가 문법적으로 허용되는 결합(FANBOYS 앞 쉼표)이라 정답이 유일하지 않다는 치명적 결함이 있다. 해설(한/영 모두)은 C 배제 논리가 관례가 아닌 문체 판단에 기대어 있어 뒷받침이 불충분하다. 사용 전 C 선택지 교체가 필요하다(판정만, 수정은 하지 않음).",
+    "issue": "A(세미콜론)는 옳으나, C(쉼표+and)도 두 독립절을 잇는 표준적이고 문법적인 방식이므로 사실상 정답이 둘이다. 해설은 C를 '어색함/대조 흐려짐'이라는 문체적 이유로 배제하는데, 이는 Standard English 관례 문제의 판정 근거가 될 수 없고, \"'to Youssef'가 앞 절에 붙는 것처럼 읽힌다\"는 설명도 문법적으로 부정확하다. 선택지 설계상 C를 명확히 오답으로 만들려면 'and' 대신 'and so'/'and that' 등 실제로 비문이 되는 형태가 필요하다.Same flaw as the Korean: the stated reason for rejecting C (that \"to Youssef\" would seem attached to the first clause) is not a valid Standard English convention argument; comma + \"and\" between two independent clauses is grammatical. Otherwise fluent, no Korean characters, letter references match."
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답이 둘이다. A(세미콜론)와 C(쉼표+and)가 모두 독립절 두 개를 올바르게 잇는다. C를 예를 들어 ', but' 대신 쓸 수 없는 형태(예: 'admiration, however,')로 바꾸거나, 쉼표만 쓰는 다른 오답으로 교체해야 한다.",
+    "issue": "C를 배제하는 근거가 문법적으로 틀렸다. 독립절 두 개를 '쉼표+and'로 잇는 것은 표준 영어에서 맞는 형태이다. 'to Youssef'는 뒤 절의 주어 앞에 오는 도입 전치사구로 자연스럽게 읽히고, 앞 절에 붙는 것처럼 읽히지 않는다. '대조가 흐려진다'는 것은 문체에 대한 판단일 뿐 어법 오류가 아니다.영어 해설도 C에 대해 같은 잘못된 근거를 든다. 쉼표+and는 두 독립절을 잇는 표준 방식이므로 C는 틀린 답이 아니다."
+   },
+   "cost": 0.0931298
+  },
+  {
+   "cid": "sv-boundaries-m-013",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.0142698
+  },
+  {
+   "cid": "sv-boundaries-m-014",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "C(세미콜론)는 분명히 옳다. 그러나 A(\"counter, and,\")는 뒤따르는 \", the whole time,\" 삽입구와 쌍 쉼표를 이루어 문법적으로 방어 가능하므로 단일 정답 조건이 위태롭다. 출제자는 A를 'and, the whole time' 쌍 쉼표가 성립하지 않도록(예: 빈칸 뒤 삽입구 제거) 수정하거나 A를 다른 오답으로 교체할 필요가 있다. 난이도는 두 독립절 판별 + 목록 연속처럼 보이는 함정(B)으로 medium에 부합. 저작권 의심 없음, 사실 오류 없음.",
+    "issue": "A를 배제하는 근거가 부정확하다. 선택지 A를 넣으면 \"counter, and, the whole time, she noticed, Rosa kept glancing...\"이 되는데, 'and' 뒤 쉼표는 'time' 뒤 쉼표와 짝을 이루어 삽입구 'the whole time'을 감싸는 구조이므로 표준 영어에서 허용 가능한 쌍 쉼표 용법이다. 따라서 A가 \"접속사와 절을 불필요하게 끊는다\"는 설명은 틀렸고, A가 두 번째 정답으로 방어될 수 있어 문항 자체에 중의성이 있다. 해설은 C에 대해서는 정확하며 글자 참조도 선택지와 일치한다.Same flaw as the Korean explanation: the rejection of A (\"the comma after 'and' wrongly separates the conjunction from the clause\") is inaccurate because the comma after \"and\" is paired with the comma after \"time,\" bracketing the parenthetical \"the whole time.\" Otherwise English is natural, letter references match, no Hangul."
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답이 둘일 수 있다. C는 옳지만, A도 'and, [the whole time], she noticed, …' 구조로 읽으면 표준 영어에 맞을 수 있다. A를 'counter, and' 등으로 바꿔 명확한 오답으로 만들어야 한다. 그 밖에 B는 콤마 스플라이스, D는 무종지문이라는 설명은 타당하다.",
+    "issue": "A를 배제하는 근거가 약하다. 'counter, and, the whole time, she noticed, Rosa kept…'에서 and 뒤 쉼표는 삽입구 'the whole time'을 여는 쉼표로 읽을 수 있고, 그러면 문장은 문법적으로 성립한다. 해설이 말하는 '접속사와 절을 불필요하게 끊었다'는 지적은 성립하지 않는다.한국어 해설과 같은 오류가 있다. A를 배제한 이유(and 뒤 쉼표)가 타당하지 않다. 이 쉼표는 삽입구 'the whole time'을 여는 쉼표로 해석할 수 있다."
+   },
+   "cost": 0.09968279999999999
+  },
+  {
+   "cid": "sv-boundaries-m-015",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "검산: 주어 Tobias + 쉼표로 열린 비필수 관계절(who... and who... available) + 본동사 unfolded 구조이므로 닫는 쉼표가 필요한 D가 유일하게 옳음. A는 세미콜론 앞이 독립절이 아님, B는 'and'가 본동사를 관계절에 흡수시켜 주절 동사 소실, C는 닫는 쉼표 누락. 한국어·영어 해설 모두 동일 결론·글자 참조로 정확하며 자연스러움. 긴 삽입절과 두 개의 who절을 추적해야 하므로 medium에 적합. 원창작 지문으로 저작권 우려 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "긴 비필수 관계절 안에 다시 'who ... and who' 병렬 구조가 들어 있다. 그래서 수험생은 주어-동사를 찾은 뒤 삽입절을 닫는 쉼표가 필요하다는 것까지 두 단계로 판단해야 한다. B는 관계절 안의 병렬 구조 때문에 그럴듯하게 보이는 매력적인 오답이다. medium 난이도에 적합하다.",
+    "issue": ""
+   },
+   "cost": 0.0681708
+  },
+  {
+   "cid": "sv-boundaries-m-016",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "검산: \"But when Dev mentioned ... town, a place ... decade\" 전체가 when 종속절(동격어구 포함)이고 주절은 \"she realized...\"이므로 쉼표(A)가 유일한 정답. B(세미콜론)·C(, and)는 앞부분을 독립절로 오인한 것이고 D는 조각문을 만든다. 긴 동격어구가 구조를 가려 훑어 읽으면 B/C에 끌리도록 설계되어 medium에 적합. 한국어·영어 해설 모두 정답과 선택지 글자 참조가 일치하고 오류 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "긴 동격어구 때문에 종속절 경계를 찾기 어려워 medium 수준에 맞음. 오답 B, C, D 모두 그럴듯함.",
+    "issue": ""
+   },
+   "cost": 0.0680318
+  },
+  {
+   "cid": "sv-boundaries-m-017",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞뒤 모두 독립절이므로 세미콜론+접속부사+쉼표(B)가 표준 정답이며, A·C는 comma splice로 명확히 배제된다. 다만 B와 D의 유일한 차이가 접속부사 meanwhile 뒤 쉼표 유무인데, 이는 실제 용법에서 선택적(특히 짧은 부사)으로 취급되는 경우가 많아 D를 '오류'로 단정하기 약하다. 실제 디지털 SAT는 세미콜론 뒤 접속부사의 쉼표 유무만으로 정오를 가르는 설계를 피하는 경향이 있으므로, 변별 근거의 견고성 측면에서 주의가 필요하다(판정 범위 내에서는 B가 최선의 선택임은 인정). 긴 동격구 뒤에 절 경계를 숨긴 점은 medium 난이도에 부합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "세미콜론 + 접속부사 + 쉼표를 묻는 표준 문항이다. 앞 독립절이 긴 동격구로 끝나서 절 경계를 찾기가 조금 어려워지고, 이 점이 medium 난이도에 맞다. D는 SAT 관례상 오답으로 처리하는 전형적인 선택지다.",
+    "issue": ""
+   },
+   "cost": 0.0756878
+  },
+  {
+   "cid": "sv-boundaries-m-018",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 \"The man beside him on the elevated platform\" 뒤에 쉼표로 열린 동격 삽입구가 \"every few seconds\"까지 이어지고 본동사 twisted가 뒤따르므로 쉼표로 닫는 C가 유일하게 옳다. A(세미콜론)는 주어와 동사를 분리해 조각을 만들고, B(대시)는 쉼표로 연 삽입구와 부호가 불일치하며, D는 경계가 사라진다. 해설(한·영) 결론과 글자 참조 일치, 영어 자연스럽고 한글 없음. 삽입구 시작점을 역추적해 부호 짝을 맞추는 두 단계 판단이 필요하고 B·A가 부분적 타당성을 가져 medium 적합. 지문은 창작물로 저작권 문제 없음. D 선택지의 공백 두 칸은 사소한 표기 차이.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "동격어구 안에 관계절(who had been checking...)이 길게 들어 있어서 동사 twisted를 찾으려면 앞뒤를 연결해 읽어야 하므로 중간 난이도에 맞는다. B와 D는 부분적으로 그럴듯한 오답이다. D 선택지 앞에 공백이 두 칸 들어간 것은 사소한 표기 문제다.",
+    "issue": ""
+   },
+   "cost": 0.07153280000000001
+  },
+  {
+   "cid": "sv-form_structure_sense-m-019",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 'the routine of the household'(단수) 뒤에 긴 분사 수식어구 'built over years of punctual departures and carefully pressed shirts'가 삽입되어 있으며, 빈칸에는 정동사가 필요하다. D 'came'은 단수·과거 정동사로 정답이 맞다. A는 수식어구 내 복수 명사에 이끌린 수 일치 오류, B·C는 비정형으로 문장이 성립하지 않는다. 한국어·영어 해설 모두 동일한 결론과 선택지 참조를 갖고 정확하다. 수식어구를 건너뛰어 주어를 찾는 단계와 정동사/비정형 판별 단계가 결합되어 있어 medium에 적합하다. 지문은 독창적으로 보이며 저작권 의심 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "'household'의 주어는 단수 'routine'이고 그 뒤에 수식어구가 끼어 있다. 'came'은 정동사이자 과거 시제여서 옳다. A는 복수 명사에 끌린 수 일치 함정이고, B와 C는 비정형이라 정동사가 없어진다. 두 단계로 판단해야 해서 중간 난이도에 맞는다.",
+    "issue": ""
+   },
+   "cost": 0.0668962
+  },
+  {
+   "cid": "sv-form_structure_sense-m-020",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "분사구 'Clutching the small cedar box…'의 수식 대상이 주어여야 하므로 Kamau가 주어인 A만 정답. B('Kamau's ears'), C(허사 there), D('the words')는 모두 현수 분사 오류. B는 이름이 포함되어 훑어 읽으면 매력적인 오답이고 D도 의미상 그럴듯하여 비교가 필요하므로 medium 적합. 한국어·영어 해설 모두 선택지 글자 참조와 결론이 일치하며 영어 해설에 한글 없음. 독창적 서사로 저작권 우려 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "현수 수식어 문항. B의 소유격 함정이 비교를 요구하고, D도 문법적으로는 성립해 보여 medium 수준에 맞음. C는 상대적으로 쉽게 배제됨.",
+    "issue": ""
+   },
+   "cost": 0.0684672
+  },
+  {
+   "cid": "sv-form_structure_sense-m-021",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 \"The rhythm\"(단수)과 긴 삽입 분사구(pulling ... hull)를 건너뛴 뒤 과거 시제 서술(spoke, did, came, could)에 맞춰야 하므로 B \"taught\"가 유일하게 수·시제가 모두 맞는 정동사다. A는 시제는 맞지만 복수, C는 비정형, D는 복수+현재완료로 모두 배제됨. 한국어·영어 해설 모두 동일 결론과 글자 참조를 가지며 오류 없음. 삽입구에 \"hands\", \"waves\" 등 복수 명사가 가까이 있어 훑어 읽으면 A로 유인되는 구조이며, 주어 식별+시제 확인의 두 단계 판단이 필요해 medium에 적합하다.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "긴 삽입구가 끼어 있어 주어-동사 수일치를 판단해야 하고, 시제도 함께 확인해야 하는 두 단계 문항이다. 근처 복수 명사(hands, waves)가 함정 역할을 하며 medium 난이도에 적합하다.",
+    "issue": ""
+   },
+   "cost": 0.0665662
+  },
+  {
+   "cid": "sv-form_structure_sense-m-022",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 'band'(단수) + 끼어든 분사구 'engraved ... 1958' 뒤에 과거 정동사 필요 → C 'looked' 정답 확인. B는 인접 복수명사 'initials'에 끌린 수 일치 함정, D는 정동사 부재(단편) 함정으로 비교 배제가 필요하며, A도 표면적으로 그럴듯함. 수 일치 + 시제 확인의 두 단계 판단이 요구되어 medium 적합. 한국어·영어 해설 결론 및 선택지 참조 일치, 영어 해설 자연스럽고 한글 없음. 지문은 창작 서사로 저작권 우려 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어와 동사 사이에 긴 수식어구가 끼어 있어 수 일치를 판단해야 하고, 서술 전체의 과거 시제도 확인해야 한다. 이렇게 두 단계 판단이 필요하므로 중간 난이도에 맞다. B는 시제는 맞아서 오답 유인이 된다. 엄밀히 말하면 빈칸 바로 앞 명사는 'summer of 1958'이지만, 'initials'가 끌어당긴다는 설명은 타당하다.",
+    "issue": ""
+   },
+   "cost": 0.0667482
+  },
+  {
+   "cid": "sv-form_structure_sense-m-023",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 'the routine'(단수)과 동사 사이에 관계절과 대시 삽입 목록(마지막 항목 'tide ledgers' 복수)이 끼어 있어 수 일치 함정이 되고, 과거 서술(had kept, began)과의 시제 일치까지 두 단계 판단이 필요하다. D 'came'만 단수·과거를 만족. A는 과거이나 복수, B는 완료 아이디어는 그럴듯하나 복수·현재완료, C는 복수 현재형. 해설(한/영) 모두 정답과 선택지 참조가 일치하며 영어 해설에 한글 없음. 난이도 medium 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어와 동사 사이에 삽입 어구가 길게 들어가 있다. 수 일치와 시제를 함께 판단해야 하므로 중간 난이도에 맞는다. A는 과거라서 그럴듯해 보이고, B와 C는 바로 앞의 복수 명사 ledgers에 끌리도록 만든 함정이다.",
+    "issue": "\"have come\"이 복수형이자 현재완료라는 설명, \"come\"이 복수 현재형이라는 설명은 맞다. 다만 오답 C, \"come\"은 원형이나 과거분사로도 읽힐 수 있다는 점은 언급하지 않았다. 사소한 문제다."
+   },
+   "cost": 0.0697942
+  },
+  {
+   "cid": "sv-form_structure_sense-m-024",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "A를 넣으면 'Setting down the platter..., Min-jun saw that his mother had already claimed the chair...'로 분사구 수식 대상과 정동사가 모두 갖춰진 완전한 문장이 된다. B는 완전한 문장이지만 어머니가 접시를 내려놓은 것이 되어 수식어 오류, C는 'the eyes'가 주어가 되어 수식어 오류, D는 정동사 부재로 fragment. 한국어·영어 해설 모두 선택지 글자 참조가 일치하고 결론이 같다. 수식어 규칙 적용 + 문맥(요리한 사람) 확인 + 정동사 여부 판단의 두 단계 추론이 필요하고 B·D가 부분적으로 타당한 오답이어서 medium에 적합하다.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "현수 수식어(dangling modifier) 문항이며 형식이 표준적이다. B는 삽입구가 있는 완전한 문장이라 그럴듯하고, D는 주어는 맞지만 문장이 성립하지 않는다. 그래서 오답 두 개가 부분적인 근거를 갖춰 medium 난이도에 맞는다. C는 비교적 쉽게 배제된다.",
+    "issue": ""
+   },
+   "cost": 0.0690712
+  },
+  {
+   "cid": "sv-form_structure_sense-m-025",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 'The older woman'(단수) + 두 개의 긴 who 관계절 뒤 정동사 필요, 'and pressed'와 병렬 → B 'took' 정답 확인. A는 인접 복수명사 'divers'에 수 일치시킨 함정으로 그럴듯하고, C/D는 관계절 연속으로 오독 시 선택 가능. 두 단계 판단(주어 식별 + 병렬 시제 확인) 요구로 medium 적합. 해설 한·영 일치, 영어 자연스럽고 한글 없음. 창작 지문으로 저작권 문제 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "긴 관계절 두 개가 주어와 동사를 떼어 놓는 구조라, 정동사인지 확인하고 단수 주어와 수를 맞추는 두 단계 판단이 필요하다. 오답 A는 바로 앞 복수명사 divers에 이끌리게 만든 함정이고, C와 D는 그럴듯해 보이는 분사형이다. 표준 SAT 중간 난이도에 맞는다.",
+    "issue": ""
+   },
+   "cost": 0.06330720000000001
+  },
+  {
+   "cid": "sv-form_structure_sense-m-026",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 'tables'(복수)와 관계절·'along with' 삽입구 뒤의 정동사 자리. 과거 시제 서술이므로 'looked'가 유일한 정답. A는 인접 단수 명사(pie/rail)에 끌리는 함정, B는 'cooling'과의 표면적 평행으로 그럴듯하며, D도 문법 형태상 말이 됨. 한국어·영어 해설 모두 결론과 선택지 참조가 일치하고 오류 없음. 지문은 독창적 서사로 저작권 의심 없음. 긴 삽입구 넘어 주어 찾기 + 시제 확인의 두 단계 판단이 요구되어 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "복수 주어와 동사의 일치, 삽입구 무시, 과거 시제 일관성을 함께 따져야 하므로 medium 난이도에 맞음. 비정동사 오답 두 개는 다소 쉽게 배제됨.",
+    "issue": ""
+   },
+   "cost": 0.0680762
+  },
+  {
+   "cid": "sv-form_structure_sense-m-027",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 'Her sandals'(복수)와 동사 사이에 'caked with red mud that ... switchbacks' 수식어구가 끼어 있어, 정동사 필요 여부 판단 + 복수 일치 확인의 두 단계가 요구됨. D 'were clearly'가 유일하게 복수 정동사이며 뒤의 'looked'와 시제 일관. A는 인접 명사 'mud'에 이끌리는 단수형 오답(부분적 근거), B·C는 비정형 동사로 절에 본동사가 없게 됨. 해설(한·영) 모두 결론·글자 참조 일치, 영어 자연스럽고 한글 없음. 지문은 창작 서사로 저작권 문제 없음. 표준 SAT medium 수준에 부합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어와 동사 사이에 수식어구가 끼어든 수 일치 문항으로, 끌림 요소(mud)가 있어 medium 난이도에 적합하다. B와 C는 쉽게 배제된다.",
+    "issue": ""
+   },
+   "cost": 0.06784420000000001
+  },
+  {
+   "cid": "sv-form_structure_sense-m-028",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "문두 분사구 \"Leaning against the cold iron railing…\"의 수식 대상이 Marcus여야 하므로 A만 적격. B(\"the realization…came to Marcus\"), D(\"it…became clear to Marcus\")는 Marcus를 포함해 훑어 읽으면 그럴듯하지만 주어가 각각 the realization / it이어서 현수 수식어가 되고, C는 \"Marcus's realization\"이 주어라 역시 오류. 한국어·영어 해설 모두 A를 일관되게 뒷받침하며 글자 참조도 일치. 지문은 창작 서사로 저작권 문제 없음. 분사구 식별 + 주어 확인의 2단계 판단이 필요하고 오답 중 둘이 부분적 타당성을 지녀 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "전형적인 현수 수식어 문항입니다. B와 D는 의미와 that절 연결이 자연스러워서 비교해 봐야 배제되므로 medium 난이도에 맞습니다.",
+    "issue": "C에 대해 \"was that… 구조도 부자연스럽다\"고 한 부분은 다소 근거가 약합니다. 이 구조는 문법적으로는 문제가 없고, 핵심 오류는 현수 수식어입니다. 다만 결론에는 영향이 없습니다."
+   },
+   "cost": 0.0696772
+  },
+  {
+   "cid": "sv-form_structure_sense-m-029",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 'The saw'(단수)는 관계절 'that he had lent...'와 'along with the two chisels...' 삽입구로 동사와 분리되어 있으며, 'along with'는 주어의 수를 바꾸지 않으므로 단수 동사 필요. 지문 전체 과거 시제(squeezed, lurched, practiced)와 뒤의 'ask for it back'의 단수 대명사 'it'도 B를 뒷받침. A는 인접 명사 'chisels'에 이끌린 복수 함정, C는 수·시제 모두 불일치, D는 정동사 부재로 문장 파편. 한국어·영어 해설 모두 동일 결론·글자 참조이며 정확함. 주어 식별 + 시제 확인의 두 단계 판단이 요구되어 medium에 적합. 원창작 지문으로 저작권 문제 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "단수 주어와 삽입구로 수 일치를 묻고, 시제 확인까지 해야 하는 두 단계 문항이다. 'ask for it back'의 it도 단수 saw를 가리켜 정답 B와 맞는다. A는 근처 명사 chisels에 끌리게 만든 그럴듯한 오답이다.",
+    "issue": ""
+   },
+   "cost": 0.0657582
+  },
+  {
+   "cid": "sv-form_structure_sense-m-030",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "분사구 \"Pressed shoulder to shoulder...\"의 수식 대상은 Ferhan이어야 하며, C만 Ferhan을 주어로 둔다. A(소유격 Ferhan's + 주어 sequence), D(가주어 it)는 Ferhan을 언급해 부분적으로 그럴듯한 함정으로 기능하고, B도 문법적으로는 성립하는 문장이라 비교가 필요하다. 한국어·영어 해설 모두 정답 및 선택지 글자 참조가 일치하고 모순 없음. 중간 난이도 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "현수 수식어 문항. 오답 A·B·D가 모두 Ferhan을 언급하고 있어 훑어 읽으면 끌릴 수 있게 설계되어 있다. medium에 적합하다.",
+    "issue": ""
+   },
+   "cost": 0.0707192
+  },
+  {
+   "cid": "sv-form_structure_sense-m-031",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 'compass'(단수)와 'together with ...' 삽입구 구조 확인 + 과거 시제('returned') 확인의 두 단계 판단이 필요한 표준 SAT 주어-동사 일치 문항. 'was'가 유일하게 단수·과거·정동사 조건을 모두 충족. A는 시제만 맞고 'hinges/them'에 끌린 복수형, B는 복수+현재완료, C는 정동사 부재로 모두 타당하게 배제됨. 한·영 해설 결론 및 선택지 참조 일치, 영어 해설 자연스럽고 한글 없음. 원작 소설 지문으로 저작권 우려 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "'together with' 삽입구로 주어와 동사 사이를 길게 떼어 놓은 주어-동사 일치 문항으로, 중간 난이도에 맞다. 다만 'the two brass hinges that held its carved lid and the folded note ... tucked beneath them'은 경첩이 뚜껑과 쪽지를 함께 고정한 것으로도 읽힐 수 있어 구문이 다소 모호하다. 정답 판정에는 영향이 없다.",
+    "issue": ""
+   },
+   "cost": 0.0680642
+  },
+  {
+   "cid": "sv-rhetorical_synthesis-m-032",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 A 검산 일치: 계획 시점(첫 잔 후 발표)과 손님 등장(그 전에 노크)을 함께 연결하는 유일한 선택지. C는 계획·시점·결과를 담지만 손님 누락, B는 손님과 과거 인연만 담고 계획 누락으로 비교가 필요한 강한 오답이며 D도 문맥상 말이 됨. 해설 한/영 결론·글자 참조 일치, 영어 자연스럽고 한글 없음. 가상 작가·작품 명시로 저작권 문제 없음. 에티오피아 커피 의식의 세 번째 잔 'baraka' 명칭도 사실에 부합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "B와 C가 각각 요소 하나씩(방문자 / 계획 시점)만 담고 있어서 둘을 비교해야 오답으로 걸러진다. 그래서 medium 난이도에 맞다. D는 너무 쉽게 배제되지만 허용 범위다. 'as soon as'는 노트의 'once'를 바꿔 쓴 표현으로 볼 수 있다.",
+    "issue": ""
+   },
+   "cost": 0.07539599999999999
+  },
+  {
+   "cid": "sv-rhetorical_synthesis-m-033",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "B만이 이니셜(R.V.)과 수리공의 기억을 연결해 '아버지 소유'라는 발견 과정을 설명함. C(아버지 이름·연도)와 D(수리공의 기억)는 부분적으로 관련 정보를 담아 비교가 필요하고, A는 배경만 제시. 두 단서의 연결이 요구되는 표준 medium 수준.",
+    "issue": "사소한 점: 해설은 '어머니의 말'을 결합할 단서로 들지만 B는 어머니의 말을 명시하지 않고 '아버지 Rafael Vega'라는 결론으로만 반영함. 판정에 지장은 없음."
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "B는 이니셜, 수리공의 기억, 아버지 이름(어머니 정보에서 나옴)을 함께 엮어 목표를 달성한다. C와 D는 단서를 일부만 담고 있어 그럴듯하지만, 비교해 보면 배제된다. 어머니에 관한 정보는 B에 'his father, Rafael Vega'라는 형태로 간접적으로만 반영되어 있으나 문제 될 정도는 아니다.",
+    "issue": ""
+   },
+   "cost": 0.07646800000000001
+  },
+  {
+   "cid": "sv-rhetorical_synthesis-m-034",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 C만이 비평가의 상징 해석(그물=사라지는 우정)과 사건을 연결해 '의미'를 설명하므로 옳음. B·D는 노트 정보를 정확히 사용하지만 의미 설명이 없어 비교 후 배제되고, A는 배경만 언급해 가장 약한 오답. 가상의 작품으로 저작권 문제 없음. 표준 SAT rhetorical synthesis 중간 난이도에 부합.",
+    "issue": "사소: \"Your goal is...\"는 \"The student's goal is...\"가 더 자연스럽지만 의미·결론·글자 참조 모두 한국어 해설과 일치함."
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "C만 상징적 의미(노트 6)를 사건과 연결하므로 정답이 맞다. B와 D는 대여 사건을 정확히 다루어 그럴듯한 오답이고, A는 배경만 다룬다. 'represent'가 단서가 되어 다소 쉬운 편이지만 표준 SAT medium 범위 안에 든다.",
+    "issue": ""
+   },
+   "cost": 0.07973
+  },
+  {
+   "cid": "sv-rhetorical_synthesis-m-035",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 D만이 처음 태도(불평)와 마지막 태도(열의)를 모두 담아 '변화'를 서술함. C는 처음 태도만, B는 변화의 원인(Kyriakos의 설명)만 담아 부분적 근거를 가진 오답으로 기능하며, A는 배경 소개로 그럴듯함. 한국어·영어 해설 모두 선택지 글자와 결론이 일치하고 영어 해설에 한글 없음. 작품·작가는 가상이며 1755 지진·Tram 28 등 실제 사실에도 오류 없음. 다만 D의 'at first... end up' 구조가 변화를 명시적으로 신호해 medium 중에서는 다소 쉬운 편(경계선상)이나 표준 SAT medium 범위로 판단.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "too_easy",
+     "eliminated:2"
+    ],
+    "note": "정답 D는 노트의 \"one of the teenagers asks\"를 \"three teenagers ... end up eager\"로 왜곡한다. 노트를 정확히 반영하지 않으므로 정답 선택지로서 결함이 있다. 수정할 때는 'the teenagers'나 'one of them'처럼 노트에 맞게 표현해야 한다. 또 처음과 끝을 함께 담은 선택지가 D 하나뿐이고 A와 B는 십대들의 반응을 다루지 않아 쉽게 배제된다. 따라서 medium보다 쉽다.",
+    "issue": "해설은 D가 십대들 '모두'의 변화를 보여 준다고 그대로 받아들인다. 그러나 노트에서 다음 정류장을 물어본 사람은 십대 '한 명'뿐이다. 해설은 이 과잉일반화를 짚지 않는다.한국어 해설과 같은 문제가 있다. 영어 해설은 세 십대 모두가 열의를 보이게 된다는 D의 진술을 노트(한 명만 질문함)와 대조해 보지 않고 그대로 인정한다. 영어 문장 자체는 자연스럽다."
+   },
+   "cost": 0.07658599999999999
+  },
+  {
+   "cid": "sv-rhetorical_synthesis-m-036",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 A는 다섯 번째·여섯 번째 메모를 결합해 '대화가 아닌 시선'이라는 방법을 명시하므로 목표에 정확히 부합한다. C·D는 의심 내용을 담아 부분적으로 타당해 비교가 필요하고, B도 장면 소개로 말이 되므로 medium에 적합. 한국어·영어 해설 모두 결론과 선택지 참조가 일치하며 한글 혼입 없음. 사소한 점: 메모에서 밴드가 'Franz가 이끄는(led by Franz)'이라 하면서 지휘자는 Herr Ebner로 서술되어 역할이 약간 혼동될 수 있으나(Franz가 단장, Ebner가 지휘자로 해석 가능) 정답 판별에는 영향 없음. A의 'his baton'은 가장 가까운 선행사가 conductor라 해석상 문제 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "메모 사이에 모순이 있다. 두 번째 메모는 밴드를 'led by Franz'라고 하는데, 네 번째 메모는 지휘자 Herr Ebner가 40년간 밴드를 이끌어 왔다고 한다. 선택지 B가 이 'led by Franz'를 그대로 가져온다. 브라스밴드 장면에 바이올리니스트가 등장하는 설정도 다소 어색하다. 정답 A는 명확하다. C와 D는 의심을 언급하지만 방식이 빠져 있어 비교가 필요한 오답이므로 medium 난이도에 적합하다.",
+    "issue": "사소한 문제: 'Your goal'이라고 썼지만 목표를 가진 사람은 학생이다('The student's goal'이 적절). 결론과 선택지 글자 참조는 한국어 해설과 일치한다."
+   },
+   "cost": 0.08521200000000001
+  },
+  {
+   "cid": "sv-transitions-m-037",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장의 '인내와 짜기만으로' 다짐과 뒤 문장의 선풍기 동원이 명확히 대조되어 B(Nevertheless)가 정답. A는 Rajesh의 방수포→대응이라는 인과로 읽힐 수 있어 유혹적이고, C도 '둘 다 장비 사용'이라는 부분 근거가 있어 비교가 필요함. D는 말이 되나 논리상 배제됨. 한국어·영어 해설 모두 동일 결론과 글자 참조, 영어 자연스럽고 한글 없음. 창작 지문으로 저작권 문제 없음. 지문 길이와 두 단계 판단(다짐 파악+행동 대조, 인과 유혹 배제)이 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "다짐과 실제 행동이 반대로 가는 대조라서 정답 B가 명확하다. A(방수포가 대응을 촉발)와 C(두 사람 모두 장비 사용)는 부분적으로 그럴듯해 오답으로 기능한다. 표준 medium 수준이다.",
+    "issue": "\"손빨래 짜기\"는 wringing을 다소 어색하게 옮긴 표현이지만 결론에는 영향이 없다."
+   },
+   "cost": 0.0676732
+  },
+  {
+   "cid": "sv-transitions-m-038",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장(열 것이라는 기대·걸쇠 클릭)과 뒤 문장(닫은 채 선반에 둠)의 관계는 예상 행동의 대체·반전이므로 'Instead'가 유일하게 성립한다. 뒤 문장의 절대구문(\"the latch closed again\")도 문법적으로 자연스럽다. A(Moreover)는 앞 문장이 행동 나열이라 훑어 읽으면 선택할 수 있고, B(As a result)는 걸쇠를 눌렀다는 직전 행동과 표면적 인과를 만들어 부분적 근거가 있다. D는 명백히 어긋나지만 말은 된다. 한국어·영어 해설 모두 C를 지지하며 글자 참조와 논리가 일치하고, 영어 해설에 한글 없음. 독창적 서사 지문으로 저작권 문제 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "기대·걸쇠를 누른 행동 → 닫힌 채 보관으로 이어지는 반전 구조라 Instead가 유일하게 맞다. 걸쇠를 누른 행동이 표면적인 인과 연결을 만들어 B가 그럴듯한 오답이 된다. 중간 난이도의 하단에 해당한다.",
+    "issue": ""
+   },
+   "cost": 0.0680472
+  },
+  {
+   "cid": "sv-transitions-m-039",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "\"Any sensible vendor would have...\" 뒤에 Linh이 반대로 행동하므로 양보·대조 전환어 D \"Even so\"가 유일하게 논리적. A(결과), B(강조), C(유사)는 모두 앞 문장의 '합리적 선택'을 Linh의 행동과 연결하는 함정으로 기능하며, 특히 B·C는 '분별 있는 상인'을 Linh과 동일시하면 그럴듯해 보여 정독이 필요함. 해설 한·영 모두 선택지 글자와 결론이 일치하고 영어 자연스러움. 원작 창작 지문으로 저작권 의심 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "'Any sensible vendor would...'라는 가정 문장 다음에 그와 반대되는 행동이 이어지므로 양보·대조의 Even so가 맞다. Indeed는 훑어 읽으면 그럴듯해 보여 매력적인 오답 역할을 한다. 다만 Accordingly와 Similarly는 비교적 쉽게 배제된다. 그래도 medium 수준에는 맞는다.",
+    "issue": ""
+   },
+   "cost": 0.056956200000000005
+  },
+  {
+   "cid": "sv-transitions-m-040",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [
+    "contract:contract_transition_parallel",
+    "contract:contract_transition_parallel",
+    "contract:contract_transition_parallel",
+    "contract:contract_transition_parallel"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.011648200000000001
+  },
+  {
+   "cid": "sv-transitions-m-041",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [
+    "contract:contract_transition_parallel"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.0121642
+  },
+  {
+   "cid": "sv-boundaries-e-042",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞뒤 모두 독립절('the two partners spoke only about leather' / 'neither man could say ... begun')이므로 세미콜론(C)이 유일하게 맞음. A는 쉼표 스플라이스, B는 융합문, D는 'which'가 이끄는 관계절이 뒤 구조와 맞지 않아 비문. 한국어·영어 해설 모두 정답과 선택지 참조가 일치하고 결론이 동일함. 단일 규칙(독립절 연결 부호)으로 풀리고 오답이 전형적 오개념이라 easy에 적합. 사소하게 선택지 B 앞 공백이 두 칸인 점만 표기상 미세한 흠.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "독립절 두 개를 세미콜론으로 잇는 단일 규칙 문항이다. 오답은 쉼표 스플라이스, 융합문, 관계절 오용으로 전형적인 오개념들이다. 선택지 B에 공백이 두 칸 들어간 것은 표시상의 사소한 문제다.",
+    "issue": ""
+   },
+   "cost": 0.0636498
+  },
+  {
+   "cid": "sv-boundaries-e-043",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 D(마침표로 두 독립절 분리)는 옳고, A(쉼표 스플라이스)·B(무종지문)·C(세미콜론+and 중복)의 배제 근거도 타당하며 해설(한/영) 모두 일관됨. 단, 형식 결함: 지문이 \"house______ inside, a boy\"로 되어 있어 빈칸 뒤에 이미 \"inside,\"가 있는데 모든 선택지에도 \"inside\"가 포함되어 있어 대입 시 \"Inside inside, a boy\"처럼 단어가 중복된다. 지문에서 빈칸 뒤 \"inside\"를 제거하거나 선택지에서 빼야 한다. 난이도는 독립절 경계라는 단일 규칙으로 풀리므로 easy에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "독립절 두 개의 경계를 정하는 전형적인 easy 문항이다. 오답은 쉼표 스플라이스, 무종지문, 연결 장치 중복으로 각각 전형적 오개념에 해당한다.",
+    "issue": "\"두 독립절은 마침표로 나눠야 하므로\"라는 표현은 지나치게 단정적이다(세미콜론 하나만 써도 문법상 옳다). 다만 선택지 중에는 D만 옳으므로 결론에는 영향이 없다."
+   },
+   "cost": 0.08280080000000001
+  },
+  {
+   "cid": "sv-form_structure_sense-e-044",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 'the watch'(단수) + 끼어든 수식어 'with its newly polished hands' 구조. 현재 시제 서술(sits, lean)에 맞춰 단수 현재형 'catches'(A)만 적합. B/C/D는 모두 복수형으로 'hands'에 이끌리는 전형적 오개념 오답. 한·영 해설 모두 정답 및 선택지 참조 일치, 한글 혼입 없음. 단일 규칙(수 일치)으로 해결되어 easy 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 'the watch'(단수)와 동사의 수 일치를 묻는 문항이다. 끼어든 'with its newly polished hands'가 오답을 유도한다. 판단 규칙이 하나뿐이라 easy 수준에 맞다. 오답 B·C·D는 모두 복수형이라 규칙만 알면 바로 걸러진다.",
+    "issue": ""
+   },
+   "cost": 0.05913380000000001
+  },
+  {
+   "cid": "sv-form_structure_sense-e-045",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 \"row\"(단수) + 수식어구 \"of glazed bowls in Akiko's window\"에 의한 전형적 주어-동사 일치 문항. \"each morning ... pretends\"가 현재 시제 단서로 작동하여 B \"shines\"만 적합. A/C/D는 모두 인접 복수 명사 \"bowls\"에 끌린 복수형 오답으로 오개념 기반 매력도 적절. 해설(한·영) 결론·글자 참조 일치, 한글 혼입 없음. 지문 창작물로 저작권 문제 없음. easy 난이도 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "단수 주어 row와 수식어 of glazed bowls 사이의 주어-동사 수일치 문항으로, 규칙 하나만 알면 풀 수 있다. 오답 A, C, D는 모두 가까운 복수 명사 bowls에 동사를 맞춘 전형적인 오개념이라 easy 난이도에 맞다.",
+    "issue": ""
+   },
+   "cost": 0.0559678
+  },
+  {
+   "cid": "sv-form_structure_sense-e-046",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 \"The dents\"(복수) + 과거 시제 서술 → \"were\"가 유일하게 맞음. 오답 3개 모두 단수형으로, 직전 명사 \"instrument\"에 의한 근접 일치 오개념을 겨냥한 전형적 오답. 한국어·영어 해설 모두 정답 C와 글자 참조가 일치하고 모순 없음. 단일 규칙·한 단계 추론으로 easy에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어-동사 수 일치 문제로, 주어와 동사 사이에 전치사구가 끼어 있음. 복수 주어 \"dents\"와 과거 시제 문맥이 맞으므로 정답은 were. 함정이 하나뿐인 전형적인 easy 문항임.",
+    "issue": "사소: D \"has been\"은 단수일 뿐 아니라 현재완료라 시제도 맞지 않는데, 해설은 수 불일치만 언급함. 결론에는 영향 없음."
+   },
+   "cost": 0.060427800000000004
+  },
+  {
+   "cid": "sv-transitions-e-047",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "첫 문장(30년간 아무에게도 빌려주지 않음)과 둘째 문장(사촌에게 말없이 건넴)은 명백한 대조 관계로, 유일한 대조 전환어 D \"Yet\"이 정답임을 직접 검산함. \"Yet when ..., Chet handed it over\"는 문법적으로도 자연스러움. 오답 A(유사), B(예시), C(결과)는 전형적 오개념 선택지로 적절. 한국어·영어 해설 모두 D를 일관되게 뒷받침하며 글자 참조 일치, 영어 해설에 한글 없음. 단일 규칙·한 단계 추론으로 easy 난이도에 부합. 원작 지문은 창작으로 보이며 저작권 의심 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "명확한 대조 관계. 'Yet' 뒤 쉼표 없음은 SAT 관례상 허용. 오답들은 전형적인 오개념이다.",
+    "issue": ""
+   },
+   "cost": 0.0602078
+  },
+  {
+   "cid": "sv-transitions-e-048",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장(한 번의 여름 동안 약속 이행) → 뒤 문장(아테네 이주·결혼·섬을 잊음)은 명백한 시간적 순서이므로 'After that,'(A)이 유일하게 논리적임. B(예시)·D(유사)는 관계 불일치, C(대조)는 뒤 문장이 앞 문장과 맞서는 내용이 아니므로 배제됨. 한국어·영어 해설 모두 A를 일관되게 지지하고 선택지 글자 참조가 정확하며 영어 해설에 한글 없음. 서술은 창작 지문으로 저작권 우려 없음. 시간 순서 전환어라는 단일 개념으로 한 단계 추론만 필요해 easy에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "The answer depends on one clue that sits right next to the blank: \"for exactly one summer\" leads into what happened next, so the time-sequence transition is correct. C is a believable wrong answer because keeping the promise and then dropping it can look like a contrast, but the sequence reading fits better. Overall the item suits the easy level.",
+    "issue": ""
+   },
+   "cost": 0.0615138
+  },
+  {
+   "cid": "sv-rhetorical_synthesis-e-049",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "B가 \"놀라운 사건\"(망가진 튜바가 더 좋은 소리를 냄)을 메모 그대로 정확히 전달한다. A·C는 목표(사건 묘사)와 무관한 배경·메타 정보, D는 메모에 없는 내용(수리, 동일한 소리)으로 부정확하여 배제된다. 한·영 해설 모두 B를 일관되게 뒷받침하며 선택지 참조가 일치하고 영어 해설에 한글 없음. 단일 규칙(목표에 맞는 관련 정보 선택)으로 풀리고 단서가 명시적이어서 easy 적합. 가상의 작가·작품으로 저작권 문제 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "목표와 일치하는 단서가 명확하고, 오답은 배경만 소개하거나 사건을 다루지 않거나 메모 내용과 어긋나는 전형적 유형이다. D는 메모에 없는 내용이라 쉽게 배제되지만 easy 수준에서는 허용된다.",
+    "issue": ""
+   },
+   "cost": 0.0591504
+  },
+  {
+   "cid": "sv-rhetorical_synthesis-e-050",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 C만 주인공(Tuan)과 배경(하노이 골목, 새벽)을 모두 포함. A·B는 노인 중심, D는 소년을 언급하나 이름·배경 없음 — 전형적 오답. 한국어·영어 해설 모두 일치하고 정확함. 가상의 작품으로 저작권 문제 없음. 두 요소 매칭만으로 풀리는 easy 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답은 C 하나뿐이다. 오답 선택지들은 이야기의 다른 사실을 담고 있어 그럴듯해 보이지만, 주인공과 배경을 둘 다 담고 있는지만 확인하면 바로 지울 수 있다. 조건 하나만 확인하면 풀리므로 쉬움(easy) 난이도에 맞다. D는 소년을 언급하지만 이름과 배경이 빠져 있다.",
+    "issue": ""
+   },
+   "cost": 0.05768040000000001
+  },
+  {
+   "cid": "sv-central_ideas_details-m-051",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "지문 1문단(이전 화가의 고정 시점 원근법 vs Tiepolo의 열린 하늘)과 2문단(직선이 적어 이동 중에도 환영 유지)을 연결해야 D에 도달하므로 두 단계 판단이 요구됨. A는 '왜곡' 세부를 차용하되 '환영주의를 버렸다'는 핵심 왜곡, B는 '계단' 세부 오독, C는 '단축법 인물' 세부에 지문에 없는 기술 난이도 비교를 덧붙인 것으로, 세 오답 모두 지문 근거 일부를 가져 비교가 필요함. Tiepolo가 18세기 베네치아 궁전 천장을 그린 사실도 정확하며, 해석적 주장은 '미술사가들이 주장'으로 적절히 귀속됨. 한·영 해설 모두 D를 일관되게 뒷받침하고 선택지 참조 일치, 영어 자연스러움.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "D가 대조(고정 시점 vs 느슨한 방식)와 이동 관람자 효과를 연결하므로 두 단계 판단이 필요하다. A·B·C는 지문 세부(왜곡, 계단, 단축법)를 부분적으로 차용한 그럴듯한 오답이다. 미술사 서술도 대체로 정확하다.",
+    "issue": ""
+   },
+   "cost": 0.074207
+  },
+  {
+   "cid": "sv-central_ideas_details-m-052",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "지정 정답 A 검산 결과 옳음: 1단락(건축 측량 경험에 기반한 고정 시점 시연)과 2단락(기록 부재, 알베르티가 가르칠 수 있는 방법으로 정리, 역사가들의 공로 배분)을 모두 포괄한다. B는 '화가로서의 일보다 중요'라는 비교가 지문에 없음, C는 'never wrote down his method'와 직접 모순, D는 역사가들의 의심이 지문에 없음(지문은 오히려 역사가들이 공로를 인정한다고 서술). 한국어·영어 해설 모두 같은 결론과 선택지 참조를 가지며 영어 해설에 한글 없음. 역사적 사실(1415년경 시연, 마네티 전기, 알베르티 1435년 On Painting) 문제 없음. 지문은 창작문으로 저작권 의심 없음. 난이도: 두 단락의 정보를 연결해야 하고 B·C·D가 각각 지문 세부(측량 훈련·알베르티·마네티)를 부분적으로 차용하여 비교가 필요하므로 medium에 적합. 다만 정답 A가 다른 선택지보다 눈에 띄게 길어 길이 단서가 될 수 있는 점은 참고.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답 A는 두 단락을 모두 아우르는 진술이다. 오답 B·C·D는 각각 지문의 세부 내용 하나를 붙잡고 왜곡하는 방식이라 그럴듯하게 읽힌다. 다만 C는 'never wrote down'과 정면으로 모순되어 쉽게 배제된다. A는 다른 선택지보다 눈에 띄게 길어 길이가 단서가 될 수 있지만, 이것만으로 판정을 바꿀 정도는 아니다. 역사적 사실(1415년경 시연, 1435년 『회화론』, 마네티의 전기)은 통설과 맞는다.",
+    "issue": ""
+   },
+   "cost": 0.08498
+  },
+  {
+   "cid": "sv-central_ideas_details-m-053",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "B는 지문의 'Yet' 전환 이후 핵심 주장(자료가 줄거리를 제약 → 비유가 실제 창작을 이끔)을 정확히 요약. A는 비평가 입장(지문이 반박), C는 인기 언급 없음, D는 세부/줄거리 수정 관계를 뒤집음. 한·영 해설 모두 B를 일관되게 뒷받침하며 글자 참조 일치, 영어 해설에 한글 없음. 1880 에세이·1885 Germinal·Anzin 방문 등 사실 관계 정확. 두 정보(비판+노트 증거) 연결이 필요하고 D가 강한 오답이므로 medium 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "A와 D는 지문 일부에 근거가 있어 비교가 필요하고, C는 그럴듯하지만 근거가 없는 오답이다. 졸라의 1880년 에세이, 1885년 Germinal, 안쟁 방문 등 사실관계도 정확하다. 중간 난이도에 맞다.",
+    "issue": ""
+   },
+   "cost": 0.067658
+  },
+  {
+   "cid": "sv-central_ideas_details-m-054",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "지문의 핵심 주장(조성 위계 → 음정 동기에 의한 조직으로의 전환)을 C가 정확히 요약함. A·D는 지문의 세부 사실(당시 비평의 '혼란' 평가, 으뜸조 부재)을 부분적으로 포함해 비교가 필요하고, B는 '해결'이라는 핵심 전제에서 지문과 정반대이나 훑어 읽으면 그럴듯함. 역사적 사실(제2현악4중주 1908, Op. 11 1909)도 정확. 한국어·영어 해설 모두 선택지 참조와 결론이 일치하며 자연스러움.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "C는 '조성 위계 포기'와 '음정 동기를 통한 조직'을 모두 담고 있어 핵심 주장과 정확히 맞는다. D는 지문 세부 사항을 정확히 담았지만 글이 반박하는 비평가 견해에 머물러 있어 훑어 읽으면 고르기 쉬운 매력적 오답이다. A와 B도 각각 부분적 근거가 있다. 2판 Op.10(1908), Op.11(1909) 연대는 사실과 맞는다.",
+    "issue": ""
+   },
+   "cost": 0.068976
+  },
+  {
+   "cid": "sv-central_ideas_details-m-055",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "지문 전체(1문단의 대안 설명 + 2문단의 뒷받침 근거)를 종합해야 D가 중심 생각임을 확인할 수 있다. A는 2문단의 세부 근거를 중심 생각으로 과장한 오답, B는 방언 설명과 욕망 주제를 뒤섞은 왜곡 오답으로 각각 부분적 근거를 가지며, C는 지문에 없는 비교지만 파피루스·인용 언급으로 표면상 그럴듯하다. 한국어·영어 해설 모두 D를 일관되게 뒷받침하고 선택지 참조가 일치한다. 사포가 아이올리스 방언으로 썼다는 사실과 방언 난해성이 전승 단절의 원인이라는 설명은 실제 학설과 부합한다. 지문 자체는 창작으로 보이며 저작권 문제 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "A·B는 부분 근거가 있어 비교가 필요하고, C도 그럴듯하다. 중간 난이도에 적합하다. Hardwick는 가상의 인물로 보이지만 문제없다.",
+    "issue": ""
+   },
+   "cost": 0.070611
+  },
+  {
+   "cid": "sv-central_ideas_details-m-056",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "마지막 두 문장(수치에서 자주 이탈 + \"flexible vocabulary that lent his intuitive choices the appearance of mathematical necessity\")이 A를 직접 뒷받침한다. B는 지문 전반부(르 코르뷔지에 자신의 홍보·마르세유 사례)만 훑으면 선택하기 쉬운 매력적 오답이고, D는 '예산' 세부를 왜곡한 오답, C는 적용 사실과 모순되지만 '엄격 적용 아님'을 과장 해석하면 말이 되는 오답이다. 역사가 견해와 건축가 자신의 주장을 구분해야 하므로 medium에 적합. 모듈로르 관련 사실(1940년대, 팔 든 사람 신장, 황금비, 위니테 다비타시옹)도 정확. 한·영 해설 모두 글자 참조와 결론이 일치한다.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답 A는 마지막 문장을 바꿔 쓴 것이다. B는 마르세유 세부를, D는 예산 언급을 근거로 삼아 그럴듯하게 꾸몄다. C는 다소 약하지만 말은 된다. 중간 난이도에 맞다.",
+    "issue": ""
+   },
+   "cost": 0.070357
+  },
+  {
+   "cid": "sv-text_structure_purpose-m-057",
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "밑줄 문장은 기법의 출처(하이카이 산문·한문 기행문)를 제시해 첫 문장의 '유럽 수입' 통설을 약화시키고 마지막 문장의 '독자적 발생' 주장을 뒷받침하므로 B가 정확하다. A(서술자 심리 설명), C(런던 영향—지문과 정반대), D(최초 사례·학자 주장 위치 오류)는 모두 지문 요소를 일부 차용해 비교가 필요한 적절한 오답이다. 소세키의 런던 체류(1900–02), Kusamakura(1906) 등 사실관계도 문제없음. 한·영 해설 모두 정답 및 선택지 참조가 일치하며 자연스럽다.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "B는 첫 문장의 '수입' 통설과 연결해야 고를 수 있다. A는 서술자 묘사와 겹치고, C는 런던 언급을 이용한 함정이라 비교가 필요하다. D는 비교적 쉽게 배제된다. 사실관계(1906년 작, 1900~02년 런던 체류)도 맞다.",
+    "issue": ""
+   },
+   "cost": 0.0732492
+  },
+  {
+   "cid": "sv-text_structure_purpose-m-058",
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 C 검증: 밑줄 문장은 \"Earlier theorists had assumed...\"로 과거의 가정을 제시하며, 앞 문장(Brillo Box로 시각적 속성 기준이 무너짐)과 뒤 문장(\"Danto argued instead\")이 각각 '도전'과 '대체'를 뒷받침한다. A는 지문 사실(거의 똑같아 보임)과 반대, B는 밑줄이 Danto의 주장이 아님, D는 Danto에 대한 비판이 아니라 선행 가정이므로 오답. 사실관계(Danto 1964 \"The Artworld\", Warhol Brillo Box) 정확. 한국어·영어 해설 모두 C로 일치하고 선택지 참조 정확, 영어 자연스럽고 한글 없음. 난이도: 밑줄 문장이 Danto의 견해인지 반대 견해인지를 \"instead\"와 앞뒤 문맥으로 판별해야 하며 B·D가 부분적으로 그럴듯해 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "C가 옳다. 앞 문장과 'instead'를 연결해야 풀 수 있어 두 단계 판단이 필요하다. B·D는 일부 맞는 근거가 있어 비교해야 배제된다. A는 지문과 직접 모순되어 비교적 쉽게 지워지지만 그럴듯하게는 읽힌다. Danto의 1964년 'The Artworld'와 합판으로 만든 Brillo Box 관련 사실 관계에는 문제가 없다.",
+    "issue": ""
+   },
+   "cost": 0.0690702
+  },
+  {
+   "cid": "sv-text_structure_purpose-m-059",
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 D 검증: 밑줄 문장은 'Yet'으로 기존 통설(반종교개혁 기원)에 반하는 기술적 연구 증거를 도입하고, 다음 문장의 대안적 결론으로 이어지므로 '널리 받아들여진 설명을 복잡하게 만드는 증거 도입'이 정확함. B·C는 지문 내 다른 문장의 내용을 차용한 부분적 근거가 있어 비교가 필요하고, A도 표면적으로 그럴듯함. 연대(1599–1600) 및 작품명 사실 관계 문제 없음. 'Yet' 신호어로 비교적 명확하지만 통설 vs 반론 구조 파악의 두 단계가 필요하여 medium 적합.",
+    "issue": "경미: B 배제 근거에서 \"그림의 특징을 언급한다는 점은 맞지만\"이라 했으나, 밑줄 문장은 특정 그림의 특징이 아니라 카라바조의 작업실 습관(기술적 연구)을 서술하므로 이 양보는 다소 부정확함. 결론(D 정답)과 글자 참조는 모두 일치.한국어 해설과 결론·글자 참조 일치, 자연스러운 영어, 한글 없음. B 관련 양보(\"relates to the painting\")는 한국어보다 완곡하여 더 적절함."
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "D가 명확한 정답이다. 'Yet'의 역접 기능과 '오랜 견해 → 반박 증거'라는 구조를 함께 파악해야 하므로 medium에 맞다. B는 방향만 뒤집은 매력적 오답이다. A와 C는 지문 요소를 끌어다 쓴 오답이며, 비교적 쉽게 배제된다.",
+    "issue": "B에 대해 '그림의 특징을 언급한다는 점은 맞다'고 했지만, 밑줄 문장은 그림의 특징이 아니라 기술적 연구와 작업실 습관을 다룬다. 다만 결론에는 영향이 없는 사소한 부정확함이다.한국어 해설과 같은 사소한 문제가 있다. 'B is right that the sentence relates to the painting'은 다소 느슨한 표현이다."
+   },
+   "cost": 0.0846842
+  },
+  {
+   "cid": "sv-boundaries-m-060",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "explanation_en_too_long"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.0120918
+  },
+  {
+   "cid": "sv-boundaries-m-061",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "치명적 결함: A \"shell, which was generated digitally, appears\"는 쉼표 한 쌍으로 묶인 비제한적 관계절로 완전히 표준 영어에 부합한다. 따라서 A와 B 두 개가 모두 정답이 되어 문항이 성립하지 않는다. B 자체는 문법적으로 옳지만 유일한 정답이 아니므로 answer_correct를 false로 판정. C(세미콜론 뒤 독립절이 whose 관계절을 끊음), D(주어-동사 사이 세미콜론)는 적절한 오답. 지문 사실관계(Hadid, parametric design, Heydar Aliyev Center in Baku)는 정확. 난이도 자체는 수정 시 medium 적합.",
+    "issue": "해설 스스로 \"A도 문법 오류는 없어 보일 수 있다\"고 인정하면서 간결성·장황함을 이유로 배제한다. boundaries(구두점 경계) 유형에서는 문법적으로 틀린 선택지만 오답이어야 하므로, 이 논리는 지정 정답을 뒷받침하지 못한다. 또 '관계절이 이중으로 겹쳐 같은 정보를 반복'한다는 설명도 사실과 다르다(which절은 새로운 정보를 추가함). C·D 설명은 타당하다.The English explanation concedes that A is \"technically possible\" and eliminates it only on wordiness, which is not a Standard English conventions criterion; it thus fails to justify B as the unique correct answer. Otherwise the English is natural and contains no Korean."
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답이 둘이다. A 'shell, which was generated digitally, appears'는 비제한적 관계절을 쉼표 한 쌍으로 바르게 묶었고, 주어 shell과 동사 appears도 온전히 이어진다. 그래서 B와 똑같이 Standard English에 맞는다. 정답이 하나로 정해지지 않으므로 문항으로 쓸 수 없다. A를 실제 오답으로 바꿔야 한다(예: 'shell, which was generated digitally appears'처럼 쉼표 하나를 빼는 방식).",
+    "issue": "해설 스스로 A에 문법 오류가 없다고 인정한다. 그러면서 '간결성'과 '더 표준적'이라는 이유로 B를 고르는데, boundaries 유형은 Standard English 관례 준수 여부만 판단하므로 이 근거는 맞지 않는다. 또 'whose 관계절이 이중으로 겹친다'는 설명은 정답을 하나로 좁히는 문법 근거가 되지 못한다.영어 해설도 A가 'technically possible'하다고 인정한 뒤 장황함(wordiness)을 이유로 B를 고른다. 관례 준수 문항에서 정답을 정할 수 없는 근거이므로 한국어 해설과 같은 결함이 있다."
+   },
+   "cost": 0.0881368
+  },
+  {
+   "cid": "sv-boundaries-m-062",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "문장 구조 검산: 주어 \"The poem's second section\" + 비필수 관계절(\"which opens ... near,\") + 본동사 \"insists\" → C만 완전한 주절을 만든다. A는 and로 insists가 관계절에 묶여 본동사 부재, B는 세미콜론 앞이 단편, D는 it이 주어를 중복하고 쉼표–대시 짝이 불일치. 한국어·영어 해설 모두 C를 지지하며 글자 참조 일치, 영어 해설에 한글 없음. Marvell 시의 인용구와 3부 구조 서술은 사실에 부합. 삽입구 닫기 + 본동사 확인의 두 단계 판단이 필요하고 A·D가 그럴듯한 오답이라 medium 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "C로 넣으면 \"The poem's second section, which opens with ... near,' insists that...\"가 되어 문법적으로 맞다. 인용된 짧은 구절은 퍼블릭 도메인이다. A는 관계절 안에 동사를 하나 더 붙이는 그럴듯한 함정이고, 나머지 오답도 말이 된다. 중간 난이도에 맞는다.",
+    "issue": ""
+   },
+   "cost": 0.07377479999999999
+  },
+  {
+   "cid": "sv-boundaries-e-063",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞(\"many copyists had begun to favor Naskh ... faster to write\")과 뒤(\"it eventually became ...\")가 모두 독립절임을 직접 확인함. D(쉼표+and)만 올바르게 두 독립절을 연결하며, A는 쉼표 스플라이스, B는 무종지문, C는 'and' 뒤 불필요한 쉼표로 배제됨. 한국어·영어 해설 모두 D를 가리키고 글자 참조·논리가 일치하며 영어 해설에 한글 없음. 쿠파체(각진 형태)·나스크체(둥근 형태, 10세기 보급)에 관한 배경 서술은 사실과 부합. 지문은 독창적 서술로 저작권 우려 없음. 단일 규칙(독립절 연결: 쉼표+등위접속사)으로 한 단계 추론으로 풀리고 오답은 전형적 오개념(쉼표 스플라이스, 융합문, 접속사 뒤 쉼표)이므로 easy 난이도에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "독립절 두 개를 쉼표+등위접속사로 잇는 규칙 하나만 쓰는 문항이다. 오답은 쉼표 스플라이스, 무종지문, 불필요한 쉼표로 모두 전형적인 오개념이다. 사실 관계(쿠픽체에서 나스크체로의 이행, 10세기 무렵)도 대체로 맞다.",
+    "issue": ""
+   },
+   "cost": 0.0679838
+  },
+  {
+   "cid": "sv-boundaries-e-064",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞(\"Her performers ... emotional weight\")과 뒤(\"audiences found ... moving\")가 모두 독립절임을 직접 확인했다. A(쉼표+and)만 올바르며, B는 쉼표 스플라이스, C는 무종지문(fused sentence), D는 and 뒤 불필요한 쉼표로 오답이다. 한국어·영어 해설 모두 정답 및 선택지 참조가 일치하고 모순이 없다. Pina Bausch·Tanztheater·1970년대 등 사실 관계도 정확하다. 독립절 연결 규칙 하나로 풀 수 있고 오답이 전형적 오개념이므로 easy 난이도에 적합하다.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "독립절 두 개를 쉼표+등위접속사로 잇는 규칙 하나만 쓰는 문항. 오답은 쉼표 스플라이스, 무종지문, 불필요한 쉼표로 학생들이 흔히 틀리는 유형이다. Bausch와 Tanztheater 설명은 사실에 맞다.",
+    "issue": ""
+   },
+   "cost": 0.058857799999999995
+  },
+  {
+   "cid": "sv-central_ideas_details-m-065",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "지문 검산: 1문단은 이중구속 이론의 제안·주목·가족치료 출범, 2문단은 관찰자 불일치·비교군의 유사 메시지·유전/신경학 연구 축적으로 원인론 폐기, 그러나 치료자들은 통찰을 계속 중시. B가 두 문단을 모두 포괄하는 주제문으로 정확. A(코딩 대화가 '입증')·D(관찰자가 '동의')는 2문단과 정반대, C는 치료자들이 '쓸모없다'고 봤다는 점이 마지막 절과 모순. A·C가 부분적 진실(가족치료 출범, 유전 연구 축적)을 담아 비교가 필요하므로 medium 적합. 역사적 서술(Bateson 그룹, 이중구속, 관찰자 신뢰도 문제, 비임상 가족의 유사 메시지, 가족치료에 남긴 영향)은 실제 학설사와 부합하며, Langley Porter 언급은 Bateson–Ruesch 협업과 연결되어 명백한 오류로 보기 어려움. 한·영 해설 모두 결론·글자 참조 일치, 영어 자연스럽고 한글 없음. 형식 이상 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "B가 정답인 것은 확실하다. 다만 지문의 역사 서술이 의심스럽다. Bateson 연구팀(1956)은 Palo Alto에 있었다(VA 병원, 이후 Mental Research Institute). 이중구속 연구와 Langley Porter 연구소를 연결하는 것은 근거가 약하거나 꾸며낸 내용으로 보인다. 난이도는 medium 하한선에 걸친다. A와 D는 지문의 한 문장만 읽어도 배제되고, D에는 부분적으로 맞는 근거가 거의 없다. C가 그나마 가장 그럴듯한 오답이다.",
+    "issue": ""
+   },
+   "cost": 0.081868
+  },
+  {
+   "cid": "sv-central_ideas_details-m-066",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "지문 검산: \"not distinguished... by their childhood IQ scores, which were similarly high\" + \"Instead, the most accomplished men had been rated... as more persistent and more confident\" → C가 정확히 일치. A는 Terman의 기대와 일치하나 지문 결과와 모순, B는 '많은 참가자가 고급 학위'라는 세부를 두 집단 비교로 오용, D는 노벨상 비교(참가자 vs 제외된 아이들)를 왜곡한 매력적 오답. 해설 한·영 모두 동일 결론·글자 참조이며 영어 해설에 한글 없음. 사실관계(1921년 시작, 약 1,500명, 1956년 사망, 제외된 두 아동의 노벨상 수상—Shockley, Alvarez)는 역사적 기록과 부합. 두 문장 연결(IQ 비구별 + 성격 특성)이 필요하고 오답들이 지문의 실제 세부를 차용하므로 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 C는 맞고, 한국어·영어 해설도 서로 일치한다. 다만 사실관계에 문제가 하나 있다. 가장 성공한 남성과 가장 덜 성공한 남성을 비교해 끈기와 자신감의 차이를 찾아낸 연구는 Terman과 Oden이 1940년대(1947년 The Gifted Child Grows Up)에 이미 한 것이다. 그런데 지문은 이 결과가 Terman이 1956년에 죽은 뒤의 추적 조사에서 나온 것처럼 서술한다. 노벨상을 받은 두 사람(Shockley, Alvarez)이 검사에서 제외됐다는 일화는 널리 인용되는 내용이다. 난이도는 대체로 medium에 맞는다. D가 다소 약한 오답이지만 A와 B는 비교해 봐야 배제된다.",
+    "issue": ""
+   },
+   "cost": 0.082467
+  },
+  {
+   "cid": "sv-central_ideas_details-m-067",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "지문이 \"Ainsworth, however, paid closest attention to the reunion\"라고 명시하고, 같은 강도로 울었던 아기들이 재회 시 다르게 반응했다는 근거를 제시하므로 D가 정답임을 직접 확인함. A는 '다른 관찰자들'의 가정(훑어 읽으면 고르기 쉬운 함정), C는 가정 관찰이 분류와 '관련'된다는 서술을 '단독 결정'으로 과장한 오답으로 비교 판단이 필요하며, B는 절차에 등장하는 낯선 사람을 이용한 그럴듯한 오답. 한국어·영어 해설 모두 동일 결론과 선택지 참조를 가지며 영어 해설에 한글 없음. Ainsworth의 Strange Situation(1960~70년대) 서술은 사실과 부합. 원문 창작 지문으로 저작권 의심 없음. 난이도 medium 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "A는 관찰자들의 가정이라 훑어 읽으면 고르기 쉬운 매력적 오답이고, C는 'alone'이 과한 진술이라 배제된다. B는 비교적 약한 오답이지만 말은 된다. medium 난이도에 맞다. Ainsworth와 Strange Situation 관련 사실도 정확하다.",
+    "issue": ""
+   },
+   "cost": 0.07108
+  },
+  {
+   "cid": "sv-central_ideas_details-m-068",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답 A는 지문의 핵심(특정 부위가 언어 생성 담당, 당시 통념에 도전)을 정확히 요약. B는 'as distinct from' 구절을 놓치면 고를 수 있는 부분적 정답 오답, C는 마지막 문장을 오독한 오답, D는 사실이지만 세부 사항. 두 단계 판단(연구 결과 + 당시 통념과의 대비) 필요. Broca/Tan 역사적 사실 정확. 한·영 해설 모두 일관되고 글자 참조 일치, 영어 해설에 한글 없음. 원문 창작 지문으로 보임.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "B·C는 지문 일부를 근거로 삼은 그럴듯한 오답이고 D는 사실이지만 세부 사항이다. 역사적 사실(1861년, Tan, 좌측 전두엽)도 정확하다. 중간 난이도로 적절하다.",
+    "issue": ""
+   },
+   "cost": 0.06248
+  },
+  {
+   "cid": "sv-central_ideas_details-m-069",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "정답 B는 마지막 문장(\"because British classrooms rewarded... the resulting gaps in achievement reflected the expectations built into schooling\")에 직접 근거함. A는 제한 코드 묘사는 정확하나 결함론 해석을 Bernstein이 거부했다는 문장과 충돌, C는 중산층이 두 코드에 능숙하다는 사실은 맞지만 '지적 능력 향상'은 지문이 명시적으로 부정, D는 지문에 없는 인과. 한·영 해설 모두 동일 결론·글자 참조, 영어 자연스럽고 한글 없음. Bernstein의 코드 이론 및 결함론 거부에 대한 서술은 사실과 부합. 정답이 지문 말미에 비교적 명시되어 있으나 오답 A·C가 부분적 근거를 갖춰 비교가 필요하므로 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "B는 지문 마지막 문장을 바꿔 쓴 것이고 근거가 분명하다. A와 C는 지문 내용을 일부 담고 있어서 지문의 결론과 대조해 봐야 걸러진다. D도 그럴듯하게 들리지만 지문에 근거가 없다. 중간 난이도에 맞다.",
+    "issue": ""
+   },
+   "cost": 0.07186400000000001
+  },
+  {
+   "cid": "sv-text_structure_purpose-m-070",
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "밑줄 문장(비전통적·불신 참여자)이 언뜻 의식의 가치를 약화시키는 듯하나, 바로 다음 문장 \"this was exactly what made the rituals revealing\"이 Myerhoff가 이를 해석의 핵심으로 삼았음을 명시하므로 C가 정확. A는 관찰자 견해(remnant)와 표면적으로 연결되고 B는 밑줄 문장만 읽으면 그럴듯해 비교가 필요하며, D는 구성원 간 논쟁이 지문에 없어 배제됨. Myerhoff의 Number Our Days(졸업식, 95세 생일 의식, 세속적 의식 논의) 내용과 사실 일치. 해설 한·영 결론과 글자 참조 일치, 영어 자연스러움, 한글 혼입 없음. 밑줄 문장과 다음 문장을 연결하는 두 단계 판단이 필요해 medium 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "Myerhoff의 'Number Our Days' 연구를 바탕으로 새로 쓴 지문이며 사실관계에 문제가 없다. 정답을 고르려면 두 단계가 필요하다. 먼저 밑줄 문장이 의식의 가치를 깎는 것처럼 보이는 특징임을 파악하고, 이어서 다음 문장이 그 특징을 오히려 핵심 근거로 뒤집는다는 점을 확인해야 한다. 오답 A와 B는 밑줄 문장만 따로 읽으면 그럴듯해서 매력적인 오답 역할을 하고, D는 상대적으로 약하지만 말은 된다.",
+    "issue": "한국어 해설에서 '의미 있게 만든다'는 지문의 'revealing'(드러내 준다)을 조금 느슨하게 옮긴 표현이지만, 정답 판단에는 영향이 없다."
+   },
+   "cost": 0.0764342
+  },
+  {
+   "cid": "sv-text_structure_purpose-m-071",
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "밑줄 문장은 '어휘에서 왔을 수 없다'(대안 설명 배제) → '지각이 원인'(결론) → 원형 이론으로 연결되는 구조로, D가 정확히 기능을 기술함. A(약점)는 방향이 반대, B(아리스토텔레스 지지)는 지문 전체 논지와 반대, C(절차 요약)는 앞 문장의 내용이지 밑줄 문장이 아님. 다니족 2개 기본 색채어·Rosch(Heider) 1970년대 초 연구 등 사실관계도 정확. 한·영 해설 모두 D를 일관되게 뒷받침하며 영어 해설에 한글 없음. 밑줄 문장의 논리 역할 파악 + 지문 전체 흐름(원형 이론으로의 연결) 확인이라는 두 단계 판단이 필요하고, B·C가 부분적으로 지문 내용과 맞아 비교가 필요하므로 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "D는 정답이 맞다. 밑줄 문장은 어휘에서 왔다는 설명을 배제하고, 그 결과 얻은 지각 기반 결론이 원형 이론으로 이어진다. 오답 B(다니족 어휘 언급)와 C(실험과의 관련성)는 부분적으로 맞는 근거를 갖고 있다. A는 비교적 쉽게 배제되지만 그럴듯하게 읽힌다. 다니족 색 연구에 관한 사실 서술은 실제 Rosch(Heider) 연구와 부합한다.",
+    "issue": ""
+   },
+   "cost": 0.0756202
+  },
+  {
+   "cid": "sv-text_structure_purpose-m-072",
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "밑줄 문장은 'Yet'으로 흔한 해석(기만적 사회생활)을 반박하고 다음 문장의 '공유된 도덕 질서' 대안 해석을 준비하므로 A가 정확. B는 소재(냉소적 조작)는 겹치나 방향이 반대, C는 '비판'이 아닌 고프먼 자신의 주장이며 기관 환경은 마지막 문장 소재, D는 첫 문장 내용으로 매력적 오답 구성이 적절. 고프먼의 '자기 연기에 빠진 수행자', 협력적 체면 유지(face-work), 병원·학교 등 기관 연구는 사실과 부합. 한국어·영어 해설 결론과 글자 참조 일치, 영어 자연스러움. 두 단계 판단(전환어 인식 + 후속 문장과의 연결)이 필요해 medium 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답 A가 명확함. B·C·D는 지문 소재(냉소적 조작, 기관 환경, 전무대/후무대)를 각각 끌어와 부분적 근거를 갖추고 있어 medium 난이도에 맞음. 다만 C는 '비판'이라는 표현 때문에 비교적 쉽게 배제됨. 'Goffman stressed that most performers are taken in by their own acts'는 『자아 연출의 사회학』 내용과 일치하나, 마지막 문장의 '경직된 기관 환경에서도'는 『수용소(Asylums)』를 다소 단순화한 서술로 문항 판정에는 영향 없음.",
+    "issue": ""
+   },
+   "cost": 0.0756052
+  },
+  {
+   "cid": "sv-text_structure_purpose-m-073",
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "밑줄 문장은 피아제가 정답 여부가 아닌 아이들의 추론(설명)에 주목했음을 밝히고, 다음 문장 \"Those explanations showed him...\"이 그 설명을 토대로 한 관찰을 제시하므로 B가 정확히 맞다. A는 오류가 앞 문장에 있고 이론 반증으로 쓰이지 않음, C는 첫 문장과 모순, D는 밑줄이 과제 결과가 아님. 한·영 해설 모두 B를 일관되게 뒷받침하며 글자 참조 일치, 영어 해설에 한글 없음. 피아제 보존 과제·단계 이론 서술은 사실에 부합. 오답 A·D가 지문 인접 내용에 부분 근거를 가져 비교가 필요하고 C도 표면상 그럴듯하여 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "B가 정답으로 옳다. A와 D는 근거가 일부 맞아 보여 서로 비교해야 배제되지만, C는 첫 문장과 정면으로 모순되어 쉽게 배제된다. 사소한 점: 보존 과제 연구는 주로 1940년대에 출간되어 시기 서술이 약간 느슨하고, 밑줄 문장의 'he pressed'는 지시 대상이 조금 모호하다. 판정에는 영향이 없다.",
+    "issue": ""
+   },
+   "cost": 0.0750522
+  },
+  {
+   "cid": "sv-text_structure_purpose-m-074",
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 C 검증: 밑줄 문장은 \"for instance\"로 도입된 구체 사례이며, 청중·상황에 따라 달라지는 서사 구조를 Hymes가 밝혀냈다는 점에서 그의 접근이 낳은 통찰을 예시함. A(한계), B(이전 언어학자의 선호 이유), D(인류학자 간 논쟁)는 모두 지문에 근거 없음. A·D는 지문 요소(Chinookan, 전사 대비)를 차용해 그럴듯하고 B도 첫 문장과 연결되어 말이 됨. 사실관계(Hymes의 speech event/ethnography of speaking, Chinookan 서사의 verse 분석)도 정확. 해설 한·영 결론 및 글자 참조 일치, 영어 자연스러움. 난이도 medium 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "\"for instance\"라는 신호어 때문에 다소 쉬워지지만, D(전사자와의 대비)와 A(Chinookan 언급)가 부분 근거를 가져 비교가 필요하므로 medium에 적합. Hymes의 ethnopoetics 작업과 사실관계 부합.",
+    "issue": ""
+   },
+   "cost": 0.0642112
+  },
+  {
+   "cid": "sv-central_ideas_details-m-075",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "지문의 핵심(국경을 그은 것이 아니라 '실효적 점령' 규칙이 분할을 가속)을 D가 정확히 요약. A는 세부(조약·원정)는 맞으나 지문이 반박한 통념을 전제, C는 배제 사실을 과대평가, B는 절차 합의를 실패로 오독하여 모두 비교 후 배제 가능. 역사적 사실(1884 베를린 회의, 실효적 점령 원칙, 아프리카 대표 부재) 정확. 한·영 해설 결론 및 글자 참조 일치, 영어 해설에 한글 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "역사적 사실(실효적 점령, 해안 영유 통보, 아프리카인 불참)이 정확함. A는 통념을 따르는 함정, B·C는 부분적 근거가 있는 오답으로 적절한 중간 난이도.",
+    "issue": ""
+   },
+   "cost": 0.067795
+  },
+  {
+   "cid": "sv-central_ideas_details-m-076",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답 A는 지문의 \"did not simply restore order under the existing arrangement… annexed outright… a step that many Company administrators had already come to favor\"와 정확히 일치한다. B는 지문이 명시적으로 부정한 주재관 체제 복귀, C는 이전 완충국 정책을 대응으로 오인, D는 배경(궁정 경쟁)을 목적으로 오인한 오답으로 모두 지문 요소를 차용해 그럴듯하다. 역사적 사실(1839 란지트 싱 사망, 1845–46 1차 전쟁·주재관, 1848 물탄 반란, 1849 칠리안왈라·구즈라트, 달하우지 병합) 모두 정확. 한국어·영어 해설 결론과 선택지 참조 일치, 영어 자연스럽고 한글 없음. 두 문장 정보 연결이 필요해 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "역사적 사실(1839 사망, 1845–46·1848–49 전쟁, 물탄 반란, 칠리안왈라·구자라트 전투, 달하우지의 병합)이 정확하다. 오답들은 지문 속 실제 요소(주재관, 완충국, 궁정 경쟁)를 끌어와 그럴듯하게 만들어져 있어 중간 난이도에 맞는다. 다만 A가 지문의 마지막 문장을 거의 그대로 옮겨 놓아 약간 쉬운 편이다.",
+    "issue": ""
+   },
+   "cost": 0.07399700000000001
+  },
+  {
+   "cid": "sv-central_ideas_details-m-077",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "지문 구조(예상된 붕괴 → 한 세대의 지연 → 1870년대 운송 혁신으로 결정적 변화)를 B가 정확히 요약함. A는 '즉시 가격 하락'이 지문의 '안정적 가격'과 모순, C는 지문에 없는 인과(의회가 낙농·육류 수요 때문에 폐지), D는 '결정적 변화'를 축소하여 모순. A·C는 지문 세부(배수·비료 투자, 지주 예측, 낙농·육류 전환)를 부분적으로 차용해 비교가 필요하고 D도 그럴듯함. 역사적 사실(1846년 폐지, 1870년대 미국 밀 유입과 농업 불황, high farming 투자) 정확. 한국어·영어 해설 결론과 글자 참조 일치, 영어 자연스럽고 한글 없음. 정답 B가 가장 길고 세밀하다는 점이 약간의 단서가 될 수 있으나 medium 범위 내.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "A·C·D 모두 지문 세부를 일부 담고 있어 비교가 필요하다. 시간 차라는 핵심 구조를 파악하면 B가 명확하다. 역사적 사실도 대체로 정확하다(1870년대 대불황기 농업 침체).",
+    "issue": ""
+   },
+   "cost": 0.07268799999999999
+  },
+  {
+   "cid": "sv-text_structure_purpose-m-078",
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "밑줄 문장은 'Yet'으로 통설과 대비되는 Louis의 수정적 견해를 도입하므로 C가 정확함. A(미국 재정 압박 언급)와 D(인식 변화 관련)는 지문 내용에 부분적 근거가 있어 비교가 필요하고, B는 가장 약하나 지문 소재상 말이 됨. 한·영 해설 모두 동일 결론·글자 참조, 모순 없음. Wm. Roger Louis의 입장 서술도 실제 학계 견해와 어긋나지 않음. 다만 통설 자체가 '쇠퇴가 가시화된 순간'이라 Louis 견해와의 대비가 다소 미묘한 편이나 '원인 vs. 노출' 구도로 충분히 성립함.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "지문 논리에 미세한 약점이 있다. 통설은 위기를 '쇠퇴가 가시화된 순간'으로 기술할 뿐 '원인'으로 보지는 않는데, Louis는 '원인이라기보다'라고 반박한다. 'qualifies'라는 표현이 이 약점을 덮어 주므로 정답 C는 유효하다. A와 D는 부분적인 근거가 있지만 B는 쉽게 배제되어, medium 난이도의 하단에 해당한다.",
+    "issue": "설명이 정답을 뒷받침하고 글자 참조도 맞다. 다만 통설(쇠퇴가 '드러난' 순간)과 Louis 견해(원인이 아니라 '드러냄')가 '드러남' 측면에서는 사실상 일치한다. 실제 대비점은 원인이냐 드러냄이냐인데, 해설이 이 차이를 분명히 하지 않는다.\"a turn away from the common account ... (that Suez was the moment Britain's decline became visible)\"라는 표현은 Louis가 '가시화' 자체를 부정한다는 오해를 줄 수 있다. 사소한 문제다."
+   },
+   "cost": 0.0788372
+  },
+  {
+   "cid": "sv-text_structure_purpose-m-079",
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "밑줄 문장은 직전의 kawanatanga/tino rangatiratanga 용어 차이를 서명자 관점에서 해석하고, 바로 뒤의 \"This gap helps explain...\" 토지 분쟁 서술로 이어주는 교량 역할을 하므로 D가 정확하다. A는 '고의적 기만' 의도가 지문에 없고, B는 서명 판본 선택 이유를 다루지 않으며, C는 분쟁 원인을 '이주민의 무시'로 잘못 귀속한다. 역사적 사실(1840년 2월 서명, 500명 이상 추장, 두 판본의 용어 차이, 역사학계의 일반적 해석)에 오류 없음. 한·영 해설 모두 D를 일관되게 뒷받침하고 글자 참조 일치, 영어 해설에 한글 없음. 오답 A·C가 부분적 근거(번역 차이, 후속 분쟁)를 가져 비교가 필요하고 B도 지문 사실에 근거해 그럴듯하므로 medium 난이도에 부합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "사실관계(1840년 2월, 500명 이상 서명, kawanatanga·tino rangatiratanga) 정확. A·B·C 모두 지문 요소를 일부 활용한 오답이라 비교가 필요해 medium에 적합. C는 내용이 명백히 틀려 다소 쉽게 배제됨.",
+    "issue": ""
+   },
+   "cost": 0.07668620000000001
+  },
+  {
+   "cid": "sv-text_structure_purpose-m-080",
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "밑줄 문장은 'Yet'으로 선거권 확대(앞 문장)에서 사전 등록 요건(절차적 특징)으로 초점을 옮기고, 마지막 문장이 그 요건의 결과(등록 법정→정당 조직)를 설명하므로 A가 정확함. B는 Salmon이 유권자 증가를 부정하지 않으므로 오답, C는 수치 요약·추가 수치 없음, D는 기존 평가의 이유 설명이 아니라 대안 해석 제시이므로 오답. 1832년 개혁법 유권자 수(약 40만→65만)와 Philip Salmon의 등록제 중심 해석은 실제 학설과 부합. 한국어·영어 해설 모두 동일 결론과 선택지 참조로 일관되며 영어 해설에 한글 없음. 오답 세 개 모두 지문의 일부 요소(대조, 수치, '전환점')와 연결되는 부분적 근거를 가져 medium 난이도에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "유권자 수 약 40만→65만은 통설 수치(약 43.5만→65.2만)와 대체로 맞는다. 등록 요건과 정당 조직 형성에 관한 Salmon의 논지도 실제 연구(Electoral Reform at Work)와 일치한다. B와 D는 일부만 맞는 근거를 갖고 있어 비교해야 배제된다. C는 다소 약한 오답이지만 말은 된다.",
+    "issue": "D에 대한 해설에서 '전환점'이라는 앞 내용과 연결된다고 했지만, 지문에는 그런 표현이 없고 'the moment the middle class entered political life'라고 되어 있다. 사소한 문제이며 결론에는 영향이 없다.한국어 해설과 같은 사소한 문제가 있다. \"turning point\" idea는 지문에 쓰인 표현이 아니라 선택지 D에 쓰인 표현이다."
+   },
+   "cost": 0.0782162
+  },
+  {
+   "cid": "sv-central_ideas_details-m-081",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "B를 직접 검산: 1문단(경쟁 신디케이트가 각자 자본을 걸고 위험 분담)과 2문단(경제사학자들이 이 구조 덕분에 더 정확한 가격 책정이 가능했다고 주장)을 결합한 진술로 중심 내용에 정확히 부합한다. A는 리드 언더라이터의 존재는 맞으나 \"자본 부족\"이라는 인과가 지문에 없고, C는 브로커 역할은 맞으나 프리미엄 제안 주체(리드 언더라이터)를 왜곡했으며, D는 예시 세부(해협·선원 기록)를 일반 규칙으로 과도하게 확장한 세부 사항이다. 두 문단 정보를 연결해야 하고 오답 2개가 부분적 근거를 가지므로 medium에 적합. 한·영 해설 모두 B를 일관되게 뒷받침하며 글자 참조 일치, 영어 해설에 한글 없음. Lloyd's의 신디케이트·리드 언더라이터·브로커 구조 서술은 실제와 부합하며 사실 오류 없음. 지문은 독창적 서술로 보여 저작권 의심 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "B는 구조 설명과 경제사가들의 평가(is credited with)를 함께 담고 있다. A와 C는 지문에 나온 세부 사항(리드 언더라이터, 브로커)에 근거하지만 메커니즘을 왜곡한다. D는 예시를 지나치게 일반화했다. 중간 난이도에 적합하다.",
+    "issue": ""
+   },
+   "cost": 0.077994
+  },
+  {
+   "cid": "sv-central_ideas_details-m-082",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 C는 마지막 문장(\"could not match the speed and flexibility that cash-poor diggers depended on\")과 중간의 세부(현금 즉시 지급, 소량 매입 vs 검사 후 지급)를 연결해야 확정되므로 2단계 판단에 해당. A는 지문이 언급하지 않은 가격 차이를 끌어들여 그럴듯하게 설계됨, B는 지문의 규제 언급을 활용하되 Kabeya가 명시적으로 부정한 내용, D는 '배타적 권리' 서술과 모순. 해설(한/영) 모두 정답 및 선택지 참조가 일치하고 모순 없음. EGC가 2019년 DRC 정부에 의해 설립되어 수공 코발트 독점 구매·수출권을 가진다는 배경은 사실과 부합하며, 경제학자는 SAT 관행대로 가상의 연구자로 제시됨.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "EGC(2019) 설립은 사실이다. Kabeya는 가상의 인물로 보이지만 문제는 없다. B는 지문의 'not because' 구문을 비틀어 만든 매력적인 오답이다. A는 그럴듯하지만 지문에 근거가 없다. D는 쉽게 배제된다. medium 난이도에 적합하다.",
+    "issue": ""
+   },
+   "cost": 0.06979
+  },
+  {
+   "cid": "sv-central_ideas_details-m-083",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "정답 D는 지문 마지막 문장(\"Because preservation at sea kept the product's quality steady and the fluyt cut the cost... reliable herring at prices competitors struggled to match\")을 정확히 종합한다. A는 지문이 반박하는 통념, B·C는 버스선/플루이트선의 특징을 서로 바꿔 붙인 세부 혼동형 오답으로, 두 선박의 역할을 각각 확인해야 배제되므로 medium 2단계 판단 요건에 부합한다. 한국어·영어 해설 모두 D를 지지하고 글자 참조 일치, 영어 해설에 한글 없음. 역사적 사실(버스선 선상 가공, 1590년대 플루이트, 적은 선원 수, de Vries)도 통설과 부합하며 서술 자체는 독창적 산문으로 저작권 우려 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "B와 C는 지문 속 두 배의 특징을 서로 바꿔 붙인 오답이라 정독해야만 걸러낼 수 있다. A는 지문이 흔한 통념으로 소개한 견해라 그럴듯하게 읽힌다. 정답 D는 지문의 마지막 문장을 바꿔 말한 것이다. medium 난이도에 맞는다.",
+    "issue": ""
+   },
+   "cost": 0.06338999999999999
+  },
+  {
+   "cid": "sv-text_structure_purpose-m-084",
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "밑줄 문장은 \"Instead\"로 앞 문장(등록 공장이 직접 작업하지 않음)을 받아 하도급 관행을 구체화하며, 이는 \"기존 설명이 하층을 가린다\"는 Rahman의 주장을 뒷받침함 → A 정답 확인. B(소매업체 가격 결정력의 원인), C(해결책), D(결론 반박)는 모두 지문과 불일치. B·C는 지문 속 요소(소매업체, 검사 제도)를 차용해 부분적 타당성을 가지며, D는 방향 반전 오답으로 비교적 쉽게 배제되지만 말은 됨. 두 단계 판단(문장 내용 파악 + Rahman 주장과의 연결) 요구로 medium 적합. 해설 한·영 결론·글자 참조 일치, 영어 해설에 한글 없음, 자연스러움. 가상의 연구자 인용으로 사실 오류·저작권 문제 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 A가 맞다. 선택지 모두 'It specifies a practice that…'로 시작하는 평행 구조라서 기능을 구분해 읽어야 한다. B와 C는 지문 속 요소(가격 결정력, 검사 제도)를 끌어와 그럴듯하게 만들었고, D는 방향을 뒤집은 오답이다. medium 난이도에 맞다.",
+    "issue": ""
+   },
+   "cost": 0.0741832
+  },
+  {
+   "cid": "sv-text_structure_purpose-m-085",
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "밑줄 문장은 짧은 임차 지역에 가축 이동로가 많고 긴 임차 지역에 현지 시설이 많다는 상관 패턴을 제시하며, 이는 '임대 정책이 육류 유통 방식을 형성했다'는 Marchetti 주장의 근거로 기능하므로 B가 정답임을 직접 확인. A(역사가 견해는 첫 문장), C(유인 설명은 직전 문장이며 드로버 선호를 다루지 않음), D(결론이 정반대)는 모두 지문 근거로 배제 가능. 한국어·영어 해설 모두 B 결론과 선택지 참조가 일치하고 영어 해설에 한글 없음. 가상의 역사가·일반적 역사 배경으로 저작권·사실 오류 우려 없음. 패턴 식별 + 주장과의 연결이라는 두 단계 판단이 필요하고 C·D가 부분적으로 맞는 근거를 가져 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "B가 명확한 정답. A는 첫 문장의 역사가 견해를 이용한 함정이고, C는 앞 문장의 인과를 이용한 함정이며, D는 형식은 맞지만 결론이 반대인 함정이다. 오답이 부분적 근거를 가지므로 medium 난이도에 적합하다. 다만 A는 Marchetti가 기존 견해를 '거부'하지 않고 '또한(also)'으로 보완한다는 점에서 배제가 비교적 쉽다.",
+    "issue": ""
+   },
+   "cost": 0.0750702
+  },
+  {
+   "cid": "sv-central_ideas_details-m-086",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "지문은 Boothby et al. 2017(Molecular Cell)의 TDP 연구를 정확히 반영함(RNAi 침묵 시 생존율 저하, 효모·세균 발현 시 내건성 증가, 유리화). 정답 C는 '기존 가정(트레할로스) → 새로운 발견(고유 단백질) → 유사한 보호 전략'이라는 지문 구조를 정확히 요약. A는 실제 세부(툰·대사 저하)를 쓰되 지문에 없는 주장을 덧붙였고, D는 실험 세부를 근거로 지문 밖 응용을 추론해 둘 다 비교·배제가 필요한 오답. B는 지문과 직접 모순되지만 트레할로스 언급으로 표면상 그럴듯함. 한·영 해설 모두 글자 참조와 논리가 일치하며 영어 해설에 한글 없음. 오리지널 작성 지문으로 보이며 저작권 의심 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "Boothby et al. 2017 실제 연구와 부합. 오답 A·D는 지문 세부를 부분적으로 활용해 비교가 필요하고, B는 명백한 모순이지만 그럴듯함. medium 적합.",
+    "issue": "\">\n"
+   },
+   "cost": 0.07582799999999999
+  },
+  {
+   "cid": "sv-central_ideas_details-m-087",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답 D는 마지막 문장의 결론(사회 구조보다 '복구를 허용하되 과도한 성장을 막는 세포적 균형')을 정확히 요약. A는 초기 가설(지문이 비중을 낮춤), B는 '적당한 텔로머레이스 활성 유지'와 모순, C는 밀집 시 분열 중단을 거꾸로 서술하고 포유류 전체로 과잉 일반화. 초기 설명과 최근 설명을 구분하고 결론 문장을 연결해야 하므로 medium 적합. 사실관계(30년 이상 수명, 생쥐의 약 10배, 조기 접촉 억제, 체세포 텔로머레이스 활성)도 알려진 연구와 부합. 한·영 해설 모두 선택지 참조 일치, 한글 혼입 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "각 오답이 지문의 일부 내용(초기 가설, 텔로머레이스와 종양의 연관, 밀집 반응)을 끌어와 그럴듯해 보이지만 정독하면 배제된다. 다만 '수명이 쥐의 약 10배'라거나 텔로머레이스가 '적당히' 유지된다는 서술처럼 과학적으로 단순화된 부분이 있다. 지문 안에서는 일관되므로 사실 오류로 보지는 않았다.",
+    "issue": ""
+   },
+   "cost": 0.077951
+  },
+  {
+   "cid": "sv-central_ideas_details-m-088",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 A 검산 일치: 글은 영양 가설(B)을 소개 후 쥐 실험으로 약화시키고, 진통 효과·화학 신호를 핵심 이점으로 제시하며, 옥시토신 연결은 미확정이라고 명시(C 배제). D는 영양 비교에서만 맞고 진통 효과를 무시하여 부분 정답형 오답으로 기능. 한국어·영어 해설 모두 글자 참조와 결론이 일치하고 자연스러움. Kristal의 POEF 연구는 실존하며 서술이 그 취지와 부합해 사실 오류 없음. 지문은 자체 작성된 원문으로 저작권 우려 없음. 반박된 가설 식별 + 마지막 문장의 유보 표현 확인이라는 두 단계 판단이 필요하고, C·D가 부분적 근거를 갖춘 오답이어서 medium 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "Kristal의 POEF(placental opioid-enhancing factor) 연구와 사실이 일치한다. 오답 B·C·D는 각각 지문의 일부(기존 가설, 미확정 옥시토신 연결, 영양 차이 없음)에 근거한 그럴듯한 함정이어서 medium 난이도에 적합하다.",
+    "issue": ""
+   },
+   "cost": 0.074379
+  },
+  {
+   "cid": "sv-text_structure_purpose-m-089",
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "밑줄 문장은 '나방→질소→조류' 가설을 뒷받침하는 상관관계 결과이며, 다음 문장이 조류를 나무늘보의 영양·위장 이익과 연결하므로 B가 정확하다. A(반박)·D(원천 역전)는 지문과 반대이고, C는 하강 행동이 지문의 큰 틀이라는 점에서 부분적 근거가 있으나 밑줄 문장 자체는 털 성분을 다루므로 배제 가능. 앞뒤 문장을 연결해 기능을 판단해야 하므로 medium에 적합. Pauli et al.(2014) 연구 내용과 사실관계 일치, 지문은 독자적 서술로 저작권 의심 없음. 한·영 해설 결론과 선택지 참조 일치.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "Pauli et al. 2014 연구를 바탕으로 한 문항이며 내용이 정확하다. B는 앞 문장(근거)과 뒤 문장(이점)을 모두 연결해야 고를 수 있다. A, C, D는 각각 지문의 요소(가설, 하강, 질소)를 활용하므로 그럴듯한 오답이다. 다만 D는 비교적 쉽게 배제된다.",
+    "issue": ""
+   },
+   "cost": 0.07538020000000001
+  },
+  {
+   "cid": "sv-text_structure_purpose-m-090",
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "밑줄 문장은 'However'로 앞 문장의 가정(아무 데나 붙어 난류를 견딤)을 뒤집는 관찰을 제시하고, 다음 문장이 항력 감소 원리를 설명하므로 C가 정확함. A는 지문 내 실제 내용(흡착판 원리)이지만 밑줄 앞 문장의 기능, B는 '난류' 어휘를 공유하나 방향이 반대, D는 '연구 결과'라는 틀은 맞으나 숙주 종 논쟁은 없음. 한·영 해설 모두 동일 결론·글자 참조, 영어 자연스럽고 한글 없음. Flammang 연구팀의 대왕고래 리모라 관찰(분수공 뒤 등 저유속 구역 집중)은 실제 연구 내용과 일치. 지문은 독창적 서술로 저작권 의심 없음. 가정-반전-설명의 두 단계 연결이 필요하고 오답들이 부분적 근거를 가져 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "Flammang 연구진의 대왕고래 빨판상어 연구(2020)와 일치한다. 'However' 단서가 뚜렷해 다소 쉬운 편이지만, B·D가 부분적으로 그럴듯해서 medium 범위에 든다.",
+    "issue": "A 설명의 '밑줄 이전 문장'은 바로 앞 문장(기존 가정)이 아니라 두 문장 앞(지문 둘째 문장)을 가리킨다. 의미는 통하지만 위치 표현이 다소 부정확하다.\"the sentence before the underlined one\"은 바로 앞 문장으로 읽히지만, 흡착판 원리는 두 문장 앞(둘째 문장)에서 설명된다. 사소한 부정확함이다."
+   },
+   "cost": 0.0750142
+  },
+  {
+   "cid": "sv-text_structure_purpose-m-091",
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "밑줄 문장은 'however'로 기존 가정(떨림 근육이 열 공급)을 반박하는 측정 결과를 제시하고, 이어지는 Drew의 제안(갈색지방이 각성을 시작)의 근거가 되므로 D가 정확. A(0°C 이하 생존 이유)·C(재가온 빈도)는 지문의 다른 부분 정보, B는 관계 반전. 오답들이 지문 내용을 부분적으로 끌어와 비교가 필요하며, 'however'와 뒤 문장의 연결을 모두 파악해야 하는 2단계 판단으로 medium에 적합. 해설 양쪽 결론·글자 참조 일치, 영어 자연스럽고 한글 없음. 북극땅다람쥐의 체온 0°C 이하, 2~3주 주기 각성, Kelly Drew 연구 등 사실관계 문제없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답 D는 타당하다. B는 관계를 뒤집은 오답이고, A와 C는 지문의 다른 정보를 끌어온 오답이다. 오답 변별력은 중간 수준이다. 'however' 위치에 관한 해설 표현만 수정하면 된다.",
+    "issue": "해설은 밑줄 문장이 'however'로 시작한다고 하지만, 실제로는 문장 중간에 삽입되어 있다('Measurements of tissue temperature during rewarming, however, ...'). 지문을 잘못 묘사한 것이며, 정답 논리 자체는 맞다.영어 해설에도 같은 오류가 있다. \"begins with 'however'\"라고 했지만 'however'는 문장 중간에 삽입되어 있다. 이 점 외에는 한국어 해설과 결론이 같고 영어도 자연스럽다."
+   },
+   "cost": 0.06472220000000001
+  },
+  {
+   "cid": "sv-central_ideas_details-m-092",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답 A 검산 일치: 지문은 '최종 퇴적지'라는 기존 가정 → 서울 먼지 화학 성분이 고원 토양과 일치 → 봄철 전선풍이 재부유 → '영구 싱크가 아닌 임시 저장소'라는 구조이며 A가 이를 정확히 요약. B는 연구 결과(고원 토양 일치)와 정반대, C는 몬순 약화 시기에 오히려 먼지가 재비산된다는 인과를 뒤집음, D는 지문에 없는 해결책·과잉 일반화. 한국어·영어 해설 모두 동일한 결론과 글자 참조를 가지며 영어 해설에 한글 없음, 표현 자연스러움. 가상의 연구자 이름(Lin Haoran)을 사용한 창작 지문으로 보이며, 황토고원이 먼지의 싱크이자 소스라는 과학적 내용 자체는 실제 연구 흐름과 모순되지 않음. 난이도: 'however' 전환과 'less like a sink than like a temporary storage site' 비교 구문을 정독해야 하며 B·C가 지문 세부(몽골 사막, 몬순 약화)를 차용해 비교를 요구하므로 medium 적합. 다만 B·C가 명시적 모순이라 medium 하단에 가까움.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "B·C는 지문 내용과 정반대여서 쉽게 배제되고, D는 지문에 없는 해결책이라 비교적 쉽게 걸러진다. 그래도 지문의 세부를 활용한 오답이어서 medium 하단 수준으로 볼 수 있다. Lin Haoran 연구는 가상의 인물로 보인다.",
+    "issue": ""
+   },
+   "cost": 0.082888
+  },
+  {
+   "cid": "sv-central_ideas_details-m-093",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "지문은 '기존 해석(기후 사막화) → 새 자료로 수정(과거 가뭄+관개, 부분 안정)' 구조이며 B가 이를 정확히 요약함. A는 90% 수치는 맞으나 글이 반박하는 '가속되는 사막화'를 주장해 틀림, C는 '유일한 원인'·강우 배제로 지문과 모순, D는 지하수 소폭 증가를 1960년대 수준 회복 예측으로 과장. 한·영 해설 모두 정답과 선택지 글자 참조가 일치하고 모순 없음. 차드호 약 90% 축소, GRACE 중력 관측 기반 지하수 증가 등 사실관계도 실제 연구(예: Pham-Duc et al. 2020)와 부합. 전체 구조 파악 + 세부 정보 대조라는 두 단계 판단이 필요하고 오답 3개가 모두 지문의 일부 사실에 근거하므로 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "B는 기존 해석을 수정하는 구조와 원인(가뭄·관개)·부분 안정을 모두 담는다. A는 앞부분만 읽으면 끌리는 오답이고, C·D는 세부 내용을 과장했다. medium 수준에 맞다.",
+    "issue": ""
+   },
+   "cost": 0.075743
+  },
+  {
+   "cid": "sv-central_ideas_details-m-094",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 C는 지문의 '배출량 동일 + 뚜껑/산에 의한 갇힘' 설명과 정확히 일치. A는 배출량 동일 진술과 모순, B는 지문에 없는 외부 유입 가정, D는 폭풍 역할 반전. 한국어·영어 해설 모두 결론·글자 참조 일치, 영어 자연스럽고 한글 없음. 두 정보(배출량 불변 + 갇힘 메커니즘) 연결이 필요해 medium 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답을 고르려면 배출량이 같다는 진술과 뚜껑 및 산이라는 메커니즘을 연결해야 함. A와 B는 부분적으로 그럴듯한 오답이고 D도 지문 요소를 활용함. medium 수준에 적합.",
+    "issue": ""
+   },
+   "cost": 0.063475
+  },
+  {
+   "cid": "sv-text_structure_purpose-m-095",
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "밑줄 문장은 기존 깔때기 설명의 한계를 지적하고 공명 요인 도입을 유도하므로 D가 정확. 'also crucial'로 A의 '대체' 주장 배제 가능. B·C는 각각 앞·뒤 문장의 기능을 차용한 적절한 오답. 해설 한·영 일치, 사실 오류 없음(Qiantang·Severn 보어, 공명 설명 타당). 난이도 medium 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "A는 '한계 지적'이라는 부분적 근거를 가진 그럴듯한 오답이다. 'also'와 대조해야 배제할 수 있다. C도 뒤 내용과 연결되어 있어 그럴듯하다. 중간 난이도에 적합하다. 공명 설명은 과학적으로 타당하다(고유 주기가 조석 주기의 약 1/4).",
+    "issue": ""
+   },
+   "cost": 0.0633452
+  },
+  {
+   "cid": "sv-text_structure_purpose-m-096",
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "밑줄 문장은 'Yet'으로 기존 가정(강진 필요)에 반하는 시추 증거를 제시하고, 다음 문장이 이를 근거로 예측 어려움이라는 결론을 도출하므로 A가 정확하다. B는 정반대, C·D는 지문의 다른 문장 내용(두 유형 대조, 물 밀어냄)을 차용한 부분적 근거가 있어 비교가 필요하며, '더 흔하다'·'규모'는 지문에 없다. 한국어·영어 해설 모두 동일 결론·글자 참조로 일관되고 영어 자연스러움. Storegga 사면의 약한 점토층·간극수압 관련 서술은 지질학 문헌과 부합하며 'apparently'로 완화되어 사실 오류 없음. 원창작 지문으로 저작권 문제 없음. 대조 파악 + 전체 글에서의 기능 연결이라는 두 단계 판단이 필요해 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "too_easy",
+     "eliminated:3"
+    ],
+    "note": "정답 A는 맞다. 다만 오답의 오류가 너무 뻔하다. B는 'Yet'과 정면으로 어긋나는 '가정을 확인한다'를 내세우고, C는 지문에 없는 '어느 쪽이 더 흔한가'를, D는 지문에 없는 '쓰나미 규모'를 근거로 삼는다. 그래서 'Yet' 하나만 보거나 지문을 훑어 읽기만 해도 바로 배제된다. 부분적으로 맞는 근거를 비교해야만 걸러지는 오답이 사실상 없어 medium으로 보기에는 쉽다. 예를 들어 '가정에 도전한다'는 부분은 맞지만 결론의 방향이나 대상이 다른 오답이 있어야 medium에 맞는다.",
+    "issue": ""
+   },
+   "cost": 0.0774902
+  },
+  {
+   "cid": "sv-central_ideas_details-m-097",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "지문은 '단일 기포 포획 → 정밀 측정 가능' + '발광 메커니즘은 미해결'의 두 축으로 구성되어 있고 B가 이를 정확히 요약함. A는 두 가설 중 하나(충격파)를 확정으로 단정해 마지막 문장과 충돌, C는 지문의 수치(10억분의 1초, 수천 도)를 차용하지만 기포 무리와의 비교는 지문에 없음, D는 1930년대부터 관찰됐다는 문장과 모순. 오답 A·C가 지문 세부를 활용한 부분적 근거를 가져 비교가 필요하고, D도 훑어 읽으면 그럴듯하므로 medium 적합. 사실관계(Gaitan 1990 단일 기포 소노루미네선스, 1930년대 다중 기포 관찰, 피코초급 섬광, 메커니즘 논쟁)도 정확함. 한·영 해설 결론 및 선택지 참조 일치, 영어 해설에 한글 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 B가 지문의 두 축(단일 기포로 정밀 측정 가능 + 발광 원리 미해결)을 모두 담는다. A·C·D는 지문의 세부를 부분적으로 활용한 그럴듯한 오답이라 medium 수준에 적합하다. 사실관계(Gaitan 1990, 1930년대 관찰)도 맞다.",
+    "issue": ""
+   },
+   "cost": 0.075499
+  },
+  {
+   "cid": "sv-central_ideas_details-m-098",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답 C는 지문의 핵심(구조·배열을 통한 역굴절 구현, 자연 물질에 없음, 구조로 설계 가능)을 정확히 요약한다. A는 구리·역굴절이라는 부분적 근거가 있으나 '구리 자체의 성질'과 '모든 주파수'가 지문과 상충하고, B는 좁은 대역이라는 세부를 끌어오지만 예측을 '반박'했다는 결론이 틀려 비교 판단이 필요하다. D는 첫 문장과 정면으로 모순되는 약한 오답이지만 말은 된다. 해설 한·영 모두 일관되고 글자 참조 정확. 사소한 참고: 실제 역굴절 직접 관측 실험은 2001년(Shelby·Smith·Schultz)이며 2000년 논문은 음의 유전율·투자율 복합매질 보고였으나, 지문 서술은 SAT식 요약 범위 내로 보아 사실 오류로 판정하지 않음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "역사적 사실 오류: Smith 연구팀의 2000년 논문(PRL)은 분할 링·와이어 복합 매질에서 left-handed 투과 대역을 보인 것이고, 음굴절(역방향 굴절) 자체를 직접 실증한 것은 2001년 Shelby·Smith·Schultz의 Science 논문이다. 문항 논리는 문제없다. 정답 C는 지문으로 뒷받침되고, B는 그럴듯한 오답이며, A는 'any frequency' 때문에 배제되고, D는 약하다. 전체 난이도는 medium에 해당한다.",
+    "issue": ""
+   },
+   "cost": 0.079473
+  },
+  {
+   "cid": "sv-central_ideas_details-m-099",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "지문 구조(방법 소개 → 20% 초과 시 광유도 할로겐화물 분리 문제 → 세슘 치환 해결)를 D가 정확히 요약함. A는 '확실히 전압을 높인다'와 '적색광 포착' 부분이 지문과 모순, B는 요오드화물 영역이 전압을 낮춘다는 내용의 역전, C는 세슘의 역할(안정화)을 밴드갭 확장으로 오기술. 한·영 해설 모두 D를 일관되게 뒷받침하며 글자 참조 일치, 영어 해설에 한글 없음. 과학 내용(Hoke 효과, Cs 혼합 안정화)은 실제 연구와 부합하며 연구자명은 가상으로 보여 저작권 우려 없음. 문제-해결 구조 파악과 세부 정보 연결이 필요하여 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "too_easy",
+     "eliminated:3"
+    ],
+    "note": "오답 A, B, C는 모두 지문과 명백히 모순된다(A: 붉은 빛·'reliably', B: 요오드화물이 전압을 높인다는 반대 진술, C: 세슘의 역할 왜곡). 부분적으로 맞는 근거를 가진 오답이 없고 D만 지문 전체 구조를 담고 있어 훑어 읽어도 맞힐 수 있다. 문제·해결 중 한 쪽만 담은 오답(예: 분리 문제만 서술)이 있어야 medium에 맞는다.",
+    "issue": "A 해설에서 '브롬화물이 전압을 높인다는 앞부분 내용'이라고 했으나 지문 앞부분은 밴드갭을 넓힌다고만 말하고 전압 상승은 직접 언급하지 않는다(암시만 됨). 경미한 부정확."
+   },
+   "cost": 0.08160700000000001
+  },
+  {
+   "cid": "sv-central_ideas_details-m-100",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답 A는 지문의 결론(진공에서도 유로퓸 결정이 자체 이온 스펙트럼으로 발광 → 내부 원자 여기)을 정확히 요약함. B는 수크로스 결과에만 근거해 '모든 결정'으로 과잉 일반화, C는 결과 반전, D는 연구 난점의 원인 오귀속으로 모두 배제 가능. 한국어·영어 해설 모두 선택지 글자 참조 일치, 결론 동일, 영어 자연스럽고 한글 없음. 인물·실험은 허구적 설정이나 과학적 서술 자체는 모순 없음. 난이도는 수크로스 결과와 유로퓸 결과 두 정보를 연결해야 B를 배제할 수 있어 medium에 부합하되, C·D가 다소 약해 쉬운 쪽에 가까움.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "오답이 모두 지문의 세부 내용(기존 방전 가설, 수크로스 결과, 분광기·연구 난점)을 끌어와 부분적 근거를 갖는다. 선택지 앞부분을 똑같이 맞춰 결론 부분만 비교하게 만든 설계라 medium에 적합하다. 다만 C와 D는 비교적 쉽게 배제된다.",
+    "issue": ""
+   },
+   "cost": 0.079124
+  },
+  {
+   "cid": "sv-central_ideas_details-m-101",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 B는 지문 마지막 문장의 결론(열린 공간 최대화보다 목표 분자에 맞춘 기공 크기·화학이 중요)을 정확히 재진술한다. A는 '다른 어떤 물질보다 많이 저장'이라는 근거 없는 과장이자 분리 성능 저하라는 핵심과 어긋나고, C는 총 저장량이 '줄었다'는 지문과 반대이며, D는 일부 넓은 기공 MOF의 결과를 전체로 일반화해 좁은 기공 MOF의 성공과 모순된다. 한국어·영어 해설 모두 같은 결론과 글자 참조를 가지며 영어는 자연스럽고 한글이 없다. Omar Farha는 실제 MOF 연구자이나 지문은 독창적으로 구성된 것으로 보이며, 1g당 축구장 넓이의 표면적 등 사실 관계도 일반적으로 통용되는 수준이다. 기존 가정 vs 새 발견을 연결해야 하고, A·C가 부분적으로 맞는 세부를 담고 있어 비교가 필요하므로 medium에 적합하다.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "C는 절반만 맞는 강한 오답이다. A와 D는 지문 세부 내용을 왜곡했지만 그럴듯하게 읽힌다. 중간 난이도에 적합하다. 다만 Omar Farha라는 실명을 연구 서술에 넣은 점은 확인이 필요하다(허구일 수 있음).",
+    "issue": ""
+   },
+   "cost": 0.08023000000000001
+  },
+  {
+   "cid": "sv-text_structure_purpose-m-102",
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "밑줄 문장은 열에 의한 재접힘(역과정)을 설명하고, 바로 다음 문장이 \"This reversal is why...\"로 이를 착용자가 관찰하는 현상(추운 날 더 느리게 맑아짐)의 근거로 사용하므로 C가 정확하다. A는 앞 문장(자외선에 의한 펼침)의 내용, B는 'Yet'을 오독한 예외 해석, D는 지문에 없는 논쟁을 상정한 오답으로 모두 배제 가능. 스피로옥사진의 UV 개환·열적 복귀 및 저온에서 퇴색이 느려지는 현상은 과학적으로 타당하다. 한·영 해설 결론 및 선택지 참조 일치, 영어 자연스럽고 한글 없음. 두 단계 판단(밑줄 내용 파악 + 다음 문장과의 연결)이 요구되어 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 C는 밑줄 문장이 설명하는 과정과 그다음 문장이 설명하는 착용자 관찰 현상을 연결해야 고를 수 있어 두 단계 판단이 필요하다. 오답 A는 앞 문장 내용, B는 'Yet'을 잘못 읽은 경우, D는 열과 빛이 함께 언급된 점에 기댄 경우로, 모두 그럴듯한 함정이다. 스피로옥사진의 광변색 원리와 온도 의존성에 대한 설명도 과학적으로 맞다.",
+    "issue": ""
+   },
+   "cost": 0.07348719999999999
+  },
+  {
+   "cid": "sv-text_structure_purpose-m-103",
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "밑줄 문장은 'Yet'으로 앞 문장의 '너무 약할 것'이라는 예상을 반박하고, 다음 문장이 그 복원력의 원인을 설명하므로 D가 정답임을 직접 확인함. A(제조 단계)는 2번째 문장, C(밀도 수치)는 1번째 문장의 내용이고 'lighter than any other known solid'는 'among the lightest'를 과장함; B는 '관찰'은 맞지만 '실험 결함' 귀속은 지문에 없음. 오답 모두 지문 내 요소를 일부 차용해 비교가 필요하므로 medium에 적합. 과학 사실(0.16 mg/cm³급 밀도, 동결건조 제조, 압축 복원)도 실제 보고와 부합. 한·영 해설 결론·글자 참조 일치, 영어 해설 자연스럽고 한글 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "'Yet'이 정답 방향을 강하게 알려 주어 쉬운 편이다. 다만 A와 C는 지문의 다른 문장 내용(제조 과정, 밀도)을 끌어와 훑어 읽는 수험생을 유인하므로 medium 하한선에는 든다. 밀도 0.16 mg/cm³ 수준 기록은 실제 사실과 맞는다.",
+    "issue": ""
+   },
+   "cost": 0.0736952
+  },
+  {
+   "cid": "sv-text_structure_purpose-m-104",
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "밑줄 문장은 'One might therefore expect'로 제시된 예상이며, 바로 뒤 'Yet' 문장이 좁은 기공을 선호하는 이유(부피 큰 분자 배제, 코크 생성 억제, 수명 연장)를 들어 이를 반박·보완하므로 A가 정답임을 직접 확인함. B·C는 본문 후반에 등장하는 세부(코크, 촉매 수명)를 차용해 부분적 그럴듯함을 갖고 있어 비교 배제가 필요하고, D도 문장 성격(정의 아님)과 글의 초점(촉매 선택)으로 배제 가능해 medium에 적합. 한국어·영어 해설 모두 결론과 선택지 참조가 일치하며 영어 해설에 한글 없음. 제올라이트가 1nm 미만 미세기공을 가진 결정성 알루미노규산염이라는 서술 및 형상 선택성 설명은 과학적으로 타당하며, 지문은 창작 설명문으로 저작권 의심 없음. 다만 'One might expect… Yet' 신호어가 매우 뚜렷해 medium 중에서는 다소 쉬운 편.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "'One might expect… Yet' 구조라서 정답을 찾을 수 있음. B와 C는 뒤 문장에 나오는 코크·촉매 수명을 끌어와 부분 근거를 갖춘 오답이고, D는 상대적으로 약함. medium 난이도에 적합함.",
+    "issue": ""
+   },
+   "cost": 0.0789762
+  },
+  {
+   "cid": "sv-words_in_context-m-105",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "콜론 뒤 '소량의 크기 차이만으로 배열이 무너진다'는 설명이 '작은 변화에 쉽게 영향받음(sensitive)'을 명확히 뒷받침한다. A(spontaneous)는 첫 문장의 'without any external guidance'와 호응해 훑어 읽으면 고르기 쉬운 강력한 오답이며, C·D도 문맥상 그럴듯해 비교가 필요하다. 콜로이드 결정의 자기조립과 다분산성에 의한 결함, 광결정 밴드갭 색상 등 과학적 내용도 타당하다. 한·영 해설 모두 결론·글자 참조 일치, 영어 자연스럽고 한글 없음. 중간 난이도에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "콜론 뒤 내용이 '작은 변동에도 무너짐'을 설명하므로 sensitive가 유일한 정답이다. spontaneous는 첫 문장과 맞아 보이는 강한 오답이고, efficient와 reversible도 그럴듯해서 medium 난이도에 맞다. 콜로이드 결정과 광자 밴드갭 관련 과학 내용도 정확하다.",
+    "issue": ""
+   },
+   "cost": 0.06510940000000001
+  },
+  {
+   "cid": "sv-words_in_context-m-106",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "\"rarely begin at random points. Instead, they tend to ______ ... and only later spread\" → '시작되다'가 유일하게 논리적. C(originate) 정답 확인. A(propagate)는 균열 관련 빈출어로 강한 매력 오답이며 \"only later spread\"와 충돌해 배제됨; D(accumulate)는 \"strain builds up\"과 연결되는 부분 근거가 있음; B(terminate)는 반대 의미로 그럴듯한 오답. 두 단계 판단(대비 구조 + 시간 순서) 필요하여 medium 적합. 해설 한·영 결론·글자 참조 일치, 영어 자연스럽고 한글 없음. 과학적 내용(SAC 솔더, 열피로, 결정립 경계 균열 개시) 사실관계 문제 없음. 가상의 연구자 인용으로 저작권 우려 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "'rarely begin'과 'only later spread'의 대비로 정답이 originate로 분명히 정해진다. propagate는 균열과 자주 쓰이는 단어이고 accumulate는 strain이 쌓인다는 내용과 겹쳐서 둘 다 그럴듯한 오답이 된다. 중간 난이도에 맞다. 다만 지문에 나오는 Priya Raman이 실존 연구자인지는 확인하지 못했다. 가상 인물이라면 문제 될 것은 없다.",
+    "issue": ""
+   },
+   "cost": 0.0591674
+  },
+  {
+   "cid": "sv-words_in_context-m-107",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "\"not simply switched on or off but can be ______ to any level between those extremes\" clearly requires a word meaning 'adjusted/set precisely'; D 'calibrated' fits ('tuned'/'adjusted' would be slightly more idiomatic but 'calibrated to any level' is acceptable). A (reversed) and B (maximized) each have partial textual support (field removal restores flow; near-solid stiffening) but are ruled out by the 'any level' contrast; C is weak but coherent. Two-step reasoning (contrast structure + 'continuously') matches medium. MR fluid description is scientifically accurate. Korean and English explanations agree in conclusion and letter references; English is natural with no Hangul.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "too_easy",
+     "eliminated:2"
+    ],
+    "note": "'to any level between those extremes'라는 단서가 너무 직접적이고, 'continuously' 같은 단서도 겹쳐 있음. 오답 중 C(concealed)는 처음부터 말이 안 되고, B(maximized)는 'any level'과 정면으로 충돌하며, A(reversed)만 조금 그럴듯함. 비교해야만 배제되는 오답이 2개 이상이어야 한다는 기준을 충족하지 못함.",
+    "issue": ""
+   },
+   "cost": 0.0625204
+  },
+  {
+   "cid": "sv-words_in_context-m-108",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "\"complicated that view\" + \"later stage rather than its origin\" 두 단서를 연결해야 'qualified'를 고를 수 있고, 'overturned'은 훑어 읽으면 고르기 쉬운 매력적 오답, 'confirmed'도 부분적 근거(가정이 후기 단계에는 맞음)가 있어 medium 기준에 부합. 해설 양쪽 결론·글자 참조 일치, 영어 자연스럽고 한글 없음. 과학적 내용(복합재 층간 박리가 섬유-수지 계면에서 시작)도 타당. 지문은 창작물로 저작권 의심 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "C(overturned)는 그럴듯한 오답이고, 'later stage rather than origin'이라는 단서로 배제된다. 지문은 기존 가정이 처음에는 수지 내부의 균열을 말했다는 점과 그 가정이 후기 단계를 설명했다는 점을 약간 느슨하게 연결하지만, 정답을 정하는 데는 문제가 없다.",
+    "issue": ""
+   },
+   "cost": 0.059000399999999995
+  },
+  {
+   "cid": "sv-words_in_context-m-109",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "too_easy",
+     "eliminated:2"
+    ],
+    "note": "정답 B(governs)는 \"arrangement ... rather than quantity alone ______ how well the material conducts heat\"라는 문장 구조와 '같은 양의 필러로 몇 배 향상'이라는 실험 결과에 정확히 부합하며 검산상 옳다. 한국어·영어 해설은 동일한 결론과 글자 참조(A/B/C/D)를 가지며 모순 없고, 영어 해설에 한글 없음. 지문은 창작 서술로 보이며 저작권 의심 없음. 자기장으로 코팅된 BN 플레이크를 정렬해 열전도도를 높이는 연구는 실제로 존재하므로 사실 오류 없음. 다만 난이도 측면에서 오답 중 C(reflects)만 인과 방향 혼동이라는 부분적 근거를 가지며, A(obscures)는 부정적 의미, D(postpones)는 시간 개념으로 문맥과 무관해 훑어 읽어도 바로 배제된다. \"오답 3개 중 최소 2개는 부분적으로 맞는 근거\"라는 medium 기준에 미달하여 too_easy로 판정.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답은 governs가 명확하다. reflects는 인과 방향을 따져야 배제되는 그럴듯한 오답이다. obscures와 postpones는 비교적 쉽게 배제되지만, 'rather than their quantity alone' 구문과 동일 충전량 조건을 연결하는 두 단계 판단이 필요하므로 medium 범위로 본다.",
+    "issue": ""
+   },
+   "cost": 0.0734024
+  },
+  {
+   "cid": "sv-boundaries-m-110",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "C(콜론)는 문법적으로 옳지만 유일한 정답이 아니다. B \"scratched through, and because zinc is more chemically reactive than iron, it corrodes preferentially...\"는 쉼표+등위접속사로 두 독립절을 잇는 완전히 적법한 구조이며, 설명적 관계라도 'and'로 연결하는 것이 Standard English 규범에 위배되지 않는다. 디지털 SAT boundaries 문항은 오답이 모두 문법적으로 불가해야 하므로, B와 C가 모두 성립하는 현 문항은 정답 유일성 결함이 있다. A(comma splice), D(run-on/모호한 because 귀속)는 적절히 오답. 아연 희생 양극 원리 등 과학적 내용은 사실과 부합. 난이도 자체(종속절+주절 구조를 인식해 독립절임을 판단)는 medium에 맞으나 정답 유일성 문제로 수정 필요.",
+    "issue": "해설은 B를 '문법적으로 가능하지만 논리 관계를 흐린다'는 이유로 배제하는데, 이는 Standard English conventions(경계) 판단 기준이 아니라 수사적 판단이다. boundaries 문항에서는 오답이 문법적으로 틀려야 하므로 B 배제 근거가 부적절하다."
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답이 하나로 정해지지 않는다. C(콜론)도 옳지만 B 'through, and because zinc..., it corrodes...'도 쉼표+등위접속사로 두 독립절을 이은 문법적으로 옳은 문장이다. SAT 관례 문항은 문법적으로 가능한 선택지가 하나뿐이어야 한다. B를 '쉼표 없는 and'나 'through, because' 같은 진짜 비문 선택지로 바꿔야 한다. 그 밖의 과학 내용(아연의 희생 양극 작용)은 정확하다.",
+    "issue": "해설은 B를 문법이 아니라 논리('and가 논리 관계를 흐린다')를 이유로 배제한다. 그러나 이 문항은 Standard English 관례를 묻는 문제이므로 수사적 판단으로 오답을 가를 수 없다. 쉼표+등위접속사 and로 두 독립절을 잇는 것은 문법적으로 옳기 때문에, 해설이 B를 배제한 근거는 성립하지 않는다.한국어 해설과 같은 결함이 있다. B를 문법이 아니라 논리('muddies the logic')로 배제하는데, 관례(conventions) 문항에서는 타당한 배제 근거가 아니다. 영어 문장 자체는 자연스럽다."
+   },
+   "cost": 0.0944338
+  },
+  {
+   "cid": "sv-boundaries-m-111",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞은 독립절+긴 동격구, 뒤는 \"by applying it, engineers can stitch...\"라는 독립절이므로 세미콜론(D)이 유일하게 적법. A는 comma splice, B는 run-on, C는 which가 절 내에서 문법적 역할이 없어 비문. 해설(한/영) 모두 정답과 선택지 참조가 일치하고 모순 없음. WLF 방정식(1955, Williams–Landel–Ferry, 시간-온도 중첩) 사실관계도 정확. 긴 동격구로 독립절 경계를 가리고 C가 그럴듯한 오답 역할을 하므로 medium 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "WLF 방정식의 연도(1955)와 저자(Williams, Landel, Ferry), 시간-온도 중첩으로 마스터 곡선을 만든다는 설명은 사실과 맞는다. 긴 동격어구 때문에 앞 절의 경계가 잘 드러나지 않고, \"by applying it\" 같은 도입 구가 있어 쉼표 오용 함정이 효과적이다. medium 난이도로 적절하다.",
+    "issue": "C 해설은 대체로 맞다. 다만 \"which, by applying it, engineers can...\"에서 which가 절의 어떤 성분도 될 수 없다는 점을 더 분명히 짚어 주면 좋겠다. 지금 설명으로도 결론은 성립한다."
+   },
+   "cost": 0.0695178
+  },
+  {
+   "cid": "sv-rhetorical_synthesis-m-112",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "A는 메모 2·4를 결합해 '이유'를 설명하는 유일한 선택지로 정답이 확실하다. B·C는 메모의 사실을 정확히 사용하지만 목표(원리 설명)에 맞지 않아 비교가 필요하고, D는 인과를 뒤집어 말이 되긴 하나 가장 약함. 해설 두 언어 모두 결론·글자 참조 일치, 영어 해설에 한글 없음. 사실 오류·저작권 의심 없음. 두 메모 연결+목표 확인이라는 2단계 판단이 요구되어 medium에 적합하나, 정답이 다소 두드러지는 편(easy 경계).",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답 A가 두 메모(전하 변화와 이동도 원리)를 연결해야 하므로 두 단계 판단이 필요하다. B와 C는 그럴듯한 부분 근거를 가진 오답이고, D는 인과 관계가 뒤바뀌었다. 오답 D가 다소 약하지만 전체적으로 medium 난이도에 적합하다.",
+    "issue": ""
+   },
+   "cost": 0.068797
+  },
+  {
+   "cid": "sv-rhetorical_synthesis-m-113",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "B는 장점(저렴·내부식)과 단점(자외선만 흡수→전환율 낮음)을 모두 제시하는 유일한 선택지. A·D는 장점/일반 사실만, C는 단점만 담아 목표의 절반만 충족. 1972 Fujishima–Honda 실험, 자외선 약 4% 비중 등 사실 관계 문제 없음. 한·영 해설 모두 정답 및 글자 참조 일치, 자연스러운 영어, 한글 혼입 없음. 두 요소 결합 판단이 필요하고 오답들이 각각 부분적 근거를 지녀 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "A·D는 장점만, C는 단점만 담고 있어 각각 부분적으로만 맞으므로 비교해야 배제할 수 있음. 정답은 B 하나로 명확하고, 사실관계(Fujishima-Honda 1972, 자외선 약 4%)도 정확함. 표준 medium 수준.",
+    "issue": ""
+   },
+   "cost": 0.066082
+  },
+  {
+   "cid": "sv-central_ideas_details-m-114",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 C는 지문의 핵심 발견(전기장 형태 조절→휘핑 단계 연장→섬유 굵기 감소)을 정확히 요약. A(도입부 세부), B(점도 '영향 없음' 과장), D(전압 크기 vs 전기장 형태 혼동)는 각각 부분적 근거가 있어 비교 배제 필요. 해설 한/영 모두 일관되고 정확하며 영어 해설에 한글 없음. 전기방사 원리 설명(테일러 콘, 휘핑 불안정)도 사실과 부합. 연구자는 가상 인물로 저작권 문제 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "C가 지문 핵심(전기장 형태 조절→휘핑 단계 연장→섬유 굵기 절반 이하)을 정확히 담고 있음. D는 '전압 크기'와 '전기장 형태'를 구분해야 걸러지는 그럴듯한 오답이고, A는 지문 내용 중 일부만 담은 오답, B는 지문 내용을 과장한 오답임. medium 난이도에 맞음.",
+    "issue": ""
+   },
+   "cost": 0.068294
+  },
+  {
+   "cid": "sv-central_ideas_details-m-115",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "D는 지문의 마지막 결론(크기가 거의 같은 기체에서는 이온 교환이 공극 기하보다 중요)을 정확히 재진술한다. A(질소가 너무 커서 통과 못함)·B(공극이 넓어짐)는 지문과 직접 모순, C는 제올라이트 자체를 부정하는 과장. 해설(한/영) 모두 D를 일관되게 뒷받침하며 글자 참조 정확, 영어 해설에 한글 없음. 과학적 내용(Li 교환 제올라이트 X의 N2 선택성 상승, N2의 사극자 모멘트)은 실제 지식과 부합하며 연구자명은 가상으로 보여 저작권 문제 없음. 기존 가정 대 새 발견의 대조를 파악해야 하고 A·B가 지문 세부를 부분적으로 차용해 비교가 필요하므로 medium에 적합. 다만 D가 마지막 문장의 거의 직접적 패러프레이즈라 medium 하단 수준.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "D는 지문 마지막 결론 문장을 정확히 바꿔 말한 것이다. 오답 B(리튬 교환이라는 세부는 맞지만 공극이 넓어진다는 인과는 틀림)와 C(공극 크기의 한계를 과장)는 부분적으로 맞는 근거가 있어 비교해야 배제된다. A는 기존 가정을 재진술한 것이라 그럴듯하다. 리튬 교환 제올라이트 X(LiX)의 질소 선택성과, 이를 질소의 전하 불균일(사중극자)로 설명한 내용은 사실과 맞다. 오답이 직접 반박되는 편이라 medium 하단에 가깝지만 목표 난이도에 맞는 것으로 판정한다.",
+    "issue": ""
+   },
+   "cost": 0.08299699999999999
+  },
+  {
+   "cid": "sv-text_structure_purpose-m-116",
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 A 검산 일치: 밑줄 문장은 \"Yet\"으로 전환해 전기전도-열전도 결합이라는 물리적 장애를 제시하고, 이어지는 \"For this reason\" 문장(10% 미만 효율)과 마지막 문장의 \"loosen this trade-off\"(연구 동기)로 직접 연결됨. B는 첫 문장 역할, D는 마지막 문장 역할로 위치 혼동 오답이며, C는 '제약'을 '부적합 단정'으로 과장한 오답으로 비교가 필요함. 과학 내용(Seebeck 효과, Wiedemann-Franz 유사 trade-off, 나노 결정립계 포논 산란, 상용 모듈 효율 <10%)은 사실과 부합. 한·영 해설 모두 결론·글자 참조 일치, 영어 자연스럽고 한글 없음. 원문 독창적 서술로 저작권 의심 없음. 두 단계 판단(장애 식별 + 뒤 문장과의 인과 연결) 요구로 medium 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "To pick A, the reader has to link the underlined sentence both to the efficiency limit that follows it and to the research at the end, which is two steps of reasoning. B and D each restate a different sentence (the first and the last), so a reader who checks where things are in the text can rule them out. Still, both use the same vocabulary as the passage, so a reader who skims could fall for them. C is the most tempting wrong answer: the underlined sentence does describe a limit on these uses, and C stretches that into \"unsuitable.\" Overall the item sits at the low end of medium.",
+    "issue": ""
+   },
+   "cost": 0.06830119999999999
+  },
+  {
+   "cid": "sv-text_structure_purpose-m-117",
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "밑줄 문장은 전극 기반 제어의 결과(재프로그래밍 가능)를 제시하고, 다음 문장이 'this flexibility'로 받아 단일 세포 분석을 설명하므로 B가 정확. A는 직전 문장의 메커니즘, C는 첫 문장의 채널 칩 한계, D는 지문에 없는 정확도 비교로 각각 배제됨. 한국어·영어 해설 모두 동일 결론과 글자 참조를 가지며 영어는 자연스럽고 한글 없음. Wheeler의 디지털 미세유체 연구 및 전기습윤 설명은 사실에 부합. 앞뒤 문장 연결(두 단계 판단)이 필요하고 오답 A·C가 인접 문장 내용을 차용한 부분적 근거를 가져 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "B만 정답으로 성립함. A는 앞 문장과 혼동하도록 만든 오답이고, C는 밑줄 문장이 채널 칩을 대비로 언급한다는 점을 이용한 부분 근거형 오답임. D는 정확도 비교라는 지문 밖 주장이라 배제됨. 중간 난이도에 맞음.",
+    "issue": ""
+   },
+   "cost": 0.0736272
+  }
+ ]
+}

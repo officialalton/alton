@@ -21,7 +21,8 @@ for (let i = 0; i < ids.length; i += 200) {
   rows.push(...JSON.parse(r.stdout.slice(r.stdout.indexOf("{"), r.stdout.lastIndexOf("}") + 1)).rows[0].j);
 }
 const byRule: Record<string, number> = {}; const exclude: string[] = [];
-for (const row of rows) { const hit = planSatErrorReportFix(row); if (!hit) continue; byRule[hit.rule] = (byRule[hit.rule] ?? 0) + 1; exclude.push(row.problem_id!); }
+const piMixed = (r: SatRow) => /in terms of (π|pi)/i.test(`${r.passage ?? ""} ${r.question ?? ""}`) && !!r.options && r.options.some((o) => /π/.test(o)) && r.options.some((o) => !/π/.test(o));
+for (const row of rows) { if (piMixed(row)) { byRule["pi-mixed"] = (byRule["pi-mixed"] ?? 0) + 1; exclude.push(row.problem_id!); continue; } const hit = planSatErrorReportFix(row); if (!hit) continue; byRule[hit.rule] = (byRule[hit.rule] ?? 0) + 1; exclude.push(row.problem_id!); }
 void MATH;
 writeFileSync(path.resolve(arg("--out")!), JSON.stringify(exclude));
 console.log(JSON.stringify({ scanned: rows.length, excluded: exclude.length, byRule }));
