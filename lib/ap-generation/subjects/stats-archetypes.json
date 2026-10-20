@@ -1533,5 +1533,635 @@
    "Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (decrease and increase).",
    "Does not match the recalculated values: without the last observation the correlation would increase in strength and the slope would increase in size, not the combination in this statement (decrease and decrease)."
   ]
+ },
+ {
+  "id": "st_n_operational_variables",
+  "topic": "1.2",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each context pairs one measurable definition of both variables with a vague definition, a single variable and unrelated variables, written and checked by hand"
+  ],
+  "misconceptions": [
+   "Both variables are based on impressions and are not defined well enough to be measured the same way for every employee.",
+   "The question asks about a relationship between two variables, and these data contain only one of them, so the question cannot be answered.",
+   "These variables are not the ones named in the question, so they cannot be used to answer it."
+  ]
+ },
+ {
+  "id": "st_n_graph_answers_question",
+  "topic": "1.5",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "each context pairs one question about the displayed variable with a two-group question, a single-individual question and a judgment question"
+  ],
+  "misconceptions": [
+   "Answering it needs a second variable that defines two groups, and the boxplot displays only one group.",
+   "Asks about one individual rather than about the population, so no variability is studied.",
+   "Asks for a judgment and needs data from another year, which the boxplot does not provide."
+  ]
+ },
+ {
+  "id": "st_n_followup_question",
+  "topic": "1.10",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each context pairs one two-variable population question with an individual question, a lookup question and a judgment question"
+  ],
+  "misconceptions": [
+   "Asks about one individual, so there is no population and no variability to study.",
+   "Asks for a single count that can be looked up, so no variability among individuals is anticipated.",
+   "Asks for a judgment about what should be done, which data cannot settle."
+  ]
+ },
+ {
+  "id": "st_n_bar_axis",
+  "topic": "1.4",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the percent difference is recomputed from the labeled values and the visual height ratio is checked to exceed 2 while the actual difference stays below 6 percent"
+  ],
+  "misconceptions": [
+   "Compares the heights of bars that do not start at zero; the ratio of the values is much closer to $1$ than the ratio of the bar heights.",
+   "A bar graph represents values by length, so starting the axis above zero distorts the sizes that readers compare.",
+   "Touching bars belong to a histogram of a quantitative variable; the spacing of bars in a bar graph is not the problem here."
+  ]
+ },
+ {
+  "id": "st_n_five_number_list",
+  "topic": "1.7",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the quartiles are recomputed as medians of the lower and upper halves that exclude the median of the eleven sorted values"
+  ],
+  "misconceptions": [
+   "Includes the median in both halves when finding the quartiles, which shifts them; the halves are the values below and above the median.",
+   "Reports the range, the maximum minus the minimum, instead of the interquartile range.",
+   "Reports the mean as the median."
+  ]
+ },
+ {
+  "id": "st_n_outlier_removal",
+  "topic": "1.7",
+  "skill": "4.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the four statistics are recomputed with and without the largest value and the case is kept only if the mean and the standard deviation change by far more than the median and the interquartile range"
+  ],
+  "misconceptions": [
+   "Reverses the roles: the extreme value pulls the mean strongly while the median is resistant.",
+   "The mean and the standard deviation are sensitive to an extreme value, but the median and the interquartile range are resistant.",
+   "Reverses the roles: the standard deviation uses every value and is inflated by the extreme value, while the interquartile range ignores it."
+  ]
+ },
+ {
+  "id": "st_n_boxplot_percent",
+  "topic": "1.8",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "each statement is checked against the rule that each part between consecutive five-number-summary values holds about a quarter of the observations"
+  ],
+  "misconceptions": [
+   "The values between the first and the third quartile are about half of the observations, not three quarters.",
+   "The box holds about half of the observations, so about half, not three quarters, lie outside the box.",
+   "The minimum is the smallest observation, so no observation is less than it; about $25\\%$ are less than the first quartile."
+  ]
+ },
+ {
+  "id": "st_n_random_digits",
+  "topic": "1.11",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each option differs from the key by one named defect: short labels with repeats, subtracting instead of skipping, or a systematic selection"
+  ],
+  "misconceptions": [
+   "Reading 1 digits at a time cannot produce every label, and accepting repeats does not give $10$ different individuals.",
+   "Subtracting makes some labels more likely than others, so not every individual has the same chance.",
+   "This is a systematic sample; not every group of individuals has the same chance of being chosen, so it is not a simple random sample."
+  ]
+ },
+ {
+  "id": "st_n_nonresponse_fix",
+  "topic": "1.12",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each context pairs the follow-up action with three actions that leave or add bias, written and checked by hand"
+  ],
+  "misconceptions": [
+   "A new sample with the same low response rate has the same nonresponse bias, only with more responses.",
+   "Volunteers differ from the selected individuals in ways that can bias the results, so replacing nonrespondents with volunteers adds bias.",
+   "Weighting the respondents more heavily increases the effect of the individuals who responded and does nothing to include the nonrespondents."
+  ]
+ },
+ {
+  "id": "st_n_blinding_purpose",
+  "topic": "1.13",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each context pairs the purpose of blinding with three purposes that belong to other design features"
+  ],
+  "misconceptions": [
+   "The sizes of the groups are set by the assignment of the treatments, not by who knows which treatment was given.",
+   "Representing a population depends on how the individuals were selected, not on who knows the treatments.",
+   "Random assignment is a separate feature of the design carried out with chance; blinding does not assign the treatments."
+  ]
+ },
+ {
+  "id": "st_n_at_least_one",
+  "topic": "2.7",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the probability is recomputed by summing the binomial terms for one or more successes"
+  ],
+  "misconceptions": [
+   "Finds the probability that all of the events happen instead of at least one.",
+   "Adds the probabilities of the separate events, which counts outcomes with several events more than once.",
+   "Finds the probability that not all events happen, which is not the same as at least one event happening."
+  ]
+ },
+ {
+  "id": "st_n_binom_mean_sd",
+  "topic": "2.10",
+  "skill": "3.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the mean and standard deviation are recomputed by summing x and (x - mean) squared times the exact binomial probabilities"
+  ],
+  "misconceptions": [
+   "Reports the variance $np(1-p)$ as the standard deviation; the standard deviation is its square root.",
+   "Uses $\\sqrt{np}$ for the standard deviation and leaves out the factor $1-p$.",
+   "Uses $n(1-p)$, the mean number of failures, as the mean."
+  ]
+ },
+ {
+  "id": "st_n_empirical_rule",
+  "topic": "2.11",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the percent from the empirical rule is compared with the exact normal probability computed with math.erf, and the two differ by less than 1 percentage point"
+  ],
+  "misconceptions": [
+   "Gives the percent within one standard deviation of the mean.",
+   "Gives the percent within two standard deviations of the mean.",
+   "Gives the percent between the mean and two standard deviations on one side only."
+  ]
+ },
+ {
+  "id": "st_n_valid_distribution",
+  "topic": "2.8",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each distribution is generated from integer weights; the three invalid lists break exactly one property and the sums are recomputed"
+  ],
+  "misconceptions": [
+   "The probabilities add up to $1.10$, which is more than $1$.",
+   "The probabilities add up to $0.90$, which is less than $1$.",
+   "One of the values is negative, and a probability cannot be negative even though the values add up to $1$."
+  ]
+ },
+ {
+  "id": "st_n_sampling_dist_dots",
+  "topic": "2.12",
+  "skill": "4.C",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the sample means are simulated with numpy and their spread is checked against the population standard deviation divided by the square root of the sample size"
+  ],
+  "misconceptions": [
+   "Each dot summarizes a whole sample, not one individual, so the display shows the variation of sample means.",
+   "The means of samples vary less than individual values; the standard deviation of the sample means is smaller than the population standard deviation.",
+   "The horizontal axis shows sample means, not sample standard deviations, and the dots are the means of the samples."
+  ]
+ },
+ {
+  "id": "st_n_cond_interpret",
+  "topic": "2.6",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each context pairs the conditional reading with a joint reading, a reversed reading and an unconditional reading, written and checked by hand"
+  ],
+  "misconceptions": [
+   "Describes a joint probability, whose denominator is all of the cases, not only those that satisfy the condition.",
+   "Reverses the conditional probability: the statement gives the proportion with B among those with A instead of the proportion with A among those with B.",
+   "Describes the probability of A with no condition; the condition B restricts the group to which the percent applies."
+  ]
+ },
+ {
+  "id": "st_n_phat_dist_change",
+  "topic": "3.2",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the two standard deviations are recomputed from the square root of p(1-p)/n for both sample sizes and their ratio equals the square root of the sample size factor"
+  ],
+  "misconceptions": [
+   "Multiplies the standard deviation by $3$, but a larger sample makes the sample proportions less variable.",
+   "Leaves the standard deviation unchanged, but the standard deviation of the sample proportion depends on the sample size.",
+   "The mean of the sampling distribution of the sample proportion is the population proportion and does not change with the sample size."
+  ]
+ },
+ {
+  "id": "st_n_method_from_counts",
+  "topic": "3.14",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "each context fits exactly one of the four procedures by its design and table shape and the other three each fail the design"
+  ],
+  "misconceptions": [
+   "No single claimed proportion is tested; the three groups are compared with each other.",
+   "There are three groups, so the comparison is among three proportions; a two-proportion procedure applies only to two groups.",
+   "The samples were taken separately from each location, rather than one sample being classified on two variables."
+  ]
+ },
+ {
+  "id": "st_n_diff_parameter",
+  "topic": "3.9",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each option names a different quantity; only the difference of the two population proportions is the parameter estimated by the difference of the sample proportions"
+  ],
+  "misconceptions": [
+   "This is the value of the statistic computed from the samples, not the parameter that it estimates.",
+   "Combining the two populations estimates a single overall proportion, not the difference between the two proportions.",
+   "The sizes of the samples are features of the study and are not a population parameter."
+  ]
+ },
+ {
+  "id": "st_n_alpha_relation",
+  "topic": "3.8",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the P-value is generated strictly between the two significance levels so exactly one of the four decision pairs is correct"
+  ],
+  "misconceptions": [
+   "The P-value $0.015$ is greater than $0.01$, so the null hypothesis is not rejected at that significance level.",
+   "The P-value $0.015$ is less than $0.1$, so the null hypothesis is rejected at that significance level.",
+   "A smaller significance level makes rejection harder, so a result rejected at the smaller level would also be rejected at the larger level."
+  ]
+ },
+ {
+  "id": "st_n_ci_sample_size",
+  "topic": "3.3",
+  "skill": "3.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the sample size is recomputed from the critical value by bisection and from scipy and rounded up; the three wrong values are the named slips"
+  ],
+  "misconceptions": [
+   "Rounds the calculated sample size down, which gives a margin of error slightly larger than the stated value; the sample size must be rounded up.",
+   "Leaves out the square on the margin of error in the denominator.",
+   "Divides by the margin of error without squaring the margin of error and without squaring the critical value."
+  ]
+ },
+ {
+  "id": "st_n_chisq_stat",
+  "topic": "3.15",
+  "skill": "3.E",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the statistic is recomputed with scipy's chi-square contingency routine without continuity correction"
+  ],
+  "misconceptions": [
+   "Adds the squared differences without dividing each by its expected count.",
+   "Divides each squared difference by the observed count instead of the expected count.",
+   "Takes the square root of the chi-square statistic, which is not the statistic that is compared with the chi-square distribution."
+  ]
+ },
+ {
+  "id": "st_n_two_prop_ci",
+  "topic": "3.10",
+  "skill": "3.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the interval is recomputed with a critical value from bisection and compared with scipy's inverse normal function and with the unpooled standard error"
+  ],
+  "misconceptions": [
+   "Uses the pooled proportion in the standard error, which is for a test of equal proportions; an interval uses the two separate sample proportions.",
+   "Uses the critical value for $90\\%$ confidence, about $1.645$, instead of about $1.960$.",
+   "Centers the interval at the sum of the sample proportions instead of at their difference."
+  ]
+ },
+ {
+  "id": "st_n_ci_claim_threshold",
+  "topic": "3.4",
+  "skill": "4.G",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the interval is recomputed from the sample proportion and the sample size and the cases keep the threshold at least 0.005 outside or inside the interval"
+  ],
+  "misconceptions": [
+   "Judges the claim from the sample proportion alone; the interval shows how far the population proportion can be from the sample proportion.",
+   "A confidence interval is used to judge whether a value is plausible, so it can provide evidence for a claim.",
+   "Misreads the confidence level or the margin of error; the claim is judged by comparing the interval with the threshold."
+  ]
+ },
+ {
+  "id": "st_n_diff_ci_interpret",
+  "topic": "3.10",
+  "skill": "4.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each option differs from the key by one named defect: a single proportion, a statement about the samples, or a reversed direction"
+  ],
+  "misconceptions": [
+   "Interprets the interval as a range for a single proportion, but the interval is for the difference between two proportions.",
+   "The difference in the sample proportions is known from the samples; the interval is about the difference in the population proportions.",
+   "Reverses the direction of the difference: a positive interval for first minus second means that the first proportion is higher."
+  ]
+ },
+ {
+  "id": "st_n_clt_conditions_choice",
+  "topic": "4.1",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each family lists exactly one description that satisfies the sample size or normal population requirement and three small samples from non-normal populations"
+  ],
+  "misconceptions": [
+   "The sample is small and the population is strongly skewed, so the Central Limit Theorem does not make the sampling distribution approximately normal.",
+   "The sample is small and the population is far from normal, so the sampling distribution of the sample mean is not approximately normal.",
+   "The sample is small and the outliers pull the sample mean, so the sampling distribution is not approximately normal."
+  ]
+ },
+ {
+  "id": "st_n_hyp_two_means",
+  "topic": "4.9",
+  "skill": "2.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each option differs from the key by one named defect: the direction, a two-sided versus one-sided alternative, or statistics used in the hypotheses"
+  ],
+  "misconceptions": [
+   "The alternative hypothesis points in the direction opposite to the researcher's suspicion.",
+   "Uses a two-sided alternative although the researcher suspects a difference in one specific direction.",
+   "States the hypotheses with sample means; hypotheses are about the population means."
+  ]
+ },
+ {
+  "id": "st_n_t_vs_z",
+  "topic": "4.2",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each option differs from the key by one named defect: using z, using n as the degrees of freedom, or a wrong reason for using t"
+  ],
+  "misconceptions": [
+   "Random selection does not make the standardized sample mean normal; with an estimated standard deviation the t distribution is used.",
+   "Uses the sample size as the degrees of freedom; the degrees of freedom for a one-sample t procedure are $21$, one less than the sample size.",
+   "The t distribution is used because the standard deviation is estimated; non-normality is a separate concern that is judged from the sample size and graphs."
+  ]
+ },
+ {
+  "id": "st_n_ci_endpoints_stats",
+  "topic": "4.2",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the midpoint and half-width are recomputed from the two endpoints and the three wrong pairs are the named slips"
+  ],
+  "misconceptions": [
+   "Reports the full width of the interval as the margin of error; the margin of error is half of the width.",
+   "Swaps the two values: the midpoint is the sample mean and half of the width is the margin of error.",
+   "Takes the lower endpoint as the sample mean, but the sample mean is the midpoint of the interval."
+  ]
+ },
+ {
+  "id": "st_n_me_t_table",
+  "topic": "4.2",
+  "skill": "3.E",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the critical values in the table are recomputed by numerical integration of the t density and the margin of error is recomputed from the value in the correct row"
+  ],
+  "misconceptions": [
+   "Reads the critical value from the row for $12$ degrees of freedom; the degrees of freedom are one less than the sample size.",
+   "Uses the normal critical value $1.960$ instead of the $t$ critical value for the degrees of freedom.",
+   "Leaves out the critical value, giving only the standard error of the sample mean."
+  ]
+ },
+ {
+  "id": "st_n_diff_means_claim",
+  "topic": "4.8",
+  "skill": "4.G",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the sign pattern of the interval endpoints decides whether zero is inside and whether the direction of the claim is supported"
+  ],
+  "misconceptions": [
+   "Judges the claim from the center of the interval; the claim depends on whether the interval includes $0$.",
+   "The sample means almost always differ; the interval shows whether $0$ is a plausible value for the population difference.",
+   "An interval is not required to be centered at $0$; what matters is whether $0$ is inside it."
+  ]
+ },
+ {
+  "id": "st_n_scope_of_inference",
+  "topic": "4.10",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the four options are the four combinations of random assignment and random selection, so exactly one matches the stated design"
+  ],
+  "misconceptions": [
+   "Does not match the design of this study: random assignment was not used and random selection was used.",
+   "Does not match the design of this study: random assignment was not used and random selection was used.",
+   "Does not match the design of this study: random assignment was not used and random selection was used."
+  ]
+ },
+ {
+  "id": "st_n_pred_one_sd",
+  "topic": "5.3",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the prediction is recomputed by fitting a least-squares line to synthetic data with exactly the stated means, standard deviations and correlation"
+  ],
+  "misconceptions": [
+   "Adds one full standard deviation of $y$, which would be right only if the correlation were $1$.",
+   "Multiplies by $r^2$ instead of $r$, which uses the proportion of variation explained instead of the correlation.",
+   "Divides by $r$ instead of multiplying, which moves the prediction farther from the mean for a weaker correlation."
+  ]
+ },
+ {
+  "id": "st_n_extrapolation",
+  "topic": "5.3",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each context gives the range of the data and a value of x outside it, so the prediction is an extrapolation in every case"
+  ],
+  "misconceptions": [
+   "A strong correlation within the range of the data does not make predictions outside that range reliable.",
+   "The least-squares property describes the fit to the observed data, not the behavior of the relationship outside the data.",
+   "A prediction can be calculated for any value of $x$; the issue is that it is unreliable outside the range of the data."
+  ]
+ },
+ {
+  "id": "st_n_residual_meaning",
+  "topic": "5.4",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each context gives a residual with a sign, and the four sentences differ by the roles of actual and predicted values, a percent reading and a slope reading"
+  ],
+  "misconceptions": [
+   "Reverses the roles of the actual and the predicted values: a residual is the actual value minus the predicted value.",
+   "Treats the residual as a percent error, but a residual is measured in the units of the response variable.",
+   "Confuses the residual with the slope; the slope describes the change in the predicted value per unit of $x$."
+  ]
+ },
+ {
+  "id": "st_n_corr_causation",
+  "topic": "5.2",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each context gives a strong correlation from observational data and a plausible lurking variable, so only the association statement is justified"
+  ],
+  "misconceptions": [
+   "A high correlation does not show cause and effect; a lurking variable can explain a strong association.",
+   "The proportion of variation explained is $r^2$, not $r$, and an explained proportion does not mean that the variation is caused by the explanatory variable.",
+   "A positive correlation gives no direction of cause and effect; neither variable can be said to cause the other from these data alone."
+  ]
+ },
+ {
+  "id": "st_set_normal_means_q1",
+  "topic": "2.11",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the probability is recomputed with math.erf and with scipy's normal survival function"
+  ],
+  "misconceptions": [
+   "Gives the probability of a value less than the cutoff instead of greater than it.",
+   "Doubles the smaller tail area as for a two-sided region, but the question is about one side only.",
+   "Uses the standard deviation of a sample mean in a question about a single value."
+  ]
+ },
+ {
+  "id": "st_set_normal_means_q2",
+  "topic": "2.12",
+  "skill": "3.D",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the standard deviation is recomputed as sigma over the square root of n"
+  ],
+  "misconceptions": [
+   "Reports the standard deviation of the individual values, which does not shrink with the sample size.",
+   "Divides by $16$ instead of by $\\sqrt{16}$.",
+   "Multiplies by the square root of the sample size, which would make the spread of the sample means larger."
+  ]
+ },
+ {
+  "id": "st_set_normal_means_q3",
+  "topic": "2.12",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the probability is recomputed with math.erf and with scipy's normal survival function for the standard deviation of the sample mean"
+  ],
+  "misconceptions": [
+   "Uses the standard deviation of the individual values, which gives the probability for one value instead of for a sample mean.",
+   "Gives the probability of a sample mean less than the cutoff instead of greater than it.",
+   "Doubles the smaller tail area as for a two-sided region, but the question is about one side only."
+  ]
+ },
+ {
+  "id": "st_set_model_compare_q1",
+  "topic": "5.4",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the prediction is recomputed from the coefficients in the table and the three wrong values are the named slips"
+  ],
+  "misconceptions": [
+   "Uses the equation of Model B instead of the equation of Model A.",
+   "Leaves the intercept out of the prediction.",
+   "Substitutes $x = 1$ instead of the given value of $x$."
+  ]
+ },
+ {
+  "id": "st_set_model_compare_q2",
+  "topic": "5.5",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "each statement is checked against the R-squared and S values that are generated so that Model A has the larger R-squared and the smaller S"
+  ],
+  "misconceptions": [
+   "Reverses the comparison: Model A has the larger R-squared and the smaller $S$ in the table.",
+   "A larger R-squared goes with a smaller $S$ here; the table shows Model A with the smaller $S$, so its predictions are typically closer.",
+   "Using the same variables does not give the same R-squared; the table shows different values."
+  ]
+ },
+ {
+  "id": "st_set_model_compare_q3",
+  "topic": "5.4",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the residual pattern of each model is stated in the table and Model A is generated with the curved pattern and the larger R-squared so the choice depends on the pattern"
+  ],
+  "misconceptions": [
+   "Judges the models by R-squared and $S$ alone; a curved pattern in a residual plot shows that the linear model is not appropriate.",
+   "Model B's residual plot has no pattern, which supports a linear model; only Model A's residual plot shows a problem.",
+   "A straight-line model can be inappropriate; the residual plot shows whether the line describes the relationship."
+  ]
  }
 ]
