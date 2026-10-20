@@ -30,7 +30,7 @@
 - **새 원형**(`archetypes/phys_p0_n.py` 단독 51 + 세트 4, `phys_p0_frq3.py` FRQ 4; 가이드는 `physics1-archetypes.json`·`physics1.ts` `frqTemplates`): 3.B 주장·원리 17(상대 운동·v-t 면적·경사로 속력·일률·정지 거리·에어백·용수철 발사·반동·튕김 충격량·경사면 수직항력·문 돌림힘·위성 속력·연속 방정식·질량-주기·아트우드 장력·마찰 면적 무관·충돌 에너지 손실…), 3.C 자료 근거 4, 2.C 순위 8, 2.A 기호식 14, 2.D 예측 8, 2문항 세트 4(`phs_ft_set` 힘-시간, `phs_torque_set` 돌림힘-시간, `phs_depth_pressure_set` 깊이-압력 표, `phs_wt_claim_set` 각속력-시간 3.B 쌍), FRQ 시나리오 4(MR 아트우드·TBR 엘리베이터 v-t 와 저울·LAB 경사면 g·QQT 원 궤도 위성). 모든 정답은 sympy·정확 분수와 numpy·RK4·이분법·최소제곱 등 독립 경로로 이중 계산한다.
 - 1차 생성(MC 144 후보 → 통과 99)에서 **검토기가 잡은 결함을 원형에서 고쳐 2차에 다시 생성**: 선택지 표기 `1.18e+03`(`:.3g` → `sig`), 순위 문항 stem 120단어 초과 4원형(compact 표기), 순위·기호식 오답 설명이 선택지와 어긋난 곳 7곳(`rank_*`, `sym_wheel_pulley`, `sym_pressure_depth`, `sym_projectile_range`, `sym_rolling_accel`, `claim_bounce_impulse`, `pred_planet_weight`), 비원시 문자열의 `\frac`·`\theta`(form-feed/TAB 으로 깨짐: `ph_sym_disk_rim_force`, 투사 범위 오답), FRQ 표 설명의 LaTeX `\theta`(렌더 게이트 `figure_label_latex_leak`). 2차 MC 36 후보 → 통과 35. FRQ 4 시나리오는 1·2·3차 생성에서 전부 통과(LAB 은 렌더 게이트 수정 후 3차).
 - 정확 배정(`phys-strict-plan.ts --sets PH5,PH6 --no-virtual --block-archetypes …`): 단원 5/8/8/5/5/3/3/5, 스킬 2.A 8·2.B 10·2.C 5·2.D 6·3.B 10·3.C 3(PH5), 동일 범위(PH6), 세트 2개, FRQ MR·TBR·LAB·QQT 각 1, **원형 44종씩(공개 66종과 겹침 0, PH5·PH6 겹침 0)**, exam_prep **PH5 23/42·PH6 22/42**. 독립 검증기(`verifyPhysAssignment`) 위반 0.
-- 화면 증거: `data/ap/screen-evidence/evidence-phys-s5.json`(§7 결과 요약 참조).
+- 화면 증거(같은 격리 스택, `AP_EV_SLOW=1` 로 이동 시간 제한 완화: 호스트 load average 25~45 에서 기본 30 s 제한이 자주 걸렸다): 후보 148 × 390×844·1280×800 = **316항목 fail 0**(`data/ap/screen-evidence/evidence-phys-s5.json`, 스크린샷 `docs/ap/screen-evidence/phys-s5/`). 첫 실행에서 FRQ 4개가 모바일에서 "문항 이동 버튼 8 s 시간 초과"로 실패했으나 FRQ 만 다시 시드해 재실행하면 통과했다(내용 결함이 아니라 부하).
 
 ## 5. Chemistry — 엄격 규칙으로 미달(수치)
 
@@ -52,6 +52,8 @@ CHEM_BLOCK_ARCH=<JSON> CHEM_DUMMY=1 npx tsx scripts/ap-generation/chem-assign.ts
 적재(관리자 '재고 관리')는 배치 `bio-b34a·b·bf·c·d`, `phys-s5a·s5s·s5f·s5b·s5g·s5h` 를 적재(`lib/ap-admin/batches.ts`) → 초안 저장(`exact-assign-bio-bi3-bi4.json`·`exact-assign-phys-ph5-ph6.json`) → 검토 → 공개 순서(원격 DB 쓰기는 총괄).
 
 ## 7. 남은 점·주의
+
+- 테스트: `lib/ap-generation/biology-archetypes.test.ts`(세트 8→9)·`physics1-archetypes.test.ts`(140→195 이름, 가이드 순서) 갱신, `data/ap/stock/tex-corrections.json` 재생성(295→318), Python `test_ap_new_archetypes_1019.py` 신설. 이 브랜치와 무관하게 실패하는 기존 테스트: `psych-archetypes.test.ts`(통합 브랜치의 PS3 세트 순서), `screen-evidence-file.test.ts` 3건(다른 과목 증거 파일의 스크린샷이 이 워크트리에 없음), `ab-select.test.ts` 1건(부하 시 시간 초과).
 
 - 원형 겹침 0 은 **원형 단위**다. 같은 원형의 다른 시드(숫자만 다름)는 같은 세트 안에서도 하나만 쓴다(문항군 규칙 그대로). 문항 단위로 공개 세트와 같은 키는 0.
 - exam_prep 비율 하락(Bio 27 %/18 %, Phys 55 %/52 %)은 위 규칙의 대가다. Bio 새 개념·표 읽기형이 `basic_learning` 으로 라벨되는 경우가 많다.

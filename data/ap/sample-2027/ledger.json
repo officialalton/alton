@@ -1,5 +1,5 @@
 {
- "spent": 375.4314,
+ "spent": 392.7221607000001,
  "entries": [
   {
    "at": "2026-10-08T09:13:14.616Z",
@@ -974,7 +974,7 @@
   {
    "at": "2026-10-09T03:26:06.749447+00:00",
    "usd": 0,
-   "note": "EXCLUDED FROM PROMOTION EVIDENCE: run v8-bio-r (cost $0.1146 already included in ledger spent) — invalid measurement (non-frozen reviewer config, rewrite not adopted). See data/ap/sample-2027/v8-bio-r/validity.json. v8-bio first pass 3/4 stays valid under validation version v8-bio.",
+   "note": "EXCLUDED FROM PROMOTION EVIDENCE: run v8-bio-r (cost $0.1146 already included in ledger spent) \u2014 invalid measurement (non-frozen reviewer config, rewrite not adopted). See data/ap/sample-2027/v8-bio-r/validity.json. v8-bio first pass 3/4 stays valid under validation version v8-bio.",
    "excludedRun": "v8-bio-r"
   },
   {
@@ -3948,6 +3948,11 @@
    "note": "audit-r6-verify batch msgbatch_01XeDGwD4sS6qRdNjfof8PTK"
   },
   {
+   "at": "2026-10-15T15:29:00.013Z",
+   "usd": 0.679326,
+   "note": "gen batch msgbatch_01HYy1sVyNf29Ft16HrBMouK"
+  },
+  {
    "at": "2026-10-15T15:29:19.883Z",
    "usd": 0.622606,
    "note": "audit-r6-verify sync"
@@ -3978,6 +3983,11 @@
    "note": "solve sync"
   },
   {
+   "at": "2026-10-15T15:34:58.506Z",
+   "usd": 0.055313,
+   "note": "solve batch msgbatch_01XndnGM12RsVyPWCaCBj5Bn"
+  },
+  {
    "at": "2026-10-15T15:35:09.318Z",
    "usd": 0.49904000000000004,
    "note": "fact sync"
@@ -3986,16 +3996,6 @@
    "at": "2026-10-15T15:35:37.587Z",
    "usd": 0.07609,
    "note": "fact sync"
-  },
-  {
-   "at": "2026-10-15T15:29:00.013Z",
-   "usd": 0.679326,
-   "note": "gen batch msgbatch_01HYy1sVyNf29Ft16HrBMouK"
-  },
-  {
-   "at": "2026-10-15T15:34:58.506Z",
-   "usd": 0.055313,
-   "note": "solve batch msgbatch_01XndnGM12RsVyPWCaCBj5Bn"
   },
   {
    "at": "2026-10-15T15:41:06.209Z",
@@ -4108,6 +4108,21 @@
    "note": "fact-mc sync"
   },
   {
+   "at": "2026-10-15T16:34:59.323Z",
+   "usd": 1.109886,
+   "note": "gen batch msgbatch_01HKziSNPbzmjBepHmQxtT9s"
+  },
+  {
+   "at": "2026-10-15T16:35:59.933Z",
+   "usd": 0.08577839999999999,
+   "note": "gen batch msgbatch_01BCWqWCAZ4j11HkTGtdq13u"
+  },
+  {
+   "at": "2026-10-15T16:41:59.486Z",
+   "usd": 0.4953044999999999,
+   "note": "solve batch msgbatch_01VeyaVYLm82N1W7383utLtA"
+  },
+  {
    "at": "2026-10-15T16:43:14.249Z",
    "usd": 0.44677520000000004,
    "note": "solve sync"
@@ -4121,6 +4136,11 @@
    "at": "2026-10-15T16:43:55.279Z",
    "usd": 0.21419599999999997,
    "note": "difficulty sync"
+  },
+  {
+   "at": "2026-10-15T16:44:23.685Z",
+   "usd": 0.681052,
+   "note": "adv batch msgbatch_01GHVfhN93hrkimxvyHG24GS"
   },
   {
    "at": "2026-10-15T16:44:46.569Z",
@@ -4153,6 +4173,11 @@
    "note": "solve sync"
   },
   {
+   "at": "2026-10-15T16:50:12.338Z",
+   "usd": 0.054100199999999994,
+   "note": "review batch msgbatch_01AQ7P2AiCW8h5tiomvB1b1J"
+  },
+  {
    "at": "2026-10-15T16:50:14.263Z",
    "usd": 0.27464099999999997,
    "note": "review sync"
@@ -4171,31 +4196,6 @@
    "at": "2026-10-15T16:50:43.114Z",
    "usd": 0.13196600000000003,
    "note": "difficulty sync"
-  },
-  {
-   "at": "2026-10-15T16:34:59.323Z",
-   "usd": 1.109886,
-   "note": "gen batch msgbatch_01HKziSNPbzmjBepHmQxtT9s"
-  },
-  {
-   "at": "2026-10-15T16:35:59.933Z",
-   "usd": 0.08577839999999999,
-   "note": "gen batch msgbatch_01BCWqWCAZ4j11HkTGtdq13u"
-  },
-  {
-   "at": "2026-10-15T16:41:59.486Z",
-   "usd": 0.4953044999999999,
-   "note": "solve batch msgbatch_01VeyaVYLm82N1W7383utLtA"
-  },
-  {
-   "at": "2026-10-15T16:44:23.685Z",
-   "usd": 0.681052,
-   "note": "adv batch msgbatch_01GHVfhN93hrkimxvyHG24GS"
-  },
-  {
-   "at": "2026-10-15T16:50:12.338Z",
-   "usd": 0.054100199999999994,
-   "note": "review batch msgbatch_01AQ7P2AiCW8h5tiomvB1b1J"
   },
   {
    "at": "2026-10-15T16:51:26.716Z",
@@ -4238,6 +4238,16 @@
    "note": "grade sync"
   },
   {
+   "at": "2026-10-15T18:52:23.325Z",
+   "usd": 0.017939,
+   "note": "solve batch msgbatch_01CbVnzJ99VNc2w86LWheP1B"
+  },
+  {
+   "at": "2026-10-15T18:52:39.016Z",
+   "usd": 0.017939,
+   "note": "solve batch msgbatch_01CbVnzJ99VNc2w86LWheP1B"
+  },
+  {
    "at": "2026-10-15T18:52:46.016Z",
    "usd": 0.67346,
    "note": "fact-dbq sync"
@@ -4248,6 +4258,16 @@
    "note": "grade sync"
   },
   {
+   "at": "2026-10-15T18:55:02.353Z",
+   "usd": 0.02676,
+   "note": "adv batch msgbatch_01BbmYX3cf7HbUzUnAXXpMuJ"
+  },
+  {
+   "at": "2026-10-15T18:55:07.333Z",
+   "usd": 0.02676,
+   "note": "adv batch msgbatch_01BbmYX3cf7HbUzUnAXXpMuJ"
+  },
+  {
    "at": "2026-10-15T18:55:15.844Z",
    "usd": 0.72785,
    "note": "fact-dbq sync"
@@ -4256,6 +4276,16 @@
    "at": "2026-10-15T18:56:35.678Z",
    "usd": 0.41754399999999997,
    "note": "grade sync"
+  },
+  {
+   "at": "2026-10-15T18:57:26.128Z",
+   "usd": 0.016766,
+   "note": "judge2 batch msgbatch_01S7iuXLchJxYjGoN7Aatszz"
+  },
+  {
+   "at": "2026-10-15T18:57:30.769Z",
+   "usd": 0.016766,
+   "note": "judge2 batch msgbatch_01S7iuXLchJxYjGoN7Aatszz"
   },
   {
    "at": "2026-10-15T18:57:35.860Z",
@@ -4271,36 +4301,6 @@
    "at": "2026-10-15T18:59:02.031Z",
    "usd": 0.36906,
    "note": "fact-dbq sync"
-  },
-  {
-   "at": "2026-10-15T18:52:23.325Z",
-   "usd": 0.017939,
-   "note": "solve batch msgbatch_01CbVnzJ99VNc2w86LWheP1B"
-  },
-  {
-   "at": "2026-10-15T18:52:39.016Z",
-   "usd": 0.017939,
-   "note": "solve batch msgbatch_01CbVnzJ99VNc2w86LWheP1B"
-  },
-  {
-   "at": "2026-10-15T18:55:02.353Z",
-   "usd": 0.02676,
-   "note": "adv batch msgbatch_01BbmYX3cf7HbUzUnAXXpMuJ"
-  },
-  {
-   "at": "2026-10-15T18:55:07.333Z",
-   "usd": 0.02676,
-   "note": "adv batch msgbatch_01BbmYX3cf7HbUzUnAXXpMuJ"
-  },
-  {
-   "at": "2026-10-15T18:57:26.128Z",
-   "usd": 0.016766,
-   "note": "judge2 batch msgbatch_01S7iuXLchJxYjGoN7Aatszz"
-  },
-  {
-   "at": "2026-10-15T18:57:30.769Z",
-   "usd": 0.016766,
-   "note": "judge2 batch msgbatch_01S7iuXLchJxYjGoN7Aatszz"
   },
   {
    "at": "2026-10-15T18:59:29.662Z",
@@ -4368,6 +4368,11 @@
    "note": "englit-real-2 frq processEssay regrade (6 samples x2 runs, englit-v1, scripts/essay-calibration.ts)"
   },
   {
+   "at": "2026-10-15T20:36:31.974Z",
+   "usd": 0.9538905999999999,
+   "note": "gen batch msgbatch_015s5vs8JDyYTmUrv8o8nC81"
+  },
+  {
    "at": "2026-10-15T20:39:04.851Z",
    "usd": 0.0924,
    "note": "solve sync"
@@ -4403,6 +4408,11 @@
    "note": "solve sync"
   },
   {
+   "at": "2026-10-15T20:41:07.130Z",
+   "usd": 0.4491351999999999,
+   "note": "solve sync"
+  },
+  {
    "at": "2026-10-15T20:41:25.665Z",
    "usd": 0.10793,
    "note": "fact sync"
@@ -4410,26 +4420,6 @@
   {
    "at": "2026-10-15T20:41:43.086Z",
    "usd": 0.11005,
-   "note": "solve sync"
-  },
-  {
-   "at": "2026-10-15T20:42:06.295Z",
-   "usd": 0.35877,
-   "note": "fact sync"
-  },
-  {
-   "at": "2026-10-15T20:42:25.898Z",
-   "usd": 0.033299999999999996,
-   "note": "solve sync"
-  },
-  {
-   "at": "2026-10-15T20:42:45.249Z",
-   "usd": 0.11337,
-   "note": "fact sync"
-  },
-  {
-   "at": "2026-10-15T20:41:07.130Z",
-   "usd": 0.4491351999999999,
    "note": "solve sync"
   },
   {
@@ -4443,9 +4433,24 @@
    "note": "review2 sync"
   },
   {
+   "at": "2026-10-15T20:42:06.295Z",
+   "usd": 0.35877,
+   "note": "fact sync"
+  },
+  {
    "at": "2026-10-15T20:42:15.549Z",
    "usd": 0.066944,
    "note": "review4 sync"
+  },
+  {
+   "at": "2026-10-15T20:42:25.898Z",
+   "usd": 0.033299999999999996,
+   "note": "solve sync"
+  },
+  {
+   "at": "2026-10-15T20:42:45.249Z",
+   "usd": 0.11337,
+   "note": "fact sync"
   },
   {
    "at": "2026-10-15T20:42:54.369Z",
@@ -4471,11 +4476,6 @@
    "at": "2026-10-15T20:48:36.311Z",
    "usd": 0.375558,
    "note": "difficulty sync"
-  },
-  {
-   "at": "2026-10-15T20:36:31.974Z",
-   "usd": 0.9538905999999999,
-   "note": "gen batch msgbatch_015s5vs8JDyYTmUrv8o8nC81"
   },
   {
    "at": "2026-10-15T21:27:07.253Z",
@@ -4553,6 +4553,11 @@
    "note": "solve batch msgbatch_011cYG3wtkNz6PnrhceTbceD"
   },
   {
+   "at": "2026-10-15T21:52:38.448Z",
+   "usd": 0.291662,
+   "note": "gen batch msgbatch_01XhvdhfmHGWr29GW9HbTohx"
+  },
+  {
    "at": "2026-10-15T21:56:56.309Z",
    "usd": 0.4233786,
    "note": "review batch msgbatch_01RFmpRbbWK7U9sQfSKk8PFr"
@@ -4573,14 +4578,29 @@
    "note": "solve batch msgbatch_01VMrQwZgfCWVLKevvyYXWTB"
   },
   {
+   "at": "2026-10-15T22:01:20.213Z",
+   "usd": 0.06391690000000001,
+   "note": "solve batch msgbatch_01BbgT7ibte5g1idiqnyg1cJ"
+  },
+  {
    "at": "2026-10-15T22:02:33.460Z",
    "usd": 0.042081999999999994,
    "note": "review2 batch msgbatch_01NpMZgayMFtqaDBenPA8qE2"
   },
   {
+   "at": "2026-10-15T22:03:44.070Z",
+   "usd": 0.1224605,
+   "note": "panel batch msgbatch_017DJavM2d8fJbs7MfsEYUWF"
+  },
+  {
    "at": "2026-10-15T22:05:55.401Z",
    "usd": 0.117776,
    "note": "difficulty batch msgbatch_01HTiGyhqfHoUzX2RkBnvDUt"
+  },
+  {
+   "at": "2026-10-15T22:06:04.960Z",
+   "usd": 0.5995240000000001,
+   "note": "frq-gen batch msgbatch_01P1NP22x95hspbbU6StQy2S"
   },
   {
    "at": "2026-10-15T22:06:45.885Z",
@@ -4633,119 +4653,14 @@
    "note": "difficulty batch msgbatch_019qxjEHwcQaeZ6qgacuLiJ5"
   },
   {
-   "at": "2026-10-15T22:27:30.820Z",
-   "usd": 0.07848,
-   "note": "solve batch msgbatch_0116xYiBujgU3BHqnhYefHqv"
-  },
-  {
-   "at": "2026-10-15T22:34:07.683Z",
-   "usd": 0.23292999999999997,
-   "note": "review batch msgbatch_01QFv7sSWSJrFJvTsTwMs78D"
-  },
-  {
-   "at": "2026-10-15T22:39:15.280Z",
-   "usd": 0.0253532,
-   "note": "review2 batch msgbatch_01Havejz9deqzWy376a1oR4Z"
-  },
-  {
-   "at": "2026-10-15T22:39:21.967Z",
-   "usd": 0.128309,
-   "note": "difficulty batch msgbatch_016pf4BEzcs8d3dHgt9u2T4n"
-  },
-  {
-   "at": "2026-10-15T22:43:23.344Z",
-   "usd": 0.0205868,
-   "note": "solve batch msgbatch_01AxRMGTHHHPc8wizCj7oUHS"
-  },
-  {
-   "at": "2026-10-15T22:43:46.460Z",
-   "usd": 0.030132,
-   "note": "solve batch msgbatch_01MbqypF21RyCg8p9SHkA7zT"
-  },
-  {
-   "at": "2026-10-15T22:43:51.078Z",
-   "usd": 0.0228208,
-   "note": "solve batch msgbatch_019AacqV8cT4a7L4U4XZTRLA"
-  },
-  {
-   "at": "2026-10-15T22:45:52.262Z",
-   "usd": 0.0255276,
-   "note": "review4 batch msgbatch_012mKEbpi5jNFGB2z3EKLfpv"
-  },
-  {
-   "at": "2026-10-15T22:48:52.523Z",
-   "usd": 0.078844,
-   "note": "review batch msgbatch_01TkNqE383knBJCnwgaFHTpe"
-  },
-  {
-   "at": "2026-10-15T22:48:56.929Z",
-   "usd": 0.061257200000000005,
-   "note": "review batch msgbatch_016oKadcFfoBbp9uG93TZPtj"
-  },
-  {
-   "at": "2026-10-15T22:48:59.413Z",
-   "usd": 0.0608552,
-   "note": "review batch msgbatch_01VDF7RTMQ3XnXe8xtfLrafg"
-  },
-  {
-   "at": "2026-10-15T22:50:26.321Z",
-   "usd": 0.0077713999999999995,
-   "note": "review2 batch msgbatch_01U1uZyTk2b85ba2wqJf3DtD"
-  },
-  {
-   "at": "2026-10-15T22:52:29.773Z",
-   "usd": 0.128879,
-   "note": "difficulty batch msgbatch_012hAQ4LGSFNCH77wUAGFKjT"
-  },
-  {
-   "at": "2026-10-15T22:54:01.757Z",
-   "usd": 0.0094312,
-   "note": "review4 batch msgbatch_01AsRufiEahZwYoBY4raesgk"
-  },
-  {
-   "at": "2026-10-15T22:54:35.397Z",
-   "usd": 0.23054500000000006,
-   "note": "difficulty batch msgbatch_01XfXj6qq3d2wTouocvhfmjq"
-  },
-  {
-   "at": "2026-10-15T22:54:37.776Z",
-   "usd": 0.093641,
-   "note": "difficulty batch msgbatch_018j6cebSQujck7SvSEm5yHe"
-  },
-  {
-   "at": "2026-10-15T23:00:08.281Z",
-   "usd": 0.233077,
-   "note": "difficulty batch msgbatch_01WEEz9qLwWddwNKFTUa8r3H"
-  },
-  {
-   "at": "2026-10-15T23:08:21.804Z",
-   "usd": 1.1961150000000011,
-   "note": "panel batch msgbatch_01NTrmNm6qnaBvR3eHxJGueL"
-  },
-  {
-   "at": "2026-10-15T21:52:38.448Z",
-   "usd": 0.291662,
-   "note": "gen batch msgbatch_01XhvdhfmHGWr29GW9HbTohx"
-  },
-  {
-   "at": "2026-10-15T22:01:20.213Z",
-   "usd": 0.06391690000000001,
-   "note": "solve batch msgbatch_01BbgT7ibte5g1idiqnyg1cJ"
-  },
-  {
-   "at": "2026-10-15T22:03:44.070Z",
-   "usd": 0.1224605,
-   "note": "panel batch msgbatch_017DJavM2d8fJbs7MfsEYUWF"
-  },
-  {
-   "at": "2026-10-15T22:06:04.960Z",
-   "usd": 0.5995240000000001,
-   "note": "frq-gen batch msgbatch_01P1NP22x95hspbbU6StQy2S"
-  },
-  {
    "at": "2026-10-15T22:27:26.101Z",
    "usd": 1.890274,
    "note": "gen batch msgbatch_01RsQ36gdSGjPEy6SK8sconh"
+  },
+  {
+   "at": "2026-10-15T22:27:30.820Z",
+   "usd": 0.07848,
+   "note": "solve batch msgbatch_0116xYiBujgU3BHqnhYefHqv"
   },
   {
    "at": "2026-10-15T22:29:18.578Z",
@@ -4758,6 +4673,11 @@
    "note": "solve batch msgbatch_014bt1vZaxWW2MB5aSEqpcPb"
   },
   {
+   "at": "2026-10-15T22:34:07.683Z",
+   "usd": 0.23292999999999997,
+   "note": "review batch msgbatch_01QFv7sSWSJrFJvTsTwMs78D"
+  },
+  {
    "at": "2026-10-15T22:35:45.949Z",
    "usd": 0.2660091,
    "note": "frq-samples batch msgbatch_01Nm1cViQ334dnUWQ8dbFt2E"
@@ -4768,6 +4688,16 @@
    "note": "panel batch msgbatch_01ERqHbSxPMMVYFkFaUPT5My"
   },
   {
+   "at": "2026-10-15T22:39:15.280Z",
+   "usd": 0.0253532,
+   "note": "review2 batch msgbatch_01Havejz9deqzWy376a1oR4Z"
+  },
+  {
+   "at": "2026-10-15T22:39:21.967Z",
+   "usd": 0.128309,
+   "note": "difficulty batch msgbatch_016pf4BEzcs8d3dHgt9u2T4n"
+  },
+  {
    "at": "2026-10-15T22:41:12.187Z",
    "usd": 0.4080814,
    "note": "frq-grade batch msgbatch_017zb7iBDghMiPznSR9A1HUr"
@@ -4776,6 +4706,11 @@
    "at": "2026-10-15T22:41:30.966Z",
    "usd": 0.0181703,
    "note": "solve batch msgbatch_01E3BjYgKgDwHgdBCTbp8dAL"
+  },
+  {
+   "at": "2026-10-15T22:43:23.344Z",
+   "usd": 0.0205868,
+   "note": "solve batch msgbatch_01AxRMGTHHHPc8wizCj7oUHS"
   },
   {
    "at": "2026-10-15T22:43:32.809Z",
@@ -4793,14 +4728,44 @@
    "note": "frq-fact2 batch msgbatch_01CZsGZeamToauFDrLUVcVW2"
   },
   {
+   "at": "2026-10-15T22:43:46.460Z",
+   "usd": 0.030132,
+   "note": "solve batch msgbatch_01MbqypF21RyCg8p9SHkA7zT"
+  },
+  {
+   "at": "2026-10-15T22:43:51.078Z",
+   "usd": 0.0228208,
+   "note": "solve batch msgbatch_019AacqV8cT4a7L4U4XZTRLA"
+  },
+  {
    "at": "2026-10-15T22:45:35.847Z",
    "usd": 0.07406650000000001,
    "note": "panel batch msgbatch_01FdUECMLoRFDXVbV789n6N2"
   },
   {
+   "at": "2026-10-15T22:45:52.262Z",
+   "usd": 0.0255276,
+   "note": "review4 batch msgbatch_012mKEbpi5jNFGB2z3EKLfpv"
+  },
+  {
    "at": "2026-10-15T22:47:51.062Z",
    "usd": 0.3740756,
    "note": "frq-gen batch msgbatch_017AD288XQGxFEJmEKJwMXZX"
+  },
+  {
+   "at": "2026-10-15T22:48:52.523Z",
+   "usd": 0.078844,
+   "note": "review batch msgbatch_01TkNqE383knBJCnwgaFHTpe"
+  },
+  {
+   "at": "2026-10-15T22:48:56.929Z",
+   "usd": 0.061257200000000005,
+   "note": "review batch msgbatch_016oKadcFfoBbp9uG93TZPtj"
+  },
+  {
+   "at": "2026-10-15T22:48:59.413Z",
+   "usd": 0.0608552,
+   "note": "review batch msgbatch_01VDF7RTMQ3XnXe8xtfLrafg"
   },
   {
    "at": "2026-10-15T22:49:04.954Z",
@@ -4813,14 +4778,44 @@
    "note": "frq-fact batch msgbatch_019p4JXqGbDREfGjiEf8TiAZ"
   },
   {
+   "at": "2026-10-15T22:50:26.321Z",
+   "usd": 0.0077713999999999995,
+   "note": "review2 batch msgbatch_01U1uZyTk2b85ba2wqJf3DtD"
+  },
+  {
+   "at": "2026-10-15T22:52:29.773Z",
+   "usd": 0.128879,
+   "note": "difficulty batch msgbatch_012hAQ4LGSFNCH77wUAGFKjT"
+  },
+  {
    "at": "2026-10-15T22:53:30.345Z",
    "usd": 0.0112623,
    "note": "solve batch msgbatch_01TevHVBDYTb5gbGN72ceBQa"
   },
   {
+   "at": "2026-10-15T22:54:01.757Z",
+   "usd": 0.0094312,
+   "note": "review4 batch msgbatch_01AsRufiEahZwYoBY4raesgk"
+  },
+  {
+   "at": "2026-10-15T22:54:35.397Z",
+   "usd": 0.23054500000000006,
+   "note": "difficulty batch msgbatch_01XfXj6qq3d2wTouocvhfmjq"
+  },
+  {
+   "at": "2026-10-15T22:54:37.776Z",
+   "usd": 0.093641,
+   "note": "difficulty batch msgbatch_018j6cebSQujck7SvSEm5yHe"
+  },
+  {
    "at": "2026-10-15T22:55:53.847Z",
    "usd": 0.0151705,
    "note": "panel batch msgbatch_01NfmygFdX7y6pUabAVnHC27"
+  },
+  {
+   "at": "2026-10-15T23:00:08.281Z",
+   "usd": 0.233077,
+   "note": "difficulty batch msgbatch_01WEEz9qLwWddwNKFTUa8r3H"
   },
   {
    "at": "2026-10-15T23:01:27.545Z",
@@ -4831,6 +4826,11 @@
    "at": "2026-10-15T23:07:56.345Z",
    "usd": 0.6004452,
    "note": "frq-grade batch msgbatch_018qyrkqDNHtzkc9tHd7mGEJ"
+  },
+  {
+   "at": "2026-10-15T23:08:21.804Z",
+   "usd": 1.1961150000000011,
+   "note": "panel batch msgbatch_01NTrmNm6qnaBvR3eHxJGueL"
   },
   {
    "at": "2026-10-15T23:10:42.686Z",
@@ -4923,16 +4923,6 @@
    "note": "sat-expand top3/gen gen batch msgbatch_01DakjFqZ83Ff6FLepoondwV"
   },
   {
-   "at": "2026-10-16T04:01:51.858Z",
-   "usd": 1.31489,
-   "note": "sat-expand top3/gen review-fable batch msgbatch_018CcbeiZP16H79twC7wbLvd"
-  },
-  {
-   "at": "2026-10-16T04:06:25.898Z",
-   "usd": 0.39116600000000007,
-   "note": "sat-expand top3/gen review-opus batch msgbatch_01X2DRaYgUDHLruiLCNhL9TA"
-  },
-  {
    "at": "2026-10-16T04:00:00.000Z",
    "usd": 0.351,
    "note": "sat-expand brainstorm seeds (3 rounds, haiku)"
@@ -4946,6 +4936,16 @@
    "at": "2026-10-16T04:00:00.000Z",
    "usd": 0.032,
    "note": "sat-expand rw-topics classify (haiku)"
+  },
+  {
+   "at": "2026-10-16T04:01:51.858Z",
+   "usd": 1.31489,
+   "note": "sat-expand top3/gen review-fable batch msgbatch_018CcbeiZP16H79twC7wbLvd"
+  },
+  {
+   "at": "2026-10-16T04:06:25.898Z",
+   "usd": 0.39116600000000007,
+   "note": "sat-expand top3/gen review-opus batch msgbatch_01X2DRaYgUDHLruiLCNhL9TA"
   },
   {
    "at": "2026-10-16T04:26:08.163Z",
@@ -4968,9 +4968,34 @@
    "note": "solve batch msgbatch_01JrCU2TBxcRJBAC7uEZYASv"
   },
   {
+   "at": "2026-10-20T02:44:45.352Z",
+   "usd": 0.893016,
+   "note": "solve sync"
+  },
+  {
+   "at": "2026-10-20T02:46:52.293Z",
+   "usd": 2.459022999999999,
+   "note": "review sync"
+  },
+  {
    "at": "2026-10-20T02:47:38.934Z",
    "usd": 0.04995399999999999,
    "note": "review batch msgbatch_01UBxdBE1DTTyaASY26sRCob"
+  },
+  {
+   "at": "2026-10-20T02:47:41.853Z",
+   "usd": 0.8522240000000002,
+   "note": "review2 sync"
+  },
+  {
+   "at": "2026-10-20T02:48:10.708Z",
+   "usd": 0.5684357999999999,
+   "note": "review4 sync"
+  },
+  {
+   "at": "2026-10-20T02:49:39.202Z",
+   "usd": 1.2141980000000003,
+   "note": "difficulty sync"
   },
   {
    "at": "2026-10-20T02:53:46.842Z",
@@ -4983,9 +5008,264 @@
    "note": "review4 batch msgbatch_011VpzAKctoZrT8ZqjL2HqW8"
   },
   {
+   "at": "2026-10-20T02:57:26.724Z",
+   "usd": 0.30184159999999993,
+   "note": "solve sync"
+  },
+  {
+   "at": "2026-10-20T02:58:07.245Z",
+   "usd": 0.6855780000000001,
+   "note": "review sync"
+  },
+  {
+   "at": "2026-10-20T02:58:30.668Z",
+   "usd": 0.30291700000000005,
+   "note": "review2 sync"
+  },
+  {
+   "at": "2026-10-20T02:58:46.858Z",
+   "usd": 0.20947299999999996,
+   "note": "review4 sync"
+  },
+  {
+   "at": "2026-10-20T02:59:14.154Z",
+   "usd": 0.36732999999999993,
+   "note": "difficulty sync"
+  },
+  {
+   "at": "2026-10-20T03:00:57.178Z",
+   "usd": 0.0804976,
+   "note": "solve sync"
+  },
+  {
+   "at": "2026-10-20T03:01:08.193Z",
+   "usd": 0.12145,
+   "note": "review sync"
+  },
+  {
+   "at": "2026-10-20T03:01:17.353Z",
+   "usd": 0.040315000000000004,
+   "note": "review2 sync"
+  },
+  {
+   "at": "2026-10-20T03:01:33.384Z",
+   "usd": 0.072842,
+   "note": "difficulty sync"
+  },
+  {
+   "at": "2026-10-20T03:01:55.910Z",
+   "usd": 0.0426976,
+   "note": "solve sync"
+  },
+  {
+   "at": "2026-10-20T03:02:06.450Z",
+   "usd": 0.05932779999999999,
+   "note": "review sync"
+  },
+  {
+   "at": "2026-10-20T03:02:15.993Z",
+   "usd": 0.024222,
+   "note": "difficulty sync"
+  },
+  {
    "at": "2026-10-20T03:02:29.109Z",
    "usd": 0.02341,
    "note": "difficulty batch msgbatch_0178byiypKreNSJkFV7SkfRN"
+  },
+  {
+   "at": "2026-10-20T03:07:01.232Z",
+   "usd": 0.028172,
+   "note": "solve sync"
+  },
+  {
+   "at": "2026-10-20T03:07:10.973Z",
+   "usd": 0.072527,
+   "note": "review sync"
+  },
+  {
+   "at": "2026-10-20T03:07:20.031Z",
+   "usd": 0.014993,
+   "note": "review2 sync"
+  },
+  {
+   "at": "2026-10-20T03:07:29.375Z",
+   "usd": 0.0160526,
+   "note": "review4 sync"
+  },
+  {
+   "at": "2026-10-20T03:07:35.885Z",
+   "usd": 0.036608,
+   "note": "difficulty sync"
+  },
+  {
+   "at": "2026-10-20T03:07:56.364Z",
+   "usd": 0.07617439999999999,
+   "note": "solve sync"
+  },
+  {
+   "at": "2026-10-20T03:08:12.307Z",
+   "usd": 0.17964400000000003,
+   "note": "review sync"
+  },
+  {
+   "at": "2026-10-20T03:08:22.960Z",
+   "usd": 0.09201399999999998,
+   "note": "review2 sync"
+  },
+  {
+   "at": "2026-10-20T03:08:34.685Z",
+   "usd": 0.0304172,
+   "note": "review4 sync"
+  },
+  {
+   "at": "2026-10-20T03:08:45.541Z",
+   "usd": 0.097092,
+   "note": "difficulty sync"
+  },
+  {
+   "at": "2026-10-20T03:09:56.938Z",
+   "usd": 0.11400719999999999,
+   "note": "solve sync"
+  },
+  {
+   "at": "2026-10-20T03:10:16.880Z",
+   "usd": 0.251718,
+   "note": "review sync"
+  },
+  {
+   "at": "2026-10-20T03:10:27.057Z",
+   "usd": 0.098169,
+   "note": "review2 sync"
+  },
+  {
+   "at": "2026-10-20T03:10:36.353Z",
+   "usd": 0.0396618,
+   "note": "review4 sync"
+  },
+  {
+   "at": "2026-10-20T03:10:50.100Z",
+   "usd": 0.12273799999999999,
+   "note": "difficulty sync"
+  },
+  {
+   "at": "2026-10-20T03:19:54.372Z",
+   "usd": 0.8341704000000001,
+   "note": "solve sync"
+  },
+  {
+   "at": "2026-10-20T03:21:39.131Z",
+   "usd": 1.9542276,
+   "note": "review sync"
+  },
+  {
+   "at": "2026-10-20T03:22:10.172Z",
+   "usd": 0.5021808,
+   "note": "review2 sync"
+  },
+  {
+   "at": "2026-10-20T03:22:25.413Z",
+   "usd": 0.27893200000000007,
+   "note": "review4 sync"
+  },
+  {
+   "at": "2026-10-20T03:23:34.708Z",
+   "usd": 0.976032,
+   "note": "difficulty sync"
+  },
+  {
+   "at": "2026-10-20T03:24:11.552Z",
+   "usd": 0.17036479999999998,
+   "note": "solve sync"
+  },
+  {
+   "at": "2026-10-20T03:24:39.680Z",
+   "usd": 0.3884812,
+   "note": "review sync"
+  },
+  {
+   "at": "2026-10-20T03:24:51.165Z",
+   "usd": 0.079992,
+   "note": "review2 sync"
+  },
+  {
+   "at": "2026-10-20T03:25:04.915Z",
+   "usd": 0.0157644,
+   "note": "review4 sync"
+  },
+  {
+   "at": "2026-10-20T03:25:24.179Z",
+   "usd": 0.19986600000000002,
+   "note": "difficulty sync"
+  },
+  {
+   "at": "2026-10-20T03:26:07.710Z",
+   "usd": 0.18180880000000002,
+   "note": "solve sync"
+  },
+  {
+   "at": "2026-10-20T03:26:20.712Z",
+   "usd": 0.2212156,
+   "note": "review sync"
+  },
+  {
+   "at": "2026-10-20T03:26:32.973Z",
+   "usd": 0.079142,
+   "note": "difficulty sync"
+  },
+  {
+   "at": "2026-10-20T03:33:53.825Z",
+   "usd": 0.24908319999999992,
+   "note": "solve sync"
+  },
+  {
+   "at": "2026-10-20T03:34:27.433Z",
+   "usd": 0.5123547999999999,
+   "note": "review sync"
+  },
+  {
+   "at": "2026-10-20T03:34:38.720Z",
+   "usd": 0.0879276,
+   "note": "review2 sync"
+  },
+  {
+   "at": "2026-10-20T03:34:53.574Z",
+   "usd": 0.0398372,
+   "note": "review4 sync"
+  },
+  {
+   "at": "2026-10-20T03:35:16.906Z",
+   "usd": 0.27191600000000005,
+   "note": "difficulty sync"
+  },
+  {
+   "at": "2026-10-20T03:36:06.498Z",
+   "usd": 0.1668808,
+   "note": "solve sync"
+  },
+  {
+   "at": "2026-10-20T03:36:20.832Z",
+   "usd": 0.1954296,
+   "note": "review sync"
+  },
+  {
+   "at": "2026-10-20T03:36:38.787Z",
+   "usd": 0.07889600000000001,
+   "note": "difficulty sync"
+  },
+  {
+   "at": "2026-10-20T03:39:33.361Z",
+   "usd": 0.1001848,
+   "note": "solve sync"
+  },
+  {
+   "at": "2026-10-20T03:39:49.106Z",
+   "usd": 0.10673959999999999,
+   "note": "review sync"
+  },
+  {
+   "at": "2026-10-20T03:40:05.571Z",
+   "usd": 0.033878,
+   "note": "difficulty sync"
   }
  ]
 }

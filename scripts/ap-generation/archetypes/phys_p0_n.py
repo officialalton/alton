@@ -1237,3 +1237,14 @@ def ph_claim_collision_energy(rng):
 
 # 2026-10-19 2차 생성: 1차에서 후보 3개가 모두 반려된 원형(표기 e+03·너무 긴 stem·오답 설명 불일치를 고친 것)
 STAGE_N2_MC = ["ph_claim_power_climb", "ph_pred_planet_weight", "ph_rank_rot_ke", "ph_rank_ang_momentum", "ph_rank_moment_inertia", "ph_rank_angular_accel", "ph_pred_altitude_weight", "ph_pred_orbit_period_radius", "ph_claim_collision_energy", "ph_gravity_scaling", "ph_orbit_period_ratio", "ph_claim_momentum_system"]
+
+# 2026-10-19: phys_mc_all(단원별 목록)·phys_sets 에 새 원형을 넣어 가이드 JSON 일관성 테스트(physics1-archetypes.test.ts)가 같은 목록을 보게 한다.
+STAGE_U1 = ["ph_claim_relative_motion", "ph_claim_vt_area", "ph_sym_kinematics_vf", "ph_sym_projectile_range", "ph_sym_free_fall_time"]
+STAGE_U2 = ["ph_evid_friction_data", "ph_evid_spring_data", "ph_pred_planet_weight", "ph_claim_incline_normal", "ph_pred_incline_angle", "ph_rank_normal_force", "ph_rank_friction_force", "ph_rank_incline_accel", "ph_claim_atwood_accel", "ph_claim_friction_area", "ph_pred_altitude_weight"]
+STAGE_U3 = ["ph_claim_ramps_speed", "ph_claim_power_climb", "ph_claim_ke_stopping", "ph_claim_spring_launch", "ph_evid_ke_speed_data", "ph_sym_slide_stop_speed"]
+STAGE_U4 = ["ph_claim_airbag_force", "ph_claim_recoil_speed", "ph_claim_bounce_impulse", "ph_rank_momentum_change", "ph_pred_collision_stick", "ph_claim_collision_energy"]
+STAGE_U5 = ["ph_sym_wheel_pulley", "ph_claim_torque_door", "ph_sym_disk_rim_force", "ph_rank_moment_inertia", "ph_rank_angular_accel"]
+STAGE_U6 = ["ph_rank_rot_ke", "ph_rank_ang_momentum", "ph_sym_rolling_accel", "ph_pred_collapse_spin", "ph_claim_satellite_speed", "ph_pred_orbit_period_radius"]
+STAGE_U7 = ["ph_pred_spring_period", "ph_claim_shm_mass", "ph_evid_period_mass_data", "ph_sym_spring_added_mass", "ph_pred_pendulum_planet"]
+STAGE_U8 = ["ph_sym_pressure_depth", "ph_sym_continuity_pipe", "ph_sym_bernoulli_diff", "ph_sym_apparent_weight", "ph_claim_continuity_speed", "ph_sym_float_fraction", "ph_sym_torricelli"]
+STAGE_SETS = ["phs_ft_set", "phs_torque_set", "phs_depth_pressure_set", "phs_wt_claim_set"]
