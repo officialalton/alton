@@ -1,0 +1,219 @@
+[
+ {
+  "key": "ap_biology-f01-k0",
+  "cellId": "ap_biology-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "1000/10000 x 100 = 10%",
+     "final_answer": "10%",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Most energy is lost as heat from cellular respiration, or used for metabolism and movement. Some stays in parts that are not eaten or digested (feces, dead material), and decomposers get that.",
+     "final_answer": "Most is lost as heat from cellular respiration and metabolic work. The rest stays in uneaten or undigested material that goes to decomposers.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "100 kcal x 0.10 = 10 kcal. Add a fourth bar labeled Tertiary at 10 kcal per year.",
+     "final_answer": "10 kcal per year; add a fourth bar labeled Tertiary with height 10",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Energy drops at each level because it leaves as heat, which organisms cannot reuse, so energy moves one way and the sun has to keep supplying it. Matter is not lost as heat: decomposers break down dead organisms and wastes, and producers reuse the nutrients.",
+     "final_answer": "The bars get smaller because energy is lost as heat at each step and cannot be reused. Energy therefore flows one way and the sun must keep supplying it. Matter such as carbon and nitrogen goes back to producers through decomposition, so it cycles.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean 4-point short FRQ on energy flow. The keys are unambiguous, the stimulus data are complete, and the rubric accepts equivalent wordings. The only weakness is that the Part C rubric row does not separately check the drawn bar.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle stays within 8.2 (energy transfer between trophic levels, heat loss, energy flow versus matter cycling). Part B is the 2.B explanation. Parts A and C are data and representation parts, which are legitimate in a short FRQ Q5. Part D connects the model to a larger principle, as the Q5-D purpose requires."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All four keys are unique and defensible. 1000/10000 = 10%, and the next level is 10 kcal. Part B accepts alternative phrasings (heat, respiration, uneaten parts, waste). Part D requires heat loss, one-way energy flow with a constant input, and matter recycling. Part C asks for both the value and a drawn bar, but the rubric row checks only the value (10). That is a minor gap, but the drawn bar is still implied by the criterion text."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The bar chart data are complete (categories, values, axis titles). The note that \"primary\" and \"secondary\" refer to consumers is clear. Part C says \"tertiary consumers\" without a chart category, which is acceptable because the student adds the fourth bar. The wording is clear US English."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no distractors. The rubric rows list common errors (energy destroyed, energy recycled, matter lost), which serves the same purpose."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The workload fits a 4-point short FRQ in about 10 minutes. The only arithmetic is a simple percent, and the calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item uses a simple three-bar chart with round numbers (10000, 1000, 100). Part A is a single division to get 10%. Part B asks for a standard explanation: energy is lost as heat through respiration, as waste, and to decomposers. Part C applies the same 10% to get 10 kcal and adds a bar, which is a light graph-extension step. Part D asks for a conceptual link between one-way energy flow and nutrient cycling. Each part is one or two steps, and the reading load is minimal. The concepts are core 8.2 content with no misconception traps or multi-variable reasoning. This is more of a foundational check than a full-mock exam item. The only representation change is reading the bar chart and then drawing a new bar.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_biology-f01-k1",
+  "cellId": "ap_biology-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "5000/50000 ×100 = 10%",
+     "final_answer": "10%",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Most of it is lost as heat from cellular respiration and used for the organism's own metabolism (movement, keeping warm). Some stays in material that isn't eaten or digested and ends up with decomposers.",
+     "final_answer": "Mostly lost as heat through cellular respiration and metabolism; the rest is in uneaten or undigested material (feces, dead remains) that goes to decomposers.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "500 × 0.10 = 50 kcal per year. Add a fourth bar labeled 'Tertiary' at height 50.",
+     "final_answer": "50 kcal per year (fourth bar 'Tertiary' at 50)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Energy goes down about 90% at each level because it leaves as heat and cannot be reused, so energy flows one way and must keep coming in from the sun. Matter (C, N and other atoms) is not lost like this: decomposers return it to the soil and air, where producers take it up again.",
+     "final_answer": "Energy drops at each level because it is lost as heat that cannot be recycled, so energy flows in one direction and needs constant solar input. Matter in dead organisms and waste is broken down by decomposers and reused by producers, so it cycles.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a correct, clear 4-point bundle on energy flow, and the keys are sound. It is weak on exam suitability. Only one part assesses the target skill, and the part purposes diverge somewhat from the Q5 pattern: A is a calculation rather than a description, and part C's drawn bar is not an explicit rubric element. I fail it on exam suitability, with no instant-reject condition.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle stays within 8.2 energy flow. Part B explains the relationship between model characteristics and fits 2.B. Part A is a calculation, C is representation, and D relates the model to a larger principle. All are legitimate in a Q5-style bundle."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are unique and verified. A is 10% and C is 50 kcal per year. The B and D rubric rows list reasonable alternative phrasings. Part C is worth 1 point but asks for both the value and the drawn bar, while the rubric row mainly requires the number 50. The bar-height element is not an explicit required element, so scoring is slightly under-specified."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus data are complete: categories, values, axis titles and units. The chart description says 'kcal' while the y-axis says 'kcal per year', a minor inconsistency. The note that primary and secondary mean consumers is helpful. Part C asks the student to draw a fourth bar, which is feasible on paper. The 50-kcal bar will be barely visible on a linear axis."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common_errors listed (energy destroyed, energy recycled, matter lost) are realistic misconceptions."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The official Q5 structure is four 1-point parts, A-D, with A describe, B explain, C represent, and D relate to a principle. This bundle deviates in two ways. Part A is a calculation, whereas Q5 A should describe characteristics of the visual. Part D, on energy flow versus matter cycling, is tagged 2.C, and the CED treats 2.C as a different skill from the Q5 D purpose of relating the model to a larger principle. The data-reading load is trivially low, and part A can be done from the chart with no biology. The item is thin on the target skill, with only B truly assessing 2.B. The scoring is mostly acceptable, but the pattern fit is only moderate."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item uses round numbers and one simple percent calculation (5000/50000 = 10%). Part B is a standard recall explanation (heat from respiration, waste, uneaten parts). Part C is a single extrapolation (500 x 10% = 50 kcal) plus adding a bar, which is a light representation change. Part D is a conceptual link between one-way energy flow and matter cycling. Each part takes one or two steps, with low reading and computation load. This suits foundational practice better than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_biology-f01-k2",
+  "cellId": "ap_biology-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "7500/50000 × 100 = 15%",
+     "final_answer": "15%",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Most of the energy is released as heat during cellular respiration. Some is used for metabolism and movement, and some stays in material that is not eaten or digested (feces, dead organisms), which goes to decomposers.",
+     "final_answer": "Mostly lost as heat from cellular respiration and metabolism; the rest is in uneaten or undigested biomass and waste that decomposers use",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "1125 × 0.15 = 168.75 kcal. The fourth bar, labeled Tertiary, is about 169 kcal/yr, so it is much shorter than the Secondary bar.",
+     "final_answer": "About 169 kcal per year (168.75), drawn as a fourth bar labeled Tertiary",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Energy drops at each level because it is lost as heat that organisms cannot reuse. Energy therefore moves one way and must be resupplied by sunlight. Matter such as carbon and nitrogen is not lost: decomposers return it to the soil and air, where producers can use it again.",
+     "final_answer": "The bars get smaller at each level because energy is lost as heat, which cannot be reused. So energy flows one way and must be replaced by sunlight. Matter is broken down by decomposers and reused by producers, so it cycles.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound in content and fit. It fails on stimulus and expression because of small wording and data inconsistencies, including the stray \"table\" reference and a drawing requirement that is not checked in the rubric.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle fits Q5 (Analyze a Model or Visual) on topic 8.2. Part A calculates, part B explains energy loss, part C represents the next level, and part D relates the model to the principle that energy flows while matter is recycled. The topic is required throughout."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys of 15% and 168.75 kcal are consistent, and the ±1 and ±8.4 tolerances are reasonable. Part C is one point for the value and the drawn bar, and the rubric row checks only the number 168.75. The row names a bar of correct relative height but lists no required element for it, so the drawing is effectively unscored. The part-D rubric row is clear about the central idea, and part D adds no new measure."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stimulus data has a title, categories, values, and axis titles, which is complete. Part B refers to a \"table\" in the common_errors text, but the stimulus is a bar chart. The series name \"Energy (kcal)\" differs from the y-axis title \"kcal per year\", a minor inconsistency. Part C asks students to add a bar, but a tertiary label is never provided in the stimulus. This is minor, but the inconsistencies reduce clarity."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response bundle with no distractors. The common_errors listed in the rubric rows are plausible, such as saying energy is destroyed or recycled."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light, with four 1-point parts and a simple calculation. The calculator designation is consistent. The structure follows the short-FRQ format for Q5 (parts A to D)."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part short FRQ on trophic energy transfer. A requires one percent calculation from the chart. B requires explaining energy loss as heat from respiration, waste and unconsumed parts. C requires applying the 15% rate (1125 x 0.15 ≈ 169 kcal) and plotting a new bar. D requires linking one-way energy loss to recycled matter. Concept depth is moderate, there is a chart-to-number-to-chart shift, and reading and arithmetic are light. This is typical of AP mock FRQ difficulty and is not hard for unfair reasons.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ }
+]

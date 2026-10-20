@@ -1,0 +1,3784 @@
+[
+ {
+  "candidateKey": "ap_physics_1-m01-k0",
+  "cellId": "ap_physics_1-m01",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "4.2",
+  "unitCode": "4",
+  "skillPrimary": "2.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "phs_ft_set_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Single concept: impulse equals area under the F-t graph. The solver splits the area into a triangle (2 N s) and a trapezoid (18 N s) and sums them to 20 N s. Mass and initial speed are unused distractors. Arithmetic is small and exact, wording is clear, and there is one graph-to-number representation change. Fits an introductory impulse practice item rather than a full-mock exam item.",
+  "payload": {
+   "archetype": "phs_ft_set",
+   "topic": "4.2",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "set_intro": "A $2\\text{ kg}$ cart moves on a horizontal track with negligible friction. At $t=0$ the cart has a speed of $2\\text{ m/s}$ in the positive direction. The graph shows the net force on the cart in the direction of its motion as a function of time.",
+   "stimulus": {
+    "kind": "graph",
+    "description": "Net force on the cart versus time",
+    "data": {
+     "x_axis": {
+      "label": "Time (s)",
+      "min": 0,
+      "max": 4,
+      "step": 1
+     },
+     "y_axis": {
+      "label": "Net force (N)",
+      "min": 0,
+      "max": 10,
+      "step": 2
+     },
+     "vertices": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       4,
+       8
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "phs_ft_set_q1",
+     "topic": "4.2",
+     "skill": "2.B",
+     "stem": "What is the magnitude of the impulse that the net force exerts on the cart between $t=0$ and $t=4\\text{ s}$?",
+     "options": [
+      {
+       "text": "$12.0\\text{ N s}$",
+       "why": "Adds the force values at the plotted points without multiplying by the intervals.",
+       "value": "12.000000"
+      },
+      {
+       "text": "$16.0\\text{ N s}$",
+       "why": "Averages the first and last forces and multiplies by the total time.",
+       "value": "16.000000"
+      },
+      {
+       "text": "$32.0\\text{ N s}$",
+       "why": "Multiplies the largest force by the total time.",
+       "value": "32.000000"
+      },
+      {
+       "text": "$20.0\\text{ N s}$",
+       "why": "The areas of the trapezoids under the graph are 2.00 and 18.0 N s, which add to $20.0\\text{ N s}$.",
+       "value": "20.000000"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is $20.0\\text{ N s}$. The areas of the trapezoids under the graph are 2.00 and 18.0 N s, which add to $20.0\\text{ N s}$.\n$12.0\\text{ N s}$ is incorrect: Adds the force values at the plotted points without multiplying by the intervals.\n$16.0\\text{ N s}$ is incorrect: Averages the first and last forces and multiplies by the total time.\n$32.0\\text{ N s}$ is incorrect: Multiplies the largest force by the total time.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "phs_ft_set_q1",
+      "subject": "ap_physics_1",
+      "kind": "mc",
+      "concept": "Two questions about a single force-time graph",
+      "topic": "4.2",
+      "skill": "2.B",
+      "student_thinking": [
+       "Find the impulse as the area under the force-time graph",
+       "Use the impulse-momentum theorem for the final speed"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the plotted force is the net force along the line of motion",
+        "evidence": "the shared stimulus states the graph shows the net force"
+       }
+      ],
+      "material": {
+       "type": "graph",
+       "must_include": [
+        "axis labels with units"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Adds the force values at the plotted points without multiplying by the intervals."
+       },
+       {
+        "id": "m2",
+        "description": "Averages the first and last forces and multiplies by the total time."
+       },
+       {
+        "id": "m3",
+        "description": "Multiplies the largest force by the total time."
+       }
+      ],
+      "verification": {
+       "independent_path": "exact fractions for the area versus numpy integration of a dense resampling; the speed from the impulse-momentum equation",
+       "method": "sympy symbolic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "law_selection"
+      ]
+     }
+    },
+    {
+     "archetype": "phs_ft_set_q2",
+     "topic": "4.2",
+     "skill": "2.B",
+     "stem": "What is the speed of the cart at $t=4\\text{ s}$?",
+     "options": [
+      {
+       "text": "$22.0\\text{ m/s}$",
+       "why": "Adds the initial speed to the impulse without dividing by the mass.",
+       "value": "22.000000"
+      },
+      {
+       "text": "$12.0\\text{ m/s}$",
+       "why": "The impulse equals the change in momentum: $J=m(v-v_0)$ with $J=20.0\\text{ N s}$, $m=2\\text{ kg}$ and $v_0=2\\text{ m/s}$ gives $v=12.0\\text{ m/s}$.",
+       "value": "12.000000"
+      },
+      {
+       "text": "$18.0\\text{ m/s}$",
+       "why": "Uses the largest force times the total time as the impulse.",
+       "value": "18.000000"
+      },
+      {
+       "text": "$6.00\\text{ m/s}$",
+       "why": "Divides the final momentum by twice the mass.",
+       "value": "6.0000000"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is $12.0\\text{ m/s}$. The impulse equals the change in momentum: $J=m(v-v_0)$ with $J=20.0\\text{ N s}$, $m=2\\text{ kg}$ and $v_0=2\\text{ m/s}$ gives $v=12.0\\text{ m/s}$.\n$22.0\\text{ m/s}$ is incorrect: Adds the initial speed to the impulse without dividing by the mass.\n$18.0\\text{ m/s}$ is incorrect: Uses the largest force times the total time as the impulse.\n$6.00\\text{ m/s}$ is incorrect: Divides the final momentum by twice the mass.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "phs_ft_set_q2",
+      "subject": "ap_physics_1",
+      "kind": "mc",
+      "concept": "Two questions about a single force-time graph",
+      "topic": "4.2",
+      "skill": "2.B",
+      "student_thinking": [
+       "Find the impulse as the area under the force-time graph",
+       "Use the impulse-momentum theorem for the final speed"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the plotted force is the net force along the line of motion",
+        "evidence": "the shared stimulus states the graph shows the net force"
+       }
+      ],
+      "material": {
+       "type": "graph",
+       "must_include": [
+        "axis labels with units"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Adds the initial speed to the impulse without dividing by the mass."
+       },
+       {
+        "id": "m2",
+        "description": "Uses the largest force times the total time as the impulse."
+       },
+       {
+        "id": "m3",
+        "description": "Divides the final momentum by twice the mass."
+       }
+      ],
+      "verification": {
+       "independent_path": "exact fractions for the area versus numpy integration of a dense resampling; the speed from the impulse-momentum equation",
+       "method": "sympy symbolic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "law_selection"
+      ]
+     }
+    }
+   ],
+   "set_size": 2,
+   "est_seconds": 190,
+   "facts": [
+    "xs=[0, 1, 4]",
+    "Fv=[0, 4, 8]",
+    "m=2.0",
+    "v0=2.0"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phs_ft_set_q1",
+   "facts": [
+    "xs=[0, 1, 4]",
+    "Fv=[0, 4, 8]",
+    "m=2.0",
+    "v0=2.0"
+   ],
+   "seed": 12100
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "The item takes about 90 seconds, needs little arithmetic, and has a typical AP load.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is correct, in scope, and suitable. The only flaws are the unused mass and speed in the stem and the key explanation calling the first piece a trapezoid when it is a triangle."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "About 95 seconds, one area computation and one law, and the options are parallel numeric values.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is correct, complete and suitable. Its key of 12 m/s is verified and its distractors are distinct and explained."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single concept: impulse equals area under the F-t graph. The solver splits the area into a triangle (2 N s) and a trapezoid (18 N s) and sums them to 20 N s. Mass and initial speed are unused distractors. Arithmetic is small and exact, wording is clear, and there is one graph-to-number representation change. Fits an introductory impulse practice item rather than a full-mock exam item.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 75
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Requires choosing the impulse-momentum theorem, reading a piecewise force-time graph, and finding the area as a triangle plus a trapezoid (2 + 18 = 20 N·s). Then Δv = J/m = 10 m/s and vf = 2 + 10 = 12 m/s. Arithmetic is small and clean, and the wording is unambiguous. Distractors map to realistic errors: omitting the mass, using only the trapezoid, or omitting the initial speed. This is a typical multi-step AP Physics 1 exam item.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 4,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 120
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_physics_1-m01-k1",
+  "cellId": "ap_physics_1-m01",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "4.2",
+  "unitCode": "4",
+  "skillPrimary": "2.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "phs_ft_set_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Impulse equals the area under the F-t graph. The student splits it into two trapezoids (19.5 + 14 = 33.5 N s) and ignores the distractor mass and initial speed. The concept is core, the arithmetic is short, and the wording is clear. This is a typical mid-level exam item.",
+  "payload": {
+   "archetype": "phs_ft_set",
+   "topic": "4.2",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "set_intro": "A $4\\text{ kg}$ cart moves on a horizontal track with negligible friction. At $t=0$ the cart has a speed of $2\\text{ m/s}$ in the positive direction. The graph shows the net force on the cart in the direction of its motion as a function of time.",
+   "stimulus": {
+    "kind": "graph",
+    "description": "Net force on the cart versus time",
+    "data": {
+     "x_axis": {
+      "label": "Time (s)",
+      "min": 0,
+      "max": 5,
+      "step": 1
+     },
+     "y_axis": {
+      "label": "Net force (N)",
+      "min": 0,
+      "max": 11,
+      "step": 2
+     },
+     "vertices": [
+      [
+       0,
+       4
+      ],
+      [
+       3,
+       9
+      ],
+      [
+       5,
+       5
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "phs_ft_set_q1",
+     "topic": "4.2",
+     "skill": "2.B",
+     "stem": "What is the magnitude of the impulse that the net force exerts on the cart between $t=0$ and $t=5\\text{ s}$?",
+     "options": [
+      {
+       "text": "$18.0\\text{ N s}$",
+       "why": "Adds the force values at the plotted points without multiplying by the intervals.",
+       "value": "18.000000"
+      },
+      {
+       "text": "$45.0\\text{ N s}$",
+       "why": "Multiplies the largest force by the total time.",
+       "value": "45.000000"
+      },
+      {
+       "text": "$33.5\\text{ N s}$",
+       "why": "The areas of the trapezoids under the graph are 19.5 and 14.0 N s, which add to $33.5\\text{ N s}$.",
+       "value": "33.500000"
+      },
+      {
+       "text": "$22.5\\text{ N s}$",
+       "why": "Averages the first and last forces and multiplies by the total time.",
+       "value": "22.500000"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is $33.5\\text{ N s}$. The areas of the trapezoids under the graph are 19.5 and 14.0 N s, which add to $33.5\\text{ N s}$.\n$18.0\\text{ N s}$ is incorrect: Adds the force values at the plotted points without multiplying by the intervals.\n$45.0\\text{ N s}$ is incorrect: Multiplies the largest force by the total time.\n$22.5\\text{ N s}$ is incorrect: Averages the first and last forces and multiplies by the total time.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "phs_ft_set_q1",
+      "subject": "ap_physics_1",
+      "kind": "mc",
+      "concept": "Two questions about a single force-time graph",
+      "topic": "4.2",
+      "skill": "2.B",
+      "student_thinking": [
+       "Find the impulse as the area under the force-time graph",
+       "Use the impulse-momentum theorem for the final speed"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the plotted force is the net force along the line of motion",
+        "evidence": "the shared stimulus states the graph shows the net force"
+       }
+      ],
+      "material": {
+       "type": "graph",
+       "must_include": [
+        "axis labels with units"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Adds the force values at the plotted points without multiplying by the intervals."
+       },
+       {
+        "id": "m2",
+        "description": "Multiplies the largest force by the total time."
+       },
+       {
+        "id": "m3",
+        "description": "Averages the first and last forces and multiplies by the total time."
+       }
+      ],
+      "verification": {
+       "independent_path": "exact fractions for the area versus numpy integration of a dense resampling; the speed from the impulse-momentum equation",
+       "method": "sympy symbolic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "law_selection"
+      ]
+     }
+    },
+    {
+     "archetype": "phs_ft_set_q2",
+     "topic": "4.2",
+     "skill": "2.B",
+     "stem": "What is the speed of the cart at $t=5\\text{ s}$?",
+     "options": [
+      {
+       "text": "$8.38\\text{ m/s}$",
+       "why": "Reports the change in speed, $J/m$, and forgets to add the initial speed.",
+       "value": "8.3750000"
+      },
+      {
+       "text": "$5.19\\text{ m/s}$",
+       "why": "Divides the final momentum by twice the mass.",
+       "value": "5.1875000"
+      },
+      {
+       "text": "$13.2\\text{ m/s}$",
+       "why": "Uses the largest force times the total time as the impulse.",
+       "value": "13.250000"
+      },
+      {
+       "text": "$10.4\\text{ m/s}$",
+       "why": "The impulse equals the change in momentum: $J=m(v-v_0)$ with $J=33.5\\text{ N s}$, $m=4\\text{ kg}$ and $v_0=2\\text{ m/s}$ gives $v=10.4\\text{ m/s}$.",
+       "value": "10.375000"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is $10.4\\text{ m/s}$. The impulse equals the change in momentum: $J=m(v-v_0)$ with $J=33.5\\text{ N s}$, $m=4\\text{ kg}$ and $v_0=2\\text{ m/s}$ gives $v=10.4\\text{ m/s}$.\n$8.38\\text{ m/s}$ is incorrect: Reports the change in speed, $J/m$, and forgets to add the initial speed.\n$5.19\\text{ m/s}$ is incorrect: Divides the final momentum by twice the mass.\n$13.2\\text{ m/s}$ is incorrect: Uses the largest force times the total time as the impulse.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "phs_ft_set_q2",
+      "subject": "ap_physics_1",
+      "kind": "mc",
+      "concept": "Two questions about a single force-time graph",
+      "topic": "4.2",
+      "skill": "2.B",
+      "student_thinking": [
+       "Find the impulse as the area under the force-time graph",
+       "Use the impulse-momentum theorem for the final speed"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the plotted force is the net force along the line of motion",
+        "evidence": "the shared stimulus states the graph shows the net force"
+       }
+      ],
+      "material": {
+       "type": "graph",
+       "must_include": [
+        "axis labels with units"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Reports the change in speed, $J/m$, and forgets to add the initial speed."
+       },
+       {
+        "id": "m2",
+        "description": "Divides the final momentum by twice the mass."
+       },
+       {
+        "id": "m3",
+        "description": "Uses the largest force times the total time as the impulse."
+       }
+      ],
+      "verification": {
+       "independent_path": "exact fractions for the area versus numpy integration of a dense resampling; the speed from the impulse-momentum equation",
+       "method": "sympy symbolic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "law_selection"
+      ]
+     }
+    }
+   ],
+   "set_size": 2,
+   "est_seconds": 190,
+   "facts": [
+    "xs=[0, 3, 5]",
+    "Fv=[4, 9, 5]",
+    "m=4.0",
+    "v0=2.0"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phs_ft_set_q1",
+   "facts": [
+    "xs=[0, 3, 5]",
+    "Fv=[4, 9, 5]",
+    "m=4.0",
+    "v0=2.0"
+   ],
+   "seed": 12101
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "The task load is typical. The mass and initial speed are unused extraneous givens left over from a paired second question, which adds minor reading load.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound, with a correct unique key and distinct distractors. The only flaw is minor: the stem gives the mass and initial speed, which this standalone question does not use."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Impulse as area under F-t graph plus impulse-momentum theorem; fits 4.2 / 2.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Area 33.5 N s, v = 2 + 8.375 = 10.375 ≈ 10.4 m/s; unique correct option."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Graph data complete with axes, labels and vertices; stem states net force and the positive direction."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor reproduces a distinct, realistic error; all three verified numerically; the explanation covers each wrong option."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Typical load, calculator allowed, about 95 s."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound: the key is correct and unique, the graph is complete, and the distractors are distinct and verified. It passes all criteria."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "exam_prep",
+    "rationale": "Impulse equals the area under the F-t graph. The student splits it into two trapezoids (19.5 + 14 = 33.5 N s) and ignores the distractor mass and initial speed. The concept is core, the arithmetic is short, and the wording is clear. This is a typical mid-level exam item.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 90
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Requires choosing the impulse-momentum theorem, reading the area under a force-time graph (two trapezoids), converting impulse to a change in velocity, and adding the initial speed. The distractor 8.38 m/s catches students who omit the initial momentum. The arithmetic is short and the wording is unambiguous. The depth and number of steps fit a full-mock item rather than basic learning.",
+    "reading_load": "low",
+    "computation_load": "medium",
+    "reasoning_steps": 4,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 120
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_physics_1-m01-k2",
+  "cellId": "ap_physics_1-m01",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "4.2",
+  "unitCode": "4",
+  "skillPrimary": "2.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "phs_ft_set_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Impulse equals the area under the F-t graph. The student reads the vertices and sums three trapezoid areas (5 + 19.5 + 16.5 = 41.0 N s). There is one representation change (graph to number) and simple arithmetic. The mass and initial speed are extraneous, giving a mild distraction. Concept depth is low, and the item fits basic learning of topic 4.2 rather than a full-mock exam-level multi-step problem.",
+  "payload": {
+   "archetype": "phs_ft_set",
+   "topic": "4.2",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "set_intro": "A $2\\text{ kg}$ cart moves on a horizontal track with negligible friction. At $t=0$ the cart has a speed of $3\\text{ m/s}$ in the positive direction. The graph shows the net force on the cart in the direction of its motion as a function of time.",
+   "stimulus": {
+    "kind": "graph",
+    "description": "Net force on the cart versus time",
+    "data": {
+     "x_axis": {
+      "label": "Time (s)",
+      "min": 0,
+      "max": 7,
+      "step": 1
+     },
+     "y_axis": {
+      "label": "Net force (N)",
+      "min": 0,
+      "max": 10,
+      "step": 2
+     },
+     "vertices": [
+      [
+       0,
+       2
+      ],
+      [
+       1,
+       8
+      ],
+      [
+       4,
+       5
+      ],
+      [
+       7,
+       6
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "phs_ft_set_q1",
+     "topic": "4.2",
+     "skill": "2.B",
+     "stem": "What is the magnitude of the impulse that the net force exerts on the cart between $t=0$ and $t=7\\text{ s}$?",
+     "options": [
+      {
+       "text": "$41.0\\text{ N s}$",
+       "why": "The areas of the trapezoids under the graph are 5.00, 19.5 and 16.5 N s, which add to $41.0\\text{ N s}$.",
+       "value": "41.000000"
+      },
+      {
+       "text": "$56.0\\text{ N s}$",
+       "why": "Multiplies the largest force by the total time.",
+       "value": "56.000000"
+      },
+      {
+       "text": "$21.0\\text{ N s}$",
+       "why": "Adds the force values at the plotted points without multiplying by the intervals.",
+       "value": "21.000000"
+      },
+      {
+       "text": "$5.00\\text{ N s}$",
+       "why": "Uses only the area of the first segment.",
+       "value": "5.0000000"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is $41.0\\text{ N s}$. The areas of the trapezoids under the graph are 5.00, 19.5 and 16.5 N s, which add to $41.0\\text{ N s}$.\n$56.0\\text{ N s}$ is incorrect: Multiplies the largest force by the total time.\n$21.0\\text{ N s}$ is incorrect: Adds the force values at the plotted points without multiplying by the intervals.\n$5.00\\text{ N s}$ is incorrect: Uses only the area of the first segment.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "phs_ft_set_q1",
+      "subject": "ap_physics_1",
+      "kind": "mc",
+      "concept": "Two questions about a single force-time graph",
+      "topic": "4.2",
+      "skill": "2.B",
+      "student_thinking": [
+       "Find the impulse as the area under the force-time graph",
+       "Use the impulse-momentum theorem for the final speed"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the plotted force is the net force along the line of motion",
+        "evidence": "the shared stimulus states the graph shows the net force"
+       }
+      ],
+      "material": {
+       "type": "graph",
+       "must_include": [
+        "axis labels with units"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Multiplies the largest force by the total time."
+       },
+       {
+        "id": "m2",
+        "description": "Adds the force values at the plotted points without multiplying by the intervals."
+       },
+       {
+        "id": "m3",
+        "description": "Uses only the area of the first segment."
+       }
+      ],
+      "verification": {
+       "independent_path": "exact fractions for the area versus numpy integration of a dense resampling; the speed from the impulse-momentum equation",
+       "method": "sympy symbolic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "law_selection"
+      ]
+     }
+    },
+    {
+     "archetype": "phs_ft_set_q2",
+     "topic": "4.2",
+     "skill": "2.B",
+     "stem": "What is the speed of the cart at $t=7\\text{ s}$?",
+     "options": [
+      {
+       "text": "$23.5\\text{ m/s}$",
+       "why": "The impulse equals the change in momentum: $J=m(v-v_0)$ with $J=41.0\\text{ N s}$, $m=2\\text{ kg}$ and $v_0=3\\text{ m/s}$ gives $v=23.5\\text{ m/s}$.",
+       "value": "23.500000"
+      },
+      {
+       "text": "$31.0\\text{ m/s}$",
+       "why": "Uses the largest force times the total time as the impulse.",
+       "value": "31.000000"
+      },
+      {
+       "text": "$20.5\\text{ m/s}$",
+       "why": "Reports the change in speed, $J/m$, and forgets to add the initial speed.",
+       "value": "20.500000"
+      },
+      {
+       "text": "$11.8\\text{ m/s}$",
+       "why": "Divides the final momentum by twice the mass.",
+       "value": "11.750000"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is $23.5\\text{ m/s}$. The impulse equals the change in momentum: $J=m(v-v_0)$ with $J=41.0\\text{ N s}$, $m=2\\text{ kg}$ and $v_0=3\\text{ m/s}$ gives $v=23.5\\text{ m/s}$.\n$31.0\\text{ m/s}$ is incorrect: Uses the largest force times the total time as the impulse.\n$20.5\\text{ m/s}$ is incorrect: Reports the change in speed, $J/m$, and forgets to add the initial speed.\n$11.8\\text{ m/s}$ is incorrect: Divides the final momentum by twice the mass.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "phs_ft_set_q2",
+      "subject": "ap_physics_1",
+      "kind": "mc",
+      "concept": "Two questions about a single force-time graph",
+      "topic": "4.2",
+      "skill": "2.B",
+      "student_thinking": [
+       "Find the impulse as the area under the force-time graph",
+       "Use the impulse-momentum theorem for the final speed"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the plotted force is the net force along the line of motion",
+        "evidence": "the shared stimulus states the graph shows the net force"
+       }
+      ],
+      "material": {
+       "type": "graph",
+       "must_include": [
+        "axis labels with units"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Uses the largest force times the total time as the impulse."
+       },
+       {
+        "id": "m2",
+        "description": "Reports the change in speed, $J/m$, and forgets to add the initial speed."
+       },
+       {
+        "id": "m3",
+        "description": "Divides the final momentum by twice the mass."
+       }
+      ],
+      "verification": {
+       "independent_path": "exact fractions for the area versus numpy integration of a dense resampling; the speed from the impulse-momentum equation",
+       "method": "sympy symbolic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "law_selection"
+      ]
+     }
+    }
+   ],
+   "set_size": 2,
+   "est_seconds": 190,
+   "facts": [
+    "xs=[0, 1, 4, 7]",
+    "Fv=[2, 8, 5, 6]",
+    "m=2.0",
+    "v0=3.0"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phs_ft_set_q1",
+   "facts": [
+    "xs=[0, 1, 4, 7]",
+    "Fv=[2, 8, 5, 6]",
+    "m=2.0",
+    "v0=3.0"
+   ],
+   "seed": 12102
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Impulse as area under F-t graph, topic 4.2, skill 2.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Area = 5+19.5+16.5 = 41 N s; unique correct option."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Graph vertices, axes with labels and units, and net-force condition are all given. Mass and initial speed are unneeded but harmless."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct misconceptions (largest force times total time, summed force values, first segment only), each explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 95 s, calculator allowed, modest arithmetic."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound. The key of 41 N s is the unique correct answer, the graph data are complete, the distractors are distinct, and the load is typical for the exam."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Impulse as area under F-t graph plus impulse-momentum theorem; topic 4.2, skill 2.B. No out-of-scope content."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Area = 5+19.5+16.5 = 41 N s; v = 3+20.5 = 23.5 m/s. Unique correct answer."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Graph data has labeled axes with units, ranges and vertices. The stem states net force along the motion direction."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "All three distractors reproduce from the stated misconceptions (56/2+3=31; 20.5; 47/4=11.75). The explanation addresses each one."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 95 seconds, calculator allowed, modest arithmetic, typical AP load."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Correct, clear and in scope. The key and distractors check out and the item has a standard AP load. Pass."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Impulse equals the area under the F-t graph. The student reads the vertices and sums three trapezoid areas (5 + 19.5 + 16.5 = 41.0 N s). There is one representation change (graph to number) and simple arithmetic. The mass and initial speed are extraneous, giving a mild distraction. Concept depth is low, and the item fits basic learning of topic 4.2 rather than a full-mock exam-level multi-step problem.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 75
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must choose the impulse-momentum theorem, find the area under a non-constant force-time graph using three trapezoid segments (the graph begins at a nonzero force), convert impulse to change in velocity using mass, and add the initial speed. Arithmetic is short and clean (5 + 19.5 + 16.5 = 41 N·s; 41/2 = 20.5; plus 3 = 23.5 m/s). Distractors target common slips such as omitting the initial speed. Wording is clear and the content is in scope.",
+    "reading_load": "low",
+    "computation_load": "medium",
+    "reasoning_steps": 4,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 150
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_physics_1-m02-k0",
+  "cellId": "ap_physics_1-m02",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "5.6",
+  "unitCode": "5",
+  "skillPrimary": "2.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "phs_torque_set_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "set_item_2:criterion_failed_scope_skill; set_item_2:reference_pattern_mismatch; criterion_failed_scope_skill; reference_pattern_mismatch",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Single-step application of Newton's second law in rotational form (alpha = tau/I). The only representation work is reading one value from a graph at a labeled vertex (t=3 s, torque = 7 N m). No multi-step reasoning, unit conversion, or heavy arithmetic. Distractors reflect simple errors (omitting I, inverting the ratio).",
+  "payload": {
+   "archetype": "phs_torque_set",
+   "topic": "5.6",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "set_intro": "A wheel with a moment of inertia of $4\\text{ kg m}^2$ is at rest at $t=0$ on a fixed frictionless axle. The graph shows the net torque on the wheel as a function of time.",
+   "stimulus": {
+    "kind": "graph",
+    "description": "Net torque on the wheel versus time",
+    "data": {
+     "x_axis": {
+      "label": "Time (s)",
+      "min": 0,
+      "max": 4,
+      "step": 1
+     },
+     "y_axis": {
+      "label": "Net torque (N m)",
+      "min": 0,
+      "max": 11,
+      "step": 2
+     },
+     "vertices": [
+      [
+       0,
+       0
+      ],
+      [
+       3,
+       7
+      ],
+      [
+       4,
+       9
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "phs_torque_set_q1",
+     "topic": "5.6",
+     "skill": "2.B",
+     "stem": "What is the angular acceleration of the wheel at $t=3\\text{ s}$?",
+     "options": [
+      {
+       "text": "$1.16\\text{ rad/s}^{2}$",
+       "why": "Uses the average torque over the whole graph divided by the moment of inertia.",
+       "value": "1.1562500"
+      },
+      {
+       "text": "$1.75\\text{ rad/s}^{2}$",
+       "why": "The net torque at $t=3\\text{ s}$ is $7\\text{ N m}$, so $\\alpha=\\tau/I=1.75\\text{ rad/s}^2$.",
+       "value": "1.7500000"
+      },
+      {
+       "text": "$7.00\\text{ rad/s}^{2}$",
+       "why": "Reports the net torque without dividing by the moment of inertia.",
+       "value": "7.0000000"
+      },
+      {
+       "text": "$0.571\\text{ rad/s}^{2}$",
+       "why": "Divides the moment of inertia by the net torque.",
+       "value": "0.57142857"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is $1.75\\text{ rad/s}^{2}$. The net torque at $t=3\\text{ s}$ is $7\\text{ N m}$, so $\\alpha=\\tau/I=1.75\\text{ rad/s}^2$.\n$1.16\\text{ rad/s}^{2}$ is incorrect: Uses the average torque over the whole graph divided by the moment of inertia.\n$7.00\\text{ rad/s}^{2}$ is incorrect: Reports the net torque without dividing by the moment of inertia.\n$0.571\\text{ rad/s}^{2}$ is incorrect: Divides the moment of inertia by the net torque.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "phs_torque_set_q1",
+      "subject": "ap_physics_1",
+      "kind": "mc",
+      "concept": "Two questions about a single net torque-time graph",
+      "topic": "5.6",
+      "skill": "2.B",
+      "student_thinking": [
+       "Use the second law for rotation to find the angular acceleration from the torque",
+       "Find the change in angular momentum as the area under the torque-time graph"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the plotted torque is the net torque about the axle",
+        "evidence": "the shared stimulus states the graph shows the net torque"
+       }
+      ],
+      "material": {
+       "type": "graph",
+       "must_include": [
+        "axis labels with units"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Uses the average torque over the whole graph divided by the moment of inertia."
+       },
+       {
+        "id": "m2",
+        "description": "Reports the net torque without dividing by the moment of inertia."
+       },
+       {
+        "id": "m3",
+        "description": "Divides the moment of inertia by the net torque."
+       }
+      ],
+      "verification": {
+       "independent_path": "exact fractions for the area versus numpy integration; the angular acceleration from the torque and the moment of inertia",
+       "method": "sympy symbolic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "law_selection"
+      ]
+     }
+    },
+    {
+     "archetype": "phs_torque_set_q2",
+     "topic": "5.6",
+     "skill": "2.B",
+     "stem": "What is the angular speed of the wheel at $t=4\\text{ s}$?",
+     "options": [
+      {
+       "text": "$4.62\\text{ rad/s}$",
+       "why": "The change in angular momentum is the area under the graph, 10.5 and 8.00 N m s, which adds to $18.5\\text{ kg m}^2\\text{/s}$; dividing by $I=4\\text{ kg m}^2$ gives $\\omega=4.62\\text{ rad/s}$.",
+       "value": "4.6250000"
+      },
+      {
+       "text": "$9.00\\text{ rad/s}$",
+       "why": "Multiplies the largest torque by the total time and divides by the moment of inertia.",
+       "value": "9.0000000"
+      },
+      {
+       "text": "$2.62\\text{ rad/s}$",
+       "why": "Uses only the area of the first segment divided by the moment of inertia.",
+       "value": "2.6250000"
+      },
+      {
+       "text": "$2.25\\text{ rad/s}$",
+       "why": "Divides the final torque by the moment of inertia, ignoring the time for which the torque acts.",
+       "value": "2.2500000"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is $4.62\\text{ rad/s}$. The change in angular momentum is the area under the graph, 10.5 and 8.00 N m s, which adds to $18.5\\text{ kg m}^2\\text{/s}$; dividing by $I=4\\text{ kg m}^2$ gives $\\omega=4.62\\text{ rad/s}$.\n$9.00\\text{ rad/s}$ is incorrect: Multiplies the largest torque by the total time and divides by the moment of inertia.\n$2.62\\text{ rad/s}$ is incorrect: Uses only the area of the first segment divided by the moment of inertia.\n$2.25\\text{ rad/s}$ is incorrect: Divides the final torque by the moment of inertia, ignoring the time for which the torque acts.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "phs_torque_set_q2",
+      "subject": "ap_physics_1",
+      "kind": "mc",
+      "concept": "Two questions about a single net torque-time graph",
+      "topic": "5.6",
+      "skill": "2.B",
+      "student_thinking": [
+       "Use the second law for rotation to find the angular acceleration from the torque",
+       "Find the change in angular momentum as the area under the torque-time graph"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the plotted torque is the net torque about the axle",
+        "evidence": "the shared stimulus states the graph shows the net torque"
+       }
+      ],
+      "material": {
+       "type": "graph",
+       "must_include": [
+        "axis labels with units"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Multiplies the largest torque by the total time and divides by the moment of inertia."
+       },
+       {
+        "id": "m2",
+        "description": "Uses only the area of the first segment divided by the moment of inertia."
+       },
+       {
+        "id": "m3",
+        "description": "Divides the final torque by the moment of inertia, ignoring the time for which the torque acts."
+       }
+      ],
+      "verification": {
+       "independent_path": "exact fractions for the area versus numpy integration; the angular acceleration from the torque and the moment of inertia",
+       "method": "sympy symbolic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "law_selection"
+      ]
+     }
+    }
+   ],
+   "set_size": 2,
+   "est_seconds": 190,
+   "facts": [
+    "xs=[0, 3, 4]",
+    "Tv=[0, 7, 9]",
+    "I=4.0"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phs_torque_set_q1",
+   "facts": [
+    "xs=[0, 3, 4]",
+    "Tv=[0, 7, 9]",
+    "I=4.0"
+   ],
+   "seed": 12100
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Applies alpha = tau/I with a torque read from a graph, which fits topic 5.6 and skill 2.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "alpha = 7/4 = 1.75 rad/s^2 is the unique answer. The graph is read at t = 3 s, the net torque is stated, and the axle is frictionless."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The data are complete: labeled axes with units and vertices (0,0), (3,7), (4,9). The value 7 falls between y-ticks but is readable from the vertex."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "The three distractors encode distinct misconceptions, and each wrong option is explained. The average-torque value 4.625/4 = 1.156 matches the option."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "A short item of about 60 to 90 seconds with minimal arithmetic. The calculator designation is consistent."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "A clean, simple item. The key 1.75 rad/s^2 is unique, the stimulus data are complete, and the distractors are distinct and explained. The only minor issue is a blueprint note about a second area question that the stem does not ask."
+   },
+   {
+    "scope_skill": {
+     "pass": false,
+     "notes": "Solution depends on angular impulse = change in angular momentum (area under torque-time graph), which belongs to later Unit 5 topics (5.7/5.8), not Newton's second law in rotational form (5.6). Item does not primarily assess tau = I alpha."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Area = 10.5 + 8 = 18.5; /4 = 4.625 rad/s. Key unique and correct."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Vertices fully specify the graph; y-axis max 11 with step 2 is slightly odd but data complete."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor has a distinct, explained misconception."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Time and calculator load are reasonable."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": false,
+    "resembles_known_exam_item": false,
+    "summary": "The arithmetic and key are correct, but the item relies on angular impulse and angular momentum (area under the torque-time graph), which is not the 5.6 topic of tau = I alpha. It fails the scope criterion."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single-step application of Newton's second law in rotational form (alpha = tau/I). The only representation work is reading one value from a graph at a labeled vertex (t=3 s, torque = 7 N m). No multi-step reasoning, unit conversion, or heavy arithmetic. Distractors reflect simple errors (omitting I, inverting the ratio).",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Requires choosing the rotational impulse-momentum / Newton's 2nd law in rotational form with a time-varying torque, reading a piecewise-linear graph, computing the area as a triangle plus a trapezoid, then dividing by I. Distractors map to plausible errors (final torque only, area to 3 s only). The arithmetic is light and the wording is clear. The difficulty comes from the representation change and multi-step reasoning, not from unfair sources.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 4,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 120
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_physics_1-m02-k1",
+  "cellId": "ap_physics_1-m02",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "5.6",
+  "unitCode": "5",
+  "skillPrimary": "2.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "phs_torque_set_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Single graph read (torque = 9 N m at t=3 s) followed by one application of Newton's second law for rotation, alpha = tau/I = 4.5 rad/s^2. Arithmetic is trivial, reading load is low, and the wording is unambiguous. Distractors reflect common errors (not dividing by I, multiplying by I). The graph is a mild representation read, but there are no extra reasoning steps such as integrating the graph or linking to kinematics.",
+  "payload": {
+   "archetype": "phs_torque_set",
+   "topic": "5.6",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "set_intro": "A wheel with a moment of inertia of $2\\text{ kg m}^2$ is at rest at $t=0$ on a fixed frictionless axle. The graph shows the net torque on the wheel as a function of time.",
+   "stimulus": {
+    "kind": "graph",
+    "description": "Net torque on the wheel versus time",
+    "data": {
+     "x_axis": {
+      "label": "Time (s)",
+      "min": 0,
+      "max": 5,
+      "step": 1
+     },
+     "y_axis": {
+      "label": "Net torque (N m)",
+      "min": 0,
+      "max": 11,
+      "step": 2
+     },
+     "vertices": [
+      [
+       0,
+       4
+      ],
+      [
+       3,
+       9
+      ],
+      [
+       5,
+       5
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "phs_torque_set_q1",
+     "topic": "5.6",
+     "skill": "2.B",
+     "stem": "What is the angular acceleration of the wheel at $t=3\\text{ s}$?",
+     "options": [
+      {
+       "text": "$3.35\\text{ rad/s}^{2}$",
+       "why": "Uses the average torque over the whole graph divided by the moment of inertia.",
+       "value": "3.3500000"
+      },
+      {
+       "text": "$9.00\\text{ rad/s}^{2}$",
+       "why": "Reports the net torque without dividing by the moment of inertia.",
+       "value": "9.0000000"
+      },
+      {
+       "text": "$18.0\\text{ rad/s}^{2}$",
+       "why": "Multiplies the net torque by the moment of inertia instead of dividing.",
+       "value": "18.000000"
+      },
+      {
+       "text": "$4.50\\text{ rad/s}^{2}$",
+       "why": "The net torque at $t=3\\text{ s}$ is $9\\text{ N m}$, so $\\alpha=\\tau/I=4.50\\text{ rad/s}^2$.",
+       "value": "4.5000000"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is $4.50\\text{ rad/s}^{2}$. The net torque at $t=3\\text{ s}$ is $9\\text{ N m}$, so $\\alpha=\\tau/I=4.50\\text{ rad/s}^2$.\n$3.35\\text{ rad/s}^{2}$ is incorrect: Uses the average torque over the whole graph divided by the moment of inertia.\n$9.00\\text{ rad/s}^{2}$ is incorrect: Reports the net torque without dividing by the moment of inertia.\n$18.0\\text{ rad/s}^{2}$ is incorrect: Multiplies the net torque by the moment of inertia instead of dividing.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "phs_torque_set_q1",
+      "subject": "ap_physics_1",
+      "kind": "mc",
+      "concept": "Two questions about a single net torque-time graph",
+      "topic": "5.6",
+      "skill": "2.B",
+      "student_thinking": [
+       "Use the second law for rotation to find the angular acceleration from the torque",
+       "Find the change in angular momentum as the area under the torque-time graph"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the plotted torque is the net torque about the axle",
+        "evidence": "the shared stimulus states the graph shows the net torque"
+       }
+      ],
+      "material": {
+       "type": "graph",
+       "must_include": [
+        "axis labels with units"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Uses the average torque over the whole graph divided by the moment of inertia."
+       },
+       {
+        "id": "m2",
+        "description": "Reports the net torque without dividing by the moment of inertia."
+       },
+       {
+        "id": "m3",
+        "description": "Multiplies the net torque by the moment of inertia instead of dividing."
+       }
+      ],
+      "verification": {
+       "independent_path": "exact fractions for the area versus numpy integration; the angular acceleration from the torque and the moment of inertia",
+       "method": "sympy symbolic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "law_selection"
+      ]
+     }
+    },
+    {
+     "archetype": "phs_torque_set_q2",
+     "topic": "5.6",
+     "skill": "2.B",
+     "stem": "What is the angular speed of the wheel at $t=5\\text{ s}$?",
+     "options": [
+      {
+       "text": "$16.8\\text{ rad/s}$",
+       "why": "The change in angular momentum is the area under the graph, 19.5 and 14.0 N m s, which adds to $33.5\\text{ kg m}^2\\text{/s}$; dividing by $I=2\\text{ kg m}^2$ gives $\\omega=16.8\\text{ rad/s}$.",
+       "value": "16.750000"
+      },
+      {
+       "text": "$22.5\\text{ rad/s}$",
+       "why": "Multiplies the largest torque by the total time and divides by the moment of inertia.",
+       "value": "22.500000"
+      },
+      {
+       "text": "$33.5\\text{ rad/s}$",
+       "why": "Reports the change in angular momentum, which is the area, without dividing by the moment of inertia.",
+       "value": "33.500000"
+      },
+      {
+       "text": "$2.50\\text{ rad/s}$",
+       "why": "Divides the final torque by the moment of inertia, ignoring the time for which the torque acts.",
+       "value": "2.5000000"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is $16.8\\text{ rad/s}$. The change in angular momentum is the area under the graph, 19.5 and 14.0 N m s, which adds to $33.5\\text{ kg m}^2\\text{/s}$; dividing by $I=2\\text{ kg m}^2$ gives $\\omega=16.8\\text{ rad/s}$.\n$22.5\\text{ rad/s}$ is incorrect: Multiplies the largest torque by the total time and divides by the moment of inertia.\n$33.5\\text{ rad/s}$ is incorrect: Reports the change in angular momentum, which is the area, without dividing by the moment of inertia.\n$2.50\\text{ rad/s}$ is incorrect: Divides the final torque by the moment of inertia, ignoring the time for which the torque acts.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "phs_torque_set_q2",
+      "subject": "ap_physics_1",
+      "kind": "mc",
+      "concept": "Two questions about a single net torque-time graph",
+      "topic": "5.6",
+      "skill": "2.B",
+      "student_thinking": [
+       "Use the second law for rotation to find the angular acceleration from the torque",
+       "Find the change in angular momentum as the area under the torque-time graph"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the plotted torque is the net torque about the axle",
+        "evidence": "the shared stimulus states the graph shows the net torque"
+       }
+      ],
+      "material": {
+       "type": "graph",
+       "must_include": [
+        "axis labels with units"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Multiplies the largest torque by the total time and divides by the moment of inertia."
+       },
+       {
+        "id": "m2",
+        "description": "Reports the change in angular momentum, which is the area, without dividing by the moment of inertia."
+       },
+       {
+        "id": "m3",
+        "description": "Divides the final torque by the moment of inertia, ignoring the time for which the torque acts."
+       }
+      ],
+      "verification": {
+       "independent_path": "exact fractions for the area versus numpy integration; the angular acceleration from the torque and the moment of inertia",
+       "method": "sympy symbolic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "law_selection"
+      ]
+     }
+    }
+   ],
+   "set_size": 2,
+   "est_seconds": 190,
+   "facts": [
+    "xs=[0, 3, 5]",
+    "Tv=[4, 9, 5]",
+    "I=2.0"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phs_torque_set_q1",
+   "facts": [
+    "xs=[0, 3, 5]",
+    "Tv=[4, 9, 5]",
+    "I=2.0"
+   ],
+   "seed": 12101
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Applies alpha = tau/I with a value read from a graph; fits topic 5.6 and skill 2.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "tau(3) = 9 N m, so alpha = 4.5 rad/s^2. The key is unique. The 3.35 distractor equals 6.7/2, consistent with its rationale."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The vertices fully specify the graph and the axes are labeled with units. The y-axis step of 2 means the peak at 9 falls between ticks, which is a minor readability issue."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor encodes a distinct error and the explanation covers every wrong option."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "The reading and calculation load is light and typical for AP Physics 1."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "A sound, simple item. Reading tau = 9 N m from the graph at t = 3 s gives alpha = 4.50 rad/s^2, and the distractors are distinct. The only weakness is that the y-axis ticks step by 2, so the peak at 9 falls between ticks."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Torque-time graph area divided by I; uses Newton's second law in rotational form integrated over time (angular impulse), a mild extension but within Unit 5. Dominant skill is a calculation with a representation read."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Areas 19.5 + 14 = 33.5; 33.5/2 = 16.75 ≈ 16.8 rad/s. Unique answer."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Vertices, axis labels and ranges are complete. Frictionless fixed axle and net torque are stated. The y-axis max of 11 with step 2 is slightly odd, but the vertices are specified."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor matches a distinct misconception (peak torque times time over I, forgetting to divide by I, final torque over I), and the explanation covers each."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 95 s, calculator-friendly, single graph, typical AP load."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound: the key is verified, the distractors are distinct, and the load is appropriate. The only caveats are a slight stretch toward angular impulse and an unusual y-axis tick choice."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single graph read (torque = 9 N m at t=3 s) followed by one application of Newton's second law for rotation, alpha = tau/I = 4.5 rad/s^2. Arithmetic is trivial, reading load is low, and the wording is unambiguous. Distractors reflect common errors (not dividing by I, multiplying by I). The graph is a mild representation read, but there are no extra reasoning steps such as integrating the graph or linking to kinematics.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must recognize that torque varies with time, so constant-alpha kinematics fails. They must use the area under the torque-time graph (angular impulse, equal to I times the change in omega) and then divide by I. Two trapezoid areas (19.5 and 14) give 33.5 N m s, and 33.5/2 = 16.75 rad/s, which is about 16.8. Distractors reflect skipping the division by I, misreading the graph, and using alpha at a single point. Arithmetic is light and the graph reading is clean.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 4,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 120
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_physics_1-m02-k2",
+  "cellId": "ap_physics_1-m02",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "5.6",
+  "unitCode": "5",
+  "skillPrimary": "2.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "phs_torque_set_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Single-step application of Newton's second law for rotation: read the torque at t=7 s from the graph (6 N m) and divide by I=2 kg m^2 to get 3.00 rad/s^2. The only added demand is a simple graph read; the distractors reflect inverted or missing-division errors. There is no multi-step reasoning, no integration of the graph, and the arithmetic is trivial.",
+  "payload": {
+   "archetype": "phs_torque_set",
+   "topic": "5.6",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "set_intro": "A wheel with a moment of inertia of $2\\text{ kg m}^2$ is at rest at $t=0$ on a fixed frictionless axle. The graph shows the net torque on the wheel as a function of time.",
+   "stimulus": {
+    "kind": "graph",
+    "description": "Net torque on the wheel versus time",
+    "data": {
+     "x_axis": {
+      "label": "Time (s)",
+      "min": 0,
+      "max": 7,
+      "step": 1
+     },
+     "y_axis": {
+      "label": "Net torque (N m)",
+      "min": 0,
+      "max": 10,
+      "step": 2
+     },
+     "vertices": [
+      [
+       0,
+       2
+      ],
+      [
+       1,
+       8
+      ],
+      [
+       4,
+       5
+      ],
+      [
+       7,
+       6
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "phs_torque_set_q1",
+     "topic": "5.6",
+     "skill": "2.B",
+     "stem": "What is the angular acceleration of the wheel at $t=7\\text{ s}$?",
+     "options": [
+      {
+       "text": "$3.00\\text{ rad/s}^{2}$",
+       "why": "The net torque at $t=7\\text{ s}$ is $6\\text{ N m}$, so $\\alpha=\\tau/I=3.00\\text{ rad/s}^2$.",
+       "value": "3.0000000"
+      },
+      {
+       "text": "$0.333\\text{ rad/s}^{2}$",
+       "why": "Divides the moment of inertia by the net torque.",
+       "value": "0.33333333"
+      },
+      {
+       "text": "$12.0\\text{ rad/s}^{2}$",
+       "why": "Multiplies the net torque by the moment of inertia instead of dividing.",
+       "value": "12.000000"
+      },
+      {
+       "text": "$6.00\\text{ rad/s}^{2}$",
+       "why": "Reports the net torque without dividing by the moment of inertia.",
+       "value": "6.0000000"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is $3.00\\text{ rad/s}^{2}$. The net torque at $t=7\\text{ s}$ is $6\\text{ N m}$, so $\\alpha=\\tau/I=3.00\\text{ rad/s}^2$.\n$0.333\\text{ rad/s}^{2}$ is incorrect: Divides the moment of inertia by the net torque.\n$12.0\\text{ rad/s}^{2}$ is incorrect: Multiplies the net torque by the moment of inertia instead of dividing.\n$6.00\\text{ rad/s}^{2}$ is incorrect: Reports the net torque without dividing by the moment of inertia.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "phs_torque_set_q1",
+      "subject": "ap_physics_1",
+      "kind": "mc",
+      "concept": "Two questions about a single net torque-time graph",
+      "topic": "5.6",
+      "skill": "2.B",
+      "student_thinking": [
+       "Use the second law for rotation to find the angular acceleration from the torque",
+       "Find the change in angular momentum as the area under the torque-time graph"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the plotted torque is the net torque about the axle",
+        "evidence": "the shared stimulus states the graph shows the net torque"
+       }
+      ],
+      "material": {
+       "type": "graph",
+       "must_include": [
+        "axis labels with units"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Divides the moment of inertia by the net torque."
+       },
+       {
+        "id": "m2",
+        "description": "Multiplies the net torque by the moment of inertia instead of dividing."
+       },
+       {
+        "id": "m3",
+        "description": "Reports the net torque without dividing by the moment of inertia."
+       }
+      ],
+      "verification": {
+       "independent_path": "exact fractions for the area versus numpy integration; the angular acceleration from the torque and the moment of inertia",
+       "method": "sympy symbolic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "law_selection"
+      ]
+     }
+    },
+    {
+     "archetype": "phs_torque_set_q2",
+     "topic": "5.6",
+     "skill": "2.B",
+     "stem": "What is the angular speed of the wheel at $t=7\\text{ s}$?",
+     "options": [
+      {
+       "text": "$28.0\\text{ rad/s}$",
+       "why": "Multiplies the largest torque by the total time and divides by the moment of inertia.",
+       "value": "28.000000"
+      },
+      {
+       "text": "$20.5\\text{ rad/s}$",
+       "why": "The change in angular momentum is the area under the graph, 5.00, 19.5 and 16.5 N m s, which adds to $41.0\\text{ kg m}^2\\text{/s}$; dividing by $I=2\\text{ kg m}^2$ gives $\\omega=20.5\\text{ rad/s}$.",
+       "value": "20.500000"
+      },
+      {
+       "text": "$3.00\\text{ rad/s}$",
+       "why": "Divides the final torque by the moment of inertia, ignoring the time for which the torque acts.",
+       "value": "3.0000000"
+      },
+      {
+       "text": "$2.50\\text{ rad/s}$",
+       "why": "Uses only the area of the first segment divided by the moment of inertia.",
+       "value": "2.5000000"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is $20.5\\text{ rad/s}$. The change in angular momentum is the area under the graph, 5.00, 19.5 and 16.5 N m s, which adds to $41.0\\text{ kg m}^2\\text{/s}$; dividing by $I=2\\text{ kg m}^2$ gives $\\omega=20.5\\text{ rad/s}$.\n$28.0\\text{ rad/s}$ is incorrect: Multiplies the largest torque by the total time and divides by the moment of inertia.\n$3.00\\text{ rad/s}$ is incorrect: Divides the final torque by the moment of inertia, ignoring the time for which the torque acts.\n$2.50\\text{ rad/s}$ is incorrect: Uses only the area of the first segment divided by the moment of inertia.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "phs_torque_set_q2",
+      "subject": "ap_physics_1",
+      "kind": "mc",
+      "concept": "Two questions about a single net torque-time graph",
+      "topic": "5.6",
+      "skill": "2.B",
+      "student_thinking": [
+       "Use the second law for rotation to find the angular acceleration from the torque",
+       "Find the change in angular momentum as the area under the torque-time graph"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the plotted torque is the net torque about the axle",
+        "evidence": "the shared stimulus states the graph shows the net torque"
+       }
+      ],
+      "material": {
+       "type": "graph",
+       "must_include": [
+        "axis labels with units"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Multiplies the largest torque by the total time and divides by the moment of inertia."
+       },
+       {
+        "id": "m2",
+        "description": "Divides the final torque by the moment of inertia, ignoring the time for which the torque acts."
+       },
+       {
+        "id": "m3",
+        "description": "Uses only the area of the first segment divided by the moment of inertia."
+       }
+      ],
+      "verification": {
+       "independent_path": "exact fractions for the area versus numpy integration; the angular acceleration from the torque and the moment of inertia",
+       "method": "sympy symbolic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "law_selection"
+      ]
+     }
+    }
+   ],
+   "set_size": 2,
+   "est_seconds": 190,
+   "facts": [
+    "xs=[0, 1, 4, 7]",
+    "Tv=[2, 8, 5, 6]",
+    "I=2.0"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phs_torque_set_q1",
+   "facts": [
+    "xs=[0, 1, 4, 7]",
+    "Tv=[2, 8, 5, 6]",
+    "I=2.0"
+   ],
+   "seed": 12102
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "The item is a short single-step reading with a division. Time and calculator load are typical of the exam.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is a clean, valid use of α = τ/I with a graph reading. It passes all five criteria."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "About 95 seconds, calculator allowed, light arithmetic, typical AP load.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound. The key of 20.5 rad/s is verified, the graph is complete, the distractors are distinct, and the load is appropriate. It is acceptable."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single-step application of Newton's second law for rotation: read the torque at t=7 s from the graph (6 N m) and divide by I=2 kg m^2 to get 3.00 rad/s^2. The only added demand is a simple graph read; the distractors reflect inverted or missing-division errors. There is no multi-step reasoning, no integration of the graph, and the arithmetic is trivial.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must recognize that angular acceleration varies, so angular speed comes from the area under the net torque-time graph divided by I (angular impulse-momentum form of Newton's 2nd law). Requires reading the graph, summing three trapezoid areas (5 + 19.5 + 16.5 = 41 N m s), and dividing by I = 2 kg m^2 to get 20.5 rad/s. Arithmetic is short and clean; wording is unambiguous; no out-of-scope content. Difficulty comes from choosing the governing approach and translating the graph, which are allowed levers.",
+    "reading_load": "low",
+    "computation_load": "medium",
+    "reasoning_steps": 4,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 120
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_physics_1-m03-k0",
+  "cellId": "ap_physics_1-m03",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "8.2",
+  "unitCode": "8",
+  "skillPrimary": "2.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "phs_depth_pressure_set_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-law application (P = rho*g*h) with one table read and one kPa-to-Pa conversion; one division, clear wording, no extra reasoning link. Straightforward core-skill item, below typical full-mock complexity.",
+  "payload": {
+   "archetype": "phs_depth_pressure_set",
+   "topic": "8.2",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "set_intro": "A student measures the gauge pressure at several depths in an open tank that contains a liquid of constant density. The table shows the measurements.",
+   "stimulus": {
+    "kind": "table",
+    "description": "Gauge pressure at different depths in an open tank of a liquid",
+    "data": {
+     "x_label": "Depth below the surface (m)",
+     "y_label": "Gauge pressure (kPa)",
+     "rows": [
+      [
+       "1.0",
+       "12.3"
+      ],
+      [
+       "4.0",
+       "49.4"
+      ],
+      [
+       "5.0",
+       "61.7"
+      ],
+      [
+       "6.0",
+       "74.1"
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "phs_depth_pressure_set_q1",
+     "topic": "8.2",
+     "skill": "2.B",
+     "stem": "What is the density of the liquid?",
+     "options": [
+      {
+       "text": "$12400\\text{ kg/m}^{3}$",
+       "why": "Divides the pressure by the depth and does not divide by the acceleration due to gravity.",
+       "value": "12350.000"
+      },
+      {
+       "text": "$1260\\text{ kg/m}^{3}$",
+       "why": "The gauge pressure is $\\rho gd$, so $\\rho=P/(gd)$; every row gives about $1260\\text{ kg/m}^3$ (for example $74100\\text{ Pa}/(9.8\\times6\\text{ m})$).",
+       "value": "1260.0000"
+      },
+      {
+       "text": "$1.26\\text{ kg/m}^{3}$",
+       "why": "Divides the pressure at the deepest point by the depth and by $g$ but forgets to convert kilopascals to pascals.",
+       "value": "1.2602041"
+      },
+      {
+       "text": "$45400\\text{ kg/m}^{3}$",
+       "why": "Multiplies the pressure by the depth and divides by $g$.",
+       "value": "45367.347"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is $1260\\text{ kg/m}^{3}$. The gauge pressure is $\\rho gd$, so $\\rho=P/(gd)$; every row gives about $1260\\text{ kg/m}^3$ (for example $74100\\text{ Pa}/(9.8\\times6\\text{ m})$).\n$12400\\text{ kg/m}^{3}$ is incorrect: Divides the pressure by the depth and does not divide by the acceleration due to gravity.\n$1.26\\text{ kg/m}^{3}$ is incorrect: Divides the pressure at the deepest point by the depth and by $g$ but forgets to convert kilopascals to pascals.\n$45400\\text{ kg/m}^{3}$ is incorrect: Multiplies the pressure by the depth and divides by $g$.",
+     "est_seconds": 100,
+     "blueprint": {
+      "id": "phs_depth_pressure_set_q1",
+      "subject": "ap_physics_1",
+      "kind": "mc",
+      "concept": "Two questions about a table of gauge pressure versus depth in a liquid",
+      "topic": "8.2",
+      "skill": "2.B",
+      "student_thinking": [
+       "Use the gauge pressure $\\rho gd$ to find the density from one row",
+       "Extend the linear relationship to a greater depth and add the atmospheric pressure"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the liquid is at rest with constant density",
+        "evidence": "the shared stimulus describes an open tank of a liquid"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "depth column",
+        "pressure column"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Divides the pressure by the depth and does not divide by the acceleration due to gravity."
+       },
+       {
+        "id": "m2",
+        "description": "Divides the pressure at the deepest point by the depth and by $g$ but forgets to convert kilopascals to pascals."
+       },
+       {
+        "id": "m3",
+        "description": "Multiplies the pressure by the depth and divides by $g$."
+       }
+      ],
+      "verification": {
+       "independent_path": "a least-squares slope through the origin and the mean of the ratios P over d agree on the density within two percent",
+       "method": "sympy symbolic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "law_selection"
+      ]
+     }
+    },
+    {
+     "archetype": "phs_depth_pressure_set_q2",
+     "topic": "8.2",
+     "skill": "2.B",
+     "stem": "The tank is open to the atmosphere, where the pressure is $101\\text{ kPa}$. What is the absolute pressure at a depth of $12\\text{ m}$?",
+     "options": [
+      {
+       "text": "$397\\text{ kPa}$",
+       "why": "Uses the square of the ratio of the depths when extending the gauge pressure, and adds the atmospheric pressure.",
+       "value": "397.40000"
+      },
+      {
+       "text": "$249\\text{ kPa}$",
+       "why": "The gauge pressure increases linearly with the depth: at $12\\text{ m}$ it is $\\rho g h/1000=148\\text{ kPa}$, so the absolute pressure is $148+101=249\\text{ kPa}$.",
+       "value": "249.17600"
+      },
+      {
+       "text": "$148\\text{ kPa}$",
+       "why": "Gives only the gauge pressure at the depth and leaves out the atmospheric pressure.",
+       "value": "148.17600"
+      },
+      {
+       "text": "$175\\text{ kPa}$",
+       "why": "Adds the atmospheric pressure to the pressure at the deepest tabulated depth and does not extend to the new depth.",
+       "value": "175.10000"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is $249\\text{ kPa}$. The gauge pressure increases linearly with the depth: at $12\\text{ m}$ it is $\\rho g h/1000=148\\text{ kPa}$, so the absolute pressure is $148+101=249\\text{ kPa}$.\n$397\\text{ kPa}$ is incorrect: Uses the square of the ratio of the depths when extending the gauge pressure, and adds the atmospheric pressure.\n$148\\text{ kPa}$ is incorrect: Gives only the gauge pressure at the depth and leaves out the atmospheric pressure.\n$175\\text{ kPa}$ is incorrect: Adds the atmospheric pressure to the pressure at the deepest tabulated depth and does not extend to the new depth.",
+     "est_seconds": 100,
+     "blueprint": {
+      "id": "phs_depth_pressure_set_q2",
+      "subject": "ap_physics_1",
+      "kind": "mc",
+      "concept": "Two questions about a table of gauge pressure versus depth in a liquid",
+      "topic": "8.2",
+      "skill": "2.B",
+      "student_thinking": [
+       "Use the gauge pressure $\\rho gd$ to find the density from one row",
+       "Extend the linear relationship to a greater depth and add the atmospheric pressure"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the liquid is at rest with constant density",
+        "evidence": "the shared stimulus describes an open tank of a liquid"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "depth column",
+        "pressure column"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Uses the square of the ratio of the depths when extending the gauge pressure, and adds the atmospheric pressure."
+       },
+       {
+        "id": "m2",
+        "description": "Gives only the gauge pressure at the depth and leaves out the atmospheric pressure."
+       },
+       {
+        "id": "m3",
+        "description": "Adds the atmospheric pressure to the pressure at the deepest tabulated depth and does not extend to the new depth."
+       }
+      ],
+      "verification": {
+       "independent_path": "a least-squares slope through the origin and the mean of the ratios P over d agree on the density within two percent",
+       "method": "sympy symbolic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "law_selection"
+      ]
+     }
+    }
+   ],
+   "set_size": 2,
+   "est_seconds": 200,
+   "facts": [
+    "depth=[1.0, 4.0, 5.0, 6.0]",
+    "P=[12.3, 49.4, 61.7, 74.1]",
+    "hq=12.0"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phs_depth_pressure_set_q1",
+   "facts": [
+    "depth=[1.0, 4.0, 5.0, 6.0]",
+    "P=[12.3, 49.4, 61.7, 74.1]",
+    "hq=12.0"
+   ],
+   "seed": 12100
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Topic 8.2: gauge pressure P=rho g d. The dominant demand is selecting the law and calculating the density with units. Fits skill 2.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Every row gives about 1260 kg/m^3 with g=9.8. The key is the unique correct option."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table has labeled depth and gauge pressure columns with units, the data are complete and consistent, and the stem is clear. The open tank and constant density are stated."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor encodes a distinct error (omitted g, unit conversion, multiplied instead of divided), and the explanation addresses each wrong option."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 100 seconds, one table read and one division. The calculator is allowed and the load is typical of the exam."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Correct, clean item on gauge pressure at depth. The key is unique, the distractors are distinct, and the stimulus is complete. It passes all five criteria."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Gauge vs absolute pressure at depth, table reading plus proportional extension; fits 8.2 and 2.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "P/d is about 12.35 kPa/m, so 12 m gives about 148 kPa gauge, and adding 101 kPa gives 249 kPa. The key is unique."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table has labels and rows; atmospheric pressure is given in the stem; fluid at rest is implied."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct, realistic errors (squared ratio, omitted atmospheric pressure, no extension), each explained. The explanation mentions rho g h without stating a density, which is a minor flaw."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 100 seconds, light arithmetic, calculator allowed."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Sound item with a correct, unique key and distinct distractors. It is within scope and has a reasonable load. The explanation's reference to rho g h without a given density is a cosmetic flaw only."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single-law application (P = rho*g*h) with one table read and one kPa-to-Pa conversion; one division, clear wording, no extra reasoning link. Straightforward core-skill item, below typical full-mock complexity.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 75
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Student reads a table, recognizes gauge pressure is proportional to depth (P = rho*g*h, about 12.3 kPa/m), scales to 12 m (about 148 kPa), then adds atmospheric pressure to get absolute pressure (about 249 kPa). Concepts are core to topic 8.2, arithmetic is simple, reading load is minimal, and the distractors target the common error of omitting atmospheric pressure. Not enough layered reasoning for full-mock exam_prep.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 75
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_physics_1-m03-k1",
+  "cellId": "ap_physics_1-m03",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "8.2",
+  "unitCode": "8",
+  "skillPrimary": "2.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "phs_depth_pressure_set_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "set_item_2:criterion_failed_distractor_explanation; criterion_failed_distractor_explanation",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Single governing law (P_gauge = rho*g*h) applied to one table row, with a kPa to Pa conversion and one division. Distractors reflect unit-conversion and ratio slips. There is little reasoning depth beyond selecting the formula, so it suits basic learning rather than a full-mock exam-prep item.",
+  "payload": {
+   "archetype": "phs_depth_pressure_set",
+   "topic": "8.2",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "set_intro": "A student measures the gauge pressure at several depths in an open tank that contains a liquid of constant density. The table shows the measurements.",
+   "stimulus": {
+    "kind": "table",
+    "description": "Gauge pressure at different depths in an open tank of a liquid",
+    "data": {
+     "x_label": "Depth below the surface (m)",
+     "y_label": "Gauge pressure (kPa)",
+     "rows": [
+      [
+       "1.0",
+       "8.8"
+      ],
+      [
+       "2.0",
+       "17.6"
+      ],
+      [
+       "3.0",
+       "26.5"
+      ],
+      [
+       "5.0",
+       "44.1"
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "phs_depth_pressure_set_q1",
+     "topic": "8.2",
+     "skill": "2.B",
+     "stem": "What is the density of the liquid?",
+     "options": [
+      {
+       "text": "$180\\text{ kg/m}^{3}$",
+       "why": "Uses the gauge pressure divided by $g$ times the depth squared.",
+       "value": "180.00000"
+      },
+      {
+       "text": "$8820\\text{ kg/m}^{3}$",
+       "why": "Divides the pressure by the depth and does not divide by the acceleration due to gravity.",
+       "value": "8820.0000"
+      },
+      {
+       "text": "$900\\text{ kg/m}^{3}$",
+       "why": "The gauge pressure is $\\rho gd$, so $\\rho=P/(gd)$; every row gives about $900\\text{ kg/m}^3$ (for example $44100\\text{ Pa}/(9.8\\times5\\text{ m})$).",
+       "value": "900.00000"
+      },
+      {
+       "text": "$0.900\\text{ kg/m}^{3}$",
+       "why": "Divides the pressure at the deepest point by the depth and by $g$ but forgets to convert kilopascals to pascals.",
+       "value": "0.90000000"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is $900\\text{ kg/m}^{3}$. The gauge pressure is $\\rho gd$, so $\\rho=P/(gd)$; every row gives about $900\\text{ kg/m}^3$ (for example $44100\\text{ Pa}/(9.8\\times5\\text{ m})$).\n$180\\text{ kg/m}^{3}$ is incorrect: Uses the gauge pressure divided by $g$ times the depth squared.\n$8820\\text{ kg/m}^{3}$ is incorrect: Divides the pressure by the depth and does not divide by the acceleration due to gravity.\n$0.900\\text{ kg/m}^{3}$ is incorrect: Divides the pressure at the deepest point by the depth and by $g$ but forgets to convert kilopascals to pascals.",
+     "est_seconds": 100,
+     "blueprint": {
+      "id": "phs_depth_pressure_set_q1",
+      "subject": "ap_physics_1",
+      "kind": "mc",
+      "concept": "Two questions about a table of gauge pressure versus depth in a liquid",
+      "topic": "8.2",
+      "skill": "2.B",
+      "student_thinking": [
+       "Use the gauge pressure $\\rho gd$ to find the density from one row",
+       "Extend the linear relationship to a greater depth and add the atmospheric pressure"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the liquid is at rest with constant density",
+        "evidence": "the shared stimulus describes an open tank of a liquid"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "depth column",
+        "pressure column"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Uses the gauge pressure divided by $g$ times the depth squared."
+       },
+       {
+        "id": "m2",
+        "description": "Divides the pressure by the depth and does not divide by the acceleration due to gravity."
+       },
+       {
+        "id": "m3",
+        "description": "Divides the pressure at the deepest point by the depth and by $g$ but forgets to convert kilopascals to pascals."
+       }
+      ],
+      "verification": {
+       "independent_path": "a least-squares slope through the origin and the mean of the ratios P over d agree on the density within two percent",
+       "method": "sympy symbolic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "law_selection"
+      ]
+     }
+    },
+    {
+     "archetype": "phs_depth_pressure_set_q2",
+     "topic": "8.2",
+     "skill": "2.B",
+     "stem": "The tank is open to the atmosphere, where the pressure is $101\\text{ kPa}$. What is the absolute pressure at a depth of $10\\text{ m}$?",
+     "options": [
+      {
+       "text": "$145\\text{ kPa}$",
+       "why": "Adds the atmospheric pressure to the pressure at the deepest tabulated depth and does not extend to the new depth.",
+       "value": "145.10000"
+      },
+      {
+       "text": "$189\\text{ kPa}$",
+       "why": "The gauge pressure increases linearly with the depth: at $10\\text{ m}$ it is $\\rho g h/1000=88\\text{ kPa}$, so the absolute pressure is $88+101=189\\text{ kPa}$.",
+       "value": "189.20000"
+      },
+      {
+       "text": "$277\\text{ kPa}$",
+       "why": "Uses the square of the ratio of the depths when extending the gauge pressure, and adds the atmospheric pressure.",
+       "value": "277.40000"
+      },
+      {
+       "text": "$88.2\\text{ kPa}$",
+       "why": "Gives only the gauge pressure at the depth and leaves out the atmospheric pressure.",
+       "value": "88.200000"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is $189\\text{ kPa}$. The gauge pressure increases linearly with the depth: at $10\\text{ m}$ it is $\\rho g h/1000=88\\text{ kPa}$, so the absolute pressure is $88+101=189\\text{ kPa}$.\n$145\\text{ kPa}$ is incorrect: Adds the atmospheric pressure to the pressure at the deepest tabulated depth and does not extend to the new depth.\n$277\\text{ kPa}$ is incorrect: Uses the square of the ratio of the depths when extending the gauge pressure, and adds the atmospheric pressure.\n$88.2\\text{ kPa}$ is incorrect: Gives only the gauge pressure at the depth and leaves out the atmospheric pressure.",
+     "est_seconds": 100,
+     "blueprint": {
+      "id": "phs_depth_pressure_set_q2",
+      "subject": "ap_physics_1",
+      "kind": "mc",
+      "concept": "Two questions about a table of gauge pressure versus depth in a liquid",
+      "topic": "8.2",
+      "skill": "2.B",
+      "student_thinking": [
+       "Use the gauge pressure $\\rho gd$ to find the density from one row",
+       "Extend the linear relationship to a greater depth and add the atmospheric pressure"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the liquid is at rest with constant density",
+        "evidence": "the shared stimulus describes an open tank of a liquid"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "depth column",
+        "pressure column"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Adds the atmospheric pressure to the pressure at the deepest tabulated depth and does not extend to the new depth."
+       },
+       {
+        "id": "m2",
+        "description": "Uses the square of the ratio of the depths when extending the gauge pressure, and adds the atmospheric pressure."
+       },
+       {
+        "id": "m3",
+        "description": "Gives only the gauge pressure at the depth and leaves out the atmospheric pressure."
+       }
+      ],
+      "verification": {
+       "independent_path": "a least-squares slope through the origin and the mean of the ratios P over d agree on the density within two percent",
+       "method": "sympy symbolic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "law_selection"
+      ]
+     }
+    }
+   ],
+   "set_size": 2,
+   "est_seconds": 200,
+   "facts": [
+    "depth=[1.0, 2.0, 3.0, 5.0]",
+    "P=[8.8, 17.6, 26.5, 44.1]",
+    "hq=10.0"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phs_depth_pressure_set_q1",
+   "facts": [
+    "depth=[1.0, 2.0, 3.0, 5.0]",
+    "P=[8.8, 17.6, 26.5, 44.1]",
+    "hq=10.0"
+   ],
+   "seed": 12101
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Topic 8.2 gauge pressure rho*g*d, with a table read and unit conversion. Fits skill 2.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "900 kg/m^3 is the unique answer; all rows are consistent."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table data are complete, with labels and units. The stem is clear. The standard g assumption is acceptable."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor maps to a distinct computational error. I checked that 180, 8820 and 0.900 reproduce from the stated errors. The explanation covers every wrong option."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short, calculator allowed, with a typical load."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "A sound, clear item with a unique key and distinct, well-explained distractors. It passes all five criteria."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "The time and calculator load are typical, and the arithmetic is light.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound in scope, key and stimulus. The one flaw is that the explanation uses ρgh/1000 without showing that density comes from the table. That should be tightened, but it does not affect the key."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single governing law (P_gauge = rho*g*h) applied to one table row, with a kPa to Pa conversion and one division. Distractors reflect unit-conversion and ratio slips. There is little reasoning depth beyond selecting the formula, so it suits basic learning rather than a full-mock exam-prep item.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must read the table, recognize the linear gauge pressure vs depth relationship (P = rho*g*d), extrapolate to 10 m using the slope (about 8.8 kPa/m), and then add atmospheric pressure to convert gauge to absolute. Distractors map to plausible errors (forgetting to add P_atm, using the 5 m value, doubling error). Arithmetic is light, wording is clear, and all content is within Unit 8 scope.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 90
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_physics_1-m03-k2",
+  "cellId": "ap_physics_1-m03",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "8.2",
+  "unitCode": "8",
+  "skillPrimary": "2.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "phs_depth_pressure_set_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Single-concept item: apply P = rho*g*h to one row (or the slope) of a table, with one kPa-to-Pa conversion and clean numbers (19.6 kPa / (9.8 x 2.0 m) = 1000 kg/m^3). Only about 2 reasoning steps, and the table read is trivial. Distractors target the unit conversion (1.000 vs 1000) and the g-multiplication or omission errors. Note an item-quality concern: options A (1.000) and C (1000) are formatted confusingly and could be read as the same value, so the options should be revised, but this does not make the item harder.",
+  "payload": {
+   "archetype": "phs_depth_pressure_set",
+   "topic": "8.2",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "set_intro": "A student measures the gauge pressure at several depths in an open tank that contains a liquid of constant density. The table shows the measurements.",
+   "stimulus": {
+    "kind": "table",
+    "description": "Gauge pressure at different depths in an open tank of a liquid",
+    "data": {
+     "x_label": "Depth below the surface (m)",
+     "y_label": "Gauge pressure (kPa)",
+     "rows": [
+      [
+       "2.0",
+       "19.6"
+      ],
+      [
+       "3.0",
+       "29.4"
+      ],
+      [
+       "4.0",
+       "39.2"
+      ],
+      [
+       "6.0",
+       "58.8"
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "phs_depth_pressure_set_q1",
+     "topic": "8.2",
+     "skill": "2.B",
+     "stem": "What is the density of the liquid?",
+     "options": [
+      {
+       "text": "$1.000\\text{ kg/m}^{3}$",
+       "why": "Divides the pressure at the deepest point by the depth and by $g$ but forgets to convert kilopascals to pascals.",
+       "value": "1.0000000"
+      },
+      {
+       "text": "$36000\\text{ kg/m}^{3}$",
+       "why": "Multiplies the pressure by the depth and divides by $g$.",
+       "value": "36000.000"
+      },
+      {
+       "text": "$1000\\text{ kg/m}^{3}$",
+       "why": "The gauge pressure is $\\rho gd$, so $\\rho=P/(gd)$; every row gives about $1000\\text{ kg/m}^3$ (for example $58800\\text{ Pa}/(9.8\\times6\\text{ m})$).",
+       "value": "1000.0000"
+      },
+      {
+       "text": "$9800\\text{ kg/m}^{3}$",
+       "why": "Divides the pressure by the depth and does not divide by the acceleration due to gravity.",
+       "value": "9800.0000"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is $1000\\text{ kg/m}^{3}$. The gauge pressure is $\\rho gd$, so $\\rho=P/(gd)$; every row gives about $1000\\text{ kg/m}^3$ (for example $58800\\text{ Pa}/(9.8\\times6\\text{ m})$).\n$1.000\\text{ kg/m}^{3}$ is incorrect: Divides the pressure at the deepest point by the depth and by $g$ but forgets to convert kilopascals to pascals.\n$36000\\text{ kg/m}^{3}$ is incorrect: Multiplies the pressure by the depth and divides by $g$.\n$9800\\text{ kg/m}^{3}$ is incorrect: Divides the pressure by the depth and does not divide by the acceleration due to gravity.",
+     "est_seconds": 100,
+     "blueprint": {
+      "id": "phs_depth_pressure_set_q1",
+      "subject": "ap_physics_1",
+      "kind": "mc",
+      "concept": "Two questions about a table of gauge pressure versus depth in a liquid",
+      "topic": "8.2",
+      "skill": "2.B",
+      "student_thinking": [
+       "Use the gauge pressure $\\rho gd$ to find the density from one row",
+       "Extend the linear relationship to a greater depth and add the atmospheric pressure"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the liquid is at rest with constant density",
+        "evidence": "the shared stimulus describes an open tank of a liquid"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "depth column",
+        "pressure column"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Divides the pressure at the deepest point by the depth and by $g$ but forgets to convert kilopascals to pascals."
+       },
+       {
+        "id": "m2",
+        "description": "Multiplies the pressure by the depth and divides by $g$."
+       },
+       {
+        "id": "m3",
+        "description": "Divides the pressure by the depth and does not divide by the acceleration due to gravity."
+       }
+      ],
+      "verification": {
+       "independent_path": "a least-squares slope through the origin and the mean of the ratios P over d agree on the density within two percent",
+       "method": "sympy symbolic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "law_selection"
+      ]
+     }
+    },
+    {
+     "archetype": "phs_depth_pressure_set_q2",
+     "topic": "8.2",
+     "skill": "2.B",
+     "stem": "The tank is open to the atmosphere, where the pressure is $101\\text{ kPa}$. What is the absolute pressure at a depth of $15\\text{ m}$?",
+     "options": [
+      {
+       "text": "$248\\text{ kPa}$",
+       "why": "The gauge pressure increases linearly with the depth: at $15\\text{ m}$ it is $\\rho g h/1000=147\\text{ kPa}$, so the absolute pressure is $147+101=248\\text{ kPa}$.",
+       "value": "248.00000"
+      },
+      {
+       "text": "$468\\text{ kPa}$",
+       "why": "Uses the square of the ratio of the depths when extending the gauge pressure, and adds the atmospheric pressure.",
+       "value": "468.50000"
+      },
+      {
+       "text": "$160\\text{ kPa}$",
+       "why": "Adds the atmospheric pressure to the pressure at the deepest tabulated depth and does not extend to the new depth.",
+       "value": "159.80000"
+      },
+      {
+       "text": "$147\\text{ kPa}$",
+       "why": "Gives only the gauge pressure at the depth and leaves out the atmospheric pressure.",
+       "value": "147.00000"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is $248\\text{ kPa}$. The gauge pressure increases linearly with the depth: at $15\\text{ m}$ it is $\\rho g h/1000=147\\text{ kPa}$, so the absolute pressure is $147+101=248\\text{ kPa}$.\n$468\\text{ kPa}$ is incorrect: Uses the square of the ratio of the depths when extending the gauge pressure, and adds the atmospheric pressure.\n$160\\text{ kPa}$ is incorrect: Adds the atmospheric pressure to the pressure at the deepest tabulated depth and does not extend to the new depth.\n$147\\text{ kPa}$ is incorrect: Gives only the gauge pressure at the depth and leaves out the atmospheric pressure.",
+     "est_seconds": 100,
+     "blueprint": {
+      "id": "phs_depth_pressure_set_q2",
+      "subject": "ap_physics_1",
+      "kind": "mc",
+      "concept": "Two questions about a table of gauge pressure versus depth in a liquid",
+      "topic": "8.2",
+      "skill": "2.B",
+      "student_thinking": [
+       "Use the gauge pressure $\\rho gd$ to find the density from one row",
+       "Extend the linear relationship to a greater depth and add the atmospheric pressure"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the liquid is at rest with constant density",
+        "evidence": "the shared stimulus describes an open tank of a liquid"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "depth column",
+        "pressure column"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Uses the square of the ratio of the depths when extending the gauge pressure, and adds the atmospheric pressure."
+       },
+       {
+        "id": "m2",
+        "description": "Adds the atmospheric pressure to the pressure at the deepest tabulated depth and does not extend to the new depth."
+       },
+       {
+        "id": "m3",
+        "description": "Gives only the gauge pressure at the depth and leaves out the atmospheric pressure."
+       }
+      ],
+      "verification": {
+       "independent_path": "a least-squares slope through the origin and the mean of the ratios P over d agree on the density within two percent",
+       "method": "sympy symbolic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "law_selection"
+      ]
+     }
+    }
+   ],
+   "set_size": 2,
+   "est_seconds": 200,
+   "facts": [
+    "depth=[2.0, 3.0, 4.0, 6.0]",
+    "P=[19.6, 29.4, 39.2, 58.8]",
+    "hq=15.0"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phs_depth_pressure_set_q1",
+   "facts": [
+    "depth=[2.0, 3.0, 4.0, 6.0]",
+    "P=[19.6, 29.4, 39.2, 58.8]",
+    "hq=15.0"
+   ],
+   "seed": 12102
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Topic 8.2 pressure at depth; calculating density from a table with a kPa-to-Pa conversion fits skill 2.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "rho = P/(g d) = 1000 kg/m^3 for every row; unique correct option."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table has labeled depth and gauge pressure columns with consistent linear data; the open tank, liquid at rest and standard g are clear. The stem does not say 'at rest' explicitly, but the model assumptions are standard."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor encodes a distinct error (missing unit conversion, wrong operation P*d/g, omitting g) and the explanation covers all three. The 36000 distractor requires a conversion, which is minor."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "A single-step calculation with one unit conversion, about 60-100 seconds; the calculator is allowed and consistent."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "A clean, unambiguous item with a unique key and distinct distractors. It is appropriate in scope and load."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Gauge vs absolute pressure at depth, topic 8.2; multi-step calculation fits 2.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Slope 9.8 kPa/m, 147 gauge + 101 = 248 kPa. Unique."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table complete with labels and units; proportional data; open tank and constant density stated."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct misconceptions, all explained; options parallel."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Reasonable load (~100 s), calculator allowed consistent."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound on all five criteria. The key (248 kPa) is unique, the table is complete, and the distractors are distinct and explained."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept item: apply P = rho*g*h to one row (or the slope) of a table, with one kPa-to-Pa conversion and clean numbers (19.6 kPa / (9.8 x 2.0 m) = 1000 kg/m^3). Only about 2 reasoning steps, and the table read is trivial. Distractors target the unit conversion (1.000 vs 1000) and the g-multiplication or omission errors. Note an item-quality concern: options A (1.000) and C (1000) are formatted confusingly and could be read as the same value, so the options should be revised, but this does not make the item harder.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must read the table, recognize gauge pressure is linear in depth (P = rho*g*h, slope 9.8 kPa/m), extrapolate to 15 m (147 kPa), then add atmospheric pressure to get absolute pressure (248 kPa). Requires choosing the governing relation and distinguishing gauge from absolute pressure; arithmetic is short and the wording is unambiguous. The distractor 147 kPa targets the common error of omitting atmospheric pressure.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 90
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_physics_1-m04-k0",
+  "cellId": "ap_physics_1-m04",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "5.1",
+  "unitCode": "5",
+  "skillPrimary": "2.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "phs_wt_claim_set_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Student reads a flat segment of an omega-t graph, concludes alpha = 0, and applies net torque = I*alpha to get zero net torque. The distractors target common misconceptions (motion requires torque, sign confusion, reusing the earlier segment's torque). There is one governing law, one representation read, and no computation. It is a foundational check on the concept, so it fits basic_learning rather than a full-mock exam_prep item. Wording is clear and the context is minimal.",
+  "payload": {
+   "archetype": "phs_wt_claim_set",
+   "topic": "5.1",
+   "skill": "3.B",
+   "calculator": "allowed",
+   "set_intro": "A wheel with a moment of inertia of $2\\text{ kg m}^2$ rotates about a fixed axle. The graph shows the angular speed of the wheel as a function of time.",
+   "stimulus": {
+    "kind": "graph",
+    "description": "Angular speed of the wheel versus time",
+    "data": {
+     "x_axis": {
+      "label": "Time (s)",
+      "min": 0,
+      "max": 10,
+      "step": 1
+     },
+     "y_axis": {
+      "label": "Angular speed (rad/s)",
+      "min": 0,
+      "max": 6,
+      "step": 2
+     },
+     "vertices": [
+      [
+       0,
+       0
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       8,
+       4
+      ],
+      [
+       10,
+       0
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "phs_wt_claim_set_q1",
+     "topic": "5.1",
+     "skill": "3.B",
+     "stem": "The wheel always rotates in the same direction. Which statement about the net torque on the wheel from $t=4\\text{ s}$ to $t=8\\text{ s}$ is correct and best justified?",
+     "options": [
+      {
+       "text": "The net torque is negative, because the line on the graph does not rise.",
+       "why": "Takes a graph that does not rise to mean a negative torque, but a negative torque would make the angular speed decrease.",
+       "value": null
+      },
+      {
+       "text": "The net torque is not zero, because the wheel keeps turning at $4\\text{ rad/s}$ and a torque is needed to keep it turning.",
+       "why": "Thinks that a net torque is needed to maintain a constant angular speed, but a net torque produces an angular acceleration.",
+       "value": null
+      },
+      {
+       "text": "The net torque is zero, because the angular speed is constant and so the angular acceleration is zero.",
+       "why": "The graph is horizontal between $4\\text{ s}$ and $8\\text{ s}$, so $\\alpha=0$ and $\\tau_{net}=I\\alpha=0$.",
+       "value": null
+      },
+      {
+       "text": "The net torque is $2\\text{ N m}$ in the direction of the rotation, because it is the same as in the first segment.",
+       "why": "Carries the net torque of the first segment into the second segment although the slope of the graph is zero there.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is The net torque is zero, because the angular speed is constant and so the angular acceleration is zero.. The graph is horizontal between $4\\text{ s}$ and $8\\text{ s}$, so $\\alpha=0$ and $\\tau_{net}=I\\alpha=0$.\nThe net torque is negative, because the line on the graph does not rise. is incorrect: Takes a graph that does not rise to mean a negative torque, but a negative torque would make the angular speed decrease.\nThe net torque is not zero, because the wheel keeps turning at $4\\text{ rad/s}$ and a torque is needed to keep it turning. is incorrect: Thinks that a net torque is needed to maintain a constant angular speed, but a net torque produces an angular acceleration.\nThe net torque is $2\\text{ N m}$ in the direction of the rotation, because it is the same as in the first segment. is incorrect: Carries the net torque of the first segment into the second segment although the slope of the graph is zero there.",
+     "est_seconds": 85,
+     "blueprint": {
+      "id": "phs_wt_claim_set_q1",
+      "subject": "ap_physics_1",
+      "kind": "mc",
+      "concept": "Justifying a zero net torque from a constant angular speed on a graph",
+      "topic": "5.1",
+      "skill": "3.B",
+      "student_thinking": [
+       "Read the slope of the graph in the interval",
+       "Relate the slope, the angular acceleration and the net torque"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the wheel rotates about a fixed axis",
+        "evidence": "the shared stimulus describes a wheel with an angular speed graph"
+       }
+      ],
+      "material": {
+       "type": "graph",
+       "must_include": [
+        "axis labels with units"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Takes a graph that does not rise to mean a negative torque, but a negative torque would make the angular speed decrease."
+       },
+       {
+        "id": "m2",
+        "description": "Thinks that a net torque is needed to maintain a constant angular speed, but a net torque produces an angular acceleration."
+       },
+       {
+        "id": "m3",
+        "description": "Carries the net torque of the first segment into the second segment although the slope of the graph is zero there."
+       }
+      ],
+      "verification": {
+       "independent_path": "the slope of each segment is computed exactly and by numerical differentiation",
+       "method": "sympy symbolic + independent numeric path"
+      },
+      "judgment_demand": [
+       "justification",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "phs_wt_claim_set_q2",
+     "topic": "5.1",
+     "skill": "3.B",
+     "stem": "Which statement about the angle through which the wheel turns from $t=0$ to $t=10\\text{ s}$ is correct and best justified?",
+     "options": [
+      {
+       "text": "The wheel turns through $16\\text{ rad}$, because the angle is found only from the part of the graph where the speed is constant.",
+       "why": "Uses only the horizontal part of the graph and leaves out the other segments.",
+       "value": null
+      },
+      {
+       "text": "The wheel turns through $28\\text{ rad}$, because the angle is the area under the angular speed-time graph.",
+       "why": "The areas of the segments are 8.00, 16.0 and 4.00 rad, which add to $28.0\\text{ rad}$.",
+       "value": null
+      },
+      {
+       "text": "The wheel turns through $40\\text{ rad}$, because the angle is the largest angular speed times the total time.",
+       "why": "Uses the largest angular speed for the whole time, but the speed is lower for part of the time.",
+       "value": null
+      },
+      {
+       "text": "The wheel turns through $0\\text{ rad}$, because the angle is the slope of the graph.",
+       "why": "Mistakes the slope, which is the angular acceleration, for the angle that the wheel turns.",
+       "value": null
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is The wheel turns through $28\\text{ rad}$, because the angle is the area under the angular speed-time graph.. The areas of the segments are 8.00, 16.0 and 4.00 rad, which add to $28.0\\text{ rad}$.\nThe wheel turns through $16\\text{ rad}$, because the angle is found only from the part of the graph where the speed is constant. is incorrect: Uses only the horizontal part of the graph and leaves out the other segments.\nThe wheel turns through $40\\text{ rad}$, because the angle is the largest angular speed times the total time. is incorrect: Uses the largest angular speed for the whole time, but the speed is lower for part of the time.\nThe wheel turns through $0\\text{ rad}$, because the angle is the slope of the graph. is incorrect: Mistakes the slope, which is the angular acceleration, for the angle that the wheel turns.",
+     "est_seconds": 90,
+     "blueprint": {
+      "id": "phs_wt_claim_set_q2",
+      "subject": "ap_physics_1",
+      "kind": "mc",
+      "concept": "Justifying the angle turned from the area under an angular speed-time graph",
+      "topic": "5.1",
+      "skill": "3.B",
+      "student_thinking": [
+       "Recognize that the angle is the area under the angular speed-time graph",
+       "Add the areas of the three segments"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the wheel always turns in the same direction",
+        "evidence": "the shared stimulus says the wheel always rotates in the same direction"
+       }
+      ],
+      "material": {
+       "type": "graph",
+       "must_include": [
+        "axis labels with units"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Uses only the horizontal part of the graph and leaves out the other segments."
+       },
+       {
+        "id": "m2",
+        "description": "Uses the largest angular speed for the whole time, but the speed is lower for part of the time."
+       },
+       {
+        "id": "m3",
+        "description": "Mistakes the slope, which is the angular acceleration, for the angle that the wheel turns."
+       }
+      ],
+      "verification": {
+       "independent_path": "exact fractions for the areas versus numpy integration of a dense resampling",
+       "method": "sympy symbolic + independent numeric path"
+      },
+      "judgment_demand": [
+       "justification",
+       "representation_reading"
+      ]
+     }
+    }
+   ],
+   "set_size": 2,
+   "est_seconds": 175,
+   "facts": [
+    "xs=[0, 4, 8, 10]",
+    "ws=[0, 4, 4, 0]"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phs_wt_claim_set_q1",
+   "facts": [
+    "xs=[0, 4, 8, 10]",
+    "ws=[0, 4, 4, 0]"
+   ],
+   "seed": 12100
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Applies tau=I*alpha with slope reading of an angular speed graph and justifies a claim; fits 5.1/3.B, no out-of-scope content."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "The segment from 4 s to 8 s is flat, so alpha=0 and net torque is zero. C is the unique correct answer."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The graph data have labeled axes with units and complete vertices. The note that the wheel always rotates in the same direction removes sign ambiguity. Wording is clear."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "The three distractors encode distinct misconceptions. Option D's 2 N m matches the first-segment torque. The explanation covers every wrong option."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Roughly 85 seconds, no needless arithmetic, one dominant skill, calculator designation consistent."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item passes all five criteria. It is a clean, unambiguous graph-reading and justification item with a unique key and distinct distractors."
+   },
+   {
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is acceptable. The key of 28 rad is unique and correct. The graph data are complete and show ω ≥ 0, so the angle equals the area under the graph. The distractors map to distinct misconceptions. The moment of inertia is an unneeded detail but harmless. Minor note: the 0 rad option is weak.",
+    "scope_skill": {
+     "pass": true,
+     "notes": "Rotational kinematics from an ω-t graph; the claim-and-justification demand fits skill 3.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "The area is 8 + 16 + 4 = 28 rad. Only one option is correct."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The graph vertices and axes are complete. The same-direction condition is implied by ω ≥ 0 on the graph. The moment of inertia is extraneous."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each wrong option names a distinct misconception and the explanation addresses all three. The 0 rad option is implausible but acceptable."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Takes about 90 seconds, needs little arithmetic, and the calculator designation is consistent."
+    }
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Student reads a flat segment of an omega-t graph, concludes alpha = 0, and applies net torque = I*alpha to get zero net torque. The distractors target common misconceptions (motion requires torque, sign confusion, reusing the earlier segment's torque). There is one governing law, one representation read, and no computation. It is a foundational check on the concept, so it fits basic_learning rather than a full-mock exam_prep item. Wording is clear and the context is minimal.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "The student must recognize that angular displacement equals the area under the ω-t graph, then sum a triangle (8), a rectangle (16) and a triangle (4) to get 28 rad. This is a single concept with one representation read and simple integer arithmetic. The distractors target common misconceptions: constant-speed segment only, max speed times total time, and area confused with slope. The moment of inertia is an extraneous detail but adds little reading load. Overall this is a direct application of the rotational kinematics definition, suitable for basic learning rather than a full-mock item.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 75
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_physics_1-m04-k1",
+  "cellId": "ap_physics_1-m04",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "5.1",
+  "unitCode": "5",
+  "skillPrimary": "2.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "phs_wt_claim_set_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "One-step conceptual application: read a flat segment of an omega-t graph, conclude alpha = 0, and apply tau_net = I*alpha to claim zero net torque. Distractors target standard misconceptions (motion requires torque, flat means negative, same as previous segment). No arithmetic, minimal reading, in scope. Tests recognition of the governing law and graph slope rather than multi-step reasoning.",
+  "payload": {
+   "archetype": "phs_wt_claim_set",
+   "topic": "5.1",
+   "skill": "3.B",
+   "calculator": "allowed",
+   "set_intro": "A wheel with a moment of inertia of $1\\text{ kg m}^2$ rotates about a fixed axle. The graph shows the angular speed of the wheel as a function of time.",
+   "stimulus": {
+    "kind": "graph",
+    "description": "Angular speed of the wheel versus time",
+    "data": {
+     "x_axis": {
+      "label": "Time (s)",
+      "min": 0,
+      "max": 9,
+      "step": 1
+     },
+     "y_axis": {
+      "label": "Angular speed (rad/s)",
+      "min": 0,
+      "max": 6,
+      "step": 2
+     },
+     "vertices": [
+      [
+       0,
+       0
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       9,
+       2
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "phs_wt_claim_set_q1",
+     "topic": "5.1",
+     "skill": "3.B",
+     "stem": "The wheel always rotates in the same direction. Which statement about the net torque on the wheel from $t=2\\text{ s}$ to $t=6\\text{ s}$ is correct and best justified?",
+     "options": [
+      {
+       "text": "The net torque is negative, because the line on the graph does not rise.",
+       "why": "Takes a graph that does not rise to mean a negative torque, but a negative torque would make the angular speed decrease.",
+       "value": null
+      },
+      {
+       "text": "The net torque is $2\\text{ N m}$ in the direction of the rotation, because it is the same as in the first segment.",
+       "why": "Carries the net torque of the first segment into the second segment although the slope of the graph is zero there.",
+       "value": null
+      },
+      {
+       "text": "The net torque is not zero, because the wheel keeps turning at $4\\text{ rad/s}$ and a torque is needed to keep it turning.",
+       "why": "Thinks that a net torque is needed to maintain a constant angular speed, but a net torque produces an angular acceleration.",
+       "value": null
+      },
+      {
+       "text": "The net torque is zero, because the angular speed is constant and so the angular acceleration is zero.",
+       "why": "The graph is horizontal between $2\\text{ s}$ and $6\\text{ s}$, so $\\alpha=0$ and $\\tau_{net}=I\\alpha=0$.",
+       "value": null
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is The net torque is zero, because the angular speed is constant and so the angular acceleration is zero.. The graph is horizontal between $2\\text{ s}$ and $6\\text{ s}$, so $\\alpha=0$ and $\\tau_{net}=I\\alpha=0$.\nThe net torque is negative, because the line on the graph does not rise. is incorrect: Takes a graph that does not rise to mean a negative torque, but a negative torque would make the angular speed decrease.\nThe net torque is $2\\text{ N m}$ in the direction of the rotation, because it is the same as in the first segment. is incorrect: Carries the net torque of the first segment into the second segment although the slope of the graph is zero there.\nThe net torque is not zero, because the wheel keeps turning at $4\\text{ rad/s}$ and a torque is needed to keep it turning. is incorrect: Thinks that a net torque is needed to maintain a constant angular speed, but a net torque produces an angular acceleration.",
+     "est_seconds": 85,
+     "blueprint": {
+      "id": "phs_wt_claim_set_q1",
+      "subject": "ap_physics_1",
+      "kind": "mc",
+      "concept": "Justifying a zero net torque from a constant angular speed on a graph",
+      "topic": "5.1",
+      "skill": "3.B",
+      "student_thinking": [
+       "Read the slope of the graph in the interval",
+       "Relate the slope, the angular acceleration and the net torque"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the wheel rotates about a fixed axis",
+        "evidence": "the shared stimulus describes a wheel with an angular speed graph"
+       }
+      ],
+      "material": {
+       "type": "graph",
+       "must_include": [
+        "axis labels with units"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Takes a graph that does not rise to mean a negative torque, but a negative torque would make the angular speed decrease."
+       },
+       {
+        "id": "m2",
+        "description": "Carries the net torque of the first segment into the second segment although the slope of the graph is zero there."
+       },
+       {
+        "id": "m3",
+        "description": "Thinks that a net torque is needed to maintain a constant angular speed, but a net torque produces an angular acceleration."
+       }
+      ],
+      "verification": {
+       "independent_path": "the slope of each segment is computed exactly and by numerical differentiation",
+       "method": "sympy symbolic + independent numeric path"
+      },
+      "judgment_demand": [
+       "justification",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "phs_wt_claim_set_q2",
+     "topic": "5.1",
+     "skill": "3.B",
+     "stem": "Which statement about the angle through which the wheel turns from $t=0$ to $t=9\\text{ s}$ is correct and best justified?",
+     "options": [
+      {
+       "text": "The wheel turns through $16\\text{ rad}$, because the angle is found only from the part of the graph where the speed is constant.",
+       "why": "Uses only the horizontal part of the graph and leaves out the other segments.",
+       "value": null
+      },
+      {
+       "text": "The wheel turns through $36\\text{ rad}$, because the angle is the largest angular speed times the total time.",
+       "why": "Uses the largest angular speed for the whole time, but the speed is lower for part of the time.",
+       "value": null
+      },
+      {
+       "text": "The wheel turns through $29\\text{ rad}$, because the angle is the area under the angular speed-time graph.",
+       "why": "The areas of the segments are 4.00, 16.0 and 9.00 rad, which add to $29.0\\text{ rad}$.",
+       "value": null
+      },
+      {
+       "text": "The wheel turns through $0.222\\text{ rad}$, because the angle is the slope of the graph.",
+       "why": "Mistakes the slope, which is the angular acceleration, for the angle that the wheel turns.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is The wheel turns through $29\\text{ rad}$, because the angle is the area under the angular speed-time graph.. The areas of the segments are 4.00, 16.0 and 9.00 rad, which add to $29.0\\text{ rad}$.\nThe wheel turns through $16\\text{ rad}$, because the angle is found only from the part of the graph where the speed is constant. is incorrect: Uses only the horizontal part of the graph and leaves out the other segments.\nThe wheel turns through $36\\text{ rad}$, because the angle is the largest angular speed times the total time. is incorrect: Uses the largest angular speed for the whole time, but the speed is lower for part of the time.\nThe wheel turns through $0.222\\text{ rad}$, because the angle is the slope of the graph. is incorrect: Mistakes the slope, which is the angular acceleration, for the angle that the wheel turns.",
+     "est_seconds": 90,
+     "blueprint": {
+      "id": "phs_wt_claim_set_q2",
+      "subject": "ap_physics_1",
+      "kind": "mc",
+      "concept": "Justifying the angle turned from the area under an angular speed-time graph",
+      "topic": "5.1",
+      "skill": "3.B",
+      "student_thinking": [
+       "Recognize that the angle is the area under the angular speed-time graph",
+       "Add the areas of the three segments"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the wheel always turns in the same direction",
+        "evidence": "the shared stimulus says the wheel always rotates in the same direction"
+       }
+      ],
+      "material": {
+       "type": "graph",
+       "must_include": [
+        "axis labels with units"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Uses only the horizontal part of the graph and leaves out the other segments."
+       },
+       {
+        "id": "m2",
+        "description": "Uses the largest angular speed for the whole time, but the speed is lower for part of the time."
+       },
+       {
+        "id": "m3",
+        "description": "Mistakes the slope, which is the angular acceleration, for the angle that the wheel turns."
+       }
+      ],
+      "verification": {
+       "independent_path": "exact fractions for the areas versus numpy integration of a dense resampling",
+       "method": "sympy symbolic + independent numeric path"
+      },
+      "judgment_demand": [
+       "justification",
+       "representation_reading"
+      ]
+     }
+    }
+   ],
+   "set_size": 2,
+   "est_seconds": 175,
+   "facts": [
+    "xs=[0, 2, 6, 9]",
+    "ws=[0, 4, 4, 2]"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phs_wt_claim_set_q1",
+   "facts": [
+    "xs=[0, 2, 6, 9]",
+    "ws=[0, 4, 4, 2]"
+   ],
+   "seed": 12101
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Slope reading plus tau=I alpha justification; Unit 5 content, claim/justification fits 3.B. Topic 5.1 is slightly stretched by tau=I alpha but within unit scope."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "D is the unique correct answer. Option B's 2 N m matches the first-segment slope of 2 rad/s^2 with I = 1 kg m^2."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Graph vertices and axes are complete with units; I and the rotation direction are given in the stem."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct named misconceptions; all wrong options are explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 85 seconds, no arithmetic burden, calculator designation consistent."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound. The key is unique, the stimulus is complete, the distractors are distinct, and the load is appropriate. The only weakness is that tau=I alpha sits slightly outside topic 5.1, but it is still within Unit 5 scope."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Area under omega-t graph gives angle; fits 5.1 and claim/justification skill 3.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "29 rad is the unique correct value (4+16+9). Graph shows only nonnegative omega so direction is unambiguous."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Graph data complete with axes, units, vertices. The key_conditions mention a statement about direction that is not in the stem, but nonnegative omega implies it."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct misconceptions, each explained. The 0.222 slope value is somewhat contrived but still encodes slope-vs-area confusion."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 90 s, simple arithmetic. Moment of inertia given in the stem is irrelevant extra information, a minor blemish."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Correct, in-scope graph-area item with a complete stimulus and distinct distractors. Minor flaws: the unused moment of inertia in the stem and a contrived slope distractor value. Acceptable."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "One-step conceptual application: read a flat segment of an omega-t graph, conclude alpha = 0, and apply tau_net = I*alpha to claim zero net torque. Distractors target standard misconceptions (motion requires torque, flat means negative, same as previous segment). No arithmetic, minimal reading, in scope. Tests recognition of the governing law and graph slope rather than multi-step reasoning.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must recognize that angular displacement equals the area under the omega-t graph and sum a triangle, rectangle and trapezoid (4+16+9=29 rad) with small integers. Distractors target common misconceptions (constant segment only, max speed times time, slope). The moment of inertia is an unused detail but adds minimal reading load. It is a standard graph-to-quantity item with a modest multi-step area computation, suited to full mocks and not trivially basic.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 4,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 90
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_physics_1-m04-k2",
+  "cellId": "ap_physics_1-m04",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "5.1",
+  "unitCode": "5",
+  "skillPrimary": "2.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "phs_wt_claim_set_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Student reads a flat segment of an angular speed vs. time graph, recognizes alpha = 0, and applies net torque = I*alpha to conclude zero net torque. Distractors target common misconceptions (torque needed to maintain motion, flat line means negative, reuse of earlier segment value). Single law, one representation read, no calculation needed, short wording, no out-of-scope content or ambiguity.",
+  "payload": {
+   "archetype": "phs_wt_claim_set",
+   "topic": "5.1",
+   "skill": "3.B",
+   "calculator": "allowed",
+   "set_intro": "A wheel with a moment of inertia of $4\\text{ kg m}^2$ rotates about a fixed axle. The graph shows the angular speed of the wheel as a function of time.",
+   "stimulus": {
+    "kind": "graph",
+    "description": "Angular speed of the wheel versus time",
+    "data": {
+     "x_axis": {
+      "label": "Time (s)",
+      "min": 0,
+      "max": 11,
+      "step": 1
+     },
+     "y_axis": {
+      "label": "Angular speed (rad/s)",
+      "min": 0,
+      "max": 8,
+      "step": 2
+     },
+     "vertices": [
+      [
+       0,
+       0
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       8,
+       6
+      ],
+      [
+       11,
+       2
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "phs_wt_claim_set_q1",
+     "topic": "5.1",
+     "skill": "3.B",
+     "stem": "The wheel always rotates in the same direction. Which statement about the net torque on the wheel from $t=4\\text{ s}$ to $t=8\\text{ s}$ is correct and best justified?",
+     "options": [
+      {
+       "text": "The net torque is zero, because the angular speed is constant and so the angular acceleration is zero.",
+       "why": "The graph is horizontal between $4\\text{ s}$ and $8\\text{ s}$, so $\\alpha=0$ and $\\tau_{net}=I\\alpha=0$.",
+       "value": null
+      },
+      {
+       "text": "The net torque is negative, because the line on the graph does not rise.",
+       "why": "Takes a graph that does not rise to mean a negative torque, but a negative torque would make the angular speed decrease.",
+       "value": null
+      },
+      {
+       "text": "The net torque is $6\\text{ N m}$ in the direction of the rotation, because it is the same as in the first segment.",
+       "why": "Carries the net torque of the first segment into the second segment although the slope of the graph is zero there.",
+       "value": null
+      },
+      {
+       "text": "The net torque is not zero, because the wheel keeps turning at $6\\text{ rad/s}$ and a torque is needed to keep it turning.",
+       "why": "Thinks that a net torque is needed to maintain a constant angular speed, but a net torque produces an angular acceleration.",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is The net torque is zero, because the angular speed is constant and so the angular acceleration is zero.. The graph is horizontal between $4\\text{ s}$ and $8\\text{ s}$, so $\\alpha=0$ and $\\tau_{net}=I\\alpha=0$.\nThe net torque is negative, because the line on the graph does not rise. is incorrect: Takes a graph that does not rise to mean a negative torque, but a negative torque would make the angular speed decrease.\nThe net torque is $6\\text{ N m}$ in the direction of the rotation, because it is the same as in the first segment. is incorrect: Carries the net torque of the first segment into the second segment although the slope of the graph is zero there.\nThe net torque is not zero, because the wheel keeps turning at $6\\text{ rad/s}$ and a torque is needed to keep it turning. is incorrect: Thinks that a net torque is needed to maintain a constant angular speed, but a net torque produces an angular acceleration.",
+     "est_seconds": 85,
+     "blueprint": {
+      "id": "phs_wt_claim_set_q1",
+      "subject": "ap_physics_1",
+      "kind": "mc",
+      "concept": "Justifying a zero net torque from a constant angular speed on a graph",
+      "topic": "5.1",
+      "skill": "3.B",
+      "student_thinking": [
+       "Read the slope of the graph in the interval",
+       "Relate the slope, the angular acceleration and the net torque"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the wheel rotates about a fixed axis",
+        "evidence": "the shared stimulus describes a wheel with an angular speed graph"
+       }
+      ],
+      "material": {
+       "type": "graph",
+       "must_include": [
+        "axis labels with units"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Takes a graph that does not rise to mean a negative torque, but a negative torque would make the angular speed decrease."
+       },
+       {
+        "id": "m2",
+        "description": "Carries the net torque of the first segment into the second segment although the slope of the graph is zero there."
+       },
+       {
+        "id": "m3",
+        "description": "Thinks that a net torque is needed to maintain a constant angular speed, but a net torque produces an angular acceleration."
+       }
+      ],
+      "verification": {
+       "independent_path": "the slope of each segment is computed exactly and by numerical differentiation",
+       "method": "sympy symbolic + independent numeric path"
+      },
+      "judgment_demand": [
+       "justification",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "phs_wt_claim_set_q2",
+     "topic": "5.1",
+     "skill": "3.B",
+     "stem": "Which statement about the angle through which the wheel turns from $t=0$ to $t=11\\text{ s}$ is correct and best justified?",
+     "options": [
+      {
+       "text": "The wheel turns through $66\\text{ rad}$, because the angle is the largest angular speed times the total time.",
+       "why": "Uses the largest angular speed for the whole time, but the speed is lower for part of the time.",
+       "value": null
+      },
+      {
+       "text": "The wheel turns through $24\\text{ rad}$, because the angle is found only from the part of the graph where the speed is constant.",
+       "why": "Uses only the horizontal part of the graph and leaves out the other segments.",
+       "value": null
+      },
+      {
+       "text": "The wheel turns through $48\\text{ rad}$, because the angle is the area under the angular speed-time graph.",
+       "why": "The areas of the segments are 12.0, 24.0 and 12.0 rad, which add to $48.0\\text{ rad}$.",
+       "value": null
+      },
+      {
+       "text": "The wheel turns through $0.182\\text{ rad}$, because the angle is the slope of the graph.",
+       "why": "Mistakes the slope, which is the angular acceleration, for the angle that the wheel turns.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is The wheel turns through $48\\text{ rad}$, because the angle is the area under the angular speed-time graph.. The areas of the segments are 12.0, 24.0 and 12.0 rad, which add to $48.0\\text{ rad}$.\nThe wheel turns through $66\\text{ rad}$, because the angle is the largest angular speed times the total time. is incorrect: Uses the largest angular speed for the whole time, but the speed is lower for part of the time.\nThe wheel turns through $24\\text{ rad}$, because the angle is found only from the part of the graph where the speed is constant. is incorrect: Uses only the horizontal part of the graph and leaves out the other segments.\nThe wheel turns through $0.182\\text{ rad}$, because the angle is the slope of the graph. is incorrect: Mistakes the slope, which is the angular acceleration, for the angle that the wheel turns.",
+     "est_seconds": 90,
+     "blueprint": {
+      "id": "phs_wt_claim_set_q2",
+      "subject": "ap_physics_1",
+      "kind": "mc",
+      "concept": "Justifying the angle turned from the area under an angular speed-time graph",
+      "topic": "5.1",
+      "skill": "3.B",
+      "student_thinking": [
+       "Recognize that the angle is the area under the angular speed-time graph",
+       "Add the areas of the three segments"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the wheel always turns in the same direction",
+        "evidence": "the shared stimulus says the wheel always rotates in the same direction"
+       }
+      ],
+      "material": {
+       "type": "graph",
+       "must_include": [
+        "axis labels with units"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Uses the largest angular speed for the whole time, but the speed is lower for part of the time."
+       },
+       {
+        "id": "m2",
+        "description": "Uses only the horizontal part of the graph and leaves out the other segments."
+       },
+       {
+        "id": "m3",
+        "description": "Mistakes the slope, which is the angular acceleration, for the angle that the wheel turns."
+       }
+      ],
+      "verification": {
+       "independent_path": "exact fractions for the areas versus numpy integration of a dense resampling",
+       "method": "sympy symbolic + independent numeric path"
+      },
+      "judgment_demand": [
+       "justification",
+       "representation_reading"
+      ]
+     }
+    }
+   ],
+   "set_size": 2,
+   "est_seconds": 175,
+   "facts": [
+    "xs=[0, 4, 8, 11]",
+    "ws=[0, 6, 6, 2]"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phs_wt_claim_set_q1",
+   "facts": [
+    "xs=[0, 4, 8, 11]",
+    "ws=[0, 6, 6, 2]"
+   ],
+   "seed": 12102
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Rotational kinematics linked to net torque via tau=I*alpha; claim plus justification fits 3.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Zero slope from 4 to 8 s gives alpha=0 and net torque 0; unique correct option."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Graph data complete with labeled axes, units and vertices; wording is clear."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct misconceptions (negative sign from no rise, carrying over the earlier torque of 6 N m, torque needed to maintain speed); each is explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 60-85 s, no arithmetic burden, calculator designation consistent."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is a sound claim-and-justification question with a unique key, a complete graph and distinct distractors. It passes all five criteria."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Rotational kinematics, angle from the area under an ω-t graph; justification claim fits 3.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "The areas 12+24+12 = 48 rad. Unique correct option. The graph shows ω ≥ 0, so the angle equals the area."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Graph vertices fully specify the figure, and the axes are labeled with units. The same-direction condition is not stated but is implied by ω ≥ 0 on the graph. The moment of inertia given in the stem is irrelevant."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Distinct misconceptions: using the maximum ω for the whole time, using only the constant segment, and confusing slope with angle. Each wrong option is explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 90 seconds, light arithmetic, calculator designation consistent. The extra moment of inertia is slight reading load."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Correct and clean item. Minor flaws: the irrelevant I = 4 kg m² and the same-direction condition left unstated (implied by the graph). It passes."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Student reads a flat segment of an angular speed vs. time graph, recognizes alpha = 0, and applies net torque = I*alpha to conclude zero net torque. Distractors target common misconceptions (torque needed to maintain motion, flat line means negative, reuse of earlier segment value). Single law, one representation read, no calculation needed, short wording, no out-of-scope content or ambiguity.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Students must recognize that angular displacement is the area under the omega-t graph and sum a triangle, a rectangle and a trapezoid with simple integer values (12+24+12=48 rad). Distractors map to common misconceptions (max speed times time, constant-speed segment only, slope). The given moment of inertia is an unused detail, but it adds little reading load. This is a single-concept item on rotational kinematics with minimal computation, so it fits basic learning rather than a full-mock exam-prep item.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 75
+   }
+  ]
+ }
+]

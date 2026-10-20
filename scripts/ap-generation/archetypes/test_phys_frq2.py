@@ -34,7 +34,7 @@ class Registry(unittest.TestCase):
         self.assertEqual(sorted(TYPE_OF[n] for n in NEW), ["lab", "lab", "mr", "mr", "qqt", "qqt", "tbr", "tbr"])
         self.assertTrue(set(NEW).isdisjoint(OLD))
         self.assertEqual(R.PHYS_STAGES["phys_s4_a"], NEW)
-        self.assertEqual(len(R.PHYS_FRQ), 12)
+        self.assertGreaterEqual(len(R.PHYS_FRQ), 12)  # 2026-10-19 phys_p0_frq3 가 세 번째 시나리오 4개를 더했다
 
     def test_deterministic(self):
         for n in NEW:
