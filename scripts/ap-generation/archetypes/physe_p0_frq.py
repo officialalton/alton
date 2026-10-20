@@ -183,7 +183,7 @@ def pef_lab_rc_time_constant(rng):
         C_est = -1 / (slope * 1e3 * Rk * 1e3) * 1e6
         if abs(C_est - Cu) / Cu < 0.08 and 0.5 < tau < 200:
             break
-    stim = {"kind": "table", "description": f"A student charges a capacitor of unknown capacitance $C$ to a potential difference of about ${V0:g}\\text{{ V}}$ and then discharges it through a resistor of resistance $R={Rk:g}\\text{{ k}}\\Omega$. A voltmeter connected across the capacitor is read at intervals of $10\\text{{ ms}}$ after the discharge starts.", "data": {"x_label": "Time t (ms)", "y_label": "Capacitor voltage V (V)", "rows": [[t, v_] for t, v_ in zip(ts, Vs)]}}
+    stim = {"kind": "table", "description": f"A student charges a capacitor of unknown capacitance C to a potential difference of about {V0:g} V and then discharges it through a resistor of resistance R = {Rk:g} kΩ. A voltmeter connected across the capacitor is read at intervals of 10 ms after the discharge starts.", "data": {"x_label": "Time t (ms)", "y_label": "Capacitor voltage V (V)", "rows": [[t, v_] for t, v_ in zip(ts, Vs)]}}
     stim["data"]["notes"] = [stim["description"]]
     parts = [
         part("A", "Describe an experimental procedure to collect the data for the capacitor voltage as a function of time during the discharge. Include the equipment and the measurements, how the independent variable is controlled, and one way to reduce the uncertainty in the voltage readings.", 3, "design", ["3.A", "2.B"],
@@ -223,7 +223,7 @@ def pef_lab_capacitor_gap(rng):
         e0 = slope * 1e-12 * 1e-3 / A
         if abs(e0 - EPS0) / EPS0 < 0.06:
             break
-    stim = {"kind": "table", "description": f"A student measures the capacitance $C$ of a parallel-plate capacitor with vacuum between its two identical square plates, each of area $A={Acm:g}\\text{{ cm}}^{{2}}$ at several plate separations $d$.", "data": {"x_label": "Plate separation d (mm)", "y_label": "Capacitance C (pF)", "rows": [[d, c_] for d, c_ in zip(ds_, Cs)]}}
+    stim = {"kind": "table", "description": f"A student measures the capacitance C of a parallel-plate capacitor with vacuum between its two identical square plates, each of area A = {Acm:g} cm², at several plate separations d.", "data": {"x_label": "Plate separation d (mm)", "y_label": "Capacitance C (pF)", "rows": [[d, c_] for d, c_ in zip(ds_, Cs)]}}
     stim["data"]["notes"] = [stim["description"]]
     parts = [
         part("A", "Describe an experimental procedure to collect the data for the capacitance as a function of the plate separation. Include the equipment and the measurements, how the independent variable is changed, and one way to reduce the uncertainty in the separation.", 3, "design", ["3.A", "2.B"],

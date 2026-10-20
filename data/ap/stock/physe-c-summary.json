@@ -1,0 +1,86 @@
+{
+ "runs": [
+  "physe-c"
+ ],
+ "rows": 102,
+ "passed": 77,
+ "rejected": 25,
+ "passRate": 0.755,
+ "singles": {
+  "candidates": 102
+ },
+ "unitsPassed": {
+  "8": 13,
+  "9": 18,
+  "10": 9,
+  "11": 18,
+  "12": 11,
+  "13": 8
+ },
+ "figPassed": {
+  "none": 77
+ },
+ "figAll": {
+  "none": 100,
+  "graph": 2
+ },
+ "figPassRate": {
+  "none": "77/100",
+  "graph": "0/2"
+ },
+ "renderTypesPassed": {
+  "none": 74,
+  "text": 2,
+  "ap_table": 1
+ },
+ "archetypesPassed": {
+  "pe_field_square_center": 2,
+  "pe_field_quarter_arc": 2,
+  "pe_flux_line_charge_cylinder": 2,
+  "pe_gauss_slab": 2,
+  "pe_ring_center_oscillation": 1,
+  "pe_plates_particle_time": 2,
+  "pe_flux_nonuniform_cube": 2,
+  "pe_work_bring_third_charge": 2,
+  "pe_sphere_surface_release_speed": 2,
+  "pe_field_from_potential_2d": 1,
+  "pe_force_from_potential_energy": 2,
+  "pe_plates_potential_position": 2,
+  "pe_two_fixed_charges_speed": 2,
+  "pe_shell_potential_inside_claim": 1,
+  "pe_uniform_sphere_center_potential": 2,
+  "pe_ring_potential_difference_speed": 2,
+  "pe_proton_eV_energy": 1,
+  "pe_cap_battery_separation_energy": 2,
+  "pe_cap_network_charge": 2,
+  "pe_spheres_connected_potential": 2,
+  "pe_cap_dielectric_field": 1,
+  "pe_cap_dielectric_removed_charge": 2,
+  "pe_wire_stretched_resistance": 2,
+  "pe_bridge_balance": 2,
+  "pe_bulbs_series_parallel_power": 2,
+  "pe_current_division": 2,
+  "pe_loop_point_potential": 2,
+  "pe_rc_two_caps_series": 1,
+  "pe_rc_time_to_fraction": 2,
+  "pe_internal_resistance_two_loads": 2,
+  "pe_short_circuit_claim": 1,
+  "pe_current_density_field": 2,
+  "pe_beam_deflection_angle": 2,
+  "pe_loop_rotate_work": 2,
+  "pe_perpendicular_wires_field": 2,
+  "pe_closed_loop_force_claim": 1,
+  "pe_electron_orbit_field": 2,
+  "pe_toroid_field_ratio": 1,
+  "pe_sliding_rod_changing_field": 2,
+  "pe_coil_removed_charge": 2,
+  "pe_rl_inductor_power": 2,
+  "pe_eddy_current_claim": 1,
+  "pef_tbr_ring_potential": 1,
+  "pef_lab_rl_decay": 1,
+  "pef_qqt_proton_field": 1
+ },
+ "costUsd": {
+  "physe-c": 3.5835
+ }
+}

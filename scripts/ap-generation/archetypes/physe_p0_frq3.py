@@ -13,7 +13,7 @@ def pef_mr_capacitor_dielectric(rng):
         break
     stim = {"kind": "text", "description": f"An air-filled parallel-plate capacitor has square plates of area $A={Acm:g}\\text{{ cm}}^{{2}}$ separated by $d={dmm:g}\\text{{ mm}}$. It is charged by a ${V:g}\\text{{ V}}$ battery and the battery is then disconnected. A dielectric slab of constant $\\kappa={kap:g}$ that completely fills the gap is then inserted. Use {KP.replace('k=9.0', 'k=9.0')} and $\\varepsilon_0=8.85\\times10^{{-12}}\\text{{ F/m}}$.", "data": {}}
     parts = [
-        part("A", "On the diagram of the capacitor in cross-section (two parallel plates, the top plate positive), draw several electric field lines in the gap before the dielectric is inserted, and mark the direction of the field. Then state how the density of the field lines in the gap should change after the dielectric is inserted.", 3, "diagram", ["1.A"],
+        part("A", "Draw a diagram of the capacitor in cross-section (two parallel plates, the top plate positive) and draw several electric field lines in the gap before the dielectric is inserted, marking the direction of the field. Then state how the density of the field lines in the gap should change after the dielectric is inserted.", 3, "diagram", ["1.A"],
              "Straight, evenly spaced field lines from the positive plate to the negative plate, perpendicular to the plates and pointing downward; after insertion the field in the gap is weaker (fewer lines per area) because the charge on the plates is unchanged.",
              [R("A1", "diagram", "Draws parallel field lines perpendicular to the plates, evenly spaced", ["parallel evenly spaced lines"], err=["draws curved lines in the middle of the gap"]),
               R("A2", "diagram", "Marks the direction from the positive plate to the negative plate (downward)", ["direction from positive to negative"], err=["draws the arrows toward the positive plate"]),
@@ -23,7 +23,7 @@ def pef_mr_capacitor_dielectric(rng):
              [R("B1", "expression", "Writes $C=\\kappa\\varepsilon_0A/d$ with the dielectric", ["kappa epsilon_0 A / d"], err=["divides by $\\kappa$"]),
               R("B2", "expression", "Notes that the charge is unchanged, $Q=C_0V_0$ with $C_0=\\varepsilon_0A/d$", ["Q = C0 V0"], requires="B1", err=["keeps the voltage fixed"]),
               R("B3", "expression", "Obtains $U=Q^2/(2C)=\\varepsilon_0AV_0^2/(2\\kappa d)$", ["epsilon_0 A V0^2 / (2 kappa d)"], requires="B2", err=["obtains $\\kappa\\varepsilon_0AV_0^2/(2d)$"])]),
-        part("C", "Calculate the capacitance with the dielectric in place and the energy stored after the insertion.", 2, "calculate", ["2.B"],
+        part("C", "Calculate the capacitance with the dielectric in place, in picofarads, and the energy stored after the insertion, in nanojoules.", 2, "calculate", ["2.B"],
              f"$C=\\kappa\\varepsilon_0A/d\\approx{C * 1e12:.0f}\\text{{ pF}}$ and $U=\\dfrac{{\\varepsilon_0AV_0^2}}{{2\\kappa d}}\\approx{U0 / kap * 1e9:.2f}\\text{{ nJ}}$.",
              [R("C1", "numeric", f"Calculates $C$ of about {C * 1e12:.0f} with units of picofarads (accept any value within 2 percent)", [f"{C * 1e12:.0f}", "pF"], requires="B1", nums=True, units=True, err=["leaves the area in square centimeters"]),
               R("C2", "numeric", f"Calculates $U$ of about {U0 / kap * 1e9:.2f} with units of nanojoules", [f"{U0 / kap * 1e9:.2f}", "nJ"], requires="B3", nums=True, units=True)]),
@@ -93,7 +93,7 @@ def pef_lab_rl_decay(rng):
         L_est = -Rr / (slope * 1e3)
         if abs(L_est - L) / L < 0.08 and 2.0 <= tau < 40:
             break
-    stim = {"kind": "table", "description": f"A student connects an ideal inductor of unknown inductance $L$ in series with a resistor of resistance $R={Rr:g}\\,\\Omega$ and a battery. After the current has reached a steady value, the battery is replaced by a short wire so that the current decays through the inductor and the resistor. A current sensor records the current $I$ at intervals of $2\\text{{ ms}}$ after the switch is thrown.", "data": {"x_label": "Time t (ms)", "y_label": "Current I (mA)", "rows": [[t, i_] for t, i_ in zip(ts, Is)]}}
+    stim = {"kind": "table", "description": f"A student connects an ideal inductor of unknown inductance L in series with a resistor of resistance R = {Rr:g} Ω and a battery. After the current has reached a steady value, the battery is replaced by a short wire so that the current decays through the inductor and the resistor. A current sensor records the current I at intervals of 2 ms after the switch is thrown.", "data": {"x_label": "Time t (ms)", "y_label": "Current I (mA)", "rows": [[t, i_] for t, i_ in zip(ts, Is)]}}
     stim["data"]["notes"] = [stim["description"]]
     parts = [
         part("A", "Describe an experimental procedure to collect the data for the current as a function of time. Include the equipment and the measurements, how the decay is started, and one way to reduce the uncertainty in the current readings.", 3, "design", ["3.A", "2.B"],

@@ -10,8 +10,8 @@ def pes_ohm_table_set(rng):
         R = pick(rng, [20.0, 40.0, 50.0, 100.0]); Vs = [2.0, 4.0, 6.0, 8.0, 10.0]; Is = [v / R * 1e3 for v in Vs]
         Vq = pick(rng, [12.0, 15.0, 20.0]); P = Vq ** 2 / R
         break
-    k1, d1 = num_opts(R, [("Uses $I/V$ in milliamperes per volt.", Is[1] / Vs[1]), ("Uses the product $VI$ with the current in milliamperes.", Vs[1] * Is[1]), ("Uses $V/I$ with the current in milliamperes, so the result is 1000 times too small.", Vs[1] / Is[1]), ("Uses the difference of two voltages divided by one current.", (Vs[3] - Vs[0]) / (Is[1] * 1e-3))], "", fmt=FU(U_OHM))
-    k2, d2 = num_opts(P, [("Uses $VI$ with the current from the first row.", Vq * Is[0] * 1e-3), ("Uses $V^2$ without dividing by $R$.", Vq ** 2), ("Uses $I^2R$ with the current from the table row at $10\\text{ V}$.", (Is[4] * 1e-3) ** 2 * R), ("Uses $V/R$ as the power.", Vq / R)], "", fmt=FU(U_W))
+    k1, d1 = num_opts(R, [("Divides the voltage by the current in milliamperes without converting to amperes.", Vs[1] / Is[1]), ("Pairs the largest voltage with the smallest current.", Vs[4] / (Is[0] * 1e-3)), ("Pairs the smallest voltage with the largest current.", Vs[0] / (Is[4] * 1e-3)), ("Uses the sum of the voltage and current values of one row.", Vs[1] + Is[1])], "", fmt=FU(U_OHM))
+    k2, d2 = num_opts(P, [("Uses $VI$ with the current from the first row of the table.", Vq * Is[0] * 1e-3), ("Multiplies the square of the voltage by the resistance, $V^2R$.", Vq ** 2 * R), ("Uses $VI$ with the current from the last row of the table.", Vq * Is[4] * 1e-3), ("Uses $V/R$, which is a current.", Vq / R)], "", fmt=FU(U_W))
     rows = [[f"{v:g}", f"{i:.4g}"] for v, i in zip(Vs, Is)]
     stim = table_stimulus("Current in a resistor at several applied voltages", "Potential difference V (V)", rows, "Current I (mA)")
     qs = [("What is the resistance of the resistor?", k1, d1, "q1", f"The ratio $V/I$ is constant: $R=V/I={sig(R)}\\,\\Omega$ for every row."),
@@ -43,4 +43,4 @@ def pes_solenoid_graph_set(rng):
     return set_pack("pes_solenoid_graph_set", "12.4", intro, stim, items, items[0]["facts"])
 
 
-STAGE_SETS_C = ["pes_ohm_table_set", "pes_solenoid_graph_set"]
+STAGE_SETS_C = ["pes_ohm_table_set"]

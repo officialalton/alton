@@ -2820,21 +2820,6 @@
   ]
  },
  {
-  "id": "pe_electrons_per_second",
-  "topic": "11.1",
-  "skill": "2.B",
-  "calculator": "allowed",
-  "stimulus": "none",
-  "verifiedBy": [
-   "the number per second is recomputed as the charge passing in one second divided by $e$"
-  ],
-  "misconceptions": [
-   "Uses the current in milliamperes as amperes.",
-   "Divides the charge by $e$ twice, $I/e^2$, in units of $10^{19}$.",
-   "Multiplies by the charge instead of dividing, $I\\,e$ in electrons per second."
-  ]
- },
- {
   "id": "pe_wire_stretched_resistance",
   "topic": "11.3",
   "skill": "2.D",
@@ -3120,21 +3105,6 @@
   ]
  },
  {
-  "id": "pe_lc_energy_fraction",
-  "topic": "13.6",
-  "skill": "2.A",
-  "calculator": "allowed",
-  "stimulus": "none",
-  "verifiedBy": [
-   "an RK4 integration of the oscillator recomputes the two energies at the stated time"
-  ],
-  "misconceptions": [
-   "Uses $\\sin(\\phi/2)^2$.",
-   "Takes the fraction to be the fraction of the period.",
-   "Gives the fraction in the capacitor instead."
-  ]
- },
- {
   "id": "pe_solenoid_energy",
   "topic": "13.4",
   "skill": "2.B",
@@ -3144,9 +3114,9 @@
    "the energy is recomputed as $\\tfrac12LI^2$ with the solenoid's inductance"
   ],
   "misconceptions": [
-   "Uses $B/(2\\mu_0)$ times the volume.",
+   "Uses the length in centimeters in the volume.",
    "Omits the factor of one half in the energy density, $B^2/\\mu_0$.",
-   "Uses the length in centimeters in the volume."
+   "Applies the factor of one half twice."
   ]
  },
  {
@@ -3162,6 +3132,231 @@
    "Believes the induced currents attract the magnet instead of opposing its motion.",
    "Believes the induced force is equal to the weight from the very start of the fall.",
    "Believes that induction requires the conductor to be magnetic."
+  ]
+ },
+ {
+  "id": "pe_data_force_distance_claim",
+  "topic": "8.1",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "the products $Fr$ and $Fr^2$ are recomputed for each row of the table"
+  ],
+  "misconceptions": [
+   "Believes a few points cannot distinguish a power law from other dependences.",
+   "Reads equal spacing of the separations as equal changes of the force.",
+   "Confuses any decreasing trend with $1/r$; $Fr$ changes from row to row."
+  ]
+ },
+ {
+  "id": "pe_compare_sphere_fields",
+  "topic": "8.3",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the two fields are recomputed from the closed form and divided"
+  ],
+  "misconceptions": [
+   "Inverts the ratio, using $R^2/Q$ for each sphere.",
+   "Compares the charges only.",
+   "Uses $Q/R$, the potential ratio."
+  ]
+ },
+ {
+  "id": "pe_scale_electric_energy",
+  "topic": "9.1",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the energy ratio is recomputed from $kq_1q_2/r$"
+  ],
+  "misconceptions": [
+   "Multiplies by the distance factor.",
+   "Uses $q^2/r^2$ with the charge factor on one charge only.",
+   "Uses $q$ instead of $q^2$."
+  ]
+ },
+ {
+  "id": "pe_data_gap_capacitance_claim",
+  "topic": "10.3",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "the products $Cd$ and $Cd^2$ are recomputed for each row of the table"
+  ],
+  "misconceptions": [
+   "Applies the inverse-square law for the field of a point charge to a parallel-plate capacitor.",
+   "Believes the capacitance depends only on the plate area.",
+   "Reads equal steps in separation as equal drops in capacitance."
+  ]
+ },
+ {
+  "id": "pe_compare_cap_energies",
+  "topic": "10.3",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the two energies are recomputed and divided"
+  ],
+  "misconceptions": [
+   "Uses $CV$, the charge ratio.",
+   "Compares the capacitances only.",
+   "Compares the voltages only."
+  ]
+ },
+ {
+  "id": "pe_scale_capacitance_geometry",
+  "topic": "10.4",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the capacitance ratio is recomputed from the closed form"
+  ],
+  "misconceptions": [
+   "Uses the separation factor multiplicatively.",
+   "Ignores the dielectric.",
+   "Uses the square of the separation."
+  ]
+ },
+ {
+  "id": "pe_data_rc_claim",
+  "topic": "11.8",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "the successive ratios and differences are recomputed from the table values"
+  ],
+  "misconceptions": [
+   "Reads the table as an accelerating decay although the successive drops get smaller.",
+   "Confuses a decaying quantity with a growing one.",
+   "Describes a constant ratio as a constant difference."
+  ]
+ },
+ {
+  "id": "pe_data_iv_claim",
+  "topic": "11.3",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "the ratio $V/I$ is recomputed for each row of the table"
+  ],
+  "misconceptions": [
+   "Misstates the condition for ohmic behavior in terms of resistance instead of voltage.",
+   "Applies the local slope of the first rows as a resistance valid for all rows.",
+   "Believes any increasing relation between $I$ and $V$ is ohmic."
+  ]
+ },
+ {
+  "id": "pe_data_force_current_length_claim",
+  "topic": "12.1",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "the ratios $F/I$ and $F/I^2$ are recomputed for each row of the table"
+  ],
+  "misconceptions": [
+   "Believes only the field, not the current, determines the force.",
+   "Invents an inverse relation with no support in the data.",
+   "Reads an increasing trend as a quadratic dependence."
+  ]
+ },
+ {
+  "id": "pe_compare_wire_forces",
+  "topic": "12.3",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the two forces per length are recomputed and divided"
+  ],
+  "misconceptions": [
+   "Uses $I^2/d^2$.",
+   "Uses the currents only, $I_2/I_1$.",
+   "Uses $I^2$ without the distance."
+  ]
+ },
+ {
+  "id": "pe_scale_magnetic_force",
+  "topic": "12.2",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the force ratio is recomputed from $qvB$ for sample values"
+  ],
+  "misconceptions": [
+   "Uses only the speed and field factors.",
+   "Adds the three factors.",
+   "Divides by the field factor."
+  ]
+ },
+ {
+  "id": "pe_data_current_decay_claim",
+  "topic": "13.5",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "the table values are recomputed from the circuit equation with an RK4 integration"
+  ],
+  "misconceptions": [
+   "Ignores that an inductor opposes the change in current.",
+   "Reads the table as linear although the increases get smaller.",
+   "Believes an increasing sequence has no upper limit."
+  ]
+ },
+ {
+  "id": "pe_compare_induced_emfs",
+  "topic": "13.2",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the two emfs are recomputed and divided"
+  ],
+  "misconceptions": [
+   "Uses $r\\,dB/dt$, the circumference rather than the area.",
+   "Compares the radii only, $r_2/r_1$.",
+   "Compares the rates only."
+  ]
+ },
+ {
+  "id": "pe_scale_inductance",
+  "topic": "13.4",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the inductance ratio is recomputed from the closed form for sample values"
+  ],
+  "misconceptions": [
+   "Multiplies by the length factor instead of dividing.",
+   "Uses $N$ instead of $N^2$.",
+   "Divides by the area instead of multiplying, $N^2/(A\\ell)$."
+  ]
+ },
+ {
+  "id": "pe_scale_generator_emf",
+  "topic": "13.2",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the peak emf ratio is recomputed from $NBA\\omega$"
+  ],
+  "misconceptions": [
+   "Squares the frequency factor.",
+   "Adds the three factors.",
+   "Divides by the field factor."
   ]
  },
  {
@@ -3504,9 +3699,9 @@
    "the resistance is recomputed from every row and the power from $V^2/R$"
   ],
   "misconceptions": [
-   "Uses the product $VI$ with the current in milliamperes.",
-   "Uses $V/I$ with the current in milliamperes, so the result is 1000 times too small.",
-   "Uses $I/V$ in milliamperes per volt."
+   "Pairs the smallest voltage with the largest current.",
+   "Uses the sum of the voltage and current values of one row.",
+   "Pairs the largest voltage with the smallest current."
   ]
  },
  {
@@ -3519,39 +3714,9 @@
    "the resistance is recomputed from every row and the power from $V^2/R$"
   ],
   "misconceptions": [
-   "Uses $VI$ with the current from the first row.",
-   "Uses $V^2$ without dividing by $R$.",
-   "Uses $I^2R$ with the current from the table row at $10\\text{ V}$."
-  ]
- },
- {
-  "id": "pes_solenoid_graph_set_q1",
-  "topic": "12.4",
-  "skill": "2.B",
-  "calculator": "allowed",
-  "stimulus": "none",
-  "verifiedBy": [
-   "the slope and the field are recomputed from $B=\\mu_0nI$"
-  ],
-  "misconceptions": [
-   "Uses $B=2\\pi\\mu_0nI$.",
-   "Solves $B=\\mu_0nI/(2\\pi)$, the long-wire formula, for $n$.",
-   "Uses $B=2\\mu_0nI$."
-  ]
- },
- {
-  "id": "pes_solenoid_graph_set_q2",
-  "topic": "12.4",
-  "skill": "2.B",
-  "calculator": "allowed",
-  "stimulus": "none",
-  "verifiedBy": [
-   "the slope and the field are recomputed from $B=\\mu_0nI$"
-  ],
-  "misconceptions": [
-   "Uses the current in the slope without the proportionality, $\\text{slope}+I$.",
-   "Uses the field at the largest plotted current.",
-   "Halves the correct field."
+   "Uses $VI$ with the current from the first row of the table.",
+   "Uses $V/R$, which is a current.",
+   "Multiplies the square of the voltage by the resistance, $V^2R$."
   ]
  }
 ]

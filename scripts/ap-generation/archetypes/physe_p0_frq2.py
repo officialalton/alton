@@ -67,7 +67,7 @@ def pef_mr_wire_ampere(rng):
              [R("B1", "expression", "Writes the current in a thin ring, $dI=J\\,2\\pi r'\\,dr'$", ["dI = J 2 pi r' dr'"], err=["uses $J\\pi r'^2$ without integrating"]),
               R("B2", "expression", "Integrates from $0$ to $r$ to obtain $I_{enc}=2\\pi J_0r^3/(3R)$", ["2 pi J0 r^3 / (3 R)"], requires="B1", err=["integrates to $r^2$ instead of $r^3$"]),
               R("B3", "expression", "Applies Ampère's law to obtain $B=\\mu_0J_0r^2/(3R)$", ["mu0 J0 r^2 / (3 R)"], requires="B2", err=["uses $B=\\mu_0I_{enc}/r$ without $2\\pi$"])]),
-        part("C", f"Calculate the magnitude of the magnetic field at $r={r * 1e3:g}\\text{{ mm}}$.", 2, "calculate", ["2.B"],
+        part("C", f"Calculate the magnitude of the magnetic field at $r={r * 1e3:g}\\text{{ mm}}$, in microteslas.", 2, "calculate", ["2.B"],
              f"$B=\\mu_0J_0r^2/(3R)\\approx{B:.1f}\\,\\mu\\text{{T}}$.",
              [R("C1", "numeric", "Substitutes the values (with the radii in meters) into the expression from part B", ["substitution in SI units"], requires="B3", nums=True, err=["leaves the radii in millimeters"]),
               R("C2", "numeric", f"Obtains about {B:.1f} with units of microteslas (accept any value within 2 percent)", [f"{B:.1f}", "microteslas"], requires="C1", nums=True, units=True)]),
@@ -77,7 +77,7 @@ def pef_mr_wire_ampere(rng):
               R("D2", "justification", "Justifies with $B=\\mu_0J_0r^2/(3R)$ (proportional to $r^2$) or with the enclosed current scaling as $r^3$ and the circumference as $r$", ["B proportional to r^2"], requires="D1", err=["argues with the $1/r$ law for the exterior of a wire"])]),
     ]
     return _pack("pef_mr_wire_ampere", "mr", "12.4", ["12.3", "11.1"], "2.A", "Magnetic field inside a wire with a nonuniform current density", stim, parts, 10, 22, [f"J0={J0}", f"Rm={Rm}", f"r={r}", f"B={B:.4f}", f"B2={B2:.4f}"],
-                 [_ev("C", "magnetic field", B, 0.02 * B + 0.1, "microteslas"), _ev("D", "field at twice the distance", B2, 0.02 * B2 + 0.1, "microteslas")],
+                 [_ev("C", "magnetic field", B, 0.02 * B + 0.1, "microteslas"), _ev("D", "factor by which the field changes", 4.0, 0.05, "")],
                  ("Applying Ampère's law with an enclosed current found by integration, representing the loop and field direction, and predicting how the field scales with distance", ["Draw the Amperian loop and the field direction", "Integrate the current density for the enclosed current and apply Ampère's law", "Predict the scaling of the field with the distance"],
                   [("the current is along the axis and the current density depends only on the distance from the axis", "the stimulus states an axial current with a radially varying density")], {"type": "text", "must_include": ["the radius", "the current density law"]},
                   "sympy integrates the current density; a Simpson integration recomputes the enclosed current; the field scaling follows from the closed form"),
@@ -171,7 +171,7 @@ def pef_lab_resistivity(rng):
         rho_est = slope * A
         if abs(rho_est - rho) / rho < 0.06:
             break
-    stim = {"kind": "table", "description": f"A student measures the resistance $R$ of pieces of the same resistance wire, of diameter $d={dmm:g}\\text{{ mm}}$, for several lengths $L$.", "data": {"x_label": "Length of wire L (m)", "y_label": "Resistance R (ohms)", "rows": [[L, r_] for L, r_ in zip(Ls, Rs)]}}
+    stim = {"kind": "table", "description": f"A student measures the resistance R of pieces of the same resistance wire, of diameter d = {dmm:g} mm, for several lengths L.", "data": {"x_label": "Length of wire L (m)", "y_label": "Resistance R (ohms)", "rows": [[L, r_] for L, r_ in zip(Ls, Rs)]}}
     stim["data"]["notes"] = [stim["description"]]
     parts = [
         part("A", "Describe an experimental procedure to collect the data for the resistance as a function of the length. Include the equipment and the measurements, how the length is changed, and one way to reduce the uncertainty in the resistance.", 3, "design", ["3.A", "2.B"],
@@ -211,7 +211,7 @@ def pef_lab_magnetic_force(rng):
         B_est = slope * 1e-3 / L
         if abs(B_est - B) / B < 0.06:
             break
-    stim = {"kind": "table", "description": f"A student hangs a horizontal straight segment of wire of length $L={L * 100:g}\\text{{ cm}}$ perpendicular to a uniform horizontal magnetic field of unknown magnitude $B$ and measures the vertical magnetic force $F$ on the wire (from the change in the reading of a balance) for several currents $I$ in the wire.", "data": {"x_label": "Current in the wire I (A)", "y_label": "Magnetic force on the wire F (mN)", "rows": [[i, f_] for i, f_ in zip(Is, Fs)]}}
+    stim = {"kind": "table", "description": f"A student hangs a horizontal straight segment of wire of length L = {L * 100:g} cm perpendicular to a uniform horizontal magnetic field of unknown magnitude B and measures the vertical magnetic force F on the wire (from the change in the reading of a balance) for several currents I in the wire.", "data": {"x_label": "Current in the wire I (A)", "y_label": "Magnetic force on the wire F (mN)", "rows": [[i, f_] for i, f_ in zip(Is, Fs)]}}
     stim["data"]["notes"] = [stim["description"]]
     parts = [
         part("A", "Describe an experimental procedure to collect the data for the force as a function of the current. Include the equipment and the measurements, how the current is changed, and one way to reduce the uncertainty in the force.", 3, "design", ["3.A", "2.B"],

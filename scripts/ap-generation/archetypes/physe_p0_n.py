@@ -149,7 +149,7 @@ def pe_current_density_field(rng):
               "the field is recomputed as the potential drop per unit length, $IR/L$", f"$E=\\rho I/A={sig(E * 1e3)}\\text{{ mV/m}}$.", [f"rho={rho}", f"I={I}", f"dmm={dmm}"], est=90)
 
 
-STAGE_U11_C = ["pe_electrons_per_second", "pe_wire_stretched_resistance", "pe_bridge_balance", "pe_bulbs_series_parallel_power", "pe_current_division", "pe_loop_point_potential", "pe_rc_two_caps_series", "pe_rc_time_to_fraction", "pe_internal_resistance_two_loads", "pe_short_circuit_claim", "pe_current_density_field"]
+STAGE_U11_C = ["pe_wire_stretched_resistance", "pe_bridge_balance", "pe_bulbs_series_parallel_power", "pe_current_division", "pe_loop_point_potential", "pe_rc_two_caps_series", "pe_rc_time_to_fraction", "pe_internal_resistance_two_loads", "pe_short_circuit_claim", "pe_current_density_field"]
 
 
 # ---------------- 단원 12 ----------------
@@ -296,7 +296,7 @@ def pe_solenoid_energy(rng):
         U = B * B / (2 * MU0) * vol * 1e3
         Lind = MU0 * N ** 2 * Acm * 1e-4 / (Lc * 1e-2); agree(U, 0.5 * Lind * I * I * 1e3, 1e-9, "U")
         break
-    key, ds = num_opts(U, [("Omits the factor of one half in the energy density, $B^2/\\mu_0$.", 2 * U), ("Uses the length in centimeters in the volume.", U * Lc), ("Uses $B/(2\\mu_0)$ times the volume.", B / (2 * MU0) * vol * 1e3), ("Uses $B^2\\,\\mu_0/2$ times the volume.", B * B * MU0 / 2 * vol * 1e3)], "", fmt=FS(U_MJ))
+    key, ds = num_opts(U, [("Omits the factor of one half in the energy density, $B^2/\\mu_0$.", 2 * U), ("Applies the factor of one half twice.", U / 2), ("Uses the length in centimeters in the volume.", U * Lc), ("Uses the field of a solenoid with twice the turns, $(2B)^2/(2\\mu_0)$.", 4 * U)], "", fmt=FS(U_MJ))
     stem = f"A long solenoid has ${N}$ turns, a length of ${Lc:g}\\text{{ cm}}$ and a cross-sectional area of ${Acm:g}\\text{{ cm}}^{{2}}$, and carries a current of ${I:g}\\text{{ A}}$. Using the energy density of the magnetic field, what total energy is stored in the field inside the solenoid? Neglect end effects." + MUUSE
     return MQ("pe_solenoid_energy", "13.4", "2.B", stem, key, ds, rng, "The magnetic energy density is $B^2/(2\\mu_0)$, and the total energy is the density times the volume", ["Find $B=\\mu_0NI/\\ell$", "Multiply $B^2/(2\\mu_0)$ by the volume $A\\ell$"],
               "the energy is recomputed as $\\tfrac12LI^2$ with the solenoid's inductance", f"$U=\\dfrac{{B^2}}{{2\\mu_0}}A\\ell={sig(U)}\\text{{ mJ}}$.", [f"N={N}", f"Lc={Lc}", f"Acm={Acm}", f"I={I}"], est=100)
@@ -313,4 +313,4 @@ def pe_eddy_current_claim(rng):
               "the induced force on a falling dipole is recomputed in a simple numerical model of a loop and a falling magnet", "", ["claim"], est=85, judg=["justification"], cond=[("the tube is a conductor and the air resistance is negligible", "the stem states a conducting tube and an otherwise ideal fall")])
 
 
-STAGE_U13_C = ["pe_sliding_rod_changing_field", "pe_coil_removed_charge", "pe_rl_inductor_power", "pe_lc_energy_fraction", "pe_solenoid_energy", "pe_eddy_current_claim"]
+STAGE_U13_C = ["pe_sliding_rod_changing_field", "pe_coil_removed_charge", "pe_rl_inductor_power", "pe_solenoid_energy", "pe_eddy_current_claim"]
