@@ -210,6 +210,8 @@ function compareKey(a: [number, number, number, string], b: [number, number, num
 // --- MST 모듈 배정 가능 플래그(계획 §2, Phase 2 초기 규칙) -----------------------------------------
 // DB의 mock_exam_set_items generated column(m1_eligible/m2_lower_eligible/m2_higher_eligible)과 같은 규칙이다.
 // easy·medium -> Module 1 / M2 lower, medium·hard -> M2 higher. 규칙을 바꾸면 마이그레이션도 함께 바꾼다.
+// 주의(2026-10-20, 마이그레이션 20262100000630): DB 는 수학(section=math)의 hard 도 M1/lower 에 허용한다(오너 확정: 세트당 hard 5). 이 함수는 자동 조립기용 기본 규칙이라
+// 종전대로 M1/lower 에 hard 를 고르지 않는다 — 수학 hard 는 세트 새 버전 SQL(sat-expand-sql.ts SAT_MATH_HARD5)이 교체 칸으로만 넣는다.
 export function moduleEligibility(difficulty: ProblemDifficulty): { m1: boolean; m2Lower: boolean; m2Higher: boolean } {
   return {
     m1: difficulty === "easy" || difficulty === "medium",

@@ -5,6 +5,7 @@ import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import path from "node:path";
 import { exactKey, findNearDuplicate, shingles, type PoolEntry } from "../mock-exam-generation/dup-rule";
 import { planSatErrorReportFix } from "../../lib/audit-fix/sat-error-report-1018";
+import { findAwkwardFraming, stripMetaLead } from "../../lib/problem-generation/awkward-framing";
 import { hasGraphAndExpressionForSameCurves } from "../../lib/problem-generation/graph-expression-redundancy";
 
 const arg = (n: string) => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : undefined; };
@@ -19,7 +20,7 @@ const piMixed = (p: any) => /in terms of (π|pi)/i.test(`${p.passage ?? ""} ${p.
 const drop: Record<string, number> = {}; const out: any[] = [];
 const bump = (k: string) => { drop[k] = (drop[k] ?? 0) + 1; };
 for (const r of recs) {
-  const p = r.problem; const text = `${p.stimulus ?? ""}\n\n${p.question ?? ""}`;
+  const p = r.problem; if (p.stimulus) p.stimulus = stripMetaLead(p.stimulus); if (p.passage) p.passage = stripMetaLead(p.passage); const text = `${p.stimulus ?? ""}\n\n${p.question ?? ""}`;
   const stem = p.stimulus ?? p.passage ?? "";
   if (exact.has(exactKey(stem, p.question ?? null, p.options))) { bump("exact_dup"); continue; }
   const sh = shingles(`${stem} ${p.question ?? ""} ${(p.options ?? []).join(" ")}`);
@@ -28,6 +29,7 @@ for (const r of recs) {
   if (findNearDuplicate(sh, group, pool)) { bump("near_dup"); continue; }
   const row = { passage: p.passage ?? stem, question: p.question ?? null, options: p.options ?? null, correct_index: p.correctIndex ?? null, explanation: p.explanation ?? null, explanation_en: p.explanationEn ?? null, figure: p.figure ?? null };
   if (/[가-힣]/.test(`${stem} ${p.question ?? ""} ${(p.options ?? []).join(" ")} ${p.explanationEn ?? ""}`) || !p.explanationEn) { bump("hangul_or_no_explanation_en"); continue; }
+  { const f = findAwkwardFraming(`${stem} ${p.question ?? ""}`); if (f) { bump(`framing:${f.rule}`); continue; } }
   const hit = planSatErrorReportFix(row);
   if (hit) { bump(`rule:${hit.rule}`); continue; }
   if (piMixed(row)) { bump("pi_mixed"); continue; }
