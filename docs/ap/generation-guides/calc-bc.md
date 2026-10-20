@@ -151,7 +151,6 @@ BC 샘플(MC 30): 공유 AB 14 + BC 전용 16(U6 3, U7 2, U8 1, U9 5, U10 5).
 | c_x4_ratio_inconclusive | 10.8 | 3.B | not_allowed | numeric ratio of consecutive terms at n = 120 for each series (independent of the symbolic limits) |
 | c_x4_repeating_decimal | 10.2 | 2.C | not_allowed | long division of the fraction produces the same first 14 digits as the repeating decimal (independent of the g |
 | c_x4_series_derivative_closed | 10.15 | 2.C | not_allowed | the partial sum of 400 terms of the differentiated series is compared with each option at three sample points  |
-| c_x4_series_integral_estimate_calc | 10.15 | 1.E | required | scipy quad of the three-term polynomial over [0, b] (independent of the term-by-term antiderivatives) |
 | c_x4_taylor_deriv_from_poly | 10.11 | 2.C | not_allowed | the k-th derivative of the polynomial itself is evaluated at x = a with sympy (independent of the coefficient- |
 | c_x4_taylor_ln_calc | 10.11 | 1.E | required | central finite differences of ln at the center build the polynomial (independent of the symbolic derivatives) |
 | g_x4_autonomous_limit_graph | 7.9 | 2.D | not_allowed | small-step Euler integration of the interpolated f from the starting value to t = 400 (independent of reading  |
@@ -159,3 +158,9 @@ BC 샘플(MC 30): 공유 AB 14 + BC 전용 16(U6 3, U7 2, U8 1, U9 5, U10 5).
 | g_x4_motion_direction_graphs | 9.6 | 2.B | not_allowed | values of the interpolated graphs at t = a computed numerically (independent of reading the plotted vertices) |
 | g_x4_partial_sum_term_graph | 10.1 | 2.B | not_allowed | difference of the interpolated graph heights at n = k and n = k - 1 (independent of reading the vertices) |
 | g_x4_speed_increasing_graphs | 9.6 | 3.D | not_allowed | central difference of hypot(x'(t), y'(t)) built from the interpolated graphs at each time (independent of the  |
+
+보강(supplement, 2026-10-09 오너 승인) 원형:
+
+| id | topic | skill | calculator | verified by |
+|---|---|---|---|---|
+| c_x4_series_integral_estimate | 10.15 | 1.E | not_allowed | scipy quad of the three-term polynomial over [0, b] (independent of the term-by-term antiderivatives) |

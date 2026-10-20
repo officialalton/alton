@@ -10,4 +10,8 @@ STAGE_LISTS = {
         "g_x4_speed_increasing_graphs", "g_x4_motion_direction_graphs",
         "frq_x4_velocity_vector_calc", "frq_x4_series_estimate_calc", "frq_x4_series_classify", "frq_x4_cycloid_exact", "frq_x4_taylor_table_lagrange", "frq_x4_rose_exact", "frq_x4_improper_arctan_calc",
     ],
+    "supp_x4c_all": [
+        "c_x4_abs_cond_classify", "c_x4_alt_error_bound_value", "c_x4_limit_comparison_value", "c_x4_repeating_decimal", "c_x4_series_integral_estimate", "c_x4_taylor_deriv_from_poly",
+        "frq_x4_velocity_vector_calc", "frq_x4_series_estimate_calc", "frq_x4_series_classify", "frq_x4_cycloid_exact", "frq_x4_taylor_table_lagrange", "frq_x4_rose_exact", "frq_x4_improper_arctan_calc",
+    ],
 }

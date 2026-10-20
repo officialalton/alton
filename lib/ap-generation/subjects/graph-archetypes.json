@@ -2957,19 +2957,19 @@
   "bc": true
  },
  {
-  "id": "c_x4_series_integral_estimate_calc",
+  "id": "c_x4_series_integral_estimate",
   "topic": "10.15",
   "skill": "1.E",
-  "calculator": "required",
+  "calculator": "not_allowed",
   "stimulus": "none",
   "verifiedBy": [
    "scipy quad of the three-term polynomial over [0, b] (independent of the term-by-term antiderivatives)"
   ],
   "misconceptions": [
-   "uses two terms",
+   "uses only two terms",
    "evaluates instead of integrating",
-   "gives the exact integral",
-   "adds a fourth term"
+   "adds a fourth term",
+   "forgets the new exponent"
   ],
   "bc": true
  },

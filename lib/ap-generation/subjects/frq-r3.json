@@ -251,16 +251,13 @@
   "id": "frq_x4_improper_arctan_calc",
   "template": "improper_arctan_calc",
   "topic": "6.13",
-  "extraTopics": [
-   "8.3",
-   "5.6"
-  ],
+  "extraTopics": [],
   "skill": "1.E",
   "calculator": "required",
-  "parts": "a A pollutant is released into a lake at the rate $r(t)=\\dfrac (3) / b Find the amount of pollutant released during the first $2$ h (2) / c At what time $t$ is the rate of release equal to half of its (2) / d At what time $t>0$ is the rate of release decreasing most ra (2)",
+  "parts": "a A pollutant is released into a lake at the rate $r(t)=\\dfrac (3) / b Find the amount of pollutant released after the first $2$ ho (2) / c Determine whether $\\displaystyle\\int_0^{\\infty}t\\,r(t)\\,dt$ (2) / d A second release has the rate $s(t)=\\dfrac{30}{(t+3)^2}$ kil (2)",
   "points": 9,
   "verifiedBy": [
-   "scipy quad to infinity and over [0, T], and a bounded minimization of r'(t) (independent of the arctangent antiderivative and of solving r''(t) = 0)"
+   "scipy quad to infinity for the totals and the remainder, and quadrature of t r(t) to two cutoffs compared with the logarithmic growth (independent of the antide"
   ]
  },
  {
@@ -273,7 +270,7 @@
   ],
   "skill": "1.E",
   "calculator": "not_allowed",
-  "parts": "a The graph of the polar curve $r=4\\sin(2\\theta)$ for $0\\le\\th (3) / b Find $\\dfrac{dr}{d\\theta}$ at $\\theta=\\dfrac{\\pi}{6}$. Is th (2) / c Find the value of $\\theta$ in $\\left(0,\\dfrac{\\pi}{2}\\right) (2) / d Let $R$ be the region inside the petal and outside the circl (2)",
+  "parts": "a The polar curve $r=4\\sin(2\\theta)$ for $0\\le\\theta\\le\\dfrac{ (3) / b Find $\\dfrac{dr}{d\\theta}$ at $\\theta=\\dfrac{\\pi}{6}$. Is th (2) / c Find the value of $\\theta$ in $\\left(0,\\dfrac{\\pi}{2}\\right) (2) / d Let $R$ be the region inside the petal and outside the circl (2)",
   "points": 9,
   "verifiedBy": [
    "scipy quad of each polar area integral, a central difference of r, and a 500 x 500 grid count of the region outside the circle (independent of the symbolic inte"
@@ -340,7 +337,7 @@
   ],
   "skill": "1.E",
   "calculator": "required",
-  "parts": "a A particle moves in the $xy$-plane so that its velocity vect (2) / b Find the position $\\bigl(x(3),y(3)\\bigr)$ of the particle at (3) / c For $0<t<3$, find the time at which the particle is moving h (2) / d Find the total distance traveled by the particle from $t=0$ (2)",
+  "parts": "a An object moves in the $xy$-plane so that its velocity vecto (2) / b Find the position $\\bigl(x(3),y(3)\\bigr)$ of the object at t (3) / c For $0<t<3$, find the time at which the object is moving hor (2) / d Find the total distance traveled by the object from $t=0$ to (2)",
   "points": 9,
   "verifiedBy": [
    "central difference of the speed at t = 1, scipy quad of each component, Brent root of y'(t), and a 30001-point Simpson rule for the distance (independent of the"

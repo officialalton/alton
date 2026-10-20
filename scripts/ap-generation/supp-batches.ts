@@ -70,7 +70,7 @@ export const elItemNames = (): string[] => {
  * 2026-10-19 확대(+세트) 신규 배치: Microeconomics `micro-s<번호>…-items.json`, Statistics `stats-x<번호>…-items.json`. 기존 파일(micro-p…, stats-s…)과 이름이 겹치지 않아 목록 중복이 없다.
  * 새 배치마다 keys-file·render-check 를 고치지 않는다. 관리자 적재 배치(lib/ap-admin/batches.ts)는 따로 등록한다.
  */
-export const EXPAND_ITEM_FILE_RE = /^(?:micro-s[0-9][a-z0-9-]*|stats-x[0-9][a-z0-9-]*)-items\.json$/;
+export const EXPAND_ITEM_FILE_RE = /^(?:micro-s[0-9][a-z0-9-]*|stats-x[0-9][a-z0-9-]*|bcx[0-9][a-z0-9-]*)-items\.json$/;
 export const expandItemNames = (): string[] => {
   const dir = path.resolve(process.cwd(), "data/ap/stock");
   return existsSync(dir) ? readdirSync(dir).filter((f) => EXPAND_ITEM_FILE_RE.test(f)).map((f) => f.replace(/\.json$/, "")).sort() : [];
