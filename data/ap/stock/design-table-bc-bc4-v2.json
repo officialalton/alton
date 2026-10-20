@@ -1,0 +1,1849 @@
+{
+ "generatedAt": "2026-10-20",
+ "subject": "ap_calculus_bc,ap_calculus_ab",
+ "report": "data/ap/stock/exact-assign-bc-bc4-v2.json",
+ "published": "data/ap/stock/assembled/calc-published-ab1-3-bc1-3.json",
+ "summary": {
+  "items": 48,
+  "publishedCompared": 288,
+  "archetypeSharedWithPublished": 0,
+  "familySharedWithPublished": 0,
+  "maxNearestSimilarity": 0.727,
+  "siblingsInsideNewSet": 0,
+  "unitCounts": {
+   "1": 3,
+   "2": 3,
+   "3": 4,
+   "4": 4,
+   "5": 6,
+   "6": 9,
+   "7": 3,
+   "8": 4,
+   "9": 5,
+   "10": 7
+  },
+  "stimulusCounts": {
+   "none": 30,
+   "graph": 10,
+   "table": 3,
+   "text": 5
+  }
+ },
+ "items": [
+  {
+   "position": 1,
+   "set": "BC4",
+   "key": "run2:ap_calculus_ab-m17-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "5",
+    "topic": "5.9",
+    "concept": null
+   },
+   "function": {
+    "skill": "2.D",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": null,
+    "verification": null
+   },
+   "duplication": {
+    "archetype": "fprime_graph_statements",
+    "family": "fam:run2:ap_calculus_ab-m17-k2",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "s1-graph-ab-final:ap_calculus_ab-m16-k0",
+    "nearest_similarity": 0.296,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 2,
+   "set": "BC4",
+   "key": "run2bc:ap_calculus_bc-m03-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "6",
+    "topic": "6.13",
+    "concept": null
+   },
+   "function": {
+    "skill": "1.E",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": null,
+    "verification": null
+   },
+   "duplication": {
+    "archetype": "improper_integral",
+    "family": "fam:run2bc:ap_calculus_bc-m03-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "supp-b1-bc-final:ap_calculus_bc-m07-k0",
+    "nearest_similarity": 0.429,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 3,
+   "set": "BC4",
+   "key": "run2bc:ap_calculus_bc-m05-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "7",
+    "topic": "7.9",
+    "concept": null
+   },
+   "function": {
+    "skill": "1.D",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": null,
+    "verification": null
+   },
+   "duplication": {
+    "archetype": "logistic",
+    "family": "fam:run2bc:ap_calculus_bc-m05-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "run2bc:ap_calculus_bc-m15-k0",
+    "nearest_similarity": 0.333,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 4,
+   "set": "BC4",
+   "key": "supp-b1-bc-final:ap_calculus_bc-m08-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "10",
+    "topic": "10.8",
+    "concept": "Evaluate the Ratio Test limit for a series whose terms involve n! and n^n"
+   },
+   "function": {
+    "skill": "1.E",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Write a(n+1)/a(n) and cancel n! and the powers of c",
+     "Rewrite n^n/(n+1)^n as 1/(1 + 1/n)^n",
+     "Use the limit (1 + 1/n)^n = e"
+    ],
+    "verification": "the ratio is evaluated at n = 10^7 using logarithms in floating point and compared with c/e (independent of the limit definition of e)"
+   },
+   "duplication": {
+    "archetype": "c_ratio_limit_e",
+    "family": "fam:supp-b1-bc-final:ap_calculus_bc-m08-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "run2bc:ap_calculus_bc-m15-k0",
+    "nearest_similarity": 0.5,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 5,
+   "set": "BC4",
+   "key": "supp-b3-bc-final:ap_calculus_bc-m06-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "10",
+    "topic": "10.14",
+    "concept": "Evaluate a limit of an indeterminate form using the Maclaurin series of the numerator"
+   },
+   "function": {
+    "skill": "1.E",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Write the Maclaurin series of the numerator and cancel the leading terms",
+     "Divide by the power of x in the denominator",
+     "Take the limit as x tends to 0"
+    ],
+    "verification": "the quotient is evaluated at x = +/-10^-3 in floating point and averaged (independent of the series expansion)"
+   },
+   "duplication": {
+    "archetype": "c_series_limit_eval",
+    "family": "fam:supp-b3-bc-final:ap_calculus_bc-m06-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "run2:ap_calculus_ab-m02-k1",
+    "nearest_similarity": 0.545,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 6,
+   "set": "BC4",
+   "key": "supp-b3-bc-final:ap_calculus_bc-m07-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "10",
+    "topic": "10.15",
+    "concept": "Find the sum of a numerical series by recognizing it as a known Maclaurin series evaluated at a point"
+   },
+   "function": {
+    "skill": "1.E",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Match the general term to the Maclaurin series of ln(1 + x) or arctan x",
+     "Identify the value of x that produces the given terms, including any constant factor",
+     "Evaluate the function at that x exactly"
+    ],
+    "verification": "partial sums of 400 terms computed in floating point (independent of the recognition of the series)"
+   },
+   "duplication": {
+    "archetype": "c_series_recognize_sum",
+    "family": "fam:supp-b3-bc-final:ap_calculus_bc-m07-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "supp-b1-bc-final:ap_calculus_bc-m07-k0",
+    "nearest_similarity": 0.727,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 7,
+   "set": "BC4",
+   "key": "supp-b3-bc-final:ap_calculus_bc-m09-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "10",
+    "topic": "10.15",
+    "concept": "Differentiate a power series term by term and sum the resulting geometric series at a point"
+   },
+   "function": {
+    "skill": "1.E",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Differentiate each term of the power series with respect to x",
+     "Recognize a geometric series with first term 1/k and ratio x/k",
+     "Sum it with a/(1 - r) at the given x"
+    ],
+    "verification": "the terms n x^(n-1)/(n k^n) = x^(n-1)/k^n are summed numerically (400 terms) at the given x (independent of the geometric-series formula)"
+   },
+   "duplication": {
+    "archetype": "c_term_diff_sum",
+    "family": "fam:supp-b3-bc-final:ap_calculus_bc-m09-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "run2bc:ap_calculus_bc-m15-k0",
+    "nearest_similarity": 0.533,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 8,
+   "set": "BC4",
+   "key": "supp-t2a-ab-final:ap_calculus_ab-m08-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "8",
+    "topic": "8.1",
+    "concept": "Count the points where a graphed function equals its average value on an interval"
+   },
+   "function": {
+    "skill": "2.D",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "graph",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Find the average value as the area under the graph divided by the interval length",
+     "Draw the horizontal line at that height on the graph",
+     "Count the crossings with the graph in the open interval"
+    ],
+    "verification": "sign changes of f - c counted on an 8001-point grid of the interpolated graph with c from numerical quadrature (independent of the exact segment test)"
+   },
+   "duplication": {
+    "archetype": "g_avg_value_intersection_graph",
+    "family": "fam:supp-t2a-ab-final:ap_calculus_ab-m08-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "s1-graph-ab-final:ap_calculus_ab-m12-k0",
+    "nearest_similarity": 0.65,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 9,
+   "set": "BC4",
+   "key": "supp-r3b-ab-final:ap_calculus_ab-m01-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "5",
+    "topic": "5.5",
+    "concept": "Find the absolute extreme value of a cubic on a closed interval by comparing critical-point and endpoint values"
+   },
+   "function": {
+    "skill": "1.E",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Find the critical points inside the interval",
+     "Evaluate $f$ at the critical points and both endpoints",
+     "Choose the largest or smallest value as asked"
+    ],
+    "verification": "maximum or minimum of the lambdified function over a 20001-point grid (independent of the candidate test)"
+   },
+   "duplication": {
+    "archetype": "c_abs_extremum_cubic",
+    "family": "fam:supp-r3b-ab-final:ap_calculus_ab-m01-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "run1:ap_calculus_ab-c021-k2",
+    "nearest_similarity": 0.364,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 10,
+   "set": "BC4",
+   "key": "supp-r3b-ab-final:ap_calculus_ab-m02-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "6",
+    "topic": "6.8",
+    "concept": "Find an indefinite integral of a sum of a power, a negative power and a constant using the basic antiderivative rules"
+   },
+   "function": {
+    "skill": "1.C",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Rewrite each term as a power of x",
+     "Raise each exponent by 1 and divide by the new exponent",
+     "Integrate the constant as a multiple of x and add C"
+    ],
+    "verification": "derivative of each option checked symbolically and by a central difference at x = 1.7 (independent of the term-by-term integration)"
+   },
+   "duplication": {
+    "archetype": "c_antideriv_power_rules",
+    "family": "fam:supp-r3b-ab-final:ap_calculus_ab-m02-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "run2bc:ap_calculus_bc-m02-k1",
+    "nearest_similarity": 0.455,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 11,
+   "set": "BC4",
+   "key": "supp-r3b-ab-final:ap_calculus_ab-m09-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "5",
+    "topic": "5.6",
+    "concept": "Find the interval of upward concavity of a product of a power and a logarithm from its second derivative"
+   },
+   "function": {
+    "skill": "1.E",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Differentiate twice with the product rule",
+     "Factor $f''$ and solve $f''>0$ using the logarithm",
+     "State the interval of $x>0$"
+    ],
+    "verification": "sign change of a second central difference found with brentq (independent of the symbolic second derivative)"
+   },
+   "duplication": {
+    "archetype": "c_concave_xnlnx",
+    "family": "fam:supp-r3b-ab-final:ap_calculus_ab-m09-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "run1:ap_calculus_ab-c021-k2",
+    "nearest_similarity": 0.333,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 12,
+   "set": "BC4",
+   "key": "supp-r3b-ab-final:ap_calculus_ab-m12-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "5",
+    "topic": "5.2",
+    "concept": "Find all critical points of a function with a vertical tangent, including the point where the derivative is undefined"
+   },
+   "function": {
+    "skill": "1.D",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Differentiate with the product rule and write $f'$ as one fraction",
+     "Find where $f'=0$ and where $f'$ is undefined but $f$ is defined",
+     "List both kinds of critical point"
+    ],
+    "verification": "root of the numerical derivative on a bracket and the size of the slope near $x=0$ (independent of the symbolic derivative)"
+   },
+   "duplication": {
+    "archetype": "c_critical_points_cusp",
+    "family": "fam:supp-r3b-ab-final:ap_calculus_ab-m12-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "supp-b4-ab-final:ap_calculus_ab-m08-k0",
+    "nearest_similarity": 0.286,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 13,
+   "set": "BC4",
+   "key": "supp-r3b-ab-final:ap_calculus_ab-m14-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.10",
+    "concept": "Differentiate tan, cot, sec or csc with the memorized derivative formula and evaluate at a special angle"
+   },
+   "function": {
+    "skill": "1.C",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Recall the derivative formula for the given trigonometric function",
+     "Substitute the special angle",
+     "Evaluate the trigonometric values exactly"
+    ],
+    "verification": "central difference (step 1e-6) of the lambdified function at the angle"
+   },
+   "duplication": {
+    "archetype": "c_derivative_sec_csc_cot_exact",
+    "family": "fam:supp-r3b-ab-final:ap_calculus_ab-m14-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "run2bc:ap_calculus_bc-m01-k0",
+    "nearest_similarity": 0.5,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 14,
+   "set": "BC4",
+   "key": "supp-r3b-ab-final:ap_calculus_ab-m32-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "8",
+    "topic": "8.2",
+    "concept": "Find the position of a particle at a later time from its velocity and its initial position when the velocity changes sign"
+   },
+   "function": {
+    "skill": "1.D",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Position equals initial position plus the integral of velocity",
+     "Integrate the velocity over the interval with the antiderivative of sine or cosine",
+     "Add the initial position; do not use the total distance"
+    ],
+    "verification": "scipy quad of the velocity over [0, T] added to the initial position (independent of the antiderivative evaluation)"
+   },
+   "duplication": {
+    "archetype": "c_position_from_velocity",
+    "family": "fam:supp-r3b-ab-final:ap_calculus_ab-m32-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "s1-graph-ab-final:ap_calculus_ab-m34-k0",
+    "nearest_similarity": 0.438,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 15,
+   "set": "BC4",
+   "key": "supp-r3b-ab-final:ap_calculus_ab-m36-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.5",
+    "concept": "Solve a related rates problem for a ladder sliding down a wall using the Pythagorean theorem"
+   },
+   "function": {
+    "skill": "1.E",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Relate the horizontal and vertical distances with $x^{2}+y^{2}=L^{2}$",
+     "Differentiate with respect to time",
+     "Find $y$ at the given instant and solve for $dy/dt$"
+    ],
+    "verification": "numerical derivative of $y(t)=\\sqrt{L^{2}-(x_0+vt)^{2}}$ (independent of implicit differentiation)"
+   },
+   "duplication": {
+    "archetype": "c_related_rates_ladder",
+    "family": "fam:supp-r3b-ab-final:ap_calculus_ab-m36-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "run2:ap_calculus_ab-m12-k2",
+    "nearest_similarity": 0.194,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 16,
+   "set": "BC4",
+   "key": "supp-r3b-ab-final:ap_calculus_ab-m39-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.6",
+    "concept": "Find a second derivative of a product with an exponential of a linear function and evaluate it at a point"
+   },
+   "function": {
+    "skill": "1.E",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Differentiate once with the product and chain rules",
+     "Differentiate the result again with the product and chain rules",
+     "Substitute the given $x$"
+    ],
+    "verification": "second central difference (step 1e-3) of the lambdified function (independent of symbolic differentiation)"
+   },
+   "duplication": {
+    "archetype": "c_second_deriv_product_exp",
+    "family": "fam:supp-r3b-ab-final:ap_calculus_ab-m39-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "run1:ap_calculus_ab-c021-k2",
+    "nearest_similarity": 0.556,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 17,
+   "set": "BC4",
+   "key": "supp-r3b-ab-final:ap_calculus_ab-m41-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "6",
+    "topic": "6.3",
+    "concept": "Recognize the limit of a right Riemann sum written in summation notation as a definite integral"
+   },
+   "function": {
+    "skill": "2.C",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Read the width of each subinterval from the factor in front",
+     "Read the starting point and the endpoint from the sample points",
+     "Write the integral of the matching function between those endpoints"
+    ],
+    "verification": "a right Riemann sum with 400000 subintervals compared with the exact integral value (independent of the symbolic recognition)"
+   },
+   "duplication": {
+    "archetype": "c_sigma_to_integral",
+    "family": "fam:supp-r3b-ab-final:ap_calculus_ab-m41-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "s1a-final:ap_calculus_ab-m28-k1",
+    "nearest_similarity": 0.381,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 18,
+   "set": "BC4",
+   "key": "supp-r3b-ab-final:ap_calculus_ab-m42-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.2",
+    "concept": "Find the time intervals on which the speed of a particle with a polynomial position function is increasing"
+   },
+   "function": {
+    "skill": "2.D",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Compute $v(t)$ and $a(t)$ and find where each is zero",
+     "Build a sign chart for $v$ and $a$ on $t>0$",
+     "Speed increases exactly where $v$ and $a$ have the same sign"
+    ],
+    "verification": "numerical derivative of $|v(t)|$ at one sample point inside each interval (independent of the sign chart)"
+   },
+   "duplication": {
+    "archetype": "c_speeding_up_intervals",
+    "family": "fam:supp-r3b-ab-final:ap_calculus_ab-m42-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "s3b-graph-ab-final:ap_calculus_ab-m03-k0",
+    "nearest_similarity": 0.48,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 19,
+   "set": "BC4",
+   "key": "supp-r3b-ab-final:ap_calculus_ab-m44-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.6",
+    "concept": "Find where the tangent line to a curve crosses the x-axis"
+   },
+   "function": {
+    "skill": "1.D",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Compute $f(a)$ and $f'(a)$",
+     "Write the tangent line $y-f(a)=f'(a)(x-a)$",
+     "Set $y=0$ and solve for $x$"
+    ],
+    "verification": "central difference slope and the zero of the resulting line (independent of the symbolic derivative)"
+   },
+   "duplication": {
+    "archetype": "c_tangent_x_intercept",
+    "family": "fam:supp-r3b-ab-final:ap_calculus_ab-m44-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "supp-b3-ab-final:ap_calculus_ab-m13-k0",
+    "nearest_similarity": 0.571,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 20,
+   "set": "BC4",
+   "key": "supp-r3b-ab-final:ap_calculus_ab-m46-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "6",
+    "topic": "6.2",
+    "concept": "Approximate the amount in a tank at a later time with an initial amount plus a trapezoidal sum over unequal subintervals of a table of rates"
+   },
+   "function": {
+    "skill": "1.E",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Compute the width of each subinterval from the table times",
+     "Apply the trapezoidal formula (average of the two rates times the width) on each subinterval and add",
+     "Add the initial amount"
+    ],
+    "verification": "scipy.integrate.trapezoid applied to the table times and values plus the initial amount (independent of the hand sum)"
+   },
+   "duplication": {
+    "archetype": "c_trapezoid_table_initial",
+    "family": "fam:supp-r3b-ab-final:ap_calculus_ab-m46-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "run2:ap_calculus_ab-f01-k3",
+    "nearest_similarity": 0.274,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 21,
+   "set": "BC4",
+   "key": "supp-r3b-ab-final:ap_calculus_ab-m47-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "1",
+    "topic": "1.5",
+    "concept": "Limit of sin(ax)/(bx) at 0 using the special trigonometric limit sin u / u -> 1"
+   },
+   "function": {
+    "skill": "1.C",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Recognize the 0/0 form",
+     "Multiply and divide to build sin(u)/u with u = ax",
+     "Apply sin u / u -> 1 and keep the leftover constant ratio"
+    ],
+    "verification": "direct evaluation at x = 1e-5 (independent of the special limit)"
+   },
+   "duplication": {
+    "archetype": "c_trig_limit_sine_ratio",
+    "family": "fam:supp-r3b-ab-final:ap_calculus_ab-m47-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "run1:ap_calculus_ab-c002-k2",
+    "nearest_similarity": 0.571,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 22,
+   "set": "BC4",
+   "key": "supp-r3b-ab-final:ap_calculus_ab-m49-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "6",
+    "topic": "6.9",
+    "concept": "Rewrite a definite integral in terms of u after a substitution, including the limits and the constant factor, for an unspecified function f"
+   },
+   "function": {
+    "skill": "2.C",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Differentiate the substitution to find du in terms of dx",
+     "Match the factor in front of f with du to find the coefficient",
+     "Evaluate u at the original limits"
+    ],
+    "verification": "numerical quadrature of both sides with the concrete continuous function f(u) = 1/(1+u^2); every distractor differs numerically from the original integral (independent of the symbolic substitution)"
+   },
+   "duplication": {
+    "archetype": "c_usub_limits_transform",
+    "family": "fam:supp-r3b-ab-final:ap_calculus_ab-m49-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "s1a-final:ap_calculus_ab-m28-k1",
+    "nearest_similarity": 0.381,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 23,
+   "set": "BC4",
+   "key": "x4a-bc-final:ap_calculus_bc-m01-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "9",
+    "topic": "9.3",
+    "concept": "Total distance for planar motion is the integral of speed; the speed here simplifies because the sum of squares is a perfect square"
+   },
+   "function": {
+    "skill": "1.E",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Write the speed sqrt((x')^2 + (y')^2)",
+     "Notice that the expression under the root is a perfect square and take the root",
+     "Integrate the speed from 0 to the final time"
+    ],
+    "verification": "scipy quad of hypot(x'(t), y'(t)) over [0, b] (independent of the perfect-square simplification)"
+   },
+   "duplication": {
+    "archetype": "c_x4_param_arclen_square",
+    "family": "fam:x4a-bc-final:ap_calculus_bc-m01-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "run2bc:ap_calculus_bc-f02-k1",
+    "nearest_similarity": 0.421,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 24,
+   "set": "BC4",
+   "key": "x4a-bc-final:ap_calculus_bc-m02-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "9",
+    "topic": "9.2",
+    "concept": "Decide the concavity of a parametric curve from the sign of d2y/dx2 = (d/dt(dy/dx))/(dx/dt)"
+   },
+   "function": {
+    "skill": "3.D",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Form dy/dx = (dy/dt)/(dx/dt)",
+     "Differentiate dy/dx with respect to t and divide by dx/dt",
+     "Find where the result is positive, keeping the points with dx/dt = 0 out"
+    ],
+    "verification": "finite-difference d2y/dx2 from the sampled parametric curve at representative t in each region (independent of the closed form)"
+   },
+   "duplication": {
+    "archetype": "c_x4_param_concave_t",
+    "family": "fam:x4a-bc-final:ap_calculus_bc-m02-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "run2bc:ap_calculus_bc-m07-k0",
+    "nearest_similarity": 0.222,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 25,
+   "set": "BC4",
+   "key": "x4a-bc-final:ap_calculus_bc-m12-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "9",
+    "topic": "9.4",
+    "concept": "Average velocity vector is the change in the position vector divided by the elapsed time"
+   },
+   "function": {
+    "skill": "1.E",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Evaluate the position vector at both ends of the interval",
+     "Subtract and divide by the length of the interval"
+    ],
+    "verification": "difference quotient of the numerically evaluated position components over the interval (independent of the sympy substitution)"
+   },
+   "duplication": {
+    "archetype": "c_x4_vec_avg_velocity",
+    "family": "fam:x4a-bc-final:ap_calculus_bc-m12-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "bc-topup-final:ap_calculus_bc-m08-k0",
+    "nearest_similarity": 0.296,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 26,
+   "set": "BC4",
+   "key": "x4b-bc-final:ap_calculus_bc-m04-k1",
+   "kind": "mc",
+   "content": {
+    "unit": "7",
+    "topic": "7.5",
+    "concept": "Identify the differential equation from the iterates of Euler's method: test each candidate with y_(n+1) = y_n + h F(x_n, y_n)"
+   },
+   "function": {
+    "skill": "2.C",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Compute the first Euler step for a candidate and compare with y_1",
+     "Compute the second step for the candidates that match, using the point (x_1, y_1)",
+     "Choose the equation matching every row"
+    ],
+    "verification": "each candidate equation is iterated exactly three times with rational arithmetic and compared with the table (independent of testing by inspection)"
+   },
+   "duplication": {
+    "archetype": "c_x4_euler_table_de",
+    "family": "fam:x4b-bc-final:ap_calculus_bc-m04-k1",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "run1:ap_calculus_ab-c026-k2",
+    "nearest_similarity": 0.308,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 27,
+   "set": "BC4",
+   "key": "x4b-bc-final:ap_calculus_bc-m05-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "10",
+    "topic": "10.2",
+    "concept": "Solve for a parameter in a convergent geometric series using sum = first term/(1 - ratio)"
+   },
+   "function": {
+    "skill": "1.E",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the first term 1 and the common ratio x/k",
+     "Write 1/(1 - x/k) = m",
+     "Solve for x and check |x/k| < 1"
+    ],
+    "verification": "the partial sum of 4000 terms at the solution is compared with the target sum (independent of the algebra)"
+   },
+   "duplication": {
+    "archetype": "c_x4_geom_sum_equation",
+    "family": "fam:x4b-bc-final:ap_calculus_bc-m05-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "run2bc:ap_calculus_bc-m15-k0",
+    "nearest_similarity": 0.429,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 28,
+   "set": "BC4",
+   "key": "x4b-bc-final:ap_calculus_bc-m07-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "10",
+    "topic": "10.4",
+    "concept": "Apply the integral test with the substitution u = ln x to decide for which p the series converges"
+   },
+   "function": {
+    "skill": "3.D",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Check that the function is positive, continuous and decreasing for x >= start",
+     "Substitute u = ln x in the improper integral",
+     "Use the p-integral to state the condition on p"
+    ],
+    "verification": "numerical quadrature of the transformed integral over [ln start, 10^4] and [ln start, 10^8] at p = 1.5, 1 and 0.5 shows bounded versus unbounded growth (independent of the antiderivative)"
+   },
+   "duplication": {
+    "archetype": "c_x4_integral_test_log_p",
+    "family": "fam:x4b-bc-final:ap_calculus_bc-m07-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "supp-b1-bc-final:ap_calculus_bc-m07-k0",
+    "nearest_similarity": 0.5,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 29,
+   "set": "BC4",
+   "key": "x4b-bc-final:ap_calculus_bc-m28-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "10",
+    "topic": "10.1",
+    "concept": "Read a series term from a graph of its partial sums: a_k = S_k - S_(k-1)"
+   },
+   "function": {
+    "skill": "2.B",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "graph",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Read the heights of the graph at n = k and n = k - 1",
+     "Subtract: the vertical change between consecutive points is the term"
+    ],
+    "verification": "difference of the interpolated graph heights at n = k and n = k - 1 (independent of reading the vertices)"
+   },
+   "duplication": {
+    "archetype": "g_x4_partial_sum_term_graph",
+    "family": "fam:x4b-bc-final:ap_calculus_bc-m28-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "supp-b1-bc-final:ap_calculus_bc-m07-k0",
+    "nearest_similarity": 0.333,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 30,
+   "set": "BC4",
+   "key": "supp-b3-bc-final:ap_calculus_bc-m01-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "7",
+    "topic": "7.9",
+    "concept": "Find when a logistic population reaches a given size from the closed-form solution"
+   },
+   "function": {
+    "skill": "1.E",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Use the logistic solution P = K/(1 + A e^(-kt)) with A from the initial value",
+     "Set P(t) equal to the target and solve for e^(-kt)",
+     "Take logarithms and evaluate with a calculator"
+    ],
+    "verification": "the differential equation is integrated numerically (Runge-Kutta, tolerance 1e-11) and the crossing time of the target is located with an event (independent of the closed-form solution)"
+   },
+   "duplication": {
+    "archetype": "c_bc_logistic_time_calc",
+    "family": "fam:supp-b3-bc-final:ap_calculus_bc-m01-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "s1-graph-ab-final:ap_calculus_ab-m14-k0",
+    "nearest_similarity": 0.375,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 31,
+   "set": "BC4",
+   "key": "supp-b3-bc-final:ap_calculus_bc-m02-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "9",
+    "topic": "9.9",
+    "concept": "Find the area between two polar curves by locating the intersection angles and subtracting squares"
+   },
+   "function": {
+    "skill": "1.D",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Solve for the angle at which the two curves meet",
+     "Set up one half the integral of the outer radius squared minus the inner radius squared over the correct angles",
+     "Evaluate with a calculator"
+    ],
+    "verification": "the area is summed from 400000 polar sectors between the intersection angles (independent of scipy quad)"
+   },
+   "duplication": {
+    "archetype": "c_bc_polar_between_calc",
+    "family": "fam:supp-b3-bc-final:ap_calculus_bc-m02-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "run2bc:ap_calculus_bc-m11-k0",
+    "nearest_similarity": 0.308,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 32,
+   "set": "BC4",
+   "key": "supp-b3-bc-final:ap_calculus_bc-m03-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "9",
+    "topic": "9.7",
+    "concept": "Find the slope of a tangent line to a polar curve from x = r cos(theta) and y = r sin(theta)"
+   },
+   "function": {
+    "skill": "1.E",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Write x and y in terms of theta and differentiate with the product rule",
+     "Form dy/dx = (dy/d theta)/(dx/d theta)",
+     "Evaluate at the given angle with a calculator"
+    ],
+    "verification": "x(theta) and y(theta) are evaluated and differenced numerically with step 1e-6, and the ratio of the differences is compared with the formula (independent of the product rule)"
+   },
+   "duplication": {
+    "archetype": "c_bc_polar_slope_calc",
+    "family": "fam:supp-b3-bc-final:ap_calculus_bc-m03-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "run2bc:ap_calculus_bc-m11-k0",
+    "nearest_similarity": 0.261,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 33,
+   "set": "BC4",
+   "key": "supp-r3a-ab-final:ap_calculus_ab-m03-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "6",
+    "topic": "6.5",
+    "concept": "Locate the absolute maximum of an accumulation function on a closed interval by comparing candidate values"
+   },
+   "function": {
+    "skill": "3.E",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Use F' = f and find where the integrand changes sign with a calculator",
+     "List the candidates: the endpoints and the point where F' changes from positive to negative",
+     "Compare F at the candidates using integrals evaluated with a calculator"
+    ],
+    "verification": "composite Simpson rule (20001 nodes) for F at the candidate point (independent of scipy quad)"
+   },
+   "duplication": {
+    "archetype": "c_accum_abs_max_x_calc",
+    "family": "fam:supp-r3a-ab-final:ap_calculus_ab-m03-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "supp-b4-ab-final:ap_calculus_ab-m01-k0",
+    "nearest_similarity": 0.435,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 34,
+   "set": "BC4",
+   "key": "supp-r3a-ab-final:ap_calculus_ab-m04-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "6",
+    "topic": "6.5",
+    "concept": "Determine where an accumulation function increases from the sign of its integrand, locating zeros with a calculator"
+   },
+   "function": {
+    "skill": "3.E",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Use F' = f, the integrand",
+     "Find the zeros of the integrand numerically with a calculator",
+     "F increases where the integrand is positive"
+    ],
+    "verification": "sign of the integrand sampled inside each of the three intervals (independent of the root-finding)"
+   },
+   "duplication": {
+    "archetype": "c_accum_increasing_interval_calc",
+    "family": "fam:supp-r3a-ab-final:ap_calculus_ab-m04-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "supp-b4-ab-final:ap_calculus_ab-m01-k0",
+    "nearest_similarity": 0.3,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 35,
+   "set": "BC4",
+   "key": "supp-r3a-ab-final:ap_calculus_ab-m23-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.1",
+    "concept": "Differentiate an exponential of a graphed function with the chain rule at a point"
+   },
+   "function": {
+    "skill": "1.C",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "graph",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Recognize e raised to a function and plan the chain rule",
+     "Read g(a) and the slope g'(a) from the graph",
+     "Evaluate (g'/2) e^(g/2) with a calculator"
+    ],
+    "verification": "central difference (step 1e-6) of e^(g/2) with g interpolated (independent of the chain rule)"
+   },
+   "duplication": {
+    "archetype": "g_chain_exp_graph_calc",
+    "family": "fam:supp-r3a-ab-final:ap_calculus_ab-m23-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "v45ab-final:v4-ab:ap_calculus_ab-m02-k0",
+    "nearest_similarity": 0.563,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 36,
+   "set": "BC4",
+   "key": "supp-r3a-ab-final:ap_calculus_ab-m24-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.1",
+    "concept": "Apply the chain rule when the outer function is a graph and the inner function is a formula"
+   },
+   "function": {
+    "skill": "1.E",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "graph",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Evaluate the inner function at a with a calculator to see which segment of the graph it falls in",
+     "Read the slope of g on that segment",
+     "Multiply by the derivative of the inner function evaluated with a calculator"
+    ],
+    "verification": "central difference (step 1e-6) of g(u(x)) with g interpolated (independent of the chain rule)"
+   },
+   "duplication": {
+    "archetype": "g_chain_graph_outer_calc",
+    "family": "fam:supp-r3a-ab-final:ap_calculus_ab-m24-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "v45ab-final:v4-ab:ap_calculus_ab-m02-k0",
+    "nearest_similarity": 0.6,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 37,
+   "set": "BC4",
+   "key": "supp-r3a-ab-final:ap_calculus_ab-m25-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "1",
+    "topic": "1.11",
+    "concept": "Choose a constant that makes a function continuous when the left piece is a graph and the right piece is a logarithmic formula"
+   },
+   "function": {
+    "skill": "1.E",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "graph",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Read f(2) from the graph of the left piece",
+     "Set the right-hand limit k ln 3 + c equal to f(2)",
+     "Solve for k with a calculator"
+    ],
+    "verification": "the right-hand piece evaluated just to the right of x = 2 with the computed k and compared with the plotted f(2) (independent of the algebra for k)"
+   },
+   "duplication": {
+    "archetype": "g_cont_k_graph_log_calc",
+    "family": "fam:supp-r3a-ab-final:ap_calculus_ab-m25-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "s1-graph-ab-final:ap_calculus_ab-m01-k0",
+    "nearest_similarity": 0.524,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 38,
+   "set": "BC4",
+   "key": "supp-r3a-ab-final:ap_calculus_ab-m28-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "1",
+    "topic": "1.16",
+    "concept": "Apply the Intermediate Value Theorem to the sum of a graphed function and a formula to decide which value is guaranteed"
+   },
+   "function": {
+    "skill": "3.D",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "graph",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Check that h is continuous on the closed interval",
+     "Find h at both endpoints using the graph for f and a calculator for the formula",
+     "Choose the value strictly between the endpoint values"
+    ],
+    "verification": "dense grid scan of h on the open interval: the key lies strictly between the endpoint values and every wrong value lies outside the attained range (independent of the endpoint arithmetic)"
+   },
+   "duplication": {
+    "archetype": "g_ivt_sum_graph_calc",
+    "family": "fam:supp-r3a-ab-final:ap_calculus_ab-m28-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "s3a-graph-ab-final:ap_calculus_ab-m16-k0",
+    "nearest_similarity": 0.594,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 39,
+   "set": "BC4",
+   "key": "supp-r3a-ab-final:ap_calculus_ab-m30-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "8",
+    "topic": "8.3",
+    "concept": "Use net change with an inflow given by a formula and an outflow given by a graph"
+   },
+   "function": {
+    "skill": "1.D",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "graph",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Recognize that the amount at time b is the initial amount plus the integral of inflow minus outflow",
+     "Evaluate the integral of R with a calculator and the integral of L as an area from the graph",
+     "Combine the three quantities"
+    ],
+    "verification": "composite Simpson rule (20001 nodes) on R - L with L interpolated (independent of splitting into two integrals)"
+   },
+   "duplication": {
+    "archetype": "g_net_amount_formula_graph_calc",
+    "family": "fam:supp-r3a-ab-final:ap_calculus_ab-m30-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "s1-graph-ab-final:ap_calculus_ab-m20-k0",
+    "nearest_similarity": 0.633,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 40,
+   "set": "BC4",
+   "key": "supp-r3a-ab-final:ap_calculus_ab-m32-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.8",
+    "concept": "Apply the product rule at a point when one factor is a formula and the other is a graph"
+   },
+   "function": {
+    "skill": "1.E",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "graph",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Differentiate the formula and evaluate f(a) and f'(a) with a calculator",
+     "Read g(a) and the slope g'(a) from the graph",
+     "Combine with the product rule"
+    ],
+    "verification": "central difference (step 1e-6) of the numerically interpolated product (independent of the product rule)"
+   },
+   "duplication": {
+    "archetype": "g_product_formula_graph_calc",
+    "family": "fam:supp-r3a-ab-final:ap_calculus_ab-m32-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "s3a-graph-ab-final:ap_calculus_ab-m12-k0",
+    "nearest_similarity": 0.556,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 41,
+   "set": "BC4",
+   "key": "supp-r3a-ab-final:ap_calculus_ab-m33-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.9",
+    "concept": "Apply the quotient rule at a point when the numerator is a formula and the denominator is a graph"
+   },
+   "function": {
+    "skill": "1.E",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "graph",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Differentiate the formula and evaluate f(a) and f'(a) with a calculator",
+     "Read g(a) and the slope g'(a) from the graph",
+     "Combine with the quotient rule"
+    ],
+    "verification": "central difference (step 1e-6) of the numerically interpolated quotient (independent of the quotient rule)"
+   },
+   "duplication": {
+    "archetype": "g_quotient_formula_graph_calc",
+    "family": "fam:supp-r3a-ab-final:ap_calculus_ab-m33-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "s3a-graph-ab-final:ap_calculus_ab-m12-k0",
+    "nearest_similarity": 0.526,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 42,
+   "set": "BC4",
+   "key": "supp-r3a-ab-final:ap_calculus_ab-m34-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "5",
+    "topic": "5.4",
+    "concept": "Locate and justify a relative maximum of a difference of a function known by its derivative graph and a formula using the sign change of h'"
+   },
+   "function": {
+    "skill": "3.E",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "graph",
+    "options": 4,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Write h' = f' - g' and find its zeros with a calculator",
+     "Check the sign of h' on both sides of each zero",
+     "Choose the zero where h' changes from positive to negative"
+    ],
+    "verification": "bisection on the first zero of f' - g' and a count of sign changes on a 2401-point grid (independent of Brent's method)"
+   },
+   "duplication": {
+    "archetype": "g_relative_max_graph_formula_calc",
+    "family": "fam:supp-r3a-ab-final:ap_calculus_ab-m34-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "s1-graph-ab-final:ap_calculus_ab-m02-k0",
+    "nearest_similarity": 0.625,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 43,
+   "set": "BC4",
+   "key": "supp-b6-ab-final:ap_calculus_ab-f01-k0",
+   "kind": "frq_bundle",
+   "content": {
+    "unit": "8",
+    "topic": "8.1",
+    "concept": "Analyze a concentration model with a calculator: average value, the meaning of the derivative, the maximum, and the time interval above a threshold"
+   },
+   "function": {
+    "skill": "1.E",
+    "response": "free response",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": null,
+    "parts": 4
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Average the model with an integral divided by the length",
+     "Differentiate the model and interpret the derivative with units",
+     "Locate the maximum with the sign of the derivative",
+     "Solve C(t) = threshold for both times and subtract"
+    ],
+    "verification": "the average is checked with sympy's symbolic integral, the derivative by central difference, and the two crossing times and the maximum by a 120001-point grid (independent of scipy quad and Brent's method)"
+   },
+   "duplication": {
+    "archetype": "frq_model_analysis_calc",
+    "family": "fam:supp-b6-ab-final:ap_calculus_ab-f01-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "s1a-final:ap_calculus_ab-f01-k1",
+    "nearest_similarity": 0.267,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 44,
+   "set": "BC4",
+   "key": "x4b-bc-final:ap_calculus_bc-f02-k0",
+   "kind": "frq_bundle",
+   "content": {
+    "unit": "6",
+    "topic": "6.13",
+    "concept": "Evaluate a convergent improper integral with an arctangent antiderivative, compare a partial amount with the total, and analyze the rate function"
+   },
+   "function": {
+    "skill": "1.E",
+    "response": "free response",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": null,
+    "parts": 4
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Write the improper integral as a limit and use the arctangent antiderivative",
+     "Evaluate the finite integral with a calculator",
+     "Solve r(t) = r(0)/2",
+     "Find where the derivative of the rate is least"
+    ],
+    "verification": "scipy quad to infinity and over [0, T], and a bounded minimization of r'(t) (independent of the arctangent antiderivative and of solving r''(t) = 0)"
+   },
+   "duplication": {
+    "archetype": "frq_x4_improper_arctan_calc",
+    "family": "fam:x4b-bc-final:ap_calculus_bc-f02-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "supp-r3c-ab-final:ap_calculus_ab-f01-k0",
+    "nearest_similarity": 0.209,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 45,
+   "set": "BC4",
+   "key": "supp-b2-ab-final:ap_calculus_ab-f01-k0",
+   "kind": "frq_bundle",
+   "content": {
+    "unit": "3",
+    "topic": "3.1",
+    "concept": "Use a table of function and derivative values for a composite, a quotient, the Mean Value Theorem, and a trapezoidal sum"
+   },
+   "function": {
+    "skill": "1.E",
+    "response": "free response",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": null,
+    "parts": 4
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Read the inner value g(a) and use f'(g(a)) g'(a)",
+     "Apply the quotient rule with table values",
+     "Check the differentiability hypotheses and apply the Mean Value Theorem",
+     "Add trapezoids with the unequal subinterval widths"
+    ],
+    "verification": "the quotient rule value is recomputed through the logarithmic derivative (k)(f'/f - g'/g) and the trapezoidal sum by floating-point arithmetic (independent of the formulas used for the model answer)"
+   },
+   "duplication": {
+    "archetype": "frq_table_values",
+    "family": "fam:supp-b2-ab-final:ap_calculus_ab-f01-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "run2:ap_calculus_ab-f01-k3",
+    "nearest_similarity": 0.307,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 46,
+   "set": "BC4",
+   "key": "supp-b2-ab-final:ap_calculus_ab-f02-k0",
+   "kind": "frq_bundle",
+   "content": {
+    "unit": "5",
+    "topic": "5.4",
+    "concept": "Analyze a function given by a formula: tangent line, relative extremum, point of inflection, and absolute extrema on a closed interval"
+   },
+   "function": {
+    "skill": "3.E",
+    "response": "free response",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": null,
+    "parts": 4
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Differentiate with the product and chain rules",
+     "Use the sign of f' and f'' around the critical number and the inflection candidate",
+     "Compare candidate values on the closed interval"
+    ],
+    "verification": "the tangent slope is checked by central difference, the critical number and inflection point by Brent's method on numerical derivatives, and the absolute maximum by a 20001-point grid (independent of the symbolic derivatives)"
+   },
+   "duplication": {
+    "archetype": "frq_function_analysis",
+    "family": "fam:supp-b2-ab-final:ap_calculus_ab-f02-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "run1:ap_calculus_ab-f02-k10",
+    "nearest_similarity": 0.471,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 47,
+   "set": "BC4",
+   "key": "supp-b2-bc-final:ap_calculus_bc-f02-k0",
+   "kind": "frq_bundle",
+   "content": {
+    "unit": "6",
+    "topic": "6.13",
+    "concept": "Evaluate a convergent improper integral and a definite integral by parts, locate the maximum of a rate, and scale a rate to a target total"
+   },
+   "function": {
+    "skill": "1.E",
+    "response": "free response",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": null,
+    "parts": 4
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Write the improper integral as a limit and use integration by parts",
+     "Evaluate the definite integral over a finite window exactly",
+     "Find the maximum rate with the sign of r'",
+     "Use linearity to scale the total"
+    ],
+    "verification": "scipy quad to infinity and over the finite window, and a 6001-point grid for the maximum rate (independent of the by-parts antiderivative and the derivative test)"
+   },
+   "duplication": {
+    "archetype": "frq_bc_improper_parts",
+    "family": "fam:supp-b2-bc-final:ap_calculus_bc-f02-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "supp-r3c-ab-final:ap_calculus_ab-f01-k0",
+    "nearest_similarity": 0.256,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 48,
+   "set": "BC4",
+   "key": "supp-r3c-ab-final:ap_calculus_ab-f07-k0",
+   "kind": "frq_bundle",
+   "content": {
+    "unit": "4",
+    "topic": "4.6",
+    "concept": "Start from a derivative formula and one value: tangent-line approximation with a concavity reason, antiderivative by substitution, absolute extrema on a closed interval"
+   },
+   "function": {
+    "skill": "1.E",
+    "response": "free response",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": null,
+    "parts": 4
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Evaluate f' at the point for the slope",
+     "Differentiate f' to see the concavity on the interval",
+     "Integrate f' by substitution and use the value to fix the constant",
+     "Apply the candidates test with the endpoints"
+    ],
+    "verification": "f is rebuilt by numerical quadrature of f' from 1 and compared at x = -1, 0, 2; the extremes by a 30001-point grid scan; the sign of f'' by sampling; f'' by central difference; the approximation compared with the numerical f(3/2)"
+   },
+   "duplication": {
+    "archetype": "frq_ivp_antiderivative",
+    "family": "fam:supp-r3c-ab-final:ap_calculus_ab-f07-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "supp-b2-bc-final:ap_calculus_bc-f01-k0",
+    "nearest_similarity": 0.294,
+    "siblings_in_new_set": 0
+   }
+  }
+ ]
+}
