@@ -7,6 +7,7 @@
 //   재실행 안전: 같은 skill 에 지문·질문이 같은 버전이 이미 있으면 건너뛴다. 기존 문제은행과 본문 유사도(3-gram Jaccard,
 //   숫자 마스킹) 0.6 이상이면 중복으로 건너뛴다(--no-dup-check 로 끔).
 //   --publish  : 임포트 직후 confirm_and_publish_problem_version 으로 공개(모의고사 조립 후보가 되려면 필요). 기본은 초안까지만.
+//   --no-text-dedupe : 지문·질문 문구가 같은 기존 문항이 있어도 건너뛰지 않는다(선택지·그림까지 정확히 같은 것만 건너뜀). 컴파일러 그래프형 교체 문항용.
 //   --tag      : 시험 임포트 표식. problems.topic 에 `mockgen-test:<tag>` 를 넣어 --cleanup-tag 로 지울 수 있게 한다.
 //   키워드: quality.mockExamGeneration.intendedSkill 에 실제 스킬(APP_SKILL_OVERRIDE 이전 planSkill)을 남긴다.
 //           임포트 뒤 scripts/keywords/link-imported.ts --file <같은 파일> --execute 로 공용 키워드에 연결한다.
@@ -128,7 +129,7 @@ async function main() {
     }
     const key = `${stimulus}\u0000${question ?? ""}`;
     const pool = existing.get(r.skill) ?? [];
-    if (pool.some((e) => e.key === key || e.key === rawKey)) { stats.skippedExisting += 1; continue; }
+    if (!flag("--no-text-dedupe") && pool.some((e) => e.key === key || e.key === rawKey)) { stats.skippedExisting += 1; continue; } // --no-text-dedupe: 그림이 다른 컴파일러 문항은 지문·질문 문구가 같을 수 있다(정확 동일 검사 exactKey 는 그대로)
     const sh = shingles(`${stimulus} ${question ?? ""} ${(g.options ?? []).join(" ")}`);
     const myGroup = (r.quality.mockExamGeneration as { archetypeId?: string } | undefined)?.archetypeId ?? null;
     if (pool.some((e) => e.ek === exactKey(stimulus, question, g.options))) { stats.skippedExisting += 1; continue; } // 정확히 같은 문제

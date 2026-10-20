@@ -149,9 +149,9 @@ export function generateAreaVolumeModel(params: {
       const cylHeight = randInt(3, 15);
       const coeff = radius * radius * cylHeight;
       const cands: { value: string; kind: DistractorKind; reason: string }[] = [
-        { value: fmt(4 * coeff), kind: "geometry_misapplied", reason: "반지름 대신 지름을 제곱해 계산했다(2r을 그대로 제곱)." },
-        { value: fmt(radius * radius), kind: "unit_error", reason: "높이를 곱하지 않아 원기둥이 아니라 원의 넓이만 계산했다." },
-        { value: fmt(2 * radius * cylHeight), kind: "geometry_misapplied", reason: "부피 대신 옆면 겉넓이(2πrh) 공식을 사용했다." },
+        { value: fmtPi(4 * coeff), kind: "geometry_misapplied", reason: "반지름 대신 지름을 제곱해 계산했다(2r을 그대로 제곱)." },
+        { value: fmtPi(radius * radius), kind: "unit_error", reason: "높이를 곱하지 않아 원기둥이 아니라 원의 넓이만 계산했다." },
+        { value: fmtPi(2 * radius * cylHeight), kind: "geometry_misapplied", reason: "부피 대신 옆면 겉넓이(2πrh) 공식을 사용했다." },
       ];
       const distractors = pickUnique(cands, fmtPi(coeff));
       if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
@@ -165,8 +165,8 @@ export function generateAreaVolumeModel(params: {
     const coeff = radius * radius * cylHeight;
     const cands: { value: string; kind: DistractorKind; reason: string }[] = [
       { value: fmtPi(diameter * diameter * cylHeight), kind: "geometry_misapplied", reason: "지름을 반으로 나누지 않고 그대로 반지름처럼 제곱해 계산했다(반지름·지름 혼동)." },
-      { value: fmt(radius * radius), kind: "unit_error", reason: "높이를 곱하지 않아 부피가 아니라 밑면 넓이만 계산했다." },
-      { value: fmt(2 * radius * cylHeight), kind: "geometry_misapplied", reason: "부피 대신 옆면 겉넓이(2πrh) 공식을 사용했다." },
+      { value: fmtPi(radius * radius), kind: "unit_error", reason: "높이를 곱하지 않아 부피가 아니라 밑면 넓이만 계산했다." },
+      { value: fmtPi(2 * radius * cylHeight), kind: "geometry_misapplied", reason: "부피 대신 옆면 겉넓이(2πrh) 공식을 사용했다." },
     ];
     const distractors = pickUnique(cands, fmtPi(coeff));
     if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).

@@ -1,0 +1,92 @@
+{
+ "files": [
+  {
+   "name": "01_import.sql",
+   "bytes": 2318139
+  },
+  {
+   "name": "02_keywords.sql",
+   "bytes": 31280
+  },
+  {
+   "name": "03_slot_import.sql",
+   "bytes": 33506
+  },
+  {
+   "name": "04_patches.sql",
+   "bytes": 31062
+  },
+  {
+   "name": "05_new_sets.sql",
+   "bytes": 435167
+  },
+  {
+   "name": "06_old_set_versions.sql",
+   "bytes": 73559
+  },
+  {
+   "name": "00_preflight.sql",
+   "bytes": 1342
+  },
+  {
+   "name": "07_verify.sql",
+   "bytes": 1236
+  },
+  {
+   "name": "99_rollback.sql",
+   "bytes": 25902
+  }
+ ],
+ "report": {
+  "importRecords": {
+   "total": 645,
+   "ok": 637,
+   "rejected": [
+    "sx-boundaries-m-051: 게이트 거절",
+    "sx-boundaries-m-385: 게이트 거절",
+    "sx-boundaries-m-546: 게이트 거절",
+    "sx-boundaries-m-623: 잔재",
+    "sy-boundaries-m-115: 게이트 거절",
+    "sy-boundaries-m-116: 게이트 거절",
+    "sy-boundaries-m-170: 게이트 거절",
+    "sz-boundaries-e-034: 게이트 거절"
+   ]
+  },
+  "slotImport": {
+   "total": 18,
+   "ok": 18,
+   "rejected": []
+  },
+  "patches": {
+   "total": 25,
+   "tally": {
+    "apply": 25
+   },
+   "newSetMathAuto": 5,
+   "newSetMathManualNeeded": [
+    "c93ba362-8516-4e33-b085-ce1b5615787d",
+    "e1f8fcfb-fbe0-45e7-819a-a38851a50e39"
+   ],
+   "byRule": {
+    "G-manual": 2,
+    "R7-polynomial-degree": 3,
+    "G6-inequality-expression-only": 1,
+    "R14-inference-trait": 1
+   },
+   "notApplicable": []
+  },
+  "oldSets": [
+   "SAT Practice Test 1: repoint 8, replace 4",
+   "SAT Practice Test 2: repoint 4, replace 6",
+   "SAT Practice Test 3: repoint 1, replace 6",
+   "SAT Practice Test 4: repoint 2, replace 0",
+   "SAT Practice Test 5: repoint 1, replace 0",
+   "SAT Practice Test 6: repoint 1, replace 0",
+   "SAT Practice Test 7: repoint 1, replace 1",
+   "SAT Practice Test 8: repoint 0, replace 1",
+   "SAT Practice Test 10: repoint 1, replace 1",
+   "SAT Practice Test 12: repoint 0, replace 1",
+   "SAT Practice Test 13: repoint 1, replace 0"
+  ]
+ }
+}
