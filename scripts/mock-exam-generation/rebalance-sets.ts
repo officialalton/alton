@@ -11,6 +11,7 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { assertGroupLimits, assertUnique, buildCandidates, buildSlots, demandVsSupply, feasibleN, planUnique, RW_DOMAINS, type PlanItem, type Weights } from "./assemble-unique";
 import { DEFAULT_TOPIC_CAPS, SUBJECTS, TARGET_MIX, capViolations, countBy, rwPaths, subjectExcess, type CapViolation, type TopicCaps, type TopicMap } from "./rw-topics-lib";
+import { reorderSetModulesOfficial } from "../../lib/mock-exam/official-order";
 import type { EligibleProblem } from "../../lib/mock-exam/assemble";
 
 export type RebalanceOpts = { caps: TopicCaps; maxShared: number; groupCap: number; total: number; firstIndex?: number; allowSkillFallback: boolean; mix: Record<string, number>; mixTol: number; relaxFormat: boolean; excludeProblems?: ReadonlySet<string>; /** 문학(literature_fiction) 상한: 게시 세트의 문학이 litMax 를 넘으면 litTarget 까지 비문학으로 교체(reason lit_excess), 새 세트는 litMax 가 하드 상한. */ litMax?: number; litTarget?: number; /** 지정하면 이 이름의 게시 세트만 문학 교체 대상(오너가 지정한 세트). */ litSets?: ReadonlySet<string> };
@@ -176,6 +177,8 @@ export function rebalance(dump0: any, W: Weights, topics: TopicMap, o: Rebalance
   // 4) 사본 문항을 현재 게시 버전으로 맞춘다
   const versionBumped: { setName: string; position: number; problemId: string; from: string; to: string }[] = [];
   for (const w of work) for (const it of w.items) { const cv = V.get(it.problemId)?.id; if (cv && cv !== it.versionId) { versionBumped.push({ setName: w.name, position: it.position, problemId: it.problemId, from: it.versionId, to: cv }); it.versionId = cv; } }
+  // 4.5) 바뀐 사본은 모듈 안 순서를 공식 순서로 다시 맞춘다(교체로 skill 이 바뀌어 순서가 깨질 수 있다).
+  for (const w of work) if (swaps.some((s) => s.setId === w.id) || versionBumped.some((b) => b.setName === w.name)) w.items = reorderSetModulesOfficial(w.items);
 
   // 5) 최종 컬렉션 검증·통계
   const finalSets: { name: string; kind: "unchanged" | "copy" | "new"; items: PlanItem[] }[] = [

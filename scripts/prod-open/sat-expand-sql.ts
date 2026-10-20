@@ -199,7 +199,7 @@ if (process.env.SAT_QUANT) {
   const impQ = buildImport(adoptedQ);
   const repQ = { total: adoptedQ.length, ok: impQ.ok.length, rejected: impQ.rejected };
   if (impQ.rejected.length) { console.error("게이트 거절:", impQ.rejected); }
-  writeChunks("27_import_quant", impQ.ok, "SAT R&W import (quant evidence)", filesQ);
+  writeChunks("32_import_quant", impQ.ok, "SAT R&W import (quant evidence)", filesQ);
   const okQ = new Set(impQ.ok.map((x) => x.gid as string));
   const usedGids = new Set(oldsQ.flatMap((o) => o.slots.map((sl) => sl.newGid!)));
   const missingQ = [...usedGids].filter((g) => !okQ.has(g));
@@ -207,14 +207,14 @@ if (process.env.SAT_QUANT) {
   const kwQ: Record<string, string> = {};
   for (const r of adoptedQ) { if (!okQ.has(r.gid)) continue; const d = SAT_KEYWORD_BY_SKILL.get(r.skill); if (d) kwQ[r.gid] = d.skillCode; }
   const namesQ = oldsQ.map((x) => x.name); const nameArrQ = `array[${namesQ.map((n) => strLit(n)).join(",")}]`; const gidArrQ = `array[${adoptedQ.map((r) => strLit(r.gid)).join(",")}]`;
-  emQ("27_preflight.sql", `${HQ("preflight for 27-30 (SELECT only): target sets - drafts, quant-evidence count, attempts; already-imported quant gids")}
+  emQ("31_preflight_quant.sql", `${HQ("preflight for 31-35 (SELECT only): target sets - drafts, quant-evidence count, attempts; already-imported quant gids")}
 select s.name, s.version_no, s.status, (select count(*) from mock_exam_set_items i where i.exam_set_id = s.id and i.skill_code = 'command_of_evidence_quant') as quant_items,
   (select count(*) from mock_exam_sets d where d.set_group_id = s.set_group_id and d.status = 'draft' and d.archived_at is null) as existing_drafts,
   (select count(*) from mock_exam_attempts a where a.exam_set_id = s.id) as attempts
 from mock_exam_sets s where s.name = any (${nameArrQ}) and s.status = 'published' and s.archived_at is null order by length(s.name), s.name;
 select count(*) as already_imported_quant_gids from problem_versions where quality->'mockExamGeneration'->>'gid' = any (${gidArrQ});
 `);
-  emQ("28_keywords_quant.sql", `${HQ("link imported quant-evidence problems to skill keywords")}
+  emQ("33_keywords_quant.sql", `${HQ("link imported quant-evidence problems to skill keywords")}
 do $kw$
 declare v_map constant jsonb := ${lit(kwQ)}; v_n int;
 begin
@@ -229,15 +229,15 @@ begin
 end
 $kw$;
 `);
-  emQ("29_set_versions_quant.sql", `${HQ("new draft set versions: Command of Evidence (Textual) slots replaced by quantitative-evidence (table/graph) items (published sets/attempts/old versions untouched; a set with an existing draft is skipped)")}\n${oldsQ.map(oldSetSql).join("\n")}`);
-  emQ("30_verify_quant.sql", `${HQ("verify after 27-29 (SELECT only)")}
+  emQ("34_set_versions_quant.sql", `${HQ("new draft set versions: Command of Evidence (Textual) slots replaced by quantitative-evidence (table/graph) items (published sets/attempts/old versions untouched; a set with an existing draft is skipped)")}\n${oldsQ.map(oldSetSql).join("\n")}`);
+  emQ("35_verify_quant.sql", `${HQ("verify after 31-34 (SELECT only)")}
 select s.name, s.version_no, s.status, s.readiness_status, (select count(*) from mock_exam_set_items i where i.exam_set_id = s.id) as items,
   (select count(*) from mock_exam_set_items i where i.exam_set_id = s.id and i.skill_code = 'command_of_evidence_quant') as quant_items
 from mock_exam_sets s where s.status = 'draft' and s.archived_at is null and s.name = any (${nameArrQ}) order by length(s.name), s.name;
 select count(*) as imported_quant_problems, count(*) filter (where p.status = 'confirmed') as confirmed from problem_versions pv join problems p on p.id = pv.problem_id where pv.quality->'mockExamGeneration'->>'gid' = any (${gidArrQ});
 select count(*) as published_sets_total from mock_exam_sets where status = 'published' and archived_at is null;
 `);
-  emQ("99_rollback_quant.sql", `${HQ("ROLLBACK of 27-30: deletes the new draft set versions of the target sets (no attempts can reference a draft) and archives imported quant problems no live set uses. Published sets untouched.")}
+  emQ("99_rollback_quant.sql", `${HQ("ROLLBACK of 31-35: deletes the new draft set versions of the target sets (no attempts can reference a draft) and archives imported quant problems no live set uses. Published sets untouched.")}
 do $rbq$ declare v_n int; begin
   delete from mock_exam_sets s where s.status = 'draft' and s.name = any (${nameArrQ}) and not exists (select 1 from mock_exam_attempts a where a.exam_set_id = s.id)
     and exists (select 1 from mock_exam_sets p where p.set_group_id = s.set_group_id and p.status = 'published' and p.version_no < s.version_no);

@@ -49,14 +49,17 @@
 초안 버전이 이미 있어 이번 계획에서 뺀 세트(해당 초안이 공개·폐기된 뒤 같은 방식으로 추가 가능): SAT Practice Test 9, SAT Practice Test 29, SAT Practice Test 21, SAT Practice Test 8, SAT Practice Test 28.
 예비 문항(미사용 5건): quant-max-step-20261685, quant-max-change-20261755, quant-max-step-20261762, quant-max-change-20261923, quant-max-step-20261930.
 
-## 반영 SQL (총괄 실행, 번호 27~30)
+## 반영 SQL (총괄 실행, 번호 31~35)
 `SAT_QUANT=1 npx tsx scripts/prod-open/sat-expand-sql.ts` 로 생성한다(원격은 읽기 SELECT 만).
-- `27_preflight.sql` 읽기: 대상 세트의 초안 유무·현재 정량 근거 문항 수·이미 가져온 gid 수.
-- `27_import_quant.sql` 새 문항 가져오기(멱등: 같은 gid 가 있으면 건너뜀, 게이트 통과분만 공개).
-- `28_keywords_quant.sql` 스킬 키워드 연결(멱등).
-- `29_set_versions_quant.sql` 대상 세트의 새 초안 버전(칸 교체, 세트 검증 함수 통과 못하면 그 세트만 건너뜀, 공개 없음). 칸 메타(스킬·난이도)는 새 문항 값으로 기록한다.
-- `30_verify_quant.sql` 읽기 검증. `99_rollback_quant.sql` 초안 버전 삭제·가져온 문항 보관 처리.
-- 순서: 27_preflight → 27_import → 28 → 29 → 30_verify. 세트 새 버전의 공개는 총괄 판단(응시 이력 있는 세트는 기존 버전이 보존됨).
+- `31_preflight_quant.sql` 읽기: 대상 세트의 초안 유무·현재 정량 근거 문항 수·이미 가져온 gid 수.
+- `32_import_quant.sql` 새 문항 가져오기(멱등: 같은 gid 가 있으면 건너뜀, 게이트 통과분만 공개).
+- `33_keywords_quant.sql` 스킬 키워드 연결(멱등).
+- `34_set_versions_quant.sql` 대상 세트의 새 초안 버전(칸 교체, 세트 검증 함수 통과 못하면 그 세트만 건너뜀, 공개 없음). 칸 메타(스킬·난이도)는 새 문항 값으로 기록한다.
+- `35_verify_quant.sql` 읽기 검증. `99_rollback_quant.sql` 초안 버전 삭제·가져온 문항 보관 처리.
+- 순서: 31_preflight → 32_import → 33 → 34 → 35_verify. 세트 새 버전의 공개는 총괄 판단(응시 이력 있는 세트는 기존 버전이 보존됨).
+
+## 순서 주의
+- 27_set_versions_official_order(공식 문항 순서 정렬)가 칸 위치(position)를 바꾼다. 이 계획의 교체는 (세트, 위치, 옛 버전 id)가 모두 맞는 칸만 바꾸므로, 정렬 초안이 이미 공개돼 위치가 바뀐 세트는 '변경 없음'으로 건너뛴다. 정렬 공개 전에 34 를 먼저 반영하거나, 공개 뒤라면 `sat-quant-plan.ts` 를 덤프 갱신 후 다시 실행해 위치를 새로 잡는다. 같은 세트에 초안이 있으면 건너뛰므로 둘 중 하나를 먼저 공개/폐기해야 한다.
 
 ## 한계
 - 시험 전체 정답률 분포·노출 횟수는 반영하지 않았다(칸 난이도만 맞춤). 반영 SQL 은 로컬 DB 리허설을 하지 않았고 세트 검증 함수에 의존한다.
