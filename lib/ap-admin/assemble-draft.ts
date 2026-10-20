@@ -8,6 +8,8 @@ import { SET_PREFIX_SUBJECT, SET_ID_RE, subjectOfSetIdOrNull, subjectOfSetId, is
 import { planStatsDraftSet } from "./assemble-stats-draft";
 import { planPhysDraftSet } from "./assemble-phys-draft";
 import { planChemDraftSet } from "./assemble-chem-draft";
+import { planPreDraftSet } from "./assemble-pre-draft";
+import type { PreItem } from "../../scripts/ap-generation/pre-pool";
 import { planMicroDraftSet } from "./assemble-micro-draft";
 import { planMacroDraftSet } from "./assemble-macro-draft";
 import { planPsychDraftSet } from "./assemble-psych-draft";
@@ -61,7 +63,7 @@ export type DraftPlan = {
 };
 
 export function planDraftSet(o: {
-  setId: string; keys: SetKeys; hasVirtual: boolean; name?: string; pool: PoolRow[]; existingFullSets: FullSetUsage[]; publishedKeys: Set<string>; stock: Item[]; floor?: number; /** 통계 재고(테스트 주입용; 기본은 커밋된 재고 + 화면 증거). */ statsStock?: StatsItem[]; /** 물리 재고(테스트 주입용). */ physStock?: PhysItem[]; /** 화학 재고(테스트 주입용). */ chemStock?: ChemItem[]; /** 마이크로 재고(테스트 주입용). */ microStock?: MicroItem[]; /** 매크로 재고(테스트 주입용). */ macroStock?: MacroItem[]; /** 심리학 재고(테스트 주입용). */ psychStock?: PsychItem[]; /** CS A 재고(테스트 주입용). */ csaStock?: CsItem[]; /** Biology 재고(테스트 주입용). */ bioStock?: BioItem[]; elStock?: ElItem[]; /** 문학 재고(테스트 주입용). */ ltStock?: LtItem[]; /** US History 재고(테스트 주입용). */ ushStock?: UshItem[]; /** World History 재고(테스트 주입용). */ whStock?: WhItem[];
+  setId: string; keys: SetKeys; hasVirtual: boolean; name?: string; pool: PoolRow[]; existingFullSets: FullSetUsage[]; publishedKeys: Set<string>; stock: Item[]; floor?: number; /** 통계 재고(테스트 주입용; 기본은 커밋된 재고 + 화면 증거). */ statsStock?: StatsItem[]; /** 물리 재고(테스트 주입용). */ physStock?: PhysItem[]; /** Precalculus 재고(테스트 주입용). */ preStock?: PreItem[]; /** 화학 재고(테스트 주입용). */ chemStock?: ChemItem[]; /** 마이크로 재고(테스트 주입용). */ microStock?: MicroItem[]; /** 매크로 재고(테스트 주입용). */ macroStock?: MacroItem[]; /** 심리학 재고(테스트 주입용). */ psychStock?: PsychItem[]; /** CS A 재고(테스트 주입용). */ csaStock?: CsItem[]; /** Biology 재고(테스트 주입용). */ bioStock?: BioItem[]; elStock?: ElItem[]; /** 문학 재고(테스트 주입용). */ ltStock?: LtItem[]; /** US History 재고(테스트 주입용). */ ushStock?: UshItem[]; /** World History 재고(테스트 주입용). */ whStock?: WhItem[];
 }): DraftPlan {
   const problems: string[] = [];
   const subjectKnown = subjectOfSetIdOrNull(o.setId); const subject = subjectKnown ?? "unknown";
@@ -78,6 +80,10 @@ export function planDraftSet(o: {
   if (subjectKnown && isPhysSubject(subjectKnown) && SET_ID_RE.test(o.setId)) { // 물리(Physics 1·C: Mechanics·C: E&M): 2문항 공유 세트·FRQ 4유형(MR/TBR/LAB/QQT) 구조는 전용 계획기가 독립 검증한다
     const pp = planPhysDraftSet({ setId: o.setId, keys: o.keys, hasVirtual: o.hasVirtual, name, pool: o.pool, existingFullSets: o.existingFullSets, subject, stock: o.physStock });
     return { ...pp, problems: [...problems, ...pp.problems], ok: problems.length === 0 && pp.ok };
+  }
+  if (subjectKnown === "ap_precalculus" && SET_ID_RE.test(o.setId)) { // Precalculus: MC 42(파트 A 29 계산기 불가 + 파트 B 13 계산기 필수)·FRQ 4(파트 A fc·mn / 파트 B mp·sy)는 전용 계획기가 독립 검증한다
+    const rp = planPreDraftSet({ setId: o.setId, keys: o.keys, hasVirtual: o.hasVirtual, name, pool: o.pool, existingFullSets: o.existingFullSets, subject, stock: o.preStock });
+    return { ...rp, problems: [...problems, ...rp.problems], ok: problems.length === 0 && rp.ok };
   }
   if (subjectKnown === "ap_chemistry" && SET_ID_RE.test(o.setId)) { // 화학: 2문항 공유 세트·FRQ 7유형 구조는 전용 계획기가 독립 검증한다
     const cp = planChemDraftSet({ setId: o.setId, keys: o.keys, hasVirtual: o.hasVirtual, name, pool: o.pool, existingFullSets: o.existingFullSets, subject, stock: o.chemStock });

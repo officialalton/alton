@@ -5,7 +5,8 @@
 export const SET_PREFIX_SUBJECT: Readonly<Record<string, string>> = {
   AB: "ap_calculus_ab", BC: "ap_calculus_bc", ST: "ap_statistics", PH: "ap_physics_1", CH: "ap_chemistry", MI: "ap_microeconomics", MA: "ap_macroeconomics", PS: "ap_psychology",
   CS: "ap_computer_science_a", BI: "ap_biology", EL: "ap_english_language", LT: "ap_english_literature", US: "ap_us_history", WH: "ap_world_history",
-  PM: "ap_physics_c_mechanics", EM: "ap_physics_c_electricity_and_magnetism",
+  PM: "ap_physics_c_mechanics", EM: "ap_physics_c_electricity_and_magnetism", PC: "ap_precalculus",
+  // 다음 과목 예약(조립기 연결 전에는 세트 ID 로 쓰지 말 것): EU = ap_european_history 등은 연결할 때 이 표에 추가한다.
 };
 export const SET_ID_RE = new RegExp(`^(${Object.keys(SET_PREFIX_SUBJECT).join("|")})\\d$`);
 export const subjectOfSetIdOrNull = (id: string): string | null => SET_PREFIX_SUBJECT[id.slice(0, 2)] ?? null;

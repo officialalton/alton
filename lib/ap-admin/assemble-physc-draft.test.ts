@@ -26,7 +26,7 @@ describe("set prefix registry (single source)", () => {
     expect(new Set(subjects).size).toBe(subjects.length);
     for (const [prefix, subject] of Object.entries(SET_PREFIX_SUBJECT)) { expect(prefix).toMatch(/^[A-Z]{2}$/); expect(AP_SUBJECT_NAME[subject], subject).toBeTruthy(); expect(AP_LAYOUTS[subject], subject).toBeTruthy(); }
   });
-  it("a registered subject without a dedicated assembler is rejected instead of being validated with Calculus rules", () => {
+  it("an empty plan for a registered subject is rejected by that subject's assembler (never validated with Calculus rules)", () => {
     const p = planDraftSet({ setId: "PM1", keys: { mcA: [], mcB: [], frqA: [], frqB: [] }, hasVirtual: false, pool: [], existingFullSets: [], publishedKeys: new Set(), stock: [], physStock: [] } as never);
     expect(p.ok).toBe(false); expect(p.subject).toBe("ap_physics_c_mechanics");
   });
