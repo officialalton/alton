@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { existsSync, readFileSync } from "node:fs";
 import { planDraftSet, subjectOfSetIdOrNull, subjectOfSetId, SET_ID_RE, SET_PREFIX_SUBJECT, defaultDraftName, type PoolRow, type SetKeys } from "./assemble-draft";
 import { STOCK_BATCHES, readAssignReport } from "./batches";
-import { AP_LAYOUTS, AP_SUBJECT_NAME, apSectionLayout } from "../ap-exam/layouts";
+import { AP_LAYOUTS, AP_NEW_SUBJECTS, AP_NEW_SUBJECTS_PUBLIC, AP_PENDING_PUBLIC_SUBJECTS, AP_SUBJECT_NAME, apSectionLayout } from "../ap-exam/layouts";
 import { loadPhysPool } from "../../scripts/ap-generation/phys-pool";
 import { STOCK_FILES } from "../../scripts/ap-generation/keys-file";
 
@@ -25,6 +25,10 @@ describe("set prefix registry (single source)", () => {
     const subjects = Object.values(SET_PREFIX_SUBJECT);
     expect(new Set(subjects).size).toBe(subjects.length);
     for (const [prefix, subject] of Object.entries(SET_PREFIX_SUBJECT)) { expect(prefix).toMatch(/^[A-Z]{2}$/); expect(AP_SUBJECT_NAME[subject], subject).toBeTruthy(); expect(AP_LAYOUTS[subject], subject).toBeTruthy(); }
+  });
+  it("a new subject can only be made public if it is a new subject with a registered set prefix (assembler connected)", () => {
+    for (const c of AP_NEW_SUBJECTS_PUBLIC) { expect(AP_NEW_SUBJECTS).toContain(c); expect(Object.values(SET_PREFIX_SUBJECT), c).toContain(c); expect(AP_PENDING_PUBLIC_SUBJECTS).not.toContain(c); }
+    expect([...AP_PENDING_PUBLIC_SUBJECTS, ...AP_NEW_SUBJECTS_PUBLIC].sort()).toEqual([...AP_NEW_SUBJECTS].sort());
   });
   it("an empty plan for a registered subject is rejected by that subject's assembler (never validated with Calculus rules)", () => {
     const p = planDraftSet({ setId: "PM1", keys: { mcA: [], mcB: [], frqA: [], frqB: [] }, hasVirtual: false, pool: [], existingFullSets: [], publishedKeys: new Set(), stock: [], physStock: [] } as never);
