@@ -68,6 +68,21 @@ PHYSC_STAGES["physc_batch3"] = [n for k in ("physc_u1_c", "physc_u2_c", "physc_u
 # 2026-10-20 4차 저작분(physc_p0_m/n/frq4): 별도 생성 런 목록
 PHYSC_STAGES["physc_batch4"] = [n for k in ("physc_u1_d", "physc_u2_d", "physc_u3_d", "physc_u4_d", "physc_u5_d", "physc_u6_d", "physc_u7_d", "physc_sets_d", "physc_frq_d") for n in PHYSC_STAGES.get(k, [])]
 PHYSC_STAGES["physc_batch2"] = [n for k in ("physc_u1_b", "physc_u2_b", "physc_u3_b", "physc_u4_b", "physc_u5_b", "physc_u6_b", "physc_u7_b", "physc_sets_b", "physc_frq_b") for n in PHYSC_STAGES.get(k, [])]
+# 2026-10-20 AP Precalculus: pre_p0_*.py 모듈을 두면 pre_ 접두 MC 원형·pref_ 접두 FRQ 원형과 STAGE_<이름> 목록이 자동 등록된다(pre_all …).
+_PR = [_il.import_module(_os.path.basename(f)[:-3]) for f in sorted(_glob.glob(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "pre_p0_*.py")))]
+PRE = {n: (getattr(m, n), "0") for m in _PR for n in dir(m) if n.startswith("pre_") and callable(getattr(m, n)) and getattr(getattr(m, n), "__module__", "") == m.__name__}
+PRE_FRQ = {n: (getattr(m, n), "0") for m in _PR for n in dir(m) if n.startswith("pref_") and callable(getattr(m, n)) and getattr(getattr(m, n), "__module__", "") == m.__name__}
+PRE_STAGES = {}
+for _m in _PR:
+    for _n in dir(_m):
+        if _n.startswith("STAGE_"):
+            _k = "pre_" + _n[6:].lower()
+            PRE_STAGES[_k] = PRE_STAGES.get(_k, []) + [x for x in getattr(_m, _n) if x not in PRE_STAGES.get(_k, [])]
+PRE_STAGES["pre_mc_all"] = sorted(PRE)
+PRE_STAGES["pre_frq_all"] = sorted(PRE_FRQ)
+PRE_STAGES["pre_all"] = PRE_STAGES["pre_mc_all"] + PRE_STAGES["pre_frq_all"]
+# 2026-10-20 2차 저작분(pre_p0_g/h/i/j/k/l: 단원 1·2·3 각 2회분)과 1차에서 통과 0 이었던 원형(수정 후 재생성): 별도 생성 런 목록
+PRE_STAGES["pre_batch2"] = [n for k in ("pre_u1c", "pre_u2c", "pre_u3c", "pre_u1d", "pre_u2d", "pre_u3d") for n in PRE_STAGES.get(k, [])] + ["pre_exp_decay_fraction", "pre_exp_equiv_form", "pre_inverse_expression", "pre_log_evaluate", "pre_periodic_model_eval_calc", "pre_quadrant_sign", "pre_sse_models_calc", "pre_trig_equation_sets"]
 # 2026-10-13 AP Chemistry(P0): chem_p0_*.py 모듈을 두면 ch_ 접두 MC 원형·chs_ 세트 원형·chf_ FRQ 원형과 STAGE_<이름> 목록이 자동 등록된다(chem_p1_mc …). 단원·스킬 표는 chem_coverage.py.
 _CH = [_il.import_module(_os.path.basename(f)[:-3]) for f in sorted(_glob.glob(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "chem_p0_*.py")))]
 CHEM = {n: (getattr(m, n), "0") for m in _CH for n in dir(m) if n.startswith(("ch_", "chs_")) and callable(getattr(m, n)) and getattr(getattr(m, n), "__module__", "") == m.__name__}
@@ -170,7 +185,7 @@ def sig(p):
     return hashlib.sha1(json.dumps([p.get("stem"), [o["text"] for o in p.get("options", [])], p.get("stimulus")], sort_keys=True).encode()).hexdigest()[:12]
 
 def batch(name, n, seed0):
-    fn = (MC.get(name) or STATS.get(name) or STATS_FRQ.get(name) or PHYS.get(name) or PHYS_FRQ.get(name) or PHYSC.get(name) or PHYSC_FRQ.get(name) or CHEM.get(name) or CHEM_FRQ.get(name) or CSA.get(name) or CSA_FRQ.get(name) or MICRO.get(name) or MICRO_FRQ.get(name) or MACRO.get(name) or MACRO_FRQ.get(name) or BIO.get(name) or BIO_FRQ.get(name) or PSYCH.get(name) or PSYCH_FRQ.get(name) or (FRQ.get(name),))[0]  # 통계 원형은 MC 사전(칼큘러스 회귀 테스트 대상)에 넣지 않는다
+    fn = (MC.get(name) or STATS.get(name) or STATS_FRQ.get(name) or PHYS.get(name) or PHYS_FRQ.get(name) or PHYSC.get(name) or PHYSC_FRQ.get(name) or PRE.get(name) or PRE_FRQ.get(name) or CHEM.get(name) or CHEM_FRQ.get(name) or CSA.get(name) or CSA_FRQ.get(name) or MICRO.get(name) or MICRO_FRQ.get(name) or MACRO.get(name) or MACRO_FRQ.get(name) or BIO.get(name) or BIO_FRQ.get(name) or PSYCH.get(name) or PSYCH_FRQ.get(name) or (FRQ.get(name),))[0]  # 통계 원형은 MC 사전(칼큘러스 회귀 테스트 대상)에 넣지 않는다
     out, seen, seed = [], set(), seed0
     while len(out) < n and seed < seed0 + 400:
         try:
@@ -197,6 +212,7 @@ if __name__ == "__main__":
         elif which.startswith("psych_"): print(json.dumps({"mc": [n for n in PSYCH_STAGES.get(which, list(PSYCH)) if n in PSYCH], "frq": [n for n in PSYCH_STAGES.get(which, []) if n in PSYCH_FRQ]}))
         elif which.startswith("macro_"): print(json.dumps({"mc": [n for n in MACRO_STAGES.get(which, list(MACRO)) if n in MACRO], "frq": [n for n in MACRO_STAGES.get(which, []) if n in MACRO_FRQ]}))
         elif which.startswith("chem"): print(json.dumps({"mc": [n for n in CHEM_STAGES.get(which, list(CHEM)) if n in CHEM], "frq": [n for n in CHEM_STAGES.get(which, []) if n in CHEM_FRQ]}))
+        elif which.startswith("pre_"): print(json.dumps({"mc": [n for n in PRE_STAGES.get(which, list(PRE)) if n in PRE], "frq": [n for n in PRE_STAGES.get(which, []) if n in PRE_FRQ]}))
         elif which.startswith("physc"): print(json.dumps({"mc": [n for n in PHYSC_STAGES.get(which, list(PHYSC)) if n in PHYSC], "frq": [n for n in PHYSC_STAGES.get(which, []) if n in PHYSC_FRQ]}))
         elif which.startswith("phys"): print(json.dumps({"mc": [n for n in PHYS_STAGES.get(which, list(PHYS)) if n in PHYS], "frq": [n for n in PHYS_STAGES.get(which, []) if n in PHYS_FRQ]}))
         elif which.startswith("stats"): print(json.dumps({"mc": [n for n in STATS_STAGES.get(which, list(STATS)) if n in STATS], "frq": [n for n in STATS_STAGES.get(which, []) if n in STATS_FRQ]}))  # 목록 순서 보존(위험 L→M→H)
@@ -234,6 +250,14 @@ if __name__ == "__main__":
             for q in (p["items"] if "items" in p else [p]):
                 b = q["blueprint"]
                 out.append({"id": q["archetype"], "topic": q["topic"], "skill": q["skill"], "calculator": "allowed", "stimulus": (q.get("stimulus") or p["stimulus"])["kind"], "verifiedBy": [b["verification"]["independent_path"]], "misconceptions": [m["description"] for m in b["misconceptions"]]})
+        print(json.dumps(out, indent=1))
+    elif cmd == "guide-pre":  # Precalculus 원형의 가이드 항목(JSON): lib/ap-generation/subjects/precalculus-archetypes.json 의 원천.
+        out = []
+        for n in PRE_STAGES["pre_mc_all"]:
+            p = (batch(n, 1, 0) or [None])[0]
+            if not p: raise SystemExit(f"no pack for {n}")
+            b = p["blueprint"]
+            out.append({"id": p["archetype"], "topic": p["topic"], "skill": p["skill"], "calculator": p["calculator"], "stimulus": p["stimulus"]["kind"], "verifiedBy": [b["verification"]["independent_path"]], "misconceptions": [m["description"] for m in b["misconceptions"]]})
         print(json.dumps(out, indent=1))
     elif cmd == "guide-physc":  # Physics C: Mechanics 원형의 가이드 항목(JSON): lib/ap-generation/subjects/physics-c-mech-archetypes.json 의 원천. 세트는 문항마다 한 항목.
         out = []
