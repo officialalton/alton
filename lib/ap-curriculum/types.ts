@@ -16,6 +16,17 @@ export const AP_SUBJECT_CODES = [
   "ap_psychology",
   "ap_us_history",
   "ap_world_history",
+  // 2026-10-20 추가 10과목
+  "ap_physics_2",
+  "ap_physics_c_mechanics",
+  "ap_physics_c_electricity_and_magnetism",
+  "ap_environmental_science",
+  "ap_us_government_and_politics",
+  "ap_comparative_government_and_politics",
+  "ap_human_geography",
+  "ap_computer_science_principles",
+  "ap_european_history",
+  "ap_precalculus",
 ] as const;
 export type ApSubjectCode = (typeof AP_SUBJECT_CODES)[number];
 

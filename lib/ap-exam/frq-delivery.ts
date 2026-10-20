@@ -17,6 +17,17 @@ export const AP_FRQ_DELIVERY: Record<string, ApFrqDelivery> = {
   ap_world_history: "digital", // AP Central: 완전 디지털(Bluebook), 2027 SAQ/LEQ 개편(docs/ap/worldhistory-facts.md)
   ap_us_history: "digital", // AP Central: 완전 디지털(Bluebook), 2027 SAQ/LEQ 개편
   ap_english_literature: "digital", // 완전 디지털(Bluebook) — AP Central 시험 페이지(docs/ap/englit-facts.md)
+  // 2026-10-20 추가: Physics 2·Physics C(2)·Precalculus 는 하이브리드(MC 디지털·FRQ 종이, AP Central 시험 페이지), 나머지는 완전 디지털(Bluebook).
+  ap_physics_2: "paper",
+  ap_physics_c_mechanics: "paper",
+  ap_physics_c_electricity_and_magnetism: "paper",
+  ap_precalculus: "paper",
+  ap_environmental_science: "digital",
+  ap_us_government_and_politics: "digital",
+  ap_comparative_government_and_politics: "digital",
+  ap_human_geography: "digital",
+  ap_computer_science_principles: "digital", // 작성형 응답 — 전달 방식 UNVERIFIED(Create 수행평가는 시험 당일 밖)
+  ap_european_history: "digital",
   ap_psychology: "digital", // 서술형(Article Analysis·Evidence-Based) 타이핑 — 실제 전달 방식은 UNVERIFIED(docs/ap/psychology-facts.md)
 };
 export function apFrqIsPaper(subject: string | null | undefined): boolean {

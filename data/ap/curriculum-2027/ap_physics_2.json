@@ -1,0 +1,2516 @@
+{
+  "schemaVersion": 1,
+  "subject": {
+    "apCode": "ap_physics_2",
+    "name": "AP Physics 2",
+    "family": "physics_2",
+    "edition": "ced-2027",
+    "cedVersion": "AP Physics 2: Algebra-Based CED (Course Framework V.1, (c)2026; 2027 exam: 42 MC/85 min, 4 FRQ/95 min)",
+    "examYear": 2027,
+    "sourceUrl": "https://apcentral.collegeboard.org/media/pdf/ap-physics-2-course-and-exam-description.pdf",
+    "officialTopicCodes": true,
+    "designNotes": "7 units numbered 9-15 in the CED (continuing the AP Physics 1 numbering): Thermodynamics, Electric Force/Field/Potential, Electric Circuits, Magnetism and Electromagnetism, Geometric Optics, Waves/Sound/Physical Optics, Modern Physics. Unit weights, topic codes/titles, class periods, skill weights and exam format are from the posted CED (read 2026-10-20). Exam: hybrid digital; Section I 42 MC, 85 min, 50%; Section II 4 FRQ, 95 min, 50% (Mathematical Routines 10 pts, Translation Between Representations 12 pts, Experimental Design and Analysis 10 pts, Qualitative/Quantitative Translation 8 pts; 40 pts total). Calculator allowed on both sections; equation sheet provided. Fluids moved to AP Physics 1. FRQ practice weights apply to whole practices. Per-topic and per-sub-keyword skills are an ALTON editorial mapping (one skill per sub-keyword chosen by kind and content), not the CED's per-topic suggested skills. Sub-keywords, kinds, requires and estLessons are ALTON editorial designs, not CED content. Topic titles are the CED's where read from the CED course-at-a-glance; where the extracted text was truncated they are close paraphrases."
+  },
+  "skills": [
+    {
+      "code": "1.A",
+      "category": "Creating Representations",
+      "label": "Create diagrams, tables, charts, or schematics to represent physical situations."
+    },
+    {
+      "code": "1.B",
+      "category": "Creating Representations",
+      "label": "Create quantitative graphs with appropriate scales and units, including plotting data."
+    },
+    {
+      "code": "1.C",
+      "category": "Creating Representations",
+      "label": "Create qualitative sketches of graphs that represent features of a model or the behavior of a physical system."
+    },
+    {
+      "code": "2.A",
+      "category": "Mathematical Routines",
+      "label": "Derive a symbolic expression from known quantities by selecting and following a logical mathematical pathway."
+    },
+    {
+      "code": "2.B",
+      "category": "Mathematical Routines",
+      "label": "Calculate or estimate an unknown quantity with units from known quantities, by selecting and following a logical computational pathway."
+    },
+    {
+      "code": "2.C",
+      "category": "Mathematical Routines",
+      "label": "Compare physical quantities between two or more scenarios or at different times and locations in a single scenario."
+    },
+    {
+      "code": "2.D",
+      "category": "Mathematical Routines",
+      "label": "Predict new values or factors of change of physical quantities using functional dependence between variables."
+    },
+    {
+      "code": "3.A",
+      "category": "Scientific Questioning and Argumentation",
+      "label": "Create experimental procedures that are appropriate for a given scientific question."
+    },
+    {
+      "code": "3.B",
+      "category": "Scientific Questioning and Argumentation",
+      "label": "Apply an appropriate law, definition, theoretical relationship, or model to make a claim."
+    },
+    {
+      "code": "3.C",
+      "category": "Scientific Questioning and Argumentation",
+      "label": "Justify or support a claim using evidence from experimental data, physical representations, or physical principles or laws."
+    }
+  ],
+  "weights": [
+    {
+      "axis": "unit",
+      "code": "9",
+      "section": "mc",
+      "min": 15,
+      "max": 18,
+      "source": "AP Physics 2 CED (Course Framework V.1, (c)2026), Exam Weighting for the Multiple-Choice Section"
+    },
+    {
+      "axis": "unit",
+      "code": "10",
+      "section": "mc",
+      "min": 15,
+      "max": 18,
+      "source": "AP Physics 2 CED (Course Framework V.1, (c)2026), Exam Weighting for the Multiple-Choice Section"
+    },
+    {
+      "axis": "unit",
+      "code": "11",
+      "section": "mc",
+      "min": 15,
+      "max": 18,
+      "source": "AP Physics 2 CED (Course Framework V.1, (c)2026), Exam Weighting for the Multiple-Choice Section"
+    },
+    {
+      "axis": "unit",
+      "code": "12",
+      "section": "mc",
+      "min": 12,
+      "max": 15,
+      "source": "AP Physics 2 CED (Course Framework V.1, (c)2026), Exam Weighting for the Multiple-Choice Section"
+    },
+    {
+      "axis": "unit",
+      "code": "13",
+      "section": "mc",
+      "min": 12,
+      "max": 15,
+      "source": "AP Physics 2 CED (Course Framework V.1, (c)2026), Exam Weighting for the Multiple-Choice Section"
+    },
+    {
+      "axis": "unit",
+      "code": "14",
+      "section": "mc",
+      "min": 12,
+      "max": 15,
+      "source": "AP Physics 2 CED (Course Framework V.1, (c)2026), Exam Weighting for the Multiple-Choice Section"
+    },
+    {
+      "axis": "unit",
+      "code": "15",
+      "section": "mc",
+      "min": 12,
+      "max": 15,
+      "source": "AP Physics 2 CED (Course Framework V.1, (c)2026), Exam Weighting for the Multiple-Choice Section"
+    },
+    {
+      "axis": "skill",
+      "code": "2.A",
+      "section": "mc",
+      "min": 15,
+      "max": 20,
+      "source": "AP Physics 2 CED, Exam Information: Exam Weighting by Science Practice"
+    },
+    {
+      "axis": "skill",
+      "code": "2.B",
+      "section": "mc",
+      "min": 20,
+      "max": 25,
+      "source": "AP Physics 2 CED, Exam Information: Exam Weighting by Science Practice"
+    },
+    {
+      "axis": "skill",
+      "code": "2.C",
+      "section": "mc",
+      "min": 10,
+      "max": 15,
+      "source": "AP Physics 2 CED, Exam Information: Exam Weighting by Science Practice"
+    },
+    {
+      "axis": "skill",
+      "code": "2.D",
+      "section": "mc",
+      "min": 10,
+      "max": 15,
+      "source": "AP Physics 2 CED, Exam Information: Exam Weighting by Science Practice"
+    },
+    {
+      "axis": "skill",
+      "code": "3.B",
+      "section": "mc",
+      "min": 20,
+      "max": 25,
+      "source": "AP Physics 2 CED, Exam Information: Exam Weighting by Science Practice"
+    },
+    {
+      "axis": "skill",
+      "code": "3.C",
+      "section": "mc",
+      "min": 5,
+      "max": 10,
+      "source": "AP Physics 2 CED, Exam Information: Exam Weighting by Science Practice"
+    },
+    {
+      "axis": "skill",
+      "code": "Creating Representations",
+      "section": "frq",
+      "min": 20,
+      "max": 35,
+      "source": "AP Physics 2 CED, Exam Information: Exam Weighting by Science Practice"
+    },
+    {
+      "axis": "skill",
+      "code": "Mathematical Routines",
+      "section": "frq",
+      "min": 30,
+      "max": 40,
+      "source": "AP Physics 2 CED, Exam Information: Exam Weighting by Science Practice"
+    },
+    {
+      "axis": "skill",
+      "code": "Scientific Questioning and Argumentation",
+      "section": "frq",
+      "min": 35,
+      "max": 45,
+      "source": "AP Physics 2 CED, Exam Information: Exam Weighting by Science Practice"
+    }
+  ],
+  "units": [
+    {
+      "code": "9",
+      "title": "Thermodynamics",
+      "officialClassPeriods": "~10–16",
+      "topics": [
+        {
+          "code": "9.1",
+          "title": "Kinetic Theory of Temperature and Pressure",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.B"
+          ],
+          "requires": [],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "9.1#1",
+              "label": "Temperature as average molecular kinetic energy",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.1#2",
+              "label": "Pressure from molecular collisions with walls",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "9.1#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.1#3",
+              "label": "Temperature scales and absolute zero",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "9.1#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "9.2",
+          "title": "The Ideal Gas Law",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.D",
+            "1.A"
+          ],
+          "requires": [
+            "9.1"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "9.2#1",
+              "label": "PV = nRT = NkT relationships",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.2#2",
+              "label": "Predict changes in P, V, T from proportional reasoning",
+              "kind": "skill",
+              "skills": [
+                "2.D"
+              ],
+              "requires": [
+                "9.2#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.2#3",
+              "label": "Reading isotherms, isobars and isochores on PV diagrams",
+              "kind": "representation",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [
+                "9.2#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "9.3",
+          "title": "Thermal Energy Transfer and Equilibrium",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "3.C"
+          ],
+          "requires": [
+            "9.2"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "9.3#1",
+              "label": "Conduction, convection and radiation",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.3#2",
+              "label": "Thermal equilibrium of two objects in contact",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "9.3#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.3#3",
+              "label": "Heat flows from hot to cold, not temperature to energy confusion",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "9.3#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "9.4",
+          "title": "The First Law of Thermodynamics",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "1.A",
+            "3.C"
+          ],
+          "requires": [
+            "9.3"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "9.4#1",
+              "label": "Internal energy change equals heat added plus work done on gas",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.4#2",
+              "label": "Work as area under a PV curve",
+              "kind": "representation",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [
+                "9.4#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.4#3",
+              "label": "Sign conventions for Q and W",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "9.4#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "9.5",
+          "title": "Specific Heat and Thermal Conductivity",
+          "scope": "both",
+          "skills": [
+            "2.B",
+            "2.D"
+          ],
+          "requires": [
+            "9.4"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "9.5#1",
+              "label": "Heat needed to change temperature, Q = mcΔT",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.5#2",
+              "label": "Calorimetry energy-balance problems",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "9.5#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.5#3",
+              "label": "Rate of conduction and its dependence on area and thickness",
+              "kind": "concept",
+              "skills": [
+                "2.D"
+              ],
+              "requires": [
+                "9.5#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "9.6",
+          "title": "Entropy and the Second Law of Thermodynamics",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "3.C"
+          ],
+          "requires": [
+            "9.5"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "9.6#1",
+              "label": "Entropy as number of microstates",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.6#2",
+              "label": "Heat engines, efficiency and reversibility",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "9.6#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.6#3",
+              "label": "Entropy of an isolated system never decreases",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "9.6#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "10",
+      "title": "Electric Force, Field, and Potential",
+      "officialClassPeriods": "~14–21",
+      "topics": [
+        {
+          "code": "10.1",
+          "title": "Electric Charge and Electric Force",
+          "scope": "both",
+          "skills": [
+            "2.D",
+            "2.B",
+            "3.C"
+          ],
+          "requires": [],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "10.1#1",
+              "label": "Coulomb's law and inverse-square dependence",
+              "kind": "concept",
+              "skills": [
+                "2.D"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "10.1#2",
+              "label": "Net force from several point charges",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "10.1#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "10.1#3",
+              "label": "Charged objects attracting neutral objects",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "10.1#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "10.2",
+          "title": "Conservation of Electric Charge and the Process of Charging",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.C"
+          ],
+          "requires": [
+            "10.1"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "10.2#1",
+              "label": "Charging by friction, contact and induction",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "10.2#2",
+              "label": "Conductors versus insulators",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "10.2#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "10.2#3",
+              "label": "Charge conservation when objects touch",
+              "kind": "skill",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [
+                "10.2#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "10.3",
+          "title": "Electric Fields",
+          "scope": "both",
+          "skills": [
+            "1.A",
+            "2.B",
+            "3.B"
+          ],
+          "requires": [
+            "10.2"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "10.3#1",
+              "label": "Field of a point charge and field lines",
+              "kind": "representation",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "10.3#2",
+              "label": "Force on a charge placed in a field",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "10.3#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "10.3#3",
+              "label": "Fields in a uniform region between plates",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "10.3#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "10.4",
+          "title": "Electric Potential Energy",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.B",
+            "3.C"
+          ],
+          "requires": [
+            "10.3"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "10.4#1",
+              "label": "Potential energy of a charge pair",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "10.4#2",
+              "label": "Work done moving a charge in a field",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "10.4#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "10.4#3",
+              "label": "Sign of potential energy for like and unlike charges",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "10.4#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "10.5",
+          "title": "Electric Potential",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "1.C",
+            "2.A"
+          ],
+          "requires": [
+            "10.4"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "10.5#1",
+              "label": "Potential as energy per unit charge",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "10.5#2",
+              "label": "Equipotential lines and field direction",
+              "kind": "representation",
+              "skills": [
+                "1.C"
+              ],
+              "requires": [
+                "10.5#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "10.5#3",
+              "label": "Potential difference in a uniform field, ΔV = Ed",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "10.5#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "10.6",
+          "title": "Capacitors",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.B",
+            "2.D"
+          ],
+          "requires": [
+            "10.5"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "10.6#1",
+              "label": "Capacitance of parallel plates",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "10.6#2",
+              "label": "Energy stored in a capacitor",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "10.6#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "10.6#3",
+              "label": "Effect of changing plate separation or area",
+              "kind": "skill",
+              "skills": [
+                "2.D"
+              ],
+              "requires": [
+                "10.6#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "10.7",
+          "title": "Conservation of Electric Energy",
+          "scope": "both",
+          "skills": [
+            "2.A",
+            "2.B",
+            "3.B"
+          ],
+          "requires": [
+            "10.6"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "10.7#1",
+              "label": "Energy conservation for a charge accelerated by a potential difference",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "10.7#2",
+              "label": "Speed gained by a charge crossing plates",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "10.7#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "10.7#3",
+              "label": "Electric potential energy converted to kinetic energy",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "10.7#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "11",
+      "title": "Electric Circuits",
+      "officialClassPeriods": "~12–20",
+      "topics": [
+        {
+          "code": "11.1",
+          "title": "Electric Current",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "3.C"
+          ],
+          "requires": [],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "11.1#1",
+              "label": "Current as charge flow per unit time",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.1#2",
+              "label": "Conventional current direction",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "11.1#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.1#3",
+              "label": "Drift velocity and charge carriers",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "11.1#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "11.2",
+          "title": "Simple Circuits",
+          "scope": "both",
+          "skills": [
+            "1.A",
+            "3.B",
+            "3.A"
+          ],
+          "requires": [
+            "11.1"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "11.2#1",
+              "label": "Circuit diagrams and symbols",
+              "kind": "representation",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.2#2",
+              "label": "Current through components in series",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "11.2#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.2#3",
+              "label": "Measuring current and voltage with meters",
+              "kind": "skill",
+              "skills": [
+                "3.A"
+              ],
+              "requires": [
+                "11.2#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "11.3",
+          "title": "Resistance, Resistivity, and Ohm's Law",
+          "scope": "both",
+          "skills": [
+            "2.D",
+            "1.B",
+            "2.B"
+          ],
+          "requires": [
+            "11.2"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "11.3#1",
+              "label": "Resistivity, length and cross-sectional area",
+              "kind": "concept",
+              "skills": [
+                "2.D"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.3#2",
+              "label": "Ohmic versus non-ohmic devices from I-V graphs",
+              "kind": "representation",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "11.3#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.3#3",
+              "label": "Ohm's law calculations",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "11.3#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "11.4",
+          "title": "Electric Power",
+          "scope": "both",
+          "skills": [
+            "2.A",
+            "2.B",
+            "3.C"
+          ],
+          "requires": [
+            "11.3"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "11.4#1",
+              "label": "Power as IV, I²R and V²/R",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.4#2",
+              "label": "Energy cost of running a device",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "11.4#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.4#3",
+              "label": "Brightness of bulbs and power dissipated",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "11.4#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "11.5",
+          "title": "Compound Direct Current (DC) Circuits",
+          "scope": "both",
+          "skills": [
+            "2.B",
+            "2.C"
+          ],
+          "requires": [
+            "11.4"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "11.5#1",
+              "label": "Equivalent resistance of series and parallel combinations",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.5#2",
+              "label": "Predicting changes when a resistor is added",
+              "kind": "skill",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [
+                "11.5#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.5#3",
+              "label": "Reducing a network step by step",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "11.5#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "11.6",
+          "title": "Kirchhoff's Loop Rule",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.A",
+            "3.C"
+          ],
+          "requires": [
+            "11.5"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "11.6#1",
+              "label": "Sum of potential changes around a loop is zero",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.6#2",
+              "label": "Applying the loop rule to find an unknown emf or voltage",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "11.6#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.6#3",
+              "label": "Potential drop across resistors and rise across batteries",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "11.6#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "11.7",
+          "title": "Kirchhoff's Junction Rule",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.B",
+            "2.A"
+          ],
+          "requires": [
+            "11.6"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "11.7#1",
+              "label": "Charge conservation at a junction",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.7#2",
+              "label": "Branch currents from the junction rule",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "11.7#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.7#3",
+              "label": "Combining loop and junction rules for a two-loop circuit",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "11.7#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "11.8",
+          "title": "Resistor-Capacitor (RC) Circuits",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.D",
+            "1.C"
+          ],
+          "requires": [
+            "11.7"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "11.8#1",
+              "label": "Charging and discharging an RC circuit",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.8#2",
+              "label": "Time constant τ = RC",
+              "kind": "skill",
+              "skills": [
+                "2.D"
+              ],
+              "requires": [
+                "11.8#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "11.8#3",
+              "label": "Sketching current and charge versus time",
+              "kind": "representation",
+              "skills": [
+                "1.C"
+              ],
+              "requires": [
+                "11.8#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "12",
+      "title": "Magnetism and Electromagnetism",
+      "officialClassPeriods": "~10–13",
+      "topics": [
+        {
+          "code": "12.1",
+          "title": "Magnetic Fields",
+          "scope": "both",
+          "skills": [
+            "1.A",
+            "3.C",
+            "2.B"
+          ],
+          "requires": [],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "12.1#1",
+              "label": "Field of bar magnets and field lines",
+              "kind": "representation",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "12.1#2",
+              "label": "Magnetic poles cannot be isolated",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "12.1#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "12.1#3",
+              "label": "Direction of field from a compass",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "12.1#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "12.2",
+          "title": "Magnetism and Moving Charges",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.C",
+            "2.B"
+          ],
+          "requires": [
+            "12.1"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "12.2#1",
+              "label": "Force on a moving charge, F = qvB sinθ",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "12.2#2",
+              "label": "Right-hand rule for force direction",
+              "kind": "skill",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [
+                "12.2#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "12.2#3",
+              "label": "Circular path of a charge in a uniform field",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "12.2#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "12.3",
+          "title": "Magnetism and Current-Carrying Wires",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.B",
+            "2.C"
+          ],
+          "requires": [
+            "12.2"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "12.3#1",
+              "label": "Force on a current-carrying wire in a field",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "12.3#2",
+              "label": "Field direction around a long straight wire",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "12.3#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "12.3#3",
+              "label": "Forces between parallel current-carrying wires",
+              "kind": "concept",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [
+                "12.3#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "12.4",
+          "title": "Electromagnetic Induction and Faraday's Law",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.B"
+          ],
+          "requires": [
+            "12.3"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "12.4#1",
+              "label": "Magnetic flux through a loop",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "12.4#2",
+              "label": "Induced emf from changing flux",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "12.4#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "12.4#3",
+              "label": "Lenz's law and direction of induced current",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "12.4#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "13",
+      "title": "Geometric Optics",
+      "officialClassPeriods": "~8–12",
+      "topics": [
+        {
+          "code": "13.1",
+          "title": "Reflection",
+          "scope": "both",
+          "skills": [
+            "1.A",
+            "3.B"
+          ],
+          "requires": [],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "13.1#1",
+              "label": "Law of reflection and ray diagrams",
+              "kind": "representation",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "13.1#2",
+              "label": "Image in a plane mirror",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "13.1#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "13.1#3",
+              "label": "Specular versus diffuse reflection",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "13.1#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "13.2",
+          "title": "Images Formed by Mirrors",
+          "scope": "both",
+          "skills": [
+            "1.A",
+            "2.B",
+            "3.C"
+          ],
+          "requires": [
+            "13.1"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "13.2#1",
+              "label": "Concave and convex mirror ray tracing",
+              "kind": "representation",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "13.2#2",
+              "label": "Mirror equation and magnification",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "13.2#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "13.2#3",
+              "label": "Real versus virtual images",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "13.2#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "13.3",
+          "title": "Refraction",
+          "scope": "both",
+          "skills": [
+            "2.B",
+            "3.B",
+            "2.C"
+          ],
+          "requires": [
+            "13.2"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "13.3#1",
+              "label": "Index of refraction and Snell's law",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "13.3#2",
+              "label": "Total internal reflection and critical angle",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "13.3#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "13.3#3",
+              "label": "Speed and wavelength of light in a medium",
+              "kind": "concept",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [
+                "13.3#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "13.4",
+          "title": "Images Formed by Lenses",
+          "scope": "both",
+          "skills": [
+            "1.A",
+            "2.B",
+            "2.D"
+          ],
+          "requires": [
+            "13.3"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "13.4#1",
+              "label": "Converging and diverging lens ray tracing",
+              "kind": "representation",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "13.4#2",
+              "label": "Thin lens equation",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "13.4#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "13.4#3",
+              "label": "Image changes when an object moves",
+              "kind": "skill",
+              "skills": [
+                "2.D"
+              ],
+              "requires": [
+                "13.4#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "14",
+      "title": "Waves, Sound, and Physical Optics",
+      "officialClassPeriods": "~14–23",
+      "topics": [
+        {
+          "code": "14.1",
+          "title": "Properties of Wave Pulses and Waves",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "3.C",
+            "1.A"
+          ],
+          "requires": [],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "14.1#1",
+              "label": "Transverse versus longitudinal waves",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "14.1#2",
+              "label": "Wave speed depends on the medium, not the source",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "14.1#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "14.1#3",
+              "label": "Pulse motion on a string",
+              "kind": "representation",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [
+                "14.1#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "14.2",
+          "title": "Periodic Waves",
+          "scope": "both",
+          "skills": [
+            "2.A",
+            "1.B",
+            "2.D"
+          ],
+          "requires": [
+            "14.1"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "14.2#1",
+              "label": "Wavelength, frequency and period relation v = fλ",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "14.2#2",
+              "label": "Reading wave graphs of displacement versus position and time",
+              "kind": "representation",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "14.2#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "14.2#3",
+              "label": "Wave speed on a string",
+              "kind": "skill",
+              "skills": [
+                "2.D"
+              ],
+              "requires": [
+                "14.2#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "14.3",
+          "title": "Boundary Behavior of Waves and Polarization",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "3.C"
+          ],
+          "requires": [
+            "14.2"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "14.3#1",
+              "label": "Reflection and transmission at a boundary",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "14.3#2",
+              "label": "Phase change at fixed versus free ends",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "14.3#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "14.3#3",
+              "label": "Polarization of transverse waves",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "14.3#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "14.4",
+          "title": "Electromagnetic Waves",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.C"
+          ],
+          "requires": [
+            "14.3"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "14.4#1",
+              "label": "The electromagnetic spectrum",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "14.4#2",
+              "label": "Speed of light in vacuum and in media",
+              "kind": "concept",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [
+                "14.4#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "14.4#3",
+              "label": "Relative energies and frequencies across the spectrum",
+              "kind": "skill",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [
+                "14.4#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "14.5",
+          "title": "The Doppler Effect",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.D",
+            "1.A"
+          ],
+          "requires": [
+            "14.4"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "14.5#1",
+              "label": "Frequency shift for moving source or observer",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "14.5#2",
+              "label": "Predict whether pitch rises or falls",
+              "kind": "skill",
+              "skills": [
+                "2.D"
+              ],
+              "requires": [
+                "14.5#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "14.5#3",
+              "label": "Wavefront diagrams for a moving source",
+              "kind": "representation",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [
+                "14.5#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "14.6",
+          "title": "Wave Interference and Standing Waves",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.B"
+          ],
+          "requires": [
+            "14.5"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "14.6#1",
+              "label": "Constructive and destructive interference",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "14.6#2",
+              "label": "Standing waves on strings and in pipes",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "14.6#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "14.6#3",
+              "label": "Harmonics and resonance",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "14.6#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "14.7",
+          "title": "Diffraction",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.D",
+            "3.C"
+          ],
+          "requires": [
+            "14.6"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "14.7#1",
+              "label": "Single-slit diffraction pattern",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "14.7#2",
+              "label": "Effect of slit width and wavelength on spreading",
+              "kind": "skill",
+              "skills": [
+                "2.D"
+              ],
+              "requires": [
+                "14.7#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "14.7#3",
+              "label": "Diffraction when wavelength is comparable to the opening",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "14.7#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "14.8",
+          "title": "Double-Slit Interference and Diffraction Gratings",
+          "scope": "both",
+          "skills": [
+            "2.B",
+            "2.A",
+            "3.B"
+          ],
+          "requires": [
+            "14.7"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "14.8#1",
+              "label": "Double-slit fringe spacing",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "14.8#2",
+              "label": "Path difference conditions for maxima and minima",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "14.8#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "14.8#3",
+              "label": "Diffraction grating line positions",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "14.8#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "14.9",
+          "title": "Thin-Film Interference",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.A"
+          ],
+          "requires": [
+            "14.8"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "14.9#1",
+              "label": "Phase shifts on reflection at thin films",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "14.9#2",
+              "label": "Film thickness for constructive or destructive reflection",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "14.9#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "14.9#3",
+              "label": "Colors seen in soap films and oil slicks",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "14.9#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "15",
+      "title": "Modern Physics",
+      "officialClassPeriods": "~14–22",
+      "topics": [
+        {
+          "code": "15.1",
+          "title": "Quantum Theory and Wave-Particle Duality",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.B",
+            "3.C"
+          ],
+          "requires": [],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "15.1#1",
+              "label": "Photon energy E = hf",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "15.1#2",
+              "label": "de Broglie wavelength of matter",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "15.1#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "15.1#3",
+              "label": "Evidence for wave and particle behavior of light and electrons",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "15.1#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "15.2",
+          "title": "The Bohr Model of Atomic Structure",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.B"
+          ],
+          "requires": [
+            "15.1"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "15.2#1",
+              "label": "Quantized energy levels of hydrogen",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "15.2#2",
+              "label": "Energy of an emitted photon in a level transition",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "15.2#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "15.2#3",
+              "label": "Limits of the Bohr model",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "15.2#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "15.3",
+          "title": "Emission and Absorption Spectra",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "3.C"
+          ],
+          "requires": [
+            "15.2"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "15.3#1",
+              "label": "Line spectra identify elements",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "15.3#2",
+              "label": "Matching spectral lines to transitions",
+              "kind": "skill",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "15.3#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "15.3#3",
+              "label": "Continuous versus discrete spectra",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "15.3#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "15.4",
+          "title": "Blackbody Radiation",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.D"
+          ],
+          "requires": [
+            "15.3"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "15.4#1",
+              "label": "Thermal emission depends on temperature",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "15.4#2",
+              "label": "Peak wavelength shifts with temperature",
+              "kind": "skill",
+              "skills": [
+                "2.D"
+              ],
+              "requires": [
+                "15.4#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "15.4#3",
+              "label": "Classical failure to explain blackbody curves",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "15.4#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "15.5",
+          "title": "The Photoelectric Effect",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.B",
+            "3.C"
+          ],
+          "requires": [
+            "15.4"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "15.5#1",
+              "label": "Work function and threshold frequency",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "15.5#2",
+              "label": "Maximum kinetic energy of photoelectrons",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "15.5#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "15.5#3",
+              "label": "Why intensity does not set photoelectron energy",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "15.5#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "15.6",
+          "title": "Compton Scattering",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "3.C"
+          ],
+          "requires": [
+            "15.5"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "15.6#1",
+              "label": "Photon momentum p = h/λ",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "15.6#2",
+              "label": "Wavelength shift after scattering off an electron",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "15.6#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "15.6#3",
+              "label": "Photon scattering as evidence for particle-like light",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "15.6#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "15.7",
+          "title": "Fission, Fusion, and Nuclear Decay",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.B",
+            "2.A"
+          ],
+          "requires": [
+            "15.6"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "15.7#1",
+              "label": "Mass defect and binding energy",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "15.7#2",
+              "label": "Energy released in fission and fusion",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "15.7#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "15.7#3",
+              "label": "Conservation laws in nuclear reactions",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "15.7#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "15.8",
+          "title": "Types of Radioactive Decay",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "2.A",
+            "2.B"
+          ],
+          "requires": [
+            "15.7"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "15.8#1",
+              "label": "Alpha, beta and gamma decay",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "15.8#2",
+              "label": "Balancing decay equations",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "15.8#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "15.8#3",
+              "label": "Half-life and remaining sample",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "15.8#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

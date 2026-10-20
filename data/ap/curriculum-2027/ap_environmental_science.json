@@ -1,0 +1,3823 @@
+{
+  "schemaVersion": 1,
+  "subject": {
+    "apCode": "ap_environmental_science",
+    "name": "AP Environmental Science",
+    "family": "environmental_science",
+    "edition": "ced-2027",
+    "cedVersion": "AP Environmental Science CED (Course at a Glance, 9 units, 99 topics; 2027 exam: fully digital, 80 MC/90 min, 3 FRQ/70 min; 2026-27 clarifications only, no content change)",
+    "examYear": 2027,
+    "sourceUrl": "https://apcentral.collegeboard.org/media/pdf/ap-environmental-science-course-at-a-glance.pdf",
+    "officialTopicCodes": true,
+    "designNotes": "9 units with unit weights from the AP Central course page and topic codes/titles/class periods from the Course at a Glance PDF (that PDF is the 2019-printed layout; AP Central states course content is unchanged for 2026-27). Exam page (read 2026-10-20): fully digital in Bluebook; Section I 80 MC, 90 min, 60% (individual questions plus 3-5 quantitative sets, 3-5 qualitative sets, 2 text-based sets); Section II 3 FRQ, 70 min, 40% (Q1 design an investigation, Q2 analyze data, Q3 analyze an environmental problem with calculations); calculators permitted. FRQ point values are not stated on the exam page and were not verified here (historically 10 each). Skills are the 7 science practices at practice level (the CED's per-practice skill codes were not extracted); no skill weights recorded. The full CED PDF exceeded the fetch limit. Per-topic and per-sub-keyword skills are an ALTON editorial mapping (one skill per sub-keyword chosen by kind and content), not the CED's per-topic suggested skills. Sub-keywords, kinds, requires and estLessons are ALTON editorial designs, not CED content. Topic titles are the CED's where read from the CED course-at-a-glance; where the extracted text was truncated they are close paraphrases."
+  },
+  "skills": [
+    {
+      "code": "1",
+      "category": "Science Practices",
+      "label": "Concept Explanation"
+    },
+    {
+      "code": "2",
+      "category": "Science Practices",
+      "label": "Visual Representations"
+    },
+    {
+      "code": "3",
+      "category": "Science Practices",
+      "label": "Text Analysis"
+    },
+    {
+      "code": "4",
+      "category": "Science Practices",
+      "label": "Scientific Experiments"
+    },
+    {
+      "code": "5",
+      "category": "Science Practices",
+      "label": "Data Analysis"
+    },
+    {
+      "code": "6",
+      "category": "Science Practices",
+      "label": "Mathematical Routines"
+    },
+    {
+      "code": "7",
+      "category": "Science Practices",
+      "label": "Environmental Solutions"
+    }
+  ],
+  "weights": [
+    {
+      "axis": "unit",
+      "code": "1",
+      "section": "mc",
+      "min": 6,
+      "max": 8,
+      "source": "AP Environmental Science, AP Central course page unit exam weightings"
+    },
+    {
+      "axis": "unit",
+      "code": "2",
+      "section": "mc",
+      "min": 6,
+      "max": 8,
+      "source": "AP Environmental Science, AP Central course page unit exam weightings"
+    },
+    {
+      "axis": "unit",
+      "code": "3",
+      "section": "mc",
+      "min": 10,
+      "max": 15,
+      "source": "AP Environmental Science, AP Central course page unit exam weightings"
+    },
+    {
+      "axis": "unit",
+      "code": "4",
+      "section": "mc",
+      "min": 10,
+      "max": 15,
+      "source": "AP Environmental Science, AP Central course page unit exam weightings"
+    },
+    {
+      "axis": "unit",
+      "code": "5",
+      "section": "mc",
+      "min": 10,
+      "max": 15,
+      "source": "AP Environmental Science, AP Central course page unit exam weightings"
+    },
+    {
+      "axis": "unit",
+      "code": "6",
+      "section": "mc",
+      "min": 10,
+      "max": 15,
+      "source": "AP Environmental Science, AP Central course page unit exam weightings"
+    },
+    {
+      "axis": "unit",
+      "code": "7",
+      "section": "mc",
+      "min": 7,
+      "max": 10,
+      "source": "AP Environmental Science, AP Central course page unit exam weightings"
+    },
+    {
+      "axis": "unit",
+      "code": "8",
+      "section": "mc",
+      "min": 7,
+      "max": 10,
+      "source": "AP Environmental Science, AP Central course page unit exam weightings"
+    },
+    {
+      "axis": "unit",
+      "code": "9",
+      "section": "mc",
+      "min": 15,
+      "max": 20,
+      "source": "AP Environmental Science, AP Central course page unit exam weightings"
+    }
+  ],
+  "units": [
+    {
+      "code": "1",
+      "title": "The Living World: Ecosystems",
+      "officialClassPeriods": "~14–15",
+      "topics": [
+        {
+          "code": "1.1",
+          "title": "Introduction to Ecosystems",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.1#1",
+              "label": "Biotic and abiotic components of an ecosystem",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.1#2",
+              "label": "Levels of ecological organization",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "1.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.2",
+          "title": "Terrestrial Biomes",
+          "scope": "both",
+          "skills": [
+            "1",
+            "2"
+          ],
+          "requires": [
+            "1.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.2#1",
+              "label": "Climate and vegetation of major biomes",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.2#2",
+              "label": "Matching climatographs to biomes",
+              "kind": "representation",
+              "skills": [
+                "2"
+              ],
+              "requires": [
+                "1.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.3",
+          "title": "Aquatic Biomes",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "1.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.3#1",
+              "label": "Freshwater and marine zones by salinity and depth",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.3#2",
+              "label": "Light and nutrient limits in aquatic systems",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "1.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.4",
+          "title": "The Carbon Cycle",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "1.3"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "1.4#1",
+              "label": "Carbon reservoirs and fluxes",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.4#2",
+              "label": "Photosynthesis and respiration as carbon pathways",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "1.4#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.4#3",
+              "label": "Human disturbance of carbon storage",
+              "kind": "misconception",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "1.4#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.5",
+          "title": "The Nitrogen Cycle",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "1.4"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.5#1",
+              "label": "Nitrogen fixation, nitrification and denitrification",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.5#2",
+              "label": "Role of bacteria in nitrogen transformations",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "1.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.6",
+          "title": "The Phosphorus Cycle",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "1.5"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.6#1",
+              "label": "Slow rock-based phosphorus cycling",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.6#2",
+              "label": "Phosphorus as a limiting nutrient",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "1.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.7",
+          "title": "The Hydrologic (Water) Cycle",
+          "scope": "both",
+          "skills": [
+            "1",
+            "2"
+          ],
+          "requires": [
+            "1.6"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.7#1",
+              "label": "Evaporation, transpiration, runoff and infiltration",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.7#2",
+              "label": "Tracing water through a diagram of the cycle",
+              "kind": "representation",
+              "skills": [
+                "2"
+              ],
+              "requires": [
+                "1.7#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.8",
+          "title": "Primary Productivity",
+          "scope": "both",
+          "skills": [
+            "1",
+            "5"
+          ],
+          "requires": [
+            "1.7"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.8#1",
+              "label": "Gross versus net primary productivity",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.8#2",
+              "label": "Comparing productivity across biomes",
+              "kind": "skill",
+              "skills": [
+                "5"
+              ],
+              "requires": [
+                "1.8#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.9",
+          "title": "Trophic Levels",
+          "scope": "both",
+          "skills": [
+            "1",
+            "5"
+          ],
+          "requires": [
+            "1.8"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.9#1",
+              "label": "Producers, consumers and decomposers",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.9#2",
+              "label": "Assigning organisms to trophic levels",
+              "kind": "skill",
+              "skills": [
+                "5"
+              ],
+              "requires": [
+                "1.9#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.10",
+          "title": "Energy Flow and the 10% Rule",
+          "scope": "both",
+          "skills": [
+            "1",
+            "6"
+          ],
+          "requires": [
+            "1.9"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.10#1",
+              "label": "Energy lost between trophic levels",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.10#2",
+              "label": "Calculating energy available to higher levels",
+              "kind": "skill",
+              "skills": [
+                "6"
+              ],
+              "requires": [
+                "1.10#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.11",
+          "title": "Food Chains and Food Webs",
+          "scope": "both",
+          "skills": [
+            "2",
+            "1"
+          ],
+          "requires": [
+            "1.10"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.11#1",
+              "label": "Reading food webs and predicting disruption",
+              "kind": "representation",
+              "skills": [
+                "2"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.11#2",
+              "label": "Food chains versus food webs",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "1.11#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "2",
+      "title": "The Living World: Biodiversity",
+      "officialClassPeriods": "~11–12",
+      "topics": [
+        {
+          "code": "2.1",
+          "title": "Introduction to Biodiversity",
+          "scope": "both",
+          "skills": [
+            "1",
+            "5"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.1#1",
+              "label": "Genetic, species and ecosystem diversity",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.1#2",
+              "label": "Measuring biodiversity in a sample",
+              "kind": "skill",
+              "skills": [
+                "5"
+              ],
+              "requires": [
+                "2.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.2",
+          "title": "Ecosystem Services",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "2.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.2#1",
+              "label": "Provisioning, regulating, cultural and supporting services",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.2#2",
+              "label": "Valuing services lost by habitat damage",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "2.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.3",
+          "title": "Island Biogeography",
+          "scope": "both",
+          "skills": [
+            "1",
+            "2"
+          ],
+          "requires": [
+            "2.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.3#1",
+              "label": "Island size and distance effects on species number",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.3#2",
+              "label": "Predicting richness from an island graph",
+              "kind": "representation",
+              "skills": [
+                "2"
+              ],
+              "requires": [
+                "2.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.4",
+          "title": "Ecological Tolerance",
+          "scope": "both",
+          "skills": [
+            "1",
+            "2"
+          ],
+          "requires": [
+            "2.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.4#1",
+              "label": "Range of tolerance for environmental factors",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.4#2",
+              "label": "Reading tolerance curves",
+              "kind": "representation",
+              "skills": [
+                "2"
+              ],
+              "requires": [
+                "2.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.5",
+          "title": "Natural Disruptions to Ecosystems",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "2.4"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.5#1",
+              "label": "Fires, floods and storms as disturbances",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.5#2",
+              "label": "Ecosystem resilience after disturbance",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "2.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.6",
+          "title": "Adaptations",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "2.5"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.6#1",
+              "label": "Structural, behavioral and physiological adaptations",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.6#2",
+              "label": "Adaptation versus acclimation confusion",
+              "kind": "misconception",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "2.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.7",
+          "title": "Ecological Succession",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "2.6"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.7#1",
+              "label": "Primary versus secondary succession",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.7#2",
+              "label": "Pioneer species and climax communities",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "2.7#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "3",
+      "title": "Populations",
+      "officialClassPeriods": "~12–13",
+      "topics": [
+        {
+          "code": "3.1",
+          "title": "Generalist and Specialist Species",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.1#1",
+              "label": "Niche breadth and resource use",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.1#2",
+              "label": "Why specialists are more vulnerable to change",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "3.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.2",
+          "title": "K-Selected and r-Selected Species",
+          "scope": "both",
+          "skills": [
+            "1",
+            "5"
+          ],
+          "requires": [
+            "3.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.2#1",
+              "label": "Life-history traits of K and r strategists",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.2#2",
+              "label": "Classifying species from their traits",
+              "kind": "skill",
+              "skills": [
+                "5"
+              ],
+              "requires": [
+                "3.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.3",
+          "title": "Survivorship Curves",
+          "scope": "both",
+          "skills": [
+            "2",
+            "5"
+          ],
+          "requires": [
+            "3.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.3#1",
+              "label": "Type I, II and III survivorship curves",
+              "kind": "representation",
+              "skills": [
+                "2"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.3#2",
+              "label": "Matching organisms to curves",
+              "kind": "skill",
+              "skills": [
+                "5"
+              ],
+              "requires": [
+                "3.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.4",
+          "title": "Carrying Capacity",
+          "scope": "both",
+          "skills": [
+            "1",
+            "2"
+          ],
+          "requires": [
+            "3.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.4#1",
+              "label": "Limiting factors and carrying capacity",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.4#2",
+              "label": "Reading logistic growth graphs",
+              "kind": "representation",
+              "skills": [
+                "2"
+              ],
+              "requires": [
+                "3.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.5",
+          "title": "Population Growth and Resource Availability",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "3.4"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "3.5#1",
+              "label": "Exponential versus logistic growth",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.5#2",
+              "label": "Density-dependent and density-independent factors",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "3.5#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.5#3",
+              "label": "Overshoot and population crash",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "3.5#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.6",
+          "title": "Age Structure Diagrams",
+          "scope": "both",
+          "skills": [
+            "2",
+            "5"
+          ],
+          "requires": [
+            "3.5"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.6#1",
+              "label": "Pyramid shapes and growth prediction",
+              "kind": "representation",
+              "skills": [
+                "2"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.6#2",
+              "label": "Comparing age structures across countries",
+              "kind": "skill",
+              "skills": [
+                "5"
+              ],
+              "requires": [
+                "3.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.7",
+          "title": "Total Fertility Rate",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "3.6"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.7#1",
+              "label": "Replacement-level fertility",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.7#2",
+              "label": "Factors that lower fertility",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "3.7#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.8",
+          "title": "Human Population Dynamics",
+          "scope": "both",
+          "skills": [
+            "6",
+            "5"
+          ],
+          "requires": [
+            "3.7"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.8#1",
+              "label": "Rule of 70 and doubling time",
+              "kind": "skill",
+              "skills": [
+                "6"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.8#2",
+              "label": "Birth, death, immigration and emigration rates",
+              "kind": "skill",
+              "skills": [
+                "5"
+              ],
+              "requires": [
+                "3.8#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.9",
+          "title": "Demographic Transition",
+          "scope": "both",
+          "skills": [
+            "1",
+            "5"
+          ],
+          "requires": [
+            "3.8"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.9#1",
+              "label": "Stages of the demographic transition model",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.9#2",
+              "label": "Placing countries in transition stages",
+              "kind": "skill",
+              "skills": [
+                "5"
+              ],
+              "requires": [
+                "3.9#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "4",
+      "title": "Earth Systems and Resources",
+      "officialClassPeriods": "~11–12",
+      "topics": [
+        {
+          "code": "4.1",
+          "title": "Plate Tectonics",
+          "scope": "both",
+          "skills": [
+            "1",
+            "2"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "4.1#1",
+              "label": "Plate boundaries and associated hazards",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.1#2",
+              "label": "Mapping earthquakes and volcanoes to boundaries",
+              "kind": "representation",
+              "skills": [
+                "2"
+              ],
+              "requires": [
+                "4.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "4.2",
+          "title": "Soil Formation and Erosion",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "4.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "4.2#1",
+              "label": "Parent material, climate and time in soil formation",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.2#2",
+              "label": "Erosion control practices",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "4.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "4.3",
+          "title": "Soil Composition and Properties",
+          "scope": "both",
+          "skills": [
+            "1",
+            "2"
+          ],
+          "requires": [
+            "4.2"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "4.3#1",
+              "label": "Soil horizons and texture",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.3#2",
+              "label": "Using the soil texture triangle",
+              "kind": "representation",
+              "skills": [
+                "2"
+              ],
+              "requires": [
+                "4.3#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.3#3",
+              "label": "Water retention and permeability",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "4.3#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "4.4",
+          "title": "Earth's Atmosphere",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "4.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "4.4#1",
+              "label": "Layers of the atmosphere",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.4#2",
+              "label": "Composition of the troposphere and stratosphere",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "4.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "4.5",
+          "title": "Global Wind Patterns",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "4.4"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "4.5#1",
+              "label": "Hadley cells and trade winds",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.5#2",
+              "label": "Coriolis effect on wind direction",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "4.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "4.6",
+          "title": "Watersheds",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "4.5"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "4.6#1",
+              "label": "Watershed boundaries and drainage",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.6#2",
+              "label": "Pollution moving through a watershed",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "4.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "4.7",
+          "title": "Solar Radiation and Earth's Seasons",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "4.6"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "4.7#1",
+              "label": "Tilt of Earth's axis and seasons",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.7#2",
+              "label": "Latitude and solar intensity",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "4.7#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "4.8",
+          "title": "Earth's Geography and Climate",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "4.7"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "4.8#1",
+              "label": "Rain shadows and mountain effects",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.8#2",
+              "label": "Ocean influence on coastal climate",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "4.8#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "4.9",
+          "title": "El Niño and La Niña",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "4.8"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "4.9#1",
+              "label": "ENSO changes in ocean temperature and winds",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.9#2",
+              "label": "Effects on fisheries and weather",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "4.9#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "5",
+      "title": "Land and Water Use",
+      "officialClassPeriods": "~18–19",
+      "topics": [
+        {
+          "code": "5.1",
+          "title": "The Tragedy of the Commons",
+          "scope": "both",
+          "skills": [
+            "1",
+            "5"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.1#1",
+              "label": "Shared resources and overuse",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.1#2",
+              "label": "Policies to avoid commons depletion",
+              "kind": "skill",
+              "skills": [
+                "5"
+              ],
+              "requires": [
+                "5.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.2",
+          "title": "Clearcutting",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "5.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.2#1",
+              "label": "Environmental costs of clearcutting",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.2#2",
+              "label": "Forest regrowth and erosion after harvest",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "5.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.3",
+          "title": "The Green Revolution",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "5.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.3#1",
+              "label": "High-yield crops and inputs",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.3#2",
+              "label": "Benefits and costs of the Green Revolution",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "5.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.4",
+          "title": "Impacts of Agricultural Practices",
+          "scope": "both",
+          "skills": [
+            "1",
+            "5"
+          ],
+          "requires": [
+            "5.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.4#1",
+              "label": "Tilling, fertilization and monoculture impacts",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.4#2",
+              "label": "Reducing soil loss in farming",
+              "kind": "skill",
+              "skills": [
+                "5"
+              ],
+              "requires": [
+                "5.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.5",
+          "title": "Irrigation Methods",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "5.4"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.5#1",
+              "label": "Flood, furrow, spray and drip irrigation compared",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.5#2",
+              "label": "Efficiency and salinization trade-offs",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "5.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.6",
+          "title": "Pest Control Methods",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "5.5"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.6#1",
+              "label": "Pesticides and resistance",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.6#2",
+              "label": "Biological and physical controls",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "5.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.7",
+          "title": "Meat Production Methods",
+          "scope": "both",
+          "skills": [
+            "1",
+            "5"
+          ],
+          "requires": [
+            "5.6"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.7#1",
+              "label": "Feedlots versus rotational grazing",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.7#2",
+              "label": "Resource use per calorie of meat",
+              "kind": "skill",
+              "skills": [
+                "5"
+              ],
+              "requires": [
+                "5.7#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.8",
+          "title": "Impacts of Overfishing",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "5.7"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.8#1",
+              "label": "Fishing methods and bycatch",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.8#2",
+              "label": "Collapse of fish stocks",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "5.8#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.9",
+          "title": "Impacts of Mining",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "5.8"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.9#1",
+              "label": "Surface and subsurface mining methods",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.9#2",
+              "label": "Mine drainage and land reclamation",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "5.9#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.10",
+          "title": "Impacts of Urbanization",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "5.9"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.10#1",
+              "label": "Urban sprawl and impervious surfaces",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.10#2",
+              "label": "Urban heat island and runoff",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "5.10#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.11",
+          "title": "Ecological Footprints",
+          "scope": "both",
+          "skills": [
+            "1",
+            "5"
+          ],
+          "requires": [
+            "5.10"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.11#1",
+              "label": "Components of an ecological footprint",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.11#2",
+              "label": "Comparing footprints between countries",
+              "kind": "skill",
+              "skills": [
+                "5"
+              ],
+              "requires": [
+                "5.11#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.12",
+          "title": "Introduction to Sustainability",
+          "scope": "both",
+          "skills": [
+            "1",
+            "5"
+          ],
+          "requires": [
+            "5.11"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.12#1",
+              "label": "Meeting present needs without harming future generations",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.12#2",
+              "label": "Evaluating sustainable versus unsustainable use",
+              "kind": "skill",
+              "skills": [
+                "5"
+              ],
+              "requires": [
+                "5.12#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.13",
+          "title": "Methods to Reduce Urban Runoff",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "5.12"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.13#1",
+              "label": "Permeable pavement and green roofs",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.13#2",
+              "label": "Retention basins and runoff control",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "5.13#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.14",
+          "title": "Integrated Pest Management",
+          "scope": "both",
+          "skills": [
+            "1",
+            "5"
+          ],
+          "requires": [
+            "5.13"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.14#1",
+              "label": "IPM tactics combining biological and chemical control",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.14#2",
+              "label": "Weighing IPM costs and benefits",
+              "kind": "skill",
+              "skills": [
+                "5"
+              ],
+              "requires": [
+                "5.14#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.15",
+          "title": "Sustainable Agriculture",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "5.14"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.15#1",
+              "label": "Crop rotation, cover crops and no-till",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.15#2",
+              "label": "Contour plowing and terracing",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "5.15#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.16",
+          "title": "Aquaculture",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "5.15"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.16#1",
+              "label": "Benefits and impacts of fish farming",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.16#2",
+              "label": "Pollution and disease from fish farms",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "5.16#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.17",
+          "title": "Sustainable Forestry",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "5.16"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.17#1",
+              "label": "Selective cutting and certified wood",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.17#2",
+              "label": "Forest management that sustains yield",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "5.17#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "6",
+      "title": "Energy Resources and Consumption",
+      "officialClassPeriods": "~16–17",
+      "topics": [
+        {
+          "code": "6.1",
+          "title": "Renewable and Nonrenewable Resources",
+          "scope": "both",
+          "skills": [
+            "1",
+            "5"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.1#1",
+              "label": "Renewable versus nonrenewable energy",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.1#2",
+              "label": "Classifying energy sources",
+              "kind": "skill",
+              "skills": [
+                "5"
+              ],
+              "requires": [
+                "6.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.2",
+          "title": "Global Energy Consumption",
+          "scope": "both",
+          "skills": [
+            "1",
+            "2"
+          ],
+          "requires": [
+            "6.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.2#1",
+              "label": "Energy use trends by income level",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.2#2",
+              "label": "Reading energy consumption graphs",
+              "kind": "representation",
+              "skills": [
+                "2"
+              ],
+              "requires": [
+                "6.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.3",
+          "title": "Fuel Types and Uses",
+          "scope": "both",
+          "skills": [
+            "1",
+            "5"
+          ],
+          "requires": [
+            "6.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.3#1",
+              "label": "Fossil, biomass and nuclear fuels compared",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.3#2",
+              "label": "Matching fuels to uses",
+              "kind": "skill",
+              "skills": [
+                "5"
+              ],
+              "requires": [
+                "6.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.4",
+          "title": "Distribution of Natural Energy Resources",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "6.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.4#1",
+              "label": "Where coal, oil and gas reserves are found",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.4#2",
+              "label": "Reserve size and production concepts",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "6.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.5",
+          "title": "Fossil Fuels",
+          "scope": "both",
+          "skills": [
+            "1",
+            "5"
+          ],
+          "requires": [
+            "6.4"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "6.5#1",
+              "label": "Formation of coal, oil and natural gas",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.5#2",
+              "label": "Extraction methods and environmental impacts",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "6.5#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.5#3",
+              "label": "Combustion efficiency and emissions",
+              "kind": "skill",
+              "skills": [
+                "5"
+              ],
+              "requires": [
+                "6.5#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.6",
+          "title": "Nuclear Power",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "6.5"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.6#1",
+              "label": "Fission process and reactor basics",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.6#2",
+              "label": "Radioactive waste and accident risk",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "6.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.7",
+          "title": "Energy from Biomass",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "6.6"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.7#1",
+              "label": "Wood, ethanol and biodiesel",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.7#2",
+              "label": "Carbon neutrality claims of biofuels",
+              "kind": "misconception",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "6.7#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.8",
+          "title": "Solar Energy",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "6.7"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.8#1",
+              "label": "Photovoltaic versus active and passive solar",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.8#2",
+              "label": "Advantages and limits of solar power",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "6.8#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.9",
+          "title": "Hydroelectric Power",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "6.8"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.9#1",
+              "label": "Dams, turbines and run-of-river designs",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.9#2",
+              "label": "Ecological impacts of dams",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "6.9#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.10",
+          "title": "Geothermal Energy",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "6.9"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.10#1",
+              "label": "Heat extraction from Earth's interior",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.10#2",
+              "label": "Site limits for geothermal use",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "6.10#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.11",
+          "title": "Hydrogen Fuel Cell",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "6.10"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.11#1",
+              "label": "Fuel cell operation and water as product",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.11#2",
+              "label": "Sources of hydrogen",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "6.11#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.12",
+          "title": "Wind Energy",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "6.11"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.12#1",
+              "label": "Turbine siting and capacity",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.12#2",
+              "label": "Wildlife and aesthetic concerns",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "6.12#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.13",
+          "title": "Energy Conservation",
+          "scope": "both",
+          "skills": [
+            "1",
+            "6"
+          ],
+          "requires": [
+            "6.12"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.13#1",
+              "label": "Home and transportation efficiency measures",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.13#2",
+              "label": "Calculating energy savings",
+              "kind": "skill",
+              "skills": [
+                "6"
+              ],
+              "requires": [
+                "6.13#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "7",
+      "title": "Atmospheric Pollution",
+      "officialClassPeriods": "~11–12",
+      "topics": [
+        {
+          "code": "7.1",
+          "title": "Introduction to Air Pollution",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "7.1#1",
+              "label": "Primary versus secondary pollutants",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.1#2",
+              "label": "Criteria air pollutants and sources",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "7.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "7.2",
+          "title": "Photochemical Smog",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "7.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "7.2#1",
+              "label": "Formation from nitrogen oxides and VOCs",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.2#2",
+              "label": "Smog conditions and health effects",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "7.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "7.3",
+          "title": "Thermal Inversion",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "7.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "7.3#1",
+              "label": "Temperature inversion trapping pollutants",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.3#2",
+              "label": "Geography that promotes inversions",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "7.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "7.4",
+          "title": "Atmospheric CO2 and Particulates",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "7.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "7.4#1",
+              "label": "Combustion sources of CO2 and particulates",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.4#2",
+              "label": "Health effects of particulate matter",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "7.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "7.5",
+          "title": "Indoor Air Pollutants",
+          "scope": "both",
+          "skills": [
+            "1",
+            "5"
+          ],
+          "requires": [
+            "7.4"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "7.5#1",
+              "label": "Radon, mold, asbestos and carbon monoxide",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.5#2",
+              "label": "Reducing indoor exposure",
+              "kind": "skill",
+              "skills": [
+                "5"
+              ],
+              "requires": [
+                "7.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "7.6",
+          "title": "Reduction of Air Pollutants",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "7.5"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "7.6#1",
+              "label": "Scrubbers, catalytic converters and regulation",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.6#2",
+              "label": "Clean Air Act approaches",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "7.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "7.7",
+          "title": "Acid Rain",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "7.6"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "7.7#1",
+              "label": "SO2 and NOx precursors of acid deposition",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.7#2",
+              "label": "Effects on lakes, soils and buildings",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "7.7#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "7.8",
+          "title": "Noise Pollution",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "7.7"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "7.8#1",
+              "label": "Sources and measures of noise",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.8#2",
+              "label": "Effects on humans and wildlife",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "7.8#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "8",
+      "title": "Aquatic and Terrestrial Pollution",
+      "officialClassPeriods": "~19–20",
+      "topics": [
+        {
+          "code": "8.1",
+          "title": "Sources of Pollution",
+          "scope": "both",
+          "skills": [
+            "1",
+            "5"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "8.1#1",
+              "label": "Point versus nonpoint sources",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.1#2",
+              "label": "Identifying pollution sources in a scenario",
+              "kind": "skill",
+              "skills": [
+                "5"
+              ],
+              "requires": [
+                "8.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.2",
+          "title": "Human Impacts on Ecosystems",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "8.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "8.2#1",
+              "label": "Habitat loss and fragmentation",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.2#2",
+              "label": "Pollution effects across ecosystems",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "8.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.3",
+          "title": "Endocrine Disruptors",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "8.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "8.3#1",
+              "label": "Chemicals that mimic hormones",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.3#2",
+              "label": "Wildlife effects of endocrine disruption",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "8.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.4",
+          "title": "Human Impacts on Wetlands and Mangroves",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "8.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "8.4#1",
+              "label": "Wetland functions and loss",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.4#2",
+              "label": "Mangrove protection of coasts",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "8.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.5",
+          "title": "Eutrophication",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "8.4"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "8.5#1",
+              "label": "Nutrient runoff and algal blooms",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.5#2",
+              "label": "Oxygen depletion and dead zones",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "8.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.6",
+          "title": "Thermal Pollution",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "8.5"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "8.6#1",
+              "label": "Heated discharge and dissolved oxygen",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.6#2",
+              "label": "Effects on aquatic organisms",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "8.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.7",
+          "title": "Persistent Organic Pollutants (POPs)",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "8.6"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "8.7#1",
+              "label": "Long-lived toxic compounds",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.7#2",
+              "label": "Why POPs spread globally",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "8.7#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.8",
+          "title": "Bioaccumulation and Biomagnification",
+          "scope": "both",
+          "skills": [
+            "1",
+            "6"
+          ],
+          "requires": [
+            "8.7"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "8.8#1",
+              "label": "Toxins accumulating up the food chain",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.8#2",
+              "label": "Calculating concentration increases by trophic level",
+              "kind": "skill",
+              "skills": [
+                "6"
+              ],
+              "requires": [
+                "8.8#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.9",
+          "title": "Solid Waste Disposal",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "8.8"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "8.9#1",
+              "label": "Landfills and incineration",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.9#2",
+              "label": "Landfill design and leachate",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "8.9#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.10",
+          "title": "Waste Reduction Methods",
+          "scope": "both",
+          "skills": [
+            "1",
+            "5"
+          ],
+          "requires": [
+            "8.9"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "8.10#1",
+              "label": "Reduce, reuse, recycle and composting",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.10#2",
+              "label": "Comparing waste management options",
+              "kind": "skill",
+              "skills": [
+                "5"
+              ],
+              "requires": [
+                "8.10#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.11",
+          "title": "Sewage Treatment",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "8.10"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "8.11#1",
+              "label": "Primary, secondary and tertiary treatment",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.11#2",
+              "label": "Septic systems versus municipal plants",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "8.11#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.12",
+          "title": "Lethal Dose 50% (LD50)",
+          "scope": "both",
+          "skills": [
+            "1",
+            "5"
+          ],
+          "requires": [
+            "8.11"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "8.12#1",
+              "label": "Meaning of LD50 values",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.12#2",
+              "label": "Comparing toxicity using LD50",
+              "kind": "skill",
+              "skills": [
+                "5"
+              ],
+              "requires": [
+                "8.12#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.13",
+          "title": "Dose Response Curve",
+          "scope": "both",
+          "skills": [
+            "2",
+            "5"
+          ],
+          "requires": [
+            "8.12"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "8.13#1",
+              "label": "Threshold and dose-response relationships",
+              "kind": "representation",
+              "skills": [
+                "2"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.13#2",
+              "label": "Reading dose-response graphs",
+              "kind": "skill",
+              "skills": [
+                "5"
+              ],
+              "requires": [
+                "8.13#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.14",
+          "title": "Pollution and Human Health",
+          "scope": "both",
+          "skills": [
+            "1",
+            "5"
+          ],
+          "requires": [
+            "8.13"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "8.14#1",
+              "label": "Pollution-linked diseases and risk",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.14#2",
+              "label": "Evaluating exposure risk data",
+              "kind": "skill",
+              "skills": [
+                "5"
+              ],
+              "requires": [
+                "8.14#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.15",
+          "title": "Pathogens and Infectious Diseases",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "8.14"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "8.15#1",
+              "label": "Waterborne and vector-borne disease",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.15#2",
+              "label": "Preventing spread of pathogens",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "8.15#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "9",
+      "title": "Global Change",
+      "officialClassPeriods": "~19–20",
+      "topics": [
+        {
+          "code": "9.1",
+          "title": "Stratospheric Ozone Depletion",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "9.1#1",
+              "label": "CFCs and ozone destruction",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.1#2",
+              "label": "UV effects on organisms",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "9.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "9.2",
+          "title": "Reducing Ozone Depletion",
+          "scope": "both",
+          "skills": [
+            "1",
+            "5"
+          ],
+          "requires": [
+            "9.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "9.2#1",
+              "label": "Montreal Protocol and CFC replacement",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.2#2",
+              "label": "Evaluating international agreements",
+              "kind": "skill",
+              "skills": [
+                "5"
+              ],
+              "requires": [
+                "9.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "9.3",
+          "title": "The Greenhouse Effect",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "9.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "9.3#1",
+              "label": "Greenhouse gases trapping heat",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.3#2",
+              "label": "Natural versus enhanced greenhouse effect",
+              "kind": "misconception",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "9.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "9.4",
+          "title": "Increases in the Greenhouse Gases",
+          "scope": "both",
+          "skills": [
+            "1",
+            "5"
+          ],
+          "requires": [
+            "9.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "9.4#1",
+              "label": "Human sources of CO2, CH4 and N2O",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.4#2",
+              "label": "Global warming potential comparisons",
+              "kind": "skill",
+              "skills": [
+                "5"
+              ],
+              "requires": [
+                "9.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "9.5",
+          "title": "Global Climate Change",
+          "scope": "both",
+          "skills": [
+            "2",
+            "1"
+          ],
+          "requires": [
+            "9.4"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "9.5#1",
+              "label": "Evidence from ice cores and temperature records",
+              "kind": "representation",
+              "skills": [
+                "2"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.5#2",
+              "label": "Climate effects on ecosystems and people",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "9.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "9.6",
+          "title": "Ocean Warming",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "9.5"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "9.6#1",
+              "label": "Thermal expansion and sea level rise",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.6#2",
+              "label": "Coral bleaching and shifts in marine life",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "9.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "9.7",
+          "title": "Ocean Acidification",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "9.6"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "9.7#1",
+              "label": "CO2 dissolving in seawater",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.7#2",
+              "label": "Effects on shell-forming organisms",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "9.7#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "9.8",
+          "title": "Invasive Species",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "9.7"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "9.8#1",
+              "label": "Characteristics of invasive species",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.8#2",
+              "label": "Ecological and economic harm",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "9.8#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "9.9",
+          "title": "Endangered Species",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "9.8"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "9.9#1",
+              "label": "Causes of species endangerment",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.9#2",
+              "label": "Conservation laws and strategies",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "9.9#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "9.10",
+          "title": "Human Impacts on Biodiversity",
+          "scope": "both",
+          "skills": [
+            "1",
+            "5"
+          ],
+          "requires": [
+            "9.9"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "9.10#1",
+              "label": "HIPPCO drivers of biodiversity loss",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.10#2",
+              "label": "Evaluating conservation solutions",
+              "kind": "skill",
+              "skills": [
+                "5"
+              ],
+              "requires": [
+                "9.10#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

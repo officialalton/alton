@@ -1,0 +1,1494 @@
+{
+  "schemaVersion": 1,
+  "subject": {
+    "apCode": "ap_computer_science_principles",
+    "name": "AP Computer Science Principles",
+    "family": "computer_science_principles",
+    "edition": "ced-2027",
+    "cedVersion": "AP Computer Science Principles CED (Course Framework V.1, (c)2023; exam: 70 MC/120 min + Create performance task + 2 written response questions/60 min)",
+    "examYear": 2027,
+    "sourceUrl": "https://apcentral.collegeboard.org/media/pdf/ap-computer-science-principles-course-and-exam-description.pdf",
+    "officialTopicCodes": true,
+    "designNotes": "CSP is organized into 5 Big Ideas rather than units; each Big Idea is stored as a 'unit' with the Big Idea's MC weight (CED Exam Weighting by Big Idea: 1 Creative Development 10-13%, 2 Data 17-22%, 3 Algorithms and Programming 30-35%, 4 Computer Systems and Networks 11-15%, 5 Impact of Computing 21-26%). Topic codes (1.1-5.6, 35 topics) from the CED topic tables; class periods are not stated per Big Idea and are left empty. Exam (read 2026-10-20): End-of-course exam Section I 70 MC, 120 min, 70% (57 single-select, 5 single-select on a computing-innovation reading passage, 8 multi-select with 2 answers; 4 options); Section II 30% = Create performance task (9+ hours in class: code, video, Personalized Project Reference) scored outside exam day, plus 2 written response questions (WR1, 2a, 2b, 2c) in 60 minutes using the student's Personalized Project Reference. No calculator concept; Exam Reference Sheet provided. Skills are the CED's practice skills 1.A-6.C (Practice 6 is not assessed in MC). Per-topic and per-sub-keyword skills are an ALTON editorial mapping (one skill per sub-keyword chosen by kind and content), not the CED's per-topic suggested skills. Sub-keywords, kinds, requires and estLessons are ALTON editorial designs, not CED content. Topic titles are the CED's where read from the CED course-at-a-glance; where the extracted text was truncated they are close paraphrases."
+  },
+  "skills": [
+    {
+      "code": "1.A",
+      "category": "Practice 1: Computational Solution Design",
+      "label": "Investigate the situation, context, or task."
+    },
+    {
+      "code": "1.B",
+      "category": "Practice 1: Computational Solution Design",
+      "label": "Determine and design an appropriate method or approach to achieve the purpose."
+    },
+    {
+      "code": "1.C",
+      "category": "Practice 1: Computational Solution Design",
+      "label": "Explain how collaboration affects the development of a solution."
+    },
+    {
+      "code": "1.D",
+      "category": "Practice 1: Computational Solution Design",
+      "label": "Evaluate solution options based on legal and ethical factors."
+    },
+    {
+      "code": "2.A",
+      "category": "Practice 2: Algorithms and Program Development",
+      "label": "Represent algorithmic processes without using a programming language."
+    },
+    {
+      "code": "2.B",
+      "category": "Practice 2: Algorithms and Program Development",
+      "label": "Implement and apply an algorithm."
+    },
+    {
+      "code": "3.A",
+      "category": "Practice 3: Abstraction in Program Development",
+      "label": "Generalize data sources through variables."
+    },
+    {
+      "code": "3.B",
+      "category": "Practice 3: Abstraction in Program Development",
+      "label": "Use abstraction to manage complexity in a program."
+    },
+    {
+      "code": "3.C",
+      "category": "Practice 3: Abstraction in Program Development",
+      "label": "Explain how abstraction manages complexity."
+    },
+    {
+      "code": "4.A",
+      "category": "Practice 4: Code Analysis",
+      "label": "Explain how a code segment or program functions."
+    },
+    {
+      "code": "4.B",
+      "category": "Practice 4: Code Analysis",
+      "label": "Determine the result of code segments."
+    },
+    {
+      "code": "4.C",
+      "category": "Practice 4: Code Analysis",
+      "label": "Identify and correct errors in algorithms and programs, including error discovery through testing."
+    },
+    {
+      "code": "5.A",
+      "category": "Practice 5: Computing Innovations",
+      "label": "Explain how computing systems work."
+    },
+    {
+      "code": "5.B",
+      "category": "Practice 5: Computing Innovations",
+      "label": "Explain how knowledge can be generated from data."
+    },
+    {
+      "code": "5.C",
+      "category": "Practice 5: Computing Innovations",
+      "label": "Describe the impact of a computing innovation."
+    },
+    {
+      "code": "5.D",
+      "category": "Practice 5: Computing Innovations",
+      "label": "Describe the impact of gathering data."
+    },
+    {
+      "code": "5.E",
+      "category": "Practice 5: Computing Innovations",
+      "label": "Evaluate the use of computing based on legal and ethical factors."
+    },
+    {
+      "code": "6.A",
+      "category": "Practice 6: Responsible Computing",
+      "label": "Collaborate in the development of solutions."
+    },
+    {
+      "code": "6.B",
+      "category": "Practice 6: Responsible Computing",
+      "label": "Use safe and secure methods when using computing devices."
+    },
+    {
+      "code": "6.C",
+      "category": "Practice 6: Responsible Computing",
+      "label": "Acknowledge the intellectual property of others."
+    }
+  ],
+  "weights": [
+    {
+      "axis": "unit",
+      "code": "1",
+      "section": "mc",
+      "min": 10,
+      "max": 13,
+      "source": "AP Computer Science Principles CED (Course Framework V.1, (c)2023), Exam Weighting for the Multiple-Choice Section (by Big Idea)"
+    },
+    {
+      "axis": "unit",
+      "code": "2",
+      "section": "mc",
+      "min": 17,
+      "max": 22,
+      "source": "AP Computer Science Principles CED (Course Framework V.1, (c)2023), Exam Weighting for the Multiple-Choice Section (by Big Idea)"
+    },
+    {
+      "axis": "unit",
+      "code": "3",
+      "section": "mc",
+      "min": 30,
+      "max": 35,
+      "source": "AP Computer Science Principles CED (Course Framework V.1, (c)2023), Exam Weighting for the Multiple-Choice Section (by Big Idea)"
+    },
+    {
+      "axis": "unit",
+      "code": "4",
+      "section": "mc",
+      "min": 11,
+      "max": 15,
+      "source": "AP Computer Science Principles CED (Course Framework V.1, (c)2023), Exam Weighting for the Multiple-Choice Section (by Big Idea)"
+    },
+    {
+      "axis": "unit",
+      "code": "5",
+      "section": "mc",
+      "min": 21,
+      "max": 26,
+      "source": "AP Computer Science Principles CED (Course Framework V.1, (c)2023), Exam Weighting for the Multiple-Choice Section (by Big Idea)"
+    }
+  ],
+  "units": [
+    {
+      "code": "1",
+      "title": "Creative Development",
+      "officialClassPeriods": null,
+      "topics": [
+        {
+          "code": "1.1",
+          "title": "Collaboration",
+          "scope": "both",
+          "skills": [
+            "1.C",
+            "4.C"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.1#1",
+              "label": "Benefits of working with diverse collaborators",
+              "kind": "concept",
+              "skills": [
+                "1.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.1#2",
+              "label": "Pair programming and peer feedback",
+              "kind": "skill",
+              "skills": [
+                "4.C"
+              ],
+              "requires": [
+                "1.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.2",
+          "title": "Program Function and Purpose",
+          "scope": "both",
+          "skills": [
+            "1.C"
+          ],
+          "requires": [
+            "1.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.2#1",
+              "label": "Describing what a program does and why",
+              "kind": "concept",
+              "skills": [
+                "1.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.2#2",
+              "label": "Events and event-driven programs",
+              "kind": "concept",
+              "skills": [
+                "1.C"
+              ],
+              "requires": [
+                "1.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.3",
+          "title": "Program Design and Development",
+          "scope": "both",
+          "skills": [
+            "1.C",
+            "4.C"
+          ],
+          "requires": [
+            "1.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.3#1",
+              "label": "Iterative and incremental development",
+              "kind": "concept",
+              "skills": [
+                "1.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.3#2",
+              "label": "Planning with requirements and prototypes",
+              "kind": "skill",
+              "skills": [
+                "4.C"
+              ],
+              "requires": [
+                "1.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.4",
+          "title": "Identifying and Correcting Errors",
+          "scope": "both",
+          "skills": [
+            "1.C",
+            "4.C"
+          ],
+          "requires": [
+            "1.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.4#1",
+              "label": "Syntax, logic, run-time and overflow errors",
+              "kind": "concept",
+              "skills": [
+                "1.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.4#2",
+              "label": "Testing with representative inputs",
+              "kind": "skill",
+              "skills": [
+                "4.C"
+              ],
+              "requires": [
+                "1.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "2",
+      "title": "Data",
+      "officialClassPeriods": null,
+      "topics": [
+        {
+          "code": "2.1",
+          "title": "Binary Numbers",
+          "scope": "both",
+          "skills": [
+            "5.B",
+            "3.A"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.1#1",
+              "label": "Converting between binary and decimal",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.1#2",
+              "label": "Bits, bytes and number of values representable",
+              "kind": "concept",
+              "skills": [
+                "3.A"
+              ],
+              "requires": [
+                "2.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.2",
+          "title": "Data Compression",
+          "scope": "both",
+          "skills": [
+            "3.A",
+            "5.B"
+          ],
+          "requires": [
+            "2.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.2#1",
+              "label": "Lossless versus lossy compression",
+              "kind": "concept",
+              "skills": [
+                "3.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.2#2",
+              "label": "Tradeoffs between size and quality",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [
+                "2.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.3",
+          "title": "Extracting Information from Data",
+          "scope": "both",
+          "skills": [
+            "5.B"
+          ],
+          "requires": [
+            "2.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.3#1",
+              "label": "Finding trends and patterns in data sets",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.3#2",
+              "label": "Correlation versus causation and data bias",
+              "kind": "misconception",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [
+                "2.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.4",
+          "title": "Using Programs with Data",
+          "scope": "both",
+          "skills": [
+            "5.B",
+            "3.A"
+          ],
+          "requires": [
+            "2.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.4#1",
+              "label": "Filtering and transforming large data sets",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.4#2",
+              "label": "Metadata and its uses",
+              "kind": "concept",
+              "skills": [
+                "3.A"
+              ],
+              "requires": [
+                "2.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "3",
+      "title": "Algorithms and Programming",
+      "officialClassPeriods": null,
+      "topics": [
+        {
+          "code": "3.1",
+          "title": "Variables and Assignments",
+          "scope": "both",
+          "skills": [
+            "4.B",
+            "3.C"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.1#1",
+              "label": "Assignment statements and tracing values",
+              "kind": "skill",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.1#2",
+              "label": "Variables as named storage",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "3.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.2",
+          "title": "Data Abstraction",
+          "scope": "both",
+          "skills": [
+            "3.C"
+          ],
+          "requires": [
+            "3.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.2#1",
+              "label": "Using lists and data structures to manage complexity",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.2#2",
+              "label": "Naming and abstraction in program design",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "3.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.3",
+          "title": "Mathematical Expressions",
+          "scope": "both",
+          "skills": [
+            "4.B",
+            "3.C"
+          ],
+          "requires": [
+            "3.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.3#1",
+              "label": "Arithmetic operators and the MOD operator",
+              "kind": "skill",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.3#2",
+              "label": "Order of operations in code",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "3.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.4",
+          "title": "Strings",
+          "scope": "both",
+          "skills": [
+            "4.B",
+            "3.C"
+          ],
+          "requires": [
+            "3.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.4#1",
+              "label": "Concatenation and substrings",
+              "kind": "skill",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.4#2",
+              "label": "Strings as ordered characters",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "3.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.5",
+          "title": "Boolean Expressions",
+          "scope": "both",
+          "skills": [
+            "3.C",
+            "4.B"
+          ],
+          "requires": [
+            "3.4"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.5#1",
+              "label": "Relational and logical operators",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.5#2",
+              "label": "Evaluating compound Boolean expressions",
+              "kind": "skill",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [
+                "3.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.6",
+          "title": "Conditionals",
+          "scope": "both",
+          "skills": [
+            "3.C",
+            "4.B"
+          ],
+          "requires": [
+            "3.5"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.6#1",
+              "label": "If and if-else statements",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.6#2",
+              "label": "Tracing branching code",
+              "kind": "skill",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [
+                "3.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.7",
+          "title": "Nested Conditionals",
+          "scope": "both",
+          "skills": [
+            "3.C",
+            "4.B"
+          ],
+          "requires": [
+            "3.6"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.7#1",
+              "label": "Nested selection structures",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.7#2",
+              "label": "Rewriting nested conditionals as compound conditions",
+              "kind": "skill",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [
+                "3.7#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.8",
+          "title": "Iteration",
+          "scope": "both",
+          "skills": [
+            "3.C",
+            "4.B",
+            "4.C"
+          ],
+          "requires": [
+            "3.7"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "3.8#1",
+              "label": "REPEAT n TIMES and REPEAT UNTIL loops",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.8#2",
+              "label": "Tracing loop execution and counting iterations",
+              "kind": "skill",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [
+                "3.8#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.8#3",
+              "label": "Infinite loops and off-by-one errors",
+              "kind": "misconception",
+              "skills": [
+                "4.C"
+              ],
+              "requires": [
+                "3.8#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.9",
+          "title": "Developing Algorithms",
+          "scope": "both",
+          "skills": [
+            "3.C",
+            "4.B"
+          ],
+          "requires": [
+            "3.8"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.9#1",
+              "label": "Sequencing, selection and iteration in algorithms",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.9#2",
+              "label": "Equivalent algorithms with different structure",
+              "kind": "skill",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [
+                "3.9#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.10",
+          "title": "Lists",
+          "scope": "both",
+          "skills": [
+            "4.B"
+          ],
+          "requires": [
+            "3.9"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.10#1",
+              "label": "Indexing, appending and removing list elements",
+              "kind": "skill",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.10#2",
+              "label": "Traversing a list with a loop",
+              "kind": "skill",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [
+                "3.10#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.11",
+          "title": "Binary Search",
+          "scope": "both",
+          "skills": [
+            "3.C",
+            "4.B"
+          ],
+          "requires": [
+            "3.10"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.11#1",
+              "label": "Binary search on sorted data",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.11#2",
+              "label": "Number of steps for binary versus linear search",
+              "kind": "skill",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [
+                "3.11#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.12",
+          "title": "Calling Procedures",
+          "scope": "both",
+          "skills": [
+            "3.C",
+            "4.B"
+          ],
+          "requires": [
+            "3.11"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.12#1",
+              "label": "Parameters and return values",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.12#2",
+              "label": "Tracing procedure calls",
+              "kind": "skill",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [
+                "3.12#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.13",
+          "title": "Developing Procedures",
+          "scope": "both",
+          "skills": [
+            "3.C",
+            "4.B"
+          ],
+          "requires": [
+            "3.12"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.13#1",
+              "label": "Procedural abstraction",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.13#2",
+              "label": "Writing a procedure to avoid duplicate code",
+              "kind": "skill",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [
+                "3.13#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.14",
+          "title": "Libraries",
+          "scope": "both",
+          "skills": [
+            "3.C"
+          ],
+          "requires": [
+            "3.13"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.14#1",
+              "label": "Using application program interfaces",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.14#2",
+              "label": "Documentation of libraries and APIs",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "3.14#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.15",
+          "title": "Random Values",
+          "scope": "both",
+          "skills": [
+            "3.C",
+            "4.B"
+          ],
+          "requires": [
+            "3.14"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.15#1",
+              "label": "Generating random numbers in programs",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.15#2",
+              "label": "Possible outcomes of random expressions",
+              "kind": "skill",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [
+                "3.15#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.16",
+          "title": "Simulations",
+          "scope": "both",
+          "skills": [
+            "3.C",
+            "4.C"
+          ],
+          "requires": [
+            "3.15"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.16#1",
+              "label": "Simplification and abstraction in simulations",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.16#2",
+              "label": "Limits and biases of simulations",
+              "kind": "misconception",
+              "skills": [
+                "4.C"
+              ],
+              "requires": [
+                "3.16#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.17",
+          "title": "Algorithmic Efficiency",
+          "scope": "both",
+          "skills": [
+            "3.C"
+          ],
+          "requires": [
+            "3.16"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.17#1",
+              "label": "Reasonable versus unreasonable running time",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.17#2",
+              "label": "Heuristics for hard problems",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "3.17#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.18",
+          "title": "Undecidable Problems",
+          "scope": "both",
+          "skills": [
+            "3.C"
+          ],
+          "requires": [
+            "3.17"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.18#1",
+              "label": "Problems no algorithm can solve in general",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.18#2",
+              "label": "The halting problem as an example",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "3.18#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "4",
+      "title": "Computer Systems and Networks",
+      "officialClassPeriods": null,
+      "topics": [
+        {
+          "code": "4.1",
+          "title": "The Internet",
+          "scope": "both",
+          "skills": [
+            "5.A",
+            "4.C"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "4.1#1",
+              "label": "Packets, routers and protocols such as IP and TCP",
+              "kind": "concept",
+              "skills": [
+                "5.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.1#2",
+              "label": "Internet versus World Wide Web",
+              "kind": "misconception",
+              "skills": [
+                "4.C"
+              ],
+              "requires": [
+                "4.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "4.2",
+          "title": "Fault Tolerance",
+          "scope": "both",
+          "skills": [
+            "5.A",
+            "4.B"
+          ],
+          "requires": [
+            "4.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "4.2#1",
+              "label": "Redundant paths and reliability",
+              "kind": "concept",
+              "skills": [
+                "5.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.2#2",
+              "label": "Effect of a failed connection on delivery",
+              "kind": "skill",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [
+                "4.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "4.3",
+          "title": "Parallel and Distributed Computing",
+          "scope": "both",
+          "skills": [
+            "5.A",
+            "4.B"
+          ],
+          "requires": [
+            "4.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "4.3#1",
+              "label": "Sequential, parallel and distributed processing",
+              "kind": "concept",
+              "skills": [
+                "5.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.3#2",
+              "label": "Speedup from parallel portions of a task",
+              "kind": "skill",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [
+                "4.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "5",
+      "title": "Impact of Computing",
+      "officialClassPeriods": null,
+      "topics": [
+        {
+          "code": "5.1",
+          "title": "Beneficial and Harmful Effects",
+          "scope": "both",
+          "skills": [
+            "5.C",
+            "5.E"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.1#1",
+              "label": "Intended and unintended effects of computing innovations",
+              "kind": "concept",
+              "skills": [
+                "5.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.1#2",
+              "label": "Analyzing a computing innovation reading passage",
+              "kind": "skill",
+              "skills": [
+                "5.E"
+              ],
+              "requires": [
+                "5.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.2",
+          "title": "Digital Divide",
+          "scope": "both",
+          "skills": [
+            "5.C"
+          ],
+          "requires": [
+            "5.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.2#1",
+              "label": "Access to technology and its causes",
+              "kind": "concept",
+              "skills": [
+                "5.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.2#2",
+              "label": "Effects of unequal access",
+              "kind": "concept",
+              "skills": [
+                "5.C"
+              ],
+              "requires": [
+                "5.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.3",
+          "title": "Computing Bias",
+          "scope": "both",
+          "skills": [
+            "5.C",
+            "5.E"
+          ],
+          "requires": [
+            "5.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.3#1",
+              "label": "Bias in data and algorithms",
+              "kind": "concept",
+              "skills": [
+                "5.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.3#2",
+              "label": "Reducing bias in computing innovations",
+              "kind": "skill",
+              "skills": [
+                "5.E"
+              ],
+              "requires": [
+                "5.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.4",
+          "title": "Crowdsourcing",
+          "scope": "both",
+          "skills": [
+            "5.C"
+          ],
+          "requires": [
+            "5.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.4#1",
+              "label": "Crowdsourcing and citizen science",
+              "kind": "concept",
+              "skills": [
+                "5.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.4#2",
+              "label": "Benefits and risks of crowdsourced data",
+              "kind": "concept",
+              "skills": [
+                "5.C"
+              ],
+              "requires": [
+                "5.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.5",
+          "title": "Legal and Ethical Concerns",
+          "scope": "both",
+          "skills": [
+            "5.C"
+          ],
+          "requires": [
+            "5.4"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.5#1",
+              "label": "Copyright, open source and Creative Commons",
+              "kind": "concept",
+              "skills": [
+                "5.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.5#2",
+              "label": "Intellectual property in programming",
+              "kind": "concept",
+              "skills": [
+                "5.C"
+              ],
+              "requires": [
+                "5.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.6",
+          "title": "Safe Computing",
+          "scope": "both",
+          "skills": [
+            "5.C"
+          ],
+          "requires": [
+            "5.5"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "5.6#1",
+              "label": "Phishing, malware and keylogging",
+              "kind": "concept",
+              "skills": [
+                "5.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.6#2",
+              "label": "Encryption and multifactor authentication",
+              "kind": "concept",
+              "skills": [
+                "5.C"
+              ],
+              "requires": [
+                "5.6#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.6#3",
+              "label": "Personally identifiable information risks",
+              "kind": "concept",
+              "skills": [
+                "5.C"
+              ],
+              "requires": [
+                "5.6#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

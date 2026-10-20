@@ -3,9 +3,9 @@ import { AP_FRQ_DELIVERY, apFrqIsPaper } from "./frq-delivery";
 import { INK_MAX_H, INK_MIN_H, INK_MAX_STROKES, clampBoardHeight, eraseStrokesNear, inkSizeProblem, simplifyPoints, strokesToSvg, svgDataUrl, type InkStroke } from "./frq-ink";
 
 describe("FRQ 전달 방식 표", () => {
-  it("종이 7과목 / 디지털 3과목(Statistics·CS A·English Language)", () => {
+  it("종이 11과목(기존 7 + Physics 2·Physics C 2·Precalculus) / 디지털(Statistics·CS A·English Language 등)", () => {
     expect(Object.entries(AP_FRQ_DELIVERY).filter(([, m]) => m === "paper").map(([k]) => k).sort()).toEqual(
-      ["ap_biology", "ap_calculus_ab", "ap_calculus_bc", "ap_chemistry", "ap_macroeconomics", "ap_microeconomics", "ap_physics_1"]);
+      ["ap_biology", "ap_calculus_ab", "ap_calculus_bc", "ap_chemistry", "ap_macroeconomics", "ap_microeconomics", "ap_physics_1", "ap_physics_2", "ap_physics_c_electricity_and_magnetism", "ap_physics_c_mechanics", "ap_precalculus"]);
     for (const k of ["ap_statistics", "ap_computer_science_a", "ap_english_language"]) expect(apFrqIsPaper(k)).toBe(false);
     expect(apFrqIsPaper(null)).toBe(false);
     expect(apFrqIsPaper("ap_unknown")).toBe(false);

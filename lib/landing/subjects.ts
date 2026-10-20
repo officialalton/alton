@@ -1,6 +1,6 @@
 import { unstable_cache } from "next/cache";
 import { createAdminClient } from "@/lib/supabase-admin";
-import { AP_LAYOUTS, AP_SUBJECT_NAME, CALCULATOR_TEXT, type ApSection } from "@/lib/ap-exam/layouts";
+import { AP_LAYOUTS, AP_SUBJECT_NAME, CALCULATOR_TEXT, isApPublicSubject, type ApSection } from "@/lib/ap-exam/layouts";
 import { SUBJECT_UNITS, type SubjectUnit } from "./subject-units.generated";
 
 // 공개 과목 소개 페이지의 데이터 원본. 정적 메타(시험 구성·단원)는 저장소에서, 공개 세트 이름은 서버에서 읽기 전용으로.
@@ -27,7 +27,7 @@ export function subjectCodeFromSlug(slug: string): string | null {
   if (slug === SAT_SLUG) return SAT_SLUG;
   if (!/^ap-[a-z0-9-]+$/.test(slug)) return null;
   const code = slug.replace(/-/g, "_");
-  return Object.prototype.hasOwnProperty.call(AP_LAYOUTS, code) ? code : null;
+  return Object.prototype.hasOwnProperty.call(AP_LAYOUTS, code) && isApPublicSubject(code) ? code : null; // 세트 공개 전 신규 과목은 404
 }
 
 const SAT_ROWS: SubjectRow[] = [
@@ -77,7 +77,7 @@ export function getSubjectMeta(slug: string): SubjectMeta | null {
 }
 
 export function allSubjectSlugs(): string[] {
-  return [...Object.keys(AP_SUBJECT_NAME).map(apSlug), SAT_SLUG];
+  return [...Object.keys(AP_SUBJECT_NAME).filter(isApPublicSubject).map(apSlug), SAT_SLUG];
 }
 
 export type PublicSet = { name: string };
