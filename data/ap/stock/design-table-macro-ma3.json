@@ -1,0 +1,2487 @@
+{
+ "generatedAt": "2026-10-20",
+ "subject": "ap_macroeconomics",
+ "report": "data/ap/stock/exact-assign-macro-ma3.json",
+ "published": "data/ap/stock/assembled/macro-ma1-ma2-v3.json",
+ "summary": {
+  "items": 63,
+  "publishedCompared": 126,
+  "archetypeSharedWithPublished": 0,
+  "familySharedWithPublished": 0,
+  "maxNearestSimilarity": 0.492,
+  "siblingsInsideNewSet": 0,
+  "unitCounts": {
+   "1": 6,
+   "2": 9,
+   "3": 14,
+   "4": 12,
+   "5": 15,
+   "6": 7
+  },
+  "stimulusCounts": {
+   "none": 54,
+   "table": 7,
+   "graph": 2
+  }
+ },
+ "items": [
+  {
+   "position": 1,
+   "set": "MA3",
+   "key": "macro-hard-a:ap_macroeconomics-m03-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "1",
+    "topic": "1.2",
+    "concept": "a one-good technology advance rotates the PPC"
+   },
+   "function": {
+    "skill": "3.C",
+    "response": "multiple choice",
+    "judgment": [
+     "carry the result of each step into the next step"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Find the new maximum output of consumer goods after the percentage increase",
+     "Find consumer goods on the old straight-line PPC at the given capital-goods level",
+     "Find consumer goods on the new PPC at the same capital-goods level",
+     "Subtract the old quantity from the new quantity"
+    ],
+    "verification": "exact fractions along the linear PPC vs sympy solution of both curve equations at the fixed capital level"
+   },
+   "duplication": {
+    "archetype": "ma_h_ppc_rotate",
+    "family": "fam:macro-hard-a:ap_macroeconomics-m03-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-a:ap_macroeconomics-m04-k1",
+    "nearest_similarity": 0.194,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 2,
+   "set": "MA3",
+   "key": "macro-p2-b:ap_macroeconomics-m06-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "1",
+    "topic": "1.6",
+    "concept": "shortage or surplus is the gap between quantities demanded and supplied at a given price"
+   },
+   "function": {
+    "skill": "3.C",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: shortage or surplus is the gap between quantities demanded and supplied at a given price",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "exact fractions vs sympy solution of the equilibrium and gap"
+   },
+   "duplication": {
+    "archetype": "ma_shortage_numeric",
+    "family": "fam:macro-p2-b:ap_macroeconomics-m06-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-b:ap_macroeconomics-m13-k1",
+    "nearest_similarity": 0.222,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 3,
+   "set": "MA3",
+   "key": "macro-x-a:ap_macroeconomics-m01-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "1",
+    "topic": "1.6",
+    "concept": "binding price ceilings cause shortages and binding price floors cause surpluses"
+   },
+   "function": {
+    "skill": "1.D",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: binding price ceilings cause shortages and binding price floors cause surpluses",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenarios; each wrong sentence reverses the quantity effect or ignores that a control binds only on one side of equilibrium"
+   },
+   "duplication": {
+    "archetype": "ma_price_control_effects",
+    "family": "fam:macro-x-a:ap_macroeconomics-m01-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-a:ap_macroeconomics-m06-k0",
+    "nearest_similarity": 0.184,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 4,
+   "set": "MA3",
+   "key": "macro-x-a:ap_macroeconomics-m02-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "1",
+    "topic": "1.4",
+    "concept": "classify related goods from the direction of the cross-price effect"
+   },
+   "function": {
+    "skill": "1.B",
+    "response": "multiple choice",
+    "judgment": [
+     "read the direction of the change in demand and name the relationship"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: classify related goods from the direction of the cross-price effect",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted pairs with a sign rule"
+   },
+   "duplication": {
+    "archetype": "ma_related_goods_id",
+    "family": "fam:macro-x-a:ap_macroeconomics-m02-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-b:ap_macroeconomics-m05-k0",
+    "nearest_similarity": 0.186,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 5,
+   "set": "MA3",
+   "key": "macro-x-b:ap_macroeconomics-m12-k1",
+   "kind": "mc",
+   "content": {
+    "unit": "1",
+    "topic": "1.3",
+    "concept": "gains from trade rest on comparative advantage"
+   },
+   "function": {
+    "skill": "2.B",
+    "response": "multiple choice",
+    "judgment": [
+     "separate absolute from comparative advantage"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: gains from trade rest on comparative advantage",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenario; the key explains the gain with opportunity cost"
+   },
+   "duplication": {
+    "archetype": "ma_absolute_vs_comparative",
+    "family": "fam:macro-x-b:ap_macroeconomics-m12-k1",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-a:ap_macroeconomics-m04-k1",
+    "nearest_similarity": 0.234,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 6,
+   "set": "MA3",
+   "key": "macro-x-a:ap_macroeconomics-m06-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.1",
+    "concept": "GDP counts the market value of final goods and services produced in the current year"
+   },
+   "function": {
+    "skill": "1.B",
+    "response": "multiple choice",
+    "judgment": [
+     "decide whether each transaction is a final good produced this year"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: GDP counts the market value of final goods and services produced in the current year",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted cases; each wrong option is a used good, transfer, financial asset, or intermediate good"
+   },
+   "duplication": {
+    "archetype": "ma_gdp_inclusion_cases",
+    "family": "fam:macro-x-a:ap_macroeconomics-m06-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-a:ap_macroeconomics-m08-k0",
+    "nearest_similarity": 0.234,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 7,
+   "set": "MA3",
+   "key": "macro-x-a:ap_macroeconomics-m07-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.6",
+    "concept": "real growth is approximately nominal growth minus inflation"
+   },
+   "function": {
+    "skill": "1.D",
+    "response": "multiple choice",
+    "judgment": [
+     "compare nominal and real growth rates"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: real growth is approximately nominal growth minus inflation",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted numbers; the key subtracts inflation from nominal growth"
+   },
+   "duplication": {
+    "archetype": "ma_real_nominal_compare",
+    "family": "fam:macro-x-a:ap_macroeconomics-m07-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-a:ap_macroeconomics-m12-k1",
+    "nearest_similarity": 0.216,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 8,
+   "set": "MA3",
+   "key": "macro-x-a:ap_macroeconomics-m08-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.4",
+    "concept": "disinflation is a lower positive inflation rate, not a falling price level"
+   },
+   "function": {
+    "skill": "1.D",
+    "response": "multiple choice",
+    "judgment": [
+     "distinguish the inflation rate from the price level"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: disinflation is a lower positive inflation rate, not a falling price level",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenario"
+   },
+   "duplication": {
+    "archetype": "ma_inflation_vs_price_level",
+    "family": "fam:macro-x-a:ap_macroeconomics-m08-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-a:ap_macroeconomics-m12-k1",
+    "nearest_similarity": 0.19,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 9,
+   "set": "MA3",
+   "key": "macro-x-a:ap_macroeconomics-m19-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.1",
+    "concept": "Y = C + I + G + NX solved for net exports"
+   },
+   "function": {
+    "skill": "2.C",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: Y = C + I + G + NX solved for net exports",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "exact subtraction vs sympy"
+   },
+   "duplication": {
+    "archetype": "ma_nx_identity",
+    "family": "fam:macro-x-a:ap_macroeconomics-m19-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-b:ap_macroeconomics-m07-k0",
+    "nearest_similarity": 0.179,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 10,
+   "set": "MA3",
+   "key": "macro-x-a:ap_macroeconomics-m43-k1",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.7",
+    "concept": "identify business-cycle phases on a real GDP graph"
+   },
+   "function": {
+    "skill": "1.B",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "graph",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: identify business-cycle phases on a real GDP graph",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "slope signs and extrema of the plotted series"
+   },
+   "duplication": {
+    "archetype": "ma_business_cycle_graph",
+    "family": "fam:macro-x-a:ap_macroeconomics-m43-k1",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-b:ap_macroeconomics-m27-k1",
+    "nearest_similarity": 0.186,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 11,
+   "set": "MA3",
+   "key": "macro-x-a:ap_macroeconomics-m47-k1",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.4",
+    "concept": "GDP deflator links nominal and real GDP"
+   },
+   "function": {
+    "skill": "1.C",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: GDP deflator links nominal and real GDP",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "exact fraction vs sympy rational"
+   },
+   "duplication": {
+    "archetype": "ma_deflator",
+    "family": "fam:macro-x-a:ap_macroeconomics-m47-k1",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-a:ap_macroeconomics-m16-k0",
+    "nearest_similarity": 0.36,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 12,
+   "set": "MA3",
+   "key": "macro-x-a:ap_macroeconomics-m48-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.5",
+    "concept": "unanticipated inflation redistributes real purchasing power"
+   },
+   "function": {
+    "skill": "3.A",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: unanticipated inflation redistributes real purchasing power",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenario table with real-versus-nominal reasoning"
+   },
+   "duplication": {
+    "archetype": "ma_inflation_winners",
+    "family": "fam:macro-x-a:ap_macroeconomics-m48-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-b:ap_macroeconomics-m32-k0",
+    "nearest_similarity": 0.203,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 13,
+   "set": "MA3",
+   "key": "macro-x-a:ap_macroeconomics-m53-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.3",
+    "concept": "who is counted as unemployed and how leaving the labor force changes the rate"
+   },
+   "function": {
+    "skill": "3.A",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: who is counted as unemployed and how leaving the labor force changes the rate",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted statements; each wrong sentence misapplies the official definition"
+   },
+   "duplication": {
+    "archetype": "ma_unemp_measure",
+    "family": "fam:macro-x-a:ap_macroeconomics-m53-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-b:ap_macroeconomics-m09-k0",
+    "nearest_similarity": 0.129,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 14,
+   "set": "MA3",
+   "key": "macro-p1-a:ap_macroeconomics-m10-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.5",
+    "concept": "recessionary versus inflationary gap from the position of AD-SRAS equilibrium relative to LRAS"
+   },
+   "function": {
+    "skill": "3.A",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "graph",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: recessionary versus inflationary gap from the position of AD-SRAS equilibrium relative to LRAS",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "parameters solved exactly and by sympy; Y0 compared to Yf"
+   },
+   "duplication": {
+    "archetype": "ma_adas_gap_graph",
+    "family": "fam:macro-p1-a:ap_macroeconomics-m10-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-b:ap_macroeconomics-m27-k0",
+    "nearest_similarity": 0.365,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 15,
+   "set": "MA3",
+   "key": "macro-p2-b:ap_macroeconomics-m18-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.1",
+    "concept": "why the aggregate demand curve slopes downward: wealth, interest-rate, and exchange-rate effects"
+   },
+   "function": {
+    "skill": "1.A",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: why the aggregate demand curve slopes downward: wealth, interest-rate, and exchange-rate effects",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted statements"
+   },
+   "duplication": {
+    "archetype": "ma_ad_slope",
+    "family": "fam:macro-p2-b:ap_macroeconomics-m18-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-a:ap_macroeconomics-m40-k0",
+    "nearest_similarity": 0.266,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 16,
+   "set": "MA3",
+   "key": "macro-x-a:ap_macroeconomics-m09-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.1",
+    "concept": "determinants of aggregate demand versus movements along the curve"
+   },
+   "function": {
+    "skill": "3.A",
+    "response": "multiple choice",
+    "judgment": [
+     "separate a shift of AD from a movement along AD and from a supply-side event"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: determinants of aggregate demand versus movements along the curve",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted statements; each wrong option is a movement along AD, a supply shock, or a leftward shift"
+   },
+   "duplication": {
+    "archetype": "ma_ad_shift_events",
+    "family": "fam:macro-x-a:ap_macroeconomics-m09-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-a:ap_macroeconomics-m18-k0",
+    "nearest_similarity": 0.338,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 17,
+   "set": "MA3",
+   "key": "macro-x-a:ap_macroeconomics-m10-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.3",
+    "concept": "input-cost changes shift short-run aggregate supply"
+   },
+   "function": {
+    "skill": "3.A",
+    "response": "multiple choice",
+    "judgment": [
+     "identify which curve shifts and trace the effect on price level and real GDP"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: input-cost changes shift short-run aggregate supply",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted statement; wrong options confuse AD with SRAS or LRAS"
+   },
+   "duplication": {
+    "archetype": "ma_sras_shift_events",
+    "family": "fam:macro-x-a:ap_macroeconomics-m10-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p3:ap_macroeconomics-m01-k1",
+    "nearest_similarity": 0.338,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 18,
+   "set": "MA3",
+   "key": "macro-x-a:ap_macroeconomics-m11-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.4",
+    "concept": "long-run aggregate supply shifts only with changes in resources, technology, or institutions"
+   },
+   "function": {
+    "skill": "1.B",
+    "response": "multiple choice",
+    "judgment": [
+     "identify an event that changes potential output"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: long-run aggregate supply shifts only with changes in resources, technology, or institutions",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted statement; wrong options are temporary or demand-side events"
+   },
+   "duplication": {
+    "archetype": "ma_lras_potential_events",
+    "family": "fam:macro-x-a:ap_macroeconomics-m11-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-b:ap_macroeconomics-m50-k1",
+    "nearest_similarity": 0.214,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 19,
+   "set": "MA3",
+   "key": "macro-x-a:ap_macroeconomics-m13-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.2",
+    "concept": "the spending multiplier is a series of rounds of re-spending"
+   },
+   "function": {
+    "skill": "3.C",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: the spending multiplier is a series of rounds of re-spending",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "exact fraction vs sympy geometric sum"
+   },
+   "duplication": {
+    "archetype": "ma_multiplier_rounds",
+    "family": "fam:macro-x-a:ap_macroeconomics-m13-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-hard-b:ap_macroeconomics-m04-k1",
+    "nearest_similarity": 0.204,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 20,
+   "set": "MA3",
+   "key": "macro-x-a:ap_macroeconomics-m18-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.7",
+    "concept": "self-correction of a recessionary gap through falling input prices"
+   },
+   "function": {
+    "skill": "2.A",
+    "response": "multiple choice",
+    "judgment": [
+     "explain the adjustment from a gap back to full employment"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: self-correction of a recessionary gap through falling input prices",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted statement; wrong options reverse the wage response"
+   },
+   "duplication": {
+    "archetype": "ma_supply_self_correction",
+    "family": "fam:macro-x-a:ap_macroeconomics-m18-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-a:ap_macroeconomics-m27-k0",
+    "nearest_similarity": 0.492,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 21,
+   "set": "MA3",
+   "key": "macro-x-b:ap_macroeconomics-m01-k1",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.8",
+    "concept": "lags make discretionary fiscal policy hard to time"
+   },
+   "function": {
+    "skill": "2.B",
+    "response": "multiple choice",
+    "judgment": [
+     "explain the timing problem of discretionary policy"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: lags make discretionary fiscal policy hard to time",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenarios; wrong options misattribute the lag or deny that policy affects demand"
+   },
+   "duplication": {
+    "archetype": "ma_fiscal_lags",
+    "family": "fam:macro-x-b:ap_macroeconomics-m01-k1",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p1-a:ap_macroeconomics-m15-k1",
+    "nearest_similarity": 0.136,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 22,
+   "set": "MA3",
+   "key": "macro-x-b:ap_macroeconomics-m02-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.7",
+    "concept": "self-correction of an inflationary gap through rising input prices"
+   },
+   "function": {
+    "skill": "3.A",
+    "response": "multiple choice",
+    "judgment": [
+     "trace the adjustment from an inflationary gap to long-run equilibrium"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: self-correction of an inflationary gap through rising input prices",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenario; wrong options reverse the wage response or shift the wrong curve"
+   },
+   "duplication": {
+    "archetype": "ma_inflationary_gap_adjust",
+    "family": "fam:macro-x-b:ap_macroeconomics-m02-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-a:ap_macroeconomics-m27-k1",
+    "nearest_similarity": 0.418,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 23,
+   "set": "MA3",
+   "key": "macro-x-b:ap_macroeconomics-m03-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.9",
+    "concept": "automatic stabilizers raise the deficit in a recession"
+   },
+   "function": {
+    "skill": "3.A",
+    "response": "multiple choice",
+    "judgment": [
+     "explain why the deficit changes without any new legislation"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: automatic stabilizers raise the deficit in a recession",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenario; wrong options credit new laws or rate changes"
+   },
+   "duplication": {
+    "archetype": "ma_deficit_in_recession",
+    "family": "fam:macro-x-b:ap_macroeconomics-m03-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-a:ap_macroeconomics-m30-k0",
+    "nearest_similarity": 0.261,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 24,
+   "set": "MA3",
+   "key": "macro-x-b:ap_macroeconomics-m13-k1",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.2",
+    "concept": "government purchases have a larger multiplier than lump-sum taxes"
+   },
+   "function": {
+    "skill": "1.D",
+    "response": "multiple choice",
+    "judgment": [
+     "compare the first-round effects and the multipliers"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: government purchases have a larger multiplier than lump-sum taxes",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted statement; wrong options reverse the comparison or ignore saving"
+   },
+   "duplication": {
+    "archetype": "ma_tax_vs_spending_compare",
+    "family": "fam:macro-x-b:ap_macroeconomics-m13-k1",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-b:ap_macroeconomics-m49-k1",
+    "nearest_similarity": 0.161,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 25,
+   "set": "MA3",
+   "key": "macro-x-b:ap_macroeconomics-m14-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.8",
+    "concept": "expansionary and contractionary fiscal actions for a gap"
+   },
+   "function": {
+    "skill": "1.D",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: expansionary and contractionary fiscal actions for a gap",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted statements; wrong options are the opposite action or a monetary tool"
+   },
+   "duplication": {
+    "archetype": "ma_fiscal_policy_compare",
+    "family": "fam:macro-x-b:ap_macroeconomics-m14-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-a:ap_macroeconomics-m38-k0",
+    "nearest_similarity": 0.233,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 26,
+   "set": "MA3",
+   "key": "macro-x-b:ap_macroeconomics-m15-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.9",
+    "concept": "automatic stabilizers versus discretionary fiscal policy"
+   },
+   "function": {
+    "skill": "1.D",
+    "response": "multiple choice",
+    "judgment": [
+     "compare how each type of policy is triggered"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: automatic stabilizers versus discretionary fiscal policy",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted statement; wrong options reverse the definitions"
+   },
+   "duplication": {
+    "archetype": "ma_stabilizer_vs_discretionary",
+    "family": "fam:macro-x-b:ap_macroeconomics-m15-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-b:ap_macroeconomics-m30-k0",
+    "nearest_similarity": 0.165,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 27,
+   "set": "MA3",
+   "key": "macro-x-b:ap_macroeconomics-m16-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.6",
+    "concept": "supply shocks pose a trade-off for demand-side policy"
+   },
+   "function": {
+    "skill": "2.B",
+    "response": "multiple choice",
+    "judgment": [
+     "explain the dilemma with two variables moving against each other"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: supply shocks pose a trade-off for demand-side policy",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted statement; wrong options say there is no trade-off"
+   },
+   "duplication": {
+    "archetype": "ma_stagflation_dilemma",
+    "family": "fam:macro-x-b:ap_macroeconomics-m16-k2",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-hard-b:ap_macroeconomics-m06-k0",
+    "nearest_similarity": 0.25,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 28,
+   "set": "MA3",
+   "key": "macro-hard-a:ap_macroeconomics-m11-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.6",
+    "concept": "an open market operation changes reserves, the money supply through the multiplier, and the nominal interest rate"
+   },
+   "function": {
+    "skill": "3.C",
+    "response": "multiple choice",
+    "judgment": [
+     "carry the change in reserves through the multiplier and then into the money market"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Find the direction and size of the change in reserves",
+     "Apply the money multiplier to find the maximum change in the money supply",
+     "Move the money supply curve in the money market",
+     "Find the change in the nominal interest rate"
+    ],
+    "verification": "exact multiplier 1/rr vs round-by-round lending simulation; interest-rate direction from the vertical-supply money market rule"
+   },
+   "duplication": {
+    "archetype": "ma_h_omo_chain",
+    "family": "fam:macro-hard-a:ap_macroeconomics-m11-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-hard-a:ap_macroeconomics-m14-k1",
+    "nearest_similarity": 0.453,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 29,
+   "set": "MA3",
+   "key": "macro-p1-a:ap_macroeconomics-m14-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.4",
+    "concept": "simple money multiplier = 1/required reserve ratio"
+   },
+   "function": {
+    "skill": "3.C",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: simple money multiplier = 1/required reserve ratio",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "exact fraction vs sympy rational"
+   },
+   "duplication": {
+    "archetype": "ma_money_multiplier",
+    "family": "fam:macro-p1-a:ap_macroeconomics-m14-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-b:ap_macroeconomics-m35-k1",
+    "nearest_similarity": 0.304,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 30,
+   "set": "MA3",
+   "key": "macro-p2-a:ap_macroeconomics-m34-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.4",
+    "concept": "required versus excess reserves from a bank balance sheet"
+   },
+   "function": {
+    "skill": "3.C",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: required versus excess reserves from a bank balance sheet",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "exact fractions vs sympy rationals"
+   },
+   "duplication": {
+    "archetype": "ma_bank_balance_sheet",
+    "family": "fam:macro-p2-a:ap_macroeconomics-m34-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-hard-a:ap_macroeconomics-m14-k1",
+    "nearest_similarity": 0.151,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 31,
+   "set": "MA3",
+   "key": "macro-x-a:ap_macroeconomics-m21-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.4",
+    "concept": "excess reserves equal total reserves minus required reserves"
+   },
+   "function": {
+    "skill": "1.C",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: excess reserves equal total reserves minus required reserves",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "exact fraction vs sympy rational"
+   },
+   "duplication": {
+    "archetype": "ma_excess_reserves_calc",
+    "family": "fam:macro-x-a:ap_macroeconomics-m21-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-hard-a:ap_macroeconomics-m14-k1",
+    "nearest_similarity": 0.289,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 32,
+   "set": "MA3",
+   "key": "macro-x-a:ap_macroeconomics-m22-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.4",
+    "concept": "bank lending creates checkable deposits and raises the money supply"
+   },
+   "function": {
+    "skill": "2.B",
+    "response": "multiple choice",
+    "judgment": [
+     "explain the effect with deposit creation and reserves"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: bank lending creates checkable deposits and raises the money supply",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenario; wrong options confuse lending with removing money from the system"
+   },
+   "duplication": {
+    "archetype": "ma_lend_excess_reserves_effect",
+    "family": "fam:macro-x-a:ap_macroeconomics-m22-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-b:ap_macroeconomics-m34-k0",
+    "nearest_similarity": 0.179,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 33,
+   "set": "MA3",
+   "key": "macro-x-a:ap_macroeconomics-m25-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.2",
+    "concept": "investment depends on the real interest rate (nominal rate minus expected inflation)"
+   },
+   "function": {
+    "skill": "2.C",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: investment depends on the real interest rate (nominal rate minus expected inflation)",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "count of returns above the real rate vs sympy subtraction"
+   },
+   "duplication": {
+    "archetype": "ma_real_rate_projects",
+    "family": "fam:macro-x-a:ap_macroeconomics-m25-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-hard-a:ap_macroeconomics-m12-k1",
+    "nearest_similarity": 0.3,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 34,
+   "set": "MA3",
+   "key": "macro-x-a:ap_macroeconomics-m26-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.4",
+    "concept": "one bank can lend its excess reserves, which are deposits minus required reserves"
+   },
+   "function": {
+    "skill": "3.C",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: one bank can lend its excess reserves, which are deposits minus required reserves",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "exact fraction vs sympy rational"
+   },
+   "duplication": {
+    "archetype": "ma_first_bank_loan",
+    "family": "fam:macro-x-a:ap_macroeconomics-m26-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-hard-a:ap_macroeconomics-m14-k1",
+    "nearest_similarity": 0.214,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 35,
+   "set": "MA3",
+   "key": "macro-x-a:ap_macroeconomics-m27-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.6",
+    "concept": "match a monetary policy action to the gap suggested by data"
+   },
+   "function": {
+    "skill": "2.B",
+    "response": "multiple choice",
+    "judgment": [
+     "read the data for the type of gap and choose the action that closes it"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: match a monetary policy action to the gap suggested by data",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenarios; wrong options choose the opposite action or a tool that moves the wrong way"
+   },
+   "duplication": {
+    "archetype": "ma_policy_for_data",
+    "family": "fam:macro-x-a:ap_macroeconomics-m27-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-a:ap_macroeconomics-m38-k0",
+    "nearest_similarity": 0.286,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 36,
+   "set": "MA3",
+   "key": "macro-x-a:ap_macroeconomics-m41-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.1",
+    "concept": "bond prices and interest rates are inversely related"
+   },
+   "function": {
+    "skill": "3.A",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: bond prices and interest rates are inversely related",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "inverse price-yield relation: present value of fixed payments recomputed at the new rate"
+   },
+   "duplication": {
+    "archetype": "ma_bond_price",
+    "family": "fam:macro-x-a:ap_macroeconomics-m41-k2",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p1-a:ap_macroeconomics-m17-k0",
+    "nearest_similarity": 0.41,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 37,
+   "set": "MA3",
+   "key": "macro-x-b:ap_macroeconomics-m04-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.5",
+    "concept": "money demand shifts with the price level and real GDP and moves along with the interest rate"
+   },
+   "function": {
+    "skill": "3.A",
+    "response": "multiple choice",
+    "judgment": [
+     "separate a shift of money demand from a movement along it"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: money demand shifts with the price level and real GDP and moves along with the interest rate",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted statements; wrong options are movements along the curve or supply changes"
+   },
+   "duplication": {
+    "archetype": "ma_money_demand_shift_factors",
+    "family": "fam:macro-x-b:ap_macroeconomics-m04-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-hard-a:ap_macroeconomics-m13-k0",
+    "nearest_similarity": 0.292,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 38,
+   "set": "MA3",
+   "key": "macro-x-b:ap_macroeconomics-m05-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.6",
+    "concept": "monetary policy works with lags between the rate change and the response of spending"
+   },
+   "function": {
+    "skill": "2.B",
+    "response": "multiple choice",
+    "judgment": [
+     "explain the timing problem of monetary policy"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: monetary policy works with lags between the rate change and the response of spending",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenario; wrong options deny the link or reverse the direction"
+   },
+   "duplication": {
+    "archetype": "ma_monetary_lags",
+    "family": "fam:macro-x-b:ap_macroeconomics-m05-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p1-a:ap_macroeconomics-m15-k1",
+    "nearest_similarity": 0.194,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 39,
+   "set": "MA3",
+   "key": "macro-x-c:ap_macroeconomics-m09-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.7",
+    "concept": "higher saving shifts loanable funds supply right, lowering the real rate and raising investment"
+   },
+   "function": {
+    "skill": "3.B",
+    "response": "multiple choice",
+    "judgment": [
+     "trace a change in saving to the interest rate and investment"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: higher saving shifts loanable funds supply right, lowering the real rate and raising investment",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenario; wrong options reverse the rate or investment effect"
+   },
+   "duplication": {
+    "archetype": "ma_saving_increase_effect",
+    "family": "fam:macro-x-c:ap_macroeconomics-m09-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-b:ap_macroeconomics-m49-k0",
+    "nearest_similarity": 0.346,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 40,
+   "set": "MA3",
+   "key": "macro-x-a:ap_macroeconomics-m29-k1",
+   "kind": "mc",
+   "content": {
+    "unit": "5",
+    "topic": "5.2",
+    "concept": "expected inflation shifts the short-run Phillips curve"
+   },
+   "function": {
+    "skill": "3.A",
+    "response": "multiple choice",
+    "judgment": [
+     "decide whether the event shifts the curve or moves along it"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: expected inflation shifts the short-run Phillips curve",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenario; wrong options reverse the shift or confuse a shift with a movement"
+   },
+   "duplication": {
+    "archetype": "ma_expected_inflation_shift",
+    "family": "fam:macro-x-a:ap_macroeconomics-m29-k1",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p3:ap_macroeconomics-m01-k1",
+    "nearest_similarity": 0.422,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 41,
+   "set": "MA3",
+   "key": "macro-x-a:ap_macroeconomics-m45-k1",
+   "kind": "mc",
+   "content": {
+    "unit": "5",
+    "topic": "5.5",
+    "concept": "definition of crowding out"
+   },
+   "function": {
+    "skill": "1.A",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: definition of crowding out",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted statements"
+   },
+   "duplication": {
+    "archetype": "ma_crowding_concept",
+    "family": "fam:macro-x-a:ap_macroeconomics-m45-k1",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-a:ap_macroeconomics-m50-k1",
+    "nearest_similarity": 0.16,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 42,
+   "set": "MA3",
+   "key": "macro-x-a:ap_macroeconomics-m46-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "5",
+    "topic": "5.4",
+    "concept": "deficits and the national debt"
+   },
+   "function": {
+    "skill": "2.A",
+    "response": "multiple choice",
+    "judgment": [
+     "explain the mechanism and reject near-miss explanations"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: deficits and the national debt",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted statements; each wrong sentence encodes one named confusion"
+   },
+   "duplication": {
+    "archetype": "ma_debt_explain",
+    "family": "fam:macro-x-a:ap_macroeconomics-m46-k2",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-a:ap_macroeconomics-m48-k0",
+    "nearest_similarity": 0.215,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 43,
+   "set": "MA3",
+   "key": "macro-x-b:ap_macroeconomics-m07-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "5",
+    "topic": "5.2",
+    "concept": "persistent low unemployment raises expected inflation and shifts the short-run Phillips curve up"
+   },
+   "function": {
+    "skill": "3.A",
+    "response": "multiple choice",
+    "judgment": [
+     "decide how expectations change the short-run curve"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: persistent low unemployment raises expected inflation and shifts the short-run Phillips curve up",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenario; wrong options reverse the shift or move the long-run curve"
+   },
+   "duplication": {
+    "archetype": "ma_phillips_unemp_below_natural",
+    "family": "fam:macro-x-b:ap_macroeconomics-m07-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p3:ap_macroeconomics-m01-k1",
+    "nearest_similarity": 0.373,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 44,
+   "set": "MA3",
+   "key": "macro-x-b:ap_macroeconomics-m08-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "5",
+    "topic": "5.4",
+    "concept": "how the national debt can burden future generations"
+   },
+   "function": {
+    "skill": "1.A",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: how the national debt can burden future generations",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted statement; wrong options overstate or deny the burden"
+   },
+   "duplication": {
+    "archetype": "ma_debt_burden_concept",
+    "family": "fam:macro-x-b:ap_macroeconomics-m08-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-a:ap_macroeconomics-m39-k1",
+    "nearest_similarity": 0.195,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 45,
+   "set": "MA3",
+   "key": "macro-x-b:ap_macroeconomics-m10-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "5",
+    "topic": "5.3",
+    "concept": "very high inflation comes from money growth far above real output growth"
+   },
+   "function": {
+    "skill": "1.B",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: very high inflation comes from money growth far above real output growth",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenario; wrong options name real-side or opposite-direction causes"
+   },
+   "duplication": {
+    "archetype": "ma_hyperinflation_cause",
+    "family": "fam:macro-x-b:ap_macroeconomics-m10-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-a:ap_macroeconomics-m49-k0",
+    "nearest_similarity": 0.219,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 46,
+   "set": "MA3",
+   "key": "macro-x-b:ap_macroeconomics-m18-k1",
+   "kind": "mc",
+   "content": {
+    "unit": "5",
+    "topic": "5.2",
+    "concept": "no long-run trade-off between unemployment and inflation"
+   },
+   "function": {
+    "skill": "2.B",
+    "response": "multiple choice",
+    "judgment": [
+     "explain the adjustment of expectations"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: no long-run trade-off between unemployment and inflation",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenario; wrong options keep a permanent trade-off"
+   },
+   "duplication": {
+    "archetype": "ma_longrun_phillips_why",
+    "family": "fam:macro-x-b:ap_macroeconomics-m18-k1",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-hard-b:ap_macroeconomics-m14-k1",
+    "nearest_similarity": 0.272,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 47,
+   "set": "MA3",
+   "key": "macro-x-b:ap_macroeconomics-m19-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "5",
+    "topic": "5.2",
+    "concept": "short-run versus long-run Phillips curves"
+   },
+   "function": {
+    "skill": "1.D",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: short-run versus long-run Phillips curves",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted statement; wrong options swap or misshape the curves"
+   },
+   "duplication": {
+    "archetype": "ma_phillips_compare",
+    "family": "fam:macro-x-b:ap_macroeconomics-m19-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-b:ap_macroeconomics-m42-k0",
+    "nearest_similarity": 0.309,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 48,
+   "set": "MA3",
+   "key": "macro-x-c:ap_macroeconomics-m01-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "5",
+    "topic": "5.3",
+    "concept": "long-run neutrality: a larger money supply raises the price level, not real output"
+   },
+   "function": {
+    "skill": "2.A",
+    "response": "multiple choice",
+    "judgment": [
+     "explain the long-run effect of money growth with the equation of exchange"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: long-run neutrality: a larger money supply raises the price level, not real output",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenario; wrong options give money real long-run effects"
+   },
+   "duplication": {
+    "archetype": "ma_money_neutral_explain",
+    "family": "fam:macro-x-c:ap_macroeconomics-m01-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-b:ap_macroeconomics-m45-k0",
+    "nearest_similarity": 0.266,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 49,
+   "set": "MA3",
+   "key": "macro-x-c:ap_macroeconomics-m02-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "5",
+    "topic": "5.2",
+    "concept": "anticipated inflation is built into contracts and has smaller real effects"
+   },
+   "function": {
+    "skill": "2.A",
+    "response": "multiple choice",
+    "judgment": [
+     "explain why expectations reduce the real effects of inflation"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: anticipated inflation is built into contracts and has smaller real effects",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenario; wrong options credit anticipated inflation with real output or redistribution"
+   },
+   "duplication": {
+    "archetype": "ma_anticipated_inflation",
+    "family": "fam:macro-x-c:ap_macroeconomics-m02-k2",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-b:ap_macroeconomics-m32-k0",
+    "nearest_similarity": 0.195,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 50,
+   "set": "MA3",
+   "key": "macro-x-c:ap_macroeconomics-m03-k1",
+   "kind": "mc",
+   "content": {
+    "unit": "5",
+    "topic": "5.4",
+    "concept": "interest on the national debt claims a growing share of future budgets"
+   },
+   "function": {
+    "skill": "2.A",
+    "response": "multiple choice",
+    "judgment": [
+     "explain how debt links the past deficits to future budgets"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: interest on the national debt claims a growing share of future budgets",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenario; wrong options deny the claim on future budgets"
+   },
+   "duplication": {
+    "archetype": "ma_debt_service_budget",
+    "family": "fam:macro-x-c:ap_macroeconomics-m03-k1",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-a:ap_macroeconomics-m49-k0",
+    "nearest_similarity": 0.2,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 51,
+   "set": "MA3",
+   "key": "macro-x-c:ap_macroeconomics-m04-k1",
+   "kind": "mc",
+   "content": {
+    "unit": "5",
+    "topic": "5.7",
+    "concept": "supply-side policies raise growth without adding inflation pressure"
+   },
+   "function": {
+    "skill": "2.B",
+    "response": "multiple choice",
+    "judgment": [
+     "match the policy to the goal using both growth and inflation"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: supply-side policies raise growth without adding inflation pressure",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenario; wrong options are demand-side or distorting policies"
+   },
+   "duplication": {
+    "archetype": "ma_growth_without_inflation",
+    "family": "fam:macro-x-c:ap_macroeconomics-m04-k1",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-hard-b:ap_macroeconomics-m02-k2",
+    "nearest_similarity": 0.25,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 52,
+   "set": "MA3",
+   "key": "macro-x-c:ap_macroeconomics-m05-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "5",
+    "topic": "5.5",
+    "concept": "deficits raise real interest rates, crowd out investment, and slow capital accumulation"
+   },
+   "function": {
+    "skill": "2.B",
+    "response": "multiple choice",
+    "judgment": [
+     "trace the effect from the deficit through the interest rate to investment and growth"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: deficits raise real interest rates, crowd out investment, and slow capital accumulation",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenario; wrong options break a link in the chain"
+   },
+   "duplication": {
+    "archetype": "ma_deficit_growth_chain",
+    "family": "fam:macro-x-c:ap_macroeconomics-m05-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-b:ap_macroeconomics-m49-k1",
+    "nearest_similarity": 0.346,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 53,
+   "set": "MA3",
+   "key": "macro-x-c:ap_macroeconomics-m06-k1",
+   "kind": "mc",
+   "content": {
+    "unit": "5",
+    "topic": "5.2",
+    "concept": "an adverse supply shock shifts the short-run Phillips curve up"
+   },
+   "function": {
+    "skill": "2.B",
+    "response": "multiple choice",
+    "judgment": [
+     "link the supply shock to the shift in the Phillips curve"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: an adverse supply shock shifts the short-run Phillips curve up",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenario; wrong options give the wrong direction or confuse a shift with a movement"
+   },
+   "duplication": {
+    "archetype": "ma_supply_shock_phillips",
+    "family": "fam:macro-x-c:ap_macroeconomics-m06-k1",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p3:ap_macroeconomics-m01-k1",
+    "nearest_similarity": 0.393,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 54,
+   "set": "MA3",
+   "key": "macro-x-c:ap_macroeconomics-m07-k3",
+   "kind": "mc",
+   "content": {
+    "unit": "5",
+    "topic": "5.6",
+    "concept": "technology shifts aggregate supply right, raising real GDP and lowering the price level"
+   },
+   "function": {
+    "skill": "2.B",
+    "response": "multiple choice",
+    "judgment": [
+     "combine the shifts of both supply curves"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: technology shifts aggregate supply right, raising real GDP and lowering the price level",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenario; wrong options shift demand or deny the supply effect"
+   },
+   "duplication": {
+    "archetype": "ma_productivity_boost_effects",
+    "family": "fam:macro-x-c:ap_macroeconomics-m07-k3",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-a:ap_macroeconomics-m23-k0",
+    "nearest_similarity": 0.362,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 55,
+   "set": "MA3",
+   "key": "macro-p2-a:ap_macroeconomics-m57-k1",
+   "kind": "mc",
+   "content": {
+    "unit": "6",
+    "topic": "6.4",
+    "concept": "determinants of currency demand and supply: effect on the exchange rate"
+   },
+   "function": {
+    "skill": "3.A",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: determinants of currency demand and supply: effect on the exchange rate",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "direction rule table vs numeric simulation of a linear currency market; for interest-rate events net exports move opposite to currency value"
+   },
+   "duplication": {
+    "archetype": "ma_fx_events",
+    "family": "fam:macro-p2-a:ap_macroeconomics-m57-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-a:ap_macroeconomics-m59-k0",
+    "nearest_similarity": 0.431,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 56,
+   "set": "MA3",
+   "key": "macro-x-a:ap_macroeconomics-m42-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "6",
+    "topic": "6.1",
+    "concept": "current account balance and its offset in the financial account"
+   },
+   "function": {
+    "skill": "1.C",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: current account balance and its offset in the financial account",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "integer arithmetic vs sympy"
+   },
+   "duplication": {
+    "archetype": "ma_bop_calc",
+    "family": "fam:macro-x-a:ap_macroeconomics-m42-k2",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-a:ap_macroeconomics-m16-k0",
+    "nearest_similarity": 0.205,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 57,
+   "set": "MA3",
+   "key": "macro-x-a:ap_macroeconomics-m51-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "6",
+    "topic": "6.5",
+    "concept": "winners and losers from a stronger or weaker currency"
+   },
+   "function": {
+    "skill": "1.D",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: winners and losers from a stronger or weaker currency",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted statements"
+   },
+   "duplication": {
+    "archetype": "ma_strong_currency",
+    "family": "fam:macro-x-a:ap_macroeconomics-m51-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-a:ap_macroeconomics-m56-k0",
+    "nearest_similarity": 0.246,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 58,
+   "set": "MA3",
+   "key": "macro-x-a:ap_macroeconomics-m52-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "6",
+    "topic": "6.5",
+    "concept": "currency value, trade, and output"
+   },
+   "function": {
+    "skill": "2.B",
+    "response": "multiple choice",
+    "judgment": [
+     "explain the mechanism and reject near-miss explanations"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: currency value, trade, and output",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted statements; each wrong sentence encodes one named confusion"
+   },
+   "duplication": {
+    "archetype": "ma_trade_explain",
+    "family": "fam:macro-x-a:ap_macroeconomics-m52-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-hard-b:ap_macroeconomics-m06-k0",
+    "nearest_similarity": 0.362,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 59,
+   "set": "MA3",
+   "key": "macro-x-b:ap_macroeconomics-m20-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "6",
+    "topic": "6.1",
+    "concept": "classify a transaction in the current and financial accounts"
+   },
+   "function": {
+    "skill": "1.B",
+    "response": "multiple choice",
+    "judgment": [
+     "classify the transaction and its matching financial entry"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: classify a transaction in the current and financial accounts",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenario; wrong options misclassify the transaction"
+   },
+   "duplication": {
+    "archetype": "ma_bop_account_entries",
+    "family": "fam:macro-x-b:ap_macroeconomics-m20-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-a:ap_macroeconomics-m54-k1",
+    "nearest_similarity": 0.222,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 60,
+   "set": "MA3",
+   "key": "macro-x-d:ap_macroeconomics-m02-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "6",
+    "topic": "6.1",
+    "concept": "a trade deficit versus a budget deficit"
+   },
+   "function": {
+    "skill": "1.D",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: a trade deficit versus a budget deficit",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted statement; wrong options swap or merge the two concepts"
+   },
+   "duplication": {
+    "archetype": "ma_trade_vs_budget_deficit",
+    "family": "fam:macro-x-d:ap_macroeconomics-m02-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-a:ap_macroeconomics-m48-k0",
+    "nearest_similarity": 0.321,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 61,
+   "set": "MA3",
+   "key": "macro-x-f:ap_macroeconomics-f01-k0",
+   "kind": "frq_bundle",
+   "content": {
+    "unit": "6",
+    "topic": "6.4",
+    "concept": "Higher administered rates: capital inflows, appreciation, net exports, and aggregate demand"
+   },
+   "function": {
+    "skill": "4.A",
+    "response": "free response",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": null,
+    "parts": 6
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Draw the currency market and show the demand shift",
+     "Trace capital flows to the exchange rate to net exports",
+     "Compute net exports and explain the combined effect on real GDP"
+    ],
+    "verification": "net exports from the table by exact subtraction versus sympy; direction of the exchange rate from a linear currency-market simulation"
+   },
+   "duplication": {
+    "archetype": "maf_long_open_economy",
+    "family": "fam:macro-x-f:ap_macroeconomics-f01-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-f:ap_macroeconomics-f05-k0",
+    "nearest_similarity": 0.453,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 62,
+   "set": "MA3",
+   "key": "macro-p1-b:ap_macroeconomics-f04-k0",
+   "kind": "frq_bundle",
+   "content": {
+    "unit": "2",
+    "topic": "2.6",
+    "concept": "Real GDP and inflation from nominal data, per-capita living standards, and the effect of inflation on a lender"
+   },
+   "function": {
+    "skill": "2.C",
+    "response": "free response",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": null,
+    "parts": 5
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Convert nominal GDP to real GDP with the deflator",
+     "Compute inflation from the deflator and compare per capita output",
+     "Judge winners and losers and the reason for using real GDP"
+    ],
+    "verification": "exact fractions for real GDP and inflation versus sympy rationals; per capita compared with exact ratios"
+   },
+   "duplication": {
+    "archetype": "maf_short_gdp_data",
+    "family": "fam:macro-p1-b:ap_macroeconomics-f04-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p1-b:ap_macroeconomics-f09-k0",
+    "nearest_similarity": 0.221,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 63,
+   "set": "MA3",
+   "key": "macro-x-f:ap_macroeconomics-f03-k1",
+   "kind": "frq_bundle",
+   "content": {
+    "unit": "1",
+    "topic": "1.3",
+    "concept": "Opportunity cost, comparative advantage, a PPC, and gains from trade"
+   },
+   "function": {
+    "skill": "1.C",
+    "response": "free response",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": null,
+    "parts": 4
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Compute opportunity cost from the table",
+     "Compare opportunity costs and draw a PPC with growth in one good",
+     "Explain mutual gains"
+    ],
+    "verification": "exact ratios versus the reciprocal opportunity cost of the other good"
+   },
+   "duplication": {
+    "archetype": "maf_short_ppc_trade",
+    "family": "fam:macro-x-f:ap_macroeconomics-f03-k1",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "macro-p2-a:ap_macroeconomics-m04-k1",
+    "nearest_similarity": 0.296,
+    "siblings_in_new_set": 0
+   }
+  }
+ ]
+}

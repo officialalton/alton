@@ -1,0 +1,122 @@
+{
+ "runs": [
+  "micro-s5-b"
+ ],
+ "rows": 93,
+ "passed": 46,
+ "rejected": 47,
+ "passRate": 0.495,
+ "mc": {
+  "rows": 93,
+  "passed": 46,
+  "passRate": 0.495
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "1": 5,
+  "2": 7,
+  "3": 12,
+  "4": 9,
+  "5": 10,
+  "6": 3
+ },
+ "skillsPassed": {
+  "2.B": 5,
+  "1.B": 11,
+  "1.D": 6,
+  "1.A": 2,
+  "2.C": 20,
+  "3.A": 2
+ },
+ "figPassed": {
+  "none": 39,
+  "table": 7
+ },
+ "figAll": {
+  "none": 75,
+  "table": 18
+ },
+ "figPassRate": {
+  "none": "39/75",
+  "table": "7/18"
+ },
+ "renderTypesPassed": {
+  "none": 39,
+  "ap_table": 7
+ },
+ "archetypesPassed": {
+  "mi_ppc_inside_point": 2,
+  "mi_trade_specialize_table": 1,
+  "mi_marginal_decision_sunk": 1,
+  "mi_incentives_opp_cost": 1,
+  "mi_substitute_complement_id": 2,
+  "mi_elasticity_type_identify": 1,
+  "mi_elasticity_compare": 2,
+  "mi_policy_compare": 1,
+  "mi_surplus_compare": 1,
+  "mi_cost_definitions": 2,
+  "mi_returns_scale_id": 3,
+  "mi_explicit_implicit_cost": 2,
+  "mi_short_long_run_id": 1,
+  "mi_scale_source_id": 2,
+  "mi_atc_mc_compare": 1,
+  "mi_shutdown_exit_compare": 1,
+  "mi_merger_hhi_change": 3,
+  "mi_mr_table_profit": 2,
+  "mi_mc_tangency_table": 1,
+  "mi_price_discrim_numeric": 1,
+  "mi_monopoly_tax_effect": 1,
+  "mi_entry_mc_shift": 1,
+  "mi_hire_table_wage_change": 2,
+  "mi_labor_shift_numeric": 3,
+  "mi_mc_from_mp_wage": 3,
+  "mi_mrp_price_change": 2,
+  "mi_natural_monopoly_pricing": 3
+ },
+ "archetypesAll": {
+  "mi_ppc_inside_point": 3,
+  "mi_trade_specialize_table": 3,
+  "mi_marginal_decision_sunk": 3,
+  "mi_mu_per_dollar_table": 3,
+  "mi_incentives_opp_cost": 3,
+  "mi_substitute_complement_id": 3,
+  "mi_elasticity_type_identify": 3,
+  "mi_elasticity_compare": 3,
+  "mi_policy_compare": 3,
+  "mi_model_limitations": 3,
+  "mi_surplus_compare": 3,
+  "mi_cost_definitions": 3,
+  "mi_returns_scale_id": 3,
+  "mi_explicit_implicit_cost": 3,
+  "mi_short_long_run_id": 3,
+  "mi_scale_source_id": 3,
+  "mi_atc_mc_compare": 3,
+  "mi_profit_measures_compare": 3,
+  "mi_shutdown_exit_compare": 3,
+  "mi_merger_hhi_change": 3,
+  "mi_mr_table_profit": 3,
+  "mi_mc_tangency_table": 3,
+  "mi_price_discrim_numeric": 3,
+  "mi_monopoly_tax_effect": 3,
+  "mi_entry_mc_shift": 3,
+  "mi_price_discrim_effect": 3,
+  "mi_hire_table_wage_change": 3,
+  "mi_labor_shift_numeric": 3,
+  "mi_mc_from_mp_wage": 3,
+  "mi_mrp_price_change": 3,
+  "mi_natural_monopoly_pricing": 3
+ },
+ "failedArchetypes": [
+  "mi_mu_per_dollar_table",
+  "mi_model_limitations",
+  "mi_profit_measures_compare",
+  "mi_price_discrim_effect"
+ ],
+ "costUsd": {
+  "micro-s5-b": 3.0272
+ }
+}

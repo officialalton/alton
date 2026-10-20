@@ -1,5 +1,20 @@
 [
  {
+  "id": "cs_2d_col_max_completion",
+  "topic": "4.13",
+  "skill": "2.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "each candidate compiled and run on arrays vs Python column max"
+  ],
+  "misconceptions": [
+   "Adds the column values instead of keeping the largest.",
+   "Keeps the smallest value in the column.",
+   "Swaps the row and column indexes, so it reads row col instead of column col."
+  ]
+ },
+ {
   "id": "cs_2d_completion",
   "topic": "4.13",
   "skill": "2.A",
@@ -45,6 +60,21 @@
   ]
  },
  {
+  "id": "cs_2d_row_sum_trace",
+  "topic": "4.12",
+  "skill": "3.B",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python row sums"
+  ],
+  "misconceptions": [
+   "Reports the largest value in the matrix instead of the largest row sum.",
+   "Reports the largest sum first and the row index second, reversing the order of the two values.",
+   "Sums the columns of the first row only, ignoring the other rows."
+  ]
+ },
+ {
   "id": "cs_2d_traverse",
   "topic": "4.12",
   "skill": "3.B",
@@ -55,7 +85,7 @@
   ],
   "misconceptions": [
    "Swaps the row and column indexes, so a column index is used past the end of a row.",
-   "Uses the number of columns as the row bound, so a row index past the end is accessed.",
+   "Uses the number of columns as the row bound, so a row index past the end is accessed. Running this version throws a run-time exception.",
    "Adds the elements in odd-numbered columns."
   ]
  },
@@ -75,6 +105,21 @@
   ]
  },
  {
+  "id": "cs_array_count_runs_trace",
+  "topic": "4.4",
+  "skill": "3.B",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python scan"
+  ],
+  "misconceptions": [
+   "Starts the count at 0, so the first run is not counted.",
+   "Counts the adjacent pairs that are equal instead of the changes.",
+   "Compares each value with the first value instead of the previous value."
+  ]
+ },
+ {
   "id": "cs_array_ref_pass",
   "topic": "4.3",
   "skill": "3.B",
@@ -87,6 +132,21 @@
    "Believes incrementing w[0] also changes v[0] because both came from the same data.",
    "Believes == compares the elements of two arrays instead of their references.",
    "Believes a method cannot change the array that is passed to it, so v keeps its original values."
+  ]
+ },
+ {
+  "id": "cs_array_shift_left_completion",
+  "topic": "4.5",
+  "skill": "2.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "each candidate compiled and run on arrays vs Python rotation"
+  ],
+  "misconceptions": [
+   "Copies each element forward, which fills the array with the first value.",
+   "Shifts the elements to the right instead of the left.",
+   "Lets i reach the last index, so a[i + 1] is out of bounds and an exception occurs."
   ]
  },
  {
@@ -114,7 +174,7 @@
    "javac+java output vs Python list manipulation"
   ],
   "misconceptions": [
-   "Believes the loop also runs for the last index, which has no next element.",
+   "Believes the loop also runs for the last index, which has no next element. Running this version throws a run-time exception.",
    "Believes the elements shift right, copying each element into the next position.",
    "Believes the last element is cleared after the shift."
   ]
@@ -135,6 +195,21 @@
   ]
  },
  {
+  "id": "cs_arraylist_double_completion",
+  "topic": "4.10",
+  "skill": "2.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "each candidate compiled and run on lists vs Python duplication"
+  ],
+  "misconceptions": [
+   "Appends each copy at the end of the list instead of next to the original.",
+   "Replaces the following element instead of inserting a copy, and fails at the last index.",
+   "Reads one index past the element, which is out of bounds at the last index."
+  ]
+ },
+ {
   "id": "cs_arraylist_insert_remove",
   "topic": "4.8",
   "skill": "3.B",
@@ -144,7 +219,7 @@
    "javac+java output vs Python list insert, pop(index), remove(value) and assignment"
   ],
   "misconceptions": [
-   "Believes remove with an Integer argument removes the element at that index.",
+   "Believes remove with an Integer argument removes the element at that index. Running this version throws a run-time exception.",
    "Believes remove(2) removes the value 2 instead of the element at index 2.",
    "Believes set inserts a new element at index 0 instead of replacing the element there."
   ]
@@ -160,7 +235,7 @@
   ],
   "misconceptions": [
    "Believes set(index, value) inserts the value and shifts the others right.",
-   "Believes add(index, value) replaces the element at that index.",
+   "Believes add(index, value) replaces the element at that index. Running this version throws a run-time exception.",
    "Believes remove(0) removes the element whose value is 0."
   ]
  },
@@ -176,7 +251,37 @@
   "misconceptions": [
    "Believes the loop visits every element after a removal, so all even values are removed.",
    "Believes only the first even value is removed.",
-   "Uses the original size as the loop bound, so an index past the end is accessed."
+   "Believes the loop bound is the original number of elements, so after removals the loop reads past the end of the shorter list and throws an exception."
+  ]
+ },
+ {
+  "id": "cs_arraylist_set_vs_add_trace",
+  "topic": "4.8",
+  "skill": "3.B",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python list operations"
+  ],
+  "misconceptions": [
+   "Believes set(1, x) inserts a new element, shifting the others to the right.",
+   "Believes add(1, y) replaces the element at index 1.",
+   "Believes remove(0) removes the last element."
+  ]
+ },
+ {
+  "id": "cs_arraylist_swap_trace",
+  "topic": "4.8",
+  "skill": "3.B",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python swap"
+  ],
+  "misconceptions": [
+   "Uses add and remove, which shifts the elements instead of swapping two positions.",
+   "Omits the temporary variable, so both ends end with the last value.",
+   "Stores the saved value in the first position again, so only one element changes."
   ]
  },
  {
@@ -207,6 +312,21 @@
    "Moves the wrong bound: searches the left half when the middle value is too small.",
    "Believes the search never counts the comparison that finds the target.",
    "Rounds the midpoint up instead of down."
+  ]
+ },
+ {
+  "id": "cs_bool_equiv_expr",
+  "topic": "2.6",
+  "skill": "3.A",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "truth table in Python vs java evaluation of each expression"
+  ],
+  "misconceptions": [
+   "Describes only the case where both are false; compare when exactly one is true.",
+   "Keeps the conjunction without negating the whole expression; compare when both are true.",
+   "Reverses the exclusive-or relationship; compare when a and b differ."
   ]
  },
  {
@@ -255,18 +375,18 @@
   ]
  },
  {
-  "id": "cs_char_arith",
-  "topic": "1.5",
-  "skill": "3.A",
+  "id": "cs_ceil_pages_completion",
+  "topic": "1.11",
+  "skill": "2.A",
   "calculator": "not_allowed",
   "stimulus": "text",
   "verifiedBy": [
-   "javac+java output vs Python ord() and chr()"
+   "each candidate compiled and run on boundary counts vs Python ceil"
   ],
   "misconceptions": [
-   "Believes the cast is not needed and prints the numeric code of the shifted letter.",
-   "Believes a char behaves like the number of its position in the alphabet.",
-   "Counts the position of the letter from 1 instead of 0."
+   "Always adds a page, which is wrong when count is an exact multiple of 8.",
+   "Rounds to the nearest page, so a partial page of fewer than half the items is dropped.",
+   "Uses integer division directly, which drops a final partial page."
   ]
  },
  {
@@ -354,9 +474,9 @@
    "javac compiles each candidate statement inside a main method"
   ],
   "misconceptions": [
-   "This statement compiles: An int value can be widened to a double.",
-   "This statement compiles: An int can be assigned to a long.",
-   "This statement compiles: String concatenation accepts an int operand."
+   "Believes an int value must be cast before it is stored in a double; the widening conversion is automatic, so this compiles.",
+   "Believes integer division in the initializer makes the statement invalid; it compiles and stores 3.0.",
+   "Believes the division of two int values cannot be stored in a double; the int result 0 widens to 0.0, so this compiles."
   ]
  },
  {
@@ -390,6 +510,21 @@
   ]
  },
  {
+  "id": "cs_compound_mixed_types",
+  "topic": "1.6",
+  "skill": "3.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python truncation after each step"
+  ],
+  "misconceptions": [
+   "Believes a compound assignment with a double is skipped when the variable is an int.",
+   "Rounds to the nearest integer after the multiplication instead of truncating.",
+   "Rounds to the nearest integer after the addition instead of truncating."
+  ]
+ },
+ {
   "id": "cs_constructor_completion",
   "topic": "3.4",
   "skill": "2.B",
@@ -402,6 +537,36 @@
    "Stores a fixed name instead of the parameter.",
    "Never sets the price, which stays 0 instead of 11.",
    "Assigns the parameter to itself, so the instance variable name is never set."
+  ]
+ },
+ {
+  "id": "cs_count_divisors_completion",
+  "topic": "2.9",
+  "skill": "2.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "each candidate compiled and run on a set of ints vs Python divisor count"
+  ],
+  "misconceptions": [
+   "Counts the values that do not divide n.",
+   "Uses integer division, which is 0 only when d exceeds n, so no loop value passes.",
+   "Reverses the operands, so only d equal to n (and nothing smaller) passes."
+  ]
+ },
+ {
+  "id": "cs_default_values_trace",
+  "topic": "3.4",
+  "skill": "3.B",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java return value vs known default values"
+  ],
+  "misconceptions": [
+   "Believes an uninitialized boolean instance variable is true.",
+   "Believes an uninitialized double instance variable prints as 0 with no decimal part.",
+   "Believes an uninitialized String instance variable holds the empty string."
   ]
  },
  {
@@ -429,9 +594,9 @@
    "javac+java runs the method on 5 or more inputs; each English description has a Python predicate that must agree (key) or disagree (distractors)"
   ],
   "misconceptions": [
-   "Believes s is a running total over the whole array.",
-   "Believes the outer index selects columns.",
-   "Believes the comparison is made on each element instead of on the row sum."
+   "Believes s is a running total over the whole array. For instance, Probe.mystery(new int[][] { { 5, 6 }, { 1, 2 } }) returns 1, but this description would give 14.",
+   "Believes the outer index selects columns. For instance, Probe.mystery(new int[][] { { 5, 6 }, { 1, 2 } }) returns 1, but this description would give 0.",
+   "Believes the comparison is made on each element instead of on the row sum. For instance, Probe.mystery(new int[][] { { 5, 6 }, { 1, 2 } }) returns 1, but this description would give 0."
   ]
  },
  {
@@ -444,9 +609,9 @@
    "javac+java runs the method on 5 or more inputs; each English description has a Python predicate that must agree (key) or disagree (distractors)"
   ],
   "misconceptions": [
-   "Believes a counter that is incremented on a comparison returns the compared value.",
-   "Reverses the direction of the comparison.",
-   "Compares each element with the last element instead of the first."
+   "Believes a counter that is incremented on a comparison returns the compared value. For instance, Probe.mystery(new int[] { 3, 5, 1, 7 }) returns 2, but this description would give 7.",
+   "Reverses the direction of the comparison. For instance, Probe.mystery(new int[] { 3, 5, 1, 7 }) returns 2, but this description would give 1.",
+   "Compares each element with the last element instead of the first. For instance, Probe.mystery(new int[] { 3, 5, 1, 7 }) returns 2, but this description would give 0."
   ]
  },
  {
@@ -459,9 +624,24 @@
    "javac+java runs the method on 5 or more inputs; each English description has a Python predicate that must agree (key) or disagree (distractors)"
   ],
   "misconceptions": [
-   "Believes += puts each new character in front of the String built so far.",
-   "Believes the step of 2 stops the loop at the middle of the String.",
-   "Believes the first pass of the loop skips the character at index 0."
+   "Believes += puts each new character in front of the String built so far. For instance, Probe.mystery(\"computer\") returns cmue, but this description would give eumc.",
+   "Believes the step of 2 stops the loop at the middle of the String. For instance, Probe.mystery(\"computer\") returns cmue, but this description would give comp.",
+   "Believes the first pass of the loop skips the character at index 0. For instance, Probe.mystery(\"computer\") returns cmue, but this description would give optr."
+  ]
+ },
+ {
+  "id": "cs_describe_first_min",
+  "topic": "4.9",
+  "skill": "4.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java runs the method on 5 or more inputs; each English description has a Python predicate that must agree (key) or disagree (distractors)"
+  ],
+  "misconceptions": [
+   "Confuses the position of the smallest value with the value itself. For instance, Probe.mystery(list) with list = [5, 2, 8, 2] returns 1, but this description would give 2.",
+   "Believes the loop only counts how many values are smaller than the first one. For instance, Probe.mystery(list) with list = [5, 2, 8, 2] returns 1, but this description would give 2.",
+   "Believes a strict comparison lets a later equal value replace the saved index. For instance, Probe.mystery(list) with list = [5, 2, 8, 2] returns 1, but this description would give 3."
   ]
  },
  {
@@ -474,9 +654,9 @@
    "javac+java runs the method on 5 or more inputs; each English description has a Python predicate that must agree (key) or disagree (distractors)"
   ],
   "misconceptions": [
-   "Believes the accumulated value keeps only the biggest digit.",
-   "Believes n % 10 appends digits to build a reversed number.",
-   "Believes the loop counts how many times it runs instead of adding the digits."
+   "Believes the accumulated value keeps only the biggest digit. For instance, Probe.mystery(123) returns 6, but this description would give 3.",
+   "Believes n % 10 appends digits to build a reversed number. For instance, Probe.mystery(123) returns 6, but this description would give 321.",
+   "Believes the loop counts how many times it runs instead of adding the digits. For instance, Probe.mystery(5) returns 5, but this description would give 1."
   ]
  },
  {
@@ -489,9 +669,24 @@
    "javac+java runs the method on 5 or more inputs; each English description has a Python predicate that must agree (key) or disagree (distractors)"
   ],
   "misconceptions": [
-   "Believes a tie replaces the stored position.",
-   "Believes best counts the larger values.",
-   "Believes the variable tracks the value rather than the position."
+   "Believes a tie replaces the stored position. For instance, Probe.mystery(list) with list = [5, 5, 2] returns 0, but this description would give 1.",
+   "Believes best counts the larger values. For instance, Probe.mystery(list) with list = [3, 9, 4] returns 1, but this description would give 2.",
+   "Believes the variable tracks the value rather than the position. For instance, Probe.mystery(list) with list = [3, 9, 4] returns 1, but this description would give 9."
+  ]
+ },
+ {
+  "id": "cs_describe_row_ends",
+  "topic": "4.12",
+  "skill": "4.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java runs the method on 5 or more inputs; each English description has a Python predicate that must agree (key) or disagree (distractors)"
+  ],
+  "misconceptions": [
+   "Reads the matrix column by column instead of row by row. For instance, Probe.mystery(new int[][] { { 3, 5, 3 }, { 1, 2, 4 } }) returns 1, but this description would give 0.",
+   "Believes every element is compared with the first element of its row, not only the last one. For instance, Probe.mystery(new int[][] { { 3, 5, 3 }, { 1, 2, 4 } }) returns 1, but this description would give 3.",
+   "Believes the equality test is a comparison for greater-than. For instance, Probe.mystery(new int[][] { { 3, 5, 3 }, { 1, 2, 4 } }) returns 1, but this description would give 0."
   ]
  },
  {
@@ -504,9 +699,9 @@
    "javac+java runs the method on 5 or more inputs; each English description has a Python predicate that must agree (key) or disagree (distractors)"
   ],
   "misconceptions": [
-   "Believes returning false on a mismatch means all characters must match.",
-   "Believes the comparison looks at neighboring characters.",
-   "Checks only the outermost pair of characters."
+   "Believes returning false on a mismatch means all characters must match. For instance, Probe.mystery(\"level\") returns true, but this description would give false.",
+   "Believes the comparison looks at neighboring characters. For instance, Probe.mystery(\"level\") returns true, but this description would give false.",
+   "Checks only the outermost pair of characters. For instance, Probe.mystery(\"abca\") returns false, but this description would give true."
   ]
  },
  {
@@ -525,6 +720,21 @@
   ]
  },
  {
+  "id": "cs_digit_reverse_trace",
+  "topic": "2.7",
+  "skill": "3.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python string reversal"
+  ],
+  "misconceptions": [
+   "Stops the loop one pass early.",
+   "Builds the number from the leading digits (using integer division) instead of the last digit.",
+   "Adds the digits instead of building a reversed number."
+  ]
+ },
+ {
   "id": "cs_else_if_chain",
   "topic": "2.3",
   "skill": "3.A",
@@ -537,6 +747,36 @@
    "Believes the else branch also runs after a branch that was chosen.",
    "Believes the two decisions form a single else-if chain, so only one letter is added.",
    "Believes every test is an independent if statement, so the else belongs to the last one only."
+  ]
+ },
+ {
+  "id": "cs_enhanced_for_trace",
+  "topic": "4.4",
+  "skill": "3.B",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python sum"
+  ],
+  "misconceptions": [
+   "Adds the multiplied values only for the first element.",
+   "Believes the enhanced for loop variable is an alias of the array element, so each element is multiplied.",
+   "Reports only the last element, believing the loop variable keeps the last value."
+  ]
+ },
+ {
+  "id": "cs_error_kind",
+  "topic": "1.2",
+  "skill": "3.D",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac compile and java run of the segment"
+  ],
+  "misconceptions": [
+   "perBox is 0, so the division items / perBox cannot produce a result, and the program does not finish normally.",
+   "Every statement is valid Java, so the compiler accepts the code; the problem appears only when the division is evaluated.",
+   "No result is printed: the division by zero ends the program with an exception before anything is printed."
   ]
  },
  {
@@ -570,6 +810,21 @@
   ]
  },
  {
+  "id": "cs_grade_branches_trace",
+  "topic": "2.3",
+  "skill": "3.C",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java return value vs Python chain"
+  ],
+  "misconceptions": [
+   "Treats >= as > in the third branch, so the boundary value falls to the last return.",
+   "Treats >= as > in the second branch, so the boundary value falls to the next branch.",
+   "Treats >= as > in the first branch, so the boundary value falls to the next branch."
+  ]
+ },
+ {
   "id": "cs_halving_count",
   "topic": "2.12",
   "skill": "3.A",
@@ -585,6 +840,21 @@
   ]
  },
  {
+  "id": "cs_helper_array_count_completion",
+  "topic": "4.4",
+  "skill": "2.C",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "each candidate compiled and run on arrays vs Python count"
+  ],
+  "misconceptions": [
+   "Stores the last multiple instead of counting them.",
+   "Counts the elements that are not multiples.",
+   "Counts every element once more, so the result is larger than the number of multiples."
+  ]
+ },
+ {
   "id": "cs_helper_completion",
   "topic": "3.5",
   "skill": "2.C",
@@ -597,6 +867,36 @@
    "Passes the running count to the helper method instead of the score.",
    "Stores the score instead of counting it.",
    "Counts the failing scores."
+  ]
+ },
+ {
+  "id": "cs_helper_digit_match_completion",
+  "topic": "2.7",
+  "skill": "2.C",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "each candidate compiled and run on start values vs Python search"
+  ],
+  "misconceptions": [
+   "Compares the number itself with the target instead of its digit sum.",
+   "Stops at the first value whose digit sum is at least 9, which can be greater than 9.",
+   "Loops while the digit sum equals 9, so it returns the first value that does not have that digit sum."
+  ]
+ },
+ {
+  "id": "cs_helper_prime_count_completion",
+  "topic": "2.9",
+  "skill": "2.C",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "each candidate compiled and run on ranges vs Python prime count"
+  ],
+  "misconceptions": [
+   "Counts the numbers that are not prime.",
+   "Stores the last prime instead of counting the primes.",
+   "Tests the running count instead of the loop value n."
   ]
  },
  {
@@ -660,6 +960,21 @@
   ]
  },
  {
+  "id": "cs_insertion_sort_pass_trace",
+  "topic": "4.15",
+  "skill": "3.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python insertion sort passes"
+  ],
+  "misconceptions": [
+   "Stores the current value one position too far to the left, overwriting an element that was just shifted. Running this version throws a run-time exception.",
+   "Writes the current value to its original position, so the shifted values overwrite it incorrectly.",
+   "Stops the loop one pass early, so the last of the intended insertions is missing."
+  ]
+ },
+ {
   "id": "cs_instance_helper_completion",
   "topic": "3.5",
   "skill": "2.C",
@@ -705,6 +1020,51 @@
   ]
  },
  {
+  "id": "cs_largest_digit_completion",
+  "topic": "2.9",
+  "skill": "2.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "each candidate compiled and run on a set of ints vs Python max digit"
+  ],
+  "misconceptions": [
+   "Keeps the last examined digit, which is the leading digit, not the largest.",
+   "Adds the digits instead of keeping the largest.",
+   "Keeps the smaller digit, which stays at 0 because best starts at 0."
+  ]
+ },
+ {
+  "id": "cs_linear_search_comparisons",
+  "topic": "4.14",
+  "skill": "3.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python index"
+  ],
+  "misconceptions": [
+   "Counts the comparison only when the value is found.",
+   "Starts the scan at the second element.",
+   "Believes the loop scans the whole array even after a match."
+  ]
+ },
+ {
+  "id": "cs_loop_accumulate_cond",
+  "topic": "2.8",
+  "skill": "3.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python comprehension"
+  ],
+  "misconceptions": [
+   "Uses < in the loop condition, so the last value is left out.",
+   "Counts the matching values instead of adding them.",
+   "Adds the loop variable to the sum only when the remainder differs from the target."
+  ]
+ },
+ {
   "id": "cs_loop_bug_fix",
   "topic": "2.8",
   "skill": "3.D",
@@ -735,6 +1095,21 @@
   ]
  },
  {
+  "id": "cs_loop_equiv_while",
+  "topic": "2.8",
+  "skill": "3.C",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "java output of each loop vs Python range"
+  ],
+  "misconceptions": [
+   "Starts the loop variable one step late, so the first value is missing.",
+   "Increments the loop variable before printing, so the first value printed is wrong and the sequence shifts.",
+   "Uses <= in the condition, so it can print one more value than the for loop."
+  ]
+ },
+ {
   "id": "cs_math_class",
   "topic": "1.11",
   "skill": "3.C",
@@ -744,9 +1119,9 @@
    "javac+java output vs Python math.pow/sqrt/abs"
   ],
   "misconceptions": [
-   "Reads Math.pow(base, 2) as base * 2.",
-   "Treats Math.sqrt as returning the square.",
-   "Ignores Math.abs and adds the negative number."
+   "Reads Math.pow(base, 2) as the base raised to itself.",
+   "Ignores Math.abs and adds the negative number.",
+   "Reads Math.pow(base, 2) as base * 2."
   ]
  },
  {
@@ -765,6 +1140,21 @@
   ]
  },
  {
+  "id": "cs_method_chain_calls",
+  "topic": "1.9",
+  "skill": "3.C",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java return value vs Python composition"
+  ],
+  "misconceptions": [
+   "Subtracts the original argument instead of f(x).",
+   "Applies f twice before multiplying.",
+   "Returns g(x) without subtracting."
+  ]
+ },
+ {
   "id": "cs_method_params",
   "topic": "1.9",
   "skill": "3.C",
@@ -777,6 +1167,21 @@
    "Believes reassigning the array parameter also changes the caller's array.",
    "Believes an array element cannot be changed by a method because arrays are copied when passed.",
    "Believes the int argument is passed by reference so x++ changes n."
+  ]
+ },
+ {
+  "id": "cs_mod_negative_trace",
+  "topic": "1.3",
+  "skill": "3.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python truncating division"
+  ],
+  "misconceptions": [
+   "Drops the sign of the dividend before taking the remainder.",
+   "Drops the sign of the dividend before dividing.",
+   "Rounds the quotient toward negative infinity instead of truncating toward zero."
   ]
  },
  {
@@ -795,6 +1200,21 @@
   ]
  },
  {
+  "id": "cs_nested_loop_pairs_trace",
+  "topic": "2.11",
+  "skill": "3.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python double comprehension"
+  ],
+  "misconceptions": [
+   "Starts the inner loop at 1, so each pair is counted in both orders.",
+   "Counts the pairs whose sum is at most the target, not equal to it.",
+   "Starts the inner loop at i, so pairs with equal values are also counted."
+  ]
+ },
+ {
   "id": "cs_nested_loops_count",
   "topic": "2.11",
   "skill": "3.A",
@@ -805,7 +1225,7 @@
   ],
   "misconceptions": [
    "Starts the inner loop at i + 1, skipping the diagonal.",
-   "Counts only the passes of the outer loop.",
+   "Counts only the passes in which j equals i, one for each row whose inner loop runs at least once.",
    "Assumes the inner loop always runs the full number of times, giving rows times columns."
   ]
  },
@@ -849,9 +1269,9 @@
    "javac+java output vs Python table of the matching signature"
   ],
   "misconceptions": [
-   "Believes the first argument decides the overload regardless of the second.",
-   "Believes the overloaded methods cannot be told apart, so the first one declared is always used.",
-   "Believes dividing two int values produces a double and picks the double version."
+   "Believes the first argument decides the overload regardless of the second. In this code Show.f(2, 3.0) actually matches the version that returns ID.",
+   "Believes the overloaded methods cannot be told apart, so the first one declared (the int version, which returns I) is used for every call.",
+   "Believes dividing two int values produces a double and picks the double version. In this code Show.f(7 / 2) actually matches the version that returns I."
   ]
  },
  {
@@ -870,6 +1290,66 @@
   ]
  },
  {
+  "id": "cs_pass_by_value_prim",
+  "topic": "1.9",
+  "skill": "3.C",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java return value vs Python arithmetic"
+  ],
+  "misconceptions": [
+   "Ignores the addition after the multiplication.",
+   "Reports the returned value first and the unchanged variable second.",
+   "Ignores the multiplication inside bump."
+  ]
+ },
+ {
+  "id": "cs_postcondition_2d",
+  "topic": "4.12",
+  "skill": "4.B",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "java run on a 3x2 and a 1x1 array"
+  ],
+  "misconceptions": [
+   "The method never assigns to m; it only reads from it.",
+   "The method returns an array, not a single value.",
+   "The method reads the first element of every row, not every element of the first row."
+  ]
+ },
+ {
+  "id": "cs_postcondition_char_count",
+  "topic": "2.10",
+  "skill": "4.B",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "java runs on several Strings vs Python count"
+  ],
+  "misconceptions": [
+   "The loop increases n when a piece equals c, so it counts the matches rather than the non-matches.",
+   "The return type is int, so the method returns a count, not a boolean.",
+   "The method never returns a position; the loop continues after a match and returns the count n."
+  ]
+ },
+ {
+  "id": "cs_postcondition_loop",
+  "topic": "2.9",
+  "skill": "4.B",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "java runs on several inputs vs Python integer division"
+  ],
+  "misconceptions": [
+   "The loop keeps subtracting while at least 4 remain, and the method returns the count rather than the value of n.",
+   "The loop does not divide repeatedly; it subtracts a fixed amount once per pass, which is not a digit count.",
+   "The loop counts subtractions in c and returns c; the remainder is the final value of n, which is not returned."
+  ]
+ },
+ {
   "id": "cs_precondition",
   "topic": "1.9",
   "skill": "4.B",
@@ -879,9 +1359,9 @@
    "javac+java runs every option call and records which throw an exception"
   ],
   "misconceptions": [
-   "The index -1 + 1 is 0, which is valid.",
-   "Index 2 is valid.",
-   "Index 1 is valid."
+   "Index 1 exists in a three-character string.",
+   "Index 1 exists in a two-character string.",
+   "A one-character string has a character at index 0."
   ]
  },
  {
@@ -915,6 +1395,51 @@
   ]
  },
  {
+  "id": "cs_precondition_division",
+  "topic": "1.9",
+  "skill": "4.B",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "java runs on zero, positive, and negative divisors"
+  ],
+  "misconceptions": [
+   "The value of total does not matter; total can be 0 or negative without any exception.",
+   "The division of ints never throws an exception when there is a remainder; the remainder is simply dropped.",
+   "This is stronger than needed: a negative count such as -3 also works, so it is not the weakest precondition."
+  ]
+ },
+ {
+  "id": "cs_precondition_list",
+  "topic": "4.9",
+  "skill": "4.B",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "java runs on an empty, a one-element, and a three-element list"
+  ],
+  "misconceptions": [
+   "A list with a single element already works; requiring three is more than is needed.",
+   "The values are never examined, only the position, so their sign does not matter.",
+   "A list with one or three elements works, so an even size is not needed."
+  ]
+ },
+ {
+  "id": "cs_precondition_string",
+  "topic": "2.10",
+  "skill": "4.B",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "java runs on a failing and a working call"
+  ],
+  "misconceptions": [
+   "The characters are never examined, only the positions, so the kind of character does not matter.",
+   "This is stronger than needed: a String with exactly two characters already works, so it is not the weakest condition.",
+   "A one-character String such as \"a\" still throws an exception because substring(0, 2) needs two characters."
+  ]
+ },
+ {
   "id": "cs_random_range",
   "topic": "1.11",
   "skill": "2.A",
@@ -930,6 +1455,21 @@
   ]
  },
  {
+  "id": "cs_recursion_calls_count",
+  "topic": "4.16",
+  "skill": "3.C",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java return value vs Python recursion with a counter"
+  ],
+  "misconceptions": [
+   "Counts only the calls made by the first recursive branch.",
+   "Reports the call count in place of the returned value.",
+   "Reports the number of calls as n."
+  ]
+ },
+ {
   "id": "cs_recursion_completion",
   "topic": "4.16",
   "skill": "2.A",
@@ -942,6 +1482,21 @@
    "Adds instead of multiplying.",
    "Never reduces exp, so the recursion never reaches the base case.",
    "Uses the wrong base case, so power(base, 1) returns 1 and power(base, 0) never ends."
+  ]
+ },
+ {
+  "id": "cs_recursion_digit_sum_trace",
+  "topic": "4.17",
+  "skill": "3.C",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java return value vs Python digit sum"
+  ],
+  "misconceptions": [
+   "Returns the last digit only, treating the recursive call as the end.",
+   "Recurses on n - 10 instead of n / 10, so the digits are not separated.",
+   "Multiplies the digits instead of adding them."
   ]
  },
  {
@@ -971,7 +1526,7 @@
   "misconceptions": [
    "Adds instead of multiplying.",
    "Believes the base case returns 0, which makes every product 0.",
-   "Skips every other factor."
+   "Steps down by 2 instead of 1, skipping every other factor; the base case at 0 is reached only when n is even, and otherwise the recursion never ends."
   ]
  },
  {
@@ -987,6 +1542,21 @@
    "Believes the recursion stops as soon as lo equals hi, so a one-position range is never examined.",
    "Believes the method returns the value that was found instead of its index.",
    "Believes the middle index is rounded up when the range has an even number of positions."
+  ]
+ },
+ {
+  "id": "cs_remove_char_completion",
+  "topic": "2.10",
+  "skill": "2.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "each candidate compiled and run on Strings vs Python replace"
+  ],
+  "misconceptions": [
+   "Replaces the result on every pass instead of appending, so only the last kept character remains.",
+   "Appends the whole rest of the String each time, which repeats characters.",
+   "Keeps only the character that should be removed."
   ]
  },
  {
@@ -1061,7 +1631,7 @@
   "misconceptions": [
    "Believes the minimum is copied to the front without moving the displaced element, losing it.",
    "Believes each pass selects the largest element instead of the smallest.",
-   "Believes each pass swaps the element with its right neighbor, like one pass of bubble sort."
+   "Believes each pass swaps position i with its right neighbor instead of with the smallest element found."
   ]
  },
  {
@@ -1075,7 +1645,7 @@
   ],
   "misconceptions": [
    "Gives || higher precedence than &&, grouping (A || B) && C.",
-   "Evaluates the right operand of || even when the left operand is true but skips && operands.",
+   "Believes || always evaluates both of its operands, so the labels of the && operands are printed even when A is true.",
    "Evaluates every operand because it ignores short-circuit evaluation."
   ]
  },
@@ -1120,8 +1690,8 @@
   ],
   "misconceptions": [
    "Collects the characters that differ from the next one.",
-   "Appends the neighbor instead of the repeated letter's first copy, adding every second occurrence of the pair.",
-   "Compares each character with the character two positions ahead."
+   "Appends the repeated letter twice for every adjacent pair instead of once.",
+   "Compares each character with the character two positions ahead. Running this version throws a run-time exception."
   ]
  },
  {
@@ -1152,6 +1722,21 @@
    "Reads the quoted dash as a minus sign.",
    "Believes the last two numbers are added before they are joined to the text.",
    "Believes every + in a println argument joins text, so a and b are written next to each other."
+  ]
+ },
+ {
+  "id": "cs_string_count_pattern",
+  "topic": "2.10",
+  "skill": "3.C",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python slicing count"
+  ],
+  "misconceptions": [
+   "Counts the positions where the first character of the pattern appears.",
+   "Compares with == between String objects, which is not guaranteed to match equal text; here the substring is a new object so nothing is counted.",
+   "Stops one position early, so a pattern at the very end is not counted."
   ]
  },
  {
@@ -1215,6 +1800,36 @@
   ]
  },
  {
+  "id": "cs_substring_index_trace",
+  "topic": "1.15",
+  "skill": "3.C",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python slicing"
+  ],
+  "misconceptions": [
+   "Starts the right part at the index of the match, so the match appears again.",
+   "Starts the right part one character too late, dropping a character.",
+   "Includes the matched text in the left part by using k + 1 as the end index."
+  ]
+ },
+ {
+  "id": "cs_sum_until_negative_completion",
+  "topic": "2.7",
+  "skill": "2.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "each candidate compiled and run on arrays vs Python slice sum"
+  ],
+  "misconceptions": [
+   "Skips negative values but keeps adding the values after them.",
+   "Stops at the first zero as well as at the first negative value.",
+   "Tests a[i] before checking i, so an array with no negative value throws an ArrayIndexOutOfBoundsException."
+  ]
+ },
+ {
   "id": "cs_this_shadow",
   "topic": "3.9",
   "skill": "3.B",
@@ -1227,6 +1842,21 @@
    "Believes neither field is set because both names are also parameters.",
    "Believes only the last constructor statement takes effect.",
    "Believes second = second assigns the parameter to the instance variable."
+  ]
+ },
+ {
+  "id": "cs_uninitialized_use",
+  "topic": "1.4",
+  "skill": "3.D",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "javac compile of every option"
+  ],
+  "misconceptions": [
+   "This segment compiles: result is given a value on every path, so the code compiles.",
+   "This segment compiles: both branches assign result, so the compiler can see it is initialized.",
+   "This segment compiles; dividing by the literal 0 is a run-time problem (an ArithmeticException), not a compile-time error."
   ]
  },
  {
@@ -1245,6 +1875,21 @@
   ]
  },
  {
+  "id": "cs_while_sentinel_trace",
+  "topic": "2.7",
+  "skill": "3.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python loop"
+  ],
+  "misconceptions": [
+   "Reports the index of the sentinel plus one.",
+   "Reads the whole array and ignores the sentinel.",
+   "Includes the sentinel value -1 in the total before stopping."
+  ]
+ },
+ {
   "id": "cs_while_trace",
   "topic": "2.7",
   "skill": "3.A",
@@ -1260,6 +1905,66 @@
   ]
  },
  {
+  "id": "css_above_mean_set_q1",
+  "topic": "4.9",
+  "skill": "3.B",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "javac+java return value vs Python count"
+  ],
+  "misconceptions": [
+   "Counts the values below the integer average.",
+   "Counts the values that are greater than or equal to the integer average.",
+   "Compares each value with the first value of the list."
+  ]
+ },
+ {
+  "id": "css_above_mean_set_q2",
+  "topic": "4.9",
+  "skill": "4.A",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "javac+java runs the method on 5 or more inputs; each English description has a Python predicate that must agree (key) or disagree (distractors)"
+  ],
+  "misconceptions": [
+   "Compares with the first value, but the code compares with the average of all values. For instance, Probe.mystery(list) with list = [3, 5, 7] returns 1, but this description would give 2.",
+   "Returns the sum of those values instead of how many there are. For instance, Probe.mystery(list) with list = [3, 5, 7] returns 1, but this description would give 7.",
+   "Includes the values equal to the average, but the comparison is strict. For instance, Probe.mystery(list) with list = [3, 5, 7] returns 1, but this description would give 2."
+  ]
+ },
+ {
+  "id": "css_adjacent_set_q1",
+  "topic": "2.10",
+  "skill": "3.C",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "javac+java return value vs Python count"
+  ],
+  "misconceptions": [
+   "Counts the characters that appear in a pair of equal neighbors twice, once for each member of the pair.",
+   "Stops one position early, so a pair at the end of the String is missed.",
+   "Counts the runs of equal characters instead of the equal neighbor pairs."
+  ]
+ },
+ {
+  "id": "css_adjacent_set_q2",
+  "topic": "2.10",
+  "skill": "4.A",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "javac+java runs the method on 5 or more inputs; each English description has a Python predicate that must agree (key) or disagree (distractors)"
+  ],
+  "misconceptions": [
+   "Reports the longest run instead of counting each adjacent equal pair. For instance, Probe.mystery(\"abab\") returns 0, but this description would give 1.",
+   "Counts repeated characters anywhere in the String, not only neighbors. For instance, Probe.mystery(\"aabbb\") returns 3, but this description would give 2.",
+   "Counts every occurrence of a repeated character, even when the repeats are not next to each other. For instance, Probe.mystery(\"aabbb\") returns 3, but this description would give 5."
+  ]
+ },
+ {
   "id": "css_array_set_q1",
   "topic": "4.5",
   "skill": "3.B",
@@ -1270,7 +1975,7 @@
   ],
   "misconceptions": [
    "Returns the largest value instead of a count.",
-   "Includes the first element in the count by starting the loop at index 0 (it is never greater than itself, so the count is the same) and then adds 1 for the comparison it makes.",
+   "Also counts the first element itself, as if it were greater than itself.",
    "Counts the elements that are greater than the last element instead of the first."
   ]
  },
@@ -1284,9 +1989,9 @@
    "javac+java runs the method on 5 or more inputs; each English description has a Python predicate that must agree (key) or disagree (distractors)"
   ],
   "misconceptions": [
-   "Reverses the direction of the comparison.",
-   "Believes a counter that is incremented on a comparison returns the compared value.",
-   "Compares each element with the last element instead of the first."
+   "Reverses the direction of the comparison. For instance, Probe.mystery(new int[] { 3, 5, 1, 7 }) returns 2, but this description would give 1.",
+   "Believes a counter that is incremented on a comparison returns the compared value. For instance, Probe.mystery(new int[] { 3, 5, 1, 7 }) returns 2, but this description would give 7.",
+   "Compares each element with the last element instead of the first. For instance, Probe.mystery(new int[] { 3, 5, 1, 7 }) returns 2, but this description would give 0."
   ]
  },
  {
@@ -1314,7 +2019,7 @@
    "each candidate compiled into the class and run on empty and non-empty playlists"
   ],
   "misconceptions": [
-   "Divides without checking for an empty playlist, which throws an ArithmeticException.",
+   "Returns 1 for an empty playlist instead of 0.",
    "Divides the number of songs by the number of plays, in the wrong order.",
    "Multiplies instead of dividing."
   ]
@@ -1344,9 +2049,9 @@
    "javac+java runs the method on 5 or more inputs; each English description has a Python predicate that must agree (key) or disagree (distractors)"
   ],
   "misconceptions": [
-   "Believes each value is compared with the first value.",
-   "Believes the counter tracks the maximum.",
-   "Believes the comparison counts increases instead of decreases."
+   "Believes each value is compared with the first value. For instance, Probe.mystery(list) with list = [3, 1, 2] returns 1, but this description would give 0.",
+   "Believes the counter tracks the maximum. For instance, Probe.mystery(list) with list = [1, 2, 3] returns 0, but this description would give 1.",
+   "Believes the comparison counts increases instead of decreases. For instance, Probe.mystery(list) with list = [1, 2, 3] returns 0, but this description would give 2."
   ]
  },
  {
@@ -1374,9 +2079,39 @@
    "javac+java runs the method on 5 or more inputs; each English description has a Python predicate that must agree (key) or disagree (distractors)"
   ],
   "misconceptions": [
-   "Believes the condition is true when the characters differ.",
-   "Believes the counter increases for each new letter it meets.",
-   "Believes the loop also counts the character at index 0."
+   "Believes the condition is true when the characters differ. For instance, Probe.mystery(\"xyz\") returns 0, but this description would give 2.",
+   "Believes the counter increases for each new letter it meets. For instance, Probe.mystery(\"abaca\") returns 2, but this description would give 3.",
+   "Believes the loop also counts the character at index 0. For instance, Probe.mystery(\"abaca\") returns 2, but this description would give 3."
+  ]
+ },
+ {
+  "id": "css_shelf_set_q1",
+  "topic": "3.5",
+  "skill": "3.B",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "javac+java output vs Python simulation"
+  ],
+  "misconceptions": [
+   "Believes a rejected batch is also added to the stock.",
+   "Believes an item batch that does not fit is partly stored, filling the shelf to capacity.",
+   "Believes the rejected count is the number of rejected batches, not the number of items."
+  ]
+ },
+ {
+  "id": "css_shelf_set_q2",
+  "topic": "3.5",
+  "skill": "2.C",
+  "calculator": "not_allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each candidate compiled into the class and run on shelves with different contents"
+  ],
+  "misconceptions": [
+   "Divides the two ints first, which gives 0 until the shelf is full.",
+   "Adds the rejected count to the percentage, which is not part of how full the shelf is.",
+   "Divides by the rejected count, which is zero when nothing was rejected, causing an ArithmeticException."
   ]
  }
 ]

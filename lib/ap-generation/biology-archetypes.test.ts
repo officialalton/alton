@@ -35,10 +35,10 @@ d("AP Biology P0 archetypes (Python generators, 2 seeds each)", () => {
   const out = (r.status === 0 ? JSON.parse(r.stdout) : { names: [], frq: [], packs: {}, frqPacks: {} }) as { names: string[]; frq: string[]; packs: Record<string, Pk[]>; frqPacks: Record<string, FrqPack[]> };
   const flat = (n: string) => out.packs[n].flatMap((p) => (p.items ?? [p]).map((q) => ({ ...q, stimulus: q.stimulus ?? p.stimulus })));
 
-  it("registers the single-item archetypes and the 8 four-item sets, covers all 8 units, and the guide JSON lists the same ids", () => {
+  it("registers the single-item archetypes and the 9 four-item sets, covers all 8 units, and the guide JSON lists the same ids", () => {
     expect(r.status).toBe(0);
     expect(out.names.filter((n) => n.startsWith("bi_")).length).toBeGreaterThanOrEqual(160);
-    expect(out.names.filter((n) => n.startsWith("bis_"))).toHaveLength(8);
+    expect(out.names.filter((n) => n.startsWith("bis_"))).toHaveLength(9); // 2026-10-19 bis_n_cellcycle_set 추가
     const ids = biologyGuide.archetypes.map((a) => a.id);
     const expected = out.names.flatMap((n) => flat(n).slice(0, out.packs[n][0].items ? 4 : 1).map((q) => q.archetype));
     expect(ids).toEqual(expected);

@@ -1,0 +1,123 @@
+{
+ "runs": [
+  "micro-s5-a"
+ ],
+ "rows": 90,
+ "passed": 60,
+ "rejected": 30,
+ "passRate": 0.667,
+ "mc": {
+  "rows": 87,
+  "passed": 58,
+  "passRate": 0.667
+ },
+ "frq": {
+  "rows": 3,
+  "passed": 2,
+  "passRate": 0.667
+ },
+ "unitsPassed": {
+  "1": 6,
+  "2": 29,
+  "3": 9,
+  "4": 2,
+  "5": 8,
+  "6": 4
+ },
+ "skillsPassed": {
+  "1.C": 14,
+  "3.C": 30,
+  "3.A": 8,
+  "1.B": 3,
+  "2.C": 3
+ },
+ "figPassed": {
+  "table": 13,
+  "none": 36,
+  "graph": 11
+ },
+ "figAll": {
+  "table": 24,
+  "none": 51,
+  "graph": 15
+ },
+ "figPassRate": {
+  "table": "13/24",
+  "none": "36/51",
+  "graph": "11/15"
+ },
+ "renderTypesPassed": {
+  "ap_table": 13,
+  "none": 36,
+  "ap_graph:econ_curves": 11
+ },
+ "archetypesPassed": {
+  "mi_ppc_opp_cost": 3,
+  "mi_trade_terms": 3,
+  "mi_cross_price": 3,
+  "mi_demand_shift_graph": 3,
+  "mi_dwl_floor_graph": 2,
+  "mi_equilibrium_numeric": 2,
+  "mi_import_numeric": 2,
+  "mi_income_elasticity": 3,
+  "mi_pe_pct": 3,
+  "mi_price_floor_surplus": 3,
+  "mi_shortage_numeric": 3,
+  "mi_tax_graph_read": 2,
+  "mi_tax_incidence_numeric": 3,
+  "mi_cost_atc_avc": 1,
+  "mi_diminishing_onset": 3,
+  "mi_fixed_cost_effect": 1,
+  "mi_pc_demand_shift": 3,
+  "mi_profit_numeric": 1,
+  "mi_monopoly_dwl": 2,
+  "mi_least_cost": 3,
+  "mi_mfc_numeric": 3,
+  "mi_monopsony_graph": 2,
+  "mi_natural_monopoly": 1,
+  "mi_pos_ext_graph": 2,
+  "mi_tax_progressive": 1,
+  "mif_short_labor": 2
+ },
+ "archetypesAll": {
+  "mi_ppc_opp_cost": 3,
+  "mi_ppc_shift": 3,
+  "mi_trade_terms": 3,
+  "mi_cross_price": 3,
+  "mi_demand_shift_graph": 3,
+  "mi_dwl_floor_graph": 3,
+  "mi_dwl_tax": 3,
+  "mi_equilibrium_numeric": 3,
+  "mi_import_numeric": 3,
+  "mi_income_elasticity": 3,
+  "mi_pe_pct": 3,
+  "mi_price_floor_surplus": 3,
+  "mi_shortage_numeric": 3,
+  "mi_tax_graph_read": 3,
+  "mi_tax_incidence_numeric": 3,
+  "mi_cost_atc_avc": 3,
+  "mi_diminishing_onset": 3,
+  "mi_fixed_cost_effect": 3,
+  "mi_pc_demand_shift": 3,
+  "mi_profit_numeric": 3,
+  "mi_monopoly_dwl": 3,
+  "mi_least_cost": 3,
+  "mi_mfc_numeric": 3,
+  "mi_monopsony_graph": 3,
+  "mi_monopsony_numeric": 3,
+  "mi_msb_msc_table": 3,
+  "mi_natural_monopoly": 3,
+  "mi_pos_ext_graph": 3,
+  "mi_tax_progressive": 3,
+  "mif_short_labor": 3
+ },
+ "failedArchetypes": [
+  "mi_ppc_shift",
+  "mi_dwl_tax",
+  "mi_monopsony_numeric",
+  "mi_msb_msc_table"
+ ],
+ "costUsd": {
+  "micro-s5-a": 3.0575
+ }
+}

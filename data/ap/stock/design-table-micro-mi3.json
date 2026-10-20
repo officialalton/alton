@@ -1,0 +1,2395 @@
+{
+ "generatedAt": "2026-10-20",
+ "subject": "ap_microeconomics",
+ "report": "data/ap/stock/exact-assign-micro-mi3.json",
+ "published": "data/ap/stock/assembled/micro-mi1-mi2.json",
+ "summary": {
+  "items": 63,
+  "publishedCompared": 126,
+  "archetypeSharedWithPublished": 0,
+  "familySharedWithPublished": 0,
+  "maxNearestSimilarity": 0.49,
+  "siblingsInsideNewSet": 0,
+  "unitCounts": {
+   "1": 9,
+   "2": 13,
+   "3": 16,
+   "4": 13,
+   "5": 6,
+   "6": 6
+  },
+  "stimulusCounts": {
+   "none": 34,
+   "table": 21,
+   "graph": 6,
+   "text": 1,
+   "payoff_matrix": 1
+  }
+ },
+ "items": [
+  {
+   "position": 1,
+   "set": "MI3",
+   "key": "micro-s5-a:ap_microeconomics-m03-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "1",
+    "topic": "1.4",
+    "concept": "mutually beneficial terms of trade lie between the two opportunity costs"
+   },
+   "function": {
+    "skill": "3.C",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: mutually beneficial terms of trade lie between the two opportunity costs",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "interval test a < terms < b vs symbolic midpoint inside the interval"
+   },
+   "duplication": {
+    "archetype": "mi_trade_terms",
+    "family": "fam:micro-s5-a:ap_microeconomics-m03-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-f:ap_microeconomics-f02-k0",
+    "nearest_similarity": 0.294,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 2,
+   "set": "MI3",
+   "key": "micro-s5-b:ap_microeconomics-m01-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "1",
+    "topic": "1.3",
+    "concept": "points inside, on, and shifts of a production possibilities curve"
+   },
+   "function": {
+    "skill": "2.B",
+    "response": "multiple choice",
+    "judgment": [
+     "separate a movement or inefficiency from a shift of the curve and match it to the cause given"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: points inside, on, and shifts of a production possibilities curve",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted statements; each wrong sentence confuses a movement with a shift or inefficiency with a trade-off"
+   },
+   "duplication": {
+    "archetype": "mi_ppc_inside_point",
+    "family": "fam:micro-s5-b:ap_microeconomics-m01-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-b:ap_microeconomics-m18-k3",
+    "nearest_similarity": 0.171,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 3,
+   "set": "MI3",
+   "key": "micro-s5-b:ap_microeconomics-m02-k1",
+   "kind": "mc",
+   "content": {
+    "unit": "1",
+    "topic": "1.4",
+    "concept": "mutually beneficial terms of trade lie strictly between the two opportunity costs"
+   },
+   "function": {
+    "skill": "2.B",
+    "response": "multiple choice",
+    "judgment": [
+     "compare the two opportunity costs and choose a trade ratio between them"
+    ]
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: mutually beneficial terms of trade lie strictly between the two opportunity costs",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "opportunity-cost ratios from the table vs reciprocal comparison"
+   },
+   "duplication": {
+    "archetype": "mi_trade_specialize_table",
+    "family": "fam:micro-s5-b:ap_microeconomics-m02-k1",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p1-a:ap_microeconomics-m16-k1",
+    "nearest_similarity": 0.296,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 4,
+   "set": "MI3",
+   "key": "micro-s5-b:ap_microeconomics-m03-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "1",
+    "topic": "1.5",
+    "concept": "marginal benefit versus marginal cost with a sunk cost"
+   },
+   "function": {
+    "skill": "2.B",
+    "response": "multiple choice",
+    "judgment": [
+     "compare the marginal benefit with the marginal cost and ignore any sunk cost"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: marginal benefit versus marginal cost with a sunk cost",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenarios; the key compares marginal values and ignores the sunk amount"
+   },
+   "duplication": {
+    "archetype": "mi_marginal_decision_sunk",
+    "family": "fam:micro-s5-b:ap_microeconomics-m03-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-c:ap_microeconomics-m04-k0",
+    "nearest_similarity": 0.195,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 5,
+   "set": "MI3",
+   "key": "micro-s5-b:ap_microeconomics-m05-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "1",
+    "topic": "1.1",
+    "concept": "opportunity cost depends on the best alternative, not on the price paid"
+   },
+   "function": {
+    "skill": "2.B",
+    "response": "multiple choice",
+    "judgment": [
+     "link a change in the value of the best alternative to the cost of the chosen action"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: opportunity cost depends on the best alternative, not on the price paid",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenarios; each wrong sentence ties opportunity cost to money, to a total, or to another decision maker"
+   },
+   "duplication": {
+    "archetype": "mi_incentives_opp_cost",
+    "family": "fam:micro-s5-b:ap_microeconomics-m05-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-c:ap_microeconomics-m11-k1",
+    "nearest_similarity": 0.171,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 6,
+   "set": "MI3",
+   "key": "micro-s5-d:ap_microeconomics-m01-k1",
+   "kind": "mc",
+   "content": {
+    "unit": "1",
+    "topic": "1.1",
+    "concept": "identify scarcity or the law of demand from a short scenario"
+   },
+   "function": {
+    "skill": "1.B",
+    "response": "multiple choice",
+    "judgment": [
+     "identify the concept from the features of the scenario"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: identify scarcity or the law of demand from a short scenario",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenarios; the key names the concept the scenario illustrates"
+   },
+   "duplication": {
+    "archetype": "mi_concept_scenario_id",
+    "family": "fam:micro-s5-d:ap_microeconomics-m01-k1",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p1-a:ap_microeconomics-m16-k1",
+    "nearest_similarity": 0.155,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 7,
+   "set": "MI3",
+   "key": "micro-s5-d:ap_microeconomics-m02-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "1",
+    "topic": "1.4",
+    "concept": "gains from trade rest on comparative advantage even when one party has an absolute advantage in everything"
+   },
+   "function": {
+    "skill": "2.B",
+    "response": "multiple choice",
+    "judgment": [
+     "separate absolute from comparative advantage and explain the gain"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: gains from trade rest on comparative advantage even when one party has an absolute advantage in everything",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenarios; the key explains the gain with opportunity cost, not absolute cost"
+   },
+   "duplication": {
+    "archetype": "mi_absolute_vs_comparative",
+    "family": "fam:micro-s5-d:ap_microeconomics-m02-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-a:ap_microeconomics-m12-k0",
+    "nearest_similarity": 0.141,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 8,
+   "set": "MI3",
+   "key": "run1:ap_microeconomics-c001-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "1",
+    "topic": "1.1",
+    "concept": null
+   },
+   "function": {
+    "skill": "1.A",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": null,
+    "verification": null
+   },
+   "duplication": {
+    "archetype": null,
+    "family": "fam:run1:ap_microeconomics-c001-k0",
+    "archetype_in_published": null,
+    "family_in_published": false,
+    "nearest_published": "micro-p1-a:ap_microeconomics-m16-k1",
+    "nearest_similarity": 0.15,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 9,
+   "set": "MI3",
+   "key": "run1:ap_microeconomics-c002-k3",
+   "kind": "mc",
+   "content": {
+    "unit": "1",
+    "topic": "1.3",
+    "concept": null
+   },
+   "function": {
+    "skill": "2.A",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": null,
+    "verification": null
+   },
+   "duplication": {
+    "archetype": null,
+    "family": "fam:run1:ap_microeconomics-c002-k3",
+    "archetype_in_published": null,
+    "family_in_published": false,
+    "nearest_published": "micro-p1-a:ap_microeconomics-m16-k1",
+    "nearest_similarity": 0.213,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 10,
+   "set": "MI3",
+   "key": "micro-s5-a:ap_microeconomics-m04-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.5",
+    "concept": "cross-price elasticity of demand and its sign"
+   },
+   "function": {
+    "skill": "1.C",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: cross-price elasticity of demand and its sign",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "exact ratio vs sympy rational and sign rule"
+   },
+   "duplication": {
+    "archetype": "mi_cross_price",
+    "family": "fam:micro-s5-a:ap_microeconomics-m04-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-b:ap_microeconomics-m05-k0",
+    "nearest_similarity": 0.196,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 11,
+   "set": "MI3",
+   "key": "micro-s5-a:ap_microeconomics-m05-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.7",
+    "concept": "read the new equilibrium after a demand shift from the graph"
+   },
+   "function": {
+    "skill": "3.A",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "graph",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: read the new equilibrium after a demand shift from the graph",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "intersection of the shifted line with supply (exact) vs sympy solve"
+   },
+   "duplication": {
+    "archetype": "mi_demand_shift_graph",
+    "family": "fam:micro-s5-a:ap_microeconomics-m05-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p1-a:ap_microeconomics-m11-k1",
+    "nearest_similarity": 0.424,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 12,
+   "set": "MI3",
+   "key": "micro-s5-a:ap_microeconomics-m10-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.5",
+    "concept": "income elasticity of demand and classification of goods"
+   },
+   "function": {
+    "skill": "1.C",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: income elasticity of demand and classification of goods",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "exact ratio vs sympy rational, classification by threshold on the value"
+   },
+   "duplication": {
+    "archetype": "mi_income_elasticity",
+    "family": "fam:micro-s5-a:ap_microeconomics-m10-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-b:ap_microeconomics-m12-k1",
+    "nearest_similarity": 0.233,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 13,
+   "set": "MI3",
+   "key": "micro-s5-a:ap_microeconomics-m14-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.8",
+    "concept": "tax revenue, deadweight loss, and incidence read from a graph"
+   },
+   "function": {
+    "skill": "3.C",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "graph",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: tax revenue, deadweight loss, and incidence read from a graph",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "areas from exact marker coordinates vs sympy equilibrium solution with the tax"
+   },
+   "duplication": {
+    "archetype": "mi_tax_graph_read",
+    "family": "fam:micro-s5-a:ap_microeconomics-m14-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p1-a:ap_microeconomics-m10-k0",
+    "nearest_similarity": 0.419,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 14,
+   "set": "MI3",
+   "key": "micro-s5-a:ap_microeconomics-m15-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.8",
+    "concept": "consumer share of a per-unit tax"
+   },
+   "function": {
+    "skill": "3.C",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: consumer share of a per-unit tax",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "difference of exact post-tax and pre-tax buyer prices vs closed form d*t/(b+d)"
+   },
+   "duplication": {
+    "archetype": "mi_tax_incidence_numeric",
+    "family": "fam:micro-s5-a:ap_microeconomics-m15-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p1-a:ap_microeconomics-m03-k0",
+    "nearest_similarity": 0.281,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 15,
+   "set": "MI3",
+   "key": "micro-s5-b:ap_microeconomics-m06-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.1",
+    "concept": "classify related goods from the direction of the cross-price effect"
+   },
+   "function": {
+    "skill": "1.B",
+    "response": "multiple choice",
+    "judgment": [
+     "read the direction of the demand change and name the relationship"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: classify related goods from the direction of the cross-price effect",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted pairs with a sign rule; the key is derived from the pair's relation"
+   },
+   "duplication": {
+    "archetype": "mi_substitute_complement_id",
+    "family": "fam:micro-s5-b:ap_microeconomics-m06-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-c:ap_microeconomics-m08-k1",
+    "nearest_similarity": 0.191,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 16,
+   "set": "MI3",
+   "key": "micro-s5-b:ap_microeconomics-m07-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.3",
+    "concept": "price elasticity from percentage changes and the total-revenue test"
+   },
+   "function": {
+    "skill": "1.B",
+    "response": "multiple choice",
+    "judgment": [
+     "compare the percentage changes and apply the total-revenue test"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: price elasticity from percentage changes and the total-revenue test",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "exact ratio of percentage changes vs total-revenue rule table"
+   },
+   "duplication": {
+    "archetype": "mi_elasticity_type_identify",
+    "family": "fam:micro-s5-b:ap_microeconomics-m07-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-c:ap_microeconomics-m03-k1",
+    "nearest_similarity": 0.235,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 17,
+   "set": "MI3",
+   "key": "micro-s5-b:ap_microeconomics-m08-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.3",
+    "concept": "compare elasticity across time, along a line, and across market sides"
+   },
+   "function": {
+    "skill": "1.D",
+    "response": "multiple choice",
+    "judgment": [
+     "compare how elasticity differs across the cases and reject the reversed or merged statements"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: compare elasticity across time, along a line, and across market sides",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted statements; each wrong sentence reverses a comparison or merges slope and elasticity"
+   },
+   "duplication": {
+    "archetype": "mi_elasticity_compare",
+    "family": "fam:micro-s5-b:ap_microeconomics-m08-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-a:ap_microeconomics-m37-k0",
+    "nearest_similarity": 0.25,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 18,
+   "set": "MI3",
+   "key": "micro-s5-b:ap_microeconomics-m09-k1",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.8",
+    "concept": "compare price controls, taxes and subsidies, and tariffs and quotas"
+   },
+   "function": {
+    "skill": "1.D",
+    "response": "multiple choice",
+    "judgment": [
+     "compare the two policies on price, quantity, and revenue and reject reversed effects"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: compare price controls, taxes and subsidies, and tariffs and quotas",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted comparisons; each wrong sentence reverses an effect or treats two policies as identical"
+   },
+   "duplication": {
+    "archetype": "mi_policy_compare",
+    "family": "fam:micro-s5-b:ap_microeconomics-m09-k1",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-a:ap_microeconomics-m34-k0",
+    "nearest_similarity": 0.276,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 19,
+   "set": "MI3",
+   "key": "micro-s5-b:ap_microeconomics-m11-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.6",
+    "concept": "compare consumer surplus, producer surplus, and deadweight loss"
+   },
+   "function": {
+    "skill": "1.D",
+    "response": "multiple choice",
+    "judgment": [
+     "compare the measures and reject swapped definitions"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: compare consumer surplus, producer surplus, and deadweight loss",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted statements; each wrong sentence swaps definitions or merges a transfer with a loss"
+   },
+   "duplication": {
+    "archetype": "mi_surplus_compare",
+    "family": "fam:micro-s5-b:ap_microeconomics-m11-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-a:ap_microeconomics-m36-k0",
+    "nearest_similarity": 0.215,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 20,
+   "set": "MI3",
+   "key": "run1:ap_microeconomics-c006-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.1",
+    "concept": null
+   },
+   "function": {
+    "skill": "2.A",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": null,
+    "verification": null
+   },
+   "duplication": {
+    "archetype": null,
+    "family": "fam:run1:ap_microeconomics-c006-k0",
+    "archetype_in_published": null,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-a:ap_microeconomics-m33-k0",
+    "nearest_similarity": 0.188,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 21,
+   "set": "MI3",
+   "key": "run1:ap_microeconomics-c009-k1",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.7",
+    "concept": null
+   },
+   "function": {
+    "skill": "3.A",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": null,
+    "verification": null
+   },
+   "duplication": {
+    "archetype": null,
+    "family": "fam:run1:ap_microeconomics-c009-k1",
+    "archetype_in_published": null,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-c:ap_microeconomics-m07-k0",
+    "nearest_similarity": 0.214,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 22,
+   "set": "MI3",
+   "key": "run1:ap_microeconomics-c010-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "2",
+    "topic": "2.9",
+    "concept": null
+   },
+   "function": {
+    "skill": "2.A",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "graph",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": null,
+    "verification": null
+   },
+   "duplication": {
+    "archetype": null,
+    "family": "fam:run1:ap_microeconomics-c010-k0",
+    "archetype_in_published": null,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-b:ap_microeconomics-m25-k3",
+    "nearest_similarity": 0.267,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 23,
+   "set": "MI3",
+   "key": "micro-s5-a:ap_microeconomics-m16-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.2",
+    "concept": "average total, variable, and fixed cost from a total cost table"
+   },
+   "function": {
+    "skill": "1.C",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: average total, variable, and fixed cost from a total cost table",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "Fraction division of the table values vs sympy closed form"
+   },
+   "duplication": {
+    "archetype": "mi_cost_atc_avc",
+    "family": "fam:micro-s5-a:ap_microeconomics-m16-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p1-a:ap_microeconomics-m04-k1",
+    "nearest_similarity": 0.421,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 24,
+   "set": "MI3",
+   "key": "micro-s5-a:ap_microeconomics-m18-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.2",
+    "concept": "effect of a fixed cost change on short-run cost curves"
+   },
+   "function": {
+    "skill": "3.A",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: effect of a fixed cost change on short-run cost curves",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "cost-function derivation: d/dF of MC and AVC is zero while ATC and AFC rise"
+   },
+   "duplication": {
+    "archetype": "mi_fixed_cost_effect",
+    "family": "fam:micro-s5-a:ap_microeconomics-m18-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-b:ap_microeconomics-m03-k3",
+    "nearest_similarity": 0.434,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 25,
+   "set": "MI3",
+   "key": "micro-s5-a:ap_microeconomics-m19-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.7",
+    "concept": "short-run and long-run adjustment to a demand change in a constant-cost industry"
+   },
+   "function": {
+    "skill": "3.A",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: short-run and long-run adjustment to a demand change in a constant-cost industry",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted adjustment table verified by a supply-and-demand simulation with entry shifting supply until profit is zero"
+   },
+   "duplication": {
+    "archetype": "mi_pc_demand_shift",
+    "family": "fam:micro-s5-a:ap_microeconomics-m19-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p1-a:ap_microeconomics-m20-k0",
+    "nearest_similarity": 0.435,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 26,
+   "set": "MI3",
+   "key": "micro-s5-a:ap_microeconomics-m20-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.5",
+    "concept": "economic profit = (price - ATC) x quantity"
+   },
+   "function": {
+    "skill": "3.C",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: economic profit = (price - ATC) x quantity",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "(P - ATC) x Q vs total revenue minus total cost"
+   },
+   "duplication": {
+    "archetype": "mi_profit_numeric",
+    "family": "fam:micro-s5-a:ap_microeconomics-m20-k2",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-a:ap_microeconomics-m31-k0",
+    "nearest_similarity": 0.419,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 27,
+   "set": "MI3",
+   "key": "micro-s5-b:ap_microeconomics-m12-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.2",
+    "concept": "definitions of average and marginal cost measures"
+   },
+   "function": {
+    "skill": "1.A",
+    "response": "multiple choice",
+    "judgment": [
+     "recall the exact definition and reject definitions of related measures"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: definitions of average and marginal cost measures",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted definitions; each wrong sentence defines a different cost measure"
+   },
+   "duplication": {
+    "archetype": "mi_cost_definitions",
+    "family": "fam:micro-s5-b:ap_microeconomics-m12-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-b:ap_microeconomics-m03-k3",
+    "nearest_similarity": 0.49,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 28,
+   "set": "MI3",
+   "key": "micro-s5-b:ap_microeconomics-m13-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.3",
+    "concept": "returns to scale compare the proportional change in output with the proportional change in all inputs"
+   },
+   "function": {
+    "skill": "1.B",
+    "response": "multiple choice",
+    "judgment": [
+     "compare the factor change in output with the factor change in inputs"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: returns to scale compare the proportional change in output with the proportional change in all inputs",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "ratio comparison vs rule table; changes of all inputs only (long run)"
+   },
+   "duplication": {
+    "archetype": "mi_returns_scale_id",
+    "family": "fam:micro-s5-b:ap_microeconomics-m13-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-a:ap_microeconomics-m15-k0",
+    "nearest_similarity": 0.298,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 29,
+   "set": "MI3",
+   "key": "micro-s5-b:ap_microeconomics-m14-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.4",
+    "concept": "implicit costs are the opportunity costs of owner-supplied resources"
+   },
+   "function": {
+    "skill": "1.B",
+    "response": "multiple choice",
+    "judgment": [
+     "separate payments to others from the value of the owner's forgone alternatives"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: implicit costs are the opportunity costs of owner-supplied resources",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted business cases with one forgone alternative each"
+   },
+   "duplication": {
+    "archetype": "mi_explicit_implicit_cost",
+    "family": "fam:micro-s5-b:ap_microeconomics-m14-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-a:ap_microeconomics-m35-k1",
+    "nearest_similarity": 0.147,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 30,
+   "set": "MI3",
+   "key": "micro-s5-b:ap_microeconomics-m15-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.1",
+    "concept": "short run (some input fixed) versus long run (all inputs variable)"
+   },
+   "function": {
+    "skill": "1.B",
+    "response": "multiple choice",
+    "judgment": [
+     "identify the period from which inputs can change"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: short run (some input fixed) versus long run (all inputs variable)",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenarios; the key identifies the period by whether any input is fixed"
+   },
+   "duplication": {
+    "archetype": "mi_short_long_run_id",
+    "family": "fam:micro-s5-b:ap_microeconomics-m15-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-a:ap_microeconomics-m15-k0",
+    "nearest_similarity": 0.212,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 31,
+   "set": "MI3",
+   "key": "micro-s5-b:ap_microeconomics-m16-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.3",
+    "concept": "sources of economies and diseconomies of scale"
+   },
+   "function": {
+    "skill": "1.B",
+    "response": "multiple choice",
+    "judgment": [
+     "identify whether average cost falls or rises with scale and name the source"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: sources of economies and diseconomies of scale",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenarios; the key links the cost change to its source"
+   },
+   "duplication": {
+    "archetype": "mi_scale_source_id",
+    "family": "fam:micro-s5-b:ap_microeconomics-m16-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-a:ap_microeconomics-m15-k0",
+    "nearest_similarity": 0.212,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 32,
+   "set": "MI3",
+   "key": "micro-s5-b:ap_microeconomics-m17-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.2",
+    "concept": "relationships among ATC, AVC, AFC, and MC"
+   },
+   "function": {
+    "skill": "1.D",
+    "response": "multiple choice",
+    "judgment": [
+     "compare the cost curves and reject reversed relationships"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: relationships among ATC, AVC, AFC, and MC",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted statements; each wrong sentence reverses a relationship"
+   },
+   "duplication": {
+    "archetype": "mi_atc_mc_compare",
+    "family": "fam:micro-s5-b:ap_microeconomics-m17-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-b:ap_microeconomics-m01-k1",
+    "nearest_similarity": 0.309,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 33,
+   "set": "MI3",
+   "key": "micro-s5-b:ap_microeconomics-m19-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.6",
+    "concept": "compare short-run shutdown with long-run exit, and firm supply with market supply"
+   },
+   "function": {
+    "skill": "1.D",
+    "response": "multiple choice",
+    "judgment": [
+     "compare the rules by period and reject swapped rules"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: compare short-run shutdown with long-run exit, and firm supply with market supply",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted statements; each wrong sentence swaps a decision rule or an aggregation direction"
+   },
+   "duplication": {
+    "archetype": "mi_shutdown_exit_compare",
+    "family": "fam:micro-s5-b:ap_microeconomics-m19-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-a:ap_microeconomics-m09-k0",
+    "nearest_similarity": 0.422,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 34,
+   "set": "MI3",
+   "key": "run1:ap_microeconomics-c012-k3",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.1",
+    "concept": null
+   },
+   "function": {
+    "skill": "1.A",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": null,
+    "verification": null
+   },
+   "duplication": {
+    "archetype": null,
+    "family": "fam:run1:ap_microeconomics-c012-k3",
+    "archetype_in_published": null,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-a:ap_microeconomics-m38-k0",
+    "nearest_similarity": 0.178,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 35,
+   "set": "MI3",
+   "key": "run1:ap_microeconomics-c013-k1",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.3",
+    "concept": null
+   },
+   "function": {
+    "skill": "1.D",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": null,
+    "verification": null
+   },
+   "duplication": {
+    "archetype": null,
+    "family": "fam:run1:ap_microeconomics-c013-k1",
+    "archetype_in_published": null,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-b:ap_microeconomics-m03-k3",
+    "nearest_similarity": 0.14,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 36,
+   "set": "MI3",
+   "key": "run1:ap_microeconomics-c014-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.4",
+    "concept": null
+   },
+   "function": {
+    "skill": "1.C",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": null,
+    "verification": null
+   },
+   "duplication": {
+    "archetype": null,
+    "family": "fam:run1:ap_microeconomics-c014-k2",
+    "archetype_in_published": null,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-a:ap_microeconomics-m17-k0",
+    "nearest_similarity": 0.214,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 37,
+   "set": "MI3",
+   "key": "run1:ap_microeconomics-c015-k1",
+   "kind": "mc",
+   "content": {
+    "unit": "3",
+    "topic": "3.5",
+    "concept": null
+   },
+   "function": {
+    "skill": "2.A",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": null,
+    "verification": null
+   },
+   "duplication": {
+    "archetype": null,
+    "family": "fam:run1:ap_microeconomics-c015-k1",
+    "archetype_in_published": null,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-a:ap_microeconomics-m31-k1",
+    "nearest_similarity": 0.306,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 38,
+   "set": "MI3",
+   "key": "micro-s5-a:ap_microeconomics-m21-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.2",
+    "concept": "deadweight loss of monopoly as a triangle"
+   },
+   "function": {
+    "skill": "3.C",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: deadweight loss of monopoly as a triangle",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "exact-fraction module (micro_checks.monopoly DWL) vs numeric integral of demand minus marginal cost over the lost quantity"
+   },
+   "duplication": {
+    "archetype": "mi_monopoly_dwl",
+    "family": "fam:micro-s5-a:ap_microeconomics-m21-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-a:ap_microeconomics-m20-k0",
+    "nearest_similarity": 0.375,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 39,
+   "set": "MI3",
+   "key": "micro-s5-b:ap_microeconomics-m20-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.1",
+    "concept": "a merger raises the HHI by twice the product of the merging firms' shares"
+   },
+   "function": {
+    "skill": "2.C",
+    "response": "multiple choice",
+    "judgment": [
+     "recompute the index for the merged market and take the difference"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: a merger raises the HHI by twice the product of the merging firms' shares",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "difference of recomputed HHI before/after vs closed form 2ab (exact integers)"
+   },
+   "duplication": {
+    "archetype": "mi_merger_hhi_change",
+    "family": "fam:micro-s5-b:ap_microeconomics-m20-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-a:ap_microeconomics-m13-k0",
+    "nearest_similarity": 0.469,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 40,
+   "set": "MI3",
+   "key": "micro-s5-b:ap_microeconomics-m21-k1",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.2",
+    "concept": "a monopolist produces where marginal revenue equals marginal cost and charges the demand price at that quantity"
+   },
+   "function": {
+    "skill": "2.C",
+    "response": "multiple choice",
+    "judgment": [
+     "derive marginal revenue from the schedule and compare it with marginal cost"
+    ]
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: a monopolist produces where marginal revenue equals marginal cost and charges the demand price at that quantity",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "MR from differences of total revenue vs exhaustive profit search"
+   },
+   "duplication": {
+    "archetype": "mi_mr_table_profit",
+    "family": "fam:micro-s5-b:ap_microeconomics-m21-k1",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-a:ap_microeconomics-m20-k0",
+    "nearest_similarity": 0.364,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 41,
+   "set": "MI3",
+   "key": "micro-s5-b:ap_microeconomics-m22-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.4",
+    "concept": "long-run monopolistic competition ends with price equal to average total cost and zero economic profit"
+   },
+   "function": {
+    "skill": "2.C",
+    "response": "multiple choice",
+    "judgment": [
+     "find the output with zero economic profit and reject the minimum-cost output"
+    ]
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: long-run monopolistic competition ends with price equal to average total cost and zero economic profit",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "unique row with P = ATC vs tangency of the linear demand to the convex ATC"
+   },
+   "duplication": {
+    "archetype": "mi_mc_tangency_table",
+    "family": "fam:micro-s5-b:ap_microeconomics-m22-k2",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-a:ap_microeconomics-m31-k0",
+    "nearest_similarity": 0.333,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 42,
+   "set": "MI3",
+   "key": "micro-s5-b:ap_microeconomics-m23-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.2",
+    "concept": "perfect price discrimination captures every buyer's willingness to pay"
+   },
+   "function": {
+    "skill": "2.C",
+    "response": "multiple choice",
+    "judgment": [
+     "compute the best uniform-price profit and the discriminating profit and take the difference"
+    ]
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: perfect price discrimination captures every buyer's willingness to pay",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "enumerate single prices at each willingness to pay vs sum of (willingness to pay - cost)"
+   },
+   "duplication": {
+    "archetype": "mi_price_discrim_numeric",
+    "family": "fam:micro-s5-b:ap_microeconomics-m23-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-c:ap_microeconomics-m02-k0",
+    "nearest_similarity": 0.153,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 43,
+   "set": "MI3",
+   "key": "micro-s5-b:ap_microeconomics-m24-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.2",
+    "concept": "a fixed fee leaves marginal cost unchanged, a per-unit tax raises it"
+   },
+   "function": {
+    "skill": "3.A",
+    "response": "multiple choice",
+    "judgment": [
+     "decide whether marginal cost changes and trace the result to price and quantity"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: a fixed fee leaves marginal cost unchanged, a per-unit tax raises it",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenarios; the key follows from where the cost change enters MR = MC"
+   },
+   "duplication": {
+    "archetype": "mi_monopoly_tax_effect",
+    "family": "fam:micro-s5-b:ap_microeconomics-m24-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-a:ap_microeconomics-m20-k0",
+    "nearest_similarity": 0.264,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 44,
+   "set": "MI3",
+   "key": "micro-s5-b:ap_microeconomics-m25-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.4",
+    "concept": "entry and exit in monopolistic competition until zero economic profit"
+   },
+   "function": {
+    "skill": "3.A",
+    "response": "multiple choice",
+    "judgment": [
+     "trace entry or exit to the change in each firm's demand and profit"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: entry and exit in monopolistic competition until zero economic profit",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenarios; the key follows profit to entry or exit and then to the shift in firm demand"
+   },
+   "duplication": {
+    "archetype": "mi_entry_mc_shift",
+    "family": "fam:micro-s5-b:ap_microeconomics-m25-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-b:ap_microeconomics-m11-k0",
+    "nearest_similarity": 0.362,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 45,
+   "set": "MI3",
+   "key": "run1:ap_microeconomics-c018-k1",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.1",
+    "concept": null
+   },
+   "function": {
+    "skill": "1.D",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": null,
+    "verification": null
+   },
+   "duplication": {
+    "archetype": null,
+    "family": "fam:run1:ap_microeconomics-c018-k1",
+    "archetype_in_published": null,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-c:ap_microeconomics-m06-k0",
+    "nearest_similarity": 0.167,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 46,
+   "set": "MI3",
+   "key": "run1:ap_microeconomics-c019-k3",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.2",
+    "concept": null
+   },
+   "function": {
+    "skill": "2.A",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "graph",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": null,
+    "verification": null
+   },
+   "duplication": {
+    "archetype": null,
+    "family": "fam:run1:ap_microeconomics-c019-k3",
+    "archetype_in_published": null,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-c:ap_microeconomics-m13-k0",
+    "nearest_similarity": 0.191,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 47,
+   "set": "MI3",
+   "key": "run1:ap_microeconomics-c020-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.4",
+    "concept": null
+   },
+   "function": {
+    "skill": "2.A",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "text",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": null,
+    "verification": null
+   },
+   "duplication": {
+    "archetype": null,
+    "family": "fam:run1:ap_microeconomics-c020-k2",
+    "archetype_in_published": null,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-a:ap_microeconomics-m16-k0",
+    "nearest_similarity": 0.333,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 48,
+   "set": "MI3",
+   "key": "run1:ap_microeconomics-c021-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "4",
+    "topic": "4.5",
+    "concept": null
+   },
+   "function": {
+    "skill": "2.C",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "payoff_matrix",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": null,
+    "verification": null
+   },
+   "duplication": {
+    "archetype": null,
+    "family": "fam:run1:ap_microeconomics-c021-k2",
+    "archetype_in_published": null,
+    "family_in_published": false,
+    "nearest_published": "micro-p1-a:ap_microeconomics-m21-k0",
+    "nearest_similarity": 0.275,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 49,
+   "set": "MI3",
+   "key": "micro-s5-b:ap_microeconomics-m29-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "5",
+    "topic": "5.3",
+    "concept": "marginal cost of output equals the wage divided by the marginal product of labor"
+   },
+   "function": {
+    "skill": "2.C",
+    "response": "multiple choice",
+    "judgment": [
+     "relate input cost and marginal product to the cost of one more unit of output"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: marginal cost of output equals the wage divided by the marginal product of labor",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "exact fraction change in w/MP vs sympy"
+   },
+   "duplication": {
+    "archetype": "mi_mc_from_mp_wage",
+    "family": "fam:micro-s5-b:ap_microeconomics-m29-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p1-a:ap_microeconomics-m08-k0",
+    "nearest_similarity": 0.262,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 50,
+   "set": "MI3",
+   "key": "micro-s5-b:ap_microeconomics-m30-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "5",
+    "topic": "5.3",
+    "concept": "the most a competitive firm will pay for a worker is the worker's marginal revenue product"
+   },
+   "function": {
+    "skill": "2.C",
+    "response": "multiple choice",
+    "judgment": [
+     "value the worker's added output at the new price"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: the most a competitive firm will pay for a worker is the worker's marginal revenue product",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "MP x price vs exact fraction check of the change"
+   },
+   "duplication": {
+    "archetype": "mi_mrp_price_change",
+    "family": "fam:micro-s5-b:ap_microeconomics-m30-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-a:ap_microeconomics-m24-k0",
+    "nearest_similarity": 0.171,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 51,
+   "set": "MI3",
+   "key": "micro-s5-c:ap_microeconomics-m01-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "5",
+    "topic": "5.2",
+    "concept": "simultaneous shifts in labor demand and labor supply: one variable is determinate, the other is not"
+   },
+   "function": {
+    "skill": "2.B",
+    "response": "multiple choice",
+    "judgment": [
+     "combine the two shifts and decide which variable is determinate"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: simultaneous shifts in labor demand and labor supply: one variable is determinate, the other is not",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenarios; the key applies the double-shift rule to wage and employment"
+   },
+   "duplication": {
+    "archetype": "mi_labor_forces_both_shift",
+    "family": "fam:micro-s5-c:ap_microeconomics-m01-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-a:ap_microeconomics-m22-k1",
+    "nearest_similarity": 0.254,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 52,
+   "set": "MI3",
+   "key": "micro-s5-c:ap_microeconomics-m02-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "5",
+    "topic": "5.3",
+    "concept": "the price of a substitute or complementary input shifts labor demand through substitution and output effects"
+   },
+   "function": {
+    "skill": "2.B",
+    "response": "multiple choice",
+    "judgment": [
+     "separate the substitution effect from the output effect and decide the net direction"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: the price of a substitute or complementary input shifts labor demand through substitution and output effects",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted scenarios; the key combines the substitution and output effects"
+   },
+   "duplication": {
+    "archetype": "mi_input_price_effect",
+    "family": "fam:micro-s5-c:ap_microeconomics-m02-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-b:ap_microeconomics-m05-k3",
+    "nearest_similarity": 0.375,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 53,
+   "set": "MI3",
+   "key": "run1:ap_microeconomics-c022-k1",
+   "kind": "mc",
+   "content": {
+    "unit": "5",
+    "topic": "5.1",
+    "concept": null
+   },
+   "function": {
+    "skill": "1.A",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": null,
+    "verification": null
+   },
+   "duplication": {
+    "archetype": null,
+    "family": "fam:run1:ap_microeconomics-c022-k1",
+    "archetype_in_published": null,
+    "family_in_published": false,
+    "nearest_published": "micro-p1-a:ap_microeconomics-m08-k0",
+    "nearest_similarity": 0.364,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 54,
+   "set": "MI3",
+   "key": "run1:ap_microeconomics-c024-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "5",
+    "topic": "5.4",
+    "concept": null
+   },
+   "function": {
+    "skill": "2.A",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "graph",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": null,
+    "verification": null
+   },
+   "duplication": {
+    "archetype": null,
+    "family": "fam:run1:ap_microeconomics-c024-k0",
+    "archetype_in_published": null,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-a:ap_microeconomics-m31-k0",
+    "nearest_similarity": 0.194,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 55,
+   "set": "MI3",
+   "key": "micro-s5-a:ap_microeconomics-m27-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "6",
+    "topic": "6.4",
+    "concept": "regulating a natural monopoly: marginal-cost versus average-cost pricing"
+   },
+   "function": {
+    "skill": "3.A",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: regulating a natural monopoly: marginal-cost versus average-cost pricing",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "fixed vetted regulatory outcomes verified with the cost relationship ATC > MC for decreasing average cost"
+   },
+   "duplication": {
+    "archetype": "mi_natural_monopoly",
+    "family": "fam:micro-s5-a:ap_microeconomics-m27-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-a:ap_microeconomics-m29-k0",
+    "nearest_similarity": 0.322,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 56,
+   "set": "MI3",
+   "key": "micro-s5-a:ap_microeconomics-m29-k1",
+   "kind": "mc",
+   "content": {
+    "unit": "6",
+    "topic": "6.5",
+    "concept": "classify a tax by how the tax rate changes with income"
+   },
+   "function": {
+    "skill": "1.C",
+    "response": "multiple choice",
+    "judgment": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ]
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: classify a tax by how the tax rate changes with income",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "exact tax-rate fractions compared across incomes vs sympy ordering"
+   },
+   "duplication": {
+    "archetype": "mi_tax_progressive",
+    "family": "fam:micro-s5-a:ap_microeconomics-m29-k1",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-b:ap_microeconomics-m03-k3",
+    "nearest_similarity": 0.143,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 57,
+   "set": "MI3",
+   "key": "micro-s5-b:ap_microeconomics-m31-k2",
+   "kind": "mc",
+   "content": {
+    "unit": "6",
+    "topic": "6.4",
+    "concept": "fair-return pricing sets price equal to average total cost; marginal-cost pricing leaves a natural monopoly with a loss"
+   },
+   "function": {
+    "skill": "2.C",
+    "response": "multiple choice",
+    "judgment": [
+     "set price equal to average total cost and choose the root that serves more customers"
+    ]
+   },
+   "representation": {
+    "stimulus": "none",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Identify the economic model that applies: fair-return pricing sets price equal to average total cost; marginal-cost pricing leaves a natural monopoly with a loss",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "verification": "closed-form roots of P = ATC vs sympy solve"
+   },
+   "duplication": {
+    "archetype": "mi_natural_monopoly_pricing",
+    "family": "fam:micro-s5-b:ap_microeconomics-m31-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-a:ap_microeconomics-m20-k0",
+    "nearest_similarity": 0.306,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 58,
+   "set": "MI3",
+   "key": "run1:ap_microeconomics-c025-k0",
+   "kind": "mc",
+   "content": {
+    "unit": "6",
+    "topic": "6.1",
+    "concept": null
+   },
+   "function": {
+    "skill": "1.A",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "graph",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": null,
+    "verification": null
+   },
+   "duplication": {
+    "archetype": null,
+    "family": "fam:run1:ap_microeconomics-c025-k0",
+    "archetype_in_published": null,
+    "family_in_published": false,
+    "nearest_published": "micro-p1-a:ap_microeconomics-m15-k1",
+    "nearest_similarity": 0.258,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 59,
+   "set": "MI3",
+   "key": "run1:ap_microeconomics-c026-k4",
+   "kind": "mc",
+   "content": {
+    "unit": "6",
+    "topic": "6.3",
+    "concept": null
+   },
+   "function": {
+    "skill": "1.B",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": null,
+    "verification": null
+   },
+   "duplication": {
+    "archetype": null,
+    "family": "fam:run1:ap_microeconomics-c026-k4",
+    "archetype_in_published": null,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-b:ap_microeconomics-m17-k0",
+    "nearest_similarity": 0.129,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 60,
+   "set": "MI3",
+   "key": "run1:ap_microeconomics-c027-k3",
+   "kind": "mc",
+   "content": {
+    "unit": "6",
+    "topic": "6.5",
+    "concept": null
+   },
+   "function": {
+    "skill": "3.A",
+    "response": "multiple choice",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": 5,
+    "parts": null
+   },
+   "reasoning": {
+    "student_thinking": null,
+    "verification": null
+   },
+   "duplication": {
+    "archetype": null,
+    "family": "fam:run1:ap_microeconomics-c027-k3",
+    "archetype_in_published": null,
+    "family_in_published": false,
+    "nearest_published": "micro-p2-a:ap_microeconomics-m34-k0",
+    "nearest_similarity": 0.14,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 61,
+   "set": "MI3",
+   "key": "micro-p1-b:ap_microeconomics-f03-k0",
+   "kind": "frq_bundle",
+   "content": {
+    "unit": "4",
+    "topic": "4.2",
+    "concept": "Monopoly profit maximization, profit, deadweight loss, and a price cap at marginal cost"
+   },
+   "function": {
+    "skill": "4.A",
+    "response": "free response",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": null,
+    "parts": 6
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Draw D, MR, MC and the monopoly optimum",
+     "Compute the optimum and profit, show the price cap",
+     "Explain the inefficiency and compute the loss under the cap"
+    ],
+    "verification": "sympy derivative of profit versus numpy grid search of profit by quantity"
+   },
+   "duplication": {
+    "archetype": "mif_long_monopoly",
+    "family": "fam:micro-p1-b:ap_microeconomics-f03-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p1-b:ap_microeconomics-f04-k0",
+    "nearest_similarity": 0.268,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 62,
+   "set": "MI3",
+   "key": "micro-p2-f:ap_microeconomics-f04-k1",
+   "kind": "frq_bundle",
+   "content": {
+    "unit": "4",
+    "topic": "4.4",
+    "concept": "Short-run profit of a monopolistically competitive firm and the long-run adjustment"
+   },
+   "function": {
+    "skill": "4.A",
+    "response": "free response",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": null,
+    "parts": 4
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Draw the four curves and mark the MR = MC optimum",
+     "Shade the profit rectangle",
+     "Reason about entry and the long-run price-cost relationship"
+    ],
+    "verification": "sympy derivative of profit versus numpy grid search of profit by quantity"
+   },
+   "duplication": {
+    "archetype": "mif_short_mc",
+    "family": "fam:micro-p2-f:ap_microeconomics-f04-k1",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p1-b:ap_microeconomics-f01-k0",
+    "nearest_similarity": 0.368,
+    "siblings_in_new_set": 0
+   }
+  },
+  {
+   "position": 63,
+   "set": "MI3",
+   "key": "micro-s5-c:ap_microeconomics-f01-k2",
+   "kind": "frq_bundle",
+   "content": {
+    "unit": "3",
+    "topic": "3.6",
+    "concept": "Profit-maximizing quantity from marginal cost, economic loss, the shutdown rule, and long-run exit"
+   },
+   "function": {
+    "skill": "2.C",
+    "response": "free response",
+    "judgment": null
+   },
+   "representation": {
+    "stimulus": "table",
+    "options": null,
+    "parts": 5
+   },
+   "reasoning": {
+    "student_thinking": [
+     "Find marginal cost from total variable cost",
+     "Compare revenue with total cost and with variable cost",
+     "Reason about sunk fixed cost and long-run exit"
+    ],
+    "verification": "argmax of total profit across quantities vs last unit with marginal cost at most the price"
+   },
+   "duplication": {
+    "archetype": "mif_short_shutdown",
+    "family": "fam:micro-s5-c:ap_microeconomics-f01-k0",
+    "archetype_in_published": false,
+    "family_in_published": false,
+    "nearest_published": "micro-p1-b:ap_microeconomics-f01-k0",
+    "nearest_similarity": 0.297,
+    "siblings_in_new_set": 0
+   }
+  }
+ ]
+}

@@ -1,6 +1,6 @@
 # Terms of Use
 
-Alton Education LLC | Effective October 6, 2026
+Alton Education LLC | Effective October 19, 2026
 
 These Terms of Use apply to your use of the ALTON website and portals, provided by Alton Education LLC, a United States company ("ALTON," "we," "us"). ALTON offers an online SAT and AP practice platform, premium one-on-one tutoring, and educational consulting for middle and high school students. By creating an account or using ALTON, you agree to these terms and to our Privacy Policy.
 

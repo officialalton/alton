@@ -1,0 +1,48 @@
+{
+ "runs": [
+  "phys-s5n2-mc"
+ ],
+ "rows": 36,
+ "passed": 35,
+ "rejected": 1,
+ "passRate": 0.972,
+ "singles": {
+  "candidates": 36
+ },
+ "unitsPassed": {
+  "2": 9,
+  "3": 3,
+  "4": 5,
+  "5": 6,
+  "6": 12
+ },
+ "figPassed": {
+  "none": 35
+ },
+ "figAll": {
+  "none": 36
+ },
+ "figPassRate": {
+  "none": "35/36"
+ },
+ "renderTypesPassed": {
+  "none": 35
+ },
+ "archetypesPassed": {
+  "ph_claim_power_climb": 3,
+  "ph_pred_planet_weight": 3,
+  "ph_rank_rot_ke": 3,
+  "ph_rank_ang_momentum": 3,
+  "ph_rank_moment_inertia": 3,
+  "ph_rank_angular_accel": 3,
+  "ph_pred_altitude_weight": 3,
+  "ph_pred_orbit_period_radius": 3,
+  "ph_claim_collision_energy": 2,
+  "ph_gravity_scaling": 3,
+  "ph_orbit_period_ratio": 3,
+  "ph_claim_momentum_system": 3
+ },
+ "costUsd": {
+  "phys-s5n2-mc": 1.1611
+ }
+}

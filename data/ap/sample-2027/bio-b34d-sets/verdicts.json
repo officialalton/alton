@@ -1,0 +1,880 @@
+[
+ {
+  "key": "ap_biology-m01-k0-q1",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "Interphase 284/400 is the majority; prophase 56 > metaphase 28 > anaphase 12. The other options contradict the data.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Describing the distribution of cells across cell-cycle stages from a table fits topic 4.6 and skill 4.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option B is the unique correct answer. The counts sum to 400 and decrease 56>28>12 across prophase, metaphase and anaphase. The other options contradict the data."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and consistent with the stem. The 24-hour cycle length is unused but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception, and the explanation addresses each wrong option accurately. Option B is slightly longer, which is a minor cue."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60 seconds with minimal reading and trivial arithmetic, and the calculator designation is fine."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean table-description question on the cell cycle with a unique key and accurate distractors. It is on the easy side but acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item requires reading a small five-row table and choosing the statement that accurately describes it (the majority of cells are in interphase; counts fall from prophase to metaphase to anaphase). No calculation is needed, since 284 of 400 is visibly a majority. The distractors are clearly contradicted by the data (telophase is not the largest group, mitosis is not the majority, and the distribution is not equal). There is one representation (a table) and a single reasoning step, with no formula use, no multi-step inference, and no regulation-of-cell-cycle prediction. This is a basic describe-the-data skill 4.B item. The 24-hour cycle time is extra information that is not needed, and the item is fair and clear.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m01-k0-q2",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Mitotic cells 56+28+12+20=116; 116/400=29.0%",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "29.0%"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key of 29.0% is unique and correct (116/400). The table is complete and consistent with the sample size of 400. Each distractor encodes a distinct, accurate misconception. The 24-hour cycle length in the stem is extraneous but harmless. The item is a standard mitotic-index calculation that fits skill 5.A.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step item: read the table, sum the four mitotic stages (116), and divide by 400 to get 29.0%. It needs only the definition of mitotic index, which the stem supplies, and one simple percent calculation with no multi-step reasoning. Distractors reflect common errors (using only prophase, raw count as a percent). The 24-hour cycle time is an unused detail but adds little reading load.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m01-k0-q3",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "Count more samples from different root tips and combine the counts",
+     "brief_reasoning": "Replicating across more root tips makes the sample bigger and reduces the effect of random variation, so the estimate becomes more reliable. A smaller count, counting only prophase cells, or counting cells far from the tip (which are not dividing) would each bias the estimate or make it less precise.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Procedure-improvement item (3.D) using mitotic index data from cell cycle; the link to regulation of the cell cycle is weak but it stays within Unit 4 content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is the unique best answer: more samples from different roots reduces random error. A, B and D are clearly flawed."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete and sums to 400. The 24-hour cycle length is extraneous and unused, and mitotic index is not defined, but neither prevents answering."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception and the explanation addresses each. The correct option is slightly longer, a minor cue."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, no arithmetic, appropriate reading load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable: the key is unique, the stimulus is complete, and the distractors each encode a distinct misconception. Minor issues are the unused 24-hour detail and the loose tie to cell cycle regulation."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks which procedural change improves reliability of a mitotic index estimate. The correct choice (more samples from different root tips, combined) follows from the basic idea that larger sample size reduces random variation. The distractors (smaller sample, a single stage, non-dividing region) are clearly flawed. The table is simple and no calculation is required, so the item needs few reasoning steps. Wording is clear and unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m01-k0-q4",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Without spindle fibers the chromosomes can't be separated, so cells arrest at the metaphase checkpoint and the percent of cells in metaphase increases.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 to 70 seconds, needs no calculation, and its length and format are balanced across options. The table is only lightly needed, since the answer rests mostly on biology, but this is acceptable for a prediction item.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. It has a unique correct key, distinct misconceptions in the distractors, and a modest reading load. The only flaws are an unused 24-hour cycle length in the stem and a stimulus that adds little to the answer."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Students must recognize that spindle inhibition blocks progression past metaphase (spindle checkpoint) and predict that the metaphase fraction rises, while rejecting plausible misconceptions (faster anaphase, interphase dropping to zero, telophase without segregation). The table is context only; no calculation is needed to answer. The concept is in scope (cell cycle regulation and disruption) with a modest 3-step reasoning chain: spindle needed for chromosome separation, so arrest at metaphase, so metaphase percent increases. This is typical of a mid-difficulty AP MCQ for full mocks. The wording is clear, and the 24-hour cycle time is an unused detail that adds slight reading load without making the item unfair.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_biology-m01-k1-q1",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "213 of 300 cells are in interphase (71%). Prophase 42 > metaphase 18 > anaphase 12, so the counts decrease across those stages. A, B and D contradict the data.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 65 seconds and needs no calculation. It is easy but acceptable.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean table-description item with a unique key and distinct distractors. It is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks the student to read a small five-row table and choose the statement that accurately describes it. Interphase has 213 of 300 cells (71%), a clear majority, and counts fall from prophase (42) to metaphase (18) to anaphase (12). Distractors are easy to reject by direct comparison of values and by the misconception that dividing tissue is mostly in mitosis. No calculation is required, since the majority is evident by inspection. The 20-hour cycle length is given but unused, adding minor reading load. Telophase (15) is slightly higher than anaphase (12), but the correct option only claims a decrease through anaphase, so there is no trap. This is a single-step data description (skill 4.B) and suits foundational practice rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m01-k1-q2",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Mitotic cells = 42+18+12+15 = 87; 87/300 = 29.0%.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "29.0%"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Mitotic index calculation from a cell-count table fits 4.6 and skill 5.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "87/300 = 29.0% is the unique correct option. The definition of mitotic index is given in the stem."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, the counts sum to 300, and the wording is clear. The 20-hour cycle length is an unused detail but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each with an accurate rationale. The options are parallel in format."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, one simple calculation, calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean: a single calculation from a complete table with one unique key and distinct, accurately explained distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-step percent calculation from a small table. The student must exclude interphase, sum four small counts (87) and divide by 300 to get 29.0%. Distractors target common errors (a single stage, the wrong denominator, the raw count). The 20-hour cycle length is an unneeded detail. Conceptual depth is shallow and the arithmetic is simple and clean.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m01-k1-q3",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "Count more samples from different root tips and combine the counts",
+     "brief_reasoning": "Counting more cells from more root tips reduces the effect of random sampling variation, so the estimate becomes more reliable. The other options either bias the sample or make it smaller.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item uses the cell cycle context (4.5/4.6) and asks the student to improve a procedure, which matches skill 3.D. The cell cycle concept is only light here, but the context is within Unit 4 scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is the one defensible answer: more samples from different root tips reduce random error. The other options are clearly flawed (one stage only, wrong region, smaller sample)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete: its counts sum to 300 and match the stem. The stem mentions the 20-hour cycle, which is unused extra information but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option encodes a distinct misconception and the explanation addresses each one. The correct option is longer than the others, but only slightly."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item can be done in about 70 seconds and needs no calculation. The table is arguably not needed to answer, but it supplies the experimental context."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound 3.D procedure-improvement question in the onion root tip context. Its key is unique and each distractor encodes a distinct misconception. The stem never defines mitotic index, which is a minor clarity gap. I passed it."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step recognition of a sampling principle: larger, replicated samples reduce random variation. The distractors are clearly flawed (biased stage selection, wrong root region, smaller sample). The table is context only, so no calculation or multi-step reasoning is needed. It aligns with skill 3.D but is low in depth for a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m01-k1-q4",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "Without spindle fibers, chromatids can't be separated, so cells arrest at metaphase (the spindle checkpoint). Cells that are still cycling keep entering mitosis, so the percent of cells in metaphase goes up.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Predicting the effect of a spindle disruption on cell-cycle stages fits 4.6 and 6.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique best answer; the other options contradict the effect of blocking the spindle."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete and sums to 300. The 20-hour cycle length is unused but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, a typical reading load, and no arithmetic needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable. It is a clean prediction of a spindle-blocking drug's effect with a unique key and distinct distractors. The table is somewhat decorative, but this is not a failure."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The student must see that the drug blocks spindle formation, so the spindle assembly checkpoint holds cells in metaphase and metaphase cells accumulate. This is a single-step cause-and-effect prediction. The distractors are common misconceptions (telophase without separation, faster anaphase, all cells entering mitosis), but they are easy to reject. The table is only context, and no calculation is needed, so the 300-cell count and the 20-hour cycle length are never used. The item is simple and fair, and its concept depth is below the level expected of a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m01-k2-q1",
+  "cellId": "ap_biology-m01",
+  "passed": false,
+  "reasons": [
+   "resembles_known_exam_item"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "Most of the cells are in interphase, and the number of cells decreases from prophase to metaphase to anaphase.",
+     "brief_reasoning": "Interphase has 216 of 300 cells (72%). The counts fall from prophase (36) to metaphase (21) to anaphase (12). The other options contradict the table.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": true,
+   "summary": "The key is unique and correct (interphase 216/300; counts fall 36>21>12). The table is complete. The item is a pure data-description task, which is legitimate for 4.B, and the topic link to cell-cycle regulation is weak but acceptable. Caveats: the scenario resembles the classic onion root tip cell-cycle counting item, the 24-hour statement is extraneous, and one distractor (equal spread) is weak.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Describing a table of cell counts across cell-cycle stages fits skill 4.B. The topic fit to 4.6 is loose but within Unit 4's cell cycle content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only option B matches the table. A: the counts are unequal. C: telophase has only 15 cells. D: mitosis totals 84/300, which is under half."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data is complete and the wording is clear. The 24-hour statement is unused but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a specific rationale tied to the data. The misconceptions are distinct, though the equal-spread distractor is weak."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 65 seconds, with a short table and a low reading load. This is typical of AP Biology."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks the student to read a five-row table and pick the statement that matches it. Interphase holds 216 of 300 cells, and the counts fall from prophase to metaphase to anaphase. No calculation is needed, and the distractors can be rejected from the numbers or from the misconception that growing tissue is mostly dividing. The 24-hour cycle length in the stem is unused, but it adds little reading load.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m01-k2-q2",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Mitotic cells 36+21+12+15=84; 84/300=28.0%",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "28.0%"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 75 seconds, a simple sum and division, with a calculator allowed.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean: a unique key, a complete table, distinct distractors, and a suitable load. It passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single proportion calculation: sum the four mitotic stages from the table (84) and divide by 300 to get 28.0%. Requires only knowing that interphase is not part of mitosis. Distractors reflect common errors (raw count as percent, dividing by interphase cells, a single stage). The numbers are clean and the reading load is minimal. This is a routine skill-5.A item, below typical full-mock complexity, since it needs no multi-step reasoning, no comparison of data sets, and no prediction.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m01-k2-q3",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "Count more samples from different root tips and combine the counts",
+     "brief_reasoning": "Replicating and using a larger sample reduces the effect of random sampling variation, so the estimate is more reliable. The other options either bias the estimate or make the sample smaller.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Mitotic index from cell counts in a root tip fits topic 4.6, and proposing a procedural change to improve reliability fits skill 3.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option B is the only defensible answer. The other options either bias the estimate or shrink the sample."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and consistent with the stem: 216+36+21+12+15 = 300 cells. The 24-hour cycle length is not needed but is harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception: counting one stage only, sampling the wrong region, and using a smaller sample. The explanations are specific. Option B is slightly longer than the others, but only by a few words."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60 to 70 seconds, has a light reading load, and needs no calculation. It is a standard experimental-design item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable. It has a unique key, a complete stimulus, distinct distractors, and suitable load for the topic and skill."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: improving reliability of a mitotic index estimate through larger, more representative sampling. The table is context only and no calculation is needed. Distractors (prophase only, region away from the dividing tip, smaller count) are clearly flawed, so one reasoning step identifies the answer. It is easier than typical exam-level experimental-design questions.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m01-k2-q4",
+  "cellId": "ap_biology-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "Drugs that block spindle formation, such as colchicine, stop cells from moving into anaphase. Cells that enter mitosis pile up at metaphase, so the percent of cells in metaphase goes up. The other choices contradict how the spindle works.",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "Strictly speaking, chromosomes cannot line up at the metaphase plate without a spindle, so cells stop at an early metaphase-like stage. Choice B is still the intended answer at the AP level."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Tests the spindle's role in mitosis (topic 4.5), not regulation of the cell cycle (cyclins, CDKs, checkpoints, p53, cancer). The prediction rests on recalling spindle function."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the intended key and the best option, but it is loosely accurate: without a spindle chromosomes cannot align at the metaphase plate, so cells would arrest in prometaphase or a metaphase-like state."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The table is not needed to answer; every option is qualitative and no table value is used. The phrase 'after several hours' is vague relative to the 24-hour cycle."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a specific rationale. Option A (interphase decreases to zero) is implausible and easy to eliminate."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Time and reading load are fine, but the item is mostly recall with a decorative table, so it is low in demand for a data-based prediction item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key (B) is defensible at the AP level, though a spindle-less cell arrests before true metaphase. The item fits topic 4.5 better than 4.6, and the table is decorative because no option uses its values. I fail it on scope and stimulus use."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Item requires linking spindle function to the metaphase-to-anaphase transition and predicting which stage accumulates after a disruption, while rejecting plausible misconceptions (all cells enter mitosis, telophase without chromosome separation, faster anaphase). The table is brief context and needs little computation. Concept depth is moderate and in scope for 4.5/4.6, with minimal reading load and no unfair difficulty sources. This is typical of a full-mock multiple-choice item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_biology-m01-k3-q1",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "304 of the 400 cells (76%) are in interphase. Among the mitotic stages, counts go down: prophase 40, metaphase 28, anaphase 16, telophase 12. That rules out the other options (mostly mitosis, an equal spread, mostly telophase).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 seconds, needs no calculation, and has a light reading load. It is typical of the exam. The 24-hour detail is unneeded but harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable. It is a clean table-description item with a unique key, distinct distractors, and a short task load."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The student reads a small 5-row table and picks the statement that matches it. Interphase has 304 of 400 cells, and mitotic counts decrease from prophase to telophase. No calculation is required and the distractors are clearly contradicted by the data. The 24-hour cycle length is an unused detail. The item tests only a basic description of data (skill 4.B) with no need to link the data to the regulation of the cell cycle.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m01-k3-q2",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Cells in mitosis: 40+28+16+12 = 96. 96/400 = 24.0%.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "24.0%"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. It asks for a mitotic index computed from a cell-count table, which fits 5.A and the cell cycle topic. The key of 24.0% is unique: 96 cells in mitosis out of 400. Each distractor encodes a distinct error: prophase only, a raw count, or the wrong denominator.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The task is a single proportion calculation from table counts, and the mitotic index is a standard cell-cycle measure. This fits the 5.A calculation skill in Topic 4.6."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is 96/400 = 24.0%. The stem defines the mitotic index, so only one option is defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, and its counts sum to 400, matching the sample size in the stem. The wording is clear. The 24-hour cell cycle length is unused extra information, but it does not mislead."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a specific, distinct misconception and an accurate rationale. Option lengths are parallel."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 75 seconds, involves light arithmetic, and a calculator is allowed."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-step percent calculation: sum four mitotic stages from a small table (96) and divide by 400 to get 24.0%. Distractors map to plausible errors (prophase only, raw count, mitotic/interphase ratio). Little conceptual depth beyond knowing which stages count as mitosis; the 24-hour cycle length is an unused detail. Appropriate as a foundational data-skill item rather than a full-mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m01-k3-q3",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "Counting more cells from several different root tips (replication) cuts down the effect of random variation, so the estimate of the mitotic index becomes more reliable. The other choices would make the sample smaller, add bias, or leave out the other dividing stages.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 70 seconds, a short stem, and no needless arithmetic. The calculator designation is acceptable.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: a standard experimental-design question with a unique key and distinct misconception distractors. The only minor issues are the unused 24-hour detail and slightly easy difficulty."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item needs one idea: more samples and larger counts improve reliability. The table gives context but no calculation is needed. Each distractor is clearly flawed (fewer cells, a non-dividing region, only one stage). Concept depth and reasoning steps are low, which fits foundational practice more than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m01-k3-q4",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Drugs that block spindle formation (like colchicine) trigger the spindle checkpoint, so cells stop at the metaphase stage and build up there. Without spindle fibers, the chromosomes cannot be separated, so cells cannot enter anaphase or telophase. Cells in interphase also would not all drop to zero.",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "Strictly speaking, chromosomes cannot line up at the metaphase plate without spindle fibers, so cells actually stop in a metaphase-like stage (prometaphase). Still, C is the intended answer and the best one."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Predicting the effect of a spindle-blocking drug on cell-cycle stages fits 4.6 and 6.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is the best and unique answer among the options offered. Strictly, cells without a spindle would arrest in a prometaphase-like state, but C is the conventional textbook answer and the other options are clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete and sums to 400. The 24-hour cycle time is unused extra detail and 'several hours' is vague, but neither changes the answer."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "A and B encode distinct misconceptions and are explained accurately. D is implausible, and its rationale partly restates the key instead of naming a misconception, but the explanation does address each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, with a short stem, a small table and no arithmetic burden. Calculator designation is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Acceptable item: on-topic, unique best key (metaphase arrest is the conventional answer, though prometaphase is more exact), complete table, distinct distractors. Minor weaknesses are the unused 24-hour cycle time and the implausible option D."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must apply the role of spindle fibers in mitosis to predict the effect of a disruption (arrest at metaphase) and reject three plausible misconceptions. The table is context with minimal reading and no calculation. Concept application in a concrete scenario is at the level of a full mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ }
+]

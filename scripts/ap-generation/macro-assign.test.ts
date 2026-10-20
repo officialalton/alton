@@ -53,8 +53,8 @@ describe("macro exact assignment (ILP + independent verifier)", () => {
     expect(toReportSet(out[0]).mcA).toHaveLength(60);
   }, 240000);
 
-  it("reports exactly the missing slots as virtual items when the stock is short (no long FRQ type, 60 percent of the archetypes gone)", () => {
-    const keep = stock(1).filter((c) => !(c.kind === "frq" && MACRO_FRQ_PROFILES[c.frqType].points === 10)).filter((c, i) => c.kind === "frq" || i % 5 < 2);
+  it("reports exactly the missing slots as virtual items when the stock is short (no long FRQ type, 80 percent of the archetypes gone)", () => {
+    const keep = stock(1).filter((c) => !(c.kind === "frq" && MACRO_FRQ_PROFILES[c.frqType].points === 10)).filter((c, i) => c.kind === "frq" || i % 5 < 1);
     const { res, out } = solveMacroSets(["MA1"], keep, { timeMs: 60000 });
     expect(res.status).toBe("optimal");
     const r = out[0];
