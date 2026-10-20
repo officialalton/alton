@@ -1,0 +1,760 @@
+[
+ {
+  "key": "ap_statistics-m01-k0",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "How much do the daily numbers of steps vary among the adult residents of a city?",
+     "brief_reasoning": "A statistical question expects the data to vary and needs data collected to answer it. The others are either straight calculations with a fixed answer or a matter of opinion.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 45-60 seconds with minimal reading, needs no calculation, and its difficulty is appropriate for an introductory topic.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean, simple item on recognizing a statistical question. The key is unique, the distractors are distinct, and the item is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Recognizing a statistical question (one that anticipates variability in data) versus a deterministic, arithmetic, or opinion question. Single core concept, very short stem, no computation, and distractors are clearly non-statistical. Foundational topic 1.1 skill, below full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k1",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "Only D requires collecting data that is expected to vary and then analyzing that variability. A is a matter of opinion, B can be answered by looking it up, and C is a fixed calculation.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly targets topic 1.1 and skill 1.A: recognizing a question that anticipates variability and requires a statistical investigation. No later-unit content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is the only question about a varying measurable variable across a population. A is an opinion, B is a lookup, and C is a fixed calculation. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and none is given. The wording is clear US English."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (opinion, lookup, fixed arithmetic) and the explanation addresses every wrong option. The key is the longest option, but only mildly so, and the parallel question format keeps the length cue negligible."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, minimal reading, no calculator needed (calculator allowed is harmless). This is typical of the CED sample items for 1.A."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, single-skill 1.A question with a unique key, distinct distractors tied to named misconceptions, and appropriate time and reading load. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recognition: the student must identify the question that anticipates variability in data (option D) versus a subjective opinion, a fact lookup, and a deterministic calculation. One reasoning step, no computation, short reading, no representation changes. Fits introductory topic 1.1 / skill 1.A.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_statistics-m02-k0",
+  "cellId": "ap_statistics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "Simple random sample using random number generator",
+     "brief_reasoning": "An SRS taken from the complete list gives every household the same chance of being picked, so the estimate is unbiased. The other plans are voluntary response, convenience, or judgment samples, and all of those can be biased.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Choosing a random sampling plan that avoids bias is squarely Topic 1.11 and skill 2.B. Everything is in Unit 1 scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only the numbered list with random number generator is a random sample from the complete frame. The other three plans are voluntary response, convenience and judgment samples. The key is unique. The wording 'most likely to give an estimate that is not biased' is slightly awkward but clear."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem gives the population size, the complete list and the sample size. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct named misconception: voluntary response, convenience, and judgment. The explanation addresses each wrong option. The key is the longest option, a mild length cue, but it is acceptable given the detail an SRS plan needs."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60-80 seconds, needs no calculation, and is typical of AP Statistics multiple-choice items."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, standard sampling-method question. It has a unique key, three distinct misconception distractors, and appropriate scope and load. I recommend acceptance."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student recognizes the SRS plan among voluntary response, convenience, and judgment sampling. Single-concept recognition, no computation, short stem, one reasoning step. Directly assesses topic 1.11 / skill 2.B at an introductory level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m02-k1",
+  "cellId": "ap_statistics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "A simple random sample drawn from the full roster gives every member an equal chance of being picked, so it avoids the selection bias in the other plans. Option A favours members who attend meetings, B favours frequent hikers, and C relies on voluntary response.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "D"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60-80 seconds, involves no calculation and has a light reading load. It is typical of AP Statistics multiple-choice items.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean, standard sampling-method item. Its key is unique and its distractors map to distinct named biases. It fits the scope, the skill and the exam format."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: recognize that only the simple random sample from the roster avoids bias, versus convenience, judgment-based, and voluntary-response plans. No computation, a short stem, one reasoning step, and no representation changes. This is a standard introductory question on random sampling.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_statistics-m03-k0",
+  "cellId": "ap_statistics-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "This is undercoverage, or selection bias. Only shoppers at the computer store can be chosen, and they are more likely to own a laptop than other adults, so the estimate will tend to be too high. A bigger sample does not remove bias.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key (C) is the unique correct answer. The distractors each reflect a distinct misconception, and the item is short and in scope for topic 1.12. The stem is fairly easy because it gives the direction of the difference, and the 2.B skill alignment is loose, but neither is disqualifying.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recognition of sampling bias from a convenience sample. The stem gives the direction of the bias, so the student only picks the matching option and rejects the misconceptions that chance selection or a large n removes bias. There is no computation, one reasoning step, and no representation change.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m03-k1",
+  "cellId": "ap_statistics-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "This is undercoverage bias. Only rewards program members can be picked, and they spend more hotel nights than other adults, so the estimates will tend to be too high.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean undercoverage-bias question. The key (too large) is the only defensible answer, because the frame includes only rewards members, who stay more nights than other adults. The distractors encode three distinct misconceptions: a large sample size fixes bias, random selection within the frame removes bias, and the direction is reversed. The item is short, fits the 60-100 second window, and needs no calculator. No stimulus is needed.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item tests topic 1.12 (potential problems with sampling). Its dominant demand is judging how a flawed selection method biases an estimate, which fits skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is option D (index 3). Only members can be selected and members stay more nights, so the estimates tend to be too large. The other three options are each clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The item needs no stimulus. The wording is clear, and the stem gives the one fact needed to decide the direction of the bias."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The wrong options correspond to the named misconceptions: size fixes bias, chance within a biased frame removes bias, and reversed direction. The explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Reading load is light and no arithmetic is needed. The calculator designation is consistent, although a calculator is not actually used."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item on undercoverage and sampling frame bias. The student identifies that the frame (rewards members) differs from the population and that members stay more nights, so estimates are too large. Distractors are the standard misconceptions (large n removes bias, random selection removes bias) plus a direction-reversed option. There is no computation, the reading is short, and the setup is direct.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m04-k0",
+  "cellId": "ap_statistics-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "P(D∪C)=0.36+0.40-0.11=0.65; neither=1-0.65=0.35",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "0.35"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Addition and complement rules fit topic 2.4 and skill 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0.35 is correct and unique; each distractor value is computed from a distinct error."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions, all explained; options are parallel in length and format."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, light arithmetic, four options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean item on addition and complement rules; the distractors map to distinct errors. Accept."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Two sequential steps: apply the addition rule to get P(dog or cat)=0.65, then take the complement to get 0.35. This meets the rubric's 2-or-fewer-steps criterion for basic_learning, even though two concepts are combined. Arithmetic is light and the stem is short. Distractors are 0.65 (stops after step 1), 0.13 and 0.24 (misuse of the overlap).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m04-k1",
+  "cellId": "ap_statistics-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "P(B∪C)=0.46+0.41-0.09=0.78; neither=0.22",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "0.22"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Addition and complement rules, topic 2.4, calculating a probability (3.C)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0.46+0.41-0.09=0.78; 1-0.78=0.22. Unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and the rounding convention is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, and the explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-80 seconds, light arithmetic, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean standalone MC item. The key is unique, the distractors reflect distinct misconceptions, and the load is appropriate."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item takes two sequential steps: the addition rule for overlapping events (0.46 + 0.41 - 0.09 = 0.78), then the complement (1 - 0.78 = 0.22). That is below the exam_prep threshold of at least 3 steps. The distractor 0.78 is the first-step result, so it is a plausible wrong answer. Reading and arithmetic are light by design and are not unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m05-k0",
+  "cellId": "ap_statistics-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Option C is the only one that fits all the binomial conditions: there is a fixed number of trials (n=20), each bulb is either defective or not, the trials are effectively independent because the shipment is very large, and p=0.04 for every bulb. Option A counts trials until the first defective, so it is geometric. Option B samples 20 of only 24 bulbs without replacement, so the trials are not independent (hypergeometric). Option D reports a mean lifetime, which is a continuous measurement, not a count of successes.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.10 binomial conditions. Skill 2.A (identify information to answer a question) fits loosely, since the student identifies which scenario has the needed features. Option A describes a geometric-type scenario but is only used as a distractor; the item does not ask students to work with the geometric distribution."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only C meets all binomial conditions. A has no fixed number of trials. B samples 20 of 24 without replacement, so the trials are clearly dependent. D is a measured lifetime. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear and the options are parallel scenarios."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor breaks a distinct condition (fixed n, independence, two outcomes) and each is explained. The correct option is longer than the others, but only slightly, so this is a minor length cue."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, no calculation, and a typical AP reading load. The calculator designation is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound binomial-conditions item with a unique key and distinct distractors, suitable for the exam. The only caveat is the loose fit to skill 2.A and the correct option being slightly longer than the others."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard recognition of binomial conditions (fixed n, independence, two outcomes, constant p). Each option needs one quick check: the first has no fixed n, the second samples without replacement from a small population, the third is correct, and the fourth is a quantitative mean. No computation and short reading. Distinguishing the geometric-type option only requires noticing that n is not fixed; it does not require geometric content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m05-k1",
+  "cellId": "ap_statistics-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "Option D has a fixed n=12, independent trials, a constant p=0.7, and counts successes, so it's binomial. A samples without replacement from a small population (hypergeometric). B adds up points instead of counting successes. C has no fixed number of trials (geometric).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Recognizing binomial conditions (BINS) is squarely topic 2.10. Option C (count trials until first miss) is geometric but is used only as a non-example for the fixed-n condition, not as geometric content to compute; this is a mild concern but acceptable. Skill label 2.A is loosely matched, but identifying the needed conditions is reasonable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is the unique binomial scenario. A: 12 of 24 without replacement, 50% of the population, so trials are not independent and p changes. B: total points, not a count of successes. C: number of trials is random."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. Wording is clear. Option A does not state the 10% condition explicitly, but 12 of 24 clearly violates it."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor breaks a distinct condition, and the explanation addresses each wrong option. The correct option is slightly longer, but this is not a significant giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds, no calculation, typical of AP style. The stem is short and standard."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unambiguous binomial-conditions recognition item with a unique key and distinct misconceptions in the distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Item asks the student to identify which scenario meets the binomial conditions (binary outcomes, fixed n, independence, constant p). Each distractor fails one clear condition: sampling without replacement from a small population, a points total rather than a count of successes, and a count of trials until a miss (the geometric setup). The correct option is a textbook binomial setup. It needs no computation and little reading, and it takes one pass of checking conditions against each option.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m06-k0",
+  "cellId": "ap_statistics-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Linear transform: mean 1.5(80)+8=128; SD scales by 1.5 only: 13.5.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "mean 128, SD 13.5"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Linear transformation effects on mean and SD are core 1.7 content; skill 3.B calculation fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Mean 128, SD 13.5 is uniquely correct; the other options each have an error."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear with units."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct, realistic misconceptions; each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, light arithmetic, typical of AP style."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, standard item on linear transformations of mean and SD. The key is unique and correct, and the distractors are distinct and explained. No issues found."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item tests the effect of a linear transformation on mean and SD: mean = 1.5*80+8 = 128, SD = 1.5*9 = 13.5. There are two short, largely independent steps, one for the mean and one for the SD. Only one standard rule is needed, namely that adding a constant does not change spread. This falls under the rubric's minimum of 3 required steps for exam_prep, so it is basic_learning. The distractors reflect common misconceptions (forgetting the shift, adding 8 to the SD, not scaling the SD), not extra reasoning depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m06-k1",
+  "cellId": "ap_statistics-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Mean = 3(126)+10 = 388 cm. SD = 3(16) = 48 cm, because adding a constant does not change spread.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "mean 388 cm, SD 48 cm"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Linear transformation effects on mean and SD fit topic 1.7 and skill 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Mean 388 and SD 48 are unique to option D."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions; the explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, light arithmetic, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, correct item with a unique key and distinct distractors; it passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard linear-transformation item: new mean = 3(126)+10 = 388; new SD = 3(16) = 48. Two independent applications of a single rule set, with only 2 steps (below the 3-step exam_prep threshold) and no carried result between steps. Short stem, light arithmetic, one source.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m07-k0",
+  "cellId": "ap_statistics-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "Estimator D",
+     "brief_reasoning": "C and D both have a mean of 0.40, so both are unbiased. D has the smaller spread (0.04 vs 0.06). A has a small spread but is biased (mean 0.45). Its MSE is 0.0029, which is higher than D's 0.0016.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.1 estimators: bias and variability from simulated sampling distributions. Dominant demand is on target; no later-unit content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is the unique best: C and D are both centered at 0.40, D has smaller SD. A is biased (0.45) and B is biased and highly variable. Even by MSE, D is best, so the key is robust."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete with title, columns, and values. Stem states true value and the simulation setup clearly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (large spread good, variability only, bias only). The explanation addresses every wrong option. The key option is slightly longer than the others, but that is a minor giveaway risk."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, no arithmetic, one table, and four options. This is typical of AP Statistics, and the calculator designation is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean estimator-comparison item with a unique key (D), distinct distractor misconceptions, a complete table, and appropriate load. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item needs two steps: find the unbiased estimators (mean equals 0.4, so C and D), then pick the one with the smaller spread (D). That is 2 steps, below the 3-step exam_prep threshold, even though it combines bias and variability. It reads one simple table with no arithmetic, and the distractors are standard (largest spread, smallest spread but biased, unbiased but more variable).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m07-k1",
+  "cellId": "ap_statistics-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "Estimator B",
+     "brief_reasoning": "B and D are both centered at the true value of 7.2, so both are unbiased. B has the smaller spread (0.3 vs 0.4). C has the smallest spread but is biased: it is centered at 6.4, which is 0.8 too low.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.1 estimators, bias and variability from simulated sampling distributions; dominant demand fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique best: unbiased and smallest SD among unbiased. A and C biased, D has larger spread than B."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete with title, columns, and rows. Wording is clear. The true value is stated in the stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (variability only, bias only, larger spread is good). Each wrong option is explained. The key is the longest option, a slight cue."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short read, no arithmetic, about 60-95 seconds. Calculator not needed but harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, correct estimator-comparison item with a unique key and distinct distractors. The only flaw is minor: the key is the longest option."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student checks which estimators have mean equal to the true value (B and D), then picks the one with smaller spread (B). Only 2 sequential steps from a single small table, with no arithmetic. This is below the rubric threshold of 3 steps for exam_prep, even though two concepts (bias and variability) are combined.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ }
+]
