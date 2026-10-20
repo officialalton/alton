@@ -9,7 +9,6 @@ export default function AvailabilityCard({ data }: { data: LandingAvailability }
   if (data.sat <= 0 && data.ap.length === 0) return null;
   const have = new Set(data.ap.map((a) => a.subject));
   const coming = Object.keys(AP_SUBJECT_NAME).filter((c) => !have.has(c)).map((c) => apSubjectLabel(c)).filter((l): l is string => !!l);
-  const maxSets = Math.max(1, ...data.ap.map((a) => a.sets));
   return (
     <section aria-label="Practice test availability" className="relative w-full max-w-[520px] lg:ml-auto">
       <div className="p-doc !gap-6">
@@ -31,16 +30,11 @@ export default function AvailabilityCard({ data }: { data: LandingAvailability }
         {data.ap.length > 0 && (
           <div className="flex flex-col gap-3">
             <span className="p-label">{C.apLabel}</span>
-            <ul className="list-none m-0 p-0 flex flex-col gap-3.5">
+            <ul className="list-none m-0 p-0 flex flex-col gap-2.5">
               {data.ap.map((a) => (
-                <li key={a.subject} className="flex flex-col gap-1.5">
-                  <div className="flex items-baseline justify-between gap-3">
-                    <span className="text-[14.5px] font-semibold">{a.label}</span>
-                    <span className="p-mono text-[12px] text-[var(--p-slate)] text-right">
-                      {plural(a.sets, "set")}{a.fullExams > 0 ? ` · ${plural(a.fullExams, "full practice exam")}` : ""}
-                    </span>
-                  </div>
-                  <span className="p-bar" aria-hidden="true"><span style={{ width: `${Math.max(8, Math.round((a.sets / maxSets) * 100))}%` }} /></span>
+                <li key={a.subject} className="flex items-baseline justify-between gap-3">
+                  <span className="text-[14.5px] font-semibold">{a.label}</span>
+                  <span className="p-mono text-[12px] text-[var(--p-slate)] text-right">{plural(a.sets, "set")}</span>
                 </li>
               ))}
             </ul>

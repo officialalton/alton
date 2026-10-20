@@ -26,13 +26,14 @@ describe("LandingView", () => {
     expect(screen.queryByText(/Coming soon/)).toBeNull();
   });
 
-  it("SAT 13 + AP Calculus AB 4세트/풀 1개를 보인다. 헤드라인에는 숫자를 넣지 않는다", () => {
+  it("SAT 13 + AP Calculus AB 4세트를 보인다(게이지 없음). 헤드라인에는 숫자를 넣지 않는다", () => {
     const a: LandingAvailability = { sat: 13, ap: [{ subject: "ap_calculus_ab", label: "AP Calculus AB", sets: 4, fullExams: 1 }] };
     render(<LandingView dest={dest} availability={a} />);
     const c = within(card()!);
     expect(c.getByText("13")).toBeInTheDocument();
     expect(c.getByText("AP Calculus AB")).toBeInTheDocument();
-    expect(c.getByText("4 sets · 1 full practice exam")).toBeInTheDocument();
+    expect(c.getByText("4 sets")).toBeInTheDocument();
+    expect(c.queryByText(/full practice exam/)).toBeNull();
     expect(c.getByText("New tests are added regularly.")).toBeInTheDocument();
     expect(c.getByText("We're building toward 10+ full practice exams per AP subject.")).toBeInTheDocument();
     const coming = c.getByText("Coming soon").parentElement!.textContent!;
