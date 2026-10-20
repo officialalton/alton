@@ -1,0 +1,3965 @@
+[
+ {
+  "candidateKey": "ap_statistics-f01-k0",
+  "cellId": "ap_statistics-f01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "frq_bundle",
+  "keywordCode": "1.10",
+  "unitCode": "1",
+  "skillPrimary": "1.A",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "stfrq_n3_q1_block",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "The item covers standard Unit 1 content: identifying experimental units and the response variable, explaining blocking and random assignment within blocks, subtracting two means (72.1 - 67.5 = 4.6), comparing center and spread from summary statistics, and writing a statistical investigative question. Each part needs only one or two steps of recall or direct application. There is no multi-step computation, no output to interpret, and no tricky misconception to untangle. Part E is open-ended but follows a clear template (population, variable, variability). The reading load is modest, with one short table. This is typical of introductory practice and is easier than a full-mock exam-prep item.",
+  "payload": {
+   "archetype": "stfrq_n3_q1_block",
+   "template": "q1_multifocus",
+   "topic": "1.10",
+   "extra_topics": [
+    "1.7",
+    "1.9",
+    "1.13"
+   ],
+   "skill": "1.A",
+   "representative_skill": "1.A",
+   "calculator": "allowed",
+   "title": "A blocked experiment comparing two fertilizers for tomato plants",
+   "stimulus": {
+    "kind": "table",
+    "description": "Summary of the height after eight weeks for each treatment group.",
+    "data": {
+     "columns": [
+      "Treatment",
+      "Number of tomato plants",
+      "Mean (centimeters)",
+      "Standard deviation (centimeters)"
+     ],
+     "rows": [
+      [
+       "Fertilizer A",
+       "24",
+       "72.1",
+       "2.8"
+      ],
+      [
+       "Fertilizer B",
+       "24",
+       "67.5",
+       "4.5"
+      ]
+     ],
+     "notes": "Results for the two treatment groups of 48 tomato plants, with the blocks combined."
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "A researcher plans an experiment to compare two fertilizers, Fertilizer A and Fertilizer B, using $48$ tomato plants. The researcher will record the height after eight weeks of each plant. Identify (i) the experimental units and (ii) the response variable.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "(i) The experimental units are the $48$ tomato plants. (ii) The response variable is the height after eight weeks (centimeters).",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Identifies the experimental units as the 48 tomato plants (the individuals that receive a treatment)",
+       "required_elements": [
+        "tomato plants"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "names the treatments as the units",
+        "names the blocks as the units"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Identifies the response variable as the height after eight weeks",
+       "required_elements": [
+        "height after eight weeks"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "names the explanatory variable (the fertilizer) as the response"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      }
+     ],
+     "topic_codes": [
+      "1.13"
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "The researcher decides to block the tomato plants by the greenhouse bench (sunny or shady). (i) Explain the purpose of blocking in this experiment. (ii) Describe how to assign the treatments at random within the blocks.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.B"
+     ],
+     "model_answer": "(i) Blocking groups tomato plants that are alike in amount of sunlight, so the treatments are compared within similar units and variability due to amount of sunlight is removed from the comparison. (ii) Within each block separately, randomly assign half of the tomato plants to Fertilizer A and the other half to Fertilizer B, for example by drawing names or using random numbers.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Explains that blocking compares the treatments among similar units so that variability due to the blocking variable (amount of sunlight) does not hide or confuse the effect of the treatments",
+       "required_elements": [
+        "compares similar units",
+        "controls variability from the blocking variable"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "each treatment appears in every block so the blocking variable cannot explain a difference"
+       ],
+       "common_errors": [
+        "says blocking makes the sample random",
+        "says blocking removes the need for random assignment"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Describes random assignment carried out separately within each block, with about half of the units in each block receiving each treatment",
+       "required_elements": [
+        "random assignment within each block",
+        "half of each block to each treatment"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "shuffle the names in each block and give the first half one treatment"
+       ],
+       "common_errors": [
+        "randomly assigns across all units ignoring the blocks",
+        "assigns the treatments by choice of the units"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      }
+     ],
+     "topic_codes": [
+      "1.13"
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "The table shown gives the results for each treatment group, with the blocks combined. Calculate the difference in the mean height after eight weeks, Fertilizer A minus Fertilizer B.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "3.B"
+     ],
+     "model_answer": "$72.1 - 67.5 = 4.6$ centimeters.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Calculates the difference in the means (answer 4.6 centimeters, with the subtraction in the stated order)",
+       "required_elements": [
+        "4.6"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "subtracts in the opposite order",
+        "divides instead of subtracts"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "1.7"
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Compare the distributions of the height after eight weeks for the two treatment groups, using the means and the standard deviations in the table. Your comparison should address both center and spread, in context.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "4.A"
+     ],
+     "model_answer": "The mean height after eight weeks is about $4.6$ centimeters greater for Fertilizer A ($72.1$) than for Fertilizer B ($67.5$). The responses under Fertilizer B are more variable: the standard deviation is $4.5$ centimeters, compared with $2.8$ centimeters for Fertilizer A.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Compares the centers in context: the mean height after eight weeks is greater for Fertilizer A than for Fertilizer B",
+       "required_elements": [
+        "72.1",
+        "67.5",
+        "greater for fertilizer a"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "compares the groups without naming the response or the treatments",
+        "reverses the direction of the difference"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Compares the spreads in context: the standard deviation is greater for Fertilizer B ($4.5$) than for Fertilizer A ($2.8$), so its responses are more variable",
+       "required_elements": [
+        "4.5",
+        "2.8",
+        "more variable for fertilizer b"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "says the group with the greater mean is more variable",
+        "interprets the standard deviation as the center"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      }
+     ],
+     "topic_codes": [
+      "1.9"
+     ]
+    },
+    {
+     "label": "E",
+     "prompt": "The researcher also wants to study the number of tomatoes that each plant produces among the tomato plants in the greenhouse. State a valid investigative question about this topic that requires a statistical investigation. Your question should name the population of interest, name the variable that would be measured, and be answerable by collecting and analyzing data that vary from individual to individual.",
+     "points": 3,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.A"
+     ],
+     "model_answer": "For example: What is the typical number of tomatoes that a tomato plant in the greenhouse produces?",
+     "rubric_rows": [
+      {
+       "row_id": "E1",
+       "points": 1,
+       "criterion": "Names the population of interest (the tomato plants in the greenhouse)",
+       "required_elements": [
+        "tomato plants in the greenhouse"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "names only the sample or one individual"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      },
+      {
+       "row_id": "E2",
+       "points": 1,
+       "criterion": "Names the variable that would be measured (the number of tomatoes that each plant produces)",
+       "required_elements": [
+        "the number of tomatoes that each plant produces"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "states no variable"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      },
+      {
+       "row_id": "E3",
+       "points": 1,
+       "criterion": "Poses a question that anticipates variability among individuals and can be answered with data (not a single fact or an opinion)",
+       "required_elements": [
+        "anticipates variability",
+        "answerable with data"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "asks a yes-or-no fact",
+        "asks for an opinion"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      }
+     ],
+     "topic_codes": [
+      "1.10"
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 22,
+   "facts": [
+    "n=24",
+    "m1=72.1",
+    "m2=67.5",
+    "s1=2.8",
+    "s2=4.5"
+   ],
+   "expected_values": [
+    {
+     "part": "C",
+     "quantity": "difference of means",
+     "value": 4.6,
+     "unit": "",
+     "tolerance": 0.01
+    }
+   ],
+   "blueprint": {
+    "id": "stfrq_n3_q1_block",
+    "subject": "ap_statistics",
+    "kind": "frq_bundle",
+    "concept": "A multi-focus question combining experimental units and response, the purpose and randomization of blocking, a difference of group means, a comparison of two distributions by center and spread and a valid investigative question",
+    "topic": "1.10",
+    "skill": "1.A",
+    "student_thinking": [
+     "Identify the experimental units and the response variable",
+     "Explain blocking and random assignment within blocks",
+     "Compare two groups by center and spread from summary statistics",
+     "Write a valid investigative question"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "blocking compares treatments within similar units and the random assignment is done within each block",
+      "evidence": "the stem names the blocking variable and the table gives the group summaries"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "group means",
+      "group standard deviations"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "the difference of the means is recomputed with exact fractions and the ratio of the standard deviations is checked to exceed 1.5 so the spread comparison is unambiguous",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "1.13"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "(i) The experimental units are the $48$ tomato plants. (ii) The response variable is the height after eight weeks (centimeters)."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Identifies the experimental units as the 48 tomato plants (the individuals that receive a treatment)",
+        "elements": [
+         "tomato plants"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Identifies the response variable as the height after eight weeks",
+        "elements": [
+         "height after eight weeks"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "2.B"
+      ],
+      "topics": [
+       "1.13"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "(i) Blocking groups tomato plants that are alike in amount of sunlight, so the treatments are compared within similar units and variability due to amount of sunlight is removed from the comparison. (ii) Within each block separately, randomly assign half of the tomato plants to Fertilizer A and the other half to Fertilizer B, for example by drawing names or using random numbers."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Explains that blocking compares the treatments among similar units so that variability due to the blocking variable (amount of sunlight) does not hide or confuse the effect of the treatments",
+        "elements": [
+         "compares similar units",
+         "controls variability from the blocking variable"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Describes random assignment carried out separately within each block, with about half of the units in each block receiving each treatment",
+        "elements": [
+         "random assignment within each block",
+         "half of each block to each treatment"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "3.B"
+      ],
+      "topics": [
+       "1.7"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "$72.1 - 67.5 = 4.6$ centimeters."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Calculates the difference in the means (answer 4.6 centimeters, with the subtraction in the stated order)",
+        "elements": [
+         "4.6"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "4.A"
+      ],
+      "topics": [
+       "1.9"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "The mean height after eight weeks is about $4.6$ centimeters greater for Fertilizer A ($72.1$) than for Fertilizer B ($67.5$). The responses under Fertilizer B are more variable: the standard deviation is $4.5$ centimeters, compared with $2.8$ centimeters for Fertilizer A."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Compares the centers in context: the mean height after eight weeks is greater for Fertilizer A than for Fertilizer B",
+        "elements": [
+         "72.1",
+         "67.5",
+         "greater for fertilizer a"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Compares the spreads in context: the standard deviation is greater for Fertilizer B ($4.5$) than for Fertilizer A ($2.8$), so its responses are more variable",
+        "elements": [
+         "4.5",
+         "2.8",
+         "more variable for fertilizer b"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "E",
+      "skills": [
+       "1.A"
+      ],
+      "topics": [
+       "1.10"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "For example: What is the typical number of tomatoes that a tomato plant in the greenhouse produces?"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "E1",
+        "points": 1,
+        "criterion": "Names the population of interest (the tomato plants in the greenhouse)",
+        "elements": [
+         "tomato plants in the greenhouse"
+        ]
+       },
+       {
+        "row_id": "E2",
+        "points": 1,
+        "criterion": "Names the variable that would be measured (the number of tomatoes that each plant produces)",
+        "elements": [
+         "the number of tomatoes that each plant produces"
+        ]
+       },
+       {
+        "row_id": "E3",
+        "points": 1,
+        "criterion": "Poses a question that anticipates variability among individuals and can be answered with data (not a single fact or an opinion)",
+        "elements": [
+         "anticipates variability",
+         "answerable with data"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "judgment_demand": [
+     "claim_justification",
+     "representation_reading",
+     "procedure_choice"
+    ]
+   },
+   "seed": 10900,
+   "pack_id": "stfrq_n3_q1_block-s10900"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "stfrq_n3_q1_block",
+   "facts": [
+    "n=24",
+    "m1=72.1",
+    "m2=67.5",
+    "s1=2.8",
+    "s2=4.5"
+   ],
+   "seed": 10900
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The Q1 multi-focus FRQ is valid: 10 points over 5 parts, each part within Unit 1 scope and matched to its own skill, with a consistent rubric, a complete table, and a typical load for about 22 minutes. The solver output agrees with the key on every part.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part E assesses 1.A / 1.10. The other parts assess 1.13, 1.7 and 1.9, all Unit 1 content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The rubric rows total 10 points and accept alternative valid wording. The expected value in part C, 4.6, is correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has labeled columns and units and notes that the blocks are combined. It belongs to the same study as parts C and D."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ. The common_errors fields are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load fits about 22 minutes, the arithmetic is minimal, and the calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item covers standard Unit 1 content: identifying experimental units and the response variable, explaining blocking and random assignment within blocks, subtracting two means (72.1 - 67.5 = 4.6), comparing center and spread from summary statistics, and writing a statistical investigative question. Each part needs only one or two steps of recall or direct application. There is no multi-step computation, no output to interpret, and no tricky misconception to untangle. Part E is open-ended but follows a clear template (population, variable, variability). The reading load is modest, with one short table. This is typical of introductory practice and is easier than a full-mock exam-prep item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-f01-k1",
+  "cellId": "ap_statistics-f01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "frq_bundle",
+  "keywordCode": "1.10",
+  "unitCode": "1",
+  "skillPrimary": "1.A",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "stfrq_n3_q1_block",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "This is a routine multi-part free-response item on core Unit 1 skills. Part A asks for the experimental units and response variable, and Part B asks for the purpose of blocking and random assignment within blocks. Part C is a single subtraction (66.6 - 63.5 = 3.1). Part D compares center and spread from a table, and Part E asks for a valid investigative question that names the population and variable. Each part uses one concept and requires no multi-step reasoning, procedure choice, or condition checking. The table is small and the reading load is light. The context is a standard textbook one with unambiguous wording. This is suitable for initial learning rather than a full mock exam.",
+  "payload": {
+   "archetype": "stfrq_n3_q1_block",
+   "template": "q1_multifocus",
+   "topic": "1.10",
+   "extra_topics": [
+    "1.7",
+    "1.9",
+    "1.13"
+   ],
+   "skill": "1.A",
+   "representative_skill": "1.A",
+   "calculator": "allowed",
+   "title": "A blocked experiment comparing two fertilizers for tomato plants",
+   "stimulus": {
+    "kind": "table",
+    "description": "Summary of the height after eight weeks for each treatment group.",
+    "data": {
+     "columns": [
+      "Treatment",
+      "Number of tomato plants",
+      "Mean (centimeters)",
+      "Standard deviation (centimeters)"
+     ],
+     "rows": [
+      [
+       "Fertilizer A",
+       "18",
+       "66.6",
+       "2.1"
+      ],
+      [
+       "Fertilizer B",
+       "18",
+       "63.5",
+       "3.8"
+      ]
+     ],
+     "notes": "Results for the two treatment groups of 36 tomato plants, with the blocks combined."
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "A researcher plans an experiment to compare two fertilizers, Fertilizer A and Fertilizer B, using $36$ tomato plants. The researcher will record the height after eight weeks of each plant. Identify (i) the experimental units and (ii) the response variable.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "(i) The experimental units are the $36$ tomato plants. (ii) The response variable is the height after eight weeks (centimeters).",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Identifies the experimental units as the 36 tomato plants (the individuals that receive a treatment)",
+       "required_elements": [
+        "tomato plants"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "names the treatments as the units",
+        "names the blocks as the units"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Identifies the response variable as the height after eight weeks",
+       "required_elements": [
+        "height after eight weeks"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "names the explanatory variable (the fertilizer) as the response"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      }
+     ],
+     "topic_codes": [
+      "1.13"
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "The researcher decides to block the tomato plants by the greenhouse bench (sunny or shady). (i) Explain the purpose of blocking in this experiment. (ii) Describe how to assign the treatments at random within the blocks.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.B"
+     ],
+     "model_answer": "(i) Blocking groups tomato plants that are alike in amount of sunlight, so the treatments are compared within similar units and variability due to amount of sunlight is removed from the comparison. (ii) Within each block separately, randomly assign half of the tomato plants to Fertilizer A and the other half to Fertilizer B, for example by drawing names or using random numbers.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Explains that blocking compares the treatments among similar units so that variability due to the blocking variable (amount of sunlight) does not hide or confuse the effect of the treatments",
+       "required_elements": [
+        "compares similar units",
+        "controls variability from the blocking variable"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "each treatment appears in every block so the blocking variable cannot explain a difference"
+       ],
+       "common_errors": [
+        "says blocking makes the sample random",
+        "says blocking removes the need for random assignment"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Describes random assignment carried out separately within each block, with about half of the units in each block receiving each treatment",
+       "required_elements": [
+        "random assignment within each block",
+        "half of each block to each treatment"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "shuffle the names in each block and give the first half one treatment"
+       ],
+       "common_errors": [
+        "randomly assigns across all units ignoring the blocks",
+        "assigns the treatments by choice of the units"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      }
+     ],
+     "topic_codes": [
+      "1.13"
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "The table shown gives the results for each treatment group, with the blocks combined. Calculate the difference in the mean height after eight weeks, Fertilizer A minus Fertilizer B.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "3.B"
+     ],
+     "model_answer": "$66.6 - 63.5 = 3.1$ centimeters.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Calculates the difference in the means (answer 3.1 centimeters, with the subtraction in the stated order)",
+       "required_elements": [
+        "3.1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "subtracts in the opposite order",
+        "divides instead of subtracts"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "1.7"
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Compare the distributions of the height after eight weeks for the two treatment groups, using the means and the standard deviations in the table. Your comparison should address both center and spread, in context.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "4.A"
+     ],
+     "model_answer": "The mean height after eight weeks is about $3.1$ centimeters greater for Fertilizer A ($66.6$) than for Fertilizer B ($63.5$). The responses under Fertilizer B are more variable: the standard deviation is $3.8$ centimeters, compared with $2.1$ centimeters for Fertilizer A.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Compares the centers in context: the mean height after eight weeks is greater for Fertilizer A than for Fertilizer B",
+       "required_elements": [
+        "66.6",
+        "63.5",
+        "greater for fertilizer a"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "compares the groups without naming the response or the treatments",
+        "reverses the direction of the difference"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Compares the spreads in context: the standard deviation is greater for Fertilizer B ($3.8$) than for Fertilizer A ($2.1$), so its responses are more variable",
+       "required_elements": [
+        "3.8",
+        "2.1",
+        "more variable for fertilizer b"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "says the group with the greater mean is more variable",
+        "interprets the standard deviation as the center"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      }
+     ],
+     "topic_codes": [
+      "1.9"
+     ]
+    },
+    {
+     "label": "E",
+     "prompt": "The researcher also wants to study the number of tomatoes that each plant produces among the tomato plants in the greenhouse. State a valid investigative question about this topic that requires a statistical investigation. Your question should name the population of interest, name the variable that would be measured, and be answerable by collecting and analyzing data that vary from individual to individual.",
+     "points": 3,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.A"
+     ],
+     "model_answer": "For example: What is the typical number of tomatoes that a tomato plant in the greenhouse produces?",
+     "rubric_rows": [
+      {
+       "row_id": "E1",
+       "points": 1,
+       "criterion": "Names the population of interest (the tomato plants in the greenhouse)",
+       "required_elements": [
+        "tomato plants in the greenhouse"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "names only the sample or one individual"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      },
+      {
+       "row_id": "E2",
+       "points": 1,
+       "criterion": "Names the variable that would be measured (the number of tomatoes that each plant produces)",
+       "required_elements": [
+        "the number of tomatoes that each plant produces"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "states no variable"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      },
+      {
+       "row_id": "E3",
+       "points": 1,
+       "criterion": "Poses a question that anticipates variability among individuals and can be answered with data (not a single fact or an opinion)",
+       "required_elements": [
+        "anticipates variability",
+        "answerable with data"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "asks a yes-or-no fact",
+        "asks for an opinion"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      }
+     ],
+     "topic_codes": [
+      "1.10"
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 22,
+   "facts": [
+    "n=18",
+    "m1=66.6",
+    "m2=63.5",
+    "s1=2.1",
+    "s2=3.8"
+   ],
+   "expected_values": [
+    {
+     "part": "C",
+     "quantity": "difference of means",
+     "value": 3.1,
+     "unit": "",
+     "tolerance": 0.01
+    }
+   ],
+   "blueprint": {
+    "id": "stfrq_n3_q1_block",
+    "subject": "ap_statistics",
+    "kind": "frq_bundle",
+    "concept": "A multi-focus question combining experimental units and response, the purpose and randomization of blocking, a difference of group means, a comparison of two distributions by center and spread and a valid investigative question",
+    "topic": "1.10",
+    "skill": "1.A",
+    "student_thinking": [
+     "Identify the experimental units and the response variable",
+     "Explain blocking and random assignment within blocks",
+     "Compare two groups by center and spread from summary statistics",
+     "Write a valid investigative question"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "blocking compares treatments within similar units and the random assignment is done within each block",
+      "evidence": "the stem names the blocking variable and the table gives the group summaries"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "group means",
+      "group standard deviations"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "the difference of the means is recomputed with exact fractions and the ratio of the standard deviations is checked to exceed 1.5 so the spread comparison is unambiguous",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "1.13"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "(i) The experimental units are the $36$ tomato plants. (ii) The response variable is the height after eight weeks (centimeters)."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Identifies the experimental units as the 36 tomato plants (the individuals that receive a treatment)",
+        "elements": [
+         "tomato plants"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Identifies the response variable as the height after eight weeks",
+        "elements": [
+         "height after eight weeks"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "2.B"
+      ],
+      "topics": [
+       "1.13"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "(i) Blocking groups tomato plants that are alike in amount of sunlight, so the treatments are compared within similar units and variability due to amount of sunlight is removed from the comparison. (ii) Within each block separately, randomly assign half of the tomato plants to Fertilizer A and the other half to Fertilizer B, for example by drawing names or using random numbers."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Explains that blocking compares the treatments among similar units so that variability due to the blocking variable (amount of sunlight) does not hide or confuse the effect of the treatments",
+        "elements": [
+         "compares similar units",
+         "controls variability from the blocking variable"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Describes random assignment carried out separately within each block, with about half of the units in each block receiving each treatment",
+        "elements": [
+         "random assignment within each block",
+         "half of each block to each treatment"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "3.B"
+      ],
+      "topics": [
+       "1.7"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "$66.6 - 63.5 = 3.1$ centimeters."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Calculates the difference in the means (answer 3.1 centimeters, with the subtraction in the stated order)",
+        "elements": [
+         "3.1"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "4.A"
+      ],
+      "topics": [
+       "1.9"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "The mean height after eight weeks is about $3.1$ centimeters greater for Fertilizer A ($66.6$) than for Fertilizer B ($63.5$). The responses under Fertilizer B are more variable: the standard deviation is $3.8$ centimeters, compared with $2.1$ centimeters for Fertilizer A."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Compares the centers in context: the mean height after eight weeks is greater for Fertilizer A than for Fertilizer B",
+        "elements": [
+         "66.6",
+         "63.5",
+         "greater for fertilizer a"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Compares the spreads in context: the standard deviation is greater for Fertilizer B ($3.8$) than for Fertilizer A ($2.1$), so its responses are more variable",
+        "elements": [
+         "3.8",
+         "2.1",
+         "more variable for fertilizer b"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "E",
+      "skills": [
+       "1.A"
+      ],
+      "topics": [
+       "1.10"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "For example: What is the typical number of tomatoes that a tomato plant in the greenhouse produces?"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "E1",
+        "points": 1,
+        "criterion": "Names the population of interest (the tomato plants in the greenhouse)",
+        "elements": [
+         "tomato plants in the greenhouse"
+        ]
+       },
+       {
+        "row_id": "E2",
+        "points": 1,
+        "criterion": "Names the variable that would be measured (the number of tomatoes that each plant produces)",
+        "elements": [
+         "the number of tomatoes that each plant produces"
+        ]
+       },
+       {
+        "row_id": "E3",
+        "points": 1,
+        "criterion": "Poses a question that anticipates variability among individuals and can be answered with data (not a single fact or an opinion)",
+        "elements": [
+         "anticipates variability",
+         "answerable with data"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "judgment_demand": [
+     "claim_justification",
+     "representation_reading",
+     "procedure_choice"
+    ]
+   },
+   "seed": 10901,
+   "pack_id": "stfrq_n3_q1_block-s10901"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "stfrq_n3_q1_block",
+   "facts": [
+    "n=18",
+    "m1=66.6",
+    "m2=63.5",
+    "s1=2.1",
+    "s2=3.8"
+   ],
+   "seed": 10901
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The multi-focus Q1 has ten 1-point rows over 5 parts, and each part fits its own skill and topic. Part E is a valid 1.A investigative question. The table belongs to the same study as the parts that use it. The keys are unique, and the solver agreed with all of them. No instant-reject conditions apply.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part matches its labeled skill and topic. Part E is the 1.A investigative question, as the Q1 standard requires."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The rubric rows are consistent, the model answers are valid, and alternative wordings are accepted."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with columns, units, group sizes and a note that the blocks are combined. The stimulus is coherent with the stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so distractors do not apply. The rubric lists common errors for each row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The reading and writing load fits about 22 minutes, and the calculator use is minimal and consistent with the \"allowed\" designation."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "This is a routine multi-part free-response item on core Unit 1 skills. Part A asks for the experimental units and response variable, and Part B asks for the purpose of blocking and random assignment within blocks. Part C is a single subtraction (66.6 - 63.5 = 3.1). Part D compares center and spread from a table, and Part E asks for a valid investigative question that names the population and variable. Each part uses one concept and requires no multi-step reasoning, procedure choice, or condition checking. The table is small and the reading load is light. The context is a standard textbook one with unambiguous wording. This is suitable for initial learning rather than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-f01-k2",
+  "cellId": "ap_statistics-f01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "frq_bundle",
+  "keywordCode": "1.10",
+  "unitCode": "1",
+  "skillPrimary": "1.A",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "stfrq_n3_q1_block",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Multi-part free-response item typical of an AP Statistics FRQ. It covers experimental units and response variable, the purpose of blocking, random assignment within blocks, a single subtraction of means (4.6 cm), a comparison of center and spread in context, and writing a valid investigative question. Each part uses core Unit 1 concepts at standard depth. The computation is trivial and the reading load is moderate. Representation changes are limited to reading a summary table and writing prose. No out-of-scope knowledge is required, and the wording is clear. The breadth of parts and the need for communication in context make it more than basic learning but not advanced.",
+  "payload": {
+   "archetype": "stfrq_n3_q1_block",
+   "template": "q1_multifocus",
+   "topic": "1.10",
+   "extra_topics": [
+    "1.7",
+    "1.9",
+    "1.13"
+   ],
+   "skill": "1.A",
+   "representative_skill": "1.A",
+   "calculator": "allowed",
+   "title": "A blocked experiment comparing two fertilizers for tomato plants",
+   "stimulus": {
+    "kind": "table",
+    "description": "Summary of the height after eight weeks for each treatment group.",
+    "data": {
+     "columns": [
+      "Treatment",
+      "Number of tomato plants",
+      "Mean (centimeters)",
+      "Standard deviation (centimeters)"
+     ],
+     "rows": [
+      [
+       "Fertilizer A",
+       "18",
+       "58.6",
+       "2.4"
+      ],
+      [
+       "Fertilizer B",
+       "18",
+       "54",
+       "4.3"
+      ]
+     ],
+     "notes": "Results for the two treatment groups of 36 tomato plants, with the blocks combined."
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "A researcher plans an experiment to compare two fertilizers, Fertilizer A and Fertilizer B, using $36$ tomato plants. The researcher will record the height after eight weeks of each plant. Identify (i) the experimental units and (ii) the response variable.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "(i) The experimental units are the $36$ tomato plants. (ii) The response variable is the height after eight weeks (centimeters).",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Identifies the experimental units as the 36 tomato plants (the individuals that receive a treatment)",
+       "required_elements": [
+        "tomato plants"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "names the treatments as the units",
+        "names the blocks as the units"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Identifies the response variable as the height after eight weeks",
+       "required_elements": [
+        "height after eight weeks"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "names the explanatory variable (the fertilizer) as the response"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      }
+     ],
+     "topic_codes": [
+      "1.13"
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "The researcher decides to block the tomato plants by the greenhouse bench (sunny or shady). (i) Explain the purpose of blocking in this experiment. (ii) Describe how to assign the treatments at random within the blocks.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.B"
+     ],
+     "model_answer": "(i) Blocking groups tomato plants that are alike in amount of sunlight, so the treatments are compared within similar units and variability due to amount of sunlight is removed from the comparison. (ii) Within each block separately, randomly assign half of the tomato plants to Fertilizer A and the other half to Fertilizer B, for example by drawing names or using random numbers.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Explains that blocking compares the treatments among similar units so that variability due to the blocking variable (amount of sunlight) does not hide or confuse the effect of the treatments",
+       "required_elements": [
+        "compares similar units",
+        "controls variability from the blocking variable"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "each treatment appears in every block so the blocking variable cannot explain a difference"
+       ],
+       "common_errors": [
+        "says blocking makes the sample random",
+        "says blocking removes the need for random assignment"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Describes random assignment carried out separately within each block, with about half of the units in each block receiving each treatment",
+       "required_elements": [
+        "random assignment within each block",
+        "half of each block to each treatment"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "shuffle the names in each block and give the first half one treatment"
+       ],
+       "common_errors": [
+        "randomly assigns across all units ignoring the blocks",
+        "assigns the treatments by choice of the units"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      }
+     ],
+     "topic_codes": [
+      "1.13"
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "The table shown gives the results for each treatment group, with the blocks combined. Calculate the difference in the mean height after eight weeks, Fertilizer A minus Fertilizer B.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "3.B"
+     ],
+     "model_answer": "$58.6 - 54 = 4.6$ centimeters.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Calculates the difference in the means (answer 4.6 centimeters, with the subtraction in the stated order)",
+       "required_elements": [
+        "4.6"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "subtracts in the opposite order",
+        "divides instead of subtracts"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "1.7"
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Compare the distributions of the height after eight weeks for the two treatment groups, using the means and the standard deviations in the table. Your comparison should address both center and spread, in context.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "4.A"
+     ],
+     "model_answer": "The mean height after eight weeks is about $4.6$ centimeters greater for Fertilizer A ($58.6$) than for Fertilizer B ($54$). The responses under Fertilizer B are more variable: the standard deviation is $4.3$ centimeters, compared with $2.4$ centimeters for Fertilizer A.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Compares the centers in context: the mean height after eight weeks is greater for Fertilizer A than for Fertilizer B",
+       "required_elements": [
+        "58.6",
+        "54",
+        "greater for fertilizer a"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "compares the groups without naming the response or the treatments",
+        "reverses the direction of the difference"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Compares the spreads in context: the standard deviation is greater for Fertilizer B ($4.3$) than for Fertilizer A ($2.4$), so its responses are more variable",
+       "required_elements": [
+        "4.3",
+        "2.4",
+        "more variable for fertilizer b"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "says the group with the greater mean is more variable",
+        "interprets the standard deviation as the center"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      }
+     ],
+     "topic_codes": [
+      "1.9"
+     ]
+    },
+    {
+     "label": "E",
+     "prompt": "The researcher also wants to study the number of tomatoes that each plant produces among the tomato plants in the greenhouse. State a valid investigative question about this topic that requires a statistical investigation. Your question should name the population of interest, name the variable that would be measured, and be answerable by collecting and analyzing data that vary from individual to individual.",
+     "points": 3,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.A"
+     ],
+     "model_answer": "For example: What is the typical number of tomatoes that a tomato plant in the greenhouse produces?",
+     "rubric_rows": [
+      {
+       "row_id": "E1",
+       "points": 1,
+       "criterion": "Names the population of interest (the tomato plants in the greenhouse)",
+       "required_elements": [
+        "tomato plants in the greenhouse"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "names only the sample or one individual"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      },
+      {
+       "row_id": "E2",
+       "points": 1,
+       "criterion": "Names the variable that would be measured (the number of tomatoes that each plant produces)",
+       "required_elements": [
+        "the number of tomatoes that each plant produces"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "states no variable"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      },
+      {
+       "row_id": "E3",
+       "points": 1,
+       "criterion": "Poses a question that anticipates variability among individuals and can be answered with data (not a single fact or an opinion)",
+       "required_elements": [
+        "anticipates variability",
+        "answerable with data"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "asks a yes-or-no fact",
+        "asks for an opinion"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      }
+     ],
+     "topic_codes": [
+      "1.10"
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 22,
+   "facts": [
+    "n=18",
+    "m1=58.6",
+    "m2=54",
+    "s1=2.4",
+    "s2=4.3"
+   ],
+   "expected_values": [
+    {
+     "part": "C",
+     "quantity": "difference of means",
+     "value": 4.6,
+     "unit": "",
+     "tolerance": 0.01
+    }
+   ],
+   "blueprint": {
+    "id": "stfrq_n3_q1_block",
+    "subject": "ap_statistics",
+    "kind": "frq_bundle",
+    "concept": "A multi-focus question combining experimental units and response, the purpose and randomization of blocking, a difference of group means, a comparison of two distributions by center and spread and a valid investigative question",
+    "topic": "1.10",
+    "skill": "1.A",
+    "student_thinking": [
+     "Identify the experimental units and the response variable",
+     "Explain blocking and random assignment within blocks",
+     "Compare two groups by center and spread from summary statistics",
+     "Write a valid investigative question"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "blocking compares treatments within similar units and the random assignment is done within each block",
+      "evidence": "the stem names the blocking variable and the table gives the group summaries"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "group means",
+      "group standard deviations"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "the difference of the means is recomputed with exact fractions and the ratio of the standard deviations is checked to exceed 1.5 so the spread comparison is unambiguous",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "1.13"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "(i) The experimental units are the $36$ tomato plants. (ii) The response variable is the height after eight weeks (centimeters)."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Identifies the experimental units as the 36 tomato plants (the individuals that receive a treatment)",
+        "elements": [
+         "tomato plants"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Identifies the response variable as the height after eight weeks",
+        "elements": [
+         "height after eight weeks"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "2.B"
+      ],
+      "topics": [
+       "1.13"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "(i) Blocking groups tomato plants that are alike in amount of sunlight, so the treatments are compared within similar units and variability due to amount of sunlight is removed from the comparison. (ii) Within each block separately, randomly assign half of the tomato plants to Fertilizer A and the other half to Fertilizer B, for example by drawing names or using random numbers."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Explains that blocking compares the treatments among similar units so that variability due to the blocking variable (amount of sunlight) does not hide or confuse the effect of the treatments",
+        "elements": [
+         "compares similar units",
+         "controls variability from the blocking variable"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Describes random assignment carried out separately within each block, with about half of the units in each block receiving each treatment",
+        "elements": [
+         "random assignment within each block",
+         "half of each block to each treatment"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "3.B"
+      ],
+      "topics": [
+       "1.7"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "$58.6 - 54 = 4.6$ centimeters."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Calculates the difference in the means (answer 4.6 centimeters, with the subtraction in the stated order)",
+        "elements": [
+         "4.6"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "4.A"
+      ],
+      "topics": [
+       "1.9"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "The mean height after eight weeks is about $4.6$ centimeters greater for Fertilizer A ($58.6$) than for Fertilizer B ($54$). The responses under Fertilizer B are more variable: the standard deviation is $4.3$ centimeters, compared with $2.4$ centimeters for Fertilizer A."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Compares the centers in context: the mean height after eight weeks is greater for Fertilizer A than for Fertilizer B",
+        "elements": [
+         "58.6",
+         "54",
+         "greater for fertilizer a"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Compares the spreads in context: the standard deviation is greater for Fertilizer B ($4.3$) than for Fertilizer A ($2.4$), so its responses are more variable",
+        "elements": [
+         "4.3",
+         "2.4",
+         "more variable for fertilizer b"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "E",
+      "skills": [
+       "1.A"
+      ],
+      "topics": [
+       "1.10"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "For example: What is the typical number of tomatoes that a tomato plant in the greenhouse produces?"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "E1",
+        "points": 1,
+        "criterion": "Names the population of interest (the tomato plants in the greenhouse)",
+        "elements": [
+         "tomato plants in the greenhouse"
+        ]
+       },
+       {
+        "row_id": "E2",
+        "points": 1,
+        "criterion": "Names the variable that would be measured (the number of tomatoes that each plant produces)",
+        "elements": [
+         "the number of tomatoes that each plant produces"
+        ]
+       },
+       {
+        "row_id": "E3",
+        "points": 1,
+        "criterion": "Poses a question that anticipates variability among individuals and can be answered with data (not a single fact or an opinion)",
+        "elements": [
+         "anticipates variability",
+         "answerable with data"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "judgment_demand": [
+     "claim_justification",
+     "representation_reading",
+     "procedure_choice"
+    ]
+   },
+   "seed": 10902,
+   "pack_id": "stfrq_n3_q1_block-s10902"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "stfrq_n3_q1_block",
+   "facts": [
+    "n=18",
+    "m1=58.6",
+    "m2=54",
+    "s1=2.4",
+    "s2=4.3"
+   ],
+   "seed": 10902
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Valid multi-focus Q1 with ten 1-point rubric rows and correct keys. Part E is over-scaffolded, since the prompt lists the required elements and gives away the population wording. That weakens discrimination but does not make the key wrong.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part fits its own skill and topic. Part E targets 1.A and the other parts cover 1.13, 1.7 and 1.9. Nothing from later units appears."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys and rubric rows are consistent and the alternative solutions are valid. E1 and E3 are weak because the prompt gives away the population and the variability criterion is vague."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with treatments, n, means and SDs in centimeters. Wording is clear. There is a minor tense mismatch between a planned experiment and reported results."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ. Common errors are listed per rubric row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load fits about 22 minutes for 10 points. The calculator designation is consistent, and part C is trivial but acceptable as a 1-point part."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part free-response item typical of an AP Statistics FRQ. It covers experimental units and response variable, the purpose of blocking, random assignment within blocks, a single subtraction of means (4.6 cm), a comparison of center and spread in context, and writing a valid investigative question. Each part uses core Unit 1 concepts at standard depth. The computation is trivial and the reading load is moderate. Representation changes are limited to reading a summary table and writing prose. No out-of-scope knowledge is required, and the wording is clear. The breadth of parts and the need for communication in context make it more than basic learning but not advanced.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-f02-k0",
+  "cellId": "ap_statistics-f02",
+  "apSubjectCode": "ap_statistics",
+  "kind": "frq_bundle",
+  "keywordCode": "5.4",
+  "unitCode": "5",
+  "skillPrimary": "4.D",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "stfrq_n3_q2_output",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Multi-part FRQ-style item on core Unit 5 skills: equation from output, intercept interpretation with extrapolation check, prediction and residual interpretation, interpretation of S, r from R-Sq with sign from slope, and residual-plot pattern judgment. Each step is standard and arithmetic is light (45.79, 2.71, sqrt(0.64)=0.80). Difficulty comes from the breadth of interpretation and conditions, as appropriate for a full mock, not from unfair sources.",
+  "payload": {
+   "archetype": "stfrq_n3_q2_output",
+   "template": "q2_regression",
+   "topic": "5.4",
+   "extra_topics": [
+    "5.2",
+    "5.5"
+   ],
+   "skill": "4.D",
+   "representative_skill": "4.D",
+   "calculator": "allowed",
+   "title": "Regression of sales on advertising spending: reading computer output",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Computer output for a least-squares regression of sales on advertising spending.",
+    "data": {
+     "chart": "output",
+     "output": {
+      "title": "Regression Analysis: Sales versus advertising spending",
+      "sections": [
+       {
+        "columns": [
+         "Predictor",
+         "Coef"
+        ],
+        "rows": [
+         [
+          "Constant",
+          "19.29"
+         ],
+         [
+          "Advertising spending",
+          "2.65"
+         ]
+        ]
+       },
+       {
+        "columns": [
+         "S",
+         "R-Sq"
+        ],
+        "rows": [
+         [
+          "1.75",
+          "64.0%"
+         ]
+        ]
+       }
+      ]
+     }
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "A researcher uses data from $30$ stores to model the relationship between advertising spending ($x$, in thousand dollars) and sales ($y$, in thousand units). The values of $x$ in the data range from $3$ to $14$ thousand dollars. The computer output shown gives the results of a least-squares regression. (i) Write the equation of the least-squares regression line. (ii) Interpret the $y$-intercept of the line in context, and explain whether this interpretation is meaningful.",
+     "points": 3,
+     "response_mode": "explain",
+     "skill_codes": [
+      "4.D"
+     ],
+     "model_answer": "(i) $\\hat y = 19.29 + 2.65x$. (ii) When the advertising spending is $0$, the predicted sales is 19.29 thousand units. This is not meaningful, because $0$ is outside the range of the data (3 to 14 thousand dollars), so the interpretation would be an extrapolation.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Writes the equation with the intercept 19.29 and the slope 2.65, in the form $\\hat y = 19.29 + 2.65x$",
+       "required_elements": [
+        "19.29",
+        "2.65"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "swaps the intercept and the slope",
+        "omits the hat on the predicted value"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Interprets the intercept as the predicted sales when the advertising spending equals $0$",
+       "required_elements": [
+        "predicted value when x is 0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "interprets the intercept as the change in y per unit of x"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Explains that the interpretation is not meaningful because $0$ is outside the range of the data (3 to 14), so it is an extrapolation",
+       "required_elements": [
+        "0 is outside the range of the data",
+        "extrapolation"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "zero is not a value of x that was observed so the intercept only anchors the line"
+       ],
+       "common_errors": [
+        "says the intercept is meaningful because it is in the output"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      }
+     ],
+     "topic_codes": [
+      "5.5"
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "The regression line is used for a store whose monthly advertising spending is $10$ thousand dollars. (i) Calculate the predicted sales. (ii) The actual sales for one such store was $48.5$ thousand units. Calculate the residual and interpret it in context.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "3.B"
+     ],
+     "model_answer": "(i) $\\hat y = 19.29 + 2.65(10) = 45.79$. (ii) Residual = $48.5 - 45.79 = 2.71$; the actual sales was 2.71 thousand units above the value predicted by the line.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Calculates the predicted value (answer 45.79)",
+       "required_elements": [
+        "45.79"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the slope as the intercept"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Calculates the residual as actual minus predicted (answer 2.71) and says that the actual value is above the prediction",
+       "required_elements": [
+        "2.71",
+        "above"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "subtracts in the wrong order",
+        "gives the residual without interpreting its sign"
+       ],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "5.4"
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "The output gives $S = 1.75$. Interpret the value of $S$ in the context of the data.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "4.D"
+     ],
+     "model_answer": "The actual sales values typically differ from the values predicted by the regression line by about 1.75 thousand units.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "States that $S$ (1.75 thousand units) is the typical size of the differences between the actual and the predicted sales, that is, of the residuals",
+       "required_elements": [
+        "1.75",
+        "typical size of the prediction errors"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "says S is the slope",
+        "says S is the percent of variation explained"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      }
+     ],
+     "topic_codes": [
+      "5.4"
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Use the output to find the correlation coefficient $r$ between advertising spending and sales, and describe the direction and strength of the linear relationship.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "3.B"
+     ],
+     "model_answer": "$r = +\\sqrt{0.64} = 0.8$, because the slope is positive. This is a strong positive linear relationship.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Calculates $r$ as the square root of $R^2$ with the sign of the slope (answer $r = 0.8$)",
+       "required_elements": [
+        "0.8"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "reports r squared as the correlation",
+        "gives the wrong sign"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Describes the relationship as positive and linear with a strength that matches the value of $r$",
+       "required_elements": [
+        "positive",
+        "strength"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "describes the strength with the percent explained instead of r"
+       ],
+       "requires_row_id": "D1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "5.2"
+     ]
+    },
+    {
+     "label": "E",
+     "prompt": "A residual plot for the regression shows a clear U-shaped pattern: the residuals are positive for the smallest and largest values of advertising spending and negative in the middle. Does the residual plot support the use of a linear model for these data? Justify your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "4.D"
+     ],
+     "model_answer": "No. A residual plot for an appropriate linear model shows no pattern; the U-shaped pattern shows that the relationship is curved, so a linear model is not appropriate.",
+     "rubric_rows": [
+      {
+       "row_id": "E1",
+       "points": 1,
+       "criterion": "States that the residual plot does not support a linear model",
+       "required_elements": [
+        "not appropriate"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "says a large r squared shows the model is appropriate"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      },
+      {
+       "row_id": "E2",
+       "points": 1,
+       "criterion": "Justifies the answer by the curved (U-shaped) pattern in the residuals, whereas an appropriate linear model leaves residuals with no pattern",
+       "required_elements": [
+        "curved pattern in the residuals",
+        "no pattern expected"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "justifies with the correlation alone"
+       ],
+       "requires_row_id": "E1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      }
+     ],
+     "topic_codes": [
+      "5.4"
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 22,
+   "facts": [
+    "a=19.29",
+    "b=2.65",
+    "s=1.75",
+    "r2=64.0",
+    "x0=10"
+   ],
+   "expected_values": [
+    {
+     "part": "B",
+     "quantity": "predicted value",
+     "value": 45.79,
+     "unit": "",
+     "tolerance": 0.02
+    },
+    {
+     "part": "B",
+     "quantity": "residual",
+     "value": 2.71,
+     "unit": "",
+     "tolerance": 0.02
+    },
+    {
+     "part": "D",
+     "quantity": "correlation",
+     "value": 0.8,
+     "unit": "",
+     "tolerance": 0.005
+    }
+   ],
+   "blueprint": {
+    "id": "stfrq_n3_q2_output",
+    "subject": "ap_statistics",
+    "kind": "frq_bundle",
+    "concept": "Read a regression output: equation and intercept with the range of the data, a prediction and its residual, the meaning of S, the correlation from R-squared and the slope sign, and a judgment from a residual pattern",
+    "topic": "5.4",
+    "skill": "4.D",
+    "student_thinking": [
+     "Write the line and judge whether the intercept is meaningful from the range of x",
+     "Compute a prediction and a residual and interpret S",
+     "Find r from R-squared and the slope sign and judge the model from the residual pattern"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the intercept, S, R-squared and the slope sign are all read from the output and the range of x is stated",
+      "evidence": "the output block shows the coefficients, S and R-squared and the stem gives the range of the data"
+     }
+    ],
+    "material": {
+     "type": "computer_output",
+     "must_include": [
+      "coefficients",
+      "S",
+      "R-Sq"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "the prediction and the residual are recomputed from the coefficients and r is recomputed from R-squared by a square root, checked to be a one-decimal value",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "4.D"
+      ],
+      "topics": [
+       "5.5"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "(i) $\\hat y = 19.29 + 2.65x$. (ii) When the advertising spending is $0$, the predicted sales is 19.29 thousand units. This is not meaningful, because $0$ is outside the range of the data (3 to 14 thousand dollars), so the interpretation would be an extrapolation."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Writes the equation with the intercept 19.29 and the slope 2.65, in the form $\\hat y = 19.29 + 2.65x$",
+        "elements": [
+         "19.29",
+         "2.65"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Interprets the intercept as the predicted sales when the advertising spending equals $0$",
+        "elements": [
+         "predicted value when x is 0"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Explains that the interpretation is not meaningful because $0$ is outside the range of the data (3 to 14), so it is an extrapolation",
+        "elements": [
+         "0 is outside the range of the data",
+         "extrapolation"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "3.B"
+      ],
+      "topics": [
+       "5.4"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "(i) $\\hat y = 19.29 + 2.65(10) = 45.79$. (ii) Residual = $48.5 - 45.79 = 2.71$; the actual sales was 2.71 thousand units above the value predicted by the line."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Calculates the predicted value (answer 45.79)",
+        "elements": [
+         "45.79"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Calculates the residual as actual minus predicted (answer 2.71) and says that the actual value is above the prediction",
+        "elements": [
+         "2.71",
+         "above"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "4.D"
+      ],
+      "topics": [
+       "5.4"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "The actual sales values typically differ from the values predicted by the regression line by about 1.75 thousand units."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "States that $S$ (1.75 thousand units) is the typical size of the differences between the actual and the predicted sales, that is, of the residuals",
+        "elements": [
+         "1.75",
+         "typical size of the prediction errors"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "3.B"
+      ],
+      "topics": [
+       "5.2"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "$r = +\\sqrt{0.64} = 0.8$, because the slope is positive. This is a strong positive linear relationship."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Calculates $r$ as the square root of $R^2$ with the sign of the slope (answer $r = 0.8$)",
+        "elements": [
+         "0.8"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Describes the relationship as positive and linear with a strength that matches the value of $r$",
+        "elements": [
+         "positive",
+         "strength"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "E",
+      "skills": [
+       "4.D"
+      ],
+      "topics": [
+       "5.4"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "No. A residual plot for an appropriate linear model shows no pattern; the U-shaped pattern shows that the relationship is curved, so a linear model is not appropriate."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "E1",
+        "points": 1,
+        "criterion": "States that the residual plot does not support a linear model",
+        "elements": [
+         "not appropriate"
+        ]
+       },
+       {
+        "row_id": "E2",
+        "points": 1,
+        "criterion": "Justifies the answer by the curved (U-shaped) pattern in the residuals, whereas an appropriate linear model leaves residuals with no pattern",
+        "elements": [
+         "curved pattern in the residuals",
+         "no pattern expected"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "judgment_demand": [
+     "interpretation",
+     "representation_reading",
+     "claim_justification"
+    ]
+   },
+   "seed": 10900,
+   "pack_id": "stfrq_n3_q2_output-s10900"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "stfrq_n3_q2_output",
+   "facts": [
+    "a=19.29",
+    "b=2.65",
+    "s=1.75",
+    "r2=64.0",
+    "x0=10"
+   ],
+   "seed": 10900
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The multi-focus regression-output FRQ is correct and in scope. It has ten 1-point rows over five parts and an independent solver agreed on every part. The only weakness is that the D2 strength criterion is loosely worded, which is minor.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The parts cover Topics 5.4, 5.2 and 5.5 and use no deleted content. Parts B and D assess skill 3.B, which is acceptable in a multi-focus question."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are verified and consistent with the output. D2 states strength loosely, but 0.8 is clearly strong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The output omits the inference columns on purpose, which is appropriate for scope. The units and the range of x are stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no options. The rubric rows list common errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for about 22 minutes and the arithmetic is minimal."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item on core Unit 5 skills: equation from output, intercept interpretation with extrapolation check, prediction and residual interpretation, interpretation of S, r from R-Sq with sign from slope, and residual-plot pattern judgment. Each step is standard and arithmetic is light (45.79, 2.71, sqrt(0.64)=0.80). Difficulty comes from the breadth of interpretation and conditions, as appropriate for a full mock, not from unfair sources.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 10,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-f02-k1",
+  "cellId": "ap_statistics-f02",
+  "apSubjectCode": "ap_statistics",
+  "kind": "frq_bundle",
+  "keywordCode": "5.4",
+  "unitCode": "5",
+  "skillPrimary": "4.D",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "stfrq_n3_q2_output",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Typical multi-part AP regression FRQ: reading computer output, intercept interpretation with extrapolation check, prediction and residual with interpretation, interpreting S, r from R-Sq with sign from the slope, and residual plot pattern. Each part uses one or two steps with short arithmetic. All content is within Unit 5 scope, so it suits full-mock practice rather than basic learning or advanced supplement.",
+  "payload": {
+   "archetype": "stfrq_n3_q2_output",
+   "template": "q2_regression",
+   "topic": "5.4",
+   "extra_topics": [
+    "5.2",
+    "5.5"
+   ],
+   "skill": "4.D",
+   "representative_skill": "4.D",
+   "calculator": "allowed",
+   "title": "Regression of sales on advertising spending: reading computer output",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Computer output for a least-squares regression of sales on advertising spending.",
+    "data": {
+     "chart": "output",
+     "output": {
+      "title": "Regression Analysis: Sales versus advertising spending",
+      "sections": [
+       {
+        "columns": [
+         "Predictor",
+         "Coef"
+        ],
+        "rows": [
+         [
+          "Constant",
+          "10.79"
+         ],
+         [
+          "Advertising spending",
+          "1.62"
+         ]
+        ]
+       },
+       {
+        "columns": [
+         "S",
+         "R-Sq"
+        ],
+        "rows": [
+         [
+          "2.08",
+          "49.0%"
+         ]
+        ]
+       }
+      ]
+     }
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "A researcher uses data from $26$ stores to model the relationship between advertising spending ($x$, in thousand dollars) and sales ($y$, in thousand units). The values of $x$ in the data range from $3$ to $14$ thousand dollars. The computer output shown gives the results of a least-squares regression. (i) Write the equation of the least-squares regression line. (ii) Interpret the $y$-intercept of the line in context, and explain whether this interpretation is meaningful.",
+     "points": 3,
+     "response_mode": "explain",
+     "skill_codes": [
+      "4.D"
+     ],
+     "model_answer": "(i) $\\hat y = 10.79 + 1.62x$. (ii) When the advertising spending is $0$, the predicted sales is 10.79 thousand units. This is not meaningful, because $0$ is outside the range of the data (3 to 14 thousand dollars), so the interpretation would be an extrapolation.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Writes the equation with the intercept 10.79 and the slope 1.62, in the form $\\hat y = 10.79 + 1.62x$",
+       "required_elements": [
+        "10.79",
+        "1.62"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "swaps the intercept and the slope",
+        "omits the hat on the predicted value"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Interprets the intercept as the predicted sales when the advertising spending equals $0$",
+       "required_elements": [
+        "predicted value when x is 0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "interprets the intercept as the change in y per unit of x"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Explains that the interpretation is not meaningful because $0$ is outside the range of the data (3 to 14), so it is an extrapolation",
+       "required_elements": [
+        "0 is outside the range of the data",
+        "extrapolation"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "zero is not a value of x that was observed so the intercept only anchors the line"
+       ],
+       "common_errors": [
+        "says the intercept is meaningful because it is in the output"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      }
+     ],
+     "topic_codes": [
+      "5.5"
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "The regression line is used for a store whose monthly advertising spending is $9$ thousand dollars. (i) Calculate the predicted sales. (ii) The actual sales for one such store was $21.2$ thousand units. Calculate the residual and interpret it in context.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "3.B"
+     ],
+     "model_answer": "(i) $\\hat y = 10.79 + 1.62(9) = 25.37$. (ii) Residual = $21.2 - 25.37 = -4.17$; the actual sales was 4.17 thousand units below the value predicted by the line.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Calculates the predicted value (answer 25.37)",
+       "required_elements": [
+        "25.37"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the slope as the intercept"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Calculates the residual as actual minus predicted (answer -4.17) and says that the actual value is below the prediction",
+       "required_elements": [
+        "-4.17",
+        "below"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "subtracts in the wrong order",
+        "gives the residual without interpreting its sign"
+       ],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "5.4"
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "The output gives $S = 2.08$. Interpret the value of $S$ in the context of the data.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "4.D"
+     ],
+     "model_answer": "The actual sales values typically differ from the values predicted by the regression line by about 2.08 thousand units.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "States that $S$ (2.08 thousand units) is the typical size of the differences between the actual and the predicted sales, that is, of the residuals",
+       "required_elements": [
+        "2.08",
+        "typical size of the prediction errors"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "says S is the slope",
+        "says S is the percent of variation explained"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      }
+     ],
+     "topic_codes": [
+      "5.4"
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Use the output to find the correlation coefficient $r$ between advertising spending and sales, and describe the direction and strength of the linear relationship.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "3.B"
+     ],
+     "model_answer": "$r = +\\sqrt{0.49} = 0.7$, because the slope is positive. This is a moderately strong positive linear relationship.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Calculates $r$ as the square root of $R^2$ with the sign of the slope (answer $r = 0.7$)",
+       "required_elements": [
+        "0.7"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "reports r squared as the correlation",
+        "gives the wrong sign"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Describes the relationship as positive and linear with a strength that matches the value of $r$",
+       "required_elements": [
+        "positive",
+        "strength"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "describes the strength with the percent explained instead of r"
+       ],
+       "requires_row_id": "D1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "5.2"
+     ]
+    },
+    {
+     "label": "E",
+     "prompt": "A residual plot for the regression shows a clear U-shaped pattern: the residuals are positive for the smallest and largest values of advertising spending and negative in the middle. Does the residual plot support the use of a linear model for these data? Justify your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "4.D"
+     ],
+     "model_answer": "No. A residual plot for an appropriate linear model shows no pattern; the U-shaped pattern shows that the relationship is curved, so a linear model is not appropriate.",
+     "rubric_rows": [
+      {
+       "row_id": "E1",
+       "points": 1,
+       "criterion": "States that the residual plot does not support a linear model",
+       "required_elements": [
+        "not appropriate"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "says a large r squared shows the model is appropriate"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      },
+      {
+       "row_id": "E2",
+       "points": 1,
+       "criterion": "Justifies the answer by the curved (U-shaped) pattern in the residuals, whereas an appropriate linear model leaves residuals with no pattern",
+       "required_elements": [
+        "curved pattern in the residuals",
+        "no pattern expected"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "justifies with the correlation alone"
+       ],
+       "requires_row_id": "E1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      }
+     ],
+     "topic_codes": [
+      "5.4"
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 22,
+   "facts": [
+    "a=10.79",
+    "b=1.62",
+    "s=2.08",
+    "r2=49.0",
+    "x0=9"
+   ],
+   "expected_values": [
+    {
+     "part": "B",
+     "quantity": "predicted value",
+     "value": 25.37,
+     "unit": "",
+     "tolerance": 0.02
+    },
+    {
+     "part": "B",
+     "quantity": "residual",
+     "value": -4.17,
+     "unit": "",
+     "tolerance": 0.02
+    },
+    {
+     "part": "D",
+     "quantity": "correlation",
+     "value": 0.7,
+     "unit": "",
+     "tolerance": 0.005
+    }
+   ],
+   "blueprint": {
+    "id": "stfrq_n3_q2_output",
+    "subject": "ap_statistics",
+    "kind": "frq_bundle",
+    "concept": "Read a regression output: equation and intercept with the range of the data, a prediction and its residual, the meaning of S, the correlation from R-squared and the slope sign, and a judgment from a residual pattern",
+    "topic": "5.4",
+    "skill": "4.D",
+    "student_thinking": [
+     "Write the line and judge whether the intercept is meaningful from the range of x",
+     "Compute a prediction and a residual and interpret S",
+     "Find r from R-squared and the slope sign and judge the model from the residual pattern"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the intercept, S, R-squared and the slope sign are all read from the output and the range of x is stated",
+      "evidence": "the output block shows the coefficients, S and R-squared and the stem gives the range of the data"
+     }
+    ],
+    "material": {
+     "type": "computer_output",
+     "must_include": [
+      "coefficients",
+      "S",
+      "R-Sq"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "the prediction and the residual are recomputed from the coefficients and r is recomputed from R-squared by a square root, checked to be a one-decimal value",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "4.D"
+      ],
+      "topics": [
+       "5.5"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "(i) $\\hat y = 10.79 + 1.62x$. (ii) When the advertising spending is $0$, the predicted sales is 10.79 thousand units. This is not meaningful, because $0$ is outside the range of the data (3 to 14 thousand dollars), so the interpretation would be an extrapolation."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Writes the equation with the intercept 10.79 and the slope 1.62, in the form $\\hat y = 10.79 + 1.62x$",
+        "elements": [
+         "10.79",
+         "1.62"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Interprets the intercept as the predicted sales when the advertising spending equals $0$",
+        "elements": [
+         "predicted value when x is 0"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Explains that the interpretation is not meaningful because $0$ is outside the range of the data (3 to 14), so it is an extrapolation",
+        "elements": [
+         "0 is outside the range of the data",
+         "extrapolation"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "3.B"
+      ],
+      "topics": [
+       "5.4"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "(i) $\\hat y = 10.79 + 1.62(9) = 25.37$. (ii) Residual = $21.2 - 25.37 = -4.17$; the actual sales was 4.17 thousand units below the value predicted by the line."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Calculates the predicted value (answer 25.37)",
+        "elements": [
+         "25.37"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Calculates the residual as actual minus predicted (answer -4.17) and says that the actual value is below the prediction",
+        "elements": [
+         "-4.17",
+         "below"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "4.D"
+      ],
+      "topics": [
+       "5.4"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "The actual sales values typically differ from the values predicted by the regression line by about 2.08 thousand units."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "States that $S$ (2.08 thousand units) is the typical size of the differences between the actual and the predicted sales, that is, of the residuals",
+        "elements": [
+         "2.08",
+         "typical size of the prediction errors"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "3.B"
+      ],
+      "topics": [
+       "5.2"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "$r = +\\sqrt{0.49} = 0.7$, because the slope is positive. This is a moderately strong positive linear relationship."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Calculates $r$ as the square root of $R^2$ with the sign of the slope (answer $r = 0.7$)",
+        "elements": [
+         "0.7"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Describes the relationship as positive and linear with a strength that matches the value of $r$",
+        "elements": [
+         "positive",
+         "strength"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "E",
+      "skills": [
+       "4.D"
+      ],
+      "topics": [
+       "5.4"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "No. A residual plot for an appropriate linear model shows no pattern; the U-shaped pattern shows that the relationship is curved, so a linear model is not appropriate."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "E1",
+        "points": 1,
+        "criterion": "States that the residual plot does not support a linear model",
+        "elements": [
+         "not appropriate"
+        ]
+       },
+       {
+        "row_id": "E2",
+        "points": 1,
+        "criterion": "Justifies the answer by the curved (U-shaped) pattern in the residuals, whereas an appropriate linear model leaves residuals with no pattern",
+        "elements": [
+         "curved pattern in the residuals",
+         "no pattern expected"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "judgment_demand": [
+     "interpretation",
+     "representation_reading",
+     "claim_justification"
+    ]
+   },
+   "seed": 10901,
+   "pack_id": "stfrq_n3_q2_output-s10901"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "stfrq_n3_q2_output",
+   "facts": [
+    "a=10.79",
+    "b=1.62",
+    "s=2.08",
+    "r2=49.0",
+    "x0=9"
+   ],
+   "seed": 10901
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Solid 10-point regression-output FRQ with a unique, defensible key and consistent rubric rows. The one weakness is mild: the U-shaped residual plot in Part E is only described in text and sits oddly beside the output, which parts A-D treat as a usable linear model, but this is not fatal.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All parts are within Unit 5 (topics 5.2, 5.4, 5.5); no deleted topics. Parts B and D are labeled skill 3.B, which is acceptable per part."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key is unique and defensible. r = 0.7 exactly; the rubric rows are consistent with the model answers."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The output data is complete, and the sample size, range of x and units are stated. The residual plot is only described in text; a mild coherence issue."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to free response. Common errors are listed in the rubric rows."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Ten points over five parts in about 22 minutes is typical, with moderate reading load and a consistent calculator allowance."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Typical multi-part AP regression FRQ: reading computer output, intercept interpretation with extrapolation check, prediction and residual with interpretation, interpreting S, r from R-Sq with sign from the slope, and residual plot pattern. Each part uses one or two steps with short arithmetic. All content is within Unit 5 scope, so it suits full-mock practice rather than basic learning or advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-f02-k2",
+  "cellId": "ap_statistics-f02",
+  "apSubjectCode": "ap_statistics",
+  "kind": "frq_bundle",
+  "keywordCode": "5.4",
+  "unitCode": "5",
+  "skillPrimary": "4.D",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "stfrq_n3_q2_output",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Multi-part FRQ-style item on reading regression output. It covers writing the equation, interpreting the intercept and judging whether it is meaningful (x=0 is outside the 3-14 range), computing a prediction and residual, interpreting S, getting r from R-sq with the sign taken from the slope, and reading a residual-plot pattern. Each part is a standard single-concept step with simple arithmetic: 19.55+2.28*6=33.23, residual 3.87, r=sqrt(0.49)=0.70. Difficulty comes from the number of parts and the interpretation wording, not from unfair sources. Context is short, and the output is clear with stated rounding. It is too multi-faceted for basic learning but has no advanced reasoning, so it fits a full mock.",
+  "payload": {
+   "archetype": "stfrq_n3_q2_output",
+   "template": "q2_regression",
+   "topic": "5.4",
+   "extra_topics": [
+    "5.2",
+    "5.5"
+   ],
+   "skill": "4.D",
+   "representative_skill": "4.D",
+   "calculator": "allowed",
+   "title": "Regression of sales on advertising spending: reading computer output",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Computer output for a least-squares regression of sales on advertising spending.",
+    "data": {
+     "chart": "output",
+     "output": {
+      "title": "Regression Analysis: Sales versus advertising spending",
+      "sections": [
+       {
+        "columns": [
+         "Predictor",
+         "Coef"
+        ],
+        "rows": [
+         [
+          "Constant",
+          "19.55"
+         ],
+         [
+          "Advertising spending",
+          "2.28"
+         ]
+        ]
+       },
+       {
+        "columns": [
+         "S",
+         "R-Sq"
+        ],
+        "rows": [
+         [
+          "2.19",
+          "49.0%"
+         ]
+        ]
+       }
+      ]
+     }
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "A researcher uses data from $30$ stores to model the relationship between advertising spending ($x$, in thousand dollars) and sales ($y$, in thousand units). The values of $x$ in the data range from $3$ to $14$ thousand dollars. The computer output shown gives the results of a least-squares regression. (i) Write the equation of the least-squares regression line. (ii) Interpret the $y$-intercept of the line in context, and explain whether this interpretation is meaningful.",
+     "points": 3,
+     "response_mode": "explain",
+     "skill_codes": [
+      "4.D"
+     ],
+     "model_answer": "(i) $\\hat y = 19.55 + 2.28x$. (ii) When the advertising spending is $0$, the predicted sales is 19.55 thousand units. This is not meaningful, because $0$ is outside the range of the data (3 to 14 thousand dollars), so the interpretation would be an extrapolation.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Writes the equation with the intercept 19.55 and the slope 2.28, in the form $\\hat y = 19.55 + 2.28x$",
+       "required_elements": [
+        "19.55",
+        "2.28"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "swaps the intercept and the slope",
+        "omits the hat on the predicted value"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Interprets the intercept as the predicted sales when the advertising spending equals $0$",
+       "required_elements": [
+        "predicted value when x is 0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "interprets the intercept as the change in y per unit of x"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Explains that the interpretation is not meaningful because $0$ is outside the range of the data (3 to 14), so it is an extrapolation",
+       "required_elements": [
+        "0 is outside the range of the data",
+        "extrapolation"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "zero is not a value of x that was observed so the intercept only anchors the line"
+       ],
+       "common_errors": [
+        "says the intercept is meaningful because it is in the output"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      }
+     ],
+     "topic_codes": [
+      "5.5"
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "The regression line is used for a store whose monthly advertising spending is $6$ thousand dollars. (i) Calculate the predicted sales. (ii) The actual sales for one such store was $37.1$ thousand units. Calculate the residual and interpret it in context.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "3.B"
+     ],
+     "model_answer": "(i) $\\hat y = 19.55 + 2.28(6) = 33.23$. (ii) Residual = $37.1 - 33.23 = 3.87$; the actual sales was 3.87 thousand units above the value predicted by the line.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Calculates the predicted value (answer 33.23)",
+       "required_elements": [
+        "33.23"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the slope as the intercept"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Calculates the residual as actual minus predicted (answer 3.87) and says that the actual value is above the prediction",
+       "required_elements": [
+        "3.87",
+        "above"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "subtracts in the wrong order",
+        "gives the residual without interpreting its sign"
+       ],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "5.4"
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "The output gives $S = 2.19$. Interpret the value of $S$ in the context of the data.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "4.D"
+     ],
+     "model_answer": "The actual sales values typically differ from the values predicted by the regression line by about 2.19 thousand units.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "States that $S$ (2.19 thousand units) is the typical size of the differences between the actual and the predicted sales, that is, of the residuals",
+       "required_elements": [
+        "2.19",
+        "typical size of the prediction errors"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "says S is the slope",
+        "says S is the percent of variation explained"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      }
+     ],
+     "topic_codes": [
+      "5.4"
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Use the output to find the correlation coefficient $r$ between advertising spending and sales, and describe the direction and strength of the linear relationship.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "3.B"
+     ],
+     "model_answer": "$r = +\\sqrt{0.49} = 0.7$, because the slope is positive. This is a moderately strong positive linear relationship.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Calculates $r$ as the square root of $R^2$ with the sign of the slope (answer $r = 0.7$)",
+       "required_elements": [
+        "0.7"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "reports r squared as the correlation",
+        "gives the wrong sign"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Describes the relationship as positive and linear with a strength that matches the value of $r$",
+       "required_elements": [
+        "positive",
+        "strength"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "describes the strength with the percent explained instead of r"
+       ],
+       "requires_row_id": "D1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "5.2"
+     ]
+    },
+    {
+     "label": "E",
+     "prompt": "A residual plot for the regression shows a clear U-shaped pattern: the residuals are positive for the smallest and largest values of advertising spending and negative in the middle. Does the residual plot support the use of a linear model for these data? Justify your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "4.D"
+     ],
+     "model_answer": "No. A residual plot for an appropriate linear model shows no pattern; the U-shaped pattern shows that the relationship is curved, so a linear model is not appropriate.",
+     "rubric_rows": [
+      {
+       "row_id": "E1",
+       "points": 1,
+       "criterion": "States that the residual plot does not support a linear model",
+       "required_elements": [
+        "not appropriate"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "says a large r squared shows the model is appropriate"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      },
+      {
+       "row_id": "E2",
+       "points": 1,
+       "criterion": "Justifies the answer by the curved (U-shaped) pattern in the residuals, whereas an appropriate linear model leaves residuals with no pattern",
+       "required_elements": [
+        "curved pattern in the residuals",
+        "no pattern expected"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "an equivalent statement in the student's own words that keeps the same meaning and the context"
+       ],
+       "common_errors": [
+        "justifies with the correlation alone"
+       ],
+       "requires_row_id": "E1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": true,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning in the context of the problem, whatever the wording; do not require any specific phrase. A response that states the right conclusion without the stated reason, or a reason without the conclusion, earns this row only when the row asks for just one of them."
+      }
+     ],
+     "topic_codes": [
+      "5.4"
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 22,
+   "facts": [
+    "a=19.55",
+    "b=2.28",
+    "s=2.19",
+    "r2=49.0",
+    "x0=6"
+   ],
+   "expected_values": [
+    {
+     "part": "B",
+     "quantity": "predicted value",
+     "value": 33.230000000000004,
+     "unit": "",
+     "tolerance": 0.02
+    },
+    {
+     "part": "B",
+     "quantity": "residual",
+     "value": 3.87,
+     "unit": "",
+     "tolerance": 0.02
+    },
+    {
+     "part": "D",
+     "quantity": "correlation",
+     "value": 0.7,
+     "unit": "",
+     "tolerance": 0.005
+    }
+   ],
+   "blueprint": {
+    "id": "stfrq_n3_q2_output",
+    "subject": "ap_statistics",
+    "kind": "frq_bundle",
+    "concept": "Read a regression output: equation and intercept with the range of the data, a prediction and its residual, the meaning of S, the correlation from R-squared and the slope sign, and a judgment from a residual pattern",
+    "topic": "5.4",
+    "skill": "4.D",
+    "student_thinking": [
+     "Write the line and judge whether the intercept is meaningful from the range of x",
+     "Compute a prediction and a residual and interpret S",
+     "Find r from R-squared and the slope sign and judge the model from the residual pattern"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the intercept, S, R-squared and the slope sign are all read from the output and the range of x is stated",
+      "evidence": "the output block shows the coefficients, S and R-squared and the stem gives the range of the data"
+     }
+    ],
+    "material": {
+     "type": "computer_output",
+     "must_include": [
+      "coefficients",
+      "S",
+      "R-Sq"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "the prediction and the residual are recomputed from the coefficients and r is recomputed from R-squared by a square root, checked to be a one-decimal value",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "4.D"
+      ],
+      "topics": [
+       "5.5"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "(i) $\\hat y = 19.55 + 2.28x$. (ii) When the advertising spending is $0$, the predicted sales is 19.55 thousand units. This is not meaningful, because $0$ is outside the range of the data (3 to 14 thousand dollars), so the interpretation would be an extrapolation."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Writes the equation with the intercept 19.55 and the slope 2.28, in the form $\\hat y = 19.55 + 2.28x$",
+        "elements": [
+         "19.55",
+         "2.28"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Interprets the intercept as the predicted sales when the advertising spending equals $0$",
+        "elements": [
+         "predicted value when x is 0"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Explains that the interpretation is not meaningful because $0$ is outside the range of the data (3 to 14), so it is an extrapolation",
+        "elements": [
+         "0 is outside the range of the data",
+         "extrapolation"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "3.B"
+      ],
+      "topics": [
+       "5.4"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "(i) $\\hat y = 19.55 + 2.28(6) = 33.23$. (ii) Residual = $37.1 - 33.23 = 3.87$; the actual sales was 3.87 thousand units above the value predicted by the line."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Calculates the predicted value (answer 33.23)",
+        "elements": [
+         "33.23"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Calculates the residual as actual minus predicted (answer 3.87) and says that the actual value is above the prediction",
+        "elements": [
+         "3.87",
+         "above"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "4.D"
+      ],
+      "topics": [
+       "5.4"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "The actual sales values typically differ from the values predicted by the regression line by about 2.19 thousand units."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "States that $S$ (2.19 thousand units) is the typical size of the differences between the actual and the predicted sales, that is, of the residuals",
+        "elements": [
+         "2.19",
+         "typical size of the prediction errors"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "3.B"
+      ],
+      "topics": [
+       "5.2"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "$r = +\\sqrt{0.49} = 0.7$, because the slope is positive. This is a moderately strong positive linear relationship."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Calculates $r$ as the square root of $R^2$ with the sign of the slope (answer $r = 0.7$)",
+        "elements": [
+         "0.7"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Describes the relationship as positive and linear with a strength that matches the value of $r$",
+        "elements": [
+         "positive",
+         "strength"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "E",
+      "skills": [
+       "4.D"
+      ],
+      "topics": [
+       "5.4"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "No. A residual plot for an appropriate linear model shows no pattern; the U-shaped pattern shows that the relationship is curved, so a linear model is not appropriate."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "E1",
+        "points": 1,
+        "criterion": "States that the residual plot does not support a linear model",
+        "elements": [
+         "not appropriate"
+        ]
+       },
+       {
+        "row_id": "E2",
+        "points": 1,
+        "criterion": "Justifies the answer by the curved (U-shaped) pattern in the residuals, whereas an appropriate linear model leaves residuals with no pattern",
+        "elements": [
+         "curved pattern in the residuals",
+         "no pattern expected"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "judgment_demand": [
+     "interpretation",
+     "representation_reading",
+     "claim_justification"
+    ]
+   },
+   "seed": 10902,
+   "pack_id": "stfrq_n3_q2_output-s10902"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "stfrq_n3_q2_output",
+   "facts": [
+    "a=19.55",
+    "b=2.28",
+    "s=2.19",
+    "r2=49.0",
+    "x0=6"
+   ],
+   "seed": 10902
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The 10-point, five-part regression-output FRQ is within Unit 5 scope. The keys are unique and agree with the independent solver. The output stimulus is complete, and the range of x is given in the stem. The rubric has ten 1-point rows with dependencies set properly. The parts mix topics 5.5, 5.4 and 5.2, which is acceptable. Minor note: the D2 element \"strength\" is vague, but 0.7 as \"moderately strong\" is defensible. Calculator load is minimal.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part is judged against its own skill and topic. All parts stay in Unit 5 and avoid inference for a slope and transformations. The 4.D parts (A, C and E) interpret the intercept, S and the residual plot. The 3.B parts (B and D) are calculations."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Computed values 33.23, 3.87 and r = 0.7 are correct. The sign of r follows the positive slope. The rubric rows are consistent and the alternative solutions are valid."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The output table shows the coefficients, S and R-Sq. The stem gives the units and the range of x. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no options. The rubric rows list the common errors, such as swapping the slope and intercept, reversing the residual order, and confusing S with R-squared."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of one AP Statistics FRQ at about 22 minutes. The arithmetic is minimal and the calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item on reading regression output. It covers writing the equation, interpreting the intercept and judging whether it is meaningful (x=0 is outside the 3-14 range), computing a prediction and residual, interpreting S, getting r from R-sq with the sign taken from the slope, and reading a residual-plot pattern. Each part is a standard single-concept step with simple arithmetic: 19.55+2.28*6=33.23, residual 3.87, r=sqrt(0.49)=0.70. Difficulty comes from the number of parts and the interpretation wording, not from unfair sources. Context is short, and the output is clear with stated rounding. It is too multi-faceted for basic learning but has no advanced reasoning, so it fits a full mock.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ }
+]

@@ -1,0 +1,164 @@
+[
+ {
+  "key": "ap_statistics-m01-k0",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "Estimator D",
+     "brief_reasoning": "C and D are both centered at 0.40, so they're unbiased. D has the smaller spread (0.04 vs 0.06). A has a small spread but is biased.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Choosing the best estimator from the center and spread of simulated sampling distributions is the core of topic 3.1 (bias and variability of estimators). It fits skill 2.D, which covers relationships among components of inference. No later-unit content appears."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is Estimator D. C and D are both centered at 0.40, and D has the smaller SD (0.04 vs 0.06). A is biased despite its small spread (the 0.03 SD is the smallest), and B is both biased and the most variable. The key is the unique defensible answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has a title, column headers, and complete values. The stem gives the true value 0.4 and the simulation setup. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode three distinct misconceptions: bias only, variability only, and treating larger spread as an advantage. The explanation addresses each wrong option. The key is the longest option, but only mildly so. B's option states a plainly false claim, which makes it fairly easy to reject."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60-95 seconds, needs no arithmetic, and has low reading load. The calculator designation is consistent with the other items in the set."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. It has a unique key (D), a complete table, three distinct misconception distractors, and appropriate scope and load for topic 3.1, skill 2.D."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The student identifies which estimators are unbiased (mean equals 0.4), then picks the one with the smallest spread (D). That is 2 sequential steps over a single small table with no arithmetic. This is a core 3.1 idea (bias plus variability), and 2 steps falls below the 3-step threshold for exam_prep. Only one distractor (C) survives the first step.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k1",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "Estimator D",
+     "brief_reasoning": "B and D both have means at 0.40, so both look unbiased. D has the smaller standard deviation (0.03 vs 0.04). A has the smallest spread, but it is biased at 0.48.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.1 estimators: bias and variability from simulated sampling distributions. Skill 2.D is loosely matched but acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is unique: unbiased (mean 0.40) with the smallest SD among unbiased estimators (0.03 vs 0.04 for B). A is biased."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has a title, column headers and all values. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (variability only, bias only, larger spread as an advantage). The explanation addresses every wrong option. Option lengths are similar."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds, no arithmetic, standalone item with a table."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. Its key is unique, the table is complete, and each distractor encodes a distinct misconception. It fits topic 3.1 and the time expected for an AP MC item."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item takes 2 sequential steps: find the estimators centered at 0.4 (B and D), then choose the one with the smaller spread (D). This is below the 3-step threshold for exam_prep. Two concepts are combined (bias and variability), but the step count keeps it basic_learning. Reading is minimal, one table is used, and there is no arithmetic. Only one distractor (B) survives the first step.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k2",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Estimator A",
+     "brief_reasoning": "A and B both have a mean of 7.2, so both are unbiased. A has the smaller spread (0.4 vs 0.6). D has the smallest spread but is biased by 0.8, so its MSE is 0.73, versus 0.16 for A.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. A is the unique best estimator: it is unbiased with the smallest spread among the unbiased estimators. Each distractor encodes a distinct misconception (variability only, bias only, larger spread as an advantage). The table is complete, and the stem gives the true value of 7.2 (units are hours). The task is short and needs no arithmetic.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits topic 3.1 (bias and variability of estimators). The dominant demand is comparing center and spread of simulated sampling distributions."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is unique: A and B are both centered at 7.2 and A has the smaller SD. D is biased despite its small spread. C is both biased and the most variable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete, with columns, rows and a title. The stem states the true mean (7.2) and the simulation setup. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option maps to a named misconception, and the explanation addresses each one. Option lengths are comparable, though the key is slightly longer."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-95 seconds, one table, four options. The calculator designation is harmless since no calculation is needed."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item has 2 sequential steps: identify the unbiased estimators (mean equals 7.2), then pick the one with the smallest spread (A over B). This falls below the 3-step threshold for exam_prep. The two concepts (bias and variability) are standard Unit 3.1 fundamentals. The table is short, with no arithmetic or heavy reading. Only one distractor (D, low spread but biased) survives the first step. The difficulty does not come from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ }
+]

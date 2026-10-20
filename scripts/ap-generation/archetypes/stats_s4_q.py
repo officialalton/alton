@@ -32,7 +32,8 @@ def st_n_estimator_compare(rng):
     cand = [i for i in range(4) if abs(mean_[i] - th) < 0.5 * sc]
     best = min(cand, key=lambda i: sds[i]); assert best == 0
     fm = (lambda v: f"${v:.2f}$") if c["unit"] == "proportion" else (lambda v: f"${v:.1f}$")
-    rows = [[f"Estimator {letters[order.index(i)]}", fm(mean_[i]), fm(sds[i] * sc)] for i in range(4)]
+    plain = lambda v: fm(v).replace("$", "")
+    rows = [[f"Estimator {letters[order.index(i)]}", plain(mean_[i]), plain(sds[i] * sc)] for i in range(4)]
     rows.sort(key=lambda r: r[0])
     L = lambda i: f"Estimator {letters[order.index(i)]}"
     key = (f"{L(0)}, because the center of its sampling distribution is at the true value and its spread is the smallest among the estimators that are centered there.", "An estimator that is unbiased has a sampling distribution centered at the parameter, and among unbiased estimators the one with the least variability is best.")
@@ -551,3 +552,6 @@ STAGE_SINGLES = ["st_n_estimator_compare", "st_n_prop_ci_compute", "st_n_param_s
 
 # 첫 런(stats-r19-p3-a)에서 반려된 원형을 고친 뒤 다시 돌리는 목록(검토기 지적: 줄글 오타, 추정량 표 제목 불일치, 설명 순서 뒤바뀜, 복수 정답 가능성, 모호한 의견 질문, 약한 오답)
 STAGE_FIX = ["st_n_stat_vs_nonstat", "st_n_plan_unbiased", "st_n_bias_direction", "st_n_union_complement", "st_n_binomial_scenario", "st_n_linear_transform", "st_n_estimator_compare"]
+
+# P3 화면 증거에서 표 칸의 $...$ 가 그대로 보이는 결함이 나온 추정량 원형을 고쳐 다시 돌린다
+STAGE_FIXEST = ["st_n_estimator_compare"]
