@@ -19,6 +19,8 @@ export type LandingDestinations = {
   /** 헤더의 계정 링크: 로그인 전엔 로그인, 후엔 내 홈. */
   account: { href: string; label: string };
   signedIn: boolean;
+  /** Insights 글이 1개 이상일 때만 메뉴에 노출(loadPublicDest가 채운다). */
+  showInsights?: boolean;
 };
 
 export const PREMIUM_PATH = "/premium-tutoring";

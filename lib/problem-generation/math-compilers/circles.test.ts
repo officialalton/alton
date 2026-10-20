@@ -158,3 +158,16 @@ describe("renderCirclesProblem — 렌더링과 그림 검증", () => {
     }
   });
 });
+
+import { generateCirclesModel as __gen } from "./circles";
+describe("'in terms of π' 둘레 문항은 보기를 전부 π 형식으로 낸다(2026-10-19)", () => {
+  it("circumference_radius/diameter 오답에 π 없는 값이 없다(200회)", () => {
+    for (const kind of ["circumference_radius", "circumference_diameter"] as const) {
+      for (let i = 0; i < 100; i++) {
+        const m = __gen({ difficulty: "medium", questionKind: kind } as never);
+        expect(m.correctAnswer.endsWith("π")).toBe(true);
+        for (const d of m.distractors) expect(d.value.endsWith("π")).toBe(true);
+      }
+    }
+  });
+});

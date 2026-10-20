@@ -16,7 +16,10 @@ export function Logo({ dark = false, size = 30 }: { dark?: boolean; size?: numbe
   );
 }
 
+const INSIGHTS_LINK = { label: "Insights", href: "/insights" } as const;
+
 export function PublicHeader({ dest }: { dest: LandingDestinations }) {
+  const navItems = dest.showInsights ? [...NAV_ITEMS, INSIGHTS_LINK] : NAV_ITEMS;
   const startLabel = dest.signedIn ? "Practice Tests" : "Start Free";
   return (
     <header className="sticky top-0 z-30 bg-[var(--p-paper)] border-b border-[var(--p-line)]">
@@ -26,7 +29,7 @@ export function PublicHeader({ dest }: { dest: LandingDestinations }) {
           <span className="p-serif text-[26px] leading-none tracking-[-0.01em]">ALTON</span>
         </Link>
         <nav aria-label="Main" className="hidden lg:flex items-center gap-8 text-[14px] font-medium text-[var(--p-slate)]">
-          {NAV_ITEMS.map((l) => (
+          {navItems.map((l) => (
             <Link key={l.href} href={l.href} className="hover:text-[var(--p-red)] transition-colors">
               {l.label}
             </Link>
@@ -49,7 +52,7 @@ export function PublicHeader({ dest }: { dest: LandingDestinations }) {
               </svg>
             </summary>
             <nav aria-label="Mobile" className="absolute right-0 top-12 w-[240px] border border-[var(--p-ink)] bg-[var(--p-paper)] p-2 flex flex-col">
-              {NAV_ITEMS.map((l) => (
+              {navItems.map((l) => (
                 <Link key={l.href} href={l.href} className="px-3 py-3 text-[14px] font-medium hover:text-[var(--p-red)]">
                   {l.label}
                 </Link>
@@ -65,7 +68,8 @@ export function PublicHeader({ dest }: { dest: LandingDestinations }) {
   );
 }
 
-export function PublicFooter() {
+export function PublicFooter({ showInsights = false }: { showInsights?: boolean } = {}) {
+  const footerLinks = showInsights ? [...FOOTER_LINKS, INSIGHTS_LINK] : FOOTER_LINKS;
   return (
     <footer className="border-t border-[var(--p-line)] py-14">
       <div className="p-wrap flex flex-col gap-10">
@@ -80,7 +84,7 @@ export function PublicFooter() {
             </p>
           </div>
           <nav aria-label="Footer" className="p-mono grid grid-cols-2 sm:grid-cols-3 gap-x-10 gap-y-3 text-[12.5px] text-[var(--p-slate)]">
-            {FOOTER_LINKS.map((l) =>
+            {footerLinks.map((l) =>
               l.href === "/privacy" || l.href === "/terms" ? (
                 <LegalLink key={l.href} doc={l.href === "/privacy" ? "privacy" : "terms"} className="hover:text-[var(--p-red)]">
                   {l.label}
@@ -108,7 +112,7 @@ export function PublicPage({ dest, children }: { dest: LandingDestinations; chil
     <div className={`${publicFontClass} min-h-screen flex flex-col`}>
       <PublicHeader dest={dest} />
       <main className="flex-1">{children}</main>
-      <PublicFooter />
+      <PublicFooter showInsights={dest.showInsights} />
     </div>
   );
 }

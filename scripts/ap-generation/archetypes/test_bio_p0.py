@@ -29,7 +29,7 @@ def packs(name, n=3, seed0=0):
 class TestRegistry(unittest.TestCase):
     def test_library_size_and_prefixes(self):
         self.assertGreaterEqual(len(R.BIO_STAGES["bio_mc_all"]), 160)
-        self.assertEqual(len(R.BIO_STAGES["bio_sets"]), 8)
+        self.assertEqual(len(R.BIO_STAGES["bio_sets"]), 9)  # 2026-10-19 bis_n_cellcycle_set 추가(BI4 의 네 번째 세트)
         self.assertGreaterEqual(len(R.BIO_STAGES["bio_frq"]), 24)
         self.assertTrue(all(n.startswith("bi_") for n in R.BIO_STAGES["bio_mc_all"]))
         self.assertTrue(all(n.startswith("bif_") for n in R.BIO_STAGES["bio_frq"]))

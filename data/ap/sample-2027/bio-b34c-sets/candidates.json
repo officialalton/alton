@@ -1,0 +1,1614 @@
+[
+ {
+  "candidateKey": "ap_biology-m01-k0",
+  "cellId": "ap_biology-m01",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "4.6",
+  "unitCode": "4",
+  "skillPrimary": "4.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "bis_n_cellcycle_set_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "set_item_3:resembles_known_exam_item; resembles_known_exam_item",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Skill 4.B item requiring only a direct read of a small 5-row table. The student must notice interphase (390 of 500) dominates and that counts fall from prophase (50) to metaphase (25) to anaphase (15). Distractors are plainly contradicted by the data (mitosis majority, telophase majority, equal spread). No calculation is required, since the 24-hour cycle length is extra context not needed for the answer. Only one representation (table) and a single comparison step. The item does not require explaining why interphase is longest, so concept depth is light. Reading load is low, wording is unambiguous, and nothing is out of scope.",
+  "payload": {
+   "archetype": "bis_n_cellcycle_set",
+   "topic": "4.6",
+   "skill": "4.B",
+   "calculator": "allowed",
+   "set_intro": "A student counted the cells in each stage of the cell cycle in a sample of 500 cells from the growing tip of an onion root. The cell cycle of these cells takes 24 hours. The table shows the number of cells in each stage.",
+   "stimulus": {
+    "kind": "table",
+    "description": "Number of cells in each stage in a sample of cells from an onion root tip",
+    "data": {
+     "columns": [
+      "Stage of the cell cycle",
+      "Number of cells"
+     ],
+     "rows": [
+      [
+       "Interphase",
+       "390"
+      ],
+      [
+       "Prophase",
+       "50"
+      ],
+      [
+       "Metaphase",
+       "25"
+      ],
+      [
+       "Anaphase",
+       "15"
+      ],
+      [
+       "Telophase",
+       "20"
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "bis_n_cellcycle_set_q1",
+     "topic": "4.6",
+     "skill": "4.B",
+     "stem": "Which statement best describes the data in the table?",
+     "options": [
+      {
+       "text": "Most of the cells are in mitosis, because a growing root tip divides all of the time.",
+       "why": "Fewer than half of the cells are in a stage of mitosis.",
+       "value": null
+      },
+      {
+       "text": "Most of the cells are in interphase, and the number of cells decreases from prophase to metaphase to anaphase.",
+       "why": "390 of the 500 cells are in interphase, and the numbers are 50, 25 and 15 in prophase, metaphase and anaphase.",
+       "value": null
+      },
+      {
+       "text": "Most of the cells are in telophase, because the cells are about to divide.",
+       "why": "Only a small number of cells are in telophase.",
+       "value": null
+      },
+      {
+       "text": "The cells are spread equally among all of the stages of the cell cycle.",
+       "why": "The numbers in the table are very different from one another.",
+       "value": null
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is Most of the cells are in interphase, and the number of cells decreases from prophase to metaphase to anaphase.. 390 of the 500 cells are in interphase, and the numbers are 50, 25 and 15 in prophase, metaphase and anaphase.\nMost of the cells are in mitosis, because a growing root tip divides all of the time. is incorrect: Fewer than half of the cells are in a stage of mitosis.\nMost of the cells are in telophase, because the cells are about to divide. is incorrect: Only a small number of cells are in telophase.\nThe cells are spread equally among all of the stages of the cell cycle. is incorrect: The numbers in the table are very different from one another.",
+     "est_seconds": 65,
+     "blueprint": {
+      "id": "bis_n_cellcycle_set_q1",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "describe the distribution of cells among the stages of the cell cycle in a table",
+      "topic": "4.6",
+      "skill": "4.B",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: describe the distribution of cells among the stages of the cell cycle in a table",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "the number of cells in each stage"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Fewer than half of the cells are in a stage of mitosis."
+       },
+       {
+        "id": "m2",
+        "description": "Only a small number of cells are in telophase."
+       },
+       {
+        "id": "m3",
+        "description": "The numbers in the table are very different from one another."
+       }
+      ],
+      "verification": {
+       "independent_path": "sum of the stage counts vs the sample size and the ordering of the counts",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_n_cellcycle_set_q2",
+     "topic": "4.6",
+     "skill": "5.A",
+     "stem": "The mitotic index is the percent of the cells in the sample that are in a stage of mitosis (prophase, metaphase, anaphase or telophase). What is the mitotic index of the sample?",
+     "options": [
+      {
+       "text": "22.0%",
+       "why": "The cells in mitosis are 50+25+15+20=110 of 500, which is 22.0%.",
+       "value": "22.000000"
+      },
+      {
+       "text": "28.2%",
+       "why": "Divides the number of cells in mitosis by the number of cells in interphase.",
+       "value": "28.205128"
+      },
+      {
+       "text": "110.0%",
+       "why": "Gives the number of cells in mitosis instead of the percent of the cells.",
+       "value": "110.00000"
+      },
+      {
+       "text": "10.0%",
+       "why": "Divides the number of cells in prophase by the sample size.",
+       "value": "10.000000"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is 22.0%. The cells in mitosis are 50+25+15+20=110 of 500, which is 22.0%.\n28.2% is incorrect: Divides the number of cells in mitosis by the number of cells in interphase.\n110.0% is incorrect: Gives the number of cells in mitosis instead of the percent of the cells.\n10.0% is incorrect: Divides the number of cells in prophase by the sample size.",
+     "est_seconds": 75,
+     "blueprint": {
+      "id": "bis_n_cellcycle_set_q2",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "calculate the mitotic index from the counts in a table",
+      "topic": "4.6",
+      "skill": "5.A",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: calculate the mitotic index from the counts in a table",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "the number of cells in each stage"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Divides the number of cells in mitosis by the number of cells in interphase."
+       },
+       {
+        "id": "m2",
+        "description": "Gives the number of cells in mitosis instead of the percent of the cells."
+       },
+       {
+        "id": "m3",
+        "description": "Divides the number of cells in prophase by the sample size."
+       }
+      ],
+      "verification": {
+       "independent_path": "the fraction of cells in mitosis vs one minus the fraction in interphase",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_n_cellcycle_set_q3",
+     "topic": "4.6",
+     "skill": "5.A",
+     "stem": "Assume that the time that a cell spends in a stage is proportional to the fraction of the cells that are in that stage. About how long does a cell spend in prophase?",
+     "options": [
+      {
+       "text": "2.40 hours",
+       "why": "The fraction in prophase is 50/500, so the time is 24 h x 0.100 = 2.40 hours.",
+       "value": "2.4000000"
+      },
+      {
+       "text": "10.00 hours",
+       "why": "Uses the percent of cells in prophase as the number of hours.",
+       "value": "10.000000"
+      },
+      {
+       "text": "1,200 hours",
+       "why": "Multiplies the cell cycle time by the number of cells in prophase instead of the fraction.",
+       "value": "1200.0000"
+      },
+      {
+       "text": "3.60 hours",
+       "why": "Includes the cells in metaphase with the cells in prophase.",
+       "value": "3.6000000"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is 2.40 hours. The fraction in prophase is 50/500, so the time is 24 h x 0.100 = 2.40 hours.\n10.00 hours is incorrect: Uses the percent of cells in prophase as the number of hours.\n1,200 hours is incorrect: Multiplies the cell cycle time by the number of cells in prophase instead of the fraction.\n3.60 hours is incorrect: Includes the cells in metaphase with the cells in prophase.",
+     "est_seconds": 80,
+     "blueprint": {
+      "id": "bis_n_cellcycle_set_q3",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "estimate the duration of a stage of the cell cycle from the fraction of cells in that stage",
+      "topic": "4.6",
+      "skill": "5.A",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: estimate the duration of a stage of the cell cycle from the fraction of cells in that stage",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "the number of cells in each stage"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Uses the percent of cells in prophase as the number of hours."
+       },
+       {
+        "id": "m2",
+        "description": "Multiplies the cell cycle time by the number of cells in prophase instead of the fraction."
+       },
+       {
+        "id": "m3",
+        "description": "Includes the cells in metaphase with the cells in prophase."
+       }
+      ],
+      "verification": {
+       "independent_path": "cell cycle time times the fraction in prophase vs the proportion of the cycle",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_n_cellcycle_set_q4",
+     "topic": "4.6",
+     "skill": "6.E",
+     "stem": "The student treats the root tip with a drug that prevents the formation of the spindle fibers and counts the cells again after several hours. Which prediction is best supported?",
+     "options": [
+      {
+       "text": "The percent of cells in metaphase would increase, because the chromosomes could not be pulled apart and the cells would stay in metaphase.",
+       "why": "Without spindle fibers the sister chromatids are not separated, so cells accumulate before anaphase.",
+       "value": null
+      },
+      {
+       "text": "The percent of cells in interphase would decrease to zero, because all of the cells would enter mitosis.",
+       "why": "Cells would not all enter mitosis, and the cells that are blocked would stay in metaphase.",
+       "value": null
+      },
+      {
+       "text": "The percent of cells in anaphase would increase, because the chromosomes would be pulled apart more quickly.",
+       "why": "A drug that blocks the spindle fibers prevents the chromosomes from being pulled apart.",
+       "value": null
+      },
+      {
+       "text": "The percent of cells in telophase would increase, because the nuclei would form without separating the chromosomes.",
+       "why": "Telophase follows anaphase, and cells that cannot separate their chromosomes do not reach it.",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is The percent of cells in metaphase would increase, because the chromosomes could not be pulled apart and the cells would stay in metaphase.. Without spindle fibers the sister chromatids are not separated, so cells accumulate before anaphase.\nThe percent of cells in interphase would decrease to zero, because all of the cells would enter mitosis. is incorrect: Cells would not all enter mitosis, and the cells that are blocked would stay in metaphase.\nThe percent of cells in anaphase would increase, because the chromosomes would be pulled apart more quickly. is incorrect: A drug that blocks the spindle fibers prevents the chromosomes from being pulled apart.\nThe percent of cells in telophase would increase, because the nuclei would form without separating the chromosomes. is incorrect: Telophase follows anaphase, and cells that cannot separate their chromosomes do not reach it.",
+     "est_seconds": 70,
+     "blueprint": {
+      "id": "bis_n_cellcycle_set_q4",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "predict the effect of a drug that blocks the spindle on the stages of mitosis",
+      "topic": "4.6",
+      "skill": "6.E",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: predict the effect of a drug that blocks the spindle on the stages of mitosis",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "the number of cells in each stage"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Cells would not all enter mitosis, and the cells that are blocked would stay in metaphase."
+       },
+       {
+        "id": "m2",
+        "description": "A drug that blocks the spindle fibers prevents the chromosomes from being pulled apart."
+       },
+       {
+        "id": "m3",
+        "description": "Telophase follows anaphase, and cells that cannot separate their chromosomes do not reach it."
+       }
+      ],
+      "verification": {
+       "independent_path": "the stage that requires the spindle fibers and the stage before it",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    }
+   ],
+   "set_size": 4,
+   "est_seconds": 290,
+   "facts": [
+    "n=500",
+    "counts={'Interphase': 390, 'Prophase': 50, 'Metaphase': 25, 'Anaphase': 15, 'Telophase': 20}"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bis_n_cellcycle_set_q1",
+   "facts": [
+    "n=500",
+    "counts={'Interphase': 390, 'Prophase': 50, 'Metaphase': 25, 'Anaphase': 15, 'Telophase': 20}"
+   ],
+   "seed": 11700
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "The item takes about 65 seconds and needs no calculation. It is a typical AP table-description item. The 24-hour cell cycle length is a mild extraneous detail but does not mislead.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is a clean table-description question with a unique, correct key and distinct distractors. It is suitable for the exam."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Mitotic index calculation from table counts; a 5.A calculation in the cell cycle topic. Acceptable under the data-skill allowance."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "110/500 = 22.0%; the key is unique and the mitotic index is defined in the stem."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table is complete, sums to 500, and matches the stem. The 24-hour cycle length is an unused detail but harmless."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct misconceptions, each explained. The 110% option is a bit weak but acceptable."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "A single calculation, about 75 seconds, with a calculator allowed."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "A correct, clean mitotic index calculation item with a unique key and distinct distractors. It is acceptable."
+   },
+   {
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": true,
+    "summary": "The item is correct and clean. The table totals 500 and the key of 2.40 hours is unique. Each distractor encodes a distinct error and is explained. It is a single proportional calculation of a suitable length. It closely resembles the well-known onion root tip cell-cycle sample scenario, which is flagged. The link to topic 4.6 is weak, since the content is closer to 4.5.",
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    }
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Predicting the effect of a spindle-blocking drug on cell-cycle stages fits 4.6 and skill 6.E. The item uses only CED-level mitosis and checkpoint ideas."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Option A is the only defensible answer. Spindle inhibitors such as colchicine arrest cells at metaphase (strictly prometaphase), so the percent in metaphase rises. The interphase, anaphase and telophase options are each clearly wrong."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table is complete and sums to 500. The stem states the sample size and the 24-hour cycle. The 24-hour figure is unused, which is a minor extra. \"Several hours\" is vague but does not affect the key."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "The wrong options encode distinct misconceptions: all cells entering mitosis, faster chromosome separation, and telophase occurring without separation. Each is explained specifically. The key is somewhat longer than the others, but only slightly."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "It can be answered in about 70 seconds, requires no calculation, and has a light reading load. The table is only marginally needed, since the answer follows from knowing mitosis, but this is acceptable."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "This is a sound item on predicting the effect of a spindle-blocking drug on the percent of cells in each stage. The key is unique, the distractors are distinct and explained, and the table is complete. The unused 24-hour detail and the vague \"several hours\" are minor issues."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Skill 4.B item requiring only a direct read of a small 5-row table. The student must notice interphase (390 of 500) dominates and that counts fall from prophase (50) to metaphase (25) to anaphase (15). Distractors are plainly contradicted by the data (mitosis majority, telophase majority, equal spread). No calculation is required, since the 24-hour cycle length is extra context not needed for the answer. Only one representation (table) and a single comparison step. The item does not require explaining why interphase is longest, so concept depth is light. Reading load is low, wording is unambiguous, and nothing is out of scope.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 0,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-step percentage: read the table, exclude interphase, sum four small counts (110), divide by 500 for 22.0%. Distractors target common errors (not dividing, dividing by the interphase count). Concept depth is shallow and there is little reasoning or representation change. The arithmetic is short and clean, and the 24-hour cycle length is an extraneous detail but adds little reading load.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "The student reads a simple table, identifies the governing relationship (fraction of cells in a stage ~ fraction of cycle time), and does one clean proportional calculation: 50/500 x 24 = 2.4 h. Distractors reflect plausible errors (percent instead of hours, skipping division by the total, wrong fraction). It is a standard AP-style data item at the easier end of mock-exam level, with no unfair difficulty sources.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 75
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Requires predicting the effect of spindle disruption on the cell cycle distribution: link spindle function to the metaphase-anaphase checkpoint, infer arrest at metaphase, and reject plausible misconceptions (faster anaphase, telophase without separation, interphase going to zero). Table is simple and barely needed for the answer; no calculation. Concept is within CED scope and the item applies it in a concrete situation rather than recalling a definition. Moderate, on the easier end of exam-level.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 75
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_biology-m01-k1",
+  "cellId": "ap_biology-m01",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "4.6",
+  "unitCode": "4",
+  "skillPrimary": "4.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "bis_n_cellcycle_set_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "set_item_3:resembles_known_exam_item; resembles_known_exam_item",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "The item asks the student to describe a simple 5-row table. The correct option follows from a direct comparison: interphase has the largest count (228 of 300), and the mitotic stage counts decrease from prophase to anaphase. The distractors are easy to reject by inspection. No calculation or multi-step reasoning is needed, and the 20-hour cycle length is an unused detail. The difficulty is low and comes from fair sources.",
+  "payload": {
+   "archetype": "bis_n_cellcycle_set",
+   "topic": "4.6",
+   "skill": "4.B",
+   "calculator": "allowed",
+   "set_intro": "A student counted the cells in each stage of the cell cycle in a sample of 300 cells from the growing tip of an onion root. The cell cycle of these cells takes 20 hours. The table shows the number of cells in each stage.",
+   "stimulus": {
+    "kind": "table",
+    "description": "Number of cells in each stage in a sample of cells from an onion root tip",
+    "data": {
+     "columns": [
+      "Stage of the cell cycle",
+      "Number of cells"
+     ],
+     "rows": [
+      [
+       "Interphase",
+       "228"
+      ],
+      [
+       "Prophase",
+       "30"
+      ],
+      [
+       "Metaphase",
+       "21"
+      ],
+      [
+       "Anaphase",
+       "12"
+      ],
+      [
+       "Telophase",
+       "9"
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "bis_n_cellcycle_set_q1",
+     "topic": "4.6",
+     "skill": "4.B",
+     "stem": "Which statement best describes the data in the table?",
+     "options": [
+      {
+       "text": "The cells are spread equally among all of the stages of the cell cycle.",
+       "why": "The numbers in the table are very different from one another.",
+       "value": null
+      },
+      {
+       "text": "Most of the cells are in mitosis, because a growing root tip divides all of the time.",
+       "why": "Fewer than half of the cells are in a stage of mitosis.",
+       "value": null
+      },
+      {
+       "text": "Most of the cells are in interphase, and the number of cells decreases from prophase to metaphase to anaphase.",
+       "why": "228 of the 300 cells are in interphase, and the numbers are 30, 21 and 12 in prophase, metaphase and anaphase.",
+       "value": null
+      },
+      {
+       "text": "Most of the cells are in telophase, because the cells are about to divide.",
+       "why": "Only a small number of cells are in telophase.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is Most of the cells are in interphase, and the number of cells decreases from prophase to metaphase to anaphase.. 228 of the 300 cells are in interphase, and the numbers are 30, 21 and 12 in prophase, metaphase and anaphase.\nThe cells are spread equally among all of the stages of the cell cycle. is incorrect: The numbers in the table are very different from one another.\nMost of the cells are in mitosis, because a growing root tip divides all of the time. is incorrect: Fewer than half of the cells are in a stage of mitosis.\nMost of the cells are in telophase, because the cells are about to divide. is incorrect: Only a small number of cells are in telophase.",
+     "est_seconds": 65,
+     "blueprint": {
+      "id": "bis_n_cellcycle_set_q1",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "describe the distribution of cells among the stages of the cell cycle in a table",
+      "topic": "4.6",
+      "skill": "4.B",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: describe the distribution of cells among the stages of the cell cycle in a table",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "the number of cells in each stage"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "The numbers in the table are very different from one another."
+       },
+       {
+        "id": "m2",
+        "description": "Fewer than half of the cells are in a stage of mitosis."
+       },
+       {
+        "id": "m3",
+        "description": "Only a small number of cells are in telophase."
+       }
+      ],
+      "verification": {
+       "independent_path": "sum of the stage counts vs the sample size and the ordering of the counts",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_n_cellcycle_set_q2",
+     "topic": "4.6",
+     "skill": "5.A",
+     "stem": "The mitotic index is the percent of the cells in the sample that are in a stage of mitosis (prophase, metaphase, anaphase or telophase). What is the mitotic index of the sample?",
+     "options": [
+      {
+       "text": "24.0%",
+       "why": "The cells in mitosis are 30+21+12+9=72 of 300, which is 24.0%.",
+       "value": "24.000000"
+      },
+      {
+       "text": "76.0%",
+       "why": "Gives the percent of cells in interphase instead of the percent in mitosis.",
+       "value": "76.000000"
+      },
+      {
+       "text": "10.0%",
+       "why": "Divides the number of cells in prophase by the sample size.",
+       "value": "10.000000"
+      },
+      {
+       "text": "31.6%",
+       "why": "Divides the number of cells in mitosis by the number of cells in interphase.",
+       "value": "31.578947"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is 24.0%. The cells in mitosis are 30+21+12+9=72 of 300, which is 24.0%.\n76.0% is incorrect: Gives the percent of cells in interphase instead of the percent in mitosis.\n10.0% is incorrect: Divides the number of cells in prophase by the sample size.\n31.6% is incorrect: Divides the number of cells in mitosis by the number of cells in interphase.",
+     "est_seconds": 75,
+     "blueprint": {
+      "id": "bis_n_cellcycle_set_q2",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "calculate the mitotic index from the counts in a table",
+      "topic": "4.6",
+      "skill": "5.A",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: calculate the mitotic index from the counts in a table",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "the number of cells in each stage"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Gives the percent of cells in interphase instead of the percent in mitosis."
+       },
+       {
+        "id": "m2",
+        "description": "Divides the number of cells in prophase by the sample size."
+       },
+       {
+        "id": "m3",
+        "description": "Divides the number of cells in mitosis by the number of cells in interphase."
+       }
+      ],
+      "verification": {
+       "independent_path": "the fraction of cells in mitosis vs one minus the fraction in interphase",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_n_cellcycle_set_q3",
+     "topic": "4.6",
+     "skill": "5.A",
+     "stem": "Assume that the time that a cell spends in a stage is proportional to the fraction of the cells that are in that stage. About how long does a cell spend in prophase?",
+     "options": [
+      {
+       "text": "600 hours",
+       "why": "Multiplies the cell cycle time by the number of cells in prophase instead of the fraction.",
+       "value": "600.00000"
+      },
+      {
+       "text": "3.40 hours",
+       "why": "Includes the cells in metaphase with the cells in prophase.",
+       "value": "3.4000000"
+      },
+      {
+       "text": "2.00 hours",
+       "why": "The fraction in prophase is 30/300, so the time is 20 h x 0.100 = 2.00 hours.",
+       "value": "2.0000000"
+      },
+      {
+       "text": "10.00 hours",
+       "why": "Uses the percent of cells in prophase as the number of hours.",
+       "value": "10.000000"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is 2.00 hours. The fraction in prophase is 30/300, so the time is 20 h x 0.100 = 2.00 hours.\n600 hours is incorrect: Multiplies the cell cycle time by the number of cells in prophase instead of the fraction.\n3.40 hours is incorrect: Includes the cells in metaphase with the cells in prophase.\n10.00 hours is incorrect: Uses the percent of cells in prophase as the number of hours.",
+     "est_seconds": 80,
+     "blueprint": {
+      "id": "bis_n_cellcycle_set_q3",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "estimate the duration of a stage of the cell cycle from the fraction of cells in that stage",
+      "topic": "4.6",
+      "skill": "5.A",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: estimate the duration of a stage of the cell cycle from the fraction of cells in that stage",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "the number of cells in each stage"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Multiplies the cell cycle time by the number of cells in prophase instead of the fraction."
+       },
+       {
+        "id": "m2",
+        "description": "Includes the cells in metaphase with the cells in prophase."
+       },
+       {
+        "id": "m3",
+        "description": "Uses the percent of cells in prophase as the number of hours."
+       }
+      ],
+      "verification": {
+       "independent_path": "cell cycle time times the fraction in prophase vs the proportion of the cycle",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_n_cellcycle_set_q4",
+     "topic": "4.6",
+     "skill": "6.E",
+     "stem": "The student treats the root tip with a drug that prevents the formation of the spindle fibers and counts the cells again after several hours. Which prediction is best supported?",
+     "options": [
+      {
+       "text": "The percent of cells in interphase would decrease to zero, because all of the cells would enter mitosis.",
+       "why": "Cells would not all enter mitosis, and the cells that are blocked would stay in metaphase.",
+       "value": null
+      },
+      {
+       "text": "The percent of cells in telophase would increase, because the nuclei would form without separating the chromosomes.",
+       "why": "Telophase follows anaphase, and cells that cannot separate their chromosomes do not reach it.",
+       "value": null
+      },
+      {
+       "text": "The percent of cells in anaphase would increase, because the chromosomes would be pulled apart more quickly.",
+       "why": "A drug that blocks the spindle fibers prevents the chromosomes from being pulled apart.",
+       "value": null
+      },
+      {
+       "text": "The percent of cells in metaphase would increase, because the chromosomes could not be pulled apart and the cells would stay in metaphase.",
+       "why": "Without spindle fibers the sister chromatids are not separated, so cells accumulate before anaphase.",
+       "value": null
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is The percent of cells in metaphase would increase, because the chromosomes could not be pulled apart and the cells would stay in metaphase.. Without spindle fibers the sister chromatids are not separated, so cells accumulate before anaphase.\nThe percent of cells in interphase would decrease to zero, because all of the cells would enter mitosis. is incorrect: Cells would not all enter mitosis, and the cells that are blocked would stay in metaphase.\nThe percent of cells in telophase would increase, because the nuclei would form without separating the chromosomes. is incorrect: Telophase follows anaphase, and cells that cannot separate their chromosomes do not reach it.\nThe percent of cells in anaphase would increase, because the chromosomes would be pulled apart more quickly. is incorrect: A drug that blocks the spindle fibers prevents the chromosomes from being pulled apart.",
+     "est_seconds": 70,
+     "blueprint": {
+      "id": "bis_n_cellcycle_set_q4",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "predict the effect of a drug that blocks the spindle on the stages of mitosis",
+      "topic": "4.6",
+      "skill": "6.E",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: predict the effect of a drug that blocks the spindle on the stages of mitosis",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "the number of cells in each stage"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Cells would not all enter mitosis, and the cells that are blocked would stay in metaphase."
+       },
+       {
+        "id": "m2",
+        "description": "Telophase follows anaphase, and cells that cannot separate their chromosomes do not reach it."
+       },
+       {
+        "id": "m3",
+        "description": "A drug that blocks the spindle fibers prevents the chromosomes from being pulled apart."
+       }
+      ],
+      "verification": {
+       "independent_path": "the stage that requires the spindle fibers and the stage before it",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    }
+   ],
+   "set_size": 4,
+   "est_seconds": 290,
+   "facts": [
+    "n=300",
+    "counts={'Interphase': 228, 'Prophase': 30, 'Metaphase': 21, 'Anaphase': 12, 'Telophase': 9}"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bis_n_cellcycle_set_q1",
+   "facts": [
+    "n=300",
+    "counts={'Interphase': 228, 'Prophase': 30, 'Metaphase': 21, 'Anaphase': 12, 'Telophase': 9}"
+   ],
+   "seed": 11701
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Describing table data on cell distribution across the cell cycle fits 4.B; the data context belongs to Unit 4."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Option C is the unique correct answer: 228 of 300 cells are in interphase and the counts fall 30, 21, 12 from prophase to anaphase. The other options contradict the data."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table is complete and sums to 300. The 20-hour cycle length in the stem is unused but harmless."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor encodes a distinct misconception (equal distribution, mitosis dominant, telophase dominant). The explanations are accurate and specific."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 65 seconds, light reading, no calculation needed, calculator designation consistent."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is acceptable. It has a unique key, a complete table, distinct distractors and a typical AP load. The 20-hour cycle length is a small extraneous detail but does not harm the item."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Mitotic index is a standard topic 4.5/4.6 calculation task (cell cycle stage proportions). Skill 5.A is a single percent calculation. The count table is the only data needed. Fits within Unit 4."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "The mitotic index is 72/300 = 24.0%. The stem defines mitotic index and the table sums to 300 (228+30+21+12+9). The key is unique."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table data are complete, with columns and rows. The stem says \"the table shows\" and the wording is clear. The 20-hour cycle length is unused, but it is harmless context."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor encodes a distinct error: 76% is the interphase percent, 10% is prophase only, and 31.6% divides by interphase cells. The explanation covers each one. Option lengths are parallel."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "The item takes about 60-75 seconds, needs a simple sum and division, and the calculator is allowed. Table reading is minimal. The unused 20-hour cycle length adds slight extra reading, but it is acceptable."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "A clean, unambiguous mitotic-index calculation with a complete table, distinct distractors tied to named errors, and typical exam load. It passes all criteria."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "Short, simple calculation suited to a calculator-allowed exam.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": true,
+    "summary": "The item is sound and correctly keyed, but it uses the classic onion root tip cell-count table with time proportional to the fraction of cells, which closely resembles a released College Board item scenario. Flagged for resemblance."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Predicting the effect of a spindle-blocking drug on stage distribution fits 4.6 (cell cycle regulation/checkpoint) and skill 6.E. No out-of-scope content."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Metaphase accumulation is the unique defensible answer. The spindle assembly checkpoint arrests cells before anaphase. Other options are clearly wrong. The drug is described as preventing spindle formation, so prophase/prometaphase accumulation might be argued. But the option states metaphase and is the best supported given the options."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table is complete: 228+30+21+12+9=300, which matches the stem. The 20-hour cycle length is unused but harmless. The table is not strictly needed for the prediction, but it gives context."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor encodes a distinct misconception: all cells enter mitosis, telophase without separation, and faster anaphase. The explanation addresses each one. The option 1 rationale is slightly muddled, since it says blocked cells stay in metaphase, but it is acceptable."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "A short item of about 70 seconds with no arithmetic load. The option lengths are similar, with the correct option slightly longer."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is acceptable. It has a single defensible key (metaphase increases), distinct distractors, a consistent table, and a light reading load. The only weakness is that the stem does not say which spindle stage is blocked, which does not change the best answer among the options."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "The item asks the student to describe a simple 5-row table. The correct option follows from a direct comparison: interphase has the largest count (228 of 300), and the mitotic stage counts decrease from prophase to anaphase. The distractors are easy to reject by inspection. No calculation or multi-step reasoning is needed, and the 20-hour cycle length is an unused detail. The difficulty is low and comes from fair sources.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "The stem defines mitotic index, so the student only needs to sum the four mitotic stages from the table (30+21+12+9=72) and divide by 300 to get 24%. The numbers are small and clean, and there is a single percent calculation with no multi-step reasoning or representation change beyond reading a simple table. Distractors reflect plausible slips: interphase percent (76%), wrong denominator (72/228 = 31.6%), and a partial sum or single stage (10%). The unused 20-hour cell cycle time is a minor extraneous detail. Conceptual depth is low, which is more typical of foundational practice than a full mock.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single proportional calculation: read the prophase count from the table, divide by the 300-cell total to get 0.10, and multiply by the 20 h cycle to get 2.0 h. The numbers are clean and the reading load is minimal. The distractors reflect common slips (multiplying count by time, not converting the percentage). The concept is standard and in scope. Few steps and no unfair difficulty sources.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept prediction: a spindle-inhibiting drug blocks chromosome separation, so cells accumulate in metaphase. The table is context only, with no calculation required, and the 20-hour cycle time is unused. Distractors are plausible misconceptions (interphase vanishing, telophase without separation, faster anaphase), but rejecting them needs only one idea. This is accessible after initial instruction and sits below typical full-mock complexity.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_biology-m01-k2",
+  "cellId": "ap_biology-m01",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "4.6",
+  "unitCode": "4",
+  "skillPrimary": "4.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "bis_n_cellcycle_set_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "set_item_3:criterion_failed_distractor_explanation; set_item_3:resembles_known_exam_item; criterion_failed_distractor_explanation; resembles_known_exam_item",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Skill 4.B item. The student reads a five-row table and picks the statement that matches it. Interphase has 312 of 400 cells, and the counts fall from prophase (40) to metaphase (20) to anaphase (16). The distractors rest on common misconceptions, such as 'dividing all the time', 'most cells in telophase', and 'equal spread'. No computation is needed, only a visual comparison of counts. There is a single representation, the table, and about two reasoning steps. The 20-hour cycle time is an unused detail and adds little difficulty. This fits an introductory check of data description more than a full-mock item, which would typically add a proportion calculation, such as estimating the time spent in each stage.",
+  "payload": {
+   "archetype": "bis_n_cellcycle_set",
+   "topic": "4.6",
+   "skill": "4.B",
+   "calculator": "allowed",
+   "set_intro": "A student counted the cells in each stage of the cell cycle in a sample of 400 cells from the growing tip of an onion root. The cell cycle of these cells takes 20 hours. The table shows the number of cells in each stage.",
+   "stimulus": {
+    "kind": "table",
+    "description": "Number of cells in each stage in a sample of cells from an onion root tip",
+    "data": {
+     "columns": [
+      "Stage of the cell cycle",
+      "Number of cells"
+     ],
+     "rows": [
+      [
+       "Interphase",
+       "312"
+      ],
+      [
+       "Prophase",
+       "40"
+      ],
+      [
+       "Metaphase",
+       "20"
+      ],
+      [
+       "Anaphase",
+       "16"
+      ],
+      [
+       "Telophase",
+       "12"
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "bis_n_cellcycle_set_q1",
+     "topic": "4.6",
+     "skill": "4.B",
+     "stem": "Which statement best describes the data in the table?",
+     "options": [
+      {
+       "text": "Most of the cells are in mitosis, because a growing root tip divides all of the time.",
+       "why": "Fewer than half of the cells are in a stage of mitosis.",
+       "value": null
+      },
+      {
+       "text": "Most of the cells are in telophase, because the cells are about to divide.",
+       "why": "Only a small number of cells are in telophase.",
+       "value": null
+      },
+      {
+       "text": "Most of the cells are in interphase, and the number of cells decreases from prophase to metaphase to anaphase.",
+       "why": "312 of the 400 cells are in interphase, and the numbers are 40, 20 and 16 in prophase, metaphase and anaphase.",
+       "value": null
+      },
+      {
+       "text": "The cells are spread equally among all of the stages of the cell cycle.",
+       "why": "The numbers in the table are very different from one another.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is Most of the cells are in interphase, and the number of cells decreases from prophase to metaphase to anaphase.. 312 of the 400 cells are in interphase, and the numbers are 40, 20 and 16 in prophase, metaphase and anaphase.\nMost of the cells are in mitosis, because a growing root tip divides all of the time. is incorrect: Fewer than half of the cells are in a stage of mitosis.\nMost of the cells are in telophase, because the cells are about to divide. is incorrect: Only a small number of cells are in telophase.\nThe cells are spread equally among all of the stages of the cell cycle. is incorrect: The numbers in the table are very different from one another.",
+     "est_seconds": 65,
+     "blueprint": {
+      "id": "bis_n_cellcycle_set_q1",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "describe the distribution of cells among the stages of the cell cycle in a table",
+      "topic": "4.6",
+      "skill": "4.B",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: describe the distribution of cells among the stages of the cell cycle in a table",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "the number of cells in each stage"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Fewer than half of the cells are in a stage of mitosis."
+       },
+       {
+        "id": "m2",
+        "description": "Only a small number of cells are in telophase."
+       },
+       {
+        "id": "m3",
+        "description": "The numbers in the table are very different from one another."
+       }
+      ],
+      "verification": {
+       "independent_path": "sum of the stage counts vs the sample size and the ordering of the counts",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_n_cellcycle_set_q2",
+     "topic": "4.6",
+     "skill": "5.A",
+     "stem": "The mitotic index is the percent of the cells in the sample that are in a stage of mitosis (prophase, metaphase, anaphase or telophase). What is the mitotic index of the sample?",
+     "options": [
+      {
+       "text": "22.0%",
+       "why": "The cells in mitosis are 40+20+16+12=88 of 400, which is 22.0%.",
+       "value": "22.000000"
+      },
+      {
+       "text": "28.2%",
+       "why": "Divides the number of cells in mitosis by the number of cells in interphase.",
+       "value": "28.205128"
+      },
+      {
+       "text": "78.0%",
+       "why": "Gives the percent of cells in interphase instead of the percent in mitosis.",
+       "value": "78.000000"
+      },
+      {
+       "text": "10.0%",
+       "why": "Divides the number of cells in prophase by the sample size.",
+       "value": "10.000000"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is 22.0%. The cells in mitosis are 40+20+16+12=88 of 400, which is 22.0%.\n28.2% is incorrect: Divides the number of cells in mitosis by the number of cells in interphase.\n78.0% is incorrect: Gives the percent of cells in interphase instead of the percent in mitosis.\n10.0% is incorrect: Divides the number of cells in prophase by the sample size.",
+     "est_seconds": 75,
+     "blueprint": {
+      "id": "bis_n_cellcycle_set_q2",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "calculate the mitotic index from the counts in a table",
+      "topic": "4.6",
+      "skill": "5.A",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: calculate the mitotic index from the counts in a table",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "the number of cells in each stage"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Divides the number of cells in mitosis by the number of cells in interphase."
+       },
+       {
+        "id": "m2",
+        "description": "Gives the percent of cells in interphase instead of the percent in mitosis."
+       },
+       {
+        "id": "m3",
+        "description": "Divides the number of cells in prophase by the sample size."
+       }
+      ],
+      "verification": {
+       "independent_path": "the fraction of cells in mitosis vs one minus the fraction in interphase",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_n_cellcycle_set_q3",
+     "topic": "4.6",
+     "skill": "5.A",
+     "stem": "Assume that the time that a cell spends in a stage is proportional to the fraction of the cells that are in that stage. About how long does a cell spend in prophase?",
+     "options": [
+      {
+       "text": "800 hours",
+       "why": "Multiplies the cell cycle time by the number of cells in prophase instead of the fraction.",
+       "value": "800.00000"
+      },
+      {
+       "text": "3.00 hours",
+       "why": "Includes the cells in metaphase with the cells in prophase.",
+       "value": "3.0000000"
+      },
+      {
+       "text": "2.00 hours",
+       "why": "The fraction in prophase is 40/400, so the time is 20 h x 0.100 = 2.00 hours.",
+       "value": "2.0000000"
+      },
+      {
+       "text": "10.00 hours",
+       "why": "Uses the percent of cells in prophase as the number of hours.",
+       "value": "10.000000"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is 2.00 hours. The fraction in prophase is 40/400, so the time is 20 h x 0.100 = 2.00 hours.\n800 hours is incorrect: Multiplies the cell cycle time by the number of cells in prophase instead of the fraction.\n3.00 hours is incorrect: Includes the cells in metaphase with the cells in prophase.\n10.00 hours is incorrect: Uses the percent of cells in prophase as the number of hours.",
+     "est_seconds": 80,
+     "blueprint": {
+      "id": "bis_n_cellcycle_set_q3",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "estimate the duration of a stage of the cell cycle from the fraction of cells in that stage",
+      "topic": "4.6",
+      "skill": "5.A",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: estimate the duration of a stage of the cell cycle from the fraction of cells in that stage",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "the number of cells in each stage"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Multiplies the cell cycle time by the number of cells in prophase instead of the fraction."
+       },
+       {
+        "id": "m2",
+        "description": "Includes the cells in metaphase with the cells in prophase."
+       },
+       {
+        "id": "m3",
+        "description": "Uses the percent of cells in prophase as the number of hours."
+       }
+      ],
+      "verification": {
+       "independent_path": "cell cycle time times the fraction in prophase vs the proportion of the cycle",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_n_cellcycle_set_q4",
+     "topic": "4.6",
+     "skill": "6.E",
+     "stem": "The student treats the root tip with a drug that prevents the formation of the spindle fibers and counts the cells again after several hours. Which prediction is best supported?",
+     "options": [
+      {
+       "text": "The percent of cells in telophase would increase, because the nuclei would form without separating the chromosomes.",
+       "why": "Telophase follows anaphase, and cells that cannot separate their chromosomes do not reach it.",
+       "value": null
+      },
+      {
+       "text": "The percent of cells in interphase would decrease to zero, because all of the cells would enter mitosis.",
+       "why": "Cells would not all enter mitosis, and the cells that are blocked would stay in metaphase.",
+       "value": null
+      },
+      {
+       "text": "The percent of cells in metaphase would increase, because the chromosomes could not be pulled apart and the cells would stay in metaphase.",
+       "why": "Without spindle fibers the sister chromatids are not separated, so cells accumulate before anaphase.",
+       "value": null
+      },
+      {
+       "text": "The percent of cells in anaphase would increase, because the chromosomes would be pulled apart more quickly.",
+       "why": "A drug that blocks the spindle fibers prevents the chromosomes from being pulled apart.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is The percent of cells in metaphase would increase, because the chromosomes could not be pulled apart and the cells would stay in metaphase.. Without spindle fibers the sister chromatids are not separated, so cells accumulate before anaphase.\nThe percent of cells in telophase would increase, because the nuclei would form without separating the chromosomes. is incorrect: Telophase follows anaphase, and cells that cannot separate their chromosomes do not reach it.\nThe percent of cells in interphase would decrease to zero, because all of the cells would enter mitosis. is incorrect: Cells would not all enter mitosis, and the cells that are blocked would stay in metaphase.\nThe percent of cells in anaphase would increase, because the chromosomes would be pulled apart more quickly. is incorrect: A drug that blocks the spindle fibers prevents the chromosomes from being pulled apart.",
+     "est_seconds": 70,
+     "blueprint": {
+      "id": "bis_n_cellcycle_set_q4",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "predict the effect of a drug that blocks the spindle on the stages of mitosis",
+      "topic": "4.6",
+      "skill": "6.E",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: predict the effect of a drug that blocks the spindle on the stages of mitosis",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "the number of cells in each stage"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Telophase follows anaphase, and cells that cannot separate their chromosomes do not reach it."
+       },
+       {
+        "id": "m2",
+        "description": "Cells would not all enter mitosis, and the cells that are blocked would stay in metaphase."
+       },
+       {
+        "id": "m3",
+        "description": "A drug that blocks the spindle fibers prevents the chromosomes from being pulled apart."
+       }
+      ],
+      "verification": {
+       "independent_path": "the stage that requires the spindle fibers and the stage before it",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    }
+   ],
+   "set_size": 4,
+   "est_seconds": 290,
+   "facts": [
+    "n=400",
+    "counts={'Interphase': 312, 'Prophase': 40, 'Metaphase': 20, 'Anaphase': 16, 'Telophase': 12}"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bis_n_cellcycle_set_q1",
+   "facts": [
+    "n=400",
+    "counts={'Interphase': 312, 'Prophase': 40, 'Metaphase': 20, 'Anaphase': 16, 'Telophase': 12}"
+   ],
+   "seed": 11702
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "The item can be answered in about 65 seconds and needs no real calculation. It is easy, and the unused 20-hour detail is a minor flaw.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is acceptable. It is a simple 4.B table-description item with a unique key. Its weaknesses are the unused 20-hour detail, a weak distractor D, and a loose fit to topic 4.6."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "About 75 seconds, a simple sum and percent, and calculator use is consistent with the designation.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is a clean, single-step mitotic index calculation with a unique key and distinct distractors. The only flaw is an unused 20-hour detail in the stem, which does not affect the answer. Passes."
+   },
+   {
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": true,
+    "summary": "The item is correct and in scope, but the inconsistent number formatting in option A (800 hours versus the two-decimal style of the other options) is a minor distractor/format flaw. Failing under the strict policy. The scenario also resembles the standard onion root tip cell-cycle task.",
+    "scope_skill": {
+     "pass": true,
+     "notes": "Fraction-of-cells calculation of stage duration fits 4.6 and skill 5.A."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "40/400 x 20 = 2.00 h; the key is unique, the table sums to 400, and the proportionality assumption is stated."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table is complete and the wording is clear."
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": "Each wrong option has a distinct, accurate misconception. However, option A is written as \"800 hours\" while the others use two decimals, a minor format inconsistency that works as a cue."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "A single calculation with a short table, about 80 seconds, with the calculator allowed. This is typical for the exam."
+    }
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Predicting the effect of a spindle-blocking disruption on the cell-cycle stages fits 6.E and the regulation/checkpoint theme of 4.6, though it leans somewhat toward 4.5 mitosis content."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Metaphase accumulation is the unique defensible answer; the other three options are clearly wrong."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table is complete and sums to 400. The 20-hour cycle time is unused, and 'several hours' is vague but does not affect the key."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor encodes a distinct misconception (telophase reachable, all cells enter mitosis, reversed drug effect), and the explanation addresses each one."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "The reading and time load is short and typical of the AP exam. No arithmetic is needed and the calculator designation is consistent."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound. It has a unique key (metaphase arrest) and three distinct, well-explained distractors, and the load is short. Minor weaknesses are the unused 20-hour detail and the table not being needed for the answer, neither of which affects correctness."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Skill 4.B item. The student reads a five-row table and picks the statement that matches it. Interphase has 312 of 400 cells, and the counts fall from prophase (40) to metaphase (20) to anaphase (16). The distractors rest on common misconceptions, such as 'dividing all the time', 'most cells in telophase', and 'equal spread'. No computation is needed, only a visual comparison of counts. There is a single representation, the table, and about two reasoning steps. The 20-hour cycle time is an unused detail and adds little difficulty. This fits an introductory check of data description more than a full-mock item, which would typically add a proportion calculation, such as estimating the time spent in each stage.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 0,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "The stem defines the mitotic index, so the student only sums the four mitotic stages (88) and divides by 400 to get 22.0%. Distractors reflect common errors: dividing by the interphase count (28.2%), reporting the interphase percentage (78.0%), and using prophase alone (10.0%). The calculation is small and the table is short. There is a single step beyond the sum, with no data interpretation or prediction, so it fits foundational practice better than a full mock. The 20-hour cycle length is unused and adds a minor distraction.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single proportional calculation (40/400 x 20 h = 2.00 h) using a clearly stated assumption and a small table. The concept is shallow and the arithmetic is clean. Distractors target predictable errors (multiplying, using the wrong denominator or numerator), but the item requires only one reasoning step with no multi-step data synthesis.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must identify the governing relationship (spindle fibers are needed to separate chromosomes at the metaphase-to-anaphase transition, so cells arrest in metaphase) and predict the effect of a disruption while rejecting plausible misconceptions (telophase without separation, interphase dropping to zero, faster anaphase). The table gives context, and no calculation is needed. Wording is clear, the scope is within CED 4.5/4.6, and there are no unfair difficulty sources. It is moderate in depth, suitable for full mocks.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 75
+   }
+  ]
+ }
+]

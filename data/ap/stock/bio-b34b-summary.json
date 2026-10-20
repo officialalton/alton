@@ -1,0 +1,94 @@
+{
+ "runs": [
+  "bio-b34b-mc"
+ ],
+ "rows": 48,
+ "passed": 36,
+ "rejected": 12,
+ "passRate": 0.75,
+ "mc": {
+  "rows": 48,
+  "passed": 36,
+  "passRate": 0.75
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "1": 5,
+  "2": 1,
+  "3": 11,
+  "4": 1,
+  "5": 4,
+  "6": 5,
+  "7": 9
+ },
+ "skillsPassed": {
+  "1.B": 12,
+  "4.B": 3,
+  "2.B": 8,
+  "6.B": 3,
+  "6.C": 2,
+  "2.A": 3,
+  "6.E": 5
+ },
+ "figPassed": {
+  "none": 22,
+  "table": 14
+ },
+ "figAll": {
+  "none": 27,
+  "table": 21
+ },
+ "figPassRate": {
+  "none": "22/27",
+  "table": "14/21"
+ },
+ "renderTypesPassed": {
+  "none": 22,
+  "ap_table": 14
+ },
+ "archetypesPassed": {
+  "bi_endomembrane_path": 1,
+  "bi_gel_interpretation": 3,
+  "bi_n_artificial_selection": 3,
+  "bi_n_cell_cycle_dna_table": 1,
+  "bi_n_claim_enzyme_temperature": 3,
+  "bi_n_drift_table": 3,
+  "bi_n_gene_regulation_euk": 2,
+  "bi_n_inhibitor_types": 3,
+  "bi_n_justify_primary_structure": 2,
+  "bi_n_light_compensation_table": 3,
+  "bi_n_linkage_table": 1,
+  "bi_n_ploidy_dna_table": 3,
+  "bi_n_predict_active_site": 2,
+  "bi_n_predict_bottleneck": 3,
+  "bi_n_water_cohesion": 3
+ },
+ "archetypesAll": {
+  "bi_endomembrane_path": 3,
+  "bi_gel_interpretation": 3,
+  "bi_n_artificial_selection": 3,
+  "bi_n_cell_cycle_dna_table": 3,
+  "bi_n_claim_enzyme_temperature": 3,
+  "bi_n_drift_table": 3,
+  "bi_n_gene_regulation_euk": 3,
+  "bi_n_inhibitor_types": 3,
+  "bi_n_justify_primary_structure": 3,
+  "bi_n_light_compensation_table": 3,
+  "bi_n_linkage_table": 3,
+  "bi_n_ploidy_dna_table": 3,
+  "bi_n_predict_active_site": 3,
+  "bi_n_predict_bottleneck": 3,
+  "bi_n_water_cohesion": 3,
+  "bi_organism_response_data": 3
+ },
+ "failedArchetypes": [
+  "bi_organism_response_data"
+ ],
+ "costUsd": {
+  "bio-b34b-mc": 1.8671
+ }
+}

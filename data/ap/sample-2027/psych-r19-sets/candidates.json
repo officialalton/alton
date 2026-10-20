@@ -1,0 +1,823 @@
+[
+ {
+  "candidateKey": "ap_psychology-m01-k0",
+  "cellId": "ap_psychology-m01",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "4.2",
+  "unitCode": "4",
+  "skillPrimary": "1.A",
+  "structure": "shared_stimulus_set",
+  "calculator": "na",
+  "archetype": "pss_u4_dissonance_pay_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "This is a single-concept application. The scenario is the classic insufficient-justification paradigm (counter-attitudinal behavior with small vs. large payment), and the table only confirms the direction of the result. Students must map it to cognitive dissonance reduction. The distractors are clearly distinct: central route, foot-in-the-door, and fundamental attribution error. The only discrimination is mild, since the central route involves persuasion but not self-persuasion from behavior. The scenario is unambiguous, the arithmetic is nil, and the reading is moderate. The table is a simple two-row table that needs no calculation.",
+  "payload": {
+   "archetype": "pss_u4_dissonance_pay",
+   "topic": "4.2",
+   "skill": "1.A",
+   "calculator": "na",
+   "set_intro": "A researcher recruited 50 first-year college students who all disagreed with a proposed rule that would require every student to attend a 7:00 A.M. exercise class. Using random assignment, she placed 25 students in each of two conditions. Each student recorded an audio message urging classmates to support the rule. Students in the first condition were paid $2 for the recording, and students in the second condition were paid $40. Afterward, an assistant who did not know which payment each student had received asked the student to rate his or her own agreement with the rule from 1 (strongly disagree) to 9 (strongly agree). The table shows the results.",
+   "stimulus": {
+    "kind": "table",
+    "description": "Agreement with the rule by payment condition",
+    "data": {
+     "columns": [
+      "Payment for the recording",
+      "Students",
+      "Mean agreement rating",
+      "Standard deviation"
+     ],
+     "rows": [
+      [
+       "$2",
+       "25",
+       "5.8",
+       "1.6"
+      ],
+      [
+       "$40",
+       "25",
+       "3.2",
+       "1.5"
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "pss_u4_dissonance_pay_q1",
+     "topic": "4.2",
+     "skill": "1.A",
+     "stem": "Which concept best explains why the students paid $2 reported more agreement with the rule than the students paid $40?",
+     "options": [
+      {
+       "text": "Cognitive dissonance reduction",
+       "why": "Students paid very little had weak outside justification for arguing against their own view, so they may have shifted their attitude to reduce the tension between their behavior and their belief.",
+       "value": null
+      },
+      {
+       "text": "The central route to persuasion",
+       "why": "The central route changes attitudes through careful evaluation of argument quality, but the payment amount says nothing about argument quality.",
+       "value": null
+      },
+      {
+       "text": "The foot-in-the-door phenomenon",
+       "why": "That phenomenon involves agreeing to a small request first, which raises later compliance with a larger request, and no larger request was made here.",
+       "value": null
+      },
+      {
+       "text": "The fundamental attribution error",
+       "why": "That error is overemphasizing personality and underemphasizing situations when explaining other people's behavior, which is not what the ratings measure.",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is Cognitive dissonance reduction. Students paid very little had weak outside justification for arguing against their own view, so they may have shifted their attitude to reduce the tension between their behavior and their belief.\nThe central route to persuasion is incorrect: The central route changes attitudes through careful evaluation of argument quality, but the payment amount says nothing about argument quality.\nThe foot-in-the-door phenomenon is incorrect: That phenomenon involves agreeing to a small request first, which raises later compliance with a larger request, and no larger request was made here.\nThe fundamental attribution error is incorrect: That error is overemphasizing personality and underemphasizing situations when explaining other people's behavior, which is not what the ratings measure.",
+     "est_seconds": 55,
+     "blueprint": {
+      "id": "pss_u4_dissonance_pay_q1",
+      "subject": "ap_psychology",
+      "kind": "mc",
+      "concept": "attitude change after a paid counter-attitudinal message; blinded rating collection",
+      "topic": "4.2",
+      "skill": "1.A",
+      "student_thinking": [
+       "Identify what the scenario or question is asking about: attitude change after a paid counter-attitudinal message; blinded rating collection",
+       "Match the defining feature in the stem against each option and reject the near-miss concepts"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "na",
+      "key_conditions": [
+       {
+        "condition": "the stem contains the defining feature of exactly one option",
+        "evidence": "stem wording"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "The central route changes attitudes through careful evaluation of argument quality, but the payment amount says nothing about argument quality."
+       },
+       {
+        "id": "m2",
+        "description": "That phenomenon involves agreeing to a small request first, which raises later compliance with a larger request, and no larger request was made here."
+       },
+       {
+        "id": "m3",
+        "description": "That error is overemphasizing personality and underemphasizing situations when explaining other people's behavior, which is not what the ratings measure."
+       }
+      ],
+      "verification": {
+       "independent_path": "authored from the CED required content (essential knowledge 4.2); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+       "method": "authored+blind-solver+panel"
+      },
+      "judgment_demand": [
+       "apply the concept to the scenario"
+      ]
+     }
+    },
+    {
+     "archetype": "pss_u4_dissonance_pay_q2",
+     "topic": "4.2",
+     "skill": "2.B",
+     "stem": "Why was the assistant who collected the agreement ratings not told which payment each student had received?",
+     "options": [
+      {
+       "text": "To ensure that students understood the true purpose of the study before rating",
+       "why": "Explaining the purpose to students is the job of a debriefing, and keeping the assistant uninformed does not provide one.",
+       "value": null
+      },
+      {
+       "text": "To help the results apply to students at other colleges",
+       "why": "Generalizability depends on how the sample was selected from the population, not on what the assistant knew.",
+       "value": null
+      },
+      {
+       "text": "To guarantee that the two payment groups were equal in size",
+       "why": "Group size was set by randomly assigning 25 students to each condition, not by keeping the assistant uninformed.",
+       "value": null
+      },
+      {
+       "text": "To keep expectations from influencing how ratings were taken",
+       "why": "Keeping the data collector unaware of the condition helps prevent his or her expectations from shaping how responses are gathered or recorded.",
+       "value": null
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is To keep expectations from influencing how ratings were taken. Keeping the data collector unaware of the condition helps prevent his or her expectations from shaping how responses are gathered or recorded.\nTo ensure that students understood the true purpose of the study before rating is incorrect: Explaining the purpose to students is the job of a debriefing, and keeping the assistant uninformed does not provide one.\nTo help the results apply to students at other colleges is incorrect: Generalizability depends on how the sample was selected from the population, not on what the assistant knew.\nTo guarantee that the two payment groups were equal in size is incorrect: Group size was set by randomly assigning 25 students to each condition, not by keeping the assistant uninformed.",
+     "est_seconds": 65,
+     "blueprint": {
+      "id": "pss_u4_dissonance_pay_q2",
+      "subject": "ap_psychology",
+      "kind": "mc",
+      "concept": "attitude change after a paid counter-attitudinal message; blinded rating collection",
+      "topic": "4.2",
+      "skill": "2.B",
+      "student_thinking": [
+       "Identify what the scenario or question is asking about: attitude change after a paid counter-attitudinal message; blinded rating collection",
+       "Match the defining feature in the stem against each option and reject the near-miss concepts"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "na",
+      "key_conditions": [
+       {
+        "condition": "the stem contains the defining feature of exactly one option",
+        "evidence": "stem wording"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Explaining the purpose to students is the job of a debriefing, and keeping the assistant uninformed does not provide one."
+       },
+       {
+        "id": "m2",
+        "description": "Generalizability depends on how the sample was selected from the population, not on what the assistant knew."
+       },
+       {
+        "id": "m3",
+        "description": "Group size was set by randomly assigning 25 students to each condition, not by keeping the assistant uninformed."
+       }
+      ],
+      "verification": {
+       "independent_path": "authored from the CED required content (essential knowledge 4.2); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+       "method": "authored+blind-solver+panel"
+      },
+      "judgment_demand": [
+       "apply the concept to the scenario"
+      ]
+     }
+    },
+    {
+     "archetype": "pss_u4_dissonance_pay_q3",
+     "topic": "4.2",
+     "skill": "3.C",
+     "stem": "Which conclusion is best supported by the table?",
+     "options": [
+      {
+       "text": "On average, students paid $2 reported more agreement with the rule than students paid $40.",
+       "why": "The mean rating was 5.8 in the $2 condition and 3.2 in the $40 condition.",
+       "value": null
+      },
+      {
+       "text": "The ratings varied so differently between the conditions that the means cannot be compared.",
+       "why": "The standard deviations, 1.6 and 1.5, are similar, so the spread does not prevent a comparison of the means.",
+       "value": null
+      },
+      {
+       "text": "The $40 payment moved most of those students from disagreement to agreement.",
+       "why": "The $40 mean stayed below the scale midpoint, which does not show that most of those students moved to agreement.",
+       "value": null
+      },
+      {
+       "text": "On average, students in both conditions agreed with the rule more than they disagreed with it.",
+       "why": "The mean of 3.2 in the $40 condition is below the scale midpoint of 5, which reflects disagreement.",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is On average, students paid $2 reported more agreement with the rule than students paid $40.. The mean rating was 5.8 in the $2 condition and 3.2 in the $40 condition.\nThe ratings varied so differently between the conditions that the means cannot be compared. is incorrect: The standard deviations, 1.6 and 1.5, are similar, so the spread does not prevent a comparison of the means.\nThe $40 payment moved most of those students from disagreement to agreement. is incorrect: The $40 mean stayed below the scale midpoint, which does not show that most of those students moved to agreement.\nOn average, students in both conditions agreed with the rule more than they disagreed with it. is incorrect: The mean of 3.2 in the $40 condition is below the scale midpoint of 5, which reflects disagreement.",
+     "est_seconds": 65,
+     "blueprint": {
+      "id": "pss_u4_dissonance_pay_q3",
+      "subject": "ap_psychology",
+      "kind": "mc",
+      "concept": "attitude change after a paid counter-attitudinal message; blinded rating collection",
+      "topic": "4.2",
+      "skill": "3.C",
+      "student_thinking": [
+       "Identify what the scenario or question is asking about: attitude change after a paid counter-attitudinal message; blinded rating collection",
+       "Match the defining feature in the stem against each option and reject the near-miss concepts"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "na",
+      "key_conditions": [
+       {
+        "condition": "the stem contains the defining feature of exactly one option",
+        "evidence": "stem wording"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "The standard deviations, 1.6 and 1.5, are similar, so the spread does not prevent a comparison of the means."
+       },
+       {
+        "id": "m2",
+        "description": "The $40 mean stayed below the scale midpoint, which does not show that most of those students moved to agreement."
+       },
+       {
+        "id": "m3",
+        "description": "The mean of 3.2 in the $40 condition is below the scale midpoint of 5, which reflects disagreement."
+       }
+      ],
+      "verification": {
+       "independent_path": "authored from the CED required content (essential knowledge 4.2); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+       "method": "authored+blind-solver+panel"
+      },
+      "judgment_demand": [
+       "apply the concept to the scenario"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 185,
+   "facts": [
+    "ek=4.2"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "pss_u4_dissonance_pay_q1",
+   "facts": [
+    "ek=4.2"
+   ],
+   "seed": 19100
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Cognitive dissonance in 4.2; applies a named concept to a scenario (1.A)."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Unique defensible key; no other option fits the scenario."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table is complete and consistent with the stem; wording is clear."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Distinct plausible distractors; each wrong option is explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 55 seconds; no calculation; four options."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Sound dissonance application item with a unique key, a complete table and well-explained distractors. It passes all five criteria."
+   },
+   {
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The key is correct, since blinding the data collector prevents experimenter expectancy from affecting how ratings are taken. The distractors address distinct misconceptions (debriefing, generalizability, group size) and are clearly wrong. The scenario fits 4.2, and the question itself tests the design element in skill 2.B. The table is not needed to answer, a minor flaw that does not break the item.",
+    "scope_skill": {
+     "pass": true,
+     "notes": "The scenario is dissonance/attitude change (4.2) and the question tests blinding as a design element (2.B)."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "The unique defensible answer is D. The solver agreed."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table is complete and consistent but not needed for the question."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each wrong option maps to a distinct misconception and the explanation covers all of them."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 65 seconds, with no calculation."
+    }
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Dissonance/insufficient justification scenario fits 4.2; reading the table to pick the supported conclusion fits 3.C."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "A is uniquely correct; B, C and D are each clearly unsupported by the table."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table is complete: n, means and SDs for both conditions, and the scale anchors are in the stem."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Distractors encode distinct misconceptions (SD misreading, overreading change, midpoint error); each wrong option is explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 65 seconds, short table, no calculation."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Sound item with a unique key, a complete table, and plausible distractors; it passes all five criteria."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "This is a single-concept application. The scenario is the classic insufficient-justification paradigm (counter-attitudinal behavior with small vs. large payment), and the table only confirms the direction of the result. Students must map it to cognitive dissonance reduction. The distractors are clearly distinct: central route, foot-in-the-door, and fundamental attribution error. The only discrimination is mild, since the central route involves persuasion but not self-persuasion from behavior. The scenario is unambiguous, the arithmetic is nil, and the reading is moderate. The table is a simple two-row table that needs no calculation.",
+    "reading_load": "medium",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 50
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "The item asks for one recall-and-apply step: recognizing that a data collector blind to condition prevents experimenter expectancy or bias. The distractors name unrelated design features (deception and debriefing, generalizability, equal group size) and are clearly distinguishable. The table is context only and does not need to be interpreted. There is no computation, the concept is in scope for 4.2 and skill 2.B, and the scenario is unambiguous.",
+    "reading_load": "medium",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must read a two-row table, compare means, judge whether SDs are comparable, and use the scale midpoint (5) to evaluate the distractors. The cognitive dissonance (insufficient justification) context supports the result but the correct answer rests on table interpretation. Distractors are clearly wrong on inspection (similar SDs, $40 mean below midpoint, no pre-test baseline). It is a typical AP data-interpretation item, more than simple recall but without heavy computation or reading.",
+    "reading_load": "medium",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 75
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_psychology-m02-k0",
+  "cellId": "ap_psychology-m02",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "5.4",
+  "unitCode": "5",
+  "skillPrimary": "1.A",
+  "structure": "shared_stimulus_set",
+  "calculator": "na",
+  "archetype": "pss_u5_checking_case_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_stimulus_expression; criterion_failed_exam_suitability; reference_pattern_mismatch; set_item_1:criterion_failed_stimulus_expression; set_item_1:criterion_failed_exam_suitability; set_item_1:reference_pattern_mismatch",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The item asks students to match a clear symptom description (repetitive checking, recognized as unnecessary, anxiety when skipped, functional impairment) to one disorder category. This is a single-concept application with four distractors that are clearly distinct. The stem includes a table, but it is not needed to answer the question (it only shows decreasing checking time across treatment), so there is no real representation change. Reading load is light, there is no calculation, and the scenario is unambiguous. Generalized anxiety disorder is a mild near-miss because it also involves anxiety, but the repetitive ritual behavior points to OCD.",
+  "payload": {
+   "archetype": "pss_u5_checking_case",
+   "topic": "5.4",
+   "skill": "1.A",
+   "calculator": "na",
+   "set_intro": "A 24-year-old graduate student sought help because she could not leave her apartment without checking the stove and the door lock over and over. She knew the checks were unnecessary, but skipping them made her intensely anxious, and the routine made her late to class most mornings. A clinician asked her to record the total minutes she spent checking on a typical day and then worked with her in weekly sessions. The table shows her self-recorded daily checking time at three points.",
+   "stimulus": {
+    "kind": "table",
+    "description": "Self-recorded daily time spent checking",
+    "data": {
+     "columns": [
+      "Point in treatment",
+      "Minutes per day spent checking"
+     ],
+     "rows": [
+      [
+       "Before treatment",
+       "180"
+      ],
+      [
+       "Week 4",
+       "95"
+      ],
+      [
+       "Week 8",
+       "40"
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "pss_u5_checking_case_q1",
+     "topic": "5.4",
+     "skill": "1.A",
+     "stem": "Which disorder best fits the student's symptoms?",
+     "options": [
+      {
+       "text": "Obsessive-compulsive disorder",
+       "why": "Repeated checking performed to relieve intense anxiety, even though the person recognizes it as unnecessary, is characteristic of obsessive-compulsive disorder.",
+       "value": null
+      },
+      {
+       "text": "Panic disorder",
+       "why": "That disorder involves sudden episodes of intense fear with physical symptoms, not a daily routine of checking.",
+       "value": null
+      },
+      {
+       "text": "Major depressive disorder",
+       "why": "That disorder centers on persistent low mood or loss of interest, which the description does not mention.",
+       "value": null
+      },
+      {
+       "text": "Generalized anxiety disorder",
+       "why": "That disorder involves persistent, hard-to-control worry about many topics rather than a repeated ritual performed to relieve anxiety.",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is Obsessive-compulsive disorder. Repeated checking performed to relieve intense anxiety, even though the person recognizes it as unnecessary, is characteristic of obsessive-compulsive disorder.\nPanic disorder is incorrect: That disorder involves sudden episodes of intense fear with physical symptoms, not a daily routine of checking.\nMajor depressive disorder is incorrect: That disorder centers on persistent low mood or loss of interest, which the description does not mention.\nGeneralized anxiety disorder is incorrect: That disorder involves persistent, hard-to-control worry about many topics rather than a repeated ritual performed to relieve anxiety.",
+     "est_seconds": 55,
+     "blueprint": {
+      "id": "pss_u5_checking_case_q1",
+      "subject": "ap_psychology",
+      "kind": "mc",
+      "concept": "compulsive checking case: disorder category, exposure-based treatment, single-case record",
+      "topic": "5.4",
+      "skill": "1.A",
+      "student_thinking": [
+       "Identify what the scenario or question is asking about: compulsive checking case: disorder category, exposure-based treatment, single-case record",
+       "Match the defining feature in the stem against each option and reject the near-miss concepts"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "na",
+      "key_conditions": [
+       {
+        "condition": "the stem contains the defining feature of exactly one option",
+        "evidence": "stem wording"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "That disorder involves sudden episodes of intense fear with physical symptoms, not a daily routine of checking."
+       },
+       {
+        "id": "m2",
+        "description": "That disorder centers on persistent low mood or loss of interest, which the description does not mention."
+       },
+       {
+        "id": "m3",
+        "description": "That disorder involves persistent, hard-to-control worry about many topics rather than a repeated ritual performed to relieve anxiety."
+       }
+      ],
+      "verification": {
+       "independent_path": "authored from the CED required content (essential knowledge 5.4); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+       "method": "authored+blind-solver+panel"
+      },
+      "judgment_demand": [
+       "apply the concept to the scenario"
+      ]
+     }
+    },
+    {
+     "archetype": "pss_u5_checking_case_q2",
+     "topic": "5.5",
+     "skill": "1.A",
+     "stem": "In one session, the clinician had her stand near the stove, deliberately not check it, and stay with her anxiety until it faded. This approach is best described as",
+     "options": [
+      {
+       "text": "Free association to uncover unconscious conflicts",
+       "why": "Free association is a psychodynamic technique for exploring unconscious material and does not involve confronting a feared situation.",
+       "value": null
+      },
+      {
+       "text": "Exposure with response prevention",
+       "why": "Facing a feared situation while resisting the usual ritual is a behavioral treatment that lets the anxiety decline without the checking.",
+       "value": null
+      },
+      {
+       "text": "Person-centered therapy with unconditional positive regard",
+       "why": "Person-centered therapy relies on an accepting listener rather than on deliberately facing a feared situation.",
+       "value": null
+      },
+      {
+       "text": "Electroconvulsive therapy for severe symptoms",
+       "why": "Electroconvulsive therapy is a biomedical treatment, and the clinician used no medical procedure in this session.",
+       "value": null
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is Exposure with response prevention. Facing a feared situation while resisting the usual ritual is a behavioral treatment that lets the anxiety decline without the checking.\nFree association to uncover unconscious conflicts is incorrect: Free association is a psychodynamic technique for exploring unconscious material and does not involve confronting a feared situation.\nPerson-centered therapy with unconditional positive regard is incorrect: Person-centered therapy relies on an accepting listener rather than on deliberately facing a feared situation.\nElectroconvulsive therapy for severe symptoms is incorrect: Electroconvulsive therapy is a biomedical treatment, and the clinician used no medical procedure in this session.",
+     "est_seconds": 60,
+     "blueprint": {
+      "id": "pss_u5_checking_case_q2",
+      "subject": "ap_psychology",
+      "kind": "mc",
+      "concept": "compulsive checking case: disorder category, exposure-based treatment, single-case record",
+      "topic": "5.5",
+      "skill": "1.A",
+      "student_thinking": [
+       "Identify what the scenario or question is asking about: compulsive checking case: disorder category, exposure-based treatment, single-case record",
+       "Match the defining feature in the stem against each option and reject the near-miss concepts"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "na",
+      "key_conditions": [
+       {
+        "condition": "the stem contains the defining feature of exactly one option",
+        "evidence": "stem wording"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Free association is a psychodynamic technique for exploring unconscious material and does not involve confronting a feared situation."
+       },
+       {
+        "id": "m2",
+        "description": "Person-centered therapy relies on an accepting listener rather than on deliberately facing a feared situation."
+       },
+       {
+        "id": "m3",
+        "description": "Electroconvulsive therapy is a biomedical treatment, and the clinician used no medical procedure in this session."
+       }
+      ],
+      "verification": {
+       "independent_path": "authored from the CED required content (essential knowledge 5.4); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+       "method": "authored+blind-solver+panel"
+      },
+      "judgment_demand": [
+       "apply the concept to the scenario"
+      ]
+     }
+    },
+    {
+     "archetype": "pss_u5_checking_case_q3",
+     "topic": "5.5",
+     "skill": "3.C",
+     "stem": "Which statement is best supported by the table?",
+     "options": [
+      {
+       "text": "Her checking time declined across the weeks, but one person's record cannot show why.",
+       "why": "Each recorded value is lower than the one before it, and a single self-reported case cannot establish what caused the decline.",
+       "value": null
+      },
+      {
+       "text": "Her recorded checking time dropped by more than half between the start of treatment and week 4.",
+       "why": "A drop from 180 to 95 minutes is a decrease of 85 minutes, which is less than half of 180.",
+       "value": null
+      },
+      {
+       "text": "Her recorded checking time rose briefly after treatment began and then fell again by week 8.",
+       "why": "The table shows no rise; each recorded value is lower than the value before it.",
+       "value": null
+      },
+      {
+       "text": "These results demonstrate that the treatment reduces checking for most people with the disorder.",
+       "why": "A single self-reported case cannot show how a treatment works for most people with a disorder.",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is Her checking time declined across the weeks, but one person's record cannot show why.. Each recorded value is lower than the one before it, and a single self-reported case cannot establish what caused the decline.\nHer recorded checking time dropped by more than half between the start of treatment and week 4. is incorrect: A drop from 180 to 95 minutes is a decrease of 85 minutes, which is less than half of 180.\nHer recorded checking time rose briefly after treatment began and then fell again by week 8. is incorrect: The table shows no rise; each recorded value is lower than the value before it.\nThese results demonstrate that the treatment reduces checking for most people with the disorder. is incorrect: A single self-reported case cannot show how a treatment works for most people with a disorder.",
+     "est_seconds": 70,
+     "blueprint": {
+      "id": "pss_u5_checking_case_q3",
+      "subject": "ap_psychology",
+      "kind": "mc",
+      "concept": "compulsive checking case: disorder category, exposure-based treatment, single-case record",
+      "topic": "5.5",
+      "skill": "3.C",
+      "student_thinking": [
+       "Identify what the scenario or question is asking about: compulsive checking case: disorder category, exposure-based treatment, single-case record",
+       "Match the defining feature in the stem against each option and reject the near-miss concepts"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "na",
+      "key_conditions": [
+       {
+        "condition": "the stem contains the defining feature of exactly one option",
+        "evidence": "stem wording"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "A drop from 180 to 95 minutes is a decrease of 85 minutes, which is less than half of 180."
+       },
+       {
+        "id": "m2",
+        "description": "The table shows no rise; each recorded value is lower than the value before it."
+       },
+       {
+        "id": "m3",
+        "description": "A single self-reported case cannot show how a treatment works for most people with a disorder."
+       }
+      ],
+      "verification": {
+       "independent_path": "authored from the CED required content (essential knowledge 5.4); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+       "method": "authored+blind-solver+panel"
+      },
+      "judgment_demand": [
+       "apply the concept to the scenario"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 185,
+   "facts": [
+    "ek=5.4"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "pss_u5_checking_case_q1",
+   "facts": [
+    "ek=5.4"
+   ],
+   "seed": 19100
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "The stem carries extra reading load from the decorative table and treatment narrative. This distracts from the single concept being tested, and the item is too easy because the key is a textbook-obvious match. The stem reads like a template built around treatment-record content that the question does not ask about.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": false,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": false,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": false,
+    "resembles_known_exam_item": false,
+    "summary": "The key is correct and in scope. The item fails because the table and treatment details are irrelevant to the question asked, which adds reading load and leaves a stimulus that is not needed."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "OCD checking case; apply ERP treatment concept, fits 5.5 and 1.A."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "ERP is uniquely correct; the other options clearly do not fit the described session."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table is complete and consistent with the stem; it is decorative but harmless."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Distractors come from psychodynamic, humanistic and biomedical approaches; each wrong option is explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 60 seconds, no calculator, typical AP load."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Sound concept-application item with a unique key (exposure with response prevention). It passes all five criteria."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Table reading plus recognizing the limits of a single-case record; fits 3.C in an OCD treatment context. The 'inferential' aspect is modest but acceptable."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "A is uniquely correct. B is false since 85 < 90. C is false because the values fall monotonically. D overgeneralizes from one case."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table is complete with clear columns and rows; wording is clear."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Distractors encode distinct misreadings (arithmetic, misreading the trend, overgeneralization); each is explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 70 seconds, no calculator, light arithmetic (85 vs 90). Key is slightly longer than the other options, but not a major giveaway."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Sound item: the key is unique and correct, the distractors are distinct and clearly wrong, and the stimulus is complete. Passes all criteria."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "The item asks students to match a clear symptom description (repetitive checking, recognized as unnecessary, anxiety when skipped, functional impairment) to one disorder category. This is a single-concept application with four distractors that are clearly distinct. The stem includes a table, but it is not needed to answer the question (it only shows decreasing checking time across treatment), so there is no real representation change. Reading load is light, there is no calculation, and the scenario is unambiguous. Generalized anxiety disorder is a mild near-miss because it also involves anxiety, but the repetitive ritual behavior points to OCD.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 1,
+    "representation_changes": 0,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 40
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept application: match a described technique (deliberately not checking and staying with the anxiety until it fades) to exposure with response prevention. The distractors (free association, person-centered therapy, ECT) are clearly different therapies, so there is no near-miss ambiguity. The table is supplementary context and is not needed to answer the question. The scenario describes OCD-type symptoms in Topic 5.4 scope without asking for a diagnosis. The item involves one reasoning step, no calculation, and short reading.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 1,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student reads a 3-row table, checks each option against the data (B requires a quick estimate that 180 to 95 is under a 50% drop; C is contradicted by the monotonic decline), and recognizes that a single self-recorded case cannot support causal or generalized claims (A vs D). This is the allowed lever 'read a table and choose the supported conclusion' with a light evaluation of study limitations. Short stem, clear distractors, no obscure terminology, no ambiguity between defensible answers. Moderate depth appropriate for a full mock.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   }
+  ]
+ }
+]

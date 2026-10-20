@@ -14,8 +14,8 @@ vi.mock("@/app/components/public/PublicShell", () => ({
 
 describe("legal pages", () => {
   it("version and last-updated date are in step", () => {
-    expect(STUDENT_TERMS_VERSION).toBe("2026-10-06-v2");
-    expect(LEGAL_LAST_UPDATED).toBe("October 6, 2026");
+    expect(STUDENT_TERMS_VERSION).toBe("2026-10-19-v1");
+    expect(LEGAL_LAST_UPDATED).toBe("October 19, 2026");
   });
 
   it.each([
@@ -25,7 +25,7 @@ describe("legal pages", () => {
     const Page = await load();
     render(await Page());
     expect(document.body.textContent).not.toMatch(/pending legal review/i);
-    expect(screen.getByText(/Last updated: October 6, 2026/)).toBeTruthy();
+    expect(screen.getByText(/Last updated: October 19, 2026/)).toBeTruthy();
     expect(document.body.textContent).toContain(phrase);
     const links = [...document.querySelectorAll("nav a")].map((a) => a.getAttribute("href")!.slice(1));
     expect(links.length).toBeGreaterThan(8);

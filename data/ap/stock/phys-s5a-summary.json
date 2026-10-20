@@ -1,0 +1,82 @@
+{
+ "runs": [
+  "phys-s5n-mc"
+ ],
+ "rows": 144,
+ "passed": 99,
+ "rejected": 45,
+ "passRate": 0.688,
+ "singles": {
+  "candidates": 144
+ },
+ "unitsPassed": {
+  "1": 12,
+  "2": 26,
+  "3": 15,
+  "4": 9,
+  "5": 4,
+  "6": 8,
+  "7": 11,
+  "8": 14
+ },
+ "figPassed": {
+  "none": 99
+ },
+ "figAll": {
+  "none": 144
+ },
+ "figPassRate": {
+  "none": "99/144"
+ },
+ "renderTypesPassed": {
+  "none": 87,
+  "ap_table": 12
+ },
+ "archetypesPassed": {
+  "ph_claim_relative_motion": 3,
+  "ph_claim_vt_area": 3,
+  "ph_claim_ramps_speed": 3,
+  "ph_claim_ke_stopping": 3,
+  "ph_claim_airbag_force": 1,
+  "ph_claim_spring_launch": 3,
+  "ph_evid_friction_data": 3,
+  "ph_evid_spring_data": 3,
+  "ph_sym_wheel_pulley": 1,
+  "ph_sym_pressure_depth": 1,
+  "ph_sym_continuity_pipe": 2,
+  "ph_sym_bernoulli_diff": 2,
+  "ph_sym_apparent_weight": 1,
+  "ph_sym_rolling_accel": 2,
+  "ph_pred_spring_period": 3,
+  "ph_pred_collapse_spin": 3,
+  "ph_claim_recoil_speed": 1,
+  "ph_claim_bounce_impulse": 2,
+  "ph_claim_incline_normal": 3,
+  "ph_claim_torque_door": 2,
+  "ph_claim_satellite_speed": 3,
+  "ph_claim_continuity_speed": 3,
+  "ph_claim_shm_mass": 3,
+  "ph_evid_ke_speed_data": 3,
+  "ph_evid_period_mass_data": 3,
+  "ph_sym_disk_rim_force": 1,
+  "ph_sym_spring_added_mass": 1,
+  "ph_sym_slide_stop_speed": 3,
+  "ph_sym_kinematics_vf": 2,
+  "ph_pred_pendulum_planet": 1,
+  "ph_pred_incline_angle": 3,
+  "ph_rank_normal_force": 2,
+  "ph_rank_friction_force": 3,
+  "ph_rank_incline_accel": 3,
+  "ph_rank_momentum_change": 2,
+  "ph_sym_projectile_range": 1,
+  "ph_sym_free_fall_time": 3,
+  "ph_sym_float_fraction": 2,
+  "ph_sym_torricelli": 3,
+  "ph_pred_collision_stick": 3,
+  "ph_claim_atwood_accel": 3,
+  "ph_claim_friction_area": 3
+ },
+ "costUsd": {
+  "phys-s5n-mc": 4.5455
+ }
+}

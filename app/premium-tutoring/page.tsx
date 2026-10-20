@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
+import { OG_IMAGES } from "@/lib/site-url";
 import { CtaButton, PageHero, Prose, PublicPage } from "@/app/components/public/PublicShell";
 import { EXPERT } from "@/lib/landing/copy";
-import { resolveLandingDestinations } from "@/lib/landing/cta";
-import { loadLandingViewer } from "@/lib/landing/viewer";
+import { loadPublicDest } from "@/lib/landing/public-dest";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/premium-tutoring" },
   title: "Premium Tutoring & Educational Consulting — ALTON",
   description: "Personalized 1:1 online tutoring and educational consulting from ALTON, available when you need more personal support.",
-  openGraph: { title: "Premium Tutoring & Educational Consulting — ALTON", description: "Personalized 1:1 online tutoring and educational consulting from ALTON, available when you need more personal support." },
+  openGraph: { images: OG_IMAGES, title: "Premium Tutoring & Educational Consulting — ALTON", description: "Personalized 1:1 online tutoring and educational consulting from ALTON, available when you need more personal support." },
 };
 
 export default async function PremiumTutoringPage() {
-  const dest = resolveLandingDestinations(await loadLandingViewer());
+  const dest = await loadPublicDest();
   return (
     <PublicPage dest={dest}>
       <PageHero eyebrow="PREMIUM TUTORING" title="Expert support when you need it" intro={EXPERT.body} />

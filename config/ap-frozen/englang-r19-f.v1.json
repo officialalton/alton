@@ -1,0 +1,94 @@
+{
+ "version": "v1-englang-r19-f",
+ "run": "englang-r19-f",
+ "subject": "ap_english_language",
+ "mode": "frq",
+ "capUsd": 9,
+ "hardStopCumulativeUsd": 640,
+ "myTotalCapUsd": 9999,
+ "syncStages": [
+  "frq-gen"
+ ],
+ "stages": [
+  "frq-gen",
+  "frq-samples",
+  "frq-grade",
+  "frq-finalize"
+ ],
+ "frqPlan": [
+  {
+   "id": "fc1",
+   "type": "synthesis",
+   "theme": "whether public libraries should lend tools, equipment and other practical objects as well as books",
+   "seed": 19401
+  },
+  {
+   "id": "fc2",
+   "type": "rhetorical_analysis",
+   "theme": "a retiring ferry captain's address to a river town about the patience that safe crossings require",
+   "seed": 19402
+  },
+  {
+   "id": "fc3",
+   "type": "argument",
+   "theme": "the extent to which schools should replace some homework with long-term community projects",
+   "seed": 19403
+  },
+  {
+   "id": "fd1",
+   "type": "synthesis",
+   "theme": "whether cities should plant fruit and nut trees on public land and invite residents to harvest them",
+   "seed": 19404
+  },
+  {
+   "id": "fd2",
+   "type": "rhetorical_analysis",
+   "theme": "a veteran stage manager's talk to a high school crew about the value of work the audience never sees",
+   "seed": 19405
+  },
+  {
+   "id": "fd3",
+   "type": "argument",
+   "theme": "the extent to which a neighborhood should share responsibility for maintaining its public sidewalks and steps",
+   "seed": 19406
+  }
+ ],
+ "models": {
+  "gen": "claude-fable-5-1",
+  "solvers": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5",
+   "claude-fable-5-1"
+  ],
+  "adversary": "claude-fable-5-1",
+  "judge": "claude-opus-5-5",
+  "review": "claude-sonnet-5-5",
+  "sampleHigh": "claude-opus-5-5",
+  "sampleLow": "claude-sonnet-5-5",
+  "graders": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5",
+   "claude-fable-5-1"
+  ]
+ },
+ "effort": "medium",
+ "genEffort": "low",
+ "gradeEffort": "low",
+ "sampleCands": 1,
+ "minKeyConfidence": 0.8,
+ "corpusExclude": [],
+ "generatorFiles": [
+  "lib/ap-generation/englang-gates.ts",
+  "lib/ap-generation/englang-frq.ts",
+  "lib/ap-generation/englang-plan.ts",
+  "lib/ap-generation/englang-prompts.ts",
+  "lib/ap-generation/english-text-stats.ts",
+  "lib/ap-generation/subjects/englang.ts",
+  "lib/ap-exam/elang-rules.ts",
+  "scripts/ap-generation/englang-pipeline.ts",
+  "scripts/mock-exam-generation/batch-lib.ts"
+ ],
+ "expected": {
+  "hash": "67c71facf94a"
+ }
+}

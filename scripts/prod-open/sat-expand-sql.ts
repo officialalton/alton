@@ -55,7 +55,7 @@ function buildImport(recs: Rec[]) {
     const keyErr = r.format === "mc" ? answerKeyError(g.options ?? null, g.correctIndex ?? null) : null;
     const gateErr = draftBankGateError({ examSystem: r.examSystem, usageScope: "mock_exam", passage: stimulus, question, options: g.options ?? null, statements: g.statements ?? null, explanationEn: g.explanationEn ?? null });
     const matErr = materialBlocker(judgeMaterialNeed({ examSystem: r.examSystem, skillCode: r.skill, text: composeProblemText(stimulus, question) }), g.figure ?? null);
-    if (keyErr ?? gateErr ?? matErr) { rejected.push(`${r.gid}: 게이트 거절`); continue; }
+    if (keyErr ?? gateErr ?? matErr) { rejected.push(`${r.gid}: 게이트 거절 ${String(keyErr ?? gateErr ?? matErr).slice(0, 120)}`); continue; }
     const fullText = composeProblemText(stimulus, question);
     const contentIssues = checkContent({ format: r.format, passage: fullText, options: g.options ?? null, correctIndex: g.correctIndex ?? null, explanation: g.explanation, answers: g.answers ?? null, statements: g.statements ?? null, skillCode: r.skill, figure: g.figure ?? null });
     const figureCheck = checkFigure(g.figure ?? null, fullText, g.options ?? null, g.correctIndex ?? null);
@@ -220,6 +220,103 @@ do $rb9$ declare v_n int; begin
 end $rb9$;
 `);
   console.log("09 sets:", specs9.map((s) => `${s.name}:${s.repointProblemIds.length}`).join(", "));
+  process.exit(0);
+}
+
+// ══ 12~15: SAT Practice Test 27~30 신규 4세트 — `SAT_30=1 npx tsx scripts/prod-open/sat-expand-sql.ts` (원격 쓰기 없음, 입력은 파일뿐) ══
+// 산출: 12_preflight · 12_import_NN(R&W 신규 임포트+공개) · 13_keywords · 14_new_sets_27_30(초안) · 15_verify(읽기) · 99_rollback_27_30.
+if (process.env.SAT_30) {
+  const D30 = "data/mock-exam-generation/sat-expand-20261019/final";
+  const adopted30 = rd<Rec[]>(`${D30}/adopted-all.json`);
+  const sets30 = rd<{ sets: { name: string; items: any[] }[] }>(`${D30}/new-sets-resolved.json`).sets;
+  mkdirSync(OUT, { recursive: true });
+  const files30: { name: string; bytes: number }[] = []; const rep30: Record<string, unknown> = {};
+  const em = (n: string, b: string) => { writeFileSync(path.join(OUT, n), b); files30.push({ name: n, bytes: b.length }); };
+  const imp30 = buildImport(adopted30);
+  rep30.import = { total: adopted30.length, ok: imp30.ok.length, rejected: imp30.rejected };
+  writeChunks("12_import", imp30.ok, "SAT R&W import (27-30)", files30);
+  const okG = new Set(imp30.ok.map((x) => x.gid as string));
+  const kw30: Record<string, string> = {};
+  for (const r of adopted30) { if (!okG.has(r.gid)) continue; const sk = resolveIntendedSkill({ quality: r.quality, skillCode: r.skill, planSkillFromFile: r.planSkill }).skill; const d = sk ? SAT_KEYWORD_BY_SKILL.get(sk) : undefined; if (d) kw30[r.gid] = d.skillCode; }
+  const names30 = sets30.map((s) => s.name); const gids30 = adopted30.map((r) => r.gid);
+  const nameArr30 = `array[${names30.map((n) => strLit(n)).join(",")}]`;
+  const gidArr30 = `array[${gids30.map((g) => strLit(g)).join(",")}]`;
+  em("12_preflight.sql", `${HEADER("preflight for 12-15 (SELECT only)")}
+select count(*) filter (where status = 'published' and archived_at is null) as live_published_sets, count(*) filter (where name = any (${nameArr30}) and archived_at is null and status <> 'archived') as already_27_30 from mock_exam_sets where name ~ '^SAT Practice Test [0-9]+$';
+select count(*) as already_imported_gids from problem_versions where quality->'mockExamGeneration'->>'gid' = any (${gidArr30});
+select count(*) as template_set_ok from mock_exam_sets where name = 'SAT Practice Test 13' and status = 'published' and archived_at is null;
+`);
+  em("13_keywords.sql", `${HEADER("link imported R&W problems to skill keywords (27-30)")}
+do $kw$
+declare v_map constant jsonb := ${lit(kw30)}; v_n int;
+begin
+  insert into problem_keywords (problem_id, keyword_id)
+  select distinct p.id, k.id from jsonb_each_text(v_map) m
+    join problem_versions pv on pv.quality->'mockExamGeneration'->>'gid' = m.key
+    join problems p on p.id = pv.problem_id and p.archived_at is null
+    join subject_keywords k on k.subject_id = p.subject_id and k.skill_code = m.value
+  on conflict (problem_id, keyword_id) do nothing;
+  get diagnostics v_n = row_count;
+  raise notice 'keyword links inserted: % (of % mapped gids)', v_n, (select count(*) from jsonb_object_keys(v_map));
+end
+$kw$;
+`);
+  em("14_new_sets_27_30.sql", `${HEADER("Practice Test 27~30 - draft sets (never published here)")}\n${sets30.map(newSetSql).join("\n")}`);
+  em("15_verify.sql", `${HEADER("verify after 12-15 (SELECT only)")}
+select s.name, s.status, s.readiness_status, (select count(*) from mock_exam_set_items i where i.exam_set_id = s.id) as items,
+  (select count(*) from mock_exam_set_items i where i.exam_set_id = s.id and i.section = 'rw') as rw, (select count(*) from mock_exam_set_items i where i.exam_set_id = s.id and i.section = 'math') as math,
+  (select count(*) from mock_exam_set_items i join mock_exam_set_items j on j.problem_id = i.problem_id and j.exam_set_id <> i.exam_set_id join mock_exam_sets o on o.id = j.exam_set_id and o.archived_at is null and o.status <> 'archived' where i.exam_set_id = s.id) as items_shared_with_other_live_sets
+from mock_exam_sets s where s.name = any (${nameArr30}) and s.archived_at is null and s.status <> 'archived' order by s.name;
+select count(*) as imported_27_30_problems, count(*) filter (where p.status = 'confirmed') as confirmed from problem_versions pv join problems p on p.id = pv.problem_id where pv.quality->'mockExamGeneration'->>'gid' = any (${gidArr30});
+select count(*) as published_sets_total from mock_exam_sets where status = 'published' and archived_at is null;
+`);
+  em("99_rollback_27_30.sql", `${HEADER("ROLLBACK of 12-15: deletes the 27-30 DRAFT sets (no attempts) and archives the imported 27-30 problems not used by any other live set. Published sets untouched.")}
+do $rb30$ declare v_n int; v_m int; begin
+  delete from mock_exam_sets s where s.status = 'draft' and s.name = any (${nameArr30}) and not exists (select 1 from mock_exam_attempts a where a.exam_set_id = s.id);
+  get diagnostics v_n = row_count;
+  update problems p set archived_at = now() where p.archived_at is null and p.id in (select pv.problem_id from problem_versions pv where pv.quality->'mockExamGeneration'->>'gid' = any (${gidArr30}))
+    and not exists (select 1 from mock_exam_set_items i join mock_exam_sets o on o.id = i.exam_set_id and o.archived_at is null and o.status <> 'archived' where i.problem_id = p.id);
+  get diagnostics v_m = row_count; raise notice 'draft sets removed: %, imported problems archived: %', v_n, v_m;
+end $rb30$;
+`);
+  writeFileSync(path.join(OUT, "manifest_30.json"), JSON.stringify({ files: files30, report: rep30 }, null, 1));
+  console.log(JSON.stringify({ files: files30, report: rep30 }));
+  process.exit(0);
+}
+
+// ══ 11: 'in terms of π' 보기 패치(E1019-P*) + 수동 패치(E1019-M*) 를 새 세트 버전 초안으로 반영(이미 초안이 있는 세트는 건너뜀 — 먼저 그 초안을 공개/폐기) — `SAT_11=1 npx tsx scripts/prod-open/sat-expand-sql.ts` (원격은 읽기 SELECT 만, 08 적용 후 기준) ══
+if (process.env.SAT_11) {
+  const M_IDS = [...rd<{ items: { problemId: string }[] }>("data/prod-open/sat-expand-sql/08_manual_patches.report.json").items, ...rd<{ items: { problemId: string }[] }>("data/prod-open/sat-expand-sql/10_pi_options_patches.report.json").items].map((i) => i.problemId);
+  const idsLit = uuidArr(M_IDS);
+  mkdirSync(OUT, { recursive: true });
+  const live9 = dbRows<{ name: string; problem_ids: string[] }>(`select s.name, array_agg(i.problem_id) as problem_ids from mock_exam_sets s join mock_exam_set_items i on i.exam_set_id = s.id join problems p on p.id = i.problem_id where s.status = 'published' and s.archived_at is null and s.name ~ '^SAT Practice Test [0-9]+$' and i.problem_id = any (${idsLit}) group by s.name`);
+  const specs9: OldSpec[] = live9.map((s) => ({ name: s.name, repointProblemIds: s.problem_ids, slots: [] })).sort((a, b) => Number(a.name.match(/\d+/)![0]) - Number(b.name.match(/\d+/)![0]));
+  const names9 = specs9.map((s) => s.name);
+  const H9 = (w: string) => `-- ${w}\n-- generated by scripts/prod-open/sat-expand-sql.ts (SAT_11=1). Run: npx supabase db query --linked -f <this file>. Idempotent; drafts only (never published here); published sets/attempts untouched.\n`;
+  const nameArr = `array[${names9.map((n) => strLit(n)).join(",")}]`;
+  writeFileSync(path.join(OUT, "11_set_versions_pi.sql"), `${H9("new draft set versions pointing at the E1019-M*/P* patched problem versions(a set with an existing draft is skipped - publish/discard it first)")}\n${specs9.map(oldSetSql).join("\n")}`);
+  writeFileSync(path.join(OUT, "11_preflight.sql"), `${H9("preflight for 11 (SELECT only): 08 applied? sets with stale items / existing drafts")}
+select s.name, s.version_no, count(*) filter (where p.published_version_id is distinct from i.problem_version_id and i.problem_id = any (${idsLit})) as stale_manual_items,
+  (select count(*) from mock_exam_sets d where d.set_group_id = s.set_group_id and d.status = 'draft') as existing_drafts
+from mock_exam_sets s join mock_exam_set_items i on i.exam_set_id = s.id join problems p on p.id = i.problem_id
+where s.status = 'published' and s.archived_at is null and s.name = any (${nameArr}) group by s.name, s.version_no, s.set_group_id order by length(s.name), s.name;
+select count(*) as patched_08_versions from problems p join problem_versions pv on pv.id = p.published_version_id where p.id = any (${idsLit}) and pv.quality->'auditFix'->>'patch' like 'E1019-M%';
+`);
+  writeFileSync(path.join(OUT, "11_verify.sql"), `${H9("verify after 11 (SELECT only)")}
+select s.name, s.version_no, s.status, s.readiness_status, (select count(*) from mock_exam_set_items i where i.exam_set_id = s.id) as items,
+  (select count(*) from mock_exam_set_items i join problems p on p.id = i.problem_id where i.exam_set_id = s.id and i.problem_id = any (${idsLit}) and p.published_version_id = i.problem_version_id) as manual_items_on_new_version,
+  (select count(*) from mock_exam_set_items i where i.exam_set_id = s.id and i.problem_id = any (${idsLit})) as manual_items
+from mock_exam_sets s where s.status = 'draft' and s.archived_at is null and s.name = any (${nameArr}) order by length(s.name), s.name;
+select count(*) as published_sets_unchanged from mock_exam_sets where status = 'published' and archived_at is null;
+`);
+  writeFileSync(path.join(OUT, "99_set_versions_pi_rollback.sql"), `${H9("ROLLBACK of 11: removes only the draft set versions created for these sets (no attempts can reference a draft). Published sets untouched.")}
+do $rb11$ declare v_n int; begin
+  delete from mock_exam_sets s where s.status = 'draft' and s.name = any (${nameArr}) and not exists (select 1 from mock_exam_attempts a where a.exam_set_id = s.id)
+    and exists (select 1 from mock_exam_sets p where p.set_group_id = s.set_group_id and p.status = 'published' and p.version_no < s.version_no);
+  get diagnostics v_n = row_count; raise notice 'draft set versions removed: %', v_n;
+end $rb11$;
+`);
+  console.log("11 sets:", specs9.map((s) => `${s.name}:${s.repointProblemIds.length}`).join(", "));
   process.exit(0);
 }
 

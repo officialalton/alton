@@ -84,6 +84,13 @@ export const EL_THEMES = [
   "map-making and how maps persuade", "the decline and return of the pay phone as an art object", "noise pollution in public spaces", "translators as invisible authors", "the economics of free public parks",
   "mentorship between generations in skilled trades", "restoring a wetland near a suburb", "the ethics of zoos and wildlife sanctuaries", "tutoring programs run by teenagers", "preserving a night market's character during redevelopment",
   "learning to read data visualisations critically", "the first season of a school robotics team", "community radio in the streaming age", "how a seaside lighthouse became a classroom", "technology curfews at home and the family dinner table",
+  // 2026-10-19 EL3·EL4 추가 라운드: 기존 40개가 모두 쓰여 새 주제 30개를 더한다(위 주제·기존 FRQ 주제와 겹치지 않게).
+  "community pantries and the dignity of choosing one's own food", "why apprenticeships deserve the same respect as college degrees", "the history of the weather forecast and public trust in predictions", "amateur radio operators as emergency communicators", "how translation apps change the experience of learning a second language",
+  "the design of crosswalks and the safety of children", "orchestral conductors and the problem of leadership without sound", "public swimming pools as shared civic spaces", "rural broadband and the homework gap", "the role of silence in a crowded city",
+  "restoring heirloom clocks and the patience of repair work", "lost-and-found offices and communal honesty", "school gardens and the science of composting", "how long-distance walking trails are built and maintained by volunteers", "the ethics of crowdfunding for medical bills",
+  "typefaces and the trust we place in printed words", "the slow disappearance of handwritten letters from family history", "teaching financial literacy before graduation", "why some towns ban fireworks while others protect the tradition", "the craft of the stage manager in a school theater",
+  "community college transfer pathways and the idea of a second chance", "the economics of the neighborhood hardware store", "memory and monuments: who decides what a town remembers", "game design as an introduction to systems thinking", "volunteer interpreters at a county clinic",
+  "book swaps as a response to shrinking school library budgets", "the quiet work of crossing guards and school custodians", "preserving a regional recipe when the ingredients disappear", "the argument for repairing rather than resurfacing old gym floors", "how a small observatory teaches patience to young visitors",
 ] as const;
 
 export const EL_SOURCE_KINDS = ["text", "visual", "quantitative"] as const;

@@ -3,7 +3,7 @@
  "version": 1,
  "generatedBy": "lib/ap-exam/tex-corrections-gen.test.ts (AP_TEX_CORR_WRITE=1)",
  "note": "변환 전 해설(explanation_en)의 sha256 에 묶인 교정 문안. 적용은 관리자 'AP 설명 수정 새 버전'(미리보기→확인→실행)만. before 해시가 DB 와 다르면 건드리지 않는다.",
- "count": 305,
+ "count": 321,
  "entries": [
   {
    "candidateKey": "bc-topup-final:ap_calculus_bc-f01-k0",
@@ -454,6 +454,134 @@
    "beforeSha256": "7f09c0c00e876722e761627102bfce993a508fdab0c94ea3bf45171d03f62754",
    "afterSha256": "52ae6cf28083a5676950267ecd43473a6aef0ba8b973fbd479d6c6788e9332fd",
    "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(A) [3 pt] Use a photogate (or motion sensor) to measure the initial speed and a meterstick to measure the sliding distance from the starting point to where the block stops; give the same block different initial speeds on the same table surface, and repeat each trial and average the distances.\n   - 1 pt: Identifies a way to measure the initial speed (photogate or motion sensor, or distance and time over a short interval) and a way to measure the stopping distance (meterstick or tape)\n   - 1 pt: Changes only the initial speed while using the same block and the same table surface (both conditions are needed)\n   - 1 pt: Reduces the uncertainty in the distance by repeating each trial and averaging, or by marking the stopping point with a method that reduces the reading error (either earns the point)\n(B) [1 pt] From $\\mu mgd=\\tfrac12mv_0^2$ we get $d=\\dfrac{1}{2\\mu g}v_0^2$: plot $d$ on the vertical axis against $v_0^2$ on the horizontal axis; the slope is $1/(2\\mu g)$.\n   - 1 pt: Identifies $d$ (vertical) versus $v_0^2$ (horizontal)\n(C) [3 pt] Points $(v_0^2,d)$: (1, 0.205), (2.25, 0.464), (4, 0.828), (6.25, 1.259), (9, 1.846) with a best-fit line of slope about $0.204\\text{ s}^2/\\text{m}$.\n   - 1 pt: Axes are labeled with quantities and units and the scale fills most of the grid\n   - 1 pt: Plots the five points $(v_0^2, d)$ accurately\n   - 1 pt: Draws a straight best-fit line through the trend of the points\n(D) [3 pt] Slope $\\approx 0.204\\text{ s}^2/\\text{m}$, so $\\mu=\\dfrac{1}{2g\\,\\text{slope}}\\approx 0.25$.\n   - 1 pt: Calculates the slope of the best-fit line using two points on the line (about 0.204 $s^2$/m; accept any value within 5 percent)\n   - 1 pt: Relates the slope to the friction coefficient: slope $=1/(2\\mu g)$\n   - 1 pt: Calculates $\\mu$ (about 0.25; accept any value within 8 percent); the coefficient has no units"
+  },
+  {
+   "candidateKey": "phys-s5n-mc:ap_physics_1-m29-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "bafd6d008b8a3138d5a23e97ca179eda947ade75b1b49c4010484ceccf3f0ba8",
+   "afterSha256": "4a41d4b6b341db759af31e1eb0d771555ef47da2946ba3a195f6e410fe6eefa7",
+   "after": "The correct answer is The quantity $T^2/m$ is nearly constant, about $1.97\\text{ s}^2\\text{/kg}$, so the data support $T$ proportional to $\\sqrt{m}$.. The values of $T^2/m$ range only from $1.95$ to $2$ $s^2$/kg, which is consistent with $T=2\\pi\\sqrt{m/k}$.\nThe product $Tm$ is nearly constant, so a larger mass gives a shorter period. is incorrect: Reads a decreasing quantity as an inverse relationship, but the period increases with the mass in the table.\nThe period does not depend on the mass, because the values of the period are all close to one another. is incorrect: Overlooks that the period increases from $0.442\\text{ s}$ to $1.716\\text{ s}$ as the mass increases.\nThe quantity $T/m$ is nearly constant, so the period is proportional to the mass. is incorrect: Tests the ratio $T/m$ for a direct proportion, but for these data it falls from $4.42$ to $1.14$ s/kg."
+  },
+  {
+   "candidateKey": "phys-s5n-mc:ap_physics_1-m29-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "8637daab2cb9713685329210907f4643175932fa987bac85b331a1eed3df0c42",
+   "afterSha256": "a5e13023413d25d4dea501ba404ade823f9235f48669319e88f37ca3b6abef57",
+   "after": "The correct answer is The quantity $T^2/m$ is nearly constant, about $0.49\\text{ s}^2\\text{/kg}$, so the data support $T$ proportional to $\\sqrt{m}$.. The values of $T^2/m$ range only from $0.487$ to $0.496$ $s^2$/kg, which is consistent with $T=2\\pi\\sqrt{m/k}$.\nThe product $Tm$ is nearly constant, so a larger mass gives a shorter period. is incorrect: Reads a decreasing quantity as an inverse relationship, but the period increases with the mass in the table.\nThe quantity $T/m$ is nearly constant, so the period is proportional to the mass. is incorrect: Tests the ratio $T/m$ for a direct proportion, but for these data it falls from $2.22$ to $0.699$ s/kg.\nThe period does not depend on the mass, because the values of the period are all close to one another. is incorrect: Overlooks that the period increases from $0.222\\text{ s}$ to $0.699\\text{ s}$ as the mass increases."
+  },
+  {
+   "candidateKey": "phys-s5n-mc:ap_physics_1-m29-k2",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "612923aab552bc484ef71b4f0b626f0570157257546d2d508be818c03c71ee4a",
+   "afterSha256": "4dbe8b42d2b4cace9436db98a759390ed51e07cac0289a552237175b17afe7de",
+   "after": "The correct answer is The quantity $T^2/m$ is nearly constant, about $0.991\\text{ s}^2\\text{/kg}$, so the data support $T$ proportional to $\\sqrt{m}$.. The values of $T^2/m$ range only from $0.972$ to $1$ $s^2$/kg, which is consistent with $T=2\\pi\\sqrt{m/k}$.\nThe quantity $T/m$ is nearly constant, so the period is proportional to the mass. is incorrect: Tests the ratio $T/m$ for a direct proportion, but for these data it falls from $2.21$ to $0.81$ s/kg.\nThe product $Tm$ is nearly constant, so a larger mass gives a shorter period. is incorrect: Reads a decreasing quantity as an inverse relationship, but the period increases with the mass in the table.\nThe period does not depend on the mass, because the values of the period are all close to one another. is incorrect: Overlooks that the period increases from $0.441\\text{ s}$ to $1.215\\text{ s}$ as the mass increases."
+  },
+  {
+   "candidateKey": "phys-s5n-mc:ap_physics_1-m38-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "7aeb3a7351e39d9fccc9fc0928dd2588fd4859a9aef384f207cf44c0f34e64a5",
+   "afterSha256": "284989f990b7286db5a302d46d779babd6cb3255dc51bdc2b280830db42abaa0",
+   "after": "The correct answer is D > B > C > A. The acceleration is $g(\\sin\\theta-\\mu\\cos\\theta)$, which does not depend on the mass; the values in m/$s^2$ are A: 2.35, B: 4.42, C: 3.25, D: 5.54, which ranks as D > B > C > A.\nD > B > A > C is incorrect: Ranks by the angle of the incline only, ignoring friction.\nC > A > D > B is incorrect: Ranks by the mass of the block, as if a heavier block accelerates more.\nC > B > D > A is incorrect: Ranks by the coefficient of friction in the reverse order, ignoring the angle."
+  },
+  {
+   "candidateKey": "phys-s5n-mc:ap_physics_1-m38-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "1e17a7aec87c08df855b579b28d68024eee535826f88ef3347c80a61864cc830",
+   "afterSha256": "1b66483a753c83ce189839327cf503f56fcf0e7454d7b04329d4a901b80ad78b",
+   "after": "The correct answer is B > C > A > D. The acceleration is $g(\\sin\\theta-\\mu\\cos\\theta)$, which does not depend on the mass; the values in m/$s^2$ are A: 2.81, B: 6.58, C: 4.02, D: 2.43, which ranks as B > C > A > D.\nA > B > D > C is incorrect: Ranks by the mass of the block, as if a heavier block accelerates more.\nB > A > D > C is incorrect: Ranks by the component of gravity along the incline, $mg\\sin\\theta$, without friction and mass cancelling.\nB > D > A > C is incorrect: Ranks by the coefficient of friction in the reverse order, ignoring the angle."
+  },
+  {
+   "candidateKey": "phys-s5n-mc:ap_physics_1-m38-k2",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "5c2810e9403e33cd29e579ef6ecbf7a776b5077a1f78018a3eb420ee147c4807",
+   "afterSha256": "353f5729692054f0736d7bb8d3d4b4e131ca6eabbf087e2637344f0e8ee26e3b",
+   "after": "The correct answer is D > B > A > C. The acceleration is $g(\\sin\\theta-\\mu\\cos\\theta)$, which does not depend on the mass; the values in m/$s^2$ are A: 4.05, B: 4.80, C: 2.81, D: 5.22, which ranks as D > B > A > C.\nA > B > C > D is incorrect: Ranks by the mass of the block, as if a heavier block accelerates more.\nB > D > A > C is incorrect: Ranks by the angle of the incline only, ignoring friction.\nD > A > C > B is incorrect: Ranks by the coefficient of friction in the reverse order, ignoring the angle."
+  },
+  {
+   "candidateKey": "phys-s5n2-mc:ap_physics_1-m04-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "7812001c9c7e3f1cc00180c1fd58f07f193936251372b01fc15b34193b82f29c",
+   "afterSha256": "d99af41a5c1c22d703090c166378c57da2018900d61498191efe831494192505",
+   "after": "The correct answer is A > D > B > C. With $L=I\\omega$ the angular momenta in kg $m^2$/s are A: 4.32, B: 0.267, C: 0.0960, D: 2.40, which ranks as A > D > B > C.\nD > A > B > C is incorrect: Ranks by the moment of inertia alone, ignoring the angular speed.\nD > A > C > B is incorrect: Ranks by the mass of the objects, as if a heavier object has more angular momentum.\nA > B > C > D is incorrect: Ranks by the angular speed alone, ignoring the moment of inertia."
+  },
+  {
+   "candidateKey": "phys-s5n2-mc:ap_physics_1-m04-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "925a080fd54698513576ac28cfe67f68a4eeb38539a35860f70e5c1a18daea27",
+   "afterSha256": "4e4a8d1cf5ff216e62c12e370f8537c227d1640e25b5735e517f456a41587986",
+   "after": "The correct answer is A > C > D > B. With $L=I\\omega$ the angular momenta in kg $m^2$/s are A: 1.92, B: 0.0320, C: 1.60, D: 0.720, which ranks as A > C > D > B.\nC > A > D > B is incorrect: Ranks by the rotational kinetic energy $\\tfrac12I\\omega^2$ instead of the angular momentum.\nD > C > A > B is incorrect: Ranks by the angular speed alone, ignoring the moment of inertia.\nA > D > B > C is incorrect: Ranks by the mass of the objects, as if a heavier object has more angular momentum."
+  },
+  {
+   "candidateKey": "phys-s5n2-mc:ap_physics_1-m04-k2",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "bd03299fb711e845109e8107518fe9f00f0cb26ebd816e50b4733c1ee942bc87",
+   "afterSha256": "db57cfcda02e18ee98d7dde4c320cd0c4d50a676acdd1db442cee15559dbee7a",
+   "after": "The correct answer is C > D > B > A. With $L=I\\omega$ the angular momenta in kg $m^2$/s are A: 0.120, B: 0.320, C: 3.84, D: 0.450, which ranks as C > D > B > A.\nC > D > A > B is incorrect: Ranks by the angular speed alone, ignoring the moment of inertia.\nC > B > D > A is incorrect: Ranks by the moment of inertia alone, ignoring the angular speed.\nB > C > A > D is incorrect: Ranks by the mass of the objects, as if a heavier object has more angular momentum."
+  },
+  {
+   "candidateKey": "phys-s5n2-mc:ap_physics_1-m05-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "03d26e721ed8befb4ead7d44e54713d74e45008eca54fc165684334211f17345",
+   "afterSha256": "abef3b7c7bf6fa9c242fa3fb16034eeef770ff6fed13af56b345c61889cf3b3d",
+   "after": "The correct answer is D > C > A > B. The moment of inertia is the sum of $mr^2$ over the particles; the values in kg $m^2$ are A: 0.400, B: 0.220, C: 0.620, D: 1.62, which ranks as D > C > A > B.\nD > A > C > B is incorrect: Ranks by the sum of the products of the mass and the distance, without squaring the distance.\nB > A > C > D is incorrect: Ranks in the reverse of the correct order.\nD > A > B > C is incorrect: Ranks by the total mass of the particles, ignoring their distances from the axis."
+  },
+  {
+   "candidateKey": "phys-s5n2-mc:ap_physics_1-m05-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "17e80cbcc05a48cb421c7f3f53ecfc658bb914eadba2aa100aef62ccf5e20c3c",
+   "afterSha256": "e3967843c9933d648a9504fa11f0741122f77aa425325fe43258b83287a893ac",
+   "after": "The correct answer is B > C > D > A. The moment of inertia is the sum of $mr^2$ over the particles; the values in kg $m^2$ are A: 0.400, B: 1.08, C: 0.800, D: 0.560, which ranks as B > C > D > A.\nD > B > C > A is incorrect: Ranks by the total mass of the particles, ignoring their distances from the axis.\nA > D > C > B is incorrect: Ranks in the reverse of the correct order.\nB > D > C > A is incorrect: Ranks by the sum of the products of the mass and the distance, without squaring the distance."
+  },
+  {
+   "candidateKey": "phys-s5n2-mc:ap_physics_1-m05-k2",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "451fbcbdd08a84d7b6caf90674cb65d3b918c8893f0e3a2b3e995b457f6af764",
+   "afterSha256": "05b8dc27b5bafe9101b08207d914a8c419e27ed017252e1686746a231dadfa6d",
+   "after": "The correct answer is A > B > C > D. The moment of inertia is the sum of $mr^2$ over the particles; the values in kg $m^2$ are A: 1.94, B: 0.960, C: 0.800, D: 0.340, which ranks as A > B > C > D.\nC > A > D > B is incorrect: Ranks by the total mass of the particles, ignoring their distances from the axis.\nD > C > B > A is incorrect: Ranks in the reverse of the correct order.\nA > C > B > D is incorrect: Ranks by the sum of the products of the mass and the distance, without squaring the distance."
+  },
+  {
+   "candidateKey": "phys-s5n2-mc:ap_physics_1-m06-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "31ceb2b4b8bfabdd0c74a45cd0325e6d1de009b0d524f81921fafd7b0cce9ce2",
+   "afterSha256": "d4b498597423f9cd14f6b79831253c0fb32e21abad0a94deb06e1c434a4d73bd",
+   "after": "The correct answer is B > C > A > D. The angular acceleration is $\\alpha=FR/I$; the values in rad/$s^2$ are A: 8.33, B: 60.0, C: 50.0, D: 4.00, which ranks as B > C > A > D.\nD > A > B > C is incorrect: Ranks by the moment of inertia, with the largest first.\nB > A > C > D is incorrect: Ranks by the force divided by the mass, as for a point mass, ignoring the radius and shape.\nA > B > C > D is incorrect: Ranks by the tangential force alone, ignoring the moment of inertia."
+  },
+  {
+   "candidateKey": "phys-s5n2-mc:ap_physics_1-m06-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "19348765e16cb2d1de42bcb0aade63db32e416e0b8015551ee4b0b35ee81c71a",
+   "afterSha256": "da0198018fbb08198e3bbea620f8244b0766fdcf7c7a9b8333846963955aece8",
+   "after": "The correct answer is A > B > D > C. The angular acceleration is $\\alpha=FR/I$; the values in rad/$s^2$ are A: 75.0, B: 26.7, C: 1.000, D: 12.5, which ranks as A > B > D > C.\nA > D > C > B is incorrect: Ranks by the torque alone, ignoring the moment of inertia.\nA > D > B > C is incorrect: Ranks by the tangential force alone, ignoring the moment of inertia.\nC > D > A > B is incorrect: Ranks by the moment of inertia, with the largest first."
+  },
+  {
+   "candidateKey": "phys-s5n2-mc:ap_physics_1-m06-k2",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "8bd7263f2ef5a7c7ad7ed8c249ba756e4db342c4bd71d1717af9224f9f2c137a",
+   "afterSha256": "850ab310243748d2d849a902483453618a5078ddc4061d35798e88b151ca1f9d",
+   "after": "The correct answer is D > A > C > B. The angular acceleration is $\\alpha=FR/I$; the values in rad/$s^2$ are A: 20.0, B: 5.00, C: 12.5, D: 53.3, which ranks as D > A > C > B.\nC > D > A > B is incorrect: Ranks by the tangential force alone, ignoring the moment of inertia.\nC > B > D > A is incorrect: Ranks by the moment of inertia, with the largest first.\nD > C > A > B is incorrect: Ranks by the force divided by the mass, as for a point mass, ignoring the radius and shape."
+  },
+  {
+   "candidateKey": "phys-s5n3-frq:ap_physics_1-f01-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "9f86034366846cb98db1a3f4f42aa0be69c884ef0d216ab1831d4604eeff48e4",
+   "afterSha256": "9722f59a643a275ef7f7a24ce3ffd9be5604cb7727dcab19dc6616ee0ab64611",
+   "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(A) [3 pt] Use a protractor (or measure the height of the raised end and the length of the track and find the angle from a trigonometric ratio) to set each angle of the track and a motion sensor to measure the acceleration; change only the angle with the same cart and track; reduce the uncertainty in the angle by measuring the height and the length with a meterstick and calculating the angle.\n   - 1 pt: Identifies a way to set and measure the angle and a way to measure the acceleration (motion sensor or a time and distance measurement)\n   - 1 pt: Changes only the angle while using the same cart and the same track (both conditions are needed)\n   - 1 pt: Reduces the uncertainty in the angle by calculating it from the height and the length measured with a meterstick, or by repeating the measurement and averaging (either earns the point)\n(B) [1 pt] For a frictionless incline $a=g\\sin\\theta$: plot $a$ on the vertical axis against $\\sin\\theta$ on the horizontal axis; the slope is $g$.\n   - 1 pt: Identifies $a$ (vertical) versus $\\sin\\theta$ (horizontal)\n(C) [3 pt] Points $(\\sin\\theta,a)$: (0.174, 1.690), (0.259, 2.495), (0.342, 3.299), (0.423, 4.149), (0.500, 4.838) with a best-fit line of slope about $9.74\\text{ m/s}^2$.\n   - 1 pt: Axes are labeled with quantities and units (sin theta has no units) and the scale fills most of the grid\n   - 1 pt: Plots the five points $(\\sin\\theta, a)$ accurately\n   - 1 pt: Draws a straight best-fit line through the trend of the points\n(D) [3 pt] The slope of the best-fit line is $g\\approx 9.7\\text{ m/s}^2$.\n   - 1 pt: Calculates the slope of the best-fit line using two points on the line (about 9.74 m/$s^2$; accept any value within 5 percent)\n   - 1 pt: Relates the slope to the gravitational field strength: slope $=g$\n   - 1 pt: States $g$ (about 9.7; accept any value within 8 percent) with units of meters per second squared or newtons per kilogram"
   },
   {
    "candidateKey": "run1:ap_biology-c004-k0",

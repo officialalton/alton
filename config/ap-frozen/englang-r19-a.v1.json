@@ -1,0 +1,73 @@
+{
+ "version": "v1-englang-r19-a",
+ "run": "englang-r19-a",
+ "subject": "ap_english_language",
+ "mode": "mc",
+ "capUsd": 6,
+ "hardStopCumulativeUsd": 640,
+ "myTotalCapUsd": 9999,
+ "syncStages": [
+  "gen"
+ ],
+ "stages": [
+  "gen",
+  "check",
+  "solve",
+  "adv",
+  "judge",
+  "finalize"
+ ],
+ "plan": {
+  "reading": {
+   "sets": 3,
+   "seed": 19201,
+   "startIndex": 40
+  },
+  "writing": {
+   "sets": 5,
+   "seed": 19202,
+   "startIndex": 40
+  }
+ },
+ "models": {
+  "gen": "claude-fable-5-1",
+  "solvers": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5",
+   "claude-fable-5-1"
+  ],
+  "adversary": "claude-fable-5-1",
+  "judge": "claude-opus-5-5",
+  "review": "claude-sonnet-5-5",
+  "sampleHigh": "claude-opus-5-5",
+  "sampleLow": "claude-sonnet-5-5",
+  "graders": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5",
+   "claude-fable-5-1"
+  ]
+ },
+ "genModels": {
+  "reading": "claude-fable-5-1",
+  "writing": "claude-opus-5-5"
+ },
+ "effort": "medium",
+ "genEffort": "low",
+ "minKeyConfidence": 0.8,
+ "corpusExclude": [],
+ "generatorFiles": [
+  "lib/ap-generation/englang-gates.ts",
+  "lib/ap-generation/englang-frq.ts",
+  "lib/ap-generation/englang-plan.ts",
+  "lib/ap-generation/englang-prompts.ts",
+  "lib/ap-generation/english-text-stats.ts",
+  "lib/ap-generation/subjects/englang.ts",
+  "lib/ap-exam/elang-rules.ts",
+  "scripts/ap-generation/englang-pipeline.ts",
+  "scripts/mock-exam-generation/batch-lib.ts"
+ ],
+ "expected": {
+  "hash": "4d467ce24c37"
+ },
+ "_note": "2026-10-19 EL3/EL4: new reading 3 + writing 5 bundles (ids r41.., w41..); extended to official sizes in a second run."
+}
