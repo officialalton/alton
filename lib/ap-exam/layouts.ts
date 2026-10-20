@@ -83,11 +83,15 @@ export const AP_SUBJECT_NAME: Record<string, string> = {
   ap_computer_science_principles: "AP Computer Science Principles", ap_european_history: "AP European History", ap_precalculus: "AP Precalculus",
 };
 
-/** 2026-10-20 추가 10과목 중 아직 공개 과목 페이지·/practice-tests 목록에 노출하지 않는 과목(세트 공개 전). 세트를 공개할 때 총괄이 이 목록에서 뺀다. */
-export const AP_PENDING_PUBLIC_SUBJECTS: readonly string[] = [
+/** 2026-10-20 추가 10과목(영구 목록). */
+export const AP_NEW_SUBJECTS: readonly string[] = [
   "ap_physics_2", "ap_physics_c_mechanics", "ap_physics_c_electricity_and_magnetism", "ap_environmental_science", "ap_us_government_and_politics",
   "ap_comparative_government_and_politics", "ap_human_geography", "ap_computer_science_principles", "ap_european_history", "ap_precalculus",
 ];
+/** 신규 과목 중 세트가 공개돼 공개 과목 페이지·/practice-tests 목록·sitemap·랜딩에 노출하는 과목. 과목의 첫 세트를 공개할 때 총괄이 여기에 한 줄 추가한다(그 밖의 코드 변경 없음). */
+export const AP_NEW_SUBJECTS_PUBLIC: readonly string[] = [];
+/** 아직 공개하지 않는 신규 과목(자동 계산: AP_NEW_SUBJECTS − AP_NEW_SUBJECTS_PUBLIC). */
+export const AP_PENDING_PUBLIC_SUBJECTS: readonly string[] = AP_NEW_SUBJECTS.filter((c) => !AP_NEW_SUBJECTS_PUBLIC.includes(c));
 export const isApPublicSubject = (code: string) => !AP_PENDING_PUBLIC_SUBJECTS.includes(code);
 
 /** 신규 10과목 FRQ(서술형) 유형 — 공식 CED 의 문항 유형 이름·배점. points=null 은 이 조사에서 공식 값을 확인하지 못한 항목이다(지어내지 않는다). */

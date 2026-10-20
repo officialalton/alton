@@ -1,0 +1,41 @@
+{
+ "runs": [
+  "physe-s"
+ ],
+ "rows": 12,
+ "passed": 6,
+ "rejected": 6,
+ "passRate": 0.5,
+ "singles": {
+  "candidates": 12
+ },
+ "unitsPassed": {
+  "10": 2,
+  "11": 2,
+  "12": 2
+ },
+ "figPassed": {
+  "none": 2,
+  "graph": 4
+ },
+ "figAll": {
+  "graph": 10,
+  "none": 2
+ },
+ "figPassRate": {
+  "graph": "4/10",
+  "none": "2/2"
+ },
+ "renderTypesPassed": {
+  "ap_table": 2,
+  "ap_graph:phys_line": 4
+ },
+ "archetypesPassed": {
+  "pes_rc_table_set_q1": 2,
+  "pes_cap_qv_graph_set_q1": 2,
+  "pes_wire_Br_graph_set_q1": 2
+ },
+ "costUsd": {
+  "physe-s": 0.8313
+ }
+}

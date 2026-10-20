@@ -1,0 +1,95 @@
+{
+ "runs": [
+  "physe-b"
+ ],
+ "rows": 124,
+ "passed": 89,
+ "rejected": 35,
+ "passRate": 0.718,
+ "singles": {
+  "candidates": 124
+ },
+ "unitsPassed": {
+  "8": 15,
+  "9": 8,
+  "10": 15,
+  "11": 21,
+  "12": 13,
+  "13": 17
+ },
+ "figPassed": {
+  "none": 88,
+  "graph": 1
+ },
+ "figAll": {
+  "none": 120,
+  "graph": 4
+ },
+ "figPassRate": {
+  "none": "88/120",
+  "graph": "1/4"
+ },
+ "renderTypesPassed": {
+  "none": 80,
+  "ap_table": 4,
+  "ap_graph:phys_line": 1,
+  "text": 4
+ },
+ "archetypesPassed": {
+  "pe_coulomb_square_corner": 2,
+  "pe_charged_spheres_string": 2,
+  "pe_field_rod_nonuniform": 2,
+  "pe_flux_hemisphere": 2,
+  "pe_field_perpendicular_bisector": 2,
+  "pe_charge_sharing_three": 2,
+  "pe_field_conducting_surface": 2,
+  "pe_gauss_shell_regions": 1,
+  "pe_potential_disk_axis": 2,
+  "pe_potential_rod_axis": 2,
+  "pe_two_particles_release": 2,
+  "pe_concentric_shells_potential": 2,
+  "pe_cap_energy_density": 2,
+  "pe_cap_spherical": 2,
+  "pe_cap_series_voltage": 2,
+  "pe_conducting_sphere_field_potential": 1,
+  "pe_cap_insert_conductor": 2,
+  "pe_cap_dielectric_work": 2,
+  "pe_sharp_point_claim": 1,
+  "pe_cap_series_energy": 2,
+  "pe_current_density_integral": 2,
+  "pe_power_series_chain": 1,
+  "pe_ladder_equivalent": 2,
+  "pe_two_battery_loop": 2,
+  "pe_rc_resistor_voltage": 2,
+  "pe_rc_two_resistor_discharge": 2,
+  "pe_internal_resistance_power": 2,
+  "pe_bulb_rank_network": 2,
+  "pe_meter_connection_claim": 1,
+  "pe_rc_series_parallel_cap_current": 2,
+  "pe_two_wires_midpoint": 2,
+  "pe_cyclotron_frequency": 1,
+  "pe_mass_spectrometer_radius": 2,
+  "pe_current_sheet_field": 2,
+  "pe_hollow_cylinder_field": 1,
+  "pe_magnetic_force_direction_claim": 1,
+  "pe_semicircle_wire_field": 2,
+  "pe_emf_expanding_loop": 2,
+  "pe_rotating_rod_emf": 2,
+  "pe_induced_current_direction_motion": 2,
+  "pe_rl_decay_current": 2,
+  "pe_rl_inductor_voltage": 2,
+  "pe_lc_current_at_charge": 2,
+  "pe_induced_E_outside_solenoid": 2,
+  "pes_cap_dielectric_table_set_q1": 1,
+  "pes_rl_table_set_q1": 2,
+  "pes_force_wire_graph_set_q1": 1,
+  "pef_mr_kirchhoff": 1,
+  "pef_tbr_induction_graph": 1,
+  "pef_tbr_discharge": 1,
+  "pef_lab_magnetic_force": 1,
+  "pef_qqt_rc_energy": 1
+ },
+ "costUsd": {
+  "physe-b": 4.6796
+ }
+}

@@ -1,10 +1,10 @@
 // 2026-10-20 신규 10과목 기반 작업 테스트(레이아웃·이름·분류·FRQ 유형). 기존 14과목 동작은 layouts.test.ts 가 지킨다.
 import { describe, expect, it } from "vitest";
-import { AP_LAYOUTS, AP_NEW_SUBJECT_FRQ_TYPES, AP_PENDING_PUBLIC_SUBJECTS, AP_SUBJECT_NAME, apBadgeText, isOfficialFullLayout, totalMinutes } from "./layouts";
+import { AP_LAYOUTS, AP_NEW_SUBJECT_FRQ_TYPES, AP_NEW_SUBJECTS, AP_SUBJECT_NAME, apBadgeText, isOfficialFullLayout, totalMinutes } from "./layouts";
 import { AP_SUBJECTS } from "../problem-taxonomy";
 import { AP_SUBJECT_CODES } from "../ap-curriculum/types";
 
-const NEW = AP_PENDING_PUBLIC_SUBJECTS;
+const NEW = AP_NEW_SUBJECTS;
 describe("신규 10과목 레이아웃", () => {
   it("10과목 모두 코드·이름·레이아웃·분류·FRQ 유형·커리큘럼 코드를 가진다", () => {
     expect(NEW).toHaveLength(10);

@@ -1,0 +1,54 @@
+{
+ "runs": [
+  "physe-fix2"
+ ],
+ "rows": 26,
+ "passed": 18,
+ "rejected": 8,
+ "passRate": 0.692,
+ "singles": {
+  "candidates": 26
+ },
+ "unitsPassed": {
+  "8": 4,
+  "9": 4,
+  "10": 2,
+  "11": 5,
+  "13": 3
+ },
+ "figPassed": {
+  "none": 17,
+  "graph": 1
+ },
+ "figAll": {
+  "none": 24,
+  "graph": 2
+ },
+ "figPassRate": {
+  "none": "17/24",
+  "graph": "1/2"
+ },
+ "renderTypesPassed": {
+  "none": 12,
+  "ap_table": 3,
+  "ap_graph:phys_line": 1,
+  "text": 2
+ },
+ "archetypesPassed": {
+  "pe_induced_charge_claim": 1,
+  "pe_pe_square_four": 2,
+  "pe_rc_energy_time": 2,
+  "pe_two_loops_claim": 1,
+  "pe_cap_dielectric_factor": 2,
+  "pe_rc_initial_final_current": 2,
+  "pe_rl_initial_final": 2,
+  "pes_coulomb_table_set_q1": 2,
+  "pes_vr_graph_set_q1": 1,
+  "pef_lab_resistivity": 1,
+  "pef_qqt_shell_field": 1,
+  "pef_qqt_closest_approach": 1
+ },
+ "costUsd": {
+  "physe-fix2": 1.0898
+ }
+}

@@ -83,6 +83,24 @@ describe("배정 가능 플래그(difficulty 파생)", () => {
   });
 });
 
+describe("배정 가능 플래그: 수학 hard 는 M1·lower 도 허용(20262100000630), R&W 는 종전 그대로", () => {
+  it("math hard -> m1/lower/higher 모두 true, rw hard -> higher 만 true, math easy -> higher false", () => {
+    const setId = newSet("math-hard-flags", "{}");
+    const mk = (n: number, section: "math" | "rw", difficulty: string) => {
+      const domain = section === "math" ? "algebra" : "rw_craft_structure";
+      const p = problem(300 + n, { domain, skill: skillA, difficulty });
+      posCounter += 1;
+      return psql(
+        `insert into mock_exam_set_items (exam_set_id, section, position, problem_id, problem_version_id, sat_domain, skill_code, difficulty, module_key)
+         values ('${setId}', '${section}', ${posCounter}, '${p.problemId}', '${p.versionId}', '${domain}', '${skillA}', '${difficulty}', '${section === "math" ? "math_m1" : "rw_m1"}') returning id;`,
+      );
+    };
+    const ids = [mk(1, "math", "hard"), mk(2, "rw", "hard"), mk(3, "math", "easy")];
+    const rows = psql(`select section || ':' || difficulty || ':' || m1_eligible || ':' || m2_lower_eligible || ':' || m2_higher_eligible from mock_exam_set_items where id in ('${ids.join("','")}') order by section, difficulty;`).split("\n");
+    expect(rows).toEqual(["math:easy:true:true:false", "math:hard:true:true:true", "rw:hard:false:false:true"]);
+  });
+});
+
 describe("스냅샷", () => {
   it("insert 시 채워지고 변경 불가; 원본 버전이 바뀌어도 채점·응시 화면은 스냅샷 기준", () => {
     const setId = newSet("snapshot", "{}");

@@ -1,0 +1,144 @@
+[
+ {
+  "cellId": "ap_physics_c_electricity_and_magnetism-m01",
+  "archetype": "pes_ohm_table_set",
+  "kind": "mc",
+  "unitCode": "11",
+  "topic": "11.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "candidates": 2,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_physics_c_electricity_and_magnetism-m02",
+  "archetype": "pe_solenoid_energy",
+  "kind": "mc",
+  "unitCode": "13",
+  "topic": "13.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "candidates": 2,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_physics_c_electricity_and_magnetism-f01",
+  "archetype": "pef_lab_rc_time_constant",
+  "kind": "frq_bundle",
+  "unitCode": "11",
+  "topic": "11.8",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "candidates": 2,
+  "extraTopics": [
+   "10.3",
+   "11.3"
+  ],
+  "template": "lab"
+ },
+ {
+  "cellId": "ap_physics_c_electricity_and_magnetism-f02",
+  "archetype": "pef_lab_capacitor_gap",
+  "kind": "frq_bundle",
+  "unitCode": "10",
+  "topic": "10.3",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "candidates": 2,
+  "extraTopics": [
+   "10.1",
+   "8.6"
+  ],
+  "template": "lab"
+ },
+ {
+  "cellId": "ap_physics_c_electricity_and_magnetism-f03",
+  "archetype": "pef_lab_resistivity",
+  "kind": "frq_bundle",
+  "unitCode": "11",
+  "topic": "11.3",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "candidates": 2,
+  "extraTopics": [
+   "11.2",
+   "11.4"
+  ],
+  "template": "lab"
+ },
+ {
+  "cellId": "ap_physics_c_electricity_and_magnetism-f04",
+  "archetype": "pef_lab_magnetic_force",
+  "kind": "frq_bundle",
+  "unitCode": "12",
+  "topic": "12.1",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "candidates": 2,
+  "extraTopics": [
+   "12.2",
+   "11.1"
+  ],
+  "template": "lab"
+ },
+ {
+  "cellId": "ap_physics_c_electricity_and_magnetism-f05",
+  "archetype": "pef_lab_rl_decay",
+  "kind": "frq_bundle",
+  "unitCode": "13",
+  "topic": "13.5",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "candidates": 2,
+  "extraTopics": [
+   "13.4",
+   "11.3"
+  ],
+  "template": "lab"
+ },
+ {
+  "cellId": "ap_physics_c_electricity_and_magnetism-f06",
+  "archetype": "pef_mr_wire_ampere",
+  "kind": "frq_bundle",
+  "unitCode": "12",
+  "topic": "12.4",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "candidates": 2,
+  "extraTopics": [
+   "12.3",
+   "11.1"
+  ],
+  "template": "mr"
+ },
+ {
+  "cellId": "ap_physics_c_electricity_and_magnetism-f07",
+  "archetype": "pef_mr_capacitor_dielectric",
+  "kind": "frq_bundle",
+  "unitCode": "10",
+  "topic": "10.4",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "candidates": 2,
+  "extraTopics": [
+   "10.3",
+   "8.6"
+  ],
+  "template": "mr"
+ },
+ {
+  "cellId": "ap_physics_c_electricity_and_magnetism-f08",
+  "archetype": "pef_qqt_closest_approach",
+  "kind": "frq_bundle",
+  "unitCode": "9",
+  "topic": "9.3",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "candidates": 2,
+  "extraTopics": [
+   "9.1",
+   "8.1"
+  ],
+  "template": "qqt"
+ }
+]

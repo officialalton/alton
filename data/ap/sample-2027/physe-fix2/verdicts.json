@@ -1,0 +1,1751 @@
+[
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m01-k0",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "Induction: the negative rod repels electrons from the knob down into the leaves. Both leaves end up negative and repel each other, so they spread apart.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Induction/charge redistribution claim with justification fits 8.2 and skill 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is the unique correct claim and reason; A, B, C each contain a physically false claim or reason."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the setup is fully described in words. Minor oddity: 'fall together' for leaves already hanging together, but not ambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct named misconceptions; the explanation addresses each wrong option. Correct option is somewhat longer, a mild giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 s, conceptual, no arithmetic, consistent with the reference pattern."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound conceptual induction item with a unique correct key and distinct misconception distractors. The only defect is that the correct option is a bit longer than the others, which is minor. Pass."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept conceptual item on polarization of a neutral conductor by a nearby charged rod. The student identifies that conduction electrons are repelled to the leaves, so the leaves share like charge and diverge. This takes about two reasoning steps with no calculation or representation change. The distractors map to common misconceptions (attraction, charge transfer through air, no movement without contact). It is a foundational check of the induction idea, below full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m01-k1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "The negative rod repels conduction electrons in the knob down to the leaves. Both leaves end up with extra negative charge, so they repel each other and spread apart. No charge needs to move through the air for this to happen.",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "'Repel more' is slightly loose wording because the leaves started hanging together, but the answer is still clearly D."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The time load is fine, but the key is conspicuously the longest, most detailed option and the \"repel more\" phrasing is inaccurate. Option B's internal inconsistency would hurt exam quality.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The physics is correct, but the item fails on wording and distractor quality. \"Repel more\" is inaccurate for leaves that start together. Option B contains a confused claim (positive leaves attracting). The key is the longest option and gives itself away. Revise the stem and options before use."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept qualitative item on charge polarization/induction in a conductor. Requires applying the idea that conduction electrons move away from a nearby negative rod, so the leaves become locally negative and repel. No computation, no representation changes, short reading. Distractors target standard misconceptions (no motion without contact, reversed electron direction, charge transfer through air). One to two reasoning steps, which is appropriate for foundational learning rather than a full-mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m02-k0",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "-698 mJ",
+     "brief_reasoning": "There are 4 adjacent opposite-sign pairs: 4 × (−kq²/a) = −1.08 J. There are 2 diagonal like-sign pairs: 2 × kq²/(a√2) = +0.382 J. Total ≈ −0.698 J.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Pairwise potential energy of a point-charge system, a Topic 9.1 computation pathway (skill 2.B)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Hand check: -4(0.27) + 2(0.27/sqrt2) = -0.698 J. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem fully specifies the geometry, the sign order, k and the zero of energy. No stimulus is needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor matches a distinct, realistic error: diagonal at distance a, double counting, and using 1/r^2. The explanation covers each wrong option. The key's 'why' is a bit terse."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, a calculator is allowed, and the options are short parallel values."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, correct item. The key of -698 mJ is verified by hand, the distractors are distinct misconceptions, and the item fits scope and exam load."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing the pairwise potential energy sum, correctly enumerating 6 pairs (4 adjacent opposite-sign, 2 diagonal same-sign), using the a*sqrt(2) diagonal distance, and handling signs. Arithmetic is short and the wording is clear. Distractors reflect common errors such as omitting the diagonals or miscounting pairs. Typical of a mock-exam calculation item.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m02-k1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "12200 mJ",
+     "brief_reasoning": "U = kq²(4/a + 2/(a√2)) = 0.225(40 + 14.14) = 12.18 J ≈ 12200 mJ",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Pairwise potential energy of a point-charge system; the dominant demand is law selection and summation, which matches 9.1 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "U = 0.225*(40+14.14) = 12.18 J = 12182 mJ, so option C is correct and unique. The other options are distinct errors."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem fully specifies the geometry, charges and constant. No stimulus is needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (r^2, missing diagonals, double counting). The explanation covers all wrong options. The key rationale is terse but adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, calculator allowed, short options, typical of the exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope and well constructed, with a unique key and distinct distractors. Pass."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires identifying the six distinct pairs (4 sides, 2 diagonals), applying U=kq1q2/r with the sqrt2 diagonal distance, and summing. A standard multi-step but short calculation, with distractors matching common errors such as omitting the diagonals or double counting. Arithmetic is modest and calculator-friendly; wording is clear.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m03-k0",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "673 µJ",
+     "brief_reasoning": "V=6(1-e^-2)=5.188 V; U=½(50µF)(5.188)^2≈673 µJ",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "RC charging energy at t=2tau; in scope for topic 11.8, skill 2.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key 673 µJ is unique and correct; distractors are distinct values."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed; the stem is complete. Ideal battery and resistor are the standard assumption."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (final energy, unsquared factor, discharging form), each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 s, calculator allowed, short parallel numeric options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean RC charging energy question. The key (673 µJ) is correct and unique, and the distractors encode distinct, realistic errors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing the correct governing relations (q(t) = CV(1 - e^{-t/RC}) and U = q^2/2C), recognizing that energy scales with the square of the charge factor, and doing a short calculator evaluation. Distractors target common errors: forgetting to square (778), using the discharging factor (122). Concept depth is moderate, there are two to three reasoning steps, and the reading and arithmetic loads are light and fair. This is typical of a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m03-k1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "V=24(1-1/e)=15.17 V; U=0.5*20uF*15.17^2≈2300 uJ",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "2300 μJ"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "RC charging, energy at t=tau; fits 11.8 and 2.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "U=0.5*C*(eps(1-1/e))^2=2301.6 uJ; unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem complete (R not needed since t=tau)."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained. Explanation uses placeholder n for t/tau, a minor wording flaw."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 s, calculator allowed, appropriate load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean single-concept RC energy item with distinct distractors; only the explanation's \"n\" placeholder is a minor blemish."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires recalling q(t)=CV(1-e^-t/RC), evaluating at t=tau, and substituting into U=q^2/2C (a squared fraction, distinguishing from the common error of using 0.632 unsquared). Few steps, short arithmetic, clear wording, in scope for the RC circuits topic.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m04-k0",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Increasing current in loop 1 increases the magnetic flux through loop 2. By Faraday's law this induces an EMF and a current in loop 2. By Lenz's law that current opposes the change in flux. Choice D says this. A gets the direction wrong, B ignores induction, and C wrongly says a steady current induces a current.",
+     "choice_index": 3,
+     "final_answer": "D",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 80 seconds, no arithmetic, low reading load.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean conceptual claim and justification question on induced currents. It has a unique key and distinct distractors, and it passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept qualitative item: apply Faraday's law and Lenz's law to a changing current in a nearby loop. Distractors map to common misconceptions (needs a wire connection, steady current induces emf, induced current aids the change). No calculation, no representation change, short and unambiguous wording.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m04-k1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "As the current in loop 1 rises steadily, its magnetic field grows, so the magnetic flux through loop 2 changes. By Faraday's law this changing flux induces an emf and a current in loop 2. By Lenz's law, the induced current flows in the direction that opposes the change in flux. A is wrong because a steady current would induce nothing. B is wrong because the induced current opposes the change rather than helping it. C is wrong because induction does not need a wire connecting the loops.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The key is noticeably longer than the other options and is the only one that names both the changing flux and the opposing sense, which is a length giveaway. This is a minor flaw, but fail when unsure. Otherwise, timing and load are appropriate, with no calculation.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is physically correct, has a unique key, and has distinct distractors. The one concern is that the key is the longest option and the only one with a complete justification, which gives a length cue and fails exam suitability."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept qualitative check of Faraday's and Lenz's laws. The student identifies that a changing current in loop 1 changes the flux through loop 2, so a current is induced that opposes the change. The distractors are common misconceptions (steady current induces emf, induced current aids the change, a wire connection is needed). There is no computation or representation translation, and the reasoning is short and direct, which suits introductory learning more than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m05-k0",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The isolated capacitor keeps Q fixed and C becomes κC, so U = Q²/2C drops to U/3.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "0.333 times the original"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, unique key (Q fixed, C to kC, U falls by a factor of 3). In scope for 10.4 and skill 2.C. Distractors encode distinct misconceptions and are all explained. Short, appropriate load.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: isolated capacitor means Q is constant, so U = Q^2/(2C) scales as 1/kappa. It needs one proportional-reasoning step and no representation changes. The arithmetic is trivial and the wording is clear. The distractors (9, 1, 0.25) target common misconceptions, but the item is a direct application of one governing relation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m05-k1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The battery holds V constant, so C becomes 5C and U = ½CV² becomes 5 times the original.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "5.00 times the original"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Dielectric insertion with battery connected; proportional comparison fits 10.4 and 2.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "V fixed, C->5C, U->5U. Unique correct answer 5.00."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Stem complete; no stimulus needed; battery stays connected, slab fills the gap."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions (kappa twice, fixed-Q reasoning, kappa+1); explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no arithmetic load, options parallel."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clear, in-scope item with a unique key and distinct distractors; passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-step proportional reasoning: with the battery connected, V is fixed and C scales by kappa, so U = (1/2)CV^2 scales by kappa = 5. The only conceptual choice is battery connected vs removed. No computation, no representation change, minimal reading. Distractors (25, 1/5, 6) map to common misconceptions.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m06-k0",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "At steady state the capacitor draws no current, so the current flows through R1 and R2 in series: I = 6/(2+12) = 0.429 A.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "0.429 A"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Steady-state RC behavior, Ohm's law; in Unit 11 scope. Simple but valid for 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0.429 A = 6/14 is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Circuit fully described in words; the switch is mentioned without detail but is implied to be in series with the battery. No stimulus needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct misconception (6/R2, 6/R1, 6/parallel combination), and the explanation covers all options."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-95 s, calculator trivial, four parallel numeric options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean, and in scope. The item is conceptually simple, with a minor unspecified switch that does not affect the answer. Passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single concept: a capacitor is an open circuit at steady state, so the current is emf divided by R1+R2 = 6/14 = 0.429 A. One-step arithmetic, no representation change, short stem. Distractors map to common errors (ignoring R2, ignoring R1, wrong combination). Appropriate for foundational learning rather than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m06-k1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The uncharged capacitor acts as a short and bypasses R2, so I = 6/4 = 1.5 A.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "1.50 A"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 11.8 initial capacitor behavior, skill 2.B fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key 1.50 A is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Circuit described completely in words; the switch is implied by the phrase 'just after the switch is closed'."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option is explained. The 2.00 A explanation ('parallel combination of the resistors') is vague, but 6/(4||12) = 2 A is a plausible error."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, calculator irrelevant, short options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key is unique, the scope and skill fit, and the circuit is fully described. The one weakness is the vague explanation of the 2.00 A distractor, which is minor."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single concept: an uncharged capacitor acts as a short at t=0, so R2 is bypassed and I = emf/R1 = 1.5 A. Minimal arithmetic, short reading. Distractors correspond to the steady-state value (0.5 A), the series sum (0.375 A), and a wrong parallel treatment (2 A). The item checks recognition of initial capacitor behavior with little multi-step reasoning or representation change.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m07-k0",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "At t=0+ the inductor current is zero, so the inductor acts as an open circuit. The current is 6 V/(8 Ω + 12 Ω) = 0.300 A.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "0.300 A"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Initial-condition RL analysis (inductor as open circuit at t=0+) is the dominant demand; arithmetic is trivial."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0.300 A is unique: 6/(8+12). Distractors correspond to distinct wrong models."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Circuit fully described in words: series R1 with the parallel inductor and R2, ideal battery, zero initial current. No figure is needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained. The explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-95 s, light reading, calculator not burdensome."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean and passes all five criteria. The key of 0.300 A is the unique defensible answer, the circuit is fully described, and each distractor encodes a distinct misconception."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single concept: an inductor with zero initial current acts as an open circuit, so the battery current is emf over R1+R2 = 6/20 = 0.300 A. Two-step reasoning, trivial arithmetic, no representation changes, short text. Appropriate as a foundational RL initial-condition check rather than a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m07-k1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The inductor acts as an open circuit at t=0+, so current = 24/(6+4) = 2.40 A",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "2.40 A"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Inductor initial behavior plus Ohm's law fits 13.5 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "2.40 A is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The circuit is fully described in words and the assumptions are stated. No stimulus is needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option encodes a distinct error and is explained. The 10.0 A rationale is terse but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, simple arithmetic, typical load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: a unique correct key, a complete stem, distinct distractors and typical exam load. The only weakness is the slightly loose 10.0 A distractor rationale."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single concept: an inductor with zero initial current acts as an open circuit, so the battery current flows through R1 and R2 in series. I = 24/(6+4) = 2.4 A. One reasoning step, trivial arithmetic, no representation change, short text.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m08-k0-q1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "q^2=Fr^2/k=0.81e-3*0.01/9e9=9e-16, q=3.0e-8 C=30 nC; data consistent with 1/r^2",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "30.0 nC"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Coulomb's law with table reading and unit conversion; fits 8.1 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "30 nC is unique and correct; the solver agrees."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete with labeled columns, and the stem gives k and states that the spheres are identical and small."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions, and the explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, with light calculator use."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, clean, and in scope. The key is unique and the distractors map to distinct misconceptions."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single application of Coulomb's law using one table row. It needs two unit conversions (cm to m, mN to N) and a square root. The numbers are clean (q = 30 nC), and the other rows are redundant. Few reasoning steps and little reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m08-k0-q2",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Inverse-square: F r^2 = 81 mN·cm^2 constant; at 50 cm F = 81/2500 = 0.0324 mN.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "0.0324 mN"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Coulomb's law inverse-square scaling from a table; fits 8.1 and 2.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Table data are consistent with F r^2 = 81 mN cm^2; 0.0324 mN is the unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has labeled columns and consistent data. The spheres are identical, carry the same charge, and are small enough to be treated as point charges. The stated k is unneeded but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a distinct named misconception and the explanation addresses all of them. Two distractors (force stays constant) are somewhat similar and weak, but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short and clean; calculator load is minimal; calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a correct, clean proportional-reasoning problem on Coulomb's law with a table. The key is unique and the distractors are adequate. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step inverse-square proportional reasoning from a table: F(50) = 0.81*(10/50)^2 = 0.0324 mN. Coulomb's law concept is core, with no multi-step setup or heavy computation. The value of k is an unneeded extra. The reading load is low and the arithmetic is simple.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m08-k1-q1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "q = r·sqrt(F/k) = 0.10·sqrt(2.25e-3/9e9) = 5.0e-8 C = 50 nC; the other rows fit the same inverse-square law.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "50.0 nC"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Coulomb's law with table reading and cm to m conversion; fits 8.1 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "50.0 nC is unique and consistent across all table rows."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete with labels and units; k is given; wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each matching a computed value; the explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 s, light arithmetic, calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item: the key is verified and unique, distractors are distinct, and scope and format fit. No defects found."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-law application of Coulomb's law with data read from a table. Requires unit conversions (cm to m, mN to N) and one square root. Numbers are clean and the distractors are off by orders of magnitude or factors of 2. No multi-step reasoning or advanced concepts.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m08-k1-q2",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Inverse square: F=2.25*(10/15)^2=1.00 mN",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "1.00 mN"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Coulomb inverse-square proportional reasoning from a table; fits 8.1 and 2.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "2.25*(10/15)^2 = 1.00 mN; table rows are consistent with inverse square; the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table has labels, units and rows; the stem is clear and complete. The given k is unnecessary but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained; 1.33 matches 1/r^3 scaling of the 20 cm entry. The two 'stays equal' options are a bit weak but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, light calculation, calculator use is consistent with the designation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clear, in-scope proportional-reasoning item with a complete table; the distractors are acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single proportional-reasoning step: recognize inverse-square dependence of Coulomb force, scale the 10 cm value by (10/15)^2 to get 1.00 mN. The table read is trivial and the arithmetic is simple. The given k is an unneeded distractor, and no charge calculation is required.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m09-k0-q1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "q = Vr/k = 180 V × 0.20 m / 9.0e9 = 4.0e-9 C",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "4.00 nC"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Point-charge potential V=kQ/r read from a graph; in scope for 9.2. Skill fit is modest but acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "V(20 cm)=180 V, Q=Vr/k=4.0 nC; unique answer. Each distractor is a distinct, valid error."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data is complete with labeled axes, units and a dense curve V=3600/r. The point at 20 cm is readable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (no unit conversion, r squared, wrong point read); the explanation addresses each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, light load; calculator use is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clear graph-reading item on point-charge potential. The key is unique and the distractors are distinct and realistic. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-step use of V=kq/r: read V=180 V at r=20 cm from the graph, convert cm to m, solve for q = 4.00 nC. Only one unit conversion and one representation read; arithmetic is simple. Distractors target unit/power-of-ten errors. Low concept depth for the skill of deriving a symbolic expression.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m09-k0-q2",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m09",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "V=kq/r gives Vr=36 V·m; E=V/r=180/0.20=900 N/C",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "900 N/C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 9.2: E from V of a point charge, read from a graph; fits 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "V(20 cm)=180 V, E=V/r=900 N/C; unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data complete; the value at 20 cm is readable."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The distractor rationales are not realistic misconceptions. The sign-convention explanation for 2V/r is incoherent, V/(2r) is arbitrary, and the unit mismatch of Vr is not addressed."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load fits the AP time range; the item is simple but acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item fits Topic 9.2. The distractors and their explanations are poorly motivated and encode no distinct, realistic misconceptions, so the item fails on distractor quality."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student reads a V-versus-r graph, recognizes V = kq/r, and uses E = -dV/dr = V/r (or finds q first, then E = kq/r^2). They must also convert cm to m. The item has a single concept link, clean numbers, and light reading, and it is a typical mock-exam routine.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m09-k1-q1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "8.00 nC",
+     "brief_reasoning": "q = Vr/k = (360 V)(0.20 m)/(9.0e9) = 8.0e-9 C",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Point-charge potential V=kQ/r with graph reading and a cm-to-m conversion. In scope for 9.2. The skill label 2.A is only loosely matched but acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "V(20 cm)=360 V gives Q=Vr/k=8.0 nC. Unique and correct, and the graph data fit V=72/r."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Axes, labels, ranges and vertices are complete. 360 V at 20 cm falls on a gridline, so it is easy to read. The stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct, plausible errors (V/(kr), the wrong point on the curve, Vr^2/k), each explained. The distractors are not meaningfully different in format or length from the key."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, a single read plus one formula. The calculator load is fine."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, clear and in scope, with plausible distractors. Acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step application of V=kq/r: read V=360 V at r=20 cm from the graph, convert cm to m, and solve for q = 8.00 nC. The graph read is easy because 20 cm is a gridline and the value is round. The arithmetic is trivial. There is no multi-step derivation or conceptual twist. Distractors correspond to unit slips (forgetting the cm conversion, or the factor of 2 error) but the item is straightforward.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-m09-k1-q2",
+  "cellId": "ap_physics_c_electricity_and_magnetism-m09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "V=kq/r so E=V/r=360 V/0.20 m=1800 N/C",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "1800 N/C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reading V from a graph and using E=V/r for a point charge fits topic 9.2 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "E=360/0.20=1800 N/C is unique and correct. The graph data are consistent with V=kQ/r."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph data are complete: axes, labels, units and a dense curve. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are distinct. The 3600 N/C rationale (\"wrong sign convention, 2V/r\") is incoherent, since a sign error does not give a factor of 2, but this is a minor flaw."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is a single step, takes about 90 seconds, and has a light calculator load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key (1800 N/C) is correct and the graph is complete. The item is suitable, with one weak distractor rationale for the 3600 N/C option."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Read V at 20 cm from the graph (360 V), recognize V=kq/r so E=V/r (or find q from a point and use kq/r^2), convert cm to m, and compute 1800 N/C. This takes a short chain with one law choice and one unit conversion. The numbers are clean, and the distractors map to common unit and factor errors.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-f01-k0",
+  "cellId": "ap_physics_c_electricity_and_magnetism-f01",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:C:numeric,D:numeric"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Draw the wire's cross-section as a circle with a dot (current out of page). Inside it, draw a dashed concentric circle of radius r<R as the Amperian loop. Put arrows tangent to the loop pointing counterclockwise, as the right-hand rule gives.",
+     "final_answer": "Concentric Amperian circle of radius r<R; B is tangent to it and points counterclockwise (seen with current out of page).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Enclosed current: I_enc = ∫0^r (J0 r'/R)(2πr' dr') = 2πJ0 r^3/(3R). By symmetry B is constant around the loop, so Ampère's law gives B(2πr) = μ0 I_enc.",
+     "final_answer": "B = μ0 J0 r^2 / (3R)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "B = (4π×10^-7)(1×10^5)(1×10^-3)^2 / (3 × 4×10^-3)",
+     "final_answer": "B ≈ 1.05×10^-5 T",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Inside the wire B is proportional to r^2, so doubling r multiplies B by 2^2 = 4. Physically, the enclosed current goes up by 8 (it scales as r^3), but the loop length doubles, so B rises by 8/2 = 4.",
+     "final_answer": "The field increases by a factor of 4.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a correct, complete Ampère's law FRQ for a wire with a nonuniform current density. It has 10 points (3/3/2/2), and each part matches its own tagged skill. The only blemish is a minor mismatch between the 2% tolerance in the C2 rubric text and the expected-value tolerance of about 3%.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys for B, C and D are correct and consistent with the rubric rows. The 2% acceptance in C2 differs slightly from the expected-value tolerance, which is a minor inconsistency."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP C E&M free-response on Ampere's law with nonuniform current density. It requires choosing Ampere's law, integrating J dA with a polynomial (r^2 dr), solving for B = mu0 J0 r^2/(3R), then a single substitution and a proportional-reasoning step (B proportional to r^2, so factor of 4). The diagram needs a right-hand-rule field direction. All steps are in scope, the arithmetic is light and the wording is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-f01-k1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-f01",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:C:numeric,D:numeric"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Draw a circle of radius R with a dot at the centre for current out of the page. Draw a dashed concentric circle of radius r<R as the Amperian loop. By the right-hand rule, B on the loop is tangent to it and points counterclockwise.",
+     "final_answer": "Concentric loop of radius r inside the wire; B is tangent to the loop and counterclockwise (seen with current out of the page).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Enclosed current: I_enc = ∫0^r (J0 r'/R)(2πr' dr') = 2πJ0 r^3/(3R). Ampère's law gives B(2πr) = μ0 I_enc, so B = μ0 J0 r^2/(3R).",
+     "final_answer": "B = μ0 J0 r^2 / (3R)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "B = (4π×10^-7)(4×10^5)(1×10^-3)^2 / (3 × 4×10^-3) ≈ 4.19×10^-5 T.",
+     "final_answer": "≈4.2×10^-5 T",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Inside the wire, B is proportional to r^2. Doubling r therefore multiplies B by 2^2 = 4. Physically, the enclosed current grows as r^3 while the loop length grows only as r.",
+     "final_answer": "B increases by a factor of 4",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a standard Ampère's law problem with a nonuniform current density and no defects. The dominant skill in part B is 2.A, and the other parts are tagged with their own skills. The answers are unique and the rubric rows are consistent. The text stimulus fully specifies the wire, the current density law and the constants. The task load is typical for the exam, and the integral uses only polynomial functions.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Unit 12.4 with a polynomial current density, so it is in scope. Part B carries the 2.A derivation. Part A is a 1.A diagram, part C is a numeric 2.B calculation, and part D is proportional reasoning with justification. Each part fits its own tagged skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key results verified: B = μ0 J0 r²/(3R), about 41.9 μT at r = 1 mm, and a factor of 4 for 2r. Rubric dependencies are consistent. The 2% tolerance in the C2 criterion is stated in the row text rather than in the numeric_tolerance field, which is a minor point."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus gives R, J0, the J(r) law and μ0. The current direction (out of the page) is given in part A, and the cross-section geometry can be rebuilt from the text."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common_errors entries listed in the rubric rows are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "10 points matches the 10-point Mathematical Routines weight. The task load is reasonable, and the calculator is used only for simple substitution."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard Ampère's law with nonuniform current density: set up and integrate a polynomial for enclosed current, apply the law, substitute once, then make a proportional-reasoning claim (B scales as r^2). Includes a diagram with right-hand rule. Arithmetic is short and the wording is clear, so the difficulty comes from concept use and multi-step derivation, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-f02-k0",
+  "cellId": "ap_physics_c_electricity_and_magnetism-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Equipment: a power supply (or cell), an ammeter in series, a voltmeter across the wire, a metre rule, a micrometer and crocodile clips. Clamp the wire along the metre rule. Fix one clip at 0 and slide the other clip to L = 0.2, 0.4, ... 1.0 m. At each length, measure V and I and calculate R = V/I, or use an ohmmeter directly. To reduce uncertainty: repeat each reading and average, take several (V, I) pairs and use the slope of V against I, keep the current small so the wire does not heat up, and subtract the resistance of the leads (zero error).",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Measure V and I across clipped lengths L of wire set with a metre rule (R = V/I). Change L by moving the sliding contact. Reduce uncertainty by repeating and averaging readings (or using the slope of V vs I) and keeping the current low to avoid heating."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "From R = (ρ/A)L, plotting R against L gives a straight line through the origin with slope ρ/A.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Vertical axis: R (Ω). Horizontal axis: L (m). Slope = ρ/A."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Use a scale of L from 0 to 1.0 m and R from 0 to 8 Ω. The points lie close to a straight line through the origin. The least-squares slope is about 7.65 Ω/m.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Plot R (Ω) against L (m) and draw a straight best-fit line close to the origin, with slope ≈ 7.65 Ω/m."
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Slope ≈ 7.65 Ω/m (least-squares fit). Cross-sectional area A = π(0.25×10⁻³ m)² = 1.96×10⁻⁷ m². Then ρ = slope × A = 7.65 × 1.96×10⁻⁷ ≈ 1.50×10⁻⁶ Ω·m.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "ρ ≈ 1.5 μΩ·m"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. It is a standard resistivity lab with design, linearization, graph and slope parts, and the solver reproduced the key.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part fits topic 11.3 (resistance, resistivity, Ohm's law) and its own tagged skill. Part A is design (3.A), B is linearization, C is graphing, and D is the slope-to-resistivity calculation. No content from later units or outside the course appears."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are consistent: slope about 7.65 ohm/m, A = 0.196 mm^2, and rho about 1.50 micro-ohm-m. Rubric rows are mostly 1 point each. Row D1 requires C3, which is reasonable. Part A3 accepts any one of several valid uncertainty-reduction methods. Total points are 3+1+3+3 = 10, matching the 10-point Experimental Design and Analysis weight."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table gives the length and resistance data plus the wire diameter in the description. Axis labels have units. The wording is clear. Part C asks for a plot on a blank grid, which suits a graph-response part."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The rubric lists common errors, such as plotting R versus 1/L and using the diameter as the radius."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is typical for a lab FRQ and calculator use is appropriate. The estimated 27 minutes is an internal reference only and is not penalized."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Typical AP C E&M lab-style FRQ. Students must design a procedure (meter setup, varying length, repeated measurements), linearize R=rho L/A, plot a best-fit line, and extract rho from the slope using A=pi d^2/4 with unit conversion. Concept depth is moderate, the arithmetic is short with clean numbers, and the wording is clear. Difficulty comes only from allowed levers: choosing the governing law, translating between representations, and a unit conversion.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-f02-k1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Standard procedure",
+     "final_answer": "Equipment: a power supply, an ammeter in series with the wire, a voltmeter across the wire (or just an ohmmeter), a meter stick, and a micrometer to check d. Clamp the wire straight along the meter stick. Put one fixed contact at the zero mark and a sliding contact (crocodile clip) at distance L. Set L to 0.2, 0.4, 0.6, 0.8 and 1.0 m by moving the clip. At each length, measure V and I and calculate R = V/I. Keep the current small so the wire does not heat up and change its resistance. To reduce uncertainty in R: repeat each reading several times (or take several V–I pairs and use the slope) and average. Also subtract the resistance of the leads, measured with the clips touching.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "R = (ρ/A)L, so R against L is a straight line with slope ρ/A",
+     "final_answer": "Plot R (Ω) on the vertical axis and L (m) on the horizontal axis. The slope equals ρ/A, so ρ = slope × A, where A = πd²/4.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Linear plot through about the origin",
+     "final_answer": "Horizontal axis: Length L (m), from 0 to 1.0. Vertical axis: Resistance R (Ω), from 0 to 8. Plot the 5 points. Draw a straight best-fit line through them, close to the origin. Its slope is about 7.6 Ω/m.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Least-squares slope = 7.61 Ω/m; A = π(0.25×10⁻³ m)² = 1.963×10⁻⁷ m²; ρ = slope × A",
+     "final_answer": "ρ ≈ 1.5 μΩ·m (about 1.49×10⁻⁶ Ω·m)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard R-versus-L resistivity lab bundle worth 10 points. The parts fit the topic, and the key and rubric rows are consistent with the data. The independent solver agreed with the keyed answers.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part fits its own tagged skill. Design (part A), linearization (part B), graphing (part C) and slope analysis (part D) all sit within topics 11.3 and 11.2."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Slope of about 7.61 ohm/m and resistivity of about 1.495 micro-ohm-m are consistent with A = pi(d/2)^2 for d = 0.5 mm. Tolerances are reasonable and the rubric rows are consistent with the model answers."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with labels, units and five rows. The diameter is stated and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to a free-response item. Rubric rows list common errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is typical of a lab FRQ, calculators are allowed and the arithmetic is light."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part lab-design item. A: procedure design (circuit with ammeter/voltmeter or ohmmeter, vary length, repeat trials). B: linearize R = (ρ/A)L, so plot R vs L. C: plot and fit a line. D: slope to resistivity, using A = πd²/4 and a unit conversion to μΩ·m. It needs the governing law, a representation change (table to graph to resistivity), and one linking step. Numbers are clean, the arithmetic is short, and the wording is unambiguous. The standard AP lab-FRQ format fits full-mock use.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-f03-k0",
+  "cellId": "ap_physics_c_electricity_and_magnetism-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Use a Gaussian sphere with r<R. It encloses no charge, so the net flux is 0. By symmetry E has the same magnitude everywhere on that sphere, so E=0 inside, including at the center. Just outside, the enclosed charge is Q, so E=kQ/R²=900 N/C. The two fields are not equal.",
+     "final_answer": "Disagree: the field at the center is 0, while just outside the surface it is kQ/R² ≈ 900 N/C.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Take a spherical Gaussian surface of radius r>R. Gauss's law gives E(4πr²)=Q/ε0, so E=Q/(4πε0 r²)=kQ/r². At r=R: E=(9.0×10^9)(4×10^-9)/(0.20)² = 900 N/C, pointing radially outward.",
+     "final_answer": "E = kQ/r²; at r=R, E ≈ 900 N/C (9.0×10² N/C), radially outward.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Outside the shell, E is proportional to 1/r² because the enclosed charge stays Q while the area of the Gaussian surface grows as r². Doubling r cuts E by a factor of 4: 900 → 225 N/C.",
+     "final_answer": "The field drops to 1/4 of the surface value, about 225 N/C.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The Gauss's law shell FRQ is correct and complete. Each part is consistent with its own skill and rubric rows. The total of 8 points matches the Qualitative/Quantitative Translation weight, and the calculator load is trivial.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Spherical-symmetry Gauss's law, topics 8.6/8.3/8.5; claim-and-justify tasks fit skill 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Values 0, 900 N/C and 225 N/C are correct; rubric dependencies are consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives R, Q, k, and the vacuum and uniform-charge conditions; nothing is missing."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ with no options; common errors are listed per rubric row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Load is typical of a short AP FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard single-symmetry Gauss's law application (uniform spherical shell). Part A needs the zero field inside from zero enclosed charge, Part B is a routine derivation giving E=kQ/r^2 and one substitution (900 N/C), and Part C is a single inverse-square proportional prediction (factor 1/4). Few steps, minimal arithmetic, short and clear wording, and no out-of-scope content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-f03-k1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Use a Gaussian sphere with r<R. It encloses no charge, and by symmetry E is uniform on it, so E·4πr²=0 and E=0 at the center. Just outside, the sphere encloses Q, so E=kQ/R²=200 N/C. The two fields are not the same.",
+     "final_answer": "Disagree: E=0 at the center, but E=200 N/C just outside.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "For a Gaussian sphere of radius r>R: E·4πr²=Q/ε0, so E=kQ/r². At r=R: E=(9.0e9)(2e-9)/(0.30)²=200 N/C.",
+     "final_answer": "E=kQ/r² = Q/(4πε0 r²); at r=R, E=200 N/C (directed radially outward)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "E is proportional to 1/r². Doubling r cuts E by 2²=4, because the same enclosed charge Q gives the same flux spread over 4 times the area.",
+     "final_answer": "The field drops to 1/4 of its value: 50 N/C",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, well-formed 8-point QQT bundle on the Gauss's-law shell field. The key is unique, the stimulus is complete, each part fits its own skill, and the load is appropriate.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard Gauss's law application to a uniformly charged thin shell: zero enclosed charge gives E=0 inside, and E=kQ/r^2 outside. Part B's arithmetic is short and clean (200 N/C), and Part C is a single inverse-square proportional prediction (factor 1/4). There is no integration, no nonuniform density, and no graph. The wording is clear and the reading load is low.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-f04-k0",
+  "cellId": "ap_physics_c_electricity_and_magnetism-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Energy conservation: ½m_p v² = kZe²/r, so r ∝ 1/v². Doubling v gives 4 times the kinetic energy, so r becomes one quarter of the original, not one half.",
+     "final_answer": "Disagree: the distance of closest approach becomes 1/4 of the original, because r ∝ 1/v².",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "The proton stops at closest approach, so ½m_p v² = kZe²/r and r = 2kZe²/(m_p v²) = (2)(9.0e9)(2)(1.6e-19)² / [(1.67e-27)(8e6)²] ≈ 8.62e-15 m.",
+     "final_answer": "r = 2kZe²/(m_p v²) ≈ 8.6 fm",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "r ∝ Z at the same speed. Going from Z = 2 to Z = 4 doubles the potential energy at any given distance, so the same kinetic energy is used up at twice the distance.",
+     "final_answer": "The closest approach doubles, to about 17 fm (≈17.2 fm).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound, correct, in-scope closest-approach FRQ with a coherent rubric. The only flaw is the loose number format in the Part C model answer.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part fits Unit 9 energy conservation (topic 9.3) with related topics 9.1 and 8.1. Part A is a 3.B claim judgment, Part B is a derivation, and Part C is a proportional prediction. All content is in scope and no calculus beyond the course is needed."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are unique and correct. Part A: r is proportional to 1/v², so doubling v makes r one quarter of the original. Part B: r = 2kZe²/(m_p v²) is about 8.6 fm. Part C: r doubles because it is proportional to Z. The rubric rows are consistent and the dependencies are sensible. The model answer for C writes \"1.72e-14 m\", which is loose formatting but harmless."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus describes the setup completely: a fixed point nucleus, a proton from far away, and all constants. The empty data object is acceptable for a text-only stimulus. One minor point is that the stem never says \"only the electric force acts\", though this is implied by a fixed point nucleus and standard assumptions."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The rubric rows list common errors such as r proportional to 1/v, a missing factor of 2, and using force instead of energy."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for a calculator-allowed FRQ and the arithmetic is light. The total is 8 points, which fits the 8-point Qualitative/Quantitative Translation weight. The estimated 16 minutes is slightly long but not grounds for rejection."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Core 9.3 energy conservation: KE converts to point-charge potential energy at the turning point. Part A requires proportional reasoning (r ∝ 1/v², so doubling speed quarters r and the claim is false). Part B is a short symbolic derivation followed by a single-step numeric evaluation (~8.6 fm). Part C is a proportional prediction (r ∝ Z, so r doubles). The item is typical of a mid-level FRQ: the student chooses the governing law, makes an argument, and does light computation. Reading and arithmetic loads are small and the wording is unambiguous, so no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_physics_c_electricity_and_magnetism-f04-k1",
+  "cellId": "ap_physics_c_electricity_and_magnetism-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "At closest approach the proton is momentarily at rest, so (1/2)m v² = kZe²/r. That gives r = 2kZe²/(m v²), so r ∝ 1/v². Doubling v makes r one quarter of the original, not one half.",
+     "final_answer": "Disagree: doubling the speed reduces the closest-approach distance to 1/4 of its original value, not 1/2.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Set the initial kinetic energy equal to the electric potential energy at closest approach: (1/2)m_p v² = kZe²/r. Solving gives r = 2kZe²/(m_p v²). Substituting: r = 2(9.0×10^9)(4)(1.60×10^-19)² / [(1.67×10^-27)(5×10^6)²] = 1.843×10^-27 / 4.175×10^-14 ≈ 4.4×10^-14 m.",
+     "final_answer": "r = 2kZe²/(m_p v²) ≈ 4.4×10^-14 m ≈ 44 fm",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Since r ∝ Z at fixed speed, doubling the charge from 4e to 8e doubles the potential energy at any given distance. The same kinetic energy is therefore used up at twice the distance.",
+     "final_answer": "The distance doubles to about 88 fm (twice the original).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The closest-approach FRQ is correct and in scope for topic 9.3. Parts A, B and C agree with the independent solver, and the rubric rows are consistent. The only blemish is the model answer's \"8.83e-14 m\" formatting, which is minor.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Single governing principle (energy conservation with point-charge potential energy) applied in three linked parts: a proportional-reasoning argument showing r_min goes as 1/v^2 so the student's claim is wrong, a symbolic derivation with a short numeric evaluation (about 44 fm) and unit conversion, and a Z-scaling prediction. Needs claim justification and a symbolic-to-numeric move but no heavy computation, no long reading, and nothing ambiguous or out of scope. This is typical full-mock free-response difficulty.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ }
+]
