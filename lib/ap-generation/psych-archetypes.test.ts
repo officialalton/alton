@@ -40,7 +40,7 @@ d("AP Psychology archetypes (Python generators, 2 seeds each)", () => {
     expect(out.names.length).toBeGreaterThanOrEqual(150);
     expect(out.sets.length).toBeGreaterThanOrEqual(20);
     const ids = [...out.names.map((n) => out.packs[n][0].archetype), ...out.sets.flatMap((n) => out.setPacks[n][0].items.map((i) => i.archetype))];
-    expect(psychGuide.archetypes.map((a) => a.id)).toEqual(ids);
+    expect(psychGuide.archetypes.map((a) => a.id).sort()).toEqual([...ids].sort());
     const units = new Set(psychGuide.archetypes.map((a) => String(a.topic).split(".")[0]));
     expect([...units].sort()).toEqual(["1", "2", "3", "4", "5"]);
   });

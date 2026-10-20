@@ -2,6 +2,10 @@
  "generatedAt": "2026-10-19",
  "checked": 59,
  "bySubject": {
+  "ap_english_literature": {
+   "checked": 13,
+   "withViolations": 1
+  },
   "ap_world_history": {
    "checked": 16,
    "withViolations": 1
@@ -10,43 +14,13 @@
    "checked": 18,
    "withViolations": 2
   },
-  "ap_english_literature": {
-   "checked": 13,
-   "withViolations": 2
-  },
   "ap_english_language": {
    "checked": 12,
    "withViolations": 0
   }
  },
- "flagged": 5,
+ "flagged": 4,
  "violations": [
-  {
-   "candidateKey": "ap_english_literature-fa2-k0",
-   "run": "englit-p1-b",
-   "subject": "ap_english_literature",
-   "template": "q2",
-   "source": "data/ap/stock/lt-p1b-items.json",
-   "inAssignedSet": true,
-   "violations": [
-    {
-     "code": "expl_denies_but_full",
-     "band": "low",
-     "detail": "bullet \"The author uses different literary elements to sh… says the thesis point is not earned, but thesis is 1/1",
-     "fix": "lower thesis to 0 (total 2/6), or rewrite the explanation to say the point is earned",
-     "proposal": {
-      "area": "thesis",
-      "from": 1,
-      "to": 0,
-      "total": 2
-     },
-     "proposedHeading": {
-      "from": "Sample essay (low; scored 3/6: thesis 1, evidence 2, sophistication 0)",
-      "to": "Sample essay (low; scored 2/6: thesis 0, evidence 2, sophistication 0)"
-     }
-    }
-   ]
-  },
   {
    "candidateKey": "ap_english_literature-fa3-k0",
    "run": "englit-p1-b",

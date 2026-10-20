@@ -265,7 +265,7 @@ describe("MockExamMstTakeClient", () => {
       fireEvent.click(screen.getByTestId("mst-whiteboard-toggle"));
     });
     expect(screen.getByTestId("mst-whiteboard")).toBeInTheDocument();
-    expect(wbLoadMock).toHaveBeenCalledWith("mock_exam", "att1", "i1");
+    expect(wbLoadMock).toHaveBeenCalledWith("mock_exam", "att1", "i1", undefined);
     await act(async () => {
       fireEvent.click(screen.getByRole("button", { name: "Close whiteboard" }));
     });
