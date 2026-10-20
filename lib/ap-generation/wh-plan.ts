@@ -2,8 +2,8 @@
 // 이 파일은 동결 구성 해시 대상이다. 각 자료의 context 는 ALTON 이 쓴 한 줄(사건·청중, 사실만)이며 학생 화면에 자료 출처 표기와 함께 표시된다.
 export type WhSrcRef = { id: string; context: string };
 export type WhStim = "primary_text" | "secondary_text" | "paired_text" | "quantitative" | "image";
-export type WhSetSpec = { id: string; exam: "WH1" | "WH2"; unit: number; stim: WhStim; theme: string; sources: WhSrcRef[]; skills: string[]; nItems: number; seed: number };
-export type WhFrqSpec = { id: string; exam: "WH1" | "WH2"; template: "saq1" | "saq2" | "saq3" | "dbq" | "leq"; era: number; units: number[]; focus: string; sources: WhSrcRef[]; seed: number };
+export type WhSetSpec = { id: string; exam: "WH1" | "WH2" | "WH3"; unit: number; stim: WhStim; theme: string; sources: WhSrcRef[]; skills: string[]; nItems: number; seed: number };
+export type WhFrqSpec = { id: string; exam: "WH1" | "WH2" | "WH3"; template: "saq1" | "saq2" | "saq3" | "dbq" | "leq"; era: number; units: number[]; focus: string; sources: WhSrcRef[]; seed: number };
 
 /** 자료별 한 줄 맥락(사실만). */
 export const CTX: Record<string, string> = {
@@ -60,8 +60,38 @@ export const CTX: Record<string, string> = {
   "txt-leagcov-art22": "The Covenant of the League of Nations was part of the peace settlement after the First World War; Article 22 set up the mandate system.",
   "txt-whitepaper-1922": "The British government published this statement in June 1922, when Britain was preparing to govern Palestine under a League of Nations mandate.",
 };
+// 2026-10-19 WH3(추가 라운드): 문화·환경·과학 자료 중심(Mughal·권리/주권·국제 권력 편중 회피). 자료는 data/ap/wh-sources/registry.json(매니페스트 wh-sources-manifest-r19.json).
+Object.assign(CTX, {
+  "txt-okakura-tea-1906": "Kakuzo Okakura was a Japanese art scholar who wrote this book in English in 1906 for American readers.",
+  "txt-nitobe-bushido-1900": "Inazo Nitobe was a Japanese educator who published this book in English in 1900 to explain the code of the warrior class of Japan's feudal age to Western readers.",
+  "txt-polo-famine-trees": "Marco Polo was a Venetian merchant who spent years in Mongol-ruled China in the 13th century; his account was written down around 1298. These passages describe policies of the Great Khan, Kublai.",
+  "img-taqi-observatory-1581": "This painting was made around 1581 for the Ottoman court and shows astronomers at the Istanbul observatory that Sultan Murad III had ordered built around 1575.",
+  "img-bellini-mehmed-1480": "Gentile Bellini, a painter from Venice, traveled to Istanbul in 1479-1480 at the request of Sultan Mehmed II and painted this portrait in 1480.",
+  "txt-columbus-1493": "Columbus was an Italian sailor in the service of Spain; he wrote this letter after his first voyage across the Atlantic in 1492-1493.",
+  "txt-galileo-1610": "Galileo was a professor of mathematics at the University of Padua in the Republic of Venice; he published this short book in Venice in 1610.",
+  "img-waldseemuller-1507": "Martin Waldseemuller, a German mapmaker, printed this large world map in 1507 using accounts of recent voyages across the Atlantic.",
+  "txt-humboldt-1800": "Humboldt was a naturalist from Prussia who traveled in the Spanish colonies of South America from 1799 to 1804; this passage describes the valleys of Aragua in Venezuela.",
+  "txt-wallace-1869": "Wallace was a British naturalist who collected specimens in what is now Indonesia from 1854 to 1862 and published this account in 1869.",
+  "txt-darwin-1839": "Charles Darwin was a British naturalist aboard H.M.S. Beagle when it surveyed coasts and islands around the world in 1831-1836; he visited the Galapagos Islands in 1835.",
+  "txt-livingstone-1857": "David Livingstone was a Scottish missionary who traveled widely in southern Africa; he published this book in 1857.",
+  "txt-ford-1922": "Henry Ford founded the Ford Motor Company in Michigan; he published this book in 1922 about the company's methods.",
+  "tab-census-worldpop-1900-1950": "The U.S. Census Bureau publishes a table comparing estimates of world population made by several scholars; this table shows the lowest and highest of those estimates for six years.",
+  "img-earthrise-1968": "The crew of Apollo 8 took this photograph in December 1968 while orbiting the Moon.",
+  "txt-cs-indonesia-2011": "This reference book was written for the U.S. government; the passage describes farming in Indonesia from the 1960s to the 1990s.",
+  "txt-cs-korea-1992": "This reference book was written for the U.S. government in the early 1990s and describes South Korean society.",
+  "txt-libby-science-1917": "Walter Libby was an American historian of science who wrote this textbook in 1917.",
+  "txt-taylor-1911": "Frederick W. Taylor was an American engineer who published this book in 1911 about how to organize work in factories.",
+  "img-hokusai-wave-1831": "Hokusai was a Japanese artist who designed this woodblock print around 1831 for a series of views of Mount Fuji; copies were sold widely in Japan.",
+  "txt-marsh-1864": "George P. Marsh was an American diplomat who had served in Italy and the Ottoman Empire; he published this book in 1864.",
+  "txt-muir-1901": "John Muir was a Scottish-born American naturalist; he published this book in 1901.",
+  "txt-arrhenius-1908": "Svante Arrhenius was a Swedish chemist; this book was published in English in 1908.",
+  "img-dustbowl-1936": "A photographer working for the U.S. government took this photograph in the Texas Panhandle in March 1936.",
+  "tab-noaa-co2-mlo": "The U.S. National Oceanic and Atmospheric Administration measures carbon dioxide in the air at an observatory on a Hawaiian volcano; this table shows annual averages for seven years.",
+  "txt-cs-soviet-1991": "This reference book was written for the U.S. government in 1991, before the Soviet Union ended.",
+  "txt-cs-brazil-1998": "This reference book was written for the U.S. government; the passage describes Brazil in the early 1990s.",
+});
 const S = (id: string): WhSrcRef => ({ id, context: CTX[id] });
-const set = (id: string, exam: "WH1" | "WH2", unit: number, stim: WhStim, theme: string, srcs: string[], skills: string[], seed: number): WhSetSpec => ({ id, exam, unit, stim, theme, sources: srcs.map(S), skills, nItems: skills.length, seed });
+const set = (id: string, exam: "WH1" | "WH2" | "WH3", unit: number, stim: WhStim, theme: string, srcs: string[], skills: string[], seed: number): WhSetSpec => ({ id, exam, unit, stim, theme, sources: srcs.map(S), skills, nItems: skills.length, seed });
 
 export const WH_SETS: WhSetSpec[] = [
   // ── WH1 ──
@@ -96,9 +126,26 @@ export const WH_SETS: WhSetSpec[] = [
   set("w213", "WH2", 8, "primary_text", "Indian nationalism and the critique of British rule", ["txt-gandhi-1909"], ["2.B", "3.A", "5.B"], 1213),
   set("w214", "WH2", 8, "image", "The division of Berlin during the Cold War", ["img-berlin-wall-cia-1961"], ["2.A", "4.B", "5.B"], 1214),
   set("w215", "WH2", 9, "secondary_text", "Economic planning and growth in India after independence", ["txt-cs-india-1995"], ["1.B", "3.A", "4.B", "5.B"], 1215),
+  // ── WH3 (2026-10-19) ──
+  set("w301", "WH3", 1, "paired_text", "Two Japanese authors explain the origins of tea culture and of the warrior code to Western readers in 1900-1906", ["txt-okakura-tea-1906", "txt-nitobe-bushido-1900"], ["3.C", "2.B", "4.A", "5.B"], 3301),
+  set("w302", "WH3", 2, "primary_text", "State relief of famine and the planting of roadside trees in Yuan China as described by a Venetian visitor", ["txt-polo-famine-trees"], ["2.B", "3.A", "4.B", "5.A"], 3302),
+  set("w303", "WH3", 3, "image", "Astronomical instruments and scholars at the Ottoman observatory in Istanbul", ["img-taqi-observatory-1581"], ["2.A", "3.A", "4.B", "5.A"], 3303),
+  set("w304", "WH3", 3, "image", "A Venetian painter at the Ottoman court and cultural exchange between the Ottoman Empire and Italian states", ["img-bellini-mehmed-1480"], ["2.A", "3.A", "4.A", "5.B"], 3304),
+  set("w305", "WH3", 4, "primary_text", "The Caribbean environment and the economic hopes of the first Atlantic crossing, 1493", ["txt-columbus-1493"], ["2.B", "3.A", "4.A", "5.B"], 3305),
+  set("w306", "WH3", 4, "primary_text", "The telescope and new observations of the Moon in the Republic of Venice", ["txt-galileo-1610"], ["2.B", "3.A", "4.B", "5.A"], 3306),
+  set("w307", "WH3", 4, "image", "European mapmaking after the first Atlantic voyages: the first map to name America", ["img-waldseemuller-1507"], ["2.A", "3.A", "4.B", "5.A"], 3307),
+  set("w308", "WH3", 5, "primary_text", "Deforestation, irrigation and a shrinking lake in Spanish Venezuela around 1800", ["txt-humboldt-1800"], ["2.B", "3.A", "4.B", "5.A"], 3308),
+  set("w309", "WH3", 5, "primary_text", "Volcanic eruptions and their effects on villages and crops in the East Indies", ["txt-wallace-1869"], ["2.A", "3.A", "4.A", "5.B"], 3309),
+  set("w310", "WH3", 6, "primary_text", "Scientific voyages and island ecosystems: a naturalist in the Galapagos in 1835", ["txt-darwin-1839"], ["2.B", "3.A", "4.B", "5.A"], 3310),
+  set("w311", "WH3", 6, "primary_text", "Legitimate commerce as a proposed alternative to the slave trade in southern Africa", ["txt-livingstone-1857"], ["2.B", "3.B", "4.A", "5.B"], 3311),
+  set("w312", "WH3", 7, "primary_text", "The moving assembly line and the organization of industrial work", ["txt-ford-1922"], ["1.B", "3.A", "4.B", "5.A"], 3312),
+  set("w313", "WH3", 7, "quantitative", "World population growth in the first half of the 20th century", ["tab-census-worldpop-1900-1950"], ["1.A", "3.B", "4.B", "5.A"], 3313),
+  set("w314", "WH3", 8, "image", "The Earth seen from lunar orbit and the rise of global environmental awareness", ["img-earthrise-1968"], ["2.A", "3.A", "4.B", "5.B"], 3314),
+  set("w315", "WH3", 8, "secondary_text", "The Green Revolution and rice self-sufficiency in Indonesia", ["txt-cs-indonesia-2011"], ["1.B", "3.A", "3.D", "4.B"], 3315),
+  set("w316", "WH3", 9, "secondary_text", "Family planning, Confucian values and rapid modernization in South Korea", ["txt-cs-korea-1992"], ["1.B", "3.A", "4.A", "5.B"], 3316),
 ];
 
-const F = (id: string, exam: "WH1" | "WH2", template: WhFrqSpec["template"], era: number, units: number[], focus: string, srcs: string[], seed: number): WhFrqSpec => ({ id, exam, template, era, units, focus, sources: srcs.map(S), seed });
+const F = (id: string, exam: "WH1" | "WH2" | "WH3", template: WhFrqSpec["template"], era: number, units: number[], focus: string, srcs: string[], seed: number): WhFrqSpec => ({ id, exam, template, era, units, focus, sources: srcs.map(S), seed });
 export const WH_FRQS: WhFrqSpec[] = [
   F("wh1_saq1", "WH1", "saq1", 4, [8], "Superpower rivalry and the end of European control in the Middle East in the 1950s (Suez crisis)", ["txt-cs-egypt-1991"], 2101),
   F("wh1_saq2", "WH1", "saq2", 1, [2], "The Black Death as a disease that moved along trade routes, and its social and economic effects in Europe and the Mediterranean (do not tie the plague to the fall of any particular dynasty)", ["txt-boccaccio-plague-1353"], 3122),
@@ -110,6 +157,12 @@ export const WH_FRQS: WhFrqSpec[] = [
   F("wh2_saq3", "WH2", "saq3", 1, [1], "Mongol expansion and the response of the states it threatened in the 13th century (the image is a detail of a longer scroll; make no claims about the rest of the scroll)", ["img-mongol-invasion-japan-1293"], 3223),
   F("wh2_dbq", "WH2", "dbq", 4, [7], "How far Allied commitments and the peace settlements after the First World War reshaped political authority in the former Ottoman Arab provinces, 1915-1922", ["txt-hussein-1915", "txt-mcmahon-1915", "txt-sykes-1916", "img-sykes-picot-map-1916", "txt-balfour-1917", "txt-leagcov-art22", "txt-whitepaper-1922"], 2204),
   F("wh2_leq", "WH2", "leq", 3, [5, 6, 7, 8, 9], "Nationalism and resistance to foreign rule, c. 1750 to the present (use only well-established facts; avoid details about who led the early stages of any revolution)", [], 3205),
+  // ── WH3 (2026-10-19) ──
+  F("wh3_saq1", "WH3", "saq1", 2, [4], "The organization of scientific inquiry in 17th-century Europe: informal groups of scholars and the founding of the Royal Society of London (do not claim the society was the first scientific body anywhere)", ["txt-libby-science-1917"], 4301),
+  F("wh3_saq2", "WH3", "saq2", 4, [7], "The reorganization of factory work in the early 20th century: scientific management and assembly-line methods, and their effects on workers and consumers", ["txt-taylor-1911"], 4302),
+  F("wh3_saq3", "WH3", "saq3", 3, [6], "Art, trade and cultural exchange in early 19th-century Japan, as seen in a woodblock print sold widely at home and later abroad (make no claims about the full series beyond the single print shown)", ["img-hokusai-wave-1831"], 4303),
+  F("wh3_dbq", "WH3", "dbq", 3, [5, 6, 7, 8, 9], "How and why understandings of the relationship between human activity and the natural environment changed from the mid-19th century to the early 21st century", ["txt-marsh-1864", "txt-muir-1901", "txt-arrhenius-1908", "img-dustbowl-1936", "tab-noaa-co2-mlo", "txt-cs-soviet-1991", "txt-cs-brazil-1998"], 4304),
+  F("wh3_leq", "WH3", "leq", 1, [1, 2], "State and community responses to famine, disease and environmental stress, c. 1200 to c. 1450 (use only well-established facts)", [], 4305),
 ];
 export const whSetsOf = (exam?: string) => WH_SETS.filter((s) => !exam || s.exam === exam);
 export const whPlanSummary = () => ({ sets: WH_SETS.length, items: WH_SETS.reduce((a, s) => a + s.nItems, 0), byExam: Object.fromEntries(["WH1", "WH2"].map((e) => [e, { sets: whSetsOf(e).length, items: whSetsOf(e).reduce((a, s) => a + s.nItems, 0), units: whSetsOf(e).reduce<Record<string, number>>((o, s) => { o[s.unit] = (o[s.unit] ?? 0) + s.nItems; return o; }, {}), stim: whSetsOf(e).reduce<Record<string, number>>((o, s) => { o[s.stim] = (o[s.stim] ?? 0) + 1; return o; }, {}), skillCats: whSetsOf(e).reduce<Record<string, number>>((o, s) => { for (const k of s.skills) o[k[0]] = (o[k[0]] ?? 0) + 1; return o; }, {}) }])) });
