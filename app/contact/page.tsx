@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
+import { OG_IMAGES } from "@/lib/site-url";
 import { PageHero, Prose, PublicPage } from "@/app/components/public/PublicShell";
-import { resolveLandingDestinations } from "@/lib/landing/cta";
-import { loadLandingViewer } from "@/lib/landing/viewer";
+import { loadPublicDest } from "@/lib/landing/public-dest";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/contact" },
   title: "Contact — ALTON",
   description: "Contact ALTON Education by email or request a tutoring consultation.",
-  openGraph: { title: "Contact — ALTON", description: "Contact ALTON Education by email or request a tutoring consultation." },
+  openGraph: { images: OG_IMAGES, title: "Contact — ALTON", description: "Contact ALTON Education by email or request a tutoring consultation." },
 };
 
 export default async function ContactPage() {
-  const dest = resolveLandingDestinations(await loadLandingViewer());
+  const dest = await loadPublicDest();
   return (
     <PublicPage dest={dest}>
       <PageHero eyebrow="CONTACT" title="Get in touch" />

@@ -1,24 +1,25 @@
 import type { Metadata } from "next";
+import { OG_IMAGES } from "@/lib/site-url";
 import LegalNotice, { LegalSection } from "@/app/components/public/LegalNotice";
 import { LegalBlocks } from "@/app/components/public/LegalContent";
 import { PageHero, Prose, PublicPage } from "@/app/components/public/PublicShell";
-import { resolveLandingDestinations } from "@/lib/landing/cta";
-import { loadLandingViewer } from "@/lib/landing/viewer";
+import { loadPublicDest } from "@/lib/landing/public-dest";
 import { TERMS_SECTIONS as TERMS_CONTENT } from "@/lib/legal/site-documents";
 
 const DESCRIPTION = "The terms that apply when you use ALTON Education's website, free learning accounts and services.";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/terms" },
   title: "Terms of Use — ALTON",
   description: DESCRIPTION,
-  openGraph: { title: "Terms of Use — ALTON", description: DESCRIPTION },
+  openGraph: { images: OG_IMAGES, title: "Terms of Use — ALTON", description: DESCRIPTION },
 };
 
 // Content lives in lib/legal/site-documents.ts (source: docs/contracts/terms-of-use-en.md).
 export const TERMS_SECTIONS = TERMS_CONTENT.map(({ id, title }) => ({ id, title }));
 
 export default async function TermsPage() {
-  const dest = resolveLandingDestinations(await loadLandingViewer());
+  const dest = await loadPublicDest();
   return (
     <PublicPage dest={dest}>
       <PageHero eyebrow="LEGAL" title="Terms of Use" />
