@@ -33,7 +33,7 @@ describe("LandingView", () => {
     expect(c.getByText("13")).toBeInTheDocument();
     expect(c.getByText("AP Calculus AB")).toBeInTheDocument();
     expect(c.getByText("4 sets")).toBeInTheDocument();
-    expect(c.queryByText(/full practice exam/)).toBeNull();
+    expect(c.queryByText(/\d full practice exam/)).toBeNull();
     expect(c.getByText("New tests are added regularly.")).toBeInTheDocument();
     expect(c.getByText("We're building toward 10+ full practice exams per AP subject.")).toBeInTheDocument();
     const coming = c.getByText("Coming soon").parentElement!.textContent!;
