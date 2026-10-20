@@ -1,0 +1,1871 @@
+[
+ {
+  "candidateKey": "ap_physics_c_mechanics-f01-k0",
+  "cellId": "ap_physics_c_mechanics-f01",
+  "apSubjectCode": "ap_physics_c_mechanics",
+  "kind": "frq_bundle",
+  "keywordCode": "7.3",
+  "unitCode": "7",
+  "skillPrimary": "2.D",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "pcf_tbr_shm_phase_graphs",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard multi-part FRQ on mass-spring SHM. It needs the graph representations of x(t) and v(t), a short derivation of v_max from energy or omega*A, substitution with clean numbers, and one proportional-reasoning prediction (T scales as sqrt(m), v_max as 1/sqrt(m)). Each part needs only one law or one representation change. Scope is within Unit 7 and the arithmetic is light, so it suits a full mock rather than basic learning or an advanced supplement.",
+  "payload": {
+   "archetype": "pcf_tbr_shm_phase_graphs",
+   "template": "tbr",
+   "topic": "7.3",
+   "extra_topics": [
+    "7.1",
+    "7.2",
+    "1.3"
+   ],
+   "skill": "2.D",
+   "representative_skill": "2.D",
+   "calculator": "allowed",
+   "title": "Position and velocity graphs of a block on a spring",
+   "stimulus": {
+    "kind": "text",
+    "description": "A block of mass $m=1\\text{ kg}$ is attached to a horizontal ideal spring of spring constant $k=100\\text{ N/m}$ on a frictionless surface. The block is pulled to $x=+A$ with $A=0.2\\text{ m}$ and released from rest at $t=0$. Blank axes are provided on the answer sheet.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "On the axes provided, sketch the position $x$ and the velocity $v$ of the block as functions of time $t$ for one full period (use two separate sets of axes stacked vertically with the same time scale). Label the amplitudes and the period.",
+     "points": 4,
+     "response_mode": "graph",
+     "skill_codes": [
+      "1.A",
+      "1.C"
+     ],
+     "model_answer": "$x(t)$ is a cosine starting at $+0.2\\text{ m}$ with period $T=0.63\\text{ s}$; $v(t)$ is a negative sine, zero at $t=0$, reaching $-2.00\\text{ m/s}$ at $T/4$.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Both sets of axes are labeled with quantities and units and share the same time scale",
+       "required_elements": [
+        "axis labels",
+        "units"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "The position graph is a cosine that starts at $+A=0.2\\text{ m}$",
+       "required_elements": [
+        "cosine starting at +A"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "starts at zero like a sine"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "The velocity graph is zero at $t=0$ and first becomes negative, reaching about $-2.00\\text{ m/s}$ at a quarter period",
+       "required_elements": [
+        "2.00",
+        "starts at zero",
+        "negative first"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "draws the velocity as a positive cosine"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      },
+      {
+       "row_id": "A4",
+       "points": 1,
+       "criterion": "The period is marked as about $0.63\\text{ s}$ on the time axis",
+       "required_elements": [
+        "0.63"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "marks half of the period"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Derive an expression for the maximum speed of the block in terms of $A$, $k$ and $m$.",
+     "points": 3,
+     "response_mode": "derive",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "$x=A\\cos\\omega t$ with $\\omega=\\sqrt{k/m}$, so $v=dx/dt=-A\\omega\\sin\\omega t$ and $v_{max}=A\\sqrt{k/m}$.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Identifies the angular frequency $\\omega=\\sqrt{k/m}$ (or sets the initial elastic energy $\\tfrac12kA^2$ equal to the maximum kinetic energy)",
+       "required_elements": [
+        "omega = sqrt(k/m)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "1/2 k A^2 = 1/2 m v_max^2 (energy conservation)"
+       ],
+       "common_errors": [
+        "uses $\\omega=\\sqrt{m/k}$"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Differentiates the position function to find the velocity $v=-A\\omega\\sin\\omega t$ (or writes the kinetic energy at the equilibrium position)",
+       "required_elements": [
+        "v = - A omega sin omega t"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "1/2 m v^2 = 1/2 k A^2"
+       ],
+       "common_errors": [
+        "differentiates cos to sin without the factor omega"
+       ],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "B3",
+       "points": 1,
+       "criterion": "Obtains $v_{max}=A\\sqrt{k/m}$",
+       "required_elements": [
+        "A sqrt(k/m)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits the square root"
+       ],
+       "requires_row_id": "B2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Calculate the period, the maximum speed and the magnitude of the maximum acceleration of the block.",
+     "points": 3,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "2.B"
+     ],
+     "model_answer": "$T=2\\pi\\sqrt{m/k}\\approx0.63\\text{ s}$, $v_{max}=A\\sqrt{k/m}\\approx2.00\\text{ m/s}$ and $a_{max}=A\\omega^2=kA/m\\approx20.00\\text{ m/s}^2$.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Calculates the period of about 0.63 with units of seconds",
+       "required_elements": [
+        "0.63",
+        "s"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits the $2\\pi$"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Calculates the maximum speed of about 2.00 with units of meters per second",
+       "required_elements": [
+        "2.00",
+        "m/s"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits the square root"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "C3",
+       "points": 1,
+       "criterion": "Calculates the maximum acceleration of about 20.00 with units of meters per second squared",
+       "required_elements": [
+        "20.00",
+        "m/s^2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses $A\\omega$ for the acceleration"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "The block is replaced by one with four times the mass and released from the same position. Predict by what factors the period and the maximum speed change, and justify your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.D",
+      "3.B"
+     ],
+     "model_answer": "The period doubles and the maximum speed is halved, because $T=2\\pi\\sqrt{m/k}$ and $v_{max}=A\\sqrt{k/m}$ depend on $m$ through $\\sqrt{m}$.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "States that the period doubles (a factor of 2) and the maximum speed is halved (a factor of 1/2)",
+       "required_elements": [
+        "period doubles",
+        "speed halves"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "states a factor of 4 for the period"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Justifies with $T\\propto\\sqrt{m}$ and $v_{max}\\propto1/\\sqrt{m}$ (same stored energy shared with a larger mass)",
+       "required_elements": [
+        "T proportional to sqrt m",
+        "same energy larger mass"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "argues only that the heavier block is slower"
+       ],
+       "requires_row_id": "D1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 12,
+   "est_minutes": 27,
+   "facts": [
+    "k=100.0",
+    "m=1.0",
+    "A=0.2",
+    "T=0.6283",
+    "vmax=2.0000",
+    "amax=20.0000"
+   ],
+   "expected_values": [
+    {
+     "part": "C",
+     "quantity": "period",
+     "value": 0.6283185307179586,
+     "unit": "s",
+     "tolerance": 0.01
+    },
+    {
+     "part": "C",
+     "quantity": "maximum speed",
+     "value": 2,
+     "unit": "m/s",
+     "tolerance": 0.029
+    },
+    {
+     "part": "C",
+     "quantity": "maximum acceleration",
+     "value": 20,
+     "unit": "m/s^2",
+     "tolerance": 0.26
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "pcf_tbr_shm_phase_graphs",
+    "subject": "ap_physics_c_mechanics",
+    "kind": "frq_bundle",
+    "concept": "Sketching the position and velocity graphs of an oscillator, deriving the maximum speed by differentiation, and predicting the effect of a larger mass",
+    "topic": "7.3",
+    "skill": "2.D",
+    "student_thinking": [
+     "Sketch the position and the velocity as functions of time",
+     "Differentiate the position function for the velocity and find its maximum",
+     "Predict the effect of a larger mass on the period and the maximum speed"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the surface is frictionless and the spring is ideal",
+      "evidence": "the stimulus states a frictionless surface and an ideal spring"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "the mass",
+      "the spring constant",
+      "the amplitude"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "an RK4 simulation recomputes the period and the maximum speed; the maximum acceleration follows from Hooke's law",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "1.A",
+       "1.C"
+      ],
+      "topics": [
+       "7.3"
+      ],
+      "points": 4,
+      "accepted_answers": [
+       "$x(t)$ is a cosine starting at $+0.2\\text{ m}$ with period $T=0.63\\text{ s}$; $v(t)$ is a negative sine, zero at $t=0$, reaching $-2.00\\text{ m/s}$ at $T/4$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Both sets of axes are labeled with quantities and units and share the same time scale",
+        "elements": [
+         "axis labels",
+         "units"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "The position graph is a cosine that starts at $+A=0.2\\text{ m}$",
+        "elements": [
+         "cosine starting at +A"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "The velocity graph is zero at $t=0$ and first becomes negative, reaching about $-2.00\\text{ m/s}$ at a quarter period",
+        "elements": [
+         "2.00",
+         "starts at zero",
+         "negative first"
+        ]
+       },
+       {
+        "row_id": "A4",
+        "points": 1,
+        "criterion": "The period is marked as about $0.63\\text{ s}$ on the time axis",
+        "elements": [
+         "0.63"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "7.3"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "$x=A\\cos\\omega t$ with $\\omega=\\sqrt{k/m}$, so $v=dx/dt=-A\\omega\\sin\\omega t$ and $v_{max}=A\\sqrt{k/m}$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Identifies the angular frequency $\\omega=\\sqrt{k/m}$ (or sets the initial elastic energy $\\tfrac12kA^2$ equal to the maximum kinetic energy)",
+        "elements": [
+         "omega = sqrt(k/m)"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Differentiates the position function to find the velocity $v=-A\\omega\\sin\\omega t$ (or writes the kinetic energy at the equilibrium position)",
+        "elements": [
+         "v = - A omega sin omega t"
+        ]
+       },
+       {
+        "row_id": "B3",
+        "points": 1,
+        "criterion": "Obtains $v_{max}=A\\sqrt{k/m}$",
+        "elements": [
+         "A sqrt(k/m)"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "2.B"
+      ],
+      "topics": [
+       "7.3"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "$T=2\\pi\\sqrt{m/k}\\approx0.63\\text{ s}$, $v_{max}=A\\sqrt{k/m}\\approx2.00\\text{ m/s}$ and $a_{max}=A\\omega^2=kA/m\\approx20.00\\text{ m/s}^2$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Calculates the period of about 0.63 with units of seconds",
+        "elements": [
+         "0.63",
+         "s"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Calculates the maximum speed of about 2.00 with units of meters per second",
+        "elements": [
+         "2.00",
+         "m/s"
+        ]
+       },
+       {
+        "row_id": "C3",
+        "points": 1,
+        "criterion": "Calculates the maximum acceleration of about 20.00 with units of meters per second squared",
+        "elements": [
+         "20.00",
+         "m/s^2"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "2.D",
+       "3.B"
+      ],
+      "topics": [
+       "7.3"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "The period doubles and the maximum speed is halved, because $T=2\\pi\\sqrt{m/k}$ and $v_{max}=A\\sqrt{k/m}$ depend on $m$ through $\\sqrt{m}$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "States that the period doubles (a factor of 2) and the maximum speed is halved (a factor of 1/2)",
+        "elements": [
+         "period doubles",
+         "speed halves"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Justifies with $T\\propto\\sqrt{m}$ and $v_{max}\\propto1/\\sqrt{m}$ (same stored energy shared with a larger mass)",
+        "elements": [
+         "T proportional to sqrt m",
+         "same energy larger mass"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 12,
+    "judgment_demand": [
+     "representation_reading",
+     "symbolic_reasoning",
+     "justification"
+    ]
+   },
+   "seed": 29000,
+   "pack_id": "pcf_tbr_shm_phase_graphs-s29000"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "pcf_tbr_shm_phase_graphs",
+   "facts": [
+    "k=100.0",
+    "m=1.0",
+    "A=0.2",
+    "T=0.6283",
+    "vmax=2.0000",
+    "amax=20.0000"
+   ],
+   "seed": 29000
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope and consistent. It has 12 points (4+3+3+2), matching the fixed Translation Between Representations weight. The keys for graphs, derivation, numeric values and the mass-factor prediction are unique and justified, and the rubric rows are properly split with conditions. Calculator use is trivial and consistent. No instant-reject conditions apply.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ on mass-spring SHM. It needs the graph representations of x(t) and v(t), a short derivation of v_max from energy or omega*A, substitution with clean numbers, and one proportional-reasoning prediction (T scales as sqrt(m), v_max as 1/sqrt(m)). Each part needs only one law or one representation change. Scope is within Unit 7 and the arithmetic is light, so it suits a full mock rather than basic learning or an advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "candidateKey": "ap_physics_c_mechanics-f01-k1",
+  "cellId": "ap_physics_c_mechanics-f01",
+  "apSubjectCode": "ap_physics_c_mechanics",
+  "kind": "frq_bundle",
+  "keywordCode": "7.3",
+  "unitCode": "7",
+  "skillPrimary": "2.D",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "pcf_tbr_shm_phase_graphs",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard AP-style multi-part FRQ. It needs the SHM governing relations (omega = sqrt(k/m), x = A cos(wt), v = -A w sin(wt)), a graph sketch, a short energy-conservation derivation, a calculation with clean numbers, and a proportional-scaling prediction (4x mass gives 2x period and 1/2 v_max). Each step is routine, but there are several of them and they span several representations. This is appropriate for a full mock, not too easy for basic learning and not beyond the course. Arithmetic is light, the wording is unambiguous, and the reading load is low.",
+  "payload": {
+   "archetype": "pcf_tbr_shm_phase_graphs",
+   "template": "tbr",
+   "topic": "7.3",
+   "extra_topics": [
+    "7.1",
+    "7.2",
+    "1.3"
+   ],
+   "skill": "2.D",
+   "representative_skill": "2.D",
+   "calculator": "allowed",
+   "title": "Position and velocity graphs of a block on a spring",
+   "stimulus": {
+    "kind": "text",
+    "description": "A block of mass $m=0.4\\text{ kg}$ is attached to a horizontal ideal spring of spring constant $k=80\\text{ N/m}$ on a frictionless surface. The block is pulled to $x=+A$ with $A=0.2\\text{ m}$ and released from rest at $t=0$. Blank axes are provided on the answer sheet.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "On the axes provided, sketch the position $x$ and the velocity $v$ of the block as functions of time $t$ for one full period (use two separate sets of axes stacked vertically with the same time scale). Label the amplitudes and the period.",
+     "points": 4,
+     "response_mode": "graph",
+     "skill_codes": [
+      "1.A",
+      "1.C"
+     ],
+     "model_answer": "$x(t)$ is a cosine starting at $+0.2\\text{ m}$ with period $T=0.44\\text{ s}$; $v(t)$ is a negative sine, zero at $t=0$, reaching $-2.83\\text{ m/s}$ at $T/4$.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Both sets of axes are labeled with quantities and units and share the same time scale",
+       "required_elements": [
+        "axis labels",
+        "units"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "The position graph is a cosine that starts at $+A=0.2\\text{ m}$",
+       "required_elements": [
+        "cosine starting at +A"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "starts at zero like a sine"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "The velocity graph is zero at $t=0$ and first becomes negative, reaching about $-2.83\\text{ m/s}$ at a quarter period",
+       "required_elements": [
+        "2.83",
+        "starts at zero",
+        "negative first"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "draws the velocity as a positive cosine"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      },
+      {
+       "row_id": "A4",
+       "points": 1,
+       "criterion": "The period is marked as about $0.44\\text{ s}$ on the time axis",
+       "required_elements": [
+        "0.44"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "marks half of the period"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Derive an expression for the maximum speed of the block in terms of $A$, $k$ and $m$.",
+     "points": 3,
+     "response_mode": "derive",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "$x=A\\cos\\omega t$ with $\\omega=\\sqrt{k/m}$, so $v=dx/dt=-A\\omega\\sin\\omega t$ and $v_{max}=A\\sqrt{k/m}$.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Identifies the angular frequency $\\omega=\\sqrt{k/m}$ (or sets the initial elastic energy $\\tfrac12kA^2$ equal to the maximum kinetic energy)",
+       "required_elements": [
+        "omega = sqrt(k/m)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "1/2 k A^2 = 1/2 m v_max^2 (energy conservation)"
+       ],
+       "common_errors": [
+        "uses $\\omega=\\sqrt{m/k}$"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Differentiates the position function to find the velocity $v=-A\\omega\\sin\\omega t$ (or writes the kinetic energy at the equilibrium position)",
+       "required_elements": [
+        "v = - A omega sin omega t"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "1/2 m v^2 = 1/2 k A^2"
+       ],
+       "common_errors": [
+        "differentiates cos to sin without the factor omega"
+       ],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "B3",
+       "points": 1,
+       "criterion": "Obtains $v_{max}=A\\sqrt{k/m}$",
+       "required_elements": [
+        "A sqrt(k/m)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits the square root"
+       ],
+       "requires_row_id": "B2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Calculate the period, the maximum speed and the magnitude of the maximum acceleration of the block.",
+     "points": 3,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "2.B"
+     ],
+     "model_answer": "$T=2\\pi\\sqrt{m/k}\\approx0.44\\text{ s}$, $v_{max}=A\\sqrt{k/m}\\approx2.83\\text{ m/s}$ and $a_{max}=A\\omega^2=kA/m\\approx40.00\\text{ m/s}^2$.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Calculates the period of about 0.44 with units of seconds",
+       "required_elements": [
+        "0.44",
+        "s"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits the $2\\pi$"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Calculates the maximum speed of about 2.83 with units of meters per second",
+       "required_elements": [
+        "2.83",
+        "m/s"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits the square root"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "C3",
+       "points": 1,
+       "criterion": "Calculates the maximum acceleration of about 40.00 with units of meters per second squared",
+       "required_elements": [
+        "40.00",
+        "m/s^2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses $A\\omega$ for the acceleration"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "The block is replaced by one with four times the mass and released from the same position. Predict by what factors the period and the maximum speed change, and justify your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.D",
+      "3.B"
+     ],
+     "model_answer": "The period doubles and the maximum speed is halved, because $T=2\\pi\\sqrt{m/k}$ and $v_{max}=A\\sqrt{k/m}$ depend on $m$ through $\\sqrt{m}$.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "States that the period doubles (a factor of 2) and the maximum speed is halved (a factor of 1/2)",
+       "required_elements": [
+        "period doubles",
+        "speed halves"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "states a factor of 4 for the period"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Justifies with $T\\propto\\sqrt{m}$ and $v_{max}\\propto1/\\sqrt{m}$ (same stored energy shared with a larger mass)",
+       "required_elements": [
+        "T proportional to sqrt m",
+        "same energy larger mass"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "argues only that the heavier block is slower"
+       ],
+       "requires_row_id": "D1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 12,
+   "est_minutes": 27,
+   "facts": [
+    "k=80.0",
+    "m=0.4",
+    "A=0.2",
+    "T=0.4443",
+    "vmax=2.8284",
+    "amax=40.0000"
+   ],
+   "expected_values": [
+    {
+     "part": "C",
+     "quantity": "period",
+     "value": 0.44428829381583657,
+     "unit": "s",
+     "tolerance": 0.01
+    },
+    {
+     "part": "C",
+     "quantity": "maximum speed",
+     "value": 2.8284271247461903,
+     "unit": "m/s",
+     "tolerance": 0.03894112549695428
+    },
+    {
+     "part": "C",
+     "quantity": "maximum acceleration",
+     "value": 40.00000000000001,
+     "unit": "m/s^2",
+     "tolerance": 0.5000000000000001
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "pcf_tbr_shm_phase_graphs",
+    "subject": "ap_physics_c_mechanics",
+    "kind": "frq_bundle",
+    "concept": "Sketching the position and velocity graphs of an oscillator, deriving the maximum speed by differentiation, and predicting the effect of a larger mass",
+    "topic": "7.3",
+    "skill": "2.D",
+    "student_thinking": [
+     "Sketch the position and the velocity as functions of time",
+     "Differentiate the position function for the velocity and find its maximum",
+     "Predict the effect of a larger mass on the period and the maximum speed"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the surface is frictionless and the spring is ideal",
+      "evidence": "the stimulus states a frictionless surface and an ideal spring"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "the mass",
+      "the spring constant",
+      "the amplitude"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "an RK4 simulation recomputes the period and the maximum speed; the maximum acceleration follows from Hooke's law",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "1.A",
+       "1.C"
+      ],
+      "topics": [
+       "7.3"
+      ],
+      "points": 4,
+      "accepted_answers": [
+       "$x(t)$ is a cosine starting at $+0.2\\text{ m}$ with period $T=0.44\\text{ s}$; $v(t)$ is a negative sine, zero at $t=0$, reaching $-2.83\\text{ m/s}$ at $T/4$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Both sets of axes are labeled with quantities and units and share the same time scale",
+        "elements": [
+         "axis labels",
+         "units"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "The position graph is a cosine that starts at $+A=0.2\\text{ m}$",
+        "elements": [
+         "cosine starting at +A"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "The velocity graph is zero at $t=0$ and first becomes negative, reaching about $-2.83\\text{ m/s}$ at a quarter period",
+        "elements": [
+         "2.83",
+         "starts at zero",
+         "negative first"
+        ]
+       },
+       {
+        "row_id": "A4",
+        "points": 1,
+        "criterion": "The period is marked as about $0.44\\text{ s}$ on the time axis",
+        "elements": [
+         "0.44"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "7.3"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "$x=A\\cos\\omega t$ with $\\omega=\\sqrt{k/m}$, so $v=dx/dt=-A\\omega\\sin\\omega t$ and $v_{max}=A\\sqrt{k/m}$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Identifies the angular frequency $\\omega=\\sqrt{k/m}$ (or sets the initial elastic energy $\\tfrac12kA^2$ equal to the maximum kinetic energy)",
+        "elements": [
+         "omega = sqrt(k/m)"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Differentiates the position function to find the velocity $v=-A\\omega\\sin\\omega t$ (or writes the kinetic energy at the equilibrium position)",
+        "elements": [
+         "v = - A omega sin omega t"
+        ]
+       },
+       {
+        "row_id": "B3",
+        "points": 1,
+        "criterion": "Obtains $v_{max}=A\\sqrt{k/m}$",
+        "elements": [
+         "A sqrt(k/m)"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "2.B"
+      ],
+      "topics": [
+       "7.3"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "$T=2\\pi\\sqrt{m/k}\\approx0.44\\text{ s}$, $v_{max}=A\\sqrt{k/m}\\approx2.83\\text{ m/s}$ and $a_{max}=A\\omega^2=kA/m\\approx40.00\\text{ m/s}^2$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Calculates the period of about 0.44 with units of seconds",
+        "elements": [
+         "0.44",
+         "s"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Calculates the maximum speed of about 2.83 with units of meters per second",
+        "elements": [
+         "2.83",
+         "m/s"
+        ]
+       },
+       {
+        "row_id": "C3",
+        "points": 1,
+        "criterion": "Calculates the maximum acceleration of about 40.00 with units of meters per second squared",
+        "elements": [
+         "40.00",
+         "m/s^2"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "2.D",
+       "3.B"
+      ],
+      "topics": [
+       "7.3"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "The period doubles and the maximum speed is halved, because $T=2\\pi\\sqrt{m/k}$ and $v_{max}=A\\sqrt{k/m}$ depend on $m$ through $\\sqrt{m}$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "States that the period doubles (a factor of 2) and the maximum speed is halved (a factor of 1/2)",
+        "elements": [
+         "period doubles",
+         "speed halves"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Justifies with $T\\propto\\sqrt{m}$ and $v_{max}\\propto1/\\sqrt{m}$ (same stored energy shared with a larger mass)",
+        "elements": [
+         "T proportional to sqrt m",
+         "same energy larger mass"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 12,
+    "judgment_demand": [
+     "representation_reading",
+     "symbolic_reasoning",
+     "justification"
+    ]
+   },
+   "seed": 29001,
+   "pack_id": "pcf_tbr_shm_phase_graphs-s29001"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "pcf_tbr_shm_phase_graphs",
+   "facts": [
+    "k=80.0",
+    "m=0.4",
+    "A=0.2",
+    "T=0.4443",
+    "vmax=2.8284",
+    "amax=40.0000"
+   ],
+   "seed": 29001
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a coherent 12-point Translation Between Representations bundle on SHM. The stem gives mass, spring constant and amplitude, and states the frictionless surface and ideal spring. Part A is a graph sketch, B a derivation, C a calculation and D a proportional-reasoning prediction. The answers are consistent with the independent solver (T ≈ 0.444 s, v_max ≈ 2.83 m/s, a_max = 40 m/s², and a factor of 2 for the period with 1/2 for v_max when the mass is quadrupled). Only polynomial and trigonometric calculus is used, and the content stays within Unit 7.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topics 7.3, 7.1, 7.2 and 1.3 are all in scope. Part D carries the target skill 2.D through proportional reasoning. Parts A to C use related skills, which is acceptable for a mixed-skill FRQ."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The rubric rows are consistent with the model answers. Alternative solutions (energy conservation) are listed for B. The tolerances are reasonable. The rubric asks for \"40.00\" with a loose tolerance, which is a minor stylistic point."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus has all the needed values and conditions. The blank axes are on the answer sheet, and the graph task is described clearly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no options. The rubric rows list realistic common errors, such as a missing 2π, a missing square root and a sine instead of a cosine."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "12 points is a reasonable size for a Physics C TBR free-response bundle. The arithmetic is light and the calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style multi-part FRQ. It needs the SHM governing relations (omega = sqrt(k/m), x = A cos(wt), v = -A w sin(wt)), a graph sketch, a short energy-conservation derivation, a calculation with clean numbers, and a proportional-scaling prediction (4x mass gives 2x period and 1/2 v_max). Each step is routine, but there are several of them and they span several representations. This is appropriate for a full mock, not too easy for basic learning and not beyond the course. Arithmetic is light, the wording is unambiguous, and the reading load is low.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "candidateKey": "ap_physics_c_mechanics-f01-k2",
+  "cellId": "ap_physics_c_mechanics-f01",
+  "apSubjectCode": "ap_physics_c_mechanics",
+  "kind": "frq_bundle",
+  "keywordCode": "7.3",
+  "unitCode": "7",
+  "skillPrimary": "2.D",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "pcf_tbr_shm_phase_graphs",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard multi-part FRQ on a mass-spring SHM system. It requires choosing the governing relations (omega = sqrt(k/m), energy conservation or x(t)/v(t) forms), translating to two stacked graphs with correct phase (cosine for x, negative sine for v) and labeled amplitudes and period, a short derivation, simple numeric evaluation (omega ~ 8.94 rad/s, T ~ 0.70 s, v_max ~ 1.79 m/s, a_max = 16 m/s^2), and one proportional-reasoning prediction (4x mass gives period x2, v_max x1/2). The item fits full-mock exam-prep level: more than single-step recall, but with no deep or unusual concepts. Arithmetic is short, wording is clear, and all content is in scope.",
+  "payload": {
+   "archetype": "pcf_tbr_shm_phase_graphs",
+   "template": "tbr",
+   "topic": "7.3",
+   "extra_topics": [
+    "7.1",
+    "7.2",
+    "1.3"
+   ],
+   "skill": "2.D",
+   "representative_skill": "2.D",
+   "calculator": "allowed",
+   "title": "Position and velocity graphs of a block on a spring",
+   "stimulus": {
+    "kind": "text",
+    "description": "A block of mass $m=1\\text{ kg}$ is attached to a horizontal ideal spring of spring constant $k=80\\text{ N/m}$ on a frictionless surface. The block is pulled to $x=+A$ with $A=0.2\\text{ m}$ and released from rest at $t=0$. Blank axes are provided on the answer sheet.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "On the axes provided, sketch the position $x$ and the velocity $v$ of the block as functions of time $t$ for one full period (use two separate sets of axes stacked vertically with the same time scale). Label the amplitudes and the period.",
+     "points": 4,
+     "response_mode": "graph",
+     "skill_codes": [
+      "1.A",
+      "1.C"
+     ],
+     "model_answer": "$x(t)$ is a cosine starting at $+0.2\\text{ m}$ with period $T=0.70\\text{ s}$; $v(t)$ is a negative sine, zero at $t=0$, reaching $-1.79\\text{ m/s}$ at $T/4$.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Both sets of axes are labeled with quantities and units and share the same time scale",
+       "required_elements": [
+        "axis labels",
+        "units"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "The position graph is a cosine that starts at $+A=0.2\\text{ m}$",
+       "required_elements": [
+        "cosine starting at +A"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "starts at zero like a sine"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "The velocity graph is zero at $t=0$ and first becomes negative, reaching about $-1.79\\text{ m/s}$ at a quarter period",
+       "required_elements": [
+        "1.79",
+        "starts at zero",
+        "negative first"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "draws the velocity as a positive cosine"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      },
+      {
+       "row_id": "A4",
+       "points": 1,
+       "criterion": "The period is marked as about $0.70\\text{ s}$ on the time axis",
+       "required_elements": [
+        "0.70"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "marks half of the period"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Derive an expression for the maximum speed of the block in terms of $A$, $k$ and $m$.",
+     "points": 3,
+     "response_mode": "derive",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "$x=A\\cos\\omega t$ with $\\omega=\\sqrt{k/m}$, so $v=dx/dt=-A\\omega\\sin\\omega t$ and $v_{max}=A\\sqrt{k/m}$.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Identifies the angular frequency $\\omega=\\sqrt{k/m}$ (or sets the initial elastic energy $\\tfrac12kA^2$ equal to the maximum kinetic energy)",
+       "required_elements": [
+        "omega = sqrt(k/m)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "1/2 k A^2 = 1/2 m v_max^2 (energy conservation)"
+       ],
+       "common_errors": [
+        "uses $\\omega=\\sqrt{m/k}$"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Differentiates the position function to find the velocity $v=-A\\omega\\sin\\omega t$ (or writes the kinetic energy at the equilibrium position)",
+       "required_elements": [
+        "v = - A omega sin omega t"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "1/2 m v^2 = 1/2 k A^2"
+       ],
+       "common_errors": [
+        "differentiates cos to sin without the factor omega"
+       ],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "B3",
+       "points": 1,
+       "criterion": "Obtains $v_{max}=A\\sqrt{k/m}$",
+       "required_elements": [
+        "A sqrt(k/m)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits the square root"
+       ],
+       "requires_row_id": "B2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Calculate the period, the maximum speed and the magnitude of the maximum acceleration of the block.",
+     "points": 3,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "2.B"
+     ],
+     "model_answer": "$T=2\\pi\\sqrt{m/k}\\approx0.70\\text{ s}$, $v_{max}=A\\sqrt{k/m}\\approx1.79\\text{ m/s}$ and $a_{max}=A\\omega^2=kA/m\\approx16.00\\text{ m/s}^2$.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Calculates the period of about 0.70 with units of seconds",
+       "required_elements": [
+        "0.70",
+        "s"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits the $2\\pi$"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Calculates the maximum speed of about 1.79 with units of meters per second",
+       "required_elements": [
+        "1.79",
+        "m/s"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits the square root"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "C3",
+       "points": 1,
+       "criterion": "Calculates the maximum acceleration of about 16.00 with units of meters per second squared",
+       "required_elements": [
+        "16.00",
+        "m/s^2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses $A\\omega$ for the acceleration"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "The block is replaced by one with four times the mass and released from the same position. Predict by what factors the period and the maximum speed change, and justify your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.D",
+      "3.B"
+     ],
+     "model_answer": "The period doubles and the maximum speed is halved, because $T=2\\pi\\sqrt{m/k}$ and $v_{max}=A\\sqrt{k/m}$ depend on $m$ through $\\sqrt{m}$.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "States that the period doubles (a factor of 2) and the maximum speed is halved (a factor of 1/2)",
+       "required_elements": [
+        "period doubles",
+        "speed halves"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "states a factor of 4 for the period"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Justifies with $T\\propto\\sqrt{m}$ and $v_{max}\\propto1/\\sqrt{m}$ (same stored energy shared with a larger mass)",
+       "required_elements": [
+        "T proportional to sqrt m",
+        "same energy larger mass"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "argues only that the heavier block is slower"
+       ],
+       "requires_row_id": "D1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 12,
+   "est_minutes": 27,
+   "facts": [
+    "k=80.0",
+    "m=1.0",
+    "A=0.2",
+    "T=0.7025",
+    "vmax=1.7889",
+    "amax=16.0000"
+   ],
+   "expected_values": [
+    {
+     "part": "C",
+     "quantity": "period",
+     "value": 0.7024814731040726,
+     "unit": "s",
+     "tolerance": 0.01
+    },
+    {
+     "part": "C",
+     "quantity": "maximum speed",
+     "value": 1.788854381999832,
+     "unit": "m/s",
+     "tolerance": 0.026466252583997985
+    },
+    {
+     "part": "C",
+     "quantity": "maximum acceleration",
+     "value": 16.000000000000004,
+     "unit": "m/s^2",
+     "tolerance": 0.21200000000000005
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "pcf_tbr_shm_phase_graphs",
+    "subject": "ap_physics_c_mechanics",
+    "kind": "frq_bundle",
+    "concept": "Sketching the position and velocity graphs of an oscillator, deriving the maximum speed by differentiation, and predicting the effect of a larger mass",
+    "topic": "7.3",
+    "skill": "2.D",
+    "student_thinking": [
+     "Sketch the position and the velocity as functions of time",
+     "Differentiate the position function for the velocity and find its maximum",
+     "Predict the effect of a larger mass on the period and the maximum speed"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the surface is frictionless and the spring is ideal",
+      "evidence": "the stimulus states a frictionless surface and an ideal spring"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "the mass",
+      "the spring constant",
+      "the amplitude"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "an RK4 simulation recomputes the period and the maximum speed; the maximum acceleration follows from Hooke's law",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "1.A",
+       "1.C"
+      ],
+      "topics": [
+       "7.3"
+      ],
+      "points": 4,
+      "accepted_answers": [
+       "$x(t)$ is a cosine starting at $+0.2\\text{ m}$ with period $T=0.70\\text{ s}$; $v(t)$ is a negative sine, zero at $t=0$, reaching $-1.79\\text{ m/s}$ at $T/4$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Both sets of axes are labeled with quantities and units and share the same time scale",
+        "elements": [
+         "axis labels",
+         "units"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "The position graph is a cosine that starts at $+A=0.2\\text{ m}$",
+        "elements": [
+         "cosine starting at +A"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "The velocity graph is zero at $t=0$ and first becomes negative, reaching about $-1.79\\text{ m/s}$ at a quarter period",
+        "elements": [
+         "1.79",
+         "starts at zero",
+         "negative first"
+        ]
+       },
+       {
+        "row_id": "A4",
+        "points": 1,
+        "criterion": "The period is marked as about $0.70\\text{ s}$ on the time axis",
+        "elements": [
+         "0.70"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "7.3"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "$x=A\\cos\\omega t$ with $\\omega=\\sqrt{k/m}$, so $v=dx/dt=-A\\omega\\sin\\omega t$ and $v_{max}=A\\sqrt{k/m}$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Identifies the angular frequency $\\omega=\\sqrt{k/m}$ (or sets the initial elastic energy $\\tfrac12kA^2$ equal to the maximum kinetic energy)",
+        "elements": [
+         "omega = sqrt(k/m)"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Differentiates the position function to find the velocity $v=-A\\omega\\sin\\omega t$ (or writes the kinetic energy at the equilibrium position)",
+        "elements": [
+         "v = - A omega sin omega t"
+        ]
+       },
+       {
+        "row_id": "B3",
+        "points": 1,
+        "criterion": "Obtains $v_{max}=A\\sqrt{k/m}$",
+        "elements": [
+         "A sqrt(k/m)"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "2.B"
+      ],
+      "topics": [
+       "7.3"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "$T=2\\pi\\sqrt{m/k}\\approx0.70\\text{ s}$, $v_{max}=A\\sqrt{k/m}\\approx1.79\\text{ m/s}$ and $a_{max}=A\\omega^2=kA/m\\approx16.00\\text{ m/s}^2$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Calculates the period of about 0.70 with units of seconds",
+        "elements": [
+         "0.70",
+         "s"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Calculates the maximum speed of about 1.79 with units of meters per second",
+        "elements": [
+         "1.79",
+         "m/s"
+        ]
+       },
+       {
+        "row_id": "C3",
+        "points": 1,
+        "criterion": "Calculates the maximum acceleration of about 16.00 with units of meters per second squared",
+        "elements": [
+         "16.00",
+         "m/s^2"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "2.D",
+       "3.B"
+      ],
+      "topics": [
+       "7.3"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "The period doubles and the maximum speed is halved, because $T=2\\pi\\sqrt{m/k}$ and $v_{max}=A\\sqrt{k/m}$ depend on $m$ through $\\sqrt{m}$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "States that the period doubles (a factor of 2) and the maximum speed is halved (a factor of 1/2)",
+        "elements": [
+         "period doubles",
+         "speed halves"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Justifies with $T\\propto\\sqrt{m}$ and $v_{max}\\propto1/\\sqrt{m}$ (same stored energy shared with a larger mass)",
+        "elements": [
+         "T proportional to sqrt m",
+         "same energy larger mass"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 12,
+    "judgment_demand": [
+     "representation_reading",
+     "symbolic_reasoning",
+     "justification"
+    ]
+   },
+   "seed": 29002,
+   "pack_id": "pcf_tbr_shm_phase_graphs-s29002"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "pcf_tbr_shm_phase_graphs",
+   "facts": [
+    "k=80.0",
+    "m=1.0",
+    "A=0.2",
+    "T=0.7025",
+    "vmax=1.7889",
+    "amax=16.0000"
+   ],
+   "seed": 29002
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle passes all five criteria: Unit 7 scope, unique keys confirmed by the independent solver, a complete text stimulus, and rubric rows with distinct common errors. The load of 12 points in about 27 minutes is reasonable, and no instant-reject condition applies.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All parts are in Unit 7 scope and use only cosine, sine and the SHM relations. Part D targets 2.D through proportional scaling."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are unique and verified by the independent solver. The energy alternative in B1/B2 is valid and the tolerances are fine."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives m, k, A, the release from rest, a frictionless surface and an ideal spring. The empty data object is acceptable for a text-only stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no options. The rubric rows list distinct common errors (missing 2π, missing square root, wrong graph phase, factor of 4 for the period)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load of 12 points in about 27 minutes is reasonable. Calculator use is allowed and appropriate."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ on a mass-spring SHM system. It requires choosing the governing relations (omega = sqrt(k/m), energy conservation or x(t)/v(t) forms), translating to two stacked graphs with correct phase (cosine for x, negative sine for v) and labeled amplitudes and period, a short derivation, simple numeric evaluation (omega ~ 8.94 rad/s, T ~ 0.70 s, v_max ~ 1.79 m/s, a_max = 16 m/s^2), and one proportional-reasoning prediction (4x mass gives period x2, v_max x1/2). The item fits full-mock exam-prep level: more than single-step recall, but with no deep or unusual concepts. Arithmetic is short, wording is clear, and all content is in scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ }
+]

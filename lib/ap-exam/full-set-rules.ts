@@ -30,6 +30,7 @@ export function fullPracticeUnitBounds(subject: string | null | undefined, label
   if (subject === "ap_calculus_ab") return Object.fromEntries(Object.entries(OFFICIAL.unitBounds).map(([u, [min, max]]) => [u, { min, max }]));
   if (subject === "ap_statistics") return statsUnitBounds();
   if (subject === "ap_physics_1") return physUnitBounds();
+  if (subject === "ap_physics_c_mechanics") return physUnitBounds(subject);
   if (subject === "ap_chemistry") return chemUnitBounds();
   if (subject === "ap_microeconomics") return microUnitBounds();
   if (subject === "ap_macroeconomics") return macroUnitBounds();
@@ -76,17 +77,22 @@ export const PHYS_SET_SIZE = 2;
 export const PHYS_FULL_TARGET = { units: { "1": 5, "2": 8, "3": 8, "4": 5, "5": 5, "6": 3, "7": 3, "8": 5 } as Record<string, number> };
 export const PHYS_FRQ_TEMPLATES = ["mr", "tbr", "lab", "qqt"] as const;
 export const PHYS_FRQ_COUNT = 4;
-export const physUnitBounds = (): UnitBounds => mapBounds(PHYS_MC_UNIT_PCT, PHYS_MC_COUNT);
+/** AP Physics C: Mechanics(7단원, 공식 MC 단원 비중 10-15/20-25/15-25/10-20/10-15/10-15/10-15 % — AP Central 과목 페이지·Course at a Glance 2026, 2026-10-20 읽음) × 42 → [5,6]/[9,10]/[7,10]/[5,8]/[5,6]/[5,6]/[5,6]. 하한 합이 41 이라 단원 배분에 여유가 있다.
+ *  목표 배분(제안, 공식 고정 아님)은 PHYSC_FULL_TARGET. MC 42 = 단독 38 + 2문항 공유 세트 2, FRQ 4 = MR/TBR/LAB/QQT 각 1 은 Physics 1 과 같다(구성은 우리 안 — 공식 세트 수 미공표). */
+export const PHYSC_MC_UNIT_PCT: Record<string, [number, number]> = { "1": [10, 15], "2": [20, 25], "3": [15, 25], "4": [10, 20], "5": [10, 15], "6": [10, 15], "7": [10, 15] };
+export const PHYSC_FULL_TARGET = { units: { "1": 5, "2": 9, "3": 8, "4": 5, "5": 5, "6": 5, "7": 5 } as Record<string, number> };
+export const physUnitBounds = (subject: string = "ap_physics_1"): UnitBounds => mapBounds(subject === "ap_physics_c_mechanics" ? PHYSC_MC_UNIT_PCT : PHYS_MC_UNIT_PCT, PHYS_MC_COUNT);
+export const physFullTarget = (subject: string = "ap_physics_1") => (subject === "ap_physics_c_mechanics" ? PHYSC_FULL_TARGET : PHYS_FULL_TARGET);
 export const physSkillBounds = (): UnitBounds => mapBounds(PHYS_MC_SKILL_PCT, PHYS_MC_COUNT);
 
 export type PhysSetItem = { kind: "mc" | "frq"; unit: string | null; skill: string | null; candidateKey: string | null; position: number };
 /** 물리 풀 세트 구성 검증(순수, 차단 위반만): MC 42·FRQ 4, 단원 범위, 2문항 공유 세트 2개(연속 위치). 스킬 범위는 physSkillWarnings 로 따로 본다. */
-export function verifyPhysFullComposition(items: PhysSetItem[]): string[] {
+export function verifyPhysFullComposition(items: PhysSetItem[], subject: string = "ap_physics_1"): string[] {
   const out: string[] = [];
   const mc = items.filter((i) => i.kind === "mc"), frq = items.filter((i) => i.kind === "frq");
   if (mc.length !== PHYS_MC_COUNT) out.push(`mc_count_${mc.length}/${PHYS_MC_COUNT}`);
   if (frq.length !== PHYS_FRQ_COUNT) out.push(`frq_count_${frq.length}/${PHYS_FRQ_COUNT}`);
-  for (const [u, b] of Object.entries(physUnitBounds())) { const n = mc.filter((i) => i.unit === u).length; if (n < b.min || n > b.max) out.push(`unit_${u}_${n}_not_in_${b.min}-${b.max}`); }
+  for (const [u, b] of Object.entries(physUnitBounds(subject))) { const n = mc.filter((i) => i.unit === u).length; if (n < b.min || n > b.max) out.push(`unit_${u}_${n}_not_in_${b.min}-${b.max}`); }
   const byKey = new Map<string, PhysSetItem[]>();
   for (const i of mc) if (i.candidateKey) byKey.set(i.candidateKey, [...(byKey.get(i.candidateKey) ?? []), i]);
   const sets = [...byKey.values()].filter((v) => v.length > 1);

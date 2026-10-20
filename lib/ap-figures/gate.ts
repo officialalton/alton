@@ -164,7 +164,7 @@ export function renderTypeOf(stimKind: string, specIn: ApSpec | FigureChoiceSpec
   if (spec.type === "ap_stat_chart") return `ap_stat_chart:${spec.chart}`;
   // 그래프 하위 유형
   if (subject === "ap_biology") return "ap_graph:bio_line";
-  if (subject === "ap_physics_1") return "ap_graph:phys_line";
+  if (subject === "ap_physics_1" || subject === "ap_physics_c_mechanics") return "ap_graph:phys_line";
   if (subject === "ap_microeconomics" || subject === "ap_macroeconomics") return "ap_graph:econ_curves";
   const hasMarkersOpen = (spec.markers ?? []).some((m) => m.style === "open");
   if (hasMarkersOpen) return "ap_graph:calc_piecewise_limits";
