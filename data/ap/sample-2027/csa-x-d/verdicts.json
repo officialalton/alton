@@ -1,0 +1,338 @@
+[
+ {
+  "key": "ap_computer_science_a-m01-k0",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "instant_reject_missing_condition"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Neither first nor last is the empty string.",
+     "brief_reasoning": "substring(0,1) needs length >= 1 for both strings, so each must be non-empty. Option 2 checks only first, and option 3 asks for more than is needed. Option 1 neither guarantees non-empty strings nor is required.",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "Non-null is also needed but is implicitly assumed."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Preconditions for string method (substring); fits 2.10 and 4.B."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Key A does not guarantee no exception: null arguments satisfy 'not the empty string' but throw NullPointerException. The stem says 'guarantees the method will not throw an exception' without assuming non-null parameters."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor is tied to a misconception and explained; the explanation for the key claims 'when it is true every call works', which is false for null."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, appropriate time and load."
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is stylistically fine, but it omits the assumption that the parameters are non-null. As written, the key is not a guaranteed no-exception precondition, because null arguments satisfy it yet throw a NullPointerException. The stem or options should state non-null, so I am failing it for a missing condition."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item needs one concept: substring(0,1) requires length >= 1. The student must apply it to both parameters and pick the least restrictive option among near-miss distractors (too strong, irrelevant, or incomplete). It involves no tracing, little reading, and no computation. The only subtlety is the word \"weakest\", which asks for the least restrictive condition. This is a straightforward precondition-identification item suited to early learning rather than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m01-k1",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "substring(0,1) needs length >= 1 for both strings. So both must be non-empty. Requiring two characters asks for more than needed, checking only first leaves last unprotected, and 'only letters' still allows an empty string.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "substring boundary conditions (2.10) with precondition description (4.B); fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is unique: both strings need length >= 1. A insufficient, B stronger, C does not exclude empty strings."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete short code; clear stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions (partial guard, over-strong, irrelevant character type); each wrong option explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 80 seconds, no calculator."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound precondition item; the key (neither string is empty) is the unique weakest sufficient condition, and the distractors are distinct and realistic."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Single short method; the solver must know substring(0,1) requires length >= 1, apply it to both parameters, and distinguish near-miss options (only first constrained, over-restrictive length >= 2, irrelevant letters-only condition). It tests describing the initial conditions needed for code to work (skill 4.B) with a moderate \"weakest precondition\" framing, no heavy reading or computation. Null is not offered as an option, so it creates no real ambiguity.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m01-k2",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "substring(0, 1) only works if the string has at least one character, and the method calls it on both first and last. So both strings must be non-empty. Requiring two or more characters (A) is stricter than needed. Checking only first (C) leaves last unchecked. 'Only letters' (D) still allows empty strings.",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "Strictly speaking, both strings must also be non-null. AP convention treats non-null as given, so the intended answer is B."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Substring on strings plus precondition description fits 2.10 and 4.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the only option that is both sufficient and not over-restrictive. The non-null requirement is unstated, but AP convention assumes non-null Strings. A is stronger, C is insufficient, D is insufficient."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code is complete and compilable; wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculator, typical of official precondition items."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound precondition item with a unique key under AP's non-null convention and distinct distractors. The only minor concern is that non-null is not stated explicitly."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: substring(0,1) requires length >= 1 for both arguments. Student must check each argument's requirement and compare against near-miss options (A is stronger than needed, C ignores last, D is unrelated to length). Minimal reading and no computation. A slight imprecision exists about null references, but the intended answer is clear and the other options are clearly wrong.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m02-k0",
+  "cellId": "ap_computer_science_a-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Each pass through the loop subtracts 3 from n and adds 1 to c, and the loop stops once n < 3. So c ends up as the number of times 3 can be subtracted from n, which is n / 3 using integer division.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "A"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Target skill 4.B is describing initial conditions (preconditions) needed for code to work. This item asks for the postcondition/returned value, and the precondition is already given in the stimulus and not needed to answer. Dominant demand is loop tracing/describing behavior, not the target skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is uniquely correct for n >= 0 (integer quotient n/3)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code is complete, precondition stated, wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors map to distinct misconceptions (value vs count, remainder, digit count); the base-3 digit option and 'n minus 3' are somewhat implausible. Explanation covers each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculator, fits about 80 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean, but it assesses the postcondition rather than the target skill 4.B (describing the initial conditions needed for code to work). The precondition is given, not asked for. Fails the scope/skill criterion."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks students to recognize that a loop subtracting 3 while n >= 3 and counting iterations computes integer division n / 3. It needs one concept (repeated subtraction as division), a short loop, and no long trace. The precondition n >= 0 is stated, so there is no ambiguity. The distractors (n - 3, the remainder, base-3 digit count) are clearly distinguishable, and the remainder option is a modest near-miss. Tracing one or two small values is enough to confirm the answer. This suits an introductory check of understanding of the algorithm and its postcondition, not a full-mock exam-level challenge.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m02-k1",
+  "cellId": "ap_computer_science_a-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Each pass through the loop subtracts 3 and adds 1 to c, and the loop stops once n < 3. So c ends up as the number of times 3 can be subtracted, which is n/3 using integer division.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "D"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.9 while-loop algorithm; describes what holds on return given stated precondition. Acceptable fit to 4.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is uniquely correct for n>=0; others clearly false."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code with precondition comment is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions (remainder vs quotient, wrong return value); base-3 digits option is weak but fine. All wrong options explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, no arithmetic burden, typical format."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, unambiguous postcondition item with a unique correct key (n / 3 by integer division) and plausible distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single while loop with repeated subtraction; student identifies that c counts quotient n/3 (integer division) versus the near-miss remainder left in n. Short code, clear precondition, minimal tracing (one or two small examples suffice), no representation changes or heavy computation. Tests basic understanding of what the loop computes.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m02-k2",
+  "cellId": "ap_computer_science_a-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The loop subtracts 3 while n >= 3 and adds 1 to c each time, so c ends up as n/3 using integer division.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "B"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is unique and correct and the item is exam-suitable. It fails the scope/skill criterion because it tests the postcondition and loop behavior, not the initial conditions that skill 4.B targets.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Target skill 4.B is describing the initial conditions (preconditions) needed for code to work. The item asks for the postcondition (what the return value means), and the given precondition n >= 0 is never examined, so the dominant demand is describing loop behavior, not initial conditions."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option B is the unique correct answer: the loop counts how many times 3 can be subtracted, which equals n / 3 using integer division. The other options are clearly false."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The code and the precondition are complete and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The explanation addresses every wrong option. The distractor 'n minus 3' is weak and implausible, but the other distractors reflect plausible misconceptions (a digit count and the remainder)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is short and needs no arithmetic, so the time and reading load fit the exam."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single short while loop that counts repeated subtraction of 3, which equals integer division n/3. The student traces a small example or recognizes the pattern, then picks the quotient over the near-miss remainder, base-3 digit count, and n-3 options. The precondition is given, the code is brief, and there is no nesting, aliasing, or heavy arithmetic. This tests recognizing what the loop computes and the postcondition, not deep reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ }
+]

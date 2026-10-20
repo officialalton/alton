@@ -1,0 +1,292 @@
+[
+ {
+  "gid": "sq-boundaries-m-001",
+  "runId": "rw-supplement-medium",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Alemayehu poured the first round of coffee, the strong abol that her mother had always insisted be served to the eldest guest ______ envelope, its stamps faded and its corners softened by twenty years in a misdirected mailbag, lay unopened beside the incense burner, her sister's careful handwriting still visible through the dust.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Alemayehu poured the first round of coffee, the strong abol that her mother had always insisted be served to the eldest guest ______ envelope, its stamps faded and its corners softened by twenty years in a misdirected mailbag, lay unopened beside the incense burner, her sister's careful handwriting still visible through the dust.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    ", the",
+    ". The",
+    " the",
+    ", and, the"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "빈칸 앞은 'Alemayehu poured the first round of coffee'라는 독립절에 긴 동격어구(the strong abol ... eldest guest)가 붙은 문장이고, 빈칸 뒤 'envelope ... lay unopened ...'도 주어와 동사를 갖춘 독립절이다. 두 독립절은 마침표로 나누어야 하므로 B가 정답이다. A는 쉼표가 동격어구를 닫아 주는 것처럼 보이지만, 쉼표 하나로 두 독립절을 이어 comma splice가 된다. C는 아무 문장부호 없이 두 절을 붙여 run-on 문장이 된다. D는 등위접속사 and를 쓴 점은 맞지만 and 뒤에 쉼표를 찍으면 안 되므로 틀렸다.",
+   "explanationEn": "Before the blank, you have an independent clause, \"Alemayehu poured the first round of coffee,\" followed by a long appositive (\"the strong abol ... eldest guest\"). After the blank comes another independent clause: \"envelope ... lay unopened ...\". Two independent clauses must be properly separated, and the period in B does exactly that. A seems to close off the appositive with a comma, but a single comma between two independent clauses makes a comma splice. C has no punctuation at all, so it creates a run-on sentence. D uses the conjunction \"and\" correctly, but you shouldn't put a comma after \"and,\" so D is also wrong.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "an excerpt of literary fiction (novel/short story scene) — Alemayehu receives a letter from her estranged sister during the Ethiopian coffee ceremony, arriving twenty years late, rekindling hope that forgiveness might still bloom across the distance that separated them.",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "검산: 빈칸 앞 'Alemayehu poured the first round of coffee, the strong abol ... eldest guest'는 독립절+동격어구로 완결되고, 빈칸 뒤 'The envelope, its stamps faded ..., lay unopened ...'도 독립절이므로 마침표(B)가 유일하게 올바름. A는 comma splice, C는 run-on, D는 and 뒤 불필요한 쉼표로 오답. 긴 동격어구 때문에 A가 동격을 닫는 쉼표처럼 보이고 D는 접속사가 있어 부분적으로 그럴듯하므로 medium에 적합. 한·영 해설 모두 B를 일관되게 지지하며 글자 참조 일치, 영어 자연스럽고 한글 없음. 선택지 C의 선행 공백은 '문장부호 없음'을 나타내는 표기로 허용 범위."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "긴 동격어구와 삽입 수식어 때문에 절 경계를 찾기가 어려워 medium 수준에 맞다. A는 쉼표가 동격어구를 닫는 것처럼 보여 그럴듯한 오답이다. 반면 D(', and,')는 쉽게 배제되어 오답으로서의 힘이 약하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "sq-boundaries-m-002",
+  "runId": "rw-supplement-medium",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Across the narrow alley, a woman about Linh's age sat hunched over her own bowl of pho, her hands, cracked and stained with what looked like years of factory dye, wrapped around the chipped porcelain for ______ when she finally looked up through the steam, Linh saw in that weathered face the life she herself had refused twenty years earlier.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Across the narrow alley, a woman about Linh's age sat hunched over her own bowl of pho, her hands, cracked and stained with what looked like years of factory dye, wrapped around the chipped porcelain for ______ when she finally looked up through the steam, Linh saw in that weathered face the life she herself had refused twenty years earlier.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "warmth, when",
+    "warmth when",
+    "warmth; when",
+    "warmth, then when"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "빈칸 앞은 'a woman ... sat hunched'라는 독립절이고, 그 뒤에 'her hands ... wrapped ...'라는 독립분사구(절대구)가 붙어 있다. 빈칸 뒤 'Linh saw ...' 역시 'when' 부사절이 앞에 놓인 독립절이므로, 두 독립절을 잇는 세미콜론을 쓴 C가 정답이다. A는 쉼표만으로 두 독립절을 이어 쉼표 오용(comma splice)이 된다. B는 문장부호가 없어 융합문이 되고, 'warmth when'으로 붙어 읽혀 의미도 흐려진다. D의 'then'은 접속부사이지 등위접속사가 아니므로 쉼표로는 두 절을 이을 수 없다.",
+   "explanationEn": "The text before the blank is an independent clause (\"a woman ... sat hunched\"), followed by an absolute phrase (\"her hands ... wrapped ...\"). After the blank comes another independent clause (\"Linh saw ...\") that opens with a \"when\" clause. Two independent clauses can be joined with a semicolon, so C is correct. A joins them with only a comma, which makes a comma splice. B uses no punctuation at all, so it creates a run-on and wrongly makes \"when\" seem to attach to \"warmth.\" D uses \"then,\" which is an adverb, not a coordinating conjunction, so a comma before it still leaves a comma splice.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "an excerpt of literary fiction (novel/short story scene) — Linh and a stranger lock eyes over steaming pho in a Hanoi dawn alley, each recognizing in the other's weathered face the ghost of a choice they made differently, then part forever.",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞은 독립절+절대구(her hands ... wrapped ... for warmth), 빈칸 뒤는 'when' 부사절이 선행하는 독립절(Linh saw ...)이므로 세미콜론(C)이 유일하게 적합. A는 comma splice, B는 융합문(when절이 앞 문장에 붙어도 'Linh saw'가 접속 없이 남음), D는 접속부사 then으로 인한 comma splice. 해설 한·영 모두 정답 및 선택지 참조 일치, 한글 혼입 없음. 절대구와 다중 쉼표로 독립절 경계를 식별해야 하므로 두 단계 판단이 필요해 medium에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "긴 절대구와 앞에 놓인 when 부사절 때문에 두 번째 독립절의 시작 지점을 찾아야 한다. 두 단계 판단이 필요해 medium에 맞는다. 오답 A와 B는 그럴듯한 함정이다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "sq-boundaries-m-003",
+  "runId": "rw-supplement-medium",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Cornelius had expected the half-starved mule he found wandering his Gold Rush camp to repay his kindness with labor. Instead, Duchess—having eaten three days of his oats, dozed through the morning heat, and stopped cold whenever the ore cart grew heavier than she ______ watched him strain at the sluice box with what looked unmistakably like pity.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Cornelius had expected the half-starved mule he found wandering his Gold Rush camp to repay his kindness with labor. Instead, Duchess—having eaten three days of his oats, dozed through the morning heat, and stopped cold whenever the ore cart grew heavier than she ______ watched him strain at the sluice box with what looked unmistakably like pity.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "liked,",
+    "liked;",
+    "liked",
+    "liked—"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "주어 Duchess 뒤의 긴 삽입구는 대시로 시작했으므로 같은 부호인 대시로 닫아야 하고, 그래야 주어가 본동사 watched와 연결된다. 따라서 정답은 D이다. A는 삽입구를 닫는 쉼표처럼 보여 그럴듯하지만, 대시로 연 삽입구를 쉼표로 닫을 수 없다. B의 세미콜론은 주어 Duchess와 동사 watched 사이를 끊어 앞뒤 모두 완전한 절이 되지 못한다. C는 문장부호가 없어서 삽입구가 끝나는 곳이 표시되지 않고, she liked watched처럼 동사가 엉켜 읽힌다.",
+   "explanationEn": "The long interrupting phrase after the subject \"Duchess\" opens with a dash, so it has to close with a dash too. That closing dash lets the subject connect to its main verb, \"watched,\" which makes D correct. A looks reasonable because a comma could close an interruption, but you can't close a dash-opened interruption with a comma. B uses a semicolon that cuts the subject \"Duchess\" off from its verb \"watched,\" so neither side is a complete clause. C has no punctuation at all, so nothing marks where the interruption ends, and \"she liked watched\" reads as a jumble of verbs.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "an excerpt of literary fiction (novel/short story scene) — Prospector Cornelius finds a half-starved mule wandering his Gold Rush camp and names it Duchess, only to realize the stubborn creature's refusal to work harder than necessary contains more wisdom than any fortune.",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 Duchess 뒤 대시로 연 긴 삽입구(having eaten…, dozed…, and stopped cold… she liked)를 같은 부호인 대시로 닫아야 본동사 watched와 연결됨 — D 정답 검산 확인. A(쉼표)는 삽입구 닫기처럼 보이는 그럴듯한 오답, B(세미콜론)는 주어-동사 분리, C는 무부호로 동사 충돌. 한국어·영어 해설 모두 D를 일관되게 뒷받침하고 글자 참조 일치, 영어 자연스럽고 한글 없음. 삽입구가 길어 앞의 여는 대시를 되짚어 확인해야 하므로 두 단계 판단이 필요한 medium에 적합. 원창작 지문으로 저작권 의심 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "삽입구 안에 쉼표 목록과 'whenever' 종속절이 길게 들어 있어서 여는 대시를 놓치기 쉽고, 그래서 오답 A가 그럴듯해 보인다. medium 난이도에 맞는다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "sq-boundaries-m-004",
+  "runId": "rw-supplement-medium",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "The letter had been written in the spring of 1941 and had wandered through three postal depots before it reached the village. Giorgi, who had not heard his son's voice in nearly thirty years, unfolded the brittle page beside the sheepfold______ a careful schoolboy hand, Levan had promised to come home when the snow left the pass, and the old man read the line aloud until the mountains seemed to answer.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "The letter had been written in the spring of 1941 and had wandered through three postal depots before it reached the village. Giorgi, who had not heard his son's voice in nearly thirty years, unfolded the brittle page beside the sheepfold______ a careful schoolboy hand, Levan had promised to come home when the snow left the pass, and the old man read the line aloud until the mountains seemed to answer.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "; in",
+    ", in",
+    " in",
+    ", which, in"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "빈칸 앞 \"Giorgi ... unfolded the brittle page beside the sheepfold\"는 삽입절이 있어도 완전한 독립절이고, 빈칸 뒤 \"in a careful schoolboy hand, Levan had promised...\"도 주어 Levan과 동사 had promised를 가진 독립절이다. 독립절 두 개는 세미콜론으로 이어야 하므로 A가 정답이다. B는 쉼표만으로 두 독립절을 이어 comma splice가 된다. C는 문장부호 없이 두 절을 붙인 run-on이며, \"sheepfold in a careful hand\"처럼 앞 절에 붙는 전치사구로 잘못 읽히게 된다. D는 which가 관계절을 만들지만 그 절 안에 Levan had promised라는 주어·동사가 따로 있어서 which가 들어갈 자리가 없으므로 문법적으로 성립하지 않는다.",
+   "explanationEn": "The words before the blank, \"Giorgi ... unfolded the brittle page beside the sheepfold,\" make a complete independent clause, even with the long \"who\" clause in the middle. The words after the blank, \"in a careful schoolboy hand, Levan had promised...,\" make a second independent clause with the subject Levan and the verb had promised. You need a semicolon to join two independent clauses, so A is correct. B joins them with only a comma, which is a comma splice. C uses no punctuation at all, which creates a run-on and makes the phrase look like it describes the sheepfold. D adds \"which,\" but the clause already has its own subject and verb (Levan had promised), so \"which\" has no role and the sentence falls apart.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "an excerpt of literary fiction (novel/short story scene) — Giorgi, an old shepherd in a Soviet Georgian village, receives a message from his son written before the war but delivered long after, its words becoming the mountain echo he needed to finally hear.",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "빈칸 앞은 삽입 관계절을 포함한 완전한 독립절, 뒤는 전치사구가 앞에 놓인 독립절(Levan had promised)이므로 세미콜론(A)이 유일하게 적합함을 직접 확인. B는 comma splice, C는 run-on(또한 \"sheepfold in a careful hand\"로 오독 유도), D는 which가 기능할 자리가 없어 비문. 긴 삽입절과 도치된 전치사구 때문에 절 경계 파악에 두 단계 판단이 필요해 medium에 적합. 한·영 해설 모두 정답 및 선택지 글자와 일치하고 자연스러움. 선택지 C의 앞 공백 두 칸은 사소한 표기 문제로 판정에 영향 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "긴 삽입절과 도입 전치사구 때문에 절 경계를 찾으려면 두 단계 판단이 필요하다. B와 C는 그럴듯한 오답이다. D는 비교적 쉽게 배제된다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "sq-boundaries-m-005",
+  "runId": "rw-supplement-medium",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Professor Aksel, who had taught in the cramped cedar sauna behind the harbor for thirty winters, ladled water onto the hissing stones and gave the three fishermen his final lesson______ the proper temperature for wisdom, he said, was the exact moment before the body rebels against comfort itself.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Professor Aksel, who had taught in the cramped cedar sauna behind the harbor for thirty winters, ladled water onto the hissing stones and gave the three fishermen his final lesson______ the proper temperature for wisdom, he said, was the exact moment before the body rebels against comfort itself.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    ", the proper",
+    ": the proper",
+    "; that the proper",
+    " the proper"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "긴 비필수 관계절 뒤에서 주절은 'gave the three fishermen his final lesson'으로 끝나는 독립절이고, 빈칸 뒤 'the proper temperature ... was ...'도 독립절이며 그 lesson의 내용을 설명한다. 따라서 앞 절의 내용을 풀어 주는 콜론을 쓴 B가 정답이다. A는 쉼표만으로 두 독립절을 이어 comma splice가 된다. C는 세미콜론 뒤에 'that'으로 시작하는 명사절이 와서 독립절이 아닌 단편이 된다. D는 아무 문장부호 없이 두 독립절을 붙인 run-on 문장이다.",
+   "explanationEn": "After the long nonrestrictive clause, the main clause ends at \"gave the three fishermen his final lesson,\" and it can stand on its own. The words after the blank, \"the proper temperature ... was ...,\" make up another independent clause, and that clause explains what the lesson was. A colon is the right way to introduce an explanation like this, so B is correct. A joins two independent clauses with only a comma, which makes a comma splice. C puts a semicolon before a \"that\" noun clause, and that clause can't stand alone, so it's a fragment. D runs the two independent clauses together with no punctuation.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "an excerpt of literary fiction (novel/short story scene) — Professor Aksel teaches his final sauna lesson to three fishermen, instructing them that the proper temperature for wisdom is the exact moment before the body rebels against comfort itself.",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "검산: 'Professor Aksel ... ladled ... and gave the three fishermen his final lesson'은 독립절, 빈칸 뒤 'the proper temperature ... was the exact moment ...'도 독립절(삽입구 'he said' 포함)이며 앞 절의 lesson 내용을 설명하므로 콜론(B)이 적절. A는 comma splice, C는 세미콜론 뒤 'that' 명사절로 단편, D는 run-on. 한국어·영어 해설 모두 B를 일관되게 뒷받침하며 글자 참조 일치, 영어 해설에 한글 없음. 난이도: 긴 비필수 관계절과 삽입구 'he said'를 넘어 절 경계를 파악한 뒤 콜론 기능을 적용하는 두 단계 판단이 필요하고, C가 그럴듯한 오답으로 기능하므로 medium에 적합. 사소: D 선택지 앞 공백이 두 칸이나 의미상 '무부호' 선택지로 이해 가능."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 B가 맞다. 'he said'가 삽입구로 들어가 있어 독립절 여부를 판단하기 조금 까다롭고, 긴 관계절 때문에 문장을 훑어 읽는 수험생은 헷갈릴 수 있다. 오답 C는 세미콜론+that 형태가 약간 쉽게 걸러진다.",
+    "passed": true
+   }
+  }
+ }
+]

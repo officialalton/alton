@@ -1,0 +1,170 @@
+{
+ "note": "문학 25% 조정 비문학 R&W 필요량(margin 은 cands 단계의 factor 가 처리)",
+ "totalNeed": 122,
+ "byDomainDifficulty": {
+  "rw_information_ideas|medium": 48,
+  "rw_craft_structure|easy": 8,
+  "rw_craft_structure|medium": 7,
+  "rw_standard_english|easy": 3,
+  "rw_standard_english|medium": 46,
+  "rw_craft_structure|hard": 8,
+  "rw_standard_english|hard": 2
+ },
+ "relaxedLit": 59,
+ "noReplacementPubSets": 0,
+ "perCell": [
+  {
+   "cell": "form_structure_sense|medium",
+   "need": {
+    "social_science": 10,
+    "humanities": 6,
+    "economics_business": 5,
+    "science_physical": 2
+   },
+   "total": 23
+  },
+  {
+   "cell": "boundaries|medium",
+   "need": {
+    "humanities": 6,
+    "economics_business": 6,
+    "science_physical": 6,
+    "social_science": 5
+   },
+   "total": 23
+  },
+  {
+   "cell": "central_ideas_details|medium",
+   "need": {
+    "social_science": 4,
+    "humanities": 4,
+    "economics_business": 4,
+    "science_physical": 3,
+    "history_civics": 3
+   },
+   "total": 18
+  },
+  {
+   "cell": "inferences|medium",
+   "need": {
+    "science_physical": 3,
+    "social_science": 3,
+    "humanities": 3,
+    "history_civics": 3,
+    "economics_business": 3
+   },
+   "total": 15
+  },
+  {
+   "cell": "command_of_evidence_text|medium",
+   "need": {
+    "science_physical": 3,
+    "social_science": 3,
+    "humanities": 3,
+    "history_civics": 3,
+    "economics_business": 3
+   },
+   "total": 15
+  },
+  {
+   "cell": "words_in_context|easy",
+   "need": {
+    "science_physical": 1,
+    "social_science": 1,
+    "humanities": 1,
+    "history_civics": 1
+   },
+   "total": 4
+  },
+  {
+   "cell": "cross_text_connections|hard",
+   "need": {
+    "economics_business": 1,
+    "science_physical": 1,
+    "social_science": 1
+   },
+   "total": 3
+  },
+  {
+   "cell": "text_structure_purpose|hard",
+   "need": {
+    "humanities": 1,
+    "history_civics": 1,
+    "economics_business": 1
+   },
+   "total": 3
+  },
+  {
+   "cell": "text_structure_purpose|easy",
+   "need": {
+    "science_physical": 1,
+    "social_science": 1,
+    "humanities": 1
+   },
+   "total": 3
+  },
+  {
+   "cell": "words_in_context|medium",
+   "need": {
+    "history_civics": 1,
+    "economics_business": 1,
+    "science_physical": 1
+   },
+   "total": 3
+  },
+  {
+   "cell": "text_structure_purpose|medium",
+   "need": {
+    "social_science": 1,
+    "humanities": 1,
+    "history_civics": 1
+   },
+   "total": 3
+  },
+  {
+   "cell": "form_structure_sense|easy",
+   "need": {
+    "economics_business": 1,
+    "science_physical": 1
+   },
+   "total": 2
+  },
+  {
+   "cell": "words_in_context|hard",
+   "need": {
+    "social_science": 1,
+    "humanities": 1
+   },
+   "total": 2
+  },
+  {
+   "cell": "form_structure_sense|hard",
+   "need": {
+    "history_civics": 1,
+    "economics_business": 1
+   },
+   "total": 2
+  },
+  {
+   "cell": "boundaries|easy",
+   "need": {
+    "science_physical": 1
+   },
+   "total": 1
+  },
+  {
+   "cell": "cross_text_connections|easy",
+   "need": {
+    "social_science": 1
+   },
+   "total": 1
+  },
+  {
+   "cell": "cross_text_connections|medium",
+   "need": {
+    "humanities": 1
+   },
+   "total": 1
+  }
+ ]
+}

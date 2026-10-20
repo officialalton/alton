@@ -1,0 +1,68 @@
+{
+ "version": "v1-csa-x-d",
+ "run": "csa-x-d",
+ "subject": "ap_computer_science_a",
+ "archetypeList": "csa_x_d",
+ "seed0": 34500,
+ "candidatesPerCell": 1,
+ "capUsd": 1,
+ "repair": false,
+ "env": {
+  "AP_REQUIRE_BLUEPRINT": "1",
+  "AP_SUBJECT_NOTES": "1",
+  "AP_FLAT_REVIEW": "1",
+  "AP_MC_CANDS": "3",
+  "AP_SYNC_CONC": "10",
+  "AP_FIXED_WORDING": "1"
+ },
+ "generatorFiles": [
+  "scripts/ap-generation/archetypes/",
+  "lib/ap-generation/subjects/graph-archetypes.json",
+  "lib/ap-generation/gates.ts",
+  "lib/ap-generation/guide-gates.ts",
+  "lib/ap-generation/subjects/calc-ab.ts",
+  "lib/ap-generation/subjects/calc-bc.ts",
+  "lib/ap-generation/part-refine.ts",
+  "lib/ap-generation/blueprint.ts",
+  "lib/ap-generation/review-parse.ts",
+  "lib/ap-generation/generator-defects.ts",
+  "lib/ap-generation/math-wrapping.ts",
+  "lib/ap-generation/frozen-config.ts",
+  "scripts/ap-generation/pipeline2.ts",
+  "scripts/ap-generation/py.ts",
+  "lib/ap-generation/stats-set.ts",
+  "lib/ap-generation/stats-difficulty.ts",
+  "lib/ap-generation/subjects/csa.ts",
+  "lib/ap-generation/subjects/csa-archetypes.json"
+ ],
+ "skipStages": [
+  "gen"
+ ],
+ "hardStopCumulativeUsd": 400,
+ "_budget_estimate": {
+  "cells": "37 singles + 3 sets x 3 candidates",
+  "estimate": "about 5"
+ },
+ "_java": "The generator executes every item with a real JDK (scripts/ap-generation/archetypes/csa_java.py). Record `java -version` (OpenJDK 21.0.x, /opt/homebrew/opt/openjdk@21) in the freeze commit message; a different JDK major version is a different generator. Results are content-addressed and deterministic.",
+ "_note": "Frozen 2026-10-19 for CS3 (strict new-set rule).",
+ "expected": {
+  "generatorHash": "21d9c935885f",
+  "reviewerPromptHash": "5a92f4256749",
+  "difficultyPromptHash": "9bda2250d42c",
+  "parserHash": "7528bbe8cdfc",
+  "models": {
+   "gen": "claude-sonnet-5-5",
+   "solve": "claude-opus-5-5",
+   "review": "claude-sonnet-5-5",
+   "difficulty": "claude-sonnet-5-5",
+   "spot": "claude-fable-5-1"
+  },
+  "flags": {
+   "flatReview": true,
+   "subjectNotes": true,
+   "requireBlueprint": true,
+   "legacyItems": false,
+   "repair": false
+  }
+ }
+}

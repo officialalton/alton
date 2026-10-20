@@ -1,0 +1,1064 @@
+[
+ {
+  "candidateKey": "ap_biology-m01-k0",
+  "cellId": "ap_biology-m01",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "7.5",
+  "unitCode": "7",
+  "skillPrimary": "5.A",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "bis_hw_set_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "set_item_2:criterion_failed_key_scoring; set_item_2:criterion_failed_stimulus_expression; set_item_2:criterion_failed_distractor_explanation; set_item_2:criterion_failed_exam_suitability; set_item_2:instant_reject_missing_condition; set_item_2:reference_pattern_mismatch; set_item_4:solver_disagrees:Stem asks which condition was violated; option C states the condition (random mating) while B states the violation (nonrandom mating). Both defensibly refer to the same answer.; set_item_4:criterion_failed_distractor_explanation; set_item_4:criterion_failed_exam_suitability; set_item_4:reference_pattern_mismatch; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability; instant_reject_missing_condition; reference_pattern_mismatch; solver_disagrees:Stem asks which condition was violated; option C states the condition (random mating) while B states the violation (nonrandom mating). Both defensibly refer to the same answer.",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The item asks for allele frequency from genotype counts, which a student can get by direct allele counting: (286 + 2×257)/2000 = 0.40. It needs one table read and one short calculation. The only trap is the choice between direct counting and the q² shortcut, which would wrongly assume equilibrium. The distractors are 0.26 (q² misread), 0.60 (frequency of A) and 0.80 (allele count not divided by 2). Concept depth and step count are low, so this suits foundational practice more than full-mock exam prep. The wording is clear and the numbers are small, so the difficulty does not come from unfair sources.",
+  "payload": {
+   "archetype": "bis_hw_set",
+   "topic": "7.5",
+   "skill": "5.A",
+   "calculator": "allowed",
+   "set_intro": "A biologist samples a population of a plant species and records the genotypes at a gene with two alleles, A and a. The table shows the data.",
+   "stimulus": {
+    "kind": "table",
+    "description": "Genotypes of 1000 individuals in a population sampled at one time",
+    "data": {
+     "columns": [
+      "Genotype",
+      "Number of individuals"
+     ],
+     "rows": [
+      [
+       "AA",
+       "457"
+      ],
+      [
+       "Aa",
+       "286"
+      ],
+      [
+       "aa",
+       "257"
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "bis_hw_set_q1",
+     "topic": "7.5",
+     "skill": "5.A",
+     "stem": "What is the frequency of allele a in the population?",
+     "options": [
+      {
+       "text": "0.26",
+       "why": "Counts the proportion of homozygous recessive individuals instead of the allele frequency.",
+       "value": "0.25700000"
+      },
+      {
+       "text": "0.60",
+       "why": "Reports the frequency of the dominant allele.",
+       "value": "0.60000000"
+      },
+      {
+       "text": "0.40",
+       "why": "There are 2000 alleles. The number of a alleles is 286 + 2(257) = 800, so the frequency of a is 800/2000 = 0.40.",
+       "value": "0.40000000"
+      },
+      {
+       "text": "0.80",
+       "why": "Divides the number of a alleles by the number of individuals instead of the number of alleles.",
+       "value": "0.80000000"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is 0.40. There are 2000 alleles. The number of a alleles is 286 + 2(257) = 800, so the frequency of a is 800/2000 = 0.40.\n0.26 is incorrect: Counts the proportion of homozygous recessive individuals instead of the allele frequency.\n0.60 is incorrect: Reports the frequency of the dominant allele.\n0.80 is incorrect: Divides the number of a alleles by the number of individuals instead of the number of alleles.",
+     "est_seconds": 65,
+     "blueprint": {
+      "id": "bis_hw_set_q1",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "allele frequency from genotype counts",
+      "topic": "7.5",
+      "skill": "5.A",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: allele frequency from genotype counts",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "genotype counts"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Counts the proportion of homozygous recessive individuals instead of the allele frequency."
+       },
+       {
+        "id": "m2",
+        "description": "Reports the frequency of the dominant allele."
+       },
+       {
+        "id": "m3",
+        "description": "Divides the number of a alleles by the number of individuals instead of the number of alleles."
+       }
+      ],
+      "verification": {
+       "independent_path": "allele counting vs the generating q",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_hw_set_q2",
+     "topic": "7.5",
+     "skill": "5.A",
+     "stem": "If the population were in Hardy-Weinberg equilibrium with the allele frequencies found in the previous question, how many heterozygotes would be expected?",
+     "options": [
+      {
+       "text": "240",
+       "why": "Uses p times q times the population size, without the factor of 2.",
+       "value": "240.00000"
+      },
+      {
+       "text": "480",
+       "why": "Applying the relationship to the values given in the question and the stimulus gives 480; each other option comes from a specific, named error.",
+       "value": "480.00000"
+      },
+      {
+       "text": "0.48",
+       "why": "Uses 2pq as a number without multiplying by the population size.",
+       "value": "0.48000000"
+      },
+      {
+       "text": "360",
+       "why": "Uses p squared times the population size.",
+       "value": "360.00000"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is 480. Applying the relationship to the values given in the question and the stimulus gives 480; each other option comes from a specific, named error.\n240 is incorrect: Uses p times q times the population size, without the factor of 2.\n0.48 is incorrect: Uses 2pq as a number without multiplying by the population size.\n360 is incorrect: Uses p squared times the population size.",
+     "est_seconds": 75,
+     "blueprint": {
+      "id": "bis_hw_set_q2",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "expected heterozygotes under Hardy-Weinberg",
+      "topic": "7.5",
+      "skill": "5.A",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: expected heterozygotes under Hardy-Weinberg",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "genotype counts"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Uses p times q times the population size, without the factor of 2."
+       },
+       {
+        "id": "m2",
+        "description": "Uses 2pq as a number without multiplying by the population size."
+       },
+       {
+        "id": "m3",
+        "description": "Uses p squared times the population size."
+       }
+      ],
+      "verification": {
+       "independent_path": "2pqN vs binomial expansion",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_hw_set_q3",
+     "topic": "7.5",
+     "skill": "4.B",
+     "stem": "Which statement best compares the observed number of heterozygotes with the expected number?",
+     "options": [
+      {
+       "text": "The population has about the expected number of heterozygotes, so it is in Hardy-Weinberg equilibrium.",
+       "why": "The observed number differs a lot from the expected number.",
+       "value": null
+      },
+      {
+       "text": "The population has more heterozygotes than expected (286 observed and about 480 expected), so it is not in equilibrium.",
+       "why": "The observed number of heterozygotes is lower than expected, not higher.",
+       "value": null
+      },
+      {
+       "text": "The population has fewer heterozygotes than expected (286 observed and about 480 expected), so it is not in Hardy-Weinberg equilibrium.",
+       "why": "A large deficit of heterozygotes is not consistent with the equilibrium genotype frequencies.",
+       "value": null
+      },
+      {
+       "text": "The comparison cannot be made, because Hardy-Weinberg applies only to dominant alleles.",
+       "why": "Hardy-Weinberg applies to alleles of a gene in a population.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is The population has fewer heterozygotes than expected (286 observed and about 480 expected), so it is not in Hardy-Weinberg equilibrium.. A large deficit of heterozygotes is not consistent with the equilibrium genotype frequencies.\nThe population has about the expected number of heterozygotes, so it is in Hardy-Weinberg equilibrium. is incorrect: The observed number differs a lot from the expected number.\nThe population has more heterozygotes than expected (286 observed and about 480 expected), so it is not in equilibrium. is incorrect: The observed number of heterozygotes is lower than expected, not higher.\nThe comparison cannot be made, because Hardy-Weinberg applies only to dominant alleles. is incorrect: Hardy-Weinberg applies to alleles of a gene in a population.",
+     "est_seconds": 70,
+     "blueprint": {
+      "id": "bis_hw_set_q3",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "compare observed and expected heterozygotes",
+      "topic": "7.5",
+      "skill": "4.B",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: compare observed and expected heterozygotes",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "genotype counts"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "The observed number differs a lot from the expected number."
+       },
+       {
+        "id": "m2",
+        "description": "The observed number of heterozygotes is lower than expected, not higher."
+       },
+       {
+        "id": "m3",
+        "description": "Hardy-Weinberg applies to alleles of a gene in a population."
+       }
+      ],
+      "verification": {
+       "independent_path": "observed minus expected heterozygotes vs the generating inbreeding",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_hw_set_q4",
+     "topic": "7.5",
+     "skill": "6.E",
+     "stem": "Which condition of Hardy-Weinberg equilibrium is most likely to have been violated?",
+     "options": [
+      {
+       "text": "A very large population, which prevents chance changes in allele frequencies",
+       "why": "A large population helps maintain equilibrium and would not cause a heterozygote deficit.",
+       "value": null
+      },
+      {
+       "text": "Nonrandom mating, such as mating between relatives, which increases the proportion of homozygotes",
+       "why": "Inbreeding raises the frequency of homozygotes and lowers the frequency of heterozygotes without changing allele frequencies.",
+       "value": null
+      },
+      {
+       "text": "Random mating among all the individuals in the population",
+       "why": "Random mating is a condition for equilibrium, not a violation.",
+       "value": null
+      },
+      {
+       "text": "No mutation, because the alleles are not changed",
+       "why": "The absence of mutation would help keep equilibrium.",
+       "value": null
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is Nonrandom mating, such as mating between relatives, which increases the proportion of homozygotes. Inbreeding raises the frequency of homozygotes and lowers the frequency of heterozygotes without changing allele frequencies.\nA very large population, which prevents chance changes in allele frequencies is incorrect: A large population helps maintain equilibrium and would not cause a heterozygote deficit.\nRandom mating among all the individuals in the population is incorrect: Random mating is a condition for equilibrium, not a violation.\nNo mutation, because the alleles are not changed is incorrect: The absence of mutation would help keep equilibrium.",
+     "est_seconds": 65,
+     "blueprint": {
+      "id": "bis_hw_set_q4",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "identify a violated equilibrium condition from a heterozygote deficit",
+      "topic": "7.5",
+      "skill": "6.E",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: identify a violated equilibrium condition from a heterozygote deficit",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "genotype counts"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "A large population helps maintain equilibrium and would not cause a heterozygote deficit."
+       },
+       {
+        "id": "m2",
+        "description": "Random mating is a condition for equilibrium, not a violation."
+       },
+       {
+        "id": "m3",
+        "description": "The absence of mutation would help keep equilibrium."
+       }
+      ],
+      "verification": {
+       "independent_path": "deficit pattern vs the generating cause",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    }
+   ],
+   "set_size": 4,
+   "est_seconds": 275,
+   "facts": [
+    "q=0.4000"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bis_hw_set_q1",
+   "facts": [
+    "q=0.4000"
+   ],
+   "seed": 11400
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "About 65 seconds, a short stem, one calculation, and parallel numeric options. Calculator use is consistent.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is clean: a single allele-counting calculation with a unique key, a complete table, distinct distractors with explanations, and appropriate exam load."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "The dangling reference to a previous question makes the item unsuitable as a standalone exam item. The calculation load itself is fine.",
+    "key_scoring": {
+     "pass": false,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": false,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": false,
+     "notes": ""
+    },
+    "instant_reject": [
+     "missing_condition"
+    ],
+    "matches_reference_pattern": false,
+    "resembles_known_exam_item": false,
+    "summary": "The item fails because the stem depends on a nonexistent \"previous question\" for the allele frequencies, so it is not self-contained. The key of 480 is otherwise correct, but the explanation is boilerplate."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Table reading plus one HW calculation; fits 7.5 and 4.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "p=0.6, expected Aa=480 vs 286 observed; C unique."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table data complete; the 480 is derived from the table using the formula sheet."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each wrong option has a specific accurate rationale; D is weak but acceptable."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 70 seconds, calculator allowed, light reading load."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound. The key is unique and verified, the stimulus is complete, and it fits topic 7.5 and skill 4.B."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Hardy-Weinberg conditions applied to genotype data; fits 7.5 and roughly 6.E (cause inference)."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "B is the unique defensible answer: p=0.6, q=0.4, homozygote excess and heterozygote deficit imply nonrandom mating."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table is complete with genotype counts summing to 1000. The stem does not say whether the alleles are neutral or whether the sample is representative, but it is acceptable."
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": "Distractors A, C and D are written as conditions that are met, so they are not violations at all and are trivially eliminated. They are not parallel to B, which is written as a violation. Misconceptions are thin and not distinct, and B is the longest option. The explanation is accurate but generic."
+    },
+    "exam_suitability": {
+     "pass": false,
+     "notes": "The timing is fine, but the option structure is a giveaway and the distractors are weak for an AP-quality item."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": false,
+    "resembles_known_exam_item": false,
+    "summary": "The key (nonrandom mating) is correct and unique, but the distractors are non-parallel. A, C and D describe satisfied conditions rather than violations, so they are trivially eliminated, and B stands out as the only option phrased as a violation. Fail on distractor quality; the options should be rewritten as parallel candidate violations (for example small population size, gene flow, selection, nonrandom mating)."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "The item asks for allele frequency from genotype counts, which a student can get by direct allele counting: (286 + 2×257)/2000 = 0.40. It needs one table read and one short calculation. The only trap is the choice between direct counting and the q² shortcut, which would wrongly assume equilibrium. The distractors are 0.26 (q² misread), 0.60 (frequency of A) and 0.80 (allele count not divided by 2). Concept depth and step count are low, so this suits foundational practice more than full-mock exam prep. The wording is clear and the numbers are small, so the difficulty does not come from unfair sources.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must read genotype counts, derive allele frequencies (p=0.6, q=0.4), apply 2pq from the formula sheet, and convert the frequency to a count (480). The arithmetic is clean and short and the content is in scope. Distractors target the frequency-vs-count confusion and mixing up p², q² and 2pq. Minor flaw: the stem refers to 'the previous question', but the needed values can be recomputed from the table, so this does not make the item unfairly hard.",
+    "reading_load": "low",
+    "computation_load": "medium",
+    "reasoning_steps": 4,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 120
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must read the genotype table, compute p and q from counts, apply 2pq to get the expected heterozygotes, and compare with the observed count. This is one formula-sheet calculation with clean numbers and distractors based on common misconceptions. It is typical of a full-mock AP Biology item and is not advanced.",
+    "reading_load": "low",
+    "computation_load": "medium",
+    "reasoning_steps": 4,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 120
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Students must derive allele frequencies from genotype counts (p=0.6, q=0.4), compute expected HW genotype counts, compare them with the observed counts, recognize the heterozygote deficit, and link it to nonrandom mating while rejecting the other conditions. The item uses one formula-sheet calculation with round numbers, reads a simple table, and applies the concept to a concrete situation. Option B partly leaks the answer by describing the effect on homozygotes, but the item still requires the data comparison. No heavy reading, long arithmetic, ambiguity, or out-of-scope content.",
+    "reading_load": "low",
+    "computation_load": "medium",
+    "reasoning_steps": 5,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 120
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_biology-m01-k1",
+  "cellId": "ap_biology-m01",
+  "apSubjectCode": "ap_biology",
+  "kind": "mc",
+  "keywordCode": "7.5",
+  "unitCode": "7",
+  "skillPrimary": "5.A",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "bis_hw_set_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "set_item_2:criterion_failed_key_scoring; set_item_2:criterion_failed_stimulus_expression; set_item_2:criterion_failed_distractor_explanation; set_item_2:criterion_failed_exam_suitability; set_item_2:instant_reject_missing_condition; set_item_2:reference_pattern_mismatch; set_item_4:solver_disagrees:The stem asks which condition was violated, and that condition is random mating, which is option D. Option C names the violation (nonrandom mating) rather than the condition, so C and D can both be defended.; set_item_4:criterion_failed_key_scoring; set_item_4:criterion_failed_distractor_explanation; set_item_4:instant_reject_multiple_correct; set_item_4:reference_pattern_mismatch; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability; instant_reject_missing_condition; reference_pattern_mismatch; solver_disagrees:The stem asks which condition was violated, and that condition is random mating, which is option D. Option C names the violation (nonrandom mating) rather than the condition, so C and D can both be defended.; instant_reject_multiple_correct",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Single allele-counting calculation from a small table: (125 + 2×87)/1000 = 0.299 ≈ 0.30. Requires reading the table and recognizing that allele frequency differs from genotype frequency (distractors 0.17, 0.25 and 0.60 reflect genotype-frequency or A-allele errors). No Hardy-Weinberg equilibrium assumption or multi-step reasoning is needed. The arithmetic is short, and the wording is clear and unambiguous.",
+  "payload": {
+   "archetype": "bis_hw_set",
+   "topic": "7.5",
+   "skill": "5.A",
+   "calculator": "allowed",
+   "set_intro": "A biologist samples a population of a plant species and records the genotypes at a gene with two alleles, A and a. The table shows the data.",
+   "stimulus": {
+    "kind": "table",
+    "description": "Genotypes of 500 individuals in a population sampled at one time",
+    "data": {
+     "columns": [
+      "Genotype",
+      "Number of individuals"
+     ],
+     "rows": [
+      [
+       "AA",
+       "288"
+      ],
+      [
+       "Aa",
+       "125"
+      ],
+      [
+       "aa",
+       "87"
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "bis_hw_set_q1",
+     "topic": "7.5",
+     "skill": "5.A",
+     "stem": "What is the frequency of allele a in the population?",
+     "options": [
+      {
+       "text": "0.60",
+       "why": "Divides the number of a alleles by the number of individuals instead of the number of alleles.",
+       "value": "0.59800000"
+      },
+      {
+       "text": "0.17",
+       "why": "Counts the proportion of homozygous recessive individuals instead of the allele frequency.",
+       "value": "0.17400000"
+      },
+      {
+       "text": "0.25",
+       "why": "Counts the proportion of heterozygous individuals instead of the allele frequency.",
+       "value": "0.25000000"
+      },
+      {
+       "text": "0.30",
+       "why": "There are 1000 alleles. The number of a alleles is 125 + 2(87) = 299, so the frequency of a is 299/1000 = 0.30.",
+       "value": "0.29900000"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is 0.30. There are 1000 alleles. The number of a alleles is 125 + 2(87) = 299, so the frequency of a is 299/1000 = 0.30.\n0.60 is incorrect: Divides the number of a alleles by the number of individuals instead of the number of alleles.\n0.17 is incorrect: Counts the proportion of homozygous recessive individuals instead of the allele frequency.\n0.25 is incorrect: Counts the proportion of heterozygous individuals instead of the allele frequency.",
+     "est_seconds": 65,
+     "blueprint": {
+      "id": "bis_hw_set_q1",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "allele frequency from genotype counts",
+      "topic": "7.5",
+      "skill": "5.A",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: allele frequency from genotype counts",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "genotype counts"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Divides the number of a alleles by the number of individuals instead of the number of alleles."
+       },
+       {
+        "id": "m2",
+        "description": "Counts the proportion of homozygous recessive individuals instead of the allele frequency."
+       },
+       {
+        "id": "m3",
+        "description": "Counts the proportion of heterozygous individuals instead of the allele frequency."
+       }
+      ],
+      "verification": {
+       "independent_path": "allele counting vs the generating q",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_hw_set_q2",
+     "topic": "7.5",
+     "skill": "5.A",
+     "stem": "If the population were in Hardy-Weinberg equilibrium with the allele frequencies found in the previous question, how many heterozygotes would be expected?",
+     "options": [
+      {
+       "text": "210",
+       "why": "Applying the relationship to the values given in the question and the stimulus gives 210; each other option comes from a specific, named error.",
+       "value": "209.59900"
+      },
+      {
+       "text": "105",
+       "why": "Uses p times q times the population size, without the factor of 2.",
+       "value": "104.79950"
+      },
+      {
+       "text": "246",
+       "why": "Uses p squared times the population size.",
+       "value": "245.70050"
+      },
+      {
+       "text": "0.42",
+       "why": "Uses 2pq as a number without multiplying by the population size.",
+       "value": "0.41919800"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is 210. Applying the relationship to the values given in the question and the stimulus gives 210; each other option comes from a specific, named error.\n105 is incorrect: Uses p times q times the population size, without the factor of 2.\n246 is incorrect: Uses p squared times the population size.\n0.42 is incorrect: Uses 2pq as a number without multiplying by the population size.",
+     "est_seconds": 75,
+     "blueprint": {
+      "id": "bis_hw_set_q2",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "expected heterozygotes under Hardy-Weinberg",
+      "topic": "7.5",
+      "skill": "5.A",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: expected heterozygotes under Hardy-Weinberg",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "genotype counts"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Uses p times q times the population size, without the factor of 2."
+       },
+       {
+        "id": "m2",
+        "description": "Uses p squared times the population size."
+       },
+       {
+        "id": "m3",
+        "description": "Uses 2pq as a number without multiplying by the population size."
+       }
+      ],
+      "verification": {
+       "independent_path": "2pqN vs binomial expansion",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_hw_set_q3",
+     "topic": "7.5",
+     "skill": "4.B",
+     "stem": "Which statement best compares the observed number of heterozygotes with the expected number?",
+     "options": [
+      {
+       "text": "The population has fewer heterozygotes than expected (125 observed and about 210 expected), so it is not in Hardy-Weinberg equilibrium.",
+       "why": "A large deficit of heterozygotes is not consistent with the equilibrium genotype frequencies.",
+       "value": null
+      },
+      {
+       "text": "The comparison cannot be made, because Hardy-Weinberg applies only to dominant alleles.",
+       "why": "Hardy-Weinberg applies to alleles of a gene in a population.",
+       "value": null
+      },
+      {
+       "text": "The population has more heterozygotes than expected (125 observed and about 210 expected), so it is not in equilibrium.",
+       "why": "The observed number of heterozygotes is lower than expected, not higher.",
+       "value": null
+      },
+      {
+       "text": "The population has about the expected number of heterozygotes, so it is in Hardy-Weinberg equilibrium.",
+       "why": "The observed number differs a lot from the expected number.",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is The population has fewer heterozygotes than expected (125 observed and about 210 expected), so it is not in Hardy-Weinberg equilibrium.. A large deficit of heterozygotes is not consistent with the equilibrium genotype frequencies.\nThe comparison cannot be made, because Hardy-Weinberg applies only to dominant alleles. is incorrect: Hardy-Weinberg applies to alleles of a gene in a population.\nThe population has more heterozygotes than expected (125 observed and about 210 expected), so it is not in equilibrium. is incorrect: The observed number of heterozygotes is lower than expected, not higher.\nThe population has about the expected number of heterozygotes, so it is in Hardy-Weinberg equilibrium. is incorrect: The observed number differs a lot from the expected number.",
+     "est_seconds": 70,
+     "blueprint": {
+      "id": "bis_hw_set_q3",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "compare observed and expected heterozygotes",
+      "topic": "7.5",
+      "skill": "4.B",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: compare observed and expected heterozygotes",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "genotype counts"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Hardy-Weinberg applies to alleles of a gene in a population."
+       },
+       {
+        "id": "m2",
+        "description": "The observed number of heterozygotes is lower than expected, not higher."
+       },
+       {
+        "id": "m3",
+        "description": "The observed number differs a lot from the expected number."
+       }
+      ],
+      "verification": {
+       "independent_path": "observed minus expected heterozygotes vs the generating inbreeding",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    },
+    {
+     "archetype": "bis_hw_set_q4",
+     "topic": "7.5",
+     "skill": "6.E",
+     "stem": "Which condition of Hardy-Weinberg equilibrium is most likely to have been violated?",
+     "options": [
+      {
+       "text": "No mutation, because the alleles are not changed",
+       "why": "The absence of mutation would help keep equilibrium.",
+       "value": null
+      },
+      {
+       "text": "A very large population, which prevents chance changes in allele frequencies",
+       "why": "A large population helps maintain equilibrium and would not cause a heterozygote deficit.",
+       "value": null
+      },
+      {
+       "text": "Nonrandom mating, such as mating between relatives, which increases the proportion of homozygotes",
+       "why": "Inbreeding raises the frequency of homozygotes and lowers the frequency of heterozygotes without changing allele frequencies.",
+       "value": null
+      },
+      {
+       "text": "Random mating among all the individuals in the population",
+       "why": "Random mating is a condition for equilibrium, not a violation.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is Nonrandom mating, such as mating between relatives, which increases the proportion of homozygotes. Inbreeding raises the frequency of homozygotes and lowers the frequency of heterozygotes without changing allele frequencies.\nNo mutation, because the alleles are not changed is incorrect: The absence of mutation would help keep equilibrium.\nA very large population, which prevents chance changes in allele frequencies is incorrect: A large population helps maintain equilibrium and would not cause a heterozygote deficit.\nRandom mating among all the individuals in the population is incorrect: Random mating is a condition for equilibrium, not a violation.",
+     "est_seconds": 65,
+     "blueprint": {
+      "id": "bis_hw_set_q4",
+      "subject": "ap_biology",
+      "kind": "mc",
+      "concept": "identify a violated equilibrium condition from a heterozygote deficit",
+      "topic": "7.5",
+      "skill": "6.E",
+      "student_thinking": [
+       "Identify the biological principle or relationship that governs the situation: identify a violated equilibrium condition from a heterozygote deficit",
+       "Apply it to the information given and compare the result with the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "every quantity or fact needed is given in the stem or the stimulus",
+        "evidence": "stem and stimulus"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "genotype counts"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "The absence of mutation would help keep equilibrium."
+       },
+       {
+        "id": "m2",
+        "description": "A large population helps maintain equilibrium and would not cause a heterozygote deficit."
+       },
+       {
+        "id": "m3",
+        "description": "Random mating is a condition for equilibrium, not a violation."
+       }
+      ],
+      "verification": {
+       "independent_path": "deficit pattern vs the generating cause",
+       "method": "independent computation / fixed fact bank"
+      },
+      "judgment_demand": "choose the governing biological relationship, then apply or interpret it",
+      "code_first": true
+     }
+    }
+   ],
+   "set_size": 4,
+   "est_seconds": 275,
+   "facts": [
+    "q=0.2990"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "bis_hw_set_q1",
+   "facts": [
+    "q=0.2990"
+   ],
+   "seed": 11401
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "The item takes about 65 seconds and needs one simple calculation, which a calculator allows. It has a short stem and four parallel numeric options.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is a clean allele-counting calculation with a unique key and distinct distractors, and it is suitable for the exam."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "A standalone exam item cannot refer to a 'previous question'. The options are mixed in format, and the key is more precise than the distractors.",
+    "key_scoring": {
+     "pass": false,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": false,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": false,
+     "notes": ""
+    },
+    "instant_reject": [
+     "missing_condition"
+    ],
+    "matches_reference_pattern": false,
+    "resembles_known_exam_item": false,
+    "summary": "The item fails because the stem relies on 'the allele frequencies found in the previous question', which is not given. The calculation (p=0.701, q=0.299, 2pqN≈210) is correct and in scope, but the item is incomplete as a standalone question. The explanation is also generic."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Hardy-Weinberg calculation from genotype counts to compare observed vs expected heterozygotes; fits 7.5 and data description."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "p=0.701, q=0.299, expected Aa about 210 vs observed 125; A is the unique correct option."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table is complete: genotype counts totaling 500, clear stem."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Distractors encode distinct errors (wrong direction, wrong applicability, no deviation); each is explained, though the explanations are brief."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 70 seconds, calculator allowed, light arithmetic."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Correct, in-scope Hardy-Weinberg table item with a unique key and distinct distractors. Passes."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Hardy-Weinberg conditions applied to genotype data; cause inference is acceptable for 6.E."
+    },
+    "key_scoring": {
+     "pass": false,
+     "notes": "Option D (random mating) is the condition whose violation is observed, so D can be read as the violated condition; C names the violation. Key is not uniquely defensible given the stem 'which condition is violated'."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table is complete and consistent with the stem; 500 individuals sum correctly."
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": "Rationale for D claims random mating 'is not a violation', which contradicts the data and makes D ambiguous. Options are not parallel (conditions vs violation)."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Time and load are typical; calculator use optional."
+    },
+    "instant_reject": [
+     "multiple_correct"
+    ],
+    "matches_reference_pattern": false,
+    "resembles_known_exam_item": false,
+    "summary": "The data support nonrandom mating, but the stem asks which condition was violated and option D names that condition (random mating) while C names the violation. Two options are defensible and the D rationale is flawed, so the item needs rewording with parallel options."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single allele-counting calculation from a small table: (125 + 2×87)/1000 = 0.299 ≈ 0.30. Requires reading the table and recognizing that allele frequency differs from genotype frequency (distractors 0.17, 0.25 and 0.60 reflect genotype-frequency or A-allele errors). No Hardy-Weinberg equilibrium assumption or multi-step reasoning is needed. The arithmetic is short, and the wording is clear and unambiguous.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must convert genotype counts from a table into allele frequencies (p ≈ 0.70, q ≈ 0.30), then apply the Hardy-Weinberg formula 2pq and scale by population size to get an expected count (~210). This is one formula-sheet proportional calculation chain with small, clean numbers, and the distractors (0.42 as a frequency rather than a count, 105 as half) target realistic errors. The reference to \"the previous question\" slightly weakens standalone clarity, but the data needed are in the table, so it is not an unfair source of difficulty.",
+    "reading_load": "low",
+    "computation_load": "medium",
+    "reasoning_steps": 4,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 120
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must read the genotype table, convert counts to allele frequencies (p about 0.70, q about 0.30), apply 2pq with N=500 to get about 210 expected heterozygotes, and compare with the observed 125 to judge equilibrium. This is a typical multi-step Hardy-Weinberg data-interpretation item with one formula-sheet calculation. The numbers are modest, the wording is clear, and the distractors target real misconceptions such as the direction of the difference and the idea that H-W applies only to dominant alleles. The difficulty comes from the concept, not from unfair sources.",
+    "reading_load": "low",
+    "computation_load": "medium",
+    "reasoning_steps": 5,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 150
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must read the genotype table, compute allele frequencies (p ≈ 0.70, q ≈ 0.30), derive expected Hardy-Weinberg genotype counts, and compare them to the observed counts. The heterozygote deficit with excess homozygotes points to nonrandom mating (inbreeding). Distractors test the other conditions (mutation, population size, random mating). Arithmetic is short and uses the formula-sheet equation, with no out-of-scope content and clear wording.",
+    "reading_load": "low",
+    "computation_load": "medium",
+    "reasoning_steps": 4,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 150
+   }
+  ]
+ }
+]

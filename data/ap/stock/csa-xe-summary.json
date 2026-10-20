@@ -1,0 +1,50 @@
+{
+ "runs": [
+  "csa-x-e"
+ ],
+ "rows": 6,
+ "passed": 2,
+ "rejected": 4,
+ "passRate": 0.333,
+ "mc": {
+  "rows": 6,
+  "passed": 2,
+  "passRate": 0.333
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "1": 1,
+  "2": 1
+ },
+ "skillsPassed": {
+  "4.B": 2
+ },
+ "figPassed": {
+  "text": 2
+ },
+ "figAll": {
+  "text": 6
+ },
+ "figPassRate": {
+  "text": "2/6"
+ },
+ "renderTypesPassed": {
+  "text": 2
+ },
+ "archetypesPassed": {
+  "cs_postcondition_char_count": 1,
+  "cs_precondition_division": 1
+ },
+ "archetypesAll": {
+  "cs_postcondition_char_count": 3,
+  "cs_precondition_division": 3
+ },
+ "failedArchetypes": [],
+ "costUsd": {
+  "csa-x-e": 0.1908
+ }
+}

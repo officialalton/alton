@@ -48,7 +48,7 @@ class Determinism(unittest.TestCase):
 
     def test_library_size_and_registration(self):
         self.assertGreaterEqual(len(MC), 90)
-        self.assertEqual(len(FRQ), 8)
+        self.assertEqual(len(FRQ), 9)  # 8 + mif_short_shutdown(MI3, 2026-10-19)
         self.assertEqual(len(set(MC + FRQ)), len(MC + FRQ))
         self.assertEqual(set(R.MICRO_STAGES["micro_p1_mc"]) - set(MC), set())
         self.assertEqual(len(R.MICRO_STAGES["micro_p1_mc"]), 22)

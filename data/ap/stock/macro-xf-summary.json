@@ -1,0 +1,51 @@
+{
+ "runs": [
+  "macro-x-f"
+ ],
+ "rows": 12,
+ "passed": 5,
+ "rejected": 7,
+ "passRate": 0.417,
+ "mc": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "frq": {
+  "rows": 12,
+  "passed": 5,
+  "passRate": 0.417
+ },
+ "unitsPassed": {},
+ "skillsPassed": {},
+ "figPassed": {
+  "table": 5
+ },
+ "figAll": {
+  "table": 12
+ },
+ "figPassRate": {
+  "table": "5/12"
+ },
+ "renderTypesPassed": {
+  "ap_table:given_info": 2,
+  "ap_table": 3
+ },
+ "archetypesPassed": {
+  "maf_long_open_economy": 2,
+  "maf_short_ppc_trade": 1,
+  "maf_short_money_banking": 2
+ },
+ "archetypesAll": {
+  "maf_long_open_economy": 3,
+  "maf_short_gdp_data": 3,
+  "maf_short_ppc_trade": 3,
+  "maf_short_money_banking": 3
+ },
+ "failedArchetypes": [
+  "maf_short_gdp_data"
+ ],
+ "costUsd": {
+  "macro-x-f": 0.5656
+ }
+}

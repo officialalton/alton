@@ -13,6 +13,7 @@
 // 소재 상한(2026-10-08): --topics rw-topics.ts 가 만든 topics.json [--max-per-module 1 --max-per-exam 2 --max-family-per-exam 4]. 상한은 하드 제약, 후보가 없을 때만 풀고 report.topicRelaxed 에 기록.
 // 실행: npx tsx scripts/mock-exam-generation/assemble-unique.ts --dump d.json --weights w.json --keep "SAT Practice Test 1,..." --n 6 [--first-index 4] [--fit] [--out dir]
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { sortModuleOfficial } from "../../lib/mock-exam/official-order";
 import { DEFAULT_TOPIC_CAPS, TopicLedger, subjectExcess, capViolations, type TopicCaps, type TopicMap } from "./rw-topics-lib";
 import { buildTargetCells, difficultyAllowedForModule, mstModulePlans, type EligibleProblem, type ProblemDifficulty } from "../../lib/mock-exam/assemble";
 
@@ -77,7 +78,7 @@ export function feasibleN(pool: EligibleProblem[], W: Weights, maxN: number, rel
 /** 전역 고유 선택. pool 은 이미 kept 문항이 빠진 후보. keptCov: 유지 세트가 이미 덮은 `skill|difficulty` 횟수. */
 const cmpKey = (a: (number | string)[], b: (number | string)[]) => { for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return a[i] < b[i] ? -1 : 1; return 0; };
 /** topics: problemId -> {subject, cluster, family}(rw-topics.ts 산출). 있으면 R&W 지문 소재 상한(모듈당/응시경로당 cluster, 경로당 family)을 하드 제약으로, 과목 구성은 소프트 목표로 쓴다. */
-export type GroupLimits = { maxShared?: number; groupCap?: number; keptGroups?: Set<string>[]; topics?: TopicMap; topicCaps?: TopicCaps; subjectMix?: Record<string, number> };
+export type GroupLimits = { maxShared?: number; groupCap?: number; keptGroups?: Set<string>[]; topics?: TopicMap; topicCaps?: TopicCaps; subjectMix?: Record<string, number>; litCap?: number };
 export function planUnique(pool: EligibleProblem[], W: Weights, n: number, keptCov: Map<string, number>, relaxFormat = false, limits: GroupLimits = {}) {
   const slots = buildSlots(W, n, relaxFormat);
   const maxShared = limits.maxShared ?? 15; const groupCap = limits.groupCap ?? Infinity; const kg = limits.keptGroups ?? [];
@@ -88,7 +89,7 @@ export function planUnique(pool: EligibleProblem[], W: Weights, n: number, keptC
   const groupOk = (g: string | null | undefined, s: number) => !g || ((groupUse.get(g) ?? 0) < groupCap && others(g, s).every((o) => (shared[s].get(o) ?? 0) + 1 <= maxShared));
   const groupAdd = (g: string | null | undefined, s: number, d: 1 | -1) => { if (!g) return; groupUse.set(g, (groupUse.get(g) ?? 0) + d); for (const o of others(g, s)) { shared[s].set(o, (shared[s].get(o) ?? 0) + d); if (o[0] === "n") { const t = Number(o.slice(1)); shared[t].set(`n${s}`, (shared[t].get(`n${s}`) ?? 0) + d); } } };
   const topics = limits.topics ?? new Map() as TopicMap; const ledger = new TopicLedger(topics, limits.topicCaps ?? DEFAULT_TOPIC_CAPS);
-  const subj = Array.from({ length: n }, () => new Map<string, number>()); const subjTotal = new Array(n).fill(0); const topicRelaxed: string[] = [];
+  const subj = Array.from({ length: n }, () => new Map<string, number>()); const subjTotal = new Array(n).fill(0); const topicRelaxed: string[] = []; const litRelaxed: string[] = []; const litCap = limits.litCap ?? Infinity;
   const subjOf = (id: string) => topics.get(id)?.subject;
   const taken = new Set<string>(); const cov = new Map(keptCov);
   const setGroups: Set<string>[] = Array.from({ length: n }, () => new Set());
@@ -104,13 +105,14 @@ export function planUnique(pool: EligibleProblem[], W: Weights, n: number, keptC
         const mk = (c: EligibleProblem) => `${sl.set}|${sl.mod.key}|${sl.mod.route}|${domain}|${c.skillCode ?? ""}`;
         let best: EligibleProblem | null = null, bk: (number | string)[] | null = null;
         let relaxed = false;
-        for (const pass of [0, 1]) { // pass 0: 소재 상한 하드 적용, pass 1: 후보가 없을 때만 상한을 풀고 기록한다
+        for (const pass of litCap < Infinity ? [0, 1, 2] : [0, 1]) { // pass 0: 소재 상한 하드 적용, pass 1: 후보가 없을 때만 상한을 풀고 기록한다, pass 2(litCap 지정 시): 문학 상한까지 풀고 기록한다
           for (const c of cands) { if (taken.has(c.problemId)) continue; if (c.similarityGroup && setGroups[sl.set].has(c.similarityGroup)) continue; if (!groupOk(c.similarityGroup, sl.set)) continue;
             if (pass === 0 && !ledger.ok(sl.set, sl.mod.key, sl.mod.route, c.problemId)) continue;
             const sub = subjOf(c.problemId);
+            if (pass < 2 && sub === "literature_fiction" && (subj[sl.set].get(sub) ?? 0) >= litCap) continue;
             const key: (number | string)[] = [cov.get(`${c.skillCode}|${diff}`) ?? 0, modSkill.get(mk(c)) ?? 0, ledger.load(sl.set, sl.mod.key, sl.mod.route, c.problemId), sub ? Math.round(subjectExcess(subj[sl.set], subjTotal[sl.set], sub, limits.subjectMix) * 40) : 0, c.similarityGroup ? groupUse.get(c.similarityGroup) ?? 0 : 0, c.exposureCount ?? 0, c.problemId];
             if (!bk || cmpKey(key, bk) < 0) { best = c; bk = key; } }
-          if (best) { relaxed = pass === 1; break; } }
+          if (best) { relaxed = pass === 1; if (pass === 2) litRelaxed.push(`${best.problemId} set${sl.set + 1} ${sl.mod.key}/${sl.mod.route ?? "-"} ${best.skillCode}|${best.difficulty}`); break; } }
         if (best && relaxed) topicRelaxed.push(`${best.problemId} set${sl.set + 1} ${sl.mod.key}/${sl.mod.route ?? "-"} ${topics.get(best.problemId)?.cluster}`);
         if (!best) { left.set(sl, 0); failures.push(`${k} set${sl.set + 1} ${sl.mod.key}/${sl.mod.route ?? "-"}: no candidate left (group conflicts)`); continue; }
         ledger.add(sl.set, sl.mod.key, sl.mod.route, best.problemId); { const sb = subjOf(best.problemId); if (sb) { subj[sl.set].set(sb, (subj[sl.set].get(sb) ?? 0) + 1); subjTotal[sl.set]++; } }
@@ -128,6 +130,7 @@ export function planUnique(pool: EligibleProblem[], W: Weights, n: number, keptC
         const idx = arr.findIndex((it) => (cov.get(`${it.skillCode}|${d}`) ?? 0) >= 2); if (idx < 0) continue; const old = arr[idx];
         if (r.similarityGroup && r.similarityGroup !== old.similarityGroup && setGroups[sl.set].has(r.similarityGroup)) continue;
         if (r.similarityGroup !== old.similarityGroup && !(groupOk(r.similarityGroup, sl.set))) continue;
+        if (subjOf(r.problemId) === "literature_fiction" && subjOf(old.problemId) !== "literature_fiction" && (subj[sl.set].get("literature_fiction") ?? 0) >= litCap) continue;
         ledger.add(sl.set, sl.mod.key, sl.mod.route, old.problemId, -1); if (!ledger.ok(sl.set, sl.mod.key, sl.mod.route, r.problemId)) { ledger.add(sl.set, sl.mod.key, sl.mod.route, old.problemId); continue; } ledger.add(sl.set, sl.mod.key, sl.mod.route, r.problemId);
         { const so = subjOf(old.problemId), sn = subjOf(r.problemId); if (so) subj[sl.set].set(so, (subj[sl.set].get(so) ?? 1) - 1); if (sn) subj[sl.set].set(sn, (subj[sl.set].get(sn) ?? 0) + 1); }
         taken.delete(old.problemId); taken.add(r.problemId); if (old.similarityGroup) { if (setGroups[sl.set].delete(old.similarityGroup)) groupAdd(old.similarityGroup, sl.set, -1); } if (r.similarityGroup) { groupAdd(r.similarityGroup, sl.set, 1); setGroups[sl.set].add(r.similarityGroup); }
@@ -137,12 +140,15 @@ export function planUnique(pool: EligibleProblem[], W: Weights, n: number, keptC
   for (let s = 0; s < n; s++) { const offs: Record<string, number> = { rw: 0, math: 0 }; const items: PlanItem[] = [];
     for (const mod of mstModulePlans(true)) {
       const arr = slots.filter((sl) => sl.set === s && sl.mod === mod || (sl.set === s && sl.mod.key === mod.key && sl.mod.route === mod.route)).flatMap((sl) => chosen.get(sl) ?? []);
-      arr.sort((a, b) => rank[a.difficulty] - rank[b.difficulty] || a.problemId.localeCompare(b.problemId));
+      // 공식 순서(lib/mock-exam/official-order.ts): R&W 영역 블록, Math skill 평균 위치, 같은 skill 안 난이도 오름차순(동률은 problemId)
+      arr.sort((a, b) => a.problemId.localeCompare(b.problemId));
+      const ordered = sortModuleOfficial(mod.section === "rw" ? "rw" : "math", arr.map((c) => ({ c, skill: c.skillCode, difficulty: c.difficulty }))).map((x) => x.c);
+      arr.splice(0, arr.length, ...ordered);
       arr.forEach((it, i) => items.push({ versionId: it.problemVersionId, position: i + 1 + offs[mod.section], problemId: it.problemId, moduleKey: mod.key, route: mod.route, section: mod.section, skill: it.skillCode ?? null, difficulty: it.difficulty, domain: it.satDomain, format: it.format ?? "mc", group: it.similarityGroup ?? null }));
       offs[mod.section] += arr.length; }
     sets.push(items); }
   const topicViolations = sets.flatMap((items, s) => { const rw = items.filter((i) => i.section === "rw"); return capViolations(rw, topics, limits.topicCaps ?? DEFAULT_TOPIC_CAPS).map((v) => ({ set: s + 1, ...v })); });
-  return { sets, failures, swaps, coverage: cov, topicRelaxed, topicViolations };
+  return { sets, failures, swaps, coverage: cov, topicRelaxed, litRelaxed, topicViolations };
 }
 
 /** 최종 단언: (a) 새 세트 문항은 어떤 세트와도(유지 세트 포함) 겹치지 않는다 (b) 한 세트 안에서 한 문항은 한 번만 (c) 모듈 정원. 위반이면 throw. */

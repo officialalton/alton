@@ -3,7 +3,7 @@
  "version": 1,
  "generatedBy": "lib/ap-exam/tex-corrections-gen.test.ts (AP_TEX_CORR_WRITE=1)",
  "note": "변환 전 해설(explanation_en)의 sha256 에 묶인 교정 문안. 적용은 관리자 'AP 설명 수정 새 버전'(미리보기→확인→실행)만. before 해시가 DB 와 다르면 건드리지 않는다.",
- "count": 295,
+ "count": 321,
  "entries": [
   {
    "candidateKey": "bc-topup-final:ap_calculus_bc-f01-k0",
@@ -368,6 +368,30 @@
    "after": "The correct answer is 3,550. HHI = $45^2$ + $30^2$ + $25^2$ = 3550.\n1183 is incorrect: Uses the average of the squared shares.\n100 is incorrect: Adds the market shares (always 100) instead of squaring them.\n10,000 is incorrect: Squares the sum of the shares.\n2,025 is incorrect: Squares only the largest firm's share."
   },
   {
+   "candidateKey": "micro-s5-b:ap_microeconomics-m20-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "707437c3cfb768c813db807cb1492fbceb36bc1fae35d9cfa57347ba70773582",
+   "afterSha256": "5c713cbd0b3d09c35be46d4601ed01291016d8c5156ac1557c31eceb03d8c5c7",
+   "after": "The correct answer is 600. The merged firm's share is 35, so the index changes by $(20+15)^2$ - $20^2$ - $15^2$ = 600.\n35 is incorrect: Adds the two shares, reporting the merged firm's share rather than a change in the index.\n300 is incorrect: Multiplies the two shares but forgets the factor of 2 in $(a + b)^2$ - $a^2$ - $b^2.$\n3,350 is incorrect: Reports the new HHI after the merger instead of the increase.\n1,225 is incorrect: Squares the merged firm's share and treats that as the change, without removing the two original squared shares."
+  },
+  {
+   "candidateKey": "micro-s5-b:ap_microeconomics-m20-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "ff4a499618e365d3ab6ebe596b77299950aceb33c3aa5a57ecdb9db118523a2c",
+   "afterSha256": "791ecf88254cea5612dcb04628ae9b438fa6169989c9d34f3f98035e51729db9",
+   "after": "The correct answer is 1,000. The merged firm's share is 45, so the index changes by $(25+20)^2$ - $25^2$ - $20^2$ = 1000.\n45 is incorrect: Adds the two shares, reporting the merged firm's share rather than a change in the index.\n3,250 is incorrect: Reports the new HHI after the merger instead of the increase.\n2,025 is incorrect: Squares the merged firm's share and treats that as the change, without removing the two original squared shares.\n500 is incorrect: Multiplies the two shares but forgets the factor of 2 in $(a + b)^2$ - $a^2$ - $b^2.$"
+  },
+  {
+   "candidateKey": "micro-s5-b:ap_microeconomics-m20-k2",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "d189b5810dfbcc6748867d70a19d126a10748a84a919e5ebd5667745ef65752e",
+   "afterSha256": "16c11ad92d54e5630e0bba7d9d57870c7f665dd2ac5729ddaaba703343c6abe4",
+   "after": "The correct answer is 1,000. The merged firm's share is 45, so the index changes by $(25+20)^2$ - $25^2$ - $20^2$ = 1000.\n3,250 is incorrect: Reports the new HHI after the merger instead of the increase.\n45 is incorrect: Adds the two shares, reporting the merged firm's share rather than a change in the index.\n2,025 is incorrect: Squares the merged firm's share and treats that as the change, without removing the two original squared shares.\n500 is incorrect: Multiplies the two shares but forgets the factor of 2 in $(a + b)^2$ - $a^2$ - $b^2.$"
+  },
+  {
    "candidateKey": "phys-s2-d:ap_physics_1-f03-k0",
    "itemIndex": 0,
    "sets": [],
@@ -430,6 +454,134 @@
    "beforeSha256": "7f09c0c00e876722e761627102bfce993a508fdab0c94ea3bf45171d03f62754",
    "afterSha256": "52ae6cf28083a5676950267ecd43473a6aef0ba8b973fbd479d6c6788e9332fd",
    "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(A) [3 pt] Use a photogate (or motion sensor) to measure the initial speed and a meterstick to measure the sliding distance from the starting point to where the block stops; give the same block different initial speeds on the same table surface, and repeat each trial and average the distances.\n   - 1 pt: Identifies a way to measure the initial speed (photogate or motion sensor, or distance and time over a short interval) and a way to measure the stopping distance (meterstick or tape)\n   - 1 pt: Changes only the initial speed while using the same block and the same table surface (both conditions are needed)\n   - 1 pt: Reduces the uncertainty in the distance by repeating each trial and averaging, or by marking the stopping point with a method that reduces the reading error (either earns the point)\n(B) [1 pt] From $\\mu mgd=\\tfrac12mv_0^2$ we get $d=\\dfrac{1}{2\\mu g}v_0^2$: plot $d$ on the vertical axis against $v_0^2$ on the horizontal axis; the slope is $1/(2\\mu g)$.\n   - 1 pt: Identifies $d$ (vertical) versus $v_0^2$ (horizontal)\n(C) [3 pt] Points $(v_0^2,d)$: (1, 0.205), (2.25, 0.464), (4, 0.828), (6.25, 1.259), (9, 1.846) with a best-fit line of slope about $0.204\\text{ s}^2/\\text{m}$.\n   - 1 pt: Axes are labeled with quantities and units and the scale fills most of the grid\n   - 1 pt: Plots the five points $(v_0^2, d)$ accurately\n   - 1 pt: Draws a straight best-fit line through the trend of the points\n(D) [3 pt] Slope $\\approx 0.204\\text{ s}^2/\\text{m}$, so $\\mu=\\dfrac{1}{2g\\,\\text{slope}}\\approx 0.25$.\n   - 1 pt: Calculates the slope of the best-fit line using two points on the line (about 0.204 $s^2$/m; accept any value within 5 percent)\n   - 1 pt: Relates the slope to the friction coefficient: slope $=1/(2\\mu g)$\n   - 1 pt: Calculates $\\mu$ (about 0.25; accept any value within 8 percent); the coefficient has no units"
+  },
+  {
+   "candidateKey": "phys-s5n-mc:ap_physics_1-m29-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "bafd6d008b8a3138d5a23e97ca179eda947ade75b1b49c4010484ceccf3f0ba8",
+   "afterSha256": "4a41d4b6b341db759af31e1eb0d771555ef47da2946ba3a195f6e410fe6eefa7",
+   "after": "The correct answer is The quantity $T^2/m$ is nearly constant, about $1.97\\text{ s}^2\\text{/kg}$, so the data support $T$ proportional to $\\sqrt{m}$.. The values of $T^2/m$ range only from $1.95$ to $2$ $s^2$/kg, which is consistent with $T=2\\pi\\sqrt{m/k}$.\nThe product $Tm$ is nearly constant, so a larger mass gives a shorter period. is incorrect: Reads a decreasing quantity as an inverse relationship, but the period increases with the mass in the table.\nThe period does not depend on the mass, because the values of the period are all close to one another. is incorrect: Overlooks that the period increases from $0.442\\text{ s}$ to $1.716\\text{ s}$ as the mass increases.\nThe quantity $T/m$ is nearly constant, so the period is proportional to the mass. is incorrect: Tests the ratio $T/m$ for a direct proportion, but for these data it falls from $4.42$ to $1.14$ s/kg."
+  },
+  {
+   "candidateKey": "phys-s5n-mc:ap_physics_1-m29-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "8637daab2cb9713685329210907f4643175932fa987bac85b331a1eed3df0c42",
+   "afterSha256": "a5e13023413d25d4dea501ba404ade823f9235f48669319e88f37ca3b6abef57",
+   "after": "The correct answer is The quantity $T^2/m$ is nearly constant, about $0.49\\text{ s}^2\\text{/kg}$, so the data support $T$ proportional to $\\sqrt{m}$.. The values of $T^2/m$ range only from $0.487$ to $0.496$ $s^2$/kg, which is consistent with $T=2\\pi\\sqrt{m/k}$.\nThe product $Tm$ is nearly constant, so a larger mass gives a shorter period. is incorrect: Reads a decreasing quantity as an inverse relationship, but the period increases with the mass in the table.\nThe quantity $T/m$ is nearly constant, so the period is proportional to the mass. is incorrect: Tests the ratio $T/m$ for a direct proportion, but for these data it falls from $2.22$ to $0.699$ s/kg.\nThe period does not depend on the mass, because the values of the period are all close to one another. is incorrect: Overlooks that the period increases from $0.222\\text{ s}$ to $0.699\\text{ s}$ as the mass increases."
+  },
+  {
+   "candidateKey": "phys-s5n-mc:ap_physics_1-m29-k2",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "612923aab552bc484ef71b4f0b626f0570157257546d2d508be818c03c71ee4a",
+   "afterSha256": "4dbe8b42d2b4cace9436db98a759390ed51e07cac0289a552237175b17afe7de",
+   "after": "The correct answer is The quantity $T^2/m$ is nearly constant, about $0.991\\text{ s}^2\\text{/kg}$, so the data support $T$ proportional to $\\sqrt{m}$.. The values of $T^2/m$ range only from $0.972$ to $1$ $s^2$/kg, which is consistent with $T=2\\pi\\sqrt{m/k}$.\nThe quantity $T/m$ is nearly constant, so the period is proportional to the mass. is incorrect: Tests the ratio $T/m$ for a direct proportion, but for these data it falls from $2.21$ to $0.81$ s/kg.\nThe product $Tm$ is nearly constant, so a larger mass gives a shorter period. is incorrect: Reads a decreasing quantity as an inverse relationship, but the period increases with the mass in the table.\nThe period does not depend on the mass, because the values of the period are all close to one another. is incorrect: Overlooks that the period increases from $0.441\\text{ s}$ to $1.215\\text{ s}$ as the mass increases."
+  },
+  {
+   "candidateKey": "phys-s5n-mc:ap_physics_1-m38-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "7aeb3a7351e39d9fccc9fc0928dd2588fd4859a9aef384f207cf44c0f34e64a5",
+   "afterSha256": "284989f990b7286db5a302d46d779babd6cb3255dc51bdc2b280830db42abaa0",
+   "after": "The correct answer is D > B > C > A. The acceleration is $g(\\sin\\theta-\\mu\\cos\\theta)$, which does not depend on the mass; the values in m/$s^2$ are A: 2.35, B: 4.42, C: 3.25, D: 5.54, which ranks as D > B > C > A.\nD > B > A > C is incorrect: Ranks by the angle of the incline only, ignoring friction.\nC > A > D > B is incorrect: Ranks by the mass of the block, as if a heavier block accelerates more.\nC > B > D > A is incorrect: Ranks by the coefficient of friction in the reverse order, ignoring the angle."
+  },
+  {
+   "candidateKey": "phys-s5n-mc:ap_physics_1-m38-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "1e17a7aec87c08df855b579b28d68024eee535826f88ef3347c80a61864cc830",
+   "afterSha256": "1b66483a753c83ce189839327cf503f56fcf0e7454d7b04329d4a901b80ad78b",
+   "after": "The correct answer is B > C > A > D. The acceleration is $g(\\sin\\theta-\\mu\\cos\\theta)$, which does not depend on the mass; the values in m/$s^2$ are A: 2.81, B: 6.58, C: 4.02, D: 2.43, which ranks as B > C > A > D.\nA > B > D > C is incorrect: Ranks by the mass of the block, as if a heavier block accelerates more.\nB > A > D > C is incorrect: Ranks by the component of gravity along the incline, $mg\\sin\\theta$, without friction and mass cancelling.\nB > D > A > C is incorrect: Ranks by the coefficient of friction in the reverse order, ignoring the angle."
+  },
+  {
+   "candidateKey": "phys-s5n-mc:ap_physics_1-m38-k2",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "5c2810e9403e33cd29e579ef6ecbf7a776b5077a1f78018a3eb420ee147c4807",
+   "afterSha256": "353f5729692054f0736d7bb8d3d4b4e131ca6eabbf087e2637344f0e8ee26e3b",
+   "after": "The correct answer is D > B > A > C. The acceleration is $g(\\sin\\theta-\\mu\\cos\\theta)$, which does not depend on the mass; the values in m/$s^2$ are A: 4.05, B: 4.80, C: 2.81, D: 5.22, which ranks as D > B > A > C.\nA > B > C > D is incorrect: Ranks by the mass of the block, as if a heavier block accelerates more.\nB > D > A > C is incorrect: Ranks by the angle of the incline only, ignoring friction.\nD > A > C > B is incorrect: Ranks by the coefficient of friction in the reverse order, ignoring the angle."
+  },
+  {
+   "candidateKey": "phys-s5n2-mc:ap_physics_1-m04-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "7812001c9c7e3f1cc00180c1fd58f07f193936251372b01fc15b34193b82f29c",
+   "afterSha256": "d99af41a5c1c22d703090c166378c57da2018900d61498191efe831494192505",
+   "after": "The correct answer is A > D > B > C. With $L=I\\omega$ the angular momenta in kg $m^2$/s are A: 4.32, B: 0.267, C: 0.0960, D: 2.40, which ranks as A > D > B > C.\nD > A > B > C is incorrect: Ranks by the moment of inertia alone, ignoring the angular speed.\nD > A > C > B is incorrect: Ranks by the mass of the objects, as if a heavier object has more angular momentum.\nA > B > C > D is incorrect: Ranks by the angular speed alone, ignoring the moment of inertia."
+  },
+  {
+   "candidateKey": "phys-s5n2-mc:ap_physics_1-m04-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "925a080fd54698513576ac28cfe67f68a4eeb38539a35860f70e5c1a18daea27",
+   "afterSha256": "4e4a8d1cf5ff216e62c12e370f8537c227d1640e25b5735e517f456a41587986",
+   "after": "The correct answer is A > C > D > B. With $L=I\\omega$ the angular momenta in kg $m^2$/s are A: 1.92, B: 0.0320, C: 1.60, D: 0.720, which ranks as A > C > D > B.\nC > A > D > B is incorrect: Ranks by the rotational kinetic energy $\\tfrac12I\\omega^2$ instead of the angular momentum.\nD > C > A > B is incorrect: Ranks by the angular speed alone, ignoring the moment of inertia.\nA > D > B > C is incorrect: Ranks by the mass of the objects, as if a heavier object has more angular momentum."
+  },
+  {
+   "candidateKey": "phys-s5n2-mc:ap_physics_1-m04-k2",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "bd03299fb711e845109e8107518fe9f00f0cb26ebd816e50b4733c1ee942bc87",
+   "afterSha256": "db57cfcda02e18ee98d7dde4c320cd0c4d50a676acdd1db442cee15559dbee7a",
+   "after": "The correct answer is C > D > B > A. With $L=I\\omega$ the angular momenta in kg $m^2$/s are A: 0.120, B: 0.320, C: 3.84, D: 0.450, which ranks as C > D > B > A.\nC > D > A > B is incorrect: Ranks by the angular speed alone, ignoring the moment of inertia.\nC > B > D > A is incorrect: Ranks by the moment of inertia alone, ignoring the angular speed.\nB > C > A > D is incorrect: Ranks by the mass of the objects, as if a heavier object has more angular momentum."
+  },
+  {
+   "candidateKey": "phys-s5n2-mc:ap_physics_1-m05-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "03d26e721ed8befb4ead7d44e54713d74e45008eca54fc165684334211f17345",
+   "afterSha256": "abef3b7c7bf6fa9c242fa3fb16034eeef770ff6fed13af56b345c61889cf3b3d",
+   "after": "The correct answer is D > C > A > B. The moment of inertia is the sum of $mr^2$ over the particles; the values in kg $m^2$ are A: 0.400, B: 0.220, C: 0.620, D: 1.62, which ranks as D > C > A > B.\nD > A > C > B is incorrect: Ranks by the sum of the products of the mass and the distance, without squaring the distance.\nB > A > C > D is incorrect: Ranks in the reverse of the correct order.\nD > A > B > C is incorrect: Ranks by the total mass of the particles, ignoring their distances from the axis."
+  },
+  {
+   "candidateKey": "phys-s5n2-mc:ap_physics_1-m05-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "17e80cbcc05a48cb421c7f3f53ecfc658bb914eadba2aa100aef62ccf5e20c3c",
+   "afterSha256": "e3967843c9933d648a9504fa11f0741122f77aa425325fe43258b83287a893ac",
+   "after": "The correct answer is B > C > D > A. The moment of inertia is the sum of $mr^2$ over the particles; the values in kg $m^2$ are A: 0.400, B: 1.08, C: 0.800, D: 0.560, which ranks as B > C > D > A.\nD > B > C > A is incorrect: Ranks by the total mass of the particles, ignoring their distances from the axis.\nA > D > C > B is incorrect: Ranks in the reverse of the correct order.\nB > D > C > A is incorrect: Ranks by the sum of the products of the mass and the distance, without squaring the distance."
+  },
+  {
+   "candidateKey": "phys-s5n2-mc:ap_physics_1-m05-k2",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "451fbcbdd08a84d7b6caf90674cb65d3b918c8893f0e3a2b3e995b457f6af764",
+   "afterSha256": "05b8dc27b5bafe9101b08207d914a8c419e27ed017252e1686746a231dadfa6d",
+   "after": "The correct answer is A > B > C > D. The moment of inertia is the sum of $mr^2$ over the particles; the values in kg $m^2$ are A: 1.94, B: 0.960, C: 0.800, D: 0.340, which ranks as A > B > C > D.\nC > A > D > B is incorrect: Ranks by the total mass of the particles, ignoring their distances from the axis.\nD > C > B > A is incorrect: Ranks in the reverse of the correct order.\nA > C > B > D is incorrect: Ranks by the sum of the products of the mass and the distance, without squaring the distance."
+  },
+  {
+   "candidateKey": "phys-s5n2-mc:ap_physics_1-m06-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "31ceb2b4b8bfabdd0c74a45cd0325e6d1de009b0d524f81921fafd7b0cce9ce2",
+   "afterSha256": "d4b498597423f9cd14f6b79831253c0fb32e21abad0a94deb06e1c434a4d73bd",
+   "after": "The correct answer is B > C > A > D. The angular acceleration is $\\alpha=FR/I$; the values in rad/$s^2$ are A: 8.33, B: 60.0, C: 50.0, D: 4.00, which ranks as B > C > A > D.\nD > A > B > C is incorrect: Ranks by the moment of inertia, with the largest first.\nB > A > C > D is incorrect: Ranks by the force divided by the mass, as for a point mass, ignoring the radius and shape.\nA > B > C > D is incorrect: Ranks by the tangential force alone, ignoring the moment of inertia."
+  },
+  {
+   "candidateKey": "phys-s5n2-mc:ap_physics_1-m06-k1",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "19348765e16cb2d1de42bcb0aade63db32e416e0b8015551ee4b0b35ee81c71a",
+   "afterSha256": "da0198018fbb08198e3bbea620f8244b0766fdcf7c7a9b8333846963955aece8",
+   "after": "The correct answer is A > B > D > C. The angular acceleration is $\\alpha=FR/I$; the values in rad/$s^2$ are A: 75.0, B: 26.7, C: 1.000, D: 12.5, which ranks as A > B > D > C.\nA > D > C > B is incorrect: Ranks by the torque alone, ignoring the moment of inertia.\nA > D > B > C is incorrect: Ranks by the tangential force alone, ignoring the moment of inertia.\nC > D > A > B is incorrect: Ranks by the moment of inertia, with the largest first."
+  },
+  {
+   "candidateKey": "phys-s5n2-mc:ap_physics_1-m06-k2",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "8bd7263f2ef5a7c7ad7ed8c249ba756e4db342c4bd71d1717af9224f9f2c137a",
+   "afterSha256": "850ab310243748d2d849a902483453618a5078ddc4061d35798e88b151ca1f9d",
+   "after": "The correct answer is D > A > C > B. The angular acceleration is $\\alpha=FR/I$; the values in rad/$s^2$ are A: 20.0, B: 5.00, C: 12.5, D: 53.3, which ranks as D > A > C > B.\nC > D > A > B is incorrect: Ranks by the tangential force alone, ignoring the moment of inertia.\nC > B > D > A is incorrect: Ranks by the moment of inertia, with the largest first.\nD > C > A > B is incorrect: Ranks by the force divided by the mass, as for a point mass, ignoring the radius and shape."
+  },
+  {
+   "candidateKey": "phys-s5n3-frq:ap_physics_1-f01-k0",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "9f86034366846cb98db1a3f4f42aa0be69c884ef0d216ab1831d4604eeff48e4",
+   "afterSha256": "9722f59a643a275ef7f7a24ce3ffd9be5604cb7727dcab19dc6616ee0ab64611",
+   "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(A) [3 pt] Use a protractor (or measure the height of the raised end and the length of the track and find the angle from a trigonometric ratio) to set each angle of the track and a motion sensor to measure the acceleration; change only the angle with the same cart and track; reduce the uncertainty in the angle by measuring the height and the length with a meterstick and calculating the angle.\n   - 1 pt: Identifies a way to set and measure the angle and a way to measure the acceleration (motion sensor or a time and distance measurement)\n   - 1 pt: Changes only the angle while using the same cart and the same track (both conditions are needed)\n   - 1 pt: Reduces the uncertainty in the angle by calculating it from the height and the length measured with a meterstick, or by repeating the measurement and averaging (either earns the point)\n(B) [1 pt] For a frictionless incline $a=g\\sin\\theta$: plot $a$ on the vertical axis against $\\sin\\theta$ on the horizontal axis; the slope is $g$.\n   - 1 pt: Identifies $a$ (vertical) versus $\\sin\\theta$ (horizontal)\n(C) [3 pt] Points $(\\sin\\theta,a)$: (0.174, 1.690), (0.259, 2.495), (0.342, 3.299), (0.423, 4.149), (0.500, 4.838) with a best-fit line of slope about $9.74\\text{ m/s}^2$.\n   - 1 pt: Axes are labeled with quantities and units (sin theta has no units) and the scale fills most of the grid\n   - 1 pt: Plots the five points $(\\sin\\theta, a)$ accurately\n   - 1 pt: Draws a straight best-fit line through the trend of the points\n(D) [3 pt] The slope of the best-fit line is $g\\approx 9.7\\text{ m/s}^2$.\n   - 1 pt: Calculates the slope of the best-fit line using two points on the line (about 9.74 m/$s^2$; accept any value within 5 percent)\n   - 1 pt: Relates the slope to the gravitational field strength: slope $=g$\n   - 1 pt: States $g$ (about 9.7; accept any value within 8 percent) with units of meters per second squared or newtons per kilogram"
   },
   {
    "candidateKey": "run1:ap_biology-c004-k0",
@@ -2268,6 +2420,62 @@
    "beforeSha256": "1fb137c448cb96169ad4e4362f1162c32cb5aba2c4a4d9e5848a64d963c98f81",
    "afterSha256": "81fe534552189cae7a927ff59992b3310c5d4070c31efa4064a3300d18b39d1c",
    "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(a) [3 pt] Area = (1/2) ∫_$0^{π/2}$ $(3 + 1 cos θ)^2$ dθ = 10.461.\n   - 1 pt: Area integrand (1/2) $r^2$ (setup)\n   - 1 pt: Limits of integration 0 and π/2 (setup)\n   - 1 pt: Answer (value)\n(b) [2 pt] dr/dθ = -1 sin θ = -0.866 at θ = π/3: the distance from the origin to the point is decreasing as theta increases.\n   - 1 pt: Value of dr/dθ at π/3 (value)\n   - 1 pt: Interpretation: the distance from the origin is decreasing as theta increases (meaning)\n(c) [2 pt] dy/dx = (r' sin θ + r cos θ)/(r' cos θ - r sin θ) = -0.289 at θ = π/3.\n   - 1 pt: Uses dy/dx = (dy/dθ)/(dx/dθ) with x = r cos θ and y = r sin θ (setup)\n   - 1 pt: Answer (slope value)\n(d) [2 pt] y = r sin θ is greatest where dy/dθ = r' sin θ + r cos θ = 0, at θ = 1.286, giving y = 3.149.\n   - 1 pt: Sets dy/dθ = r' sin θ + r cos θ equal to zero (setup)\n   - 1 pt: Answer: the greatest y-coordinate (value)"
+  },
+  {
+   "candidateKey": "supp-aud1015-final:ap_calculus_ab-f02-k912",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "fba25e15dbbfb61ee63524918650ab27b89bac99928d6c515526bbd7e18fc724",
+   "afterSha256": "6d4c997e8be2adac8a6a23dc22adc1e625c45f8113926e066e225c23d323570f",
+   "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(a) [3 pt] f'(t)=0 at t=2 and t=9. At t=2, f' changes from negative to positive, so f has a relative minimum at t=2. At t=9, f' changes from positive to negative, so f has a relative maximum at t=9.\n   - 1 pt: Identifies both critical points\n   - 1 pt: Relative minimum at t=2 with sign-change justification\n   - 1 pt: Relative maximum at t=9 with sign-change justification\n(b) [2 pt] t=5. f'' is positive on (0,5) because f' is increasing, and negative on (5,7) because f' is decreasing, so f'' changes sign at t=5 (f' has its maximum there). No other sign change of f'' occurs: f' is increasing on (0,5) and decreasing on (5,10).\n   - 1 pt: Identifies t=5 only\n   - 1 pt: Justifies using change in sign of f'' (f' changes from increasing to decreasing)\n(c) [3 pt] Candidates: the endpoints t=0 and t=10 and the critical points t=2 and t=9. f(2)=40+int_$0^2$ f' = 40-2=38. f(9)=38+9+8+2=57. f(10)=57-1=56. f(0)=40. The smallest is f(2)=38, so the absolute minimum value is 38 dollars.\n   - 1 pt: Setup: considers endpoints and critical points as candidates\n   - 1 pt: Computes candidate values using f(0)+area under f'\n   - 1 pt: Answer 38 with comparison of candidates\n(d) [1 pt] (9,10). There f'(t)<0 so f is decreasing, and f' is decreasing so f''<0 and f is concave down. On (0,2), f is decreasing but f' is increasing, so f is concave up.\n   - 1 pt: Interval (9,10) with reason using signs of f' and f''"
+  },
+  {
+   "candidateKey": "supp-aud1015-final:ap_calculus_ab-f03-k913",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "d9ebda8195c6ad9cb8b9141927f5e30db1f4c4d28c55454258a5fc1375fcec06",
+   "afterSha256": "e71339298f45058dead2a1108ad7117dcb300b9cab0c333a5a3d41188a17fbf8",
+   "after": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(a) [2 pt] At (0,1): 1/3. At (1,-1): 3/3 = 1. At (0,0) the denominator is 0, so the slope is undefined (there is no finite slope); no slope segment is drawn there.\n   - 1 pt: Both slopes computed correctly\n   - 1 pt: States slope undefined at (0,0) because denominator is 0\n(b) [3 pt] $3y^2$ dy = (2x+1) dx; $y^3$ = $x^2$ + x + C; y = $(x^2 + x + C)^{1/3}$.\n   - 1 pt: Separates variables correctly\n   - 1 pt: Antiderivatives of both sides with a constant C\n   - 1 pt: Solves for y\n(c) [2 pt] 8 = C, so y = $(x^2 + x + 8)^{1/3}$.\n   - 1 pt: Uses the initial condition to find C\n   - 1 pt: States particular solution\n(d) [2 pt] The differential equation requires y ≠ 0. Since $x^2$+x+8 has discriminant 1-32 < 0, it is always positive, so y > 0 for all x. The solution is valid on (-infinity, infinity).\n   - 1 pt: Identifies condition y ≠ 0 and shows $x^2$+x+8 > 0 for all x\n   - 1 pt: Concludes interval is all real numbers"
+  },
+  {
+   "candidateKey": "supp-aud1015-final:ap_calculus_ab-m04-k901",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "985790ced22aa65c42923def60c223c2b7546f39a77ce819f590bd75cee684e7",
+   "afterSha256": "d0950350919186df162ab64aac2386ef68cd284a2ae9cd0126c7326357275857",
+   "after": "The correct answer is -0.366. Implicit differentiation: $e^y$ + x $e^y$ y' + 2y y' = 0, so y' = -$e^y$/(x $e^y$ + 2y), evaluated with a calculator.\n-0.868 is incorrect: Differentiates $y^2$ as 2y without the factor dy/dx.\n-0.500 is incorrect: Forgets the 2y dy/dx term from y squared and solves $e^y$ + x $e^y$ y' = 0.\n-0.134 is incorrect: Treats y as a constant when differentiating x $e^y$, so the $e^y$ term is missing from the numerator: -1/(...) ."
+  },
+  {
+   "candidateKey": "supp-aud1015-final:ap_calculus_ab-m24-k905",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "76b1b9979232265008e045076ed4ff263203857ee92191257d2eedf3deb87a9c",
+   "afterSha256": "2d6cc7451b35a2395f7092e9e98c1e1edb6a4604cba6c464883136b0eaf84cbd",
+   "after": "The correct answer is 2. The quotient has the form 0/0 at x = a, so the limit equals f'(a)/g'(a), the ratio of the slopes read from the graphs (L'Hopital's Rule).\n0 is incorrect: Substitutes x = 7 and concludes the quotient 0/0 equals 0.\n$\\frac{1}{2}$ is incorrect: Takes the ratio of slopes upside down, g'(a)/f'(a).\n8 is incorrect: Multiplies the two slopes instead of dividing them."
+  },
+  {
+   "candidateKey": "supp-aud1015-final:ap_calculus_bc-m02-k902",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "177366d61105c39201ab04e290f778e67e181e359a1e8aafcb8587813625a802",
+   "afterSha256": "1ab22be49cc0ce66a4e0d59b4a2bc30d6e8ff58e25bee304983e27164e4a20b3",
+   "after": "The correct answer is 0.122. $Error \\le M$ $|x|^3$/3! where M is the maximum of |f'''| on [0, a] read from the graph; evaluate with a calculator.\n0.608 is incorrect: Uses the maximum of |f'''| over the whole graph instead of over [0, 0.9].\n0.012 is incorrect: Uses the value of f''' at x = 0.9 instead of its maximum absolute value.\n0.365 is incorrect: Divides by 2! instead of 3!."
+  },
+  {
+   "candidateKey": "supp-aud1015-final:ap_calculus_bc-m02-k903",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "d9b5259ca42e623bdf26e930697db5acf4fab2e2f15c411717d844433ac05584",
+   "afterSha256": "cc8cd99704e7f7119ed016e810ba17a428410bf7a6c3abd4d0c6f0642b874a22",
+   "after": "The correct answer is 0.480. M $x^4$/4! with M = the maximum of |$f^{4}$| on [0, a] read from the graph, evaluated with a calculator.\n1.921 is incorrect: Divides by 3! instead of 4!.\n0.096 is incorrect: Uses the largest signed value of the graph on [0, 1.4] instead of the largest absolute value.\n0.960 is incorrect: Takes the maximum over the whole graph, not only over [0, 1.4]."
+  },
+  {
+   "candidateKey": "supp-aud1015-final:ap_calculus_bc-m04-k904",
+   "itemIndex": 0,
+   "sets": [],
+   "beforeSha256": "819cc4cd7eda0d4dad0bc0ea73e2223d6209310e5cdcf93b6a38852578fee315",
+   "afterSha256": "0135f1f102f6dc5f1be0d1e951371c16db1d9e372df412c8f228007fa6a8198d",
+   "after": "The correct answer is $\\frac{4}{3}$. M $a^4$ / 4! with M the maximum of |$f^{4}$| on [0, a], read from the graph.\n$\\frac{2}{3}$ is incorrect: Uses the power 3 instead of 4 for the x-term.\n$\\frac{8}{3}$ is incorrect: Takes the maximum over the whole graph instead of only the interval from 0 to 2.\n$\\frac{16}{3}$ is incorrect: Divides by 3! instead of 4!."
   },
   {
    "candidateKey": "supp-b1-bc-final:ap_calculus_bc-m01-k0",

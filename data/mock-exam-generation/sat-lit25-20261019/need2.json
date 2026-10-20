@@ -1,0 +1,26 @@
+{
+ "note": "문학 25% 조정 비문학 R&W 필요량(margin 은 cands 단계의 factor 가 처리)",
+ "totalNeed": 3,
+ "byDomainDifficulty": {
+  "rw_standard_english|easy": 1,
+  "rw_standard_english|medium": 2
+ },
+ "relaxedLit": 3,
+ "noReplacementPubSets": 0,
+ "perCell": [
+  {
+   "cell": "form_structure_sense|medium",
+   "need": {
+    "humanities": 2
+   },
+   "total": 2
+  },
+  {
+   "cell": "form_structure_sense|easy",
+   "need": {
+    "humanities": 1
+   },
+   "total": 1
+  }
+ ]
+}
