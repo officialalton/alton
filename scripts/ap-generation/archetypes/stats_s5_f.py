@@ -12,9 +12,9 @@ def cap(s):
 # ======================= Q1. 층화 추출 · 무응답 편향 · 비율 비교 (1.11 / 1.A) =======================
 Q1_CTX = [
     dict(unit="students", u1="student", strata=("freshmen", "seniors"), place="a high school", q="Do you support a later start time for the school day?", cats=("Support", "Oppose", "No opinion"), resp="support",
-         bias="Students who feel strongly about the start time are more likely to return the survey than students who do not care.", bias_dir="overestimate the percentage who support or who oppose, because students with strong opinions answer more often", pop="students at the school", fvar="the number of minutes that students at the school spend commuting each day", fq="What is the typical number of minutes that students at the school spend commuting each day?"),
+         bias="Students who support a later start time are more likely to return the survey than students who oppose it.", bias_dir="overestimate the percentage who support a later start time, because supporters answer more often than opponents", pop="students at the school", fvar="the number of minutes that students at the school spend commuting each day", fq="What is the typical number of minutes that students at the school spend commuting each day?"),
     dict(unit="residents", u1="resident", strata=("renters", "homeowners"), place="a city", q="Do you favor building a new library branch?", cats=("Favor", "Oppose", "Undecided"), resp="favor",
-         bias="Residents who use the library are more likely to return the survey than residents who never use it.", bias_dir="overestimate the percentage who favor the new branch, because library users answer more often and are more likely to favor it", pop="residents of the city", fvar="the number of library books that residents of the city borrow each year", fq="What is the typical number of library books that residents of the city borrow in a year?"),
+         bias="Residents who use the library are more likely to return the survey than residents who never use it, and library users are more likely to favor a new branch.", bias_dir="overestimate the percentage who favor the new branch, because library users answer more often and favor it more often", pop="residents of the city", fvar="the number of library books that residents of the city borrow each year", fq="What is the typical number of library books that residents of the city borrow in a year?"),
 ]
 
 
@@ -35,10 +35,10 @@ def stfrq_n4_q1_stratified(rng):
              f"Make a separate list of the {s1} and a separate list of the {s2}. Within each list, use a random number generator (or draw names at random) to select $50$ different {c['unit']}; the two selections together form the stratified random sample.",
              [R("A1", f"Separates the {c['unit']} into the two groups ({s1} and {s2}) before selecting, with ${50}$ from each group", [f"separate lists for {s1} and {s2}", "50 from each group"], err=["selects 100 from all {0} together".format(c['unit']), "chooses by convenience within a group"]),
               R("A2", "Uses a chance method (random numbers or drawing names) within each group to choose the individuals, without repeats", ["random selection within each group"], alt=["number each list and use random numbers to pick 50 different numbers"], err=["lets volunteers join", "takes the first 50 on each list"])]),
-        part("B", f"Suppose that the researcher mails the survey to the selected {c['unit']} and only $35\\%$ of them return it. Explain how nonresponse could bias the results of the survey, and state the direction of the bias for the question \"{c['q']}\"", 2, "explain", ["2.B"],
+        part("B", f"Suppose that the researcher mails the survey to the selected {c['unit']} and only $35\\%$ of them return it. {c['bias']} Explain how nonresponse could bias the results of the survey, and state the direction of the bias for the question \"{c['q']}\"", 2, "explain", ["2.B"],
              f"Nonresponse bias occurs when the {c['unit']} who respond differ from those who do not. {c['bias']} The survey would likely {c['bias_dir']}.",
              [R("B1", f"Explains that the {c['unit']} who respond can differ from those who do not respond, so the responses do not represent everyone who was selected", ["respondents differ from nonrespondents"], err=["says a low response rate only makes the sample smaller", "says nonresponse bias can be fixed by a larger sample"]),
-              R("B2", "Describes in context how the difference could push the results in a particular direction (which kind of answers are over-represented)", ["names the over-represented answers in context"], err=["gives a general statement with no connection to the question"])]),
+              R("B2", "States in context the direction of the bias that follows from the stated difference: the survey would overestimate the percentage of the answer that the more frequent responders give", ["overestimates the percentage who support/favor"], err=["states the opposite direction", "gives a general statement with no connection to the question"])]),
         part("C", f"The table shown gives the counts of the answers in an earlier survey, in which random samples of the {s1} and of the {s2} were asked. What percent of the {s1} in the earlier survey chose \"{c['cats'][0]}\"? Round to one decimal place.", 1, "calculate", ["3.B"],
              f"${r1[0]}/{n1} \\approx {float(p1) * 100:.1f}\\%$.",
              [R("C1", f"Calculates the percent of the {s1} who chose \"{c['cats'][0]}\" (answer {float(p1) * 100:.1f}%)", [f"{float(p1) * 100:.1f}"], nums=True, err=["divides by the total of both groups", "divides by the other group's total"])]),
@@ -217,3 +217,6 @@ def stfrq_n4_q4_chisq(rng):
 
 
 STAGE_FRQ = ["stfrq_n4_q1_stratified", "stfrq_n4_q2_table", "stfrq_n4_q3_twomeans", "stfrq_n4_q4_chisq"]
+
+# P4 첫 FRQ 런에서 반려된 Q1 을 고쳐 다시 돌린다
+STAGE_FIXFRQ = ["stfrq_n4_q1_stratified"]

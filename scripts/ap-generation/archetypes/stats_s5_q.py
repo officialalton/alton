@@ -168,12 +168,11 @@ def st_n_chisq_stat(rng):
     c2, pv, dof, e2 = ss.chi2_contingency(np.array(cells), correction=False); agree(c2, chi, tol=1e-9, name="chi2")
     fm = lambda v: f"${v:.2f}$"
     stim = stat_stim(f"Observed counts for {c['what']}", "two_way", title="Observed counts", rowHeader=c["rh"], rowLabels=list(c["rows"]), colLabels=list(c["cols"]), cells=cells)
-    key = (fm(chi), f"The statistic is the sum of $(O - E)^2/E$ over the four cells, using expected counts ${exp[0][0]:.2f}$, ${exp[0][1]:.2f}$, ${exp[1][0]:.2f}$ and ${exp[1][1]:.2f}$, which gives ${chi:.2f}$.", round(chi, 2))
+    key = (fm(chi), f"The expected counts are row total times column total divided by the grand total, ${exp[0][0]:.2f}$, ${exp[0][1]:.2f}$, ${exp[1][0]:.2f}$ and ${exp[1][1]:.2f}$, and the sum of $(O - E)^2/E$ over the four cells is ${chi:.2f}$.", round(chi, 2))
     wr = [(fm(w1), "Adds the squared differences without dividing each by its expected count.", "no_division_by_expected", round(w1, 2), 1), (fm(w2), "Divides each squared difference by the observed count instead of the expected count.", "divides_by_observed", round(w2, 2), 2), (fm(w3), "Takes the square root of the chi-square statistic, which is not the statistic that is compared with the chi-square distribution.", "square_root_taken", round(w3, 2), 2)]
-    ex_txt = f"${exp[0][0]:.2f}$, ${exp[0][1]:.2f}$, ${exp[1][0]:.2f}$ and ${exp[1][1]:.2f}$"
-    stem = f"The table shown gives the observed counts for a chi-square test of independence in a random sample. When the null hypothesis is true, the expected counts in the cells, in the order of the table (row by row), are {ex_txt}. What is the value of the chi-square statistic? (Round to two decimal places.)"
+    stem = f"The table shown gives the observed counts for a chi-square test of independence in a random sample. What is the value of the chi-square statistic? (Compute the expected counts from the row and column totals and round the statistic to two decimal places.)"
     return mc("st_n_chisq_stat", "3.15", "3.E", "Compute the chi-square statistic from observed and expected counts",
-              ["Find the squared difference between each observed and expected count", "Divide each by its expected count and add the four results"],
+              ["Find the expected count of each cell from the row and column totals", "Divide each squared difference by its expected count and add the four results"],
               key, wr, rng, stem, "the statistic is recomputed with scipy's chi-square contingency routine without continuity correction", ["procedure_choice", "calculated_value_decision", "representation_reading"], stim, est=105, facts=[f"cells={cells}"])
 
 
@@ -216,11 +215,16 @@ def st_n_ci_claim_threshold(rng):
             break
     conv = lo > thr
     I = f"$({lo:.3f},\\ {hi:.3f})$"
-    key = ((f"Yes, because every value in the interval {I} is greater than ${thr:g}$, so there is convincing evidence for the claim.") if conv else
-           (f"No, because the interval {I} includes values on both sides of ${thr:g}$, so there is not convincing evidence for the claim."), "A claim that the proportion is greater than a value is supported when the whole interval lies above that value; an interval that includes the value leaves it plausible.")
-    wr = [((f"No, because the sample proportion ${ph:g}$ is greater than ${thr:g}$ but the interval {I} is too wide to support any claim.") if conv else (f"Yes, because the sample proportion ${ph:g}$ is greater than ${thr:g}$, so the claim that {c['claim']} is justified."), "Judges the claim from the sample proportion alone; the interval shows how far the population proportion can be from the sample proportion.", "sample_proportion_only", None, 1),
-          ((f"No, because a confidence interval can never provide evidence for a claim about a proportion.") if conv else (f"Yes, because most of the values in the interval {I} are greater than ${thr:g}$."), "The claim is justified only if all of the plausible values satisfy it; having most of the values above the threshold is not enough." if not conv else "A confidence interval is used to judge whether a value is plausible, so it can provide evidence for a claim.", "interval_cannot_support" if conv else "most_values_above", None, 2),
-          ((f"No, because there is a $95\\%$ chance that the sample proportion is above ${thr:g}$ only.") if conv else (f"Yes, because the margin of error is less than ${thr:g}$."), "Misreads the confidence level or the margin of error; the claim is judged by comparing the interval with the threshold." , "confidence_level_misread" if conv else "margin_vs_threshold", None, 2)]
+    if conv:
+        key = (f"Yes, because every value in the interval {I} is greater than ${thr:g}$, so ${thr:g}$ is not a plausible value.", "A claim that the proportion is greater than a value is supported when the whole interval lies above that value, so the value itself is not plausible.")
+        wr = [(f"No, because the interval {I} is not centered at ${thr:g}$.", "An interval is not required to be centered at the value in the claim; what matters is whether the value is inside the interval.", "centered_at_value", None, 1),
+              ("No, because a confidence level of $95\\%$ is too low to support any claim about a proportion.", "A $95\\%$ interval is commonly used to support claims; the claim is judged by comparing the interval with the value.", "level_too_low", None, 2),
+              (f"No, because the sample proportion ${ph:g}$ is not equal to ${thr:g}$.", "The sample proportion never has to equal the value in the claim; the interval shows which population proportions are plausible.", "must_equal", None, 1)]
+    else:
+        key = (f"No, because the interval {I} includes values on both sides of ${thr:g}$, so ${thr:g}$ is a plausible value.", "An interval that includes the value leaves it plausible, so the claim that the proportion is greater than that value is not supported.")
+        wr = [(f"Yes, because the sample proportion ${ph:g}$ is greater than ${thr:g}$.", "Judges the claim from the sample proportion alone; the interval shows how far the population proportion can be from the sample proportion.", "sample_proportion_only", None, 1),
+              (f"Yes, because most of the values in the interval {I} are greater than ${thr:g}$.", "The claim is justified only if all of the plausible values satisfy it; most of them is not enough.", "most_values_above", None, 2),
+              ("Yes, because a $95\\%$ interval always provides convincing evidence for a claim about a proportion.", "An interval supports a claim only when the value in the claim is not a plausible value; the confidence level alone does not decide this.", "level_always_supports", None, 1)]
     stem = f"{c['sc'].replace('${n}$', f'${n}$')} The sample proportion is ${ph:g}$, and the conditions for inference are met. The interval is {I}. Does the interval provide convincing evidence for the claim that {c['claim']}?"
     return mc("st_n_ci_claim_threshold", "3.4", "4.G", "Justify a one-sided claim about a proportion from a confidence interval",
               ["Compare the whole interval with the threshold in the claim", "State whether the claim is justified: only when every value in the interval satisfies it"],
@@ -457,7 +461,8 @@ def st_n_extrapolation(rng):
     wr = [(f"The prediction of ${v:.1f}$ is reliable, because the correlation of ${r}$ is close to $1$.", "A strong correlation within the range of the data does not make predictions outside that range reliable.", "r_makes_reliable", None, 1),
           (f"The prediction of ${v:.1f}$ is reliable, because the line is the least-squares line, which has the smallest sum of squared residuals.", "The least-squares property describes the fit to the observed data, not the behavior of the relationship outside the data.", "least_squares_makes_reliable", None, 1),
           (f"The prediction cannot be made, because a regression line can only be used for the values of $x$ that appear in the data set.", "A prediction can be calculated for any value of $x$; the issue is that it is unreliable outside the range of the data.", "cannot_calculate", None, 2)]
-    stem = f"A least-squares regression line for predicting {c['y']} from {c['x']} is $\\hat y = {a:g} {sg} {abs(b):g}x$, based on data for which $x$ ranges from ${c['lo']}$ to ${c['hi']}$, with $r = {r}$. A researcher uses the line to predict {c['yn']} when $x = {xn}$. Which of the following statements about the prediction is correct?"
+    rs = r if b >= 0 else -r
+    stem = f"A least-squares regression line for predicting {c['y']} from {c['x']} is $\\hat y = {a:g} {sg} {abs(b):g}x$, based on data for which $x$ ranges from ${c['lo']}$ to ${c['hi']}$, with $r = {rs}$. A researcher uses the line to predict {c['yn']} when $x = {xn}$. Which of the following statements about the prediction is correct?"
     return mc("st_n_extrapolation", "5.3", "4.D", "Judge a prediction outside the range of the data",
               ["Compare the value of x with the range of the data", "Conclude that the prediction is an extrapolation and reject reasons based on the correlation or the least-squares property"],
               key, wr, rng, stem, "each context gives the range of the data and a value of x outside it, so the prediction is an extrapolation in every case", ["claim_justification", "interpretation", "condition_check"], est=90, facts=[f"xn={xn}"])
@@ -502,3 +507,6 @@ def st_n_corr_causation(rng):
 STAGE_SINGLES = ["st_n_phat_dist_change", "st_n_method_from_counts", "st_n_diff_parameter", "st_n_alpha_relation", "st_n_ci_sample_size", "st_n_chisq_stat", "st_n_two_prop_ci", "st_n_ci_claim_threshold", "st_n_diff_ci_interpret",
                  "st_n_clt_conditions_choice", "st_n_hyp_two_means", "st_n_t_vs_z", "st_n_ci_endpoints_stats", "st_n_me_t_table", "st_n_diff_means_claim", "st_n_scope_of_inference",
                  "st_n_pred_one_sd", "st_n_extrapolation", "st_n_residual_meaning", "st_n_corr_causation"]
+
+# P4 첫 런에서 반려된 원형을 고쳐 다시 돌린다(카이제곱 통계량: 기대 빈도 반올림 모호, 구간으로 과반 주장: 약한 오답, 외삽: r 부호)
+STAGE_FIX = ["st_n_chisq_stat", "st_n_ci_claim_threshold", "st_n_extrapolation"]
