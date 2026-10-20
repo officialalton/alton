@@ -10,9 +10,9 @@ const files = readdirSync(DIR).filter((n) => n.endsWith(".json"));
 const data = new Map(files.map((n) => [n.replace(".json", ""), JSON.parse(readFileSync(path.join(DIR, n), "utf-8")) as ApCurriculumFile]));
 
 describe("AP curriculum seed data (official CED backbone)", () => {
-  it("has all 14 owner subjects, none excluded", () => {
+  it("has all 24 owner subjects (14 + 10 added 2026-10-20), none excluded", () => {
     for (const code of AP_SUBJECT_CODES) expect(data.has(code), code).toBe(true);
-    expect(data.size).toBe(14);
+    expect(data.size).toBe(24);
   });
 
   it.each([...data.entries()])("%s passes structural validation", (_code, f) => {

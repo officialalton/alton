@@ -289,6 +289,48 @@ export const SUBJECT_UNITS: Record<string, SubjectUnit[]> = {
    ]
   }
  ],
+ "ap_comparative_government_and_politics": [
+  {
+   "code": "1",
+   "title": "Political Systems, Regimes, and Governments",
+   "mc": [
+    18,
+    27
+   ]
+  },
+  {
+   "code": "2",
+   "title": "Political Institutions",
+   "mc": [
+    22,
+    33
+   ]
+  },
+  {
+   "code": "3",
+   "title": "Political Culture and Participation",
+   "mc": [
+    11,
+    18
+   ]
+  },
+  {
+   "code": "4",
+   "title": "Party and Electoral Systems and Citizen Organizations",
+   "mc": [
+    13,
+    18
+   ]
+  },
+  {
+   "code": "5",
+   "title": "Political and Economic Changes and Development",
+   "mc": [
+    16,
+    24
+   ]
+  }
+ ],
  "ap_computer_science_a": [
   {
    "code": "1",
@@ -320,6 +362,48 @@ export const SUBJECT_UNITS: Record<string, SubjectUnit[]> = {
    "mc": [
     30,
     40
+   ]
+  }
+ ],
+ "ap_computer_science_principles": [
+  {
+   "code": "1",
+   "title": "Creative Development",
+   "mc": [
+    10,
+    13
+   ]
+  },
+  {
+   "code": "2",
+   "title": "Data",
+   "mc": [
+    17,
+    22
+   ]
+  },
+  {
+   "code": "3",
+   "title": "Algorithms and Programming",
+   "mc": [
+    30,
+    35
+   ]
+  },
+  {
+   "code": "4",
+   "title": "Computer Systems and Networks",
+   "mc": [
+    11,
+    15
+   ]
+  },
+  {
+   "code": "5",
+   "title": "Impact of Computing",
+   "mc": [
+    21,
+    26
    ]
   }
  ],
@@ -397,6 +481,212 @@ export const SUBJECT_UNITS: Record<string, SubjectUnit[]> = {
   {
    "code": "9",
    "title": "Longer Fiction or Drama III"
+  }
+ ],
+ "ap_environmental_science": [
+  {
+   "code": "1",
+   "title": "The Living World: Ecosystems",
+   "mc": [
+    6,
+    8
+   ]
+  },
+  {
+   "code": "2",
+   "title": "The Living World: Biodiversity",
+   "mc": [
+    6,
+    8
+   ]
+  },
+  {
+   "code": "3",
+   "title": "Populations",
+   "mc": [
+    10,
+    15
+   ]
+  },
+  {
+   "code": "4",
+   "title": "Earth Systems and Resources",
+   "mc": [
+    10,
+    15
+   ]
+  },
+  {
+   "code": "5",
+   "title": "Land and Water Use",
+   "mc": [
+    10,
+    15
+   ]
+  },
+  {
+   "code": "6",
+   "title": "Energy Resources and Consumption",
+   "mc": [
+    10,
+    15
+   ]
+  },
+  {
+   "code": "7",
+   "title": "Atmospheric Pollution",
+   "mc": [
+    7,
+    10
+   ]
+  },
+  {
+   "code": "8",
+   "title": "Aquatic and Terrestrial Pollution",
+   "mc": [
+    7,
+    10
+   ]
+  },
+  {
+   "code": "9",
+   "title": "Global Change",
+   "mc": [
+    15,
+    20
+   ]
+  }
+ ],
+ "ap_european_history": [
+  {
+   "code": "1",
+   "title": "Renaissance and Exploration",
+   "mc": [
+    10,
+    15
+   ]
+  },
+  {
+   "code": "2",
+   "title": "Age of Reformation",
+   "mc": [
+    10,
+    15
+   ]
+  },
+  {
+   "code": "3",
+   "title": "Absolutism and Constitutionalism",
+   "mc": [
+    10,
+    15
+   ]
+  },
+  {
+   "code": "4",
+   "title": "Scientific, Philosophical, and Political Developments",
+   "mc": [
+    10,
+    15
+   ]
+  },
+  {
+   "code": "5",
+   "title": "Conflict, Crisis, and Reaction in the Late 18th Century",
+   "mc": [
+    10,
+    15
+   ]
+  },
+  {
+   "code": "6",
+   "title": "Industrialization and Its Effects",
+   "mc": [
+    10,
+    15
+   ]
+  },
+  {
+   "code": "7",
+   "title": "19th-Century Perspectives and Political Developments",
+   "mc": [
+    10,
+    15
+   ]
+  },
+  {
+   "code": "8",
+   "title": "20th-Century Global Conflicts",
+   "mc": [
+    10,
+    15
+   ]
+  },
+  {
+   "code": "9",
+   "title": "Cold War and Contemporary Europe",
+   "mc": [
+    10,
+    15
+   ]
+  }
+ ],
+ "ap_human_geography": [
+  {
+   "code": "1",
+   "title": "Thinking Geographically",
+   "mc": [
+    8,
+    10
+   ]
+  },
+  {
+   "code": "2",
+   "title": "Population and Migration Patterns and Processes",
+   "mc": [
+    12,
+    17
+   ]
+  },
+  {
+   "code": "3",
+   "title": "Cultural Patterns and Processes",
+   "mc": [
+    12,
+    17
+   ]
+  },
+  {
+   "code": "4",
+   "title": "Political Patterns and Processes",
+   "mc": [
+    12,
+    17
+   ]
+  },
+  {
+   "code": "5",
+   "title": "Agriculture and Rural Land-Use Patterns and Processes",
+   "mc": [
+    12,
+    17
+   ]
+  },
+  {
+   "code": "6",
+   "title": "Cities and Urban Land-Use Patterns and Processes",
+   "mc": [
+    12,
+    17
+   ]
+  },
+  {
+   "code": "7",
+   "title": "Industrial and Economic Development Patterns and Processes",
+   "mc": [
+    12,
+    17
+   ]
   }
  ],
  "ap_macroeconomics": [
@@ -565,6 +855,198 @@ export const SUBJECT_UNITS: Record<string, SubjectUnit[]> = {
    ]
   }
  ],
+ "ap_physics_2": [
+  {
+   "code": "9",
+   "title": "Thermodynamics",
+   "mc": [
+    15,
+    18
+   ]
+  },
+  {
+   "code": "10",
+   "title": "Electric Force, Field, and Potential",
+   "mc": [
+    15,
+    18
+   ]
+  },
+  {
+   "code": "11",
+   "title": "Electric Circuits",
+   "mc": [
+    15,
+    18
+   ]
+  },
+  {
+   "code": "12",
+   "title": "Magnetism and Electromagnetism",
+   "mc": [
+    12,
+    15
+   ]
+  },
+  {
+   "code": "13",
+   "title": "Geometric Optics",
+   "mc": [
+    12,
+    15
+   ]
+  },
+  {
+   "code": "14",
+   "title": "Waves, Sound, and Physical Optics",
+   "mc": [
+    12,
+    15
+   ]
+  },
+  {
+   "code": "15",
+   "title": "Modern Physics",
+   "mc": [
+    12,
+    15
+   ]
+  }
+ ],
+ "ap_physics_c_electricity_and_magnetism": [
+  {
+   "code": "8",
+   "title": "Electric Charges, Fields, and Gauss's Law",
+   "mc": [
+    15,
+    25
+   ]
+  },
+  {
+   "code": "9",
+   "title": "Electric Potential",
+   "mc": [
+    10,
+    20
+   ]
+  },
+  {
+   "code": "10",
+   "title": "Conductors and Capacitors",
+   "mc": [
+    10,
+    15
+   ]
+  },
+  {
+   "code": "11",
+   "title": "Electric Circuits",
+   "mc": [
+    15,
+    25
+   ]
+  },
+  {
+   "code": "12",
+   "title": "Magnetic Fields and Electromagnetism",
+   "mc": [
+    10,
+    20
+   ]
+  },
+  {
+   "code": "13",
+   "title": "Electromagnetic Induction",
+   "mc": [
+    10,
+    20
+   ]
+  }
+ ],
+ "ap_physics_c_mechanics": [
+  {
+   "code": "1",
+   "title": "Kinematics",
+   "mc": [
+    10,
+    15
+   ]
+  },
+  {
+   "code": "2",
+   "title": "Force and Translational Dynamics",
+   "mc": [
+    20,
+    25
+   ]
+  },
+  {
+   "code": "3",
+   "title": "Work, Energy, and Power",
+   "mc": [
+    15,
+    25
+   ]
+  },
+  {
+   "code": "4",
+   "title": "Linear Momentum",
+   "mc": [
+    10,
+    20
+   ]
+  },
+  {
+   "code": "5",
+   "title": "Torque and Rotational Dynamics",
+   "mc": [
+    10,
+    15
+   ]
+  },
+  {
+   "code": "6",
+   "title": "Energy and Momentum of Rotating Systems",
+   "mc": [
+    10,
+    15
+   ]
+  },
+  {
+   "code": "7",
+   "title": "Oscillations",
+   "mc": [
+    10,
+    15
+   ]
+  }
+ ],
+ "ap_precalculus": [
+  {
+   "code": "1",
+   "title": "Polynomial and Rational Functions",
+   "mc": [
+    30,
+    40
+   ]
+  },
+  {
+   "code": "2",
+   "title": "Exponential and Logarithmic Functions",
+   "mc": [
+    25,
+    40
+   ]
+  },
+  {
+   "code": "3",
+   "title": "Trigonometric and Polar Functions",
+   "mc": [
+    30,
+    35
+   ]
+  }
+ ],
  "ap_psychology": [
   {
    "code": "1",
@@ -646,6 +1128,48 @@ export const SUBJECT_UNITS: Record<string, SubjectUnit[]> = {
    "mc": [
     10,
     20
+   ]
+  }
+ ],
+ "ap_us_government_and_politics": [
+  {
+   "code": "1",
+   "title": "Foundations of American Democracy",
+   "mc": [
+    15,
+    22
+   ]
+  },
+  {
+   "code": "2",
+   "title": "Interactions Among Branches of Government",
+   "mc": [
+    25,
+    36
+   ]
+  },
+  {
+   "code": "3",
+   "title": "Civil Liberties and Civil Rights",
+   "mc": [
+    13,
+    18
+   ]
+  },
+  {
+   "code": "4",
+   "title": "American Political Ideologies and Beliefs",
+   "mc": [
+    10,
+    15
+   ]
+  },
+  {
+   "code": "5",
+   "title": "Political Participation",
+   "mc": [
+    20,
+    27
    ]
   }
  ],
