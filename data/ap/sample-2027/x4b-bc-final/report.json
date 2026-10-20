@@ -1,0 +1,53 @@
+{
+ "run": "x4b-bc",
+ "subject": "ap_calculus_bc",
+ "generatedAt": "2026-10-20T06:10:16.910Z",
+ "totalCostUsd": 1.94,
+ "newSpendSinceBaseline": 2,
+ "cap": 50,
+ "calls": 228,
+ "candidates": 72,
+ "mcCandidates": 58,
+ "frqCandidates": 14,
+ "passedAll": 38,
+ "adopted": 24,
+ "mcAdopted": 23,
+ "frqAdopted": 1,
+ "reserve": 14,
+ "yield": 0.333,
+ "costPerAdopted": 0.081,
+ "callsPerAdopted": 9.5,
+ "duplicateRejected": 6,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 4,
+  "template": 68
+ },
+ "rejectionReasons": {
+  "criterion_failed_distractor_explanation": 9,
+  "blueprint": 6,
+  "wording_missing": 6,
+  "criterion_failed_exam_suitability": 2,
+  "duplicate_gate_near_duplicate": 6,
+  "part_c_justification_without_reason_row": 2,
+  "criterion_failed_scope_skill": 1,
+  "part_b_justification_without_reason_row": 2,
+  "bundle_ref": 12,
+  "part_a_justification_without_reason_row": 2,
+  "part_d_justification_without_reason_row": 6
+ },
+ "unfilledCells": [
+  "ap_calculus_bc-m01",
+  "ap_calculus_bc-m02",
+  "ap_calculus_bc-m08",
+  "ap_calculus_bc-m20",
+  "ap_calculus_bc-m22",
+  "ap_calculus_bc-m23",
+  "ap_calculus_bc-f01",
+  "ap_calculus_bc-f03",
+  "ap_calculus_bc-f04",
+  "ap_calculus_bc-f05",
+  "ap_calculus_bc-f06",
+  "ap_calculus_bc-f07"
+ ]
+}

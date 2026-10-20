@@ -1,0 +1,570 @@
+[
+ {
+  "key": "ap_chemistry-f01-k0",
+  "cellId": "ap_chemistry-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Ksp=[Mg2+][OH-]^2=4s^3=5.6e-12, s=(1.4e-12)^(1/3)",
+     "final_answer": "Ksp=[Mg2+][OH-]^2; s ≈ 1.1×10^-4 M",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "After dilution [Mg2+]=1.0e-3, [OH-]=5.0e-7; Q=2.5e-16 < Ksp",
+     "final_answer": "Q = 2.5×10^-16 < Ksp; no precipitate forms",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "s=Ksp/(0.02)^2=5.6e-12/4e-4",
+     "final_answer": "1.4×10^-8 M",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Common ion OH- shifts the equilibrium Mg(OH)2 ⇌ Mg2+ + 2OH- to the left (Le Chatelier), so less solid dissolves",
+     "final_answer": "The solubility in (c), 1.4e-8 M, is much lower than in (a), 1.1e-4 M, because of the common-ion effect",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Ksp depends only on temperature; adding the salt changes Q and shifts the equilibrium, but Ksp stays the same",
+     "final_answer": "Incorrect; Ksp stays the same at constant temperature",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Each part has a single defensible answer, and the independent solver agreed on all five. The item stays within topics 7.11, 7.9 and 7.12, uses a reasonable calculation load, and has 10 points over 5 parts. Minor flaws: rubric row B1 is tagged \"numeric\" but is a statement, and part C's stem does not say to neglect the small amount that dissolves, though the rubric covers it.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part fits its own tagged skill and topic."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Answers are unique and consistent with the rubric rows."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete for a text-only item."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to free response; common_errors are listed."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load fits a long question, and the calculator is allowed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ on Ksp, molar solubility via a cube root, Q vs Ksp after a dilution on mixing, the common-ion effect, and the temperature dependence of Ksp. It needs several routine steps (choosing the relationship, a dilution adjustment, an approximation) plus short conceptual justifications. The numbers are clean, the reading is light, and everything is within Unit 7 scope.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_chemistry-f01-k1",
+  "cellId": "ap_chemistry-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Ksp=[Mg2+][OH-]^2=4s^3 -> s=(1.4e-12)^(1/3)",
+     "final_answer": "Ksp=[Mg2+][OH-]^2; s ≈ 1.1 × 10^-4 M",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Dilution by half: [Mg2+]=5.0e-7, [OH-]=2.0e-4; Q=5.0e-7*(2.0e-4)^2=2.0e-14 < 5.6e-12",
+     "final_answer": "Q = 2.0 × 10^-14 < Ksp; no precipitate forms",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "s=Ksp/(0.1)^2",
+     "final_answer": "5.6 × 10^-10 M",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Common ion OH- shifts Mg(OH)2(s) ⇌ Mg2+ + 2OH- left (Q>Ksp initially), so less dissolves",
+     "final_answer": "Solubility in (c) (5.6e-10 M) is much lower than in (a) (1.1e-4 M) because of the common-ion effect (Le Chatelier shift toward solid).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Ksp is an equilibrium constant depending only on temperature",
+     "final_answer": "Incorrect; Ksp depends only on temperature. Adding the salt changes Q and the solubility, not Ksp.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Coherent 10-point long FRQ on Ksp, Q versus Ksp and the common-ion effect. Keys are correct and consistent with the independent solver. Rubric rows are well structured, and the load is appropriate.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Five-part FRQ-style item covering Ksp expression, molar solubility with a cube root, Q vs Ksp after a dilution-by-mixing step, the common-ion effect calculation, and conceptual justifications (Le Chatelier shift, Ksp depends only on temperature). Each part is a standard AP routine with clean numbers, short arithmetic, and clear wording. Difficulty comes from choosing the right relationship and linking results to claims, which are allowed levers. This suits a full mock rather than basic practice or advanced extension.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_chemistry-f01-k2",
+  "cellId": "ap_chemistry-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Ksp=[Ag+]^2[CrO4^2-]; 4s^3=1.1e-12, so s=6.5e-5 M",
+     "final_answer": "Ksp=[Ag+]^2[CrO4^2-]; s ≈ 6.5×10^-5 M",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "After 1:1 dilution: [Ag+]=1.0e-3 M, [CrO4^2-]=1.0e-7 M; Q=(1e-3)^2(1e-7)=1.0e-13, which is less than Ksp=1.1e-12",
+     "final_answer": "Q = 1.0×10^-13 < Ksp, so no precipitate forms",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "(2s)^2(0.05)=1.1e-12, so s^2=5.5e-12 and s≈2.3e-6 M",
+     "final_answer": "s ≈ 2.3×10^-6 M",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Common-ion effect: the added CrO4^2- raises Q above Ksp, so by Le Chatelier's principle the dissolution equilibrium shifts left and less solid dissolves",
+     "final_answer": "Solubility in (c) is lower than in (a), about 2.3e-6 M vs 6.5e-5 M, because of the common-ion effect (equilibrium shifts toward the solid)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Ksp is an equilibrium constant that depends only on temperature; adding the salt shifts the position of equilibrium, not the constant",
+     "final_answer": "Incorrect: Ksp stays the same at constant temperature; only the solubility changes",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The 10-point long FRQ on Ag2CrO4 solubility, Q versus Ksp, and the common-ion effect is correct and in scope. The independent solver reproduced every answer. No instant-reject condition applies. Minor notes: part (c) does not state the assumption that [CrO4²⁻] stays at 0.05 M, though the rubric does, and part B's skill tags are slightly loose.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All parts fall in 7.11, with 7.9 and 7.12 as related topics. Each part fits its own tagged skill. Part B's 3.C/6.D tag is slightly loose against a rubric that is mostly calculation."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys for A, B and C are verified, and D and E have a single defensible answer. The rubric states the approximation in part C. Rows are consistent, with dependencies set."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text-only stimulus is complete and clear. Ksp, concentrations and temperature are given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "There are no multiple-choice distractors. The rubric rows list plausible common errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 10 points match a long FRQ. Arithmetic is modest and the calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item is a standard AP FRQ-style multi-part problem covering Ksp, Q vs Ksp, and the common-ion effect. The solver must set up the Ksp expression with 1:2 stoichiometry and take a cube root, account for the dilution on mixing before computing Q, handle the square root and the s = [Ag+]/2 relationship in the common-ion case, and give qualitative Le Chatelier justifications. Numbers are clean and the wording is unambiguous, and all content is within Unit 7 scope. The difficulty comes from the concepts and the number of routine steps, not from heavy arithmetic or reading.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_chemistry-f01-k3",
+  "cellId": "ap_chemistry-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Ksp=[Mg2+][OH-]^2=4s^3=5.6e-12, s^3=1.4e-12",
+     "final_answer": "Ksp=[Mg2+][OH-]^2; s ≈ 1.1×10^-4 M",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "After mixing, each concentration is 5.0e-7 M; Q=(5e-7)(5e-7)^2",
+     "final_answer": "Q ≈ 1.3×10^-19 < Ksp, so no precipitate forms",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "s=Ksp/(0.02)^2=5.6e-12/4e-4",
+     "final_answer": "1.4×10^-8 M",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Common-ion effect: the added OH- shifts Mg(OH)2(s) ⇌ Mg2+ + 2OH- to the left (Le Chatelier), so less solid dissolves",
+     "final_answer": "Solubility in (c), 1.4e-8 M, is much lower than in (a), 1.1e-4 M, because of the common-ion effect",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Ksp is an equilibrium constant that depends only on temperature; the added ion changes the equilibrium position, not K",
+     "final_answer": "Incorrect; Ksp stays 5.6e-12 at 25 °C, and only the solubility (equilibrium position) changes",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The 10-point long question on Ksp, Q versus Ksp and the common-ion effect is in scope for topics 7.11, 7.9 and 7.12. The keys are consistent: s = 1.12e-4 M in part (a), Q = 1.25e-19 with no precipitate in part (b), and s = 1.4e-8 M in part (c). The independent solver's 1.3e-19 for Q differs only by rounding a 1.25e-19 tie, and the rubric's \"about\" wording covers this. The rubric rows are one point each, with explicit dependencies and a justification row for the Le Chatelier argument. The load is typical of a long FRQ with calculator use.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item squarely within the 7.11/7.12 scope with a single equilibrium. Part A requires writing the Ksp expression and solving 4s^3 = Ksp (cube root, about 1.1e-4 M). Part B requires recognizing the 1:1 dilution on mixing (concentrations halve to 5.0e-7 M), computing Q = [Mg2+][OH-]^2 with the squared exponent (about 1.3e-19), and comparing Q to Ksp to conclude no precipitate. Part C uses the common-ion approximation s = Ksp/(0.02)^2 (about 1.4e-8 M). Parts D and E ask for a conceptual justification (Le Chatelier shift, Ksp depends only on temperature). Arithmetic is short with clean numbers, reading load is modest, and wording is unambiguous. Difficulty comes from legitimate levers (choosing the relationship, dilution step, linking the result to a claim), making it suitable for full mock exams rather than basic learning or advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_chemistry-f02-k0",
+  "cellId": "ap_chemistry-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "P = nRT/V = (1.75)(0.08206)(273.15)/20",
+     "final_answer": "1.96 atm",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "P_CO2 = (0.25)(0.08206)(273.15)/20, or mole fraction 0.143 x 1.96",
+     "final_answer": "0.280 atm",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Both gases are at the same temperature, so they have the same average kinetic energy (KE = 1/2 mv^2). CH4 molecules have less mass (16.04 vs 44.01 g/mol), so they must move faster on average. The rms speed is proportional to sqrt(1/M).",
+     "final_answer": "CH4 has the greater average speed: at the same temperature it has the same average KE as CO2 but a smaller molar mass.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Short 4-point FRQ (1/1/2) on ideal gas mixture, Dalton's law and KMT speed reasoning. The stimulus gives all needed quantities and molar masses, and the ideal-behavior assumption is stated. Keys are consistent with the independent solver. Part C's rubric has a claim row and a justification row that depends on the claim row, so the scoring is sound. The load is appropriate for the AP exam. Minor note: the model answer for B uses \"n_b\" notation, which is cosmetic only. The molar masses are given but only used qualitatively, which is acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A and B are 5.F calculations (ideal gas law, Dalton's law) and part C is a KMT reasoning argument, all within Unit 3 (topics 3.4 and 3.5). Each part is tagged with its own skill, and no out-of-scope content is used."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Part A gives 1.961 atm with T = 273.15 K. Part B gives 0.280 atm, which equals nRT/V for CO2 alone. Part C identifies CH4 as faster because both gases have the same average kinetic energy and CH4 has the smaller mass. The rubric rows are consistent and the dependency C2 on C1 is sensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete: volume, moles, temperature, ideal assumption and molar masses are all given. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The common_errors listed (Celsius temperature, wrong mole fraction, heavier gas identified as faster) are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The calculation load is light and a calculator is allowed. The format is a typical short question, answerable in about 6 to 9 minutes."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Three-part item covering the ideal gas law with a Celsius-to-kelvin conversion, partial pressure of one gas, and a KMT conceptual justification (equal average KE at the same T, so the lighter molecule is faster). Each part is standard and short, the reading load is minimal, and the arithmetic is modest with no out-of-scope content. Difficulty comes from choosing the correct relationships and linking the result to a claim, which suits a full mock but is not advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 270
+  }
+ },
+ {
+  "key": "ap_chemistry-f02-k1",
+  "cellId": "ap_chemistry-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "P = nRT/V = (1.25)(0.08206)(300 K)/10 L",
+     "final_answer": "≈3.08 atm",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "P(CO2) = (0.75)(0.08206)(300)/10, or mole fraction 0.6 × 3.08",
+     "final_answer": "≈1.85 atm",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Both gases are at the same temperature, so they have the same average kinetic energy (KE = ½mv²). CH4 has the smaller molar mass (16.04 vs 44.01 g/mol), so its molecules must move faster on average.",
+     "final_answer": "CH4 has the greater average molecular speed",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The short FRQ on a CH4/CO2 mixture is correct, in scope for 3.4 and 3.5, and uses a 1/1/2 point split that fits the short-question grain. The keys are unique and the tolerance covers a 300 K versus 300.15 K difference. The only blemish is that the rubric flags a units row that does not exist as a separate row, which is minor.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Ideal gas law, Dalton's law with mole fraction, and a KMT speed argument all sit in Unit 3 and match each part's tagged skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The pressures of 3.079 atm and 1.847 atm are correct. The tolerance covers use of 300 K. CH4 is the unique answer for part C."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and states ideal behavior, so the empty data object is acceptable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is free response, so there are no distractors. The listed common errors are plausible."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light and the calculator is appropriate. The 4-point short-question structure matches the official grain."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Three linked parts: PV=nRT with a Celsius-to-kelvin conversion and summed moles (A), a partial-pressure calculation (B), and a KMT justification linking equal average KE at the same T to molar mass and speed (C). Concept depth is moderate, arithmetic is short and clean, reading load is low, and everything is within Unit 3 scope. Typical of a standard AP free-response sub-question set, so it suits full mocks rather than basic learning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_chemistry-f02-k2",
+  "cellId": "ap_chemistry-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "P=nRT/V=(1.25)(0.08206)(300.15)/25",
+     "final_answer": "1.23 atm",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "P_Ar = X_Ar*P_total = 0.20*1.23, or nRT/V with n=0.25",
+     "final_answer": "0.246 atm",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Same T means same average KE (1/2 mv^2); Ne has smaller molar mass so higher average speed (u_rms = sqrt(3RT/M))",
+     "final_answer": "Ne has the greater average molecular speed: both gases have the same average kinetic energy at the same temperature, and Ne has the smaller mass.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a short free-response question on an ideal-gas mixture and kinetic molecular theory. Its keys are correct and verified, the stimulus is complete, the rubric rows are consistent, and the load fits a 4-point short question.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Three-part item combining the ideal gas law with a Celsius-to-kelvin conversion, Dalton's partial pressure, and a KMT justification (equal average KE at the same T, so the lighter gas is faster). It requires choosing the governing relationship and linking a result to a claim, but the arithmetic is short and clean, the wording is unambiguous, and everything is in the Unit 3 scope. This is typical of a full-mock free-response item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_chemistry-f02-k3",
+  "cellId": "ap_chemistry-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Use P = nRT/V with n = 2.75 mol, R = 0.08206 L·atm/(mol·K), T = 300 K, V = 20 L: P = 2.75(0.08206)(300)/20.",
+     "final_answer": "3.39 atm (about 3.4 atm)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Partial pressure P = 1.25(0.08206)(300)/20. This equals the mole fraction (1.25/2.75) times the total pressure.",
+     "final_answer": "1.54 atm",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Both gases are at the same temperature, so their molecules have the same average kinetic energy (KE = ½mv²). CH4 has the smaller molar mass, so its molecules must move faster on average to have that same kinetic energy.",
+     "final_answer": "CH4 has the greater average molecular speed",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A short 4-point question made of 1/1/2 parts. It covers the ideal gas law, Dalton's law with a mole fraction, and a kinetic molecular theory argument on speed. Each part matches its tagged skill and rubric rows, and the key is unique.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All three parts fall within topics 3.4 and 3.5. The part C justification uses KMT and equal average kinetic energy at the same temperature, which is the target topic. No out-of-scope content such as van der Waals constants."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is 3.387 atm using kelvins. The solver's 3.39 atm falls within the stated tolerance, so a 300 K versus 300.15 K difference does not affect scoring. B is 1.539 atm, and C is CH4. The rubric rows are consistent with the model answers."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives volume, moles, temperature, the ideal-behavior assumption and the molar masses. That is complete, and the empty data object is fine for a text stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is free response, so the rubric rows carry the scoring. The common errors listed are realistic: using Celsius, using the other gas's mole fraction, and naming the heavier gas as faster."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The estimated 9 minutes is a reasonable load for a short question. The arithmetic is light and a calculator is allowed. The molar masses are given but only used as a reference for part C."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct application of PV=nRT with one Celsius-to-kelvin conversion, a partial-pressure calculation by the same relationship, and a qualitative KMT justification (equal average KE at the same T, so the lighter gas is faster). Few steps, clean numbers, low reading load, no graph reading or multi-step linking. In scope for 3.4 and 3.5.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 200
+  }
+ }
+]

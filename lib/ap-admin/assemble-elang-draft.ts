@@ -1,6 +1,7 @@
 // AP English Language 풀 모의고사 초안 세트 계획(순수 함수). assemble-draft.ts 의 AB/BC 경로와 별개로, 영어의 구조(MC 45 = 지문 묶음: 읽기 23–25 + 글쓰기 20–22 / FRQ 3 = q1 종합·q2 수사 분석·q3 논증 각 1)를 독립 검증한다.
 // 보고서 형식(el-assign.ts): mcA = MC 후보 키(지문 묶음은 한 번, 읽기 묶음 먼저), frqA = FRQ 키(q1·q2·q3 순). 묶음은 후보 1개 = 문제 n건(ap_candidate_problems.item_index 0..n-1)이며 연속 n칸에 그대로 들어간다.
 // 8 스킬 범주 범위는 차단 조건이다(lib/ap-exam/elang-rules.ts). 시험 사이 중복·문항군은 배정기가 막고, 여기서는 저장된 다른 풀 세트와 같은 문항이 없는지 본다.
+import { sortFrqByOfficialOrder } from "../ap-exam/official-order";
 import { apSectionLayout } from "../ap-exam/layouts";
 import { ELANG_FRQ_TYPES, elangSectionOf, verifyElangFullComposition, type ElangSetItem } from "../ap-exam/elang-rules";
 import type { DraftPlan, FullSetUsage, PoolRow, SetKeys } from "./assemble-draft";
@@ -15,7 +16,7 @@ export function planElDraftSet(o: {
   setId: string; keys: SetKeys; hasVirtual: boolean; name: string; pool: PoolRow[]; existingFullSets: FullSetUsage[]; stock?: ElItem[]; subject: string;
 }): DraftPlan {
   const problems: string[] = [];
-  const mcKeys = [...(o.keys.mcA ?? []), ...(o.keys.mcB ?? [])]; const frqKeys = [...(o.keys.frqA ?? []), ...(o.keys.frqB ?? [])];
+  const mcKeys = [...(o.keys.mcA ?? []), ...(o.keys.mcB ?? [])]; let frqKeys = [...(o.keys.frqA ?? []), ...(o.keys.frqB ?? [])];
   const all = [...mcKeys, ...frqKeys];
   if (o.hasVirtual) problems.push("이 배정에는 가상 문항(재고에 없는 칸)이 있어 저장하지 않습니다.");
   if (new Set(all).size !== all.length) problems.push("세트 안에 같은 문항이 두 번 들어 있습니다.");
@@ -33,6 +34,7 @@ export function planElDraftSet(o: {
   if (notReady.length) problems.push(`문제은행 변환·검증이 끝나지 않은 문항 ${notReady.length}건: ${notReady.slice(0, 8).join(", ")}${notReady.length > 8 ? " …" : ""}`);
 
   // 위치 배정: 후보 순서대로, 묶음은 연속 n칸(읽기 묶음이 먼저 와야 한다 — 검증기가 확인)
+  frqKeys = sortFrqByOfficialOrder("ap_english_language", frqKeys, (k) => stockBy.get(k)?.frqType); // 공식 FRQ 번호 순(docs/ap/ap-question-order-research-2026-10-20.md)
   const comp: ElangSetItem[] = []; let pos = 1;
   for (const key of mcKeys) { const st = stockBy.get(key); if (!st) continue; for (const m of st.members) comp.push({ kind: "mc", skill: m.skill, candidateKey: key, position: pos++ }); }
   for (const [i, key] of frqKeys.entries()) comp.push({ kind: "frq", skill: null, candidateKey: key, position: i + 1 });

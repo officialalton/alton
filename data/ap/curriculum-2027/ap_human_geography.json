@@ -1,0 +1,2683 @@
+{
+  "schemaVersion": 1,
+  "subject": {
+    "apCode": "ap_human_geography",
+    "name": "AP Human Geography",
+    "family": "human_geography",
+    "edition": "ced-2027",
+    "cedVersion": "AP Human Geography CED (Course Framework V.1, (c)2020 posted edition; 2027 exam: fully digital, 60 MC/60 min, 3 FRQ/75 min, scheduled May 3, 2027)",
+    "examYear": 2027,
+    "sourceUrl": "https://apcentral.collegeboard.org/media/pdf/ap-human-geography-course-and-exam-description.pdf",
+    "officialTopicCodes": true,
+    "designNotes": "7 units with weights, topic codes/titles and class periods from the posted CED (read 2026-10-20; the posted PDF is dated 2020, and the AP Central exam page lists no 2027 structural change). Exam: fully digital; Section I 60 MC, 60 min, 50% (30-40% of questions use stimulus material, individual and set-based); Section II 3 FRQ, 75 min, 50% (7 points each; Q1 no stimulus, Q2 one stimulus, Q3 two stimuli; each assesses at least two units). Calculator use is not mentioned. Skill categories 1-5 (Concepts and Processes, Spatial Relationships, Data Analysis, Visual Analysis, Scale Analysis) with MC and FRQ weightings from the CED. Per-topic and per-sub-keyword skills are an ALTON editorial mapping (one skill per sub-keyword chosen by kind and content), not the CED's per-topic suggested skills. Sub-keywords, kinds, requires and estLessons are ALTON editorial designs, not CED content. Topic titles are the CED's where read from the CED course-at-a-glance; where the extracted text was truncated they are close paraphrases."
+  },
+  "skills": [
+    {
+      "code": "1",
+      "category": "Skill Categories",
+      "label": "Concepts and Processes"
+    },
+    {
+      "code": "2",
+      "category": "Skill Categories",
+      "label": "Spatial Relationships"
+    },
+    {
+      "code": "3",
+      "category": "Skill Categories",
+      "label": "Data Analysis"
+    },
+    {
+      "code": "4",
+      "category": "Skill Categories",
+      "label": "Visual Analysis"
+    },
+    {
+      "code": "5",
+      "category": "Skill Categories",
+      "label": "Scale Analysis"
+    }
+  ],
+  "weights": [
+    {
+      "axis": "unit",
+      "code": "1",
+      "section": "mc",
+      "min": 8,
+      "max": 10,
+      "source": "AP Human Geography CED (Course Framework V.1, (c)2020), Exam Weighting for the Multiple-Choice Section"
+    },
+    {
+      "axis": "unit",
+      "code": "2",
+      "section": "mc",
+      "min": 12,
+      "max": 17,
+      "source": "AP Human Geography CED (Course Framework V.1, (c)2020), Exam Weighting for the Multiple-Choice Section"
+    },
+    {
+      "axis": "unit",
+      "code": "3",
+      "section": "mc",
+      "min": 12,
+      "max": 17,
+      "source": "AP Human Geography CED (Course Framework V.1, (c)2020), Exam Weighting for the Multiple-Choice Section"
+    },
+    {
+      "axis": "unit",
+      "code": "4",
+      "section": "mc",
+      "min": 12,
+      "max": 17,
+      "source": "AP Human Geography CED (Course Framework V.1, (c)2020), Exam Weighting for the Multiple-Choice Section"
+    },
+    {
+      "axis": "unit",
+      "code": "5",
+      "section": "mc",
+      "min": 12,
+      "max": 17,
+      "source": "AP Human Geography CED (Course Framework V.1, (c)2020), Exam Weighting for the Multiple-Choice Section"
+    },
+    {
+      "axis": "unit",
+      "code": "6",
+      "section": "mc",
+      "min": 12,
+      "max": 17,
+      "source": "AP Human Geography CED (Course Framework V.1, (c)2020), Exam Weighting for the Multiple-Choice Section"
+    },
+    {
+      "axis": "unit",
+      "code": "7",
+      "section": "mc",
+      "min": 12,
+      "max": 17,
+      "source": "AP Human Geography CED (Course Framework V.1, (c)2020), Exam Weighting for the Multiple-Choice Section"
+    },
+    {
+      "axis": "skill",
+      "code": "1",
+      "section": "mc",
+      "min": 25,
+      "max": 36,
+      "source": "AP Human Geography CED, Exam Information: How Student Learning Is Assessed (skill category weightings)"
+    },
+    {
+      "axis": "skill",
+      "code": "2",
+      "section": "mc",
+      "min": 16,
+      "max": 25,
+      "source": "AP Human Geography CED, Exam Information: How Student Learning Is Assessed (skill category weightings)"
+    },
+    {
+      "axis": "skill",
+      "code": "3",
+      "section": "mc",
+      "min": 13,
+      "max": 20,
+      "source": "AP Human Geography CED, Exam Information: How Student Learning Is Assessed (skill category weightings)"
+    },
+    {
+      "axis": "skill",
+      "code": "4",
+      "section": "mc",
+      "min": 13,
+      "max": 20,
+      "source": "AP Human Geography CED, Exam Information: How Student Learning Is Assessed (skill category weightings)"
+    },
+    {
+      "axis": "skill",
+      "code": "5",
+      "section": "mc",
+      "min": 13,
+      "max": 20,
+      "source": "AP Human Geography CED, Exam Information: How Student Learning Is Assessed (skill category weightings)"
+    },
+    {
+      "axis": "skill",
+      "code": "1",
+      "section": "frq",
+      "min": 23,
+      "max": 29,
+      "source": "AP Human Geography CED, Exam Information: How Student Learning Is Assessed (skill category weightings)"
+    },
+    {
+      "axis": "skill",
+      "code": "2",
+      "section": "frq",
+      "min": 33,
+      "max": 43,
+      "source": "AP Human Geography CED, Exam Information: How Student Learning Is Assessed (skill category weightings)"
+    },
+    {
+      "axis": "skill",
+      "code": "3",
+      "section": "frq",
+      "min": 10,
+      "max": 19,
+      "source": "AP Human Geography CED, Exam Information: How Student Learning Is Assessed (skill category weightings)"
+    },
+    {
+      "axis": "skill",
+      "code": "4",
+      "section": "frq",
+      "min": 10,
+      "max": 19,
+      "source": "AP Human Geography CED, Exam Information: How Student Learning Is Assessed (skill category weightings)"
+    },
+    {
+      "axis": "skill",
+      "code": "5",
+      "section": "frq",
+      "min": 10,
+      "max": 14,
+      "source": "AP Human Geography CED, Exam Information: How Student Learning Is Assessed (skill category weightings)"
+    }
+  ],
+  "units": [
+    {
+      "code": "1",
+      "title": "Thinking Geographically",
+      "officialClassPeriods": "~9–10",
+      "topics": [
+        {
+          "code": "1.1",
+          "title": "Introduction to Maps",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.1#1",
+              "label": "Reference and thematic maps",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.1#2",
+              "label": "Map projections and distortion",
+              "kind": "misconception",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "1.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.2",
+          "title": "Geographic Data",
+          "scope": "both",
+          "skills": [
+            "3"
+          ],
+          "requires": [
+            "1.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.2#1",
+              "label": "Qualitative and quantitative geographic data",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.2#2",
+              "label": "Sources of geographic data such as census and GIS",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [
+                "1.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.3",
+          "title": "The Power of Geographic Data",
+          "scope": "both",
+          "skills": [
+            "1",
+            "3"
+          ],
+          "requires": [
+            "1.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.3#1",
+              "label": "GIS, remote sensing and GPS",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.3#2",
+              "label": "Using data to make decisions about places",
+              "kind": "skill",
+              "skills": [
+                "3"
+              ],
+              "requires": [
+                "1.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.4",
+          "title": "Spatial Concepts",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "1.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.4#1",
+              "label": "Absolute and relative location",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.4#2",
+              "label": "Distance decay, pattern and distribution",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "1.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.5",
+          "title": "Human–Environmental Interaction",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "1.4"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.5#1",
+              "label": "Possibilism and environmental determinism",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.5#2",
+              "label": "Human modification of landscapes",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "1.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.6",
+          "title": "Scales of Analysis",
+          "scope": "both",
+          "skills": [
+            "5"
+          ],
+          "requires": [
+            "1.5"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.6#1",
+              "label": "Global, regional, national and local scales",
+              "kind": "concept",
+              "skills": [
+                "5"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.6#2",
+              "label": "Choosing the scale that fits a question",
+              "kind": "skill",
+              "skills": [
+                "5"
+              ],
+              "requires": [
+                "1.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.7",
+          "title": "Regional Analysis",
+          "scope": "both",
+          "skills": [
+            "1",
+            "2"
+          ],
+          "requires": [
+            "1.6"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.7#1",
+              "label": "Formal, functional and perceptual regions",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.7#2",
+              "label": "Identifying a region type from a description",
+              "kind": "skill",
+              "skills": [
+                "2"
+              ],
+              "requires": [
+                "1.7#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "2",
+      "title": "Population and Migration Patterns and Processes",
+      "officialClassPeriods": "~19–20",
+      "topics": [
+        {
+          "code": "2.1",
+          "title": "Population Distribution",
+          "scope": "both",
+          "skills": [
+            "1",
+            "3"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.1#1",
+              "label": "Factors shaping where people live",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.1#2",
+              "label": "Reading dot maps and density maps",
+              "kind": "representation",
+              "skills": [
+                "3"
+              ],
+              "requires": [
+                "2.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.2",
+          "title": "Consequences of Population Distribution",
+          "scope": "both",
+          "skills": [
+            "3"
+          ],
+          "requires": [
+            "2.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.2#1",
+              "label": "Arithmetic, physiological and agricultural density",
+              "kind": "skill",
+              "skills": [
+                "3"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.2#2",
+              "label": "Density and resource pressure",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [
+                "2.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.3",
+          "title": "Population Composition",
+          "scope": "both",
+          "skills": [
+            "1",
+            "4"
+          ],
+          "requires": [
+            "2.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.3#1",
+              "label": "Age-sex structure and dependency ratio",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.3#2",
+              "label": "Reading population pyramids",
+              "kind": "representation",
+              "skills": [
+                "4"
+              ],
+              "requires": [
+                "2.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.4",
+          "title": "Population Dynamics",
+          "scope": "both",
+          "skills": [
+            "3"
+          ],
+          "requires": [
+            "2.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.4#1",
+              "label": "Crude birth, death and natural increase rates",
+              "kind": "skill",
+              "skills": [
+                "3"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.4#2",
+              "label": "Doubling time and growth projections",
+              "kind": "skill",
+              "skills": [
+                "3"
+              ],
+              "requires": [
+                "2.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.5",
+          "title": "The Demographic Transition Model",
+          "scope": "both",
+          "skills": [
+            "1",
+            "3"
+          ],
+          "requires": [
+            "2.4"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.5#1",
+              "label": "Stages of the demographic transition",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.5#2",
+              "label": "Fitting a country to a stage using data",
+              "kind": "skill",
+              "skills": [
+                "3"
+              ],
+              "requires": [
+                "2.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.6",
+          "title": "Malthusian Theory",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "2.5"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.6#1",
+              "label": "Population growth outpacing food supply",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.6#2",
+              "label": "Critiques of Malthus and neo-Malthusian views",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "2.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.7",
+          "title": "Population Policies",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "2.6"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.7#1",
+              "label": "Pro-natalist and anti-natalist policies",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.7#2",
+              "label": "Evaluating China's one-child policy",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "2.7#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.8",
+          "title": "Women and Demographic Change",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "2.7"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.8#1",
+              "label": "Education and fertility decline",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.8#2",
+              "label": "Gender and migration patterns",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "2.8#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.9",
+          "title": "Aging Populations",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "2.8"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.9#1",
+              "label": "Aging and dependency challenges",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.9#2",
+              "label": "Policy responses to low fertility",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "2.9#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.10",
+          "title": "Causes of Migration",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "2.9"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.10#1",
+              "label": "Push and pull factors",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.10#2",
+              "label": "Gravity model and intervening opportunities",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "2.10#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.11",
+          "title": "Forced and Voluntary Migration",
+          "scope": "both",
+          "skills": [
+            "1",
+            "2"
+          ],
+          "requires": [
+            "2.10"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.11#1",
+              "label": "Refugees and internally displaced people",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.11#2",
+              "label": "Voluntary and forced migration compared",
+              "kind": "skill",
+              "skills": [
+                "2"
+              ],
+              "requires": [
+                "2.11#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.12",
+          "title": "Effects of Migration",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "2.11"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.12#1",
+              "label": "Remittances and brain drain",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.12#2",
+              "label": "Cultural and economic effects on sending and receiving places",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "2.12#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "3",
+      "title": "Cultural Patterns and Processes",
+      "officialClassPeriods": "~19–20",
+      "topics": [
+        {
+          "code": "3.1",
+          "title": "Introduction to Culture",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.1#1",
+              "label": "Folk and popular culture",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.1#2",
+              "label": "Cultural traits and complexes",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "3.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.2",
+          "title": "Cultural Landscapes",
+          "scope": "both",
+          "skills": [
+            "1",
+            "4"
+          ],
+          "requires": [
+            "3.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.2#1",
+              "label": "Elements of cultural landscapes",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.2#2",
+              "label": "Reading a landscape photograph for cultural clues",
+              "kind": "representation",
+              "skills": [
+                "4"
+              ],
+              "requires": [
+                "3.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.3",
+          "title": "Cultural Patterns",
+          "scope": "both",
+          "skills": [
+            "1",
+            "4"
+          ],
+          "requires": [
+            "3.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.3#1",
+              "label": "Language, religion and ethnicity patterns",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.3#2",
+              "label": "Mapping cultural regions",
+              "kind": "representation",
+              "skills": [
+                "4"
+              ],
+              "requires": [
+                "3.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.4",
+          "title": "Types of Diffusion",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "3.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.4#1",
+              "label": "Relocation, expansion and hierarchical diffusion",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.4#2",
+              "label": "Contagious and stimulus diffusion",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "3.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.5",
+          "title": "Historical Causes of Diffusion",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "3.4"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.5#1",
+              "label": "Trade routes and colonialism as diffusion pathways",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.5#2",
+              "label": "Early diffusion of religion and language",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "3.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.6",
+          "title": "Contemporary Causes of Diffusion",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "3.5"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.6#1",
+              "label": "Globalization and technology spreading culture",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.6#2",
+              "label": "Social media and diffusion speed",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "3.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.7",
+          "title": "Diffusion of Religion and Language",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "3.6"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.7#1",
+              "label": "Language families and branches",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.7#2",
+              "label": "Universalizing versus ethnic religions",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "3.7#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.8",
+          "title": "Effects of Diffusion",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "3.7"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.8#1",
+              "label": "Acculturation, assimilation and syncretism",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.8#2",
+              "label": "Cultural convergence versus divergence",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "3.8#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "4",
+      "title": "Political Patterns and Processes",
+      "officialClassPeriods": "~19–20",
+      "topics": [
+        {
+          "code": "4.1",
+          "title": "Introduction to Political Geography",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "4.1#1",
+              "label": "Types of political units and sovereignty",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.1#2",
+              "label": "States, nations and nation-states",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "4.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "4.2",
+          "title": "Political Processes",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "4.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "4.2#1",
+              "label": "Voting patterns and electoral geography",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.2#2",
+              "label": "Gerrymandering and redistricting",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "4.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "4.3",
+          "title": "Political Power and Territoriality",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "4.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "4.3#1",
+              "label": "Territoriality and control of space",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.3#2",
+              "label": "Geopolitical theories of power",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "4.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "4.4",
+          "title": "Defining Political Boundaries",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "4.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "4.4#1",
+              "label": "Physical and cultural boundaries",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.4#2",
+              "label": "Antecedent, subsequent and superimposed boundaries",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "4.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "4.5",
+          "title": "The Function of Political Boundaries",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "4.4"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "4.5#1",
+              "label": "Open and closed boundaries",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.5#2",
+              "label": "Boundary disputes and conflicts",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "4.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "4.6",
+          "title": "Internal Boundaries",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "4.5"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "4.6#1",
+              "label": "Voting districts and administrative units",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.6#2",
+              "label": "Spatial effects of internal boundaries",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "4.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "4.7",
+          "title": "Forms of Governance",
+          "scope": "both",
+          "skills": [
+            "1",
+            "2"
+          ],
+          "requires": [
+            "4.6"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "4.7#1",
+              "label": "Unitary and federal states",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.7#2",
+              "label": "Comparing governance forms",
+              "kind": "skill",
+              "skills": [
+                "2"
+              ],
+              "requires": [
+                "4.7#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "4.8",
+          "title": "Defining Devolutionary Factors",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "4.7"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "4.8#1",
+              "label": "Ethnic separatism and economic disparity",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.8#2",
+              "label": "Case studies of devolution",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "4.8#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "4.9",
+          "title": "Challenges to Sovereignty",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "4.8"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "4.9#1",
+              "label": "Supranational organizations and terrorism",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.9#2",
+              "label": "Economic and cultural challenges to the state",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "4.9#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "4.10",
+          "title": "Consequences of Centrifugal and Centripetal Forces",
+          "scope": "both",
+          "skills": [
+            "1",
+            "2"
+          ],
+          "requires": [
+            "4.9"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "4.10#1",
+              "label": "Forces that divide or unite states",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.10#2",
+              "label": "Classifying a force as centrifugal or centripetal",
+              "kind": "skill",
+              "skills": [
+                "2"
+              ],
+              "requires": [
+                "4.10#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "5",
+      "title": "Agriculture and Rural Land-Use Patterns and Processes",
+      "officialClassPeriods": "~19–20",
+      "topics": [
+        {
+          "code": "5.1",
+          "title": "Introduction to Agriculture",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.1#1",
+              "label": "Hearths and types of agriculture",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.1#2",
+              "label": "Subsistence and commercial farming",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "5.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.2",
+          "title": "Settlement Patterns and Survey Methods",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "5.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.2#1",
+              "label": "Clustered, dispersed and linear settlements",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.2#2",
+              "label": "Township and range and metes and bounds",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "5.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.3",
+          "title": "Agricultural Origins and Diffusions",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "5.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.3#1",
+              "label": "First agricultural revolution and domestication",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.3#2",
+              "label": "Diffusion of crops and animals",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "5.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.4",
+          "title": "The Second Agricultural Revolution",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "5.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.4#1",
+              "label": "Technology and urbanization effects",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.4#2",
+              "label": "Industrial farming methods",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "5.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.5",
+          "title": "The Green Revolution",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "5.4"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.5#1",
+              "label": "High-yield seeds and inputs",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.5#2",
+              "label": "Effects on food supply and environment",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "5.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.6",
+          "title": "Agricultural Production Regions",
+          "scope": "both",
+          "skills": [
+            "1",
+            "2"
+          ],
+          "requires": [
+            "5.5"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.6#1",
+              "label": "Climate and agricultural regions",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.6#2",
+              "label": "Matching regions to crops",
+              "kind": "skill",
+              "skills": [
+                "2"
+              ],
+              "requires": [
+                "5.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.7",
+          "title": "Spatial Organization of Agriculture",
+          "scope": "both",
+          "skills": [
+            "1",
+            "4"
+          ],
+          "requires": [
+            "5.6"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.7#1",
+              "label": "Land use around markets",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.7#2",
+              "label": "Rural land-use patterns",
+              "kind": "representation",
+              "skills": [
+                "4"
+              ],
+              "requires": [
+                "5.7#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.8",
+          "title": "Von Thünen Model",
+          "scope": "both",
+          "skills": [
+            "4",
+            "2"
+          ],
+          "requires": [
+            "5.7"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.8#1",
+              "label": "Concentric rings of agricultural land use",
+              "kind": "representation",
+              "skills": [
+                "4"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.8#2",
+              "label": "Applying the model to a scenario",
+              "kind": "skill",
+              "skills": [
+                "2"
+              ],
+              "requires": [
+                "5.8#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.9",
+          "title": "The Global System of Agriculture",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "5.8"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.9#1",
+              "label": "Agribusiness and global food chains",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.9#2",
+              "label": "Food miles and trade",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "5.9#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.10",
+          "title": "Consequences of Agricultural Practices",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "5.9"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.10#1",
+              "label": "Soil degradation and water use",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.10#2",
+              "label": "Land-use change and deforestation",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "5.10#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.11",
+          "title": "Challenges of Contemporary Agriculture",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "5.10"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.11#1",
+              "label": "Genetic modification and organic farming",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.11#2",
+              "label": "Food insecurity and food deserts",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "5.11#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.12",
+          "title": "Women in Agriculture",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "5.11"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.12#1",
+              "label": "Roles of women in farming systems",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.12#2",
+              "label": "Land ownership and access to resources",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "5.12#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "6",
+      "title": "Cities and Urban Land-Use Patterns and Processes",
+      "officialClassPeriods": "~19–20",
+      "topics": [
+        {
+          "code": "6.1",
+          "title": "The Origin and Influences of Urbanization",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.1#1",
+              "label": "Early urban hearths",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.1#2",
+              "label": "Push and pull factors for urbanization",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "6.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.2",
+          "title": "Cities Across the World",
+          "scope": "both",
+          "skills": [
+            "1",
+            "2"
+          ],
+          "requires": [
+            "6.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.2#1",
+              "label": "Megacities and world cities",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.2#2",
+              "label": "Comparing cities in developed and developing regions",
+              "kind": "skill",
+              "skills": [
+                "2"
+              ],
+              "requires": [
+                "6.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.3",
+          "title": "Cities and Globalization",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "6.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.3#1",
+              "label": "Global cities and economic networks",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.3#2",
+              "label": "Urban hierarchy",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "6.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.4",
+          "title": "The Size and Distribution of Cities",
+          "scope": "both",
+          "skills": [
+            "1",
+            "4"
+          ],
+          "requires": [
+            "6.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.4#1",
+              "label": "Rank-size rule and primate cities",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.4#2",
+              "label": "Central place theory",
+              "kind": "representation",
+              "skills": [
+                "4"
+              ],
+              "requires": [
+                "6.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.5",
+          "title": "The Internal Structure of Cities",
+          "scope": "both",
+          "skills": [
+            "4",
+            "2"
+          ],
+          "requires": [
+            "6.4"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.5#1",
+              "label": "Concentric zone, sector and multiple nuclei models",
+              "kind": "representation",
+              "skills": [
+                "4"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.5#2",
+              "label": "Applying a model to a city map",
+              "kind": "skill",
+              "skills": [
+                "2"
+              ],
+              "requires": [
+                "6.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.6",
+          "title": "Density and Land Use",
+          "scope": "both",
+          "skills": [
+            "3",
+            "1"
+          ],
+          "requires": [
+            "6.5"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.6#1",
+              "label": "Urban density gradients",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.6#2",
+              "label": "Zoning and land-use conflicts",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "6.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.7",
+          "title": "Infrastructure",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "6.6"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.7#1",
+              "label": "Transportation, utilities and housing",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.7#2",
+              "label": "Infrastructure and urban growth",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "6.7#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.8",
+          "title": "Urban Sustainability",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "6.7"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.8#1",
+              "label": "New urbanism and smart growth",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.8#2",
+              "label": "Sustainable city planning",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "6.8#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.9",
+          "title": "Urban Data",
+          "scope": "both",
+          "skills": [
+            "3"
+          ],
+          "requires": [
+            "6.8"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.9#1",
+              "label": "Using census data to describe urban areas",
+              "kind": "skill",
+              "skills": [
+                "3"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.9#2",
+              "label": "Reading urban data maps and tables",
+              "kind": "representation",
+              "skills": [
+                "3"
+              ],
+              "requires": [
+                "6.9#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.10",
+          "title": "Challenges of Urban Changes",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "6.9"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.10#1",
+              "label": "Gentrification and suburbanization",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.10#2",
+              "label": "Redlining and segregation",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "6.10#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.11",
+          "title": "Challenges of Urban Sustainability",
+          "scope": "both",
+          "skills": [
+            "1",
+            "2"
+          ],
+          "requires": [
+            "6.10"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.11#1",
+              "label": "Sprawl, pollution and congestion",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.11#2",
+              "label": "Evaluating urban policy solutions",
+              "kind": "skill",
+              "skills": [
+                "2"
+              ],
+              "requires": [
+                "6.11#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "7",
+      "title": "Industrial and Economic Development Patterns and Processes",
+      "officialClassPeriods": "~19–20",
+      "topics": [
+        {
+          "code": "7.1",
+          "title": "The Industrial Revolution",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "7.1#1",
+              "label": "Origins and diffusion of industrialization",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.1#2",
+              "label": "Locational factors for early industry",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "7.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "7.2",
+          "title": "Economic Sectors and Patterns",
+          "scope": "both",
+          "skills": [
+            "1",
+            "2"
+          ],
+          "requires": [
+            "7.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "7.2#1",
+              "label": "Primary, secondary, tertiary and quaternary sectors",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.2#2",
+              "label": "Sector shifts as economies change",
+              "kind": "skill",
+              "skills": [
+                "2"
+              ],
+              "requires": [
+                "7.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "7.3",
+          "title": "Measures of Development",
+          "scope": "both",
+          "skills": [
+            "3"
+          ],
+          "requires": [
+            "7.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "7.3#1",
+              "label": "HDI, GDP per capita and gender inequality indices",
+              "kind": "concept",
+              "skills": [
+                "3"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.3#2",
+              "label": "Interpreting development indicator tables",
+              "kind": "skill",
+              "skills": [
+                "3"
+              ],
+              "requires": [
+                "7.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "7.4",
+          "title": "Women and Economic Development",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "7.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "7.4#1",
+              "label": "Gender gaps in work and education",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.4#2",
+              "label": "Microloans and empowerment",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "7.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "7.5",
+          "title": "Theories of Development",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "7.4"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "7.5#1",
+              "label": "Rostow's stages of growth",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.5#2",
+              "label": "Dependency theory and world systems theory",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "7.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "7.6",
+          "title": "Trade and the World Economy",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "7.5"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "7.6#1",
+              "label": "Comparative advantage and trade blocs",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.6#2",
+              "label": "Globalization and outsourcing",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "7.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "7.7",
+          "title": "Changes as a Result of the Industrial and Postindustrial Economy",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "7.6"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "7.7#1",
+              "label": "Deindustrialization and the service economy",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.7#2",
+              "label": "Special economic zones and maquiladoras",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "7.7#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "7.8",
+          "title": "Sustainable Development",
+          "scope": "both",
+          "skills": [
+            "1"
+          ],
+          "requires": [
+            "7.7"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "7.8#1",
+              "label": "Balancing growth and environmental protection",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.8#2",
+              "label": "Ecotourism and renewable development",
+              "kind": "concept",
+              "skills": [
+                "1"
+              ],
+              "requires": [
+                "7.8#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

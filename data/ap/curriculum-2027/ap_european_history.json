@@ -1,0 +1,3410 @@
+{
+  "schemaVersion": 1,
+  "subject": {
+    "apCode": "ap_european_history",
+    "name": "AP European History",
+    "family": "european_history",
+    "edition": "ced-2027",
+    "cedVersion": "AP European History CED (Course Framework V.1, (c)2026; 2027 exam: fully digital, 55 MC/55 min, 3 SAQ/40 min, DBQ 60 min incl. 15 min reading + LEQ 40 min)",
+    "examYear": 2027,
+    "sourceUrl": "https://apcentral.collegeboard.org/media/pdf/ap-european-history-course-and-exam-description.pdf",
+    "officialTopicCodes": true,
+    "designNotes": "9 units (c. 1450 to present), each weighted 10-15% on MC, with topic codes and class periods from the posted CED (read 2026-10-20). Exam: fully digital; Section I Part A 55 MC, 55 min, 40%; Part B 3 SAQ, 40 min, 20% (secondary source, primary source, non-text source); Section II DBQ 25% (60 min recommended incl. 15 min reading, 7 documents) and LEQ 15% (40 min). AP Central announces updated SAQ/LEQ question formats starting May 2027 without changing course content or section timing; the specific new SAQ/LEQ formats were not described on the pages read and should be rechecked in the AP History Exam Updates. Skills are the history skills 1.A-6.D (same codes and wording as the AP U.S. and World History files). Topic titles for 2.6, 3.3/3.4, 4.7, 6.8, 7.4, 9.10 and a few others are close paraphrases of truncated CED text. Per-topic and per-sub-keyword skills are an ALTON editorial mapping (one skill per sub-keyword chosen by kind and content), not the CED's per-topic suggested skills. Sub-keywords, kinds, requires and estLessons are ALTON editorial designs, not CED content. Topic titles are the CED's where read from the CED course-at-a-glance; where the extracted text was truncated they are close paraphrases."
+  },
+  "skills": [
+    {
+      "code": "1.A",
+      "category": "Skill 1: Developments and Processes",
+      "label": "Identify a historical concept, development, or process"
+    },
+    {
+      "code": "1.B",
+      "category": "Skill 1: Developments and Processes",
+      "label": "Explain a historical concept, development, or process"
+    },
+    {
+      "code": "2.A",
+      "category": "Skill 2: Sourcing and Situation",
+      "label": "Identify a source's point of view, purpose, historical situation, and/or audience"
+    },
+    {
+      "code": "2.B",
+      "category": "Skill 2: Sourcing and Situation",
+      "label": "Explain the point of view, purpose, historical situation, and/or audience of a source"
+    },
+    {
+      "code": "2.C",
+      "category": "Skill 2: Sourcing and Situation",
+      "label": "Explain the significance of a source's point of view, purpose, historical situation, and/or audience, including how these might limit its use"
+    },
+    {
+      "code": "3.A",
+      "category": "Skill 3: Claims and Evidence in Sources",
+      "label": "Identify and describe a claim and/or argument in a text-based or non-text-based source"
+    },
+    {
+      "code": "3.B",
+      "category": "Skill 3: Claims and Evidence in Sources",
+      "label": "Identify the evidence used in a source to support an argument"
+    },
+    {
+      "code": "3.C",
+      "category": "Skill 3: Claims and Evidence in Sources",
+      "label": "Compare the arguments or main ideas of two sources"
+    },
+    {
+      "code": "3.D",
+      "category": "Skill 3: Claims and Evidence in Sources",
+      "label": "Explain how claims or evidence support, modify, or refute a source's argument"
+    },
+    {
+      "code": "4.A",
+      "category": "Skill 4: Contextualization",
+      "label": "Identify and describe a historical context for a specific historical development or process"
+    },
+    {
+      "code": "4.B",
+      "category": "Skill 4: Contextualization",
+      "label": "Explain how a specific historical development or process is situated within a broader historical context"
+    },
+    {
+      "code": "5.A",
+      "category": "Skill 5: Making Connections",
+      "label": "Identify patterns among or connections between historical developments and processes"
+    },
+    {
+      "code": "5.B",
+      "category": "Skill 5: Making Connections",
+      "label": "Explain how a historical development or process relates to another historical development or process"
+    },
+    {
+      "code": "6.A",
+      "category": "Skill 6: Argumentation",
+      "label": "Make a historically defensible claim"
+    },
+    {
+      "code": "6.B",
+      "category": "Skill 6: Argumentation",
+      "label": "Support an argument using specific and relevant evidence"
+    },
+    {
+      "code": "6.C",
+      "category": "Skill 6: Argumentation",
+      "label": "Use historical reasoning to explain relationships among pieces of historical evidence"
+    },
+    {
+      "code": "6.D",
+      "category": "Skill 6: Argumentation",
+      "label": "Corroborate, qualify, or modify an argument using diverse and alternative evidence to develop a complex argument"
+    }
+  ],
+  "weights": [
+    {
+      "axis": "unit",
+      "code": "1",
+      "section": "mc",
+      "min": 10,
+      "max": 15,
+      "source": "AP European History CED (Course Framework V.1, (c)2026), Exam Weighting by unit"
+    },
+    {
+      "axis": "unit",
+      "code": "2",
+      "section": "mc",
+      "min": 10,
+      "max": 15,
+      "source": "AP European History CED (Course Framework V.1, (c)2026), Exam Weighting by unit"
+    },
+    {
+      "axis": "unit",
+      "code": "3",
+      "section": "mc",
+      "min": 10,
+      "max": 15,
+      "source": "AP European History CED (Course Framework V.1, (c)2026), Exam Weighting by unit"
+    },
+    {
+      "axis": "unit",
+      "code": "4",
+      "section": "mc",
+      "min": 10,
+      "max": 15,
+      "source": "AP European History CED (Course Framework V.1, (c)2026), Exam Weighting by unit"
+    },
+    {
+      "axis": "unit",
+      "code": "5",
+      "section": "mc",
+      "min": 10,
+      "max": 15,
+      "source": "AP European History CED (Course Framework V.1, (c)2026), Exam Weighting by unit"
+    },
+    {
+      "axis": "unit",
+      "code": "6",
+      "section": "mc",
+      "min": 10,
+      "max": 15,
+      "source": "AP European History CED (Course Framework V.1, (c)2026), Exam Weighting by unit"
+    },
+    {
+      "axis": "unit",
+      "code": "7",
+      "section": "mc",
+      "min": 10,
+      "max": 15,
+      "source": "AP European History CED (Course Framework V.1, (c)2026), Exam Weighting by unit"
+    },
+    {
+      "axis": "unit",
+      "code": "8",
+      "section": "mc",
+      "min": 10,
+      "max": 15,
+      "source": "AP European History CED (Course Framework V.1, (c)2026), Exam Weighting by unit"
+    },
+    {
+      "axis": "unit",
+      "code": "9",
+      "section": "mc",
+      "min": 10,
+      "max": 15,
+      "source": "AP European History CED (Course Framework V.1, (c)2026), Exam Weighting by unit"
+    }
+  ],
+  "units": [
+    {
+      "code": "1",
+      "title": "Renaissance and Exploration",
+      "officialClassPeriods": "~15",
+      "topics": [
+        {
+          "code": "1.1",
+          "title": "Contextualizing Renaissance and Discovery",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "5.B"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.1#1",
+              "label": "Late medieval Europe on the eve of the Renaissance",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.1#2",
+              "label": "Placing Renaissance developments in context",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [
+                "1.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.2",
+          "title": "Italian Renaissance",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "1.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.2#1",
+              "label": "Humanism and civic life in Italian city-states",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.2#2",
+              "label": "Patronage and artistic innovation",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "1.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.3",
+          "title": "Northern Renaissance",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "5.B"
+          ],
+          "requires": [
+            "1.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.3#1",
+              "label": "Christian humanism and Erasmus",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.3#2",
+              "label": "Northern versus Italian Renaissance contrasts",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [
+                "1.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.4",
+          "title": "Printing",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "1.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.4#1",
+              "label": "Printing press and spread of ideas",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.4#2",
+              "label": "Effects of printing on literacy and religion",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "1.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.5",
+          "title": "New Monarchies",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "1.4"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.5#1",
+              "label": "Centralization under Spain, France and England",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.5#2",
+              "label": "Tools of royal consolidation",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "1.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.6",
+          "title": "Technological Advances",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "1.5"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.6#1",
+              "label": "Navigation and shipbuilding advances",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.6#2",
+              "label": "Gunpowder and military change",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "1.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.7",
+          "title": "Rivals on the World Stage",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "5.B"
+          ],
+          "requires": [
+            "1.6"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.7#1",
+              "label": "Competition among Europe, the Ottomans and others",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.7#2",
+              "label": "Comparing early rival powers",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [
+                "1.7#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.8",
+          "title": "Colonial Expansion",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "5.B"
+          ],
+          "requires": [
+            "1.7"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.8#1",
+              "label": "Motives for European colonial expansion",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.8#2",
+              "label": "Portuguese, Spanish and later empires compared",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [
+                "1.8#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.9",
+          "title": "The Slave Trade",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "1.8"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.9#1",
+              "label": "Atlantic slave trade and European economies",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.9#2",
+              "label": "Human and economic effects of slavery",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "1.9#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.10",
+          "title": "The Commercial Revolution",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "1.9"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.10#1",
+              "label": "Joint-stock companies and mercantilism",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.10#2",
+              "label": "Price revolution and trade expansion",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "1.10#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.11",
+          "title": "Causation in the Age of Discovery",
+          "scope": "both",
+          "skills": [
+            "5.B"
+          ],
+          "requires": [
+            "1.10"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "1.11#1",
+              "label": "Causes of European overseas expansion",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.11#2",
+              "label": "Short- and long-term effects of exploration",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [
+                "1.11#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "2",
+      "title": "Age of Reformation",
+      "officialClassPeriods": "~15",
+      "topics": [
+        {
+          "code": "2.1",
+          "title": "Contextualizing 16th- and 17th-Century Challenges and Developments",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "5.B"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.1#1",
+              "label": "Religious and political tensions before the Reformation",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.1#2",
+              "label": "Church corruption and calls for reform",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [
+                "2.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.2",
+          "title": "Luther and the Protestant Reformation",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "2.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.2#1",
+              "label": "Luther's Ninety-five Theses and core beliefs",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.2#2",
+              "label": "Spread of Lutheranism",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "2.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.3",
+          "title": "Protestant Reform Continues",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "5.B"
+          ],
+          "requires": [
+            "2.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.3#1",
+              "label": "Calvinism, Anglicanism and Anabaptists",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.3#2",
+              "label": "Comparing Protestant movements",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [
+                "2.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.4",
+          "title": "Wars of Religion",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "2.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.4#1",
+              "label": "French Wars of Religion and the Edict of Nantes",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.4#2",
+              "label": "Thirty Years' War and the Peace of Westphalia",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "2.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.5",
+          "title": "The Catholic Reformation",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "2.4"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.5#1",
+              "label": "Council of Trent and the Jesuits",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.5#2",
+              "label": "Counter-Reformation tools and reforms",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "2.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.6",
+          "title": "16th-Century Society and Politics",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "2.5"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.6#1",
+              "label": "Social hierarchy and daily life",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.6#2",
+              "label": "Witch hunts and social tension",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "2.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.7",
+          "title": "Art of the 16th Century: Mannerism and Baroque Art",
+          "scope": "both",
+          "skills": [
+            "3.A",
+            "1.B"
+          ],
+          "requires": [
+            "2.6"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.7#1",
+              "label": "Features of Mannerism and Baroque art",
+              "kind": "representation",
+              "skills": [
+                "3.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.7#2",
+              "label": "Art as religious and political expression",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "2.7#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.8",
+          "title": "Causation in the Age of Reformation",
+          "scope": "both",
+          "skills": [
+            "5.B"
+          ],
+          "requires": [
+            "2.7"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "2.8#1",
+              "label": "Causes of the Reformation",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.8#2",
+              "label": "Political and social effects of religious division",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [
+                "2.8#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "3",
+      "title": "Absolutism and Constitutionalism",
+      "officialClassPeriods": "~15",
+      "topics": [
+        {
+          "code": "3.1",
+          "title": "Contextualizing Absolutism and Constitutionalism",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "5.B"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.1#1",
+              "label": "Crisis and state-building in the 17th century",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.1#2",
+              "label": "Placing absolutism in context",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [
+                "3.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.2",
+          "title": "The English Civil War",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "3.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.2#1",
+              "label": "Causes of conflict between king and Parliament",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.2#2",
+              "label": "Cromwell and the Restoration",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "3.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.3",
+          "title": "Continuities and Changes to Economic Development",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "3.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.3#1",
+              "label": "Persistence of agrarian economies",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.3#2",
+              "label": "Changes in trade and manufacture",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "3.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.4",
+          "title": "Economic Development in the Age of Absolutism",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "3.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.4#1",
+              "label": "Mercantilism and state economic policy",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.4#2",
+              "label": "Colbert and French economic management",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "3.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.5",
+          "title": "The Dutch Golden Age",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "3.4"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.5#1",
+              "label": "Dutch republic, commerce and tolerance",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.5#2",
+              "label": "Dutch finance and trading companies",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "3.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.6",
+          "title": "Balance of Power",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "3.5"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.6#1",
+              "label": "Diplomacy and shifting alliances",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.6#2",
+              "label": "Wars among Europe's great powers",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "3.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.7",
+          "title": "Absolutist Approaches to Power",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "3.6"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.7#1",
+              "label": "Louis XIV and Versailles",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.7#2",
+              "label": "Peter the Great and Russian absolutism",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "3.7#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.8",
+          "title": "Comparison in the Age of Absolutism and Constitutionalism",
+          "scope": "both",
+          "skills": [
+            "5.B"
+          ],
+          "requires": [
+            "3.7"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "3.8#1",
+              "label": "Comparing English and French government",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.8#2",
+              "label": "Constitutional monarchy versus absolutism",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [
+                "3.8#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "4",
+      "title": "Scientific, Philosophical, and Political Developments",
+      "officialClassPeriods": "~15",
+      "topics": [
+        {
+          "code": "4.1",
+          "title": "Contextualizing the Scientific, Philosophical, and Political Developments",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "5.B"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "4.1#1",
+              "label": "Intellectual background of the Scientific Revolution",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.1#2",
+              "label": "Placing new ideas in context",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [
+                "4.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "4.2",
+          "title": "The Scientific Revolution",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "4.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "4.2#1",
+              "label": "Copernicus, Galileo and Newton",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.2#2",
+              "label": "Scientific method and new world views",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "4.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "4.3",
+          "title": "The Enlightenment",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "4.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "4.3#1",
+              "label": "Locke, Voltaire and Rousseau",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.3#2",
+              "label": "Enlightenment critiques of church and state",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "4.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "4.4",
+          "title": "18th-Century Society and Demographics",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "4.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "4.4#1",
+              "label": "Population growth and agricultural change",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.4#2",
+              "label": "Social classes and family life",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "4.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "4.5",
+          "title": "18th-Century Culture and Arts",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "3.A"
+          ],
+          "requires": [
+            "4.4"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "4.5#1",
+              "label": "Salons, coffeehouses and the public sphere",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.5#2",
+              "label": "Rococo, neoclassical and other styles",
+              "kind": "representation",
+              "skills": [
+                "3.A"
+              ],
+              "requires": [
+                "4.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "4.6",
+          "title": "Enlightened and Other Approaches to Power",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "5.B"
+          ],
+          "requires": [
+            "4.5"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "4.6#1",
+              "label": "Enlightened absolutism under Frederick, Catherine and Joseph",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.6#2",
+              "label": "Limits of enlightened reform",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [
+                "4.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "4.7",
+          "title": "Causation in the Age of Scientific Revolution and the Enlightenment",
+          "scope": "both",
+          "skills": [
+            "5.B"
+          ],
+          "requires": [
+            "4.6"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "4.7#1",
+              "label": "Causes of the Enlightenment",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.7#2",
+              "label": "Effects on political thought and reform",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [
+                "4.7#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "5",
+      "title": "Conflict, Crisis, and Reaction in the Late 18th Century",
+      "officialClassPeriods": "~15",
+      "topics": [
+        {
+          "code": "5.1",
+          "title": "Contextualizing Conflict, Crisis, and Reaction in the Late 18th Century",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "5.B"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.1#1",
+              "label": "Strains on the old order",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.1#2",
+              "label": "Placing revolutionary change in context",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [
+                "5.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.2",
+          "title": "The Rise of Global Markets",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "5.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.2#1",
+              "label": "Global trade networks and finance",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.2#2",
+              "label": "Consumer culture and early industry",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "5.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.3",
+          "title": "Britain's Ascendency",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "5.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.3#1",
+              "label": "British naval and financial power",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.3#2",
+              "label": "Seven Years' War and colonial rivalry",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "5.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.4",
+          "title": "The French Revolution",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "5.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.4#1",
+              "label": "Causes of the French Revolution",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.4#2",
+              "label": "National Assembly and the Declaration of the Rights of Man",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "5.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.5",
+          "title": "The French Revolution's Radicalization",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "5.4"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.5#1",
+              "label": "Jacobins and the Reign of Terror",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.5#2",
+              "label": "Radical reforms and their opposition",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "5.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.6",
+          "title": "Napoleon's Rise, Dominance, and Defeat",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "5.5"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.6#1",
+              "label": "Napoleonic reforms and the Civil Code",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.6#2",
+              "label": "Continental System and the Russian campaign",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "5.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.7",
+          "title": "The Congress of Vienna",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "5.6"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.7#1",
+              "label": "Metternich and the balance of power",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.7#2",
+              "label": "Legitimacy and the settlement of 1815",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "5.7#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.8",
+          "title": "Romanticism",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "3.A"
+          ],
+          "requires": [
+            "5.7"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.8#1",
+              "label": "Romantic reaction against reason",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.8#2",
+              "label": "Romantic art, music and literature",
+              "kind": "representation",
+              "skills": [
+                "3.A"
+              ],
+              "requires": [
+                "5.8#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.9",
+          "title": "Continuity and Change in 18th-Century States",
+          "scope": "both",
+          "skills": [
+            "5.B"
+          ],
+          "requires": [
+            "5.8"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "5.9#1",
+              "label": "Persistence of monarchy and aristocracy",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.9#2",
+              "label": "Change from revolutionary ideas",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [
+                "5.9#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "6",
+      "title": "Industrialization and Its Effects",
+      "officialClassPeriods": "~15",
+      "topics": [
+        {
+          "code": "6.1",
+          "title": "Contextualizing Industrialization and Its Effects",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "5.B"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.1#1",
+              "label": "Preconditions for industrialization in Britain",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.1#2",
+              "label": "Placing industry in context",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [
+                "6.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.2",
+          "title": "The Spread of Industry Throughout Europe",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "6.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.2#1",
+              "label": "Diffusion of industry to the continent",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.2#2",
+              "label": "Railways and state support for industry",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "6.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.3",
+          "title": "Second Wave Industrialization and Its Effects",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "6.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.3#1",
+              "label": "Steel, chemicals and electricity",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.3#2",
+              "label": "Rise of large corporations",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "6.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.4",
+          "title": "Social Effects of Industrialization",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "6.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.4#1",
+              "label": "Urbanization and working-class life",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.4#2",
+              "label": "Changing family roles and gender",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "6.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.5",
+          "title": "The Concert of Europe and European Conservatism",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "6.4"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.5#1",
+              "label": "Concert of Europe diplomacy",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.5#2",
+              "label": "Conservative resistance to change",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "6.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.6",
+          "title": "Reactions and Revolutions",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "6.5"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.6#1",
+              "label": "Revolutions of 1830 and 1848",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.6#2",
+              "label": "Government responses to unrest",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "6.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.7",
+          "title": "Ideologies of Change and Reform Movements",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "6.6"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.7#1",
+              "label": "Liberalism, socialism and Marxism",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.7#2",
+              "label": "Reform movements and abolition",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "6.7#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.8",
+          "title": "19th-Century Culture and Arts",
+          "scope": "both",
+          "skills": [
+            "3.A",
+            "1.B"
+          ],
+          "requires": [
+            "6.7"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.8#1",
+              "label": "Realism and new artistic movements",
+              "kind": "representation",
+              "skills": [
+                "3.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.8#2",
+              "label": "Culture and social change",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "6.8#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.9",
+          "title": "Institutional Responses and Reform",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "5.B"
+          ],
+          "requires": [
+            "6.8"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.9#1",
+              "label": "Public health, education and labor law",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.9#2",
+              "label": "State responses to industrial problems",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [
+                "6.9#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.10",
+          "title": "Causation in the Age of Industrialization",
+          "scope": "both",
+          "skills": [
+            "5.B"
+          ],
+          "requires": [
+            "6.9"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "6.10#1",
+              "label": "Causes of industrialization",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.10#2",
+              "label": "Long-term consequences of industrial change",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [
+                "6.10#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "7",
+      "title": "19th-Century Perspectives and Political Developments",
+      "officialClassPeriods": "~15",
+      "topics": [
+        {
+          "code": "7.1",
+          "title": "Contextualizing 19th-Century Perspectives and Political Developments",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "5.B"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "7.1#1",
+              "label": "Political and intellectual climate after 1848",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.1#2",
+              "label": "Placing nationalism and science in context",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [
+                "7.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "7.2",
+          "title": "Nationalism",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "7.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "7.2#1",
+              "label": "Cultural and political nationalism",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.2#2",
+              "label": "Nationalism as a unifying and dividing force",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "7.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "7.3",
+          "title": "National Unification and Diplomatic Realignment",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "7.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "7.3#1",
+              "label": "Italian and German unification",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.3#2",
+              "label": "Bismarck and realpolitik",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "7.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "7.4",
+          "title": "Darwinism, Social Darwinism, and Science",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "7.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "7.4#1",
+              "label": "Darwin and evolutionary theory",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.4#2",
+              "label": "Social Darwinism and its uses",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "7.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "7.5",
+          "title": "The Age of Progress",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "7.4"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "7.5#1",
+              "label": "Faith in science and technology",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.5#2",
+              "label": "Medical and technological advances",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "7.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "7.6",
+          "title": "New Imperialism: Motivations and Methods",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "7.5"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "7.6#1",
+              "label": "Economic and strategic motives for imperialism",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.6#2",
+              "label": "Methods of control in Africa and Asia",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "7.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "7.7",
+          "title": "Imperialism's Global Effects",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "7.6"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "7.7#1",
+              "label": "Effects of imperial rule on colonized peoples",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.7#2",
+              "label": "Imperial rivalry and tension among European states",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "7.7#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "7.8",
+          "title": "Late 19th-Century Culture and Arts",
+          "scope": "both",
+          "skills": [
+            "3.A",
+            "1.B"
+          ],
+          "requires": [
+            "7.7"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "7.8#1",
+              "label": "Late 19th-century art and intellectual trends",
+              "kind": "representation",
+              "skills": [
+                "3.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.8#2",
+              "label": "Culture as political expression",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "7.8#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "7.9",
+          "title": "Causation in 19th-Century Perspectives and Political Developments",
+          "scope": "both",
+          "skills": [
+            "5.B"
+          ],
+          "requires": [
+            "7.8"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "7.9#1",
+              "label": "Causes of nationalism and imperialism",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.9#2",
+              "label": "Effects on international relations",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [
+                "7.9#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "8",
+      "title": "20th-Century Global Conflicts",
+      "officialClassPeriods": "~15",
+      "topics": [
+        {
+          "code": "8.1",
+          "title": "Contextualizing 20th-Century Global Conflicts",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "5.B"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "8.1#1",
+              "label": "Pre-war tensions in Europe",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.1#2",
+              "label": "Placing global conflict in context",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [
+                "8.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.2",
+          "title": "World War I",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "8.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "8.2#1",
+              "label": "Causes of World War I",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.2#2",
+              "label": "Total war and the home front",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "8.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.3",
+          "title": "The Russian Revolution",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "8.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "8.3#1",
+              "label": "Causes of the 1917 revolutions",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.3#2",
+              "label": "Bolshevik rise to power",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "8.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.4",
+          "title": "Versailles Conference and Peace Settlement",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "8.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "8.4#1",
+              "label": "Terms of the Treaty of Versailles",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.4#2",
+              "label": "Consequences of the settlement for Europe",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "8.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.5",
+          "title": "Global Economic Crisis",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "8.4"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "8.5#1",
+              "label": "Causes of the Great Depression",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.5#2",
+              "label": "Political responses to economic crisis",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "8.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.6",
+          "title": "Fascism and Totalitarianism",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "8.5"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "8.6#1",
+              "label": "Features of fascist and totalitarian states",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.6#2",
+              "label": "Rise of Mussolini and Hitler",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "8.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.7",
+          "title": "Europe During the Interwar Period",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "8.6"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "8.7#1",
+              "label": "Weimar Republic and political instability",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.7#2",
+              "label": "Appeasement and the road to war",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "8.7#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.8",
+          "title": "World War II",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "8.7"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "8.8#1",
+              "label": "Causes and course of World War II",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.8#2",
+              "label": "Home fronts and total war",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "8.8#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.9",
+          "title": "The Holocaust",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "8.8"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "8.9#1",
+              "label": "Nazi persecution and genocide",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.9#2",
+              "label": "Responses and Nuremberg trials",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "8.9#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.10",
+          "title": "20th-Century Cultural, Intellectual, and Artistic Developments",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "8.9"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "8.10#1",
+              "label": "Modernism and existentialism",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.10#2",
+              "label": "Disillusionment after World War I",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "8.10#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.11",
+          "title": "Continuity and Change in the Age of Global Conflict",
+          "scope": "both",
+          "skills": [
+            "5.B"
+          ],
+          "requires": [
+            "8.10"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "8.11#1",
+              "label": "Continuities in European politics across wars",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.11#2",
+              "label": "Changes in warfare and society",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [
+                "8.11#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "9",
+      "title": "Cold War and Contemporary Europe",
+      "officialClassPeriods": "~17",
+      "topics": [
+        {
+          "code": "9.1",
+          "title": "Contextualizing Cold War and Contemporary Europe",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "5.B"
+          ],
+          "requires": [],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "9.1#1",
+              "label": "Europe at the end of World War II",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.1#2",
+              "label": "Placing postwar Europe in context",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [
+                "9.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "9.2",
+          "title": "Rebuilding Europe",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "9.1"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "9.2#1",
+              "label": "Marshall Plan and economic recovery",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.2#2",
+              "label": "Postwar social welfare states",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "9.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "9.3",
+          "title": "The Cold War",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "9.2"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "9.3#1",
+              "label": "Origins of the Cold War and containment",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.3#2",
+              "label": "Divided Germany and NATO and Warsaw Pact",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "9.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "9.4",
+          "title": "Two Superpowers Emerge",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "9.3"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "9.4#1",
+              "label": "US and Soviet influence in Europe",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.4#2",
+              "label": "Arms race and proxy conflicts",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "9.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "9.5",
+          "title": "Postwar Nationalism, Ethnic Conflict, and Unification",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "9.4"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "9.5#1",
+              "label": "Nationalism in postwar Europe",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.5#2",
+              "label": "European integration from the ECSC to the EU",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "9.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "9.6",
+          "title": "Contemporary Western Democracies",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "9.5"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "9.6#1",
+              "label": "Political trends in Western Europe",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.6#2",
+              "label": "Welfare state challenges",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "9.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "9.7",
+          "title": "The Fall of Communism",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "9.6"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "9.7#1",
+              "label": "Soviet reform and the revolutions of 1989",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.7#2",
+              "label": "Collapse of the Soviet Union",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "9.7#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "9.8",
+          "title": "20th-Century Feminism",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "9.7"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "9.8#1",
+              "label": "Suffrage and postwar feminist movements",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.8#2",
+              "label": "Changing roles of women",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "9.8#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "9.9",
+          "title": "Decolonization",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "9.8"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "9.9#1",
+              "label": "Independence movements and the end of empire",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.9#2",
+              "label": "Postcolonial migration to Europe",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "9.9#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "9.10",
+          "title": "Terrorism and Security",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "9.9"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "9.10#1",
+              "label": "Terrorism in contemporary Europe",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.10#2",
+              "label": "Security responses and civil liberties",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "9.10#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "9.11",
+          "title": "Migration and Immigration",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "9.10"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "9.11#1",
+              "label": "Postwar migration to Europe",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.11#2",
+              "label": "Immigration debates and policy",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "9.11#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "9.12",
+          "title": "Technology",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "9.11"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "9.12#1",
+              "label": "Technological change in postwar Europe",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.12#2",
+              "label": "Science and communication advances",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "9.12#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "9.13",
+          "title": "Globalization",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "9.12"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "9.13#1",
+              "label": "Economic globalization and Europe",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.13#2",
+              "label": "Globalization and the European Union",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "9.13#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "9.14",
+          "title": "Culture, Arts, and Demographic Trends",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "9.13"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "9.14#1",
+              "label": "Postwar culture and popular media",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.14#2",
+              "label": "Aging populations and demographic shift",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "9.14#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "9.15",
+          "title": "Continuity and Change in the Cold War and Contemporary Europe",
+          "scope": "both",
+          "skills": [
+            "5.B"
+          ],
+          "requires": [
+            "9.14"
+          ],
+          "estLessons": 1.0,
+          "subKeywords": [
+            {
+              "code": "9.15#1",
+              "label": "Continuities across the Cold War era",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "9.15#2",
+              "label": "Changes since 1945",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [
+                "9.15#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

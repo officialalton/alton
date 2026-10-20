@@ -1,6 +1,7 @@
 // AP Macroeconomics 풀 모의고사 초안 세트 계획(순수 함수). assemble-draft.ts 의 AB/BC 경로와 별개로, 매크로의 구조(MC 60 단독 5지선다 / FRQ 3 = 긴 1 + 짧은 2)를 독립 검증한다.
 // 보고서 형식(macro-assign.ts): mcA = MC 후보 키(단원 오름차순), frqA = FRQ 키(긴 1 → 짧은 2). 문항 한 개 = 후보 한 개(ap_candidate_problems 1건).
 // 스킬 범주(1·2·3)·단원·수치 분석 비중은 차단 조건이다(공식 CED 범위, docs/ap/macroeconomics-facts.md): 범위 밖이면 저장하지 않는다.
+import { sortFrqByOfficialOrder } from "../ap-exam/official-order";
 import { apSectionLayout } from "../ap-exam/layouts";
 import { MACRO_FRQ_TYPES, verifyMacroFullComposition, type MacroSetItem } from "../ap-exam/macro-rules";
 import type { DraftPlan, FullSetUsage, PoolRow, SetKeys } from "./assemble-draft";
@@ -15,7 +16,7 @@ export function planMacroDraftSet(o: {
   setId: string; keys: SetKeys; hasVirtual: boolean; name: string; pool: PoolRow[]; existingFullSets: FullSetUsage[]; stock?: MacroItem[]; subject: string;
 }): DraftPlan {
   const problems: string[] = [];
-  const mcKeys = [...(o.keys.mcA ?? []), ...(o.keys.mcB ?? [])]; const frqKeys = [...(o.keys.frqA ?? []), ...(o.keys.frqB ?? [])];
+  const mcKeys = [...(o.keys.mcA ?? []), ...(o.keys.mcB ?? [])]; let frqKeys = [...(o.keys.frqA ?? []), ...(o.keys.frqB ?? [])];
   const all = [...mcKeys, ...frqKeys];
   if (o.hasVirtual) problems.push("이 배정에는 가상 문항(재고에 없는 칸)이 있어 저장하지 않습니다.");
   if (new Set(all).size !== all.length) problems.push("세트 안에 같은 문항이 두 번 들어 있습니다.");
@@ -32,6 +33,7 @@ export function planMacroDraftSet(o: {
   if (notReady.length) problems.push(`문제은행 변환·검증이 끝나지 않은 문항 ${notReady.length}건: ${notReady.slice(0, 8).join(", ")}${notReady.length > 8 ? " …" : ""}`);
 
   // 위치 배정: 후보 순서대로(단원 오름차순 보고서)
+  frqKeys = sortFrqByOfficialOrder("ap_macroeconomics", frqKeys, (k) => stockBy.get(k)?.frqType); // 공식 FRQ 번호 순(docs/ap/ap-question-order-research-2026-10-20.md)
   const comp: MacroSetItem[] = []; let pos = 1;
   for (const key of mcKeys) { const st = stockBy.get(key); if (!st) continue; const m = st.members[0]; comp.push({ kind: "mc", unit: String(m.unit), skill: m.skill, candidateKey: key, position: pos++ }); }
   for (const [i, key] of frqKeys.entries()) comp.push({ kind: "frq", unit: null, skill: null, candidateKey: key, position: i + 1, frqType: stockBy.get(key)?.frqType });

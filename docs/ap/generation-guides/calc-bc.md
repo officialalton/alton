@@ -110,3 +110,57 @@ BC 샘플(MC 30): 공유 AB 14 + BC 전용 16(U6 3, U7 2, U8 1, U9 5, U10 5).
 | c_bc_polar_slope_calc | 9.7 | 1.E | required | x(theta) and y(theta) are evaluated and differenced numerically with step 1e-6, and the ratio of the differenc |
 | c_bc_vector_speed_max_calc | 9.6 | 1.E | required | the maximum speed over a 300001-point grid on [0, T] (independent of Brent's method on the derivative of the s |
 | c_series_limit_eval | 10.14 | 1.E | not_allowed | the quotient is evaluated at x = +/-10^-3 in floating point and averaged (independent of the series expansion) |
+
+보강(supplement, 2026-10-09 오너 승인) 원형:
+
+| id | topic | skill | calculator | verified by |
+|---|---|---|---|---|
+| c_x4_param_arclen_square | 9.3 | 1.E | not_allowed | scipy quad of hypot(x'(t), y'(t)) over [0, b] (independent of the perfect-square simplification) |
+| c_x4_param_concave_t | 9.2 | 3.D | not_allowed | finite-difference d2y/dx2 from the sampled parametric curve at representative t in each region (independent of |
+| c_x4_param_eliminate | 9.1 | 2.C | not_allowed | five sample parameter values are substituted into each option's equation; only the key is satisfied at every s |
+| c_x4_param_hor_tangent_count | 9.1 | 2.D | not_allowed | numeric slopes y'(t)/x'(t) on both sides of each zero of dy/dt (independent of the symbolic simplification) |
+| c_x4_param_min_speed_calc | 9.6 | 1.E | required | bounded scalar minimization of the squared speed checked against a 40001-point grid search (independent of set |
+| c_x4_param_point_time_calc | 9.6 | 1.E | required | bisection root of x(t) and a central finite difference of y over x at that root (independent of the derivative |
+| c_x4_polar_area_petal | 9.8 | 1.E | not_allowed | scipy quad of (1/2) r^2 over the petal interval (independent of the symbolic integration) |
+| c_x4_polar_between_setup | 9.9 | 1.C | not_allowed | Cartesian grid count of lattice cells with a < r < a(1+cos(theta)) compared with the value of the key integral |
+| c_x4_polar_inner_loop_calc | 9.8 | 1.E | required | shoelace area of the polygon through 20001 sampled points of the inner loop (independent of the integral) |
+| c_x4_polar_to_cartesian | 9.7 | 2.C | not_allowed | polar points (r cos(theta), r sin(theta)) at four angles are tested against the distance to the claimed center |
+| c_x4_speed_up_dot | 9.6 | 3.D | not_allowed | central difference of the speed sqrt(x'^2 + y'^2) at the given time (independent of the dot product) |
+| c_x4_vec_avg_velocity | 9.4 | 1.E | not_allowed | difference quotient of the numerically evaluated position components over the interval (independent of the sym |
+| c_x4_vec_position_from_velocity | 9.5 | 1.E | not_allowed | scipy quad of each velocity component over [0, 2] plus the initial coordinates (independent of the symbolic an |
+
+보강(supplement, 2026-10-09 오너 승인) 원형:
+
+| id | topic | skill | calculator | verified by |
+|---|---|---|---|---|
+| c_x4_abs_cond_classify | 10.9 | 3.D | not_allowed | partial sums of the absolute terms up to 10^3 and 10^5 terms and the size of the 10^5-th term (independent of  |
+| c_x4_alt_error_bound_value | 10.10 | 1.E | not_allowed | the partial sum of 200000 terms compared with S_4 shows the true error lies between 0.4 a_5 and a_5 (independe |
+| c_x4_arclength_exact | 8.13 | 1.E | not_allowed | scipy quad of sqrt(1 + x) over [0, b] (independent of the substitution antiderivative) |
+| c_x4_euler_table_de | 7.5 | 2.C | not_allowed | each candidate equation is iterated exactly three times with rational arithmetic and compared with the table ( |
+| c_x4_geom_sum_equation | 10.2 | 1.E | not_allowed | the partial sum of 4000 terms at the solution is compared with the target sum (independent of the algebra) |
+| c_x4_improper_converges_choice | 6.13 | 3.D | not_allowed | log-variable quadrature of each integral to two cutoffs (1e8 and 1e16 for infinity, 1e-8 and 1e-16 for 0) show |
+| c_x4_integral_test_log_p | 10.4 | 3.D | not_allowed | numerical quadrature of the transformed integral over [ln start, 10^4] and [ln start, 10^8] at p = 1.5, 1 and  |
+| c_x4_limit_comparison_value | 10.6 | 1.E | not_allowed | the ratio a_n/b_n is evaluated numerically at n = 10^6 (independent of the algebraic limit) |
+| c_x4_logistic_max_rate | 7.9 | 1.E | not_allowed | a 20001-point grid search of r P (1 - P/K) over 0 < P < K (independent of the vertex formula) |
+| c_x4_maclaurin_compose | 10.14 | 2.C | not_allowed | the three-term polynomial and the exact function agree to within the size of the next term at x = 0.05 (indepe |
+| c_x4_nth_term_test | 10.3 | 3.B | not_allowed | the general term of each series is evaluated numerically at n = 10^7; only the key stays far from 0 (independe |
+| c_x4_p_series_range | 10.5 | 1.D | not_allowed | the sum of terms n = N+1..2N at N = 10^5 is compared at the boundary exponent and half a unit above it (indepe |
+| c_x4_partial_sum_table | 10.1 | 2.B | not_allowed | the term list is rebuilt by cumulative summation of the generated terms and compared with the table difference |
+| c_x4_parts_ln_exact | 6.11 | 1.E | not_allowed | scipy quad of x^n ln x over [1, e] (independent of the parts antiderivative) |
+| c_x4_radius_from_known_points | 10.13 | 3.E | not_allowed | geometric power series with radius R on a grid are tested numerically at both points: the radii consistent wit |
+| c_x4_ratio_inconclusive | 10.8 | 3.B | not_allowed | numeric ratio of consecutive terms at n = 120 for each series (independent of the symbolic limits) |
+| c_x4_repeating_decimal | 10.2 | 2.C | not_allowed | long division of the fraction produces the same first 14 digits as the repeating decimal (independent of the g |
+| c_x4_series_derivative_closed | 10.15 | 2.C | not_allowed | the partial sum of 400 terms of the differentiated series is compared with each option at three sample points  |
+| c_x4_taylor_deriv_from_poly | 10.11 | 2.C | not_allowed | the k-th derivative of the polynomial itself is evaluated at x = a with sympy (independent of the coefficient- |
+| c_x4_taylor_ln_calc | 10.11 | 1.E | required | central finite differences of ln at the center build the polynomial (independent of the symbolic derivatives) |
+| g_x4_autonomous_limit_graph | 7.9 | 2.D | not_allowed | small-step Euler integration of the interpolated f from the starting value to t = 400 (independent of reading  |
+| g_x4_euler_autonomous_graph | 7.5 | 1.E | not_allowed | Euler iteration repeated with the interpolated graph function (independent of reading integer vertices) |
+| g_x4_motion_direction_graphs | 9.6 | 2.B | not_allowed | values of the interpolated graphs at t = a computed numerically (independent of reading the plotted vertices) |
+| g_x4_partial_sum_term_graph | 10.1 | 2.B | not_allowed | difference of the interpolated graph heights at n = k and n = k - 1 (independent of reading the vertices) |
+| g_x4_speed_increasing_graphs | 9.6 | 3.D | not_allowed | central difference of hypot(x'(t), y'(t)) built from the interpolated graphs at each time (independent of the  |
+
+보강(supplement, 2026-10-09 오너 승인) 원형:
+
+| id | topic | skill | calculator | verified by |
+|---|---|---|---|---|
+| c_x4_series_integral_estimate | 10.15 | 1.E | not_allowed | scipy quad of the three-term polynomial over [0, b] (independent of the term-by-term antiderivatives) |

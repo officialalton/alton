@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { OG_IMAGES } from "@/lib/site-url";
 import Link from "next/link";
-import { AP_SUBJECT_NAME } from "@/lib/ap-exam/layouts";
+import { AP_SUBJECT_NAME, isApPublicSubject } from "@/lib/ap-exam/layouts";
 import { SAT_SLUG, apSlug } from "@/lib/landing/subjects";
 import { CtaButton, PageHero, Prose, PublicPage } from "@/app/components/public/PublicShell";
 import { PRACTICE_TESTS_PAGE } from "@/lib/landing/copy";
@@ -31,7 +31,7 @@ export default async function PracticeTestsPage() {
         <p>AP practice tests are subject-specific. Pick a subject to see its exam format and units.</p>
         <ul>
           <li><Link href={`/practice-tests/${SAT_SLUG}`}>SAT</Link></li>
-          {Object.entries(AP_SUBJECT_NAME).map(([code, name]) => (
+          {Object.entries(AP_SUBJECT_NAME).filter(([code]) => isApPublicSubject(code)).map(([code, name]) => (
             <li key={code}><Link href={`/practice-tests/${apSlug(code)}`}>{name}</Link></li>
           ))}
         </ul>

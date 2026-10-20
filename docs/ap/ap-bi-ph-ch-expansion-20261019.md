@@ -66,3 +66,11 @@ CHEM_BLOCK_ARCH=<JSON> CHEM_DUMMY=1 npx tsx scripts/ap-generation/chem-assign.ts
 - 원격 읽기 전용 SELECT(`supabase db query --linked`, 쓰기 없음): 게시 중인 Practice Exam 1·2 의 `mock_exam_set_items` + `problems.ap_candidate_key` = 키 120개(세트 키 포함), `ap_candidate_items.problem_id is null` 인 Biology 후보 847개(변환 안 됨)를 막는 키로 만들었다. 공개 세트가 쓴 키의 원형은 재고·가상 칸 모두 제외.
 - `bio-assign.ts` 신규 옵션 `--block-keys`(막을 문항 키), `--block-arch-keys`(그 키가 쓴 원형을 막음). 새 공개 구성 기준으로 풀면 가상 4칸(단원6×P1 1, 단원7×P1 2, 단원7×P2 1)이 남아, 새 원형 4개(`bio_p0_p.py`: 유전자 조절·자연선택 유형·생식적 격리·대립유전자 빈도 막대 그래프)를 써서 새 배치 `bio-b34e`(통과 7)·`bio-b34f`(통과 1)를 만들었다(적재된 b34a~d 배치는 변경 없음). 비용 $1.41.
 - 재배정 `data/ap/stock/exact-assign-bio-bi3-bi4-r2.json`: 가상 0·검증 위반 0·게시 키와 겹침 0, BI3 exam_prep 13/60, BI4 11/60, Practice 공식 범위 안. 새 문항 4개 화면 증거(390·1280) `evidence-bio-b34r2.json` 8건 0 실패. 이전 보고서 `exact-assign-bio-bi3-bi4.json` 은 폐기(관리자 화면에서는 r2 로 다시 적재).
+
+## 8. Chemistry CH3 (2026-10-20, 오너 지시: 규칙 완화 금지)
+
+- 엄격 규칙 계획: 원격 SELECT 로 읽은 게시 중 Chemistry 1·2 의 실제 문항(130키)과 원형 73개를 막고(`chem-assign.ts` 신규 `CHEM_BLOCK_ARCH` = 재고 문항도 같은 원형이면 제외, 파일 경로 지정), 원격에서 변환 안 된 키 166개는 계획에 한 개도 쓰이지 않았다. 새 FRQ 시나리오는 `chem-pool.ts` 의 `FRQ_SLOT` 이 긴 문항 3칸·짧은 문항 4칸에 대응시킨다.
+- 새 저작: 단독 원형 60(`chem_p0_n/o/q.py`: 계산 18 + 고정 문장 은행 42), 2문항 세트 2(`chem_p0_p.py`: 커피컵 열량계 표, ΔG° 대 T 표), FRQ 시나리오 7(`chem_p0_frq3.py`: 긴 완충 용액·용해도곱·열량계와 헤스, 짧은 질량 분석·기체 혼합물·용액 농도·강산 강염기). 첫 생성에서 반려된 원인은 거의 주제 코드 오류(예 VSEPR 을 2.6 으로 표기, 5.7 로 표기한 아레니우스는 범위 밖)와 한 원형 안에 여러 주제 장면을 섞은 것이었다 — 고치고 다시 생성했다.
+- 생성(유료): `config/ap-frozen/chem-ch3-{mc,mcr2,frq,frq2}.v1.json`, 후보 MC 216+84·FRQ 21+8, 통과 113·42·8·5. 비용 약 $10.6(MC $6.83 + $2.57, FRQ $0.84 + $0.38).
+- 배정 `data/ap/stock/exact-assign-chem-ch3.json`: 단독 56 + 세트 2 + FRQ 7, 가상 0, 독립 검증 위반 0, 게시 키·원형과 겹침 0, 한 시험 안 원형 중복 0, exam_prep 17/60. 배치 `chem-c3a/c3b/c3f/c3g`(통과 키는 이 배정에 쓰인 64개만 남겼다).
+- 남은 일: 화면 증거(`evidence-chem-ch3.json`) — 격리 스택 시작이 Docker Desktop 정지로 막혔다.

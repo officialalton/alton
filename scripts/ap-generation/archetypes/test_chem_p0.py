@@ -16,7 +16,9 @@ ALL_MC = MC + SETS
 MC_SKILLS_OK = set(C.MC_SKILLS)  # 3.x 는 MC 에서 평가되지 않는다
 # 값이 pH·원자량처럼 한 단위가 작은 문항은 상대 8% 대신 절대 간격을 쓴다(chem_common.abs_opts 에 간격이 명시돼 있다)
 ABS_GAP = {"ch_strong_ph", "ch_weak_acid_ph", "ch_buffer_ph", "ch_average_atomic_mass", "ch_successive_ie", "ch_cell_potential", "ch_nernst", "ch_buret_data", "ch_beer_procedure", "ch_balance_combustion", "ch_particulate_limiting",
-           "ch_mass_spec_peaks", "ch_lewis_lone_pairs", "chs_titration_set_q2", "ch_formal_charge", "ch_hess_law", "ch_bond_enthalpy", "ch_formation_enthalpy", "ch_calorimetry", "ch_cell_deltag", "ch_energy_profile", "ch_gibbs_k", "ch_ice_table"}
+           "ch_mass_spec_peaks", "ch_lewis_lone_pairs", "chs_titration_set_q2", "ch_formal_charge", "ch_hess_law", "ch_bond_enthalpy", "ch_formation_enthalpy", "ch_calorimetry", "ch_cell_deltag", "ch_energy_profile", "ch_gibbs_k", "ch_ice_table", "ch_n_ph_strong_base", "ch_n_buffer_after_acid", "ch_n_halfway_titration_ph", "ch_n_entropy_reaction", "ch_n_gibbs_hs", "chs_gibbs_temperature_set_q1", "chs_gibbs_temperature_set_q2", "chs_calorimeter_dissolve_set_q1", "chs_calorimeter_dissolve_set_q2"}
+FRQ_FORM_1 = ["chf_long_kinetics", "chf_long_thermo", "chf_long_titration", "chf_short_bonding", "chf_short_equilibrium", "chf_short_pes", "chf_short_stoich"]
+FRQ_FORM_2 = ["chf_long_buffer", "chf_long_calorimetry", "chf_long_ksp", "chf_short_gas_mix", "chf_short_massspec", "chf_short_neutral", "chf_short_solution"]
 curriculum = json.load(open("../../../data/ap/curriculum-2027/ap_chemistry.json"))
 TOPICS = {t["code"] for u in curriculum["units"] for t in u["topics"]}
 SKILLS = {s["code"] for s in curriculum["skills"]}
@@ -58,8 +60,8 @@ class Determinism(unittest.TestCase):
 
     def test_library_size_and_registration(self):
         self.assertGreaterEqual(len(MC), 90)
-        self.assertEqual(SETS, ["chs_equilibrium_set", "chs_rate_set", "chs_titration_set"])
-        self.assertEqual(FRQ, ["chf_long_kinetics", "chf_long_thermo", "chf_long_titration", "chf_short_bonding", "chf_short_equilibrium", "chf_short_pes", "chf_short_stoich"])
+        self.assertEqual(SETS, ["chs_calorimeter_dissolve_set", "chs_equilibrium_set", "chs_gibbs_temperature_set", "chs_rate_set", "chs_titration_set"])
+        self.assertEqual(FRQ, sorted(FRQ_FORM_1 + FRQ_FORM_2))
         self.assertEqual(len(set(MC + SETS + FRQ)), len(MC + SETS + FRQ))
 
 
@@ -320,17 +322,19 @@ class FrqStructure(unittest.TestCase):
                 self.assertIn("not official AP scoring", p["reference_note"])
 
     def test_exam_has_three_long_and_four_short_46_points(self):
-        packs = [R.batch(n, 1, 0)[0] for n in FRQ]
-        self.assertEqual(sorted(p["template"] for p in packs), ["long"] * 3 + ["short"] * 4)
-        self.assertEqual(sum(p["total_points"] for p in packs), 46)
+        for form in (FRQ_FORM_1, FRQ_FORM_2):
+            packs = [R.batch(n, 1, 0)[0] for n in form]
+            self.assertEqual(sorted(p["template"] for p in packs), ["long"] * 3 + ["short"] * 4)
+            self.assertEqual(sum(p["total_points"] for p in packs), 46)
 
     def test_frq_practice_shares_inside_official_ranges(self):
-        packs = [R.batch(n, 1, 0)[0] for n in FRQ]
-        shares, tot = C.frq_point_shares(packs)
-        self.assertEqual(tot, 46)
-        for pr, (lo, hi) in C.PRACTICE_FRQ.items():
-            self.assertGreaterEqual(shares.get(pr, 0), lo, f"Practice {pr} {shares}")
-            self.assertLessEqual(shares.get(pr, 0), hi, f"Practice {pr} {shares}")
+        for form in (FRQ_FORM_1, FRQ_FORM_2):
+            packs = [R.batch(n, 1, 0)[0] for n in form]
+            shares, tot = C.frq_point_shares(packs)
+            self.assertEqual(tot, 46)
+            for pr, (lo, hi) in C.PRACTICE_FRQ.items():
+                self.assertGreaterEqual(shares.get(pr, 0), lo, f"Practice {pr} {shares} {form[0]}")
+                self.assertLessEqual(shares.get(pr, 0), hi, f"Practice {pr} {shares} {form[0]}")
 
     def test_numeric_expected_values_match_facts(self):
         for p in R.batch("chf_long_thermo", 4, 0):

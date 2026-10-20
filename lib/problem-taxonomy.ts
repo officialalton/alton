@@ -145,5 +145,16 @@ export const AP_SUBJECTS: ApSubjectMeta[] = [
   { code: "ap_psychology", label: "AP Psychology", supported: false, formats: [] },
   { code: "ap_us_history", label: "AP U.S. History", supported: false, formats: [] },
   { code: "ap_computer_science_a", label: "AP Computer Science A", supported: false, formats: [] },
+  // 2026-10-20 추가 10과목(FRQ 유형은 lib/ap-exam/layouts.ts AP_NEW_SUBJECT_FRQ_TYPES)
+  { code: "ap_physics_2", label: "AP Physics 2", supported: false, formats: [] },
+  { code: "ap_physics_c_mechanics", label: "AP Physics C: Mechanics", supported: false, formats: [] },
+  { code: "ap_physics_c_electricity_and_magnetism", label: "AP Physics C: Electricity and Magnetism", supported: false, formats: [] },
+  { code: "ap_environmental_science", label: "AP Environmental Science", supported: false, formats: [] },
+  { code: "ap_us_government_and_politics", label: "AP United States Government and Politics", supported: false, formats: [] },
+  { code: "ap_comparative_government_and_politics", label: "AP Comparative Government and Politics", supported: false, formats: [] },
+  { code: "ap_human_geography", label: "AP Human Geography", supported: false, formats: [] },
+  { code: "ap_computer_science_principles", label: "AP Computer Science Principles", supported: false, formats: [] },
+  { code: "ap_european_history", label: "AP European History", supported: false, formats: [] },
+  { code: "ap_precalculus", label: "AP Precalculus", supported: false, formats: [] },
 ];
 export const AP_SUBJECT_BY_CODE = new Map(AP_SUBJECTS.map((a) => [a.code, a]));

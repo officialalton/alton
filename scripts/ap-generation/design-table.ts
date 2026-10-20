@@ -8,7 +8,7 @@ const arg = (n: string, d = "") => { const i = process.argv.indexOf(n); return i
 const SUBJECT = arg("--subject"); const OUT = arg("--out");
 type Raw = { stockKey: string; apSubjectCode: string; kind: string; keywordCode?: string; skillPrimary?: string; itemFamilyId?: string; payload: Record<string, any> };
 const rows = new Map<string, Raw>();
-for (const f of STOCK_FILES) { const p = `data/ap/stock/${f}.json`; if (!existsSync(p)) continue; for (const r of JSON.parse(readFileSync(p, "utf-8")) as Raw[]) if (r.apSubjectCode === SUBJECT && !rows.has(r.stockKey)) rows.set(r.stockKey, r); }
+for (const f of STOCK_FILES) { const p = `data/ap/stock/${f}.json`; if (!existsSync(p)) continue; for (const r of JSON.parse(readFileSync(p, "utf-8")) as Raw[]) if (SUBJECT.split(",").includes(r.apSubjectCode) && !rows.has(r.stockKey)) rows.set(r.stockKey, r); }
 const keysOf = (file: string) => { const o = JSON.parse(readFileSync(file, "utf-8")) as { sets: { id: string; mcA?: string[]; mcB?: string[]; frqA?: string[]; frqB?: string[] }[] }; return o.sets.flatMap((s) => [...(s.mcA ?? []), ...(s.mcB ?? []), ...(s.frqA ?? []), ...(s.frqB ?? [])].map((k) => ({ set: s.id, key: k }))); };
 const target = keysOf(arg("--report"));
 const published = arg("--published").split(",").filter(Boolean).flatMap(keysOf);

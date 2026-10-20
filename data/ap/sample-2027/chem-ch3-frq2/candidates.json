@@ -1,0 +1,3694 @@
+[
+ {
+  "candidateKey": "ap_chemistry-f01-k0",
+  "cellId": "ap_chemistry-f01",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "frq_bundle",
+  "keywordCode": "7.11",
+  "unitCode": "7",
+  "skillPrimary": "5.F",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "chf_long_ksp",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard multi-part FRQ on Ksp, molar solubility via a cube root, Q vs Ksp after a dilution on mixing, the common-ion effect, and the temperature dependence of Ksp. It needs several routine steps (choosing the relationship, a dilution adjustment, an approximation) plus short conceptual justifications. The numbers are clean, the reading is light, and everything is within Unit 7 scope.",
+  "payload": {
+   "archetype": "chf_long_ksp",
+   "template": "long",
+   "topic": "7.11",
+   "extra_topics": [
+    "7.9",
+    "7.12"
+   ],
+   "skill": "5.F",
+   "representative_skill": "5.F",
+   "calculator": "allowed",
+   "title": "Solubility product, precipitation and the common-ion effect",
+   "stimulus": {
+    "kind": "text",
+    "description": "The solubility-product constant of $\\mathrm{Mg(OH)_{2}}$ at 25 °C is $K_{sp} = 5.6 × 10⁻¹²$. Part (b) concerns mixing equal volumes of a $2.0 × 10⁻³\\text{ M}$ solution that contains Mg²⁺ and a $1.0 × 10⁻⁶\\text{ M}$ solution that contains OH⁻. Part (c) concerns a saturated solution of $\\mathrm{Mg(OH)_{2}}$ in a solution that contains $0.02\\text{ M}$ of OH⁻ from a soluble salt.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Write the K_sp expression for $\\mathrm{Mg(OH)_{2}}$ and calculate its molar solubility in pure water.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.B",
+      "5.F"
+     ],
+     "model_answer": "K_sp = [Mg²⁺]^1[OH⁻]^2; with s mol/L dissolved, (1s)^1(2s)^2 = K_sp, so s = 1.12 × 10⁻⁴ M.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Writes K_sp = [Mg²⁺]^1[OH⁻]^2 with the coefficients as exponents",
+       "required_elements": [
+        "[Mg²⁺]^1[OH⁻]^2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "includes the solid in the expression"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Calculates the molar solubility (about 1.1 × 10⁻⁴ M)",
+       "required_elements": [
+        "1.1 × 10⁻⁴"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "takes s equal to K_sp"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Calculate the reaction quotient Q immediately after the two solutions are mixed, and state whether a precipitate forms.",
+     "points": 3,
+     "response_mode": "determine",
+     "skill_codes": [
+      "3.C",
+      "6.D"
+     ],
+     "model_answer": "After mixing, each concentration is halved: [Mg²⁺] = 1.0 × 10⁻³ M and [OH⁻] = 5.0 × 10⁻⁷ M. Q = 2.5 × 10⁻¹⁶, which is less than K_sp, so no precipitate forms.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "States that the concentrations are halved on mixing equal volumes",
+       "required_elements": [
+        "concentrations halved"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the unmixed concentrations"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Calculates Q (about 2.5 × 10⁻¹⁶) from the diluted concentrations",
+       "required_elements": [
+        "2.5 × 10⁻¹⁶"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits the exponents"
+       ],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "B3",
+       "points": 1,
+       "criterion": "Compares Q with K_sp and concludes that no precipitate forms",
+       "required_elements": [
+        "no precipitate"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "reverses the comparison"
+       ],
+       "requires_row_id": "B2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Calculate the molar solubility of $\\mathrm{Mg(OH)_{2}}$ in the solution that contains $0.02\\text{ M}$ of OH⁻.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F"
+     ],
+     "model_answer": "With [OH⁻] = 0.02 M, (1s)^1(0.02)^2 = K_sp gives s = 1.4 × 10⁻⁸ M.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Sets up K_sp with [OH⁻] equal to the common-ion concentration (0.02 M) and ignores the small amount that dissolves",
+       "required_elements": [
+        "[OH⁻] = 0.02"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the same concentration for the two ions"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Calculates the molar solubility (about 1.4 × 10⁻⁸ M)",
+       "required_elements": [
+        "1.4 × 10⁻⁸"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "forgets the exponent of the common ion"
+       ],
+       "requires_row_id": "C1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Compare the solubility in part (c) with the solubility in part (a). Justify your answer in terms of equilibrium.",
+     "points": 2,
+     "response_mode": "justify",
+     "skill_codes": [
+      "6.D",
+      "6.E"
+     ],
+     "model_answer": "The solubility is lower in the solution with the common ion: the added ion shifts the dissolution equilibrium toward the solid (Le Châtelier), so less of the salt dissolves.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "States that the solubility is lower in the solution that contains the common ion",
+       "required_elements": [
+        "lower"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says the solubility is greater"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Justifies with the shift of the dissolution equilibrium toward the solid when the concentration of the common ion is increased (or Q greater than K_sp for the pure-water saturation)",
+       "required_elements": [
+        "shifts toward the solid",
+        "common ion"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says that K_sp becomes smaller"
+       ],
+       "requires_row_id": "D1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    },
+    {
+     "label": "E",
+     "prompt": "A student states that adding the soluble salt changes the value of K_sp. Is the statement correct? Justify your answer.",
+     "points": 1,
+     "response_mode": "justify",
+     "skill_codes": [
+      "6.E"
+     ],
+     "model_answer": "The statement is incorrect: K_sp depends only on temperature, and the added ion changes the concentrations, not the constant.",
+     "rubric_rows": [
+      {
+       "row_id": "E1",
+       "points": 1,
+       "criterion": "States that the statement is incorrect and justifies that K_sp is a constant at a given temperature",
+       "required_elements": [
+        "incorrect",
+        "depends on temperature only"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says K_sp changes with the concentration"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 23,
+   "facts": [
+    "form=Mg(OH)2",
+    "Ksp=5.6e-12",
+    "cc=0.002",
+    "ca=1e-06",
+    "c0=0.02",
+    "s=1.1187e-04",
+    "Q=2.5000e-16",
+    "s'=1.4000e-08"
+   ],
+   "expected_values": [],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "chf_long_ksp",
+    "subject": "ap_chemistry",
+    "kind": "frq_bundle",
+    "concept": "K_sp from a formula, Q versus K_sp for mixing solutions, and the common-ion effect",
+    "topic": "7.11",
+    "skill": "5.F",
+    "student_thinking": [
+     "Write the K_sp expression with the formula's subscripts",
+     "Halve the concentrations for equal-volume mixing and compare Q with K_sp",
+     "Use the common-ion concentration in K_sp to find the reduced solubility"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the solutions are at 25 °C",
+      "evidence": "the stimulus"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "K_sp",
+      "concentrations"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "bisection on the K_sp equation recomputes the solubilities; Q is computed from exact halved concentrations",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "5.B",
+       "5.F"
+      ],
+      "topics": [
+       "7.11"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "K_sp = [Mg²⁺]^1[OH⁻]^2; with s mol/L dissolved, (1s)^1(2s)^2 = K_sp, so s = 1.12 × 10⁻⁴ M."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Writes K_sp = [Mg²⁺]^1[OH⁻]^2 with the coefficients as exponents",
+        "elements": [
+         "[Mg²⁺]^1[OH⁻]^2"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Calculates the molar solubility (about 1.1 × 10⁻⁴ M)",
+        "elements": [
+         "1.1 × 10⁻⁴"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "3.C",
+       "6.D"
+      ],
+      "topics": [
+       "7.11"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "After mixing, each concentration is halved: [Mg²⁺] = 1.0 × 10⁻³ M and [OH⁻] = 5.0 × 10⁻⁷ M. Q = 2.5 × 10⁻¹⁶, which is less than K_sp, so no precipitate forms."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "States that the concentrations are halved on mixing equal volumes",
+        "elements": [
+         "concentrations halved"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Calculates Q (about 2.5 × 10⁻¹⁶) from the diluted concentrations",
+        "elements": [
+         "2.5 × 10⁻¹⁶"
+        ]
+       },
+       {
+        "row_id": "B3",
+        "points": 1,
+        "criterion": "Compares Q with K_sp and concludes that no precipitate forms",
+        "elements": [
+         "no precipitate"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "5.F"
+      ],
+      "topics": [
+       "7.11"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "With [OH⁻] = 0.02 M, (1s)^1(0.02)^2 = K_sp gives s = 1.4 × 10⁻⁸ M."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Sets up K_sp with [OH⁻] equal to the common-ion concentration (0.02 M) and ignores the small amount that dissolves",
+        "elements": [
+         "[OH⁻] = 0.02"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Calculates the molar solubility (about 1.4 × 10⁻⁸ M)",
+        "elements": [
+         "1.4 × 10⁻⁸"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "6.D",
+       "6.E"
+      ],
+      "topics": [
+       "7.11"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "The solubility is lower in the solution with the common ion: the added ion shifts the dissolution equilibrium toward the solid (Le Châtelier), so less of the salt dissolves."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "States that the solubility is lower in the solution that contains the common ion",
+        "elements": [
+         "lower"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Justifies with the shift of the dissolution equilibrium toward the solid when the concentration of the common ion is increased (or Q greater than K_sp for the pure-water saturation)",
+        "elements": [
+         "shifts toward the solid",
+         "common ion"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "E",
+      "skills": [
+       "6.E"
+      ],
+      "topics": [
+       "7.11"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "The statement is incorrect: K_sp depends only on temperature, and the added ion changes the concentrations, not the constant."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "E1",
+        "points": 1,
+        "criterion": "States that the statement is incorrect and justifies that K_sp is a constant at a given temperature",
+        "elements": [
+         "incorrect",
+         "depends on temperature only"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "judgment_demand": [
+     "law_selection",
+     "justification",
+     "representation_reading"
+    ]
+   },
+   "seed": 13700,
+   "pack_id": "chf_long_ksp-s13700"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "chf_long_ksp",
+   "facts": [
+    "form=Mg(OH)2",
+    "Ksp=5.6e-12",
+    "cc=0.002",
+    "ca=1e-06",
+    "c0=0.02",
+    "s=1.1187e-04",
+    "Q=2.5000e-16",
+    "s'=1.4000e-08"
+   ],
+   "seed": 13700
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Each part has a single defensible answer, and the independent solver agreed on all five. The item stays within topics 7.11, 7.9 and 7.12, uses a reasonable calculation load, and has 10 points over 5 parts. Minor flaws: rubric row B1 is tagged \"numeric\" but is a statement, and part C's stem does not say to neglect the small amount that dissolves, though the rubric covers it.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part fits its own tagged skill and topic."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Answers are unique and consistent with the rubric rows."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete for a text-only item."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to free response; common_errors are listed."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load fits a long question, and the calculator is allowed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ on Ksp, molar solubility via a cube root, Q vs Ksp after a dilution on mixing, the common-ion effect, and the temperature dependence of Ksp. It needs several routine steps (choosing the relationship, a dilution adjustment, an approximation) plus short conceptual justifications. The numbers are clean, the reading is light, and everything is within Unit 7 scope.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-f01-k1",
+  "cellId": "ap_chemistry-f01",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "frq_bundle",
+  "keywordCode": "7.11",
+  "unitCode": "7",
+  "skillPrimary": "5.F",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "chf_long_ksp",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Five-part FRQ-style item covering Ksp expression, molar solubility with a cube root, Q vs Ksp after a dilution-by-mixing step, the common-ion effect calculation, and conceptual justifications (Le Chatelier shift, Ksp depends only on temperature). Each part is a standard AP routine with clean numbers, short arithmetic, and clear wording. Difficulty comes from choosing the right relationship and linking results to claims, which are allowed levers. This suits a full mock rather than basic practice or advanced extension.",
+  "payload": {
+   "archetype": "chf_long_ksp",
+   "template": "long",
+   "topic": "7.11",
+   "extra_topics": [
+    "7.9",
+    "7.12"
+   ],
+   "skill": "5.F",
+   "representative_skill": "5.F",
+   "calculator": "allowed",
+   "title": "Solubility product, precipitation and the common-ion effect",
+   "stimulus": {
+    "kind": "text",
+    "description": "The solubility-product constant of $\\mathrm{Mg(OH)_{2}}$ at 25 °C is $K_{sp} = 5.6 × 10⁻¹²$. Part (b) concerns mixing equal volumes of a $1.0 × 10⁻⁶\\text{ M}$ solution that contains Mg²⁺ and a $4.0 × 10⁻⁴\\text{ M}$ solution that contains OH⁻. Part (c) concerns a saturated solution of $\\mathrm{Mg(OH)_{2}}$ in a solution that contains $0.1\\text{ M}$ of OH⁻ from a soluble salt.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Write the K_sp expression for $\\mathrm{Mg(OH)_{2}}$ and calculate its molar solubility in pure water.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.B",
+      "5.F"
+     ],
+     "model_answer": "K_sp = [Mg²⁺]^1[OH⁻]^2; with s mol/L dissolved, (1s)^1(2s)^2 = K_sp, so s = 1.12 × 10⁻⁴ M.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Writes K_sp = [Mg²⁺]^1[OH⁻]^2 with the coefficients as exponents",
+       "required_elements": [
+        "[Mg²⁺]^1[OH⁻]^2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "includes the solid in the expression"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Calculates the molar solubility (about 1.1 × 10⁻⁴ M)",
+       "required_elements": [
+        "1.1 × 10⁻⁴"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "takes s equal to K_sp"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Calculate the reaction quotient Q immediately after the two solutions are mixed, and state whether a precipitate forms.",
+     "points": 3,
+     "response_mode": "determine",
+     "skill_codes": [
+      "3.C",
+      "6.D"
+     ],
+     "model_answer": "After mixing, each concentration is halved: [Mg²⁺] = 5.0 × 10⁻⁷ M and [OH⁻] = 2.0 × 10⁻⁴ M. Q = 2.0 × 10⁻¹⁴, which is less than K_sp, so no precipitate forms.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "States that the concentrations are halved on mixing equal volumes",
+       "required_elements": [
+        "concentrations halved"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the unmixed concentrations"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Calculates Q (about 2.0 × 10⁻¹⁴) from the diluted concentrations",
+       "required_elements": [
+        "2.0 × 10⁻¹⁴"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits the exponents"
+       ],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "B3",
+       "points": 1,
+       "criterion": "Compares Q with K_sp and concludes that no precipitate forms",
+       "required_elements": [
+        "no precipitate"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "reverses the comparison"
+       ],
+       "requires_row_id": "B2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Calculate the molar solubility of $\\mathrm{Mg(OH)_{2}}$ in the solution that contains $0.1\\text{ M}$ of OH⁻.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F"
+     ],
+     "model_answer": "With [OH⁻] = 0.1 M, (1s)^1(0.1)^2 = K_sp gives s = 5.6 × 10⁻¹⁰ M.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Sets up K_sp with [OH⁻] equal to the common-ion concentration (0.1 M) and ignores the small amount that dissolves",
+       "required_elements": [
+        "[OH⁻] = 0.1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the same concentration for the two ions"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Calculates the molar solubility (about 5.6 × 10⁻¹⁰ M)",
+       "required_elements": [
+        "5.6 × 10⁻¹⁰"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "forgets the exponent of the common ion"
+       ],
+       "requires_row_id": "C1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Compare the solubility in part (c) with the solubility in part (a). Justify your answer in terms of equilibrium.",
+     "points": 2,
+     "response_mode": "justify",
+     "skill_codes": [
+      "6.D",
+      "6.E"
+     ],
+     "model_answer": "The solubility is lower in the solution with the common ion: the added ion shifts the dissolution equilibrium toward the solid (Le Châtelier), so less of the salt dissolves.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "States that the solubility is lower in the solution that contains the common ion",
+       "required_elements": [
+        "lower"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says the solubility is greater"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Justifies with the shift of the dissolution equilibrium toward the solid when the concentration of the common ion is increased (or Q greater than K_sp for the pure-water saturation)",
+       "required_elements": [
+        "shifts toward the solid",
+        "common ion"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says that K_sp becomes smaller"
+       ],
+       "requires_row_id": "D1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    },
+    {
+     "label": "E",
+     "prompt": "A student states that adding the soluble salt changes the value of K_sp. Is the statement correct? Justify your answer.",
+     "points": 1,
+     "response_mode": "justify",
+     "skill_codes": [
+      "6.E"
+     ],
+     "model_answer": "The statement is incorrect: K_sp depends only on temperature, and the added ion changes the concentrations, not the constant.",
+     "rubric_rows": [
+      {
+       "row_id": "E1",
+       "points": 1,
+       "criterion": "States that the statement is incorrect and justifies that K_sp is a constant at a given temperature",
+       "required_elements": [
+        "incorrect",
+        "depends on temperature only"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says K_sp changes with the concentration"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 23,
+   "facts": [
+    "form=Mg(OH)2",
+    "Ksp=5.6e-12",
+    "cc=1e-06",
+    "ca=0.0004",
+    "c0=0.1",
+    "s=1.1187e-04",
+    "Q=2.0000e-14",
+    "s'=5.6000e-10"
+   ],
+   "expected_values": [],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "chf_long_ksp",
+    "subject": "ap_chemistry",
+    "kind": "frq_bundle",
+    "concept": "K_sp from a formula, Q versus K_sp for mixing solutions, and the common-ion effect",
+    "topic": "7.11",
+    "skill": "5.F",
+    "student_thinking": [
+     "Write the K_sp expression with the formula's subscripts",
+     "Halve the concentrations for equal-volume mixing and compare Q with K_sp",
+     "Use the common-ion concentration in K_sp to find the reduced solubility"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the solutions are at 25 °C",
+      "evidence": "the stimulus"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "K_sp",
+      "concentrations"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "bisection on the K_sp equation recomputes the solubilities; Q is computed from exact halved concentrations",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "5.B",
+       "5.F"
+      ],
+      "topics": [
+       "7.11"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "K_sp = [Mg²⁺]^1[OH⁻]^2; with s mol/L dissolved, (1s)^1(2s)^2 = K_sp, so s = 1.12 × 10⁻⁴ M."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Writes K_sp = [Mg²⁺]^1[OH⁻]^2 with the coefficients as exponents",
+        "elements": [
+         "[Mg²⁺]^1[OH⁻]^2"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Calculates the molar solubility (about 1.1 × 10⁻⁴ M)",
+        "elements": [
+         "1.1 × 10⁻⁴"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "3.C",
+       "6.D"
+      ],
+      "topics": [
+       "7.11"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "After mixing, each concentration is halved: [Mg²⁺] = 5.0 × 10⁻⁷ M and [OH⁻] = 2.0 × 10⁻⁴ M. Q = 2.0 × 10⁻¹⁴, which is less than K_sp, so no precipitate forms."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "States that the concentrations are halved on mixing equal volumes",
+        "elements": [
+         "concentrations halved"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Calculates Q (about 2.0 × 10⁻¹⁴) from the diluted concentrations",
+        "elements": [
+         "2.0 × 10⁻¹⁴"
+        ]
+       },
+       {
+        "row_id": "B3",
+        "points": 1,
+        "criterion": "Compares Q with K_sp and concludes that no precipitate forms",
+        "elements": [
+         "no precipitate"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "5.F"
+      ],
+      "topics": [
+       "7.11"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "With [OH⁻] = 0.1 M, (1s)^1(0.1)^2 = K_sp gives s = 5.6 × 10⁻¹⁰ M."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Sets up K_sp with [OH⁻] equal to the common-ion concentration (0.1 M) and ignores the small amount that dissolves",
+        "elements": [
+         "[OH⁻] = 0.1"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Calculates the molar solubility (about 5.6 × 10⁻¹⁰ M)",
+        "elements": [
+         "5.6 × 10⁻¹⁰"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "6.D",
+       "6.E"
+      ],
+      "topics": [
+       "7.11"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "The solubility is lower in the solution with the common ion: the added ion shifts the dissolution equilibrium toward the solid (Le Châtelier), so less of the salt dissolves."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "States that the solubility is lower in the solution that contains the common ion",
+        "elements": [
+         "lower"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Justifies with the shift of the dissolution equilibrium toward the solid when the concentration of the common ion is increased (or Q greater than K_sp for the pure-water saturation)",
+        "elements": [
+         "shifts toward the solid",
+         "common ion"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "E",
+      "skills": [
+       "6.E"
+      ],
+      "topics": [
+       "7.11"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "The statement is incorrect: K_sp depends only on temperature, and the added ion changes the concentrations, not the constant."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "E1",
+        "points": 1,
+        "criterion": "States that the statement is incorrect and justifies that K_sp is a constant at a given temperature",
+        "elements": [
+         "incorrect",
+         "depends on temperature only"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "judgment_demand": [
+     "law_selection",
+     "justification",
+     "representation_reading"
+    ]
+   },
+   "seed": 13701,
+   "pack_id": "chf_long_ksp-s13701"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "chf_long_ksp",
+   "facts": [
+    "form=Mg(OH)2",
+    "Ksp=5.6e-12",
+    "cc=1e-06",
+    "ca=0.0004",
+    "c0=0.1",
+    "s=1.1187e-04",
+    "Q=2.0000e-14",
+    "s'=5.6000e-10"
+   ],
+   "seed": 13701
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Coherent 10-point long FRQ on Ksp, Q versus Ksp and the common-ion effect. Keys are correct and consistent with the independent solver. Rubric rows are well structured, and the load is appropriate.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Five-part FRQ-style item covering Ksp expression, molar solubility with a cube root, Q vs Ksp after a dilution-by-mixing step, the common-ion effect calculation, and conceptual justifications (Le Chatelier shift, Ksp depends only on temperature). Each part is a standard AP routine with clean numbers, short arithmetic, and clear wording. Difficulty comes from choosing the right relationship and linking results to claims, which are allowed levers. This suits a full mock rather than basic practice or advanced extension.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-f01-k2",
+  "cellId": "ap_chemistry-f01",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "frq_bundle",
+  "keywordCode": "7.11",
+  "unitCode": "7",
+  "skillPrimary": "5.F",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "chf_long_ksp",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The item is a standard AP FRQ-style multi-part problem covering Ksp, Q vs Ksp, and the common-ion effect. The solver must set up the Ksp expression with 1:2 stoichiometry and take a cube root, account for the dilution on mixing before computing Q, handle the square root and the s = [Ag+]/2 relationship in the common-ion case, and give qualitative Le Chatelier justifications. Numbers are clean and the wording is unambiguous, and all content is within Unit 7 scope. The difficulty comes from the concepts and the number of routine steps, not from heavy arithmetic or reading.",
+  "payload": {
+   "archetype": "chf_long_ksp",
+   "template": "long",
+   "topic": "7.11",
+   "extra_topics": [
+    "7.9",
+    "7.12"
+   ],
+   "skill": "5.F",
+   "representative_skill": "5.F",
+   "calculator": "allowed",
+   "title": "Solubility product, precipitation and the common-ion effect",
+   "stimulus": {
+    "kind": "text",
+    "description": "The solubility-product constant of $\\mathrm{Ag_{2}CrO_{4}}$ at 25 °C is $K_{sp} = 1.1 × 10⁻¹²$. Part (b) concerns mixing equal volumes of a $2.0 × 10⁻³\\text{ M}$ solution that contains Ag⁺ and a $2.0 × 10⁻⁷\\text{ M}$ solution that contains CrO4²⁻. Part (c) concerns a saturated solution of $\\mathrm{Ag_{2}CrO_{4}}$ in a solution that contains $0.05\\text{ M}$ of CrO4²⁻ from a soluble salt.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Write the K_sp expression for $\\mathrm{Ag_{2}CrO_{4}}$ and calculate its molar solubility in pure water.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.B",
+      "5.F"
+     ],
+     "model_answer": "K_sp = [Ag⁺]^2[CrO4²⁻]^1; with s mol/L dissolved, (2s)^2(1s)^1 = K_sp, so s = 6.50 × 10⁻⁵ M.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Writes K_sp = [Ag⁺]^2[CrO4²⁻]^1 with the coefficients as exponents",
+       "required_elements": [
+        "[Ag⁺]^2[CrO4²⁻]^1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "includes the solid in the expression"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Calculates the molar solubility (about 6.5 × 10⁻⁵ M)",
+       "required_elements": [
+        "6.5 × 10⁻⁵"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "takes s equal to K_sp"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Calculate the reaction quotient Q immediately after the two solutions are mixed, and state whether a precipitate forms.",
+     "points": 3,
+     "response_mode": "determine",
+     "skill_codes": [
+      "3.C",
+      "6.D"
+     ],
+     "model_answer": "After mixing, each concentration is halved: [Ag⁺] = 1.0 × 10⁻³ M and [CrO4²⁻] = 1.0 × 10⁻⁷ M. Q = 1.00 × 10⁻¹³, which is less than K_sp, so no precipitate forms.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "States that the concentrations are halved on mixing equal volumes",
+       "required_elements": [
+        "concentrations halved"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the unmixed concentrations"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Calculates Q (about 1.00 × 10⁻¹³) from the diluted concentrations",
+       "required_elements": [
+        "1.00 × 10⁻¹³"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits the exponents"
+       ],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "B3",
+       "points": 1,
+       "criterion": "Compares Q with K_sp and concludes that no precipitate forms",
+       "required_elements": [
+        "no precipitate"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "reverses the comparison"
+       ],
+       "requires_row_id": "B2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Calculate the molar solubility of $\\mathrm{Ag_{2}CrO_{4}}$ in the solution that contains $0.05\\text{ M}$ of CrO4²⁻.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F"
+     ],
+     "model_answer": "With [CrO4²⁻] = 0.05 M, (2s)^2(0.05)^1 = K_sp gives s = 2.3 × 10⁻⁶ M.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Sets up K_sp with [CrO4²⁻] equal to the common-ion concentration (0.05 M) and ignores the small amount that dissolves",
+       "required_elements": [
+        "[CrO4²⁻] = 0.05"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the same concentration for the two ions"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Calculates the molar solubility (about 2.3 × 10⁻⁶ M)",
+       "required_elements": [
+        "2.3 × 10⁻⁶"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "forgets the exponent of the common ion"
+       ],
+       "requires_row_id": "C1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Compare the solubility in part (c) with the solubility in part (a). Justify your answer in terms of equilibrium.",
+     "points": 2,
+     "response_mode": "justify",
+     "skill_codes": [
+      "6.D",
+      "6.E"
+     ],
+     "model_answer": "The solubility is lower in the solution with the common ion: the added ion shifts the dissolution equilibrium toward the solid (Le Châtelier), so less of the salt dissolves.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "States that the solubility is lower in the solution that contains the common ion",
+       "required_elements": [
+        "lower"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says the solubility is greater"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Justifies with the shift of the dissolution equilibrium toward the solid when the concentration of the common ion is increased (or Q greater than K_sp for the pure-water saturation)",
+       "required_elements": [
+        "shifts toward the solid",
+        "common ion"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says that K_sp becomes smaller"
+       ],
+       "requires_row_id": "D1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    },
+    {
+     "label": "E",
+     "prompt": "A student states that adding the soluble salt changes the value of K_sp. Is the statement correct? Justify your answer.",
+     "points": 1,
+     "response_mode": "justify",
+     "skill_codes": [
+      "6.E"
+     ],
+     "model_answer": "The statement is incorrect: K_sp depends only on temperature, and the added ion changes the concentrations, not the constant.",
+     "rubric_rows": [
+      {
+       "row_id": "E1",
+       "points": 1,
+       "criterion": "States that the statement is incorrect and justifies that K_sp is a constant at a given temperature",
+       "required_elements": [
+        "incorrect",
+        "depends on temperature only"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says K_sp changes with the concentration"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 23,
+   "facts": [
+    "form=Ag2CrO4",
+    "Ksp=1.1e-12",
+    "cc=0.002",
+    "ca=2e-07",
+    "c0=0.05",
+    "s=6.5030e-05",
+    "Q=1.0000e-13",
+    "s'=2.3452e-06"
+   ],
+   "expected_values": [],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "chf_long_ksp",
+    "subject": "ap_chemistry",
+    "kind": "frq_bundle",
+    "concept": "K_sp from a formula, Q versus K_sp for mixing solutions, and the common-ion effect",
+    "topic": "7.11",
+    "skill": "5.F",
+    "student_thinking": [
+     "Write the K_sp expression with the formula's subscripts",
+     "Halve the concentrations for equal-volume mixing and compare Q with K_sp",
+     "Use the common-ion concentration in K_sp to find the reduced solubility"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the solutions are at 25 °C",
+      "evidence": "the stimulus"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "K_sp",
+      "concentrations"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "bisection on the K_sp equation recomputes the solubilities; Q is computed from exact halved concentrations",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "5.B",
+       "5.F"
+      ],
+      "topics": [
+       "7.11"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "K_sp = [Ag⁺]^2[CrO4²⁻]^1; with s mol/L dissolved, (2s)^2(1s)^1 = K_sp, so s = 6.50 × 10⁻⁵ M."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Writes K_sp = [Ag⁺]^2[CrO4²⁻]^1 with the coefficients as exponents",
+        "elements": [
+         "[Ag⁺]^2[CrO4²⁻]^1"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Calculates the molar solubility (about 6.5 × 10⁻⁵ M)",
+        "elements": [
+         "6.5 × 10⁻⁵"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "3.C",
+       "6.D"
+      ],
+      "topics": [
+       "7.11"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "After mixing, each concentration is halved: [Ag⁺] = 1.0 × 10⁻³ M and [CrO4²⁻] = 1.0 × 10⁻⁷ M. Q = 1.00 × 10⁻¹³, which is less than K_sp, so no precipitate forms."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "States that the concentrations are halved on mixing equal volumes",
+        "elements": [
+         "concentrations halved"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Calculates Q (about 1.00 × 10⁻¹³) from the diluted concentrations",
+        "elements": [
+         "1.00 × 10⁻¹³"
+        ]
+       },
+       {
+        "row_id": "B3",
+        "points": 1,
+        "criterion": "Compares Q with K_sp and concludes that no precipitate forms",
+        "elements": [
+         "no precipitate"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "5.F"
+      ],
+      "topics": [
+       "7.11"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "With [CrO4²⁻] = 0.05 M, (2s)^2(0.05)^1 = K_sp gives s = 2.3 × 10⁻⁶ M."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Sets up K_sp with [CrO4²⁻] equal to the common-ion concentration (0.05 M) and ignores the small amount that dissolves",
+        "elements": [
+         "[CrO4²⁻] = 0.05"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Calculates the molar solubility (about 2.3 × 10⁻⁶ M)",
+        "elements": [
+         "2.3 × 10⁻⁶"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "6.D",
+       "6.E"
+      ],
+      "topics": [
+       "7.11"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "The solubility is lower in the solution with the common ion: the added ion shifts the dissolution equilibrium toward the solid (Le Châtelier), so less of the salt dissolves."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "States that the solubility is lower in the solution that contains the common ion",
+        "elements": [
+         "lower"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Justifies with the shift of the dissolution equilibrium toward the solid when the concentration of the common ion is increased (or Q greater than K_sp for the pure-water saturation)",
+        "elements": [
+         "shifts toward the solid",
+         "common ion"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "E",
+      "skills": [
+       "6.E"
+      ],
+      "topics": [
+       "7.11"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "The statement is incorrect: K_sp depends only on temperature, and the added ion changes the concentrations, not the constant."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "E1",
+        "points": 1,
+        "criterion": "States that the statement is incorrect and justifies that K_sp is a constant at a given temperature",
+        "elements": [
+         "incorrect",
+         "depends on temperature only"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "judgment_demand": [
+     "law_selection",
+     "justification",
+     "representation_reading"
+    ]
+   },
+   "seed": 13702,
+   "pack_id": "chf_long_ksp-s13702"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "chf_long_ksp",
+   "facts": [
+    "form=Ag2CrO4",
+    "Ksp=1.1e-12",
+    "cc=0.002",
+    "ca=2e-07",
+    "c0=0.05",
+    "s=6.5030e-05",
+    "Q=1.0000e-13",
+    "s'=2.3452e-06"
+   ],
+   "seed": 13702
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The 10-point long FRQ on Ag2CrO4 solubility, Q versus Ksp, and the common-ion effect is correct and in scope. The independent solver reproduced every answer. No instant-reject condition applies. Minor notes: part (c) does not state the assumption that [CrO4²⁻] stays at 0.05 M, though the rubric does, and part B's skill tags are slightly loose.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All parts fall in 7.11, with 7.9 and 7.12 as related topics. Each part fits its own tagged skill. Part B's 3.C/6.D tag is slightly loose against a rubric that is mostly calculation."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys for A, B and C are verified, and D and E have a single defensible answer. The rubric states the approximation in part C. Rows are consistent, with dependencies set."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text-only stimulus is complete and clear. Ksp, concentrations and temperature are given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "There are no multiple-choice distractors. The rubric rows list plausible common errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 10 points match a long FRQ. Arithmetic is modest and the calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item is a standard AP FRQ-style multi-part problem covering Ksp, Q vs Ksp, and the common-ion effect. The solver must set up the Ksp expression with 1:2 stoichiometry and take a cube root, account for the dilution on mixing before computing Q, handle the square root and the s = [Ag+]/2 relationship in the common-ion case, and give qualitative Le Chatelier justifications. Numbers are clean and the wording is unambiguous, and all content is within Unit 7 scope. The difficulty comes from the concepts and the number of routine steps, not from heavy arithmetic or reading.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-f01-k3",
+  "cellId": "ap_chemistry-f01",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "frq_bundle",
+  "keywordCode": "7.11",
+  "unitCode": "7",
+  "skillPrimary": "5.F",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "chf_long_ksp",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Multi-part FRQ-style item squarely within the 7.11/7.12 scope with a single equilibrium. Part A requires writing the Ksp expression and solving 4s^3 = Ksp (cube root, about 1.1e-4 M). Part B requires recognizing the 1:1 dilution on mixing (concentrations halve to 5.0e-7 M), computing Q = [Mg2+][OH-]^2 with the squared exponent (about 1.3e-19), and comparing Q to Ksp to conclude no precipitate. Part C uses the common-ion approximation s = Ksp/(0.02)^2 (about 1.4e-8 M). Parts D and E ask for a conceptual justification (Le Chatelier shift, Ksp depends only on temperature). Arithmetic is short with clean numbers, reading load is modest, and wording is unambiguous. Difficulty comes from legitimate levers (choosing the relationship, dilution step, linking the result to a claim), making it suitable for full mock exams rather than basic learning or advanced supplement.",
+  "payload": {
+   "archetype": "chf_long_ksp",
+   "template": "long",
+   "topic": "7.11",
+   "extra_topics": [
+    "7.9",
+    "7.12"
+   ],
+   "skill": "5.F",
+   "representative_skill": "5.F",
+   "calculator": "allowed",
+   "title": "Solubility product, precipitation and the common-ion effect",
+   "stimulus": {
+    "kind": "text",
+    "description": "The solubility-product constant of $\\mathrm{Mg(OH)_{2}}$ at 25 °C is $K_{sp} = 5.6 × 10⁻¹²$. Part (b) concerns mixing equal volumes of a $1.0 × 10⁻⁶\\text{ M}$ solution that contains Mg²⁺ and a $1.0 × 10⁻⁶\\text{ M}$ solution that contains OH⁻. Part (c) concerns a saturated solution of $\\mathrm{Mg(OH)_{2}}$ in a solution that contains $0.02\\text{ M}$ of OH⁻ from a soluble salt.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Write the K_sp expression for $\\mathrm{Mg(OH)_{2}}$ and calculate its molar solubility in pure water.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.B",
+      "5.F"
+     ],
+     "model_answer": "K_sp = [Mg²⁺]^1[OH⁻]^2; with s mol/L dissolved, (1s)^1(2s)^2 = K_sp, so s = 1.12 × 10⁻⁴ M.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Writes K_sp = [Mg²⁺]^1[OH⁻]^2 with the coefficients as exponents",
+       "required_elements": [
+        "[Mg²⁺]^1[OH⁻]^2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "includes the solid in the expression"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Calculates the molar solubility (about 1.1 × 10⁻⁴ M)",
+       "required_elements": [
+        "1.1 × 10⁻⁴"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "takes s equal to K_sp"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Calculate the reaction quotient Q immediately after the two solutions are mixed, and state whether a precipitate forms.",
+     "points": 3,
+     "response_mode": "determine",
+     "skill_codes": [
+      "3.C",
+      "6.D"
+     ],
+     "model_answer": "After mixing, each concentration is halved: [Mg²⁺] = 5.0 × 10⁻⁷ M and [OH⁻] = 5.0 × 10⁻⁷ M. Q = 1.2 × 10⁻¹⁹, which is less than K_sp, so no precipitate forms.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "States that the concentrations are halved on mixing equal volumes",
+       "required_elements": [
+        "concentrations halved"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the unmixed concentrations"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Calculates Q (about 1.2 × 10⁻¹⁹) from the diluted concentrations",
+       "required_elements": [
+        "1.2 × 10⁻¹⁹"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits the exponents"
+       ],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "B3",
+       "points": 1,
+       "criterion": "Compares Q with K_sp and concludes that no precipitate forms",
+       "required_elements": [
+        "no precipitate"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "reverses the comparison"
+       ],
+       "requires_row_id": "B2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Calculate the molar solubility of $\\mathrm{Mg(OH)_{2}}$ in the solution that contains $0.02\\text{ M}$ of OH⁻.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F"
+     ],
+     "model_answer": "With [OH⁻] = 0.02 M, (1s)^1(0.02)^2 = K_sp gives s = 1.4 × 10⁻⁸ M.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Sets up K_sp with [OH⁻] equal to the common-ion concentration (0.02 M) and ignores the small amount that dissolves",
+       "required_elements": [
+        "[OH⁻] = 0.02"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the same concentration for the two ions"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Calculates the molar solubility (about 1.4 × 10⁻⁸ M)",
+       "required_elements": [
+        "1.4 × 10⁻⁸"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "forgets the exponent of the common ion"
+       ],
+       "requires_row_id": "C1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Compare the solubility in part (c) with the solubility in part (a). Justify your answer in terms of equilibrium.",
+     "points": 2,
+     "response_mode": "justify",
+     "skill_codes": [
+      "6.D",
+      "6.E"
+     ],
+     "model_answer": "The solubility is lower in the solution with the common ion: the added ion shifts the dissolution equilibrium toward the solid (Le Châtelier), so less of the salt dissolves.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "States that the solubility is lower in the solution that contains the common ion",
+       "required_elements": [
+        "lower"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says the solubility is greater"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Justifies with the shift of the dissolution equilibrium toward the solid when the concentration of the common ion is increased (or Q greater than K_sp for the pure-water saturation)",
+       "required_elements": [
+        "shifts toward the solid",
+        "common ion"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says that K_sp becomes smaller"
+       ],
+       "requires_row_id": "D1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    },
+    {
+     "label": "E",
+     "prompt": "A student states that adding the soluble salt changes the value of K_sp. Is the statement correct? Justify your answer.",
+     "points": 1,
+     "response_mode": "justify",
+     "skill_codes": [
+      "6.E"
+     ],
+     "model_answer": "The statement is incorrect: K_sp depends only on temperature, and the added ion changes the concentrations, not the constant.",
+     "rubric_rows": [
+      {
+       "row_id": "E1",
+       "points": 1,
+       "criterion": "States that the statement is incorrect and justifies that K_sp is a constant at a given temperature",
+       "required_elements": [
+        "incorrect",
+        "depends on temperature only"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says K_sp changes with the concentration"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 23,
+   "facts": [
+    "form=Mg(OH)2",
+    "Ksp=5.6e-12",
+    "cc=1e-06",
+    "ca=1e-06",
+    "c0=0.02",
+    "s=1.1187e-04",
+    "Q=1.2500e-19",
+    "s'=1.4000e-08"
+   ],
+   "expected_values": [],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "chf_long_ksp",
+    "subject": "ap_chemistry",
+    "kind": "frq_bundle",
+    "concept": "K_sp from a formula, Q versus K_sp for mixing solutions, and the common-ion effect",
+    "topic": "7.11",
+    "skill": "5.F",
+    "student_thinking": [
+     "Write the K_sp expression with the formula's subscripts",
+     "Halve the concentrations for equal-volume mixing and compare Q with K_sp",
+     "Use the common-ion concentration in K_sp to find the reduced solubility"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the solutions are at 25 °C",
+      "evidence": "the stimulus"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "K_sp",
+      "concentrations"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "bisection on the K_sp equation recomputes the solubilities; Q is computed from exact halved concentrations",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "5.B",
+       "5.F"
+      ],
+      "topics": [
+       "7.11"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "K_sp = [Mg²⁺]^1[OH⁻]^2; with s mol/L dissolved, (1s)^1(2s)^2 = K_sp, so s = 1.12 × 10⁻⁴ M."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Writes K_sp = [Mg²⁺]^1[OH⁻]^2 with the coefficients as exponents",
+        "elements": [
+         "[Mg²⁺]^1[OH⁻]^2"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Calculates the molar solubility (about 1.1 × 10⁻⁴ M)",
+        "elements": [
+         "1.1 × 10⁻⁴"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "3.C",
+       "6.D"
+      ],
+      "topics": [
+       "7.11"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "After mixing, each concentration is halved: [Mg²⁺] = 5.0 × 10⁻⁷ M and [OH⁻] = 5.0 × 10⁻⁷ M. Q = 1.2 × 10⁻¹⁹, which is less than K_sp, so no precipitate forms."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "States that the concentrations are halved on mixing equal volumes",
+        "elements": [
+         "concentrations halved"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Calculates Q (about 1.2 × 10⁻¹⁹) from the diluted concentrations",
+        "elements": [
+         "1.2 × 10⁻¹⁹"
+        ]
+       },
+       {
+        "row_id": "B3",
+        "points": 1,
+        "criterion": "Compares Q with K_sp and concludes that no precipitate forms",
+        "elements": [
+         "no precipitate"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "5.F"
+      ],
+      "topics": [
+       "7.11"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "With [OH⁻] = 0.02 M, (1s)^1(0.02)^2 = K_sp gives s = 1.4 × 10⁻⁸ M."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Sets up K_sp with [OH⁻] equal to the common-ion concentration (0.02 M) and ignores the small amount that dissolves",
+        "elements": [
+         "[OH⁻] = 0.02"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Calculates the molar solubility (about 1.4 × 10⁻⁸ M)",
+        "elements": [
+         "1.4 × 10⁻⁸"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "6.D",
+       "6.E"
+      ],
+      "topics": [
+       "7.11"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "The solubility is lower in the solution with the common ion: the added ion shifts the dissolution equilibrium toward the solid (Le Châtelier), so less of the salt dissolves."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "States that the solubility is lower in the solution that contains the common ion",
+        "elements": [
+         "lower"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Justifies with the shift of the dissolution equilibrium toward the solid when the concentration of the common ion is increased (or Q greater than K_sp for the pure-water saturation)",
+        "elements": [
+         "shifts toward the solid",
+         "common ion"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "E",
+      "skills": [
+       "6.E"
+      ],
+      "topics": [
+       "7.11"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "The statement is incorrect: K_sp depends only on temperature, and the added ion changes the concentrations, not the constant."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "E1",
+        "points": 1,
+        "criterion": "States that the statement is incorrect and justifies that K_sp is a constant at a given temperature",
+        "elements": [
+         "incorrect",
+         "depends on temperature only"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "judgment_demand": [
+     "law_selection",
+     "justification",
+     "representation_reading"
+    ]
+   },
+   "seed": 13703,
+   "pack_id": "chf_long_ksp-s13703"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "chf_long_ksp",
+   "facts": [
+    "form=Mg(OH)2",
+    "Ksp=5.6e-12",
+    "cc=1e-06",
+    "ca=1e-06",
+    "c0=0.02",
+    "s=1.1187e-04",
+    "Q=1.2500e-19",
+    "s'=1.4000e-08"
+   ],
+   "seed": 13703
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The 10-point long question on Ksp, Q versus Ksp and the common-ion effect is in scope for topics 7.11, 7.9 and 7.12. The keys are consistent: s = 1.12e-4 M in part (a), Q = 1.25e-19 with no precipitate in part (b), and s = 1.4e-8 M in part (c). The independent solver's 1.3e-19 for Q differs only by rounding a 1.25e-19 tie, and the rubric's \"about\" wording covers this. The rubric rows are one point each, with explicit dependencies and a justification row for the Le Chatelier argument. The load is typical of a long FRQ with calculator use.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item squarely within the 7.11/7.12 scope with a single equilibrium. Part A requires writing the Ksp expression and solving 4s^3 = Ksp (cube root, about 1.1e-4 M). Part B requires recognizing the 1:1 dilution on mixing (concentrations halve to 5.0e-7 M), computing Q = [Mg2+][OH-]^2 with the squared exponent (about 1.3e-19), and comparing Q to Ksp to conclude no precipitate. Part C uses the common-ion approximation s = Ksp/(0.02)^2 (about 1.4e-8 M). Parts D and E ask for a conceptual justification (Le Chatelier shift, Ksp depends only on temperature). Arithmetic is short with clean numbers, reading load is modest, and wording is unambiguous. Difficulty comes from legitimate levers (choosing the relationship, dilution step, linking the result to a claim), making it suitable for full mock exams rather than basic learning or advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-f02-k0",
+  "cellId": "ap_chemistry-f02",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "frq_bundle",
+  "keywordCode": "3.5",
+  "unitCode": "3",
+  "skillPrimary": "5.F",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "chf_short_gas_mix",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Three-part item covering the ideal gas law with a Celsius-to-kelvin conversion, partial pressure of one gas, and a KMT conceptual justification (equal average KE at the same T, so the lighter molecule is faster). Each part is standard and short, the reading load is minimal, and the arithmetic is modest with no out-of-scope content. Difficulty comes from choosing the correct relationships and linking the result to a claim, which suits a full mock but is not advanced.",
+  "payload": {
+   "archetype": "chf_short_gas_mix",
+   "template": "short",
+   "topic": "3.5",
+   "extra_topics": [
+    "3.4",
+    "3.6"
+   ],
+   "skill": "5.F",
+   "representative_skill": "5.F",
+   "calculator": "allowed",
+   "title": "Gas mixture, partial pressure and molecular speed",
+   "stimulus": {
+    "kind": "text",
+    "description": "A rigid container of volume $20\\text{ L}$ holds $1.5\\text{ mol}$ of $\\mathrm{CH_{4}}$(g) and $0.25\\text{ mol}$ of $\\mathrm{CO_{2}}$(g) at $0\\,^{\\circ}\\text{C}$. Assume ideal behavior. Molar masses: $\\mathrm{CH_{4}}$ $16.04\\text{ g/mol}$, $\\mathrm{CO_{2}}$ $44.01\\text{ g/mol}$.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Calculate the total pressure, in atm, in the container.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.B",
+      "5.F"
+     ],
+     "model_answer": "P = nRT/V = (1.75)(0.08206)(273.15)/20 = 1.961 atm.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Calculates the total pressure (about 1.961 atm) using kelvins",
+       "required_elements": [
+        "1.961"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the Celsius temperature"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Calculate the pressure that $\\mathrm{CO_{2}}$ alone exerts in the container.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F"
+     ],
+     "model_answer": "The pressure of CO2 = (n_b/n_total)P_total = (0.25/1.75)(1.961) = 0.280 atm.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Multiplies the mole fraction of CO2 by the total pressure to calculate the pressure of CO2 (about 0.280 atm)",
+       "required_elements": [
+        "0.280"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the mole fraction of the other gas"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Which gas, $\\mathrm{CH_{4}}$ or $\\mathrm{CO_{2}}$, has the greater average molecular speed at this temperature? Justify your answer.",
+     "points": 2,
+     "response_mode": "justify",
+     "skill_codes": [
+      "6.E",
+      "6.B"
+     ],
+     "model_answer": "CH4 moves faster: at the same temperature the molecules have the same average kinetic energy, so the lighter molecules (CH4) have the greater average speed.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Identifies CH4 (the gas of lower molar mass) as faster",
+       "required_elements": [
+        "CH4"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "identifies the heavier gas"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Justifies that the average kinetic energy depends only on temperature, so a smaller mass means a larger speed",
+       "required_elements": [
+        "same average kinetic energy",
+        "smaller mass"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says the heavier gas has more energy"
+       ],
+       "requires_row_id": "C1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 4,
+   "est_minutes": 9,
+   "facts": [
+    "ga=CH4",
+    "gb=CO2",
+    "na=1.5",
+    "nb=0.25",
+    "V=20.0",
+    "Tc=0",
+    "Pt=1.9613",
+    "Pb=0.2802"
+   ],
+   "expected_values": [
+    {
+     "part": "A",
+     "quantity": "total pressure",
+     "value": 1.9612852874999995,
+     "unit": "atm",
+     "tolerance": 0.03922570574999999
+    },
+    {
+     "part": "B",
+     "quantity": "partial pressure",
+     "value": 0.28018361249999996,
+     "unit": "atm",
+     "tolerance": 0.0056036722499999995
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "chf_short_gas_mix",
+    "subject": "ap_chemistry",
+    "kind": "frq_bundle",
+    "concept": "Ideal gas law for a mixture, a mole-fraction partial pressure and a kinetic-molecular-theory argument",
+    "topic": "3.5",
+    "skill": "5.F",
+    "student_thinking": [
+     "Apply the ideal gas law to the total moles",
+     "Apply Dalton's law with the mole fraction",
+     "Reason about average kinetic energy and speed"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the gases behave ideally",
+      "evidence": "the stimulus"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "moles",
+      "volume",
+      "temperature"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "bisection on PV − nRT recomputes the pressure; the partial pressure from the mole fraction",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "5.B",
+       "5.F"
+      ],
+      "topics": [
+       "3.5"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "P = nRT/V = (1.75)(0.08206)(273.15)/20 = 1.961 atm."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Calculates the total pressure (about 1.961 atm) using kelvins",
+        "elements": [
+         "1.961"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "5.F"
+      ],
+      "topics": [
+       "3.5"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "The pressure of CO2 = (n_b/n_total)P_total = (0.25/1.75)(1.961) = 0.280 atm."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Multiplies the mole fraction of CO2 by the total pressure to calculate the pressure of CO2 (about 0.280 atm)",
+        "elements": [
+         "0.280"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "6.E",
+       "6.B"
+      ],
+      "topics": [
+       "3.5"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "CH4 moves faster: at the same temperature the molecules have the same average kinetic energy, so the lighter molecules (CH4) have the greater average speed."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Identifies CH4 (the gas of lower molar mass) as faster",
+        "elements": [
+         "CH4"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Justifies that the average kinetic energy depends only on temperature, so a smaller mass means a larger speed",
+        "elements": [
+         "same average kinetic energy",
+         "smaller mass"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 4,
+    "judgment_demand": [
+     "law_selection",
+     "justification"
+    ]
+   },
+   "seed": 13700,
+   "pack_id": "chf_short_gas_mix-s13700"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "chf_short_gas_mix",
+   "facts": [
+    "ga=CH4",
+    "gb=CO2",
+    "na=1.5",
+    "nb=0.25",
+    "V=20.0",
+    "Tc=0",
+    "Pt=1.9613",
+    "Pb=0.2802"
+   ],
+   "seed": 13700
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Short 4-point FRQ (1/1/2) on ideal gas mixture, Dalton's law and KMT speed reasoning. The stimulus gives all needed quantities and molar masses, and the ideal-behavior assumption is stated. Keys are consistent with the independent solver. Part C's rubric has a claim row and a justification row that depends on the claim row, so the scoring is sound. The load is appropriate for the AP exam. Minor note: the model answer for B uses \"n_b\" notation, which is cosmetic only. The molar masses are given but only used qualitatively, which is acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A and B are 5.F calculations (ideal gas law, Dalton's law) and part C is a KMT reasoning argument, all within Unit 3 (topics 3.4 and 3.5). Each part is tagged with its own skill, and no out-of-scope content is used."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Part A gives 1.961 atm with T = 273.15 K. Part B gives 0.280 atm, which equals nRT/V for CO2 alone. Part C identifies CH4 as faster because both gases have the same average kinetic energy and CH4 has the smaller mass. The rubric rows are consistent and the dependency C2 on C1 is sensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete: volume, moles, temperature, ideal assumption and molar masses are all given. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The common_errors listed (Celsius temperature, wrong mole fraction, heavier gas identified as faster) are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The calculation load is light and a calculator is allowed. The format is a typical short question, answerable in about 6 to 9 minutes."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Three-part item covering the ideal gas law with a Celsius-to-kelvin conversion, partial pressure of one gas, and a KMT conceptual justification (equal average KE at the same T, so the lighter molecule is faster). Each part is standard and short, the reading load is minimal, and the arithmetic is modest with no out-of-scope content. Difficulty comes from choosing the correct relationships and linking the result to a claim, which suits a full mock but is not advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 270
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-f02-k1",
+  "cellId": "ap_chemistry-f02",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "frq_bundle",
+  "keywordCode": "3.5",
+  "unitCode": "3",
+  "skillPrimary": "5.F",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "chf_short_gas_mix",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Three linked parts: PV=nRT with a Celsius-to-kelvin conversion and summed moles (A), a partial-pressure calculation (B), and a KMT justification linking equal average KE at the same T to molar mass and speed (C). Concept depth is moderate, arithmetic is short and clean, reading load is low, and everything is within Unit 3 scope. Typical of a standard AP free-response sub-question set, so it suits full mocks rather than basic learning.",
+  "payload": {
+   "archetype": "chf_short_gas_mix",
+   "template": "short",
+   "topic": "3.5",
+   "extra_topics": [
+    "3.4",
+    "3.6"
+   ],
+   "skill": "5.F",
+   "representative_skill": "5.F",
+   "calculator": "allowed",
+   "title": "Gas mixture, partial pressure and molecular speed",
+   "stimulus": {
+    "kind": "text",
+    "description": "A rigid container of volume $10\\text{ L}$ holds $0.5\\text{ mol}$ of $\\mathrm{CH_{4}}$(g) and $0.75\\text{ mol}$ of $\\mathrm{CO_{2}}$(g) at $27\\,^{\\circ}\\text{C}$. Assume ideal behavior. Molar masses: $\\mathrm{CH_{4}}$ $16.04\\text{ g/mol}$, $\\mathrm{CO_{2}}$ $44.01\\text{ g/mol}$.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Calculate the total pressure, in atm, in the container.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.B",
+      "5.F"
+     ],
+     "model_answer": "P = nRT/V = (1.25)(0.08206)(300.15)/10 = 3.079 atm.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Calculates the total pressure (about 3.079 atm) using kelvins",
+       "required_elements": [
+        "3.079"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the Celsius temperature"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Calculate the pressure that $\\mathrm{CO_{2}}$ alone exerts in the container.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F"
+     ],
+     "model_answer": "The pressure of CO2 = (n_b/n_total)P_total = (0.75/1.25)(3.079) = 1.847 atm.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Multiplies the mole fraction of CO2 by the total pressure to calculate the pressure of CO2 (about 1.847 atm)",
+       "required_elements": [
+        "1.847"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the mole fraction of the other gas"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Which gas, $\\mathrm{CH_{4}}$ or $\\mathrm{CO_{2}}$, has the greater average molecular speed at this temperature? Justify your answer.",
+     "points": 2,
+     "response_mode": "justify",
+     "skill_codes": [
+      "6.E",
+      "6.B"
+     ],
+     "model_answer": "CH4 moves faster: at the same temperature the molecules have the same average kinetic energy, so the lighter molecules (CH4) have the greater average speed.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Identifies CH4 (the gas of lower molar mass) as faster",
+       "required_elements": [
+        "CH4"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "identifies the heavier gas"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Justifies that the average kinetic energy depends only on temperature, so a smaller mass means a larger speed",
+       "required_elements": [
+        "same average kinetic energy",
+        "smaller mass"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says the heavier gas has more energy"
+       ],
+       "requires_row_id": "C1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 4,
+   "est_minutes": 9,
+   "facts": [
+    "ga=CH4",
+    "gb=CO2",
+    "na=0.5",
+    "nb=0.75",
+    "V=10.0",
+    "Tc=27",
+    "Pt=3.0788",
+    "Pb=1.8473"
+   ],
+   "expected_values": [
+    {
+     "part": "A",
+     "quantity": "total pressure",
+     "value": 3.0787886249999996,
+     "unit": "atm",
+     "tolerance": 0.061575772499999994
+    },
+    {
+     "part": "B",
+     "quantity": "partial pressure",
+     "value": 1.8472731749999998,
+     "unit": "atm",
+     "tolerance": 0.0369454635
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "chf_short_gas_mix",
+    "subject": "ap_chemistry",
+    "kind": "frq_bundle",
+    "concept": "Ideal gas law for a mixture, a mole-fraction partial pressure and a kinetic-molecular-theory argument",
+    "topic": "3.5",
+    "skill": "5.F",
+    "student_thinking": [
+     "Apply the ideal gas law to the total moles",
+     "Apply Dalton's law with the mole fraction",
+     "Reason about average kinetic energy and speed"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the gases behave ideally",
+      "evidence": "the stimulus"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "moles",
+      "volume",
+      "temperature"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "bisection on PV − nRT recomputes the pressure; the partial pressure from the mole fraction",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "5.B",
+       "5.F"
+      ],
+      "topics": [
+       "3.5"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "P = nRT/V = (1.25)(0.08206)(300.15)/10 = 3.079 atm."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Calculates the total pressure (about 3.079 atm) using kelvins",
+        "elements": [
+         "3.079"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "5.F"
+      ],
+      "topics": [
+       "3.5"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "The pressure of CO2 = (n_b/n_total)P_total = (0.75/1.25)(3.079) = 1.847 atm."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Multiplies the mole fraction of CO2 by the total pressure to calculate the pressure of CO2 (about 1.847 atm)",
+        "elements": [
+         "1.847"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "6.E",
+       "6.B"
+      ],
+      "topics": [
+       "3.5"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "CH4 moves faster: at the same temperature the molecules have the same average kinetic energy, so the lighter molecules (CH4) have the greater average speed."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Identifies CH4 (the gas of lower molar mass) as faster",
+        "elements": [
+         "CH4"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Justifies that the average kinetic energy depends only on temperature, so a smaller mass means a larger speed",
+        "elements": [
+         "same average kinetic energy",
+         "smaller mass"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 4,
+    "judgment_demand": [
+     "law_selection",
+     "justification"
+    ]
+   },
+   "seed": 13701,
+   "pack_id": "chf_short_gas_mix-s13701"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "chf_short_gas_mix",
+   "facts": [
+    "ga=CH4",
+    "gb=CO2",
+    "na=0.5",
+    "nb=0.75",
+    "V=10.0",
+    "Tc=27",
+    "Pt=3.0788",
+    "Pb=1.8473"
+   ],
+   "seed": 13701
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The short FRQ on a CH4/CO2 mixture is correct, in scope for 3.4 and 3.5, and uses a 1/1/2 point split that fits the short-question grain. The keys are unique and the tolerance covers a 300 K versus 300.15 K difference. The only blemish is that the rubric flags a units row that does not exist as a separate row, which is minor.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Ideal gas law, Dalton's law with mole fraction, and a KMT speed argument all sit in Unit 3 and match each part's tagged skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The pressures of 3.079 atm and 1.847 atm are correct. The tolerance covers use of 300 K. CH4 is the unique answer for part C."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and states ideal behavior, so the empty data object is acceptable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is free response, so there are no distractors. The listed common errors are plausible."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light and the calculator is appropriate. The 4-point short-question structure matches the official grain."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Three linked parts: PV=nRT with a Celsius-to-kelvin conversion and summed moles (A), a partial-pressure calculation (B), and a KMT justification linking equal average KE at the same T to molar mass and speed (C). Concept depth is moderate, arithmetic is short and clean, reading load is low, and everything is within Unit 3 scope. Typical of a standard AP free-response sub-question set, so it suits full mocks rather than basic learning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-f02-k2",
+  "cellId": "ap_chemistry-f02",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "frq_bundle",
+  "keywordCode": "3.5",
+  "unitCode": "3",
+  "skillPrimary": "5.F",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "chf_short_gas_mix",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Three-part item combining the ideal gas law with a Celsius-to-kelvin conversion, Dalton's partial pressure, and a KMT justification (equal average KE at the same T, so the lighter gas is faster). It requires choosing the governing relationship and linking a result to a claim, but the arithmetic is short and clean, the wording is unambiguous, and everything is in the Unit 3 scope. This is typical of a full-mock free-response item.",
+  "payload": {
+   "archetype": "chf_short_gas_mix",
+   "template": "short",
+   "topic": "3.5",
+   "extra_topics": [
+    "3.4",
+    "3.6"
+   ],
+   "skill": "5.F",
+   "representative_skill": "5.F",
+   "calculator": "allowed",
+   "title": "Gas mixture, partial pressure and molecular speed",
+   "stimulus": {
+    "kind": "text",
+    "description": "A rigid container of volume $25\\text{ L}$ holds $1\\text{ mol}$ of $\\mathrm{Ne}$(g) and $0.25\\text{ mol}$ of $\\mathrm{Ar}$(g) at $27\\,^{\\circ}\\text{C}$. Assume ideal behavior. Molar masses: $\\mathrm{Ne}$ $20.18\\text{ g/mol}$, $\\mathrm{Ar}$ $39.95\\text{ g/mol}$.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Calculate the total pressure, in atm, in the container.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.B",
+      "5.F"
+     ],
+     "model_answer": "P = nRT/V = (1.25)(0.08206)(300.15)/25 = 1.232 atm.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Calculates the total pressure (about 1.232 atm) using kelvins",
+       "required_elements": [
+        "1.232"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the Celsius temperature"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Calculate the pressure that $\\mathrm{Ar}$ alone exerts in the container.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F"
+     ],
+     "model_answer": "The pressure of Ar = (n_b/n_total)P_total = (0.25/1.25)(1.232) = 0.246 atm.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Multiplies the mole fraction of Ar by the total pressure to calculate the pressure of Ar (about 0.246 atm)",
+       "required_elements": [
+        "0.246"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the mole fraction of the other gas"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Which gas, $\\mathrm{Ne}$ or $\\mathrm{Ar}$, has the greater average molecular speed at this temperature? Justify your answer.",
+     "points": 2,
+     "response_mode": "justify",
+     "skill_codes": [
+      "6.E",
+      "6.B"
+     ],
+     "model_answer": "Ne moves faster: at the same temperature the molecules have the same average kinetic energy, so the lighter molecules (Ne) have the greater average speed.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Identifies Ne (the gas of lower molar mass) as faster",
+       "required_elements": [
+        "Ne"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "identifies the heavier gas"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Justifies that the average kinetic energy depends only on temperature, so a smaller mass means a larger speed",
+       "required_elements": [
+        "same average kinetic energy",
+        "smaller mass"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says the heavier gas has more energy"
+       ],
+       "requires_row_id": "C1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 4,
+   "est_minutes": 9,
+   "facts": [
+    "ga=Ne",
+    "gb=Ar",
+    "na=1.0",
+    "nb=0.25",
+    "V=25.0",
+    "Tc=27",
+    "Pt=1.2315",
+    "Pb=0.2463"
+   ],
+   "expected_values": [
+    {
+     "part": "A",
+     "quantity": "total pressure",
+     "value": 1.2315154499999998,
+     "unit": "atm",
+     "tolerance": 0.024630308999999996
+    },
+    {
+     "part": "B",
+     "quantity": "partial pressure",
+     "value": 0.24630308999999997,
+     "unit": "atm",
+     "tolerance": 0.004926061799999999
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "chf_short_gas_mix",
+    "subject": "ap_chemistry",
+    "kind": "frq_bundle",
+    "concept": "Ideal gas law for a mixture, a mole-fraction partial pressure and a kinetic-molecular-theory argument",
+    "topic": "3.5",
+    "skill": "5.F",
+    "student_thinking": [
+     "Apply the ideal gas law to the total moles",
+     "Apply Dalton's law with the mole fraction",
+     "Reason about average kinetic energy and speed"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the gases behave ideally",
+      "evidence": "the stimulus"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "moles",
+      "volume",
+      "temperature"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "bisection on PV − nRT recomputes the pressure; the partial pressure from the mole fraction",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "5.B",
+       "5.F"
+      ],
+      "topics": [
+       "3.5"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "P = nRT/V = (1.25)(0.08206)(300.15)/25 = 1.232 atm."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Calculates the total pressure (about 1.232 atm) using kelvins",
+        "elements": [
+         "1.232"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "5.F"
+      ],
+      "topics": [
+       "3.5"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "The pressure of Ar = (n_b/n_total)P_total = (0.25/1.25)(1.232) = 0.246 atm."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Multiplies the mole fraction of Ar by the total pressure to calculate the pressure of Ar (about 0.246 atm)",
+        "elements": [
+         "0.246"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "6.E",
+       "6.B"
+      ],
+      "topics": [
+       "3.5"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "Ne moves faster: at the same temperature the molecules have the same average kinetic energy, so the lighter molecules (Ne) have the greater average speed."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Identifies Ne (the gas of lower molar mass) as faster",
+        "elements": [
+         "Ne"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Justifies that the average kinetic energy depends only on temperature, so a smaller mass means a larger speed",
+        "elements": [
+         "same average kinetic energy",
+         "smaller mass"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 4,
+    "judgment_demand": [
+     "law_selection",
+     "justification"
+    ]
+   },
+   "seed": 13702,
+   "pack_id": "chf_short_gas_mix-s13702"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "chf_short_gas_mix",
+   "facts": [
+    "ga=Ne",
+    "gb=Ar",
+    "na=1.0",
+    "nb=0.25",
+    "V=25.0",
+    "Tc=27",
+    "Pt=1.2315",
+    "Pb=0.2463"
+   ],
+   "seed": 13702
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a short free-response question on an ideal-gas mixture and kinetic molecular theory. Its keys are correct and verified, the stimulus is complete, the rubric rows are consistent, and the load fits a 4-point short question.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Three-part item combining the ideal gas law with a Celsius-to-kelvin conversion, Dalton's partial pressure, and a KMT justification (equal average KE at the same T, so the lighter gas is faster). It requires choosing the governing relationship and linking a result to a claim, but the arithmetic is short and clean, the wording is unambiguous, and everything is in the Unit 3 scope. This is typical of a full-mock free-response item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-f02-k3",
+  "cellId": "ap_chemistry-f02",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "frq_bundle",
+  "keywordCode": "3.5",
+  "unitCode": "3",
+  "skillPrimary": "5.F",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "chf_short_gas_mix",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Direct application of PV=nRT with one Celsius-to-kelvin conversion, a partial-pressure calculation by the same relationship, and a qualitative KMT justification (equal average KE at the same T, so the lighter gas is faster). Few steps, clean numbers, low reading load, no graph reading or multi-step linking. In scope for 3.4 and 3.5.",
+  "payload": {
+   "archetype": "chf_short_gas_mix",
+   "template": "short",
+   "topic": "3.5",
+   "extra_topics": [
+    "3.4",
+    "3.6"
+   ],
+   "skill": "5.F",
+   "representative_skill": "5.F",
+   "calculator": "allowed",
+   "title": "Gas mixture, partial pressure and molecular speed",
+   "stimulus": {
+    "kind": "text",
+    "description": "A rigid container of volume $20\\text{ L}$ holds $1.5\\text{ mol}$ of $\\mathrm{CH_{4}}$(g) and $1.25\\text{ mol}$ of $\\mathrm{CO_{2}}$(g) at $27\\,^{\\circ}\\text{C}$. Assume ideal behavior. Molar masses: $\\mathrm{CH_{4}}$ $16.04\\text{ g/mol}$, $\\mathrm{CO_{2}}$ $44.01\\text{ g/mol}$.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Calculate the total pressure, in atm, in the container.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.B",
+      "5.F"
+     ],
+     "model_answer": "P = nRT/V = (2.75)(0.08206)(300.15)/20 = 3.387 atm.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Calculates the total pressure (about 3.387 atm) using kelvins",
+       "required_elements": [
+        "3.387"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the Celsius temperature"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Calculate the pressure that $\\mathrm{CO_{2}}$ alone exerts in the container.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F"
+     ],
+     "model_answer": "The pressure of CO2 = (n_b/n_total)P_total = (1.25/2.75)(3.387) = 1.539 atm.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Multiplies the mole fraction of CO2 by the total pressure to calculate the pressure of CO2 (about 1.539 atm)",
+       "required_elements": [
+        "1.539"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the mole fraction of the other gas"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Which gas, $\\mathrm{CH_{4}}$ or $\\mathrm{CO_{2}}$, has the greater average molecular speed at this temperature? Justify your answer.",
+     "points": 2,
+     "response_mode": "justify",
+     "skill_codes": [
+      "6.E",
+      "6.B"
+     ],
+     "model_answer": "CH4 moves faster: at the same temperature the molecules have the same average kinetic energy, so the lighter molecules (CH4) have the greater average speed.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Identifies CH4 (the gas of lower molar mass) as faster",
+       "required_elements": [
+        "CH4"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "identifies the heavier gas"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Justifies that the average kinetic energy depends only on temperature, so a smaller mass means a larger speed",
+       "required_elements": [
+        "same average kinetic energy",
+        "smaller mass"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says the heavier gas has more energy"
+       ],
+       "requires_row_id": "C1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 4,
+   "est_minutes": 9,
+   "facts": [
+    "ga=CH4",
+    "gb=CO2",
+    "na=1.5",
+    "nb=1.25",
+    "V=20.0",
+    "Tc=27",
+    "Pt=3.3867",
+    "Pb=1.5394"
+   ],
+   "expected_values": [
+    {
+     "part": "A",
+     "quantity": "total pressure",
+     "value": 3.3866674874999996,
+     "unit": "atm",
+     "tolerance": 0.06773334974999999
+    },
+    {
+     "part": "B",
+     "quantity": "partial pressure",
+     "value": 1.5393943124999998,
+     "unit": "atm",
+     "tolerance": 0.030787886249999997
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "chf_short_gas_mix",
+    "subject": "ap_chemistry",
+    "kind": "frq_bundle",
+    "concept": "Ideal gas law for a mixture, a mole-fraction partial pressure and a kinetic-molecular-theory argument",
+    "topic": "3.5",
+    "skill": "5.F",
+    "student_thinking": [
+     "Apply the ideal gas law to the total moles",
+     "Apply Dalton's law with the mole fraction",
+     "Reason about average kinetic energy and speed"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the gases behave ideally",
+      "evidence": "the stimulus"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "moles",
+      "volume",
+      "temperature"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "bisection on PV − nRT recomputes the pressure; the partial pressure from the mole fraction",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "5.B",
+       "5.F"
+      ],
+      "topics": [
+       "3.5"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "P = nRT/V = (2.75)(0.08206)(300.15)/20 = 3.387 atm."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Calculates the total pressure (about 3.387 atm) using kelvins",
+        "elements": [
+         "3.387"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "5.F"
+      ],
+      "topics": [
+       "3.5"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "The pressure of CO2 = (n_b/n_total)P_total = (1.25/2.75)(3.387) = 1.539 atm."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Multiplies the mole fraction of CO2 by the total pressure to calculate the pressure of CO2 (about 1.539 atm)",
+        "elements": [
+         "1.539"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "6.E",
+       "6.B"
+      ],
+      "topics": [
+       "3.5"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "CH4 moves faster: at the same temperature the molecules have the same average kinetic energy, so the lighter molecules (CH4) have the greater average speed."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Identifies CH4 (the gas of lower molar mass) as faster",
+        "elements": [
+         "CH4"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Justifies that the average kinetic energy depends only on temperature, so a smaller mass means a larger speed",
+        "elements": [
+         "same average kinetic energy",
+         "smaller mass"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 4,
+    "judgment_demand": [
+     "law_selection",
+     "justification"
+    ]
+   },
+   "seed": 13703,
+   "pack_id": "chf_short_gas_mix-s13703"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "chf_short_gas_mix",
+   "facts": [
+    "ga=CH4",
+    "gb=CO2",
+    "na=1.5",
+    "nb=1.25",
+    "V=20.0",
+    "Tc=27",
+    "Pt=3.3867",
+    "Pb=1.5394"
+   ],
+   "seed": 13703
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A short 4-point question made of 1/1/2 parts. It covers the ideal gas law, Dalton's law with a mole fraction, and a kinetic molecular theory argument on speed. Each part matches its tagged skill and rubric rows, and the key is unique.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All three parts fall within topics 3.4 and 3.5. The part C justification uses KMT and equal average kinetic energy at the same temperature, which is the target topic. No out-of-scope content such as van der Waals constants."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is 3.387 atm using kelvins. The solver's 3.39 atm falls within the stated tolerance, so a 300 K versus 300.15 K difference does not affect scoring. B is 1.539 atm, and C is CH4. The rubric rows are consistent with the model answers."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives volume, moles, temperature, the ideal-behavior assumption and the molar masses. That is complete, and the empty data object is fine for a text stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is free response, so the rubric rows carry the scoring. The common errors listed are realistic: using Celsius, using the other gas's mole fraction, and naming the heavier gas as faster."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The estimated 9 minutes is a reasonable load for a short question. The arithmetic is light and a calculator is allowed. The molar masses are given but only used as a reference for part C."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct application of PV=nRT with one Celsius-to-kelvin conversion, a partial-pressure calculation by the same relationship, and a qualitative KMT justification (equal average KE at the same T, so the lighter gas is faster). Few steps, clean numbers, low reading load, no graph reading or multi-step linking. In scope for 3.4 and 3.5.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 200
+  }
+ }
+]
