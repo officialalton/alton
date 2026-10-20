@@ -76,7 +76,7 @@ def st_set_pd_table(rng):
 
 
 # ======================= 세트 B (단원 5): 자료표 + 주어진 회귀직선, 영향점 =======================
-LV_CTX = [dict(intro="A veterinarian records the age and the weight of nine randomly selected puppies of the same breed.", x="Age (weeks)", y="Weight (kg)", xr=(5, 18), a=1.0, b=0.62, xu="weeks", yu="kilograms", xd="age", yd="weight", sub="puppy"),
+LV_CTX = [dict(intro="A dispatcher records the distance and the delivery time for nine randomly selected delivery routes of a courier company.", x="Distance (km)", y="Delivery time (minutes)", xr=(4, 20), a=8.0, b=2.4, xu="kilometers", yu="minutes", xd="distance", yd="delivery time", sub="route"),
           dict(intro="A hiker records the elevation and the temperature at nine randomly selected points along a mountain trail.", x="Elevation (hundreds of meters)", y="Temperature (degrees Celsius)", xr=(4, 30), a=24.0, b=-0.62, xu="hundred meters", yu="degrees Celsius", xd="elevation", yd="temperature", sub="point")]
 
 
@@ -88,14 +88,14 @@ def st_set_reg_leverage(rng):
         if len(set(xs)) < 8:
             continue
         ys = np.round(c["a"] + c["b"] * xs + gen.normal(0, abs(c["b"]) * 1.6, 8), 1)
-        xl = float(xs.max() + (c["xr"][1] - c["xr"][0]) * 0.6)
+        xl = float(round(xs.max() + (c["xr"][1] - c["xr"][0]) * 0.6))
         trend = c["a"] + c["b"] * xl
         yl = round(trend - np.sign(c["b"]) * abs(c["b"]) * (c["xr"][1] - c["xr"][0]) * 0.55, 1)
         X = np.append(xs, xl); Y = np.append(ys, yl)
         b_all, a_all = np.polyfit(X, Y, 1); r_all = float(np.corrcoef(X, Y)[0, 1])
         b_wo, a_wo = np.polyfit(xs, ys, 1); r_wo = float(np.corrcoef(xs, ys)[0, 1])
         dr = abs(r_wo) - abs(r_all); db = abs(b_wo) - abs(b_all)
-        if abs(dr) >= 0.04 and abs(db) / abs(b_all) >= 0.1 and abs(b_all) > 0.05:
+        if abs(dr) >= 0.04 and abs(db) / abs(b_all) >= 0.1 and abs(b_all) > 0.05 and abs(round(float(a_all), 2) + round(float(b_all), 3) * float(X[3]) - float(Y[3]) + 0.0) > 0.0:
             break
     # 독립 경로: 정규방정식
     sxx = ((X - X.mean()) ** 2).sum(); sxy = ((X - X.mean()) * (Y - Y.mean())).sum(); agree(sxy / sxx, b_all, tol=1e-8, name="slope")
@@ -110,8 +110,8 @@ def st_set_reg_leverage(rng):
     i = 3; x0, y0 = float(X[i]), float(Y[i])
     yh = ar + br * x0; res = y0 - yh
     vals = [res, -res, y0 - br * x0, yh]
-    if not gaps_ok([round(v, 2) for v in vals], 0.08):
-        raise ValueError("q1_close")
+    if not gaps_ok([round(v, 2) for v in vals], 0.08) or abs((abs(res) * 100) % 1 - 0.5) < 0.12:
+        raise ValueError("q1_close_or_tie")
     key1 = (fm2(res), f"The residual is the actual value minus the predicted value: ${y0:g} - ({yh:.2f}) = {res:.2f}$.", round(res, 2))
     wr1 = [(fm2(-res), "Subtracts in the wrong order; the residual is the actual value minus the predicted value.", "sign_reversed", round(-res, 2), 1), (fm2(y0 - br * x0), "Leaves the intercept out of the predicted value before subtracting.", "intercept_left_out", round(y0 - br * x0, 2), 2), (fm2(yh), "Reports the predicted value instead of the residual.", "prediction_not_residual", round(yh, 2), 2)]
     m1 = _member("st_set_reg_leverage", 1, "5.4", "3.B", "Calculate a residual for an observation from the table and the given line",
@@ -148,7 +148,14 @@ def st_set_reg_leverage(rng):
     key3 = (desc(rd, sd_), f"With the last observation removed, $|r|$ changes from ${abs(r_all):.2f}$ to ${abs(r_wo):.2f}$ and the size of the slope changes from ${abs(b_all):.3f}$ to ${abs(b_wo):.3f}$.")
     whys = {("increase", "increase"): "The correlation and the slope would both be larger in size when the last observation is removed.", ("increase", "decrease"): "The correlation would be larger in strength but the slope would be smaller in size.",
             ("decrease", "increase"): "The correlation would be weaker but the slope would be larger in size.", ("decrease", "decrease"): "The correlation would be weaker and the slope would be smaller in size."}
-    wr3 = [(desc(a_, b_), f"Does not match the recalculated values: without the last observation the correlation would {rd} in strength and the slope would {sd_} in size, not the combination in this statement ({a_} and {b_}).", f"change_{a_}_{b_}", None, 1 + (i % 2)) for i, (a_, b_) in enumerate([x for x in combos if x != (rd, sd_)])]
+    def why3(a_, b_):
+        parts_ = []
+        if a_ != rd:
+            parts_.append(f"the strength of the correlation goes from $|r| = {abs(r_all):.2f}$ to ${abs(r_wo):.2f}$, which is an {rd}, not a {a_}")
+        if b_ != sd_:
+            parts_.append(f"the size of the slope goes from ${abs(b_all):.3f}$ to ${abs(b_wo):.3f}$, which is an {sd_}, not a {b_}")
+        return "Does not match the recalculated values: " + " and ".join(parts_) + "."
+    wr3 = [(desc(a_, b_), why3(a_, b_), f"change_{a_}_{b_}", None, 1 + (i % 2)) for i, (a_, b_) in enumerate([x for x in combos if x != (rd, sd_)])]
     m3 = _member("st_set_reg_leverage", 3, "5.2", "4.D", "Judge how removing a high-leverage observation changes the correlation and the slope",
                  ["Notice that the last observation lies far to the right of the other observations and away from their trend", "Decide how removing it changes the strength of the correlation and the size of the slope, and match both changes to one option"],
                  key3, wr3, rng, f"The observation with the largest {c['xd']} is removed, and the least-squares line and the correlation are recalculated from the other eight observations. Which of the following describes the change?", "the line and correlation are recomputed with and without the last observation by two methods and the four combinations of changes are exhaustive, so one is true", ["interpretation", "claim_justification", "representation_reading"], 110, [f"rd={rd}", f"sd={sd_}"],
@@ -157,3 +164,6 @@ def st_set_reg_leverage(rng):
 
 
 STAGE_SETS = ["st_set_pd_table", "st_set_reg_leverage"]
+
+# 첫 세트 런(stats-r19-p3-b)에서 반려된 세트(범위 표기 오류·동점 잔차·일반적 오답 설명·기존 문항과 유사한 맥락)를 고친 뒤 다시 돌린다
+STAGE_FIXSETS = ["st_set_reg_leverage"]
