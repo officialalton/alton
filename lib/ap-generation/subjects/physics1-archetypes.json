@@ -2173,5 +2173,890 @@
    "Reports $\\pi A/T$, with one factor of two missing.",
    "Reports the maximum acceleration $4\\pi^2A/T^2$ instead of the maximum speed."
   ]
+ },
+ {
+  "id": "ph_claim_airbag_force",
+  "topic": "4.2",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a numerical integration of the constant force over the stopping time reproduces the change in momentum"
+  ],
+  "misconceptions": [
+   "Thinks that a longer time means a larger impulse, but the impulse is fixed by the change in momentum.",
+   "Treats equal momentum changes as equal forces, forgetting that the time of the stop differs.",
+   "Multiplies the momentum by the time instead of dividing the change in momentum by the time."
+  ]
+ },
+ {
+  "id": "ph_claim_ke_stopping",
+  "topic": "3.2",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the braking motion is sampled in time and integrated to give the stopping distance at both speeds"
+  ],
+  "misconceptions": [
+   "Concludes that a constant force always gives the same distance, ignoring the larger kinetic energy to be removed.",
+   "Takes the distance to be proportional to the speed, but the kinetic energy depends on the square of the speed.",
+   "Reverses the effect of the speed on the distance and confuses momentum with the energy that the friction force removes."
+  ]
+ },
+ {
+  "id": "ph_claim_power_climb",
+  "topic": "3.5",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the work is found by numerical integration of the force over the height, and the average power is the work over the time"
+  ],
+  "misconceptions": [
+   "Treats equal work as equal power, forgetting that power is the rate at which the work is done.",
+   "Confuses the time spent with the amount of work; the work depends on the force and the distance.",
+   "Divides the wrong way or thinks that a longer time means more power, but power decreases as the time increases."
+  ]
+ },
+ {
+  "id": "ph_claim_ramps_speed",
+  "topic": "3.4",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "constant-acceleration kinematics on each incline gives the same final speed as the energy equation"
+  ],
+  "misconceptions": [
+   "Overlooks the smaller acceleration on the longer ramp; the speed depends on the height only.",
+   "A greater acceleration over a shorter distance gives the same speed, since $v^2=2aL$ with $a=gh/L$ gives $v^2=2gh$ for both.",
+   "Equates $mgh$ with $mv^2$ and so leaves out the factor $\\tfrac12$ in the kinetic energy."
+  ]
+ },
+ {
+  "id": "ph_claim_relative_motion",
+  "topic": "1.4",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "positions of the objects are sampled over time and the rate of change of their separation is compared with the vector sum or difference stated in the option"
+  ],
+  "misconceptions": [
+   "Treats the velocity of A as the same for every observer.",
+   "Gets the sign of the relative velocity wrong; the slower car is seen moving backward by the faster driver.",
+   "Adds the speeds, which is correct only when the cars move in opposite directions."
+  ]
+ },
+ {
+  "id": "ph_claim_spring_launch",
+  "topic": "3.3",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the work done by the spring force is found by numerically integrating kx over the compression and the speed from the kinetic energy"
+  ],
+  "misconceptions": [
+   "Concludes that the speed depends only on $k$ and $m$, ignoring the greater compression.",
+   "Takes the speed to be proportional to the energy, but the energy is proportional to the speed squared.",
+   "Treats the stored energy as proportional to the compression instead of to its square."
+  ]
+ },
+ {
+  "id": "ph_claim_vt_area",
+  "topic": "1.2",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a dense numerical integration of the velocity gives the final position and the integral of the speed gives the path length"
+  ],
+  "misconceptions": [
+   "Gives the distance as the magnitude of the displacement, which holds only if the direction does not reverse.",
+   "Treats displacement and distance as equal even though the velocity changes direction.",
+   "Averages the two velocities without weighting them by the time that each lasts."
+  ]
+ },
+ {
+  "id": "ph_evid_friction_data",
+  "topic": "2.7",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "the normal equations for a line through the origin give a slope close to the mean of f/N, and N - f changes by more than a factor of two"
+  ],
+  "misconceptions": [
+   "Overlooks that $f$ rises from $2.50\\text{ N}$ to $19.89\\text{ N}$ as the normal force increases.",
+   "Tests the difference instead of the ratio, but for these data $N-f$ varies from $2.5$ to $20.1$ N.",
+   "Reads the reciprocal ratio $N/f$ as the coefficient of kinetic friction, which is defined as $f/N$."
+  ]
+ },
+ {
+  "id": "ph_evid_spring_data",
+  "topic": "2.8",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "the normal equations for a line through the origin give a slope close to the mean of F/x, and the product F x varies by more than a factor of three"
+  ],
+  "misconceptions": [
+   "Reads the reciprocal $x/F$ as the spring constant, which is defined as $F/x$.",
+   "Tests the product instead of the ratio, but for these data $Fx$ increases from $0.032$ to $1.79$ J.",
+   "Mistakes an increasing force for an increasing spring constant, but the ratio of force to stretch is constant."
+  ]
+ },
+ {
+  "id": "ph_pred_collapse_spin",
+  "topic": "6.4",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the angular speed from conservation of angular momentum is compared with the rotational kinetic energy ratio from half I omega squared, which increases by the same square factor"
+  ],
+  "misconceptions": [
+   "Takes the angular speed to be proportional to the radius, so it would decrease.",
+   "Takes the angular speed to be inversely proportional to the radius instead of the square of the radius.",
+   "Assumes that the angular speed does not change because no external torque acts."
+  ]
+ },
+ {
+  "id": "ph_pred_planet_weight",
+  "topic": "2.6",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the weight is computed from Newton's law of gravitation with the masses and radii of Earth and the planet and the ratio is compared with the scaling factor"
+  ],
+  "misconceptions": [
+   "Divides the factor for the mass by the radius instead of by the square of the radius.",
+   "Multiplies the weight by the factor for the mass only and forgets the radius.",
+   "Multiplies the weight by the factor for the mass and the factor for the radius squared."
+  ]
+ },
+ {
+  "id": "ph_pred_spring_period",
+  "topic": "7.2",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the equation of motion is integrated with RK4 for both systems and the periods are measured at the quarter-period crossing"
+  ],
+  "misconceptions": [
+   "Uses the square root of the inverse ratio, as if the period increased with the spring constant and decreased with the mass.",
+   "Uses the ratio of the masses to the ratio of the spring constants without the square root.",
+   "Multiplies the square roots of the two factors instead of dividing the square root of the mass factor by that of the spring factor."
+  ]
+ },
+ {
+  "id": "ph_rank_ang_momentum",
+  "topic": "6.4",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fractions of I times omega are sorted and compared with the floating-point ordering"
+  ],
+  "misconceptions": [
+   "Ranks by the angular speed alone, ignoring the moment of inertia.",
+   "Ranks by the mass of the objects, as if a heavier object has more angular momentum.",
+   "Ranks by the moment of inertia alone, ignoring the angular speed."
+  ]
+ },
+ {
+  "id": "ph_rank_rot_ke",
+  "topic": "6.1",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fractions of the energy formula are sorted and compared with the floating-point ordering"
+  ],
+  "misconceptions": [
+   "Ranks by the angular speed alone, ignoring the moment of inertia.",
+   "Ranks by the moment of inertia alone, ignoring the angular speed.",
+   "Ranks by the mass times the angular speed squared, ignoring the radius and shape."
+  ]
+ },
+ {
+  "id": "ph_sym_apparent_weight",
+  "topic": "8.3",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "force balance solved numerically and the buoyant force integrated over the submerged fraction, and the printed option is evaluated by a TeX evaluator"
+  ],
+  "misconceptions": [
+   "Leaves out the factor of the acceleration due to gravity.",
+   "Uses the volume of the part that is above the surface of the fluid.",
+   "Uses the whole volume of the object although only part of it is below the surface of the fluid."
+  ]
+ },
+ {
+  "id": "ph_sym_bernoulli_diff",
+  "topic": "8.4",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the Bernoulli sum is set equal at the two points and the pressure difference is evaluated numerically, and the printed option is evaluated by a TeX evaluator"
+  ],
+  "misconceptions": [
+   "Uses only the gravitational term and ignores the change in speed.",
+   "Leaves out the change in the gravitational potential energy per unit volume, although point 1 is higher than point 2.",
+   "Adds the gravitational term instead of subtracting it, which treats point 1 as lower than point 2."
+  ]
+ },
+ {
+  "id": "ph_sym_continuity_pipe",
+  "topic": "8.4",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the equal volume flow rates are solved for the speed, and the printed option is evaluated by a TeX evaluator against the numeric result from the areas"
+  ],
+  "misconceptions": [
+   "Leaves out the factor of $\\pi$ in the area of a circle.",
+   "Uses the diameter instead of the radius in the area formula, so the factor of 4 is missing.",
+   "Uses the circumference times the speed instead of the area times the speed."
+  ]
+ },
+ {
+  "id": "ph_sym_pressure_depth",
+  "topic": "8.2",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the rate of increase of pressure with depth is integrated numerically and compared with the symbolic formula, and the printed option is evaluated by a TeX evaluator"
+  ],
+  "misconceptions": [
+   "Divides by the area instead of multiplying by it.",
+   "Uses the absolute pressure to find the net force, although the air inside pushes on the hatch with the atmospheric pressure from the other side.",
+   "Uses the depth squared in the pressure of the fluid."
+  ]
+ },
+ {
+  "id": "ph_sym_rolling_accel",
+  "topic": "6.5",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "energy conservation with the kinetic energy split into translation and rotation gives the acceleration through v squared = 2 a s, which agrees with the force and torque solution, and the printed option is evaluated by a TeX evaluator"
+  ],
+  "misconceptions": [
+   "Uses the wrong rotational inertia factor, so the share of the energy in rotation is too large.",
+   "Uses the wrong rotational inertia factor, so the share of the energy in rotation is too small.",
+   "Uses the cosine of the angle, which is the component of gravity perpendicular to the incline."
+  ]
+ },
+ {
+  "id": "ph_sym_wheel_pulley",
+  "topic": "5.6",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solves the equations of both bodies; numpy solves the 2x2 linear system at the chosen values, and the printed option is evaluated by a TeX evaluator"
+  ],
+  "misconceptions": [
+   "Gives the net force $ma$ on the block instead of the tension in the string.",
+   "Takes the tension to equal the weight of the hanging block, which holds only if the block does not accelerate.",
+   "Splits the weight equally between the string and the acceleration of the block, as if the moment of inertia of the wheel were always $mR^2$."
+  ]
+ },
+ {
+  "id": "phs_depth_pressure_set_q1",
+  "topic": "8.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "a least-squares slope through the origin and the mean of the ratios P over d agree on the density within two percent"
+  ],
+  "misconceptions": [
+   "Uses the gauge pressure divided by $g$ times the depth squared.",
+   "Multiplies the pressure by the depth and divides by $g$.",
+   "Divides the pressure by the depth and does not divide by the acceleration due to gravity."
+  ]
+ },
+ {
+  "id": "phs_depth_pressure_set_q2",
+  "topic": "8.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "a least-squares slope through the origin and the mean of the ratios P over d agree on the density within two percent"
+  ],
+  "misconceptions": [
+   "Adds the atmospheric pressure to the pressure at the deepest tabulated depth and does not extend to the new depth.",
+   "Uses the square of the ratio of the depths when extending the gauge pressure, and adds the atmospheric pressure.",
+   "Gives only the gauge pressure at the depth and leaves out the atmospheric pressure."
+  ]
+ },
+ {
+  "id": "phs_ft_set_q1",
+  "topic": "4.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "exact fractions for the area versus numpy integration of a dense resampling; the speed from the impulse-momentum equation"
+  ],
+  "misconceptions": [
+   "Uses only the area of the first segment.",
+   "Adds the force values at the plotted points without multiplying by the intervals.",
+   "Multiplies the largest force by the total time."
+  ]
+ },
+ {
+  "id": "phs_ft_set_q2",
+  "topic": "4.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "exact fractions for the area versus numpy integration of a dense resampling; the speed from the impulse-momentum equation"
+  ],
+  "misconceptions": [
+   "Adds the initial speed to the impulse without dividing by the mass.",
+   "Uses the largest force times the total time as the impulse.",
+   "Reports the change in speed, $J/m$, and forgets to add the initial speed."
+  ]
+ },
+ {
+  "id": "phs_torque_set_q1",
+  "topic": "5.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "exact fractions for the area versus numpy integration; the angular acceleration from the torque and the moment of inertia"
+  ],
+  "misconceptions": [
+   "Divides the moment of inertia by the net torque.",
+   "Uses the average torque over the whole graph divided by the moment of inertia.",
+   "Reports the net torque without dividing by the moment of inertia."
+  ]
+ },
+ {
+  "id": "phs_torque_set_q2",
+  "topic": "5.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "exact fractions for the area versus numpy integration; the angular acceleration from the torque and the moment of inertia"
+  ],
+  "misconceptions": [
+   "Multiplies the largest torque by the total time and divides by the moment of inertia.",
+   "Uses only the area of the first segment divided by the moment of inertia.",
+   "Divides the final torque by the moment of inertia, ignoring the time for which the torque acts."
+  ]
+ },
+ {
+  "id": "ph_claim_bounce_impulse",
+  "topic": "4.2",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a force pulse over the contact time is integrated numerically to give the impulse, which is compared with the change in momentum"
+  ],
+  "misconceptions": [
+   "Subtracts the speeds before and after, forgetting that the velocity changes direction so the momenta have opposite signs.",
+   "Compares only the initial momenta, but the impulse is the change in momentum and depends on the final velocity.",
+   "Uses only the magnitude of the final momentum of ball 2 and so misses that the velocity changes sign."
+  ]
+ },
+ {
+  "id": "ph_claim_continuity_speed",
+  "topic": "8.4",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the equal flow rates are solved numerically from the two circular areas"
+  ],
+  "misconceptions": [
+   "Reverses the effect of the area on the speed; a smaller area gives a greater speed for a constant flow rate.",
+   "Uses the ratio of the diameters instead of the ratio of the areas.",
+   "Confuses a constant flow rate with a constant speed, ignoring the change in the cross-sectional area."
+  ]
+ },
+ {
+  "id": "ph_claim_incline_normal",
+  "topic": "2.2",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the force balance perpendicular to the incline is solved numerically from the components of the weight"
+  ],
+  "misconceptions": [
+   "Uses the component of the weight along the incline, which is balanced by friction and not by the normal force.",
+   "Divides by the cosine instead of multiplying, which gives a normal force greater than the weight.",
+   "Treats the normal force as equal to the weight on any surface, but it equals only the perpendicular component of the weight on an incline."
+  ]
+ },
+ {
+  "id": "ph_claim_recoil_speed",
+  "topic": "4.3",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a linear system for the two final velocities with zero total momentum and the speed of the bullet relative to the ground is solved numerically"
+  ],
+  "misconceptions": [
+   "Internal forces change the motion of the parts of a system; they only leave the momentum of the whole system unchanged.",
+   "Takes equal and opposite forces to mean equal speeds, ignoring the different masses.",
+   "Inverts the mass ratio so that the heavier rifle moves faster than the bullet."
+  ]
+ },
+ {
+  "id": "ph_claim_satellite_speed",
+  "topic": "6.6",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the orbit is integrated numerically with RK4 to confirm a circular orbit at the speed $\\sqrt{GM/r}$"
+  ],
+  "misconceptions": [
+   "Treats the speed as independent of the radius, but the gravitational force changes with the distance.",
+   "Takes $v\\propto 1/r$, but the circular-orbit condition gives $v\\propto 1/\\sqrt{r}$.",
+   "Reverses the dependence of the speed on the radius."
+  ]
+ },
+ {
+  "id": "ph_claim_shm_mass",
+  "topic": "7.2",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the period is computed from the formula for both masses and the ratio is compared with the square root of the mass ratio"
+  ],
+  "misconceptions": [
+   "Reverses the effect of the mass; a greater mass gives a greater period.",
+   "Takes the period to be proportional to the mass instead of to its square root.",
+   "Confuses the mass-spring system with a pendulum, whose period does not depend on the mass."
+  ]
+ },
+ {
+  "id": "ph_claim_torque_door",
+  "topic": "5.3",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the torque is computed as the cross product of the position vector and the force vector in two dimensions"
+  ],
+  "misconceptions": [
+   "Reverses the dependence on the distance, although the torque increases with the lever arm.",
+   "Ignores the lever arm, but the torque depends on the distance from the axis as well as on the force.",
+   "Divides the force by the distance instead of multiplying them."
+  ]
+ },
+ {
+  "id": "ph_evid_ke_speed_data",
+  "topic": "3.1",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "the normal equations for K proportional to v squared give a slope close to half the mass and the spread of K over v squared is under six percent"
+  ],
+  "misconceptions": [
+   "Reads the table as an inverse relationship although the kinetic energy increases with the speed.",
+   "Tests the ratio $K/v$ for a direct proportion, but for these data it increases from $0.5$ to $3.01$.",
+   "Mistakes a quadratic increase for a doubling for each unit of speed."
+  ]
+ },
+ {
+  "id": "ph_evid_period_mass_data",
+  "topic": "7.2",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "a least-squares fit of log T against log m gives an exponent within 0.03 of one half, and the spread of T squared over m is under six percent"
+  ],
+  "misconceptions": [
+   "Overlooks that the period increases from $0.314\\text{ s}$ to $1.213\\text{ s}$ as the mass increases.",
+   "Tests the ratio $T/m$ for a direct proportion, but for these data it falls from $3.14$ to $0.809$ s/kg.",
+   "Reads a decreasing quantity as an inverse relationship, but the period increases with the mass in the table."
+  ]
+ },
+ {
+  "id": "ph_pred_incline_angle",
+  "topic": "2.7",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the acceleration at each angle is obtained from the kinematics of the sliding block and compared with the ratio of the expressions"
+  ],
+  "misconceptions": [
+   "Assumes the acceleration does not change because the coefficient of friction is the same.",
+   "Compares only the components of gravity along the incline and ignores friction.",
+   "Uses the cosines of the angles in place of the sines in the driving term."
+  ]
+ },
+ {
+  "id": "ph_pred_pendulum_planet",
+  "topic": "7.2",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the nonlinear pendulum equation is integrated with RK4 at small amplitude for both values of g and the periods are compared"
+  ],
+  "misconceptions": [
+   "Takes the period to be inversely proportional to the acceleration due to gravity, without the square root.",
+   "Takes the period to be proportional to the acceleration due to gravity.",
+   "Takes the period to be unchanged, because the period of a pendulum does not depend on the mass."
+  ]
+ },
+ {
+  "id": "ph_sym_disk_rim_force",
+  "topic": "5.6",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solves the rotational second law; a 1x1 linear solve and an RK4 integration of the angular acceleration give the same value, and the printed option is evaluated by a TeX evaluator"
+  ],
+  "misconceptions": [
+   "Divides by the time instead of multiplying by it.",
+   "Uses the moment of inertia of a hoop, $mR^2$, instead of that of a solid disk.",
+   "Leaves out the time, which gives the angular acceleration and not the angular speed."
+  ]
+ },
+ {
+  "id": "ph_sym_kinematics_vf",
+  "topic": "1.2",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the equations of motion are integrated numerically for the position and the speed, and the printed option is evaluated by a TeX evaluator"
+  ],
+  "misconceptions": [
+   "Uses the average of the speed and the acceleration.",
+   "Leaves out the factor of one half in the term of the acceleration.",
+   "Leaves out the initial speed."
+  ]
+ },
+ {
+  "id": "ph_sym_slide_stop_speed",
+  "topic": "3.2",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "constant-deceleration kinematics sampled in time gives the same speed or distance as the energy equation, and the printed option is evaluated by a TeX evaluator"
+  ],
+  "misconceptions": [
+   "Divides by the coefficient of friction only and forgets the acceleration due to gravity.",
+   "Leaves out the factor of 2 in the kinetic energy.",
+   "Uses the speed instead of the speed squared."
+  ]
+ },
+ {
+  "id": "ph_sym_spring_added_mass",
+  "topic": "7.2",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the equation of motion measures the period at the quarter-period crossing, and the printed option is evaluated by a TeX evaluator"
+  ],
+  "misconceptions": [
+   "Inverts the ratio under the square root, so a stiffer spring would give a longer period.",
+   "Uses only the mass of the block that was originally attached and leaves out the added mass.",
+   "Adds the masses outside the square root."
+  ]
+ },
+ {
+  "id": "ph_claim_atwood_accel",
+  "topic": "2.5",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the two equations of motion are solved as a linear system for the acceleration and the tension"
+  ],
+  "misconceptions": [
+   "Adds the weights, which would be the tension only if the blocks hung from one end at rest.",
+   "Treats the tension as the weight of the lighter block, which holds only if that block does not accelerate.",
+   "Treats the tension as the weight of the heavier block, which holds only if that block does not accelerate."
+  ]
+ },
+ {
+  "id": "ph_claim_friction_area",
+  "topic": "2.7",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the friction force is computed as mu times the normal force obtained from a vertical force balance, which does not involve the area"
+  ],
+  "misconceptions": [
+   "Confuses the pressure on the surface with the friction force; the force does not depend on the area.",
+   "Assumes that the friction force is proportional to the contact area, but the model $f=\\mu N$ does not include the area.",
+   "Divides the weight by the area, but the friction force is $\\mu N$ and the normal force is the same."
+  ]
+ },
+ {
+  "id": "ph_pred_collision_stick",
+  "topic": "4.3",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the final speed in each trial is found from a numerical solution of the momentum equation and the ratio of the speeds is compared"
+  ],
+  "misconceptions": [
+   "Divides the speed by the mass factor and by two.",
+   "Takes the speed to be inversely proportional to the mass of the stationary cart only.",
+   "Takes the speed to be inversely proportional to the square of the total mass."
+  ]
+ },
+ {
+  "id": "ph_rank_angular_accel",
+  "topic": "5.6",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fractions of the torque over the moment of inertia are sorted and compared with the floating-point ordering"
+  ],
+  "misconceptions": [
+   "Ranks by the tangential force alone, ignoring the moment of inertia.",
+   "Ranks by the force divided by the mass, as for a point mass, ignoring the radius and shape.",
+   "Ranks by the moment of inertia, with the largest first."
+  ]
+ },
+ {
+  "id": "ph_rank_friction_force",
+  "topic": "2.7",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fractions of mu times m are sorted and compared with the floating-point ordering"
+  ],
+  "misconceptions": [
+   "Ranks by the product of the coefficient and the speed.",
+   "Ranks by the speed of the blocks, as if the kinetic friction force increased with the speed.",
+   "Ranks by the coefficient of friction only, ignoring the mass."
+  ]
+ },
+ {
+  "id": "ph_rank_incline_accel",
+  "topic": "2.7",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the accelerations are computed from the expression and checked against the sorting of the floating-point values"
+  ],
+  "misconceptions": [
+   "Ranks by the coefficient of friction in the reverse order, ignoring the angle.",
+   "Ranks by the component of gravity along the incline, $mg\\sin\\theta$, without friction and mass cancelling.",
+   "Ranks by the mass of the block, as if a heavier block accelerates more."
+  ]
+ },
+ {
+  "id": "ph_rank_moment_inertia",
+  "topic": "5.4",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fractions of the sums of m r squared are sorted and compared with the floating-point ordering"
+  ],
+  "misconceptions": [
+   "Ranks by the sum of the products of the mass and the distance, without squaring the distance.",
+   "Ranks in the reverse of the correct order.",
+   "Ranks by the total mass of the particles, ignoring their distances from the axis."
+  ]
+ },
+ {
+  "id": "ph_rank_momentum_change",
+  "topic": "4.2",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fractions of the change in momentum are sorted and compared with the floating-point ordering"
+  ],
+  "misconceptions": [
+   "Ranks by the initial momentum of each ball, ignoring what happens in the collision.",
+   "Ranks by the kinetic energy before the collision.",
+   "Ranks by the final momentum of each ball, ignoring the change in direction."
+  ]
+ },
+ {
+  "id": "ph_rank_normal_force",
+  "topic": "2.2",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the force balance is solved for each block and the values are sorted and compared with the floating-point ordering"
+  ],
+  "misconceptions": [
+   "Adds the extra force to the weight for every block, including the block that is pulled upward and the block on the incline.",
+   "Ranks by the weight of the blocks, as if the normal force always equals the weight.",
+   "Ranks in the reverse of the correct order."
+  ]
+ },
+ {
+  "id": "ph_sym_float_fraction",
+  "topic": "8.3",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the force balance is solved by bisection for the submerged fraction or depth, and the printed option is evaluated by a TeX evaluator"
+  ],
+  "misconceptions": [
+   "Leaves out the height of the block and gives only the fraction.",
+   "Gives the height of the block above the surface instead of the depth below it.",
+   "Inverts the ratio of the densities."
+  ]
+ },
+ {
+  "id": "ph_sym_free_fall_time",
+  "topic": "1.2",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "RK4 integration of the vertical motion measures the time to reach the ground or the starting height, and the printed option is evaluated by a TeX evaluator"
+  ],
+  "misconceptions": [
+   "Squares the initial speed in the numerator.",
+   "Gives only the time to reach the top of the path, which is half of the time of flight.",
+   "Uses the equation for the maximum height, $v_0^2/(2g)$, as the time."
+  ]
+ },
+ {
+  "id": "ph_sym_projectile_range",
+  "topic": "1.5",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the equations of motion are integrated with RK4 until the projectile lands or reaches the top, and the printed option is evaluated by a TeX evaluator"
+  ],
+  "misconceptions": [
+   "Uses the cosine of the angle, which is the horizontal component.",
+   "Uses the full speed instead of its vertical component.",
+   "Uses the sine without squaring it."
+  ]
+ },
+ {
+  "id": "ph_sym_torricelli",
+  "topic": "8.4",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the Bernoulli equation is solved by bisection for the exit speed and the horizontal distance is integrated over the time of fall, and the printed option is evaluated by a TeX evaluator"
+  ],
+  "misconceptions": [
+   "Adds the two heights under the square root.",
+   "Leaves out the factor of 2.",
+   "Uses the product of the heights without the square root."
+  ]
+ },
+ {
+  "id": "phs_wt_claim_set_q1",
+  "topic": "5.1",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "the slope of each segment is computed exactly and by numerical differentiation"
+  ],
+  "misconceptions": [
+   "Takes a graph that does not rise to mean a negative torque, but a negative torque would make the angular speed decrease.",
+   "Thinks that a net torque is needed to maintain a constant angular speed, but a net torque produces an angular acceleration.",
+   "Carries the net torque of the first segment into the second segment although the slope of the graph is zero there."
+  ]
+ },
+ {
+  "id": "phs_wt_claim_set_q2",
+  "topic": "5.1",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "exact fractions for the areas versus numpy integration of a dense resampling"
+  ],
+  "misconceptions": [
+   "Mistakes the slope, which is the angular acceleration, for the angle that the wheel turns.",
+   "Uses only the horizontal part of the graph and leaves out the other segments.",
+   "Uses the largest angular speed for the whole time, but the speed is lower for part of the time."
+  ]
+ },
+ {
+  "id": "ph_claim_collision_energy",
+  "topic": "4.4",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the momentum equation is solved as a linear system for the final speed and the kinetic energies are computed directly"
+  ],
+  "misconceptions": [
+   "Splits the energy equally between the carts without using the masses and the conservation of momentum.",
+   "Treats conservation of momentum as conservation of kinetic energy, which holds only for elastic collisions.",
+   "Uses the original speed for the combined mass, but the speed decreases after the carts stick together."
+  ]
+ },
+ {
+  "id": "ph_pred_altitude_weight",
+  "topic": "2.6",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the weight is computed from Newton's law of gravitation at both distances and the ratio is compared with the inverse square of the distance factor"
+  ],
+  "misconceptions": [
+   "Assumes the weight does not change because the mass of the astronaut does not change.",
+   "Divides by the square of the height above the surface, forgetting that the distance is measured from the center of Earth.",
+   "Uses the distance from the center divided by the radius, $1+k$, without squaring it."
+  ]
+ },
+ {
+  "id": "ph_pred_orbit_period_radius",
+  "topic": "6.6",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the orbits are integrated with RK4 and the time for one revolution is measured at both radii"
+  ],
+  "misconceptions": [
+   "Takes the period to be proportional to the square of the radius.",
+   "Takes the period to be unchanged because both satellites feel the gravity of the same Earth.",
+   "Takes the period to be proportional to the square root of the radius."
+  ]
  }
 ]

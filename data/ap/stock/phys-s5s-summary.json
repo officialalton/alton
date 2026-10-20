@@ -1,0 +1,42 @@
+{
+ "runs": [
+  "phys-s5n-sets"
+ ],
+ "rows": 12,
+ "passed": 10,
+ "rejected": 2,
+ "passRate": 0.833,
+ "singles": {
+  "candidates": 0
+ },
+ "unitsPassed": {
+  "4": 3,
+  "5": 5,
+  "8": 2
+ },
+ "figPassed": {
+  "graph": 8,
+  "none": 2
+ },
+ "figAll": {
+  "graph": 9,
+  "none": 3
+ },
+ "figPassRate": {
+  "graph": "8/9",
+  "none": "2/3"
+ },
+ "renderTypesPassed": {
+  "ap_graph:phys_line": 8,
+  "ap_table": 2
+ },
+ "archetypesPassed": {
+  "phs_ft_set_q1": 3,
+  "phs_torque_set_q1": 2,
+  "phs_depth_pressure_set_q1": 2,
+  "phs_wt_claim_set_q1": 3
+ },
+ "costUsd": {
+  "phys-s5n-sets": 0.8545
+ }
+}
