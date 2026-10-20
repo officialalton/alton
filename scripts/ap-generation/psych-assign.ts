@@ -172,7 +172,9 @@ function main() {
   if (arg("--verify-report")) return verifyReport(arg("--verify-report"));
   const ids = arg("--sets", "PS1,PS2").split(",").filter(Boolean); const TIME = Number(arg("--time-ms", "120000"));
   const files = arg("--files") ? arg("--files").split(",") : undefined;
-  const { pool } = loadPsychPool({ requireScreen: !has("--no-screen"), files });
+  const { pool: pool0 } = loadPsychPool({ requireScreen: !has("--no-screen"), files });
+  // 2026-10-19: --ban-archetypes <정규식> — 외부 검수가 지적한 틀(pre/post·GPA 신뢰도·z 꼬리·반응시간·방관자·효과/p·위약 평가)의 원형 변형을 새 세트에서 뺀다.
+  const banRe = arg("--ban-archetypes") ? new RegExp(arg("--ban-archetypes")) : null; const pool = banRe ? pool0.filter((c) => !banRe.test(c.archetype)) : pool0;
   const log = (s: string) => console.error(s);
   const blocked = new Set<string>(); for (const f of arg("--block-file").split(",").filter(Boolean)) for (const st of (JSON.parse(readFileSync(f, "utf-8")) as { sets: { mcA?: string[]; frqA?: string[] }[] }).sets) for (const k of [...(st.mcA ?? []), ...(st.frqA ?? [])]) blocked.add(k);
   const setCount = Number(arg("--set-count", String(PSYCH_SET_COUNT)));
