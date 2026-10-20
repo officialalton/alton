@@ -38,9 +38,9 @@ def st_n_iq_table_vars(rng):
 
 # ======================= 2. 통계적 질문 가려내기 (1.1 / 1.A) =======================
 SN_CTX = [
-    dict(stat="How much do the daily numbers of steps vary among the adult residents of a city?", lookup="How many days are there in a leap year?", calc="If each of 4 walkers takes 8,000 steps in a day, how many steps do the walkers take altogether?", opin="Is walking a more enjoyable exercise than swimming?", pop="residents of a city"),
-    dict(stat="How much do the weights of the loaves produced by a bakery on one day vary?", lookup="What is the legal minimum weight for a loaf of bread sold in the state, according to the state's regulations?", calc="If each of 12 loaves weighs 500 grams, what is the total weight of the loaves?", opin="Is rye bread tastier than wheat bread?", pop="loaves"),
-    dict(stat="How does the number of books borrowed in a month vary among the members of a public library?", lookup="In what year was the first public library in the country opened?", calc="If 5 members each borrow 3 books, how many books were borrowed in all?", opin="Is reading a novel better than reading a newspaper?", pop="members of a library"),
+    dict(stat="How much do the daily numbers of steps vary among the adult residents of a city?", lookup="How many days are there in a leap year?", calc="If each of 4 walkers takes 8,000 steps in a day, how many steps do the walkers take altogether?", opin="Is a brisk walk a nobler form of exercise than a swim?", pop="residents of a city"),
+    dict(stat="How much do the weights of the loaves produced by a bakery on one day vary?", lookup="What is the legal minimum weight for a loaf of bread sold in the state, according to the state's regulations?", calc="If each of 12 loaves weighs 500 grams, what is the total weight of the loaves?", opin="Is the smell of rye bread more beautiful than the smell of wheat bread?", pop="loaves"),
+    dict(stat="How does the number of books borrowed in a month vary among the members of a public library?", lookup="In what year was the first public library in the country opened?", calc="If 5 members each borrow 3 books, how many books were borrowed in all?", opin="Is the first page of a novel more beautiful than the front page of a newspaper?", pop="members of a library"),
 ]
 
 
@@ -48,7 +48,7 @@ def st_n_stat_vs_nonstat(rng):
     c = pick(rng, SN_CTX)
     wr_all = [(c["lookup"], "It has a single factual answer that can be looked up, so no variability among individuals is anticipated.", "lookup"),
               (c["calc"], "It is answered by a fixed calculation with the given numbers, so no data have to be collected and analyzed.", "arithmetic"),
-              (c["opin"], "It asks for a preference or judgment, which data on a measured variable cannot settle.", "opinion")]
+              (c["opin"], "It asks for a moral or aesthetic judgment, which no data on a measured variable can settle.", "opinion")]
     key = (c["stat"], "It asks about a variable that takes different values for different individuals in a population, so it is answered by collecting and analyzing data.")
     stem = "A teacher asks students to write a question that requires a statistical investigation. Which of the following questions does so?"
     return mc("st_n_stat_vs_nonstat", "1.1", "1.A", "Recognize a question that anticipates variability and can be answered with data",
@@ -125,8 +125,8 @@ def st_n_cat_compare_totals(rng):
 
 # ======================= 5. 일차 변환 뒤의 평균·표준편차 (1.7 / 3.B) =======================
 LT_CTX = [dict(thing="quiz scores", unit="points", cur="a teacher multiplies each score by ${a}$ and then adds ${b}$ points", base=(50, 90, 6, 14)),
-          dict(thing="the lengths of rope pieces", unit="centimeters", cur="a worker records each length on a new scale that is ${a}$ times the old scale plus ${b}$ centimeters", base=(80, 140, 8, 22)),
-          dict(thing="the daily wages of workers", unit="dollars", cur="a company multiplies each wage by ${a}$ and then adds a flat bonus of ${b}$ dollars", base=(90, 160, 10, 30))]
+          dict(thing="lengths of rope pieces", unit="centimeters", cur="a worker records each length on a new scale that is ${a}$ times the old scale plus ${b}$ centimeters", base=(80, 140, 8, 22)),
+          dict(thing="daily wages of workers", unit="dollars", cur="a company multiplies each wage by ${a}$ and then adds a flat bonus of ${b}$ dollars", base=(90, 160, 10, 30))]
 
 
 def st_n_linear_transform(rng):
@@ -232,7 +232,7 @@ PL_CTX = [
          w=["Post the survey on the village's website and use the answers of the households that choose to respond", "Survey the first ${n}$ households that the researcher meets while walking along the main street", "Ask the village council to choose ${n}$ households that it considers typical of the village"]),
     dict(pop="the {N} members of a hiking club", est="the mean number of hikes per year of a member", frame="the membership roster",
          key="Assign each member a number from the roster, select ${n}$ different numbers at random, and ask those members",
-         w=["Ask the ${n}$ members who arrive first at the next club meeting", "Send an e-mail to all members and use the first ${n}$ replies", "Ask ${n}$ members whom the club president knows to be frequent hikers"]),
+         w=["Send an e-mail to all members and use the first ${n}$ replies", "Ask the ${n}$ members who arrive first at the next club meeting", "Ask ${n}$ members whom the club president knows to be frequent hikers"]),
     dict(pop="the {N} students in a school's ninth grade", est="the proportion of students who walk to school", frame="the grade's class roster",
          key="Give each student on the roster a number, draw ${n}$ different numbers using a random number table, and interview those students",
          w=["Interview the ${n}$ students who volunteer to stay after school for an announcement", "Interview the ${n}$ students sitting nearest to the principal's office at lunch", "Interview the ${n}$ students whom the homeroom teachers suggest as typical"]),
@@ -254,28 +254,31 @@ def st_n_plan_unbiased(rng):
 
 # ======================= 9. 표본 편향의 방향 (1.12 / 2.B) =======================
 BD_CTX = [
-    dict(where="outside a fitness center on Saturday mornings", what="the mean number of hours that adults in the city exercise per week", fact="People who use the fitness center exercise more hours per week, on average, than other adults in the city", dirn="high"),
-    dict(where="at the checkout counters of a computer store", what="the proportion of adults in the city who own a laptop", fact="Shoppers at a computer store are more likely to own a laptop than other adults in the city", dirn="high"),
-    dict(where="at the entrance of a large discount store on weekday afternoons", what="the mean amount that adults in the town spend on groceries each week", fact="Customers who can shop on weekday afternoons spend less per week on groceries, on average, than other adults in the town", dirn="low"),
-    dict(where="from a list of members of a luxury hotel's rewards program", what="the mean number of nights per year that adults in the region spend in hotels", fact="Members of the rewards program stay in hotels more nights per year, on average, than other adults in the region", dirn="high"),
-    dict(where="outside the campus health office in the afternoon", what="the proportion of students at the university who have had the flu this year", fact="Students who visit the health office are more likely to have had the flu this year than other students", dirn="high"),
+    dict(who="adults", where="outside a fitness center on Saturday mornings", what="the mean number of hours that adults in the city exercise per week", fact="People who use the fitness center exercise more hours per week, on average, than other adults in the city", dirn="high",
+         t="the adults who use the fitness center exercise more hours per week than other adults in the city, and only those adults can be selected", f="the adults who use the fitness center exercise fewer hours per week than other adults in the city, and only those adults can be selected", pass_by="who walk by"),
+    dict(who="adults", where="at the checkout counters of a computer store", what="the proportion of adults in the city who own a laptop", fact="Shoppers at a computer store are more likely to own a laptop than other adults in the city", dirn="high",
+         t="shoppers at a computer store are more likely to own a laptop than other adults in the city, and only those shoppers can be selected", f="shoppers at a computer store are less likely to own a laptop than other adults in the city, and only those shoppers can be selected", pass_by="who check out"),
+    dict(who="adults", where="at the entrance of a large discount store on weekday afternoons", what="the mean amount that adults in the town spend on groceries each week", fact="Customers who can shop on weekday afternoons spend less per week on groceries, on average, than other adults in the town", dirn="low",
+         t="customers who shop on weekday afternoons spend less per week on groceries than other adults in the town, and only those customers can be selected", f="customers who shop on weekday afternoons spend more per week on groceries than other adults in the town, and only those customers can be selected", pass_by="who enter the store"),
+    dict(who="adults", where="from a list of members of a luxury hotel's rewards program", what="the mean number of nights per year that adults in the region spend in hotels", fact="Members of the rewards program stay in hotels more nights per year, on average, than other adults in the region", dirn="high",
+         t="members of the rewards program stay in hotels more nights per year than other adults in the region, and only members can be selected", f="members of the rewards program stay in hotels fewer nights per year than other adults in the region, and only members can be selected", pass_by="on the list"),
+    dict(who="students", where="outside the campus health office in the afternoon", what="the proportion of students at the university who have had the flu this year", fact="Students who visit the health office are more likely to have had the flu this year than other students", dirn="high",
+         t="the students who visit the health office are more likely to have had the flu than other students, and only those students can be selected", f="the students who visit the health office are less likely to have had the flu than other students, and only those students can be selected", pass_by="who walk by"),
 ]
 
 
 def st_n_bias_direction(rng):
     c = pick(rng, BD_CTX)
     hi = c["dirn"] == "high"
-    cd = {True: ("tend to be too high", "too large"), False: ("tend to be too low", "too small")}
-    opp = "low" if hi else "high"
-    key = (f"The estimates will tend to be too {'large' if hi else 'small'}, because the people who are surveyed differ from the population in the direction that raises the result." if hi else "The estimates will tend to be too small, because the people who are surveyed differ from the population in the direction that lowers the result.",
-           "The sampled individuals are not representative of the population, and the stated difference shows which way the estimates are pushed.")
-    wr = [(f"The estimates will tend to be too {'small' if hi else 'large'}, because the people who are surveyed differ from the population in the direction that {'lowers' if hi else 'raises'} the result.", "Reverses the direction: the individuals who are sampled differ in the opposite way from the one stated.", "direction_reversed", None, 2),
-          ("There is no bias, because every adult who is surveyed answers the question honestly.", "Honest answers do not remove selection bias, which comes from who is sampled and not from how the sampled people answer.", "honesty_not_bias", None, 1),
-          ("There is no bias, because a large sample always represents the population.", "A large sample does not remove bias from a flawed way of selecting individuals; it only makes the biased estimate more precise.", "size_fixes_bias", None, 1)]
-    stem = f"To estimate {c['what']}, a researcher interviews ${rng.choice([200, 300, 400, 500])}$ adults selected {c['where']}. {c['fact']}. Which of the following statements about the estimates from this plan is correct?"
+    n = rng.choice([200, 300, 400, 500])
+    key = (f"The estimates will tend to be too {'large' if hi else 'small'}, because {c['t']}.", "The sampled individuals are not representative of the population, and the stated difference shows which way the estimates are pushed.")
+    wr = [(f"The estimates will tend to be too {'small' if hi else 'large'}, because {c['f']}.", "Reverses the direction: the stated difference between the sampled group and the population pushes the estimates the other way.", "direction_reversed", None, 2),
+          (f"There is no bias, because the {c['who']} are chosen by chance from those {c['pass_by']}.", "Choosing by chance among the individuals who happen to be available does not remove the bias, because those who are available differ from the whole population.", "chance_within_biased_frame", None, 1),
+          (f"There is no bias, because a sample of ${n}$ is large.", "A large sample does not remove bias from a flawed way of selecting individuals; it only makes the biased estimate more precise.", "size_fixes_bias", None, 1)]
+    stem = f"To estimate {c['what']}, a researcher interviews ${n}$ {c['who']} selected {c['where']}. {c['fact']}. Which of the following statements about the estimates from this plan is correct?"
     return mc("st_n_bias_direction", "1.12", "2.B", "Decide the direction of the bias that a flawed way of selecting individuals produces",
-              ["Compare the people who can be selected with the whole population on the variable being estimated", "Use the stated difference to decide whether the estimates are pushed up or down, and reject claims that honesty or sample size removes bias"],
-              key, wr, rng, stem, "each scenario states how the sampled group differs from the population, so the direction of the bias follows from the statement", ["claim_justification", "interpretation"], est=80, facts=[f"dirn={c['dirn']}"])
+              ["Compare the people who can be selected with the whole population on the variable being estimated", "Use the stated difference to decide whether the estimates are pushed up or down, and reject claims that chance within the available group or a large sample removes bias"],
+              key, wr, rng, stem, "each scenario states how the sampled group differs from the population, so the direction of the bias follows from the statement", ["claim_justification", "interpretation"], est=85, facts=[f"dirn={c['dirn']}"])
 
 
 # ======================= 10. 요인이 둘인 실험의 실험 단위와 처리 (1.13 / 2.A) =======================
@@ -308,8 +311,8 @@ def st_n_union_complement(rng):
     c = pick(rng, UN_CTX)
     for _ in forever():
         a = rng.randint(30, 55) / 100; b = rng.randint(25, 45) / 100; both = rng.randint(8, 20) / 100
-        vv = [1 - a - b + both, 1 - a - b, a + b - both, 1 - a * b]
-        if both < min(a, b) - 0.05 and a + b - both < 0.9 and min(abs(x - y) for x in vv for y in vv if x is not y) >= 0.03:
+        vv = [1 - a - b + both, 1 - a - b, a + b - both, 1 - a - b - both]
+        if both < min(a, b) - 0.05 and a + b - both < 0.9 and 1 - a - b - both > 0.02 and min(abs(x - y) for x in vv for y in vv if x is not y) >= 0.03:
             break
     union = a + b - both; neither = 1 - union
     # 독립 경로: 가상 모집단 1000명의 집합 연산
@@ -319,7 +322,7 @@ def st_n_union_complement(rng):
     fm = lambda v: f"${v:.2f}$"
     key = (fm(neither), f"The probability of at least one is ${a:.2f} + {b:.2f} - {both:.2f} = {union:.2f}$, and the probability of neither is $1 - {union:.2f} = {neither:.2f}$.", neither)
     wr = [(fm(1 - a - b), "Subtracts the two probabilities from $1$ without adding back the overlap that was counted twice.", "overlap_ignored", 1 - a - b, 1), (fm(union), "Stops at the probability of at least one event and does not take the complement.", "complement_missed", union, 2),
-          (fm(1 - a * b), "Treats the events as independent and finds the probability that they do not both happen.", "independence_assumed", 1 - a * b, 1)]
+          (fm(1 - a - b - both), "Adds the overlap instead of subtracting it when finding the probability of at least one event, so the probability of neither comes out too small.", "overlap_added", 1 - a - b - both, 1)]
     stem = f"Among the {c['who']}, ${int(round(a * 100))}\\%$ {c['A']}, ${int(round(b * 100))}\\%$ {c['B']}, and ${int(round(both * 100))}\\%$ do both. One is selected at random. What is the probability that the selected one does neither? (Probabilities are given to two decimal places.)"
     return mc("st_n_union_complement", "2.4", "3.C", "Find the probability of neither event from the addition rule for two events that overlap",
               ["Use the addition rule with the overlap to find the probability of at least one of the two events", "Take the complement of that probability to find the probability of neither"],
@@ -457,16 +460,16 @@ def zstar_tail(p):
 BN_SC = [
     dict(ok="A quality inspector tests ${n}$ light bulbs chosen at random from a very large shipment in which $4\\%$ of the bulbs are defective, and counts the defective bulbs.",
          bad=[("An inspector tests light bulbs chosen at random from a very large shipment in which $4\\%$ are defective until the first defective bulb is found, and counts the bulbs tested.", "The number of trials is not fixed in advance; the variable counts trials until the first success."),
-              ("An inspector chooses ${n}$ bulbs from a box of exactly ${m}$ bulbs of which ${d}$ are defective, with no bulb replaced, and counts the defective bulbs.", "The sample is a large part of a small box, so removing a bulb changes the probability for the next one and the trials are not independent."),
-              ("An inspector tests ${n}$ bulbs and records the number of hours that each bulb lasts, then reports the mean lifetime.", "The variable is a measured lifetime rather than a count of successes in a fixed number of independent trials with two outcomes.")]),
-    dict(ok="A basketball player takes ${n}$ free throws in a practice, and the coach counts the number she makes, assuming that each shot has the same probability of success and that the shots are independent.",
-         bad=[("A basketball player keeps shooting free throws until she misses and the coach counts the shots she takes.", "The number of trials is not fixed in advance."),
-              ("A coach draws ${n}$ players without replacement from a team of ${m}$ players of whom ${d}$ are starters and counts the starters drawn.", "Sampling a large part of a small group without replacement makes the probability change from draw to draw."),
-              ("A player takes ${n}$ free throws, and the coach adds the number of points each shot earns to get a total score for the practice.", "The variable is a total of point values rather than a count of successes with two possible outcomes per trial.")]),
+              ("An inspector chooses ${n}$ bulbs one at a time, without replacement, from a box of exactly ${m}$ bulbs of which ${d}$ are defective, and counts the defective bulbs.", "The sample is a large part of a small box, so removing a bulb changes the probability for the next one and the trials are not independent."),
+              ("An inspector tests ${n}$ bulbs chosen at random from a very large shipment and records the number of hours that each bulb lasts, then reports the mean lifetime.", "The variable is a measured lifetime rather than a count of successes in a fixed number of independent trials with two outcomes.")]),
+    dict(ok="A basketball player takes ${n}$ free throws in a practice, making each one with probability $0.7$ independently of the other shots, and the coach counts the number that she makes.",
+         bad=[("A basketball player keeps shooting free throws, making each one with probability $0.7$ independently of the others, until she misses, and the coach counts the shots she takes.", "The number of trials is not fixed in advance."),
+              ("A coach draws ${n}$ players one at a time, without replacement, from a team of ${m}$ players of whom ${d}$ are starters, and counts the starters drawn.", "Sampling a large part of a small group without replacement makes the probability change from draw to draw."),
+              ("A player takes ${n}$ shots, some from the free-throw line worth $1$ point and some from the three-point line worth $3$ points, and the coach adds the points to get a total score.", "The variable is a total of point values from different kinds of shots rather than a count of successes with two outcomes per trial.")]),
     dict(ok="A pollster phones ${n}$ voters selected at random from the very large list of voters in a state, and counts the voters who say they plan to vote.",
-         bad=[("A pollster phones voters selected at random from a very large list until one voter says no, and counts the calls made.", "The number of trials is not fixed in advance."),
+         bad=[("A pollster phones voters selected at random from a very large list, one after another, until one voter says no, and counts the calls made.", "The number of trials is not fixed in advance."),
               ("A pollster selects ${n}$ voters, one after another without replacement, from a club of exactly ${m}$ voters of whom ${d}$ plan to vote, and counts those who plan to vote.", "The probability of success changes with every selection from the small club, so the trials are not independent."),
-              ("A pollster asks ${n}$ voters how many hours they plan to spend at the polls and averages the answers.", "The variable is a measurement averaged over voters, not a count of successes with two outcomes per trial.")]),
+              ("A pollster asks ${n}$ voters selected at random from a very large list how many hours they plan to spend at the polls and averages the answers.", "The variable is a measurement averaged over voters, not a count of successes with two outcomes per trial.")]),
 ]
 
 

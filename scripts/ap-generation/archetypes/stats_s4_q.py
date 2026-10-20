@@ -39,8 +39,9 @@ def st_n_estimator_compare(rng):
     wr = [(f"{L(2)}, because it has the smallest spread of all the estimators.", "Considers variability alone; the center of this sampling distribution is not at the true value, so the estimator is biased.", "variability_only", None, 1),
           (f"{L(1)}, because the center of its sampling distribution is at the true value.", "Considers bias alone; another estimator is also centered at the true value and has less variability.", "bias_only", None, 2),
           (f"{L(3)}, because its sampling distribution has the largest spread and so covers the most possible values.", "Treats a larger spread as an advantage; more variability means estimates that are farther from the parameter more often.", "spread_good", None, 1)]
-    stim = stat_stim("Mean and standard deviation of the estimates from 1000 simulated samples", "table", title="Results of 1000 simulated samples for each estimator", columns=["Estimator", "Mean of the estimates", "Standard deviation of the estimates"], rows=rows)
-    stem = f"The true value of {c['what']} is ${th:g}$. A researcher compares four estimators by simulating ${rng.choice([1000, 2000])}$ samples for each and computing the estimate from every sample. The table shown gives the mean and the standard deviation of the estimates for each estimator. Which estimator is best for estimating the true value?"
+    ns = rng.choice([1000, 2000])
+    stim = stat_stim(f"Mean and standard deviation of the estimates from {ns} simulated samples", "table", title=f"Results of {ns} simulated samples for each estimator", columns=["Estimator", "Mean of the estimates", "Standard deviation of the estimates"], rows=rows)
+    stem = f"The true value of {c['what']} is ${th:g}$. A researcher compares four estimators by simulating ${ns}$ samples for each and computing the estimate from every sample. The table shown gives the mean and the standard deviation of the estimates for each estimator. Which estimator is best for estimating the true value?"
     return mc("st_n_estimator_compare", "3.1", "2.D", "Choose the best estimator from the center and spread of its simulated sampling distribution",
               ["Compare the center of each sampling distribution with the true value to find the unbiased estimators", "Among the unbiased estimators choose the one with the smallest spread and reject choices based on only one of the two properties"],
               key, wr, rng, stem, "the unbiased estimators are found by comparing each mean with the true value and the best one has the smallest standard deviation among them; the biased estimator with the smallest spread is deliberately included", ["representation_reading", "claim_justification", "interpretation"], stim, est=95, facts=[f"theta={th}"],
@@ -547,3 +548,6 @@ def st_n_intercept_meaning(rng):
 STAGE_SINGLES = ["st_n_estimator_compare", "st_n_prop_ci_compute", "st_n_param_statistic", "st_n_hyp_two_prop", "st_n_sim_pvalue", "st_n_me_tradeoff", "st_n_cond_two_prop", "st_n_two_prop_z", "st_n_chisq_expected",
                  "st_n_se_change", "st_n_t_interval_compute", "st_n_hyp_paired", "st_n_t_table", "st_n_diff_means_sd", "st_n_method_from_table", "st_n_practical",
                  "st_n_scatter_describe", "st_n_corr_changes", "st_n_line_from_stats", "st_n_intercept_meaning"]
+
+# 첫 런(stats-r19-p3-a)에서 반려된 원형을 고친 뒤 다시 돌리는 목록(검토기 지적: 줄글 오타, 추정량 표 제목 불일치, 설명 순서 뒤바뀜, 복수 정답 가능성, 모호한 의견 질문, 약한 오답)
+STAGE_FIX = ["st_n_stat_vs_nonstat", "st_n_plan_unbiased", "st_n_bias_direction", "st_n_union_complement", "st_n_binomial_scenario", "st_n_linear_transform", "st_n_estimator_compare"]
