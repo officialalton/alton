@@ -102,7 +102,7 @@ export function generateCirclesModel(params: {
       const cands: { value: string; kind: DistractorKind; reason: string }[] = [
         { value: fmtPi(radius), kind: "formula_misuse", reason: "둘레 공식에서 2를 곱하는 것을 잊었다(반지름을 지름으로 착각)." },
         { value: fmtPi(radius * radius), kind: "geometry_misapplied", reason: "둘레 대신 넓이 공식(πr²)의 형태로 계산했다." },
-        { value: fmt(2 * radius), kind: "unit_error", reason: "π를 빼먹고 지름(2r)만 답으로 썼다." },
+        { value: fmtPi(4 * radius), kind: "geometry_misapplied", reason: "지름(2r)에 다시 2를 곱했다(반지름·지름 혼동)." },
       ];
       const distractors = pickUnique(cands, fmtPi(coeff));
       if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
@@ -116,7 +116,7 @@ export function generateCirclesModel(params: {
       const cands: { value: string; kind: DistractorKind; reason: string }[] = [
         { value: fmtPi(2 * diameter), kind: "geometry_misapplied", reason: "지름을 반지름으로 착각해 다시 2를 곱했다(반지름·지름 혼동)." },
         { value: fmtPi(diameter * diameter), kind: "geometry_misapplied", reason: "둘레 대신 넓이 공식의 형태로 계산했다." },
-        { value: fmt(diameter), kind: "unit_error", reason: "π를 빼먹고 지름만 답으로 썼다." },
+        { value: fmtPi(radius), kind: "geometry_misapplied", reason: "지름을 반지름으로 착각해 반으로 나눴다(반지름·지름 혼동)." },
       ];
       const distractors = pickUnique(cands, fmtPi(coeff));
       if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
