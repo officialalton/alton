@@ -1,7 +1,7 @@
-"""AP Computer Science A P0 — FRQ 4유형(공식 형식: Q1 Methods and Control Structures, Q2 Class Design, Q3 Data Analysis with ArrayList, Q4 2D Array), 문항당 9점 = 36점.
+"""AP Computer Science A P0 — FRQ 4유형(공식 형식: Q1 Methods and Control Structures, Q2 Class Design, Q3 Data Analysis with ArrayList, Q4 2D Array), 문항별 Q1 7점·Q2 7점·Q3 5점·Q4 6점 = 25점(2025 공식 배점).
 각 문항은 (1) 컴파일되는 모범 답안 + 독립 대안 답안 + '그럴듯한 오답' 3개를 실제로 javac/java 로 돌려 같은 테스트 케이스 묶음에서 모범·대안은 전부 통과, 오답은 최소 1개 실패함을 확인하고,
 (2) 기대값은 독립 Python 참조 구현이 만든다. 테스트 케이스는 `self_check_tests` 로 팩에 저장한다(학생 답안 자기 점검용 — 이 파일은 학생 코드를 실행하지 않는다).
-모범 답안은 'ALTON reference answer for self-review — not official AP scoring' 이다(공식 채점 문구 복제 없음). 채점 행은 1점씩이고 한 행이 한 행동(루프 범위·조건·누적·반환…)을 본다."""
+모범 답안은 'ALTON reference answer for self-review — not official AP scoring' 이다(공식 채점 문구 복제 없음). 채점 행은 1점씩이다. 원래 9행으로 쓴 행동 단위를 공식 배점에 맞게 인접 행끼리 합쳐 한 행이 한두 개의 연속된 행동을 본다(`_rescale`)."""
 import re
 from csa_common import *  # noqa: F401,F403
 from calc_ab_frq import row, part
@@ -62,11 +62,55 @@ def _fence(code):
     return f"{FENCE}java\n{code.strip(chr(10))}\n{FENCE}"
 
 
+CSA_POINTS = {"q1": [3, 4], "q2": [7], "q3": [5], "q4": [6]}  # 2025 공식 배점: Q1 7(a 3 + b 4), Q2 7, Q3 5, Q4 6
+
+
+def _group_sizes(n, m, rows):
+    """n개 행을 m개 묶음으로 인접 병합한다. 마지막 '컴파일/헤더' 행은 앞 행과 먼저 합친다."""
+    sizes = [1] * n
+    while len(sizes) > m:
+        if len(sizes) == n and re.search(r"compil|headers? and return type", rows[-1]["criterion"], re.I):
+            sizes[-2] += sizes.pop()
+            continue
+        k = min(range(len(sizes) - 1), key=lambda i: (sizes[i] + sizes[i + 1], i))  # 가장 작은 인접 쌍을 합친다
+        sizes[k] += sizes.pop(k + 1)
+    return sizes
+
+
+def _rescale(template, parts):
+    """9행(각 1점)으로 쓴 채점 행을 공식 배점(CSA_POINTS)에 맞게 병합한다. 행 id·requires 를 새 묶음 기준으로 다시 매긴다."""
+    tgt = CSA_POINTS[template]; owner = {}
+    assert len(tgt) == len(parts), template
+    for pt, m in zip(parts, tgt):
+        rows = pt["rubric_rows"]
+        assert all(r["points"] == 1 for r in rows) and len(rows) >= m, (template, pt["label"])
+        sizes = _group_sizes(len(rows), m, rows)
+        prefix = rows[0]["row_id"][0]; out = []; i = 0
+        for g, sz in enumerate(sizes, 1):
+            chunk = rows[i:i + sz]; i += sz
+            for r in chunk:
+                owner[r["row_id"]] = f"{prefix}{g}"
+            merged = dict(chunk[0]); merged["row_id"] = f"{prefix}{g}"; merged["points"] = 1
+            merged["criterion"] = "; ".join(r["criterion"].rstrip(".") for r in chunk) + "." if sz > 1 else chunk[0]["criterion"]
+            merged["required_elements"] = [e for r in chunk for e in r["required_elements"]]
+            merged["common_errors"] = [e for r in chunk for e in r["common_errors"]]
+            merged["_req"] = chunk[0].get("requires_row_id")
+            out.append(merged)
+        pt["rubric_rows"] = out; pt["points"] = m
+    for pt in parts:
+        for r in pt["rubric_rows"]:
+            q = owner.get(r.pop("_req"))
+            r["requires_row_id"] = q if q and q != r["row_id"] else None
+    return parts
+
+
 def _pack(arch, template, topic, extra, skill, title, intro, skeleton, parts, tests, verified, facts, bpr):
     assert sum(p["points"] for p in parts) == 9 and all(r["points"] == 1 for p in parts for r in p["rubric_rows"]), arch
+    parts = _rescale(template, parts)
+    total = sum(p["points"] for p in parts)
     stim = {"kind": "text", "description": intro + "\n" + _fence(skeleton), "data": {"variant": "java_code", "language": "java"}}
     pk = {"archetype": arch, "template": template, "topic": topic, "extra_topics": extra, "skill": skill, "representative_skill": skill, "calculator": "not_allowed", "title": title, "stimulus": stim,
-          "parts": parts, "total_points": 9, "est_minutes": 22, "facts": facts, "expected_values": [], "reference_note": REF_NOTE,
+          "parts": parts, "total_points": total, "est_minutes": 22, "facts": facts, "expected_values": [], "reference_note": REF_NOTE,
           "self_check_tests": [{"part": p, "call": c, "expected": e} for p, c, e in tests], "verification": verified}
     concept, thinking, conds, path = bpr
     pk["blueprint"] = frq_blueprint(arch, SUB, pk, concept, thinking, conds, {"type": "code", "must_include": ["class or method skeleton", "specification with examples"]}, path, extra={"judgment_demand": "write correct Java for the stated specification"}, method="javac+java unit tests + python reference")

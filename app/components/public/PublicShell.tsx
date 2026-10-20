@@ -20,12 +20,11 @@ const INSIGHTS_LINK = { label: "Insights", href: "/insights" } as const;
 
 export function PublicHeader({ dest }: { dest: LandingDestinations }) {
   const navItems = dest.showInsights ? [...NAV_ITEMS, INSIGHTS_LINK] : NAV_ITEMS;
-  const startLabel = dest.signedIn ? "Practice Tests" : "Start Free";
+  const startLabel = dest.signedIn ? "Free Practice Tests" : "Start Free";
   return (
     <header className="sticky top-0 z-30 bg-[var(--p-paper)] border-b border-[var(--p-line)]">
       <div className="p-wrap h-[64px] md:h-[72px] flex items-center justify-between gap-4">
         <Link href="/" aria-label="ALTON home" className="flex items-center gap-2.5 no-underline">
-          <Logo />
           <span className="p-serif text-[26px] leading-none tracking-[-0.01em]">ALTON</span>
         </Link>
         <nav aria-label="Main" className="hidden lg:flex items-center gap-8 text-[14px] font-medium text-[var(--p-slate)]">
@@ -76,7 +75,6 @@ export function PublicFooter({ showInsights = false }: { showInsights?: boolean 
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8">
           <div className="flex flex-col gap-3 max-w-[340px]">
             <div className="flex items-center gap-2.5">
-              <Logo size={26} />
               <span className="p-serif text-[24px] leading-none">ALTON</span>
             </div>
             <p className="m-0 text-[14px] leading-[1.7] text-[var(--p-slate)]">
