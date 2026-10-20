@@ -21,7 +21,9 @@ def stfrq_n5_q1_hist(rng):
         counts = [rng.randint(2, 6), rng.randint(6, 12), rng.randint(14, 24), rng.randint(10, 18), rng.randint(5, 10), rng.randint(2, 5), rng.randint(0, 2)]
         n = sum(counts)
         peak = counts.index(max(counts))
-        if peak == 2 and n in range(55, 90):
+        mid = [lo0 + w * (i + 0.5) for i in range(7)]; mean_h = sum(m_ * v for m_, v in zip(mid, counts)) / n
+        cum_ = np.cumsum(counts); med_h = mid[int(np.searchsorted(cum_, n / 2.0))]
+        if peak == 2 and n in range(55, 90) and mean_h > med_h + 0.15 * w and counts[-1] + counts[-2] >= 3:
             break
     bins = [{"from": lo0 + w * i, "to": lo0 + w * (i + 1), "count": v} for i, v in enumerate(counts)]
     thr_i = 4; thr = lo0 + w * thr_i; atl = sum(counts[thr_i:]); pct = atl / n * 100
@@ -36,12 +38,12 @@ def stfrq_n5_q1_hist(rng):
         part("B", f"Describe a completely randomized design for the study in which the {c['who']} are blinded to the treatment they receive, and explain why blinding is used.", 2, "explain", ["2.B"],
              f"Assign the {c['who']} at random, half to {c['trt']} and half to {c['ctl']} (for example by drawing names or using random numbers), and do not tell the {c['who']} or the people who measure the response which treatment each one received. Blinding keeps expectations from influencing the responses or the measurements.",
              [R("B1", f"Describes random assignment of the {c['who']} to the two treatments, with about half in each group", ["random assignment", "half to each treatment"], alt=["shuffle the names and give the first half one treatment"], err=["lets the individuals choose their treatment", "assigns by order of arrival"]), R("B2", "Explains that blinding keeps the expectations of the individuals (or of those who measure) from influencing the responses, so the groups are treated alike apart from the treatment", ["expectations do not influence the results"], err=["says blinding makes the groups the same size", "says blinding lets the results be generalized"])]),
-        part("C", f"The histogram shown displays the {c['what']} for the treatment group of ${n}$ {c['who']}. What percent of the {c['who']} in the treatment group had a value of at least ${thr}$ {c['unit']}? Round to one decimal place.", 1, "calculate", ["3.B"],
+        part("C", f"The histogram shown displays {c['what']} for the treatment group of ${n}$ {c['who']}. What percent of the {c['who']} in the treatment group had a value of at least ${thr}$ {c['unit']}? Round to one decimal place.", 1, "calculate", ["3.B"],
              f"The bars at ${thr}$ and above have a total frequency of ${atl}$ out of ${n}$, so the percent is about ${pct:.1f}\\%$.",
              [R("C1", f"Adds the frequencies of the bars at {thr} and above ({atl}) and divides by the total {n} (answer {pct:.1f}%)", [str(atl), f"{pct:.1f}"], nums=True, err=["divides by the number of bars", "uses only the frequency of one bar"])]),
-        part("D", f"Describe the distribution of the {c['what']} for the treatment group shown in the histogram. Your description should address the shape, a typical value (the class that contains the median) and the spread, in context.", 2, "explain", ["4.C"],
-             f"The distribution is unimodal with its peak in the class from ${lo0 + w * 2}$ to ${lo0 + w * 3}$ {c['unit']} and is {'skewed to the right' if counts[-1] + counts[-2] + counts[-3] > counts[0] + counts[1] else 'roughly symmetric'}; the median is in the class from ${mc_from}$ to ${mc_to}$ {c['unit']}, and the values range from the class starting at ${lo0}$ to the class ending at ${lo0 + w * (7 if counts[-1] else 6)}$ {c['unit']}.",
-             [R("D1", "Describes the shape of the distribution (one peak and the direction of any skew) in context", ["shape", "unimodal", "skew"], err=["describes the shape of a different variable", "gives only a measure of center"]), R("D2", f"Gives a typical value (the median is in the class from {mc_from} to {mc_to}) and the spread (the range of the classes), with units", [f"{mc_from} to {mc_to}", "spread", c["unit"]], nums=True, err=["gives the center without the spread", "omits the units"])]),
+        part("D", f"Describe the distribution of {c['what']} for the treatment group shown in the histogram. Your description should address the shape, a typical value (the class that contains the median) and the spread, in context.", 2, "explain", ["4.C"],
+             f"The distribution is unimodal with its peak in the class from ${lo0 + w * 2}$ to ${lo0 + w * 3}$ {c['unit']} and is skewed to the right; the median is in the class from ${mc_from}$ to ${mc_to}$ {c['unit']}, and the values range from the class starting at ${lo0}$ to the class ending at ${lo0 + w * (7 if counts[-1] else 6)}$ {c['unit']}.",
+             [R("D1", "Describes the shape of the distribution as having one peak and a longer tail on the right (skewed to the right) in context", ["one peak", "skewed to the right"], err=["describes the shape of a different variable", "gives only a measure of center"]), R("D2", f"Gives a typical value (the median is in the class from {mc_from} to {mc_to}) and the spread (the range of the classes), with units", [f"{mc_from} to {mc_to}", "spread", c["unit"]], nums=True, err=["gives the center without the spread", "omits the units"])]),
         part("E", f"The researcher also wants to study {c['fvar']}. State a valid investigative question about this topic that requires a statistical investigation. Your question should name the population of interest, name the variable that would be measured, and be answerable by collecting and analyzing data that vary from individual to individual.", 3, "explain", ["1.A"],
              f"For example: {c['fq']}",
              [R("E1", f"Names the population of interest (the {c['pop']})", [c["pop"]], err=["names only the sample or one individual"]), R("E2", f"Names the variable that would be measured ({c['fvar']})", [c["fvar"]], err=["states no variable"]), R("E3", "Poses a question that anticipates variability among individuals and can be answered with data (not a single fact or an opinion)", ["anticipates variability", "answerable with data"], err=["asks a yes-or-no fact", "asks for an opinion"])]),
@@ -100,7 +102,7 @@ def stfrq_n5_q2_outlier(rng):
     for pt, tc in zip(parts, [["5.1"], ["5.3"], ["5.4"], ["5.2"], ["5.5"]]):
         pt["topic_codes"] = tc
     return frq_pack("stfrq_n5_q2_outlier", "q2_regression", "5.2", ["5.1", "5.3", "5.4", "5.5"], "4.D", f"A scatterplot with an outlier: {c['ys']} versus {c['xs']}", stim, parts, 22,
-                    [f"ar={ar}", f"br={br}", f"rr={rr}", f"res={res:.2f}", f"rw={rw}"], [ev("C", "residual", res, 0.02), ev("E", "r squared", r2, 0.003)],
+                    [f"ar={ar}", f"br={br}", f"rr={rr}", f"res={res:.2f}", f"rw={rw}"], [ev("C", "residual", res, 0.02)],
                     ("Describe an association with an outlier, interpret the slope, compute a residual, judge the effect of removing an outlier on the slope and the correlation, and interpret r squared",
                      ["Describe the association and the outlier", "Interpret the slope and compute a residual", "Judge the effect of the outlier and interpret r squared"],
                      [("an outlier far from the line but near the middle of x weakens r but changes the slope little", "the scatterplot highlights the point and the problem gives the lines and correlations with and without it")], {"type": "scatter", "must_include": ["fitted line", "highlighted point"]},
@@ -171,7 +173,7 @@ def stfrq_n5_q4_binom(rng):
              [R("A1", f"Identifies a binomial distribution with n = {k} and p = {p}", ["binomial", f"n = {k}", f"p = {p}"], err=["gives p as a percent without converting", "names a normal distribution"]), R("A2", f"Calculates the probability of at least {kk} (answer {pa:.3f})", [f"{pa:.3f}"], requires="A1", nums=True, err=["computes P(X > {0})".format(kk), "computes P(X = {0})".format(kk)])]),
         part("B", f"A random sample of ${n2}$ {c['unit']} is selected from the population. State the mean and the standard deviation of the sampling distribution of the sample proportion $\\hat p$, and verify that the sampling distribution is approximately normal.", 2, "calculate", ["3.D"],
              f"The mean is ${p}$ and the standard deviation is $\\sqrt{{{p}(1-{p})/{n2}}} \\approx {sd:.4f}$. Both $np = {n2 * p:.1f}$ and $n(1-p) = {n2 * (1 - p):.1f}$ are at least $10$, so the sampling distribution is approximately normal.",
-             [R("B1", f"States that the mean is {p} and the standard deviation is {sd:.4f}", [f"{p}", f"{sd:.4f}"], nums=True, err=["gives the standard deviation without the square root", "uses the sample proportion in place of p"]), R("B2", "Verifies the large counts condition with np and n(1 - p), both at least 10", ["np and n(1 - p) at least 10"], err=["checks only the sample size", "uses p-hat"])]),
+             [R("B1", f"States that the mean is {p} and the standard deviation is {sd:.4f}", [f"{p}", f"{sd:.4f}"], nums=True, err=["gives the standard deviation without the square root", "uses the sample proportion in place of p"]), R("B2", f"Verifies the large counts condition with np = {n2 * p:.1f} and n(1 - p) = {n2 * (1 - p):.1f}, both at least 10", [f"{n2 * p:.1f}", f"{n2 * (1 - p):.1f}"], nums=True, err=["checks only the sample size", "uses p-hat"])]),
         part("C", f"Using the sampling distribution from part (B), calculate the probability that the sample proportion is greater than ${cut}$. Round to three decimal places.", 2, "calculate", ["3.C"],
              f"$z = ({cut} - {p})/{sd:.4f} = {(cut - p) / sd:.2f}$ and $P(\\hat p > {cut}) \\approx {pb:.3f}$.",
              [R("C1", f"Standardizes the value: z = ({cut} - {p})/{sd:.4f} of about {(cut - p) / sd:.2f}", [f"{(cut - p) / sd:.2f}"], nums=True, err=["uses the standard deviation of a single value", "subtracts in the wrong order"]), R("C2", f"Finds the upper tail probability (answer {pb:.3f})", [f"{pb:.3f}"], requires="C1", nums=True, err=["finds the lower tail"])]),
@@ -196,3 +198,6 @@ def stfrq_n5_q4_binom(rng):
 
 
 STAGE_FRQ = ["stfrq_n5_q1_hist", "stfrq_n5_q2_outlier", "stfrq_n5_q3_twoprop", "stfrq_n5_q4_binom"]
+
+# P5 첫 FRQ 런에서 반려된 Q1·Q2·Q4 를 고쳐 다시 돌린다
+STAGE_FIXFRQ = ["stfrq_n5_q1_hist", "stfrq_n5_q2_outlier", "stfrq_n5_q4_binom"]

@@ -100,8 +100,11 @@ def st_set_scatter_outlier(rng):
         return "Does not match the recalculated values: " + " and ".join(parts_) + "."
     wr3 = [(desc(a_, b_), why3(a_, b_), f"change_{a_}_{b_.split()[1]}", None, 1 + i % 2) for i, (a_, b_) in enumerate([x for x in combos if x != truth])]
     m3 = _member("st_set_scatter_outlier", 3, "5.2", "4.D", "Judge how removing an outlier with little leverage changes the correlation and the slope", ["Notice that the highlighted point is far from the line but near the middle of the values of x", "Decide that removing it strengthens the correlation but leaves the slope almost unchanged and match both to one option"], key3, wr3, rng, "The highlighted observation is removed, and the least-squares line and the correlation are recalculated from the other observations. Which of the following describes the change?", "the line and correlation are recomputed with and without the highlighted point and the slope changes by under 12 percent while the correlation strengthens by at least 0.06", ["interpretation", "claim_justification", "representation_reading"], 110, [f"ra={ra}"],
-                 sig=(["outlier", "leverage and influence"], 1, "none"))
+                 sig=(["an outlier in the data", "leverage and influence"], 1, "none"))
     return _set_pack("st_set_scatter_outlier", intro, stim, [m1, m2, m3], [f"a={ar}", f"b={br}", f"r={rr}"])
 
 
 STAGE_SETS = ["st_set_joint_table", "st_set_scatter_outlier"]
+
+# P5 세트 런에서 반려된 산점도 이상치 세트(난이도 신호 개념 이름)를 고쳐 다시 돌린다
+STAGE_FIXSETS = ["st_set_scatter_outlier"]

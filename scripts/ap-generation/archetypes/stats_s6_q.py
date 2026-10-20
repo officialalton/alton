@@ -220,19 +220,21 @@ def st_n5_t_features(rng):
               key, wr, rng, stem, "the critical values are recomputed by numerical integration of the t density and the statements are checked against them", ["interpretation", "claim_justification"], est=90, facts=[f"n1={c['n1']}", f"n2={c['n2']}"])
 
 
-# ======================= 27. 두 평균 차가 추정하는 모수 (4.6 / 2.A) =======================
-DM5 = [dict(a="students who use paper notes", b="students who use a laptop", what="test score", pa="students who use paper notes", pb="students who use a laptop"), dict(a="drivers of electric cars", b="drivers of gasoline cars", what="weekly driving distance", pa="drivers of electric cars", pb="drivers of gasoline cars"),
-       dict(a="workers on the new schedule", b="workers on the old schedule", what="daily output", pa="workers on the new schedule", pb="workers on the old schedule")]
+# ======================= 27. 두 평균의 차를 추정하려면 어떤 자료가 필요한가 (4.6 / 2.A) =======================
+DD_CTX = [dict(q="Do students who use paper notes tend to score higher on a test than students who use a laptop?", pop="students at a college", ga="students who use paper notes", gb="students who use a laptop", var="the test score"),
+          dict(q="Do drivers of electric cars tend to drive more kilometers per week than drivers of gasoline cars?", pop="drivers in a city", ga="drivers of electric cars", gb="drivers of gasoline cars", var="the number of kilometers driven in a week"),
+          dict(q="Do workers on the new schedule tend to complete more tasks per day than workers on the old schedule?", pop="workers at a company", ga="workers on the new schedule", gb="workers on the old schedule", var="the number of tasks completed in a day")]
 
 
-def st_n5_diff_means_param(rng):
-    c = pick(rng, DM5)
-    n1 = rng.choice([30, 36, 40]); n2 = rng.choice([32, 38, 45]); m1 = round(rng.uniform(70, 90), 1); m2 = round(m1 - rng.uniform(2, 6), 1)
-    key = (f"The difference between the mean {c['what']} of all {c['pa']} and the mean {c['what']} of all {c['pb']}.", "A statistic estimates a parameter: the difference of the sample means estimates the difference of the two population means.")
-    wr = W([(f"The difference between the two sample means, ${m1 - m2:.1f}$, which is computed from the two samples.", "This is the value of the statistic computed from the samples, not the parameter that it estimates.", "statistic_as_parameter", 1), (f"The mean {c['what']} of all individuals in the two populations taken together.", "Combining the two populations estimates one overall mean, not the difference between the two means.", "combined_mean", 1), (f"The difference between the sizes of the two samples, ${abs(n1 - n2)}$, which is a feature of the study.", "The sample sizes are features of the study and are not a population parameter.", "sample_sizes", 1)])
-    stem = f"A researcher takes independent random samples of ${n1}$ {c['pa']} and ${n2}$ {c['pb']} and finds sample means of ${m1:g}$ and ${m2:g}$ for the {c['what']}. The difference $\\bar x_1 - \\bar x_2 = {m1 - m2:.1f}$ is used as an estimate. Which of the following is the parameter that this statistic estimates?"
-    return mc("st_n5_diff_means_param", "4.6", "2.A", "Identify the parameter that the difference of two sample means estimates", ["Recognize that the difference of the sample means is a statistic", "Identify the matching population quantity: the difference of the two population means"],
-              key, wr, rng, stem, "each option names a different quantity; only the difference of the two population means is the parameter estimated by the difference of the sample means", ["interpretation", "claim_justification"], est=80)
+def st_n5_data_for_difference(rng):
+    c = pick(rng, DD_CTX)
+    na = rng.choice([30, 36, 40]); nb = rng.choice([32, 38, 45])
+    key = (f"Independent random samples of ${na}$ {c['ga']} and ${nb}$ {c['gb']}, with {c['var']} recorded for each individual.", "The question compares the mean of a quantitative variable between two groups, so the data needed are independent random samples from the two groups with that variable recorded for every individual.")
+    wr = W([(f"One random sample of ${na + nb}$ {c['pop']}, with only the group of each individual recorded.", "The variable that the question compares is not recorded, so the means cannot be compared.", "variable_not_recorded", 1), (f"A random sample of ${na}$ {c['ga']}, with {c['var']} recorded for each individual.", "Data from only one of the two groups cannot show a difference between the groups.", "one_group_only", 1),
+            (f"Independent random samples of ${na}$ {c['ga']} and ${nb}$ {c['gb']}, with only whether each individual is above or below average recorded.", "Recording only above or below average discards the quantitative variable that the means need.", "categorized_response", 2)])
+    stem = f"A researcher wants to answer the investigative question \"{c['q']}\" for the {c['pop']}. Which of the following describes the data that the researcher should collect?"
+    return mc("st_n5_data_for_difference", "4.6", "2.A", "Choose the data needed to compare the means of two groups", ["Identify the quantitative variable and the two groups named in the question", "Choose independent random samples from both groups with the variable recorded and reject plans with one group, a missing variable or a categorized response"],
+              key, wr, rng, stem, "each context pairs the complete plan with a plan that omits the variable, omits a group or categorizes the response", ["claim_justification", "procedure_choice"], est=80)
 
 
 # ======================= 28. 쌍체 설계를 쓰는 이유 (4.4 / 2.B) =======================
@@ -352,34 +354,39 @@ def st_n5_missing_residual(rng):
 
 
 # ======================= 34. 단위를 바꾸면 기울기는? (5.5 / 4.D) =======================
-SU_CTX = [dict(x="the height of a tree in feet", y="the diameter of its trunk in inches", slope=0.9, x2="meters", f="0.3048", fx="meters"), dict(x="the distance of a trip in miles", y="the cost of the trip in dollars", slope=0.6, x2="kilometers", f="1.609", fx="kilometers"),
-          dict(x="the weight of a bag in pounds", y="the shipping fee in dollars", slope=1.8, x2="kilograms", f="0.4536", fx="kilograms")]
+SU_CTX = [dict(x="the height of a tree", y="the diameter of its trunk", xu="foot", xu2="meter", yu="inches", slope=0.9, f=0.3048, desc="1 foot = 0.3048 meter"), dict(x="the length of a trip", y="the cost of the trip", xu="mile", xu2="kilometer", yu="dollars", slope=0.6, f=1.609, desc="1 mile = 1.609 kilometers"),
+          dict(x="the weight of a bag", y="the shipping fee", xu="pound", xu2="kilogram", yu="dollars", slope=1.8, f=0.4536, desc="1 pound = 0.4536 kilogram")]
 
 
 def st_n5_slope_units(rng):
     c = pick(rng, SU_CTX)
-    f = float(c["f"]); b = c["slope"]; b2 = b / f
-    key = (f"The slope is multiplied by ${1 / f:.3f}$ and becomes about ${b2:.2f}$ per {c['fx'][:-1] if c['fx'].endswith('s') else c['fx']}.", "Changing the units of x rescales the slope by the reciprocal of the conversion factor, while the correlation is unchanged.")
-    wr = [(f"The slope stays ${b:g}$ per {c['fx'][:-1] if c['fx'].endswith('s') else c['fx']}, because changing units does not change the relationship between the variables.", "The relationship is the same, but the slope is measured per unit of x, so it changes when the unit changes.", "slope_unchanged", None, 1), (f"The slope is multiplied by ${f}$ and becomes about ${b * f:.2f}$ per {c['fx'][:-1] if c['fx'].endswith('s') else c['fx']}, as the conversion factor.", "Multiplies by the conversion factor instead of dividing by it; one new unit of x is larger or smaller than one old unit in the opposite way.", "wrong_direction_of_factor", None, 2),
-          (f"The slope becomes ${-b2:.2f}$ per {c['fx'][:-1] if c['fx'].endswith('s') else c['fx']}, because the direction of the relationship changes with the units.", "The direction of the relationship does not change with the units, so the sign of the slope is unchanged.", "sign_changes", None, 1)]
-    stem = f"The slope of the least-squares line for predicting {c['y']} from {c['x']} is ${b:g}$ per original unit of $x$. The explanatory variable is converted so that it is measured in {c['x2']} (one original unit equals ${c['f']}$ {c['fx']}). Which of the following describes the slope of the new least-squares line?"
-    return mc("st_n5_slope_units", "5.5", "4.D", "Describe how the slope changes when the units of the explanatory variable change", ["Recognize that the slope is measured per unit of x", "Rescale the slope by the reciprocal of the conversion factor and keep its sign"],
-              key, wr, rng, stem, "the new slope is recomputed from a synthetic data set whose x values are multiplied by the conversion factor", ["interpretation", "calculated_value_decision"], est=90, facts=[f"b={b}", f"f={f}"])
+    f = c["f"]; b = c["slope"]; b2 = b / f
+    # 독립 경로: 합성 자료의 x 에 환산 계수를 곱하고 최소제곱 기울기를 다시 구한다
+    xs = np.arange(1, 11, dtype=float); ys = b * xs + 3 + np.array([0.3, -0.2, 0.1, -0.4, 0.2, 0.0, -0.1, 0.4, -0.3, 0.1])
+    agree(np.polyfit(xs * f, ys, 1)[0], np.polyfit(xs, ys, 1)[0] / f, tol=1e-9, name="slope")
+    key = (f"About ${b2:.2f}$ {c['yu']} per {c['xu2']}.", f"One {c['xu']} is ${f}$ of a {c['xu2']}, so the predicted change per {c['xu2']} is ${b:g}/{f} \\approx {b2:.2f}$ {c['yu']}.")
+    wr = [(f"About ${b:g}$ {c['yu']} per {c['xu2']}.", f"The slope is measured per unit of $x$, so it changes when the unit changes from the {c['xu']} to the {c['xu2']}.", "slope_unchanged", None, 1), (f"About ${b * f:.2f}$ {c['yu']} per {c['xu2']}.", f"Multiplies by the conversion factor instead of dividing by it; a {c['xu2']} is a different amount of $x$ than a {c['xu']} in the opposite way.", "factor_multiplied", None, 2),
+          (f"About ${-b2:.2f}$ {c['yu']} per {c['xu2']}.", "The sign of the slope does not depend on the units, because the direction of the relationship does not change.", "sign_changes", None, 1)]
+    stem = f"The least-squares line for predicting {c['y']} (in {c['yu']}) from {c['x']} (in {c['xu']}s) has a slope of ${b:g}$ {c['yu']} per {c['xu']}. The explanatory variable is converted to {c['xu2']}s ({c['desc']}) and the least-squares line is found again. What is the slope of the new line?"
+    return mc("st_n5_slope_units", "5.5", "4.D", "Find the slope after the explanatory variable is converted to other units", ["Recognize that the slope is measured per unit of x", "Divide the slope by the conversion factor and keep its sign"],
+              key, wr, rng, stem, "the new slope is recomputed by fitting a least-squares line to synthetic data whose x values are multiplied by the conversion factor", ["interpretation", "calculated_value_decision"], est=90, facts=[f"b={b}", f"f={f}"])
 
 
 # ======================= 35. 내삽으로 믿을 만한 예측 고르기 (5.3 / 4.D) =======================
-IL_CTX = [dict(x="the number of hours of practice per week", y="the skill score", lo=2, hi=12, a=40, b=3.5, unit="hours"), dict(x="the age of a car in years", y="its resale value in thousand dollars", lo=1, hi=10, a=30, b=-2.2, unit="years"), dict(x="the daily advertising spending in hundreds of dollars", y="the daily sales in thousands of units", lo=3, hi=15, a=12, b=1.8, unit="hundred dollars")]
+IL_CTX = [dict(x="the number of hours of practice per week", y="the skill score", lo=2, hi=12, a=40, b=3.5, unit="hours"), dict(x="the age of a car in years", y="its resale value in thousand dollars", lo=2, hi=10, a=30, b=-2.2, unit="years"), dict(x="the daily advertising spending in hundreds of dollars", y="the daily sales in thousands of units", lo=3, hi=15, a=12, b=1.8, unit="hundred dollars")]
 
 
 def st_n5_interpolation_choice(rng):
     c = pick(rng, IL_CTX)
-    inside = rng.choice([c["lo"] + 2, (c["lo"] + c["hi"]) // 2, c["hi"] - 1]); outs = [c["lo"] - 1 if c["lo"] > 1 else c["hi"] + 4, c["hi"] + 5, c["hi"] + 12]
+    inside = rng.choice([c["lo"] + 2, (c["lo"] + c["hi"]) // 2, c["hi"] - 2]); near = c["hi"] + 2; far = c["hi"] + 12; below = c["lo"] - 1
     a, b = c["a"], c["b"]; sg = "+" if b >= 0 else "-"
-    key = (f"The prediction for $x = {inside}$ is the most reliable, because ${inside}$ is within the range of the data.", f"The data have values of $x$ from ${c['lo']}$ to ${c['hi']}$, and predictions are most reliable within that range.")
-    wr = [(f"The prediction for $x = {o}$ is the most reliable, because it is farthest from the others and so is least affected by them.", f"${o}$ is outside the range of the data (${c['lo']}$ to ${c['hi']}$), so the prediction is an extrapolation.", f"extrapolation_{i}", None, 1 + i % 2) for i, o in enumerate(outs)]
-    stem = f"A least-squares line $\\hat y = {a} {sg} {abs(b):g}x$ predicts {c['y']} from {c['x']}, using data with $x$ from ${c['lo']}$ to ${c['hi']}$ {c['unit']}. A researcher considers predictions for $x = {inside}$, $x = {outs[0]}$, $x = {outs[1]}$ and $x = {outs[2]}$. Which prediction is the most reliable, and why?"
-    return mc("st_n5_interpolation_choice", "5.3", "4.D", "Choose the prediction that is not an extrapolation", ["Compare each value of x with the range of the data", "Choose the value inside the range and reject values outside it"],
-              key, wr, rng, stem, "exactly one of the four values lies inside the stated range of the data", ["claim_justification", "condition_check"], est=85, facts=[f"inside={inside}"])
+    key = (f"The prediction for $x = {inside}$, because ${inside}$ is between the smallest and the largest values of $x$ in the data.", f"The data have values of $x$ from ${c['lo']}$ to ${c['hi']}$, and a prediction inside that range is an interpolation, which is the most reliable kind.")
+    wr = [(f"The prediction for $x = {near}$, because it is only a little beyond the largest value of $x$ in the data.", f"${near}$ is outside the range of the data (${c['lo']}$ to ${c['hi']}$), so the prediction is an extrapolation, even though it is close to the range.", "slightly_outside", None, 1),
+          (f"The prediction for $x = {far}$, because the line is a least-squares line that fits all of the data.", "A good fit within the range of the data does not show that the line continues to hold far outside the range.", "least_squares_fits_all", None, 2),
+          (f"The prediction for $x = {below}$, because the correlation is close to $1$.", f"${below}$ is below the smallest value of $x$ in the data, and a strong correlation within the range does not make predictions outside it reliable.", "strong_r_outside", None, 1)]
+    stem = f"A least-squares line $\\hat y = {a} {sg} {abs(b):g}x$ predicts {c['y']} from {c['x']}, using data with $x$ from ${c['lo']}$ to ${c['hi']}$ {c['unit']} and a correlation close to $1$. A researcher considers predictions for $x = {inside}$, $x = {near}$, $x = {far}$ and $x = {below}$. Which prediction is the most reliable, and why?"
+    return mc("st_n5_interpolation_choice", "5.3", "4.D", "Choose the prediction that is not an extrapolation and reject reasons based on closeness, fit or correlation", ["Compare each value of x with the range of the data", "Choose the value inside the range and reject values outside it whatever the reason given"],
+              key, wr, rng, stem, "exactly one of the four values lies inside the stated range of the data and each wrong option gives a different reason", ["claim_justification", "condition_check"], est=85, facts=[f"inside={inside}"])
 
 
 # ======================= 36. 상관계수 크기 비교 (5.2 / 4.A) =======================
@@ -406,5 +413,8 @@ def st_n5_corr_compare(rng):
 
 
 STAGE_SINGLES = ["st_n5_phat_varies", "st_n5_phat_normal_cond", "st_n5_hyp_from_claim", "st_n5_interval_or_test", "st_n5_pvalue_from_z", "st_n5_margin_error_p", "st_n5_pooled_phat", "st_n5_ci_two_sided", "st_n5_two_prop_conclusion",
-                 "st_n5_t_features", "st_n5_diff_means_param", "st_n5_why_matched", "st_n5_paired_t_list", "st_n5_sample_size_mean", "st_n5_ci_mean_interpret", "st_n5_paired_conclusion",
+                 "st_n5_t_features", "st_n5_data_for_difference", "st_n5_why_matched", "st_n5_paired_t_list", "st_n5_sample_size_mean", "st_n5_ci_mean_interpret", "st_n5_paired_conclusion",
                  "st_n5_missing_residual", "st_n5_slope_units", "st_n5_interpolation_choice", "st_n5_corr_compare"]
+
+# P5 첫 런에서 반려된 원형(정의 암기 문항 교체, 단위 문구, 반복된 오답 근거)을 고쳐 다시 돌린다
+STAGE_FIX = ["st_n5_data_for_difference", "st_n5_slope_units", "st_n5_interpolation_choice"]
