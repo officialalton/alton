@@ -72,7 +72,7 @@ ch_o_lewis_choice = _b("ch_o_lewis_choice", "2.5", "1.A", [
      [("A nitrogen atom with three single bonds to hydrogen atoms, one lone pair, and a charge of +1.", "This is the structure of NH3 with an extra charge that does not account for the fourth hydrogen atom."), ("A nitrogen atom with four single bonds and one lone pair.", "This has ten electrons around nitrogen, which violates the octet rule for nitrogen."), ("A nitrogen atom with two double bonds to two hydrogen atoms.", "Hydrogen cannot form double bonds.")]),
 ], "choose the correct Lewis structure from the valence electron count")
 
-ch_o_vsepr_shape = _b("ch_o_vsepr_shape", "2.6", "1.A", [
+ch_o_vsepr_shape = _b("ch_o_vsepr_shape", "2.7", "4.A", [
     ("Which of the following correctly gives the molecular geometry of SF4, a molecule with four bonded atoms and one lone pair on the central atom?",
      ("See-saw, because the lone pair is equatorial in a trigonal bipyramid of five domains.", "Five domains give a trigonal bipyramidal arrangement and one lone pair gives a see-saw shape."),
      [("Tetrahedral, because there are four bonded atoms.", "Lone pairs must be counted as domains, so the electron-domain geometry is trigonal bipyramidal."), ("Square planar, because there are four bonded atoms in one plane.", "Square planar needs two lone pairs on an octahedral arrangement."), ("Trigonal pyramidal, because there is one lone pair.", "A trigonal pyramid has three bonded atoms and one lone pair.")]),
@@ -84,17 +84,17 @@ ch_o_vsepr_shape = _b("ch_o_vsepr_shape", "2.6", "1.A", [
      [("Trigonal planar, because there are three bonded atoms.", "The lone pair must be counted as a domain."), ("Tetrahedral, because there are four electron domains.", "Tetrahedral molecular geometry requires four bonded atoms."), ("Bent, because chlorine has a lone pair.", "A bent shape has two bonded atoms.")]),
 ], "predict the molecular geometry from the electron domains")
 
-ch_o_bond_order_length = _b("ch_o_bond_order_length", "2.4", "1.B", [
+ch_o_bond_order_length = _b("ch_o_bond_order_length", "2.2", "4.A", [
     ("Which of the following correctly ranks the carbon–carbon bonds in C2H6, C2H4 and C2H2 in order of increasing bond length?",
-     ("C2H2 < C2H4 < C2H6, because a higher bond order gives a shorter bond.", "A higher bond order brings the nuclei closer together."),
-     [("C2H6 < C2H4 < C2H2, because more bonds make the atoms repel more.", "A higher bond order shortens the bond."), ("C2H2 = C2H4 = C2H6, because all of them join two carbon atoms.", "The bond length depends on the bond order."), ("C2H4 < C2H2 < C2H6, because a double bond is the shortest.", "A triple bond is shorter than a double bond.")]),
+     ("C2H2 < C2H4 < C2H6, because a higher bond order gives a shorter bond.", "The bond order increases from a single to a triple bond, and the nuclei move closer together."),
+     [("C2H6 < C2H4 < C2H2, because more bonds make the atoms repel more.", "A higher bond order shortens the bond."), ("C2H2 = C2H4 = C2H6, because all of them join two carbon atoms.", "The bond length depends on the bond order, not only on the atoms joined."), ("C2H4 < C2H2 < C2H6, because a double bond is the shortest.", "A triple bond is shorter than a double bond.")]),
     ("A student compares the bond energies of the $\\mathrm{N-N}$, $\\mathrm{N=N}$ and $\\mathrm{N\\equiv N}$ bonds. Which of the following is correct?",
      ("The bond energy increases from N–N to N=N to N≡N, because more shared pairs bind more strongly.", "A higher bond order gives a higher bond energy."),
      [("The bond energy decreases from N–N to N≡N, because shorter bonds are weaker.", "Shorter bonds of a higher order are stronger."), ("All three bonds have the same energy because they join nitrogen atoms.", "Bond energy increases with the bond order."), ("The N=N bond has the highest energy, because double bonds are the most stable.", "The triple bond has the highest energy.")]),
-    ("In the carbonate ion, CO3²⁻, the three carbon–oxygen bonds are identical. How does the length of each C–O bond compare with a $\\mathrm{C=O}$ bond and a $\\mathrm{C-O}$ single bond?",
-     ("It is between the two, because the resonance forms give each bond an average order of 4/3.", "Delocalization gives an intermediate bond order."),
-     [("It is the same as the C=O bond, because one resonance form has a double bond.", "Each bond is the average of the resonance forms, not equal to the double bond."), ("It is the same as the C–O single bond, because the ion has a negative charge.", "The extra charge does not change the bond order to one."), ("It is longer than both, because resonance weakens all bonds.", "Resonance gives an intermediate length and not a longer one.")]),
-], "relate bond order to bond length and bond energy")
+    ("Which of the following correctly ranks the carbon–oxygen bonds in CO, CO2 and CH3OH in order of increasing bond length?",
+     ("CO < CO2 < CH3OH, because the bond order falls from triple to double to single.", "A triple bond is the shortest and a single bond is the longest."),
+     [("CH3OH < CO2 < CO, because a single bond is the strongest.", "A single bond is longer and weaker than a triple bond."), ("CO2 < CO < CH3OH, because CO2 has two C–O bonds.", "The number of bonds in the molecule does not set the length of each one."), ("CO = CO2 = CH3OH, because all three contain carbon and oxygen.", "The bond order differs, so the lengths differ.")]),
+], "relate bond order to bond length and bond energy", "fixed fact bank checked against CED 2.2")
 
 ch_o_conductivity_claim = _b("ch_o_conductivity_claim", "2.1", "6.A", [
     ("A student observes that solid NaCl does not conduct electricity but molten NaCl does. Which claim is best supported by this evidence?",
@@ -158,7 +158,7 @@ ch_o_net_ionic = _b("ch_o_net_ionic", "4.2", "4.A", [
      [("HCl(aq) + NaOH(aq) → NaCl(aq) + H2O(l)", "This is the molecular equation."), ("Na⁺(aq) + Cl⁻(aq) → NaCl(s)", "Sodium chloride remains dissolved."), ("H2O(l) → H⁺(aq) + OH⁻(aq)", "This is the reverse of the reaction.")]),
 ], "write and interpret net ionic equations for precipitation and neutralization")
 
-ch_o_acid_base_type = _b("ch_o_acid_base_type", "4.3", "4.B", [
+ch_o_acid_base_type = _b("ch_o_acid_base_type", "4.8", "4.A", [
     ("In the reaction NH3(aq) + H2O(l) ⇌ NH4⁺(aq) + OH⁻(aq), which species acts as the Brønsted-Lowry base in the forward reaction?",
      ("NH3, because it accepts a proton from H2O.", "A Brønsted-Lowry base is a proton acceptor."),
      [("H2O, because it accepts a proton.", "Water donates the proton in the forward reaction."), ("OH⁻, because it is produced.", "A product is not a base in the forward direction by this fact alone."), ("NH4⁺, because it has a positive charge.", "NH4⁺ donates a proton in the reverse reaction.")]),
@@ -170,7 +170,7 @@ ch_o_acid_base_type = _b("ch_o_acid_base_type", "4.3", "4.B", [
      [("H⁺ combines with Na⁺ to form NaH.", "Sodium ions are spectators."), ("Cl⁻ combines with CH3COO⁻ to form a precipitate.", "No precipitate forms when a proton transfer to acetate occurs."), ("CH3COO⁻ donates a proton to H⁺.", "Acetate has no proton to donate to a hydrogen ion.")]),
 ], "identify acids, bases and their conjugates in proton-transfer reactions")
 
-ch_o_redox_agent = _b("ch_o_redox_agent", "4.9", "4.C", [
+ch_o_redox_agent = _b("ch_o_redox_agent", "4.9", "4.A", [
     ("In the reaction Mg(s) + 2 HCl(aq) → MgCl2(aq) + H2(g), which species is the oxidizing agent?",
      ("H⁺, because it is reduced to H2.", "The oxidizing agent is the species that is reduced."),
      [("Mg, because it is the metal.", "Magnesium is oxidized, so it is the reducing agent."), ("Cl⁻, because it is a spectator.", "Chloride is a spectator ion."), ("H2, because it is a product.", "H2 is the product of the reduction.")]),
@@ -182,7 +182,7 @@ ch_o_redox_agent = _b("ch_o_redox_agent", "4.9", "4.C", [
      [("AgNO3(aq) + NaCl(aq) → AgCl(s) + NaNO3(aq), because a solid forms.", "No oxidation number changes in a precipitation reaction."), ("HCl(aq) + NaOH(aq) → NaCl(aq) + H2O(l), because water forms.", "A neutralization does not change oxidation numbers."), ("NaCl(s) → Na⁺(aq) + Cl⁻(aq), because ions form.", "Dissolving does not change oxidation numbers.")]),
 ], "identify oxidizing and reducing agents and redox reactions")
 
-ch_o_precip_claim = _b("ch_o_precip_claim", "4.2", "6.C", [
+ch_o_precip_claim = _b("ch_o_precip_claim", "4.2", "6.A", [
     ("A student mixes solutions of Pb(NO3)2 and KI and observes a yellow solid. Which claim is best supported?",
      ("PbI2 precipitated, because lead(II) iodide is insoluble in water.", "The yellow solid is lead(II) iodide."),
      [("A precipitate of KNO3 formed, because potassium and nitrate ions are present.", "All nitrates and potassium salts are soluble."), ("A gas formed, which is seen as a yellow solid.", "A solid is a precipitate and not a gas."), ("No reaction occurred, because the ions are all soluble.", "The formation of a solid shows a reaction.")]),
@@ -195,19 +195,19 @@ ch_o_precip_claim = _b("ch_o_precip_claim", "4.2", "6.C", [
 ], "make a claim about precipitation from solubility rules and observations")
 
 # ---- Unit 5 ----
-ch_o_mechanism_step = _b("ch_o_mechanism_step", "5.5", "4.C", [
+ch_o_mechanism_step = _b("ch_o_mechanism_step", "5.8", "5.B", [
     ("A reaction mechanism has two elementary steps: (1) A + B → C (slow); (2) C + A → D (fast). What is the rate law for the overall reaction?",
      ("rate = k[A][B], because the slow step involves one A and one B.", "The rate law of the rate-determining step gives the overall rate law."),
      [("rate = k[A]²[B], because A appears twice in the mechanism.", "Only the slow step determines the rate law."), ("rate = k[C][A], because that is the fast step.", "The fast step does not set the rate."), ("rate = k[D], because D is the final product.", "The rate does not depend on the product concentration here.")]),
-    ("A proposed mechanism has two steps: (1) NO2 + NO2 → NO3 + NO (slow); (2) NO3 + CO → NO2 + CO2 (fast). What is the overall reaction, and which species is an intermediate?",
-     ("NO2 + CO → NO + CO2, with NO3 as the intermediate formed and then used.", "An intermediate forms in one step and is used up in a later step."),
-     [("NO2 + CO → NO + CO2, and NO2 is the intermediate.", "NO2 is a reactant overall and it is regenerated; it acts as a catalyst, not an intermediate."), ("2 NO2 + CO → NO + CO2 + NO2, and CO is the intermediate.", "CO is a reactant and not an intermediate."), ("NO3 + CO → NO + CO2, and NO is the intermediate.", "NO is a product that is not consumed in a later step.")]),
-    ("For a reaction with the mechanism (1) A ⇌ B (fast equilibrium); (2) B + C → D (slow), which is the rate law in terms of the reactants A and C?",
-     ("rate = k[A][C], because [B] follows [A] through the fast equilibrium.", "B is an intermediate and so it must be replaced by [A]."),
-     [("rate = k[B][C], because the slow step sets the rate.", "The rate law can include only the reactants and not the intermediate B."), ("rate = k[A], because step 1 is the first.", "The slow step includes C."), ("rate = k[D], because D is the product.", "The product concentration is not in the rate law.")]),
-], "derive the rate law from a mechanism with a slow step")
+    ("A proposed mechanism has two steps: (1) 2 NO → N2O2 (fast equilibrium); (2) N2O2 + O2 → 2 NO2 (slow). Which rate law is consistent with the mechanism?",
+     ("rate = k[NO]²[O2], because [N2O2] is proportional to [NO]² through the fast equilibrium.", "The intermediate is replaced using the equilibrium of step 1."),
+     [("rate = k[N2O2][O2], because the slow step involves N2O2.", "An intermediate cannot appear in the final rate law."), ("rate = k[NO][O2], because the reaction needs one NO and one O2.", "The pre-equilibrium puts [NO] to the second power."), ("rate = k[NO]², because step 1 is the first step.", "The slow step involves O2, so it appears in the rate law.")]),
+    ("A mechanism has two steps: (1) X + Y → Z (slow); (2) Z + Y → P (fast). The overall reaction is X + 2 Y → P. What is the order of the reaction in Y?",
+     ("First order in Y, because only one Y takes part in the slow step.", "The order is set by the slow step and not by the overall equation."),
+     [("Second order in Y, because the overall equation has 2 Y.", "The overall coefficients do not set the order."), ("Zero order in Y, because Y is also used in the fast step.", "Y takes part in the slow step, so the rate depends on [Y]."), ("The order cannot be found without experimental data.", "A mechanism with a slow step gives the rate law that it predicts.")]),
+], "derive the rate law from a mechanism with a slow step", "fixed fact bank checked against CED 5.8")
 
-ch_o_collision_model = _b("ch_o_collision_model", "5.7", "4.A", [
+ch_o_collision_model = _b("ch_o_collision_model", "5.5", "6.E", [
     ("Which statement best explains why the rate of a reaction increases when the temperature is raised?",
      ("A larger fraction of collisions have energy that is greater than or equal to the activation energy.", "Raising T widens the distribution of kinetic energies toward higher values."),
      [("The activation energy becomes lower when the temperature is raised.", "The activation energy does not depend on temperature."), ("The number of reactant particles increases when the temperature is raised.", "Heating does not create more particles."), ("The reaction becomes more exothermic at higher temperatures.", "ΔH does not change the rate that way.")]),
@@ -232,7 +232,7 @@ ch_o_energy_diagram = _b("ch_o_energy_diagram", "6.6", "4.A", [
      [("30 kJ/mol, because 80 − 50 = 30.", "This subtracts the energy released instead of adding it."), ("50 kJ/mol, because it equals ΔH.", "The activation energy is not equal to ΔH."), ("80 kJ/mol, because a reaction has one activation energy.", "The reverse barrier is different.")]),
 ], "interpret reaction energy diagrams for activation energy and enthalpy change")
 
-ch_o_hess_logic = _b("ch_o_hess_logic", "6.9", "4.B", [
+ch_o_hess_logic = _b("ch_o_hess_logic", "6.9", "5.F", [
     ("Reaction 1 has $\\Delta H = -100\\text{ kJ}$. A student reverses reaction 1 and doubles it. What is ΔH for the new reaction?",
      ("+200 kJ, because reversing flips the sign and doubling doubles the value.", "Both operations are applied to ΔH."),
      [("−200 kJ, because doubling the reaction doubles ΔH.", "Reversing changes the sign."), ("+100 kJ, because reversing only changes the sign.", "Doubling the equation also doubles ΔH."), ("−50 kJ, because reversing halves the value.", "Reversing does not halve the value.")]),
@@ -287,7 +287,7 @@ ch_o_curve_features = _b("ch_o_curve_features", "8.5", "4.A", [
      [("The equivalence point, where the number of moles of acid equals base.", "The pH changes most rapidly near the equivalence point."), ("The region after the equivalence point.", "Excess strong base gives a rapid rise."), ("The initial point, before any base is added.", "The pH changes quickly just after the start but then flattens in the buffer region.")]),
 ], "interpret features of titration curves")
 
-ch_o_ka_strength = _b("ch_o_ka_strength", "8.3", "4.B", [
+ch_o_ka_strength = _b("ch_o_ka_strength", "8.3", "4.A", [
     ("Acid X has $K_a = 1.0 \\times 10^{-3}$ and acid Y has $K_a = 1.0 \\times 10^{-6}$. Both solutions have the same initial concentration. Which statement is correct?",
      ("The solution of X has the lower pH, because X ionizes more and gives more hydronium.", "A larger Ka means greater ionization."),
      [("The solution of Y has the lower pH, because its Ka is smaller.", "A smaller Ka gives less ionization and a higher pH."), ("The solutions have the same pH, because the concentrations are equal.", "The pH depends on Ka as well as on the concentration."), ("The solution of X has the higher pH, because it ionizes more.", "More ionization gives more hydronium ions and a lower pH.")]),
@@ -299,7 +299,7 @@ ch_o_ka_strength = _b("ch_o_ka_strength", "8.3", "4.B", [
      [("HA is a stronger acid than HB, because its pH is higher.", "A higher pH means a weaker acid at the same concentration."), ("They have the same strength, because the concentrations are the same.", "The pH values differ, so the strengths differ."), ("HA ionizes to a greater extent than HB.", "HB ionizes to a greater extent, as the lower pH shows.")]),
 ], "compare acid strength from Ka values and pH")
 
-ch_o_buffer_concept = _b("ch_o_buffer_concept", "8.9", "4.C", [
+ch_o_buffer_concept = _b("ch_o_buffer_concept", "8.8", "4.A", [
     ("Which of the following mixtures forms a buffer?",
      ("Equal moles of acetic acid and sodium acetate in solution.", "A weak acid and its conjugate base are both present."),
      [("Equal moles of HCl and NaCl in solution.", "A strong acid and its salt do not resist a change in pH."), ("Equal moles of NaOH and NaCl in solution.", "A strong base and a neutral salt do not form a buffer."), ("Equal moles of acetic acid and NaCl in solution.", "A neutral salt does not supply the conjugate base.")]),
@@ -326,15 +326,15 @@ ch_o_conj_pair = _b("ch_o_conj_pair", "8.1", "4.A", [
 # ---- Unit 9, practice 6 ----
 ch_o_spontaneity_justify = _b("ch_o_spontaneity_justify", "9.3", "6.D", [
     ("A reaction has ΔH < 0 and ΔS > 0. Which statement is best justified?",
-     ("The reaction is spontaneous at all temperatures, because ΔG = ΔH − TΔS is negative for every T.", "Both terms favor spontaneity."),
-     [("The reaction is spontaneous only at low temperature, because ΔH is negative.", "The −TΔS term is also negative, so the reaction is spontaneous at all T."), ("The reaction is spontaneous only at high temperature, because ΔS is positive.", "Both terms favor spontaneity at any T."), ("The reaction is nonspontaneous at all temperatures.", "ΔG is negative at all temperatures.")]),
+     ("It is spontaneous at all temperatures, because −TΔS is negative and adds to a negative ΔH.", "Both terms of ΔG = ΔH − TΔS favor spontaneity at every temperature."),
+     [("It is spontaneous only at low temperatures, because ΔH is negative and the entropy term matters less there.", "The entropy term also favors spontaneity, so a high temperature does not reverse the sign of ΔG."), ("It is spontaneous only at high temperatures, because ΔS is positive and the entropy term must dominate.", "ΔH is already negative, so no temperature is needed to make ΔG negative."), ("It is nonspontaneous at all temperatures, because the entropy of the system increases.", "An increase in entropy favors spontaneity, so ΔG is negative at all temperatures.")]),
     ("A reaction has ΔH > 0 and ΔS > 0. Which statement is best justified?",
-     ("Spontaneous only at high temperatures, because −TΔS must outweigh the positive ΔH.", "The entropy term becomes more important as T rises."),
-     [("The reaction is spontaneous at all temperatures, because ΔS is positive.", "A positive ΔH opposes spontaneity at low T."), ("The reaction is spontaneous only at low temperatures.", "At low T the positive ΔH dominates."), ("The reaction is never spontaneous.", "At high T, −TΔS can make ΔG negative.")]),
+     ("It is spontaneous only at high temperatures, because −TΔS must outweigh the positive ΔH.", "The entropy term becomes more important as T rises, so ΔG turns negative above ΔH/ΔS."),
+     [("It is spontaneous at all temperatures, because ΔS is positive and entropy always favors a reaction.", "The positive ΔH opposes spontaneity at low T, so the reaction is not spontaneous at every temperature."), ("It is spontaneous only at low temperatures, because the positive ΔH is smaller than −TΔS there.", "At low T the positive ΔH dominates the small −TΔS term."), ("It is nonspontaneous at all temperatures, because ΔH is positive and absorbs energy.", "At high T the −TΔS term can exceed ΔH, so ΔG becomes negative.")]),
     ("A reaction has ΔH < 0 and ΔS < 0. Which statement is best justified?",
-     ("Spontaneous only at low temperatures, because −TΔS must be smaller than |ΔH|.", "At high temperatures the positive −TΔS term dominates."),
-     [("The reaction is spontaneous at all temperatures, because ΔH is negative.", "A negative ΔS opposes spontaneity at high T."), ("The reaction is spontaneous only at high temperatures.", "At high T, ΔG becomes positive."), ("The reaction is never spontaneous, because ΔS is negative.", "At low T the ΔH term dominates.")]),
-], "justify the temperature dependence of spontaneity from the signs of ΔH and ΔS")
+     ("It is spontaneous only at low temperatures, because −TΔS must be smaller than |ΔH|.", "At high temperatures the positive −TΔS term dominates a negative ΔH."),
+     [("It is spontaneous at all temperatures, because ΔH is negative and releases energy.", "The negative ΔS makes −TΔS positive, which opposes spontaneity at high T."), ("It is spontaneous only at high temperatures, because the entropy decrease is favored by heat.", "At high T the positive −TΔS term makes ΔG positive."), ("It is nonspontaneous at all temperatures, because the entropy of the system decreases.", "At low T the negative ΔH dominates, so ΔG is negative.")]),
+], "justify the temperature dependence of spontaneity from the signs of ΔH and ΔS", "fixed fact bank checked against CED 9.3")
 
 ch_o_cell_justify = _b("ch_o_cell_justify", "9.9", "6.E", [
     ("A galvanic cell has a standard cell potential of +1.10 V. Which statement is best justified?",

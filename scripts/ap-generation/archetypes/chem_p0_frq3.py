@@ -82,7 +82,7 @@ def chf_long_ksp(rng):
              [R("E1", "justification", "States that the statement is incorrect and justifies that K_sp is a constant at a given temperature", ["incorrect", "depends on temperature only"], err=["says K_sp changes with the concentration"])]),
     ]
     return _pack("chf_long_ksp", "long", "7.11", ["7.9", "7.12"], "5.F", "Solubility product, precipitation and the common-ion effect", stim, parts, 10, 23, [f"form={form}", f"Ksp={Ksp}", f"cc={cc}", f"ca={ca}", f"c0={c0}", f"s={s:.4e}", f"Q={Q:.4e}", f"s'={sp_:.4e}"],
-                 [_ev("A", "molar solubility", s, 0.03 * s, "M"), _ev("B", "Q", Q, 0.03 * Q, ""), _ev("C", "common-ion solubility", sp_, 0.03 * sp_, "M")],
+                 [],
                  ("K_sp from a formula, Q versus K_sp for mixing solutions, and the common-ion effect", ["Write the K_sp expression with the formula's subscripts", "Halve the concentrations for equal-volume mixing and compare Q with K_sp", "Use the common-ion concentration in K_sp to find the reduced solubility"],
                   [("the solutions are at 25 °C", "the stimulus")], {"type": "text", "must_include": ["K_sp", "concentrations"]},
                   "bisection on the K_sp equation recomputes the solubilities; Q is computed from exact halved concentrations"), ["law_selection", "justification", "representation_reading"])
@@ -159,8 +159,8 @@ def chf_short_gas_mix(rng):
     parts = [
         part("A", "Calculate the total pressure, in atm, in the container.", 1, "calculate", ["5.B", "5.F"], f"P = nRT/V = ({nt:g})(0.08206)({T:.2f})/{V:g} = {Pt:.3f} atm.",
              [R("A1", "numeric", f"Calculates the total pressure (about {Pt:.3f} atm) using kelvins", [f"{Pt:.3f}"], nums=True, units=True, err=["uses the Celsius temperature"])]),
-        part("B", f"Calculate the partial pressure of {cf(gb)}.", 1, "calculate", ["5.F"], f"P({gb}) = (n_b/n_total)P_total = ({nb:g}/{nt:g})({Pt:.3f}) = {Pb:.3f} atm.",
-             [R("B1", "numeric", f"Multiplies the mole fraction of {gb} by the total pressure to calculate the partial pressure (about {Pb:.3f} atm)", [f"{Pb:.3f}"], nums=True, units=True, err=["uses the mole fraction of the other gas"])]),
+        part("B", f"Calculate the pressure that {cf(gb)} alone exerts in the container.", 1, "calculate", ["5.F"], f"The pressure of {gb} = (n_b/n_total)P_total = ({nb:g}/{nt:g})({Pt:.3f}) = {Pb:.3f} atm.",
+             [R("B1", "numeric", f"Multiplies the mole fraction of {gb} by the total pressure to calculate the pressure of {gb} (about {Pb:.3f} atm)", [f"{Pb:.3f}"], nums=True, units=True, err=["uses the mole fraction of the other gas"])]),
         part("C", f"Which gas, {cf(ga)} or {cf(gb)}, has the greater average molecular speed at this temperature? Justify your answer.", 2, "justify", ["6.E", "6.B"], f"{ga} moves faster: at the same temperature the molecules have the same average kinetic energy, so the lighter molecules ({ga}) have the greater average speed.",
              [R("C1", "claim", f"Identifies {ga} (the gas of lower molar mass) as faster", [ga], err=["identifies the heavier gas"]),
               R("C2", "justification", "Justifies that the average kinetic energy depends only on temperature, so a smaller mass means a larger speed", ["same average kinetic energy", "smaller mass"], requires="C1", err=["says the heavier gas has more energy"])]),

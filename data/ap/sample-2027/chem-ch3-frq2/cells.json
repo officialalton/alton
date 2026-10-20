@@ -1,0 +1,32 @@
+[
+ {
+  "cellId": "ap_chemistry-f01",
+  "archetype": "chf_long_ksp",
+  "kind": "frq_bundle",
+  "unitCode": "7",
+  "topic": "7.11",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "candidates": 4,
+  "extraTopics": [
+   "7.9",
+   "7.12"
+  ],
+  "template": "long"
+ },
+ {
+  "cellId": "ap_chemistry-f02",
+  "archetype": "chf_short_gas_mix",
+  "kind": "frq_bundle",
+  "unitCode": "3",
+  "topic": "3.5",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "candidates": 4,
+  "extraTopics": [
+   "3.4",
+   "3.6"
+  ],
+  "template": "short"
+ }
+]

@@ -1291,7 +1291,7 @@
  },
  {
   "id": "ch_n_second_order_time",
-  "topic": "5.4",
+  "topic": "5.3",
   "skill": "5.F",
   "calculator": "allowed",
   "stimulus": "none",
@@ -1381,8 +1381,8 @@
  },
  {
   "id": "ch_o_acid_base_type",
-  "topic": "4.3",
-  "skill": "4.B",
+  "topic": "4.8",
+  "skill": "4.A",
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
@@ -1411,12 +1411,12 @@
  },
  {
   "id": "ch_o_bond_order_length",
-  "topic": "2.4",
-  "skill": "1.B",
+  "topic": "2.2",
+  "skill": "4.A",
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "fixed fact bank checked against CED"
+   "fixed fact bank checked against CED 2.2"
   ],
   "misconceptions": [
    "The triple bond has the highest energy.",
@@ -1426,8 +1426,8 @@
  },
  {
   "id": "ch_o_buffer_concept",
-  "topic": "8.9",
-  "skill": "4.C",
+  "topic": "8.8",
+  "skill": "4.A",
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
@@ -1456,8 +1456,8 @@
  },
  {
   "id": "ch_o_collision_model",
-  "topic": "5.7",
-  "skill": "4.A",
+  "topic": "5.5",
+  "skill": "6.E",
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
@@ -1547,7 +1547,7 @@
  {
   "id": "ch_o_hess_logic",
   "topic": "6.9",
-  "skill": "4.B",
+  "skill": "5.F",
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
@@ -1622,7 +1622,7 @@
  {
   "id": "ch_o_ka_strength",
   "topic": "8.3",
-  "skill": "4.B",
+  "skill": "4.A",
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
@@ -1651,17 +1651,17 @@
  },
  {
   "id": "ch_o_mechanism_step",
-  "topic": "5.5",
-  "skill": "4.C",
+  "topic": "5.8",
+  "skill": "5.B",
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "fixed fact bank checked against CED"
+   "fixed fact bank checked against CED 5.8"
   ],
   "misconceptions": [
-   "NO is a product that is not consumed in a later step.",
-   "CO is a reactant and not an intermediate.",
-   "NO2 is a reactant overall and it is regenerated; it acts as a catalyst, not an intermediate."
+   "The slow step involves O2, so it appears in the rate law.",
+   "The pre-equilibrium puts [NO] to the second power.",
+   "An intermediate cannot appear in the final rate law."
   ]
  },
  {
@@ -1712,7 +1712,7 @@
  {
   "id": "ch_o_precip_claim",
   "topic": "4.2",
-  "skill": "6.C",
+  "skill": "6.A",
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
@@ -1727,7 +1727,7 @@
  {
   "id": "ch_o_redox_agent",
   "topic": "4.9",
-  "skill": "4.C",
+  "skill": "4.A",
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
@@ -1761,18 +1761,18 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "fixed fact bank checked against CED"
+   "fixed fact bank checked against CED 9.3"
   ],
   "misconceptions": [
-   "At high T, \u2212T\u0394S can make \u0394G negative.",
-   "At low T the positive \u0394H dominates.",
-   "A positive \u0394H opposes spontaneity at low T."
+   "At high T the \u2212T\u0394S term can exceed \u0394H, so \u0394G becomes negative.",
+   "At low T the positive \u0394H dominates the small \u2212T\u0394S term.",
+   "The positive \u0394H opposes spontaneity at low T, so the reaction is not spontaneous at every temperature."
   ]
  },
  {
   "id": "ch_o_vsepr_shape",
-  "topic": "2.6",
-  "skill": "1.A",
+  "topic": "2.7",
+  "skill": "4.A",
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
@@ -2022,6 +2022,111 @@
    "Omits the mass of the acid, so its molar mass cannot be calculated.",
    "Omits the conversion of volume to moles.",
    "Omits the titration to the endpoint, so the moles of acid are unknown."
+  ]
+ },
+ {
+  "id": "ch_q_half_life_concept",
+  "topic": "5.3",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 5.3"
+  ],
+  "misconceptions": [
+   "The half-life depends on the first power of the concentration.",
+   "That holds for a zero-order reaction.",
+   "That holds only for a first-order reaction."
+  ]
+ },
+ {
+  "id": "ch_q_imf_property",
+  "topic": "3.1",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 3.1"
+  ],
+  "misconceptions": [
+   "Hydrogen bonds between molecules are not covalent bonds.",
+   "A greater molar mass and more hydrogen bonds give stronger forces.",
+   "Glycerol has three OH groups and ethanol has one."
+  ]
+ },
+ {
+  "id": "ch_q_particulate_acid",
+  "topic": "8.3",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 8.3"
+  ],
+  "misconceptions": [
+   "HCl is ionized completely in water.",
+   "The chloride ion from the acid must be shown and the OH\u207b ions are not produced by the acid.",
+   "That diagram shows a weak acid that is only partly ionized."
+  ]
+ },
+ {
+  "id": "ch_q_particulate_bonding",
+  "topic": "2.1",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 2.1"
+  ],
+  "misconceptions": [
+   "Metallic bonding is described by electrons that are free to move.",
+   "Copper is not made of separate molecules; its electrons are delocalized.",
+   "A metal does not consist of oppositely charged copper ions."
+  ]
+ },
+ {
+  "id": "ch_q_particulate_buffer",
+  "topic": "8.8",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 8.8"
+  ],
+  "misconceptions": [
+   "The strong acid produces CH3COOH from acetate and does not use it up.",
+   "The buffer removes most of the added H3O\u207a by reacting it with acetate.",
+   "The acetate ions are used up by the added acid and so they become fewer."
+  ]
+ },
+ {
+  "id": "ch_q_particulate_ionic_solid",
+  "topic": "2.3",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 2.3"
+  ],
+  "misconceptions": [
+   "A salt is a lattice of ions and not separate molecules.",
+   "The ratio is reversed; two fluoride ions balance one calcium ion.",
+   "Equal numbers would not balance the charge of 2+ against 1\u2212."
+  ]
+ },
+ {
+  "id": "ch_q_rate_relationship",
+  "topic": "5.1",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 5.1"
+  ],
+  "misconceptions": [
+   "The ratio of N2 to H2 is 1 to 3.",
+   "The rates follow the coefficients.",
+   "More H2 than N2 is used, so N2 is used more slowly."
   ]
  },
  {

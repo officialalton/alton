@@ -193,7 +193,7 @@ def ch_n_second_order_time(rng):
     pairs = [("Uses the first-order integrated rate law.", math.log(A0 / A) / k), ("Subtracts the concentrations and divides by the rate constant.", (A0 - A) / k), ("Uses 1/[A]0 − 1/[A] so the time is negative in sign convention but reported as a magnitude of the wrong quantity.", (1 / A0) / k), ("Divides the final concentration by the rate constant.", A / k)]
     key, ds = num_opts(t, pairs, "s")
     stem = f"The reaction 2 A → products is second order in A with a rate constant of ${k:g}\\text{{ L/(mol s)}}$. How long does it take for the concentration of A to fall from ${A0:g}\\text{{ M}}$ to ${A:g}\\text{{ M}}$?"
-    return mk("ch_n_second_order_time", "5.4", "5.F", stem, key, ds, rng, concept="time for a second-order concentration change from the integrated rate law", path="1/[A] = 1/[A]0 + kt solved directly vs bisection on the concentration curve", facts=[f"k={k}", f"A0={A0}", f"A={A}"],
+    return mk("ch_n_second_order_time", "5.3", "5.F", stem, key, ds, rng, concept="time for a second-order concentration change from the integrated rate law", path="1/[A] = 1/[A]0 + kt solved directly vs bisection on the concentration curve", facts=[f"k={k}", f"A0={A0}", f"A={A}"],
               kwhy=f"For second order 1/[A] = 1/[A]0 + kt, so t = (1/{A:g} − 1/{A0:g})/{k:g} = {sig(t)} s.", judgment="choose the integrated rate law that matches the order", est=85)
 
 

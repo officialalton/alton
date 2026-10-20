@@ -1,0 +1,38 @@
+{
+ "run": "chem-ch3-mcr2",
+ "subject": "ap_chemistry",
+ "generatedAt": "2026-10-20T07:32:46.808Z",
+ "totalCostUsd": 2.19,
+ "newSpendSinceBaseline": 2.57,
+ "cap": 50,
+ "calls": 252,
+ "candidates": 84,
+ "mcCandidates": 84,
+ "frqCandidates": 0,
+ "passedAll": 50,
+ "adopted": 20,
+ "mcAdopted": 20,
+ "frqAdopted": 0,
+ "reserve": 26,
+ "yield": 0.238,
+ "costPerAdopted": 0.109,
+ "callsPerAdopted": 12.6,
+ "duplicateRejected": 4,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 0,
+  "template": 84
+ },
+ "rejectionReasons": {
+  "criterion_failed_distractor_explanation": 27,
+  "criterion_failed_key_scoring": 4,
+  "criterion_failed_stimulus_expression": 3,
+  "instant_reject_missing_condition": 2,
+  "instant_reject_multiple_correct": 1,
+  "reference_pattern_mismatch": 17,
+  "criterion_failed_scope_skill": 8,
+  "criterion_failed_exam_suitability": 16,
+  "duplicate_gate_near_duplicate": 4
+ },
+ "unfilledCells": []
+}
