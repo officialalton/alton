@@ -1,0 +1,38 @@
+{
+ "run": "stats-r19-p3-c",
+ "subject": "ap_statistics",
+ "generatedAt": "2026-10-20T07:11:42.503Z",
+ "totalCostUsd": 0.63,
+ "newSpendSinceBaseline": 43.48,
+ "cap": 50,
+ "calls": 36,
+ "candidates": 12,
+ "mcCandidates": 0,
+ "frqCandidates": 12,
+ "passedAll": 6,
+ "adopted": 3,
+ "mcAdopted": 0,
+ "frqAdopted": 3,
+ "reserve": 3,
+ "yield": 0.25,
+ "costPerAdopted": 0.211,
+ "callsPerAdopted": 12,
+ "duplicateRejected": 1,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 0,
+  "template": 12
+ },
+ "rejectionReasons": {
+  "solver_disagrees": 3,
+  "criterion_failed_stimulus_expression": 4,
+  "criterion_failed_key_scoring": 2,
+  "instant_reject_missing_condition": 2,
+  "criterion_failed_exam_suitability": 1,
+  "reference_pattern_mismatch": 1,
+  "duplicate_gate_near_duplicate": 1
+ },
+ "unfilledCells": [
+  "ap_statistics-f01"
+ ]
+}

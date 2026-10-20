@@ -1,0 +1,47 @@
+{
+ "runs": [
+  "physc-fix4"
+ ],
+ "rows": 18,
+ "passed": 14,
+ "rejected": 4,
+ "passRate": 0.778,
+ "singles": {
+  "candidates": 18
+ },
+ "unitsPassed": {
+  "1": 3,
+  "2": 1,
+  "3": 3,
+  "5": 4,
+  "7": 3
+ },
+ "figPassed": {
+  "none": 8,
+  "graph": 6
+ },
+ "figAll": {
+  "none": 12,
+  "graph": 6
+ },
+ "figPassRate": {
+  "none": "8/12",
+  "graph": "6/6"
+ },
+ "renderTypesPassed": {
+  "ap_table": 2,
+  "none": 6,
+  "ap_graph:phys_line": 6
+ },
+ "archetypesPassed": {
+  "pc_hooke_table_constant": 1,
+  "pc_net_torque_two_forces": 3,
+  "pc_exp_decay_distance": 3,
+  "pcs_fx_signed_set_q1": 3,
+  "pcs_vt_shm_set_q1": 3,
+  "pcf_lab_disk_inertia": 1
+ },
+ "costUsd": {
+  "physc-fix4": 0.9077
+ }
+}

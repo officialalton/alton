@@ -1,0 +1,71 @@
+{
+ "runs": [
+  "physc-b"
+ ],
+ "rows": 81,
+ "passed": 67,
+ "rejected": 14,
+ "passRate": 0.827,
+ "singles": {
+  "candidates": 81
+ },
+ "unitsPassed": {
+  "1": 9,
+  "2": 18,
+  "3": 5,
+  "4": 4,
+  "5": 6,
+  "6": 15,
+  "7": 10
+ },
+ "figPassed": {
+  "none": 65,
+  "graph": 2
+ },
+ "figAll": {
+  "none": 78,
+  "graph": 3
+ },
+ "figPassRate": {
+  "none": "65/78",
+  "graph": "2/3"
+ },
+ "renderTypesPassed": {
+  "none": 59,
+  "ap_graph:phys_line": 2,
+  "ap_table": 4,
+  "text": 2
+ },
+ "archetypesPassed": {
+  "pc_cliff_launch_time": 3,
+  "pc_free_fall_two_balls": 3,
+  "pc_projectile_speed_at_time": 3,
+  "pc_atwood_incline_accel": 2,
+  "pc_banked_curve_speed": 3,
+  "pc_block_on_block_slip": 3,
+  "pc_quadratic_drag_terminal_numeric": 3,
+  "pc_springs_series_stretch": 3,
+  "pc_hilltop_normal_force": 3,
+  "pc_gravity_work_variable": 2,
+  "pc_incline_up_distance": 3,
+  "pc_spring_collision_compression": 2,
+  "pc_impulse_triangle_speed": 2,
+  "pc_rod_release_acceleration": 2,
+  "pc_ladder_friction": 1,
+  "pc_massive_pulley_tension": 2,
+  "pc_rolling_accel_incline": 3,
+  "pc_child_merry_go_round": 3,
+  "pc_pulley_energy_speed": 3,
+  "pc_orbit_period_numeric": 3,
+  "pc_shm_amplitude_initial": 3,
+  "pc_pendulum_length_period": 3,
+  "pc_shm_value_at_time": 3,
+  "pcs_orbit_table_set_q1": 3,
+  "pcf_mr_pulley_disk": 1,
+  "pcf_tbr_drag_graph": 1,
+  "pcf_lab_pendulum_g": 1
+ },
+ "costUsd": {
+  "physc-b": 3.4045
+ }
+}

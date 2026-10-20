@@ -1,0 +1,73 @@
+{
+ "runs": [
+  "physc-h"
+ ],
+ "rows": 102,
+ "passed": 69,
+ "rejected": 33,
+ "passRate": 0.676,
+ "singles": {
+  "candidates": 102
+ },
+ "unitsPassed": {
+  "1": 8,
+  "2": 11,
+  "3": 9,
+  "4": 11,
+  "5": 11,
+  "6": 8,
+  "7": 11
+ },
+ "figPassed": {
+  "none": 65,
+  "graph": 4
+ },
+ "figAll": {
+  "none": 90,
+  "graph": 12
+ },
+ "figPassRate": {
+  "none": "65/90",
+  "graph": "4/12"
+ },
+ "renderTypesPassed": {
+  "none": 60,
+  "ap_graph:phys_line": 4,
+  "ap_table": 3,
+  "text": 2
+ },
+ "archetypesPassed": {
+  "pc_xt_product_max": 2,
+  "pc_swimmer_direct_crossing": 3,
+  "pc_complementary_angle_heights": 3,
+  "pc_two_incline_pulley": 3,
+  "pc_terminal_speed_ratio": 3,
+  "pc_elevator_tension_graph": 2,
+  "pc_spring_incline_equilibrium": 3,
+  "pc_pendulum_bottom_tension": 2,
+  "pc_power_incline_climb": 3,
+  "pc_pendulum_max_angle": 2,
+  "pc_average_power_claim": 2,
+  "pc_bullet_through_block": 3,
+  "pc_cannon_recoil_angle": 3,
+  "pc_equal_mass_exchange": 1,
+  "pc_impulse_rank_pulses": 3,
+  "pc_beam_two_supports": 3,
+  "pc_ring_tangential_alpha": 3,
+  "pc_rolling_friction_force": 1,
+  "pc_rod_quarter_inertia": 3,
+  "pc_rolling_time_ratio": 2,
+  "pc_orbit_transfer_work": 3,
+  "pc_ring_drop_ke_loss": 3,
+  "pc_shm_phase_velocity_zero": 3,
+  "pc_pendulum_independence_claim": 3,
+  "pc_shm_accel_graph_amplitude": 2,
+  "pcs_pendulum_table_set_q1": 2,
+  "pcf_mr_rod_release": 1,
+  "pcf_lab_spring_period_k": 1,
+  "pcf_qqt_inelastic_collision": 1
+ },
+ "costUsd": {
+  "physc-h": 3.7571
+ }
+}

@@ -1,0 +1,3554 @@
+[
+ {
+  "candidateKey": "ap_statistics-m01-k0",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "2.11",
+  "unitCode": "2",
+  "skillPrimary": "3.C",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "st_set_normal_means_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_distractor_explanation; set_item_1:criterion_failed_distractor_explanation",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "One-step normal probability: compute z = 0.5 and find the upper-tail area (0.309). The distractors reflect common errors (lower tail, doubling the tail). The chart only confirms the mean, so there is no multi-step reasoning or heavy representation work.",
+  "payload": {
+   "archetype": "st_set_normal_means",
+   "topic": "2.11",
+   "skill": "3.C",
+   "calculator": "allowed",
+   "set_intro": "The distribution of the weight of an apple for apples from an orchard is approximately normal with mean $156$ grams and standard deviation $13$ grams, as shown in the graph.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Normal curve for the weight of an apple",
+    "data": {
+     "chart": "curve",
+     "curve": {
+      "family": "normal",
+      "x": {
+       "label": "The weight of an apple (grams)",
+       "min": 104,
+       "max": 208,
+       "ticks": [
+        117,
+        130,
+        143,
+        156,
+        169,
+        182,
+        195
+       ]
+      },
+      "points": [
+       [
+        104,
+        0.000010294632751145029
+       ],
+       [
+        105.3,
+        0.000015281190107136337
+       ],
+       [
+        106.6,
+        0.00002245745583011231
+       ],
+       [
+        107.9,
+        0.00003267540542698094
+       ],
+       [
+        109.2,
+        0.000047069379239521005
+       ],
+       [
+        110.5,
+        0.00006712943808044308
+       ],
+       [
+        111.8,
+        0.00009478608988253982
+       ],
+       [
+        113.1,
+        0.0001325053030041291
+       ],
+       [
+        114.4,
+        0.00018339140011268035
+       ],
+       [
+        115.7,
+        0.0002512937735538404
+       ],
+       [
+        117,
+        0.00034091141630292367
+       ],
+       [
+        118.3,
+        0.0004578871092135268
+       ],
+       [
+        119.6,
+        0.0006088808909984583
+       ],
+       [
+        120.9,
+        0.0008016103703402004
+       ],
+       [
+        122.2,
+        0.0010448437872065872
+       ],
+       [
+        123.5,
+        0.00134833080719758
+       ],
+       [
+        124.8,
+        0.0017226561765263755
+       ],
+       [
+        126.1,
+        0.002179002903200089
+       ],
+       [
+        127.4,
+        0.0027288148343254967
+       ],
+       [
+        128.7,
+        0.003383353536955932
+       ],
+       [
+        130,
+        0.004153151270245236
+       ],
+       [
+        131.3,
+        0.005047370367282825
+       ],
+       [
+        132.6,
+        0.006073089100068777
+       ],
+       [
+        133.9,
+        0.007234544413606693
+       ],
+       [
+        135.2,
+        0.008532371898419646
+       ],
+       [
+        136.5,
+        0.009962891974299365
+       ],
+       [
+        137.8,
+        0.011517497356595775
+       ],
+       [
+        139.1,
+        0.013182199388292867
+       ],
+       [
+        140.4,
+        0.014937388844862546
+       ],
+       [
+        141.7,
+        0.01675785977173464
+       ],
+       [
+        143,
+        0.01861313265531872
+       ],
+       [
+        144.3,
+        0.02046809614605808
+       ],
+       [
+        145.6,
+        0.022283965597037127
+       ],
+       [
+        146.9,
+        0.024019533335904723
+       ],
+       [
+        148.2,
+        0.025632661760907654
+       ],
+       [
+        149.5,
+        0.027081948212638426
+       ],
+       [
+        150.8,
+        0.02832847233102488
+       ],
+       [
+        152.1,
+        0.029337524266194157
+       ],
+       [
+        153.4,
+        0.030080207228881228
+       ],
+       [
+        154.7,
+        0.030534811344385522
+       ],
+       [
+        156,
+        0.030687867723187132
+       ],
+       [
+        157.3,
+        0.030534811344385522
+       ],
+       [
+        158.6,
+        0.030080207228881228
+       ],
+       [
+        159.9,
+        0.029337524266194157
+       ],
+       [
+        161.2,
+        0.02832847233102488
+       ],
+       [
+        162.5,
+        0.027081948212638426
+       ],
+       [
+        163.8,
+        0.025632661760907654
+       ],
+       [
+        165.1,
+        0.024019533335904723
+       ],
+       [
+        166.4,
+        0.022283965597037127
+       ],
+       [
+        167.7,
+        0.02046809614605808
+       ],
+       [
+        169,
+        0.01861313265531872
+       ],
+       [
+        170.3,
+        0.01675785977173464
+       ],
+       [
+        171.6,
+        0.014937388844862546
+       ],
+       [
+        172.9,
+        0.013182199388292867
+       ],
+       [
+        174.2,
+        0.011517497356595775
+       ],
+       [
+        175.5,
+        0.009962891974299365
+       ],
+       [
+        176.8,
+        0.008532371898419646
+       ],
+       [
+        178.1,
+        0.007234544413606693
+       ],
+       [
+        179.4,
+        0.006073089100068777
+       ],
+       [
+        180.7,
+        0.005047370367282825
+       ],
+       [
+        182,
+        0.004153151270245236
+       ],
+       [
+        183.3,
+        0.003383353536955932
+       ],
+       [
+        184.6,
+        0.0027288148343254967
+       ],
+       [
+        185.9,
+        0.002179002903200089
+       ],
+       [
+        187.2,
+        0.001722656176526381
+       ],
+       [
+        188.5,
+        0.00134833080719758
+       ],
+       [
+        189.8,
+        0.0010448437872065833
+       ],
+       [
+        191.1,
+        0.0008016103703402004
+       ],
+       [
+        192.4,
+        0.0006088808909984583
+       ],
+       [
+        193.7,
+        0.00045788710921352844
+       ],
+       [
+        195,
+        0.00034091141630292367
+       ],
+       [
+        196.3,
+        0.00025129377355383924
+       ],
+       [
+        197.6,
+        0.00018339140011268035
+       ],
+       [
+        198.9,
+        0.0001325053030041291
+       ],
+       [
+        200.2,
+        0.00009478608988254025
+       ],
+       [
+        201.5,
+        0.00006712943808044308
+       ],
+       [
+        202.8,
+        0.000047069379239520795
+       ],
+       [
+        204.1,
+        0.00003267540542698094
+       ],
+       [
+        205.4,
+        0.00002245745583011231
+       ],
+       [
+        206.7,
+        0.000015281190107136418
+       ],
+       [
+        208,
+        0.000010294632751145029
+       ]
+      ],
+      "marks": [
+       {
+        "at": 156,
+        "label": "156"
+       }
+      ]
+     },
+     "title": "Distribution of the weight of an apple"
+    }
+   },
+   "items": [
+    {
+     "archetype": "st_set_normal_means_q1",
+     "topic": "2.11",
+     "skill": "3.C",
+     "stem": "What is the probability that a randomly selected apple has a weight greater than $162.5$ grams? (Give the answer as a decimal rounded to three decimal places.)",
+     "options": [
+      {
+       "text": "$0.309$",
+       "why": "$z = (162.5 - 156)/13 = 0.50$, and the probability of a value greater than $162.5$ is $1 - \\Phi(0.50) \\approx 0.309$.",
+       "value": "0.30900000"
+      },
+      {
+       "text": "$0.617$",
+       "why": "Doubles the smaller tail area as for a two-sided region, but the question is about one side only.",
+       "value": "0.61700000"
+      },
+      {
+       "text": "$0.023$",
+       "why": "Uses the standard deviation of a sample mean in a question about a single value.",
+       "value": "0.023000000"
+      },
+      {
+       "text": "$0.691$",
+       "why": "Gives the probability of a value less than the cutoff instead of greater than it.",
+       "value": "0.69100000"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is $0.309$. $z = (162.5 - 156)/13 = 0.50$, and the probability of a value greater than $162.5$ is $1 - \\Phi(0.50) \\approx 0.309$.\n$0.617$ is incorrect: Doubles the smaller tail area as for a two-sided region, but the question is about one side only.\n$0.023$ is incorrect: Uses the standard deviation of a sample mean in a question about a single value.\n$0.691$ is incorrect: Gives the probability of a value less than the cutoff instead of greater than it.",
+     "est_seconds": 90,
+     "blueprint": {
+      "id": "st_set_normal_means_q1",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find the probability that a single value exceeds a cutoff from a normal model",
+      "topic": "2.11",
+      "skill": "3.C",
+      "student_thinking": [
+       "Standardize the cutoff using the mean and the standard deviation of the individual values",
+       "Find the area of the upper tail of the standard normal distribution"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Find the probability that a single value exceeds a cutoff from a normal model",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "wrong_tail",
+        "description": "Gives the probability of a value less than the cutoff instead of greater than it."
+       },
+       {
+        "id": "two_sided_area",
+        "description": "Doubles the smaller tail area as for a two-sided region, but the question is about one side only."
+       },
+       {
+        "id": "uses_mean_distribution",
+        "description": "Uses the standard deviation of a sample mean in a question about a single value."
+       }
+      ],
+      "verification": {
+       "independent_path": "the probability is recomputed with math.erf and with scipy's normal survival function",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_normal_means_q2",
+     "topic": "2.12",
+     "skill": "3.D",
+     "stem": "A random sample of $16$ apples is selected from the population, and the sample mean is calculated. What is the standard deviation of the sampling distribution of the sample mean? (Round to two decimal places.)",
+     "options": [
+      {
+       "text": "$3.25$ grams",
+       "why": "The standard deviation of the sampling distribution of $\\bar x$ is $\\sigma/\\sqrt{n} = 13/\\sqrt{16} = 3.25$.",
+       "value": "3.2500000"
+      },
+      {
+       "text": "$52.00$ grams",
+       "why": "Multiplies by the square root of the sample size, which would make the spread of the sample means larger.",
+       "value": "52.000000"
+      },
+      {
+       "text": "$13.00$ grams",
+       "why": "Reports the standard deviation of the individual values, which does not shrink with the sample size.",
+       "value": "13.000000"
+      },
+      {
+       "text": "$0.81$ grams",
+       "why": "Divides by $16$ instead of by $\\sqrt{16}$.",
+       "value": "0.81000000"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is $3.25$ grams. The standard deviation of the sampling distribution of $\\bar x$ is $\\sigma/\\sqrt{n} = 13/\\sqrt{16} = 3.25$.\n$52.00$ grams is incorrect: Multiplies by the square root of the sample size, which would make the spread of the sample means larger.\n$13.00$ grams is incorrect: Reports the standard deviation of the individual values, which does not shrink with the sample size.\n$0.81$ grams is incorrect: Divides by $16$ instead of by $\\sqrt{16}$.",
+     "est_seconds": 80,
+     "blueprint": {
+      "id": "st_set_normal_means_q2",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find the standard deviation of the sampling distribution of the sample mean",
+      "topic": "2.12",
+      "skill": "3.D",
+      "student_thinking": [
+       "Recall that the standard deviation of the sample mean is the population standard deviation divided by the square root of the sample size",
+       "Substitute the given values and reject the unshrunk and wrongly scaled values"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Find the standard deviation of the sampling distribution of the sample mean",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "population_sd",
+        "description": "Reports the standard deviation of the individual values, which does not shrink with the sample size."
+       },
+       {
+        "id": "divides_by_n",
+        "description": "Divides by $16$ instead of by $\\sqrt{16}$."
+       },
+       {
+        "id": "multiplies_by_root_n",
+        "description": "Multiplies by the square root of the sample size, which would make the spread of the sample means larger."
+       }
+      ],
+      "verification": {
+       "independent_path": "the standard deviation is recomputed as sigma over the square root of n",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "interpretation"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_normal_means_q3",
+     "topic": "2.12",
+     "skill": "3.C",
+     "stem": "A random sample of $16$ apples is selected. What is the probability that the mean weight of the sample is greater than $162.5$ grams? (Give the answer as a decimal rounded to three decimal places.)",
+     "options": [
+      {
+       "text": "$0.046$",
+       "why": "Doubles the smaller tail area as for a two-sided region, but the question is about one side only.",
+       "value": "0.046000000"
+      },
+      {
+       "text": "$0.309$",
+       "why": "Uses the standard deviation of the individual values, which gives the probability for one value instead of for a sample mean.",
+       "value": "0.30900000"
+      },
+      {
+       "text": "$0.977$",
+       "why": "Gives the probability of a sample mean less than the cutoff instead of greater than it.",
+       "value": "0.97700000"
+      },
+      {
+       "text": "$0.023$",
+       "why": "The sample mean is approximately normal with mean $156$ and standard deviation $3.250$, so $z = (162.5 - 156)/3.250 = 2.00$ and $P(\\bar x > 162.5) \\approx 0.023$.",
+       "value": "0.023000000"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is $0.023$. The sample mean is approximately normal with mean $156$ and standard deviation $3.250$, so $z = (162.5 - 156)/3.250 = 2.00$ and $P(\\bar x > 162.5) \\approx 0.023$.\n$0.046$ is incorrect: Doubles the smaller tail area as for a two-sided region, but the question is about one side only.\n$0.309$ is incorrect: Uses the standard deviation of the individual values, which gives the probability for one value instead of for a sample mean.\n$0.977$ is incorrect: Gives the probability of a sample mean less than the cutoff instead of greater than it.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "st_set_normal_means_q3",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find a probability for a sample mean from the normal model of its sampling distribution",
+      "topic": "2.12",
+      "skill": "3.C",
+      "student_thinking": [
+       "Describe the sampling distribution of the sample mean with its mean and its standard deviation",
+       "Standardize the cutoff with that standard deviation and find the upper tail area"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Find a probability for a sample mean from the normal model of its sampling distribution",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "individual_sd",
+        "description": "Uses the standard deviation of the individual values, which gives the probability for one value instead of for a sample mean."
+       },
+       {
+        "id": "wrong_tail",
+        "description": "Gives the probability of a sample mean less than the cutoff instead of greater than it."
+       },
+       {
+        "id": "two_sided_area",
+        "description": "Doubles the smaller tail area as for a two-sided region, but the question is about one side only."
+       }
+      ],
+      "verification": {
+       "independent_path": "the probability is recomputed with math.erf and with scipy's normal survival function for the standard deviation of the sample mean",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "interpretation"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 265,
+   "facts": [
+    "mu=156",
+    "sd=13",
+    "n=16",
+    "cut=162.5"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_set_normal_means_q1",
+   "facts": [
+    "mu=156",
+    "sd=13",
+    "n=16",
+    "cut=162.5"
+   ],
+   "seed": 20500
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Normal probability calculation, topic 2.11, skill 3.C."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "0.309 is unique and correct."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Curve data complete with axis label, ticks and mean mark."
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": "The 0.023 distractor claims to use a sample-mean SD, but no n is given, so the value is not reproducible from the item. The explanation is vague and the option is implausible."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short, typical load."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The key and stimulus are fine. The 0.023 distractor rests on a sample size the item never gives, so it is neither realistic nor traceable and its explanation is weak. Fail on distractor quality only."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Directly computes SD of sample mean; fits 2.12 and 3.D."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "13/sqrt(16)=3.25 unique; distractors clearly wrong."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Curve data complete with labeled axis, ticks, mean mark; rounding stated. Graph is mostly decorative but consistent."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct misconceptions, all explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short, appropriate load, calculator allowed consistent."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Clean, correct, in-scope MC item with distinct distractors and a complete stimulus. The graph is only mildly necessary."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Sampling distribution of a mean with a normal population, probability calculation; fits 2.12 and 3.C."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "SE=3.25, z=2, P=0.0228 -> 0.023; unique correct answer, rounding stated."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Normal curve data complete with axis label, units, ticks at SD spacing, mean mark; consistent with stem."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct misconceptions; 0.309 = P(X>162.5) is accurate; all wrong options explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short, calculator-appropriate, parallel decimal options."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Sound item: correct unique key (0.023), a complete stimulus, distinct distractors with explanations, and an appropriate load for the exam."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "One-step normal probability: compute z = 0.5 and find the upper-tail area (0.309). The distractors reflect common errors (lower tail, doubling the tail). The chart only confirms the mean, so there is no multi-step reasoning or heavy representation work.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-formula application: SD of sample mean = sigma/sqrt(n) = 13/4 = 3.25. Only 2 steps (recall formula, compute), one concept, light arithmetic. The graph repeats information given in the stem, so there is no real representation change. Distractors reflect common formula errors but do not add reasoning depth. Falls below the exam_prep threshold of at least 3 steps.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 0,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Standard CLT application: compute the standard error 13/sqrt(16)=3.25, then z=2 and P(Z>2)=0.023. By the counted structure there are 2 required steps, which falls under the basic_learning rubric even though two concepts (sampling distribution and normal probability) are combined. Distractors reflect common errors (two-tailed, using sigma instead of SE, wrong tail). Arithmetic is light and the stem is short, so there are no unfair difficulty sources.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 75
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_statistics-m01-k1",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "2.11",
+  "unitCode": "2",
+  "skillPrimary": "3.C",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "st_set_normal_means_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_distractor_explanation; set_item_1:criterion_failed_distractor_explanation",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step normal probability: compute z = -0.5 and find the upper-tail area (0.691). The only pitfall is tail direction, and the distractors are common errors (0.309 for the wrong tail, 0.617 for the area between 92 and 96). The graph only confirms the mean, so there is little representation work and almost no computation or reading load.",
+  "payload": {
+   "archetype": "st_set_normal_means",
+   "topic": "2.11",
+   "skill": "3.C",
+   "calculator": "allowed",
+   "set_intro": "The distribution of the length of a bolt for bolts from a factory is approximately normal with mean $94$ millimeters and standard deviation $4$ millimeters, as shown in the graph.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Normal curve for the length of a bolt",
+    "data": {
+     "chart": "curve",
+     "curve": {
+      "family": "normal",
+      "x": {
+       "label": "The length of a bolt (millimeters)",
+       "min": 78,
+       "max": 110,
+       "ticks": [
+        82,
+        86,
+        90,
+        94,
+        98,
+        102,
+        106
+       ]
+      },
+      "points": [
+       [
+        78,
+        0.00003345755644122134
+       ],
+       [
+        78.4,
+        0.000049663867848193444
+       ],
+       [
+        78.8,
+        0.00007298673144786488
+       ],
+       [
+        79.2,
+        0.00010619506763768824
+       ],
+       [
+        79.6,
+        0.00015297548252844232
+       ],
+       [
+        80,
+        0.00021817067376144004
+       ],
+       [
+        80.4,
+        0.00030805479211825634
+       ],
+       [
+        80.8,
+        0.00043064223476341917
+       ],
+       [
+        81.2,
+        0.0005960220503662122
+       ],
+       [
+        81.6,
+        0.0008167047640499768
+       ],
+       [
+        82,
+        0.0011079621029845019
+       ],
+       [
+        82.4,
+        0.0014881331049439702
+       ],
+       [
+        82.8,
+        0.0019788628957449865
+       ],
+       [
+        83.2,
+        0.0026052337036056535
+       ],
+       [
+        83.6,
+        0.003395742308421392
+       ],
+       [
+        84,
+        0.004382075123392135
+       ],
+       [
+        84.4,
+        0.005598632573710742
+       ],
+       [
+        84.8,
+        0.00708175943540028
+       ],
+       [
+        85.2,
+        0.008868648211557872
+       ],
+       [
+        85.6,
+        0.010995898995106765
+       ],
+       [
+        86,
+        0.013497741628297016
+       ],
+       [
+        86.4,
+        0.016403953693669194
+       ],
+       [
+        86.8,
+        0.019737539575223517
+       ],
+       [
+        87.2,
+        0.02351226934422176
+       ],
+       [
+        87.6,
+        0.02773020866986383
+       ],
+       [
+        88,
+        0.032379398916472936
+       ],
+       [
+        88.4,
+        0.037431866408936296
+       ],
+       [
+        88.8,
+        0.0428421480119518
+       ],
+       [
+        89.2,
+        0.04854651374580328
+       ],
+       [
+        89.6,
+        0.05446304425813756
+       ],
+       [
+        90,
+        0.06049268112978584
+       ],
+       [
+        90.4,
+        0.0665213124746888
+       ],
+       [
+        90.8,
+        0.07242288819037065
+       ],
+       [
+        91.2,
+        0.07806348334169036
+       ],
+       [
+        91.6,
+        0.08330615072294985
+       ],
+       [
+        92,
+        0.08801633169107488
+       ],
+       [
+        92.4,
+        0.09206753507583089
+       ],
+       [
+        92.8,
+        0.09534695386513102
+       ],
+       [
+        93.2,
+        0.097760673493864
+       ],
+       [
+        93.6,
+        0.09923813686925294
+       ],
+       [
+        94,
+        0.09973557010035818
+       ],
+       [
+        94.4,
+        0.09923813686925294
+       ],
+       [
+        94.8,
+        0.097760673493864
+       ],
+       [
+        95.2,
+        0.09534695386513102
+       ],
+       [
+        95.6,
+        0.09206753507583089
+       ],
+       [
+        96,
+        0.08801633169107488
+       ],
+       [
+        96.4,
+        0.08330615072294985
+       ],
+       [
+        96.8,
+        0.07806348334169036
+       ],
+       [
+        97.2,
+        0.07242288819037065
+       ],
+       [
+        97.6,
+        0.0665213124746888
+       ],
+       [
+        98,
+        0.06049268112978584
+       ],
+       [
+        98.4,
+        0.05446304425813756
+       ],
+       [
+        98.8,
+        0.04854651374580328
+       ],
+       [
+        99.2,
+        0.0428421480119518
+       ],
+       [
+        99.6,
+        0.037431866408936296
+       ],
+       [
+        100,
+        0.032379398916472936
+       ],
+       [
+        100.4,
+        0.02773020866986383
+       ],
+       [
+        100.8,
+        0.02351226934422176
+       ],
+       [
+        101.2,
+        0.019737539575223517
+       ],
+       [
+        101.6,
+        0.016403953693669194
+       ],
+       [
+        102,
+        0.013497741628297016
+       ],
+       [
+        102.4,
+        0.010995898995106765
+       ],
+       [
+        102.8,
+        0.008868648211557872
+       ],
+       [
+        103.2,
+        0.00708175943540028
+       ],
+       [
+        103.6,
+        0.005598632573710742
+       ],
+       [
+        104,
+        0.004382075123392135
+       ],
+       [
+        104.4,
+        0.003395742308421392
+       ],
+       [
+        104.8,
+        0.0026052337036056535
+       ],
+       [
+        105.2,
+        0.0019788628957449865
+       ],
+       [
+        105.6,
+        0.0014881331049439702
+       ],
+       [
+        106,
+        0.0011079621029845019
+       ],
+       [
+        106.4,
+        0.0008167047640499768
+       ],
+       [
+        106.8,
+        0.0005960220503662122
+       ],
+       [
+        107.2,
+        0.00043064223476341917
+       ],
+       [
+        107.6,
+        0.00030805479211825634
+       ],
+       [
+        108,
+        0.00021817067376144004
+       ],
+       [
+        108.4,
+        0.00015297548252844232
+       ],
+       [
+        108.8,
+        0.00010619506763768824
+       ],
+       [
+        109.2,
+        0.00007298673144786488
+       ],
+       [
+        109.6,
+        0.000049663867848193444
+       ],
+       [
+        110,
+        0.00003345755644122134
+       ]
+      ],
+      "marks": [
+       {
+        "at": 94,
+        "label": "94"
+       }
+      ]
+     },
+     "title": "Distribution of the length of a bolt"
+    }
+   },
+   "items": [
+    {
+     "archetype": "st_set_normal_means_q1",
+     "topic": "2.11",
+     "skill": "3.C",
+     "stem": "What is the probability that a randomly selected bolt has a length greater than $92$ millimeters? (Give the answer as a decimal rounded to three decimal places.)",
+     "options": [
+      {
+       "text": "$0.977$",
+       "why": "Uses the standard deviation of a sample mean in a question about a single value.",
+       "value": "0.97700000"
+      },
+      {
+       "text": "$0.617$",
+       "why": "Doubles the smaller tail area as for a two-sided region, but the question is about one side only.",
+       "value": "0.61700000"
+      },
+      {
+       "text": "$0.691$",
+       "why": "$z = (92 - 94)/4 = -0.50$, and the probability of a value greater than $92$ is $1 - \\Phi(-0.50) \\approx 0.691$.",
+       "value": "0.69100000"
+      },
+      {
+       "text": "$0.309$",
+       "why": "Gives the probability of a value less than the cutoff instead of greater than it.",
+       "value": "0.30900000"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is $0.691$. $z = (92 - 94)/4 = -0.50$, and the probability of a value greater than $92$ is $1 - \\Phi(-0.50) \\approx 0.691$.\n$0.977$ is incorrect: Uses the standard deviation of a sample mean in a question about a single value.\n$0.617$ is incorrect: Doubles the smaller tail area as for a two-sided region, but the question is about one side only.\n$0.309$ is incorrect: Gives the probability of a value less than the cutoff instead of greater than it.",
+     "est_seconds": 90,
+     "blueprint": {
+      "id": "st_set_normal_means_q1",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find the probability that a single value exceeds a cutoff from a normal model",
+      "topic": "2.11",
+      "skill": "3.C",
+      "student_thinking": [
+       "Standardize the cutoff using the mean and the standard deviation of the individual values",
+       "Find the area of the upper tail of the standard normal distribution"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Find the probability that a single value exceeds a cutoff from a normal model",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "wrong_tail",
+        "description": "Gives the probability of a value less than the cutoff instead of greater than it."
+       },
+       {
+        "id": "two_sided_area",
+        "description": "Doubles the smaller tail area as for a two-sided region, but the question is about one side only."
+       },
+       {
+        "id": "uses_mean_distribution",
+        "description": "Uses the standard deviation of a sample mean in a question about a single value."
+       }
+      ],
+      "verification": {
+       "independent_path": "the probability is recomputed with math.erf and with scipy's normal survival function",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_normal_means_q2",
+     "topic": "2.12",
+     "skill": "3.D",
+     "stem": "A random sample of $16$ bolts is selected from the population, and the sample mean is calculated. What is the standard deviation of the sampling distribution of the sample mean? (Round to two decimal places.)",
+     "options": [
+      {
+       "text": "$0.25$ millimeters",
+       "why": "Divides by $16$ instead of by $\\sqrt{16}$.",
+       "value": "0.25000000"
+      },
+      {
+       "text": "$4.00$ millimeters",
+       "why": "Reports the standard deviation of the individual values, which does not shrink with the sample size.",
+       "value": "4.0000000"
+      },
+      {
+       "text": "$16.00$ millimeters",
+       "why": "Multiplies by the square root of the sample size, which would make the spread of the sample means larger.",
+       "value": "16.000000"
+      },
+      {
+       "text": "$1.00$ millimeters",
+       "why": "The standard deviation of the sampling distribution of $\\bar x$ is $\\sigma/\\sqrt{n} = 4/\\sqrt{16} = 1.00$.",
+       "value": "1.0000000"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is $1.00$ millimeters. The standard deviation of the sampling distribution of $\\bar x$ is $\\sigma/\\sqrt{n} = 4/\\sqrt{16} = 1.00$.\n$0.25$ millimeters is incorrect: Divides by $16$ instead of by $\\sqrt{16}$.\n$4.00$ millimeters is incorrect: Reports the standard deviation of the individual values, which does not shrink with the sample size.\n$16.00$ millimeters is incorrect: Multiplies by the square root of the sample size, which would make the spread of the sample means larger.",
+     "est_seconds": 80,
+     "blueprint": {
+      "id": "st_set_normal_means_q2",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find the standard deviation of the sampling distribution of the sample mean",
+      "topic": "2.12",
+      "skill": "3.D",
+      "student_thinking": [
+       "Recall that the standard deviation of the sample mean is the population standard deviation divided by the square root of the sample size",
+       "Substitute the given values and reject the unshrunk and wrongly scaled values"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Find the standard deviation of the sampling distribution of the sample mean",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "population_sd",
+        "description": "Reports the standard deviation of the individual values, which does not shrink with the sample size."
+       },
+       {
+        "id": "divides_by_n",
+        "description": "Divides by $16$ instead of by $\\sqrt{16}$."
+       },
+       {
+        "id": "multiplies_by_root_n",
+        "description": "Multiplies by the square root of the sample size, which would make the spread of the sample means larger."
+       }
+      ],
+      "verification": {
+       "independent_path": "the standard deviation is recomputed as sigma over the square root of n",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "interpretation"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_normal_means_q3",
+     "topic": "2.12",
+     "skill": "3.C",
+     "stem": "A random sample of $16$ bolts is selected. What is the probability that the mean length of the sample is greater than $92$ millimeters? (Give the answer as a decimal rounded to three decimal places.)",
+     "options": [
+      {
+       "text": "$0.046$",
+       "why": "Doubles the smaller tail area as for a two-sided region, but the question is about one side only.",
+       "value": "0.046000000"
+      },
+      {
+       "text": "$0.977$",
+       "why": "The sample mean is approximately normal with mean $94$ and standard deviation $1.000$, so $z = (92 - 94)/1.000 = -2.00$ and $P(\\bar x > 92) \\approx 0.977$.",
+       "value": "0.97700000"
+      },
+      {
+       "text": "$0.691$",
+       "why": "Uses the standard deviation of the individual values, which gives the probability for one value instead of for a sample mean.",
+       "value": "0.69100000"
+      },
+      {
+       "text": "$0.023$",
+       "why": "Gives the probability of a sample mean less than the cutoff instead of greater than it.",
+       "value": "0.023000000"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is $0.977$. The sample mean is approximately normal with mean $94$ and standard deviation $1.000$, so $z = (92 - 94)/1.000 = -2.00$ and $P(\\bar x > 92) \\approx 0.977$.\n$0.046$ is incorrect: Doubles the smaller tail area as for a two-sided region, but the question is about one side only.\n$0.691$ is incorrect: Uses the standard deviation of the individual values, which gives the probability for one value instead of for a sample mean.\n$0.023$ is incorrect: Gives the probability of a sample mean less than the cutoff instead of greater than it.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "st_set_normal_means_q3",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find a probability for a sample mean from the normal model of its sampling distribution",
+      "topic": "2.12",
+      "skill": "3.C",
+      "student_thinking": [
+       "Describe the sampling distribution of the sample mean with its mean and its standard deviation",
+       "Standardize the cutoff with that standard deviation and find the upper tail area"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Find a probability for a sample mean from the normal model of its sampling distribution",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "individual_sd",
+        "description": "Uses the standard deviation of the individual values, which gives the probability for one value instead of for a sample mean."
+       },
+       {
+        "id": "wrong_tail",
+        "description": "Gives the probability of a sample mean less than the cutoff instead of greater than it."
+       },
+       {
+        "id": "two_sided_area",
+        "description": "Doubles the smaller tail area as for a two-sided region, but the question is about one side only."
+       }
+      ],
+      "verification": {
+       "independent_path": "the probability is recomputed with math.erf and with scipy's normal survival function for the standard deviation of the sample mean",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "interpretation"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 265,
+   "facts": [
+    "mu=94",
+    "sd=4",
+    "n=16",
+    "cut=92.0"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_set_normal_means_q1",
+   "facts": [
+    "mu=94",
+    "sd=4",
+    "n=16",
+    "cut=92.0"
+   ],
+   "seed": 20501
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Normal probability, topic 2.11 / skill 3.C."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "0.691 is correct and unique."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Curve data complete with labels, units, ticks and mark; the stem already gives the mean and SD."
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": "The rationale for 0.977 (sample-mean SD) does not produce that value; 0.977 is P(Z>-2), i.e. z computed with sigma=1 rather than 4. The 0.617 'doubles tail' rationale gives 0.618, not 0.617, and is not a realistic misconception. The explanation text also omits no option, but two of the three wrong-option rationales are inaccurate."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Typical length and load, calculator allowed."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The key is correct and the scope fits, but the distractor rationales for 0.977 and 0.617 do not match how those values arise and encode no realistic misconception. Fail on distractor and explanation quality."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "SD of sample mean sigma/sqrt(n) is core 2.12/3.D."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Key 1.00 is unique and correct."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Curve data complete and consistent with N(94,4); stem wording clear; rounding stated."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct misconceptions, each explained; options parallel."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 80 seconds, light load, calculator designation consistent."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is a clean, correct MC on the SD of the sampling distribution of the mean. The graph is redundant but consistent with the stem, and the distractors are distinct and explained. It passes all five criteria."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Sampling distribution of the mean with a normal probability, which is a direct fit for 2.12 and 3.C."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "SE=1, z=-2, P=0.977, and the key is unique."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The curve data are complete, with labeled axis, title and mark, and are consistent with N(94,4). The rounding convention is stated."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor encodes a distinct error (individual SD, wrong tail, doubled tail), and the explanation addresses each one."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 95 seconds, light arithmetic, calculator allowed."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "A clean, correct item on the sampling distribution of a sample mean with a unique key and distinct distractors. The graph is redundant but complete."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single-step normal probability: compute z = -0.5 and find the upper-tail area (0.691). The only pitfall is tail direction, and the distractors are common errors (0.309 for the wrong tail, 0.617 for the area between 92 and 96). The graph only confirms the mean, so there is little representation work and almost no computation or reading load.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Direct application of sigma/sqrt(n) = 4/sqrt(16) = 1.00. Only 2 counted steps (identify the formula, compute), below the 3-step threshold for exam_prep. The graph is redundant with the stem. Distractors are the population SD (4), n (16), and 1/sqrt(n)-style errors (0.25), which are plausible but do not add reasoning depth.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 0,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 40
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Two sequential steps: compute SE = 4/sqrt(16) = 1, then z = -2 and P(Z > -2) = 0.977. Standard CLT/normal-probability application with light arithmetic. Distractors (0.023, 0.046, 0.691) reflect sign error, doubling, and using sigma instead of SE. Meets the 2-or-fewer-steps criterion for basic_learning, not the 3-step exam_prep threshold.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 75
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_statistics-m01-k2",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "2.11",
+  "unitCode": "2",
+  "skillPrimary": "3.C",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "st_set_normal_means_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step normal probability: compute z=0.5, find the upper tail area = 0.309. The graph only restates the mean and SD. Distractors cover the complement, a wrong z, and an arithmetic slip. Routine application of one procedure with minimal reading and computation.",
+  "payload": {
+   "archetype": "st_set_normal_means",
+   "topic": "2.11",
+   "skill": "3.C",
+   "calculator": "allowed",
+   "set_intro": "The distribution of the length of a bolt for bolts from a factory is approximately normal with mean $86$ millimeters and standard deviation $4$ millimeters, as shown in the graph.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Normal curve for the length of a bolt",
+    "data": {
+     "chart": "curve",
+     "curve": {
+      "family": "normal",
+      "x": {
+       "label": "The length of a bolt (millimeters)",
+       "min": 70,
+       "max": 102,
+       "ticks": [
+        74,
+        78,
+        82,
+        86,
+        90,
+        94,
+        98
+       ]
+      },
+      "points": [
+       [
+        70,
+        0.00003345755644122134
+       ],
+       [
+        70.4,
+        0.000049663867848193444
+       ],
+       [
+        70.8,
+        0.00007298673144786488
+       ],
+       [
+        71.2,
+        0.00010619506763768824
+       ],
+       [
+        71.6,
+        0.00015297548252844232
+       ],
+       [
+        72,
+        0.00021817067376144004
+       ],
+       [
+        72.4,
+        0.00030805479211825634
+       ],
+       [
+        72.8,
+        0.00043064223476341917
+       ],
+       [
+        73.2,
+        0.0005960220503662122
+       ],
+       [
+        73.6,
+        0.0008167047640499768
+       ],
+       [
+        74,
+        0.0011079621029845019
+       ],
+       [
+        74.4,
+        0.0014881331049439702
+       ],
+       [
+        74.8,
+        0.0019788628957449865
+       ],
+       [
+        75.2,
+        0.0026052337036056535
+       ],
+       [
+        75.6,
+        0.003395742308421392
+       ],
+       [
+        76,
+        0.004382075123392135
+       ],
+       [
+        76.4,
+        0.005598632573710742
+       ],
+       [
+        76.8,
+        0.00708175943540028
+       ],
+       [
+        77.2,
+        0.008868648211557872
+       ],
+       [
+        77.6,
+        0.010995898995106765
+       ],
+       [
+        78,
+        0.013497741628297016
+       ],
+       [
+        78.4,
+        0.016403953693669194
+       ],
+       [
+        78.8,
+        0.019737539575223517
+       ],
+       [
+        79.2,
+        0.02351226934422176
+       ],
+       [
+        79.6,
+        0.02773020866986383
+       ],
+       [
+        80,
+        0.032379398916472936
+       ],
+       [
+        80.4,
+        0.037431866408936296
+       ],
+       [
+        80.8,
+        0.0428421480119518
+       ],
+       [
+        81.2,
+        0.04854651374580328
+       ],
+       [
+        81.6,
+        0.05446304425813756
+       ],
+       [
+        82,
+        0.06049268112978584
+       ],
+       [
+        82.4,
+        0.0665213124746888
+       ],
+       [
+        82.8,
+        0.07242288819037065
+       ],
+       [
+        83.2,
+        0.07806348334169036
+       ],
+       [
+        83.6,
+        0.08330615072294985
+       ],
+       [
+        84,
+        0.08801633169107488
+       ],
+       [
+        84.4,
+        0.09206753507583089
+       ],
+       [
+        84.8,
+        0.09534695386513102
+       ],
+       [
+        85.2,
+        0.097760673493864
+       ],
+       [
+        85.6,
+        0.09923813686925294
+       ],
+       [
+        86,
+        0.09973557010035818
+       ],
+       [
+        86.4,
+        0.09923813686925294
+       ],
+       [
+        86.8,
+        0.097760673493864
+       ],
+       [
+        87.2,
+        0.09534695386513102
+       ],
+       [
+        87.6,
+        0.09206753507583089
+       ],
+       [
+        88,
+        0.08801633169107488
+       ],
+       [
+        88.4,
+        0.08330615072294985
+       ],
+       [
+        88.8,
+        0.07806348334169036
+       ],
+       [
+        89.2,
+        0.07242288819037065
+       ],
+       [
+        89.6,
+        0.0665213124746888
+       ],
+       [
+        90,
+        0.06049268112978584
+       ],
+       [
+        90.4,
+        0.05446304425813756
+       ],
+       [
+        90.8,
+        0.04854651374580328
+       ],
+       [
+        91.2,
+        0.0428421480119518
+       ],
+       [
+        91.6,
+        0.037431866408936296
+       ],
+       [
+        92,
+        0.032379398916472936
+       ],
+       [
+        92.4,
+        0.02773020866986383
+       ],
+       [
+        92.8,
+        0.02351226934422176
+       ],
+       [
+        93.2,
+        0.019737539575223517
+       ],
+       [
+        93.6,
+        0.016403953693669194
+       ],
+       [
+        94,
+        0.013497741628297016
+       ],
+       [
+        94.4,
+        0.010995898995106765
+       ],
+       [
+        94.8,
+        0.008868648211557872
+       ],
+       [
+        95.2,
+        0.00708175943540028
+       ],
+       [
+        95.6,
+        0.005598632573710742
+       ],
+       [
+        96,
+        0.004382075123392135
+       ],
+       [
+        96.4,
+        0.003395742308421392
+       ],
+       [
+        96.8,
+        0.0026052337036056535
+       ],
+       [
+        97.2,
+        0.0019788628957449865
+       ],
+       [
+        97.6,
+        0.0014881331049439702
+       ],
+       [
+        98,
+        0.0011079621029845019
+       ],
+       [
+        98.4,
+        0.0008167047640499768
+       ],
+       [
+        98.8,
+        0.0005960220503662122
+       ],
+       [
+        99.2,
+        0.00043064223476341917
+       ],
+       [
+        99.6,
+        0.00030805479211825634
+       ],
+       [
+        100,
+        0.00021817067376144004
+       ],
+       [
+        100.4,
+        0.00015297548252844232
+       ],
+       [
+        100.8,
+        0.00010619506763768824
+       ],
+       [
+        101.2,
+        0.00007298673144786488
+       ],
+       [
+        101.6,
+        0.000049663867848193444
+       ],
+       [
+        102,
+        0.00003345755644122134
+       ]
+      ],
+      "marks": [
+       {
+        "at": 86,
+        "label": "86"
+       }
+      ]
+     },
+     "title": "Distribution of the length of a bolt"
+    }
+   },
+   "items": [
+    {
+     "archetype": "st_set_normal_means_q1",
+     "topic": "2.11",
+     "skill": "3.C",
+     "stem": "What is the probability that a randomly selected bolt has a length greater than $88$ millimeters? (Give the answer as a decimal rounded to three decimal places.)",
+     "options": [
+      {
+       "text": "$0.309$",
+       "why": "$z = (88 - 86)/4 = 0.50$, and the probability of a value greater than $88$ is $1 - \\Phi(0.50) \\approx 0.309$.",
+       "value": "0.30900000"
+      },
+      {
+       "text": "$0.691$",
+       "why": "Gives the probability of a value less than the cutoff instead of greater than it.",
+       "value": "0.69100000"
+      },
+      {
+       "text": "$0.023$",
+       "why": "Uses the standard deviation of a sample mean in a question about a single value.",
+       "value": "0.023000000"
+      },
+      {
+       "text": "$0.617$",
+       "why": "Doubles the smaller tail area as for a two-sided region, but the question is about one side only.",
+       "value": "0.61700000"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is $0.309$. $z = (88 - 86)/4 = 0.50$, and the probability of a value greater than $88$ is $1 - \\Phi(0.50) \\approx 0.309$.\n$0.691$ is incorrect: Gives the probability of a value less than the cutoff instead of greater than it.\n$0.023$ is incorrect: Uses the standard deviation of a sample mean in a question about a single value.\n$0.617$ is incorrect: Doubles the smaller tail area as for a two-sided region, but the question is about one side only.",
+     "est_seconds": 90,
+     "blueprint": {
+      "id": "st_set_normal_means_q1",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find the probability that a single value exceeds a cutoff from a normal model",
+      "topic": "2.11",
+      "skill": "3.C",
+      "student_thinking": [
+       "Standardize the cutoff using the mean and the standard deviation of the individual values",
+       "Find the area of the upper tail of the standard normal distribution"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Find the probability that a single value exceeds a cutoff from a normal model",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "wrong_tail",
+        "description": "Gives the probability of a value less than the cutoff instead of greater than it."
+       },
+       {
+        "id": "two_sided_area",
+        "description": "Doubles the smaller tail area as for a two-sided region, but the question is about one side only."
+       },
+       {
+        "id": "uses_mean_distribution",
+        "description": "Uses the standard deviation of a sample mean in a question about a single value."
+       }
+      ],
+      "verification": {
+       "independent_path": "the probability is recomputed with math.erf and with scipy's normal survival function",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_normal_means_q2",
+     "topic": "2.12",
+     "skill": "3.D",
+     "stem": "A random sample of $16$ bolts is selected from the population, and the sample mean is calculated. What is the standard deviation of the sampling distribution of the sample mean? (Round to two decimal places.)",
+     "options": [
+      {
+       "text": "$0.25$ millimeters",
+       "why": "Divides by $16$ instead of by $\\sqrt{16}$.",
+       "value": "0.25000000"
+      },
+      {
+       "text": "$1.00$ millimeters",
+       "why": "The standard deviation of the sampling distribution of $\\bar x$ is $\\sigma/\\sqrt{n} = 4/\\sqrt{16} = 1.00$.",
+       "value": "1.0000000"
+      },
+      {
+       "text": "$16.00$ millimeters",
+       "why": "Multiplies by the square root of the sample size, which would make the spread of the sample means larger.",
+       "value": "16.000000"
+      },
+      {
+       "text": "$4.00$ millimeters",
+       "why": "Reports the standard deviation of the individual values, which does not shrink with the sample size.",
+       "value": "4.0000000"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is $1.00$ millimeters. The standard deviation of the sampling distribution of $\\bar x$ is $\\sigma/\\sqrt{n} = 4/\\sqrt{16} = 1.00$.\n$0.25$ millimeters is incorrect: Divides by $16$ instead of by $\\sqrt{16}$.\n$16.00$ millimeters is incorrect: Multiplies by the square root of the sample size, which would make the spread of the sample means larger.\n$4.00$ millimeters is incorrect: Reports the standard deviation of the individual values, which does not shrink with the sample size.",
+     "est_seconds": 80,
+     "blueprint": {
+      "id": "st_set_normal_means_q2",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find the standard deviation of the sampling distribution of the sample mean",
+      "topic": "2.12",
+      "skill": "3.D",
+      "student_thinking": [
+       "Recall that the standard deviation of the sample mean is the population standard deviation divided by the square root of the sample size",
+       "Substitute the given values and reject the unshrunk and wrongly scaled values"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Find the standard deviation of the sampling distribution of the sample mean",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "population_sd",
+        "description": "Reports the standard deviation of the individual values, which does not shrink with the sample size."
+       },
+       {
+        "id": "divides_by_n",
+        "description": "Divides by $16$ instead of by $\\sqrt{16}$."
+       },
+       {
+        "id": "multiplies_by_root_n",
+        "description": "Multiplies by the square root of the sample size, which would make the spread of the sample means larger."
+       }
+      ],
+      "verification": {
+       "independent_path": "the standard deviation is recomputed as sigma over the square root of n",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "interpretation"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_normal_means_q3",
+     "topic": "2.12",
+     "skill": "3.C",
+     "stem": "A random sample of $16$ bolts is selected. What is the probability that the mean length of the sample is greater than $88$ millimeters? (Give the answer as a decimal rounded to three decimal places.)",
+     "options": [
+      {
+       "text": "$0.023$",
+       "why": "The sample mean is approximately normal with mean $86$ and standard deviation $1.000$, so $z = (88 - 86)/1.000 = 2.00$ and $P(\\bar x > 88) \\approx 0.023$.",
+       "value": "0.023000000"
+      },
+      {
+       "text": "$0.309$",
+       "why": "Uses the standard deviation of the individual values, which gives the probability for one value instead of for a sample mean.",
+       "value": "0.30900000"
+      },
+      {
+       "text": "$0.046$",
+       "why": "Doubles the smaller tail area as for a two-sided region, but the question is about one side only.",
+       "value": "0.046000000"
+      },
+      {
+       "text": "$0.977$",
+       "why": "Gives the probability of a sample mean less than the cutoff instead of greater than it.",
+       "value": "0.97700000"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is $0.023$. The sample mean is approximately normal with mean $86$ and standard deviation $1.000$, so $z = (88 - 86)/1.000 = 2.00$ and $P(\\bar x > 88) \\approx 0.023$.\n$0.309$ is incorrect: Uses the standard deviation of the individual values, which gives the probability for one value instead of for a sample mean.\n$0.046$ is incorrect: Doubles the smaller tail area as for a two-sided region, but the question is about one side only.\n$0.977$ is incorrect: Gives the probability of a sample mean less than the cutoff instead of greater than it.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "st_set_normal_means_q3",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Find a probability for a sample mean from the normal model of its sampling distribution",
+      "topic": "2.12",
+      "skill": "3.C",
+      "student_thinking": [
+       "Describe the sampling distribution of the sample mean with its mean and its standard deviation",
+       "Standardize the cutoff with that standard deviation and find the upper tail area"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Find a probability for a sample mean from the normal model of its sampling distribution",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "individual_sd",
+        "description": "Uses the standard deviation of the individual values, which gives the probability for one value instead of for a sample mean."
+       },
+       {
+        "id": "wrong_tail",
+        "description": "Gives the probability of a sample mean less than the cutoff instead of greater than it."
+       },
+       {
+        "id": "two_sided_area",
+        "description": "Doubles the smaller tail area as for a two-sided region, but the question is about one side only."
+       }
+      ],
+      "verification": {
+       "independent_path": "the probability is recomputed with math.erf and with scipy's normal survival function for the standard deviation of the sample mean",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "interpretation"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 265,
+   "facts": [
+    "mu=86",
+    "sd=4",
+    "n=16",
+    "cut=88.0"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_set_normal_means_q1",
+   "facts": [
+    "mu=86",
+    "sd=4",
+    "n=16",
+    "cut=88.0"
+   ],
+   "seed": 20502
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Normal probability for a single value; fits 2.11 / 3.C."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "P(Z>0.5)=0.3085 -> 0.309; unique."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Curve data complete, symmetric about 86, labeled with units; rounding stated."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Wrong tail and doubling distractors are sound. The 0.023 option's 'sample mean SD' rationale has no stated n, so it is weakly justified, but the option is still a plausible wrong answer."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 60-90 seconds, calculator allowed, short parallel options."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is correct and suitable. The only weakness is the 0.023 distractor, whose sample-mean rationale lacks a stated n. This is minor, so I pass the item."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Direct application of sigma/sqrt(n); fits 2.12 / 3.D."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "4/sqrt(16)=1.00 unique."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Curve data complete with labels, units, ticks, mean mark; sigma given in stem and consistent with the curve."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct misconceptions, each explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 80 seconds, light arithmetic, calculator designation consistent."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Clean, straightforward item with a unique key and distinct distractors. The graph is redundant but consistent with the stem. Passes."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Sampling distribution of the mean, probability calculation; fits 2.12 / 3.C."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "SE=1, z=2, upper tail 0.0228 -> 0.023. Unique correct answer."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Curve data complete with labels, ticks, mark; stem gives parameters. Rounding stated."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "0.309 uses sigma=4, 0.977 wrong tail, 0.046 doubled tail; distinct misconceptions, each explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short, calculator-appropriate, typical load."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Sound item; the key is correct, the distractors are distinct, and the stimulus is complete."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single-step normal probability: compute z=0.5, find the upper tail area = 0.309. The graph only restates the mean and SD. Distractors cover the complement, a wrong z, and an arithmetic slip. Routine application of one procedure with minimal reading and computation.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "The item is a direct application of sigma/sqrt(n) = 4/sqrt(16) = 1.00. It has 2 steps (identify the formula, then compute), which is below the 3-step threshold for exam_prep, and it involves essentially a single concept. The graph adds no extra reasoning because the mean and SD are stated in the stem. The distractors (0.25, 4.00, 16.00) reflect common formula errors but do not add reasoning depth.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 0,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 40
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Two sequential steps: compute the standard error (4/sqrt(16)=1), then find the normal tail probability P(Z>2)=0.023. This is a single standard CLT application with light arithmetic. The graph only restates the given mean and standard deviation. The step count is below the exam_prep threshold of 3, so the label is basic_learning.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 75
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_statistics-m02-k0",
+  "cellId": "ap_statistics-m02",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.4",
+  "unitCode": "5",
+  "skillPrimary": "3.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "st_set_model_compare_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_scope_skill; criterion_failed_stimulus_expression; criterion_failed_exam_suitability; reference_pattern_mismatch; set_item_1:criterion_failed_scope_skill; set_item_1:criterion_failed_stimulus_expression; set_item_1:criterion_failed_exam_suitability; set_item_1:reference_pattern_mismatch; set_item_2:criterion_failed_stimulus_expression; set_item_2:criterion_failed_exam_suitability; set_item_3:solver_disagrees:Both models are linear regressions of price on age (x) fit to the same 30 cars. Least squares gives only one line for given data, so two different equations, R-squared values and residual plots are inconsistent unless Model B uses a transformed variable, which is not stated. Both slopes are also positive (older cars cost more), which is implausible. The intended answer is still clearly D.; set_item_3:criterion_failed_key_scoring; set_item_3:criterion_failed_stimulus_expression; set_item_3:criterion_failed_exam_suitability; set_item_3:instant_reject_missing_condition; set_item_3:reference_pattern_mismatch; solver_disagrees:Both models are linear regressions of price on age (x) fit to the same 30 cars. Least squares gives only one line for given data, so two different equations, R-squared values and residual plots are inconsistent unless Model B uses a transformed variable, which is not stated. Both slopes are also positive (older cars cost more), which is implausible. The intended answer is still clearly D.; criterion_failed_key_scoring; instant_reject_missing_condition",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Select Model A's equation from the table and substitute x=7 to get 45.26. That is 2 steps with a single core concept (prediction from a least-squares line). The second model and the residual plot column are distractors that are not needed. Arithmetic is light. By the rubric, 2 or fewer steps means basic_learning.",
+  "payload": {
+   "archetype": "st_set_model_compare",
+   "topic": "5.4",
+   "skill": "3.B",
+   "calculator": "allowed",
+   "set_intro": "A researcher used data from $30$ randomly selected cars to build two regression models for predicting the selling price of a used car (in thousand dollars) from the age of the car in years. The table shown summarizes both models, where $x$ is the age of the car in years.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Two regression models for the selling price of a used car",
+    "data": {
+     "chart": "table",
+     "data": {
+      "columns": [
+       "Model",
+       "Equation",
+       "R-squared",
+       "S",
+       "Residual plot"
+      ],
+      "rows": [
+       [
+        "Model A",
+        "y-hat = 32.8 + 1.78x",
+        "92%",
+        "1.9",
+        "Curved (U-shaped) pattern"
+       ],
+       [
+        "Model B",
+        "y-hat = 30.3 + 1.71x",
+        "88%",
+        "2.7",
+        "No pattern"
+       ]
+      ]
+     },
+     "title": "Summary of two regression models"
+    }
+   },
+   "items": [
+    {
+     "archetype": "st_set_model_compare_q1",
+     "topic": "5.4",
+     "skill": "3.B",
+     "stem": "What does Model A predict for the selling price of a car whose age is $7$ years? (Round to two decimal places.)",
+     "options": [
+      {
+       "text": "$12.46$ thousand dollars",
+       "why": "Leaves the intercept out of the prediction.",
+       "value": "12.460000"
+      },
+      {
+       "text": "$45.26$ thousand dollars",
+       "why": "Model A predicts $32.8 + 1.78(7) = 45.26$.",
+       "value": "45.260000"
+      },
+      {
+       "text": "$42.27$ thousand dollars",
+       "why": "Uses the equation of Model B instead of the equation of Model A.",
+       "value": "42.270000"
+      },
+      {
+       "text": "$34.58$ thousand dollars",
+       "why": "Substitutes $x = 1$ instead of the given value of $x$.",
+       "value": "34.580000"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is $45.26$ thousand dollars. Model A predicts $32.8 + 1.78(7) = 45.26$.\n$12.46$ thousand dollars is incorrect: Leaves the intercept out of the prediction.\n$42.27$ thousand dollars is incorrect: Uses the equation of Model B instead of the equation of Model A.\n$34.58$ thousand dollars is incorrect: Substitutes $x = 1$ instead of the given value of $x$.",
+     "est_seconds": 85,
+     "blueprint": {
+      "id": "st_set_model_compare_q1",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Calculate a predicted value from one of two given regression equations",
+      "topic": "5.4",
+      "skill": "3.B",
+      "student_thinking": [
+       "Select the equation of Model A from the table",
+       "Substitute the given value of x into the equation, using both the intercept and the slope term"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Calculate a predicted value from one of two given regression equations",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "wrong_model",
+        "description": "Uses the equation of Model B instead of the equation of Model A."
+       },
+       {
+        "id": "intercept_left_out",
+        "description": "Leaves the intercept out of the prediction."
+       },
+       {
+        "id": "wrong_x",
+        "description": "Substitutes $x = 1$ instead of the given value of $x$."
+       }
+      ],
+      "verification": {
+       "independent_path": "the prediction is recomputed from the coefficients in the table and the three wrong values are the named slips",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_model_compare_q2",
+     "topic": "5.5",
+     "skill": "4.A",
+     "stem": "Which of the following statements about the two models is supported by the values of R-squared and $S$ in the table?",
+     "options": [
+      {
+       "text": "The two models explain the same percent of the variation in selling price, because both use the same variables.",
+       "why": "Using the same variables does not give the same R-squared; the table shows different values.",
+       "value": null
+      },
+      {
+       "text": "Model A explains a larger percent of the variation in selling price, but its predictions are typically farther from the actual values than those of Model B.",
+       "why": "A larger R-squared goes with a smaller $S$ here; the table shows Model A with the smaller $S$, so its predictions are typically closer.",
+       "value": null
+      },
+      {
+       "text": "Model A explains a larger percent of the variation in selling price ($92\\%$ compared with $88\\%$), and its predictions are typically closer to the actual values ($S = 1.9$ compared with $2.7$).",
+       "why": "A larger R-squared means more of the variation is explained by the linear model, and a smaller S means that the actual values typically differ less from the predictions.",
+       "value": null
+      },
+      {
+       "text": "Model B explains a larger percent of the variation in selling price than Model A, and its predictions are typically closer to the actual values.",
+       "why": "Reverses the comparison: Model A has the larger R-squared and the smaller $S$ in the table.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is Model A explains a larger percent of the variation in selling price ($92\\%$ compared with $88\\%$), and its predictions are typically closer to the actual values ($S = 1.9$ compared with $2.7$).. A larger R-squared means more of the variation is explained by the linear model, and a smaller S means that the actual values typically differ less from the predictions.\nThe two models explain the same percent of the variation in selling price, because both use the same variables. is incorrect: Using the same variables does not give the same R-squared; the table shows different values.\nModel A explains a larger percent of the variation in selling price, but its predictions are typically farther from the actual values than those of Model B. is incorrect: A larger R-squared goes with a smaller $S$ here; the table shows Model A with the smaller $S$, so its predictions are typically closer.\nModel B explains a larger percent of the variation in selling price than Model A, and its predictions are typically closer to the actual values. is incorrect: Reverses the comparison: Model A has the larger R-squared and the smaller $S$ in the table.",
+     "est_seconds": 90,
+     "blueprint": {
+      "id": "st_set_model_compare_q2",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Compare two regression models by R-squared and S from a summary table",
+      "topic": "5.5",
+      "skill": "4.A",
+      "student_thinking": [
+       "Read R-squared and S for both models in the table",
+       "State which model has the larger percent of variation explained and which has the typically smaller prediction errors"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Compare two regression models by R-squared and S from a summary table",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "models_reversed",
+        "description": "Reverses the comparison: Model A has the larger R-squared and the smaller $S$ in the table."
+       },
+       {
+        "id": "s_misread",
+        "description": "A larger R-squared goes with a smaller $S$ here; the table shows Model A with the smaller $S$, so its predictions are typically closer."
+       },
+       {
+        "id": "same_variables_same_fit",
+        "description": "Using the same variables does not give the same R-squared; the table shows different values."
+       }
+      ],
+      "verification": {
+       "independent_path": "each statement is checked against the R-squared and S values that are generated so that Model A has the larger R-squared and the smaller S",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "interpretation",
+       "claim_justification"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_model_compare_q3",
+     "topic": "5.4",
+     "skill": "4.D",
+     "stem": "Which model is more appropriate for describing the relationship, and why?",
+     "options": [
+      {
+       "text": "Model A, because it has the larger R-squared and the smaller $S$, so its predictions are typically closer to the actual values.",
+       "why": "Judges the models by R-squared and $S$ alone; a curved pattern in a residual plot shows that the linear model is not appropriate.",
+       "value": null
+      },
+      {
+       "text": "Neither model, because the residual plots show that the data cannot be modeled with a line.",
+       "why": "Model B's residual plot has no pattern, which supports a linear model; only Model A's residual plot shows a problem.",
+       "value": null
+      },
+      {
+       "text": "Both models are equally appropriate, because both use a straight line.",
+       "why": "A straight-line model can be inappropriate; the residual plot shows whether the line describes the relationship.",
+       "value": null
+      },
+      {
+       "text": "Model B, because the residual plot for Model A has a curved pattern while the residual plot for Model B has no pattern.",
+       "why": "An appropriate linear model leaves residuals with no pattern; a curved pattern in the residuals shows that a linear model is not appropriate even when R-squared is large.",
+       "value": null
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is Model B, because the residual plot for Model A has a curved pattern while the residual plot for Model B has no pattern.. An appropriate linear model leaves residuals with no pattern; a curved pattern in the residuals shows that a linear model is not appropriate even when R-squared is large.\nModel A, because it has the larger R-squared and the smaller $S$, so its predictions are typically closer to the actual values. is incorrect: Judges the models by R-squared and $S$ alone; a curved pattern in a residual plot shows that the linear model is not appropriate.\nNeither model, because the residual plots show that the data cannot be modeled with a line. is incorrect: Model B's residual plot has no pattern, which supports a linear model; only Model A's residual plot shows a problem.\nBoth models are equally appropriate, because both use a straight line. is incorrect: A straight-line model can be inappropriate; the residual plot shows whether the line describes the relationship.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "st_set_model_compare_q3",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Choose a regression model using the pattern in the residual plot",
+      "topic": "5.4",
+      "skill": "4.D",
+      "student_thinking": [
+       "Read the description of each residual plot in the table",
+       "Choose the model whose residuals show no pattern and explain why a curved pattern is a problem even when R-squared is large"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Choose a regression model using the pattern in the residual plot",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "r2_only",
+        "description": "Judges the models by R-squared and $S$ alone; a curved pattern in a residual plot shows that the linear model is not appropriate."
+       },
+       {
+        "id": "neither_model",
+        "description": "Model B's residual plot has no pattern, which supports a linear model; only Model A's residual plot shows a problem."
+       },
+       {
+        "id": "straight_line_enough",
+        "description": "A straight-line model can be inappropriate; the residual plot shows whether the line describes the relationship."
+       }
+      ],
+      "verification": {
+       "independent_path": "the residual pattern of each model is stated in the table and Model A is generated with the curved pattern and the larger R-squared so the choice depends on the pattern",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "claim_justification",
+       "representation_reading",
+       "interpretation"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 270,
+   "facts": [
+    "aA=32.8",
+    "bA=1.78",
+    "x0=7"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_set_model_compare_q1",
+   "facts": [
+    "aA=32.8",
+    "bA=1.78",
+    "x0=7"
+   ],
+   "seed": 20500
+  },
+  "review": [
+   {
+    "instant_reject": [],
+    "matches_reference_pattern": false,
+    "resembles_known_exam_item": false,
+    "summary": "The key is correct, but the item tests only substitution into a given equation and does not address residuals. The stimulus carries unused model-comparison columns and an unrealistic positive age slope for used-car prices. I recommend failing it on topic fit and stimulus design.",
+    "scope_skill": {
+     "pass": false,
+     "notes": "Dominant demand is plugging x=7 into a given equation. Nothing about residuals (topic 5.4) is assessed; the residual plot column is unused. Skill 3.B is met only trivially."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "45.26 is correct and unique. Distractors match their named slips."
+    },
+    "stimulus_expression": {
+     "pass": false,
+     "notes": "Table is complete, but it includes R-squared, S and residual plot columns that the question never uses. A positive slope for price against age is unrealistic for used cars."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each wrong option encodes a distinct slip and the explanation covers all three."
+    },
+    "exam_suitability": {
+     "pass": false,
+     "notes": "The unused columns add reading load that serves no purpose. The question is too trivial for the residuals topic, and the unrealistic context detracts from exam quality."
+    }
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Reading R-squared and S from a summary table to compare models fits topic 5.5 and skill 4.A. Nothing is out of scope."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Option C is the unique correct statement given the R-squared and S values. A, B and D each contradict the table. The statement is supported by R-squared and S as the stem asks, even though Model A's residual plot is curved."
+    },
+    "stimulus_expression": {
+     "pass": false,
+     "notes": "The data object is complete (table with columns and rows). However, both equations show a positive slope for age (+1.78 and +1.71), which implies older used cars sell for more. This is unrealistic for a used-car context. The Residual plot column is irrelevant to the question and adds reading load. It also suggests Model A is inappropriate, which creates a distracting tension with the keyed answer. The stem says the stimulus table is 'shown', so the table is needed, but the extra columns are not."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "The distractors are distinct: same variables means same fit, a misread S direction, and a reversed comparison. Every wrong option is explained. The key option restates the numbers in parentheses and is noticeably longer than the others, which is a mild length giveaway. Distractor B's explanation is somewhat awkward ('goes with a smaller S here')."
+    },
+    "exam_suitability": {
+     "pass": false,
+     "notes": "The timing is fine. The unrealistic positive slope for price versus age and the irrelevant residual-plot column with a curved pattern reduce quality. An exam item would likely either use the residual information deliberately or omit it. The item's context is flawed as written."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The key is correct and unique, and the item is in scope. The stimulus has two flaws: positive slopes for price versus age are unrealistic, and the curved residual-plot entry for Model A is irrelevant to the question yet creates a distracting tension. The correct option is also longer than the others. Fix the slope signs (they should be negative), remove or justify the residual column, and shorten the key option before use."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Residual-plot pattern for model choice fits topic 5.4 and skill 4.D."
+    },
+    "key_scoring": {
+     "pass": false,
+     "notes": "Both models are linear fits of price on age for the same 30 cars. Least squares gives a unique line, so two different equations, R-squared values and residual plots are impossible without an unstated transformation or subset. The key rests on an inconsistent premise."
+    },
+    "stimulus_expression": {
+     "pass": false,
+     "notes": "The stimulus is internally inconsistent: no difference between the models is stated (different data, variable or transformation). Both slopes are positive, so price rises with age, which is implausible in context. The residual plots are given only as text descriptions."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor encodes a distinct misconception and the explanation addresses each one."
+    },
+    "exam_suitability": {
+     "pass": false,
+     "notes": "The data-generating scenario is not realistic or coherent, which is not suitable for an exam item. Time and load are otherwise fine."
+    },
+    "instant_reject": [
+     "missing_condition"
+    ],
+    "matches_reference_pattern": false,
+    "resembles_known_exam_item": false,
+    "summary": "The intended answer (Model B) is clear, but the setup is statistically incoherent. Two different least-squares lines cannot come from the same 30 cars with the same variables, and the stem gives no condition that makes them differ. Fail until the stem states how the models differ (for example, different explanatory variables or different subsets of data) and the context is made coherent."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Select Model A's equation from the table and substitute x=7 to get 45.26. That is 2 steps with a single core concept (prediction from a least-squares line). The second model and the residual plot column are distractors that are not needed. Arithmetic is light. By the rubric, 2 or fewer steps means basic_learning.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Students read two values (R-squared and S) from a small table and apply the standard interpretations: higher R-squared means more variation explained, and lower S means smaller typical prediction error. No computation is needed. The distractors are straightforward (same R-squared, mixed-up direction, reversed). The residual plot column is extraneous to the question and does not add real difficulty.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "The student reads the residual plot patterns (a curve for Model A, none for Model B) and concludes that the curved pattern means a linear model is inappropriate, so Model B is preferred despite its lower R-squared. This takes 2 sequential steps, which is below the 3-step threshold for exam_prep. The task is a standard residual-plot interpretation with one tempting distractor (choosing Model A for its higher R-squared and smaller S). Reading load is light and no arithmetic is needed.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_statistics-m02-k1",
+  "cellId": "ap_statistics-m02",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.4",
+  "unitCode": "5",
+  "skillPrimary": "3.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "st_set_model_compare_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "set_item_2:criterion_failed_distractor_explanation; set_item_2:criterion_failed_exam_suitability; set_item_3:solver_disagrees:Both models are least-squares lines of y on the same x from the same 30 households. That line is unique, so two different lines with different R-squared values are impossible. The stem doesn't say how Model B differs (e.g., transformed variables). The intended answer is still B.; set_item_3:criterion_failed_key_scoring; set_item_3:criterion_failed_stimulus_expression; set_item_3:instant_reject_missing_condition; set_item_3:reference_pattern_mismatch; criterion_failed_distractor_explanation; criterion_failed_exam_suitability; solver_disagrees:Both models are least-squares lines of y on the same x from the same 30 households. That line is unique, so two different lines with different R-squared values are impossible. The stem doesn't say how Model B differs (e.g., transformed variables). The intended answer is still B.; criterion_failed_key_scoring; criterion_failed_stimulus_expression; instant_reject_missing_condition; reference_pattern_mismatch",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "The item requires reading Model A's equation from the table and substituting x = 645 to get 99.24. That is 2 steps and essentially one concept (computing a predicted value). The Model B and residual-plot information is a distractor and is not needed. The distractors correspond to the slope term alone (59.34), a mistaken use of Model B, and an intercept or slope error. Under the rubric, 2 or fewer steps means basic_learning.",
+  "payload": {
+   "archetype": "st_set_model_compare",
+   "topic": "5.4",
+   "skill": "3.B",
+   "calculator": "allowed",
+   "set_intro": "A researcher used data from $30$ randomly selected households to build two regression models for predicting the monthly electricity bill of a household (in dollars) from the household's monthly use in kilowatt-hours. The table shown summarizes both models, where $x$ is the household's monthly use in kilowatt-hours.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Two regression models for the monthly electricity bill of a household",
+    "data": {
+     "chart": "table",
+     "data": {
+      "columns": [
+       "Model",
+       "Equation",
+       "R-squared",
+       "S",
+       "Residual plot"
+      ],
+      "rows": [
+       [
+        "Model A",
+        "y-hat = 39.9 + 0.092x",
+        "90%",
+        "1.9",
+        "Curved (U-shaped) pattern"
+       ],
+       [
+        "Model B",
+        "y-hat = 42.6 + 0.079x",
+        "85%",
+        "2.4",
+        "No pattern"
+       ]
+      ]
+     },
+     "title": "Summary of two regression models"
+    }
+   },
+   "items": [
+    {
+     "archetype": "st_set_model_compare_q1",
+     "topic": "5.4",
+     "skill": "3.B",
+     "stem": "What does Model A predict for the monthly bill of a household whose monthly use is $645$ kilowatt-hours? (Round to two decimal places.)",
+     "options": [
+      {
+       "text": "$99.24$ dollars",
+       "why": "Model A predicts $39.9 + 0.092(645) = 99.24$.",
+       "value": "99.240000"
+      },
+      {
+       "text": "$93.56$ dollars",
+       "why": "Uses the equation of Model B instead of the equation of Model A.",
+       "value": "93.560000"
+      },
+      {
+       "text": "$39.99$ dollars",
+       "why": "Substitutes $x = 1$ instead of the given value of $x$.",
+       "value": "39.990000"
+      },
+      {
+       "text": "$59.34$ dollars",
+       "why": "Leaves the intercept out of the prediction.",
+       "value": "59.340000"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is $99.24$ dollars. Model A predicts $39.9 + 0.092(645) = 99.24$.\n$93.56$ dollars is incorrect: Uses the equation of Model B instead of the equation of Model A.\n$39.99$ dollars is incorrect: Substitutes $x = 1$ instead of the given value of $x$.\n$59.34$ dollars is incorrect: Leaves the intercept out of the prediction.",
+     "est_seconds": 85,
+     "blueprint": {
+      "id": "st_set_model_compare_q1",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Calculate a predicted value from one of two given regression equations",
+      "topic": "5.4",
+      "skill": "3.B",
+      "student_thinking": [
+       "Select the equation of Model A from the table",
+       "Substitute the given value of x into the equation, using both the intercept and the slope term"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Calculate a predicted value from one of two given regression equations",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "wrong_model",
+        "description": "Uses the equation of Model B instead of the equation of Model A."
+       },
+       {
+        "id": "intercept_left_out",
+        "description": "Leaves the intercept out of the prediction."
+       },
+       {
+        "id": "wrong_x",
+        "description": "Substitutes $x = 1$ instead of the given value of $x$."
+       }
+      ],
+      "verification": {
+       "independent_path": "the prediction is recomputed from the coefficients in the table and the three wrong values are the named slips",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_model_compare_q2",
+     "topic": "5.5",
+     "skill": "4.A",
+     "stem": "Which of the following statements about the two models is supported by the values of R-squared and $S$ in the table?",
+     "options": [
+      {
+       "text": "Model A explains a larger percent of the variation in monthly bill, but its predictions are typically farther from the actual values than those of Model B.",
+       "why": "A larger R-squared goes with a smaller $S$ here; the table shows Model A with the smaller $S$, so its predictions are typically closer.",
+       "value": null
+      },
+      {
+       "text": "Model B explains a larger percent of the variation in monthly bill than Model A, and its predictions are typically closer to the actual values.",
+       "why": "Reverses the comparison: Model A has the larger R-squared and the smaller $S$ in the table.",
+       "value": null
+      },
+      {
+       "text": "Model A explains a larger percent of the variation in monthly bill ($90\\%$ compared with $85\\%$), and its predictions are typically closer to the actual values ($S = 1.9$ compared with $2.4$).",
+       "why": "A larger R-squared means more of the variation is explained by the linear model, and a smaller S means that the actual values typically differ less from the predictions.",
+       "value": null
+      },
+      {
+       "text": "The two models explain the same percent of the variation in monthly bill, because both use the same variables.",
+       "why": "Using the same variables does not give the same R-squared; the table shows different values.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is Model A explains a larger percent of the variation in monthly bill ($90\\%$ compared with $85\\%$), and its predictions are typically closer to the actual values ($S = 1.9$ compared with $2.4$).. A larger R-squared means more of the variation is explained by the linear model, and a smaller S means that the actual values typically differ less from the predictions.\nModel A explains a larger percent of the variation in monthly bill, but its predictions are typically farther from the actual values than those of Model B. is incorrect: A larger R-squared goes with a smaller $S$ here; the table shows Model A with the smaller $S$, so its predictions are typically closer.\nModel B explains a larger percent of the variation in monthly bill than Model A, and its predictions are typically closer to the actual values. is incorrect: Reverses the comparison: Model A has the larger R-squared and the smaller $S$ in the table.\nThe two models explain the same percent of the variation in monthly bill, because both use the same variables. is incorrect: Using the same variables does not give the same R-squared; the table shows different values.",
+     "est_seconds": 90,
+     "blueprint": {
+      "id": "st_set_model_compare_q2",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Compare two regression models by R-squared and S from a summary table",
+      "topic": "5.5",
+      "skill": "4.A",
+      "student_thinking": [
+       "Read R-squared and S for both models in the table",
+       "State which model has the larger percent of variation explained and which has the typically smaller prediction errors"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Compare two regression models by R-squared and S from a summary table",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "models_reversed",
+        "description": "Reverses the comparison: Model A has the larger R-squared and the smaller $S$ in the table."
+       },
+       {
+        "id": "s_misread",
+        "description": "A larger R-squared goes with a smaller $S$ here; the table shows Model A with the smaller $S$, so its predictions are typically closer."
+       },
+       {
+        "id": "same_variables_same_fit",
+        "description": "Using the same variables does not give the same R-squared; the table shows different values."
+       }
+      ],
+      "verification": {
+       "independent_path": "each statement is checked against the R-squared and S values that are generated so that Model A has the larger R-squared and the smaller S",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "interpretation",
+       "claim_justification"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_model_compare_q3",
+     "topic": "5.4",
+     "skill": "4.D",
+     "stem": "Which model is more appropriate for describing the relationship, and why?",
+     "options": [
+      {
+       "text": "Model B, because the residual plot for Model A has a curved pattern while the residual plot for Model B has no pattern.",
+       "why": "An appropriate linear model leaves residuals with no pattern; a curved pattern in the residuals shows that a linear model is not appropriate even when R-squared is large.",
+       "value": null
+      },
+      {
+       "text": "Model A, because it has the larger R-squared and the smaller $S$, so its predictions are typically closer to the actual values.",
+       "why": "Judges the models by R-squared and $S$ alone; a curved pattern in a residual plot shows that the linear model is not appropriate.",
+       "value": null
+      },
+      {
+       "text": "Neither model, because the residual plots show that the data cannot be modeled with a line.",
+       "why": "Model B's residual plot has no pattern, which supports a linear model; only Model A's residual plot shows a problem.",
+       "value": null
+      },
+      {
+       "text": "Both models are equally appropriate, because both use a straight line.",
+       "why": "A straight-line model can be inappropriate; the residual plot shows whether the line describes the relationship.",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is Model B, because the residual plot for Model A has a curved pattern while the residual plot for Model B has no pattern.. An appropriate linear model leaves residuals with no pattern; a curved pattern in the residuals shows that a linear model is not appropriate even when R-squared is large.\nModel A, because it has the larger R-squared and the smaller $S$, so its predictions are typically closer to the actual values. is incorrect: Judges the models by R-squared and $S$ alone; a curved pattern in a residual plot shows that the linear model is not appropriate.\nNeither model, because the residual plots show that the data cannot be modeled with a line. is incorrect: Model B's residual plot has no pattern, which supports a linear model; only Model A's residual plot shows a problem.\nBoth models are equally appropriate, because both use a straight line. is incorrect: A straight-line model can be inappropriate; the residual plot shows whether the line describes the relationship.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "st_set_model_compare_q3",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Choose a regression model using the pattern in the residual plot",
+      "topic": "5.4",
+      "skill": "4.D",
+      "student_thinking": [
+       "Read the description of each residual plot in the table",
+       "Choose the model whose residuals show no pattern and explain why a curved pattern is a problem even when R-squared is large"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Choose a regression model using the pattern in the residual plot",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "r2_only",
+        "description": "Judges the models by R-squared and $S$ alone; a curved pattern in a residual plot shows that the linear model is not appropriate."
+       },
+       {
+        "id": "neither_model",
+        "description": "Model B's residual plot has no pattern, which supports a linear model; only Model A's residual plot shows a problem."
+       },
+       {
+        "id": "straight_line_enough",
+        "description": "A straight-line model can be inappropriate; the residual plot shows whether the line describes the relationship."
+       }
+      ],
+      "verification": {
+       "independent_path": "the residual pattern of each model is stated in the table and Model A is generated with the curved pattern and the larger R-squared so the choice depends on the pattern",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "claim_justification",
+       "representation_reading",
+       "interpretation"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 270,
+   "facts": [
+    "aA=39.9",
+    "bA=0.092",
+    "x0=645"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_set_model_compare_q1",
+   "facts": [
+    "aA=39.9",
+    "bA=0.092",
+    "x0=645"
+   ],
+   "seed": 20501
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "The task is short with light arithmetic, the rounding convention is stated, and calculator use is allowed.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is acceptable. The key is verified, the distractors are distinct slips, and the stimulus is complete. The only weaknesses are the unused residual-plot column and the loose fit to topic 5.4."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Reading R-squared and S for two models; fits 5.5 and 4.A."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "C is unique given the stem restricts the claim to R-squared and S."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table data are complete and clear. The residual-plot column is extra, but it is described fully."
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": "The key is much longer than the other options and is the only one that includes the numeric values, which is a length and format giveaway. The explanation for option A is awkwardly worded."
+    },
+    "exam_suitability": {
+     "pass": false,
+     "notes": "The residual-plot column is irrelevant to the question asked and adds a distracting reading load, creating tension with the stem's restriction to R-squared and S."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The key is correct, but the item has a length giveaway in the correct option and an irrelevant residual-plot column that adds a distracting reading load and creates tension with the stem's restriction to R-squared and S. The distractor and exam-suitability criteria fail, so the item should be revised."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Residual plot pattern for model choice fits 5.4 and 4.D; in scope."
+    },
+    "key_scoring": {
+     "pass": false,
+     "notes": "Intended key is B, but the premise is impossible: two different least-squares lines of y on the same x from the same 30 households cannot exist. The stem does not say how the models differ, so the setup is not defensible."
+    },
+    "stimulus_expression": {
+     "pass": false,
+     "notes": "Table is internally inconsistent with the stem: both models are linear in the same x and same data, yet have different equations, R-squared and S. Residual plots are only described in words."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Distractors encode distinct misconceptions (R-squared only, neither model, any line is fine); each is explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short, no arithmetic, appropriate load."
+    },
+    "instant_reject": [
+     "missing_condition"
+    ],
+    "matches_reference_pattern": false,
+    "resembles_known_exam_item": false,
+    "summary": "The item tests the right skill and has a good key and distractors, but the stimulus is impossible. Two different least-squares lines of the same response on the same x for the same 30 households cannot have different equations and R-squared values. The stem does not say how the models differ, for example subsets of the data or different predictors. This missing context makes the setup statistically incoherent, so the item fails."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "The item requires reading Model A's equation from the table and substituting x = 645 to get 99.24. That is 2 steps and essentially one concept (computing a predicted value). The Model B and residual-plot information is a distractor and is not needed. The distractors correspond to the slope term alone (59.34), a mistaken use of Model B, and an intercept or slope error. Under the rubric, 2 or fewer steps means basic_learning.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "The item requires reading two values (R-squared and S) from a small table and matching their standard interpretations: larger R-squared means more variation explained, and smaller S means predictions typically closer to actual values. Only one reasoning step is needed, with no computation and little reading. The residual plot column is a distractor, since the stem asks only about what R-squared and S support. The distractors are straightforward misinterpretations.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "The item has 2 required steps, below the 3-step exam_prep threshold. Students read the two residual plot descriptions, then apply the rule that a curved residual plot means a linear model is inappropriate, which outweighs a higher R-squared. The R-squared/S distractor is a common misconception, but it is rejected in one conceptual move. No computation is needed.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_statistics-m02-k2",
+  "cellId": "ap_statistics-m02",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.4",
+  "unitCode": "5",
+  "skillPrimary": "3.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "st_set_model_compare_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "The item asks for a direct prediction from Model A's equation: read the equation from the table and substitute x = 834 (26 + 0.18*834 = 176.12). That is 2 steps with essentially one concept (computing a predicted value). The R-squared, S and residual-plot columns are not needed for the question. The options reflect common slips (e.g., 150.12 omits the intercept, 26.18 misplaces the slope), but these do not add reasoning depth. By the rubric (2 or fewer steps or a single concept), this is basic_learning rather than exam_prep.",
+  "payload": {
+   "archetype": "st_set_model_compare",
+   "topic": "5.4",
+   "skill": "3.B",
+   "calculator": "allowed",
+   "set_intro": "A researcher used data from $24$ randomly selected households to build two regression models for predicting the monthly electricity bill of a household (in dollars) from the household's monthly use in kilowatt-hours. The table shown summarizes both models, where $x$ is the household's monthly use in kilowatt-hours.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Two regression models for the monthly electricity bill of a household",
+    "data": {
+     "chart": "table",
+     "data": {
+      "columns": [
+       "Model",
+       "Equation",
+       "R-squared",
+       "S",
+       "Residual plot"
+      ],
+      "rows": [
+       [
+        "Model A",
+        "y-hat = 26 + 0.18x",
+        "90%",
+        "1.8",
+        "Curved (U-shaped) pattern"
+       ],
+       [
+        "Model B",
+        "y-hat = 27.8 + 0.164x",
+        "85%",
+        "2.3",
+        "No pattern"
+       ]
+      ]
+     },
+     "title": "Summary of two regression models"
+    }
+   },
+   "items": [
+    {
+     "archetype": "st_set_model_compare_q1",
+     "topic": "5.4",
+     "skill": "3.B",
+     "stem": "What does Model A predict for the monthly bill of a household whose monthly use is $834$ kilowatt-hours? (Round to two decimal places.)",
+     "options": [
+      {
+       "text": "$26.18$ dollars",
+       "why": "Substitutes $x = 1$ instead of the given value of $x$.",
+       "value": "26.180000"
+      },
+      {
+       "text": "$176.12$ dollars",
+       "why": "Model A predicts $26 + 0.18(834) = 176.12$.",
+       "value": "176.12000"
+      },
+      {
+       "text": "$150.12$ dollars",
+       "why": "Leaves the intercept out of the prediction.",
+       "value": "150.12000"
+      },
+      {
+       "text": "$164.58$ dollars",
+       "why": "Uses the equation of Model B instead of the equation of Model A.",
+       "value": "164.58000"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is $176.12$ dollars. Model A predicts $26 + 0.18(834) = 176.12$.\n$26.18$ dollars is incorrect: Substitutes $x = 1$ instead of the given value of $x$.\n$150.12$ dollars is incorrect: Leaves the intercept out of the prediction.\n$164.58$ dollars is incorrect: Uses the equation of Model B instead of the equation of Model A.",
+     "est_seconds": 85,
+     "blueprint": {
+      "id": "st_set_model_compare_q1",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Calculate a predicted value from one of two given regression equations",
+      "topic": "5.4",
+      "skill": "3.B",
+      "student_thinking": [
+       "Select the equation of Model A from the table",
+       "Substitute the given value of x into the equation, using both the intercept and the slope term"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Calculate a predicted value from one of two given regression equations",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "wrong_model",
+        "description": "Uses the equation of Model B instead of the equation of Model A."
+       },
+       {
+        "id": "intercept_left_out",
+        "description": "Leaves the intercept out of the prediction."
+       },
+       {
+        "id": "wrong_x",
+        "description": "Substitutes $x = 1$ instead of the given value of $x$."
+       }
+      ],
+      "verification": {
+       "independent_path": "the prediction is recomputed from the coefficients in the table and the three wrong values are the named slips",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "procedure_choice",
+       "calculated_value_decision",
+       "representation_reading"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_model_compare_q2",
+     "topic": "5.5",
+     "skill": "4.A",
+     "stem": "Which of the following statements about the two models is supported by the values of R-squared and $S$ in the table?",
+     "options": [
+      {
+       "text": "Model B explains a larger percent of the variation in monthly bill than Model A, and its predictions are typically closer to the actual values.",
+       "why": "Reverses the comparison: Model A has the larger R-squared and the smaller $S$ in the table.",
+       "value": null
+      },
+      {
+       "text": "Model A explains a larger percent of the variation in monthly bill, but its predictions are typically farther from the actual values than those of Model B.",
+       "why": "A larger R-squared goes with a smaller $S$ here; the table shows Model A with the smaller $S$, so its predictions are typically closer.",
+       "value": null
+      },
+      {
+       "text": "Model A explains a larger percent of the variation in monthly bill ($90\\%$ compared with $85\\%$), and its predictions are typically closer to the actual values ($S = 1.8$ compared with $2.3$).",
+       "why": "A larger R-squared means more of the variation is explained by the linear model, and a smaller S means that the actual values typically differ less from the predictions.",
+       "value": null
+      },
+      {
+       "text": "The two models explain the same percent of the variation in monthly bill, because both use the same variables.",
+       "why": "Using the same variables does not give the same R-squared; the table shows different values.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is Model A explains a larger percent of the variation in monthly bill ($90\\%$ compared with $85\\%$), and its predictions are typically closer to the actual values ($S = 1.8$ compared with $2.3$).. A larger R-squared means more of the variation is explained by the linear model, and a smaller S means that the actual values typically differ less from the predictions.\nModel B explains a larger percent of the variation in monthly bill than Model A, and its predictions are typically closer to the actual values. is incorrect: Reverses the comparison: Model A has the larger R-squared and the smaller $S$ in the table.\nModel A explains a larger percent of the variation in monthly bill, but its predictions are typically farther from the actual values than those of Model B. is incorrect: A larger R-squared goes with a smaller $S$ here; the table shows Model A with the smaller $S$, so its predictions are typically closer.\nThe two models explain the same percent of the variation in monthly bill, because both use the same variables. is incorrect: Using the same variables does not give the same R-squared; the table shows different values.",
+     "est_seconds": 90,
+     "blueprint": {
+      "id": "st_set_model_compare_q2",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Compare two regression models by R-squared and S from a summary table",
+      "topic": "5.5",
+      "skill": "4.A",
+      "student_thinking": [
+       "Read R-squared and S for both models in the table",
+       "State which model has the larger percent of variation explained and which has the typically smaller prediction errors"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Compare two regression models by R-squared and S from a summary table",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "models_reversed",
+        "description": "Reverses the comparison: Model A has the larger R-squared and the smaller $S$ in the table."
+       },
+       {
+        "id": "s_misread",
+        "description": "A larger R-squared goes with a smaller $S$ here; the table shows Model A with the smaller $S$, so its predictions are typically closer."
+       },
+       {
+        "id": "same_variables_same_fit",
+        "description": "Using the same variables does not give the same R-squared; the table shows different values."
+       }
+      ],
+      "verification": {
+       "independent_path": "each statement is checked against the R-squared and S values that are generated so that Model A has the larger R-squared and the smaller S",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "interpretation",
+       "claim_justification"
+      ]
+     }
+    },
+    {
+     "archetype": "st_set_model_compare_q3",
+     "topic": "5.4",
+     "skill": "4.D",
+     "stem": "Which model is more appropriate for describing the relationship, and why?",
+     "options": [
+      {
+       "text": "Both models are equally appropriate, because both use a straight line.",
+       "why": "A straight-line model can be inappropriate; the residual plot shows whether the line describes the relationship.",
+       "value": null
+      },
+      {
+       "text": "Model A, because it has the larger R-squared and the smaller $S$, so its predictions are typically closer to the actual values.",
+       "why": "Judges the models by R-squared and $S$ alone; a curved pattern in a residual plot shows that the linear model is not appropriate.",
+       "value": null
+      },
+      {
+       "text": "Model B, because the residual plot for Model A has a curved pattern while the residual plot for Model B has no pattern.",
+       "why": "An appropriate linear model leaves residuals with no pattern; a curved pattern in the residuals shows that a linear model is not appropriate even when R-squared is large.",
+       "value": null
+      },
+      {
+       "text": "Neither model, because the residual plots show that the data cannot be modeled with a line.",
+       "why": "Model B's residual plot has no pattern, which supports a linear model; only Model A's residual plot shows a problem.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is Model B, because the residual plot for Model A has a curved pattern while the residual plot for Model B has no pattern.. An appropriate linear model leaves residuals with no pattern; a curved pattern in the residuals shows that a linear model is not appropriate even when R-squared is large.\nBoth models are equally appropriate, because both use a straight line. is incorrect: A straight-line model can be inappropriate; the residual plot shows whether the line describes the relationship.\nModel A, because it has the larger R-squared and the smaller $S$, so its predictions are typically closer to the actual values. is incorrect: Judges the models by R-squared and $S$ alone; a curved pattern in a residual plot shows that the linear model is not appropriate.\nNeither model, because the residual plots show that the data cannot be modeled with a line. is incorrect: Model B's residual plot has no pattern, which supports a linear model; only Model A's residual plot shows a problem.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "st_set_model_compare_q3",
+      "subject": "ap_statistics",
+      "kind": "mc",
+      "concept": "Choose a regression model using the pattern in the residual plot",
+      "topic": "5.4",
+      "skill": "4.D",
+      "student_thinking": [
+       "Read the description of each residual plot in the table",
+       "Choose the model whose residuals show no pattern and explain why a curved pattern is a problem even when R-squared is large"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "Choose a regression model using the pattern in the residual plot",
+        "evidence": "the stem and the displayed data give every value that this check uses"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "r2_only",
+        "description": "Judges the models by R-squared and $S$ alone; a curved pattern in a residual plot shows that the linear model is not appropriate."
+       },
+       {
+        "id": "neither_model",
+        "description": "Model B's residual plot has no pattern, which supports a linear model; only Model A's residual plot shows a problem."
+       },
+       {
+        "id": "straight_line_enough",
+        "description": "A straight-line model can be inappropriate; the residual plot shows whether the line describes the relationship."
+       }
+      ],
+      "verification": {
+       "independent_path": "the residual pattern of each model is stated in the table and Model A is generated with the curved pattern and the larger R-squared so the choice depends on the pattern",
+       "method": "exact arithmetic + independent numeric path"
+      },
+      "judgment_demand": [
+       "claim_justification",
+       "representation_reading",
+       "interpretation"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 270,
+   "facts": [
+    "aA=26.0",
+    "bA=0.18",
+    "x0=834"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_set_model_compare_q1",
+   "facts": [
+    "aA=26.0",
+    "bA=0.18",
+    "x0=834"
+   ],
+   "seed": 20502
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "The item takes about 85 seconds with light arithmetic, which suits the exam.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "A correct, clean prediction item. It is easy and loosely tied to residuals, but it is acceptable."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Comparing R-squared and S from a summary table is within topic 5.5 and fits skill 4.A (reading and interpreting a tabular representation and summary statistics)."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Option C is the only statement supported by the table: Model A has the larger R-squared and the smaller S. Options A, B and D are each contradicted by the table values. The stem asks only what R-squared and S support, so the curved residual plot for Model A does not make C wrong."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table data are complete, with columns for model, equation, R-squared, S and residual plot. The residual plot column is a plausible distractor feature. Units for S are not stated (dollars), but this is a minor omission."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "The distractors encode distinct errors: reversing the models, mismatching R-squared and S, and assuming the same variables give the same fit. The explanation addresses every wrong option. Option C is much longer than the others because it includes the numbers, which is a mild length cue."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Reading load is light and no calculation is needed, so the item fits the 60-100 second reference. The residual plot column adds a possible distraction but is not a flaw. Option C's inline numbers and its length are a slight giveaway."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound. The key is unique and the distractors are distinct. The only minor issues are that option C is longer than the others and S has no stated units."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Topic 5.4 residual plots with a model-choice judgment (4.D). It stays within Unit 5 and has no deleted content. Two linear models with different equations is a mild oddity, but both are linear fits and the item stays in scope."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Option C is the unique defensible answer. Model A's curved residual plot shows a linear model is inappropriate despite the larger R-squared and smaller S. Model B's residuals show no pattern. The other three options are each clearly wrong."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table has columns, rows and a title, and gives every value needed. The residual plot is described in words instead of drawn, which is acceptable for a rendered table. The stem says the table is 'shown' and defines x. The 24 randomly selected households is a harmless detail."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor maps to a distinct named misconception: R-squared only, 'neither model', and 'a straight line is enough'. The explanation addresses every wrong option. Option lengths are similar, so there is no giveaway."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "The item takes about 60 to 90 seconds, needs no arithmetic and has a light reading load. The calculator designation is harmless."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is a clean model-comparison question using residual plot patterns. It has a unique key, distinct distractors tied to named misconceptions, and a complete stimulus. It passes all criteria."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "The item asks for a direct prediction from Model A's equation: read the equation from the table and substitute x = 834 (26 + 0.18*834 = 176.12). That is 2 steps with essentially one concept (computing a predicted value). The R-squared, S and residual-plot columns are not needed for the question. The options reflect common slips (e.g., 150.12 omits the intercept, 26.18 misplaces the slope), but these do not add reasoning depth. By the rubric (2 or fewer steps or a single concept), this is basic_learning rather than exam_prep.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Direct reading of R-squared and S from a small table and matching them to correct interpretations (larger R-squared = more variation explained; smaller S = typical prediction error smaller). No computation; distractors reverse one or both comparisons or claim equal R-squared. The residual-plot column is extraneous to the question asked. Low concept depth, few steps.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "The item has 2 required steps (below the 3-step exam_prep threshold) and rests on one core idea: a curved residual plot means a linear model is inappropriate despite a higher R-squared. The student reads a small table and compares the two models, so there is no multi-step chaining or representation switching. The R-squared distractor is a common misconception, but it does not add enough steps to move the item up. There is no arithmetic and the reading load is light.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   }
+  ]
+ }
+]

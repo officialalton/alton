@@ -1,0 +1,1363 @@
+[
+ {
+  "key": "ap_chemistry-f01-k0",
+  "cellId": "ap_chemistry-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "pH = pKa + log([NH3]/[NH4+]) = 9.25 + log(0.1/0.4) = 9.25 − 0.60",
+     "final_answer": "pH = pKa + log([NH3]/[NH4+]); pH ≈ 8.65",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "H3O+ + NH3 → NH4+ + H2O. NH3 drops to 0.1 − 0.03 = 0.07 mol and NH4+ rises to 0.4 + 0.03 = 0.43 mol. pH = 9.25 + log(0.07/0.43) = 9.25 − 0.79",
+     "final_answer": "pH ≈ 8.46",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "log(base/acid) = 0.70, so base/acid = 10^0.70 ≈ 5.01. Moles of base = 5.01 × 0.4 ≈ 2.0 mol",
+     "final_answer": "≈ 2.0 mol of conjugate base (NH3)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The conjugate base NH3 reacts with the added H3O+ to make NH4+ and water. The strong acid is used up, so [H3O+] stays nearly the same. The ratio [NH3]/[NH4+] changes only a little, so the pH changes only a little.",
+     "final_answer": "NH3 + H3O+ → NH4+ + H2O uses up the added acid. The base/acid ratio changes only slightly, so the pH barely changes.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Dilution lowers both concentrations by the same factor. The ratio [NH3]/[NH4+] stays the same, so the Henderson–Hasselbalch pH stays the same.",
+     "final_answer": "No, the pH stays essentially the same (≈ 8.65) because the base/acid ratio does not change. The buffer capacity does go down.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Chemistry, keys and scoring are correct, but the stem has a wording flaw: it calls NH4⁺ \"the weak acid ammonium\" and never names the conjugate base (NH3), while the rubric uses generic A⁻/HA. Fix by writing \"ammonium ion, NH4⁺\" and \"its conjugate base, NH3\".",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts match topics 8.9, 8.5 and 8.10 and their tagged skills."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The values 8.65, 8.46 and 2.005 mol are correct, and the rubric rows are consistent."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The wording \"weak acid ammonium\" is imprecise and the base is unnamed. The data object is empty, which is fine for a text stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ; the rubric lists common errors per row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of a 10-point long question, with a calculator allowed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part buffer item covering H-H calculation, stoichiometric neutralization by strong acid followed by H-H, inverse H-H for composition, a conceptual explanation, and a dilution prediction. Each part uses a standard AP Chemistry routine with clean numbers (log 0.25, log of 5 from 10^0.70) and no long arithmetic. Part B requires the extra reasoning step of reacting the added acid with the conjugate base before applying H-H, and part C requires rearranging the equation. Moderate depth and a modest number of reasoning steps fit full-mock exam preparation rather than basic learning or advanced material. One wording issue: the stimulus calls ammonium the weak acid and says 'its conjugate base' without naming NH3. This is a small imprecision, not a source of difficulty. It is also a given that the weak acid has 0.4 mol and the base 0.1 mol, so the ratio is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 9,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_chemistry-f01-k1",
+  "cellId": "ap_chemistry-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "pH = pKa + log([HCOO-]/[HCOOH]) = 3.75 + log(0.15/0.20)",
+     "final_answer": "pH = pKa + log([A-]/[HA]); pH ≈ 3.63",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "H+ + HCOO- → HCOOH: base 0.12 mol, acid 0.23 mol; pH = 3.75 + log(0.12/0.23)",
+     "final_answer": "pH ≈ 3.47",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "ratio = 10^0.30 ≈ 2.0; 0.2 × 2.0",
+     "final_answer": "≈ 0.40 mol conjugate base",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Added H3O+ is consumed by the conjugate base HCOO- to form weak HCOOH and water, so [H3O+] stays nearly constant; the base/acid ratio changes only slightly, so the pH changes only slightly.",
+     "final_answer": "HCOO- neutralizes added H+ forming HCOOH; ratio changes little so pH nearly constant",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Both concentrations drop by the same factor, so the [A-]/[HA] ratio stays the same; by H-H the pH stays essentially the same (only a very slight real change), though buffer capacity goes down.",
+     "final_answer": "No (essentially unchanged); ratio unchanged",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a correct, in-scope buffer FRQ worth 10 points. The keys match the stem values, the rubric rows are consistent, and the stimulus is complete. No instant-reject condition applies.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topics 8.9, 8.5 and 8.10 are in scope, and each part fits its own tagged skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The pH values 3.63 and 3.47 and the 0.399 mol answer are correct. The parts total 10 points."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives the volume, moles, pKa and the no-volume-change assumption. The empty data object is fine for a text stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no distractors. The rubric rows list common errors instead."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of an AP long question, with simple arithmetic and a calculator allowed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Five-part buffer item spanning 8.9, 8.8, 8.10. Parts require choosing Henderson-Hasselbalch, a stoichiometric neutralization step before applying it (B), an inverse log calculation (C), a particulate-level explanation (D), and a dilution-invariance justification (E). Each part is standard in scope with short stimulus and light arithmetic (log 0.75, 0.12/0.23, 10^0.30). Difficulty arises from multi-step reasoning and representation switching, not from heavy computation or ambiguity, which fits a full-mock FRQ.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_chemistry-f01-k2",
+  "cellId": "ap_chemistry-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "pH = pKa + log([HCOO-]/[HCOOH]) = 3.75 + log(0.25/0.40) = 3.55",
+     "final_answer": "pH = pKa + log([A-]/[HA]); pH ≈ 3.55",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "H+ + HCOO- → HCOOH: base 0.22 mol, acid 0.43 mol; pH = 3.75 + log(0.22/0.43) = 3.46",
+     "final_answer": "pH ≈ 3.46",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "log(x/0.4) = 0.70 → x = 0.4 × 5.01 ≈ 2.0 mol",
+     "final_answer": "≈2.0 mol conjugate base",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Formate (HCOO-) reacts with the added H3O+ to form HCOOH and water. The strong acid is replaced by weak acid, and the [A-]/[HA] ratio changes only slightly, so pH falls only a little.",
+     "final_answer": "HCOO- neutralizes the added H+ by forming weak HCOOH; the ratio changes little, so the pH change is small",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Both concentrations fall by the same factor, so the ratio [A-]/[HA] is unchanged and pH stays ≈ 3.55. Only buffer capacity decreases.",
+     "final_answer": "No (essentially): the ratio is unchanged, so pH stays about 3.55",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard buffer long FRQ (10 points) covering Henderson-Hasselbalch, a strong-acid addition, a target ratio, buffer action and dilution. Keys are correct and consistent with the rubric, the stimulus is complete and the load is typical.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part buffer item: direct HH application, a stoichiometric neutralization step followed by HH, an inverse HH calculation with a ratio from a logarithm, a conceptual species-based explanation, and a dilution argument. Concept depth is moderate and typical of AP free-response; the arithmetic is light with small, clean numbers and the wording is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_chemistry-f02-k0",
+  "cellId": "ap_chemistry-f02",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:A:numeric,B:numeric,C:numeric"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Ksp = [Mg2+][OH-]^2 = s(2s)^2 = 4s^3, so s = (5.6e-12/4)^(1/3) = (1.4e-12)^(1/3)",
+     "final_answer": "Ksp = [Mg2+][OH-]^2; s ≈ 1.1 × 10^-4 M",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Mixing equal volumes halves each concentration: [Mg2+] = 1.5e-7 M and [OH-] = 1.0e-7 M. Q = 1.5e-7 × (1.0e-7)^2 = 1.5e-21, which is less than Ksp.",
+     "final_answer": "Q = 1.5 × 10^-21, which is less than Ksp (5.6 × 10^-12), so no precipitate forms",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "[OH-] stays at about 0.02 M, so s = 5.6e-12/(0.02)^2",
+     "final_answer": "s = 1.4 × 10^-8 M",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Common-ion effect: the extra OH- makes Q larger than Ksp, so by Le Chatelier's principle the equilibrium Mg(OH)2(s) ⇌ Mg2+ + 2OH- shifts left and less solid dissolves.",
+     "final_answer": "The solubility in (c), 1.4 × 10^-8 M, is much lower than in (a), 1.1 × 10^-4 M, because the added OH- shifts the dissolution equilibrium to the left.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Ksp is an equilibrium constant, so it depends only on temperature. Adding the salt changes the ion concentrations and the solubility, not Ksp.",
+     "final_answer": "No, the statement is incorrect. Ksp stays the same at constant temperature; only the solubility changes.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, consistent multipart Ksp item. Keys verified (1.12e-4 M, Q = 1.5e-21 with no precipitate, 1.4e-8 M). Rubric rows are coherent and the 10-point split is standard. Minor issue: Q is trivially far below Ksp in part B.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All parts are in unit 7 scope (7.11, with 7.9 and 7.12). Each part is judged against its own tagged skill. Part B's mixing step is an allowed difficulty lever."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The numeric keys match an independent solve. Rubric rows are consistent and dependencies are sensible. Row B1 is typed numeric but states a concept, which is minor."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives Ksp, the concentrations and the temperature, so it is complete. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is free response. The common_errors fields encode realistic errors such as including the solid, omitting the exponent, and reversing the Q/Ksp comparison."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The calculator load is light and the reading load is low. About 23 minutes for 10 points is acceptable."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ-style item on Ksp: molar solubility with a cube root (stoichiometric factor of 4), a Q vs Ksp precipitation judgment that needs the dilution on mixing (halving concentrations) and squaring [OH-], a common-ion solubility calculation, and two conceptual justifications (Le Chatelier shift, Ksp depends only on temperature). The numbers are clean and the reading load is small. The difficulty comes from choosing the governing relationships and linking results to claims, which are all allowed levers. It is within Unit 7 scope (7.11, 7.12, 7.9) and has no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_chemistry-f02-k1",
+  "cellId": "ap_chemistry-f02",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:A:numeric,B:numeric,C:numeric"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Ksp=[Pb2+][I-]^2=(s)(2s)^2=4s^3=9.8e-9, so s^3=2.45e-9",
+     "final_answer": "Ksp=[Pb2+][I-]^2; s ≈ 1.3 × 10^-3 M (1.35e-3)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Mixing equal volumes halves each concentration: [Pb2+]=1.5e-7 M, [I-]=2.0e-4 M. Q=(1.5e-7)(2.0e-4)^2=6.0e-15",
+     "final_answer": "Q = 6.0 × 10^-15, which is less than Ksp (9.8e-9), so no precipitate forms",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "s(0.1)^2=9.8e-9, using the approximation that 2s is negligible next to 0.1 M",
+     "final_answer": "s ≈ 9.8 × 10^-7 M",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "9.8e-7 M is far less than 1.35e-3 M. The added I- (a common ion) raises Q above Ksp, so the dissolution equilibrium PbI2(s) ⇌ Pb2+ + 2I- shifts left (Le Chatelier). Less solid dissolves.",
+     "final_answer": "The solubility is lower in the I- solution, by about 1000 times, because of the common-ion effect.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Ksp is an equilibrium constant, so only temperature changes it. Adding the salt changes the ion concentrations and the solubility, but the product [Pb2+][I-]^2 at equilibrium stays at 9.8e-9.",
+     "final_answer": "The statement is incorrect. Ksp stays the same at constant temperature.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Long FRQ, 10 points, covering Ksp, Q versus Ksp, the common-ion effect and constancy of Ksp. The values are consistent with the independent solver. Minor flaw: row A2 says about 1.3e-3 while the model answer is 1.35e-3 and no tolerance is given, which is acceptable. The stimulus is text only, so an empty data object is acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All parts fit topics 7.9, 7.11 and 7.12 with appropriate per-part skills."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are unique and correct. Row A2 (about 1.3e-3) versus model answer 1.35e-3 is a minor rounding ambiguity."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Text stimulus is complete; the temperature (25 °C) and Ksp are given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Rubric rows include distinct common errors for each part."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Load is typical of a long question, with a calculator and light arithmetic."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part item covering standard AP routines: writing Ksp and solving 4s^3 = Ksp, halving concentrations on mixing before computing Q and comparing it with Ksp, the common-ion calculation, and conceptual justifications (Le Chatelier, Ksp depends only on temperature). Numbers are clean and calculator-friendly. Difficulty comes from selecting the right relationships and the number of linked steps, not from arithmetic length or ambiguity.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_chemistry-f02-k2",
+  "cellId": "ap_chemistry-f02",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:A:numeric,B:numeric,C:numeric",
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Ksp=[Pb2+][I-]^2=4s^3=9.8e-9, so s=(2.45e-9)^(1/3)",
+     "final_answer": "Ksp=[Pb2+][I-]^2; s ≈ 1.3×10^-3 M (1.35×10^-3 M)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "After dilution, [Pb2+]=1.0e-5 M and [I-]=5.0e-7 M. Q=1.0e-5×(5.0e-7)^2",
+     "final_answer": "Q = 2.5×10^-18, which is less than Ksp, so no precipitate forms",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "s = Ksp/(0.02)^2 = 9.8e-9/4e-4",
+     "final_answer": "s ≈ 2.5×10^-5 M (2.45×10^-5 M)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Common-ion effect: the added I- raises Q above Ksp, so equilibrium shifts left (Le Chatelier) and less PbI2 dissolves.",
+     "final_answer": "Solubility is lower in part (c) (2.5e-5 M vs 1.3e-3 M) because the common ion I- shifts PbI2(s) ⇌ Pb2+ + 2I- to the left.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Ksp is an equilibrium constant and depends only on temperature.",
+     "final_answer": "Not correct: Ksp changes only with temperature. Adding the salt changes the ion concentrations and Q, and the system re-equilibrates at the same Ksp.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is on topic and well formed, but the Part C key is a truncation rather than a correct rounding. The exact value is 2.45e-5 M, which rounds to 2.5e-5, yet the model answer and rubric say 2.4e-5. A correct answer of 2.5e-5 could be marked wrong against the string match. Part A has a similar but harmless 1.3 versus 1.35 inconsistency. The negligible-dissolution assumption in Part C is not stated in the stem.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All parts sit within topics 7.11, 7.9 and 7.12, and each part matches its tagged skill."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part C: the exact value is 2.45e-5 M, but the model answer and rubric say 2.4e-5. This is a rounding or truncation error that could penalize the correct 2.5e-5. The rubric should accept 2.4 to 2.5 e-5 or state 2.45e-5. Part A mixes 1.3 and 1.35 in the rubric and model answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is sufficient. The stem does not state that the dissolved amount is negligible in Part C."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to the free-response format. Common errors are listed per rubric row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Load and point grain are typical of a long AP Chemistry question."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part Ksp item covering molar solubility, Q vs Ksp after a dilution on mixing, the common-ion effect, and a conceptual claim that Ksp depends only on temperature. Each part uses a single well-known routine with short calculator arithmetic. The challenge comes from choosing the right relationship (4s^3 versus s = Ksp/[I-]^2), remembering the 2x dilution on mixing, and justifying claims in terms of equilibrium. All of this is within Unit 7 scope and there is no unfair difficulty.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_chemistry-f03-k0",
+  "cellId": "ap_chemistry-f03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "instant_reject_missing_condition",
+   "resembles_known_exam_item"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "q = mcΔT = 150 g × 4.18 J/(g·°C) × 13.3 °C",
+     "final_answer": "8.34×10^3 J (8339 J)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "0.150 mol H2O formed; ΔH = -8.339 kJ / 0.150 mol",
+     "final_answer": "-55.6 kJ/mol",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "2×(reaction 1) + reaction 2: 2(-75) + 80",
+     "final_answer": "-70 kJ",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Heat lost means the measured ΔT is too low, so q is too low and |ΔH| comes out too small",
+     "final_answer": "The calculated ΔH is smaller in magnitude (less negative) than the true value",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Heat released and mass of solution both double, so ΔT = q/(mc) stays the same",
+     "final_answer": "No change; the temperature rise stays about 13.3 °C",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": true,
+   "summary": "The arithmetic keys are correct, but part E's \"ΔT unchanged\" key rests on an unstated assumption of negligible heat loss. Part D introduces heat loss in the same item, and the stem's \"no heat is lost to the calorimeter\" adds to the ambiguity. Rejected for the missing condition.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A-E fit 6.4 with extra topics 6.3/6.9. Each part is judged against its own tagged skill and rubric rows, and these fit. Part C (Hess's law) is a 6.9 prerequisite and is acceptable under the stated extra topics."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The keys for A-D are computationally correct and the solver agrees. Part E fails on a missing condition: its key says ΔT is unchanged because heat and mass both double, but this holds only if heat loss to the surroundings is negligible. Part D states the calorimeter loses heat, and part E says only that the student \"repeats the experiment\", so it is unclear whether the loss still applies. If it does, the larger volume has a smaller fractional heat loss and ΔT would not be exactly unchanged. The stem also says \"no heat is lost to the calorimeter\", which conflicts with D, though D's \"surroundings\" wording partly reconciles this. Part E needs an explicit assumption that heat loss is negligible. Part B has a minor issue: the rubric requires a negative sign but the answer in the model answer is only stated as \"about -55.6\", with a 0.5 tolerance, which is acceptable. Part A's rubric requires \"8340\", which sits within tolerance of 8339."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete for A-C: volumes, concentrations, temperatures, density, specific heat, and the ΔH values are all given. data is empty, which is fine for a text-only stimulus. Part E's missing assumption is a wording gap."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The rubric common_errors are sensible."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of a 10-point long question, with calculator use appropriate. The structure of calorimetry, Hess's law and error analysis is a standard AP pattern. The scenario of mixing 75 mL of 2 M HCl with 75 mL of 2 M NaOH is close to common textbook and College Board-style coffee-cup problems."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ-style item covering calorimetry (q = mcΔT, per-mole conversion with sign), Hess's law with one scaled reaction, error analysis of heat loss, and proportional reasoning about doubling the volumes. All concepts are in Unit 6 scope. Arithmetic is short (about 3 sig figs) and the wording is unambiguous, with explicit assumptions stated. The difficulty comes from choosing the relationships and linking results to claims, not from long computation or reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 9,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_chemistry-f03-k1",
+  "cellId": "ap_chemistry-f03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_exam_suitability",
+   "resembles_known_exam_item"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "The total volume is 100 mL, so the mass is 100 g. q = mcΔT = 100 g × 4.18 J/(g·°C) × 3.3 °C = 1379 J.",
+     "final_answer": "About 1.38×10^3 J (1379 J)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Moles of water formed = 0.050 L × 0.5 M = 0.025 mol. The reaction releases heat, so ΔH is negative: ΔH = −1.379 kJ / 0.025 mol.",
+     "final_answer": "About −55.2 kJ/mol",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Double reaction (1) and add reaction (2): 2(−120 kJ) + 80 kJ.",
+     "final_answer": "−160 kJ",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Heat lost to the surroundings makes the measured temperature rise too small. That makes the calculated q too small, so the magnitude of ΔH is too small (less negative than the true value).",
+     "final_answer": "The calculated |ΔH| would be too small (an underestimate).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Doubling both volumes doubles the moles reacting, so twice the heat is released. The mass of solution also doubles, so ΔT = q/(mc) stays the same.",
+     "final_answer": "The temperature rise stays the same (about 3.3 °C).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": true,
+   "summary": "The item is correct, in scope and consistent with the independent solver, but its exam suitability is weak. Part C awards 3 points for a one-line Hess's law step, and the HCl/NaOH coffee-cup scenario closely resembles a standard College Board-style calorimetry item.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A-E map to 6.4, 6.3 and 6.9, which are allowed related topics. Each part matches its own tagged skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are consistent with the stimulus. q = 1379.4 J, ΔH = -55.2 kJ/mol and Hess's law gives -160 kJ. Row B1's wording \"from the limiting amount\" is slightly loose because both reagents are present in equal amounts."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and the wording is clear. The reactions in part C are abstract but consistent. The data object is empty, which is acceptable for a text stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to free response. Common errors are listed for each rubric row."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Part C's 3 points for a short scale-and-add Hess's law step is inflated relative to the demand. The strong-acid/strong-base coffee-cup scenario with 50 mL of 0.5 M solutions is a very standard calorimetry item that resembles known exam scenarios."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part AP item. Concepts: q=mcΔT, converting q to molar ΔH with a moles/limiting-reagent step and sign convention, Hess's law with a coefficient multiplication, qualitative error analysis, and a proportional-reasoning prediction. Each part needs only 1-3 steps with small, clean numbers. Within Unit 6 scope (6.3, 6.4, 6.9). The load is typical of a mock-exam FRQ rather than an introductory exercise or an advanced extension.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 9,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_chemistry-f03-k2",
+  "cellId": "ap_chemistry-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "q=mcΔT=200 g×4.18×12.4",
+     "final_answer": "≈1.04×10^4 J (10,366 J)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "0.200 mol H2O formed; ΔH=-10.37 kJ/0.200 mol",
+     "final_answer": "-51.8 kJ/mol",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "2×(1)+(2): 2(-75)+80",
+     "final_answer": "-70 kJ",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Heat lost makes the measured ΔT too low, so q is too small and the calculated |ΔH| is smaller than the true value (less negative).",
+     "final_answer": "Calculated magnitude of ΔH is too small (less negative)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Heat released and mass both double, so ΔT = q/(mc) stays the same.",
+     "final_answer": "Temperature rise stays the same (12.4 °C)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The 10-point calorimetry and Hess's law bundle is consistent and its keys are correct. Parts sit within 6.4, 6.3 and 6.9, and the rubric rows are coherent. No instant-reject condition applies.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part fits its own tagged skill and topic (6.4, 6.3, 6.9), with no content from later units."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are unique and correct: q is about 10,366 J, ΔH is -51.8 kJ/mol, and the Hess sum is -70 kJ. The rubric rows are split sensibly and are consistent with the model answers. Part D's claim row refers to the magnitude of ΔH, which is clear from the stem."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus gives all needed quantities and assumptions. The Hess's law reactions are tacked onto the experiment text, which is slightly awkward but clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The common errors listed in the rubric rows are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is typical of a 10-point long question and the calculator use is appropriate, with no needless arithmetic."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part AP free-response style item. Requires choosing q=mcΔT, converting to kJ/mol using limiting moles (mL to L, J to kJ, sign), applying Hess's law with a coefficient multiplication, a qualitative error-analysis claim, and a proportional-reasoning prediction. Each step is routine, arithmetic is short with given rounded values, assumptions are explicitly stated, and the context is minimal. Depth and step count match a full mock rather than basic learning or advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 8,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_chemistry-f04-k0",
+  "cellId": "ap_chemistry-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "0.601(68.93)+0.399(70.92)=41.43+28.30",
+     "final_answer": "69.72 u",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Mass number 71; 71-31=40",
+     "final_answer": "40 neutrons",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The weighted average moves toward the isotope that makes up more of the sample. If more of the sample is the heavier isotope (70.92 u), the average moves up.",
+     "final_answer": "Greater: the average atomic mass is a weighted average, so a larger share of the heavier 70.92 u isotope pulls it closer to 70.92 u.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Short 4-point mass spectrum bundle on gallium: a weighted average, a neutron count, and a prediction about abundance. Keys are unique and consistent (69.72 u, 40 neutrons, greater). The rubric rows are clear and part C's justification row depends on its claim row. The stimulus table is complete. The load is typical of a short AP question. The only minor point is that the mass number 71 is inferred by rounding 70.92 u, which is a standard step.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part fits topic 1.2 or 1.1 and its own tagged skill. Part B (neutron count from the isotope data) matches 1.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are unique. The abundances sum to 100%. The rubric rows are consistent with the model answers."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete, with isotope masses and abundances, and the wording is clear. The mass numbers are not given, but rounding to 71 is standard."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no options. The rubric lists common errors (averaging without abundances, giving the mass number as the neutron count)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light arithmetic, a calculator is allowed, and about 9 minutes is reasonable for 4 points."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Three-part item on topics 1.1/1.2. Part A is a two-term weighted average (percent to fraction), B requires rounding the isotope mass to a mass number and subtracting the atomic number, and C is a proportional prediction with justification. It combines calculation, nuclear-composition reasoning, and a justified claim, which is typical full-mock free-response, and uses only the allowed difficulty levers. Arithmetic is short and the wording is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 270
+  }
+ },
+ {
+  "key": "ap_chemistry-f04-k1",
+  "cellId": "ap_chemistry-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Weighted average: 0.692(62.93)+0.308(64.93)=43.55+20.00",
+     "final_answer": "63.55 u",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Mass number 65 minus 29 protons",
+     "final_answer": "36 neutrons",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Average atomic mass is a weighted average; increasing the fraction of the 64.93 u isotope (above current average 63.55) pulls the average toward 64.93.",
+     "final_answer": "Greater, because the weighted average shifts toward the heavier isotope's mass when its abundance increases.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The keys are correct and unique, the stimulus is adequate, and the load fits a short FRQ. The only minor concern is that Part B requires inferring the mass number from the listed isotope masses.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts match topics 1.2 and 1.1 and their own tagged skills. A is a weighted average (3.C), B is the neutron count (1.A), and C is a prediction with a justification. All of it stays within Unit 1."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A: 63.55 u. B: 36 neutrons, because the mass number is 65 and Z is 29. C: greater, with a weighted-average justification. The rubric rows are consistent, C2 depends on C1, and the independent solver agrees. In B, the mass number is inferred by rounding 64.93 u to 65. This is standard, but the table labels the column only as \"Isotope mass (u)\"."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete: two isotope masses, abundances that sum to 100%, and the atomic number given in the title. The x_label \"Isotope\" is slightly odd, since the rows have no isotope label column. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no distractors. Each rubric row lists a plausible common error (an unweighted average, mass number given as neutron count, \"less\")."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A 4-point short question with 1/1/2 parts, light arithmetic, and a calculator allowed. This fits the AP Chemistry short-question format."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard weighted-average calculation from a two-row table, a simple neutron count (mass number minus atomic number), and a one-step proportional prediction about how abundance shifts average mass. Concepts are foundational, steps are few, and arithmetic is short and clean. No out-of-scope content or ambiguity.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_chemistry-f04-k2",
+  "cellId": "ap_chemistry-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Weighted average: 0.199(10.01)+0.801(11.01)=1.992+8.819=10.81 u",
+     "final_answer": "10.81 u",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Mass number 11 minus 5 protons = 6 neutrons",
+     "final_answer": "6 neutrons",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Average atomic mass is weighted by abundance; more of the 11.01 u isotope shifts the weighted average toward 11.01, so it is greater than 10.81 u.",
+     "final_answer": "Greater than that of the first sample",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Short 4-point FRQ on the boron isotope table. The weighted average (10.81 u), the neutron count (6) and the \"greater\" prediction are all correct and unique. The table data are complete and consistent (abundances sum to 100%). The rubric rows are consistent and the load is light, which fits the short-question format. No instant-reject conditions apply.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part sits within topics 1.2/1.1 and matches its own tagged skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys verified; rubric rows are consistent, with C2 dependent on C1."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete. The isotope rows carry no explicit labels, but the masses identify them."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The common errors listed are plausible."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Calculator use is minimal and the time load is appropriate for 4 points."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item tests core Topic 1.2 and 1.1 skills with a two-isotope table. Part A is a weighted average with two terms and short arithmetic. Part B subtracts the atomic number from the mass number, taken from the rounded isotope mass of 11.01 u. Part C is a one-step proportional prediction: more of the heavier isotope raises the average. Reading load is minimal, the wording is unambiguous, and everything is in scope. There is no long arithmetic, and the calculator is barely needed.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 200
+  }
+ },
+ {
+  "key": "ap_chemistry-f05-k0",
+  "cellId": "ap_chemistry-f05",
+  "passed": false,
+  "reasons": [
+   "bundle_ref:part_B_references_missing_part_i"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_chemistry-f05-k1",
+  "cellId": "ap_chemistry-f05",
+  "passed": false,
+  "reasons": [
+   "bundle_ref:part_B_references_missing_part_i"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_chemistry-f05-k2",
+  "cellId": "ap_chemistry-f05",
+  "passed": false,
+  "reasons": [
+   "bundle_ref:part_B_references_missing_part_i"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_chemistry-f06-k0",
+  "cellId": "ap_chemistry-f06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "5.55/95.21=0.05829 mol; /0.500 L",
+     "final_answer": "0.117 M MgCl2",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "M1V1=M2V2: 0.1166×500/2500",
+     "final_answer": "0.0233 M",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "2 Cl- per MgCl2: 2×0.1166",
+     "final_answer": "0.233 M Cl-",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Same moles of ions but in 5x volume, so ion concentration is lower; fewer charge carriers per volume",
+     "final_answer": "Worse — the diluted solution has a lower concentration of Mg2+ and Cl- ions (1/5 as much), so fewer mobile ions per unit volume carry current.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clear four-part short FRQ on molarity, dilution, ion concentration and conductivity. Keys verified, and the load is appropriate. Per-part skill tags differ, which is acceptable under the instructions.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The content is in scope for 3.7 with the allowed related topics. Each part is judged against its own tagged skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All values are correct and the rubric rows are consistent. The 0.233 value in part C is within tolerance of 0.2332."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item with no distractors. The common-error lists are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light and suitable for a 4-point short question with a calculator."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Four routine, linked steps: mass to moles to molarity (with mL to L conversion), dilution via M1V1=M2V2, ion stoichiometry (2 Cl- per MgCl2), and a brief qualitative claim about conductivity based on ion concentration. Each part needs a single well-known relationship, arithmetic is short and clean, and the wording is unambiguous. Fits foundational skill practice rather than a challenging mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_chemistry-f06-k1",
+  "cellId": "ap_chemistry-f06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "5.55/58.44=0.0950 mol; /0.250 L",
+     "final_answer": "0.380 M",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "M1V1=M2V2: 0.380(250)/1000",
+     "final_answer": "0.0950 M",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "1 Cl- per NaCl, complete dissociation",
+     "final_answer": "0.380 M",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Same moles of ions in 4x volume, so lower concentration of mobile ions means fewer charge carriers per volume",
+     "final_answer": "Worse; ion concentration is 1/4 of original, fewer charge carriers per unit volume",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Valid short FRQ made of four 1-point parts. The keys are correct and the stimulus is complete. Part C is trivial (a 1:1 ion ratio), but that is acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All parts are in 3.7 and its related topics. Part C is tagged 4.A and part D is tagged 2.B, which is fine because each part is judged against its own tag."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are unique and correct. The rubric rows are consistent with the model answers."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives the mass, molar mass and both volumes. No figure is needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to a free-response item. The listed common errors are plausible."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light and consistent with a 4-point short question. A calculator is allowed."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Straightforward molarity, dilution (M1V1=M2V2) and 1:1 ion dissociation calculations with clean numbers, plus a brief qualitative conductivity justification. Each part needs 1-2 steps, with only a mL-to-L conversion as a lever. Concept depth is introductory and suits skill practice rather than full-mock exam-level discrimination.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_chemistry-f06-k2",
+  "cellId": "ap_chemistry-f06",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "22.2/58.44=0.380 mol; /0.500 L",
+     "final_answer": "0.760 M",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "M1V1=M2V2: 0.760*500/2500",
+     "final_answer": "0.152 M",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "NaCl dissociates 1:1 into Na+ and Cl-",
+     "final_answer": "0.760 M Cl⁻",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Fewer ions per unit volume carry less current",
+     "final_answer": "Worse: after dilution there are fewer Na+ and Cl- ions per unit volume (0.152 M vs 0.760 M), so fewer charge carriers move through a given volume.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The chemistry and keys are correct and in scope. It fails exam suitability because Part C (1:1 ion count) is trivial and the item as a whole is low-demand.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A and B target 5.F in topic 3.7 (molarity and dilution), and Part D uses a conductivity argument. Part C is tagged 4.A and is a trivial 1:1 ion count; it is still a related skill and acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are unique and consistent with the solver. The 0.760 M and 0.1520 M values are correct. The rubric for D requires both the direction (worse) and the justification (lower ion concentration), which is clear. The model answer for C says 'these ions' rather than naming Cl-, a minor wording flaw."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus is complete text with all needed data, and the empty data object is fine for a text stimulus. The model answers in C and D use generic wording. The B model answer shows 0.1520, which implies 4 significant figures from a 3-significant-figure input, a minor inconsistency."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. Common errors are listed for each row: using mL for the volume, dividing by the volume of water added, and the ion-count mistake."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item is low-demand and not very exam-like. Part C is trivial because NaCl gives 1:1 ions, so the 1-point ion-count step tests almost nothing. Part B repeats the same relation as A with no new reasoning. Part D is a simple qualitative claim. The short-FRQ structure of four 1-point parts is acceptable, but the cognitive demand is thin compared with an AP short question. This is a borderline fail on suitability, mainly because of Part C."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Routine molarity, dilution and 1:1 ion concentration calculations, plus a brief qualitative conductivity justification. Each part uses a single standard relationship (M = n/V, M1V1 = M2V2, stoichiometric dissociation). Numbers are clean, with a mL-to-L conversion and a 5x dilution factor. Parts A-C are mostly recall and direct application. Part D needs one reasoning step linking lower ion concentration to lower conductivity. This is well suited to foundational practice rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_chemistry-f07-k0",
+  "cellId": "ap_chemistry-f07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "HNO3 dissociates completely, so [H+] = 0.02 M and pH = -log(0.02) = 1.70",
+     "final_answer": "pH = 1.70",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Each Ba(OH)2 gives 2 OH-, so [OH-] = 0.050 M, pOH = 1.30 and pH = 14 - 1.30 = 12.70",
+     "final_answer": "pH = 12.70",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "mol H+ = 0.025 L x 0.02 M = 5.0e-4 mol. Each Ba(OH)2 supplies 2 OH-, so 2.5e-4 mol Ba(OH)2 is needed. Volume = 2.5e-4 mol / 0.025 M = 0.010 L = 10 mL",
+     "final_answer": "10 mL",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "A strong acid and a strong base react completely to give water and Ba(NO3)2. Neither Ba2+ nor NO3- hydrolyzes, so [H+] = [OH-] = 1e-7 M at 25 °C",
+     "final_answer": "pH = 7.00",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Four 1-point parts: strong acid pH, Ba(OH)2 pH, neutralization volume, and equivalence-point pH with justification. All keys check out (1.70, 12.70, 10.0 mL, pH 7). The independent solver agreed on every part.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A-C are calculations (5.F) in topic 8.2. Part D uses 4.A/6.D for the neutral equivalence point, which is in scope for 8.1/4.3. Each part fits its own tagged skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are unique and unambiguous. The rubric rows are consistent with the model answers. The standard 25 °C assumption is stated in the stimulus."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives concentrations and temperature, and the parts supply the 25 mL volume. The stimulus is complete and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no options. The rubric rows list common errors, such as ignoring the 2 OH⁻ per Ba(OH)2 and giving the pOH instead of the pH."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The arithmetic load is light and the calculator is allowed, which suits a 4-point short question. About 9 minutes is reasonable."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four short parts on strong acid/base pH and neutralization. The main difficulty comes from recognizing that Ba(OH)₂ gives 2 OH⁻ (Part B), applying the 1:2 mole ratio with an mL-to-L conversion (Part C), and justifying pH 7 at equivalence via a neutral salt of a strong acid and strong base (Part D). The arithmetic is clean and the wording is unambiguous. Everything is in scope for 8.2, 8.1 and 4.3, and the item is appropriate for a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_chemistry-f07-k1",
+  "cellId": "ap_chemistry-f07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Strong monoprotic acid: [H+]=0.01 M, pH=-log(0.01)",
+     "final_answer": "pH = 2.00",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Ba(OH)2 gives 2 OH-: [OH-]=0.010 M, pOH=2, pH=14-2",
+     "final_answer": "pH = 12.00",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "mol H+ = 0.025 L x 0.01 M = 2.5e-4 mol; Ba(OH)2 needed = 1.25e-4 mol; 1.25e-4 / 0.005 M = 0.025 L",
+     "final_answer": "25 mL",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Strong acid + strong base make Ba(NO3)2. Neither ion hydrolyzes, so the solution is neutral at 25 °C",
+     "final_answer": "pH = 7",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean 4-point short FRQ with four 1-point parts on strong acid and base pH, neutralization volume, and equivalence-point pH. All keys are correct and match the independent solver. It is within Unit 8 scope and suitable for the exam.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A-C are 5.F calculations on topic 8.2, and part D is a justification tagged 4.A/6.D on topic 8.1/4.3, which is allowed. No content from later units."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are unique and correct: pH 2.00, pH 12.00, 25.0 mL, and pH 7. Each rubric row is 1 point with common errors listed. The pH 7 condition holds at 25 °C, which the stimulus states."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "A text stimulus with concentrations and temperature is sufficient, and the 25 mL volume is given in part C. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no options. The common-error rows (the OH⁻ stoichiometry factor, a pH below 7 from using an acid) are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light, with simple numbers and a calculator allowed. The estimated time of about 9 minutes is reasonable for a short FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four short parts with clean numbers: strong-acid pH, strong-base pH needing the 2 OH- per Ba(OH)2 factor and pOH-to-pH conversion, neutralization volume with mL/L conversion, and a conceptual justification of a neutral equivalence point. Concept depth is moderate, with a few distinct routines and one claim-justification step. No unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_chemistry-f07-k2",
+  "cellId": "ap_chemistry-f07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "HNO3 is a strong acid, so [H+] = 0.05 M and pH = -log(0.05) = 1.30.",
+     "final_answer": "pH = 1.30",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Each Ba(OH)2 gives 2 OH-, so [OH-] = 0.050 M. pOH = 1.30, so pH = 14.00 - 1.30 = 12.70.",
+     "final_answer": "pH = 12.70",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "mol H+ = 0.025 L x 0.05 M = 1.25e-3 mol. mol Ba(OH)2 needed = 6.25e-4 mol. Volume = 6.25e-4 / 0.025 M = 0.025 L.",
+     "final_answer": "25 mL",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "A strong acid neutralized by a strong base leaves only water and Ba(NO3)2. Neither Ba2+ nor NO3- hydrolyzes (both are conjugates of a strong base or strong acid), so [H+] = [OH-] = 1e-7 M at 25 C.",
+     "final_answer": "pH = 7.00",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Four 1-point parts on strong acid and base pH, neutralization volume, and equivalence-point pH. All keys are correct and match the independent solver. The scenario is generic and fits topics 8.2, 8.1 and 4.3. Part D is tagged 4.A/6.D and is judged against its own justification row. The 25 mL volume and the 25 °C assumption are given, and calculator use is appropriate.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A-C use skill 5.F on topic 8.2. Part D is a topic 8.1/4.3 justification judged against its own skill tags (4.A, 6.D), which is acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Every answer is unique and defensible. Part D's rubric requires pH 7 and a spectator-ion justification, which is consistent with the model answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus gives both concentrations and the temperature. The 25 mL acid volume appears in Part C's prompt. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common-error notes in the rubric rows are realistic, such as ignoring the two OH⁻ ions per formula unit."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light and fits a 4-point short FRQ. There is no needless arithmetic, and the calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Four short parts on standard routines: pH of a strong monoprotic acid, pH of a strong base with a 2:1 hydroxide stoichiometry, a mole-ratio neutralization volume with mL handling, and a conceptual justification that the equivalence point of a strong acid-strong base reaction is pH 7 because the spectator ions do not hydrolyze. The numbers are clean, reading is minimal, and each part needs at most 2-3 steps. This fits foundational practice better than a full-mock item. The only mild complexity is the 2 OH- per Ba(OH)2 step and the justification wording.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ }
+]

@@ -25,6 +25,9 @@ export function chemExamCount(r: { kind: string; difficultyProvisional?: string 
   return r.difficultyProvisional === "exam_prep" ? 1 : 0;
 }
 
+/** 2026-10-19 새 FRQ 시나리오(두 번째 벌)가 채우는 칸: 긴 문항 3칸·짧은 문항 4칸(유형 칸은 배점 구조일 뿐 주제를 정하지 않는다). */
+const FRQ_SLOT: Record<string, string> = { chf_long_buffer: "chf_long_titration", chf_long_ksp: "chf_long_thermo", chf_long_calorimetry: "chf_long_kinetics", chf_short_massspec: "chf_short_pes", chf_short_gas_mix: "chf_short_stoich", chf_short_solution: "chf_short_bonding", chf_short_neutral: "chf_short_equilibrium" };
+
 export function loadChemPool(opts: { requireScreen?: boolean; files?: string[] } = {}) {
   const scan = new Set((JSON.parse(readFileSync("data/ap/stock/defect-scan.json", "utf-8")) as { key: string }[]).map((r) => r.key));
   const ev = new Set<string>();
@@ -38,7 +41,7 @@ export function loadChemPool(opts: { requireScreen?: boolean; files?: string[] }
   const cl = clusterLookAlikes(mc.map(({ i }) => ({ key: i.stockKey, family: i.itemFamilyId, archetype: String(i.payload.archetype ?? i.archetype ?? ""), topic: i.keywordCode, stimKind: (i.payload.stimulus as { kind?: string } | undefined)?.kind ?? "none", stem: String(first(i).stem ?? ""), thinking: first(i).blueprint?.student_thinking })));
   const all: ChemItem[] = gated.map(({ i, g }) => ({
     key: i.stockKey, kind: i.kind === "mc" ? "mc" : "frq", shared: i.kind === "mc" && Array.isArray(i.payload.items), members: chemMembers(i),
-    fam: i.kind === "mc" ? (cl.effectiveFamily.get(i.stockKey) ?? i.itemFamilyId) : i.itemFamilyId, frqType: i.kind === "frq_bundle" ? String(i.payload.archetype ?? i.archetype ?? i.keywordCode) : "",
+    fam: i.kind === "mc" ? (cl.effectiveFamily.get(i.stockKey) ?? i.itemFamilyId) : i.itemFamilyId, frqType: i.kind === "frq_bundle" ? FRQ_SLOT[String(i.payload.archetype ?? i.archetype ?? i.keywordCode)] ?? String(i.payload.archetype ?? i.archetype ?? i.keywordCode) : "",
     archetype: String(i.payload.archetype ?? i.archetype ?? ""), screen: ev.has(i.stockKey), batch: batchOf.get(i.stockKey) ?? "", renderType: g.renderType, stimKind: g.stimKind, exam: chemExamCount(i),
   }));
   const pool = opts.requireScreen === false ? all : all.filter((c) => c.screen);

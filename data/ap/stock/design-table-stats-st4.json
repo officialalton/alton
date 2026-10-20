@@ -1,0 +1,956 @@
+{
+ "set": "ST4",
+ "report": "data/ap/stock/exact-assign-stats-st4-p4.json",
+ "generatedBy": "scripts/ap-generation/new6-design-table.ts",
+ "note": "내용=토픽, 기능=스킬, 표현=자료 형태, 추론=난이도 판정기 라벨·풀이 단계, 중복=원형·문항군. 정답 유일성: 파이프라인의 독립 풀이(Opus·Sonnet)+검토+패널 기록은 각 후보 verification/review 에 있다.",
+ "rows": [
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m01-k0",
+   "kind": "mc",
+   "archetype": "st_n_operational_variables",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m01-k0",
+   "duplicateOf": null,
+   "content": [
+    "1.2"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m02-k0",
+   "kind": "mc",
+   "archetype": "st_n_graph_answers_question",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m02-k0",
+   "duplicateOf": null,
+   "content": [
+    "1.5"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "stat_chart",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m03-k0",
+   "kind": "mc",
+   "archetype": "st_n_followup_question",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m03-k0",
+   "duplicateOf": null,
+   "content": [
+    "1.10"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m04-k1",
+   "kind": "mc",
+   "archetype": "st_n_bar_axis",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m04-k1",
+   "duplicateOf": null,
+   "content": [
+    "1.4"
+   ],
+   "function": [
+    "4.A"
+   ],
+   "representation": "stat_chart",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m05-k1",
+   "kind": "mc",
+   "archetype": "st_n_five_number_list",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m05-k1",
+   "duplicateOf": null,
+   "content": [
+    "1.7"
+   ],
+   "function": [
+    "3.B"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 3
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m06-k0",
+   "kind": "mc",
+   "archetype": "st_n_outlier_removal",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m06-k0",
+   "duplicateOf": null,
+   "content": [
+    "1.7"
+   ],
+   "function": [
+    "4.C"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m07-k0",
+   "kind": "mc",
+   "archetype": "st_n_boxplot_percent",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m07-k0",
+   "duplicateOf": null,
+   "content": [
+    "1.8"
+   ],
+   "function": [
+    "4.D"
+   ],
+   "representation": "stat_chart",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m08-k0",
+   "kind": "mc",
+   "archetype": "st_n_random_digits",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m08-k0",
+   "duplicateOf": null,
+   "content": [
+    "1.11"
+   ],
+   "function": [
+    "2.B"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m09-k0",
+   "kind": "mc",
+   "archetype": "st_n_nonresponse_fix",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m09-k0",
+   "duplicateOf": null,
+   "content": [
+    "1.12"
+   ],
+   "function": [
+    "2.B"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m10-k0",
+   "kind": "mc",
+   "archetype": "st_n_blinding_purpose",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m10-k0",
+   "duplicateOf": null,
+   "content": [
+    "1.13"
+   ],
+   "function": [
+    "2.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m11-k1",
+   "kind": "mc",
+   "archetype": "st_n_at_least_one",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m11-k1",
+   "duplicateOf": null,
+   "content": [
+    "2.7"
+   ],
+   "function": [
+    "3.C"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m12-k0",
+   "kind": "mc",
+   "archetype": "st_n_binom_mean_sd",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m12-k0",
+   "duplicateOf": null,
+   "content": [
+    "2.10"
+   ],
+   "function": [
+    "3.D"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-b:ap_statistics-m01-k2",
+   "kind": "mc",
+   "archetype": "st_set_normal_means_q1",
+   "family": "fam:stats-r19-p4-b:ap_statistics-m01-k2",
+   "duplicateOf": null,
+   "content": [
+    "2.11",
+    "2.12",
+    "2.12"
+   ],
+   "function": [
+    "3.C",
+    "3.D",
+    "3.C"
+   ],
+   "representation": "stat_chart",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    },
+    {
+     "label": "basic_learning",
+     "steps": 2
+    },
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m13-k0",
+   "kind": "mc",
+   "archetype": "st_n_empirical_rule",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m13-k0",
+   "duplicateOf": null,
+   "content": [
+    "2.11"
+   ],
+   "function": [
+    "3.C"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m14-k0",
+   "kind": "mc",
+   "archetype": "st_n_valid_distribution",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m14-k0",
+   "duplicateOf": null,
+   "content": [
+    "2.8"
+   ],
+   "function": [
+    "2.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m15-k0",
+   "kind": "mc",
+   "archetype": "st_n_sampling_dist_dots",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m15-k0",
+   "duplicateOf": null,
+   "content": [
+    "2.12"
+   ],
+   "function": [
+    "4.C"
+   ],
+   "representation": "stat_chart",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m16-k0",
+   "kind": "mc",
+   "archetype": "st_n_cond_interpret",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m16-k0",
+   "duplicateOf": null,
+   "content": [
+    "2.6"
+   ],
+   "function": [
+    "4.D"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m17-k0",
+   "kind": "mc",
+   "archetype": "st_n_phat_dist_change",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m17-k0",
+   "duplicateOf": null,
+   "content": [
+    "3.2"
+   ],
+   "function": [
+    "2.D"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m18-k1",
+   "kind": "mc",
+   "archetype": "st_n_method_from_counts",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m18-k1",
+   "duplicateOf": null,
+   "content": [
+    "3.14"
+   ],
+   "function": [
+    "2.C"
+   ],
+   "representation": "stat_chart",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m19-k1",
+   "kind": "mc",
+   "archetype": "st_n_diff_parameter",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m19-k1",
+   "duplicateOf": null,
+   "content": [
+    "3.9"
+   ],
+   "function": [
+    "2.A"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m20-k0",
+   "kind": "mc",
+   "archetype": "st_n_alpha_relation",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m20-k0",
+   "duplicateOf": null,
+   "content": [
+    "3.8"
+   ],
+   "function": [
+    "2.D"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m21-k1",
+   "kind": "mc",
+   "archetype": "st_n_ci_sample_size",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m21-k1",
+   "duplicateOf": null,
+   "content": [
+    "3.3"
+   ],
+   "function": [
+    "3.E"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m23-k0",
+   "kind": "mc",
+   "archetype": "st_n_two_prop_ci",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m23-k0",
+   "duplicateOf": null,
+   "content": [
+    "3.10"
+   ],
+   "function": [
+    "3.E"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m25-k0",
+   "kind": "mc",
+   "archetype": "st_n_diff_ci_interpret",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m25-k0",
+   "duplicateOf": null,
+   "content": [
+    "3.10"
+   ],
+   "function": [
+    "4.F"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 3
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-d:ap_statistics-m01-k0",
+   "kind": "mc",
+   "archetype": "st_n_chisq_stat",
+   "family": "fam:stats-r19-p4-d:ap_statistics-m01-k0",
+   "duplicateOf": null,
+   "content": [
+    "3.15"
+   ],
+   "function": [
+    "3.E"
+   ],
+   "representation": "stat_chart",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 3
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-d:ap_statistics-m02-k0",
+   "kind": "mc",
+   "archetype": "st_n_ci_claim_threshold",
+   "family": "fam:stats-r19-p4-d:ap_statistics-m02-k0",
+   "duplicateOf": null,
+   "content": [
+    "3.4"
+   ],
+   "function": [
+    "4.G"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m26-k1",
+   "kind": "mc",
+   "archetype": "st_n_clt_conditions_choice",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m26-k1",
+   "duplicateOf": null,
+   "content": [
+    "4.1"
+   ],
+   "function": [
+    "2.D"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m27-k0",
+   "kind": "mc",
+   "archetype": "st_n_hyp_two_means",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m27-k0",
+   "duplicateOf": null,
+   "content": [
+    "4.9"
+   ],
+   "function": [
+    "2.E"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-b:ap_statistics-m02-k2",
+   "kind": "mc",
+   "archetype": "st_set_model_compare_q1",
+   "family": "fam:stats-r19-p4-b:ap_statistics-m02-k2",
+   "duplicateOf": null,
+   "content": [
+    "5.4",
+    "5.5",
+    "5.4"
+   ],
+   "function": [
+    "3.B",
+    "4.A",
+    "4.D"
+   ],
+   "representation": "stat_chart",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    },
+    {
+     "label": "basic_learning",
+     "steps": 2
+    },
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m28-k0",
+   "kind": "mc",
+   "archetype": "st_n_t_vs_z",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m28-k0",
+   "duplicateOf": null,
+   "content": [
+    "4.2"
+   ],
+   "function": [
+    "2.C"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m29-k0",
+   "kind": "mc",
+   "archetype": "st_n_ci_endpoints_stats",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m29-k0",
+   "duplicateOf": null,
+   "content": [
+    "4.2"
+   ],
+   "function": [
+    "3.B"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m30-k0",
+   "kind": "mc",
+   "archetype": "st_n_me_t_table",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m30-k0",
+   "duplicateOf": null,
+   "content": [
+    "4.2"
+   ],
+   "function": [
+    "3.E"
+   ],
+   "representation": "stat_chart",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m31-k1",
+   "kind": "mc",
+   "archetype": "st_n_diff_means_claim",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m31-k1",
+   "duplicateOf": null,
+   "content": [
+    "4.8"
+   ],
+   "function": [
+    "4.G"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m32-k1",
+   "kind": "mc",
+   "archetype": "st_n_scope_of_inference",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m32-k1",
+   "duplicateOf": null,
+   "content": [
+    "4.10"
+   ],
+   "function": [
+    "4.D"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m33-k0",
+   "kind": "mc",
+   "archetype": "st_n_pred_one_sd",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m33-k0",
+   "duplicateOf": null,
+   "content": [
+    "5.3"
+   ],
+   "function": [
+    "3.B"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m35-k0",
+   "kind": "mc",
+   "archetype": "st_n_residual_meaning",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m35-k0",
+   "duplicateOf": null,
+   "content": [
+    "5.4"
+   ],
+   "function": [
+    "4.D"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m36-k0",
+   "kind": "mc",
+   "archetype": "st_n_corr_causation",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m36-k0",
+   "duplicateOf": null,
+   "content": [
+    "5.2"
+   ],
+   "function": [
+    "4.B"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 1
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-d:ap_statistics-m03-k0",
+   "kind": "mc",
+   "archetype": "st_n_extrapolation",
+   "family": "fam:stats-r19-p4-a:ap_statistics-m34-k1",
+   "duplicateOf": null,
+   "content": [
+    "5.3"
+   ],
+   "function": [
+    "4.D"
+   ],
+   "representation": "none",
+   "reasoning": [
+    {
+     "label": "basic_learning",
+     "steps": 2
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-e:ap_statistics-f01-k1",
+   "kind": "frq_bundle",
+   "archetype": "stfrq_n4_q1_stratified",
+   "family": "fam:stats-r19-p4-e:ap_statistics-f01-k1",
+   "duplicateOf": null,
+   "content": [
+    "1.10"
+   ],
+   "function": [
+    "1.A"
+   ],
+   "representation": "table",
+   "reasoning": [
+    {
+     "label": "exam_prep",
+     "steps": 6
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-c:ap_statistics-f02-k1",
+   "kind": "frq_bundle",
+   "archetype": "stfrq_n4_q2_table",
+   "family": "fam:stats-r19-p4-c:ap_statistics-f02-k1",
+   "duplicateOf": null,
+   "content": [
+    "5.3"
+   ],
+   "function": [
+    "4.D"
+   ],
+   "representation": "table",
+   "reasoning": [
+    {
+     "label": "exam_prep",
+     "steps": 5
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-c:ap_statistics-f03-k0",
+   "kind": "frq_bundle",
+   "archetype": "stfrq_n4_q3_twomeans",
+   "family": "fam:stats-r19-p4-c:ap_statistics-f03-k0",
+   "duplicateOf": null,
+   "content": [
+    "4.10"
+   ],
+   "function": [
+    "3.E"
+   ],
+   "representation": "text",
+   "reasoning": [
+    {
+     "label": "exam_prep",
+     "steps": 6
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "stats-r19-p4-c:ap_statistics-f04-k0",
+   "kind": "frq_bundle",
+   "archetype": "stfrq_n4_q4_chisq",
+   "family": "fam:stats-r19-p4-c:ap_statistics-f04-k0",
+   "duplicateOf": null,
+   "content": [
+    "2.6"
+   ],
+   "function": [
+    "3.C"
+   ],
+   "representation": "stat_chart",
+   "reasoning": [
+    {
+     "label": "exam_prep",
+     "steps": 9
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  }
+ ]
+}

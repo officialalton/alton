@@ -1,0 +1,164 @@
+[
+ {
+  "key": "ap_statistics-m01-k0",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "x=8 lies inside the observed range of 2 to 10, so predicting there is interpolation. x=1, 12 and 22 are all outside that range, so those would be extrapolation. At x=22 the line even gives a negative value (30 − 48.4 = −18.4).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "B"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Extrapolation vs interpolation, within 5.3; interpretation/claim justification fits 4.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only x=8 lies within 2 to 10; key B unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem gives the data range. Minor wording slip ('its resale value') is not ambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option encodes a distinct misconception and the explanation covers all three."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no arithmetic, four parallel options with similar length."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, unambiguous extrapolation item with a unique key and distinct distractors. Passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: identify the prediction that is interpolation (x=8 within 2 to 10) versus extrapolation (12, 22, and 1 outside the data range). One reasoning step, no computation, no representation change, short reading. Distractors are common misconceptions (strong r or least-squares justifying extrapolation), but the concept depth is introductory.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k1",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "x=4 lies inside the observed range of x (2 to 12), so predicting there is interpolation. The other three values (1, 14 and 24) fall outside that range, so those predictions would be extrapolation.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "The prediction for x = 4 (interpolation)"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Interpolation vs extrapolation in 5.3; interpreting a claim about reliability fits 4.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only x=4 is within 2 to 12; unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem gives all necessary information."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception and the explanation addresses each. The key is somewhat longer but not a giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, no arithmetic, appropriate load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean: a unique key, distinct misconceptions in the distractors and a suitable load. It passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: identify which x-value lies within the observed range (interpolation) versus extrapolation. One reasoning step, no computation, short stem; distractors are standard misconceptions about extrapolation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k2",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "x=5 lies within the data range 3–15, so this prediction is interpolation. The other three values are outside that range, so predicting them would be extrapolation.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "A"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.3 prediction and extrapolation, interpreting a claim about reliability (4.D). In scope, no deleted topics."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only x=5 lies in the range 3-15; the other three values are all outside it. The key is unique and defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed; the stem gives the line, units and range. The wording is clear. Options are text sentences, which is acceptable for an interpretation item."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (closeness to the range, least-squares fit, strong correlation). The explanation addresses each wrong option. The key is slightly longer than the others, but this is not a strong giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-85 seconds with no arithmetic and a light reading load. Calculator designation is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean interpolation versus extrapolation question with a unique key and distinct, realistic distractors. It fits topic 5.3 and skill 4.D and passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single concept (interpolation vs extrapolation). Student compares each x to the data range 3-15 and picks the one inside it. Distractors are common misconceptions about extrapolation. No computation and minimal reading, so the item is straightforward.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ }
+]

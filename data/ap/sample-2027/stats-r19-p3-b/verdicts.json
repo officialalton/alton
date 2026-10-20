@@ -1,0 +1,997 @@
+[
+ {
+  "key": "ap_statistics-m01-k0-q1",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "P(X>=3)=P(3)+P(4)=0.08+0.22=0.30",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "0.30"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.8 probability from a discrete distribution table; skill 3.C fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Table sums to 1; P(X>=3)=0.30 unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data complete with title, columns, rows; rounding stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (boundary excluded, complement, single value); each explained. Key explanation is thin but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick, light reading, appropriate load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean, simple item with a valid table and distinct distractors; passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step item: interpret 'at least 3' and add two table probabilities (0.08 + 0.22 = 0.30). Distractors reflect common slips: only X=4, the complement P(X<=2), and only X=3. It involves no multi-step reasoning, no representation change beyond reading a small table, and trivial arithmetic. It is appropriate for introductory understanding of discrete probability distributions rather than full-mock exam depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k0-q2",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "E(X)=0(.39)+1(.13)+2(.18)+3(.08)+4(.22)=1.61",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "1.61"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Direct mean of a discrete RV from a table; fits 2.9 and 3.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Mean = 1.61; probabilities sum to 1; unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data complete with title and column labels; rounding stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Mode (0.00), mean of squares (5.09), unweighted average (2.00) are distinct, realistic misconceptions; all explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, light arithmetic, calculator allowed, typical AP MC load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean, in-scope item with a unique key and well-motivated distractors; passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks for the mean of a discrete random variable from a 5-row table. It needs one direct application of the formula sum x*P(x), with light arithmetic (result 1.61). The counted 2 steps and single source fall below the exam_prep rubric threshold of 3 steps. Distractors are simple (0.00, 5.09 as a sum of x or similar, 2.00 as the median or midpoint), so no extra reasoning is needed.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k0-q3",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "Mean = 1.61 and SD = sqrt(5.09 - 1.61^2) ≈ 1.58. The SD is the typical distance of values from the mean. B is false, C mixes up mean and SD, and D describes the variance.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 80 seconds, has a light reading load, and has four parallel options.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean interpretation item on the SD of a discrete random variable. The key is unique and the distractors are distinct. Passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: identify the correct interpretation of the standard deviation of a discrete random variable among named misinterpretations (maximum deviation, mean, variance). The mean of 1.61 is verified consistent with the table (variance about 2.50, SD about 1.58), and the student does not need to compute anything. Reading and computation load are minimal and the table is simple, so this is a straightforward recognition of the standard definition.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k1-q1",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "P(X>=3)=P(3)+P(4)=0.38+0.08=0.46",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "0.46"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reading a discrete probability distribution table and computing P(X>=3) fits topic 2.8 and skill 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Probabilities sum to 1. P(X>=3)=0.38+0.08=0.46 is the unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data is complete, with title, columns and rows. The stem states the rounding convention and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors are distinct misconceptions: single value, boundary excluded, complement. Each is explained. The key explanation is thin but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, no heavy arithmetic. Very easy but acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound, easy MC on a discrete distribution table. The key is correct and unique, and the distractors are distinct and explained."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step discrete probability: read the table and add P(3) + P(4) = 0.46. The only conceptual demand is interpreting 'at least'. Distractors are P(X=3), P(X=4), and the complement. Minimal reading, trivial arithmetic, no representation change beyond reading the table.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k1-q2",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "E(X)=0(.28)+1(.12)+2(.14)+3(.38)+4(.08)=0.12+0.28+1.14+0.32=1.86",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "1.86"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Mean of a discrete RV from a table: exactly topic 2.9 / skill 3.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Probabilities sum to 1; mean 1.86 is unique and correct. Distractors 2.00, 3.00, 5.38 verified as wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data complete with title, column labels, and values; rounding stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct realistic misconceptions (unweighted mean, mode, mean of squares); each wrong option explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, light arithmetic, calculator allowed, short parallel numeric options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, standard item. The key of 1.86 is correct and unique, and the distractors are distinct and verified. The stimulus is complete and the load is appropriate. Accept."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: compute E(X) = sum of x*P(x) from one table. Two sequential steps (multiply, then sum), light arithmetic, and one source. This falls under the rubric's basic_learning cutoff of 2 or fewer steps and a single concept. The distractors are a plain sum of x-values and a few other wrong results, with no deeper reasoning needed.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k1-q3",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "Mean = 1.86. E[X^2] = 5.38, so the variance is 5.38 − 1.86² = 1.9204 and the SD is about 1.386 ≈ 1.39, which matches the stem. The SD describes how far a typical value is from the mean. Option D describes the variance, not the SD.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Interpreting the SD of a discrete random variable is squarely topic 2.9, skill 4.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique correct interpretation. Mean 1.86 and SD about 1.39 verified; probabilities sum to 1."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data is complete, with title, columns and rows. The stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions (mean, maximum deviation, variance). Each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, with no arithmetic needed. Options are parallel and similar in length."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean interpretation question on the SD of a discrete random variable. The key is unique and verified, the distractors are distinct, and the load is appropriate. It passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: recognize the correct interpretation of the standard deviation of a discrete random variable. The SD and mean are given or easily checked (mean 1.86, SD about 1.386). Distractors are standard misinterpretations (confusing SD with the mean, a maximum deviation, or the variance). It needs no computation and only one reasoning step, so it suits foundational learning more than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k2-q1",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "P(X<=1)=P(0)+P(1)=0.17+0.11=0.28",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "0.28"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reading a discrete probability distribution and computing P(X<=1) fits 2.8 / 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Table sums to 1; P(X<=1)=0.17+0.11=0.28 is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data complete with title, columns, rows; rounding stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained. Key rationale is slightly vague but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-80 seconds, minimal reading, calculator not needed but harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A correct, clean, easy item. The table is a valid distribution, the key is unique, and the distractors are distinct and each explained."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: read a small discrete distribution table and add two probabilities for P(X ≤ 1) = 0.28. Distractors correspond to P(X=1), P(X=0), and the complement. One or two reasoning steps, trivial arithmetic, minimal reading, no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k2-q2",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "E(X)=0(.17)+1(.11)+2(.16)+3(.30)+4(.26)=2.37",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "2.37"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Mean of a discrete random variable from a table; matches topic 2.9 and skill 3.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "2.37 is unique; the other options are clearly distinct and wrong. Rounding to two decimals is stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data is complete, with columns, rows, and title; probabilities sum to 1. The stem says 'shown in the table' and the table is provided."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode three distinct misconceptions (unweighted mean, mean of squares, mode). The explanation addresses each wrong option. The key's 'why' is slightly terse but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick, light arithmetic, calculator allowed; about 85 seconds is typical."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean: the key of 2.37 is correct and unique, the table is complete, and the distractors are distinct. It fits topic 2.9 and skill 3.D."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct application of the expected value formula to a single probability table: multiply each x by its probability and sum. Counted steps are 2, below the 3-step threshold for exam_prep, and it uses one core concept with light arithmetic. Distractors (2.00 unweighted mean, 7.61 sum of x*P(x)^... style error, 3.00 median/mode-like) are plausible but do not add reasoning depth. No unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k2-q3",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "I checked the table: the mean is 2.37 and the SD is about 1.41. The SD is the typical distance of values from the mean, which is choice A. Choice B describes the variance, not the SD. Choice C is false because values can be farther than 1.41 from the mean. Choice D confuses the SD with the mean.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Interpreting SD of a discrete random variable; fits 2.9 and 4.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Mean 2.37 and SD 1.41 verified; A is the unique correct interpretation."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete with columns, rows, title; probabilities sum to 1."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions; each wrong option explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, no calculation needed, four parallel sentence options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, clean interpretation item. The key is unique and correct, the table is complete, and the distractors are distinct misconceptions. Accept."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept interpretation of the standard deviation of a discrete random variable. The mean and SD are consistent with the table (mean 2.37, SD about 1.41), so no calculation is needed. The student only has to pick the standard \"typical distance from the mean\" wording over the distractors: variance, a maximum deviation, and the mean. There is little reading or computation load and no representation change beyond reading the table.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m02-k0-q1",
+  "cellId": "ap_statistics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "yhat=3.13+4.18=7.31; residual=6.4-7.31=-0.91",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "-0.91"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Residual calculation from a given line, which fits topic 5.4 and skill 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "-0.91 is the unique correct answer: 6.4-7.31."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete and rounding is stated. The extra r=0.9 is unneeded but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions (sign reversed, predicted value reported, intercept omitted), and each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds with light arithmetic, consistent with a calculator-allowed Statistics MC."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean residual item with a correct key, distinct distractors and a complete table. The unused r=0.9 is a minor extra. Pass."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Two steps: compute the predicted weight at x=10 (3.13 + 0.418*10 = 7.31), then subtract it from the actual weight (6.4 - 7.31 = -0.91). Only one real concept is tested (residual = actual - predicted), with a single table lookup and light arithmetic. This falls under the rubric's basic_learning bound of 2 or fewer steps. The distractors (7.31 as the predicted value, 0.91 as a sign error) are plausible but do not add required reasoning steps.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m02-k0-q2",
+  "cellId": "ap_statistics-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "6.06 kg; reasonable, because 7 weeks is inside the observed age range (interpolation)",
+     "brief_reasoning": "Predicted weight = 3.13 + 0.418(7) ≈ 6.06 kg. Seven weeks is within the observed age range of 5–24 weeks, so the prediction is interpolation and is reasonable.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Prediction plus extrapolation check fits 5.3 / 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key A is unique: 6.06 and 7 is within 5-24."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data are complete with title and columns. r=0.9 is unused extra info, which is minor."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Explanation states the observed range as 5 to 24.8, but the table maximum is 24, which is a factual error. The 'outside the range' distractors are trivially rejected by looking at the table."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short and calculator use is light. The item is easy but within the typical range."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item is in scope. It fails only on the explanation, which gives the data range as 5 to 24.8 when the table maximum is 24. That should be corrected. The item is also very easy, and r=0.9 is unused."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Two sequential steps: compute the predicted value 3.13 + 0.418(7) ≈ 6.06, then check that 7 lies within the observed age range of 5 to 24 to judge interpolation versus extrapolation. This is below the exam_prep threshold of 3 steps. The arithmetic is light, the wording is clear, and the stem is short. No unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m02-k0-q3",
+  "cellId": "ap_statistics-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "resembles_known_exam_item"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "The point (24, 11.9) is far to the right and below the line, so it flattens the slope. Recalculating without it gives slope ≈ 0.587 (up from 0.418) and r ≈ 0.946 (up from 0.9).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Influential point effect on r and slope; in Unit 5 scope, interpretation of results."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key A is the unique correct combination (r up, slope up) per verified values."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table has labeled columns with units and a title; complete."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "All three wrong-option explanations are identical boilerplate ('does not match the recalculated values') and name no distinct misconception (e.g., thinking removing an outlier weakens r, or that an influential point increases slope). Does not explain why each is wrong."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Time and load typical; calculator use is reasonable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": true,
+   "summary": "The item is sound in scope, key, and stimulus. It fails on distractor explanations, which are generic boilerplate with no distinct misconceptions. It also closely mirrors a released AP item about removing the last observation from a nine-point age/weight table and its effect on r and slope."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item tests one concept, how removing a high-leverage point affects r and the slope. It takes 2 steps: locate the point relative to the line, then reason about its effect. That is below the rubric's threshold of 3 steps and 2 combined concepts for exam_prep. There is no arithmetic and the reading load is short, so none of the difficulty comes from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_statistics-m02-k1-q1",
+  "cellId": "ap_statistics-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_multiple_correct",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "-0.22",
+     "brief_reasoning": "Predicted temperature = 21.17 - 0.397(15) = 15.215. Residual = 15 - 15.215 = -0.215, which rounds to -0.22.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "A rounding tie at 0.215 is poor exam practice. The table is mostly irrelevant, since only one row is used.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "multiple_correct"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The residual is exactly -0.215, a tie at the rounding digit, so the key -0.22 is not uniquely defensible. The explanation also relies on an intermediate rounded prediction. Fail."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item takes two steps: plug x=15 into the given line to get 15.215, then compute residual = actual - predicted = 15 - 15.215 = -0.215, which rounds to -0.22. This is a single core skill (residual calculation) with light arithmetic. It does not reach the 3-step threshold for exam_prep. The distractors cover the sign error and reporting the predicted value or another quantity, but the item remains a direct application of the residual definition.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m02-k1-q2",
+  "cellId": "ap_statistics-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "17.99 °C, reasonable (interpolation)",
+     "brief_reasoning": "21.17-0.397*8=17.99; 8 is within the observed range of 7 to 41, so this is interpolation.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Prediction from line plus extrapolation judgment fits 5.3/3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "21.17-0.397*8=17.994≈17.99; 8 is within 7-41, so the key (reasonable, interpolation) is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table has title, column labels and units; complete. Rounding of the prediction (2 decimals) is evident from the options."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Explanation states the observed range as 7 to 41.6, but the data maximum is 41. Factual inconsistency in the rationale. Distractors otherwise encode distinct errors (intercept omitted, reliability reversed)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light arithmetic, about 100 seconds; options are long but parallel. The key is the same format as the distractors, with no extra giveaway."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key 17.99 with interpolation is unique and correct, and the table is complete. The explanation misstates the data range as 7 to 41.6 when the maximum is 41, which should be fixed. Fail only on that rationale error."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item takes two steps: substitute x = 8 into the line to get 17.99, then check that 8 lies within the observed range of 7 to 41, so the prediction is an interpolation. The two concepts are a predicted value and extrapolation. The rubric requires at least 3 steps for exam_prep, so this item fits basic_learning. Arithmetic is light, the stem is short, and there are no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m02-k1-q3",
+  "cellId": "ap_statistics-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Without (41,7.1): slope ≈ -0.632 (steeper than -0.397), r ≈ -0.98 (stronger than -0.92). The removed high-leverage point sits well above the trend of the others, so it flattened the line and weakened r.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Influential point effect on r and slope; Unit 5, interpretation skill fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key C unique; options exhaustive over the 2x2 combinations; solver agrees."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table has title, labeled columns with units, and complete data."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "All three wrong-option explanations are the same boilerplate sentence restating the true result; none names a distinct misconception (e.g., thinking an off-trend high-leverage point strengthens r, or that removing any point weakens r). The explanation does not teach why each is wrong."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, one dominant skill, calculator optional."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Content and key are sound, but the distractor rationales are generic boilerplate rather than distinct named misconceptions, so the distractor/explanation criterion fails."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Item requires recognizing a high-leverage point and reasoning about how its removal changes r and slope magnitude. The counted structure is 2 steps and 2 concepts, below the 3-step threshold for exam_prep. No arithmetic, short stem, no unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_statistics-m02-k2-q1",
+  "cellId": "ap_statistics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "0.12",
+     "brief_reasoning": "Predicted = 21.71-0.43(11)=16.98; residual = 17.1-16.98 = 0.12.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Residual computation from given line and table; fits 5.4 / 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Predicted 16.98, residual 0.12; unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table has title, column labels with units, nine rows; the needed row is present. Rounding stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct error; 21.83 arises from omitting the intercept (17.1+4.73). Explanation wording for it is slightly terse but valid."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds, light arithmetic, calculator designation fine."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean residual item with complete table and distinct distractors; acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Two sequential steps: compute the predicted value from the given line (16.98), then subtract it from the observed value (17.1 - 16.98 = 0.12). Only one core concept (the residual definition) is applied. This is below the exam_prep threshold of 3 steps. Distractors are the sign error and the predicted value itself. Arithmetic is light and the wording is clear, so no unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m02-k2-q2",
+  "cellId": "ap_statistics-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "-1.51 °C; not reliable because it is an extrapolation",
+     "brief_reasoning": "21.71-0.43(54)=-1.51. 54 is above the maximum observed elevation of 44, so the prediction is an extrapolation.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Prediction and extrapolation, topic 5.3, skill 3.B. In scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "-1.51 and extrapolation, since 54 > 44. Unique key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with titled columns, units and nine rows."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The explanation states the data range is 5 to 44.6, but the table maximum is 44. This is a factual error in the rationale shown to students."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light load, about 100 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key is correct and unique, and the distractors are distinct. The explanation misstates the data range as 5 to 44.6 when the table maximum is 44. This should be fixed before use."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item takes two steps: plug x=54 into the given line to get -1.51, then compare 54 with the data range (max 44) to identify extrapolation. This is a standard, direct application of prediction and the extrapolation concept, with light arithmetic and a short stem. It falls under the rubric's 2-or-fewer steps criterion, so it fits basic_learning rather than exam_prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m02-k2-q3",
+  "cellId": "ap_statistics-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "Point (44,5.2) has high leverage and a residual of about +2.4, which flattens the line. Without it, the slope is about -0.62 (larger in size than 0.43) and r is about -0.995 (stronger than -0.95).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Influential point effect on r and slope is in Unit 5 scope and fits interpretation/claim reasoning."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key D is consistent with supplied values and independent solver; unique among the four exhaustive combinations."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table complete with labels and units; wording clear. Minor: explanation states |r| = 1.00, which is a rounding of ~0.995 and misleading."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Distractor explanations are generic templates that name no misconception and give no reasoning; no explanation of why the point flattens the line (positive residual, high leverage). Distractors do not encode distinct named misconceptions."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Load and time are typical for an AP item; synthetic near-perfect linear data and r = 1.00 claim are slightly unrealistic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The content and key are sound, but the distractor explanations are generic templates with no named misconceptions or reasoning. The explanation also overstates |r| as 1.00. Fails the distractor/explanation criterion."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item takes 2 sequential steps (identify the high-leverage point, then judge its effect on r and slope) and applies one core idea, influential points. This meets the basic_learning criterion of 2 or fewer steps. It needs no arithmetic and has a short stem, and the wording is clear. One distractor survives the first step, but the item does not reach the 3-step requirement for exam_prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ }
+]

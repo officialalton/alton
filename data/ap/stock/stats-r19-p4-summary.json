@@ -1,0 +1,470 @@
+{
+ "difficultyAudit": {
+  "declared": 15,
+  "structuralExamPrep": 0,
+  "judgeExamPrep": 0,
+  "agreement": {
+   "agree": 15
+  },
+  "singlesExamPrepShare": 0,
+  "disagreements": []
+ },
+ "runs": [
+  "stats-r19-p4-a",
+  "stats-r19-p4-b",
+  "stats-r19-p4-c",
+  "stats-r19-p4-d",
+  "stats-r19-p4-e"
+ ],
+ "rows": 102,
+ "passed": 72,
+ "rejected": 30,
+ "exactDuplicates": 0,
+ "singles": {
+  "candidates": 81,
+  "passed": 64
+ },
+ "sets": {
+  "candidates": 6,
+  "passed": 2,
+  "questionsInPassedSets": 6
+ },
+ "frq": {
+  "candidates": 15,
+  "passed": 6
+ },
+ "uniquePassedItems": 76,
+ "structureFamilies": 42,
+ "itemFamilyIds": 42,
+ "perUnit": {
+  "1": 18,
+  "2": 14,
+  "3": 15,
+  "4": 10,
+  "5": 13
+ },
+ "perSkillCategory": {
+  "1": 6,
+  "2": 17,
+  "3": 22,
+  "4": 25
+ },
+ "rejectionReasons": [
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m04-k0",
+   "reason": "criterion_failed_stimulus_expression; criterion_failed_exam_suitability"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m05-k0",
+   "reason": "solver_disagrees:Option D (IQR 24) matches the quartile method that includes the median (Q1=17, Q3=41), so it is also defensible. A is correct under the standard AP convention."
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m11-k0",
+   "reason": "criterion_failed_distractor_explanation"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m18-k0",
+   "reason": "criterion_failed_scope_skill; criterion_failed_stimulus_expression; criterion_failed_exam_suitability; reference_pattern_mismatch"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m19-k0",
+   "reason": "criterion_failed_scope_skill"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m20-k1",
+   "reason": "criterion_failed_scope_skill; criterion_failed_exam_suitability; instant_reject_out_of_scope_knowledge; reference_pattern_mismatch"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m21-k0",
+   "reason": "criterion_failed_distractor_explanation"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m22-k0",
+   "reason": "criterion_failed_key_scoring; instant_reject_wrong_key"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m22-k1",
+   "reason": "criterion_failed_key_scoring; criterion_failed_distractor_explanation; instant_reject_wrong_key"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m24-k0",
+   "reason": "criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m24-k1",
+   "reason": "criterion_failed_distractor_explanation; criterion_failed_exam_suitability"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m25-k1",
+   "reason": "criterion_failed_stimulus_expression"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m26-k0",
+   "reason": "criterion_failed_key_scoring; criterion_failed_distractor_explanation"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m28-k1",
+   "reason": "criterion_failed_distractor_explanation"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m31-k0",
+   "reason": "criterion_failed_distractor_explanation; criterion_failed_exam_suitability"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m32-k0",
+   "reason": "criterion_failed_stimulus_expression; criterion_failed_exam_suitability; instant_reject_<; instant_reject_p; instant_reject_a; instant_reject_r; instant_reject_a; instant_reject_m; instant_reject_e; instant_reject_t; instant_reject_e; instant_reject_r; instant_reject_ ; instant_reject_n; instant_reject_a; instant_reject_m; instant_reject_e; instant_reject_=; instant_reject_\"; instant_reject__; instant_reject_\"; instant_reject_>; instant_reject_[; instant_reject_]"
+  },
+  {
+   "key": "stats-r19-p4-a:ap_statistics-m34-k0",
+   "reason": "solver_disagrees:The stem gives r = 0.96, but the slope is −4.34. The correlation must have the same sign as the slope, so r should be −0.96. This does not change the intended answer, but option D repeats the error.; criterion_failed_stimulus_expression"
+  },
+  {
+   "key": "stats-r19-p4-b:ap_statistics-m01-k0",
+   "reason": "criterion_failed_distractor_explanation; set_item_1:criterion_failed_distractor_explanation"
+  },
+  {
+   "key": "stats-r19-p4-b:ap_statistics-m01-k1",
+   "reason": "criterion_failed_distractor_explanation; set_item_1:criterion_failed_distractor_explanation"
+  },
+  {
+   "key": "stats-r19-p4-b:ap_statistics-m02-k0",
+   "reason": "criterion_failed_scope_skill; criterion_failed_stimulus_expression; criterion_failed_exam_suitability; reference_pattern_mismatch; set_item_1:criterion_failed_scope_skill; set_item_1:criterion_failed_stimulus_expression; set_item_1:criterion_failed_exam_suitability; set_item_1:reference_pattern_mismatch; set_item_2:criterion_failed_stimulus_expression; set_item_2:criterion_failed_exam_suitability; set_item_3:solver_disagrees:Both models are linear regressions of price on age (x) fit to the same 30 cars. Least squares gives only one line for given data, so two different equations, R-squared values and residual plots are inconsistent unless Model B uses a transformed variable, which is not stated. Both slopes are also positive (older cars cost more), which is implausible. The intended answer is still clearly D.; set_item_3:criterion_failed_key_scoring; set_item_3:criterion_failed_stimulus_expression; set_item_3:criterion_failed_exam_suitability; set_item_3:instant_reject_missing_condition; set_item_3:reference_pattern_mismatch; solver_disagrees:Both models are linear regressions of price on age (x) fit to the same 30 cars. Least squares gives only one line for given data, so two different equations, R-squared values and residual plots are inconsistent unless Model B uses a transformed variable, which is not stated. Both slopes are also positive (older cars cost more), which is implausible. The intended answer is still clearly D.; criterion_failed_key_scoring; instant_reject_missing_condition"
+  },
+  {
+   "key": "stats-r19-p4-b:ap_statistics-m02-k1",
+   "reason": "set_item_2:criterion_failed_distractor_explanation; set_item_2:criterion_failed_exam_suitability; set_item_3:solver_disagrees:Both models are least-squares lines of y on the same x from the same 30 households. That line is unique, so two different lines with different R-squared values are impossible. The stem doesn't say how Model B differs (e.g., transformed variables). The intended answer is still B.; set_item_3:criterion_failed_key_scoring; set_item_3:criterion_failed_stimulus_expression; set_item_3:instant_reject_missing_condition; set_item_3:reference_pattern_mismatch; criterion_failed_distractor_explanation; criterion_failed_exam_suitability; solver_disagrees:Both models are least-squares lines of y on the same x from the same 30 households. That line is unique, so two different lines with different R-squared values are impossible. The stem doesn't say how Model B differs (e.g., transformed variables). The intended answer is still B.; criterion_failed_key_scoring; criterion_failed_stimulus_expression; instant_reject_missing_condition; reference_pattern_mismatch"
+  },
+  {
+   "key": "stats-r19-p4-c:ap_statistics-f01-k0",
+   "reason": "solver_disagrees:B:flagged; criterion_failed_key_scoring"
+  },
+  {
+   "key": "stats-r19-p4-c:ap_statistics-f01-k1",
+   "reason": "solver_disagrees:B:flagged; criterion_failed_key_scoring; instant_reject_missing_condition"
+  },
+  {
+   "key": "stats-r19-p4-c:ap_statistics-f01-k2",
+   "reason": "solver_disagrees:B:flagged; criterion_failed_key_scoring; criterion_failed_distractor_explanation; instant_reject_wrong_key"
+  },
+  {
+   "key": "stats-r19-p4-c:ap_statistics-f02-k0",
+   "reason": "solver_disagrees:C:numeric; criterion_failed_key_scoring; criterion_failed_exam_suitability; instant_reject_wrong_key; instant_reject_missing_condition"
+  },
+  {
+   "key": "stats-r19-p4-c:ap_statistics-f02-k2",
+   "reason": "criterion_failed_key_scoring"
+  },
+  {
+   "key": "stats-r19-p4-c:ap_statistics-f03-k2",
+   "reason": "criterion_failed_key_scoring; criterion_failed_stimulus_expression"
+  },
+  {
+   "key": "stats-r19-p4-c:ap_statistics-f04-k1",
+   "reason": "criterion_failed_key_scoring; criterion_failed_stimulus_expression; instant_reject_missing_condition"
+  },
+  {
+   "key": "stats-r19-p4-c:ap_statistics-f04-k2",
+   "reason": "criterion_failed_key_scoring; criterion_failed_stimulus_expression; instant_reject_missing_condition"
+  },
+  {
+   "key": "stats-r19-p4-e:ap_statistics-f01-k0",
+   "reason": "duplicate_gate_near_duplicate"
+  }
+ ],
+ "costs": {
+  "stats-r19-p4-a": {
+   "byStage": {
+    "difficulty": 0.4982,
+    "review": 1.0014,
+    "review2": 0.1197,
+    "review4": 0.0107,
+    "solve": 0.4718
+   },
+   "total": 2.1018
+  },
+  "stats-r19-p4-b": {
+   "byStage": {
+    "difficulty": 0.156,
+    "review": 0.2933,
+    "review2": 0.061,
+    "review4": 0.0189,
+    "solve": 0.1764
+   },
+   "total": 0.7056
+  },
+  "stats-r19-p4-c": {
+   "byStage": {
+    "difficulty": 0.0996,
+    "review": 0.3172,
+    "solve": 0.3102
+   },
+   "total": 0.727
+  },
+  "stats-r19-p4-d": {
+   "byStage": {
+    "difficulty": 0.0676,
+    "review": 0.1267,
+    "solve": 0.0826
+   },
+   "total": 0.2769
+  },
+  "stats-r19-p4-e": {
+   "byStage": {
+    "difficulty": 0.0275,
+    "review": 0.0742,
+    "review2": 0.0283,
+    "solve": 0.052
+   },
+   "total": 0.182
+  }
+ },
+ "totalUsd": 3.9933,
+ "lookAlikeClustersWithExistingStock": 0,
+ "lookAlikeClustersContainingBatch": [
+  {
+   "id": "la:stats-r19-p4-a:ap_statistics-m01-k0",
+   "keys": [
+    "stats-r19-p4-a:ap_statistics-m01-k0",
+    "stats-r19-p4-a:ap_statistics-m01-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p4-a:ap_statistics-m02-k0",
+   "keys": [
+    "stats-r19-p4-a:ap_statistics-m02-k0",
+    "stats-r19-p4-a:ap_statistics-m02-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p4-a:ap_statistics-m03-k0",
+   "keys": [
+    "stats-r19-p4-a:ap_statistics-m03-k0",
+    "stats-r19-p4-a:ap_statistics-m03-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p4-a:ap_statistics-m06-k0",
+   "keys": [
+    "stats-r19-p4-a:ap_statistics-m06-k0",
+    "stats-r19-p4-a:ap_statistics-m06-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p4-a:ap_statistics-m07-k0",
+   "keys": [
+    "stats-r19-p4-a:ap_statistics-m07-k0",
+    "stats-r19-p4-a:ap_statistics-m07-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p4-a:ap_statistics-m08-k0",
+   "keys": [
+    "stats-r19-p4-a:ap_statistics-m08-k0",
+    "stats-r19-p4-a:ap_statistics-m08-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p4-a:ap_statistics-m09-k0",
+   "keys": [
+    "stats-r19-p4-a:ap_statistics-m09-k0",
+    "stats-r19-p4-a:ap_statistics-m09-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p4-a:ap_statistics-m10-k0",
+   "keys": [
+    "stats-r19-p4-a:ap_statistics-m10-k0",
+    "stats-r19-p4-a:ap_statistics-m10-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p4-a:ap_statistics-m12-k0",
+   "keys": [
+    "stats-r19-p4-a:ap_statistics-m12-k0",
+    "stats-r19-p4-a:ap_statistics-m12-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p4-a:ap_statistics-m13-k0",
+   "keys": [
+    "stats-r19-p4-a:ap_statistics-m13-k0",
+    "stats-r19-p4-a:ap_statistics-m13-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p4-a:ap_statistics-m14-k0",
+   "keys": [
+    "stats-r19-p4-a:ap_statistics-m14-k0",
+    "stats-r19-p4-a:ap_statistics-m14-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p4-a:ap_statistics-m15-k0",
+   "keys": [
+    "stats-r19-p4-a:ap_statistics-m15-k0",
+    "stats-r19-p4-a:ap_statistics-m15-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p4-a:ap_statistics-m16-k0",
+   "keys": [
+    "stats-r19-p4-a:ap_statistics-m16-k0",
+    "stats-r19-p4-a:ap_statistics-m16-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p4-a:ap_statistics-m17-k0",
+   "keys": [
+    "stats-r19-p4-a:ap_statistics-m17-k0",
+    "stats-r19-p4-a:ap_statistics-m17-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p4-a:ap_statistics-m23-k0",
+   "keys": [
+    "stats-r19-p4-a:ap_statistics-m23-k0",
+    "stats-r19-p4-a:ap_statistics-m23-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p4-a:ap_statistics-m27-k0",
+   "keys": [
+    "stats-r19-p4-a:ap_statistics-m27-k0",
+    "stats-r19-p4-a:ap_statistics-m27-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p4-a:ap_statistics-m29-k0",
+   "keys": [
+    "stats-r19-p4-a:ap_statistics-m29-k0",
+    "stats-r19-p4-a:ap_statistics-m29-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p4-a:ap_statistics-m30-k0",
+   "keys": [
+    "stats-r19-p4-a:ap_statistics-m30-k0",
+    "stats-r19-p4-a:ap_statistics-m30-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p4-a:ap_statistics-m33-k0",
+   "keys": [
+    "stats-r19-p4-a:ap_statistics-m33-k0",
+    "stats-r19-p4-a:ap_statistics-m33-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p4-a:ap_statistics-m34-k1",
+   "keys": [
+    "stats-r19-p4-a:ap_statistics-m34-k1",
+    "stats-r19-p4-d:ap_statistics-m03-k0",
+    "stats-r19-p4-d:ap_statistics-m03-k1",
+    "stats-r19-p4-d:ap_statistics-m03-k2"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p4-a:ap_statistics-m35-k0",
+   "keys": [
+    "stats-r19-p4-a:ap_statistics-m35-k0",
+    "stats-r19-p4-a:ap_statistics-m35-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p4-a:ap_statistics-m36-k0",
+   "keys": [
+    "stats-r19-p4-a:ap_statistics-m36-k0",
+    "stats-r19-p4-a:ap_statistics-m36-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p4-d:ap_statistics-m01-k0",
+   "keys": [
+    "stats-r19-p4-d:ap_statistics-m01-k0",
+    "stats-r19-p4-d:ap_statistics-m01-k1",
+    "stats-r19-p4-d:ap_statistics-m01-k2"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p4-d:ap_statistics-m02-k0",
+   "keys": [
+    "stats-r19-p4-d:ap_statistics-m02-k0",
+    "stats-r19-p4-d:ap_statistics-m02-k1",
+    "stats-r19-p4-d:ap_statistics-m02-k2"
+   ],
+   "reasons": [
+    "family"
+   ]
+  }
+ ],
+ "lookAlikeComparedAgainst": "403 existing auto_passed MC (all subjects incl. the S1 pilot) + 66 S2-a items"
+}

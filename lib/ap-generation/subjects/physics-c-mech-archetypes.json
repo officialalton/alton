@@ -1,0 +1,3392 @@
+[
+ {
+  "id": "pc_xt_poly_velocity",
+  "topic": "1.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy derivative versus a central finite difference of the same function"
+  ],
+  "misconceptions": [
+   "Evaluates the position function instead of its derivative.",
+   "Divides the position by the time, which gives the average velocity from $t=0$ rather than the instantaneous velocity.",
+   "Differentiates only the cubic term, $3At^2$, and drops the other terms."
+  ]
+ },
+ {
+  "id": "pc_xt_poly_rest_accel",
+  "topic": "1.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy roots of the derivative; a finite-difference second derivative recomputes the acceleration"
+  ],
+  "misconceptions": [
+   "Reports the position at the later time instead of the acceleration.",
+   "Uses the earlier time at which the velocity is zero, where the acceleration has the opposite sign.",
+   "Reports zero, confusing a momentary stop with zero acceleration."
+  ]
+ },
+ {
+  "id": "pc_vt_poly_displacement",
+  "topic": "1.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy definite integral versus a Simpson integration of the same function; the distance uses the integral of |v|"
+  ],
+  "misconceptions": [
+   "Reports the total distance traveled, adding the areas without regard to the sign of the velocity.",
+   "Multiplies the final velocity by the elapsed time, as if the velocity were constant.",
+   "Multiplies the average of the initial and final velocities by the elapsed time, which holds only for constant acceleration."
+  ]
+ },
+ {
+  "id": "pc_at_linear_velocity",
+  "topic": "1.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy integral versus numpy trapezoid integration of the acceleration"
+  ],
+  "misconceptions": [
+   "Integrates twice, adding a position-like term $kT^3/6$ to the initial velocity.",
+   "Treats the acceleration at the final time as constant, $v_0+kT\\cdot T$.",
+   "Forgets the initial velocity and reports only the change in velocity."
+  ]
+ },
+ {
+  "id": "pc_xt_avg_vs_inst_claim",
+  "topic": "1.2",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the average velocity from position values and the instantaneous velocity from a central finite difference at the midpoint and the end are compared numerically"
+  ],
+  "misconceptions": [
+   "Halves the average velocity because the initial velocity is zero, instead of using the position change divided by the time.",
+   "Believes that average and instantaneous velocities are never related when the position is not linear in time.",
+   "Identifies the average velocity over an interval with the final instantaneous velocity."
+  ]
+ },
+ {
+  "id": "pc_cliff_horizontal_launch",
+  "topic": "1.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "closed form versus an RK4 integration of the projectile until it reaches the ground"
+  ],
+  "misconceptions": [
+   "Assumes the horizontal speed grows with time under gravity, using the speed just before impact times the fall time.",
+   "Divides the height by the time rather than multiplying the speed by the time.",
+   "Uses $v_0 h/g$, mixing the height into the time of flight."
+  ]
+ },
+ {
+  "id": "pc_projectile_scaling",
+  "topic": "1.5",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the quantity is evaluated numerically at $v_0$ and $kv_0$ and the ratio is compared with $k$ to the stated power"
+  ],
+  "misconceptions": [
+   "Scales as the square root of the launch speed.",
+   "Scales linearly with the launch speed, $\\times k$.",
+   "Scales with the cube of the launch speed."
+  ]
+ },
+ {
+  "id": "pc_river_drift",
+  "topic": "1.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the downstream position is accumulated numerically over the crossing time"
+  ],
+  "misconceptions": [
+   "Multiplies the width by the ratio $v_b/v_r$ (inverted).",
+   "Reports the width of the river as the drift.",
+   "Divides the river width by the speed of the current, $w/v_r$."
+  ]
+ },
+ {
+  "id": "pc_position_vector_speed",
+  "topic": "1.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy derivatives versus central differences of each component"
+  ],
+  "misconceptions": [
+   "Adds the components of the velocity instead of combining them as a vector sum, $3+4$.",
+   "Divides the magnitude of the position vector by the time, which is an average speed from the origin.",
+   "Uses only the horizontal velocity component, $3\\text{ m/s}$."
+  ]
+ },
+ {
+  "id": "pc_impact_angle",
+  "topic": "1.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the projectile gives the components at the ground and their ratio"
+  ],
+  "misconceptions": [
+   "Uses the average vertical speed during the fall, $v_y/2$, instead of the final vertical speed.",
+   "Assumes the ball lands at $45^\\circ$ for any launch speed.",
+   "Uses the height divided by the horizontal speed, $\\tan^{-1}(h/v_0)$."
+  ]
+ },
+ {
+  "id": "pc_xt_graph_speed_rank",
+  "topic": "1.3",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "the slopes are computed by central differences of the plotted function"
+  ],
+  "misconceptions": [
+   "Ranks by the position value at each time rather than the slope.",
+   "Ranks by time order, assuming the particle speeds up all the time.",
+   "Ranks by the reversed time order."
+  ]
+ },
+ {
+  "id": "pc_sym_stopping_distance",
+  "topic": "1.2",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solves the kinematic relation for the distance and each option is evaluated numerically with the same values"
+  ],
+  "misconceptions": [
+   "Inverts the relation, $2a/v^2$.",
+   "Uses $v^2/(2a)$ with $v$ replaced by its half, $v^2/(8a)$.",
+   "Omits the factor of two, $v^2/a$."
+  ]
+ },
+ {
+  "id": "pc_two_cars_catch_up",
+  "topic": "1.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solves the position equation; a bisection root finder on the position difference recomputes the time"
+  ],
+  "misconceptions": [
+   "Uses the distance that car B needs to reach the speed $v_A$, $v_A^2/(2a)=28.1\\text{ m}$, which is where B is when the speeds match.",
+   "Reports the time at which the cars meet, $2v_A/a=7.50\\text{ s}$, as if it were the distance.",
+   "Uses the time when the speeds are equal, $t=v_A/a=3.75\\text{ s}$, so the distance is $v_A^2/a=56.2\\text{ m}$."
+  ]
+ },
+ {
+  "id": "pc_atwood_tension",
+  "topic": "2.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solves the two equations; numpy linalg.solve recomputes the tension"
+  ],
+  "misconceptions": [
+   "Averages the two weights, $(m_1+m_2)g/2$.",
+   "Divides the net force by the sum of the masses, giving the acceleration instead of the tension.",
+   "Uses the weight of the heavier block, $m_2g$, as the tension."
+  ]
+ },
+ {
+  "id": "pc_incline_friction_accel",
+  "topic": "2.7",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "components of the force vectors are rotated and summed numerically"
+  ],
+  "misconceptions": [
+   "Adds friction to the weight component, $g(\\sin\\theta+\\mu\\cos\\theta)$.",
+   "Uses $\\mu g$ without the angle for the friction term, $g\\sin\\theta-\\mu g$.",
+   "Ignores friction, $g\\sin\\theta$."
+  ]
+ },
+ {
+  "id": "pc_contact_force_blocks",
+  "topic": "2.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy linalg.solve of the two Newton equations recomputes the contact force"
+  ],
+  "misconceptions": [
+   "Uses the fraction of the first block, $Fm_1/(m_1+m_2)$.",
+   "Assumes the contact force equals the applied force, $F$.",
+   "Computes the acceleration of the pair instead of the contact force."
+  ]
+ },
+ {
+  "id": "pc_force_time_poly_velocity",
+  "topic": "2.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the acceleration recomputes the speed"
+  ],
+  "misconceptions": [
+   "Integrates twice, giving the displacement-type term $cT^3/(6m)$.",
+   "Treats the final force as constant, $v=cT\\cdot T/m$.",
+   "Divides the time by two but not the force, $v=cT/(2m)$."
+  ]
+ },
+ {
+  "id": "pc_drag_linear_terminal",
+  "topic": "2.9",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of $m\\,dv/dt=mg-bv$ over many time constants reaches the same speed"
+  ],
+  "misconceptions": [
+   "Takes the square root as for quadratic drag, $\\sqrt{mg/b}$.",
+   "Multiplies the mass by the drag coefficient, $mb$.",
+   "Uses the weight alone, $mg$, as a speed."
+  ]
+ },
+ {
+  "id": "pc_drag_linear_scaling",
+  "topic": "2.9",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the terminal speed formula is evaluated numerically at the original and changed values"
+  ],
+  "misconceptions": [
+   "Uses the inverse factor, reversing the dependence.",
+   "Uses the square root of the factor, as for quadratic drag.",
+   "Reports no change, because every object falls at the same acceleration."
+  ]
+ },
+ {
+  "id": "pc_sym_quadratic_terminal",
+  "topic": "2.9",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the equation of motion converges to the value of each option evaluated with the same constants"
+  ],
+  "misconceptions": [
+   "Forgets the gravitational acceleration, $\\sqrt{m/c}$.",
+   "Uses $\\sqrt{2mg/c}$, which comes from an incorrect factor of two.",
+   "Inverts the ratio, $\\sqrt{c/(mg)}$."
+  ]
+ },
+ {
+  "id": "pc_drag_exp_speed",
+  "topic": "2.9",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of $m\\,dv/dt=mg-bv$ recomputes the speed at that time"
+  ],
+  "misconceptions": [
+   "Uses the terminal speed itself, $4.90\\text{ m/s}$, as if it were reached after 2 time constants.",
+   "Uses the factor $1-e^{-2/2}$, as if the time constant were twice as long.",
+   "Uses $v_te^{-2}$, the fraction that remains instead of the fraction gained."
+  ]
+ },
+ {
+  "id": "pc_flat_curve_mu",
+  "topic": "2.10",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a bisection root finder on the force balance recomputes the coefficient"
+  ],
+  "misconceptions": [
+   "Divides by the speed squared instead of multiplying, $gr/v^2$.",
+   "Uses the diameter instead of the radius in the denominator, $v^2/(2gr)$.",
+   "Uses $v^2/r$ without dividing by $g$."
+  ]
+ },
+ {
+  "id": "pc_vertical_circle_top_tension",
+  "topic": "2.10",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the net inward force is computed from the force vectors and compared with mv^2/r"
+  ],
+  "misconceptions": [
+   "Ignores the weight, $mv^2/r$.",
+   "Adds the weight to the centripetal term at the top, $mv^2/r+mg$.",
+   "Uses $v^2/r-g$ without the mass."
+  ]
+ },
+ {
+  "id": "pc_circular_scaling",
+  "topic": "2.10",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the force is evaluated numerically for the original and the changed values"
+  ],
+  "misconceptions": [
+   "Multiplies the force by $1/9$, squaring the radius dependence as if $F=mv^2/r^2$.",
+   "Multiplies the force by $9$, using the square of the radius in the numerator.",
+   "Leaves the force unchanged, because the speed and the mass are unchanged."
+  ]
+ },
+ {
+  "id": "pc_spring_added_mass",
+  "topic": "2.8",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the two equilibrium extensions are computed separately and subtracted"
+  ],
+  "misconceptions": [
+   "Uses only the original mass, $m_1g/k$.",
+   "Uses the total mass for the extra stretch, $(m_1+m_2)g/k$.",
+   "Multiplies by the spring constant instead of dividing, $m_2gk$."
+  ]
+ },
+ {
+  "id": "pc_elevator_scale",
+  "topic": "2.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a linear solve of Newton's second law recomputes the normal force"
+  ],
+  "misconceptions": [
+   "Gets the sign of the acceleration term wrong, $m(g+a)$ instead of $m(g-a)$.",
+   "Uses the weight $mg=735\\text{ N}$ and ignores the acceleration.",
+   "Counts the acceleration twice, $m(g-2a)$."
+  ]
+ },
+ {
+  "id": "pc_static_friction_claim",
+  "topic": "2.7",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the equilibrium friction and the maximum static friction are computed and compared numerically"
+  ],
+  "misconceptions": [
+   "Gets the direction of static friction backward.",
+   "Uses the maximum static friction as the actual friction force.",
+   "Believes a block at rest experiences no friction."
+  ]
+ },
+ {
+  "id": "pc_newton3_claim",
+  "topic": "2.3",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the accelerations from equal forces are computed numerically to confirm that the lighter car accelerates more"
+  ],
+  "misconceptions": [
+   "Believes the force depends on which object has more momentum, and that unequal forces give equal accelerations.",
+   "Equal forces do not imply equal accelerations when the masses differ.",
+   "Believes the more massive object exerts the larger force in a collision."
+  ]
+ },
+ {
+  "id": "pc_two_strings_tension",
+  "topic": "2.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy linalg.solve of the two equilibrium equations recomputes the tensions"
+  ],
+  "misconceptions": [
+   "Omits the factor of two, $mg/\\sin\\theta$.",
+   "Uses $mg\\sin\\theta/2$ with the sine multiplying instead of dividing.",
+   "Ignores the angle, $mg/2$."
+  ]
+ },
+ {
+  "id": "pc_com_discrete",
+  "topic": "2.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy weighted average recomputes the center of mass"
+  ],
+  "misconceptions": [
+   "Takes the simple average of the positions, ignoring the masses.",
+   "Divides the sum of $mx$ by 3, the number of masses, instead of by the total mass.",
+   "Uses the midpoint of the two outermost objects."
+  ]
+ },
+ {
+  "id": "pc_com_rod_nonuniform",
+  "topic": "2.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy integrals versus a Simpson integration of the same two integrals"
+  ],
+  "misconceptions": [
+   "Uses the end of the rod, $L$.",
+   "Uses the exponent of the density instead of the exponent plus one, $n/(n+1)\\,L$.",
+   "Uses the geometric center of the rod, $L/2$."
+  ]
+ },
+ {
+  "id": "pc_gravity_altitude",
+  "topic": "2.6",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the field strength is evaluated numerically at the two distances"
+  ],
+  "misconceptions": [
+   "Uses the inverse square of the height above the surface only, $1/k^2$.",
+   "Reports no change, because gravity is nearly constant.",
+   "Uses the inverse of the distance from the surface, $1/(1+k)$."
+  ]
+ },
+ {
+  "id": "pc_sym_incline_accel",
+  "topic": "2.7",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "force vectors are rotated and summed numerically with the same angle and coefficient used to evaluate each option"
+  ],
+  "misconceptions": [
+   "Exchanges sine and cosine in the weight component, $g(\\cos\\theta-\\mu\\sin\\theta)$.",
+   "Uses $\\mu g$ for the friction term, $g\\sin\\theta-\\mu g$.",
+   "Adds the friction term, $g(\\sin\\theta+\\mu\\cos\\theta)$."
+  ]
+ },
+ {
+  "id": "pc_incline_up_friction_claim",
+  "topic": "2.2",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the deceleration with and without friction is computed numerically to confirm the claim"
+  ],
+  "misconceptions": [
+   "Applies equilibrium to a block that is slowing down.",
+   "Takes friction to point along the direction of motion.",
+   "Believes friction acts only for downward sliding."
+  ]
+ },
+ {
+  "id": "pc_friction_plateau_mu",
+  "topic": "2.7",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "the fit of the plateau rows is recomputed numerically and the coefficient is compared with the generating value"
+  ],
+  "misconceptions": [
+   "Divides the plateau force by the mass without $g$.",
+   "Uses the largest friction force in the table, which is the maximum static friction, giving the static coefficient.",
+   "Divides by $g$ only, $f_k/g$."
+  ]
+ },
+ {
+  "id": "pc_work_variable_force_poly",
+  "topic": "3.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy definite integral versus a Simpson integration of the same function"
+  ],
+  "misconceptions": [
+   "Averages the initial and final forces and multiplies by the distance, $\\tfrac12(64.0\\text{ N})(4\\text{ m})$.",
+   "Integrates $ax^2$ as if it were $ax$, giving $\\tfrac12aX^2=32.0\\text{ J}$.",
+   "Multiplies the final force, $64.0\\text{ N}$, by the distance, treating the force as constant at its final value."
+  ]
+ },
+ {
+  "id": "pc_work_spring_stretch",
+  "topic": "3.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a Simpson integration of the spring force over the extension recomputes the work"
+  ],
+  "misconceptions": [
+   "Uses the total energy at the final extension, $\\tfrac12kx_2^2$.",
+   "Squares the change in extension, $\\tfrac12k(x_2-x_1)^2$.",
+   "Omits the factor of one half, $k(x_2^2-x_1^2)$."
+  ]
+ },
+ {
+  "id": "pc_variable_force_speed",
+  "topic": "3.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a numerical integral of $d(v^2)/dx=2F/m$ recomputes the speed"
+  ],
+  "misconceptions": [
+   "Omits the factor of two in the work-energy theorem, $\\sqrt{W/m}$.",
+   "Uses the final force times the distance as the work.",
+   "Reports $W/m$ as the speed."
+  ]
+ },
+ {
+  "id": "pc_force_from_potential",
+  "topic": "3.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy derivative versus a central finite difference of the same function"
+  ],
+  "misconceptions": [
+   "Divides the potential energy by the position, $-U/x$.",
+   "Reports the derivative without the minus sign, $+dU/dx$.",
+   "Reports the value of the potential energy at that position."
+  ]
+ },
+ {
+  "id": "pc_stable_equilibrium",
+  "topic": "3.3",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy roots of the derivative and a finite-difference second derivative identify the minimum"
+  ],
+  "misconceptions": [
+   "Confuses a zero of the potential energy with an equilibrium position, where the force would have to be zero.",
+   "Mislabels the maximum of $U$ at $x=2$ as a minimum; a negative second derivative means a maximum, which is unstable.",
+   "Sets the second derivative to zero instead of the first, which locates the inflection point where the force is not zero."
+  ]
+ },
+ {
+  "id": "pc_spring_launch_ramp",
+  "topic": "3.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the vertical rise with the launch speed from the spring recomputes the height"
+  ],
+  "misconceptions": [
+   "Uses $kx/(mg)$ with the extension to the first power.",
+   "Omits the factor of one half, $kx^2/(mg)$.",
+   "Equates the spring force to the weight, $kx/(2mg)$."
+  ]
+ },
+ {
+  "id": "pc_pendulum_bottom_speed",
+  "topic": "3.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the pendulum equation recomputes the speed at the lowest point"
+  ],
+  "misconceptions": [
+   "Omits the factor of two, $\\sqrt{gL(1-\\cos\\theta)}$.",
+   "Uses $L\\cos\\theta$ as the height drop.",
+   "Uses the full length as the height, $\\sqrt{2gL}$."
+  ]
+ },
+ {
+  "id": "pc_rough_patch_speed",
+  "topic": "3.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the deceleration across the patch confirms the length and the speed"
+  ],
+  "misconceptions": [
+   "Replaces $\\mu d$ by $d$ in the energy loss, $\\sqrt{2g(h-d)}$, treating the length of the patch as a height loss.",
+   "Ignores the friction, $\\sqrt{2gh}=7.67\\text{ m/s}$.",
+   "Subtracts the speeds instead of the energies, $\\sqrt{2gh}-\\mu gd$."
+  ]
+ },
+ {
+  "id": "pc_power_force_velocity",
+  "topic": "3.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the work done over one second at constant force recomputes the power relation"
+  ],
+  "misconceptions": [
+   "Uses $P/v^2$, which has the wrong dimensions.",
+   "Uses $2P/v$, double counting the power.",
+   "Uses half of the power, $P/(2v)$."
+  ]
+ },
+ {
+  "id": "pc_energy_power_poly",
+  "topic": "3.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy integral versus a Simpson integration"
+  ],
+  "misconceptions": [
+   "Integrates twice, $pT^3/6=125\\text{ J}$.",
+   "Integrates only up to half of the time, $\\tfrac12p(T/2)^2=18.8\\text{ J}$.",
+   "Reports the final power, $30.0\\text{ W}$, as if it were the energy, without integrating."
+  ]
+ },
+ {
+  "id": "pc_power_scaling",
+  "topic": "3.5",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the power is evaluated numerically at the two speeds"
+  ],
+  "misconceptions": [
+   "Scales as the fourth power of the speed.",
+   "Does not change, because the engine power is rated.",
+   "Scales linearly with the speed."
+  ]
+ },
+ {
+  "id": "pc_ke_stopping_scaling",
+  "topic": "3.1",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the distance $d=mv^2/(2F)$ is evaluated numerically at both speeds"
+  ],
+  "misconceptions": [
+   "Does not change, because the force is constant.",
+   "Scales as the square root of the speed.",
+   "Scales with the cube of the speed."
+  ]
+ },
+ {
+  "id": "pc_loop_min_height",
+  "topic": "3.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the energy at the top is recomputed from the minimum speed"
+  ],
+  "misconceptions": [
+   "Sets the speed at the bottom of the loop, not the top, equal to $\\sqrt{gR}$, so $h=R/2=1.50\\text{ m}$.",
+   "Takes the speed at the top as $\\sqrt{2gR}$ instead of $\\sqrt{gR}$, so $h=2R+R=9.00\\text{ m}$.",
+   "Uses only the height of the top of the loop, $2R=6.00\\text{ m}$, which leaves the block with no speed at the top."
+  ]
+ },
+ {
+  "id": "pc_nonconservative_claim",
+  "topic": "3.4",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the initial potential energy and the final kinetic energy are computed numerically and subtracted"
+  ],
+  "misconceptions": [
+   "Gets the sign of the work by friction wrong.",
+   "Applies conservation of mechanical energy even though friction acts.",
+   "Assumes all the potential energy becomes thermal energy."
+  ]
+ },
+ {
+  "id": "pc_gravity_path_claim",
+  "topic": "3.3",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the work along a straight ramp is integrated numerically and compared with mgh"
+  ],
+  "misconceptions": [
+   "Uses the displacement along the ramp as the vertical displacement in $W=mgd$.",
+   "Believes the work of a conservative force grows with the length of the path rather than with the vertical drop.",
+   "Thinks the normal force cancels the work of gravity, although the two forces act in different directions."
+  ]
+ },
+ {
+  "id": "pc_energy_graph_ke",
+  "topic": "3.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "the plotted function is evaluated numerically at the position"
+  ],
+  "misconceptions": [
+   "Uses the total energy as the kinetic energy, $\\sqrt{2E/m}=6.32\\text{ m/s}$, ignoring the potential energy.",
+   "Reads the potential energy as the kinetic energy, $\\sqrt{2U/m}=4.00\\text{ m/s}$.",
+   "Adds the potential energy to the total energy, $\\sqrt{2(E+U)/m}=7.48\\text{ m/s}$."
+  ]
+ },
+ {
+  "id": "pc_sym_ramp_speed",
+  "topic": "3.4",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the vertical motion with the same acceleration confirms the speed"
+  ],
+  "misconceptions": [
+   "Omits the initial speed, $\\sqrt{2gh}$.",
+   "Omits the factor of two, $\\sqrt{v_0^2+gh}$.",
+   "Adds the speeds, $v_0+\\sqrt{2gh}$."
+  ]
+ },
+ {
+  "id": "pc_sym_spring_height",
+  "topic": "3.4",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each option is evaluated numerically with the same constants and compared with an RK4 flight"
+  ],
+  "misconceptions": [
+   "Omits the factor of two, $kx^2/(mg)$.",
+   "Omits the square on the compression, $kx/(2mg)$.",
+   "Leaves out the mass, $kx^2/(2g)$."
+  ]
+ },
+ {
+  "id": "pc_rank_ramp_speeds",
+  "topic": "3.4",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the speeds are computed from the work-energy theorem for each ramp and ranked"
+  ],
+  "misconceptions": [
+   "Ranks by the coefficient divided by the sine of the angle, treating the friction work as $\\mu mgL$ without the cosine of the angle. Applying that rule orders the objects C > A > B > D.",
+   "Ranks by the friction coefficient only, ignoring the angle: a smaller coefficient is assumed to give a faster block. Applying that rule orders the objects C > D > A > B.",
+   "Ranks by the angle only, ignoring the friction: a steeper ramp is assumed to give a faster block. Applying that rule orders the objects B > C > A > D."
+  ]
+ },
+ {
+  "id": "pc_work_force_angle",
+  "topic": "3.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the dot product of the force vector and the displacement vector recomputes the work"
+  ],
+  "misconceptions": [
+   "Ignores the angle, $Fd$.",
+   "Uses the sine of the angle, $Fd\\sin\\theta$.",
+   "Uses the tangent of the angle, $Fd\\tan\\theta$."
+  ]
+ },
+ {
+  "id": "pc_impulse_force_poly",
+  "topic": "4.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy integral versus a Simpson integration"
+  ],
+  "misconceptions": [
+   "Reports the final force, $18.0\\text{ N}$, as the impulse without multiplying by any time.",
+   "Applies the factor of one half twice, $cT^2/4=13.5\\text{ N\u00b7s}$.",
+   "Multiplies the final force, $18.0\\text{ N}$, by the time, treating the force as constant."
+  ]
+ },
+ {
+  "id": "pc_impulse_parabola_speed",
+  "topic": "4.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy integral versus a Simpson integration"
+  ],
+  "misconceptions": [
+   "Uses $cT^3/(3m)$, the integral of $t(T-t)$ with the wrong factor.",
+   "Uses the peak force times the time, divided by the mass.",
+   "Integrates $c\\,t$ rather than $ct(T-t)$, giving $cT^2/(2m)$."
+  ]
+ },
+ {
+  "id": "pc_inelastic_collision_speed",
+  "topic": "4.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy linalg.solve of the momentum equation recomputes the common velocity"
+  ],
+  "misconceptions": [
+   "Divides the total momentum by only the first mass.",
+   "Uses the speed of the first cart, as if the second cart did not change the motion.",
+   "Averages the two speeds, $(v_1+v_2)/2$."
+  ]
+ },
+ {
+  "id": "pc_elastic_final_velocity",
+  "topic": "4.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy linalg.solve of momentum plus relative-speed equations; the kinetic energy is checked"
+  ],
+  "misconceptions": [
+   "Swaps the masses, $(m_2-m_1)v/(m_1+m_2)$.",
+   "Assumes the first object keeps its speed.",
+   "Uses the result for a perfectly inelastic collision, $m_1v/(m_1+m_2)$."
+  ]
+ },
+ {
+  "id": "pc_ballistic_pendulum",
+  "topic": "4.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the swing height from the computed speeds is recomputed and compared with the given height"
+  ],
+  "misconceptions": [
+   "Forgets the square root, $(m+M)(2gh)/m$.",
+   "Uses only the swing speed, $\\sqrt{2gh}=1.40\\text{ m/s}$, as the bullet speed.",
+   "Applies energy conservation through the collision, $\\tfrac12mv^2=(m+M)gh$, although the collision dissipates energy."
+  ]
+ },
+ {
+  "id": "pc_explosion_recoil",
+  "topic": "4.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solves the two equations; the kinetic energy of the result is recomputed"
+  ],
+  "misconceptions": [
+   "Splits the energy equally between the two pieces.",
+   "Gives all of the energy to the lighter piece, $\\sqrt{2E/m_1}$.",
+   "Ignores momentum conservation and uses $\\sqrt{2E/(m_1+m_2)}$."
+  ]
+ },
+ {
+  "id": "pc_com_velocity_system",
+  "topic": "4.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the center-of-mass position is differentiated numerically"
+  ],
+  "misconceptions": [
+   "Uses the velocity of the heavier object, $-2\\text{ m/s}$.",
+   "Averages the two velocities, ignoring the masses.",
+   "Adds the velocities, $v_1+v_2$."
+  ]
+ },
+ {
+  "id": "pc_momentum_ke_claim",
+  "topic": "4.4",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the kinetic energies before and after are computed numerically"
+  ],
+  "misconceptions": [
+   "Thinks momentum is lost when objects stick.",
+   "Believes the absence of external forces conserves kinetic energy.",
+   "Confuses which quantity is conserved."
+  ]
+ },
+ {
+  "id": "pc_ke_loss_fraction",
+  "topic": "4.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the kinetic energies are computed numerically for the stated masses"
+  ],
+  "misconceptions": [
+   "Reports the fraction of the speed that is lost, $m_2/(m_1+m_2)$ squared.",
+   "Uses $m_1/(m_1+m_2)$, the fraction of the moving mass.",
+   "Reports one half for every sticking collision."
+  ]
+ },
+ {
+  "id": "pc_impulse_time_scaling",
+  "topic": "4.2",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the average force is evaluated numerically for both stopping times"
+  ],
+  "misconceptions": [
+   "Scales in the wrong direction, increasing when the time increases.",
+   "Scales as the square root of the time factor.",
+   "Scales as the square of the time factor."
+  ]
+ },
+ {
+  "id": "pc_sym_inelastic_speed",
+  "topic": "4.3",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each option is evaluated numerically and compared with the momentum balance"
+  ],
+  "misconceptions": [
+   "Divides by the mass of the moving cart only, $m_1v/m_2$, forgetting to include it in the combined mass.",
+   "Puts the mass of the stationary cart in the numerator, $m_2v/(m_1+m_2)$.",
+   "Reports the original speed, $v$, as if the stationary cart did not change the motion."
+  ]
+ },
+ {
+  "id": "pc_rank_impulse_bounce",
+  "topic": "4.2",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the changes in momentum are computed numerically and ranked"
+  ],
+  "misconceptions": [
+   "Ranks by the initial momentum only. Applying that rule orders the objects D > C > B > A.",
+   "Ranks by the final momentum only. Applying that rule orders the objects B > C > D > A.",
+   "Ranks by the mass times the change in speed, ignoring that a velocity reversal changes the sign. Applying that rule orders the objects D > B > C > A."
+  ]
+ },
+ {
+  "id": "pc_momentum_graph_force",
+  "topic": "4.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "a least-squares fit of the segment recomputes the slope"
+  ],
+  "misconceptions": [
+   "Uses the average slope over the whole graph, $0.625\\text{ N}$, instead of the slope at that time.",
+   "Divides the momentum change in the segment by the total time of the graph, $0.250\\text{ N}$.",
+   "Reads the momentum at that time, $4.00\\text{ kg\u00b7m/s}$, as the force."
+  ]
+ },
+ {
+  "id": "pc_theta_poly_alpha",
+  "topic": "5.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy second derivative versus a central finite difference"
+  ],
+  "misconceptions": [
+   "Differentiates the cubic term twice but drops the quadratic term, $6at$.",
+   "Reports the angular speed at that time, $3at^2+2bt$.",
+   "Reports the angular position at that time."
+  ]
+ },
+ {
+  "id": "pc_rot_kin_stop_turns",
+  "topic": "5.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the rotation until the wheel stops recomputes the angle"
+  ],
+  "misconceptions": [
+   "Reports the angle in degrees, $20600^\\circ$, instead of revolutions.",
+   "Converts radians to revolutions by dividing by $\\pi$ instead of $2\\pi$, giving $115$.",
+   "Reports the angle in radians, $360\\text{ rad}$, instead of converting to revolutions."
+  ]
+ },
+ {
+  "id": "pc_total_acceleration_rim",
+  "topic": "5.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy norm of the two component vector recomputes the magnitude"
+  ],
+  "misconceptions": [
+   "Adds the components directly instead of as perpendicular vectors, $\\omega^2r+\\alpha r$.",
+   "Reports only the tangential component, $\\alpha r$.",
+   "Uses $\\omega r$ as the acceleration, which is the speed."
+  ]
+ },
+ {
+  "id": "pc_torque_force_angle",
+  "topic": "5.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the two-dimensional cross product of the position and force vectors recomputes the torque"
+  ],
+  "misconceptions": [
+   "Uses the cosine, $rF\\cos\\theta$.",
+   "Ignores the angle, $rF$.",
+   "Divides by the sine, $rF/\\sin\\theta$."
+  ]
+ },
+ {
+  "id": "pc_lever_balance",
+  "topic": "5.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy linalg.solve of the torque balance recomputes the distance"
+  ],
+  "misconceptions": [
+   "Balances the masses rather than the torques, $d_2=d_1$.",
+   "Inverts the mass ratio, $m_2d_1/m_1$.",
+   "Uses the sum of the masses in the denominator, $m_1d_1/(m_1+m_2)$."
+  ]
+ },
+ {
+  "id": "pc_inertia_rod_integral",
+  "topic": "5.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a Simpson integration of $\\lambda x^2$ recomputes the rotational inertia"
+  ],
+  "misconceptions": [
+   "Treats all of the mass as a point at the end, $ML^2$.",
+   "Uses the uniform-rod result, $\\tfrac13ML^2$.",
+   "Uses $\\tfrac12ML^2$ for every density."
+  ]
+ },
+ {
+  "id": "pc_parallel_axis_disk",
+  "topic": "5.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the same value is recomputed by summing the two contributions numerically"
+  ],
+  "misconceptions": [
+   "Adds $Md$ instead of $Md^2$.",
+   "Uses the center-of-mass value only, $\\tfrac12MR^2$.",
+   "Squares only the sum, $M(R+d)^2/2$."
+  ]
+ },
+ {
+  "id": "pc_inertia_composite",
+  "topic": "5.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the contributions are summed numerically"
+  ],
+  "misconceptions": [
+   "Omits the point masses, $ML^2/12$.",
+   "Uses the full length for the point masses, $2mL^2+ML^2/12$.",
+   "Uses the end-pivot value for the rod, $2m(L/2)^2+ML^2/3$."
+  ]
+ },
+ {
+  "id": "pc_pulley_massive_accel",
+  "topic": "5.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy linalg.solve of the two coupled equations recomputes the acceleration"
+  ],
+  "misconceptions": [
+   "Omits the block mass in the denominator, $mg/(M/2)$.",
+   "Ignores the pulley, $g$.",
+   "Treats the pulley as a point mass at the rim, $mg/(m+M)$."
+  ]
+ },
+ {
+  "id": "pc_torque_alpha_disk",
+  "topic": "5.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the angular motion with the net torque recomputes the angular acceleration"
+  ],
+  "misconceptions": [
+   "Forgets the radius in the torque, $F/(\\tfrac12MR^2)$.",
+   "Uses the point-mass value $I=MR^2$, giving $F/(MR)$.",
+   "Divides the torque by the mass instead of by the rotational inertia, $FR/M$."
+  ]
+ },
+ {
+  "id": "pc_inertia_scaling",
+  "topic": "5.4",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the rotational inertia is evaluated for both disks numerically"
+  ],
+  "misconceptions": [
+   "Scales with the mass and the radius to the first power.",
+   "Scales with the mass squared and the radius squared.",
+   "Scales only with the mass."
+  ]
+ },
+ {
+  "id": "pc_torque_pivot_claim",
+  "topic": "5.3",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the torques about the two pivots are computed numerically"
+  ],
+  "misconceptions": [
+   "Gets the right comparison for the wrong reason: the lever arm is measured from the pivot to the force, not from the center of the rod.",
+   "Believes the torque depends only on the force and not on the pivot position.",
+   "Reverses the dependence on the lever arm, thinking that a pivot nearer the force gives a larger torque."
+  ]
+ },
+ {
+  "id": "pc_beam_wall_tension",
+  "topic": "5.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy linalg.solve of the torque balance recomputes the tension"
+  ],
+  "misconceptions": [
+   "Puts the beam's weight at the end, $(M+m)g/\\sin\\theta$.",
+   "Omits the hanging mass, $Mg/(2\\sin\\theta)$.",
+   "Uses the cosine, $(M/2+m)g/\\cos\\theta$."
+  ]
+ },
+ {
+  "id": "pc_sym_alpha_pulley",
+  "topic": "5.6",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each option is evaluated numerically with the same constants"
+  ],
+  "misconceptions": [
+   "Omits the radius in the torque, $2T/(MR^2)$.",
+   "Uses the point-mass value for the rotational inertia, $T/(MR)$.",
+   "Inverts the ratio, $MR/(2T)$."
+  ]
+ },
+ {
+  "id": "pc_rot_ke_flywheel",
+  "topic": "6.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the energy is recomputed from the closed form $\\tfrac14MR^2\\omega^2$"
+  ],
+  "misconceptions": [
+   "Forgets to square the angular speed, $\\tfrac12I\\omega$.",
+   "Uses $I=MR^2$ for a disk, doubling the energy.",
+   "Uses $I=\\tfrac14MR^2$ for the disk, halving the energy."
+  ]
+ },
+ {
+  "id": "pc_work_torque_integral",
+  "topic": "6.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy integral versus a Simpson integration"
+  ],
+  "misconceptions": [
+   "Uses the final torque as the work.",
+   "Multiplies the final torque by the angle, $c\\theta_1\\cdot\\theta_1$.",
+   "Averages the torque and multiplies by the angle squared."
+  ]
+ },
+ {
+  "id": "pc_ang_mom_disks",
+  "topic": "6.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy linalg.solve of the angular momentum balance recomputes the final speed"
+  ],
+  "misconceptions": [
+   "Averages the two angular speeds, $\\omega_1/2$.",
+   "Conserves kinetic energy instead of angular momentum, $\\omega_1\\sqrt{I_1/(I_1+I_2)}$.",
+   "Uses the mass of the second disk, $I_2\\omega_1/(I_1+I_2)$."
+  ]
+ },
+ {
+  "id": "pc_skater_ke_ratio",
+  "topic": "6.4",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the kinetic energy is evaluated numerically from $L^2/(2I)$ before and after"
+  ],
+  "misconceptions": [
+   "Reports $k^2$, as if the kinetic energy were proportional to the square of the angular speed at constant inertia.",
+   "Reports $1/k$, assuming the energy decreases.",
+   "Reports that the kinetic energy is unchanged, because angular momentum is conserved."
+  ]
+ },
+ {
+  "id": "pc_rolling_incline_speed",
+  "topic": "6.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the energy balance is recomputed numerically"
+  ],
+  "misconceptions": [
+   "Multiplies by $(1+1)$ instead of dividing, $\\sqrt{2gh(1+1)}$.",
+   "Drops the factor of two in the energy balance, $\\sqrt{gh/(1+1)}$.",
+   "Ignores the rotational energy, $\\sqrt{2gh}=6.26\\text{ m/s}$."
+  ]
+ },
+ {
+  "id": "pc_rolling_speed_ratio",
+  "topic": "6.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the two speeds are computed from the energy balance and divided"
+  ],
+  "misconceptions": [
+   "Inverts the ratio, $\\sqrt{(1+0.5)/(1+1)}=0.866$.",
+   "Uses the ratio of the rotational inertia coefficients, $\\dfrac{1}{0.5}=2.00$, without the energy balance.",
+   "Omits the square root, $(1+1)/(1+0.5)=1.33$."
+  ]
+ },
+ {
+  "id": "pc_angular_impulse_speed",
+  "topic": "6.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the angular acceleration recomputes the angular speed"
+  ],
+  "misconceptions": [
+   "Uses the final torque over the inertia, $cT/I$.",
+   "Treats the torque as constant at its final value, $cT^2/I$.",
+   "Forgets to divide by the rotational inertia."
+  ]
+ },
+ {
+  "id": "pc_orbit_circular_speed",
+  "topic": "6.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the orbit with this speed keeps the radius constant"
+  ],
+  "misconceptions": [
+   "Uses $\\sqrt{2GM/r}$, the escape speed.",
+   "Uses $\\sqrt{GMr}$.",
+   "Uses $\\sqrt{GM/r^2}$, the field strength."
+  ]
+ },
+ {
+  "id": "pc_orbit_energy_ratio",
+  "topic": "6.6",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the energies are evaluated numerically for a sample orbit"
+  ],
+  "misconceptions": [
+   "Reports $-1/2$, which is the ratio $K/U$ with the two energies swapped.",
+   "Reports $+2$, giving the potential energy a positive sign.",
+   "Reports $-1$, which is the ratio $E/K$ of the total energy to the kinetic energy, not $U/K$."
+  ]
+ },
+ {
+  "id": "pc_kepler_period_scaling",
+  "topic": "6.6",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the periods are computed numerically from $T=2\\pi\\sqrt{r^3/GM}$ at the two radii"
+  ],
+  "misconceptions": [
+   "Scales as the square of the radius.",
+   "Scales as the square root of the radius.",
+   "Scales linearly with the orbital radius."
+  ]
+ },
+ {
+  "id": "pc_ellipse_speed_ratio",
+  "topic": "6.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the angular momentum per unit mass is computed at both points numerically"
+  ],
+  "misconceptions": [
+   "Uses the square of the ratio, $v_pr_p^2/r_a^2$.",
+   "Uses $v_a=v_p\\,r_a/r_p$, inverting the ratio.",
+   "Keeps the speed the same."
+  ]
+ },
+ {
+  "id": "pc_particle_ang_mom_line",
+  "topic": "6.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the two-dimensional cross product of a sample position and the momentum recomputes the magnitude"
+  ],
+  "misconceptions": [
+   "Divides by the distance instead of multiplying, $mv/d=4.00$.",
+   "Squares the distance, $mvd^2=32.0$, as in a rotational inertia.",
+   "Squares the speed, $mv^2d=128$, as in a kinetic energy."
+  ]
+ },
+ {
+  "id": "pc_bullet_rod_pivot",
+  "topic": "6.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy linalg.solve of the angular momentum balance recomputes the angular speed"
+  ],
+  "misconceptions": [
+   "Uses the center-pivot rod value, $ML^2/12$.",
+   "Conserves linear momentum instead, $mv/(M+m)$.",
+   "Omits the bullet from the final rotational inertia, $mvL/(ML^2/3)$."
+  ]
+ },
+ {
+  "id": "pc_escape_speed",
+  "topic": "6.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a bisection root finder on the total energy recomputes the escape speed"
+  ],
+  "misconceptions": [
+   "Uses $\\sqrt{2GM/R^2}$.",
+   "Uses $\\sqrt{2GMR}$.",
+   "Omits the square root, $2GM/R$."
+  ]
+ },
+ {
+  "id": "pc_shm_max_accel",
+  "topic": "7.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a numerical second derivative over one period recomputes the maximum"
+  ],
+  "misconceptions": [
+   "Uses $A\\omega$ squared with the wrong amplitude factor, $A^2\\omega$.",
+   "Uses $A\\omega^3$.",
+   "Reports the maximum speed, $A\\omega$."
+  ]
+ },
+ {
+  "id": "pc_shm_period_mass_spring",
+  "topic": "7.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the motion recomputes the period from the quarter period"
+  ],
+  "misconceptions": [
+   "Omits the square root, $2\\pi m/k$.",
+   "Reports the frequency instead of the period, $\\tfrac1{2\\pi}\\sqrt{k/m}$.",
+   "Omits the $2\\pi$, $\\sqrt{m/k}$."
+  ]
+ },
+ {
+  "id": "pc_shm_g_independence_claim",
+  "topic": "7.2",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the vertical oscillation with gravity included shows the same period for both values of $g$"
+  ],
+  "misconceptions": [
+   "Applies the pendulum period to a spring oscillator.",
+   "Believes that gravity supplies the restoring force of a spring oscillator.",
+   "Thinks that a smaller equilibrium stretch gives a shorter period."
+  ]
+ },
+ {
+  "id": "pc_shm_speed_at_x",
+  "topic": "7.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the speed is recomputed from the energy balance in a separate arrangement"
+  ],
+  "misconceptions": [
+   "Subtracts the amplitude and position instead of their squares, $\\sqrt{k(A-x)/m}$.",
+   "Uses the maximum speed, $A\\sqrt{k/m}$.",
+   "Uses the position as the amplitude, $x\\sqrt{k/m}$."
+  ]
+ },
+ {
+  "id": "pc_shm_ke_fraction",
+  "topic": "7.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the energy fractions are computed numerically from $x/A$"
+  ],
+  "misconceptions": [
+   "Uses $x/A$ for the kinetic energy fraction.",
+   "Uses $(x/A)^2$, the potential energy fraction.",
+   "Uses the position fraction itself, $1-x/A$."
+  ]
+ },
+ {
+  "id": "pc_shm_ode_period",
+  "topic": "7.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the equation recomputes the period from the quarter period"
+  ],
+  "misconceptions": [
+   "Omits the $2\\pi$, $1/\\sqrt{25}=0.200\\text{ s}$.",
+   "Multiplies by the root instead of dividing, $2\\pi\\sqrt{25}=31.4\\text{ s}$.",
+   "Omits the square root, $2\\pi/25=0.251\\text{ s}$."
+  ]
+ },
+ {
+  "id": "pc_pendulum_moon_ratio",
+  "topic": "7.5",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the periods are evaluated numerically for both values of g"
+  ],
+  "misconceptions": [
+   "Inverts the ratio, $\\sqrt{g_M/g_E}$.",
+   "Uses the inverse ratio without the root, $g_M/g_E$.",
+   "Uses the ratio of the field strengths without the root, $g_E/g_M$."
+  ]
+ },
+ {
+  "id": "pc_physical_pendulum_period",
+  "topic": "7.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the period is recomputed from the small-angle equation of motion with the same constants"
+  ],
+  "misconceptions": [
+   "Uses the center-of-mass inertia $ML^2/12$ at the pivot, $2\\pi\\sqrt{L/(6g)}$.",
+   "Treats the rod as a simple pendulum of length $L/2$.",
+   "Treats the rod as a simple pendulum of length $L$, $2\\pi\\sqrt{L/g}$."
+  ]
+ },
+ {
+  "id": "pc_spring_parallel_period",
+  "topic": "7.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration with the summed spring constant recomputes the period"
+  ],
+  "misconceptions": [
+   "Adds the periods that each spring would give alone.",
+   "Treats the springs as if they were in series, $k=k_1k_2/(k_1+k_2)$.",
+   "Uses only the first spring, $k_1=40\\text{ N/m}$."
+  ]
+ },
+ {
+  "id": "pc_shm_time_fraction",
+  "topic": "7.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the inverse cosine of the position fraction is evaluated numerically"
+  ],
+  "misconceptions": [
+   "Uses one quarter of the period, $1.50\\text{ s}$, which is the time to reach the equilibrium position.",
+   "Uses one third of the period, $2.00\\text{ s}$, which is the time to first reach $x=-A/2$.",
+   "Uses one eighth of the period, $0.750\\text{ s}$, assuming the position changes linearly in time so half of the amplitude takes half of a quarter period."
+  ]
+ },
+ {
+  "id": "pc_shm_xt_graph_claim",
+  "topic": "7.3",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "the signs are computed by finite differences of the plotted function"
+  ],
+  "misconceptions": [
+   "Reads the sign of the position backward, taking a point above the axis as negative or a point below the axis as positive.",
+   "Reads the slope sign backward, taking a falling graph as a positive velocity or a rising graph as a negative one.",
+   "Gives the acceleration the same sign as the position, instead of the opposite sign required by $a=-\\omega^2x$."
+  ]
+ },
+ {
+  "id": "pc_shm_scaling",
+  "topic": "7.2",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the period is evaluated numerically for both settings"
+  ],
+  "misconceptions": [
+   "Multiplies the period by $9$, squaring the factor.",
+   "Leaves the period unchanged, because the spring is the same.",
+   "Multiplies the period by $1/\\sqrt{3}$, inverting the dependence on the mass."
+  ]
+ },
+ {
+  "id": "pc_vertical_spring_period",
+  "topic": "7.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration with $k/m=g/\\Delta x$ recomputes the period"
+  ],
+  "misconceptions": [
+   "Uses the pendulum form with the stretch as a length and no $2\\pi$, $\\sqrt{\\Delta x/g}$.",
+   "Omits the square root, $2\\pi\\Delta x/g$.",
+   "Uses $2\\pi\\sqrt{g/\\Delta x}$, inverting the ratio."
+  ]
+ },
+ {
+  "id": "pc_shm_energy_scaling",
+  "topic": "7.4",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the energy and the maximum speed are evaluated numerically for both amplitudes"
+  ],
+  "misconceptions": [
+   "Multiplies the maximum speed by $\\sqrt{3}$, taking the square root of the amplitude factor.",
+   "Multiplies the maximum speed by $1/3$, thinking a larger amplitude slows the block.",
+   "Leaves the maximum speed unchanged, because the period does not depend on the amplitude."
+  ]
+ },
+ {
+  "id": "pc_vt_sine_displacement",
+  "topic": "1.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy definite integral versus a Simpson integration"
+  ],
+  "misconceptions": [
+   "Integrates $\\sin\\omega t$ without the factor $1/\\omega$ from the chain rule, giving $2A=12.0\\text{ m}$.",
+   "Takes the average of the peak speed and zero over the half period, $\\tfrac12A\\pi/\\omega=3.14\\text{ m}$.",
+   "Evaluates the antiderivative at the upper limit only, $A/\\omega=2.00\\text{ m}$, and forgets the lower limit."
+  ]
+ },
+ {
+  "id": "pc_cliff_launch_time",
+  "topic": "1.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the vertical motion confirms that the ball reaches the ground at the computed time"
+  ],
+  "misconceptions": [
+   "Drops the factor of two in the quadratic, $(v_y+\\sqrt{v_y^2+gh})/g=2.72\\text{ s}$.",
+   "Uses the flight time for level ground, $2v_0\\sin\\theta/g=1.97\\text{ s}$, and ignores the height of the cliff.",
+   "Takes the negative root of the quadratic, $(v_y-\\sqrt{v_y^2+2gh})/g$ in magnitude, $1.26\\text{ s}$, which is the time before the launch."
+  ]
+ },
+ {
+  "id": "pc_rain_on_car",
+  "topic": "1.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the relative velocity vector is built numerically and its norm is computed"
+  ],
+  "misconceptions": [
+   "Uses only the speed of the car, $20\\text{ m/s}$.",
+   "Uses only the speed of the rain, $12\\text{ m/s}$.",
+   "Subtracts the speeds, $v-u=8.00\\text{ m/s}$, as if the rain moved parallel to the car."
+  ]
+ },
+ {
+  "id": "pc_free_fall_two_balls",
+  "topic": "1.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of each fall recomputes the two times"
+  ],
+  "misconceptions": [
+   "Reports the fall time of the thrown ball, $3.15\\text{ s}$, instead of the difference.",
+   "Uses $v_0/g=1.02\\text{ s}$, the time for gravity to change the speed by $v_0$.",
+   "Reports the fall time of the dropped ball, $4.04\\text{ s}$, instead of the difference."
+  ]
+ },
+ {
+  "id": "pc_projectile_speed_at_time",
+  "topic": "1.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the vertical motion recomputes the vertical component"
+  ],
+  "misconceptions": [
+   "Adds the components instead of combining them as perpendicular vectors, $v_x+v_y=29.3\\text{ m/s}$.",
+   "Reports the launch speed, $25\\text{ m/s}$, as if the speed were constant.",
+   "Uses only the vertical component, $|v_y|=16.8\\text{ m/s}$."
+  ]
+ },
+ {
+  "id": "pc_atwood_incline_accel",
+  "topic": "2.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy linalg.solve of the two coupled equations recomputes the acceleration"
+  ],
+  "misconceptions": [
+   "Leaves the mass on the incline out of the total mass, $(m_2-m_1\\sin\\theta)g/m_2=7.84\\text{ m/s}^2$.",
+   "Ignores the incline angle, $(m_2-m_1)g/(m_1+m_2)=4.20\\text{ m/s}^2$.",
+   "Uses the cosine for the weight component along the incline, $(m_2-m_1\\cos\\theta)g/(m_1+m_2)=4.58\\text{ m/s}^2$."
+  ]
+ },
+ {
+  "id": "pc_banked_curve_speed",
+  "topic": "2.10",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the normal force from the vertical balance gives the centripetal acceleration, from which the speed is recomputed"
+  ],
+  "misconceptions": [
+   "Inverts the tangent, $\\sqrt{gr/\\tan\\theta}=45.8\\text{ m/s}$.",
+   "Omits the square root, $gr\\tan\\theta=457\\text{ m/s}$.",
+   "Ignores the banking, $\\sqrt{gr}=31.3\\text{ m/s}$."
+  ]
+ },
+ {
+  "id": "pc_conical_pendulum_period",
+  "topic": "2.10",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the angular speed is recomputed from $\\omega^2=g\\tan\\theta/(L\\sin\\theta)$"
+  ],
+  "misconceptions": [
+   "Uses $\\sin\\theta$ instead of $\\cos\\theta$, $2\\pi\\sqrt{L\\sin\\theta/g}=2.48\\text{ s}$.",
+   "Puts the cosine in the denominator, $2\\pi\\sqrt{L/(g\\cos\\theta)}=3.54\\text{ s}$.",
+   "Uses the simple-pendulum period, $2\\pi\\sqrt{L/g}=2.84\\text{ s}$."
+  ]
+ },
+ {
+  "id": "pc_block_on_block_slip",
+  "topic": "2.7",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy linalg.solve of the system equation recomputes the force"
+  ],
+  "misconceptions": [
+   "Uses the total weight without the coefficient, $(M+m)g=58.8\\text{ N}$.",
+   "Uses only the maximum friction force on the top block, $\\mu mg=3.92\\text{ N}$.",
+   "Uses the weight of the bottom block, $\\mu Mg=7.84\\text{ N}$, instead of the total mass."
+  ]
+ },
+ {
+  "id": "pc_quadratic_drag_terminal_numeric",
+  "topic": "2.9",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the equation of motion over a long time converges to the same speed"
+  ],
+  "misconceptions": [
+   "Multiplies by the drag constant instead of dividing, $\\sqrt{mgc}=4.43\\text{ m/s}$.",
+   "Uses the linear-drag formula with the constant $c$, $mg/\\sqrt{c}=55.4\\text{ m/s}$.",
+   "Omits the square root, $mg/c=78.4\\text{ m/s}$."
+  ]
+ },
+ {
+  "id": "pc_springs_series_stretch",
+  "topic": "2.8",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the two extensions are computed separately and added"
+  ],
+  "misconceptions": [
+   "Uses only the first spring, $mg/k_1=0.0490\\text{ m}$.",
+   "Treats the springs as acting in parallel, $mg/(k_1+k_2)=0.0218\\text{ m}$.",
+   "Averages the two extensions, $0.0441\\text{ m}$."
+  ]
+ },
+ {
+  "id": "pc_hilltop_normal_force",
+  "topic": "2.10",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the net inward force is computed from the vector sum and compared with mv^2/r"
+  ],
+  "misconceptions": [
+   "Reports only the centripetal force, $mv^2/r=2000\\text{ N}$.",
+   "Adds the centripetal term to the weight, $m(g+v^2/r)=11800\\text{ N}$.",
+   "Reports the weight, $mg=9800\\text{ N}$, ignoring the circular motion."
+  ]
+ },
+ {
+  "id": "pc_gravity_work_variable",
+  "topic": "3.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a Simpson integration of the gravitational force recomputes the work"
+  ],
+  "misconceptions": [
+   "Uses $GMm\\,(r_2-r_1)/r_1^2$, the initial force times the distance, giving $4.98\\times10^{10}\\text{ J}$.",
+   "Treats gravity as constant at the surface value, $mg(r_2-r_1)$ with $g=9.8\\text{ m/s}^2$, giving $7.84\\times10^{10}\\text{ J}$.",
+   "Uses the final distance only in both terms, $GMm\\,(r_2-r_1)/r_2^2$, giving $1.25\\times10^{10}\\text{ J}$."
+  ]
+ },
+ {
+  "id": "pc_power_from_position",
+  "topic": "3.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "finite-difference first and second derivatives recompute the velocity and the acceleration"
+  ],
+  "misconceptions": [
+   "Uses the force $6.00\\text{ N}$ from dropping the factor of two in the second derivative, so the power is half of the correct value.",
+   "Multiplies the force, $12.0\\text{ N}$, by the position, $1.00\\text{ m}$, instead of by the velocity.",
+   "Uses the average power over the first $1\\text{ s}$, $\\tfrac12mv^2/t=9.00\\text{ W}$, instead of the instantaneous power."
+  ]
+ },
+ {
+  "id": "pc_block_drop_spring_compression",
+  "topic": "3.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a bisection root finder on the energy balance recomputes the compression"
+  ],
+  "misconceptions": [
+   "Divides by $2k$ instead of $k$ in the quadratic formula, $0.0632\\text{ m}$.",
+   "Ignores the further drop during the compression, $\\sqrt{2mgh/k}=0.0990\\text{ m}$.",
+   "Gives the equilibrium compression, $mg/k=0.0245\\text{ m}$, which is where the speed is greatest, not the lowest point."
+  ]
+ },
+ {
+  "id": "pc_incline_up_distance",
+  "topic": "3.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the constant deceleration recomputes the distance"
+  ],
+  "misconceptions": [
+   "Subtracts the friction term as if it helped the block, $v_0^2/\\left(2g(\\sin\\theta-\\mu\\cos\\theta)\\right)=6.26\\text{ m}$.",
+   "Ignores friction, $v_0^2/(2g\\sin\\theta)=5.43\\text{ m}$.",
+   "Omits the factor of two, $v_0^2/\\left(g(\\sin\\theta+\\mu\\cos\\theta)\\right)=9.58\\text{ m}$."
+  ]
+ },
+ {
+  "id": "pc_perp_collision_speed",
+  "topic": "4.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy norm of the total momentum vector recomputes the speed"
+  ],
+  "misconceptions": [
+   "Combines the speeds before the collision, $\\sqrt{v_1^2+v_2^2}=18.0\\text{ m/s}$, ignoring the masses.",
+   "Adds the momenta as if the cars moved along the same line, $(m_1v_1+m_2v_2)/(m_1+m_2)=12.3\\text{ m/s}$.",
+   "Subtracts the momenta instead of combining them as perpendicular vectors, $|m_1v_1-m_2v_2|/(m_1+m_2)=1.36\\text{ m/s}$."
+  ]
+ },
+ {
+  "id": "pc_spring_collision_compression",
+  "topic": "4.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 simulation of the two carts and the spring recomputes the maximum compression"
+  ],
+  "misconceptions": [
+   "Applies momentum conservation but forgets the factor of one half in the spring energy, $v\\sqrt{2m_1m_2/\\big(k(m_1+m_2)\\big)}=0.155\\text{ m}$.",
+   "Puts all of the initial kinetic energy into the spring, $v\\sqrt{m_1/k}=0.141\\text{ m}$, although the second cart is moving at the maximum compression.",
+   "Uses the sum of the masses, $v\\sqrt{(m_1+m_2)/k}=0.224\\text{ m}$."
+  ]
+ },
+ {
+  "id": "pc_impulse_triangle_speed",
+  "topic": "4.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "a numerical integration of the plotted force recomputes the impulse"
+  ],
+  "misconceptions": [
+   "Reports the impulse without dividing by the mass, $60.0\\text{ m/s}$.",
+   "Uses the area of a rectangle, $F_{max}T/m=40.0\\text{ m/s}$.",
+   "Divides the impulse by the mass twice, $J/m^2=6.67\\text{ m/s}$."
+  ]
+ },
+ {
+  "id": "pc_rod_release_acceleration",
+  "topic": "5.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the torque and the rotational inertia are combined numerically"
+  ],
+  "misconceptions": [
+   "Uses the rotational inertia about the center, $ML^2/12$, which gives $6g=58.8\\text{ m/s}^2$.",
+   "Treats all of the mass as concentrated at the free end, $I=ML^2$, which gives $g/2=4.90\\text{ m/s}^2$.",
+   "Uses the acceleration of the center of mass, $\\alpha L/2=7.35\\text{ m/s}^2$."
+  ]
+ },
+ {
+  "id": "pc_ladder_friction",
+  "topic": "5.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy linalg.solve of the equilibrium equations recomputes the ratio of friction to normal force"
+  ],
+  "misconceptions": [
+   "Omits the factor of two from the center of mass at $L/2$, $1/\\tan\\theta=0.466$.",
+   "Uses the sine instead of the tangent, $1/(2\\sin\\theta)=0.552$.",
+   "Inverts the tangent, $\\tan\\theta/2=1.07$."
+  ]
+ },
+ {
+  "id": "pc_massive_pulley_tension",
+  "topic": "5.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy linalg.solve of the coupled equations recomputes the tension"
+  ],
+  "misconceptions": [
+   "Treats the pulley as a point mass at the rim, $I=MR^2$, giving $T=mMg/(m+M)=13.1\\text{ N}$.",
+   "Uses the pulley's weight, $Mg=39.2\\text{ N}$.",
+   "Takes the tension equal to the weight, $mg=19.6\\text{ N}$, as if the block were at rest."
+  ]
+ },
+ {
+  "id": "pc_rolling_accel_incline",
+  "topic": "6.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the energy method over a fixed distance recomputes the acceleration"
+  ],
+  "misconceptions": [
+   "Multiplies by $(1+1)$ instead of dividing, $g\\sin\\theta\\,(1+1)=11.2\\text{ m/s}^2$.",
+   "Uses the cosine of the angle, $g\\cos\\theta/(1+1)=4.01\\text{ m/s}^2$.",
+   "Treats the object as sliding without friction, $g\\sin\\theta=5.62\\text{ m/s}^2$."
+  ]
+ },
+ {
+  "id": "pc_child_merry_go_round",
+  "topic": "6.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy linalg.solve of the angular momentum balance recomputes the angular speed"
+  ],
+  "misconceptions": [
+   "Leaves the child out of the final rotational inertia, $mvR/I=0.600\\text{ rad/s}$.",
+   "Ignores the merry-go-round, $v/R=1.50\\text{ rad/s}$.",
+   "Conserves linear momentum and divides by the radius, $mv/\\big((M+m)R\\big)=0.250\\text{ rad/s}$."
+  ]
+ },
+ {
+  "id": "pc_pulley_energy_speed",
+  "topic": "6.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the speed from the acceleration and the distance recomputes the value"
+  ],
+  "misconceptions": [
+   "Omits the factor of two, $\\sqrt{mgh/(m+M/2)}=1.57\\text{ m/s}$.",
+   "Treats the block as in free fall, $\\sqrt{2gh}=3.13\\text{ m/s}$.",
+   "Treats the pulley as a point mass at the rim, $\\sqrt{2mgh/(m+M)}=1.81\\text{ m/s}$."
+  ]
+ },
+ {
+  "id": "pc_orbit_period_numeric",
+  "topic": "6.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the period is recomputed from the circumference and the orbital speed"
+  ],
+  "misconceptions": [
+   "Uses $r^2$ in place of $r^3$ inside the root, $2\\pi\\sqrt{r^2/(GM)}=9.60\\text{ s}$.",
+   "Uses the escape speed to find the period, $2\\pi r/\\sqrt{2GM/r}=2.15\\times10^{4}\\text{ s}$.",
+   "Omits the $2\\pi$, $\\sqrt{r^3/(GM)}=4830\\text{ s}$."
+  ]
+ },
+ {
+  "id": "pc_shm_amplitude_initial",
+  "topic": "7.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 simulation from the given initial conditions finds the maximum displacement"
+  ],
+  "misconceptions": [
+   "Uses only the velocity term, $v_0\\sqrt{m/k}=0.100\\text{ m}$, and ignores the initial displacement.",
+   "Adds the displacement and the velocity term, $x_0+v_0\\sqrt{m/k}=0.150\\text{ m}$.",
+   "Ignores the angular frequency, $\\sqrt{x_0^2+v_0^2}=1.00\\text{ m}$, which mixes meters and meters per second."
+  ]
+ },
+ {
+  "id": "pc_pendulum_length_period",
+  "topic": "7.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the period of a pendulum with the computed length is evaluated and compared with the given period"
+  ],
+  "misconceptions": [
+   "Uses $2\\pi$ instead of $4\\pi^2$, $gT^2/(2\\pi)=14.0\\text{ m}$.",
+   "Inverts the relation, $4\\pi^2/(gT^2)=0.448\\text{ m}$.",
+   "Omits the square on the period, $gT/(4\\pi^2)=0.745\\text{ m}$."
+  ]
+ },
+ {
+  "id": "pc_shm_value_at_time",
+  "topic": "7.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the position is recomputed with a calculator-independent numerical cosine"
+  ],
+  "misconceptions": [
+   "Uses the sine instead of the cosine, $0.182\\text{ m}$.",
+   "Evaluates the cosine with the argument in degrees, $0.200\\text{ m}$, instead of radians.",
+   "Leaves out the phase constant, $0.0141\\text{ m}$."
+  ]
+ },
+ {
+  "id": "pc_exp_decay_distance",
+  "topic": "1.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy improper integral versus a Simpson integration over forty time constants"
+  ],
+  "misconceptions": [
+   "Integrates $e^{-t/\\tau}$ without the factor $\\tau$ from the chain rule, giving $v_0=12.0\\text{ m}$.",
+   "Assumes the boat keeps its initial speed for five time constants, $5v_0\\tau=120\\text{ m}$.",
+   "Integrates only up to $t=\\tau$, $v_0\\tau(1-e^{-1})=15.2\\text{ m}$, instead of to infinity."
+  ]
+ },
+ {
+  "id": "pc_toss_from_platform_apex",
+  "topic": "1.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the vertical motion until the apex recomputes the height"
+  ],
+  "misconceptions": [
+   "Omits the factor of two in the rise, $h_0+v_0^2/g=35.0\\text{ m}$.",
+   "Reports the rise above the platform, $v_0^2/(2g)=10.0\\text{ m}$, and forgets the platform height.",
+   "Adds the initial speed to the platform height, $h_0+v_0=29.0\\text{ m}$, which mixes a speed with a height."
+  ]
+ },
+ {
+  "id": "pc_plane_crosswind",
+  "topic": "1.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the ground velocity vector is built from the heading and the wind and its components are checked"
+  ],
+  "misconceptions": [
+   "Adds the squares, $\\sqrt{v_a^2+v_w^2}=262\\text{ m/s}$, as if the wind were a perpendicular addition to the ground velocity.",
+   "Reports the wind speed, $80\\text{ m/s}$.",
+   "Subtracts the wind speed, $v_a-v_w=170\\text{ m/s}$, as if the wind blew against the plane."
+  ]
+ },
+ {
+  "id": "pc_circular_kinematics_accel",
+  "topic": "1.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "finite-difference second derivatives of each component recompute the magnitude"
+  ],
+  "misconceptions": [
+   "Differentiates three times, $R\\omega^3=54.0\\text{ m/s}^2$.",
+   "Divides by the radius, $\\omega^2/R=4.50\\text{ m/s}^2$, which has the wrong units.",
+   "Reports the speed, $R\\omega=6.00\\text{ m/s}$, instead of the acceleration."
+  ]
+ },
+ {
+  "id": "pc_xt_quartic_minimum",
+  "topic": "1.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy roots of the derivative and a finite-difference check of the stationary point"
+  ],
+  "misconceptions": [
+   "Evaluates the position where the acceleration is zero, $t=2/\\sqrt3$ s, $-4.44\\text{ m}$.",
+   "Drops the sign, $8.00\\text{ m}$.",
+   "Reports the time of the minimum, $t=2\\text{ s}$, instead of the position."
+  ]
+ },
+ {
+  "id": "pc_crate_pull_angle",
+  "topic": "2.7",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the vertical balance and the horizontal equation are evaluated numerically"
+  ],
+  "misconceptions": [
+   "Ignores friction, $F\\cos\\theta/m=4.83\\text{ m/s}^2$.",
+   "Uses the full weight for the normal force, $(F\\cos\\theta-\\mu mg)/m=2.87\\text{ m/s}^2$.",
+   "Adds the vertical component to the normal force, $\\big(F\\cos\\theta-\\mu(mg+F\\sin\\theta)\\big)/m=2.42\\text{ m/s}^2$."
+  ]
+ },
+ {
+  "id": "pc_table_hanging_friction",
+  "topic": "2.7",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy linalg.solve of the coupled equations recomputes the acceleration"
+  ],
+  "misconceptions": [
+   "Adds the friction force instead of subtracting it, $(m_2+\\mu m_1)g/(m_1+m_2)=4.51\\text{ m/s}^2$.",
+   "Ignores friction, $m_2g/(m_1+m_2)=3.92\\text{ m/s}^2$.",
+   "Leaves the sliding block out of the total mass, $(m_2-\\mu m_1)g/m_2=8.33\\text{ m/s}^2$."
+  ]
+ },
+ {
+  "id": "pc_hooke_table_constant",
+  "topic": "2.8",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "a least-squares fit through the table data recomputes the slope"
+  ],
+  "misconceptions": [
+   "Reports the largest force in the table, $30.1\\text{ N}$, which is a force and not a slope.",
+   "Divides the largest force by the smallest extension, $601\\text{ N/m}$.",
+   "Inverts the slope, $\\Delta x/\\Delta F=0.00833\\text{ m/N}$."
+  ]
+ },
+ {
+  "id": "pc_exp_force_velocity",
+  "topic": "2.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the acceleration recomputes the speed"
+  ],
+  "misconceptions": [
+   "Forgets the factor $\\tau$ from the chain rule, $F_0(1-e^{-1})/m=5.06\\text{ m/s}$.",
+   "Integrates to infinity instead of to $t=\\tau$, $F_0\\tau/m=16.0\\text{ m/s}$.",
+   "Uses only the part that remains after $t=\\tau$, $F_0\\tau e^{-1}/m=5.89\\text{ m/s}$."
+  ]
+ },
+ {
+  "id": "pc_circle_bottom_tension",
+  "topic": "2.10",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the net force toward the center is computed from the vector sum and compared with mv^2/r"
+  ],
+  "misconceptions": [
+   "Uses $m(g+v/r)$, a speed over a radius, $6.40\\text{ N}$.",
+   "Reports only the centripetal term, $mv^2/r=4.50\\text{ N}$.",
+   "Reports only the weight, $mg=4.90\\text{ N}$."
+  ]
+ },
+ {
+  "id": "pc_turntable_radius",
+  "topic": "2.10",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a bisection root finder on the force balance recomputes the radius"
+  ],
+  "misconceptions": [
+   "Inverts the relation, $\\omega^2/(\\mu g)=4.25\\text{ m}$.",
+   "Multiplies by $\\omega^2$, $\\mu g\\omega^2=147\\text{ m}$.",
+   "Divides by $\\omega$ instead of $\\omega^2$, $\\mu g/\\omega=1.18\\text{ m}$."
+  ]
+ },
+ {
+  "id": "pc_field_zero_point",
+  "topic": "2.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a bisection root finder on the net field recomputes the distance"
+  ],
+  "misconceptions": [
+   "Divides in the ratio of the masses, $d\\,m_1/(m_1+m_2)=0.200\\text{ m}$, forgetting the square roots from the inverse-square law.",
+   "Takes the midpoint, $d/2=1.00\\text{ m}$, as if the masses were equal.",
+   "Divides in the ratio of the squares of the masses, $d\\,m_1^2/(m_1^2+m_2^2)=0.0244\\text{ m}$."
+  ]
+ },
+ {
+  "id": "pc_drag_half_terminal_time",
+  "topic": "2.9",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the equation of motion confirms that the speed is half of the terminal speed at the computed time"
+  ],
+  "misconceptions": [
+   "Uses $\\tau\\ln 2$ with $\\tau=b/m$, $0.347\\text{ s}$.",
+   "Uses $\\tau(1-\\ln2)=0.614\\text{ s}$.",
+   "Takes one time constant, $\\tau=2.00\\text{ s}$, which is when the speed reaches 63 percent of the terminal speed."
+  ]
+ },
+ {
+  "id": "pc_com_planar_distance",
+  "topic": "2.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy weighted averages recompute both coordinates and the distance"
+  ],
+  "misconceptions": [
+   "Gives only the $x$-coordinate of the center of mass, $3.20\\text{ m}$.",
+   "Gives only the $y$-coordinate of the center of mass, $2.80\\text{ m}$.",
+   "Averages the coordinates without the masses, $\\sqrt{(4.00)^2+(2.67)^2}=4.81\\text{ m}$."
+  ]
+ },
+ {
+  "id": "pc_power_constant_force_scaling",
+  "topic": "3.5",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the power is evaluated numerically at the two times"
+  ],
+  "misconceptions": [
+   "Multiplies the power by $\\sqrt{3}$, taking the square root of the time factor.",
+   "Leaves the power unchanged, because the force is constant.",
+   "Multiplies the power by $9$, treating the power like the kinetic energy, which grows with the square of the time."
+  ]
+ },
+ {
+  "id": "pc_coaster_rank",
+  "topic": "3.4",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the speed at each point is computed from the energy balance and ranked"
+  ],
+  "misconceptions": [
+   "Ranks by the height only, with the highest point fastest, as if potential energy added to the speed. Applying that rule orders the objects C > B > D > A.",
+   "Ranks by the order of the labels along the track, assuming the car speeds up all the way. Applying that rule orders the objects A > B > C > D.",
+   "Ranks by the reverse order of the labels along the track. Applying that rule orders the objects D > C > B > A."
+  ]
+ },
+ {
+  "id": "pc_spring_speed_equilibrium",
+  "topic": "3.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a Simpson integration of the spring force recomputes the work and the speed"
+  ],
+  "misconceptions": [
+   "Uses $x_1\\sqrt{m/k}=0.0100\\text{ m/s}$, with the mass and spring constant interchanged.",
+   "Uses $\\sqrt{kx_1/m}=3.16\\text{ m/s}$, with the stretch to the first power.",
+   "Drops the factor of two in the energy balance, $\\sqrt{kx_1^2/(2m)}=0.707\\text{ m/s}$."
+  ]
+ },
+ {
+  "id": "pc_bounce_height",
+  "topic": "3.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the speeds before and after the bounce are computed and the rise recomputed"
+  ],
+  "misconceptions": [
+   "Cubes the fraction, $e^3h=1.02\\text{ m}$.",
+   "Takes the square root of the fraction, $\\sqrt{e}\\,h=1.79\\text{ m}$.",
+   "Uses one minus the fraction, $(1-e)h=0.400\\text{ m}$."
+  ]
+ },
+ {
+  "id": "pc_inverse_square_force",
+  "topic": "3.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy derivative versus a central finite difference"
+  ],
+  "misconceptions": [
+   "Halves the correct force, $A/(2r^2)=0.444\\text{ N}$, by treating the potential energy as an integral of the force with a factor of one half.",
+   "Divides by the cube of the distance, $A/r^3=0.296\\text{ N}$.",
+   "Reports the magnitude of the potential energy, $A/r=2.67\\text{ N}$."
+  ]
+ },
+ {
+  "id": "pc_work_fx_graph_signed",
+  "topic": "3.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "exact fractions for the trapezoid areas versus numpy integration of the resampled graph"
+  ],
+  "misconceptions": [
+   "Multiplies the final force by the distance, $12.0\\text{ J}$.",
+   "Adds the magnitudes of the areas, $10.0\\text{ J}$, without regard to the sign of the force.",
+   "Uses only the first segment, $4.00\\text{ J}$."
+  ]
+ },
+ {
+  "id": "pc_cart_rain_momentum",
+  "topic": "4.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy linalg.solve of the momentum balance recomputes the final speed"
+  ],
+  "misconceptions": [
+   "Divides by the mass of the rain only, $Mv/m=18.0\\text{ m/s}$.",
+   "Keeps the original speed, $3\\text{ m/s}$, because the rain falls vertically and has no horizontal momentum to remove.",
+   "Subtracts the masses, $(M-m)v/(M+m)=2.14\\text{ m/s}$, as in an elastic collision."
+  ]
+ },
+ {
+  "id": "pc_wall_bounce_force",
+  "topic": "4.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the impulse is recomputed numerically from the force and compared with the change in momentum"
+  ],
+  "misconceptions": [
+   "Uses only the speed after the impact, $m\\,ev/\\Delta t=90.0\\text{ N}$.",
+   "Ignores the reversal of the velocity, $m(v-ev)/\\Delta t=60.0\\text{ N}$.",
+   "Uses only the speed before the impact, $mv/\\Delta t=150\\text{ N}$, as if the ball stopped."
+  ]
+ },
+ {
+  "id": "pc_newton_cradle_claim",
+  "topic": "4.4",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the momentum and the kinetic energy of the two candidate outcomes are computed numerically"
+  ],
+  "misconceptions": [
+   "Believes that the speed can be shared equally without changing the total kinetic energy.",
+   "Thinks that stationary balls absorb part of the energy in a perfectly elastic collision.",
+   "Applies only the momentum conservation and ignores that an elastic collision also conserves the kinetic energy."
+  ]
+ },
+ {
+  "id": "pc_ke_momentum_ratio",
+  "topic": "4.1",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the momenta are evaluated numerically for two sample masses with the same kinetic energy"
+  ],
+  "misconceptions": [
+   "Says the momenta are equal, because the kinetic energies are equal.",
+   "Uses the inverse of the root, $1/3$, giving the lighter cart the larger momentum.",
+   "Uses the mass ratio itself, $9$, as if the momentum were proportional to the mass at the same kinetic energy."
+  ]
+ },
+ {
+  "id": "pc_rolling_contact_velocity",
+  "topic": "5.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the velocity of each point is computed as the sum of the translational and rotational parts"
+  ],
+  "misconceptions": [
+   "Gives the speed of a point at the side of the wheel, $\\sqrt{2}\\,v=8.49\\text{ m/s}$.",
+   "Adds the rim speed and the speed of the center twice, $v+2\\omega R=18.0\\text{ m/s}$.",
+   "Reports the speed of the center, $6\\text{ m/s}$, for every point of the wheel."
+  ]
+ },
+ {
+  "id": "pc_net_torque_two_forces",
+  "topic": "5.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the signed torques are added numerically"
+  ],
+  "misconceptions": [
+   "Multiplies the forces by the same lever arm, $(F_1-F_2)r_1=4.00\\text{ N\u00b7m}$.",
+   "Adds the magnitudes of the two torques, $F_1r_1+F_2r_2=13.0\\text{ N\u00b7m}$, ignoring that they have opposite senses.",
+   "Subtracts in the wrong order, $F_2r_2-F_1r_1=-3.00\\text{ N\u00b7m}$, which reverses the sense of the net torque."
+  ]
+ },
+ {
+  "id": "pc_flywheel_force_spinup",
+  "topic": "5.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the constant angular acceleration recomputes the angular speed"
+  ],
+  "misconceptions": [
+   "Uses the linear speed $Ft/M=3.75\\text{ m/s}$ as the angular speed.",
+   "Treats the disk as a point mass at the rim, $Ft/(MR)=12.5\\text{ rad/s}$.",
+   "Forgets the radius in the torque, $2Ft/M=7.50\\text{ rad/s}$."
+  ]
+ },
+ {
+  "id": "pc_atwood_massive_pulley",
+  "topic": "5.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy linalg.solve of the three coupled equations recomputes the acceleration"
+  ],
+  "misconceptions": [
+   "Treats the pulley as a point mass at the rim, $(m_2-m_1)g/(m_1+m_2+M)=2.45\\text{ m/s}^2$.",
+   "Ignores the pulley's rotational inertia, $(m_2-m_1)g/(m_1+m_2)=3.27\\text{ m/s}^2$.",
+   "Uses the heavier mass only in the denominator, $(m_2-m_1)g/(m_2+M/2)=3.92\\text{ m/s}^2$."
+  ]
+ },
+ {
+  "id": "pc_rod_swing_end_speed",
+  "topic": "6.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the energy balance is recomputed numerically"
+  ],
+  "misconceptions": [
+   "Treats the free end as falling freely through $L$, $\\sqrt{2gL}=6.26\\text{ m/s}$.",
+   "Uses $I=ML^2/12$ about the end, $\\sqrt{12gL}=15.3\\text{ m/s}$.",
+   "Treats the rod as a point mass falling through $L/2$, $\\sqrt{gL}=4.43\\text{ m/s}$."
+  ]
+ },
+ {
+  "id": "pc_rolling_ke_fraction",
+  "topic": "6.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the two energies are computed numerically with $\\omega=v/R$"
+  ],
+  "misconceptions": [
+   "Reports the translational fraction, $1/(1+0.4)=0.714$.",
+   "Reports the coefficient itself, $0.4$, as the fraction.",
+   "Uses $1-0.4=0.600$."
+  ]
+ },
+ {
+  "id": "pc_angular_momentum_orbit_ratio",
+  "topic": "6.3",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the angular momentum is evaluated numerically for the two radii"
+  ],
+  "misconceptions": [
+   "Scales with the radius to the three halves, $27$.",
+   "Leaves the angular momentum unchanged, because it is conserved.",
+   "Scales the angular momentum with the radius, $9$."
+  ]
+ },
+ {
+  "id": "pc_brake_turns",
+  "topic": "6.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the constant deceleration recomputes the angle"
+  ],
+  "misconceptions": [
+   "Uses $I=\\tfrac14MR^2$, $2.86$ revolutions, halving the rotational kinetic energy.",
+   "Reports the angle in radians, $36.0\\text{ rad}$, instead of revolutions.",
+   "Uses $I=MR^2$ for the disk, $11.5$ revolutions, doubling the rotational kinetic energy."
+  ]
+ },
+ {
+  "id": "pc_physical_pendulum_disk",
+  "topic": "7.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the period is recomputed from the small-angle equation of motion with the same rotational inertia"
+  ],
+  "misconceptions": [
+   "Uses the rotational inertia about the center, $\\tfrac12MR^2$, at the pivot, $2\\pi\\sqrt{R/(2g)}=1.00\\text{ s}$.",
+   "Uses a pendulum length of the diameter, $2\\pi\\sqrt{2R/g}=2.01\\text{ s}$.",
+   "Treats the disk as a simple pendulum of length $R$, $2\\pi\\sqrt{R/g}=1.42\\text{ s}$."
+  ]
+ },
+ {
+  "id": "pc_shm_equal_energy_position",
+  "topic": "7.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the kinetic and potential energies are evaluated numerically at the computed position"
+  ],
+  "misconceptions": [
+   "Uses $A\\sqrt{3}/2=0.346\\text{ m}$, where three quarters of the energy is potential.",
+   "Takes a quarter of the amplitude, $A/4=0.100\\text{ m}$.",
+   "Takes half of the amplitude, $A/2=0.200\\text{ m}$, where only a quarter of the energy is potential."
+  ]
+ },
+ {
+  "id": "pc_shm_vmax_from_period",
+  "topic": "7.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the position function is differentiated numerically over one period and the maximum speed is read"
+  ],
+  "misconceptions": [
+   "Uses $\\pi A/T=0.314\\text{ m/s}$, with one factor of two missing.",
+   "Reports the maximum acceleration $4\\pi^2A/T^2=3.95\\text{ m/s}^2$ in place of the speed.",
+   "Omits the factor of $2\\pi$, $A/T=0.100\\text{ m/s}$."
+  ]
+ },
+ {
+  "id": "pc_shm_series_springs_period",
+  "topic": "7.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 simulation with the effective spring constant recomputes the period"
+  ],
+  "misconceptions": [
+   "Adds the periods that each spring would give alone, $0.957\\text{ s}$.",
+   "Adds the spring constants as for springs in parallel, $2\\pi\\sqrt{m/(k_1+k_2)}=0.336\\text{ s}$.",
+   "Uses only the first spring, $2\\pi\\sqrt{m/k_1}=0.444\\text{ s}$."
+  ]
+ },
+ {
+  "id": "pc_xt_product_max",
+  "topic": "1.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy derivative and a finite-difference check of the stationary point"
+  ],
+  "misconceptions": [
+   "Forgets the factor $1/e$ and reports $a\\tau=12.0\\text{ m}$.",
+   "Uses $a\\tau e=32.6\\text{ m}$, with the exponential in the numerator.",
+   "Evaluates the position at $t=2\\tau$, $3.25\\text{ m}$."
+  ]
+ },
+ {
+  "id": "pc_swimmer_direct_crossing",
+  "topic": "1.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the ground velocity vector is built from the heading and the current and its components are checked"
+  ],
+  "misconceptions": [
+   "Uses the resultant speed $\\sqrt{v_s^2+v_r^2}$ for the crossing, $w/\\sqrt{v_s^2+v_r^2}=14.0\\text{ s}$.",
+   "Uses the sum of the speeds, $w/(v_s+v_r)=10.9\\text{ s}$.",
+   "Uses the difference of the speeds, $w/(v_s-v_r)=24.0\\text{ s}$."
+  ]
+ },
+ {
+  "id": "pc_complementary_angle_heights",
+  "topic": "1.5",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the two maximum heights are computed by RK4 integration and divided"
+  ],
+  "misconceptions": [
+   "Inverts the ratio, $1/\\tan^2\\theta=2.04$.",
+   "Reports one, because the two ranges are equal.",
+   "Uses the ratio of the sines, $\\sin\\theta/\\cos\\theta=0.700$, without squaring."
+  ]
+ },
+ {
+  "id": "pc_two_incline_pulley",
+  "topic": "2.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy linalg.solve of the two coupled equations recomputes the acceleration"
+  ],
+  "misconceptions": [
+   "Ignores the angle of the second incline, $(m_1\\sin\\theta_1-m_2)g/(m_1+m_2)$, $0.238\\text{ m/s}^2$.",
+   "Adds the two weight components, $(m_1\\sin\\theta_1+m_2\\sin\\theta_2)g/(m_1+m_2)=6.12\\text{ m/s}^2$.",
+   "Uses the cosines for the components along the inclines, $(m_1\\cos\\theta_1-m_2\\cos\\theta_2)g/(m_1+m_2)$, $0.763\\text{ m/s}^2$."
+  ]
+ },
+ {
+  "id": "pc_terminal_speed_ratio",
+  "topic": "2.9",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the terminal speeds are evaluated numerically for the two masses under the stated law"
+  ],
+  "misconceptions": [
+   "Uses the square of the mass ratio, $81$.",
+   "Inverts the ratio, $1/3$.",
+   "Says the terminal speeds are equal, because every object falls with the same acceleration $g$."
+  ]
+ },
+ {
+  "id": "pc_resultant_three_forces",
+  "topic": "2.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the vectors are added numerically and the norm is computed"
+  ],
+  "misconceptions": [
+   "Ignores the force along $-x$, $\\sqrt{F_1^2+F_2^2}=25.0\\text{ N}$.",
+   "Adds the magnitudes of the three forces, $40.0\\text{ N}$.",
+   "Adds the two perpendicular components without the Pythagorean theorem, $|F_x|+F_y=30.0\\text{ N}$."
+  ]
+ },
+ {
+  "id": "pc_elevator_tension_graph",
+  "topic": "2.5",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "the slope is computed from the vertices and Newton's second law is solved numerically"
+  ],
+  "misconceptions": [
+   "Reports the net force $m|a|=300\\text{ N}$ as the tension.",
+   "Uses the tension for the speeding-up stage, $m(g+a)=3390\\text{ N}$.",
+   "Reports the weight, $mg=2940\\text{ N}$, ignoring the acceleration."
+  ]
+ },
+ {
+  "id": "pc_spring_incline_equilibrium",
+  "topic": "2.8",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy linalg.solve of the equilibrium equation recomputes the extension"
+  ],
+  "misconceptions": [
+   "Doubles the force, $2mg\\sin\\theta/k=0.277\\text{ m}$.",
+   "Uses the full weight, $mg/k=0.196\\text{ m}$, ignoring the incline.",
+   "Omits the factor $g$, $m\\sin\\theta/k=0.0141\\text{ m}$."
+  ]
+ },
+ {
+  "id": "pc_friction_graph_mus",
+  "topic": "2.7",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "the peak value of the plotted friction force is read numerically and divided by the weight"
+  ],
+  "misconceptions": [
+   "Divides the peak force by the mass without $g$, $f_{max}/m=4.90$.",
+   "Divides the plateau force by the weight, $f_k/(mg)=0.400$, which is the kinetic coefficient.",
+   "Divides the weight by the peak force, $mg/f_{max}=2.00$."
+  ]
+ },
+ {
+  "id": "pc_pendulum_bottom_tension",
+  "topic": "3.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the speed from an RK4 pendulum integration recomputes the tension"
+  ],
+  "misconceptions": [
+   "Subtracts the centripetal term from the weight, $mg-mv^2/L$ in magnitude, $4.06\\text{ N}$.",
+   "Uses the speed from a drop through the whole length, $mg+m(2gL)/L=29.4\\text{ N}$.",
+   "Reports only the centripetal term, $mv^2/L=5.74\\text{ N}$."
+  ]
+ },
+ {
+  "id": "pc_power_incline_climb",
+  "topic": "3.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the driving force and the power are computed numerically"
+  ],
+  "misconceptions": [
+   "Ignores the resistive force, $mg\\sin\\theta\\,v=10300\\text{ W}$.",
+   "Ignores the weight component, $fv=6000\\text{ W}$.",
+   "Uses the full weight, $(mg+f)v=153000\\text{ W}$."
+  ]
+ },
+ {
+  "id": "pc_spring_launch_friction_distance",
+  "topic": "3.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the deceleration after the release recomputes the distance"
+  ],
+  "misconceptions": [
+   "Uses $kx/(\\mu mg)=13.6\\text{ m}$, the stretch force over the friction force.",
+   "Ignores the friction on the spring release and uses $kx^2/(mg)\\mu$ without the factor of two, $1.36\\text{ m}$.",
+   "Uses the weight in place of the friction force, $kx^2/(2mg)=0.204\\text{ m}$."
+  ]
+ },
+ {
+  "id": "pc_pendulum_max_angle",
+  "topic": "3.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the energy balance is recomputed at the computed angle"
+  ],
+  "misconceptions": [
+   "Omits the factor of two in the energy, $\\cos\\theta=1-v^2/(gL)$ gives $57.3^\\circ$.",
+   "Takes the angle whose cosine is $v^2/(2gL)$, $76.7^\\circ$.",
+   "Uses $\\sin\\theta=1-v^2/(2gL)$, $\\theta=50.4^\\circ$, with the sine in place of the cosine."
+  ]
+ },
+ {
+  "id": "pc_average_power_claim",
+  "topic": "3.5",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the work done divided by the time is computed numerically and compared with the final instantaneous power"
+  ],
+  "misconceptions": [
+   "Thinks that starting from rest makes the average power zero.",
+   "Believes that a constant force delivers a constant power.",
+   "Applies the time dependence of the kinetic energy to the power."
+  ]
+ },
+ {
+  "id": "pc_bullet_through_block",
+  "topic": "4.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy linalg.solve of the momentum balance recomputes the block speed"
+  ],
+  "misconceptions": [
+   "Uses the bullet's final momentum, $mv_2/M=3.75\\text{ m/s}$.",
+   "Adds the bullet speeds, $m(v_1+v_2)/M=13.8\\text{ m/s}$.",
+   "Uses the full initial bullet momentum, $mv_1/M=10.0\\text{ m/s}$, as if the bullet stopped in the block."
+  ]
+ },
+ {
+  "id": "pc_cannon_recoil_angle",
+  "topic": "4.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy linalg.solve of the horizontal momentum balance recomputes the recoil speed"
+  ],
+  "misconceptions": [
+   "Uses the vertical component, $mv\\sin\\theta/M=1.50\\text{ m/s}$.",
+   "Divides by the cosine instead of multiplying, $mv/(M\\cos\\theta)=3.13\\text{ m/s}$.",
+   "Uses the full muzzle speed, $mv/M=2.50\\text{ m/s}$, ignoring the angle."
+  ]
+ },
+ {
+  "id": "pc_equal_mass_exchange",
+  "topic": "4.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy linalg.solve of the momentum and relative-speed equations recomputes the final velocities"
+  ],
+  "misconceptions": [
+   "Reverses its own velocity, $-6\\text{ m/s}$, as for a bounce off a wall.",
+   "Keeps its own velocity, $6\\text{ m/s}$, as if the second block did not affect it.",
+   "Takes the negative of the second block's initial velocity, $3.00\\text{ m/s}$."
+  ]
+ },
+ {
+  "id": "pc_impulse_rank_pulses",
+  "topic": "4.2",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the impulse of each pulse is computed from its area and ranked"
+  ],
+  "misconceptions": [
+   "Ranks by the peak force only. Applying that rule orders the objects D > C > A > B.",
+   "Ranks the pulses in reverse order of the impulse. Applying that rule orders the objects D > B > A > C.",
+   "Ranks by the duration only. Applying that rule orders the objects C > B > A > D."
+  ]
+ },
+ {
+  "id": "pc_beam_two_supports",
+  "topic": "5.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy linalg.solve of the force and torque balances recomputes the support forces"
+  ],
+  "misconceptions": [
+   "Leaves out the weight of the beam, $mgx/L=24.5\\text{ N}$.",
+   "Splits the total weight equally, $(M+m)g/2=196\\text{ N}$.",
+   "Measures the position of the box from the wrong end, $Mg/2+mg(L-x)/L=220\\text{ N}$, which is the force on the left support."
+  ]
+ },
+ {
+  "id": "pc_ring_tangential_alpha",
+  "topic": "5.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the angular motion recomputes the angular acceleration"
+  ],
+  "misconceptions": [
+   "Reports the linear acceleration $F/M=2.50\\text{ m/s}^2$ as the angular acceleration.",
+   "Uses the rotational inertia of a disk, $2F/(MR)=16.7\\text{ rad/s}^2$.",
+   "Multiplies by the radius, $FR/M=0.750\\text{ rad/s}^2$."
+  ]
+ },
+ {
+  "id": "pc_rolling_friction_force",
+  "topic": "5.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the friction force is recomputed from the weight component minus the mass times the rolling acceleration"
+  ],
+  "misconceptions": [
+   "Reports zero, because the point of contact does not slip.",
+   "Uses the whole weight component, $Mg\\sin\\theta=6.70\\text{ N}$, as the friction force.",
+   "Uses the kinetic friction formula with an assumed coefficient of $0.5$, $0.5\\,Mg\\cos\\theta=9.21\\text{ N}$."
+  ]
+ },
+ {
+  "id": "pc_rod_quarter_inertia",
+  "topic": "5.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the two contributions are summed numerically"
+  ],
+  "misconceptions": [
+   "Adds $Md$ instead of $Md^2$, $ML^2/12+ML/4=1.67\\text{ kg\u00b7m}^2$.",
+   "Subtracts the parallel-axis term instead of adding it, $ML^2/12-M(L/4)^2=0.167\\text{ kg\u00b7m}^2$.",
+   "Uses the value about the end, $ML^2/3=2.67\\text{ kg\u00b7m}^2$."
+  ]
+ },
+ {
+  "id": "pc_rolling_time_ratio",
+  "topic": "6.5",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the accelerations are computed and the times from the same distance are divided"
+  ],
+  "misconceptions": [
+   "Uses the ratio of the rotational inertia coefficients, $c_1/c_2=0.400$, without the energy balance.",
+   "Omits the square root, $(1+0.4)/(1+1)=0.700$.",
+   "Inverts the ratio, $\\sqrt{(1+1)/(1+0.4)}=1.20$."
+  ]
+ },
+ {
+  "id": "pc_orbit_transfer_work",
+  "topic": "6.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the kinetic and potential energies are recomputed separately and added"
+  ],
+  "misconceptions": [
+   "Uses only the change in the potential energy, $GMm(1/r_1-1/r_2)=2.66\\times10^{10}\\text{ J}$.",
+   "Uses the magnitude of the potential energy at the smaller orbit, $GMm/r_1=3.99\\times10^{10}\\text{ J}$.",
+   "Uses the kinetic energy at the larger orbit, $GMm/(2r_2)=6.64\\times10^{9}\\text{ J}$."
+  ]
+ },
+ {
+  "id": "pc_ring_drop_ke_loss",
+  "topic": "6.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the kinetic energies before and after are computed numerically"
+  ],
+  "misconceptions": [
+   "Reports the ratio of the rotational inertias, $I_2/I_1=1.33$, instead of the fraction of the energy lost.",
+   "Squares the fraction, $\\left(I_2/(I_1+I_2)\\right)^2=0.327$.",
+   "Uses the fraction of the first disk, $I_1/(I_1+I_2)=0.429$, which is the fraction that remains."
+  ]
+ },
+ {
+  "id": "pc_shm_phase_velocity_zero",
+  "topic": "7.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a central finite difference of the position function recomputes the velocity at $t=0$"
+  ],
+  "misconceptions": [
+   "Uses the cosine, $A\\omega\\cos\\phi=0.527\\text{ m/s}$.",
+   "Drops the minus sign, $0.288\\text{ m/s}$.",
+   "Evaluates the position instead of the velocity, $A\\cos\\phi=0.176\\text{ m}$."
+  ]
+ },
+ {
+  "id": "pc_pendulum_independence_claim",
+  "topic": "7.5",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the periods of both pendulums are computed from the small-angle equation of motion and shown to be equal"
+  ],
+  "misconceptions": [
+   "Treats a mass dependence as present but small.",
+   "Believes that a larger weight speeds up the swing, forgetting that the inertia is larger too.",
+   "Considers only the inertia and not the larger restoring force."
+  ]
+ },
+ {
+  "id": "pc_period_table_spring_k",
+  "topic": "7.2",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "a least-squares fit of $T^2$ against $m$ recomputes the slope and the spring constant"
+  ],
+  "misconceptions": [
+   "Forgets the $4\\pi^2$, $1/\\text{slope}=1.26\\text{ N/m}$.",
+   "Uses $\\text{slope}/(4\\pi^2)=0.0200\\text{ N/m}$, inverted.",
+   "Uses the slope of $T$ against $m$ instead of $T^2$, $4\\pi^2/\\text{slope}$ with that slope, $45.9\\text{ N/m}$."
+  ]
+ },
+ {
+  "id": "pc_shm_accel_graph_amplitude",
+  "topic": "7.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "the plotted function is evaluated numerically and the amplitude recomputed from the extremes"
+  ],
+  "misconceptions": [
+   "Uses the period instead of the angular frequency, $a_{max}/T^2=3.00\\text{ m}$.",
+   "Uses $a_{max}T^2/(2\\pi)=7.64\\text{ m}$, with one factor of $\\pi$ missing.",
+   "Multiplies by $\\omega^2$ instead of dividing, $a_{max}\\omega^2=118\\text{ m}$."
+  ]
+ },
+ {
+  "id": "pcs_fx_poly_set_q1",
+  "topic": "3.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy integral versus Simpson integration; speed from the energy equation"
+  ],
+  "misconceptions": [
+   "Averages the initial and final forces and multiplies by the distance.",
+   "Multiplies the final force by the distance.",
+   "Integrates twice, $cX^4/12$."
+  ]
+ },
+ {
+  "id": "pcs_fx_poly_set_q2",
+  "topic": "3.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy integral versus Simpson integration; speed from the energy equation"
+  ],
+  "misconceptions": [
+   "Omits the factor of two in the work-energy theorem, $\\sqrt{W/m}$.",
+   "Forgets the square root, $2W/m$.",
+   "Reports the work per unit mass, $W/m$, as the speed."
+  ]
+ },
+ {
+  "id": "pcs_xt_cubic_set_q1",
+  "topic": "1.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy derivative versus a central finite difference; the displacement from direct evaluation"
+  ],
+  "misconceptions": [
+   "Evaluates the position function instead of its derivative.",
+   "Divides the position by the time, which gives an average velocity.",
+   "Differentiates only the cubic term."
+  ]
+ },
+ {
+  "id": "pcs_xt_cubic_set_q2",
+  "topic": "1.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy derivative versus a central finite difference; the displacement from direct evaluation"
+  ],
+  "misconceptions": [
+   "Reports the absolute value of the displacement as a distance with the wrong sign.",
+   "Reports the position at the earlier time only.",
+   "Divides the displacement by the elapsed time, which is the average velocity."
+  ]
+ },
+ {
+  "id": "pcs_ft_sine_set_q1",
+  "topic": "4.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy integral versus Simpson integration"
+  ],
+  "misconceptions": [
+   "Uses $cT/\\pi$, forgetting a factor of two from the integral of the sine.",
+   "Uses $\\pi cT/2$.",
+   "Takes half of the peak force times the time, $cT/2$."
+  ]
+ },
+ {
+  "id": "pcs_ft_sine_set_q2",
+  "topic": "4.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy integral versus Simpson integration"
+  ],
+  "misconceptions": [
+   "Reports the peak force.",
+   "Reports half of the peak force.",
+   "Divides the impulse by two times the duration."
+  ]
+ },
+ {
+  "id": "pcs_shm_energy_set_q1",
+  "topic": "7.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the oscillator recomputes the maximum speed at the equilibrium position"
+  ],
+  "misconceptions": [
+   "Divides the energy by the spring constant, $E/k=0.0200\\text{ m}$, with the wrong power.",
+   "Takes $\\sqrt{E/k}=0.141\\text{ m}$, missing the factor of two in $E=\\tfrac12kA^2$.",
+   "Reads the total energy, $2.00\\text{ J}$, as if it were a position in meters."
+  ]
+ },
+ {
+  "id": "pcs_shm_energy_set_q2",
+  "topic": "7.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the oscillator recomputes the maximum speed at the equilibrium position"
+  ],
+  "misconceptions": [
+   "Uses the potential energy at half of the amplitude as the kinetic energy, $\\sqrt{2(E/4)/m}=0.707\\text{ m/s}$.",
+   "Multiplies instead of dividing by the mass, $\\sqrt{2Em}=2.83\\text{ m/s}$.",
+   "Omits the factor of two, $\\sqrt{E/m}=1.00\\text{ m/s}$."
+  ]
+ },
+ {
+  "id": "pcs_drag_graph_set_q1",
+  "topic": "2.9",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the equation of motion reproduces the graph and its plateau"
+  ],
+  "misconceptions": [
+   "Takes half of the plateau value, $2.45\\text{ m/s}$, as the terminal speed.",
+   "Reads the top of the vertical axis, $6.12\\text{ m/s}$, as the terminal speed.",
+   "Reads the speed at $t=1.00\\text{ s}$, $4.24\\text{ m/s}$, before the curve levels off."
+  ]
+ },
+ {
+  "id": "pcs_drag_graph_set_q2",
+  "topic": "2.9",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the equation of motion reproduces the graph and its plateau"
+  ],
+  "misconceptions": [
+   "Divides the terminal speed by the weight, $v_t/(mg)=0.250\\text{ kg/s}$.",
+   "Multiplies the mass by the terminal speed, $mv_t=9.80\\text{ kg\u00b7m/s}$.",
+   "Uses the weight $mg=19.6\\text{ N}$ as the drag coefficient."
+  ]
+ },
+ {
+  "id": "pcs_torque_graph_set_q1",
+  "topic": "6.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a numerical integration of the plotted torque recomputes the angular impulse; the angular speed follows from $\\omega=\\Delta L/I$"
+  ],
+  "misconceptions": [
+   "Uses only the flat part of the graph, $\\tau_0t_2=6.00\\text{ kg\u00b7m}^{2}\\text{/s}$.",
+   "Multiplies the final torque by the total time, $\\tau_0T=12.0\\text{ kg\u00b7m}^{2}\\text{/s}$.",
+   "Uses only the triangle, $\\tfrac12\\tau_0t_1=3.00\\text{ kg\u00b7m}^{2}\\text{/s}$."
+  ]
+ },
+ {
+  "id": "pcs_torque_graph_set_q2",
+  "topic": "6.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a numerical integration of the plotted torque recomputes the angular impulse; the angular speed follows from $\\omega=\\Delta L/I$"
+  ],
+  "misconceptions": [
+   "Forgets to divide by the rotational inertia, $9.00\\text{ rad/s}$.",
+   "Uses the flat part only, $\\tau_0t_2/I=3.00\\text{ rad/s}$.",
+   "Divides by the rotational inertia twice, $2.25\\text{ rad/s}$."
+  ]
+ },
+ {
+  "id": "pcs_orbit_table_set_q1",
+  "topic": "6.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the angular momentum per unit mass is computed at both points and the speed ratio is squared"
+  ],
+  "misconceptions": [
+   "Uses the square of the ratio of the distances, $v_p(r_p/r_a)^2=778\\text{ m/s}$.",
+   "Inverts the ratio of the distances, $v_p\\,r_a/r_p=2.10\\times10^{4}\\text{ m/s}$.",
+   "Keeps the speed unchanged, $7000\\text{ m/s}$."
+  ]
+ },
+ {
+  "id": "pcs_orbit_table_set_q2",
+  "topic": "6.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the angular momentum per unit mass is computed at both points and the speed ratio is squared"
+  ],
+  "misconceptions": [
+   "Uses the ratio of the speeds, $v_a/v_p=0.333$, without squaring.",
+   "Uses the inverse of the speed ratio squared, $(v_p/v_a)^2=9.00$.",
+   "Reports that the kinetic energy is the same at both points, $1$."
+  ]
+ },
+ {
+  "id": "pcs_fx_signed_set_q1",
+  "topic": "3.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fractions for the signed areas versus numpy integration; the kinetic energy is accumulated numerically and its maximum located"
+  ],
+  "misconceptions": [
+   "Multiplies the initial force by the total distance, $F_0x_f=42.0\\text{ J}$.",
+   "Averages the force values at the plotted points and multiplies by the distance, $17.5\\text{ J}$.",
+   "Adds the magnitudes of the areas, $26.0\\text{ J}$, without the sign of the last segment."
+  ]
+ },
+ {
+  "id": "pcs_fx_signed_set_q2",
+  "topic": "3.2",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fractions for the signed areas versus numpy integration; the kinetic energy is accumulated numerically and its maximum located"
+  ],
+  "misconceptions": [
+   "Chooses the end of the graph, $x=7\\text{ m}$, because the force has acted over the greatest distance.",
+   "Chooses the midpoint of the graph, $x=3.50\\text{ m}$.",
+   "Chooses the position where the force is largest, $x=3\\text{ m}$, instead of where it changes sign."
+  ]
+ },
+ {
+  "id": "pcs_vt_shm_set_q1",
+  "topic": "7.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the plotted velocity is differentiated and integrated numerically to recompute the maximum acceleration and the amplitude"
+  ],
+  "misconceptions": [
+   "Uses $v_{max}\\cdot2\\pi/T=3.14\\text{ m}$, which is the maximum acceleration.",
+   "Uses $v_{max}T/\\pi=0.637\\text{ m}$, from $\\omega=\\pi/T$.",
+   "Divides the maximum speed by the period without the $2\\pi$, $v_{max}/T=0.500\\text{ m}$."
+  ]
+ },
+ {
+  "id": "pcs_vt_shm_set_q2",
+  "topic": "7.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the plotted velocity is differentiated and integrated numerically to recompute the maximum acceleration and the amplitude"
+  ],
+  "misconceptions": [
+   "Divides the maximum speed by the period, $v_{max}/T=0.500\\text{ m/s}^2$, ignoring the factor of $2\\pi$.",
+   "Uses $v_{max}\\omega^2=9.87\\text{ m/s}^2$ with an extra factor of $\\omega$.",
+   "Uses $v_{max}/(2\\pi T)=0.0796\\text{ m/s}^2$."
+  ]
+ },
+ {
+  "id": "pcs_elevator_vt_set_q1",
+  "topic": "2.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the slope is computed from the vertices; Newton's second law is solved numerically"
+  ],
+  "misconceptions": [
+   "Divides the speed by the time of the constant-speed part, $-v_1/(t_f-t_1)=-0.500\\text{ m/s}^2$.",
+   "Gives the acceleration the wrong sign, $1.50\\text{ m/s}^2$.",
+   "Reports the speeding-up acceleration, $1.00\\text{ m/s}^2$, instead of the slowing-down one."
+  ]
+ },
+ {
+  "id": "pcs_elevator_vt_set_q2",
+  "topic": "2.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the slope is computed from the vertices; Newton's second law is solved numerically"
+  ],
+  "misconceptions": [
+   "Uses the speeding-up acceleration, $m(g+a_1)=648\\text{ N}$.",
+   "Reports the net force, $m|a|=90.0\\text{ N}$.",
+   "Reports the weight, $mg=588\\text{ N}$."
+  ]
+ },
+ {
+  "id": "pcs_pendulum_table_set_q1",
+  "topic": "7.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a least-squares fit of $T^2$ against $L$ recomputes the slope; the period follows from the pendulum formula"
+  ],
+  "misconceptions": [
+   "Uses $2\\pi/\\text{slope}=1.56\\text{ m/s}^2$.",
+   "Uses $4\\pi^2L/T$ at the last row, with $T$ in place of $T^2$, $19.7\\text{ m/s}^2$.",
+   "Forgets the $4\\pi^2$, $1/\\text{slope}=0.248\\text{ m/s}^2$."
+  ]
+ },
+ {
+  "id": "pcs_pendulum_table_set_q2",
+  "topic": "7.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a least-squares fit of $T^2$ against $L$ recomputes the slope; the period follows from the pendulum formula"
+  ],
+  "misconceptions": [
+   "Scales the period linearly with the length from the last row, $4.02\\text{ s}$.",
+   "Omits the square root, $2\\pi L/g=1.28\\text{ s}$.",
+   "Uses the length divided by $g$ without the square root and $2\\pi$, $L/g=0.204\\text{ s}$."
+  ]
+ }
+]

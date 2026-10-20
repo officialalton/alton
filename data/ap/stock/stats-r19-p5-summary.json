@@ -1,0 +1,539 @@
+{
+ "difficultyAudit": {
+  "declared": 12,
+  "structuralExamPrep": 0,
+  "judgeExamPrep": 0,
+  "agreement": {
+   "agree": 12
+  },
+  "singlesExamPrepShare": 0,
+  "disagreements": []
+ },
+ "runs": [
+  "stats-r19-p5-a",
+  "stats-r19-p5-b",
+  "stats-r19-p5-c",
+  "stats-r19-p5-d",
+  "stats-r19-p5-e",
+  "stats-r19-p5-f",
+  "stats-r19-p5-g",
+  "stats-r19-p5-h"
+ ],
+ "rows": 120,
+ "passed": 67,
+ "rejected": 53,
+ "exactDuplicates": 0,
+ "singles": {
+  "candidates": 84,
+  "passed": 56
+ },
+ "sets": {
+  "candidates": 9,
+  "passed": 6,
+  "questionsInPassedSets": 18
+ },
+ "frq": {
+  "candidates": 27,
+  "passed": 5
+ },
+ "uniquePassedItems": 79,
+ "structureFamilies": 42,
+ "itemFamilyIds": 42,
+ "perUnit": {
+  "1": 14,
+  "2": 17,
+  "3": 15,
+  "4": 11,
+  "5": 17
+ },
+ "perSkillCategory": {
+  "1": 3,
+  "2": 15,
+  "3": 30,
+  "4": 26
+ },
+ "rejectionReasons": [
+  {
+   "key": "stats-r19-p5-a:ap_statistics-m01-k1",
+   "reason": "duplicate_gate_near_duplicate"
+  },
+  {
+   "key": "stats-r19-p5-a:ap_statistics-m02-k1",
+   "reason": "duplicate_gate_near_duplicate"
+  },
+  {
+   "key": "stats-r19-p5-a:ap_statistics-m03-k1",
+   "reason": "duplicate_gate_near_duplicate"
+  },
+  {
+   "key": "stats-r19-p5-a:ap_statistics-m08-k0",
+   "reason": "criterion_failed_key_scoring; instant_reject_missing_condition"
+  },
+  {
+   "key": "stats-r19-p5-a:ap_statistics-m09-k1",
+   "reason": "duplicate_gate_near_duplicate"
+  },
+  {
+   "key": "stats-r19-p5-a:ap_statistics-m10-k1",
+   "reason": "duplicate_gate_near_duplicate"
+  },
+  {
+   "key": "stats-r19-p5-a:ap_statistics-m11-k1",
+   "reason": "criterion_failed_distractor_explanation"
+  },
+  {
+   "key": "stats-r19-p5-a:ap_statistics-m14-k1",
+   "reason": "duplicate_gate_near_duplicate"
+  },
+  {
+   "key": "stats-r19-p5-a:ap_statistics-m15-k0",
+   "reason": "criterion_failed_distractor_explanation"
+  },
+  {
+   "key": "stats-r19-p5-a:ap_statistics-m16-k1",
+   "reason": "duplicate_gate_near_duplicate"
+  },
+  {
+   "key": "stats-r19-p5-a:ap_statistics-m17-k0",
+   "reason": "criterion_failed_stimulus_expression; criterion_failed_distractor_explanation"
+  },
+  {
+   "key": "stats-r19-p5-a:ap_statistics-m19-k1",
+   "reason": "duplicate_gate_near_duplicate"
+  },
+  {
+   "key": "stats-r19-p5-a:ap_statistics-m25-k1",
+   "reason": "criterion_failed_key_scoring; criterion_failed_stimulus_expression; instant_reject_missing_condition"
+  },
+  {
+   "key": "stats-r19-p5-a:ap_statistics-m26-k1",
+   "reason": "criterion_failed_distractor_explanation"
+  },
+  {
+   "key": "stats-r19-p5-a:ap_statistics-m27-k0",
+   "reason": "criterion_failed_scope_skill; criterion_failed_distractor_explanation; criterion_failed_exam_suitability; reference_pattern_mismatch"
+  },
+  {
+   "key": "stats-r19-p5-a:ap_statistics-m27-k1",
+   "reason": "criterion_failed_scope_skill; criterion_failed_exam_suitability; reference_pattern_mismatch"
+  },
+  {
+   "key": "stats-r19-p5-a:ap_statistics-m28-k1",
+   "reason": "duplicate_gate_near_duplicate"
+  },
+  {
+   "key": "stats-r19-p5-a:ap_statistics-m30-k1",
+   "reason": "criterion_failed_scope_skill; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; instant_reject_out_of_scope_knowledge; reference_pattern_mismatch"
+  },
+  {
+   "key": "stats-r19-p5-a:ap_statistics-m32-k1",
+   "reason": "criterion_failed_distractor_explanation"
+  },
+  {
+   "key": "stats-r19-p5-a:ap_statistics-m34-k0",
+   "reason": "criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability; reference_pattern_mismatch"
+  },
+  {
+   "key": "stats-r19-p5-a:ap_statistics-m34-k1",
+   "reason": "criterion_failed_scope_skill; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; instant_reject_missing_condition; reference_pattern_mismatch"
+  },
+  {
+   "key": "stats-r19-p5-a:ap_statistics-m35-k0",
+   "reason": "criterion_failed_distractor_explanation; criterion_failed_exam_suitability; reference_pattern_mismatch"
+  },
+  {
+   "key": "stats-r19-p5-a:ap_statistics-m35-k1",
+   "reason": "criterion_failed_distractor_explanation; criterion_failed_exam_suitability; reference_pattern_mismatch"
+  },
+  {
+   "key": "stats-r19-p5-a:ap_statistics-m36-k1",
+   "reason": "duplicate_gate_near_duplicate"
+  },
+  {
+   "key": "stats-r19-p5-b:ap_statistics-m02-k0",
+   "reason": "set_item_3:difficulty_signals_concepts; difficulty_signals_concepts"
+  },
+  {
+   "key": "stats-r19-p5-b:ap_statistics-m02-k1",
+   "reason": "set_item_3:difficulty_signals_concepts; difficulty_signals_concepts"
+  },
+  {
+   "key": "stats-r19-p5-b:ap_statistics-m02-k2",
+   "reason": "set_item_3:difficulty_signals_concepts; difficulty_signals_concepts"
+  },
+  {
+   "key": "stats-r19-p5-c:ap_statistics-f01-k0",
+   "reason": "criterion_failed_key_scoring; instant_reject_wrong_key"
+  },
+  {
+   "key": "stats-r19-p5-c:ap_statistics-f01-k1",
+   "reason": "solver_disagrees:B:flagged; criterion_failed_scope_skill; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_exam_suitability; instant_reject_wrong_key; instant_reject_missing_condition; reference_pattern_mismatch"
+  },
+  {
+   "key": "stats-r19-p5-c:ap_statistics-f01-k2",
+   "reason": "criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_exam_suitability"
+  },
+  {
+   "key": "stats-r19-p5-c:ap_statistics-f02-k0",
+   "reason": "solver_disagrees:E:numeric"
+  },
+  {
+   "key": "stats-r19-p5-c:ap_statistics-f02-k1",
+   "reason": "solver_disagrees:E:numeric"
+  },
+  {
+   "key": "stats-r19-p5-c:ap_statistics-f02-k2",
+   "reason": "solver_disagrees:E:numeric; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_exam_suitability; reference_pattern_mismatch"
+  },
+  {
+   "key": "stats-r19-p5-c:ap_statistics-f03-k2",
+   "reason": "duplicate_gate_near_duplicate"
+  },
+  {
+   "key": "stats-r19-p5-c:ap_statistics-f04-k0",
+   "reason": "part_B_calculation_without_answer_row"
+  },
+  {
+   "key": "stats-r19-p5-c:ap_statistics-f04-k1",
+   "reason": "part_B_calculation_without_answer_row"
+  },
+  {
+   "key": "stats-r19-p5-c:ap_statistics-f04-k2",
+   "reason": "part_B_calculation_without_answer_row"
+  },
+  {
+   "key": "stats-r19-p5-d:ap_statistics-m02-k1",
+   "reason": "criterion_failed_scope_skill; criterion_failed_distractor_explanation"
+  },
+  {
+   "key": "stats-r19-p5-d:ap_statistics-m02-k2",
+   "reason": "criterion_failed_distractor_explanation"
+  },
+  {
+   "key": "stats-r19-p5-d:ap_statistics-m03-k0",
+   "reason": "solver_disagrees:The stem contradicts itself. The slope is −2.2, so the correlation r must be negative and close to −1, not 'close to 1'. Option A repeats the same mistake. The intended answer (B) is still clear.; criterion_failed_stimulus_expression; criterion_failed_exam_suitability; instant_reject_missing_condition"
+  },
+  {
+   "key": "stats-r19-p5-d:ap_statistics-m03-k2",
+   "reason": "duplicate_gate_near_duplicate"
+  },
+  {
+   "key": "stats-r19-p5-f:ap_statistics-f01-k0",
+   "reason": "criterion_failed_key_scoring"
+  },
+  {
+   "key": "stats-r19-p5-f:ap_statistics-f01-k1",
+   "reason": "criterion_failed_stimulus_expression"
+  },
+  {
+   "key": "stats-r19-p5-f:ap_statistics-f01-k2",
+   "reason": "solver_disagrees:B:flagged; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability; instant_reject_wrong_key; reference_pattern_mismatch"
+  },
+  {
+   "key": "stats-r19-p5-f:ap_statistics-f02-k1",
+   "reason": "criterion_failed_key_scoring"
+  },
+  {
+   "key": "stats-r19-p5-f:ap_statistics-f02-k2",
+   "reason": "criterion_failed_key_scoring"
+  },
+  {
+   "key": "stats-r19-p5-f:ap_statistics-f03-k0",
+   "reason": "part_B_calculation_without_answer_row"
+  },
+  {
+   "key": "stats-r19-p5-f:ap_statistics-f03-k1",
+   "reason": "part_B_calculation_without_answer_row"
+  },
+  {
+   "key": "stats-r19-p5-f:ap_statistics-f03-k2",
+   "reason": "part_B_calculation_without_answer_row"
+  },
+  {
+   "key": "stats-r19-p5-h:ap_statistics-f01-k1",
+   "reason": "duplicate_gate_near_duplicate"
+  },
+  {
+   "key": "stats-r19-p5-h:ap_statistics-f01-k2",
+   "reason": "solver_disagrees:B:flagged; criterion_failed_key_scoring; criterion_failed_stimulus_expression; instant_reject_wrong_key"
+  },
+  {
+   "key": "stats-r19-p5-h:ap_statistics-f02-k1",
+   "reason": "duplicate_gate_near_duplicate"
+  },
+  {
+   "key": "stats-r19-p5-h:ap_statistics-f02-k2",
+   "reason": "criterion_failed_key_scoring"
+  }
+ ],
+ "costs": {
+  "stats-r19-p5-a": {
+   "byStage": {
+    "difficulty": 0.4939,
+    "review": 0.9824,
+    "review2": 0.0567,
+    "review4": 0.0249,
+    "solve": 0.4169
+   },
+   "total": 1.9748
+  },
+  "stats-r19-p5-b": {
+   "byStage": {
+    "difficulty": 0.1109,
+    "review": 0.2116,
+    "solve": 0.0954
+   },
+   "total": 0.4179
+  },
+  "stats-r19-p5-c": {
+   "byStage": {
+    "difficulty": 0.074,
+    "review": 0.2387,
+    "solve": 0.2129
+   },
+   "total": 0.5256
+  },
+  "stats-r19-p5-d": {
+   "byStage": {
+    "difficulty": 0.0631,
+    "review": 0.1179,
+    "review2": 0.0111,
+    "solve": 0.0544
+   },
+   "total": 0.2465
+  },
+  "stats-r19-p5-e": {
+   "byStage": {
+    "difficulty": 0.072,
+    "review": 0.138,
+    "review2": 0.0164,
+    "solve": 0.098
+   },
+   "total": 0.3244
+  },
+  "stats-r19-p5-f": {
+   "byStage": {
+    "difficulty": 0.0519,
+    "review": 0.1733,
+    "solve": 0.1654
+   },
+   "total": 0.3906
+  },
+  "stats-r19-p5-g": {
+   "byStage": {
+    "difficulty": 0.0206,
+    "review": 0.0385,
+    "solve": 0.0159
+   },
+   "total": 0.075
+  },
+  "stats-r19-p5-h": {
+   "byStage": {
+    "difficulty": 0.0537,
+    "review": 0.1662,
+    "solve": 0.1604
+   },
+   "total": 0.3803
+  }
+ },
+ "totalUsd": 4.3351,
+ "lookAlikeClustersWithExistingStock": 0,
+ "lookAlikeClustersContainingBatch": [
+  {
+   "id": "la:stats-r19-p5-a:ap_statistics-m04-k0",
+   "keys": [
+    "stats-r19-p5-a:ap_statistics-m04-k0",
+    "stats-r19-p5-a:ap_statistics-m04-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p5-a:ap_statistics-m05-k0",
+   "keys": [
+    "stats-r19-p5-a:ap_statistics-m05-k0",
+    "stats-r19-p5-a:ap_statistics-m05-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p5-a:ap_statistics-m06-k0",
+   "keys": [
+    "stats-r19-p5-a:ap_statistics-m06-k0",
+    "stats-r19-p5-a:ap_statistics-m06-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p5-a:ap_statistics-m07-k0",
+   "keys": [
+    "stats-r19-p5-a:ap_statistics-m07-k0",
+    "stats-r19-p5-a:ap_statistics-m07-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p5-a:ap_statistics-m12-k0",
+   "keys": [
+    "stats-r19-p5-a:ap_statistics-m12-k0",
+    "stats-r19-p5-a:ap_statistics-m12-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p5-a:ap_statistics-m13-k0",
+   "keys": [
+    "stats-r19-p5-a:ap_statistics-m13-k0",
+    "stats-r19-p5-a:ap_statistics-m13-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p5-a:ap_statistics-m18-k0",
+   "keys": [
+    "stats-r19-p5-a:ap_statistics-m18-k0",
+    "stats-r19-p5-a:ap_statistics-m18-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p5-a:ap_statistics-m20-k0",
+   "keys": [
+    "stats-r19-p5-a:ap_statistics-m20-k0",
+    "stats-r19-p5-a:ap_statistics-m20-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p5-a:ap_statistics-m21-k0",
+   "keys": [
+    "stats-r19-p5-a:ap_statistics-m21-k0",
+    "stats-r19-p5-a:ap_statistics-m21-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p5-a:ap_statistics-m22-k0",
+   "keys": [
+    "stats-r19-p5-a:ap_statistics-m22-k0",
+    "stats-r19-p5-a:ap_statistics-m22-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p5-a:ap_statistics-m23-k0",
+   "keys": [
+    "stats-r19-p5-a:ap_statistics-m23-k0",
+    "stats-r19-p5-a:ap_statistics-m23-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p5-a:ap_statistics-m24-k0",
+   "keys": [
+    "stats-r19-p5-a:ap_statistics-m24-k0",
+    "stats-r19-p5-a:ap_statistics-m24-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p5-a:ap_statistics-m29-k0",
+   "keys": [
+    "stats-r19-p5-a:ap_statistics-m29-k0",
+    "stats-r19-p5-a:ap_statistics-m29-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p5-a:ap_statistics-m31-k0",
+   "keys": [
+    "stats-r19-p5-a:ap_statistics-m31-k0",
+    "stats-r19-p5-a:ap_statistics-m31-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p5-a:ap_statistics-m33-k0",
+   "keys": [
+    "stats-r19-p5-a:ap_statistics-m33-k0",
+    "stats-r19-p5-a:ap_statistics-m33-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p5-b:ap_statistics-m01-k0",
+   "keys": [
+    "stats-r19-p5-b:ap_statistics-m01-k0",
+    "stats-r19-p5-b:ap_statistics-m01-k1",
+    "stats-r19-p5-b:ap_statistics-m01-k2"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p5-d:ap_statistics-m01-k0",
+   "keys": [
+    "stats-r19-p5-d:ap_statistics-m01-k0",
+    "stats-r19-p5-d:ap_statistics-m01-k1",
+    "stats-r19-p5-d:ap_statistics-m01-k2"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p5-d:ap_statistics-m03-k1",
+   "keys": [
+    "stats-r19-p5-d:ap_statistics-m03-k1",
+    "stats-r19-p5-g:ap_statistics-m01-k0",
+    "stats-r19-p5-g:ap_statistics-m01-k1",
+    "stats-r19-p5-g:ap_statistics-m01-k2"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-r19-p5-e:ap_statistics-m01-k0",
+   "keys": [
+    "stats-r19-p5-e:ap_statistics-m01-k0",
+    "stats-r19-p5-e:ap_statistics-m01-k1",
+    "stats-r19-p5-e:ap_statistics-m01-k2"
+   ],
+   "reasons": [
+    "family"
+   ]
+  }
+ ],
+ "lookAlikeComparedAgainst": "403 existing auto_passed MC (all subjects incl. the S1 pilot) + 62 S2-a items"
+}

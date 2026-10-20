@@ -1,0 +1,617 @@
+[
+ {
+  "candidateKey": "ap_statistics-m01-k0",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "3.1",
+  "unitCode": "3",
+  "skillPrimary": "2.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n_estimator_compare",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "The student identifies which estimators are unbiased (mean equals 0.4), then picks the one with the smallest spread (D). That is 2 sequential steps over a single small table with no arithmetic. This is a core 3.1 idea (bias plus variability), and 2 steps falls below the 3-step threshold for exam_prep. Only one distractor (C) survives the first step.",
+  "payload": {
+   "archetype": "st_n_estimator_compare",
+   "topic": "3.1",
+   "skill": "2.D",
+   "calculator": "allowed",
+   "stem": "The true value of the proportion of all voters in a city who support a measure is $0.4$. A researcher compares four estimators by simulating $1000$ samples for each and computing the estimate from every sample. The table shown gives the mean and the standard deviation of the estimates for each estimator. Which estimator is best for estimating the true value?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Mean and standard deviation of the estimates from 1000 simulated samples",
+    "data": {
+     "chart": "table",
+     "data": {
+      "columns": [
+       "Estimator",
+       "Mean of the estimates",
+       "Standard deviation of the estimates"
+      ],
+      "rows": [
+       [
+        "Estimator A",
+        "0.34",
+        "0.03"
+       ],
+       [
+        "Estimator B",
+        "0.35",
+        "0.08"
+       ],
+       [
+        "Estimator C",
+        "0.40",
+        "0.06"
+       ],
+       [
+        "Estimator D",
+        "0.40",
+        "0.04"
+       ]
+      ]
+     },
+     "title": "Results of 1000 simulated samples for each estimator"
+    }
+   },
+   "options": [
+    {
+     "text": "Estimator C, because the center of its sampling distribution is at the true value.",
+     "why": "Considers bias alone; another estimator is also centered at the true value and has less variability.",
+     "value": null
+    },
+    {
+     "text": "Estimator D, because the center of its sampling distribution is at the true value and its spread is the smallest among the estimators that are centered there.",
+     "why": "An estimator that is unbiased has a sampling distribution centered at the parameter, and among unbiased estimators the one with the least variability is best.",
+     "value": null
+    },
+    {
+     "text": "Estimator A, because it has the smallest spread of all the estimators.",
+     "why": "Considers variability alone; the center of this sampling distribution is not at the true value, so the estimator is biased.",
+     "value": null
+    },
+    {
+     "text": "Estimator B, because its sampling distribution has the largest spread and so covers the most possible values.",
+     "why": "Treats a larger spread as an advantage; more variability means estimates that are farther from the parameter more often.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 95,
+   "facts": [
+    "theta=0.4"
+   ],
+   "blueprint": {
+    "id": "st_n_estimator_compare",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Choose the best estimator from the center and spread of its simulated sampling distribution",
+    "topic": "3.1",
+    "skill": "2.D",
+    "student_thinking": [
+     "Compare the center of each sampling distribution with the true value to find the unbiased estimators",
+     "Among the unbiased estimators choose the one with the smallest spread and reject choices based on only one of the two properties"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Choose the best estimator from the center and spread of its simulated sampling distributio",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "the displayed values"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "variability_only",
+      "description": "Considers variability alone; the center of this sampling distribution is not at the true value, so the estimator is biased."
+     },
+     {
+      "id": "bias_only",
+      "description": "Considers bias alone; another estimator is also centered at the true value and has less variability."
+     },
+     {
+      "id": "spread_good",
+      "description": "Treats a larger spread as an advantage; more variability means estimates that are farther from the parameter more often."
+     }
+    ],
+    "verification": {
+     "independent_path": "the unbiased estimators are found by comparing each mean with the true value and the best one has the smallest standard deviation among them; the biased estimator with the smallest spread is deliberately included",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "representation_reading",
+     "claim_justification",
+     "interpretation"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Compare the center of each sampling distribution with the true value to find the unbiased estimators",
+     "Among the unbiased estimators choose the one with the smallest spread and reject choices based on only one of the two properties"
+    ],
+    "concepts": [
+     "bias of an estimator",
+     "variability of an estimator"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "Estimator A, because it has the smallest spread of all the estimators.": 1,
+     "Estimator C, because the center of its sampling distribution is at the true value.": 2,
+     "Estimator B, because its sampling distribution has the largest spread and so covers the most possible values.": 1
+    },
+    "arithmetic": "none"
+   },
+   "seed": 11000,
+   "pack_id": "st_n_estimator_compare-s11000",
+   "explanation_en": "The correct answer is Estimator D, because the center of its sampling distribution is at the true value and its spread is the smallest among the estimators that are centered there.. An estimator that is unbiased has a sampling distribution centered at the parameter, and among unbiased estimators the one with the least variability is best.\nEstimator C, because the center of its sampling distribution is at the true value. is incorrect: Considers bias alone; another estimator is also centered at the true value and has less variability.\nEstimator A, because it has the smallest spread of all the estimators. is incorrect: Considers variability alone; the center of this sampling distribution is not at the true value, so the estimator is biased.\nEstimator B, because its sampling distribution has the largest spread and so covers the most possible values. is incorrect: Treats a larger spread as an advantage; more variability means estimates that are farther from the parameter more often."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n_estimator_compare",
+   "facts": [
+    "theta=0.4"
+   ],
+   "seed": 11000
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Choosing the best estimator from the center and spread of simulated sampling distributions is the core of topic 3.1 (bias and variability of estimators). It fits skill 2.D, which covers relationships among components of inference. No later-unit content appears."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is Estimator D. C and D are both centered at 0.40, and D has the smaller SD (0.04 vs 0.06). A is biased despite its small spread (the 0.03 SD is the smallest), and B is both biased and the most variable. The key is the unique defensible answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has a title, column headers, and complete values. The stem gives the true value 0.4 and the simulation setup. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode three distinct misconceptions: bias only, variability only, and treating larger spread as an advantage. The explanation addresses each wrong option. The key is the longest option, but only mildly so. B's option states a plainly false claim, which makes it fairly easy to reject."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60-95 seconds, needs no arithmetic, and has low reading load. The calculator designation is consistent with the other items in the set."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. It has a unique key (D), a complete table, three distinct misconception distractors, and appropriate scope and load for topic 3.1, skill 2.D."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The student identifies which estimators are unbiased (mean equals 0.4), then picks the one with the smallest spread (D). That is 2 sequential steps over a single small table with no arithmetic. This is a core 3.1 idea (bias plus variability), and 2 steps falls below the 3-step threshold for exam_prep. Only one distractor (C) survives the first step.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m01-k1",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "3.1",
+  "unitCode": "3",
+  "skillPrimary": "2.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n_estimator_compare",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "The item takes 2 sequential steps: find the estimators centered at 0.4 (B and D), then choose the one with the smaller spread (D). This is below the 3-step threshold for exam_prep. Two concepts are combined (bias and variability), but the step count keeps it basic_learning. Reading is minimal, one table is used, and there is no arithmetic. Only one distractor (B) survives the first step.",
+  "payload": {
+   "archetype": "st_n_estimator_compare",
+   "topic": "3.1",
+   "skill": "2.D",
+   "calculator": "allowed",
+   "stem": "The true value of the proportion of all voters in a city who support a measure is $0.4$. A researcher compares four estimators by simulating $2000$ samples for each and computing the estimate from every sample. The table shown gives the mean and the standard deviation of the estimates for each estimator. Which estimator is best for estimating the true value?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Mean and standard deviation of the estimates from 2000 simulated samples",
+    "data": {
+     "chart": "table",
+     "data": {
+      "columns": [
+       "Estimator",
+       "Mean of the estimates",
+       "Standard deviation of the estimates"
+      ],
+      "rows": [
+       [
+        "Estimator A",
+        "0.48",
+        "0.02"
+       ],
+       [
+        "Estimator B",
+        "0.40",
+        "0.04"
+       ],
+       [
+        "Estimator C",
+        "0.44",
+        "0.06"
+       ],
+       [
+        "Estimator D",
+        "0.40",
+        "0.03"
+       ]
+      ]
+     },
+     "title": "Results of 2000 simulated samples for each estimator"
+    }
+   },
+   "options": [
+    {
+     "text": "Estimator C, because its sampling distribution has the largest spread and so covers the most possible values.",
+     "why": "Treats a larger spread as an advantage; more variability means estimates that are farther from the parameter more often.",
+     "value": null
+    },
+    {
+     "text": "Estimator B, because the center of its sampling distribution is at the true value.",
+     "why": "Considers bias alone; another estimator is also centered at the true value and has less variability.",
+     "value": null
+    },
+    {
+     "text": "Estimator D, because the center of its sampling distribution is at the true value and its spread is the smallest among the estimators that are centered there.",
+     "why": "An estimator that is unbiased has a sampling distribution centered at the parameter, and among unbiased estimators the one with the least variability is best.",
+     "value": null
+    },
+    {
+     "text": "Estimator A, because it has the smallest spread of all the estimators.",
+     "why": "Considers variability alone; the center of this sampling distribution is not at the true value, so the estimator is biased.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 95,
+   "facts": [
+    "theta=0.4"
+   ],
+   "blueprint": {
+    "id": "st_n_estimator_compare",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Choose the best estimator from the center and spread of its simulated sampling distribution",
+    "topic": "3.1",
+    "skill": "2.D",
+    "student_thinking": [
+     "Compare the center of each sampling distribution with the true value to find the unbiased estimators",
+     "Among the unbiased estimators choose the one with the smallest spread and reject choices based on only one of the two properties"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Choose the best estimator from the center and spread of its simulated sampling distributio",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "the displayed values"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "variability_only",
+      "description": "Considers variability alone; the center of this sampling distribution is not at the true value, so the estimator is biased."
+     },
+     {
+      "id": "bias_only",
+      "description": "Considers bias alone; another estimator is also centered at the true value and has less variability."
+     },
+     {
+      "id": "spread_good",
+      "description": "Treats a larger spread as an advantage; more variability means estimates that are farther from the parameter more often."
+     }
+    ],
+    "verification": {
+     "independent_path": "the unbiased estimators are found by comparing each mean with the true value and the best one has the smallest standard deviation among them; the biased estimator with the smallest spread is deliberately included",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "representation_reading",
+     "claim_justification",
+     "interpretation"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Compare the center of each sampling distribution with the true value to find the unbiased estimators",
+     "Among the unbiased estimators choose the one with the smallest spread and reject choices based on only one of the two properties"
+    ],
+    "concepts": [
+     "bias of an estimator",
+     "variability of an estimator"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "Estimator A, because it has the smallest spread of all the estimators.": 1,
+     "Estimator B, because the center of its sampling distribution is at the true value.": 2,
+     "Estimator C, because its sampling distribution has the largest spread and so covers the most possible values.": 1
+    },
+    "arithmetic": "none"
+   },
+   "seed": 11001,
+   "pack_id": "st_n_estimator_compare-s11001",
+   "explanation_en": "The correct answer is Estimator D, because the center of its sampling distribution is at the true value and its spread is the smallest among the estimators that are centered there.. An estimator that is unbiased has a sampling distribution centered at the parameter, and among unbiased estimators the one with the least variability is best.\nEstimator C, because its sampling distribution has the largest spread and so covers the most possible values. is incorrect: Treats a larger spread as an advantage; more variability means estimates that are farther from the parameter more often.\nEstimator B, because the center of its sampling distribution is at the true value. is incorrect: Considers bias alone; another estimator is also centered at the true value and has less variability.\nEstimator A, because it has the smallest spread of all the estimators. is incorrect: Considers variability alone; the center of this sampling distribution is not at the true value, so the estimator is biased."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n_estimator_compare",
+   "facts": [
+    "theta=0.4"
+   ],
+   "seed": 11001
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.1 estimators: bias and variability from simulated sampling distributions. Skill 2.D is loosely matched but acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is unique: unbiased (mean 0.40) with the smallest SD among unbiased estimators (0.03 vs 0.04 for B). A is biased."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has a title, column headers and all values. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (variability only, bias only, larger spread as an advantage). The explanation addresses every wrong option. Option lengths are similar."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds, no arithmetic, standalone item with a table."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. Its key is unique, the table is complete, and each distractor encodes a distinct misconception. It fits topic 3.1 and the time expected for an AP MC item."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item takes 2 sequential steps: find the estimators centered at 0.4 (B and D), then choose the one with the smaller spread (D). This is below the 3-step threshold for exam_prep. Two concepts are combined (bias and variability), but the step count keeps it basic_learning. Reading is minimal, one table is used, and there is no arithmetic. Only one distractor (B) survives the first step.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m01-k2",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "3.1",
+  "unitCode": "3",
+  "skillPrimary": "2.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n_estimator_compare",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "The item has 2 sequential steps: identify the unbiased estimators (mean equals 7.2), then pick the one with the smallest spread (A over B). This falls below the 3-step threshold for exam_prep. The two concepts (bias and variability) are standard Unit 3.1 fundamentals. The table is short, with no arithmetic or heavy reading. Only one distractor (D, low spread but biased) survives the first step. The difficulty does not come from unfair sources.",
+  "payload": {
+   "archetype": "st_n_estimator_compare",
+   "topic": "3.1",
+   "skill": "2.D",
+   "calculator": "allowed",
+   "stem": "The true value of the mean number of hours that all students at a school sleep on a school night is $7.2$. A researcher compares four estimators by simulating $1000$ samples for each and computing the estimate from every sample. The table shown gives the mean and the standard deviation of the estimates for each estimator. Which estimator is best for estimating the true value?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Mean and standard deviation of the estimates from 1000 simulated samples",
+    "data": {
+     "chart": "table",
+     "data": {
+      "columns": [
+       "Estimator",
+       "Mean of the estimates",
+       "Standard deviation of the estimates"
+      ],
+      "rows": [
+       [
+        "Estimator A",
+        "7.2",
+        "0.4"
+       ],
+       [
+        "Estimator B",
+        "7.2",
+        "0.6"
+       ],
+       [
+        "Estimator C",
+        "7.7",
+        "0.8"
+       ],
+       [
+        "Estimator D",
+        "8.0",
+        "0.3"
+       ]
+      ]
+     },
+     "title": "Results of 1000 simulated samples for each estimator"
+    }
+   },
+   "options": [
+    {
+     "text": "Estimator A, because the center of its sampling distribution is at the true value and its spread is the smallest among the estimators that are centered there.",
+     "why": "An estimator that is unbiased has a sampling distribution centered at the parameter, and among unbiased estimators the one with the least variability is best.",
+     "value": null
+    },
+    {
+     "text": "Estimator D, because it has the smallest spread of all the estimators.",
+     "why": "Considers variability alone; the center of this sampling distribution is not at the true value, so the estimator is biased.",
+     "value": null
+    },
+    {
+     "text": "Estimator C, because its sampling distribution has the largest spread and so covers the most possible values.",
+     "why": "Treats a larger spread as an advantage; more variability means estimates that are farther from the parameter more often.",
+     "value": null
+    },
+    {
+     "text": "Estimator B, because the center of its sampling distribution is at the true value.",
+     "why": "Considers bias alone; another estimator is also centered at the true value and has less variability.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 95,
+   "facts": [
+    "theta=7.2"
+   ],
+   "blueprint": {
+    "id": "st_n_estimator_compare",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Choose the best estimator from the center and spread of its simulated sampling distribution",
+    "topic": "3.1",
+    "skill": "2.D",
+    "student_thinking": [
+     "Compare the center of each sampling distribution with the true value to find the unbiased estimators",
+     "Among the unbiased estimators choose the one with the smallest spread and reject choices based on only one of the two properties"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Choose the best estimator from the center and spread of its simulated sampling distributio",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "the displayed values"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "variability_only",
+      "description": "Considers variability alone; the center of this sampling distribution is not at the true value, so the estimator is biased."
+     },
+     {
+      "id": "bias_only",
+      "description": "Considers bias alone; another estimator is also centered at the true value and has less variability."
+     },
+     {
+      "id": "spread_good",
+      "description": "Treats a larger spread as an advantage; more variability means estimates that are farther from the parameter more often."
+     }
+    ],
+    "verification": {
+     "independent_path": "the unbiased estimators are found by comparing each mean with the true value and the best one has the smallest standard deviation among them; the biased estimator with the smallest spread is deliberately included",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "representation_reading",
+     "claim_justification",
+     "interpretation"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Compare the center of each sampling distribution with the true value to find the unbiased estimators",
+     "Among the unbiased estimators choose the one with the smallest spread and reject choices based on only one of the two properties"
+    ],
+    "concepts": [
+     "bias of an estimator",
+     "variability of an estimator"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "Estimator D, because it has the smallest spread of all the estimators.": 1,
+     "Estimator B, because the center of its sampling distribution is at the true value.": 2,
+     "Estimator C, because its sampling distribution has the largest spread and so covers the most possible values.": 1
+    },
+    "arithmetic": "none"
+   },
+   "seed": 11002,
+   "pack_id": "st_n_estimator_compare-s11002",
+   "explanation_en": "The correct answer is Estimator A, because the center of its sampling distribution is at the true value and its spread is the smallest among the estimators that are centered there.. An estimator that is unbiased has a sampling distribution centered at the parameter, and among unbiased estimators the one with the least variability is best.\nEstimator D, because it has the smallest spread of all the estimators. is incorrect: Considers variability alone; the center of this sampling distribution is not at the true value, so the estimator is biased.\nEstimator C, because its sampling distribution has the largest spread and so covers the most possible values. is incorrect: Treats a larger spread as an advantage; more variability means estimates that are farther from the parameter more often.\nEstimator B, because the center of its sampling distribution is at the true value. is incorrect: Considers bias alone; another estimator is also centered at the true value and has less variability."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n_estimator_compare",
+   "facts": [
+    "theta=7.2"
+   ],
+   "seed": 11002
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. A is the unique best estimator: it is unbiased with the smallest spread among the unbiased estimators. Each distractor encodes a distinct misconception (variability only, bias only, larger spread as an advantage). The table is complete, and the stem gives the true value of 7.2 (units are hours). The task is short and needs no arithmetic.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits topic 3.1 (bias and variability of estimators). The dominant demand is comparing center and spread of simulated sampling distributions."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is unique: A and B are both centered at 7.2 and A has the smaller SD. D is biased despite its small spread. C is both biased and the most variable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete, with columns, rows and a title. The stem states the true mean (7.2) and the simulation setup. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option maps to a named misconception, and the explanation addresses each one. Option lengths are comparable, though the key is slightly longer."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-95 seconds, one table, four options. The calculator designation is harmless since no calculation is needed."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item has 2 sequential steps: identify the unbiased estimators (mean equals 7.2), then pick the one with the smallest spread (A over B). This falls below the 3-step threshold for exam_prep. The two concepts (bias and variability) are standard Unit 3.1 fundamentals. The table is short, with no arithmetic or heavy reading. Only one distractor (D, low spread but biased) survives the first step. The difficulty does not come from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ }
+]

@@ -1,0 +1,1377 @@
+[
+ {
+  "candidateKey": "ap_statistics-m01-k0",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "4.6",
+  "unitCode": "4",
+  "skillPrimary": "2.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n5_data_for_difference",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "The student only has to recognize that comparing mean weekly kilometers for two groups calls for independent random samples from each group, with a quantitative response recorded. Each distractor fails in an obvious way: it records a categorical response, records no response variable, or samples only one group. There is no computation, the reading is short, and no representation change is needed.",
+  "payload": {
+   "archetype": "st_n5_data_for_difference",
+   "topic": "4.6",
+   "skill": "2.A",
+   "calculator": "allowed",
+   "stem": "A researcher wants to answer the investigative question \"Do drivers of electric cars tend to drive more kilometers per week than drivers of gasoline cars?\" for the drivers in a city. Which of the following describes the data that the researcher should collect?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Independent random samples of $36$ drivers of electric cars and $45$ drivers of gasoline cars, with only whether each individual is above or below average recorded.",
+     "why": "Recording only above or below average discards the quantitative variable that the means need.",
+     "value": null
+    },
+    {
+     "text": "Independent random samples of $36$ drivers of electric cars and $45$ drivers of gasoline cars, with the number of kilometers driven in a week recorded for each individual.",
+     "why": "The question compares the mean of a quantitative variable between two groups, so the data needed are independent random samples from the two groups with that variable recorded for every individual.",
+     "value": null
+    },
+    {
+     "text": "One random sample of $81$ drivers in a city, with only the group of each individual recorded.",
+     "why": "The variable that the question compares is not recorded, so the means cannot be compared.",
+     "value": null
+    },
+    {
+     "text": "A random sample of $36$ drivers of electric cars, with the number of kilometers driven in a week recorded for each individual.",
+     "why": "Data from only one of the two groups cannot show a difference between the groups.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 80,
+   "facts": [],
+   "blueprint": {
+    "id": "st_n5_data_for_difference",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Choose the data needed to compare the means of two groups",
+    "topic": "4.6",
+    "skill": "2.A",
+    "student_thinking": [
+     "Identify the quantitative variable and the two groups named in the question",
+     "Choose independent random samples from both groups with the variable recorded and reject plans with one group, a missing variable or a categorized response"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Choose the data needed to compare the means of two groups",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "variable_not_recorded",
+      "description": "The variable that the question compares is not recorded, so the means cannot be compared."
+     },
+     {
+      "id": "one_group_only",
+      "description": "Data from only one of the two groups cannot show a difference between the groups."
+     },
+     {
+      "id": "categorized_response",
+      "description": "Recording only above or below average discards the quantitative variable that the means need."
+     }
+    ],
+    "verification": {
+     "independent_path": "each context pairs the complete plan with a plan that omits the variable, omits a group or categorizes the response",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "claim_justification",
+     "procedure_choice"
+    ]
+   },
+   "seed": 30700,
+   "pack_id": "st_n5_data_for_difference-s30700",
+   "explanation_en": "The correct answer is Independent random samples of $36$ drivers of electric cars and $45$ drivers of gasoline cars, with the number of kilometers driven in a week recorded for each individual.. The question compares the mean of a quantitative variable between two groups, so the data needed are independent random samples from the two groups with that variable recorded for every individual.\nIndependent random samples of $36$ drivers of electric cars and $45$ drivers of gasoline cars, with only whether each individual is above or below average recorded. is incorrect: Recording only above or below average discards the quantitative variable that the means need.\nOne random sample of $81$ drivers in a city, with only the group of each individual recorded. is incorrect: The variable that the question compares is not recorded, so the means cannot be compared.\nA random sample of $36$ drivers of electric cars, with the number of kilometers driven in a week recorded for each individual. is incorrect: Data from only one of the two groups cannot show a difference between the groups."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n5_data_for_difference",
+   "facts": [],
+   "seed": 30700
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Dominant demand is identifying the data needed to answer a two-mean comparison question (skill 2.A), tied to the two-sample context of 4.6. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option B is the only plan with both groups sampled independently and the quantitative variable recorded. The distractors each omit a necessary element, so B is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed, and the stem is clear. One small wording point: 'drivers in a city' is fine, but the options say 'random samples', which is consistent. The word 'average' in option A is slightly vague but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (categorized response, missing variable, one group only). The explanation addresses every wrong option. Option lengths are parallel."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short reading load, about 60-80 seconds, no calculation. Calculator designation is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unique-key MC on choosing data for a two-mean comparison. Distractors are distinct and explained, and the item is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The student only has to recognize that comparing mean weekly kilometers for two groups calls for independent random samples from each group, with a quantitative response recorded. Each distractor fails in an obvious way: it records a categorical response, records no response variable, or samples only one group. There is no computation, the reading is short, and no representation change is needed.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m01-k1",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "4.6",
+  "unitCode": "4",
+  "skillPrimary": "2.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n5_data_for_difference",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "The student only needs to recognize that comparing mean tasks per day for two groups requires independent random samples from each schedule with a quantitative response recorded. The distractors fail in obvious ways: a single group, no response variable, or a quantitative variable reduced to categories. There is no computation, one short concept, and no tricky wording or out-of-scope content.",
+  "payload": {
+   "archetype": "st_n5_data_for_difference",
+   "topic": "4.6",
+   "skill": "2.A",
+   "calculator": "allowed",
+   "stem": "A researcher wants to answer the investigative question \"Do workers on the new schedule tend to complete more tasks per day than workers on the old schedule?\" for the workers at a company. Which of the following describes the data that the researcher should collect?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "A random sample of $30$ workers on the new schedule, with the number of tasks completed in a day recorded for each individual.",
+     "why": "Data from only one of the two groups cannot show a difference between the groups.",
+     "value": null
+    },
+    {
+     "text": "One random sample of $75$ workers at a company, with only the group of each individual recorded.",
+     "why": "The variable that the question compares is not recorded, so the means cannot be compared.",
+     "value": null
+    },
+    {
+     "text": "Independent random samples of $30$ workers on the new schedule and $45$ workers on the old schedule, with the number of tasks completed in a day recorded for each individual.",
+     "why": "The question compares the mean of a quantitative variable between two groups, so the data needed are independent random samples from the two groups with that variable recorded for every individual.",
+     "value": null
+    },
+    {
+     "text": "Independent random samples of $30$ workers on the new schedule and $45$ workers on the old schedule, with only whether each individual is above or below average recorded.",
+     "why": "Recording only above or below average discards the quantitative variable that the means need.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 80,
+   "facts": [],
+   "blueprint": {
+    "id": "st_n5_data_for_difference",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Choose the data needed to compare the means of two groups",
+    "topic": "4.6",
+    "skill": "2.A",
+    "student_thinking": [
+     "Identify the quantitative variable and the two groups named in the question",
+     "Choose independent random samples from both groups with the variable recorded and reject plans with one group, a missing variable or a categorized response"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Choose the data needed to compare the means of two groups",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "variable_not_recorded",
+      "description": "The variable that the question compares is not recorded, so the means cannot be compared."
+     },
+     {
+      "id": "one_group_only",
+      "description": "Data from only one of the two groups cannot show a difference between the groups."
+     },
+     {
+      "id": "categorized_response",
+      "description": "Recording only above or below average discards the quantitative variable that the means need."
+     }
+    ],
+    "verification": {
+     "independent_path": "each context pairs the complete plan with a plan that omits the variable, omits a group or categorizes the response",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "claim_justification",
+     "procedure_choice"
+    ]
+   },
+   "seed": 30701,
+   "pack_id": "st_n5_data_for_difference-s30701",
+   "explanation_en": "The correct answer is Independent random samples of $30$ workers on the new schedule and $45$ workers on the old schedule, with the number of tasks completed in a day recorded for each individual.. The question compares the mean of a quantitative variable between two groups, so the data needed are independent random samples from the two groups with that variable recorded for every individual.\nA random sample of $30$ workers on the new schedule, with the number of tasks completed in a day recorded for each individual. is incorrect: Data from only one of the two groups cannot show a difference between the groups.\nOne random sample of $75$ workers at a company, with only the group of each individual recorded. is incorrect: The variable that the question compares is not recorded, so the means cannot be compared.\nIndependent random samples of $30$ workers on the new schedule and $45$ workers on the old schedule, with only whether each individual is above or below average recorded. is incorrect: Recording only above or below average discards the quantitative variable that the means need."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n5_data_for_difference",
+   "facts": [],
+   "seed": 30701
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Skill 2.A (identify the data needed to answer a question) is the dominant demand. The context is a difference of two means (topic 4.6), and no out-of-scope content appears."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the unique defensible answer. A is missing a group, B is missing the quantitative variable, and D categorizes the response. The 'workers at a company' population is consistent with the independent random samples in C."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and none is given. The wording is clear and the options are parallel."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct named misconception (one group only, variable not recorded, categorized response). The explanation addresses every wrong option. Option C is the longest, but only slightly, and the sample sizes differ across options in a way that does not give away the key."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 80 seconds and has a low reading load. No calculator is needed, which is acceptable under 'allowed'."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean 2.A data-identification question with a unique key and three distinct misconception distractors, and it fits the reference pattern. I found no issues."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The student only needs to recognize that comparing mean tasks per day for two groups requires independent random samples from each schedule with a quantitative response recorded. The distractors fail in obvious ways: a single group, no response variable, or a quantitative variable reduced to categories. There is no computation, one short concept, and no tricky wording or out-of-scope content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m01-k2",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "4.6",
+  "unitCode": "4",
+  "skillPrimary": "2.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n5_data_for_difference",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "The item asks which data collection plan matches a two-group comparison of mean tasks per day. The student must see that two independent samples are needed and that a quantitative variable must be recorded for each worker. Each distractor fails in an obvious way: no response variable, only one group, or a categorical variable. There is no computation, no representation change, and very little reading, so this is a basic concept check. It fits the stated skill 2.A, identifying the information needed to answer a question, and the difficulty comes from no unfair source.",
+  "payload": {
+   "archetype": "st_n5_data_for_difference",
+   "topic": "4.6",
+   "skill": "2.A",
+   "calculator": "allowed",
+   "stem": "A researcher wants to answer the investigative question \"Do workers on the new schedule tend to complete more tasks per day than workers on the old schedule?\" for the workers at a company. Which of the following describes the data that the researcher should collect?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "One random sample of $62$ workers at a company, with only the group of each individual recorded.",
+     "why": "The variable that the question compares is not recorded, so the means cannot be compared.",
+     "value": null
+    },
+    {
+     "text": "A random sample of $30$ workers on the new schedule, with the number of tasks completed in a day recorded for each individual.",
+     "why": "Data from only one of the two groups cannot show a difference between the groups.",
+     "value": null
+    },
+    {
+     "text": "Independent random samples of $30$ workers on the new schedule and $32$ workers on the old schedule, with only whether each individual is above or below average recorded.",
+     "why": "Recording only above or below average discards the quantitative variable that the means need.",
+     "value": null
+    },
+    {
+     "text": "Independent random samples of $30$ workers on the new schedule and $32$ workers on the old schedule, with the number of tasks completed in a day recorded for each individual.",
+     "why": "The question compares the mean of a quantitative variable between two groups, so the data needed are independent random samples from the two groups with that variable recorded for every individual.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 80,
+   "facts": [],
+   "blueprint": {
+    "id": "st_n5_data_for_difference",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Choose the data needed to compare the means of two groups",
+    "topic": "4.6",
+    "skill": "2.A",
+    "student_thinking": [
+     "Identify the quantitative variable and the two groups named in the question",
+     "Choose independent random samples from both groups with the variable recorded and reject plans with one group, a missing variable or a categorized response"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Choose the data needed to compare the means of two groups",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "variable_not_recorded",
+      "description": "The variable that the question compares is not recorded, so the means cannot be compared."
+     },
+     {
+      "id": "one_group_only",
+      "description": "Data from only one of the two groups cannot show a difference between the groups."
+     },
+     {
+      "id": "categorized_response",
+      "description": "Recording only above or below average discards the quantitative variable that the means need."
+     }
+    ],
+    "verification": {
+     "independent_path": "each context pairs the complete plan with a plan that omits the variable, omits a group or categorizes the response",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "claim_justification",
+     "procedure_choice"
+    ]
+   },
+   "seed": 30702,
+   "pack_id": "st_n5_data_for_difference-s30702",
+   "explanation_en": "The correct answer is Independent random samples of $30$ workers on the new schedule and $32$ workers on the old schedule, with the number of tasks completed in a day recorded for each individual.. The question compares the mean of a quantitative variable between two groups, so the data needed are independent random samples from the two groups with that variable recorded for every individual.\nOne random sample of $62$ workers at a company, with only the group of each individual recorded. is incorrect: The variable that the question compares is not recorded, so the means cannot be compared.\nA random sample of $30$ workers on the new schedule, with the number of tasks completed in a day recorded for each individual. is incorrect: Data from only one of the two groups cannot show a difference between the groups.\nIndependent random samples of $30$ workers on the new schedule and $32$ workers on the old schedule, with only whether each individual is above or below average recorded. is incorrect: Recording only above or below average discards the quantitative variable that the means need."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n5_data_for_difference",
+   "facts": [],
+   "seed": 30702
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "The dominant demand is identifying the data needed to compare two means (skill 2.A), which fits the two-sample means context of topic 4.6. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is the only choice with independent random samples from both groups and the quantitative variable recorded. A, B and C each fail on one clear point (missing variable, one group only, categorized response)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear. The \"for the workers at a company\" phrasing is slightly awkward but not ambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct, realistic misconceptions, and the explanation addresses each one. Option A (one random sample of 62 with only group recorded) is less natural than the others, though it is acceptable. Options A and B are slightly shorter than C and D, which is a minor length cue."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60-80 seconds, involves no calculation, and the calculator designation is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean skill 2.A item with a unique key and three distinct misconception-based distractors. It has appropriate load and passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks which data collection plan matches a two-group comparison of mean tasks per day. The student must see that two independent samples are needed and that a quantitative variable must be recorded for each worker. Each distractor fails in an obvious way: no response variable, only one group, or a categorical variable. There is no computation, no representation change, and very little reading, so this is a basic concept check. It fits the stated skill 2.A, identifying the information needed to answer a question, and the difficulty comes from no unfair source.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m02-k0",
+  "cellId": "ap_statistics-m02",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.5",
+  "unitCode": "5",
+  "skillPrimary": "4.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n5_slope_units",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: the effect of a linear unit change in x on the least-squares slope. It needs one reasoning step (divide the slope by 1.609) and one simple calculation. The distractors are the multiply-instead-of-divide error, an unchanged slope, and a sign error. There is no stimulus and almost no reading. This is a direct skill check suited to initial learning rather than a full mock.",
+  "payload": {
+   "archetype": "st_n5_slope_units",
+   "topic": "5.5",
+   "skill": "4.D",
+   "calculator": "allowed",
+   "stem": "The least-squares line for predicting the cost of the trip (in dollars) from the length of a trip (in miles) has a slope of $0.6$ dollars per mile. The explanatory variable is converted to kilometers (1 mile = 1.609 kilometers) and the least-squares line is found again. What is the slope of the new line?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "About $0.97$ dollars per kilometer.",
+     "why": "Multiplies by the conversion factor instead of dividing by it; a kilometer is a different amount of $x$ than a mile in the opposite way.",
+     "value": null
+    },
+    {
+     "text": "About $0.37$ dollars per kilometer.",
+     "why": "One mile is $1.609$ of a kilometer, so the predicted change per kilometer is $0.6/1.609 \\approx 0.37$ dollars.",
+     "value": null
+    },
+    {
+     "text": "About $0.6$ dollars per kilometer.",
+     "why": "The slope is measured per unit of $x$, so it changes when the unit changes from the mile to the kilometer.",
+     "value": null
+    },
+    {
+     "text": "About $-0.37$ dollars per kilometer.",
+     "why": "The sign of the slope does not depend on the units, because the direction of the relationship does not change.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 90,
+   "facts": [
+    "b=0.6",
+    "f=1.609"
+   ],
+   "blueprint": {
+    "id": "st_n5_slope_units",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Find the slope after the explanatory variable is converted to other units",
+    "topic": "5.5",
+    "skill": "4.D",
+    "student_thinking": [
+     "Recognize that the slope is measured per unit of x",
+     "Divide the slope by the conversion factor and keep its sign"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Find the slope after the explanatory variable is converted to other units",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "slope_unchanged",
+      "description": "The slope is measured per unit of $x$, so it changes when the unit changes from the mile to the kilometer."
+     },
+     {
+      "id": "factor_multiplied",
+      "description": "Multiplies by the conversion factor instead of dividing by it; a kilometer is a different amount of $x$ than a mile in the opposite way."
+     },
+     {
+      "id": "sign_changes",
+      "description": "The sign of the slope does not depend on the units, because the direction of the relationship does not change."
+     }
+    ],
+    "verification": {
+     "independent_path": "the new slope is recomputed by fitting a least-squares line to synthetic data whose x values are multiplied by the conversion factor",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "interpretation",
+     "calculated_value_decision"
+    ]
+   },
+   "seed": 30700,
+   "pack_id": "st_n5_slope_units-s30700",
+   "explanation_en": "The correct answer is About $0.37$ dollars per kilometer.. One mile is $1.609$ of a kilometer, so the predicted change per kilometer is $0.6/1.609 \\approx 0.37$ dollars.\nAbout $0.97$ dollars per kilometer. is incorrect: Multiplies by the conversion factor instead of dividing by it; a kilometer is a different amount of $x$ than a mile in the opposite way.\nAbout $0.6$ dollars per kilometer. is incorrect: The slope is measured per unit of $x$, so it changes when the unit changes from the mile to the kilometer.\nAbout $-0.37$ dollars per kilometer. is incorrect: The sign of the slope does not depend on the units, because the direction of the relationship does not change."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n5_slope_units",
+   "facts": [
+    "b=0.6",
+    "f=1.609"
+   ],
+   "seed": 30700
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.5 slope and the effect of changing units is in scope. The dominant demand is a calculation, though, with only light interpretation. Skill 4.D fit is weak but acceptable, since it asks what the slope means per unit of x."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is 0.6/1.609 ≈ 0.37, which is unique and correct. The distractors 0.97, 0.6 and -0.37 are all clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear and complete. The rounding convention is given as 'About', and the options are well separated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct misconception: multiplying instead of dividing, leaving the slope unchanged, and flipping the sign. The explanations cover every wrong option. The 'factor_multiplied' wording is slightly garbled ('in the opposite way'), and the 0.97 explanation is mildly confusing. This is minor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60-90 seconds and has one step with trivial arithmetic. It is a standard concept check and consistent with the calculator-allowed designation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean. It has a unique key and distinct misconception distractors. It is a short, standard slope-units question. The only weakness is that the skill is closer to computation than interpretation, which is not enough to fail it."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: the effect of a linear unit change in x on the least-squares slope. It needs one reasoning step (divide the slope by 1.609) and one simple calculation. The distractors are the multiply-instead-of-divide error, an unchanged slope, and a sign error. There is no stimulus and almost no reading. This is a direct skill check suited to initial learning rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m02-k1",
+  "cellId": "ap_statistics-m02",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.5",
+  "unitCode": "5",
+  "skillPrimary": "4.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n5_slope_units",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_scope_skill; criterion_failed_distractor_explanation",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item on how a unit change in x rescales the least-squares slope. It needs one reasoning step (divide by the conversion factor, not multiply) and one simple calculation, and the distractors are the multiply-instead-of-divide, sign, and no-change errors. Reading and computation are minimal, and the item is in scope for Unit 5.",
+  "payload": {
+   "archetype": "st_n5_slope_units",
+   "topic": "5.5",
+   "skill": "4.D",
+   "calculator": "allowed",
+   "stem": "The least-squares line for predicting the shipping fee (in dollars) from the weight of a bag (in pounds) has a slope of $1.8$ dollars per pound. The explanatory variable is converted to kilograms (1 pound = 0.4536 kilogram) and the least-squares line is found again. What is the slope of the new line?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "About $0.82$ dollars per kilogram.",
+     "why": "Multiplies by the conversion factor instead of dividing by it; a kilogram is a different amount of $x$ than a pound in the opposite way.",
+     "value": null
+    },
+    {
+     "text": "About $-3.97$ dollars per kilogram.",
+     "why": "The sign of the slope does not depend on the units, because the direction of the relationship does not change.",
+     "value": null
+    },
+    {
+     "text": "About $3.97$ dollars per kilogram.",
+     "why": "One pound is $0.4536$ of a kilogram, so the predicted change per kilogram is $1.8/0.4536 \\approx 3.97$ dollars.",
+     "value": null
+    },
+    {
+     "text": "About $1.8$ dollars per kilogram.",
+     "why": "The slope is measured per unit of $x$, so it changes when the unit changes from the pound to the kilogram.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 90,
+   "facts": [
+    "b=1.8",
+    "f=0.4536"
+   ],
+   "blueprint": {
+    "id": "st_n5_slope_units",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Find the slope after the explanatory variable is converted to other units",
+    "topic": "5.5",
+    "skill": "4.D",
+    "student_thinking": [
+     "Recognize that the slope is measured per unit of x",
+     "Divide the slope by the conversion factor and keep its sign"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Find the slope after the explanatory variable is converted to other units",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "slope_unchanged",
+      "description": "The slope is measured per unit of $x$, so it changes when the unit changes from the pound to the kilogram."
+     },
+     {
+      "id": "factor_multiplied",
+      "description": "Multiplies by the conversion factor instead of dividing by it; a kilogram is a different amount of $x$ than a pound in the opposite way."
+     },
+     {
+      "id": "sign_changes",
+      "description": "The sign of the slope does not depend on the units, because the direction of the relationship does not change."
+     }
+    ],
+    "verification": {
+     "independent_path": "the new slope is recomputed by fitting a least-squares line to synthetic data whose x values are multiplied by the conversion factor",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "interpretation",
+     "calculated_value_decision"
+    ]
+   },
+   "seed": 30701,
+   "pack_id": "st_n5_slope_units-s30701",
+   "explanation_en": "The correct answer is About $3.97$ dollars per kilogram.. One pound is $0.4536$ of a kilogram, so the predicted change per kilogram is $1.8/0.4536 \\approx 3.97$ dollars.\nAbout $0.82$ dollars per kilogram. is incorrect: Multiplies by the conversion factor instead of dividing by it; a kilogram is a different amount of $x$ than a pound in the opposite way.\nAbout $-3.97$ dollars per kilogram. is incorrect: The sign of the slope does not depend on the units, because the direction of the relationship does not change.\nAbout $1.8$ dollars per kilogram. is incorrect: The slope is measured per unit of $x$, so it changes when the unit changes from the pound to the kilogram."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n5_slope_units",
+   "facts": [
+    "b=1.8",
+    "f=0.4536"
+   ],
+   "seed": 30701
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Task is a mechanical unit rescaling of the slope, not interpreting a result to assess meaning or a claim (4.D). It is in Unit 5 scope but the skill fit is weak."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "1.8/0.4536 ≈ 3.97 is the unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear, and 'about' signals rounding."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Rationale for the 0.82 option is garbled ('a different amount of x in the opposite way'). The sign-flip distractor is unrealistic, and its 'why' text states the correct principle instead of the student's error."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short and quick to answer, with parallel numeric options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the item is a mechanical unit conversion that fits skill 4.D weakly, and the distractor rationales are poorly worded. The sign-flip distractor is unrealistic. I fail it on scope/skill and distractor quality."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item on how a unit change in x rescales the least-squares slope. It needs one reasoning step (divide by the conversion factor, not multiply) and one simple calculation, and the distractors are the multiply-instead-of-divide, sign, and no-change errors. Reading and computation are minimal, and the item is in scope for Unit 5.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m02-k2",
+  "cellId": "ap_statistics-m02",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.5",
+  "unitCode": "5",
+  "skillPrimary": "4.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n5_slope_units",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_distractor_explanation",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single concept: rescaling the explanatory variable changes the slope by the inverse of the conversion factor. It needs one direction-of-change decision and one simple division, with short reading and a single representation. Distractors are the standard errors (multiplying instead of dividing, sign flip, no change). The difficulty does not come from unfair sources.",
+  "payload": {
+   "archetype": "st_n5_slope_units",
+   "topic": "5.5",
+   "skill": "4.D",
+   "calculator": "allowed",
+   "stem": "The least-squares line for predicting the shipping fee (in dollars) from the weight of a bag (in pounds) has a slope of $1.8$ dollars per pound. The explanatory variable is converted to kilograms (1 pound = 0.4536 kilogram) and the least-squares line is found again. What is the slope of the new line?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "About $0.82$ dollars per kilogram.",
+     "why": "Multiplies by the conversion factor instead of dividing by it; a kilogram is a different amount of $x$ than a pound in the opposite way.",
+     "value": null
+    },
+    {
+     "text": "About $-3.97$ dollars per kilogram.",
+     "why": "The sign of the slope does not depend on the units, because the direction of the relationship does not change.",
+     "value": null
+    },
+    {
+     "text": "About $1.8$ dollars per kilogram.",
+     "why": "The slope is measured per unit of $x$, so it changes when the unit changes from the pound to the kilogram.",
+     "value": null
+    },
+    {
+     "text": "About $3.97$ dollars per kilogram.",
+     "why": "One pound is $0.4536$ of a kilogram, so the predicted change per kilogram is $1.8/0.4536 \\approx 3.97$ dollars.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 90,
+   "facts": [
+    "b=1.8",
+    "f=0.4536"
+   ],
+   "blueprint": {
+    "id": "st_n5_slope_units",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Find the slope after the explanatory variable is converted to other units",
+    "topic": "5.5",
+    "skill": "4.D",
+    "student_thinking": [
+     "Recognize that the slope is measured per unit of x",
+     "Divide the slope by the conversion factor and keep its sign"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Find the slope after the explanatory variable is converted to other units",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "slope_unchanged",
+      "description": "The slope is measured per unit of $x$, so it changes when the unit changes from the pound to the kilogram."
+     },
+     {
+      "id": "factor_multiplied",
+      "description": "Multiplies by the conversion factor instead of dividing by it; a kilogram is a different amount of $x$ than a pound in the opposite way."
+     },
+     {
+      "id": "sign_changes",
+      "description": "The sign of the slope does not depend on the units, because the direction of the relationship does not change."
+     }
+    ],
+    "verification": {
+     "independent_path": "the new slope is recomputed by fitting a least-squares line to synthetic data whose x values are multiplied by the conversion factor",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "interpretation",
+     "calculated_value_decision"
+    ]
+   },
+   "seed": 30702,
+   "pack_id": "st_n5_slope_units-s30702",
+   "explanation_en": "The correct answer is About $3.97$ dollars per kilogram.. One pound is $0.4536$ of a kilogram, so the predicted change per kilogram is $1.8/0.4536 \\approx 3.97$ dollars.\nAbout $0.82$ dollars per kilogram. is incorrect: Multiplies by the conversion factor instead of dividing by it; a kilogram is a different amount of $x$ than a pound in the opposite way.\nAbout $-3.97$ dollars per kilogram. is incorrect: The sign of the slope does not depend on the units, because the direction of the relationship does not change.\nAbout $1.8$ dollars per kilogram. is incorrect: The slope is measured per unit of $x$, so it changes when the unit changes from the pound to the kilogram."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n5_slope_units",
+   "facts": [
+    "b=1.8",
+    "f=0.4536"
+   ],
+   "seed": 30702
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Effect of changing units on slope is within Unit 5 (least-squares line, slope interpretation). Fit with 4.D is modest: mostly a units-conversion calculation with a short interpretive step."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "1.8/0.4536 = 3.97 is unique and correct; the other options are clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and the rounding is given as 'About'."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The explanation for the multiplied-by-factor distractor is garbled ('a different amount of x than a pound in the opposite way'). The explanation for the unchanged-slope distractor is phrased as a rule rather than the student's error. The -3.97 option is a weak, implausible distractor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, with light reading load. Calculator use is minimal but harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the stem is clean. The item fails on distractor explanation quality: the explanation for the multiplied-by-factor distractor is garbled and the explanation for the unchanged-slope distractor is phrased as a rule. Its fit with skill 4.D is modest, since it is mostly a unit-conversion calculation."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single concept: rescaling the explanatory variable changes the slope by the inverse of the conversion factor. It needs one direction-of-change decision and one simple division, with short reading and a single representation. Distractors are the standard errors (multiplying instead of dividing, sign flip, no change). The difficulty does not come from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m03-k0",
+  "cellId": "ap_statistics-m03",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.3",
+  "unitCode": "5",
+  "skillPrimary": "4.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n5_interpolation_choice",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "solver_disagrees:The stem contradicts itself. The slope is −2.2, so the correlation r must be negative and close to −1, not 'close to 1'. Option A repeats the same mistake. The intended answer (B) is still clear.; criterion_failed_stimulus_expression; criterion_failed_exam_suitability; instant_reject_missing_condition",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item on interpolation versus extrapolation. The student compares each x-value to the data range of 2 to 10 and picks the one inside it. Distractors are common misconceptions: high correlation justifies extrapolation, slight extrapolation is acceptable, and least-squares fit guarantees reliability. There is no computation, minimal reading, and no representation change.",
+  "payload": {
+   "archetype": "st_n5_interpolation_choice",
+   "topic": "5.3",
+   "skill": "4.D",
+   "calculator": "allowed",
+   "stem": "A least-squares line $\\hat y = 30 - 2.2x$ predicts its resale value in thousand dollars from the age of a car in years, using data with $x$ from $2$ to $10$ years and a correlation close to $1$. A researcher considers predictions for $x = 6$, $x = 12$, $x = 22$ and $x = 1$. Which prediction is the most reliable, and why?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The prediction for $x = 1$, because the correlation is close to $1$.",
+     "why": "$1$ is below the smallest value of $x$ in the data, and a strong correlation within the range does not make predictions outside it reliable.",
+     "value": null
+    },
+    {
+     "text": "The prediction for $x = 6$, because $6$ is between the smallest and the largest values of $x$ in the data.",
+     "why": "The data have values of $x$ from $2$ to $10$, and a prediction inside that range is an interpolation, which is the most reliable kind.",
+     "value": null
+    },
+    {
+     "text": "The prediction for $x = 12$, because it is only a little beyond the largest value of $x$ in the data.",
+     "why": "$12$ is outside the range of the data ($2$ to $10$), so the prediction is an extrapolation, even though it is close to the range.",
+     "value": null
+    },
+    {
+     "text": "The prediction for $x = 22$, because the line is a least-squares line that fits all of the data.",
+     "why": "A good fit within the range of the data does not show that the line continues to hold far outside the range.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 85,
+   "facts": [
+    "inside=6"
+   ],
+   "blueprint": {
+    "id": "st_n5_interpolation_choice",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Choose the prediction that is not an extrapolation and reject reasons based on closeness, fit or correlation",
+    "topic": "5.3",
+    "skill": "4.D",
+    "student_thinking": [
+     "Compare each value of x with the range of the data",
+     "Choose the value inside the range and reject values outside it whatever the reason given"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Choose the prediction that is not an extrapolation and reject reasons based on closeness, ",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "slightly_outside",
+      "description": "$12$ is outside the range of the data ($2$ to $10$), so the prediction is an extrapolation, even though it is close to the range."
+     },
+     {
+      "id": "least_squares_fits_all",
+      "description": "A good fit within the range of the data does not show that the line continues to hold far outside the range."
+     },
+     {
+      "id": "strong_r_outside",
+      "description": "$1$ is below the smallest value of $x$ in the data, and a strong correlation within the range does not make predictions outside it reliable."
+     }
+    ],
+    "verification": {
+     "independent_path": "exactly one of the four values lies inside the stated range of the data and each wrong option gives a different reason",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "claim_justification",
+     "condition_check"
+    ]
+   },
+   "seed": 30700,
+   "pack_id": "st_n5_interpolation_choice-s30700",
+   "explanation_en": "The correct answer is The prediction for $x = 6$, because $6$ is between the smallest and the largest values of $x$ in the data.. The data have values of $x$ from $2$ to $10$, and a prediction inside that range is an interpolation, which is the most reliable kind.\nThe prediction for $x = 1$, because the correlation is close to $1$. is incorrect: $1$ is below the smallest value of $x$ in the data, and a strong correlation within the range does not make predictions outside it reliable.\nThe prediction for $x = 12$, because it is only a little beyond the largest value of $x$ in the data. is incorrect: $12$ is outside the range of the data ($2$ to $10$), so the prediction is an extrapolation, even though it is close to the range.\nThe prediction for $x = 22$, because the line is a least-squares line that fits all of the data. is incorrect: A good fit within the range of the data does not show that the line continues to hold far outside the range."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n5_interpolation_choice",
+   "facts": [
+    "inside=6"
+   ],
+   "seed": 30700
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The time and reading load are fine. The internally inconsistent statistical claim (positive r with a negative slope) is not acceptable on an exam item.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is conceptually sound and its key (B) is unique. It fails because the stem and option A say the correlation is close to 1 while the slope is -2.2, which is contradictory. Change this to \"strong\" or \"close to -1\" and the item would be acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item on interpolation versus extrapolation. The student compares each x-value to the data range of 2 to 10 and picks the one inside it. Distractors are common misconceptions: high correlation justifies extrapolation, slight extrapolation is acceptable, and least-squares fit guarantees reliability. There is no computation, minimal reading, and no representation change.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m03-k1",
+  "cellId": "ap_statistics-m03",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.3",
+  "unitCode": "5",
+  "skillPrimary": "4.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n5_interpolation_choice",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single concept: interpolation vs extrapolation. The student checks which x-values fall within the data range 3 to 15 and rejects distractors based on common misconceptions (least-squares fits everywhere, slight extrapolation is fine, high r justifies extrapolation). No computation is needed and the reading load is short.",
+  "payload": {
+   "archetype": "st_n5_interpolation_choice",
+   "topic": "5.3",
+   "skill": "4.D",
+   "calculator": "allowed",
+   "stem": "A least-squares line $\\hat y = 12 + 1.8x$ predicts the daily sales in thousands of units from the daily advertising spending in hundreds of dollars, using data with $x$ from $3$ to $15$ hundred dollars and a correlation close to $1$. A researcher considers predictions for $x = 5$, $x = 17$, $x = 27$ and $x = 2$. Which prediction is the most reliable, and why?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The prediction for $x = 27$, because the line is a least-squares line that fits all of the data.",
+     "why": "A good fit within the range of the data does not show that the line continues to hold far outside the range.",
+     "value": null
+    },
+    {
+     "text": "The prediction for $x = 17$, because it is only a little beyond the largest value of $x$ in the data.",
+     "why": "$17$ is outside the range of the data ($3$ to $15$), so the prediction is an extrapolation, even though it is close to the range.",
+     "value": null
+    },
+    {
+     "text": "The prediction for $x = 5$, because $5$ is between the smallest and the largest values of $x$ in the data.",
+     "why": "The data have values of $x$ from $3$ to $15$, and a prediction inside that range is an interpolation, which is the most reliable kind.",
+     "value": null
+    },
+    {
+     "text": "The prediction for $x = 2$, because the correlation is close to $1$.",
+     "why": "$2$ is below the smallest value of $x$ in the data, and a strong correlation within the range does not make predictions outside it reliable.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 85,
+   "facts": [
+    "inside=5"
+   ],
+   "blueprint": {
+    "id": "st_n5_interpolation_choice",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Choose the prediction that is not an extrapolation and reject reasons based on closeness, fit or correlation",
+    "topic": "5.3",
+    "skill": "4.D",
+    "student_thinking": [
+     "Compare each value of x with the range of the data",
+     "Choose the value inside the range and reject values outside it whatever the reason given"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Choose the prediction that is not an extrapolation and reject reasons based on closeness, ",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "slightly_outside",
+      "description": "$17$ is outside the range of the data ($3$ to $15$), so the prediction is an extrapolation, even though it is close to the range."
+     },
+     {
+      "id": "least_squares_fits_all",
+      "description": "A good fit within the range of the data does not show that the line continues to hold far outside the range."
+     },
+     {
+      "id": "strong_r_outside",
+      "description": "$2$ is below the smallest value of $x$ in the data, and a strong correlation within the range does not make predictions outside it reliable."
+     }
+    ],
+    "verification": {
+     "independent_path": "exactly one of the four values lies inside the stated range of the data and each wrong option gives a different reason",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "claim_justification",
+     "condition_check"
+    ]
+   },
+   "seed": 30701,
+   "pack_id": "st_n5_interpolation_choice-s30701",
+   "explanation_en": "The correct answer is The prediction for $x = 5$, because $5$ is between the smallest and the largest values of $x$ in the data.. The data have values of $x$ from $3$ to $15$, and a prediction inside that range is an interpolation, which is the most reliable kind.\nThe prediction for $x = 27$, because the line is a least-squares line that fits all of the data. is incorrect: A good fit within the range of the data does not show that the line continues to hold far outside the range.\nThe prediction for $x = 17$, because it is only a little beyond the largest value of $x$ in the data. is incorrect: $17$ is outside the range of the data ($3$ to $15$), so the prediction is an extrapolation, even though it is close to the range.\nThe prediction for $x = 2$, because the correlation is close to $1$. is incorrect: $2$ is below the smallest value of $x$ in the data, and a strong correlation within the range does not make predictions outside it reliable."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n5_interpolation_choice",
+   "facts": [
+    "inside=5"
+   ],
+   "seed": 30701
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Takes about 60 to 85 seconds, needs no calculation, and has a light reading load. It is a standard conceptual item. The calculator designation is harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean and valid. It has a unique key, three distinct misconception distractors, and an appropriate load for AP Statistics topic 5.3 and skill 4.D."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single concept: interpolation vs extrapolation. The student checks which x-values fall within the data range 3 to 15 and rejects distractors based on common misconceptions (least-squares fits everywhere, slight extrapolation is fine, high r justifies extrapolation). No computation is needed and the reading load is short.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m03-k2",
+  "cellId": "ap_statistics-m03",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.3",
+  "unitCode": "5",
+  "skillPrimary": "4.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_n5_interpolation_choice",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: identify the only x-value inside the observed range (3 to 15) and avoid extrapolation. Distractors are standard misconceptions (least squares fits everywhere, slight extrapolation is fine, high r justifies extrapolation). No computation is required, reading is short, and there is one reasoning step.",
+  "payload": {
+   "archetype": "st_n5_interpolation_choice",
+   "topic": "5.3",
+   "skill": "4.D",
+   "calculator": "allowed",
+   "stem": "A least-squares line $\\hat y = 12 + 1.8x$ predicts the daily sales in thousands of units from the daily advertising spending in hundreds of dollars, using data with $x$ from $3$ to $15$ hundred dollars and a correlation close to $1$. A researcher considers predictions for $x = 5$, $x = 17$, $x = 27$ and $x = 2$. Which prediction is the most reliable, and why?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The prediction for $x = 27$, because the line is a least-squares line that fits all of the data.",
+     "why": "A good fit within the range of the data does not show that the line continues to hold far outside the range.",
+     "value": null
+    },
+    {
+     "text": "The prediction for $x = 17$, because it is only a little beyond the largest value of $x$ in the data.",
+     "why": "$17$ is outside the range of the data ($3$ to $15$), so the prediction is an extrapolation, even though it is close to the range.",
+     "value": null
+    },
+    {
+     "text": "The prediction for $x = 2$, because the correlation is close to $1$.",
+     "why": "$2$ is below the smallest value of $x$ in the data, and a strong correlation within the range does not make predictions outside it reliable.",
+     "value": null
+    },
+    {
+     "text": "The prediction for $x = 5$, because $5$ is between the smallest and the largest values of $x$ in the data.",
+     "why": "The data have values of $x$ from $3$ to $15$, and a prediction inside that range is an interpolation, which is the most reliable kind.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 85,
+   "facts": [
+    "inside=5"
+   ],
+   "blueprint": {
+    "id": "st_n5_interpolation_choice",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Choose the prediction that is not an extrapolation and reject reasons based on closeness, fit or correlation",
+    "topic": "5.3",
+    "skill": "4.D",
+    "student_thinking": [
+     "Compare each value of x with the range of the data",
+     "Choose the value inside the range and reject values outside it whatever the reason given"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Choose the prediction that is not an extrapolation and reject reasons based on closeness, ",
+      "evidence": "the stem and the displayed data give every value that this check uses"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "slightly_outside",
+      "description": "$17$ is outside the range of the data ($3$ to $15$), so the prediction is an extrapolation, even though it is close to the range."
+     },
+     {
+      "id": "least_squares_fits_all",
+      "description": "A good fit within the range of the data does not show that the line continues to hold far outside the range."
+     },
+     {
+      "id": "strong_r_outside",
+      "description": "$2$ is below the smallest value of $x$ in the data, and a strong correlation within the range does not make predictions outside it reliable."
+     }
+    ],
+    "verification": {
+     "independent_path": "exactly one of the four values lies inside the stated range of the data and each wrong option gives a different reason",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "claim_justification",
+     "condition_check"
+    ]
+   },
+   "seed": 30702,
+   "pack_id": "st_n5_interpolation_choice-s30702",
+   "explanation_en": "The correct answer is The prediction for $x = 5$, because $5$ is between the smallest and the largest values of $x$ in the data.. The data have values of $x$ from $3$ to $15$, and a prediction inside that range is an interpolation, which is the most reliable kind.\nThe prediction for $x = 27$, because the line is a least-squares line that fits all of the data. is incorrect: A good fit within the range of the data does not show that the line continues to hold far outside the range.\nThe prediction for $x = 17$, because it is only a little beyond the largest value of $x$ in the data. is incorrect: $17$ is outside the range of the data ($3$ to $15$), so the prediction is an extrapolation, even though it is close to the range.\nThe prediction for $x = 2$, because the correlation is close to $1$. is incorrect: $2$ is below the smallest value of $x$ in the data, and a strong correlation within the range does not make predictions outside it reliable."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_n5_interpolation_choice",
+   "facts": [
+    "inside=5"
+   ],
+   "seed": 30702
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Interpolation vs. extrapolation in a least-squares model (topic 5.3, prediction and extrapolation); the reasoning is an interpretation/justification of a claim (4.D). In scope for Unit 5."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only x=5 lies inside 3 to 15; the other three values (17, 27, 2) are all extrapolations. The key (index 3) is unique and defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem gives the line, units, x range and correlation. The wording is clear, and no rounding is needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception: fit everywhere, being close to the range, and strong r. The explanation covers each wrong option. The key option is the longest, a mild giveaway, but its length is similar to the others."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, no calculation, and the format is typical of an AP item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unambiguous item on interpolation versus extrapolation. The key is unique and the distractors are distinct misconceptions. It is in scope and suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: identify the only x-value inside the observed range (3 to 15) and avoid extrapolation. Distractors are standard misconceptions (least squares fits everywhere, slight extrapolation is fine, high r justifies extrapolation). No computation is required, reading is short, and there is one reasoning step.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ }
+]

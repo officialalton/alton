@@ -1,0 +1,215 @@
+[
+ {
+  "key": "ap_physics_c_mechanics-f01-k0",
+  "cellId": "ap_physics_c_mechanics-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "x = A cos(ωt): starts at +0.2 m, crosses zero at T/4, reaches -0.2 m at T/2, crosses zero at 3T/4, back to +0.2 m at T. v = -Aω sin(ωt): starts at 0, minimum -2 m/s at T/4, zero at T/2, maximum +2 m/s at 3T/4, zero at T. T = 0.628 s.",
+     "final_answer": "x: cosine curve with amplitude 0.2 m starting at +A. v: negative sine curve with amplitude 2 m/s starting at 0. Both shown over one period T ≈ 0.63 s.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Energy is conserved: (1/2)kA² = (1/2)m·vmax², so vmax = A·sqrt(k/m).",
+     "final_answer": "vmax = A√(k/m)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "ω = sqrt(k/m) = 10 rad/s. T = 2π/ω. vmax = Aω. amax = kA/m.",
+     "final_answer": "T ≈ 0.63 s, vmax = 2.0 m/s, amax = 20 m/s²",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "T = 2π√(m/k), so 4m makes T 2 times larger. vmax = A√(k/m), and A is the same, so vmax becomes 1/2. The stored energy (1/2)kA² is unchanged, but 4 times the mass needs half the speed to have the same kinetic energy.",
+     "final_answer": "The period doubles (×2) and the maximum speed halves (×1/2).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope and consistent. It has 12 points (4+3+3+2), matching the fixed Translation Between Representations weight. The keys for graphs, derivation, numeric values and the mass-factor prediction are unique and justified, and the rubric rows are properly split with conditions. Calculator use is trivial and consistent. No instant-reject conditions apply.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ on mass-spring SHM. It needs the graph representations of x(t) and v(t), a short derivation of v_max from energy or omega*A, substitution with clean numbers, and one proportional-reasoning prediction (T scales as sqrt(m), v_max as 1/sqrt(m)). Each part needs only one law or one representation change. Scope is within Unit 7 and the arithmetic is light, so it suits a full mock rather than basic learning or an advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-f01-k1",
+  "cellId": "ap_physics_c_mechanics-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "x = A cos(ωt): starts at +0.2 m, crosses 0 at T/4, reaches -0.2 m at T/2, crosses 0 again at 3T/4, back to +0.2 m at T. v = -Aω sin(ωt): starts at 0, reaches its minimum -2.83 m/s at T/4, 0 at T/2, +2.83 m/s at 3T/4, 0 at T. Period T ≈ 0.444 s.",
+     "final_answer": "x(t) is a cosine with amplitude 0.2 m starting at +A. v(t) is a negative sine with amplitude 2.83 m/s starting at 0. Both are drawn over one period T ≈ 0.444 s, with v at its extreme exactly where x = 0.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "With no friction, energy is conserved: (1/2)kA² = (1/2)m·vmax²",
+     "final_answer": "vmax = A·sqrt(k/m)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "ω = sqrt(k/m) = sqrt(80/0.4) = sqrt(200) ≈ 14.1 rad/s. Then T = 2π/ω, vmax = Aω and amax = kA/m = Aω².",
+     "final_answer": "T ≈ 0.444 s; vmax ≈ 2.83 m/s; amax = 40 m/s²",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "T = 2π·sqrt(m/k), so 4m gives a period sqrt(4) = 2 times larger. The amplitude A and spring energy (1/2)kA² stay the same, so vmax = A·sqrt(k/m) is 1/2 as large.",
+     "final_answer": "Period doubles (×2, to ≈0.889 s); maximum speed halves (×1/2, to ≈1.41 m/s)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a coherent 12-point Translation Between Representations bundle on SHM. The stem gives mass, spring constant and amplitude, and states the frictionless surface and ideal spring. Part A is a graph sketch, B a derivation, C a calculation and D a proportional-reasoning prediction. The answers are consistent with the independent solver (T ≈ 0.444 s, v_max ≈ 2.83 m/s, a_max = 40 m/s², and a factor of 2 for the period with 1/2 for v_max when the mass is quadrupled). Only polynomial and trigonometric calculus is used, and the content stays within Unit 7.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topics 7.3, 7.1, 7.2 and 1.3 are all in scope. Part D carries the target skill 2.D through proportional reasoning. Parts A to C use related skills, which is acceptable for a mixed-skill FRQ."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The rubric rows are consistent with the model answers. Alternative solutions (energy conservation) are listed for B. The tolerances are reasonable. The rubric asks for \"40.00\" with a loose tolerance, which is a minor stylistic point."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus has all the needed values and conditions. The blank axes are on the answer sheet, and the graph task is described clearly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no options. The rubric rows list realistic common errors, such as a missing 2π, a missing square root and a sine instead of a cosine."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "12 points is a reasonable size for a Physics C TBR free-response bundle. The arithmetic is light and the calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style multi-part FRQ. It needs the SHM governing relations (omega = sqrt(k/m), x = A cos(wt), v = -A w sin(wt)), a graph sketch, a short energy-conservation derivation, a calculation with clean numbers, and a proportional-scaling prediction (4x mass gives 2x period and 1/2 v_max). Each step is routine, but there are several of them and they span several representations. This is appropriate for a full mock, not too easy for basic learning and not beyond the course. Arithmetic is light, the wording is unambiguous, and the reading load is low.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_c_mechanics-f01-k2",
+  "cellId": "ap_physics_c_mechanics-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "x(t)=A cos(ωt) starts at +0.2 m, crosses zero at T/4, reaches -0.2 m at T/2 and returns to +0.2 m at T. v(t)=-Aω sin(ωt) starts at 0, reaches -1.79 m/s at T/4, is 0 at T/2, reaches +1.79 m/s at 3T/4 and is 0 at T. T≈0.70 s.",
+     "final_answer": "x: cosine curve with amplitude 0.2 m starting at +A. v: negative sine curve with amplitude ≈1.79 m/s. Both share the period T≈0.70 s.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Mechanical energy is conserved, so the spring energy at x=A equals the kinetic energy at x=0: (1/2)kA² = (1/2)mv_max².",
+     "final_answer": "v_max = A·sqrt(k/m)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "ω=sqrt(k/m)=sqrt(80) rad/s. T=2π·sqrt(m/k), v_max=Aω, a_max=kA/m.",
+     "final_answer": "T≈0.70 s, v_max≈1.79 m/s, a_max=16 m/s²",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "T is proportional to sqrt(m), so 4m gives 2T. v_max=A·sqrt(k/m), so with the same A, v_max is halved. Equivalently, the stored energy (1/2)kA² stays the same while the mass is four times larger, so the speed is half.",
+     "final_answer": "Period doubles (×2, to ≈1.40 s). Maximum speed halves (×1/2, to ≈0.89 m/s).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle passes all five criteria: Unit 7 scope, unique keys confirmed by the independent solver, a complete text stimulus, and rubric rows with distinct common errors. The load of 12 points in about 27 minutes is reasonable, and no instant-reject condition applies.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All parts are in Unit 7 scope and use only cosine, sine and the SHM relations. Part D targets 2.D through proportional scaling."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are unique and verified by the independent solver. The energy alternative in B1/B2 is valid and the tolerances are fine."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives m, k, A, the release from rest, a frictionless surface and an ideal spring. The empty data object is acceptable for a text-only stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no options. The rubric rows list distinct common errors (missing 2π, missing square root, wrong graph phase, factor of 4 for the period)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load of 12 points in about 27 minutes is reasonable. Calculator use is allowed and appropriate."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ on a mass-spring SHM system. It requires choosing the governing relations (omega = sqrt(k/m), energy conservation or x(t)/v(t) forms), translating to two stacked graphs with correct phase (cosine for x, negative sine for v) and labeled amplitudes and period, a short derivation, simple numeric evaluation (omega ~ 8.94 rad/s, T ~ 0.70 s, v_max ~ 1.79 m/s, a_max = 16 m/s^2), and one proportional-reasoning prediction (4x mass gives period x2, v_max x1/2). The item fits full-mock exam-prep level: more than single-step recall, but with no deep or unusual concepts. Arithmetic is short, wording is clear, and all content is in scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ }
+]
