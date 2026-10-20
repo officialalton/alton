@@ -91,3 +91,4 @@
 - 2026-10-19: Vercel Pro 전환. 크론 변경: resync-meeting-events 매시 정각(0 * * * *), dispatch-contracts 6시간마다(0 */6 * * *, 하루 4회). 나머지 5개는 하루 1회 유지. 크론 주기 제한(Hobby)은 해제됨.
 - 2026-10-20: 신규 AP 10과목은 권장 구성으로 진행(5세트: Physics C Mechanics·Precalculus·Physics C E&M·European History / 3세트: Physics 2·CS Principles·US Gov / 2세트: Comp Gov·Human Geography·APES), 예상 약 $245, 중단선 $640 유지. 신규 과목 공개 때 AP_PENDING_PUBLIC_SUBJECTS에서 제거.
 - 2026-10-20: 예산 상한 배분 — 신규 AP 10과목 합계 $245 이내(과목별: 5세트 과목 $44, 3세트 $30, 2세트 $20), 기존 AP 5세트 확충·보완은 나머지 여유 이내, 전체 중단선 $640 불가침. 에이전트 지시에 과목별 상한 명시.
+- 2026-10-20: Supabase 공지 — 2026-10-30부터 public 스키마 새 테이블에 Data API 권한이 자동 부여되지 않는다(기존 테이블은 유지). 10-30 이후 만드는 테이블(및 db reset·신규 프로젝트·프리뷰 브랜치로 스키마를 재생성하는 경우)은 같은 마이그레이션에 service_role/authenticated/anon grant를 명시한다. 최근 마이그레이션 대부분은 grant 없이 만들어졌으므로 db reset 재생성 경로는 별도 점검 필요.
