@@ -76,13 +76,15 @@ export default function AttemptHistoryTable({ rows }: { rows: AttemptHistoryRow[
                       <td colSpan={3} className="pr-3 text-grey-500">
                         {graded
                           ? r.track === "ap"
-                            ? `${r.mc?.correct ?? 0}/${r.mc?.total ?? 0} correct (multiple choice) · AP scores (1–5) are not estimated`
+                            ? `${r.mc?.correct ?? 0}/${r.mc?.total || r.mc?.setTotal || 0} correct (multiple choice) · AP scores (1–5) are not estimated`
                           : e.reason === "no_estimate_fixed"
                             ? `Score estimate not available (fixed-format test) · ${(r.sections.rw.correct ?? 0) + (r.sections.math.correct ?? 0)}/${r.sections.rw.total + r.sections.math.total} correct`
                             : e.reason === "insufficient_responses"
                               ? "Not enough responses to estimate a score range."
                               : "Score estimate not available"
-                          : "—"}
+                          : r.track === "ap" && r.mc?.setTotal
+                            ? `${r.mc.setTotal} question${r.mc.setTotal === 1 ? "" : "s"} · not graded yet`
+                            : "—"}
                       </td>
                     )}
                     <td>{(graded || r.status !== "assigned") && (
