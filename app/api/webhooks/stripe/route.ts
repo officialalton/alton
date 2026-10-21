@@ -40,6 +40,8 @@ type CheckoutSessionObject = {
   id: string;
   payment_intent: string | null;
   amount_total: number | null;
+  currency?: string | null;
+  payment_status?: string | null;
   metadata: {
     purchase_id?: string;
     student_id?: string;
@@ -51,6 +53,24 @@ type PaymentIntentObject = {
   id: string;
   metadata: { purchase_id?: string } | null;
   last_payment_error?: { message?: string } | null;
+};
+
+type RefundObject = {
+  id: string;
+  amount?: number;
+  currency?: string;
+  status?: string | null;
+  reason?: string | null;
+  charge?: string | null;
+  payment_intent?: string | null;
+};
+
+type RefundOrChargeObject = {
+  id: string;
+  payment_intent?: string | null;
+  amount_refunded?: number;
+  currency?: string;
+  refunds?: { data?: unknown[] } | null;
 };
 
 type DisputeObject = {
@@ -91,13 +111,39 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "invalid signature" }, { status: 400 });
   }
 
-  // 모드 혼입 방지: STRIPE_SECRET_KEY 접두사(sk_live_/rk_live_ = 라이브)로 이 배포의 모드를 정하고,
-  // 반대 모드 이벤트는 처리·영수증 기록 없이 ACK 한다(재시도해도 해결되지 않으므로 200).
+  // 모드 혼입 방지: STRIPE_MODE(live|test)가 명시되면 그것이 기준이고 STRIPE_SECRET_KEY 접두사와
+  // 반드시 일치해야 한다(불일치 = 배포 설정 오류 → 500 으로 Stripe 재시도를 받는다). 미설정이면
+  // 키 접두사로 추정한다. 반대 모드 이벤트는 "처리 완료"로 위장하지 않고 payment_webhook_issues
+  // (kind=livemode_mismatch, 이벤트 원문 포함)에 보관하고 receipt 는 만들지 않는다 — 설정 수정 후
+  // Stripe 에서 재전송하면 정상 처리된다(처리는 멱등).
   const secretKey = process.env.STRIPE_SECRET_KEY ?? "";
-  const deploymentLive = /^(sk|rk)_live_/.test(secretKey);
+  const keyLive = /^(sk|rk)_live_/.test(secretKey);
+  const modeSetting = process.env.STRIPE_MODE;
+  if (modeSetting && modeSetting !== "live" && modeSetting !== "test") {
+    logAudit("stripe_mode_invalid", { modeSetting });
+    return NextResponse.json({ error: "invalid STRIPE_MODE" }, { status: 500 });
+  }
+  if (modeSetting && (modeSetting === "live") !== keyLive) {
+    logAudit("stripe_mode_key_conflict", { modeSetting, keyLive });
+    return NextResponse.json({ error: "STRIPE_MODE conflicts with STRIPE_SECRET_KEY" }, { status: 500 });
+  }
+  const deploymentLive = modeSetting ? modeSetting === "live" : keyLive;
   if (typeof event.livemode === "boolean" && event.livemode !== deploymentLive) {
     logAudit("livemode_mismatch", { eventId: event.id, eventLivemode: event.livemode, deploymentLive });
-    return NextResponse.json({ ok: true, skipped: "livemode mismatch" });
+    const { error: mismatchError } = await createAdminClient()
+      .from("payment_webhook_issues")
+      .upsert(
+        {
+          event_id: event.id,
+          kind: "livemode_mismatch",
+          detail: { eventType: event.type, eventLivemode: event.livemode, deploymentLive, event },
+        },
+        { onConflict: "event_id,kind", ignoreDuplicates: true }
+      );
+    if (mismatchError) {
+      return NextResponse.json({ error: "mismatch_record_failed" }, { status: 500 });
+    }
+    return NextResponse.json({ ok: true, skipped: "livemode mismatch", recorded: true });
   }
 
   const admin = createAdminClient();
@@ -138,24 +184,100 @@ export async function POST(request: Request) {
       .eq("event_id", event.id);
   };
 
-  if (event.type === "checkout.session.completed") {
+  if (
+    event.type === "checkout.session.completed" ||
+    event.type === "checkout.session.async_payment_succeeded"
+  ) {
     const session = event.data.object as CheckoutSessionObject;
     const metadata = session.metadata;
+    const paid = session.payment_status === "paid";
+
+    const recordIssue = async (kind: string, purchaseId: string | null, detail: Record<string, unknown>) => {
+      logAudit(`issue_${kind}`, { eventId: event.id, purchaseId, ...detail });
+      await admin
+        .from("payment_webhook_issues")
+        .upsert(
+          { event_id: event.id, kind, purchase_id: purchaseId, detail },
+          { onConflict: "event_id,kind", ignoreDuplicates: true }
+        );
+    };
 
     if (metadata?.purchase_id) {
       // R4 entitlement 구매 플로우.
       const purchaseId = metadata.purchase_id;
 
-      const { error: attemptError } = await admin.from("payment_attempts").insert({
-        purchase_id: purchaseId,
-        status: "succeeded",
-        stripe_payment_intent_id: session.payment_intent,
-      });
+      // 지연 결제수단: 아직 미결제 — 수업권 부여 없이 processing 으로만 기록한다.
+      // 이후 async_payment_succeeded/failed 이벤트가 확정한다.
+      if (!paid) {
+        const { error: pendingError } = await admin.from("payment_attempts").upsert(
+          {
+            purchase_id: purchaseId,
+            status: "processing",
+            stripe_payment_intent_id: session.payment_intent,
+            attempt_key: `evt:${event.id}`,
+          },
+          { onConflict: "attempt_key", ignoreDuplicates: true }
+        );
+        if (pendingError) return NextResponse.json({ error: pendingError.message }, { status: 500 });
+        await markProcessed();
+        return NextResponse.json({ ok: true, skipped: "payment not paid yet" });
+      }
+
+      // 서버에 확정 저장된 구매(할인·세금 반영 total_minor, 통화)와 Stripe 결제를 대조한다.
+      const { data: purchaseRow } = await admin
+        .from("purchases")
+        .select("total_minor, currency")
+        .eq("id", purchaseId)
+        .maybeSingle();
+      const expectedCurrency = (purchaseRow?.currency ?? "").toLowerCase();
+      const sessionCurrency = (session.currency ?? "").toLowerCase();
+      if (
+        !purchaseRow ||
+        Number(purchaseRow.total_minor) !== session.amount_total ||
+        expectedCurrency !== sessionCurrency
+      ) {
+        await recordIssue(purchaseRow ? "amount_mismatch" : "purchase_not_found", purchaseRow ? purchaseId : null, {
+          sessionId: session.id,
+          expectedMinor: purchaseRow?.total_minor ?? null,
+          expectedCurrency: purchaseRow?.currency ?? null,
+          amountTotal: session.amount_total,
+          currency: session.currency ?? null,
+        });
+        if (purchaseRow) {
+          await admin.from("payment_attempts").upsert(
+            {
+              purchase_id: purchaseId,
+              status: "reconciliation_needed",
+              stripe_payment_intent_id: session.payment_intent,
+              failure_reason: "amount or currency mismatch with purchase record",
+              attempt_key: `evt:${event.id}`,
+            },
+            { onConflict: "attempt_key", ignoreDuplicates: true }
+          );
+          await admin
+            .from("purchases")
+            .update({ status: "reconciliation_needed" })
+            .eq("id", purchaseId)
+            .neq("status", "succeeded");
+        }
+        await markProcessed();
+        return NextResponse.json({ ok: true, skipped: "amount mismatch" });
+      }
+
+      const { error: attemptError } = await admin.from("payment_attempts").upsert(
+        {
+          purchase_id: purchaseId,
+          status: "succeeded",
+          stripe_payment_intent_id: session.payment_intent,
+          attempt_key: `evt:${event.id}`,
+        },
+        { onConflict: "attempt_key", ignoreDuplicates: true }
+      );
       if (attemptError) {
         return NextResponse.json({ error: attemptError.message }, { status: 500 });
       }
 
-      // grant 생성은 멱등 — 같은 purchaseId로 두 번 호출돼도 grant를 두 번
+      // grant 생성은 멱등 — 같은 purchaseId로 두 번 호출돼도(다른 이벤트여도) grant를 두 번
       // 만들지 않는다(lib/entitlements.ts).
       await createEntitlementGrantForPurchase(admin, purchaseId);
 
@@ -175,11 +297,15 @@ export async function POST(request: Request) {
       return NextResponse.json({ ok: true });
     }
 
-    // 레거시 credit_packages 플로우 — 기존 동작 그대로 유지.
+    // 레거시 credit_packages 플로우.
     const studentId = metadata?.student_id;
     const packageId = metadata?.package_id;
     if (!studentId || !packageId) {
       return NextResponse.json({ error: "missing metadata" }, { status: 400 });
+    }
+    if (!paid) {
+      await markProcessed();
+      return NextResponse.json({ ok: true, skipped: "payment not paid yet" });
     }
 
     const { data: pkg } = await admin
@@ -191,46 +317,117 @@ export async function POST(request: Request) {
       await markProcessed();
       return NextResponse.json({ ok: true, skipped: "unknown package" });
     }
-
-    const { data: purchase, error: purchaseError } = await admin
-      .from("credit_purchases")
-      .insert({
-        student_id: studentId,
-        package_id: packageId,
-        stripe_payment_intent_id: session.payment_intent,
-        amount_usd: pkg.price_usd,
-        credits_purchased: pkg.credit_count,
-      })
-      .select("id")
-      .single();
-    if (purchaseError) {
-      return NextResponse.json({ error: purchaseError.message }, { status: 500 });
+    const expectedMinor = Math.round(Number(pkg.price_usd) * 100);
+    if (session.amount_total !== expectedMinor || (session.currency ?? "").toLowerCase() !== "usd") {
+      await recordIssue("legacy_amount_mismatch", null, {
+        sessionId: session.id,
+        packageId,
+        studentId,
+        expectedMinor,
+        amountTotal: session.amount_total,
+        currency: session.currency ?? null,
+      });
+      await markProcessed();
+      return NextResponse.json({ ok: true, skipped: "amount mismatch" });
     }
 
-    const { error: txError } = await admin.from("credit_transactions").insert({
-      student_id: studentId,
-      type: "purchase",
-      amount: pkg.credit_count,
-      related_purchase_id: purchase.id,
-      reason: "Stripe 결제",
+    // 한 트랜잭션 RPC — checkout session 당 1회만 지급(unique 제약), 중간 실패 시 전체 롤백.
+    // 다른 event.id 가 같은 session 을 가리켜도, 동시 경합이어도 한 번만 지급된다.
+    const { error: grantError } = await admin.rpc("grant_legacy_credit_purchase", {
+      p_session_id: session.id,
+      p_student_id: studentId,
+      p_package_id: packageId,
+      p_payment_intent: session.payment_intent,
     });
-    if (txError) {
-      return NextResponse.json({ error: txError.message }, { status: 500 });
+    if (grantError) {
+      return NextResponse.json({ error: grantError.message }, { status: 500 });
     }
 
-    const { data: student } = await admin
-      .from("students")
-      .select("credit_balance")
-      .eq("id", studentId)
-      .single();
-    const { error: balanceError } = await admin
-      .from("students")
-      .update({ credit_balance: (student?.credit_balance ?? 0) + pkg.credit_count })
-      .eq("id", studentId);
-    if (balanceError) {
-      return NextResponse.json({ error: balanceError.message }, { status: 500 });
+    await markProcessed();
+    return NextResponse.json({ ok: true });
+  }
+
+  if (event.type === "checkout.session.async_payment_failed") {
+    const session = event.data.object as CheckoutSessionObject;
+    const purchaseId = session.metadata?.purchase_id;
+    if (purchaseId) {
+      await admin.from("payment_attempts").upsert(
+        {
+          purchase_id: purchaseId,
+          status: "failed",
+          stripe_payment_intent_id: session.payment_intent,
+          failure_reason: "async payment failed",
+          attempt_key: `evt:${event.id}`,
+        },
+        { onConflict: "attempt_key", ignoreDuplicates: true }
+      );
+      await admin.from("purchases").update({ status: "failed" }).eq("id", purchaseId).neq("status", "succeeded");
+    }
+    await markProcessed();
+    return NextResponse.json({ ok: true });
+  }
+
+  if (event.type === "charge.refunded" || event.type === "charge.refund.updated") {
+    // 환불 — payment_refunds 에 구매와 연결해 기록(항상 동작, needs_review=true 가 관리자 확인 큐).
+    // 수업권 자동 회수는 STRIPE_AUTO_REVOKE_ON_REFUND=true 일 때만, 전액 환불 성공 + 전부 미사용일 때만
+    // DB RPC(auto_revoke_refunded_purchase)가 그 구매의 grant 만 회수한다. 기본 꺼짐.
+    const obj = event.data.object as RefundOrChargeObject;
+    const isCharge = event.type === "charge.refunded";
+    const refundObj = obj as unknown as RefundObject;
+    const listed = (obj.refunds?.data ?? []) as RefundObject[];
+    const refunds: RefundObject[] = isCharge
+      ? listed.length
+        ? listed
+        : [{ id: `charge:${obj.id}`, amount: obj.amount_refunded ?? 0, currency: obj.currency, status: "succeeded" }]
+      : [refundObj];
+    const chargeId = isCharge ? obj.id : (refundObj.charge ?? null);
+    const paymentIntent = isCharge ? (obj.payment_intent ?? null) : (refundObj.payment_intent ?? null);
+
+    let purchaseId: string | null = null;
+    if (paymentIntent) {
+      const { data: purchase } = await admin
+        .from("purchases")
+        .select("id")
+        .eq("stripe_payment_intent_id", paymentIntent)
+        .maybeSingle();
+      purchaseId = purchase?.id ?? null;
     }
 
+    for (const refund of refunds) {
+      const { error: refundError } = await admin.from("payment_refunds").upsert(
+        {
+          purchase_id: purchaseId,
+          stripe_refund_id: refund.id,
+          stripe_charge_id: chargeId,
+          stripe_payment_intent_id: paymentIntent,
+          amount_minor: refund.amount ?? 0,
+          currency: (refund.currency ?? "usd").toUpperCase(),
+          status: refund.status ?? null,
+          reason: refund.reason ?? null,
+          updated_at: new Date().toISOString(),
+        },
+        { onConflict: "stripe_refund_id" }
+      );
+      if (refundError) return NextResponse.json({ error: refundError.message }, { status: 500 });
+    }
+
+    // pending/failed/canceled 환불은 성공으로 취급하지 않는다(RPC 가 status='succeeded' 합계만 본다).
+    if (purchaseId && process.env.STRIPE_AUTO_REVOKE_ON_REFUND === "true") {
+      const { data: revoke, error: revokeError } = await admin.rpc("auto_revoke_refunded_purchase", {
+        p_purchase_id: purchaseId,
+      });
+      if (revokeError) return NextResponse.json({ error: revokeError.message }, { status: 500 });
+      const result = revoke as { revoked?: boolean; reason?: string } | null;
+      await admin
+        .from("payment_refunds")
+        .update({
+          auto_revoke_status: result?.reason ?? null,
+          needs_review: !result?.revoked,
+        })
+        .eq("purchase_id", purchaseId);
+      logAudit("refund_auto_revoke", { purchaseId, ...result });
+    }
+    logAudit(`stripe_${event.type}`, { purchaseId, chargeId, count: refunds.length });
     await markProcessed();
     return NextResponse.json({ ok: true });
   }
@@ -239,12 +436,16 @@ export async function POST(request: Request) {
     const pi = event.data.object as PaymentIntentObject;
     const purchaseId = pi.metadata?.purchase_id;
     if (purchaseId) {
-      await admin.from("payment_attempts").insert({
-        purchase_id: purchaseId,
-        status: "failed",
-        stripe_payment_intent_id: pi.id,
-        failure_reason: pi.last_payment_error?.message ?? null,
-      });
+      await admin.from("payment_attempts").upsert(
+        {
+          purchase_id: purchaseId,
+          status: "failed",
+          stripe_payment_intent_id: pi.id,
+          failure_reason: pi.last_payment_error?.message ?? null,
+          attempt_key: `evt:${event.id}`,
+        },
+        { onConflict: "attempt_key", ignoreDuplicates: true }
+      );
       // 순서 뒤바뀐 이벤트가 이미 성공한 구매를 되돌리지 못하게 한다.
       await admin.from("purchases").update({ status: "failed" }).eq("id", purchaseId).neq("status", "succeeded");
     }
@@ -256,11 +457,15 @@ export async function POST(request: Request) {
     const session = event.data.object as CheckoutSessionObject;
     const purchaseId = session.metadata?.purchase_id;
     if (purchaseId) {
-      await admin.from("payment_attempts").insert({
-        purchase_id: purchaseId,
-        status: "cancelled",
-        stripe_payment_intent_id: session.payment_intent,
-      });
+      await admin.from("payment_attempts").upsert(
+        {
+          purchase_id: purchaseId,
+          status: "cancelled",
+          stripe_payment_intent_id: session.payment_intent,
+          attempt_key: `evt:${event.id}`,
+        },
+        { onConflict: "attempt_key", ignoreDuplicates: true }
+      );
       await admin.from("purchases").update({ status: "cancelled" }).eq("id", purchaseId).neq("status", "succeeded");
     }
     await markProcessed();
@@ -328,11 +533,15 @@ export async function POST(request: Request) {
   const maybeObject = event.data.object as { metadata?: { purchase_id?: string } };
   const unresolvedPurchaseId = maybeObject?.metadata?.purchase_id;
   if (unresolvedPurchaseId) {
-    await admin.from("payment_attempts").insert({
-      purchase_id: unresolvedPurchaseId,
-      status: "reconciliation_needed",
-      failure_reason: `unhandled event type: ${event.type}`,
-    });
+    await admin.from("payment_attempts").upsert(
+      {
+        purchase_id: unresolvedPurchaseId,
+        status: "reconciliation_needed",
+        failure_reason: `unhandled event type: ${event.type}`,
+        attempt_key: `evt:${event.id}`,
+      },
+      { onConflict: "attempt_key", ignoreDuplicates: true }
+    );
     await admin
       .from("purchases")
       .update({ status: "reconciliation_needed" })
