@@ -8,6 +8,8 @@ import type {
   AttemptHistoryRow, FreeAccountProfile, FreeAccountRow, FreeAccountsAnalytics, FreeAccountsListParams, FreeAccountsPage, LearningUsage,
 } from "@/lib/free-accounts/types";
 import { loadMockExamAttemptDetail, type MockExamAttemptDetail } from "@/lib/mock-exam/attempt-data";
+import { loadEssayScores, type EssayScoreView } from "@/lib/essay-grading/view";
+import { essayGradingSubject } from "@/lib/essay-grading/subject";
 import { setStudentStatus, type AccountStatusTarget } from "./users-actions";
 
 const CAP = "학생관리";
@@ -79,6 +81,32 @@ export async function getFreeAccountsAnalyticsAction(from: string, to: string, i
 export async function getAttemptDetailForAdminAction(attemptId: string): Promise<MockExamAttemptDetail | null> {
   const { supabase } = await requireAdminOrCapability(CAP);
   return loadMockExamAttemptDetail(supabase, attemptId);
+}
+
+export type AdminApAttemptView = {
+  detail: MockExamAttemptDetail; essayScores: EssayScoreView[]; essayAi: boolean; isTestAccount: boolean | null;
+  /** 채점에 쓰인 구성(점수 행에서 읽은 값). 행이 없으면 빈 배열 → 화면은 "No scoring version recorded" 로 표시한다. */
+  versions: { rubricVersion: string; model: string | null; rows: number }[];
+};
+
+/** AP 응시 상세(관리자, 읽기 전용): 학생·학부모 화면과 같은 계산(result-score)에 쓸 입력 + 테스트 계정 여부 + 적용된 채점 구성. 쓰기 없음. */
+export async function getApAttemptViewForAdminAction(attemptId: string): Promise<AdminApAttemptView | null> {
+  const { supabase } = await requireAdminOrCapability(CAP);
+  const detail = await loadMockExamAttemptDetail(supabase, attemptId);
+  if (!detail || detail.examProgram !== "ap") return null;
+  const [essayScores, student, versionRows] = await Promise.all([
+    loadEssayScores(supabase, attemptId),
+    supabase.from("students").select("is_test_account").eq("id", detail.studentId).maybeSingle(),
+    supabase.from("mock_exam_essay_scores").select("rubric_version, model").eq("attempt_id", attemptId),
+  ]);
+  const byKey = new Map<string, { rubricVersion: string; model: string | null; rows: number }>();
+  for (const r of ((versionRows as { data: { rubric_version: string; model: string | null }[] | null }).data ?? [])) {
+    const k = `${r.rubric_version}|${r.model ?? ""}`;
+    const e = byKey.get(k) ?? { rubricVersion: r.rubric_version, model: r.model ?? null, rows: 0 };
+    e.rows += 1; byKey.set(k, e);
+  }
+  const flag = (student as { data: { is_test_account: boolean } | null }).data?.is_test_account;
+  return { detail, essayScores, essayAi: essayGradingSubject(detail.apSubject) || essayScores.length > 0, isTestAccount: typeof flag === "boolean" ? flag : null, versions: [...byKey.values()] };
 }
 
 /** 정지·재활성·종료 — 기존 transition_account_status(감사 account_status_events). 사유 필수. */

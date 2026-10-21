@@ -390,7 +390,17 @@ const TABS: { key: TabKey; label: string }[] = [
  * 2026-10-02(오너 UAT B4) — Summary / Results by Domain / Review Mistakes 서브탭.
  * 내부 채점 근거는 이 컴포넌트에 넘어오지 않는다 — attempt-data.ts 가 공개 가능한 필드만 내려준다.
  */
-export default function MockExamResultView({
+type ResultViewProps = Parameters<typeof SatResultViewInner>[0];
+
+/** SAT 결과 화면. AP 응시(섹션 구조가 다름)는 받지 않는다 — 호출부가 AP 결과 화면을 써야 한다. */
+export default function MockExamResultView(props: ResultViewProps) {
+  if (props.attempt.examProgram === "ap") {
+    return <p className="text-[12.5px] text-grey-500" role="alert">This is an AP attempt, so it can't be shown in the SAT result view. Open it from the AP result screen.</p>;
+  }
+  return <SatResultViewInner {...props} />;
+}
+
+function SatResultViewInner({
   attempt,
   readOnly,
   reportRole: reportRoleProp,
