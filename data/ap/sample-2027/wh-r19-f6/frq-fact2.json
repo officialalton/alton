@@ -1,0 +1,100 @@
+{
+ "fs-wh3_saq1-high-0": {
+  "flags": []
+ },
+ "fs-wh3_saq1-high-1": {
+  "flags": []
+ },
+ "fs-wh3_saq1-high-2": {
+  "flags": [
+   {
+    "where": "Sample response (A), final sentence: 'the group was informal until it was organized in 1662'",
+    "kind": "inaccurate",
+    "detail": "The London group formally organized itself as a society at Gresham College in November 1660; 1662 is the date of the first royal charter incorporating it as the Royal Society (which the sample itself correctly states in part C). Saying it was first 'organized' in 1662 conflates formal organization with chartering. Minor, but a high-tier sample should have the dates right and consistent."
+   }
+  ]
+ },
+ "fs-wh3_saq1-high-3": {
+  "flags": []
+ },
+ "fs-wh3_saq1-mid-0": {
+  "flags": [
+   {
+    "where": "Sample response (C): \"it was only formally organized in 1662 when it became the Royal Society\"",
+    "kind": "inaccurate",
+    "detail": "The Royal Society was formally organized in November 1660 (the founding meeting at Gresham College after a Wren lecture, with a constitution and officers established then). 1662 is the date of its first royal charter, not of its formal organization. The sample conflates charter with founding; the overall contrast with the state-funded Académie des sciences (1666, Colbert, pensioned members) remains valid."
+   }
+  ]
+ },
+ "fs-wh3_saq1-mid-1": {
+  "flags": []
+ },
+ "fs-wh3_saq1-mid-2": {
+  "flags": [
+   {
+    "where": "Student sample response, part (C), final sentence",
+    "kind": "inaccurate",
+    "detail": "The response says the London group 'only got organized in 1662.' The formal society was organized in November 1660 (following Wren's Gresham College lecture); 1662 is the date of the first royal charter that made it the Royal Society. The dating conflates founding with chartering; the comparison itself (informal origins vs. state-funded Paris academy from 1666 under Colbert) is otherwise sound."
+   }
+  ]
+ },
+ "fs-wh3_saq1-mid-3": {
+  "flags": []
+ },
+ "fs-wh3_saq1-low-0": {
+  "flags": [
+   {
+    "where": "Sample response (C): 'the London group was the Royal Society from the start, with the king supporting it'",
+    "kind": "inaccurate",
+    "detail": "The group that began meeting in London in the 1640s (the so-called 'Invisible College' / 1645 group described by Wallis and Libby) was an informal gathering with no royal involvement. The Royal Society was not founded until 1660 and received its royal charter from Charles II in 1662. The prompt itself states that groups were informal and only 'later' received charters, so the sample contradicts the material."
+   },
+   {
+    "where": "Sample response (C): 'The Royal Society was the first scientific society in the world'",
+    "kind": "inaccurate",
+    "detail": "The Accademia dei Lincei (Rome, founded 1603) and the Accademia del Cimento (Florence, 1657) predate the Royal Society (1660/1662). The Lincei is even named in the question stem, making the claim internally inconsistent with the prompt."
+   },
+   {
+    "where": "Sample response (C): 'the Paris one copied it, so the London group was more important'",
+    "kind": "contested",
+    "detail": "The Académie des sciences (1666) was founded under Colbert with a different, state-funded and salaried model; characterizing it as merely a copy of the Royal Society and declaring the London group 'more important' is an unsupported, non-neutral judgment rather than a settled historical fact."
+   }
+  ]
+ },
+ "fs-wh3_saq1-low-1": {
+  "flags": [
+   {
+    "where": "Sample response (C): \"The London group was the Royal Society from the start, so the king supported it\"",
+    "kind": "inaccurate",
+    "detail": "The 1640s London group (described by Wallis and quoted by Libby) was an informal, private gathering with no royal involvement. The Royal Society was founded only in 1660 and received its royal charter in 1662. Calling the 1640s group 'the Royal Society from the start' with royal support is anachronistic and factually wrong."
+   },
+   {
+    "where": "Sample response (C): \"the Academie des sciences in Paris was different because it was just scholars on their own and the government was not involved\"",
+    "kind": "inaccurate",
+    "detail": "The Académie des sciences was founded in 1666 by Louis XIV's minister Colbert as a state institution; its members were selected and salaried by the crown and it met in the royal library. It was the most state-directed of the major 17th-century academies, so the claimed similarity/difference is inverted."
+   },
+   {
+    "where": "Prompt: \"The excerpt below comes from a history of science textbook...\"",
+    "kind": "other",
+    "detail": "The prompt refers to an excerpt 'below' but no excerpt text is included in the material, so students (and checkers) cannot verify what the document actually says; the sample response's specific details (weekly meetings, Goddard's lodging in Wood Street, Bull's Head Tavern, Gresham College) do match Wallis's account as quoted by Libby, but the document itself needs to be supplied."
+   }
+  ]
+ },
+ "fs-wh3_saq1-low-2": {
+  "flags": [
+   {
+    "where": "Sample response, part (C)",
+    "kind": "inaccurate",
+    "detail": "The response claims the London group and the Paris Académie des sciences were 'both royal societies supported by the king' and 'both of them were under the control of the government and studied science for the rulers.' This misstates the Royal Society's situation. Charles II granted charters (1662, 1663) but provided no funding; the Royal Society was a self-governing, self-financed body of fee-paying fellows that chose its own members and research, and it was not under government direction. By contrast, the Académie des sciences (founded 1666 under Colbert) was state-funded, its members received royal pensions, and it worked on projects for the crown. The key point is a difference in state control and funding, not a similarity; also, the 1640s group in the excerpt predates the Royal Society and had no royal involvement at all."
+   }
+  ]
+ },
+ "fs-wh3_saq1-low-3": {
+  "flags": [
+   {
+    "where": "Student sample response (C)",
+    "kind": "inaccurate",
+    "detail": "The claim that the London group was 'more religious' and 'mostly made up of people who were all from the same church,' while the Académie des sciences 'did not have to follow a religion,' is historically wrong. Wallis's account (which Libby quotes) stresses that the London meetings deliberately excluded theology and state affairs and drew members of differing religious and political loyalties during the Civil War era; the later Royal Society likewise avoided confessional tests. The Paris Académie, by contrast, was a creation of the Catholic French crown under Louis XIV, and after 1685 Protestants were effectively excluded. The sample is labeled as weak for vagueness, but its historical claims should be accurate; this one inverts the actual situation."
+   }
+  ]
+ }
+}
