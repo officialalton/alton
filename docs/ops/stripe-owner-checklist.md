@@ -38,3 +38,6 @@ Stripe 대시보드 우상단 "Test mode" 켜기.
 
 ## E. 환불 자동 회수 검증 (활성화 보류)
 시나리오 17종 검증 결과는 `docs/ops/stripe-refund-revoke-verification.md`. 오너 확인 전까지 `STRIPE_AUTO_REVOKE_ON_REFUND` 를 켜지 않는다(현재 환불은 기록 + 관리자 처리 대상 표시만).
+
+## 참고: 같은 Preview UAT 의 AP 결과 화면 현황 (2026-10-21)
+학생 결과 화면(English Language `5b9952b6…`, Calculus AB `7020773d…`) 확인 완료. 학부모 화면은 UAT 보호자 계정 연결(오너 가입 대기), 관리자 AP 결과 화면은 브라우저 확인 대기. 결제·Stripe 항목과 무관하며 같은 UAT 계정 준비를 공유한다.

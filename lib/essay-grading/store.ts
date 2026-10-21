@@ -23,8 +23,8 @@ export function createSupabaseEssayStore(admin: Admin, now: () => Date = () => n
     async usage(k): Promise<Usage> {
       const d = now();
       const [a, day, month] = await Promise.all([
-        admin.from(T).select("set_item_id, part_label", { count: "exact", head: true }).eq("attempt_id", k.attemptId).neq("status", "skipped").neq("status", "pending").neq("set_item_id", k.setItemId),
-        admin.from(T).select("id", { count: "exact", head: true }).eq("student_id", k.studentId).gte("created_at", dayStart(d)).neq("status", "skipped"),
+        admin.from(T).select("set_item_id, part_label", { count: "exact", head: true }).eq("attempt_id", k.attemptId).neq("status", "skipped").neq("status", "pending").neq("set_item_id", k.setItemId).or("last_error.is.null,last_error.not.in.(daily_cap,monthly_budget,no_reference_answers)"),
+        admin.from(T).select("id", { count: "exact", head: true }).eq("student_id", k.studentId).gte("created_at", dayStart(d)).neq("status", "skipped").or("last_error.is.null,last_error.not.in.(daily_cap,monthly_budget,no_reference_answers)"),
         admin.from(T).select("cost_usd").gte("created_at", monthStart(d)),
       ]);
       const spend = (month.data ?? []).reduce((s, r) => s + Number(r.cost_usd ?? 0), 0);
