@@ -25,12 +25,14 @@ export function physExamCount(r: { kind: string; difficultyProvisional?: string 
   return r.difficultyProvisional === "exam_prep" ? 1 : 0;
 }
 
-export function loadPhysPool(opts: { requireScreen?: boolean; files?: string[] } = {}) {
+/** subject 기본값: 환경 변수 PHYS_SUBJECT, 없으면 Physics 1. 관리자 화면(서버)은 환경 변수가 아니라 세트의 과목을 명시한다. */
+export function loadPhysPool(opts: { requireScreen?: boolean; files?: string[]; subject?: string } = {}) {
+  const subject = opts.subject ?? process.env.PHYS_SUBJECT ?? "ap_physics_1";
   const scan = new Set((JSON.parse(readFileSync("data/ap/stock/defect-scan.json", "utf-8")) as { key: string }[]).map((r) => r.key));
   const ev = new Set<string>();
   for (const f of readdirSync("data/ap/screen-evidence").filter((x) => /^evidence-.*\.json$/.test(x))) for (const e of (JSON.parse(readFileSync(`data/ap/screen-evidence/${f}`, "utf-8")) as { entries: { candidate_key: string }[] }).entries) ev.add(e.candidate_key);
   const batchOf = new Map<string, string>(); const raws: Raw[] = [];
-  for (const f of opts.files ?? STOCK_FILES) { const p = `data/ap/stock/${f}.json`; if (!existsSync(p)) continue; for (const r of JSON.parse(readFileSync(p, "utf-8")) as Raw[]) { if (r.apSubjectCode !== (process.env.PHYS_SUBJECT ?? "ap_physics_1") || batchOf.has(r.stockKey)) continue; batchOf.set(r.stockKey, f); raws.push(r); } }
+  for (const f of opts.files ?? STOCK_FILES) { const p = `data/ap/stock/${f}.json`; if (!existsSync(p)) continue; for (const r of JSON.parse(readFileSync(p, "utf-8")) as Raw[]) { if (r.apSubjectCode !== subject || batchOf.has(r.stockKey)) continue; batchOf.set(r.stockKey, f); raws.push(r); } }
   const live = raws.filter((i) => i.validation === "auto_passed" && !scan.has(i.stockKey) && !i.duplicateOf);
   const gated = live.map((i) => ({ i, g: gateCandidate({ stockKey: i.stockKey, candidateKey: i.stockKey, apSubjectCode: i.apSubjectCode, kind: i.kind, payload: i.payload }) })).filter((x) => x.g.status !== "fail");
   const first = (r: Raw) => (Array.isArray(r.payload.items) ? (r.payload.items as Json[])[0] : r.payload) as { stem?: string; blueprint?: { student_thinking?: string[] } };

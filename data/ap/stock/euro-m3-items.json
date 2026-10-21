@@ -1,0 +1,266 @@
+[
+ {
+  "cellId": "ap_european_history-e205",
+  "apSubjectCode": "ap_european_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_european_history-e205-k0",
+  "keywordCode": "3.6",
+  "unitCode": "3",
+  "skillPrimary": "1.B",
+  "structure": "shared_stimulus_set",
+  "archetype": "euro_e205",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   }
+  ],
+  "gateOverride": "euro-m3-2026-10-20",
+  "run": "euro-m3",
+  "stockKey": "euro-m3:ap_european_history-e205-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "euro-m3-2026-10-20",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_european_history",
+  "itemFamilyId": "fam:euro-m3:ap_european_history-e205-k0",
+  "canonicalKey": "euro-m3:ap_european_history-e205-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_european_history:3.6",
+  "sharedWith": [],
+  "stockCell": "ap_european_history|3.6|1.B|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "euro-m3",
+    "gateVersion": "euro-m3-2026-10-20",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "eu-txt-westphalia-1648"
+  ],
+  "exam": "EU2",
+  "payload": {
+   "archetype": "euro_e205",
+   "topic": "3.6",
+   "skill": "1.B",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(primary source)\nTreaty of Westphalia (Treaty of Munster), articles LXIV-LXV (excerpt on the rights of the Imperial States)\nThe Holy Roman Emperor, France and their allies (treaty of Munster, 24 October 1648; seventeenth-century English translation), 1648 (October 24). Avalon Project, Yale Law School (transcription). Reuse: public domain (published before 1929). excerpted (2 segments joined by [...]); whitespace normalized; no wording changed.\nContext: The Holy Roman Emperor, France and their allies agreed to this treaty (the Treaty of Munster) in October 1648; together with a second treaty it ended the Thirty Years' War in Germany, and this is an English translation.\n\n\"LXIV. And to prevent for the future any Differences arising in the Politick State, all and every one of the Electors, Princes and States of the Roman Empire, are so establish'd and confirm'd in their antient Rights, Prerogatives, Libertys, Privileges, free exercise of Territorial Right, as well Ecclesiastick, as Politick Lordships, Regales, by virtue of this present Transaction: that they never can or ought to be molested therein by any whomsoever upon any manner of pretence. [...] Above all, it shall be free perpetually to each of the States of the Empire, to make Alliances with Strangers for their Preservation and Safety; provided, nevertheless, such Alliances be not against the Emperor, and the Empire, nor against the Publick Peace, and this Treaty, and without prejudice to the Oath by which every one is bound to the Emperor and the Empire.\"",
+   "euro_set": {
+    "unit": 3,
+    "stim_type": "primary_text",
+    "theme": "The rights of the German states in the Peace of Westphalia",
+    "title": "The rights of the German states in the Peace of Westphalia",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "primary_text",
+      "title": "Treaty of Westphalia (Treaty of Munster), articles LXIV-LXV (excerpt on the rights of the Imperial States)",
+      "attribution": "The Holy Roman Emperor, France and their allies (treaty of Munster, 24 October 1648; seventeenth-century English translation), 1648 (October 24). Avalon Project, Yale Law School (transcription). Reuse: public domain (published before 1929). excerpted (2 segments joined by [...]); whitespace normalized; no wording changed.",
+      "context": "The Holy Roman Emperor, France and their allies agreed to this treaty (the Treaty of Munster) in October 1648; together with a second treaty it ended the Thirty Years' War in Germany, and this is an English translation.",
+      "real_data": true,
+      "source_registry_id": "eu-txt-westphalia-1648",
+      "source_sha256": "9256e38cfce10bf531514a4c22fa8767a102d2de730e24dc758dbfc6a6679e89"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "euro_e205_1B",
+     "topic": "3.6",
+     "skill": "1.B",
+     "stem": "The provisions in the excerpt best reflect which of the following developments in the Holy Roman Empire after 1648?",
+     "options": [
+      {
+       "text": "The decentralization of political authority, as individual princes held sovereign powers within their own territories",
+       "why": "The article confirms each state's free exercise of territorial right and its freedom to make foreign alliances, so the treaty left real power with the princes and kept the emperor weak.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The adoption of a single official confession for the entire Empire, enforced by the emperor and the imperial courts in each territory",
+       "why": "Westphalia confirmed religious pluralism, recognizing Catholicism, Lutheranism and Calvinism, and it left church matters to the territorial rulers. It did not impose one faith across the Empire.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "The creation of a unified German national state whose princes surrendered their lands to a parliament",
+       "why": "German unification came in 1871 under Prussian leadership, more than two centuries after this treaty kept the German states separate.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The centralization of imperial power, as the Habsburg emperor gained the right to direct the foreign policy of every German state",
+       "why": "This is the opposite of what happened. The excerpt lets the states make their own alliances with outside powers, so the emperor did not control their foreign policy.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"The decentralization of political authority, as individual princes held sovereign powers within their own territories\". The article confirms each state's free exercise of territorial right and its freedom to make foreign alliances, so the treaty left real power with the princes and kept the emperor weak.\n\"The adoption of a single official confession for the entire Empire, enforced by the emperor and the imperial courts in each territory\" is incorrect: Westphalia confirmed religious pluralism, recognizing Catholicism, Lutheranism and Calvinism, and it left church matters to the territorial rulers. It did not impose one faith across the Empire.\n\"The creation of a unified German national state whose princes surrendered their lands to a parliament\" is incorrect: German unification came in 1871 under Prussian leadership, more than two centuries after this treaty kept the German states separate.\n\"The centralization of imperial power, as the Habsburg emperor gained the right to direct the foreign policy of every German state\" is incorrect: This is the opposite of what happened. The excerpt lets the states make their own alliances with outside powers, so the emperor did not control their foreign policy.",
+     "est_seconds": 60,
+     "facts": [
+      "The Peace of Westphalia (1648) confirmed the territorial sovereignty of the German princes within the Holy Roman Empire.",
+      "The 1648 settlement recognized Calvinism alongside Catholicism and Lutheranism in the Empire."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "1.B",
+      "key_evidence_in_source": "The article guarantees the states' territorial rights and their freedom to form alliances with foreign powers, which shows political power spread out among the princes.",
+      "evidence_quote": "free exercise of Territorial Right, as well Ecclesiastick, as Politick Lordships"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 0
+     }
+    },
+    {
+     "archetype": "euro_e205_2B",
+     "topic": "3.6",
+     "skill": "2.B",
+     "stem": "France's participation in the agreement described in the excerpt is best explained by which of the following French goals?",
+     "options": [
+      {
+       "text": "Securing access to Baltic trade routes and German ports, which France received as its main territorial gains",
+       "why": "Sweden gained the Baltic lands, including western Pomerania. France's gains lay in Alsace and Lorraine (the bishoprics of Metz, Toul and Verdun).",
+       "value": null,
+       "label": "misattributed"
+      },
+      {
+       "text": "Keeping the German lands divided so that the Habsburg emperor could not threaten France's eastern frontier",
+       "why": "France, which the context line names as a party, had fought the Habsburgs. Guaranteeing the princes' liberties and their right to foreign alliances kept the Empire weak and gave France possible allies inside it.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Gaining the support of the German princes for the Bourbon claim to the Spanish throne after the death of Charles II",
+       "why": "Charles II of Spain died in 1700, so the succession question belongs to the War of the Spanish Succession, not to 1648.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "Restoring Catholic unity across the Empire by helping the emperor suppress the Lutheran and Calvinist princes of northern Germany",
+       "why": "Under Richelieu, Catholic France backed the Protestant powers against the Habsburgs, and it did so for reasons of state, not religious unity.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"Keeping the German lands divided so that the Habsburg emperor could not threaten France's eastern frontier\". France, which the context line names as a party, had fought the Habsburgs. Guaranteeing the princes' liberties and their right to foreign alliances kept the Empire weak and gave France possible allies inside it.\n\"Securing access to Baltic trade routes and German ports, which France received as its main territorial gains\" is incorrect: Sweden gained the Baltic lands, including western Pomerania. France's gains lay in Alsace and Lorraine (the bishoprics of Metz, Toul and Verdun).\n\"Gaining the support of the German princes for the Bourbon claim to the Spanish throne after the death of Charles II\" is incorrect: Charles II of Spain died in 1700, so the succession question belongs to the War of the Spanish Succession, not to 1648.\n\"Restoring Catholic unity across the Empire by helping the emperor suppress the Lutheran and Calvinist princes of northern Germany\" is incorrect: Under Richelieu, Catholic France backed the Protestant powers against the Habsburgs, and it did so for reasons of state, not religious unity.",
+     "est_seconds": 70,
+     "facts": [
+      "France under Richelieu entered the Thirty Years' War against the Habsburgs in 1635, despite being a Catholic power.",
+      "Under the 1648 settlement France gained lands in Alsace and confirmation of Metz, Toul and Verdun, while Sweden gained western Pomerania."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "2.B",
+      "key_evidence_in_source": "The context line names France as a party to the treaty, and the article lets the German states make alliances with foreign powers, which served French interests.",
+      "evidence_quote": "it shall be free perpetually to each of the States of the Empire, to make Alliances with Strangers"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 1
+     }
+    },
+    {
+     "archetype": "euro_e205_5B",
+     "topic": "3.6",
+     "skill": "5.B",
+     "stem": "The rights confirmed in the excerpt most directly contributed to which of the following developments in the eighteenth century?",
+     "options": [
+      {
+       "text": "The establishment of a parliamentary monarchy in Britain in which Parliament controlled taxation and the standing army",
+       "why": "Britain's constitutional settlement grew out of English conflicts and the Glorious Revolution, not out of the rights of the German states.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "The unification of the German states into an empire led by Prussia after victory over France",
+       "why": "This happened in 1871, in the nineteenth century, not the eighteenth.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The emperor's success in turning the Empire into a centralized absolute monarchy ruled from Vienna with a single army",
+       "why": "The Empire stayed decentralized until it was dissolved in 1806. The Habsburgs built up absolutism in their hereditary lands, not across the Empire.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "The rise of Brandenburg-Prussia as a power able to wage war against the Habsburg monarchy",
+       "why": "Because the treaty secured the princes' independence, a state like Brandenburg-Prussia could build its own army and foreign policy. Frederick II later seized Silesia from Austria in 1740.",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"The rise of Brandenburg-Prussia as a power able to wage war against the Habsburg monarchy\". Because the treaty secured the princes' independence, a state like Brandenburg-Prussia could build its own army and foreign policy. Frederick II later seized Silesia from Austria in 1740.\n\"The establishment of a parliamentary monarchy in Britain in which Parliament controlled taxation and the standing army\" is incorrect: Britain's constitutional settlement grew out of English conflicts and the Glorious Revolution, not out of the rights of the German states.\n\"The unification of the German states into an empire led by Prussia after victory over France\" is incorrect: This happened in 1871, in the nineteenth century, not the eighteenth.\n\"The emperor's success in turning the Empire into a centralized absolute monarchy ruled from Vienna with a single army\" is incorrect: The Empire stayed decentralized until it was dissolved in 1806. The Habsburgs built up absolutism in their hereditary lands, not across the Empire.",
+     "est_seconds": 60,
+     "facts": [
+      "Frederick II of Prussia invaded Habsburg Silesia in 1740, which began the War of the Austrian Succession.",
+      "The Holy Roman Empire was dissolved in 1806."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "5.B",
+      "key_evidence_in_source": "The article's guarantee that the princes would not be molested in their rights and could make alliances let German states such as Brandenburg-Prussia act as independent powers.",
+      "evidence_quote": "they never can or ought to be molested therein by any whomsoever upon any manner of pretence"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "likely"
+       },
+       {
+        "choice": 3,
+        "confidence": "likely"
+       }
+      ],
+      "panel_choice": 3
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ }
+]

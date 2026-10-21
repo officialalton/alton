@@ -1,0 +1,49 @@
+{
+ "run": "pre-mc",
+ "subject": "ap_precalculus",
+ "generatedAt": "2026-10-20T21:53:15.884Z",
+ "totalCostUsd": 8.19,
+ "newSpendSinceBaseline": 8.55,
+ "cap": 11,
+ "calls": 846,
+ "candidates": 282,
+ "mcCandidates": 282,
+ "frqCandidates": 0,
+ "passedAll": 193,
+ "adopted": 86,
+ "mcAdopted": 86,
+ "frqAdopted": 0,
+ "reserve": 107,
+ "yield": 0.305,
+ "costPerAdopted": 0.095,
+ "callsPerAdopted": 9.8,
+ "duplicateRejected": 0,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 0,
+  "template": 282
+ },
+ "rejectionReasons": {
+  "criterion_failed_distractor_explanation": 80,
+  "criterion_failed_exam_suitability": 19,
+  "criterion_failed_scope_skill": 12,
+  "reference_pattern_mismatch": 19,
+  "criterion_failed_key_scoring": 8,
+  "criterion_failed_stimulus_expression": 11,
+  "instant_reject_missing_condition": 3,
+  "instant_reject_multiple_correct": 5,
+  "instant_reject_out_of_scope_knowledge": 2,
+  "instant_reject_wrong_stimulus": 2,
+  "solver_disagrees": 3
+ },
+ "unfilledCells": [
+  "ap_precalculus-m14",
+  "ap_precalculus-m16",
+  "ap_precalculus-m26",
+  "ap_precalculus-m31",
+  "ap_precalculus-m39",
+  "ap_precalculus-m57",
+  "ap_precalculus-m82",
+  "ap_precalculus-m88"
+ ]
+}

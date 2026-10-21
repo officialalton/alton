@@ -30,7 +30,8 @@ export function fullPracticeUnitBounds(subject: string | null | undefined, label
   if (subject === "ap_calculus_ab") return Object.fromEntries(Object.entries(OFFICIAL.unitBounds).map(([u, [min, max]]) => [u, { min, max }]));
   if (subject === "ap_statistics") return statsUnitBounds();
   if (subject === "ap_physics_1") return physUnitBounds();
-  if (subject === "ap_physics_c_mechanics") return physUnitBounds(subject);
+  if (subject === "ap_physics_c_mechanics" || subject === "ap_physics_c_electricity_and_magnetism") return physUnitBounds(subject);
+  if (subject === "ap_precalculus") return preUnitBounds();
   if (subject === "ap_chemistry") return chemUnitBounds();
   if (subject === "ap_microeconomics") return microUnitBounds();
   if (subject === "ap_macroeconomics") return macroUnitBounds();
@@ -81,9 +82,17 @@ export const PHYS_FRQ_COUNT = 4;
  *  목표 배분(제안, 공식 고정 아님)은 PHYSC_FULL_TARGET. MC 42 = 단독 38 + 2문항 공유 세트 2, FRQ 4 = MR/TBR/LAB/QQT 각 1 은 Physics 1 과 같다(구성은 우리 안 — 공식 세트 수 미공표). */
 export const PHYSC_MC_UNIT_PCT: Record<string, [number, number]> = { "1": [10, 15], "2": [20, 25], "3": [15, 25], "4": [10, 20], "5": [10, 15], "6": [10, 15], "7": [10, 15] };
 export const PHYSC_FULL_TARGET = { units: { "1": 5, "2": 9, "3": 8, "4": 5, "5": 5, "6": 5, "7": 5 } as Record<string, number> };
-export const physUnitBounds = (subject: string = "ap_physics_1"): UnitBounds => mapBounds(subject === "ap_physics_c_mechanics" ? PHYSC_MC_UNIT_PCT : PHYS_MC_UNIT_PCT, PHYS_MC_COUNT);
-export const physFullTarget = (subject: string = "ap_physics_1") => (subject === "ap_physics_c_mechanics" ? PHYSC_FULL_TARGET : PHYS_FULL_TARGET);
-export const physSkillBounds = (): UnitBounds => mapBounds(PHYS_MC_SKILL_PCT, PHYS_MC_COUNT);
+/** AP Physics C: Electricity and Magnetism(6단원, 번호 8–13, 공식 MC 단원 비중 15-25/10-20/10-15/15-25/10-20/10-20 % — AP Central CED(Course Framework V.1, 2026) Exam Weighting for the Multiple-Choice Section, 2026-10-20 읽음) × 42 → [7,10]/[5,8]/[5,6]/[7,10]/[5,8]/[5,8].
+ *  목표 배분(제안, 공식 고정 아님)은 PHYSE_FULL_TARGET = 8/6/5/9/7/7. 스킬 비중은 CED "Exam Weighting by Science Practice": 2.A 25-30 · 2.B 20-25 · 2.C 10-15 · 2.D 10-15 · 3.B 15-25 · 3.C 5-10 %(MC 에서 평가하지 않는 1.A·1.B·1.C·3.A 제외).
+ *  MC 42 = 단독 38 + 2문항 공유 세트 2, FRQ 4 = MR(10)/TBR(12)/LAB(10)/QQT(8) 각 1 은 Physics 1·C: Mechanics 와 같다(구성은 우리 안). */
+export const PHYSE_MC_UNIT_PCT: Record<string, [number, number]> = { "8": [15, 25], "9": [10, 20], "10": [10, 15], "11": [15, 25], "12": [10, 20], "13": [10, 20] };
+export const PHYSE_MC_SKILL_PCT: Record<string, [number, number]> = { "2.A": [25, 30], "2.B": [20, 25], "2.C": [10, 15], "2.D": [10, 15], "3.B": [15, 25], "3.C": [5, 10] };
+export const PHYSE_FULL_TARGET = { units: { "8": 8, "9": 6, "10": 5, "11": 9, "12": 7, "13": 7 } as Record<string, number> };
+const PHYS_UNIT_PCT_BY_SUBJECT: Record<string, Record<string, [number, number]>> = { ap_physics_c_mechanics: PHYSC_MC_UNIT_PCT, ap_physics_c_electricity_and_magnetism: PHYSE_MC_UNIT_PCT };
+const PHYS_TARGET_BY_SUBJECT: Record<string, { units: Record<string, number> }> = { ap_physics_c_mechanics: PHYSC_FULL_TARGET, ap_physics_c_electricity_and_magnetism: PHYSE_FULL_TARGET };
+export const physUnitBounds = (subject: string = "ap_physics_1"): UnitBounds => mapBounds(PHYS_UNIT_PCT_BY_SUBJECT[subject] ?? PHYS_MC_UNIT_PCT, PHYS_MC_COUNT);
+export const physFullTarget = (subject: string = "ap_physics_1") => PHYS_TARGET_BY_SUBJECT[subject] ?? PHYS_FULL_TARGET;
+export const physSkillBounds = (subject: string = "ap_physics_1"): UnitBounds => mapBounds(subject === "ap_physics_c_electricity_and_magnetism" ? PHYSE_MC_SKILL_PCT : PHYS_MC_SKILL_PCT, PHYS_MC_COUNT);
 
 export type PhysSetItem = { kind: "mc" | "frq"; unit: string | null; skill: string | null; candidateKey: string | null; position: number };
 /** 물리 풀 세트 구성 검증(순수, 차단 위반만): MC 42·FRQ 4, 단원 범위, 2문항 공유 세트 2개(연속 위치). 스킬 범위는 physSkillWarnings 로 따로 본다. */
@@ -107,9 +116,38 @@ export function verifyPhysFullComposition(items: PhysSetItem[], subject: string 
   return out;
 }
 /** 스킬 범위 이탈(경고): 공식 MC 스킬 비중 범위를 벗어난 스킬과 실제 수. */
-export function physSkillWarnings(items: PhysSetItem[]): string[] {
+export function physSkillWarnings(items: PhysSetItem[], subject: string = "ap_physics_1"): string[] {
   const mc = items.filter((i) => i.kind === "mc");
-  return Object.entries(physSkillBounds()).flatMap(([k, b]) => { const n = mc.filter((i) => i.skill === k).length; return n < b.min || n > b.max ? [`skill_${k}_${n}_not_in_${b.min}-${b.max}`] : []; });
+  return Object.entries(physSkillBounds(subject)).flatMap(([k, b]) => { const n = mc.filter((i) => i.skill === k).length; return n < b.min || n > b.max ? [`skill_${k}_${n}_not_in_${b.min}-${b.max}`] : []; });
+}
+
+// ---- AP Precalculus (CED effective Fall 2026; AP Central 시험 페이지 2026-10-20, docs/ap/precalculus-groundwork.md) ----
+// MC 42 = 파트 A 29(계산기 불가, 65분) + 파트 B 13(그래핑 계산기 필수, 40분), 단독 문항만(공유 자료 세트 없음). 단원 MC 비중 30-40/25-40/30-35 % × 42 → [13,16]/[11,16]/[13,14].
+// 목표 배분(제안, 공식 고정 아님) 15/13/14. FRQ 4 = fc·mn(파트 A, 계산기 필수) + mp·sy(파트 B, 계산기 불가) 각 1, 순서 고정, 문항 6점.
+export const PRE_MC_COUNT = 42;
+export const PRE_MC_PART_A = 29;
+export const PRE_MC_PART_B = 13;
+export const PRE_MC_UNIT_PCT: Record<string, [number, number]> = { "1": [30, 40], "2": [25, 40], "3": [30, 35] };
+export const PRE_FULL_TARGET = { units: { "1": 15, "2": 13, "3": 14 } as Record<string, number> };
+export const PRE_FRQ_TEMPLATES = ["fc", "mn", "mp", "sy"] as const;
+export const PRE_FRQ_CALC: Record<string, "required" | "not_allowed"> = { fc: "required", mn: "required", mp: "not_allowed", sy: "not_allowed" };
+export const PRE_FRQ_COUNT = 4;
+export const preUnitBounds = (): UnitBounds => mapBounds(PRE_MC_UNIT_PCT, PRE_MC_COUNT);
+export type PreSetItem = { kind: "mc" | "frq"; unit: string | null; calc: string | null; template: string | null; candidateKey: string | null; position: number };
+/** Precalculus 풀 세트 구성 검증(순수, 차단 위반만): MC 42(계산기 불가 29 + 필수 13), FRQ 4(유형 각 1), 단원 범위. */
+export function verifyPreFullComposition(items: PreSetItem[]): string[] {
+  const out: string[] = [];
+  const mc = items.filter((i) => i.kind === "mc"), frq = items.filter((i) => i.kind === "frq");
+  if (mc.length !== PRE_MC_COUNT) out.push(`mc_count_${mc.length}/${PRE_MC_COUNT}`);
+  const a = mc.filter((i) => i.calc === "not_allowed").length, b = mc.filter((i) => i.calc === "required").length;
+  if (a !== PRE_MC_PART_A) out.push(`part_a_${a}/${PRE_MC_PART_A}`);
+  if (b !== PRE_MC_PART_B) out.push(`part_b_${b}/${PRE_MC_PART_B}`);
+  if (frq.length !== PRE_FRQ_COUNT) out.push(`frq_count_${frq.length}/${PRE_FRQ_COUNT}`);
+  for (const t of PRE_FRQ_TEMPLATES) if (frq.filter((i) => i.template === t).length !== 1) out.push(`frq_type_${t}_not_1`);
+  for (const [u, bd] of Object.entries(preUnitBounds())) { const n = mc.filter((i) => i.unit === u).length; if (n < bd.min || n > bd.max) out.push(`unit_${u}_${n}_not_in_${bd.min}-${bd.max}`); }
+  const keys = items.map((i) => i.candidateKey).filter(Boolean);
+  if (new Set(keys).size !== keys.length) out.push("duplicate_key");
+  return out;
 }
 
 // ---- AP Chemistry (2027 CED p.205-207, docs/ap/chemistry-facts.md) ----

@@ -6,7 +6,7 @@ import type { McPack } from "./gates";
 type Json = Record<string, unknown>;
 export const STATS_SET_SIZE = 3;
 /** 과목별 공유 자료 세트 크기: Statistics 3문항, Physics 1·Chemistry 는 2문항(공식 세트 크기는 미공표 — Chemistry 는 CED 가 "shared stimulus 세트"만 언급). */
-export const setSizeOf = (subject: string) => (subject === "ap_biology" ? 4 : subject === "ap_physics_1" || subject === "ap_physics_c_mechanics" || subject === "ap_chemistry" || subject === "ap_computer_science_a" ? 2 : STATS_SET_SIZE); // Biology 공유 자료 세트는 공식 "typically 4–5 questions each" 에 맞춰 4문항
+export const setSizeOf = (subject: string) => (subject === "ap_biology" ? 4 : subject === "ap_physics_1" || subject === "ap_physics_c_mechanics" || subject === "ap_physics_c_electricity_and_magnetism" || subject === "ap_chemistry" || subject === "ap_computer_science_a" ? 2 : STATS_SET_SIZE); // Biology 공유 자료 세트는 공식 "typically 4–5 questions each" 에 맞춰 4문항
 /** 세트 팩(Python 원형 출력): 문항은 각각 독립 MC 팩(자체 설계도·정답·오답 근거)이고 자료는 세트가 한 번만 갖는다. */
 export type SetPack = {
   archetype: string; topic: string; skill: string; calculator: string; set_intro: string; stimulus: McPack["stimulus"];

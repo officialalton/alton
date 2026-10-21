@@ -1,0 +1,943 @@
+[
+ {
+  "cellId": "ap_european_history-eu1_saq3",
+  "apSubjectCode": "ap_european_history",
+  "kind": "frq_bundle",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_european_history-eu1_saq3-k0",
+  "keywordCode": "1.1",
+  "unitCode": "1",
+  "skillPrimary": "1.B",
+  "structure": "frq_multipart",
+  "archetype": "eurofrq_eu1_saq3",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "gateOverride": "euro-f1-2026-10-20",
+  "run": "euro-f1",
+  "stockKey": "euro-f1:ap_european_history-eu1_saq3-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "euro-f1-2026-10-20",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_european_history",
+  "itemFamilyId": "fam:euro-f1:ap_european_history-eu1_saq3-k0",
+  "canonicalKey": "euro-f1:ap_european_history-eu1_saq3-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_european_history:1.1",
+  "sharedWith": [],
+  "stockCell": "ap_european_history|1.1|1.B|frq_multipart|na",
+  "history": [
+   {
+    "run": "euro-f1",
+    "gateVersion": "euro-f1-2026-10-20",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "eu-img-durer-rhinoceros-1515"
+  ],
+  "exam": "EU1",
+  "payload": {
+   "archetype": "eurofrq_eu1_saq3",
+   "template": "saq3",
+   "topic": "1.1",
+   "extra_topics": [],
+   "skill": "1.B",
+   "representative_skill": "1.B",
+   "calculator": "na",
+   "title": "Durer's Rhinoceros (1515): Portuguese Expansion, Trade, and Print",
+   "set_intro": "Historical source (real document)\n(print)\nThe Rhinoceros (woodcut with German caption)\nAlbrecht Durer, 1515. Wikimedia Commons (file page records the source institution and public-domain tag). Reuse: public domain (16th-century work; digital image released under CC0). unmodified except Wikimedia Commons' scaled JPEG rendering of the file (upload.wikimedia.org thumbnail, 1280 px wide at most).\nContext: Albrecht Durer was a German artist from Nuremberg; he made this print in 1515 after hearing about an Indian rhinoceros sent to the king of Portugal.\n\nThe image for this source is shown below. Select the image to open it full size.",
+   "stimulus": {
+    "kind": "image",
+    "description": "A black-and-white woodcut of a rhinoceros seen from the side, drawn with a plated, armor-like hide covered in rings and scales, a small second horn on its shoulders and a large curved horn on its nose; the year '1515' and the word 'RHINOCERVS' with the artist's monogram are printed at the upper right, and several lines of German text run across the top.",
+    "data": {
+     "path": "ap-sources/eu-img-durer-rhinoceros-1515/image.jpg",
+     "alt": "A black-and-white woodcut of a rhinoceros seen from the side, drawn with a plated, armor-like hide covered in rings and scales, a small second horn on its shoulders and a large curved horn on its nose; the year '1515' and the word 'RHINOCERVS' with the artist's monogram are printed at the upper right, and several lines of German text run across the top.",
+     "credit": "The Rhinoceros, Albrecht Durer, 1515. National Gallery of Art, via Wikimedia Commons (CC0)."
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Briefly describe ONE feature of the image that shows how Europeans in the early 1500s pictured or understood an animal from Asia.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.B"
+     ],
+     "topic_codes": [
+      "1.1"
+     ],
+     "model_answer": "The rhinoceros is drawn with a hide of overlapping plates that look like a suit of armor, showing that the artist pictured an unfamiliar animal by comparing it with things Europeans already knew.",
+     "rubric_rows": [
+      {
+       "row_id": "a",
+       "points": 1,
+       "criterion": "Describe one visible feature of the woodcut that reveals how Europeans pictured an Asian animal, such as the plated, armor-like hide, the scaly legs, the small extra horn on the shoulders, or the presentation of the animal with a Latin name and date as if it were an accurate report.",
+       "required_elements": [
+        "The rhinoceros is drawn with a hide of overlapping plates that look like a suit of armor, showing that the artist pictured an unfamiliar animal by comparing it with things Europeans already knew.",
+        "The legs are covered in scale-like patterns and there is a small extra horn on the animal's shoulders, suggesting that the image was built from secondhand description and imagination rather than direct observation.",
+        "The print gives the animal a Latin label, RHINOCERVS, and the date 1515, presenting the image as a factual, up-to-date report about a rare creature from Asia.",
+        "The animal fills the whole sheet as a curiosity to be studied, which shows strong European interest in exotic creatures from lands reached by sea."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Briefly explain ONE specific development in Portuguese overseas expansion in the period c. 1450 to c. 1550 that helps explain how an animal from India could reach the king of Portugal around 1515.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.B"
+     ],
+     "topic_codes": [
+      "1.1"
+     ],
+     "model_answer": "Vasco da Gama sailed around the Cape of Good Hope and reached Calicut in 1498, opening a direct sea route from Portugal to India that let goods and animals be shipped to Lisbon.",
+     "rubric_rows": [
+      {
+       "row_id": "b",
+       "points": 1,
+       "criterion": "Explain one specific development in Portuguese expansion c. 1450 to c. 1550 that made direct contact with India possible, such as Vasco da Gama's voyage around Africa to Calicut in 1498, the taking of Goa in 1510 or Malacca in 1511 under Afonso de Albuquerque, the network of fortified trading posts in the Indian Ocean, or earlier voyages down the African coast such as Dias rounding the Cape of Good Hope in 1488.",
+       "required_elements": [
+        "Vasco da Gama sailed around the Cape of Good Hope and reached Calicut in 1498, opening a direct sea route from Portugal to India that let goods and animals be shipped to Lisbon.",
+        "Afonso de Albuquerque captured Goa in 1510, giving Portugal a permanent base on the Indian coast from which ships regularly sailed to Lisbon.",
+        "Portugal built a network of fortified trading posts in the Indian Ocean, including Malacca, taken in 1511, so the crown could control part of the spice trade and receive luxury goods and diplomatic gifts from Asia.",
+        "In the fifteenth century, Portuguese voyages sponsored by the crown moved down the West African coast, and Bartolomeu Dias rounded the Cape of Good Hope in 1488, which prepared the way for the sea route to India."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Briefly explain ONE other way, besides prints of animals, that the printing press affected the spread of information or ideas in Europe in the period c. 1450 to c. 1600.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.B"
+     ],
+     "topic_codes": [
+      "1.1"
+     ],
+     "model_answer": "Martin Luther's Ninety-Five Theses and later pamphlets, from 1517 on, were printed and spread quickly across the German lands, helping the Protestant Reformation reach a wide audience.",
+     "rubric_rows": [
+      {
+       "row_id": "c",
+       "points": 1,
+       "criterion": "Explain one specific effect of printing on the spread of information or ideas in Europe c. 1450 to c. 1600 other than animal prints, such as the rapid spread of Luther's writings after 1517, the printing of vernacular Bibles, wide circulation of Columbus's 1493 letter about his voyage, printed illustrated scientific works such as Vesalius's 1543 anatomy, or printed humanist editions of classical texts.",
+       "required_elements": [
+        "Martin Luther's Ninety-Five Theses and later pamphlets, from 1517 on, were printed and spread quickly across the German lands, helping the Protestant Reformation reach a wide audience.",
+        "Printed Bibles in vernacular languages, such as Luther's German translation, let more lay people read scripture themselves.",
+        "Columbus's 1493 letter describing his voyage was printed and reprinted in several cities, spreading news of lands across the Atlantic within months.",
+        "Vesalius's illustrated anatomy, On the Fabric of the Human Body (1543), used printed images to spread new medical knowledge in identical copies across Europe."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "reference_text": "Scoring guide (ALTON reference — not official AP scoring). This question is worth 3 points.\nPart A (0-1): Describe one visible feature of the woodcut that reveals how Europeans pictured an Asian animal, such as the plated, armor-like hide, the scaly legs, the small extra horn on the shoulders, or the presentation of the animal with a Latin name and date as if it were an accurate report.\n   - 1: The response accurately describes one feature of the woodcut and connects it to how Europeans pictured or understood the animal, such as an imagined armored hide drawn from secondhand reports.\n   - 0: The response does not describe a feature of the image, describes something not shown, or gives only a general statement such as 'it is a rhinoceros' without linking it to how Europeans understood the animal.\nPart B (0-1): Explain one specific development in Portuguese expansion c. 1450 to c. 1550 that made direct contact with India possible, such as Vasco da Gama's voyage around Africa to Calicut in 1498, the taking of Goa in 1510 or Malacca in 1511 under Afonso de Albuquerque, the network of fortified trading posts in the Indian Ocean, or earlier voyages down the African coast such as Dias rounding the Cape of Good Hope in 1488.\n   - 1: The response explains one accurate, specific Portuguese development from c. 1450 to c. 1550 and shows how it connected Portugal to India by sea.\n   - 0: The response names no specific development, is inaccurate (for example, credits Columbus with reaching India), falls outside the period, or only restates the source.\nPart C (0-1): Explain one specific effect of printing on the spread of information or ideas in Europe c. 1450 to c. 1600 other than animal prints, such as the rapid spread of Luther's writings after 1517, the printing of vernacular Bibles, wide circulation of Columbus's 1493 letter about his voyage, printed illustrated scientific works such as Vesalius's 1543 anatomy, or printed humanist editions of classical texts.\n   - 1: The response explains one accurate, specific way printing spread information or ideas in Europe in the period, with a concrete example.\n   - 0: The response gives no specific example, offers only a vague claim such as 'more people could read,' is inaccurate, or merely repeats the rhinoceros print.\nNote: Students are not expected to read the German caption; part A should be scored on visible features of the image and the context line.\nNote: Do not award part A for claims that Durer saw the animal himself; the context line says he made the print after hearing about it.\nNote: Do not penalize minor date discrepancies concerning the animal's arrival; score part B on the Portuguese development explained.\nNote: Parts B and C each need a specific development, not a general statement about exploration or literacy.\nNote: ALTON reference — not official AP scoring\nAcceptable answers for A: The rhinoceros is drawn with a hide of overlapping plates that look like a suit of armor, showing that the artist pictured an unfamiliar animal by comparing it with things Europeans already knew. / The legs are covered in scale-like patterns and there is a small extra horn on the animal's shoulders, suggesting that the image was built from secondhand description and imagination rather than direct observation. / The print gives the animal a Latin label, RHINOCERVS, and the date 1515, presenting the image as a factual, up-to-date report about a rare creature from Asia. / The animal fills the whole sheet as a curiosity to be studied, which shows strong European interest in exotic creatures from lands reached by sea.\nAcceptable answers for B: Vasco da Gama sailed around the Cape of Good Hope and reached Calicut in 1498, opening a direct sea route from Portugal to India that let goods and animals be shipped to Lisbon. / Afonso de Albuquerque captured Goa in 1510, giving Portugal a permanent base on the Indian coast from which ships regularly sailed to Lisbon. / Portugal built a network of fortified trading posts in the Indian Ocean, including Malacca, taken in 1511, so the crown could control part of the spice trade and receive luxury goods and diplomatic gifts from Asia. / In the fifteenth century, Portuguese voyages sponsored by the crown moved down the West African coast, and Bartolomeu Dias rounded the Cape of Good Hope in 1488, which prepared the way for the sea route to India.\nAcceptable answers for C: Martin Luther's Ninety-Five Theses and later pamphlets, from 1517 on, were printed and spread quickly across the German lands, helping the Protestant Reformation reach a wide audience. / Printed Bibles in vernacular languages, such as Luther's German translation, let more lay people read scripture themselves. / Columbus's 1493 letter describing his voyage was printed and reprinted in several cities, spreading news of lands across the Atlantic within months. / Vesalius's illustrated anatomy, On the Fabric of the Human Body (1543), used printed images to spread new medical knowledge in identical copies across Europe.\n\nSample response, high score (3/3; Part A 1, Part B 1, Part C 1):\n(A) Durer draws the rhinoceros with a hide made of hard, riveted plates, almost like a suit of armor, and he adds a small twisted horn on its shoulders that a real Indian rhinoceros does not have. This shows that Europeans in the early 1500s pictured Asian animals through secondhand descriptions mixed with imagination, because Durer never saw the animal himself and filled in the details with things familiar to Europeans, like armor.\n\n(B) In 1498 Vasco da Gama sailed around the Cape of Good Hope and reached Calicut in India, opening a direct sea route from Portugal to Asia. After that, Afonso de Albuquerque captured Goa in 1510, which gave the Portuguese a permanent base in India. With regular fleets sailing between Goa and Lisbon, an Indian ruler could send gifts like a rhinoceros by ship to the king of Portugal.\n\n(C) The printing press let Martin Luther's ideas spread very quickly after he wrote the Ninety-Five Theses in 1517. Printers made thousands of copies of his pamphlets, many in German, so his attacks on indulgences and the Church reached people across the Holy Roman Empire within weeks. This fast spread helped the Protestant Reformation grow before Church authorities could silence him.\n   - \"a hide made of hard, riveted plates, almost like a suit of armor\" - Describes a visible feature of the woodcut accurately.\n   - \"secondhand descriptions mixed with imagination, because Durer never saw the animal himself\" - Connects the feature to European understanding and correctly follows the context line (he only heard about it). Earns the point.\n   - \"In 1498 Vasco da Gama sailed around the Cape of Good Hope and reached Calicut in India\" - A specific, accurate Portuguese development within the period.\n   - \"With regular fleets sailing between Goa and Lisbon\" - Shows how the development linked India to Portugal by sea, so it explains how the animal could arrive. Earns the point.\n   - \"Martin Luther's ideas spread very quickly after he wrote the Ninety-Five Theses in 1517\" - A concrete, accurate example that is not an animal print.\n   - \"Printers made thousands of copies of his pamphlets, many in German\" - Explains how printing spread the ideas (mass copies, in the vernacular), not just a vague claim about literacy. Earns the point.\n\nSample response, middle score (2/3; Part A 1, Part B 1, Part C 0):\n(A) One feature of the image is the hide of the rhinoceros, which is drawn like plates of armor with rings and scales all over the body and legs. Since Durer only heard about the animal and did not see it, he pictured it like a knight in armor. This shows that Europeans in the early 1500s imagined an animal from Asia using things they already knew, like armor, because they only had secondhand reports.\n\n(B) One development was Vasco da Gama's voyage around Africa to India. In 1498 he sailed from Portugal around the Cape of Good Hope and reached Calicut on the coast of India. This opened a direct sea route between Portugal and India, so Portuguese ships could go to India and bring back goods and gifts. Later the Portuguese took Goa in 1510 and made it a base. This helps explain how an animal from India could be put on a ship and sent to the king of Portugal around 1515.\n\n(C) The printing press also helped spread information and ideas in Europe because books could be made faster and cheaper than copying them by hand. This meant a lot more people could get books and learn new things. Ideas moved around Europe much more quickly after the printing press was invented, and this changed how people learned about the world.\n   - \"the hide of the rhinoceros, which is drawn like plates of armor with rings and scales all over the body and legs\" - Accurately describes a visible feature of the woodcut (plated, armor-like hide), as the rubric lists.\n   - \"he pictured it like a knight in armor\" - Links the feature to how Europeans pictured the animal from secondhand reports, and respects the note that Durer did not see it. This earns the point.\n   - \"In 1498 he sailed from Portugal around the Cape of Good Hope and reached Calicut on the coast of India.\" - Accurate, specific development within c. 1450 to c. 1550 (da Gama to Calicut, 1498).\n   - \"This opened a direct sea route between Portugal and India, so Portuguese ships could go to India and bring back goods and gifts.\" - Shows how the development connected Portugal to India by sea and explains how the animal could reach the king. The point is earned. Goa 1510 is also correct.\n   - \"because books could be made faster and cheaper than copying them by hand\" - A true but general statement about printing. It names no specific work, event or person.\n   - \"Ideas moved around Europe much more quickly after the printing press was invented, and this changed how people learned about the world.\" - Vague claim with no concrete example, such as Luther's writings, vernacular Bibles or Vesalius. The rubric requires a specific example, so no point is earned.\n\nSample response, low score (1/3; Part A 0, Part B 1, Part C 0):\n(A) The picture shows a rhinoceros with a horn on its nose and it has a lot of lines on its body. It is a picture of an animal from Asia that Europeans were curious about at that time. The word RHINOCERVS is written on it too.\n\n(B) One development in Portuguese expansion was Vasco da Gama's voyage in 1498. He sailed from Portugal down and around the southern tip of Africa and then across the Indian Ocean to Calicut in India. This opened a direct sea route to India that did not go through Muslim and Italian middlemen in the Mediterranean. After this the Portuguese set up trading posts and forts in the Indian Ocean, such as Goa, so Portuguese ships could go back and forth between India and Lisbon. That is how an animal from India could be put on a ship and sent to the king of Portugal in 1515.\n\n(C) The printing press also made it so more people could read and get information. Before the printing press books were copied by hand so they were expensive, and after Gutenberg printing made books cheaper and there were a lot more of them. This helped ideas spread around Europe faster and changed how people learned about things.\n   - \"it has a lot of lines on its body\" - Too vague. It does not identify the plated, armor-like hide or the extra shoulder horn, and it does not connect the feature to how Europeans understood the animal from secondhand reports. No credit.\n   - \"The word RHINOCERVS is written on it too.\" - Only notes a label and does not explain how the Latin name or date made the print look like an accurate report. It merely restates the source, so Part A earns no credit.\n   - \"He sailed from Portugal down and around the southern tip of Africa and then across the Indian Ocean to Calicut in India.\" - Accurate, specific development (da Gama, 1498, Calicut) that shows how Portugal reached India by sea. This earns the point.\n   - \"so Portuguese ships could go back and forth between India and Lisbon\" - Links the trading posts such as Goa to regular contact with India, tying the development to the question of how the animal reached the king.\n   - \"The printing press also made it so more people could read and get information.\" - Vague claim about literacy and information with no specific example, such as Luther's writings, vernacular Bibles or Columbus's letter. The rubric says this earns no credit.\n   - \"after Gutenberg printing made books cheaper and there were a lot more of them\" - The point about cheaper books is accurate but general. It does not name a concrete effect or example of ideas spreading, so Part C stays at 0.",
+   "whap_frq": {
+    "schema_version": "whap-frq-1",
+    "task_type": "saq",
+    "template": "saq3",
+    "era": 1,
+    "units": [
+     1
+    ],
+    "title": "Durer's Rhinoceros (1515): Portuguese Expansion, Trade, and Print",
+    "prompt": {
+     "scenario": "In the period c. 1450 to c. 1600, Portuguese voyages opened a sea route between Europe and Asia, and the printing press changed how news and images moved within Europe. The Nuremberg artist Albrecht Durer made this woodcut in 1515 after hearing about an Indian rhinoceros sent to the king of Portugal.",
+     "task": "Using the image, answer (a), (b), and (c).",
+     "requirements": [
+      "Each part requires only one answer.",
+      "Parts B and C must use specific historical evidence from the years named in each part.",
+      "For part B, do not simply repeat that the animal came from India or was sent to the king of Portugal; explain a development that made this possible."
+     ],
+     "parts": [
+      {
+       "label": "A",
+       "prompt": "Briefly describe ONE feature of the image that shows how Europeans in the early 1500s pictured or understood an animal from Asia.",
+       "points": 1
+      },
+      {
+       "label": "B",
+       "prompt": "Briefly explain ONE specific development in Portuguese overseas expansion in the period c. 1450 to c. 1550 that helps explain how an animal from India could reach the king of Portugal around 1515.",
+       "points": 1
+      },
+      {
+       "label": "C",
+       "prompt": "Briefly explain ONE other way, besides prints of animals, that the printing press affected the spread of information or ideas in Europe in the period c. 1450 to c. 1600.",
+       "points": 1
+      }
+     ]
+    },
+    "sources": [
+     {
+      "id": "A",
+      "kind": "image",
+      "title": "The Rhinoceros (woodcut with German caption)",
+      "attribution": "Albrecht Durer, 1515. Wikimedia Commons (file page records the source institution and public-domain tag). Reuse: public domain (16th-century work; digital image released under CC0). unmodified except Wikimedia Commons' scaled JPEG rendering of the file (upload.wikimedia.org thumbnail, 1280 px wide at most).",
+      "context": "Albrecht Durer was a German artist from Nuremberg; he made this print in 1515 after hearing about an Indian rhinoceros sent to the king of Portugal.",
+      "real_data": true,
+      "source_registry_id": "eu-img-durer-rhinoceros-1515",
+      "source_sha256": "db38b6d12fe00183cb589c6ea5bde533d3b74ead95ffddadb79ef97482a1faa3",
+      "body": "A black-and-white woodcut of a rhinoceros seen from the side, drawn with a plated, armor-like hide covered in rings and scales, a small second horn on its shoulders and a large curved horn on its nose; the year '1515' and the word 'RHINOCERVS' with the artist's monogram are printed at the upper right, and several lines of German text run across the top.",
+      "image": {
+       "path": "ap-sources/eu-img-durer-rhinoceros-1515/image.jpg",
+       "alt": "A black-and-white woodcut of a rhinoceros seen from the side, drawn with a plated, armor-like hide covered in rings and scales, a small second horn on its shoulders and a large curved horn on its nose; the year '1515' and the word 'RHINOCERVS' with the artist's monogram are printed at the upper right, and several lines of German text run across the top.",
+       "credit": "The Rhinoceros, Albrecht Durer, 1515. National Gallery of Art, via Wikimedia Commons (CC0)."
+      },
+      "provenance": {
+       "kind": "real_historical_source",
+       "real_data": true,
+       "note": "registry eu-img-durer-rhinoceros-1515"
+      }
+     }
+    ],
+    "rubric": {
+     "rubric_id": "whap-v1",
+     "total_points": 3,
+     "rows": [
+      {
+       "row_id": "a",
+       "name": "Part A",
+       "max": 1,
+       "descriptors": {
+        "0": "The response does not describe a feature of the image, describes something not shown, or gives only a general statement such as 'it is a rhinoceros' without linking it to how Europeans understood the animal.",
+        "1": "The response accurately describes one feature of the woodcut and connects it to how Europeans pictured or understood the animal, such as an imagined armored hide drawn from secondhand reports."
+       },
+       "task_specific": "Describe one visible feature of the woodcut that reveals how Europeans pictured an Asian animal, such as the plated, armor-like hide, the scaly legs, the small extra horn on the shoulders, or the presentation of the animal with a Latin name and date as if it were an accurate report."
+      },
+      {
+       "row_id": "b",
+       "name": "Part B",
+       "max": 1,
+       "descriptors": {
+        "0": "The response names no specific development, is inaccurate (for example, credits Columbus with reaching India), falls outside the period, or only restates the source.",
+        "1": "The response explains one accurate, specific Portuguese development from c. 1450 to c. 1550 and shows how it connected Portugal to India by sea."
+       },
+       "task_specific": "Explain one specific development in Portuguese expansion c. 1450 to c. 1550 that made direct contact with India possible, such as Vasco da Gama's voyage around Africa to Calicut in 1498, the taking of Goa in 1510 or Malacca in 1511 under Afonso de Albuquerque, the network of fortified trading posts in the Indian Ocean, or earlier voyages down the African coast such as Dias rounding the Cape of Good Hope in 1488."
+      },
+      {
+       "row_id": "c",
+       "name": "Part C",
+       "max": 1,
+       "descriptors": {
+        "0": "The response gives no specific example, offers only a vague claim such as 'more people could read,' is inaccurate, or merely repeats the rhinoceros print.",
+        "1": "The response explains one accurate, specific way printing spread information or ideas in Europe in the period, with a concrete example."
+       },
+       "task_specific": "Explain one specific effect of printing on the spread of information or ideas in Europe c. 1450 to c. 1600 other than animal prints, such as the rapid spread of Luther's writings after 1517, the printing of vernacular Bibles, wide circulation of Columbus's 1493 letter about his voyage, printed illustrated scientific works such as Vesalius's 1543 anatomy, or printed humanist editions of classical texts."
+      }
+     ],
+     "scoring_notes": [
+      "Students are not expected to read the German caption; part A should be scored on visible features of the image and the context line.",
+      "Do not award part A for claims that Durer saw the animal himself; the context line says he made the print after hearing about it.",
+      "Do not penalize minor date discrepancies concerning the animal's arrival; score part B on the Portuguese development explained.",
+      "Parts B and C each need a specific development, not a general statement about exploration or literacy.",
+      "ALTON reference — not official AP scoring"
+     ]
+    },
+    "expected_features": {
+     "defensible_theses": [],
+     "contextualization_ideas": [
+      "Portugal's crown-sponsored sea route to Asia and its effort to control the spice trade.",
+      "Growth of printing centers such as Nuremberg in the late fifteenth century.",
+      "Renaissance curiosity about nature and collecting rare objects."
+     ],
+     "outside_evidence": [
+      "Treaty of Tordesillas, 1494",
+      "Vasco da Gama's voyage, 1497 to 1499",
+      "Luther's printed pamphlets after 1517",
+      "Vesalius, 1543"
+     ],
+     "reasoning_types": [
+      "Sourcing and analysis of an image",
+      "Causation",
+      "Contextualization"
+     ],
+     "saq_answers": {
+      "a": [
+       "The rhinoceros is drawn with a hide of overlapping plates that look like a suit of armor, showing that the artist pictured an unfamiliar animal by comparing it with things Europeans already knew.",
+       "The legs are covered in scale-like patterns and there is a small extra horn on the animal's shoulders, suggesting that the image was built from secondhand description and imagination rather than direct observation.",
+       "The print gives the animal a Latin label, RHINOCERVS, and the date 1515, presenting the image as a factual, up-to-date report about a rare creature from Asia.",
+       "The animal fills the whole sheet as a curiosity to be studied, which shows strong European interest in exotic creatures from lands reached by sea."
+      ],
+      "b": [
+       "Vasco da Gama sailed around the Cape of Good Hope and reached Calicut in 1498, opening a direct sea route from Portugal to India that let goods and animals be shipped to Lisbon.",
+       "Afonso de Albuquerque captured Goa in 1510, giving Portugal a permanent base on the Indian coast from which ships regularly sailed to Lisbon.",
+       "Portugal built a network of fortified trading posts in the Indian Ocean, including Malacca, taken in 1511, so the crown could control part of the spice trade and receive luxury goods and diplomatic gifts from Asia.",
+       "In the fifteenth century, Portuguese voyages sponsored by the crown moved down the West African coast, and Bartolomeu Dias rounded the Cape of Good Hope in 1488, which prepared the way for the sea route to India."
+      ],
+      "c": [
+       "Martin Luther's Ninety-Five Theses and later pamphlets, from 1517 on, were printed and spread quickly across the German lands, helping the Protestant Reformation reach a wide audience.",
+       "Printed Bibles in vernacular languages, such as Luther's German translation, let more lay people read scripture themselves.",
+       "Columbus's 1493 letter describing his voyage was printed and reprinted in several cities, spreading news of lands across the Atlantic within months.",
+       "Vesalius's illustrated anatomy, On the Fabric of the Human Body (1543), used printed images to spread new medical knowledge in identical copies across Europe."
+      ]
+     },
+     "common_pitfalls": [
+      "Claiming that Durer saw the rhinoceros in person.",
+      "Assuming students can read the German caption, or inventing what it says.",
+      "Mixing up Portuguese and Spanish voyages, for example claiming Columbus reached India.",
+      "Giving vague answers such as 'trade increased' or 'more people could read' without a specific example.",
+      "For part C, using the rhinoceros print again instead of another example."
+     ],
+     "facts": [
+      "Albrecht Durer was a German artist based in Nuremberg; the woodcut is dated 1515.",
+      "An Indian rhinoceros reached Lisbon in 1515 as a gift to King Manuel I of Portugal.",
+      "Durer did not see the animal; he worked from a written description and sketch sent from Lisbon.",
+      "Vasco da Gama reached Calicut in 1498.",
+      "Afonso de Albuquerque took Goa in 1510 and Malacca in 1511.",
+      "Bartolomeu Dias rounded the Cape of Good Hope in 1488.",
+      "Gutenberg's movable-type printing began in Mainz around 1450.",
+      "Woodcuts could be printed many times, so one image could circulate widely."
+     ]
+    },
+    "samples": [
+     {
+      "tier": "high",
+      "target_total": 3,
+      "essay": "(A) Durer draws the rhinoceros with a hide made of hard, riveted plates, almost like a suit of armor, and he adds a small twisted horn on its shoulders that a real Indian rhinoceros does not have. This shows that Europeans in the early 1500s pictured Asian animals through secondhand descriptions mixed with imagination, because Durer never saw the animal himself and filled in the details with things familiar to Europeans, like armor.\n\n(B) In 1498 Vasco da Gama sailed around the Cape of Good Hope and reached Calicut in India, opening a direct sea route from Portugal to Asia. After that, Afonso de Albuquerque captured Goa in 1510, which gave the Portuguese a permanent base in India. With regular fleets sailing between Goa and Lisbon, an Indian ruler could send gifts like a rhinoceros by ship to the king of Portugal.\n\n(C) The printing press let Martin Luther's ideas spread very quickly after he wrote the Ninety-Five Theses in 1517. Printers made thousands of copies of his pamphlets, many in German, so his attacks on indulgences and the Church reached people across the Holy Roman Empire within weeks. This fast spread helped the Protestant Reformation grow before Church authorities could silence him.",
+      "word_count": 203,
+      "rubric_scores": {
+       "a": 1,
+       "b": 1,
+       "c": 1,
+       "total": 3
+      },
+      "annotations": [
+       {
+        "quote": "a hide made of hard, riveted plates, almost like a suit of armor",
+        "comment": "Describes a visible feature of the woodcut accurately.",
+        "row_id": "a"
+       },
+       {
+        "quote": "secondhand descriptions mixed with imagination, because Durer never saw the animal himself",
+        "comment": "Connects the feature to European understanding and correctly follows the context line (he only heard about it). Earns the point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "In 1498 Vasco da Gama sailed around the Cape of Good Hope and reached Calicut in India",
+        "comment": "A specific, accurate Portuguese development within the period.",
+        "row_id": "b"
+       },
+       {
+        "quote": "With regular fleets sailing between Goa and Lisbon",
+        "comment": "Shows how the development linked India to Portugal by sea, so it explains how the animal could arrive. Earns the point.",
+        "row_id": "b"
+       },
+       {
+        "quote": "Martin Luther's ideas spread very quickly after he wrote the Ninety-Five Theses in 1517",
+        "comment": "A concrete, accurate example that is not an animal print.",
+        "row_id": "c"
+       },
+       {
+        "quote": "Printers made thousands of copies of his pamphlets, many in German",
+        "comment": "Explains how printing spread the ideas (mass copies, in the vernacular), not just a vague claim about literacy. Earns the point.",
+        "row_id": "c"
+       }
+      ]
+     },
+     {
+      "tier": "mid",
+      "target_total": 2,
+      "essay": "(A) One feature of the image is the hide of the rhinoceros, which is drawn like plates of armor with rings and scales all over the body and legs. Since Durer only heard about the animal and did not see it, he pictured it like a knight in armor. This shows that Europeans in the early 1500s imagined an animal from Asia using things they already knew, like armor, because they only had secondhand reports.\n\n(B) One development was Vasco da Gama's voyage around Africa to India. In 1498 he sailed from Portugal around the Cape of Good Hope and reached Calicut on the coast of India. This opened a direct sea route between Portugal and India, so Portuguese ships could go to India and bring back goods and gifts. Later the Portuguese took Goa in 1510 and made it a base. This helps explain how an animal from India could be put on a ship and sent to the king of Portugal around 1515.\n\n(C) The printing press also helped spread information and ideas in Europe because books could be made faster and cheaper than copying them by hand. This meant a lot more people could get books and learn new things. Ideas moved around Europe much more quickly after the printing press was invented, and this changed how people learned about the world.",
+      "word_count": 225,
+      "rubric_scores": {
+       "a": 1,
+       "b": 1,
+       "c": 0,
+       "total": 2
+      },
+      "annotations": [
+       {
+        "quote": "the hide of the rhinoceros, which is drawn like plates of armor with rings and scales all over the body and legs",
+        "comment": "Accurately describes a visible feature of the woodcut (plated, armor-like hide), as the rubric lists.",
+        "row_id": "a"
+       },
+       {
+        "quote": "he pictured it like a knight in armor",
+        "comment": "Links the feature to how Europeans pictured the animal from secondhand reports, and respects the note that Durer did not see it. This earns the point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "In 1498 he sailed from Portugal around the Cape of Good Hope and reached Calicut on the coast of India.",
+        "comment": "Accurate, specific development within c. 1450 to c. 1550 (da Gama to Calicut, 1498).",
+        "row_id": "b"
+       },
+       {
+        "quote": "This opened a direct sea route between Portugal and India, so Portuguese ships could go to India and bring back goods and gifts.",
+        "comment": "Shows how the development connected Portugal to India by sea and explains how the animal could reach the king. The point is earned. Goa 1510 is also correct.",
+        "row_id": "b"
+       },
+       {
+        "quote": "because books could be made faster and cheaper than copying them by hand",
+        "comment": "A true but general statement about printing. It names no specific work, event or person.",
+        "row_id": "c"
+       },
+       {
+        "quote": "Ideas moved around Europe much more quickly after the printing press was invented, and this changed how people learned about the world.",
+        "comment": "Vague claim with no concrete example, such as Luther's writings, vernacular Bibles or Vesalius. The rubric requires a specific example, so no point is earned.",
+        "row_id": "c"
+       }
+      ]
+     },
+     {
+      "tier": "low",
+      "target_total": 1,
+      "essay": "(A) The picture shows a rhinoceros with a horn on its nose and it has a lot of lines on its body. It is a picture of an animal from Asia that Europeans were curious about at that time. The word RHINOCERVS is written on it too.\n\n(B) One development in Portuguese expansion was Vasco da Gama's voyage in 1498. He sailed from Portugal down and around the southern tip of Africa and then across the Indian Ocean to Calicut in India. This opened a direct sea route to India that did not go through Muslim and Italian middlemen in the Mediterranean. After this the Portuguese set up trading posts and forts in the Indian Ocean, such as Goa, so Portuguese ships could go back and forth between India and Lisbon. That is how an animal from India could be put on a ship and sent to the king of Portugal in 1515.\n\n(C) The printing press also made it so more people could read and get information. Before the printing press books were copied by hand so they were expensive, and after Gutenberg printing made books cheaper and there were a lot more of them. This helped ideas spread around Europe faster and changed how people learned about things.",
+      "word_count": 210,
+      "rubric_scores": {
+       "a": 0,
+       "b": 1,
+       "c": 0,
+       "total": 1
+      },
+      "annotations": [
+       {
+        "quote": "it has a lot of lines on its body",
+        "comment": "Too vague. It does not identify the plated, armor-like hide or the extra shoulder horn, and it does not connect the feature to how Europeans understood the animal from secondhand reports. No credit.",
+        "row_id": "a"
+       },
+       {
+        "quote": "The word RHINOCERVS is written on it too.",
+        "comment": "Only notes a label and does not explain how the Latin name or date made the print look like an accurate report. It merely restates the source, so Part A earns no credit.",
+        "row_id": "a"
+       },
+       {
+        "quote": "He sailed from Portugal down and around the southern tip of Africa and then across the Indian Ocean to Calicut in India.",
+        "comment": "Accurate, specific development (da Gama, 1498, Calicut) that shows how Portugal reached India by sea. This earns the point.",
+        "row_id": "b"
+       },
+       {
+        "quote": "so Portuguese ships could go back and forth between India and Lisbon",
+        "comment": "Links the trading posts such as Goa to regular contact with India, tying the development to the question of how the animal reached the king.",
+        "row_id": "b"
+       },
+       {
+        "quote": "The printing press also made it so more people could read and get information.",
+        "comment": "Vague claim about literacy and information with no specific example, such as Luther's writings, vernacular Bibles or Columbus's letter. The rubric says this earns no credit.",
+        "row_id": "c"
+       },
+       {
+        "quote": "after Gutenberg printing made books cheaper and there were a lot more of them",
+        "comment": "The point about cheaper books is accurate but general. It does not name a concrete effect or example of ideas spreading, so Part C stays at 0.",
+        "row_id": "c"
+       }
+      ]
+     }
+    ],
+    "provenance": {
+     "kind": "alton_authored_from_real_sources",
+     "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+    }
+   },
+   "design": {
+    "source_fixed_first": true,
+    "documents_chosen_before_prompt": true
+   },
+   "verification": {
+    "fact_checker": "claude-fable-5-1",
+    "graders": [
+     "claude-opus-5-5",
+     "claude-sonnet-5-5"
+    ],
+    "fact_flags": [],
+    "sample_totals": {
+     "high": 3,
+     "mid": 2,
+     "low": 1
+    },
+    "bands": {
+     "high": [
+      3,
+      3
+     ],
+     "mid": [
+      2,
+      2
+     ],
+     "low": [
+      1,
+      1
+     ]
+    }
+   }
+  }
+ },
+ {
+  "cellId": "ap_european_history-eu1_leq",
+  "apSubjectCode": "ap_european_history",
+  "kind": "frq_bundle",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_european_history-eu1_leq-k0",
+  "keywordCode": "3.1",
+  "unitCode": "3",
+  "skillPrimary": "6.A",
+  "structure": "frq_multipart",
+  "archetype": "eurofrq_eu1_leq",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "gateOverride": "euro-f1-2026-10-20",
+  "run": "euro-f1",
+  "stockKey": "euro-f1:ap_european_history-eu1_leq-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "euro-f1-2026-10-20",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_european_history",
+  "itemFamilyId": "fam:euro-f1:ap_european_history-eu1_leq-k0",
+  "canonicalKey": "euro-f1:ap_european_history-eu1_leq-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_european_history:3.1",
+  "sharedWith": [],
+  "stockCell": "ap_european_history|3.1|6.A|frq_multipart|na",
+  "history": [
+   {
+    "run": "euro-f1",
+    "gateVersion": "euro-f1-2026-10-20",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [],
+  "exam": "EU1",
+  "payload": {
+   "archetype": "eurofrq_eu1_leq",
+   "template": "leq",
+   "topic": "3.1",
+   "extra_topics": [],
+   "skill": "6.A",
+   "representative_skill": "6.A",
+   "calculator": "na",
+   "title": "Rulers and Subjects in Europe, c. 1648 to c. 1914: State Power, Rights and Political Participation",
+   "set_intro": "",
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Between the end of the Thirty Years' War and the eve of the First World War, European governments took on new powers to tax, police, educate and mobilize their populations. Over the same years, political writers, revolutionaries and reformers raised new claims about the rights of individuals and about who should have a voice in government. Some monarchies kept much of their authority, while others shared power with elected assemblies or were overthrown.\n\nEvaluate the extent to which the relationship between rulers and their subjects in Europe changed from c. 1648 to c. 1914. You are not expected to address the entire time period.\n\nIn your response you should do the following:\n- Respond to the prompt with a historically defensible thesis or claim that establishes a line of reasoning.\n- Describe a broader historical context relevant to the prompt.\n- Support an argument in response to the prompt using at least two pieces of specific and relevant evidence.\n- Use historical reasoning (continuity and change) to frame or structure an argument that addresses the prompt.\n- Use evidence to show a complex understanding of the prompt, for example by explaining both change and continuity, by comparing different states or regions, or by connecting the development to other periods.",
+     "points": 6,
+     "response_mode": "essay",
+     "skill_codes": [
+      "6.A"
+     ],
+     "topic_codes": [
+      "3.1"
+     ],
+     "model_answer": "After 1648, many European rulers claimed that their power came directly from God and could not be questioned by their subjects. By 1914, most western European states had constitutions and elected parliaments, and even Russia had a Duma. However, this change was much greater in western Europe than in the eastern empires, and in every state the government actually gained more power over people's daily lives even as subjects gained rights. So the relationship changed a lot in terms of who had a voice, but continued in the sense that states kept growing stronger and rulers in the east kept most of their authority.\n\nThe Thirty Years' War and other seventeenth-century crises, like the Fronde in France and the English Civil War, made many people believe that only a strong ruler could keep order. Writers like Hobbes argued that subjects should give up their freedom to a sovereign to avoid chaos. Later, the Enlightenment challenged this idea. Thinkers such as Locke and Rousseau argued that government should rest on the consent of the governed and protect natural rights. These ideas set up the conflict between rulers and subjects that played out over the next two centuries.\n\nAt the start of the period, Louis XIV is the best example of absolutism. He built Versailles and brought the nobles to live at court so they would depend on him instead of challenging him, and he ruled without calling the Estates General. Subjects had almost no voice. England was different, though. After the Glorious Revolution, the English Bill of Rights of 1689 said the monarch could not raise taxes or keep an army in peacetime without Parliament's consent. This shows that even early in the period the relationship was not the same everywhere, since English subjects, at least wealthy ones, had a real check on the crown.\n\nThe French Revolution was the biggest change. The Declaration of the Rights of Man and of the Citizen in 1789 said that sovereignty belonged to the nation, not the king, and that men had natural rights like liberty and property. This turned subjects into citizens in theory. But the Revolution also shows continuity, because the revolutionary government and then Napoleon built a stronger central state than Louis XIV ever had, with mass conscription and the Napoleonic Code applied across France. Napoleon kept legal equality but took away real political freedom. So people gained rights while the state gained power at the same time.\n\nIn the nineteenth century, participation kept spreading in the west. Britain's Reform Act of 1832 gave more middle-class men the vote, and later reform acts expanded it to many workers. Industrialization created a middle class and working class that demanded this voice. Germany had universal male suffrage for the Reichstag after 1871, but this was limited because the chancellor answered to the Kaiser, not the parliament. This shows that voting did not always mean real power.\n\nIn the east, change was much smaller. Russia's tsars remained autocrats for most of the period. Alexander II emancipated the serfs in 1861, which changed the lives of millions of peasants, but he did not give them political rights. After the Revolution of 1905, Nicholas II created the Duma, but he dissolved it when it disagreed with him and kept control over the government. Russian subjects in 1914 still had much less voice than British or French citizens.\n\nIn conclusion, the relationship between rulers and subjects changed significantly from 1648 to 1914, especially in western Europe where people gained constitutional rights and the vote. But the change was limited in the east, and everywhere governments became more powerful, taxing, conscripting and educating their populations more than ever before.",
+     "rubric_rows": [
+      {
+       "row_id": "thesis",
+       "points": 1,
+       "criterion": "A claim that judges how far the ruler-subject relationship changed between c. 1648 and c. 1914 and points to a line of reasoning, for example that rights and participation widened while state power kept growing, or that change was large in western Europe but limited in the eastern empires.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "context",
+       "points": 1,
+       "criterion": "A description of broader developments that shaped ruler-subject relations, such as the seventeenth-century crises and religious wars that encouraged absolutist claims, the Enlightenment critique of arbitrary power, or industrialization and urban growth that produced new classes demanding a political voice.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "evidence",
+       "points": 2,
+       "criterion": "Specific examples such as Louis XIV's court at Versailles, the English Bill of Rights of 1689, the reforms of Joseph II, the Declaration of the Rights of Man and of the Citizen, the Napoleonic Code, the Reform Acts in Britain, the revolutions of 1848, the emancipation of the Russian serfs in 1861, universal male suffrage for the German Reichstag, or the Russian Duma after 1905.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "analysis",
+       "points": 2,
+       "criterion": "Use of continuity and change to structure the argument, and a complex understanding shown by weighing change against continuity, comparing regions or states, or noting that greater participation often came with stronger state power.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "reference_text": "Scoring guide (ALTON reference — not official AP scoring). This question is worth 6 points.\nThesis/claim (0-1): A claim that judges how far the ruler-subject relationship changed between c. 1648 and c. 1914 and points to a line of reasoning, for example that rights and participation widened while state power kept growing, or that change was large in western Europe but limited in the eastern empires.\n   - 1: The response makes a defensible claim about the extent of change or continuity in ruler-subject relations that sets up a line of reasoning, placed in the introduction or conclusion.\n   - 0: The response restates the prompt, has no defensible claim, or makes a claim that does not judge the extent of change.\nContextualization (0-1): A description of broader developments that shaped ruler-subject relations, such as the seventeenth-century crises and religious wars that encouraged absolutist claims, the Enlightenment critique of arbitrary power, or industrialization and urban growth that produced new classes demanding a political voice.\n   - 1: The response describes a broader historical development before, during or after the period and explicitly ties it to the question of rulers and subjects.\n   - 0: The response gives no relevant context or only a passing phrase.\nEvidence (0-2): Specific examples such as Louis XIV's court at Versailles, the English Bill of Rights of 1689, the reforms of Joseph II, the Declaration of the Rights of Man and of the Citizen, the Napoleonic Code, the Reform Acts in Britain, the revolutions of 1848, the emancipation of the Russian serfs in 1861, universal male suffrage for the German Reichstag, or the Russian Duma after 1905.\n   - 2: The response uses at least two specific pieces of relevant evidence to support an argument about the extent of change in ruler-subject relations.\n   - 1: The response names at least two specific pieces of relevant evidence but does not use them to support an argument.\n   - 0: The response gives no specific evidence relevant to the prompt.\nAnalysis and reasoning (0-2): Use of continuity and change to structure the argument, and a complex understanding shown by weighing change against continuity, comparing regions or states, or noting that greater participation often came with stronger state power.\n   - 2: The response shows a complex understanding, for example by explaining both what changed and what persisted, by contrasting western and eastern Europe, or by showing how expanded rights and stronger states developed together, backed by evidence.\n   - 1: The response uses continuity and change reasoning to frame or structure an argument, though the analysis may be uneven or one-sided.\n   - 0: The response lists events or describes rulers without using continuity and change reasoning.\nNote: Students may focus on any part of the period; an essay running only from c. 1789 to c. 1914, or only from c. 1648 to c. 1815, can still earn every point if it judges the extent of change.\nNote: The thesis has to judge extent; a claim that the relationship simply changed earns no credit unless it says how much or in what way.\nNote: Credit evidence from any European state, including the Ottoman and Russian empires, and from European colonies where subjects' rights or participation are discussed.\nNote: The complexity point can be earned through a thread running through the whole essay or through a well-developed counterargument; one sentence of qualification is not enough on its own.\nNote: ALTON reference — not official AP scoring\n\nSample response, high score (6/6; Thesis/claim 1, Contextualization 1, Evidence 2, Analysis and reasoning 2):\nAfter 1648, many European rulers claimed that their power came directly from God and could not be questioned by their subjects. By 1914, most western European states had constitutions and elected parliaments, and even Russia had a Duma. However, this change was much greater in western Europe than in the eastern empires, and in every state the government actually gained more power over people's daily lives even as subjects gained rights. So the relationship changed a lot in terms of who had a voice, but continued in the sense that states kept growing stronger and rulers in the east kept most of their authority.\n\nThe Thirty Years' War and other seventeenth-century crises, like the Fronde in France and the English Civil War, made many people believe that only a strong ruler could keep order. Writers like Hobbes argued that subjects should give up their freedom to a sovereign to avoid chaos. Later, the Enlightenment challenged this idea. Thinkers such as Locke and Rousseau argued that government should rest on the consent of the governed and protect natural rights. These ideas set up the conflict between rulers and subjects that played out over the next two centuries.\n\nAt the start of the period, Louis XIV is the best example of absolutism. He built Versailles and brought the nobles to live at court so they would depend on him instead of challenging him, and he ruled without calling the Estates General. Subjects had almost no voice. England was different, though. After the Glorious Revolution, the English Bill of Rights of 1689 said the monarch could not raise taxes or keep an army in peacetime without Parliament's consent. This shows that even early in the period the relationship was not the same everywhere, since English subjects, at least wealthy ones, had a real check on the crown.\n\nThe French Revolution was the biggest change. The Declaration of the Rights of Man and of the Citizen in 1789 said that sovereignty belonged to the nation, not the king, and that men had natural rights like liberty and property. This turned subjects into citizens in theory. But the Revolution also shows continuity, because the revolutionary government and then Napoleon built a stronger central state than Louis XIV ever had, with mass conscription and the Napoleonic Code applied across France. Napoleon kept legal equality but took away real political freedom. So people gained rights while the state gained power at the same time.\n\nIn the nineteenth century, participation kept spreading in the west. Britain's Reform Act of 1832 gave more middle-class men the vote, and later reform acts expanded it to many workers. Industrialization created a middle class and working class that demanded this voice. Germany had universal male suffrage for the Reichstag after 1871, but this was limited because the chancellor answered to the Kaiser, not the parliament. This shows that voting did not always mean real power.\n\nIn the east, change was much smaller. Russia's tsars remained autocrats for most of the period. Alexander II emancipated the serfs in 1861, which changed the lives of millions of peasants, but he did not give them political rights. After the Revolution of 1905, Nicholas II created the Duma, but he dissolved it when it disagreed with him and kept control over the government. Russian subjects in 1914 still had much less voice than British or French citizens.\n\nIn conclusion, the relationship between rulers and subjects changed significantly from 1648 to 1914, especially in western Europe where people gained constitutional rights and the vote. But the change was limited in the east, and everywhere governments became more powerful, taxing, conscripting and educating their populations more than ever before.\n   - \"this change was much greater in western Europe than in the eastern empires\" - Judges extent and sets up a line of reasoning: west vs. east, and rights growing alongside state power. Earns the point.\n   - \"made many people believe that only a strong ruler could keep order\" - Ties the seventeenth-century crises and the Enlightenment critique to ruler-subject relations. Earns the point.\n   - \"English Bill of Rights of 1689 said the monarch could not raise taxes or keep an army in peacetime without Parliament's consent\" - Specific, accurate evidence used to show that early limits on the crown varied by state.\n   - \"he dissolved it when it disagreed with him\" - The Duma is used to argue that change in the east was limited. Several pieces of evidence support the argument, so this earns 2.\n   - \"So people gained rights while the state gained power at the same time.\" - Complexity: change and continuity happening together, backed by Napoleonic evidence. This thread carries through to the conclusion.\n   - \"This shows that voting did not always mean real power.\" - Qualifies the idea of change by looking at the limits of the Reichstag. A deeper look at social groups left out (women, colonies) would make the analysis stronger, which is why this sits at about 5 of 6.\n\nSample response, middle score (5/6; Thesis/claim 1, Contextualization 1, Evidence 2, Analysis and reasoning 1):\nBetween 1648 and 1914 the relationship between rulers and their subjects in Europe changed quite a lot, but not everywhere and not completely. In much of western Europe subjects gained rights and a voice in government, while in eastern Europe rulers kept most of their power, so the change was large in some places and limited in others.\n\nEurope in the 1600s had just come through the Thirty Years' War, which was very destructive, and many rulers wanted strong armies and more control so that this kind of disorder would not happen again. Later the Enlightenment came along and writers began to criticize kings and talk about natural rights. These developments shaped how rulers and subjects related to each other during the period.\n\nOne example of strong rulers is Louis XIV of France. He built the palace at Versailles and made the nobles live around him so that they would depend on the king. He also built a large army and collected taxes to pay for it. This shows that in the late 1600s subjects had very little say and the king held most of the power. In England things went a different way. The English Bill of Rights of 1689 limited the monarch and gave Parliament an important role, for example by saying the king could not tax without Parliament's consent. So by 1700 England and France were already moving in different directions.\n\nLater on there were big changes. The French Revolution began in 1789 and the Declaration of the Rights of Man and of the Citizen said that men were born free and equal and that power came from the nation. The king was overthrown and executed. This was a major change from the time of Louis XIV. In the 1800s other things happened too. Britain passed Reform Acts such as the one in 1832 which gave more men the vote, and in Russia Alexander II freed the serfs in 1861.\n\nHowever, there were continuities as well. After the French Revolution Napoleon made himself emperor and ruled with a lot of control. Russia still had a tsar with a great deal of power into the early 1900s, and Austria and Prussia stayed ruled by monarchs for a long time. Governments also kept growing in their ability to tax and draft soldiers.\n\nIn conclusion, the relationship between rulers and subjects changed a great deal in places like France and Britain, where rights and voting spread, but it changed much less in eastern Europe, where monarchs held on to their authority. Overall the change was significant but uneven.\n   - \"changed quite a lot, but not everywhere and not completely. In much of western Europe subjects gained rights and a voice in government, while in eastern Europe rulers kept most of their power\" - Defensible thesis that judges the extent of change and gives a line of reasoning (west vs east). Earns the thesis point.\n   - \"Europe in the 1600s had just come through the Thirty Years' War, which was very destructive, and many rulers wanted strong armies\" - Context is only about one or two sentences and is not developed or clearly tied to specific ruler-subject outcomes, so it does not earn the contextualization point.\n   - \"He built the palace at Versailles and made the nobles live around him so that they would depend on the king.\" - Accurate specific evidence (Versailles), described but used mostly as description rather than to build an argument about extent of change.\n   - \"The English Bill of Rights of 1689 limited the monarch and gave Parliament an important role\" - Second accurate specific example, named and described. Together with Versailles this earns 1 of 2 evidence points, since the examples are not tied tightly to the argument.\n   - \"However, there were continuities as well.\" - Notes continuity, but only briefly and in a list-like way; there is no sustained weighing of change against continuity and no explanation of how rights and state power grew together, so no complexity credit.\n   - \"Later on there were big changes.\" - Organization is mostly chronological description of events with little reasoning about why they changed the relationship.\n\nSample response, low score (1/6; Thesis/claim 0, Contextualization 1, Evidence 0, Analysis and reasoning 0):\nBetween 1648 and 1914 the relationship between rulers and their subjects in Europe changed in many ways and also stayed the same in some ways. Rulers had a lot of power at the start and by the end things were different in some places, so there was both change and continuity.\n\nIn the 1600s Europe had been through a lot of war and religious conflict. The Thirty Years' War left many states wrecked and people afraid of disorder, and this made many people think a strong king was needed to keep order and keep the peace. Because of this, rulers wanted more control over their subjects and built bigger armies and collected more taxes. This is the background for how rulers and subjects related to each other for a long time afterward.\n\nOne example is Louis XIV of France, who ruled from Versailles and kept the nobles close to him so that they could not rebel. He said he was the center of the state and people were expected to obey him. Later on, things began to change because of new ideas. Writers during the Enlightenment said that people had rights and that governments should not be unfair. These ideas spread around Europe and made people question their rulers. Some people wanted more of a say in government.\n\nBy the 1800s there were many changes in Europe because of industry and cities growing. More people wanted to be heard, and governments had to deal with this. Some countries changed more than others. In conclusion, the relationship between rulers and subjects did change a lot in some ways, but not everything changed, and rulers still kept some of their power.\n   - \"changed in many ways and also stayed the same in some ways\" - Vague thesis that says there was both change and continuity but never judges how much or in what way, so no thesis credit.\n   - \"The Thirty Years' War left many states wrecked and people afraid of disorder, and this made many people think a strong king was needed to keep order and keep the peace.\" - Describes a broader development (the wars and fear of disorder) and explicitly ties it to stronger rulers over subjects. This earns the contextualization point.\n   - \"One example is Louis XIV of France, who ruled from Versailles and kept the nobles close to him so that they could not rebel.\" - Only one specific example is given. The Enlightenment and the 1800s are mentioned only in general terms, so there is no second piece of evidence and no evidence credit.\n   - \"Some countries changed more than others.\" - Generic statement with no states named and no comparison or explanation, so no complexity credit.\n   - \"Later on, things began to change because of new ideas.\" - Asserts change without explaining how ruler-subject relations actually changed or what persisted. The essay does not use continuity and change reasoning, so no analysis credit.",
+   "whap_frq": {
+    "schema_version": "whap-frq-1",
+    "task_type": "leq",
+    "template": "leq",
+    "era": 2,
+    "units": [
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "title": "Rulers and Subjects in Europe, c. 1648 to c. 1914: State Power, Rights and Political Participation",
+    "prompt": {
+     "scenario": "Between the end of the Thirty Years' War and the eve of the First World War, European governments took on new powers to tax, police, educate and mobilize their populations. Over the same years, political writers, revolutionaries and reformers raised new claims about the rights of individuals and about who should have a voice in government. Some monarchies kept much of their authority, while others shared power with elected assemblies or were overthrown.",
+     "task": "Evaluate the extent to which the relationship between rulers and their subjects in Europe changed from c. 1648 to c. 1914. You are not expected to address the entire time period.",
+     "requirements": [
+      "Respond to the prompt with a historically defensible thesis or claim that establishes a line of reasoning.",
+      "Describe a broader historical context relevant to the prompt.",
+      "Support an argument in response to the prompt using at least two pieces of specific and relevant evidence.",
+      "Use historical reasoning (continuity and change) to frame or structure an argument that addresses the prompt.",
+      "Use evidence to show a complex understanding of the prompt, for example by explaining both change and continuity, by comparing different states or regions, or by connecting the development to other periods."
+     ]
+    },
+    "sources": [],
+    "rubric": {
+     "rubric_id": "whap-v1",
+     "total_points": 6,
+     "rows": [
+      {
+       "row_id": "thesis",
+       "name": "Thesis/claim",
+       "max": 1,
+       "descriptors": {
+        "0": "The response restates the prompt, has no defensible claim, or makes a claim that does not judge the extent of change.",
+        "1": "The response makes a defensible claim about the extent of change or continuity in ruler-subject relations that sets up a line of reasoning, placed in the introduction or conclusion."
+       },
+       "task_specific": "A claim that judges how far the ruler-subject relationship changed between c. 1648 and c. 1914 and points to a line of reasoning, for example that rights and participation widened while state power kept growing, or that change was large in western Europe but limited in the eastern empires."
+      },
+      {
+       "row_id": "context",
+       "name": "Contextualization",
+       "max": 1,
+       "descriptors": {
+        "0": "The response gives no relevant context or only a passing phrase.",
+        "1": "The response describes a broader historical development before, during or after the period and explicitly ties it to the question of rulers and subjects."
+       },
+       "task_specific": "A description of broader developments that shaped ruler-subject relations, such as the seventeenth-century crises and religious wars that encouraged absolutist claims, the Enlightenment critique of arbitrary power, or industrialization and urban growth that produced new classes demanding a political voice."
+      },
+      {
+       "row_id": "evidence",
+       "name": "Evidence",
+       "max": 2,
+       "descriptors": {
+        "0": "The response gives no specific evidence relevant to the prompt.",
+        "1": "The response names at least two specific pieces of relevant evidence but does not use them to support an argument.",
+        "2": "The response uses at least two specific pieces of relevant evidence to support an argument about the extent of change in ruler-subject relations."
+       },
+       "task_specific": "Specific examples such as Louis XIV's court at Versailles, the English Bill of Rights of 1689, the reforms of Joseph II, the Declaration of the Rights of Man and of the Citizen, the Napoleonic Code, the Reform Acts in Britain, the revolutions of 1848, the emancipation of the Russian serfs in 1861, universal male suffrage for the German Reichstag, or the Russian Duma after 1905."
+      },
+      {
+       "row_id": "analysis",
+       "name": "Analysis and reasoning",
+       "max": 2,
+       "descriptors": {
+        "0": "The response lists events or describes rulers without using continuity and change reasoning.",
+        "1": "The response uses continuity and change reasoning to frame or structure an argument, though the analysis may be uneven or one-sided.",
+        "2": "The response shows a complex understanding, for example by explaining both what changed and what persisted, by contrasting western and eastern Europe, or by showing how expanded rights and stronger states developed together, backed by evidence."
+       },
+       "task_specific": "Use of continuity and change to structure the argument, and a complex understanding shown by weighing change against continuity, comparing regions or states, or noting that greater participation often came with stronger state power."
+      }
+     ],
+     "scoring_notes": [
+      "Students may focus on any part of the period; an essay running only from c. 1789 to c. 1914, or only from c. 1648 to c. 1815, can still earn every point if it judges the extent of change.",
+      "The thesis has to judge extent; a claim that the relationship simply changed earns no credit unless it says how much or in what way.",
+      "Credit evidence from any European state, including the Ottoman and Russian empires, and from European colonies where subjects' rights or participation are discussed.",
+      "The complexity point can be earned through a thread running through the whole essay or through a well-developed counterargument; one sentence of qualification is not enough on its own.",
+      "ALTON reference — not official AP scoring"
+     ]
+    },
+    "expected_features": {
+     "defensible_theses": [
+      "Between 1648 and 1914 the basis of rulers' authority shifted a great deal from divine right toward constitutions, written rights and elected parliaments, especially in Britain and France. Even so, state power over subjects kept growing through bureaucracies, conscription and mass schooling, so subjects gained a voice without escaping more intensive government.",
+      "The relationship changed significantly in western Europe, where the Glorious Revolution, the French Revolution and the British Reform Acts widened rights and participation. It changed much less in central and eastern Europe, where Prussian, Austrian and Russian monarchs kept real power even after granting limited assemblies such as the Reichstag and the Duma.",
+      "Change was real but limited: by 1914 most European men could vote for some kind of assembly, and serfdom had been abolished across Europe. Still, monarchs, aristocrats and propertied elites often controlled governments, women were mostly kept out of national politics, and rulers repeatedly cut back rights after revolutions, as in 1815 and after 1848."
+     ],
+     "contextualization_ideas": [
+      "The religious wars and political crises of the seventeenth century, including the Thirty Years' War, the English Civil War and the Fronde, led many rulers and theorists such as Hobbes to argue that strong central authority was needed to keep order. This set the starting point of absolutist claims in 1648.",
+      "Enlightenment writers such as Locke, Montesquieu and Rousseau questioned arbitrary rule and argued for natural rights, the separation of powers and popular sovereignty. These ideas shaped both enlightened absolutism and the revolutions after 1789.",
+      "Industrialization and urbanization in the nineteenth century created a large middle class and an industrial working class. Both demanded political representation, and their demands encouraged suffrage reform, labor parties and state social welfare."
+     ],
+     "outside_evidence": [
+      "Louis XIV of France centralized royal power, used intendants to carry out royal policy in the provinces, drew the nobility to the court at Versailles, and revoked the Edict of Nantes in 1685, ending legal toleration for Huguenots.",
+      "The Glorious Revolution of 1688 and the English Bill of Rights of 1689 limited the English monarchy, requiring parliamentary consent for taxation and for keeping a standing army in peacetime.",
+      "Frederick II of Prussia, an enlightened absolutist, restricted the use of judicial torture and supported religious toleration while keeping absolute authority and relying on the Junker nobility.",
+      "Joseph II of the Habsburg Monarchy issued the Patent of Toleration in 1781 and abolished personal serfdom in his lands, but his centralizing reforms met strong resistance, and some were reversed after his death.",
+      "Catherine the Great of Russia crushed the Pugachev Rebellion of 1773 to 1775 and issued the Charter of the Nobility in 1785, which confirmed noble privileges and left serfdom in place.",
+      "In 1789 the French National Assembly adopted the Declaration of the Rights of Man and of the Citizen, which declared that sovereignty resides in the nation and set out rights such as legal equality and liberty.",
+      "The Napoleonic Code of 1804 established legal equality for men and protected property, but it strengthened fathers' authority over wives and children. Napoleon's rule also relied on censorship and a powerful police.",
+      "After 1815 the Concert of Europe and Metternich's Carlsbad Decrees of 1819 restricted the press and universities in the German states in an attempt to suppress liberal and nationalist movements.",
+      "Britain's Great Reform Act of 1832 redistributed parliamentary seats and widened the franchise to more of the middle class. The Chartists' demands for universal male suffrage were rejected, but later Reform Acts in 1867 and 1884 extended the vote to many working men.",
+      "During the revolutions of 1848, the Frankfurt Parliament tried to write a liberal constitution for a united Germany. France adopted universal male suffrage and elected Louis Napoleon president, and he later made himself emperor.",
+      "Alexander II emancipated the Russian serfs in 1861. Later, after the Revolution of 1905, Nicholas II issued the October Manifesto and created the Duma, but he kept wide powers under the Fundamental Laws of 1906.",
+      "The German Empire of 1871 elected its Reichstag by universal male suffrage, yet the chancellor answered to the emperor. In the 1880s Bismarck introduced health, accident and old-age insurance partly to win workers away from socialism, while his Anti-Socialist Laws restricted the Social Democrats.",
+      "The French Third Republic's Ferry laws of the 1880s created free, compulsory, secular primary education, which expanded the state's role in shaping citizens.",
+      "Women gained the vote in national elections in Finland in 1906 and Norway in 1913, while suffragists in Britain such as the Women's Social and Political Union campaigned for the vote without winning it before 1914."
+     ],
+     "reasoning_types": [
+      "Continuity and change over time (primary reasoning skill)",
+      "Comparison of western and eastern European states",
+      "Causation, as a supporting skill explaining why change occurred"
+     ],
+     "common_pitfalls": [
+      "Describing absolutism or the French Revolution in detail without judging the extent of change across the period.",
+      "Treating change as steady or uniform across Europe and ignoring the setbacks after 1815 and 1848 and the differences between western and eastern Europe.",
+      "Assuming more voting rights meant less state power, and missing that conscription, taxation, policing and schooling grew alongside participation.",
+      "Calling enlightened absolutists democratic or constitutional rulers, when they kept absolute authority.",
+      "Claiming universal suffrage existed by 1914 without noting that women were mostly excluded and that many systems had property qualifications or weighted voting.",
+      "Drifting into the First World War or the twentieth century without connecting it to the prompt."
+     ],
+     "facts": [
+      "The Peace of Westphalia was signed in 1648.",
+      "The English Bill of Rights dates from 1689.",
+      "Louis XIV revoked the Edict of Nantes in 1685.",
+      "Joseph II's Patent of Toleration was issued in 1781.",
+      "The Declaration of the Rights of Man and of the Citizen was adopted in 1789.",
+      "The Napoleonic Code was promulgated in 1804.",
+      "The Carlsbad Decrees were issued in 1819.",
+      "The British Great Reform Act was passed in 1832, and further Reform Acts followed in 1867 and 1884.",
+      "Revolutions broke out across much of Europe in 1848.",
+      "Russian serfs were emancipated in 1861.",
+      "The German Empire was proclaimed in 1871 with a Reichstag elected by universal male suffrage.",
+      "The Russian October Manifesto of 1905 led to the creation of the Duma.",
+      "Finland granted women the vote in national elections in 1906 and Norway in 1913."
+     ]
+    },
+    "samples": [
+     {
+      "tier": "high",
+      "target_total": 6,
+      "essay": "After 1648, many European rulers claimed that their power came directly from God and could not be questioned by their subjects. By 1914, most western European states had constitutions and elected parliaments, and even Russia had a Duma. However, this change was much greater in western Europe than in the eastern empires, and in every state the government actually gained more power over people's daily lives even as subjects gained rights. So the relationship changed a lot in terms of who had a voice, but continued in the sense that states kept growing stronger and rulers in the east kept most of their authority.\n\nThe Thirty Years' War and other seventeenth-century crises, like the Fronde in France and the English Civil War, made many people believe that only a strong ruler could keep order. Writers like Hobbes argued that subjects should give up their freedom to a sovereign to avoid chaos. Later, the Enlightenment challenged this idea. Thinkers such as Locke and Rousseau argued that government should rest on the consent of the governed and protect natural rights. These ideas set up the conflict between rulers and subjects that played out over the next two centuries.\n\nAt the start of the period, Louis XIV is the best example of absolutism. He built Versailles and brought the nobles to live at court so they would depend on him instead of challenging him, and he ruled without calling the Estates General. Subjects had almost no voice. England was different, though. After the Glorious Revolution, the English Bill of Rights of 1689 said the monarch could not raise taxes or keep an army in peacetime without Parliament's consent. This shows that even early in the period the relationship was not the same everywhere, since English subjects, at least wealthy ones, had a real check on the crown.\n\nThe French Revolution was the biggest change. The Declaration of the Rights of Man and of the Citizen in 1789 said that sovereignty belonged to the nation, not the king, and that men had natural rights like liberty and property. This turned subjects into citizens in theory. But the Revolution also shows continuity, because the revolutionary government and then Napoleon built a stronger central state than Louis XIV ever had, with mass conscription and the Napoleonic Code applied across France. Napoleon kept legal equality but took away real political freedom. So people gained rights while the state gained power at the same time.\n\nIn the nineteenth century, participation kept spreading in the west. Britain's Reform Act of 1832 gave more middle-class men the vote, and later reform acts expanded it to many workers. Industrialization created a middle class and working class that demanded this voice. Germany had universal male suffrage for the Reichstag after 1871, but this was limited because the chancellor answered to the Kaiser, not the parliament. This shows that voting did not always mean real power.\n\nIn the east, change was much smaller. Russia's tsars remained autocrats for most of the period. Alexander II emancipated the serfs in 1861, which changed the lives of millions of peasants, but he did not give them political rights. After the Revolution of 1905, Nicholas II created the Duma, but he dissolved it when it disagreed with him and kept control over the government. Russian subjects in 1914 still had much less voice than British or French citizens.\n\nIn conclusion, the relationship between rulers and subjects changed significantly from 1648 to 1914, especially in western Europe where people gained constitutional rights and the vote. But the change was limited in the east, and everywhere governments became more powerful, taxing, conscripting and educating their populations more than ever before.",
+      "word_count": 611,
+      "rubric_scores": {
+       "thesis": 1,
+       "context": 1,
+       "evidence": 2,
+       "analysis": 2,
+       "total": 6
+      },
+      "annotations": [
+       {
+        "quote": "this change was much greater in western Europe than in the eastern empires",
+        "comment": "Judges extent and sets up a line of reasoning: west vs. east, and rights growing alongside state power. Earns the point.",
+        "row_id": "thesis"
+       },
+       {
+        "quote": "made many people believe that only a strong ruler could keep order",
+        "comment": "Ties the seventeenth-century crises and the Enlightenment critique to ruler-subject relations. Earns the point.",
+        "row_id": "contextualization"
+       },
+       {
+        "quote": "English Bill of Rights of 1689 said the monarch could not raise taxes or keep an army in peacetime without Parliament's consent",
+        "comment": "Specific, accurate evidence used to show that early limits on the crown varied by state.",
+        "row_id": "evidence"
+       },
+       {
+        "quote": "he dissolved it when it disagreed with him",
+        "comment": "The Duma is used to argue that change in the east was limited. Several pieces of evidence support the argument, so this earns 2.",
+        "row_id": "evidence"
+       },
+       {
+        "quote": "So people gained rights while the state gained power at the same time.",
+        "comment": "Complexity: change and continuity happening together, backed by Napoleonic evidence. This thread carries through to the conclusion.",
+        "row_id": "analysis"
+       },
+       {
+        "quote": "This shows that voting did not always mean real power.",
+        "comment": "Qualifies the idea of change by looking at the limits of the Reichstag. A deeper look at social groups left out (women, colonies) would make the analysis stronger, which is why this sits at about 5 of 6.",
+        "row_id": "analysis"
+       }
+      ]
+     },
+     {
+      "tier": "mid",
+      "target_total": 5,
+      "essay": "Between 1648 and 1914 the relationship between rulers and their subjects in Europe changed quite a lot, but not everywhere and not completely. In much of western Europe subjects gained rights and a voice in government, while in eastern Europe rulers kept most of their power, so the change was large in some places and limited in others.\n\nEurope in the 1600s had just come through the Thirty Years' War, which was very destructive, and many rulers wanted strong armies and more control so that this kind of disorder would not happen again. Later the Enlightenment came along and writers began to criticize kings and talk about natural rights. These developments shaped how rulers and subjects related to each other during the period.\n\nOne example of strong rulers is Louis XIV of France. He built the palace at Versailles and made the nobles live around him so that they would depend on the king. He also built a large army and collected taxes to pay for it. This shows that in the late 1600s subjects had very little say and the king held most of the power. In England things went a different way. The English Bill of Rights of 1689 limited the monarch and gave Parliament an important role, for example by saying the king could not tax without Parliament's consent. So by 1700 England and France were already moving in different directions.\n\nLater on there were big changes. The French Revolution began in 1789 and the Declaration of the Rights of Man and of the Citizen said that men were born free and equal and that power came from the nation. The king was overthrown and executed. This was a major change from the time of Louis XIV. In the 1800s other things happened too. Britain passed Reform Acts such as the one in 1832 which gave more men the vote, and in Russia Alexander II freed the serfs in 1861.\n\nHowever, there were continuities as well. After the French Revolution Napoleon made himself emperor and ruled with a lot of control. Russia still had a tsar with a great deal of power into the early 1900s, and Austria and Prussia stayed ruled by monarchs for a long time. Governments also kept growing in their ability to tax and draft soldiers.\n\nIn conclusion, the relationship between rulers and subjects changed a great deal in places like France and Britain, where rights and voting spread, but it changed much less in eastern Europe, where monarchs held on to their authority. Overall the change was significant but uneven.",
+      "word_count": 428,
+      "rubric_scores": {
+       "thesis": 1,
+       "context": 1,
+       "evidence": 2,
+       "analysis": 1,
+       "total": 5
+      },
+      "annotations": [
+       {
+        "quote": "changed quite a lot, but not everywhere and not completely. In much of western Europe subjects gained rights and a voice in government, while in eastern Europe rulers kept most of their power",
+        "comment": "Defensible thesis that judges the extent of change and gives a line of reasoning (west vs east). Earns the thesis point.",
+        "row_id": "thesis"
+       },
+       {
+        "quote": "Europe in the 1600s had just come through the Thirty Years' War, which was very destructive, and many rulers wanted strong armies",
+        "comment": "Context is only about one or two sentences and is not developed or clearly tied to specific ruler-subject outcomes, so it does not earn the contextualization point.",
+        "row_id": "context"
+       },
+       {
+        "quote": "He built the palace at Versailles and made the nobles live around him so that they would depend on the king.",
+        "comment": "Accurate specific evidence (Versailles), described but used mostly as description rather than to build an argument about extent of change.",
+        "row_id": "evidence"
+       },
+       {
+        "quote": "The English Bill of Rights of 1689 limited the monarch and gave Parliament an important role",
+        "comment": "Second accurate specific example, named and described. Together with Versailles this earns 1 of 2 evidence points, since the examples are not tied tightly to the argument.",
+        "row_id": "evidence"
+       },
+       {
+        "quote": "However, there were continuities as well.",
+        "comment": "Notes continuity, but only briefly and in a list-like way; there is no sustained weighing of change against continuity and no explanation of how rights and state power grew together, so no complexity credit.",
+        "row_id": "analysis"
+       },
+       {
+        "quote": "Later on there were big changes.",
+        "comment": "Organization is mostly chronological description of events with little reasoning about why they changed the relationship.",
+        "row_id": "analysis"
+       }
+      ]
+     },
+     {
+      "tier": "low",
+      "target_total": 1,
+      "essay": "Between 1648 and 1914 the relationship between rulers and their subjects in Europe changed in many ways and also stayed the same in some ways. Rulers had a lot of power at the start and by the end things were different in some places, so there was both change and continuity.\n\nIn the 1600s Europe had been through a lot of war and religious conflict. The Thirty Years' War left many states wrecked and people afraid of disorder, and this made many people think a strong king was needed to keep order and keep the peace. Because of this, rulers wanted more control over their subjects and built bigger armies and collected more taxes. This is the background for how rulers and subjects related to each other for a long time afterward.\n\nOne example is Louis XIV of France, who ruled from Versailles and kept the nobles close to him so that they could not rebel. He said he was the center of the state and people were expected to obey him. Later on, things began to change because of new ideas. Writers during the Enlightenment said that people had rights and that governments should not be unfair. These ideas spread around Europe and made people question their rulers. Some people wanted more of a say in government.\n\nBy the 1800s there were many changes in Europe because of industry and cities growing. More people wanted to be heard, and governments had to deal with this. Some countries changed more than others. In conclusion, the relationship between rulers and subjects did change a lot in some ways, but not everything changed, and rulers still kept some of their power.",
+      "word_count": 279,
+      "rubric_scores": {
+       "thesis": 0,
+       "context": 1,
+       "evidence": 0,
+       "analysis": 0,
+       "total": 1
+      },
+      "annotations": [
+       {
+        "quote": "changed in many ways and also stayed the same in some ways",
+        "comment": "Vague thesis that says there was both change and continuity but never judges how much or in what way, so no thesis credit.",
+        "row_id": "thesis"
+       },
+       {
+        "quote": "The Thirty Years' War left many states wrecked and people afraid of disorder, and this made many people think a strong king was needed to keep order and keep the peace.",
+        "comment": "Describes a broader development (the wars and fear of disorder) and explicitly ties it to stronger rulers over subjects. This earns the contextualization point.",
+        "row_id": "context"
+       },
+       {
+        "quote": "One example is Louis XIV of France, who ruled from Versailles and kept the nobles close to him so that they could not rebel.",
+        "comment": "Only one specific example is given. The Enlightenment and the 1800s are mentioned only in general terms, so there is no second piece of evidence and no evidence credit.",
+        "row_id": "evidence"
+       },
+       {
+        "quote": "Some countries changed more than others.",
+        "comment": "Generic statement with no states named and no comparison or explanation, so no complexity credit.",
+        "row_id": "analysis"
+       },
+       {
+        "quote": "Later on, things began to change because of new ideas.",
+        "comment": "Asserts change without explaining how ruler-subject relations actually changed or what persisted. The essay does not use continuity and change reasoning, so no analysis credit.",
+        "row_id": "analysis"
+       }
+      ]
+     }
+    ],
+    "provenance": {
+     "kind": "alton_authored_from_real_sources",
+     "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+    }
+   },
+   "design": {
+    "source_fixed_first": true,
+    "documents_chosen_before_prompt": true
+   },
+   "verification": {
+    "fact_checker": "claude-fable-5-1",
+    "graders": [
+     "claude-opus-5-5",
+     "claude-sonnet-5-5"
+    ],
+    "fact_flags": [],
+    "sample_totals": {
+     "high": 6,
+     "mid": 5,
+     "low": 1
+    },
+    "bands": {
+     "high": [
+      5,
+      6
+     ],
+     "mid": [
+      3,
+      5
+     ],
+     "low": [
+      1,
+      3
+     ]
+    }
+   }
+  }
+ }
+]

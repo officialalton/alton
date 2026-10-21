@@ -1,0 +1,64 @@
+{
+ "fs-eu1_saq2-high-0": {
+  "flags": []
+ },
+ "fs-eu1_saq2-mid-0": {
+  "flags": []
+ },
+ "fs-eu1_saq2-low-0": {
+  "flags": []
+ },
+ "fs-eu2_saq3-high-0": {
+  "flags": []
+ },
+ "fs-eu2_saq3-mid-0": {
+  "flags": []
+ },
+ "fs-eu2_saq3-low-0": {
+  "flags": [
+   {
+    "where": "Sample response (C): \"after the Berlin Wall was built and the Cold War got worse in the 1950s\"",
+    "kind": "anachronism",
+    "detail": "The Berlin Wall was built in August 1961, not in the 1950s. The sentence places the Wall's construction in the wrong decade (and the prompt itself anchors the 1961 confrontation to the city's division that year)."
+   },
+   {
+    "where": "Sample response (C): \"The wall came down and people in Berlin were happy because the United States had won the Cold War against the Soviets.\"",
+    "kind": "contested",
+    "detail": "Presented as settled causation, this is inaccurate/contested. The Wall was opened on 9 November 1989 as a result of mass protests in the GDR, the exodus via Hungary's opened border, Gorbachev's refusal to intervene (abandonment of the Brezhnev Doctrine), and the East German regime's botched announcement of new travel rules. The Soviet Union still existed until December 1991, so the Cold War had not yet been 'won' when the Wall fell; attributing the opening to a U.S. victory inverts the chronology and oversimplifies causation."
+   }
+  ]
+ },
+ "fs-eu2_saq3-low-1": {
+  "flags": [
+   {
+    "where": "Student sample response (C)",
+    "kind": "inaccurate",
+    "detail": "The response states that German reunification followed the collapse of the Soviet Union in 1991 ('when the Soviet Union fell apart in 1991 and then Germany was one country again'). This reverses the chronology: Germany was reunified on 3 October 1990, more than a year before the USSR dissolved in December 1991. The Berlin Wall opened in November 1989. Since the instructions say the low-tier sample's historical claims should be accurate (only vague), this sequencing/causal error should be corrected; it also places the chosen development outside the 1962–1990 window required by the prompt."
+   }
+  ]
+ },
+ "fs-eu2_saq3-low-2": {
+  "flags": [
+   {
+    "where": "Student sample response, part (C)",
+    "kind": "inaccurate",
+    "detail": "The sample states that 'in 1968 the Soviet Union let Germany come back together' and that the Berlin Wall was taken down afterward. This is historically false: Germany was not reunified in 1968 (that year the USSR crushed the Prague Spring and the division of Germany remained firmly in place). The Berlin Wall was opened in November 1989 and German reunification occurred on 3 October 1990, with Soviet acceptance under Gorbachev. The sequence is also reversed (the Wall fell before, not after, reunification). Even as a low-tier sample, the instructions require historical claims to be accurate, so this fabricated date/event should be corrected (e.g., to Gorbachev's reforms, the 1989 opening of the Wall, or the 1990 Two-Plus-Four Treaty)."
+   }
+  ]
+ },
+ "fs-eu2_saq3-low-3": {
+  "flags": []
+ },
+ "fs-eu2_saq3-low-4": {
+  "flags": [
+   {
+    "where": "Student sample response, part (C)",
+    "kind": "inaccurate",
+    "detail": "States the Berlin Wall was torn down in the 1970s. The Wall was opened on 9 November 1989 and demolished thereafter; German reunification followed on 3 October 1990. The sample's claim that 'the government took it down' because people were tired of it also misrepresents the causation (mass protests, Hungary's border opening, Gorbachev's reforms, East German leadership crisis). Since the material notes historical claims in the low-tier sample should be accurate, this is a genuine error, not merely vagueness."
+   }
+  ]
+ },
+ "fs-eu2_saq3-low-5": {
+  "flags": []
+ }
+}

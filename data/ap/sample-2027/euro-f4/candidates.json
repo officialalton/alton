@@ -1,0 +1,1013 @@
+[
+ {
+  "cellId": "ap_european_history-eu1_saq2",
+  "apSubjectCode": "ap_european_history",
+  "kind": "frq_bundle",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_european_history-eu1_saq2-k0",
+  "keywordCode": "5.1",
+  "unitCode": "5",
+  "skillPrimary": "3.A",
+  "structure": "frq_multipart",
+  "archetype": "eurofrq_eu1_saq2",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "gateOverride": "euro-f4-2026-10-20",
+  "run": "euro-f4",
+  "stockKey": "euro-f4:ap_european_history-eu1_saq2-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "euro-f4-2026-10-20",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_european_history",
+  "itemFamilyId": "fam:euro-f4:ap_european_history-eu1_saq2-k0",
+  "canonicalKey": "euro-f4:ap_european_history-eu1_saq2-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_european_history:5.1",
+  "sharedWith": [],
+  "stockCell": "ap_european_history|5.1|3.A|frq_multipart|na",
+  "history": [
+   {
+    "run": "euro-f4",
+    "gateVersion": "euro-f4-2026-10-20",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "eu-txt-kant-1795"
+  ],
+  "exam": "EU1",
+  "payload": {
+   "archetype": "eurofrq_eu1_saq2",
+   "template": "saq2",
+   "topic": "5.1",
+   "extra_topics": [],
+   "skill": "3.A",
+   "representative_skill": "3.A",
+   "calculator": "na",
+   "title": "Kant on Standing Armies and the Wars of 1789 to 1815",
+   "set_intro": "Historical source (real document)\n(primary source)\nPerpetual Peace, first preliminary article 3 (excerpt on standing armies)\nImmanuel Kant (1795; English translation by Mary Campbell Smith, 1903), 1795 (text); 1903 (Campbell Smith translation). Project Gutenberg eBook #50922. Reuse: public domain in the United States (published before 1929). excerpted (1 segment); whitespace normalized; no wording changed; italic markup (underscores) removed.\nContext: Immanuel Kant was a German philosopher who taught at the University of Konigsberg in Prussia; he published this essay in 1795.\n\n\"Standing armies (miles perpetuus) shall be abolished in course of time.” For they are always threatening other states with war by appearing to be in constant readiness to fight. They incite the various states to outrival one another in the number of their soldiers, and to this number no limit can be set. Now, since owing to the sums devoted to this purpose, peace at last becomes even more oppressive than a short war, these standing armies are themselves the cause of wars of aggression, undertaken in order to get rid of this burden. To which we must add that the practice of hiring men to kill or to be killed seems to imply a use of them as mere machines and instruments in the hand of another (namely, the state) which cannot easily be reconciled with the right of humanity in our own person.\"",
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Briefly describe ONE reason Kant gives in the excerpt for abolishing standing armies.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.A"
+     ],
+     "topic_codes": [
+      "5.1"
+     ],
+     "model_answer": "Kant says standing armies always threaten other states with war because they appear to be in constant readiness to fight.",
+     "rubric_rows": [
+      {
+       "row_id": "a",
+       "points": 1,
+       "criterion": "Students describe one reason the excerpt gives for abolishing standing armies: their constant readiness threatens other states; they push states into competing over troop numbers with no limit; their cost makes peace more burdensome than a short war and so leads to wars of aggression; or paying men to kill or be killed treats them as tools of the state, which conflicts with the right of humanity.",
+       "required_elements": [
+        "Kant says standing armies always threaten other states with war because they appear to be in constant readiness to fight.",
+        "Kant argues that standing armies push states to outdo one another in the number of their soldiers, and that this competition has no natural limit.",
+        "Kant claims that the cost of maintaining standing armies makes peace more oppressive than a short war, so states start wars of aggression to get rid of the burden.",
+        "Kant objects that hiring men to kill or be killed uses them as mere machines or instruments of the state, which conflicts with the right of humanity in each person."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Briefly explain ONE specific military development or event in Europe in the period 1789 to 1815 that either supports or challenges Kant's argument that standing armies increase the risk of war.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.A"
+     ],
+     "topic_codes": [
+      "5.1"
+     ],
+     "model_answer": "The French levee en masse of 1793 called the whole nation to serve the war effort and produced armies much larger than earlier ones. This supports Kant's point that the number of soldiers can grow without limit and pull states into wider war.",
+     "rubric_rows": [
+      {
+       "row_id": "b",
+       "points": 1,
+       "criterion": "Students explain one specific European military development or event from 1789 to 1815, such as the levee en masse of 1793, French conscription laws, the growth of Napoleon's armies, the Prussian military reforms after 1806, or the 1812 invasion of Russia, and connect it to Kant's claim that standing armies raise the risk of war. Students may argue that it supports or challenges the claim.",
+       "required_elements": [
+        "The French levee en masse of 1793 called the whole nation to serve the war effort and produced armies much larger than earlier ones. This supports Kant's point that the number of soldiers can grow without limit and pull states into wider war.",
+        "Napoleon's large conscript armies, such as the multinational force he led into Russia in 1812, show military power being used for wars of conquest across Europe. This supports Kant's claim that large standing forces encourage aggression.",
+        "After its defeat by Napoleon in 1806, Prussia was forced to limit the size of its army, and reformers such as Scharnhorst and Gneisenau rebuilt it. The other powers answered France by enlarging and reorganizing their own armies, which matches the competition over troop numbers that Kant describes.",
+        "Revolutionary France's war against Austria and Prussia, which began in 1792, was driven largely by ideological fears and political conflict, not only by the burden of keeping standing armies. This complicates Kant's claim that standing armies are themselves the cause of wars of aggression."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Briefly explain ONE way the peace arrangements made by the European great powers in 1814 to 1815 either resembled or differed from Kant's proposal about standing armies and the risk of war.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.A"
+     ],
+     "topic_codes": [
+      "5.1"
+     ],
+     "model_answer": "The Vienna settlement differed from Kant's proposal because the great powers did not abolish standing armies. Austria, Prussia, Russia and Britain kept large military forces and relied on a balance of power to deter aggression.",
+     "rubric_rows": [
+      {
+       "row_id": "c",
+       "points": 1,
+       "criterion": "Students explain one similarity or difference between the 1814 to 1815 peace arrangements (the Congress of Vienna, the Treaties of Paris, the Quadruple Alliance, the Holy Alliance, the Concert of Europe) and Kant's proposal. The comparison must be about standing armies or the risk of war. The most likely difference is that the powers kept large standing armies and relied on a balance of power and joint military commitments rather than disarmament. A likely similarity is that the powers shared Kant's goal of preventing future wars of aggression.",
+       "required_elements": [
+        "The Vienna settlement differed from Kant's proposal because the great powers did not abolish standing armies. Austria, Prussia, Russia and Britain kept large military forces and relied on a balance of power to deter aggression.",
+        "The Quadruple Alliance of November 1815 committed Austria, Prussia, Russia and Britain to act together, including by force, against a renewed French threat. This differed from Kant because it used combined military power, not disarmament, to keep the peace.",
+        "Under the Second Treaty of Paris of 1815, allied troops occupied part of France for a period of years. This differed from Kant because peace was enforced with standing armies rather than by removing them.",
+        "The peacemakers resembled Kant in one goal: like him, they wanted to keep any single state from launching wars of aggression. They pursued this through great-power consultation in the Concert of Europe instead of abolishing armies."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "reference_text": "Scoring guide (ALTON reference — not official AP scoring). This question is worth 3 points.\nPart A (0-1): Students describe one reason the excerpt gives for abolishing standing armies: their constant readiness threatens other states; they push states into competing over troop numbers with no limit; their cost makes peace more burdensome than a short war and so leads to wars of aggression; or paying men to kill or be killed treats them as tools of the state, which conflicts with the right of humanity.\n   - 1: The response accurately describes one reason the excerpt gives for abolishing standing armies.\n   - 0: The response gives no reason, gives a reason the excerpt does not contain, or only repeats that Kant wanted armies abolished.\nPart B (0-1): Students explain one specific European military development or event from 1789 to 1815, such as the levee en masse of 1793, French conscription laws, the growth of Napoleon's armies, the Prussian military reforms after 1806, or the 1812 invasion of Russia, and connect it to Kant's claim that standing armies raise the risk of war. Students may argue that it supports or challenges the claim.\n   - 1: The response explains one specific, accurate development from 1789 to 1815 and how it supports or challenges Kant's argument about standing armies and war.\n   - 0: The response names no specific development, gives one outside 1789 to 1815, or does not link it to standing armies and the risk of war.\nPart C (0-1): Students explain one similarity or difference between the 1814 to 1815 peace arrangements (the Congress of Vienna, the Treaties of Paris, the Quadruple Alliance, the Holy Alliance, the Concert of Europe) and Kant's proposal. The comparison must be about standing armies or the risk of war. The most likely difference is that the powers kept large standing armies and relied on a balance of power and joint military commitments rather than disarmament. A likely similarity is that the powers shared Kant's goal of preventing future wars of aggression.\n   - 1: The response explains one accurate similarity or difference between the 1814 to 1815 arrangements and Kant's proposal about standing armies and the risk of war.\n   - 0: The response does not identify an accurate feature of the 1814 to 1815 arrangements, or it compares them with Kant on something other than standing armies or the risk of war.\nNote: Part A must rest on the excerpt itself. Do not credit claims about Kant's other preliminary or definitive articles, such as republican constitutions or a federation of states, because the excerpt does not contain them.\nNote: In Part B, credit both supporting and challenging answers. For example, a student may argue that mass conscription shows armies growing with no limit, which supports Kant, or that the citizen army of 1793 was raised to defend the revolution rather than for a planned war of aggression, which complicates his argument.\nNote: In Part C, do not credit a description of the Vienna settlement alone. The response must connect it to standing armies or to preventing war.\nNote: Do not penalize minor errors in dates or spelling if the development is clearly identified and accurately described.\nNote: ALTON reference — not official AP scoring\nAcceptable answers for A: Kant says standing armies always threaten other states with war because they appear to be in constant readiness to fight. / Kant argues that standing armies push states to outdo one another in the number of their soldiers, and that this competition has no natural limit. / Kant claims that the cost of maintaining standing armies makes peace more oppressive than a short war, so states start wars of aggression to get rid of the burden. / Kant objects that hiring men to kill or be killed uses them as mere machines or instruments of the state, which conflicts with the right of humanity in each person.\nAcceptable answers for B: The French levee en masse of 1793 called the whole nation to serve the war effort and produced armies much larger than earlier ones. This supports Kant's point that the number of soldiers can grow without limit and pull states into wider war. / Napoleon's large conscript armies, such as the multinational force he led into Russia in 1812, show military power being used for wars of conquest across Europe. This supports Kant's claim that large standing forces encourage aggression. / After its defeat by Napoleon in 1806, Prussia was forced to limit the size of its army, and reformers such as Scharnhorst and Gneisenau rebuilt it. The other powers answered France by enlarging and reorganizing their own armies, which matches the competition over troop numbers that Kant describes. / Revolutionary France's war against Austria and Prussia, which began in 1792, was driven largely by ideological fears and political conflict, not only by the burden of keeping standing armies. This complicates Kant's claim that standing armies are themselves the cause of wars of aggression.\nAcceptable answers for C: The Vienna settlement differed from Kant's proposal because the great powers did not abolish standing armies. Austria, Prussia, Russia and Britain kept large military forces and relied on a balance of power to deter aggression. / The Quadruple Alliance of November 1815 committed Austria, Prussia, Russia and Britain to act together, including by force, against a renewed French threat. This differed from Kant because it used combined military power, not disarmament, to keep the peace. / Under the Second Treaty of Paris of 1815, allied troops occupied part of France for a period of years. This differed from Kant because peace was enforced with standing armies rather than by removing them. / The peacemakers resembled Kant in one goal: like him, they wanted to keep any single state from launching wars of aggression. They pursued this through great-power consultation in the Concert of Europe instead of abolishing armies.\n\nSample response, high score (3/3; Part A 1, Part B 1, Part C 1):\n(A) One reason Kant gives for abolishing standing armies is that they push states into an arms race. Because each state's army is always ready to fight, its neighbors feel threatened and raise more soldiers to match it, and Kant says \"no limit can be set\" to this competition. The cost of keeping these armies makes peace \"more oppressive than a short war,\" so states may start wars of aggression just to get rid of the burden.\n\n(B) The levee en masse of 1793 supports Kant's argument. After France went to war in 1792, the revolutionary government drafted huge numbers of men and built armies far bigger than the old royal armies. Later, under Napoleon, these large conscript armies were used for wars of conquest across Europe, including the invasion of Russia in 1812. Other states had to answer with big armies of their own, for example through Prussia's military reforms after its defeat at Jena in 1806. This matches Kant's point that standing armies make states compete over troop numbers with no limit and make war more likely.\n\n(C) The peace arrangements of 1814 to 1815 differed from Kant's proposal because the great powers did not abolish standing armies. At the Congress of Vienna, Austria, Prussia, Russia, and Britain tried to prevent another war of aggression through a balance of power and the Quadruple Alliance, in which they promised to use their armed forces together against any new French threat. So instead of disarming, they kept peace by keeping large militaries ready and agreeing to act together, which is the \"constant readiness to fight\" Kant said would threaten other states.\n   - \"they push states into an arms race\" - Earns the point: correctly describes a reason the excerpt gives (competing over troop numbers with no limit) and backs it with the text.\n   - \"more oppressive than a short war\" - Adds the excerpt's cost argument and links it to wars of aggression, so the answer comes straight from the excerpt.\n   - \"The levee en masse of 1793 supports Kant's argument.\" - Earns the point: names a specific, accurate development from inside 1789 to 1815 and says it supports Kant.\n   - \"make states compete over troop numbers with no limit and make war more likely\" - Connects mass conscription and the arms competition it set off (Napoleon, Prussian reforms) to Kant's claim about risk of war.\n   - \"the great powers did not abolish standing armies\" - Earns the point: gives an accurate difference that is about standing armies, as the rubric requires.\n   - \"the Quadruple Alliance, in which they promised to use their armed forces together against any new French threat\" - Uses an accurate feature of the settlement (balance of power, a joint military commitment) and ties it to preventing war, not just describing Vienna.\n\nSample response, middle score (2/3; Part A 1, Part B 0, Part C 1):\n(A) One reason Kant gives is that standing armies make states compete with each other over how many soldiers they have, and there is no limit to that number. Because every state keeps adding soldiers to keep up with its neighbors, the competition never stops and states end up more threatened.\n\n(B) Between 1789 and 1815 there were a lot of wars in Europe, like the wars of Napoleon, and they affected many countries. Napoleon fought many battles and conquered a lot of land, so Europe was at war for a long time. This shows that war was a big problem in this period, which is what Kant was worried about in his essay.\n\n(C) The peace arrangements of 1814 to 1815 differed from Kant's proposal because the great powers did not abolish their standing armies. At the Congress of Vienna the powers wanted to stop France from threatening Europe again, so they surrounded it with stronger states and made the Quadruple Alliance, in which Britain, Austria, Prussia and Russia agreed to use their armies together if France became aggressive again. So they tried to prevent war with military strength and a balance of power, while Kant wanted states to disarm over time so that armies would not threaten others.\n   - \"make states compete with each other over how many soldiers they have, and there is no limit to that number\" - Accurately describes a reason stated in the excerpt (states outrival each other in soldiers with no limit). Earns the point for Part A.\n   - \"Because every state keeps adding soldiers to keep up with its neighbors\" - Adds a short, accurate explanation that stays within the excerpt.\n   - \"Between 1789 and 1815 there were a lot of wars in Europe, like the wars of Napoleon\" - Only names the general wars. It gives no specific development such as the levee en masse, conscription, or the 1812 invasion of Russia, so no credit.\n   - \"This shows that war was a big problem in this period, which is what Kant was worried about in his essay.\" - Does not link any development to standing armies raising the risk of war. It says only that war was common, so Part B earns no credit.\n   - \"the great powers did not abolish their standing armies\" - Identifies an accurate difference from Kant's proposal about standing armies, which is the most likely creditable difference.\n   - \"in which Britain, Austria, Prussia and Russia agreed to use their armies together if France became aggressive again\" - Accurate specific evidence about the Quadruple Alliance, tied to armies and preventing war. It supports the point for Part C.\n   - \"Kant wanted states to disarm over time so that armies would not threaten others\" - Completes the comparison by contrasting balance-of-power military security with Kant's gradual abolition of armies.\n\nSample response, low score (1/3; Part A 1, Part B 0, Part C 0):\n(A) One reason Kant gives is that standing armies keep threatening other states with war because they always look like they are ready to fight. When one state has an army that is always ready, the other states feel threatened, so this makes war more likely.\n\n(B) During the years 1789 to 1815 there were a lot of wars in Europe and many armies were involved. France fought many countries and Napoleon had big armies and won many battles. This shows that armies can lead to wars, so it supports what Kant said about standing armies. Many soldiers died in these wars and Europe was changed a lot.\n\n(C) The peace arrangements in 1814 to 1815 were made at the Congress of Vienna, where the great powers met after Napoleon was defeated. They wanted to make Europe stable again and bring back the old rulers, like Louis XVIII in France. This was different from Kant because Kant was a philosopher and the leaders at Vienna were kings and diplomats who cared about their own countries and about keeping their power.\n   - \"keep threatening other states with war because they always look like they are ready to fight\" - Accurately describes one reason actually stated in the excerpt (constant readiness threatens other states). Earns the point.\n   - \"France fought many countries and Napoleon had big armies and won many battles\" - Too general. It names no specific development such as the levee en masse, conscription laws, or the 1812 invasion of Russia, so it earns no credit.\n   - \"This shows that armies can lead to wars, so it supports what Kant said about standing armies.\" - Asserts a link to Kant but does not explain how the event shows armies raising the risk of war, so the connection is missing.\n   - \"They wanted to make Europe stable again and bring back the old rulers, like Louis XVIII in France.\" - This accurately describes the Vienna settlement but never connects it to standing armies or preventing war. Description of the settlement alone earns no credit.\n   - \"Kant was a philosopher and the leaders at Vienna were kings and diplomats\" - The comparison rests on who Kant and the leaders were, not on standing armies or the risk of war, so it earns no credit.",
+   "whap_frq": {
+    "schema_version": "whap-frq-1",
+    "task_type": "saq",
+    "template": "saq2",
+    "era": 2,
+    "units": [
+     5
+    ],
+    "title": "Kant on Standing Armies and the Wars of 1789 to 1815",
+    "prompt": {
+     "scenario": "In the late eighteenth century, European philosophers debated whether war between states could be limited or ended. In 1795, while Europe was at war with revolutionary France, the Prussian philosopher Immanuel Kant published a proposal for a lasting peace among states. Between 1789 and 1815, European states fought a long series of wars and then negotiated a new peace settlement.",
+     "task": "Using the excerpt, answer (a), (b), and (c).",
+     "requirements": [
+      "Each part requires one specific, accurate response.",
+      "Part A must be based on what the excerpt itself says.",
+      "Parts B and C must use specific historical evidence from the period 1789 to 1815 beyond the excerpt."
+     ],
+     "parts": [
+      {
+       "label": "A",
+       "prompt": "Briefly describe ONE reason Kant gives in the excerpt for abolishing standing armies.",
+       "points": 1
+      },
+      {
+       "label": "B",
+       "prompt": "Briefly explain ONE specific military development or event in Europe in the period 1789 to 1815 that either supports or challenges Kant's argument that standing armies increase the risk of war.",
+       "points": 1
+      },
+      {
+       "label": "C",
+       "prompt": "Briefly explain ONE way the peace arrangements made by the European great powers in 1814 to 1815 either resembled or differed from Kant's proposal about standing armies and the risk of war.",
+       "points": 1
+      }
+     ]
+    },
+    "sources": [
+     {
+      "id": "A",
+      "kind": "primary_text",
+      "title": "Perpetual Peace, first preliminary article 3 (excerpt on standing armies)",
+      "attribution": "Immanuel Kant (1795; English translation by Mary Campbell Smith, 1903), 1795 (text); 1903 (Campbell Smith translation). Project Gutenberg eBook #50922. Reuse: public domain in the United States (published before 1929). excerpted (1 segment); whitespace normalized; no wording changed; italic markup (underscores) removed.",
+      "context": "Immanuel Kant was a German philosopher who taught at the University of Konigsberg in Prussia; he published this essay in 1795.",
+      "real_data": true,
+      "source_registry_id": "eu-txt-kant-1795",
+      "source_sha256": "126dd5b5037e70c7ef7939249319ae1e1f7a2836c302e92fdcdb143764f8dc29",
+      "body": "Standing armies (miles perpetuus) shall be abolished in course of time.” For they are always threatening other states with war by appearing to be in constant readiness to fight. They incite the various states to outrival one another in the number of their soldiers, and to this number no limit can be set. Now, since owing to the sums devoted to this purpose, peace at last becomes even more oppressive than a short war, these standing armies are themselves the cause of wars of aggression, undertaken in order to get rid of this burden. To which we must add that the practice of hiring men to kill or to be killed seems to imply a use of them as mere machines and instruments in the hand of another (namely, the state) which cannot easily be reconciled with the right of humanity in our own person.",
+      "provenance": {
+       "kind": "real_historical_source",
+       "real_data": true,
+       "note": "registry eu-txt-kant-1795"
+      }
+     }
+    ],
+    "rubric": {
+     "rubric_id": "whap-v1",
+     "total_points": 3,
+     "rows": [
+      {
+       "row_id": "a",
+       "name": "Part A",
+       "max": 1,
+       "descriptors": {
+        "0": "The response gives no reason, gives a reason the excerpt does not contain, or only repeats that Kant wanted armies abolished.",
+        "1": "The response accurately describes one reason the excerpt gives for abolishing standing armies."
+       },
+       "task_specific": "Students describe one reason the excerpt gives for abolishing standing armies: their constant readiness threatens other states; they push states into competing over troop numbers with no limit; their cost makes peace more burdensome than a short war and so leads to wars of aggression; or paying men to kill or be killed treats them as tools of the state, which conflicts with the right of humanity."
+      },
+      {
+       "row_id": "b",
+       "name": "Part B",
+       "max": 1,
+       "descriptors": {
+        "0": "The response names no specific development, gives one outside 1789 to 1815, or does not link it to standing armies and the risk of war.",
+        "1": "The response explains one specific, accurate development from 1789 to 1815 and how it supports or challenges Kant's argument about standing armies and war."
+       },
+       "task_specific": "Students explain one specific European military development or event from 1789 to 1815, such as the levee en masse of 1793, French conscription laws, the growth of Napoleon's armies, the Prussian military reforms after 1806, or the 1812 invasion of Russia, and connect it to Kant's claim that standing armies raise the risk of war. Students may argue that it supports or challenges the claim."
+      },
+      {
+       "row_id": "c",
+       "name": "Part C",
+       "max": 1,
+       "descriptors": {
+        "0": "The response does not identify an accurate feature of the 1814 to 1815 arrangements, or it compares them with Kant on something other than standing armies or the risk of war.",
+        "1": "The response explains one accurate similarity or difference between the 1814 to 1815 arrangements and Kant's proposal about standing armies and the risk of war."
+       },
+       "task_specific": "Students explain one similarity or difference between the 1814 to 1815 peace arrangements (the Congress of Vienna, the Treaties of Paris, the Quadruple Alliance, the Holy Alliance, the Concert of Europe) and Kant's proposal. The comparison must be about standing armies or the risk of war. The most likely difference is that the powers kept large standing armies and relied on a balance of power and joint military commitments rather than disarmament. A likely similarity is that the powers shared Kant's goal of preventing future wars of aggression."
+      }
+     ],
+     "scoring_notes": [
+      "Part A must rest on the excerpt itself. Do not credit claims about Kant's other preliminary or definitive articles, such as republican constitutions or a federation of states, because the excerpt does not contain them.",
+      "In Part B, credit both supporting and challenging answers. For example, a student may argue that mass conscription shows armies growing with no limit, which supports Kant, or that the citizen army of 1793 was raised to defend the revolution rather than for a planned war of aggression, which complicates his argument.",
+      "In Part C, do not credit a description of the Vienna settlement alone. The response must connect it to standing armies or to preventing war.",
+      "Do not penalize minor errors in dates or spelling if the development is clearly identified and accurately described.",
+      "ALTON reference — not official AP scoring"
+     ]
+    },
+    "expected_features": {
+     "defensible_theses": [],
+     "contextualization_ideas": [
+      "Eighteenth-century dynastic states kept permanent professional armies, and Frederick the Great's Prussia was a well-known example.",
+      "Enlightenment thinkers applied reason to questions of international order and human dignity.",
+      "Kant published the essay in 1795, while the wars between revolutionary France and the European monarchies were under way, and in the same year as the Peace of Basel."
+     ],
+     "outside_evidence": [
+      "Levee en masse (1793)",
+      "Jourdan conscription law (1798)",
+      "Napoleon's Grande Armee and the 1812 Russian campaign",
+      "Prussian military reforms after 1806",
+      "Congress of Vienna and the balance of power",
+      "Quadruple Alliance and the Concert of Europe",
+      "Second Treaty of Paris (1815) and the allied occupation of France"
+     ],
+     "reasoning_types": [
+      "Sourcing and claims: identifying an argument in a primary source",
+      "Causation: connecting military growth to the risk of war",
+      "Comparison: contrasting Kant's proposal with the 1815 settlement"
+     ],
+     "doc_uses": [
+      {
+       "source_id": "Kant, Perpetual Peace (1795), first preliminary article 3",
+       "usable_for": "Identifying Enlightenment arguments against standing armies: the threat they pose, arms competition, financial burden, and the moral objection to using soldiers as instruments.",
+       "sourcing": "This is a normative philosophical proposal by a Prussian university philosopher, published in 1795 during the wars with revolutionary France. It sets out what states should do and does not describe events."
+      }
+     ],
+     "saq_answers": {
+      "a": [
+       "Kant says standing armies always threaten other states with war because they appear to be in constant readiness to fight.",
+       "Kant argues that standing armies push states to outdo one another in the number of their soldiers, and that this competition has no natural limit.",
+       "Kant claims that the cost of maintaining standing armies makes peace more oppressive than a short war, so states start wars of aggression to get rid of the burden.",
+       "Kant objects that hiring men to kill or be killed uses them as mere machines or instruments of the state, which conflicts with the right of humanity in each person."
+      ],
+      "b": [
+       "The French levee en masse of 1793 called the whole nation to serve the war effort and produced armies much larger than earlier ones. This supports Kant's point that the number of soldiers can grow without limit and pull states into wider war.",
+       "Napoleon's large conscript armies, such as the multinational force he led into Russia in 1812, show military power being used for wars of conquest across Europe. This supports Kant's claim that large standing forces encourage aggression.",
+       "After its defeat by Napoleon in 1806, Prussia was forced to limit the size of its army, and reformers such as Scharnhorst and Gneisenau rebuilt it. The other powers answered France by enlarging and reorganizing their own armies, which matches the competition over troop numbers that Kant describes.",
+       "Revolutionary France's war against Austria and Prussia, which began in 1792, was driven largely by ideological fears and political conflict, not only by the burden of keeping standing armies. This complicates Kant's claim that standing armies are themselves the cause of wars of aggression."
+      ],
+      "c": [
+       "The Vienna settlement differed from Kant's proposal because the great powers did not abolish standing armies. Austria, Prussia, Russia and Britain kept large military forces and relied on a balance of power to deter aggression.",
+       "The Quadruple Alliance of November 1815 committed Austria, Prussia, Russia and Britain to act together, including by force, against a renewed French threat. This differed from Kant because it used combined military power, not disarmament, to keep the peace.",
+       "Under the Second Treaty of Paris of 1815, allied troops occupied part of France for a period of years. This differed from Kant because peace was enforced with standing armies rather than by removing them.",
+       "The peacemakers resembled Kant in one goal: like him, they wanted to keep any single state from launching wars of aggression. They pursued this through great-power consultation in the Concert of Europe instead of abolishing armies."
+      ]
+     },
+     "common_pitfalls": [
+      "Attributing to the excerpt ideas from other parts of Perpetual Peace, such as republican government or a league of nations, which the excerpt does not contain.",
+      "Saying that Kant described or reported on actual events. The excerpt is a philosophical proposal, not an account of events.",
+      "In Part B, naming a war or battle without explaining how it relates to standing armies or the risk of war.",
+      "In Part C, describing the Congress of Vienna's territorial changes without relating them to armies or war prevention.",
+      "Claiming that the Congress of Vienna disarmed Europe or abolished standing armies, which is inaccurate.",
+      "Using developments from after 1815, or from the United States, as main evidence."
+     ],
+     "facts": [
+      "Immanuel Kant taught at the University of Konigsberg in Prussia and published Perpetual Peace in 1795.",
+      "In 1795 Prussia made a separate peace with France, the Peace of Basel, and left the war against France.",
+      "France declared war on Austria in April 1792, beginning the French Revolutionary Wars; Prussia joined Austria.",
+      "The National Convention decreed the levee en masse in August 1793.",
+      "The Jourdan Law of 1798 established regular conscription in France.",
+      "Napoleon defeated Prussia at Jena and Auerstedt in 1806, and the Treaties of Tilsit followed in 1807.",
+      "Prussian military reform after 1806 was associated with Scharnhorst and Gneisenau.",
+      "Napoleon invaded Russia in 1812 with a very large multinational army.",
+      "The Congress of Vienna met in 1814 to 1815.",
+      "The Holy Alliance (Russia, Austria and Prussia) and the Quadruple Alliance (Austria, Prussia, Russia and Britain) were formed in 1815.",
+      "The Second Treaty of Paris (1815) included an allied occupation of part of France and an indemnity."
+     ]
+    },
+    "samples": [
+     {
+      "tier": "high",
+      "target_total": 3,
+      "essay": "(A) One reason Kant gives for abolishing standing armies is that they push states into an arms race. Because each state's army is always ready to fight, its neighbors feel threatened and raise more soldiers to match it, and Kant says \"no limit can be set\" to this competition. The cost of keeping these armies makes peace \"more oppressive than a short war,\" so states may start wars of aggression just to get rid of the burden.\n\n(B) The levee en masse of 1793 supports Kant's argument. After France went to war in 1792, the revolutionary government drafted huge numbers of men and built armies far bigger than the old royal armies. Later, under Napoleon, these large conscript armies were used for wars of conquest across Europe, including the invasion of Russia in 1812. Other states had to answer with big armies of their own, for example through Prussia's military reforms after its defeat at Jena in 1806. This matches Kant's point that standing armies make states compete over troop numbers with no limit and make war more likely.\n\n(C) The peace arrangements of 1814 to 1815 differed from Kant's proposal because the great powers did not abolish standing armies. At the Congress of Vienna, Austria, Prussia, Russia, and Britain tried to prevent another war of aggression through a balance of power and the Quadruple Alliance, in which they promised to use their armed forces together against any new French threat. So instead of disarming, they kept peace by keeping large militaries ready and agreeing to act together, which is the \"constant readiness to fight\" Kant said would threaten other states.",
+      "word_count": 271,
+      "rubric_scores": {
+       "a": 1,
+       "b": 1,
+       "c": 1,
+       "total": 3
+      },
+      "annotations": [
+       {
+        "quote": "they push states into an arms race",
+        "comment": "Earns the point: correctly describes a reason the excerpt gives (competing over troop numbers with no limit) and backs it with the text.",
+        "row_id": "a"
+       },
+       {
+        "quote": "more oppressive than a short war",
+        "comment": "Adds the excerpt's cost argument and links it to wars of aggression, so the answer comes straight from the excerpt.",
+        "row_id": "a"
+       },
+       {
+        "quote": "The levee en masse of 1793 supports Kant's argument.",
+        "comment": "Earns the point: names a specific, accurate development from inside 1789 to 1815 and says it supports Kant.",
+        "row_id": "b"
+       },
+       {
+        "quote": "make states compete over troop numbers with no limit and make war more likely",
+        "comment": "Connects mass conscription and the arms competition it set off (Napoleon, Prussian reforms) to Kant's claim about risk of war.",
+        "row_id": "b"
+       },
+       {
+        "quote": "the great powers did not abolish standing armies",
+        "comment": "Earns the point: gives an accurate difference that is about standing armies, as the rubric requires.",
+        "row_id": "c"
+       },
+       {
+        "quote": "the Quadruple Alliance, in which they promised to use their armed forces together against any new French threat",
+        "comment": "Uses an accurate feature of the settlement (balance of power, a joint military commitment) and ties it to preventing war, not just describing Vienna.",
+        "row_id": "c"
+       }
+      ]
+     },
+     {
+      "tier": "mid",
+      "target_total": 2,
+      "essay": "(A) One reason Kant gives is that standing armies make states compete with each other over how many soldiers they have, and there is no limit to that number. Because every state keeps adding soldiers to keep up with its neighbors, the competition never stops and states end up more threatened.\n\n(B) Between 1789 and 1815 there were a lot of wars in Europe, like the wars of Napoleon, and they affected many countries. Napoleon fought many battles and conquered a lot of land, so Europe was at war for a long time. This shows that war was a big problem in this period, which is what Kant was worried about in his essay.\n\n(C) The peace arrangements of 1814 to 1815 differed from Kant's proposal because the great powers did not abolish their standing armies. At the Congress of Vienna the powers wanted to stop France from threatening Europe again, so they surrounded it with stronger states and made the Quadruple Alliance, in which Britain, Austria, Prussia and Russia agreed to use their armies together if France became aggressive again. So they tried to prevent war with military strength and a balance of power, while Kant wanted states to disarm over time so that armies would not threaten others.",
+      "word_count": 210,
+      "rubric_scores": {
+       "a": 1,
+       "b": 0,
+       "c": 1,
+       "total": 2
+      },
+      "annotations": [
+       {
+        "quote": "make states compete with each other over how many soldiers they have, and there is no limit to that number",
+        "comment": "Accurately describes a reason stated in the excerpt (states outrival each other in soldiers with no limit). Earns the point for Part A.",
+        "row_id": "a"
+       },
+       {
+        "quote": "Because every state keeps adding soldiers to keep up with its neighbors",
+        "comment": "Adds a short, accurate explanation that stays within the excerpt.",
+        "row_id": "a"
+       },
+       {
+        "quote": "Between 1789 and 1815 there were a lot of wars in Europe, like the wars of Napoleon",
+        "comment": "Only names the general wars. It gives no specific development such as the levee en masse, conscription, or the 1812 invasion of Russia, so no credit.",
+        "row_id": "b"
+       },
+       {
+        "quote": "This shows that war was a big problem in this period, which is what Kant was worried about in his essay.",
+        "comment": "Does not link any development to standing armies raising the risk of war. It says only that war was common, so Part B earns no credit.",
+        "row_id": "b"
+       },
+       {
+        "quote": "the great powers did not abolish their standing armies",
+        "comment": "Identifies an accurate difference from Kant's proposal about standing armies, which is the most likely creditable difference.",
+        "row_id": "c"
+       },
+       {
+        "quote": "in which Britain, Austria, Prussia and Russia agreed to use their armies together if France became aggressive again",
+        "comment": "Accurate specific evidence about the Quadruple Alliance, tied to armies and preventing war. It supports the point for Part C.",
+        "row_id": "c"
+       },
+       {
+        "quote": "Kant wanted states to disarm over time so that armies would not threaten others",
+        "comment": "Completes the comparison by contrasting balance-of-power military security with Kant's gradual abolition of armies.",
+        "row_id": "c"
+       }
+      ]
+     },
+     {
+      "tier": "low",
+      "target_total": 1,
+      "essay": "(A) One reason Kant gives is that standing armies keep threatening other states with war because they always look like they are ready to fight. When one state has an army that is always ready, the other states feel threatened, so this makes war more likely.\n\n(B) During the years 1789 to 1815 there were a lot of wars in Europe and many armies were involved. France fought many countries and Napoleon had big armies and won many battles. This shows that armies can lead to wars, so it supports what Kant said about standing armies. Many soldiers died in these wars and Europe was changed a lot.\n\n(C) The peace arrangements in 1814 to 1815 were made at the Congress of Vienna, where the great powers met after Napoleon was defeated. They wanted to make Europe stable again and bring back the old rulers, like Louis XVIII in France. This was different from Kant because Kant was a philosopher and the leaders at Vienna were kings and diplomats who cared about their own countries and about keeping their power.",
+      "word_count": 180,
+      "rubric_scores": {
+       "a": 1,
+       "b": 0,
+       "c": 0,
+       "total": 1
+      },
+      "annotations": [
+       {
+        "quote": "keep threatening other states with war because they always look like they are ready to fight",
+        "comment": "Accurately describes one reason actually stated in the excerpt (constant readiness threatens other states). Earns the point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "France fought many countries and Napoleon had big armies and won many battles",
+        "comment": "Too general. It names no specific development such as the levee en masse, conscription laws, or the 1812 invasion of Russia, so it earns no credit.",
+        "row_id": "b"
+       },
+       {
+        "quote": "This shows that armies can lead to wars, so it supports what Kant said about standing armies.",
+        "comment": "Asserts a link to Kant but does not explain how the event shows armies raising the risk of war, so the connection is missing.",
+        "row_id": "b"
+       },
+       {
+        "quote": "They wanted to make Europe stable again and bring back the old rulers, like Louis XVIII in France.",
+        "comment": "This accurately describes the Vienna settlement but never connects it to standing armies or preventing war. Description of the settlement alone earns no credit.",
+        "row_id": "c"
+       },
+       {
+        "quote": "Kant was a philosopher and the leaders at Vienna were kings and diplomats",
+        "comment": "The comparison rests on who Kant and the leaders were, not on standing armies or the risk of war, so it earns no credit.",
+        "row_id": "c"
+       }
+      ]
+     }
+    ],
+    "provenance": {
+     "kind": "alton_authored_from_real_sources",
+     "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+    }
+   },
+   "design": {
+    "source_fixed_first": true,
+    "documents_chosen_before_prompt": true
+   },
+   "verification": {
+    "fact_checker": "claude-fable-5-1",
+    "graders": [
+     "claude-opus-5-5",
+     "claude-sonnet-5-5"
+    ],
+    "fact_flags": [],
+    "sample_totals": {
+     "high": 3,
+     "mid": 2,
+     "low": 1
+    },
+    "bands": {
+     "high": [
+      3,
+      3
+     ],
+     "mid": [
+      2,
+      2
+     ],
+     "low": [
+      1,
+      1
+     ]
+    }
+   }
+  }
+ },
+ {
+  "cellId": "ap_european_history-eu2_saq3",
+  "apSubjectCode": "ap_european_history",
+  "kind": "frq_bundle",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_european_history-eu2_saq3-k0",
+  "keywordCode": "9.1",
+  "unitCode": "9",
+  "skillPrimary": "1.B",
+  "structure": "frq_multipart",
+  "archetype": "eurofrq_eu2_saq3",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "gateOverride": "euro-f4-2026-10-20",
+  "run": "euro-f4",
+  "stockKey": "euro-f4:ap_european_history-eu2_saq3-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "euro-f4-2026-10-20",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_european_history",
+  "itemFamilyId": "fam:euro-f4:ap_european_history-eu2_saq3-k0",
+  "canonicalKey": "euro-f4:ap_european_history-eu2_saq3-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_european_history:9.1",
+  "sharedWith": [],
+  "stockCell": "ap_european_history|9.1|1.B|frq_multipart|na",
+  "history": [
+   {
+    "run": "euro-f4",
+    "gateVersion": "euro-f4-2026-10-20",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "eu-img-checkpoint-charlie-1961"
+  ],
+  "exam": "EU2",
+  "payload": {
+   "archetype": "eurofrq_eu2_saq3",
+   "template": "saq3",
+   "topic": "9.1",
+   "extra_topics": [],
+   "skill": "1.B",
+   "representative_skill": "1.B",
+   "calculator": "na",
+   "title": "A U.S. Tank at Checkpoint Charlie, Berlin, 1961",
+   "set_intro": "Historical source (real document)\n(photograph)\nA U.S. tank at Checkpoint Charlie, Berlin\nU.S. Army photo, 1961. Wikimedia Commons (file page records the source institution and public-domain tag). Reuse: public domain (U.S. government work, 17 U.S.C. 105). unmodified except Wikimedia Commons' scaled JPEG rendering of the file (upload.wikimedia.org thumbnail, 1280 px wide at most).\nContext: A U.S. Army photographer took this picture in 1961 at a crossing point between the American sector of West Berlin and East Berlin.\n\nThe image for this source is shown below. Select the image to open it full size.",
+   "stimulus": {
+    "kind": "image",
+    "description": "A black-and-white photograph taken from above of a street in Berlin: a large U.S. Army tank with a white star on its turret and a blade on its front, its crew heads showing from the hatches, is parked across the foreground; beyond it, across a paved sidewalk and a lawn, several uniformed men stand near a lamp, a barrier gate and a large sign on posts, and a Volkswagen van is parked at the upper left.",
+    "data": {
+     "path": "ap-sources/eu-img-checkpoint-charlie-1961/image.jpg",
+     "alt": "A black-and-white photograph taken from above of a street in Berlin: a large U.S. Army tank with a white star on its turret and a blade on its front, its crew heads showing from the hatches, is parked across the foreground; beyond it, across a paved sidewalk and a lawn, several uniformed men stand near a lamp, a barrier gate and a large sign on posts, and a Volkswagen van is parked at the upper left.",
+     "credit": "U.S. tank at Checkpoint Charlie, Berlin, U.S. Army photo, 1961. Wikimedia Commons (public domain)."
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Briefly describe ONE visible feature of the photograph that shows military power being displayed at the Berlin crossing point in 1961.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.B"
+     ],
+     "topic_codes": [
+      "9.1"
+     ],
+     "model_answer": "A large U.S. Army tank marked with a white star is parked across the street at the crossing, a show of armed American strength.",
+     "rubric_rows": [
+      {
+       "row_id": "a",
+       "points": 1,
+       "criterion": "Describes one clearly visible element of the photograph that shows military power at the crossing point, such as the U.S. Army tank with its white star and front blade, the crew in the hatches, the long gun barrel, or the uniformed men standing near the barrier gate.",
+       "required_elements": [
+        "A large U.S. Army tank marked with a white star is parked across the street at the crossing, a show of armed American strength.",
+        "Crew members can be seen in the tank's hatches, which suggests the tank was manned and ready rather than parked and empty.",
+        "The tank's long gun barrel points along the street at the crossing, showing that heavy weapons had been brought right up to the checkpoint.",
+        "Several uniformed men stand near a barrier gate beyond the tank, showing that the crossing was controlled and guarded."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Briefly explain ONE specific historical development in the period 1945 to 1961, not shown in the photograph, that helps explain why United States military forces faced Soviet-bloc forces in Berlin in 1961.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.B"
+     ],
+     "topic_codes": [
+      "9.1"
+     ],
+     "model_answer": "The Berlin Blockade of 1948-1949 and the Western airlift showed that the United States would commit itself to keeping West Berlin, which helps explain why U.S. forces were still there and ready to stand firm in 1961.",
+     "rubric_rows": [
+      {
+       "row_id": "b",
+       "points": 1,
+       "criterion": "Explains one specific development from 1945 to 1961 that accounts for the U.S.-Soviet confrontation in Berlin, such as the four-power occupation agreed by the wartime Allies, the Berlin Blockade and Airlift of 1948-1949, the founding of two German states in 1949, the large flow of East Germans to the West through Berlin, Khrushchev's 1958 demand that the Western powers leave Berlin, or the construction of the Berlin Wall beginning in August 1961.",
+       "required_elements": [
+        "The Berlin Blockade of 1948-1949 and the Western airlift showed that the United States would commit itself to keeping West Berlin, which helps explain why U.S. forces were still there and ready to stand firm in 1961.",
+        "Large numbers of East Germans left for the West through Berlin in the 1950s, which led East German and Soviet leaders to seal the border with the Berlin Wall in August 1961 and raised tensions with the Western powers.",
+        "In 1958 Khrushchev demanded that the Western powers leave Berlin and that it become a free city, which began a long crisis that was still unresolved in 1961.",
+        "The creation of two rival German states in 1949, tied to NATO and later the Warsaw Pact, made Berlin the place where the two blocs touched directly."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Briefly explain ONE specific historical development in the period 1962 to 1990 that changed or ended the division of Berlin and Germany.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.B"
+     ],
+     "topic_codes": [
+      "9.1"
+     ],
+     "model_answer": "Willy Brandt's Ostpolitik, including the 1972 Basic Treaty between the two German states, eased the division by setting up formal relations and making contacts and travel easier.",
+     "rubric_rows": [
+      {
+       "row_id": "c",
+       "points": 1,
+       "criterion": "Explains one specific development from 1962 to 1990 that changed or ended the division, such as Willy Brandt's Ostpolitik and the 1972 Basic Treaty, the 1975 Helsinki Accords, Gorbachev's reforms and his move away from using force in Eastern Europe, Hungary's opening of its border with Austria in 1989, the opening of the Berlin Wall on 9 November 1989, or German reunification on 3 October 1990.",
+       "required_elements": [
+        "Willy Brandt's Ostpolitik, including the 1972 Basic Treaty between the two German states, eased the division by setting up formal relations and making contacts and travel easier.",
+        "Gorbachev's reforms and his choice not to use Soviet force to keep the East European regimes in power allowed the East German regime to collapse in 1989.",
+        "Hungary's opening of its border with Austria in 1989 let thousands of East Germans escape west, which added pressure leading to the opening of the Berlin Wall on 9 November 1989.",
+        "German reunification on 3 October 1990 ended the division of Germany and of Berlin."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "reference_text": "Scoring guide (ALTON reference — not official AP scoring). This question is worth 3 points.\nPart A (0-1): Describes one clearly visible element of the photograph that shows military power at the crossing point, such as the U.S. Army tank with its white star and front blade, the crew in the hatches, the long gun barrel, or the uniformed men standing near the barrier gate.\n   - 1: The response accurately describes one visible feature of the photograph that shows a display of military power at the crossing.\n   - 0: The response names no visible feature, describes something that cannot be seen, or makes unsupported claims about the sign's words or about which side the people stand on.\nPart B (0-1): Explains one specific development from 1945 to 1961 that accounts for the U.S.-Soviet confrontation in Berlin, such as the four-power occupation agreed by the wartime Allies, the Berlin Blockade and Airlift of 1948-1949, the founding of two German states in 1949, the large flow of East Germans to the West through Berlin, Khrushchev's 1958 demand that the Western powers leave Berlin, or the construction of the Berlin Wall beginning in August 1961.\n   - 1: The response explains how one specific, accurate development from 1945 to 1961 helps account for U.S. and Soviet-bloc forces confronting each other in Berlin in 1961.\n   - 0: The response gives no development, a development outside 1945 to 1961, an inaccurate one, or only restates the photograph.\nPart C (0-1): Explains one specific development from 1962 to 1990 that changed or ended the division, such as Willy Brandt's Ostpolitik and the 1972 Basic Treaty, the 1975 Helsinki Accords, Gorbachev's reforms and his move away from using force in Eastern Europe, Hungary's opening of its border with Austria in 1989, the opening of the Berlin Wall on 9 November 1989, or German reunification on 3 October 1990.\n   - 1: The response explains how one specific, accurate development from 1962 to 1990 changed or ended the division of Berlin and Germany.\n   - 0: The response gives no development, one outside 1962 to 1990, an inaccurate one, or does not connect it to the division of Berlin or Germany.\nNote: Each part is scored on its own; a response can earn 0 to 3 points.\nNote: In part A, do not reward claims about the words on the sign or about which side of the boundary any person stands on, because the photograph does not show these clearly.\nNote: Do not reward a part B response that only says Berlin was split into sectors, since the context line already gives that information. A response that explains the four-power occupation agreement as the reason Western troops were in the city may earn the point.\nNote: A response does not need to date the photograph to a specific month; the October 1961 tank standoff at Checkpoint Charlie may be used as context but should not be claimed as the moment the picture was taken.\nNote: ALTON reference — not official AP scoring\nAcceptable answers for A: A large U.S. Army tank marked with a white star is parked across the street at the crossing, a show of armed American strength. / Crew members can be seen in the tank's hatches, which suggests the tank was manned and ready rather than parked and empty. / The tank's long gun barrel points along the street at the crossing, showing that heavy weapons had been brought right up to the checkpoint. / Several uniformed men stand near a barrier gate beyond the tank, showing that the crossing was controlled and guarded.\nAcceptable answers for B: The Berlin Blockade of 1948-1949 and the Western airlift showed that the United States would commit itself to keeping West Berlin, which helps explain why U.S. forces were still there and ready to stand firm in 1961. / Large numbers of East Germans left for the West through Berlin in the 1950s, which led East German and Soviet leaders to seal the border with the Berlin Wall in August 1961 and raised tensions with the Western powers. / In 1958 Khrushchev demanded that the Western powers leave Berlin and that it become a free city, which began a long crisis that was still unresolved in 1961. / The creation of two rival German states in 1949, tied to NATO and later the Warsaw Pact, made Berlin the place where the two blocs touched directly.\nAcceptable answers for C: Willy Brandt's Ostpolitik, including the 1972 Basic Treaty between the two German states, eased the division by setting up formal relations and making contacts and travel easier. / Gorbachev's reforms and his choice not to use Soviet force to keep the East European regimes in power allowed the East German regime to collapse in 1989. / Hungary's opening of its border with Austria in 1989 let thousands of East Germans escape west, which added pressure leading to the opening of the Berlin Wall on 9 November 1989. / German reunification on 3 October 1990 ended the division of Germany and of Berlin.\n\nSample response, high score (3/3; Part A 1, Part B 1, Part C 1):\n(A) The photograph shows a large U.S. Army tank with a white star on its turret parked right across the street at the crossing point, with its crew looking out of the hatches. Putting a heavy combat vehicle at a civilian checkpoint was a clear display of American military power, showing the Soviet bloc that the United States was ready to defend its rights in West Berlin.\n\n(B) One development that explains the confrontation is the large flow of East Germans escaping to the West through Berlin in the 1950s. Because so many skilled workers and young people were leaving, the East German government, with Soviet backing, began building the Berlin Wall in August 1961 to close the border. This made the crossing points tense places where American forces and Soviet-bloc forces faced each other directly, as the U.S. insisted on keeping its access to East Berlin.\n\n(C) In 1989 Gorbachev's reforms and his refusal to use Soviet force to prop up Eastern European governments weakened East Germany, and after mass protests and people fleeing through Hungary, the Berlin Wall was opened on 9 November 1989. This allowed East Berliners to cross freely into West Berlin and led directly to German reunification on 3 October 1990, which ended the division of both Berlin and Germany.\n   - \"a large U.S. Army tank with a white star on its turret parked right across the street\" - Accurately describes a clearly visible feature showing military power; makes no claims about the sign or which side people stand on. Earns the point.\n   - \"the large flow of East Germans escaping to the West through Berlin in the 1950s\" - Gives a specific, accurate development from 1945-1961 that the rubric lists.\n   - \"began building the Berlin Wall in August 1961 to close the border\" - Explains how the emigration led to the Wall and to U.S. and Soviet-bloc forces facing each other at crossing points. Earns the point.\n   - \"the Berlin Wall was opened on 9 November 1989\" - Specific, accurate development with the correct date, tied to Gorbachev's non-intervention policy.\n   - \"led directly to German reunification on 3 October 1990, which ended the division of both Berlin and Germany\" - Clearly connects the development to the end of the division. Earns the point.\n\nSample response, middle score (2/3; Part A 1, Part B 1, Part C 0):\n(A) One visible feature that shows military power is the big U.S. Army tank in the foreground. It has a white star on its turret and a blade on the front, and the crew members have their heads out of the hatches, so it looks ready to move if it has to. A tank is a weapon, so having it parked right there at the crossing point shows the U.S. was willing to use force.\n\n(B) One development from 1945 to 1961 is the Berlin Blockade and Airlift of 1948 to 1949. After World War II, Germany and Berlin were divided into occupation zones run by the United States, Britain, France and the Soviet Union, and Berlin was deep inside the Soviet zone. In 1948 Stalin cut off road and rail access to West Berlin because the Western powers were combining their zones and introducing a new currency. The United States and Britain flew in supplies for almost a year, and Stalin finally ended the blockade in 1949. This showed that the U.S. was committed to staying in West Berlin and defending it against the Soviets, which is why American forces were still there facing Soviet-bloc forces in 1961.\n\n(C) One development from 1962 to 1990 that ended the division was the fall of the Berlin Wall in 1989. Communist governments in Eastern Europe were having a lot of trouble then, and the Wall was opened in November. After that, things changed a lot in Germany and Europe, and the division did not last much longer.\n   - \"It has a white star on its turret and a blade on the front, and the crew members have their heads out of the hatches\" - Accurately describes clearly visible features of the tank (star, blade, crew in hatches) and ties them to military power. Earns the point.\n   - \"A tank is a weapon, so having it parked right there at the crossing point shows the U.S. was willing to use force.\" - Links the visible feature to a display of military power, as the prompt requires.\n   - \"the Berlin Blockade and Airlift of 1948 to 1949\" - Names a specific, accurate development within 1945 to 1961 that is not shown in the photograph.\n   - \"Stalin cut off road and rail access to West Berlin because the Western powers were combining their zones and introducing a new currency\" - Gives accurate specific evidence about the cause of the blockade.\n   - \"This showed that the U.S. was committed to staying in West Berlin and defending it against the Soviets, which is why American forces were still there\" - Explains the link from the 1948-49 crisis to U.S. and Soviet-bloc forces confronting each other in 1961. This is the reasoning that earns the point.\n   - \"the fall of the Berlin Wall in 1989\" - Names a correct development in the period, but it is only mentioned. The response does not say what caused the opening or how it ended the division of Germany.\n   - \"After that, things changed a lot in Germany and Europe, and the division did not last much longer.\" - Vague. It does not mention reunification on 3 October 1990, Gorbachev's refusal to use force, or any other concrete consequence, so the link to ending the division is not explained. No credit.\n\nSample response, low score (1/3; Part A 1, Part B 0, Part C 0):\n(A) One feature that shows military power is the big U.S. Army tank in the front of the photograph. It has a white star on its turret and a blade on the front, and the crew members are sticking their heads out of the hatches, so it looks ready for action at the crossing point.\n\n(B) One development before 1961 is that the Cold War was going on and the United States and the Soviet Union did not trust each other. Berlin was split up and both sides had soldiers there, so they ended up facing each other with tanks in 1961. This was part of the tension between the two superpowers after World War II.\n\n(C) One development was that the Cold War got better over time and the Soviet Union became weaker. Eventually there were a lot of changes in Europe and people were not as divided anymore. This helped end the tension between the two sides in the later years.\n   - \"One feature that shows military power is the big U.S. Army tank in the front of the photograph.\" - Names a clearly visible element that displays military power, which is what Part A asks for.\n   - \"It has a white star on its turret and a blade on the front, and the crew members are sticking their heads out of the hatches\" - Accurate, specific details that can really be seen in the photo (star, blade, crew in hatches). This earns the Part A point.\n   - \"the Cold War was going on and the United States and the Soviet Union did not trust each other\" - Too general. It names no specific development from 1945 to 1961 such as the four-power occupation, the Berlin Blockade and Airlift, or Khrushchev's 1958 demand. No credit.\n   - \"Berlin was split up and both sides had soldiers there\" - This only repeats the context line and the photograph and does not explain why the forces were there. The note says it should not be rewarded.\n   - \"the Cold War got better over time and the Soviet Union became weaker\" - Vague and names no specific event. Ostpolitik, the Helsinki Accords, Gorbachev's reforms, or the opening of the Wall on 9 November 1989 would have counted.\n   - \"Eventually there were a lot of changes in Europe and people were not as divided anymore.\" - Never connects a development to the division of Berlin or Germany and gives no date or detail, so Part C earns no credit.",
+   "whap_frq": {
+    "schema_version": "whap-frq-1",
+    "task_type": "saq",
+    "template": "saq3",
+    "era": 4,
+    "units": [
+     9
+    ],
+    "title": "A U.S. Tank at Checkpoint Charlie, Berlin, 1961",
+    "prompt": {
+     "scenario": "In the period c. 1945 to 1990, Berlin was a focal point of the Cold War between the United States and the Soviet Union, and in 1961 the city's division became a scene of open military confrontation.",
+     "task": "Using the image, answer (a), (b), and (c).",
+     "requirements": [
+      "Each part requires one specific, historically accurate response.",
+      "Part A must rest on what can actually be seen in the photograph.",
+      "Parts B and C must use specific developments from the years named in each part."
+     ],
+     "parts": [
+      {
+       "label": "A",
+       "prompt": "Briefly describe ONE visible feature of the photograph that shows military power being displayed at the Berlin crossing point in 1961.",
+       "points": 1
+      },
+      {
+       "label": "B",
+       "prompt": "Briefly explain ONE specific historical development in the period 1945 to 1961, not shown in the photograph, that helps explain why United States military forces faced Soviet-bloc forces in Berlin in 1961.",
+       "points": 1
+      },
+      {
+       "label": "C",
+       "prompt": "Briefly explain ONE specific historical development in the period 1962 to 1990 that changed or ended the division of Berlin and Germany.",
+       "points": 1
+      }
+     ]
+    },
+    "sources": [
+     {
+      "id": "A",
+      "kind": "image",
+      "title": "A U.S. tank at Checkpoint Charlie, Berlin",
+      "attribution": "U.S. Army photo, 1961. Wikimedia Commons (file page records the source institution and public-domain tag). Reuse: public domain (U.S. government work, 17 U.S.C. 105). unmodified except Wikimedia Commons' scaled JPEG rendering of the file (upload.wikimedia.org thumbnail, 1280 px wide at most).",
+      "context": "A U.S. Army photographer took this picture in 1961 at a crossing point between the American sector of West Berlin and East Berlin.",
+      "real_data": true,
+      "source_registry_id": "eu-img-checkpoint-charlie-1961",
+      "source_sha256": "120918d251c0c5a52bd0d740874c61f95b4b5b18e7c3e64d9ba05bdb7681678d",
+      "body": "A black-and-white photograph taken from above of a street in Berlin: a large U.S. Army tank with a white star on its turret and a blade on its front, its crew heads showing from the hatches, is parked across the foreground; beyond it, across a paved sidewalk and a lawn, several uniformed men stand near a lamp, a barrier gate and a large sign on posts, and a Volkswagen van is parked at the upper left.",
+      "image": {
+       "path": "ap-sources/eu-img-checkpoint-charlie-1961/image.jpg",
+       "alt": "A black-and-white photograph taken from above of a street in Berlin: a large U.S. Army tank with a white star on its turret and a blade on its front, its crew heads showing from the hatches, is parked across the foreground; beyond it, across a paved sidewalk and a lawn, several uniformed men stand near a lamp, a barrier gate and a large sign on posts, and a Volkswagen van is parked at the upper left.",
+       "credit": "U.S. tank at Checkpoint Charlie, Berlin, U.S. Army photo, 1961. Wikimedia Commons (public domain)."
+      },
+      "provenance": {
+       "kind": "real_historical_source",
+       "real_data": true,
+       "note": "registry eu-img-checkpoint-charlie-1961"
+      }
+     }
+    ],
+    "rubric": {
+     "rubric_id": "whap-v1",
+     "total_points": 3,
+     "rows": [
+      {
+       "row_id": "a",
+       "name": "Part A",
+       "max": 1,
+       "descriptors": {
+        "0": "The response names no visible feature, describes something that cannot be seen, or makes unsupported claims about the sign's words or about which side the people stand on.",
+        "1": "The response accurately describes one visible feature of the photograph that shows a display of military power at the crossing."
+       },
+       "task_specific": "Describes one clearly visible element of the photograph that shows military power at the crossing point, such as the U.S. Army tank with its white star and front blade, the crew in the hatches, the long gun barrel, or the uniformed men standing near the barrier gate."
+      },
+      {
+       "row_id": "b",
+       "name": "Part B",
+       "max": 1,
+       "descriptors": {
+        "0": "The response gives no development, a development outside 1945 to 1961, an inaccurate one, or only restates the photograph.",
+        "1": "The response explains how one specific, accurate development from 1945 to 1961 helps account for U.S. and Soviet-bloc forces confronting each other in Berlin in 1961."
+       },
+       "task_specific": "Explains one specific development from 1945 to 1961 that accounts for the U.S.-Soviet confrontation in Berlin, such as the four-power occupation agreed by the wartime Allies, the Berlin Blockade and Airlift of 1948-1949, the founding of two German states in 1949, the large flow of East Germans to the West through Berlin, Khrushchev's 1958 demand that the Western powers leave Berlin, or the construction of the Berlin Wall beginning in August 1961."
+      },
+      {
+       "row_id": "c",
+       "name": "Part C",
+       "max": 1,
+       "descriptors": {
+        "0": "The response gives no development, one outside 1962 to 1990, an inaccurate one, or does not connect it to the division of Berlin or Germany.",
+        "1": "The response explains how one specific, accurate development from 1962 to 1990 changed or ended the division of Berlin and Germany."
+       },
+       "task_specific": "Explains one specific development from 1962 to 1990 that changed or ended the division, such as Willy Brandt's Ostpolitik and the 1972 Basic Treaty, the 1975 Helsinki Accords, Gorbachev's reforms and his move away from using force in Eastern Europe, Hungary's opening of its border with Austria in 1989, the opening of the Berlin Wall on 9 November 1989, or German reunification on 3 October 1990."
+      }
+     ],
+     "scoring_notes": [
+      "Each part is scored on its own; a response can earn 0 to 3 points.",
+      "In part A, do not reward claims about the words on the sign or about which side of the boundary any person stands on, because the photograph does not show these clearly.",
+      "Do not reward a part B response that only says Berlin was split into sectors, since the context line already gives that information. A response that explains the four-power occupation agreement as the reason Western troops were in the city may earn the point.",
+      "A response does not need to date the photograph to a specific month; the October 1961 tank standoff at Checkpoint Charlie may be used as context but should not be claimed as the moment the picture was taken.",
+      "ALTON reference — not official AP scoring"
+     ]
+    },
+    "expected_features": {
+     "defensible_theses": [],
+     "contextualization_ideas": [
+      "The postwar occupation of Germany and the growing split between the wartime Allies.",
+      "Berlin as an island of Western control inside the Soviet zone and then inside the GDR."
+     ],
+     "outside_evidence": [
+      "Berlin Airlift 1948-1949",
+      "Berlin Wall begun 13 August 1961",
+      "Kennedy's 'Ich bin ein Berliner' speech, June 1963",
+      "Basic Treaty 1972",
+      "Helsinki Accords 1975",
+      "Fall of the Wall 9 November 1989"
+     ],
+     "reasoning_types": [
+      "Causation",
+      "Continuity and change over time"
+     ],
+     "doc_uses": [
+      {
+       "source_id": "photo",
+       "usable_for": "Evidence of armed U.S. presence and a guarded crossing point in divided Berlin in 1961.",
+       "sourcing": "A U.S. Army photograph taken from above. Because the Army made it, it may have been meant to record or show American resolve, but the credit line does not say what it was for."
+      }
+     ],
+     "saq_answers": {
+      "a": [
+       "A large U.S. Army tank marked with a white star is parked across the street at the crossing, a show of armed American strength.",
+       "Crew members can be seen in the tank's hatches, which suggests the tank was manned and ready rather than parked and empty.",
+       "The tank's long gun barrel points along the street at the crossing, showing that heavy weapons had been brought right up to the checkpoint.",
+       "Several uniformed men stand near a barrier gate beyond the tank, showing that the crossing was controlled and guarded."
+      ],
+      "b": [
+       "The Berlin Blockade of 1948-1949 and the Western airlift showed that the United States would commit itself to keeping West Berlin, which helps explain why U.S. forces were still there and ready to stand firm in 1961.",
+       "Large numbers of East Germans left for the West through Berlin in the 1950s, which led East German and Soviet leaders to seal the border with the Berlin Wall in August 1961 and raised tensions with the Western powers.",
+       "In 1958 Khrushchev demanded that the Western powers leave Berlin and that it become a free city, which began a long crisis that was still unresolved in 1961.",
+       "The creation of two rival German states in 1949, tied to NATO and later the Warsaw Pact, made Berlin the place where the two blocs touched directly."
+      ],
+      "c": [
+       "Willy Brandt's Ostpolitik, including the 1972 Basic Treaty between the two German states, eased the division by setting up formal relations and making contacts and travel easier.",
+       "Gorbachev's reforms and his choice not to use Soviet force to keep the East European regimes in power allowed the East German regime to collapse in 1989.",
+       "Hungary's opening of its border with Austria in 1989 let thousands of East Germans escape west, which added pressure leading to the opening of the Berlin Wall on 9 November 1989.",
+       "German reunification on 3 October 1990 ended the division of Germany and of Berlin."
+      ]
+     },
+     "common_pitfalls": [
+      "Claiming to read the sign or saying which side of the boundary particular figures stand on.",
+      "Saying that the photograph definitely shows the October 1961 tank standoff.",
+      "In part B, only restating that Berlin had an American sector and an eastern sector, which is already in the context line.",
+      "In part C, picking events outside 1962-1990 or events that did not affect the German division, such as only naming the Cuban Missile Crisis without linking it to Berlin.",
+      "Confusing the Berlin Blockade (1948-1949) with the building of the Wall (1961)."
+     ],
+     "facts": [
+      "After 1945 the four occupying powers (United States, Britain, France, Soviet Union) divided Berlin into sectors, though the city lay inside the Soviet zone of Germany.",
+      "The Soviet Union blockaded West Berlin's land routes in 1948-1949, and the Western powers supplied the city by airlift.",
+      "The Federal Republic of Germany and the German Democratic Republic were both founded in 1949.",
+      "Construction of the Berlin Wall began on 13 August 1961.",
+      "In October 1961, U.S. and Soviet tanks faced each other at Checkpoint Charlie.",
+      "The Berlin Wall was opened on 9 November 1989, and Germany was reunified on 3 October 1990."
+     ]
+    },
+    "samples": [
+     {
+      "tier": "high",
+      "target_total": 3,
+      "essay": "(A) The photograph shows a large U.S. Army tank with a white star on its turret parked right across the street at the crossing point, with its crew looking out of the hatches. Putting a heavy combat vehicle at a civilian checkpoint was a clear display of American military power, showing the Soviet bloc that the United States was ready to defend its rights in West Berlin.\n\n(B) One development that explains the confrontation is the large flow of East Germans escaping to the West through Berlin in the 1950s. Because so many skilled workers and young people were leaving, the East German government, with Soviet backing, began building the Berlin Wall in August 1961 to close the border. This made the crossing points tense places where American forces and Soviet-bloc forces faced each other directly, as the U.S. insisted on keeping its access to East Berlin.\n\n(C) In 1989 Gorbachev's reforms and his refusal to use Soviet force to prop up Eastern European governments weakened East Germany, and after mass protests and people fleeing through Hungary, the Berlin Wall was opened on 9 November 1989. This allowed East Berliners to cross freely into West Berlin and led directly to German reunification on 3 October 1990, which ended the division of both Berlin and Germany.",
+      "word_count": 215,
+      "rubric_scores": {
+       "a": 1,
+       "b": 1,
+       "c": 1,
+       "total": 3
+      },
+      "annotations": [
+       {
+        "quote": "a large U.S. Army tank with a white star on its turret parked right across the street",
+        "comment": "Accurately describes a clearly visible feature showing military power; makes no claims about the sign or which side people stand on. Earns the point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "the large flow of East Germans escaping to the West through Berlin in the 1950s",
+        "comment": "Gives a specific, accurate development from 1945-1961 that the rubric lists.",
+        "row_id": "b"
+       },
+       {
+        "quote": "began building the Berlin Wall in August 1961 to close the border",
+        "comment": "Explains how the emigration led to the Wall and to U.S. and Soviet-bloc forces facing each other at crossing points. Earns the point.",
+        "row_id": "b"
+       },
+       {
+        "quote": "the Berlin Wall was opened on 9 November 1989",
+        "comment": "Specific, accurate development with the correct date, tied to Gorbachev's non-intervention policy.",
+        "row_id": "c"
+       },
+       {
+        "quote": "led directly to German reunification on 3 October 1990, which ended the division of both Berlin and Germany",
+        "comment": "Clearly connects the development to the end of the division. Earns the point.",
+        "row_id": "c"
+       }
+      ]
+     },
+     {
+      "tier": "mid",
+      "target_total": 2,
+      "essay": "(A) One visible feature that shows military power is the big U.S. Army tank in the foreground. It has a white star on its turret and a blade on the front, and the crew members have their heads out of the hatches, so it looks ready to move if it has to. A tank is a weapon, so having it parked right there at the crossing point shows the U.S. was willing to use force.\n\n(B) One development from 1945 to 1961 is the Berlin Blockade and Airlift of 1948 to 1949. After World War II, Germany and Berlin were divided into occupation zones run by the United States, Britain, France and the Soviet Union, and Berlin was deep inside the Soviet zone. In 1948 Stalin cut off road and rail access to West Berlin because the Western powers were combining their zones and introducing a new currency. The United States and Britain flew in supplies for almost a year, and Stalin finally ended the blockade in 1949. This showed that the U.S. was committed to staying in West Berlin and defending it against the Soviets, which is why American forces were still there facing Soviet-bloc forces in 1961.\n\n(C) One development from 1962 to 1990 that ended the division was the fall of the Berlin Wall in 1989. Communist governments in Eastern Europe were having a lot of trouble then, and the Wall was opened in November. After that, things changed a lot in Germany and Europe, and the division did not last much longer.",
+      "word_count": 256,
+      "rubric_scores": {
+       "a": 1,
+       "b": 1,
+       "c": 0,
+       "total": 2
+      },
+      "annotations": [
+       {
+        "quote": "It has a white star on its turret and a blade on the front, and the crew members have their heads out of the hatches",
+        "comment": "Accurately describes clearly visible features of the tank (star, blade, crew in hatches) and ties them to military power. Earns the point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "A tank is a weapon, so having it parked right there at the crossing point shows the U.S. was willing to use force.",
+        "comment": "Links the visible feature to a display of military power, as the prompt requires.",
+        "row_id": "a"
+       },
+       {
+        "quote": "the Berlin Blockade and Airlift of 1948 to 1949",
+        "comment": "Names a specific, accurate development within 1945 to 1961 that is not shown in the photograph.",
+        "row_id": "b"
+       },
+       {
+        "quote": "Stalin cut off road and rail access to West Berlin because the Western powers were combining their zones and introducing a new currency",
+        "comment": "Gives accurate specific evidence about the cause of the blockade.",
+        "row_id": "b"
+       },
+       {
+        "quote": "This showed that the U.S. was committed to staying in West Berlin and defending it against the Soviets, which is why American forces were still there",
+        "comment": "Explains the link from the 1948-49 crisis to U.S. and Soviet-bloc forces confronting each other in 1961. This is the reasoning that earns the point.",
+        "row_id": "b"
+       },
+       {
+        "quote": "the fall of the Berlin Wall in 1989",
+        "comment": "Names a correct development in the period, but it is only mentioned. The response does not say what caused the opening or how it ended the division of Germany.",
+        "row_id": "c"
+       },
+       {
+        "quote": "After that, things changed a lot in Germany and Europe, and the division did not last much longer.",
+        "comment": "Vague. It does not mention reunification on 3 October 1990, Gorbachev's refusal to use force, or any other concrete consequence, so the link to ending the division is not explained. No credit.",
+        "row_id": "c"
+       }
+      ]
+     },
+     {
+      "tier": "low",
+      "target_total": 1,
+      "essay": "(A) One feature that shows military power is the big U.S. Army tank in the front of the photograph. It has a white star on its turret and a blade on the front, and the crew members are sticking their heads out of the hatches, so it looks ready for action at the crossing point.\n\n(B) One development before 1961 is that the Cold War was going on and the United States and the Soviet Union did not trust each other. Berlin was split up and both sides had soldiers there, so they ended up facing each other with tanks in 1961. This was part of the tension between the two superpowers after World War II.\n\n(C) One development was that the Cold War got better over time and the Soviet Union became weaker. Eventually there were a lot of changes in Europe and people were not as divided anymore. This helped end the tension between the two sides in the later years.",
+      "word_count": 163,
+      "rubric_scores": {
+       "a": 1,
+       "b": 0,
+       "c": 0,
+       "total": 1
+      },
+      "annotations": [
+       {
+        "quote": "One feature that shows military power is the big U.S. Army tank in the front of the photograph.",
+        "comment": "Names a clearly visible element that displays military power, which is what Part A asks for.",
+        "row_id": "a"
+       },
+       {
+        "quote": "It has a white star on its turret and a blade on the front, and the crew members are sticking their heads out of the hatches",
+        "comment": "Accurate, specific details that can really be seen in the photo (star, blade, crew in hatches). This earns the Part A point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "the Cold War was going on and the United States and the Soviet Union did not trust each other",
+        "comment": "Too general. It names no specific development from 1945 to 1961 such as the four-power occupation, the Berlin Blockade and Airlift, or Khrushchev's 1958 demand. No credit.",
+        "row_id": "b"
+       },
+       {
+        "quote": "Berlin was split up and both sides had soldiers there",
+        "comment": "This only repeats the context line and the photograph and does not explain why the forces were there. The note says it should not be rewarded.",
+        "row_id": "b"
+       },
+       {
+        "quote": "the Cold War got better over time and the Soviet Union became weaker",
+        "comment": "Vague and names no specific event. Ostpolitik, the Helsinki Accords, Gorbachev's reforms, or the opening of the Wall on 9 November 1989 would have counted.",
+        "row_id": "c"
+       },
+       {
+        "quote": "Eventually there were a lot of changes in Europe and people were not as divided anymore.",
+        "comment": "Never connects a development to the division of Berlin or Germany and gives no date or detail, so Part C earns no credit.",
+        "row_id": "c"
+       }
+      ]
+     }
+    ],
+    "provenance": {
+     "kind": "alton_authored_from_real_sources",
+     "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+    }
+   },
+   "design": {
+    "source_fixed_first": true,
+    "documents_chosen_before_prompt": true
+   },
+   "verification": {
+    "fact_checker": "claude-fable-5-1",
+    "graders": [
+     "claude-opus-5-5",
+     "claude-sonnet-5-5"
+    ],
+    "fact_flags": [],
+    "sample_totals": {
+     "high": 3,
+     "mid": 2,
+     "low": 1
+    },
+    "bands": {
+     "high": [
+      3,
+      3
+     ],
+     "mid": [
+      2,
+      2
+     ],
+     "low": [
+      1,
+      1
+     ]
+    }
+   }
+  }
+ }
+]

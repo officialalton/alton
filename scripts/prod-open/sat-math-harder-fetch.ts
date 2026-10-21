@@ -8,7 +8,9 @@ import path from "node:path";
 
 const arg = (n: string) => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : undefined; };
 const dump = JSON.parse(readFileSync(path.resolve(arg("--dump")!), "utf-8"));
-const live = new Set<string>(dump.sets.filter((s: any) => !s.archived_at && s.status !== "failed").map((s: any) => s.id));
+// 수학 상향 초안(44번이 만든 draft 30개)은 폐기 예정이라 사용 중으로 세지 않는다(--drafts-count 로 되돌림).
+const DRAFT_OFF = !process.argv.includes("--drafts-count");
+const live = new Set<string>(dump.sets.filter((s: any) => !s.archived_at && s.status !== "failed" && !(DRAFT_OFF && s.status === "draft" && /^SAT Practice Test \d+$/.test(s.name))).map((s: any) => s.id));
 const used = new Set<string>(dump.items.filter((i: any) => live.has(i.exam_set_id)).map((i: any) => i.problem_id));
 const ALL = process.argv.includes("--all");
 const ids: string[] = dump.problems.filter((p: any) => (ALL || !used.has(p.id)) && !p.archived_at && p.status === "confirmed" && p.usage_scope === "mock_exam" && p.sat_domain && !String(p.sat_domain).startsWith("rw_") && (ALL || p.difficulty !== "easy")).map((p: any) => p.id);

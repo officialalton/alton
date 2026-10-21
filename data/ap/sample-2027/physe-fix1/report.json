@@ -1,0 +1,44 @@
+{
+ "run": "physe-fix1",
+ "subject": "ap_physics_c_electricity_and_magnetism",
+ "generatedAt": "2026-10-20T22:00:23.710Z",
+ "totalCostUsd": 1.3,
+ "newSpendSinceBaseline": 1.36,
+ "cap": 3,
+ "calls": 114,
+ "candidates": 38,
+ "mcCandidates": 32,
+ "frqCandidates": 6,
+ "passedAll": 19,
+ "adopted": 11,
+ "mcAdopted": 9,
+ "frqAdopted": 2,
+ "reserve": 4,
+ "yield": 0.289,
+ "costPerAdopted": 0.118,
+ "callsPerAdopted": 10.4,
+ "duplicateRejected": 2,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 0,
+  "template": 38
+ },
+ "rejectionReasons": {
+  "criterion_failed_key_scoring": 2,
+  "criterion_failed_distractor_explanation": 11,
+  "criterion_failed_exam_suitability": 2,
+  "reference_pattern_mismatch": 2,
+  "set_item_N": 10,
+  "instant_reject_missing_condition": 1,
+  "criterion_failed_scope_skill": 1,
+  "solver_disagrees": 2,
+  "duplicate_gate_near_duplicate": 2
+ },
+ "unfilledCells": [
+  "ap_physics_c_electricity_and_magnetism-m04",
+  "ap_physics_c_electricity_and_magnetism-m05",
+  "ap_physics_c_electricity_and_magnetism-m07",
+  "ap_physics_c_electricity_and_magnetism-m09",
+  "ap_physics_c_electricity_and_magnetism-f01"
+ ]
+}

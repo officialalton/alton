@@ -1,0 +1,1282 @@
+[
+ {
+  "key": "ap_precalculus-f01-k0",
+  "cellId": "ap_precalculus-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "D(1)=13.5, D(4)=12+1.5√3≈14.598; (14.598-13.5)/3≈0.366",
+     "final_answer": "≈0.366 ft/hr; on average, the water depth increases by about 0.366 feet per hour from 1 a.m. to 4 a.m.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "sin(πt/6)=0.4 → t=6·arcsin(0.4)/π",
+     "final_answer": "t ≈ 0.786 hours",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "sin(πt/6)>0.5 → 1<t<5",
+     "final_answer": "4 hours",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "2π/(π/6)=12",
+     "final_answer": "12 hours; the depth pattern repeats every 12 hours (one full tide cycle)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope sinusoidal modeling FRQ with 6 points in 1-point rows. Keys are verified (0.366, 0.786, 4, period 12). Minor weaknesses: Part C is solvable by hand, B2 is flagged as a units row but requires no units, and Part A does not require naming the interval.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits topic 3.7 with related topics 3.4, 3.10 and 1.2. Part D is a period interpretation, which is acceptable in a mixed-skill bundle."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are unique and correct. The B2 units flag is slightly inconsistent with its required element."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The model, domain and calculator requirement are all stated. Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to free response. The rubric rows are adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is typical of an AP free response item."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four short parts on one sinusoidal model: AROC with units and interpretation, solving a sinusoidal equation for the first positive solution, an inequality solved via graph or intersection, and period interpretation. Needs calculator use and moving between equation, graph, and context. Concepts are within Unit 3 scope, the arithmetic is light, and the reading load is low. This matches typical AP exam-level difficulty.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 7,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_precalculus-f01-k1",
+  "cellId": "ap_precalculus-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "D(1)=11.5, D(4)=12.598; (1.098)/3",
+     "final_answer": "≈0.366 ft/hr; from t=1 to t=4 the depth increases on average by about 0.366 feet per hour",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "sin(πt/6)=0.4 → t=6·arcsin(0.4)/π",
+     "final_answer": "t≈0.786 hours",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "sin(πt/6)>0.5 for 1<t<5",
+     "final_answer": "4 hours",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "2π/(π/6)=12",
+     "final_answer": "12 hours; the depth completes one full cycle (high to low and back) every 12 hours",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Values verified: A 0.366, B 0.786, C 4 hours, D 12 hours. Scope fits topic 3.7 and the related topics, and the text stimulus is complete. The rubric is 6 one-point rows, which matches the format. Minor weaknesses: Part A's interpretation does not require naming the interval, and some rubric rows depend on exact phrasing. These are not disqualifying.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Sinusoidal model context with a rate of change, an equation, an inequality duration and the period; this fits the bundle."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are unique and correct. The rubric rows are consistent with the points."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The model and domain are fully stated in the text. No figure is needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. Common errors lists are empty, which is acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is moderate and typical of a free-response calculator section."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four short parts on a single sinusoidal model: average rate of change with a units interpretation, solving a sinusoidal equation, solving an inequality via graph or intersection, and period with its meaning. Each part takes 1-3 steps, and the item moves between equation, graph, and context. The reading and computation loads are light and all calculator use is standard, so this fits a full-mock free-response item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_precalculus-f01-k2",
+  "cellId": "ap_precalculus-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "D(1)=14.5 and D(4)=12+2.5√3≈16.330, so the average rate is (16.330−14.5)/3≈0.610. Between 1 a.m. and 4 a.m., the water depth rises by about 0.610 feet per hour on average.",
+     "final_answer": "≈0.610 ft/hr; from t=1 to t=4 the depth increases on average by about 0.610 feet per hour",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Set 12+5sin(πt/6)=14, so sin(πt/6)=0.4. The first positive solution is t=(6/π)·arcsin(0.4)≈0.786.",
+     "final_answer": "t≈0.786 hours",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "D>14.5 means sin(πt/6)>0.5, so π/6<πt/6<5π/6. That gives 1<t<5, which lasts 4 hours.",
+     "final_answer": "4 hours",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The period is 2π/(π/6)=12. The depth pattern repeats every 12 hours. On 0≤t≤12, the model shows exactly one full cycle.",
+     "final_answer": "12 hours; the water depth goes through one complete cycle and repeats every 12 hours",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria with no instant-reject condition. Minor weaknesses are Part B's units row, Part C's exact answer by hand and Part D's lack of calculator need.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Sinusoidal context modeling with average rate of change, solving a trig equation and period; all in Unit 3 scope. Part D is a skill 3 period question, which is acceptable because each part is judged against its own skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All four answers agree with the independent solver (0.610, 0.786, 4 hours, 12 hours). Minor: Part B's units row is set on B2 although the model answer does not require \"hours\" explicitly."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "D(t) and the domain are fully stated, and the wording is clear US English. The stimulus data object is empty, but the text carries the full specification."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Free-response item, so distractors do not apply."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Load is typical for a 6-point calculator-required free-response question. Part D does not need a calculator, and Part C has an exact answer by hand (1 < t < 5); both are minor design weaknesses."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ-style sinusoidal modeling item. A needs the average rate of change with a units interpretation (D(4)-D(1))/3. B needs a calculator or algebraic solve of 5sin(pi t/6)=2 for the first positive t. C needs the interval between two intersections where D>14.5. D needs the period 12 and its meaning. Each part is short and uses allowed levers (reading features from an equation, graph and calculator intersection, interpreting in context). The domain is stated, the arithmetic is light, and the reading load is small, so difficulty does not come from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_precalculus-f02-k0",
+  "cellId": "ap_precalculus-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "80(0.82)^3+20 = 80(0.551368)+20",
+     "final_answer": "T(3) ≈ 64.109 °C",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "T(2)=73.792, T(8)≈36.353; (36.353-73.792)/6",
+     "final_answer": "≈ -6.240 °C per minute; negative, so the tea's temperature decreases over 2≤t≤8 (on average by about 6.24 °C per minute).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "0.82^t=0.15, t=ln0.15/ln0.82",
+     "final_answer": "t ≈ 9.560 minutes",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "0.82^t→0",
+     "final_answer": "T(t)→20 °C; over a long time the tea cools toward 20 °C, which is the room (ambient) temperature.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. It is a standard 6-point, calculator-required modeling FRQ on a shifted exponential. Parts A to C test evaluation, average rate of change with its sign, and solving for time. Part D asks for the horizontal asymptote and its interpretation, phrased as \"approaches\" with no limit notation, so it stays within Precalculus. The key values match the solver's answers.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.5 with skills 1, 2 and 3 across the parts. Every part is in scope for Unit 2, and there is no calculus content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Each part has a unique answer, and the independent solver agrees with all four keys. The rubric rows are consistent: 1 point for A, 2 for B, 2 for C and 1 for D, totaling 6. The stem states t ≥ 0, and C2 depends on C1 (requires_row_id)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The model is fully specified in the stem. The wording is clear and uses US English. The empty data object is acceptable for a text stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The model answers explain each part."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The calculator load is typical, with three-decimal answers. The estimated 17 minutes is only an internal reference and is not penalized."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multipart item with routine procedures: evaluate a shifted exponential, compute an average rate of change and interpret its sign, solve an exponential equation (log or calculator intersection), and identify the horizontal asymptote in context. Each part needs only a few steps, and the calculator handles the arithmetic. This is typical full-mock content that tests fluency across several skills, not a single basic skill and not an extension beyond the course.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_precalculus-f02-k1",
+  "cellId": "ap_precalculus-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "60(0.82)^3+30",
+     "final_answer": "T(3) ≈ 63.082 °C",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "T(2)=70.344, T(8)≈42.265; (42.265-70.344)/6",
+     "final_answer": "≈ -4.680 °C per minute; negative, so the temperature decreases on [2,8], dropping about 4.68 °C per minute on average",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "0.82^t=0.2, t=ln0.2/ln0.82",
+     "final_answer": "t ≈ 8.110 minutes",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "0.82^t goes to 0",
+     "final_answer": "T approaches 30 °C; the tea cools toward the room (surrounding) temperature of 30 °C but never drops below it",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The FRQ is a clean calculator-required shifted-exponential model with four parts: evaluate, average rate of change with its sign, solve for the time, and horizontal asymptote in context. The keys are correct, the rubric rows are consistent, and the point grain of 1/2/2/1 totals 6 points. It is appropriate for the Function Concepts and Modeling a Non-Periodic Context type.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topics 2.5, 2.13 and 1.2 are in scope. The end-behavior language in D is informal, with no calculus."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All values verified: T(3)=63.082, average rate of change -4.680, t=8.110, asymptote 30. The rubric dependencies are consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The model is fully specified in the text, and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to FRQ; the rubric rows are adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for a calculator FRQ, and the calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part shifted exponential model. A is direct evaluation, B is an average rate of change from two calculator evaluations with sign interpretation, C requires isolating the exponential after subtracting the vertical shift and then solving with logarithms or a calculator intersection, and D reads the horizontal asymptote and interprets it in context. Each part is routine and in scope for topics 2.5/2.13. Computation is calculator-friendly and the reading load is low. Overall difficulty is typical of a standard exam-style item.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_precalculus-f02-k2",
+  "cellId": "ap_precalculus-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "T(5) = 80(0.9)^5 + 20 = 80(0.59049) + 20",
+     "final_answer": "T(5) ≈ 67.239 °C",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "T(2) = 84.8 and T(8) ≈ 54.437, so (54.437 − 84.8)/6 ≈ −5.061",
+     "final_answer": "About −5.061 °C per minute. The sign is negative, so the tea cools (its temperature goes down) over 2 ≤ t ≤ 8, by about 5.06 °C per minute on average.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Set 80(0.9)^t + 20 = 30, so (0.9)^t = 1/8 and t = ln(1/8)/ln(0.9)",
+     "final_answer": "t ≈ 19.736 minutes",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "(0.9)^t approaches 0 as t increases, so T(t) approaches 20",
+     "final_answer": "T(t) approaches 20 °C. The tea cools toward the room (surrounding) temperature of 20 °C but never quite reaches it.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Valid 6-point calculator FRQ on a shifted exponential model. The key values are correct (T(5)=67.239, average rate of change -5.0604, t=19.736, asymptote 20). The solver's -5.061 is a rounding slip and falls within the stated tolerance. The rubric rows are consistent, and the scope and calculator load are appropriate.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item on a shifted exponential model. It covers evaluation, average rate of change with sign interpretation, solving 80(0.9)^t+20=30 by calculator intersection or logs, and interpreting the horizontal asymptote in context. Each part needs only one or two steps, and the rounding is mild. The calculator use and contextual interpretation are typical of AP exam level, not basic recall, and not beyond the course scope.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_precalculus-f03-k0",
+  "cellId": "ap_precalculus-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Midline = (19+11)/2 = 15. Amplitude = (19-11)/2 = 4. High tide to low tide takes 6 h, which is half a period, so the period is 12 h.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Midline d = 15 ft, amplitude = 4 ft, period = 12 hours"
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "b = 2π/12 = π/6. Use a = 4 and k = 15. The cosine has its maximum at t = 3, so c = 3.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "d(t) = 4cos((π/6)(t−3)) + 15"
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "d(6) = 4cos(π/2) + 15 = 4(0) + 15 = 15.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "15 feet"
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Set d = 17: cos((π/6)(t−3)) = 1/2. So (π/6)(t−3) = ±π/3 + 2πn, which gives t−3 = ±2 + 12n. The only solutions with 0 < t < 12 are t = 1 and t = 5.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "t = 1 and t = 5 hours"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The tide model is correct and unique: midline 15, amplitude 4, period 12, d(t)=4cos(π/6(t-3))+15, d(6)=15, and the depth is 17 ft at t=1 and t=5. All answers are exact, and the item fits the no-calculator sinusoidal modeling format with an acceptable 2/2/1/1 point split.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys verified, and the solver agrees. The Part B rubric allows equivalent forms. The unit check in C1 is flagged as a units row but not listed in the required elements, which is minor."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard sinusoidal context modeling. Students read max/min and the half-period to get midline 15, amplitude 4 and period 12, then build a cosine model using the high tide as the phase shift. Evaluating at t=6 and solving cos=1/2 on a bounded interval use special angles with simple arithmetic. Several short steps across four parts, but each concept is routine, the wording is unambiguous and the reading load is light.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_precalculus-f03-k1",
+  "cellId": "ap_precalculus-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Midline (16+8)/2=12, amplitude (16-8)/2=4, half period is 6 so period is 12.",
+     "final_answer": "Midline d=12 ft; amplitude 4 ft; period 12 hours",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Cosine peaks at t=5, so c=5. b=2π/12=π/6.",
+     "final_answer": "d(t)=4cos((π/6)(t-5))+12",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "d(8)=4cos(π/2)+12=0+12=12.",
+     "final_answer": "12 feet",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "cos((π/6)(t-5))=1/2, so (π/6)(t-5)=±π/3, which gives t-5=±2. The other solutions (15, -9) are outside 0<t<12.",
+     "final_answer": "t=3 and t=7 hours",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, exact-answer, no-calculator sinusoidal tide model. The key is unique, the rubric rows are consistent and the load is typical for an AP FRQ. The parts are procedural and within Unit 3 scope.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part sinusoidal modeling item: extract midline, amplitude, and period from context; build a cosine model; evaluate at a special angle; solve a trig equation using unit-circle values and check solutions on the interval. Concepts are standard for the unit, the arithmetic is light, and the wording is clear and unambiguous. Appropriate for full mock exams.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_precalculus-f03-k2",
+  "cellId": "ap_precalculus-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Midline = (21+9)/2 = 15. Amplitude = (21-9)/2 = 6. High to low takes 6 h, which is half a period, so the period is 12 h.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Midline y = 15 ft; amplitude 6 ft; period 12 hours"
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "a = 6, b = 2π/12 = π/6, k = 15. Cosine peaks at its shift, so c = 3 (high tide).",
+     "ambiguous_or_flawed": false,
+     "final_answer": "d(t) = 6cos((π/6)(t − 3)) + 15"
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "d(6) = 6cos(π/2) + 15 = 6·0 + 15 = 15.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "15 feet"
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Set d = 18, so cos((π/6)(t − 3)) = 1/2. Then (π/6)(t − 3) = ±π/3 + 2πn, so t − 3 = ±2 + 12n. In 0 < t < 12 this gives t = 1 and t = 5.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "t = 1 hour and t = 5 hours"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, self-contained sinusoidal tide model with exact answers and a 6-point structure of 1-point rubric rows. It is suitable for a no-calculator periodic-context free-response item. The only weakness is the loosely worded alternative-solution rubric text in part B.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.7 with 3.5, 3.6 and 3.10 elements, procedural fluency, all in Unit 3 scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The unique answers were verified: midline 15, amplitude 6, period 12, d(6)=15, t=1 and t=5. The alternative-solution wording in B2 is loose but acceptable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and clearly worded."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Free-response item with no options; the model answers show the work."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Exact values and light load, consistent with the no-calculator designation."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part sinusoidal modeling FRQ. Requires extracting midline, amplitude and period from high/low tide data (period = 2 x 6 = 12), building a cosine model with a phase shift at the maximum (t=3), evaluating at a special angle, and solving a trig equation (cos = 1/2) for two solutions in a given interval. All numbers are clean and involve only special angles. Difficulty comes from legitimate concept depth and multiple steps, not from heavy arithmetic or reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 360
+  }
+ },
+ {
+  "key": "ap_precalculus-f04-k0",
+  "cellId": "ap_precalculus-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Released from 10 cm below rest; oscillates about rest position.",
+     "final_answer": "Amplitude 10 cm; midline d = 0",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Max at t=0, b=2π/24.",
+     "final_answer": "d(t)=10cos(πt/12)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "10cos(π/4)",
+     "final_answer": "5√2 cm (below rest)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "cos(πt/12)=1/2 gives πt/12=π/3",
+     "final_answer": "t = 4 seconds",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, unambiguous spring-cosine FRQ. In scope, hand-computable exact answers, consistent rubric rows. The part skill labels and the generic rubric element in D are minor issues.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Each part is a single direct procedure: read amplitude and midline from context, b = 2π/period, evaluate cos(π/4), and solve cos(x) = 1/2 for the first positive solution. The arithmetic is exact and light, and the context is clear. Depth is shallow, with little multi-step reasoning or representation switching.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_precalculus-f04-k1",
+  "cellId": "ap_precalculus-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Released from rest at 4 cm, so the maximum displacement is 4 cm. It oscillates about the rest position.",
+     "final_answer": "Amplitude 4 cm; midline d = 0",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "a = 4 because d(0) = 4 is a maximum. b = 2π/24 = π/12.",
+     "final_answer": "d(t) = 4cos(πt/12)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "d(3) = 4cos(π/4) = 4(√2/2) = 2√2.",
+     "final_answer": "2√2 cm (below rest position)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Set 4cos(πt/12) = 2, so cos(πt/12) = 1/2. The first positive solution is πt/12 = π/3, so t = 4.",
+     "final_answer": "t = 4 seconds",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is mathematically correct and consistent, with unique answers in all four parts, exact values and no calculator needed. One minor weakness: the part A rubric elements \"4\" and \"0\" do not tie each value to amplitude or midline, so a swapped answer could earn credit. This does not affect the key.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys verified: amplitude 4, midline 0, d(t)=4cos(2πt/24), d(3)=2√2, first t=4. Part A's rubric does not distinguish which value is the amplitude and which the midline."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Routine sinusoidal modeling. Amplitude and midline come straight from the context. The period gives b = 2π/24 = π/12, and evaluation uses a special angle (π/4). Solving 4cos(πt/12) = 2 needs a single unit-circle step to get t = 4. The wording is clear and the arithmetic is light. This is mostly one-step procedural work, a good fit for basic learning rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_precalculus-f04-k2",
+  "cellId": "ap_precalculus-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Released from rest 8 cm below the rest position, so 8 cm is the greatest displacement. The rest position is d=0.",
+     "final_answer": "Amplitude 8 cm; midline d = 0",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "a=8 because d(0)=8 is the maximum. b=2π/24=π/12.",
+     "final_answer": "d(t) = 8cos(πt/12)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "d(3)=8cos(π/4)=8(√2/2).",
+     "final_answer": "4√2 cm (below the rest position)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Set 8cos(πt/12)=4, so cos(πt/12)=1/2. The first positive solution is πt/12=π/3, giving t=4.",
+     "final_answer": "t = 4 seconds",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The spring-cosine FRQ is mathematically correct and uses exact values suited to a no-calculator part. All parts fit topic 3.7 and symbolic fluency. Minor rubric wording issues: D1 uses a generic P instead of 24, and the units requirement in C1 is not in its required elements. These do not change the key.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All parts are within topic 3.7 (with 3.5 and 3.6 equations) and use exact-angle symbolic work. There is no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "d(0)=8 gives a cosine with amplitude 8 and midline 0. b=π/12, d(3)=4√2, and the first time d=4 is t=4. All keys are unique and correct. Minor rubric wording issues only."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem fully specifies the starting displacement, direction convention, and period. The data object is empty, but a text stimulus does not need data."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no options, so distractors do not apply."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light, the arithmetic is exact, and the no-calculator designation is consistent. The 6-point split is acceptable."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard cosine modeling with a max at t=0. Parts: read amplitude/midline, compute b=2π/24=π/12, evaluate 8cos(π/4)=4√2, solve cos(πt/12)=1/2 for the first positive t=4. Each step uses special angles and a single technique, with minimal arithmetic and short reading. Procedural fluency, no multi-layer reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_precalculus-f05-k0",
+  "cellId": "ap_precalculus-f05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Amplitude = (13-9)/2 = 2. Midline is d = (13+9)/2 = 11.",
+     "final_answer": "Amplitude 2 hours; midline d = 11",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "b = 2π/12 = π/6. The maximum at t=5 needs (π/6)(5-c) = π/2, so c = 2. The next smaller value, 2-12, is negative, so c = 2 is the smallest nonnegative choice.",
+     "final_answer": "d(t) = 2 sin(π/6 (t-2)) + 11",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "d(3) = 2 sin(π/6) + 11 = 2(1/2) + 11 = 12.",
+     "final_answer": "12 hours",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Set d = 12, so sin(π/6 (t-2)) = 1/2. Then (π/6)(t-2) = π/6 or 5π/6 (plus multiples of 2π), giving t = 3 or t = 7. Other solutions fall outside 0 ≤ t < 12.",
+     "final_answer": "t = 3 and t = 7",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. The sinusoidal daylight model is fully specified, and each part has a unique exact answer: amplitude 2, midline 11, c = 2, d(3) = 12, and t = 3 and 7. The rubric rows are 1-point rows totaling 6 points, as expected for a no-calculator periodic-modeling free response. The work is exact and handled by hand, with no calculus content.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Sinusoidal context modeling with exact values and a trigonometric equation, all within Unit 3 and the allowed related topics."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is unique. With c required to be the smallest nonnegative value, c = 2 is the only choice (2 - 12 is negative). The solutions t = 3 and 7 are the only ones in [0, 12)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus states the maximum, minimum, time of the maximum and period, which is complete. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The rubric rows are consistent with the model answers."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of a no-calculator periodic-modeling free response, with exact arithmetic and a reasonable reading load."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part standard sinusoidal modeling: amplitude/midline from max/min, phase shift found by moving a quarter period back from the max (c=2), evaluating at a special angle, and solving sin=1/2 for two solutions in one period. Clean numbers, no calculator needed, short reading. Appropriate for a full mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_precalculus-f05-k1",
+  "cellId": "ap_precalculus-f05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Amplitude (15-7)/2, midline (15+7)/2",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Amplitude 4 hours; midline d = 11"
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "b=2π/12; max at t=5 gives (π/6)(5-c)=π/2, c=2",
+     "ambiguous_or_flawed": false,
+     "final_answer": "d(t)=4 sin((π/6)(t-2)) + 11"
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "4 sin(π/6)+11 = 13",
+     "ambiguous_or_flawed": false,
+     "final_answer": "13 hours"
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "sin((π/6)(t-2))=1/2 → angle π/6 or 5π/6 within [-π/3,5π/3)",
+     "ambiguous_or_flawed": false,
+     "final_answer": "t = 3 and t = 7"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a correct, exact-answer, non-calculator sinusoidal daylight model. Its keys check out by hand and the rubric rows are consistent. Parts A through D fit topics 3.7, 3.5 and 3.6. No distractors apply because this is a free-response bundle.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part sinusoidal modeling item. It covers amplitude and midline from extrema, building the equation with period and phase shift from the max location, evaluating at a special angle, and solving a sine equation on a restricted interval for two solutions. All arithmetic is simple and uses unit circle values. The wording is clear and the concepts are in scope. The main challenges are the phase shift from the max and checking both solutions in the interval, which fits a typical full-mock free-response item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 400
+  }
+ },
+ {
+  "key": "ap_precalculus-f05-k2",
+  "cellId": "ap_precalculus-f05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "(15-11)/2=2, (15+11)/2=13",
+     "final_answer": "Amplitude 2 hours; midline d=13",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "b=2π/12=π/6; max at t=6 requires (π/6)(6-c)=π/2 so c=3",
+     "final_answer": "d(t)=2 sin((π/6)(t-3))+13",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "2 sin(π/6)+13=14",
+     "final_answer": "14 hours",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "sin((π/6)(t-3))=1/2 → t-3=1 or 5",
+     "final_answer": "t=4 and t=8",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The mathematics is correct and unique: amplitude 2, midline 13, c = 3, d(4) = 14, solutions t = 4 and 8. I am failing it on the stimulus and rubric expression. Row D1 uses a symbolic c in its required element. Row C1 is flagged as a units row but lists no unit. The stem also says the calculator is not allowed inside the stimulus text, and the data object is empty.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.7 sinusoidal modeling, with exact-angle evaluation and equation solving. All of it is in Unit 3 scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are verified and unique. The smallest nonnegative c is 3."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The data object is empty and the stimulus is text only, which is acceptable for this item. The rubric weaknesses are D1's symbolic \"c\" in the required element and the units row C1 with no unit element."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Free-response item. No distractors apply, and common_errors lists are empty."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is light and the arithmetic is exact. The 6-point total with rows of 1 point each is fine."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part sinusoidal modeling: amplitude/midline from extrema, period to b, phase shift via quarter-period reasoning, evaluate at a point, then solve a sine equation for two solutions in one period. Requires several standard steps and a representation shift from context to equation, but arithmetic is simple and wording is clear, which suits a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 9,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_precalculus-f06-k0",
+  "cellId": "ap_precalculus-f06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Amplitude = max - midline = 0.8; min = 98.6-0.8",
+     "final_answer": "Amplitude 0.8°F; lowest 97.8°F",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "b=2π/24, max at 16",
+     "final_answer": "T(t)=0.8cos((π/12)(t−16))+98.6",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "cos(π/2)=0",
+     "final_answer": "98.6°F",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "cos=1/2 → t−16=±4",
+     "final_answer": "t=12 hours (noon) and t=20 hours (8 PM)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The sinusoidal body-temperature FRQ is mathematically correct: amplitude 0.8, lowest temperature 97.8, T(t)=0.8cos(π/12(t−16))+98.6, T(22)=98.6, and the 99°F times are t=12 and t=20. The rubric rows are 1-point rows, no calculator is needed, and the content stays within Unit 3. Minor wording looseness in B2 and D1 (the placeholder c in the D1 element) is acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The parts cover amplitude, midline, writing the model, evaluating it, and solving a trigonometric equation, all within 3.7, 3.5 and 3.6."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All values were checked and are unique and correct. The rubric allows equivalent shifts for part B."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete: maximum, time of maximum, period and midline are all given. Part B names the required form."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item with no options, so distractors do not apply."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is moderate, the arithmetic is exact, and the no-calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part sinusoidal modeling item with clean arithmetic. It requires finding the amplitude and minimum, building a cosine model with a phase shift from the max location, evaluating at a special angle (pi/2), and solving cos(theta)=1/2 for two solutions in one period. Each step is standard in scope and uses exact unit-circle values with no calculator. Difficulty comes from sequencing several routine skills, which fits a full-mock exam item rather than a single-concept basic item. Nothing is hard because of unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_precalculus-f06-k1",
+  "cellId": "ap_precalculus-f06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Amplitude = 98.8 - 98 = 0.8. Lowest = 98 - 0.8.",
+     "final_answer": "Amplitude 0.8°F; lowest temperature 97.2°F",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "a = 0.8, b = 2π/24 = π/12, maximum at t = 18 so c = 18, d = 98.",
+     "final_answer": "T(t) = 0.8cos((π/12)(t − 18)) + 98",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "T(24) = 0.8cos(π/2) + 98 = 0 + 98.",
+     "final_answer": "98°F",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Set cos((π/12)(t − 18)) = 0.5, so (π/12)(t − 18) = ±π/3, which gives t − 18 = ±4.",
+     "final_answer": "t = 14 hours and t = 22 hours (2 PM and 10 PM)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The answers are correct and unique: amplitude 0.8 and minimum 97.2, T(t) = 0.8cos(π/12 (t−18)) + 98, T(24) = 98, and t = 14 and 22. All values are exact and hand-computable. The scope fits 3.7 with 3.5 and 3.6, and the rubric rows are consistent, with valid alternatives noted for part B. Minor weaknesses: common_errors are empty, and the 'no calculator' sentence in the stimulus is redundant.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part sinusoidal modeling item. Requires amplitude and min from max and midline, building a cosine model with b=2π/24 and a phase shift to the max at t=18, evaluating at a quarter period, and solving a trig equation with cosθ=1/2 using the unit circle and period. All arithmetic is simple and the angles are standard. Typical AP-style free-response difficulty with no unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_precalculus-f06-k2",
+  "cellId": "ap_precalculus-f06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Amplitude = max − midline = 99.8 − 98.6 = 1.2. Minimum = midline − amplitude = 98.6 − 1.2 = 97.4°F.",
+     "final_answer": "Amplitude 1.2°F; lowest temperature 97.4°F",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "a = 1.2. b = 2π/24 = π/12. The maximum is at t = 16, so with cosine c = 16. Midline gives d = 98.6.",
+     "final_answer": "T(t) = 1.2cos((π/12)(t − 16)) + 98.6",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "(π/12)(22 − 16) = π/2 and cos(π/2) = 0, so T = 98.6.",
+     "final_answer": "98.6°F",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Set 1.2cos(...) = 0.6, so cos = 1/2 and the argument is ±π/3. Then t − 16 = ±4, giving t = 12 and t = 20, both in [0, 24].",
+     "final_answer": "t = 12 hours (noon) and t = 20 hours (8 PM)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean non-calculator sinusoidal modeling FRQ with 6 points in 1-point rubric rows. All answers are exact and unique. Minor rubric looseness: the generic \"c\" in the D1 element and the combined values in A1. Neither is a defect that affects scoring.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Sinusoidal context modeling plus exact trig equation solving, all within Unit 3 and doable by hand."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are unique. In part D the other solutions fall outside [0, 24], and the B alternative shift of -8 is valid."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete: maximum, time of maximum, period, and midline. The empty data object is fine for a text-only stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The workload is reasonable and no calculator is needed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part sinusoidal modeling item: amplitude/min from context, building a cosine model from max location, period, and midline, evaluating at a special angle, and solving a trig equation with special-angle values over one period. Requires several routine steps and a context-to-equation representation change, but arithmetic is simple and reading is short. This matches typical full-mock free-response difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ }
+]

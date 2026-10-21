@@ -1,0 +1,293 @@
+{
+ "run": "euro-f1",
+ "generatedAt": "2026-10-20",
+ "passed": [
+  "euro-f1:ap_european_history-eu1_saq3-k0",
+  "euro-f1:ap_european_history-eu1_leq-k0"
+ ],
+ "rejected": [
+  {
+   "__rejected": true,
+   "specId": "eu1_saq1",
+   "reason": "sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate; fact_contested"
+  },
+  {
+   "__rejected": true,
+   "specId": "eu1_saq2",
+   "reason": "sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate; fact_inaccurate"
+  },
+  {
+   "__rejected": true,
+   "specId": "eu1_dbq",
+   "reason": "sources_differ_from_registry; sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate; fact_inaccurate"
+  }
+ ],
+ "audit": [
+  {
+   "id": "eu1_saq1",
+   "tier": "high",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "eu1_saq1",
+   "tier": "mid",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "eu1_saq1",
+   "tier": "low",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "eu1_saq2",
+   "tier": "high",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "eu1_saq2",
+   "tier": "mid",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "eu1_saq2",
+   "tier": "low",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "eu1_saq3",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "anachronism:In 1498 the eastern Mediterranean/Red Sea spice route ran through the Mamluk Sultanate (Egypt and Syria), not the Ottoma"
+     ]
+    },
+    {
+     "k": 1,
+     "total": 3,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "contested:Minor: whether Luther physically posted/nailed the Theses to the Wittenberg church door is debated among historians (the"
+     ]
+    },
+    {
+     "k": 2,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 3,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 4,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 5,
+     "total": 3,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:Overstated. The Church executed Hus at Constance in 1415, but it did not stop his movement: the Hussite Wars (1419–c.143",
+      "inaccurate:Conflates the Theses with later pamphlets. The Ninety-Five Theses were written and first printed in Latin (Nuremberg, Le"
+     ]
+    }
+   ],
+   "chosen": 2
+  },
+  {
+   "id": "eu1_saq3",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "eu1_saq3",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "eu1_dbq",
+   "tier": "high",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "eu1_dbq",
+   "tier": "mid",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "eu1_dbq",
+   "tier": "low",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "eu1_leq",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 6,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "eu1_leq",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 5,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "eu1_leq",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 0,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 1,
+     "total": 3,
+     "spread": 1,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The sequence implies the king was overthrown in 1789 and then the Declaration was written. In fact the Declaration of th"
+     ]
+    },
+    {
+     "k": 2,
+     "total": 4,
+     "spread": 1,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 3,
+     "total": 4,
+     "spread": 1,
+     "flagged": true,
+     "flags": [
+      "contested:This presents the famous 'L'état, c'est moi' as something Louis XIV actually said. The attribution is apocryphal; there "
+     ]
+    },
+    {
+     "k": 4,
+     "total": 3,
+     "spread": 1,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The sentence ties the overthrow of the king to 1789. In 1789 the Revolution began (Estates-General, Bastille, Declaratio"
+     ]
+    },
+    {
+     "k": 5,
+     "total": 4,
+     "spread": 1,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 6,
+     "total": 5,
+     "spread": 1,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 7,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 8,
+     "total": 3,
+     "spread": 1,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 9,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 10,
+     "total": 4,
+     "spread": 1,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 11,
+     "total": 5,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "anachronism:John Locke's major political writings (Two Treatises of Government, 1689; Letter Concerning Toleration, 1689) were publi",
+      "inaccurate:The passage implies the monarchy was overthrown in 1789. In 1789 the Estates-General became the National Assembly and is"
+     ]
+    }
+   ],
+   "chosen": 7
+  }
+ ]
+}

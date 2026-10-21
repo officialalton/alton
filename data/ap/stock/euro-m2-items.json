@@ -1,0 +1,277 @@
+[
+ {
+  "cellId": "ap_european_history-e213",
+  "apSubjectCode": "ap_european_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_european_history-e213-k0",
+  "keywordCode": "7.3",
+  "unitCode": "7",
+  "skillPrimary": "3.C",
+  "structure": "shared_stimulus_set",
+  "archetype": "euro_e213",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   }
+  ],
+  "gateOverride": "euro-m2-2026-10-20",
+  "run": "euro-m2",
+  "stockKey": "euro-m2:ap_european_history-e213-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "euro-m2-2026-10-20",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_european_history",
+  "itemFamilyId": "fam:euro-m2:ap_european_history-e213-k0",
+  "canonicalKey": "euro-m2:ap_european_history-e213-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_european_history:7.3",
+  "sharedWith": [],
+  "stockCell": "ap_european_history|7.3|3.C|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "euro-m2",
+    "gateVersion": "euro-m2-2026-10-20",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "eu-txt-dualalliance-1879",
+   "eu-txt-entente-1904"
+  ],
+  "exam": "EU2",
+  "payload": {
+   "archetype": "euro_e213",
+   "topic": "7.3",
+   "skill": "3.C",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\nSource A (primary source)\nThe Dual Alliance between Austria-Hungary and Germany, articles 1-2 (excerpt)\nThe governments of Germany and Austria-Hungary (treaty of 7 October 1879), 1879 (October 7). Avalon Project, Yale Law School (transcription). Reuse: public domain (published before 1929). excerpted (2 segments joined by [...]); whitespace normalized; no wording changed.\nContext: Germany and Austria-Hungary signed this treaty on October 7, 1879, and kept its text secret at the time.\n\n\"ARTICLE 1 . Should, contrary to their hope, and against the loyal desire of the two High Contracting Parties, one of the two Empires be attacked by Russia the High Contracting Parties are bound to come to the assistance one of the other with the whole war strength of their Empires, and accordingly only to conclude peace together and upon mutual agreement. [...] ARTICLE 2. Should one of the High Contracting Parties be attacked by another Power, the other High Contracting Party binds itself hereby, not only not to support the aggressor against its high Ally, but to observe at least a benevolent neutral attitude towards its fellow Contracting Party. Should, however, the attacking party in such a case be supported by Russia, either by an active cooperation or by military measures which constitute a menace to the Party attacked, then the obligation stipulated in Article 1 of this Treaty, for reciprocal assistance with the whole fighting force, becomes equally operative, and the conduct of the war by the two High Contracting Parties shall in this case also be in common until the conclusion of a common peace.\"\n\n———\n\nSource B (primary source)\nThe Entente Cordiale between England and France, public articles 1-2 (excerpt)\nThe governments of the United Kingdom and France (declaration of 8 April 1904, published in Parliamentary Papers), 1904 (April 8). Avalon Project, Yale Law School (transcription). Reuse: public domain (published before 1929). excerpted (2 segments joined by [...]); whitespace normalized; no wording changed.\nContext: Britain and France signed this declaration on April 8, 1904, and published it; secret articles signed the same day were not made public.\n\n\"His Britannic Majesty's Government declare that they have no intention of altering the political status of Egypt. The Government of the French Republic, for their part, declare that they will not obstruct the action of Great Britain in that country. [...] The Government of the French Republic declare that they have no intention of altering the political status of Morocco. His Britannic Majesty's Government, for their part, recognise that it appertains to France, more particularly as a Power whose dominions are conterminous for a great distance with those of Morocco, to preserve order in that country, and to provide assistance for the purpose of all administrative, economic, financial , and military reforms which it may require.\"",
+   "euro_set": {
+    "unit": 7,
+    "stim_type": "paired_text",
+    "theme": "The Dual Alliance of 1879 and the Entente Cordiale of 1904",
+    "title": "The Dual Alliance of 1879 and the Entente Cordiale of 1904",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "primary_text",
+      "title": "The Dual Alliance between Austria-Hungary and Germany, articles 1-2 (excerpt)",
+      "attribution": "The governments of Germany and Austria-Hungary (treaty of 7 October 1879), 1879 (October 7). Avalon Project, Yale Law School (transcription). Reuse: public domain (published before 1929). excerpted (2 segments joined by [...]); whitespace normalized; no wording changed.",
+      "context": "Germany and Austria-Hungary signed this treaty on October 7, 1879, and kept its text secret at the time.",
+      "real_data": true,
+      "source_registry_id": "eu-txt-dualalliance-1879",
+      "source_sha256": "03dff656aabbb9e8faeb42caac24736f5735c2704da1c26db702b7e534caf86b"
+     },
+     {
+      "id": "B",
+      "kind": "primary_text",
+      "title": "The Entente Cordiale between England and France, public articles 1-2 (excerpt)",
+      "attribution": "The governments of the United Kingdom and France (declaration of 8 April 1904, published in Parliamentary Papers), 1904 (April 8). Avalon Project, Yale Law School (transcription). Reuse: public domain (published before 1929). excerpted (2 segments joined by [...]); whitespace normalized; no wording changed.",
+      "context": "Britain and France signed this declaration on April 8, 1904, and published it; secret articles signed the same day were not made public.",
+      "real_data": true,
+      "source_registry_id": "eu-txt-entente-1904",
+      "source_sha256": "a9a576473f9c2179b153203ae632f3381fd8b92c528731fd22725b543bf1245e"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "euro_e213_3C",
+     "topic": "7.3",
+     "skill": "3.C",
+     "stem": "Which of the following best describes a difference between the main purposes of Source A and Source B?",
+     "options": [
+      {
+       "text": "Both sources create binding military alliances that require the signers to go to war together against any power that attacks either one of them.",
+       "why": "Only Source A requires joint war, and even it limits that duty to Russia or Russian-backed attacks. Source B contains no military obligation.",
+       "value": null,
+       "label": "overstated"
+      },
+      {
+       "text": "Source A pledges joint military action against a named rival, while Source B settles competing colonial claims in North Africa.",
+       "why": "Source A binds both empires to fight Russia with their whole war strength, while Source B's public articles trade British freedom of action in Egypt for French freedom of action in Morocco and contain no military pledge.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Source A aims to revise borders drawn at the Congress of Vienna, while Source B aims to end British rule and restore Ottoman authority in Egypt.",
+       "why": "Neither text supports this. Source A is defensive and says nothing about the Vienna borders, and in Source B Britain declares it will not change Egypt's status, which leaves its own position there intact.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "Source A divides overseas spheres of influence between two empires, while Source B pledges full military aid if either signer is attacked by Germany.",
+       "why": "This swaps the two documents. Source A is the military pact, and Source B's public text divides spheres of influence and does not mention Germany.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"Source A pledges joint military action against a named rival, while Source B settles competing colonial claims in North Africa.\". Source A binds both empires to fight Russia with their whole war strength, while Source B's public articles trade British freedom of action in Egypt for French freedom of action in Morocco and contain no military pledge.\n\"Both sources create binding military alliances that require the signers to go to war together against any power that attacks either one of them.\" is incorrect: Only Source A requires joint war, and even it limits that duty to Russia or Russian-backed attacks. Source B contains no military obligation.\n\"Source A aims to revise borders drawn at the Congress of Vienna, while Source B aims to end British rule and restore Ottoman authority in Egypt.\" is incorrect: Neither text supports this. Source A is defensive and says nothing about the Vienna borders, and in Source B Britain declares it will not change Egypt's status, which leaves its own position there intact.\n\"Source A divides overseas spheres of influence between two empires, while Source B pledges full military aid if either signer is attacked by Germany.\" is incorrect: This swaps the two documents. Source A is the military pact, and Source B's public text divides spheres of influence and does not mention Germany.",
+     "est_seconds": 60,
+     "facts": [
+      "The Dual Alliance of 1879 was a defensive military alliance between Germany and Austria-Hungary aimed at Russia.",
+      "The Entente Cordiale of 1904 settled colonial disputes between Britain and France, chiefly over Egypt and Morocco."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.C",
+      "key_evidence_in_source": "Source A's Article 1 commits both empires to war against Russia; Source B's public articles deal only with the status of Egypt and Morocco.",
+      "evidence_quote": "bound to come to the assistance one of the other with the whole war strength of their Empires"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 1
+     }
+    },
+    {
+     "archetype": "euro_e213_4A",
+     "topic": "7.3",
+     "skill": "4.A",
+     "stem": "Which of the following contexts most directly shaped the focus on Russia in Source A?",
+     "options": [
+      {
+       "text": "Russian resentment after the Congress of Berlin in 1878 cut back Russian gains in the Balkans",
+       "why": "The Congress of Berlin revised the Treaty of San Stefano and reduced Russia's gains from its war with the Ottomans. Russia blamed Germany and Austria-Hungary, so Bismarck turned to an alliance with Vienna aimed at Russia.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Anglo-French victory over Russia in the Crimean War of 1853 to 1856, which left Russia eager to revise the peace terms",
+       "why": "The Crimean War came more than two decades before 1879. The more recent Balkan crisis of 1877-1878 and the Congress of Berlin shaped the treaty's focus on Russia.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "Fear in Vienna and Berlin of liberal and nationalist uprisings like those that spread across central Europe in 1848",
+       "why": "The revolutions of 1848 came three decades earlier, and the treaty deals with an attack by a foreign power, not with internal revolt.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "Russian weakness after its defeat by Japan in 1905, which encouraged the Central Powers to plan an attack eastward",
+       "why": "The Russo-Japanese War ended in 1905, twenty-six years after this treaty, and the treaty is defensive, not a plan for attack.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"Russian resentment after the Congress of Berlin in 1878 cut back Russian gains in the Balkans\". The Congress of Berlin revised the Treaty of San Stefano and reduced Russia's gains from its war with the Ottomans. Russia blamed Germany and Austria-Hungary, so Bismarck turned to an alliance with Vienna aimed at Russia.\n\"Anglo-French victory over Russia in the Crimean War of 1853 to 1856, which left Russia eager to revise the peace terms\" is incorrect: The Crimean War came more than two decades before 1879. The more recent Balkan crisis of 1877-1878 and the Congress of Berlin shaped the treaty's focus on Russia.\n\"Fear in Vienna and Berlin of liberal and nationalist uprisings like those that spread across central Europe in 1848\" is incorrect: The revolutions of 1848 came three decades earlier, and the treaty deals with an attack by a foreign power, not with internal revolt.\n\"Russian weakness after its defeat by Japan in 1905, which encouraged the Central Powers to plan an attack eastward\" is incorrect: The Russo-Japanese War ended in 1905, twenty-six years after this treaty, and the treaty is defensive, not a plan for attack.",
+     "est_seconds": 50,
+     "facts": [
+      "The Congress of Berlin (1878) revised the Treaty of San Stefano and reduced Russian gains in the Balkans.",
+      "Russian anger at Germany and Austria-Hungary after 1878 helped lead to the Dual Alliance of 1879."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.A",
+      "key_evidence_in_source": "Source A names Russia as the expected attacker in both articles, which points to the Russian grievances following the 1878 Congress of Berlin.",
+      "evidence_quote": "one of the two Empires be attacked by Russia"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "likely"
+       }
+      ],
+      "panel_choice": 0
+     }
+    },
+    {
+     "archetype": "euro_e213_5B",
+     "topic": "7.9",
+     "skill": "5.B",
+     "stem": "Germany's reaction to the British recognition of French interests in Morocco in Source B most directly contributed to which development?",
+     "options": [
+      {
+       "text": "The South African War, in which Britain fought the Boer republics of the Transvaal and Orange Free State",
+       "why": "The South African War (1899-1902) ended before the 1904 agreement and was not caused by German policy toward Morocco.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The First Moroccan Crisis, settled at the Algeciras Conference of 1906",
+       "why": "In 1905 Germany challenged the French position in Morocco, starting with Wilhelm II's visit to Tangier. At the Algeciras Conference of 1906 Britain backed France, and the entente grew stronger instead of breaking apart.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The Bosnian Crisis, in which Austria-Hungary annexed Bosnia-Herzegovina over strong objections from Serbia and Russia",
+       "why": "The Bosnian Crisis of 1908 was a Balkan dispute among Austria-Hungary, Serbia and Russia and had nothing to do with Morocco.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "The Fashoda Crisis, in which British and French forces confronted each other on the upper Nile in Sudan",
+       "why": "The Fashoda Crisis happened in 1898, before the 1904 agreement. It was part of the rivalry the Entente later settled, not a German reaction to it.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"The First Moroccan Crisis, settled at the Algeciras Conference of 1906\". In 1905 Germany challenged the French position in Morocco, starting with Wilhelm II's visit to Tangier. At the Algeciras Conference of 1906 Britain backed France, and the entente grew stronger instead of breaking apart.\n\"The South African War, in which Britain fought the Boer republics of the Transvaal and Orange Free State\" is incorrect: The South African War (1899-1902) ended before the 1904 agreement and was not caused by German policy toward Morocco.\n\"The Bosnian Crisis, in which Austria-Hungary annexed Bosnia-Herzegovina over strong objections from Serbia and Russia\" is incorrect: The Bosnian Crisis of 1908 was a Balkan dispute among Austria-Hungary, Serbia and Russia and had nothing to do with Morocco.\n\"The Fashoda Crisis, in which British and French forces confronted each other on the upper Nile in Sudan\" is incorrect: The Fashoda Crisis happened in 1898, before the 1904 agreement. It was part of the rivalry the Entente later settled, not a German reaction to it.",
+     "est_seconds": 50,
+     "facts": [
+      "Wilhelm II's visit to Tangier in 1905 set off the First Moroccan Crisis.",
+      "The Algeciras Conference of 1906 largely upheld France's position in Morocco, with British support."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "5.B",
+      "key_evidence_in_source": "Source B's article on Morocco recognizes France's right to act there, the arrangement Germany challenged in 1905.",
+      "evidence_quote": "to provide assistance for the purpose of all administrative, economic, financial , and military reforms which it may require"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 1
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ }
+]

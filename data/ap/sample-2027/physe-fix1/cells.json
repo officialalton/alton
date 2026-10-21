@@ -1,0 +1,190 @@
+[
+ {
+  "cellId": "ap_physics_c_electricity_and_magnetism-m01",
+  "archetype": "pe_coulomb_scaling",
+  "kind": "mc",
+  "unitCode": "8",
+  "topic": "8.1",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "candidates": 2,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_physics_c_electricity_and_magnetism-m02",
+  "archetype": "pe_field_two_charges_midpoint",
+  "kind": "mc",
+  "unitCode": "8",
+  "topic": "8.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "candidates": 2,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_physics_c_electricity_and_magnetism-m03",
+  "archetype": "pe_connected_spheres_field_ratio",
+  "kind": "mc",
+  "unitCode": "10",
+  "topic": "10.2",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "candidates": 2,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_physics_c_electricity_and_magnetism-m04",
+  "archetype": "pe_cap_energy",
+  "kind": "mc",
+  "unitCode": "10",
+  "topic": "10.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "candidates": 2,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_physics_c_electricity_and_magnetism-m05",
+  "archetype": "pe_cap_dielectric_factor",
+  "kind": "mc",
+  "unitCode": "10",
+  "topic": "10.4",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "candidates": 2,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_physics_c_electricity_and_magnetism-m06",
+  "archetype": "pe_resistance_geometry",
+  "kind": "mc",
+  "unitCode": "11",
+  "topic": "11.3",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "candidates": 2,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_physics_c_electricity_and_magnetism-m07",
+  "archetype": "pe_rc_initial_final_current",
+  "kind": "mc",
+  "unitCode": "11",
+  "topic": "11.8",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "candidates": 2,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_physics_c_electricity_and_magnetism-m08",
+  "archetype": "pe_solenoid_inductance",
+  "kind": "mc",
+  "unitCode": "13",
+  "topic": "13.4",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "candidates": 2,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_physics_c_electricity_and_magnetism-m09",
+  "archetype": "pe_rl_initial_final",
+  "kind": "mc",
+  "unitCode": "13",
+  "topic": "13.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "candidates": 2,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_physics_c_electricity_and_magnetism-m10",
+  "archetype": "pe_inductor_energy",
+  "kind": "mc",
+  "unitCode": "13",
+  "topic": "13.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "candidates": 2,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_physics_c_electricity_and_magnetism-m11",
+  "archetype": "pes_vx_graph_set",
+  "kind": "mc",
+  "unitCode": "9",
+  "topic": "9.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "candidates": 2,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_physics_c_electricity_and_magnetism-m12",
+  "archetype": "pes_gauss_er_set",
+  "kind": "mc",
+  "unitCode": "8",
+  "topic": "8.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "candidates": 2,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_physics_c_electricity_and_magnetism-m13",
+  "archetype": "pes_bt_graph_set",
+  "kind": "mc",
+  "unitCode": "13",
+  "topic": "13.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "candidates": 2,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_physics_c_electricity_and_magnetism-f01",
+  "archetype": "pef_qqt_closest_approach",
+  "kind": "frq_bundle",
+  "unitCode": "9",
+  "topic": "9.3",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "candidates": 2,
+  "extraTopics": [
+   "9.1",
+   "8.1"
+  ],
+  "template": "qqt"
+ },
+ {
+  "cellId": "ap_physics_c_electricity_and_magnetism-f02",
+  "archetype": "pef_mr_rc_circuit",
+  "kind": "frq_bundle",
+  "unitCode": "11",
+  "topic": "11.8",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "candidates": 2,
+  "extraTopics": [
+   "11.2",
+   "10.3"
+  ],
+  "template": "mr"
+ },
+ {
+  "cellId": "ap_physics_c_electricity_and_magnetism-f03",
+  "archetype": "pef_lab_capacitor_gap",
+  "kind": "frq_bundle",
+  "unitCode": "10",
+  "topic": "10.3",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "candidates": 2,
+  "extraTopics": [
+   "10.1",
+   "8.6"
+  ],
+  "template": "lab"
+ }
+]

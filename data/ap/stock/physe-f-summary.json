@@ -1,0 +1,40 @@
+{
+ "runs": [
+  "physe-f"
+ ],
+ "rows": 16,
+ "passed": 5,
+ "rejected": 11,
+ "passRate": 0.313,
+ "singles": {
+  "candidates": 16
+ },
+ "unitsPassed": {
+  "8": 2,
+  "11": 1,
+  "13": 2
+ },
+ "figPassed": {
+  "none": 5
+ },
+ "figAll": {
+  "none": 16
+ },
+ "figPassRate": {
+  "none": "5/16"
+ },
+ "renderTypesPassed": {
+  "text": 4,
+  "ap_table": 1
+ },
+ "archetypesPassed": {
+  "pef_mr_ring_field": 1,
+  "pef_tbr_gauss_er": 1,
+  "pef_lab_rc_time_constant": 1,
+  "pef_tbr_rl_current": 1,
+  "pef_qqt_motional_emf": 1
+ },
+ "costUsd": {
+  "physe-f": 0.8462
+ }
+}

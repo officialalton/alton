@@ -71,7 +71,14 @@ export const elItemNames = (): string[] => {
  * 새 배치마다 keys-file·render-check 를 고치지 않는다. 관리자 적재 배치(lib/ap-admin/batches.ts)는 따로 등록한다.
  */
 export const EXPAND_ITEM_FILE_RE = /^(?:micro-s[0-9][a-z0-9-]*|stats-x[0-9][a-z0-9-]*|bcx[0-9][a-z0-9-]*)-items\.json$/;
-export const expandItemNames = (): string[] => {
+/** 2026-10-20 신규 과목: Physics C Mechanics(physc-*), Physics C E&M(physe-*), Precalculus(pre-*). 이름 규칙 파일을 디스크에서 찾는다. */
+export const NEWSUBJ_ITEM_FILE_RE = /^(?:physc|physe|pre)-[a-z0-9]+(?:-[a-z0-9]+)*-items\.json$/;
+export const newSubjectItemNames = (): string[] => {
+  const dir = path.resolve(process.cwd(), "data/ap/stock");
+  return existsSync(dir) ? readdirSync(dir).filter((f) => NEWSUBJ_ITEM_FILE_RE.test(f)).map((f) => f.replace(/\.json$/, "")).sort() : [];
+};
+
+export const expandItemNames =(): string[] => {
   const dir = path.resolve(process.cwd(), "data/ap/stock");
   return existsSync(dir) ? readdirSync(dir).filter((f) => EXPAND_ITEM_FILE_RE.test(f)).map((f) => f.replace(/\.json$/, "")).sort() : [];
 };
@@ -115,6 +122,12 @@ export const WH_ITEM_FILE_RE = /^wh-[a-z0-9]+(?:-[a-z0-9]+)*-items\.json$/;
 export const whItemNames = (): string[] => {
   const dir = path.resolve(process.cwd(), "data/ap/stock");
   return existsSync(dir) ? readdirSync(dir).filter((f) => WH_ITEM_FILE_RE.test(f)).map((f) => f.replace(/\.json$/, "")).sort() : [];
+};
+/** AP European History 재고 파일(data/ap/stock/euro-<배치>-items.json, 2026-10-20). */
+export const EURO_ITEM_FILE_RE = /^euro-[a-z0-9]+(?:-[a-z0-9]+)*-items\.json$/;
+export const euroItemNames = (): string[] => {
+  const dir = path.resolve(process.cwd(), "data/ap/stock");
+  return existsSync(dir) ? readdirSync(dir).filter((f) => EURO_ITEM_FILE_RE.test(f)).map((f) => f.replace(/\.json$/, "")).sort() : [];
 };
 export const ushItemNames = (): string[] => {
   const dir = path.resolve(process.cwd(), "data/ap/stock");
