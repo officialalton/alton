@@ -6,8 +6,8 @@ import type { Usage } from "./costs";
 type Admin = ReturnType<typeof createAdminClient>;
 const T = "mock_exam_essay_scores";
 const monthStart = (d: Date) => new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), 1)).toISOString();
-const noRpc = (e: { code?: string } | null) => e?.code === "PGRST202" || e?.code === "42883"; // 마이그레이션 20261101100000 미적용(함수 없음)
-const EV = "essay_ai_cost_events"; // 비용 원장(마이그레이션 20261101100000): 호출 실행마다 발생 시각과 함께 기록. 월·일 귀속은 여기서만 정한다.
+const noRpc = (e: { code?: string } | null) => e?.code === "PGRST202" || e?.code === "42883"; // 마이그레이션 20262100000650 미적용(함수 없음)
+const EV = "essay_ai_cost_events"; // 비용 원장(마이그레이션 20262100000650): 호출 실행마다 발생 시각과 함께 기록. 월·일 귀속은 여기서만 정한다.
 const dayStart = (d: Date) => new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate())).toISOString();
 
 /** service_role 저장소. claim 은 (1) 행 없으면 pending 으로 삽입(unique 충돌 무시) (2) pending/재시도 가능 failed 일 때만 단일 UPDATE 로 processing 전환 — 동시 호출 중 하나만 claimed=true. */
