@@ -129,3 +129,14 @@
 
 ## 2026-10-21 US3 공개
 AP U.S. History Practice Exam 3 공개(세트 e3cb8ff1, 60문항). 근거 범위: AI 채점기 2종 일치, 역사 교사 검수 없음. 공개 US History 3세트. 상세는 CURRENT.
+
+## 2026-10-21 후속 정리 (기준 시각 2026-10-21T23:15:43Z, DB 집계)
+
+- **공개 세트(DB 집계, status=published·미보관)**: 풀 모의고사 **67**, 부분 연습 **3**(Calculus AB frq 1·mc 2). 과목별 풀 모의고사: Biology 5 · Calc AB 3 · Calc BC 5 · Chemistry 3 · CS A 3 · Eng Lang 5 · Eng Lit 3 · Euro 2 · Macro 3 · Micro 3 · Physics 1 4 · Physics C E&M 5 · Physics C Mech 5 · Precalculus 5 · Psychology 2 · Statistics 5 · US History 3 · World 3. 이번 구간 신규 공개: Precalculus PC5(22:45Z), Biology BI5(23:11Z), English Language EL5(23:12Z), US3(22:51Z).
+- **BI5·EL5**: 원인은 증거 부족이 아니라 ④ 변환 누락·배치 미등록이었다(BI5 의 `run1:ap_biology-c021-k3` 는 적재·렌더·화면 검증 완료·변환만 안 됨 → `bio-bi5-base` 변환 전용 배치 등록; EL5 의 r41/w41/w45 는 `el-r19a` 배치 미등록 → 등록 후 ①②③④). 둘 다 최신 DB 기준 편성·겹침 0·해시·화면 증거·변환 통과 후 공개, 공개 후 같은 과목 내 문항 중복 0 확인.
+- **Physics 1 PH5**: 기존 `exact-assign-phys-ph5-ph6.json` 은 공개된 Exam 3 과 동일(공개하면 중복)이라 폐기. 공개 세트 키를 막고 다시 풀면 가상 0·검증기 위반 0 으로 **계산상 조립 가능**하지만, 44개 중 38개가 공개 Physics 1 문항과 같은 look-alike 군(`fam`)에 속해 **준비 완료 아님** — 구조 동일 여부를 자료·조건·요구 과제·추론 단계로 대조해야 한다. 미공개.
+- **Psychology PS3**: [ps3-status-20261021T2300Z.md](ps3-status-20261021T2300Z.md) 단일 기준 시점 현황. 준비 완료 아님.
+- **US3 연결 기록**: 옛 합성 초안 `7d5377c4-d995-4c50-a5fa-8d5c1bb0a6be`(보관, 응시 0, 문항 60 보존) → 새 세트 `e3cb8ff1-e775-4532-ba4a-5bbe1611ad82`(공개 22:51Z). 두 세트는 **서로 다른 set_group_id** 이며 같은 계열의 새 버전이 아니다. 교체 사유: 합성 문항 대신 실제 출처(Foner 2013 등 인용, SAQ1 Dunning·Du Bois 발췌)로 전환. 어떤 공개 세트·응시의 그룹 ID도 바꾸지 않았다.
+- **US3 SAQ1 루브릭 16개 회귀**: **AI 채점 일관성 검증**(Opus 5.5·Sonnet 5.5 두 채점기가 기대 점수와 일치)이며 공식 채점 정확도 검증이 아니다. 역사 교사 검토 아님.
+- **테스트 응시 `99e0ade2-3218-4d95-8dfe-0f3ffba6b9bd`**(학생 테스트22, 미제출 in_progress): 삭제하지 않음. 해당 학생은 `students.is_test_account=true` 이고 이용 통계 RPC(`p_include_test=false` 기본)가 테스트 계정을 제외한다. 별도 포기·종료 기능은 코드에서 찾지 못해 그대로 둔다(통계 영향 없음).
+- **비용**: 기준 원장 $512.18(US3 회귀 반영, 이 후속 작업에서 유료 호출 없음). 진행 중 문항 제작 에이전트의 호출·예약은 이 기록에 포함되지 않음 — 과목별 보고 때 갱신.
