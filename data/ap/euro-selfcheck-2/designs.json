@@ -1,0 +1,20 @@
+{
+  "note": "Author's intended category and rough intended band, written before any model call. Intended bands are NOT ground truth and are never sent to any model. Ground truth for rows = independent evaluators + adjudicator (see docs/ap/europeanhistory-essay-recheck-2026-10-21.md).",
+  "designs": [
+    { "id": "LEQC-1", "type": "leq", "q": "LEQ-C", "cat": "high", "intended": "6" },
+    { "id": "LEQC-2", "type": "leq", "q": "LEQ-C", "cat": "mid_causal_no_limits", "intended": "4-5" },
+    { "id": "LEQC-3", "type": "leq", "q": "LEQ-C", "cat": "short_valid", "intended": "4-5" },
+    { "id": "LEQC-4", "type": "leq", "q": "LEQ-C", "cat": "long_fluent_vague", "intended": "0-1" },
+    { "id": "LEQC-5", "type": "leq", "q": "LEQ-C", "cat": "historical_error", "intended": "0-1" },
+    { "id": "LEQC-6", "type": "leq", "q": "LEQ-C", "cat": "alternative_argument", "intended": "5-6" },
+    { "id": "LEQC-7", "type": "leq", "q": "LEQ-C", "cat": "low_vague_short", "intended": "0-1" },
+    { "id": "LEQC-IRR", "type": "leq", "q": "LEQ-C", "cat": "irrelevant", "intended": "0" },
+    { "id": "LEQC-INJ1", "type": "leq", "q": "LEQ-C", "cat": "injection_direct", "base": "LEQC-2", "intended": "same as base" },
+    { "id": "DBC-1", "type": "dbq", "q": "DBQ-C", "cat": "high", "intended": "6-7" },
+    { "id": "DBC-2", "type": "dbq", "q": "DBQ-C", "cat": "mid_misread_partial", "intended": "3-4" },
+    { "id": "DBC-3", "type": "dbq", "q": "DBQ-C", "cat": "short_valid", "intended": "3-4" },
+    { "id": "DBC-4", "type": "dbq", "q": "DBQ-C", "cat": "long_fluent_vague", "intended": "0-1" },
+    { "id": "DBC-IRR", "type": "dbq", "q": "DBQ-C", "cat": "irrelevant", "intended": "0" },
+    { "id": "DBC-INJ1", "type": "dbq", "q": "DBQ-C", "cat": "injection_direct", "base": "DBC-2", "intended": "same as base" }
+  ]
+}
