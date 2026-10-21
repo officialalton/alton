@@ -1,0 +1,76 @@
+# AP European History 에세이 AI 채점 — 준비·보정 계획 (2026-10-20)
+
+상태: **코드 준비 완료, 꺼짐.** 유료 호출은 하지 않았다. 켜기 전 보정(§3–5)과 오너 승인(§7)이 필요하다. 오너 확정 정책(2026-10-14): AI 채점은 "참고용 추정치(공식 점수 아님)"로만 제공.
+
+## 1. 공식 루브릭 확인 결과
+확인한 것(2025 Scoring Guidelines Set 1 PDF 직접 열람, 2026-10-20):
+- SAQ 각 **3점**(A·B·C 1점씩). DBQ **7점**: Row A 0–1(논지) · Row B 0–1(맥락화) · Row C 0–2(문서 활용) + 0–1(문서 밖 증거) · Row D 0–1(출처 분석) + 0–1(복합성). LEQ **6점**: A 0–1 · B 0–1 · C 0–2(증거) · D 0–2(분석·추론).
+- 시험 비중(AP Central 시험 페이지): SAQ 20% · DBQ 25% · LEQ 15%.
+- 2027년 5월 시험 개편(AP Central "AP History Exam Updates"): SAQ 3개 모두 필수·자료 포함, LEQ 필수 1문항, DBQ 연대 확대. 채점 기준·과목 내용은 불변이라 안내됨.
+
+**확인 못 한 것**: (a) 2027 개편 형식의 공식 Scoring Guidelines는 아직 공개되지 않았다(가장 최근은 2026 SG: `ap26-sg-european-history.pdf` — 이번에 내용을 열어 보지 않았다). 보정 착수 전 2026 SG에서 행·점수가 2025와 같은지 재확인해야 한다. (b) 개편 SAQ가 "3문항 × 3점 = 9점"인지 문항당 3점 외 가중이 있는지 공식 문서로 못 확인(현재 코드는 문항당 3점, 합산 없음). (c) 개편 LEQ 6점 유지 여부(안내는 "채점 기준 불변"이라고만 함).
+
+## 2. 구현(꺼짐)
+| 항목 | 위치 |
+|---|---|
+| 루브릭 `euro-v1`(SAQ a·b·c / DBQ 6행 7점 / LEQ 4행 6점, 과목명·유럽사 규칙, 응시당 상한 기본 5건 = SAQ3+DBQ+LEQ, 환경변수 `AI_ESSAY_PER_ATTEMPT_CAP_EURO`) | `lib/essay-grading/rubric.ts` |
+| 과목 게이트 `EURO_ESSAY_GRADING_VALIDATED = false` — `essayGradingSubject("ap_european_history")` 는 false. 켜려면 이 상수 + 기존 플래그 `AI_ESSAY_GRADING_ENABLED` 둘 다 필요 | `lib/essay-grading/subject.ts` |
+| 유럽사 FRQ payload(`whap_frq` 형식)를 `euro-v1` 로 채점하도록 매핑 | `lib/essay-grading/actions.ts` |
+| 학생 결과 화면: 서술형이 있는 European History 응시에 "AI essay scoring is not available for this subject yet. Your written responses are not scored; use the reference answers and scoring guides below to review them." 상태 표시(`data-testid="essay-scoring-unavailable"`). 수학·과학 FRQ 과목엔 표시하지 않음 | `ApExamResultView.tsx`, `subject.ts` |
+| 저장 점수 조회 목록에 `euro-v1` 추가, 묶음 SAQ 자동 시작 판정에 whap·euro 포함(기존엔 US만 포함되어 있었음) | `view.ts`, `ApExamResultView.tsx` |
+| 단위 테스트 | `lib/essay-grading/euro.test.ts` |
+
+프롬프트는 기존 History 시스템 프롬프트 골격(학생 글은 데이터, 주입 무시, 보수적 채점, 앵커 샘플 보정)을 그대로 쓰고 과목명과 "1450–현재 유럽사" 규칙 한 줄을 더했다. 루브릭 문구는 ALTON 자체 표현(공식 문구 복제 아님).
+
+## 3. 보정에 쓸 공식 채점 예시 (내부 채점 비교 전용)
+출처: AP Central 과거 시험 문항 페이지 `https://apcentral.collegeboard.org/courses/ap-european-history/exam/past-exam-questions` (2026-10-20 확인). 각 문항마다 High/Mid/Low 3개 샘플 + 점수 + 해설이 공개되어 있다.
+
+| 연도·세트 | Scoring Guidelines | Sample Responses (DBQ · LEQ2–4 · SAQ1–4) |
+|---|---|---|
+| 2025 Set 1 | `ap25-sg-european-history-set-1.pdf` | `ap25-apc-european-history-{dbq,leq2,leq3,leq4,saq1..saq4}-set-1.pdf` |
+| 2025 Set 2 | `ap25-sg-european-history-set-2.pdf` | 동일 패턴 `-set-2` |
+| 2024 Set 1·2 | `ap24-sg-european-history-set-{1,2}.pdf` | `ap24-apc-…-set-{1,2}.pdf` |
+| (예비) 2023 Set 1·2 | `ap23-sg-…` | `ap23-apc-…` |
+(모두 `https://apcentral.collegeboard.org/media/pdf/` 아래. 2026 SG·FRQ는 샘플 응답 미공개.)
+
+**저작권 이용 방식**: College Board 저작물이므로 저장소에 PDF·샘플 전문을 커밋하지 않는다. 로컬(비공개 작업 폴더, gitignore)에서 내려받아 보정 실행 중에만 모델 입력으로 사용하고, 결과 파일에는 문항 ID·샘플 번호·공식 점수·AI 점수만 남긴다(샘플 본문·공식 SG 문구 미저장·미인용). 학생 화면·프롬프트 앵커에 공식 샘플을 쓰지 않는다(앵커는 기존대로 ALTON 자체 생성 샘플). 문서·보고서의 직접 인용은 하지 않는다. 사용 목적은 내부 품질 비교뿐이며, 이 이용 방식이 College Board 이용 약관상 허용되는지는 오너/법무 확인 대상(§7).
+
+한계: 2027 개편 형식(자료 포함 SAQ 3개 전부, 신규 LEQ 소개문, 확대 DBQ 연대)의 공식 샘플은 존재하지 않는다. 과거(2023–2025) 샘플의 행·점수는 같은 구조이므로 채점 기준 보정에는 유효하나, 개편 형식 자체의 일치율은 검증하지 못한다 — 개편 형식 샘플은 2027 시험 이후 공개되면 재보정.
+
+## 4. 보정 문항 수·호출 수·비용 상한
+현재 호출 단가: `lib/essay-grading/costs.ts` 기본 입력 $3 / 출력 $15 per M 토큰(가정값). 실측: World History 보정 62호출 $1.85 → 호출당 약 $0.030. 채점은 에세이당 2회 호출(낮은 쪽 채택).
+
+계산식: 비용 = Σ(문항수 × 샘플당 호출 2 × 호출당 단가). 호출당 단가 추정: DBQ(문서 7개) $0.06 · LEQ $0.03 · SAQ $0.02.
+
+권장 보정 세트(샘플 72건 = 문항 24 × 3샘플):
+| 유형 | 문항(출처) | 샘플 | 호출 | 단가 | 소계 |
+|---|---|---|---|---|---|
+| DBQ | 4 (2024·2025 Set1·2) | 12 | 24 | $0.06 | $1.44 |
+| LEQ | 8 | 24 | 48 | $0.03 | $1.44 |
+| SAQ | 12 | 36 | 72 | $0.02 | $1.44 |
+| 합계 | 24 | 72 | 144 | | **$4.32** |
++ 주입 방어 점검(mid·low 샘플 각 1문항 × 유형 3) 약 $0.3, 불합격 시 프롬프트 수정 후 재실행 1회(전체의 약 절반~전체) $2–4.5 → 예상 총 **약 $7–9**.
+
+**권장 상한: 하드 $12(중단선), 목표 $9.** 정지 로직은 `scripts/essay-calibration.ts` 의 `CALIB_CAP`(기본 $1.0)를 상한으로 쓴다. 호출 수 상한 약 300. 신규 세트 생성 예산 장부(상한 $650 / 중단선 $640)와 별개로 장부에 기록한다. **이번 작업에서는 실행하지 않았다.**
+
+## 5. 합격 기준 (공식 점수 vs AI 점수, 샘플 단위 total 비교)
+- 정확 일치율 ≥ 60%, ±1점 이내 ≥ 90%(DBQ는 ±1 이내 ≥ 85%).
+- 평균 부호 오차(AI − 공식) 절대값 ≤ 0.5 (WH 보정 기준: MAE 0.167). 보수 편향은 허용, 과대 채점 편향 불허.
+- 각 문항 High > Mid > Low 서열 보존 100%.
+- 행 단위(thesis/context/evidence…) 일치율 ≥ 80%, 어느 행도 한 방향 편향 ≥ +0.3 불가.
+- 프롬프트 주입 시 점수 부풀림 0건. `invalid_output`/`bad_rationale_context` 재시도 대상 비율 ≤ 5%.
+- 기준 미달 시: 프롬프트·행 안내 수정 → 1회 재보정(상한 내). 재미달이면 비활성 유지.
+
+## 6. 켜기 전 체크리스트
+1. 2026 SG(및 가능하면 2027 CED 개정본)에서 행·점수 재확인, 확인 불가 항목(§1) 해소 또는 오너 수용.
+2. 보정 실행 승인(§7) → §4 실행 → §5 통과 → 결과 `data/ap/essay-calibration-result-euro.json`(점수만) + 본 문서 갱신.
+3. 유럽사 stock FRQ 앵커 샘플 3개 확보 확인(앵커 3개 미만 문항은 코드가 자동 스킵).
+4. `AI_ESSAY_PER_ATTEMPT_CAP_EURO`(기본 5), 일 한도·월 $25 예산이 유럽사 추가분을 감안하는지 확인.
+5. Preview에서 플래그 ON 상태 테스트 계정으로 SAQ·DBQ·LEQ 각 1회 채점·학생/보호자 화면 확인 후 `EURO_ESSAY_GRADING_VALIDATED` 를 true 로 변경(별도 커밋), 안내 문구 `essay-scoring-unavailable` 가 사라지는지 확인.
+6. 개인정보 처리방침의 AI 채점 절(2026-10-15 승인)에 European History 포함됨을 확인(과목 한정 문구 없음 가정 — 확인 필요).
+7. 프로덕션 반영은 별도 승인.
+
+## 7. 켜기 전 필요한 오너 결정
+- 보정 실행 승인과 비용 상한(권장 하드 $12 / 목표 $9).
+- 공식 College Board 샘플 응답을 내부 비교용으로 사용하는 것의 이용 약관 허용 여부(저장소 미커밋·전문 미저장 방식으로 제안).
+- 2027 개편 형식의 공식 샘플이 없다는 점을 수용하고 과거 샘플로 보정할지(권장: 수용, 개편 후 재보정).

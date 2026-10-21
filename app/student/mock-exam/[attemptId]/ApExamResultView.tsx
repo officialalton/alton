@@ -4,7 +4,8 @@ import { memo, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import EssayScoreCard from "@/app/components/EssayScoreCard";
 import type { EssayScoreView } from "@/lib/essay-grading/view";
-import { USH_RUBRIC_ID } from "@/lib/essay-grading/rubric";
+import { EURO_RUBRIC_ID, USH_RUBRIC_ID, WHAP_RUBRIC_ID } from "@/lib/essay-grading/rubric";
+import { essayScoringNotice } from "@/lib/essay-grading/subject";
 import { enqueueEssayGradingAction } from "@/lib/essay-grading/actions";
 import type { MockExamAttemptDetail, MockExamAttemptItem, MockExamAttemptSummary } from "@/lib/mock-exam/attempt-data";
 import { AP_SUBJECT_NAME, apBadgeText, apCoverageLines, apGuidanceLines, apUnitsFromDomains } from "@/lib/ap-exam/layouts";
@@ -100,7 +101,7 @@ export default function ApExamResultView({ attempt, attempts, topicNames, handwr
     const missing = attempt.items.some((i) => {
       if (i.format !== "essay") return false;
       const ps = i.parts ?? [];
-      if (ps.length > 1 && essayByPart.get(inkKey(i.setItemId, ps[0].label))?.rubricVersion === USH_RUBRIC_ID) return false; // SAQ 묶음: 첫 파트 행 하나가 전체
+      if (ps.length > 1 && [USH_RUBRIC_ID, WHAP_RUBRIC_ID, EURO_RUBRIC_ID].includes(essayByPart.get(inkKey(i.setItemId, ps[0].label))?.rubricVersion ?? "")) return false; // SAQ 묶음: 첫 파트 행 하나가 전체
       return ps.some((p) => !essayByPart.has(inkKey(i.setItemId, p.label)));
     });
     if (missing) { started.current = true; startScoring(); }
@@ -144,6 +145,7 @@ export default function ApExamResultView({ attempt, attempts, topicNames, handwr
           <ul className="mt-2 text-[12.5px] text-grey-600">{bySection.map((s) => <li key={s.key}>{s.label}: {s.correct}/{s.total}</li>)}</ul>
         )}
         {frq.length > 0 && <p className="mt-2 text-[12.5px] text-grey-600">Free-response answers are shown next to a reference answer and scoring guide for self-review. This is reference feedback, not official scoring.{essayAiEnabled ? " Where shown, an AI estimate is an internal estimate, not an official AP score." : " No score is given."}</p>}
+        {frq.length > 0 && essayScoringNotice(attempt.apSubject) && <p className="mt-2 rounded-lg border border-grey-200 bg-grey-50 p-3 text-[12.5px] font-semibold text-grey-700" data-testid="essay-scoring-unavailable" role="note">{essayScoringNotice(attempt.apSubject)}</p>}
         <p className="mt-2 text-[11.5px] text-grey-500">AP scores (1–5) are not estimated for practice tests.</p>
       </section>
 

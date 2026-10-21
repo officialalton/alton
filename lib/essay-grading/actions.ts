@@ -11,7 +11,7 @@ import { concatSaqAnswers, parseEssayContext } from "./context";
 import { loadEssayPayload } from "./payload";
 import { processEssay, type Job } from "./queue";
 import { essayGradingSubject } from "./subject";
-import { USH_RUBRIC_ID, WHAP_RUBRIC_ID } from "./rubric";
+import { EURO_RUBRIC_ID, USH_RUBRIC_ID, WHAP_RUBRIC_ID } from "./rubric";
 import { createSupabaseEssayStore } from "./store";
 
 type Result = { ok: true; value: { enabled: boolean; queued: number } } | { ok: false; error: string };
@@ -32,15 +32,17 @@ export async function enqueueEssayGradingAction(attemptId: string): Promise<Resu
       const answers = parseFrqAnswer(it.response ?? "");
       const payload = await loadEssayPayload(admin, it.problemId);
       const parts = it.parts ?? [];
-      const first = parts[0] ? parseEssayContext(payload, parts[0].label) : null;
-      if ((first?.rubricId === USH_RUBRIC_ID || first?.rubricId === WHAP_RUBRIC_ID) && first.taskType === "saq" && parts.length > 0) {
+      const parsed = parts[0] ? parseEssayContext(payload, parts[0].label) : null;
+      const first = parsed && attempt.apSubject === "ap_european_history" && parsed.rubricId === WHAP_RUBRIC_ID ? { ...parsed, rubricId: EURO_RUBRIC_ID } : parsed; // 유럽사 FRQ payload 는 whap_frq 형식 — 루브릭만 euro-v1 로
+      if ((first?.rubricId === USH_RUBRIC_ID || first?.rubricId === WHAP_RUBRIC_ID || first?.rubricId === EURO_RUBRIC_ID) && first.taskType === "saq" && parts.length > 0) {
         // SAQ: 한 문항(A·B·C)을 한 건으로 채점 — 답한 파트를 "(A) … (B) … (C) …" 로 합치고 첫 파트 라벨을 키로 쓴다.
         const essay = concatSaqAnswers(parts, answers);
         jobs.push({ attemptId, setItemId: it.setItemId, partLabel: parts[0].label, studentId: user.id, essay, ...first });
         continue;
       }
       for (const p of parts) {
-        const ctx = parseEssayContext(payload, p.label) ?? { taskPrompt: p.prompt, sources: [], anchors: [] };
+        const c0 = parseEssayContext(payload, p.label) ?? { taskPrompt: p.prompt, sources: [], anchors: [] };
+        const ctx = attempt.apSubject === "ap_european_history" && (c0 as { rubricId?: string }).rubricId === WHAP_RUBRIC_ID ? { ...c0, rubricId: EURO_RUBRIC_ID } : c0;
         jobs.push({ attemptId, setItemId: it.setItemId, partLabel: p.label, studentId: user.id, essay: answers[p.label] ?? "", ...ctx, ...(attempt.apSubject === "ap_english_literature" ? { rubricId: "englit" } : {}) });
       }
     }
