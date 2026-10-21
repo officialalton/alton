@@ -1,0 +1,3157 @@
+{
+ "models": {
+  "solvers": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5"
+  ],
+  "fact": "claude-fable-5-1"
+ },
+ "solve": {
+  "solve-ap_us_history-real_g_whitefield-0": [
+   {
+    "q": 1,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "Franklin says the crowds included 'all sects and denominations' and that the town's manners changed, with psalms heard in homes along every street. Option 0 is wrong because he says the multitudes were 'enormous' even after Whitefield had to preach in the fields."
+   },
+   {
+    "q": 2,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "Whitefield's 1739 tour was a central event of the First Great Awakening. The Salem trials (1692), the Stamp Act (1765) and the Second Great Awakening (after 1800) belong to other periods."
+   },
+   {
+    "q": 3,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "The Awakening split congregations into New Lights and Old Lights, challenged the authority of established clergy, and helped new congregations and denominations grow, including Baptists, Methodists and New Side Presbyterians. The other options are historically false."
+   }
+  ],
+  "solve-ap_us_history-real_g_whitefield-1": [
+   {
+    "q": 1,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "Franklin says multitudes of all sects attended and the town's religious habits changed."
+   },
+   {
+    "q": 2,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "Whitefield's 1739 tour was part of the First Great Awakening."
+   },
+   {
+    "q": 3,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "The Awakening split colonists into New Lights and Old Lights over clerical authority, and new congregations grew."
+   }
+  ],
+  "solve-ap_us_history-real_g_nworder-0": [
+   {
+    "q": 1,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "The ban covered only the Northwest Territory, and the fugitive clause protected slaveholders' property claims. Option 0 is wrong because the ordinance was passed in 1787, before the Constitution was ratified. Option 2 describes popular sovereignty, which came later."
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Article 3 says directly that 'utmost good faith' will be observed toward the Indians and that their lands will not be taken without their consent. The excerpt does not support any of the other options."
+   },
+   {
+    "q": 3,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "The ordinance organized the western lands the United States claimed after the Revolution. The other options are events that came after 1787."
+   },
+   {
+    "q": 4,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "The Missouri Compromise carried forward Article 6's approach: Congress banning slavery in part of a territory. Dred Scott rejected that power, and the Emancipation Proclamation is described inaccurately (it did not free all enslaved people everywhere)."
+   }
+  ],
+  "solve-ap_us_history-real_g_nworder-1": [
+   {
+    "q": 1,
+    "choice": 3,
+    "confidence": "likely",
+    "also": null,
+    "note": "Limited to Northwest Territory and included fugitive clause."
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Article 3 states good faith and no taking of lands without consent."
+   },
+   {
+    "q": 3,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "Ordinance organized western lands after Revolution."
+   },
+   {
+    "q": 4,
+    "choice": 1,
+    "confidence": "likely",
+    "also": null,
+    "note": "Missouri Compromise banned slavery in territory north of a line, building on the Ordinance's approach."
+   }
+  ],
+  "solve-ap_us_history-real_g_beard-0": [
+   {
+    "q": 1,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Beard argues that the delegates had a personal economic stake in the new system, that the Constitution protected property rights from popular majorities, and that it was not the work of 'the whole people.'"
+   },
+   {
+    "q": 2,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "Beard states that about three-fourths of adult males did not vote for convention delegates, either because they did not care or because property qualifications kept them from voting."
+   },
+   {
+    "q": 3,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "The book was published in 1913, during the Progressive Era, when critics were questioning how business interests influenced government."
+   },
+   {
+    "q": 4,
+    "choice": 3,
+    "confidence": "unsure",
+    "also": 2,
+    "note": "Beard's method is to explain government by the economic interests of a powerful group. Option 3 is the only choice built around economic interests controlling government, so it is probably the intended answer. But the question is flawed: option 3 describes what reformers believed, not a historian's interest-based explanation. Option 2 could also be defended, because it explains a political document by its author's strategic motives, though those motives were diplomatic, not economic."
+   }
+  ],
+  "solve-ap_us_history-real_g_beard-1": [
+   {
+    "q": 1,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Beard says delegates had personal economic interests and the Constitution was not created by the whole people."
+   },
+   {
+    "q": 2,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "The excerpt says three-fourths of adult males did not vote, from indifference or property disfranchisement."
+   },
+   {
+    "q": 3,
+    "choice": 1,
+    "confidence": "likely",
+    "also": 2,
+    "note": "The 1913 publication date places it in the Progressive Era, when reformers and scholars questioned business influence on government."
+   },
+   {
+    "q": 4,
+    "choice": 3,
+    "confidence": "unsure",
+    "also": 2,
+    "note": "Explaining political outcomes by economic interests is the closest match in method to Beard."
+   }
+  ],
+  "solve-ap_us_history-real_g_northup-0": [
+   {
+    "q": 1,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "Slave narratives like Northup's were published to inform Northern readers about slavery and build abolitionist sentiment."
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "The fear at the gin-house over a weight shortfall directly shows the threat of punishment. The other options contradict the text."
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "Cotton production expanded into the Deep South after the cotton gin, which increased demand for enslaved labor. Option 0 is false, since slavery grew rather than declined after 1808."
+   },
+   {
+    "q": 4,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "Labor demand in the Deep South drove the domestic slave trade from the Upper South. Northup himself was sold through this trade."
+   }
+  ],
+  "solve-ap_us_history-real_g_northup-1": [
+   {
+    "q": 1,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "Slave narratives were published to inform Northern audiences and build abolitionist sentiment."
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "The fear at the gin-house when the weight falls short directly shows the threat of punishment."
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "The cotton boom in the Deep South after the cotton gin increased the demand for enslaved labor."
+   },
+   {
+    "q": 4,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "The cotton economy drove the domestic slave trade, which moved enslaved people from the Upper South to the Deep South."
+   }
+  ],
+  "solve-ap_us_history-real_g_nullification-0": [
+   {
+    "q": 1,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "Source A declares the tariffs null and void inside South Carolina. Source B says no single state has the power to annul a federal law. The other options misstate one source or both."
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "This option closely restates Jackson's own words: nullification is 'contradicted expressly by the letter of the Constitution' and 'destructive of the great object for which it was formed.'"
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "This is the Nullification Crisis, a fight over the protective tariffs of 1828 and 1832. Many in the South believed those tariffs favored Northern manufacturers."
+   }
+  ],
+  "solve-ap_us_history-real_g_nullification-1": [
+   {
+    "q": 1,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "A asserts state power to nullify; B denies it."
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Directly quotes the letter of the Constitution and the destructive effect on the Union's purpose."
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "The Nullification Crisis arose from Southern opposition to the tariffs of 1828 and 1832."
+   }
+  ],
+  "solve-ap_us_history-real_g_14th-0": [
+   {
+    "q": 1,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Section 1 says no state may deny any person within its jurisdiction the equal protection of the laws. Barring race-based denial of the vote is the Fifteenth Amendment, and abolishing slavery is the Thirteenth."
+   },
+   {
+    "q": 2,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "Section 2 cuts a state's House representation in proportion to the eligible adult male citizens it denies the vote. It also ends the three-fifths clause, so option 0 describes the old rule, not this one. Barring ex-Confederates from office is in Section 3, which is not excerpted here."
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "The amendment came out of Congressional Reconstruction in 1866, when Congress responded to the Black Codes and built on the Civil Rights Act of 1866."
+   },
+   {
+    "q": 4,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "Plessy v. Ferguson (1896) read equal protection narrowly enough to allow segregation. Brown came in the twentieth century, and the Fifteenth Amendment expanded rights rather than limiting them."
+   }
+  ],
+  "solve-ap_us_history-real_g_14th-1": [
+   {
+    "q": 1,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "The equal protection clause is in Section 1; the other options describe the 13th/15th Amendments or are not in the text."
+   },
+   {
+    "q": 2,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "Section 2 reduces a state's representation if it denies the vote to eligible adult male citizens."
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "The amendment responded to the Black Codes and sought to protect freed people during Reconstruction."
+   },
+   {
+    "q": 4,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "Plessy v. Ferguson (1896) upheld segregation and so limited the equal protection clause. Brown came in 1954, and the Emancipation Proclamation and the 15th Amendment are not limits on Section 1."
+   }
+  ],
+  "solve-ap_us_history-real_g_hayes-0": [
+   {
+    "q": 1,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "Hayes says the local self-government in the South must guard the interests of both races carefully and equally. The option says 'rights' where Hayes says 'interests', but the meaning is close enough. The other options contradict the text: he says the South is still impoverished and he favors local self-government, not keeping troops there."
+   },
+   {
+    "q": 2,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "The speech came right after the disputed 1876 election and the Compromise of 1877. After it, federal troops were withdrawn from the South, which ended Reconstruction."
+   },
+   {
+    "q": 3,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Jim Crow laws and the disfranchisement of Black voters show that the promise to protect both races equally was not kept. The other options are either factually wrong or happened before 1877 (the Civil Rights Act of 1875)."
+   }
+  ],
+  "solve-ap_us_history-real_g_hayes-1": [
+   {
+    "q": 1,
+    "choice": 1,
+    "confidence": "likely",
+    "also": null,
+    "note": "Hayes says local self-government must guard the interests of both races carefully and equally."
+   },
+   {
+    "q": 2,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "Disputed 1876 election and Compromise of 1877 ending federal troop support for Reconstruction governments."
+   },
+   {
+    "q": 3,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Jim Crow laws and disfranchisement show the failure of equal protection for both races."
+   }
+  ],
+  "solve-ap_us_history-real_g_turner-0": [
+   {
+    "q": 1,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "Turner tells the story from the point of view of white settlers. Native peoples show up only as 'Indian clearings' and 'Indian trails', almost as part of the landscape. That limits what the excerpt can tell us about everyone who lived in the West. The other options get the facts about Turner or his essay wrong: he was a professor, not a settler or a government official, and the essay is about the West, not eastern cities."
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Turner says the settler 'fits himself into the Indian clearings and follows the Indian trails' and slowly transforms the wilderness. He argues that the result 'is not the old Europe' but 'a new product that is American.'"
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "likely",
+    "also": null,
+    "note": "The full essay opens by citing the 1890 census superintendent's statement that a frontier line of settlement could no longer be traced. The excerpt itself doesn't mention the end of the frontier, so this answer depends on outside knowledge. The Spanish-American War (1898) came after the essay (1893). The Homestead Act and the Louisiana Purchase happened decades earlier and did not prompt his thesis."
+   }
+  ],
+  "solve-ap_us_history-real_g_turner-1": [
+   {
+    "q": 1,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "Turner centers white settlers and treats Native peoples as part of the environment (clearings and trails), which limits the excerpt as evidence for all Western experiences."
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Turner cites settlers fitting themselves into Indian clearings and trails and says the outcome is 'not the old Europe' but a new American product."
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "The 1890 census bulletin declared the frontier line closed, which prompted Turner's thesis in 1893. The Spanish-American War came in 1898, after the essay."
+   }
+  ],
+  "solve-ap_us_history-real_g_cities-0": [
+   {
+    "q": 1,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "Railroads made Chicago the hub linking western farms to eastern markets. The other options are false: there was no gold near Chicago, its port wasn't a Chinese immigration route, and the capital never moved there."
+   },
+   {
+    "q": 2,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "From 1850 to 1890, Chicago grew about 37 times (29,963 to 1,099,850). The next highest are Cleveland (about 15 times) and Detroit (about 10 times). New York grew only about 3 times. Option 1 is wrong because St. Louis (451,770) was smaller than Philadelphia (1,046,964). Option 2 is wrong because Detroit in 1870 (79,577) was smaller than Cleveland in 1890 (261,353)."
+   },
+   {
+    "q": 3,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "In the late 1800s, industrial jobs and immigration drew workers into cities. The other options are the wrong period or the wrong trend."
+   },
+   {
+    "q": 4,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "The Great Migration moved Black Southerners into northern cities, so it continued urban growth. The Homestead Act came earlier (1862) and was about farmland. The other two options are false claims about people leaving cities."
+   }
+  ],
+  "solve-ap_us_history-real_g_cities-1": [
+   {
+    "q": 1,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "Railroads made Chicago a hub linking western farms with eastern markets."
+   },
+   {
+    "q": 2,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "Chicago grew about 36.7x, more than any other city shown."
+   },
+   {
+    "q": 3,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Industrialization and immigration drew workers to cities in the late nineteenth century."
+   },
+   {
+    "q": 4,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "The Great Migration of Black Southerners to northern cities continued urban growth."
+   }
+  ],
+  "solve-ap_us_history-real_g_bryan-0": [
+   {
+    "q": 1,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Bryan's stated purpose is to call attention to the 'demoralizing influence' of Darwinism on morality and faith. One caveat: this excerpt itself attacks the theory, not its teaching specifically, though Bryan's broader campaign was against teaching it."
+   },
+   {
+    "q": 2,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "He says it is 'obscuring God and weakening all the virtues that rest upon the religious tie between God and man.'"
+   },
+   {
+    "q": 3,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "The 1920s fundamentalist-modernist conflict over science and traditional values."
+   },
+   {
+    "q": 4,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "The 1925 Scopes Trial came out of the controversy, with Bryan serving as a prosecutor. The other options are wrong in date or cause, or never happened."
+   }
+  ],
+  "solve-ap_us_history-real_g_bryan-1": [
+   {
+    "q": 1,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Bryan argues evolution is a menace to morality and religious faith."
+   },
+   {
+    "q": 2,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "The passage states the hypothesis is obscuring God and weakening virtues resting on the religious tie."
+   },
+   {
+    "q": 3,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "1920s fundamentalist-modernist conflict."
+   },
+   {
+    "q": 4,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "The Scopes trial of 1925 followed Tennessee's Butler Act."
+   }
+  ],
+  "solve-ap_us_history-real_g_eo8802-0": [
+   {
+    "q": 1,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "Randolph's planned March on Washington prompted EO 8802 in June 1941. Pearl Harbor came later, in December 1941."
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "The preamble says the discrimination hurt workers' morale and national unity."
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "Truman's EO 9981 in 1948 desegregated the armed forces, which is a federal responsibility."
+   },
+   {
+    "q": 4,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "The Wagner Act set rules for private employers. TVA, CCC and FDIC did not regulate employers' labor practices."
+   }
+  ],
+  "solve-ap_us_history-real_g_eo8802-1": [
+   {
+    "q": 1,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "Randolph's planned March on Washington pressured FDR; Pearl Harbor came after June 1941."
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "The WHEREAS clause cites detriment to workers' morale and national unity."
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "likely",
+    "also": null,
+    "note": "Truman's Executive Order 9981 (1948) desegregated the armed forces, extending nondiscrimination to another federal area."
+   },
+   {
+    "q": 4,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "The Wagner Act (NLRA) regulated private employers' labor practices using federal authority."
+   }
+  ],
+  "solve-ap_us_history-real_g_truman-0": [
+   {
+    "q": 1,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "The excerpt quotes this almost word for word. The other options go against the text."
+   },
+   {
+    "q": 2,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "In 1947 the Greek civil war was under way and Soviet influence was spreading in Eastern Europe. Pearl Harbor came earlier, the Great Depression is the wrong era, and the Cuban crisis came later (1962)."
+   },
+   {
+    "q": 3,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "The Marshall Plan (1947–48) carried on containment through economic aid, which the speech names as its main tool. The other options all come before 1947."
+   }
+  ],
+  "solve-ap_us_history-real_g_truman-1": [
+   {
+    "q": 1,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "Direct quote from the excerpt."
+   },
+   {
+    "q": 2,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "Greek civil war and Soviet expansion after WWII."
+   },
+   {
+    "q": 3,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "The Marshall Plan continued economic aid to contain communism."
+   }
+  ],
+  "solve-ap_us_history-real_g_cra-0": [
+   {
+    "q": 1,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "Section 201(a) bars discrimination or segregation in places of public accommodation on the basis of race, color, religion, or national origin. The other options misread the text."
+   },
+   {
+    "q": 2,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "'Sex' appears in 703(a) but not in 201(a). Color, religion and national origin are listed in both sections."
+   },
+   {
+    "q": 3,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Civil rights protests such as the sit-ins, the Birmingham campaign and the 1963 March on Washington pushed Congress to pass the Act. The other options come from other eras."
+   },
+   {
+    "q": 4,
+    "choice": 2,
+    "confidence": "likely",
+    "also": null,
+    "note": "Title VII created the EEOC, and federal courts enforced the Act's bans. Heart of Atlanta Motel (1964) upheld Title II rather than striking it down, segregation did not end within a year, and the Act was never repealed. One caveat: the EEOC was created to handle job discrimination only, and it could not bring lawsuits until 1972, so the option's wording is a bit loose."
+   }
+  ],
+  "solve-ap_us_history-real_g_cra-1": [
+   {
+    "q": 1,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "201(a) text."
+   },
+   {
+    "q": 2,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "Sex appears only in 703(a)."
+   },
+   {
+    "q": 3,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Civil rights movement context."
+   },
+   {
+    "q": 4,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "EEOC created and courts enforced; Heart of Atlanta upheld the Act."
+   }
+  ],
+  "solve-ap_us_history-real_g_gulf-0": [
+   {
+    "q": 1,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "It is an Oval Office address to the nation, given as the air attacks began. It explains why force was being used. Congress had already authorized force, and the war was just starting, not ending."
+   },
+   {
+    "q": 2,
+    "choice": 2,
+    "confidence": "likely",
+    "also": null,
+    "note": "Bush points to 'months of constant and virtually endless diplomatic activity.' The excerpt never actually says Saddam rejected these efforts. That is only implied by the phrase 'exhausted all reasonable efforts,' but this is still clearly the best option."
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "Iraq invaded Kuwait in August 1990, and a coalition backed by UN resolutions formed in response. The address mentions 28 countries and UN resolutions."
+   },
+   {
+    "q": 4,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "Saddam stayed in power after 1991. Sanctions, no-fly zones and weapons inspections followed, and the U.S. invaded Iraq again in 2003."
+   }
+  ],
+  "solve-ap_us_history-real_g_gulf-1": [
+   {
+    "q": 1,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "The address, delivered as air attacks began, explains to the American public why military action was started."
+   },
+   {
+    "q": 2,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "Bush cites months of diplomatic activity by the UN, the US and other countries; the other options are not in the source."
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "The address responds to Iraq's 1990 invasion of Kuwait and the UN-backed coalition."
+   },
+   {
+    "q": 4,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "After 1991, sanctions, weapons inspections and no-fly zones continued, leading to the 2003 Iraq War."
+   }
+  ],
+  "solve-ap_us_history-real_g_whitefield-0-r2": [
+   {
+    "q": 1,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "Franklin notes the 'multitudes of all sects and denominations' and says religious manners in the town changed, with psalms sung in every street."
+   },
+   {
+    "q": 2,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "Whitefield's 1739 tour was a key part of the First Great Awakening."
+   },
+   {
+    "q": 3,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "The Awakening split believers into New Lights and Old Lights, challenged the authority of established clergy, and led to new congregations growing. The other options are inaccurate."
+   }
+  ],
+  "solve-ap_us_history-real_g_whitefield-1-r2": [
+   {
+    "q": 1,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "Franklin notes multitudes of all sects and denominations and the change in the town's religious manners."
+   },
+   {
+    "q": 2,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "Whitefield's 1739 tour was part of the First Great Awakening."
+   },
+   {
+    "q": 3,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "The Awakening split colonists into New Lights and Old Lights, challenged established clergy, and fueled the growth of new congregations."
+   }
+  ],
+  "solve-ap_us_history-real_g_nworder-0-r2": [
+   {
+    "q": 1,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "Article 6 covered only the Northwest Territory and included a fugitive clause protecting slaveholders' claims, so it limits any claim of a national antislavery consensus. Option 0 is wrong because the ordinance was passed in July 1787, before the Constitution was ratified. Option 2 describes popular sovereignty, which came later."
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Article 3 directly states that the 'utmost good faith' shall be observed toward the Indians and that their lands will not be taken without their consent."
+   },
+   {
+    "q": 3,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "The ordinance set up government for the western lands north of the Ohio River that the United States gained after the Revolution. The other options are all later events."
+   },
+   {
+    "q": 4,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "The Missouri Compromise followed the same approach as Article 6: Congress banning slavery in part of a federal territory."
+   }
+  ],
+  "solve-ap_us_history-real_g_nworder-1-r2": [
+   {
+    "q": 1,
+    "choice": 3,
+    "confidence": "likely",
+    "also": null,
+    "note": "Limited to one territory and included fugitive clause; option 3 is chronologically wrong (July 1787, before ratification)."
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Article 3 pledges good faith and no taking of lands without consent."
+   },
+   {
+    "q": 3,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "Ordinance organized the western lands claimed after the Revolution."
+   },
+   {
+    "q": 4,
+    "choice": 1,
+    "confidence": "likely",
+    "also": null,
+    "note": "Missouri Compromise banned slavery in territory north of a line, building on the Northwest Ordinance precedent."
+   }
+  ],
+  "solve-ap_us_history-real_g_beard-0-r2": [
+   {
+    "q": 1,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Beard says the delegates had a personal economic stake, that the Constitution protected property rights from popular majorities, and that it was not made by 'the whole people.'"
+   },
+   {
+    "q": 2,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "Beard says about three-fourths of adult males did not vote for state convention delegates, either because they didn't care or because property qualifications kept them from voting."
+   },
+   {
+    "q": 3,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "The book came out in 1913, during the Progressive Era, when reformers were critical of how business interests shaped government."
+   },
+   {
+    "q": 4,
+    "choice": 3,
+    "confidence": "likely",
+    "also": null,
+    "note": "Both Beard and this argument explain political results through the money and influence of economic interest groups. Option 2 also points to a self-interested motive, but it is about diplomacy, not economic class."
+   }
+  ],
+  "solve-ap_us_history-real_g_beard-1-r2": [
+   {
+    "q": 1,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Beard says delegates had economic interests and the Constitution was not created by the whole people."
+   },
+   {
+    "q": 2,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "The excerpt says about three-fourths of adult males did not vote, from indifference or property disfranchisement."
+   },
+   {
+    "q": 3,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "A 1913 work that stresses economic interests fits the Progressive Era."
+   },
+   {
+    "q": 4,
+    "choice": 3,
+    "confidence": "likely",
+    "also": 2,
+    "note": "Economic interests controlling government is the same method as Beard's."
+   }
+  ],
+  "solve-ap_us_history-real_g_northup-0-r2": [
+   {
+    "q": 1,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "Slave narratives like Northup's, published in 1853 after Uncle Tom's Cabin came out, were written to tell Northern readers about slavery and turn them against it."
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "The excerpt says workers came to the gin-house with fear because falling short on weight meant suffering. The other options contradict the text."
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "The cotton boom in the Deep South pushed up the demand for enslaved labor. The other options are inaccurate or from the wrong period."
+   },
+   {
+    "q": 4,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "The domestic slave trade moved roughly a million enslaved people from the Upper South to the Deep South. Northup himself was sold to Louisiana through it."
+   }
+  ],
+  "solve-ap_us_history-real_g_northup-1-r2": [
+   {
+    "q": 1,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "Slave narratives like Northup's were published to expose slavery to Northern audiences and build abolitionist sentiment."
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "The fear of approaching the gin-house because a shortfall means suffering directly shows pressure and threat of punishment."
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "Cotton expansion in the Deep South after the cotton gin increased demand for enslaved labor."
+   },
+   {
+    "q": 4,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "The cotton economy fueled the domestic slave trade moving enslaved people from the Upper South to the Deep South."
+   }
+  ],
+  "solve-ap_us_history-real_g_14th-0-r2": [
+   {
+    "q": 1,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Section 1 says no state shall deny any person within its jurisdiction the equal protection of the laws, almost word for word. Race-based voting protection comes from the 15th Amendment, and the ban on slavery comes from the 13th."
+   },
+   {
+    "q": 2,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "Section 2 reduces a state's basis of representation in proportion to the number of adult male citizens it denies the vote. It replaced the three-fifths clause rather than restating it. The ban on former Confederates holding office is in Section 3, which is not excerpted here."
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "Congress proposed the amendment in 1866 to protect freedpeople's civil rights after Southern states passed the Black Codes, and to give the Civil Rights Act of 1866 a constitutional basis."
+   },
+   {
+    "q": 4,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "Plessy v. Ferguson (1896) read the equal protection clause narrowly and upheld segregation, which limited Section 1's protections. Brown (1954) is not late 19th century and expanded protections, the 15th Amendment expanded rights, and the Emancipation Proclamation came before the amendment."
+   }
+  ],
+  "solve-ap_us_history-real_g_14th-1-r2": [
+   {
+    "q": 1,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Equal protection clause is in Section 1."
+   },
+   {
+    "q": 2,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "Section 2 reduces representation for denying the vote to eligible male citizens."
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "The amendment responded to the Black Codes and aimed to protect freed people."
+   },
+   {
+    "q": 4,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "Plessy v. Ferguson (1896) limited Section 1 protections in the late nineteenth century."
+   }
+  ],
+  "solve-ap_us_history-real_g_hayes-0-r2": [
+   {
+    "q": 1,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "Hayes calls for wise, honest local self-government that guards the interests of both races carefully and equally. The excerpt does not say the word 'local' in that exact sentence, but the context makes it clear."
+   },
+   {
+    "q": 2,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "The address came after the disputed 1876 election and the Compromise of 1877, which led to federal troops being withdrawn and Reconstruction ending."
+   },
+   {
+    "q": 3,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Jim Crow laws and the disfranchisement of Black voters show that 'home rule' did not protect both races equally. The Civil Rights Act of 1875 came before Hayes spoke and was not a limit on his goal. The other two options are historically false."
+   }
+  ],
+  "solve-ap_us_history-real_g_hayes-1-r2": [
+   {
+    "q": 1,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "The excerpt directly says the government must guard the interests of both races carefully and equally."
+   },
+   {
+    "q": 2,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "The address followed the disputed 1876 election and the Compromise of 1877, which ended federal military support for Reconstruction."
+   },
+   {
+    "q": 3,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Jim Crow laws and disfranchisement undercut equal protection for both races."
+   }
+  ],
+  "solve-ap_us_history-real_g_turner-0-r2": [
+   {
+    "q": 1,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "Turner tells the story from the point of view of white settlers. Native peoples show up only as part of the environment ('Indian clearings,' 'Indian trails'), so the essay leaves out their experience and that of other western groups. The other options are wrong about who Turner was: he was a professor, not a settler, an eyewitness or a land promoter, and the essay is not about eastern immigrants."
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "The excerpt says the settler 'fits himself into the Indian clearings and follows the Indian trails' and changes the wilderness, but 'the outcome is not the old Europe... here is a new product that is American.' Option 1 says the opposite of Turner's argument, and he does not mention government planning or eastern capital."
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "Turner's essay begins by quoting the Superintendent of the Census, who said in 1890 that there was no longer a continuous frontier line. This is not in the excerpt, but it is well-known background. The Spanish-American War (1898) came after the essay (1893). The Homestead Act and the Louisiana Purchase were much earlier and had nothing to do with the frontier closing."
+   }
+  ],
+  "solve-ap_us_history-real_g_turner-1-r2": [
+   {
+    "q": 1,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "Turner centers white settlers and treats Native peoples as part of the environment (clearings and trails), which limits the excerpt as evidence for all Westerners."
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "The excerpt says settlers fit themselves into Indian clearings and trails, and the outcome is 'not the old Europe' but 'a new product that is American.'"
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "The 1890 census bulletin declared the frontier line closed, which is the immediate prompt for Turner's 1893 essay."
+   }
+  ],
+  "solve-ap_us_history-real_g_eo8802-0-r2": [
+   {
+    "q": 1,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "Randolph's planned March on Washington prompted EO 8802 (June 1941, before Pearl Harbor)."
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "The preamble explicitly says the discrimination harms workers' morale and national unity."
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "Truman's EO 9981 (1948) applied nondiscrimination to the armed forces."
+   },
+   {
+    "q": 4,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "The Wagner Act imposed federal rules on private employers' labor practices."
+   }
+  ],
+  "solve-ap_us_history-real_g_eo8802-1-r2": [
+   {
+    "q": 1,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "Randolph's planned March on Washington prompted the order, which was signed in June 1941, before Pearl Harbor."
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "The order's WHEREAS clause says that barring workers from defense jobs harmed morale and national unity."
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "Truman's Executive Order 9981 in 1948 desegregated the armed forces."
+   },
+   {
+    "q": 4,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "The National Labor Relations Act set federal rules for private employers' dealings with unions."
+   }
+  ],
+  "solve-ap_us_history-real_g_gulf-0-r2": [
+   {
+    "q": 1,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "This is an Oval Office address to the nation announcing that air attacks had begun and explaining why. Congress had already authorized force, troops were already deployed, and the war had only just started, so the other options do not fit."
+   },
+   {
+    "q": 2,
+    "choice": 2,
+    "confidence": "likely",
+    "also": null,
+    "note": "Bush cites 'months of constant and virtually endless diplomatic activity' by the UN, the U.S. and other countries. The excerpt does not say outright that Saddam 'rejected' these efforts, but that is implied by 'exhausted all reasonable efforts.' The other options are not in the text, and the sanctions claim is false."
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "The direct context is Iraq's August 1990 invasion of Kuwait and the 28-nation coalition acting under UN resolutions."
+   },
+   {
+    "q": 4,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "Saddam stayed in power after 1991. Sanctions, no-fly zones and UN weapons inspections followed through the 1990s, and the U.S. invaded Iraq in 2003."
+   }
+  ],
+  "solve-ap_us_history-real_g_gulf-1-r2": [
+   {
+    "q": 1,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "The address explains to the public why allied military action began."
+   },
+   {
+    "q": 2,
+    "choice": 2,
+    "confidence": "likely",
+    "also": null,
+    "note": "Bush cites months of diplomatic activity by the UN, the US and other countries; the source implies Saddam rejected them."
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "The address responds to Iraq's 1990 invasion of Kuwait and the UN-backed coalition."
+   },
+   {
+    "q": 4,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "After 1991 sanctions and weapons inspections continued, and the 2003 Iraq War followed."
+   }
+  ],
+  "solve-ap_us_history-real_g_nworder-0-r3": [
+   {
+    "q": 1,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "Article 6 covered only the Northwest Territory and included a fugitive clause protecting slaveholders' claims, which limits it as evidence of national antislavery consensus. Option 0 is wrong (1787 predates ratification); option 2 describes popular sovereignty."
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Article 3 directly pledges 'utmost good faith' and says lands shall not be taken without consent."
+   },
+   {
+    "q": 3,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "The ordinance organized the Northwest Territory, western land claimed after the Revolution; other options are later events."
+   },
+   {
+    "q": 4,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "The Missouri Compromise, like Article 6, used congressional power to ban slavery in a defined territorial area. Dred Scott rejected that approach; option 2 is factually inaccurate."
+   }
+  ],
+  "solve-ap_us_history-real_g_nworder-1-r3": [
+   {
+    "q": 1,
+    "choice": 3,
+    "confidence": "likely",
+    "also": null,
+    "note": "Limited to Northwest Territory and included a fugitive clause; other options are factually wrong."
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Article 3 pledges good faith and no taking of lands without consent."
+   },
+   {
+    "q": 3,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "The Ordinance organized western lands claimed after the Revolution."
+   },
+   {
+    "q": 4,
+    "choice": 1,
+    "confidence": "likely",
+    "also": null,
+    "note": "The Missouri Compromise used the same approach of banning slavery in territory north of a line."
+   }
+  ],
+  "solve-ap_us_history-real_g_beard-0-r3": [
+   {
+    "q": 1,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Beard argues that the delegates had personal economic interests, that the Constitution protected property rights from popular majorities, and that it was not the work of 'the whole people.'"
+   },
+   {
+    "q": 2,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "The excerpt says about three-fourths of adult males did not vote for state convention delegates, either because they didn't care or because property qualifications kept them from voting."
+   },
+   {
+    "q": 3,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "The book came out in 1913, during the Progressive Era, when reformers and scholars were looking hard at how business and money influenced government."
+   },
+   {
+    "q": 4,
+    "choice": 3,
+    "confidence": "likely",
+    "also": null,
+    "note": "Like Beard, this argument explains political results by pointing to the economic interests and money of powerful groups. The other options rely on environmental, religious, or diplomatic explanations."
+   }
+  ],
+  "solve-ap_us_history-real_g_beard-1-r3": [
+   {
+    "q": 1,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Beard argues the framers had property interests the Constitution protected, and it was not created by the whole people."
+   },
+   {
+    "q": 2,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "The excerpt says about three-fourths of adult males did not vote, from indifference or property-qualification disfranchisement."
+   },
+   {
+    "q": 3,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "Beard's 1913 economic interpretation reflects Progressive Era scholarship and reform concerns about business interests."
+   },
+   {
+    "q": 4,
+    "choice": 3,
+    "confidence": "likely",
+    "also": 2,
+    "note": "Explaining politics through the economic interests of powerful groups matches Beard's method."
+   }
+  ],
+  "solve-ap_us_history-real_g_nworder-0-r4": [
+   {
+    "q": 1,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "The ban covered only the Northwest Territory and included a fugitive slave clause, so it was a limited compromise rather than a national consensus. The other options get the facts wrong: the Ordinance passed in 1787, before the Constitution was ratified, and it did not provide for popular sovereignty."
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Article 3 directly states that 'utmost good faith' shall be observed toward the Indians and that their lands will not be taken without their consent."
+   },
+   {
+    "q": 3,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "The Confederation Congress passed the Ordinance to organize and govern the western lands north of the Ohio River that the United States gained after the Revolution. The other options refer to later events."
+   },
+   {
+    "q": 4,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "The Missouri Compromise also had Congress ban slavery in part of the federal territory, extending the precedent set by Article 6. Dred Scott rejected that congressional power, and the Emancipation Proclamation option misstates what the Proclamation did."
+   }
+  ],
+  "solve-ap_us_history-real_g_nworder-1-r4": [
+   {
+    "q": 1,
+    "choice": 3,
+    "confidence": "likely",
+    "also": null,
+    "note": "Limited to the Northwest Territory and included a fugitive clause, so it shows limited consensus."
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Article 3 states good faith and no taking of lands without consent."
+   },
+   {
+    "q": 3,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "The Ordinance organized the western lands claimed after the Revolution."
+   },
+   {
+    "q": 4,
+    "choice": 1,
+    "confidence": "likely",
+    "also": null,
+    "note": "The Missouri Compromise applied a congressional ban on slavery in territory north of a line, building on Article 6."
+   }
+  ]
+ },
+ "fact": {
+  "fact-ap_us_history-real_g_northup": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "fix",
+     "note": "Key and distractors are sound, but the option [0] rationale and the designer's evidence note claim the excerpt 'describes ... whippings.' The supplied passage never mentions whipping; it says only that a worker who falls short 'knows that he must suffer.' Reword to 'fear, long hours and the threat of punishment.'"
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Key quotation is verbatim; each distractor is directly contradicted by the excerpt (10–15 minutes at noon, weighing at the gin-house, no stopping until the driver orders a halt)."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Cotton expansion in the Deep South increasing demand for enslaved labor is the correct context; distractor rationales are historically accurate."
+    },
+    {
+     "where": "Q4",
+     "verdict": "sound",
+     "note": "Domestic (internal) slave trade from the Upper South to the Deep South is the standard result; distractors are clearly false and their rationales accurate."
+    }
+   ],
+   "flags": [
+    {
+     "where": "Q1 option [0] rationale and designer evidence line",
+     "kind": "source_misread",
+     "detail": "Claims the excerpt describes 'whippings.' The supplied passage does not mention whipping or any specific punishment; it says only that a worker whose basket falls short 'knows that he must suffer.' The inference is reasonable but the rationale should not attribute an explicit mention of whippings to the excerpt."
+    }
+   ]
+  },
+  "fact-ap_us_history-real_g_whitefield": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Key [1] is directly supported by the quoted lines; distractors are clearly contradicted or unsupported by the excerpt."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Key [3] is the correct context; dates in distractor rationales (Salem 1692, Stamp Act 1765, Second Great Awakening c. 1800) are accurate."
+    },
+    {
+     "where": "Q3",
+     "verdict": "fix",
+     "note": "Key [0] is historically sound and distractors are clearly false, but the designer's cited evidence refers to material not present in the supplied excerpt."
+    }
+   ],
+   "flags": [
+    {
+     "where": "Q3 evidence line",
+     "kind": "source_misread",
+     "detail": "The cited evidence 'the building of a meeting house open to any preacher of any persuasion' does not appear in the supplied excerpt; it comes from the following passage of the Autobiography (the building erected 'expressly for the use of any preacher of any religious persuasion'). Also, the excerpt shows the clergy uniformly 'taking a dislike' to Whitefield, not 'dividing over him'. The evidence line should be revised to cite only what is in the excerpt (e.g., clergy refusing pulpits, crowds of all sects, change in manners)."
+    }
+   ]
+  },
+  "fact-ap_us_history-real_g_14th": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Key is quoted verbatim from Section 1; distractors correctly attributed to the Fifteenth and Thirteenth Amendments or to no provision."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Key matches the penalty clause of Section 2; rationale on 'whole number of persons' replacing the three-fifths rule is accurate; Section 3 and women's suffrage rationales are accurate."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Black Codes (1865–66) as context for the Fourteenth Amendment is standard; date arithmetic (1820 to 1868 ≈ 48 years) is fine."
+    },
+    {
+     "where": "Q4",
+     "verdict": "sound",
+     "note": "Plessy v. Ferguson (1896) upholding Louisiana's separate railroad cars under 'separate but equal' is accurate and is the only late-19th-century limiting development offered; Brown (1954) and Emancipation Proclamation (1863) correctly dated."
+    }
+   ],
+   "flags": [
+    {
+     "where": "Q2 option [1] rationale",
+     "kind": "ambiguous_key",
+     "detail": "Minor: the rationale says 'the office-holding restriction appears in Section 3,' but Section 3 does not bar all 'former Confederate officials' from 'any' office; it bars only those who had previously sworn an oath to support the Constitution and then engaged in insurrection, and Congress could remove the disability by two-thirds vote. The distractor is still clearly wrong for the excerpt, so no change to the key is needed; the rationale could be worded more precisely."
+    }
+   ]
+  },
+  "fact-ap_us_history-real_g_nullification": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Both excerpts are quoted verbatim from the Avalon transcriptions; the key correctly contrasts South Carolina's declaration that the tariff acts are 'null, void, and no law' with Jackson's denial that any one state has the power to annul a federal law. Distractor rationales are accurate."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Key matches Jackson's wording exactly ('contradicted expressly by the letter of the Constitution ... destructive of the great object for which it was formed'). Distractors are clearly unsupported by the excerpt. One distractor rationale slightly overstates what Source A argues (see flag), but it does not affect the key."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Context line and dates are correct (Nov 24 to Dec 10 is sixteen days; tariffs of 1828 and 1832). The cited preamble language ('intended for the protection of domestic manufactures') is in the real ordinance. Distractor date rationales are accurate (Missouri Compromise 1820; Mexican-American War 1846-48; Reconstruction after 1865)."
+    }
+   ],
+   "flags": [
+    {
+     "where": "Q2 option [2] rationale",
+     "kind": "other",
+     "detail": "The rationale says 'That is the argument of Source A.' The Source A excerpt actually argues the tariffs are unconstitutional ('unauthorized by the constitution'), not that nullification is 'a fair response to an unfair tax.' The full ordinance's preamble does call the tariffs oppressive and unequal, so the idea is loosely present in the document, but it is not in the supplied excerpt. Minor; does not affect the key."
+    }
+   ]
+  },
+  "fact-ap_us_history-real_g_beard": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Key is clearly supported by the excerpt. Distractor [1] rationale cites Beard's 'line of cleavage' claim (personalty vs. small farming/debtor interests), which is accurate to the book's conclusion but does not appear in the supplied excerpt."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Key matches the three-fourths/indifference-or-disfranchisement passage; distractors are clearly contradicted by the excerpt or standard knowledge."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "1913 falls in the Progressive Era; distractor rationales' dates (Cold War post-1945, Reconstruction ending 1877, ratification 1787–88) are accurate."
+    },
+    {
+     "where": "Q4",
+     "verdict": "fix",
+     "note": "Key [3] is still the best of the four, but the stem asks for a 'later' argument while the key describes a Progressive Era argument contemporaneous with Beard (1913); and the option is worded as a claim about what reformers believed rather than as an interpretive argument that explains a political outcome by economic interests, so its 'method' is murky. Reword the key (e.g., 'An argument that railroad and trust interests shaped the legislation passed by Gilded Age state legislatures') or drop 'later' from the stem."
+    }
+   ],
+   "flags": [
+    {
+     "where": "Q4 stem / key [3]",
+     "kind": "ambiguous_key",
+     "detail": "Stem specifies a 'later' argument, but Progressive reformers' views (key) are contemporaneous with Beard's 1913 book, not later. The option also describes a belief held by reformers rather than a historian's explanatory method, making the 'similar in method' comparison loose. Key remains the only economic-interest option, so not unsound, but should be reworded."
+    },
+    {
+     "where": "Q1 distractor [1] rationale",
+     "kind": "source_misread",
+     "detail": "Rationale says Beard 'says the line of conflict ran between property interests ... and small farming and debtor interests.' That statement is in Beard's full conclusion but not in the supplied excerpt; the rationale should rely on the excerpt's language (framers 'derived economic advantages,' property rights 'beyond the reach of popular majorities') or note it is from elsewhere in the book."
+    }
+   ]
+  },
+  "fact-ap_us_history-real_g_nworder": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "fix",
+     "note": "Key [3] is the clear best answer and the option wording ('allowed fugitives... to be reclaimed') is accurate. Only the key rationale slightly misstates the clause (see flag)."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Key [0] is directly supported by Art. 3; distractors are each contradicted or unsupported by the excerpt. Dates and claims in rationales are accurate."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Key [2] is the correct context; date arithmetic (1803 = 16 years later; 1820 = 33 years later) and the Fugitive Slave Act of 1850 reference are accurate."
+    },
+    {
+     "where": "Q4",
+     "verdict": "sound",
+     "note": "Key [1] is correct; Missouri Compromise barred slavery in the Louisiana Purchase north of 36°30' (except Missouri). Dred Scott (1857), Emancipation Proclamation scope, and Compromise of 1877 are accurately characterized."
+    }
+   ],
+   "flags": [
+    {
+     "where": "Q1 key rationale",
+     "kind": "source_misread",
+     "detail": "Rationale says the clause was 'requiring that fugitives be returned to the states they came from.' The proviso is permissive, not mandatory ('may be lawfully reclaimed'), and it provides for conveyance to 'the person claiming his or her labor or service,' not to the state. The option text itself ('allowed... to be reclaimed') is accurate; only the rationale wording needs adjusting."
+    }
+   ]
+  },
+  "fact-ap_us_history-real_g_turner": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Key supported by the excerpt; biographical claims (born 1861 in Wisconsin, professional historian, not a Plains settler) are accurate."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Key matches the excerpt's reasoning ('fits himself into the Indian clearings... a new product that is American'); distractor rationales accurate."
+    },
+    {
+     "where": "Q3",
+     "verdict": "fix",
+     "note": "Key is correct (Turner opens with the 1890 census superintendent's statement that the frontier line can no longer be traced). Minor anachronism in the key rationale: in 1890 the agency was the temporary Census Office under the Interior Department; the permanent Census Bureau was created in 1902. Turner cites 'the Superintendent of the Census for 1890.' Dates for Homestead Act (1862), Spanish-American War (1898), Louisiana Purchase (1803) are correct."
+    }
+   ],
+   "flags": [
+    {
+     "where": "Q3 key rationale",
+     "kind": "anachronism",
+     "detail": "'The Census Bureau reported after the 1890 census...' — no permanent Census Bureau existed in 1890; the 1890 count was run by the Census Office (Interior Department), and Turner quotes the 'Superintendent of the Census for 1890.' The Bureau of the Census was established in 1902. Suggest 'the Census Office' or 'the Superintendent of the Census'."
+    }
+   ]
+  },
+  "fact-ap_us_history-real_g_cities": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Chicago figures match Gibson's tables; railroad-hub explanation is standard and distractors are clearly false."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Checked ratios: Chicago ≈36.7x, Cleveland ≈15.3x, Detroit ≈9.8x, Philadelphia ≈8.6x, St. Louis ≈5.8x, New York ≈2.9x. Key and all distractor rationales are numerically correct."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Industrialization/immigration context is standard; distractors are chronologically or substantively wrong as stated."
+    },
+    {
+     "where": "Q4",
+     "verdict": "sound",
+     "note": "Great Migration is the only option continuing urban growth; 1920 census urban-majority claim and Homestead Act date are accurate. 'Hundreds of thousands' understates the roughly 1.5 million migrants by 1930 but is not inaccurate."
+    }
+   ],
+   "flags": []
+  },
+  "fact-ap_us_history-real_g_hayes": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "fix",
+     "note": "Key is supportable from the excerpt ('guards the interests of both races carefully and equally'), but the key rationale and cited evidence quote 'only a local government which recognizes and maintains inviolate the rights of all' (and 'true self-government'), which appears in the full address but NOT in the supplied excerpt. Distractor rationales likewise cite material outside the excerpt ('effects of the revolution still remain', 'party lines should fade'). Rationales/evidence should be restricted to the excerpt actually shown, or the excerpt expanded."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Dates and context (disputed 1876 election, electoral commission, March 5, 1877 public inauguration, troop withdrawal April 1877) are accurate; key is clearly best."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Key and distractor rationales (Civil Rights Act of 1875; Plessy 1896; Brown 1954; decline of Black officeholding after 1877) are accurate."
+    }
+   ],
+   "flags": [
+    {
+     "where": "Q1 key rationale / designer evidence",
+     "kind": "source_misread",
+     "detail": "Quotation 'only a local government which recognizes and maintains inviolate the rights of all' (and the 'true self-government' wording in the key option) is from the full Hayes address but is not in the three segments of the supplied excerpt; students cannot verify it from the source shown."
+    },
+    {
+     "where": "Q1 distractor rationales [0] and [2]",
+     "kind": "source_misread",
+     "detail": "Rationale [0] says Hayes states 'effects of the revolution still remain' and rationale [2] says the excerpt 'says party lines should fade'; neither statement appears in the supplied excerpt (they derive from other parts of the full address)."
+    }
+   ]
+  },
+  "fact-ap_us_history-real_g_truman": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Key quotes the excerpt verbatim; distractors contradict the text (Truman calls for involvement, favors primarily economic aid, never mentions occupation)."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Soviet domination of Eastern Europe and the Greek civil war (with Britain's February 1947 announcement it would end aid) are the accepted context; distractor dates (1941, 1929, 1962) are correct."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Marshall Plan (announced June 1947, enacted 1948) is the standard continuation of the economic-aid approach; dates for Neutrality Acts, Monroe Doctrine (1823), and Open Door (1899–1900) are accurate."
+    }
+   ],
+   "flags": []
+  },
+  "fact-ap_us_history-real_g_bryan": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Key is clearly best; distractors are not defensible. Minor: the excerpt attacks the doctrine itself, not 'teaching' it specifically, but this does not change the answer."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Key quotes the source accurately; distractors are not supported by the excerpt."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Fundamentalist–modernist conflict of the 1920s is the correct context; dates in rationales (1922, Depression after 1929, Gilded Age) are accurate."
+    },
+    {
+     "where": "Q4",
+     "verdict": "sound",
+     "note": "Butler Act (March 1925) and Scopes trial (July 1925) with Bryan assisting the prosecution are accurate; 18th Amendment ratified January 1919 and Brown v. Board 1954 are accurate."
+    }
+   ],
+   "flags": [
+    {
+     "where": "Q1 key / Q4 evidence line",
+     "kind": "other",
+     "detail": "The excerpt does not mention 'teaching' evolution; it condemns the Darwinian hypothesis/doctrine itself. Key [0] ('teaching evolution threatened...') and the Q4 evidence note ('the excerpt's argument against teaching evolution') slightly overstate what the passage says, though the key remains the single best answer. Consider rewording to 'the theory of evolution threatened religious faith and morality.'"
+    }
+   ]
+  },
+  "fact-ap_us_history-real_g_cra": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Key matches Section 201(a) verbatim; distractors (private clubs, home sales, interstate travel) are not in the excerpt. Private clubs are in fact exempted under 201(e), and housing was not covered until the 1968 Fair Housing Act, so distractor rationales are accurate."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Sex appears only in Title VII Section 703(a); Section 201(a) lists race, color, religion, national origin. Quotes match the source."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Sit-ins (1960 onward) and the August 1963 March on Washington are correct early-1960s context; Freedmen's Bureau (1865-72), Red Scare (1919-20) and New Deal (1930s) dates are accurate."
+    },
+    {
+     "where": "Q4",
+     "verdict": "sound",
+     "note": "EEOC was created by Title VII (though it lacked litigation authority until 1972, it did process complaints and conciliate, consistent with the rationale); Title II Sec. 206 and Title VII Sec. 707 authorized Attorney General suits. Heart of Atlanta Motel v. U.S. (Dec. 1964) upheld Title II. Title VII was never repealed."
+    }
+   ],
+   "flags": []
+  },
+  "fact-ap_us_history-real_g_eo8802": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "EO 8802 (June 25, 1941) was issued in response to A. Philip Randolph's planned July 1, 1941 march on Washington; distractor dating (Pearl Harbor Dec. 1941, veterans post-1945, CRA 1964) is accurate."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Key is directly supported by the excerpt ('to the detriment of workers' morale and of national unity'). Distractors are clearly contradicted or unsupported. One distractor rationale cites a provision (contract clause) that is in the full order but not in the excerpt shown."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Truman's EO 9981 (July 26, 1948) ordered 'equality of treatment and opportunity for all persons in the armed services'; accurately described. Distractors are unrelated to nondiscrimination policy."
+    },
+    {
+     "where": "Q4",
+     "verdict": "fix",
+     "note": "Key is correct (Wagner Act, 1935, required employers to bargain collectively with unions) and distractors are accurately described. However, the designer's cited evidence quotes 'obligating the contractor not to discriminate,' a paragraph of EO 8802 that was cut from the excerpt via [...]; the excerpt's actual support is the 'duty of employers and of labor organizations' clause. Replace the evidence citation or restore that paragraph to the excerpt."
+    }
+   ],
+   "flags": [
+    {
+     "where": "Q4 evidence citation",
+     "kind": "source_misread",
+     "detail": "The phrase 'obligating the contractor not to discriminate' appears in the full text of EO 8802 (the contracting-agencies paragraph) but is not in the three segments presented to students; the cited evidence is not visible in the excerpt."
+    },
+    {
+     "where": "Q2 option [3] rationale",
+     "kind": "source_misread",
+     "detail": "Rationale says 'the order requires a nondiscrimination clause in future contracts' — accurate for the full order, but that provision is omitted from the excerpt shown, so students cannot verify it from the given text. Minor; the distractor is still unsupported by the excerpt."
+    }
+   ]
+  },
+  "fact-ap_us_history-real_g_gulf": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Purpose/audience key is clearly supported; distractors are clearly wrong. Context line (Congress authorized force Jan 12, four days earlier) is accurate."
+    },
+    {
+     "where": "Q2",
+     "verdict": "fix",
+     "note": "Key is correct and supported by the excerpt, but the key rationale cites Secretary Baker's rebuffed Geneva meeting, which appears in the full speech but not in the supplied excerpt."
+    },
+    {
+     "where": "Q3",
+     "verdict": "fix",
+     "note": "Key is correct on standard knowledge, but the cited evidence ('This conflict started August 2d...') and the key rationale's claim that 'the address says the conflict started when Iraq invaded Kuwait' rely on text not included in the excerpt; only 'drive Saddam from Kuwait' and 'in accord with United Nations resolutions' are present."
+    },
+    {
+     "where": "Q4",
+     "verdict": "sound",
+     "note": "Key and all distractor rationales are historically accurate (Saddam remained until 2003; sanctions/inspections continued; USSR dissolved Dec 1991)."
+    }
+   ],
+   "flags": [
+    {
+     "where": "Q2 key rationale",
+     "kind": "source_misread",
+     "detail": "Rationale states Bush says 'Secretary Baker's meeting in Geneva was rebuffed.' That passage is in the full January 16, 1991 address but is not in the supplied excerpt; the rationale should rely only on the excerpted lines ('months of constant and virtually endless diplomatic activity'; 'exhausted all reasonable efforts')."
+    },
+    {
+     "where": "Q2 option [1] rationale",
+     "kind": "source_misread",
+     "detail": "Says 'the excerpt describes Iraq's invasion of Kuwait'; the excerpt only refers to driving Saddam 'from Kuwait' and does not describe the invasion itself. Minor, but the wording should match the excerpt."
+    },
+    {
+     "where": "Q3 cited evidence and key rationale",
+     "kind": "source_misread",
+     "detail": "The quoted evidence 'This conflict started August 2d when the dictator of Iraq invaded a small and helpless neighbor' is from the full speech, not the excerpt provided. The key rationale's claim that 'the address says the conflict started when Iraq invaded Kuwait' is therefore not verifiable from the excerpt; the key still stands on 'drive Saddam from Kuwait' plus 'in accord with United Nations resolutions' and standard knowledge."
+    }
+   ]
+  },
+  "fact-ap_us_history-real_g_northup-r2": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Key and rationales accurate; context line about Northup (kidnapped 1841, freed 1853, narrative written with white lawyer/writer David Wilson) is correct."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Quoted evidence matches the excerpt verbatim; distractor rationales correctly describe the source (10–15 minutes at noon, baskets weighed, halt only on driver's order)."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Key correctly situates the passage in the cotton-driven expansion of slavery in the Deep South; distractor rationales are historically accurate."
+    },
+    {
+     "where": "Q4",
+     "verdict": "sound",
+     "note": "Domestic slave trade from Upper South to Deep South is the standard consequence; distractor rationales (British purchases continued to 1861, no Louisiana emancipation laws in 1840s) are accurate."
+    }
+   ],
+   "flags": []
+  },
+  "fact-ap_us_history-real_g_whitefield-r2": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Key [1] is directly supported by the quoted lines ('all sects and denominations'; psalms sung in families); distractors are clearly contradicted by or absent from the excerpt."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Whitefield's 1739-41 colonial tour is standardly treated as the centerpiece of the Great Awakening; the distractor dates (Salem 1692, Stamp Act 1765, Second Great Awakening c. 1790s-1800) are accurate."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Old Light/New Light divisions and growth of Baptist and New Side Presbyterian congregations are standard effects; distractor rationales are historically accurate (no single imperial established church; several colonies retained establishments past 1750; church membership rose)."
+    }
+   ],
+   "flags": []
+  },
+  "fact-ap_us_history-real_g_hayes-r2": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Key is a near-verbatim claim from the excerpt; distractor rationales accurately describe what the excerpt does and does not say."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Date arithmetic (13th Amendment 1865, Johnson impeachment 1868, Populists 1890s) is correct; the 1876 disputed election/electoral commission and 1877 troop withdrawal are standard and accurately stated."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Jim Crow laws and disfranchisement (1890s–1900s) correctly identified; Civil Rights Act of 1875, Plessy (1896) and Brown (1954) dates are accurate; no Black majorities in most Southern legislatures by 1890."
+    }
+   ],
+   "flags": []
+  },
+  "fact-ap_us_history-real_g_14th-r2": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Key is quoted verbatim from Section 1; distractor rationales correctly attribute voting-race ban to the 15th Amendment and the slavery ban to the 13th."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Key matches the penalty clause of Section 2; the statement that Section 2 replaced the three-fifths rule and that office-holding restrictions are in Section 3 are accurate."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Black Codes of 1865–66 and the congressional response are accurately described; 1820 Missouri Compromise dating ('nearly fifty years') is fine."
+    },
+    {
+     "where": "Q4",
+     "verdict": "sound",
+     "note": "Plessy v. Ferguson (1896) correctly described; dates for the Emancipation Proclamation and the Fifteenth Amendment are accurate. Brown (1954) characterization is a standard simplification."
+    }
+   ],
+   "flags": [
+    {
+     "where": "Q4 option [3] / rationale",
+     "kind": "other",
+     "detail": "Minor: Brown v. Board of Education declared school segregation unconstitutional rather than literally 'ending' it (implementation lagged for years). Standard textbook shorthand; does not affect the key."
+    }
+   ]
+  },
+  "fact-ap_us_history-real_g_nworder-r2": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Key correctly reflects the territorial scope and fugitive proviso of Art. 6; distractor rationales are accurate (Ordinance predates ratification; in 1787 only PA, MA, NH, RI, CT had abolished or begun gradual abolition, so most of the 13 states still permitted slavery)."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Key is directly supported by Art. 3; distractors are clearly unsupported by the excerpt."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Key and date-based distractor rationales (1803, 1850, 1820) are accurate; context line is correct."
+    },
+    {
+     "where": "Q4",
+     "verdict": "sound",
+     "note": "Missouri Compromise correctly described (ban north of 36°30' covering most of the Louisiana Purchase); Dred Scott, Emancipation Proclamation, and Compromise of 1877 descriptions are accurate."
+    }
+   ],
+   "flags": [
+    {
+     "where": "Q3 designer evidence",
+     "kind": "source_misread",
+     "detail": "The cited phrase 'which may be formed therein' does not appear in the supplied excerpt (it is from other articles of the Ordinance); only 'the said territory' is in the excerpt. Minor, since it is labeled as context and does not affect the key."
+    }
+   ]
+  },
+  "fact-ap_us_history-real_g_turner-r2": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Turner born 1861 in Portage, Wisconsin; professional historian, not a Plains settler or land official. Key accurately characterizes the excerpt's settler-centered perspective ('Indian clearings', 'Indian trails')."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Key matches the excerpt's argument (environment 'too strong for the man', adaptation, 'not the old Europe', 'a new product that is American'). Distractors are not supported by the excerpt."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Turner's essay opens by quoting the 1890 Census bulletin stating a frontier line could no longer be said to exist. Dates in distractor rationales (Homestead Act 1862, Spanish-American War 1898, Louisiana Purchase 1803) are correct. Context line (AHA meeting, July 12, 1893, Chicago, during the Columbian Exposition) is accurate."
+    }
+   ],
+   "flags": []
+  },
+  "fact-ap_us_history-real_g_beard-r2": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Quotations match Beard's conclusion; key is the clear main argument; distractors are contradicted by the excerpt."
+    },
+    {
+     "where": "Q2",
+     "verdict": "fix",
+     "note": "Key is directly supported by the excerpt. Minor inaccuracy in the distractor [1] rationale: the blanket claim that 'women could not vote in these elections' overlooks New Jersey, whose 1776 constitution enfranchised property-holding 'inhabitants' (including some women) until 1807. Simply drop that clause; the distractor is still wrong because of the property qualifications Beard cites."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "1913 falls squarely in the Progressive Era; rationales about Cold War consensus history and Reconstruction's end in 1877 are accurate."
+    },
+    {
+     "where": "Q4",
+     "verdict": "sound",
+     "note": "Key correctly mirrors Beard's economic-interest method; distractor rationales accurately characterize the alternative explanations."
+    }
+   ],
+   "flags": [
+    {
+     "where": "Q2 distractor [1] rationale",
+     "kind": "inaccurate",
+     "detail": "States that 'women could not vote in these elections.' In New Jersey, the 1776 constitution allowed property-holding inhabitants, including unmarried women, to vote until 1807, so this blanket statement is not strictly accurate. The distractor remains wrong on the 'all adult men' point, which Beard explicitly contradicts (property qualifications); recommend removing the clause about women or qualifying it."
+    }
+   ]
+  },
+  "fact-ap_us_history-real_g_gulf-r2": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Key and distractor rationales match the excerpt; the address does announce the start of allied air attacks to the nation, and Bush notes Congress had already consented."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Key is supported by 'months of constant and virtually endless diplomatic activity' and 'exhausted all reasonable efforts.' The phrase 'that Saddam Hussein rejected' is a slight inference beyond the literal excerpt, but is the plain implication and historically accurate; distractors are clearly unsupported."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Key correctly identifies the August 1990 invasion of Kuwait and UN-backed coalition. Distractor rationales are accurate (Iran hostage crisis ended January 20, 1981; 9/11 a decade later; Gulf of Tonkin 1964)."
+    },
+    {
+     "where": "Q4",
+     "verdict": "sound",
+     "note": "Key is accurate (sanctions, UNSCOM/UNMOVIC inspections, 2003 invasion). Distractor rationales accurate: Saddam stayed in power until 2003; US kept forces in the region; USSR dissolved December 1991. Context line's 'four days earlier' matches the January 12, 1991 congressional authorization."
+    }
+   ],
+   "flags": []
+  },
+  "fact-ap_us_history-real_g_eo8802-r2": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Key correct: Randolph's March on Washington Movement (planned July 1941) prompted EO 8802 on June 25, 1941. Distractor rationales (Pearl Harbor Dec 1941; veterans post-1945; CRA 1964) are accurate."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Key quotes the WHEREAS clause verbatim. Distractors are not supported by the text; the full order adds nondiscrimination clauses to future contracts but does not cancel existing ones, so rationale 3 holds."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Truman's EO 9981 (July 26, 1948) ordered 'equality of treatment and opportunity' in the armed services; description accurate. Distractors (Great Society as described, Nixon-China, Reagan tax cuts) do not extend nondiscrimination policy."
+    },
+    {
+     "where": "Q4",
+     "verdict": "sound",
+     "note": "Wagner Act (1935) required private employers to bargain collectively with unions; TVA, CCC and FDIC descriptions are accurate and none set rules for private employers."
+    }
+   ],
+   "flags": []
+  },
+  "fact-ap_us_history-real_g_beard-r3": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Key accurately summarizes the excerpt (framers' personal economic interest; not 'the whole people'); distractors clearly contradicted by the text."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Key matches Beard's three-fourths non-voting claim and its two stated causes; distractors are not in the excerpt or contradict it."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "1913 falls squarely in the Progressive Era; date-based distractor rationales (Cold War post-1945, Reconstruction ending 1877) are accurate."
+    },
+    {
+     "where": "Q4",
+     "verdict": "sound",
+     "note": "Key correctly parallels Beard's economic-interest explanation of political outcomes; distractors invoke environmental, religious, or diplomatic/military causation and are accurately characterized."
+    }
+   ],
+   "flags": []
+  },
+  "fact-ap_us_history-real_g_nworder-r3": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Key correctly reads Art. 6 (territory-only ban plus fugitive proviso). Dates and claims in rationales check out; Ordinance passed July 1787, before ratification (1788)."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Key is directly quoted in Art. 3; distractors are clearly unsupported. Minor imprecision in key rationale noted as a flag but does not affect the answer."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Context line and all date arithmetic (1803, 1850, 1820) are correct; key fits Treaty of Paris/western lands context."
+    },
+    {
+     "where": "Q4",
+     "verdict": "sound",
+     "note": "Missouri Compromise (1820) as congressional ban north of 36°30' parallels Art. 6; Dred Scott (1857), Emancipation Proclamation, and Compromise of 1877 rationales are accurate."
+    }
+   ],
+   "flags": [
+    {
+     "where": "Q2 key rationale",
+     "kind": "source_misread",
+     "detail": "Rationale says lands 'shall not be taken without their consent except in just and lawful wars authorized by Congress.' In the text the 'unless in just and lawful wars' exception attaches to the clause about being 'invaded or disturbed' in property, rights, and liberty, not to the consent-for-lands clause. Minor conflation; the key option itself is accurately stated."
+    }
+   ]
+  },
+  "fact-ap_us_history-real_g_nworder-r4": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Key [3] is directly supported by the excerpt (ban limited to 'the said territory'; fugitive proviso for 'any one of the original States'). Distractor rationales are accurate: the Ordinance (July 1787) preceded ratification; in 1787 eight of thirteen states still permitted slavery outright; no settler vote appears in Article 6."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Key [0] is a near-verbatim restatement of Article 3. Distractors are not supported by the text, and their rationales are accurate."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Key [2] is the standard context (organizing western lands ceded under the 1783 Treaty of Paris). Date arithmetic in distractor rationales (1803, 1850, 1820) is correct."
+    },
+    {
+     "where": "Q4",
+     "verdict": "sound",
+     "note": "Missouri Compromise (1820) is the standard example of Congress barring slavery in territory by line, building on Art. 6. Dred Scott (1857), Emancipation Proclamation (limited to areas in rebellion), and Compromise of 1877 rationales are accurate."
+    }
+   ],
+   "flags": []
+  }
+ },
+ "items": {
+  "ap_us_history-real_g_whitefield#1": {
+   "keyIndex": 1,
+   "solverChoices": [
+    1,
+    1
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key [1] is directly supported by the quoted lines ('all sects and denominations'; psalms sung in families); distractors are clearly contradicted by or absent from the excerpt.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_whitefield#2": {
+   "keyIndex": 3,
+   "solverChoices": [
+    3,
+    3
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Whitefield's 1739-41 colonial tour is standardly treated as the centerpiece of the Great Awakening; the distractor dates (Salem 1692, Stamp Act 1765, Second Great Awakening c. 1790s-1800) are accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_whitefield#3": {
+   "keyIndex": 0,
+   "solverChoices": [
+    0,
+    0
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Old Light/New Light divisions and growth of Baptist and New Side Presbyterian congregations are standard effects; distractor rationales are historically accurate (no single imperial established church; several colonies retained establishments past 1750; church membership rose).",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_nworder#1": {
+   "keyIndex": 3,
+   "solverChoices": [
+    3,
+    3
+   ],
+   "solverConfidence": [
+    "certain",
+    "likely"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key [3] is directly supported by the excerpt (ban limited to 'the said territory'; fugitive proviso for 'any one of the original States'). Distractor rationales are accurate: the Ordinance (July 1787) preceded ratification; in 1787 eight of thirteen states still permitted slavery outright; no settler vote appears in Article 6.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_nworder#2": {
+   "keyIndex": 0,
+   "solverChoices": [
+    0,
+    0
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key [0] is a near-verbatim restatement of Article 3. Distractors are not supported by the text, and their rationales are accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_nworder#3": {
+   "keyIndex": 2,
+   "solverChoices": [
+    2,
+    2
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key [2] is the standard context (organizing western lands ceded under the 1783 Treaty of Paris). Date arithmetic in distractor rationales (1803, 1850, 1820) is correct.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_nworder#4": {
+   "keyIndex": 1,
+   "solverChoices": [
+    1,
+    1
+   ],
+   "solverConfidence": [
+    "certain",
+    "likely"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Missouri Compromise (1820) is the standard example of Congress barring slavery in territory by line, building on Art. 6. Dred Scott (1857), Emancipation Proclamation (limited to areas in rebellion), and Compromise of 1877 rationales are accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_beard#1": {
+   "keyIndex": 0,
+   "solverChoices": [
+    0,
+    0
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key accurately summarizes the excerpt (framers' personal economic interest; not 'the whole people'); distractors clearly contradicted by the text.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_beard#2": {
+   "keyIndex": 2,
+   "solverChoices": [
+    2,
+    2
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key matches Beard's three-fourths non-voting claim and its two stated causes; distractors are not in the excerpt or contradict it.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_beard#3": {
+   "keyIndex": 1,
+   "solverChoices": [
+    1,
+    1
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "1913 falls squarely in the Progressive Era; date-based distractor rationales (Cold War post-1945, Reconstruction ending 1877) are accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_beard#4": {
+   "keyIndex": 3,
+   "solverChoices": [
+    3,
+    3
+   ],
+   "solverConfidence": [
+    "likely",
+    "likely"
+   ],
+   "solverAlso": [
+    null,
+    2
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key correctly parallels Beard's economic-interest explanation of political outcomes; distractors invoke environmental, religious, or diplomatic/military causation and are accurately characterized.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_northup#1": {
+   "keyIndex": 2,
+   "solverChoices": [
+    2,
+    2
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key and rationales accurate; context line about Northup (kidnapped 1841, freed 1853, narrative written with white lawyer/writer David Wilson) is correct.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_northup#2": {
+   "keyIndex": 0,
+   "solverChoices": [
+    0,
+    0
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Quoted evidence matches the excerpt verbatim; distractor rationales correctly describe the source (10–15 minutes at noon, baskets weighed, halt only on driver's order).",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_northup#3": {
+   "keyIndex": 3,
+   "solverChoices": [
+    3,
+    3
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key correctly situates the passage in the cotton-driven expansion of slavery in the Deep South; distractor rationales are historically accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_northup#4": {
+   "keyIndex": 1,
+   "solverChoices": [
+    1,
+    1
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Domestic slave trade from Upper South to Deep South is the standard consequence; distractor rationales (British purchases continued to 1861, no Louisiana emancipation laws in 1840s) are accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_nullification#1": {
+   "keyIndex": 2,
+   "solverChoices": [
+    2,
+    2
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Both excerpts are quoted verbatim from the Avalon transcriptions; the key correctly contrasts South Carolina's declaration that the tariff acts are 'null, void, and no law' with Jackson's denial that any one state has the power to annul a federal law. Distractor rationales are accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_nullification#2": {
+   "keyIndex": 0,
+   "solverChoices": [
+    0,
+    0
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key matches Jackson's wording exactly ('contradicted expressly by the letter of the Constitution ... destructive of the great object for which it was formed'). Distractors are clearly unsupported by the excerpt. One distractor rationale slightly overstates what Source A argues (see flag), but it does not affect the key.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_nullification#3": {
+   "keyIndex": 3,
+   "solverChoices": [
+    3,
+    3
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Context line and dates are correct (Nov 24 to Dec 10 is sixteen days; tariffs of 1828 and 1832). The cited preamble language ('intended for the protection of domestic manufactures') is in the real ordinance. Distractor date rationales are accurate (Missouri Compromise 1820; Mexican-American War 1846-48; Reconstruction after 1865).",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_14th#1": {
+   "keyIndex": 0,
+   "solverChoices": [
+    0,
+    0
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key is quoted verbatim from Section 1; distractor rationales correctly attribute voting-race ban to the 15th Amendment and the slavery ban to the 13th.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_14th#2": {
+   "keyIndex": 2,
+   "solverChoices": [
+    2,
+    2
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key matches the penalty clause of Section 2; the statement that Section 2 replaced the three-fifths rule and that office-holding restrictions are in Section 3 are accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_14th#3": {
+   "keyIndex": 3,
+   "solverChoices": [
+    3,
+    3
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Black Codes of 1865–66 and the congressional response are accurately described; 1820 Missouri Compromise dating ('nearly fifty years') is fine.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_14th#4": {
+   "keyIndex": 1,
+   "solverChoices": [
+    1,
+    1
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Plessy v. Ferguson (1896) correctly described; dates for the Emancipation Proclamation and the Fifteenth Amendment are accurate. Brown (1954) characterization is a standard simplification.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_hayes#1": {
+   "keyIndex": 1,
+   "solverChoices": [
+    1,
+    1
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key is a near-verbatim claim from the excerpt; distractor rationales accurately describe what the excerpt does and does not say.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_hayes#2": {
+   "keyIndex": 3,
+   "solverChoices": [
+    3,
+    3
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Date arithmetic (13th Amendment 1865, Johnson impeachment 1868, Populists 1890s) is correct; the 1876 disputed election/electoral commission and 1877 troop withdrawal are standard and accurately stated.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_hayes#3": {
+   "keyIndex": 0,
+   "solverChoices": [
+    0,
+    0
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Jim Crow laws and disfranchisement (1890s–1900s) correctly identified; Civil Rights Act of 1875, Plessy (1896) and Brown (1954) dates are accurate; no Black majorities in most Southern legislatures by 1890.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_turner#1": {
+   "keyIndex": 2,
+   "solverChoices": [
+    2,
+    2
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Turner born 1861 in Portage, Wisconsin; professional historian, not a Plains settler or land official. Key accurately characterizes the excerpt's settler-centered perspective ('Indian clearings', 'Indian trails').",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_turner#2": {
+   "keyIndex": 0,
+   "solverChoices": [
+    0,
+    0
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key matches the excerpt's argument (environment 'too strong for the man', adaptation, 'not the old Europe', 'a new product that is American'). Distractors are not supported by the excerpt.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_turner#3": {
+   "keyIndex": 3,
+   "solverChoices": [
+    3,
+    3
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Turner's essay opens by quoting the 1890 Census bulletin stating a frontier line could no longer be said to exist. Dates in distractor rationales (Homestead Act 1862, Spanish-American War 1898, Louisiana Purchase 1803) are correct. Context line (AHA meeting, July 12, 1893, Chicago, during the Columbian Exposition) is accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_cities#1": {
+   "keyIndex": 1,
+   "solverChoices": [
+    1,
+    1
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Chicago figures match Gibson's tables; railroad-hub explanation is standard and distractors are clearly false.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_cities#2": {
+   "keyIndex": 3,
+   "solverChoices": [
+    3,
+    3
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Checked ratios: Chicago ≈36.7x, Cleveland ≈15.3x, Detroit ≈9.8x, Philadelphia ≈8.6x, St. Louis ≈5.8x, New York ≈2.9x. Key and all distractor rationales are numerically correct.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_cities#3": {
+   "keyIndex": 0,
+   "solverChoices": [
+    0,
+    0
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Industrialization/immigration context is standard; distractors are chronologically or substantively wrong as stated.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_cities#4": {
+   "keyIndex": 2,
+   "solverChoices": [
+    2,
+    2
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Great Migration is the only option continuing urban growth; 1920 census urban-majority claim and Homestead Act date are accurate. 'Hundreds of thousands' understates the roughly 1.5 million migrants by 1930 but is not inaccurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_bryan#1": {
+   "keyIndex": 0,
+   "solverChoices": [
+    0,
+    0
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key is clearly best; distractors are not defensible. Minor: the excerpt attacks the doctrine itself, not 'teaching' it specifically, but this does not change the answer.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_bryan#2": {
+   "keyIndex": 2,
+   "solverChoices": [
+    2,
+    2
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key quotes the source accurately; distractors are not supported by the excerpt.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_bryan#3": {
+   "keyIndex": 1,
+   "solverChoices": [
+    1,
+    1
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Fundamentalist–modernist conflict of the 1920s is the correct context; dates in rationales (1922, Depression after 1929, Gilded Age) are accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_bryan#4": {
+   "keyIndex": 3,
+   "solverChoices": [
+    3,
+    3
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Butler Act (March 1925) and Scopes trial (July 1925) with Bryan assisting the prosecution are accurate; 18th Amendment ratified January 1919 and Brown v. Board 1954 are accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_eo8802#1": {
+   "keyIndex": 2,
+   "solverChoices": [
+    2,
+    2
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key correct: Randolph's March on Washington Movement (planned July 1941) prompted EO 8802 on June 25, 1941. Distractor rationales (Pearl Harbor Dec 1941; veterans post-1945; CRA 1964) are accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_eo8802#2": {
+   "keyIndex": 0,
+   "solverChoices": [
+    0,
+    0
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key quotes the WHEREAS clause verbatim. Distractors are not supported by the text; the full order adds nondiscrimination clauses to future contracts but does not cancel existing ones, so rationale 3 holds.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_eo8802#3": {
+   "keyIndex": 3,
+   "solverChoices": [
+    3,
+    3
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Truman's EO 9981 (July 26, 1948) ordered 'equality of treatment and opportunity' in the armed services; description accurate. Distractors (Great Society as described, Nixon-China, Reagan tax cuts) do not extend nondiscrimination policy.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_eo8802#4": {
+   "keyIndex": 1,
+   "solverChoices": [
+    1,
+    1
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Wagner Act (1935) required private employers to bargain collectively with unions; TVA, CCC and FDIC descriptions are accurate and none set rules for private employers.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_truman#1": {
+   "keyIndex": 3,
+   "solverChoices": [
+    3,
+    3
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key quotes the excerpt verbatim; distractors contradict the text (Truman calls for involvement, favors primarily economic aid, never mentions occupation).",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_truman#2": {
+   "keyIndex": 1,
+   "solverChoices": [
+    1,
+    1
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Soviet domination of Eastern Europe and the Greek civil war (with Britain's February 1947 announcement it would end aid) are the accepted context; distractor dates (1941, 1929, 1962) are correct.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_truman#3": {
+   "keyIndex": 0,
+   "solverChoices": [
+    0,
+    0
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Marshall Plan (announced June 1947, enacted 1948) is the standard continuation of the economic-aid approach; dates for Neutrality Acts, Monroe Doctrine (1823), and Open Door (1899–1900) are accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_cra#1": {
+   "keyIndex": 1,
+   "solverChoices": [
+    1,
+    1
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key matches Section 201(a) verbatim; distractors (private clubs, home sales, interstate travel) are not in the excerpt. Private clubs are in fact exempted under 201(e), and housing was not covered until the 1968 Fair Housing Act, so distractor rationales are accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_cra#2": {
+   "keyIndex": 3,
+   "solverChoices": [
+    3,
+    3
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Sex appears only in Title VII Section 703(a); Section 201(a) lists race, color, religion, national origin. Quotes match the source.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_cra#3": {
+   "keyIndex": 0,
+   "solverChoices": [
+    0,
+    0
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Sit-ins (1960 onward) and the August 1963 March on Washington are correct early-1960s context; Freedmen's Bureau (1865-72), Red Scare (1919-20) and New Deal (1930s) dates are accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_cra#4": {
+   "keyIndex": 2,
+   "solverChoices": [
+    2,
+    2
+   ],
+   "solverConfidence": [
+    "likely",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "EEOC was created by Title VII (though it lacked litigation authority until 1972, it did process complaints and conciliate, consistent with the rationale); Title II Sec. 206 and Title VII Sec. 707 authorized Attorney General suits. Heart of Atlanta Motel v. U.S. (Dec. 1964) upheld Title II. Title VII was never repealed.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_gulf#1": {
+   "keyIndex": 0,
+   "solverChoices": [
+    0,
+    0
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key and distractor rationales match the excerpt; the address does announce the start of allied air attacks to the nation, and Bush notes Congress had already consented.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_gulf#2": {
+   "keyIndex": 2,
+   "solverChoices": [
+    2,
+    2
+   ],
+   "solverConfidence": [
+    "likely",
+    "likely"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key is supported by 'months of constant and virtually endless diplomatic activity' and 'exhausted all reasonable efforts.' The phrase 'that Saddam Hussein rejected' is a slight inference beyond the literal excerpt, but is the plain implication and historically accurate; distractors are clearly unsupported.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_gulf#3": {
+   "keyIndex": 3,
+   "solverChoices": [
+    3,
+    3
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key correctly identifies the August 1990 invasion of Kuwait and UN-backed coalition. Distractor rationales are accurate (Iran hostage crisis ended January 20, 1981; 9/11 a decade later; Gulf of Tonkin 1964).",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_g_gulf#4": {
+   "keyIndex": 1,
+   "solverChoices": [
+    1,
+    1
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key is accurate (sanctions, UNSCOM/UNMOVIC inspections, 2003 invasion). Distractor rationales accurate: Saddam stayed in power until 2003; US kept forces in the region; USSR dissolved December 1991. Context line's 'four days earlier' matches the January 12, 1991 congressional authorization.",
+   "flags": [],
+   "status": "verified"
+  }
+ }
+}

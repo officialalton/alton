@@ -19,7 +19,7 @@ export function registryViolations(sources: RegistrySource[], root = "data/ap/us
     if (ids.has(s.id)) v.push(`${s.id}:duplicate_id`); ids.add(s.id);
     for (const k of REQUIRED) if (!String((s as unknown as Record<string, unknown>)[k] ?? "").trim()) v.push(`${s.id}:missing_${k}`);
     if (s.origin !== "real_historical_source") v.push(`${s.id}:origin`);
-    if (!/^https:\/\/(www\.)?(loc\.gov|archives\.gov|census\.gov|avalon\.law\.yale\.edu|gutenberg\.org|commons\.wikimedia\.org|archive\.org|senate\.gov|trumanlibrary\.gov|govinfo\.gov)\//.test(s.url)) v.push(`${s.id}:url_not_allowed_repository`);
+    if (!/^https:\/\/(www2?\.)?(loc\.gov|archives\.gov|census\.gov|avalon\.law\.yale\.edu|gutenberg\.org|commons\.wikimedia\.org|archive\.org|senate\.gov|trumanlibrary\.gov|govinfo\.gov)\//.test(s.url)) v.push(`${s.id}:url_not_allowed_repository`);
     if (s.excerpt_segments) { const joined = s.excerpt_segments.join(" [...] "); if (sha256(joined) !== s.sha256) v.push(`${s.id}:excerpt_hash_mismatch`); }
     else if (s.table) { if (sha256(JSON.stringify(sortKeys(s.table))) !== s.sha256) v.push(`${s.id}:table_hash_mismatch`); }
     else if (s.file) { const f = path.join(root, s.file); if (!existsSync(f)) v.push(`${s.id}:file_missing`); else { const b = readFileSync(f); if (sha256(b) !== s.sha256) v.push(`${s.id}:file_hash_mismatch`); if (s.bytes !== b.length) v.push(`${s.id}:bytes_mismatch`); if (!/\.(jpg|jpeg|png|svg)$/.test(s.file)) v.push(`${s.id}:file_type`); if (b.length > 1_500_000) v.push(`${s.id}:file_too_large`); } if (!s.alt || !s.credit) v.push(`${s.id}:alt_or_credit_missing`); }

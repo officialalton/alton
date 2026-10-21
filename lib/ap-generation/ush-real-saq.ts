@@ -16,6 +16,7 @@ const letter = (i: number) => String.fromCharCode(65 + i);
 export function realSaqBlock(label: string | null, s: RegistrySource, context: string): string {
   const head = `${label ? `${label} ` : ""}(${TYPE_LABEL[s.type] ?? s.type})\n${s.title}\n${saqCredit(s)}\nContext: ${context}`;
   if (s.excerpt_segments) return `${head}\n\n"${s.excerpt_segments.join(" [...] ")}"`;
+  if (s.table) return `${head}\n\nThe table for this source appears below.`;
   return `${head}\n\nThe ${s.type === "photograph" ? "photograph" : "image"} for this source appears below. Select the image to open it full size.`;
 }
 export function realSaqPassage(order: { id: string; context: string }[], reg: Map<string, RegistrySource>): string {
@@ -25,7 +26,8 @@ export function realSaqPassage(order: { id: string; context: string }[], reg: Ma
 }
 /** 그림 칸: 이미지 자료가 있으면 정적 이미지, 없으면 없음(텍스트 SAQ). */
 export function realSaqStimulus(order: { id: string }[], reg: Map<string, RegistrySource>): Json | undefined {
-  const s = order.map((o) => reg.get(o.id)!).find((x) => x.public_path); if (!s) return undefined;
+  const rs = order.map((o) => reg.get(o.id)!); const s = rs.find((x) => x.public_path);
+  if (!s) { const t = rs.find((x) => x.table); return t ? { kind: "table", description: t.title, data: { columns: t.table!.columns, rows: t.table!.rows } } : undefined; }
   return { kind: "image", description: s.alt, data: { path: s.public_path, alt: s.alt, credit: s.credit } };
 }
 
