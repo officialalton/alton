@@ -48,3 +48,6 @@ Stripe 대시보드 우상단 "Test mode" 켜기.
 2. Stripe 웹훅 이벤트 선택: `checkout.session.completed`, `checkout.session.async_payment_succeeded`, `checkout.session.async_payment_failed`, `checkout.session.expired`, `payment_intent.payment_failed`, `charge.refunded`, `charge.refund.updated`, `charge.dispute.created`, `charge.dispute.updated`, `charge.dispute.closed`. 기대 결과: 각 이벤트 전달 응답 200.
 3. 환불 이벤트 도착 시 기대 결과: 관리자 "결제 실패·대사" 탭에 처리 대기로 표시, 자동 회수 꺼짐 상태에서 수업권 변화 없음.
 4. 수동 회수는 예약(미소비 hold)이 있으면 중단되고 처리 완료 표시가 남지 않는다(마이그레이션 `20261031200000` 적용 후). 예약을 취소한 뒤 다시 처리하면 1회만 회수된다.
+
+## 참고: 같은 Preview UAT 의 AP 결과 화면 현황 (2026-10-21)
+학생 결과 화면(English Language `5b9952b6…`, Calculus AB `7020773d…`) 확인 완료. 학부모 화면은 UAT 보호자 계정 연결(오너 가입 대기), 관리자 AP 결과 화면은 브라우저 확인 대기. 결제·Stripe 항목과 무관하며 같은 UAT 계정 준비를 공유한다.
