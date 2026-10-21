@@ -9,6 +9,7 @@ const receiptUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
 
 const paymentAttemptInsertMock = vi.fn().mockResolvedValue({ error: null });
 const purchaseUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
+const purchaseNeqMock = vi.fn().mockResolvedValue({ error: null });
 const purchaseSelectMaybeSingleMock = vi.fn();
 const disputeUpsertMock = vi.fn().mockResolvedValue({ error: null });
 
@@ -27,7 +28,9 @@ const fromMock = vi.fn((table: string) => {
   }
   if (table === "purchases") {
     return {
-      update: () => ({ eq: purchaseUpdateEqMock }),
+      update: () => ({
+        eq: (...a: unknown[]) => Object.assign(Promise.resolve(purchaseUpdateEqMock(...a)), { neq: purchaseNeqMock }),
+      }),
       select: () => ({ eq: () => ({ maybeSingle: purchaseSelectMaybeSingleMock }) }),
     };
   }
@@ -154,6 +157,40 @@ describe("POST /api/webhooks/stripe (R4 entitlement 구매 플로우)", () => {
       expect.objectContaining({ purchase_id: "purchase1", status: "failed" })
     );
     expect(purchaseUpdateEqMock).toHaveBeenCalledWith("id", "purchase1");
+    // 이미 succeeded 인 구매는 되돌리지 않는다(순서 뒤바뀐 이벤트 방어)
+    expect(purchaseNeqMock).toHaveBeenCalledWith("status", "succeeded");
+  });
+
+  it("배포 모드와 다른 livemode 이벤트는 처리·기록 없이 ACK 한다(테스트/라이브 혼입 방지)", async () => {
+    process.env.STRIPE_SECRET_KEY = "sk_test_x";
+    const { POST } = await import("./route");
+    const res = await POST(
+      makeRequest({
+        type: "checkout.session.completed",
+        livemode: true,
+        data: { object: { id: "cs_1", payment_intent: "pi_1", metadata: { purchase_id: "purchase1" } } },
+      })
+    );
+    expect(res.status).toBe(200);
+    expect(await res.json()).toMatchObject({ skipped: "livemode mismatch" });
+    expect(createGrantMock).not.toHaveBeenCalled();
+    expect(receiptInsertMock).not.toHaveBeenCalled();
+    expect(paymentAttemptInsertMock).not.toHaveBeenCalled();
+    delete process.env.STRIPE_SECRET_KEY;
+  });
+
+  it("grant 생성이 DB 오류로 실패하면 receipt 를 처리 완료로 표시하지 않는다(재시도 가능)", async () => {
+    createGrantMock.mockRejectedValueOnce(new Error("db down"));
+    const { POST } = await import("./route");
+    await expect(
+      POST(
+        makeRequest({
+          type: "checkout.session.completed",
+          data: { object: { id: "cs_1", payment_intent: "pi_1", metadata: { purchase_id: "purchase1" } } },
+        })
+      )
+    ).rejects.toThrow("db down");
+    expect(receiptUpdateEqMock).not.toHaveBeenCalled();
   });
 
   it("checkout.session.expired는 grant를 만들지 않고 purchases를 cancelled로 남긴다", async () => {
