@@ -414,3 +414,11 @@ describe("temporary caps and missing reference answers (2026-10-21)", () => {
     expect(c.calls).toBe(2); // 두 번 채점(한 답안 1건)만
   });
 });
+
+describe("비용 한도", () => {
+  it("최대 4호출(2회 채점 x 형식 오류 재호출)을 한도 검사가 가정한다", () => {
+    const l = limits(); const worst4 = 4 * costUsd(l.maxInputTokensPerEssay, l.maxOutputTokensPerEssay, l);
+    expect(checkCaps({ attemptEssays: 0, accountEssaysToday: 0, monthSpendUsd: l.monthlyBudgetUsd - worst4 + 0.001 }, 1000, l)).toEqual({ ok: false, reason: "monthly_budget" });
+    expect(checkCaps({ attemptEssays: 0, accountEssaysToday: 0, monthSpendUsd: l.monthlyBudgetUsd - worst4 - 0.001 }, 1000, l)).toEqual({ ok: true });
+  });
+});

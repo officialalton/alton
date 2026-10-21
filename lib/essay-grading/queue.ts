@@ -21,7 +21,7 @@ export type Status = "pending" | "processing" | "done" | "failed" | "dead" | "sk
 export type Row = { status: Status; attemptsMade: number; nextRetryAt: string | null };
 export type Finish = {
   status: Status; model?: string | null; scores?: Record<string, unknown> | null; rationale?: Record<string, unknown> | null;
-  attemptsMade?: number; nextRetryAt?: string | null; lastError?: string | null; inputTokens?: number; outputTokens?: number; costUsd?: number;
+  attemptsMade?: number; nextRetryAt?: string | null; lastError?: string | null; /** 토큰·비용은 이번 실행의 증분 — 저장소가 이전 값에 합산한다 */ inputTokens?: number; outputTokens?: number; costUsd?: number;
 };
 /** 저장소 경계(실제 구현은 store.ts, service_role). claim 은 원자적이어야 한다: pending 이거나 재시도 시각이 지난 failed 일 때만 processing 으로 바꾸고 true. */
 export interface EssayStore {
