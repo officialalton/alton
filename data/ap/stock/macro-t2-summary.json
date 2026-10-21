@@ -1,0 +1,102 @@
+{
+ "runs": [
+  "macro-t2-a",
+  "macro-t2-f"
+ ],
+ "rows": 90,
+ "passed": 45,
+ "rejected": 45,
+ "passRate": 0.5,
+ "mc": {
+  "rows": 60,
+  "passed": 31,
+  "passRate": 0.517
+ },
+ "frq": {
+  "rows": 30,
+  "passed": 14,
+  "passRate": 0.467
+ },
+ "unitsPassed": {
+  "3": 6,
+  "4": 25
+ },
+ "skillsPassed": {
+  "3.B": 2,
+  "3.A": 23,
+  "1.D": 2,
+  "1.A": 2,
+  "1.B": 2
+ },
+ "figPassed": {
+  "none": 22,
+  "graph": 9,
+  "table": 14
+ },
+ "figAll": {
+  "none": 48,
+  "graph": 12,
+  "table": 30
+ },
+ "figPassRate": {
+  "none": "22/48",
+  "graph": "9/12",
+  "table": "14/30"
+ },
+ "renderTypesPassed": {
+  "none": 22,
+  "ap_graph:econ_curves": 9,
+  "ap_table:given_info": 8,
+  "ap_table": 6
+ },
+ "archetypesPassed": {
+  "ma_lf_capital_inflow": 1,
+  "ma_lf_events": 4,
+  "ma_lf_graph": 4,
+  "ma_lf_investment": 1,
+  "ma_lras_vs_sras": 2,
+  "ma_money_market_graph": 5,
+  "ma_money_market_shift": 4,
+  "ma_omo_effects": 6,
+  "ma_sras_slope": 2,
+  "ma_stagflation": 2,
+  "maf_long_money_market": 1,
+  "maf_long_open_economy": 3,
+  "maf_short_fiscal_multiplier": 1,
+  "maf_short_fx_trade": 1,
+  "maf_short_gdp_data": 2,
+  "maf_short_lf_crowding": 1,
+  "maf_short_money_banking": 2,
+  "maf_short_phillips": 1,
+  "maf_short_ppc_trade": 2
+ },
+ "archetypesAll": {
+  "ma_lf_capital_inflow": 6,
+  "ma_lf_events": 6,
+  "ma_lf_graph": 6,
+  "ma_lf_investment": 6,
+  "ma_lras_vs_sras": 6,
+  "ma_money_market_graph": 6,
+  "ma_money_market_shift": 6,
+  "ma_omo_effects": 6,
+  "ma_sras_slope": 6,
+  "ma_stagflation": 6,
+  "maf_long_adas_policy": 3,
+  "maf_long_money_market": 3,
+  "maf_long_open_economy": 3,
+  "maf_short_fiscal_multiplier": 3,
+  "maf_short_fx_trade": 3,
+  "maf_short_gdp_data": 3,
+  "maf_short_lf_crowding": 3,
+  "maf_short_money_banking": 3,
+  "maf_short_phillips": 3,
+  "maf_short_ppc_trade": 3
+ },
+ "failedArchetypes": [
+  "maf_long_adas_policy"
+ ],
+ "costUsd": {
+  "macro-t2-a": 1.6938,
+  "macro-t2-f": 1.4169
+ }
+}

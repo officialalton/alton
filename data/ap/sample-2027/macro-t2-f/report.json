@@ -1,0 +1,43 @@
+{
+ "run": "macro-t2-f",
+ "subject": "ap_macroeconomics",
+ "generatedAt": "2026-10-21T22:50:27.040Z",
+ "totalCostUsd": 1.42,
+ "newSpendSinceBaseline": 3.21,
+ "cap": 50,
+ "calls": 90,
+ "candidates": 30,
+ "mcCandidates": 0,
+ "frqCandidates": 30,
+ "passedAll": 14,
+ "adopted": 9,
+ "mcAdopted": 0,
+ "frqAdopted": 9,
+ "reserve": 5,
+ "yield": 0.3,
+ "costPerAdopted": 0.157,
+ "callsPerAdopted": 10,
+ "duplicateRejected": 2,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 0,
+  "template": 30
+ },
+ "rejectionReasons": {
+  "criterion_failed_key_scoring": 7,
+  "instant_reject_multiple_correct": 4,
+  "criterion_failed_scope_skill": 1,
+  "reference_pattern_mismatch": 8,
+  "resembles_known_exam_item": 3,
+  "duplicate_gate_near_duplicate": 2,
+  "criterion_failed_stimulus_expression": 3,
+  "criterion_failed_exam_suitability": 3,
+  "criterion_failed_distractor_explanation": 2,
+  "instant_reject_wrong_key": 1,
+  "instant_reject_missing_condition": 1,
+  "solver_disagrees": 1
+ },
+ "unfilledCells": [
+  "ap_macroeconomics-f01"
+ ]
+}

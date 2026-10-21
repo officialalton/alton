@@ -1,0 +1,76 @@
+{
+ "runs": [
+  "micro-t-a",
+  "micro-t-f"
+ ],
+ "rows": 48,
+ "passed": 34,
+ "rejected": 14,
+ "passRate": 0.708,
+ "mc": {
+  "rows": 42,
+  "passed": 30,
+  "passRate": 0.714
+ },
+ "frq": {
+  "rows": 6,
+  "passed": 4,
+  "passRate": 0.667
+ },
+ "unitsPassed": {
+  "1": 3,
+  "2": 5,
+  "3": 13,
+  "4": 6,
+  "6": 3
+ },
+ "skillsPassed": {
+  "2.B": 12,
+  "1.A": 3,
+  "3.A": 9,
+  "2.A": 6
+ },
+ "figPassed": {
+  "none": 30,
+  "table": 4
+ },
+ "figAll": {
+  "none": 42,
+  "table": 6
+ },
+ "figPassRate": {
+  "none": "30/42",
+  "table": "4/6"
+ },
+ "renderTypesPassed": {
+  "none": 30,
+  "ap_table": 4
+ },
+ "archetypesPassed": {
+  "mi_entry_exit": 6,
+  "mi_factors_production": 3,
+  "mi_fixed_cost_effect": 4,
+  "mi_neg_externality": 3,
+  "mi_pd_markets": 6,
+  "mi_shift_supply": 5,
+  "mi_shutdown_rule": 3,
+  "mif_short_mc": 2,
+  "mif_long_pc_firm": 2
+ },
+ "archetypesAll": {
+  "mi_entry_exit": 6,
+  "mi_factors_production": 6,
+  "mi_fixed_cost_effect": 6,
+  "mi_neg_externality": 6,
+  "mi_pd_markets": 6,
+  "mi_shift_supply": 6,
+  "mi_shutdown_rule": 6,
+  "mif_short_mc": 3,
+  "mif_long_pc_firm": 3
+ },
+ "failedArchetypes": [],
+ "costUsd": {
+  "micro-t-a": 1.2788,
+  "micro-t-f": 0.3501
+ }
+}

@@ -1,0 +1,87 @@
+{
+ "runs": [
+  "macro-t-a",
+  "macro-t-f"
+ ],
+ "rows": 81,
+ "passed": 31,
+ "rejected": 50,
+ "passRate": 0.383,
+ "mc": {
+  "rows": 78,
+  "passed": 30,
+  "passRate": 0.385
+ },
+ "frq": {
+  "rows": 3,
+  "passed": 1,
+  "passRate": 0.333
+ },
+ "unitsPassed": {
+  "2": 7,
+  "3": 16,
+  "4": 2,
+  "5": 5
+ },
+ "skillsPassed": {
+  "1.B": 12,
+  "1.D": 4,
+  "2.A": 3,
+  "3.A": 4,
+  "2.B": 5,
+  "1.A": 2
+ },
+ "figPassed": {
+  "none": 30,
+  "table": 1
+ },
+ "figAll": {
+  "none": 78,
+  "table": 3
+ },
+ "figPassRate": {
+  "none": "30/78",
+  "table": "1/3"
+ },
+ "renderTypesPassed": {
+  "none": 30,
+  "ap_table:given_info": 1
+ },
+ "archetypesPassed": {
+  "ma_auto_stabilizers": 2,
+  "ma_fiscal_policy_compare": 2,
+  "ma_inflation_explain": 1,
+  "ma_lras_shift": 6,
+  "ma_lras_vs_sras": 2,
+  "ma_money_functions": 2,
+  "ma_nominal_vs_real": 2,
+  "ma_policy_goal_conflict": 1,
+  "ma_policy_mix": 4,
+  "ma_realnominal_explain": 2,
+  "ma_sras_slope": 2,
+  "ma_stagflation": 2,
+  "ma_unemp_measure": 2,
+  "maf_short_lf_crowding": 1
+ },
+ "archetypesAll": {
+  "ma_auto_stabilizers": 6,
+  "ma_fiscal_policy_compare": 6,
+  "ma_inflation_explain": 6,
+  "ma_lras_shift": 6,
+  "ma_lras_vs_sras": 6,
+  "ma_money_functions": 6,
+  "ma_nominal_vs_real": 6,
+  "ma_policy_goal_conflict": 6,
+  "ma_policy_mix": 6,
+  "ma_realnominal_explain": 6,
+  "ma_sras_slope": 6,
+  "ma_stagflation": 6,
+  "ma_unemp_measure": 6,
+  "maf_short_lf_crowding": 3
+ },
+ "failedArchetypes": [],
+ "costUsd": {
+  "macro-t-a": 2.5582,
+  "macro-t-f": 0.1158
+ }
+}

@@ -1,0 +1,1271 @@
+[
+ {
+  "candidateKey": "ap_macroeconomics-f01-k0",
+  "cellId": "ap_macroeconomics-f01",
+  "apSubjectCode": "ap_macroeconomics",
+  "kind": "frq_bundle",
+  "keywordCode": "5.5",
+  "unitCode": "5",
+  "skillPrimary": "4.C",
+  "structure": "frq_multipart",
+  "calculator": "na",
+  "archetype": "maf_short_lf_crowding",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_stimulus_expression; criterion_failed_exam_suitability",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard FRQ-style crowding-out item. Part A requires drawing and labeling a loanable funds graph and shifting demand right to raise r1 to r2. Part B asks for the direction of the effect on private investment with an explanation. Part C links lower investment to slower capital accumulation and long-run growth. Concept depth is moderate, the chain is one comparative-statics step plus a qualitative causal link, there is no computation, the reading load is minimal, and the scenario is unambiguous. Appropriate for a full mock exam.",
+  "payload": {
+   "archetype": "maf_short_lf_crowding",
+   "template": "short_lf_crowding",
+   "topic": "5.5",
+   "extra_topics": [
+    "4.7",
+    "5.6"
+   ],
+   "skill": "4.C",
+   "calculator": "na",
+   "title": "Government borrowing and crowding out",
+   "stimulus": {
+    "kind": "table",
+    "description": "Situation in Bayland.",
+    "data": {
+     "columns": [
+      "Item",
+      "Value"
+     ],
+     "rows": [
+      [
+       "Economy",
+       "Closed to international financial flows"
+      ],
+      [
+       "Government budget",
+       "A deficit that the government plans to increase by borrowing from private savers"
+      ]
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Draw a correctly labeled graph of the loanable funds market in Bayland, labeling the equilibrium real interest rate r1. Then show the effect of the government's increased borrowing on your graph and label the new real interest rate r2.",
+     "points": 2,
+     "response_mode": "draw",
+     "skill_codes": [
+      "4.A",
+      "4.C"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Downward-sloping demand and upward-sloping supply of loanable funds with the real interest rate on the vertical axis; demand shifts right and the new real interest rate r2 is above r1.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Loanable funds graph labeled",
+       "required_elements": [
+        "Draws a downward-sloping demand curve and an upward-sloping supply curve for loanable funds, labels the vertical axis the real interest rate and the horizontal axis the quantity of loanable funds, and labels the equilibrium real interest rate r1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "curves may be labeled D and S",
+        "axis may say interest rate or price of loanable funds"
+       ],
+       "common_errors": [
+        "labels the vertical axis as the nominal interest rate",
+        "draws the supply curve downward sloping"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Demand shifts right; r2 higher",
+       "required_elements": [
+        "Shifts the demand curve for loanable funds to the right and labels a new real interest rate r2 above r1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "draws and labels D2",
+        "dashed line to r2 at the new intersection"
+       ],
+       "common_errors": [
+        "shifts the supply curve to the right",
+        "labels r2 below r1"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "4.7",
+      "5.5"
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Identify the effect of the government's increased borrowing on private investment spending, and explain.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.B"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Private investment spending decreases (crowding out), because the higher real interest rate makes borrowing more expensive and fewer investment projects are profitable.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Gives the reason: private investment decreases",
+       "required_elements": [
+        "States that private investment spending decreases (crowding out)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "private investment falls",
+        "a correct equivalent statement in the student's own words"
+       ],
+       "common_errors": [
+        "says private investment increases",
+        "says investment is unchanged"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Gives the reason: higher real rate reduces investment",
+       "required_elements": [
+        "Explains that the higher real interest rate raises the cost of borrowing, so firms undertake less investment"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "fewer projects have returns above the cost of funds",
+        "a correct equivalent statement in the student's own words"
+       ],
+       "common_errors": [
+        "says the lower real interest rate reduces investment",
+        "says firms have less income"
+       ],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "5.5"
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Explain how this change in private investment affects the economy's long-run growth.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Less private investment slows the growth of the capital stock, so potential output and long-run aggregate supply grow more slowly.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Gives the reason: slower capital accumulation lowers growth",
+       "required_elements": [
+        "Explains that lower investment reduces the growth of the capital stock, so long-run aggregate supply (potential output) grows more slowly"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "a smaller capital stock lowers productivity growth",
+        "a correct equivalent statement in the student's own words"
+       ],
+       "common_errors": [
+        "says long-run growth is unaffected by investment",
+        "says growth speeds up"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "5.6"
+     ]
+    }
+   ],
+   "total_points": 5,
+   "est_minutes": 12,
+   "facts": [
+    "country=Bayland"
+   ],
+   "context": "lf_crowding",
+   "blueprint": {
+    "id": "maf_short_lf_crowding",
+    "subject": "ap_macroeconomics",
+    "kind": "frq_bundle",
+    "concept": "Government borrowing in the loanable funds market: real interest rate, crowding out, and long-run growth",
+    "topic": "5.5",
+    "skill": "4.C",
+    "student_thinking": [
+     "Draw the market and show the demand shift",
+     "Identify and explain the effect on private investment",
+     "Link investment to long-run growth"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "Closed economy so only domestic saving supplies loanable funds",
+      "evidence": "stated in the stimulus"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "economy",
+      "government budget"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "loanable funds equilibrium simulation: demand shift raises the rate and lowers private funds",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "4.A",
+       "4.C"
+      ],
+      "topics": [
+       "4.7",
+       "5.5"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Downward-sloping demand and upward-sloping supply of loanable funds with the real interest rate on the vertical axis; demand shifts right and the new real interest rate r2 is above r1."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Loanable funds graph labeled",
+        "elements": [
+         "Draws a downward-sloping demand curve and an upward-sloping supply curve for loanable funds, labels the vertical axis the real interest rate and the horizontal axis the quantity of loanable funds, and labels the equilibrium real interest rate r1"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Demand shifts right; r2 higher",
+        "elements": [
+         "Shifts the demand curve for loanable funds to the right and labels a new real interest rate r2 above r1"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "3.B"
+      ],
+      "topics": [
+       "5.5"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Private investment spending decreases (crowding out), because the higher real interest rate makes borrowing more expensive and fewer investment projects are profitable."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Gives the reason: private investment decreases",
+        "elements": [
+         "States that private investment spending decreases (crowding out)"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Gives the reason: higher real rate reduces investment",
+        "elements": [
+         "Explains that the higher real interest rate raises the cost of borrowing, so firms undertake less investment"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "5.6"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Less private investment slows the growth of the capital stock, so potential output and long-run aggregate supply grow more slowly."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Gives the reason: slower capital accumulation lowers growth",
+        "elements": [
+         "Explains that lower investment reduces the growth of the capital stock, so long-run aggregate supply (potential output) grows more slowly"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 5,
+    "model": {
+     "initial_state": "closed economy loanable funds market in equilibrium",
+     "changed_conditions": [
+      "government deficit borrowing increases"
+     ],
+     "held_constant": [
+      "saving behavior"
+     ],
+     "checks": [
+      "r rises",
+      "private investment falls",
+      "growth slows"
+     ],
+     "key_assumptions_id": "lf-crowding",
+     "explanation_assumptions_id": "lf-crowding"
+    }
+   },
+   "seed": 61100,
+   "pack_id": "maf_short_lf_crowding-s61100"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "maf_short_lf_crowding",
+   "facts": [
+    "country=Bayland"
+   ],
+   "seed": 61100
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is mostly sound and in scope: the loanable funds graph, the crowding-out effect and the link to growth are all correct. It is failed on two minor grounds. The stimulus says the government \"plans to increase\" borrowing, but the prompt treats the increase as having happened, which is inconsistent. The text-only table stimulus is also unnecessary and adds little.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A is a drawn graph and fits 4.C. Parts B and C are in scope for 5.5 and 5.6."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are correct and unique. B1 is labeled \"reason\" but only checks that investment decreases, which is a minor labeling issue."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stimulus wording \"plans to increase\" conflicts with the prompt's \"increased borrowing\", which is an ambiguity. The two-row text table is not needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common errors listed in the rubric rows are realistic."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The load is light for 5 points. The 12-minute estimate is somewhat high, but I did not penalize it for that. The unnecessary stimulus and the plan-versus-actual wording slightly reduce exam suitability."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style crowding-out item. Part A requires drawing and labeling a loanable funds graph and shifting demand right to raise r1 to r2. Part B asks for the direction of the effect on private investment with an explanation. Part C links lower investment to slower capital accumulation and long-run growth. Concept depth is moderate, the chain is one comparative-statics step plus a qualitative causal link, there is no computation, the reading load is minimal, and the scenario is unambiguous. Appropriate for a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "candidateKey": "ap_macroeconomics-f01-k1",
+  "cellId": "ap_macroeconomics-f01",
+  "apSubjectCode": "ap_macroeconomics",
+  "kind": "frq_bundle",
+  "keywordCode": "5.5",
+  "unitCode": "5",
+  "skillPrimary": "4.C",
+  "structure": "frq_multipart",
+  "calculator": "na",
+  "archetype": "maf_short_lf_crowding",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "This is a standard crowding-out item at the core of topic 5.5. Part A asks for one labeled loanable funds graph and a single demand shift. Part B asks for the direction of the effect on private investment and a short explanation. Part C adds one causal link to long-run growth through a lower capital stock. There is no calculation, and the stimulus is minimal. The only representation change is from the scenario to a graph. The reasoning is a single chain of one comparative-statics step, with no combination of effects. This is a foundational application of the model, not a full-mock challenge.",
+  "payload": {
+   "archetype": "maf_short_lf_crowding",
+   "template": "short_lf_crowding",
+   "topic": "5.5",
+   "extra_topics": [
+    "4.7",
+    "5.6"
+   ],
+   "skill": "4.C",
+   "calculator": "na",
+   "title": "Government borrowing and crowding out",
+   "stimulus": {
+    "kind": "table",
+    "description": "Situation in Tessoria.",
+    "data": {
+     "columns": [
+      "Item",
+      "Value"
+     ],
+     "rows": [
+      [
+       "Economy",
+       "Closed to international financial flows"
+      ],
+      [
+       "Government budget",
+       "A deficit that the government plans to increase by borrowing from private savers"
+      ]
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Draw a correctly labeled graph of the loanable funds market in Tessoria, labeling the equilibrium real interest rate r1. Then show the effect of the government's increased borrowing on your graph and label the new real interest rate r2.",
+     "points": 2,
+     "response_mode": "draw",
+     "skill_codes": [
+      "4.A",
+      "4.C"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Downward-sloping demand and upward-sloping supply of loanable funds with the real interest rate on the vertical axis; demand shifts right and the new real interest rate r2 is above r1.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Loanable funds graph labeled",
+       "required_elements": [
+        "Draws a downward-sloping demand curve and an upward-sloping supply curve for loanable funds, labels the vertical axis the real interest rate and the horizontal axis the quantity of loanable funds, and labels the equilibrium real interest rate r1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "curves may be labeled D and S",
+        "axis may say interest rate or price of loanable funds"
+       ],
+       "common_errors": [
+        "labels the vertical axis as the nominal interest rate",
+        "draws the supply curve downward sloping"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Demand shifts right; r2 higher",
+       "required_elements": [
+        "Shifts the demand curve for loanable funds to the right and labels a new real interest rate r2 above r1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "draws and labels D2",
+        "dashed line to r2 at the new intersection"
+       ],
+       "common_errors": [
+        "shifts the supply curve to the right",
+        "labels r2 below r1"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "4.7",
+      "5.5"
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Identify the effect of the government's increased borrowing on private investment spending, and explain.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.B"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Private investment spending decreases (crowding out), because the higher real interest rate makes borrowing more expensive and fewer investment projects are profitable.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Gives the reason: private investment decreases",
+       "required_elements": [
+        "States that private investment spending decreases (crowding out)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "private investment falls",
+        "a correct equivalent statement in the student's own words"
+       ],
+       "common_errors": [
+        "says private investment increases",
+        "says investment is unchanged"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Gives the reason: higher real rate reduces investment",
+       "required_elements": [
+        "Explains that the higher real interest rate raises the cost of borrowing, so firms undertake less investment"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "fewer projects have returns above the cost of funds",
+        "a correct equivalent statement in the student's own words"
+       ],
+       "common_errors": [
+        "says the lower real interest rate reduces investment",
+        "says firms have less income"
+       ],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "5.5"
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Explain how this change in private investment affects the economy's long-run growth.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Less private investment slows the growth of the capital stock, so potential output and long-run aggregate supply grow more slowly.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Gives the reason: slower capital accumulation lowers growth",
+       "required_elements": [
+        "Explains that lower investment reduces the growth of the capital stock, so long-run aggregate supply (potential output) grows more slowly"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "a smaller capital stock lowers productivity growth",
+        "a correct equivalent statement in the student's own words"
+       ],
+       "common_errors": [
+        "says long-run growth is unaffected by investment",
+        "says growth speeds up"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "5.6"
+     ]
+    }
+   ],
+   "total_points": 5,
+   "est_minutes": 12,
+   "facts": [
+    "country=Tessoria"
+   ],
+   "context": "lf_crowding",
+   "blueprint": {
+    "id": "maf_short_lf_crowding",
+    "subject": "ap_macroeconomics",
+    "kind": "frq_bundle",
+    "concept": "Government borrowing in the loanable funds market: real interest rate, crowding out, and long-run growth",
+    "topic": "5.5",
+    "skill": "4.C",
+    "student_thinking": [
+     "Draw the market and show the demand shift",
+     "Identify and explain the effect on private investment",
+     "Link investment to long-run growth"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "Closed economy so only domestic saving supplies loanable funds",
+      "evidence": "stated in the stimulus"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "economy",
+      "government budget"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "loanable funds equilibrium simulation: demand shift raises the rate and lowers private funds",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "4.A",
+       "4.C"
+      ],
+      "topics": [
+       "4.7",
+       "5.5"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Downward-sloping demand and upward-sloping supply of loanable funds with the real interest rate on the vertical axis; demand shifts right and the new real interest rate r2 is above r1."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Loanable funds graph labeled",
+        "elements": [
+         "Draws a downward-sloping demand curve and an upward-sloping supply curve for loanable funds, labels the vertical axis the real interest rate and the horizontal axis the quantity of loanable funds, and labels the equilibrium real interest rate r1"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Demand shifts right; r2 higher",
+        "elements": [
+         "Shifts the demand curve for loanable funds to the right and labels a new real interest rate r2 above r1"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "3.B"
+      ],
+      "topics": [
+       "5.5"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Private investment spending decreases (crowding out), because the higher real interest rate makes borrowing more expensive and fewer investment projects are profitable."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Gives the reason: private investment decreases",
+        "elements": [
+         "States that private investment spending decreases (crowding out)"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Gives the reason: higher real rate reduces investment",
+        "elements": [
+         "Explains that the higher real interest rate raises the cost of borrowing, so firms undertake less investment"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "5.6"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Less private investment slows the growth of the capital stock, so potential output and long-run aggregate supply grow more slowly."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Gives the reason: slower capital accumulation lowers growth",
+        "elements": [
+         "Explains that lower investment reduces the growth of the capital stock, so long-run aggregate supply (potential output) grows more slowly"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 5,
+    "model": {
+     "initial_state": "closed economy loanable funds market in equilibrium",
+     "changed_conditions": [
+      "government deficit borrowing increases"
+     ],
+     "held_constant": [
+      "saving behavior"
+     ],
+     "checks": [
+      "r rises",
+      "private investment falls",
+      "growth slows"
+     ],
+     "key_assumptions_id": "lf-crowding",
+     "explanation_assumptions_id": "lf-crowding"
+    }
+   },
+   "seed": 61101,
+   "pack_id": "maf_short_lf_crowding-s61101"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "maf_short_lf_crowding",
+   "facts": [
+    "country=Tessoria"
+   ],
+   "seed": 61101
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard short FRQ on crowding out in the loanable funds market. Part A draws the graph and shows the demand shift, part B identifies the fall in private investment and explains it, and part C links lower investment to slower long-run growth. The 5 points split 2/2/1, and every part is graded against its own rubric rows. The closed-economy condition is stated in the stimulus. The answers are unambiguous and the load is appropriate.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The dominant demand is graphing the effect of increased government borrowing (4.C), with related topics 4.7 and 5.6 in the other parts. Everything stays within Unit 5."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The unique correct result is a rightward demand shift, a higher real interest rate, lower private investment, and slower long-run growth. The rubric rows are consistent, and the alternative wordings are valid."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is minimal but complete. It states the closed economy and the deficit financed by borrowing from private savers. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no MC distractors. The common errors in each rubric row reflect realistic misconceptions."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is about 12 minutes for 5 points, typical for a short FRQ. No calculator is needed."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "This is a standard crowding-out item at the core of topic 5.5. Part A asks for one labeled loanable funds graph and a single demand shift. Part B asks for the direction of the effect on private investment and a short explanation. Part C adds one causal link to long-run growth through a lower capital stock. There is no calculation, and the stimulus is minimal. The only representation change is from the scenario to a graph. The reasoning is a single chain of one comparative-statics step, with no combination of effects. This is a foundational application of the model, not a full-mock challenge.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "candidateKey": "ap_macroeconomics-f01-k2",
+  "cellId": "ap_macroeconomics-f01",
+  "apSubjectCode": "ap_macroeconomics",
+  "kind": "frq_bundle",
+  "keywordCode": "5.5",
+  "unitCode": "5",
+  "skillPrimary": "4.C",
+  "structure": "frq_multipart",
+  "calculator": "na",
+  "archetype": "maf_short_lf_crowding",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Standard crowding-out item in the loanable funds model. The model is clearly stated (closed economy, deficit financed by private savers). Part A is a single comparative-statics step: draw the market and shift demand right, so r rises from r1 to r2. Part B is a direct recall that investment falls because of the higher interest rate. Part C links lower investment to a smaller capital stock and slower long-run growth. No calculation, little reading, and no ambiguity. It is a core, routine application of 5.5 and works better as a basic-learning check than as a full-mock item.",
+  "payload": {
+   "archetype": "maf_short_lf_crowding",
+   "template": "short_lf_crowding",
+   "topic": "5.5",
+   "extra_topics": [
+    "4.7",
+    "5.6"
+   ],
+   "skill": "4.C",
+   "calculator": "na",
+   "title": "Government borrowing and crowding out",
+   "stimulus": {
+    "kind": "table",
+    "description": "Situation in Elvaria.",
+    "data": {
+     "columns": [
+      "Item",
+      "Value"
+     ],
+     "rows": [
+      [
+       "Economy",
+       "Closed to international financial flows"
+      ],
+      [
+       "Government budget",
+       "A deficit that the government plans to increase by borrowing from private savers"
+      ]
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Draw a correctly labeled graph of the loanable funds market in Elvaria, labeling the equilibrium real interest rate r1. Then show the effect of the government's increased borrowing on your graph and label the new real interest rate r2.",
+     "points": 2,
+     "response_mode": "draw",
+     "skill_codes": [
+      "4.A",
+      "4.C"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Downward-sloping demand and upward-sloping supply of loanable funds with the real interest rate on the vertical axis; demand shifts right and the new real interest rate r2 is above r1.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Loanable funds graph labeled",
+       "required_elements": [
+        "Draws a downward-sloping demand curve and an upward-sloping supply curve for loanable funds, labels the vertical axis the real interest rate and the horizontal axis the quantity of loanable funds, and labels the equilibrium real interest rate r1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "curves may be labeled D and S",
+        "axis may say interest rate or price of loanable funds"
+       ],
+       "common_errors": [
+        "labels the vertical axis as the nominal interest rate",
+        "draws the supply curve downward sloping"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Demand shifts right; r2 higher",
+       "required_elements": [
+        "Shifts the demand curve for loanable funds to the right and labels a new real interest rate r2 above r1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "draws and labels D2",
+        "dashed line to r2 at the new intersection"
+       ],
+       "common_errors": [
+        "shifts the supply curve to the right",
+        "labels r2 below r1"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "4.7",
+      "5.5"
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Identify the effect of the government's increased borrowing on private investment spending, and explain.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.B"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Private investment spending decreases (crowding out), because the higher real interest rate makes borrowing more expensive and fewer investment projects are profitable.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Gives the reason: private investment decreases",
+       "required_elements": [
+        "States that private investment spending decreases (crowding out)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "private investment falls",
+        "a correct equivalent statement in the student's own words"
+       ],
+       "common_errors": [
+        "says private investment increases",
+        "says investment is unchanged"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Gives the reason: higher real rate reduces investment",
+       "required_elements": [
+        "Explains that the higher real interest rate raises the cost of borrowing, so firms undertake less investment"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "fewer projects have returns above the cost of funds",
+        "a correct equivalent statement in the student's own words"
+       ],
+       "common_errors": [
+        "says the lower real interest rate reduces investment",
+        "says firms have less income"
+       ],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "5.5"
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Explain how this change in private investment affects the economy's long-run growth.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Less private investment slows the growth of the capital stock, so potential output and long-run aggregate supply grow more slowly.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Gives the reason: slower capital accumulation lowers growth",
+       "required_elements": [
+        "Explains that lower investment reduces the growth of the capital stock, so long-run aggregate supply (potential output) grows more slowly"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "a smaller capital stock lowers productivity growth",
+        "a correct equivalent statement in the student's own words"
+       ],
+       "common_errors": [
+        "says long-run growth is unaffected by investment",
+        "says growth speeds up"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "5.6"
+     ]
+    }
+   ],
+   "total_points": 5,
+   "est_minutes": 12,
+   "facts": [
+    "country=Elvaria"
+   ],
+   "context": "lf_crowding",
+   "blueprint": {
+    "id": "maf_short_lf_crowding",
+    "subject": "ap_macroeconomics",
+    "kind": "frq_bundle",
+    "concept": "Government borrowing in the loanable funds market: real interest rate, crowding out, and long-run growth",
+    "topic": "5.5",
+    "skill": "4.C",
+    "student_thinking": [
+     "Draw the market and show the demand shift",
+     "Identify and explain the effect on private investment",
+     "Link investment to long-run growth"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "Closed economy so only domestic saving supplies loanable funds",
+      "evidence": "stated in the stimulus"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "economy",
+      "government budget"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "loanable funds equilibrium simulation: demand shift raises the rate and lowers private funds",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "4.A",
+       "4.C"
+      ],
+      "topics": [
+       "4.7",
+       "5.5"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Downward-sloping demand and upward-sloping supply of loanable funds with the real interest rate on the vertical axis; demand shifts right and the new real interest rate r2 is above r1."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Loanable funds graph labeled",
+        "elements": [
+         "Draws a downward-sloping demand curve and an upward-sloping supply curve for loanable funds, labels the vertical axis the real interest rate and the horizontal axis the quantity of loanable funds, and labels the equilibrium real interest rate r1"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Demand shifts right; r2 higher",
+        "elements": [
+         "Shifts the demand curve for loanable funds to the right and labels a new real interest rate r2 above r1"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "3.B"
+      ],
+      "topics": [
+       "5.5"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Private investment spending decreases (crowding out), because the higher real interest rate makes borrowing more expensive and fewer investment projects are profitable."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Gives the reason: private investment decreases",
+        "elements": [
+         "States that private investment spending decreases (crowding out)"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Gives the reason: higher real rate reduces investment",
+        "elements": [
+         "Explains that the higher real interest rate raises the cost of borrowing, so firms undertake less investment"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "5.6"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Less private investment slows the growth of the capital stock, so potential output and long-run aggregate supply grow more slowly."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Gives the reason: slower capital accumulation lowers growth",
+        "elements": [
+         "Explains that lower investment reduces the growth of the capital stock, so long-run aggregate supply (potential output) grows more slowly"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 5,
+    "model": {
+     "initial_state": "closed economy loanable funds market in equilibrium",
+     "changed_conditions": [
+      "government deficit borrowing increases"
+     ],
+     "held_constant": [
+      "saving behavior"
+     ],
+     "checks": [
+      "r rises",
+      "private investment falls",
+      "growth slows"
+     ],
+     "key_assumptions_id": "lf-crowding",
+     "explanation_assumptions_id": "lf-crowding"
+    }
+   },
+   "seed": 61102,
+   "pack_id": "maf_short_lf_crowding-s61102"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "maf_short_lf_crowding",
+   "facts": [
+    "country=Elvaria"
+   ],
+   "seed": 61102
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a 5-point short FRQ on loanable funds and crowding out, with a graphing part (4.C), an explanation of crowding out, and a link to long-run growth. The stimulus states the closed economy and the increased government borrowing, which is enough to specify the model. The key is unique, and the rubric rows are meaning-based with valid alternatives. The format matches the official short-FRQ grain: parts of 1-2 points, with the dependent row A2 requiring A1.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A directly assesses graphing the shift in loanable funds (4.C). Part B covers crowding out (5.5) and part C covers growth (5.6). All of this is within Unit 5 scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The unique correct result is a rightward demand shift, a higher r2, and lower private investment. Both rubric rows in part B are logically sound. Row B1 is labeled \"Gives the reason\" although it is a statement of the effect, which is a minor wording issue only."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is minimal but complete. It gives the closed economy and the increased borrowing, and the student draws the graph. No data needs rendering."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The common_errors listed (supply shifts instead of demand, r2 below r1, nominal rate on the axis) are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light and typical of a short FRQ (about 12 minutes). No calculator is needed."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard crowding-out item in the loanable funds model. The model is clearly stated (closed economy, deficit financed by private savers). Part A is a single comparative-statics step: draw the market and shift demand right, so r rises from r1 to r2. Part B is a direct recall that investment falls because of the higher interest rate. Part C links lower investment to a smaller capital stock and slower long-run growth. No calculation, little reading, and no ambiguity. It is a core, routine application of 5.5 and works better as a basic-learning check than as a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ }
+]

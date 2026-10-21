@@ -3859,6 +3859,193 @@
   "bc": false
  },
  {
+  "id": "ma_t_bank_balance_identify",
+  "topic": "4.4",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options label an asset as a liability or misuse required reserves"
+  ],
+  "misconceptions": [
+   "That is the required reserves, not the excess.",
+   "Excess reserves are reserves held above the requirement.",
+   "Required reserves must be subtracted first.",
+   "The bank holds more than it is required to hold."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_t_fed_tools_compare",
+  "topic": "4.6",
+  "skill": "1.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted statements; wrong options reverse a direction or merge the tools"
+  ],
+  "misconceptions": [
+   "A sale removes reserves because banks pay the central bank.",
+   "A purchase lowers the interest rate by adding reserves.",
+   "The effects of buying and selling are reversed.",
+   "Bond transactions with banks change reserves directly."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_t_financial_asset_compare",
+  "topic": "4.1",
+  "skill": "1.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted statements; wrong options reverse liquidity or return"
+  ],
+  "misconceptions": [
+   "Where an asset is held does not determine how easily it becomes spendable money.",
+   "Withdrawing at any time makes the balance more liquid, not less.",
+   "Interest does not make an asset more liquid; ease of conversion does.",
+   "A guarantee affects risk, not how quickly funds can be spent."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_t_interest_rate_compare",
+  "topic": "4.2",
+  "skill": "1.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted statements; wrong options add inflation or swap the definitions"
+  ],
+  "misconceptions": [
+   "The nominal rate must be adjusted for expected inflation.",
+   "The real rate is the nominal rate less expected inflation, not inflation alone.",
+   "Inflation is subtracted, not added.",
+   "The rates are subtracted, not divided."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_t_money_function_identify",
+  "topic": "4.3",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options name another function"
+  ],
+  "misconceptions": [
+   "The example is about quoting and comparing prices, not the act of paying.",
+   "Money quotes both prices, so this is not barter.",
+   "Saving for later is a different function.",
+   "That describes the type of money, not a function."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_t_national_debt_identify",
+  "topic": "5.4",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted statements; wrong options swap deficit and debt or name another measure"
+  ],
+  "misconceptions": [
+   "A surplus occurs when revenue exceeds spending.",
+   "A trade deficit compares imports and exports.",
+   "The debt is the total accumulated, not one year's gap.",
+   "The GDP gap compares output with potential output."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_t_phillips_compare2",
+  "topic": "5.2",
+  "skill": "1.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted statements; wrong options reverse the shapes or the effects"
+  ],
+  "misconceptions": [
+   "Neither lowers unemployment permanently.",
+   "Unexpected inflation can temporarily reduce unemployment.",
+   "The effects are reversed.",
+   "Unexpected inflation tends to reduce unemployment in the short run."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_t_phillips_long_identify",
+  "topic": "5.2",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted statements; wrong options confuse movements with shifts or the two curves"
+  ],
+  "misconceptions": [
+   "That is a movement along the curve, not a shift.",
+   "Lower costs shift the short-run curve downward.",
+   "Lower expected inflation shifts the curve downward.",
+   "A fall in demand moves the economy along the curve."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_t_productivity_identify",
+  "topic": "5.6",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted statements; wrong options name another labor or capital measure"
+  ],
+  "misconceptions": [
+   "That raises the quantity of labor, not its quality.",
+   "Natural resources are a different factor of production.",
+   "Machinery is physical capital.",
+   "A wage change does not by itself raise skills."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_t_self_correct_explain",
+  "topic": "3.7",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options shift the wrong curve or deny self-correction"
+  ],
+  "misconceptions": [
+   "Unemployment is below the natural rate in an inflationary gap.",
+   "In an inflationary gap wages tend to rise.",
+   "Long-run aggregate supply does not shift because of price changes.",
+   "Potential output does not rise on its own in this situation."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_t_xrate_nx_explain",
+  "topic": "6.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options reverse the price effects"
+  ],
+  "misconceptions": [
+   "A depreciation makes imports more expensive.",
+   "Relative prices expressed in a common currency affect trade.",
+   "A depreciation makes U.S. goods cheaper abroad.",
+   "A lower-valued dollar makes exports easier to sell."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_tax_multiplier",
   "topic": "3.2",
   "skill": "3.C",

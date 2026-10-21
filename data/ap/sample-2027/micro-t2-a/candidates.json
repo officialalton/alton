@@ -1,0 +1,2129 @@
+[
+ {
+  "candidateKey": "ap_microeconomics-m01-k0",
+  "cellId": "ap_microeconomics-m01",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "2.6",
+  "unitCode": "2",
+  "skillPrimary": "1.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_surplus_compare",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step definitional recall of producer vs consumer surplus (skill 1.D, comparing concepts within the supply-and-demand model). Distractors reflect common misconceptions (swapped definitions, revenue confusion, total surplus conflation, zero surplus at equilibrium) but no graph reading, calculation, or multi-step reasoning is needed. Wording is clear and short.",
+  "payload": {
+   "archetype": "mi_surplus_compare",
+   "topic": "2.6",
+   "skill": "1.D",
+   "calculator": "allowed",
+   "stem": "Which statement correctly compares producer surplus and consumer surplus at a competitive equilibrium?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Producer surplus equals total revenue, while consumer surplus equals total spending minus total revenue.",
+     "why": "Equates surplus with revenue; surplus subtracts costs or willingness to pay from the price.",
+     "value": null
+    },
+    {
+     "text": "Producer surplus is the difference between the price and the buyers' willingness to pay, while consumer surplus is the difference between the price and the sellers' cost.",
+     "why": "Swaps the two definitions; consumer surplus uses buyers' willingness to pay and producer surplus uses sellers' costs.",
+     "value": null
+    },
+    {
+     "text": "Producer surplus is the difference between the price sellers receive and their minimum acceptable price, while consumer surplus is the difference between buyers' maximum willingness to pay and the price paid.",
+     "why": "Both are net gains from trade measured against the market price, one for sellers and one for buyers.",
+     "value": null
+    },
+    {
+     "text": "Producer surplus is the area above the supply curve and below the demand curve, which is the same as consumer surplus.",
+     "why": "Describes total surplus; each surplus is a separate triangle bounded by the price line.",
+     "value": null
+    },
+    {
+     "text": "Both surpluses equal zero at the equilibrium, because the market clears there.",
+     "why": "Confuses market clearing with zero gains; only the marginal unit has zero surplus.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 60,
+   "facts": [
+    "variant=Which statement correctly compares produ"
+   ],
+   "blueprint": {
+    "id": "mi_surplus_compare",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "compare consumer surplus, producer surplus, and deadweight loss",
+    "topic": "2.6",
+    "skill": "1.D",
+    "student_thinking": [
+     "Identify the economic model that applies: compare consumer surplus, producer surplus, and deadweight loss",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Equates surplus with revenue; surplus subtracts costs or willingness to pay from the price."
+     },
+     {
+      "id": "m2",
+      "description": "Swaps the two definitions; consumer surplus uses buyers' willingness to pay and producer surplus uses sellers' costs."
+     },
+     {
+      "id": "m3",
+      "description": "Describes total surplus; each surplus is a separate triangle bounded by the price line."
+     },
+     {
+      "id": "m4",
+      "description": "Confuses market clearing with zero gains; only the marginal unit has zero surplus."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted statements; each wrong sentence swaps definitions or merges a transfer with a loss",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "compare the measures and reject swapped definitions"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: compare consumer surplus, producer surplus, and deadweight loss",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_surplus_compare",
+     "explanation_assumptions_id": "mi_surplus_compare"
+    }
+   },
+   "seed": 64000,
+   "pack_id": "mi_surplus_compare-s64000",
+   "explanation_en": "The correct answer is Producer surplus is the difference between the price sellers receive and their minimum acceptable price, while consumer surplus is the difference between buyers' maximum willingness to pay and the price paid.. Both are net gains from trade measured against the market price, one for sellers and one for buyers.\nProducer surplus equals total revenue, while consumer surplus equals total spending minus total revenue. is incorrect: Equates surplus with revenue; surplus subtracts costs or willingness to pay from the price.\nProducer surplus is the difference between the price and the buyers' willingness to pay, while consumer surplus is the difference between the price and the sellers' cost. is incorrect: Swaps the two definitions; consumer surplus uses buyers' willingness to pay and producer surplus uses sellers' costs.\nProducer surplus is the area above the supply curve and below the demand curve, which is the same as consumer surplus. is incorrect: Describes total surplus; each surplus is a separate triangle bounded by the price line.\nBoth surpluses equal zero at the equilibrium, because the market clears there. is incorrect: Confuses market clearing with zero gains; only the marginal unit has zero surplus."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_surplus_compare",
+   "facts": [
+    "variant=Which statement correctly compares produ"
+   ],
+   "seed": 64000
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 60 seconds, no calculation. The calculator designation is harmless. The item is a typical conceptual MC for AP Microeconomics.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean definitional comparison item with a unique key, distinct distractors tied to misconceptions, and an appropriate load. Passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step definitional recall of producer vs consumer surplus (skill 1.D, comparing concepts within the supply-and-demand model). Distractors reflect common misconceptions (swapped definitions, revenue confusion, total surplus conflation, zero surplus at equilibrium) but no graph reading, calculation, or multi-step reasoning is needed. Wording is clear and short.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m01-k1",
+  "cellId": "ap_microeconomics-m01",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "2.6",
+  "unitCode": "2",
+  "skillPrimary": "1.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_surplus_compare",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept definitional recall: distinguishing producer surplus (price received minus minimum acceptable price) from consumer surplus (willingness to pay minus price paid). No calculation, no graph reading, and no comparative statics. Distractors are clear misconceptions (revenue confusion, swapped definitions, zero surplus, merged areas). Fits foundational learning of topic 2.6 rather than full-mock exam-level reasoning.",
+  "payload": {
+   "archetype": "mi_surplus_compare",
+   "topic": "2.6",
+   "skill": "1.D",
+   "calculator": "allowed",
+   "stem": "Which statement correctly compares producer surplus and consumer surplus at a competitive equilibrium?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Producer surplus equals total revenue, while consumer surplus equals total spending minus total revenue.",
+     "why": "Equates surplus with revenue; surplus subtracts costs or willingness to pay from the price.",
+     "value": null
+    },
+    {
+     "text": "Producer surplus is the difference between the price and the buyers' willingness to pay, while consumer surplus is the difference between the price and the sellers' cost.",
+     "why": "Swaps the two definitions; consumer surplus uses buyers' willingness to pay and producer surplus uses sellers' costs.",
+     "value": null
+    },
+    {
+     "text": "Both surpluses equal zero at the equilibrium, because the market clears there.",
+     "why": "Confuses market clearing with zero gains; only the marginal unit has zero surplus.",
+     "value": null
+    },
+    {
+     "text": "Producer surplus is the area above the supply curve and below the demand curve, which is the same as consumer surplus.",
+     "why": "Describes total surplus; each surplus is a separate triangle bounded by the price line.",
+     "value": null
+    },
+    {
+     "text": "Producer surplus is the difference between the price sellers receive and their minimum acceptable price, while consumer surplus is the difference between buyers' maximum willingness to pay and the price paid.",
+     "why": "Both are net gains from trade measured against the market price, one for sellers and one for buyers.",
+     "value": null
+    }
+   ],
+   "key_index": 4,
+   "est_seconds": 60,
+   "facts": [
+    "variant=Which statement correctly compares produ"
+   ],
+   "blueprint": {
+    "id": "mi_surplus_compare",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "compare consumer surplus, producer surplus, and deadweight loss",
+    "topic": "2.6",
+    "skill": "1.D",
+    "student_thinking": [
+     "Identify the economic model that applies: compare consumer surplus, producer surplus, and deadweight loss",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Equates surplus with revenue; surplus subtracts costs or willingness to pay from the price."
+     },
+     {
+      "id": "m2",
+      "description": "Swaps the two definitions; consumer surplus uses buyers' willingness to pay and producer surplus uses sellers' costs."
+     },
+     {
+      "id": "m3",
+      "description": "Confuses market clearing with zero gains; only the marginal unit has zero surplus."
+     },
+     {
+      "id": "m4",
+      "description": "Describes total surplus; each surplus is a separate triangle bounded by the price line."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted statements; each wrong sentence swaps definitions or merges a transfer with a loss",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "compare the measures and reject swapped definitions"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: compare consumer surplus, producer surplus, and deadweight loss",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_surplus_compare",
+     "explanation_assumptions_id": "mi_surplus_compare"
+    }
+   },
+   "seed": 64001,
+   "pack_id": "mi_surplus_compare-s64001",
+   "explanation_en": "The correct answer is Producer surplus is the difference between the price sellers receive and their minimum acceptable price, while consumer surplus is the difference between buyers' maximum willingness to pay and the price paid.. Both are net gains from trade measured against the market price, one for sellers and one for buyers.\nProducer surplus equals total revenue, while consumer surplus equals total spending minus total revenue. is incorrect: Equates surplus with revenue; surplus subtracts costs or willingness to pay from the price.\nProducer surplus is the difference between the price and the buyers' willingness to pay, while consumer surplus is the difference between the price and the sellers' cost. is incorrect: Swaps the two definitions; consumer surplus uses buyers' willingness to pay and producer surplus uses sellers' costs.\nBoth surpluses equal zero at the equilibrium, because the market clears there. is incorrect: Confuses market clearing with zero gains; only the marginal unit has zero surplus.\nProducer surplus is the area above the supply curve and below the demand curve, which is the same as consumer surplus. is incorrect: Describes total surplus; each surplus is a separate triangle bounded by the price line."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_surplus_compare",
+   "facts": [
+    "variant=Which statement correctly compares produ"
+   ],
+   "seed": 64001
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.6 definitions; compare/describe model concepts fits 1.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "E is uniquely correct; others clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions, each explained. Key is longest option (slight cue)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, five options, light reading."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound definitional item with a unique correct key and distinct, explained distractors. Minor issues: the key is the longest option, and the blueprint mentions deadweight loss, which the item does not use. Acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept definitional recall: distinguishing producer surplus (price received minus minimum acceptable price) from consumer surplus (willingness to pay minus price paid). No calculation, no graph reading, and no comparative statics. Distractors are clear misconceptions (revenue confusion, swapped definitions, zero surplus, merged areas). Fits foundational learning of topic 2.6 rather than full-mock exam-level reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m01-k2",
+  "cellId": "ap_microeconomics-m01",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "2.6",
+  "unitCode": "2",
+  "skillPrimary": "1.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_surplus_compare",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step definitional recall and comparison of producer and consumer surplus. No computation or graph reading is needed. Distractors are common misconceptions: swapped definitions, zero surplus at equilibrium, PS equal to CS, and PS equal to revenue. The concept is foundational and the wording is clear and in scope for 2.6. It fits skill 1.D lightly through describing the model's concepts, but demands little depth.",
+  "payload": {
+   "archetype": "mi_surplus_compare",
+   "topic": "2.6",
+   "skill": "1.D",
+   "calculator": "allowed",
+   "stem": "Which statement correctly compares producer surplus and consumer surplus at a competitive equilibrium?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Producer surplus is the difference between the price and the buyers' willingness to pay, while consumer surplus is the difference between the price and the sellers' cost.",
+     "why": "Swaps the two definitions; consumer surplus uses buyers' willingness to pay and producer surplus uses sellers' costs.",
+     "value": null
+    },
+    {
+     "text": "Both surpluses equal zero at the equilibrium, because the market clears there.",
+     "why": "Confuses market clearing with zero gains; only the marginal unit has zero surplus.",
+     "value": null
+    },
+    {
+     "text": "Producer surplus is the area above the supply curve and below the demand curve, which is the same as consumer surplus.",
+     "why": "Describes total surplus; each surplus is a separate triangle bounded by the price line.",
+     "value": null
+    },
+    {
+     "text": "Producer surplus is the difference between the price sellers receive and their minimum acceptable price, while consumer surplus is the difference between buyers' maximum willingness to pay and the price paid.",
+     "why": "Both are net gains from trade measured against the market price, one for sellers and one for buyers.",
+     "value": null
+    },
+    {
+     "text": "Producer surplus equals total revenue, while consumer surplus equals total spending minus total revenue.",
+     "why": "Equates surplus with revenue; surplus subtracts costs or willingness to pay from the price.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 60,
+   "facts": [
+    "variant=Which statement correctly compares produ"
+   ],
+   "blueprint": {
+    "id": "mi_surplus_compare",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "compare consumer surplus, producer surplus, and deadweight loss",
+    "topic": "2.6",
+    "skill": "1.D",
+    "student_thinking": [
+     "Identify the economic model that applies: compare consumer surplus, producer surplus, and deadweight loss",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Swaps the two definitions; consumer surplus uses buyers' willingness to pay and producer surplus uses sellers' costs."
+     },
+     {
+      "id": "m2",
+      "description": "Confuses market clearing with zero gains; only the marginal unit has zero surplus."
+     },
+     {
+      "id": "m3",
+      "description": "Describes total surplus; each surplus is a separate triangle bounded by the price line."
+     },
+     {
+      "id": "m4",
+      "description": "Equates surplus with revenue; surplus subtracts costs or willingness to pay from the price."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted statements; each wrong sentence swaps definitions or merges a transfer with a loss",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "compare the measures and reject swapped definitions"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: compare consumer surplus, producer surplus, and deadweight loss",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_surplus_compare",
+     "explanation_assumptions_id": "mi_surplus_compare"
+    }
+   },
+   "seed": 64002,
+   "pack_id": "mi_surplus_compare-s64002",
+   "explanation_en": "The correct answer is Producer surplus is the difference between the price sellers receive and their minimum acceptable price, while consumer surplus is the difference between buyers' maximum willingness to pay and the price paid.. Both are net gains from trade measured against the market price, one for sellers and one for buyers.\nProducer surplus is the difference between the price and the buyers' willingness to pay, while consumer surplus is the difference between the price and the sellers' cost. is incorrect: Swaps the two definitions; consumer surplus uses buyers' willingness to pay and producer surplus uses sellers' costs.\nBoth surpluses equal zero at the equilibrium, because the market clears there. is incorrect: Confuses market clearing with zero gains; only the marginal unit has zero surplus.\nProducer surplus is the area above the supply curve and below the demand curve, which is the same as consumer surplus. is incorrect: Describes total surplus; each surplus is a separate triangle bounded by the price line.\nProducer surplus equals total revenue, while consumer surplus equals total spending minus total revenue. is incorrect: Equates surplus with revenue; surplus subtracts costs or willingness to pay from the price."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_surplus_compare",
+   "facts": [
+    "variant=Which statement correctly compares produ"
+   ],
+   "seed": 64002
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Compares CS and PS concepts in the S&D model; fits 2.6 and 1.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is the unique correct definition-based statement."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Four distinct misconceptions, all explained; key slightly longer but not a giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, five options, no calculation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean conceptual MC item with a unique correct key, plausible distractors, and appropriate load. Passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step definitional recall and comparison of producer and consumer surplus. No computation or graph reading is needed. Distractors are common misconceptions: swapped definitions, zero surplus at equilibrium, PS equal to CS, and PS equal to revenue. The concept is foundational and the wording is clear and in scope for 2.6. It fits skill 1.D lightly through describing the model's concepts, but demands little depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m01-k3",
+  "cellId": "ap_microeconomics-m01",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "2.6",
+  "unitCode": "2",
+  "skillPrimary": "1.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_surplus_compare",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step conceptual recall of the definitions of consumer and producer surplus. No computation, graph reading, or multi-effect reasoning. Distractors are common misconceptions (swapped definitions, revenue confusion, zero surplus, conflated areas), but identifying the correct definition requires only foundational knowledge of topic 2.6. The wording is clear and the item is within scope.",
+  "payload": {
+   "archetype": "mi_surplus_compare",
+   "topic": "2.6",
+   "skill": "1.D",
+   "calculator": "allowed",
+   "stem": "Which statement correctly compares producer surplus and consumer surplus at a competitive equilibrium?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Producer surplus equals total revenue, while consumer surplus equals total spending minus total revenue.",
+     "why": "Equates surplus with revenue; surplus subtracts costs or willingness to pay from the price.",
+     "value": null
+    },
+    {
+     "text": "Producer surplus is the difference between the price and the buyers' willingness to pay, while consumer surplus is the difference between the price and the sellers' cost.",
+     "why": "Swaps the two definitions; consumer surplus uses buyers' willingness to pay and producer surplus uses sellers' costs.",
+     "value": null
+    },
+    {
+     "text": "Producer surplus is the difference between the price sellers receive and their minimum acceptable price, while consumer surplus is the difference between buyers' maximum willingness to pay and the price paid.",
+     "why": "Both are net gains from trade measured against the market price, one for sellers and one for buyers.",
+     "value": null
+    },
+    {
+     "text": "Both surpluses equal zero at the equilibrium, because the market clears there.",
+     "why": "Confuses market clearing with zero gains; only the marginal unit has zero surplus.",
+     "value": null
+    },
+    {
+     "text": "Producer surplus is the area above the supply curve and below the demand curve, which is the same as consumer surplus.",
+     "why": "Describes total surplus; each surplus is a separate triangle bounded by the price line.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 60,
+   "facts": [
+    "variant=Which statement correctly compares produ"
+   ],
+   "blueprint": {
+    "id": "mi_surplus_compare",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "compare consumer surplus, producer surplus, and deadweight loss",
+    "topic": "2.6",
+    "skill": "1.D",
+    "student_thinking": [
+     "Identify the economic model that applies: compare consumer surplus, producer surplus, and deadweight loss",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Equates surplus with revenue; surplus subtracts costs or willingness to pay from the price."
+     },
+     {
+      "id": "m2",
+      "description": "Swaps the two definitions; consumer surplus uses buyers' willingness to pay and producer surplus uses sellers' costs."
+     },
+     {
+      "id": "m3",
+      "description": "Confuses market clearing with zero gains; only the marginal unit has zero surplus."
+     },
+     {
+      "id": "m4",
+      "description": "Describes total surplus; each surplus is a separate triangle bounded by the price line."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted statements; each wrong sentence swaps definitions or merges a transfer with a loss",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "compare the measures and reject swapped definitions"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: compare consumer surplus, producer surplus, and deadweight loss",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_surplus_compare",
+     "explanation_assumptions_id": "mi_surplus_compare"
+    }
+   },
+   "seed": 64003,
+   "pack_id": "mi_surplus_compare-s64003",
+   "explanation_en": "The correct answer is Producer surplus is the difference between the price sellers receive and their minimum acceptable price, while consumer surplus is the difference between buyers' maximum willingness to pay and the price paid.. Both are net gains from trade measured against the market price, one for sellers and one for buyers.\nProducer surplus equals total revenue, while consumer surplus equals total spending minus total revenue. is incorrect: Equates surplus with revenue; surplus subtracts costs or willingness to pay from the price.\nProducer surplus is the difference between the price and the buyers' willingness to pay, while consumer surplus is the difference between the price and the sellers' cost. is incorrect: Swaps the two definitions; consumer surplus uses buyers' willingness to pay and producer surplus uses sellers' costs.\nBoth surpluses equal zero at the equilibrium, because the market clears there. is incorrect: Confuses market clearing with zero gains; only the marginal unit has zero surplus.\nProducer surplus is the area above the supply curve and below the demand curve, which is the same as consumer surplus. is incorrect: Describes total surplus; each surplus is a separate triangle bounded by the price line."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_surplus_compare",
+   "facts": [
+    "variant=Which statement correctly compares produ"
+   ],
+   "seed": 64003
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 seconds, has five options, and requires no calculation. The calculator label is irrelevant but harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean definitional comparison of consumer and producer surplus with a unique key and distinct distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step conceptual recall of the definitions of consumer and producer surplus. No computation, graph reading, or multi-effect reasoning. Distractors are common misconceptions (swapped definitions, revenue confusion, zero surplus, conflated areas), but identifying the correct definition requires only foundational knowledge of topic 2.6. The wording is clear and the item is within scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m01-k4",
+  "cellId": "ap_microeconomics-m01",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "2.6",
+  "unitCode": "2",
+  "skillPrimary": "1.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_surplus_compare",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step definitional recall comparing consumer and producer surplus. Distractors are common misconceptions (swapped definitions, zero surplus, revenue confusion, total surplus conflation), but no computation, graph reading, or multi-step reasoning is needed. Wording is clear and in scope.",
+  "payload": {
+   "archetype": "mi_surplus_compare",
+   "topic": "2.6",
+   "skill": "1.D",
+   "calculator": "allowed",
+   "stem": "Which statement correctly compares producer surplus and consumer surplus at a competitive equilibrium?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Producer surplus is the difference between the price and the buyers' willingness to pay, while consumer surplus is the difference between the price and the sellers' cost.",
+     "why": "Swaps the two definitions; consumer surplus uses buyers' willingness to pay and producer surplus uses sellers' costs.",
+     "value": null
+    },
+    {
+     "text": "Both surpluses equal zero at the equilibrium, because the market clears there.",
+     "why": "Confuses market clearing with zero gains; only the marginal unit has zero surplus.",
+     "value": null
+    },
+    {
+     "text": "Producer surplus is the difference between the price sellers receive and their minimum acceptable price, while consumer surplus is the difference between buyers' maximum willingness to pay and the price paid.",
+     "why": "Both are net gains from trade measured against the market price, one for sellers and one for buyers.",
+     "value": null
+    },
+    {
+     "text": "Producer surplus equals total revenue, while consumer surplus equals total spending minus total revenue.",
+     "why": "Equates surplus with revenue; surplus subtracts costs or willingness to pay from the price.",
+     "value": null
+    },
+    {
+     "text": "Producer surplus is the area above the supply curve and below the demand curve, which is the same as consumer surplus.",
+     "why": "Describes total surplus; each surplus is a separate triangle bounded by the price line.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 60,
+   "facts": [
+    "variant=Which statement correctly compares produ"
+   ],
+   "blueprint": {
+    "id": "mi_surplus_compare",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "compare consumer surplus, producer surplus, and deadweight loss",
+    "topic": "2.6",
+    "skill": "1.D",
+    "student_thinking": [
+     "Identify the economic model that applies: compare consumer surplus, producer surplus, and deadweight loss",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Swaps the two definitions; consumer surplus uses buyers' willingness to pay and producer surplus uses sellers' costs."
+     },
+     {
+      "id": "m2",
+      "description": "Confuses market clearing with zero gains; only the marginal unit has zero surplus."
+     },
+     {
+      "id": "m3",
+      "description": "Equates surplus with revenue; surplus subtracts costs or willingness to pay from the price."
+     },
+     {
+      "id": "m4",
+      "description": "Describes total surplus; each surplus is a separate triangle bounded by the price line."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted statements; each wrong sentence swaps definitions or merges a transfer with a loss",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "compare the measures and reject swapped definitions"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: compare consumer surplus, producer surplus, and deadweight loss",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_surplus_compare",
+     "explanation_assumptions_id": "mi_surplus_compare"
+    }
+   },
+   "seed": 64004,
+   "pack_id": "mi_surplus_compare-s64004",
+   "explanation_en": "The correct answer is Producer surplus is the difference between the price sellers receive and their minimum acceptable price, while consumer surplus is the difference between buyers' maximum willingness to pay and the price paid.. Both are net gains from trade measured against the market price, one for sellers and one for buyers.\nProducer surplus is the difference between the price and the buyers' willingness to pay, while consumer surplus is the difference between the price and the sellers' cost. is incorrect: Swaps the two definitions; consumer surplus uses buyers' willingness to pay and producer surplus uses sellers' costs.\nBoth surpluses equal zero at the equilibrium, because the market clears there. is incorrect: Confuses market clearing with zero gains; only the marginal unit has zero surplus.\nProducer surplus equals total revenue, while consumer surplus equals total spending minus total revenue. is incorrect: Equates surplus with revenue; surplus subtracts costs or willingness to pay from the price.\nProducer surplus is the area above the supply curve and below the demand curve, which is the same as consumer surplus. is incorrect: Describes total surplus; each surplus is a separate triangle bounded by the price line."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_surplus_compare",
+   "facts": [
+    "variant=Which statement correctly compares produ"
+   ],
+   "seed": 64004
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Compares consumer and producer surplus definitions at equilibrium, which fits topic 2.6 and skill 1.D (describe similarities and differences in models). Unit 2 content only."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the unique correct statement. A swaps the definitions, B is false, D equates surplus with revenue, and E describes total surplus and claims the two surpluses are equal. No other option is defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed, and the stem is clear and self-contained."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (swapped definitions, zero surplus at equilibrium, surplus as revenue, total surplus), and the explanation addresses every wrong option. Option C is the longest, which is a mild length cue, but the other options are also long, so it is not a giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Takes about 60 seconds, has five options, and needs no calculation. The calculator designation is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean conceptual item with a unique key and distinct distractors, and it is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step definitional recall comparing consumer and producer surplus. Distractors are common misconceptions (swapped definitions, zero surplus, revenue confusion, total surplus conflation), but no computation, graph reading, or multi-step reasoning is needed. Wording is clear and in scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m01-k5",
+  "cellId": "ap_microeconomics-m01",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "2.6",
+  "unitCode": "2",
+  "skillPrimary": "1.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_surplus_compare",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step definitional recall of consumer and producer surplus. No calculation, graph reading, or multi-effect reasoning is needed. Distractors are clear misconceptions (swapped definitions, total surplus conflated with one side, zero surplus, revenue confusion). The item is foundational and fits topic 2.6 concept introduction rather than full-mock exam difficulty.",
+  "payload": {
+   "archetype": "mi_surplus_compare",
+   "topic": "2.6",
+   "skill": "1.D",
+   "calculator": "allowed",
+   "stem": "Which statement correctly compares producer surplus and consumer surplus at a competitive equilibrium?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Producer surplus is the difference between the price and the buyers' willingness to pay, while consumer surplus is the difference between the price and the sellers' cost.",
+     "why": "Swaps the two definitions; consumer surplus uses buyers' willingness to pay and producer surplus uses sellers' costs.",
+     "value": null
+    },
+    {
+     "text": "Producer surplus is the difference between the price sellers receive and their minimum acceptable price, while consumer surplus is the difference between buyers' maximum willingness to pay and the price paid.",
+     "why": "Both are net gains from trade measured against the market price, one for sellers and one for buyers.",
+     "value": null
+    },
+    {
+     "text": "Producer surplus is the area above the supply curve and below the demand curve, which is the same as consumer surplus.",
+     "why": "Describes total surplus; each surplus is a separate triangle bounded by the price line.",
+     "value": null
+    },
+    {
+     "text": "Both surpluses equal zero at the equilibrium, because the market clears there.",
+     "why": "Confuses market clearing with zero gains; only the marginal unit has zero surplus.",
+     "value": null
+    },
+    {
+     "text": "Producer surplus equals total revenue, while consumer surplus equals total spending minus total revenue.",
+     "why": "Equates surplus with revenue; surplus subtracts costs or willingness to pay from the price.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 60,
+   "facts": [
+    "variant=Which statement correctly compares produ"
+   ],
+   "blueprint": {
+    "id": "mi_surplus_compare",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "compare consumer surplus, producer surplus, and deadweight loss",
+    "topic": "2.6",
+    "skill": "1.D",
+    "student_thinking": [
+     "Identify the economic model that applies: compare consumer surplus, producer surplus, and deadweight loss",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Swaps the two definitions; consumer surplus uses buyers' willingness to pay and producer surplus uses sellers' costs."
+     },
+     {
+      "id": "m2",
+      "description": "Describes total surplus; each surplus is a separate triangle bounded by the price line."
+     },
+     {
+      "id": "m3",
+      "description": "Confuses market clearing with zero gains; only the marginal unit has zero surplus."
+     },
+     {
+      "id": "m4",
+      "description": "Equates surplus with revenue; surplus subtracts costs or willingness to pay from the price."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted statements; each wrong sentence swaps definitions or merges a transfer with a loss",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "compare the measures and reject swapped definitions"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: compare consumer surplus, producer surplus, and deadweight loss",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_surplus_compare",
+     "explanation_assumptions_id": "mi_surplus_compare"
+    }
+   },
+   "seed": 64005,
+   "pack_id": "mi_surplus_compare-s64005",
+   "explanation_en": "The correct answer is Producer surplus is the difference between the price sellers receive and their minimum acceptable price, while consumer surplus is the difference between buyers' maximum willingness to pay and the price paid.. Both are net gains from trade measured against the market price, one for sellers and one for buyers.\nProducer surplus is the difference between the price and the buyers' willingness to pay, while consumer surplus is the difference between the price and the sellers' cost. is incorrect: Swaps the two definitions; consumer surplus uses buyers' willingness to pay and producer surplus uses sellers' costs.\nProducer surplus is the area above the supply curve and below the demand curve, which is the same as consumer surplus. is incorrect: Describes total surplus; each surplus is a separate triangle bounded by the price line.\nBoth surpluses equal zero at the equilibrium, because the market clears there. is incorrect: Confuses market clearing with zero gains; only the marginal unit has zero surplus.\nProducer surplus equals total revenue, while consumer surplus equals total spending minus total revenue. is incorrect: Equates surplus with revenue; surplus subtracts costs or willingness to pay from the price."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_surplus_compare",
+   "facts": [
+    "variant=Which statement correctly compares produ"
+   ],
+   "seed": 64005
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Compares consumer and producer surplus definitions in a competitive market model. This fits topic 2.6 and skill 1.D (describing similarities and differences of models) well."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option B is the standard correct definitions. A swaps the definitions, C describes total surplus, D is false because only the marginal unit has zero surplus, and E confuses surplus with revenue. B is the only defensible answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the stem is clear. It has five options, as required."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception and the explanation addresses every wrong option. The key is longer than the others, but only slightly."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Takes about 60 seconds, needs no calculation, and is typical of an AP multiple-choice item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean conceptual item on the definitions of consumer and producer surplus. The key is unique, the distractors map to distinct misconceptions, and the workload is appropriate. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step definitional recall of consumer and producer surplus. No calculation, graph reading, or multi-effect reasoning is needed. Distractors are clear misconceptions (swapped definitions, total surplus conflated with one side, zero surplus, revenue confusion). The item is foundational and fits topic 2.6 concept introduction rather than full-mock exam difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m02-k0",
+  "cellId": "ap_microeconomics-m02",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "2.8",
+  "unitCode": "2",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_tax_incidence_elasticity",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: tax burden falls more on the less elastic side. Compare two given elasticities (supply 1.0 < demand 2.0) to conclude producers bear the larger share. No calculation, graph, or representation change; distractors target common misconceptions (statutory vs economic incidence, equal split, reversed elasticity rule). Fits foundational understanding rather than full-mock multi-step reasoning.",
+  "payload": {
+   "archetype": "mi_tax_incidence_elasticity",
+   "topic": "2.8",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "The government imposes a per-unit tax on coffee. In this market the absolute value of the price elasticity of demand is 2.0 and the price elasticity of supply is 1.0. Which of the following best describes the burden of the tax?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Sellers bear the entire tax, because they remit it to the government.",
+     "why": "Equates the party that pays the government with the party that bears the burden.",
+     "value": null
+    },
+    {
+     "text": "Producers bear the larger share, because supply is less elastic than demand.",
+     "why": "The side of the market that is less elastic is less able to avoid the tax, so it bears the larger share of the burden.",
+     "value": null
+    },
+    {
+     "text": "The burden depends only on the size of the tax and not on elasticities.",
+     "why": "Ignores that elasticities determine how the burden is shared.",
+     "value": null
+    },
+    {
+     "text": "Consumers and producers bear equal shares, because the tax is collected from sellers.",
+     "why": "Believes the legal incidence determines the economic incidence.",
+     "value": null
+    },
+    {
+     "text": "Consumers bear the larger share, because demand is less elastic than supply.",
+     "why": "Reverses the rule: the more elastic side can avoid the tax, so the more inelastic side bears more.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 60,
+   "facts": [
+    "ed=2.0",
+    "es=1.0",
+    "cons_more=False"
+   ],
+   "blueprint": {
+    "id": "mi_tax_incidence_elasticity",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "tax incidence depends on relative elasticities",
+    "topic": "2.8",
+    "skill": "2.B",
+    "student_thinking": [
+     "Identify the economic model that applies: tax incidence depends on relative elasticities",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Equates the party that pays the government with the party that bears the burden."
+     },
+     {
+      "id": "m2",
+      "description": "Ignores that elasticities determine how the burden is shared."
+     },
+     {
+      "id": "m3",
+      "description": "Believes the legal incidence determines the economic incidence."
+     },
+     {
+      "id": "m4",
+      "description": "Reverses the rule: the more elastic side can avoid the tax, so the more inelastic side bears more."
+     }
+    ],
+    "verification": {
+     "independent_path": "elasticity comparison rule vs numeric tax simulation in a linear market with matching slopes",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: tax incidence depends on relative elasticities",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_tax_incidence_elasticity",
+     "explanation_assumptions_id": "mi_tax_incidence_elasticity"
+    }
+   },
+   "seed": 64000,
+   "pack_id": "mi_tax_incidence_elasticity-s64000",
+   "explanation_en": "The correct answer is Producers bear the larger share, because supply is less elastic than demand.. The side of the market that is less elastic is less able to avoid the tax, so it bears the larger share of the burden.\nSellers bear the entire tax, because they remit it to the government. is incorrect: Equates the party that pays the government with the party that bears the burden.\nThe burden depends only on the size of the tax and not on elasticities. is incorrect: Ignores that elasticities determine how the burden is shared.\nConsumers and producers bear equal shares, because the tax is collected from sellers. is incorrect: Believes the legal incidence determines the economic incidence.\nConsumers bear the larger share, because demand is less elastic than supply. is incorrect: Reverses the rule: the more elastic side can avoid the tax, so the more inelastic side bears more."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_tax_incidence_elasticity",
+   "facts": [
+    "ed=2.0",
+    "es=1.0",
+    "cons_more=False"
+   ],
+   "seed": 64000
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Tax incidence by relative elasticities is squarely in 2.8; explanation with reason fits 2.B adequately."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Ed=2, Es=1, so supply is less elastic and producers bear more. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option maps to a distinct misconception and the explanation covers all of them."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, five options, no arithmetic needed. The calculator label is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, correct conceptual item on tax incidence with a unique key and distinct distractors. It is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: tax burden falls more on the less elastic side. Compare two given elasticities (supply 1.0 < demand 2.0) to conclude producers bear the larger share. No calculation, graph, or representation change; distractors target common misconceptions (statutory vs economic incidence, equal split, reversed elasticity rule). Fits foundational understanding rather than full-mock multi-step reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m02-k1",
+  "cellId": "ap_microeconomics-m02",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "2.8",
+  "unitCode": "2",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_tax_incidence_elasticity",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recall and application of the tax incidence rule: the more inelastic side bears more of the tax. Compare two given elasticities (3.0 vs 1.0), so supply is less elastic and producers bear more; the answer is B. No calculation, no graph, and the distractors are common misconceptions. It is clear and in scope, but it is too straightforward for a full mock, and it only weakly meets skill 2.B because it has just one comparison and no multiple-variable explanation.",
+  "payload": {
+   "archetype": "mi_tax_incidence_elasticity",
+   "topic": "2.8",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "The government imposes a per-unit tax on orange juice. In this market the absolute value of the price elasticity of demand is 3.0 and the price elasticity of supply is 1.0. Which of the following best describes the burden of the tax?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Consumers bear the entire tax, because the price rises by the amount of the tax.",
+     "why": "Assumes the price always rises by the full tax.",
+     "value": null
+    },
+    {
+     "text": "Producers bear the larger share, because supply is less elastic than demand.",
+     "why": "The side of the market that is less elastic is less able to avoid the tax, so it bears the larger share of the burden.",
+     "value": null
+    },
+    {
+     "text": "Consumers bear the larger share, because demand is less elastic than supply.",
+     "why": "Reverses the rule: the more elastic side can avoid the tax, so the more inelastic side bears more.",
+     "value": null
+    },
+    {
+     "text": "Consumers and producers bear equal shares, because the tax is collected from sellers.",
+     "why": "Believes the legal incidence determines the economic incidence.",
+     "value": null
+    },
+    {
+     "text": "Sellers bear the entire tax, because they remit it to the government.",
+     "why": "Equates the party that pays the government with the party that bears the burden.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 60,
+   "facts": [
+    "ed=3.0",
+    "es=1.0",
+    "cons_more=False"
+   ],
+   "blueprint": {
+    "id": "mi_tax_incidence_elasticity",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "tax incidence depends on relative elasticities",
+    "topic": "2.8",
+    "skill": "2.B",
+    "student_thinking": [
+     "Identify the economic model that applies: tax incidence depends on relative elasticities",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Assumes the price always rises by the full tax."
+     },
+     {
+      "id": "m2",
+      "description": "Reverses the rule: the more elastic side can avoid the tax, so the more inelastic side bears more."
+     },
+     {
+      "id": "m3",
+      "description": "Believes the legal incidence determines the economic incidence."
+     },
+     {
+      "id": "m4",
+      "description": "Equates the party that pays the government with the party that bears the burden."
+     }
+    ],
+    "verification": {
+     "independent_path": "elasticity comparison rule vs numeric tax simulation in a linear market with matching slopes",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: tax incidence depends on relative elasticities",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_tax_incidence_elasticity",
+     "explanation_assumptions_id": "mi_tax_incidence_elasticity"
+    }
+   },
+   "seed": 64001,
+   "pack_id": "mi_tax_incidence_elasticity-s64001",
+   "explanation_en": "The correct answer is Producers bear the larger share, because supply is less elastic than demand.. The side of the market that is less elastic is less able to avoid the tax, so it bears the larger share of the burden.\nConsumers bear the entire tax, because the price rises by the amount of the tax. is incorrect: Assumes the price always rises by the full tax.\nConsumers bear the larger share, because demand is less elastic than supply. is incorrect: Reverses the rule: the more elastic side can avoid the tax, so the more inelastic side bears more.\nConsumers and producers bear equal shares, because the tax is collected from sellers. is incorrect: Believes the legal incidence determines the economic incidence.\nSellers bear the entire tax, because they remit it to the government. is incorrect: Equates the party that pays the government with the party that bears the burden."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_tax_incidence_elasticity",
+   "facts": [
+    "ed=3.0",
+    "es=1.0",
+    "cons_more=False"
+   ],
+   "seed": 64001
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard tax incidence item. The key B is unique and correct, since demand is more elastic than supply. Distractors map to distinct misconceptions, and the explanation addresses every option. Passes all criteria.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.8 tax incidence. The skill 2.B fit is modest but acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Producers bear about 3/4 of the tax because supply is less elastic than demand. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and gives both elasticities."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor reflects a distinct misconception and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, no calculation, five options."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall and application of the tax incidence rule: the more inelastic side bears more of the tax. Compare two given elasticities (3.0 vs 1.0), so supply is less elastic and producers bear more; the answer is B. No calculation, no graph, and the distractors are common misconceptions. It is clear and in scope, but it is too straightforward for a full mock, and it only weakly meets skill 2.B because it has just one comparison and no multiple-variable explanation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m02-k2",
+  "cellId": "ap_microeconomics-m02",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "2.8",
+  "unitCode": "2",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_tax_incidence_elasticity",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: the more elastic side of the market bears less of the tax. Comparing two given elasticities (3.0 vs 1.5) gives the answer with no computation, graph, or representation change. Distractors are standard misconceptions (statutory incidence, equal split, full pass-through, elasticity irrelevant). Wording is clear and in scope. It is too straightforward for a full-mock exam_prep slot and only weakly engages the multi-variable explanation skill.",
+  "payload": {
+   "archetype": "mi_tax_incidence_elasticity",
+   "topic": "2.8",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "The government imposes a per-unit tax on headphones. In this market the absolute value of the price elasticity of demand is 3.0 and the price elasticity of supply is 1.5. Which of the following best describes the burden of the tax?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Consumers bear the larger share, because demand is less elastic than supply.",
+     "why": "Reverses the rule: the more elastic side can avoid the tax, so the more inelastic side bears more.",
+     "value": null
+    },
+    {
+     "text": "The burden depends only on the size of the tax and not on elasticities.",
+     "why": "Ignores that elasticities determine how the burden is shared.",
+     "value": null
+    },
+    {
+     "text": "Consumers bear the entire tax, because the price rises by the amount of the tax.",
+     "why": "Assumes the price always rises by the full tax.",
+     "value": null
+    },
+    {
+     "text": "Producers bear the larger share, because supply is less elastic than demand.",
+     "why": "The side of the market that is less elastic is less able to avoid the tax, so it bears the larger share of the burden.",
+     "value": null
+    },
+    {
+     "text": "Consumers and producers bear equal shares, because the tax is collected from sellers.",
+     "why": "Believes the legal incidence determines the economic incidence.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 60,
+   "facts": [
+    "ed=3.0",
+    "es=1.5",
+    "cons_more=False"
+   ],
+   "blueprint": {
+    "id": "mi_tax_incidence_elasticity",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "tax incidence depends on relative elasticities",
+    "topic": "2.8",
+    "skill": "2.B",
+    "student_thinking": [
+     "Identify the economic model that applies: tax incidence depends on relative elasticities",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Reverses the rule: the more elastic side can avoid the tax, so the more inelastic side bears more."
+     },
+     {
+      "id": "m2",
+      "description": "Ignores that elasticities determine how the burden is shared."
+     },
+     {
+      "id": "m3",
+      "description": "Assumes the price always rises by the full tax."
+     },
+     {
+      "id": "m4",
+      "description": "Believes the legal incidence determines the economic incidence."
+     }
+    ],
+    "verification": {
+     "independent_path": "elasticity comparison rule vs numeric tax simulation in a linear market with matching slopes",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: tax incidence depends on relative elasticities",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_tax_incidence_elasticity",
+     "explanation_assumptions_id": "mi_tax_incidence_elasticity"
+    }
+   },
+   "seed": 64002,
+   "pack_id": "mi_tax_incidence_elasticity-s64002",
+   "explanation_en": "The correct answer is Producers bear the larger share, because supply is less elastic than demand.. The side of the market that is less elastic is less able to avoid the tax, so it bears the larger share of the burden.\nConsumers bear the larger share, because demand is less elastic than supply. is incorrect: Reverses the rule: the more elastic side can avoid the tax, so the more inelastic side bears more.\nThe burden depends only on the size of the tax and not on elasticities. is incorrect: Ignores that elasticities determine how the burden is shared.\nConsumers bear the entire tax, because the price rises by the amount of the tax. is incorrect: Assumes the price always rises by the full tax.\nConsumers and producers bear equal shares, because the tax is collected from sellers. is incorrect: Believes the legal incidence determines the economic incidence."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_tax_incidence_elasticity",
+   "facts": [
+    "ed=3.0",
+    "es=1.5",
+    "cons_more=False"
+   ],
+   "seed": 64002
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Tax incidence from relative elasticities is squarely topic 2.8. Explaining the outcome from two variables (demand and supply elasticity) fits skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "With |Ed|=3.0 and Es=1.5, supply is less elastic, so producers bear the larger share (about 2/3 to 1/3). Option D is the unique defensible answer. The other options are clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem gives all required values and is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions: reversed rule, elasticity ignored, full pass-through to consumers, and legal incidence equals economic incidence. The explanation addresses each wrong option. The correct option is a similar length to the others, so there is no length giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, five options, and no calculation needed. This is typical of the AP exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, standard incidence-by-elasticity question. The key is unique and the distractors are distinct. It is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: the more elastic side of the market bears less of the tax. Comparing two given elasticities (3.0 vs 1.5) gives the answer with no computation, graph, or representation change. Distractors are standard misconceptions (statutory incidence, equal split, full pass-through, elasticity irrelevant). Wording is clear and in scope. It is too straightforward for a full-mock exam_prep slot and only weakly engages the multi-variable explanation skill.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m02-k3",
+  "cellId": "ap_microeconomics-m02",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "2.8",
+  "unitCode": "2",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_tax_incidence_elasticity",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: tax burden falls more heavily on the less elastic side of the market. The student compares two given elasticities (supply 0.5 vs. demand 3.0) and picks the matching statement. No calculation, no graph, minimal reading. Distractors reflect common misconceptions (legal vs. economic incidence, reversed elasticity logic), but the reasoning is one short step. It lightly touches skill 2.B by weighing two variables, but the depth is below typical full-mock exam_prep items.",
+  "payload": {
+   "archetype": "mi_tax_incidence_elasticity",
+   "topic": "2.8",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "The government imposes a per-unit tax on notebooks. In this market the absolute value of the price elasticity of demand is 3.0 and the price elasticity of supply is 0.5. Which of the following best describes the burden of the tax?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Consumers bear the larger share, because demand is less elastic than supply.",
+     "why": "Reverses the rule: the more elastic side can avoid the tax, so the more inelastic side bears more.",
+     "value": null
+    },
+    {
+     "text": "The burden depends only on the size of the tax and not on elasticities.",
+     "why": "Ignores that elasticities determine how the burden is shared.",
+     "value": null
+    },
+    {
+     "text": "Consumers and producers bear equal shares, because the tax is collected from sellers.",
+     "why": "Believes the legal incidence determines the economic incidence.",
+     "value": null
+    },
+    {
+     "text": "Sellers bear the entire tax, because they remit it to the government.",
+     "why": "Equates the party that pays the government with the party that bears the burden.",
+     "value": null
+    },
+    {
+     "text": "Producers bear the larger share, because supply is less elastic than demand.",
+     "why": "The side of the market that is less elastic is less able to avoid the tax, so it bears the larger share of the burden.",
+     "value": null
+    }
+   ],
+   "key_index": 4,
+   "est_seconds": 60,
+   "facts": [
+    "ed=3.0",
+    "es=0.5",
+    "cons_more=False"
+   ],
+   "blueprint": {
+    "id": "mi_tax_incidence_elasticity",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "tax incidence depends on relative elasticities",
+    "topic": "2.8",
+    "skill": "2.B",
+    "student_thinking": [
+     "Identify the economic model that applies: tax incidence depends on relative elasticities",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Reverses the rule: the more elastic side can avoid the tax, so the more inelastic side bears more."
+     },
+     {
+      "id": "m2",
+      "description": "Ignores that elasticities determine how the burden is shared."
+     },
+     {
+      "id": "m3",
+      "description": "Believes the legal incidence determines the economic incidence."
+     },
+     {
+      "id": "m4",
+      "description": "Equates the party that pays the government with the party that bears the burden."
+     }
+    ],
+    "verification": {
+     "independent_path": "elasticity comparison rule vs numeric tax simulation in a linear market with matching slopes",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: tax incidence depends on relative elasticities",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_tax_incidence_elasticity",
+     "explanation_assumptions_id": "mi_tax_incidence_elasticity"
+    }
+   },
+   "seed": 64003,
+   "pack_id": "mi_tax_incidence_elasticity-s64003",
+   "explanation_en": "The correct answer is Producers bear the larger share, because supply is less elastic than demand.. The side of the market that is less elastic is less able to avoid the tax, so it bears the larger share of the burden.\nConsumers bear the larger share, because demand is less elastic than supply. is incorrect: Reverses the rule: the more elastic side can avoid the tax, so the more inelastic side bears more.\nThe burden depends only on the size of the tax and not on elasticities. is incorrect: Ignores that elasticities determine how the burden is shared.\nConsumers and producers bear equal shares, because the tax is collected from sellers. is incorrect: Believes the legal incidence determines the economic incidence.\nSellers bear the entire tax, because they remit it to the government. is incorrect: Equates the party that pays the government with the party that bears the burden."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_tax_incidence_elasticity",
+   "facts": [
+    "ed=3.0",
+    "es=0.5",
+    "cons_more=False"
+   ],
+   "seed": 64003
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 seconds, has five options, and needs no arithmetic. The calculator designation is harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, standard tax-incidence item. The key is unique, the distractors are distinct misconceptions, and the load is appropriate. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: tax burden falls more heavily on the less elastic side of the market. The student compares two given elasticities (supply 0.5 vs. demand 3.0) and picks the matching statement. No calculation, no graph, minimal reading. Distractors reflect common misconceptions (legal vs. economic incidence, reversed elasticity logic), but the reasoning is one short step. It lightly touches skill 2.B by weighing two variables, but the depth is below typical full-mock exam_prep items.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m02-k4",
+  "cellId": "ap_microeconomics-m02",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "2.8",
+  "unitCode": "2",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_tax_incidence_elasticity",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step conceptual application: compare the two given elasticities (demand 2.0 vs. supply 1.5) and apply the rule that the less elastic side bears the larger share of a per-unit tax. No calculation, graph, or multi-effect reasoning is required. Distractors target common misconceptions (statutory vs. economic incidence, full pass-through, equal split), but each is dismissed by recalling the basic incidence rule. Short stem, clear wording, and in scope for topic 2.8.",
+  "payload": {
+   "archetype": "mi_tax_incidence_elasticity",
+   "topic": "2.8",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "The government imposes a per-unit tax on pizza. In this market the absolute value of the price elasticity of demand is 2.0 and the price elasticity of supply is 1.5. Which of the following best describes the burden of the tax?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Producers bear the larger share, because supply is less elastic than demand.",
+     "why": "The side of the market that is less elastic is less able to avoid the tax, so it bears the larger share of the burden.",
+     "value": null
+    },
+    {
+     "text": "Sellers bear the entire tax, because they remit it to the government.",
+     "why": "Equates the party that pays the government with the party that bears the burden.",
+     "value": null
+    },
+    {
+     "text": "The burden depends only on the size of the tax and not on elasticities.",
+     "why": "Ignores that elasticities determine how the burden is shared.",
+     "value": null
+    },
+    {
+     "text": "Consumers bear the entire tax, because the price rises by the amount of the tax.",
+     "why": "Assumes the price always rises by the full tax.",
+     "value": null
+    },
+    {
+     "text": "Consumers and producers bear equal shares, because the tax is collected from sellers.",
+     "why": "Believes the legal incidence determines the economic incidence.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 60,
+   "facts": [
+    "ed=2.0",
+    "es=1.5",
+    "cons_more=False"
+   ],
+   "blueprint": {
+    "id": "mi_tax_incidence_elasticity",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "tax incidence depends on relative elasticities",
+    "topic": "2.8",
+    "skill": "2.B",
+    "student_thinking": [
+     "Identify the economic model that applies: tax incidence depends on relative elasticities",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Equates the party that pays the government with the party that bears the burden."
+     },
+     {
+      "id": "m2",
+      "description": "Ignores that elasticities determine how the burden is shared."
+     },
+     {
+      "id": "m3",
+      "description": "Assumes the price always rises by the full tax."
+     },
+     {
+      "id": "m4",
+      "description": "Believes the legal incidence determines the economic incidence."
+     }
+    ],
+    "verification": {
+     "independent_path": "elasticity comparison rule vs numeric tax simulation in a linear market with matching slopes",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: tax incidence depends on relative elasticities",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_tax_incidence_elasticity",
+     "explanation_assumptions_id": "mi_tax_incidence_elasticity"
+    }
+   },
+   "seed": 64004,
+   "pack_id": "mi_tax_incidence_elasticity-s64004",
+   "explanation_en": "The correct answer is Producers bear the larger share, because supply is less elastic than demand.. The side of the market that is less elastic is less able to avoid the tax, so it bears the larger share of the burden.\nSellers bear the entire tax, because they remit it to the government. is incorrect: Equates the party that pays the government with the party that bears the burden.\nThe burden depends only on the size of the tax and not on elasticities. is incorrect: Ignores that elasticities determine how the burden is shared.\nConsumers bear the entire tax, because the price rises by the amount of the tax. is incorrect: Assumes the price always rises by the full tax.\nConsumers and producers bear equal shares, because the tax is collected from sellers. is incorrect: Believes the legal incidence determines the economic incidence."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_tax_incidence_elasticity",
+   "facts": [
+    "ed=2.0",
+    "es=1.5",
+    "cons_more=False"
+   ],
+   "seed": 64004
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Tax incidence by relative elasticities is squarely topic 2.8; explaining the outcome via elasticities fits skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Demand is more elastic (2.0 vs 1.5), so producers bear the larger share. The key is unique. The other options are clearly wrong: entire burden on one side, equal split, or no dependence on elasticities."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem gives both elasticities and is unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (legal vs. economic incidence, ignoring elasticities, full pass-through, equal split), and the explanation addresses each. The key is somewhat longer than the others, but only slightly."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, with no calculation needed, and about 60 seconds. Five options. Typical of the AP exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, correct tax incidence item. The key is unique, the distractors are distinct misconceptions, and the load is appropriate."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step conceptual application: compare the two given elasticities (demand 2.0 vs. supply 1.5) and apply the rule that the less elastic side bears the larger share of a per-unit tax. No calculation, graph, or multi-effect reasoning is required. Distractors target common misconceptions (statutory vs. economic incidence, full pass-through, equal split), but each is dismissed by recalling the basic incidence rule. Short stem, clear wording, and in scope for topic 2.8.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m02-k5",
+  "cellId": "ap_microeconomics-m02",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "2.8",
+  "unitCode": "2",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_tax_incidence_elasticity",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: tax incidence falls more on the less elastic side. The student compares Ed = 2.0 with Es = 0.5 and rejects the statutory-incidence misconception. No computation, no graph, minimal reading, and one reasoning step. It suits foundational learning more than a full mock exam.",
+  "payload": {
+   "archetype": "mi_tax_incidence_elasticity",
+   "topic": "2.8",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "The government imposes a per-unit tax on umbrellas. In this market the absolute value of the price elasticity of demand is 2.0 and the price elasticity of supply is 0.5. Which of the following best describes the burden of the tax?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Sellers bear the entire tax, because they remit it to the government.",
+     "why": "Equates the party that pays the government with the party that bears the burden.",
+     "value": null
+    },
+    {
+     "text": "Producers bear the larger share, because supply is less elastic than demand.",
+     "why": "The side of the market that is less elastic is less able to avoid the tax, so it bears the larger share of the burden.",
+     "value": null
+    },
+    {
+     "text": "Consumers and producers bear equal shares, because the tax is collected from sellers.",
+     "why": "Believes the legal incidence determines the economic incidence.",
+     "value": null
+    },
+    {
+     "text": "Consumers bear the entire tax, because the price rises by the amount of the tax.",
+     "why": "Assumes the price always rises by the full tax.",
+     "value": null
+    },
+    {
+     "text": "The burden depends only on the size of the tax and not on elasticities.",
+     "why": "Ignores that elasticities determine how the burden is shared.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 60,
+   "facts": [
+    "ed=2.0",
+    "es=0.5",
+    "cons_more=False"
+   ],
+   "blueprint": {
+    "id": "mi_tax_incidence_elasticity",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "tax incidence depends on relative elasticities",
+    "topic": "2.8",
+    "skill": "2.B",
+    "student_thinking": [
+     "Identify the economic model that applies: tax incidence depends on relative elasticities",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Equates the party that pays the government with the party that bears the burden."
+     },
+     {
+      "id": "m2",
+      "description": "Believes the legal incidence determines the economic incidence."
+     },
+     {
+      "id": "m3",
+      "description": "Assumes the price always rises by the full tax."
+     },
+     {
+      "id": "m4",
+      "description": "Ignores that elasticities determine how the burden is shared."
+     }
+    ],
+    "verification": {
+     "independent_path": "elasticity comparison rule vs numeric tax simulation in a linear market with matching slopes",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: tax incidence depends on relative elasticities",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_tax_incidence_elasticity",
+     "explanation_assumptions_id": "mi_tax_incidence_elasticity"
+    }
+   },
+   "seed": 64005,
+   "pack_id": "mi_tax_incidence_elasticity-s64005",
+   "explanation_en": "The correct answer is Producers bear the larger share, because supply is less elastic than demand.. The side of the market that is less elastic is less able to avoid the tax, so it bears the larger share of the burden.\nSellers bear the entire tax, because they remit it to the government. is incorrect: Equates the party that pays the government with the party that bears the burden.\nConsumers and producers bear equal shares, because the tax is collected from sellers. is incorrect: Believes the legal incidence determines the economic incidence.\nConsumers bear the entire tax, because the price rises by the amount of the tax. is incorrect: Assumes the price always rises by the full tax.\nThe burden depends only on the size of the tax and not on elasticities. is incorrect: Ignores that elasticities determine how the burden is shared."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_tax_incidence_elasticity",
+   "facts": [
+    "ed=2.0",
+    "es=0.5",
+    "cons_more=False"
+   ],
+   "seed": 64005
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Tax incidence via relative elasticities is squarely topic 2.8; explaining burden from two elasticities fits 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Consumer share = 0.5/2.5 = 20%, producers 80%; B is the unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear, with both elasticities given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors map to distinct misconceptions, and the explanation covers each wrong option. A and C are similar in spirit but distinguishable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, five options, typical load. The calculator label is unnecessary but harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, quick conceptual item on tax incidence. The key is unique and correct, and the distractors reflect distinct misconceptions. Minor weaknesses (an unneeded calculator designation, an easy option E) do not warrant rejection."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: tax incidence falls more on the less elastic side. The student compares Ed = 2.0 with Es = 0.5 and rejects the statutory-incidence misconception. No computation, no graph, minimal reading, and one reasoning step. It suits foundational learning more than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ }
+]

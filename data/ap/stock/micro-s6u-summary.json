@@ -1,0 +1,74 @@
+{
+ "runs": [
+  "micro-t2-a",
+  "micro-t2-f"
+ ],
+ "rows": 39,
+ "passed": 27,
+ "rejected": 12,
+ "passRate": 0.692,
+ "mc": {
+  "rows": 12,
+  "passed": 7,
+  "passRate": 0.583
+ },
+ "frq": {
+  "rows": 27,
+  "passed": 20,
+  "passRate": 0.741
+ },
+ "unitsPassed": {
+  "2": 7
+ },
+ "skillsPassed": {
+  "1.D": 1,
+  "2.B": 6
+ },
+ "figPassed": {
+  "none": 7,
+  "table": 20
+ },
+ "figAll": {
+  "none": 12,
+  "table": 27
+ },
+ "figPassRate": {
+  "none": "7/12",
+  "table": "20/27"
+ },
+ "renderTypesPassed": {
+  "none": 7,
+  "ap_table": 20
+ },
+ "archetypesPassed": {
+  "mi_surplus_compare": 1,
+  "mi_tax_incidence_elasticity": 6,
+  "mif_long_market_policy": 2,
+  "mif_long_monopoly": 1,
+  "mif_long_pc_firm": 3,
+  "mif_short_elasticity": 3,
+  "mif_short_externality": 2,
+  "mif_short_labor": 3,
+  "mif_short_mc": 2,
+  "mif_short_shutdown": 2,
+  "mif_short_trade": 2
+ },
+ "archetypesAll": {
+  "mi_surplus_compare": 6,
+  "mi_tax_incidence_elasticity": 6,
+  "mif_long_market_policy": 3,
+  "mif_long_monopoly": 3,
+  "mif_long_pc_firm": 3,
+  "mif_short_elasticity": 3,
+  "mif_short_externality": 3,
+  "mif_short_labor": 3,
+  "mif_short_mc": 3,
+  "mif_short_shutdown": 3,
+  "mif_short_trade": 3
+ },
+ "failedArchetypes": [],
+ "costUsd": {
+  "micro-t2-a": 0.3686,
+  "micro-t2-f": 1.4285
+ }
+}

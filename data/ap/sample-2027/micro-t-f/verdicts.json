@@ -1,0 +1,452 @@
+[
+ {
+  "key": "ap_microeconomics-f01-k0",
+  "cellId": "ap_microeconomics-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "MR = MC = $60 at Q = 10, so Q1 = 10. Reading up to the demand curve gives P1 = $80. ATC at that output is $70. The graph should show a downward-sloping demand curve, an MR curve below it, a U-shaped ATC curve, and an MC curve that crosses ATC near its minimum.",
+     "final_answer": "Q1 = 10, P1 = $80 (where MR = MC = $60); ATC = $70 at Q1",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Profit = (P − ATC) × Q = (80 − 70) × 10 = $100. Shade the rectangle between $80 and $70 from quantity 0 to 10.",
+     "final_answer": "Shade the rectangle from ATC $70 up to P $80 over Q = 0–10; economic profit = $100",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Positive economic profit draws new firms into the market. That reduces each firm's share of customers, so this firm's demand (and MR) shifts left and becomes more elastic. This continues until P = ATC and economic profit is zero.",
+     "final_answer": "Demand shifts left (decreases) as new firms enter, until economic profit is zero",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Demand slopes downward, so MR is below price. The firm produces where MR = MC, which means P > MC. This leaves the firm with excess capacity and some allocative inefficiency.",
+     "final_answer": "Price is greater than marginal cost",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The 5-point short FRQ on monopolistic competition is consistent. The table gives MR=MC at Q=10, P=$80, ATC=$70, so profit is $100. Rubric rows match the model answers, and the parts are in scope and fit the short-FRQ grain.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A assesses graphing, B profit shading, C entry and the demand shift, D the long-run P>MC comparison. All are Unit 4.4 content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are unique and consistent with the table. Rubric rows are meaning-based, with sensible dependencies (A2 requires A1)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with price, MR, MC, and ATC at four quantities, and the wording is clear. The blueprint's \"constant marginal cost\" note conflicts with the rising MC in the table, but this is internal metadata and the student-facing stimulus is fine."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no options. Common errors are listed per row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for a 5-point short FRQ, with no calculator needed and little arithmetic."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ on monopolistic competition. The student must read the table to find MR = MC at Q = 10 (P = $80, ATC = $70), convert it into a labeled graph with D, MR, MC and ATC, and shade the profit rectangle. Parts C and D then ask for the long-run effects of entry (demand shifts left, P = ATC > MC, with excess capacity/markup). The data are clean and consistent, the arithmetic is trivial, the reading load is light, and the scope is within 4.4. The graphing and the combination of short-run and long-run reasoning put it at full-mock exam level rather than basic recall.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_microeconomics-f01-k1",
+  "cellId": "ap_microeconomics-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "MR=MC=$90 at Q=30, so P1 is read from demand at $150. The graph shows downward-sloping D, MR below D, an upward-sloping MC, and a U-shaped ATC cut by MC at its minimum.",
+     "final_answer": "Q1 = 30, P1 = $150 (MR = MC = $90); demand above ATC ($120) at Q1",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Shade the rectangle between P = $150 and ATC = $120 from 0 to Q = 30. Profit = (150 - 120) × 30.",
+     "final_answer": "Shaded rectangle between $150 and $120 over Q 0–30; economic profit = $900",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Positive economic profit draws new firms in, because entry is easy. Customers spread across more salons, so this firm's demand (and its MR) shifts left until P = ATC and profit is zero.",
+     "final_answer": "Demand decreases (shifts left), and likely becomes more elastic, until economic profit is zero",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The firm still faces downward-sloping demand, so MR < P. Since it sets MR = MC, P > MC.",
+     "final_answer": "Price is greater than marginal cost",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The 5-point short FRQ on a monopolistically competitive firm is consistent: the table gives MR = MC at Q = 30, P = 150, ATC = 120, so profit is 900. The rubric rows match the prompts. The grain is correct (5 points in parts of 1-2) and no calculator is needed. The only blemish is a hidden metadata condition that says constant MC, while the table shows rising MC. Students do not see this.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 4.4 is covered. Part A assesses 4.A, and the other parts use other skills, which is allowed in a bundle."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The optimum (Q = 30, P = 150) and the profit rectangle are uniquely determined by the table. The rubric rows are consistent and meaning-based."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and clear. The hidden key-condition text saying constant MC contradicts the table, but it is not shown to students."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The rubric lists realistic common errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of a short FRQ at about 12 minutes, with no calculator needed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the table to find where MR = MC (Q=30, P=$150), then draw four curves on a labeled graph, mark Q_1 and P_1, and shade the profit rectangle using ATC=$120 at Q_1. Parts C and D check the standard long-run result (entry shifts demand left; P > MC at zero economic profit). The concepts are core Unit 4.4 content, and the arithmetic is minimal and clean. Moderate multi-step graphing with a table-to-graph representation change is typical of a full-mock FRQ.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_microeconomics-f01-k2",
+  "cellId": "ap_microeconomics-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring",
+   "resembles_known_exam_item"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Draw a downward-sloping demand curve with MR below it and steeper (demand P=210−2Q, MR=210−4Q), an upward-sloping MC, and a U-shaped ATC. MR=MC=$90 at Q=30, so Q1=30. Read price from demand at Q1: P1=$150. ATC at Q1 is $120, which is below the price.",
+     "final_answer": "Q1=30, P1=$150 (where MR=MC=$90; price read from demand)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Shade the rectangle between P1=$150 and ATC=$120, from 0 to Q1=30. Profit = (150−120)×30 = $900.",
+     "final_answer": "Shade the rectangle from $120 to $150 over 0–30; economic profit = $900",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Positive economic profit draws new firms in because entry is easy. They take customers away, so this firm's demand (and MR) shifts left and becomes more elastic. This continues until demand is tangent to ATC and economic profit is zero.",
+     "final_answer": "Demand decreases (shifts left) until economic profit is zero",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The firm still faces a downward-sloping demand curve, so MR is below price. It produces where MR=MC, which means P > MC. This is why there is allocative inefficiency (markup).",
+     "final_answer": "Price is greater than marginal cost",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": true,
+   "summary": "The item is a standard monopolistic competition short FRQ and is mostly sound. It fails because of inconsistent skill coding (B is coded 4.B and D is coded 1.D), a contradictory \"constant marginal cost\" condition against the rising MC in the table, and a loosely specified part A rubric that does not tie the graph to the table values.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Part A (draw the curves and label Q1 and P1) fits topic 4.4 and skill 4.A. Part B is labeled skill 4.B, but shading profit is also a graphing task and the bundle label is 4.A, so the skill coding is inconsistent. Part D is coded 1.D, which is a questionable label for a P versus MC comparison. The item is mostly in scope, but part C and part D together are thin on the dominant graphing skill."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The table gives Q = 30 as the MR = MC point with P = $150 and ATC = $120, so the profit is $900. Part A asks for a graph \"showing the firm's demand, MR, MC, and ATC\", but the rubric accepts a generic sketch that ignores the table values. It does not require the curves to be consistent with the data, for example MC crossing MR at Q = 30 or ATC below price at Q1. Part A row A1 bundles many elements (four curves, labels, axes) into a single point, so partial credit is ambiguous. Part D's \"identify and briefly justify\" is a 1-point row with two required elements."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and clear. MC is constant in the model but rises in the table (60, 90, 120, 150), which is consistent with the drawn rising MC. The table's ATC at Q = 45 is $115 and at Q = 60 is $120, so the ATC is U-shaped. The key_conditions say \"constant marginal cost\", which contradicts the rising MC in the table."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. Common errors are listed per row and are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 5-point short FRQ grain fits the official format. The load is about 12 minutes, which is reasonable."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style item. The student reads a table to find MR = MC (Q=30, P=$150, ATC=$120), converts it into a labeled four-curve graph, shades the profit rectangle, then gives the usual long-run results: entry shifts demand left, P = ATC, and P > MC. Concepts are core Unit 4.4, arithmetic is minimal, and reading is light. Difficulty comes from the graphing and the table-to-graph representation change, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_microeconomics-f02-k0",
+  "cellId": "ap_microeconomics-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "MC by unit: 21, 23, 25, 27, 29, 31, 33, 35. ATC is lowest at $28 when q = 4. So at P = $28, the price line is tangent to minimum ATC at Q_F = 4, and economic profit is zero.",
+     "final_answer": "Market graph: downward-sloping D and upward-sloping S cross at P = $28 and Q_M. Firm graph: a horizontal line at $28 (P = MR = D = AR) is tangent to the minimum of the U-shaped ATC curve. MC crosses ATC at its minimum, at Q_F = 4 tons.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "MC of the 6th unit is $31, which is less than $32. MC of the 7th unit is $33, which is more than $32. So the firm makes 6 tons. TR = 6 × $32 = $192 and TC = $172, so profit = $20. Checking 7 tons: 224 − 205 = $19, which is lower.",
+     "final_answer": "6 tons; economic profit = $20",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Demand shifts right, so the market price rises to $32. The firm's MR line moves up to $32 and the firm produces where MR = MC.",
+     "final_answer": "Market graph: D shifts right to D2 and the new price is $32. Firm graph: a new MR line at $32. Q_F2 = 6 is where MR2 meets MC, and Q_F2 is greater than Q_F. Shade the rectangle between $32 and ATC at Q_F2 (about $28.67), from 0 to Q_F2. This is the $20 profit.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Positive economic profit attracts entry. Barriers to entry are absent.",
+     "final_answer": "The number of firms increases. New firms enter because the existing firms earn positive economic profit. Entry shifts market supply to the right until price falls back to $28 (minimum ATC) and economic profit returns to zero.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "In a constant-cost industry, long-run supply is horizontal at $28. Demand is now higher, so it meets that supply at a larger quantity.",
+     "final_answer": "Greater than Q_M. The industry is constant-cost, so price returns to $28. With demand higher, more is bought at $28, and the extra output comes from more firms each producing 4 tons.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The table is consistent: ATC is lowest at $28 when Q = 4, MC is 31 and then 33 around the $32 price, the profit-maximizing quantity is 6 tons, and economic profit is $20. The independent solver agrees on all parts. The rubric rows match the parts and the 10-point long-FRQ format. The item passes.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part perfect competition FRQ. Students derive MC from the TC table, find minimum ATC at Q=4 and P=28, draw paired market/firm graphs, apply MR=MC at P=32 (Q=6, profit = 192-172 = 20), shade profit, then reason about entry and a constant-cost long run (price returns to 28, market quantity rises above Q_M). Arithmetic is small and the wording is unambiguous. Difficulty comes from the number of steps and the graph/table representation changes, which is typical of an AP FRQ.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_microeconomics-f02-k1",
+  "cellId": "ap_microeconomics-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Min ATC = 32 at q=3; P=MR=MC=min ATC.",
+     "final_answer": "Market graph: S and D cross at P=$32, Q_M. Firm graph: horizontal P=MR=$32 line tangent to the minimum of ATC where MC crosses it, at Q_F=3 tons.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "MC of 5th unit=38<39, 6th=42>39. TR=195, TC=168.",
+     "final_answer": "Q=5 tons; economic profit = $27",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Demand shifts right; firm's MR rises to 39; ATC at 5 is 33.60.",
+     "final_answer": "Market: D shifts right, P=$39. Firm: MR=$39, Q_F2=5>Q_F, profit rectangle between $39 and ATC=$33.60 over 5 units, area $27.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Positive economic profit attracts entry, which shifts supply right until P=$32 and profit=0.",
+     "final_answer": "The number of firms increases because positive economic profits attract entry until price returns to $32 and economic profit is zero.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Constant-cost industry: long-run supply is horizontal at $32; higher demand at the same price means a larger quantity.",
+     "final_answer": "Greater than Q_M",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Consistent 10-point long FRQ on a competitive firm and its market. The cost table implies a minimum ATC of $32 at Q=3, consistent with the stated long-run price. Part B gives 5 tons and $27 profit. The graphing, entry and long-run-quantity parts are coherent and meaning-based, so no flaws were found.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP FRQ on perfect competition. Students draw linked market and firm graphs, derive MC and ATC from a total cost table, apply MR=MC at P=39 (Q=5, profit = 195-168 = $27), then reason through entry and the return to long-run equilibrium in a constant-cost industry. The arithmetic is small and the wording is unambiguous. Difficulty comes from combining graph construction, table reading, one comparative-statics shift, and the long-run entry argument, all within Unit 3 scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_microeconomics-f02-k2",
+  "cellId": "ap_microeconomics-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "MC: 21,23,25,27,29,31,33,35. ATC is lowest at q=4 ($28), so P=28=min ATC and the firm is in long-run equilibrium at Q_F=4. Market graph: downward-sloping D and upward-sloping S crossing at $28 and Q_M. Firm graph: horizontal line at $28 (MR=D=P) touching the minimum of U-shaped ATC where MC crosses it, at Q_F=4.",
+     "final_answer": "Market: S and D cross at P=$28, Q_M. Firm: P=MR=$28 is tangent to min ATC where MC=ATC, at Q_F (4 tons).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Keep producing while MC ≤ 32. MC of the 6th ton is 31 and of the 7th ton is 33, so q=6. TR=6×32=192 and TC=172, so profit=20. Check: q=5 and q=7 each give a profit of 19.",
+     "final_answer": "6 tons; economic profit = $20",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Demand shifts right, so the market price rises to $32. On the firm graph, MR rises to $32 and Q_F2 is where MR=MC, to the right of Q_F. Profit is the rectangle between P=$32 and ATC at Q_F2, with width Q_F2.",
+     "final_answer": "D shifts right to D2 and P rises to $32. Firm: MR2=$32, Q_F2 > Q_F where MR2=MC. Shade the area (P − ATC) × Q_F2.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Positive economic profit and free entry draw new firms in. Market supply shifts right until the price falls back to min ATC ($28) and profit is zero.",
+     "final_answer": "The number of firms increases because economic profits attract entry. Entry continues until price returns to $28 and economic profit is zero.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "In a constant-cost industry, the long-run supply curve is horizontal at $28. The new equilibrium is on the higher demand curve at $28, so market quantity is larger.",
+     "final_answer": "Greater than Q_M. Price returns to $28 on the higher demand curve, so more is bought, and the entering firms supply the extra output.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The numeric keys check out: B gives 6 tons and $20, and the table is consistent with a long-run price of $28 at minimum ATC. The weakness is the graph rubrics. A1 and A2 bundle several required elements into one point each. A and C never require the firm-graph price labels ($28, $32) or Q_F = 4, so partial responses are hard to score consistently. I am failing on key_scoring for that reason.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The parts fit units 3.5 through 3.7 and 2.7, and the graph parts match skill 4.A."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "B is correct and unique. The graph rubrics (A1, A2, C2) bundle multiple elements per point and do not require the stated prices on the firm graph. Part D's second row asks for more than the prompt strictly requires."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and the note states the long-run price."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so common_errors in the rubric rows stand in for distractors, and they are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 10-point grain and the load are typical of a long FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ on perfect competition. Students must draw paired market/firm graphs at long-run equilibrium, derive MC from the total cost table, apply P = MC to find Q = 6 at P = $32, and compute profit (192 - 172 = $20). They then show a demand increase on the graphs, explain entry, and conclude that market quantity rises in the new long-run equilibrium because price returns to $28 in a constant-cost industry. The table is consistent: ATC is minimized at Q = 4 and equals $28, matching the stated long-run price. Difficulty comes from combining graphing with one calculation and one comparative-statics step, which is typical of a full mock FRQ. Arithmetic is small and the wording is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ }
+]

@@ -1,0 +1,200 @@
+[
+ {
+  "key": "ap_macroeconomics-f01-k0",
+  "cellId": "ap_macroeconomics-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Loanable funds graph: vertical axis real interest rate, horizontal axis quantity of loanable funds. Upward-sloping supply and downward-sloping demand cross at r1. More government borrowing shifts demand right (D1 to D2), which raises the rate to r2 > r1 and increases the equilibrium quantity of loanable funds.",
+     "final_answer": "Demand for loanable funds shifts right, so the real interest rate rises from r1 to r2 (r2 > r1).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Borrowing costs more at the higher real interest rate. That lowers the quantity of loanable funds firms demand, so private investment falls. This is crowding out.",
+     "final_answer": "Private investment decreases because the real interest rate rises, making borrowing more costly for firms (crowding out).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "With less investment, physical capital builds up more slowly. That slows growth in productivity and potential output.",
+     "final_answer": "Long-run growth slows: lower investment means less capital accumulation, so productivity and potential output grow more slowly (the LRAS/PPC shifts right more slowly).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is mostly sound and in scope: the loanable funds graph, the crowding-out effect and the link to growth are all correct. It is failed on two minor grounds. The stimulus says the government \"plans to increase\" borrowing, but the prompt treats the increase as having happened, which is inconsistent. The text-only table stimulus is also unnecessary and adds little.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A is a drawn graph and fits 4.C. Parts B and C are in scope for 5.5 and 5.6."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are correct and unique. B1 is labeled \"reason\" but only checks that investment decreases, which is a minor labeling issue."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stimulus wording \"plans to increase\" conflicts with the prompt's \"increased borrowing\", which is an ambiguity. The two-row text table is not needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common errors listed in the rubric rows are realistic."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The load is light for 5 points. The 12-minute estimate is somewhat high, but I did not penalize it for that. The unnecessary stimulus and the plan-versus-actual wording slightly reduce exam suitability."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style crowding-out item. Part A requires drawing and labeling a loanable funds graph and shifting demand right to raise r1 to r2. Part B asks for the direction of the effect on private investment with an explanation. Part C links lower investment to slower capital accumulation and long-run growth. Concept depth is moderate, the chain is one comparative-statics step plus a qualitative causal link, there is no computation, the reading load is minimal, and the scenario is unambiguous. Appropriate for a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f01-k1",
+  "cellId": "ap_macroeconomics-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Loanable funds graph: vertical axis real interest rate, horizontal axis quantity of loanable funds; downward-sloping demand, upward-sloping supply, equilibrium at r1. Government borrowing from private savers raises demand for loanable funds: D shifts right to D2, so the real interest rate rises to r2 > r1 and the quantity of loanable funds increases.",
+     "final_answer": "Demand for loanable funds shifts right; real interest rate rises from r1 to r2 (r2 > r1).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "A higher real interest rate raises the cost of borrowing for firms, so fewer investment projects are profitable and private investment falls. This is crowding out.",
+     "final_answer": "Private investment spending decreases because the higher real interest rate makes borrowing more expensive for firms (crowding out).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Lower investment means slower growth of the physical capital stock, which lowers productivity growth. Potential output therefore grows more slowly, and the LRAS/PPC shifts out less.",
+     "final_answer": "Long-run growth slows because less capital is accumulated, so productivity and potential output grow more slowly.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard short FRQ on crowding out in the loanable funds market. Part A draws the graph and shows the demand shift, part B identifies the fall in private investment and explains it, and part C links lower investment to slower long-run growth. The 5 points split 2/2/1, and every part is graded against its own rubric rows. The closed-economy condition is stated in the stimulus. The answers are unambiguous and the load is appropriate.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The dominant demand is graphing the effect of increased government borrowing (4.C), with related topics 4.7 and 5.6 in the other parts. Everything stays within Unit 5."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The unique correct result is a rightward demand shift, a higher real interest rate, lower private investment, and slower long-run growth. The rubric rows are consistent, and the alternative wordings are valid."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is minimal but complete. It states the closed economy and the deficit financed by borrowing from private savers. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no MC distractors. The common errors in each rubric row reflect realistic misconceptions."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is about 12 minutes for 5 points, typical for a short FRQ. No calculator is needed."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "This is a standard crowding-out item at the core of topic 5.5. Part A asks for one labeled loanable funds graph and a single demand shift. Part B asks for the direction of the effect on private investment and a short explanation. Part C adds one causal link to long-run growth through a lower capital stock. There is no calculation, and the stimulus is minimal. The only representation change is from the scenario to a graph. The reasoning is a single chain of one comparative-statics step, with no combination of effects. This is a foundational application of the model, not a full-mock challenge.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_macroeconomics-f01-k2",
+  "cellId": "ap_macroeconomics-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Graph: vertical axis is the real interest rate, horizontal axis is the quantity of loanable funds. Supply of loanable funds slopes upward and demand slopes downward; they cross at r1. Government borrowing raises the demand for loanable funds, so demand shifts right (D1 to D2). The new equilibrium is at a higher rate, r2 > r1, and a larger quantity.",
+     "final_answer": "Demand for loanable funds shifts right, so the real interest rate rises from r1 to r2 (r2 > r1).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Private investment falls because the higher real interest rate makes borrowing cost more. Fewer investment projects are profitable at that cost. This is crowding out.",
+     "final_answer": "Private investment decreases because the higher real interest rate raises the cost of borrowing (crowding out).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Less investment means physical capital builds up more slowly. That slows productivity growth, so long-run growth is lower and the LRAS/PPC shifts out less.",
+     "final_answer": "Long-run growth slows because the capital stock grows less, which slows productivity growth.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a 5-point short FRQ on loanable funds and crowding out, with a graphing part (4.C), an explanation of crowding out, and a link to long-run growth. The stimulus states the closed economy and the increased government borrowing, which is enough to specify the model. The key is unique, and the rubric rows are meaning-based with valid alternatives. The format matches the official short-FRQ grain: parts of 1-2 points, with the dependent row A2 requiring A1.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A directly assesses graphing the shift in loanable funds (4.C). Part B covers crowding out (5.5) and part C covers growth (5.6). All of this is within Unit 5 scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The unique correct result is a rightward demand shift, a higher r2, and lower private investment. Both rubric rows in part B are logically sound. Row B1 is labeled \"Gives the reason\" although it is a statement of the effect, which is a minor wording issue only."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is minimal but complete. It gives the closed economy and the increased borrowing, and the student draws the graph. No data needs rendering."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The common_errors listed (supply shifts instead of demand, r2 below r1, nominal rate on the axis) are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light and typical of a short FRQ (about 12 minutes). No calculator is needed."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard crowding-out item in the loanable funds model. The model is clearly stated (closed economy, deficit financed by private savers). Part A is a single comparative-statics step: draw the market and shift demand right, so r rises from r1 to r2. Part B is a direct recall that investment falls because of the higher interest rate. Part C links lower investment to a smaller capital stock and slower long-run growth. No calculation, little reading, and no ambiguity. It is a core, routine application of 5.5 and works better as a basic-learning check than as a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ }
+]

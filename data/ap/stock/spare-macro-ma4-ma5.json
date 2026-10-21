@@ -1,0 +1,1159 @@
+{
+ "sets": [
+  "MA4",
+  "MA5"
+ ],
+ "spare": [
+  {
+   "key": "macro-fg-a:ap_macroeconomics-m01-k0",
+   "unit": 1,
+   "skill": "1.B",
+   "archetype": "ma_g_cross_price_table",
+   "screen": false
+  },
+  {
+   "key": "macro-fg-a:ap_macroeconomics-m01-k1",
+   "unit": 1,
+   "skill": "1.B",
+   "archetype": "ma_g_cross_price_table",
+   "screen": false
+  },
+  {
+   "key": "macro-fg-a:ap_macroeconomics-m01-k2",
+   "unit": 1,
+   "skill": "1.B",
+   "archetype": "ma_g_cross_price_table",
+   "screen": false
+  },
+  {
+   "key": "macro-fg-a:ap_macroeconomics-m02-k0",
+   "unit": 1,
+   "skill": "1.D",
+   "archetype": "ma_g_price_control_graph",
+   "screen": false
+  },
+  {
+   "key": "macro-fg-a:ap_macroeconomics-m02-k1",
+   "unit": 1,
+   "skill": "1.D",
+   "archetype": "ma_g_price_control_graph",
+   "screen": false
+  },
+  {
+   "key": "macro-fg-a:ap_macroeconomics-m03-k1",
+   "unit": 2,
+   "skill": "2.C",
+   "archetype": "ma_g_gdp_peak_trough",
+   "screen": false
+  },
+  {
+   "key": "macro-fg-a:ap_macroeconomics-m03-k2",
+   "unit": 2,
+   "skill": "2.C",
+   "archetype": "ma_g_gdp_peak_trough",
+   "screen": false
+  },
+  {
+   "key": "macro-fg-a:ap_macroeconomics-m04-k0",
+   "unit": 2,
+   "skill": "1.D",
+   "archetype": "ma_g_price_index_line",
+   "screen": true
+  },
+  {
+   "key": "macro-fg-a:ap_macroeconomics-m04-k1",
+   "unit": 2,
+   "skill": "1.D",
+   "archetype": "ma_g_price_index_line",
+   "screen": false
+  },
+  {
+   "key": "macro-fg-a:ap_macroeconomics-m04-k2",
+   "unit": 2,
+   "skill": "1.D",
+   "archetype": "ma_g_price_index_line",
+   "screen": true
+  },
+  {
+   "key": "macro-fg-a:ap_macroeconomics-m05-k0",
+   "unit": 2,
+   "skill": "3.A",
+   "archetype": "ma_g_cyclical_unemp_graph",
+   "screen": false
+  },
+  {
+   "key": "macro-fg-a:ap_macroeconomics-m05-k1",
+   "unit": 2,
+   "skill": "3.A",
+   "archetype": "ma_g_cyclical_unemp_graph",
+   "screen": false
+  },
+  {
+   "key": "macro-fg-a:ap_macroeconomics-m06-k0",
+   "unit": 3,
+   "skill": "3.C",
+   "archetype": "ma_g_ad_multiplier_graph",
+   "screen": false
+  },
+  {
+   "key": "macro-fg-a:ap_macroeconomics-m06-k1",
+   "unit": 3,
+   "skill": "3.C",
+   "archetype": "ma_g_ad_multiplier_graph",
+   "screen": false
+  },
+  {
+   "key": "macro-fg-a:ap_macroeconomics-m06-k2",
+   "unit": 3,
+   "skill": "3.C",
+   "archetype": "ma_g_ad_multiplier_graph",
+   "screen": false
+  },
+  {
+   "key": "macro-fg-a:ap_macroeconomics-m07-k1",
+   "unit": 3,
+   "skill": "3.A",
+   "archetype": "ma_g_stabilizer_table",
+   "screen": true
+  },
+  {
+   "key": "macro-fg-a:ap_macroeconomics-m08-k1",
+   "unit": 3,
+   "skill": "1.A",
+   "archetype": "ma_g_ad_move_along_graph",
+   "screen": false
+  },
+  {
+   "key": "macro-fg-a:ap_macroeconomics-m09-k0",
+   "unit": 4,
+   "skill": "1.C",
+   "archetype": "ma_g_real_rate_lines",
+   "screen": false
+  },
+  {
+   "key": "macro-fg-a:ap_macroeconomics-m09-k1",
+   "unit": 4,
+   "skill": "1.C",
+   "archetype": "ma_g_real_rate_lines",
+   "screen": false
+  },
+  {
+   "key": "macro-fg-a:ap_macroeconomics-m09-k2",
+   "unit": 4,
+   "skill": "1.C",
+   "archetype": "ma_g_real_rate_lines",
+   "screen": false
+  },
+  {
+   "key": "macro-fg-a:ap_macroeconomics-m10-k0",
+   "unit": 4,
+   "skill": "3.C",
+   "archetype": "ma_g_deposit_rounds_table",
+   "screen": false
+  },
+  {
+   "key": "macro-fg-a:ap_macroeconomics-m10-k1",
+   "unit": 4,
+   "skill": "3.C",
+   "archetype": "ma_g_deposit_rounds_table",
+   "screen": false
+  },
+  {
+   "key": "macro-fg-a:ap_macroeconomics-m10-k2",
+   "unit": 4,
+   "skill": "3.C",
+   "archetype": "ma_g_deposit_rounds_table",
+   "screen": false
+  },
+  {
+   "key": "macro-fg-a:ap_macroeconomics-m12-k1",
+   "unit": 5,
+   "skill": "3.A",
+   "archetype": "ma_g_phillips_shift_graph",
+   "screen": true
+  },
+  {
+   "key": "macro-fg-a:ap_macroeconomics-m13-k0",
+   "unit": 5,
+   "skill": "1.B",
+   "archetype": "ma_g_debt_balance_table",
+   "screen": true
+  },
+  {
+   "key": "macro-fg-a:ap_macroeconomics-m13-k1",
+   "unit": 5,
+   "skill": "1.B",
+   "archetype": "ma_g_debt_balance_table",
+   "screen": true
+  },
+  {
+   "key": "macro-fg-a:ap_macroeconomics-m14-k1",
+   "unit": 5,
+   "skill": "2.B",
+   "archetype": "ma_g_growth_sources_table",
+   "screen": true
+  },
+  {
+   "key": "macro-fg-a:ap_macroeconomics-m15-k1",
+   "unit": 6,
+   "skill": "1.D",
+   "archetype": "ma_g_fx_line_graph",
+   "screen": true
+  },
+  {
+   "key": "macro-fg-a:ap_macroeconomics-m16-k1",
+   "unit": 6,
+   "skill": "3.A",
+   "archetype": "ma_g_exports_imports_lines",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-a:ap_macroeconomics-m01-k1",
+   "unit": 1,
+   "skill": "1.C",
+   "archetype": "ma_h_trade_gain",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-a:ap_macroeconomics-m02-k1",
+   "unit": 1,
+   "skill": "3.C",
+   "archetype": "ma_h_shift_shortage",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-a:ap_macroeconomics-m03-k1",
+   "unit": 1,
+   "skill": "3.C",
+   "archetype": "ma_h_ppc_rotate",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-a:ap_macroeconomics-m05-k0",
+   "unit": 2,
+   "skill": "2.C",
+   "archetype": "ma_h_real_percapita",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-a:ap_macroeconomics-m05-k2",
+   "unit": 2,
+   "skill": "2.C",
+   "archetype": "ma_h_real_percapita",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-a:ap_macroeconomics-m06-k0",
+   "unit": 2,
+   "skill": "3.C",
+   "archetype": "ma_h_unemp_event",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-a:ap_macroeconomics-m06-k1",
+   "unit": 2,
+   "skill": "3.C",
+   "archetype": "ma_h_unemp_event",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-a:ap_macroeconomics-m07-k2",
+   "unit": 2,
+   "skill": "2.C",
+   "archetype": "ma_h_cpi_real_wage",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-a:ap_macroeconomics-m08-k1",
+   "unit": 2,
+   "skill": "2.C",
+   "archetype": "ma_h_exp_real_growth",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-a:ap_macroeconomics-m08-k2",
+   "unit": 2,
+   "skill": "2.C",
+   "archetype": "ma_h_exp_real_growth",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-a:ap_macroeconomics-m10-k1",
+   "unit": 2,
+   "skill": "2.C",
+   "archetype": "ma_h_unexpected_inflation",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-a:ap_macroeconomics-m11-k0",
+   "unit": 4,
+   "skill": "3.C",
+   "archetype": "ma_h_omo_chain",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-a:ap_macroeconomics-m11-k1",
+   "unit": 4,
+   "skill": "3.C",
+   "archetype": "ma_h_omo_chain",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-a:ap_macroeconomics-m13-k1",
+   "unit": 4,
+   "skill": "3.C",
+   "archetype": "ma_h_money_target",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-a:ap_macroeconomics-m13-k2",
+   "unit": 4,
+   "skill": "3.C",
+   "archetype": "ma_h_money_target",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-a:ap_macroeconomics-m14-k0",
+   "unit": 4,
+   "skill": "3.C",
+   "archetype": "ma_h_rr_cut",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-a:ap_macroeconomics-m14-k2",
+   "unit": 4,
+   "skill": "3.C",
+   "archetype": "ma_h_rr_cut",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-a:ap_macroeconomics-m15-k0",
+   "unit": 6,
+   "skill": "3.C",
+   "archetype": "ma_h_export_price",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-a:ap_macroeconomics-m15-k1",
+   "unit": 6,
+   "skill": "3.C",
+   "archetype": "ma_h_export_price",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-a:ap_macroeconomics-m16-k0",
+   "unit": 6,
+   "skill": "3.C",
+   "archetype": "ma_h_trip_exchange",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-a:ap_macroeconomics-m17-k0",
+   "unit": 6,
+   "skill": "3.C",
+   "archetype": "ma_h_depr_nx_gdp",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-a:ap_macroeconomics-m17-k2",
+   "unit": 6,
+   "skill": "3.C",
+   "archetype": "ma_h_depr_nx_gdp",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-b:ap_macroeconomics-m01-k1",
+   "unit": 3,
+   "skill": "3.C",
+   "archetype": "ma_h_gap_tax",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-b:ap_macroeconomics-m01-k2",
+   "unit": 3,
+   "skill": "3.C",
+   "archetype": "ma_h_gap_tax",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-b:ap_macroeconomics-m03-k2",
+   "unit": 3,
+   "skill": "3.C",
+   "archetype": "ma_h_mpc_table_gap",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-b:ap_macroeconomics-m04-k0",
+   "unit": 3,
+   "skill": "3.C",
+   "archetype": "ma_h_two_policy_net",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-b:ap_macroeconomics-m04-k2",
+   "unit": 3,
+   "skill": "3.C",
+   "archetype": "ma_h_two_policy_net",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-b:ap_macroeconomics-m05-k1",
+   "unit": 3,
+   "skill": "3.C",
+   "archetype": "ma_h_adas_table_shift",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-b:ap_macroeconomics-m08-k1",
+   "unit": 5,
+   "skill": "3.C",
+   "archetype": "ma_h_debt_path",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-b:ap_macroeconomics-m08-k2",
+   "unit": 5,
+   "skill": "3.C",
+   "archetype": "ma_h_debt_path",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-b:ap_macroeconomics-m09-k0",
+   "unit": 5,
+   "skill": "3.C",
+   "archetype": "ma_h_crowding_table",
+   "screen": true
+  },
+  {
+   "key": "macro-hard-b:ap_macroeconomics-m09-k1",
+   "unit": 5,
+   "skill": "3.C",
+   "archetype": "ma_h_crowding_table",
+   "screen": true
+  },
+  {
+   "key": "macro-p1-a:ap_macroeconomics-m01-k0",
+   "unit": 1,
+   "skill": "1.C",
+   "archetype": "ma_ppc_opp_cost",
+   "screen": true
+  },
+  {
+   "key": "macro-p1-a:ap_macroeconomics-m01-k1",
+   "unit": 1,
+   "skill": "1.C",
+   "archetype": "ma_ppc_opp_cost",
+   "screen": true
+  },
+  {
+   "key": "macro-p1-a:ap_macroeconomics-m02-k0",
+   "unit": 1,
+   "skill": "1.B",
+   "archetype": "ma_demand_shift",
+   "screen": true
+  },
+  {
+   "key": "macro-p1-a:ap_macroeconomics-m02-k1",
+   "unit": 1,
+   "skill": "1.B",
+   "archetype": "ma_demand_shift",
+   "screen": true
+  },
+  {
+   "key": "macro-p1-a:ap_macroeconomics-m04-k1",
+   "unit": 2,
+   "skill": "1.C",
+   "archetype": "ma_gdp_expenditure",
+   "screen": true
+  },
+  {
+   "key": "macro-p1-a:ap_macroeconomics-m05-k1",
+   "unit": 2,
+   "skill": "1.C",
+   "archetype": "ma_unemp_rate",
+   "screen": true
+  },
+  {
+   "key": "macro-p1-a:ap_macroeconomics-m06-k0",
+   "unit": 2,
+   "skill": "2.C",
+   "archetype": "ma_cpi_inflation",
+   "screen": true
+  },
+  {
+   "key": "macro-p1-a:ap_macroeconomics-m06-k1",
+   "unit": 2,
+   "skill": "2.C",
+   "archetype": "ma_cpi_inflation",
+   "screen": true
+  },
+  {
+   "key": "macro-p1-a:ap_macroeconomics-m07-k1",
+   "unit": 2,
+   "skill": "1.B",
+   "archetype": "ma_unemp_types",
+   "screen": true
+  },
+  {
+   "key": "macro-p1-a:ap_macroeconomics-m08-k0",
+   "unit": 3,
+   "skill": "3.C",
+   "archetype": "ma_multiplier_calc",
+   "screen": true
+  },
+  {
+   "key": "macro-p1-a:ap_macroeconomics-m08-k1",
+   "unit": 3,
+   "skill": "3.C",
+   "archetype": "ma_multiplier_calc",
+   "screen": true
+  },
+  {
+   "key": "macro-p1-a:ap_macroeconomics-m14-k1",
+   "unit": 4,
+   "skill": "3.C",
+   "archetype": "ma_money_multiplier",
+   "screen": true
+  },
+  {
+   "key": "macro-p1-a:ap_macroeconomics-m16-k1",
+   "unit": 4,
+   "skill": "3.A",
+   "archetype": "ma_lf_events",
+   "screen": true
+  },
+  {
+   "key": "macro-p1-a:ap_macroeconomics-m17-k1",
+   "unit": 4,
+   "skill": "3.A",
+   "archetype": "ma_omo_effects",
+   "screen": true
+  },
+  {
+   "key": "macro-p1-a:ap_macroeconomics-m18-k0",
+   "unit": 4,
+   "skill": "1.C",
+   "archetype": "ma_real_rate",
+   "screen": true
+  },
+  {
+   "key": "macro-p1-a:ap_macroeconomics-m25-k1",
+   "unit": 6,
+   "skill": "1.C",
+   "archetype": "ma_exchange_calc",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-a:ap_macroeconomics-m01-k0",
+   "unit": 1,
+   "skill": "1.B",
+   "archetype": "ma_factors_payments",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-a:ap_macroeconomics-m02-k0",
+   "unit": 1,
+   "skill": "1.B",
+   "archetype": "ma_ppc_graph_points",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-a:ap_macroeconomics-m05-k0",
+   "unit": 1,
+   "skill": "1.D",
+   "archetype": "ma_movement_vs_shift",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-a:ap_macroeconomics-m07-k0",
+   "unit": 1,
+   "skill": "2.A",
+   "archetype": "ma_surplus_explain",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-a:ap_macroeconomics-m07-k1",
+   "unit": 1,
+   "skill": "2.A",
+   "archetype": "ma_surplus_explain",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-a:ap_macroeconomics-m08-k1",
+   "unit": 2,
+   "skill": "1.A",
+   "archetype": "ma_gdp_counts",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-a:ap_macroeconomics-m09-k1",
+   "unit": 2,
+   "skill": "1.C",
+   "archetype": "ma_value_added",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-a:ap_macroeconomics-m10-k0",
+   "unit": 2,
+   "skill": "2.C",
+   "archetype": "ma_gdp_percapita_growth",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-a:ap_macroeconomics-m10-k1",
+   "unit": 2,
+   "skill": "2.C",
+   "archetype": "ma_gdp_percapita_growth",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-a:ap_macroeconomics-m11-k0",
+   "unit": 2,
+   "skill": "3.C",
+   "archetype": "ma_employment_change",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-a:ap_macroeconomics-m15-k1",
+   "unit": 2,
+   "skill": "2.C",
+   "archetype": "ma_real_wage",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-a:ap_macroeconomics-m21-k1",
+   "unit": 3,
+   "skill": "2.A",
+   "archetype": "ma_multiplier_explain",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-a:ap_macroeconomics-m22-k1",
+   "unit": 3,
+   "skill": "1.A",
+   "archetype": "ma_sras_slope",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-a:ap_macroeconomics-m23-k1",
+   "unit": 3,
+   "skill": "1.D",
+   "archetype": "ma_lras_vs_sras",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-a:ap_macroeconomics-m26-k1",
+   "unit": 3,
+   "skill": "1.B",
+   "archetype": "ma_stagflation",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-a:ap_macroeconomics-m32-k0",
+   "unit": 4,
+   "skill": "1.C",
+   "archetype": "ma_real_rate",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-a:ap_macroeconomics-m32-k1",
+   "unit": 4,
+   "skill": "1.C",
+   "archetype": "ma_real_rate",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-a:ap_macroeconomics-m34-k1",
+   "unit": 4,
+   "skill": "3.C",
+   "archetype": "ma_bank_balance_sheet",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-a:ap_macroeconomics-m35-k0",
+   "unit": 4,
+   "skill": "3.C",
+   "archetype": "ma_deposit_expansion",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-a:ap_macroeconomics-m35-k1",
+   "unit": 4,
+   "skill": "3.C",
+   "archetype": "ma_deposit_expansion",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-a:ap_macroeconomics-m46-k0",
+   "unit": 5,
+   "skill": "3.C",
+   "archetype": "ma_quantity_theory",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-a:ap_macroeconomics-m46-k1",
+   "unit": 5,
+   "skill": "3.C",
+   "archetype": "ma_quantity_theory",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-b:ap_macroeconomics-m01-k1",
+   "unit": 1,
+   "skill": "1.A",
+   "archetype": "ma_scarcity_concept",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-b:ap_macroeconomics-m08-k1",
+   "unit": 2,
+   "skill": "1.C",
+   "archetype": "ma_income_approach",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-b:ap_macroeconomics-m10-k0",
+   "unit": 2,
+   "skill": "2.C",
+   "archetype": "ma_cyclical_rate",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-b:ap_macroeconomics-m15-k0",
+   "unit": 2,
+   "skill": "3.A",
+   "archetype": "ma_nominal_vs_real",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-b:ap_macroeconomics-m16-k0",
+   "unit": 2,
+   "skill": "2.A",
+   "archetype": "ma_realnominal_explain",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-b:ap_macroeconomics-m19-k0",
+   "unit": 3,
+   "skill": "3.C",
+   "archetype": "ma_balanced_budget",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-b:ap_macroeconomics-m21-k1",
+   "unit": 3,
+   "skill": "3.C",
+   "archetype": "ma_tax_multiplier",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-b:ap_macroeconomics-m25-k1",
+   "unit": 3,
+   "skill": "3.A",
+   "archetype": "ma_adas_shock",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-b:ap_macroeconomics-m28-k1",
+   "unit": 3,
+   "skill": "3.C",
+   "archetype": "ma_fiscal_gap_closing",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-b:ap_macroeconomics-m36-k1",
+   "unit": 4,
+   "skill": "3.A",
+   "archetype": "ma_money_market_graph",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-b:ap_macroeconomics-m40-k0",
+   "unit": 4,
+   "skill": "3.A",
+   "archetype": "ma_lf_graph",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-b:ap_macroeconomics-m47-k1",
+   "unit": 5,
+   "skill": "3.C",
+   "archetype": "ma_deficit_debt",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-b:ap_macroeconomics-m55-k1",
+   "unit": 6,
+   "skill": "1.C",
+   "archetype": "ma_exchange_calc",
+   "screen": true
+  },
+  {
+   "key": "macro-p2-b:ap_macroeconomics-m59-k1",
+   "unit": 6,
+   "skill": "1.C",
+   "archetype": "ma_ncf_identity",
+   "screen": true
+  },
+  {
+   "key": "macro-t-a:ap_macroeconomics-m01-k0",
+   "unit": 3,
+   "skill": "1.B",
+   "archetype": "ma_auto_stabilizers",
+   "screen": true
+  },
+  {
+   "key": "macro-t-a:ap_macroeconomics-m03-k1",
+   "unit": 2,
+   "skill": "2.A",
+   "archetype": "ma_inflation_explain",
+   "screen": false
+  },
+  {
+   "key": "macro-t-a:ap_macroeconomics-m04-k0",
+   "unit": 3,
+   "skill": "1.B",
+   "archetype": "ma_lras_shift",
+   "screen": false
+  },
+  {
+   "key": "macro-t-a:ap_macroeconomics-m04-k1",
+   "unit": 3,
+   "skill": "1.B",
+   "archetype": "ma_lras_shift",
+   "screen": false
+  },
+  {
+   "key": "macro-t-a:ap_macroeconomics-m04-k2",
+   "unit": 3,
+   "skill": "1.B",
+   "archetype": "ma_lras_shift",
+   "screen": false
+  },
+  {
+   "key": "macro-t-a:ap_macroeconomics-m07-k0",
+   "unit": 2,
+   "skill": "3.A",
+   "archetype": "ma_nominal_vs_real",
+   "screen": false
+  },
+  {
+   "key": "macro-t2-a:ap_macroeconomics-m02-k0",
+   "unit": 4,
+   "skill": "3.A",
+   "archetype": "ma_lf_events",
+   "screen": false
+  },
+  {
+   "key": "macro-t2-a:ap_macroeconomics-m02-k1",
+   "unit": 4,
+   "skill": "3.A",
+   "archetype": "ma_lf_events",
+   "screen": false
+  },
+  {
+   "key": "macro-t2-a:ap_macroeconomics-m03-k0",
+   "unit": 4,
+   "skill": "3.A",
+   "archetype": "ma_lf_graph",
+   "screen": false
+  },
+  {
+   "key": "macro-t2-a:ap_macroeconomics-m03-k1",
+   "unit": 4,
+   "skill": "3.A",
+   "archetype": "ma_lf_graph",
+   "screen": false
+  },
+  {
+   "key": "macro-t2-a:ap_macroeconomics-m06-k0",
+   "unit": 4,
+   "skill": "3.A",
+   "archetype": "ma_money_market_graph",
+   "screen": false
+  },
+  {
+   "key": "macro-t2-a:ap_macroeconomics-m06-k1",
+   "unit": 4,
+   "skill": "3.A",
+   "archetype": "ma_money_market_graph",
+   "screen": false
+  },
+  {
+   "key": "macro-t2-a:ap_macroeconomics-m07-k3",
+   "unit": 4,
+   "skill": "3.A",
+   "archetype": "ma_money_market_shift",
+   "screen": false
+  },
+  {
+   "key": "macro-t2-a:ap_macroeconomics-m08-k0",
+   "unit": 4,
+   "skill": "3.A",
+   "archetype": "ma_omo_effects",
+   "screen": false
+  },
+  {
+   "key": "macro-t2-a:ap_macroeconomics-m08-k1",
+   "unit": 4,
+   "skill": "3.A",
+   "archetype": "ma_omo_effects",
+   "screen": false
+  },
+  {
+   "key": "macro-t2-a:ap_macroeconomics-m08-k3",
+   "unit": 4,
+   "skill": "3.A",
+   "archetype": "ma_omo_effects",
+   "screen": false
+  },
+  {
+   "key": "macro-t3-a:ap_macroeconomics-m01-k5",
+   "unit": 4,
+   "skill": "1.D",
+   "archetype": "ma_t_financial_asset_compare",
+   "screen": true
+  },
+  {
+   "key": "macro-t3-a:ap_macroeconomics-m10-k5",
+   "unit": 3,
+   "skill": "2.A",
+   "archetype": "ma_t_self_correct_explain",
+   "screen": true
+  },
+  {
+   "key": "macro-t4-a:ap_macroeconomics-m03-k3",
+   "unit": 4,
+   "skill": "1.B",
+   "archetype": "ma_money_functions",
+   "screen": true
+  },
+  {
+   "key": "macro-x-a:ap_macroeconomics-m04-k1",
+   "unit": 2,
+   "skill": "2.C",
+   "archetype": "ma_lfpr_calc",
+   "screen": false
+  },
+  {
+   "key": "macro-x-a:ap_macroeconomics-m12-k0",
+   "unit": 3,
+   "skill": "3.C",
+   "archetype": "ma_mpc_mps_data",
+   "screen": false
+  },
+  {
+   "key": "macro-x-a:ap_macroeconomics-m12-k1",
+   "unit": 3,
+   "skill": "3.C",
+   "archetype": "ma_mpc_mps_data",
+   "screen": false
+  },
+  {
+   "key": "macro-x-a:ap_macroeconomics-m13-k1",
+   "unit": 3,
+   "skill": "3.C",
+   "archetype": "ma_multiplier_rounds",
+   "screen": false
+  },
+  {
+   "key": "macro-x-a:ap_macroeconomics-m19-k1",
+   "unit": 2,
+   "skill": "2.C",
+   "archetype": "ma_nx_identity",
+   "screen": false
+  },
+  {
+   "key": "macro-x-a:ap_macroeconomics-m21-k1",
+   "unit": 4,
+   "skill": "1.C",
+   "archetype": "ma_excess_reserves_calc",
+   "screen": false
+  },
+  {
+   "key": "macro-x-a:ap_macroeconomics-m25-k0",
+   "unit": 4,
+   "skill": "2.C",
+   "archetype": "ma_real_rate_projects",
+   "screen": false
+  },
+  {
+   "key": "macro-x-a:ap_macroeconomics-m25-k1",
+   "unit": 4,
+   "skill": "2.C",
+   "archetype": "ma_real_rate_projects",
+   "screen": false
+  },
+  {
+   "key": "macro-x-a:ap_macroeconomics-m26-k0",
+   "unit": 4,
+   "skill": "3.C",
+   "archetype": "ma_first_bank_loan",
+   "screen": false
+  },
+  {
+   "key": "macro-x-a:ap_macroeconomics-m26-k1",
+   "unit": 4,
+   "skill": "3.C",
+   "archetype": "ma_first_bank_loan",
+   "screen": false
+  },
+  {
+   "key": "macro-x-a:ap_macroeconomics-m28-k0",
+   "unit": 5,
+   "skill": "2.C",
+   "archetype": "ma_phillips_tradeoff_table",
+   "screen": true
+  },
+  {
+   "key": "macro-x-a:ap_macroeconomics-m28-k1",
+   "unit": 5,
+   "skill": "2.C",
+   "archetype": "ma_phillips_tradeoff_table",
+   "screen": true
+  },
+  {
+   "key": "macro-x-a:ap_macroeconomics-m31-k0",
+   "unit": 5,
+   "skill": "3.C",
+   "archetype": "ma_velocity_solve",
+   "screen": false
+  },
+  {
+   "key": "macro-x-a:ap_macroeconomics-m32-k1",
+   "unit": 5,
+   "skill": "3.C",
+   "archetype": "ma_money_growth_numeric",
+   "screen": false
+  },
+  {
+   "key": "macro-x-a:ap_macroeconomics-m32-k2",
+   "unit": 5,
+   "skill": "3.C",
+   "archetype": "ma_money_growth_numeric",
+   "screen": false
+  },
+  {
+   "key": "macro-x-a:ap_macroeconomics-m33-k0",
+   "unit": 5,
+   "skill": "1.C",
+   "archetype": "ma_interest_on_debt",
+   "screen": false
+  },
+  {
+   "key": "macro-x-a:ap_macroeconomics-m33-k1",
+   "unit": 5,
+   "skill": "1.C",
+   "archetype": "ma_interest_on_debt",
+   "screen": false
+  },
+  {
+   "key": "macro-x-a:ap_macroeconomics-m34-k0",
+   "unit": 5,
+   "skill": "3.C",
+   "archetype": "ma_saving_investment_numeric",
+   "screen": false
+  },
+  {
+   "key": "macro-x-a:ap_macroeconomics-m34-k1",
+   "unit": 5,
+   "skill": "3.C",
+   "archetype": "ma_saving_investment_numeric",
+   "screen": false
+  },
+  {
+   "key": "macro-x-a:ap_macroeconomics-m39-k1",
+   "unit": 6,
+   "skill": "1.C",
+   "archetype": "ma_cross_rate_numeric",
+   "screen": true
+  },
+  {
+   "key": "macro-x-a:ap_macroeconomics-m40-k0",
+   "unit": 6,
+   "skill": "2.C",
+   "archetype": "ma_appreciation_calc",
+   "screen": true
+  },
+  {
+   "key": "macro-x-a:ap_macroeconomics-m40-k2",
+   "unit": 6,
+   "skill": "2.C",
+   "archetype": "ma_appreciation_calc",
+   "screen": true
+  },
+  {
+   "key": "macro-x-a:ap_macroeconomics-m49-k2",
+   "unit": 3,
+   "skill": "2.C",
+   "archetype": "ma_multiplier_concept",
+   "screen": false
+  },
+  {
+   "key": "macro-x-a:ap_macroeconomics-m52-k1",
+   "unit": 6,
+   "skill": "2.B",
+   "archetype": "ma_trade_explain",
+   "screen": true
+  },
+  {
+   "key": "macro-x-a:ap_macroeconomics-m53-k1",
+   "unit": 2,
+   "skill": "3.A",
+   "archetype": "ma_unemp_measure",
+   "screen": false
+  },
+  {
+   "key": "macro-x-b:ap_macroeconomics-m14-k2",
+   "unit": 3,
+   "skill": "1.D",
+   "archetype": "ma_fiscal_policy_compare",
+   "screen": false
+  },
+  {
+   "key": "macro-x-b:ap_macroeconomics-m21-k0",
+   "unit": 3,
+   "skill": "2.A",
+   "archetype": "ma_supply_self_correction",
+   "screen": false
+  }
+ ],
+ "selected": [
+  "macro-hard-a:ap_macroeconomics-m02-k1",
+  "macro-p1-a:ap_macroeconomics-m04-k1",
+  "macro-p1-a:ap_macroeconomics-m05-k1",
+  "macro-p2-b:ap_macroeconomics-m16-k0",
+  "macro-hard-a:ap_macroeconomics-m05-k0",
+  "macro-fg-a:ap_macroeconomics-m07-k1",
+  "macro-p2-b:ap_macroeconomics-m25-k1",
+  "macro-p2-a:ap_macroeconomics-m22-k1",
+  "macro-p2-a:ap_macroeconomics-m26-k1",
+  "macro-t-a:ap_macroeconomics-m01-k0",
+  "macro-p2-a:ap_macroeconomics-m23-k1",
+  "macro-p2-a:ap_macroeconomics-m21-k1",
+  "macro-t3-a:ap_macroeconomics-m10-k5",
+  "macro-p1-a:ap_macroeconomics-m16-k1",
+  "macro-p1-a:ap_macroeconomics-m17-k1",
+  "macro-p2-b:ap_macroeconomics-m36-k1",
+  "macro-t3-a:ap_macroeconomics-m01-k5",
+  "macro-t4-a:ap_macroeconomics-m03-k3",
+  "macro-fg-a:ap_macroeconomics-m12-k1",
+  "macro-fg-a:ap_macroeconomics-m14-k1",
+  "macro-fg-a:ap_macroeconomics-m13-k0",
+  "macro-fg-a:ap_macroeconomics-m13-k1",
+  "macro-fg-a:ap_macroeconomics-m16-k1",
+  "macro-x-a:ap_macroeconomics-m52-k1",
+  "macro-p2-b:ap_macroeconomics-m01-k1",
+  "macro-p2-a:ap_macroeconomics-m05-k0",
+  "macro-p1-a:ap_macroeconomics-m02-k0",
+  "macro-p2-b:ap_macroeconomics-m15-k0",
+  "macro-p1-a:ap_macroeconomics-m07-k1",
+  "macro-fg-a:ap_macroeconomics-m04-k0",
+  "macro-hard-b:ap_macroeconomics-m01-k1",
+  "macro-p1-a:ap_macroeconomics-m18-k0",
+  "macro-x-a:ap_macroeconomics-m28-k0",
+  "macro-x-a:ap_macroeconomics-m28-k1",
+  "macro-hard-b:ap_macroeconomics-m08-k1",
+  "macro-fg-a:ap_macroeconomics-m15-k1"
+ ]
+}
