@@ -1,16 +1,17 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+const purchaseInsertSelectSingle = vi.fn().mockResolvedValue({ data: { id: "purchase1" }, error: null });
+const txInsertMock = vi.fn().mockResolvedValue({ error: null });
 const packageSingleMock = vi.fn().mockResolvedValue({
   data: { credit_count: 10, price_usd: 1200 },
   error: null,
 });
+const studentSelectSingleMock = vi.fn().mockResolvedValue({ data: { credit_balance: 4 } });
+const studentUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
 
 const receiptMaybeSingleMock = vi.fn().mockResolvedValue({ data: null });
 const receiptInsertMock = vi.fn().mockResolvedValue({ error: null });
 const receiptUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
-
-const rpcMock = vi.fn().mockResolvedValue({ data: { created: true }, error: null });
-const issueUpsertMock = vi.fn().mockResolvedValue({ error: null });
 
 const fromMock = vi.fn((table: string) => {
   if (table === "external_event_receipts") {
@@ -25,14 +26,25 @@ const fromMock = vi.fn((table: string) => {
   if (table === "credit_packages") {
     return { select: () => ({ eq: () => ({ single: packageSingleMock }) }) };
   }
-  if (table === "payment_webhook_issues") {
-    return { upsert: issueUpsertMock };
+  if (table === "credit_purchases") {
+    return {
+      insert: () => ({ select: () => ({ single: purchaseInsertSelectSingle }) }),
+    };
+  }
+  if (table === "credit_transactions") {
+    return { insert: txInsertMock };
+  }
+  if (table === "students") {
+    return {
+      select: () => ({ eq: () => ({ single: studentSelectSingleMock }) }),
+      update: () => ({ eq: studentUpdateEqMock }),
+    };
   }
   throw new Error(`unexpected table ${table}`);
 });
 
 vi.mock("@/lib/supabase-admin", () => ({
-  createAdminClient: () => ({ from: fromMock, rpc: rpcMock }),
+  createAdminClient: () => ({ from: fromMock }),
 }));
 
 // constructEvent를 실제 HMAC 검증 없이 요청 본문을 그대로 파싱하는 것으로
@@ -67,8 +79,11 @@ describe("POST /api/webhooks/stripe (레거시 credit_packages 플로우)", () =
     vi.clearAllMocks();
     process.env.STRIPE_WEBHOOK_SECRET = "whsec_test";
     constructEventMock.mockImplementation((rawBody: string) => JSON.parse(rawBody));
-    rpcMock.mockResolvedValue({ data: { created: true }, error: null });
+    purchaseInsertSelectSingle.mockResolvedValue({ data: { id: "purchase1" }, error: null });
+    txInsertMock.mockResolvedValue({ error: null });
     packageSingleMock.mockResolvedValue({ data: { credit_count: 10, price_usd: 1200 }, error: null });
+    studentSelectSingleMock.mockResolvedValue({ data: { credit_balance: 4 } });
+    studentUpdateEqMock.mockResolvedValue({ error: null });
     receiptMaybeSingleMock.mockResolvedValue({ data: null });
     receiptInsertMock.mockResolvedValue({ error: null });
     receiptUpdateEqMock.mockResolvedValue({ error: null });
@@ -88,7 +103,7 @@ describe("POST /api/webhooks/stripe (레거시 credit_packages 플로우)", () =
 
     const res = await POST(request);
     expect(res.status).toBe(401);
-    expect(rpcMock).not.toHaveBeenCalled();
+    expect(txInsertMock).not.toHaveBeenCalled();
   });
 
   it("서명 헤더가 없으면 401을 반환한다(fail-closed)", async () => {
@@ -119,57 +134,27 @@ describe("POST /api/webhooks/stripe (레거시 credit_packages 플로우)", () =
     expect(res.status).toBe(400);
   });
 
-  const paidSession = {
-    id: "cs_123",
-    payment_intent: "pi_123",
-    amount_total: 120000,
-    currency: "usd",
-    payment_status: "paid",
-    metadata: { student_id: "s1", package_id: "p1" },
-  };
-
-  it("paid + 금액 일치면 단일 트랜잭션 RPC 로 session 기준 1회 지급한다", async () => {
+  it("checkout.session.completed 이벤트를 받으면 수업권을 지급한다", async () => {
     const { POST } = await import("./route");
-    const res = await POST(makeRequest({ type: "checkout.session.completed", data: { object: paidSession } }));
-    expect(res.status).toBe(200);
-    expect(rpcMock).toHaveBeenCalledWith("grant_legacy_credit_purchase", {
-      p_session_id: "cs_123",
-      p_student_id: "s1",
-      p_package_id: "p1",
-      p_payment_intent: "pi_123",
+    const request = makeRequest({
+      type: "checkout.session.completed",
+      data: {
+        object: {
+          id: "cs_123",
+          payment_intent: "pi_123",
+          amount_total: 120000,
+          metadata: { student_id: "s1", package_id: "p1" },
+        },
+      },
     });
-  });
 
-  it("RPC 가 실패하면 500 이고 receipt 를 처리 완료로 표시하지 않는다(Stripe 재시도 → 중복 지급 없음은 RPC unique 가 보장)", async () => {
-    rpcMock.mockResolvedValueOnce({ data: null, error: { message: "boom" } });
-    const { POST } = await import("./route");
-    const res = await POST(makeRequest({ type: "checkout.session.completed", data: { object: paidSession } }));
-    expect(res.status).toBe(500);
-    expect(receiptUpdateEqMock).not.toHaveBeenCalled();
-  });
-
-  it("서로 다른 event 가 같은 session 을 가리켜도 매번 같은 session 키로 RPC 를 호출한다(멱등은 DB unique)", async () => {
-    const { POST } = await import("./route");
-    await POST(makeRequest({ type: "checkout.session.completed", data: { object: paidSession } }));
-    await POST(makeRequest({ type: "checkout.session.async_payment_succeeded", data: { object: paidSession } }));
-    expect(rpcMock.mock.calls.map((c) => c[1].p_session_id)).toEqual(["cs_123", "cs_123"]);
-  });
-
-  it("금액 불일치면 지급하지 않고 이상 대장에 기록한다", async () => {
-    const { POST } = await import("./route");
-    await POST(
-      makeRequest({ type: "checkout.session.completed", data: { object: { ...paidSession, amount_total: 100 } } })
+    const res = await POST(request);
+    expect(res.status).toBe(200);
+    expect(fromMock).toHaveBeenCalledWith("credit_purchases");
+    expect(txInsertMock).toHaveBeenCalledWith(
+      expect.objectContaining({ student_id: "s1", type: "purchase", amount: 10 })
     );
-    expect(rpcMock).not.toHaveBeenCalled();
-    expect(issueUpsertMock).toHaveBeenCalledWith(expect.objectContaining({ kind: "legacy_amount_mismatch" }), expect.anything());
-  });
-
-  it("unpaid 면 지급하지 않는다", async () => {
-    const { POST } = await import("./route");
-    await POST(
-      makeRequest({ type: "checkout.session.completed", data: { object: { ...paidSession, payment_status: "unpaid" } } })
-    );
-    expect(rpcMock).not.toHaveBeenCalled();
+    expect(studentUpdateEqMock).toHaveBeenCalledWith("id", "s1");
   });
 
   it("checkout.session.completed가 아닌(그리고 R4 처리 대상도 아닌) 이벤트는 reconciliation 없이 무시한다", async () => {
@@ -178,7 +163,7 @@ describe("POST /api/webhooks/stripe (레거시 credit_packages 플로우)", () =
 
     const res = await POST(request);
     expect(res.status).toBe(200);
-    expect(rpcMock).not.toHaveBeenCalled();
+    expect(txInsertMock).not.toHaveBeenCalled();
   });
 
   it("metadata가 없으면 400을 반환한다", async () => {
@@ -190,6 +175,6 @@ describe("POST /api/webhooks/stripe (레거시 credit_packages 플로우)", () =
 
     const res = await POST(request);
     expect(res.status).toBe(400);
-    expect(rpcMock).not.toHaveBeenCalled();
+    expect(txInsertMock).not.toHaveBeenCalled();
   });
 });
