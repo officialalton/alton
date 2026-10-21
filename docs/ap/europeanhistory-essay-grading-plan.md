@@ -74,3 +74,12 @@
 - 보정 실행 승인과 비용 상한(권장 하드 $12 / 목표 $9).
 - 공식 College Board 샘플 응답을 내부 비교용으로 사용하는 것의 이용 약관 허용 여부(저장소 미커밋·전문 미저장 방식으로 제안).
 - 2027 개편 형식의 공식 샘플이 없다는 점을 수용하고 과거 샘플로 보정할지(권장: 수용, 개편 후 재보정).
+
+## 8. 약관 검토 결과와 보정 중단 (2026-10-21)
+직접 열람(2026-10-21): College Board Privacy Center
+- Legal Terms for Students `https://privacy.collegeboard.org/student-legal-terms` — §8 "College Board Intellectual Property": 콘텐츠는 College Board 및 라이선서 소유·저작권 보호, "may not be distributed, downloaded, uploaded, reproduced, reposted"를 포함해 서면 허락 없이 어떤 방식으로도 사용 불가, "scrape or data-mine" 금지. §10 "non-commercial use only": 서비스를 "to make money or as part of any test prep or other business"에 쓸 수 없음.
+- Legal Terms for Educators and Institutions `https://privacy.collegeboard.org/educator-legal-terms` — §6 동일한 복제·재사용 금지와 서면 허락 요건, §4 "any commercial purpose" 금지.
+- 허락 경로: Copyright and Trademark Permission Request `https://privacy.collegeboard.org/copyright-trademark/request-instructions`. (AP Central 자체 약관 URL은 404였고, 비상업 교실 인쇄 배포 예외만 별도 안내되어 있음.)
+
+판단: Alton은 영리 SAT/AP 사교육 사업이며, 샘플 응답을 내려받아 모델에 입력하는 것은 "downloaded/reused ... without express written permission" 및 "test prep business" 금지 문언에 문면상 해당한다. 공개 PDF가 위 약관의 "Services"에 속하는지, 내부 평가가 공정이용인지는 법률 판단이 필요하지만, 문면상 금지이므로 **보정을 실행하지 않았다(유료 호출 0건, 비용 $0).** 켜기 상수 `EURO_ESSAY_GRADING_VALIDATED`는 false 유지.
+다음 선택지(오너): (a) 위 허락 양식으로 College Board에 서면 허락 신청, (b) 법무 확인으로 공정이용·비서비스 자료 판단 확보, (c) 공식 샘플 없이 ALTON 자체 생성 샘플(기존 앵커 방식)로 보정. 어느 쪽이든 승인 후 §4 계획을 그대로 실행 가능.
