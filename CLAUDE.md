@@ -1,5 +1,7 @@
 # Alton Education — 프로젝트 컨텍스트
 
+> **2026-10-21 현황 정정:** 최신 시작점은 `docs/CURRENT.md`. 공유 원격 DB를 독립 비프로덕션으로 취급하지 않는다. 제품·법적 문안 변경은 별도이며 이번 현황 문서 정리로 운영 스위치가 활성화되지 않는다.
+
 이 파일은 Claude Code가 세션을 시작할 때 자동으로 읽는 파일입니다. 새 세션마다 이 내용을 다시 설명할 필요가 없도록 여기 유지하세요.
 
 ## 작업 위치 (2026-09-28 이전 완료 — 반드시 지킬 것)
@@ -7,11 +9,11 @@
 - 저장소 정본: **`~/Developer/ALTON`** (`preview/m4-integration-verification` 체크아웃, 조정/배포 세션 전용).
 - 기능 세션 worktree: **`~/Developer/ALTON-worktrees/<기능명>`** (`git worktree add -b <branch> ~/Developer/ALTON-worktrees/<기능명> origin/preview/m4-integration-verification`). worktree마다 `npm ci`와 `.env.local` 복사(`~/Developer/ALTON/.env.local`)가 필요하다 — Turbopack은 `node_modules` 심볼릭 링크를 거부한다.
 - **iCloud 경로(`~/Library/Mobile Documents/com~apple~CloudDocs/Claude/ALTON`)는 폐기됐다.** iCloud가 `.git/objects/pack` 파일을 dataless로 evict해 fetch/checkout이 깨지고, `.claude/worktrees/*`의 이름 충돌 파일(`… 2`)이 ref를 오염시켰다. 그 경로에서는 어떤 git·supabase·테스트 명령도 실행하지 않는다(삭제 예정).
-- 로컬 Supabase 컨테이너(`supabase_db_ALTON`, 54422)는 **모든 worktree가 공유**한다. 다른 세션이 `supabase db reset`을 돌리면 내 마이그레이션·테스트 데이터가 사라진다. DB 검증이 필요하면 (a) 조정 세션에 reset 일정을 알리거나, (b) `supabase/config.toml`의 `project_id`와 포트(54421→54521, 54422→54522, 54420→54520, 54429→54529, 54423→54523, 54424→54524, 54427→54527, smtp 54325→54525)를 **임시로** 바꿔 격리 스택을 띄우고(`npx supabase start`), 테스트는 `SUPABASE_TEST_DB_URL`/`SUPABASE_TEST_API_URL`로 대상 DB를 지정한다. 검증 후 `npx supabase stop`, `config.toml`은 커밋 전에 반드시 원복.
+- 로컬 Supabase 컨테이너(`supabase_db_ALTON`, 54422)는 **모든 worktree가 공유**한다. 다른 세션이 `supabase db reset`을 돌리면 내 마이그레이션·테스트 데이터가 사라진다. DB 검증이 필요하면 (a) 조정 세션에 reset 일정을 알리거나, (b) `supabase/config.toml`의 `project_id`와 포트(54421→54521, 54422→54522, 54420→54520, 54429→54529, 54423→54523, 54424→54524, 54427→54527, smtp 54325→54525)를 **임시로** 바꿔 격리 스택을 띄우고(`npx supabase start`), 테스트는 `SUPABASE_TEST_DB_URL`/`SUPABASE_TEST_API_URL`로 대상 DB를 지정한다. 격리 시작·종료는 `scripts/dev/isolated-stack.sh`와 `docs/BRANCH-WORKFLOW.md`의 프로젝트 지정 절차를 따른다. 인자 없는 `supabase stop`은 금지하며 config는 커밋 전에 원복한다.
 
 ## 현재 작업 기준 — 반드시 먼저 읽기
 
-서비스는 아직 오픈 전이며 운영 고객 데이터는 없다. 기존 구현은 검증용 개발본이다.
+현재 서비스·고객·배포 상태는 `docs/CURRENT.md`의 기준일과 확인 범위를 따른다. 2026-10-15 운영 런북에는 Preview/Production이 같은 Supabase 프로젝트를 쓰는 정정이 있다. 과거의 "오픈 전·운영 데이터 없음"을 안전 근거로 쓰지 않는다.
 
 **새 세션은 과거 문서를 전부 읽지 말고 다음 순서로만 시작한다**:
 
@@ -98,7 +100,7 @@ Gate A·B·C는 2026-08-30 전부 완료됐다(Gate B: `docs/2026-08-29-gate-b-m
 ## 코딩 컨벤션
 
 - 컴포넌트는 기능 단위 폴더로 (`app/(session)/session-view/`, `app/admin/curriculum/` 등)
-- 목업의 한국어 UI 텍스트/라벨은 그대로 유지한다 (번역하지 않음)
+- 언어는 `docs/POLICY-DECISIONS.md` 최신 결정과 해당 화면 기준을 따른다. 고객용 학생·학부모·교사·공개 화면은 영어이며 과거 한국어 목업 지시를 복사하지 않는다. 관리자 화면은 해당 기능의 확정 정책을 따른다.
 - 데이터 모델 필드명은 목업의 변수명을 참고하되, DB 컬럼은 snake_case로 정규화
 - v3 범위 밖 기능이나 정책을 임의로 추가하지 않는다. 목업에 없더라도 v3에 확정된 기능은 구현 범위다.
 

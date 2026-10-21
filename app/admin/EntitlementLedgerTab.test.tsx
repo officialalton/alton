@@ -2,6 +2,8 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import EntitlementLedgerTab from "./EntitlementLedgerTab";
 
+vi.mock("./PaymentRefundBoard", () => ({ default: () => null }));
+
 const refreshMock = vi.fn();
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ refresh: refreshMock }),

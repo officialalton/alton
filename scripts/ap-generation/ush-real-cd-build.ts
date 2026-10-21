@@ -8,12 +8,14 @@ import { planConversion } from "../../lib/ap-exam/convert";
 import { realSetViolations, registryViolations, type RegistrySource } from "../../lib/ap-generation/ush-real-gates";
 import { MC_SETS_C, type McSet } from "./ush-real-c-content";
 import { MC_SETS_D } from "./ush-real-d-content";
+import { MC_SETS_E } from "./ush-real-e-content";
 
 type Json = Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
-export type Run = "c" | "d";
+export type Run = "c" | "d" | "e";
 export const RUNS: Record<Run, { run: string; gate: string; sets: McSet[] }> = {
   c: { run: "ush-real-c", gate: "ush-real-c-2026-10-15", sets: MC_SETS_C },
   d: { run: "ush-real-d", gate: "ush-real-d-2026-10-15", sets: MC_SETS_D },
+  e: { run: "ush-real-e", gate: "ush-real-e-2026-10-19", sets: MC_SETS_E },
 };
 const MARK = "Historical source (real document)";
 const rd = (p: string) => JSON.parse(readFileSync(p, "utf-8"));

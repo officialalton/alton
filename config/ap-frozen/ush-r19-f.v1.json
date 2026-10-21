@@ -1,0 +1,125 @@
+{
+ "version": "v1-ush-r19-f",
+ "run": "ush-r19-f",
+ "subject": "ap_us_history",
+ "mode": "frq",
+ "capUsd": 9,
+ "hardStopCumulativeUsd": 640,
+ "myTotalCapUsd": 9999,
+ "stages": [
+  "frq-gen",
+  "frq-fact",
+  "frq-samples",
+  "frq-grade",
+  "frq-fact2",
+  "frq-finalize"
+ ],
+ "models": {
+  "gen": "claude-opus-5-5",
+  "solvers": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5"
+  ],
+  "panel": "claude-fable-5-1",
+  "sampleHigh": "claude-opus-5-5",
+  "sampleLow": "claude-sonnet-5-5",
+  "graders": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5"
+  ],
+  "fact": "claude-fable-5-1"
+ },
+ "effort": "low",
+ "genEffort": "medium",
+ "generatorFiles": [
+  "scripts/ap-generation/ushistory-pipeline.ts",
+  "lib/ap-generation/ushistory-prompts.ts",
+  "lib/ap-generation/ushistory-plan.ts",
+  "lib/ap-generation/ushistory-gates.ts",
+  "lib/ap-generation/ushistory-frq.ts",
+  "lib/ap-generation/subjects/ushistory.ts",
+  "lib/ap-exam/ush-rules.ts"
+ ],
+ "expected": {
+  "hash": "4e19765f7c55"
+ },
+ "frqPlan": [
+  {
+   "id": "saq1_r1",
+   "template": "saq1",
+   "period": 9,
+   "focus": "Two fictional historians interpret why population and political influence shifted toward the South and Southwest after 1970: one emphasizes air conditioning, defense spending and business climate, the other emphasizes migration of retirees and the decline of older industrial cities.",
+   "seed": 19810
+  },
+  {
+   "id": "saq2_r1",
+   "template": "saq2",
+   "period": 2,
+   "focus": "A composed letter from a fictional German-speaking immigrant farmer in Pennsylvania in the 1740s describing why he left Europe, how he acquired land, and what he finds different about farming and neighbors.",
+   "seed": 19811
+  },
+  {
+   "id": "saq3_r1",
+   "template": "saq3",
+   "period": 5,
+   "focus": "Non-text source: a bar chart (illustrative composite, labeled as such) of cotton bales exported and of enslaved population in selected Deep South states in selected years 1820-1860, consistent with the expansion of cotton and slavery.",
+   "seed": 19812
+  },
+  {
+   "id": "dbq_r1",
+   "template": "dbq",
+   "period": 8,
+   "focus": "How and why Americans responded to the Cold War within the United States between 1945 and 1963, including fear, civil defense, loyalty investigations, science education and consumer culture.",
+   "seed": 19813
+  },
+  {
+   "id": "leq_r1",
+   "template": "leq",
+   "period": 3,
+   "focus": "Evaluate the extent to which the American Revolution changed social and political life in the United States between 1763 and 1800.",
+   "seed": 19814
+  }
+ ],
+ "sampleCands": 5,
+ "resample": {
+  "saq1_3": [
+   "mid",
+   "low:5"
+  ],
+  "saq2_2": [
+   "low"
+  ],
+  "saq2_3": [
+   "low"
+  ],
+  "saq2_1": [
+   "high",
+   "low"
+  ],
+  "saq3_3": [
+   "mid",
+   "low"
+  ],
+  "dbq_2": [
+   "mid"
+  ],
+  "dbq_1": [
+   "mid",
+   "low"
+  ],
+  "leq_1": [
+   "mid",
+   "low"
+  ],
+  "leq_3": [
+   "mid",
+   "low"
+  ],
+  "saq1_5": [],
+  "saq1_6": [
+   "high:3",
+   "mid:3",
+   "low:3"
+  ]
+ }
+}

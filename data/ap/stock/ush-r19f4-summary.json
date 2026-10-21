@@ -1,0 +1,131 @@
+{
+ "runs": [
+  "ush-r19-f4"
+ ],
+ "rows": 2,
+ "passed": 2,
+ "rejected": 0,
+ "mcSets": {
+  "rows": 0,
+  "passed": 0
+ },
+ "frqSets": {
+  "rows": 2,
+  "passed": 2
+ },
+ "mcItems": {
+  "generated": 0,
+  "deterministicPass": 0,
+  "solvers3of3": 0,
+  "finalPass": 0,
+  "firstPassRate": 0
+ },
+ "failureReasons": {},
+ "keyConfidence": {
+  "items": 0,
+  "high": 0,
+  "medium": 0,
+  "mean": 0
+ },
+ "categoriesPassed": {},
+ "skillsPassed": {},
+ "renderTypesPassed": {
+  "none": 1,
+  "ap_table": 1
+ },
+ "frqAudit": [
+  {
+   "id": "saq1_r4",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "saq1_r4",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "saq1_r4",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "saq3_r4",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "saq3_r4",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "saq3_r4",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  }
+ ],
+ "costUsd": {
+  "ush-r19-f4": {
+   "frq-fact": 0.0805,
+   "frq-fact2": 0.1083,
+   "frq-gen": 0.1159,
+   "frq-grade": 0.0923,
+   "frq-samples": 0.0603
+  }
+ }
+}

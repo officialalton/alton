@@ -1,0 +1,337 @@
+{
+ "models": {
+  "solvers": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5"
+  ],
+  "fact": "claude-fable-5-1"
+ },
+ "solve": {
+  "solve-ap_us_history-real_e_harriot-0": [
+   {
+    "q": 1,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "The excerpt says the plant purges humors and keeps the body healthy, and that it was thrown into fires, water and air to please the gods."
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "likely",
+    "also": null,
+    "note": "Harriot's Briefe and True Report was promotional writing for Raleigh's colonizing venture. It lists Virginia's 'merchantable commodities' to attract investors and settlers."
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "The report was published in 1588 about the 1585-86 Roanoke expedition, which did not last. Jamestown (1607) came later."
+   },
+   {
+    "q": 4,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "Harriot says the English smoked tobacco 'after their maner', both in Virginia and after returning home. That is an example of the Columbian Exchange flowing from the Americas to Europe."
+   }
+  ],
+  "solve-ap_us_history-real_e_harriot-1": [
+   {
+    "q": 1,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "The excerpt describes health benefits and sacrifices to please gods."
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "likely",
+    "also": null,
+    "note": "Harriot's Briefe and True Report was promotional, meant to attract investors and settlers to Virginia."
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "The report comes from the 1585-86 Roanoke expedition."
+   },
+   {
+    "q": 4,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "The English adopted the Native practice of smoking tobacco, a Columbian Exchange example."
+   }
+  ],
+  "solve-ap_us_history-real_e_tordesillas-0": [
+   {
+    "q": 1,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "The text gives Portugal the lands east of the line and Castile the lands west of it."
+   },
+   {
+    "q": 2,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "The treaty says it was made 'for the sake of peace and concord' to settle a controversy over claims."
+   },
+   {
+    "q": 3,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Portugal's voyages along Africa and Columbus's 1492 voyage created overlapping claims. The other options happened after 1494."
+   },
+   {
+    "q": 4,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "Brazil lies east of the line, so Portugal colonized it, while Spain colonized most of the rest of Latin America."
+   }
+  ],
+  "solve-ap_us_history-real_e_tordesillas-1": [
+   {
+    "q": 1,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "Treaty gives lands east of line to Portugal, west to Castile/Aragon."
+   },
+   {
+    "q": 2,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "Preamble cites controversy and peace and concord."
+   },
+   {
+    "q": 3,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Overlapping Portuguese and Spanish claims after Columbus."
+   },
+   {
+    "q": 4,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "Brazil lay east of the line, so Portugal colonized it."
+   }
+  ]
+ },
+ "fact": {
+  "fact-ap_us_history-real_e_tordesillas": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Key matches the text: line 370 leagues west of Cape Verde Islands, east to Portugal, west to Castile/Aragon. Distractor rationales accurate."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "'For the sake of peace and concord' directly supports the key; the Reformation (1517) postdates the treaty as the rationale states."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Portuguese African voyages (Alcáçovas 1479 claims) plus Columbus's 1492–93 voyage produced the dispute leading to Inter caetera and Tordesillas; distractor dating is accurate."
+    },
+    {
+     "where": "Q4",
+     "verdict": "sound",
+     "note": "Brazil's eastern bulge lay east of the Tordesillas line and underpinned Portugal's claim; other rationales (Mexico never transferred, England and France not parties) are accurate."
+    }
+   ],
+   "flags": []
+  },
+  "fact-ap_us_history-real_e_harriot": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Key [2] is directly supported (smoke purges humors/preserves health; powder cast into hallowed fires, air and water to please gods). Distractors are each contradicted by the text; rationales accurately describe the excerpt."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Harriot's Briefe and True Report was a promotional tract for Raleigh's Virginia venture; key [0] is standard and supported. Distractor rationales are accurate."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Roanoke colonies of 1585 and 1587 under Raleigh's patronage, Harriot on the 1585-86 colony, colony found abandoned in 1590; all dates for Jamestown (1607), Plymouth (1620), Manhattan (1626) correct and clearly post-date 1588."
+    },
+    {
+     "where": "Q4",
+     "verdict": "sound",
+     "note": "Excerpt explicitly states the English smoked it 'after their maner' during and after their stay, and that Spaniards already used the name Tobacco; key [1] is the single defensible answer."
+    }
+   ],
+   "flags": []
+  }
+ },
+ "items": {
+  "ap_us_history-real_e_harriot#1": {
+   "keyIndex": 2,
+   "solverChoices": [
+    2,
+    2
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key [2] is directly supported (smoke purges humors/preserves health; powder cast into hallowed fires, air and water to please gods). Distractors are each contradicted by the text; rationales accurately describe the excerpt.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_e_harriot#2": {
+   "keyIndex": 0,
+   "solverChoices": [
+    0,
+    0
+   ],
+   "solverConfidence": [
+    "likely",
+    "likely"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Harriot's Briefe and True Report was a promotional tract for Raleigh's Virginia venture; key [0] is standard and supported. Distractor rationales are accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_e_harriot#3": {
+   "keyIndex": 3,
+   "solverChoices": [
+    3,
+    3
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Roanoke colonies of 1585 and 1587 under Raleigh's patronage, Harriot on the 1585-86 colony, colony found abandoned in 1590; all dates for Jamestown (1607), Plymouth (1620), Manhattan (1626) correct and clearly post-date 1588.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_e_harriot#4": {
+   "keyIndex": 1,
+   "solverChoices": [
+    1,
+    1
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Excerpt explicitly states the English smoked it 'after their maner' during and after their stay, and that Spaniards already used the name Tobacco; key [1] is the single defensible answer.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_e_tordesillas#1": {
+   "keyIndex": 1,
+   "solverChoices": [
+    1,
+    1
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key matches the text: line 370 leagues west of Cape Verde Islands, east to Portugal, west to Castile/Aragon. Distractor rationales accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_e_tordesillas#2": {
+   "keyIndex": 3,
+   "solverChoices": [
+    3,
+    3
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "'For the sake of peace and concord' directly supports the key; the Reformation (1517) postdates the treaty as the rationale states.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_e_tordesillas#3": {
+   "keyIndex": 0,
+   "solverChoices": [
+    0,
+    0
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Portuguese African voyages (Alcáçovas 1479 claims) plus Columbus's 1492–93 voyage produced the dispute leading to Inter caetera and Tordesillas; distractor dating is accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_e_tordesillas#4": {
+   "keyIndex": 2,
+   "solverChoices": [
+    2,
+    2
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Brazil's eastern bulge lay east of the Tordesillas line and underpinned Portugal's claim; other rationales (Mexico never transferred, England and France not parties) are accurate.",
+   "flags": [],
+   "status": "verified"
+  }
+ }
+}

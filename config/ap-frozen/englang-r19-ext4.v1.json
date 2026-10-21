@@ -1,0 +1,100 @@
+{
+ "version": "v1-englang-r19-ext4",
+ "run": "englang-r19-ext4",
+ "subject": "ap_english_language",
+ "mode": "mc",
+ "capUsd": 6,
+ "hardStopCumulativeUsd": 640,
+ "myTotalCapUsd": 9999,
+ "stages": [
+  "gen",
+  "check",
+  "solve",
+  "adv",
+  "judge",
+  "finalize"
+ ],
+ "models": {
+  "gen": "claude-fable-5-1",
+  "solvers": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5",
+   "claude-fable-5-1"
+  ],
+  "adversary": "claude-fable-5-1",
+  "judge": "claude-opus-5-5",
+  "review": "claude-sonnet-5-5",
+  "sampleHigh": "claude-opus-5-5",
+  "sampleLow": "claude-sonnet-5-5",
+  "graders": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5",
+   "claude-fable-5-1"
+  ]
+ },
+ "genModels": {
+  "reading": "claude-fable-5-1",
+  "writing": "claude-opus-5-5"
+ },
+ "effort": "medium",
+ "genEffort": "low",
+ "minKeyConfidence": 0.8,
+ "corpusExclude": [],
+ "generatorFiles": [
+  "lib/ap-generation/englang-gates.ts",
+  "lib/ap-generation/englang-frq.ts",
+  "lib/ap-generation/englang-plan.ts",
+  "lib/ap-generation/englang-prompts.ts",
+  "lib/ap-generation/english-text-stats.ts",
+  "lib/ap-generation/subjects/englang.ts",
+  "lib/ap-exam/elang-rules.ts",
+  "scripts/ap-generation/englang-pipeline.ts",
+  "scripts/mock-exam-generation/batch-lib.ts"
+ ],
+ "_note": "2026-10-20 EL3/EL4 writing top-up: long writing bundles must reach 7-9 items each and writing 20-22 per exam.",
+ "ext": [
+  {
+   "id": "lw41",
+   "base": "englang-r19-ext2:ap_english_language-lw41-k0",
+   "newSkills": [
+    "2.A",
+    "4.A",
+    "8.B"
+   ],
+   "seed": 19901
+  },
+  {
+   "id": "lw42",
+   "base": "englang-r19-ext:ap_english_language-lw42-k0",
+   "newSkills": [
+    "2.A",
+    "6.A",
+    "8.A"
+   ],
+   "seed": 19902
+  },
+  {
+   "id": "lw43",
+   "base": "englang-r19-ext:ap_english_language-lw43-k0",
+   "newSkills": [
+    "2.B",
+    "6.B",
+    "8.A"
+   ],
+   "seed": 19903
+  },
+  {
+   "id": "lw44",
+   "base": "englang-r19-ext2:ap_english_language-lw44-k0",
+   "newSkills": [
+    "4.C",
+    "8.A"
+   ],
+   "seed": 19904
+  }
+ ],
+ "extSource": "../sample-2027/englang-r19-ext4-bases.json",
+ "expected": {
+  "hash": "db424b268b22"
+ }
+}

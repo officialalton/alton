@@ -1,0 +1,176 @@
+{
+ "run": "wh-r19-f5",
+ "generatedAt": "2026-10-20",
+ "passed": [
+  "wh-r19-f5:ap_world_history-wh3_dbq-k0"
+ ],
+ "rejected": [
+  {
+   "__rejected": true,
+   "specId": "wh3_saq1",
+   "reason": "sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate; fact_anachronism"
+  }
+ ],
+ "audit": [
+  {
+   "id": "wh3_saq1",
+   "tier": "high",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh3_saq1",
+   "tier": "mid",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh3_saq1",
+   "tier": "low",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh3_dbq",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 7,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "anachronism:The sample presents Yellowstone's creation in 1872 as 'the result of this kind of thinking' in Muir's document about for",
+      "contested:The sample says the 1991 U.S. government report was written 'during the Cold War.' By 1991 the Cold War is generally con",
+      "inaccurate:The sample states that Arrhenius's work 'does not blame industry' and that 'in 1908 the science existed without any sens"
+     ]
+    },
+    {
+     "k": 1,
+     "total": 7,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 2,
+     "total": 7,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 3,
+     "total": 7,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The Chernobyl disaster (26 April 1986) occurred during a botched safety test of reactor No. 4's turbine systems while th"
+     ]
+    },
+    {
+     "k": 4,
+     "total": 7,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:If Doc 3 is Arrhenius's 1896 paper (the standard excerpt used for this period), his published estimate for a doubling of"
+     ]
+    }
+   ],
+   "chosen": 1
+  },
+  {
+   "id": "wh3_dbq",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 5,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The Aral Sea's desiccation was indeed a direct result of Soviet state irrigation planning (cotton monoculture diverting "
+     ]
+    },
+    {
+     "k": 1,
+     "total": 6,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 2,
+     "total": 4,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 3,
+     "total": 6,
+     "spread": 1,
+     "flagged": true,
+     "flags": [
+      "misdescribes_source:In Worlds in the Making (1908) Arrhenius explicitly attributes rising atmospheric CO2 to 'the enormous combustion of coa",
+      "contested:By 1991 the Cold War was effectively over (Berlin Wall fallen 1989, Soviet dissolution Dec. 1991); treating a 1991 repor"
+     ]
+    },
+    {
+     "k": 4,
+     "total": 5,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "misdescribes_source:In Worlds in the Making (1908) Arrhenius explicitly attributes rising atmospheric carbon dioxide to 'the enormous combus",
+      "inaccurate:The Mauna Loa CO2 record was begun in 1958 by Charles David Keeling of the Scripps Institution of Oceanography (a univer"
+     ]
+    }
+   ],
+   "chosen": 2
+  },
+  {
+   "id": "wh3_dbq",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 1,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 2,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 3,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 4,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 1
+  }
+ ]
+}

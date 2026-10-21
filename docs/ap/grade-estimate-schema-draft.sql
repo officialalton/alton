@@ -14,7 +14,7 @@ create table if not exists ap_grade_scales (
   cut_basis text not null default 'none' check (cut_basis in ('official', 'external_estimate', 'internal_provisional', 'internal_validated', 'none')),
   source_note text,
   validation_id uuid,
-  range_policy jsonb not null default '{"max_width":2}'::jsonb,
+  range_policy jsonb not null default '{}'::jsonb,   -- 폭 한도는 검증 결과를 본 뒤 오너가 설정(기본값 없음)
   created_by uuid references profiles (id),
   created_at timestamptz not null default now(),
   activated_by uuid references profiles (id),
@@ -90,7 +90,8 @@ create table if not exists ap_official_score_reports (
   subject text not null,
   exam_year int not null,
   official_grade smallint not null check (official_grade between 1 and 5),
-  verification text not null default 'self_reported' check (verification in ('self_reported', 'document')),
+  self_reported boolean not null default true,       -- 성적표 이미지는 기본 필수 아님(저장하지 않음)
+  attempt_id uuid references mock_exam_attempts (id), -- 연결한 모의 응시(선택). 응시일·학습 기록은 조회로 연결
   submitted_at timestamptz not null default now(),
   unique (student_id, subject, exam_year)
 );

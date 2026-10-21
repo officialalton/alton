@@ -46,8 +46,8 @@ export async function enqueueEssayGradingAction(attemptId: string): Promise<Resu
         jobs.push({ attemptId, setItemId: it.setItemId, partLabel: p.label, studentId: user.id, essay: answers[p.label] ?? "", ...ctx, ...(attempt.apSubject === "ap_english_literature" ? { rubricId: "englit" } : {}) });
       }
     }
-    // 보정(앵커) 샘플이 없는 문항은 채점하지 않는다 — 점수 신뢰도를 보증할 수 없다.
-    const runnable = jobs.filter((j) => j.anchors.length >= 3);
+    // 기준 답안(앵커) 부족 문항도 processEssay 로 보낸다 — 거기서 모델 호출 없이 명시적 이용 불가 행(no_reference_answers)을 남긴다.
+    const runnable = jobs;
     after(async () => { for (const j of runnable) await processEssay(deps, j); }); // 순차(동시 비용 폭주 방지)
     return { ok: true, value: { enabled: true, queued: runnable.length } };
   } catch {

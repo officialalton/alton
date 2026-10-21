@@ -1,5 +1,11 @@
 # ALTON 문서 지도
 
+> **2026-10-21 문서 지도 갱신:** 아래 2026-09-01 분류는 역사적 배경이다. 새 세션은 `../CLAUDE.md` → `POLICY-DECISIONS.md` 최신 정정 → `CURRENT.md` → `BRANCH-WORKFLOW.md`를 따른다.
+>
+> 최신 현황·발견 사항: [전반 점검표](qa/alton-overview-audit-2026-10-21.md). AP 채점: [FRQ 로드맵](ap/frq-scoring-roadmap.md), [파일럿](ap/grade-estimate-pilot-plan.md). 결제: [Stripe 체크리스트](ops/stripe-owner-checklist.md), [환불 검증](ops/stripe-refund-revoke-verification.md). 운영 경계: [런북 10-15 정정](production-open-runbook.md). 과거 CURRENT 원문: [보존본](history/CURRENT-archive-before-2026-10-21-overview.md).
+>
+> 파일·SQL 존재, 코드 병합, 원격 DB 적용, Preview UAT, Production 배포·활성화를 같은 상태로 표시하지 않는다.
+
 기준일: 2026-09-01
 
 ## 1. 현재 유효한 문서

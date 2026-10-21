@@ -87,7 +87,7 @@ export function frqViolations(p: UshFrqPayload, corpus: { id: string; text: stri
     if (!/briefly|identify|describe|explain/i.test(parts.map((x) => x.prompt).join(" "))) v.push("saq_no_task_verb");
     if (p.template === "saq1" && !(n === 2 && kinds.every((k) => k === "secondary_text"))) v.push("saq1_needs_two_secondary_texts");
     if (p.template === "saq2" && !(n === 1 && kinds[0] === "primary_text")) v.push("saq2_needs_one_primary_text");
-    if (p.template === "saq3" && !(n === 1 && (kinds[0] === "table" || kinds[0] === "chart"))) v.push("saq3_needs_non_text_source");
+    if (p.template === "saq3" && !(n === 1 && (kinds[0] === "table" || kinds[0] === "chart" || kinds[0] === "image"))) v.push("saq3_needs_non_text_source");
     if (p.period < 1 || p.period > 9) v.push("saq_period"); if (p.period === 9 && !/2001|1991|199\d|198\d/.test(student)) void 0;
   } else if (task === "dbq") {
     if (n !== 7) v.push(`dbq_documents_${n}_not_7`); if (p.sources.map((s) => s.id).join("") !== "1234567") v.push("dbq_ids_not_1_to_7");

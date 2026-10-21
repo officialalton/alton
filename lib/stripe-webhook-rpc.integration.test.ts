@@ -132,6 +132,62 @@ describe("auto_revoke_refunded_purchase", () => {
     expect(balance(g2)).toBe(19);
   });
 
+  const ledger = (g: string, type: string, amt: number, res = false) =>
+    fixture(`insert into entitlement_ledger (grant_id, event_type, amount, ${res ? "reservation_id" : "business_event_id"}) values ('${g}', '${type}', ${amt}, '${res ? randomUUID() : `${RUN}-${type}-${randomUUID()}`}');`);
+  const manualCase = (name: string, setup: (g: string) => void, expectBalance: number) =>
+    it(`${name} → 회수하지 않고 관리자 처리로 남는다`, () => {
+      const p = newPurchase();
+      const g = newGrant(p);
+      setup(g);
+      const other = newGrant(newPurchase());
+      addRefund(p, "succeeded", 21875, `m${randomUUID()}`);
+      const before = Number(call(`select count(*) from entitlement_ledger where grant_id in ('${g}','${other}');`));
+      expect(revoke(p)).toMatchObject({ revoked: false, reason: "partially_used_or_reserved" });
+      expect(balance(g)).toBe(expectBalance);
+      expect(balance(other)).toBe(20);
+      expect(Number(call(`select count(*) from entitlement_ledger where grant_id in ('${g}','${other}');`))).toBe(before);
+    });
+  manualCase("예약 hold 가 grant 를 점유", (g) => ledger(g, "hold", -1, true), 19);
+  manualCase("소비(consume) 진행", (g) => { ledger(g, "hold", -1, true); ledger(g, "consume", 0, true); }, 19);
+  manualCase("hold 후 release(예약 취소) 이력", (g) => { ledger(g, "hold", -1, true); ledger(g, "release", 1, true); }, 20);
+  manualCase("일부 만료(expire)", (g) => ledger(g, "expire", -5), 15);
+  manualCase("이전(transfer)된 이력", (g) => ledger(g, "transfer", -5), 15);
+  manualCase("관리자 보정(adjust +) 이력(이월·연장 포함)", (g) => ledger(g, "adjust", 2), 22);
+
+  it("환불 pending → succeeded 순서로 오면 succeeded 가 된 뒤에만 회수, 반복 호출 안전", () => {
+    const p = newPurchase();
+    const g = newGrant(p);
+    addRefund(p, "pending", 21875, "seq");
+    expect(revoke(p).revoked).toBe(false);
+    fixture(`update payment_refunds set status='succeeded' where stripe_refund_id='${RUN}-seq';`);
+    expect(revoke(p).revoked).toBe(true);
+    expect(revoke(p).reason).toBe("already_revoked");
+    expect(balance(g)).toBe(0);
+  });
+
+  it("환불 후 재결제: 새 구매의 grant 는 영향받지 않는다", () => {
+    const p1 = newPurchase();
+    const g1 = newGrant(p1);
+    addRefund(p1, "succeeded", 21875, "re1");
+    revoke(p1);
+    const p2 = newPurchase();
+    const g2 = newGrant(p2);
+    expect(revoke(p1).reason).toBe("already_revoked");
+    expect(balance(g1)).toBe(0);
+    expect(balance(g2)).toBe(20);
+    expect(revoke(p2)).toMatchObject({ revoked: false, reason: "not_full_refund" });
+  });
+
+  it("동시 중복 호출에서도 refund ledger 는 1행", async () => {
+    const p = newPurchase();
+    const g = newGrant(p);
+    addRefund(p, "succeeded", 21875, "conc");
+    const q = `select public.auto_revoke_refunded_purchase('${p}');`;
+    await Promise.all([1, 2, 3, 4].map(() => new Promise<void>((res, rej) => execFile("psql", [DB_URL, "-q", "-t", "-A", "-c", q], (e) => (e ? rej(e) : res())))));
+    expect(Number(call(`select count(*) from entitlement_ledger where grant_id='${g}' and event_type='refund';`))).toBe(1);
+    expect(balance(g)).toBe(0);
+  });
+
   it("grant 가 없는 구매는 회수 대상 없음", () => {
     const p = newPurchase();
     addRefund(p, "succeeded", 21875, "nog");

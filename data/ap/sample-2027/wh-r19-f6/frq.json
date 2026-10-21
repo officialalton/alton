@@ -1,0 +1,192 @@
+[
+ {
+  "id": "wh3_saq1",
+  "spec": {
+   "id": "wh3_saq1",
+   "exam": "WH3",
+   "template": "saq1",
+   "era": 2,
+   "units": [
+    4
+   ],
+   "focus": "The organization of scientific inquiry in 17th-century Europe: informal groups of scholars and the founding of the Royal Society of London (do not claim the society was the first scientific body anywhere; keep every example in the rubric and sample answers to Europe and avoid Mughal, Indian or Ottoman examples; name only the Royal Society (chartered 1662), the Accademia dei Lincei and the Academie des sciences (1666) as other examples, and never describe a society as royal before its charter)",
+   "sources": [
+    {
+     "id": "txt-libby-science-1917",
+     "context": "Walter Libby was an American historian of science who wrote this textbook in 1917."
+    }
+   ],
+   "seed": 4341
+  },
+  "payload": {
+   "schema_version": "whap-frq-1",
+   "task_type": "saq",
+   "template": "saq1",
+   "era": 2,
+   "units": [
+    4
+   ],
+   "title": "Informal Scholarly Circles and the Origins of the Royal Society of London, 1640s to 1660s",
+   "prompt": {
+    "scenario": "In the period c. 1600 to c. 1700, scholars in Europe who studied the natural world increasingly met, corresponded and shared experiments in organized groups. Some of these groups were informal gatherings, and others later received charters or support from rulers. The excerpt below comes from a history of science textbook written in 1917 by the American historian Walter Libby. It describes a group of scholars who began meeting in London in the 1640s.",
+    "task": "Using the excerpt, answer (a), (b), and (c).",
+    "requirements": [
+     "Each part requires one specific, accurate answer of one to three sentences.",
+     "Part B must use a development that the excerpt does not name.",
+     "Part C must compare the London group with either the Accademia dei Lincei or the Academie des sciences."
+    ],
+    "parts": [
+     {
+      "label": "A",
+      "prompt": "Briefly describe ONE feature of how the London group described in the excerpt organized its study of the natural world.",
+      "points": 1
+     },
+     {
+      "label": "B",
+      "prompt": "Briefly explain ONE specific historical development in Europe in the period 1450 to 1700, not mentioned in the excerpt, that helps explain why scholars like those in the excerpt formed groups to study the natural world.",
+      "points": 1
+     },
+     {
+      "label": "C",
+      "prompt": "Briefly explain ONE similarity or difference between the London group described in the excerpt and either the Accademia dei Lincei in Rome or the Academie des sciences in Paris in the 1600s.",
+      "points": 1
+     }
+    ]
+   },
+   "sources": [
+    {
+     "id": "A",
+     "kind": "secondary_text",
+     "title": "An Introduction to the History of Science (excerpt on the Royal Society)",
+     "attribution": "Walter Libby, American historian of science, 1917 (Boston: Houghton Mifflin). Project Gutenberg eBook #40706. Reuse: public domain in the United States (published before 1929). excerpted (1 segment); whitespace normalized; no wording changed.",
+     "context": "Walter Libby was an American historian of science who wrote this textbook in 1917.",
+     "real_data": true,
+     "source_registry_id": "txt-libby-science-1917",
+     "source_sha256": "f9fa16c9c7c8e97450e105c967e187e8aebae4b0a422dc73373a9e07fd6d614f",
+     "body": "These philosophers whom Boyle entertained, and whose scientific acumen, breadth of mind, humility, and universal good-will he found so congenial, were the nucleus of the Royal Society of London, of which, on its definite organization in 1662, he was the foremost member. They had begun to meet together in London about 1645, worthy persons inquisitive into natural philosophy--Wilkins, interested in the navigation of the air and of waters below the surface; Wallis, mathematician and grammarian; the many-sided Petty, political economist, and inventor of a double-bottomed boat, who had as a youth of twenty studied with Hobbes in Paris in 1643, and in 1648 was to write his first treatise on industrial education at the suggestion of Hartlib, and finally make a survey of Ireland and acquire large estates; Foster, professor of astronomy at Gresham College; Theodore Haak from the Pfalz; a number of medical men, Dr. Merret, Dr. Ent, a friend of Harvey, Dr. Goddard, who could always be relied upon to undertake an experiment, Dr. Glisson, the physiologist, author in 1654 of a treatise on the liver (De Hepate), and others. They met once a week at Goddard's in Wood Street, at the Bull's Head Tavern in Cheapside, and at Gresham College.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry txt-libby-science-1917"
+     }
+    }
+   ],
+   "rubric": {
+    "rubric_id": "whap-v1",
+    "total_points": 3,
+    "rows": [
+     {
+      "row_id": "a",
+      "name": "Part A",
+      "max": 1,
+      "descriptors": {
+       "0": "The response does not describe an organizational feature that the excerpt supports, or it only repeats a name with no description.",
+       "1": "The response accurately describes one feature of how the group met, who belonged, or how it worked, and that feature is supported by the excerpt."
+      },
+      "task_specific": "Describe one feature of the group's organization or practice that comes from the excerpt: regular weekly meetings; meetings held in informal or semi-public places (a private house in Wood Street, the Bull's Head Tavern, Gresham College); members from many fields (mathematics, astronomy, medicine, physiology, political economy, invention); a member from outside England (Theodore Haak from the Pfalz); hands-on experiment (Goddard undertaking experiments); or the gathering beginning informally around 1645 and only being formally organized in 1662."
+     },
+     {
+      "row_id": "b",
+      "name": "Part B",
+      "max": 1,
+      "descriptors": {
+       "0": "The response names a development that is inaccurate, outside the years or outside Europe, already named in the excerpt, or not connected to scholars forming groups.",
+       "1": "The response accurately explains one development from 1450 to 1700, not named in the excerpt, and connects it to why scholars gathered to share observations or experiments."
+      },
+      "task_specific": "Explain one development from 1450 to 1700 in Europe that the excerpt does not name and that helps explain why scholars formed groups to study nature, such as the printing press spreading scientific texts, Copernican heliocentrism challenging older views of the cosmos, Galileo's telescope observations, Vesalius's anatomy based on dissection, or Francis Bacon's call for experiment and shared, organized inquiry. Harvey, Hobbes, Boyle and Gresham College are named in the excerpt and do not earn the point alone."
+     },
+     {
+      "row_id": "c",
+      "name": "Part C",
+      "max": 1,
+      "descriptors": {
+       "0": "The response does not make an accurate comparison, uses an institution other than the two named, describes the London group of the 1640s as royal, or claims that any of these bodies was the first scientific society anywhere.",
+       "1": "The response accurately explains one similarity or difference between the London group and either the Accademia dei Lincei or the Academie des sciences."
+      },
+      "task_specific": "Explain one accurate similarity or difference between the London group and the Accademia dei Lincei (founded in Rome in 1603 by Federico Cesi, with Galileo as a member) or the Academie des sciences (founded in Paris in 1666 under Louis XIV and his minister Colbert, whose members were paid by the crown). A response may also contrast the Paris academy with the Royal Society after its 1662 charter, but it must not call the 1640s London group royal."
+     }
+    ],
+    "scoring_notes": [
+     "Score each part on its own; a response may earn 0, 1, 2 or 3 points.",
+     "Do not award credit for a claim that the Royal Society or any other body was the first scientific society in the world.",
+     "The group meeting from about 1645 should be described as the informal group that later became the Royal Society; it was not royal until its charter in 1662.",
+     "In Part B, people and places named in the excerpt (Boyle, Harvey, Hobbes, Hartlib, Gresham College) do not earn credit unless the response explains a separate development not named in the excerpt.",
+     "Examples must be European; responses using examples from outside Europe do not earn credit in Part B or Part C.",
+     "ALTON reference — not official AP scoring"
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [],
+    "contextualization_ideas": [
+     "The Scientific Revolution in Europe moved inquiry toward observation, experiment and mathematics and away from relying only on ancient authorities such as Aristotle and Galen.",
+     "Printing and growing networks of letters among scholars let findings circulate across Europe.",
+     "Rulers such as Louis XIV came to see organized science as a source of prestige and practical benefit."
+    ],
+    "outside_evidence": [
+     "Philosophical Transactions, published by the Royal Society from 1665.",
+     "Francis Bacon's Novum Organum (1620).",
+     "Copernicus's On the Revolutions of the Heavenly Spheres (1543).",
+     "Vesalius's On the Fabric of the Human Body (1543).",
+     "Galileo's The Starry Messenger (1610)."
+    ],
+    "reasoning_types": [
+     "Sourcing and reading a secondary text (Part A)",
+     "Causation (Part B)",
+     "Comparison (Part C)"
+    ],
+    "doc_uses": [
+     {
+      "source_id": "Libby 1917 excerpt",
+      "usable_for": "Shows how a scientific circle in London was organized: weekly meetings, informal meeting places, members from many fields, a member from abroad, and a practice of doing experiments, followed by formal organization in 1662.",
+      "sourcing": "A 1917 American textbook in the history of science, written long after the events. Its admiring language (the members' humility, good-will and worthiness) and its focus on individual famous men show the celebratory style of early twentieth-century history of science; it is a secondary source and not a seventeenth-century account."
+     }
+    ],
+    "saq_answers": {
+     "a": [
+      "The group met on a regular schedule, once a week, which shows it was a steady gathering and not a one-time meeting.",
+      "The scholars met in ordinary places such as Goddard's house in Wood Street and the Bull's Head Tavern in Cheapside, as well as at Gresham College, so the group worked informally before it had any charter.",
+      "The group brought together people from many fields, including mathematics (Wallis), astronomy (Foster), medicine and physiology (Merret, Ent, Goddard, Glisson) and political economy (Petty), so members could share knowledge across subjects.",
+      "The members did practical work and not just discussion; the excerpt says Goddard could always be relied upon to undertake an experiment."
+     ],
+     "b": [
+      "The printing press made it possible to copy and spread scientific books and findings widely in Europe, so scholars could read the same works and had reason to meet and discuss them.",
+      "Copernicus's heliocentric model, published in 1543, challenged the long-accepted Earth-centered view of the universe and encouraged scholars to test older authorities against new observation.",
+      "Galileo's telescope observations, published in 1610, showed features of the heavens such as the moons of Jupiter, which encouraged scholars to gather evidence and compare observations directly.",
+      "Francis Bacon, in works such as Novum Organum (1620), argued that knowledge should be built through observation and experiment carried out cooperatively, an idea that encouraged scholars to organize shared experimental work."
+     ],
+     "c": [
+      "Similarity: like the London group, the Accademia dei Lincei began as a private gathering of scholars, founded in 1603 by the nobleman Federico Cesi, and not as a government institution.",
+      "Similarity: both the London group and the Accademia dei Lincei included members interested in observation and experiment; Galileo, known for his telescope work, joined the Lincei in 1611.",
+      "Difference: the Academie des sciences was founded in 1666 under Louis XIV and Colbert and paid its members through the crown, while the London scholars of the 1640s met informally in a house, a tavern and a college without state funding.",
+      "Difference: the Paris academy was organized from the start by the French state to serve the monarchy, while the London group grew up on its own for nearly two decades before its 1662 charter made it the Royal Society."
+     ]
+    },
+    "common_pitfalls": [
+     "Calling the 1640s meetings the Royal Society, or calling the group royal before the 1662 charter.",
+     "Claiming that the Royal Society, the Lincei or the Paris academy was the first scientific society in the world.",
+     "Using Harvey, Boyle or Hobbes as the Part B development even though the excerpt already names them.",
+     "Giving a Part B development that falls after 1700 or comes from outside Europe.",
+     "In Part C, naming the Paris academy or the Lincei without saying how it was similar to or different from the London group.",
+     "Treating Libby's 1917 textbook as a seventeenth-century primary source."
+    ],
+    "facts": [
+     "The Royal Society of London received a royal charter from Charles II in 1662.",
+     "The Royal Society began publishing Philosophical Transactions in 1665, edited by Henry Oldenburg.",
+     "The Accademia dei Lincei was founded in Rome in 1603 by Federico Cesi, and Galileo became a member in 1611.",
+     "The Academie des sciences was founded in Paris in 1666 under Louis XIV, with Jean-Baptiste Colbert as its key organizer, and its members received pay from the crown.",
+     "Nicolaus Copernicus published On the Revolutions of the Heavenly Spheres in 1543.",
+     "Andreas Vesalius published On the Fabric of the Human Body in 1543.",
+     "Galileo published telescope observations in The Starry Messenger in 1610.",
+     "Francis Bacon published Novum Organum in 1620 and argued for knowledge built from observation and experiment.",
+     "The printing press with movable type spread across Europe in the second half of the 1400s."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_authored_from_real_sources",
+    "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+   }
+  },
+  "fact": []
+ }
+]

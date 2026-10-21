@@ -1,0 +1,189 @@
+[
+ {
+  "id": "wh3_saq1",
+  "spec": {
+   "id": "wh3_saq1",
+   "exam": "WH3",
+   "template": "saq1",
+   "era": 2,
+   "units": [
+    4
+   ],
+   "focus": "The organization of scientific inquiry in 17th-century Europe: informal groups of scholars and the founding of the Royal Society of London (do not claim the society was the first scientific body anywhere; keep every example in the rubric and sample answers to Europe and avoid Mughal, Indian or Ottoman examples; name only the Royal Society (chartered 1662), the Accademia dei Lincei and the Academie des sciences (1666) as other examples, and never describe a society as royal before its charter)",
+   "sources": [
+    {
+     "id": "txt-libby-science-1917",
+     "context": "Walter Libby was an American historian of science who wrote this textbook in 1917."
+    }
+   ],
+   "seed": 4341
+  },
+  "payload": {
+   "schema_version": "whap-frq-1",
+   "task_type": "saq",
+   "template": "saq1",
+   "era": 2,
+   "units": [
+    4
+   ],
+   "title": "Informal Scholarly Meetings and the Origins of the Royal Society of London",
+   "prompt": {
+    "scenario": "In the period c. 1600 to c. 1700, European scholars interested in natural philosophy increasingly met, corresponded and shared experiments in organized groups. Some of these groups later received formal recognition from rulers.",
+    "task": "Using the excerpt, answer (a), (b), and (c).",
+    "requirements": [
+     "Each part needs only a brief response of one to three sentences.",
+     "Parts B and C must use specific evidence beyond the people and places named in the excerpt.",
+     "Responses may use only developments from the years 1600 to 1700."
+    ],
+    "parts": [
+     {
+      "label": "A",
+      "prompt": "Briefly describe ONE feature of the way the scholars in the excerpt organized their scientific inquiry before 1662.",
+      "points": 1
+     },
+     {
+      "label": "B",
+      "prompt": "Briefly explain ONE specific intellectual development in Europe in the period 1600 to 1700, not named in the excerpt, that helps explain why scholars formed groups like the one the excerpt describes.",
+      "points": 1
+     },
+     {
+      "label": "C",
+      "prompt": "Briefly explain ONE similarity or ONE difference between the organization of scientific inquiry described in the excerpt and the organization of scientific inquiry somewhere else in Europe in the period 1600 to 1700.",
+      "points": 1
+     }
+    ]
+   },
+   "sources": [
+    {
+     "id": "A",
+     "kind": "secondary_text",
+     "title": "An Introduction to the History of Science (excerpt on the Royal Society)",
+     "attribution": "Walter Libby, American historian of science, 1917 (Boston: Houghton Mifflin). Project Gutenberg eBook #40706. Reuse: public domain in the United States (published before 1929). excerpted (1 segment); whitespace normalized; no wording changed.",
+     "context": "Walter Libby was an American historian of science who wrote this textbook in 1917.",
+     "real_data": true,
+     "source_registry_id": "txt-libby-science-1917",
+     "source_sha256": "f9fa16c9c7c8e97450e105c967e187e8aebae4b0a422dc73373a9e07fd6d614f",
+     "body": "These philosophers whom Boyle entertained, and whose scientific acumen, breadth of mind, humility, and universal good-will he found so congenial, were the nucleus of the Royal Society of London, of which, on its definite organization in 1662, he was the foremost member. They had begun to meet together in London about 1645, worthy persons inquisitive into natural philosophy--Wilkins, interested in the navigation of the air and of waters below the surface; Wallis, mathematician and grammarian; the many-sided Petty, political economist, and inventor of a double-bottomed boat, who had as a youth of twenty studied with Hobbes in Paris in 1643, and in 1648 was to write his first treatise on industrial education at the suggestion of Hartlib, and finally make a survey of Ireland and acquire large estates; Foster, professor of astronomy at Gresham College; Theodore Haak from the Pfalz; a number of medical men, Dr. Merret, Dr. Ent, a friend of Harvey, Dr. Goddard, who could always be relied upon to undertake an experiment, Dr. Glisson, the physiologist, author in 1654 of a treatise on the liver (De Hepate), and others. They met once a week at Goddard's in Wood Street, at the Bull's Head Tavern in Cheapside, and at Gresham College.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry txt-libby-science-1917"
+     }
+    }
+   ],
+   "rubric": {
+    "rubric_id": "whap-v1",
+    "total_points": 3,
+    "rows": [
+     {
+      "row_id": "a",
+      "name": "Part A",
+      "max": 1,
+      "descriptors": {
+       "0": "The response does not describe a feature supported by the excerpt, only restates the title, or wrongly says the group was already the chartered Royal Society around 1645.",
+       "1": "The response accurately describes one organizational feature of the pre-1662 group that the excerpt supports."
+      },
+      "task_specific": "The response describes a feature of the group's organization that comes from the excerpt: regular weekly meetings, meetings held in informal or mixed places (a private home, a tavern, a college), members with varied specialties and professions (mathematics, astronomy, medicine, economics, invention), a member from outside England, or the group as an informal circle that later became the core of the society organized in 1662."
+     },
+     {
+      "row_id": "b",
+      "name": "Part B",
+      "max": 1,
+      "descriptors": {
+       "0": "The response names no specific development, uses only people or places already in the excerpt, falls outside 1600 to 1700, or gives no link to why scholars formed groups.",
+       "1": "The response explains one accurate, specific development from 1600 to 1700 and links it to the forming of groups of scholars."
+      },
+      "task_specific": "The response explains a specific European intellectual development from 1600 to 1700 that is not named in the excerpt and connects it to why scholars gathered to share inquiry, such as Francis Bacon's call for inductive, experimental investigation, the spread of printed scientific works, or new telescope observations by Galileo that encouraged testing ideas by observation."
+     },
+     {
+      "row_id": "c",
+      "name": "Part C",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no accurate comparison, uses a case outside Europe or outside 1600 to 1700, or claims without support that one society was the first scientific body anywhere.",
+       "1": "The response accurately explains one similarity or difference using a specific European example from 1600 to 1700."
+      },
+      "task_specific": "The response explains a similarity or difference between the English group (or the Royal Society after 1662) and another European case from 1600 to 1700. Accepted cases are the Accademia dei Lincei in Rome or the Academie des sciences in Paris (1666). Examples include state funding and paid members in France compared with the self-supporting English society, or private aristocratic patronage of the Lincei."
+     }
+    ],
+    "scoring_notes": [
+     "Each part is scored on its own; a response may earn 0 to 3 points.",
+     "Do not award Part A for treating Libby as a participant or eyewitness; he is a historian writing in 1917.",
+     "Do not award Part B for Boyle, Harvey, Hobbes, Hartlib or Gresham College alone, because the excerpt names them.",
+     "Do not award a response that calls the 1640s group 'the Royal Society' as if it had already been chartered, or that calls any society the first scientific body anywhere.",
+     "In Part C, accept only the Accademia dei Lincei or the Academie des sciences (1666) as other societies; answers about cases outside Europe do not fit this prompt.",
+     "ALTON reference — not official AP scoring"
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [],
+    "contextualization_ideas": [
+     "The Scientific Revolution in Europe moved toward observation, experiment and mathematics.",
+     "Printing let scientific findings circulate widely across Europe."
+    ],
+    "outside_evidence": [
+     "Francis Bacon's Novum Organum (1620)",
+     "Galileo's Sidereus Nuncius (1610)",
+     "Accademia dei Lincei (1603)",
+     "Academie des sciences (1666)",
+     "Philosophical Transactions (1665)"
+    ],
+    "reasoning_types": [
+     "Sourcing and describing a secondary source",
+     "Causation",
+     "Comparison"
+    ],
+    "saq_answers": {
+     "a": [
+      "The scholars met regularly, once a week, which shows that inquiry was organized through a steady routine of in-person meetings rather than only individual study.",
+      "They met in ordinary places such as a member's house in Wood Street, a tavern in Cheapside and Gresham College, so the group was informal and not yet a chartered institution.",
+      "The group brought together people with very different specialties, including mathematics, astronomy, medicine, physiology and political economy, so inquiry was shared across fields.",
+      "The group included Theodore Haak from the Pfalz as well as English members, and it formed the nucleus of the society organized in 1662, so an informal circle later became a formal body."
+     ],
+     "b": [
+      "Francis Bacon's Novum Organum (1620) argued that knowledge of nature should be built from careful observation and experiment, which encouraged scholars to gather to carry out, watch and check experiments together.",
+      "Bacon's New Atlantis (1626) pictured an organized house of learned investigators working together, giving English scholars a model of shared, collective research.",
+      "Galileo's telescope observations, published in 1610, showed that new instruments and observation could challenge accepted ideas about the heavens, which pushed scholars to share and compare observations with one another.",
+      "The spread of printed scientific books and treatises in the 1600s let scholars read new findings quickly, and groups formed to discuss, repeat and test these published claims."
+     ],
+     "c": [
+      "Difference: the Academie des sciences, founded in Paris in 1666 with Colbert's support under Louis XIV, gave members royal pensions and state backing, while the Royal Society got a royal charter in 1662 but was supported largely by its members.",
+      "Similarity: the Accademia dei Lincei, founded in Rome in 1603 by Federico Cesi, was also a small circle of scholars sharing natural inquiry, and Galileo joined it in 1611.",
+      "Difference: the Accademia dei Lincei depended on one aristocratic patron, Federico Cesi, while the London group drew members from several professions who met on their own at homes, taverns and a college.",
+      "Similarity: both the Royal Society and the Academie des sciences turned scholarly inquiry into lasting institutions with rulers' recognition in the 1660s, linking science to the prestige of the crown."
+     ]
+    },
+    "common_pitfalls": [
+     "Calling the 1640s circle the Royal Society, or calling it royal before the 1662 charter.",
+     "Saying that the Royal Society was the first scientific society anywhere.",
+     "Using Boyle, Harvey, Hobbes, Hartlib or Gresham College as the Part B development when the excerpt already names them.",
+     "Treating Libby as an eyewitness or as a primary source from the 1600s.",
+     "Using examples from outside Europe or after 1700 in Part C, such as later Enlightenment salons.",
+     "Describing the excerpt instead of explaining a connection in Parts B and C."
+    ],
+    "facts": [
+     "The Royal Society of London received its royal charter from Charles II in 1662.",
+     "A meeting at Gresham College in November 1660 is usually given as the founding of the society that was chartered in 1662.",
+     "The Royal Society began publishing Philosophical Transactions, edited by Henry Oldenburg, in 1665.",
+     "The Accademia dei Lincei was founded in Rome in 1603 by Federico Cesi; Galileo became a member in 1611.",
+     "The Academie des sciences was founded in Paris in 1666 under Louis XIV with Colbert's support, and its members received royal pensions.",
+     "Francis Bacon published Novum Organum in 1620 and New Atlantis in 1626.",
+     "Galileo published telescope observations in Sidereus Nuncius in 1610.",
+     "Walter Libby wrote the excerpt in 1917 as a historian of science; he was not a participant in the events."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_authored_from_real_sources",
+    "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+   }
+  },
+  "fact": [
+   {
+    "where": "Rubric Part C and the note 'In Part C, accept only the Accademia dei Lincei or the Academie des sciences (1666) as other societies'",
+    "kind": "other",
+    "detail": "The prompt asks for a comparison with scientific inquiry 'somewhere else in Europe in the period 1600 to 1700', but the rubric restricts credit to two cases. Other accurate, in-period European examples exist and would be wrongly scored 0: the Accademia del Cimento (Florence, 1657, Medici patronage), the Academia Naturae Curiosorum/Leopoldina (Schweinfurt, 1652), the Montmor Academy in Paris (1650s), or the Paris circle around Mersenne. The restriction is inconsistent with the prompt's wording and would penalize historically correct answers."
+   }
+  ]
+ }
+]
