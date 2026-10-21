@@ -87,7 +87,29 @@ export type AdminApAttemptView = {
   detail: MockExamAttemptDetail; essayScores: EssayScoreView[]; essayAi: boolean; isTestAccount: boolean | null;
   /** 채점에 쓰인 구성(점수 행에서 읽은 값). 행이 없으면 빈 배열 → 화면은 "No scoring version recorded" 로 표시한다. */
   versions: { rubricVersion: string; model: string | null; rows: number }[];
+  /** 모델 채점이 아닌 행(건너뜀·대기·실패)을 사유별로 묶은 것. 채점 구성(versions)에 세지 않는다. */
+  unscored?: { label: string; rows: number }[];
 };
+
+const SKIP_LABEL: Record<string, string> = {
+  empty: "submitted blank response → 0 points (no model call)",
+  too_short: "response too short → not scored (no model call)",
+  too_long: "response too long → not scored (no model call)",
+  daily_cap: "daily scoring limit reached → not scored",
+  monthly_budget: "monthly scoring budget reached → not scored",
+  no_reference_answers: "scoring unavailable (no reference answers)",
+  bad_rubric: "scoring unavailable (unknown rubric)",
+};
+/** 점수 행 하나가 모델 채점인지, 아니라면 어떤 사유로 표시할지. done(또는 status 미기재 레거시 행)만 채점 구성에 센다. */
+export function unscoredLabel(status: string | undefined, lastError: string | null | undefined): string | null {
+  if (!status || status === "done") return null;
+  if (status === "skipped") return SKIP_LABEL[lastError ?? ""] ?? `skipped (${lastError ?? "no reason recorded"}) → not scored (no model call)`;
+  if (status === "pending" || status === "processing") return "waiting to be scored";
+  if (status === "failed" && (lastError === "daily_cap" || lastError === "monthly_budget")) return "waiting for scoring limit reset";
+  if (status === "failed") return "scoring failed, will retry";
+  if (status === "dead") return "scoring failed (no more retries)";
+  return `${status} → not scored`;
+}
 
 /** AP 응시 상세(관리자, 읽기 전용): 학생·학부모 화면과 같은 계산(result-score)에 쓸 입력 + 테스트 계정 여부 + 적용된 채점 구성. 쓰기 없음. */
 export async function getApAttemptViewForAdminAction(attemptId: string): Promise<AdminApAttemptView | null> {
@@ -97,16 +119,19 @@ export async function getApAttemptViewForAdminAction(attemptId: string): Promise
   const [essayScores, student, versionRows] = await Promise.all([
     loadEssayScores(supabase, attemptId),
     supabase.from("students").select("is_test_account").eq("id", detail.studentId).maybeSingle(),
-    supabase.from("mock_exam_essay_scores").select("rubric_version, model").eq("attempt_id", attemptId),
+    supabase.from("mock_exam_essay_scores").select("rubric_version, model, status, last_error").eq("attempt_id", attemptId),
   ]);
+  const unscored = new Map<string, number>();
   const byKey = new Map<string, { rubricVersion: string; model: string | null; rows: number }>();
-  for (const r of ((versionRows as { data: { rubric_version: string; model: string | null }[] | null }).data ?? [])) {
+  for (const r of ((versionRows as { data: { rubric_version: string; model: string | null; status?: string; last_error?: string | null }[] | null }).data ?? [])) {
+    const u = unscoredLabel(r.status, r.last_error);
+    if (u) { unscored.set(u, (unscored.get(u) ?? 0) + 1); continue; }
     const k = `${r.rubric_version}|${r.model ?? ""}`;
     const e = byKey.get(k) ?? { rubricVersion: r.rubric_version, model: r.model ?? null, rows: 0 };
     e.rows += 1; byKey.set(k, e);
   }
   const flag = (student as { data: { is_test_account: boolean } | null }).data?.is_test_account;
-  return { detail, essayScores, essayAi: essayGradingSubject(detail.apSubject) || essayScores.length > 0, isTestAccount: typeof flag === "boolean" ? flag : null, versions: [...byKey.values()] };
+  return { detail, essayScores, essayAi: essayGradingSubject(detail.apSubject) || essayScores.length > 0, isTestAccount: typeof flag === "boolean" ? flag : null, versions: [...byKey.values()], unscored: [...unscored].map(([label, rows]) => ({ label, rows })) };
 }
 
 /** 정지·재활성·종료 — 기존 transition_account_status(감사 account_status_events). 사유 필수. */
