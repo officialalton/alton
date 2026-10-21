@@ -2,7 +2,7 @@
 //   npx tsx scripts/ap-generation/lt-assign.ts --sets LT1[,LT2] [--time-ms 120000] [--write-report data/ap/stock/exact-assign-englit-lt1-lt2.json] [--files lt-p1a-items,...] [--no-screen] [--highs]
 // 조건(docs/ap/englit-facts.md, lib/ap-exam/englit-rules.ts): MC 55 = 5묶음(각 8–13문항, 한 장르), 장르 문항 수(단편 23–27 / 시 19–25 / 장편·희곡 8–10), 7범주 범위(차단 조건), 산문 ≥2·시 ≥2 묶음, FRQ 3 = q1 시 / q2 산문 / q3 논증 각 1.
 // 시험 사이 같은 문항 0, 문항군(look-alike 포함)은 두 시험을 합쳐 한 번. 가상 칸(재고에 없는 칸)은 만들지 않는다: 재고만으로 불가능하면 해 없음(infeasible)과 부족 요약을 보고한다.
-import { writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import { solveMip, type Cons } from "../../lib/ap-exam/ilp";
 import { ENGLIT_CATEGORIES, ENGLIT_FRQ_COUNT, ENGLIT_FRQ_TYPES, ENGLIT_FULL_TARGET, ENGLIT_GROUPS, ENGLIT_MC_COUNT, ENGLIT_SET_COUNT, ENGLIT_SET_SIZE, englitCategoryBounds, englitGroupBounds, verifyEnglitFullComposition, type EnglitSetItem } from "../../lib/ap-exam/englit-rules";
 import { loadLtPool, type LtItem } from "./lt-pool";
@@ -74,8 +74,9 @@ export function groupSummary(r: LtResult) { const c: Record<string, number> = {}
 function main() {
   const ids = arg("--sets", "LT1,LT2").split(",").filter(Boolean); const TIME = Number(arg("--time-ms", "120000")); const files = arg("--files") ? arg("--files").split(",") : undefined;
   const { pool } = loadLtPool({ requireScreen: !has("--no-screen"), files }); const log = (s: string) => console.error(s);
-  const m = solveLtSets(ids, pool, { timeMs: TIME, log, highs: has("--highs") });
-  const bad = m.res.x.length ? verifyLtAssignment(m.out) : ["해 없음(재고만으로 공식 구조를 채울 수 없음)"]; const cnt = (f: (c: LtItem) => boolean) => pool.filter(f).length;
+  const blocked = new Set<string>(); for (const f of arg("--block-file").split(",").filter(Boolean)) for (const st of (JSON.parse(readFileSync(f, "utf-8")) as { sets: { mcA?: string[]; mcB?: string[]; frqA?: string[]; frqB?: string[] }[] }).sets) for (const k of [...(st.mcA ?? []), ...(st.mcB ?? []), ...(st.frqA ?? []), ...(st.frqB ?? [])]) blocked.add(k);
+  const m = solveLtSets(ids, pool, { timeMs: TIME, log, highs: has("--highs"), blocked });
+  const bad = m.res.x.length ? verifyLtAssignment(m.out, blocked) : ["해 없음(재고만으로 공식 구조를 채울 수 없음)"]; const cnt = (f: (c: LtItem) => boolean) => pool.filter(f).length;
   console.log(`# lt-assign sets=${ids.join(",")} 재고 묶음 단편 ${cnt((c) => c.group === "short")} 시 ${cnt((c) => c.group === "poetry")} 장편·희곡 ${cnt((c) => c.group === "longer")} (문항 ${pool.filter((c) => c.kind === "mc").reduce((a, c) => a + c.members.length, 0)}) FRQ ${cnt((c) => c.kind === "frq")} (${ENGLIT_FRQ_TYPES.map((t) => `${t}:${cnt((c) => c.frqType === t)}`).join(" ")})`);
   console.log(`status=${m.res.status} 목적값(범주 목표 이탈 + 낮은 키 신뢰도)=${m.res.obj}`); console.log(`독립 검증기 위반: ${bad.length ? bad.join("; ") : "0"}`);
   for (const r of m.out) { const mcq = r.sets.reduce((a, c) => a + c.members.length, 0), ex = r.sets.reduce((a, c) => a + (c.exam ?? 0), 0); console.log(`- ${r.id}: 묶음 ${r.sets.length} (${JSON.stringify(groupSummary(r))}), MC ${mcq}, FRQ ${r.frq.length}, 범주 ${JSON.stringify(categorySummary(r))}, exam_prep ${ex}/${mcq}`); }
