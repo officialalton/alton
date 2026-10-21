@@ -224,6 +224,10 @@ export const STOCK_BATCHES: StockBatch[] = [
   // 2026-10-15 EL 공식 5묶음 구조(docs/ap/englang-structure-audit.md): 검증된 el-rv 묶음 8개에 문항을 더해 읽기 11–13문항·글쓰기 7–9문항으로 확장한 묶음(MC 8). EL1·EL2 정확 배정: data/ap/stock/exact-assign-el-long-el1-el2.json
   // 2026-10-20 AP English Language EL3·EL4(추가 라운드): 새 ALTON 원본 지문 묶음(공식 5묶음 크기로 확장·트림, 병합 실행 englang-r19-merged) + FRQ 6. 정확 배정 data/ap/stock/exact-assign-el-el3-el4.json. 화면 증거 미실행(자리표시자 evidence-el-r19.json).
   { id: "el-r19m", title: "AP English Language EL3·EL4 장문 묶음 (읽기 4 + 글쓰기 5, 공식 5묶음)", itemsFile: "el-r19m-items.json", loadLabel: "el-r19m-2026-10-20", supplement: true, passKeysFile: "el-r19m-pass-keys.json", evidenceFile: "evidence-el-r19.json" },
+  // 2026-10-21 EL5(exact-assign-el-el5.json): 장문 묶음 r19-a 의 EL5 가 쓰는 3키(r41·w41·w45)를 포함한 통과 7. 화면 증거는 evidence-el-r19.json 에 이미 있다 — ②③ 기록·적재·변환만 한다.
+  { id: "el-r19a", title: "AP English Language EL5 r19-a 묶음 (통과 7)", itemsFile: "el-r19a-items.json", loadLabel: "el-r19a-2026-10-21", supplement: true, passKeysFile: "el-r19a-pass-keys.json", evidenceFile: "evidence-el-r19.json" },
+  // 2026-10-21 BI5 가 쓰는 기존 run1 후보 1건(run1:ap_biology-c021-k3: 이미 적재·렌더·화면 검증 완료, 변환만 안 됨) — 변환만 한다.
+  { id: "bio-bi5-base", title: "AP Biology BI5 기존 run1 후보 1건 (이미 적재, 변환만)", itemsFile: null, loadLabel: null, supplement: false, passKeysFile: "bio-bi5-base-pass-keys.json", evidenceFile: "evidence-2026-10-09c.json" },
   { id: "el-r19f", title: "AP English Language EL3·EL4 FRQ (통과 4)", itemsFile: "el-r19f-items.json", loadLabel: "el-r19f-2026-10-20", supplement: true, passKeysFile: "el-r19f-pass-keys.json", evidenceFile: "evidence-el-r19.json" },
   { id: "el-r19f2", title: "AP English Language EL4 FRQ q1 (통과 1)", itemsFile: "el-r19f2-items.json", loadLabel: "el-r19f2-2026-10-20", supplement: true, passKeysFile: "el-r19f2-pass-keys.json", evidenceFile: "evidence-el-r19.json" },
   { id: "el-r19f5", title: "AP English Language EL3 FRQ q2 (통과 1)", itemsFile: "el-r19f5-items.json", loadLabel: "el-r19f5-2026-10-20", supplement: true, passKeysFile: "el-r19f5-pass-keys.json", evidenceFile: "evidence-el-r19.json" },
