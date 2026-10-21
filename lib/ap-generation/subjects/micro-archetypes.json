@@ -68,6 +68,23 @@
   "bc": false
  },
  {
+  "id": "mi_cartel_stability_factors",
+  "topic": "4.5",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options ignore the incentive to cheat or reverse the role of monitoring"
+  ],
+  "misconceptions": [
+   "Not seeing the other's output makes cheating easier, not less likely.",
+   "Cheating on quotas increases total output and lowers the price.",
+   "Earning the monopoly profit does not remove each firm's gain from cheating.",
+   "Two sellers can earn positive profit, but their agreement is unstable."
+  ],
+  "bc": false
+ },
+ {
   "id": "mi_comp_adv_table",
   "topic": "1.4",
   "skill": "1.C",
@@ -132,6 +149,23 @@
    "Reports total variable cost without dividing by quantity.",
    "Uses average variable cost, the wrong cost measure for this question.",
    "Reports the marginal cost of the last unit."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_cost_curve_input_change",
+  "topic": "3.2",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options move the wrong set of cost curves"
+  ],
+  "misconceptions": [
+   "Higher wages raise the variable cost of every unit, so the average curves rise too.",
+   "Average total cost includes variable cost, so it rises as well.",
+   "Wages change with the quantity produced, so they are a variable cost.",
+   "A wage change affects short-run variable cost immediately."
   ],
   "bc": false
  },
@@ -459,6 +493,23 @@
   "bc": false
  },
  {
+  "id": "mi_entry_exit_adjust",
+  "topic": "3.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options swap the direction of entry and exit or shift demand instead of supply"
+  ],
+  "misconceptions": [
+   "Exit shifts supply, not demand, and a rising price reduces losses.",
+   "Competitive firms are price takers, so their own prices are set by the market.",
+   "Entry happens when firms earn profit, not when they lose money.",
+   "Long-run equilibrium in a competitive market has zero economic profit."
+  ],
+  "bc": false
+ },
+ {
   "id": "mi_entry_mc_shift",
   "topic": "4.4",
   "skill": "3.A",
@@ -527,6 +578,40 @@
   "bc": false
  },
  {
+  "id": "mi_externality_permits",
+  "topic": "6.2",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options reverse who sells permits or claim trading changes the cap"
+  ],
+  "misconceptions": [
+   "Trading usually lowers total costs because reductions shift to low-cost firms.",
+   "Under trading, firms do not all cut by the same amount.",
+   "The total cap still fixes the total reduction.",
+   "Permits are limited by the cap, so pollution does not fall to zero."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_externality_remedy",
+  "topic": "6.2",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options reverse the cost gap or choose a policy that raises output"
+  ],
+  "misconceptions": [
+   "A price ceiling creates a shortage and does not make the producer account for the external cost.",
+   "An income tax does not change the producer's cost for each unit of pollution.",
+   "A subsidy lowers the producer's cost and increases the quantity, which worsens the problem.",
+   "A lump-sum tax does not change the cost of producing another unit."
+  ],
+  "bc": false
+ },
+ {
   "id": "mi_factor_derived",
   "topic": "5.1",
   "skill": "1.A",
@@ -540,6 +625,23 @@
    "Reverses the direction of derivation.",
    "Labor demand slopes downward because marginal revenue product falls as more labor is hired.",
    "The marginal revenue product depends on the output price, so the output price matters."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_factor_role_id",
+  "topic": "1.1",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options misclassify the factor or the payment"
+  ],
+  "misconceptions": [
+   "Labor is human effort, not a natural resource.",
+   "Profit is the reward to entrepreneurs, while payment for land is called rent.",
+   "Capital means human-made goods used in production, and a natural field is not human-made.",
+   "Entrepreneurship is the risk-taking organizing role, not a field."
   ],
   "bc": false
  },
@@ -1139,6 +1241,23 @@
   "bc": false
  },
  {
+  "id": "mi_monopcomp_run_adjust",
+  "topic": "4.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options shift demand the wrong way or treat the firms as price takers"
+  ],
+  "misconceptions": [
+   "Entry occurs when firms earn profit, not when they lose money.",
+   "Exit continues until the remaining firms break even.",
+   "Fewer substitutes raise, not lower, each firm's demand.",
+   "Monopolistically competitive firms face downward-sloping demand and are not price takers."
+  ],
+  "bc": false
+ },
+ {
   "id": "mi_monopoly_dwl",
   "topic": "4.2",
   "skill": "3.C",
@@ -1220,6 +1339,23 @@
    "Believes output restriction does not raise the price.",
    "Reverses the effect of market power on quantity and price.",
    "Describes the perfectly competitive outcome."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_monopoly_welfare_compare",
+  "topic": "4.2",
+  "skill": "1.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options reverse the price or quantity comparison"
+  ],
+  "misconceptions": [
+   "Consumer surplus depends on the price and quantity, which both change.",
+   "The monopoly price is higher than the competitive price.",
+   "Higher monopoly profit is not a source of consumer surplus.",
+   "The monopoly quantity is lower than the competitive quantity."
   ],
   "bc": false
  },
@@ -1632,6 +1768,40 @@
   "bc": false
  },
  {
+  "id": "mi_pdiscrim_effect_cases",
+  "topic": "4.2",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options reverse the output, surplus, or deadweight-loss effect"
+  ],
+  "misconceptions": [
+   "The second group buys units that were not sold before.",
+   "The first group's price is unchanged, so its consumer surplus is unchanged.",
+   "The second group buys additional units, so output increases.",
+   "More units sold at prices above marginal cost reduce the deadweight loss."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_pdiscrim_profit_logic",
+  "topic": "4.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options reverse which group pays more or ignore the resale condition"
+  ],
+  "misconceptions": [
+   "Pricing in this way depends on elasticity of demand, not on a higher cost of serving a group.",
+   "Charging different prices to groups with different elasticities raises profit.",
+   "A discount helps only where buyers are price sensitive, so students must be the more elastic group.",
+   "The check prevents resale, which is a condition for the strategy to work."
+  ],
+  "bc": false
+ },
+ {
   "id": "mi_pe_midpoint",
   "topic": "2.3",
   "skill": "1.C",
@@ -1981,10 +2151,10 @@
    "revenue minus explicit (and implicit) costs vs sympy arithmetic"
   ],
   "misconceptions": [
-   "Subtracts only the implicit costs from revenue.",
-   "Reports the total of explicit and implicit costs rather than the profit.",
-   "Reports total revenue without subtracting any costs.",
-   "Reports economic profit instead of accounting profit."
+   "Subtracts only the implicit costs from revenue. The amount is therefore a different quantity from the profit measure the question asks for, so it does not answer the question.",
+   "Reports the total of explicit and implicit costs rather than the profit. The amount is therefore a different quantity from the profit measure the question asks for, so it does not answer the question.",
+   "Reports total revenue without subtracting any costs. The amount is therefore a different quantity from the profit measure the question asks for, so it does not answer the question.",
+   "Reports economic profit instead of accounting profit. The amount is therefore a different quantity from the profit measure the question asks for, so it does not answer the question."
   ],
   "bc": false
  },
@@ -2091,6 +2261,23 @@
   "bc": false
  },
  {
+  "id": "mi_seasonal_shutdown",
+  "topic": "3.6",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options use average total cost or let the firm set its price"
+  ],
+  "misconceptions": [
+   "The shutdown decision compares price with average variable cost, not average total cost.",
+   "With price below average total cost, the stand has an economic loss.",
+   "A short-run loss does not require closing if variable costs are covered.",
+   "Fixed costs are real costs, but they are paid whether or not the stand operates."
+  ],
+  "bc": false
+ },
+ {
   "id": "mi_shift_demand",
   "topic": "2.7",
   "skill": "3.A",
@@ -2159,6 +2346,23 @@
   "bc": false
  },
  {
+  "id": "mi_shutdown_condition_compare",
+  "topic": "3.6",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options use ATC for the shutdown rule or let the firm set its price"
+  ],
+  "misconceptions": [
+   "At this price every quantity loses more than the fixed cost.",
+   "A competitive firm is a price taker and cannot set its price.",
+   "Revenue below variable cost makes the loss larger than the fixed cost alone.",
+   "Fixed costs are paid either way, so the choice depends on covering variable costs."
+  ],
+  "bc": false
+ },
+ {
   "id": "mi_shutdown_decision",
   "topic": "3.6",
   "skill": "3.C",
@@ -2206,6 +2410,23 @@
    "Profit requires price above average total cost, which is not true here.",
    "A loss alone is not the shutdown rule; the firm shuts down only if price is below average variable cost.",
    "A competitive firm produces where price equals marginal cost, not where price equals average total cost."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_structure_features_match",
+  "topic": "4.1",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options swap the number of sellers or the entry condition"
+  ],
+  "misconceptions": [
+   "Monopolistic competition requires many sellers and free entry.",
+   "Perfect competition requires many sellers, which this market lacks.",
+   "Oligopoly requires a few sellers, but this market has only one.",
+   "Monopoly is defined by barriers that keep others out, not by the firm's freedom to enter other markets."
   ],
   "bc": false
  },
@@ -2274,6 +2495,23 @@
    "Assumes sunk costs can be recovered, which contradicts the non-refundable payment.",
    "Treats an unrecoverable cost as zero while still counting its payment as a benefit.",
    "Counts the sunk payment as a benefit of going."
+  ],
+  "bc": false
+ },
+ {
+  "id": "mi_supply_shift_eq",
+  "topic": "2.7",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options swap the curve that shifts or reverse a direction"
+  ],
+  "misconceptions": [
+   "A drought shifts supply left, so the equilibrium quantity falls.",
+   "Less wheat at every price raises the equilibrium price.",
+   "A drought affects production, which is supply, not demand.",
+   "A shift in supply changes the equilibrium even if demand does not move."
   ],
   "bc": false
  },

@@ -1,0 +1,71 @@
+{
+ "runs": [
+  "micro-y-a"
+ ],
+ "rows": 27,
+ "passed": 8,
+ "rejected": 19,
+ "passRate": 0.296,
+ "mc": {
+  "rows": 27,
+  "passed": 8,
+  "passRate": 0.296
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "1": 1,
+  "2": 1,
+  "3": 3,
+  "4": 2,
+  "6": 1
+ },
+ "skillsPassed": {
+  "1.A": 1,
+  "3.A": 2,
+  "2.A": 3,
+  "2.B": 2
+ },
+ "figPassed": {
+  "none": 8
+ },
+ "figAll": {
+  "none": 27
+ },
+ "figPassRate": {
+  "none": "8/27"
+ },
+ "renderTypesPassed": {
+  "none": 8
+ },
+ "archetypesPassed": {
+  "mi_factor_role_id": 1,
+  "mi_supply_shift_eq": 1,
+  "mi_shutdown_condition_compare": 1,
+  "mi_entry_exit_adjust": 1,
+  "mi_cost_curve_input_change": 1,
+  "mi_cartel_stability_factors": 1,
+  "mi_monopcomp_run_adjust": 1,
+  "mi_externality_remedy": 1
+ },
+ "archetypesAll": {
+  "mi_factor_role_id": 3,
+  "mi_supply_shift_eq": 3,
+  "mi_shutdown_condition_compare": 3,
+  "mi_entry_exit_adjust": 3,
+  "mi_cost_curve_input_change": 3,
+  "mi_cartel_stability_factors": 3,
+  "mi_monopcomp_run_adjust": 3,
+  "mi_price_cut_dilemma": 3,
+  "mi_externality_remedy": 3
+ },
+ "failedArchetypes": [
+  "mi_price_cut_dilemma"
+ ],
+ "costUsd": {
+  "micro-y-a": 0.7337
+ }
+}

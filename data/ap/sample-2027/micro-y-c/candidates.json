@@ -1,0 +1,3159 @@
+[
+ {
+  "candidateKey": "ap_microeconomics-m01-k0",
+  "cellId": "ap_microeconomics-m01",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "4.3",
+  "unitCode": "4",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_pdiscrim_profit_logic",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_distractor_explanation; criterion_failed_exam_suitability",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recall and application of price discrimination conditions (different elasticities plus prevention of resale). Short stem, no calculation, no graph. Distractors each contradict one condition, so only a modest two-factor explanation is needed. Fits foundational practice rather than full-mock exam-level difficulty.",
+  "payload": {
+   "archetype": "mi_pdiscrim_profit_logic",
+   "topic": "4.3",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "A museum charges a lower admission price to students than to other adults and checks identification at the door. Which statement best explains why the museum can increase its profit this way?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Students are more sensitive to price than other adults, and the identification check prevents resale of student tickets.",
+     "why": "Separating more elastic and less elastic buyers and preventing resale lets the museum raise profit with different prices.",
+     "value": null
+    },
+    {
+     "text": "The identification check is irrelevant, because students could resell tickets to other adults.",
+     "why": "The check prevents resale, which is a condition for the strategy to work.",
+     "value": null
+    },
+    {
+     "text": "Students cost more to serve than other adults, so they must pay a higher price.",
+     "why": "Pricing in this way depends on elasticity of demand, not on a higher cost of serving a group.",
+     "value": null
+    },
+    {
+     "text": "The museum gains profit only if all visitors pay the same price, because separate prices confuse visitors.",
+     "why": "Charging different prices to groups with different elasticities raises profit.",
+     "value": null
+    },
+    {
+     "text": "Students are less sensitive to price than other adults, so the discount raises the number of student visits.",
+     "why": "A discount helps only where buyers are price sensitive, so students must be the more elastic group.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 60,
+   "facts": [
+    "variant=A museum charges a lower admission price"
+   ],
+   "blueprint": {
+    "id": "mi_pdiscrim_profit_logic",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "charging a higher price to the less elastic group and preventing resale raises a monopolist's profit",
+    "topic": "4.3",
+    "skill": "2.B",
+    "student_thinking": [
+     "Identify the economic model that applies: charging a higher price to the less elastic group and preventing resale raises a monopolist's profit",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "The check prevents resale, which is a condition for the strategy to work."
+     },
+     {
+      "id": "m2",
+      "description": "Pricing in this way depends on elasticity of demand, not on a higher cost of serving a group."
+     },
+     {
+      "id": "m3",
+      "description": "Charging different prices to groups with different elasticities raises profit."
+     },
+     {
+      "id": "m4",
+      "description": "A discount helps only where buyers are price sensitive, so students must be the more elastic group."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted scenarios; wrong options reverse which group pays more or ignore the resale condition",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: charging a higher price to the less elastic group and preventing resale raises a monopolist's profit",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_pdiscrim_profit_logic",
+     "explanation_assumptions_id": "mi_pdiscrim_profit_logic"
+    }
+   },
+   "seed": 40900,
+   "pack_id": "mi_pdiscrim_profit_logic-s40900",
+   "explanation_en": "The correct answer is Students are more sensitive to price than other adults, and the identification check prevents resale of student tickets.. Separating more elastic and less elastic buyers and preventing resale lets the museum raise profit with different prices.\nThe identification check is irrelevant, because students could resell tickets to other adults. is incorrect: The check prevents resale, which is a condition for the strategy to work.\nStudents cost more to serve than other adults, so they must pay a higher price. is incorrect: Pricing in this way depends on elasticity of demand, not on a higher cost of serving a group.\nThe museum gains profit only if all visitors pay the same price, because separate prices confuse visitors. is incorrect: Charging different prices to groups with different elasticities raises profit.\nStudents are less sensitive to price than other adults, so the discount raises the number of student visits. is incorrect: A discount helps only where buyers are price sensitive, so students must be the more elastic group."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_pdiscrim_profit_logic",
+   "facts": [
+    "variant=A museum charges a lower admission price"
+   ],
+   "seed": 40900
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 4.3 in scope; explaining the outcome via elasticity plus the no-resale condition fits skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is the unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Key is much longer and the only option with both conditions (length giveaway). B and D are implausible, with D obviously false, so they do not encode realistic misconceptions. The 'why' explanations are circular restatements."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Timing is fine, but the length giveaway and weak distractors make the item easy to answer by test-wiseness without economics knowledge."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Content and key are correct and in scope, but the key is longest and the only option stating both conditions, and two distractors (B, D) are implausible. It fails on distractor quality and exam suitability."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall and application of price discrimination conditions (different elasticities plus prevention of resale). Short stem, no calculation, no graph. Distractors each contradict one condition, so only a modest two-factor explanation is needed. Fits foundational practice rather than full-mock exam-level difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m01-k1",
+  "cellId": "ap_microeconomics-m01",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "4.3",
+  "unitCode": "4",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_pdiscrim_profit_logic",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "This is a conceptual recall and application item on third-degree price discrimination. Students need to know two conditions: different elasticities across groups and the ability to prevent resale. No calculation or graph reading is involved. The correct option combines the two conditions, which fits skill 2.B's requirement to explain an outcome with multiple variables, but distractors are clearly wrong (same elasticity, resale helps, MC-based pricing, inelastic schools get discount). Reading load is minimal and the model is stated clearly, so it is a standard introductory check of the topic.",
+  "payload": {
+   "archetype": "mi_pdiscrim_profit_logic",
+   "topic": "4.3",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "A software company sells the same program to schools and to businesses, charging schools a much lower price. Which statement best explains why this pricing can raise the company's profit?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Schools have more elastic demand than businesses, and the company can keep the groups from reselling to each other.",
+     "why": "Charging more where demand is less elastic and less where it is more elastic raises profit if resale is prevented.",
+     "value": null
+    },
+    {
+     "text": "The two groups have the same elasticity, so different prices raise profit by confusing buyers.",
+     "why": "With identical elasticities there is no gain from charging different prices.",
+     "value": null
+    },
+    {
+     "text": "Businesses can easily resell the program to schools, so the lower price protects the company.",
+     "why": "Easy resale would undermine the price difference.",
+     "value": null
+    },
+    {
+     "text": "The company's marginal cost is lower for schools, so schools must pay a lower price.",
+     "why": "Price discrimination is based on willingness to pay and elasticity, not on a difference in marginal cost.",
+     "value": null
+    },
+    {
+     "text": "Schools have less elastic demand than businesses, so a lower price raises revenue from schools.",
+     "why": "A price cut raises revenue only where demand is elastic, which is the more price-sensitive group.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 60,
+   "facts": [
+    "variant=A software company sells the same progra"
+   ],
+   "blueprint": {
+    "id": "mi_pdiscrim_profit_logic",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "charging a higher price to the less elastic group and preventing resale raises a monopolist's profit",
+    "topic": "4.3",
+    "skill": "2.B",
+    "student_thinking": [
+     "Identify the economic model that applies: charging a higher price to the less elastic group and preventing resale raises a monopolist's profit",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "With identical elasticities there is no gain from charging different prices."
+     },
+     {
+      "id": "m2",
+      "description": "Easy resale would undermine the price difference."
+     },
+     {
+      "id": "m3",
+      "description": "Price discrimination is based on willingness to pay and elasticity, not on a difference in marginal cost."
+     },
+     {
+      "id": "m4",
+      "description": "A price cut raises revenue only where demand is elastic, which is the more price-sensitive group."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted scenarios; wrong options reverse which group pays more or ignore the resale condition",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: charging a higher price to the less elastic group and preventing resale raises a monopolist's profit",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_pdiscrim_profit_logic",
+     "explanation_assumptions_id": "mi_pdiscrim_profit_logic"
+    }
+   },
+   "seed": 40901,
+   "pack_id": "mi_pdiscrim_profit_logic-s40901",
+   "explanation_en": "The correct answer is Schools have more elastic demand than businesses, and the company can keep the groups from reselling to each other.. Charging more where demand is less elastic and less where it is more elastic raises profit if resale is prevented.\nThe two groups have the same elasticity, so different prices raise profit by confusing buyers. is incorrect: With identical elasticities there is no gain from charging different prices.\nBusinesses can easily resell the program to schools, so the lower price protects the company. is incorrect: Easy resale would undermine the price difference.\nThe company's marginal cost is lower for schools, so schools must pay a lower price. is incorrect: Price discrimination is based on willingness to pay and elasticity, not on a difference in marginal cost.\nSchools have less elastic demand than businesses, so a lower price raises revenue from schools. is incorrect: A price cut raises revenue only where demand is elastic, which is the more price-sensitive group."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_pdiscrim_profit_logic",
+   "facts": [
+    "variant=A software company sells the same progra"
+   ],
+   "seed": 40901
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standalone conceptual MC on price discrimination: it requires more elastic demand in the low-price group plus preventing resale. The key (A) is unique, and each distractor reverses elasticity, ignores resale, or confuses marginal cost with willingness to pay. Five options, no stimulus needed, about 60 seconds. Pass.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item is on topic 4.3. It asks the student to explain an outcome with multiple contributing variables (elasticity difference and resale prevention), which fits skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the only statement that is both true and complete. B, C, D and E are each clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear and the scenario is a standard one."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct misconception. The explanation for E is slightly awkward (\"A price cut raises revenue only where demand is elastic\"), but it still shows that schools are the more elastic group, so E is wrong."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light reading load, no calculation, and the time is typical for an AP item. The calculator designation does not matter here."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "This is a conceptual recall and application item on third-degree price discrimination. Students need to know two conditions: different elasticities across groups and the ability to prevent resale. No calculation or graph reading is involved. The correct option combines the two conditions, which fits skill 2.B's requirement to explain an outcome with multiple variables, but distractors are clearly wrong (same elasticity, resale helps, MC-based pricing, inelastic schools get discount). Reading load is minimal and the model is stated clearly, so it is a standard introductory check of the topic.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m01-k2",
+  "cellId": "ap_microeconomics-m01",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "4.3",
+  "unitCode": "4",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_pdiscrim_profit_logic",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recall of the conditions for price discrimination (different price elasticities across groups plus prevention of resale). No calculation, graph, or table. The correct option pairs the two conditions, and the distractors are clearly wrong (cost-based pricing, uniform pricing, inverted elasticity, resale irrelevant). Short reading load and in-scope content. This is a straightforward introductory check rather than a full-mock level multi-step item.",
+  "payload": {
+   "archetype": "mi_pdiscrim_profit_logic",
+   "topic": "4.3",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "A museum charges a lower admission price to students than to other adults and checks identification at the door. Which statement best explains why the museum can increase its profit this way?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Students cost more to serve than other adults, so they must pay a higher price.",
+     "why": "Pricing in this way depends on elasticity of demand, not on a higher cost of serving a group.",
+     "value": null
+    },
+    {
+     "text": "Students are more sensitive to price than other adults, and the identification check prevents resale of student tickets.",
+     "why": "Separating more elastic and less elastic buyers and preventing resale lets the museum raise profit with different prices.",
+     "value": null
+    },
+    {
+     "text": "The museum gains profit only if all visitors pay the same price, because separate prices confuse visitors.",
+     "why": "Charging different prices to groups with different elasticities raises profit.",
+     "value": null
+    },
+    {
+     "text": "Students are less sensitive to price than other adults, so the discount raises the number of student visits.",
+     "why": "A discount helps only where buyers are price sensitive, so students must be the more elastic group.",
+     "value": null
+    },
+    {
+     "text": "The identification check is irrelevant, because students could resell tickets to other adults.",
+     "why": "The check prevents resale, which is a condition for the strategy to work.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 60,
+   "facts": [
+    "variant=A museum charges a lower admission price"
+   ],
+   "blueprint": {
+    "id": "mi_pdiscrim_profit_logic",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "charging a higher price to the less elastic group and preventing resale raises a monopolist's profit",
+    "topic": "4.3",
+    "skill": "2.B",
+    "student_thinking": [
+     "Identify the economic model that applies: charging a higher price to the less elastic group and preventing resale raises a monopolist's profit",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Pricing in this way depends on elasticity of demand, not on a higher cost of serving a group."
+     },
+     {
+      "id": "m2",
+      "description": "Charging different prices to groups with different elasticities raises profit."
+     },
+     {
+      "id": "m3",
+      "description": "A discount helps only where buyers are price sensitive, so students must be the more elastic group."
+     },
+     {
+      "id": "m4",
+      "description": "The check prevents resale, which is a condition for the strategy to work."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted scenarios; wrong options reverse which group pays more or ignore the resale condition",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: charging a higher price to the less elastic group and preventing resale raises a monopolist's profit",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_pdiscrim_profit_logic",
+     "explanation_assumptions_id": "mi_pdiscrim_profit_logic"
+    }
+   },
+   "seed": 40902,
+   "pack_id": "mi_pdiscrim_profit_logic-s40902",
+   "explanation_en": "The correct answer is Students are more sensitive to price than other adults, and the identification check prevents resale of student tickets.. Separating more elastic and less elastic buyers and preventing resale lets the museum raise profit with different prices.\nStudents cost more to serve than other adults, so they must pay a higher price. is incorrect: Pricing in this way depends on elasticity of demand, not on a higher cost of serving a group.\nThe museum gains profit only if all visitors pay the same price, because separate prices confuse visitors. is incorrect: Charging different prices to groups with different elasticities raises profit.\nStudents are less sensitive to price than other adults, so the discount raises the number of student visits. is incorrect: A discount helps only where buyers are price sensitive, so students must be the more elastic group.\nThe identification check is irrelevant, because students could resell tickets to other adults. is incorrect: The check prevents resale, which is a condition for the strategy to work."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_pdiscrim_profit_logic",
+   "facts": [
+    "variant=A museum charges a lower admission price"
+   ],
+   "seed": 40902
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Third-degree price discrimination (4.3). The item asks the student to explain the outcome using two contributing variables, elasticity difference and resale prevention, which fits skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option B is the only correct answer. A reverses the cost logic. C contradicts the profit gain. D reverses which group is more elastic. E dismisses the resale condition."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the stem is self-contained. The wording is clear US English with five options."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception: cost-based pricing, same-price-is-better, reversed elasticity, and resale irrelevance. The explanation addresses every wrong option, though the 'why' texts are somewhat terse. The correct option is the longest and the only one with two conditions, a mild giveaway but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, no calculation, and the calculator designation is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean conceptual multiple-choice item on price discrimination, with a unique key and distinct distractors. Its only weakness is a mild length cue on the key."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall of the conditions for price discrimination (different price elasticities across groups plus prevention of resale). No calculation, graph, or table. The correct option pairs the two conditions, and the distractors are clearly wrong (cost-based pricing, uniform pricing, inverted elasticity, resale irrelevant). Short reading load and in-scope content. This is a straightforward introductory check rather than a full-mock level multi-step item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m02-k0",
+  "cellId": "ap_microeconomics-m02",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "4.2",
+  "unitCode": "4",
+  "skillPrimary": "1.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_monopoly_welfare_compare",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recall/comparison: monopoly yields higher price and lower quantity than perfect competition, so consumer surplus is smaller. No computation, no graph or table interpretation, and distractors are clearly wrong (e.g., higher quantity, lower price, unchanged surplus). The stem is unambiguous and short, so it fits foundational learning rather than a full-mock exam item.",
+  "payload": {
+   "archetype": "mi_monopoly_welfare_compare",
+   "topic": "4.2",
+   "skill": "1.D",
+   "calculator": "allowed",
+   "stem": "Which statement correctly compares consumer surplus in a market served by a single-price monopolist with the same market under perfect competition, assuming the same costs and demand?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Consumer surplus is smaller under monopoly, because the price is higher and the quantity is lower.",
+     "why": "Higher price and lower quantity shrink the area between the demand curve and the price.",
+     "value": null
+    },
+    {
+     "text": "Consumer surplus is smaller under monopoly, because the quantity is higher.",
+     "why": "The monopoly quantity is lower than the competitive quantity.",
+     "value": null
+    },
+    {
+     "text": "Consumer surplus is the same, because demand does not change.",
+     "why": "Consumer surplus depends on the price and quantity, which both change.",
+     "value": null
+    },
+    {
+     "text": "Consumer surplus is larger under monopoly, because the price is lower.",
+     "why": "The monopoly price is higher than the competitive price.",
+     "value": null
+    },
+    {
+     "text": "Consumer surplus is larger under monopoly, because the monopolist has a higher profit.",
+     "why": "Higher monopoly profit is not a source of consumer surplus.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 60,
+   "facts": [
+    "variant=Which statement correctly compares consu"
+   ],
+   "blueprint": {
+    "id": "mi_monopoly_welfare_compare",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "a single-price monopoly charges more and sells less than perfect competition, which lowers consumer surplus and creates deadweight loss",
+    "topic": "4.2",
+    "skill": "1.D",
+    "student_thinking": [
+     "Identify the economic model that applies: a single-price monopoly charges more and sells less than perfect competition, which lowers consumer surplus and creates deadweight loss",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "The monopoly quantity is lower than the competitive quantity."
+     },
+     {
+      "id": "m2",
+      "description": "Consumer surplus depends on the price and quantity, which both change."
+     },
+     {
+      "id": "m3",
+      "description": "The monopoly price is higher than the competitive price."
+     },
+     {
+      "id": "m4",
+      "description": "Higher monopoly profit is not a source of consumer surplus."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted scenarios; wrong options reverse the price or quantity comparison",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: a single-price monopoly charges more and sells less than perfect competition, which lowers consumer surplus and creates deadweight loss",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_monopoly_welfare_compare",
+     "explanation_assumptions_id": "mi_monopoly_welfare_compare"
+    }
+   },
+   "seed": 40900,
+   "pack_id": "mi_monopoly_welfare_compare-s40900",
+   "explanation_en": "The correct answer is Consumer surplus is smaller under monopoly, because the price is higher and the quantity is lower.. Higher price and lower quantity shrink the area between the demand curve and the price.\nConsumer surplus is smaller under monopoly, because the quantity is higher. is incorrect: The monopoly quantity is lower than the competitive quantity.\nConsumer surplus is the same, because demand does not change. is incorrect: Consumer surplus depends on the price and quantity, which both change.\nConsumer surplus is larger under monopoly, because the price is lower. is incorrect: The monopoly price is higher than the competitive price.\nConsumer surplus is larger under monopoly, because the monopolist has a higher profit. is incorrect: Higher monopoly profit is not a source of consumer surplus."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_monopoly_welfare_compare",
+   "facts": [
+    "variant=Which statement correctly compares consu"
+   ],
+   "seed": 40900
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 30-60 seconds and has five options. It is low difficulty, but typical of an AP recall/comparison item. No calculation is required, and the calculator designation is harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous monopoly vs. perfect competition consumer surplus comparison. It has one correct key and distinct distractors, and it is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall/comparison: monopoly yields higher price and lower quantity than perfect competition, so consumer surplus is smaller. No computation, no graph or table interpretation, and distractors are clearly wrong (e.g., higher quantity, lower price, unchanged surplus). The stem is unambiguous and short, so it fits foundational learning rather than a full-mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m02-k1",
+  "cellId": "ap_microeconomics-m02",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "4.2",
+  "unitCode": "4",
+  "skillPrimary": "1.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_monopoly_welfare_compare",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recall: a single-price monopolist charges more and produces less than a perfectly competitive industry with the same costs, creating deadweight loss. The comparison between models is the standard textbook result. There is no calculation, graph reading, or multi-step reasoning. The distractors are common misconceptions that are easily dismissed with basic knowledge. The wording is clear and the model assumptions are stated (single-price, same costs).",
+  "payload": {
+   "archetype": "mi_monopoly_welfare_compare",
+   "topic": "4.2",
+   "skill": "1.D",
+   "calculator": "allowed",
+   "stem": "Compared with the same industry if it were perfectly competitive, a single-price monopolist producing a good with the same costs will most likely have which result?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "A higher price and a lower quantity, with a deadweight loss.",
+     "why": "The monopolist produces where marginal revenue equals marginal cost, so price exceeds marginal cost and quantity is lower than efficient.",
+     "value": null
+    },
+    {
+     "text": "The same price and quantity, but a lower consumer surplus.",
+     "why": "A change in market power changes the price and the quantity.",
+     "value": null
+    },
+    {
+     "text": "A lower price, because the monopolist's cost per unit is lower.",
+     "why": "With the same costs, the monopolist's price is not lower.",
+     "value": null
+    },
+    {
+     "text": "A higher price and a higher quantity, because the monopolist's revenue is larger.",
+     "why": "A monopolist raises its price by cutting, not raising, the quantity.",
+     "value": null
+    },
+    {
+     "text": "A lower price and a higher quantity, with a gain in total surplus.",
+     "why": "Monopoly restricts output and raises the price relative to competition.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 60,
+   "facts": [
+    "variant=Compared with the same industry if it we"
+   ],
+   "blueprint": {
+    "id": "mi_monopoly_welfare_compare",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "a single-price monopoly charges more and sells less than perfect competition, which lowers consumer surplus and creates deadweight loss",
+    "topic": "4.2",
+    "skill": "1.D",
+    "student_thinking": [
+     "Identify the economic model that applies: a single-price monopoly charges more and sells less than perfect competition, which lowers consumer surplus and creates deadweight loss",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "A change in market power changes the price and the quantity."
+     },
+     {
+      "id": "m2",
+      "description": "With the same costs, the monopolist's price is not lower."
+     },
+     {
+      "id": "m3",
+      "description": "A monopolist raises its price by cutting, not raising, the quantity."
+     },
+     {
+      "id": "m4",
+      "description": "Monopoly restricts output and raises the price relative to competition."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted scenarios; wrong options reverse the price or quantity comparison",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: a single-price monopoly charges more and sells less than perfect competition, which lowers consumer surplus and creates deadweight loss",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_monopoly_welfare_compare",
+     "explanation_assumptions_id": "mi_monopoly_welfare_compare"
+    }
+   },
+   "seed": 40901,
+   "pack_id": "mi_monopoly_welfare_compare-s40901",
+   "explanation_en": "The correct answer is A higher price and a lower quantity, with a deadweight loss.. The monopolist produces where marginal revenue equals marginal cost, so price exceeds marginal cost and quantity is lower than efficient.\nThe same price and quantity, but a lower consumer surplus. is incorrect: A change in market power changes the price and the quantity.\nA lower price, because the monopolist's cost per unit is lower. is incorrect: With the same costs, the monopolist's price is not lower.\nA higher price and a higher quantity, because the monopolist's revenue is larger. is incorrect: A monopolist raises its price by cutting, not raising, the quantity.\nA lower price and a higher quantity, with a gain in total surplus. is incorrect: Monopoly restricts output and raises the price relative to competition."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_monopoly_welfare_compare",
+   "facts": [
+    "variant=Compared with the same industry if it we"
+   ],
+   "seed": 40901
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item can be answered in about 60 seconds, has five options, and has a standard conceptual form typical of AP Microeconomics. It involves no arithmetic.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean, standard conceptual item that compares monopoly with perfect competition. The key is unique and correct, the distractors are plausible, and the distractor explanations are adequate. I found no instant-reject condition."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall: a single-price monopolist charges more and produces less than a perfectly competitive industry with the same costs, creating deadweight loss. The comparison between models is the standard textbook result. There is no calculation, graph reading, or multi-step reasoning. The distractors are common misconceptions that are easily dismissed with basic knowledge. The wording is clear and the model assumptions are stated (single-price, same costs).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m02-k2",
+  "cellId": "ap_microeconomics-m02",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "4.2",
+  "unitCode": "4",
+  "skillPrimary": "1.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_monopoly_welfare_compare",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept conceptual comparison of monopoly vs. perfect competition (higher price, lower quantity, smaller consumer surplus). No calculation, graph, or stimulus. Distractors contain obvious errors (same CS, lower price, higher quantity). Fits skill 1.D at a foundational level, so it is more suitable for basic learning than for full mocks.",
+  "payload": {
+   "archetype": "mi_monopoly_welfare_compare",
+   "topic": "4.2",
+   "skill": "1.D",
+   "calculator": "allowed",
+   "stem": "Which statement correctly compares consumer surplus in a market served by a single-price monopolist with the same market under perfect competition, assuming the same costs and demand?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Consumer surplus is the same, because demand does not change.",
+     "why": "Consumer surplus depends on the price and quantity, which both change.",
+     "value": null
+    },
+    {
+     "text": "Consumer surplus is smaller under monopoly, because the price is higher and the quantity is lower.",
+     "why": "Higher price and lower quantity shrink the area between the demand curve and the price.",
+     "value": null
+    },
+    {
+     "text": "Consumer surplus is larger under monopoly, because the price is lower.",
+     "why": "The monopoly price is higher than the competitive price.",
+     "value": null
+    },
+    {
+     "text": "Consumer surplus is larger under monopoly, because the monopolist has a higher profit.",
+     "why": "Higher monopoly profit is not a source of consumer surplus.",
+     "value": null
+    },
+    {
+     "text": "Consumer surplus is smaller under monopoly, because the quantity is higher.",
+     "why": "The monopoly quantity is lower than the competitive quantity.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 60,
+   "facts": [
+    "variant=Which statement correctly compares consu"
+   ],
+   "blueprint": {
+    "id": "mi_monopoly_welfare_compare",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "a single-price monopoly charges more and sells less than perfect competition, which lowers consumer surplus and creates deadweight loss",
+    "topic": "4.2",
+    "skill": "1.D",
+    "student_thinking": [
+     "Identify the economic model that applies: a single-price monopoly charges more and sells less than perfect competition, which lowers consumer surplus and creates deadweight loss",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Consumer surplus depends on the price and quantity, which both change."
+     },
+     {
+      "id": "m2",
+      "description": "The monopoly price is higher than the competitive price."
+     },
+     {
+      "id": "m3",
+      "description": "Higher monopoly profit is not a source of consumer surplus."
+     },
+     {
+      "id": "m4",
+      "description": "The monopoly quantity is lower than the competitive quantity."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted scenarios; wrong options reverse the price or quantity comparison",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: a single-price monopoly charges more and sells less than perfect competition, which lowers consumer surplus and creates deadweight loss",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_monopoly_welfare_compare",
+     "explanation_assumptions_id": "mi_monopoly_welfare_compare"
+    }
+   },
+   "seed": 40902,
+   "pack_id": "mi_monopoly_welfare_compare-s40902",
+   "explanation_en": "The correct answer is Consumer surplus is smaller under monopoly, because the price is higher and the quantity is lower.. Higher price and lower quantity shrink the area between the demand curve and the price.\nConsumer surplus is the same, because demand does not change. is incorrect: Consumer surplus depends on the price and quantity, which both change.\nConsumer surplus is larger under monopoly, because the price is lower. is incorrect: The monopoly price is higher than the competitive price.\nConsumer surplus is larger under monopoly, because the monopolist has a higher profit. is incorrect: Higher monopoly profit is not a source of consumer surplus.\nConsumer surplus is smaller under monopoly, because the quantity is higher. is incorrect: The monopoly quantity is lower than the competitive quantity."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_monopoly_welfare_compare",
+   "facts": [
+    "variant=Which statement correctly compares consu"
+   ],
+   "seed": 40902
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Compares monopoly vs perfect competition model outcomes; fits 4.2 and skill 1.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is uniquely correct; others contain false claims."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem states the assumptions clearly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors reverse price or quantity comparisons or invoke irrelevant reasons; each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, five options, no calculation needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, unambiguous conceptual item with a unique key and well-explained distractors. Passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept conceptual comparison of monopoly vs. perfect competition (higher price, lower quantity, smaller consumer surplus). No calculation, graph, or stimulus. Distractors contain obvious errors (same CS, lower price, higher quantity). Fits skill 1.D at a foundational level, so it is more suitable for basic learning than for full mocks.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m03-k0",
+  "cellId": "ap_microeconomics-m03",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "4.2",
+  "unitCode": "4",
+  "skillPrimary": "3.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_pdiscrim_effect_cases",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_scope_skill; instant_reject_out_of_scope_knowledge; reference_pattern_mismatch",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recall and application: a monopolist that adds a lower-priced second group sells units that went unsold at the single price, so output rises. No computation, graph, or table. One short reasoning step, and the distractors target common misconceptions (deadweight loss rises, output unchanged, first group's consumer surplus rises, output falls). Wording is slightly loose (\"most likely\") but standard for the topic and not a source of unfair difficulty.",
+  "payload": {
+   "archetype": "mi_pdiscrim_effect_cases",
+   "topic": "4.2",
+   "skill": "3.A",
+   "calculator": "allowed",
+   "stem": "A monopolist currently charging a single price starts charging a lower price to a second group of buyers whose willingness to pay is below the original price, without changing the price paid by the first group. Which statement is most likely true?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Output increases, because the second group buys units that were not sold at the single price.",
+     "why": "Sales to the second group are additional units, so total output rises and the deadweight loss falls.",
+     "value": null
+    },
+    {
+     "text": "Deadweight loss rises, because more units are sold at lower prices.",
+     "why": "More units sold at prices above marginal cost reduce the deadweight loss.",
+     "value": null
+    },
+    {
+     "text": "Output is unchanged, because the first group's price did not change.",
+     "why": "The second group buys units that were not sold before.",
+     "value": null
+    },
+    {
+     "text": "Output increases, but the first group's consumer surplus rises.",
+     "why": "The first group's price is unchanged, so its consumer surplus is unchanged.",
+     "value": null
+    },
+    {
+     "text": "Output decreases, because the second group's lower price reduces the monopolist's marginal revenue.",
+     "why": "The second group buys additional units, so output increases.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 60,
+   "facts": [
+    "variant=A monopolist currently charging a single"
+   ],
+   "blueprint": {
+    "id": "mi_pdiscrim_effect_cases",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "price discrimination raises output relative to a single price, and perfect discrimination removes the deadweight loss and consumer surplus",
+    "topic": "4.2",
+    "skill": "3.A",
+    "student_thinking": [
+     "Identify the economic model that applies: price discrimination raises output relative to a single price, and perfect discrimination removes the deadweight loss and consumer surplus",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "More units sold at prices above marginal cost reduce the deadweight loss."
+     },
+     {
+      "id": "m2",
+      "description": "The second group buys units that were not sold before."
+     },
+     {
+      "id": "m3",
+      "description": "The first group's price is unchanged, so its consumer surplus is unchanged."
+     },
+     {
+      "id": "m4",
+      "description": "The second group buys additional units, so output increases."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted scenarios; wrong options reverse the output, surplus, or deadweight-loss effect",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: price discrimination raises output relative to a single price, and perfect discrimination removes the deadweight loss and consumer surplus",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_pdiscrim_effect_cases",
+     "explanation_assumptions_id": "mi_pdiscrim_effect_cases"
+    }
+   },
+   "seed": 40900,
+   "pack_id": "mi_pdiscrim_effect_cases-s40900",
+   "explanation_en": "The correct answer is Output increases, because the second group buys units that were not sold at the single price.. Sales to the second group are additional units, so total output rises and the deadweight loss falls.\nDeadweight loss rises, because more units are sold at lower prices. is incorrect: More units sold at prices above marginal cost reduce the deadweight loss.\nOutput is unchanged, because the first group's price did not change. is incorrect: The second group buys units that were not sold before.\nOutput increases, but the first group's consumer surplus rises. is incorrect: The first group's price is unchanged, so its consumer surplus is unchanged.\nOutput decreases, because the second group's lower price reduces the monopolist's marginal revenue. is incorrect: The second group buys additional units, so output increases."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_pdiscrim_effect_cases",
+   "facts": [
+    "variant=A monopolist currently charging a single"
+   ],
+   "seed": 40900
+  },
+  "review": {
+   "instant_reject": [
+    "out_of_scope_knowledge"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean, but it assesses price discrimination (topic 4.3) under a topic 4.2 Monopoly label. This is a scope mismatch, so I fail it on scope.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "The stem describes price discrimination, which is topic 4.3 (Price Discrimination), not 4.2 Monopoly. The blueprint concept itself is price discrimination. The item is in Unit 4 but is mislabeled against the official topic 4.2. The skill (determine the outcome) fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is defensible. The second group's willingness to pay is below the original price, so those are additional units and output rises. The first group's price is unchanged, so its surplus is unchanged. B, C, D and E are each clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and none is given. The wording is clear. One minor gap: the stem never states that the lower price still exceeds marginal cost, though this is implied."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a distinct reversal: deadweight loss, output unchanged, first group's surplus, output decreases. Each is explained. The key is also noticeably longer and more explicit than the distractors, a mild giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A quick conceptual item of about 60 seconds with five options. The calculator designation is irrelevant but harmless."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall and application: a monopolist that adds a lower-priced second group sells units that went unsold at the single price, so output rises. No computation, graph, or table. One short reasoning step, and the distractors target common misconceptions (deadweight loss rises, output unchanged, first group's consumer surplus rises, output falls). Wording is slightly loose (\"most likely\") but standard for the topic and not a source of unfair difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m03-k1",
+  "cellId": "ap_microeconomics-m03",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "4.2",
+  "unitCode": "4",
+  "skillPrimary": "3.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_pdiscrim_effect_cases",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_scope_skill; criterion_failed_distractor_explanation",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recall of the perfect price discrimination outcome (output rises to the efficient quantity where P = MC, consumer surplus goes to zero, deadweight loss disappears). No calculation, graph, or table. Distractors are easily eliminated once the key result is known. The item is fair and unambiguous, with no unfair difficulty sources. Note that it aligns more with topic 4.3 than 4.2.",
+  "payload": {
+   "archetype": "mi_pdiscrim_effect_cases",
+   "topic": "4.2",
+   "skill": "3.A",
+   "calculator": "allowed",
+   "stem": "A monopolist that had been charging one price to all buyers begins to charge each buyer exactly the most that buyer is willing to pay. Compared with the single-price outcome, which statement is correct?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Output rises to the efficient level, consumer surplus falls to zero, and the deadweight loss disappears.",
+     "why": "A perfect price discriminator sells every unit that buyers value above marginal cost, so output is efficient and the monopolist captures the surplus.",
+     "value": null
+    },
+    {
+     "text": "Output is unchanged, consumer surplus is unchanged, and the deadweight loss disappears.",
+     "why": "The deadweight loss disappears only because output expands and the surplus is captured.",
+     "value": null
+    },
+    {
+     "text": "Output rises to the efficient level, and consumer surplus rises to its largest value.",
+     "why": "Under perfect discrimination, consumer surplus falls to zero.",
+     "value": null
+    },
+    {
+     "text": "Output rises, consumer surplus rises, and the deadweight loss disappears.",
+     "why": "The seller captures consumer surplus, so it does not rise.",
+     "value": null
+    },
+    {
+     "text": "Output falls, consumer surplus rises, and the deadweight loss grows.",
+     "why": "Perfect price discrimination raises output, and the seller captures consumer surplus.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 60,
+   "facts": [
+    "variant=A monopolist that had been charging one "
+   ],
+   "blueprint": {
+    "id": "mi_pdiscrim_effect_cases",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "price discrimination raises output relative to a single price, and perfect discrimination removes the deadweight loss and consumer surplus",
+    "topic": "4.2",
+    "skill": "3.A",
+    "student_thinking": [
+     "Identify the economic model that applies: price discrimination raises output relative to a single price, and perfect discrimination removes the deadweight loss and consumer surplus",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "The deadweight loss disappears only because output expands and the surplus is captured."
+     },
+     {
+      "id": "m2",
+      "description": "Under perfect discrimination, consumer surplus falls to zero."
+     },
+     {
+      "id": "m3",
+      "description": "The seller captures consumer surplus, so it does not rise."
+     },
+     {
+      "id": "m4",
+      "description": "Perfect price discrimination raises output, and the seller captures consumer surplus."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted scenarios; wrong options reverse the output, surplus, or deadweight-loss effect",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: price discrimination raises output relative to a single price, and perfect discrimination removes the deadweight loss and consumer surplus",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_pdiscrim_effect_cases",
+     "explanation_assumptions_id": "mi_pdiscrim_effect_cases"
+    }
+   },
+   "seed": 40901,
+   "pack_id": "mi_pdiscrim_effect_cases-s40901",
+   "explanation_en": "The correct answer is Output rises to the efficient level, consumer surplus falls to zero, and the deadweight loss disappears.. A perfect price discriminator sells every unit that buyers value above marginal cost, so output is efficient and the monopolist captures the surplus.\nOutput is unchanged, consumer surplus is unchanged, and the deadweight loss disappears. is incorrect: The deadweight loss disappears only because output expands and the surplus is captured.\nOutput rises to the efficient level, and consumer surplus rises to its largest value. is incorrect: Under perfect discrimination, consumer surplus falls to zero.\nOutput rises, consumer surplus rises, and the deadweight loss disappears. is incorrect: The seller captures consumer surplus, so it does not rise.\nOutput falls, consumer surplus rises, and the deadweight loss grows. is incorrect: Perfect price discrimination raises output, and the seller captures consumer surplus."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_pdiscrim_effect_cases",
+   "facts": [
+    "variant=A monopolist that had been charging one "
+   ],
+   "seed": 40901
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the item is labeled 4.2 while it assesses 4.3 content (perfect price discrimination). The distractors are weak and mechanically generated: B and E are implausible, C and D are redundant, and the explanations are circular. I fail it on scope and distractor quality.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "The item tests perfect price discrimination, which belongs to topic 4.3 (Price Discrimination), not 4.2 (Monopoly). The labeled topic does not match what is assessed. The skill demand is also mostly recall of a standard result. There is no comparison of outcomes beyond the textbook fact."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the unique correct answer. The other options each contain a clear error: unchanged output, rising consumer surplus, or falling output."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear. It does not say that marginal cost is positive or that the monopolist has no other constraints, but this is a standard assumption and does not make the answer ambiguous."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Several distractors are implausible. Option B (output unchanged but the deadweight loss disappears) is internally inconsistent. Option E (output falls and the deadweight loss grows) is also implausible. The explanations are weak and partly circular. For option B, the explanation says the deadweight loss disappears only because output expands, which restates the key and does not name the misconception. The distractors are mostly mechanical reversals of the key's three effects and do not reflect distinct, realistic student errors. Option D (consumer surplus rises) and option C (consumer surplus rises to its largest value) are near-duplicate misconceptions."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is short and suitable in length and format. It has five options. The calculator designation is irrelevant because no calculation is required."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall of the perfect price discrimination outcome (output rises to the efficient quantity where P = MC, consumer surplus goes to zero, deadweight loss disappears). No calculation, graph, or table. Distractors are easily eliminated once the key result is known. The item is fair and unambiguous, with no unfair difficulty sources. Note that it aligns more with topic 4.3 than 4.2.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m03-k2",
+  "cellId": "ap_microeconomics-m03",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "4.2",
+  "unitCode": "4",
+  "skillPrimary": "3.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_pdiscrim_effect_cases",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Conceptual item on price discrimination. The student must see that selling to a previously unserved group at a lower price adds units, so output rises and deadweight loss falls. There is no computation, graph or table. The distractors are plausible but each has one clear flaw. The wording is unambiguous and the content is in scope.",
+  "payload": {
+   "archetype": "mi_pdiscrim_effect_cases",
+   "topic": "4.2",
+   "skill": "3.A",
+   "calculator": "allowed",
+   "stem": "A monopolist currently charging a single price starts charging a lower price to a second group of buyers whose willingness to pay is below the original price, without changing the price paid by the first group. Which statement is most likely true?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Output is unchanged, because the first group's price did not change.",
+     "why": "The second group buys units that were not sold before.",
+     "value": null
+    },
+    {
+     "text": "Output increases, because the second group buys units that were not sold at the single price.",
+     "why": "Sales to the second group are additional units, so total output rises and the deadweight loss falls.",
+     "value": null
+    },
+    {
+     "text": "Output increases, but the first group's consumer surplus rises.",
+     "why": "The first group's price is unchanged, so its consumer surplus is unchanged.",
+     "value": null
+    },
+    {
+     "text": "Output decreases, because the second group's lower price reduces the monopolist's marginal revenue.",
+     "why": "The second group buys additional units, so output increases.",
+     "value": null
+    },
+    {
+     "text": "Deadweight loss rises, because more units are sold at lower prices.",
+     "why": "More units sold at prices above marginal cost reduce the deadweight loss.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 60,
+   "facts": [
+    "variant=A monopolist currently charging a single"
+   ],
+   "blueprint": {
+    "id": "mi_pdiscrim_effect_cases",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "price discrimination raises output relative to a single price, and perfect discrimination removes the deadweight loss and consumer surplus",
+    "topic": "4.2",
+    "skill": "3.A",
+    "student_thinking": [
+     "Identify the economic model that applies: price discrimination raises output relative to a single price, and perfect discrimination removes the deadweight loss and consumer surplus",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "The second group buys units that were not sold before."
+     },
+     {
+      "id": "m2",
+      "description": "The first group's price is unchanged, so its consumer surplus is unchanged."
+     },
+     {
+      "id": "m3",
+      "description": "The second group buys additional units, so output increases."
+     },
+     {
+      "id": "m4",
+      "description": "More units sold at prices above marginal cost reduce the deadweight loss."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted scenarios; wrong options reverse the output, surplus, or deadweight-loss effect",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: price discrimination raises output relative to a single price, and perfect discrimination removes the deadweight loss and consumer surplus",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_pdiscrim_effect_cases",
+     "explanation_assumptions_id": "mi_pdiscrim_effect_cases"
+    }
+   },
+   "seed": 40902,
+   "pack_id": "mi_pdiscrim_effect_cases-s40902",
+   "explanation_en": "The correct answer is Output increases, because the second group buys units that were not sold at the single price.. Sales to the second group are additional units, so total output rises and the deadweight loss falls.\nOutput is unchanged, because the first group's price did not change. is incorrect: The second group buys units that were not sold before.\nOutput increases, but the first group's consumer surplus rises. is incorrect: The first group's price is unchanged, so its consumer surplus is unchanged.\nOutput decreases, because the second group's lower price reduces the monopolist's marginal revenue. is incorrect: The second group buys additional units, so output increases.\nDeadweight loss rises, because more units are sold at lower prices. is incorrect: More units sold at prices above marginal cost reduce the deadweight loss."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_pdiscrim_effect_cases",
+   "facts": [
+    "variant=A monopolist currently charging a single"
+   ],
+   "seed": 40902
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Conceptual outcome determination (3.A) fits. The content is really Topic 4.3 price discrimination rather than 4.2, but it is within Unit 4 and not out of scope. Minor topic label mismatch."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is uniquely defensible: the second group's WTP is below the original price, so their purchases are additional units, output rises and DWL falls. The other options reverse output, CS, or DWL effects."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct errors (no change in output, CS rises, output falls, DWL rises). Each wrong option is explained, though the explanation for D is brief. The key is slightly longer than the others."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, five options, no arithmetic. Typical of an AP MC item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound conceptual item with a unique key and distinct distractors. The only flaw is that the content belongs to Topic 4.3 while the item is labeled 4.2. This is minor and within Unit 4 scope. Passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Conceptual item on price discrimination. The student must see that selling to a previously unserved group at a lower price adds units, so output rises and deadweight loss falls. There is no computation, graph or table. The distractors are plausible but each has one clear flaw. The wording is unambiguous and the content is in scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m04-k0",
+  "cellId": "ap_microeconomics-m04",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "4.1",
+  "unitCode": "4",
+  "skillPrimary": "1.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_structure_features_match",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step concept identification (skill 1.B): one seller plus barriers to entry maps directly to monopoly. Distractors are clearly wrong. There is no computation, graph, or multi-step reasoning, and the reading is minimal.",
+  "payload": {
+   "archetype": "mi_structure_features_match",
+   "topic": "4.1",
+   "skill": "1.B",
+   "calculator": "allowed",
+   "stem": "The only company that supplies electricity to a region is protected by high costs of building a second network, so no rival can enter. Which market structure does the electricity market best represent?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Monopoly, because there is a single seller and barriers to entry block rivals.",
+     "why": "A single seller protected by barriers to entry describes a monopoly.",
+     "value": null
+    },
+    {
+     "text": "Monopoly, because the company can enter any market it wants.",
+     "why": "Monopoly is defined by barriers that keep others out, not by the firm's freedom to enter other markets.",
+     "value": null
+    },
+    {
+     "text": "Monopolistic competition, because the company sells a differentiated product.",
+     "why": "Monopolistic competition requires many sellers and free entry.",
+     "value": null
+    },
+    {
+     "text": "Perfect competition, because customers pay the same price for electricity.",
+     "why": "Perfect competition requires many sellers, which this market lacks.",
+     "value": null
+    },
+    {
+     "text": "Oligopoly, because the company is large and has few competitors.",
+     "why": "Oligopoly requires a few sellers, but this market has only one.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 60,
+   "facts": [
+    "variant=The only company that supplies electrici"
+   ],
+   "blueprint": {
+    "id": "mi_structure_features_match",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "market structures are identified by the number of sellers, product differentiation, and barriers to entry",
+    "topic": "4.1",
+    "skill": "1.B",
+    "student_thinking": [
+     "Identify the economic model that applies: market structures are identified by the number of sellers, product differentiation, and barriers to entry",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Monopoly is defined by barriers that keep others out, not by the firm's freedom to enter other markets."
+     },
+     {
+      "id": "m2",
+      "description": "Monopolistic competition requires many sellers and free entry."
+     },
+     {
+      "id": "m3",
+      "description": "Perfect competition requires many sellers, which this market lacks."
+     },
+     {
+      "id": "m4",
+      "description": "Oligopoly requires a few sellers, but this market has only one."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted scenarios; wrong options swap the number of sellers or the entry condition",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: market structures are identified by the number of sellers, product differentiation, and barriers to entry",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_structure_features_match",
+     "explanation_assumptions_id": "mi_structure_features_match"
+    }
+   },
+   "seed": 40900,
+   "pack_id": "mi_structure_features_match-s40900",
+   "explanation_en": "The correct answer is Monopoly, because there is a single seller and barriers to entry block rivals.. A single seller protected by barriers to entry describes a monopoly.\nMonopoly, because the company can enter any market it wants. is incorrect: Monopoly is defined by barriers that keep others out, not by the firm's freedom to enter other markets.\nMonopolistic competition, because the company sells a differentiated product. is incorrect: Monopolistic competition requires many sellers and free entry.\nPerfect competition, because customers pay the same price for electricity. is incorrect: Perfect competition requires many sellers, which this market lacks.\nOligopoly, because the company is large and has few competitors. is incorrect: Oligopoly requires a few sellers, but this market has only one."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_structure_features_match",
+   "facts": [
+    "variant=The only company that supplies electrici"
+   ],
+   "seed": 40900
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 30-60 seconds, has five options, and requires no calculation, which is typical of an AP Microeconomics MC question. The calculator designation is harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous market-structure identification question. The key is unique, the distractors are distinct, and the scope and load are appropriate. I recommend acceptance."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step concept identification (skill 1.B): one seller plus barriers to entry maps directly to monopoly. Distractors are clearly wrong. There is no computation, graph, or multi-step reasoning, and the reading is minimal.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m04-k1",
+  "cellId": "ap_microeconomics-m04",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "4.1",
+  "unitCode": "4",
+  "skillPrimary": "1.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_structure_features_match",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step identification of market structure from three clear cues: many sellers, differentiated products, easy entry. No computation, graph, or representation change. Distractors are plausible but each fails on one clear characteristic. Introductory recall level.",
+  "payload": {
+   "archetype": "mi_structure_features_match",
+   "topic": "4.1",
+   "skill": "1.B",
+   "calculator": "allowed",
+   "stem": "A town has dozens of restaurants, each selling its own style of food at its own price, and new restaurants can open easily. Which market structure does the restaurant market best represent?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Monopolistic competition, because there are many sellers of differentiated products and entry is easy.",
+     "why": "Many firms, differentiated products, and free entry describe monopolistic competition.",
+     "value": null
+    },
+    {
+     "text": "Oligopoly, because each restaurant is aware of its rivals.",
+     "why": "Oligopoly has a few large sellers, not dozens of small ones.",
+     "value": null
+    },
+    {
+     "text": "Perfect competition, because each restaurant sets its own price.",
+     "why": "Setting its own price indicates market power, not perfect competition.",
+     "value": null
+    },
+    {
+     "text": "Monopoly, because each restaurant is the only seller of its own style of food.",
+     "why": "Many close substitutes remain, so no restaurant is a monopoly.",
+     "value": null
+    },
+    {
+     "text": "Perfect competition, because there are many sellers and entry is easy.",
+     "why": "Perfect competition requires identical products, but restaurants differentiate their food.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 60,
+   "facts": [
+    "variant=A town has dozens of restaurants, each s"
+   ],
+   "blueprint": {
+    "id": "mi_structure_features_match",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "market structures are identified by the number of sellers, product differentiation, and barriers to entry",
+    "topic": "4.1",
+    "skill": "1.B",
+    "student_thinking": [
+     "Identify the economic model that applies: market structures are identified by the number of sellers, product differentiation, and barriers to entry",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Oligopoly has a few large sellers, not dozens of small ones."
+     },
+     {
+      "id": "m2",
+      "description": "Setting its own price indicates market power, not perfect competition."
+     },
+     {
+      "id": "m3",
+      "description": "Many close substitutes remain, so no restaurant is a monopoly."
+     },
+     {
+      "id": "m4",
+      "description": "Perfect competition requires identical products, but restaurants differentiate their food."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted scenarios; wrong options swap the number of sellers or the entry condition",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: market structures are identified by the number of sellers, product differentiation, and barriers to entry",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_structure_features_match",
+     "explanation_assumptions_id": "mi_structure_features_match"
+    }
+   },
+   "seed": 40901,
+   "pack_id": "mi_structure_features_match-s40901",
+   "explanation_en": "The correct answer is Monopolistic competition, because there are many sellers of differentiated products and entry is easy.. Many firms, differentiated products, and free entry describe monopolistic competition.\nOligopoly, because each restaurant is aware of its rivals. is incorrect: Oligopoly has a few large sellers, not dozens of small ones.\nPerfect competition, because each restaurant sets its own price. is incorrect: Setting its own price indicates market power, not perfect competition.\nMonopoly, because each restaurant is the only seller of its own style of food. is incorrect: Many close substitutes remain, so no restaurant is a monopoly.\nPerfect competition, because there are many sellers and entry is easy. is incorrect: Perfect competition requires identical products, but restaurants differentiate their food."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_structure_features_match",
+   "facts": [
+    "variant=A town has dozens of restaurants, each s"
+   ],
+   "seed": 40901
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Identifying market structure from a described scenario is squarely topic 4.1 and skill 1.B (identify a concept illustrated by an example). No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key (A) is unique. The stem gives dozens of sellers, differentiated food and easy entry, which is monopolistic competition. Options B, C, D and E each contain a flawed claim: B (few sellers), C (price-taking, which contradicts differentiated pricing), D (a single seller) and E (identical products)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed, and none is given. The wording is clear and complete. All five conditions needed for the determination are in the stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions: oligopoly from rival awareness, perfect competition from setting its own price, monopoly from a unique product, and perfect competition from many sellers plus easy entry while ignoring differentiation. The explanation addresses each wrong option. The two perfect competition options differ in their reasoning. Option A is the longest, but only slightly, so this is not a meaningful giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60 seconds, has five options, and needs no calculation. The calculator designation does not matter here. It is a standard textbook scenario and does not reproduce a specific released AP item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unambiguous 4.1/1.B market-structure identification item with a unique key and distinct, well-explained distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step identification of market structure from three clear cues: many sellers, differentiated products, easy entry. No computation, graph, or representation change. Distractors are plausible but each fails on one clear characteristic. Introductory recall level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m04-k2",
+  "cellId": "ap_microeconomics-m04",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "4.1",
+  "unitCode": "4",
+  "skillPrimary": "1.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_structure_features_match",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step concept identification: one seller plus barriers to entry maps directly to monopoly. No calculation, no graph or table, and a short stem. Distractors target basic definitional confusion (differentiated product, same price, few firms, entry into any market) and are easily eliminated once the definitions are known. This is a standard topic 4.1 recognition item suited to initial learning rather than a full mock exam.",
+  "payload": {
+   "archetype": "mi_structure_features_match",
+   "topic": "4.1",
+   "skill": "1.B",
+   "calculator": "allowed",
+   "stem": "The only company that supplies electricity to a region is protected by high costs of building a second network, so no rival can enter. Which market structure does the electricity market best represent?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Monopolistic competition, because the company sells a differentiated product.",
+     "why": "Monopolistic competition requires many sellers and free entry.",
+     "value": null
+    },
+    {
+     "text": "Monopoly, because there is a single seller and barriers to entry block rivals.",
+     "why": "A single seller protected by barriers to entry describes a monopoly.",
+     "value": null
+    },
+    {
+     "text": "Perfect competition, because customers pay the same price for electricity.",
+     "why": "Perfect competition requires many sellers, which this market lacks.",
+     "value": null
+    },
+    {
+     "text": "Oligopoly, because the company is large and has few competitors.",
+     "why": "Oligopoly requires a few sellers, but this market has only one.",
+     "value": null
+    },
+    {
+     "text": "Monopoly, because the company can enter any market it wants.",
+     "why": "Monopoly is defined by barriers that keep others out, not by the firm's freedom to enter other markets.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 60,
+   "facts": [
+    "variant=The only company that supplies electrici"
+   ],
+   "blueprint": {
+    "id": "mi_structure_features_match",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "market structures are identified by the number of sellers, product differentiation, and barriers to entry",
+    "topic": "4.1",
+    "skill": "1.B",
+    "student_thinking": [
+     "Identify the economic model that applies: market structures are identified by the number of sellers, product differentiation, and barriers to entry",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Monopolistic competition requires many sellers and free entry."
+     },
+     {
+      "id": "m2",
+      "description": "Perfect competition requires many sellers, which this market lacks."
+     },
+     {
+      "id": "m3",
+      "description": "Oligopoly requires a few sellers, but this market has only one."
+     },
+     {
+      "id": "m4",
+      "description": "Monopoly is defined by barriers that keep others out, not by the firm's freedom to enter other markets."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted scenarios; wrong options swap the number of sellers or the entry condition",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: market structures are identified by the number of sellers, product differentiation, and barriers to entry",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_structure_features_match",
+     "explanation_assumptions_id": "mi_structure_features_match"
+    }
+   },
+   "seed": 40902,
+   "pack_id": "mi_structure_features_match-s40902",
+   "explanation_en": "The correct answer is Monopoly, because there is a single seller and barriers to entry block rivals.. A single seller protected by barriers to entry describes a monopoly.\nMonopolistic competition, because the company sells a differentiated product. is incorrect: Monopolistic competition requires many sellers and free entry.\nPerfect competition, because customers pay the same price for electricity. is incorrect: Perfect competition requires many sellers, which this market lacks.\nOligopoly, because the company is large and has few competitors. is incorrect: Oligopoly requires a few sellers, but this market has only one.\nMonopoly, because the company can enter any market it wants. is incorrect: Monopoly is defined by barriers that keep others out, not by the firm's freedom to enter other markets."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_structure_features_match",
+   "facts": [
+    "variant=The only company that supplies electrici"
+   ],
+   "seed": 40902
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 4.1 market structure identification, skill 1.B; dominant demand matches."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique defensible answer; E has the same label but a false reason."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Four distinct misconceptions, each explained; E is a somewhat weak but valid distractor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short reading, quick, five options, appropriate to AP style. Calculator label is irrelevant but harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, simple, correct market-structure identification item with a unique key and distinct distractors. Acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step concept identification: one seller plus barriers to entry maps directly to monopoly. No calculation, no graph or table, and a short stem. Distractors target basic definitional confusion (differentiated product, same price, few firms, entry into any market) and are easily eliminated once the definitions are known. This is a standard topic 4.1 recognition item suited to initial learning rather than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m05-k0",
+  "cellId": "ap_microeconomics-m05",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "6.2",
+  "unitCode": "6",
+  "skillPrimary": "2.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_externality_permits",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Conceptual recall and light interpretation of a core Unit 6.2 idea: tradable permits under a fixed cap achieve the same total abatement at lower total cost because low-cost abaters cut more. There is no calculation or graph, one short reasoning step, and the distractors are clearly wrong (pollution to zero, same cost, a smaller reduction). The wording is clear with no unstated assumptions.",
+  "payload": {
+   "archetype": "mi_externality_permits",
+   "topic": "6.2",
+   "skill": "2.A",
+   "calculator": "allowed",
+   "stem": "A government changes from a rule that requires every firm to reduce pollution by 20 percent to a rule that allows firms to trade pollution permits under a fixed total cap. Which statement best describes the likely result?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The same total pollution reduction is achieved at a lower total cost, because firms with low cutting costs reduce more.",
+     "why": "Allowing trades shifts reductions to firms with the lowest costs, so the cap is met more cheaply.",
+     "value": null
+    },
+    {
+     "text": "Pollution falls to zero, because firms with high costs buy permits.",
+     "why": "Permits are limited by the cap, so pollution does not fall to zero.",
+     "value": null
+    },
+    {
+     "text": "The total cost of meeting the cap is higher, because trading adds transaction costs for every firm.",
+     "why": "Trading usually lowers total costs because reductions shift to low-cost firms.",
+     "value": null
+    },
+    {
+     "text": "The same total pollution reduction is achieved at the same cost, because every firm cuts by the same amount.",
+     "why": "Under trading, firms do not all cut by the same amount.",
+     "value": null
+    },
+    {
+     "text": "The total pollution reduction is smaller, because firms are no longer required to reduce.",
+     "why": "The total cap still fixes the total reduction.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 60,
+   "facts": [
+    "variant=A government changes from a rule that re"
+   ],
+   "blueprint": {
+    "id": "mi_externality_permits",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "tradable permits meet a pollution cap at lower cost by shifting reductions to firms with the lowest abatement costs",
+    "topic": "6.2",
+    "skill": "2.A",
+    "student_thinking": [
+     "Identify the economic model that applies: tradable permits meet a pollution cap at lower cost by shifting reductions to firms with the lowest abatement costs",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Permits are limited by the cap, so pollution does not fall to zero."
+     },
+     {
+      "id": "m2",
+      "description": "Trading usually lowers total costs because reductions shift to low-cost firms."
+     },
+     {
+      "id": "m3",
+      "description": "Under trading, firms do not all cut by the same amount."
+     },
+     {
+      "id": "m4",
+      "description": "The total cap still fixes the total reduction."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted scenarios; wrong options reverse who sells permits or claim trading changes the cap",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: tradable permits meet a pollution cap at lower cost by shifting reductions to firms with the lowest abatement costs",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_externality_permits",
+     "explanation_assumptions_id": "mi_externality_permits"
+    }
+   },
+   "seed": 40900,
+   "pack_id": "mi_externality_permits-s40900",
+   "explanation_en": "The correct answer is The same total pollution reduction is achieved at a lower total cost, because firms with low cutting costs reduce more.. Allowing trades shifts reductions to firms with the lowest costs, so the cap is met more cheaply.\nPollution falls to zero, because firms with high costs buy permits. is incorrect: Permits are limited by the cap, so pollution does not fall to zero.\nThe total cost of meeting the cap is higher, because trading adds transaction costs for every firm. is incorrect: Trading usually lowers total costs because reductions shift to low-cost firms.\nThe same total pollution reduction is achieved at the same cost, because every firm cuts by the same amount. is incorrect: Under trading, firms do not all cut by the same amount.\nThe total pollution reduction is smaller, because firms are no longer required to reduce. is incorrect: The total cap still fixes the total reduction."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_externality_permits",
+   "facts": [
+    "variant=A government changes from a rule that re"
+   ],
+   "seed": 40900
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 seconds, needs no calculation, and has a light reading load. The calculator designation is harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean conceptual item on tradable permits with a unique key, distinct distractors, and a fitting scope and time load."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Conceptual recall and light interpretation of a core Unit 6.2 idea: tradable permits under a fixed cap achieve the same total abatement at lower total cost because low-cost abaters cut more. There is no calculation or graph, one short reasoning step, and the distractors are clearly wrong (pollution to zero, same cost, a smaller reduction). The wording is clear with no unstated assumptions.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m05-k1",
+  "cellId": "ap_microeconomics-m05",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "6.2",
+  "unitCode": "6",
+  "skillPrimary": "2.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_externality_permits",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_distractor_explanation",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recall and explanation: tradable permits shift abatement to low-cost firms, minimizing total cost under a fixed cap. No graph, no calculation, one reasoning step. Distractors are clearly incorrect (they contradict the cap or reverse buyer/seller roles). Fits Unit 6.2 and skill 2.A, but it is introductory rather than full-mock exam-level.",
+  "payload": {
+   "archetype": "mi_externality_permits",
+   "topic": "6.2",
+   "skill": "2.A",
+   "calculator": "allowed",
+   "stem": "A government limits total pollution by issuing a fixed number of tradable pollution permits, and firms may buy and sell the permits. Which statement best explains why trading can lower the total cost of meeting the limit?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Firms that can cut pollution cheaply sell permits to firms for which cutting is costly, so the cuts happen where they cost least.",
+     "why": "Trading moves the reductions to the firms with the lowest abatement costs while total pollution stays at the cap.",
+     "value": null
+    },
+    {
+     "text": "Trading raises total pollution above the cap, because permits can be sold to anyone.",
+     "why": "The cap fixes total pollution regardless of who holds the permits.",
+     "value": null
+    },
+    {
+     "text": "Permits raise the marginal social benefit of pollution, so firms pollute less.",
+     "why": "Permits create a price for pollution, which does not change social benefit.",
+     "value": null
+    },
+    {
+     "text": "Trading is not useful, because every firm must cut by the same amount.",
+     "why": "Trading lets firms with different costs cut by different amounts.",
+     "value": null
+    },
+    {
+     "text": "Firms that can cut pollution cheaply buy more permits, so they cut less.",
+     "why": "Low-cost reducers have more to gain by selling permits than buying them.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 60,
+   "facts": [
+    "variant=A government limits total pollution by i"
+   ],
+   "blueprint": {
+    "id": "mi_externality_permits",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "tradable permits meet a pollution cap at lower cost by shifting reductions to firms with the lowest abatement costs",
+    "topic": "6.2",
+    "skill": "2.A",
+    "student_thinking": [
+     "Identify the economic model that applies: tradable permits meet a pollution cap at lower cost by shifting reductions to firms with the lowest abatement costs",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "The cap fixes total pollution regardless of who holds the permits."
+     },
+     {
+      "id": "m2",
+      "description": "Permits create a price for pollution, which does not change social benefit."
+     },
+     {
+      "id": "m3",
+      "description": "Trading lets firms with different costs cut by different amounts."
+     },
+     {
+      "id": "m4",
+      "description": "Low-cost reducers have more to gain by selling permits than buying them."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted scenarios; wrong options reverse who sells permits or claim trading changes the cap",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: tradable permits meet a pollution cap at lower cost by shifting reductions to firms with the lowest abatement costs",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_externality_permits",
+     "explanation_assumptions_id": "mi_externality_permits"
+    }
+   },
+   "seed": 40901,
+   "pack_id": "mi_externality_permits-s40901",
+   "explanation_en": "The correct answer is Firms that can cut pollution cheaply sell permits to firms for which cutting is costly, so the cuts happen where they cost least.. Trading moves the reductions to the firms with the lowest abatement costs while total pollution stays at the cap.\nTrading raises total pollution above the cap, because permits can be sold to anyone. is incorrect: The cap fixes total pollution regardless of who holds the permits.\nPermits raise the marginal social benefit of pollution, so firms pollute less. is incorrect: Permits create a price for pollution, which does not change social benefit.\nTrading is not useful, because every firm must cut by the same amount. is incorrect: Trading lets firms with different costs cut by different amounts.\nFirms that can cut pollution cheaply buy more permits, so they cut less. is incorrect: Low-cost reducers have more to gain by selling permits than buying them."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_externality_permits",
+   "facts": [
+    "variant=A government limits total pollution by i"
+   ],
+   "seed": 40901
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Content and key are correct and in scope. Distractors are weak: B, C and D are implausible, only E is a realistic misconception, and the key is the longest option, which gives a length cue. Failing on distractor quality.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Only E reverses the sellers and buyers of permits, a realistic misconception. B, C and D are clearly wrong on their face, and C is incoherent. The key is the longest option, a length giveaway. The explanations do cover every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall and explanation: tradable permits shift abatement to low-cost firms, minimizing total cost under a fixed cap. No graph, no calculation, one reasoning step. Distractors are clearly incorrect (they contradict the cap or reverse buyer/seller roles). Fits Unit 6.2 and skill 2.A, but it is introductory rather than full-mock exam-level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m05-k2",
+  "cellId": "ap_microeconomics-m05",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "6.2",
+  "unitCode": "6",
+  "skillPrimary": "2.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_externality_permits",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: tradable permits under a fixed cap achieve the same total abatement at lower total cost, since low-cost abaters cut more and high-cost firms buy permits. It requires one comparative step (uniform mandate vs. trading) with no calculation or graph. Reading is short and unambiguous, and the distractors are common misconceptions that are easy to eliminate once the cap and cost-minimization logic are identified.",
+  "payload": {
+   "archetype": "mi_externality_permits",
+   "topic": "6.2",
+   "skill": "2.A",
+   "calculator": "allowed",
+   "stem": "A government changes from a rule that requires every firm to reduce pollution by 20 percent to a rule that allows firms to trade pollution permits under a fixed total cap. Which statement best describes the likely result?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The total cost of meeting the cap is higher, because trading adds transaction costs for every firm.",
+     "why": "Trading usually lowers total costs because reductions shift to low-cost firms.",
+     "value": null
+    },
+    {
+     "text": "The same total pollution reduction is achieved at a lower total cost, because firms with low cutting costs reduce more.",
+     "why": "Allowing trades shifts reductions to firms with the lowest costs, so the cap is met more cheaply.",
+     "value": null
+    },
+    {
+     "text": "The same total pollution reduction is achieved at the same cost, because every firm cuts by the same amount.",
+     "why": "Under trading, firms do not all cut by the same amount.",
+     "value": null
+    },
+    {
+     "text": "The total pollution reduction is smaller, because firms are no longer required to reduce.",
+     "why": "The total cap still fixes the total reduction.",
+     "value": null
+    },
+    {
+     "text": "Pollution falls to zero, because firms with high costs buy permits.",
+     "why": "Permits are limited by the cap, so pollution does not fall to zero.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 60,
+   "facts": [
+    "variant=A government changes from a rule that re"
+   ],
+   "blueprint": {
+    "id": "mi_externality_permits",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "tradable permits meet a pollution cap at lower cost by shifting reductions to firms with the lowest abatement costs",
+    "topic": "6.2",
+    "skill": "2.A",
+    "student_thinking": [
+     "Identify the economic model that applies: tradable permits meet a pollution cap at lower cost by shifting reductions to firms with the lowest abatement costs",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Trading usually lowers total costs because reductions shift to low-cost firms."
+     },
+     {
+      "id": "m2",
+      "description": "Under trading, firms do not all cut by the same amount."
+     },
+     {
+      "id": "m3",
+      "description": "The total cap still fixes the total reduction."
+     },
+     {
+      "id": "m4",
+      "description": "Permits are limited by the cap, so pollution does not fall to zero."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted scenarios; wrong options reverse who sells permits or claim trading changes the cap",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: tradable permits meet a pollution cap at lower cost by shifting reductions to firms with the lowest abatement costs",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_externality_permits",
+     "explanation_assumptions_id": "mi_externality_permits"
+    }
+   },
+   "seed": 40902,
+   "pack_id": "mi_externality_permits-s40902",
+   "explanation_en": "The correct answer is The same total pollution reduction is achieved at a lower total cost, because firms with low cutting costs reduce more.. Allowing trades shifts reductions to firms with the lowest costs, so the cap is met more cheaply.\nThe total cost of meeting the cap is higher, because trading adds transaction costs for every firm. is incorrect: Trading usually lowers total costs because reductions shift to low-cost firms.\nThe same total pollution reduction is achieved at the same cost, because every firm cuts by the same amount. is incorrect: Under trading, firms do not all cut by the same amount.\nThe total pollution reduction is smaller, because firms are no longer required to reduce. is incorrect: The total cap still fixes the total reduction.\nPollution falls to zero, because firms with high costs buy permits. is incorrect: Permits are limited by the cap, so pollution does not fall to zero."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_externality_permits",
+   "facts": [
+    "variant=A government changes from a rule that re"
+   ],
+   "seed": 40902
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Tradable pollution permits are a standard Topic 6.2 externality-correction tool. The task is to explain how an outcome occurs, which fits skill 2.A. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique defensible answer. The cap fixes total reduction and trading shifts cuts to low-cost firms, lowering total cost. The 'same total cap' condition is implied by 'fixed total cap' in the stem. Option A cites transaction costs, but standard AP treatment says trading lowers total cost, so A is not defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete, and the wording is in US English."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor targets a distinct misconception: transaction costs raise total cost, uniform cuts, a smaller total reduction, and pollution falling to zero. The explanation addresses every wrong option. Option lengths are comparable, though the key is slightly longer. The 'calculator allowed' label is nominal and harmless."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, five options, a conceptual item with no calculation. This is typical of the AP exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean conceptual item on tradable pollution permits. It has a unique key, distinct distractors, and it is within scope for Topic 6.2 and skill 2.A."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: tradable permits under a fixed cap achieve the same total abatement at lower total cost, since low-cost abaters cut more and high-cost firms buy permits. It requires one comparative step (uniform mandate vs. trading) with no calculation or graph. Reading is short and unambiguous, and the distractors are common misconceptions that are easy to eliminate once the cap and cost-minimization logic are identified.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m06-k0",
+  "cellId": "ap_microeconomics-m06",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "3.6",
+  "unitCode": "3",
+  "skillPrimary": "2.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_seasonal_shutdown",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recall and application of the short-run shutdown rule (P > AVC means keep producing even at a loss). It needs one reasoning step, no computation and no graph or table. The distractors target common misconceptions, which is fair conceptual testing.",
+  "payload": {
+   "archetype": "mi_seasonal_shutdown",
+   "topic": "3.6",
+   "skill": "2.A",
+   "calculator": "allowed",
+   "stem": "In the summer, the price that the same ice cream stand can charge is above its average variable cost but below its average total cost. Which statement best describes what the stand should do in the summer?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Stay open and produce, because the revenue covers all variable costs and part of the fixed costs.",
+     "why": "When price exceeds average variable cost, producing reduces the loss compared with closing and paying all fixed costs.",
+     "value": null
+    },
+    {
+     "text": "Stay open, because fixed costs are not part of the stand's costs.",
+     "why": "Fixed costs are real costs, but they are paid whether or not the stand operates.",
+     "value": null
+    },
+    {
+     "text": "Close, because price is below average total cost, which includes fixed costs.",
+     "why": "The shutdown decision compares price with average variable cost, not average total cost.",
+     "value": null
+    },
+    {
+     "text": "Stay open, because the stand earns a positive economic profit.",
+     "why": "With price below average total cost, the stand has an economic loss.",
+     "value": null
+    },
+    {
+     "text": "Close, because the stand is making a loss.",
+     "why": "A short-run loss does not require closing if variable costs are covered.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 60,
+   "facts": [
+    "variant=In the summer, the price that the same i"
+   ],
+   "blueprint": {
+    "id": "mi_seasonal_shutdown",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "a competitive firm operates in the short run if price covers average variable cost and closes if it does not, because fixed costs are paid either way",
+    "topic": "3.6",
+    "skill": "2.A",
+    "student_thinking": [
+     "Identify the economic model that applies: a competitive firm operates in the short run if price covers average variable cost and closes if it does not, because fixed costs are paid either way",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Fixed costs are real costs, but they are paid whether or not the stand operates."
+     },
+     {
+      "id": "m2",
+      "description": "The shutdown decision compares price with average variable cost, not average total cost."
+     },
+     {
+      "id": "m3",
+      "description": "With price below average total cost, the stand has an economic loss."
+     },
+     {
+      "id": "m4",
+      "description": "A short-run loss does not require closing if variable costs are covered."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted scenarios; wrong options use average total cost or let the firm set its price",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: a competitive firm operates in the short run if price covers average variable cost and closes if it does not, because fixed costs are paid either way",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_seasonal_shutdown",
+     "explanation_assumptions_id": "mi_seasonal_shutdown"
+    }
+   },
+   "seed": 40900,
+   "pack_id": "mi_seasonal_shutdown-s40900",
+   "explanation_en": "The correct answer is Stay open and produce, because the revenue covers all variable costs and part of the fixed costs.. When price exceeds average variable cost, producing reduces the loss compared with closing and paying all fixed costs.\nStay open, because fixed costs are not part of the stand's costs. is incorrect: Fixed costs are real costs, but they are paid whether or not the stand operates.\nClose, because price is below average total cost, which includes fixed costs. is incorrect: The shutdown decision compares price with average variable cost, not average total cost.\nStay open, because the stand earns a positive economic profit. is incorrect: With price below average total cost, the stand has an economic loss.\nClose, because the stand is making a loss. is incorrect: A short-run loss does not require closing if variable costs are covered."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_seasonal_shutdown",
+   "facts": [
+    "variant=In the summer, the price that the same i"
+   ],
+   "seed": 40900
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 seconds, has five options, and needs no calculation. This matches the typical AP Microeconomics multiple-choice format.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, standard shutdown-rule item. The key is unique and correct, the distractors map to distinct misconceptions, and the load is appropriate. The only weakness is that the stem does not state that the stand is a price taker."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall and application of the short-run shutdown rule (P > AVC means keep producing even at a loss). It needs one reasoning step, no computation and no graph or table. The distractors target common misconceptions, which is fair conceptual testing.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m06-k1",
+  "cellId": "ap_microeconomics-m06",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "3.6",
+  "unitCode": "3",
+  "skillPrimary": "2.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_seasonal_shutdown",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item on the shutdown rule (P < AVC means shut down in the short run, and fixed costs are sunk). It needs one reasoning step, with no calculation, graph, or representation change. The wording is clear and short. The distractors target common misconceptions (ATC vs AVC, short-run vs long-run exit, price-taking), but identifying the correct answer only requires recalling the rule. This suits early learning rather than a full mock.",
+  "payload": {
+   "archetype": "mi_seasonal_shutdown",
+   "topic": "3.6",
+   "skill": "2.A",
+   "calculator": "allowed",
+   "stem": "A seasonal ice cream stand in a competitive market has fixed costs that it must pay all year whether or not it opens. In the winter, the price it can charge is below its average variable cost at every quantity. Which statement best describes what the stand should do in the winter?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Close for the winter, because opening would lose more than the fixed costs it must pay anyway.",
+     "why": "When price is below average variable cost, opening adds losses beyond fixed cost, so temporary closure is better.",
+     "value": null
+    },
+    {
+     "text": "Stay open, because the price is below average total cost, so closing would end all costs.",
+     "why": "Fixed costs continue even if the stand is closed in the short run.",
+     "value": null
+    },
+    {
+     "text": "Close permanently, because a short-run loss requires leaving the industry.",
+     "why": "A short-run shutdown does not require leaving the market for good.",
+     "value": null
+    },
+    {
+     "text": "Raise the price, because a competitive firm can set any price it chooses.",
+     "why": "A competitive firm is a price taker and cannot set its price.",
+     "value": null
+    },
+    {
+     "text": "Stay open, because the stand still earns some revenue to cover fixed costs.",
+     "why": "Revenue below variable cost makes the loss larger than the fixed cost alone.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 60,
+   "facts": [
+    "variant=A seasonal ice cream stand in a competit"
+   ],
+   "blueprint": {
+    "id": "mi_seasonal_shutdown",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "a competitive firm operates in the short run if price covers average variable cost and closes if it does not, because fixed costs are paid either way",
+    "topic": "3.6",
+    "skill": "2.A",
+    "student_thinking": [
+     "Identify the economic model that applies: a competitive firm operates in the short run if price covers average variable cost and closes if it does not, because fixed costs are paid either way",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Fixed costs continue even if the stand is closed in the short run."
+     },
+     {
+      "id": "m2",
+      "description": "A short-run shutdown does not require leaving the market for good."
+     },
+     {
+      "id": "m3",
+      "description": "A competitive firm is a price taker and cannot set its price."
+     },
+     {
+      "id": "m4",
+      "description": "Revenue below variable cost makes the loss larger than the fixed cost alone."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted scenarios; wrong options use average total cost or let the firm set its price",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: a competitive firm operates in the short run if price covers average variable cost and closes if it does not, because fixed costs are paid either way",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_seasonal_shutdown",
+     "explanation_assumptions_id": "mi_seasonal_shutdown"
+    }
+   },
+   "seed": 40901,
+   "pack_id": "mi_seasonal_shutdown-s40901",
+   "explanation_en": "The correct answer is Close for the winter, because opening would lose more than the fixed costs it must pay anyway.. When price is below average variable cost, opening adds losses beyond fixed cost, so temporary closure is better.\nStay open, because the price is below average total cost, so closing would end all costs. is incorrect: Fixed costs continue even if the stand is closed in the short run.\nClose permanently, because a short-run loss requires leaving the industry. is incorrect: A short-run shutdown does not require leaving the market for good.\nRaise the price, because a competitive firm can set any price it chooses. is incorrect: A competitive firm is a price taker and cannot set its price.\nStay open, because the stand still earns some revenue to cover fixed costs. is incorrect: Revenue below variable cost makes the loss larger than the fixed cost alone."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_seasonal_shutdown",
+   "facts": [
+    "variant=A seasonal ice cream stand in a competit"
+   ],
+   "seed": 40901
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Tests the shutdown rule (P < AVC means close in the short run) from topic 3.6, with an explanation-type task that fits skill 2.A. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the only defensible answer. Opening at P < AVC loses the fixed costs plus the variable-cost shortfall, so closing is better. B, C, D and E are each wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the stem gives every condition. The wording is clear. The stem says 'below AVC at every quantity', which is unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors target distinct misconceptions: fixed costs vanish when closed, short-run loss means permanent exit, price setting, and revenue covering fixed cost. The explanation addresses each wrong option. Option B's wording is slightly muddled, but still wrong. The key is somewhat longer than the other options, which is a mild giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, five options, no calculation. The calculator designation is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean, unambiguous shutdown-rule item with a unique key and distinct distractors. It is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item on the shutdown rule (P < AVC means shut down in the short run, and fixed costs are sunk). It needs one reasoning step, with no calculation, graph, or representation change. The wording is clear and short. The distractors target common misconceptions (ATC vs AVC, short-run vs long-run exit, price-taking), but identifying the correct answer only requires recalling the rule. This suits early learning rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-m06-k2",
+  "cellId": "ap_microeconomics-m06",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "mc",
+  "keywordCode": "3.6",
+  "unitCode": "3",
+  "skillPrimary": "2.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "mi_seasonal_shutdown",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_stimulus_expression",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept application of the shutdown rule (P > AVC but P < ATC means produce in the short run to minimize losses). It needs no calculation and no graph reading. The distractors map to well-known misconceptions, such as treating sunk fixed costs as avoidable, or closing whenever there is a loss. This is a foundational check of topic 3.6 rather than a multi-step full-mock item.",
+  "payload": {
+   "archetype": "mi_seasonal_shutdown",
+   "topic": "3.6",
+   "skill": "2.A",
+   "calculator": "allowed",
+   "stem": "In the summer, the price that the same ice cream stand can charge is above its average variable cost but below its average total cost. Which statement best describes what the stand should do in the summer?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Close, because price is below average total cost, which includes fixed costs.",
+     "why": "The shutdown decision compares price with average variable cost, not average total cost.",
+     "value": null
+    },
+    {
+     "text": "Stay open and produce, because the revenue covers all variable costs and part of the fixed costs.",
+     "why": "When price exceeds average variable cost, producing reduces the loss compared with closing and paying all fixed costs.",
+     "value": null
+    },
+    {
+     "text": "Stay open, because the stand earns a positive economic profit.",
+     "why": "With price below average total cost, the stand has an economic loss.",
+     "value": null
+    },
+    {
+     "text": "Close, because the stand is making a loss.",
+     "why": "A short-run loss does not require closing if variable costs are covered.",
+     "value": null
+    },
+    {
+     "text": "Stay open, because fixed costs are not part of the stand's costs.",
+     "why": "Fixed costs are real costs, but they are paid whether or not the stand operates.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 60,
+   "facts": [
+    "variant=In the summer, the price that the same i"
+   ],
+   "blueprint": {
+    "id": "mi_seasonal_shutdown",
+    "subject": "ap_microeconomics",
+    "kind": "mc",
+    "concept": "a competitive firm operates in the short run if price covers average variable cost and closes if it does not, because fixed costs are paid either way",
+    "topic": "3.6",
+    "skill": "2.A",
+    "student_thinking": [
+     "Identify the economic model that applies: a competitive firm operates in the short run if price covers average variable cost and closes if it does not, because fixed costs are paid either way",
+     "Work out the outcome (or read the figure) and match it against the five options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity or condition needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "The shutdown decision compares price with average variable cost, not average total cost."
+     },
+     {
+      "id": "m2",
+      "description": "With price below average total cost, the stand has an economic loss."
+     },
+     {
+      "id": "m3",
+      "description": "A short-run loss does not require closing if variable costs are covered."
+     },
+     {
+      "id": "m4",
+      "description": "Fixed costs are real costs, but they are paid whether or not the stand operates."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed vetted scenarios; wrong options use average total cost or let the firm set its price",
+     "method": "exact fractions + independent symbolic/numeric path"
+    },
+    "judgment_demand": [
+     "apply the economic model to the situation and compare the outcome with the five options"
+    ],
+    "model": {
+     "initial_state": "market or firm situation described in the stem: a competitive firm operates in the short run if price covers average variable cost and closes if it does not, because fixed costs are paid either way",
+     "changed_conditions": [
+      "the event or comparison named in the stem"
+     ],
+     "held_constant": [
+      "all other conditions (ceteris paribus)"
+     ],
+     "checks": [
+      "key recomputed by an independent path"
+     ],
+     "key_assumptions_id": "mi_seasonal_shutdown",
+     "explanation_assumptions_id": "mi_seasonal_shutdown"
+    }
+   },
+   "seed": 40902,
+   "pack_id": "mi_seasonal_shutdown-s40902",
+   "explanation_en": "The correct answer is Stay open and produce, because the revenue covers all variable costs and part of the fixed costs.. When price exceeds average variable cost, producing reduces the loss compared with closing and paying all fixed costs.\nClose, because price is below average total cost, which includes fixed costs. is incorrect: The shutdown decision compares price with average variable cost, not average total cost.\nStay open, because the stand earns a positive economic profit. is incorrect: With price below average total cost, the stand has an economic loss.\nClose, because the stand is making a loss. is incorrect: A short-run loss does not require closing if variable costs are covered.\nStay open, because fixed costs are not part of the stand's costs. is incorrect: Fixed costs are real costs, but they are paid whether or not the stand operates."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mi_seasonal_shutdown",
+   "facts": [
+    "variant=In the summer, the price that the same i"
+   ],
+   "seed": 40902
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.6 shutdown rule, explain action; fits skill 2.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique defensible answer."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Stem says 'the same ice cream stand' with no prior reference, which is a wording flaw. It also does not state that the stand is a price-taking firm. Minor, but the stem should read 'An ice cream stand...'."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Four distinct misconceptions, each explained. The key is the longest option, a slight cue."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, five options, no needless load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The content is correct and in scope, with good distractors. The stem has a dangling reference ('the same ice cream stand') and the stand is never stated to be a price taker, so I am failing the stimulus/wording criterion pending a fix."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept application of the shutdown rule (P > AVC but P < ATC means produce in the short run to minimize losses). It needs no calculation and no graph reading. The distractors map to well-known misconceptions, such as treating sunk fixed costs as avoidable, or closing whenever there is a loss. This is a foundational check of topic 3.6 rather than a multi-step full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ }
+]
