@@ -21,7 +21,7 @@ export function realDbqDocText(n: number, s: RegistrySource, context: string): s
 /** set_intro: 표지 한 줄 + 안내 + 문서 7개. 레지스트리가 유일한 원본이라 문서 본문은 발췌 구간·표 그대로다. */
 export function realDbqPassage(order: { id: string; context: string }[], reg: Map<string, RegistrySource>, imageDocs: number[]): string {
   const docs = order.map((o, i) => realDbqDocText(i + 1, reg.get(o.id)!, o.context));
-  const note = `These documents are real historical sources (excerpts are cut verbatim from the repository text; [...] marks an omission).${imageDocs.length ? ` Documents ${imageDocs.join(" and ")} are images shown below the documents.` : ""}`;
+  const note = `These documents are real historical sources (excerpts are cut verbatim from the repository text; [...] marks an omission).${imageDocs.length === 1 ? ` Document ${imageDocs[0]} is an image shown below the documents.` : imageDocs.length ? ` Documents ${imageDocs.join(" and ")} are images shown below the documents.` : ""}`;
   return `${US_REAL_SOURCE_MARKER}\n${note}\n\n${docs.join("\n\n———\n\n")}`;
 }
 
