@@ -12,6 +12,10 @@ const purchaseUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
 const purchaseNeqMock = vi.fn().mockResolvedValue({ error: null });
 const purchaseSelectMaybeSingleMock = vi.fn();
 const disputeUpsertMock = vi.fn().mockResolvedValue({ error: null });
+const issueUpsertMock = vi.fn().mockResolvedValue({ error: null });
+const refundUpsertMock = vi.fn().mockResolvedValue({ error: null });
+const refundUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
+const rpcMock = vi.fn().mockResolvedValue({ data: { revoked: false, reason: "partially_used_or_reserved" }, error: null });
 
 const fromMock = vi.fn((table: string) => {
   if (table === "external_event_receipts") {
@@ -24,7 +28,7 @@ const fromMock = vi.fn((table: string) => {
     };
   }
   if (table === "payment_attempts") {
-    return { insert: paymentAttemptInsertMock };
+    return { upsert: paymentAttemptInsertMock };
   }
   if (table === "purchases") {
     return {
@@ -37,11 +41,17 @@ const fromMock = vi.fn((table: string) => {
   if (table === "payment_disputes") {
     return { upsert: disputeUpsertMock };
   }
+  if (table === "payment_webhook_issues") {
+    return { upsert: issueUpsertMock };
+  }
+  if (table === "payment_refunds") {
+    return { upsert: refundUpsertMock, update: () => ({ eq: refundUpdateEqMock }) };
+  }
   throw new Error(`unexpected table ${table}`);
 });
 
 vi.mock("@/lib/supabase-admin", () => ({
-  createAdminClient: () => ({ from: fromMock }),
+  createAdminClient: () => ({ from: fromMock, rpc: rpcMock }),
 }));
 
 const constructEventMock = vi.fn((rawBody: string) => JSON.parse(rawBody));
@@ -75,7 +85,10 @@ describe("POST /api/webhooks/stripe (R4 entitlement 구매 플로우)", () => {
     receiptUpdateEqMock.mockResolvedValue({ error: null });
     paymentAttemptInsertMock.mockResolvedValue({ error: null });
     purchaseUpdateEqMock.mockResolvedValue({ error: null });
-    purchaseSelectMaybeSingleMock.mockResolvedValue({ data: null });
+    purchaseSelectMaybeSingleMock.mockResolvedValue({ data: { id: "purchase1", total_minor: 21875, currency: "USD" } });
+    issueUpsertMock.mockResolvedValue({ error: null });
+    refundUpsertMock.mockResolvedValue({ error: null });
+    rpcMock.mockResolvedValue({ data: { revoked: false, reason: "partially_used_or_reserved" }, error: null });
     createGrantMock.mockResolvedValue({ grantId: "grant1", created: true });
   });
 
@@ -91,6 +104,9 @@ describe("POST /api/webhooks/stripe (R4 entitlement 구매 플로우)", () => {
         object: {
           id: "cs_1",
           payment_intent: "pi_1",
+          amount_total: 21875,
+          currency: "usd",
+          payment_status: "paid",
           metadata: { purchase_id: "purchase1", child_id: "child1", household_id: "hh1" },
         },
       },
@@ -99,8 +115,7 @@ describe("POST /api/webhooks/stripe (R4 entitlement 구매 플로우)", () => {
     const res = await POST(request);
     expect(res.status).toBe(200);
     expect(paymentAttemptInsertMock).toHaveBeenCalledWith(
-      expect.objectContaining({ purchase_id: "purchase1", status: "succeeded" })
-    );
+      expect.objectContaining({ purchase_id: "purchase1", status: "succeeded" }), expect.anything());
     expect(createGrantMock).toHaveBeenCalledWith(expect.anything(), "purchase1");
     expect(purchaseUpdateEqMock).toHaveBeenCalledWith("id", "purchase1");
   });
@@ -110,7 +125,7 @@ describe("POST /api/webhooks/stripe (R4 entitlement 구매 플로우)", () => {
     const request1 = makeRequest(
       {
         type: "checkout.session.completed",
-        data: { object: { id: "cs_1", payment_intent: "pi_1", metadata: { purchase_id: "purchase1" } } },
+        data: { object: { id: "cs_1", payment_intent: "pi_1", amount_total: 21875, currency: "usd", payment_status: "paid", metadata: { purchase_id: "purchase1" } } },
       },
       "evt_dup_1"
     );
@@ -127,7 +142,7 @@ describe("POST /api/webhooks/stripe (R4 entitlement 구매 플로우)", () => {
     const request2 = makeRequest(
       {
         type: "checkout.session.completed",
-        data: { object: { id: "cs_1", payment_intent: "pi_1", metadata: { purchase_id: "purchase1" } } },
+        data: { object: { id: "cs_1", payment_intent: "pi_1", amount_total: 21875, currency: "usd", payment_status: "paid", metadata: { purchase_id: "purchase1" } } },
       },
       "evt_dup_1"
     );
@@ -154,14 +169,13 @@ describe("POST /api/webhooks/stripe (R4 entitlement 구매 플로우)", () => {
     expect(res.status).toBe(200);
     expect(createGrantMock).not.toHaveBeenCalled();
     expect(paymentAttemptInsertMock).toHaveBeenCalledWith(
-      expect.objectContaining({ purchase_id: "purchase1", status: "failed" })
-    );
+      expect.objectContaining({ purchase_id: "purchase1", status: "failed" }), expect.anything());
     expect(purchaseUpdateEqMock).toHaveBeenCalledWith("id", "purchase1");
     // 이미 succeeded 인 구매는 되돌리지 않는다(순서 뒤바뀐 이벤트 방어)
     expect(purchaseNeqMock).toHaveBeenCalledWith("status", "succeeded");
   });
 
-  it("배포 모드와 다른 livemode 이벤트는 처리·기록 없이 ACK 한다(테스트/라이브 혼입 방지)", async () => {
+  it("배포 모드와 다른 livemode 이벤트는 처리하지 않고 이상 대장에 보관한다(정상 처리 완료와 구분, receipt 없음)", async () => {
     process.env.STRIPE_SECRET_KEY = "sk_test_x";
     const { POST } = await import("./route");
     const res = await POST(
@@ -172,11 +186,128 @@ describe("POST /api/webhooks/stripe (R4 entitlement 구매 플로우)", () => {
       })
     );
     expect(res.status).toBe(200);
-    expect(await res.json()).toMatchObject({ skipped: "livemode mismatch" });
+    expect(await res.json()).toMatchObject({ skipped: "livemode mismatch", recorded: true });
     expect(createGrantMock).not.toHaveBeenCalled();
     expect(receiptInsertMock).not.toHaveBeenCalled();
-    expect(paymentAttemptInsertMock).not.toHaveBeenCalled();
+    expect(issueUpsertMock).toHaveBeenCalledWith(
+      expect.objectContaining({ kind: "livemode_mismatch" }),
+      expect.anything()
+    );
     delete process.env.STRIPE_SECRET_KEY;
+  });
+
+  it("STRIPE_MODE 와 키 접두사가 충돌하면 500(설정 오류, 재시도 대상)", async () => {
+    process.env.STRIPE_SECRET_KEY = "sk_test_x";
+    process.env.STRIPE_MODE = "live";
+    const { POST } = await import("./route");
+    const res = await POST(
+      makeRequest({ type: "checkout.session.completed", livemode: false, data: { object: { id: "cs_1" } } })
+    );
+    expect(res.status).toBe(500);
+    expect(receiptInsertMock).not.toHaveBeenCalled();
+    delete process.env.STRIPE_SECRET_KEY;
+    delete process.env.STRIPE_MODE;
+  });
+
+  it("금액 불일치면 수업권을 부여하지 않고 이상 대장·reconciliation_needed 로 남긴다", async () => {
+    const { POST } = await import("./route");
+    const res = await POST(
+      makeRequest({
+        type: "checkout.session.completed",
+        data: {
+          object: { id: "cs_1", payment_intent: "pi_1", amount_total: 100, currency: "usd", payment_status: "paid", metadata: { purchase_id: "purchase1" } },
+        },
+      })
+    );
+    expect(res.status).toBe(200);
+    expect(createGrantMock).not.toHaveBeenCalled();
+    expect(issueUpsertMock).toHaveBeenCalledWith(expect.objectContaining({ kind: "amount_mismatch" }), expect.anything());
+    expect(paymentAttemptInsertMock).toHaveBeenCalledWith(
+      expect.objectContaining({ status: "reconciliation_needed" }),
+      expect.anything()
+    );
+  });
+
+  it("통화 불일치도 부여하지 않는다", async () => {
+    const { POST } = await import("./route");
+    await POST(
+      makeRequest({
+        type: "checkout.session.completed",
+        data: {
+          object: { id: "cs_1", payment_intent: "pi_1", amount_total: 21875, currency: "krw", payment_status: "paid", metadata: { purchase_id: "purchase1" } },
+        },
+      })
+    );
+    expect(createGrantMock).not.toHaveBeenCalled();
+  });
+
+  it("payment_status 가 unpaid 면 수업권을 부여하지 않고 processing 만 기록, async_payment_succeeded 에서 부여한다", async () => {
+    const { POST } = await import("./route");
+    const obj = { id: "cs_1", payment_intent: "pi_1", amount_total: 21875, currency: "usd", metadata: { purchase_id: "purchase1" } };
+    await POST(makeRequest({ type: "checkout.session.completed", data: { object: { ...obj, payment_status: "unpaid" } } }));
+    expect(createGrantMock).not.toHaveBeenCalled();
+    expect(paymentAttemptInsertMock).toHaveBeenCalledWith(expect.objectContaining({ status: "processing" }), expect.anything());
+    await POST(
+      makeRequest({ type: "checkout.session.async_payment_succeeded", data: { object: { ...obj, payment_status: "paid" } } })
+    );
+    expect(createGrantMock).toHaveBeenCalledTimes(1);
+  });
+
+  it("async_payment_failed 는 grant 없이 failed 로 기록한다", async () => {
+    const { POST } = await import("./route");
+    await POST(
+      makeRequest({ type: "checkout.session.async_payment_failed", data: { object: { id: "cs_1", metadata: { purchase_id: "purchase1" } } } })
+    );
+    expect(createGrantMock).not.toHaveBeenCalled();
+    expect(paymentAttemptInsertMock).toHaveBeenCalledWith(expect.objectContaining({ status: "failed" }), expect.anything());
+  });
+
+  it("attempt 는 event.id 기반 attempt_key 로 upsert 된다(재시도해도 1행)", async () => {
+    const { POST } = await import("./route");
+    await POST(
+      makeRequest(
+        {
+          type: "checkout.session.completed",
+          data: { object: { id: "cs_1", payment_intent: "pi_1", amount_total: 21875, currency: "usd", payment_status: "paid", metadata: { purchase_id: "purchase1" } } },
+        },
+        "evt_k"
+      )
+    );
+    expect(paymentAttemptInsertMock).toHaveBeenCalledWith(
+      expect.objectContaining({ attempt_key: "evt:evt_k" }),
+      { onConflict: "attempt_key", ignoreDuplicates: true }
+    );
+  });
+
+  it("charge.refunded 는 구매에 연결해 기록하고 플래그가 꺼져 있으면 회수하지 않는다", async () => {
+    const { POST } = await import("./route");
+    const res = await POST(
+      makeRequest({
+        type: "charge.refunded",
+        data: { object: { id: "ch_1", payment_intent: "pi_1", amount_refunded: 21875, currency: "usd", refunds: { data: [{ id: "re_1", amount: 21875, currency: "usd", status: "succeeded" }] } } },
+      })
+    );
+    expect(res.status).toBe(200);
+    expect(refundUpsertMock).toHaveBeenCalledWith(
+      expect.objectContaining({ purchase_id: "purchase1", stripe_refund_id: "re_1", amount_minor: 21875, status: "succeeded" }),
+      { onConflict: "stripe_refund_id" }
+    );
+    expect(rpcMock).not.toHaveBeenCalled();
+    expect(createGrantMock).not.toHaveBeenCalled();
+  });
+
+  it("플래그가 켜지면 RPC 로 회수를 시도하고, 회수 불가(manual)면 needs_review 로 남는다", async () => {
+    process.env.STRIPE_AUTO_REVOKE_ON_REFUND = "true";
+    const { POST } = await import("./route");
+    await POST(
+      makeRequest({
+        type: "charge.refund.updated",
+        data: { object: { id: "re_2", charge: "ch_1", payment_intent: "pi_1", amount: 21875, currency: "usd", status: "pending" } },
+      })
+    );
+    expect(refundUpsertMock).toHaveBeenCalledWith(expect.objectContaining({ status: "pending" }), expect.anything());
+    expect(rpcMock).toHaveBeenCalledWith("auto_revoke_refunded_purchase", { p_purchase_id: "purchase1" });
+    delete process.env.STRIPE_AUTO_REVOKE_ON_REFUND;
   });
 
   it("grant 생성이 DB 오류로 실패하면 receipt 를 처리 완료로 표시하지 않는다(재시도 가능)", async () => {
@@ -186,7 +317,7 @@ describe("POST /api/webhooks/stripe (R4 entitlement 구매 플로우)", () => {
       POST(
         makeRequest({
           type: "checkout.session.completed",
-          data: { object: { id: "cs_1", payment_intent: "pi_1", metadata: { purchase_id: "purchase1" } } },
+          data: { object: { id: "cs_1", payment_intent: "pi_1", amount_total: 21875, currency: "usd", payment_status: "paid", metadata: { purchase_id: "purchase1" } } },
         })
       )
     ).rejects.toThrow("db down");
@@ -204,8 +335,7 @@ describe("POST /api/webhooks/stripe (R4 entitlement 구매 플로우)", () => {
     expect(res.status).toBe(200);
     expect(createGrantMock).not.toHaveBeenCalled();
     expect(paymentAttemptInsertMock).toHaveBeenCalledWith(
-      expect.objectContaining({ purchase_id: "purchase1", status: "cancelled" })
-    );
+      expect.objectContaining({ purchase_id: "purchase1", status: "cancelled" }), expect.anything());
   });
 
   it("우리가 모르는/모호한 이벤트 타입은 reconciliation_needed로 남기고 성공으로 추측하지 않는다", async () => {
@@ -221,8 +351,7 @@ describe("POST /api/webhooks/stripe (R4 entitlement 구매 플로우)", () => {
     expect(body.skipped).toContain("unhandled event");
     expect(createGrantMock).not.toHaveBeenCalled();
     expect(paymentAttemptInsertMock).toHaveBeenCalledWith(
-      expect.objectContaining({ purchase_id: "purchase1", status: "reconciliation_needed" })
-    );
+      expect.objectContaining({ purchase_id: "purchase1", status: "reconciliation_needed" }), expect.anything());
     expect(purchaseUpdateEqMock).toHaveBeenCalledWith("id", "purchase1");
   });
 

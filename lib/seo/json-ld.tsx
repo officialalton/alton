@@ -7,18 +7,30 @@ export function JsonLd({ data }: { data: unknown }) {
 
 export const organizationJsonLd = () => ({
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: SITE_NAME,
+  "@type": "EducationalOrganization",
+  "@id": absoluteUrl("/#organization"),
+  name: "ALTON Education",
+  alternateName: ["ALTON", "Alton Education LLC"],
   legalName: "Alton Education LLC",
   url: SITE_URL,
+  logo: absoluteUrl("/apple-icon"),
   email: "official@alton.education",
+  description: "Free SAT and AP practice tests, learning tools and premium online tutoring for students in the US and Korea.",
+  address: { "@type": "PostalAddress", addressRegion: "CA", addressCountry: "US" },
+  contactPoint: [{ "@type": "ContactPoint", contactType: "customer support", email: "official@alton.education", availableLanguage: ["English", "Korean"] }],
+  // sameAs: 오너가 확인한 공식 프로필만(2026-10-21 Instagram). 다른 SNS는 개설·확인 후에만 추가한다.
+  sameAs: ["https://www.instagram.com/alton_education/"],
 });
 
 export const websiteJsonLd = () => ({
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: SITE_NAME,
+  "@id": absoluteUrl("/#website"),
+  name: "ALTON Education",
+  alternateName: ["ALTON", "alton.education"],
   url: SITE_URL,
+  publisher: { "@id": absoluteUrl("/#organization") },
+  inLanguage: "en-US",
 });
 
 export const breadcrumbJsonLd = (items: { name: string; path: string }[]) => ({

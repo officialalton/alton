@@ -5,7 +5,10 @@ import { notFound } from "next/navigation";
 import { CtaButton, PageHero, Prose, PublicPage } from "@/app/components/public/PublicShell";
 import { JsonLd, breadcrumbJsonLd } from "@/lib/seo/json-ld";
 import { loadStaticPublicDest } from "@/lib/landing/public-dest";
-import { allSubjectSlugs, getPublicSetsBySubject, getSubjectMeta } from "@/lib/landing/subjects";
+import { allSubjectSlugs, getSubjectMeta } from "@/lib/landing/subjects";
+import { getPublicTests } from "@/lib/landing/test-pages";
+import { AP_SAMPLES, SAT_SAMPLES, SUBJECT_ABOUT } from "@/lib/landing/samples";
+import { SampleQuestions } from "@/app/components/public/SampleQuestions";
 import { SITE_NAME, absoluteUrl } from "@/lib/site-url";
 
 // 공개 과목 소개: 정적 메타 + 공개 세트 이름만. 문항 본문·정답·해설은 읽지 않는다. ISR 1시간.
@@ -22,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { subject } = await params;
   const m = getSubjectMeta(subject);
   if (!m) return {};
-  const title = `${m.name} Practice Tests — Free | ALTON`;
+  const title = m.kind === "sat" ? "Free SAT Practice Tests Online with Answers & Explanations | ALTON Education" : `Free ${m.name} Practice Test Online — Exam Format & Units | ALTON Education`;
   return {
     title,
     description: m.description,
@@ -36,8 +39,9 @@ export default async function SubjectPage({ params }: Props) {
   const { subject } = await params;
   const m = getSubjectMeta(subject);
   if (!m) notFound();
-  const [dest, sets] = await Promise.all([loadStaticPublicDest(), getPublicSetsBySubject()]);
-  const published = sets[m.code] ?? [];
+  const [dest, published] = await Promise.all([loadStaticPublicDest(), getPublicTests(m.code)]);
+  const samples = m.kind === "sat" ? [...SAT_SAMPLES.math.slice(0, 1), ...SAT_SAMPLES.rw.slice(0, 1)] : AP_SAMPLES[m.code] ? [AP_SAMPLES[m.code]] : [];
+  const about = SUBJECT_ABOUT[m.code];
   const path = `/practice-tests/${m.slug}`;
 
   const course = {
@@ -57,11 +61,13 @@ export default async function SubjectPage({ params }: Props) {
       <nav aria-label="Breadcrumb" className="p-wrap pt-8 text-[13px] text-[var(--p-slate)]">
         <Link href="/practice-tests" className="hover:text-[var(--p-red)]">Practice Tests</Link> / <span>{m.name}</span>
       </nav>
-      <PageHero eyebrow={m.kind === "ap" ? "AP PRACTICE TESTS" : "SAT PRACTICE TESTS"} title={`${m.name} Practice Tests`} intro={m.description} />
+      <PageHero eyebrow={m.kind === "ap" ? "AP PRACTICE TESTS" : "SAT PRACTICE TESTS"} title={m.kind === "sat" ? "Free SAT Practice Tests Online" : `Free ${m.name} Practice Tests`} intro={m.description} />
       <Prose>
         <div className="flex flex-wrap gap-3 pb-4">
           <CtaButton href={dest.freeLearning} ctaName="free_learning" section={`subject_${m.slug}_hero`}>Start free practice</CtaButton>
         </div>
+
+        {about && <p>{about}</p>}
 
         <h2>Exam format</h2>
         <p>About {m.totalMinutes} minutes and {m.totalQuestions} {m.kind === "ap" ? "questions and prompts" : "questions"} in total.</p>
@@ -89,11 +95,20 @@ export default async function SubjectPage({ params }: Props) {
           </>
         )}
 
+        <SampleQuestions samples={samples} />
+
+        {m.kind === "sat" && (
+          <p>
+            Prefer to focus on one section? See <Link href="/sat-math-practice">SAT Math practice</Link> and{" "}
+            <Link href="/sat-reading-and-writing-practice">SAT Reading and Writing practice</Link>.
+          </p>
+        )}
+
         <h2>Free practice sets</h2>
         {published.length > 0 ? (
           <>
             <p>{published.length} published {published.length === 1 ? "set" : "sets"} so far. Create a free account to take them.</p>
-            <ul>{published.map((s) => <li key={s.name}>{s.name}</li>)}</ul>
+            <ul>{published.map((s) => <li key={s.slug}><Link href={`/practice-tests/${m.slug}/${s.slug}`}>{s.name}</Link></li>)}</ul>
           </>
         ) : (
           <p>New {m.name} practice sets are added regularly. Create a free account to be ready when they are published.</p>

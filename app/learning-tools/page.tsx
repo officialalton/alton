@@ -5,9 +5,9 @@ import { loadPublicDest } from "@/lib/landing/public-dest";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/learning-tools" },
-  title: "Learning Tools — ALTON",
+  title: "Learning Tools | ALTON Education",
   description: "Review results, keep a mistake notebook, build your vocabulary and use free study materials, all in one ALTON account.",
-  openGraph: { images: OG_IMAGES, title: "Learning Tools — ALTON", description: "Review results, keep a mistake notebook, build your vocabulary and use free study materials, all in one ALTON account." },
+  openGraph: { images: OG_IMAGES, title: "Learning Tools | ALTON Education", description: "Review results, keep a mistake notebook, build your vocabulary and use free study materials, all in one ALTON account." },
 };
 
 export default async function LearningToolsPage() {

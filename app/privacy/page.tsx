@@ -10,9 +10,9 @@ const DESCRIPTION = "How ALTON Education collects, uses, shares and protects per
 
 export const metadata: Metadata = {
   alternates: { canonical: "/privacy" },
-  title: "Privacy Policy — ALTON",
+  title: "Privacy Policy | ALTON Education",
   description: DESCRIPTION,
-  openGraph: { images: OG_IMAGES, title: "Privacy Policy — ALTON", description: DESCRIPTION },
+  openGraph: { images: OG_IMAGES, title: "Privacy Policy | ALTON Education", description: DESCRIPTION },
 };
 
 // Content lives in lib/legal/site-documents.ts (source: docs/contracts/privacy-policy-en.md).
