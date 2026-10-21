@@ -17,6 +17,8 @@ export type AttemptFacts = {
   gradedAt: string | null;
   attemptSeq: number;
   sections: { rw: SectionFacts; math: SectionFacts };
+  /** AP 전용: 객관식 정답 수/총 문항(점수 추정 없음). */
+  mc?: { total: number; correct: number | null };
 };
 export type EstimateReason = null | "not_graded" | "no_estimate_fixed" | "no_estimate_ap" | "section_incomplete" | "insufficient_responses";
 export type AttemptEstimate = { rw: ScoreRange | null; math: ScoreRange | null; total: ScoreRange | null; reason: EstimateReason };

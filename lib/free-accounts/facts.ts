@@ -9,6 +9,7 @@ export type FactsRpcRow = {
   attempt_seq: number; score_adjusted: boolean;
   rw_total: number; rw_correct: number | null; rw_complete: boolean; rw_route: string | null; rw_answered?: number | null;
   math_total: number; math_correct: number | null; math_complete: boolean; math_route: string | null; math_answered?: number | null;
+  mc_total?: number | null; mc_correct?: number | null;
 };
 
 const route = (r: string | null): ScoreRoute | null => (r === "higher" || r === "lower" ? r : null);
@@ -29,6 +30,7 @@ export function factsFromRpcRows(rows: FactsRpcRow[]): AttemptHistoryRow[] {
       rw: section(r.rw_total, r.rw_correct, r.rw_complete, r.rw_route, r.rw_answered),
       math: section(r.math_total, r.math_correct, r.math_complete, r.math_route, r.math_answered),
     },
+    mc: r.exam_track === "ap" ? { total: r.mc_total ?? 0, correct: r.mc_correct ?? null } : undefined,
     difficultyTier: r.difficulty_tier,
     submittedAt: r.submitted_at,
     scoreAdjusted: r.score_adjusted,
