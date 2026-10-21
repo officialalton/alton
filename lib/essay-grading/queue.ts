@@ -1,6 +1,6 @@
 import { buildPrompt, checkEssayLength, type Anchor } from "./prompt";
 import { resolveRubric } from "./rubric";
-import { checkCaps, costUsd, flagEnabled, limits, type Usage } from "./costs";
+import { checkCaps, costUsd, flagEnabled, limits, worstCaseUsd, type Usage } from "./costs";
 import { combineRuns, totalOf, validateGraderOutput, type Disagreement, type GraderOutput } from "./schema";
 import { GraderRefusal, type GraderClient } from "./client";
 
@@ -22,12 +22,15 @@ export type Row = { status: Status; attemptsMade: number; nextRetryAt: string | 
 export type Finish = {
   status: Status; model?: string | null; scores?: Record<string, unknown> | null; rationale?: Record<string, unknown> | null;
   attemptsMade?: number; nextRetryAt?: string | null; lastError?: string | null; /** 토큰·비용은 이번 실행의 증분 — 저장소가 이전 값에 합산한다 */ inputTokens?: number; outputTokens?: number; costUsd?: number;
+  /** reserveBudget 이 돌려준 예약 id — 있으면 실비로 정산(비용 0 이면 해제) */ reservationId?: string;
 };
 /** 저장소 경계(실제 구현은 store.ts, service_role). claim 은 원자적이어야 한다: pending 이거나 재시도 시각이 지난 failed 일 때만 processing 으로 바꾸고 true. */
 export interface EssayStore {
   claim(key: EssayKey): Promise<{ claimed: boolean; row: Row }>;
   usage(key: EssayKey): Promise<Usage>;
   finish(key: EssayKey, f: Finish): Promise<void>;
+  /** 월 예산 원자적 예약(선택 구현): 월 지출(확정+유효 예약)+amountUsd 가 budgetUsd 이하일 때만 예약 id 를 돌려준다. 동시 요청이 같은 잔여 예산을 보고 함께 실행하는 것을 막는다. */
+  reserveBudget?(key: EssayKey, amountUsd: number, budgetUsd: number): Promise<{ ok: true; reservationId: string } | { ok: false }>;
 }
 export type Deps = { store: EssayStore; client: GraderClient; now?: () => Date };
 export type Job = EssayKey & { taskPrompt: string; sources: { id: string; title?: string; body: string }[]; essay: string; anchors: Anchor[]; /** 생략 = englang-v2 */ rubricId?: string; taskType?: "saq" | "dbq" | "leq" | string; scoringNotes?: string };
@@ -69,6 +72,16 @@ export async function processEssay(deps: Deps, job: Job): Promise<Outcome> {
   }
   if (!cap.ok) { await store.finish(key, { status: "skipped", lastError: cap.reason, attemptsMade: row.attemptsMade }); return { status: "skipped", reason: cap.reason }; }
 
+  // 호출 전 예산 예약(최악 4호출 금액을 원장에 선기록). 실패하면 월 예산 대기 — 모델 호출 없음.
+  let reservationId: string | undefined;
+  if (store.reserveBudget) {
+    const r = await store.reserveBudget(key, worstCaseUsd(l), l.monthlyBudgetUsd);
+    if (!r.ok) {
+      await store.finish(key, { status: "failed", lastError: "monthly_budget", attemptsMade: row.attemptsMade, nextRetryAt: limitResetAt("monthly_budget", now()).toISOString() });
+      return { status: "failed", error: "monthly_budget" };
+    }
+    reservationId = r.reservationId;
+  }
   let inTok = 0, outTok = 0, model: string | null = null;
   try {
     const runs: GraderOutput[] = [];
@@ -86,7 +99,7 @@ export async function processEssay(deps: Deps, job: Job): Promise<Outcome> {
     const { result, disagreement } = combineRuns(runs[0], runs[1], def.rows);
     const total = totalOf(result.scores, def.rows);
     await store.finish(key, {
-      status: "done", model, attemptsMade, nextRetryAt: null, lastError: null, inputTokens: inTok, outputTokens: outTok, costUsd: costUsd(inTok, outTok, l),
+      status: "done", model, attemptsMade, nextRetryAt: null, lastError: null, inputTokens: inTok, outputTokens: outTok, costUsd: costUsd(inTok, outTok, l), reservationId,
       scores: { ...result.scores, total, disagreement: disagreement !== null, rubricVersion: def.id, ...(def.taskType ? { taskType: def.taskType } : {}) },
       rationale: { ...result.rationale, improve: result.improve },
     });
@@ -96,7 +109,7 @@ export async function processEssay(deps: Deps, job: Job): Promise<Outcome> {
     const terminal = code === "flag_off" || code === "no_key" ? false : attemptsMade >= MAX_ATTEMPTS;
     const status: Status = terminal ? "dead" : "failed";
     await store.finish(key, {
-      status, model, attemptsMade, lastError: code, inputTokens: inTok, outputTokens: outTok, costUsd: costUsd(inTok, outTok, l),
+      status, model, attemptsMade, lastError: code, inputTokens: inTok, outputTokens: outTok, costUsd: costUsd(inTok, outTok, l), reservationId,
       nextRetryAt: terminal ? null : new Date(now().getTime() + backoffMs(attemptsMade)).toISOString(),
     });
     return { status, error: code };

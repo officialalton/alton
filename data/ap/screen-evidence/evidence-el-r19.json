@@ -22307,6 +22307,88 @@
      "note": "no explanation text on result screen"
     }
    }
+  },
+  {
+   "candidate_key": "englang-r19-f2:ap_english_language-fe1-k0",
+   "checker_kind": "automated",
+   "content_hash": "382123ba59dd9f01088d5ae2444d3d8af89064677e68404c4acc475f4332f89a",
+   "problem_version_id": "91e273e2-3220-4279-a6c0-504efafc1c45",
+   "kind": "frq_bundle",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/el-r19/englang-r19-f2_ap_english_language-fe1-k0-390x844.jpg",
+   "timestamp": "2026-10-21T17:13:21.883Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "1/1 FRQ parts visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "2 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "pass",
+     "note": "typed into 1 part input(s), value retained"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "englang-r19-f2:ap_english_language-fe1-k0",
+   "checker_kind": "automated",
+   "content_hash": "382123ba59dd9f01088d5ae2444d3d8af89064677e68404c4acc475f4332f89a",
+   "problem_version_id": "91e273e2-3220-4279-a6c0-504efafc1c45",
+   "kind": "frq_bundle",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/el-r19/englang-r19-f2_ap_english_language-fe1-k0-1280x800.jpg",
+   "timestamp": "2026-10-21T17:13:24.224Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "1/1 FRQ parts visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "2 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "pass",
+     "note": "typed into 1 part input(s), value retained"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
   }
  ]
 }

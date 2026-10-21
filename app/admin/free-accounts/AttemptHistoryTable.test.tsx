@@ -43,4 +43,23 @@ describe("AttemptHistoryTable", () => {
     await waitFor(() => expect(screen.getByText("SAT result view")).toBeTruthy());
     expect(apAction).not.toHaveBeenCalled();
   });
+  it("AP not graded yet: shows the set's question count and 'not graded yet' (never 0 questions); correct count stays unknown", () => {
+    for (const status of ["assigned", "in_progress", "submitted"]) {
+      render(<AttemptHistoryTable rows={factsFromRpcRows([row({ status, graded_at: null, mc_total: 0, mc_correct: null, mc_item_count: 45 })])} />);
+      expect(screen.getByText("45 questions · not graded yet")).toBeTruthy();
+      expect(screen.queryByText(/0 questions|\/0 correct/)).toBeNull();
+      cleanup();
+    }
+  });
+  it("AP not graded with an unknown set count (older RPC) keeps the plain dash; one-question set is singular", () => {
+    render(<AttemptHistoryTable rows={factsFromRpcRows([row({ status: "in_progress", graded_at: null, mc_total: 0, mc_correct: null })])} />);
+    expect(screen.queryByText(/not graded yet/)).toBeNull();
+    cleanup();
+    render(<AttemptHistoryTable rows={factsFromRpcRows([row({ status: "in_progress", graded_at: null, mc_total: 0, mc_correct: null, mc_item_count: 1 })])} />);
+    expect(screen.getByText("1 question · not graded yet")).toBeTruthy();
+  });
+  it("AP graded with no stored items falls back to the set count for the denominator", () => {
+    render(<AttemptHistoryTable rows={factsFromRpcRows([row({ mc_total: 0, mc_correct: 0, mc_item_count: 30 })])} />);
+    expect(screen.getByText(/0\/30 correct/)).toBeTruthy();
+  });
 });
