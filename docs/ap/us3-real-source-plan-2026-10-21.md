@@ -127,3 +127,56 @@
 - 3·6절 후보 자료의 URL·권리 문구·판본은 확인하지 않은 후보이며 전부 확인 전에는 '확보'가 아니다.
 - SAQ 단가는 실측이 없어 DBQ 비례 추정이다(§4). 사실 점검은 LLM 이며 역사 교사 검수가 아니다.
 - 기존 r19-f/f4 키의 합성 자료는 삭제·표지 변경 없이 보존 구분하며, 새 키로 교체해도 이전 키는 재고에 남는다.
+
+---
+
+# 진행 상태 (2026-10-21 실행 결과, 오너 승인 후)
+
+승인: 비용 상한 $13(FRQ $7 + MC $6), 장부 시작 $504.0092, 이번 작업 증가분 **$6.1716**(FRQ $3.0738 + MC $3.0978; 전체 중단선 $640 불가침, 누적 $510.1808). 원격 DB는 읽기 전용 SELECT만 했다(스냅샷 1회). 적재·공개·프로덕션 배포는 하지 않았다.
+
+| 단계 | 내용 | 상태 |
+|---|---|---|
+| 1 자료 확인 | AP Central 시험 구조 확인, 후보 자료 권리 문구·판본·URL 레지스트리 기록(아래 표) | 완료 |
+| 2 FRQ | SAQ1·SAQ2·SAQ3·DBQ 실제 사료, LEQ 표지 정정. 3단계 샘플 × 독립 채점기 2 + 사실 점검(Fable), 게이트 0 위반 | 완료(5/5 통과) |
+| 3 MC | 14세트 전부 실제 사료로 교체(1차 11·2차 2·짝 1·정량 1). 블라인드 풀이 2 + 사실 점검, 문항 50개 전부 verified | 완료(14/14 통과) |
+| 4 배정·증거 | exact-assign US3 갱신(독립 검증기 위반 0, 원격 스냅샷 기준 US1·US2 키·문항군·실제 자료 겹침 0), render-check 병합(8576→8595, 기존 행 변경 0), 격리 스택 화면 증거(114건, 실패 0) | 완료 |
+| 적재·공개 | DB 적재(ush-real-f·ush-real-g 배치), US3 새 버전 생성, 공개 | **총괄 단계(미실행)** |
+
+## 2027 AP US History 시험 구조 (AP Central, 2026-10-21 조회)
+
+SAQ 3문항 전부 필수(선택 없음): Q1 2차 텍스트, Q2 1차 텍스트, Q3 1·2차 비텍스트, 시대는 서로 다르며 1491–2001. DBQ 문서 7개(1754–1980 주제), LEQ 필수 1(넓은 프롬프트, 전 시대를 다룰 필요 없음). SAQ·LEQ 개정은 2027년 5월부터이며 세부 변경은 해당 페이지가 싣지 않았다(구조 기준은 위가 전부).
+
+## US3 가 쓰는 실제 자료와 권리 근거
+
+(저장소·판본·URL·권리 문구·해시는 `data/ap/ush-sources/registry.json` 과 `files/<id>/SOURCE.md` 에 항목별로 기록. OCR 원문은 줄바꿈 하이픈·오탈자만 고치고 고친 곳을 `modified` 에 적었다.)
+
+| 자료 id | 쓰임 | 저장소 | 권리 근거 |
+|---|---|---|---|
+| txt-dunning-1907 · txt-dubois-1910 | SAQ1 (시대 5, 2차 쌍) | Internet Archive (1907 초판 스캔 · JSTOR Early Journal Content) | 1907·1910 미국 간행물(1929 이전), 저자 Dunning 1922 사망 |
+| txt-penn-privileges-1701 | SAQ2 (시대 2) | Avalon (Yale) | 1701 식민지 헌장 |
+| img-migrant-mother-1936 | SAQ3 (시대 7, 사진) | Library of Congress | 연방기관 직원 작품 + LoC 'No known restrictions'(2026-10-21 LoC 항목 페이지 재확인) |
+| txt-eo9835-1947 · txt-smith-1950 · txt-survival-1950 · txt-ndea-1958 · stat-defense-outlays-1946-1962 · txt-eisenhower-1961 · img-mrbm-san-cristobal-1962 | DBQ (시대 8, 7문서) | Truman Library · Senate.gov · Internet Archive(GPO 1950 소책자) · GovInfo(법령·OMB 표) · Avalon · Commons(NARA) | 연방 문서(17 U.S.C. 105). 사진은 NARA 'No Copyright - United States', 표는 OMB Historical Table 3.1 |
+| txt-franklin-whitefield-1771 · txt-nworder-1787 · txt-beard-1913 · txt-northup-1853 · txt-sc-ordinance-1832 · txt-jackson-proclamation-1832 · txt-14th-amendment-1868 · txt-hayes-inaugural-1877 · txt-turner-1893 · stat-city-population-1850-1890 · txt-bryan-1922 · txt-eo8802-1941 · txt-cra-1964 · txt-bush-gulf-1991 · txt-truman-1947(기존) · txt-harriot-1588(기존) | MC 15세트 | Gutenberg · Avalon · National Archives · Census(WP27) · GovInfo | 1929 이전 간행물 또는 연방 문서 |
+
+계획서 후보 중 **제외·대체**: Mittelberger 1750(OCR 쪽머리글이 본문 중간에 섞여 코드 절단이 불안정)과 Franklin 1751(Founders Online 도메인 비허용) 대신 Penn 1701 헌장(Avalon). 'Migrant Mother'는 LoC 항목 페이지에서 권리 문구 확인 후 사용. DBQ는 Truman Doctrine 대신 EO 9835(Truman Doctrine 은 MC u849 에 사용). 레지스트리 허용 도메인에 archive.org·senate.gov·trumanlibrary.gov·govinfo.gov·www2.census.gov 를 추가했다. 만평은 쓰지 않았다.
+
+## 구성 결과
+
+- FRQ: SAQ1 5.10(Freedmen's Bureau 해석 대비, 시대 5로 변경) · SAQ2 2.5(시대 2) · SAQ3 7.9(시대 7, 사진) · DBQ 냉전 국내 대응 1947–1962(문서 7: 1차 5·표 1·사진 1) · LEQ 3.1(프롬프트 전용, `provenance` 를 '자료 없음'으로 정정, 저점 샘플은 채점기 대역 이탈로 더 약한 답안으로 교체, 구 r19-f 키 보존).
+- MC: 세트당 문항 수·시대(단원)·스킬 범주를 교체되는 세트와 같게 유지(`ush-real-g-build.test.ts` 가드). 시험 합계 MC 55, 자료 유형 primary 11·secondary 2·paired 1·quantitative 1.
+- 코드: `ush-real-f-*`(SAQ·DBQ·LEQ 빌드·검증), `ush-real-g-*`(MC), `lib/ap-generation/ush-real-saq.ts`(SAQ 표시문·게이트: 레지스트리 글자 일치·ALTON 표지 금지·그림 칸), `ushistory-frq.ts` SAQ3 가 사진도 비텍스트 자료로 인정, `ush-real-gates.ts` 허용 도메인, `ush-real-dbq.ts` 이미지 1개일 때 문법. 신규 테스트 `ush-real-f-build.test.ts`·`ush-real-g-build.test.ts`.
+- 검증 중 잡힌 오류(모두 수정 후 재검증): 해설·증거가 발췌에 없는 원문 내용을 인용(EO 9835 조항, Eisenhower 문장, NDEA 문장, Hayes 문장 등) → 발췌에 해당 문장을 넣거나 해설을 발췌 안 근거로 고침, SAQ2 매사추세츠 투표 제한 시기 불일치, 세부 날짜(1664/1691) 정리, Census Bureau→Census Office 시대착오, 채점 노트의 Rhode Island 일률 배제.
+
+## 한계 (정직 보고)
+
+- 사실 점검·블라인드 풀이·채점은 LLM(Opus·Sonnet·Fable)이며 역사 교사 검수가 아니다. 샘플 답안의 3/2/1 대역은 독립 채점기 2개로 확인했다.
+- SAQ1 은 Dunning(1907)의 시각을 2차 자료로 싣는다. 자료 소개 줄에서 저자 시대·관점을 밝히고 질문은 두 해석의 비교로 설계했지만, 공개 전 오너·교사 확인을 권한다.
+- 화면 증거는 표시·입력·노출·잘림의 자동 점검이며 문장 자연스러움·그림 의미 검토가 아니다.
+- US1·US2 의 라벨 표기 합성 MC 약 21세트 처리 방침은 오너 미결정이라 건드리지 않았다.
+- 원격 스냅샷은 읽기 전용이었으며, 이 세션의 `.env.local` 에는 원격 접속값이 없어 Supabase CLI 로그인 권한으로 프로세스 메모리에서만 service_role 키를 받아 SELECT 했다(저장·출력 없음).
+
+## 총괄이 할 일
+
+1. `ush-real-f-items.json`(5)·`ush-real-g-items.json`(14) 적재(`import-candidates.ts`, 배치 `ush-real-f-2026-10-21`·`ush-real-g-2026-10-21`)와 `mark-verified.ts --render/--screen` 드라이런으로 DB 내용 해시 대조(이 세션은 DB 해시 대조 미수행).
+2. `exact-assign-ushistory-us3.json`(새 키)로 US3 새 버전 조립 — 원격 Practice Exam 3 초안은 옛 합성 20키라 교체 대상. 조립 직전 `ush-remote-snapshot.ts --remote-ref …` 로 스냅샷을 다시 받아 `ush-us3-assign.ts` 가 위반 0 인지 재확인.
+3. 오너 확인 후 공개.

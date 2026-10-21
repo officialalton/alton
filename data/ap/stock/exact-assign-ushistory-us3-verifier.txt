@@ -1,0 +1,13 @@
+# US3 exact-assign 검증 (2026-10-21, DB 쓰기 없음) — 원격 읽기 전용 스냅샷 2026-10-21T17:56:35.187Z (worpsqwqgnspddnrtnvq.supabase.co)
+US1·US2 스냅샷 키 28+30 중 로컬 재고에 없는 키: 0
+독립 검증기(US3 단독 구성 규칙): 위반 0
+독립 검증기(US1·US2·US3 키·문항군 겹침, US3 관련): 0
+US3 키 20개 ∩ 원격 US1·US2(모든 버전) 키 = 0 
+US3 키 ∩ 원격 Practice Exam 3 초안(합성 자료 20키, 교체 대상) 키 = 1
+US3 MC 문항군(테마) ∩ 원격 US1·US2 MC 문항군 = 0 
+US3 FRQ 문항군 ∩ 원격 US1·US2 FRQ 문항군 = 0
+US3 가 쓴 레지스트리 실제 자료 27건 ∩ US1·US2 가 쓴 실제 자료 25건 = 0 
+US3 구성: MC 세트 15 (문항 55), 단원별 문항 {"1":4,"2":3,"3":7,"4":8,"5":5,"6":8,"7":8,"8":8,"9":4}, 자료 유형 {"primary_text":11,"secondary_text":2,"paired_text":1,"quantitative":1}
+US3 FRQ: saq1(P5) ush-real-f:ap_us_history-real_f_saq1-k0 | saq2(P2) ush-real-f:ap_us_history-real_f_saq2-k0 | saq3(P7) ush-real-f:ap_us_history-real_f_saq3-k0 | dbq(P8) ush-real-f:ap_us_history-real_f_dbq_coldwar-k0 | leq(P3) ush-real-f:ap_us_history-real_f_leq-k0
+화면 증거(screen-evidence) 없는 US3 키: 0
+종합: 위반 0
