@@ -18,7 +18,8 @@ export const organizationJsonLd = () => ({
   description: "Free SAT and AP practice tests, learning tools and premium online tutoring for students in the US and Korea.",
   address: { "@type": "PostalAddress", addressRegion: "CA", addressCountry: "US" },
   contactPoint: [{ "@type": "ContactPoint", contactType: "customer support", email: "official@alton.education", availableLanguage: ["English", "Korean"] }],
-  // sameAs: 공식 SNS·프로필 URL은 개설·확인 후에만 추가한다(확인되지 않은 URL 금지).
+  // sameAs: 오너가 확인한 공식 프로필만(2026-10-21 Instagram). 다른 SNS는 개설·확인 후에만 추가한다.
+  sameAs: ["https://www.instagram.com/alton_education/"],
 });
 
 export const websiteJsonLd = () => ({
