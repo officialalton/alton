@@ -1,0 +1,999 @@
+[
+ {
+  "id": "fe2",
+  "plan": {
+   "id": "fe2",
+   "type": "rhetorical_analysis",
+   "theme": "a county fair judge's address to young exhibitors about honest craftsmanship and graceful losing",
+   "seed": 19411
+  },
+  "payload": {
+   "schema_version": "el-frq-1",
+   "task_type": "rhetorical_analysis",
+   "template": "q2",
+   "title": "Rhetorical Analysis: Marguerite Oldacre's Closing Remarks to Youth Exhibitors at the Tellwick County Fair",
+   "prompt": {
+    "scenario": "Speaker: Marguerite Oldacre, head judge of the Tellwick County Fair for twenty-two years and a retired furniture restorer. Audience: roughly two hundred youth exhibitors (ages nine to eighteen) and their families gathered in the show barn at the closing ribbon ceremony, some holding champion ribbons and many holding none. Exigence: the ceremony comes immediately after placings have been announced; the judge has witnessed, over many years, children and parents reacting bitterly to low placings, and she wants to redirect how the young exhibitors understand both craftsmanship and losing before they leave the grounds. Purpose: to persuade the young exhibitors that honest workmanship, not ribbons, is the true measure of their effort, and that losing gracefully is a skill that serves them beyond the fair. The remarks were later printed in the fair's annual bulletin in 1978.",
+    "task": "The passage below is adapted from closing remarks delivered in 1978 by Marguerite Oldacre, head judge of the Tellwick County Fair, to the young people who had entered livestock, crafts, and baked goods in that year's competition. Read the passage carefully. Write an essay that analyzes the rhetorical choices Oldacre makes to persuade her young listeners to value honest craftsmanship over ribbons and to accept a loss with grace.",
+    "requirements": [
+     "Respond to the prompt with a defensible thesis that analyzes the writer's rhetorical choices.",
+     "Select and use evidence from the passage to support your line of reasoning.",
+     "Explain how the evidence supports your line of reasoning by showing how specific choices serve the writer's purpose for her audience."
+    ]
+   },
+   "sources": [
+    {
+     "id": "passage",
+     "kind": "text",
+     "title": "Closing Remarks to Youth Exhibitors, Tellwick County Fair",
+     "attribution": "Marguerite Oldacre, head judge, remarks delivered in the show barn at the closing ribbon ceremony of the Tellwick County Fair, 1978; printed in the fair's annual bulletin",
+     "genre": "ceremonial speech",
+     "paragraphs": [
+      [
+       "Before the trucks are loaded and the straw is swept out of the barns, I want five minutes of your attention, and I want it from the ones holding purple ribbons as much as from the ones holding nothing.",
+       "I have judged at this fair for twenty-two summers.",
+       "In that time I have handled, by the fair secretary's count, somewhere past eleven thousand entries: quilts, heifers, jars of plum jelly, birdhouses, one bewildering wheel of cheese that I still think about.",
+       "So I speak to you as someone who has looked closely at a great many things made by young hands, and who has had to say, more often than not, \"not this year.\""
+      ],
+      [
+       "Let me tell you about a boy I will call Dennis.",
+       "Dennis entered a cedar chest in the woodworking division some fifteen years ago, and it was a handsome piece: tight dovetails, the lid balanced so it closed with a sigh instead of a bang.",
+       "I turned it over, as judges do, and found that the bottom panel had been glued in with the grain running the wrong way, a mistake that would split that board within three winters.",
+       "I gave him a red ribbon and wrote the reason on the card.",
+       "He did not argue.",
+       "He read the card twice, nodded, and asked me whether I thought the panel could be replaced without ruining the sides.",
+       "That question told me more about Dennis than the chest did."
+      ],
+      [
+       "Now, I know what some of you are thinking, because I thought it myself at your age: the judging is a matter of taste, and taste is a matter of luck, and luck is nothing to lose sleep over.",
+       "There is a grain of truth in that.",
+       "Two honest judges can disagree about a pie crust.",
+       "But the dovetail either fits or it gaps, the calf either stands square or she does not, the jelly either sets or it runs, and no judge on earth can argue with a seam that holds.",
+       "Craftsmanship is not the opinion of the person at the table.",
+       "Craftsmanship is the agreement between what you promised the material and what you actually did."
+      ],
+      [
+       "What is a ribbon, really?",
+       "It is a strip of dyed cloth that costs the fair board about forty cents apiece.",
+       "It will fade on a bedroom wall.",
+       "The thing that does not fade is the habit you built getting here: the hour you spent resanding a joint nobody would ever see, the calf you walked every evening in August when your friends were at the lake.",
+       "Those hours are already yours.",
+       "I cannot award them and I cannot take them away."
+      ],
+      [
+       "I will be plainer still, because I have watched some ugly things in this show ring.",
+       "I have watched a girl kick her own lamb because it placed fourth.",
+       "I have watched a father tear up a card in front of his son and tell him the judge was blind.",
+       "Each of those moments taught a child something, and it was not something about lambs.",
+       "The animal did not lose.",
+       "The chest did not lose.",
+       "You did not even lose; you were measured, and measuring is a kindness, because it tells you where the next hour of work should go."
+      ],
+      [
+       "So here is what I ask of you, and I ask it of the champions first.",
+       "Walk over to the person who beat you, or whom you beat, and ask them how they did it.",
+       "Look at the winning entry long enough to learn something from it instead of just long enough to resent it.",
+       "Then go home, find the panel with the grain running wrong, and fix it.",
+       "Dennis, by the way, came back the next year with the same chest, bottom replaced, and it took the division.",
+       "He is a cabinetmaker now, three counties over, and I am told his drawers still close with a sigh.",
+       "That is the whole of what I know about losing: it is the first half of a sentence, and you are the one who gets to write the rest."
+      ]
+     ],
+     "stance": "Honest workmanship and graceful acceptance of a placing matter more than the ribbon itself.",
+     "provenance": {
+      "kind": "original",
+      "author_alias": "Marguerite Oldacre",
+      "year_alias": 1978
+     }
+    }
+   ],
+   "rubric": {
+    "total_points": 6,
+    "rows": [
+     {
+      "row_id": "A",
+      "name": "Thesis",
+      "max": 1,
+      "descriptors": {
+       "0": "No thesis, or a thesis that only restates the prompt (for example, 'Oldacre uses rhetorical choices to persuade the exhibitors'), only summarizes the speech, or names devices without connecting them to any purpose or effect.",
+       "1": "A defensible claim, stated in the introduction or elsewhere, that identifies at least one specific thing Oldacre does and connects it to her goal of reshaping how the young exhibitors regard craftsmanship and losing. The thesis may be a single sentence or spread across adjacent sentences but must make an arguable claim about how the rhetoric works, not merely that it exists."
+      },
+      "task_specific": "Acceptable theses might argue that Oldacre builds credibility through her long record and then uses the Dennis story as a model the audience is invited to imitate; that she deflates the ribbon through definition and rhetorical question so that she can relocate value to the exhibitor's own hours; or that she shifts from warm storytelling to blunt confrontation and back to warmth in order to shame bad losing without shaming the children. A thesis that simply lists 'ethos, pathos, and logos' with no claim about purpose earns 0."
+     },
+     {
+      "row_id": "B",
+      "name": "Evidence and Commentary",
+      "max": 4,
+      "descriptors": {
+       "0": "Restates the thesis, summarizes the speech, or offers evidence with no connection to any claim.",
+       "1": "Mostly summary or paraphrase of the passage with little or no analysis; may mention a device by name but does not quote or point to a specific sentence, or quotes without explaining anything.",
+       "2": "Provides some specific evidence from the passage and attempts commentary, but the commentary is generic (for example, 'this makes the audience feel emotional' or 'this makes her credible') and does not explain why that effect matters for the specific purpose or audience. May identify devices accurately but treat each in isolation. Line of reasoning is present but uneven.",
+       "3": "Provides specific, well-chosen evidence (quoted or precisely referenced) for multiple choices and explains how each choice works on this particular audience of young exhibitors and families. Commentary consistently links choice to purpose. Some explanations may be less developed, or the essay may not account for how the choices work together across the speech.",
+       "4": "Provides specific evidence for several distinct choices and develops commentary that explains both how each choice advances Oldacre's purpose for this audience and how the choices build on one another (for example, how the opening ethos licenses the blunt fifth paragraph, or how the return to Dennis in the final paragraph closes the frame the anecdote opened). The line of reasoning is clear and the essay demonstrates an understanding of the rhetorical situation: a judge speaking to children who have just been ranked, in front of their parents."
+      },
+      "task_specific": "Choices that count include: the catalog of credentials and the admission of frequent 'not this year' (ethos, sentences 2-4); the Dennis anecdote and its return in sentences 35-36; the concession and rebuttal about taste in sentences 12-15; the parallel 'either/or' series in sentence 15; the two-part definition of craftsmanship in 16-17; the rhetorical question and forty-cent deflation of the ribbon in 18-20; the concrete images of unseen labor in 21; the tone shift to 'I will be plainer still' and the harsh pictures of the lamb and the torn card in 24-27; the short repeated 'did not lose' sentences in 28-30; the direct imperatives in 31-34; and the closing metaphor of losing as half a sentence in 37. Evidence should be specific; vague references such as 'she tells a story' without detail belong at level 2 or below. Essays at 3 or 4 must discuss at least three distinct choices with commentary tied to the young audience."
+     },
+     {
+      "row_id": "C",
+      "name": "Sophistication",
+      "max": 1,
+      "descriptors": {
+       "0": "Commentary stays at the level of identifying devices and their immediate effects; prose may be competent but the essay does not situate the rhetoric in its context, explore tensions, or sustain a nuanced argument. Ornate but empty language does not earn this point.",
+       "1": "The essay does at least one of the following consistently: explains how the rhetorical situation (a judge who has just ranked these children, addressing them in front of their parents) shapes or complicates her choices, such as her decision to address the champions first or to confront parents indirectly through the father who tore the card; recognizes tensions, such as how Oldacre admits judging involves taste yet insists craftsmanship is objective and how she reconciles them; or sustains a tightly argued, stylistically controlled analysis that treats the speech as a designed whole rather than a list of techniques."
+      },
+      "task_specific": "Observations that could support the point: Oldacre never names a current exhibitor or placing, keeping every example at a distance (Dennis fifteen years ago, an unnamed girl, an unnamed father) so no listener is singled out; her definition of craftsmanship reframes losing as information rather than verdict, which is the logical hinge of the whole speech; the understatement 'it was not something about lambs' lets the audience draw the harsh conclusion themselves."
+     }
+    ],
+    "scoring_notes": [
+     "The thesis may appear anywhere in the essay; scorers should look for an arguable claim about how Oldacre's choices serve her purpose.",
+     "Do not reward device-spotting. An essay that correctly labels eight devices but explains none beyond 'this appeals to the audience' should score no higher than 2 on Row B.",
+     "Accept analysis of choices not listed in the task-specific guidance as long as the evidence is in the passage and the commentary is sound.",
+     "Misreadings of the passage (for example, claiming Dennis won the first year, or that Oldacre says ribbons are worthless) should lower Row B by one level if the misreading undercuts the argument.",
+     "Row C can be earned with uneven prose if the insight is genuinely present; it cannot be earned by vocabulary alone.",
+     "Length is not a criterion; a focused three-paragraph essay may earn all six points."
+    ]
+   },
+   "expected_features": {
+    "defensible_positions": [
+     "Oldacre establishes authority through her record and candor, then uses a single exhibitor's story as a model of graceful losing that the audience can imitate.",
+     "Oldacre devalues the ribbon through definition, cost, and rhetorical question so that she can relocate the real prize to the exhibitor's own unseen hours of work.",
+     "Oldacre controls tone deliberately, moving from warm reminiscence to blunt confrontation and back to warmth, so that she can condemn ugly losing without humiliating any child present.",
+     "Oldacre reframes judging from a verdict into a measurement, which turns a loss into usable information and makes graceful acceptance seem rational rather than merely polite."
+    ],
+    "lines_of_reasoning": [
+     "Credibility first (sentences 1-4), then a concrete exemplar (5-11), then the anticipated objection answered (12-17), then the ribbon deflated and value relocated (18-23), then the harsh contrast (24-30), then direct instruction and the payoff of the exemplar (31-37).",
+     "The speech runs on two paired contrasts: ribbon versus hours, and losing versus being measured; each rhetorical choice serves one of those reversals.",
+     "Oldacre tailors every move to a mixed audience of winners, losers, and parents, addressing champions first, keeping examples anonymous, and rebuking adults only through a story."
+    ],
+    "rhetorical_choices": [
+     {
+      "device": "ethos",
+      "paragraph": 1,
+      "sentence_ids": [
+       2,
+       3,
+       4
+      ],
+      "effect": "The count of summers and entries, and the admission that she usually says 'not this year,' establish her as experienced and candid, so her later praise of losing cannot be dismissed as a winner's platitude."
+     },
+     {
+      "device": "direct_address",
+      "paragraph": 1,
+      "sentence_ids": [
+       1
+      ],
+      "effect": "Naming both ribbon-holders and the empty-handed in the first sentence tells every listener the speech is for them and frames winners and losers as one audience."
+     },
+     {
+      "device": "anecdote",
+      "paragraph": 2,
+      "sentence_ids": [
+       5,
+       6,
+       7,
+       8,
+       9,
+       10,
+       11
+      ],
+      "effect": "Dennis supplies a concrete, imitable model of accepting a red ribbon; the specific detail of the grain direction makes the judgment feel technical rather than arbitrary."
+     },
+     {
+      "device": "concession_and_rebuttal",
+      "paragraph": 3,
+      "sentence_ids": [
+       12,
+       13,
+       14,
+       15
+      ],
+      "effect": "By voicing the audience's suspicion that judging is taste and granting it partly, she earns the right to insist that most craftsmanship is testable."
+     },
+     {
+      "device": "parallelism",
+      "paragraph": 3,
+      "sentence_ids": [
+       15
+      ],
+      "effect": "The repeated either/or clauses across woodworking, livestock, and preserves make the standard feel universal and settle the objection with rhythm as much as logic."
+     },
+     {
+      "device": "definition",
+      "paragraph": 3,
+      "sentence_ids": [
+       16,
+       17
+      ],
+      "effect": "Defining craftsmanship as a promise kept to the material shifts the standard from the judge's opinion to the maker's own honesty, which is the heart of her purpose."
+     },
+     {
+      "device": "rhetorical_question",
+      "paragraph": 4,
+      "sentence_ids": [
+       18,
+       19,
+       20
+      ],
+      "effect": "Asking what a ribbon really is and answering with its forty-cent cost deflates the prize the children are fixated on."
+     },
+     {
+      "device": "statistic",
+      "paragraph": 4,
+      "sentence_ids": [
+       19
+      ],
+      "effect": "The precise, trivial price makes the ribbon's smallness tangible and slightly comic."
+     },
+     {
+      "device": "pathos",
+      "paragraph": 4,
+      "sentence_ids": [
+       21,
+       22,
+       23
+      ],
+      "effect": "The resanded joint nobody sees and the calf walked while friends were at the lake honor the audience's private sacrifices and relocate value to hours only they own."
+     },
+     {
+      "device": "tone_shift",
+      "paragraph": 5,
+      "sentence_ids": [
+       24,
+       25,
+       26,
+       27
+      ],
+      "effect": "The announced turn to plainness and the images of the kicked lamb and torn card jolt the audience out of comfortable agreement and show what bad losing actually looks like."
+     },
+     {
+      "device": "understatement",
+      "paragraph": 5,
+      "sentence_ids": [
+       27
+      ],
+      "effect": "Saying the lesson 'was not something about lambs' lets listeners, including parents, draw the harsh conclusion themselves."
+     },
+     {
+      "device": "repetition",
+      "paragraph": 5,
+      "sentence_ids": [
+       28,
+       29,
+       30
+      ],
+      "effect": "The short repeated 'did not lose' sentences build to the reframing of a placing as a measurement, and the brevity makes the point feel settled."
+     },
+     {
+      "device": "sentence_length_variation",
+      "paragraph": 5,
+      "sentence_ids": [
+       28,
+       29,
+       30
+      ],
+      "effect": "Two three-word sentences followed by a long explanatory one slow the delivery, then release the core idea that measuring is a kindness."
+     },
+     {
+      "device": "enumeration",
+      "paragraph": 6,
+      "sentence_ids": [
+       31,
+       32,
+       33,
+       34
+      ],
+      "effect": "A sequence of concrete imperatives converts the speech's ideas into actions the children can take that same afternoon."
+     },
+     {
+      "device": "juxtaposition",
+      "paragraph": 6,
+      "sentence_ids": [
+       35,
+       36
+      ],
+      "effect": "Returning to Dennis as a cabinetmaker whose drawers still close with a sigh echoes sentence 6 and proves the early loss was the beginning of his success."
+     },
+     {
+      "device": "metaphor",
+      "paragraph": 6,
+      "sentence_ids": [
+       37
+      ],
+      "effect": "Losing as the first half of a sentence hands authorship to the exhibitors and leaves them with agency rather than consolation."
+     }
+    ],
+    "source_uses": [
+     {
+      "source_id": "passage",
+      "usable_for": "All evidence must come from the passage; students should quote or precisely reference numbered sentences."
+     }
+    ],
+    "common_pitfalls": [
+     "Summarizing the Dennis story in detail rather than analyzing why Oldacre tells it, splits it across the speech, and withholds his success until the end.",
+     "Labeling 'ethos, pathos, logos' as the three body paragraphs without reference to the specific audience of children who have just been ranked.",
+     "Treating the concession in sentences 12-14 as Oldacre's actual position rather than a position she sets up to rebut.",
+     "Claiming Oldacre argues that ribbons do not matter at all, when she in fact addresses the champions first and asks them to lead.",
+     "Ignoring the tone shift in paragraph five or noting it without explaining why a speaker who opened gently would turn harsh and then soften again.",
+     "Quoting long stretches of the passage with little commentary, or paraphrasing without quoting anything specific.",
+     "Writing about what the speech 'makes the reader feel' in general terms rather than what it is designed to make a nine-to-eighteen-year-old exhibitor do next."
+    ]
+   },
+   "samples": [],
+   "blueprint": {
+    "theme": "honest craftsmanship and graceful losing",
+    "issue": "whether young competitors should measure themselves by ribbons or by the integrity of their own work and their conduct after a placing",
+    "stances": [
+     "Craftsmanship is an honest agreement between maker and material, not a judge's opinion.",
+     "A low placing is a measurement that tells the maker where to work next, not a verdict on the maker.",
+     "Graceful losing is a learnable habit, and champions bear the first responsibility for modeling it."
+    ],
+    "devices": [
+     {
+      "device": "direct_address",
+      "sentence_ids": [
+       1,
+       31
+      ],
+      "function": "Includes every listener, winners and losers alike, and later singles out champions to lead."
+     },
+     {
+      "device": "ethos",
+      "sentence_ids": [
+       2,
+       3,
+       4
+      ],
+      "function": "Establishes long experience and candor about saying no."
+     },
+     {
+      "device": "enumeration",
+      "sentence_ids": [
+       3,
+       31,
+       32,
+       33,
+       34
+      ],
+      "function": "Catalog of entries shows breadth; later imperatives give a sequence of actions."
+     },
+     {
+      "device": "anecdote",
+      "sentence_ids": [
+       5,
+       6,
+       7,
+       8,
+       9,
+       10,
+       11,
+       35,
+       36
+      ],
+      "function": "Dennis models graceful acceptance; his return proves the lesson pays."
+     },
+     {
+      "device": "concession_and_rebuttal",
+      "sentence_ids": [
+       12,
+       13,
+       14,
+       15
+      ],
+      "function": "Grants that taste plays a part, then insists most quality is testable."
+     },
+     {
+      "device": "parallelism",
+      "sentence_ids": [
+       15
+      ],
+      "function": "Either/or clauses across three divisions universalize the standard."
+     },
+     {
+      "device": "definition",
+      "sentence_ids": [
+       16,
+       17
+      ],
+      "function": "Redefines craftsmanship as honesty toward the material."
+     },
+     {
+      "device": "rhetorical_question",
+      "sentence_ids": [
+       18
+      ],
+      "function": "Invites the audience to reconsider the ribbon's worth."
+     },
+     {
+      "device": "statistic",
+      "sentence_ids": [
+       19
+      ],
+      "function": "Forty-cent cost deflates the prize."
+     },
+     {
+      "device": "pathos",
+      "sentence_ids": [
+       21,
+       22,
+       23
+      ],
+      "function": "Honors unseen labor and private sacrifice."
+     },
+     {
+      "device": "tone_shift",
+      "sentence_ids": [
+       24,
+       25,
+       26,
+       27
+      ],
+      "function": "Turns blunt to confront ugly losing, including by parents."
+     },
+     {
+      "device": "understatement",
+      "sentence_ids": [
+       27
+      ],
+      "function": "Lets listeners infer the harsh lesson themselves."
+     },
+     {
+      "device": "repetition",
+      "sentence_ids": [
+       28,
+       29,
+       30
+      ],
+      "function": "Hammers the reframing from losing to measuring."
+     },
+     {
+      "device": "sentence_length_variation",
+      "sentence_ids": [
+       28,
+       29,
+       30
+      ],
+      "function": "Short blows then a long release carrying the key idea."
+     },
+     {
+      "device": "antithesis",
+      "sentence_ids": [
+       33
+      ],
+      "function": "Learning versus resenting sets the two possible responses side by side."
+     },
+     {
+      "device": "metaphor",
+      "sentence_ids": [
+       37
+      ],
+      "function": "Losing as half a sentence gives the exhibitors authorship of what follows."
+     }
+    ]
+   },
+   "provenance": {
+    "kind": "original",
+    "note": "ALTON original practice material; fictional sources and attributions."
+   }
+  }
+ },
+ {
+  "id": "fe1",
+  "plan": {
+   "id": "fe1",
+   "type": "synthesis",
+   "theme": "whether cities should uncover buried streams and restore them as public waterways",
+   "seed": 19412
+  },
+  "payload": {
+   "schema_version": "el-frq-1",
+   "task_type": "synthesis",
+   "template": "q1",
+   "title": "Synthesis: Should Cities Uncover Buried Streams and Restore Them as Public Waterways?",
+   "prompt": {
+    "scenario": "Many older cities were built on top of small streams that were long ago enclosed in brick or concrete pipes and forgotten beneath roads and parking lots. In recent years some cities have begun to dig these streams back up, a practice often called daylighting, and to rebuild them as open channels with banks, footpaths, and small parks. Supporters describe lower flood damage, cooler streets, and new public space. Critics point to high costs, lost traffic lanes, long construction periods, rising rents, and the fact that the pipes were installed for reasons that have not gone away. Cities with limited budgets must decide whether, where, and on what terms to bring buried water back into the open.",
+    "task": "Carefully read the six sources that follow, including the introductory information for each. Then write an essay that synthesizes material from at least three of the sources and develops your position on whether cities should uncover buried streams and restore them as public waterways.",
+    "requirements": [
+     "Take a clear, defensible position on whether, and under what conditions, cities should uncover buried streams; a conditional or limited position is acceptable as long as it is specific.",
+     "Use material from at least three of the six sources to support your line of reasoning, citing each as Source A, Source B, and so on (or by the writer's name).",
+     "Your argument must be your own; the sources are evidence for your reasoning, not a substitute for it, so explain how each piece of evidence supports your claim rather than summarizing the sources.",
+     "Treat the quantitative and visual sources (Source E and Source F) as evidence to be interpreted, not merely reported."
+    ]
+   },
+   "sources": [
+    {
+     "id": "A",
+     "kind": "text",
+     "title": "Carrow Creek Returns to Daylight After Ninety Years",
+     "attribution": "Tamsin Okoro-Beale, staff reporter, the Orvell Ledger, 2024",
+     "genre": "news report",
+     "body": "For ninety years the water beneath Larkin Street ran through a brick culvert that nobody saw and almost nobody remembered. On Saturday morning, after three years of construction and 14 million dollars, the city opened 600 meters of Carrow Creek to the sky, complete with a stepped bank, a footbridge, and a strip of grass that engineers call a floodplain and children at the ribbon cutting called a beach.\n\nCity engineer Marisol Quayle said the project was never only about scenery. The old culvert, she said, was built for a smaller city with fewer roofs and parking lots, and during heavy storms it backed up into basements along four blocks. Figures released this week by the Merrow Basin Water Authority show that flood-damage claims within 400 meters of the creek fell 38 percent over the first two rainy seasons after the channel opened, compared with the two seasons before.\n\nNot everyone on Larkin Street is celebrating. One traffic lane is gone for good, along with eleven metered parking spaces, and Dov Ashenbrenner, who has run a bakery on the corner for twenty-two years, said his delivery trucks now circle the block. \"I like the ducks,\" he said. \"I liked my customers more.\" The city offered no compensation to businesses for the construction period, which ran eight months past schedule.\n\nStill, by noon the footbridge was crowded. A woman who grew up two streets over said her grandmother used to tell her there was a river under the road, and she had never quite believed it.",
+     "paragraphs": [
+      [
+       "For ninety years the water beneath Larkin Street ran through a brick culvert that nobody saw and almost nobody remembered.",
+       "On Saturday morning, after three years of construction and 14 million dollars, the city opened 600 meters of Carrow Creek to the sky, complete with a stepped bank, a footbridge, and a strip of grass that engineers call a floodplain and children at the ribbon cutting called a beach."
+      ],
+      [
+       "City engineer Marisol Quayle said the project was never only about scenery.",
+       "The old culvert, she said, was built for a smaller city with fewer roofs and parking lots, and during heavy storms it backed up into basements along four blocks.",
+       "Figures released this week by the Merrow Basin Water Authority show that flood-damage claims within 400 meters of the creek fell 38 percent over the first two rainy seasons after the channel opened, compared with the two seasons before."
+      ],
+      [
+       "Not everyone on Larkin Street is celebrating.",
+       "One traffic lane is gone for good, along with eleven metered parking spaces, and Dov Ashenbrenner, who has run a bakery on the corner for twenty-two years, said his delivery trucks now circle the block.",
+       "\"I like the ducks,\" he said.",
+       "\"I liked my customers more.\"",
+       "The city offered no compensation to businesses for the construction period, which ran eight months past schedule."
+      ],
+      [
+       "Still, by noon the footbridge was crowded.",
+       "A woman who grew up two streets over said her grandmother used to tell her there was a river under the road, and she had never quite believed it."
+      ]
+     ],
+     "stance": "Largely favorable account of a completed project that also records costs, delays, and local complaints",
+     "provenance": {
+      "kind": "original",
+      "author_alias": "Tamsin Okoro-Beale",
+      "year_alias": 2024
+     }
+    },
+    {
+     "id": "B",
+     "kind": "text",
+     "title": "A Pipe Is Not a Crime",
+     "attribution": "Rudiger Fenn, opinion columnist, the Eastmark Review, 2025",
+     "genre": "op-ed",
+     "body": "Every few years a city rediscovers that it has a stream under it and reacts as if it had found a kidnapped child. Our ancestors did not bury these creeks out of spite. They buried them because open water in a dense city carried sewage, bred mosquitoes, flooded cellars, and stank in August. The pipe was the solution, and for most of a century it has worked.\n\nEastmark has already spent 5.9 million dollars to open 180 meters of Hollis Run between two apartment blocks, and the brochure promised kingfishers. There is no room for kingfishers. There is room for a concrete trough with a railing, which is a postcard, not an ecosystem. Flood claims nearby dropped 4 percent, which is what you get from an ordinary dry year. In Orvell, the celebrated Carrow Creek project cost more than 23,000 dollars per meter. For that money a city can replace kilometers of failing water mains, the unglamorous kind that break in February and leave a neighborhood boiling its water.\n\nI am told that opened streams reduce flooding. Sometimes they do, where there is land to spare. Downtown there is no land to spare, which is why the stream was buried in the first place. What an open channel reliably delivers is a lane of traffic lost, a year of jackhammers, and a public space that someone must then mow, police, and fish shopping carts out of.\n\nNow the council wants to do it again on Pellam Street. If the culvert under Pellam Street is failing, replace the culvert. Sentiment about rivers is a fine thing for poets. It is a poor way to size a budget.",
+     "paragraphs": [
+      [
+       "Every few years a city rediscovers that it has a stream under it and reacts as if it had found a kidnapped child.",
+       "Our ancestors did not bury these creeks out of spite.",
+       "They buried them because open water in a dense city carried sewage, bred mosquitoes, flooded cellars, and stank in August.",
+       "The pipe was the solution, and for most of a century it has worked."
+      ],
+      [
+       "Eastmark has already spent 5.9 million dollars to open 180 meters of Hollis Run between two apartment blocks, and the brochure promised kingfishers.",
+       "There is no room for kingfishers.",
+       "There is room for a concrete trough with a railing, which is a postcard, not an ecosystem.",
+       "Flood claims nearby dropped 4 percent, which is what you get from an ordinary dry year.",
+       "In Orvell, the celebrated Carrow Creek project cost more than 23,000 dollars per meter.",
+       "For that money a city can replace kilometers of failing water mains, the unglamorous kind that break in February and leave a neighborhood boiling its water."
+      ],
+      [
+       "I am told that opened streams reduce flooding.",
+       "Sometimes they do, where there is land to spare.",
+       "Downtown there is no land to spare, which is why the stream was buried in the first place.",
+       "What an open channel reliably delivers is a lane of traffic lost, a year of jackhammers, and a public space that someone must then mow, police, and fish shopping carts out of."
+      ],
+      [
+       "Now the council wants to do it again on Pellam Street.",
+       "If the culvert under Pellam Street is failing, replace the culvert.",
+       "Sentiment about rivers is a fine thing for poets.",
+       "It is a poor way to size a budget."
+      ]
+     ],
+     "stance": "Opposed: buried pipes work, daylighting is costly sentiment, and money should go to basic infrastructure",
+     "provenance": {
+      "kind": "original",
+      "author_alias": "Rudiger Fenn",
+      "year_alias": 2025
+     }
+    },
+    {
+     "id": "C",
+     "kind": "text",
+     "title": "Water Needs Room: A Conversation with Hydrologist Ilse Vantongeren",
+     "attribution": "Interview excerpt, Quarterly Bulletin of the Brightwater Institute for Urban Water (a fictional research body), 2025",
+     "genre": "interview excerpt",
+     "body": "Interviewer: Does uncovering a stream actually reduce flooding?\n\nVantongeren: It can, but the stream is not the point; the room around it is. A pipe has a fixed capacity. When a storm exceeds it, the water goes somewhere, and that somewhere is usually a basement. An open channel with a strip of floodplain beside it lets the water spread, slow down, and soak in. Take away the floodplain and you have an open pipe. It looks nicer. It does not hold more water.\n\nInterviewer: So the projects that disappoint people are the ones without that strip?\n\nVantongeren: Usually the ones squeezed between buildings. In our basin data, the projects with a hectare or more of adjacent floodplain park show flood-claim reductions in the forties of percent. The one with no floodplain at all shows almost nothing. That is not an argument against uncovering streams. It is an argument against pretending that a channel is a floodplain.\n\nInterviewer: What would you tell a city council weighing a project?\n\nVantongeren: Three things. First, start where the old culvert is nearest the end of its life, because then you are comparing the cost of daylighting against the cost of replacement, not against zero. Second, pair the channel with rain gardens and permeable paving upstream; the stream handles the water that arrives, and the gardens reduce how much arrives. Third, do not promise an ecosystem. Promise a flood-management tool that people can sit beside. If an otter turns up, enjoy it.",
+     "paragraphs": [
+      [
+       "Interviewer: Does uncovering a stream actually reduce flooding?"
+      ],
+      [
+       "Vantongeren: It can, but the stream is not the point; the room around it is.",
+       "A pipe has a fixed capacity.",
+       "When a storm exceeds it, the water goes somewhere, and that somewhere is usually a basement.",
+       "An open channel with a strip of floodplain beside it lets the water spread, slow down, and soak in.",
+       "Take away the floodplain and you have an open pipe.",
+       "It looks nicer.",
+       "It does not hold more water."
+      ],
+      [
+       "Interviewer: So the projects that disappoint people are the ones without that strip?"
+      ],
+      [
+       "Vantongeren: Usually the ones squeezed between buildings.",
+       "In our basin data, the projects with a hectare or more of adjacent floodplain park show flood-claim reductions in the forties of percent.",
+       "The one with no floodplain at all shows almost nothing.",
+       "That is not an argument against uncovering streams.",
+       "It is an argument against pretending that a channel is a floodplain."
+      ],
+      [
+       "Interviewer: What would you tell a city council weighing a project?"
+      ],
+      [
+       "Vantongeren: Three things.",
+       "First, start where the old culvert is nearest the end of its life, because then you are comparing the cost of daylighting against the cost of replacement, not against zero.",
+       "Second, pair the channel with rain gardens and permeable paving upstream; the stream handles the water that arrives, and the gardens reduce how much arrives.",
+       "Third, do not promise an ecosystem.",
+       "Promise a flood-management tool that people can sit beside.",
+       "If an otter turns up, enjoy it."
+      ]
+     ],
+     "stance": "Conditional: daylighting works as flood management only where there is floodplain room, when timed with culvert replacement, and paired with upstream measures",
+     "provenance": {
+      "kind": "original",
+      "author_alias": "Ilse Vantongeren",
+      "year_alias": 2025
+     }
+    },
+    {
+     "id": "D",
+     "kind": "text",
+     "title": "Letter to the Orvell City Council from the Lower Pennick Neighborhood Council",
+     "attribution": "Henrietta Baskerville-Oyelaran, chair, Lower Pennick Neighborhood Council (a fictional residents' group), 2025",
+     "genre": "letter",
+     "body": "Dear Council Members,\n\nOur neighborhood sits on top of the Pennick Drain, and the water comes up through our floors most Aprils. We have watched the opening of Carrow Creek with interest and some envy, and we write to say that we want the same for Lower Pennick. We also write to say what we are afraid of.\n\nWithin two years of the Carrow Creek ribbon cutting, advertised rents on the blocks facing the new park rose 19 percent, against 9 percent across the city. Three of the five families on our council have rented here for more than fifteen years. A creek we cannot afford to live beside is not a gift to us. It is a gift to whoever replaces us.\n\nWe are therefore asking for four commitments before any shovel goes into the ground. First, that the city housing office be a named partner in the project rather than an afterthought. Second, that a fixed share of the park budget be reserved for repairing the basements that flood now, this year, not after construction. Third, that residents, not consultants, choose what goes on the banks. Fourth, that the construction schedule be published with penalties for delay, because our members cannot run a corner store beside a trench for a year and a half.\n\nWe know the city cannot promise that nobody will ever sell a house for more money. We are asking only that the people who have lived with the water in the dark be the ones who get to enjoy it in the light.\n\nRespectfully,\nHenrietta Baskerville-Oyelaran, Chair",
+     "paragraphs": [
+      [
+       "Dear Council Members,"
+      ],
+      [
+       "Our neighborhood sits on top of the Pennick Drain, and the water comes up through our floors most Aprils.",
+       "We have watched the opening of Carrow Creek with interest and some envy, and we write to say that we want the same for Lower Pennick.",
+       "We also write to say what we are afraid of."
+      ],
+      [
+       "Within two years of the Carrow Creek ribbon cutting, advertised rents on the blocks facing the new park rose 19 percent, against 9 percent across the city.",
+       "Three of the five families on our council have rented here for more than fifteen years.",
+       "A creek we cannot afford to live beside is not a gift to us.",
+       "It is a gift to whoever replaces us."
+      ],
+      [
+       "We are therefore asking for four commitments before any shovel goes into the ground.",
+       "First, that the city housing office be a named partner in the project rather than an afterthought.",
+       "Second, that a fixed share of the park budget be reserved for repairing the basements that flood now, this year, not after construction.",
+       "Third, that residents, not consultants, choose what goes on the banks.",
+       "Fourth, that the construction schedule be published with penalties for delay, because our members cannot run a corner store beside a trench for a year and a half."
+      ],
+      [
+       "We know the city cannot promise that nobody will ever sell a house for more money.",
+       "We are asking only that the people who have lived with the water in the dark be the ones who get to enjoy it in the light."
+      ],
+      [
+       "Respectfully,",
+       "Henrietta Baskerville-Oyelaran, Chair"
+      ]
+     ],
+     "stance": "Conditional support: residents want the project but demand anti-displacement and scheduling protections",
+     "provenance": {
+      "kind": "original",
+      "author_alias": "Henrietta Baskerville-Oyelaran",
+      "year_alias": 2025
+     }
+    },
+    {
+     "id": "E",
+     "kind": "quantitative",
+     "title": "Five Stream-Uncovering Projects in the Merrow River Basin: Length, Cost, Floodplain, and Flood Claims",
+     "attribution": "Compiled from project records of the Merrow Basin Water Authority (a fictional regional body), 2024",
+     "genre": "data table",
+     "body": "The table lists five stream-uncovering projects completed in the Merrow River basin between 2016 and 2023, as recorded by the Merrow Basin Water Authority. The change in flood-damage claims compares the two rainy seasons after completion with the two seasons before, for properties within 400 meters of each project.",
+     "table": {
+      "columns": [
+       "Project (city)",
+       "Length uncovered (meters)",
+       "Total cost (millions of dollars)",
+       "Adjacent floodplain park (hectares)",
+       "Change in flood-damage claims (percent)"
+      ],
+      "rows": [
+       [
+        "Carrow Creek (Orvell)",
+        600,
+        14,
+        2.4,
+        -38
+       ],
+       [
+        "Tilling Brook (Sader Falls)",
+        350,
+        6.2,
+        1.1,
+        -41
+       ],
+       [
+        "Hollis Run (Eastmark)",
+        180,
+        5.9,
+        0,
+        -4
+       ],
+       [
+        "Sallow Brook (Orvell)",
+        420,
+        9.8,
+        0.6,
+        -22
+       ],
+       [
+        "Fenwick Branch (Marrowby)",
+        900,
+        21.5,
+        3.8,
+        -47
+       ]
+      ]
+     },
+     "stance": "Informational: shows that flood benefits vary widely and track adjacent floodplain area rather than cost or length",
+     "provenance": {
+      "kind": "original",
+      "author_alias": "Merrow Basin Water Authority",
+      "year_alias": 2024
+     }
+    },
+    {
+     "id": "F",
+     "kind": "visual",
+     "title": "How Orvell Residents Would Spend a Hypothetical 10-Million-Dollar Stormwater Budget",
+     "attribution": "Survey of 1,200 Orvell adults by Calder Street Polling (a fictional firm), 2025",
+     "genre": "bar chart",
+     "body": "Respondents were asked which single use they would choose for a hypothetical 10-million-dollar stormwater budget. Results are shown separately for residents living inside and outside the city's mapped flood zones.",
+     "figure": {
+      "chart": "bar",
+      "title": "Preferred single use of a 10-million-dollar stormwater budget, Orvell, 2025",
+      "categories": [
+       "Replace aging",
+       "Uncover",
+       "Rain gardens",
+       "Flood",
+       "No additional"
+      ],
+      "series": [
+       {
+        "name": "Residents inside mapped flood zones (percent)",
+        "values": [
+         38,
+         21,
+         17,
+         19,
+         5
+        ]
+       },
+       {
+        "name": "Residents outside flood zones (percent)",
+        "values": [
+         27,
+         30,
+         23,
+         6,
+         14
+        ]
+       }
+      ],
+      "xTitle": "Preferred use of the budget",
+      "yTitle": "Share of respondents (percent)",
+      "description": "A grouped bar chart with five categories and two bars each. Among residents inside flood zones, 38 percent chose replacing aging pipes, 21 percent chose uncovering buried streams, 17 percent chose rain gardens and permeable paving, 19 percent chose flood barriers, and 5 percent chose no additional spending. Among residents outside flood zones, 27 percent chose replacing pipes, 30 percent chose uncovering streams, 23 percent chose rain gardens, 6 percent chose flood barriers, and 14 percent chose no additional spending. Categories: Replace aging = Replace aging pipes; Uncover = Uncover buried streams; Rain gardens = Rain gardens and permeable paving; Flood = Flood barriers; No additional = No additional spending."
+     },
+     "stance": "Informational: residents at flood risk favor pipes and barriers, while residents outside flood zones are the strongest supporters of uncovering streams",
+     "provenance": {
+      "kind": "original",
+      "author_alias": "Calder Street Polling",
+      "year_alias": 2025
+     }
+    }
+   ],
+   "rubric": {
+    "total_points": 6,
+    "rows": [
+     {
+      "row_id": "A",
+      "name": "Thesis",
+      "max": 1,
+      "descriptors": {
+       "0": "No position is taken, or the thesis merely restates the prompt (for example, 'Cities must decide whether to uncover buried streams'), or it only announces that there are advantages and disadvantages without choosing, or it summarizes the sources without committing to a claim.",
+       "1": "The response states a defensible position on whether cities should uncover buried streams. The position may be unconditional (yes or no), conditional (yes only where there is floodplain room, when a culvert is already failing, with anti-displacement protections), or comparative (prefer rain gardens or pipe replacement over daylighting). A thesis earns the point if a reader could disagree with it and if it governs the essay, even if it appears at the end rather than the opening."
+      },
+      "task_specific": "A conditional thesis counts only when the condition is specific (floodplain space, culvert age, housing protections, flood-zone priority). 'Cities should uncover streams when it makes sense' is too vague to be defensible and earns 0."
+     },
+     {
+      "row_id": "B",
+      "name": "Evidence and Commentary",
+      "max": 4,
+      "descriptors": {
+       "0": "Restates the thesis, offers only personal opinion with no reference to the sources, or references sources in ways that are irrelevant or inaccurate.",
+       "1": "Uses fewer than three sources, or uses three or more only as a parade of summaries ('Source A says the creek opened. Source B disagrees.') with no connection to a claim. Evidence may be general ('Source E shows the data') and commentary is absent or restates the evidence.",
+       "2": "Uses at least three sources with some relevance to the thesis, but commentary is thin or uneven: the writer quotes or cites a figure and then asserts that it proves the point without explaining how. Typical of this level: citing the 38 percent drop in Source A as proof daylighting works without noticing that Source E and Source C show the benefit depends on floodplain area; or citing Source B's cost-per-meter figure without addressing the replacement-cost comparison in Source C. Sources may be used one at a time in separate paragraphs with no interaction.",
+       "3": "Uses at least three sources as specific, accurately represented evidence and explains how each supports a coherent line of reasoning. At least some commentary interprets rather than reports: for example, reading Source E to show that Hollis Run's weak result (0.0 hectares, minus 4 percent) and Fenwick Branch's strong result (3.8 hectares, minus 47 percent) support Vantongeren's claim in Source C, or reading Source F to show that the amenity appeal of daylighting is strongest among people who do not flood. Reasoning may contain small gaps, or one source may be handled less well than the others.",
+       "4": "Meets the level-3 standard throughout, and the sources are placed in conversation with each other and with the writer's own claim. Evidence is chosen deliberately: the writer notices tensions (Source A's favorable report contains the complaints Source B exploits; Source D wants what Source A got but fears its side effects; Source F complicates the assumption that flood victims are the main constituency for daylighting). Commentary consistently explains why the evidence matters to the position, and the line of reasoning develops rather than repeats across paragraphs."
+      },
+      "task_specific": "Counting toward the three-source minimum: any accurate, purposeful use of Sources A-F, including a single figure from Source E or F if it is interpreted. Not counting: mentioning a source by letter without content, misreporting a figure (for example, claiming Source E shows all projects reduce flooding by about 40 percent), or using Source F as if it measured support for daylighting in general rather than preferred use of a fixed budget. A writer who argues against daylighting can reach 4 using Sources B, E (Hollis Run and Sallow Brook), and F (flood-zone residents prefer pipes) just as readily as a supporter."
+     },
+     {
+      "row_id": "C",
+      "name": "Sophistication",
+      "max": 1,
+      "descriptors": {
+       "0": "Prose is competent but the argument stays inside a single frame, or complexity is announced rather than demonstrated ('This is a complicated issue with many sides'). Ornate or inflated language, sweeping generalizations about nature or cities, or a concluding sentence that gestures at nuance without doing any work do not earn the point.",
+       "1": "The response does at least one of the following consistently rather than in a single sentence: it explains why the same facts look different to different parties (a park that is an amenity to Source F's non-flood-zone residents is a rent increase to Source D's tenants and a lost lane to Source A's baker); it identifies and examines a limitation of its own position (a conditional thesis acknowledges that 'wait for the culvert to fail' delays relief for people who flood now, as Source D's second demand points out); it situates the debate in a broader tension such as who pays for and who benefits from public works; or it sustains a controlled, distinctive style that advances the argument."
+      },
+      "task_specific": "The strongest sophisticated responses tend to notice that the question 'should cities daylight streams' hides a prior question about what the project is for: flood management, public space, or ecology. Essays that make that distinction and use it to sort the sources (Source C and E speak to flood management, Source D and F to who gets the public space, Source B to the ecology claim) usually earn this point."
+     }
+    ],
+    "scoring_notes": [
+     "A score of 6 requires 1 + 4 + 1. The sophistication point is independent of the evidence score; a 1-3-1 essay is possible but rare.",
+     "Do not penalize a position for being unpopular. Opposition to daylighting, support for rain gardens instead, or a flood-zone-first priority rule are all defensible with these sources.",
+     "Verify numbers against the sources. The Carrow Creek project is 600 meters, 14 million dollars, 38 percent fewer claims; Hollis Run is 180 meters, 5.9 million dollars, 4 percent fewer claims. Source B's figure of more than 23,000 dollars per meter is consistent with Source A (14 million divided by 600). Essays that misstate these figures lose credit in Row B for inaccurate evidence.",
+     "Source F reports a forced single choice from a fixed budget; it does not measure whether residents like streams. An essay claiming 'only 21 percent of flood-zone residents support daylighting' is misreading, while 'flood-zone residents rank it below pipes and nearly even with barriers' is accurate.",
+     "Quotations are not required. Accurate paraphrase with attribution counts as use of a source.",
+     "Length alone earns nothing. A tight four-paragraph essay that reads Source E correctly outscores a long essay that walks through all six sources in order."
+    ]
+   },
+   "expected_features": {
+    "defensible_positions": [
+     "Cities should uncover buried streams wherever feasible, because the flood benefits (Sources A, E), public enthusiasm (Source A, Source F among non-flood-zone residents), and neighborhood demand (Source D) outweigh the costs.",
+     "Cities should not uncover buried streams as a general policy; they should replace failing culverts and spend on pipes, which is what residents at actual flood risk prefer (Sources B, F, and the Hollis Run row of Source E).",
+     "Cities should uncover streams only where there is room for a real floodplain and the existing culvert is near the end of its life, and should pair the channel with upstream rain gardens (Sources C and E, with Source B's cost objection partly answered).",
+     "Cities should uncover streams first in neighborhoods that flood now, and only with housing protections and construction guarantees written into the project, because without them the benefit flows to newcomers (Sources D, A, and F).",
+     "Cities should prioritize cheaper distributed measures such as rain gardens and permeable paving, treating daylighting as an occasional showcase rather than a strategy (Sources C and F, with Source E to show cost per project)."
+    ],
+    "lines_of_reasoning": [
+     "The purpose test: decide what the project is for (flood control, public space, or ecology), then judge each source's evidence against that purpose.",
+     "The floodplain pattern: use Source E's floodplain column alongside Source C to argue that the physical site, not the idea, determines success, and apply that to Source B's Hollis Run complaint.",
+     "The who-benefits analysis: combine Source D's rent figures, Source A's baker, and Source F's split between flood-zone and non-flood-zone residents to argue about distribution of costs and benefits.",
+     "The opportunity-cost comparison: weigh Source B's cost-per-meter argument against Source C's point that the fair comparison is daylighting versus culvert replacement, not versus nothing.",
+     "The sequencing argument: accept daylighting but order it after immediate basement repairs and housing commitments, drawing on Source D's four demands."
+    ],
+    "rhetorical_choices": [
+     {
+      "device": "metaphor",
+      "paragraph": 2,
+      "sentence_ids": [
+       7
+      ],
+      "effect": "Source B's 'a postcard, not an ecosystem' compresses the objection that a railed concrete channel delivers appearance without function, giving the opposing stance a memorable phrase students can test against Source E."
+     },
+     {
+      "device": "anecdote",
+      "paragraph": 3,
+      "sentence_ids": [
+       8,
+       9
+      ],
+      "effect": "Source A's baker ('I like the ducks. I liked my customers more.') embodies the local cost of a project the article otherwise celebrates, letting students show that a favorable source contains counter-evidence."
+     },
+     {
+      "device": "antithesis",
+      "paragraph": 5,
+      "sentence_ids": [
+       14
+      ],
+      "effect": "Source D's 'water in the dark' against 'enjoy it in the light' turns the technical question into a fairness claim about who has endured the flooding and who should receive the park."
+     },
+     {
+      "device": "enumeration",
+      "paragraph": 6,
+      "sentence_ids": [
+       16,
+       17,
+       18,
+       19
+      ],
+      "effect": "Source C's three numbered recommendations give students a ready-made structure for a conditional thesis and a way to answer Source B's cost objection with the replacement-cost comparison."
+     },
+     {
+      "device": "cause_effect_chain",
+      "paragraph": 2,
+      "sentence_ids": [
+       2,
+       3,
+       4
+      ],
+      "effect": "Source C's pipe-capacity explanation (fixed capacity, excess water, basement) supplies the mechanism that makes the Source E floodplain pattern intelligible rather than merely correlational."
+     }
+    ],
+    "source_uses": [
+     {
+      "source_id": "A",
+      "usable_for": "A concrete completed example with cost, length, flood-claim reduction, delay, and local complaints; usable by supporters for results and by critics for the lost lane, parking, delay, and lack of compensation."
+     },
+     {
+      "source_id": "B",
+      "usable_for": "The strongest case against: historical reasons for burying streams, cost per meter, the Hollis Run disappointment, opportunity cost in water mains, and the argument that failing culverts should simply be replaced."
+     },
+     {
+      "source_id": "C",
+      "usable_for": "The expert conditional position: floodplain room determines flood benefit; compare daylighting cost with replacement cost; pair with rain gardens; do not promise ecology. Also explains the pattern in Source E."
+     },
+     {
+      "source_id": "D",
+      "usable_for": "The equity dimension: residents who flood want the project but fear rent increases (19 percent versus 9 percent citywide) and long construction; four concrete conditions for support."
+     },
+     {
+      "source_id": "E",
+      "usable_for": "Evidence that outcomes vary (minus 4 to minus 47 percent) and track adjacent floodplain hectares rather than cost or length; supports C, qualifies A, and partly supports B on Hollis Run."
+     },
+     {
+      "source_id": "F",
+      "usable_for": "Evidence about who wants what: residents in flood zones prefer pipes (38 percent) and barriers (19 percent) over streams (21 percent), while residents outside flood zones rank streams first (30 percent); usable to argue that daylighting is an amenity more than a flood tool in public perception, or that flood-zone priorities should govern spending."
+     }
+    ],
+    "common_pitfalls": [
+     "Treating the question as pro versus con and ignoring the conditional positions offered by Sources C and D, which are the richest material.",
+     "Citing the Carrow Creek flood reduction (Source A) as if it were typical, when Source E shows results ranging from minus 4 to minus 47 percent.",
+     "Reading Source E as a list rather than a pattern; the floodplain column is the key variable and most students skip it.",
+     "Misreading Source F as a general approval rating for daylighting instead of a forced choice among budget uses.",
+     "Dismissing Source B as mere cynicism rather than engaging with its strongest point: the replacement-cost comparison, which Source C partly concedes.",
+     "Summarizing each source in turn ('Source A says... Source B says...') instead of organizing paragraphs around the writer's own reasons.",
+     "Using Source D only for the rent statistic and missing its argument that flood relief for current residents should precede park construction.",
+     "Claiming that daylighting restores ecosystems when no source supports that claim and Sources B and C both argue against promising it.",
+     "Stating that the issue is complex in the conclusion instead of showing complexity in the body."
+    ]
+   },
+   "samples": [],
+   "blueprint": {
+    "theme": "Public works, environment, and who benefits from urban change",
+    "issue": "Whether cities should uncover buried streams and restore them as public waterways, and if so where and on what terms",
+    "stances": [
+     "Unconditional support: daylight streams broadly for flood relief and public space",
+     "Opposition: keep or replace pipes; daylighting is costly sentiment with uneven flood benefit",
+     "Engineering-conditional: daylight only where floodplain room exists, when culverts need replacement, paired with upstream measures",
+     "Equity-conditional: daylight in flooding neighborhoods first, with housing and construction protections",
+     "Alternative: prefer distributed measures such as rain gardens over channel projects"
+    ],
+    "devices": [
+     {
+      "device": "metaphor",
+      "sentence_ids": [
+       7
+      ],
+      "function": "Source B frames a railed channel as a postcard rather than an ecosystem to deflate the ecological promise."
+     },
+     {
+      "device": "anecdote",
+      "sentence_ids": [
+       8,
+       9
+      ],
+      "function": "Source A's baker quotation gives the favorable report an internal counterweight."
+     },
+     {
+      "device": "antithesis",
+      "sentence_ids": [
+       14
+      ],
+      "function": "Source D's dark-versus-light closing turns the issue into a fairness claim."
+     },
+     {
+      "device": "enumeration",
+      "sentence_ids": [
+       16,
+       17,
+       18,
+       19
+      ],
+      "function": "Source C's numbered advice models a conditional position."
+     },
+     {
+      "device": "statistic",
+      "sentence_ids": [
+       5
+      ],
+      "function": "Source A's 38 percent claim reduction anchors the supporters' case and is qualified by Source E."
+     },
+     {
+      "device": "juxtaposition",
+      "sentence_ids": [
+       4
+      ],
+      "function": "Source D sets a 19 percent rent rise beside the 9 percent citywide figure to show displacement pressure."
+     }
+    ]
+   },
+   "provenance": {
+    "kind": "original",
+    "note": "ALTON original practice material; fictional sources and attributions."
+   }
+  }
+ }
+]

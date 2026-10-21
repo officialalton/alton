@@ -1,0 +1,806 @@
+[
+ {
+  "id": "wh3_saq1",
+  "spec": {
+   "id": "wh3_saq1",
+   "exam": "WH3",
+   "template": "saq1",
+   "era": 2,
+   "units": [
+    4
+   ],
+   "focus": "The organization of scientific inquiry in 17th-century Europe: informal groups of scholars and the founding of the Royal Society of London (do not claim the society was the first scientific body anywhere)",
+   "sources": [
+    {
+     "id": "txt-libby-science-1917",
+     "context": "Walter Libby was an American historian of science who wrote this textbook in 1917."
+    }
+   ],
+   "seed": 4301
+  },
+  "payload": {
+   "schema_version": "whap-frq-1",
+   "task_type": "saq",
+   "template": "saq1",
+   "era": 2,
+   "units": [
+    4
+   ],
+   "title": "Informal Scholarly Gatherings and the Royal Society of London, 17th Century",
+   "prompt": {
+    "scenario": "In the period c. 1450 to c. 1750, new ways of studying the natural world developed in Europe, and scholars began to organize their inquiry through regular meetings, correspondence and formal societies. In 1917 the historian of science Walter Libby described the origins of the Royal Society of London.",
+    "task": "Using the excerpt, answer (a), (b), and (c).",
+    "requirements": [
+     "Responses to (b) and (c) must use specific historical evidence from the stated years beyond the people, places and works named in the excerpt.",
+     "Each part is scored separately."
+    ],
+    "parts": [
+     {
+      "label": "A",
+      "prompt": "Briefly describe ONE claim Libby makes about how the group that became the Royal Society of London was organized or who belonged to it before 1662.",
+      "points": 1
+     },
+     {
+      "label": "B",
+      "prompt": "Briefly explain ONE specific historical development in Europe in the period 1600 to 1700, not mentioned in the excerpt, that helps explain why scholars like those described by Libby met to share experiments and observations.",
+      "points": 1
+     },
+     {
+      "label": "C",
+      "prompt": "Briefly explain ONE way that the organization of scientific or astronomical inquiry in a region outside England in the period 1450 to 1750 was similar to OR different from the gatherings Libby describes.",
+      "points": 1
+     }
+    ]
+   },
+   "sources": [
+    {
+     "id": "A",
+     "kind": "secondary_text",
+     "title": "An Introduction to the History of Science (excerpt on the Royal Society)",
+     "attribution": "Walter Libby, American historian of science, 1917 (Boston: Houghton Mifflin). Project Gutenberg eBook #40706. Reuse: public domain in the United States (published before 1929). excerpted (1 segment); whitespace normalized; no wording changed.",
+     "context": "Walter Libby was an American historian of science who wrote this textbook in 1917.",
+     "real_data": true,
+     "source_registry_id": "txt-libby-science-1917",
+     "source_sha256": "f9fa16c9c7c8e97450e105c967e187e8aebae4b0a422dc73373a9e07fd6d614f",
+     "body": "These philosophers whom Boyle entertained, and whose scientific acumen, breadth of mind, humility, and universal good-will he found so congenial, were the nucleus of the Royal Society of London, of which, on its definite organization in 1662, he was the foremost member. They had begun to meet together in London about 1645, worthy persons inquisitive into natural philosophy--Wilkins, interested in the navigation of the air and of waters below the surface; Wallis, mathematician and grammarian; the many-sided Petty, political economist, and inventor of a double-bottomed boat, who had as a youth of twenty studied with Hobbes in Paris in 1643, and in 1648 was to write his first treatise on industrial education at the suggestion of Hartlib, and finally make a survey of Ireland and acquire large estates; Foster, professor of astronomy at Gresham College; Theodore Haak from the Pfalz; a number of medical men, Dr. Merret, Dr. Ent, a friend of Harvey, Dr. Goddard, who could always be relied upon to undertake an experiment, Dr. Glisson, the physiologist, author in 1654 of a treatise on the liver (De Hepate), and others. They met once a week at Goddard's in Wood Street, at the Bull's Head Tavern in Cheapside, and at Gresham College.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry txt-libby-science-1917"
+     }
+    }
+   ],
+   "rubric": {
+    "rubric_id": "whap-v1",
+    "total_points": 3,
+    "rows": [
+     {
+      "row_id": "a",
+      "name": "Part A",
+      "max": 1,
+      "descriptors": {
+       "0": "The response does not describe a claim from the excerpt, misreads it, or only repeats a name with no description.",
+       "1": "The response accurately describes one claim from the excerpt about the group's meetings, membership, interests or connection to the 1662 society."
+      },
+      "task_specific": "Describe a claim the excerpt actually makes: for example that the group met informally about once a week from about 1645 in a private house, a tavern and Gresham College; that its members had varied interests (mathematics, astronomy, medicine, navigation, political economy); that many members were physicians; that it included a foreign-born scholar; or that this circle formed the nucleus of the Royal Society organized in 1662, with Boyle as its leading member."
+     },
+     {
+      "row_id": "b",
+      "name": "Part B",
+      "max": 1,
+      "descriptors": {
+       "0": "The response names no accurate development from the stated years, relies only on the excerpt's own examples, or gives no link to collaborative inquiry.",
+       "1": "The response explains one accurate, specific development from 1600 to 1700 and how it encouraged scholars to meet and share experimental or observational work."
+      },
+      "task_specific": "Explain a specific European development from 1600 to 1700 not named in the excerpt (such as Bacon's call for experimental, inductive method, Galileo's telescopic observations, printed scientific works and letter networks, or the Royal Society's journal) and link it to why scholars gathered to share experiments and observations."
+     },
+     {
+      "row_id": "c",
+      "name": "Part C",
+      "max": 1,
+      "descriptors": {
+       "0": "The response names no accurate example outside England from the stated years, or names one without saying how it was similar to or different from the London gatherings.",
+       "1": "The response accurately explains one specific similarity or difference between the London gatherings and organized inquiry in another region from 1450 to 1750."
+      },
+      "task_specific": "Explain a similarity or difference between the London gatherings and the organization of inquiry in another region from 1450 to 1750, such as the Accademia dei Lincei in Rome, the French Academy of Sciences founded under Louis XIV, Taqi al-Din's observatory in Istanbul, Jesuit astronomers at the Chinese court, or Jai Singh II's observatories in India."
+     }
+    ],
+    "scoring_notes": [
+     "Do not award credit in (b) or (c) for responses that claim the Royal Society was the first scientific organization in the world; Libby does not say this and it is inaccurate.",
+     "In (c), a comparison may stress sponsorship (a ruler or state versus a private, self-organized circle), purpose (calendar and astronomy for a court versus wide-ranging experiment), or similar features (regular meetings, shared instruments, recorded observations).",
+     "A response may earn credit in (a) by describing the variety of meeting places or the variety of members' interests; a bare list of names is not enough.",
+     "ALTON reference — not official AP scoring"
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [],
+    "contextualization_ideas": [
+     "The Scientific Revolution in Europe moved natural philosophy toward observation, mathematics and experiment, away from relying only on ancient authorities.",
+     "The London meetings took place during and after the English Civil Wars, and the society's 1662 charter came after the Restoration."
+    ],
+    "outside_evidence": [
+     "Francis Bacon, Novum Organum (1620)",
+     "Galileo's telescopic observations (1609 to 1610)",
+     "Accademia dei Lincei (1603)",
+     "French Academy of Sciences (1666)",
+     "Philosophical Transactions (1665)",
+     "Newton's Principia (1687)",
+     "Jesuit astronomers at the Ming and Qing courts",
+     "Taqi al-Din's Istanbul observatory",
+     "Jai Singh II's observatories"
+    ],
+    "reasoning_types": [
+     "Sourcing and claim identification (a)",
+     "Causation (b)",
+     "Comparison (c)"
+    ],
+    "doc_uses": [
+     {
+      "source_id": "Libby 1917",
+      "usable_for": "The origins, meeting places and membership of the circle that became the Royal Society",
+      "sourcing": "A secondary account by an American historian of science writing a textbook in 1917; it praises the members' character and focuses on notable individuals, and it gives one account of the society's origins that later scholarship has added to."
+     }
+    ],
+    "evidence_map": [],
+    "saq_answers": {
+     "a": [
+      "Libby claims the group began meeting in London around 1645 and met once a week, before it became the Royal Society in 1662.",
+      "Libby describes the meetings as informal, held in a private home on Wood Street, at the Bull's Head Tavern and at Gresham College, not in one official institution.",
+      "Libby stresses the members' range of interests, including mathematics, astronomy, navigation, political economy and especially medicine, since several members were physicians.",
+      "Libby claims this circle of natural philosophers was the nucleus of the Royal Society and that Boyle was its foremost member once it was organized."
+     ],
+     "b": [
+      "Francis Bacon's Novum Organum (1620) argued that knowledge should come from careful observation and repeated experiment, so scholars had reason to meet, run experiments together and check one another's results.",
+      "Galileo's telescope observations of Jupiter's moons and the phases of Venus (1609 to 1610) challenged Aristotle's and Ptolemy's views of the heavens, and scholars wanted to repeat and discuss such new observations.",
+      "Printing presses and letter networks spread new scientific books and reports across Europe, and from 1665 the Royal Society's Philosophical Transactions published members' experiments, which encouraged scholars to gather and share findings.",
+      "New instruments such as the telescope, microscope and air pump made experiment more central to natural philosophy, and these tools were costly and easier to use and display in group settings."
+     ],
+     "c": [
+      "Similar: the Accademia dei Lincei in Rome (founded 1603) also gathered scholars, including Galileo, to share observations of nature, so organized groups of natural philosophers existed in Italy before the London meetings.",
+      "Different: the French Academy of Sciences (1666) was founded with Louis XIV's backing and its members were paid by the crown, while Libby describes London scholars who began meeting privately in homes and a tavern.",
+      "Different: in Qing China, Jesuit astronomers such as Ferdinand Verbiest worked inside the imperial astronomical bureau on the court calendar, so their inquiry was run by the state, unlike the self-organized London circle.",
+      "Different: Taqi al-Din's observatory in Istanbul depended on the sultan's support and was torn down around 1580, while the London group lasted and later got a royal charter."
+     ]
+    },
+    "common_pitfalls": [
+     "Claiming the Royal Society was the first scientific society anywhere; Italian academies such as the Accademia dei Lincei came earlier.",
+     "Using Boyle, Harvey, Hobbes, Gresham College or other people and places named in the excerpt as the outside development in (b).",
+     "Treating Libby, writing in 1917, as someone who attended the meetings.",
+     "Naming a non-English example in (c) without saying how it was similar or different.",
+     "Using developments outside 1600 to 1700 in (b), such as Enlightenment political thought of the later eighteenth century, or outside 1450 to 1750 in (c), such as Ulugh Beg's fifteenth-century Samarkand observatory, which dates from the 1420s."
+    ],
+    "facts": [
+     "Libby dates the beginning of the London meetings to about 1645 and the society's definite organization to 1662.",
+     "Charles II granted the Royal Society a royal charter in 1662, after the Restoration of the monarchy in 1660.",
+     "Francis Bacon published Novum Organum in 1620, promoting inductive reasoning from observation and experiment.",
+     "Galileo made telescopic observations around 1609 to 1610 and was tried by the Roman Inquisition in 1633.",
+     "The Accademia dei Lincei was founded in Rome in 1603, and Galileo became a member.",
+     "The French Academy of Sciences was founded in 1666 under Louis XIV with royal backing through Colbert.",
+     "The Royal Society's Philosophical Transactions began publication in 1665 under Henry Oldenburg.",
+     "Isaac Newton's Principia was published in 1687.",
+     "Jesuit missionaries such as Matteo Ricci, Johann Adam Schall von Bell and Ferdinand Verbiest brought European astronomy and mathematics to the Ming and Qing courts, and Schall and Verbiest served in the imperial astronomical bureau.",
+     "Taqi al-Din ran an observatory in Istanbul under Sultan Murad III; it was torn down around 1580.",
+     "Jai Singh II of Jaipur built large masonry observatories in north India in the early eighteenth century."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_authored_from_real_sources",
+    "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+   }
+  },
+  "fact": [
+   {
+    "where": "saq_answers.b, third answer (Philosophical Transactions from 1665) and Rubric Part B ('or the Royal Society's journal')",
+    "kind": "other",
+    "detail": "Part (b) asks for a development that helps explain why scholars like those Libby describes met to share experiments; Libby's circle began meeting about 1645. Philosophical Transactions began in 1665, three years after the Society was already chartered, so it cannot be a cause of the gatherings it is offered to explain. It is also an organ of the Royal Society itself, which the excerpt names, sitting uneasily with the 'not mentioned in the excerpt' requirement. The printing/correspondence part of the answer is sound; the journal example should be removed or reframed as a consequence rather than a cause."
+   }
+  ]
+ },
+ {
+  "id": "wh3_dbq",
+  "spec": {
+   "id": "wh3_dbq",
+   "exam": "WH3",
+   "template": "dbq",
+   "era": 3,
+   "units": [
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "focus": "How and why understandings of the relationship between human activity and the natural environment changed from the mid-19th century to the early 21st century",
+   "sources": [
+    {
+     "id": "txt-marsh-1864",
+     "context": "George P. Marsh was an American diplomat who had served in Italy and the Ottoman Empire; he published this book in 1864."
+    },
+    {
+     "id": "txt-muir-1901",
+     "context": "John Muir was a Scottish-born American naturalist; he published this book in 1901."
+    },
+    {
+     "id": "txt-arrhenius-1908",
+     "context": "Svante Arrhenius was a Swedish chemist; this book was published in English in 1908."
+    },
+    {
+     "id": "img-dustbowl-1936",
+     "context": "A photographer working for a U.S. government agency took this photograph in the Texas Panhandle in March 1936."
+    },
+    {
+     "id": "tab-noaa-co2-mlo",
+     "context": "The U.S. National Oceanic and Atmospheric Administration measures carbon dioxide in the air at an observatory on a Hawaiian volcano; this table shows annual averages for seven years."
+    },
+    {
+     "id": "txt-cs-soviet-1991",
+     "context": "This reference book was written for the U.S. government in 1991, before the Soviet Union ended."
+    },
+    {
+     "id": "txt-cs-brazil-1998",
+     "context": "This reference book was written for the U.S. government; the passage describes Brazil in the early 1990s."
+    }
+   ],
+   "seed": 4304
+  },
+  "payload": {
+   "schema_version": "whap-frq-1",
+   "task_type": "dbq",
+   "template": "dbq",
+   "era": 3,
+   "units": [
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "title": "Changing Understandings of Human Activity and the Natural Environment, c. 1860 to c. 2000",
+   "prompt": {
+    "scenario": "Between the middle of the nineteenth century and the end of the twentieth century, industrialization, the spread of commercial agriculture, and state-led development projects changed landscapes, waterways, and the atmosphere around the world. Over the same period, writers, scientists, governments, and international bodies offered new explanations of how human activity affects the natural environment. The seven documents include a scholarly warning from the 1860s, a naturalist's account of forest reserves, a chemist's calculation about carbon dioxide, a photograph made for a U.S. government agency during the Dust Bowl, a table of atmospheric carbon dioxide measurements, and two reference studies about the Soviet Union and Brazil.",
+    "task": "Evaluate the extent to which understandings of the relationship between human activity and the natural environment changed from c. 1860 to c. 2000.",
+    "requirements": [
+     "Respond to the prompt with a historically defensible thesis or claim that establishes a line of reasoning.",
+     "Describe a broader historical context relevant to the prompt.",
+     "Support an argument in response to the prompt using at least four documents.",
+     "Use at least one additional piece of specific historical evidence (beyond that found in the documents) relevant to an argument about the prompt.",
+     "For at least two documents, explain how or why the document's point of view, purpose, historical situation, and/or audience is relevant to an argument.",
+     "Use evidence to corroborate, qualify, or modify an argument that addresses the prompt."
+    ]
+   },
+   "sources": [
+    {
+     "id": "1",
+     "kind": "primary_text",
+     "title": "Man and Nature; or, Physical Geography as Modified by Human Action (excerpt)",
+     "attribution": "George P. Marsh, American diplomat and scholar, 1864 (New York: Scribner). Project Gutenberg eBook #37957. Reuse: public domain in the United States (published before 1929). excerpted (1 segment); whitespace normalized; no wording changed.",
+     "context": "George P. Marsh was an American diplomat who had served in Italy and the Ottoman Empire; he published this book in 1864.",
+     "real_data": true,
+     "source_registry_id": "txt-marsh-1864",
+     "source_sha256": "0344445886dd494d412cfb1695dd94ec67c0c611efb2d171d82db1430a8933e4",
+     "body": "The earth is fast becoming an unfit home for its noblest inhabitant, and another era of equal human crime and human improvidence, and of like duration with that through which traces of that crime and that improvidence extend, would reduce it to such a condition of impoverished productiveness, of shattered surface, of climatic excess, as to threaten the depravation, barbarism, and perhaps even extinction of the species.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry txt-marsh-1864"
+     }
+    },
+    {
+     "id": "2",
+     "kind": "primary_text",
+     "title": "Our National Parks, ch. 1 (excerpt on the forest reserves)",
+     "attribution": "John Muir, Scottish-American naturalist, 1901 (Boston: Houghton Mifflin). Project Gutenberg eBook #60929. Reuse: public domain in the United States (published before 1929). excerpted (1 segment); whitespace normalized; no wording changed.",
+     "context": "John Muir was a Scottish-born American naturalist; he published this book in 1901.",
+     "real_data": true,
+     "source_registry_id": "txt-muir-1901",
+     "source_sha256": "4256c640d101fba9c68cfa8b8b8a380253090a0db661bc85e04f81b2ba687b7b",
+     "body": "The forty million acres of these reserves are in the main unspoiled as yet, though sadly wasted and threatened on their more open margins by the axe and fire of the lumberman and prospector, and by hoofed locusts, which, like the winged ones, devour every leaf within reach, while the shepherds and owners set fires with the intention of making a blade of grass grow in the place of every tree, but with the result of killing both the grass and the trees.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry txt-muir-1901"
+     }
+    },
+    {
+     "id": "3",
+     "kind": "primary_text",
+     "title": "Worlds in the Making: The Evolution of the Universe (excerpt on carbonic acid and temperature)",
+     "attribution": "Svante Arrhenius, Swedish chemist (English translation by H. Borns), 1908 (English edition; Swedish original 1906). Project Gutenberg eBook #69022. Reuse: public domain in the United States (published before 1929). excerpted (1 segment); whitespace normalized; no wording changed.",
+     "context": "Svante Arrhenius was a Swedish chemist; this book was published in English in 1908.",
+     "real_data": true,
+     "source_registry_id": "txt-arrhenius-1908",
+     "source_sha256": "6fe663c94004ff484609cf0b6139b0d078661988a7a0701c15f5f5f58fb11bbf",
+     "body": "With the help of these data I have calculated that if the atmosphere were deprived of all its carbonic acid—of which it contains only 0.03 per cent. by volume—the temperature of the earth’s surface would fall by about 21°. This lowering of the temperature would diminish the amount of water vapor in the atmosphere, and would cause a further almost equally strong fall of temperature. The examples, so far as they go, demonstrate that comparatively unimportant variations in the composition of the air have a very great influence. If the quantity of carbonic acid in the air should sink to one-half its present percentage, the temperature would fall by about 4°; a diminution to one-quarter would reduce the temperature by 8°. On the other hand, any doubling of the percentage of carbon dioxide in the air would raise the temperature of the earth’s surface by 4°; and if the carbon dioxide were increased fourfold, the temperature would rise by 8°.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry txt-arrhenius-1908"
+     }
+    },
+    {
+     "id": "4",
+     "kind": "image",
+     "title": "Dust bowl, Texas Panhandle (photograph made for the Resettlement Administration; held in the Library of Congress FSA/OWI Collection)",
+     "attribution": "Arthur Rothstein, photographer for the Resettlement Administration (the agency was folded into the Farm Security Administration in 1937), 1936 (March). Wikimedia Commons (file page records the source institution and public-domain tag). Reuse: public domain (U.S. government work). unmodified except Wikimedia Commons' scaled JPEG rendering of the file (upload.wikimedia.org thumbnail).",
+     "context": "A photographer working for a U.S. government agency took this photograph in the Texas Panhandle in March 1936.",
+     "real_data": true,
+     "source_registry_id": "img-dustbowl-1936",
+     "source_sha256": "d2eaf34896b459c0408427d06b1e319d4d1921dfccdfc8f71a445c34b60a6dd1",
+     "body": "A black-and-white photograph of a straight rural road under a sky filled with huge dark clouds of dust; a single car travels along the road across a flat plain.",
+     "image": {
+      "path": "ap-sources/img-dustbowl-1936/image.jpg",
+      "alt": "A black-and-white photograph of a straight rural road under a sky filled with huge dark clouds of dust; a single car travels along the road across a flat plain.",
+      "credit": "Arthur Rothstein, Dust bowl, Texas Panhandle, March 1936. Library of Congress (FSA/OWI Collection) via Wikimedia Commons (public domain)."
+     },
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry img-dustbowl-1936"
+     }
+    },
+    {
+     "id": "5",
+     "kind": "table",
+     "title": "Atmospheric carbon dioxide at Mauna Loa Observatory, annual mean (ppm), selected years 1960-2020",
+     "attribution": "NOAA Global Monitoring Laboratory (data from 1958-1974 obtained by C. David Keeling, Scripps Institution of Oceanography), Data file created October 2026. NOAA Global Monitoring Laboratory. Reuse: public domain (U.S. government data; credit NOAA GML and Scripps as requested). seven rows copied from the 'mean' column of the annual-mean file (CO2 mole fraction in dry air, ppm); no values changed or recomputed.",
+     "context": "The U.S. National Oceanic and Atmospheric Administration measures carbon dioxide in the air at an observatory on a Hawaiian volcano; this table shows annual averages for seven years.",
+     "real_data": true,
+     "source_registry_id": "tab-noaa-co2-mlo",
+     "source_sha256": "f08d0473a0d8c617da5541ebf9e34b1fc981056086c0d6a365c42518d87272d3",
+     "body": "Atmospheric carbon dioxide at Mauna Loa Observatory, annual mean (ppm), selected years 1960-2020",
+     "table": {
+      "columns": [
+       "Year",
+       "Annual mean CO2 (ppm)"
+      ],
+      "rows": [
+       [
+        "1960",
+        "316.91"
+       ],
+       [
+        "1970",
+        "325.68"
+       ],
+       [
+        "1980",
+        "338.76"
+       ],
+       [
+        "1990",
+        "354.45"
+       ],
+       [
+        "2000",
+        "369.71"
+       ],
+       [
+        "2010",
+        "390.10"
+       ],
+       [
+        "2020",
+        "414.21"
+       ]
+      ]
+     },
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry tab-noaa-co2-mlo"
+     }
+    },
+    {
+     "id": "6",
+     "kind": "secondary_text",
+     "title": "Soviet Union: A Country Study (excerpt on environmental degradation)",
+     "attribution": "Raymond E. Zickel, ed., Federal Research Division, Library of Congress, 1991. Library of Congress, Federal Research Division (Country Studies; full text via Internet Archive OCR). Reuse: public domain (U.S. government work, 17 U.S.C. 105). excerpted (1 segment); whitespace normalized; OCR line-break hyphenation rejoined; running page headers/numbers removed; no wording changed.",
+     "context": "This reference book was written for the U.S. government in 1991, before the Soviet Union ended.",
+     "real_data": true,
+     "source_registry_id": "txt-cs-soviet-1991",
+     "source_sha256": "f9f8425d77727af22a4b9bb9194789ffea5c0a67a2172e645b4eaade379dace6",
+     "body": "As a consequence of this neglect, two of the twentieth century's worst man-made environmental disasters struck the Soviet Union: the Chernobyl' nuclear power plant accident, the consequence of an insufficient regard for safety to obtain increased energy; and the loss of huge amounts of water from the Aral Sea. Although the death toll from the Chernobyl' accident in 1986 was initially low, millions of people continued to live on radioactive land and raise and consume contaminated food. In addition to the human costs, cleaning up and repairing the after-effects of the accident, which continued to leak radioactive gases in 1991, were estimated to cost hundreds of billions of rubles (see Glossary) by the year 2000. The other major environmental disaster was the near destruction of the Aral Sea, whose main sources of water were diverted to irrigate arid land for the purpose of raising cotton and other crops beginning in 1960. Subsequently, the Aral Sea's coast receded sixty kilometers, in places, from its former location. Other environmental problems included the severe pollution of rivers, lakes, and the air resulting from the direct discharge of pollutants, particularly in the European part of the Soviet Union.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry txt-cs-soviet-1991"
+     }
+    },
+    {
+     "id": "7",
+     "kind": "secondary_text",
+     "title": "Brazil: A Country Study (excerpt on deforestation and development)",
+     "attribution": "Rex A. Hudson, ed., Federal Research Division, Library of Congress, 1998. Library of Congress, Federal Research Division (Country Studies; full text via Internet Archive OCR). Reuse: public domain (U.S. government work, 17 U.S.C. 105). excerpted (1 segment); whitespace normalized; OCR line-break hyphenation rejoined; no wording changed.",
+     "context": "This reference book was written for the U.S. government; the passage describes Brazil in the early 1990s.",
+     "real_data": true,
+     "source_registry_id": "txt-cs-brazil-1998",
+     "source_sha256": "c89f30ae6ed74b326fa951662a8db3b3f243261598ab8439de152a6b8633ea25",
+     "body": "The topics of rapid deforestation and extensive burning of the Amazon rain forest and environmental pollution received unprecedented international attention in the late 1980s and early 1990s. Water and air pollution had also become a serious problem for Brazil. Sao Paulo State's Tiete is so polluted that in 1992 the state was forced to launch a US$2.6 billion program to revive it. In June 1992, Rio de Janeiro hosted the United Nations (UN) Conference on the Environment and Development (Eco-92). However, the Brazilian government's attention to the problems of deforestation and pollution waned following Eco-92, despite the creation in late 1993 of the Ministry of Environment and the Amazon Region. In the mid-1990s, discussion of public policies intended to promote sustainable development (see Glossary) remained intense.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry txt-cs-brazil-1998"
+     }
+    }
+   ],
+   "rubric": {
+    "rubric_id": "whap-v1",
+    "total_points": 7,
+    "rows": [
+     {
+      "row_id": "thesis",
+      "name": "Thesis/claim",
+      "max": 1,
+      "descriptors": {
+       "0": "The response restates the prompt, offers no position on extent of change, or makes a claim that is not historically defensible.",
+       "1": "The response makes a defensible claim about the extent of change in understandings of human-environment relations and indicates how the argument will proceed."
+      },
+      "task_specific": "A claim that takes a position on how much understandings changed between c. 1860 and c. 2000 (for example, a shift from local, moral warnings about land misuse to global, measured, and institutional understandings, while concern about waste and development priorities persisted) and signals a line of reasoning."
+     },
+     {
+      "row_id": "context",
+      "name": "Contextualization",
+      "max": 1,
+      "descriptors": {
+       "0": "Context is missing, inaccurate, or a passing phrase not linked to the argument.",
+       "1": "The response describes a relevant broader historical development before, during, or continuing through the period and connects it to the argument."
+      },
+      "task_specific": "Accurate description of broader developments such as industrialization and fossil-fuel use, the expansion of commercial and settler agriculture, twentieth-century state-planned development, decolonization and development debates, or the rise of environmental movements and international conferences, tied to the prompt."
+     },
+     {
+      "row_id": "docs",
+      "name": "Evidence from the documents",
+      "max": 2,
+      "descriptors": {
+       "0": "Fewer than three documents are described accurately, or content is misread.",
+       "1": "The content of at least three documents is accurately described in relation to the topic.",
+       "2": "At least four documents are used accurately to support an argument about the extent of change."
+      },
+      "task_specific": "Accurate use of document content; for 2 points, at least four documents are used to support an argument about change and continuity in understandings, not just summarized."
+     },
+     {
+      "row_id": "outside",
+      "name": "Evidence beyond the documents",
+      "max": 1,
+      "descriptors": {
+       "0": "No outside evidence, or only a vague reference or a restatement of a document.",
+       "1": "The response uses a specific, accurate piece of outside evidence and explains how it supports the argument."
+      },
+      "task_specific": "A specific piece of evidence not in the documents, such as Rachel Carson's Silent Spring (1962), the 1972 Stockholm conference, the Montreal Protocol (1987), the Chipko movement, or the Kyoto Protocol (1997), used to support the argument."
+     },
+     {
+      "row_id": "sourcing",
+      "name": "Sourcing (point of view, purpose, situation, audience)",
+      "max": 1,
+      "descriptors": {
+       "0": "Sourcing is absent, applied to fewer than two documents, or merely restates the credit line.",
+       "1": "For at least two documents the response explains how the source's situation, purpose, point of view, or audience is relevant to the argument."
+      },
+      "task_specific": "For two documents, explanation of how point of view, purpose, historical situation, or audience matters (for example, Document 6 as a 1991 U.S. government reference work on a Cold War rival; Document 4 as a photograph made for a New Deal federal agency)."
+     },
+     {
+      "row_id": "complexity",
+      "name": "Complex understanding",
+      "max": 1,
+      "descriptors": {
+       "0": "The argument is simplistic or one-sided without qualification.",
+       "1": "The response demonstrates a complex understanding through sustained analysis of multiple variables, both change and continuity, or effective qualification of its claim."
+      },
+      "task_specific": "A nuanced argument, for example showing both change and continuity, explaining why understandings changed (scientific measurement, visible disasters, global politics), comparing regions or political systems, or explaining tensions between knowledge and development policy."
+     }
+    ],
+    "scoring_notes": [
+     "Evidence from Document 5 after 2000 may be used to show continuation of a trend, but the argument should center on c. 1860 to c. 2000.",
+     "Do not credit sourcing that asserts an author personally witnessed the events described.",
+     "A thesis may argue for substantial change, substantial continuity, or a mix, provided it is defensible and supported.",
+     "ALTON reference — not official AP scoring"
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [
+     "Understandings changed considerably: nineteenth-century writers such as Marsh and Muir framed environmental damage as local waste and moral improvidence, while twentieth-century science and disasters (Arrhenius, the Mauna Loa record, Chernobyl, the Aral Sea) produced a measured, global understanding that human activity could alter the atmosphere and whole regions.",
+     "Understandings changed only moderately: the core idea that human misuse of land threatens human welfare appears already in Marsh in 1864 and persists through the Dust Bowl and the Soviet and Brazilian cases, so what changed was mainly the scale of evidence and the involvement of governments and international bodies.",
+     "Understanding of environmental harm grew steadily, but it repeatedly ran up against development priorities, as the Soviet cotton irrigation and Brazil's waning attention after Eco-92 show; the gap between knowledge and policy was a key continuity."
+    ],
+    "contextualization_ideas": [
+     "The Industrial Revolution's reliance on coal and later oil sharply increased fossil-fuel burning and urban pollution in industrializing states from the nineteenth century onward.",
+     "The expansion of commercial and settler agriculture and resource extraction, including the plowing of grasslands and logging in the American West and elsewhere, transformed environments in the nineteenth and early twentieth centuries.",
+     "After 1945, state-led development in both communist and capitalist states, and in newly independent and developing nations, prioritized rapid growth, while environmental movements and UN conferences from the 1970s onward placed environmental issues on the global agenda."
+    ],
+    "outside_evidence": [
+     "Rachel Carson's Silent Spring (1962) raised public awareness of the effects of pesticides such as DDT.",
+     "The UN Conference on the Human Environment met in Stockholm in 1972.",
+     "The Montreal Protocol (1987) set out to phase out ozone-depleting chemicals such as CFCs.",
+     "The Intergovernmental Panel on Climate Change was established in 1988, and the Kyoto Protocol was adopted in 1997.",
+     "The Chipko movement in India in the 1970s, in which villagers protested logging by embracing trees.",
+     "Wangari Maathai founded the Green Belt Movement in Kenya in 1977 to promote tree planting.",
+     "The Bhopal gas disaster in India in 1984 at a Union Carbide pesticide plant.",
+     "Yellowstone became the first U.S. national park in 1872, and John Muir co-founded the Sierra Club in 1892.",
+     "The U.S. government created the Soil Conservation Service in 1935 in response to soil erosion during the Dust Bowl.",
+     "Brazilian rubber tapper and activist Chico Mendes was murdered in 1988, drawing international attention to the Amazon."
+    ],
+    "reasoning_types": [
+     "Continuity and change over time",
+     "Causation",
+     "Comparison"
+    ],
+    "doc_uses": [
+     {
+      "source_id": "1",
+      "usable_for": "Shows an early, sweeping warning that human 'crime' and 'improvidence' could make the earth unfit for people and even threaten extinction of the species; evidence that the idea of human-caused environmental danger predates modern science and institutions.",
+      "sourcing": "Marsh was a diplomat and scholar who had served in Italy and the Ottoman Empire, long-settled regions; this historical situation helps explain why he thought about environmental damage across long eras of human history and framed it in moral terms for a general reading public."
+     },
+     {
+      "source_id": "2",
+      "usable_for": "Describes forty million acres of forest reserves as mostly unspoiled but threatened by lumbering, prospecting, grazing, and set fires; shows concern about resource waste and the existence of government-protected land by 1901.",
+      "sourcing": "As a naturalist writing a book titled Our National Parks, Muir had a point of view favoring preservation; his description of grazing animals as 'hoofed locusts' reflects that advocacy and his hostility to commercial use of the reserves."
+     },
+     {
+      "source_id": "3",
+      "usable_for": "Calculates that changes in atmospheric carbon dioxide would raise or lower the earth's temperature by several degrees; shows the beginning of a quantitative, planet-scale scientific understanding of the atmosphere.",
+      "sourcing": "Arrhenius was a chemist writing a book on the evolution of the universe, so his purpose was scientific explanation rather than warning; the passage treats carbon dioxide changes as a physical question without moral judgment, which contrasts with Marsh and Muir."
+     },
+     {
+      "source_id": "4",
+      "usable_for": "Shows a massive dust cloud over a flat plain in the Texas Panhandle in 1936, visual evidence of severe environmental crisis in a farming region in the 1930s.",
+      "sourcing": "The photograph was made for the Resettlement Administration, a U.S. government agency of the 1930s; its creation for a federal agency indicates that government was now documenting environmental and rural crises, and the dramatic framing may have shaped how audiences viewed the region."
+     },
+     {
+      "source_id": "5",
+      "usable_for": "Shows atmospheric carbon dioxide rising every decade from about 317 ppm in 1960 to about 414 ppm in 2020; evidence that by the late twentieth century human effects on the atmosphere were being continuously measured, linking to Arrhenius's calculations.",
+      "sourcing": "The data come from a U.S. government scientific agency and from Keeling at Scripps; as systematic instrument measurements at a single remote observatory, they carry a different kind of authority from the arguments in Documents 1 and 2, though they show only one location and selected years."
+     },
+     {
+      "source_id": "6",
+      "usable_for": "Describes Chernobyl and the near destruction of the Aral Sea through irrigation for cotton, plus severe river and air pollution; shows that by 1991 large-scale disasters were understood as man-made results of development priorities.",
+      "sourcing": "Written for the U.S. government in 1991 before the Soviet Union ended, this reference work comes from a Cold War rival's perspective, which may explain its emphasis on Soviet 'neglect'; at the same time, its specific figures and descriptions are useful for showing how such disasters were understood."
+     },
+     {
+      "source_id": "7",
+      "usable_for": "Notes unprecedented international attention to Amazon deforestation and pollution, the 1992 Rio conference, and a new environment ministry, but also waning government attention after Eco-92; shows environmental issues becoming global and institutional while competing with development.",
+      "sourcing": "Written for the U.S. government about Brazil in the early 1990s, the study views Brazil from outside; its emphasis on international attention reflects a global audience's concern with the Amazon, and its comments on Brazilian policy reflect an outside evaluator's perspective."
+     }
+    ],
+    "evidence_map": [
+     {
+      "line": "Understanding shifted from local land and forest damage toward a global, scientifically measured view of human effects, especially on the atmosphere.",
+      "supports": [
+       "3",
+       "5",
+       "7"
+      ],
+      "complicates": [
+       "1"
+      ]
+     },
+     {
+      "line": "Continuity: concern that human misuse of land, water, and forests would harm human welfare persisted throughout the period.",
+      "supports": [
+       "1",
+       "2",
+       "4",
+       "6"
+      ],
+      "complicates": [
+       "3"
+      ]
+     },
+     {
+      "line": "Responses moved from individual warnings toward governments, and later international bodies, documenting and addressing environmental problems, though development priorities often overrode this knowledge.",
+      "supports": [
+       "4",
+       "6",
+       "7"
+      ],
+      "complicates": [
+       "2"
+      ]
+     }
+    ],
+    "common_pitfalls": [
+     "Summarizing each document in order without making an argument about the extent of change.",
+     "Treating Arrhenius (Document 3) as issuing a climate change warning; the excerpt calculates temperature effects and does not argue that change is harmful.",
+     "Assuming Marsh or Muir personally saw the damage they describe, or inventing purposes not supported by the credit lines.",
+     "Using Document 5 only to describe numbers without connecting it to how understandings changed.",
+     "Focusing entirely on the United States and ignoring the Soviet, Brazilian, and global material.",
+     "Asserting a single cause for the Dust Bowl or the Aral Sea instead of the documented combination of factors."
+    ],
+    "facts": [
+     "George P. Marsh published Man and Nature in 1864.",
+     "John Muir published Our National Parks in 1901 and co-founded the Sierra Club in 1892.",
+     "Svante Arrhenius was a Swedish chemist who won a Nobel Prize in Chemistry (1903).",
+     "The Dust Bowl struck the southern Great Plains in the 1930s, resulting from severe drought combined with the plowing of native grasslands.",
+     "Charles David Keeling began carbon dioxide measurements at Mauna Loa in 1958.",
+     "The Chernobyl nuclear accident occurred in 1986 in Soviet Ukraine.",
+     "Soviet irrigation projects diverted the Amu Darya and Syr Darya rivers, which fed the Aral Sea, largely for cotton.",
+     "The UN Conference on Environment and Development was held in Rio de Janeiro in June 1992."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_authored_from_real_sources",
+    "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+   }
+  },
+  "fact": [
+   {
+    "where": "Expected features – defensible_theses[0]",
+    "kind": "misdescribes_source",
+    "detail": "The model thesis says nineteenth-century writers 'such as Marsh and Muir framed environmental damage as local waste.' Document 1 (Marsh) is explicitly planetary and species-wide in scope ('The earth is fast becoming an unfit home... extinction of the species'), as the doc_uses entry for Document 1 itself acknowledges ('sweeping warning'). Characterizing Marsh as 'local' misdescribes the document and is internally inconsistent with the doc_uses description."
+   },
+   {
+    "where": "Document 1 credit line / context ('had served in Italy and the Ottoman Empire')",
+    "kind": "inaccurate",
+    "detail": "Marsh served as U.S. minister to the Ottoman Empire (1849–1854), but in 1864, when Man and Nature appeared, he was currently serving as U.S. minister to the Kingdom of Italy (appointed 1861, serving until his death in 1882). 'Had served in Italy' misstates his situation at the time of publication; he wrote the book while posted in Italy."
+   },
+   {
+    "where": "Document 5 credit line ('Data file created October 2026')",
+    "kind": "other",
+    "detail": "The stated creation date of the NOAA data file (October 2026) appears to post-date the preparation of this material; verify the file date, as a future-dated credit line cannot be correct as written."
+   }
+  ]
+ },
+ {
+  "id": "wh3_leq",
+  "spec": {
+   "id": "wh3_leq",
+   "exam": "WH3",
+   "template": "leq",
+   "era": 1,
+   "units": [
+    2,
+    3,
+    4
+   ],
+   "focus": "State and community responses to famine, disease and environmental stress, c. 1200 to c. 1750 (use only well-established facts)",
+   "sources": [],
+   "seed": 4305
+  },
+  "payload": {
+   "schema_version": "whap-frq-1",
+   "task_type": "leq",
+   "template": "leq",
+   "era": 1,
+   "units": [
+    2,
+    3,
+    4
+   ],
+   "title": "LEQ: Continuity and Change in State and Community Responses to Famine, Disease and Environmental Stress, c. 1200 to c. 1750",
+   "prompt": {
+    "scenario": "Between c. 1200 and c. 1750, societies across Afro-Eurasia and the Americas faced repeated crises: famines after failed harvests, the plague pandemic of the fourteenth century and its later returns, the spread of newly introduced diseases after 1492, and the cooler, less predictable climate that historians call the Little Ice Age. Rulers, religious institutions, towns and villages responded with grain storage, relief, labor and tax policy, public health measures, religious practice, migration and new crops.",
+    "task": "Evaluate the extent to which state and community responses to famine, epidemic disease or environmental stress changed from c. 1200 to c. 1750. You are not expected to address the entire time period.",
+    "requirements": [
+     "Respond to the prompt with a historically defensible thesis or claim that establishes a line of reasoning.",
+     "Describe a broader historical context relevant to the prompt.",
+     "Support an argument in response to the prompt using at least two pieces of specific and relevant evidence.",
+     "Use historical reasoning (continuity and change) to frame or structure an argument that addresses the prompt.",
+     "Use evidence to corroborate, qualify or modify an argument that addresses the prompt, demonstrating a complex understanding."
+    ]
+   },
+   "sources": [],
+   "rubric": {
+    "rubric_id": "whap-v1",
+    "total_points": 6,
+    "rows": [
+     {
+      "row_id": "thesis",
+      "name": "Thesis/claim",
+      "max": 1,
+      "descriptors": {
+       "0": "Repeats the prompt, gives no claim about the extent of change, or makes a claim that is not historically defensible.",
+       "1": "Makes a defensible claim about how far responses changed or stayed the same, and gives at least one reason that sets up the line of argument."
+      },
+      "task_specific": "A claim that judges how far responses to famine, disease or environmental stress changed between c. 1200 and c. 1750, with a line of reasoning. One example: quarantine and organized public health measures were new, while food storage and religious responses stayed the same."
+     },
+     {
+      "row_id": "context",
+      "name": "Contextualization",
+      "max": 1,
+      "descriptors": {
+       "0": "Gives no relevant context or only a passing phrase.",
+       "1": "Describes a broader development before, during or after the period and explains how it relates to state or community responses to crisis."
+      },
+      "task_specific": "Places the argument in broader developments, for example Mongol-era trade networks that helped plague spread, the Columbian Exchange, the Little Ice Age, or the growth of gunpowder and bureaucratic empires able to collect taxes and store grain."
+     },
+     {
+      "row_id": "evidence",
+      "name": "Evidence",
+      "max": 2,
+      "descriptors": {
+       "0": "Gives no specific relevant evidence, or evidence that is inaccurate or off the topic.",
+       "1": "Identifies at least two specific, accurate examples relevant to responses to famine, disease or environmental stress.",
+       "2": "Uses at least two specific, accurate examples to support an argument about the extent of change and continuity."
+      },
+      "task_specific": "Specific examples of responses, such as Ragusa's isolation rule of 1377, England's Ordinance of Labourers of 1349, Inca storehouses, Nezahualcoyotl's dike, Qing ever-normal granaries, Tokugawa sweet potato promotion, or the spread of smallpox inoculation."
+     },
+     {
+      "row_id": "analysis",
+      "name": "Analysis and reasoning",
+      "max": 2,
+      "descriptors": {
+       "0": "Lists examples without historical reasoning about change and continuity.",
+       "1": "Uses continuity and change to frame or structure an argument about crisis responses, even if the treatment is uneven.",
+       "2": "Shows complex understanding by building an argument that weighs change against continuity, explains why responses differed across regions or times, or uses evidence to qualify the main claim."
+      },
+      "task_specific": "Uses continuity and change to structure the argument, and for the second point shows complex understanding, for example by weighing both change and continuity, comparing regions with different paths (Venice adopting quarantine while Ottoman authorities did not adopt it systematically until 1838), or using several pieces of evidence to qualify the claim."
+     }
+    ],
+    "scoring_notes": [
+     "Students may draw examples from any region; essays need not cover the whole span, but the argument about change has to compare at least two points in time.",
+     "Accept responses that argue for mostly continuity, mostly change, or a mixed outcome, as long as the evidence supports the claim.",
+     "Do not credit unsupported claims that a single famine or epidemic caused the fall of a particular state; credit careful statements that crises came alongside or added to political strain.",
+     "Describing a disaster without discussing how states or communities responded does not count as relevant evidence for this prompt.",
+     "ALTON reference — not official AP scoring"
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [
+     "From c. 1200 to c. 1750, states moved from mostly religious and improvised responses to disease toward organized public health measures such as quarantine and lazarettos, but famine relief through state granaries and tax remission stayed largely the same, especially in China.",
+     "Responses changed in tools more than in purpose: rulers continued to store grain, control labor and sponsor prayer, but after 1492 they also used new crops from the Columbian Exchange and, by the early 1700s, smallpox inoculation.",
+     "Change was uneven by region: Italian and Dalmatian city-states built quarantine systems after the Black Death, and Qing and Tokugawa governments expanded famine relief, while many community responses such as processions, flight from cities and blaming outsiders continued throughout the period."
+    ],
+    "contextualization_ideas": [
+     "Mongol-era integration of Eurasian trade and travel routes in the thirteenth and fourteenth centuries helped the plague move from Central Asia to the Mediterranean world by the 1340s.",
+     "The Columbian Exchange after 1492 carried smallpox and other diseases to the Americas and brought American crops such as maize and potatoes to Afro-Eurasia, which changed both the crises societies faced and the tools they had.",
+     "The Little Ice Age brought cooler conditions and harvest failures in many regions, especially in the seventeenth century, at the same time that larger bureaucratic and gunpowder empires were gaining greater power to tax, store and redistribute resources."
+    ],
+    "outside_evidence": [
+     "The Black Death (1346 to 1353) killed a large share of the population in Europe, North Africa and Southwest Asia; responses included prayer, processions and, in some European towns, flagellant movements.",
+     "During the Black Death, Jewish communities in many European towns were falsely blamed and attacked, for example in Strasbourg in 1349.",
+     "In 1377 Ragusa (Dubrovnik) required newcomers from plague areas to spend a period in isolation before entering, an early form of quarantine; Venice later set up a lazaretto (plague hospital) in 1423.",
+     "England's Ordinance of Labourers (1349) and Statute of Labourers (1351) tried to hold wages at pre-plague levels after labor shortages; anger over labor and tax policy fed into the Peasants' Revolt of 1381.",
+     "Muslim rulers funded hospitals through charitable endowments (waqf), such as the bimaristan founded by Sultan Qalawun in Cairo in 1284.",
+     "The Inca state kept thousands of storehouses (qollqa) of food and goods and built farming terraces, which let it support armies and workers and provide food during shortages.",
+     "In Mexica Tenochtitlan, a long dike built under Nezahualcoyotl of Texcoco in the mid-1400s helped protect the city from flooding in the lake system, and chinampa farming expanded food production.",
+     "Smallpox struck Tenochtitlan in 1520 during the Spanish conquest; in the following decades Spanish authorities resettled shrinking Indigenous populations into concentrated towns (congregaciones or reducciones) and kept forced labor systems such as the mita.",
+     "Qing China kept a large network of ever-normal granaries in the eighteenth century to buy grain cheaply, store it, and sell or give it out in years of dearth.",
+     "After the Kyoho famine of 1732, the Tokugawa government under Tokugawa Yoshimune promoted growing sweet potatoes, an American crop, as famine insurance.",
+     "American crops such as maize and sweet potatoes spread in China, and potatoes spread in parts of Europe, during the sixteenth to eighteenth centuries, supporting population growth.",
+     "London's response to the Great Plague of 1665 included shutting up infected households and publishing weekly bills of mortality.",
+     "During the 1720 plague in Marseille, French authorities set up a cordon and built a plague wall in Provence to contain the outbreak.",
+     "Smallpox variolation was practiced in China and the Ottoman Empire; Lady Mary Wortley Montagu learned of it in Istanbul and promoted it in England around 1721."
+    ],
+    "reasoning_types": [
+     "Continuity and change over time (primary)",
+     "Comparison of responses across regions as a way to qualify claims about change",
+     "Causation, as a secondary tool, explaining why some responses changed (for example new crops after the Columbian Exchange or greater bureaucratic capacity)"
+    ],
+    "common_pitfalls": [
+     "Describing famines, plagues or climate events without discussing how states or communities responded.",
+     "Writing only about Europe or only about the Black Death, with no change over time to c. 1750.",
+     "Claiming that a single epidemic or climate event by itself destroyed a dynasty or empire, a claim historians dispute.",
+     "Treating the high death toll in the Americas only as the result of deliberate policy and ignoring disease, or ignoring the effects of colonial labor and resettlement policies.",
+     "Confusing the dates of quarantine measures or attributing nineteenth-century germ theory to earlier periods.",
+     "Listing examples without making a judgment about the extent of change."
+    ],
+    "facts": [
+     "The Black Death reached the Mediterranean and Europe in 1347 and spread widely by 1351.",
+     "Ragusa (Dubrovnik) introduced a mandatory isolation period for arrivals from plague areas in 1377.",
+     "Venice established a permanent lazaretto in 1423.",
+     "England issued the Ordinance of Labourers in 1349 and the Statute of Labourers in 1351.",
+     "The Peasants' Revolt in England took place in 1381.",
+     "Sultan Qalawun's hospital in Cairo was founded in 1284.",
+     "Smallpox spread in Tenochtitlan in 1520.",
+     "The Great Plague of London occurred in 1665.",
+     "Plague struck Marseille in 1720.",
+     "The Kyoho famine in Japan occurred in 1732.",
+     "Lady Mary Wortley Montagu promoted smallpox inoculation in England around 1721."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_authored_from_real_sources",
+    "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+   }
+  },
+  "fact": [
+   {
+    "where": "EXPECTED FEATURES > outside_evidence: 'Smallpox struck Tenochtitlan in 1520... Spanish authorities resettled shrinking Indigenous populations into concentrated towns (congregaciones or reducciones) and kept forced labor systems such as the mita.'",
+    "kind": "inaccurate",
+    "detail": "The mita was the Andean (Peruvian) draft-labor system, adapted from the Inca mit'a and formalized under Viceroy Toledo in the 1570s; it was not used in central Mexico, where the comparable system was the repartimiento (after encomienda). Pairing the mita with the Tenochtitlan/New Spain example conflates two regions; the item should specify the Andes or use repartimiento/encomienda for Mexico."
+   }
+  ]
+ }
+]
