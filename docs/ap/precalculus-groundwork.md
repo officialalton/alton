@@ -9,7 +9,7 @@
 | MC | 42문항 / 1시간 45분 / 62.5% | 파트 A 29문항 65분 계산기 불가(43.75%), 파트 B 13문항 40분 그래핑 계산기 필수(18.75%) |
 | FRQ | 4문항 / 1시간 10분 / 37.5% | 파트 A 2문항 35분 그래핑 계산기 필수(FRQ 1 Function Concepts, FRQ 2 Modeling a Non-Periodic Context), 파트 B 2문항 35분 계산기 불가(FRQ 3 Modeling a Periodic Context, FRQ 4 Symbolic Manipulations) |
 | 계획서 값과 대조 | 일치 | 42/29/13, 65/40분, FRQ 2+2·35/35분 모두 같다 |
-| 확인 못 한 것 | 문항별 6점 | 시험 페이지에는 점수가 없고 파트별 비율(각 18.75%)만 있다. 6점은 CED 점수 구조 값(계획서)이며 이번 원형은 이 값을 따른다. 공개 전 CED 재확인 권장 |
+| 문항별 6점·비중 근거 | 오너 확인(2026-10-20): FRQ 6/6/6/6점, 2027 시험 MC 62.5%·FRQ 37.5% | 원문 페이지 번호는 미기재. 같은 값이 `data/ap/curriculum-2027/ap_precalculus.json` `subject.designNotes`("each 6 points, scored analytically, equal weight"; MC 62.5%, 파트 A 43.75%·B 18.75%)에 CED(effective Fall 2026) 시험 개요로 기록돼 있다. 코드: `lib/ap-exam/layouts.ts` `AP_NEW_SUBJECT_FRQ_TYPES`·`AP_SECTION_WEIGHTS_PCT`. 파트 A/B 비중은 문항 수 비례(29:13)가 아니라 7:3 이다 |
 | 2027 변경 | 페이지가 "MC 수·FRQ 1·2·시간이 갱신된다"고만 하고 새 수치는 별도 PDF | 위 값은 2027 시험 형식 값이다 |
 
 단원 MC 비중(CED, 커리큘럼 JSON): 1단원 30–40%, 2단원 25–40%, 3단원 30–35% → 42문항 [13,16]/[11,16]/[13,14], 목표 15/13/14(`lib/ap-exam/full-set-rules.ts` `PRE_*`).

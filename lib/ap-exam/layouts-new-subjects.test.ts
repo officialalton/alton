@@ -1,10 +1,18 @@
 // 2026-10-20 신규 10과목 기반 작업 테스트(레이아웃·이름·분류·FRQ 유형). 기존 14과목 동작은 layouts.test.ts 가 지킨다.
 import { describe, expect, it } from "vitest";
-import { AP_LAYOUTS, AP_NEW_SUBJECT_FRQ_TYPES, AP_NEW_SUBJECTS, AP_SUBJECT_NAME, apBadgeText, isOfficialFullLayout, totalMinutes } from "./layouts";
+import { AP_SECTION_WEIGHTS_PCT, AP_LAYOUTS, AP_NEW_SUBJECT_FRQ_TYPES, AP_NEW_SUBJECTS, AP_SUBJECT_NAME, apBadgeText, isOfficialFullLayout, totalMinutes } from "./layouts";
 import { AP_SUBJECTS } from "../problem-taxonomy";
 import { AP_SUBJECT_CODES } from "../ap-curriculum/types";
 
 const NEW = AP_NEW_SUBJECTS;
+describe("공식 섹션 비중(Precalculus·Mechanics)", () => {
+  it("합이 100이고 Precalculus 파트 A/B 는 MC 합과 같다", () => {
+    for (const w of Object.values(AP_SECTION_WEIGHTS_PCT)) expect(w.mc + w.frq).toBe(100);
+    const p = AP_SECTION_WEIGHTS_PCT.ap_precalculus;
+    expect(p.parts!.ap_mc_a + p.parts!.ap_mc_b).toBe(p.mc);
+    expect(AP_SECTION_WEIGHTS_PCT.ap_physics_c_mechanics).toMatchObject({ mc: 50, frq: 50 });
+  });
+});
 describe("신규 10과목 레이아웃", () => {
   it("10과목 모두 코드·이름·레이아웃·분류·FRQ 유형·커리큘럼 코드를 가진다", () => {
     expect(NEW).toHaveLength(10);
@@ -38,7 +46,9 @@ describe("신규 10과목 레이아웃", () => {
     expect(sum("ap_comparative_government_and_politics")).toBe(19);
     expect(sum("ap_human_geography")).toBe(21);
     expect(AP_NEW_SUBJECT_FRQ_TYPES.ap_precalculus.map((t) => t.points)).toEqual([6, 6, 6, 6]);
-    expect(AP_NEW_SUBJECT_FRQ_TYPES.ap_physics_c_mechanics.every((t) => t.points === null)).toBe(true); // 미확인 값은 비워 둔다
+    expect(AP_NEW_SUBJECT_FRQ_TYPES.ap_physics_c_mechanics.map((t) => t.points)).toEqual([10, 12, 10, 8]); // 오너 확인 2026-10-20
+    expect(sum("ap_physics_c_mechanics")).toBe(40);
+    expect(sum("ap_precalculus")).toBe(24);
     const frqCount = (c: string) => AP_LAYOUTS[c].filter((x) => x.kind === "frq").reduce((a, x) => a + x.count, 0);
     // Euro 는 SAQ 3 + DBQ + LEQ = 5유형, CSP 는 WR1·2a·2b·2c 4프롬프트(레이아웃 문항 2)라 유형 수가 다르다
     for (const c of NEW) if (c !== "ap_computer_science_principles") expect(AP_NEW_SUBJECT_FRQ_TYPES[c].length, c).toBe(c === "ap_european_history" ? 5 : frqCount(c));
