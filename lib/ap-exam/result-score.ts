@@ -83,7 +83,7 @@ export function summarizeApResult(o: {
     const earned = c.id === "mc" ? correct : items.filter((i) => i.component === c.id).reduce((n, i) => n + (i.earned ?? 0), 0);
     const max = c.id === "mc" ? mc.length : items.filter((i) => i.component === c.id).reduce((n, i) => n + i.max, 0);
     if (max <= 0) return withhold("point_mismatch"); // 구성 요소가 비었거나 만점 0 → 가중 계산 불가
-    comps.push({ id: c.id, label: COMPONENT_LABEL[c.id], earned, max, weightPct: round1(c.pct), contribution: (earned / max) * c.pct });
+    comps.push({ id: c.id, label: COMPONENT_LABEL[c.id], earned, max, weightPct: Math.round(c.pct * 100) / 100, contribution: (earned / max) * c.pct });
   }
   const assigned = items.reduce((n, i) => n + i.max, 0), inComps = comps.filter((c) => c.id !== "mc").reduce((n, c) => n + c.max, 0);
   if (assigned !== inComps) return withhold("point_mismatch"); // 어떤 FRQ 도 구성 요소에서 빠지지 않아야 한다

@@ -94,5 +94,17 @@
 | D. 위 B+C 병행 + 허락 회신 후 A | $6–7 + 허락 시 추가(합계 $12 이내) | 가장 신중하나 일정 길어짐 |
 권장: D(B로 서열·주입·편향 먼저 점검, 정확도 보증은 허락 확보 후).
 
-### 8.2 허락 문의 초안 (College Board Copyright and Trademark Permission Request)
-"Alton Education LLC is an online SAT/AP tutoring provider. We request written permission to use publicly posted AP European History sample student responses and their official scores (2023-2025, ~72 samples) solely as internal evaluation inputs to measure the accuracy of our automated practice-essay feedback tool. We will not publish, redistribute, or show the responses to users or store full text in our repositories; only scores and aggregate statistics would be retained. Our tool states that results are estimates, not official AP scores. Please advise whether this use is permitted and under what conditions."
+### 8.2 허락 문의 초안 (College Board Copyright and Trademark Permission Request) — 2026-10-21 보완, **발송 금지(오너 승인 전)**
+일반 교육 목적 허락이 아니라 아래 여섯 항목을 모두 명시해 요청한다.
+| 항목 | 초안에 명시할 내용 |
+|---|---|
+| 대상 자료 | AP European History 의 공개 Sample Student Responses 와 해당 공식 점수(2023–2025, 최대 약 72건), 필요 시 공식 Scoring Guidelines 의 점수 설명. 자료별 URL·연도·세트를 표로 첨부. |
+| 이용 목적 | 영리 사업체(Alton Education LLC, 유료 SAT/AP 비대면 수업)가 자사 AI 연습 채점 기능의 정확도를 **내부 평가**하는 용도. 시험 대비 상품의 품질 관리 목적임을 숨기지 않는다. |
+| 외부 AI 제공자 전송 | **전송한다.** 자료 본문이 평가 호출 때 외부 AI 서비스 제공자(Anthropic API)로 전송된다. 제공자 이름, 전송 시점(평가 실행 중 한정), 제공자의 보관·학습 정책(상용 API 약관 기준 확인 후 기재)을 적는다. 전송을 원치 않으면 허락 범위에서 제외하라는 회신도 요청. |
+| 저장·보관 | 저장소(git)·학생 화면·로그에 본문을 남기지 않는다. 평가 중에만 접근 제한된 비공개 작업 폴더에 두고 평가 종료 후 삭제. 영구 보관은 문항 ID·샘플 번호·공식 점수·AI 점수·집계 통계뿐. 삭제 시점과 확인 방식을 적는다. |
+| 학생 화면 공개 여부 | 공개하지 않는다. 학생·학부모·교사 화면, 프롬프트 앵커, 마케팅 자료에 표시·인용하지 않는다(채점 결과는 AI 추정치이며 College Board 자료 본문을 포함하지 않는다). |
+| 모델 학습 사용 여부 | 모델 학습·미세조정·평가 데이터셋 외부 배포에 사용하지 않는다. 제공자가 이 자료를 학습에 쓰지 않는 계약 조건인지 확인해 기재(확인 전에는 "확인 중"으로 표기하고 오너가 판단). |
+추가로 물을 것: (1) 상업적 교육 서비스 대상 별도 라이선스 경로가 있는지, (2) 허락 조건(기간·범위·보고)이 있는지, (3) 학생 약관의 "test prep or other business" 비영리 조항과 이 허락의 관계.
+영문 본문 초안:
+"Alton Education LLC is a for-profit online SAT/AP tutoring company. We request written permission to use the following publicly posted College Board materials: AP European History sample student responses and their official scores for 2023-2025 (up to about 72 responses; list attached by URL). The use is limited to internal evaluation of our own automated practice-essay scoring feature, which tells students its results are estimates and not official AP scores. To run that evaluation, the response text would be transmitted to a third-party AI service provider (Anthropic, via its commercial API) for the duration of each evaluation run; we will confirm and state the provider's retention and no-training terms before any use. We would not commit the text to any code repository, show it to students, parents, or teachers, use it as an example or anchor in prompts, publish it, or use it to train or fine-tune any model. The text would be kept only in access-restricted storage during the evaluation and deleted afterward; we would retain only response identifiers, official scores, our scores, and aggregate statistics. Please tell us whether this use is permitted, whether a separate commercial license applies, and any conditions."
+참고: 이 허락과 무관하게 2026-10-21 자체 샘플 검증(`docs/ap/europeanhistory-essay-selfcheck-2026-10-21.md`)은 공식 자료 없이 수행했고(호출 비용 $3.70), 결과는 사전 등록 기준 미달(과소 채점 중심)이다. 안전 방향 항목은 양호. 켜기 상수는 false 유지.

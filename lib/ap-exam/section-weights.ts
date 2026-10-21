@@ -10,6 +10,8 @@ export type ApExamWeights = {
   /** recorded = 저장소 문서가 출처를 인용해 기록, owner = 오너 확인(원문 페이지 미기재). */
   basis: "recorded" | "owner";
   source: string;
+  /** FRQ 내부 비중(%, FRQ 점수 대비): 문항 점수 비율이 이 값과 같아야 한다(예: Micro/Macro 10·5·5점 = 50·25·25%). */
+  frqSplit?: number[];
 };
 
 const mcFrq = (mc: number, frq: number, source: string, basis: "recorded" | "owner" = "recorded"): ApExamWeights => ({ examYear: 2027, components: [{ id: "mc", pct: mc }, { id: "frq", pct: frq }], basis, source });
@@ -23,8 +25,9 @@ export const AP_EXAM_WEIGHTS: Record<string, ApExamWeights> = {
   ap_physics_1: mcFrq(50, 50, "docs/ap/physics1-facts.md (CED p.17)"),
   ap_statistics: mcFrq(50, 50, "docs/ap/statistics-facts.md (CED p.156)"),
   ap_computer_science_a: mcFrq(55, 45, "curriculum-2027/ap_computer_science_a.json (CED exam overview)"),
-  ap_microeconomics: mcFrq(200 / 3, 100 / 3, "docs/ap/2027-exam-spec-table.md writes 66%/33%; 66 2/3 : 33 1/3 assumed (confirm)"),
-  ap_macroeconomics: mcFrq(200 / 3, 100 / 3, "docs/ap/2027-exam-spec-table.md writes 66%/33%; 66 2/3 : 33 1/3 assumed (confirm)"),
+  // 오너 확인(2026-10-21): Fall 2026 CED 기재 MC 66.65% · FRQ 33.35%(장문 1문항 50% · 단문 2문항 각 25%). CED 쪽수는 미기록 — 확인되면 source 에 추가.
+  ap_microeconomics: { ...mcFrq(66.65, 33.35, "Fall 2026 CED (owner confirmation 2026-10-21; page number not recorded)", "owner"), frqSplit: [50, 25, 25] },
+  ap_macroeconomics: { ...mcFrq(66.65, 33.35, "Fall 2026 CED (owner confirmation 2026-10-21; page number not recorded)", "owner"), frqSplit: [50, 25, 25] },
   ap_psychology: mcFrq(200 / 3, 100 / 3, "docs/ap/psychology-facts.md (CED p.147: 66.7% / 33.3%)"),
   ap_english_language: mcFrq(45, 55, "curriculum-2027/ap_english_language.json (CED exam overview)"),
   ap_english_literature: mcFrq(45, 55, "curriculum-2027/ap_english_literature.json (CED p.135)"),

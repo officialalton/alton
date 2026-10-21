@@ -128,6 +128,16 @@ describe("section weights registry", () => {
       expect(AP_LAYOUTS[k], k).toBeDefined();
     }
   });
+  it("Micro/Macro use the Fall 2026 CED values 66.65 / 33.35 and a 50/25/25 FRQ split that sums to 100", () => {
+    for (const k of ["ap_microeconomics", "ap_macroeconomics"]) {
+      const w = AP_EXAM_WEIGHTS[k];
+      expect(w.components.map((c) => c.pct), k).toEqual([66.65, 33.35]);
+      expect(w.frqSplit, k).toEqual([50, 25, 25]);
+      expect(w.frqSplit!.reduce((a, b) => a + b, 0)).toBe(100);
+      expect(Math.round((66.65 + 33.35) * 100) / 100).toBe(100);
+      expect(w.basis).toBe("owner");
+    }
+  });
   it("agrees with the older AP_SECTION_WEIGHTS_PCT entries", () => {
     for (const [k, w] of Object.entries(AP_SECTION_WEIGHTS_PCT)) {
       const c = AP_EXAM_WEIGHTS[k].components;
