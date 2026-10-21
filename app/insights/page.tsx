@@ -10,10 +10,10 @@ export const revalidate = 900;
 const DESCRIPTION = "Practical guidance on SAT and AP preparation from ALTON Education.";
 
 export const metadata: Metadata = {
-  title: "Insights — ALTON",
+  title: "Insights | ALTON Education",
   description: DESCRIPTION,
   alternates: { canonical: "/insights" },
-  openGraph: { images: OG_IMAGES, title: "Insights — ALTON", description: DESCRIPTION, type: "website", url: "/insights" },
+  openGraph: { images: OG_IMAGES, title: "Insights | ALTON Education", description: DESCRIPTION, type: "website", url: "/insights" },
 };
 
 const formatInsightDate = (iso: string | null) =>

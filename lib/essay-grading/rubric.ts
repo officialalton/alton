@@ -27,7 +27,8 @@ export const ENGLANG_RUBRIC_ID = RUBRIC_VERSION;
 export type RubricId = "englang" | "englit";
 export const RUBRIC_VERSION_ENGLIT = "englit-v1";
 export const WHAP_RUBRIC_ID = "whap-v1";
-export const RUBRIC_IDS = [ENGLANG_RUBRIC_ID, RUBRIC_VERSION_ENGLIT, USH_RUBRIC_ID, WHAP_RUBRIC_ID] as const;
+export const EURO_RUBRIC_ID = "euro-v1";
+export const RUBRIC_IDS = [ENGLANG_RUBRIC_ID, RUBRIC_VERSION_ENGLIT, USH_RUBRIC_ID, WHAP_RUBRIC_ID, EURO_RUBRIC_ID] as const;
 const sum = (rows: readonly { max: number }[]) => rows.reduce((n, r) => n + r.max, 0);
 
 const ENGLISH_DEF: RubricDef = {
@@ -74,6 +75,13 @@ const USH_DEFS: Record<UshTaskType, RubricDef> = {
 const toWhap = (d: RubricDef): RubricDef => ({ ...d, id: WHAP_RUBRIC_ID, subject: "AP World History: Modern", head: [d.head[0].replace("AP U.S. History", "AP World History: Modern"), d.head[1]], perAttemptEnv: "AI_ESSAY_PER_ATTEMPT_CAP_WHAP" });
 const WHAP_DEFS: Record<UshTaskType, RubricDef> = { saq: toWhap(USH_DEFS.saq), dbq: toWhap(USH_DEFS.dbq), leq: toWhap(USH_DEFS.leq) };
 
+// AP European History(euro-v1, 준비 단계·꺼짐): 공식 구조 SAQ 3문항 각 3점(A·B·C 1점씩) · DBQ 7점(A 1 · B 1 · C 증거 2+1 · D 분석 1+1) · LEQ 6점(A 1 · B 1 · C 2 · D 2) — 2025 공식 Scoring Guidelines Set 1 로 확인.
+// 2027 개편(SAQ 3개 모두 필수·자료 포함, LEQ 필수 1문항, DBQ 연대 확대)은 문항 형식 변경이며 채점 기준 불변이라고 AP Central 이 안내 — 2027 공식 채점 기준 문서는 아직 확인하지 못했다(보정 전 재확인 필요).
+// 행·안내는 whap-v1/ushistory-v1 과 같은 ALTON 자체 표현을 재사용하고 과목명·유럽사 규칙(시대 1450–현재, 문서 7개)·상한 환경변수만 바꾼다.
+const toEuro = (d: RubricDef): RubricDef => ({ ...d, id: EURO_RUBRIC_ID, subject: "AP European History", head: [d.head[0].replace("AP U.S. History", "AP European History"), d.head[1]], perAttemptEnv: "AI_ESSAY_PER_ATTEMPT_CAP_EURO", perAttemptDefault: 5,
+  extraRules: [...d.extraRules, "The course covers European history from about 1450 to the present. Judge contextualization and evidence against European developments relevant to the prompt."] });
+const EURO_DEFS: Record<UshTaskType, RubricDef> = { saq: toEuro(USH_DEFS.saq), dbq: toEuro(USH_DEFS.dbq), leq: toEuro(USH_DEFS.leq) };
+
 export const RUBRIC_ROWS_ENGLIT = [
   { key: "thesis", label: "Thesis", max: 1, guide: "1 if the essay states a defensible interpretation that answers the prompt (of the poem, the passage, or the chosen work as a whole); 0 if it only restates the prompt, summarizes or describes the text, makes a general comment that does not respond to the prompt, or offers no claim that needs defending." },
   { key: "evidence", label: "Evidence & Commentary", max: 4, guide: "0 = restates the thesis or prompt, repeats given information, or is irrelevant; 1 = evidence is mostly general and the essay summarizes or paraphrases without explaining how the evidence supports an argument; 2 = some specific, relevant evidence (a quoted phrase or precise detail) mixed with generalities, with at least an attempt to explain how some of it relates to the argument, even if the commentary is thin or there is no established (or a faulty) line of reasoning — do not drop to 1 only because the commentary is simple when specific evidence is actually present; 3 = specific evidence for the claims in a line of reasoning, with commentary explaining how some evidence supports it, including how at least one literary element or technique contributes to meaning; 4 = specific evidence for every claim, commentary that consistently explains how the evidence supports the line of reasoning, and explanation of how multiple literary elements or techniques contribute to meaning. Naming a device or quoting a line without explaining its effect stays at 1-2. For the literary argument question the evidence must come accurately from the chosen work and the commentary must connect the named concept to an interpretation of the whole work, not retell the plot. Errors that interfere with communication prevent a 4." },
@@ -96,6 +104,7 @@ export function resolveRubric(id?: string | null, taskType?: string | null): Rub
   if (id === RUBRIC_VERSION_ENGLIT || id === "englit") return LIT_DEF;
   if (id === USH_RUBRIC_ID && (taskType === "saq" || taskType === "dbq" || taskType === "leq")) return USH_DEFS[taskType];
   if (id === WHAP_RUBRIC_ID && (taskType === "saq" || taskType === "dbq" || taskType === "leq")) return WHAP_DEFS[taskType];
+  if (id === EURO_RUBRIC_ID && (taskType === "saq" || taskType === "dbq" || taskType === "leq")) return EURO_DEFS[taskType];
   return null;
 }
 export const englishRubric = (): RubricDef => ENGLISH_DEF;

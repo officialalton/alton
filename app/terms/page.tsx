@@ -10,9 +10,9 @@ const DESCRIPTION = "The terms that apply when you use ALTON Education's website
 
 export const metadata: Metadata = {
   alternates: { canonical: "/terms" },
-  title: "Terms of Use — ALTON",
+  title: "Terms of Use | ALTON Education",
   description: DESCRIPTION,
-  openGraph: { images: OG_IMAGES, title: "Terms of Use — ALTON", description: DESCRIPTION },
+  openGraph: { images: OG_IMAGES, title: "Terms of Use | ALTON Education", description: DESCRIPTION },
 };
 
 // Content lives in lib/legal/site-documents.ts (source: docs/contracts/terms-of-use-en.md).

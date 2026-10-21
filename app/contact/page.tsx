@@ -5,9 +5,9 @@ import { loadPublicDest } from "@/lib/landing/public-dest";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/contact" },
-  title: "Contact — ALTON",
+  title: "Contact | ALTON Education",
   description: "Contact ALTON Education by email or request a tutoring consultation.",
-  openGraph: { images: OG_IMAGES, title: "Contact — ALTON", description: "Contact ALTON Education by email or request a tutoring consultation." },
+  openGraph: { images: OG_IMAGES, title: "Contact | ALTON Education", description: "Contact ALTON Education by email or request a tutoring consultation." },
 };
 
 export default async function ContactPage() {
