@@ -2,6 +2,7 @@
 
 // 2026-10-06 Free Accounts — 관리자 전용 서버 액션. 전부 requireAdminOrCapability("학생관리") 후 사용자 세션 클라이언트로
 // RPC 호출(서비스 롤 우회 없음). DB RPC가 _free_accounts_staff()로 한 번 더 검사한다(이중 방어).
+import { unscoredLabel } from "@/lib/free-accounts/unscored-label";
 import { requireAdminOrCapability } from "@/lib/admin-auth";
 import { factsFromRpcRows, type FactsRpcRow } from "@/lib/free-accounts/facts";
 import type {
@@ -90,26 +91,6 @@ export type AdminApAttemptView = {
   /** 모델 채점이 아닌 행(건너뜀·대기·실패)을 사유별로 묶은 것. 채점 구성(versions)에 세지 않는다. */
   unscored?: { label: string; rows: number }[];
 };
-
-const SKIP_LABEL: Record<string, string> = {
-  empty: "submitted blank response → 0 points (no model call)",
-  too_short: "response too short → not scored (no model call)",
-  too_long: "response too long → not scored (no model call)",
-  daily_cap: "daily scoring limit reached → not scored",
-  monthly_budget: "monthly scoring budget reached → not scored",
-  no_reference_answers: "scoring unavailable (no reference answers)",
-  bad_rubric: "scoring unavailable (unknown rubric)",
-};
-/** 점수 행 하나가 모델 채점인지, 아니라면 어떤 사유로 표시할지. done(또는 status 미기재 레거시 행)만 채점 구성에 센다. */
-export function unscoredLabel(status: string | undefined, lastError: string | null | undefined): string | null {
-  if (!status || status === "done") return null;
-  if (status === "skipped") return SKIP_LABEL[lastError ?? ""] ?? `skipped (${lastError ?? "no reason recorded"}) → not scored (no model call)`;
-  if (status === "pending" || status === "processing") return "waiting to be scored";
-  if (status === "failed" && (lastError === "daily_cap" || lastError === "monthly_budget")) return "waiting for scoring limit reset";
-  if (status === "failed") return "scoring failed, will retry";
-  if (status === "dead") return "scoring failed (no more retries)";
-  return `${status} → not scored`;
-}
 
 /** AP 응시 상세(관리자, 읽기 전용): 학생·학부모 화면과 같은 계산(result-score)에 쓸 입력 + 테스트 계정 여부 + 적용된 채점 구성. 쓰기 없음. */
 export async function getApAttemptViewForAdminAction(attemptId: string): Promise<AdminApAttemptView | null> {

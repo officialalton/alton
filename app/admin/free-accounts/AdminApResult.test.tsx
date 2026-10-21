@@ -15,7 +15,8 @@ vi.mock("./../users-actions", () => ({ setStudentStatus: vi.fn() }));
 vi.mock("@/lib/essay-grading/actions", () => ({ enqueueEssayGradingAction: vi.fn() }));
 vi.mock("@/app/components/ProblemErrorReportButton", () => ({ default: () => <button type="button">Report a problem</button> }));
 
-import { getApAttemptViewForAdminAction, unscoredLabel } from "../free-accounts-actions";
+import { getApAttemptViewForAdminAction } from "../free-accounts-actions";
+import { unscoredLabel } from "@/lib/free-accounts/unscored-label";
 import AdminApResultView from "./AdminApResultView";
 
 const mc = (i: number, ok: boolean) => ({ setItemId: `m${i}`, section: "ap_mc", format: "mc", question: "Q", options: ["a", "b"], correctIndex: 0, response: ok ? "0" : "1", correct: ok, parts: null, satDomain: "ap:U1.1" });
