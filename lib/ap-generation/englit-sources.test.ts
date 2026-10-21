@@ -21,7 +21,7 @@ describe("englit source registry", () => {
     expect(validateEntry({ ...e, year_first_published: 1934 }, t)).toContain("published_after_1928_needs_explicit_pd_statement");
     expect(validateEntry({ ...e, url: "https://example.com/x" }, t)).toContain("url_not_authorized_repository");
   });
-  it("records every modification and a raw-file hash", () => { for (const e of reg.entries) { expect(e.raw_sha256).toMatch(/^[0-9a-f]{64}$/); expect(e.modifications.length).toBeGreaterThan(0); expect(e.retrieved).toBe("2026-10-15"); } });
+  it("records every modification and a raw-file hash", () => { for (const e of reg.entries) { expect(e.raw_sha256).toMatch(/^[0-9a-f]{64}$/); expect(e.modifications.length).toBeGreaterThan(0); expect(["2026-10-15", "2026-10-19"]).toContain(e.retrieved); } });
 });
 
 describe("extractors", () => {
