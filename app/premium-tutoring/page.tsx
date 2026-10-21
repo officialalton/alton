@@ -6,9 +6,9 @@ import { loadPublicDest } from "@/lib/landing/public-dest";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/premium-tutoring" },
-  title: "Premium Tutoring & Educational Consulting — ALTON",
+  title: "Premium Tutoring & Educational Consulting | ALTON Education",
   description: "Personalized 1:1 online tutoring and educational consulting from ALTON, available when you need more personal support.",
-  openGraph: { images: OG_IMAGES, title: "Premium Tutoring & Educational Consulting — ALTON", description: "Personalized 1:1 online tutoring and educational consulting from ALTON, available when you need more personal support." },
+  openGraph: { images: OG_IMAGES, title: "Premium Tutoring & Educational Consulting | ALTON Education", description: "Personalized 1:1 online tutoring and educational consulting from ALTON, available when you need more personal support." },
 };
 
 export default async function PremiumTutoringPage() {

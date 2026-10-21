@@ -5,7 +5,7 @@ import { JsonLd, organizationJsonLd, websiteJsonLd } from "@/lib/seo/json-ld";
 import { loadPublicDest } from "@/lib/landing/public-dest";
 import { getLandingAvailability } from "@/lib/landing/practice-test-count";
 
-const TITLE = "ALTON — Free SAT Practice Tests, Learning Tools & Premium Tutoring";
+const TITLE = "ALTON Education | Free SAT & AP Practice Tests";
 const DESCRIPTION =
   "Practice with free SAT tests, understand your mistakes, and keep your review organized with a vocabulary builder and mistake notebook. Premium tutoring and educational consulting are available when you need more support.";
 

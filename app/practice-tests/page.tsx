@@ -9,9 +9,9 @@ import { loadPublicDest } from "@/lib/landing/public-dest";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/practice-tests" },
-  title: "Free SAT Practice Tests — ALTON",
+  title: "Free SAT & AP Practice Tests | ALTON Education",
   description: "Take free, modular and adaptive SAT practice tests and subject-specific AP tests and review detailed results and explanations.",
-  openGraph: { images: OG_IMAGES, title: "Free SAT Practice Tests — ALTON", description: "Take free, modular and adaptive SAT practice tests and subject-specific AP tests and review detailed results and explanations." },
+  openGraph: { images: OG_IMAGES, title: "Free SAT & AP Practice Tests | ALTON Education", description: "Take free, modular and adaptive SAT practice tests and subject-specific AP tests and review detailed results and explanations." },
 };
 
 export default async function PracticeTestsPage() {
@@ -28,7 +28,7 @@ export default async function PracticeTestsPage() {
           <li>One-click saving of missed questions to your Mistake Notebook.</li>
         </ul>
         <h2>AP practice tests</h2>
-        <p>AP practice tests are subject-specific. Pick a subject to see its exam format and units.</p>
+        <p>AP practice tests are subject-specific. Pick a subject to see its exam format and units, or browse the <Link href="/ap-practice-tests">AP practice tests overview</Link>. For SAT section practice, see <Link href="/sat-math-practice">SAT Math</Link> and <Link href="/sat-reading-and-writing-practice">SAT Reading and Writing</Link>.</p>
         <ul>
           <li><Link href={`/practice-tests/${SAT_SLUG}`}>SAT</Link></li>
           {Object.entries(AP_SUBJECT_NAME).filter(([code]) => isApPublicSubject(code)).map(([code, name]) => (
