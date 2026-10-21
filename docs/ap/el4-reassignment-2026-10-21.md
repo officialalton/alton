@@ -47,3 +47,23 @@
 2. 또는 **새 q1 프롬프트 1개 생성**: 화면 증거가 필요한 새 후보 1건. 과거 EL FRQ 검수 기준으로 생성·평가·감사 합쳐 약 US$1~3 예상(화면 증거 수집 별도, 추가 비용 없음).
 
 재실행: `npx tsx scripts/ap-generation/el4-reassign.ts [--conservative] [--no-pins] [--write data/ap/stock/exact-assign-el-el4-v2.json]` (해가 있으면 독립 검증기·`planElDraftSet`·해시 대조 통과 시에만 파일 기록).
+
+## 후속 (2026-10-21 오후): fe1 수선과 EL4 재배정 성공
+
+결과: **EL4 재배정 해를 얻어 `data/ap/stock/exact-assign-el-el4-v2.json` 을 만들었다.** q1 = `englang-r19-f2:ap_english_language-fe1-k0` + 유지 7키. 기존 `exact-assign-el-el3-el4.json` 은 변경 없음(EL3 항목 sha256 `53b90a79a196c1496d199d51bd90a229c2e2c4b304e4542e7663b69c71308527` 그대로 재확인). LLM 호출·원격 쓰기 없음.
+
+1. **fe1 수선(최소)**: stat_chart 제목 "Preferred single use of a 10-million-dollar stormwater budget, Orvell, 2025"(75자) → "Preferred use of a 10-million-dollar stormwater budget, Orvell, 2025"(68자). 제목은 질문·참고답·루브릭에서 인용되지 않고(검색 결과 차트 데이터 2곳뿐), 본문의 "single use"·yTitle "Preferred use of the budget"과 의미가 일치한다. 데이터·질문·참고답·루브릭은 변경 없음. 수정 파일: `data/ap/stock/el-r19f2-items.json`, `data/ap/sample-2027/englang-r19-f2/{candidates.json,frq.json,frq-gen.results.jsonl}`(같은 문자열 치환).
+2. **해시 규칙**: 아이템 content hash(`itemContentHash(payload)`)는 payload 내용 해시라 제목 변경으로 새 해시 `382123ba59dd…`(전체 `382123ba59dd9f01088d5ae2444d3d8af89064677e68404c4acc475f4332f89a`)가 되었다(구 `bccad5fb…`). 생성기 파일 변경이 아니므로 frozen config(`config/ap-frozen/englang-r19-f2.v1.json`) 해시와 무관하다. `el-r19f2-pass-keys.json` 은 stockKey 목록이라 변경 불필요. 증거가 없던 후보라 기존 검증 기록과의 충돌도 없다.
+3. **렌더 게이트**: `render-check.ts` 재실행 → fe1 `stat_chart` pass(전체 pass 2405→2406, fail 32→31), 다른 행의 결과·해시 변화 없음(`report.json`에서 fe1 행과 집계만 변경).
+4. **화면 증거(격리 스택 `ALTON_apel4`, 포트 +2500)**: `local-demo-seed.ts seed --keys-file <fe1> --practice-sets` → `screen-evidence.ts` 390x844·1280x800 = 2항목, 점검 7종 전부 pass(보기·그림 렌더 2요소·가림 없음·정답/해설 비노출·FRQ 입력·원문 TeX 없음). `evidence-el-r19.json` 에 병합(544→546항목, 기존 행 보존), 해시 = 렌더 보고서 해시. 스크린샷: `docs/ap/screen-evidence/el-r19/englang-r19-f2_ap_english_language-fe1-k0-{390x844,1280x800}.jpg`.
+5. **재배정**: 원격 비프로덕션 DB 읽기 전용 SELECT로 스냅샷 재취득(`data/ap/stock/el4-reassign-db-snapshot-2026-10-21.json`) — 공개 세트(Exam 1 v4, Exam 2 v4, Exam 3 v1)·풀 83행·문제 ID 모두 이전 스냅샷과 동일(변경 없음). `el4-reassign.ts` 에 `--pending-key`(DB 미적재 수선 키를 가상 행으로 취급, 렌더 보고서·로컬 증거 해시 일치를 필수 확인) 추가. 실행: status=optimal, 독립 검증기 위반 0, `planElDraftSet` ok=true 위반 0 items=48, 공개 세트 키·문제 ID·문항군·계보 겹침 0(fe1 는 차단 목록에 걸리지 않음), 해시 불일치 0.
+   - EL4: mcA = lr21·lr24·lw43·lw44·sw45(변경 없음), frqA = fe1(q1)·fd2(q2)·fd3(q3). 구 q1 `el-rv fa1`(Exam 2 사용 중)만 교체.
+   - 한계: fe1 의 문제 ID·버전 ID 는 DB 적재 전이라 `planElDraftSet` 은 가상 ID(`00000000-…f1`)로 검증했다. fe1 의 실제 문제 ID 겹침은 적재 뒤 확인해야 한다(키·문항군·계보 겹침은 사전 확인 완료, 새 문항이라 기존 문제 ID 와 겹칠 수 없음).
+
+### 총괄이 해야 할 적재 단계
+
+fe1 은 아직 DB 에 없다. 관리자 화면에서 batch **`el-r19f2`**(`lib/ap-admin/batches.ts`: items `el-r19f2-items.json`, pass-keys `el-r19f2-pass-keys.json`(fe1 1키), evidence `evidence-el-r19.json`)를 적재(변환)하고 렌더·화면 검증 기록을 남긴다. 기대: 새 키 1개, 렌더·화면 해시 `382123ba59dd…` 일치. 이후 `el4-reassign.ts`(스냅샷 갱신 후, `--pending-key` 없이)를 다시 돌려 DB 행 기준으로 위반 0·해시 일치를 확인하고 `exact-assign-el-el4-v2.json` 으로 EL4 초안을 조립한다.
+
+### 부수 발견
+
+- 신규 마이그레이션 `20261101100000_essay_ai_cost_events.sql` 이 `20262100000600_essay_ai_scores.sql`(mock_exam_essay_scores 생성)보다 버전 번호가 앞서, 빈 DB 에서 `supabase start` 가 `relation "public.mock_exam_essay_scores" does not exist` 로 실패한다(격리 스택 시작 시 확인, 해당 파일을 임시로 빼고 기동). 원격에 이미 적용돼 있으면 영향이 없지만, 신규 환경·reset 에서는 깨진다. 별도 정정 필요(적용 완료 번호는 고치지 않고 새 번호로).
