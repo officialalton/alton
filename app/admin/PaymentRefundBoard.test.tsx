@@ -5,8 +5,10 @@ import PaymentRefundBoard from "./PaymentRefundBoard";
 const listMock = vi.fn();
 const resolveRefundMock = vi.fn();
 const resolveIssueMock = vi.fn();
+const pageMock = vi.fn();
 vi.mock("./payment-refund-actions", () => ({
   listPaymentRefundBoard: (...a: unknown[]) => listMock(...a),
+  listPaymentRefundPage: (...a: unknown[]) => pageMock(...a),
   resolvePaymentRefund: (...a: unknown[]) => resolveRefundMock(...a),
   resolvePaymentWebhookIssue: (...a: unknown[]) => resolveIssueMock(...a),
 }));
@@ -124,13 +126,43 @@ describe("PaymentRefundBoard", () => {
     listMock.mockResolvedValue({
       refunds: [refund({ id: "old", purchaseId: "pOld", needsReview: true }), refund({ id: "x", purchaseId: "pX", needsReview: false })],
       issues: [],
-      counts: { refundsTotal: 250, refundsPending: 2, refundsShown: 102, issuesTotal: 3, issuesOpen: 1, issuesShown: 3 },
+      counts: { refundsTotal: 250, refundsPending: 2, refundsDone: 248, refundsPendingShown: 2, refundsShown: 102, issuesTotal: 3, issuesOpen: 1, issuesShown: 3 },
     });
     render(<PaymentRefundBoard />);
-    expect(await screen.findByText(/환불 기록 250건 중 102건 표시 · 처리 대기 2건/)).toBeTruthy();
+    expect(await screen.findByText(/서버 처리 대기 2건 중 2건 불러옴 · 처리 완료 248건 중 0건 불러옴/)).toBeTruthy();
     expect(screen.getAllByTestId("refund-pending")).toHaveLength(2);
     fireEvent.change(screen.getByLabelText("환불 필터"), { target: { value: "review" } });
     expect(screen.getAllByTestId("refund-pending")).toHaveLength(1);
     expect(screen.getByTestId("issue-counts").textContent).toMatch(/3건 중 3건 표시 · 미해결 1건/);
+  });
+
+  it("처리 대기가 제한을 넘으면 일부만 표시 중임을 알리고 '더 불러오기'로 이어서 불러온다", async () => {
+    listMock.mockResolvedValue({
+      refunds: [refund({ id: "a", createdAt: "2026-01-01T00:00:00.000001+00:00" }), refund({ id: "b", createdAt: "2026-01-02T00:00:00.000002+00:00" })],
+      issues: [],
+      counts: { refundsTotal: 1200, refundsPending: 1200, refundsDone: 0, refundsPendingShown: 2, refundsShown: 2, issuesTotal: 0, issuesOpen: 0, issuesShown: 0 },
+    });
+    pageMock.mockResolvedValue({ items: [refund({ id: "c" })], next: null });
+    render(<PaymentRefundBoard />);
+    expect(await screen.findByTestId("refund-truncated")).toBeTruthy();
+    expect(screen.getByTestId("refund-truncated").textContent).toMatch(/1,000건까지만/);
+    expect(screen.getByTestId("refund-truncated").textContent).toMatch(/1198건/);
+    fireEvent.click(screen.getByText("처리 대기 더 불러오기"));
+    await waitFor(() => expect(pageMock).toHaveBeenCalledWith({ kind: "pending", after: { at: "2026-01-02T00:00:00.000002+00:00", id: "b" } }));
+    await waitFor(() => expect(screen.getAllByTestId("refund-pending")).toHaveLength(3));
+  });
+
+  it("처리 완료 이력도 '이전 처리 기록 더 보기'로 과거 기록을 불러온다", async () => {
+    const d = (id: string, at: string) => refund({ id, handledAt: at, handledBy: "admin", handledAction: "dismiss", handledNote: "ok" });
+    listMock.mockResolvedValue({
+      refunds: [d("d1", "2026-10-20T00:00:00+00:00")],
+      issues: [],
+      counts: { refundsTotal: 3, refundsPending: 0, refundsDone: 3, refundsPendingShown: 0, refundsShown: 1, issuesTotal: 0, issuesOpen: 0, issuesShown: 0 },
+    });
+    pageMock.mockResolvedValue({ items: [d("d2", "2026-10-19T00:00:00+00:00"), d("d3", "2026-10-18T00:00:00+00:00")], next: null });
+    render(<PaymentRefundBoard />);
+    fireEvent.click(await screen.findByText(/이전 처리 기록 더 보기\(2건 남음\)/));
+    await waitFor(() => expect(pageMock).toHaveBeenCalledWith({ kind: "done", after: { at: "2026-10-20T00:00:00+00:00", id: "d1" } }));
+    await waitFor(() => expect(screen.getAllByTestId("refund-done")).toHaveLength(3));
   });
 });

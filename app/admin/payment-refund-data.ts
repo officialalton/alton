@@ -41,6 +41,10 @@ export const PENDING_LIMIT = 1000;
 export type BoardCounts = {
   refundsTotal: number;
   refundsPending: number;
+  /** 서버에 있는 처리 완료 전체 건수(표시는 최근 DONE_LIMIT건 + 더 보기로 이어서) */
+  refundsDone: number;
+  /** 지금 불러온 처리 대기 건수 — refundsPending 보다 작으면 일부만 표시 중(PENDING_LIMIT 초과) */
+  refundsPendingShown: number;
   refundsShown: number;
   issuesTotal: number;
   issuesOpen: number;
@@ -51,18 +55,16 @@ const REFUND_COLS =
   "id, purchase_id, stripe_refund_id, amount_minor, currency, status, needs_review, auto_revoke_status, handled_by, handled_at, handled_action, handled_note, created_at";
 const ISSUE_COLS = "id, event_id, kind, purchase_id, detail, created_at, resolved_at, resolved_note";
 
-export async function loadPaymentRefundBoard(
-  supabase: SupabaseClient
-): Promise<{ refunds: PaymentRefundBoardItem[]; issues: PaymentWebhookIssueItem[]; counts: BoardCounts }> {
-  const [pendingR, doneR, totalR, pendingCountR] = await Promise.all([
-    supabase.from("payment_refunds").select(REFUND_COLS).is("handled_at", null).order("created_at", { ascending: true }).limit(PENDING_LIMIT),
-    supabase.from("payment_refunds").select(REFUND_COLS).not("handled_at", "is", null).order("handled_at", { ascending: false }).limit(DONE_LIMIT),
-    supabase.from("payment_refunds").select("id", { count: "exact", head: true }),
-    supabase.from("payment_refunds").select("id", { count: "exact", head: true }).is("handled_at", null),
-  ]);
-  for (const r of [pendingR, doneR, totalR, pendingCountR]) if (r.error) throw new Error(r.error.message);
-  const refunds = [...(pendingR.data ?? []), ...(doneR.data ?? [])];
 
+/** 다음 페이지 조회용 키셋 커서. at 은 DB 가 돌려준 timestamptz 문자열 그대로(밀리초 반올림 없이). */
+export type RefundCursor = { at: string; id: string };
+export const PAGE_SIZE = 200;
+const CURSOR_AT = /^[0-9TZ:.+\- ]{10,40}$/;
+const CURSOR_ID = /^[0-9a-fA-F-]{36}$/;
+export const isValidCursor = (c: unknown): c is RefundCursor =>
+  !!c && typeof c === "object" && CURSOR_AT.test(String((c as RefundCursor).at)) && CURSOR_ID.test(String((c as RefundCursor).id));
+
+async function enrichRefunds(supabase: SupabaseClient, refunds: Record<string, any>[]): Promise<PaymentRefundBoardItem[]> { // eslint-disable-line @typescript-eslint/no-explicit-any
   const purchaseIds = [...new Set(refunds.map((r) => r.purchase_id).filter((v): v is string => Boolean(v)))];
   const purchaseById = new Map<string, { totalMinor: number; currency: string; status: string }>();
   const stats = new Map<string, Stat>();
@@ -106,25 +108,7 @@ export async function loadPaymentRefundBoard(
     }
   }
 
-  const [openI, doneI, totalI, openCountI] = await Promise.all([
-    supabase.from("payment_webhook_issues").select(ISSUE_COLS).is("resolved_at", null).order("created_at", { ascending: true }).limit(PENDING_LIMIT),
-    supabase.from("payment_webhook_issues").select(ISSUE_COLS).not("resolved_at", "is", null).order("resolved_at", { ascending: false }).limit(DONE_LIMIT),
-    supabase.from("payment_webhook_issues").select("id", { count: "exact", head: true }),
-    supabase.from("payment_webhook_issues").select("id", { count: "exact", head: true }).is("resolved_at", null),
-  ]);
-  for (const r of [openI, doneI, totalI, openCountI]) if (r.error) throw new Error(r.error.message);
-  const issueRows = [...(openI.data ?? []), ...(doneI.data ?? [])];
-
-  return {
-    counts: {
-      refundsTotal: totalR.count ?? refunds.length,
-      refundsPending: pendingCountR.count ?? (pendingR.data ?? []).length,
-      refundsShown: refunds.length,
-      issuesTotal: totalI.count ?? issueRows.length,
-      issuesOpen: openCountI.count ?? (openI.data ?? []).length,
-      issuesShown: issueRows.length,
-    },
-    refunds: refunds.map((r) => {
+  return refunds.map((r) => {
       const s = r.purchase_id ? stats.get(r.purchase_id) : undefined;
       return {
         id: r.id,
@@ -152,7 +136,43 @@ export async function loadPaymentRefundBoard(
             }
           : null,
       };
-    }),
+    });
+}
+
+export async function loadPaymentRefundBoard(
+  supabase: SupabaseClient
+): Promise<{ refunds: PaymentRefundBoardItem[]; issues: PaymentWebhookIssueItem[]; counts: BoardCounts }> {
+  const [pendingR, doneR, totalR, pendingCountR, doneCountR] = await Promise.all([
+    supabase.from("payment_refunds").select(REFUND_COLS).is("handled_at", null).order("created_at", { ascending: true }).order("id", { ascending: true }).limit(PENDING_LIMIT),
+    supabase.from("payment_refunds").select(REFUND_COLS).not("handled_at", "is", null).order("handled_at", { ascending: false }).order("id", { ascending: false }).limit(DONE_LIMIT),
+    supabase.from("payment_refunds").select("id", { count: "exact", head: true }),
+    supabase.from("payment_refunds").select("id", { count: "exact", head: true }).is("handled_at", null),
+    supabase.from("payment_refunds").select("id", { count: "exact", head: true }).not("handled_at", "is", null),
+  ]);
+  for (const r of [pendingR, doneR, totalR, pendingCountR, doneCountR]) if (r.error) throw new Error(r.error.message);
+  const refunds = await enrichRefunds(supabase, [...(pendingR.data ?? []), ...(doneR.data ?? [])]);
+
+  const [openI, doneI, totalI, openCountI] = await Promise.all([
+    supabase.from("payment_webhook_issues").select(ISSUE_COLS).is("resolved_at", null).order("created_at", { ascending: true }).limit(PENDING_LIMIT),
+    supabase.from("payment_webhook_issues").select(ISSUE_COLS).not("resolved_at", "is", null).order("resolved_at", { ascending: false }).limit(DONE_LIMIT),
+    supabase.from("payment_webhook_issues").select("id", { count: "exact", head: true }),
+    supabase.from("payment_webhook_issues").select("id", { count: "exact", head: true }).is("resolved_at", null),
+  ]);
+  for (const r of [openI, doneI, totalI, openCountI]) if (r.error) throw new Error(r.error.message);
+  const issueRows = [...(openI.data ?? []), ...(doneI.data ?? [])];
+
+  return {
+    counts: {
+      refundsTotal: totalR.count ?? refunds.length,
+      refundsPending: pendingCountR.count ?? (pendingR.data ?? []).length,
+      refundsDone: doneCountR.count ?? (doneR.data ?? []).length,
+      refundsPendingShown: (pendingR.data ?? []).length,
+      refundsShown: refunds.length,
+      issuesTotal: totalI.count ?? issueRows.length,
+      issuesOpen: openCountI.count ?? (openI.data ?? []).length,
+      issuesShown: issueRows.length,
+    },
+    refunds,
     issues: issueRows.map((i) => ({
       id: i.id,
       eventId: i.event_id,
@@ -164,4 +184,29 @@ export async function loadPaymentRefundBoard(
       resolvedNote: i.resolved_note,
     })),
   };
+}
+
+/**
+ * 대장의 다음 페이지(키셋). pending = 접수 오래된 순으로 cursor 뒤, done = 처리 최근 순으로 cursor 뒤(더 과거).
+ * 처리 대기가 PENDING_LIMIT 을 넘어도, 처리 완료 이력이 DONE_LIMIT 을 넘어도 이 경로로 전부 접근할 수 있다.
+ */
+export async function loadPaymentRefundPage(
+  supabase: SupabaseClient,
+  params: { kind: "pending" | "done"; after?: RefundCursor | null }
+): Promise<{ items: PaymentRefundBoardItem[]; next: RefundCursor | null }> {
+  const pending = params.kind === "pending";
+  const col = pending ? "created_at" : "handled_at";
+  let q = supabase.from("payment_refunds").select(REFUND_COLS);
+  q = pending ? q.is("handled_at", null) : q.not("handled_at", "is", null);
+  if (params.after) {
+    const { at, id } = params.after;
+    const op = pending ? "gt" : "lt";
+    q = q.or(`${col}.${op}."${at}",and(${col}.eq."${at}",id.${op}.${id})`);
+  }
+  const { data, error } = await q.order(col, { ascending: pending }).order("id", { ascending: pending }).limit(PAGE_SIZE + 1);
+  if (error) throw new Error(error.message);
+  const rows = data ?? [];
+  const page = rows.slice(0, PAGE_SIZE);
+  const last = page[page.length - 1] as Record<string, string> | undefined;
+  return { items: await enrichRefunds(supabase, page), next: rows.length > PAGE_SIZE && last ? { at: last[col], id: last.id } : null };
 }
