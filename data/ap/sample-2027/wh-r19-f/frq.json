@@ -1,0 +1,1192 @@
+[
+ {
+  "id": "wh3_saq1",
+  "spec": {
+   "id": "wh3_saq1",
+   "exam": "WH3",
+   "template": "saq1",
+   "era": 2,
+   "units": [
+    4
+   ],
+   "focus": "The organization of scientific inquiry in 17th-century Europe: informal groups of scholars and the founding of the Royal Society of London (do not claim the society was the first scientific body anywhere)",
+   "sources": [
+    {
+     "id": "txt-libby-science-1917",
+     "context": "Walter Libby was an American historian of science who wrote this textbook in 1917."
+    }
+   ],
+   "seed": 4301
+  },
+  "payload": {
+   "schema_version": "whap-frq-1",
+   "task_type": "saq",
+   "template": "saq1",
+   "era": 2,
+   "units": [
+    4
+   ],
+   "title": "Organizing Scientific Inquiry in Seventeenth-Century Europe: From Informal Meetings to the Royal Society of London",
+   "prompt": {
+    "scenario": "In the period c. 1600 to c. 1750, European scholars studying the natural world increasingly worked through regular meetings, correspondence, and formally organized societies, rather than only on their own or within universities. The excerpt below, from a 1917 history of science textbook, describes the informal group of scholars in London whose meetings came before the formal organization of the Royal Society of London in 1662.",
+    "task": "Using the excerpt, answer (a), (b), and (c).",
+    "requirements": [
+     "Each part asks for ONE answer; only the first answer given in each part is scored.",
+     "Parts B and C must use evidence beyond the people and works named in the excerpt.",
+     "Answers to Part C must name a specific European state or society other than England and stay within 1600 to 1750."
+    ],
+    "parts": [
+     {
+      "label": "A",
+      "prompt": "Briefly describe ONE feature of the way the London scholars in the excerpt organized their study of natural philosophy before 1662.",
+      "points": 1
+     },
+     {
+      "label": "B",
+      "prompt": "Briefly explain ONE specific historical development in Europe in the period 1450 to 1700, other than the people and works named in the excerpt, that helps explain why scholars such as those in the excerpt began meeting to study the natural world.",
+      "points": 1
+     },
+     {
+      "label": "C",
+      "prompt": "Briefly explain ONE similarity or ONE difference between the organization of scientific inquiry in England described in the excerpt and the organization of scientific inquiry in ANOTHER European state in the period 1600 to 1750.",
+      "points": 1
+     }
+    ]
+   },
+   "sources": [
+    {
+     "id": "A",
+     "kind": "secondary_text",
+     "title": "An Introduction to the History of Science (excerpt on the Royal Society)",
+     "attribution": "Walter Libby, American historian of science, 1917 (Boston: Houghton Mifflin). Project Gutenberg eBook #40706. Reuse: public domain in the United States (published before 1929). excerpted (1 segment); whitespace normalized; no wording changed.",
+     "context": "Walter Libby was an American historian of science who wrote this textbook in 1917.",
+     "real_data": true,
+     "source_registry_id": "txt-libby-science-1917",
+     "source_sha256": "f9fa16c9c7c8e97450e105c967e187e8aebae4b0a422dc73373a9e07fd6d614f",
+     "body": "These philosophers whom Boyle entertained, and whose scientific acumen, breadth of mind, humility, and universal good-will he found so congenial, were the nucleus of the Royal Society of London, of which, on its definite organization in 1662, he was the foremost member. They had begun to meet together in London about 1645, worthy persons inquisitive into natural philosophy--Wilkins, interested in the navigation of the air and of waters below the surface; Wallis, mathematician and grammarian; the many-sided Petty, political economist, and inventor of a double-bottomed boat, who had as a youth of twenty studied with Hobbes in Paris in 1643, and in 1648 was to write his first treatise on industrial education at the suggestion of Hartlib, and finally make a survey of Ireland and acquire large estates; Foster, professor of astronomy at Gresham College; Theodore Haak from the Pfalz; a number of medical men, Dr. Merret, Dr. Ent, a friend of Harvey, Dr. Goddard, who could always be relied upon to undertake an experiment, Dr. Glisson, the physiologist, author in 1654 of a treatise on the liver (De Hepate), and others. They met once a week at Goddard's in Wood Street, at the Bull's Head Tavern in Cheapside, and at Gresham College.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry txt-libby-science-1917"
+     }
+    }
+   ],
+   "rubric": {
+    "rubric_id": "whap-v1",
+    "total_points": 3,
+    "rows": [
+     {
+      "row_id": "a",
+      "name": "Part A",
+      "max": 1,
+      "descriptors": {
+       "0": "The response does not describe an accurate feature of the group's organization shown in the excerpt, or only restates the title or date without describing how the group worked.",
+       "1": "The response accurately describes one feature of how the London scholars organized their inquiry as presented in the excerpt."
+      },
+      "task_specific": "Describes a feature of the pre-1662 London group drawn from the excerpt, such as weekly meetings, meetings in private homes, taverns and Gresham College, members with varied specialties, many physicians, interest in experiment, a member from abroad, or the informal group becoming the core of the later chartered society."
+     },
+     {
+      "row_id": "b",
+      "name": "Part B",
+      "max": 1,
+      "descriptors": {
+       "0": "The response names no specific development, relies only on people or works named in the excerpt, falls outside 1450 to 1700, or does not connect the development to scholars meeting to study nature.",
+       "1": "The response explains how one specific, accurate development from 1450 to 1700 helps account for scholars gathering to study the natural world."
+      },
+      "task_specific": "Explains a specific development from 1450 to 1700 not named in the excerpt (for example the printing press, Francis Bacon's call for organized experimental inquiry, Copernican or Galilean challenges to accepted authority, the telescope and other new instruments, or Descartes's new method) and links it to scholars choosing to meet and share observations."
+     },
+     {
+      "row_id": "c",
+      "name": "Part C",
+      "max": 1,
+      "descriptors": {
+       "0": "The response does not name another European state or body, gives an inaccurate comparison, falls outside 1600 to 1750, or only describes the other case without making a comparison.",
+       "1": "The response explains one accurate similarity or difference between scientific organization in England and in another named European state from 1600 to 1750."
+      },
+      "task_specific": "Explains a similarity or difference between English scientific organization and that of another named European state from 1600 to 1750, such as the French Academy of Sciences (1666) under royal sponsorship, the Accademia dei Lincei in Rome (1603), the Accademia del Cimento in Florence (1657) with Medici patronage, or Mersenne's correspondence network in Paris."
+     }
+    ],
+    "scoring_notes": [
+     "Score each part separately; one point per part, three points total.",
+     "Do not give credit for claims that the Royal Society was the first scientific society in Europe; earlier bodies such as the Accademia dei Lincei existed.",
+     "In Part A, a description that paraphrases the excerpt accurately is enough; outside knowledge is not needed.",
+     "In Part B, Boyle, Harvey, Hobbes, Hartlib, Gresham College and the other figures named in the excerpt do not count as the explained development, but they may appear as supporting detail.",
+     "In Part C, a comparison can be implied as long as the English side of the comparison is clear from the response.",
+     "ALTON reference — not official AP scoring"
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [],
+    "contextualization_ideas": [
+     "The Scientific Revolution's turn from reliance on ancient authorities toward observation and experiment.",
+     "The English Civil Wars and the Restoration of Charles II in 1660 as the political background to the Royal Society's charter."
+    ],
+    "outside_evidence": [
+     "Philosophical Transactions (1665)",
+     "French Academy of Sciences (1666)",
+     "Accademia dei Lincei (1603)",
+     "Bacon's New Atlantis (1627)",
+     "Newton's Principia (1687)"
+    ],
+    "reasoning_types": [
+     "Comparison",
+     "Causation"
+    ],
+    "doc_uses": [
+     {
+      "source_id": "Libby 1917 excerpt",
+      "usable_for": "Describing the informal, regular and multidisciplinary meetings that came before the formal organization of the Royal Society in 1662.",
+      "sourcing": "A secondary source: an early twentieth-century American textbook whose admiring tone toward the founders ('humility, and universal good-will') reflects a celebratory view of science's history common in its time."
+     }
+    ],
+    "saq_answers": {
+     "a": [
+      "The scholars met regularly, about once a week, starting around 1645.",
+      "They met in a range of informal and semi-public places, including a member's home on Wood Street, a tavern in Cheapside, and Gresham College, instead of at a single formal institution.",
+      "The group brought together people with very different specialties, including mathematics, astronomy, navigation, political economy and medicine, so inquiry was shared across fields.",
+      "The group stressed practical experiment (Goddard could be relied on to carry one out), and this informal circle became the core of the Royal Society once it was formally organized in 1662."
+     ],
+     "b": [
+      "Francis Bacon's Novum Organum (1620) and New Atlantis (1627) argued that knowledge of nature should come from organized, shared observation and experiment, and this gave scholars a model for working together in groups.",
+      "The printing press, spreading across Europe after the mid-1400s, circulated new scientific works and results widely, which created a community of readers who wanted to discuss, test and compare findings with each other.",
+      "Copernicus's heliocentric model (1543) and Galileo's telescopic observations (1610) challenged ancient authorities such as Aristotle and Ptolemy, which encouraged scholars to test claims through observation and to debate them together rather than relying on inherited texts.",
+      "New instruments such as the telescope, the microscope and the air pump made experiments complicated and costly, so scholars had reason to pool skills and witness experiments as a group."
+     ],
+     "c": [
+      "Similarity: like the London group, the Accademia dei Lincei in Rome (founded 1603) brought scholars together to study nature through observation, and Galileo was a member.",
+      "Difference: the French Academy of Sciences (1666) was set up and funded by Louis XIV's government, which paid pensions to its members, while the Royal Society had a royal charter but depended mostly on its members rather than state salaries.",
+      "Difference: the Accademia del Cimento in Florence (1657) depended on the patronage of the Medici family and did not last long, while the English society grew out of a self-organized circle of scholars and continued after 1662.",
+      "Similarity: in Paris, Marin Mersenne's correspondence network linked scholars such as Descartes and shared results across Europe, much as the London group shared knowledge through regular meetings and, later, through the Philosophical Transactions."
+     ]
+    },
+    "common_pitfalls": [
+     "Calling the Royal Society the first scientific society or academy in the world or in Europe.",
+     "In Part A, listing members' names without describing how the group was organized.",
+     "In Part B, using Boyle, Harvey or Hobbes, who are named in the excerpt, as the main development.",
+     "In Part B, naming a development such as the printing press without explaining how it encouraged scholars to gather and share results.",
+     "In Part C, describing the French Academy of Sciences or an Italian academy without actually comparing it to the English case.",
+     "Dating the Royal Society's charter or the French Academy wrongly, or placing Newton's Principia before the society existed.",
+     "Treating Libby's 1917 textbook as a seventeenth-century primary source."
+    ],
+    "facts": [
+     "The Royal Society of London received a royal charter from Charles II in 1662, following a founding meeting at Gresham College in 1660.",
+     "The Accademia dei Lincei was founded in Rome in 1603, and Galileo became a member in 1611.",
+     "The Accademia del Cimento was founded in Florence in 1657 under Medici patronage.",
+     "The French Academy of Sciences was founded in 1666 under Louis XIV, with Colbert's support, and its members received royal pensions.",
+     "The Royal Society's Philosophical Transactions began publication in 1665 under Henry Oldenburg.",
+     "Francis Bacon published Novum Organum in 1620 and New Atlantis, which describes the research institution Salomon's House, in 1627.",
+     "Copernicus published On the Revolutions of the Heavenly Spheres in 1543.",
+     "Galileo used the telescope to observe the heavens and published Sidereus Nuncius in 1610.",
+     "Isaac Newton's Principia was published in 1687 under the Royal Society's imprimatur."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_authored_from_real_sources",
+    "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+   }
+  },
+  "fact": []
+ },
+ {
+  "id": "wh3_saq2",
+  "spec": {
+   "id": "wh3_saq2",
+   "exam": "WH3",
+   "template": "saq2",
+   "era": 4,
+   "units": [
+    7
+   ],
+   "focus": "The reorganization of factory work in the early 20th century: scientific management and assembly-line methods, and their effects on workers and consumers",
+   "sources": [
+    {
+     "id": "txt-taylor-1911",
+     "context": "Frederick W. Taylor was an American engineer who published this book in 1911 about how to organize work in factories."
+    }
+   ],
+   "seed": 4302
+  },
+  "payload": {
+   "schema_version": "whap-frq-1",
+   "task_type": "saq",
+   "template": "saq2",
+   "era": 4,
+   "units": [
+    7
+   ],
+   "title": "Taylor's Promise of Shared Prosperity and the Reorganization of Factory Work, c. 1900-1939",
+   "prompt": {
+    "scenario": "In the period c. 1900-1939, engineers and industrialists in the United States and elsewhere reorganized factory work through scientific management, time study, and assembly-line mass production. These changes affected workers' pay and working conditions, relations between employers and labor, and the price and availability of manufactured goods.",
+    "task": "Using the excerpt, answer (a), (b), and (c).",
+    "requirements": [
+     "Each part asks for ONE specific, accurate response.",
+     "Part A must be based on what the excerpt actually says.",
+     "Parts B and C must use specific historical evidence from 1900-1939 that is not simply a restatement of the excerpt.",
+     "Part C must refer to Europe or the Soviet Union, not the United States alone."
+    ],
+    "parts": [
+     {
+      "label": "A",
+      "prompt": "Briefly describe ONE claim Taylor makes in the excerpt about the relationship between employers and employees.",
+      "points": 1
+     },
+     {
+      "label": "B",
+      "prompt": "Briefly explain ONE specific historical development in the period 1900-1939 that either supports or challenges Taylor's claim that the interests of employers and employees could become identical.",
+      "points": 1
+     },
+     {
+      "label": "C",
+      "prompt": "Briefly explain ONE way that scientific management or assembly-line methods were adopted or adapted in Europe or the Soviet Union in the period 1900-1939.",
+      "points": 1
+     }
+    ]
+   },
+   "sources": [
+    {
+     "id": "A",
+     "kind": "primary_text",
+     "title": "The Principles of Scientific Management, ch. I (opening)",
+     "attribution": "Frederick Winslow Taylor, American mechanical engineer, 1911 (New York: Harper & Brothers). Project Gutenberg eBook #6435. Reuse: public domain in the United States (published before 1929). excerpted (1 segment); whitespace normalized; no wording changed.",
+     "context": "Frederick W. Taylor was an American engineer who published this book in 1911 about how to organize work in factories.",
+     "real_data": true,
+     "source_registry_id": "txt-taylor-1911",
+     "source_sha256": "b747085f1a787e461bf330880b2e2c2020fa7c98e180bd3d3fdd24dfd9b3899e",
+     "body": "The principal object of management should be to secure the maximum prosperity for the employer, coupled with the maximum prosperity for each employee. The words \"maximum prosperity\" are used, in their broad sense, to mean not only large dividends for the company or owner, but the development of every branch of the business to its highest state of excellence, so that the prosperity may be permanent. In the same way maximum prosperity for each employee means not only higher wages than are usually received by men of his class, but, of more importance still, it also means the development of each man to his state of maximum efficiency, so that he may be able to do, generally speaking, the highest grade of work for which his natural abilities fit him, and it further means giving him, when possible, this class of work to do. It would seem to be so self-evident that maximum prosperity for the employer, coupled with maximum prosperity for the employee, ought to be the two leading objects of management, that even to state this fact should be unnecessary. And yet there is no question that, throughout the industrial world, a large part of the organization of employers, as well as employees, is for war rather than for peace, and that perhaps the majority on either side do not believe that it is possible so to arrange their mutual relations that their interests become identical.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry txt-taylor-1911"
+     }
+    }
+   ],
+   "rubric": {
+    "rubric_id": "whap-v1",
+    "total_points": 3,
+    "rows": [
+     {
+      "row_id": "a",
+      "name": "Part A",
+      "max": 1,
+      "descriptors": {
+       "0": "The response does not describe a claim from the excerpt, misreads it, or only restates the topic of the book.",
+       "1": "The response accurately describes one claim Taylor makes in the excerpt about employers and employees."
+      },
+      "task_specific": "Describe one claim from the excerpt about employer-employee relations, such as that management should seek maximum prosperity for both sides, that employee prosperity means higher wages and work suited to each man's abilities, that the two sides' interests can become identical, or that employers and workers are currently organized for war rather than peace."
+     },
+     {
+      "row_id": "b",
+      "name": "Part B",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no specific development, gives one outside 1900-1939, or does not connect it to whether employer and employee interests matched.",
+       "1": "The response explains one specific, accurate development from 1900-1939 and shows how it supports or challenges Taylor's claim of identical interests."
+      },
+      "task_specific": "Explain one specific development from 1900-1939 that supports Taylor's claim (for example, higher wages tied to new production methods) or challenges it (for example, strikes, union organizing, or worker resistance to time study and speedups), and connect it to the idea of shared or conflicting interests."
+     },
+     {
+      "row_id": "c",
+      "name": "Part C",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no specific example, places it only in the United States, or falls outside 1900-1939.",
+       "1": "The response explains one specific, accurate way these methods were adopted or adapted in Europe or the Soviet Union between 1900 and 1939."
+      },
+      "task_specific": "Explain one specific example of scientific management or assembly-line methods being adopted or adapted in Europe or the Soviet Union between 1900 and 1939, such as Lenin's 1918 endorsement of the Taylor system, Soviet industrialization under the Five-Year Plans and the Stakhanovite movement, Ford's help building the Soviet automobile plant at Nizhny Novgorod (Gorky), the Weimar German rationalization movement, or assembly-line production at Citroen or Fiat."
+     }
+    ],
+    "scoring_notes": [
+     "Each part earns its point on its own; a weak answer to one part does not lower the score for another.",
+     "In Part B, either supporting or challenging evidence earns the point if the response explains how it relates to Taylor's claim of identical interests.",
+     "In Part B, Ford examples count even though the excerpt does not mention Ford, because the excerpt names no specific firm or event.",
+     "In Part C, a general statement that 'other countries copied American methods' without a specific country, program, or firm does not earn the point.",
+     "ALTON reference — not official AP scoring"
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [],
+    "contextualization_ideas": [
+     "Second Industrial Revolution growth of large corporations and electrified factories.",
+     "Labor conflict and union growth in industrial countries before and after the First World War.",
+     "Interwar interest in productivity in both capitalist and communist states."
+    ],
+    "outside_evidence": [
+     "Ford Highland Park moving assembly line, 1913",
+     "Five Dollar Day, 1914",
+     "Falling Model T prices and the spread of consumer car ownership",
+     "Watertown Arsenal strike, 1911",
+     "Flint sit-down strike, 1936-1937",
+     "Lenin's 1918 endorsement of Taylorism",
+     "Soviet Five-Year Plans and Stakhanovite movement",
+     "Ford-assisted Gorky automobile plant",
+     "Weimar rationalization movement",
+     "Charlie Chaplin's film Modern Times (1936) as a cultural critique of assembly-line work"
+    ],
+    "reasoning_types": [
+     "sourcing and claim identification",
+     "corroboration and contradiction",
+     "comparison across regions"
+    ],
+    "doc_uses": [
+     {
+      "source_id": "Taylor 1911",
+      "usable_for": "Identifying Taylor's argument that scientific management can unite the interests of employers and workers, and his view that industrial relations were marked by conflict.",
+      "sourcing": "Written by an American mechanical engineer who designed the system he promotes, published in book form in 1911; the text presents scientific management in a favorable light."
+     }
+    ],
+    "saq_answers": {
+     "a": [
+      "Taylor claims that the main goal of management should be the maximum prosperity of the employer together with the maximum prosperity of each employee.",
+      "Taylor claims that prosperity for the worker means more than higher wages: it also means developing each man to his maximum efficiency and giving him the highest grade of work his natural abilities fit him for.",
+      "Taylor argues that the interests of employers and employees can become identical, even though most people on both sides do not believe this.",
+      "Taylor observes that across the industrial world employers and employees are organized 'for war rather than for peace,' so their relations are currently marked by conflict."
+     ],
+     "b": [
+      "Supports: In 1914 Henry Ford introduced the Five Dollar Day, roughly doubling pay for many workers at his Highland Park plant after the moving assembly line (1913) raised output, which suggested that higher productivity could bring higher wages and higher profits together.",
+      "Challenges: Workers at the Watertown Arsenal in Massachusetts went on strike in 1911 to protest stopwatch time study, and the dispute led to congressional hearings on the Taylor system, showing that many workers saw scientific management as a speedup that served employers.",
+      "Challenges: Assembly-line work at Ford was so repetitive and tightly paced that the company had very high worker turnover around 1913, which shows that the new methods did not automatically win workers' loyalty.",
+      "Challenges: The 1936-1937 sit-down strike at General Motors plants in Flint, Michigan, led by the United Auto Workers, showed continuing conflict between mass-production workers and employers over pay, pace of work, and union recognition."
+     ],
+     "c": [
+      "In 1918 Lenin publicly called for the Soviet state to study and adopt the Taylor system, even though he also criticized it as a capitalist method, because he wanted to raise labor productivity.",
+      "Under the Five-Year Plans beginning in 1928, the Soviet Union pushed rapid industrialization and production quotas, and from 1935 the Stakhanovite movement celebrated workers who greatly exceeded output targets.",
+      "Under an agreement signed in 1929, the Ford Motor Company helped the Soviet Union build a large automobile plant at Nizhny Novgorod (later Gorky), which brought American assembly-line methods to Soviet industry.",
+      "In Weimar Germany in the 1920s, industrialists and engineers promoted 'rationalization,' using standardization, time study, and mechanized production to rebuild industry after the First World War.",
+      "French carmaker Citroen began mass production on the American model in 1919, and Fiat in Italy opened its Lingotto factory in Turin in the 1920s, designed around assembly-line production."
+     ]
+    },
+    "common_pitfalls": [
+     "Summarizing the whole excerpt in Part A without naming one specific claim.",
+     "Saying in Part A that Taylor admits his system harms workers; the excerpt makes no such claim.",
+     "Answering Part B with a general statement about factories being hard without a specific event, policy, or firm.",
+     "Using only US examples in Part C.",
+     "Using examples from after 1939 (for example, postwar Japanese lean production) in Parts B or C.",
+     "Treating Taylor's claim as proven fact rather than as his argument."
+    ],
+    "facts": [
+     "Frederick Winslow Taylor published The Principles of Scientific Management in 1911.",
+     "Scientific management used time and motion study, standardized tasks, and incentive pay to raise output per worker.",
+     "Ford introduced a moving assembly line at its Highland Park, Michigan, plant in 1913.",
+     "Ford announced the Five Dollar Day in January 1914.",
+     "Mass production lowered the price of the Model T over the 1910s, making cars available to many more consumers.",
+     "Lenin endorsed studying and applying the Taylor system in 1918.",
+     "The first Soviet Five-Year Plan began in 1928; the Stakhanovite movement began in 1935.",
+     "The Flint sit-down strike against General Motors took place in 1936-1937."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_authored_from_real_sources",
+    "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+   }
+  },
+  "fact": []
+ },
+ {
+  "id": "wh3_saq3",
+  "spec": {
+   "id": "wh3_saq3",
+   "exam": "WH3",
+   "template": "saq3",
+   "era": 3,
+   "units": [
+    6
+   ],
+   "focus": "Art, trade and cultural exchange in early 19th-century Japan, as seen in a woodblock print sold widely at home and later abroad (make no claims about the full series beyond the single print shown)",
+   "sources": [
+    {
+     "id": "img-hokusai-wave-1831",
+     "context": "Hokusai was a Japanese artist who designed this woodblock print around 1831 for a series of views of Mount Fuji; copies were sold widely in Japan."
+    }
+   ],
+   "seed": 4303
+  },
+  "payload": {
+   "schema_version": "whap-frq-1",
+   "task_type": "saq",
+   "template": "saq3",
+   "era": 3,
+   "units": [
+    6
+   ],
+   "title": "Hokusai's Great Wave: Art, Commerce, and Cultural Exchange in Japan, c. 1750 to c. 1900",
+   "prompt": {
+    "scenario": "In the period c. 1750 to c. 1900, Japan under the Tokugawa shogunate and then the Meiji government produced a commercial print culture whose works circulated first among Japanese buyers and later among collectors and artists overseas.",
+    "task": "Using the image, answer (a), (b), and (c).",
+    "requirements": [
+     "Each part requires a brief response of one to three sentences.",
+     "Parts B and C must use specific historical evidence from the years named in each part.",
+     "Part B must name a development not already shown in the image."
+    ],
+    "parts": [
+     {
+      "label": "A",
+      "prompt": "Briefly describe ONE way the print portrays the relationship between people and the natural world.",
+      "points": 1
+     },
+     {
+      "label": "B",
+      "prompt": "Briefly explain ONE economic or social development in Japan in the period 1750 to 1853 that helps explain why woodblock prints such as this one could be produced and sold widely.",
+      "points": 1
+     },
+     {
+      "label": "C",
+      "prompt": "Briefly explain ONE way that cultural exchange between Japan and Europe changed in the period 1853 to 1900.",
+      "points": 1
+     }
+    ]
+   },
+   "sources": [
+    {
+     "id": "A",
+     "kind": "image",
+     "title": "Under the Wave off Kanagawa (The Great Wave)",
+     "attribution": "Katsushika Hokusai, Japanese woodblock artist, c. 1831 (first publication between 1826 and 1833). Wikimedia Commons (file page records the source institution and public-domain tag). Reuse: public domain (19th-century work). unmodified except Wikimedia Commons' scaled JPEG rendering of a restored scan of the print (upload.wikimedia.org thumbnail).",
+     "context": "Hokusai was a Japanese artist who designed this woodblock print around 1831 for a series of views of Mount Fuji; copies were sold widely in Japan.",
+     "real_data": true,
+     "source_registry_id": "img-hokusai-wave-1831",
+     "source_sha256": "371387f0329dc6dbcc928cff962290aeede37e9cfa298c7067196034e2061d9e",
+     "body": "A color woodblock print: a huge curling wave with claw-like foam rises over three narrow boats with rowers, while a small snow-capped Mount Fuji sits in the distance under a pale sky.",
+     "image": {
+      "path": "ap-sources/img-hokusai-wave-1831/image.jpg",
+      "alt": "A color woodblock print: a huge curling wave with claw-like foam rises over three narrow boats with rowers, while a small snow-capped Mount Fuji sits in the distance under a pale sky.",
+      "credit": "Katsushika Hokusai, Under the Wave off Kanagawa, c. 1831. Via Wikimedia Commons (public domain)."
+     },
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry img-hokusai-wave-1831"
+     }
+    }
+   ],
+   "rubric": {
+    "rubric_id": "whap-v1",
+    "total_points": 3,
+    "rows": [
+     {
+      "row_id": "a",
+      "name": "Part A",
+      "max": 1,
+      "descriptors": {
+       "0": "The response does not describe a feature of the image that relates people to nature, or only restates the title or names the artist.",
+       "1": "The response accurately describes ONE way the print relates people to nature, such as showing the boatmen as small and vulnerable beneath a much larger, threatening wave."
+      },
+      "task_specific": "Describe ONE way the image shows people in relation to nature, based on what is visible: the huge wave dwarfing three narrow boats, the rowers crouched low, the distant Mount Fuji appearing small and calm beneath the wave, or the low horizon that makes the human figures seem fragile."
+     },
+     {
+      "row_id": "b",
+      "name": "Part B",
+      "max": 1,
+      "descriptors": {
+       "0": "The response names no relevant development, uses a development from outside 1750 to 1853, or only describes the image again.",
+       "1": "The response explains ONE specific development in Japan from 1750 to 1853 and connects it to the production or sale of prints such as this one."
+      },
+      "task_specific": "Explain ONE development in Japan from 1750 to 1853 that made mass production or broad sale of prints possible, such as the growth of large commercial cities like Edo, a wealthier merchant and townsperson population, the inexpensive multi-block printing process run by commercial publishers, or the limited foreign trade at Nagasaki that brought in goods such as imported pigment."
+     },
+     {
+      "row_id": "c",
+      "name": "Part C",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no relevant change, stays outside 1853 to 1900, or makes only a general statement that Japan and Europe had contact.",
+       "1": "The response explains ONE specific change in cultural exchange between Japan and Europe from 1853 to 1900."
+      },
+      "task_specific": "Explain ONE change in cultural exchange between Japan and Europe from 1853 to 1900, such as the opening of Japan after the Perry expedition and the treaties that followed, the export of Japanese prints and the European fashion called Japonisme, Japanese displays at world's fairs such as the 1867 Paris exhibition, or Meiji adoption of Western art, education, and technology."
+     }
+    ],
+    "scoring_notes": [
+     "Each part earns 1 point, for a total of 3 points; parts are scored independently.",
+     "For Part A, accept any accurate reading of the visible image; do not require students to identify the boats' purpose or translate the inscription.",
+     "For Part B, mention of Dutch and Chinese trade at Nagasaki earns the point only if it is connected to prints, materials, or ideas, such as imported blue pigment or knowledge of Western perspective.",
+     "For Part C, the exchange may run in either direction: Japanese art influencing Europe or European ideas and goods entering Meiji Japan.",
+     "Do not award credit for claims that Japanese prints alone caused Impressionism or any other European art movement; influence on particular artists is acceptable.",
+     "ALTON reference — not official AP scoring"
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [],
+    "contextualization_ideas": [
+     "Tokugawa stability and urban commerce supported a market for affordable printed art.",
+     "Regulated foreign contact still allowed some foreign materials and ideas into Japan before 1853.",
+     "Forced opening after 1853 widened the two-way flow of goods and art between Japan and the West."
+    ],
+    "outside_evidence": [
+     "Growth of Edo and of urban merchant culture under the Tokugawa",
+     "Dutch trading post at Dejima, Nagasaki",
+     "Import of Prussian blue pigment",
+     "Perry expedition and the Treaty of Kanagawa (1854)",
+     "Meiji Restoration (1868) and Westernization",
+     "Japonisme in Europe; Van Gogh's copies of Japanese prints",
+     "Japan at the 1867 Paris Exposition Universelle"
+    ],
+    "reasoning_types": [
+     "Sourcing and visual analysis (Part A)",
+     "Contextualization and causation (Part B)",
+     "Continuity and change over time (Part C)"
+    ],
+    "doc_uses": [
+     {
+      "source_id": "Under the Wave off Kanagawa (The Great Wave)",
+      "usable_for": "Part A, describing how the image shows human vulnerability before nature and the place of Mount Fuji in the composition; background for Parts B and C as an example of a widely sold print that later reached Europe.",
+      "sourcing": "A commercial woodblock print designed by Katsushika Hokusai around 1831 for a series of views of Mount Fuji and sold widely in Japan; as a mass-produced print it reflects popular urban taste rather than court or elite patronage."
+     }
+    ],
+    "saq_answers": {
+     "a": [
+      "The print shows the boatmen as small and helpless beneath a wave that rises far above them and looks ready to crash down on their narrow boats.",
+      "The rowers crouch low in their boats while the foam of the wave curls like claws above them, suggesting the danger and power of the sea.",
+      "Mount Fuji appears small and calm in the distance, framed by the wave, so the natural world dominates the scene and the people seem fragile within it.",
+      "The low horizon and huge swells put the human figures at the mercy of nature, showing people working in a dangerous environment rather than controlling it."
+     ],
+     "b": [
+      "The growth of large cities such as Edo created a large population of merchants and artisans with money to spend on affordable entertainment and decoration, including woodblock prints.",
+      "Commercial publishers used the multi-block color printing process to produce many copies of a design cheaply, so prints could be sold in large numbers to townspeople.",
+      "Limited Dutch and Chinese trade at Nagasaki brought in foreign goods such as the imported blue pigment used in prints of this period, along with some knowledge of Western techniques like linear perspective.",
+      "Peace and internal stability under the Tokugawa shogunate supported domestic travel and commerce, which helped create demand for prints of famous places such as Mount Fuji."
+     ],
+     "c": [
+      "After the Perry expedition and the treaties of the 1850s opened Japanese ports, Japanese prints and other goods were exported to Europe, where collectors created a fashion known as Japonisme.",
+      "European artists such as Vincent van Gogh copied or studied Japanese woodblock prints in the 1880s, borrowing flat color and bold outlines.",
+      "Japan displayed its art and crafts at world's fairs such as the 1867 Paris Exposition Universelle, giving European audiences direct contact with Japanese goods.",
+      "After the Meiji Restoration of 1868, the Japanese government adopted Western technology, schooling, and art training, so European styles and ideas flowed into Japan."
+     ]
+    },
+    "common_pitfalls": [
+     "In Part A, naming the artist, date, or title without describing how people and nature appear in the image.",
+     "In Part A, asserting details about the boats' cargo or purpose that the image does not show.",
+     "In Part B, using the Perry expedition or Meiji reforms, which fall outside 1750 to 1853.",
+     "In Part B, describing the wave or Mount Fuji again instead of a historical development.",
+     "In Part C, writing only that Japan and Europe traded, without a specific change or example.",
+     "In Part C, claiming Japanese prints single-handedly created Impressionism.",
+     "Describing Tokugawa Japan as completely closed, ignoring regulated trade at Nagasaki."
+    ],
+    "facts": [
+     "Katsushika Hokusai designed Under the Wave off Kanagawa around 1831 as part of a series of views of Mount Fuji.",
+     "Color woodblock prints in Edo-period Japan were made by carving separate blocks for different colors, which allowed many copies to be printed at a relatively low price.",
+     "Edo (Tokyo) was among the largest cities in the world in the 1700s, with a large population of merchants and artisans.",
+     "Under Tokugawa policy, regulated foreign trade was carried on chiefly through Nagasaki, where Dutch merchants were confined to Dejima and Chinese merchants also traded.",
+     "Prussian blue, a synthetic pigment first made in Europe, was imported into Japan and used in prints of this period, including this one.",
+     "Commodore Matthew Perry's expedition (1853 to 1854) led to the Treaty of Kanagawa, and later treaties opened more Japanese ports to Western trade.",
+     "The Meiji Restoration of 1868 began a government program of Westernization and industrialization.",
+     "Japan exhibited at the 1867 Paris Exposition Universelle.",
+     "European artists such as Vincent van Gogh and Claude Monet collected or copied Japanese woodblock prints in the later 1800s; this European taste was called Japonisme."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_authored_from_real_sources",
+    "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+   }
+  },
+  "fact": []
+ },
+ {
+  "id": "wh3_dbq",
+  "spec": {
+   "id": "wh3_dbq",
+   "exam": "WH3",
+   "template": "dbq",
+   "era": 3,
+   "units": [
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "focus": "How and why understandings of the relationship between human activity and the natural environment changed from the mid-19th century to the early 21st century",
+   "sources": [
+    {
+     "id": "txt-marsh-1864",
+     "context": "George P. Marsh was an American diplomat who had served in Italy and the Ottoman Empire; he published this book in 1864."
+    },
+    {
+     "id": "txt-muir-1901",
+     "context": "John Muir was a Scottish-born American naturalist; he published this book in 1901."
+    },
+    {
+     "id": "txt-arrhenius-1908",
+     "context": "Svante Arrhenius was a Swedish chemist; this book was published in English in 1908."
+    },
+    {
+     "id": "img-dustbowl-1936",
+     "context": "A photographer working for the U.S. government took this photograph in the Texas Panhandle in March 1936."
+    },
+    {
+     "id": "tab-noaa-co2-mlo",
+     "context": "The U.S. National Oceanic and Atmospheric Administration measures carbon dioxide in the air at an observatory on a Hawaiian volcano; this table shows annual averages for seven years."
+    },
+    {
+     "id": "txt-cs-soviet-1991",
+     "context": "This reference book was written for the U.S. government in 1991, before the Soviet Union ended."
+    },
+    {
+     "id": "txt-cs-brazil-1998",
+     "context": "This reference book was written for the U.S. government; the passage describes Brazil in the early 1990s."
+    }
+   ],
+   "seed": 4304
+  },
+  "payload": {
+   "schema_version": "whap-frq-1",
+   "task_type": "dbq",
+   "template": "dbq",
+   "era": 3,
+   "units": [
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "title": "Changing Understandings of Human Activity and the Natural Environment, c. 1860 to c. 2000",
+   "prompt": {
+    "scenario": "From the middle of the nineteenth century, industrialization, the expansion of commercial agriculture, and new scientific instruments changed what people could see and measure about the natural world. Writers, scientists, governments, and international bodies offered different explanations of how human activity affected forests, soil, water, and the atmosphere. The seven documents below include a scholar's warning, a naturalist's account, a chemist's calculation, a government photograph, a scientific data table, and two government reference studies.",
+    "task": "Evaluate the extent to which understandings of the relationship between human activity and the natural environment changed from c. 1860 to c. 2000.",
+    "requirements": [
+     "Respond to the prompt with a historically defensible thesis or claim that establishes a line of reasoning.",
+     "Describe a broader historical context relevant to the prompt.",
+     "Support an argument in response to the prompt using at least four documents.",
+     "Use at least one additional piece of specific historical evidence (beyond that found in the documents) relevant to an argument about the prompt.",
+     "For at least two documents, explain how or why the document's point of view, purpose, historical situation, and/or audience is relevant to an argument.",
+     "Use evidence to corroborate, qualify, or modify an argument that addresses the prompt."
+    ]
+   },
+   "sources": [
+    {
+     "id": "1",
+     "kind": "primary_text",
+     "title": "Man and Nature; or, Physical Geography as Modified by Human Action (excerpt)",
+     "attribution": "George P. Marsh, American diplomat and scholar, 1864 (New York: Scribner). Project Gutenberg eBook #37957. Reuse: public domain in the United States (published before 1929). excerpted (1 segment); whitespace normalized; no wording changed.",
+     "context": "George P. Marsh was an American diplomat who had served in Italy and the Ottoman Empire; he published this book in 1864.",
+     "real_data": true,
+     "source_registry_id": "txt-marsh-1864",
+     "source_sha256": "0344445886dd494d412cfb1695dd94ec67c0c611efb2d171d82db1430a8933e4",
+     "body": "The earth is fast becoming an unfit home for its noblest inhabitant, and another era of equal human crime and human improvidence, and of like duration with that through which traces of that crime and that improvidence extend, would reduce it to such a condition of impoverished productiveness, of shattered surface, of climatic excess, as to threaten the depravation, barbarism, and perhaps even extinction of the species.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry txt-marsh-1864"
+     }
+    },
+    {
+     "id": "2",
+     "kind": "primary_text",
+     "title": "Our National Parks, ch. 1 (excerpt on the forest reserves)",
+     "attribution": "John Muir, Scottish-American naturalist, 1901 (Boston: Houghton Mifflin). Project Gutenberg eBook #60929. Reuse: public domain in the United States (published before 1929). excerpted (1 segment); whitespace normalized; no wording changed.",
+     "context": "John Muir was a Scottish-born American naturalist; he published this book in 1901.",
+     "real_data": true,
+     "source_registry_id": "txt-muir-1901",
+     "source_sha256": "4256c640d101fba9c68cfa8b8b8a380253090a0db661bc85e04f81b2ba687b7b",
+     "body": "The forty million acres of these reserves are in the main unspoiled as yet, though sadly wasted and threatened on their more open margins by the axe and fire of the lumberman and prospector, and by hoofed locusts, which, like the winged ones, devour every leaf within reach, while the shepherds and owners set fires with the intention of making a blade of grass grow in the place of every tree, but with the result of killing both the grass and the trees.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry txt-muir-1901"
+     }
+    },
+    {
+     "id": "3",
+     "kind": "primary_text",
+     "title": "Worlds in the Making: The Evolution of the Universe (excerpt on carbonic acid and temperature)",
+     "attribution": "Svante Arrhenius, Swedish chemist (English translation by H. Borns), 1908 (English edition; Swedish original 1906). Project Gutenberg eBook #69022. Reuse: public domain in the United States (published before 1929). excerpted (1 segment); whitespace normalized; no wording changed.",
+     "context": "Svante Arrhenius was a Swedish chemist; this book was published in English in 1908.",
+     "real_data": true,
+     "source_registry_id": "txt-arrhenius-1908",
+     "source_sha256": "6fe663c94004ff484609cf0b6139b0d078661988a7a0701c15f5f5f58fb11bbf",
+     "body": "With the help of these data I have calculated that if the atmosphere were deprived of all its carbonic acid—of which it contains only 0.03 per cent. by volume—the temperature of the earth’s surface would fall by about 21°. This lowering of the temperature would diminish the amount of water vapor in the atmosphere, and would cause a further almost equally strong fall of temperature. The examples, so far as they go, demonstrate that comparatively unimportant variations in the composition of the air have a very great influence. If the quantity of carbonic acid in the air should sink to one-half its present percentage, the temperature would fall by about 4°; a diminution to one-quarter would reduce the temperature by 8°. On the other hand, any doubling of the percentage of carbon dioxide in the air would raise the temperature of the earth’s surface by 4°; and if the carbon dioxide were increased fourfold, the temperature would rise by 8°.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry txt-arrhenius-1908"
+     }
+    },
+    {
+     "id": "4",
+     "kind": "image",
+     "title": "Dust bowl, Texas Panhandle (Farm Security Administration photograph)",
+     "attribution": "Arthur Rothstein, Farm Security Administration photographer, 1936 (March). Wikimedia Commons (file page records the source institution and public-domain tag). Reuse: public domain (U.S. government work). unmodified except Wikimedia Commons' scaled JPEG rendering of the file (upload.wikimedia.org thumbnail).",
+     "context": "A photographer working for the U.S. government took this photograph in the Texas Panhandle in March 1936.",
+     "real_data": true,
+     "source_registry_id": "img-dustbowl-1936",
+     "source_sha256": "d2eaf34896b459c0408427d06b1e319d4d1921dfccdfc8f71a445c34b60a6dd1",
+     "body": "A black-and-white photograph of a straight rural road under a sky filled with huge dark clouds of dust; a single car travels along the road across a flat plain.",
+     "image": {
+      "path": "ap-sources/img-dustbowl-1936/image.jpg",
+      "alt": "A black-and-white photograph of a straight rural road under a sky filled with huge dark clouds of dust; a single car travels along the road across a flat plain.",
+      "credit": "Arthur Rothstein, Dust bowl, Texas Panhandle, March 1936. Library of Congress (FSA) via Wikimedia Commons (public domain)."
+     },
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry img-dustbowl-1936"
+     }
+    },
+    {
+     "id": "5",
+     "kind": "table",
+     "title": "Atmospheric carbon dioxide at Mauna Loa Observatory, annual mean (ppm), selected years 1960-2020",
+     "attribution": "NOAA Global Monitoring Laboratory (data from 1958-1974 obtained by C. David Keeling, Scripps Institution of Oceanography), Data file created October 2026. NOAA Global Monitoring Laboratory. Reuse: public domain (U.S. government data; credit NOAA GML and Scripps as requested). seven rows copied from the 'mean' column of the annual-mean file (CO2 mole fraction in dry air, ppm); no values changed or recomputed.",
+     "context": "The U.S. National Oceanic and Atmospheric Administration measures carbon dioxide in the air at an observatory on a Hawaiian volcano; this table shows annual averages for seven years.",
+     "real_data": true,
+     "source_registry_id": "tab-noaa-co2-mlo",
+     "source_sha256": "f08d0473a0d8c617da5541ebf9e34b1fc981056086c0d6a365c42518d87272d3",
+     "body": "Atmospheric carbon dioxide at Mauna Loa Observatory, annual mean (ppm), selected years 1960-2020",
+     "table": {
+      "columns": [
+       "Year",
+       "Annual mean CO2 (ppm)"
+      ],
+      "rows": [
+       [
+        "1960",
+        "316.91"
+       ],
+       [
+        "1970",
+        "325.68"
+       ],
+       [
+        "1980",
+        "338.76"
+       ],
+       [
+        "1990",
+        "354.45"
+       ],
+       [
+        "2000",
+        "369.71"
+       ],
+       [
+        "2010",
+        "390.10"
+       ],
+       [
+        "2020",
+        "414.21"
+       ]
+      ]
+     },
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry tab-noaa-co2-mlo"
+     }
+    },
+    {
+     "id": "6",
+     "kind": "secondary_text",
+     "title": "Soviet Union: A Country Study (excerpt on environmental degradation)",
+     "attribution": "Raymond E. Zickel, ed., Federal Research Division, Library of Congress, 1991. Library of Congress, Federal Research Division (Country Studies; full text via Internet Archive OCR). Reuse: public domain (U.S. government work, 17 U.S.C. 105). excerpted (1 segment); whitespace normalized; OCR line-break hyphenation rejoined; running page headers/numbers removed; no wording changed.",
+     "context": "This reference book was written for the U.S. government in 1991, before the Soviet Union ended.",
+     "real_data": true,
+     "source_registry_id": "txt-cs-soviet-1991",
+     "source_sha256": "f9f8425d77727af22a4b9bb9194789ffea5c0a67a2172e645b4eaade379dace6",
+     "body": "As a consequence of this neglect, two of the twentieth century's worst man-made environmental disasters struck the Soviet Union: the Chernobyl' nuclear power plant accident, the consequence of an insufficient regard for safety to obtain increased energy; and the loss of huge amounts of water from the Aral Sea. Although the death toll from the Chernobyl' accident in 1986 was initially low, millions of people continued to live on radioactive land and raise and consume contaminated food. In addition to the human costs, cleaning up and repairing the after-effects of the accident, which continued to leak radioactive gases in 1991, were estimated to cost hundreds of billions of rubles (see Glossary) by the year 2000. The other major environmental disaster was the near destruction of the Aral Sea, whose main sources of water were diverted to irrigate arid land for the purpose of raising cotton and other crops beginning in 1960. Subsequently, the Aral Sea's coast receded sixty kilometers, in places, from its former location. Other environmental problems included the severe pollution of rivers, lakes, and the air resulting from the direct discharge of pollutants, particularly in the European part of the Soviet Union.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry txt-cs-soviet-1991"
+     }
+    },
+    {
+     "id": "7",
+     "kind": "secondary_text",
+     "title": "Brazil: A Country Study (excerpt on deforestation and development)",
+     "attribution": "Rex A. Hudson, ed., Federal Research Division, Library of Congress, 1998. Library of Congress, Federal Research Division (Country Studies; full text via Internet Archive OCR). Reuse: public domain (U.S. government work, 17 U.S.C. 105). excerpted (1 segment); whitespace normalized; OCR line-break hyphenation rejoined; no wording changed.",
+     "context": "This reference book was written for the U.S. government; the passage describes Brazil in the early 1990s.",
+     "real_data": true,
+     "source_registry_id": "txt-cs-brazil-1998",
+     "source_sha256": "c89f30ae6ed74b326fa951662a8db3b3f243261598ab8439de152a6b8633ea25",
+     "body": "The topics of rapid deforestation and extensive burning of the Amazon rain forest and environmental pollution received unprecedented international attention in the late 1980s and early 1990s. Water and air pollution had also become a serious problem for Brazil. Sao Paulo State's Tiete is so polluted that in 1992 the state was forced to launch a US$2.6 billion program to revive it. In June 1992, Rio de Janeiro hosted the United Nations (UN) Conference on the Environment and Development (Eco-92). However, the Brazilian government's attention to the problems of deforestation and pollution waned following Eco-92, despite the creation in late 1993 of the Ministry of Environment and the Amazon Region. In the mid-1990s, discussion of public policies intended to promote sustainable development (see Glossary) remained intense.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry txt-cs-brazil-1998"
+     }
+    }
+   ],
+   "rubric": {
+    "rubric_id": "whap-v1",
+    "total_points": 7,
+    "rows": [
+     {
+      "row_id": "thesis",
+      "name": "Thesis/claim",
+      "max": 1,
+      "descriptors": {
+       "0": "The response restates the prompt, offers no judgment about the extent of change, or places its claim only in the conclusion without a line of reasoning.",
+       "1": "The response makes a defensible claim about the degree of change in understandings of human impact on the environment and signals the reasoning that will support it, in the introduction or conclusion."
+      },
+      "task_specific": "A claim that judges how far understandings changed between c. 1860 and c. 2000 (for example, from local land misuse to global atmospheric change, or from individual warnings to state and international action) and sets up a line of reasoning; it must go beyond restating the prompt."
+     },
+     {
+      "row_id": "context",
+      "name": "Contextualization",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no context, gives only a passing phrase, or describes context unconnected to the argument.",
+       "1": "The response describes a relevant broader development before, during, or after the period and explains how it connects to changing understandings of the environment."
+      },
+      "task_specific": "Accurate description of a broader development such as the Industrial Revolution and fossil fuel use, imperial and settler expansion of commercial agriculture and logging, or Cold War state-led development, connected to the argument."
+     },
+     {
+      "row_id": "docs",
+      "name": "Evidence from the documents",
+      "max": 2,
+      "descriptors": {
+       "0": "The response uses fewer than three documents accurately or only quotes or lists them without relevance to the topic.",
+       "1": "The response accurately describes the content of at least three documents in a way that addresses the topic.",
+       "2": "The response uses the content of at least four documents to support an argument about how far understandings changed."
+      },
+      "task_specific": "Accurate use of document content: 1 point for describing the content of at least three documents relevant to the topic; 2 points for using the content of at least four documents to support an argument about the extent of change."
+     },
+     {
+      "row_id": "outside",
+      "name": "Evidence beyond the documents",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no outside evidence, or mentions it without linking it to an argument, or repeats what the documents already show.",
+       "1": "The response explains how a specific, accurate piece of outside evidence supports an argument about changing environmental understandings."
+      },
+      "task_specific": "At least one specific piece of evidence not in the documents, such as Rachel Carson's Silent Spring (1962), the 1972 Stockholm Conference, the Montreal Protocol (1987), the IPCC (1988), or the Kyoto Protocol (1997), used to support the argument."
+     },
+     {
+      "row_id": "sourcing",
+      "name": "Sourcing (point of view, purpose, situation, audience)",
+      "max": 1,
+      "descriptors": {
+       "0": "The response sources fewer than two documents or only names the author or date without explaining relevance.",
+       "1": "The response explains for at least two documents why the point of view, purpose, historical situation, or audience matters to the argument."
+      },
+      "task_specific": "For at least two documents, explanation of how point of view, purpose, historical situation, or audience affects the argument (for example, Marsh's experience in Mediterranean lands, the U.S. government authorship of Documents 6 and 7 in the Cold War and post-Cold War setting, or the measurement program behind Document 5)."
+     },
+     {
+      "row_id": "complexity",
+      "name": "Complex understanding",
+      "max": 1,
+      "descriptors": {
+       "0": "The response does not show a complex understanding, or does so only in a single sentence or phrase.",
+       "1": "The response builds a nuanced argument across the essay, for example by qualifying its claim with documents that show continuity or by connecting scientific, political, and economic factors."
+      },
+      "task_specific": "A complex understanding of the extent of change, such as weighing both continuity and change, explaining several causes of shifting understandings, linking multiple regions, or showing how policy lagged behind knowledge, developed across the essay."
+     }
+    ],
+    "scoring_notes": [
+     "Document 3 does not by itself assign blame to human activity; credit students who note that the excerpt treats carbon dioxide as a physical variable and who connect it to fossil fuel burning using outside knowledge or Document 5.",
+     "Document 4 should be described only from what is visible: a large dark dust cloud over a flat plain, a road, fence posts, and a car. Do not reward invented details.",
+     "Document 5 continues to 2020; students may use it to show acceleration in measured carbon dioxide, but the argument should center on c. 1860 to c. 2000.",
+     "Sourcing for Documents 6 and 7 may note that they are U.S. government reference works about other countries; avoid crediting claims that the authors witnessed the events.",
+     "ALTON reference — not official AP scoring"
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [
+     "Understandings changed significantly in scale: mid-nineteenth-century observers such as Marsh and Muir saw human damage mainly in forests, soil, and grazing land, while by the late twentieth century scientists and governments treated the atmosphere and the whole planet as affected, as Arrhenius's calculation and the rising Mauna Loa readings show.",
+     "Understandings changed less than it seems, because the central idea that careless human use of land and water degrades the environment runs from Marsh in 1864 through the Dust Bowl to the Aral Sea and the Amazon; what changed was the tools of measurement and the size of the institutions responding.",
+     "Knowledge about human environmental impact grew steadily and became the business of governments and international bodies, but economic development goals often outweighed that knowledge, as Soviet irrigation for cotton and Brazil's fading attention after Eco-92 show."
+    ],
+    "contextualization_ideas": [
+     "The Industrial Revolution greatly increased the burning of coal and later oil, while railroads and global markets pushed logging, mining, and commercial farming into new regions in the nineteenth century.",
+     "Settler and imperial expansion in the Americas, Australia, Africa, and Asia turned forests and grasslands into plantations, ranches, and wheat fields for world markets.",
+     "After 1945, Cold War competition and decolonization encouraged rapid state-led industrialization and agricultural expansion in both capitalist and communist states, while new environmental movements and UN conferences emerged in the 1960s to 1990s."
+    ],
+    "outside_evidence": [
+     "Yellowstone was established as the first U.S. national park in 1872.",
+     "John Muir helped found the Sierra Club in 1892.",
+     "Rachel Carson's Silent Spring (1962) warned about the effects of pesticides such as DDT and helped spark the modern environmental movement.",
+     "The UN Conference on the Human Environment met in Stockholm in 1972.",
+     "The Montreal Protocol (1987) set out to phase out chemicals that damage the ozone layer.",
+     "The Intergovernmental Panel on Climate Change was established in 1988.",
+     "The Kyoto Protocol (1997) set targets for reducing greenhouse gas emissions by industrialized countries.",
+     "Wangari Maathai founded the Green Belt Movement in Kenya in 1977 to plant trees.",
+     "The Bhopal gas leak at a Union Carbide plant in India in 1984 killed thousands.",
+     "Chico Mendes, a Brazilian rubber tapper and forest defender, was murdered in 1988.",
+     "The U.S. Soil Conservation Service was created in 1935 during the Dust Bowl."
+    ],
+    "reasoning_types": [
+     "Continuity and change over time",
+     "Causation",
+     "Comparison"
+    ],
+    "doc_uses": [
+     {
+      "source_id": "1",
+      "usable_for": "Evidence that by 1864 a scholar argued human 'crime' and 'improvidence' had damaged the earth and could threaten the species, showing early awareness of human-driven environmental change.",
+      "sourcing": "The context line says Marsh had served as a diplomat in Italy and the Ottoman Empire, regions with long histories of settlement; that experience may have shaped his long-term, civilizational view of environmental decline."
+     },
+     {
+      "source_id": "2",
+      "usable_for": "Shows a naturalist in 1901 identifying lumbering, prospecting, sheep grazing, and fires as threats to forest reserves, linking conservation to protecting land from economic use.",
+      "sourcing": "Muir wrote as a naturalist in a book titled Our National Parks, so his purpose was likely to win public support for protecting reserves; his vivid language ('hoofed locusts') reflects advocacy."
+     },
+     {
+      "source_id": "3",
+      "usable_for": "Shows that by the early twentieth century science could calculate how changes in atmospheric carbon dioxide alter global temperature, moving understanding toward the whole planet.",
+      "sourcing": "As a chemist writing a book on the evolution of the universe, Arrhenius frames carbon dioxide as a physical variable rather than a moral or political problem, which limits the document as evidence of public concern at the time."
+     },
+     {
+      "source_id": "4",
+      "usable_for": "Visual evidence of a massive dust storm over flat farmland in the Texas Panhandle in 1936, showing large-scale soil loss in an agricultural region.",
+      "sourcing": "The photograph was taken for the U.S. government's Farm Security Administration during the 1930s, so it reflects a government effort to record rural conditions, which shows the state taking an interest in environmental and farm crises."
+     },
+     {
+      "source_id": "5",
+      "usable_for": "Shows a steady rise in measured atmospheric carbon dioxide from about 317 ppm in 1960 to about 370 ppm in 2000 and 414 ppm in 2020, evidence of systematic global monitoring.",
+      "sourcing": "The data come from a long-running government and university measurement program at a remote Hawaiian observatory; its purpose is scientific record-keeping, which gives it reliability and shows how institutions came to track environmental change."
+     },
+     {
+      "source_id": "6",
+      "usable_for": "Describes Chernobyl and the shrinking of the Aral Sea after rivers were diverted for cotton as 'man-made' disasters, showing that by 1991 environmental damage was understood as a result of state development priorities.",
+      "sourcing": "Written for the U.S. government in 1991 before the Soviet Union ended, it may emphasize Soviet failings in a way shaped by Cold War-era perspectives, though the events it names are well documented."
+     },
+     {
+      "source_id": "7",
+      "usable_for": "Shows deforestation and pollution in Brazil gaining international attention, Rio hosting the 1992 UN conference, and debate over sustainable development, while government attention waned.",
+      "sourcing": "As a U.S. government reference study of another country, its outside perspective highlights international attention and policy gaps; its intended readers were likely U.S. officials, which may shape its focus on government performance."
+     }
+    ],
+    "evidence_map": [
+     {
+      "line": "Understanding expanded from local damage to land and forests toward a global view of the atmosphere and climate.",
+      "supports": [
+       "3",
+       "5",
+       "7"
+      ],
+      "complicates": [
+       "6"
+      ]
+     },
+     {
+      "line": "Continuity: from the mid-nineteenth century on, observers recognized that careless human use of land and water degraded environments.",
+      "supports": [
+       "1",
+       "2",
+       "4",
+       "6"
+      ],
+      "complicates": [
+       "3"
+      ]
+     },
+     {
+      "line": "Responsibility for understanding and responding to environmental change shifted from individual writers to governments, scientific institutions, and international bodies.",
+      "supports": [
+       "4",
+       "5",
+       "7"
+      ],
+      "complicates": [
+       "1"
+      ]
+     },
+     {
+      "line": "Growing knowledge did not end the priority given to economic development and resource extraction.",
+      "supports": [
+       "2",
+       "6",
+       "7"
+      ],
+      "complicates": [
+       "5"
+      ]
+     }
+    ],
+    "saq_answers": {},
+    "common_pitfalls": [
+     "Describing each document in order without making an argument about the extent of change.",
+     "Claiming that Arrhenius in this excerpt warned that humans were causing global warming; the excerpt only calculates temperature effects of carbon dioxide changes.",
+     "Inventing details in the photograph, such as people fleeing or specific damage not visible.",
+     "Treating Documents 6 and 7 as eyewitness accounts rather than government reference studies.",
+     "Focusing only on the United States and ignoring the Soviet Union, Brazil, and global examples.",
+     "Using Document 5's post-2000 data as the core of the argument instead of the c. 1860 to c. 2000 period."
+    ],
+    "facts": [
+     "George Perkins Marsh published Man and Nature in 1864.",
+     "John Muir published Our National Parks in 1901.",
+     "Svante Arrhenius was a Swedish chemist; the English edition of Worlds in the Making appeared in 1908.",
+     "Arthur Rothstein photographed the Texas Panhandle dust storm in 1936 for the Farm Security Administration.",
+     "Charles David Keeling began measurements of carbon dioxide at Mauna Loa in 1958.",
+     "The Chernobyl nuclear accident occurred in 1986 in Soviet Ukraine.",
+     "The UN Conference on Environment and Development met in Rio de Janeiro in June 1992.",
+     "Annual mean carbon dioxide at Mauna Loa rose from 316.91 ppm in 1960 to 369.71 ppm in 2000."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_authored_from_real_sources",
+    "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+   }
+  },
+  "fact": [
+   {
+    "where": "Document 4 credit line and context ('Arthur Rothstein, Farm Security Administration photographer, 1936 (March)'; 'A photographer working for the U.S. government'), and doc_uses sourcing for Document 4 ('taken for the U.S. government's Farm Security Administration during the 1930s')",
+    "kind": "anachronism",
+    "detail": "In March 1936 Rothstein was working for the Resettlement Administration; the Farm Security Administration was not created until 1937 (the photograph is today held in the LOC's FSA/OWI collection, which is why it is commonly labeled FSA). Describing the agency as the FSA at the time the photo was taken is anachronistic; the context line's 'U.S. government' phrasing is fine, but the credit line and doc_uses should say Resettlement Administration (later FSA)."
+   },
+   {
+    "where": "Expected features, defensible_theses[0]: 'mid-nineteenth-century observers such as Marsh and Muir'",
+    "kind": "inaccurate",
+    "detail": "Muir's Our National Parks dates from 1901 (Document 2), so he is not a mid-nineteenth-century observer; only Marsh (1864) fits that description. The same thesis also places Arrhenius's 1908 calculation alongside 'late twentieth century' scientists, which blurs the chronology."
+   }
+  ]
+ },
+ {
+  "id": "wh3_leq",
+  "spec": {
+   "id": "wh3_leq",
+   "exam": "WH3",
+   "template": "leq",
+   "era": 1,
+   "units": [
+    1,
+    2
+   ],
+   "focus": "State and community responses to famine, disease and environmental stress, c. 1200 to c. 1450 (use only well-established facts)",
+   "sources": [],
+   "seed": 4305
+  },
+  "payload": {
+   "schema_version": "whap-frq-1",
+   "task_type": "leq",
+   "template": "leq",
+   "era": 1,
+   "units": [
+    1,
+    2
+   ],
+   "title": "LEQ: Continuity and Change in Responses to Famine, Disease, and Environmental Stress, c. 1200 to c. 1750",
+   "prompt": {
+    "scenario": "Between c. 1200 and c. 1750, societies across Afro-Eurasia and the Americas faced repeated crises of hunger, epidemic disease, drought, flooding, and climate cooling. Rulers, religious institutions, city governments, and local communities responded in many ways, including storing grain, building and repairing water works, isolating the sick, controlling labor, organizing prayer and charity, moving to new lands, and adopting new crops and medical practices.",
+    "task": "Evaluate the extent to which the ways states and communities responded to famine, disease, or environmental stress changed in the period c. 1200 to c. 1750. You are not expected to address the entire time period.",
+    "requirements": [
+     "Make a historically defensible claim (thesis) that establishes a line of reasoning.",
+     "Describe a broader historical context relevant to the prompt.",
+     "Support an argument in response to the prompt using at least two pieces of specific and relevant evidence.",
+     "Use historical reasoning (continuity and change) to frame or structure an argument that addresses the prompt.",
+     "Use the evidence to demonstrate a complex understanding of the prompt, for example by explaining both continuity and change, by comparing responses in more than one region, or by explaining why some responses changed while others did not."
+    ]
+   },
+   "sources": [],
+   "rubric": {
+    "rubric_id": "whap-v1",
+    "total_points": 6,
+    "rows": [
+     {
+      "row_id": "thesis",
+      "name": "Thesis/claim",
+      "max": 1,
+      "descriptors": {
+       "0": "The response restates the prompt, lacks a defensible claim, or describes crises without judging how far responses changed.",
+       "1": "The response makes a defensible claim about the extent of continuity or change in responses and indicates the reasons or categories that will organize the argument."
+      },
+      "task_specific": "A claim that evaluates how far responses to famine, disease, or environmental stress changed between c. 1200 and c. 1750 and signals a line of reasoning, such as naming the responses that persisted (granaries, prayer, charity) and those that were new or expanded (quarantine, boards of health, inoculation, new crops). It must appear in the introduction or conclusion."
+     },
+     {
+      "row_id": "context",
+      "name": "Contextualization",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no relevant context or only a passing phrase.",
+       "1": "The response describes a broader historical process before, during, or continuing after the period and connects it to how states or communities responded to crisis."
+      },
+      "task_specific": "A description of broader developments relevant to the prompt, such as the trade and travel networks of the Mongol era that helped spread plague, dependence on agriculture and stored harvests, the cooling and climate swings later called the Little Ice Age, or the Columbian Exchange that brought new diseases and new crops. The description must be linked to the argument, not just mentioned."
+     },
+     {
+      "row_id": "evidence",
+      "name": "Evidence",
+      "max": 2,
+      "descriptors": {
+       "0": "The response offers no specific evidence or only general statements about crises.",
+       "1": "The response gives at least two specific, relevant examples of responses to famine, disease, or environmental stress.",
+       "2": "The response uses at least two specific examples to support a claim about the extent of continuity or change in responses."
+      },
+      "task_specific": "Specific examples of responses, such as the Ragusa isolation rule of 1377 and the Venice lazaretto, the English Ordinance and Statute of Labourers, Inca qollqa storehouses, Ming and Qing state granaries, Mamluk communal prayers and waqf charity, Spanish resettlement of Indigenous communities after epidemics, the adoption of American food crops in China, or variolation in China and the Ottoman Empire."
+     },
+     {
+      "row_id": "analysis",
+      "name": "Analysis and reasoning",
+      "max": 2,
+      "descriptors": {
+       "0": "The response does not use continuity and change reasoning or only lists events.",
+       "1": "The response uses continuity and change reasoning to frame or structure an argument about responses to crisis.",
+       "2": "The response shows a complex understanding, for example by explaining both what persisted and what changed and why, or by testing the claim across more than one region, with evidence integrated throughout."
+      },
+      "task_specific": "Continuity and change reasoning applied across the period, with a complex understanding shown by weighing continuity against change, comparing regions, explaining why certain practices spread while others persisted, or noting how the scale and type of crisis shaped responses."
+     }
+    ],
+    "scoring_notes": [
+     "The prompt allows any region; essays that use only European examples can earn all points but are stronger when they place Europe beside other regions.",
+     "Accept religious responses (processions, prayer, charity, pilgrimage) as real responses by communities and institutions, not only medical or administrative ones.",
+     "Migration and abandonment of settlements count as community responses to environmental stress when the essay explains them as such and does not claim a single cause.",
+     "Do not award evidence points for wrong dates or for examples outside c. 1200 to c. 1750 unless they serve only as context.",
+     "ALTON reference — not official AP scoring"
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [
+     "From c. 1200 to c. 1750, responses to crisis changed in their methods more than in their goals: states kept relying on stored grain and religious and charitable institutions kept offering prayer and relief, but Italian city-states developed quarantine and boards of health after the Black Death, and later societies added inoculation and new American crops.",
+     "Responses changed only in limited ways before about 1500. After that, the Columbian Exchange changed both the crises and the answers to them, as Spanish authorities resettled Indigenous survivors of epidemics and Chinese farmers planted maize and sweet potatoes to guard against famine.",
+     "Responses to famine changed little across the period, because states from the Inca to the Ming and Qing kept depending on storehouses and labor obligations. Responses to epidemic disease changed more, moving from mostly religious and communal reactions toward organized isolation and, in some regions, variolation."
+    ],
+    "contextualization_ideas": [
+     "Mongol-era trade and travel across Eurasia in the thirteenth and fourteenth centuries linked distant regions and helped carry plague westward toward the Black Sea, the Mediterranean, and the Middle East in the 1340s.",
+     "Most people in agrarian empires and kingdoms lived close to subsistence and depended on harvests, so rulers claimed legitimacy partly by preventing hunger, as in the Confucian idea that good government kept granaries full and the people fed.",
+     "The Columbian Exchange after 1492 brought Old World diseases such as smallpox to the Americas with devastating mortality, and it also spread American crops such as maize, potatoes, and sweet potatoes across Afro-Eurasia; colder conditions in parts of the 1600s, often called the Little Ice Age, added to harvest failures in many regions."
+    ],
+    "outside_evidence": [
+     "The Great Famine of 1315 to 1317 in northern Europe followed years of heavy rain and failed harvests, showing how vulnerable societies were before the Black Death.",
+     "The Black Death spread across the Mediterranean, Europe, North Africa, and Southwest Asia from 1346 to about 1353 and killed roughly a third or more of Europe's population, with very heavy losses in cities such as Cairo.",
+     "In 1377 the city of Ragusa (Dubrovnik) required arriving travelers from plague areas to wait in isolation for thirty days, an early quarantine rule; Venice later set a forty-day period and opened a lazaretto island in 1423.",
+     "England's Ordinance of Labourers (1349) and Statute of Labourers (1351) tried to hold wages at pre-plague levels after the population fell, and tensions over labor and the poll tax formed part of the background to the Peasants' Revolt of 1381.",
+     "Some communities in Europe responded to the plague with flagellant processions and violent attacks on Jewish communities, such as in Strasbourg in 1349, while Pope Clement VI issued bulls in 1348 condemning the accusations against Jews.",
+     "In Mamluk Egypt and Syria, communities held mass prayers and processions during the plague, and charitable foundations (waqf) supported institutions such as the Mansuri hospital in Cairo, founded by Sultan Qalawun in the 1280s; Ibn al-Khatib of Granada wrote a treatise arguing that plague spread by contagion.",
+     "The Inca state stored food, cloth, and other goods in thousands of qollqa storehouses and used mit'a labor and terraced fields to manage risk in Andean environments.",
+     "Ming and Qing emperors maintained state granary systems, and in the eighteenth century the Qing ran large famine relief efforts that distributed grain and kept prices steady.",
+     "After the 1520 smallpox epidemic in Tenochtitlan and later epidemics, Spanish authorities moved scattered Indigenous survivors into planned towns (congregaciones or reducciones), partly to keep labor and tribute coming in.",
+     "Maize and sweet potatoes from the Americas spread in China from the sixteenth century, letting farmers use hillier and drier land and supporting population growth.",
+     "Variolation against smallpox was practiced in China and in the Ottoman Empire, and Lady Mary Wortley Montagu described the Ottoman practice in Istanbul in 1717 and promoted it in Britain.",
+     "Ancestral Puebloan communities left the Mesa Verde region in the late thirteenth century, a time of severe drought, and moved south to places such as the Rio Grande valley."
+    ],
+    "reasoning_types": [
+     "Continuity and change over time (primary)",
+     "Comparison of state and community responses across regions",
+     "Causation in explaining why new responses such as quarantine or new crops spread"
+    ],
+    "common_pitfalls": [
+     "Describing famines and epidemics without discussing how states or communities responded to them.",
+     "Claiming that one crisis alone caused the fall of a dynasty or empire, a claim historians debate.",
+     "Treating religious responses as ignorance instead of analyzing them as organized community responses.",
+     "Writing only about Europe, or only about the Black Death, without addressing change over the period.",
+     "Giving wrong dates, for example placing the Black Death in the 1200s or the Columbian Exchange before 1492.",
+     "Listing examples without making a judgment about how far responses changed."
+    ],
+    "facts": [
+     "The Black Death reached the Mediterranean and Europe in 1347 and spread widely through 1351, with recurrences for centuries.",
+     "Ragusa passed an isolation rule for arriving travelers in 1377.",
+     "The English Statute of Labourers was passed in 1351.",
+     "The Peasants' Revolt in England took place in 1381.",
+     "The Great Famine in northern Europe lasted from 1315 to 1317.",
+     "Smallpox struck Tenochtitlan in 1520.",
+     "Lady Mary Wortley Montagu described Ottoman variolation in 1717.",
+     "The Inca built qollqa storehouses throughout their empire."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_authored_from_real_sources",
+    "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+   }
+  },
+  "fact": [
+   {
+    "where": "pack",
+    "kind": "other",
+    "detail": "not_checked"
+   }
+  ]
+ }
+]

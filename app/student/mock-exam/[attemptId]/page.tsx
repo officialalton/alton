@@ -65,8 +65,10 @@ export default async function StudentMockExamAttemptPage({ params }: { params: P
       return Array.isArray(data) ? (data as FrqInkRow[]) : [];
     })();
     // AI 에세이 추정 점수(플래그 켜짐 + AP English 일 때만 쿼리 1회). 꺼져 있으면 조회도 없다.
-    const essayAi = isGraded && essayAiEnabledFlag() && essayGradingSubject(attempt.apSubject);
-    const essayScoresP = essayAi ? loadEssayScores(supabase, attemptId) : Promise.resolve([]);
+    // 과목이 AI 채점을 지원하면 저장된 점수 행은 플래그와 무관하게 읽어 보여 준다. 플래그는 "새 채점 시작"만 제어한다(꺼져 있으면 시작 안 함).
+    const essaySupported = isGraded && essayGradingSubject(attempt.apSubject);
+    const essayAi = essaySupported && essayAiEnabledFlag();
+    const essayScoresP = essaySupported ? loadEssayScores(supabase, attemptId) : Promise.resolve([]);
     const [topicNames, handwriting, attempts, essayScores] = await Promise.all([topicNamesP, handwritingP, attemptsP, essayScoresP]);
     // w-full: body 가 flex-col 이라 mx-auto 만 있으면 main 이 내용 최소폭(문항 번호 줄 796px)까지 늘어나 모바일에서 가로 스크롤·번호 버튼 클릭 불가가 됐다(2026-10-09 화면 점검에서 발견). *
     // 응시 중에는 SAT 응시 화면처럼 전체 화면 레이아웃(자체 위 막대에 제목·타이머가 있다). 결과는 기존 카드형 페이지.
@@ -80,7 +82,7 @@ export default async function StudentMockExamAttemptPage({ params }: { params: P
           {attempt.examSetName}
           {attempt.attemptNo && (attempt.attemptTotal ?? 1) > 1 ? <span className="ml-2 text-[13px] font-semibold text-grey-500">Attempt {attempt.attemptNo}</span> : null}
         </h1>
-        <ApExamResultView attempt={attempt} attempts={attempts} topicNames={topicNames} handwriting={handwriting} essayScores={essayScores} essayAiEnabled={essayAi} />
+        <ApExamResultView attempt={attempt} attempts={attempts} topicNames={topicNames} handwriting={handwriting} essayScores={essayScores} essayAiEnabled={essayAi} essayScoringSupported={essaySupported} />
       </main>
     );
   }

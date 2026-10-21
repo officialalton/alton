@@ -10,7 +10,7 @@ import type { WhSetSpec } from "./wh-plan";
 
 export type WhRegistrySource = RegistrySource & { region?: string; unit?: string; width?: number; height?: number; notes?: string };
 const REQUIRED = ["id", "type", "title", "author", "year", "repository", "url", "rights_statement", "reuse_basis", "modified", "retrieved", "sha256"] as const;
-const ALLOWED_URL = /^https:\/\/(www\.)?(loc\.gov|archives\.gov|nara\.gov|census\.gov|avalon\.law\.yale\.edu|gutenberg\.org|en\.wikisource\.org|commons\.wikimedia\.org|upload\.wikimedia\.org|si\.edu|archive\.org)\//;
+const ALLOWED_URL = /^https:\/\/(www\.)?(loc\.gov|archives\.gov|nara\.gov|census\.gov|avalon\.law\.yale\.edu|gutenberg\.org|en\.wikisource\.org|commons\.wikimedia\.org|upload\.wikimedia\.org|si\.edu|archive\.org|gml\.noaa\.gov)\//;
 export const WH_REGISTRY_PATH = "data/ap/wh-sources/registry.json";
 export const loadWhRegistry = (p = WH_REGISTRY_PATH): WhRegistrySource[] => (JSON.parse(readFileSync(p, "utf-8")) as { sources: WhRegistrySource[] }).sources;
 function sortKeys(o: unknown): unknown { if (Array.isArray(o)) return o.map(sortKeys); if (o && typeof o === "object") return Object.fromEntries(Object.keys(o as object).sort().map((k) => [k, sortKeys((o as Record<string, unknown>)[k])])); return o; }

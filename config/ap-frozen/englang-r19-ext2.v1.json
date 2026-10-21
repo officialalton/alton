@@ -1,0 +1,106 @@
+{
+ "version": "v1-englang-r19-ext2",
+ "run": "englang-r19-ext2",
+ "subject": "ap_english_language",
+ "mode": "mc",
+ "capUsd": 6,
+ "hardStopCumulativeUsd": 640,
+ "myTotalCapUsd": 9999,
+ "stages": [
+  "gen",
+  "check",
+  "solve",
+  "adv",
+  "judge",
+  "finalize"
+ ],
+ "models": {
+  "gen": "claude-fable-5-1",
+  "solvers": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5",
+   "claude-fable-5-1"
+  ],
+  "adversary": "claude-fable-5-1",
+  "judge": "claude-opus-5-5",
+  "review": "claude-sonnet-5-5",
+  "sampleHigh": "claude-opus-5-5",
+  "sampleLow": "claude-sonnet-5-5",
+  "graders": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5",
+   "claude-fable-5-1"
+  ]
+ },
+ "genModels": {
+  "reading": "claude-fable-5-1",
+  "writing": "claude-opus-5-5"
+ },
+ "effort": "medium",
+ "genEffort": "low",
+ "minKeyConfidence": 0.8,
+ "corpusExclude": [],
+ "generatorFiles": [
+  "lib/ap-generation/englang-gates.ts",
+  "lib/ap-generation/englang-frq.ts",
+  "lib/ap-generation/englang-plan.ts",
+  "lib/ap-generation/englang-prompts.ts",
+  "lib/ap-generation/english-text-stats.ts",
+  "lib/ap-generation/subjects/englang.ts",
+  "lib/ap-exam/elang-rules.ts",
+  "scripts/ap-generation/englang-pipeline.ts",
+  "scripts/mock-exam-generation/batch-lib.ts"
+ ],
+ "_note": "2026-10-19 EL3/EL4 top-up: lr41, lr24 (8 items) and lw41, lw44 (6 items) were below the official bundle sizes after the first extension.",
+ "ext": [
+  {
+   "id": "lr41",
+   "base": "englang-r19-ext:ap_english_language-lr41-k0",
+   "newSkills": [
+    "1.A",
+    "1.B",
+    "3.C",
+    "5.C",
+    "7.B"
+   ],
+   "seed": 19701
+  },
+  {
+   "id": "lr24",
+   "base": "englang-r19-ext:ap_english_language-lr24-k0",
+   "newSkills": [
+    "3.A",
+    "5.A",
+    "5.C",
+    "7.A",
+    "7.C"
+   ],
+   "seed": 19702
+  },
+  {
+   "id": "lw41",
+   "base": "englang-r19-ext:ap_english_language-lw41-k0",
+   "newSkills": [
+    "4.B",
+    "4.C",
+    "8.A"
+   ],
+   "seed": 19703
+  },
+  {
+   "id": "lw44",
+   "base": "englang-r19-ext:ap_english_language-lw44-k0",
+   "newSkills": [
+    "2.B",
+    "4.B",
+    "8.C",
+    "6.B"
+   ],
+   "seed": 19704
+  }
+ ],
+ "extSource": "../sample-2027/englang-r19-ext2-bases.json",
+ "expected": {
+  "hash": "65d241411a1e"
+ }
+}

@@ -1,0 +1,17 @@
+[
+ {
+  "__rejected": true,
+  "specId": "wh3_saq1",
+  "reason": "sample_mid_missing; sample_low_missing; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate"
+ },
+ {
+  "__rejected": true,
+  "specId": "wh3_dbq",
+  "reason": "sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate; fact_misdescribes_source; fact_inaccurate"
+ },
+ {
+  "__rejected": true,
+  "specId": "wh3_leq",
+  "reason": "sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate; fact_inaccurate"
+ }
+]
