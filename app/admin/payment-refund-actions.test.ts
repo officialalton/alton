@@ -7,9 +7,14 @@ const rpcMock = vi.fn();
 vi.mock("@/lib/supabase-admin", () => ({ createAdminClient: () => ({ rpc: rpcMock }) }));
 
 const loadMock = vi.fn();
-vi.mock("./payment-refund-data", () => ({ loadPaymentRefundBoard: (...a: unknown[]) => loadMock(...a) }));
+const pageMock = vi.fn();
+vi.mock("./payment-refund-data", () => ({
+  loadPaymentRefundBoard: (...a: unknown[]) => loadMock(...a),
+  loadPaymentRefundPage: (...a: unknown[]) => pageMock(...a),
+  isValidCursor: (c: { at?: string; id?: string } | null) => !!c && /^[0-9TZ:.+\- ]{10,40}$/.test(String(c.at)) && /^[0-9a-fA-F-]{36}$/.test(String(c.id)),
+}));
 
-import { listPaymentRefundBoard, resolvePaymentRefund, resolvePaymentWebhookIssue } from "./payment-refund-actions";
+import { listPaymentRefundBoard, listPaymentRefundPage, resolvePaymentRefund, resolvePaymentWebhookIssue } from "./payment-refund-actions";
 
 beforeEach(() => {
   vi.clearAllMocks();
@@ -21,10 +26,12 @@ describe("payment-refund-actions", () => {
   it("모든 액션은 관리자/manage_payments 권한 검사를 먼저 한다(거부되면 DB 호출 없음)", async () => {
     requireMock.mockRejectedValue(new Error("forbidden"));
     await expect(listPaymentRefundBoard()).rejects.toThrow("forbidden");
+    await expect(listPaymentRefundPage({ kind: "pending" })).rejects.toThrow("forbidden");
     await expect(resolvePaymentRefund({ refundId: "r", action: "revoke", note: "x" })).rejects.toThrow("forbidden");
     await expect(resolvePaymentWebhookIssue({ issueId: "i", note: "x" })).rejects.toThrow("forbidden");
     expect(rpcMock).not.toHaveBeenCalled();
     expect(loadMock).not.toHaveBeenCalled();
+    expect(pageMock).not.toHaveBeenCalled();
     expect(requireMock).toHaveBeenCalledWith("manage_payments");
   });
 
@@ -66,5 +73,14 @@ describe("payment-refund-actions", () => {
       p_admin: "admin1",
       p_note: "재전송 완료",
     });
+  });
+
+  it("다음 페이지 조회는 커서 형식을 검증한다(필터 문자열 주입 차단)", async () => {
+    pageMock.mockResolvedValue({ items: [], next: null });
+    await listPaymentRefundPage({ kind: "pending", after: { at: "2026-10-01T00:00:00.123456+00:00", id: "11111111-1111-1111-1111-111111111111" } });
+    expect(pageMock).toHaveBeenCalledTimes(1);
+    await expect(listPaymentRefundPage({ kind: "pending", after: { at: 'x",id.gt.1', id: "11111111-1111-1111-1111-111111111111" } })).rejects.toThrow();
+    await expect(listPaymentRefundPage({ kind: "bogus" as never })).rejects.toThrow();
+    expect(pageMock).toHaveBeenCalledTimes(1);
   });
 });

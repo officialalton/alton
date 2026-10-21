@@ -2,7 +2,7 @@
 
 import { requireAdminOrCapability } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
-import { loadPaymentRefundBoard } from "./payment-refund-data";
+import { isValidCursor, loadPaymentRefundBoard, loadPaymentRefundPage, type RefundCursor } from "./payment-refund-data";
 
 // Stripe 환불 기록·웹훅 이상 대장 관리자 액션. entitlement-actions.ts 와 같은 capability(manage_payments).
 const PAYMENTS_CAPABILITY = "manage_payments";
@@ -10,6 +10,14 @@ const PAYMENTS_CAPABILITY = "manage_payments";
 export async function listPaymentRefundBoard() {
   await requireAdminOrCapability(PAYMENTS_CAPABILITY);
   return loadPaymentRefundBoard(createAdminClient());
+}
+
+/** 대장 다음 페이지(처리 대기 PENDING_LIMIT 초과분 · 처리 완료 과거 이력). 같은 capability 검사, 커서는 형식 검증 뒤 사용. */
+export async function listPaymentRefundPage(params: { kind: "pending" | "done"; after?: RefundCursor | null }) {
+  await requireAdminOrCapability(PAYMENTS_CAPABILITY);
+  if (params.kind !== "pending" && params.kind !== "done") throw new Error("잘못된 요청입니다.");
+  if (params.after != null && !isValidCursor(params.after)) throw new Error("잘못된 요청입니다.");
+  return loadPaymentRefundPage(createAdminClient(), params);
 }
 
 /**

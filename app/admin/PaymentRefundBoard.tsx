@@ -1,8 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { listPaymentRefundBoard, resolvePaymentRefund, resolvePaymentWebhookIssue } from "./payment-refund-actions";
-import type { BoardCounts, PaymentRefundBoardItem, PaymentWebhookIssueItem } from "./payment-refund-data";
+import { listPaymentRefundBoard, listPaymentRefundPage, resolvePaymentRefund, resolvePaymentWebhookIssue } from "./payment-refund-actions";
+import { PENDING_LIMIT, type BoardCounts, type PaymentRefundBoardItem, type PaymentWebhookIssueItem } from "./payment-refund-data";
 import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDateTime } from "@/lib/format-datetime";
 
@@ -44,6 +44,7 @@ export default function PaymentRefundBoard() {
   const [counts, setCounts] = useState<BoardCounts | null>(null);
   const [filter, setFilter] = useState<"all" | "review" | "stripe_issue">("all");
   const [error, setError] = useState<string | null>(null);
+  const [paging, setPaging] = useState<"pending" | "done" | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
   const [noteById, setNoteById] = useState<Record<string, string>>({});
 
@@ -63,6 +64,27 @@ export default function PaymentRefundBoard() {
     void load();
   }, [load]);
 
+  /** 제한(처리 대기 1,000건·처리 완료 최근 100건) 밖의 기록을 키셋 커서로 이어서 불러온다. */
+  async function loadMore(kind: "pending" | "done") {
+    const list = (refunds ?? []).filter((r) => (kind === "pending" ? !r.handledAt : r.handledAt));
+    const last = list[list.length - 1];
+    const at = kind === "pending" ? last?.createdAt : last?.handledAt;
+    if (!last || !at) return;
+    setPaging(kind);
+    setError(null);
+    try {
+      const page = await listPaymentRefundPage({ kind, after: { at, id: last.id } });
+      setRefunds((prev) => {
+        const seen = new Set((prev ?? []).map((r) => r.id));
+        return [...(prev ?? []), ...page.items.filter((r) => !seen.has(r.id))];
+      });
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "불러오지 못했습니다.");
+    } finally {
+      setPaging(null);
+    }
+  }
+
   async function run(id: string, fn: () => Promise<void>) {
     setBusyId(id);
     setError(null);
@@ -79,6 +101,9 @@ export default function PaymentRefundBoard() {
 
   const pending = (refunds ?? []).filter((r) => !r.handledAt).filter((r) => (filter === "review" ? r.needsReview : filter === "stripe_issue" ? r.status !== "succeeded" : true));
   const done = (refunds ?? []).filter((r) => r.handledAt);
+  const pendingLoaded = (refunds ?? []).filter((r) => !r.handledAt).length;
+  const pendingHidden = counts ? Math.max(0, counts.refundsPending - pendingLoaded) : 0;
+  const doneHidden = counts ? Math.max(0, counts.refundsDone - done.length) : 0;
   const openIssues = issues.filter((i) => !i.resolvedAt);
   const doneIssues = issues.filter((i) => i.resolvedAt);
 
@@ -97,16 +122,24 @@ export default function PaymentRefundBoard() {
       {counts && (
         <div className="flex flex-wrap items-center gap-3 mb-3" data-testid="refund-counts">
           <span className="text-[12px] text-grey-500">
-            환불 기록 {counts.refundsTotal}건 중 {counts.refundsShown}건 표시 · 처리 대기 {counts.refundsPending}건(오래된 대기 건은 항상 먼저 표시, 처리 완료는 최근 100건만)
+            환불 기록 {counts.refundsTotal}건 · 서버 처리 대기 {counts.refundsPending}건 중 {pendingLoaded}건 불러옴 · 처리 완료 {counts.refundsDone}건 중 {done.length}건 불러옴
           </span>
           <label className="text-[12px] text-grey-500">
-            필터{" "}
+            필터(불러온 대기 건에만 적용){" "}
             <select aria-label="환불 필터" className={input} value={filter} onChange={(e) => setFilter(e.target.value as typeof filter)}>
-              <option value="all">처리 대기 전체</option>
+              <option value="all">불러온 처리 대기 전체</option>
               <option value="review">확인 필요만</option>
               <option value="stripe_issue">Stripe 상태 비성공만</option>
             </select>
           </label>
+          {pendingHidden > 0 && (
+            <p className="w-full text-[12px] text-red" role="status" data-testid="refund-truncated">
+              처리 대기가 많아 오래된 순 {PENDING_LIMIT.toLocaleString()}건까지만 먼저 표시했습니다. 아직 표시되지 않은 대기 {pendingHidden}건이 있습니다.{" "}
+              <button className={btnSecondary} disabled={paging !== null} onClick={() => void loadMore("pending")}>
+                {paging === "pending" ? "불러오는 중…" : "처리 대기 더 불러오기"}
+              </button>
+            </p>
+          )}
         </div>
       )}
       {refunds === null ? (
@@ -165,7 +198,7 @@ export default function PaymentRefundBoard() {
       )}
       {done.length > 0 && (
         <details className="mb-5">
-          <summary className="text-[12.5px] text-grey-500 cursor-pointer">처리 완료 {done.length}건</summary>
+          <summary className="text-[12.5px] text-grey-500 cursor-pointer">처리 완료 {done.length}건 표시{counts ? ` (전체 ${counts.refundsDone}건)` : ""}</summary>
           {done.map((r) => (
             <div key={r.id} className={card} data-testid="refund-done">
               <div className="text-[13px] font-bold text-ink">
@@ -177,6 +210,11 @@ export default function PaymentRefundBoard() {
               </div>
             </div>
           ))}
+          {doneHidden > 0 && (
+            <button className={btnSecondary} disabled={paging !== null} onClick={() => void loadMore("done")}>
+              {paging === "done" ? "불러오는 중…" : `이전 처리 기록 더 보기(${doneHidden}건 남음)`}
+            </button>
+          )}
         </details>
       )}
 
