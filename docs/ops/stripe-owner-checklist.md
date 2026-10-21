@@ -40,3 +40,16 @@ Stripe 대시보드 우상단 "Test mode" 켜기.
 
 ## E. 환불 자동 회수 검증 (활성화 보류)
 시나리오 17종 검증 결과는 `docs/ops/stripe-refund-revoke-verification.md`. 오너 확인 전까지 `STRIPE_AUTO_REVOKE_ON_REFUND` 를 켜지 않는다(현재 환불은 기록 + 관리자 처리 대상 표시만).
+
+### 현재 상태 (구분 기재)
+- 공유 DB 스키마: `20261030100000`, `20261031100000` 적용 완료(공유 비프로덕션 DB). `20261031200000_refund_entitlement_lock_before_check.sql`(수동 회수 예약 경합 정정)은 작성만 됨, 적용 대기.
+- Preview 코드 배포·UAT: 미확인. Production 코드 배포: 미배포. 자동 회수: 꺼짐. 실제 결제·환불 조작: 없음.
+
+### 운영 반영 전 확인 항목 (값 요청 없음, 이름·이벤트·기대 결과만)
+1. 환경변수 이름: `STRIPE_MODE`(live|test, 키 접두사와 일치), `STRIPE_AUTO_REVOKE_ON_REFUND`(미설정 또는 false 가 기대값). 점검: `node scripts/check-stripe-env.mjs` 가 OK.
+2. Stripe 웹훅 이벤트 선택: `checkout.session.completed`, `checkout.session.async_payment_succeeded`, `checkout.session.async_payment_failed`, `checkout.session.expired`, `payment_intent.payment_failed`, `charge.refunded`, `charge.refund.updated`, `charge.dispute.created`, `charge.dispute.updated`, `charge.dispute.closed`. 기대 결과: 각 이벤트 전달 응답 200.
+3. 환불 이벤트 도착 시 기대 결과: 관리자 "결제 실패·대사" 탭에 처리 대기로 표시, 자동 회수 꺼짐 상태에서 수업권 변화 없음.
+4. 수동 회수는 예약(미소비 hold)이 있으면 중단되고 처리 완료 표시가 남지 않는다(마이그레이션 `20261031200000` 적용 후). 예약을 취소한 뒤 다시 처리하면 1회만 회수된다.
+
+## 참고: 같은 Preview UAT 의 AP 결과 화면 현황 (2026-10-21)
+학생 결과 화면(English Language `5b9952b6…`, Calculus AB `7020773d…`) 확인 완료. 학부모 화면은 UAT 보호자 계정 연결(오너 가입 대기), 관리자 AP 결과 화면은 브라우저 확인 대기. 결제·Stripe 항목과 무관하며 같은 UAT 계정 준비를 공유한다.
