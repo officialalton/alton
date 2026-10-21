@@ -35,3 +35,6 @@ Stripe 대시보드 우상단 "Test mode" 켜기.
 - 환불 시 수업권 회수 정책(자동/수동 범위)은 오너 결정 대기 — 현재는 기록 + 관리자 확인 큐만 항상 동작, 자동 회수는 꺼짐.
 - 관리자 화면에는 `payment_refunds`/`payment_webhook_issues` 목록 UI 가 아직 없다(SQL 로 조회). 화면 노출은 후속 폴리싱 대상.
 - 분쟁은 기록만 하며 수업권을 자동 회수하지 않는다(확정 정책).
+
+## E. 환불 자동 회수 검증 (활성화 보류)
+시나리오 17종 검증 결과는 `docs/ops/stripe-refund-revoke-verification.md`. 오너 확인 전까지 `STRIPE_AUTO_REVOKE_ON_REFUND` 를 켜지 않는다(현재 환불은 기록 + 관리자 처리 대상 표시만).
