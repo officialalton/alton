@@ -1,5 +1,7 @@
 # Stripe 웹훅 오너 점검 체크리스트
 
+> **2026-10-21 점검 정정:** 공유 DB에 `20261030100000`, `20261031100000` 적용은 개발자 보고. Production 코드 배포·실제 결제·환불·자동 회수 켜기는 별도 단계다. 자동 회수는 꺼짐 유지. [환불 검증](stripe-refund-revoke-verification.md)의 실예약 함수 29건과 Preview 화면 UAT를 구분한다. 이 문서의 라이브 결제·환불 예시는 실행 승인 자체가 아니며 임의 소액 실거래 테스트를 하지 않는다. 우선 Stripe 테스트 환경으로 검증한다.
+
 엔드포인트: `https://<도메인>/api/webhooks/stripe`. 처리 이벤트: `checkout.session.completed`, `checkout.session.async_payment_succeeded/failed`, `payment_intent.payment_failed`, `checkout.session.expired`, `charge.dispute.created/updated/closed`, `charge.refunded`, `charge.refund.updated`. 그 외 이벤트는 영수증만 남기고 200(`skipped: unhandled event`).
 모드는 환경변수 `STRIPE_MODE`(`live`|`test`)로 명시하고 `STRIPE_SECRET_KEY` 접두사와 반드시 일치해야 한다(불일치면 웹훅이 500 — 배포 설정 오류). 배포 전 `node scripts/check-stripe-env.mjs` 로 확인. 반대 모드 이벤트는 처리하지 않고 `payment_webhook_issues`(kind=livemode_mismatch, 이벤트 원문 포함)에 보관하며 200 `recorded:true`(receipt 는 만들지 않음 → 설정 수정 후 Stripe 에서 Resend 하면 정상 처리, 모두 멱등). 테스트 모드 시크릿(`whsec_`)과 라이브 모드 시크릿은 서로 다르며 환경별로 따로 넣는다(Preview=테스트, Production=라이브).
 
@@ -32,8 +34,8 @@ Stripe 대시보드 우상단 "Test mode" 켜기.
 - **운영 기록 대조(읽기 전용)**: `npx supabase db query --linked -f scripts/stripe-reconcile-readonly.sql -o table`. 이것은 "앱에 기록된 웹훅·구매·지급끼리의 정합"만 본다. "기록된 이벤트에 미처리 없음"이 "Stripe 의 모든 실제 결제가 앱에 반영됨"을 뜻하지 않는다. 후자는 Stripe 대시보드 Payments > Export(기간·테스트/라이브 구분 선택, CSV)의 `id`/`payment_intent` 열이 `purchases.stripe_payment_intent_id` 에 모두 있는지 대조하고, Developers > Events 에서 Delivery 실패(5xx) 이벤트가 없는지 확인한다.
 
 ## D. 알려진 제한(오너 인지 필요)
-- 환불 시 수업권 회수 정책(자동/수동 범위)은 오너 결정 대기 — 현재는 기록 + 관리자 확인 큐만 항상 동작, 자동 회수는 꺼짐.
-- 관리자 화면: "결제 실패·대사" 탭 하단에서 환불 기록·수업권 현황·웹훅 이상을 보고 사유를 남겨 처리한다(마이그레이션 `20261031100000` 적용 필요). 탭 구성·문구 정리는 후속 폴리싱 대상.
+- 자동 회수 조건은 전액 성공 환불·해당 구매 전부 미사용으로 정해졌으며, 운영 활성화만 보류다. 조건을 다시 정책 승인 대기로 올리지 않는다. 수동 회수의 잠금 전 예약 검사 경합은 수정·검증 대상이다.
+- 관리자 결제 실패·대사 탭 하단의 PaymentRefundBoard와 수동 처리 RPC는 be52a9291로 구현됐다. Preview UAT는 최신 보고 확인이 필요하다. 최근 100건 제한으로 오래된 미해결 건 누락 가능성이 있어 서버 미해결 조회/페이지 이동 보강 대상이다.
 - 분쟁은 기록만 하며 수업권을 자동 회수하지 않는다(확정 정책).
 
 ## E. 환불 자동 회수 검증 (활성화 보류)
