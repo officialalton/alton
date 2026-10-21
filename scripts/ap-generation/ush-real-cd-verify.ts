@@ -6,7 +6,7 @@ import { runBatch, toolInput, estimate, ledger, type BatchReq } from "../mock-ex
 import { ledgerTotal } from "./ledger-total";
 import * as P from "../../lib/ap-generation/ushistory-prompts";
 type Json = Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
-const run = process.argv[2] === "d" ? "d" : "c";
+const run = process.argv[2] === "d" ? "d" : process.argv[2] === "e" ? "e" : "c";
 const MODELS = { solvers: ["claude-opus-5-5", "claude-sonnet-5-5"], fact: "claude-fable-5-1" };
 const CAP = Number(process.env.USH_CAP ?? 3); const CUM_STOP = Number(process.env.USH_CUM_STOP ?? 260); const DIR = `data/ap/sample-2027/ush-real-${run}`; const OUT = `data/ap/ush-sources/real-${run}-verification.json`;
 const only = process.argv.includes("--only") ? process.argv[process.argv.indexOf("--only") + 1] : "";

@@ -37,6 +37,9 @@ function frqItem(it: MockExamAttemptItem, byPart: Map<string, EssayScoreView>, a
   for (const r of rows) {
     // 행이 아직 없는데 채점 시작이 꺼져 있으면 "진행 중"이 아니라 "일시 중단"(아무도 시작하지 않는다)
     if (!r) { if (state !== "in_progress") state = scoringActive ? "in_progress" : "paused"; continue; }
+    // 한도 초과 대기(daily_cap·monthly_budget)는 "진행 중"이 아니라 일시 중단, 기준 답안 부족은 이용 불가(사유 보존)
+    if (r.status === "failed" && (r.lastError === "daily_cap" || r.lastError === "monthly_budget")) { if (state !== "in_progress") state = "paused"; reason = r.lastError; continue; }
+    if (r.status === "failed" && r.lastError === "no_reference_answers") { if (state !== "in_progress" && state !== "paused") state = "unavailable"; reason = r.lastError; continue; }
     if (r.status === "pending" || r.status === "processing" || r.status === "failed") { state = "in_progress"; continue; }
     // 제출 확정(graded)된 응시의 빈 답안만 진짜 0점(공식 AP 도 빈 답안은 0점). 제출 전·진행 중 응시의 빈 답안은 0점이 아니라 미정이다.
     if (r.status === "skipped" && r.lastError === "empty") { if (!submitted) state = "in_progress"; continue; }

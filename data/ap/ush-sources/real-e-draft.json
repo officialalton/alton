@@ -1,0 +1,536 @@
+[
+ {
+  "cellId": "ap_us_history-real_e_harriot",
+  "apSubjectCode": "ap_us_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "authored_from_real_source",
+  "candidateKey": "ap_us_history-real_e_harriot-k0",
+  "keywordCode": "1.6",
+  "unitCode": "1",
+  "skillPrimary": "3.A",
+  "structure": "shared_stimulus_set",
+  "archetype": "ush_real_real_e_harriot",
+  "reviewState": "sample_unverified",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "basic_learning"
+   }
+  ],
+  "gateOverride": "ush-real-e-2026-10-19",
+  "run": "ush-real-e",
+  "stockKey": "ush-real-e:ap_us_history-real_e_harriot-k0",
+  "pipeline": "real_source_v1",
+  "validation": "needs_review",
+  "gateVersion": "ush-real-e-2026-10-19",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_us_history",
+  "itemFamilyId": "fam:ush-real-e:ap_us_history-real_e_harriot-k0",
+  "canonicalKey": "ush-real-e:ap_us_history-real_e_harriot-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_us_history:1.6",
+  "sharedWith": [],
+  "stockCell": "ap_us_history|1.6|3.A|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "ush-real-e",
+    "gateVersion": "ush-real-e-2026-10-19",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "txt-harriot-1588"
+  ],
+  "replaces": "US3 P1 (new)",
+  "payload": {
+   "archetype": "ush_real_real_e_harriot",
+   "topic": "1.6",
+   "skill": "3.A",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(primary source)\nA Briefe and True Report of the New Found Land of Virginia (excerpt on Vppowoc, tobacco)\nThomas Harriot, member of the English expedition to Roanoke Island (1585-1586), 1588 (London; first printing, Quarto). Project Gutenberg eBook #4247. Reuse: public domain in the United States (published before 1929; author died 1621). excerpted (two segments joined by [...]); whitespace normalized; original spelling kept; no wording changed. Excerpt from a report published in 1588 by a member of the English expedition that tried to found a colony on Roanoke Island (in present-day North Carolina); the spelling is that of the original printing.\n\n\"There is an herbe which is sowed a part by it selfe & is called by the inhabitants Vppówoc: In the West Indies it hath diuers names, according to the seuerall places & countries where it groweth and is vsed: The Spaniardes generally call it Tobacco. The leaues thereof being dried and brought into powder: they vse to take the fume or smoke thereof by sucking it through pipes made of claie into their stomacke and heade; from whence it purgeth superfluous fleame & other grosse humors, openeth all the pores & passages of the body: by which meanes the vse thereof, not only preserueth the body from obstructions; but also if any be, so that they haue not beene of too long continuance, in short time breaketh them: wherby their bodies are notably preserued in health, & know not many greeuous diseases wherewithall wee in England are oftentimes afflicted. The Vppówoc is of so precious estimation amongest then, that they thinke their gods are maruelously delighted therwith: Wherupon sometime they make hallowed fires & cast some of the pouder therein for a sacrifice: being in a storme vppon the waters, to pacifie their gods, they cast some vp into the aire and into the water: so a weare for fish being newly set vp, they cast some therein and into the aire: also after an escape of danger, they cast some into the aire likewise: [...] We ourselues during the time we were there vsed to suck it after their maner, as also since our returne, & haue found manie rare and wonderful experiments of the vertues thereof; of which the relation woulde require a volume by it selfe:\"",
+   "ush_set": {
+    "period": 1,
+    "stim_type": "primary_text",
+    "theme": "Native crops and English colonization at Roanoke",
+    "title": "Thomas Harriot on Native uses of tobacco, 1588",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "primary_text",
+      "title": "A Briefe and True Report of the New Found Land of Virginia (excerpt on Vppowoc, tobacco)",
+      "attribution": "Thomas Harriot, member of the English expedition to Roanoke Island (1585-1586), 1588 (London; first printing, Quarto). Project Gutenberg eBook #4247. Reuse: public domain in the United States (published before 1929; author died 1621). excerpted (two segments joined by [...]); whitespace normalized; original spelling kept; no wording changed.",
+      "real_data": true,
+      "source_registry_id": "txt-harriot-1588",
+      "source_sha256": "2db620ecf7be512347fd05bbad173f10ab13ea96e9265f719736801df492c30d"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "ush_real_3A",
+     "topic": "1.6",
+     "skill": "3.A",
+     "stem": "Which of the following claims about Vppówoc (tobacco) is made in the excerpt?",
+     "options": [
+      {
+       "text": "The inhabitants grew it only as a food crop for their villages and never burned or smoked any of it, according to the author.",
+       "why": "The excerpt says the plant was sowed apart and smoked through clay pipes, and describes burning the powder as an offering, so it was not only a food crop.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "The Spaniards of the West Indies had never seen the plant before the English expedition arrived.",
+       "why": "The excerpt says the Spaniards generally call it Tobacco and that it is used in the West Indies, so Europeans already knew it.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "The inhabitants valued it for its effects on the body and used it in rituals meant to please their gods.",
+       "why": "The author says the inhabitants dried the leaves and smoked them for health, and that they cast the powder into fires and the air as offerings to their gods.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Its use was forbidden to ordinary people and reserved for a small group of priests in each village.",
+       "why": "The author says the inhabitants as a whole took the smoke for their health and that the English themselves smoked it; no restriction to priests is mentioned.",
+       "value": null,
+       "label": "overstated"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"The inhabitants valued it for its effects on the body and used it in rituals meant to please their gods.\". The author says the inhabitants dried the leaves and smoked them for health, and that they cast the powder into fires and the air as offerings to their gods.\n\"The inhabitants grew it only as a food crop for their villages and never burned or smoked any of it, according to the author.\" is incorrect: The excerpt says the plant was sowed apart and smoked through clay pipes, and describes burning the powder as an offering, so it was not only a food crop.\n\"The Spaniards of the West Indies had never seen the plant before the English expedition arrived.\" is incorrect: The excerpt says the Spaniards generally call it Tobacco and that it is used in the West Indies, so Europeans already knew it.\n\"Its use was forbidden to ordinary people and reserved for a small group of priests in each village.\" is incorrect: The author says the inhabitants as a whole took the smoke for their health and that the English themselves smoked it; no restriction to priests is mentioned.",
+     "est_seconds": 75,
+     "facts": [
+      "Thomas Harriot took part in the English expedition to Roanoke Island in 1585-1586 and published A Briefe and True Report in 1588.",
+      "Native peoples of the Americas cultivated and smoked tobacco before European contact."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.A",
+      "key_evidence_in_source": "dried leaves smoked in clay pipes; precious in esteem because their gods are delighted; powder cast into fires and the air as sacrifice"
+     }
+    },
+    {
+     "archetype": "ush_real_2A",
+     "topic": "1.6",
+     "skill": "2.A",
+     "stem": "The author most likely wrote the report from which the excerpt comes in order to",
+     "options": [
+      {
+       "text": "encourage English investors and settlers to support colonies in North America",
+       "why": "The report describes plants, foods and goods of the region in a favorable way for English readers and was published to build support for colonizing Virginia.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "persuade the English government to give up its plans for colonizing North America and to concentrate its efforts on trade with the West Indies",
+       "why": "The report praises the region's resources and the author took part in an expedition to settle it, so its purpose was to promote, not end, colonization.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "record the religious beliefs and ceremonies of Spanish settlers living in the West Indies",
+       "why": "The excerpt is about the inhabitants of the region around Roanoke and mentions the Spaniards only to give their name for the plant.",
+       "value": null,
+       "label": "true_but_not_responsive"
+      },
+      {
+       "text": "teach English farmers how to grow and prepare tobacco in the fields of England",
+       "why": "The excerpt describes how the inhabitants use the plant and says nothing about instructions for growing it in England.",
+       "value": null,
+       "label": "unsupported_by_source"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"encourage English investors and settlers to support colonies in North America\". The report describes plants, foods and goods of the region in a favorable way for English readers and was published to build support for colonizing Virginia.\n\"persuade the English government to give up its plans for colonizing North America and to concentrate its efforts on trade with the West Indies\" is incorrect: The report praises the region's resources and the author took part in an expedition to settle it, so its purpose was to promote, not end, colonization.\n\"record the religious beliefs and ceremonies of Spanish settlers living in the West Indies\" is incorrect: The excerpt is about the inhabitants of the region around Roanoke and mentions the Spaniards only to give their name for the plant.\n\"teach English farmers how to grow and prepare tobacco in the fields of England\" is incorrect: The excerpt describes how the inhabitants use the plant and says nothing about instructions for growing it in England.",
+     "est_seconds": 75,
+     "facts": [
+      "Harriot's report was published in 1588 to promote English colonization of Virginia."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "2.A",
+      "key_evidence_in_source": "title and content: a report on the products of the New Found Land of Virginia; favorable description of a valued plant"
+     }
+    },
+    {
+     "archetype": "ush_real_4A",
+     "topic": "1.6",
+     "skill": "4.A",
+     "stem": "Which of the following developments provides the best historical context for the excerpt?",
+     "options": [
+      {
+       "text": "The founding of the Jamestown settlement in 1607 by the Virginia Company of London, after the Roanoke colonies had failed",
+       "why": "Jamestown was founded in 1607, nearly twenty years after this report was published in 1588.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The arrival of the Pilgrims at Plymouth in 1620 in search of religious freedom for their congregation",
+       "why": "The Pilgrims arrived in 1620, long after the 1588 report.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The Dutch purchase of Manhattan Island from Native Americans in the year 1626",
+       "why": "The Dutch settlement of New Netherland began in the 1620s, decades after the report.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "English efforts in the 1580s to found a colony on Roanoke Island, which did not last",
+       "why": "Walter Raleigh sponsored colonies on Roanoke Island in 1585 and 1587; the author took part in the first expedition, and the colony had disappeared by 1590.",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"English efforts in the 1580s to found a colony on Roanoke Island, which did not last\". Walter Raleigh sponsored colonies on Roanoke Island in 1585 and 1587; the author took part in the first expedition, and the colony had disappeared by 1590.\n\"The founding of the Jamestown settlement in 1607 by the Virginia Company of London, after the Roanoke colonies had failed\" is incorrect: Jamestown was founded in 1607, nearly twenty years after this report was published in 1588.\n\"The arrival of the Pilgrims at Plymouth in 1620 in search of religious freedom for their congregation\" is incorrect: The Pilgrims arrived in 1620, long after the 1588 report.\n\"The Dutch purchase of Manhattan Island from Native Americans in the year 1626\" is incorrect: The Dutch settlement of New Netherland began in the 1620s, decades after the report.",
+     "est_seconds": 75,
+     "facts": [
+      "Roanoke colonies were founded in 1585 and 1587 under Walter Raleigh's patent.",
+      "Jamestown was founded in 1607; Plymouth in 1620."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.A",
+      "key_evidence_in_source": "(context; the report is dated 1588 and the author describes the inhabitants he met during his stay)"
+     }
+    },
+    {
+     "archetype": "ush_real_1B",
+     "topic": "1.6",
+     "skill": "1.B",
+     "stem": "The excerpt best illustrates which of the following developments in the Atlantic world in the sixteenth century?",
+     "options": [
+      {
+       "text": "Native Americans adopted European crops and gave up the plants they had grown for many centuries before contact.",
+       "why": "The excerpt describes Europeans taking up a Native American plant, not Native Americans adopting European crops.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Europeans learned about and adopted plants and practices that Native Americans had developed.",
+       "why": "The author reports that the English tried the smoke 'after their maner' and that Spaniards already called the plant Tobacco, showing Europeans adopting a Native American crop and custom.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "European livestock quickly replaced Native American farming in the region around Roanoke.",
+       "why": "The excerpt mentions no livestock and describes a plant grown by the inhabitants.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "Native American religious practices came to an end soon after contact with the English.",
+       "why": "The excerpt describes religious uses of the plant continuing during the author's stay and says nothing about their end.",
+       "value": null,
+       "label": "overstated"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"Europeans learned about and adopted plants and practices that Native Americans had developed.\". The author reports that the English tried the smoke 'after their maner' and that Spaniards already called the plant Tobacco, showing Europeans adopting a Native American crop and custom.\n\"Native Americans adopted European crops and gave up the plants they had grown for many centuries before contact.\" is incorrect: The excerpt describes Europeans taking up a Native American plant, not Native Americans adopting European crops.\n\"European livestock quickly replaced Native American farming in the region around Roanoke.\" is incorrect: The excerpt mentions no livestock and describes a plant grown by the inhabitants.\n\"Native American religious practices came to an end soon after contact with the English.\" is incorrect: The excerpt describes religious uses of the plant continuing during the author's stay and says nothing about their end.",
+     "est_seconds": 75,
+     "facts": [
+      "The Columbian Exchange moved crops, animals and diseases between the Americas and Europe; tobacco became an important export crop after English settlement in Virginia."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "1.B",
+      "key_evidence_in_source": "the English tried the smoke after the inhabitants' manner; the Spaniards call the plant Tobacco"
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ },
+ {
+  "cellId": "ap_us_history-real_e_tordesillas",
+  "apSubjectCode": "ap_us_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "authored_from_real_source",
+  "candidateKey": "ap_us_history-real_e_tordesillas-k0",
+  "keywordCode": "1.3",
+  "unitCode": "1",
+  "skillPrimary": "3.A",
+  "structure": "shared_stimulus_set",
+  "archetype": "ush_real_real_e_tordesillas",
+  "reviewState": "sample_unverified",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "basic_learning"
+   }
+  ],
+  "gateOverride": "ush-real-e-2026-10-19",
+  "run": "ush-real-e",
+  "stockKey": "ush-real-e:ap_us_history-real_e_tordesillas-k0",
+  "pipeline": "real_source_v1",
+  "validation": "needs_review",
+  "gateVersion": "ush-real-e-2026-10-19",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_us_history",
+  "itemFamilyId": "fam:ush-real-e:ap_us_history-real_e_tordesillas-k0",
+  "canonicalKey": "ush-real-e:ap_us_history-real_e_tordesillas-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_us_history:1.3",
+  "sharedWith": [],
+  "stockCell": "ap_us_history|1.3|3.A|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "ush-real-e",
+    "gateVersion": "ush-real-e-2026-10-19",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "txt-tordesillas-1494"
+  ],
+  "replaces": "US3 P1 (new)",
+  "payload": {
+   "archetype": "ush_real_real_e_tordesillas",
+   "topic": "1.3",
+   "skill": "3.A",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(primary source)\nTreaty between Spain and Portugal concluded at Tordesillas, June 7, 1494 (excerpt on the boundary line)\nRepresentatives of Ferdinand and Isabella of Castile and Aragon and of John II of Portugal, 1494 (June 7). Avalon Project, Yale Law School (transcription of an English translation). Reuse: public domain (15th-century document; translation published before 1929). excerpted (one contiguous passage); whitespace normalized; clause numeral and editorial brackets omitted; no wording changed. Excerpt from a treaty between the crowns of Spain and Portugal signed in 1494, after Columbus's first voyage; leagues are units of distance.\n\n\"That, whereas a certain controversy exists between the said lords, their constituents, as to what lands, of all those discovered in the ocean sea up to the present day, the date of this treaty, pertain to each one of the said parts respectively; therefore, for the sake of peace and concord, and for the preservation of the relationship and love of the said King of Portugal for the said King and Queen of Castile, Aragon, etc., it being the pleasure of their Highnesses, they, their said representatives, acting in their name and by virtue of their powers herein described, covenanted and agreed that a boundary or straight line be determined and drawn north and south, from pole to pole, on the said ocean sea, from the Arctic to the Antarctic pole. This boundary or line shall be drawn straight, as aforesaid, at a distance of three hundred and seventy leagues west of the Cape Verde Islands, being calculated by degrees, or by any other manner as may be considered the best and readiest, provided the distance shall be no greater than abovesaid. And all lands, both islands and mainlands, found and discovered already, or to be found and discovered hereafter, by the said King of Portugal and by his vessels on this side of the said line and bound determined as above, toward the east, in either north or south latitude, on the eastern side of the said bound provided the said bound is not crossed, shall belong to, and remain in the possession of, and pertain forever to, the said King of Portugal and his successors. And all other lands, both islands and mainlands, found or to be found hereafter, discovered or to be discovered hereafter, which have been discovered or shall be discovered by the said King and Queen of Castile, Aragon, etc., and by their vessels, on the western side of the said bound, determined as above, after having passed the said bound toward the west, in either its north or south latitude, shall belong to, and remain in the possession of, and pertain forever to, the said King and Queen of Castile, Leon, etc., and to their successors.\"",
+   "ush_set": {
+    "period": 1,
+    "stim_type": "primary_text",
+    "theme": "Spain, Portugal and the division of newly encountered lands",
+    "title": "The Treaty of Tordesillas, 1494",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "primary_text",
+      "title": "Treaty between Spain and Portugal concluded at Tordesillas, June 7, 1494 (excerpt on the boundary line)",
+      "attribution": "Representatives of Ferdinand and Isabella of Castile and Aragon and of John II of Portugal, 1494 (June 7). Avalon Project, Yale Law School (transcription of an English translation). Reuse: public domain (15th-century document; translation published before 1929). excerpted (one contiguous passage); whitespace normalized; clause numeral and editorial brackets omitted; no wording changed.",
+      "real_data": true,
+      "source_registry_id": "txt-tordesillas-1494",
+      "source_sha256": "3c7e405cc7dff9fed2e2178031c9f188e92224289faeda2ce8de5c62e178b0c3"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "ush_real_3A",
+     "topic": "1.3",
+     "skill": "3.A",
+     "stem": "Which of the following does the treaty provide?",
+     "options": [
+      {
+       "text": "The two crowns would divide all of the lands in the Americas equally between them without drawing any boundary line.",
+       "why": "The treaty relies on a drawn boundary line, not an equal division, and does not mention the Americas by name.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "Lands found east of a north-south line in the Atlantic would belong to Portugal, and those west of it to Castile and Aragon.",
+       "why": "The treaty sets a straight line 370 leagues west of the Cape Verde Islands and says lands discovered east of it belong to Portugal and lands west of it to the Spanish crowns.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Lands west of the line would belong to Portugal and lands east of it to Castile and Aragon, as the two crowns agreed in the treaty.",
+       "why": "The treaty states the opposite: lands on the eastern side go to Portugal and lands on the western side to Castile and Aragon.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "The native rulers in the lands discovered would decide for themselves which crown they would join.",
+       "why": "The treaty makes the decision between the two crowns and does not mention the wishes of the peoples already living in the lands.",
+       "value": null,
+       "label": "unsupported_by_source"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"Lands found east of a north-south line in the Atlantic would belong to Portugal, and those west of it to Castile and Aragon.\". The treaty sets a straight line 370 leagues west of the Cape Verde Islands and says lands discovered east of it belong to Portugal and lands west of it to the Spanish crowns.\n\"The two crowns would divide all of the lands in the Americas equally between them without drawing any boundary line.\" is incorrect: The treaty relies on a drawn boundary line, not an equal division, and does not mention the Americas by name.\n\"Lands west of the line would belong to Portugal and lands east of it to Castile and Aragon, as the two crowns agreed in the treaty.\" is incorrect: The treaty states the opposite: lands on the eastern side go to Portugal and lands on the western side to Castile and Aragon.\n\"The native rulers in the lands discovered would decide for themselves which crown they would join.\" is incorrect: The treaty makes the decision between the two crowns and does not mention the wishes of the peoples already living in the lands.",
+     "est_seconds": 75,
+     "facts": [
+      "The Treaty of Tordesillas (1494) drew a north-south line 370 leagues west of the Cape Verde Islands.",
+      "Portugal claimed lands to the east of the line and Spain lands to the west."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.A",
+      "key_evidence_in_source": "a boundary or straight line... three hundred and seventy leagues west of the Cape Verde Islands; east to Portugal, west to Castile"
+     }
+    },
+    {
+     "archetype": "ush_real_2A",
+     "topic": "1.3",
+     "skill": "2.A",
+     "stem": "The agreement stated in the excerpt most directly reflects which of the following purposes?",
+     "options": [
+      {
+       "text": "To open the newly found lands to settlement and trade by merchants from every kingdom of Europe",
+       "why": "The treaty gives each crown exclusive rights on its own side of the line and does not open the lands to others.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "To spread Protestant teachings to the peoples living on the islands of the Atlantic Ocean",
+       "why": "The treaty is an agreement between two Catholic monarchies about territory, and the Protestant Reformation began only in the next century.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "To set up a trading company that would be owned and run jointly by Spain and Portugal",
+       "why": "The excerpt creates no company; it fixes a boundary and assigns lands to each crown separately.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "To prevent conflict by settling the competing claims of two crowns to newly found lands",
+       "why": "The text says the controversy over which lands belong to each side is settled 'for the sake of peace and concord' between the two rulers.",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"To prevent conflict by settling the competing claims of two crowns to newly found lands\". The text says the controversy over which lands belong to each side is settled 'for the sake of peace and concord' between the two rulers.\n\"To open the newly found lands to settlement and trade by merchants from every kingdom of Europe\" is incorrect: The treaty gives each crown exclusive rights on its own side of the line and does not open the lands to others.\n\"To spread Protestant teachings to the peoples living on the islands of the Atlantic Ocean\" is incorrect: The treaty is an agreement between two Catholic monarchies about territory, and the Protestant Reformation began only in the next century.\n\"To set up a trading company that would be owned and run jointly by Spain and Portugal\" is incorrect: The excerpt creates no company; it fixes a boundary and assigns lands to each crown separately.",
+     "est_seconds": 75,
+     "facts": [
+      "Spain and Portugal were rival maritime powers in the late fifteenth century.",
+      "The treaty was an agreement between the two crowns, not a trading company charter."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "2.A",
+      "key_evidence_in_source": "for the sake of peace and concord... a boundary or straight line be determined and drawn north and south"
+     }
+    },
+    {
+     "archetype": "ush_real_4A",
+     "topic": "1.3",
+     "skill": "4.A",
+     "stem": "Which of the following developments in the late fifteenth century most directly led to the agreement described in the excerpt?",
+     "options": [
+      {
+       "text": "Portuguese voyages along the coast of Africa and Columbus's Spanish-sponsored voyage created overlapping claims.",
+       "why": "Portuguese exploration of Africa and Columbus's 1492 voyage under the Spanish crowns each opened lands the two kingdoms might claim, which created the dispute the treaty addresses.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The founding of English colonies along the Atlantic coast of North America in the late sixteenth century and the early seventeenth century",
+       "why": "English colonies were founded in the late 1500s and 1600s, long after 1494.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The establishment of French fur-trading posts along the St. Lawrence River in the early seventeenth century",
+       "why": "French posts on the St. Lawrence began in the early 1600s, long after 1494.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The growth of the Atlantic slave trade to supply sugar plantations in the Caribbean during the 1700s",
+       "why": "The expansion of the slave trade for Caribbean plantations came in the 1600s and 1700s, long after the treaty.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"Portuguese voyages along the coast of Africa and Columbus's Spanish-sponsored voyage created overlapping claims.\". Portuguese exploration of Africa and Columbus's 1492 voyage under the Spanish crowns each opened lands the two kingdoms might claim, which created the dispute the treaty addresses.\n\"The founding of English colonies along the Atlantic coast of North America in the late sixteenth century and the early seventeenth century\" is incorrect: English colonies were founded in the late 1500s and 1600s, long after 1494.\n\"The establishment of French fur-trading posts along the St. Lawrence River in the early seventeenth century\" is incorrect: French posts on the St. Lawrence began in the early 1600s, long after 1494.\n\"The growth of the Atlantic slave trade to supply sugar plantations in the Caribbean during the 1700s\" is incorrect: The expansion of the slave trade for Caribbean plantations came in the 1600s and 1700s, long after the treaty.",
+     "est_seconds": 75,
+     "facts": [
+      "Portugal explored the West African coast through the fifteenth century.",
+      "Columbus's first voyage under the Spanish crowns was in 1492."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.A",
+      "key_evidence_in_source": "the treaty states the dispute concerns lands 'discovered in the ocean sea' up to the date of the treaty, June 7, 1494"
+     }
+    },
+    {
+     "archetype": "ush_real_5A",
+     "topic": "1.3",
+     "skill": "5.A",
+     "stem": "Which of the following later developments is most clearly connected to the arrangement described in the excerpt?",
+     "options": [
+      {
+       "text": "The English decision to honor the line when the Virginia colony was founded in the early 1600s and to avoid Spanish lands",
+       "why": "England was not a party to the treaty, and its colonization of Virginia did not rest on the line.",
+       "value": null,
+       "label": "misattributed"
+      },
+      {
+       "text": "Spain's transfer of the conquered lands of Mexico to Portugal during the sixteenth century",
+       "why": "Spain colonized Mexico after 1519 and kept it; there was no transfer to Portugal.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "Portugal's colonization of Brazil, east of the line, while Spain colonized much of the rest of Latin America",
+       "why": "Brazil lies partly east of the line, which supported Portugal's claim, while most of the rest of the Americas fell on the western side claimed by Spain.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "France's exclusive right to trade with Native American peoples in the interior of North America",
+       "why": "France was not a party to the treaty and never gained an exclusive trading right in North America.",
+       "value": null,
+       "label": "misattributed"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"Portugal's colonization of Brazil, east of the line, while Spain colonized much of the rest of Latin America\". Brazil lies partly east of the line, which supported Portugal's claim, while most of the rest of the Americas fell on the western side claimed by Spain.\n\"The English decision to honor the line when the Virginia colony was founded in the early 1600s and to avoid Spanish lands\" is incorrect: England was not a party to the treaty, and its colonization of Virginia did not rest on the line.\n\"Spain's transfer of the conquered lands of Mexico to Portugal during the sixteenth century\" is incorrect: Spain colonized Mexico after 1519 and kept it; there was no transfer to Portugal.\n\"France's exclusive right to trade with Native American peoples in the interior of North America\" is incorrect: France was not a party to the treaty and never gained an exclusive trading right in North America.",
+     "est_seconds": 75,
+     "facts": [
+      "Portugal claimed Brazil after 1500 and colonized it from the 1530s.",
+      "Spain conquered Mexico in 1519-1521 and colonized much of Central and South America."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "5.A",
+      "key_evidence_in_source": "lands east of the line to Portugal; lands west of the line to Castile and Aragon"
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ }
+]

@@ -1,5 +1,7 @@
 # 정정(2026-10-15, 오너 확인): Production 은 비프로덕션과 같은 Supabase 프로젝트를 쓴다
 
+> **2026-10-21 사용 범위 정정:** 이 문서 첫 10-15 정정과 [CURRENT](CURRENT.md)가 현재 기준이다. 아래 본문에 남은 '운영 프로젝트 없음·새 DB 생성·Hobby·계약/AI 문구 없음'은 이전 설계 기록이며 그대로 실행하지 않는다. Vercel Pro 전환은 10-19 정책에 기록됐고 실제 crons는 vercel.json을 확인한다. 공유 DB 쓰기는 운영 영향 작업으로 취급하며 새 DB 이관/reset 절차를 임의 실행하지 않는다. 최근 Stripe SQL 공유 DB 적용은 개발자 보고, Production 코드·자동 회수 활성화와 구분한다.
+
 - Vercel Production 의 `NEXT_PUBLIC_SUPABASE_URL` = `https://worpsqwqgnspddnrtnvq.supabase.co` — 지금까지 '비프로덕션'이라 부른 바로 그 프로젝트다. 따라서 이 문서의 '새 프로젝트 생성 → 마이그레이션 594개 적용 → 콘텐츠 이관(§2)' 절차는 **필요 없다**. 마이그레이션과 콘텐츠(공개 세트 44개 포함)는 이미 이 프로젝트에 있다.
 - 오픈 = (1) `main` 을 통합 브랜치로 fast-forward 해 Production 재배포 + (2) Production 환경변수 확인 + (3) **DB 안의 테스트·UAT 데이터 정리** + (4) 백업·요금제 + (5) 스모크 검증.
 - 위험 변화: 이제 '비프로덕션'에서 하던 관리자 쓰기(AP 재고 적재, 새 버전 공개 등)는 곧 **라이브 데이터 변경**이다. Preview(review) 환경의 `AP_STOCK_ADMIN_ALLOWED_REFS` 허용 목록이 이 ref 를 포함하는 한 review 사이트의 관리자 쓰기가 라이브 학생에게 즉시 보인다. 오픈 후 콘텐츠 변경은 '새 버전' 흐름(기존 응시 보존)으로만, 변경 전 오너 확인을 받는다. Production 환경에는 `AP_STOCK_ADMIN_ALLOWED_REFS` 를 설정하지 않는다(관리자 AP 쓰기 차단 유지).

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
+import PaymentRefundBoard from "./PaymentRefundBoard";
 import {
   createEntitlementProductVersion,
   discontinueEntitlementProductVersion,
@@ -344,6 +345,7 @@ function ReconciliationSection({
           </div>
         ))
       )}
+      <PaymentRefundBoard />
     </div>
   );
 }

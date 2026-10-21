@@ -1,0 +1,484 @@
+[
+ {
+  "id": "fi2",
+  "plan": {
+   "id": "fi2",
+   "type": "rhetorical_analysis",
+   "theme": "a veteran river guide's address to new guides about reading water, humility and responsibility for others",
+   "seed": 19441
+  },
+  "payload": {
+   "schema_version": "el-frq-1",
+   "task_type": "rhetorical_analysis",
+   "template": "q2",
+   "title": "Rhetorical Analysis: A Veteran River Guide Addresses the New Class",
+   "prompt": {
+    "scenario": "Speaker: Marisol Tenney, a fictional guide with twenty-seven seasons on the fictional Corrow River. Audience: a dozen first-year guides at the spring orientation of Hollis Bend Outfitters, a fictional rafting company, in 2019. Exigence: the new guides are physically capable but have not yet learned to read moving water, and the company has had three injuries in the previous season. Purpose: to persuade the new guides that reading water, practiced humility, and a felt sense of responsibility for passengers matter more than strength or confidence, and to get them to adopt specific habits (scouting, admitting uncertainty, watching the surface) before the season begins.",
+    "task": "The passage below is the text of remarks delivered by Marisol Tenney, a veteran river guide, to a group of first-year guides at a spring orientation held by Hollis Bend Outfitters in 2019. Read the passage carefully. Write an essay that analyzes the rhetorical choices Tenney makes to convince the new guides that attentiveness and humility, not strength or confidence, are what keep passengers safe.",
+    "requirements": [
+     "Respond to the prompt with a thesis that presents a defensible interpretation of how Tenney's rhetorical choices serve her purpose.",
+     "Select and present specific evidence from the passage to support your line of reasoning.",
+     "Explain in your commentary how the evidence you cite shows the choices working on the audience and advancing Tenney's purpose."
+    ]
+   },
+   "sources": [
+    {
+     "id": "passage",
+     "kind": "text",
+     "title": "Remarks to the First-Year Guides",
+     "attribution": "Marisol Tenney, spring orientation address, Hollis Bend Outfitters, 2019 (fictional)",
+     "genre": "orientation speech",
+     "paragraphs": [
+      [
+       "(1) Twenty-seven springs ago I stood where you are standing, in borrowed sandals, certain that I already understood the river.",
+       "(2) I had run the Corrow four times as a passenger.",
+       "(3) I could name every rapid between the put-in and Saddler's Gate.",
+       "(4) What I could not do, and did not know I could not do, was read water.",
+       "(5) That is the gap I want to talk about this morning, because it is the gap that puts people in the hospital."
+      ],
+      [
+       "(6) Reading water is not memorizing a map.",
+       "(7) A map tells you where the rock was last August; the river tells you where the rock is right now, and it tells you only if you are watching.",
+       "(8) Look downstream of any boulder and you will see a pillow of smooth water piled against its upstream face, a seam of folded current along its shoulder, and a tongue of dark green pointing the way through.",
+       "(9) The pillow warns, the seam steers, the tongue invites.",
+       "(10) Those three signs say more than any guidebook, and they change every hour as the gauge rises or falls.",
+       "(11) The river is a sentence that rewrites itself while you are reading it."
+      ],
+      [
+       "(12) I know what some of you are thinking, because I thought it too.",
+       "(13) You are strong, you are quick, and you have the kind of balance that makes a raft feel like a living room floor.",
+       "(14) Fine.",
+       "(15) Strength matters, and I will not pretend otherwise.",
+       "(16) But strength gets you out of trouble that reading would have kept you out of altogether, and the river does not grade on effort.",
+       "(17) In my fourth season a guide named Ollie Brask, stronger than any of us, high-sided too late at Kettle Drop because he was looking at his paddle instead of the pillow.",
+       "(18) Six people swam.",
+       "(19) One of them, a schoolteacher from Dunmore, spent eleven days with a tube in her chest.",
+       "(20) Ollie never guided again, not because we sent him away but because he could not forgive himself for the second and a half he spent not looking."
+      ],
+      [
+       "(21) So here is the arithmetic of this job.",
+       "(22) Last season Hollis Bend ran 1,140 commercial trips.",
+       "(23) On 1,137 of them nobody got hurt beyond a scraped shin.",
+       "(24) That sounds like success, and in most trades it would be.",
+       "(25) On a river it means three families went home carrying a story they did not sign up for, and each of those stories has a guide's name in it.",
+       "(26) You will not be judged by the thousand quiet days.",
+       "(27) You will be judged by the one loud one, and you should be."
+      ],
+      [
+       "(28) Humility, in this work, is not a mood; it is a procedure.",
+       "(29) It is scouting a rapid you have run three hundred times because the water came up two inches overnight.",
+       "(30) It is saying out loud, in front of the guests, \"I am not sure, let's eddy out and look,\" when every part of you wants to seem certain.",
+       "(31) It is admitting that the river has a longer memory than you do and a shorter temper."
+      ],
+      [
+       "(32) Who sits in your boat?",
+       "(33) A retired welder who saved for two years.",
+       "(34) A nine-year-old who has not yet decided whether she is brave.",
+       "(35) A father who will never say so but is more afraid of the water than she is.",
+       "(36) They have handed you something they cannot get back, and they did it on the strength of a company brochure and the fact that you looked at them and smiled.",
+       "(37) Honor that."
+      ],
+      [
+       "(38) I will not tell you the river is your enemy; it is not.",
+       "(39) It is indifferent, which is harder, because an enemy at least pays attention to you.",
+       "(40) So you will pay attention for both of you.",
+       "(41) Watch the pillow.",
+       "(42) Trust the tongue.",
+       "(43) Scout when in doubt, and be in doubt more often than feels comfortable.",
+       "(44) The Corrow was carving this canyon before anyone was here to name it, and it will go on rewriting itself long after the last of us has pulled a boat out at Saddler's Gate.",
+       "(45) Read it as if your passengers' lives depend on it, because on the loud day, they do."
+      ]
+     ],
+     "stance": "Reading water, humility, and responsibility for passengers outweigh strength and confidence.",
+     "provenance": {
+      "kind": "original",
+      "author_alias": "Marisol Tenney",
+      "year_alias": 2019
+     }
+    }
+   ],
+   "rubric": {
+    "total_points": 6,
+    "rows": [
+     {
+      "row_id": "A",
+      "name": "Thesis",
+      "max": 1,
+      "descriptors": {
+       "0": "No thesis, or a thesis that only restates the prompt (for example, 'Tenney uses rhetorical choices to convince the guides'), or one that summarizes the speech, or one that argues about river safety itself rather than about how the speech works.",
+       "1": "A defensible claim about how Tenney's choices work on the new guides. The claim may be a single sentence anywhere in the essay. It must name at least one identifiable move or pattern (an anecdote, a shift from instruction to warning, the redefinition of humility, the catalog of passengers, the concession about strength) and connect it to her aim of changing how the guides think or behave."
+      },
+      "task_specific": "Counts as defensible: any thesis tying one or more named choices to the purpose of making attentiveness and humility feel more urgent than strength or confidence. A thesis that merely lists three devices without saying what they do for her purpose earns 0."
+     },
+     {
+      "row_id": "B",
+      "name": "Evidence and Commentary",
+      "max": 4,
+      "descriptors": {
+       "0": "Restates the thesis, summarizes the speech, or offers no evidence from the passage.",
+       "1": "Mostly summary or paraphrase of what Tenney says, with general comments such as 'this makes the audience feel emotional' that could be said of any passage. Evidence may be quoted but is not tied to a choice.",
+       "2": "Identifies some rhetorical choices with accurate evidence (for example, names the Ollie Brask anecdote or the 1,140 trips figure) but commentary mostly labels the device or states its effect in one sentence without explaining how it works on first-year guides specifically. Reasoning may be a list of devices rather than a line of argument.",
+       "3": "Supplies specific evidence for each claim and explains how at least two or three choices advance Tenney's purpose with this audience (new, strong, overconfident guides). Commentary follows the evidence rather than preceding it. Some explanations may be uneven, and the essay may not account for the shift in the passage or for how choices work together.",
+       "4": "Sustains a line of reasoning across the essay: evidence is consistently well chosen and the commentary explains not only what each choice does but why Tenney makes it at that moment for these listeners. The essay accounts for the movement of the speech (for instance, from the technical lesson of paragraph two to the anecdote, the statistics, the redefinition of humility, and the closing catalog of passengers) and shows how choices build on each other."
+      },
+      "task_specific": "Choices that count include: the opening ethos of twenty-seven seasons and the admission in sentence 4; the extended metaphor of the river as a sentence that rewrites itself (11, 44); the enumeration and parallelism of pillow, seam, tongue (8-9, 41-42); the concession about strength and its rebuttal (12-16); the Ollie Brask anecdote with its short sentence 18; the statistics reframed in 22-27; the definition of humility as procedure (28-31); the rhetorical question and the catalog of passengers (32-37); the personification of an indifferent river (38-40); the tone shifts between instruction, warning, and tenderness. Full credit does not require covering all of these."
+     },
+     {
+      "row_id": "C",
+      "name": "Sophistication",
+      "max": 1,
+      "descriptors": {
+       "0": "Commentary stays at the level of naming devices and effects; prose is serviceable but general; or the essay makes sweeping claims about rhetoric in general or inflates its language without adding insight.",
+       "1": "The essay does one or more of the following consistently and in support of its argument: explains the tension Tenney manages between respecting the guides' strength and undercutting their confidence; explains why she positions responsibility (the passengers) after the technical lesson rather than before it; notices how she makes herself an example of the overconfidence she warns against and why that matters for credibility; or writes with precise, controlled prose throughout that advances the analysis."
+      },
+      "task_specific": "Do not award this point for merely noting that the speech 'uses ethos, pathos, and logos' or for ornate vocabulary. Award it for a sustained explanation of how the speech works as a whole on a specific audience of capable but inexperienced listeners."
+     }
+    ],
+    "scoring_notes": [
+     "Total is the sum of rows A, B, and C (maximum 6).",
+     "An essay that earns 0 on row A can still earn up to 2 on row B if it accurately discusses choices in the passage; it cannot earn row C.",
+     "Essays that mislabel a device (calling the anecdote a statistic, for instance) but accurately explain its effect should not be penalized for the label.",
+     "Essays that treat the passage as an argument to agree or disagree with rather than analyzing its rhetoric are capped at 1 on row B.",
+     "Quotation is not required; precise paraphrase with sentence references is acceptable evidence."
+    ]
+   },
+   "expected_features": {
+    "defensible_positions": [
+     "Tenney first earns the guides' trust by confessing her own early overconfidence, then uses concrete sensory instruction, a cautionary anecdote, and a reframed statistic to replace their faith in strength with a habit of watching.",
+     "The speech moves from the technical to the moral: by defining humility as a procedure and then naming the people in the boat, Tenney turns an abstract virtue into daily behavior with human stakes.",
+     "Tenney's concession that strength matters allows her to disarm the audience's likely resistance before she undercuts it with evidence that strength failed a stronger guide than any of them."
+    ],
+    "lines_of_reasoning": [
+     "Ethos through confession (1-5) sets up the lesson in reading water (6-11), which the anecdote (17-20) proves necessary and the statistic (22-27) proves urgent; the definition (28-31) and catalog (32-37) then convert urgency into practice and responsibility.",
+     "Tenney anticipates and manages the audience's pride: the concession and blunt 'Fine' (12-16) acknowledge their strength, the anecdote shows its limits, and the closing imperatives (41-43) give them something to do with their energy instead.",
+     "Short sentences at moments of consequence (14, 18, 37, 41-42) punctuate longer explanatory sentences, so the rhythm of the speech itself enacts the alternation between watching and acting that she asks of the guides."
+    ],
+    "rhetorical_choices": [
+     {
+      "device": "ethos",
+      "paragraph": 1,
+      "sentence_ids": [
+       1,
+       2,
+       3,
+       4
+      ],
+      "effect": "By admitting she once mistook familiarity for understanding, Tenney establishes both long experience and humility, modeling the attitude she will ask for and preempting the guides' sense that she cannot understand their confidence."
+     },
+     {
+      "device": "enumeration",
+      "paragraph": 2,
+      "sentence_ids": [
+       8,
+       9
+      ],
+      "effect": "Naming pillow, seam, and tongue gives the guides a concrete vocabulary for watching, making 'reading water' a learnable skill rather than a vague ideal."
+     },
+     {
+      "device": "parallelism",
+      "paragraph": 2,
+      "sentence_ids": [
+       9
+      ],
+      "effect": "The three-part verb pattern makes the signs memorable and suggests the river communicates in an orderly grammar, preparing the metaphor that follows."
+     },
+     {
+      "device": "metaphor",
+      "paragraph": 2,
+      "sentence_ids": [
+       11,
+       44
+      ],
+      "effect": "The river as a self-rewriting sentence frames guiding as continual reading, and its return in sentence 44 ties the technical lesson to the closing demand for lifelong attention."
+     },
+     {
+      "device": "concession_and_rebuttal",
+      "paragraph": 3,
+      "sentence_ids": [
+       12,
+       13,
+       14,
+       15,
+       16
+      ],
+      "effect": "Acknowledging the guides' strength lowers their defenses so that the rebuttal, that the river does not grade on effort, lands as fair rather than dismissive."
+     },
+     {
+      "device": "anecdote",
+      "paragraph": 3,
+      "sentence_ids": [
+       17,
+       18,
+       19,
+       20
+      ],
+      "effect": "Ollie Brask, stronger than anyone, failing because of a second and a half of inattention, is a specific proof that strength cannot substitute for reading, and his guilt previews the moral weight of the job."
+     },
+     {
+      "device": "sentence_length_variation",
+      "paragraph": 3,
+      "sentence_ids": [
+       14,
+       18
+      ],
+      "effect": "The one-word 'Fine' and the three-word 'Six people swam' stop the speech cold, giving the consequences a blunt finality the longer sentences cannot."
+     },
+     {
+      "device": "statistic",
+      "paragraph": 4,
+      "sentence_ids": [
+       22,
+       23,
+       24,
+       25
+      ],
+      "effect": "The near-perfect record is introduced only to be reread as three families harmed, teaching the guides to count by the loud day rather than the quiet ones."
+     },
+     {
+      "device": "antithesis",
+      "paragraph": 4,
+      "sentence_ids": [
+       26,
+       27
+      ],
+      "effect": "Quiet days against the loud one condenses the lesson of the numbers into a standard the guides can carry, and 'you should be' closes off any objection that the standard is unfair."
+     },
+     {
+      "device": "definition",
+      "paragraph": 5,
+      "sentence_ids": [
+       28,
+       29,
+       30,
+       31
+      ],
+      "effect": "Recasting humility as a procedure rather than a mood turns a character trait into specific actions (scouting, saying 'I am not sure'), which is what an orientation can actually ask for."
+     },
+     {
+      "device": "rhetorical_question",
+      "paragraph": 6,
+      "sentence_ids": [
+       32
+      ],
+      "effect": "Asking who sits in the boat shifts the guides' attention from themselves to their passengers and sets up the catalog that answers it."
+     },
+     {
+      "device": "pathos",
+      "paragraph": 6,
+      "sentence_ids": [
+       33,
+       34,
+       35,
+       36,
+       37
+      ],
+      "effect": "Three sharply particular passengers make trust tangible; the reminder that they trusted a brochure and a smile places the weight of that trust directly on the listener before the two-word command 'Honor that.'"
+     },
+     {
+      "device": "personification",
+      "paragraph": 7,
+      "sentence_ids": [
+       38,
+       39,
+       40
+      ],
+      "effect": "Denying the river is an enemy and calling it indifferent removes any drama of combat and leaves the guide solely responsible for attention."
+     },
+     {
+      "device": "tone_shift",
+      "paragraph": 6,
+      "sentence_ids": [
+       21,
+       32,
+       41
+      ],
+      "effect": "The speech moves from patient instruction to stern arithmetic to tenderness to crisp imperatives, so the guides experience in turn the knowledge, the fear, the care, and the habit she wants them to hold."
+     },
+     {
+      "device": "direct_address",
+      "paragraph": 7,
+      "sentence_ids": [
+       41,
+       42,
+       43,
+       45
+      ],
+      "effect": "Closing imperatives return the guides to the vocabulary of paragraph two and convert the whole speech into instructions they can act on tomorrow."
+     }
+    ],
+    "source_uses": [
+     {
+      "source_id": "passage",
+      "usable_for": "All evidence; students should cite sentence numbers or quote directly."
+     }
+    ],
+    "common_pitfalls": [
+     "Writing a device-list essay (one paragraph on ethos, one on pathos, one on logos) with no line of reasoning connecting them to the audience of new guides.",
+     "Summarizing the Ollie Brask story at length without explaining why Tenney places it immediately after conceding that strength matters.",
+     "Calling the passenger catalog in paragraph six 'emotional appeal' without explaining what the specificity (a welder's savings, a child's undecided bravery, a father's hidden fear) accomplishes for a speaker trying to make responsibility feel concrete.",
+     "Treating the 1,140 trips figure as simple logos while missing that Tenney reverses its apparent meaning in sentences 24-27.",
+     "Ignoring the speaker's own admitted overconfidence in sentences 1-4 and therefore missing how she builds credibility.",
+     "Arguing about whether river guiding is dangerous instead of analyzing the speech."
+    ]
+   },
+   "samples": [],
+   "blueprint": {
+    "theme": "Attentiveness, humility, and responsibility for others in skilled physical work",
+    "issue": "Whether strength and confidence or watchfulness and humility keep passengers safe on a river",
+    "stances": [
+     "Reading water and practiced humility outweigh strength (speaker's stance)",
+     "Strength and quick reflexes are the main safeguard (the audience's implied stance, conceded then rebutted)"
+    ],
+    "devices": [
+     {
+      "device": "ethos",
+      "sentence_ids": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "function": "Establishes experience and models the humility being taught through confession of early overconfidence."
+     },
+     {
+      "device": "enumeration",
+      "sentence_ids": [
+       8
+      ],
+      "function": "Lists pillow, seam, tongue to make reading water concrete and teachable."
+     },
+     {
+      "device": "parallelism",
+      "sentence_ids": [
+       9,
+       29,
+       30,
+       31,
+       41,
+       42
+      ],
+      "function": "Patterned clauses make the signs and the procedures memorable and rhythmic."
+     },
+     {
+      "device": "metaphor",
+      "sentence_ids": [
+       11,
+       44
+      ],
+      "function": "River as self-rewriting sentence frames guiding as continuous reading; recurs to close the speech."
+     },
+     {
+      "device": "concession_and_rebuttal",
+      "sentence_ids": [
+       12,
+       13,
+       14,
+       15,
+       16
+      ],
+      "function": "Grants that strength matters, then shows its limits so the audience accepts the correction."
+     },
+     {
+      "device": "anecdote",
+      "sentence_ids": [
+       17,
+       18,
+       19,
+       20
+      ],
+      "function": "Ollie Brask's failure proves strength cannot replace attention and introduces the moral cost."
+     },
+     {
+      "device": "sentence_length_variation",
+      "sentence_ids": [
+       14,
+       18,
+       37
+      ],
+      "function": "Abrupt short sentences deliver verdicts and consequences with force."
+     },
+     {
+      "device": "statistic",
+      "sentence_ids": [
+       22,
+       23,
+       24,
+       25
+      ],
+      "function": "A near-perfect safety record is reframed as three harmed families."
+     },
+     {
+      "device": "antithesis",
+      "sentence_ids": [
+       26,
+       27
+      ],
+      "function": "Quiet days versus the loud one fixes the standard by which guides are judged."
+     },
+     {
+      "device": "definition",
+      "sentence_ids": [
+       28,
+       29,
+       30,
+       31
+      ],
+      "function": "Redefines humility as procedure, converting virtue into actions."
+     },
+     {
+      "device": "personification",
+      "sentence_ids": [
+       31,
+       38,
+       39
+      ],
+      "function": "River with memory and temper, then an indifferent river, places responsibility entirely on the guide."
+     },
+     {
+      "device": "rhetorical_question",
+      "sentence_ids": [
+       32
+      ],
+      "function": "Turns attention from the guides to their passengers."
+     },
+     {
+      "device": "pathos",
+      "sentence_ids": [
+       33,
+       34,
+       35,
+       36,
+       37
+      ],
+      "function": "Specific passengers make the trust placed in guides concrete and emotionally weighty."
+     },
+     {
+      "device": "tone_shift",
+      "sentence_ids": [
+       21,
+       32,
+       38
+      ],
+      "function": "Moves from instruction to stern reckoning to tenderness to imperative, carrying the audience through knowledge, fear, care, and habit."
+     },
+     {
+      "device": "direct_address",
+      "sentence_ids": [
+       40,
+       41,
+       42,
+       43,
+       45
+      ],
+      "function": "Closing imperatives give the guides actionable habits tied to the earlier vocabulary."
+     }
+    ]
+   },
+   "provenance": {
+    "kind": "original",
+    "note": "ALTON original practice material; fictional sources and attributions."
+   }
+  }
+ }
+]

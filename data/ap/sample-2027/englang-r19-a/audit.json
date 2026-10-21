@@ -1,0 +1,642 @@
+[
+ {
+  "set": "r41",
+  "i": 0,
+  "skill": "1.B",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.82,
+  "pass": false,
+  "reasons": [
+   "deterministic_1"
+  ]
+ },
+ {
+  "set": "r41",
+  "i": 1,
+  "skill": "1.B",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.765,
+  "pass": false,
+  "reasons": [
+   "deterministic_1"
+  ]
+ },
+ {
+  "set": "r41",
+  "i": 2,
+  "skill": "3.B",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.765,
+  "pass": false,
+  "reasons": [
+   "solver_reports_second_defensible_option",
+   "deterministic_1"
+  ]
+ },
+ {
+  "set": "r41",
+  "i": 3,
+  "skill": "5.A",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "none",
+  "judge": "key_clearly_better",
+  "score": 1,
+  "pass": true,
+  "reasons": []
+ },
+ {
+  "set": "r41",
+  "i": 4,
+  "skill": "5.B",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.87,
+  "pass": true,
+  "reasons": []
+ },
+ {
+  "set": "r41",
+  "i": 5,
+  "skill": "7.A",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "none",
+  "judge": "key_clearly_better",
+  "score": 1,
+  "pass": true,
+  "reasons": []
+ },
+ {
+  "set": "r42",
+  "i": 0,
+  "skill": "1.A",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.87,
+  "pass": true,
+  "reasons": []
+ },
+ {
+  "set": "r42",
+  "i": 1,
+  "skill": "3.A",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.87,
+  "pass": true,
+  "reasons": []
+ },
+ {
+  "set": "r42",
+  "i": 2,
+  "skill": "3.B",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.788,
+  "pass": false,
+  "reasons": [
+   "solver_reports_second_defensible_option"
+  ]
+ },
+ {
+  "set": "r42",
+  "i": 3,
+  "skill": "5.A",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.87,
+  "pass": true,
+  "reasons": []
+ },
+ {
+  "set": "r42",
+  "i": 4,
+  "skill": "5.C",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.843,
+  "pass": true,
+  "reasons": []
+ },
+ {
+  "set": "r42",
+  "i": 5,
+  "skill": "7.C",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.87,
+  "pass": true,
+  "reasons": []
+ },
+ {
+  "set": "r43",
+  "i": 0,
+  "skill": "1.B",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "none",
+  "judge": "key_clearly_better",
+  "score": 0.95,
+  "pass": false,
+  "reasons": [
+   "deterministic_2"
+  ]
+ },
+ {
+  "set": "r43",
+  "i": 1,
+  "skill": "3.A",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.82,
+  "pass": false,
+  "reasons": [
+   "deterministic_1"
+  ]
+ },
+ {
+  "set": "r43",
+  "i": 2,
+  "skill": "3.B",
+  "det": [
+   "quote_not_in_passage_but_we_would_ask_you_to_consider_that_th",
+   "quote_not_in_passage_we_are_asking_that_you_move_one_line,_fr"
+  ],
+  "solverAgree": 0,
+  "adversary": null,
+  "judge": null,
+  "score": 0,
+  "pass": false,
+  "reasons": [
+   "adversary_missing",
+   "judge_missing",
+   "deterministic_2"
+  ]
+ },
+ {
+  "set": "r43",
+  "i": 3,
+  "skill": "5.C",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.82,
+  "pass": false,
+  "reasons": [
+   "deterministic_1"
+  ]
+ },
+ {
+  "set": "r43",
+  "i": 4,
+  "skill": "7.A",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.843,
+  "pass": true,
+  "reasons": []
+ },
+ {
+  "set": "r43",
+  "i": 5,
+  "skill": "7.A",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.815,
+  "pass": false,
+  "reasons": [
+   "solver_reports_second_defensible_option"
+  ]
+ },
+ {
+  "set": "w41",
+  "i": 0,
+  "skill": "2.B",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.87,
+  "pass": true,
+  "reasons": []
+ },
+ {
+  "set": "w41",
+  "i": 1,
+  "skill": "2.B",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.87,
+  "pass": true,
+  "reasons": []
+ },
+ {
+  "set": "w41",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.82,
+  "pass": false,
+  "reasons": [
+   "deterministic_1"
+  ]
+ },
+ {
+  "set": "w41",
+  "i": 3,
+  "skill": "6.B",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "none",
+  "judge": "key_clearly_better",
+  "score": 1,
+  "pass": true,
+  "reasons": []
+ },
+ {
+  "set": "w41",
+  "i": 4,
+  "skill": "6.B",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.87,
+  "pass": true,
+  "reasons": []
+ },
+ {
+  "set": "w41",
+  "i": 5,
+  "skill": "8.A",
+  "det": [
+   "key_rationale_missing"
+  ],
+  "solverAgree": 0,
+  "adversary": null,
+  "judge": null,
+  "score": 0,
+  "pass": false,
+  "reasons": [
+   "adversary_missing",
+   "judge_missing",
+   "deterministic_1"
+  ]
+ },
+ {
+  "set": "w42",
+  "i": 0,
+  "skill": "2.A",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.82,
+  "pass": false,
+  "reasons": [
+   "deterministic_1"
+  ]
+ },
+ {
+  "set": "w42",
+  "i": 1,
+  "skill": "2.B",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.843,
+  "pass": true,
+  "reasons": []
+ },
+ {
+  "set": "w42",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.87,
+  "pass": true,
+  "reasons": []
+ },
+ {
+  "set": "w42",
+  "i": 3,
+  "skill": "6.C",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.87,
+  "pass": true,
+  "reasons": []
+ },
+ {
+  "set": "w42",
+  "i": 4,
+  "skill": "8.B",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.87,
+  "pass": true,
+  "reasons": []
+ },
+ {
+  "set": "w42",
+  "i": 5,
+  "skill": "8.C",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "none",
+  "judge": "key_clearly_better",
+  "score": 1,
+  "pass": true,
+  "reasons": []
+ },
+ {
+  "set": "w43",
+  "i": 0,
+  "skill": "2.A",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.87,
+  "pass": true,
+  "reasons": []
+ },
+ {
+  "set": "w43",
+  "i": 1,
+  "skill": "4.B",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.87,
+  "pass": true,
+  "reasons": []
+ },
+ {
+  "set": "w43",
+  "i": 2,
+  "skill": "4.C",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "none",
+  "judge": "key_clearly_better",
+  "score": 1,
+  "pass": true,
+  "reasons": []
+ },
+ {
+  "set": "w43",
+  "i": 3,
+  "skill": "6.A",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "none",
+  "judge": "key_clearly_better",
+  "score": 1,
+  "pass": true,
+  "reasons": []
+ },
+ {
+  "set": "w43",
+  "i": 4,
+  "skill": "8.A",
+  "det": [
+   "distractor_flaw_missing"
+  ],
+  "solverAgree": 0,
+  "adversary": null,
+  "judge": null,
+  "score": 0,
+  "pass": false,
+  "reasons": [
+   "adversary_missing",
+   "judge_missing",
+   "deterministic_1"
+  ]
+ },
+ {
+  "set": "w43",
+  "i": 5,
+  "skill": "8.B",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "none",
+  "judge": "key_clearly_better",
+  "score": 1,
+  "pass": true,
+  "reasons": []
+ },
+ {
+  "set": "w44",
+  "i": 0,
+  "skill": "2.A",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.87,
+  "pass": true,
+  "reasons": []
+ },
+ {
+  "set": "w44",
+  "i": 1,
+  "skill": "4.A",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.87,
+  "pass": true,
+  "reasons": []
+ },
+ {
+  "set": "w44",
+  "i": 2,
+  "skill": "4.C",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.843,
+  "pass": false,
+  "reasons": [
+   "solver_reports_second_defensible_option"
+  ]
+ },
+ {
+  "set": "w44",
+  "i": 3,
+  "skill": "6.B",
+  "det": [
+   "distractor_flaw_missing"
+  ],
+  "solverAgree": 0,
+  "adversary": null,
+  "judge": null,
+  "score": 0,
+  "pass": false,
+  "reasons": [
+   "adversary_missing",
+   "judge_missing",
+   "deterministic_1"
+  ]
+ },
+ {
+  "set": "w44",
+  "i": 4,
+  "skill": "8.A",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.87,
+  "pass": true,
+  "reasons": []
+ },
+ {
+  "set": "w44",
+  "i": 5,
+  "skill": "8.B",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.82,
+  "pass": false,
+  "reasons": [
+   "deterministic_1"
+  ]
+ },
+ {
+  "set": "w45",
+  "i": 0,
+  "skill": "2.B",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.82,
+  "pass": false,
+  "reasons": [
+   "deterministic_1"
+  ]
+ },
+ {
+  "set": "w45",
+  "i": 1,
+  "skill": "4.A",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "none",
+  "judge": "key_clearly_better",
+  "score": 1,
+  "pass": true,
+  "reasons": []
+ },
+ {
+  "set": "w45",
+  "i": 2,
+  "skill": "6.B",
+  "det": [
+   "distractor_labels_not_diverse"
+  ],
+  "solverAgree": 0,
+  "adversary": null,
+  "judge": null,
+  "score": 0,
+  "pass": false,
+  "reasons": [
+   "adversary_missing",
+   "judge_missing",
+   "deterministic_1"
+  ]
+ },
+ {
+  "set": "w45",
+  "i": 3,
+  "skill": "6.C",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "none",
+  "judge": "key_clearly_better",
+  "score": 1,
+  "pass": true,
+  "reasons": []
+ },
+ {
+  "set": "w45",
+  "i": 4,
+  "skill": "8.A",
+  "det": [],
+  "solverAgree": 1,
+  "adversary": "weak",
+  "judge": "key_clearly_better",
+  "score": 0.87,
+  "pass": true,
+  "reasons": []
+ },
+ {
+  "set": "w45",
+  "i": 5,
+  "skill": "8.C",
+  "det": [
+   "distractor_labels_not_diverse"
+  ],
+  "solverAgree": 0,
+  "adversary": null,
+  "judge": null,
+  "score": 0,
+  "pass": false,
+  "reasons": [
+   "adversary_missing",
+   "judge_missing",
+   "deterministic_1"
+  ]
+ }
+]

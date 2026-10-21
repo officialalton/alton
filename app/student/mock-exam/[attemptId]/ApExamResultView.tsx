@@ -92,12 +92,12 @@ const ApReviewItem = memo(function ApReviewItem({ it, attemptId, inkByPart, essa
   );
 });
 
-const UNAVAILABLE_TEXT: Record<string, string> = { too_short: "response too short", too_long: "response too long", attempt_cap: "AI estimate limit reached", daily_cap: "daily limit reached", monthly_budget: "AI estimates temporarily unavailable", input_too_large: "response and sources too long", dead: "AI estimate not available" };
+const UNAVAILABLE_TEXT: Record<string, string> = { too_short: "response too short", too_long: "response too long", attempt_cap: "AI estimate limit reached", daily_cap: "daily limit reached", monthly_budget: "AI estimates temporarily unavailable", input_too_large: "response and sources too long", dead: "AI estimate not available", no_reference_answers: "no reference answers for this question yet" };
 function frqStatusText(f: FrqItemResult | undefined): string {
   if (!f) return "Not scored";
   if (f.state === "scored") return f.noResponse ? `No response (0 / ${f.max})` : `${f.earned} / ${f.max} points`;
   if (f.state === "in_progress") return "Scoring in progress";
-  if (f.state === "paused") return "AI scoring temporarily unavailable";
+  if (f.state === "paused") return f.reason === "monthly_budget" ? "AI scoring paused (monthly capacity reached)" : f.reason === "daily_cap" ? "AI scoring paused (daily limit reached)" : "AI scoring temporarily unavailable";
   if (f.state === "unavailable") return f.reason && UNAVAILABLE_TEXT[f.reason] ? `Not scored: ${UNAVAILABLE_TEXT[f.reason]}` : "Score unavailable";
   return "Not scored";
 }

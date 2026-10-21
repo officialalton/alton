@@ -11,7 +11,7 @@ const SKIP_TEXT: Record<string, string> = {
   too_short: "This response is too short for an AI estimate.",
   too_long: "This response is too long for an AI estimate.",
   attempt_cap: "The AI estimate limit for this test has been reached.",
-  daily_cap: "The daily AI estimate limit has been reached. Try again tomorrow.",
+  daily_cap: "The AI estimate limit was reached for this essay.",
   monthly_budget: "AI estimates are temporarily unavailable.",
   input_too_large: "This response and its sources are too long for an AI estimate.",
 };
@@ -33,8 +33,19 @@ export default function EssayScoreCard({ score, readOnly = false, onRetry }: { s
 
   if (score.status === "pending" || score.status === "processing")
     return <div className={box} data-testid="essay-score-pending" role="status" aria-live="polite">{head}<p className="mt-1 text-[13px] text-grey-600">Scoring in progress… this usually takes under a minute.</p></div>;
-  if (score.status === "failed")
-    return <div className={box} data-testid="essay-score-failed">{head}<p className="mt-1 text-[13px] text-grey-600">We could not score this essay yet. We will retry automatically.</p>{!readOnly && onRetry && <button type="button" onClick={onRetry} className="mt-2 min-h-[44px] rounded-lg border border-grey-200 px-3 text-[12.5px] font-bold">Retry now</button>}</div>;
+  if (score.status === "failed") {
+    const btn = (label: string) => !readOnly && onRetry && <button type="button" onClick={onRetry} className="mt-2 min-h-[44px] rounded-lg border border-grey-200 px-3 text-[12.5px] font-bold">{label}</button>;
+    const when = score.nextRetryAt ? `${score.nextRetryAt.slice(0, 16).replace("T", " ")} UTC` : null;
+    const ready = !score.nextRetryAt || new Date(score.nextRetryAt).getTime() <= Date.now();
+    // "다시 시도" 문구는 실제 재시도 경로(Retry 버튼 → 기존 채점 시작 경로, 한도 초기화 뒤 한 번만 처리)가 있을 때만 쓴다. 읽기 전용(보호자·관리자)에는 안내 문구만.
+    if (score.lastError === "daily_cap" || score.lastError === "monthly_budget") {
+      const what = score.lastError === "daily_cap" ? "the daily AI scoring limit was reached" : "the monthly AI scoring capacity was reached";
+      return <div className={box} data-testid="essay-score-waiting">{head}<p className="mt-1 text-[13px] text-grey-600">Scoring is paused because {what}.{when ? ` It can be tried again after ${when}.` : ""}</p>{ready ? btn("Retry now") : null}</div>;
+    }
+    if (score.lastError === "no_reference_answers")
+      return <div className={box} data-testid="essay-score-no-anchors">{head}<p className="mt-1 text-[13px] text-grey-600">This question cannot be scored yet because no reference answers are available for it. It will be scored after they are added.</p>{btn("Check again")}</div>;
+    return <div className={box} data-testid="essay-score-failed">{head}<p className="mt-1 text-[13px] text-grey-600">We could not score this essay yet.{!readOnly && onRetry ? " Press Retry to try again." : ""}</p>{btn("Retry now")}</div>;
+  }
   if (score.status === "dead")
     return <div className={box} data-testid="essay-score-dead">{head}<p className="mt-1 text-[13px] text-grey-600">An AI estimate is not available for this essay. Use the reference answer and scoring guide below to review it.</p></div>;
   if (score.status === "skipped")
