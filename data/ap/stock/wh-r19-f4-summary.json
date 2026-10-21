@@ -1,0 +1,79 @@
+{
+ "run": "wh-r19-f4",
+ "generatedAt": "2026-10-20",
+ "passed": [],
+ "rejected": [
+  {
+   "__rejected": true,
+   "specId": "wh3_saq1",
+   "reason": "sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate; fact_inaccurate"
+  },
+  {
+   "__rejected": true,
+   "specId": "wh3_dbq",
+   "reason": "samples_not_strictly_ordered"
+  }
+ ],
+ "audit": [
+  {
+   "id": "wh3_saq1",
+   "tier": "high",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh3_saq1",
+   "tier": "mid",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh3_saq1",
+   "tier": "low",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh3_dbq",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 7,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "wh3_dbq",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 1,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "wh3_dbq",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  }
+ ]
+}

@@ -1,0 +1,466 @@
+[
+ {
+  "cellId": "ap_us_history-saq1_r2",
+  "apSubjectCode": "ap_us_history",
+  "kind": "frq_bundle",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "generated",
+  "candidateKey": "ap_us_history-saq1_r2-k0",
+  "keywordCode": "9.1",
+  "unitCode": "9",
+  "skillPrimary": "1.B",
+  "structure": "frq_multipart",
+  "archetype": "ushfrq_saq1_r2",
+  "reviewState": "rejected",
+  "rejectionReason": "sample_high_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_low_no_consistent_candidate",
+  "difficultyProvisional": null,
+  "payload": {
+   "archetype": "ushfrq_saq1_r2",
+   "ush_frq": {
+    "schema_version": "ush-frq-1",
+    "task_type": "saq",
+    "template": "saq1",
+    "period": 9,
+    "periods": [
+     9,
+     8
+    ],
+    "title": "Explaining the Rise of the Sun Belt, 1970-2000",
+    "prompt": {
+     "scenario": "The two excerpts below give different explanations for why the population and political influence of the South and Southwest grew in the decades after 1970.",
+     "task": "Using the excerpts, answer (A), (B), and (C).",
+     "requirements": [
+      "Answer all three parts.",
+      "Each part is worth one point.",
+      "Use specific historical evidence not explicitly mentioned in the excerpts for parts B and C."
+     ],
+     "parts": [
+      {
+       "label": "A",
+       "prompt": "Briefly describe ONE major difference between Tennant's and Haverly's interpretations of why the South and Southwest grew in population and political influence after 1970.",
+       "points": 1
+      },
+      {
+       "label": "B",
+       "prompt": "Briefly explain how ONE specific historical event, development, or circumstance from the period 1970 to 2000 that is not explicitly mentioned in the excerpts could be used to support Tennant's interpretation.",
+       "points": 1
+      },
+      {
+       "label": "C",
+       "prompt": "Briefly explain how ONE specific historical event, development, or circumstance from the period 1970 to 2000 that is not explicitly mentioned in the excerpts could be used to support Haverly's interpretation.",
+       "points": 1
+      }
+     ]
+    },
+    "sources": [
+     {
+      "id": "A",
+      "kind": "secondary_text",
+      "title": "Excerpt from Marisol Tennant, Cool Air and Federal Money: Remaking the Southern Rim, 1970-2000",
+      "attribution": "Marisol Tennant, fictional historian, Cool Air and Federal Money: Remaking the Southern Rim, 1970-2000 (fictional book) (ALTON-composed, in the style of a modern academic history of regional development)",
+      "body": "The rise of the Sun Belt after 1970 was no accident of climate. Mechanical cooling turned the humid Gulf Coast and the desert Southwest from places people put up with into places they chose. Federal money did most of the rest. Washington poured defense dollars into the region's shipyards, airfields, and research laboratories, creating payrolls that drew engineers and technicians by the thousands. State governments, eager for growth, kept taxes low and made sure employers knew it. By the 1990s the region's swelling population had turned into new congressional seats and a larger share of the electoral vote, and national candidates learned to campaign there first.",
+      "provenance": {
+       "kind": "alton_composed",
+       "note": "ush-prompts-v1"
+      }
+     },
+     {
+      "id": "B",
+      "kind": "secondary_text",
+      "title": "Excerpt from Desmond Haverly, Leaving the Mill Towns: Age, Work, and the Migration South",
+      "attribution": "Desmond Haverly, fictional historian, Leaving the Mill Towns: Age, Work, and the Migration South (fictional book) (ALTON-composed, in the style of a modern social history of internal migration)",
+      "body": "Explanations built around federal contracts overlook the people who actually moved. Many of the newcomers to Florida, Arizona, and southern Texas were not engineers at all. They were retirees, older couples from Ohio, Michigan, and New York who sold modest houses and bought smaller ones where the winters were mild. Meanwhile, the closing of steel mills, auto plants, and factories in older industrial cities pushed younger workers to look elsewhere. The Sun Belt grew because the industrial heartland shrank. Its rising political weight came mostly from the votes of transplanted northerners, many of them older and many of them worried about taxes and government spending.",
+      "provenance": {
+       "kind": "alton_composed",
+       "note": "ush-prompts-v1"
+      }
+     }
+    ],
+    "rubric": {
+     "rubric_id": "ushistory-v1",
+     "total_points": 3,
+     "rows": [
+      {
+       "row_id": "a",
+       "name": "Part A",
+       "max": 1,
+       "descriptors": {
+        "0": "The response does not describe a real difference, only summarizes one excerpt, or gets either historian's argument wrong.",
+        "1": "The response describes one real difference, such as Tennant stressing federal defense spending and air conditioning while Haverly stresses retirees and the decline of northern industrial cities."
+       },
+       "task_specific": "Describe one real difference between the interpretations. Tennant credits technology (air conditioning) and government action (defense spending, low state taxes) that pulled workers to the region. Haverly credits retiree migration and the push from deindustrializing northern cities."
+      },
+      {
+       "row_id": "b",
+       "name": "Part B",
+       "max": 1,
+       "descriptors": {
+        "0": "The response gives no specific evidence, only restates the excerpt, uses evidence from outside the period without linking it to 1970-2000, or does not explain how the evidence supports Tennant.",
+        "1": "The response explains how one specific, accurate development (for example, defense spending on bases in Texas and California during the 1980s buildup, or Texas having no state personal income tax) supports Tennant's interpretation."
+       },
+       "task_specific": "Explain how one specific development from 1970 to 2000, not explicitly in the excerpts, supports Tennant's argument about air conditioning, defense spending, or low taxes. Acceptable topics: specific military bases or the 1980s defense buildup, how widespread home and workplace air conditioning became, federal highway and housing spending, or particular state tax policies."
+      },
+      {
+       "row_id": "c",
+       "name": "Part C",
+       "max": 1,
+       "descriptors": {
+        "0": "The response gives no specific evidence, only restates the excerpt, or does not explain how the evidence supports Haverly.",
+        "1": "The response explains how one specific, accurate development (for example, Florida's lack of a state income tax drawing retirees from New York and the Midwest) supports Haverly's interpretation."
+       },
+       "task_specific": "Explain how one specific development from 1970 to 2000, not explicitly in the excerpts, supports Haverly's argument about retiree migration or the decline of older industrial cities. Acceptable evidence includes Florida's lack of a state personal income tax drawing retirees from high-tax northern states, Interstate highways linking the Northeast and Midwest to Florida and Arizona, air conditioning making year-round retirement in hot climates possible, and lower Sun Belt taxes drawing factories away from older northern cities."
+      }
+     ],
+     "scoring_notes": [
+      "The same broad topic, such as air conditioning or tax policy, can earn points in both B and C if the response ties it to each historian's specific argument: workers and federal payrolls for Tennant, retirees and people leaving the industrial North for Haverly.",
+      "Evidence from before 1970, such as the 1956 Federal-Aid Highway Act, is acceptable only if the response explains its effects during 1970-2000.",
+      "Restating the excerpt's own examples (for example, simply saying 'defense spending' or 'steel mills closed') does not earn B or C; responses need a specific development not explicitly in the excerpts."
+     ]
+    },
+    "expected_features": {
+     "defensible_theses": [],
+     "contextualization_ideas": [],
+     "outside_evidence": [
+      "Interstate Highway System (1956 act) and its later effects",
+      "FHA and VA mortgage programs",
+      "Reagan-era defense buildup and Sun Belt military installations",
+      "No state personal income tax in Florida and Texas",
+      "Spread of residential and commercial air conditioning"
+     ],
+     "reasoning_types": [
+      "Comparison of historical interpretations",
+      "Causation",
+      "Use of evidence to support an argument"
+     ],
+     "saq_answers": {
+      "a": [
+       "Tennant argues that technology (air conditioning) and government policy (federal defense spending and low state taxes) pulled working-age engineers and technicians to the region, while Haverly argues that retirees and workers pushed out of older industrial cities drove the growth.",
+       "Tennant sees the Sun Belt's growth as the result of federal and state policy decisions, while Haverly sees it as the result of individual choices by retirees and displaced northern workers.",
+       "Tennant links the region's political power to population growth that won new congressional seats and electoral votes, while Haverly links it mainly to transplanted older northern voters worried about taxes and spending.",
+       "Similarity: both historians agree that people moved from the North and Midwest to the South and Southwest and that this migration raised the region's political influence."
+      ],
+      "b": [
+       "The 1980s defense buildup sent large sums to military bases and defense contractors in states like Texas and California, creating jobs that drew working-age migrants, as Tennant argues.",
+       "Texas has no state personal income tax, which helped Texas recruit employers and workers and fits Tennant's point about low taxes drawing growth.",
+       "By the 1970s and 1980s air conditioning was standard in new homes, offices, and factories in cities like Houston and Phoenix, which made year-round work in hot climates practical, supporting Tennant's emphasis on mechanical cooling.",
+       "Federal spending on Interstate highways and federally insured mortgages helped pay for the suburban growth of Sun Belt metropolitan areas, supporting Tennant's view that federal money built the region."
+      ],
+      "c": [
+       "Florida's lack of a state personal income tax drew retirees from high-tax states like New York, supporting Haverly's emphasis on retirement migration.",
+       "Interstate highways such as I-95 and I-75 linked the Northeast and Midwest directly to Florida, which made it easier for retirees to move south and keep visiting family, supporting Haverly.",
+       "Air conditioning made year-round living in Florida and Arizona comfortable for older people, which helped retirement communities grow, as Haverly describes.",
+       "Lower state taxes in Southern states drew manufacturers to move plants out of older northern industrial cities, which hastened the decline of the industrial heartland that Haverly says pushed workers south."
+      ]
+     },
+     "common_pitfalls": [
+      "Summarizing each excerpt in Part A without stating a clear contrast between them.",
+      "Repeating evidence already in the excerpts (air conditioning in general, defense dollars in general, steel mill closings) instead of giving a specific additional development.",
+      "Citing evidence without explaining how it supports the particular historian's argument.",
+      "Mixing up the two historians or using the same explanation for B and C without tying it to each argument.",
+      "Making inaccurate claims about which states lack a state income tax."
+     ],
+     "facts": [
+      "The Federal-Aid Highway Act of 1956 created the Interstate Highway System, which connected the Northeast and Midwest to Southern and Southwestern states.",
+      "The Federal Housing Administration (created 1934) and VA home loans under the GI Bill (1944) backed mortgages that made new single-family homes affordable, including in fast-growing Sun Belt metropolitan areas.",
+      "Room and central air conditioning spread widely in American homes and workplaces after World War II, making hot, humid, and desert regions more comfortable year-round.",
+      "Florida and Texas do not levy a state personal income tax.",
+      "Federal defense spending grew sharply during the Reagan administration's military buildup of the 1980s.",
+      "Large military installations are located in Sun Belt states such as Texas, California, Florida, Georgia, and Virginia.",
+      "Many Southern states kept overall state tax burdens low and used that fact to recruit businesses."
+     ]
+    },
+    "samples": [
+     {
+      "tier": "mid",
+      "target_total": 2,
+      "essay": "(A) Tennant and Haverly disagree about what caused the South and Southwest to grow. Tennant thinks the growth came from air conditioning and from the federal government, which spent money on defense and helped create jobs that pulled workers into the region. Haverly thinks the growth came from the people who moved, especially retirees from the North, along with the decline of industry in northern cities that pushed workers out.\n\n(B) One development that supports Tennant is the defense buildup of the 1980s under President Reagan. During the 1980s the federal government greatly increased military spending, and a lot of that money went to bases, shipbuilding, and aerospace companies in Texas, California, and Florida. These contracts created jobs for engineers and technicians, so people moved to those states to work. This supports Tennant because she argues that federal money created payrolls that drew workers to the region, and the 1980s buildup is a clear example of that happening.\n\n(C) A development that supports Haverly is that many northern factories were closing in the 1970s and 1980s and people were unhappy about it. Lots of people in the North lost their jobs and the South kept growing, which fits Haverly saying the Sun Belt grew because the industrial heartland shrank. Also a lot of older people wanted to retire somewhere warm, so they moved south, and this made the population of the South bigger and gave it more political power.",
+      "word_count": 239,
+      "rubric_scores": {
+       "a": 1,
+       "b": 1,
+       "c": 0,
+       "total": 2
+      },
+      "annotations": [
+       {
+        "quote": "Tennant thinks the growth came from air conditioning and from the federal government, which spent money on defense and helped create jobs that pulled workers into the region.",
+        "comment": "Accurately states Tennant's pull explanation (technology plus federal action).",
+        "row_id": "a"
+       },
+       {
+        "quote": "Haverly thinks the growth came from the people who moved, especially retirees from the North, along with the decline of industry in northern cities that pushed workers out.",
+        "comment": "Accurately states Haverly's retiree and push-factor argument, so the response describes a real contrast and earns the point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "the defense buildup of the 1980s under President Reagan",
+        "comment": "A specific, accurate development within 1970-2000 that is not named in the excerpts (which only say 'defense dollars' generally).",
+        "row_id": "b"
+       },
+       {
+        "quote": "a lot of that money went to bases, shipbuilding, and aerospace companies in Texas, California, and Florida",
+        "comment": "Gives concrete detail on where the spending went, making the evidence specific rather than a restatement.",
+        "row_id": "b"
+       },
+       {
+        "quote": "This supports Tennant because she argues that federal money created payrolls that drew workers to the region",
+        "comment": "Explicitly links the evidence to Tennant's argument, which the rubric requires for the point.",
+        "row_id": "b"
+       },
+       {
+        "quote": "many northern factories were closing in the 1970s and 1980s and people were unhappy about it",
+        "comment": "Only repeats Haverly's own point about closing factories. No specific event, place, or policy is named, so this is a restatement and earns no credit.",
+        "row_id": "c"
+       },
+       {
+        "quote": "a lot of older people wanted to retire somewhere warm, so they moved south",
+        "comment": "Also restates the excerpt's retiree claim. A specific development such as Florida having no state income tax or interstate highways to Florida was needed to earn the point.",
+        "row_id": "c"
+       }
+      ]
+     }
+    ],
+    "provenance": {
+     "kind": "alton_composed",
+     "note": "ALTON-composed practice material; fictional sources and attributions."
+    }
+   }
+  }
+ },
+ {
+  "cellId": "ap_us_history-saq3_r2",
+  "apSubjectCode": "ap_us_history",
+  "kind": "frq_bundle",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "generated",
+  "candidateKey": "ap_us_history-saq3_r2-k0",
+  "keywordCode": "5.1",
+  "unitCode": "5",
+  "skillPrimary": "1.B",
+  "structure": "frq_multipart",
+  "archetype": "ushfrq_saq3_r2",
+  "reviewState": "rejected",
+  "rejectionReason": "sample_mid_missing; sample_low_missing; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate",
+  "difficultyProvisional": null,
+  "payload": {
+   "archetype": "ushfrq_saq3_r2",
+   "ush_frq": {
+    "schema_version": "ush-frq-1",
+    "task_type": "saq",
+    "template": "saq3",
+    "period": 5,
+    "periods": [
+     5,
+     4
+    ],
+    "title": "Railroad Mileage in the North and South, 1850 and 1860",
+    "prompt": {
+     "scenario": "The table below shows rounded, illustrative figures for the miles of railroad track in operation in the Northern states and the Southern states of the United States in 1850 and 1860. The figures are a composite made for practice. They follow the general pattern historians describe for the decade before the Civil War.",
+     "task": "Using the table, answer parts A, B, and C.",
+     "requirements": [
+      "Answer all three parts.",
+      "Each part is worth one point.",
+      "Use specific historical evidence from the period."
+     ],
+     "parts": [
+      {
+       "label": "A",
+       "prompt": "Briefly identify ONE pattern or trend in railroad mileage shown in the table.",
+       "points": 1
+      },
+      {
+       "label": "B",
+       "prompt": "Briefly explain ONE specific historical cause of the pattern or trend you identified in part A.",
+       "points": 1
+      },
+      {
+       "label": "C",
+       "prompt": "Briefly explain ONE specific effect of the difference in railroad development between the North and the South in the period 1850 to 1877.",
+       "points": 1
+      }
+     ]
+    },
+    "sources": [
+     {
+      "id": "A",
+      "kind": "table",
+      "title": "Miles of Railroad Track in Operation, North and South, 1850 and 1860 (illustrative composite)",
+      "attribution": "Illustrative composite table compiled for classroom practice; figures rounded and approximate, not official totals (ALTON-composed, in the style of a nineteenth-century statistical abstract)",
+      "body": "A table comparing approximate miles of railroad track in operation in the Northern states and the Southern states in 1850 and 1860, with the increase over the decade.",
+      "table": {
+       "columns": [
+        "Region",
+        "Miles of track, 1850",
+        "Miles of track, 1860",
+        "Increase, 1850 to 1860"
+       ],
+       "rows": [
+        [
+         "Northern states",
+         "6,600",
+         "22,000",
+         "15,400"
+        ],
+        [
+         "Southern states",
+         "2,400",
+         "9,000",
+         "6,600"
+        ],
+        [
+         "United States total",
+         "9,000",
+         "31,000",
+         "22,000"
+        ]
+       ]
+      },
+      "provenance": {
+       "kind": "alton_composed",
+       "note": "ush-prompts-v1"
+      }
+     }
+    ],
+    "rubric": {
+     "rubric_id": "ushistory-v1",
+     "total_points": 3,
+     "rows": [
+      {
+       "row_id": "a",
+       "name": "Part A",
+       "max": 1,
+       "descriptors": {
+        "0": "The response gives no pattern, misreads the table, or names a pattern the table does not show.",
+        "1": "The response correctly identifies one pattern or trend stated directly in the table."
+       },
+       "task_specific": "Identify a pattern stated directly in the table, such as the North having more track in both years, both regions adding track, the national total more than tripling, or the gap in miles between North and South growing."
+      },
+      {
+       "row_id": "b",
+       "name": "Part B",
+       "max": 1,
+       "descriptors": {
+        "0": "The response gives no cause, gives an inaccurate cause, or only restates the table.",
+        "1": "The response explains one specific historical cause connected to the pattern in the table."
+       },
+       "task_specific": "Explain a specific, accurate historical cause of the Northern rail advantage or of overall rail growth in the 1850s, such as Northern industrialization and investment capital, the Market Revolution, or Southern wealth being tied up in land and enslaved people."
+      },
+      {
+       "row_id": "c",
+       "name": "Part C",
+       "max": 1,
+       "descriptors": {
+        "0": "The response gives no effect, an inaccurate effect, or an effect outside the period with no connection to it.",
+        "1": "The response explains one specific historical effect of the difference in railroad development."
+       },
+       "task_specific": "Explain a specific, accurate effect of the regional difference in railroads between 1850 and 1877, such as Union logistical advantages in the Civil War, destruction of Southern lines, or the Pacific Railway Act and transcontinental railroad."
+      }
+     ],
+     "scoring_notes": [
+      "Part A answers should stay with simple comparisons stated directly in the table; do not require percentages or growth-rate calculations.",
+      "The figures are illustrative; do not reward or penalize students for citing exact real mileage totals.",
+      "For part B, a cause of overall rail growth in the 1850s is acceptable if the student identified overall growth in part A."
+     ]
+    },
+    "expected_features": {
+     "defensible_theses": [],
+     "contextualization_ideas": [
+      "Sectional economic differences in the 1850s between a free-labor industrial North and a slave-labor agricultural South."
+     ],
+     "outside_evidence": [
+      "Market Revolution and canal network",
+      "Northern industrialization",
+      "Plantation economy and cotton exports",
+      "Pacific Railway Act of 1862",
+      "Sherman's March to the Sea, 1864",
+      "Transcontinental railroad, 1869"
+     ],
+     "reasoning_types": [
+      "Causation",
+      "Comparison"
+     ],
+     "saq_answers": {
+      "a": [
+       "The Northern states had more miles of track than the Southern states in both 1850 and 1860.",
+       "Both regions greatly increased their railroad mileage between 1850 and 1860.",
+       "The North added more miles of track over the decade (15,400) than the South did (6,600), so the gap in miles grew.",
+       "Total United States mileage more than tripled, from about 9,000 to about 31,000 miles."
+      ],
+      "b": [
+       "The North's growing factory economy and commercial cities produced investment capital and demand for fast freight, so investors and states paid for more lines.",
+       "The Market Revolution linked Northeastern cities to Midwestern farms, and railroads were built to carry grain and manufactured goods between the two regions, building on the canal network.",
+       "Much Southern wealth was invested in land and enslaved people rather than in industry, and cotton planters could ship by river to ports, so the South had less capital and less demand for dense rail networks.",
+       "The North's larger, growing population, swelled by European immigration in the 1840s and 1850s, supplied workers and customers for new railroads."
+      ],
+      "c": [
+       "During the Civil War the Union used its larger rail network to move troops and supplies more effectively than the Confederacy, which helped its war effort.",
+       "Southern railroads wore out and were destroyed during the war, as when Sherman's forces tore up rail lines in Georgia in 1864, adding to the South's economic collapse.",
+       "With Southern members gone from Congress after secession, Congress passed the Pacific Railway Act of 1862, leading to the transcontinental railroad completed at Promontory Summit in 1869.",
+       "Rail links tied the Midwest economically to the Northeast, which strengthened Northern unity and the free-labor economy that backed the Union and the Republican Party."
+      ]
+     },
+     "common_pitfalls": [
+      "Claiming the South had no railroads or that Southern mileage fell; the table shows Southern growth.",
+      "Restating the table in part B instead of explaining a cause.",
+      "Giving a part C effect that has no connection to the regional rail gap or falls far outside 1850 to 1877.",
+      "Treating the illustrative figures as exact official census totals."
+     ],
+     "facts": [
+      "Railroad mileage in the United States grew from roughly 9,000 miles in 1850 to about 30,000 miles in 1860.",
+      "Most of the nation's rail mileage before the Civil War was in the free states.",
+      "The Pacific Railway Act was passed in 1862.",
+      "The first transcontinental railroad was completed at Promontory Summit, Utah Territory, in 1869.",
+      "Sherman's forces destroyed railroads in Georgia in 1864."
+     ]
+    },
+    "samples": [
+     {
+      "tier": "high",
+      "target_total": 3,
+      "essay": "(A) One trend shown in the table is that the gap between the North and the South grew during the 1850s. In 1850 the North had about 4,200 more miles of track than the South, but by 1860 it had about 13,000 more, since the North added 15,400 miles while the South added only 6,600.\n\n(B) One reason the North pulled ahead is that it had more industry and more investment capital during the Market Revolution. Northern banks, merchants, and factory owners could put money into railroad companies, and lines like the ones connecting Chicago to eastern cities carried grain and manufactured goods between the Midwest and the Northeast. In the South, most wealth was tied up in land and enslaved people, and cotton planters relied on rivers to ship crops to ports, so there was less demand and less capital for building railroads.\n\n(C) One effect of the North's railroad advantage was that it helped the Union win the Civil War. The Union could use its larger and more connected rail network to move troops, food, and ammunition quickly, while the Confederacy struggled to supply its armies because its lines were shorter, often used different track gauges, and were hard to repair. Union forces also targeted Southern railroads, as when Sherman's army tore up track in Georgia in 1864, which further weakened the Confederacy's ability to keep fighting.",
+      "word_count": 229,
+      "rubric_scores": {
+       "a": 1,
+       "b": 1,
+       "c": 1,
+       "total": 3
+      },
+      "annotations": [
+       {
+        "quote": "the gap between the North and the South grew during the 1850s",
+        "comment": "Earns the point: names a trend shown directly in the table, and the subtraction that follows (4,200 to 13,000) backs it up correctly.",
+        "row_id": "a"
+       },
+       {
+        "quote": "In the South, most wealth was tied up in land and enslaved people",
+        "comment": "Earns the point: gives an accurate, specific cause and ties it to the North-South gap through capital and Market Revolution links.",
+        "row_id": "b"
+       },
+       {
+        "quote": "lines like the ones connecting Chicago to eastern cities carried grain and manufactured goods",
+        "comment": "This specific example strengthens the explanation of Northern rail investment.",
+        "row_id": "b"
+       },
+       {
+        "quote": "move troops, food, and ammunition quickly",
+        "comment": "Earns the point: explains a Union logistical advantage in the Civil War, which falls inside 1850-1877.",
+        "row_id": "c"
+       },
+       {
+        "quote": "Sherman's army tore up track in Georgia in 1864",
+        "comment": "Accurate specific evidence of Southern lines being destroyed, which makes the effect stronger.",
+        "row_id": "c"
+       }
+      ]
+     }
+    ],
+    "provenance": {
+     "kind": "alton_composed",
+     "note": "ALTON-composed practice material; fictional sources and attributions."
+    }
+   }
+  }
+ }
+]

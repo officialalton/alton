@@ -1,0 +1,104 @@
+[
+ {
+  "id": "saq1_r2",
+  "tier": "high",
+  "options": [
+   {
+    "k": 0,
+    "total": 3,
+    "spread": 0,
+    "flagged": true,
+    "flags": [
+     {
+      "where": "Sample response (B): 'bases and aerospace and defense companies in Texas, California, and other southern states, like the NASA Johnson Space Center area around Houston'",
+      "kind": "inaccurate",
+      "detail": "The Johnson Space Center is a civilian NASA facility, not a product of Reagan-era military/defense spending; citing it as an example of the 1980s defense buildup conflates civilian space funding with the military budget. Also, the phrasing groups California among 'southern states'; California is a Sun Belt but not a southern state."
+     }
+    ]
+   }
+  ],
+  "chosen": null
+ },
+ {
+  "id": "saq1_r2",
+  "tier": "mid",
+  "options": [
+   {
+    "k": 0,
+    "total": 2,
+    "spread": 0,
+    "flagged": false,
+    "flags": []
+   }
+  ],
+  "chosen": 0
+ },
+ {
+  "id": "saq1_r2",
+  "tier": "low",
+  "options": [
+   {
+    "k": 0,
+    "total": 1,
+    "spread": 0,
+    "flagged": true,
+    "flags": [
+     {
+      "where": "Student sample response, part (C): \"Florida had a state income tax that was lower than in the North\"",
+      "kind": "inaccurate",
+      "detail": "Florida has had no state personal income tax at all (prohibited by the state constitution since 1924), not merely a 'lower' one. The sample response's historical claim is factually wrong; the correct framing is that Florida's absence of a personal income tax was an attraction for retirees. Since the material states that low-tier sample historical claims should still be accurate, this should be corrected."
+     }
+    ]
+   }
+  ],
+  "chosen": null
+ },
+ {
+  "id": "saq3_r2",
+  "tier": "high",
+  "options": [
+   {
+    "k": 0,
+    "total": 3,
+    "spread": 0,
+    "flagged": false,
+    "flags": []
+   }
+  ],
+  "chosen": 0
+ },
+ {
+  "id": "saq3_r2",
+  "tier": "mid",
+  "options": [
+   {
+    "k": 0,
+    "total": 3,
+    "spread": 0,
+    "flagged": false,
+    "flags": []
+   }
+  ],
+  "chosen": null
+ },
+ {
+  "id": "saq3_r2",
+  "tier": "low",
+  "options": [
+   {
+    "k": 0,
+    "total": 2,
+    "spread": 1,
+    "flagged": true,
+    "flags": [
+     {
+      "where": "Student sample response, part (C): 'helped the North win the Civil War in 1812'",
+      "kind": "inaccurate",
+      "detail": "The Civil War was fought 1861–1865, not in 1812. The War of 1812 was a separate conflict with Britain that predated U.S. railroads entirely. The prompt states that the low-tier sample's weaknesses should be vagueness, not factual errors, so this date error should be corrected (e.g., 'the Civil War (1861–1865)')."
+     }
+    ]
+   }
+  ],
+  "chosen": null
+ }
+]

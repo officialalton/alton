@@ -1,0 +1,376 @@
+[
+ {
+  "id": "saq1_r3",
+  "spec": {
+   "id": "saq1_r3",
+   "template": "saq1",
+   "period": 9,
+   "focus": "Two fictional historians interpret why the population and political influence of the South and Southwest grew after 1970: one emphasizes air conditioning, defense spending and lower taxes, the other emphasizes retirement migration and the decline of older industrial cities. Keep every rubric example and sample answer to well-established facts about air conditioning, military bases, federal highway and housing spending and state tax policy; do not mention Medicare or Social Security.",
+   "seed": 19830
+  },
+  "payload": {
+   "schema_version": "ush-frq-1",
+   "task_type": "saq",
+   "template": "saq1",
+   "period": 9,
+   "periods": [
+    9,
+    8
+   ],
+   "title": "Explaining the Growth of the Sun Belt, 1970 to 2000",
+   "prompt": {
+    "scenario": "The two excerpts below were written by historians who explain why the population and political influence of the South and Southwest grew between 1970 and 2000.",
+    "task": "Using the excerpts, answer (A), (B), and (C).",
+    "requirements": [
+     "Answer all three parts.",
+     "Each part is worth one point.",
+     "Use specific historical evidence not explicitly mentioned in the excerpts for parts B and C."
+    ],
+    "parts": [
+     {
+      "label": "A",
+      "prompt": "Briefly describe ONE major difference between Okafor-Brandt's and Westcott's historical interpretations of the growth of the South and Southwest after 1970.",
+      "points": 1
+     },
+     {
+      "label": "B",
+      "prompt": "Briefly explain how ONE specific historical event, development, or circumstance from the period 1970 to 2000 that is not explicitly mentioned in the excerpts could be used to support Okafor-Brandt's interpretation.",
+      "points": 1
+     },
+     {
+      "label": "C",
+      "prompt": "Briefly explain how ONE specific historical event, development, or circumstance from the period 1970 to 2000 that is not explicitly mentioned in the excerpts could be used to support Westcott's interpretation.",
+      "points": 1
+     }
+    ]
+   },
+   "sources": [
+    {
+     "id": "A",
+     "kind": "secondary_text",
+     "title": "Historian Marisol Okafor-Brandt on the making of the Sun Belt",
+     "attribution": "Marisol Okafor-Brandt, fictional historian, Cool Air and Federal Money: Remaking the Sun Belt, fictional book, 2014 (ALTON-composed, in the style of a modern historical monograph)",
+     "body": "The rise of the South and Southwest after 1970 was built as much as it was discovered. Window units and central air conditioning made Houston offices and Phoenix subdivisions livable through long, humid summers, and employers stopped worrying that heat would wreck productivity. Washington supplied many of the paychecks. Military bases, shipyards, and aerospace contracts flowed to Texas, California, Georgia, and Florida, especially during the defense buildup of the 1980s. State legislatures finished the job by keeping taxes low and courting firms with incentives. Population followed the jobs, and after each census, seats in the House and votes in the Electoral College followed the population.",
+     "provenance": {
+      "kind": "alton_composed",
+      "note": "ush-prompts-v1"
+     }
+    },
+    {
+     "id": "B",
+     "kind": "secondary_text",
+     "title": "Historian Harlan Westcott on migration to the Sun Belt",
+     "attribution": "Harlan Westcott, fictional historian, Leaving the Snow: Migration and the New American Map, fictional book, 2009 (ALTON-composed, in the style of a modern historical monograph)",
+     "body": "Historians who credit the Sun Belt's own advantages tell only half the story. The other half lies in the places people left behind. As steel mills, auto plants, and rubber factories in cities like Youngstown, Gary, and Detroit closed or shrank during the 1970s and 1980s, hundreds of thousands of workers and their families headed south and west looking for work. At the same time, a growing number of older Americans with pensions and savings chose to spend their retirement years in Florida and Arizona. The Sun Belt's growth was a story of push as much as pull, and the Northeast and Midwest lost political weight as a result.",
+     "provenance": {
+      "kind": "alton_composed",
+      "note": "ush-prompts-v1"
+     }
+    }
+   ],
+   "rubric": {
+    "rubric_id": "ushistory-v1",
+    "total_points": 3,
+    "rows": [
+     {
+      "row_id": "a",
+      "name": "Part A",
+      "max": 1,
+      "descriptors": {
+       "0": "The response does not describe a valid difference, simply quotes or summarizes one excerpt, or misreads either historian's argument.",
+       "1": "The response accurately describes one difference, such as Okafor-Brandt stressing technology, federal spending, and state tax policy that drew people to the region while Westcott stresses deindustrialization and retirees leaving the North."
+      },
+      "task_specific": "Describe one major difference between the interpretations. Okafor-Brandt emphasizes pull factors within the Sun Belt (air conditioning, federal defense spending, low state taxes), while Westcott emphasizes push factors, meaning industrial decline in older northern cities, along with retirement migration."
+     },
+     {
+      "row_id": "b",
+      "name": "Part B",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no specific evidence, repeats evidence named in Excerpt A without new specifics, or does not connect the evidence to Okafor-Brandt's argument.",
+       "1": "The response explains how one specific piece of evidence, such as the absence of a personal state income tax in Texas or Florida drawing businesses, or military installations and aerospace work in particular Sun Belt states, supports Okafor-Brandt's interpretation."
+      },
+      "task_specific": "Explain how specific evidence from 1970 to 2000 not mentioned in Excerpt A (air conditioning, military bases and defense contracts, federal highway or housing spending, or state tax policy) supports the view that Sun Belt advantages and federal money drew population and power to the region."
+     },
+     {
+      "row_id": "c",
+      "name": "Part C",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no specific evidence, simply restates Westcott's examples, or does not connect the evidence to migration from the Northeast and Midwest or to retirement migration.",
+       "1": "The response explains how one specific piece of evidence, such as Florida having no personal state income tax, which made it attractive to retirees on fixed incomes from northern states, supports Westcott's interpretation."
+      },
+      "task_specific": "Explain how specific evidence from 1970 to 2000 not mentioned in Excerpt B supports the view that people moving out of older industrial regions, including retirees, drove Sun Belt growth. Evidence should come from well-established facts about air conditioning, federal highway and housing spending, or state tax policy as they enabled or encouraged out-migration and retirement migration."
+     }
+    ],
+    "scoring_notes": [
+     "Each part earns one point independently.",
+     "For part A, a response may also describe a valid similarity only if the prompt is read as allowing it; this prompt asks for a difference, so a similarity alone does not earn the point.",
+     "For parts B and C, evidence named in the relevant excerpt (for example the 1980s defense buildup in A, or Youngstown, Gary, and Detroit in B) does not count unless the response adds new, specific detail.",
+     "Evidence may support one historian even if it could also be used for the other, provided the explanation ties it to the stated interpretation."
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [],
+    "contextualization_ideas": [
+     "Postwar federal investment in highways, housing, and defense in the South and West.",
+     "Deindustrialization in the Northeast and Midwest in the 1970s and 1980s.",
+     "The political shift toward Sun Belt states in reapportionment and presidential elections."
+    ],
+    "outside_evidence": [
+     "Interstate highways such as I-95 and I-75",
+     "Absence of a personal state income tax in Texas and Florida",
+     "Fort Hood and San Diego naval bases",
+     "Johnson Space Center in Houston",
+     "FHA and VA mortgage programs",
+     "Spread of central air conditioning in Phoenix, Houston, and Atlanta"
+    ],
+    "reasoning_types": [
+     "Causation",
+     "Comparison of historical interpretations"
+    ],
+    "saq_answers": {
+     "a": [
+      "Okafor-Brandt argues that Sun Belt growth came mainly from pull factors in the region, such as air conditioning, federal defense money, and low taxes, while Westcott argues it came mainly from push factors like factory closings in northern industrial cities.",
+      "Okafor-Brandt gives the federal government and state legislatures the central role in building the Sun Belt, while Westcott focuses on the choices of individual migrants, including displaced workers and retirees.",
+      "Okafor-Brandt explains political gains as the result of jobs created in the South and West, while Westcott explains them as the result of the Northeast and Midwest losing people and political weight."
+     ],
+     "b": [
+      "Texas and Florida had no personal state income tax, which helped attract corporate relocations and new businesses to cities such as Houston, Dallas, and Miami, supporting Okafor-Brandt's emphasis on low taxes.",
+      "Large military installations in Sun Belt states, such as Fort Hood in Texas and the naval bases around San Diego, provided steady federal payrolls and local jobs, showing how defense spending fueled regional growth.",
+      "NASA's Johnson Space Center in Houston and aerospace firms in Southern California drew federal contracts and engineers to the region, supporting the claim that Washington supplied the paychecks.",
+      "As central air conditioning became standard in new homes and office buildings, fast-growing cities like Phoenix, Atlanta, and Houston became comfortable year-round, which made them attractive to employers and workers."
+     ],
+     "c": [
+      "Florida's lack of a personal state income tax attracted retirees on fixed incomes from high-tax northern states such as New York and New Jersey, supporting Westcott's emphasis on retirement migration.",
+      "Interstate highways built with federal money, such as I-95 and I-75, linked the Northeast and Midwest directly to Florida, making it easier for retirees and displaced workers to move south.",
+      "Federally backed home mortgages helped finance large new housing developments and retirement communities in Florida and Arizona, giving older Americans leaving northern cities places to settle.",
+      "The spread of air conditioning made year-round living in hot places like Phoenix and South Florida bearable for older people, which allowed retirement migration from the North to grow."
+     ]
+    },
+    "common_pitfalls": [
+     "Summarizing one excerpt in Part A without saying how it differs from the other.",
+     "Using evidence already named in an excerpt, such as the 1980s defense buildup or Youngstown, without adding new specific detail.",
+     "Citing evidence from outside the 1970 to 2000 period without explaining its effect within the period.",
+     "Naming a fact (for example, the Interstate system) without explaining how it supports the specific historian's argument.",
+     "Confusing which historian emphasizes push factors and which emphasizes pull factors."
+    ],
+    "facts": [
+     "The Interstate Highway system was authorized by the Federal-Aid Highway Act of 1956 and was largely built in the following decades.",
+     "Texas, Florida, and Nevada do not levy a personal state income tax.",
+     "Defense spending rose sharply under President Reagan in the 1980s, benefiting aerospace and military centers in states such as California and Texas.",
+     "NASA's Johnson Space Center is located in Houston, Texas.",
+     "Fort Hood in Texas and naval facilities in San Diego were major military installations in the Sun Belt.",
+     "The FHA and VA home loan programs backed mortgages that helped finance postwar suburban and residential growth.",
+     "Air conditioning became widespread in homes and offices in the South and Southwest in the decades after World War II.",
+     "Reapportionment after each census from 1970 to 2000 shifted House seats and electoral votes from the Northeast and Midwest to states such as Florida, Texas, California, and Arizona."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_composed",
+    "note": "ALTON-composed practice material; fictional sources and attributions."
+   }
+  },
+  "fact": [
+   {
+    "where": "Source A, sentence 2 (\"made Houston offices and Phoenix subdivisions livable through long, humid summers\")",
+    "kind": "inaccurate",
+    "detail": "Phoenix has a hot, arid desert climate, not humid summers. The humidity description fits Houston but is inaccurate when applied to Phoenix; the sentence should refer to 'long, hot summers' or distinguish the two cities."
+   },
+   {
+    "where": "Part B sample answer 4 (central air conditioning in Phoenix, Atlanta, Houston) vs. rubric Part B / common pitfalls",
+    "kind": "inconsistent_with_documents",
+    "detail": "Excerpt A already explicitly names air conditioning in Houston offices and Phoenix subdivisions. The sample answer largely restates that evidence (adding only Atlanta), while the rubric and pitfalls say evidence named in the excerpt does not count without new specific detail. The rubric's own Part B wording ('not mentioned in Excerpt A (air conditioning, military bases..., state tax policy)') also lists categories that Excerpt A does mention, so the rubric and sample answers are internally inconsistent on what qualifies as outside evidence."
+   }
+  ]
+ },
+ {
+  "id": "saq3_r3",
+  "spec": {
+   "id": "saq3_r3",
+   "template": "saq3",
+   "period": 5,
+   "focus": "Non-text source: a table (illustrative composite, labeled as such) of the number of miles of railroad track in operation in the North and in the South in 1850 and 1860, consistent with the Northern advantage in railroads before the Civil War; keep every acceptable answer to simple comparisons stated directly in the table.",
+   "seed": 19831
+  },
+  "payload": {
+   "schema_version": "ush-frq-1",
+   "task_type": "saq",
+   "template": "saq3",
+   "period": 5,
+   "periods": [
+    5,
+    4
+   ],
+   "title": "Railroad Track in the North and South, 1850 and 1860",
+   "prompt": {
+    "scenario": "The table below is an illustrative composite showing rounded estimates of the miles of railroad track in operation in the Northern states and in the Southern states in 1850 and in 1860. The figures are made up for practice, but they follow the general pattern historians describe for the decade before the Civil War.",
+    "task": "Using the table, answer parts A, B, and C.",
+    "requirements": [
+     "Answer all three parts.",
+     "Each part asks for ONE specific, historically accurate response.",
+     "Responses to parts B and C should use specific historical evidence beyond the table."
+    ],
+    "parts": [
+     {
+      "label": "A",
+      "prompt": "Briefly identify ONE trend or pattern in railroad track mileage shown in the table.",
+      "points": 1
+     },
+     {
+      "label": "B",
+      "prompt": "Briefly explain ONE specific historical cause of the trend or pattern you identified in part A.",
+      "points": 1
+     },
+     {
+      "label": "C",
+      "prompt": "Briefly explain ONE specific effect of, or development related to, the pattern of railroad growth shown in the table in the period 1850 to 1877.",
+      "points": 1
+     }
+    ]
+   },
+   "sources": [
+    {
+     "id": "A",
+     "kind": "table",
+     "title": "Miles of Railroad Track in Operation, Northern and Southern States, 1850 and 1860 (Illustrative Composite)",
+     "attribution": "Illustrative composite table of rounded estimates prepared for classroom practice; not actual census figures (ALTON-composed, in the style of a mid-nineteenth-century statistical summary)",
+     "body": "A table comparing rounded estimates of railroad track mileage in the Northern states and the Southern states in 1850 and 1860, showing growth in both regions and a larger total in the North in both years.",
+     "table": {
+      "columns": [
+       "Region",
+       "Miles of track, 1850",
+       "Miles of track, 1860"
+      ],
+      "rows": [
+       [
+        "Northern states",
+        "6,700",
+        "21,300"
+       ],
+       [
+        "Southern states",
+        "2,300",
+        "9,200"
+       ],
+       [
+        "Total",
+        "9,000",
+        "30,500"
+       ]
+      ]
+     },
+     "provenance": {
+      "kind": "alton_composed",
+      "note": "ush-prompts-v1"
+     }
+    }
+   ],
+   "rubric": {
+    "rubric_id": "ushistory-v1",
+    "total_points": 3,
+    "rows": [
+     {
+      "row_id": "a",
+      "name": "Part A",
+      "max": 1,
+      "descriptors": {
+       "0": "Gives no trend, or a trend the table does not show, such as saying the South had more track or that mileage went down.",
+       "1": "Correctly identifies one trend or pattern stated directly in the table, such as the North having more miles of track than the South in both 1850 and 1860."
+      },
+      "task_specific": "Identifies one trend or pattern stated directly in the table, such as the North having more track than the South in both years, or both regions adding track between 1850 and 1860."
+     },
+     {
+      "row_id": "b",
+      "name": "Part B",
+      "max": 1,
+      "descriptors": {
+       "0": "Gives no cause, a vague or wrong one, or only restates the data.",
+       "1": "Explains one specific, accurate historical cause of the railroad pattern shown in the table."
+      },
+      "task_specific": "Explains one specific, accurate historical cause of the pattern, such as Northern industrialization and capital investment, the market revolution tying the Northeast to the Midwest, government land grants, or the Southern economy putting its capital into land and enslaved people and relying on rivers."
+     },
+     {
+      "row_id": "c",
+      "name": "Part C",
+      "max": 1,
+      "descriptors": {
+       "0": "Gives no effect, a vague or wrong one, or one outside the period with no link back to it.",
+       "1": "Explains one specific, accurate effect or related development tied to the railroad pattern in the table."
+      },
+      "task_specific": "Explains one specific, accurate effect or related development from 1850 to 1877, such as the Union's transportation advantage in the Civil War, stronger economic ties between the Northeast and Midwest, the Pacific Railway Act and transcontinental railroad, or the wrecking and rebuilding of Southern railroads."
+     }
+    ],
+    "scoring_notes": [
+     "Part A answers must match the table; any accurate simple comparison taken directly from the table earns the point.",
+     "For parts B and C, the response must go beyond restating the table and give specific historical evidence.",
+     "Do not penalize small rounding differences when students cite the numbers."
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [],
+    "contextualization_ideas": [
+     "Sectional economic differences between the industrializing, free-labor North and the plantation economy of the South based on slavery in the 1850s."
+    ],
+    "outside_evidence": [
+     "Market revolution",
+     "Illinois Central land grant of 1850",
+     "Pacific Railway Act of 1862",
+     "Transcontinental railroad, 1869",
+     "Sherman's March to the Sea, 1864"
+    ],
+    "reasoning_types": [
+     "Causation",
+     "Comparison"
+    ],
+    "saq_answers": {
+     "a": [
+      "The Northern states had more miles of railroad track than the Southern states in both 1850 and 1860.",
+      "Track mileage grew in both regions between 1850 and 1860.",
+      "The North added far more miles of track than the South during the decade (about 14,600 compared with about 6,900).",
+      "Total track in operation more than tripled, from about 9,000 miles to about 30,500 miles."
+     ],
+     "b": [
+      "Northern industrialization and the market revolution gave the Northeast more factories, banks, and investment capital to pay for building railroads.",
+      "Railroads were built to connect Northeastern cities with the growing farms and towns of the Midwest, part of a regional market economy based on free labor.",
+      "Government aid, such as the 1850 federal land grant that helped pay for the Illinois Central Railroad, encouraged railroad building.",
+      "Southern wealth was concentrated in land and enslaved people, and cotton planters relied on rivers to ship crops to ports, so the South built fewer railroads."
+     ],
+     "c": [
+      "During the Civil War, the Union's larger railroad network helped it move troops and supplies, which was a major advantage over the Confederacy.",
+      "Railroads linking the Northeast and Midwest strengthened economic and political ties between those regions, helping the Republican Party grow in the 1850s.",
+      "Congress passed the Pacific Railway Act in 1862, which led to the first transcontinental railroad, completed in 1869.",
+      "Union armies, including on Sherman's march in 1864, wrecked many Southern railroads, and they had to be rebuilt during Reconstruction."
+     ]
+    },
+    "common_pitfalls": [
+     "Saying the South had more track or that Southern track decreased, which the table does not show.",
+     "For part A, making claims about why the pattern happened instead of describing the data.",
+     "Giving vague causes like 'the North was richer' without naming a specific development.",
+     "Pointing to effects after 1877, such as the Gilded Age railroad strikes, without linking them back to the period."
+    ],
+    "facts": [
+     "Railroad mileage in the United States grew quickly in the 1850s, to roughly 30,000 miles by 1860.",
+     "Most railroad mileage in 1860 was in the free states of the North.",
+     "In 1850 Congress passed a land-grant act that supported the Illinois Central Railroad.",
+     "The Pacific Railway Act was passed in 1862.",
+     "The first transcontinental railroad was completed in 1869 at Promontory Summit, Utah Territory.",
+     "Sherman's forces destroyed railroads in Georgia in 1864."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_composed",
+    "note": "ALTON-composed practice material; fictional sources and attributions."
+   }
+  },
+  "fact": [
+   {
+    "where": "common_pitfalls: 'Pointing to effects after 1877, such as the Gilded Age railroad strikes'",
+    "kind": "inaccurate",
+    "detail": "The best-known 'Gilded Age railroad strike,' the Great Railroad Strike, occurred in July 1877, which falls within (not after) the question's stated 1850–1877 period. A student citing it with a link to railroad expansion would arguably be in period; the pitfall should reference later strikes (e.g., Pullman 1894) or rephrase."
+   }
+  ]
+ }
+]

@@ -3,9 +3,10 @@
 import { useState } from "react";
 import { estimateAttempt } from "@/lib/mock-exam/score-aggregate";
 import type { AttemptHistoryRow } from "@/lib/free-accounts/types";
+import AdminApResultView from "./AdminApResultView";
 import MockExamResultView from "@/app/student/mock-exam/[attemptId]/MockExamResultView";
 import type { MockExamAttemptDetail } from "@/lib/mock-exam/attempt-data";
-import { getAttemptDetailForAdminAction } from "../free-accounts-actions";
+import { getApAttemptViewForAdminAction, getAttemptDetailForAdminAction, type AdminApAttemptView } from "../free-accounts-actions";
 import { fmtRange } from "./ScoreStatsCard";
 
 const STATUS: Record<string, string> = { assigned: "In progress", in_progress: "In progress", submitted: "In progress", graded: "Graded" };
@@ -14,14 +15,29 @@ const STATUS: Record<string, string> = { assigned: "In progress", in_progress: "
 export default function AttemptHistoryTable({ rows }: { rows: AttemptHistoryRow[] }) {
   const [openId, setOpenId] = useState<string | null>(null);
   const [detail, setDetail] = useState<MockExamAttemptDetail | null>(null);
+  const [apView, setApView] = useState<AdminApAttemptView | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   async function open(id: string) {
-    if (openId === id) { setOpenId(null); setDetail(null); return; }
-    setOpenId(id); setDetail(null); setError(null);
+    if (openId === id) { setOpenId(null); setDetail(null); setApView(null); return; }
+    setOpenId(id); setDetail(null); setApView(null); setError(null);
     try {
+      // AP 응시는 SAT 결과 컴포넌트가 아니라 AP 읽기 전용 결과(학생·학부모와 같은 계산)로 연다.
+      if (rows.find((r) => r.attemptId === id)?.track === "ap") {
+        const v = await getApAttemptViewForAdminAction(id);
+        if (!v) setError("Couldn't load this attempt.");
+        setApView(v);
+        return;
+      }
       const d = await getAttemptDetailForAdminAction(id);
       if (!d) setError("Couldn't load this attempt.");
+      // 목록 데이터가 AP임을 알려주지 못한 경우에도 SAT 결과 화면에 AP 데이터를 넘기지 않는다.
+      if (d?.examProgram === "ap") {
+        const v = await getApAttemptViewForAdminAction(id);
+        if (!v) setError("Couldn't load this attempt.");
+        setApView(v);
+        return;
+      }
       setDetail(d);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Couldn't load this attempt.");
@@ -59,7 +75,9 @@ export default function AttemptHistoryTable({ rows }: { rows: AttemptHistoryRow[
                     ) : (
                       <td colSpan={3} className="pr-3 text-grey-500">
                         {graded
-                          ? e.reason === "no_estimate_fixed"
+                          ? r.track === "ap"
+                            ? `${r.mc?.correct ?? 0}/${r.mc?.total ?? 0} correct (multiple choice) · AP scores (1–5) are not estimated`
+                          : e.reason === "no_estimate_fixed"
                             ? `Score estimate not available (fixed-format test) · ${(r.sections.rw.correct ?? 0) + (r.sections.math.correct ?? 0)}/${r.sections.rw.total + r.sections.math.total} correct`
                             : e.reason === "insufficient_responses"
                               ? "Not enough responses to estimate a score range."
@@ -82,7 +100,8 @@ export default function AttemptHistoryTable({ rows }: { rows: AttemptHistoryRow[
       {openId && (
         <div className="mt-4 border-t border-grey-200 pt-4">
           {error && <p className="text-[12.5px] text-red">{error}</p>}
-          {!detail && !error && <p className="text-[12.5px] text-grey-500" aria-busy="true">Loading…</p>}
+          {!detail && !apView && !error && <p className="text-[12.5px] text-grey-500" aria-busy="true">Loading…</p>}
+          {apView && <AdminApResultView view={apView} />}
           {detail && <MockExamResultView attempt={detail} readOnly reportRole={null} />}
         </div>
       )}

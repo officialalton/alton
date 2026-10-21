@@ -1,0 +1,415 @@
+{
+ "set": "EL3",
+ "report": "data/ap/stock/exact-assign-el-el3-el4.json",
+ "generatedBy": "scripts/ap-generation/new6-design-table.ts",
+ "note": "내용=토픽, 기능=스킬, 표현=자료 형태, 추론=난이도 판정기 라벨·풀이 단계, 중복=원형·문항군. 정답 유일성: 파이프라인의 독립 풀이(Opus·Sonnet)+검토+패널 기록은 각 후보 verification/review 에 있다.",
+ "rows": [
+  {
+   "key": "englang-r19-merged:ap_english_language-lr41-k0",
+   "kind": "mc",
+   "archetype": "el_reading_lr41",
+   "family": "fam:englang-r19-merged:ap_english_language-lr41-k0",
+   "duplicateOf": null,
+   "content": [
+    "U5.1",
+    "U5.1",
+    "U6.3",
+    "U7.1",
+    "U4.3",
+    "U2.2",
+    "U7.5",
+    "U8.2",
+    "U7.1",
+    "U4.4",
+    "U7.3",
+    "U5.1"
+   ],
+   "function": [
+    "5.A",
+    "5.B",
+    "7.A",
+    "1.A",
+    "3.B",
+    "3.A",
+    "7.C",
+    "7.A",
+    "3.C",
+    "5.C",
+    "7.B",
+    "5.A"
+   ],
+   "representation": "text",
+   "reasoning": [
+    {
+     "label": "exam_prep",
+     "steps": null
+    },
+    {
+     "label": "exam_prep",
+     "steps": null
+    },
+    {
+     "label": "exam_prep",
+     "steps": null
+    },
+    {
+     "label": "exam_prep",
+     "steps": null
+    },
+    {
+     "label": "basic_learning",
+     "steps": null
+    },
+    {
+     "label": "basic_learning",
+     "steps": null
+    },
+    {
+     "label": "exam_prep",
+     "steps": null
+    },
+    {
+     "label": "advanced_supplement",
+     "steps": null
+    },
+    {
+     "label": "exam_prep",
+     "steps": null
+    },
+    {
+     "label": "advanced_supplement",
+     "steps": null
+    },
+    {
+     "label": "exam_prep",
+     "steps": null
+    },
+    {
+     "label": "advanced_supplement",
+     "steps": null
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "englang-r19-merged:ap_english_language-lr42-k0",
+   "kind": "mc",
+   "archetype": "el_reading_lr42",
+   "family": "fam:englang-r19-merged:ap_english_language-lr42-k0",
+   "duplicateOf": null,
+   "content": [
+    "U1.1",
+    "U3.1",
+    "U5.1",
+    "U4.4",
+    "U7.5",
+    "U8.1",
+    "U2.1",
+    "U3.1",
+    "U9.1",
+    "U6.2",
+    "U5.1",
+    "U8.2"
+   ],
+   "function": [
+    "1.A",
+    "3.A",
+    "5.A",
+    "5.C",
+    "7.C",
+    "1.B",
+    "1.B",
+    "3.A",
+    "3.C",
+    "3.B",
+    "5.B",
+    "7.B"
+   ],
+   "representation": "text",
+   "reasoning": [
+    {
+     "label": "exam_prep",
+     "steps": null
+    },
+    {
+     "label": "exam_prep",
+     "steps": null
+    },
+    {
+     "label": "exam_prep",
+     "steps": null
+    },
+    {
+     "label": "advanced_supplement",
+     "steps": null
+    },
+    {
+     "label": "exam_prep",
+     "steps": null
+    },
+    {
+     "label": "exam_prep",
+     "steps": null
+    },
+    {
+     "label": "exam_prep",
+     "steps": null
+    },
+    {
+     "label": "basic_learning",
+     "steps": null
+    },
+    {
+     "label": "advanced_supplement",
+     "steps": null
+    },
+    {
+     "label": "exam_prep",
+     "steps": null
+    },
+    {
+     "label": "exam_prep",
+     "steps": null
+    },
+    {
+     "label": "exam_prep",
+     "steps": null
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "englang-r19-merged:ap_english_language-lw42-k0",
+   "kind": "mc",
+   "archetype": "el_writing_lw42",
+   "family": "fam:englang-r19-merged:ap_english_language-lw42-k0",
+   "duplicateOf": null,
+   "content": [
+    "U2.1",
+    "U4.3",
+    "U4.4",
+    "U8.3",
+    "U7.5",
+    "U3.2",
+    "U7.2",
+    "U8.3",
+    "U5.5"
+   ],
+   "function": [
+    "2.B",
+    "4.B",
+    "6.C",
+    "8.B",
+    "8.C",
+    "4.A",
+    "4.C",
+    "8.A",
+    "8.A"
+   ],
+   "representation": "text",
+   "reasoning": [
+    {
+     "label": "exam_prep",
+     "steps": null
+    },
+    {
+     "label": "exam_prep",
+     "steps": null
+    },
+    {
+     "label": "exam_prep",
+     "steps": null
+    },
+    {
+     "label": "exam_prep",
+     "steps": null
+    },
+    {
+     "label": "basic_learning",
+     "steps": null
+    },
+    {
+     "label": "exam_prep",
+     "steps": null
+    },
+    {
+     "label": "exam_prep",
+     "steps": null
+    },
+    {
+     "label": "basic_learning",
+     "steps": null
+    },
+    {
+     "label": "advanced_supplement",
+     "steps": null
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "englang-r19-merged:ap_english_language-lw41-k0",
+   "kind": "mc",
+   "archetype": "el_writing_lw41",
+   "family": "fam:englang-r19-merged:ap_english_language-lw41-k0",
+   "duplicateOf": null,
+   "content": [
+    "U2.1",
+    "U8.1",
+    "U5.2",
+    "U5.2",
+    "U7.2",
+    "U3.2",
+    "U7.2",
+    "U4.2"
+   ],
+   "function": [
+    "2.B",
+    "2.B",
+    "6.B",
+    "6.B",
+    "2.A",
+    "6.A",
+    "4.C",
+    "2.A"
+   ],
+   "representation": "text",
+   "reasoning": [
+    {
+     "label": "exam_prep",
+     "steps": null
+    },
+    {
+     "label": "advanced_supplement",
+     "steps": null
+    },
+    {
+     "label": "basic_learning",
+     "steps": null
+    },
+    {
+     "label": "exam_prep",
+     "steps": null
+    },
+    {
+     "label": "exam_prep",
+     "steps": null
+    },
+    {
+     "label": "exam_prep",
+     "steps": null
+    },
+    {
+     "label": "exam_prep",
+     "steps": null
+    },
+    {
+     "label": "advanced_supplement",
+     "steps": null
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "englang-p1-a2:ap_english_language-w01-k0",
+   "kind": "mc",
+   "archetype": "el_writing_w01",
+   "family": "fam:englang-p1-a2:ap_english_language-w01-k0",
+   "duplicateOf": null,
+   "content": [
+    "U4.2",
+    "U4.3",
+    "U5.2",
+    "U8.3"
+   ],
+   "function": [
+    "2.A",
+    "4.B",
+    "6.B",
+    "8.A"
+   ],
+   "representation": "text",
+   "reasoning": [
+    {
+     "label": "advanced_supplement",
+     "steps": null
+    },
+    {
+     "label": "exam_prep",
+     "steps": null
+    },
+    {
+     "label": "exam_prep",
+     "steps": null
+    },
+    {
+     "label": "exam_prep",
+     "steps": null
+    }
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "englang-r19-f:ap_english_language-fc1-k0",
+   "kind": "frq_bundle",
+   "archetype": "elfrq_fc1",
+   "family": "fam:englang-r19-f:ap_english_language-fc1-k0",
+   "duplicateOf": null,
+   "content": [
+    "U9.3"
+   ],
+   "function": [
+    "4.B"
+   ],
+   "representation": "stat_chart",
+   "reasoning": [
+    null
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "englang-r19-f5:ap_english_language-fi2-k0",
+   "kind": "frq_bundle",
+   "archetype": "elfrq_fi2",
+   "family": "fam:englang-r19-f5:ap_english_language-fi2-k0",
+   "duplicateOf": null,
+   "content": [
+    "U9.3"
+   ],
+   "function": [
+    "7.A"
+   ],
+   "representation": "text",
+   "reasoning": [
+    null
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  },
+  {
+   "key": "englang-r19-f:ap_english_language-fc3-k0",
+   "kind": "frq_bundle",
+   "archetype": "elfrq_fc3",
+   "family": "fam:englang-r19-f:ap_english_language-fc3-k0",
+   "duplicateOf": null,
+   "content": [
+    "U9.3"
+   ],
+   "function": [
+    "6.A"
+   ],
+   "representation": "text",
+   "reasoning": [
+    null
+   ],
+   "independentSolve": "auto_passed",
+   "validation": "auto_passed"
+  }
+ ]
+}

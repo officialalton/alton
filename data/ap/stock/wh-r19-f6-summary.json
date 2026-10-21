@@ -1,0 +1,136 @@
+{
+ "run": "wh-r19-f6",
+ "generatedAt": "2026-10-21",
+ "passed": [],
+ "rejected": [
+  {
+   "__rejected": true,
+   "specId": "wh3_saq1",
+   "reason": "sample_low_missing; sample_low_no_consistent_candidate"
+  }
+ ],
+ "audit": [
+  {
+   "id": "wh3_saq1",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 1,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 2,
+     "total": 3,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The London group formally organized itself as a society at Gresham College in November 1660; 1662 is the date of the fir"
+     ]
+    },
+    {
+     "k": 3,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "wh3_saq1",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 2,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The Royal Society was formally organized in November 1660 (the founding meeting at Gresham College after a Wren lecture,"
+     ]
+    },
+    {
+     "k": 1,
+     "total": 3,
+     "spread": 1,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 2,
+     "total": 2,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The response says the London group 'only got organized in 1662.' The formal society was organized in November 1660 (foll"
+     ]
+    },
+    {
+     "k": 3,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 3
+  },
+  {
+   "id": "wh3_saq1",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 1,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The group that began meeting in London in the 1640s (the so-called 'Invisible College' / 1645 group described by Wallis ",
+      "inaccurate:The Accademia dei Lincei (Rome, founded 1603) and the Accademia del Cimento (Florence, 1657) predate the Royal Society (",
+      "contested:The Académie des sciences (1666) was founded under Colbert with a different, state-funded and salaried model; characteri"
+     ]
+    },
+    {
+     "k": 1,
+     "total": 1,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The 1640s London group (described by Wallis and quoted by Libby) was an informal, private gathering with no royal involv",
+      "inaccurate:The Académie des sciences was founded in 1666 by Louis XIV's minister Colbert as a state institution; its members were s"
+     ]
+    },
+    {
+     "k": 2,
+     "total": 1,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The response claims the London group and the Paris Académie des sciences were 'both royal societies supported by the kin"
+     ]
+    },
+    {
+     "k": 3,
+     "total": 1,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The claim that the London group was 'more religious' and 'mostly made up of people who were all from the same church,' w"
+     ]
+    }
+   ],
+   "chosen": null
+  }
+ ]
+}

@@ -1,0 +1,70 @@
+{
+ "version": "v1-englang-r19-f2",
+ "run": "englang-r19-f2",
+ "subject": "ap_english_language",
+ "mode": "frq",
+ "capUsd": 5,
+ "hardStopCumulativeUsd": 640,
+ "myTotalCapUsd": 9999,
+ "syncStages": [
+  "frq-gen"
+ ],
+ "stages": [
+  "frq-gen",
+  "frq-samples",
+  "frq-grade",
+  "frq-finalize"
+ ],
+ "frqPlan": [
+  {
+   "id": "fe2",
+   "type": "rhetorical_analysis",
+   "theme": "a county fair judge's address to young exhibitors about honest craftsmanship and graceful losing",
+   "seed": 19411
+  },
+  {
+   "id": "fe1",
+   "type": "synthesis",
+   "theme": "whether cities should uncover buried streams and restore them as public waterways",
+   "seed": 19412
+  }
+ ],
+ "models": {
+  "gen": "claude-fable-5-1",
+  "solvers": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5",
+   "claude-fable-5-1"
+  ],
+  "adversary": "claude-fable-5-1",
+  "judge": "claude-opus-5-5",
+  "review": "claude-sonnet-5-5",
+  "sampleHigh": "claude-opus-5-5",
+  "sampleLow": "claude-sonnet-5-5",
+  "graders": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5",
+   "claude-fable-5-1"
+  ]
+ },
+ "effort": "medium",
+ "genEffort": "low",
+ "gradeEffort": "low",
+ "sampleCands": 1,
+ "minKeyConfidence": 0.8,
+ "corpusExclude": [],
+ "generatorFiles": [
+  "lib/ap-generation/englang-gates.ts",
+  "lib/ap-generation/englang-frq.ts",
+  "lib/ap-generation/englang-plan.ts",
+  "lib/ap-generation/englang-prompts.ts",
+  "lib/ap-generation/english-text-stats.ts",
+  "lib/ap-generation/subjects/englang.ts",
+  "lib/ap-exam/elang-rules.ts",
+  "scripts/ap-generation/englang-pipeline.ts",
+  "scripts/mock-exam-generation/batch-lib.ts"
+ ],
+ "expected": {
+  "hash": "1219c373fcc9"
+ }
+}

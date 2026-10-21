@@ -1,0 +1,81 @@
+{
+ "version": "v1-englang-r19-ext5",
+ "run": "englang-r19-ext5",
+ "subject": "ap_english_language",
+ "mode": "mc",
+ "capUsd": 6,
+ "hardStopCumulativeUsd": 640,
+ "myTotalCapUsd": 9999,
+ "stages": [
+  "gen",
+  "check",
+  "solve",
+  "adv",
+  "judge",
+  "finalize"
+ ],
+ "models": {
+  "gen": "claude-fable-5-1",
+  "solvers": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5",
+   "claude-fable-5-1"
+  ],
+  "adversary": "claude-fable-5-1",
+  "judge": "claude-opus-5-5",
+  "review": "claude-sonnet-5-5",
+  "sampleHigh": "claude-opus-5-5",
+  "sampleLow": "claude-sonnet-5-5",
+  "graders": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5",
+   "claude-fable-5-1"
+  ]
+ },
+ "genModels": {
+  "reading": "claude-fable-5-1",
+  "writing": "claude-opus-5-5"
+ },
+ "effort": "medium",
+ "genEffort": "low",
+ "minKeyConfidence": 0.8,
+ "corpusExclude": [],
+ "generatorFiles": [
+  "lib/ap-generation/englang-gates.ts",
+  "lib/ap-generation/englang-frq.ts",
+  "lib/ap-generation/englang-plan.ts",
+  "lib/ap-generation/englang-prompts.ts",
+  "lib/ap-generation/english-text-stats.ts",
+  "lib/ap-generation/subjects/englang.ts",
+  "lib/ap-exam/elang-rules.ts",
+  "scripts/ap-generation/englang-pipeline.ts",
+  "scripts/mock-exam-generation/batch-lib.ts"
+ ],
+ "_note": "2026-10-20 EL3: need S-W>=4 and one more reading item to reach 45.",
+ "ext": [
+  {
+   "id": "lw42",
+   "base": "englang-r19-ext:ap_english_language-lw42-k0",
+   "newSkills": [
+    "8.A",
+    "8.B",
+    "8.C",
+    "8.A"
+   ],
+   "seed": 19951
+  },
+  {
+   "id": "lr42",
+   "base": "englang-r19-ext:ap_english_language-lr42-k0",
+   "newSkills": [
+    "1.A",
+    "1.B"
+   ],
+   "seed": 19952
+  }
+ ],
+ "extSource": "../sample-2027/englang-r19-ext5-bases.json",
+ "expected": {
+  "hash": "9dacb42e856a"
+ }
+}

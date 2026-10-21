@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { buildPrompt, checkEssayLength, sanitizeEssay, SYSTEM_PROMPT } from "./prompt";
 import { combineRuns, validateGraderOutput, totalOf } from "./schema";
 import { checkCaps, costUsd, limits } from "./costs";
-import { backoffMs, MAX_ATTEMPTS, processEssay, type EssayKey, type EssayStore, type Finish, type Job, type Row } from "./queue";
+import { backoffMs, limitResetAt, MAX_ATTEMPTS, processEssay, type EssayKey, type EssayStore, type Finish, type Job, type Row } from "./queue";
 import { createAnthropicGraderClient, GraderRefusal, type GraderClient, type GraderRequest } from "./client";
 import { parseEssayContext } from "./context";
 import type { Usage } from "./costs";
@@ -112,9 +112,7 @@ describe("pipeline", () => {
   });
   it.each([
     [{ attemptEssays: 3, accountEssaysToday: 0, monthSpendUsd: 0 }, "attempt_cap"],
-    [{ attemptEssays: 0, accountEssaysToday: 6, monthSpendUsd: 0 }, "daily_cap"],
-    [{ attemptEssays: 0, accountEssaysToday: 0, monthSpendUsd: 24.9 }, "monthly_budget"],
-  ])("caps %j -> %s, no model call", async (u, reason) => {
+  ])("terminal cap %j -> %s skipped, no model call", async (u, reason) => {
     const store = new MemStore(); store.usageVal = u; const c = fakeClient(() => good());
     expect(await processEssay({ store, client: c }, job())).toEqual({ status: "skipped", reason });
     expect(c.calls).toBe(0);
@@ -350,5 +348,77 @@ describe("AP English Literature rubric id", () => {
     const q3 = parseEssayContext(toEssayPayload({ parts: [{ label: "A", prompt: "Choose a work." }], lit_frq: { prompt: { task: "Choose a work." }, samples: [{ tier: "high", essay: "E" }] } }), "A");
     expect(q3?.sources).toEqual([]); expect(q3?.anchors).toHaveLength(1);
     expect(toEssayPayload({ lit_frq: { prompt: {} } })).toBeNull();
+  });
+});
+
+describe("temporary caps and missing reference answers (2026-10-21)", () => {
+  it.each([
+    [{ attemptEssays: 0, accountEssaysToday: 6, monthSpendUsd: 0 }, "daily_cap"],
+    [{ attemptEssays: 0, accountEssaysToday: 0, monthSpendUsd: 24.9 }, "monthly_budget"],
+  ] as const)("%j -> %s waits (failed + reset time), spends no attempt, no model call, limits untouched", async (u, reason) => {
+    const store = new MemStore(); store.usageVal = u; const c = fakeClient(() => good());
+    const r = await processEssay({ store, client: c }, job());
+    expect(r).toEqual({ status: "failed", error: reason });
+    const row = store.rows.get("a1|i1|a")!;
+    expect(row.status).toBe("failed"); expect(row.attemptsMade).toBe(0); expect(row.fin!.lastError).toBe(reason);
+    expect(new Date(row.nextRetryAt!).getTime()).toBeGreaterThan(Date.now());
+    expect(c.calls).toBe(0);
+    // 초기화 전에 다시 눌러도 중복 실행 없음
+    expect(await processEssay({ store, client: c }, job())).toMatchObject({ status: "already" });
+    expect(c.calls).toBe(0);
+  });
+  it("reset times are the next UTC midnight / next UTC month start", () => {
+    const d = new Date(Date.UTC(2026, 9, 21, 15, 30));
+    expect(limitResetAt("daily_cap", d).toISOString()).toBe("2026-10-22T00:00:00.000Z");
+    expect(limitResetAt("monthly_budget", d).toISOString()).toBe("2026-11-01T00:00:00.000Z");
+    expect(limitResetAt("monthly_budget", new Date(Date.UTC(2026, 11, 31))).toISOString()).toBe("2027-01-01T00:00:00.000Z");
+  });
+  it("after the reset the same row is processed once through the existing path and then never again", async () => {
+    const store = new MemStore(); store.usageVal = { attemptEssays: 0, accountEssaysToday: 6, monthSpendUsd: 0 }; const c = fakeClient(() => good(1, 4, 1));
+    await processEssay({ store, client: c }, job());
+    store.rows.get("a1|i1|a")!.nextRetryAt = new Date(Date.now() - 1000).toISOString(); // 초기화 시각 경과
+    store.usageVal = { attemptEssays: 0, accountEssaysToday: 0, monthSpendUsd: 0 };
+    expect(await processEssay({ store, client: c }, job())).toMatchObject({ status: "done" });
+    expect(c.calls).toBe(2);
+    expect(await processEssay({ store, client: c }, job())).toMatchObject({ status: "already" }); // 완료 답안은 재채점 금지
+    expect(c.calls).toBe(2);
+  });
+  it("still capped after the reset waits again without consuming attempts; model-call failures keep their own cap", async () => {
+    const store = new MemStore(); store.usageVal = { attemptEssays: 0, accountEssaysToday: 6, monthSpendUsd: 0 }; const c = fakeClient(() => good());
+    for (let i = 0; i < 4; i++) {
+      await processEssay({ store, client: c }, job());
+      store.rows.get("a1|i1|a")!.nextRetryAt = new Date(Date.now() - 1000).toISOString();
+    }
+    expect(store.rows.get("a1|i1|a")!.attemptsMade).toBe(0);
+    expect(c.calls).toBe(0);
+  });
+  it("blank answers and completed answers are never re-scored", async () => {
+    const store = new MemStore(); const c = fakeClient(() => good());
+    expect(await processEssay({ store, client: c }, job({ essay: "" }))).toEqual({ status: "skipped", reason: "empty" });
+    expect(await processEssay({ store, client: c }, job({ essay: "" }))).toMatchObject({ status: "already" });
+    expect(c.calls).toBe(0);
+  });
+  it("fewer than 3 reference answers: explicit unavailable state with reason, no model call, no attempt spent", async () => {
+    const store = new MemStore(); const c = fakeClient(() => good());
+    const r = await processEssay({ store, client: c }, job({ anchors: job().anchors.slice(0, 2) }));
+    expect(r).toEqual({ status: "failed", error: "no_reference_answers" });
+    const row = store.rows.get("a1|i1|a")!;
+    expect(row.fin!.lastError).toBe("no_reference_answers"); expect(row.attemptsMade).toBe(0); expect(c.calls).toBe(0);
+  });
+  it("once reference answers are added only this answer is re-processed; duplicates are blocked", async () => {
+    const store = new MemStore(); const c = fakeClient(() => good(1, 4, 1));
+    await processEssay({ store, client: c }, job({ anchors: [] }));
+    await new Promise((r) => setTimeout(r, 5));
+    const [first, second] = await Promise.all([processEssay({ store, client: c }, job()), processEssay({ store, client: c }, job())]);
+    expect([first.status, second.status].sort()).toEqual(["already", "done"]);
+    expect(c.calls).toBe(2); // 두 번 채점(한 답안 1건)만
+  });
+});
+
+describe("비용 한도", () => {
+  it("최대 4호출(2회 채점 x 형식 오류 재호출)을 한도 검사가 가정한다", () => {
+    const l = limits(); const worst4 = 4 * costUsd(l.maxInputTokensPerEssay, l.maxOutputTokensPerEssay, l);
+    expect(checkCaps({ attemptEssays: 0, accountEssaysToday: 0, monthSpendUsd: l.monthlyBudgetUsd - worst4 + 0.001 }, 1000, l)).toEqual({ ok: false, reason: "monthly_budget" });
+    expect(checkCaps({ attemptEssays: 0, accountEssaysToday: 0, monthSpendUsd: l.monthlyBudgetUsd - worst4 - 0.001 }, 1000, l)).toEqual({ ok: true });
   });
 });

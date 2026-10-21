@@ -1,0 +1,208 @@
+{
+ "runs": [
+  "ush-r19-f"
+ ],
+ "rows": 5,
+ "passed": 3,
+ "rejected": 2,
+ "mcSets": {
+  "rows": 0,
+  "passed": 0
+ },
+ "frqSets": {
+  "rows": 5,
+  "passed": 3
+ },
+ "mcItems": {
+  "generated": 0,
+  "deterministicPass": 0,
+  "solvers3of3": 0,
+  "finalPass": 0,
+  "firstPassRate": 0
+ },
+ "failureReasons": {},
+ "keyConfidence": {
+  "items": 0,
+  "high": 0,
+  "medium": 0,
+  "mean": 0
+ },
+ "categoriesPassed": {},
+ "skillsPassed": {},
+ "renderTypesPassed": {
+  "none": 3
+ },
+ "frqAudit": [
+  {
+   "id": "saq1_r1",
+   "tier": "high",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "saq1_r1",
+   "tier": "mid",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "saq1_r1",
+   "tier": "low",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "saq2_r1",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "saq2_r1",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "saq2_r1",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "saq3_r1",
+   "tier": "high",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "saq3_r1",
+   "tier": "mid",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "saq3_r1",
+   "tier": "low",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "dbq_r1",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 7,
+     "spread": 1,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "dbq_r1",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 4,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "dbq_r1",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "leq_r1",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 6,
+     "spread": 1,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "leq_r1",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 5,
+     "spread": 1,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "leq_r1",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  }
+ ],
+ "costUsd": {
+  "ush-r19-f": {
+   "frq-fact": 0.2314,
+   "frq-fact2": 0.2025,
+   "frq-gen": 0.3347,
+   "frq-grade": 0.1887,
+   "frq-samples": 0.1357
+  }
+ }
+}

@@ -1,0 +1,80 @@
+{
+ "version": "v1-ush-r19-f4",
+ "run": "ush-r19-f4",
+ "subject": "ap_us_history",
+ "mode": "frq",
+ "capUsd": 6,
+ "hardStopCumulativeUsd": 640,
+ "myTotalCapUsd": 9999,
+ "stages": [
+  "frq-gen",
+  "frq-fact",
+  "frq-samples",
+  "frq-grade",
+  "frq-fact2",
+  "frq-finalize"
+ ],
+ "models": {
+  "gen": "claude-opus-5-5",
+  "solvers": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5"
+  ],
+  "panel": "claude-fable-5-1",
+  "sampleHigh": "claude-opus-5-5",
+  "sampleLow": "claude-sonnet-5-5",
+  "graders": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5"
+  ],
+  "fact": "claude-fable-5-1"
+ },
+ "effort": "low",
+ "genEffort": "medium",
+ "generatorFiles": [
+  "scripts/ap-generation/ushistory-pipeline.ts",
+  "lib/ap-generation/ushistory-prompts.ts",
+  "lib/ap-generation/ushistory-plan.ts",
+  "lib/ap-generation/ushistory-gates.ts",
+  "lib/ap-generation/ushistory-frq.ts",
+  "lib/ap-generation/subjects/ushistory.ts",
+  "lib/ap-exam/ush-rules.ts"
+ ],
+ "expected": {
+  "hash": "e7f62ccb43cf"
+ },
+ "frqPlan": [
+  {
+   "id": "saq1_r4",
+   "template": "saq1",
+   "period": 9,
+   "focus": "Two fictional historians interpret why the population and political influence of the South and Southwest grew after 1970: one emphasizes air conditioning, defense spending and lower taxes, the other emphasizes retirement migration and the decline of older industrial cities. Keep every rubric example and sample answer to well-established facts about air conditioning, military bases, federal highway and housing spending and state tax policy; do not mention Medicare or Social Security. Extra constraints: Excerpt A and Excerpt B must not name any specific city; describe the climate only as 'long, hot summers'. In the rubric, Part B must ask for evidence that neither excerpt mentions (so air conditioning, military bases and tax policy count only if the excerpt that argues otherwise did not name them), and every sample answer for Part B must use a piece of evidence outside both excerpts, such as the federal Interstate Highway System (1956) or the growth of suburban housing financed by federal mortgage insurance.",
+   "seed": 19840
+  },
+  {
+   "id": "saq3_r4",
+   "template": "saq3",
+   "period": 5,
+   "focus": "Non-text source: a table (illustrative composite, labeled as such) of the number of miles of railroad track in operation in the North and in the South in 1850 and 1860, consistent with the Northern advantage in railroads before the Civil War; keep every acceptable answer to simple comparisons stated directly in the table. Extra constraints: the stated period of the question is 1850-1860 only; the common pitfalls list must not mention any event after 1860 (no strikes, no Reconstruction-era events); every acceptable answer is a direct comparison or calculation from the table.",
+   "seed": 19841
+  }
+ ],
+ "sampleCands": 5,
+ "resample": {
+  "saq1_r3": [
+   "high:4",
+   "mid:4",
+   "low:4"
+  ],
+  "saq3_r3": [
+   "high:4",
+   "mid:4",
+   "low:4"
+  ]
+ },
+ "gate": "ush-r19-f4-2026-10-21",
+ "corpusExclude": [
+  "ush-r19-f2",
+  "ush-r19-f3"
+ ]
+}

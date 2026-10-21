@@ -1,0 +1,116 @@
+{
+ "runs": [
+  "englang-r19-f2"
+ ],
+ "rows": 2,
+ "passed": 1,
+ "rejected": 1,
+ "mcSets": {
+  "rows": 0,
+  "passed": 0
+ },
+ "frqSets": {
+  "rows": 2,
+  "passed": 1
+ },
+ "mcItems": {
+  "generated": 0,
+  "deterministicPass": 0,
+  "solvers3of3": 0,
+  "finalPass": 0,
+  "firstPassRate": 0
+ },
+ "failureReasons": {},
+ "keyConfidence": {
+  "items": 0,
+  "high": 0,
+  "medium": 0,
+  "mean": 0
+ },
+ "categoriesPassed": {},
+ "skillsPassed": {},
+ "renderTypesPassed": {
+  "stat_chart": 1
+ },
+ "frqAudit": [
+  {
+   "id": "fe2",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 6,
+     "spread": 0
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "fe2",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 4,
+     "spread": 0
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "fe2",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 2,
+     "spread": 1
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "fe1",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 6,
+     "spread": 0
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "fe1",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 4,
+     "spread": 1
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "fe1",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 2,
+     "spread": 0
+    }
+   ],
+   "chosen": 0
+  }
+ ],
+ "costUsd": {
+  "englang-r19-f2": {
+   "frq-gen": 1.4332,
+   "frq-grade": 0.5511,
+   "frq-samples": 0.1464
+  }
+ }
+}

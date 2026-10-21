@@ -1,0 +1,67 @@
+diff --git a/app/api/webhooks/stripe/route.ts b/app/api/webhooks/stripe/route.ts
+index 96a366f42..923863a6f 100644
+--- a/app/api/webhooks/stripe/route.ts
++++ b/app/api/webhooks/stripe/route.ts
+@@ -173,53 +173,16 @@ export async function POST(request: Request) {
+       return NextResponse.json({ error: "missing metadata" }, { status: 400 });
+     }
+ 
+-    const { data: pkg } = await admin
+-      .from("credit_packages")
+-      .select("credit_count, price_usd")
+-      .eq("id", packageId)
+-      .single();
+-    if (!pkg) {
+-      await markProcessed();
+-      return NextResponse.json({ ok: true, skipped: "unknown package" });
+-    }
+-
+-    const { data: purchase, error: purchaseError } = await admin
+-      .from("credit_purchases")
+-      .insert({
+-        student_id: studentId,
+-        package_id: packageId,
+-        stripe_payment_intent_id: session.payment_intent,
+-        amount_usd: pkg.price_usd,
+-        credits_purchased: pkg.credit_count,
+-      })
+-      .select("id")
+-      .single();
+-    if (purchaseError) {
+-      return NextResponse.json({ error: purchaseError.message }, { status: 500 });
+-    }
+-
+-    const { error: txError } = await admin.from("credit_transactions").insert({
+-      student_id: studentId,
+-      type: "purchase",
+-      amount: pkg.credit_count,
+-      related_purchase_id: purchase.id,
+-      reason: "Stripe 결제",
++    // 호환성 수정안: 세 번의 개별 쓰기 대신, 신 스키마의 grant_legacy_credit_purchase RPC(단일 트랜잭션,
++    // checkout session 당 1회 지급, 20261030100000)를 호출한다. 실패하면 500 -> Stripe 재시도로 안전하게 복구.
++    const { error: grantError } = await admin.rpc("grant_legacy_credit_purchase", {
++      p_session_id: session.id,
++      p_student_id: studentId,
++      p_package_id: packageId,
++      p_payment_intent: session.payment_intent,
+     });
+-    if (txError) {
+-      return NextResponse.json({ error: txError.message }, { status: 500 });
+-    }
+-
+-    const { data: student } = await admin
+-      .from("students")
+-      .select("credit_balance")
+-      .eq("id", studentId)
+-      .single();
+-    const { error: balanceError } = await admin
+-      .from("students")
+-      .update({ credit_balance: (student?.credit_balance ?? 0) + pkg.credit_count })
+-      .eq("id", studentId);
+-    if (balanceError) {
+-      return NextResponse.json({ error: balanceError.message }, { status: 500 });
++    if (grantError) {
++      return NextResponse.json({ error: grantError.message }, { status: 500 });
+     }
+ 
+     await markProcessed();

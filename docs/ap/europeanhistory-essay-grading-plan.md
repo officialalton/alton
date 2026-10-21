@@ -1,5 +1,13 @@
 # AP European History 에세이 AI 채점 — 준비·보정 계획 (2026-10-20)
 
+> **2026-10-21 최신 지시·상태(아래 원계획보다 우선):** 교사 채점·섭외·사람 비용은 제외하고 AI만으로 개선한다. 공식 샘플 사용 허락은 자체 샘플 기능 검증의 선행 관문이 아니며 문의는 초안만, 발송 안 함. 아래 §3~8의 공식 샘플 실행·선택지 승인 대기는 이전 계획이다.
+>
+> [자체 검증 결과](europeanhistory-essay-selfcheck-2026-10-21.md): $3.70, 사전 기준 미달, EURO_ESSAY_GRADING_VALIDATED=false 유지. 기준 점수가 작성 에이전트와 독립적이지 않아 공식/실제 학생 정확도를 입증하지 못한다. 기존 평가 표본은 이제 회귀용이고 수정 후 새 미사용 표본이 필요하다.
+>
+> 다음: 독립 AI 판정·근거 비교·이견만 추가 재판정, LEQ 요소별 판단 개선, 일괄 +1 보정 금지. 기존 총상한 $12 안에서 **추가 $2 이내 한 차례** 수정 후 검증 지시가 있으며 완료 증거는 이번에 확인되지 않았다. 모든 재요청·수선·진행 중 호출 포함, 미달이면 자동 반복 금지. 교사 승인·공식 샘플 허락을 운영 활성화 필수 조건으로 새로 추가하지 않지만, 자체 검증 미달 상태를 안내 문구만으로 공개하지도 않는다. 활성화는 결과 보고 후 별도 판단, AP1~5와 별개다.
+>
+> 루브릭을 ALTON 말로 바꾸는 것만으로 권리 문제가 해결됐다고 단정하지 않는다. 공식 자료를 복제·모델 입력하지 않는 자체 검증과 문서 이용 판단을 분리한다. 전반 상태는 [CURRENT](../CURRENT.md).
+
 상태: **코드 준비 완료, 꺼짐.** 유료 호출은 하지 않았다. 켜기 전 보정(§3–5)과 오너 승인(§7)이 필요하다. 오너 확정 정책(2026-10-14): AI 채점은 "참고용 추정치(공식 점수 아님)"로만 제공.
 
 ## 1. 공식 루브릭 확인 결과
@@ -94,5 +102,33 @@
 | D. 위 B+C 병행 + 허락 회신 후 A | $6–7 + 허락 시 추가(합계 $12 이내) | 가장 신중하나 일정 길어짐 |
 권장: D(B로 서열·주입·편향 먼저 점검, 정확도 보증은 허락 확보 후).
 
-### 8.2 허락 문의 초안 (College Board Copyright and Trademark Permission Request)
-"Alton Education LLC is an online SAT/AP tutoring provider. We request written permission to use publicly posted AP European History sample student responses and their official scores (2023-2025, ~72 samples) solely as internal evaluation inputs to measure the accuracy of our automated practice-essay feedback tool. We will not publish, redistribute, or show the responses to users or store full text in our repositories; only scores and aggregate statistics would be retained. Our tool states that results are estimates, not official AP scores. Please advise whether this use is permitted and under what conditions."
+### 8.2 허락 문의 초안 (College Board Copyright and Trademark Permission Request) — 2026-10-21 보완, **발송 금지(오너 승인 전)**
+일반 교육 목적 허락이 아니라 아래 여섯 항목을 모두 명시해 요청한다.
+| 항목 | 초안에 명시할 내용 |
+|---|---|
+| 대상 자료 | AP European History 의 공개 Sample Student Responses 와 해당 공식 점수(2023–2025, 최대 약 72건), 필요 시 공식 Scoring Guidelines 의 점수 설명. 자료별 URL·연도·세트를 표로 첨부. |
+| 이용 목적 | 영리 사업체(Alton Education LLC, 유료 SAT/AP 비대면 수업)가 자사 AI 연습 채점 기능의 정확도를 **내부 평가**하는 용도. 시험 대비 상품의 품질 관리 목적임을 숨기지 않는다. |
+| 외부 AI 제공자 전송 | **전송한다.** 자료 본문이 평가 호출 때 외부 AI 서비스 제공자(Anthropic API)로 전송된다. 제공자 이름, 전송 시점(평가 실행 중 한정), 제공자의 보관·학습 정책(상용 API 약관 기준 확인 후 기재)을 적는다. 전송을 원치 않으면 허락 범위에서 제외하라는 회신도 요청. |
+| 저장·보관 | 저장소(git)·학생 화면·로그에 본문을 남기지 않는다. 평가 중에만 접근 제한된 비공개 작업 폴더에 두고 평가 종료 후 삭제. 영구 보관은 문항 ID·샘플 번호·공식 점수·AI 점수·집계 통계뿐. 삭제 시점과 확인 방식을 적는다. |
+| 학생 화면 공개 여부 | 공개하지 않는다. 학생·학부모·교사 화면, 프롬프트 앵커, 마케팅 자료에 표시·인용하지 않는다(채점 결과는 AI 추정치이며 College Board 자료 본문을 포함하지 않는다). |
+| 모델 학습 사용 여부 | 모델 학습·미세조정·평가 데이터셋 외부 배포에 사용하지 않는다. 제공자가 이 자료를 학습에 쓰지 않는 계약 조건인지 확인해 기재(확인 전에는 "확인 중"으로 표기하고 오너가 판단). |
+추가로 물을 것: (1) 상업적 교육 서비스 대상 별도 라이선스 경로가 있는지, (2) 허락 조건(기간·범위·보고)이 있는지, (3) 학생 약관의 "test prep or other business" 비영리 조항과 이 허락의 관계.
+영문 본문 초안:
+"Alton Education LLC is a for-profit online SAT/AP tutoring company. We request written permission to use the following publicly posted College Board materials: AP European History sample student responses and their official scores for 2023-2025 (up to about 72 responses; list attached by URL). The use is limited to internal evaluation of our own automated practice-essay scoring feature, which tells students its results are estimates and not official AP scores. To run that evaluation, the response text would be transmitted to a third-party AI service provider (Anthropic, via its commercial API) for the duration of each evaluation run; we will confirm and state the provider's retention and no-training terms before any use. We would not commit the text to any code repository, show it to students, parents, or teachers, use it as an example or anchor in prompts, publish it, or use it to train or fine-tune any model. The text would be kept only in access-restricted storage during the evaluation and deleted afterward; we would retain only response identifiers, official scores, our scores, and aggregate statistics. Please tell us whether this use is permitted, whether a separate commercial license applies, and any conditions."
+참고: 이 허락과 무관하게 2026-10-21 자체 샘플 검증(`docs/ap/europeanhistory-essay-selfcheck-2026-10-21.md`)은 공식 자료 없이 수행했고(호출 비용 $3.70), 결과는 사전 등록 기준 미달(과소 채점 중심)이다. 안전 방향 항목은 양호. 켜기 상수는 false 유지.
+
+## 9. 운영 채점 경로 설계 (2026-10-21, 코드 `lib/essay-grading/checklist.ts`·`review-policy.ts`, 꺼짐·미연결)
+- 기본 **1회 채점**(체크리스트 구조: 요소별 사실 판정 + 인용, 점수는 코드가 합산). 요소는 서로의 결함을 이유로 감점하지 않는다.
+- 추가 검토는 다음 중 하나일 때만: 형식 오류, 합계 불일치, 점수>0 인데 근거 누락, 불확실 요소, 조작 의심(채점 지시문·위조 태그 패턴), 두 결과 불일치. 추가 호출은 에세이당 최대 2회, 에세이당 비용 상한 $0.12.
+- 해결되지 않으면 임의 점수를 확정하지 않고 **"Scoring under review"** 로 두고 점수를 저장하지 않는다(미채점을 0점으로 처리하지 않음). 답안·저장·복습은 그대로.
+- 표시(활성화 시): 라벨 "AI-generated practice score", 요소별 점수·인용 한 구절·근거, 한계 문구(selfcheck §7.1 재사용), "Report a scoring problem" 버튼(학생이 요소를 지정해 신고 → 관리자 큐; 신고 저장소는 활성화 전에 별도 설계), under_review 상태 안내문. 표시 코드는 아직 만들지 않았다.
+
+## 10. 루브릭 문구의 작성 근거와 사용 자료 (사실 정리 — 허용/금지 판단 아님)
+- `euro-v1` 요소 안내문: `ushistory-v1`(2026-10-14, 커밋 dec566610) 안내문을 그대로 재사용하고 과목명·시대 규칙 한 줄만 바꿨다(커밋 275b4ed01, 2026-10-20). `ushistory-v1` 작성 때 쓴 자료는 `docs/ap/ushistory-facts.md` 에 공개 CED PDF 로컬 추출 대조로 기록돼 있으나, **요소 안내문 작성 시 어떤 공식 채점 문서가 눈앞에 있었는지는 기록에 없다**(확인 불가).
+- 2026-10-20 문서(§1)는 2025 Scoring Guidelines Set 1 PDF 를 직접 열람했다고 기록. 그 결과는 배점 구조(행·점수)이며, 이번 세션은 어떤 공식 문서도 열지 않았다.
+- 이번에 새로 쓴 `checklist.ts` 문구는 이 세션이 작성했고 공식 문서를 열지 않았다. 다만 임계값(문서 3·4개, 출처 2개, 외부 증거 1개, 증거 2개)은 위 공개 배점 구조와 같은 숫자이고, 모델이 공식 루브릭을 학습으로 알고 있을 가능성을 배제하지 못한다.
+- 따라서 "ALTON 말로 바꿨으므로 문제없다"로 처리하지 않으며, 공식 기준과 유사할 수 있다는 추정만으로 금지·허용을 단정하지도 않는다. 오너/법무의 판단 사항으로 남긴다. College Board 허락 문의(§8.2)는 초안만 작성했고 **발송하지 않았다**.
+
+## 11. 켜기 판단 자료 요약 (2026-10-21)
+- 근거 문서: `europeanhistory-essay-analysis-2026-10-21.md`(원인), `europeanhistory-essay-recheck-2026-10-21.md`(새 표본 재검증). 사전 등록 12개 기준 충족, 단 합의 응답 9개·과대 +1 2건·이전 로직과의 같은 표본 비교 없음·공식 정확성 미확인.
+- 학생 안내 문구: selfcheck §7.1 재사용(위 한계를 담은 문구). 켜기·연결은 오너 결정.
