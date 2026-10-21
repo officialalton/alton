@@ -35,7 +35,7 @@ export const AP_LAYOUTS: Record<string, ApSection[]> = {
   ap_us_history: [s("ap_mc", "mc", "Section I, Part A: Multiple Choice", 55, 55, "na", 4), s("ap_saq", "frq", "Section I, Part B: Short Answer", 40, 3, "na"), s("ap_frq", "frq", "Section II: Document-Based Question and Long Essay", 100, 2, "na")],
   ap_psychology: [s("ap_mc", "mc", "Section I: Multiple Choice", 90, 75, "na", 4), s("ap_frq", "frq", "Section II: Free Response (Article Analysis + Evidence-Based)", 70, 2, "na")],
   // ── 2026-10-20 추가 10과목(출처·검증 수준: data/ap/curriculum-2027/<code>.json designNotes, docs/ap/new-subjects-plan-2026-10-20.md) ──
-  // Physics 2 · Physics C: E&M — CED(Fall 2026 판) Exam Overview: MC 42 / 85분, FRQ 4(MR 10·TBR 12·EDA 10·QQT 8점) / 95분, 계산기 두 섹션 허용. Physics C: Mechanics 는 CED 전문을 읽지 못해 동일 형식을 인용(VERIFY).
+  // Physics 2 · Physics C: E&M — CED(Fall 2026 판) Exam Overview: MC 42 / 85분, FRQ 4(MR 10·TBR 12·EDA 10·QQT 8점) / 95분, 계산기 두 섹션 허용. Physics C: Mechanics 는 FRQ 10/12/10/8점이 오너 확인(2026-10-20, 공식 자료 확인 결과 전달; 원문 페이지 번호는 미기재)으로 확정됐다. 문항 수·시간(42/85, 4/95)은 AP Central 시험 페이지·AP Students 평가 페이지 직접 확인(docs/ap/physics-c-mechanics-groundwork.md §1).
   ap_physics_2: PHYS_42,
   ap_physics_c_mechanics: PHYS_42,
   ap_physics_c_electricity_and_magnetism: PHYS_42,
@@ -94,7 +94,7 @@ export const AP_NEW_SUBJECTS_PUBLIC: readonly string[] = ["ap_physics_c_mechanic
 export const AP_PENDING_PUBLIC_SUBJECTS: readonly string[] = AP_NEW_SUBJECTS.filter((c) => !AP_NEW_SUBJECTS_PUBLIC.includes(c));
 export const isApPublicSubject = (code: string) => !AP_PENDING_PUBLIC_SUBJECTS.includes(code);
 
-/** 신규 10과목 FRQ(서술형) 유형 — 공식 CED 의 문항 유형 이름·배점. points=null 은 이 조사에서 공식 값을 확인하지 못한 항목이다(지어내지 않는다). */
+/** 신규 10과목 FRQ(서술형) 유형 — 공식 CED 의 문항 유형 이름·배점. points=null 은 공식 값을 확인하지 못한 항목이다(지어내지 않는다). Precalculus·Physics C: Mechanics·Physics 2·E&M 값은 각각 아래 주석의 근거를 따른다. */
 export type ApFrqType = { key: string; label: string; points: number | null };
 const PHYS_FRQ = (mr: number | null, tbr: number | null, eda: number | null, qqt: number | null): ApFrqType[] => [
   { key: "mr", label: "Mathematical Routines", points: mr }, { key: "tbr", label: "Translation Between Representations", points: tbr },
@@ -103,7 +103,8 @@ const PHYS_FRQ = (mr: number | null, tbr: number | null, eda: number | null, qqt
 export const AP_NEW_SUBJECT_FRQ_TYPES: Record<string, ApFrqType[]> = {
   ap_physics_2: PHYS_FRQ(10, 12, 10, 8),
   ap_physics_c_electricity_and_magnetism: PHYS_FRQ(10, 12, 10, 8),
-  ap_physics_c_mechanics: PHYS_FRQ(null, null, null, null),
+  // 오너 확인(2026-10-20): 10/12/10/8점, MC/FRQ 각 50%. 원문 페이지 번호는 미기재(data/ap/curriculum-2027/ap_physics_c_mechanics.json designNotes 참조).
+  ap_physics_c_mechanics: PHYS_FRQ(10, 12, 10, 8),
   ap_environmental_science: [
     { key: "design", label: "Design an investigation", points: null }, { key: "data", label: "Analyze and interpret quantitative data", points: null },
     { key: "calc", label: "Analyze an environmental problem using calculations", points: null },
@@ -129,10 +130,19 @@ export const AP_NEW_SUBJECT_FRQ_TYPES: Record<string, ApFrqType[]> = {
     { key: "saq_nontext", label: "Short answer: primary or secondary non-text source", points: 3 },
     { key: "dbq", label: "Document-Based Question", points: 7 }, { key: "leq", label: "Long Essay Question", points: 6 },
   ],
+  // 오너 확인(2026-10-20): 4문항 각 6점(분석적 채점·동일 비중), MC 62.5%·FRQ 37.5%. CED(effective Fall 2026) 시험 개요 값이며 data/ap/curriculum-2027/ap_precalculus.json designNotes 에 같은 값이 기록돼 있다. 원문 페이지 번호는 미기재.
   ap_precalculus: [
     { key: "frq1", label: "Function Concepts", points: 6 }, { key: "frq2", label: "Modeling a Non-Periodic Context", points: 6 },
     { key: "frq3", label: "Modeling a Periodic Context", points: 6 }, { key: "frq4", label: "Symbolic Manipulations", points: 6 },
   ],
+};
+
+/** 공식 섹션 비중(%, 2027 시험). 점수 환산 코드는 아직 없다(AP 1~5 미표시) — 환산을 만들 때 이 값을 단일 출처로 쓴다.
+ *  Precalculus: MC 62.5(파트 A 43.75 + 파트 B 18.75) · FRQ 37.5 (AP Central 시험 페이지 값, docs/ap/precalculus-groundwork.md §1). 파트 A/B 비중은 문항 수 비례(29:13)가 아니라 7:3 이다.
+ *  Physics C: Mechanics: MC 50 · FRQ 50 (오너 확인 2026-10-20, AP Central 페이지 값). */
+export const AP_SECTION_WEIGHTS_PCT: Record<string, { mc: number; frq: number; parts?: Record<string, number> }> = {
+  ap_precalculus: { mc: 62.5, frq: 37.5, parts: { ap_mc_a: 43.75, ap_mc_b: 18.75 } },
+  ap_physics_c_mechanics: { mc: 50, frq: 50 },
 };
 
 /** 라벨이 요구하는 섹션(조립이 채워야 할 섹션). */
