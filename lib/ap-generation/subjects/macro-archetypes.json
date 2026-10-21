@@ -731,6 +731,23 @@
   "bc": false
  },
  {
+  "id": "ma_deficit_path_debt",
+  "topic": "5.4",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options confuse the flow of the deficit with the stock of the debt"
+  ],
+  "misconceptions": [
+   "Any positive deficit adds to the debt.",
+   "The decline in the deficit does not repay existing debt.",
+   "A smaller deficit still adds new borrowing, so the debt does not fall.",
+   "The debt grows by this year's deficit, which is smaller than last year's."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_deficit_vs_debt",
   "topic": "5.4",
   "skill": "1.B",
@@ -795,6 +812,23 @@
    "Reports the entire deposit, ignoring the required reserves.",
    "Reports the amount the bank must hold as required reserves.",
    "Divides the deposit by (1 - required reserve ratio)."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_disinflation_cost",
+  "topic": "5.2",
+  "skill": "1.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options reverse the direction of the trade-off or confuse the short-run and long-run curves"
+  ],
+  "misconceptions": [
+   "A rise in costs does not lower unemployment at each inflation rate.",
+   "The short-run trade-off still exists on the new, higher curve.",
+   "An upward shift raises, not lowers, inflation at each unemployment rate.",
+   "A temporary supply shock moves the short-run curve, not the long-run curve."
   ],
   "bc": false
  },
@@ -1530,6 +1564,23 @@
   "bc": false
  },
  {
+  "id": "ma_growth_capital_or_human",
+  "topic": "5.6",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options misclassify the source of productivity growth"
+  ],
+  "misconceptions": [
+   "The machines are the same, so the gain comes from worker skills.",
+   "The number of workers is unchanged, only their skills.",
+   "Physical capital is the stock of machines and structures, which has not changed for the firm.",
+   "Training does not reduce natural resources, and the effect would not raise growth."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_growth_graph",
   "topic": "5.6",
   "skill": "3.A",
@@ -1594,6 +1645,23 @@
    "Price controls distort production and can reduce output.",
    "Money growth raises prices but not potential output.",
    "A higher minimum wage does not raise the economy's productive capacity."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_growth_sacrifice_now",
+  "topic": "5.7",
+  "skill": "1.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options reverse the timing of the cost and benefit"
+  ],
+  "misconceptions": [
+   "Greater productivity raises potential output and living standards over time.",
+   "Changing the mix of spending changes both what is available now and later.",
+   "The payoff from education and research arrives mainly in the future.",
+   "Research and education raise potential output rather than lowering growth."
   ],
   "bc": false
  },
@@ -2210,6 +2278,23 @@
   "bc": false
  },
  {
+  "id": "ma_hyperinflation_money_printing",
+  "topic": "5.3",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options credit money growth with raising real output or ignore the ratio to output"
+  ],
+  "misconceptions": [
+   "A stable money-to-output ratio does not produce a falling price level.",
+   "Money growth matched to output does not stop real growth.",
+   "Money growth matched to output growth does not raise the price level.",
+   "The nominal interest rate does not rise just because money grows with output."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_income_approach",
   "topic": "2.1",
   "skill": "1.C",
@@ -2363,6 +2448,23 @@
   "bc": false
  },
  {
+  "id": "ma_lf_deficit_regime",
+  "topic": "4.7",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options treat government borrowing as supply or reverse the crowding-out effect"
+  ],
+  "misconceptions": [
+   "A lower real rate raises the quantity of funds firms want to borrow for investment.",
+   "A smaller government claim on funds frees funds for private borrowers.",
+   "Reduced government borrowing lowers demand for funds, so supply does not fall.",
+   "Lower demand for funds leads to a lower, not higher, real interest rate."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_lf_events",
   "topic": "4.7",
   "skill": "3.A",
@@ -2427,6 +2529,57 @@
    "Says investment spending would increase, but it would decrease. With a higher real interest rate, firms borrow and invest less, so investment falls.",
    "Says the real interest rate would decrease, but it would increase. The supply of loanable funds shifts left, so the real interest rate rises.",
    "Says investment spending would not change, but it would decrease. With a higher real interest rate, firms borrow and invest less, so investment falls."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_lf_profit_outlook",
+  "topic": "4.7",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options swap the curve that shifts or reverse the rate effect"
+  ],
+  "misconceptions": [
+   "A leftward demand shift lowers, not raises, the equilibrium real interest rate.",
+   "Firms want to borrow less, so demand does not increase.",
+   "Ending a credit for borrowers changes the willingness to borrow, which is demand, not the supply of funds.",
+   "A change in desired borrowing at every rate shifts the demand curve and changes the rate."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_lf_thrift_shock",
+  "topic": "4.7",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options swap the curve that shifts or reverse the rate and investment effects"
+  ],
+  "misconceptions": [
+   "A leftward supply shift raises, not lowers, the equilibrium real interest rate.",
+   "Withdrawing funds reduces the amount offered at each rate, so supply does not rise.",
+   "Foreign lenders are suppliers of funds, so their withdrawal changes supply rather than demand.",
+   "Funds supplied by foreign savers are part of the supply of loanable funds."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_lf_two_shifts_rate_qty",
+  "topic": "4.7",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options claim the ambiguous variable is determinate or reverse a determinate effect"
+  ],
+  "misconceptions": [
+   "Both a decrease in supply and an increase in demand raise the real rate.",
+   "Neither shift lowers the equilibrium real interest rate.",
+   "A leftward supply shift together with a rightward demand shift leaves the quantity, not the rate, ambiguous.",
+   "The two shifts reinforce each other in raising the rate."
   ],
   "bc": false
  },
@@ -2567,6 +2720,23 @@
   "bc": false
  },
  {
+  "id": "ma_lrpc_vertical_reason",
+  "topic": "5.2",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options give the curve a slope, put it at zero unemployment, or fail to shift it with the natural rate"
+  ],
+  "misconceptions": [
+   "The location of the vertical curve is set by the natural rate of unemployment.",
+   "The long-run curve stays vertical at any natural rate.",
+   "A higher natural rate moves the vertical curve to the right.",
+   "The question asks about the long-run curve, which shifts with the natural rate."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_m1_m2",
   "topic": "4.3",
   "skill": "1.B",
@@ -2648,6 +2818,23 @@
    "That describes a different policy approach and is not the reason for a vertical supply curve.",
    "That would make the supply curve upward sloping.",
    "Neither variable makes the money supply vertical."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_money_demand_price_level",
+  "topic": "4.5",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options shift the wrong curve or reverse the nominal rate effect"
+  ],
+  "misconceptions": [
+   "The central bank leaves the money supply unchanged, so supply does not shift.",
+   "A fixed quantity of money does not prevent the price of holding money from changing.",
+   "A leftward money demand shift with fixed supply lowers, not raises, the nominal rate.",
+   "The technology reduces, not raises, the money people need to hold."
   ],
   "bc": false
  },
@@ -2784,6 +2971,23 @@
    "In the long run the real interest rate is set by saving and investment, not the money supply.",
    "In the long run real output is set by resources and technology, not by money.",
    "The scenario holds velocity constant."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_money_supply_open_market",
+  "topic": "4.5",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options reverse the direction of the supply shift or attribute the change to money demand"
+  ],
+  "misconceptions": [
+   "Selling bonds takes reserves out of the banking system, so the money supply does not rise.",
+   "The sale changes the supply of money, not the demand for money.",
+   "With demand unchanged, a leftward supply shift raises the nominal rate.",
+   "An open market sale changes bank reserves and shifts money supply."
   ],
   "bc": false
  },
@@ -3107,6 +3311,23 @@
    "Says the unemployment rate would decrease, but it would increase. Real GDP falls, so the unemployment rate rises along the SRPC.",
    "Says the inflation rate would increase, but it would decrease. Aggregate demand shifts left, so the economy moves down along the SRPC and the inflation rate falls.",
    "Says the inflation rate would not change, but it would decrease. Aggregate demand shifts left, so the economy moves down along the SRPC and the inflation rate falls."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_phillips_move_vs_shift",
+  "topic": "5.2",
+  "skill": "1.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options confuse movement with a shift or use the long-run curve"
+  ],
+  "misconceptions": [
+   "Higher expected inflation shifts the curve up, not down.",
+   "A change in inflation expectations does not move the long-run curve.",
+   "A movement along the curve requires a change in unemployment, but unemployment stays at the natural rate.",
+   "Expected inflation is the factor that shifts the short-run curve."
   ],
   "bc": false
  },
@@ -3889,6 +4110,23 @@
    "Both are fiscal policies that change aggregate demand.",
    "Households spend only the MPC share of the extra disposable income.",
    "A tax cut raises disposable income and, with a positive MPC, raises spending."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_trade_barrier_chain",
+  "topic": "6.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed vetted scenarios; wrong options treat net exports as aggregate supply or give a price-level change that contradicts the AD shift"
+  ],
+  "misconceptions": [
+   "A leftward AD shift lowers the price level along SRAS.",
+   "A fall in net exports reduces, not raises, aggregate demand.",
+   "Net exports are a component of aggregate demand, not a determinant of aggregate supply.",
+   "Net exports are part of aggregate expenditure, so a change shifts aggregate demand."
   ],
   "bc": false
  },
