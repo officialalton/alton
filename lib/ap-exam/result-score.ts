@@ -23,7 +23,7 @@ const round1 = (n: number) => Math.round(n * 10) / 10;
 const key = (id: string, label: string) => `${id}:${label}`;
 
 /** 서술형 문항 하나의 상태. aiScoring=false 면 이 응시는 FRQ 점수가 없다(0점 아님). */
-function frqItem(it: MockExamAttemptItem, byPart: Map<string, EssayScoreView>, aiScoring: boolean, scoringActive: boolean, hasHistory: boolean): FrqItemResult {
+function frqItem(it: MockExamAttemptItem, byPart: Map<string, EssayScoreView>, aiScoring: boolean, scoringActive: boolean, submitted: boolean, hasHistory: boolean): FrqItemResult {
   const parts = it.parts ?? [];
   const max = parts.reduce((n, p) => n + (Number.isFinite(p.points) ? p.points : 0), 0);
   const base = { setItemId: it.setItemId, section: it.section as string, max };
@@ -38,7 +38,8 @@ function frqItem(it: MockExamAttemptItem, byPart: Map<string, EssayScoreView>, a
     // 행이 아직 없는데 채점 시작이 꺼져 있으면 "진행 중"이 아니라 "일시 중단"(아무도 시작하지 않는다)
     if (!r) { if (state !== "in_progress") state = scoringActive ? "in_progress" : "paused"; continue; }
     if (r.status === "pending" || r.status === "processing" || r.status === "failed") { state = "in_progress"; continue; }
-    if (r.status === "skipped" && r.lastError === "empty") continue; // 답안 없음 = 진짜 0점(공식 AP 도 빈 답안은 0점)
+    // 제출 확정(graded)된 응시의 빈 답안만 진짜 0점(공식 AP 도 빈 답안은 0점). 제출 전·진행 중 응시의 빈 답안은 0점이 아니라 미정이다.
+    if (r.status === "skipped" && r.lastError === "empty") { if (!submitted) state = "in_progress"; continue; }
     noResponse = false;
     const t = r.scores?.total;
     if (r.status !== "done" || typeof t !== "number" || !Number.isFinite(t)) { if (state !== "in_progress" && state !== "paused") state = "unavailable"; reason = r.lastError ?? r.status; continue; }
@@ -60,6 +61,8 @@ export function summarizeApResult(o: {
   aiScoring: boolean;
   /** 채점 시작 경로가 켜져 있다(플래그). 생략하면 켜진 것으로 본다. */
   scoringActive?: boolean;
+  /** 제출 확정(graded) 여부. 생략하면 확정으로 본다. false 면 빈 답안을 0점으로 보지 않는다. */
+  submitted?: boolean;
 }): ApResultSummary {
   const mc = o.items.filter((i) => i.format === "mc");
   const frqIt = o.items.filter((i) => i.format === "essay");
@@ -68,7 +71,7 @@ export function summarizeApResult(o: {
   const weights = apWeightsFor(o.subject);
   const hasHistory = !!weights?.components.some((c) => c.id === "dbq");
   const byPart = new Map((o.essayScores ?? []).map((r) => [key(r.setItemId, r.partLabel), r]));
-  const items = frqIt.map((i) => frqItem(i, byPart, o.aiScoring, o.scoringActive ?? true, hasHistory));
+  const items = frqIt.map((i) => frqItem(i, byPart, o.aiScoring, o.scoringActive ?? true, o.submitted ?? true, hasHistory));
   const scored = items.filter((i) => i.state === "scored");
   const frqState: ApResultSummary["frq"]["state"] = items.length === 0 ? "none" : !o.aiScoring ? "not_scored" : items.some((i) => i.state === "in_progress") ? "in_progress" : items.some((i) => i.state === "paused") ? "paused" : items.some((i) => i.state === "unavailable") ? "unavailable" : "complete";
   const out: ApResultSummary = {
