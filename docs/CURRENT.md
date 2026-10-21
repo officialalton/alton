@@ -777,3 +777,11 @@
 - English 서술형 AI 채점: `lib/essay-grading/*`(루브릭 englang-v2, 평균 오차 0.33점, 참고용 ±1점), Vercel Preview에 키·플래그 설정 완료. 학생에게 켜기 전 실제 제출 UAT 필요.
 - 새 AP 과목 투입 절차: 커리큘럼 시드 SQL(`scripts/ap-curriculum/seed-sql.ts` → `supabase db query --linked -f`) → 관리자 '배치 전체 적재'(필요 시 건너뜀 허용) → 초안 저장(배정 보고서) → 검토 탭에서 공개. 공개 세트 교체는 '새 버전'(교체안 `data/ap/stock/*swap-plan*.json`).
 - 알려진 한계: 사람 검수 없음(모델 검증), Macro·Psych 난이도 높은 문항 적음, English 샘플 점수 일부 사람 채점 필요, Vercel Function Storage 한도 임박(`docs/vercel-function-size.md` 작업 중).
+
+## AP 결과 화면·예상 등급 준비 현황 (2026-10-21)
+- **예상 AP 등급은 여전히 숨김**(향후 제공 방향, 현재 숨김은 임시). 환산 경계점 값은 18과목 모두 없음(`docs/ap/grade-estimate-audit-2026-10-21.md`).
+- 결과 화면(학생·학부모 읽기 전용·관리자 읽기 전용)은 `lib/ap-exam/result-score.ts` 하나를 쓴다: 미채점 FRQ ≠ 0점, 가중 합산은 풀 구성·전체 채점 완료 때만.
+- **Preview 학생 결과 화면 확인 완료**: English Language 응시 `5b9952b6…`, Calculus AB 응시 `7020773d…`(총괄 확인). English Language 의 빈 응답 2건은 **제출 확정 후 실제 0점**이며 복구 대상이 아니다(정책상 건너뜀 `empty`). 표시된 **가중 합산 6.1/100 은 해당 응시의 계산 검증 결과일 뿐 예상 AP 등급 정확성 검증이 아니다.**
+- **학부모 화면·관리자 AP 결과 화면은 각각 브라우저 확인 전까지 미완료**(코드·단위 테스트 완료; 보호자 연결 계정은 오너 가입 대기).
+- 채점 상태 결함 수정(2026-10-21): 일일·월간 한도 초과는 최종 skipped 가 아니라 "대기"(failed + 한도 초기화 시각 `next_retry_at`, 시도 횟수 미소모, 예산 자동 증액 없음)이며 기존 Retry 경로로 초기화 뒤 한 번만 처리된다. 기준 답안(앵커) 3개 미만은 모델 호출 없이 `no_reference_answers` 이용 불가 상태와 사유를 남기고, 보강 뒤 그 답안만 재처리된다(임시 기준 답안 자동 생성 없음). 완료 답안·제출 확정된 빈 답안은 재채점하지 않는다. 멈춘 응시 집계: `docs/ap/stuck-essay-scoring-report-2026-10-21.md`(전부 테스트 계정, 일괄 재채점 하지 않음).
+- 파일럿: 이용량 구간별 AI 호출 예산(최대 약 $74)은 **미승인 제안**. 사람 2차 채점·유료 인센티브는 범위 제외. European History 추가 검증은 별도 에이전트(예산 중복 없음). `docs/ap/grade-estimate-pilot-plan.md`.

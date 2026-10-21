@@ -74,7 +74,7 @@ FRQ AI 의 보정 수치 출처: `docs/ap/essay-ai-calibration.md`(영어·문�
 - 이 감사 시점에 위 세 조건이 충족된 과목: **없음.** College Board 가 과거 시험의 복합점수 구간을 공개하는지(예: 연례 보고서)와 2027 구조에 적용 가능한지는 이 세션에서 1차 자료로 확인하지 않았다 — 파일럿 0단계의 첫 작업.
 - 우리 시험은 ALTON 자체 생성 문항이다. 난도 보정(문항 응답 자료)이 없으면 다른 시험의 환산표를 적용해도 검증된 것이 아니다.
 - FRQ AI 채점 오차의 합산 영향(100점 만점 복합점수 기준, 가중치에서 계산): 영어 에세이 1점 = 55/18 = **3.1점**, 미국사·세계사 DBQ 1점 = 25/7 = **3.6점**, LEQ 1점 = 15/6 = **2.5점**, SAQ 1점 = 20/9 = **2.2점**. 보정 결과의 에세이당 평균 오차 0.17~0.33점이면 복합점수 0.5~1점이지만, 약한 답안 +2 과대(영어 fb3)·중간 답안 −1 압축 같은 체계적 편향이 있고 표본이 작다. 등급 경계 근처 학생은 AI 오차만으로 등급이 바뀔 수 있어 범위 표시(§구현 계획)가 필요하다.
-- 자료 부족 시 필요한 추가 검증: ① 공식 채점 샘플(과거 시험 공개 답안)로 AI 채점 재보정(유럽사 필수) ② 실제 학생 답안에서 AI 대 교사 채점 비교 ③ 파일럿에서 실제 AP 성적과 대조.
+- 자료 부족 시 필요한 추가 검증: ① 자체 샘플 기준 점수의 개발용/최종 평가용 분리 재측정(유럽사는 별도 진행분) ② 자발적으로 공유된 실제 AP 성적과의 결과 수준 대조(파일럿 B단계). 교사·사람 2차 채점은 범위에서 제외했으며, 따라서 이 감사는 AI 채점이 공식 채점과 같다는 것을 입증하지 않는다.
 
 ## 6. 이번 작업에서 바뀐 것 / 남은 차단 항목
 
@@ -134,6 +134,28 @@ FRQ AI 의 보정 수치 출처: `docs/ap/essay-ai-calibration.md`(영어·문�
 | US History / English Literature | 각 2 | 각 2 | 0 | 0 |
 | **합계** | **79** | | | |
 
+## 9a. 18과목 FRQ 채점 분류
+
+A(AI 채점 지원 4: English Language·Literature·US·World History) / B(코드 있음·검증 미완료 1: European History) / C(채점 미지원 13: Calculus AB·BC, Precalculus, Statistics, Biology, Chemistry, Physics 1, Physics C ×2, Micro, Macro, Psychology, CS A). 상세·채점 종류별 표·등급 제공 순서는 `docs/ap/frq-scoring-roadmap.md` §0.
+
+## 9b. 2026-10-21 Preview 확인에서 발견·수정한 표시 오류
+
+English Language attempt `5b9952b6…`: 점수 행 3건(완료 1·total 2, skipped(empty) 2)이 있는데 화면이 "not scored for this subject"를 표시했다. 원인: 결과 페이지가 점수 행 조회와 `aiScoring` 입력을 **채점 시작 플래그(`AI_ESSAY_GRADING_ENABLED`) AND 과목 지원** 으로 묶었고, Preview 에서 플래그가 꺼져 있어 지원 과목인데도 행을 읽지 않고 "미제공"으로 매핑됐다(`result-score` 입력 매핑 오류). 수정: 과목 지원 여부(점수 읽기·표시)와 플래그(새 채점 시작)를 분리. 지원 과목은 저장된 행을 항상 읽어 점수·근거를 보이고, 빈 답안(skipped:empty)은 실제 0점("No response (0 / 6)"), 그 밖의 skipped 는 사유("Not scored: response too short"), 행이 없고 플래그가 꺼져 있으면 "AI scoring temporarily unavailable", 켜져 있으면 "Scoring in progress". "not scored for this subject"는 진짜 비지원 과목에만 나온다. 가중 합산 문구도 같은 상태 기준(`frq_paused` 추가).
+
 ## 9. 현재 4과목 "보정 완료"의 의미
 
 영어·문학·미국사·세계사의 AI 채점 "보정"은 **ALTON 이 작성한 샘플 에세이에 대한 자체 샘플 기능 검증**이다. **실제 학생 답안에 대한 정확도 검증이 아니며** 공식 채점 샘플·교사 채점과의 비교도 아직 없다. 문서·화면·보고에서 "보정 완료/통과"라고 쓸 때 이 구분을 함께 적는다. 또 같은 샘플이 프롬프트·문구 조정과 측정에 함께 쓰여 개발용/최종 평가용이 분리돼 있지 않다(파일럿 A단계에서 분리).
+
+## 10. English Language 결과 화면 — 채점 상태 5분류와 실제 사유 (2026-10-21)
+
+화면·계산은 학생·학부모·관리자가 모두 `ApExamResultView` → `lib/ap-exam/result-score.ts` 하나를 쓴다. 상태 분리:
+① **지원 여부**: 과목이 AI 채점 지원이면 일부 문항에 점수가 없다는 이유로 "미제공"을 표시하지 않는다. "not scored for this subject"는 비지원 과목에만. 점수 행이 없다고 곧바로 비지원으로 보지 않는다.
+② **대기·진행·완료**: 행 없음(채점 시작 켜짐) / pending·processing / done.
+③ **건너뜀과 사유**: 빈 답안(`empty`)은 아래 ⑤, 그 밖(`too_short`, `too_long`, `attempt_cap`, `daily_cap`, `monthly_budget`, `input_too_large`)은 사유를 문구로("Not scored: response too short") 보이고 합산을 막는다.
+④ **실패·일시 이용 불가**: failed(자동 재시도) = 진행 중으로 표시, dead = "AI estimate not available", 행이 없는데 채점 시작이 꺼져 있으면 "AI scoring temporarily unavailable".
+⑤ **제출 확정된 무응답 0점**: `empty` 건너뜀은 **제출 확정(graded)된 응시에서만** 실제 0점("No response (0 / 6)"). 채점 시작 액션 자체가 `status === "graded"` 응시만 받고, 계산 함수도 `submitted=false` 이면 빈 답안을 0점이 아니라 미정(진행 중)으로 본다(단위 테스트).
+전체 채점 미완료면 확정 가중 합산을 숨기고 완료된 부분(문항별 점수·"N of M answers scored")과 남은 상태를 보인다. 학생용 문구는 전부 영어.
+
+**attempt 5b9952b6… 실제 사유(읽기 전용 SELECT)**: 3행 모두 `englang-v2`. 문항 44bf3d4b… = done(총점 2, 시도 1, 모델 claude-sonnet-5-5). 문항 c09a17b1…, c0cdd469… = skipped, `last_error = empty`, 시도 1, 모델·점수 없음. 두 건은 **정책상 건너뜀(빈 응답)** 이며 처리 실패가 아니다. 자동 복구 대상(failed/재시도)이 아니다.
+**재채점 안전성(코드 확인)**: 저장소 claim 은 `pending` 또는 재시도 시각이 지난 `failed` 행만 잡는다. `done`·`skipped`·`dead` 행은 다시 claim 되지 않으므로(`already`) 완료 문항은 재채점되지 않고 재시도 경로를 눌러도 멱등이다. 행 키는 (attempt, 문항, 파트, 루브릭) upsert.
+**남은 위험(수정하지 않음, 보고)**: ① `skipped` 는 종결 상태라 `daily_cap`·`monthly_budget`처럼 일시적인 사유도 자동으로 다시 시도되지 않는다(카드 문구 "Try again tomorrow"와 불일치). ② 보정 앵커가 3개 미만인 문항은 행을 만들지 않으므로 채점 시작이 켜져 있을 때 "Scoring in progress"가 끝나지 않을 수 있다. 둘 다 설계 결정이 필요한 별도 수정이다.

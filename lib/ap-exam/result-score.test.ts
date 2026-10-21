@@ -65,6 +65,56 @@ describe("summarizeApResult — FRQ state", () => {
   });
 });
 
+describe("summarizeApResult — supported subject with scoring start off", () => {
+  const off = (essay: EssayScoreView[]) => summarizeApResult({ subject: "ap_english_language", items: engItems(30), layout: AP_LAYOUTS.ap_english_language, essayScores: essay, aiScoring: true, scoringActive: false });
+  it("missing rows are paused (not in progress, not zero, not 'unsupported')", () => {
+    const r = off([score("e1", "a", "done", 5)]);
+    expect(r.frq.state).toBe("paused");
+    expect(r.frq.items.map((i) => i.state)).toEqual(["scored", "paused", "paused"]);
+    expect(r.weighted).toEqual({ status: "withheld", reason: "frq_paused" });
+  });
+  it("stored rows still count when scoring start is off", () => {
+    const r = off(["e1", "e2", "e3"].map((id) => score(id, "a", "done", 6)));
+    expect(r.frq.state).toBe("complete");
+    expect(r.weighted.status).toBe("available");
+  });
+  it("skipped(too_short) carries its reason", () => {
+    const r = off([score("e1", "a", "done", 5), score("e2", "a", "skipped", null, { lastError: "too_short" }), score("e3", "a", "done", 5)]);
+    expect(r.frq.items[1]).toMatchObject({ state: "unavailable", reason: "too_short" });
+  });
+});
+
+describe("waiting and missing-reference states", () => {
+  const run = (rows: EssayScoreView[]) => summarizeApResult({ subject: "ap_english_language", items: engItems(30), layout: AP_LAYOUTS.ap_english_language, essayScores: rows, aiScoring: true });
+  it("daily/monthly cap wait = paused with reason; not 'in progress'", () => {
+    const r = run([score("e1", "a", "done", 5), score("e2", "a", "failed", null, { lastError: "daily_cap" }), score("e3", "a", "failed", null, { lastError: "monthly_budget" })]);
+    expect(r.frq.state).toBe("paused");
+    expect(r.frq.items.map((i) => [i.state, i.reason ?? null])).toEqual([["scored", null], ["paused", "daily_cap"], ["paused", "monthly_budget"]]);
+    expect(r.weighted).toEqual({ status: "withheld", reason: "frq_paused" });
+  });
+  it("no_reference_answers = unavailable with reason (never 'Scoring in progress')", () => {
+    const r = run(["e1", "e2"].map((id) => score(id, "a", "done", 5)).concat(score("e3", "a", "failed", null, { lastError: "no_reference_answers" })));
+    expect(r.frq.items[2]).toMatchObject({ state: "unavailable", reason: "no_reference_answers" });
+    expect(r.frq.state).toBe("unavailable");
+  });
+  it("an ordinary failed row (backoff retry) is still in progress", () => {
+    expect(run([score("e1", "a", "failed", null, { lastError: "grader_error" }), score("e2", "a", "done", 5), score("e3", "a", "done", 5)]).frq.items[0].state).toBe("in_progress");
+  });
+});
+
+describe("blank answer = 0 only for a submitted (graded) attempt", () => {
+  const rows = [score("e1", "a", "done", 5), score("e2", "a", "skipped", null, { lastError: "empty" }), score("e3", "a", "done", 4)];
+  it("graded: real 0", () => {
+    const r = summarizeApResult({ subject: "ap_english_language", items: engItems(30), layout: AP_LAYOUTS.ap_english_language, essayScores: rows, aiScoring: true, submitted: true });
+    expect(r.frq.items[1]).toMatchObject({ state: "scored", earned: 0, noResponse: true });
+  });
+  it("not submitted: undecided, no weighted total", () => {
+    const r = summarizeApResult({ subject: "ap_english_language", items: engItems(30), layout: AP_LAYOUTS.ap_english_language, essayScores: rows, aiScoring: true, submitted: false });
+    expect(r.frq.items[1].state).toBe("in_progress");
+    expect(r.weighted.status).toBe("withheld");
+  });
+});
+
 describe("summarizeApResult — weighted total", () => {
   it("applies official section weights only after everything is scored (English Language 45/55)", () => {
     const r = eng(engItems(36), [score("e1", "a", "done", 6), score("e2", "a", "done", 3), score("e3", "a", "done", 3)]);

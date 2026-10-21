@@ -1,0 +1,444 @@
+[
+ {
+  "id": "rf11",
+  "payload": {
+   "schema_version": "lit-frq-1",
+   "task_type": "poetry_analysis",
+   "template": "q1",
+   "title": "Poetry Analysis: An Old Man's Winter Night",
+   "prompt": {
+    "lead": "The following poem is \"An Old Man's Winter Night\" by Robert Frost (1916). In this poem, the speaker describes an elderly man alone in his farmhouse on a winter night, following him from his confused visit to the cellar to his falling asleep by the stove while the dark, cold world presses in around the house.",
+    "task": "Read the poem closely. Then write an essay in which you analyze how Robert Frost uses poetic elements and techniques to convey a complex view of the old man's solitude, in which his frailty, forgetfulness, and smallness against the vast winter night exist alongside a quiet, almost stubborn claim that his lone presence still keeps and fills the place.",
+    "requirements": [
+     "Respond to the prompt with a thesis that offers a defensible interpretation of the poem.",
+     "Use specific evidence from the poem, and explain how that evidence supports your line of reasoning.",
+     "Explain how multiple poetic elements and techniques contribute to the meaning you describe.",
+     "Write clearly, with appropriate grammar and punctuation."
+    ]
+   },
+   "passage": {
+    "form": "poem",
+    "title": "An Old Man's Winter Night",
+    "attribution": "by Robert Frost",
+    "headnote": "The following poem is by Robert Frost (1916).",
+    "stanzas": [
+     [
+      "All out of doors looked darkly in at him",
+      "Through the thin frost, almost in separate stars,",
+      "That gathers on the pane in empty rooms.",
+      "What kept his eyes from giving back the gaze",
+      "Was the lamp tilted near them in his hand.",
+      "What kept him from remembering what it was",
+      "That brought him to that creaking room was age.",
+      "He stood with barrels round him--at a loss.",
+      "And having scared the cellar under him",
+      "In clomping there, he scared it once again",
+      "In clomping off;--and scared the outer night,",
+      "Which has its sounds, familiar, like the roar",
+      "Of trees and crack of branches, common things,",
+      "But nothing so like beating on a box.",
+      "A light he was to no one but himself",
+      "Where now he sat, concerned with he knew what,",
+      "A quiet light, and then not even that.",
+      "He consigned to the moon, such as she was,",
+      "So late-arising, to the broken moon",
+      "As better than the sun in any case",
+      "For such a charge, his snow upon the roof,",
+      "His icicles along the wall to keep;",
+      "And slept. The log that shifted with a jolt",
+      "Once in the stove, disturbed him and he shifted,",
+      "And eased his heavy breathing, but still slept.",
+      "One aged man--one man--can't fill a house,",
+      "A farm, a countryside, or if he can,",
+      "It's thus he does it of a winter night."
+     ]
+    ],
+    "line_count": 28,
+    "provenance": {
+     "kind": "public_domain",
+     "author_alias": "Robert Frost",
+     "year_alias": 1916,
+     "registry_id": "frost-old-mans-winter-night",
+     "source_url": "https://www.gutenberg.org/ebooks/29345"
+    }
+   },
+   "rubric": {
+    "total_points": 6,
+    "rows": [
+     {
+      "row_id": "A",
+      "name": "Thesis",
+      "max": 1,
+      "descriptors": {
+       "0": "No defensible thesis: the response only restates the prompt, summarizes or describes the text, makes a comment that does not answer the prompt, or never states an interpretation that needs to be defended.",
+       "1": "The response states a defensible interpretation that answers the prompt (it may take more than one sentence and may appear anywhere in the essay)."
+      },
+      "task_specific": "A defensible thesis must make a claim about how the poem presents the old man's solitude, and it must go beyond saying the poem is 'about loneliness' or 'about old age.' Strong theses identify a tension, for example that the man is pitiably reduced (forgetful, dimming, outmatched by the night) yet also asserts a stubborn, limited power to keep house against the dark, or that the final lines turn pity into qualified respect. A thesis that only lists devices ('Frost uses imagery and personification'), only restates the prompt, or makes a claim the text cannot support (for example that the man definitely dies in the poem, or that the poem is simply celebratory) does not earn the point. The thesis may be more than one sentence and may appear anywhere, but it must be identifiable."
+     },
+     {
+      "row_id": "B",
+      "name": "Evidence and commentary",
+      "max": 4,
+      "descriptors": {
+       "0": "Restates the thesis or the prompt, repeats given information, or offers irrelevant material; no usable evidence or commentary.",
+       "1": "Evidence is mostly general; the response summarizes or paraphrases and does not explain how the evidence supports an argument.",
+       "2": "Some specific, relevant evidence, mixed with generalities. Explains how some evidence relates to the argument, but no line of reasoning is established or it is faulty.",
+       "3": "Specific evidence for the claims in a line of reasoning, and explains how some of that evidence supports the line of reasoning, including how at least one literary element or technique contributes to meaning.",
+       "4": "Specific evidence supports every claim in a line of reasoning, the commentary consistently explains how the evidence supports it, and it explains how multiple literary elements or techniques contribute to meaning. Errors that interfere with communication prevent this level."
+      },
+      "task_specific": "Strong responses (3-4 points) select specific evidence from across the poem and explain how it builds the divided view: the personified night that 'looked darkly in at him' and the gaze he cannot return; the convoluted syntax of 'What kept him from remembering what it was' that enacts his confusion; the caesura in 'at a loss'; the comic-pathetic 'clomping' and the simile 'like beating on a box' that make his noise both intrusive and absurd against the night's 'common things'; the shrinking repetition of 'A light he was to no one but himself' and 'A quiet light, and then not even that'; the possessives 'his snow' and 'His icicles' entrusted to the 'broken moon'; and the concluding qualified claim 'can't fill a house... or if he can.' Commentary must connect each choice to the line of reasoning (how it shows diminishment, how it shows persistence or ownership, or how the two interact) rather than labeling devices or paraphrasing. A 2 typically offers accurate but general commentary or focuses only on loneliness and decay; a 1 mostly summarizes the old man's actions; a 0 is off-topic or mere restatement. Responses that track the movement of the poem, from the man as observed object to the final assertion, generally reason more effectively than device-by-device lists."
+     },
+     {
+      "row_id": "C",
+      "name": "Sophistication",
+      "max": 1,
+      "descriptors": {
+       "0": "Does not meet the criteria for the point: contextualizing is limited to sweeping generalities, other readings are only hinted at, complexity is oversimplified, or elaborate language does not advance the argument.",
+       "1": "Shows sophistication of thought or develops a complex literary argument, sustained through the essay (not a phrase): explores tensions or complexities in the text, situates the interpretation in a broader context, accounts for alternative interpretations, or uses a consistently vivid and persuasive style."
+      },
+      "task_specific": "Sophistication may be earned by exploring the poem's complexity, for example by showing how the last three lines rescale the poem (house, farm, countryside) and recast everything before them, so that 'thus he does it' names both a hollow, fragile filling and a real one; by analyzing how the speaker's tone balances pity with dry humor (the scared cellar, the box) without mocking him; by examining the ambiguity of the light going out and the man sleeping 'still,' noting how the poem gestures toward death without stating it; or by considering how the 'broken moon' as a fitting keeper mirrors the man's own brokenness. Writing that is especially vivid and controlled in service of such an argument can also qualify. A single sweeping statement or an unsupported claim about Frost's life or rural America does not earn the point."
+     }
+    ],
+    "scoring_notes": [
+     "Do not reward claims that the old man dies as settled fact; the text says he 'still slept.' Discussing the poem's hints of death as an ambiguity is acceptable and can be strong.",
+     "Biographical claims about Frost or historical claims not grounded in the text should not earn credit as evidence.",
+     "Responses need not address every line; depth of commentary on well-chosen evidence outweighs coverage.",
+     "Identifying devices with correct terminology is not required; what matters is explaining how specific choices create meaning related to the focus.",
+     "A response that reads the poem as purely bleak can still earn Row A and solid Row B credit if well argued, but responses that grapple with the final lines' qualified assertion are better placed for higher B scores and C."
+    ]
+   },
+   "expected_features": {
+    "defensible_positions": [
+     "The poem mainly presents the old man as diminished and isolated: the night watches him, his memory fails, his light shrinks to nothing, and the final lines grant him only a hollow, ironic power to 'fill' the house.",
+     "The poem moves from pity toward qualified respect: though frail and forgetful, the man claims ownership ('his snow,' 'His icicles') and, through his mere presence and noise, holds the house against the night in the only way one person can.",
+     "The speaker balances pathos with gentle humor, so that the man's clomping and box-like noise seem both absurd and touching, keeping the poem from either sentimentality or mockery.",
+     "The poem uses sleep and the fading light to gesture toward death, so that the man's keeping of the house is shown as precarious and temporary even as it is affirmed.",
+     "The poem contrasts the vast, indifferent natural world (night, trees, broken moon) with the small human presence, suggesting that human meaning is limited and fragile but still real."
+    ],
+    "devices": [
+     {
+      "device": "personification",
+      "quote": "All out of doors looked darkly in at him",
+      "effect": "Makes the night a watching presence pressing in on the house, casting the man as observed and exposed, and setting up the contest between his small presence and the vast outside."
+     },
+     {
+      "device": "imagery",
+      "quote": "Through the thin frost, almost in separate stars,",
+      "effect": "The frost on the window looks like a cold, distant sky, fusing the windowpane with the cosmos and stressing how thin the barrier is between the man and the emptiness outside."
+     },
+     {
+      "device": "syntax",
+      "quote": "That brought him to that creaking room was age.",
+      "effect": "The long, winding sentence holds back its subject until the last word, 'age,' acting out the man's lapse of memory and landing on the cause flatly."
+     },
+     {
+      "device": "caesura",
+      "quote": "He stood with barrels round him--at a loss.",
+      "effect": "The dash forces a pause that copies his stalled confusion, leaving him stranded among the objects of the cellar."
+     },
+     {
+      "device": "repetition",
+      "quote": "he scared it once again",
+      "effect": "The repeated 'scared' and 'clomping' give his movement a clumsy, slightly comic insistence, so his noise is the way he asserts himself, however awkwardly."
+     },
+     {
+      "device": "simile",
+      "quote": "But nothing so like beating on a box.",
+      "effect": "Sets the man's hollow, unnatural sound apart from the night's 'common things,' making him both intrusive and pitiably small, a noise the natural world does not recognize."
+     },
+     {
+      "device": "repetition",
+      "quote": "A quiet light, and then not even that.",
+      "effect": "Picking up 'A light he was to no one but himself,' the repeated and shrinking light traces his fading presence, literally the lamp going out and figuratively a hint of mortality."
+     },
+     {
+      "device": "personification",
+      "quote": "to the broken moon",
+      "effect": "Entrusting his house to a damaged, 'late-arising' moon pictures a guardian as worn as he is, a fitting but uncertain stand-in for his watchfulness."
+     },
+     {
+      "device": "diction",
+      "quote": "His icicles along the wall to keep;",
+      "effect": "The possessive 'His' (echoing 'his snow') claims ownership even over winter's cold, suggesting dignity and stubborn stewardship in the middle of decline."
+     },
+     {
+      "device": "understatement",
+      "quote": "One aged man--one man--can't fill a house,",
+      "effect": "The halting self-correction and plain denial make the closing claim modest, and so the qualified turn that follows feels earned rather than sentimental."
+     },
+     {
+      "device": "shift_in_tone",
+      "quote": "It's thus he does it of a winter night.",
+      "effect": "The closing line turns the poem's pity into a wry, qualified affirmation, recasting all his fumbling, noise, and sleep as the way a single life fills a place."
+     }
+    ],
+    "common_pitfalls": [
+     "Summarizing the old man's actions in order without explaining how the language shapes our view of him.",
+     "Stating as fact that the old man dies, ignoring 'but still slept,' instead of treating the death imagery as suggestion or ambiguity.",
+     "Reading the poem as only sad or only uplifting, and so missing the tension the final lines create.",
+     "Listing devices (personification, imagery, repetition) without tying them to a claim about solitude, diminishment, or presence.",
+     "Bringing in unsupported biographical claims about Frost or general claims about rural life in place of textual evidence.",
+     "Ignoring the final three lines, which change the meaning of the whole poem."
+    ]
+   },
+   "samples": [],
+   "blueprint": {
+    "central_idea": "The poem shows a lone old man reduced by age, forgetfulness, and the huge indifferent winter night, yet it ends by grudgingly saying that his fumbling, noisy, sleeping presence is how one person keeps and fills a house, farm, and countryside.",
+    "complexity": "The speaker's attitude is divided and changes over the poem: pity and gentle humor at the man's confusion and clumsy noise sit alongside respect for his claim on 'his snow' and 'His icicles'; the fading light and deep sleep hint at death without stating it; and the final lines both deny and affirm his power ('can't fill a house... or if he can'), so the reader must hold diminishment and persistence together."
+   },
+   "provenance": {
+    "kind": "original",
+    "note": "Real public-domain text (registry frost-old-mans-winter-night); rubric guidance and sample essays are ALTON-authored, not official College Board material."
+   }
+  }
+ },
+ {
+  "id": "rf12",
+  "payload": {
+   "schema_version": "lit-frq-1",
+   "task_type": "prose_analysis",
+   "template": "q2",
+   "title": "Prose Fiction Analysis: The Wife of His Youth",
+   "prompt": {
+    "lead": "The following passage is from \"The Wife of His Youth,\" a short story by Charles W. Chesnutt (1899 in the original). In this passage, the narrator describes the \"Blue Vein Society,\" a social club of mostly light-skinned colored people founded in a Northern city shortly after the war, and introduces Mr. Ryder, its leading member.",
+    "task": "Read the passage closely. Then write an essay in which you analyze how Charles W. Chesnutt uses literary elements and techniques to convey the narrator's divided attitude toward the Blue Veins and Mr. Ryder, a measured respect for their ambition, refinement, and self-made success alongside quiet irony about the color and class prejudice they officially deny.",
+    "requirements": [
+     "Respond to the prompt with a thesis that offers a defensible interpretation of the passage.",
+     "Use specific evidence from the passage, and explain how that evidence supports your line of reasoning.",
+     "Explain how multiple literary elements and techniques contribute to the meaning you describe.",
+     "Write clearly, with appropriate grammar and punctuation."
+    ]
+   },
+   "passage": {
+    "form": "prose",
+    "title": "The Wife of His Youth",
+    "attribution": "by Charles W. Chesnutt",
+    "headnote": "The following passage from a short story is by Charles W. Chesnutt (1899). This is an excerpt.",
+    "stanzas": [
+     [
+      "    Mr. Ryder might aptly be called the dean of the Blue",
+      "Veins. The original Blue Veins were a little society of",
+      "colored persons organized in a certain Northern city",
+      "shortly after the war. Its purpose was to establish and",
+      "maintain correct social standards among a people whose",
+      "social condition presented almost unlimited room for",
+      "improvement. By accident, combined perhaps with some",
+      "natural affinity, the society consisted of individuals",
+      "who were, generally speaking, more white than black.",
+      "Some envious outsider made the suggestion that no one",
+      "was eligible for membership who was not white enough to",
+      "show blue veins. The suggestion was readily adopted by",
+      "those who were not of the favored few, and since that",
+      "time the society, though possessing a longer and more",
+      "pretentious name, had been known far and wide as the",
+      "\"Blue Vein Society,\" and its members as the \"Blue",
+      "Veins.\""
+     ],
+     [
+      "    The Blue Veins did not allow that any such",
+      "requirement existed for admission to their circle, but,",
+      "on the contrary, declared that character and culture",
+      "were the only things considered; and that if most of",
+      "their members were light-colored, it was because such",
+      "persons, as a rule, had had better opportunities to",
+      "qualify themselves for membership. Opinions differed,",
+      "too, as to the usefulness of the society. There were",
+      "those who had been known to assail it violently as a",
+      "glaring example of the very prejudice from which the",
+      "colored race had suffered most; and later, when such",
+      "critics had succeeded in getting on the inside, they had",
+      "been heard to maintain with zeal and earnestness that",
+      "the society was a lifeboat, an anchor, a bulwark and a",
+      "shield,--a pillar of cloud by day and of fire by night,",
+      "to guide their people through the social wilderness.",
+      "Another alleged prerequisite for Blue Vein membership",
+      "was that of free birth; and while there was really no",
+      "such requirement, it is doubtless true that very few of",
+      "the members would have been unable to meet it if there",
+      "had been. If there were one or two of the older members",
+      "who had come up from the South and from slavery, their",
+      "history presented enough romantic circumstances to rob",
+      "their servile origin of its grosser aspects."
+     ],
+     [
+      "    While there were no such tests of eligibility, it is",
+      "true that the Blue Veins had their notions on these",
+      "subjects, and that not all of them were equally liberal",
+      "in regard to the things they collectively disclaimed.",
+      "Mr. Ryder was one of the most conservative. Though he",
+      "had not been among the founders of the society, but had",
+      "come in some years later, his genius for social",
+      "leadership was such that he had speedily become its",
+      "recognized adviser and head, the custodian of its",
+      "standards, and the preserver of its traditions. He",
+      "shaped its social policy, was active in providing for",
+      "its entertainment, and when the interest fell off, as it",
+      "sometimes did, he fanned the embers until they burst",
+      "again into a cheerful flame."
+     ],
+     [
+      "    There were still other reasons for his popularity.",
+      "While he was not as white as some of the Blue Veins, his",
+      "appearance was such as to confer distinction upon them.",
+      "His features were of a refined type, his hair was almost",
+      "straight; he was always neatly dressed; his manners were",
+      "irreproachable, and his morals above suspicion. He had",
+      "come to Groveland a young man, and obtaining employment",
+      "in the office of a railroad company as messenger had in",
+      "time worked himself up to the position of stationery",
+      "clerk, having charge of the distribution of the office",
+      "supplies for the whole company. Although the lack of",
+      "early training had hindered the orderly development of a",
+      "naturally fine mind, it had not prevented him from doing",
+      "a great deal of reading or from forming decidedly",
+      "literary tastes. Poetry was his passion. He could repeat",
+      "whole pages of the great English poets; and if his",
+      "pronunciation was sometimes faulty, his eye, his voice,",
+      "his gestures, would respond to the changing sentiment",
+      "with a precision that revealed a poetic soul and",
+      "disarmed criticism. He was economical, and had saved",
+      "money; he owned and occupied a very comfortable house on",
+      "a respectable street. His residence was handsomely",
+      "furnished, containing among other things a good library,",
+      "especially rich in poetry, a piano, and some choice",
+      "engravings. He generally shared his house with some",
+      "young couple, who looked after his wants and were",
+      "company for him; for Mr. Ryder was a single man. In the",
+      "early days of his connection with the Blue Veins he had",
+      "been regarded as quite a catch, and young ladies and",
+      "their mothers had manoeuvred with much ingenuity to",
+      "capture him. Not, however, until Mrs. Molly Dixon",
+      "visited Groveland had any woman ever made him wish to",
+      "change his condition to that of a married man."
+     ]
+    ],
+    "line_count": 88,
+    "provenance": {
+     "kind": "public_domain",
+     "author_alias": "Charles W. Chesnutt",
+     "year_alias": 1899,
+     "registry_id": "chesnutt-wife-of-his-youth",
+     "source_url": "https://www.gutenberg.org/ebooks/11057"
+    }
+   },
+   "rubric": {
+    "total_points": 6,
+    "rows": [
+     {
+      "row_id": "A",
+      "name": "Thesis",
+      "max": 1,
+      "descriptors": {
+       "0": "No defensible thesis: the response only restates the prompt, summarizes or describes the text, makes a comment that does not answer the prompt, or never states an interpretation that needs to be defended.",
+       "1": "The response states a defensible interpretation that answers the prompt (it may take more than one sentence and may appear anywhere in the essay)."
+      },
+      "task_specific": "A defensible thesis must make an interpretive claim about the narrator's attitude toward the Blue Veins and/or Mr. Ryder that goes beyond summary. Strong theses name the doubleness, for example that the narrator's polite, judicious voice both honors the society's aims and Ryder's achievements and exposes the color prejudice hidden under its claims of 'character and culture.' A thesis that only says the society is light-skinned, or that the narrator 'describes Mr. Ryder,' does not earn the point. A thesis that reads the passage as purely admiring or as open, bitter condemnation can earn the point only if it is defensible and argued, but such one-sided readings usually limit performance in Row B. Restating the prompt or just listing devices ('the author uses irony and imagery') does not count."
+     },
+     {
+      "row_id": "B",
+      "name": "Evidence and commentary",
+      "max": 4,
+      "descriptors": {
+       "0": "Restates the thesis or the prompt, repeats given information, or offers irrelevant material; no usable evidence or commentary.",
+       "1": "Evidence is mostly general; the response summarizes or paraphrases and does not explain how the evidence supports an argument.",
+       "2": "Some specific, relevant evidence, mixed with generalities. Explains how some evidence relates to the argument, but no line of reasoning is established or it is faulty.",
+       "3": "Specific evidence for the claims in a line of reasoning, and explains how some of that evidence supports the line of reasoning, including how at least one literary element or technique contributes to meaning.",
+       "4": "Specific evidence supports every claim in a line of reasoning, the commentary consistently explains how the evidence supports it, and it explains how multiple literary elements or techniques contribute to meaning. Errors that interfere with communication prevent this level."
+      },
+      "task_specific": "Strong responses look closely at how the narrator's careful, hedging syntax produces the irony: the denials that admit what they deny ('while there was really no such requirement, it is doubtless true that very few of the members would have been unable to meet it'), the outsider's joke about blue veins being 'readily adopted,' and the critics who change their minds once 'on the inside' and then pile up inflated metaphors ('a lifeboat, an anchor, a bulwark and a shield') and the scriptural 'pillar of cloud.' For Ryder, responses should analyze the list of physical traits that ties his 'distinction' to whiteness ('his hair was almost straight'), the concessive sentences that admit a flaw and then praise him ('if his pronunciation was sometimes faulty'), the language of office and guardianship ('custodian of its standards'), and the details of possessions that measure respectability. Commentary has to explain how these choices create both respect and irony, not just point to them. For a 4, the response should trace the attitude across the passage, from the society's group self-deception to the more sympathetic yet still ironic portrait of Ryder, and might note the closing turn toward Mrs. Molly Dixon. A 3 explains relevant evidence with some uneven commentary. A 2 mostly summarizes or names devices with thin explanation. A 1 gives general or inaccurate claims."
+     },
+     {
+      "row_id": "C",
+      "name": "Sophistication",
+      "max": 1,
+      "descriptors": {
+       "0": "Does not meet the criteria for the point: contextualizing is limited to sweeping generalities, other readings are only hinted at, complexity is oversimplified, or elaborate language does not advance the argument.",
+       "1": "Shows sophistication of thought or develops a complex literary argument, sustained through the essay (not a phrase): explores tensions or complexities in the text, situates the interpretation in a broader context, accounts for alternative interpretations, or uses a consistently vivid and persuasive style."
+      },
+      "task_specific": "Sophistication can be earned by working through the tension rather than settling it. Examples: arguing that the narrator's own genteel, Blue-Vein-like politeness is the tool of the satire, so the style takes part in what it mocks; explaining how Ryder can be both admirably self-made and complicit in the hierarchy he guards ('one of the most conservative'); seeing that the slavery passage ('rob their servile origin of its grosser aspects') shows the society reshaping painful history into respectable romance; or reading the final sentence about Mrs. Molly Dixon as a sign that personal desire will test Ryder's standards. The insight must run through the argument. A single complex-sounding sentence or speculation about the rest of the story without textual grounding does not earn the point."
+     }
+    ],
+    "scoring_notes": [
+     "Accept any reasonable wording for the narrator's attitude (ironic, wry, gently satirical, ambivalent, measured), as long as the response grounds it in specific language.",
+     "Do not reward claims about the author's biography or the rest of the story that are not supported by the passage and headnote.",
+     "Identifying the 'pillar of cloud by day and of fire by night' as a biblical allusion (the Exodus journey through the wilderness) is acceptable, but credit depends on explaining its inflated, ironic effect, not just labeling it.",
+     "Responses that read the narrator as straightforwardly endorsing the society's claim that 'character and culture were the only things considered' misread the irony and should be limited in Row B.",
+     "Discussion of race and colorism should stay tied to the text's own terms ('more white than black,' 'light-colored,' 'blue veins') and to the narrator's handling of them."
+    ]
+   },
+   "expected_features": {
+    "defensible_positions": [
+     "The narrator's polite, judicious voice works as quiet satire: by repeating the society's denials in its own careful language, the narrator shows the color prejudice that the Blue Veins claim does not exist.",
+     "The narrator is divided: the passage takes seriously the Blue Veins' wish for 'correct social standards' and respects Ryder's self-made rise, but treats their ranking of people by lightness of skin and free birth as self-deception.",
+     "Mr. Ryder gets a warmer, more sympathetic portrait than the society as a whole, yet the irony still reaches him, since his 'distinction' rests partly on near-white features and his role is to guard exclusionary 'standards.'",
+     "The passage shows respectability as something staged and displayed (manners, possessions, recited poetry, rewritten histories of slavery), and the narrator both admires the effort and exposes what it costs and hides.",
+     "The ending turns from social portrait to personal desire with Mrs. Molly Dixon, suggesting that Ryder's carefully kept standards are about to be tested."
+    ],
+    "devices": [
+     {
+      "device": "irony",
+      "quote": "while there was really no such requirement, it is doubtless true that very few of the members would have been unable to meet it if there had been",
+      "effect": "The roundabout hedging denies the free-birth test while admitting that in practice it applies, so the society's claim exposes itself."
+     },
+     {
+      "device": "metaphor",
+      "quote": "the society was a lifeboat, an anchor, a bulwark and a shield",
+      "effect": "The pile-up of grand rescue metaphors, spoken by former critics now 'on the inside,' mocks how self-interest changes opinion and inflates the society's importance."
+     },
+     {
+      "device": "allusion",
+      "quote": "a pillar of cloud by day and of fire by night",
+      "effect": "The scriptural image of divine guidance through the wilderness is ironically oversized for a social club, which highlights the members' self-importance."
+     },
+     {
+      "device": "diction",
+      "quote": "enough romantic circumstances to rob their servile origin of its grosser aspects",
+      "effect": "The genteel wording shows how members with slave origins are made acceptable by turning a painful history into a romance, which suggests shame about the past."
+     },
+     {
+      "device": "understatement",
+      "quote": "not all of them were equally liberal in regard to the things they collectively disclaimed",
+      "effect": "The mild phrasing shows the gap between the group's public denials and its members' private prejudices, and it prepares for Ryder's place among 'the most conservative.'"
+     },
+     {
+      "device": "syntax",
+      "quote": "His features were of a refined type, his hair was almost straight; he was always neatly dressed; his manners were irreproachable, and his morals above suspicion.",
+      "effect": "The list puts racially coded physical traits on the same level as dress, manners, and morals, showing that the society treats closeness to whiteness as a virtue."
+     },
+     {
+      "device": "juxtaposition",
+      "quote": "if his pronunciation was sometimes faulty, his eye, his voice, his gestures, would respond to the changing sentiment with a precision that revealed a poetic soul",
+      "effect": "Admitting a flaw and then giving real praise shows the narrator's sympathy for Ryder's self-education and gently notes the limits of his polish."
+     },
+     {
+      "device": "metaphor",
+      "quote": "he fanned the embers until they burst again into a cheerful flame",
+      "effect": "Ryder's tireless social leadership appears as warm and life-giving, which supports a sincere side of the narrator's respect."
+     },
+     {
+      "device": "foreshadowing",
+      "quote": "Not, however, until Mrs. Molly Dixon visited Groveland had any woman ever made him wish to change his condition to that of a married man.",
+      "effect": "The closing turn moves from portrait to plot and hints that desire will put Ryder's settled life and standards under pressure."
+     }
+    ],
+    "common_pitfalls": [
+     "Taking the society's claim that 'character and culture were the only things considered' at face value and missing the narrator's irony.",
+     "Reading the narrator as harshly condemning, which ignores the real respect shown for Ryder's work, reading, and leadership.",
+     "Listing devices (irony, metaphor, allusion) without explaining how they shape the narrator's divided attitude.",
+     "Summarizing Ryder's biography and possessions without analyzing what the details suggest about respectability and race.",
+     "Bringing in plot events or author biography not found in the passage instead of analyzing the given text.",
+     "Missing the shift in the passage from the collective satire of the society to the individual, more sympathetic portrait of Ryder."
+    ]
+   },
+   "samples": [],
+   "blueprint": {
+    "central_idea": "Through a courteous, measured narrative voice, the passage both honors and gently satirizes a post-war society of light-skinned colored people and its leader, Mr. Ryder: it respects their ambition and self-made refinement while exposing, through hedged denials and inflated praise, the color and class prejudice they officially disclaim.",
+    "complexity": "The irony works through restraint, not open attack. The narrator borrows the society's own genteel style to show its contradictions, and the respect for Ryder is real even as his distinction is tied to near-white features and guarding exclusive standards. Students have to hold sympathy and critique together, notice the shift from group satire to individual portrait, and see how the ending turns toward personal desire."
+   },
+   "provenance": {
+    "kind": "original",
+    "note": "Real public-domain text (registry chesnutt-wife-of-his-youth); rubric guidance and sample essays are ALTON-authored, not official College Board material."
+   }
+  }
+ }
+]

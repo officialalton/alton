@@ -24,13 +24,14 @@ export default async function ParentMockExamResultPage({ params }: { params: Pro
 
   // AP 응시는 SAT 결과 화면이 아니라 AP 결과 화면(읽기 전용, 영어 UI)으로 보여 준다 — 학생 화면과 같은 점수·채점 중 표시 정책.
   if (attempt.examProgram === "ap") {
-    const essayAi = essayAiEnabledFlag() && essayGradingSubject(attempt.apSubject);
-    const essayScores = essayAi ? await loadEssayScores(supabase, attemptId) : [];
+    const essaySupported = essayGradingSubject(attempt.apSubject);
+    const essayAi = essaySupported && essayAiEnabledFlag();
+    const essayScores = essaySupported ? await loadEssayScores(supabase, attemptId) : [];
     return (
       <main className="mx-auto max-w-4xl px-4 py-6">
         <h1 className="mb-1 text-[18px] font-extrabold">{attempt.examSetName}</h1>
         <p className="mb-4 text-[12.5px] text-grey-500">{attempt.studentName}&apos;s results</p>
-        <ApExamResultView attempt={attempt} readOnly attempts={attempts} essayScores={essayScores} essayAiEnabled={essayAi} attemptHrefBase={`/parent/mock-exam/${studentId}/`} />
+        <ApExamResultView attempt={attempt} readOnly attempts={attempts} essayScores={essayScores} essayAiEnabled={essayAi} essayScoringSupported={essaySupported} attemptHrefBase={`/parent/mock-exam/${studentId}/`} />
       </main>
     );
   }
