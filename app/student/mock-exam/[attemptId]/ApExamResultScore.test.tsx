@@ -83,4 +83,30 @@ describe("ApExamResultView — scoring display", () => {
     render(<ApExamResultView attempt={attempt(full())} essayScores={[]} essayAiEnabled />);
     expect(enqueue).toHaveBeenCalledTimes(1);
   });
+  // 2026-10-21 Preview 확인: 지원 과목인데 플래그가 꺼져 있으면 저장된 점수 행을 그대로 보이고 "이 과목은 미제공"이라 하지 않는다.
+  it("supported subject with the start flag off: stored rows are shown (1 done, 2 blank = real 0), weighted total computed", () => {
+    enqueue.mockClear();
+    const skipped = (id: string): EssayScoreView => ({ ...row(id, "skipped", null), lastError: "empty" });
+    render(<ApExamResultView attempt={attempt(full())} essayScores={[row("e1", "done", 2), skipped("e2"), skipped("e3")]} essayAiEnabled={false} essayScoringSupported />);
+    expect(screen.getByTestId("ap-frq-summary")).toHaveTextContent("2 / 18 points");
+    expect(screen.queryByText(/not scored for this subject/)).toBeNull();
+    expect(screen.getByText(/Question 46 · Free response · 2 \/ 6 points/)).toBeInTheDocument();
+    expect(screen.getByText(/Question 47 · Free response · No response \(0 \/ 6\)/)).toBeInTheDocument();
+    expect(screen.getByTestId("ap-weighted-total")).toBeInTheDocument();
+    expect(enqueue).not.toHaveBeenCalled(); // 플래그가 꺼져 있으면 새 채점을 시작하지 않는다
+  });
+  it("supported subject, flag off, rows missing: 'AI scoring temporarily unavailable' (not 'not scored for this subject', not 0)", () => {
+    render(<ApExamResultView attempt={attempt(full())} essayScores={[]} essayAiEnabled={false} essayScoringSupported />);
+    expect(screen.getByTestId("ap-frq-summary")).toHaveTextContent("AI scoring is temporarily unavailable");
+    expect(screen.queryByText(/not scored for this subject/)).toBeNull();
+    expect(screen.getByText(/Question 46 · Free response · AI scoring temporarily unavailable/)).toBeInTheDocument();
+    expect(screen.getByTestId("ap-weighted-withheld")).toHaveTextContent("temporarily unavailable");
+    expect(screen.queryByTestId("ap-weighted-total")).toBeNull();
+  });
+  it("skipped for a non-empty reason is named, not shown as zero", () => {
+    const tooShort = (id: string): EssayScoreView => ({ ...row(id, "skipped", null), lastError: "too_short" });
+    render(<ApExamResultView attempt={attempt(full())} essayScores={[row("e1", "done", 5), tooShort("e2"), row("e3", "done", 4)]} essayAiEnabled essayScoringSupported />);
+    expect(screen.getByText(/Question 47 · Free response · Not scored: response too short/)).toBeInTheDocument();
+    expect(screen.queryByTestId("ap-weighted-total")).toBeNull();
+  });
 });
