@@ -1,0 +1,123 @@
+{
+ "run": "wh-r19-f7",
+ "generatedAt": "2026-10-21",
+ "passed": [
+  "wh-r19-f7:ap_world_history-wh3_saq1-k0"
+ ],
+ "rejected": [],
+ "audit": [
+  {
+   "id": "wh3_saq1",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:Minor dating imprecision. The Royal Society was formally constituted at the Gresham College meeting of 28 November 1660;"
+     ]
+    },
+    {
+     "k": 1,
+     "total": 3,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "anachronism:In John Wallis's account of the pre-1662 meetings (the source this response describes), William Petty appears as \"Dr. Pe"
+     ]
+    },
+    {
+     "k": 2,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 3,
+     "total": 3,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "misdescribes_source:The excerpt (Wallis's account of the 1645 London meetings) describes Jonathan Goddard as keeping an operator in his hous"
+     ]
+    }
+   ],
+   "chosen": 2
+  },
+  {
+   "id": "wh3_saq1",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 2,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The society was organized in November 1660 (the meeting at Gresham College after Wren's lecture, at which the members re"
+     ]
+    },
+    {
+     "k": 1,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 2,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 3,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 1
+  },
+  {
+   "id": "wh3_saq1",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 1,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 2,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 3,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  }
+ ]
+}

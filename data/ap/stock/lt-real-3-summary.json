@@ -1,0 +1,108 @@
+{
+ "run": "lt-real-3",
+ "generatedAt": "2026-10-20",
+ "executions": [
+  "englit-real-5",
+  "englit-real-6",
+  "englit-real-7"
+ ],
+ "passed": [
+  {
+   "stockKey": "lt-real-3:ap_english_literature-real-rs11-k0",
+   "replaces": "LT3 (new exam)"
+  },
+  {
+   "stockKey": "lt-real-3:ap_english_literature-real-rs12-k0",
+   "replaces": "LT3 (new exam)"
+  },
+  {
+   "stockKey": "lt-real-3:ap_english_literature-real-rs13-k0",
+   "replaces": "LT3 (new exam)"
+  },
+  {
+   "stockKey": "lt-real-3:ap_english_literature-real-rs14-k0",
+   "replaces": "LT3 (new exam)"
+  },
+  {
+   "stockKey": "lt-real-3:ap_english_literature-real-rs15-k0",
+   "replaces": "LT3 (new exam)"
+  },
+  {
+   "stockKey": "lt-real-3:ap_english_literature-real-rf11-k0",
+   "replaces": "LT3 (new exam)"
+  },
+  {
+   "stockKey": "lt-real-3:ap_english_literature-real-rf12-k0",
+   "replaces": "LT3 (new exam)"
+  }
+ ],
+ "selection": {
+  "sets": [
+   "rs11",
+   "rs12",
+   "rs13",
+   "rs14",
+   "rs15"
+  ],
+  "candidates": [
+   11,
+   14,
+   14,
+   10,
+   11
+  ],
+  "categories": {
+   "1": 11,
+   "2": 3,
+   "3": 8,
+   "4": 13,
+   "5": 6,
+   "6": 7,
+   "7": 7
+  },
+  "sizes": {
+   "rs11": 9,
+   "rs12": 13,
+   "rs13": 13,
+   "rs14": 10,
+   "rs15": 10
+  },
+  "keyPositionViolations": {
+   "rs11": [],
+   "rs12": [],
+   "rs13": [],
+   "rs14": [],
+   "rs15": []
+  },
+  "bounds": {
+   "1": [
+    8,
+    11
+   ],
+   "2": [
+    1,
+    4
+   ],
+   "3": [
+    8,
+    11
+   ],
+   "4": [
+    11,
+    15
+   ],
+   "5": [
+    5,
+    8
+   ],
+   "6": [
+    5,
+    8
+   ],
+   "7": [
+    5,
+    8
+   ]
+  }
+ }
+}

@@ -1,0 +1,358 @@
+[
+ {
+  "id": "saq1_r4",
+  "spec": {
+   "id": "saq1_r4",
+   "template": "saq1",
+   "period": 9,
+   "focus": "Two fictional historians interpret why the population and political influence of the South and Southwest grew after 1970: one emphasizes air conditioning, defense spending and lower taxes, the other emphasizes retirement migration and the decline of older industrial cities. Keep every rubric example and sample answer to well-established facts about air conditioning, military bases, federal highway and housing spending and state tax policy; do not mention Medicare or Social Security. Extra constraints: Excerpt A and Excerpt B must not name any specific city; describe the climate only as 'long, hot summers'. In the rubric, Part B must ask for evidence that neither excerpt mentions (so air conditioning, military bases and tax policy count only if the excerpt that argues otherwise did not name them), and every sample answer for Part B must use a piece of evidence outside both excerpts, such as the federal Interstate Highway System (1956) or the growth of suburban housing financed by federal mortgage insurance.",
+   "seed": 19840
+  },
+  "payload": {
+   "schema_version": "ush-frq-1",
+   "task_type": "saq",
+   "template": "saq1",
+   "period": 9,
+   "periods": [
+    9,
+    8
+   ],
+   "title": "Explaining the Rise of the Sun Belt After 1970",
+   "prompt": {
+    "scenario": "After 1970, the population of the South and Southwest grew faster than the population of the Northeast and Midwest. After each census, the region also gained seats in the House of Representatives. Two historians explain this shift in different ways.",
+    "task": "Use the two excerpts to answer all parts of the question.",
+    "requirements": [
+     "Answer all three parts.",
+     "For Parts B and C, use evidence that neither excerpt mentions."
+    ],
+    "parts": [
+     {
+      "label": "A",
+      "prompt": "Briefly describe ONE major difference between Holloway's and Amberg's interpretations of why the South and Southwest grew in population and political influence after 1970.",
+      "points": 1
+     },
+     {
+      "label": "B",
+      "prompt": "Briefly explain how ONE specific historical event, development, or circumstance from the period 1940 to 2000 that is not mentioned in either excerpt could be used to support Holloway's interpretation.",
+      "points": 1
+     },
+     {
+      "label": "C",
+      "prompt": "Briefly explain how ONE specific historical event, development, or circumstance from the period 1940 to 2000 that is not mentioned in either excerpt could be used to support Amberg's interpretation.",
+      "points": 1
+     }
+    ]
+   },
+   "sources": [
+    {
+     "id": "A",
+     "kind": "secondary_text",
+     "title": "Excerpt A",
+     "attribution": "Dana Holloway, historian, The Cooled Frontier: Building the Modern Sun Belt (fictional book) (ALTON-composed, in the style of a recent scholarly monograph)",
+     "body": "The rise of the Sun Belt after 1970 rested on three supports. The first was air conditioning. When homes, offices, and factories could be cooled cheaply, the region's long, hot summers stopped discouraging employers and workers from settling there. The second was federal defense spending. Cold War contracts for aircraft, missiles, and electronics went to Southern and Southwestern plants and laboratories. They created skilled jobs that drew engineers from across the nation. The third was taxation. State governments competed for firms by keeping business and personal taxes low. People followed the jobs, and congressional seats followed the people.",
+     "provenance": {
+      "kind": "alton_composed",
+      "note": "ush-prompts-v1"
+     }
+    },
+    {
+     "id": "B",
+     "kind": "secondary_text",
+     "title": "Excerpt B",
+     "attribution": "Russell Amberg, historian, Leaving the Snow Belt: Migration and American Regions Since 1970 (fictional book) (ALTON-composed, in the style of a recent scholarly monograph)",
+     "body": "Explanations built around machines or federal contracts overlook the people who actually moved. Many newcomers to the South and Southwest after 1970 were not looking for new jobs at all. They were retirees living on pensions and savings. They sold homes in the North and bought into planned communities, where long, hot summers seemed a fair price for mild winters. What migrants left behind mattered just as much. In the 1970s and 1980s, steel mills, auto plants, and rubber factories in the Northeast and Midwest closed. Younger workers lost their jobs, and older cities lost their tax base. The Sun Belt grew largely because the Rust Belt shrank.",
+     "provenance": {
+      "kind": "alton_composed",
+      "note": "ush-prompts-v1"
+     }
+    }
+   ],
+   "rubric": {
+    "rubric_id": "ushistory-v1",
+    "total_points": 3,
+    "rows": [
+     {
+      "row_id": "a",
+      "name": "Part A",
+      "max": 1,
+      "descriptors": {
+       "0": "The response does not accurately describe a difference between the two interpretations, or it only summarizes one excerpt.",
+       "1": "The response accurately describes one major difference between Holloway's and Amberg's interpretations."
+      },
+      "task_specific": "Describe one major difference between the interpretations. Example: Holloway credits pull factors such as air conditioning, defense contracts, and low state taxes that created jobs in the region. Amberg credits migrants who were not looking for jobs, such as retirees, and push factors such as Northern deindustrialization."
+     },
+     {
+      "row_id": "b",
+      "name": "Part B",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no evidence, gives evidence named in either excerpt, gives inaccurate evidence, or does not connect the evidence to Holloway's interpretation.",
+       "1": "The response explains how one accurate, specific piece of evidence from 1940 to 2000 that neither excerpt mentions supports Holloway's interpretation."
+      },
+      "task_specific": "Explain how one specific piece of evidence from 1940 to 2000 that neither excerpt mentions supports Holloway's argument that technology, federal spending, and business-friendly policy drew jobs and people. Air conditioning, defense contracts, and low state taxes do not earn the point because Excerpt A already names them. Acceptable evidence includes the Interstate Highway System (Federal-Aid Highway Act of 1956), suburban housing financed by FHA mortgage insurance or VA-guaranteed loans, and military bases built or expanded in Southern and Southwestern states."
+     },
+     {
+      "row_id": "c",
+      "name": "Part C",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no evidence, gives evidence named in either excerpt, gives inaccurate evidence, or does not connect the evidence to Amberg's interpretation.",
+       "1": "The response explains how one accurate, specific piece of evidence from 1940 to 2000 that neither excerpt mentions supports Amberg's interpretation."
+      },
+      "task_specific": "Explain how one specific piece of evidence from 1940 to 2000 that neither excerpt mentions supports Amberg's argument that retirement migration and the decline of older industrial regions drove Sun Belt growth. Retirees, pensions, and closing Northern factories do not earn the point because Excerpt B already names them. Acceptable evidence includes the Interstate Highway System making long-distance moves by car and truck easier for retirees and displaced workers, federally insured mortgages financing the new subdivisions that absorbed Northern migrants, and military retirees settling near the Southern bases where they had served."
+     }
+    ],
+    "scoring_notes": [
+     "Score each part on its own. A part can earn its point even if the other parts do not.",
+     "For Parts B and C, evidence must come from outside both excerpts. Restating an excerpt's own factors (air conditioning, defense contracts, low taxes, retirees, factory closings) does not earn the point.",
+     "Evidence from just before 1970 is acceptable if the response connects it to growth after 1970."
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [],
+    "contextualization_ideas": [
+     "Deindustrialization in the Northeast and Midwest in the 1970s and 1980s",
+     "Cold War federal spending in the South and West",
+     "Census reapportionment moving House seats toward the Sun Belt"
+    ],
+    "outside_evidence": [
+     "Federal-Aid Highway Act of 1956",
+     "FHA mortgage insurance",
+     "VA-guaranteed home loans under the GI Bill",
+     "Military bases in Southern and Southwestern states"
+    ],
+    "reasoning_types": [
+     "Comparison of historical interpretations",
+     "Causation"
+    ],
+    "saq_answers": {
+     "a": [
+      "Holloway says new technology and government policy created jobs that pulled workers south. Amberg says many migrants, especially retirees, were not following jobs at all.",
+      "Holloway focuses on pull factors inside the Sun Belt, such as air conditioning, defense contracts, and low taxes. Amberg focuses on a push factor, the closing of factories in the Northeast and Midwest.",
+      "Holloway treats the federal government and state tax policy as the main causes. Amberg treats the personal choices of individual migrants, such as retirees seeking mild winters, as the main cause.",
+      "Holloway ties growth to new skilled jobs in the region. Amberg ties it to job losses elsewhere."
+     ],
+     "b": [
+      "The Interstate Highway System, funded by the Federal-Aid Highway Act of 1956, let firms ship goods by truck. That made it practical to put plants and offices in Southern and Southwestern states, which supports Holloway's claim that people followed jobs created by federal investment.",
+      "FHA mortgage insurance and VA-guaranteed loans paid for large new suburban developments. Workers who took the new jobs Holloway describes could buy homes, which shows federal policy making the region attractive.",
+      "Military bases built or expanded in Southern and Southwestern states during World War II and the Cold War brought steady federal payrolls and related businesses. This supports Holloway's view that federal spending drove the region's growth."
+     ],
+     "c": [
+      "The Interstate Highway System, begun under the 1956 act, made it easier for retirees and laid-off Northern workers to drive and haul their belongings to the South and Southwest. This supports Amberg's focus on individual migration.",
+      "Federally insured mortgages financed the new subdivisions that took in migrants from the North. Retirees and displaced workers could buy homes quickly, which supports Amberg's point that newcomers who were not following jobs reshaped the region.",
+      "Many military retirees settled near the Southern and Southwestern bases where they had served. This supports Amberg's argument that retirement migration, not new jobs, drove much of the population growth."
+     ]
+    },
+    "common_pitfalls": [
+     "Using air conditioning, defense contracts, or low taxes as Part B evidence, even though Excerpt A already names them.",
+     "Using retirees or closing Northern factories as Part C evidence, even though Excerpt B already names them.",
+     "Summarizing each excerpt in Part A without stating how they differ.",
+     "Naming a piece of evidence without explaining how it supports the historian's argument.",
+     "Using evidence from outside 1940 to 2000 without connecting it to growth after 1970."
+    ],
+    "facts": [
+     "The Federal-Aid Highway Act of 1956 funded the Interstate Highway System.",
+     "The Federal Housing Administration, created in 1934, insured home mortgages and helped finance suburban housing.",
+     "The GI Bill of 1944 included VA-guaranteed home loans for veterans.",
+     "During World War II and the Cold War, many military bases were built or expanded in Southern and Southwestern states.",
+     "Air conditioning spread widely in American homes and workplaces after World War II.",
+     "After the 1980 and later censuses, Sun Belt states such as Texas and Florida gained House seats, and states in the Northeast and Midwest lost seats."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_composed",
+    "note": "ALTON-composed practice material; fictional sources and attributions."
+   }
+  },
+  "fact": [
+   {
+    "where": "Outside evidence / Rubric Part B / saq_answers b (third answer): military bases as acceptable evidence",
+    "kind": "other",
+    "detail": "Internal tension in the rubric. Excerpt A explicitly names 'federal defense spending' as its second support, and the rubric/pitfalls state that restating an excerpt's own factors does not earn the point. Yet the expected answer for military bases concludes 'this supports Holloway's view that federal spending drove the region's growth,' which is essentially restating Excerpt A's own factor. Either clarify that bases (payrolls, not procurement contracts) are distinct from the 'contracts for aircraft, missiles, and electronics' named in the excerpt, or remove this item, so scoring is consistent with the 'not mentioned in either excerpt' requirement."
+   }
+  ]
+ },
+ {
+  "id": "saq3_r4",
+  "spec": {
+   "id": "saq3_r4",
+   "template": "saq3",
+   "period": 5,
+   "focus": "Non-text source: a table (illustrative composite, labeled as such) of the number of miles of railroad track in operation in the North and in the South in 1850 and 1860, consistent with the Northern advantage in railroads before the Civil War; keep every acceptable answer to simple comparisons stated directly in the table. Extra constraints: the stated period of the question is 1850-1860 only; the common pitfalls list must not mention any event after 1860 (no strikes, no Reconstruction-era events); every acceptable answer is a direct comparison or calculation from the table.",
+   "seed": 19841
+  },
+  "payload": {
+   "schema_version": "ush-frq-1",
+   "task_type": "saq",
+   "template": "saq3",
+   "period": 5,
+   "periods": [
+    5
+   ],
+   "title": "Railroad Mileage in the North and the South, 1850 and 1860",
+   "prompt": {
+    "scenario": "The table below is an illustrative composite. It shows rounded figures for the number of miles of railroad track in operation in the North and in the South in 1850 and 1860. The figures are made up for practice, but they follow the general pattern historians describe for the decade before 1861. Use only the table and the period 1850 to 1860 to answer the question.",
+    "task": "Using the table, answer (A), (B), and (C).",
+    "requirements": [
+     "Each part asks for ONE answer worth 1 point.",
+     "Answers should be based on direct comparisons or simple calculations using the figures in the table.",
+     "Confine answers to the years 1850 to 1860 shown in the table."
+    ],
+    "parts": [
+     {
+      "label": "A",
+      "prompt": "Briefly identify ONE trend or pattern in railroad mileage shown in the table between 1850 and 1860.",
+      "points": 1
+     },
+     {
+      "label": "B",
+      "prompt": "Briefly explain ONE way the data in the table show how the difference between Northern and Southern railroad mileage changed from 1850 to 1860.",
+      "points": 1
+     },
+     {
+      "label": "C",
+      "prompt": "Briefly explain ONE way the data in the table could be used to support the claim that by 1860 the North had a larger railroad network for moving goods and people than the South.",
+      "points": 1
+     }
+    ]
+   },
+   "sources": [
+    {
+     "id": "A",
+     "kind": "table",
+     "title": "Miles of Railroad Track in Operation, North and South, 1850 and 1860 (Illustrative Composite)",
+     "attribution": "Illustrative composite table compiled by ALTON for practice; rounded figures consistent with the general pattern of the 1850s; not real census data (ALTON-composed, in the style of a nineteenth-century statistical abstract)",
+     "body": "The table compares rounded, illustrative totals of railroad miles in operation in the North and the South in 1850 and 1860, with a combined total for each year.",
+     "table": {
+      "columns": [
+       "Region",
+       "Miles of track, 1850",
+       "Miles of track, 1860"
+      ],
+      "rows": [
+       [
+        "North",
+        "6,800",
+        "21,500"
+       ],
+       [
+        "South",
+        "2,200",
+        "8,800"
+       ],
+       [
+        "Total (North and South)",
+        "9,000",
+        "30,300"
+       ]
+      ]
+     },
+     "provenance": {
+      "kind": "alton_composed",
+      "note": "ush-prompts-v1"
+     }
+    }
+   ],
+   "rubric": {
+    "rubric_id": "ushistory-v1",
+    "total_points": 3,
+    "rows": [
+     {
+      "row_id": "a",
+      "name": "Part A",
+      "max": 1,
+      "descriptors": {
+       "0": "The response does not identify a trend or pattern that the table accurately shows, or misreads the figures.",
+       "1": "The response identifies one trend or pattern that the table accurately shows, such as the North having more miles than the South in both 1850 and 1860."
+      },
+      "task_specific": "Identify one accurate trend or pattern stated directly in the table, such as growth in both regions, Northern mileage exceeding Southern mileage in both years, or the total more than tripling."
+     },
+     {
+      "row_id": "b",
+      "name": "Part B",
+      "max": 1,
+      "descriptors": {
+       "0": "The response does not accurately describe how the difference between the regions changed, or uses figures that do not match the table.",
+       "1": "The response accurately explains one way the North-South difference changed from 1850 to 1860, using a direct comparison or calculation from the table."
+      },
+      "task_specific": "Explain one accurate change in the North-South difference using a comparison or calculation from the table, for example that the gap in miles grew from 4,600 to 12,700, or that the South grew faster in percentage terms even though the North added more miles."
+     },
+     {
+      "row_id": "c",
+      "name": "Part C",
+      "max": 1,
+      "descriptors": {
+       "0": "The response does not use the table accurately to support the claim, or relies only on information not in the table.",
+       "1": "The response accurately uses one comparison or calculation from the table to support the claim that the North had the larger railroad network by 1860."
+      },
+      "task_specific": "Use a direct comparison or calculation from the 1860 figures (or the 1850 to 1860 change) to support the claim that the North had the larger rail network, for example that the North had 21,500 miles against 8,800, about two and a half times as many, or about 71 percent of the combined total."
+     }
+    ],
+    "scoring_notes": [
+     "Accept rounded calculations that are reasonably close (for example 'about three times' for 21,500 compared with 6,800).",
+     "Every acceptable answer must rest on a direct comparison or calculation from the table; outside knowledge may be added but is not required and cannot replace use of the data.",
+     "Do not award a point for the claim that the North's share of total mileage increased; in this table it fell from about 76 percent to about 71 percent.",
+     "Responses should stay within 1850 to 1860; developments after 1860 neither earn nor are needed for credit."
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [],
+    "contextualization_ideas": [
+     "Rapid expansion of railroad building in the United States during the 1850s.",
+     "Regional economic differences between a more industrial North and a largely agricultural South before 1861."
+    ],
+    "outside_evidence": [],
+    "reasoning_types": [
+     "Comparison",
+     "Continuity and change over time",
+     "Quantitative analysis of data"
+    ],
+    "saq_answers": {
+     "a": [
+      "Railroad mileage grew in both the North and the South between 1850 and 1860.",
+      "The North had more miles of track than the South in both 1850 (6,800 compared with 2,200) and 1860 (21,500 compared with 8,800).",
+      "Total mileage more than tripled, from 9,000 miles in 1850 to 30,300 miles in 1860.",
+      "Northern mileage more than tripled, rising from 6,800 to 21,500 miles."
+     ],
+     "b": [
+      "The gap in miles widened: the North led by 4,600 miles in 1850 and by 12,700 miles in 1860.",
+      "The North added 14,700 miles over the decade while the South added 6,600, so the North pulled further ahead in total miles.",
+      "The South grew faster in percentage terms (four times its 1850 mileage, compared with a little over three times for the North), so the ratio narrowed from about 3 to 1 to about 2.5 to 1, even though the gap in miles grew.",
+      "The South's share of combined mileage rose from about 24 percent to about 29 percent, yet the South still had far fewer miles than the North."
+     ],
+     "c": [
+      "In 1860 the North had 21,500 miles of track compared with 8,800 in the South, about two and a half times as many.",
+      "In 1860 the North held about 71 percent of the combined 30,300 miles.",
+      "The North had 12,700 more miles than the South in 1860, more than the South's entire network of 8,800 miles.",
+      "The North added more new track in the 1850s (14,700 miles) than the South had in total by 1860 (8,800 miles)."
+     ]
+    },
+    "common_pitfalls": [
+     "Claiming that the North's share of total mileage increased; in the table it fell from about 76 to about 71 percent even though the gap in miles grew.",
+     "Confusing the gap in miles with the growth rate, for example saying the South grew more slowly because it added fewer miles.",
+     "Making arithmetic errors, such as reporting the 1860 total as anything other than 30,300 miles.",
+     "Giving outside causes or effects without using any figure or comparison from the table.",
+     "Bringing in developments after 1860, which fall outside the 1850 to 1860 scope of the question.",
+     "Treating the illustrative composite figures as exact official census statistics."
+    ],
+    "facts": [
+     "In the table the North had 6,800 miles in 1850 and 21,500 miles in 1860.",
+     "In the table the South had 2,200 miles in 1850 and 8,800 miles in 1860.",
+     "Combined mileage in the table rose from 9,000 in 1850 to 30,300 in 1860, more than three times as much.",
+     "The North added 14,700 miles and the South added 6,600 miles over the decade in the table.",
+     "The gap between North and South grew from 4,600 miles in 1850 to 12,700 miles in 1860 in the table.",
+     "Southern mileage in the table grew fourfold; Northern mileage grew a little more than threefold.",
+     "The North had about 76 percent of combined mileage in 1850 and about 71 percent in 1860 in the table.",
+     "In the 1850s, as historians generally describe, railroad building expanded rapidly in the United States, and the North held a clear lead in total mileage."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_composed",
+    "note": "ALTON-composed practice material; fictional sources and attributions."
+   }
+  },
+  "fact": []
+ }
+]
