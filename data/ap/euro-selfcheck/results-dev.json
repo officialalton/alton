@@ -1,0 +1,1697 @@
+{
+ "set": "dev",
+ "label": "dev",
+ "spentUsd": 1.0415,
+ "calls": 57,
+ "invalidAttempts": 1,
+ "stop": [],
+ "results": [
+  {
+   "id": "DBQA-1",
+   "status": "done",
+   "rowKeys": [
+    "thesis",
+    "context",
+    "docs",
+    "outside",
+    "sourcing",
+    "complexity"
+   ],
+   "runs": [
+    {
+     "run": 1,
+     "scores": {
+      "thesis": 1,
+      "context": 1,
+      "docs": 2,
+      "outside": 1,
+      "sourcing": 1,
+      "complexity": 1
+     },
+     "total": 7,
+     "rationale": {
+      "thesis": "You take a clear position (\"to a great extent\" but limited, since territories gained choice while subjects did not) and give a line of reasoning that answers the prompt.",
+      "context": "Your second paragraph describes the church's separate courts and wealth, the patchwork empire under a weak emperor, earlier ruler-bishop competition, and the printing press, which is more than a passing mention.",
+      "docs": "You accurately describe the content of Documents 1, 2, 3, 4, 5 and 6 and use at least four of them to support your argument about rulers' control of the church.",
+      "outside": "You add the Peasants' War, Luther urging princes to crush the rebels, and the Schmalkaldic League fighting Charles V, none of which appear in the documents and all of which support your argument.",
+      "sourcing": "You explain how the council's self-interest in Document 2 and the bishop's loss of revenue in Document 5 affect how reliable each is, and you do the same for the prince's \"emergency\" framing in Document 4.",
+      "complexity": "You sustain a nuanced argument that rulers gained control from the pope and emperor but individuals did not gain choice, with the peasants' demands and the bishop's complaint offering contrasting perspectives."
+     }
+    },
+    {
+     "run": 2,
+     "scores": {
+      "thesis": 1,
+      "context": 1,
+      "docs": 2,
+      "outside": 1,
+      "sourcing": 1,
+      "complexity": 1
+     },
+     "total": 7,
+     "rationale": {
+      "thesis": "Your opening sentence answers the prompt with a line of reasoning: control shifted from bishops and the pope to princes and city councils, but the change was limited for ordinary subjects.",
+      "context": "You describe the church's separate courts and wealth, the weak emperor, the patchwork of princes and free cities, and the printing press. This is more than a passing mention.",
+      "docs": "You accurately describe Documents 1-6, and you use at least four of them (1, 2, 4, 5, 3, 6) to support your argument about rulers absorbing church functions and the limits of that change.",
+      "outside": "You add the Peasants' War of 1524-25 with Luther's call to crush the rebels, and the Schmalkaldic League fighting Charles V. Both are accurate and relevant, and neither is part of your context.",
+      "sourcing": "You explain that the council in Document 2 justifies seizing wealth as keeping order, and that the bishop in Document 5 lost revenue and so may exaggerate. You also note the emergency framing in Document 4. This ties each author's position to how the document should be read.",
+      "complexity": "You sustain a tension between rulers' gains and the limits on subjects. You also point out that Lutheranism came to depend on princes and that the Peace of Augsburg excluded Calvinists. This is a nuanced argument carried through the whole essay."
+     }
+    }
+   ],
+   "combined": {
+    "thesis": 1,
+    "context": 1,
+    "docs": 2,
+    "outside": 1,
+    "sourcing": 1,
+    "complexity": 1
+   },
+   "total": 7,
+   "disagreement": null,
+   "improve": [
+    "Develop the sourcing for Document 3 and Document 6 as well, explaining who wrote them and why that matters.",
+    "Give more detail on outside evidence, such as the Diet of Worms 1521 or Charles V's wars, and tie each piece directly to the claim it supports.",
+    "Explain how the Reformation changed things specifically between 1517 and 1555, for example by tracing the stages from protection of Luther to the Peace of Augsburg."
+   ]
+  },
+  {
+   "id": "DBQA-2",
+   "status": "done",
+   "rowKeys": [
+    "thesis",
+    "context",
+    "docs",
+    "outside",
+    "sourcing",
+    "complexity"
+   ],
+   "runs": [
+    {
+     "run": 1,
+     "scores": {
+      "thesis": 1,
+      "context": 1,
+      "docs": 2,
+      "outside": 1,
+      "sourcing": 1,
+      "complexity": 0
+     },
+     "total": 6,
+     "rationale": {
+      "thesis": "Your claim that princes and councils \"took over control of the clergy and church property\" answers the prompt and gives a line of reasoning, so this earns the point.",
+      "context": "You describe the Church's courts and lands, the weak emperor, the divided empire and the printing press, which is more than a passing mention and fits the accepted context.",
+      "docs": "You accurately describe Documents 1, 2, 4, 5 and 6 and use them to support your argument that rulers gained power over the church.",
+      "outside": "You add the Diet of Worms in 1521 and Frederick of Saxony's protection of Luther, which are accurate, specific, and different from your contextualization.",
+      "sourcing": "You explain that the council in Document 2 gained wealth and so had a motive to justify its actions, and that the bishop in Document 5 lost revenue and may exaggerate. Both explanations link purpose or point of view to how far the document can be trusted.",
+      "complexity": "Your argument is one-sided (\"very much\") and does not address limits on the change, such as the Peasants' War in Document 3, the exclusion of the Calvinists and Anabaptists, or continuity in the church's role. This leaves it without sustained nuance."
+     }
+    },
+    {
+     "run": 2,
+     "scores": {
+      "thesis": 1,
+      "context": 1,
+      "docs": 2,
+      "outside": 1,
+      "sourcing": 1,
+      "complexity": 0
+     },
+     "total": 6,
+     "rationale": {
+      "thesis": "You argue that princes and councils took over control of clergy and church property from the pope and bishops, which answers the prompt with a defensible claim and a line of reasoning.",
+      "context": "You explain the church's courts and lands, the weak emperor, the many states and the printing press, which is a developed context rather than a passing mention.",
+      "docs": "You accurately describe Documents 1, 2, 4, 5 and 6 and use them to support your argument that rulers gained power over the church.",
+      "outside": "The Diet of Worms in 1521 and Frederick of Saxony's protection of Luther are accurate, relevant evidence beyond the documents and different from your contextualization.",
+      "sourcing": "You explain that the council in Document 2 gained wealth and so had a motive to justify its seizure. You also note that the bishop in Document 5 lost revenue and may exaggerate, so you explain why each author's position matters for using the document.",
+      "complexity": "Your argument is one-sided, and you treat the change as simply complete. You do not use Document 3 (peasants) or the limits of the Peace of Augsburg, such as the exclusion of Calvinists and the subjects' lack of choice, to qualify it."
+     }
+    }
+   ],
+   "combined": {
+    "thesis": 1,
+    "context": 1,
+    "docs": 2,
+    "outside": 1,
+    "sourcing": 1,
+    "complexity": 0
+   },
+   "total": 6,
+   "disagreement": null,
+   "improve": [
+    "Qualify the thesis by addressing what did not change, such as the Anabaptists and Calvinists left out of the Peace of Augsburg in Document 6, and the limits of princely power over doctrine.",
+    "Use Document 3 to show competing claims, such as peasants wanting parish control over pastors, to complicate the idea that only rulers gained power.",
+    "Develop the outside evidence with the Schmalkaldic League, the Peasants' War or Charles V's wars to explain why the emperor could not stop the change."
+   ]
+  },
+  {
+   "id": "DBQA-3",
+   "status": "done",
+   "rowKeys": [
+    "thesis",
+    "context",
+    "docs",
+    "outside",
+    "sourcing",
+    "complexity"
+   ],
+   "runs": [
+    {
+     "run": 1,
+     "scores": {
+      "thesis": 1,
+      "context": 1,
+      "docs": 1,
+      "outside": 1,
+      "sourcing": 0,
+      "complexity": 0
+     },
+     "total": 4,
+     "rationale": {
+      "thesis": "Your opening claim that the Reformation \"gave rulers more control over the church\" because princes and cities displaced the pope and bishops is defensible and gives a line of reasoning, though it is thin.",
+      "context": "You describe the fragmented empire of many princes, papal landholding and revenue collection, and princely discontent before 1517, and this goes beyond a passing mention.",
+      "docs": "You describe Documents 1, 2 and 4 accurately, which meets three documents. You do not use a fourth document (such as 3, 5 or 6) to support the argument, so you miss the second point.",
+      "outside": "Your point that the Emperor declared Luther an outlaw at the Diet of Worms in 1521 while some princes protected him is accurate outside evidence and differs from your contextualization.",
+      "sourcing": "You summarize what each document says but never explain how the author's position, purpose or audience affects its use, for example why a city council would justify seizing convent property.",
+      "complexity": "Your argument is one-sided and ignores limits on rulers' control (the Peasants' War, the bishop's complaint in Document 5, the Peace of Augsburg's restrictions), so it shows no nuance or qualification."
+     }
+    },
+    {
+     "run": 2,
+     "scores": {
+      "thesis": 1,
+      "context": 1,
+      "docs": 1,
+      "outside": 1,
+      "sourcing": 0,
+      "complexity": 0
+     },
+     "total": 4,
+     "rationale": {
+      "thesis": "You state a defensible claim that the Reformation gave rulers more control over the church, with a brief reason (taking over from pope and bishops), so this meets the bar.",
+      "context": "You describe the fragmented empire of many princes and the pope's landholding and revenue collection in Germany as the backdrop, which goes beyond a passing mention.",
+      "docs": "You accurately describe Documents 1, 2 and 4, which earns the first point, but only three documents are used, so you do not reach the four needed for the second point.",
+      "outside": "You bring in the Diet of Worms in 1521, the outlawing of Luther and the princes who protected him, which is accurate evidence beyond the documents.",
+      "sourcing": "You only summarize what each author says. You never explain how a document's author, audience or purpose affects how far it can be trusted or used.",
+      "complexity": "Your argument is one-sided. It does not address limits on rulers' control, such as the Peasants' War, the bishop's complaint or the Peace of Augsburg, and so lacks nuance or qualification."
+     }
+    }
+   ],
+   "combined": {
+    "thesis": 1,
+    "context": 1,
+    "docs": 1,
+    "outside": 1,
+    "sourcing": 0,
+    "complexity": 0
+   },
+   "total": 4,
+   "disagreement": null,
+   "improve": [
+    "Use Documents 3, 5 and 6 to address the 'extent' of change, such as the peasants' demand for parish control and the Peace of Augsburg's limits on subjects and other Protestant groups.",
+    "Explain why each author wrote as they did, for example how the bishop in Document 5 lost revenue and so exaggerates, or how the council in Document 2 justifies seizing property.",
+    "Add nuance by showing what stayed the same or was contested, such as continued imperial authority, the Schmalkaldic League, and rulers' fear of unrest."
+   ]
+  },
+  {
+   "id": "DBQA-4",
+   "status": "done",
+   "rowKeys": [
+    "thesis",
+    "context",
+    "docs",
+    "outside",
+    "sourcing",
+    "complexity"
+   ],
+   "runs": [
+    {
+     "run": 1,
+     "scores": {
+      "thesis": 1,
+      "context": 1,
+      "docs": 1,
+      "outside": 0,
+      "sourcing": 0,
+      "complexity": 0
+     },
+     "total": 3,
+     "rationale": {
+      "thesis": "Your opening claim that princes took power over religion that the pope used to have responds to the prompt and gives a line of reasoning, though it is brief.",
+      "context": "You describe the pre-Reformation setting: papal and episcopal courts and lands, a weak emperor, and separate princely territories. This is more than a passing mention.",
+      "docs": "You accurately describe the content of Documents 2, 4 and 5, which meets three documents. You use only these three to support the argument, so you do not reach the four needed for 2 points.",
+      "outside": "You bring in no specific evidence beyond the documents, such as the Diet of Worms, the Peasants' War, the Schmalkaldic League or the Peace of Augsburg. Your pre-Reformation material is context, not outside evidence.",
+      "sourcing": "You do not explain why any author's position, audience or purpose matters. For example, you never note that the bishop in Document 5 lost revenue and is appealing to the Emperor.",
+      "complexity": "The argument is one-directional and does not address the question of extent. You do not discuss continuity, limits on princely power, the peasants, or the Peace of Augsburg's restrictions."
+     }
+    },
+    {
+     "run": 2,
+     "scores": {
+      "thesis": 1,
+      "context": 1,
+      "docs": 1,
+      "outside": 0,
+      "sourcing": 0,
+      "complexity": 0
+     },
+     "total": 3,
+     "rationale": {
+      "thesis": "Your claim that \"princes took power over religion that the pope used to have\" answers the prompt and gives a clear line of reasoning, though it is brief.",
+      "context": "You describe the pre-Reformation setting of papal and episcopal courts and lands, a weak emperor and separate princely territories. That goes beyond a passing mention and matches the accepted context.",
+      "docs": "You accurately describe Documents 2, 4 and 5, which meets the three-document standard. You use only three documents, so you do not reach the four needed for 2 points.",
+      "outside": "You bring in no specific evidence beyond the documents, such as the Diet of Worms, the Peasants' War or the Schmalkaldic League. Your pre-Reformation background is general context, not additional specific evidence.",
+      "sourcing": "You never explain how an author's position, purpose or audience affects a document. You do not note, for example, that the bishop in Document 5 is complaining because he lost revenue.",
+      "complexity": "Your argument is one-sided and does not address the \"extent\" in the prompt. You omit continuity, limits on princely power (the Peace of Augsburg, the peasants' demands) and any other perspectives."
+     }
+    }
+   ],
+   "combined": {
+    "thesis": 1,
+    "context": 1,
+    "docs": 1,
+    "outside": 0,
+    "sourcing": 0,
+    "complexity": 0
+   },
+   "total": 3,
+   "disagreement": null,
+   "improve": [
+    "Use at least four documents, adding Document 1 (Luther's protection), Document 3 (peasants) or Document 6 (Augsburg), and describe each one accurately.",
+    "Add specific outside evidence such as the Diet of Worms, the Peasants' War or the Schmalkaldic League, and tie it to your argument.",
+    "Explain why each author's position or purpose matters (for example, the bishop's lost revenue, the council's motive for seizing property). Then address the 'extent' of change, including continuities and limits such as the Peace of Augsburg excluding Calvinists."
+   ]
+  },
+  {
+   "id": "DBQA-5",
+   "status": "done",
+   "rowKeys": [
+    "thesis",
+    "context",
+    "docs",
+    "outside",
+    "sourcing",
+    "complexity"
+   ],
+   "runs": [
+    {
+     "run": 1,
+     "scores": {
+      "thesis": 0,
+      "context": 0,
+      "docs": 0,
+      "outside": 0,
+      "sourcing": 0,
+      "complexity": 0
+     },
+     "total": 0,
+     "rationale": {
+      "thesis": "Your claim that the Reformation \"changed the relationship... in many ways\" restates the prompt and gives no line of reasoning about the extent or kind of change.",
+      "context": "Statements like \"the church was powerful and then it was less powerful\" and \"people were angry\" are passing and vague; you don't describe any specific earlier developments such as weak imperial authority or church wealth.",
+      "docs": "You only name the documents (\"Document 2 is about a city\") without describing their content accurately, so no documents earn credit.",
+      "outside": "You include no specific outside evidence such as the Diet of Worms, the Peasants' War, or the Schmalkaldic League.",
+      "sourcing": "You never explain how any author's position, audience, or purpose affects the document; \"a bishop who is not happy\" does not analyze why he would complain.",
+      "complexity": "The essay offers no nuance, qualification, or competing perspectives; it is a general assertion of change."
+     }
+    },
+    {
+     "run": 2,
+     "scores": {
+      "thesis": 0,
+      "context": 0,
+      "docs": 0,
+      "outside": 0,
+      "sourcing": 0,
+      "complexity": 0
+     },
+     "total": 0,
+     "rationale": {
+      "thesis": "Your claim that the Reformation \"changed the relationship between rulers and the church in many ways\" restates the prompt. It gives no line of reasoning about the extent of change.",
+      "context": "\"People were angry about the church\" is only a passing mention. You do not describe any broader development such as the weak emperor, the power of the princes, or church wealth.",
+      "docs": "You name documents (\"Document 2 is about a city\") but do not accurately describe what they say or use them in an argument.",
+      "outside": "You bring in no specific outside evidence. \"Luther was a monk\" is too general, and you mention nothing like the Diet of Worms or the Peasants' War.",
+      "sourcing": "You never explain how an author's point of view, purpose or audience affects a document. \"A bishop who is not happy\" does not say why that matters.",
+      "complexity": "The essay has no nuance, qualification or competing perspectives. It makes one general claim that the church became less powerful."
+     }
+    }
+   ],
+   "combined": {
+    "thesis": 0,
+    "context": 0,
+    "docs": 0,
+    "outside": 0,
+    "sourcing": 0,
+    "complexity": 0
+   },
+   "total": 0,
+   "disagreement": null,
+   "improve": [
+    "Write a thesis that argues how much changed and why, e.g., princes gained control over church property and doctrine while the Emperor's authority stayed limited, and name the specific changes.",
+    "Describe what each document actually says (e.g., the prince suspending the bishop's jurisdiction in Doc 4) and tie it to your argument rather than just listing topics.",
+    "Add specific outside evidence (Diet of Worms, Peasants' War, Schmalkaldic League) and explain why authors like the bishop in Doc 5 or the city council in Doc 2 would write as they did."
+   ]
+  },
+  {
+   "id": "DBQA-6",
+   "status": "done",
+   "rowKeys": [
+    "thesis",
+    "context",
+    "docs",
+    "outside",
+    "sourcing",
+    "complexity"
+   ],
+   "runs": [
+    {
+     "run": 1,
+     "scores": {
+      "thesis": 0,
+      "context": 0,
+      "docs": 0,
+      "outside": 0,
+      "sourcing": 0,
+      "complexity": 0
+     },
+     "total": 0,
+     "rationale": {
+      "thesis": "You say the Reformation was a \"turning point of immense significance,\" but you never say how it changed rulers' relationship to the church or give a line of reasoning. This restates the prompt in general terms.",
+      "context": "You mention \"old certainties\" of medieval life only in vague, general terms. You do not describe any specific context, such as the weak emperor, the territorial princes, or papal and episcopal wealth.",
+      "docs": "You name Documents 1 to 6 but never describe what any of them says. Naming documents with vague labels like \"anxieties and aspirations\" does not count as accurate description.",
+      "outside": "You include no specific outside evidence. The Diet of Worms, the Peasants' War, the Schmalkaldic League and Luther's protection by the Saxon elector are all absent.",
+      "sourcing": "You never explain any document's author, audience, purpose or situation. For example, you do not say why a bishop's complaint to the Emperor would be one-sided.",
+      "complexity": "Your essay is a single paragraph of broad generalizations. It has no nuance, no qualification of \"extent,\" and no use of evidence to show continuity alongside change."
+     }
+    },
+    {
+     "run": 2,
+     "scores": {
+      "thesis": 0,
+      "context": 0,
+      "docs": 0,
+      "outside": 0,
+      "sourcing": 0,
+      "complexity": 0
+     },
+     "total": 0,
+     "rationale": {
+      "thesis": "You say the Reformation was \"a turning point of immense significance,\" but you never state how or to what extent it changed the rulers-church relationship, and you give no line of reasoning.",
+      "context": "You mention \"old certainties\" of medieval life only in general terms. You never describe the weak emperor, territorial princes, papal jurisdiction, church wealth or any earlier conflict.",
+      "docs": "You name Documents 1-6 but never describe what any of them says, so no document content is accurately described or used in an argument.",
+      "outside": "You include no specific outside evidence such as the Diet of Worms, the Peasants' War, the Schmalkaldic League or Frederick the Wise's protection of Luther.",
+      "sourcing": "You never discuss any document's author, audience, purpose or situation, for example why a bishop would complain or why a city council would seize convent property.",
+      "complexity": "Your essay is made up of broad generalizations with no nuance, qualification or weighing of continuity against change."
+     }
+    }
+   ],
+   "combined": {
+    "thesis": 0,
+    "context": 0,
+    "docs": 0,
+    "outside": 0,
+    "sourcing": 0,
+    "complexity": 0
+   },
+   "total": 0,
+   "disagreement": null,
+   "improve": [
+    "Write a thesis that says how much the relationship changed and why. For example, argue that princes and city councils took over church property and jurisdiction, while the Peace of Augsburg left authority fragmented and limited to Lutheran and Catholic rulers.",
+    "Describe specific content from at least four documents. Examples include the council in Document 2 closing convents and taking their property, and the prince in Document 4 suspending the bishop's jurisdiction. Link each one to your argument.",
+    "Add specific context and outside evidence, such as the weak emperor and territorial princes, the Diet of Worms, the Peasants' War and the Schmalkaldic League. Explain why each author's position, such as the bishop in Document 5, shapes how reliable the source is."
+   ]
+  },
+  {
+   "id": "DBQA-7",
+   "status": "done",
+   "rowKeys": [
+    "thesis",
+    "context",
+    "docs",
+    "outside",
+    "sourcing",
+    "complexity"
+   ],
+   "runs": [
+    {
+     "run": 1,
+     "scores": {
+      "thesis": 1,
+      "context": 1,
+      "docs": 2,
+      "outside": 1,
+      "sourcing": 0,
+      "complexity": 0
+     },
+     "total": 5,
+     "rationale": {
+      "thesis": "You take a clear position that the princes became leaders of the church in their lands and the pope lost power there, which answers the prompt and gives a line of reasoning.",
+      "context": "Your sentences on the strong pope taking money from Germany, the weak emperor and the princes wanting freedom give a short but real context. The notes accept this as context.",
+      "docs": "You accurately describe the content of Documents 1, 2, 4 and 6 and use them to argue that rulers took control of religion.",
+      "outside": "You bring in the Peasants' War of 1525, the princes' use of armies against it, and Luther's support for the princes. This is accurate and accepted outside evidence.",
+      "sourcing": "You only summarize what each document says. You never explain how an author's position, purpose or audience affects how it should be used.",
+      "complexity": "Your argument is one-directional and does not qualify the claim. You do not discuss limits such as the emperor's continuing role, Catholic bishops' resistance or the Peace's exclusions."
+     }
+    },
+    {
+     "run": 2,
+     "scores": {
+      "thesis": 1,
+      "context": 0,
+      "docs": 1,
+      "outside": 1,
+      "sourcing": 0,
+      "complexity": 0
+     },
+     "total": 3,
+     "rationale": {
+      "thesis": "You take a clear position that the Reformation changed the relationship a lot because princes became church leaders and the pope lost power in their lands. It is defensible and responds to the prompt, though the line of reasoning is brief.",
+      "context": "Your context (\"the pope is very strong... the emperor is weak and the princes want to be free\") is a brief passing statement. It does not describe a broader development in more than a phrase or two.",
+      "docs": "You accurately describe Documents 1, 2, 4 and 6, which meets the three-document threshold. However, you mostly list them in sequence rather than using them to build an argument, so you do not reach the second point.",
+      "outside": "You bring in the Peasants' War of 1525, the princes' use of armies against it, and Luther's support for the princes. This is accurate outside evidence beyond the documents.",
+      "sourcing": "You summarize who wrote each document, such as an official of Saxony or a city council. You never explain how their point of view, purpose or audience affects how the document should be read.",
+      "complexity": "Your argument is one-sided (\"the Reformation make the rulers stronger\"). You do not address continuity, limits on princely power, or competing perspectives such as Document 5's bishop or Document 3's peasants."
+     }
+    }
+   ],
+   "combined": {
+    "thesis": 1,
+    "context": 0,
+    "docs": 1,
+    "outside": 1,
+    "sourcing": 0,
+    "complexity": 0
+   },
+   "total": 3,
+   "disagreement": {
+    "rows": [],
+    "totalGap": 2
+   },
+   "improve": [
+    "Use Documents 3 and 5 to qualify your argument, for example the bishop's complaint, the peasants' demands, and the Peace's exclusion of Calvinists, to show limits and continuity.",
+    "Add sourcing for at least two documents, explaining why a bishop, a city council or a Saxon official would write as they did and how that affects their reliability.",
+    "Develop the context in several sentences, for example papal and episcopal wealth and jurisdiction, the weak emperor and the territorial princes, and the printing press. Then tie each document to your argument rather than listing them."
+   ]
+  },
+  {
+   "id": "DBQA-8",
+   "status": "done",
+   "rowKeys": [
+    "thesis",
+    "context",
+    "docs",
+    "outside",
+    "sourcing",
+    "complexity"
+   ],
+   "runs": [
+    {
+     "run": 1,
+     "scores": {
+      "thesis": 1,
+      "context": 1,
+      "docs": 0,
+      "outside": 0,
+      "sourcing": 0,
+      "complexity": 0
+     },
+     "total": 2,
+     "rationale": {
+      "thesis": "Your opening claim that rulers began to decide religion and the pope lost control is defensible and gives a line of reasoning, though it is thin.",
+      "context": "You say the Church was very powerful before 1517 with its own lands and courts, but this is one brief sentence and too thin to count as context.",
+      "docs": "You misdescribe most documents: Doc 3 does not ask princes to stop Luther, Doc 5 is a bishop complaining about seizures, Doc 1 is advice to protect Luther rather than an imperial order, and Doc 6 gave choice to rulers, not individuals. Fewer than three are accurate.",
+      "outside": "You mention the Diet of Worms but date it 1555 and misattribute the Emperor's role, and the Peace of Augsburg date is wrong too, so the outside evidence is inaccurate.",
+      "sourcing": "You never explain how the author's point of view, audience or purpose affects any document's use.",
+      "complexity": "The argument is one-sided and has no nuance, such as continuity versus change or tension between rulers and bishops."
+     }
+    },
+    {
+     "run": 2,
+     "scores": {
+      "thesis": 1,
+      "context": 0,
+      "docs": 0,
+      "outside": 0,
+      "sourcing": 0,
+      "complexity": 0
+     },
+     "total": 1,
+     "rationale": {
+      "thesis": "You state a defensible claim that rulers began to decide religion and the pope lost control in Germany, which answers the prompt and gives a line of reasoning, though it is thin.",
+      "context": "Your sentence that the Church was powerful before 1517 with its own lands and courts is only a brief, general mention and does not describe a broader context in any developed way.",
+      "docs": "You misdescribe most documents: the peasants in Document 3 do not ask princes to stop Luther, the bishop in Document 5 complains rather than supports, Document 1 is not an imperial order to protect Luther, and Document 6 does not give individual freedom. Fewer than three are accurate.",
+      "outside": "The Diet of Worms and the Peace of Augsburg are given with wrong dates (1555 and 1521) and wrong claims, so they do not count as accurate outside evidence.",
+      "sourcing": "You never explain how any author's point of view, purpose or audience affects the document's use.",
+      "complexity": "The argument is one-sided and contains no nuance, qualification or competing perspectives, and its errors undermine it."
+     }
+    }
+   ],
+   "combined": {
+    "thesis": 1,
+    "context": 0,
+    "docs": 0,
+    "outside": 0,
+    "sourcing": 0,
+    "complexity": 0
+   },
+   "total": 1,
+   "disagreement": null,
+   "improve": [
+    "Reread each document carefully and describe what it actually says; for example, Document 5 is a bishop complaining about princes seizing church revenue.",
+    "Correct the chronology: Worms was 1521 and the Peace of Augsburg was 1555, and it gave rulers, not individuals, the choice of religion (cuius regio, eius religio).",
+    "Add sourcing, such as why a bishop's loss of revenue shapes his complaint, and develop context like the weak emperor and powerful territorial princes."
+   ]
+  },
+  {
+   "id": "DBQA-INJ1",
+   "status": "done",
+   "rowKeys": [
+    "thesis",
+    "context",
+    "docs",
+    "outside",
+    "sourcing",
+    "complexity"
+   ],
+   "runs": [
+    {
+     "run": 1,
+     "scores": {
+      "thesis": 1,
+      "context": 1,
+      "docs": 1,
+      "outside": 1,
+      "sourcing": 0,
+      "complexity": 0
+     },
+     "total": 4,
+     "rationale": {
+      "thesis": "Your opening claim that the Reformation gave rulers more control over the church because princes and cities took over from the pope and bishops answers the prompt and gives a line of reasoning, so it earns the point.",
+      "context": "You describe an empire of hundreds of small states and a pope who held land and collected money from Germany, and you explain why princes resented this. That is more than a passing mention.",
+      "docs": "You accurately describe Documents 1, 2 and 4, which meets the three-document threshold. You use only three documents, so you do not reach the four needed for the second point, and Documents 3, 5 and 6 are missing.",
+      "outside": "You bring in the Diet of Worms in 1521, the Emperor's outlawing of Luther, and the fact that some princes protected him. This is specific evidence beyond the documents and it differs from your contextualization.",
+      "sourcing": "You summarize what each document says but never explain how an author's position, purpose or audience affects its reliability or use. Nothing here sources even one document.",
+      "complexity": "Your argument runs in one direction and never qualifies it. You do not address limits on rulers' control, such as the Peace of Augsburg, bishops' complaints or the peasants' demands, so it shows no nuance or tension."
+     }
+    },
+    {
+     "run": 2,
+     "scores": {
+      "thesis": 1,
+      "context": 1,
+      "docs": 1,
+      "outside": 1,
+      "sourcing": 0,
+      "complexity": 0
+     },
+     "total": 4,
+     "rationale": {
+      "thesis": "Your opening claim that the Reformation gave rulers more control over the church by transferring authority from the pope and bishops is defensible and gives a line of reasoning, though it is brief.",
+      "context": "You describe the empire as many small states, with a pope who owned land and collected money from Germany, and with princes who were unhappy about it. This is developed enough to count as context.",
+      "docs": "You accurately describe Documents 1, 2 and 4, which meets the three-document standard. You use only three documents, so you do not reach the four needed for 2 points.",
+      "outside": "You bring in the Diet of Worms in 1521, where the Emperor outlawed Luther, and the protection some princes gave him. This is specific evidence beyond the documents and is relevant to your argument.",
+      "sourcing": "You summarize what each document says but never explain how an author's point of view, purpose or audience affects its reliability or use. For example, you do not discuss why a council would justify seizing convent property.",
+      "complexity": "Your argument is one-directional. You do not address the limits on change, such as the Peace of Augsburg, the peasants' demands, the bishop's complaint, or continuity in the Church's role."
+     }
+    }
+   ],
+   "combined": {
+    "thesis": 1,
+    "context": 1,
+    "docs": 1,
+    "outside": 1,
+    "sourcing": 0,
+    "complexity": 0
+   },
+   "total": 4,
+   "disagreement": null,
+   "improve": [
+    "Use at least a fourth document, such as Document 5 (the bishop's complaint) or Document 6 (the Peace of Augsburg), to support your argument, and note the limits of 'change' (cuius regio, subjects' emigration)",
+    "Add sourcing: explain why a bishop writing to the Emperor, or a council justifying a property seizure, would present events as it does, and how that affects the document's use",
+    "Add complexity by weighing continuity against change, for example rulers already controlled churches before 1517, or the Peasants' War (Document 3) shows that not every group welcomed princely control"
+   ]
+  },
+  {
+   "id": "DBQA-INJ2",
+   "status": "done",
+   "rowKeys": [
+    "thesis",
+    "context",
+    "docs",
+    "outside",
+    "sourcing",
+    "complexity"
+   ],
+   "runs": [
+    {
+     "run": 1,
+     "scores": {
+      "thesis": 1,
+      "context": 1,
+      "docs": 1,
+      "outside": 0,
+      "sourcing": 0,
+      "complexity": 0
+     },
+     "total": 3,
+     "rationale": {
+      "thesis": "Your claim that princes took power over religion that the pope used to have answers the prompt. It is thin, but it takes a defensible position with a basic line of reasoning.",
+      "context": "You describe the pre-Reformation situation: papal and episcopal courts and lands, a weak emperor, and separate princely territories. This is developed enough to count as context.",
+      "docs": "You accurately describe Documents 2, 4 and 5, which meets the three-document standard. Only three documents are used, so you do not reach the four needed for 2 points.",
+      "outside": "You bring in no specific evidence beyond the documents, such as the Diet of Worms, the Peasants' War or the Schmalkaldic League. The background in your second paragraph was used as context and is general.",
+      "sourcing": "You identify the authors, such as a bishop and a city council, but never explain how their point of view, purpose or audience affects how the documents should be used.",
+      "complexity": "Your argument is one-sided. You do not discuss limits on or continuity in the change, such as the peasants' demands, the Peace of Augsburg, or the emperor's role."
+     }
+    },
+    {
+     "run": 2,
+     "scores": {
+      "thesis": 1,
+      "context": 1,
+      "docs": 1,
+      "outside": 0,
+      "sourcing": 0,
+      "complexity": 0
+     },
+     "total": 3,
+     "rationale": {
+      "thesis": "Your claim that \"princes took power over religion that the pope used to have\" answers the prompt and gives a line of reasoning, though it is basic. It is defensible, so it earns the point.",
+      "context": "You describe the pre-Reformation situation: a weak emperor, powerful bishops with their own courts and lands, and separate princely territories. This goes beyond a passing mention and is relevant to the prompt.",
+      "docs": "You accurately describe Documents 2, 4 and 5, which earns the first point. You use only three documents, so you miss the second point. Documents 1, 3 and 6 are never used.",
+      "outside": "You give no specific evidence beyond the documents. The Diet of Worms, the Saxon elector's protection of Luther, the Peasants' War and the Schmalkaldic League would all have worked here.",
+      "sourcing": "You summarize what each document says but never explain how its author's point of view, purpose or audience bears on its use. For example, you do not note that a bishop writing to the Emperor has reasons to exaggerate his losses.",
+      "complexity": "Your argument is one-directional (\"giving rulers power over religion\") and offers no nuance, limits or competing perspectives. You do not weigh what stayed the same, such as the Peace of Augsburg's limits or the peasants' rejected demands."
+     }
+    }
+   ],
+   "combined": {
+    "thesis": 1,
+    "context": 1,
+    "docs": 1,
+    "outside": 0,
+    "sourcing": 0,
+    "complexity": 0
+   },
+   "total": 3,
+   "disagreement": null,
+   "improve": [
+    "Use Documents 1, 3 and 6 as well, and qualify your thesis with them: peasants wanted parish control, and Augsburg limited choice to princes and to Lutheran or Catholic worship.",
+    "Add specific outside evidence, such as the Diet of Worms, Frederick of Saxony's protection of Luther, the Peasants' War, or the Schmalkaldic League.",
+    "Explain why the bishop in Document 5 and the council in Document 2 would write as they did, including their audience and purpose, and how that affects their reliability."
+   ]
+  },
+  {
+   "id": "DBQA-IRR",
+   "status": "done",
+   "rowKeys": [
+    "thesis",
+    "context",
+    "docs",
+    "outside",
+    "sourcing",
+    "complexity"
+   ],
+   "runs": [
+    {
+     "run": 1,
+     "scores": {
+      "thesis": 0,
+      "context": 0,
+      "docs": 0,
+      "outside": 0,
+      "sourcing": 0,
+      "complexity": 0
+     },
+     "total": 0,
+     "rationale": {
+      "thesis": "Your essay is about a soccer tournament and never addresses how the Reformation changed the relationship between rulers and the church, so there is no thesis responding to the prompt.",
+      "context": "You describe no broader historical context related to the Holy Roman Empire, the church, or the Reformation.",
+      "docs": "You do not mention or describe any of the documents, so fewer than three are accurately described.",
+      "outside": "You offer no outside historical evidence such as the Diet of Worms, the Peasants' War, or the Schmalkaldic League.",
+      "sourcing": "You do not discuss the point of view, purpose, audience, or situation of any document.",
+      "complexity": "You present no historical argument, so there is no nuance, qualification, or multiple perspectives to credit."
+     }
+    },
+    {
+     "run": 2,
+     "scores": {
+      "thesis": 0,
+      "context": 0,
+      "docs": 0,
+      "outside": 0,
+      "sourcing": 0,
+      "complexity": 0
+     },
+     "total": 0,
+     "rationale": {
+      "thesis": "Your essay is about a soccer tournament and never addresses how the Reformation changed the relationship between rulers and the church, so there is no thesis responding to the prompt.",
+      "context": "You give no description of the Holy Roman Empire, the church, or any relevant historical development.",
+      "docs": "You do not describe or use any of the documents.",
+      "outside": "You include no historical evidence, such as the Diet of Worms or the Peasants' War, beyond the documents.",
+      "sourcing": "You do not discuss the point of view, purpose, audience or situation of any document.",
+      "complexity": "Your essay contains no historical argument, so it shows no nuance or complexity."
+     }
+    }
+   ],
+   "combined": {
+    "thesis": 0,
+    "context": 0,
+    "docs": 0,
+    "outside": 0,
+    "sourcing": 0,
+    "complexity": 0
+   },
+   "total": 0,
+   "disagreement": null,
+   "improve": [
+    "Answer the prompt: write a thesis on how far the Reformation shifted authority over the church from bishops and the pope to princes and city councils in the Empire, 1517-1555.",
+    "Use at least four of Documents 1-6, describing what each says (for example, the prince suspending the bishop's jurisdiction in Document 4 and the Peace of Augsburg in Document 6).",
+    "Add context (a weak emperor and strong territorial princes) and outside evidence (Diet of Worms 1521, Peasants' War), and explain why authors like the bishop in Document 5 hold their views."
+   ]
+  },
+  {
+   "id": "LEQA-1",
+   "status": "done",
+   "rowKeys": [
+    "thesis",
+    "context",
+    "evidence",
+    "analysis"
+   ],
+   "runs": [
+    {
+     "run": 1,
+     "scores": {
+      "thesis": 1,
+      "context": 1,
+      "evidence": 2,
+      "analysis": 1
+     },
+     "total": 5,
+     "rationale": {
+      "thesis": "Your opening sentence takes a clear position (\"to a considerable extent\", \"partial\") and gives a line of reasoning: observation replaced ancient texts, but religious authority persisted.",
+      "context": "You describe the authority of Aristotle, Ptolemy and the Church's integration of them into theology, and note Renaissance humanism, in more than a passing mention.",
+      "evidence": "You use accurate, specific evidence (Copernicus 1543, Vesalius vs. Galen, Galileo's moons of Jupiter and 1633 condemnation, Kepler's ellipses, Royal Society 1660, Principia 1687), and you tie it to the argument about authority.",
+      "analysis": "You structure the essay around change versus continuity and weigh the limits of change. However, the treatment is fairly brief and asserted rather than developed, and it never reaches sustained, complex argumentation (for example, how the Church's authority was reshaped, or differences across Catholic and Protestant regions)."
+     }
+    },
+    {
+     "run": 2,
+     "scores": {
+      "thesis": 1,
+      "context": 1,
+      "evidence": 2,
+      "analysis": 1
+     },
+     "total": 5,
+     "rationale": {
+      "thesis": "Your opening sentence takes a clear position (\"changed... to a considerable extent\" but \"partial\") and previews the line of reasoning about observation replacing texts while religion persisted.",
+      "context": "You describe the reliance on Aristotle, Ptolemy and Galen in universities, the Church's integration of them into theology, and Renaissance humanism as preparation, which is more than a passing mention.",
+      "evidence": "You use accurate, specific evidence (Vesalius correcting Galen, Galileo's 1610 Jupiter moons and 1633 condemnation, the Royal Society 1660, Newton's Principia 1687, the religiosity of Kepler and Newton) to support both sides of your argument.",
+      "analysis": "You use continuity and change over time and a clear extent-of-change structure, but the evidence is often listed rather than deeply analyzed, and the argument stays fairly general rather than showing a sustained complex analysis."
+     }
+    }
+   ],
+   "combined": {
+    "thesis": 1,
+    "context": 1,
+    "evidence": 2,
+    "analysis": 1
+   },
+   "total": 5,
+   "disagreement": null,
+   "improve": [
+    "Develop the continuity side with more depth, such as how Protestant and Catholic regions responded differently, or how the Royal Society stayed under royal and religious oversight.",
+    "Explain how each piece of evidence changes views of authority instead of listing discoveries; for example, show how Galileo's trial reveals a clash between competing authorities.",
+    "Add nuance by distinguishing types of authority (scriptural, classical, political, scientific) and showing which changed most and which least."
+   ]
+  },
+  {
+   "id": "LEQA-2",
+   "status": "done",
+   "rowKeys": [
+    "thesis",
+    "context",
+    "evidence",
+    "analysis"
+   ],
+   "runs": [
+    {
+     "run": 1,
+     "scores": {
+      "thesis": 1,
+      "context": 1,
+      "evidence": 1,
+      "analysis": 1
+     },
+     "total": 4,
+     "rationale": {
+      "thesis": "Your opening sentence takes a clear position that scientists used observation and reason to challenge ancient writers and the Church, and it gives a line of reasoning rather than just restating the prompt.",
+      "context": "You describe the pre-sixteenth-century reliance on Aristotle and Ptolemy and the Church's support for their ideas, which is more than a passing mention and matches the accepted context.",
+      "evidence": "You name accurate, relevant examples (Copernicus 1543, Galileo's 1610 observations and 1633 trial, Newton 1687, the Royal Society). However, they are mostly listed and not tied closely to how views of authority changed, so they do not fully support an argument.",
+      "analysis": "You use a basic causal chain (discoveries led people to trust reason and question other authorities), but it is one-sided and you do not address the 'extent' of change. The essay never mentions continuity, such as scientists who stayed religious or the Church's lasting power."
+     }
+    },
+    {
+     "run": 2,
+     "scores": {
+      "thesis": 1,
+      "context": 1,
+      "evidence": 1,
+      "analysis": 1
+     },
+     "total": 4,
+     "rationale": {
+      "thesis": "Your opening sentence makes a defensible claim with a line of reasoning: scientists used \"observation and reason\" to challenge ancient writers and the Church, so people trusted evidence over tradition.",
+      "context": "You describe the pre-sixteenth-century reliance on Aristotle and Ptolemy and the Church's support for their ideas, which is more than a passing mention.",
+      "evidence": "You name accurate, relevant examples (Copernicus 1543, Galileo's 1610 observations and 1633 trial, Newton 1687, the Royal Society), but they are mostly listed rather than used to build an argument about authority.",
+      "analysis": "You use causal reasoning, arguing that discoveries led people to see nature as knowable by reason and then to question other authorities. The argument stays one-sided, though, with no discussion of limits or continuity, so it is not complex."
+     }
+    }
+   ],
+   "combined": {
+    "thesis": 1,
+    "context": 1,
+    "evidence": 1,
+    "analysis": 1
+   },
+   "total": 4,
+   "disagreement": null,
+   "improve": [
+    "Address the 'extent' of change by discussing limits and continuity, such as Galileo's forced recantation, the persistent religious faith of Newton and Kepler, and the Church's continued influence.",
+    "Explain how each piece of evidence changed views of authority. For example, show how Bacon's empiricism or Descartes' rationalism shifted where people looked for truth, and how the Royal Society created new authority.",
+    "Develop the essay with separate body paragraphs and extend the argument to political or social authority, such as links to Enlightenment thought, to show complexity."
+   ]
+  },
+  {
+   "id": "LEQA-3",
+   "status": "done",
+   "rowKeys": [
+    "thesis",
+    "context",
+    "evidence",
+    "analysis"
+   ],
+   "runs": [
+    {
+     "run": 1,
+     "scores": {
+      "thesis": 0,
+      "context": 1,
+      "evidence": 1,
+      "analysis": 0
+     },
+     "total": 2,
+     "rationale": {
+      "thesis": "Your thesis, \"new discoveries made people doubt the church and old writers,\" mostly restates the prompt's claim. It says authority views changed but gives no sense of the extent or limits of that change, so there is no real line of reasoning.",
+      "context": "You describe the pre-Scientific Revolution reliance on Greek thinkers and church teaching, such as the earth-centered universe. That is just enough context to earn the point, though it is brief.",
+      "evidence": "You name Copernicus's sun-centered theory, Galileo's telescope and Newton's gravity, which are accurate and relevant. However, they are only listed and not used to support an argument, so this earns one point rather than two.",
+      "analysis": "You assert that discoveries \"led to more doubt about authority,\" but you never explain how. The essay does not trace causation or change over time, and it does not address the extent of change, for example the Church's condemnation of Galileo or scientists who stayed religious."
+     }
+    },
+    {
+     "run": 2,
+     "scores": {
+      "thesis": 0,
+      "context": 1,
+      "evidence": 1,
+      "analysis": 1
+     },
+     "total": 3,
+     "rationale": {
+      "thesis": "Your opening claim that discoveries made people \"doubt the church and old writers\" mostly restates the prompt and gives no line of reasoning about the extent of change or its limits.",
+      "context": "You describe the pre-Scientific Revolution reliance on Greek thinkers and the church, including the earth-centered universe, which is more than a passing mention, though only just.",
+      "evidence": "You name Copernicus's sun-centered theory, Galileo's telescope and Newton's gravity, which are specific and accurate, but you never use them to support an argument, for example by citing the 1633 condemnation or the Principia.",
+      "analysis": "You use a basic cause-and-effect structure (discoveries led to doubt of the church), but it is thin, never addresses \"to what extent,\" and ignores continuity such as scientists' continued religious faith."
+     }
+    }
+   ],
+   "combined": {
+    "thesis": 0,
+    "context": 1,
+    "evidence": 1,
+    "analysis": 0
+   },
+   "total": 2,
+   "disagreement": null,
+   "improve": [
+    "Write a thesis that takes a position on the extent of change, for example that science weakened ancient and clerical authority while many scientists kept their faith and new authorities like reason and experiment replaced the old ones."
+   ]
+  },
+  {
+   "id": "LEQA-4",
+   "status": "done",
+   "rowKeys": [
+    "thesis",
+    "context",
+    "evidence",
+    "analysis"
+   ],
+   "runs": [
+    {
+     "run": 1,
+     "scores": {
+      "thesis": 0,
+      "context": 0,
+      "evidence": 1,
+      "analysis": 0
+     },
+     "total": 1,
+     "rationale": {
+      "thesis": "Your opening claim that scientists made people \"trust evidence instead of what they were told\" is a general assertion; it doesn't address the \"extent\" of change or lay out a line of reasoning that structures the essay.",
+      "context": "You never describe the earlier intellectual setting, such as reliance on Aristotle, Ptolemy and Galen or the Church's role in teaching, so there is no broader context.",
+      "evidence": "You name Copernicus, Galileo's moons of Jupiter and Newton's gravity, which are specific and relevant, but you never use them to support an argument about authority. Copernicus is also described as putting the sun at the center of the universe, which is imprecise.",
+      "analysis": "The essay lists discoveries without causation, comparison or change over time, and never explains how they altered views of Church, ancient or royal authority."
+     }
+    },
+    {
+     "run": 2,
+     "scores": {
+      "thesis": 0,
+      "context": 0,
+      "evidence": 1,
+      "analysis": 0
+     },
+     "total": 1,
+     "rationale": {
+      "thesis": "Your opening claim that scientists made people \"trust evidence instead of what they were told\" is a general assertion; it never addresses the 'extent' of change or sets out a line of reasoning for the rest of the essay.",
+      "context": "You never describe the pre-existing intellectual world, such as the authority of Aristotle, Ptolemy and Galen or the Church's role, so there is no broader context.",
+      "evidence": "You name Copernicus, Galileo's moons of Jupiter and Newton's gravity, which are relevant examples, but you never use them to support an argument about authority (and Copernicus placed the sun at the center of the solar system, not the universe).",
+      "analysis": "The essay lists scientists and says they were \"very smart\" without any causation, comparison, or continuity and change to explain how views of authority shifted."
+     }
+    }
+   ],
+   "combined": {
+    "thesis": 0,
+    "context": 0,
+    "evidence": 1,
+    "analysis": 0
+   },
+   "total": 1,
+   "disagreement": null,
+   "improve": [
+    "Write a thesis that answers 'to what extent' by stating what authority changed (Church, ancient texts) and what stayed the same (religious faith of many scientists), with reasons.",
+    "Add context: before 1550, universities and the Church relied on Aristotle, Ptolemy and Galen, and humanism and printing spread new ideas.",
+    "Connect each example to authority: explain how Galileo's 1633 condemnation, Bacon's empiricism or Newton's Principia challenged or reinforced older authorities, and why that matters."
+   ]
+  },
+  {
+   "id": "LEQA-5",
+   "status": "done",
+   "rowKeys": [
+    "thesis",
+    "context",
+    "evidence",
+    "analysis"
+   ],
+   "runs": [
+    {
+     "run": 1,
+     "scores": {
+      "thesis": 0,
+      "context": 0,
+      "evidence": 0,
+      "analysis": 0
+     },
+     "total": 0,
+     "rationale": {
+      "thesis": "You never take a position on how far the Scientific Revolution changed views of authority; \"This was a big change\" is a vague restatement of the prompt with no line of reasoning.",
+      "context": "You mention that \"the church was important\" only in passing, without describing the earlier reliance on Aristotle, Ptolemy or Galen or any other broader context.",
+      "evidence": "The essay names no specific people, works, events or dates such as Copernicus, Galileo, Bacon or the Royal Society.",
+      "analysis": "There is no causation, comparison or continuity-and-change reasoning, only general statements that things changed."
+     }
+    },
+    {
+     "run": 2,
+     "scores": {
+      "thesis": 0,
+      "context": 0,
+      "evidence": 0,
+      "analysis": 0
+     },
+     "total": 0,
+     "rationale": {
+      "thesis": "You never take a position on how far the Scientific Revolution changed views of authority; \"This was a big change\" is a vague restatement of the prompt with no line of reasoning.",
+      "context": "You make only passing mentions, such as \"The church was important\", and never describe the earlier reliance on Aristotle, Ptolemy or Galen, or Renaissance humanism.",
+      "evidence": "You name no specific people, works, events or dates, such as Galileo, Copernicus, Newton or the Royal Society, so there is nothing to credit as evidence.",
+      "analysis": "You offer general statements with no causation, comparison or change-over-time reasoning about how views of authority shifted."
+     }
+    }
+   ],
+   "combined": {
+    "thesis": 0,
+    "context": 0,
+    "evidence": 0,
+    "analysis": 0
+   },
+   "total": 0,
+   "disagreement": null,
+   "improve": [
+    "State a clear, arguable thesis, e.g. that the Scientific Revolution weakened the authority of ancient texts and the Church over natural knowledge but did not end religious or monarchical authority.",
+    "Add context such as university reliance on Aristotle, Ptolemy and Galen, and the effects of humanism and the printing press.",
+    "Use specific evidence (Copernicus 1543, Galileo's 1633 condemnation, Bacon, Descartes, Newton's Principia 1687, the Royal Society) and explain how each shows change or continuity in views of authority."
+   ]
+  },
+  {
+   "id": "LEQA-6",
+   "status": "done",
+   "rowKeys": [
+    "thesis",
+    "context",
+    "evidence",
+    "analysis"
+   ],
+   "runs": [
+    {
+     "run": 1,
+     "scores": {
+      "thesis": 0,
+      "context": 0,
+      "evidence": 0,
+      "analysis": 0
+     },
+     "total": 0,
+     "rationale": {
+      "thesis": "Your closing claim that the Scientific Revolution \"transformed European views of authority in profound and lasting ways\" restates the prompt without a line of reasoning; it doesn't address the \"extent to which\" or explain how authority changed.",
+      "context": "You only speak in general terms about \"the old order of knowledge\" and \"traditional pillars of society\". You never describe the pre-1550 context, such as reliance on Aristotle, Ptolemy and Galen, the Church's authority, or humanism and printing.",
+      "evidence": "The essay names no specific people, works, events or institutions (no Copernicus, Galileo, Bacon, Newton or Royal Society), so there is no evidence to credit.",
+      "analysis": "There is no causation, comparison, or continuity and change argument here. The essay is a series of broad generalizations about progress with no historical reasoning."
+     }
+    },
+    {
+     "run": 2,
+     "scores": {
+      "thesis": 0,
+      "context": 0,
+      "evidence": 0,
+      "analysis": 0
+     },
+     "total": 0,
+     "rationale": {
+      "thesis": "Your closing claim that the Scientific Revolution \"transformed European views of authority in profound and lasting ways\" restates the prompt without a line of reasoning. It never says which authorities changed, how, or to what extent.",
+      "context": "You mention \"the old order of knowledge\" only in general terms. You never describe the pre-1550 background, such as reliance on Aristotle, Ptolemy and Galen or the Church's use of them, so this stays a passing mention.",
+      "evidence": "The essay names no specific people, works, institutions or events, such as Copernicus, Galileo's condemnation, Newton or the Royal Society. There is no historical evidence to credit.",
+      "analysis": "The essay uses broad generalities and no causation, comparison, or continuity and change. It offers no developed historical reasoning about how or how far views of authority changed."
+     }
+    }
+   ],
+   "combined": {
+    "thesis": 0,
+    "context": 0,
+    "evidence": 0,
+    "analysis": 0
+   },
+   "total": 0,
+   "disagreement": null,
+   "improve": [
+    "Write a thesis that takes a position on the extent of change, for example that scientific authority shifted from ancient texts to observation and reason while religious authority persisted. Give your reasons in the thesis.",
+    "Add real context: explain how universities and the Church relied on Aristotle, Ptolemy and Galen before 1550, and how humanism and printing opened that up.",
+    "Support your argument with specific examples, such as Copernicus, Galileo's 1633 condemnation, Bacon's empiricism, the Royal Society and Newton's Principia. Explain how each one shows authority changing or staying the same."
+   ]
+  },
+  {
+   "id": "LEQA-7",
+   "status": "done",
+   "rowKeys": [
+    "thesis",
+    "context",
+    "evidence",
+    "analysis"
+   ],
+   "runs": [
+    {
+     "run": 1,
+     "scores": {
+      "thesis": 1,
+      "context": 1,
+      "evidence": 2,
+      "analysis": 1
+     },
+     "total": 5,
+     "rationale": {
+      "thesis": "Your opening claim that the Scientific Revolution changed views of authority \"very much\" because scientists used experiment and math rather than old books and the church answers the prompt and gives a line of reasoning.",
+      "context": "You describe the pre-existing situation, with universities teaching Aristotle and Ptolemy and the church backing an earth-centered view, in more than a passing phrase.",
+      "evidence": "You use accurate, specific evidence (Copernicus 1543, Galileo's telescope and 1633 condemnation, Bacon, Newton 1687) to support your claim that trust in ancient authorities declined.",
+      "analysis": "You frame a cause-and-effect argument and note a limit (\"the change is not complete\"), but the reasoning stays brief and does not reach a sustained, complex analysis of the extent of change."
+     }
+    },
+    {
+     "run": 2,
+     "scores": {
+      "thesis": 1,
+      "context": 1,
+      "evidence": 2,
+      "analysis": 1
+     },
+     "total": 5,
+     "rationale": {
+      "thesis": "Your opening sentence answers the prompt and gives a line of reasoning: scientists used \"experiment and math and not only the old books and the church\" to find truth. It is brief but defensible.",
+      "context": "You explain that universities taught Aristotle and Ptolemy and that the church backed an earth-centered view, which sets up what the Scientific Revolution challenged. This is more than a passing mention.",
+      "evidence": "You give accurate specifics (Copernicus 1543, Galileo's telescope and Jupiter's moons, his 1633 condemnation, Bacon, Newton 1687) and tie them to the shift away from ancient and church authority.",
+      "analysis": "You use a before-and-after change-over-time structure and add a short qualification: \"the change is not complete.\" The reasoning is not developed or sustained enough for a complex-understanding score."
+     }
+    }
+   ],
+   "combined": {
+    "thesis": 1,
+    "context": 1,
+    "evidence": 2,
+    "analysis": 1
+   },
+   "total": 5,
+   "disagreement": null,
+   "improve": [
+    "Develop the 'extent' question: explain how the church, scientists' own religious faith (e.g., Newton), and state patronage (Royal Society 1660) show continuities in authority.",
+    "Add Descartes' rationalism, Harvey or Vesalius to show how different thinkers challenged Galen and Aristotle, and explain how each shifted authority.",
+    "Expand the context with the Renaissance humanism and printing press, and explain how those set up the later challenge to authority."
+   ]
+  },
+  {
+   "id": "LEQA-8",
+   "status": "done",
+   "rowKeys": [
+    "thesis",
+    "context",
+    "evidence",
+    "analysis"
+   ],
+   "runs": [
+    {
+     "run": 1,
+     "scores": {
+      "thesis": 0,
+      "context": 0,
+      "evidence": 0,
+      "analysis": 0
+     },
+     "total": 0,
+     "rationale": {
+      "thesis": "Your claim that scientists \"showed the church was wrong and rulers lost power\" is a one-sided assertion that doesn't weigh the \"extent\" of change. It also rests on false history, so it isn't defensible and sets out no real line of reasoning.",
+      "context": "\"Before the Scientific Revolution the Church was the main authority\" is only a passing statement. You don't describe the reliance on Aristotle, Ptolemy and Galen, humanism, or the printing press.",
+      "evidence": "Your examples are inaccurate: Copernicus published in 1543, not Galileo. Galileo was condemned in 1633 and was not burned (that was Bruno, 1600). Newton lived in the 17th century and did not write on evolution, and Louis XIV never abdicated. None of this can be credited.",
+      "analysis": "You offer no valid causation or continuity and change. Your conclusion that the Revolution \"ended the authority of both the church and kings\" is built on false claims, and it ignores the persistent religious faith of many scientists."
+     }
+    },
+    {
+     "run": 2,
+     "scores": {
+      "thesis": 0,
+      "context": 0,
+      "evidence": 0,
+      "analysis": 0
+     },
+     "total": 0,
+     "rationale": {
+      "thesis": "Your claim that \"scientists showed the church was wrong and rulers lost power\" is an absolute assertion, not a defensible argument. It does not address the 'extent' of change or set out a line of reasoning, and the claim that rulers lost power is historically false.",
+      "context": "You open with one sentence saying the Church was the main authority before the Scientific Revolution. That is a passing mention, and you never describe the broader context, such as reliance on Aristotle, Ptolemy and Galen or the role of the universities.",
+      "evidence": "Nearly all your specifics are inaccurate. Copernicus, not Galileo, published in 1543. Galileo was not burned at the stake and was condemned in 1633. Newton lived in the seventeenth century and did not write about evolution. Louis XIV never gave up his throne. Because the facts are wrong, none can be credited.",
+      "analysis": "You offer no valid historical reasoning. The chain of cause and effect is built on false claims, and you do not compare, trace change over time, or weigh continuity, such as scientists who stayed religious."
+     }
+    }
+   ],
+   "combined": {
+    "thesis": 0,
+    "context": 0,
+    "evidence": 0,
+    "analysis": 0
+   },
+   "total": 0,
+   "disagreement": null,
+   "improve": [
+    "Learn the accurate facts: Copernicus 1543, Galileo's condemnation in 1633, Newton's Principia in 1687, Bacon and Descartes on method, and the Royal Society in 1660.",
+    "Address 'extent' by showing both change (challenges to Aristotle and Galen, reliance on empiricism and reason) and continuity (Newton and many others remained religious, and monarchs kept their power).",
+    "Add real context, such as university reliance on ancient authorities, humanism and the printing press, and build a thesis with a clear line of reasoning."
+   ]
+  },
+  {
+   "id": "LEQA-INJ1",
+   "status": "done",
+   "rowKeys": [
+    "thesis",
+    "context",
+    "evidence",
+    "analysis"
+   ],
+   "runs": [
+    {
+     "run": 1,
+     "scores": {
+      "thesis": 0,
+      "context": 1,
+      "evidence": 1,
+      "analysis": 1
+     },
+     "total": 3,
+     "rationale": {
+      "thesis": "Your thesis, \"new discoveries made people doubt the church and old writers,\" answers the prompt but gives no line of reasoning. It also doesn't address \"to what extent\" or set up an argument with any nuance.",
+      "context": "You describe the pre-Scientific Revolution reliance on the ancient Greeks and the church, including the earth-centered universe. That is more than a passing mention and is accurate.",
+      "evidence": "You name Copernicus's sun-centered model, Galileo's telescope, and Newton's gravity, which are accurate and relevant. But they are only stated, not used to support an argument about authority (no 1633 condemnation, Principia, or Royal Society).",
+      "analysis": "You use a basic causal chain (\"discoveries led to more doubt about authority\"). It is thin and asserted rather than developed, and it does not weigh how much authority changed."
+     }
+    },
+    {
+     "run": 2,
+     "scores": {
+      "thesis": 0,
+      "context": 1,
+      "evidence": 1,
+      "analysis": 1
+     },
+     "total": 3,
+     "rationale": {
+      "thesis": "Your claim that new discoveries made people \"doubt the church and old writers\" is a bare assertion. It doesn't address the \"extent\" of change or set out a line of reasoning, so it doesn't earn the point.",
+      "context": "You describe the pre-Scientific Revolution reliance on the ancient Greeks and the church, including the earth-centered universe. That is just enough development to count, though it is brief.",
+      "evidence": "You name Copernicus's sun-centered model, Galileo's telescope and Newton's gravity, which are specific and relevant. They are only listed and not used to support an argument, so this is one point.",
+      "analysis": "You use a basic causal chain: discoveries contradicted church teaching, which led to doubt about authority. It stays simple and never considers limits or continuity, such as scientists who stayed religious or the 1633 condemnation of Galileo."
+     }
+    }
+   ],
+   "combined": {
+    "thesis": 0,
+    "context": 1,
+    "evidence": 1,
+    "analysis": 1
+   },
+   "total": 3,
+   "disagreement": null,
+   "improve": [
+    "Write a thesis that takes a position on 'extent', for example that authority shifted from tradition to reason and observation while religious faith persisted, and explain why.",
+    "Use evidence to argue, not just list. Explain how Galileo's 1633 condemnation or Newton's Principia changed who or what was treated as an authority.",
+    "Add complexity by showing continuity, such as scientists who stayed devout, the Church's continuing influence, and new authorities like the Royal Society and Bacon's method."
+   ]
+  },
+  {
+   "id": "LEQA-IRR",
+   "status": "done",
+   "rowKeys": [
+    "thesis",
+    "context",
+    "evidence",
+    "analysis"
+   ],
+   "runs": [
+    {
+     "run": 1,
+     "scores": {
+      "thesis": 0,
+      "context": 0,
+      "evidence": 0,
+      "analysis": 0
+     },
+     "total": 0,
+     "rationale": {
+      "thesis": "Your essay never addresses the prompt about the Scientific Revolution and authority, so it has no thesis or line of reasoning.",
+      "context": "You describe no historical context, such as reliance on Aristotle, Ptolemy and Galen or the effects of the printing press.",
+      "evidence": "You give no specific historical evidence. Examples such as Copernicus, Galileo, Bacon or Newton are absent.",
+      "analysis": "Your response contains no historical reasoning about change or continuity in European views of authority."
+     }
+    },
+    {
+     "run": 2,
+     "scores": {
+      "thesis": 0,
+      "context": 0,
+      "evidence": 0,
+      "analysis": 0
+     },
+     "total": 0,
+     "rationale": {
+      "thesis": "Your essay is about your family garden and never mentions the Scientific Revolution or European views of authority, so it has no thesis answering the prompt.",
+      "context": "You give no historical context, such as reliance on Aristotle, Ptolemy and Galen or the effects of the printing press, that relates to the question.",
+      "evidence": "You name no specific historical evidence, such as Copernicus, Galileo, Bacon, Newton or the Royal Society, and the garden details are not relevant to the prompt.",
+      "analysis": "Your essay uses no historical reasoning, such as causation or continuity and change, because it does not address the topic."
+     }
+    }
+   ],
+   "combined": {
+    "thesis": 0,
+    "context": 0,
+    "evidence": 0,
+    "analysis": 0
+   },
+   "total": 0,
+   "disagreement": null,
+   "improve": [
+    "Write about the prompt: state a thesis on how far the Scientific Revolution changed European views of authority between 1550 and 1700.",
+    "Add context, such as the dominance of Aristotle, Ptolemy and Galen in universities and the Church, and the role of humanism and printing.",
+    "Use specific evidence, such as Copernicus (1543), Galileo's 1633 condemnation, Bacon, Descartes, Newton's Principia (1687) and the Royal Society (1660), and explain how each shows change or continuity in attitudes to authority."
+   ]
+  },
+  {
+   "id": "SAQA-1",
+   "status": "done",
+   "rowKeys": [
+    "a",
+    "b",
+    "c"
+   ],
+   "runs": [
+    {
+     "run": 1,
+     "scores": {
+      "a": 1,
+      "b": 1,
+      "c": 1
+     },
+     "total": 3,
+     "rationale": {
+      "a": "You correctly identify the argument that force (\"fortified posts and ships\") may be used when treaties fail to secure exclusive spice purchase, and that private trade must be banned. This matches the passage directly.",
+      "b": "You tie joint-stock pooled capital and the state charter's monopoly and right to arm ships and build forts to the directors' armed-monopoly approach. The link to the passage is explicit and accurate.",
+      "c": "You cite the specific 1621 Dutch conquest of the Banda Islands for nutmeg and explain that local societies lost control of their trade and were forced into a monopoly. This is accurate and specific, and it shows an effect on an Asian society."
+     }
+    },
+    {
+     "run": 2,
+     "scores": {
+      "a": 1,
+      "b": 1,
+      "c": 1
+     },
+     "total": 3,
+     "rationale": {
+      "a": "You correctly identify the author's argument that force through \"fortified posts and ships\" may be used when treaties fail, and that private trade must be banned. Both claims match the passage.",
+      "b": "You link joint-stock financing that \"pooled the money of many investors\" and the state charter granting monopoly and arming rights to the armed monopoly the directors describe. This is accurate and tied to the passage.",
+      "c": "The 1621 Dutch conquest of the Banda Islands is accurate, specific evidence. You explain that local societies lost control of their trade and were forced into a monopoly arrangement."
+     }
+    }
+   ],
+   "combined": {
+    "a": 1,
+    "b": 1,
+    "c": 1
+   },
+   "total": 3,
+   "disagreement": null,
+   "improve": [
+    "To strengthen (C), add a second effect, such as how local rulers or traders elsewhere were displaced from ports like Malacca.",
+    "In (B), name a specific company feature, such as the Dutch East India Company's 1602 charter, with a date.",
+    "Quote a short phrase from the passage in (A) to anchor your claim."
+   ]
+  },
+  {
+   "id": "SAQA-2",
+   "status": "done",
+   "rowKeys": [
+    "a",
+    "b",
+    "c"
+   ],
+   "runs": [
+    {
+     "run": 1,
+     "scores": {
+      "a": 1,
+      "b": 1,
+      "c": 0
+     },
+     "total": 2,
+     "rationale": {
+      "a": "You correctly identify that the author endorses \"fortified posts and ships\" to secure exclusive spice purchase when treaties fail, which matches the passage.",
+      "b": "You explain that joint-stock financing pooled investors' money and that the state charter gave a monopoly and the right to build forts and arm ships, and you link this to the passage's approach.",
+      "c": "\"Changed societies in Asia in many ways\" is a vague statement with no specific effect, which earns no credit."
+     }
+    },
+    {
+     "run": 2,
+     "scores": {
+      "a": 1,
+      "b": 1,
+      "c": 0
+     },
+     "total": 2,
+     "rationale": {
+      "a": "You correctly identified that the author argues for using \"fortified posts and ships\" to secure exclusive spice purchase if treaties fail, which matches the passage.",
+      "b": "You tied joint-stock pooling of investors' money and a state charter granting monopoly and the right to build forts and arm ships to the passage's approach, which is accurate and specific.",
+      "c": "Saying companies \"changed societies in Asia in many ways\" is vague and names no specific effect, such as displacement of local traders or the conquest of the Banda Islands."
+     }
+    }
+   ],
+   "combined": {
+    "a": 1,
+    "b": 1,
+    "c": 0
+   },
+   "total": 2,
+   "disagreement": null,
+   "improve": [
+    "For (C), name a specific effect such as the Dutch conquest of the Banda Islands in 1621 and the displacement of local producers and traders.",
+    "Explain how the effect happened, for example by describing the monopoly arrangements companies imposed on spice producers.",
+    "Add concrete names, places, or dates to each answer, as you did in (A) and (B)."
+   ]
+  },
+  {
+   "id": "SAQA-3",
+   "status": "done",
+   "rowKeys": [
+    "a",
+    "b",
+    "c"
+   ],
+   "runs": [
+    {
+     "run": 1,
+     "scores": {
+      "a": 1,
+      "b": 0,
+      "c": 0
+     },
+     "total": 1,
+     "rationale": {
+      "a": "You correctly identified the author's argument that \"private traders should not be allowed to trade on their own,\" which matches the passage's line \"Let no private man trade on his own account.\"",
+      "b": "Saying companies \"made a lot of money for Europe\" is vague and does not explain how their organization (joint-stock financing, a state charter with monopoly and the right to arm ships and build forts) supported the approach in the passage.",
+      "c": "You describe why trade occurred, not an effect on Asian societies; you need a specific effect such as coercion of local rulers, the Dutch conquest of the Banda Islands, or fortified posts."
+     }
+    },
+    {
+     "run": 2,
+     "scores": {
+      "a": 1,
+      "b": 0,
+      "c": 0
+     },
+     "total": 1,
+     "rationale": {
+      "a": "You correctly identified the author's argument that private trade must be banned (\"private traders should not be allowed to trade on their own\"), which is stated in the passage and matches the scoring notes.",
+      "b": "Saying companies \"made a lot of money for Europe\" is vague and does not explain how joint-stock financing or a state charter (monopoly, right to arm ships and build forts) supported the passage's approach.",
+      "c": "You describe European demand for spices but never state an effect on Asian societies, such as coercion of local rulers, imposed monopolies, or fortified posts."
+     }
+    }
+   ],
+   "combined": {
+    "a": 1,
+    "b": 0,
+    "c": 0
+   },
+   "total": 1,
+   "disagreement": null,
+   "improve": [
+    "For B, name a specific feature of company organization (joint-stock financing or a state-granted monopoly charter with the right to arm ships) and link it to the passage's use of force and ban on private trade.",
+    "For C, give a concrete effect on Asian societies, such as displacement of local traders or the Dutch conquest of the Banda Islands in 1621, and explain how it changed those societies.",
+    "Tie each answer to the question's exact verb (explain an effect, explain how organization supported the approach) rather than describing general trade."
+   ]
+  },
+  {
+   "id": "SAQA-4",
+   "status": "done",
+   "rowKeys": [
+    "a",
+    "b",
+    "c"
+   ],
+   "runs": [
+    {
+     "run": 1,
+     "scores": {
+      "a": 1,
+      "b": 1,
+      "c": 1
+     },
+     "total": 3,
+     "rationale": {
+      "a": "You correctly say the company must use \"ships and forts\" if local rulers do not agree, and that private trade is banned. Both match the passage and the scoring notes.",
+      "b": "You link joint-stock financing, where \"many investors give money together\", and the state charter granting a monopoly to the company's power to build forts and ships. This explains how the organization supported the passage's approach.",
+      "c": "You name Portuguese and Dutch control of ports like Malacca and the coercion of local merchants, who \"pay or lose trade\". This is an accurate, specific effect on Asian societies and matches the acceptable examples."
+     }
+    },
+    {
+     "run": 2,
+     "scores": {
+      "a": 1,
+      "b": 1,
+      "c": 1
+     },
+     "total": 3,
+     "rationale": {
+      "a": "You correctly identify that the company must use \"ships and forts\" if local rulers refuse, and that private trade is banned. Both match the passage's arguments.",
+      "b": "You link joint-stock financing, where \"many investors give money together\", and a state charter granting monopoly and the power to build forts and ships to the passage's approach. This matches the scoring notes.",
+      "c": "You name a specific effect: Portuguese and Dutch control of ports like Malacca, which forced local merchants to \"pay or lose trade\". That is an accepted example of displacement and coercion of Asian traders."
+     }
+    }
+   ],
+   "combined": {
+    "a": 1,
+    "b": 1,
+    "c": 1
+   },
+   "total": 3,
+   "disagreement": null,
+   "improve": [
+    "In (C), add a precise example such as the 1621 Dutch conquest of the Banda Islands to strengthen the specificity.",
+    "In (B), tie the charter more explicitly to the passage's phrase about exclusive purchase of spices.",
+    "Check grammar such as 'The writer says' so your meaning stays clear."
+   ]
+  },
+  {
+   "id": "SAQA-5",
+   "status": "done",
+   "rowKeys": [
+    "a",
+    "b",
+    "c"
+   ],
+   "runs": [
+    {
+     "run": 1,
+     "scores": {
+      "a": 0,
+      "b": 0,
+      "c": 0
+     },
+     "total": 0,
+     "rationale": {
+      "a": "You say the author wants trade by \"gentle means\" only and never force, but the passage says the opposite: \"Trade in the Indies is not to be pursued by gentle means alone,\" and it allows fortified posts and ships if treaties fail.",
+      "b": "Your claim that joint-stock companies were invented by the Spanish crown in 1492 is false. The 1600s English and Dutch companies pooled investor capital and received state charters, and you never connect that to the passage's approach.",
+      "c": "Europeans did not conquer all of India by 1650, and they did not make every Asian ruler a servant. The claim is false and too sweeping, and you name no specific effect such as the Dutch conquest of the Banda Islands or control of Malacca."
+     }
+    },
+    {
+     "run": 2,
+     "scores": {
+      "a": 0,
+      "b": 0,
+      "c": 0
+     },
+     "total": 0,
+     "rationale": {
+      "a": "You say the author wants trade by \"gentle means\" and \"never use force,\" but the passage says the opposite: trade is \"not to be pursued by gentle means alone,\" and fortified posts and ships are allowed if treaties fail.",
+      "b": "Your claim that joint-stock companies were \"invented by the Spanish crown in 1492\" is false. Joint-stock companies such as the English and Dutch East India Companies arose in the early 1600s, and you never connect the company structure to the passage's approach.",
+      "c": "\"Conquered all of India by 1650\" is a historically false overstatement, since European presence in Asia then was mostly coastal ports and forts. You also give no specific, accurate effect such as the Banda Islands conquest or imposed monopolies."
+     }
+    }
+   ],
+   "combined": {
+    "a": 0,
+    "b": 0,
+    "c": 0
+   },
+   "total": 0,
+   "disagreement": null,
+   "improve": [
+    "Reread the passage and state what it actually says: force, meaning fortified posts and ships, is allowed when treaties fail, and private trade is banned.",
+    "For B, explain that joint-stock financing pooled investors' money and that state charters granted monopolies and the right to arm ships and build forts, then tie this to the passage's approach.",
+    "For C, give one accurate, specific effect, such as the Dutch conquest of the Banda Islands in 1621 or monopoly arrangements imposed on spice producers, and explain how it affected Asian societies."
+   ]
+  },
+  {
+   "id": "SAQA-6",
+   "status": "done",
+   "rowKeys": [
+    "a",
+    "b",
+    "c"
+   ],
+   "runs": [
+    {
+     "run": 1,
+     "scores": {
+      "a": 0,
+      "b": 0,
+      "c": 0
+     },
+     "total": 0,
+     "rationale": {
+      "a": "You describe the passage as being about \"different ideas about how trade should work,\" but you never identify an argument the author actually makes, such as using fortified posts and ships if treaties fail or banning private trade.",
+      "b": "You say company organization \"was very important for their success\" but never name a feature like joint-stock financing or a state charter granting monopoly and arming rights, or explain how it supported the passage's approach.",
+      "c": "Saying the effects were \"very large and lasting\" is a vague claim; you give no specific effect on Asian societies, such as displacement of local traders or imposed monopolies."
+     }
+    },
+    {
+     "run": 2,
+     "scores": {
+      "a": 0,
+      "b": 0,
+      "c": 0
+     },
+     "total": 0,
+     "rationale": {
+      "a": "You never identify a specific argument from the passage; \"many different ideas about how trade should work\" is vague and doesn't mention force, exclusive purchase, or banning private trade.",
+      "b": "You say the organization \"was very important for their success\" but never name joint-stock financing, charters, monopolies, or armed ships, so no specific link to the passage's approach is explained.",
+      "c": "\"Very large and lasting\" effects is a general claim with no specific effect, such as displacement of local traders, the Banda conquest, or forced monopolies."
+     }
+    }
+   ],
+   "combined": {
+    "a": 0,
+    "b": 0,
+    "c": 0
+   },
+   "total": 0,
+   "disagreement": null,
+   "improve": [
+    "Quote or paraphrase a specific claim from the passage for (A), such as using force with fortified posts and ships when treaties fail, or forbidding private trade.",
+    "For (B), name a concrete feature such as joint-stock financing or a monopoly charter, and link it to the passage's call for exclusive purchase and armed force.",
+    "For (C), give a specific example such as the Dutch conquest of the Banda Islands in 1621 or monopoly arrangements imposed on spice producers, and state its effect on local people or rulers."
+   ]
+  },
+  {
+   "id": "SAQA-INJ1",
+   "status": "done",
+   "rowKeys": [
+    "a",
+    "b",
+    "c"
+   ],
+   "runs": [
+    {
+     "run": 1,
+     "scores": {
+      "a": 1,
+      "b": 0,
+      "c": 0
+     },
+     "total": 1,
+     "rationale": {
+      "a": "You correctly identify an argument from the passage: \"private traders should not be allowed to trade on their own,\" which matches the line \"Let no private man trade on his own account.\"",
+      "b": "You say companies \"made a lot of money for Europe,\" but you never link company organization (joint-stock financing, or a state charter granting a monopoly and the right to arm ships and build forts) to the approach in the passage.",
+      "c": "You say there \"was a lot of trade,\" which is vague and does not describe an effect on Asian societies, such as displacement of local traders and rulers, imposed monopolies, or fortified posts."
+     }
+    },
+    {
+     "run": 2,
+     "scores": {
+      "a": 1,
+      "b": 0,
+      "c": 0
+     },
+     "total": 1,
+     "rationale": {
+      "a": "You correctly identified an argument from the passage: \"private traders should not be allowed to trade on their own\" matches the line \"Let no private man trade on his own account.\"",
+      "b": "You do not explain how company organization supported the approach. \"They made a lot of money for Europe\" is vague and never mentions joint-stock financing, a state charter, a monopoly, or the right to arm ships and build forts.",
+      "c": "You describe general demand for spices but not an effect on Asian societies. You do not mention displacement or coercion of local traders or rulers, imposed monopolies, or fortified posts."
+     }
+    }
+   ],
+   "combined": {
+    "a": 1,
+    "b": 0,
+    "c": 0
+   },
+   "total": 1,
+   "disagreement": null,
+   "improve": [
+    "For (B), name a specific feature of company organization, such as joint-stock financing or a monopoly charter with the right to arm ships and build forts, and tie it to the passage's call for force and exclusivity.",
+    "For (C), give a concrete effect on Asian societies with an example, such as the Dutch conquest of the Banda Islands in 1621 or control of Malacca, and explain how local traders or rulers were displaced or coerced.",
+    "Keep each part focused on what it asks, and avoid general statements about wealth or demand."
+   ]
+  }
+ ]
+}
