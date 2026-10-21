@@ -8,13 +8,13 @@ import type { EssayScoreView } from "@/lib/essay-grading/view";
 
 const GROUPED_RUBRICS = ["ushistory-v1", "whap-v1", "euro-v1"]; // SAQ 묶음 채점: 첫 파트 행 하나가 문항 전체
 
-export type FrqItemState = "scored" | "in_progress" | "unavailable" | "not_scored";
-export type FrqItemResult = { setItemId: string; section: string; state: FrqItemState; max: number; earned: number | null; noResponse?: boolean; component: ApWeightComponentId };
+export type FrqItemState = "scored" | "in_progress" | "paused" | "unavailable" | "not_scored";
+export type FrqItemResult = { setItemId: string; section: string; state: FrqItemState; max: number; earned: number | null; noResponse?: boolean; component: ApWeightComponentId; /** unavailable 사유(점수 행 last_error: too_short 등) */ reason?: string | null };
 export type WeightedComponent = { id: ApWeightComponentId; label: string; earned: number; max: number; weightPct: number; contribution: number };
-export type WithheldReason = "partial_set" | "no_weights" | "mc_incomplete" | "frq_not_scored" | "frq_in_progress" | "frq_unavailable" | "point_mismatch";
+export type WithheldReason = "partial_set" | "no_weights" | "mc_incomplete" | "frq_not_scored" | "frq_in_progress" | "frq_unavailable" | "frq_paused" | "point_mismatch";
 export type ApResultSummary = {
   mc: { total: number; answered: number; correct: number; pct: number | null };
-  frq: { items: FrqItemResult[]; max: number; scoredPoints: number; scoredItems: number; state: "none" | "not_scored" | "in_progress" | "unavailable" | "complete" };
+  frq: { items: FrqItemResult[]; max: number; scoredPoints: number; scoredItems: number; state: "none" | "not_scored" | "in_progress" | "paused" | "unavailable" | "complete" };
   weighted: { status: "available"; points: number; components: WeightedComponent[] } | { status: "withheld"; reason: WithheldReason };
 };
 
@@ -23,7 +23,7 @@ const round1 = (n: number) => Math.round(n * 10) / 10;
 const key = (id: string, label: string) => `${id}:${label}`;
 
 /** 서술형 문항 하나의 상태. aiScoring=false 면 이 응시는 FRQ 점수가 없다(0점 아님). */
-function frqItem(it: MockExamAttemptItem, byPart: Map<string, EssayScoreView>, aiScoring: boolean, hasHistory: boolean): FrqItemResult {
+function frqItem(it: MockExamAttemptItem, byPart: Map<string, EssayScoreView>, aiScoring: boolean, scoringActive: boolean, submitted: boolean, hasHistory: boolean): FrqItemResult {
   const parts = it.parts ?? [];
   const max = parts.reduce((n, p) => n + (Number.isFinite(p.points) ? p.points : 0), 0);
   const base = { setItemId: it.setItemId, section: it.section as string, max };
@@ -33,27 +33,39 @@ function frqItem(it: MockExamAttemptItem, byPart: Map<string, EssayScoreView>, a
   const grouped = parts.length > 1 && !!first && GROUPED_RUBRICS.includes(first.rubricVersion ?? "");
   const rows = (grouped ? [first] : parts.map((p) => byPart.get(key(it.setItemId, p.label)))) as (EssayScoreView | undefined)[];
   if (rows.length === 0) return { ...base, state: "unavailable", earned: null, component };
-  let earned = 0, noResponse = true, state: FrqItemState = "scored";
+  let earned = 0, noResponse = true, state: FrqItemState = "scored", reason: string | null = null;
   for (const r of rows) {
-    if (!r || r.status === "pending" || r.status === "processing" || r.status === "failed") { state = "in_progress"; continue; }
-    if (r.status === "skipped" && r.lastError === "empty") continue; // 답안 없음 = 진짜 0점(공식 AP 도 빈 답안은 0점)
+    // 행이 아직 없는데 채점 시작이 꺼져 있으면 "진행 중"이 아니라 "일시 중단"(아무도 시작하지 않는다)
+    if (!r) { if (state !== "in_progress") state = scoringActive ? "in_progress" : "paused"; continue; }
+    // 한도 초과 대기(daily_cap·monthly_budget)는 "진행 중"이 아니라 일시 중단, 기준 답안 부족은 이용 불가(사유 보존)
+    if (r.status === "failed" && (r.lastError === "daily_cap" || r.lastError === "monthly_budget")) { if (state !== "in_progress") state = "paused"; reason = r.lastError; continue; }
+    if (r.status === "failed" && r.lastError === "no_reference_answers") { if (state !== "in_progress" && state !== "paused") state = "unavailable"; reason = r.lastError; continue; }
+    if (r.status === "pending" || r.status === "processing" || r.status === "failed") { state = "in_progress"; continue; }
+    // 제출 확정(graded)된 응시의 빈 답안만 진짜 0점(공식 AP 도 빈 답안은 0점). 제출 전·진행 중 응시의 빈 답안은 0점이 아니라 미정이다.
+    if (r.status === "skipped" && r.lastError === "empty") { if (!submitted) state = "in_progress"; continue; }
     noResponse = false;
     const t = r.scores?.total;
-    if (r.status !== "done" || typeof t !== "number" || !Number.isFinite(t)) { if (state !== "in_progress") state = "unavailable"; continue; }
+    if (r.status !== "done" || typeof t !== "number" || !Number.isFinite(t)) { if (state !== "in_progress" && state !== "paused") state = "unavailable"; reason = r.lastError ?? r.status; continue; }
     earned += t;
   }
   if (hasHistory && it.section !== ("ap_saq" as string)) {
     const tt = rows.map((r) => r?.scores?.taskType).find((x) => typeof x === "string");
     if (tt === "dbq" || tt === "leq") component = tt;
   }
-  if (state !== "scored") return { ...base, state, earned: null, component };
+  if (state !== "scored") return { ...base, state, earned: null, component, reason };
   if (earned < 0 || earned > max) return { ...base, state: "unavailable", earned: null, component }; // 합산 오류 방지: 문항 만점을 넘는 점수는 쓰지 않는다
   return { ...base, state, earned, noResponse, component };
 }
 
 export function summarizeApResult(o: {
   subject: string | null | undefined; items: MockExamAttemptItem[]; layout: LayoutLike | null | undefined;
-  essayScores?: EssayScoreView[]; aiScoring: boolean;
+  essayScores?: EssayScoreView[];
+  /** 이 과목은 FRQ AI 채점을 지원한다(과목 조건). false 만 "이 과목은 채점 미제공". */
+  aiScoring: boolean;
+  /** 채점 시작 경로가 켜져 있다(플래그). 생략하면 켜진 것으로 본다. */
+  scoringActive?: boolean;
+  /** 제출 확정(graded) 여부. 생략하면 확정으로 본다. false 면 빈 답안을 0점으로 보지 않는다. */
+  submitted?: boolean;
 }): ApResultSummary {
   const mc = o.items.filter((i) => i.format === "mc");
   const frqIt = o.items.filter((i) => i.format === "essay");
@@ -62,9 +74,9 @@ export function summarizeApResult(o: {
   const weights = apWeightsFor(o.subject);
   const hasHistory = !!weights?.components.some((c) => c.id === "dbq");
   const byPart = new Map((o.essayScores ?? []).map((r) => [key(r.setItemId, r.partLabel), r]));
-  const items = frqIt.map((i) => frqItem(i, byPart, o.aiScoring, hasHistory));
+  const items = frqIt.map((i) => frqItem(i, byPart, o.aiScoring, o.scoringActive ?? true, o.submitted ?? true, hasHistory));
   const scored = items.filter((i) => i.state === "scored");
-  const frqState: ApResultSummary["frq"]["state"] = items.length === 0 ? "none" : !o.aiScoring ? "not_scored" : items.some((i) => i.state === "in_progress") ? "in_progress" : items.some((i) => i.state === "unavailable") ? "unavailable" : "complete";
+  const frqState: ApResultSummary["frq"]["state"] = items.length === 0 ? "none" : !o.aiScoring ? "not_scored" : items.some((i) => i.state === "in_progress") ? "in_progress" : items.some((i) => i.state === "paused") ? "paused" : items.some((i) => i.state === "unavailable") ? "unavailable" : "complete";
   const out: ApResultSummary = {
     mc: { total: mc.length, answered, correct, pct: mc.length ? Math.round((100 * correct) / mc.length) : null },
     frq: { items, max: items.reduce((n, i) => n + i.max, 0), scoredPoints: scored.reduce((n, i) => n + (i.earned ?? 0), 0), scoredItems: scored.length, state: frqState },
@@ -77,13 +89,14 @@ export function summarizeApResult(o: {
   for (const s of o.layout ?? []) if (o.items.filter((i) => (i.section as string) === s.key).length !== s.count) return withhold("mc_incomplete");
   if (frqState === "none" || frqState === "not_scored") return withhold("frq_not_scored");
   if (frqState === "in_progress") return withhold("frq_in_progress");
+  if (frqState === "paused") return withhold("frq_paused");
   if (frqState === "unavailable") return withhold("frq_unavailable");
   const comps: WeightedComponent[] = [];
   for (const c of weights.components) {
     const earned = c.id === "mc" ? correct : items.filter((i) => i.component === c.id).reduce((n, i) => n + (i.earned ?? 0), 0);
     const max = c.id === "mc" ? mc.length : items.filter((i) => i.component === c.id).reduce((n, i) => n + i.max, 0);
     if (max <= 0) return withhold("point_mismatch"); // 구성 요소가 비었거나 만점 0 → 가중 계산 불가
-    comps.push({ id: c.id, label: COMPONENT_LABEL[c.id], earned, max, weightPct: round1(c.pct), contribution: (earned / max) * c.pct });
+    comps.push({ id: c.id, label: COMPONENT_LABEL[c.id], earned, max, weightPct: Math.round(c.pct * 100) / 100, contribution: (earned / max) * c.pct });
   }
   const assigned = items.reduce((n, i) => n + i.max, 0), inComps = comps.filter((c) => c.id !== "mc").reduce((n, c) => n + c.max, 0);
   if (assigned !== inComps) return withhold("point_mismatch"); // 어떤 FRQ 도 구성 요소에서 빠지지 않아야 한다
@@ -96,6 +109,7 @@ export const WITHHELD_TEXT: Record<WithheldReason, string> = {
   mc_incomplete: "A weighted total is not available because this attempt does not contain every question of the exam.",
   frq_not_scored: "A weighted total is not available because the free-response section is not scored for this subject. Section scores are shown instead.",
   frq_in_progress: "Scoring in progress. Your weighted total will appear after every free-response answer is scored.",
+  frq_paused: "AI scoring is temporarily unavailable, so some free-response answers are not scored yet. Your weighted total will appear after they are scored.",
   frq_unavailable: "A weighted total is not available because at least one free-response answer could not be scored.",
   point_mismatch: "A weighted total is not available because the question points do not add up.",
 };

@@ -10,6 +10,8 @@ export type EssayScoreView = {
   scores: { total: number; disagreement?: boolean; rubricVersion?: string; taskType?: string; [row: string]: number | boolean | string | undefined } | null;
   rationale: { improve: string[]; [row: string]: string | string[] } | null;
   lastError: string | null;
+  /** 재시도 가능 시각(한도 초과 대기·백오프). 없으면 즉시 또는 해당 없음. */
+  nextRetryAt?: string | null;
 };
 
 type Sb = { from: (t: string) => any }; // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -18,8 +20,8 @@ type Sb = { from: (t: string) => any }; // eslint-disable-line @typescript-eslin
 export async function loadEssayScores(supabase: Sb, attemptId: string): Promise<EssayScoreView[]> {
   try {
     const { data, error } = await supabase.from("mock_exam_essay_scores")
-      .select("set_item_id, part_label, status, scores, rationale, last_error, rubric_version").eq("attempt_id", attemptId).in("rubric_version", [...RUBRIC_IDS]);
+      .select("set_item_id, part_label, status, scores, rationale, last_error, rubric_version, next_retry_at").eq("attempt_id", attemptId).in("rubric_version", [...RUBRIC_IDS]);
     if (error || !Array.isArray(data)) return [];
-    return data.map((r: Record<string, unknown>) => ({ setItemId: r.set_item_id, rubricVersion: r.rubric_version, partLabel: r.part_label, status: r.status, scores: r.scores ?? null, rationale: r.rationale ?? null, lastError: (r.last_error as string) ?? null })) as EssayScoreView[];
+    return data.map((r: Record<string, unknown>) => ({ setItemId: r.set_item_id, rubricVersion: r.rubric_version, partLabel: r.part_label, status: r.status, scores: r.scores ?? null, rationale: r.rationale ?? null, lastError: (r.last_error as string) ?? null, nextRetryAt: (r.next_retry_at as string) ?? null })) as EssayScoreView[];
   } catch { return []; }
 }
