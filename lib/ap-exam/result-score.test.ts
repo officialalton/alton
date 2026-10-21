@@ -65,6 +65,25 @@ describe("summarizeApResult — FRQ state", () => {
   });
 });
 
+describe("summarizeApResult — supported subject with scoring start off", () => {
+  const off = (essay: EssayScoreView[]) => summarizeApResult({ subject: "ap_english_language", items: engItems(30), layout: AP_LAYOUTS.ap_english_language, essayScores: essay, aiScoring: true, scoringActive: false });
+  it("missing rows are paused (not in progress, not zero, not 'unsupported')", () => {
+    const r = off([score("e1", "a", "done", 5)]);
+    expect(r.frq.state).toBe("paused");
+    expect(r.frq.items.map((i) => i.state)).toEqual(["scored", "paused", "paused"]);
+    expect(r.weighted).toEqual({ status: "withheld", reason: "frq_paused" });
+  });
+  it("stored rows still count when scoring start is off", () => {
+    const r = off(["e1", "e2", "e3"].map((id) => score(id, "a", "done", 6)));
+    expect(r.frq.state).toBe("complete");
+    expect(r.weighted.status).toBe("available");
+  });
+  it("skipped(too_short) carries its reason", () => {
+    const r = off([score("e1", "a", "done", 5), score("e2", "a", "skipped", null, { lastError: "too_short" }), score("e3", "a", "done", 5)]);
+    expect(r.frq.items[1]).toMatchObject({ state: "unavailable", reason: "too_short" });
+  });
+});
+
 describe("summarizeApResult — weighted total", () => {
   it("applies official section weights only after everything is scored (English Language 45/55)", () => {
     const r = eng(engItems(36), [score("e1", "a", "done", 6), score("e2", "a", "done", 3), score("e3", "a", "done", 3)]);

@@ -134,6 +134,14 @@ FRQ AI 의 보정 수치 출처: `docs/ap/essay-ai-calibration.md`(영어·문�
 | US History / English Literature | 각 2 | 각 2 | 0 | 0 |
 | **합계** | **79** | | | |
 
+## 9a. 18과목 FRQ 채점 분류
+
+A(AI 채점 지원 4: English Language·Literature·US·World History) / B(코드 있음·검증 미완료 1: European History) / C(채점 미지원 13: Calculus AB·BC, Precalculus, Statistics, Biology, Chemistry, Physics 1, Physics C ×2, Micro, Macro, Psychology, CS A). 상세·채점 종류별 표·등급 제공 순서는 `docs/ap/frq-scoring-roadmap.md` §0.
+
+## 9b. 2026-10-21 Preview 확인에서 발견·수정한 표시 오류
+
+English Language attempt `5b9952b6…`: 점수 행 3건(완료 1·total 2, skipped(empty) 2)이 있는데 화면이 "not scored for this subject"를 표시했다. 원인: 결과 페이지가 점수 행 조회와 `aiScoring` 입력을 **채점 시작 플래그(`AI_ESSAY_GRADING_ENABLED`) AND 과목 지원** 으로 묶었고, Preview 에서 플래그가 꺼져 있어 지원 과목인데도 행을 읽지 않고 "미제공"으로 매핑됐다(`result-score` 입력 매핑 오류). 수정: 과목 지원 여부(점수 읽기·표시)와 플래그(새 채점 시작)를 분리. 지원 과목은 저장된 행을 항상 읽어 점수·근거를 보이고, 빈 답안(skipped:empty)은 실제 0점("No response (0 / 6)"), 그 밖의 skipped 는 사유("Not scored: response too short"), 행이 없고 플래그가 꺼져 있으면 "AI scoring temporarily unavailable", 켜져 있으면 "Scoring in progress". "not scored for this subject"는 진짜 비지원 과목에만 나온다. 가중 합산 문구도 같은 상태 기준(`frq_paused` 추가).
+
 ## 9. 현재 4과목 "보정 완료"의 의미
 
 영어·문학·미국사·세계사의 AI 채점 "보정"은 **ALTON 이 작성한 샘플 에세이에 대한 자체 샘플 기능 검증**이다. **실제 학생 답안에 대한 정확도 검증이 아니며** 공식 채점 샘플·교사 채점과의 비교도 아직 없다. 문서·화면·보고에서 "보정 완료/통과"라고 쓸 때 이 구분을 함께 적는다. 또 같은 샘플이 프롬프트·문구 조정과 측정에 함께 쓰여 개발용/최종 평가용이 분리돼 있지 않다(파일럿 A단계에서 분리).

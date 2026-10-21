@@ -1,6 +1,27 @@
 # AP FRQ 채점 없는 과목 — 구현 로드맵 (2026-10-21, 제안)
 
-범위: 공개 세트가 있는 18과목 중 FRQ 채점이 **없는** 13과목(영어·문학·미국사·세계사는 기존 AI 채점, 유럽사는 별도 지시로 진행 중이라 제외). 요청서의 "12과목"과 한 과목 차이가 나는 이유는 CS A·Psychology 를 모두 포함해 13개로 세었기 때문이다 — 오너 기준 목록이 다르면 알려 달라. 이 문서는 조사·제안만 한다(구현·유료 호출·DB 쓰기 없음).
+범위: **현재 공개 세트가 있는 18과목 전체**. 이 문서는 조사·제안만 한다(유료 호출·학생 모집·프로덕션 변경 없음).
+
+## 0. 18과목 분류 (구현 기준, 2026-10-21 코드 확인)
+
+| 분류 | 과목 | 수 |
+|---|---|---|
+| A. FRQ AI 채점 지원(코드 있음·보정 통과, "자체 샘플 기능 검증") | English Language, English Literature, U.S. History, World History | 4 |
+| B. 코드 있음·**검증 미완료**(꺼짐: `EURO_ESSAY_GRADING_VALIDATED=false`, 자체 샘플 검증은 다른 에이전트 진행 중) | European History | 1 |
+| C. **FRQ 채점 미지원**(채점 코드 없음) | Calculus AB, Calculus BC, Precalculus, Statistics, Biology, Chemistry, Physics 1, Physics C: Mechanics, Physics C: E&M, Microeconomics, Macroeconomics, Psychology, Computer Science A | **13** |
+
+→ 4 + 1 + 13 = 18. **C 는 13개가 맞다**(Psychology·CS A 포함). European History 는 "채점 미지원"이 아니라 **"코드 있음·검증 미완료"**로 분류하며 13개에 넣지 않는다. 앞서 "12과목"이라 한 요청은 13으로 정정한다.
+
+채점 종류별 표(현재 구현):
+
+| 채점 종류 | 지원 과목 | 상태 |
+|---|---|---|
+| 에세이 채점(AI, 루브릭 요소별) | English Language(`englang-v2`), English Literature(`englit-v1`), U.S. History·World History의 DBQ·LEQ(`ushistory-v1`·`whap-v1`) | 켜짐 가능(자체 샘플 기능 검증; 실제 학생 답안 정확도 검증 아님) |
+| SAQ 채점(AI, A·B·C 묶음 3점) | U.S. History, World History | 위와 같음 |
+| 에세이·SAQ 채점 | European History(`euro-v1`) | 코드 있음, 꺼짐, 검증 미완료 |
+| 기타 FRQ 채점(수치·수식·그래프·코드·설명) | 없음 — 위 13과목 | 아래 §2 이후 구현 로드맵 |
+
+**예상 등급 제공 순서 제안(준비된 과목부터, 각 단계는 파일럿 B단계 통과 + 오너 승인 후)**: 1) English Language → 2) English Literature → 3) U.S. History → 4) World History → 5) European History(검증 통과 후) → 6) Psychology·Statistics(S1 채점 구현·검증 후) → 이후 §4 단계 순. 채점 미지원 13과목은 FRQ 채점이 구현·검증될 때까지 결과 분석만 제공한다.
 
 ## 1. 원칙
 
@@ -9,7 +30,7 @@
 - 결정적 검증(수치·수식·단위·테스트 실행)은 "최종 답 요소"만 판정한다. 풀이 과정·설명 요소는 루브릭 근거 채점(LLM)으로 분리한다.
 - 모든 새 채점 경로는 기존 에세이 파이프라인(대기열·상한·예산·재시도·주입 방어·`mock_exam_essay_scores` 행 모델)을 재사용하고, 켜기 전 자체 샘플 검증(개발/최종 평가 분리, 파일럿 계획 A단계)과 오너 승인을 거친다.
 
-## 2. 과목·답안 유형별 현황표
+## 2. FRQ 채점 미지원 13과목: 과목·답안 유형별 현황표
 
 현재 입력 방식은 `lib/ap-exam/frq-delivery.ts`(paper = 타이핑 또는 손글씨 SVG 선택, digital = 타이핑)와 문항 파트 `mode`(DB `problem_versions.statements`, 공개 세트 전수 집계)에서 확인했다. 루브릭 열의 "참고 답안+요소 점수"는 문항 해설에 `- N pt:` 요소 목록이 있고 합이 문항 만점과 일치함을 확인한 경우(CS A 12문항 확인; 다른 과목은 요소 목록 형식을 과목별로 추가 확인 필요). 점수 비중은 해당 과목 파트 점수 기준 %.
 
@@ -60,4 +81,4 @@
 1. S1(Psychology·Statistics) 착수 승인과 단계별 상한.
 2. 손글씨만 제출된 FRQ 를 "not scored"로 남기는 방침(OCR·이미지 평가는 별도 검증 전까지 미사용) 확인.
 3. 그래프 그리기 입력 도구를 만들 시점(Micro·Macro·Bio·Physics 의 선행조건).
-4. 13과목 vs 12과목 대상 목록 확인.
+4. (해소) 대상은 13과목으로 확인.

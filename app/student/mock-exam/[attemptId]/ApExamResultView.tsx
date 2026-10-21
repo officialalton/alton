@@ -92,11 +92,13 @@ const ApReviewItem = memo(function ApReviewItem({ it, attemptId, inkByPart, essa
   );
 });
 
+const UNAVAILABLE_TEXT: Record<string, string> = { too_short: "response too short", too_long: "response too long", attempt_cap: "AI estimate limit reached", daily_cap: "daily limit reached", monthly_budget: "AI estimates temporarily unavailable", input_too_large: "response and sources too long", dead: "AI estimate not available" };
 function frqStatusText(f: FrqItemResult | undefined): string {
   if (!f) return "Not scored";
   if (f.state === "scored") return f.noResponse ? `No response (0 / ${f.max})` : `${f.earned} / ${f.max} points`;
   if (f.state === "in_progress") return "Scoring in progress";
-  if (f.state === "unavailable") return "Score unavailable";
+  if (f.state === "paused") return "AI scoring temporarily unavailable";
+  if (f.state === "unavailable") return f.reason && UNAVAILABLE_TEXT[f.reason] ? `Not scored: ${UNAVAILABLE_TEXT[f.reason]}` : "Score unavailable";
   return "Not scored";
 }
 
@@ -105,20 +107,22 @@ function FrqScoreSummary({ summary }: { summary: ReturnType<typeof summarizeApRe
   const n = frq.items.length;
   let text: string;
   if (frq.state === "not_scored") text = `Free response: not scored for this subject (${frq.max} points available). Use the reference answers below to review.`;
+  else if (frq.state === "paused") text = `Free response: AI scoring is temporarily unavailable. ${frq.scoredItems} of ${n} answers scored.`;
   else if (frq.state === "in_progress") text = `Free response: Scoring in progress. ${frq.scoredItems} of ${n} answers scored so far.`;
   else if (frq.state === "unavailable") text = `Free response: ${frq.scoredPoints} points on ${frq.scoredItems} of ${n} scored answers. The others could not be scored, so no section total is shown.`;
   else text = `Free response: ${frq.scoredPoints} / ${frq.max} points (AI estimate)`;
   return <p className="mt-2 text-[13px] font-semibold text-grey-700" data-testid="ap-frq-summary" data-state={frq.state} role={frq.state === "in_progress" ? "status" : undefined}>{text}</p>;
 }
 
-export default function ApExamResultView({ attempt, attempts, topicNames, handwriting, essayScores, essayAiEnabled = false, readOnly = false, attemptHrefBase = "/student/mock-exam/" }: { attempt: MockExamAttemptDetail; attempts?: MockExamAttemptSummary[]; topicNames?: Record<string, string>; handwriting?: FrqInkRow[]; essayScores?: EssayScoreView[]; essayAiEnabled?: boolean; readOnly?: boolean; attemptHrefBase?: string }) {
+export default function ApExamResultView({ attempt, attempts, topicNames, handwriting, essayScores, essayAiEnabled = false, essayScoringSupported, readOnly = false, attemptHrefBase = "/student/mock-exam/" }: { attempt: MockExamAttemptDetail; attempts?: MockExamAttemptSummary[]; topicNames?: Record<string, string>; handwriting?: FrqInkRow[]; essayScores?: EssayScoreView[]; essayAiEnabled?: boolean; /** 과목이 AI 채점 지원(플래그와 별개). 생략하면 essayAiEnabled 와 같다. */ essayScoringSupported?: boolean; readOnly?: boolean; attemptHrefBase?: string }) {
   const router = useRouter();
-  const essayByPart = useMemo(() => (essayAiEnabled ? new Map((essayScores ?? []).map((r) => [inkKey(r.setItemId, r.partLabel), r])) : undefined), [essayScores, essayAiEnabled]);
+  const supported = essayScoringSupported ?? essayAiEnabled;
+  const essayByPart = useMemo(() => (supported ? new Map((essayScores ?? []).map((r) => [inkKey(r.setItemId, r.partLabel), r])) : undefined), [essayScores, supported]);
   const started = useRef(false);
   const startScoring = () => { void enqueueEssayGradingAction(attempt.id).then(() => router.refresh()); };
   // 플래그가 켜져 있고 에세이 파트 중 점수 행이 없는 것이 있으면 학생 화면에서 한 번 채점을 시작한다(멱등, 서버가 상한을 강제).
   useEffect(() => {
-    if (readOnly || !essayByPart || started.current) return;
+    if (readOnly || !essayAiEnabled || !essayByPart || started.current) return;
     const missing = attempt.items.some((i) => {
       if (i.format !== "essay") return false;
       const ps = i.parts ?? [];
@@ -145,7 +149,7 @@ export default function ApExamResultView({ attempt, attempts, topicNames, handwr
   }, [mc]);
   const shown = attempt.items.filter((i) => (filter === "all" ? true : filter === "frq" ? i.format === "essay" : i.format === "mc" && i.correct !== true));
   const subject = AP_SUBJECT_NAME[attempt.apSubject ?? ""] ?? "AP";
-  const summary = useMemo(() => summarizeApResult({ subject: attempt.apSubject, items: attempt.items, layout: attempt.sectionLayout, essayScores, aiScoring: essayAiEnabled }), [attempt.apSubject, attempt.items, attempt.sectionLayout, essayScores, essayAiEnabled]);
+  const summary = useMemo(() => summarizeApResult({ subject: attempt.apSubject, items: attempt.items, layout: attempt.sectionLayout, essayScores, aiScoring: supported, scoringActive: essayAiEnabled }), [attempt.apSubject, attempt.items, attempt.sectionLayout, essayScores, supported, essayAiEnabled]);
   const frqById = useMemo(() => new Map(summary.frq.items.map((f) => [f.setItemId, f])), [summary]);
 
   return (
@@ -167,7 +171,7 @@ export default function ApExamResultView({ attempt, attempts, topicNames, handwr
         {bySection.length > 1 && (
           <ul className="mt-2 text-[12.5px] text-grey-600">{bySection.map((s) => <li key={s.key}>{s.label}: {s.correct}/{s.total}</li>)}</ul>
         )}
-        {frq.length > 0 && <p className="mt-2 text-[12.5px] text-grey-600">Free-response answers are shown next to a reference answer and scoring guide for self-review. This is reference feedback, not official scoring.{essayAiEnabled ? " Where shown, an AI estimate is an internal estimate, not an official AP score." : " No score is given."}</p>}
+        {frq.length > 0 && <p className="mt-2 text-[12.5px] text-grey-600">Free-response answers are shown next to a reference answer and scoring guide for self-review. This is reference feedback, not official scoring.{supported ? " Where shown, an AI estimate is an internal estimate, not an official AP score." : " No score is given."}</p>}
         {frq.length > 0 && essayScoringNotice(attempt.apSubject) && <p className="mt-2 rounded-lg border border-grey-200 bg-grey-50 p-3 text-[12.5px] font-semibold text-grey-700" data-testid="essay-scoring-unavailable" role="note">{essayScoringNotice(attempt.apSubject)}</p>}
         {frq.length > 0 && <FrqScoreSummary summary={summary} />}
         {summary.weighted.status === "available" ? (
