@@ -3,7 +3,7 @@
 // 조건(docs/ap/englang-facts.md, lib/ap-exam/elang-rules.ts): MC 45 = 읽기 23–25(스킬 1·3·5·7) + 글쓰기 20–22(스킬 2·4·6·8), 8 스킬 범주 범위(RS-R 4–7 / RS-W 4–7 / CE-R 5–8 / CE-W 4–7 / RO-R 5–8 / RO-W 4–7 / S-R 4–7 / S-W 4–7: 공식 % 의 하한 내림·상한 올림, 차단 조건),
 //   지문 묶음 3–6문항·읽기 4–6묶음·글쓰기 4–6묶음·읽기 먼저, FRQ 3 = q1 종합 / q2 수사 분석 / q3 논증 각 1. 시험 사이 같은 문항 0, 문항군(look-alike 포함)은 시험당 1 이고 두 시험을 합쳐도 1 번(지문·주제 재사용 방지).
 // 가상 칸(재고에 없는 칸)은 만들지 않는다: 재고만으로 불가능하면 해 없음(infeasible)과 부족 요약을 보고한다.
-import { writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import { solveMip, type Cons } from "../../lib/ap-exam/ilp";
 import { ELANG_OFFICIAL_READING_SETS, ELANG_OFFICIAL_WRITING_SETS, ELANG_CATEGORIES, ELANG_FRQ_COUNT, ELANG_FRQ_TYPES, ELANG_FULL_TARGET, ELANG_MC_COUNT, ELANG_READING_RANGE, ELANG_SET_COUNT, ELANG_SET_SIZE, ELANG_WRITING_RANGE, elangCategoryBounds, elangSectionOf, verifyElangFullComposition, type ElangSetItem } from "../../lib/ap-exam/elang-rules";
 import { loadElPool, type ElItem } from "./el-pool";
@@ -90,8 +90,9 @@ function main() {
   const official = has("--official"); const mcPins = arg("--mc-pins") ? (JSON.parse(arg("--mc-pins")) as Record<string, string[]>) : undefined; const pins = arg("--frq-pins") ? (JSON.parse(arg("--frq-pins")) as Record<string, string[]>) : undefined;
   const ids = arg("--sets", "EL1,EL2").split(",").filter(Boolean); const TIME = Number(arg("--time-ms", "120000")); const files = arg("--files") ? arg("--files").split(",") : undefined;
   const { pool } = loadElPool({ requireScreen: !has("--no-screen"), files }); const log = (s: string) => console.error(s);
-  const m = solveElSets(ids, pool, { timeMs: TIME, log, highs: has("--highs"), official, frqPins: pins, mcPins });
-  const bad = m.res.x.length ? verifyElAssignment(m.out) : ["해 없음(재고만으로 공식 구조를 채울 수 없음)"];
+  const blocked = new Set<string>(); for (const f of arg("--block-file").split(",").filter(Boolean)) for (const st of (JSON.parse(readFileSync(f, "utf-8")) as { sets: { mcA?: string[]; mcB?: string[]; frqA?: string[]; frqB?: string[] }[] }).sets) for (const k of [...(st.mcA ?? []), ...(st.mcB ?? []), ...(st.frqA ?? []), ...(st.frqB ?? [])]) blocked.add(k);
+  const m = solveElSets(ids, pool, { timeMs: TIME, log, highs: has("--highs"), official, frqPins: pins, mcPins, blocked });
+  const bad = m.res.x.length ? verifyElAssignment(m.out, blocked) : ["해 없음(재고만으로 공식 구조를 채울 수 없음)"];
   const cnt = (f: (c: ElItem) => boolean) => pool.filter(f).length;
   console.log(`# el-assign sets=${ids.join(",")} 재고 읽기 묶음 ${cnt((c) => c.section === "reading")} 글쓰기 묶음 ${cnt((c) => c.section === "writing")} (문항 ${pool.filter((c) => c.kind === "mc").reduce((a, c) => a + c.members.length, 0)}) FRQ ${cnt((c) => c.kind === "frq")} (${ELANG_FRQ_TYPES.map((t) => `${t}:${cnt((c) => c.frqType === t)}`).join(" ")})`);
   console.log(`status=${m.res.status} 목적값(범주 목표 이탈 + 낮은 키 신뢰도)=${m.res.obj}`);
