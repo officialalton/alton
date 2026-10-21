@@ -13,7 +13,7 @@
 | 2027 시험일 | 2027-05-03 1교시 | 두 페이지 |
 
 - **확인된 것**: 42/85, 4/95 는 College Board 공식 페이지 두 곳에서 직접 확인했다(계획서의 "간접 확인" 해소). 일부 서드파티 페이지의 "40/80, 4/100" 은 2026 시험(구형식)이다.
-- **확인 못 한 것**: FRQ 문항별 배점·유형(MR/TBR/EDA/QQT 가정), MC 스킬 비중, 참조 정보(식 시트) 본문. CED 전문(10MB 초과)과 Exam Updates PDF 를 읽지 못했다. 이 라운드의 FRQ 배점 10/12/10/8 은 같은 계열 CED(Physics C: E&M·Physics 2)의 값을 **임시로** 쓴 것이며, 가이드·프롬프트·루브릭 모두 "provisional"로 표기했다. **공개 전 Mechanics CED 재확인 필요.**
+- **확인 못 한 것**: FRQ 문항별 배점·유형(MR/TBR/EDA/QQT 가정), MC 스킬 비중, 참조 정보(식 시트) 본문. CED 전문(10MB 초과)과 Exam Updates PDF 를 읽지 못했다. **2026-10-20 갱신: FRQ 10/12/10/8점과 MC 50%·FRQ 50% 는 오너가 공식 자료로 확인했다(원문 페이지 번호는 미기재; `lib/ap-exam/layouts.ts` `AP_NEW_SUBJECT_FRQ_TYPES`·`AP_SECTION_WEIGHTS_PCT`).** 아래 "임시" 서술은 이 라운드 당시 기록이며 현재는 확정값이다. 당시에는 같은 계열 CED(Physics C: E&M·Physics 2)의 값을 임시로 쓴 것이며, 가이드·프롬프트·루브릭 모두 "provisional"로 표기했다. **공개 전 Mechanics CED 재확인 필요.**
 - 단원 MC 비중(공식 범위, Course at a Glance 2026): 1 10–15 · 2 20–25 · 3 15–25 · 4 10–20 · 5 10–15 · 6 10–15 · 7 10–15 %. 42문항 환산 [5,6]/[9,10]/[7,10]/[5,8]/[5,6]/[5,6]/[5,6], 목표 배분 5/9/8/5/5/5/5(`lib/ap-exam/full-set-rules.ts` `PHYSC_*`). 7단원이고 유체가 없다(Physics 1 은 8단원).
 
 ## 2. 구성(Physics 1 재사용 방식)

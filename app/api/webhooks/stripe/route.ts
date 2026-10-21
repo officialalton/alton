@@ -81,7 +81,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "invalid signature" }, { status: 401 });
   }
 
-  let event: { id: string; type: string; data: { object: unknown } };
+  let event: { id: string; type: string; livemode?: boolean; data: { object: unknown } };
   try {
     event = stripe.webhooks.constructEvent(rawBody, signature, webhookSecret) as typeof event;
   } catch (err) {
@@ -89,6 +89,15 @@ export async function POST(request: Request) {
       message: err instanceof Error ? err.message : String(err),
     });
     return NextResponse.json({ error: "invalid signature" }, { status: 400 });
+  }
+
+  // 모드 혼입 방지: STRIPE_SECRET_KEY 접두사(sk_live_/rk_live_ = 라이브)로 이 배포의 모드를 정하고,
+  // 반대 모드 이벤트는 처리·영수증 기록 없이 ACK 한다(재시도해도 해결되지 않으므로 200).
+  const secretKey = process.env.STRIPE_SECRET_KEY ?? "";
+  const deploymentLive = /^(sk|rk)_live_/.test(secretKey);
+  if (typeof event.livemode === "boolean" && event.livemode !== deploymentLive) {
+    logAudit("livemode_mismatch", { eventId: event.id, eventLivemode: event.livemode, deploymentLive });
+    return NextResponse.json({ ok: true, skipped: "livemode mismatch" });
   }
 
   const admin = createAdminClient();
@@ -236,7 +245,8 @@ export async function POST(request: Request) {
         stripe_payment_intent_id: pi.id,
         failure_reason: pi.last_payment_error?.message ?? null,
       });
-      await admin.from("purchases").update({ status: "failed" }).eq("id", purchaseId);
+      // 순서 뒤바뀐 이벤트가 이미 성공한 구매를 되돌리지 못하게 한다.
+      await admin.from("purchases").update({ status: "failed" }).eq("id", purchaseId).neq("status", "succeeded");
     }
     await markProcessed();
     return NextResponse.json({ ok: true });
@@ -251,7 +261,7 @@ export async function POST(request: Request) {
         status: "cancelled",
         stripe_payment_intent_id: session.payment_intent,
       });
-      await admin.from("purchases").update({ status: "cancelled" }).eq("id", purchaseId);
+      await admin.from("purchases").update({ status: "cancelled" }).eq("id", purchaseId).neq("status", "succeeded");
     }
     await markProcessed();
     return NextResponse.json({ ok: true });

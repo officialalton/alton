@@ -21,6 +21,15 @@ describe("estimateAttempt", () => {
     expect(estimateAttempt(mk("a", 1, { format: "fixed" })).reason).toBe("no_estimate_fixed");
     expect(estimateAttempt(mk("a", 1, { track: "ap", apSubject: "calc" })).reason).toBe("no_estimate_ap");
   });
+  it("AP 신규 과목(Precalculus·Mechanics)은 만점·0점·부분 점수여도 AP 1~5 추정이 없고, 미채점과 사유가 구분된다", () => {
+    for (const apSubject of ["ap_precalculus", "ap_physics_c_mechanics"]) {
+      for (const correct of [42, 0, 21]) {
+        const f = mk("a", 1, { track: "ap", apSubject }); f.sections.rw = sec(correct, 42, correct);
+        expect(estimateAttempt(f)).toEqual({ rw: null, math: null, total: null, reason: "no_estimate_ap" });
+      }
+      expect(estimateAttempt(mk("a", 1, { track: "ap", apSubject, status: "submitted", gradedAt: null })).reason).toBe("not_graded");
+    }
+  });
   it("한 섹션이 미완료면 총점 없음(섹션 합성 금지)", () => {
     const f = mk("a", 1); f.sections.math = sec(null, 54, null, false);
     expect(estimateAttempt(f)).toMatchObject({ total: null, reason: "section_incomplete" });
