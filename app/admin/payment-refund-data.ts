@@ -34,18 +34,34 @@ export type PaymentWebhookIssueItem = {
 
 type Stat = { granted: number; balance: number; consumed: number; holds: number; released: number; refunded: number };
 
+/** 미해결(처리 대기·확인 필요)은 오래돼도 전부(상한 PENDING_LIMIT) 먼저, 처리 완료는 최근 DONE_LIMIT건만 읽는다. */
+export const DONE_LIMIT = 100;
+export const PENDING_LIMIT = 1000;
+
+export type BoardCounts = {
+  refundsTotal: number;
+  refundsPending: number;
+  refundsShown: number;
+  issuesTotal: number;
+  issuesOpen: number;
+  issuesShown: number;
+};
+
+const REFUND_COLS =
+  "id, purchase_id, stripe_refund_id, amount_minor, currency, status, needs_review, auto_revoke_status, handled_by, handled_at, handled_action, handled_note, created_at";
+const ISSUE_COLS = "id, event_id, kind, purchase_id, detail, created_at, resolved_at, resolved_note";
+
 export async function loadPaymentRefundBoard(
   supabase: SupabaseClient
-): Promise<{ refunds: PaymentRefundBoardItem[]; issues: PaymentWebhookIssueItem[] }> {
-  const { data: refundRows, error: refundError } = await supabase
-    .from("payment_refunds")
-    .select(
-      "id, purchase_id, stripe_refund_id, amount_minor, currency, status, needs_review, auto_revoke_status, handled_by, handled_at, handled_action, handled_note, created_at"
-    )
-    .order("created_at", { ascending: false })
-    .limit(100);
-  if (refundError) throw new Error(refundError.message);
-  const refunds = refundRows ?? [];
+): Promise<{ refunds: PaymentRefundBoardItem[]; issues: PaymentWebhookIssueItem[]; counts: BoardCounts }> {
+  const [pendingR, doneR, totalR, pendingCountR] = await Promise.all([
+    supabase.from("payment_refunds").select(REFUND_COLS).is("handled_at", null).order("created_at", { ascending: true }).limit(PENDING_LIMIT),
+    supabase.from("payment_refunds").select(REFUND_COLS).not("handled_at", "is", null).order("handled_at", { ascending: false }).limit(DONE_LIMIT),
+    supabase.from("payment_refunds").select("id", { count: "exact", head: true }),
+    supabase.from("payment_refunds").select("id", { count: "exact", head: true }).is("handled_at", null),
+  ]);
+  for (const r of [pendingR, doneR, totalR, pendingCountR]) if (r.error) throw new Error(r.error.message);
+  const refunds = [...(pendingR.data ?? []), ...(doneR.data ?? [])];
 
   const purchaseIds = [...new Set(refunds.map((r) => r.purchase_id).filter((v): v is string => Boolean(v)))];
   const purchaseById = new Map<string, { totalMinor: number; currency: string; status: string }>();
@@ -90,14 +106,24 @@ export async function loadPaymentRefundBoard(
     }
   }
 
-  const { data: issueRows, error: iError } = await supabase
-    .from("payment_webhook_issues")
-    .select("id, event_id, kind, purchase_id, detail, created_at, resolved_at, resolved_note")
-    .order("created_at", { ascending: false })
-    .limit(100);
-  if (iError) throw new Error(iError.message);
+  const [openI, doneI, totalI, openCountI] = await Promise.all([
+    supabase.from("payment_webhook_issues").select(ISSUE_COLS).is("resolved_at", null).order("created_at", { ascending: true }).limit(PENDING_LIMIT),
+    supabase.from("payment_webhook_issues").select(ISSUE_COLS).not("resolved_at", "is", null).order("resolved_at", { ascending: false }).limit(DONE_LIMIT),
+    supabase.from("payment_webhook_issues").select("id", { count: "exact", head: true }),
+    supabase.from("payment_webhook_issues").select("id", { count: "exact", head: true }).is("resolved_at", null),
+  ]);
+  for (const r of [openI, doneI, totalI, openCountI]) if (r.error) throw new Error(r.error.message);
+  const issueRows = [...(openI.data ?? []), ...(doneI.data ?? [])];
 
   return {
+    counts: {
+      refundsTotal: totalR.count ?? refunds.length,
+      refundsPending: pendingCountR.count ?? (pendingR.data ?? []).length,
+      refundsShown: refunds.length,
+      issuesTotal: totalI.count ?? issueRows.length,
+      issuesOpen: openCountI.count ?? (openI.data ?? []).length,
+      issuesShown: issueRows.length,
+    },
     refunds: refunds.map((r) => {
       const s = r.purchase_id ? stats.get(r.purchase_id) : undefined;
       return {
@@ -127,7 +153,7 @@ export async function loadPaymentRefundBoard(
           : null,
       };
     }),
-    issues: (issueRows ?? []).map((i) => ({
+    issues: issueRows.map((i) => ({
       id: i.id,
       eventId: i.event_id,
       kind: i.kind,

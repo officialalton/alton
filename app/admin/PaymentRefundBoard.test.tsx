@@ -119,4 +119,18 @@ describe("PaymentRefundBoard", () => {
     fireEvent.click(screen.getAllByText("해결 처리")[0]);
     await waitFor(() => expect(resolveIssueMock).toHaveBeenCalledWith({ issueId: "i1", note: "설정 수정 후 재전송" }));
   });
+
+  it("건수('N건 중 M건 표시')를 보이고 필터로 확인 필요 건만 좁힌다", async () => {
+    listMock.mockResolvedValue({
+      refunds: [refund({ id: "old", purchaseId: "pOld", needsReview: true }), refund({ id: "x", purchaseId: "pX", needsReview: false })],
+      issues: [],
+      counts: { refundsTotal: 250, refundsPending: 2, refundsShown: 102, issuesTotal: 3, issuesOpen: 1, issuesShown: 3 },
+    });
+    render(<PaymentRefundBoard />);
+    expect(await screen.findByText(/환불 기록 250건 중 102건 표시 · 처리 대기 2건/)).toBeTruthy();
+    expect(screen.getAllByTestId("refund-pending")).toHaveLength(2);
+    fireEvent.change(screen.getByLabelText("환불 필터"), { target: { value: "review" } });
+    expect(screen.getAllByTestId("refund-pending")).toHaveLength(1);
+    expect(screen.getByTestId("issue-counts").textContent).toMatch(/3건 중 3건 표시 · 미해결 1건/);
+  });
 });

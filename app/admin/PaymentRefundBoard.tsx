@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { listPaymentRefundBoard, resolvePaymentRefund, resolvePaymentWebhookIssue } from "./payment-refund-actions";
-import type { PaymentRefundBoardItem, PaymentWebhookIssueItem } from "./payment-refund-data";
+import type { BoardCounts, PaymentRefundBoardItem, PaymentWebhookIssueItem } from "./payment-refund-data";
 import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDateTime } from "@/lib/format-datetime";
 
@@ -41,6 +41,8 @@ export default function PaymentRefundBoard() {
   const tz = useViewerTimezone();
   const [refunds, setRefunds] = useState<PaymentRefundBoardItem[] | null>(null);
   const [issues, setIssues] = useState<PaymentWebhookIssueItem[]>([]);
+  const [counts, setCounts] = useState<BoardCounts | null>(null);
+  const [filter, setFilter] = useState<"all" | "review" | "stripe_issue">("all");
   const [error, setError] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
   const [noteById, setNoteById] = useState<Record<string, string>>({});
@@ -50,6 +52,7 @@ export default function PaymentRefundBoard() {
       const board = await listPaymentRefundBoard();
       setRefunds(board.refunds);
       setIssues(board.issues);
+      setCounts(board.counts ?? null);
     } catch (e) {
       setError(e instanceof Error ? e.message : "불러오지 못했습니다.");
       setRefunds([]);
@@ -74,7 +77,7 @@ export default function PaymentRefundBoard() {
     }
   }
 
-  const pending = (refunds ?? []).filter((r) => !r.handledAt);
+  const pending = (refunds ?? []).filter((r) => !r.handledAt).filter((r) => (filter === "review" ? r.needsReview : filter === "stripe_issue" ? r.status !== "succeeded" : true));
   const done = (refunds ?? []).filter((r) => r.handledAt);
   const openIssues = issues.filter((i) => !i.resolvedAt);
   const doneIssues = issues.filter((i) => i.resolvedAt);
@@ -90,6 +93,21 @@ export default function PaymentRefundBoard() {
         <p role="alert" className="text-[12.5px] text-red mb-3">
           {error}
         </p>
+      )}
+      {counts && (
+        <div className="flex flex-wrap items-center gap-3 mb-3" data-testid="refund-counts">
+          <span className="text-[12px] text-grey-500">
+            환불 기록 {counts.refundsTotal}건 중 {counts.refundsShown}건 표시 · 처리 대기 {counts.refundsPending}건(오래된 대기 건은 항상 먼저 표시, 처리 완료는 최근 100건만)
+          </span>
+          <label className="text-[12px] text-grey-500">
+            필터{" "}
+            <select aria-label="환불 필터" className={input} value={filter} onChange={(e) => setFilter(e.target.value as typeof filter)}>
+              <option value="all">처리 대기 전체</option>
+              <option value="review">확인 필요만</option>
+              <option value="stripe_issue">Stripe 상태 비성공만</option>
+            </select>
+          </label>
+        </div>
       )}
       {refunds === null ? (
         <p className="text-[13px] text-grey-500">불러오는 중…</p>
@@ -197,6 +215,11 @@ export default function PaymentRefundBoard() {
             </div>
           );
         })
+      )}
+      {counts && (
+        <p className="text-[12px] text-grey-500 mt-2" data-testid="issue-counts">
+          웹훅 이상 {counts.issuesTotal}건 중 {counts.issuesShown}건 표시 · 미해결 {counts.issuesOpen}건(미해결은 항상 전부 표시)
+        </p>
       )}
       {doneIssues.length > 0 && (
         <p className="text-[12px] text-grey-500 mt-2">해결 완료 {doneIssues.length}건(기록은 보존됩니다).</p>

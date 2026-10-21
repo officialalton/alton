@@ -33,7 +33,7 @@ export function checkCaps(u: Usage, inputChars: number, l: Limits = limits()): C
   if (estimateInputTokens(inputChars) > l.maxInputTokensPerEssay) return { ok: false, reason: "input_too_large" };
   if (u.attemptEssays >= l.perAttemptEssays) return { ok: false, reason: "attempt_cap" };
   if (u.accountEssaysToday >= l.perAccountDailyEssays) return { ok: false, reason: "daily_cap" };
-  const worst = 2 * costUsd(l.maxInputTokensPerEssay, l.maxOutputTokensPerEssay, l);
+  const worst = 4 * costUsd(l.maxInputTokensPerEssay, l.maxOutputTokensPerEssay, l);
   if (u.monthSpendUsd + worst > l.monthlyBudgetUsd) return { ok: false, reason: "monthly_budget" };
   return { ok: true };
 }

@@ -25,7 +25,7 @@ export function createSupabaseEssayStore(admin: Admin, now: () => Date = () => n
       const [a, day, month] = await Promise.all([
         admin.from(T).select("set_item_id, part_label", { count: "exact", head: true }).eq("attempt_id", k.attemptId).neq("status", "skipped").neq("status", "pending").neq("set_item_id", k.setItemId).or("last_error.is.null,last_error.not.in.(daily_cap,monthly_budget,no_reference_answers)"),
         admin.from(T).select("id", { count: "exact", head: true }).eq("student_id", k.studentId).gte("created_at", dayStart(d)).neq("status", "skipped").or("last_error.is.null,last_error.not.in.(daily_cap,monthly_budget,no_reference_answers)"),
-        admin.from(T).select("cost_usd").gte("created_at", monthStart(d)),
+        admin.from(T).select("cost_usd").gte("updated_at", monthStart(d)), // 재시도 비용은 행의 updated_at 월에 잡힌다(전월 생성 행의 이번 달 재시도 포함, 약간 보수적)
       ]);
       const spend = (month.data ?? []).reduce((s, r) => s + Number(r.cost_usd ?? 0), 0);
       return { attemptEssays: a.count ?? 0, accountEssaysToday: Math.max(0, (day.count ?? 0) - 1), monthSpendUsd: spend };
@@ -34,6 +34,13 @@ export function createSupabaseEssayStore(admin: Admin, now: () => Date = () => n
       const patch: Record<string, unknown> = { status: f.status, updated_at: now().toISOString() };
       const map: [keyof Finish, string][] = [["model", "model"], ["scores", "scores"], ["rationale", "rationale"], ["attemptsMade", "attempts_made"], ["nextRetryAt", "next_retry_at"], ["lastError", "last_error"], ["inputTokens", "input_tokens"], ["outputTokens", "output_tokens"], ["costUsd", "cost_usd"]];
       for (const [from, to] of map) if (f[from] !== undefined) patch[to] = f[from];
+      // 비용·토큰은 호출 단위 증분이다 — 이전 시도 값에 합산한다(덮어쓰면 재시도 때 과거 지출이 사라진다). claim 한 하나의 작업자만 processing 행을 쓰므로 읽고-더하기는 안전하다.
+      if (f.costUsd !== undefined || f.inputTokens !== undefined || f.outputTokens !== undefined) {
+        const { data: prev } = await match(admin.from(T).select("cost_usd, input_tokens, output_tokens"), k).maybeSingle();
+        patch.cost_usd = Math.round((Number(prev?.cost_usd ?? 0) + (f.costUsd ?? 0)) * 100_000) / 100_000;
+        patch.input_tokens = Number(prev?.input_tokens ?? 0) + (f.inputTokens ?? 0);
+        patch.output_tokens = Number(prev?.output_tokens ?? 0) + (f.outputTokens ?? 0);
+      }
       await match(admin.from(T).update(patch), k);
     },
   };
