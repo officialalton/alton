@@ -5,7 +5,7 @@ const num = (v: string | undefined, d: number) => { const n = Number(v); return 
 
 export type Limits = {
   maxInputTokensPerEssay: number; maxOutputTokensPerEssay: number;
-  perAttemptEssays: number; perAccountDailyEssays: number; /** 월 예산(UTC 월). 호출 전 최악 비용(4호출)을 원장에 원자적으로 예약해 동시 요청의 초과를 막지만, 단가 가정·예외로 끝난 호출의 알 수 없는 비용·30분 넘게 정산 안 된 예약은 반영되지 않는다 → 회계상 절대 상한이 아닌 근사 한도(마이그레이션 20262100000650 적용 전에는 사전 검사만 하는 소프트 한도). */ monthlyBudgetUsd: number;
+  perAttemptEssays: number; perAccountDailyEssays: number; /** 월 예산(**UTC 월** 경계 — 교사 정산의 America/Los_Angeles 기준과 다르다). 호출 전 최악 비용(4호출)을 원장에 원자적으로 예약해 동시 요청의 초과를 막는다. 호출이 시작됐는데 정산이 없는 예약은 시간이 지나도 합계에 남는다(unsettled, 보수적). 단가 가정이 틀리면 어긋나고, 구형 코드가 쓴 비용은 원장이 모른다(전환 기간 대조 필요) → 서비스 전체 AI 지출을 통제하는 절대 상한이 아닌, 이 앱 코드가 호출한 채점 비용의 근사 한도(마이그레이션 20262100000650 적용 전에는 사전 검사만 하는 소프트 한도). */ monthlyBudgetUsd: number;
   usdPerMInput: number; usdPerMOutput: number;
 };
 /** rubricId 를 주면 그 루브릭의 응시당 상한·입력 한도 기본값을 쓴다(영어 3건 · U.S. History 6건). 환경변수는 영어 AI_ESSAY_PER_ATTEMPT_CAP · History AI_ESSAY_PER_ATTEMPT_CAP_USH. */

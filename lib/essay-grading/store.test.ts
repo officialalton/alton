@@ -1,13 +1,14 @@
-import { describe, expect, it } from "vitest";
-import { createSupabaseEssayStore } from "./store";
+import { describe, expect, it, vi } from "vitest";
+import { createSupabaseEssayStore, __resetLedgerWarnForTest } from "./store";
+import { getEssayLedgerStatus } from "./ledger-status";
 import { processEssay, type EssayKey } from "./queue";
 import { worstCaseUsd, limits } from "./costs";
 
 type R = Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
 // 두 테이블(행·원장)과 월 지출·예약 RPC 를 메모리로 흉내 낸다. RPC 는 마이그레이션 SQL(essay_ai_month_spend / reserve_essay_ai_budget)과 같은 규칙:
 // 확정(settled·legacy) + 이벤트 없는 기존 행(updated_at) + 30분 이내 예약, UTC 월 [시작, 다음 달 시작).
-function fakeAdmin(rows: R[], events: R[] = [], clock: { t: Date } = { t: new Date() }) {
-  let seq = 0;
+let seq = 0; // 인스턴스를 여러 번 만들어도 id 가 겹치지 않게 모듈 단위
+function fakeAdmin(rows: R[], events: R[] = [], clock: { t: Date } = { t: new Date() }, failUpdate = false) {
   const monthSpend = (nowIso: string) => {
     const n = new Date(nowIso), s = Date.UTC(n.getUTCFullYear(), n.getUTCMonth(), 1), e = Date.UTC(n.getUTCFullYear(), n.getUTCMonth() + 1, 1);
     const inM = (iso: string) => new Date(iso).getTime() >= s && new Date(iso).getTime() < e;
@@ -15,7 +16,8 @@ function fakeAdmin(rows: R[], events: R[] = [], clock: { t: Date } = { t: new Da
     let sum = 0;
     for (const v of events) if (fin(v) && inM(v.occurred_at)) sum += Number(v.cost_usd);
     for (const r of rows) if (Number(r.cost_usd) > 0 && !events.some((v) => v.essay_score_id === r.id && fin(v)) && inM(r.updated_at)) sum += Number(r.cost_usd);
-    for (const v of events) if (v.state === "reserved" && inM(v.occurred_at) && new Date(v.created_at).getTime() > n.getTime() - 30 * 60_000) sum += Number(v.cost_usd);
+    // 예약: 호출 시작 표시가 있거나(unsettled, 시간이 지나도 유지) 아직 30분 이내인 것만. 표시 없이 30분이 지난 예약은 해제된 것.
+    for (const v of events) if (v.state === "reserved" && inM(v.occurred_at) && (v.call_started_at || new Date(v.created_at).getTime() > n.getTime() - 30 * 60_000)) sum += Number(v.cost_usd);
     return Math.round(sum * 100_000) / 100_000;
   };
   const table = (name: string) => {
@@ -34,7 +36,8 @@ function fakeAdmin(rows: R[], events: R[] = [], clock: { t: Date } = { t: new Da
       },
       update: (patch: R) => {
         const f: Array<(r: R) => boolean> = [];
-        const c: R = { eq: (k: string, v: unknown) => { f.push((r) => r[k] === v); return c; }, then: (res: (v: unknown) => unknown) => { data.filter((r) => f.every((x) => x(r))).forEach((r) => Object.assign(r, patch)); return res({ data: null }); } };
+        const apply = () => { const hit = data.filter((r) => f.every((x) => x(r))); hit.forEach((r) => Object.assign(r, patch)); return hit; };
+        const c: R = { eq: (k: string, v: unknown) => { f.push((r) => r[k] === v); return c; }, select: () => ({ then: (res: (v: unknown) => unknown) => res(failUpdate ? { data: null, error: { message: "boom" } } : { data: apply().map((r) => ({ id: r.id })), error: null }) }), then: (res: (v: unknown) => unknown) => { apply(); return res({ data: null }); } };
         return c;
       },
       insert: async (row: R) => { data.push({ id: `e${++seq}`, created_at: clock.t.toISOString(), occurred_at: clock.t.toISOString(), ...row }); return { data: null }; },
@@ -44,6 +47,11 @@ function fakeAdmin(rows: R[], events: R[] = [], clock: { t: Date } = { t: new Da
     from: (n: string) => table(n),
     rpc: async (fn: string, a: R) => {
       if (fn === "essay_ai_month_spend") return { data: monthSpend(a.p_now) };
+      if (fn === "start_essay_ai_call") { // SQL 과 같은 규칙: 예약 상태이고 (이미 표시됐거나 30분 이내)일 때만 표시
+        const v = events.find((e) => e.id === a.p_id && e.state === "reserved" && (e.call_started_at || new Date(e.created_at).getTime() > clock.t.getTime() - 30 * 60_000));
+        if (v) v.call_started_at = v.call_started_at ?? clock.t.toISOString();
+        return { data: !!v };
+      }
       if (monthSpend(a.p_now) + a.p_amount > a.p_budget) return { data: null };
       const id = `res${++seq}`;
       events.push({ id, essay_score_id: a.p_score_id, student_id: a.p_student_id, state: "reserved", cost_usd: a.p_amount, occurred_at: a.p_now, created_at: a.p_now });
@@ -153,7 +161,88 @@ describe("essay store 월 예산 원자적 예약", () => {
     const r1 = await processEssay({ store: mk(false) as never, client }, job);
     expect(r1).toEqual({ status: "failed", error: "monthly_budget" }); expect(calls).toBe(0);
     await processEssay({ store: mk(true) as never, client }, job);
-    expect(finishes.at(-1)).toMatchObject({ reservationId: "res1", costUsd: 0 });
+    expect(finishes.at(-1)).toMatchObject({ reservationId: "res1", costUnknown: true }); // grade() 중 예외 = 비용 미확정 → 해제하지 않는다
     delete process.env.AI_ESSAY_GRADING_ENABLED;
+  });
+});
+
+describe("예약 만료·구형 공존: 호출 시작 표시(call_started)", () => {
+  const W = worstCaseUsd(limits()), BUDGET = W * 1.5; // 예약 하나만 들어가는 예산
+  const T0 = "2026-10-15T12:00:00.000Z", T2H = "2026-10-15T14:00:00.000Z";
+  const setup = () => { const rows = [row()]; const events: R[] = []; const clock = { t: new Date(T0) }; return { rows, events, clock, store: (iso: string) => { clock.t = new Date(iso); return createSupabaseEssayStore(fakeAdmin(rows, events, clock), at(iso)); } }; };
+  const idOf = (r: unknown) => (r as { reservationId: string }).reservationId;
+  it("a) 호출을 시작한 예약 A 가 2시간 정산 없이 지나도 새 예약 B 는 같은 예산을 받지 못한다(보수적 unsettled)", async () => {
+    const t = setup(); const a = await t.store(T0).reserveBudget!(key, W, BUDGET);
+    expect(await t.store(T0).markCallStarted!(key, idOf(a))).toBe(true);
+    expect((await t.store(T2H).reserveBudget!(key, W, BUDGET)).ok).toBe(false);
+    expect(await monthOf(t.rows, t.events, T2H)).toBe(Math.round(W * 100_000) / 100_000);
+  });
+  it("호출을 시작하지 않은 예약 C 는 30분 뒤 해제돼 D 가 예산을 받고, 만료된 C 는 호출 시작 표시를 거절한다", async () => {
+    const t = setup(); const c = await t.store(T0).reserveBudget!(key, W, BUDGET);
+    expect((await t.store(T2H).reserveBudget!(key, W, BUDGET)).ok).toBe(true);
+    expect(await t.store(T2H).markCallStarted!(key, idOf(c))).toBe(false);
+  });
+  it("늦은 정산: 만료 후 정산이 도착해도 발생 월에 실비가 반영되고, 같은 예약의 중복 정산은 무시된다", async () => {
+    const t = setup(); const a = await t.store(T0).reserveBudget!(key, W, BUDGET);
+    await t.store(T0).markCallStarted!(key, idOf(a));
+    await t.store(T2H).finish(key, { status: "done", costUsd: 0.4, inputTokens: 10, outputTokens: 5, reservationId: idOf(a) });
+    expect(await monthOf(t.rows, t.events, T2H)).toBe(0.4);
+    expect(t.rows[0].cost_usd).toBe(0.4);
+    await t.store(T2H).finish(key, { status: "done", costUsd: 0.4, inputTokens: 10, outputTokens: 5, reservationId: idOf(a) }); // 중복
+    expect(await monthOf(t.rows, t.events, T2H)).toBe(0.4);
+    expect(t.rows[0].cost_usd).toBe(0.4); // 행 누적도 이중으로 늘지 않는다
+    expect(t.events.filter((e) => e.state === "settled")).toHaveLength(1);
+  });
+  it("타임아웃(costUnknown)·정산 실패는 예약을 unsettled 로 남겨 월 합계에 계속 포함한다", async () => {
+    const t = setup(); const a = await t.store(T0).reserveBudget!(key, W, BUDGET);
+    await t.store(T0).markCallStarted!(key, idOf(a));
+    await t.store(T2H).finish(key, { status: "failed", lastError: "grader_error", costUnknown: true, costUsd: 0, inputTokens: 0, outputTokens: 0, reservationId: idOf(a) });
+    expect(t.events[0].state).toBe("reserved"); expect(t.rows[0].cost_usd).toBe(0);
+    expect(await monthOf(t.rows, t.events, T2H)).toBe(Math.round(W * 100_000) / 100_000);
+    // 정산 UPDATE 자체가 실패해도(네트워크 등) 같은 결과: 예약 유지, 행 누적 없음
+    const t2 = setup(); const b = await t2.store(T0).reserveBudget!(key, W, BUDGET);
+    await t2.store(T0).markCallStarted!(key, idOf(b));
+    await createSupabaseEssayStore(fakeAdmin(t2.rows, t2.events, t2.clock, true), at(T2H)).finish(key, { status: "done", costUsd: 0.4, inputTokens: 1, outputTokens: 1, reservationId: idOf(b) });
+    expect(t2.events[0].state).toBe("reserved"); expect(t2.rows[0].cost_usd).toBe(0);
+    expect(await monthOf(t2.rows, t2.events, T2H)).toBe(Math.round(W * 100_000) / 100_000);
+  });
+  it("processEssay: 예약이 만료돼 markCallStarted 가 거절되면 모델 호출 없이 예약 해제·재시도 대기", async () => {
+    process.env.AI_ESSAY_GRADING_ENABLED = "true";
+    let calls = 0; const finishes: unknown[] = [];
+    const store = {
+      claim: async () => ({ claimed: true, row: { status: "pending", attemptsMade: 0, nextRetryAt: null } }),
+      usage: async () => ({ attemptEssays: 0, accountEssaysToday: 0, monthSpendUsd: 0 }),
+      reserveBudget: async () => ({ ok: true as const, reservationId: "res1" }),
+      markCallStarted: async () => false,
+      finish: async (_k: unknown, f: unknown) => { finishes.push(f); },
+    };
+    const client = { grade: async () => { calls++; return {} as never; } } as never;
+    const job = { ...key, taskPrompt: "p", sources: [], essay: "word ".repeat(300), anchors: [{ score: 3, text: "a" }, { score: 4, text: "b" }, { score: 5, text: "c" }] } as never;
+    expect(await processEssay({ store: store as never, client }, job)).toEqual({ status: "failed", error: "reservation_expired" });
+    expect(calls).toBe(0);
+    expect(finishes.at(-1)).toMatchObject({ reservationId: "res1", costUsd: 0, lastError: "reservation_expired" });
+    delete process.env.AI_ESSAY_GRADING_ENABLED;
+  });
+  it("미적용 환경 폴백은 조용하지 않다: 서버 로그 경고가 한 번 남는다", async () => {
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+    __resetLedgerWarnForTest();
+    const admin = { from: () => ({ select: () => { const c: R = {}; for (const m of ["eq", "neq", "or", "gte"]) c[m] = () => c; c.maybeSingle = async () => ({ data: { id: "row1" } }); c.then = (res: (v: unknown) => unknown) => res({ count: 0, data: [] }); return c; } }), rpc: async () => ({ data: null, error: { code: "PGRST202" } }) } as never;
+    const store = createSupabaseEssayStore(admin, at(OCT));
+    expect((await store.reserveBudget!(key, 0.2, 1)).ok).toBe(true); // 호환 동작(예약 없음)
+    await store.usage(key); await store.reserveBudget!(key, 0.2, 1);
+    expect(warn.mock.calls.filter((c) => String(c[0]).includes("[essay-ledger]"))).toHaveLength(1);
+    warn.mockRestore();
+  });
+});
+
+describe("essay_ai_ledger_status 헬퍼", () => {
+  it("함수가 없으면 ledgerPresent=false(migration_not_applied) + 경고, 있으면 확인 대상을 요약한다", async () => {
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+    expect(await getEssayLedgerStatus({ rpc: async () => ({ data: null, error: { code: "PGRST202", message: "x" } }) } as never)).toEqual({ ledgerPresent: false, reason: "migration_not_applied" });
+    expect(warn).toHaveBeenCalled(); warn.mockRestore();
+    const st = await getEssayLedgerStatus({ rpc: async () => ({ data: { month_utc: "2026-10", month_spend_usd: 1.2, unsettled_count: 2, unsettled_usd: 0.9, oldest_unsettled_at: "2026-10-01T00:00:00Z", expired_unstarted_reservations: 0, row_ledger_mismatch_rows: 1, rows_cost_total_usd: 3, ledger_settled_legacy_total_usd: 2.9 }, error: null }) } as never);
+    expect(st).toMatchObject({ ledgerPresent: true, needsAttention: true, unsettledCount: 2, rowLedgerMismatchRows: 1 });
+    const ok = await getEssayLedgerStatus({ rpc: async () => ({ data: { month_utc: "2026-10", unsettled_count: 0, row_ledger_mismatch_rows: 0 }, error: null }) } as never);
+    expect(ok).toMatchObject({ ledgerPresent: true, needsAttention: false });
   });
 });
