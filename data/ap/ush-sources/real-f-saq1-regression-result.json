@@ -1,0 +1,185 @@
+{
+ "models": [
+  "claude-opus-5-5",
+  "claude-sonnet-5-5"
+ ],
+ "generatedAt": "2026-10-21T21:57:01.220Z",
+ "cases": [
+  {
+   "id": "b-veto",
+   "kind": "valid",
+   "row": "b",
+   "expect": 1,
+   "scores": [
+    1,
+    1
+   ],
+   "ok": true
+  },
+  {
+   "id": "b-circular9-inform",
+   "kind": "valid",
+   "row": "b",
+   "expect": 1,
+   "scores": [
+    1,
+    1
+   ],
+   "ok": true
+  },
+  {
+   "id": "b-registration-assist",
+   "kind": "exception",
+   "row": "b",
+   "expect": 1,
+   "scores": [
+    1,
+    1
+   ],
+   "ok": true
+  },
+  {
+   "id": "b-registration-supervise",
+   "kind": "exception",
+   "row": "b",
+   "expect": 1,
+   "scores": [
+    1,
+    1
+   ],
+   "ok": true
+  },
+  {
+   "id": "b-steedman-nolink",
+   "kind": "inaccurate",
+   "row": "b",
+   "expect": 0,
+   "scores": [
+    0,
+    0
+   ],
+   "ok": true
+  },
+  {
+   "id": "b-repeat-hostility",
+   "kind": "inaccurate",
+   "row": "b",
+   "expect": 0,
+   "scores": [
+    0,
+    0
+   ],
+   "ok": true
+  },
+  {
+   "id": "b-bureau-ran-elections",
+   "kind": "inaccurate",
+   "row": "b",
+   "expect": 0,
+   "scores": [
+    0,
+    0
+   ],
+   "ok": true
+  },
+  {
+   "id": "b-out-of-period",
+   "kind": "inaccurate",
+   "row": "b",
+   "expect": 0,
+   "scores": [
+    0,
+    0
+   ],
+   "ok": true
+  },
+  {
+   "id": "c-blackcodes",
+   "kind": "valid",
+   "row": "c",
+   "expect": 1,
+   "scores": [
+    1,
+    1
+   ],
+   "ok": true
+  },
+  {
+   "id": "c-edisto-restoration",
+   "kind": "valid",
+   "row": "c",
+   "expect": 1,
+   "scores": [
+    1,
+    1
+   ],
+   "ok": true
+  },
+  {
+   "id": "c-edisto-some-opposed",
+   "kind": "exception",
+   "row": "c",
+   "expect": 1,
+   "scores": [
+    1,
+    1
+   ],
+   "ok": true
+  },
+  {
+   "id": "c-edisto-petition",
+   "kind": "exception",
+   "row": "c",
+   "expect": 1,
+   "scores": [
+    1,
+    1
+   ],
+   "ok": true
+  },
+  {
+   "id": "c-fisk-bureau-alone",
+   "kind": "inaccurate",
+   "row": "c",
+   "expect": 0,
+   "scores": [
+    0,
+    0
+   ],
+   "ok": true
+  },
+  {
+   "id": "c-bureau-stopped-restoration",
+   "kind": "inaccurate",
+   "row": "c",
+   "expect": 0,
+   "scores": [
+    0,
+    0
+   ],
+   "ok": true
+  },
+  {
+   "id": "c-repeat-teachers",
+   "kind": "inaccurate",
+   "row": "c",
+   "expect": 0,
+   "scores": [
+    0,
+    0
+   ],
+   "ok": true
+  },
+  {
+   "id": "c-out-of-period",
+   "kind": "inaccurate",
+   "row": "c",
+   "expect": 0,
+   "scores": [
+    0,
+    0
+   ],
+   "ok": true
+  }
+ ]
+}
