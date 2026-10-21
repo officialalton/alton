@@ -1,0 +1,996 @@
+[
+ {
+  "key": "ap_microeconomics-m01-k0",
+  "cellId": "ap_microeconomics-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Price discrimination works when groups have different price elasticities and resale (arbitrage) can be prevented. Students have more elastic demand, so they get the lower price, and the ID check stops resale.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "A"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 4.3 in scope; explaining the outcome via elasticity plus the no-resale condition fits skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is the unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Key is much longer and the only option with both conditions (length giveaway). B and D are implausible, with D obviously false, so they do not encode realistic misconceptions. The 'why' explanations are circular restatements."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Timing is fine, but the length giveaway and weak distractors make the item easy to answer by test-wiseness without economics knowledge."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Content and key are correct and in scope, but the key is longest and the only option stating both conditions, and two distractors (B, D) are implausible. It fails on distractor quality and exam suitability."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall and application of price discrimination conditions (different elasticities plus prevention of resale). Short stem, no calculation, no graph. Distractors each contradict one condition, so only a modest two-factor explanation is needed. Fits foundational practice rather than full-mock exam-level difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_microeconomics-m01-k1",
+  "cellId": "ap_microeconomics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Price discrimination raises profit when the groups have different elasticities and resale can be prevented. The group with more elastic demand (schools) gets the lower price.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "A"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standalone conceptual MC on price discrimination: it requires more elastic demand in the low-price group plus preventing resale. The key (A) is unique, and each distractor reverses elasticity, ignores resale, or confuses marginal cost with willingness to pay. Five options, no stimulus needed, about 60 seconds. Pass.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item is on topic 4.3. It asks the student to explain an outcome with multiple contributing variables (elasticity difference and resale prevention), which fits skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the only statement that is both true and complete. B, C, D and E are each clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear and the scenario is a standard one."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct misconception. The explanation for E is slightly awkward (\"A price cut raises revenue only where demand is elastic\"), but it still shows that schools are the more elastic group, so E is wrong."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light reading load, no calculation, and the time is typical for an AP item. The calculator designation does not matter here."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "This is a conceptual recall and application item on third-degree price discrimination. Students need to know two conditions: different elasticities across groups and the ability to prevent resale. No calculation or graph reading is involved. The correct option combines the two conditions, which fits skill 2.B's requirement to explain an outcome with multiple variables, but distractors are clearly wrong (same elasticity, resale helps, MC-based pricing, inelastic schools get discount). Reading load is minimal and the model is stated clearly, so it is a standard introductory check of the topic.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_microeconomics-m01-k2",
+  "cellId": "ap_microeconomics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "This is third-degree price discrimination. It raises profit when students have more elastic demand (they respond more to price) and when the ID check stops students from reselling discounted tickets to other adults.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Third-degree price discrimination (4.3). The item asks the student to explain the outcome using two contributing variables, elasticity difference and resale prevention, which fits skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option B is the only correct answer. A reverses the cost logic. C contradicts the profit gain. D reverses which group is more elastic. E dismisses the resale condition."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the stem is self-contained. The wording is clear US English with five options."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception: cost-based pricing, same-price-is-better, reversed elasticity, and resale irrelevance. The explanation addresses every wrong option, though the 'why' texts are somewhat terse. The correct option is the longest and the only one with two conditions, a mild giveaway but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, no calculation, and the calculator designation is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean conceptual multiple-choice item on price discrimination, with a unique key and distinct distractors. Its only weakness is a mild length cue on the key."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall of the conditions for price discrimination (different price elasticities across groups plus prevention of resale). No calculation, graph, or table. The correct option pairs the two conditions, and the distractors are clearly wrong (cost-based pricing, uniform pricing, inverted elasticity, resale irrelevant). Short reading load and in-scope content. This is a straightforward introductory check rather than a full-mock level multi-step item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_microeconomics-m02-k0",
+  "cellId": "ap_microeconomics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "A single-price monopolist sells where MR equals MC. That means it charges a higher price and sells a smaller quantity than a competitive market would. As a result, consumer surplus shrinks: some of it goes to the monopolist as profit and some is lost as deadweight loss.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 30-60 seconds and has five options. It is low difficulty, but typical of an AP recall/comparison item. No calculation is required, and the calculator designation is harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous monopoly vs. perfect competition consumer surplus comparison. It has one correct key and distinct distractors, and it is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall/comparison: monopoly yields higher price and lower quantity than perfect competition, so consumer surplus is smaller. No computation, no graph or table interpretation, and distractors are clearly wrong (e.g., higher quantity, lower price, unchanged surplus). The stem is unambiguous and short, so it fits foundational learning rather than a full-mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_microeconomics-m02-k1",
+  "cellId": "ap_microeconomics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A higher price and a lower quantity, with a deadweight loss.",
+     "brief_reasoning": "A monopolist produces where MR = MC, and because MR is below demand, that quantity is smaller than the competitive one where P = MC. It then charges the higher price found on the demand curve, which creates a deadweight loss.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item can be answered in about 60 seconds, has five options, and has a standard conceptual form typical of AP Microeconomics. It involves no arithmetic.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean, standard conceptual item that compares monopoly with perfect competition. The key is unique and correct, the distractors are plausible, and the distractor explanations are adequate. I found no instant-reject condition."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall: a single-price monopolist charges more and produces less than a perfectly competitive industry with the same costs, creating deadweight loss. The comparison between models is the standard textbook result. There is no calculation, graph reading, or multi-step reasoning. The distractors are common misconceptions that are easily dismissed with basic knowledge. The wording is clear and the model assumptions are stated (single-price, same costs).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_microeconomics-m02-k2",
+  "cellId": "ap_microeconomics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "A monopolist sets output where MR = MC, so it sells less and charges more than a competitive market would (where P = MC). Part of the consumer surplus becomes the monopolist's profit and part is lost as deadweight loss, so consumer surplus is smaller.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Compares monopoly vs perfect competition model outcomes; fits 4.2 and skill 1.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is uniquely correct; others contain false claims."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem states the assumptions clearly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors reverse price or quantity comparisons or invoke irrelevant reasons; each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, five options, no calculation needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, unambiguous conceptual item with a unique key and well-explained distractors. Passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept conceptual comparison of monopoly vs. perfect competition (higher price, lower quantity, smaller consumer surplus). No calculation, graph, or stimulus. Distractors contain obvious errors (same CS, lower price, higher quantity). Fits skill 1.D at a foundational level, so it is more suitable for basic learning than for full mocks.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_microeconomics-m03-k0",
+  "cellId": "ap_microeconomics-m03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "instant_reject_out_of_scope_knowledge",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "The second group's willingness to pay is below the original price, so they bought nothing before. When the monopolist sells to them at a lower price while the first group's price stays the same, these are extra units, so total output rises. The other options fail: deadweight loss falls rather than rises (B), output does change (C), the first group's consumer surplus stays the same because their price is unchanged (D), and output does not fall (E).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "out_of_scope_knowledge"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean, but it assesses price discrimination (topic 4.3) under a topic 4.2 Monopoly label. This is a scope mismatch, so I fail it on scope.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "The stem describes price discrimination, which is topic 4.3 (Price Discrimination), not 4.2 Monopoly. The blueprint concept itself is price discrimination. The item is in Unit 4 but is mislabeled against the official topic 4.2. The skill (determine the outcome) fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is defensible. The second group's willingness to pay is below the original price, so those are additional units and output rises. The first group's price is unchanged, so its surplus is unchanged. B, C, D and E are each clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and none is given. The wording is clear. One minor gap: the stem never states that the lower price still exceeds marginal cost, though this is implied."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a distinct reversal: deadweight loss, output unchanged, first group's surplus, output decreases. Each is explained. The key is also noticeably longer and more explicit than the distractors, a mild giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A quick conceptual item of about 60 seconds with five options. The calculator designation is irrelevant but harmless."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall and application: a monopolist that adds a lower-priced second group sells units that went unsold at the single price, so output rises. No computation, graph, or table. One short reasoning step, and the distractors target common misconceptions (deadweight loss rises, output unchanged, first group's consumer surplus rises, output falls). Wording is slightly loose (\"most likely\") but standard for the topic and not a source of unfair difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_microeconomics-m03-k1",
+  "cellId": "ap_microeconomics-m03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Under perfect price discrimination, marginal revenue equals the demand curve. The monopolist therefore produces where P = MC, which is the efficient output. It captures all of the surplus, so consumer surplus is zero and there is no deadweight loss.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "A"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the item is labeled 4.2 while it assesses 4.3 content (perfect price discrimination). The distractors are weak and mechanically generated: B and E are implausible, C and D are redundant, and the explanations are circular. I fail it on scope and distractor quality.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "The item tests perfect price discrimination, which belongs to topic 4.3 (Price Discrimination), not 4.2 (Monopoly). The labeled topic does not match what is assessed. The skill demand is also mostly recall of a standard result. There is no comparison of outcomes beyond the textbook fact."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the unique correct answer. The other options each contain a clear error: unchanged output, rising consumer surplus, or falling output."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear. It does not say that marginal cost is positive or that the monopolist has no other constraints, but this is a standard assumption and does not make the answer ambiguous."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Several distractors are implausible. Option B (output unchanged but the deadweight loss disappears) is internally inconsistent. Option E (output falls and the deadweight loss grows) is also implausible. The explanations are weak and partly circular. For option B, the explanation says the deadweight loss disappears only because output expands, which restates the key and does not name the misconception. The distractors are mostly mechanical reversals of the key's three effects and do not reflect distinct, realistic student errors. Option D (consumer surplus rises) and option C (consumer surplus rises to its largest value) are near-duplicate misconceptions."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is short and suitable in length and format. It has five options. The calculator designation is irrelevant because no calculation is required."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall of the perfect price discrimination outcome (output rises to the efficient quantity where P = MC, consumer surplus goes to zero, deadweight loss disappears). No calculation, graph, or table. Distractors are easily eliminated once the key result is known. The item is fair and unambiguous, with no unfair difficulty sources. Note that it aligns more with topic 4.3 than 4.2.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_microeconomics-m03-k2",
+  "cellId": "ap_microeconomics-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "The second group's willingness to pay is below the original price, so they bought nothing before. Selling to them at a lower price adds units that weren't sold under the single price, so output goes up and deadweight loss goes down. The first group's price doesn't change, so their consumer surplus doesn't change either.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Conceptual outcome determination (3.A) fits. The content is really Topic 4.3 price discrimination rather than 4.2, but it is within Unit 4 and not out of scope. Minor topic label mismatch."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is uniquely defensible: the second group's WTP is below the original price, so their purchases are additional units, output rises and DWL falls. The other options reverse output, CS, or DWL effects."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct errors (no change in output, CS rises, output falls, DWL rises). Each wrong option is explained, though the explanation for D is brief. The key is slightly longer than the others."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, five options, no arithmetic. Typical of an AP MC item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound conceptual item with a unique key and distinct distractors. The only flaw is that the content belongs to Topic 4.3 while the item is labeled 4.2. This is minor and within Unit 4 scope. Passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Conceptual item on price discrimination. The student must see that selling to a previously unserved group at a lower price adds units, so output rises and deadweight loss falls. There is no computation, graph or table. The distractors are plausible but each has one clear flaw. The wording is unambiguous and the content is in scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_microeconomics-m04-k0",
+  "cellId": "ap_microeconomics-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Monopoly, because there is a single seller and barriers to entry block rivals.",
+     "brief_reasoning": "There is one seller, and the high cost of building a second network keeps rivals out. That makes it a natural monopoly.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 30-60 seconds, has five options, and requires no calculation, which is typical of an AP Microeconomics MC question. The calculator designation is harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous market-structure identification question. The key is unique, the distractors are distinct, and the scope and load are appropriate. I recommend acceptance."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step concept identification (skill 1.B): one seller plus barriers to entry maps directly to monopoly. Distractors are clearly wrong. There is no computation, graph, or multi-step reasoning, and the reading is minimal.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_microeconomics-m04-k1",
+  "cellId": "ap_microeconomics-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Monopolistic competition",
+     "brief_reasoning": "There are many sellers, each product is different, each restaurant sets its own price, and entry is easy. Those are the features of monopolistic competition.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Identifying market structure from a described scenario is squarely topic 4.1 and skill 1.B (identify a concept illustrated by an example). No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key (A) is unique. The stem gives dozens of sellers, differentiated food and easy entry, which is monopolistic competition. Options B, C, D and E each contain a flawed claim: B (few sellers), C (price-taking, which contradicts differentiated pricing), D (a single seller) and E (identical products)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed, and none is given. The wording is clear and complete. All five conditions needed for the determination are in the stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions: oligopoly from rival awareness, perfect competition from setting its own price, monopoly from a unique product, and perfect competition from many sellers plus easy entry while ignoring differentiation. The explanation addresses each wrong option. The two perfect competition options differ in their reasoning. Option A is the longest, but only slightly, so this is not a meaningful giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60 seconds, has five options, and needs no calculation. The calculator designation does not matter here. It is a standard textbook scenario and does not reproduce a specific released AP item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unambiguous 4.1/1.B market-structure identification item with a unique key and distinct, well-explained distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step identification of market structure from three clear cues: many sellers, differentiated products, easy entry. No computation, graph, or representation change. Distractors are plausible but each fails on one clear characteristic. Introductory recall level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_microeconomics-m04-k2",
+  "cellId": "ap_microeconomics-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "There is one seller, and the high cost of building a second network keeps rivals out. A single seller plus barriers to entry is a monopoly, and it may even be a natural monopoly.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "Monopoly, because there is a single seller and barriers to entry block rivals."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 4.1 market structure identification, skill 1.B; dominant demand matches."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique defensible answer; E has the same label but a false reason."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Four distinct misconceptions, each explained; E is a somewhat weak but valid distractor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short reading, quick, five options, appropriate to AP style. Calculator label is irrelevant but harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, simple, correct market-structure identification item with a unique key and distinct distractors. Acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step concept identification: one seller plus barriers to entry maps directly to monopoly. No calculation, no graph or table, and a short stem. Distractors target basic definitional confusion (differentiated product, same price, few firms, entry into any market) and are easily eliminated once the definitions are known. This is a standard topic 4.1 recognition item suited to initial learning rather than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_microeconomics-m05-k0",
+  "cellId": "ap_microeconomics-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "Under cap-and-trade, firms with low abatement costs cut more and sell permits to high-cost firms. The total reduction stays the same (fixed cap) but costs less overall.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 seconds, needs no calculation, and has a light reading load. The calculator designation is harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean conceptual item on tradable permits with a unique key, distinct distractors, and a fitting scope and time load."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Conceptual recall and light interpretation of a core Unit 6.2 idea: tradable permits under a fixed cap achieve the same total abatement at lower total cost because low-cost abaters cut more. There is no calculation or graph, one short reasoning step, and the distractors are clearly wrong (pollution to zero, same cost, a smaller reduction). The wording is clear with no unstated assumptions.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_microeconomics-m05-k1",
+  "cellId": "ap_microeconomics-m05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "Trading moves the pollution cuts to the firms with low abatement costs. Those firms cut more and sell their spare permits to firms with high abatement costs. This evens out marginal abatement costs across firms, so the cap is met at the lowest total cost.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Content and key are correct and in scope. Distractors are weak: B, C and D are implausible, only E is a realistic misconception, and the key is the longest option, which gives a length cue. Failing on distractor quality.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Only E reverses the sellers and buyers of permits, a realistic misconception. B, C and D are clearly wrong on their face, and C is incoherent. The key is the longest option, a length giveaway. The explanations do cover every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall and explanation: tradable permits shift abatement to low-cost firms, minimizing total cost under a fixed cap. No graph, no calculation, one reasoning step. Distractors are clearly incorrect (they contradict the cap or reverse buyer/seller roles). Fits Unit 6.2 and skill 2.A, but it is introductory rather than full-mock exam-level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_microeconomics-m05-k2",
+  "cellId": "ap_microeconomics-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "Under cap-and-trade, total emissions stay fixed at the cap. Firms that can cut pollution cheaply cut more and sell their permits to firms with high cutting costs. Marginal abatement costs end up equal across firms, so total cost falls compared with a uniform 20 percent cut.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Tradable pollution permits are a standard Topic 6.2 externality-correction tool. The task is to explain how an outcome occurs, which fits skill 2.A. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique defensible answer. The cap fixes total reduction and trading shifts cuts to low-cost firms, lowering total cost. The 'same total cap' condition is implied by 'fixed total cap' in the stem. Option A cites transaction costs, but standard AP treatment says trading lowers total cost, so A is not defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete, and the wording is in US English."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor targets a distinct misconception: transaction costs raise total cost, uniform cuts, a smaller total reduction, and pollution falling to zero. The explanation addresses every wrong option. Option lengths are comparable, though the key is slightly longer. The 'calculator allowed' label is nominal and harmless."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, five options, a conceptual item with no calculation. This is typical of the AP exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean conceptual item on tradable pollution permits. It has a unique key, distinct distractors, and it is within scope for Topic 6.2 and skill 2.A."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: tradable permits under a fixed cap achieve the same total abatement at lower total cost, since low-cost abaters cut more and high-cost firms buy permits. It requires one comparative step (uniform mandate vs. trading) with no calculation or graph. Reading is short and unambiguous, and the distractors are common misconceptions that are easy to eliminate once the cap and cost-minimization logic are identified.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_microeconomics-m06-k0",
+  "cellId": "ap_microeconomics-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Stay open and produce, because the revenue covers all variable costs and part of the fixed costs.",
+     "brief_reasoning": "AVC < P < ATC: in the short run, producing gives a smaller loss than shutting down, because revenue covers variable costs and part of fixed costs.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 seconds, has five options, and needs no calculation. This matches the typical AP Microeconomics multiple-choice format.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, standard shutdown-rule item. The key is unique and correct, the distractors map to distinct misconceptions, and the load is appropriate. The only weakness is that the stem does not state that the stand is a price taker."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall and application of the short-run shutdown rule (P > AVC means keep producing even at a loss). It needs one reasoning step, no computation and no graph or table. The distractors target common misconceptions, which is fair conceptual testing.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_microeconomics-m06-k1",
+  "cellId": "ap_microeconomics-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "P < AVC at every quantity means shutting down in the short run. Closed, the stand loses only its fixed costs. Open, it would lose the fixed costs plus some of its variable costs.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Tests the shutdown rule (P < AVC means close in the short run) from topic 3.6, with an explanation-type task that fits skill 2.A. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the only defensible answer. Opening at P < AVC loses the fixed costs plus the variable-cost shortfall, so closing is better. B, C, D and E are each wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the stem gives every condition. The wording is clear. The stem says 'below AVC at every quantity', which is unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors target distinct misconceptions: fixed costs vanish when closed, short-run loss means permanent exit, price setting, and revenue covering fixed cost. The explanation addresses each wrong option. Option B's wording is slightly muddled, but still wrong. The key is somewhat longer than the other options, which is a mild giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, five options, no calculation. The calculator designation is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean, unambiguous shutdown-rule item with a unique key and distinct distractors. It is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item on the shutdown rule (P < AVC means shut down in the short run, and fixed costs are sunk). It needs one reasoning step, with no calculation, graph, or representation change. The wording is clear and short. The distractors target common misconceptions (ATC vs AVC, short-run vs long-run exit, price-taking), but identifying the correct answer only requires recalling the rule. This suits early learning rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_microeconomics-m06-k2",
+  "cellId": "ap_microeconomics-m06",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "AVC < P < ATC: short-run loss, but staying open covers variable costs and part of fixed costs, so the loss is smaller than shutting down (loss = FC).",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "'Same ice cream stand' refers to prior context, but the item can still be answered."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.6 shutdown rule, explain action; fits skill 2.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique defensible answer."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Stem says 'the same ice cream stand' with no prior reference, which is a wording flaw. It also does not state that the stand is a price-taking firm. Minor, but the stem should read 'An ice cream stand...'."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Four distinct misconceptions, each explained. The key is the longest option, a slight cue."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, five options, no needless load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The content is correct and in scope, with good distractors. The stem has a dangling reference ('the same ice cream stand') and the stand is never stated to be a price taker, so I am failing the stimulus/wording criterion pending a fix."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept application of the shutdown rule (P > AVC but P < ATC means produce in the short run to minimize losses). It needs no calculation and no graph reading. The distractors map to well-known misconceptions, such as treating sunk fixed costs as avoidable, or closing whenever there is a loss. This is a foundational check of topic 3.6 rather than a multi-step full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ }
+]

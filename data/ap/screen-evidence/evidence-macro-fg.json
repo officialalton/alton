@@ -1,0 +1,500 @@
+{
+ "schema": "ap-screen-evidence/v3",
+ "generator": "playwright",
+ "limitations": "Automated screen check (Playwright): covers display, input, answer/explanation exposure and clipping only. It does NOT verify graph meaning, figure correctness, or naturalness of wording — that still needs human review.",
+ "generatedAt": "2026-10-21T23:34:50.898Z",
+ "entries": [
+  {
+   "candidate_key": "macro-fg-a:ap_macroeconomics-m05-k2",
+   "checker_kind": "automated",
+   "content_hash": "5f47ff24a84b9200278b4d531713f0dcb9dad9647ddc0c49dedb7c4d70ce9c51",
+   "problem_version_id": "897da16c-37ab-4d35-b8e6-7bbf5c8de046",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/macro-ma4/macro-fg-a_ap_macroeconomics-m05-k2-390x844.jpg",
+   "timestamp": "2026-10-21T23:34:08.760Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "5/5 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "macro-fg-a:ap_macroeconomics-m11-k0",
+   "checker_kind": "automated",
+   "content_hash": "5381240e6aa2670a4ad9adcfbb90a69d9abdb436c4595cae2b8d312b3432298a",
+   "problem_version_id": "741b52f8-5151-425d-9400-1dd4360e3134",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/macro-ma4/macro-fg-a_ap_macroeconomics-m11-k0-390x844.jpg",
+   "timestamp": "2026-10-21T23:34:09.138Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "5/5 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "macro-fg-a:ap_macroeconomics-m12-k2",
+   "checker_kind": "automated",
+   "content_hash": "376ba5830f5b4898301ae6075bbb647d7507c561071acaaac5e725f95728ae50",
+   "problem_version_id": "95d0d7ef-f875-4530-b134-5f47feaaa897",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/macro-ma4/macro-fg-a_ap_macroeconomics-m12-k2-390x844.jpg",
+   "timestamp": "2026-10-21T23:34:09.518Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "5/5 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "macro-fg-a:ap_macroeconomics-m13-k2",
+   "checker_kind": "automated",
+   "content_hash": "37cdbfaf9cd558c25819bddac92c6b94047ea5cfa47484187dcd97ef59046dce",
+   "problem_version_id": "02f17aa6-b672-4396-95ac-726128e08d43",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/macro-ma4/macro-fg-a_ap_macroeconomics-m13-k2-390x844.jpg",
+   "timestamp": "2026-10-21T23:34:09.918Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "5/5 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "macro-fg-a:ap_macroeconomics-m15-k0",
+   "checker_kind": "automated",
+   "content_hash": "31ece909ff0103d55d35dc409f1cc7e9d407a75dfcd385d1a903a3914fcc6671",
+   "problem_version_id": "bd04e6ce-d5c7-4239-8946-9c3615aa63bb",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/macro-ma4/macro-fg-a_ap_macroeconomics-m15-k0-390x844.jpg",
+   "timestamp": "2026-10-21T23:34:10.288Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "5/5 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "macro-fg-a:ap_macroeconomics-m16-k2",
+   "checker_kind": "automated",
+   "content_hash": "9fd4598d32c5b28676954d2ddaeb9e6db0be45ffe05364d34363f1f219b4d5a6",
+   "problem_version_id": "c755a1b8-fb90-41e1-89cd-8b9879d8bb02",
+   "kind": "mc",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/macro-ma4/macro-fg-a_ap_macroeconomics-m16-k2-390x844.jpg",
+   "timestamp": "2026-10-21T23:34:10.645Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "5/5 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "macro-fg-a:ap_macroeconomics-m05-k2",
+   "checker_kind": "automated",
+   "content_hash": "5f47ff24a84b9200278b4d531713f0dcb9dad9647ddc0c49dedb7c4d70ce9c51",
+   "problem_version_id": "897da16c-37ab-4d35-b8e6-7bbf5c8de046",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/macro-ma4/macro-fg-a_ap_macroeconomics-m05-k2-1280x800.jpg",
+   "timestamp": "2026-10-21T23:34:22.810Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "5/5 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "macro-fg-a:ap_macroeconomics-m11-k0",
+   "checker_kind": "automated",
+   "content_hash": "5381240e6aa2670a4ad9adcfbb90a69d9abdb436c4595cae2b8d312b3432298a",
+   "problem_version_id": "741b52f8-5151-425d-9400-1dd4360e3134",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/macro-ma4/macro-fg-a_ap_macroeconomics-m11-k0-1280x800.jpg",
+   "timestamp": "2026-10-21T23:34:23.176Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "5/5 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "macro-fg-a:ap_macroeconomics-m12-k2",
+   "checker_kind": "automated",
+   "content_hash": "376ba5830f5b4898301ae6075bbb647d7507c561071acaaac5e725f95728ae50",
+   "problem_version_id": "95d0d7ef-f875-4530-b134-5f47feaaa897",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/macro-ma4/macro-fg-a_ap_macroeconomics-m12-k2-1280x800.jpg",
+   "timestamp": "2026-10-21T23:34:23.576Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "5/5 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "macro-fg-a:ap_macroeconomics-m13-k2",
+   "checker_kind": "automated",
+   "content_hash": "37cdbfaf9cd558c25819bddac92c6b94047ea5cfa47484187dcd97ef59046dce",
+   "problem_version_id": "02f17aa6-b672-4396-95ac-726128e08d43",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/macro-ma4/macro-fg-a_ap_macroeconomics-m13-k2-1280x800.jpg",
+   "timestamp": "2026-10-21T23:34:23.986Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "5/5 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "macro-fg-a:ap_macroeconomics-m15-k0",
+   "checker_kind": "automated",
+   "content_hash": "31ece909ff0103d55d35dc409f1cc7e9d407a75dfcd385d1a903a3914fcc6671",
+   "problem_version_id": "bd04e6ce-d5c7-4239-8946-9c3615aa63bb",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/macro-ma4/macro-fg-a_ap_macroeconomics-m15-k0-1280x800.jpg",
+   "timestamp": "2026-10-21T23:34:24.358Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "5/5 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "macro-fg-a:ap_macroeconomics-m16-k2",
+   "checker_kind": "automated",
+   "content_hash": "9fd4598d32c5b28676954d2ddaeb9e6db0be45ffe05364d34363f1f219b4d5a6",
+   "problem_version_id": "c755a1b8-fb90-41e1-89cd-8b9879d8bb02",
+   "kind": "mc",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/macro-ma4/macro-fg-a_ap_macroeconomics-m16-k2-1280x800.jpg",
+   "timestamp": "2026-10-21T23:34:24.726Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "5/5 options visible"
+    },
+    "figure_rendered": {
+     "result": "pass",
+     "note": "1 figure/table element(s) visible"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "na",
+     "note": "multiple-choice item"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "no explanation text on result screen"
+    }
+   }
+  }
+ ]
+}
