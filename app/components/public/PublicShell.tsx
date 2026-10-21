@@ -80,6 +80,9 @@ export function PublicFooter({ showInsights = false }: { showInsights?: boolean 
             <p className="m-0 text-[14px] leading-[1.7] text-[var(--p-slate)]">
               Free SAT practice and learning tools, with premium tutoring and educational consulting when you need them.
             </p>
+            <a href="https://www.instagram.com/alton_education/" rel="me noopener" target="_blank" className="text-[14px] text-[var(--p-slate)] hover:text-[var(--p-red)]">
+              Instagram
+            </a>
           </div>
           <nav aria-label="Footer" className="p-mono grid grid-cols-2 sm:grid-cols-3 gap-x-10 gap-y-3 text-[12.5px] text-[var(--p-slate)]">
             {footerLinks.map((l) =>

@@ -42,7 +42,7 @@
 - **SAT 섹션 페이지 2개**(`/sat-math-practice`, `/sat-reading-and-writing-practice`): 4개 영역 설명·비중, 샘플 문항 2개씩, FAQ, 내부 링크.
 - **AP 허브** `/ap-practice-tests`: 18과목 목록과 한 줄 소개.
 - **사이트맵**: 허브·섹션 페이지·시험별 URL 자동 반영, `lastmod`는 `CONTENT_LASTMOD` 상수(콘텐츠 변경 시 갱신; 요청 시각을 쓰지 않음).
-- **브랜드**: 홈 title `ALTON Education | Free SAT & AP Practice Tests`, 나머지 `… | ALTON Education`. Organization을 EducationalOrganization으로(name·alternateName·legalName·logo·contactPoint·주 단위 주소), WebSite(alternateName 포함). About에 운영 주체·소재지(캘리포니아) 명시. 주소는 개인 주거 가능성이 있어 도시·번지를 공개하지 않았다. sameAs는 확인된 URL만 넣는다(현재 없음, 아래 체크리스트).
+- **브랜드**: 홈 title `ALTON Education | Free SAT & AP Practice Tests`, 나머지 `… | ALTON Education`. Organization을 EducationalOrganization으로(name·alternateName·legalName·logo·contactPoint·주 단위 주소), WebSite(alternateName 포함). About에 운영 주체·소재지(캘리포니아) 명시. 주소는 개인 주거 가능성이 있어 도시·번지를 공개하지 않았다. sameAs는 확인된 URL만 넣는다(현재 Instagram 1개, 푸터 링크 포함).
 - 테스트: `lib/landing/test-pages.test.ts`(slug·집계·DB 실패), `app/sitemap.test.ts`. 이 워크트리에는 sanity 패키지가 없어 `next build`와 sanity를 import하는 페이지 테스트(legal-pages)는 실행하지 못했다 → 총괄이 Preview 빌드에서 확인.
 
 ### 남은 계획 (우선순위)
@@ -63,7 +63,7 @@
 5. 향상 > 사이트 이름/로고(또는 홈의 WebSite 구조화 데이터 검사)로 "ALTON Education" 인식 확인. 리치 결과 테스트로 FAQPage·Breadcrumb 확인.
 
 **브랜드 신호**
-6. 공식 프로필 개설 후 URL을 알려주면 홈에서 링크하고 `sameAs`에 반영: LinkedIn 회사 페이지, Instagram, YouTube, 네이버 블로그 등. 확인되지 않은 URL은 넣지 않는다.
+6. 현재 공식 프로필은 Instagram 1개(반영 완료). 추가 개설 권고(개설 후 URL을 알려주면 푸터·`sameAs`에 반영): LinkedIn 회사 페이지, YouTube, 네이버 블로그. 확인되지 않은 URL은 넣지 않는다.
 7. Google Business Profile: 온라인 전용 교육업은 매장·서비스 지역 요건을 충족해야 하며 우편 인증이 필요하다. 소재지가 개인 주거면 공개 주소 노출을 피하고(서비스 지역 비즈니스로 주소 숨김) 가능 여부를 확인.
 8. "alton education" 동명 기관이 있으면 도메인 검색 "alton.education"과 "ALTON Education SAT" 조합을 먼저 노린다.
 
