@@ -11,7 +11,7 @@ import type { FullSetUsage, PoolRow } from "../../lib/ap-admin/assemble-draft";
 
 const arg = (n: string, d = "") => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : d; };
 const has = (n: string) => process.argv.includes(n);
-type SnapPool = PoolRow & { renderHash: string | null; screenHash: string | null; item_family_id: string; content_key: string };
+type SnapPool = PoolRow & { renderHash: string | null; screenHash: string | null; item_family_id: string; content_key: string; duplicate_of?: string | null; defect_flags?: unknown };
 type Snap = { pool: SnapPool[]; sets: Record<string, { name: string; status: string; version_no: number; problemIds: string[]; candidateKeys: string[] }> };
 const snap = JSON.parse(readFileSync("data/ap/stock/el4-reassign-db-snapshot-2026-10-21.json", "utf-8")) as Snap;
 const dbBy = new Map(snap.pool.map((r) => [r.candidate_key, r]));
