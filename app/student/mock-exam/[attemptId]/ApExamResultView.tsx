@@ -149,7 +149,7 @@ export default function ApExamResultView({ attempt, attempts, topicNames, handwr
   }, [mc]);
   const shown = attempt.items.filter((i) => (filter === "all" ? true : filter === "frq" ? i.format === "essay" : i.format === "mc" && i.correct !== true));
   const subject = AP_SUBJECT_NAME[attempt.apSubject ?? ""] ?? "AP";
-  const summary = useMemo(() => summarizeApResult({ subject: attempt.apSubject, items: attempt.items, layout: attempt.sectionLayout, essayScores, aiScoring: supported, scoringActive: essayAiEnabled }), [attempt.apSubject, attempt.items, attempt.sectionLayout, essayScores, supported, essayAiEnabled]);
+  const summary = useMemo(() => summarizeApResult({ subject: attempt.apSubject, items: attempt.items, layout: attempt.sectionLayout, essayScores, aiScoring: supported, scoringActive: essayAiEnabled, submitted: attempt.status === "graded" }), [attempt.status, attempt.apSubject, attempt.items, attempt.sectionLayout, essayScores, supported, essayAiEnabled]);
   const frqById = useMemo(() => new Map(summary.frq.items.map((f) => [f.setItemId, f])), [summary]);
 
   return (

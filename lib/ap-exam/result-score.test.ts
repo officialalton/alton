@@ -84,6 +84,19 @@ describe("summarizeApResult — supported subject with scoring start off", () =>
   });
 });
 
+describe("blank answer = 0 only for a submitted (graded) attempt", () => {
+  const rows = [score("e1", "a", "done", 5), score("e2", "a", "skipped", null, { lastError: "empty" }), score("e3", "a", "done", 4)];
+  it("graded: real 0", () => {
+    const r = summarizeApResult({ subject: "ap_english_language", items: engItems(30), layout: AP_LAYOUTS.ap_english_language, essayScores: rows, aiScoring: true, submitted: true });
+    expect(r.frq.items[1]).toMatchObject({ state: "scored", earned: 0, noResponse: true });
+  });
+  it("not submitted: undecided, no weighted total", () => {
+    const r = summarizeApResult({ subject: "ap_english_language", items: engItems(30), layout: AP_LAYOUTS.ap_english_language, essayScores: rows, aiScoring: true, submitted: false });
+    expect(r.frq.items[1].state).toBe("in_progress");
+    expect(r.weighted.status).toBe("withheld");
+  });
+});
+
 describe("summarizeApResult — weighted total", () => {
   it("applies official section weights only after everything is scored (English Language 45/55)", () => {
     const r = eng(engItems(36), [score("e1", "a", "done", 6), score("e2", "a", "done", 3), score("e3", "a", "done", 3)]);
