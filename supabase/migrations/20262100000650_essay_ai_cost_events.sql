@@ -76,5 +76,5 @@ create or replace view public.essay_ai_cost_daily with (security_invoker = true)
   )
   select coalesce(n.day, c.day) as day, coalesce(n.model, c.model) as model,
          coalesce(n.essays, 0) as essays, coalesce(n.done, 0) as done, coalesce(n.failed, 0) as failed,
-         c.input_tokens, c.output_tokens, c.cost_usd
+         coalesce(c.input_tokens, 0) as input_tokens, coalesce(c.output_tokens, 0) as output_tokens, coalesce(c.cost_usd, 0) as cost_usd -- 비용 없는 그룹도 600 정의처럼 0(NULL 아님)
     from n full join c on n.day = c.day and n.model is not distinct from c.model;

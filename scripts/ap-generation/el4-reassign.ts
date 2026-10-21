@@ -28,6 +28,19 @@ const rawBy = new Map<string, Record<string, unknown>>();
 for (const f of readdirSync("data/ap/stock").filter((x) => /^(el|englang).*-items\.json$/.test(x))) for (const r of JSON.parse(readFileSync(`data/ap/stock/${f}`, "utf-8")) as { stockKey: string; payload: Record<string, unknown> }[]) if (!rawBy.has(r.stockKey)) rawBy.set(r.stockKey, r.payload);
 // 같은 계보(개정본) 식별: FRQ 는 제목, MC 는 첫 문항 발문+지문 앞부분 해시. 공개 세트 문항의 개정본·원본도 막는다(el-rv 가 p1-b2 의 개정본인 경우 등).
 const lineage = (k: string): string | null => { const p = rawBy.get(k); if (!p) return null; const it = Array.isArray(p.items) ? (p.items as { stem?: string }[])[0] : null; const t = it ? String(it.stem ?? "") + String(p.stimulus ? JSON.stringify(p.stimulus).slice(0, 300) : "") : String(p.title ?? ""); return t ? createHash("sha1").update(t).digest("hex") : null; };
+// --pending-key: DB 에 아직 적재되지 않았지만 로컬 렌더 보고서·화면 증거(격리 스택)가 현재 내용 해시와 일치하는 수선된 키. 가상 DB 행(가짜 문제 ID)으로 취급하고, 렌더 보고서·로컬 증거 해시 일치를 반드시 확인한다. 총괄의 실제 적재 뒤에는 DB 행으로 다시 검증해야 한다.
+const pendingKey = arg("--pending-key");
+let pendingHashOk = true;
+if (pendingKey) {
+  const lh = itemContentHash(rawBy.get(pendingKey) ?? null);
+  const rep = (JSON.parse(readFileSync("data/ap/render-check/report.json", "utf-8")) as { results?: { key: string; contentHash: string }[]; rows?: { key: string; contentHash: string }[] });
+  const rr = (rep.results ?? rep.rows ?? Object.values(rep).flat().filter((x): x is { key: string; contentHash: string } => !!x && typeof x === "object" && (x as { key?: string }).key === pendingKey)).find((x) => x.key === pendingKey);
+  const ev = (JSON.parse(readFileSync("data/ap/screen-evidence/evidence-el-r19.json", "utf-8")) as { entries: { candidate_key: string; content_hash: string }[] }).entries.filter((e) => e.candidate_key === pendingKey);
+  pendingHashOk = rr?.contentHash === lh && ev.length >= 2 && ev.every((e) => e.content_hash === lh);
+  console.log(`pending ${pendingKey}: 로컬 해시 ${lh.slice(0, 12)} 렌더보고서 ${rr?.contentHash === lh ? "=" : "!="} 화면증거(${ev.length}) ${ev.every((e) => e.content_hash === lh) ? "=" : "!="} → ${pendingHashOk ? "ok" : "불일치"}`);
+  const row = { candidate_key: pendingKey, kind: "frq_bundle", keyword_code: "U9.3", difficulty_provisional: "exam_prep", purpose: "mock_exam", is_current: true, render_verified: true, screen_verified: true, content_key: "ap_english_language:U9.3", item_family_id: `fam:${pendingKey}`, duplicate_of: null, defect_flags: [], renderHash: lh, screenHash: lh, ap_candidate_problems: [{ item_index: 0, problem_id: "00000000-0000-4000-8000-0000000000f1", problem_version_id: "00000000-0000-4000-8000-0000000000f2" }] } as unknown as SnapPool;
+  snap.pool.push(row); dbBy.set(pendingKey, row);
+}
 const assume = arg("--assume-key"); // 가능성 점검 전용: 화면 증거·DB 적재가 없는 키를 있는 것으로 보고 해가 나는지만 본다(기록하지 않음).
 const { pool: local, all: localAll } = loadElPool(); if (assume) { const a = localAll.find((c) => c.key === assume); if (a && !local.includes(a)) local.push(a); }
 const famOf = new Map(local.map((c) => [`${c.kind}|${c.key}`, c.fam]));
@@ -76,5 +89,5 @@ console.log(`해시 불일치 ${hashBad}`); console.log(rows.join("\n"));
 console.log(`변경: EL4 구 mcA ${JSON.stringify(oldEl4.mcA)} frqA ${JSON.stringify(oldEl4.frqA)}\n신 mcA ${JSON.stringify(rep.mcA)} frqA ${JSON.stringify(rep.frqA)}`);
 const el3Hash = createHash("sha256").update(JSON.stringify(old.sets.find((s) => s.id === "EL3"))).digest("hex");
 console.log(`EL3 항목 sha256(원 파일, 변경 없음) ${el3Hash}`);
-const w = arg("--write"); if (w && !bad.length && plan.ok && !hashBad) { writeFileSync(w, JSON.stringify({ sets: [rep] }, null, 1)); console.log(`기록 ${w}`); }
+const w = arg("--write"); if (w && !bad.length && plan.ok && !hashBad && pendingHashOk) { writeFileSync(w, JSON.stringify({ sets: [rep] }, null, 1)); console.log(`기록 ${w}`); }
 const md = arg("--md"); if (md) writeFileSync(md, rows.join("\n"));
