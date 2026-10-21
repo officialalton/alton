@@ -1,0 +1,105 @@
+{
+ "run": "wh-r19-f2",
+ "generatedAt": "2026-10-20",
+ "passed": [],
+ "rejected": [
+  {
+   "__rejected": true,
+   "specId": "wh3_saq1",
+   "reason": "sample_mid_missing; sample_low_missing; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate"
+  },
+  {
+   "__rejected": true,
+   "specId": "wh3_dbq",
+   "reason": "sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate; fact_misdescribes_source; fact_inaccurate"
+  },
+  {
+   "__rejected": true,
+   "specId": "wh3_leq",
+   "reason": "sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate; fact_inaccurate"
+  }
+ ],
+ "audit": [
+  {
+   "id": "wh3_saq1",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "wh3_saq1",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": null
+  },
+  {
+   "id": "wh3_saq1",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 1,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The Royal Society was organized/founded in 1660 (first formal meeting at Gresham College, 28 Nov 1660); 1662 is the date",
+      "inaccurate:This is a Eurocentric and historically unsupported generalization. In 1450–1750 Asian regions had highly organized astro"
+     ]
+    }
+   ],
+   "chosen": null
+  },
+  {
+   "id": "wh3_dbq",
+   "tier": "high",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh3_dbq",
+   "tier": "mid",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh3_dbq",
+   "tier": "low",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh3_leq",
+   "tier": "high",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh3_leq",
+   "tier": "mid",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh3_leq",
+   "tier": "low",
+   "options": [],
+   "chosen": null
+  }
+ ]
+}

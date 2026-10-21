@@ -1,7 +1,7 @@
-# Dust bowl, Texas Panhandle (Farm Security Administration photograph)
+# Dust bowl, Texas Panhandle (photograph made for the Resettlement Administration; held in the Library of Congress FSA/OWI Collection)
 
 - id: img-dustbowl-1936
-- author: Arthur Rothstein, Farm Security Administration photographer
+- author: Arthur Rothstein, photographer for the Resettlement Administration (the agency was folded into the Farm Security Administration in 1937)
 - year: 1936 (March)
 - repository: Wikimedia Commons (file page records the source institution and public-domain tag)
 - url: https://commons.wikimedia.org/wiki/File:Dust_bowl,_Texas_Panhandle,_TX_fsa.8b27276_edit.jpg

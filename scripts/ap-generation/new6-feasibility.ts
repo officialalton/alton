@@ -23,14 +23,14 @@ export function blockSet(pool: P[], cur: Set<string>, removed: Set<string> = new
 }
 const which = process.argv[2];
 if (which === "us") {
-  const { pool } = loadUshPool(); const re = /^us\d-v\d-.*swap-plan\.json$/; const blocked = blockSet(pool, currentKeys(["exact-assign-ushistory-us1-us2.json"], re), removedKeys(re)); console.log("blocked", blocked.size, "pool", pool.length);
+  const { pool } = loadUshPool({ requireScreen: false }); const re = /^us\d-v\d-.*swap-plan\.json$/; const blocked = blockSet(pool, currentKeys(["exact-assign-ushistory-us1-us2.json"], re), removedKeys(re)); console.log("blocked", blocked.size, "pool", pool.length);
   if (process.argv[3] === "frqfree") for (const p of pool as unknown as { key: string; kind: string }[]) if (p.kind === "frq" && !currentKeys(["exact-assign-ushistory-us1-us2.json"], re).has(p.key)) blocked.delete(p.key);
   const m = solveUshSets(["US3"], pool, { timeMs: 120000, blocked, highs: true, mcOnly: process.argv[3] === "mc", log: console.error });
   const bad = m.res.x.length ? verifyUshAssignment(m.out, blocked) : ["해 없음"]; console.log(m.res.status, bad.join("; ") || "0");
   for (const r of m.out) console.log(r.id, r.sets.length, JSON.stringify(unitSummary(r)), r.frq.map((c) => c.template + c.period).join(","));
 }
 if (which === "wh") {
-  const { pool } = loadWhPool(); const re = /^wh\d-v\d-.*swap-plan\.json$/; const blocked = blockSet(pool, currentKeys(["exact-assign-worldhistory-wh1-wh2.json"], re), removedKeys(re)); console.log("blocked", blocked.size, "pool", pool.length);
+  const { pool } = loadWhPool({ requireScreen: false }); const re = /^wh\d-v\d-.*swap-plan\.json$/; const blocked = blockSet(pool, currentKeys(["exact-assign-worldhistory-wh1-wh2.json"], re), removedKeys(re)); console.log("blocked", blocked.size, "pool", pool.length);
   const m = solveWhSets(["WH3"], pool, { timeMs: 120000, blocked, highs: true, mcOnly: process.argv[3] === "mc", log: console.error });
   const bad = m.res.x.length ? verifyWhAssignment(m.out, blocked) : ["해 없음"]; console.log(m.res.status, bad.join("; ") || "0");
   for (const r of m.out) console.log(r.id, r.sets.length, r.frq.map((c) => c.template + c.era).join(","));

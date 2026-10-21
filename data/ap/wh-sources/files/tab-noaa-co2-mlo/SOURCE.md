@@ -2,7 +2,7 @@
 
 - id: tab-noaa-co2-mlo
 - author: NOAA Global Monitoring Laboratory (data from 1958-1974 obtained by C. David Keeling, Scripps Institution of Oceanography)
-- year: Data file created October 2026
+- year: Annual means; data file retrieved October 19, 2026
 - repository: NOAA Global Monitoring Laboratory
 - url: https://gml.noaa.gov/ccgg/trends/data.html
 - call number: co2_annmean_mlo.txt

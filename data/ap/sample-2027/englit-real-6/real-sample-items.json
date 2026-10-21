@@ -1,0 +1,3383 @@
+[
+ {
+  "cellId": "ap_english_literature-real-rs11",
+  "apSubjectCode": "ap_english_literature",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "source_first_real_text",
+  "candidateKey": "ap_english_literature-real-rs11-k0",
+  "structure": "shared_stimulus_set",
+  "archetype": "lt_real_poetry_rs11",
+  "pipeline": "real_text_v1",
+  "releaseTier": "sample_not_loaded",
+  "expertStatus": "unreviewed",
+  "renderVerified": false,
+  "screenVerified": false,
+  "sourceKind": "real_public_domain",
+  "registryId": "keats-to-autumn",
+  "keywordCode": "U1.3",
+  "unitCode": "1",
+  "skillPrimary": "4.A",
+  "reviewState": "auto_passed",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "payload": {
+   "layout_status": "not verified identical to the official AP Central preview: layout was checked only against the ALTON PassageBlock at 390px and 1280px (docs/ap/englit-material-audit.md section 6)",
+   "archetype": "lt_real_poetry_rs11",
+   "topic": "U1.3",
+   "skill": "4.A",
+   "calculator": "na",
+   "set_intro": "Public-domain source text — John Keats, To Autumn, Keats: Poems Published in 1820 (Gutenberg eBook #23684; edited reprint of the 1820 volume with the repository's apparatus). Ode written September 1819\nTo Autumn\nby John Keats\nThe following poem is by John Keats (1820).\n\n```passage\nSeason of mists and mellow fruitfulness,\nClose bosom-friend of the maturing sun;\nConspiring with him how to load and bless\nWith fruit the vines that round the thatch-eves run;\nTo bend with apples the moss'd cottage-trees,\nAnd fill all fruit with ripeness to the core;\nTo swell the gourd, and plump the hazel shells\nWith a sweet kernel; to set budding more,\nAnd still more, later flowers for the bees,\nUntil they think warm days will never cease,\nFor Summer has o'er-brimm'd their clammy cells.\n\nWho hath not seen thee oft amid thy store?\nSometimes whoever seeks abroad may find\nThee sitting careless on a granary floor,\nThy hair soft-lifted by the winnowing wind;\nOr on a half-reap'd furrow sound asleep,\nDrows'd with the fume of poppies, while thy hook\nSpares the next swath and all its twined flowers:\nAnd sometimes like a gleaner thou dost keep\nSteady thy laden head across a brook;\nOr by a cyder-press, with patient look,\nThou watchest the last oozings hours by hours.\n\nWhere are the songs of Spring? Ay, where are they?\nThink not of them, thou hast thy music too,--\nWhile barred clouds bloom the soft-dying day,\nAnd touch the stubble-plains with rosy hue;\nThen in a wailful choir the small gnats mourn\nAmong the river sallows, borne aloft\nOr sinking as the light wind lives or dies;\nAnd full-grown lambs loud bleat from hilly bourn;\nHedge-crickets sing; and now with treble soft\nThe red-breast whistles from a garden-croft;\nAnd gathering swallows twitter in the skies.\n```",
+   "lt_passage": {
+    "form": "poem",
+    "group": "poetry",
+    "title": "To Autumn",
+    "headnote": "The following poem is by John Keats (1820).",
+    "stanzas": [
+     [
+      "Season of mists and mellow fruitfulness,",
+      "Close bosom-friend of the maturing sun;",
+      "Conspiring with him how to load and bless",
+      "With fruit the vines that round the thatch-eves run;",
+      "To bend with apples the moss'd cottage-trees,",
+      "And fill all fruit with ripeness to the core;",
+      "To swell the gourd, and plump the hazel shells",
+      "With a sweet kernel; to set budding more,",
+      "And still more, later flowers for the bees,",
+      "Until they think warm days will never cease,",
+      "For Summer has o'er-brimm'd their clammy cells."
+     ],
+     [
+      "Who hath not seen thee oft amid thy store?",
+      "Sometimes whoever seeks abroad may find",
+      "Thee sitting careless on a granary floor,",
+      "Thy hair soft-lifted by the winnowing wind;",
+      "Or on a half-reap'd furrow sound asleep,",
+      "Drows'd with the fume of poppies, while thy hook",
+      "Spares the next swath and all its twined flowers:",
+      "And sometimes like a gleaner thou dost keep",
+      "Steady thy laden head across a brook;",
+      "Or by a cyder-press, with patient look,",
+      "Thou watchest the last oozings hours by hours."
+     ],
+     [
+      "Where are the songs of Spring? Ay, where are they?",
+      "Think not of them, thou hast thy music too,--",
+      "While barred clouds bloom the soft-dying day,",
+      "And touch the stubble-plains with rosy hue;",
+      "Then in a wailful choir the small gnats mourn",
+      "Among the river sallows, borne aloft",
+      "Or sinking as the light wind lives or dies;",
+      "And full-grown lambs loud bleat from hilly bourn;",
+      "Hedge-crickets sing; and now with treble soft",
+      "The red-breast whistles from a garden-croft;",
+      "And gathering swallows twitter in the skies."
+     ]
+    ],
+    "line_count": 33
+   },
+   "provenance": {
+    "kind": "public_domain",
+    "registry_id": "keats-to-autumn",
+    "author": "John Keats",
+    "translator": null,
+    "year": 1820,
+    "repository": "Project Gutenberg (gutenberg.org)",
+    "url": "https://www.gutenberg.org/ebooks/23684",
+    "reuse_basis": "United States public domain: poem published 1820; author died 1821. The repository states the eBook is not protected by U.S. copyright; the text is reproduced without the repository's trademark or license header.",
+    "text_sha256": "1ff13d7914ce2895901dc9a509048fbe1be9eb865bb5019dd48a1b96281b86b3",
+    "excerpt": {
+     "unit": "line",
+     "from": 1,
+     "to": 33,
+     "whole_work": true,
+     "note": "Complete ode, 33 lines in three stanzas (11/11/11); the edition's stanza numerals and margin line counts are removed."
+    },
+    "modifications": [
+     "Stanza numerals (1., 2., 3.) removed.",
+     "Margin line numbers (10, 20, 30) removed.",
+     "Repository base indent removed; line breaks unchanged."
+    ]
+   },
+   "text_map": {
+    "central_idea": "Speaking directly to Autumn, the speaker celebrates the season's fullness in three stages. First it ripens everything (stanza 1), then it lingers over the harvest as a person (stanza 2), and finally its music sounds at dusk over harvested fields (stanza 3). The poem treats the season's abundance and its gentle fading as one beauty and does not mourn the loss of spring.",
+    "speaker_or_narrator": "An admiring speaker who addresses Autumn directly throughout. The speaker praises the season, pictures it as a figure anyone might come across, and comforts it by reminding it of its own music.",
+    "structure_and_shifts": [
+     {
+      "quote": "Season of mists and mellow fruitfulness",
+      "from": "no prior context",
+      "to": "an address to Autumn as a ripening force working with the sun"
+     },
+     {
+      "quote": "Who hath not seen thee oft amid thy store?",
+      "from": "Autumn as an unseen force making things ripe",
+      "to": "Autumn as a visible figure in harvest scenes"
+     },
+     {
+      "quote": "Where are the songs of Spring? Ay, where are they?",
+      "from": "visual scenes of the harvest",
+      "to": "the sounds of autumn at the end of the day, with the speaker reassuring Autumn"
+     },
+     {
+      "quote": "And gathering swallows twitter in the skies",
+      "from": "a catalogue of creatures' sounds",
+      "to": "an open ending that hints at the season passing"
+     }
+    ],
+    "devices": [
+     {
+      "device": "apostrophe",
+      "quote": "Season of mists and mellow fruitfulness",
+      "function": "Sets up the speaker's direct, admiring address to Autumn."
+     },
+     {
+      "device": "personification",
+      "quote": "Close bosom-friend of the maturing sun",
+      "function": "Makes Autumn an intimate partner of the sun in producing abundance."
+     },
+     {
+      "device": "diction",
+      "quote": "Until they think warm days will never cease",
+      "function": "The word 'think' quietly marks the bees' sense of endless warmth as an illusion."
+     },
+     {
+      "device": "personification",
+      "quote": "Thee sitting careless on a granary floor",
+      "function": "Shows Autumn as an unhurried figure at ease among the harvest."
+     },
+     {
+      "device": "simile",
+      "quote": "And sometimes like a gleaner thou dost keep",
+      "function": "Compares Autumn to a harvest worker carefully balancing a heavy load."
+     },
+     {
+      "device": "imagery",
+      "quote": "While barred clouds bloom the soft-dying day",
+      "function": "Joins blooming beauty with the dying of the day."
+     },
+     {
+      "device": "personification",
+      "quote": "Then in a wailful choir the small gnats mourn",
+      "function": "Gives a mournful voice to the dusk, which tinges its beauty with loss."
+     },
+     {
+      "device": "contrast",
+      "quote": "And touch the stubble-plains with rosy hue",
+      "function": "Sets the harvested fields against stanza 1's ripening, which marks the move from fullness to aftermath."
+     },
+     {
+      "device": "syntax",
+      "quote": "Who hath not seen thee oft amid thy store?",
+      "function": "A rhetorical question that makes Autumn's presence something everyone has seen."
+     }
+    ],
+    "skills_supported": [
+     {
+      "skill": "4.A",
+      "why_supported": "The opening address shows the speaker's relation to Autumn.",
+      "quote": "Close bosom-friend of the maturing sun"
+     },
+     {
+      "skill": "5.B",
+      "why_supported": "The word 'think' carries connotations that qualify the bees' belief.",
+      "quote": "Until they think warm days will never cease"
+     },
+     {
+      "skill": "4.B",
+      "why_supported": "The perspective shifts to a general observer coming upon Autumn.",
+      "quote": "Sometimes whoever seeks abroad may find"
+     },
+     {
+      "skill": "1.A",
+      "why_supported": "Autumn's posture and actions reveal qualities of character.",
+      "quote": "Thee sitting careless on a granary floor"
+     },
+     {
+      "skill": "6.A",
+      "why_supported": "An explicit simile compares Autumn to a gleaner.",
+      "quote": "And sometimes like a gleaner thou dost keep"
+     },
+     {
+      "skill": "1.B",
+      "why_supported": "Autumn's activity changes between stanza 1 and stanza 2.",
+      "quote": "Thou watchest the last oozings hours by hours"
+     },
+     {
+      "skill": "4.C",
+      "why_supported": "The speaker's reply to the question about Spring shows the speaker's tone.",
+      "quote": "Think not of them, thou hast thy music too"
+     },
+     {
+      "skill": "5.D",
+      "why_supported": "A cluster of images in stanza 3 creates a mixed mood.",
+      "quote": "Then in a wailful choir the small gnats mourn"
+     },
+     {
+      "skill": "3.D",
+      "why_supported": "Stanza 1 and stanza 3 contrast ripening with harvested fields.",
+      "quote": "And touch the stubble-plains with rosy hue"
+     },
+     {
+      "skill": "3.C",
+      "why_supported": "The final line closes the poem in a meaningful way.",
+      "quote": "And gathering swallows twitter in the skies"
+     },
+     {
+      "skill": "7.D",
+      "why_supported": "Several quotations can be weighed as evidence for a claim about endings.",
+      "quote": "While barred clouds bloom the soft-dying day"
+     },
+     {
+      "skill": "7.B",
+      "why_supported": "The three-stage structure supports a thesis about the whole poem.",
+      "quote": "Season of mists and mellow fruitfulness"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "lt_poetry_4A",
+     "topic": "U1.3",
+     "skill": "4.A",
+     "cognitive": "identify",
+     "stem": "In the opening lines (line 1), the speaker is best described as",
+     "options": [
+      {
+       "text": "a skeptic suggesting the season's generosity is a scheme to deceive the busy bees",
+       "why": "This reads 'Conspiring' as sinister. In fact the plot produces real abundance.",
+       "value": null,
+       "label": "lexical_trap"
+      },
+      {
+       "text": "a mourner lamenting that the sun has deserted the season and left it to decay",
+       "why": "The opening celebrates ripeness 'to the core', not desertion or decay.",
+       "value": null,
+       "label": "wrong_tone"
+      },
+      {
+       "text": "a farmer recounting his own labor in loading the vines and bending the old apple trees",
+       "why": "It is Autumn and the sun, not the speaker, who load the vines and bend the trees.",
+       "value": null,
+       "label": "misread_speaker"
+      },
+      {
+       "text": "a celebrant addressing the season directly and praising its partnership with the sun",
+       "why": "The speaker addresses the season in admiring terms and calls it the sun's 'bosom-friend', working with him to load and bless.",
+       "value": null,
+       "label": "correct"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"a celebrant addressing the season directly and praising its partnership with the sun\". The speaker addresses the season in admiring terms and calls it the sun's 'bosom-friend', working with him to load and bless.\n\"a skeptic suggesting the season's generosity is a scheme to deceive the busy bees\" is incorrect: This reads 'Conspiring' as sinister. In fact the plot produces real abundance.\n\"a mourner lamenting that the sun has deserted the season and left it to decay\" is incorrect: The opening celebrates ripeness 'to the core', not desertion or decay.\n\"a farmer recounting his own labor in loading the vines and bending the old apple trees\" is incorrect: It is Autumn and the sun, not the speaker, who load the vines and bend the trees.",
+     "est_seconds": 55,
+     "evidence_quotes": [
+      "Close bosom-friend of the maturing sun",
+      "Conspiring with him how to load and bless"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 1,
+       "to": 1
+      }
+     },
+     "devices_used": [
+      "apostrophe",
+      "personification"
+     ],
+     "real_text": {
+      "registry_id": "keats-to-autumn",
+      "skill": "4.A",
+      "key_evidence": {
+       "quote": "Close bosom-friend of the maturing sun",
+       "from": 2,
+       "to": 2,
+       "ref": "line 2",
+       "unit": "stanza 1"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "lexical_trap",
+        "why": "This reads 'Conspiring' as sinister. In fact the plot produces real abundance.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "To swell the gourd, and plump the hazel shells",
+         "from": 7,
+         "to": 7,
+         "ref": "line 7",
+         "unit": "stanza 1"
+        }
+       },
+       {
+        "index": 1,
+        "label": "wrong_tone",
+        "why": "The opening celebrates ripeness 'to the core', not desertion or decay.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "fill all fruit with ripeness to the core",
+         "from": 6,
+         "to": 6,
+         "ref": "line 6",
+         "unit": "stanza 1"
+        }
+       },
+       {
+        "index": 2,
+        "label": "misread_speaker",
+        "why": "It is Autumn and the sun, not the speaker, who load the vines and bend the trees.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Conspiring with him how to load and bless",
+         "from": 3,
+         "to": 3,
+         "ref": "line 3",
+         "unit": "stanza 1"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        3,
+        3
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 3,
+       "panel_agree": true,
+       "score": 1,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 1,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 3,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_5B",
+     "topic": "U5.1",
+     "skill": "5.B",
+     "cognitive": "explain",
+     "stem": "In the phrase \"Until they think warm days will never cease\" (line 10), the word \"think\" primarily suggests that",
+     "options": [
+      {
+       "text": "the speaker himself is convinced that the warm days will never come to an end",
+       "why": "The belief belongs to the bees. The speaker later describes the day dying.",
+       "value": null,
+       "label": "misread_speaker"
+      },
+      {
+       "text": "the bees are anxious and doubtful about how long the flowers will last",
+       "why": "The bees are overfilled and confident, not anxious.",
+       "value": null,
+       "label": "wrong_tone"
+      },
+      {
+       "text": "the bees have correctly judged that summer's warmth will continue for good",
+       "why": "The stubble-plains of stanza 3 show that the harvest and the warmth do pass.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "the bees' sense of endless warmth is a belief the season will not bear out",
+       "why": "'Think' presents the endless warmth as only the bees' belief. The poem later shows the day 'soft-dying'.",
+       "value": null,
+       "label": "correct"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"the bees' sense of endless warmth is a belief the season will not bear out\". 'Think' presents the endless warmth as only the bees' belief. The poem later shows the day 'soft-dying'.\n\"the speaker himself is convinced that the warm days will never come to an end\" is incorrect: The belief belongs to the bees. The speaker later describes the day dying.\n\"the bees are anxious and doubtful about how long the flowers will last\" is incorrect: The bees are overfilled and confident, not anxious.\n\"the bees have correctly judged that summer's warmth will continue for good\" is incorrect: The stubble-plains of stanza 3 show that the harvest and the warmth do pass.",
+     "est_seconds": 60,
+     "evidence_quotes": [
+      "Until they think warm days will never cease",
+      "While barred clouds bloom the soft-dying day"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 10,
+       "to": 10
+      }
+     },
+     "devices_used": [
+      "diction"
+     ],
+     "real_text": {
+      "registry_id": "keats-to-autumn",
+      "skill": "5.B",
+      "key_evidence": {
+       "quote": "Until they think warm days will never cease",
+       "from": 10,
+       "to": 10,
+       "ref": "line 10",
+       "unit": "stanza 1"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "misread_speaker",
+        "why": "The belief belongs to the bees. The speaker later describes the day dying.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "While barred clouds bloom the soft-dying day",
+         "from": 25,
+         "to": 25,
+         "ref": "line 25",
+         "unit": "stanza 3"
+        }
+       },
+       {
+        "index": 1,
+        "label": "wrong_tone",
+        "why": "The bees are overfilled and confident, not anxious.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Summer has o'er-brimm'd their clammy cells",
+         "from": 11,
+         "to": 11,
+         "ref": "line 11",
+         "unit": "stanza 1"
+        }
+       },
+       {
+        "index": 2,
+        "label": "reversal",
+        "why": "The stubble-plains of stanza 3 show that the harvest and the warmth do pass.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "the stubble-plains with rosy hue",
+         "from": 26,
+         "to": 26,
+         "ref": "line 26",
+         "unit": "stanza 3"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        3,
+        3
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 3,
+       "panel_agree": true,
+       "score": 0.959,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.959,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 3,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_4B",
+     "topic": "U4.3",
+     "skill": "4.B",
+     "cognitive": "explain",
+     "stem": "The question in line 12, together with the phrase \"whoever seeks abroad may find\" (line 13), primarily serves to",
+     "options": [
+      {
+       "text": "shift the poem from praise of nature to a general meditation on everyday human labor",
+       "why": "Autumn herself stays the focus of the stanza, not human labor in general.",
+       "value": null,
+       "label": "too_broad"
+      },
+      {
+       "text": "introduce doubt about whether Autumn's abundance has truly been seen by anyone",
+       "why": "This treats a rhetorical question as a real doubt. Autumn is in fact found in the scene that follows.",
+       "value": null,
+       "label": "wrong_function"
+      },
+      {
+       "text": "turn Autumn from an unseen force at work into a figure any observer might come upon",
+       "why": "Stanza 1 describes Autumn's ripening work. Stanza 2 opens the view to 'whoever' looks and pictures Autumn as a figure that can be seen.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "reveal that the speaker alone has been granted a private vision of the season",
+       "why": "The rhetorical question implies that everyone has seen Autumn, not only the speaker.",
+       "value": null,
+       "label": "misread_speaker"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"turn Autumn from an unseen force at work into a figure any observer might come upon\". Stanza 1 describes Autumn's ripening work. Stanza 2 opens the view to 'whoever' looks and pictures Autumn as a figure that can be seen.\n\"shift the poem from praise of nature to a general meditation on everyday human labor\" is incorrect: Autumn herself stays the focus of the stanza, not human labor in general.\n\"introduce doubt about whether Autumn's abundance has truly been seen by anyone\" is incorrect: This treats a rhetorical question as a real doubt. Autumn is in fact found in the scene that follows.\n\"reveal that the speaker alone has been granted a private vision of the season\" is incorrect: The rhetorical question implies that everyone has seen Autumn, not only the speaker.",
+     "est_seconds": 70,
+     "evidence_quotes": [
+      "Who hath not seen thee oft amid thy store?",
+      "Sometimes whoever seeks abroad may find"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 12,
+       "to": 12
+      },
+      "r2": {
+       "from": 13,
+       "to": 13
+      }
+     },
+     "devices_used": [
+      "syntax",
+      "personification"
+     ],
+     "real_text": {
+      "registry_id": "keats-to-autumn",
+      "skill": "4.B",
+      "key_evidence": {
+       "quote": "Sometimes whoever seeks abroad may find",
+       "from": 13,
+       "to": 13,
+       "ref": "line 13",
+       "unit": "stanza 2"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "too_broad",
+        "why": "Autumn herself stays the focus of the stanza, not human labor in general.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Thy hair soft-lifted by the winnowing wind",
+         "from": 15,
+         "to": 15,
+         "ref": "line 15",
+         "unit": "stanza 2"
+        }
+       },
+       {
+        "index": 1,
+        "label": "wrong_function",
+        "why": "This treats a rhetorical question as a real doubt. Autumn is in fact found in the scene that follows.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Thee sitting careless on a granary floor",
+         "from": 14,
+         "to": 14,
+         "ref": "line 14",
+         "unit": "stanza 2"
+        }
+       },
+       {
+        "index": 3,
+        "label": "misread_speaker",
+        "why": "The rhetorical question implies that everyone has seen Autumn, not only the speaker.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Who hath not seen thee oft amid thy store?",
+         "from": 12,
+         "to": 12,
+         "ref": "line 12",
+         "unit": "stanza 2"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        2,
+        2
+       ],
+       "adversary": "weak",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 2,
+       "panel_agree": true,
+       "score": 0.829,
+       "band": "medium",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.829,
+      "band": "medium",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 2,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "likely"
+       },
+       {
+        "choice": 2,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_1A",
+     "topic": "U2.1",
+     "skill": "1.A",
+     "cognitive": "identify",
+     "stem": "Taken together, the images of Autumn \"sitting careless on a granary floor\" (line 14) and \"sound asleep\" on a \"half-reap'd furrow\" (line 16) most strongly characterize Autumn as",
+     "options": [
+      {
+       "text": "weary and overburdened, collapsing from exhaustion after months of relentless toil",
+       "why": "Her sleep comes from the drowsy scent of poppies, not from exhaustion.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "a watchful guardian who keeps a careful eye on the granary and its stored grain",
+       "why": "Autumn sits 'careless', the opposite of watchful guarding.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "a negligent laborer whose idleness threatens to ruin the season's unfinished harvest",
+       "why": "Nothing is ruined. Autumn is surrounded by her 'store', and the sparing of the swath is gentle, not neglectful.",
+       "value": null,
+       "label": "wrong_tone"
+      },
+      {
+       "text": "unhurried and at ease, lingering amid the harvest rather than rushing to finish it",
+       "why": "Autumn sits 'careless', sleeps in a half-reaped furrow, and her hook spares the next swath. Each detail shows leisurely lingering.",
+       "value": null,
+       "label": "correct"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"unhurried and at ease, lingering amid the harvest rather than rushing to finish it\". Autumn sits 'careless', sleeps in a half-reaped furrow, and her hook spares the next swath. Each detail shows leisurely lingering.\n\"weary and overburdened, collapsing from exhaustion after months of relentless toil\" is incorrect: Her sleep comes from the drowsy scent of poppies, not from exhaustion.\n\"a watchful guardian who keeps a careful eye on the granary and its stored grain\" is incorrect: Autumn sits 'careless', the opposite of watchful guarding.\n\"a negligent laborer whose idleness threatens to ruin the season's unfinished harvest\" is incorrect: Nothing is ruined. Autumn is surrounded by her 'store', and the sparing of the swath is gentle, not neglectful.",
+     "est_seconds": 55,
+     "evidence_quotes": [
+      "Thee sitting careless on a granary floor",
+      "Spares the next swath and all its twined flowers"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 14,
+       "to": 14
+      },
+      "r2": {
+       "from": 16,
+       "to": 16
+      }
+     },
+     "devices_used": [
+      "personification",
+      "imagery"
+     ],
+     "real_text": {
+      "registry_id": "keats-to-autumn",
+      "skill": "1.A",
+      "key_evidence": {
+       "quote": "Spares the next swath and all its twined flowers",
+       "from": 18,
+       "to": 18,
+       "ref": "line 18",
+       "unit": "stanza 2"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "unsupported",
+        "why": "Her sleep comes from the drowsy scent of poppies, not from exhaustion.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Drows'd with the fume of poppies",
+         "from": 17,
+         "to": 17,
+         "ref": "line 17",
+         "unit": "stanza 2"
+        }
+       },
+       {
+        "index": 1,
+        "label": "reversal",
+        "why": "Autumn sits 'careless', the opposite of watchful guarding.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Thee sitting careless on a granary floor",
+         "from": 14,
+         "to": 14,
+         "ref": "line 14",
+         "unit": "stanza 2"
+        }
+       },
+       {
+        "index": 2,
+        "label": "wrong_tone",
+        "why": "Nothing is ruined. Autumn is surrounded by her 'store', and the sparing of the swath is gentle, not neglectful.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Who hath not seen thee oft amid thy store?",
+         "from": 12,
+         "to": 12,
+         "ref": "line 12",
+         "unit": "stanza 2"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        3,
+        3
+       ],
+       "adversary": "weak",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 3,
+       "panel_agree": true,
+       "score": 0.87,
+       "band": "medium",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.87,
+      "band": "medium",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 3,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_6A",
+     "topic": "U2.3",
+     "skill": "6.A",
+     "cognitive": "explain",
+     "stem": "The simile in line 19 compares Autumn to a gleaner chiefly in order to",
+     "options": [
+      {
+       "text": "suggest steady, balanced care in carrying the season's heavy yield",
+       "why": "Like a gleaner, Autumn keeps her 'laden head' steady while crossing a brook. The image suggests careful bearing of a full harvest.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "contrast Autumn's poverty with the wealth described in the first stanza",
+       "why": "This takes the poverty a gleaner might suggest and applies it to Autumn. Yet Autumn is pictured among her plentiful 'store'.",
+       "value": null,
+       "label": "lexical_trap"
+      },
+      {
+       "text": "stress the strain and danger of Autumn's labor as it nears the brook",
+       "why": "The stanza stresses steadiness and patience, not strain or danger.",
+       "value": null,
+       "label": "wrong_tone"
+      },
+      {
+       "text": "show that Autumn is literally a poor field hand gathering leftover grain",
+       "why": "Autumn is a season seen as a person. The gleaner is a comparison, not a literal identity.",
+       "value": null,
+       "label": "literal_for_figurative"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"suggest steady, balanced care in carrying the season's heavy yield\". Like a gleaner, Autumn keeps her 'laden head' steady while crossing a brook. The image suggests careful bearing of a full harvest.\n\"contrast Autumn's poverty with the wealth described in the first stanza\" is incorrect: This takes the poverty a gleaner might suggest and applies it to Autumn. Yet Autumn is pictured among her plentiful 'store'.\n\"stress the strain and danger of Autumn's labor as it nears the brook\" is incorrect: The stanza stresses steadiness and patience, not strain or danger.\n\"show that Autumn is literally a poor field hand gathering leftover grain\" is incorrect: Autumn is a season seen as a person. The gleaner is a comparison, not a literal identity.",
+     "est_seconds": 55,
+     "evidence_quotes": [
+      "And sometimes like a gleaner thou dost keep",
+      "Steady thy laden head across a brook"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 19,
+       "to": 19
+      }
+     },
+     "devices_used": [
+      "simile"
+     ],
+     "real_text": {
+      "registry_id": "keats-to-autumn",
+      "skill": "6.A",
+      "key_evidence": {
+       "quote": "Steady thy laden head across a brook",
+       "from": 20,
+       "to": 20,
+       "ref": "line 20",
+       "unit": "stanza 2"
+      },
+      "distractor_evidence": [
+       {
+        "index": 1,
+        "label": "lexical_trap",
+        "why": "This takes the poverty a gleaner might suggest and applies it to Autumn. Yet Autumn is pictured among her plentiful 'store'.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Who hath not seen thee oft amid thy store?",
+         "from": 12,
+         "to": 12,
+         "ref": "line 12",
+         "unit": "stanza 2"
+        }
+       },
+       {
+        "index": 2,
+        "label": "wrong_tone",
+        "why": "The stanza stresses steadiness and patience, not strain or danger.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Or by a cyder-press, with patient look",
+         "from": 21,
+         "to": 21,
+         "ref": "line 21",
+         "unit": "stanza 2"
+        }
+       },
+       {
+        "index": 3,
+        "label": "literal_for_figurative",
+        "why": "Autumn is a season seen as a person. The gleaner is a comparison, not a literal identity.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Season of mists and mellow fruitfulness",
+         "from": 1,
+         "to": 1,
+         "ref": "line 1",
+         "unit": "stanza 1"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        0,
+        0
+       ],
+       "adversary": "weak",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 0,
+       "panel_agree": true,
+       "score": 0.829,
+       "band": "medium",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.829,
+      "band": "medium",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 0,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_1B",
+     "topic": "U3.1",
+     "skill": "1.B",
+     "cognitive": "explain",
+     "stem": "Compared with Autumn \"Conspiring with him how to load and bless\" (line 3) in the first stanza, Autumn watching \"the last oozings hours by hours\" (line 22) in the second stanza shows Autumn",
+     "options": [
+      {
+       "text": "shifting from actively producing abundance to patiently attending its final yield",
+       "why": "In stanza 1 Autumn plots to load and fill. In stanza 2 she watches, 'with patient look', as the last of the cider oozes out.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "remaining exactly as busy and productive as it was at the start of the poem",
+       "why": "Stanza 2 shows Autumn sitting 'careless' and asleep, not busily producing.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "abandoning the harvest altogether to take up the music of the final stanza",
+       "why": "In stanza 2 Autumn is still at the cider-press, and the music belongs to a later stanza.",
+       "value": null,
+       "label": "wrong_scope"
+      },
+      {
+       "text": "growing more anxious and hurried as the season's harvest begins to slip away from it",
+       "why": "Autumn's look is described as 'patient', not anxious or hurried.",
+       "value": null,
+       "label": "wrong_tone"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"shifting from actively producing abundance to patiently attending its final yield\". In stanza 1 Autumn plots to load and fill. In stanza 2 she watches, 'with patient look', as the last of the cider oozes out.\n\"remaining exactly as busy and productive as it was at the start of the poem\" is incorrect: Stanza 2 shows Autumn sitting 'careless' and asleep, not busily producing.\n\"abandoning the harvest altogether to take up the music of the final stanza\" is incorrect: In stanza 2 Autumn is still at the cider-press, and the music belongs to a later stanza.\n\"growing more anxious and hurried as the season's harvest begins to slip away from it\" is incorrect: Autumn's look is described as 'patient', not anxious or hurried.",
+     "est_seconds": 70,
+     "evidence_quotes": [
+      "Conspiring with him how to load and bless",
+      "Thou watchest the last oozings hours by hours"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 3,
+       "to": 3
+      },
+      "r2": {
+       "from": 22,
+       "to": 22
+      }
+     },
+     "devices_used": [
+      "personification",
+      "contrast"
+     ],
+     "real_text": {
+      "registry_id": "keats-to-autumn",
+      "skill": "1.B",
+      "key_evidence": {
+       "quote": "Conspiring with him how to load and bless",
+       "from": 3,
+       "to": 3,
+       "ref": "line 3",
+       "unit": "stanza 1"
+      },
+      "distractor_evidence": [
+       {
+        "index": 1,
+        "label": "reversal",
+        "why": "Stanza 2 shows Autumn sitting 'careless' and asleep, not busily producing.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Thee sitting careless on a granary floor",
+         "from": 14,
+         "to": 14,
+         "ref": "line 14",
+         "unit": "stanza 2"
+        }
+       },
+       {
+        "index": 2,
+        "label": "wrong_scope",
+        "why": "In stanza 2 Autumn is still at the cider-press, and the music belongs to a later stanza.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Thou watchest the last oozings hours by hours",
+         "from": 22,
+         "to": 22,
+         "ref": "line 22",
+         "unit": "stanza 2"
+        }
+       },
+       {
+        "index": 3,
+        "label": "wrong_tone",
+        "why": "Autumn's look is described as 'patient', not anxious or hurried.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Or by a cyder-press, with patient look",
+         "from": 21,
+         "to": 21,
+         "ref": "line 21",
+         "unit": "stanza 2"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        0,
+        0
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 0,
+       "panel_agree": true,
+       "score": 1,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 1,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 0,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_4C",
+     "topic": "U4.3",
+     "skill": "4.C",
+     "cognitive": "identify",
+     "stem": "The speaker's response in line 24 to the question \"Where are the songs of Spring?\" conveys a tone that is best described as",
+     "options": [
+      {
+       "text": "sternly instructive, lecturing the reader on the order of seasons",
+       "why": "The addressee throughout is Autumn ('thee', 'thou'), not the reader, and nothing is lectured.",
+       "value": null,
+       "label": "misread_speaker"
+      },
+      {
+       "text": "mournfully nostalgic, wishing that the songs of Spring could return",
+       "why": "The speaker explicitly dismisses longing for Spring.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "gently consoling, turning Autumn from regret toward its own beauty",
+       "why": "The speaker tells Autumn not to think of Spring because she has her own music, which is a reassuring redirection.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "bitterly resentful of Spring for outshining Autumn's quieter music",
+       "why": "The catalogue that follows is affectionate. Spring is set aside, not attacked.",
+       "value": null,
+       "label": "wrong_tone"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"gently consoling, turning Autumn from regret toward its own beauty\". The speaker tells Autumn not to think of Spring because she has her own music, which is a reassuring redirection.\n\"sternly instructive, lecturing the reader on the order of seasons\" is incorrect: The addressee throughout is Autumn ('thee', 'thou'), not the reader, and nothing is lectured.\n\"mournfully nostalgic, wishing that the songs of Spring could return\" is incorrect: The speaker explicitly dismisses longing for Spring.\n\"bitterly resentful of Spring for outshining Autumn's quieter music\" is incorrect: The catalogue that follows is affectionate. Spring is set aside, not attacked.",
+     "est_seconds": 50,
+     "evidence_quotes": [
+      "Think not of them, thou hast thy music too"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 24,
+       "to": 24
+      }
+     },
+     "devices_used": [
+      "apostrophe",
+      "diction"
+     ],
+     "real_text": {
+      "registry_id": "keats-to-autumn",
+      "skill": "4.C",
+      "key_evidence": {
+       "quote": "thou hast thy music too",
+       "from": 24,
+       "to": 24,
+       "ref": "line 24",
+       "unit": "stanza 3"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "misread_speaker",
+        "why": "The addressee throughout is Autumn ('thee', 'thou'), not the reader, and nothing is lectured.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Who hath not seen thee oft amid thy store?",
+         "from": 12,
+         "to": 12,
+         "ref": "line 12",
+         "unit": "stanza 2"
+        }
+       },
+       {
+        "index": 1,
+        "label": "reversal",
+        "why": "The speaker explicitly dismisses longing for Spring.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Think not of them, thou hast",
+         "from": 24,
+         "to": 24,
+         "ref": "line 24",
+         "unit": "stanza 3"
+        }
+       },
+       {
+        "index": 3,
+        "label": "wrong_tone",
+        "why": "The catalogue that follows is affectionate. Spring is set aside, not attacked.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Hedge-crickets sing; and now with treble soft",
+         "from": 31,
+         "to": 31,
+         "ref": "line 31",
+         "unit": "stanza 3"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        2,
+        2
+       ],
+       "adversary": "weak",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 2,
+       "panel_agree": true,
+       "score": 0.87,
+       "band": "medium",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.87,
+      "band": "medium",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 2,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_5D",
+     "topic": "U8.3",
+     "skill": "5.D",
+     "cognitive": "explain",
+     "stem": "The images in line 25 and line 27 work together primarily to",
+     "options": [
+      {
+       "text": "express the speaker's bitter despair that all living things must soon perish",
+       "why": "The rosy light and gentle tone soften the ending into beauty, not despair.",
+       "value": null,
+       "label": "wrong_tone"
+      },
+      {
+       "text": "blend beauty with intimations of ending, so that loss is felt within loveliness",
+       "why": "The clouds 'bloom' a 'soft-dying day' and the gnats form a 'wailful choir'. Beauty and mourning appear together.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "describe a storm gathering over the fields as the day grows dark and cold",
+       "why": "'Barred clouds' are rosy and blooming, and the wind is 'light'. Nothing suggests a storm.",
+       "value": null,
+       "label": "lexical_trap"
+      },
+      {
+       "text": "depict an entirely lovely sunset that is free of any sense of sorrow or decline",
+       "why": "The scene is lovely, but the gnats 'mourn' and the day is 'dying'.",
+       "value": null,
+       "label": "partially_right"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"blend beauty with intimations of ending, so that loss is felt within loveliness\". The clouds 'bloom' a 'soft-dying day' and the gnats form a 'wailful choir'. Beauty and mourning appear together.\n\"express the speaker's bitter despair that all living things must soon perish\" is incorrect: The rosy light and gentle tone soften the ending into beauty, not despair.\n\"describe a storm gathering over the fields as the day grows dark and cold\" is incorrect: 'Barred clouds' are rosy and blooming, and the wind is 'light'. Nothing suggests a storm.\n\"depict an entirely lovely sunset that is free of any sense of sorrow or decline\" is incorrect: The scene is lovely, but the gnats 'mourn' and the day is 'dying'.",
+     "est_seconds": 65,
+     "evidence_quotes": [
+      "While barred clouds bloom the soft-dying day",
+      "Then in a wailful choir the small gnats mourn"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 25,
+       "to": 25
+      },
+      "r2": {
+       "from": 27,
+       "to": 27
+      }
+     },
+     "devices_used": [
+      "imagery",
+      "personification"
+     ],
+     "real_text": {
+      "registry_id": "keats-to-autumn",
+      "skill": "5.D",
+      "key_evidence": {
+       "quote": "barred clouds bloom the soft-dying day",
+       "from": 25,
+       "to": 25,
+       "ref": "line 25",
+       "unit": "stanza 3"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "wrong_tone",
+        "why": "The rosy light and gentle tone soften the ending into beauty, not despair.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "And touch the stubble-plains with rosy hue",
+         "from": 26,
+         "to": 26,
+         "ref": "line 26",
+         "unit": "stanza 3"
+        }
+       },
+       {
+        "index": 2,
+        "label": "lexical_trap",
+        "why": "'Barred clouds' are rosy and blooming, and the wind is 'light'. Nothing suggests a storm.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "as the light wind lives or dies",
+         "from": 29,
+         "to": 29,
+         "ref": "line 29",
+         "unit": "stanza 3"
+        }
+       },
+       {
+        "index": 3,
+        "label": "partially_right",
+        "why": "The scene is lovely, but the gnats 'mourn' and the day is 'dying'.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "the small gnats mourn",
+         "from": 27,
+         "to": 27,
+         "ref": "line 27",
+         "unit": "stanza 3"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        1,
+        1
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 1,
+       "panel_agree": true,
+       "score": 0.959,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.959,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 1,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_3D",
+     "topic": "U2.2",
+     "skill": "3.D",
+     "cognitive": "identify",
+     "stem": "The contrast between the first stanza's \"fill all fruit with ripeness to the core\" (line 6) and the third stanza's \"stubble-plains\" (line 26) primarily marks a movement from",
+     "options": [
+      {
+       "text": "early morning to deep night within a single day spent laboring in the fields",
+       "why": "The poem traces a season, and no morning scene appears.",
+       "value": null,
+       "label": "wrong_scope"
+      },
+      {
+       "text": "the natural world to a world wholly given over to human work and industry",
+       "why": "Stanza 3 is filled with natural creatures and their sounds, not human industry.",
+       "value": null,
+       "label": "too_broad"
+      },
+      {
+       "text": "ripening toward fullness to the aftermath of a harvest already gathered",
+       "why": "Stanza 1 shows fruit filling and ripening. Stanza 3 shows stubble, the fields left after reaping.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "a barren landscape to one that is gradually filling with new growth",
+       "why": "The order is reversed: stanza 1 is full of fruit, and stanza 3 shows harvested stubble.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"ripening toward fullness to the aftermath of a harvest already gathered\". Stanza 1 shows fruit filling and ripening. Stanza 3 shows stubble, the fields left after reaping.\n\"early morning to deep night within a single day spent laboring in the fields\" is incorrect: The poem traces a season, and no morning scene appears.\n\"the natural world to a world wholly given over to human work and industry\" is incorrect: Stanza 3 is filled with natural creatures and their sounds, not human industry.\n\"a barren landscape to one that is gradually filling with new growth\" is incorrect: The order is reversed: stanza 1 is full of fruit, and stanza 3 shows harvested stubble.",
+     "est_seconds": 50,
+     "evidence_quotes": [
+      "And fill all fruit with ripeness to the core",
+      "And touch the stubble-plains with rosy hue"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 6,
+       "to": 6
+      },
+      "r2": {
+       "from": 26,
+       "to": 26
+      }
+     },
+     "devices_used": [
+      "contrast",
+      "imagery"
+     ],
+     "real_text": {
+      "registry_id": "keats-to-autumn",
+      "skill": "3.D",
+      "key_evidence": {
+       "quote": "And touch the stubble-plains with rosy hue",
+       "from": 26,
+       "to": 26,
+       "ref": "line 26",
+       "unit": "stanza 3"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "wrong_scope",
+        "why": "The poem traces a season, and no morning scene appears.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Season of mists and mellow fruitfulness",
+         "from": 1,
+         "to": 1,
+         "ref": "line 1",
+         "unit": "stanza 1"
+        }
+       },
+       {
+        "index": 1,
+        "label": "too_broad",
+        "why": "Stanza 3 is filled with natural creatures and their sounds, not human industry.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Hedge-crickets sing; and now with treble soft",
+         "from": 31,
+         "to": 31,
+         "ref": "line 31",
+         "unit": "stanza 3"
+        }
+       },
+       {
+        "index": 3,
+        "label": "reversal",
+        "why": "The order is reversed: stanza 1 is full of fruit, and stanza 3 shows harvested stubble.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "To bend with apples the moss'd cottage-trees",
+         "from": 5,
+         "to": 5,
+         "ref": "line 5",
+         "unit": "stanza 1"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        2,
+        2
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 2,
+       "panel_agree": true,
+       "score": 1,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 1,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 2,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_7D",
+     "topic": "U8.3",
+     "skill": "7.D",
+     "cognitive": "evaluate",
+     "stem": "Which of the following quotations provides the strongest evidence for the claim that the poem acknowledges endings even in the midst of abundance?",
+     "options": [
+      {
+       "text": "\"Thy hair soft-lifted by the winnowing wind\"",
+       "why": "This is a gentle image of harvest activity and does not suggest an ending.",
+       "value": null,
+       "label": "too_narrow"
+      },
+      {
+       "text": "\"barred clouds bloom the soft-dying day\"",
+       "why": "'Bloom' suggests flourishing, while 'soft-dying' names an ending. Both appear in one phrase.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "\"fill all fruit with ripeness to the core\"",
+       "why": "This supports the abundance half of the claim only and says nothing of endings.",
+       "value": null,
+       "label": "partially_right"
+      },
+      {
+       "text": "\"Close bosom-friend of the maturing sun\"",
+       "why": "This shows Autumn's partnership with the sun, not any awareness of endings.",
+       "value": null,
+       "label": "wrong_function"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"\"barred clouds bloom the soft-dying day\"\". 'Bloom' suggests flourishing, while 'soft-dying' names an ending. Both appear in one phrase.\n\"\"Thy hair soft-lifted by the winnowing wind\"\" is incorrect: This is a gentle image of harvest activity and does not suggest an ending.\n\"\"fill all fruit with ripeness to the core\"\" is incorrect: This supports the abundance half of the claim only and says nothing of endings.\n\"\"Close bosom-friend of the maturing sun\"\" is incorrect: This shows Autumn's partnership with the sun, not any awareness of endings.",
+     "est_seconds": 75,
+     "evidence_quotes": [
+      "While barred clouds bloom the soft-dying day"
+     ],
+     "ref_lines": {},
+     "devices_used": [
+      "imagery",
+      "juxtaposition"
+     ],
+     "real_text": {
+      "registry_id": "keats-to-autumn",
+      "skill": "7.D",
+      "key_evidence": {
+       "quote": "barred clouds bloom the soft-dying day",
+       "from": 25,
+       "to": 25,
+       "ref": "line 25",
+       "unit": "stanza 3"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "too_narrow",
+        "why": "This is a gentle image of harvest activity and does not suggest an ending.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Thy hair soft-lifted by the winnowing wind",
+         "from": 15,
+         "to": 15,
+         "ref": "line 15",
+         "unit": "stanza 2"
+        }
+       },
+       {
+        "index": 2,
+        "label": "partially_right",
+        "why": "This supports the abundance half of the claim only and says nothing of endings.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "fill all fruit with ripeness to the core",
+         "from": 6,
+         "to": 6,
+         "ref": "line 6",
+         "unit": "stanza 1"
+        }
+       },
+       {
+        "index": 3,
+        "label": "wrong_function",
+        "why": "This shows Autumn's partnership with the sun, not any awareness of endings.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Close bosom-friend of the maturing sun",
+         "from": 2,
+         "to": 2,
+         "ref": "line 2",
+         "unit": "stanza 1"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        1,
+        1
+       ],
+       "adversary": "weak",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 1,
+       "panel_agree": true,
+       "score": 0.87,
+       "band": "medium",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.87,
+      "band": "medium",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 1,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_7B",
+     "topic": "U5.4",
+     "skill": "7.B",
+     "cognitive": "evaluate",
+     "stem": "Which of the following statements is the most defensible thesis about the poem as a whole?",
+     "options": [
+      {
+       "text": "The poem mourns the loss of spring, treating autumn as a bleak season of decay that offers no consolation.",
+       "why": "The speaker explicitly comforts Autumn with its own music.",
+       "value": null,
+       "label": "wrong_tone"
+      },
+      {
+       "text": "By moving from ripening to harvest to dusk, the poem finds beauty in a season's fullness and its fading alike.",
+       "why": "The stanzas move from ripening to lingering harvest to a 'soft-dying day', and each stage is presented as beautiful.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "The poem celebrates autumn's abundance as a permanent, unchanging state that the speaker hopes will never end.",
+       "why": "The poem does celebrate abundance, but it also traces the 'last oozings' and the dying day.",
+       "value": null,
+       "label": "partially_right"
+      },
+      {
+       "text": "Through its three stanzas, the poem argues that all of nature is an endless cycle in which death is only an illusion.",
+       "why": "The poem never claims death is an illusion. The gnats 'mourn' a real ending.",
+       "value": null,
+       "label": "too_broad"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"By moving from ripening to harvest to dusk, the poem finds beauty in a season's fullness and its fading alike.\". The stanzas move from ripening to lingering harvest to a 'soft-dying day', and each stage is presented as beautiful.\n\"The poem mourns the loss of spring, treating autumn as a bleak season of decay that offers no consolation.\" is incorrect: The speaker explicitly comforts Autumn with its own music.\n\"The poem celebrates autumn's abundance as a permanent, unchanging state that the speaker hopes will never end.\" is incorrect: The poem does celebrate abundance, but it also traces the 'last oozings' and the dying day.\n\"Through its three stanzas, the poem argues that all of nature is an endless cycle in which death is only an illusion.\" is incorrect: The poem never claims death is an illusion. The gnats 'mourn' a real ending.",
+     "est_seconds": 90,
+     "evidence_quotes": [
+      "fill all fruit with ripeness to the core",
+      "While barred clouds bloom the soft-dying day"
+     ],
+     "ref_lines": {},
+     "devices_used": [
+      "contrast",
+      "imagery",
+      "apostrophe"
+     ],
+     "real_text": {
+      "registry_id": "keats-to-autumn",
+      "skill": "7.B",
+      "key_evidence": {
+       "quote": "barred clouds bloom the soft-dying day",
+       "from": 25,
+       "to": 25,
+       "ref": "line 25",
+       "unit": "stanza 3"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "wrong_tone",
+        "why": "The speaker explicitly comforts Autumn with its own music.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "thou hast thy music too",
+         "from": 24,
+         "to": 24,
+         "ref": "line 24",
+         "unit": "stanza 3"
+        }
+       },
+       {
+        "index": 2,
+        "label": "partially_right",
+        "why": "The poem does celebrate abundance, but it also traces the 'last oozings' and the dying day.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Thou watchest the last oozings hours by hours",
+         "from": 22,
+         "to": 22,
+         "ref": "line 22",
+         "unit": "stanza 2"
+        }
+       },
+       {
+        "index": 3,
+        "label": "too_broad",
+        "why": "The poem never claims death is an illusion. The gnats 'mourn' a real ending.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Then in a wailful choir the small gnats mourn",
+         "from": 27,
+         "to": 27,
+         "ref": "line 27",
+         "unit": "stanza 3"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        1,
+        1
+       ],
+       "adversary": "weak",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 1,
+       "panel_agree": true,
+       "score": 0.87,
+       "band": "medium",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.87,
+      "band": "medium",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 1,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ]
+     }
+    }
+   ],
+   "excluded_items": [
+    {
+     "index": 9,
+     "skill": "3.C",
+     "stem": "The final line of the poem ([[r1]]) functions primarily to",
+     "reasons": []
+    }
+   ],
+   "assignable_size": true,
+   "set_note": ""
+  }
+ },
+ {
+  "cellId": "ap_english_literature-real-rs14",
+  "apSubjectCode": "ap_english_literature",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "source_first_real_text",
+  "candidateKey": "ap_english_literature-real-rs14-k0",
+  "structure": "shared_stimulus_set",
+  "archetype": "lt_real_short_rs14",
+  "pipeline": "real_text_v1",
+  "releaseTier": "sample_not_loaded",
+  "expertStatus": "unreviewed",
+  "renderVerified": false,
+  "screenVerified": false,
+  "sourceKind": "real_public_domain",
+  "registryId": "mansfield-miss-brill",
+  "keywordCode": "U4.2",
+  "unitCode": "4",
+  "skillPrimary": "2.B",
+  "reviewState": "auto_passed",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "payload": {
+   "layout_status": "not verified identical to the official AP Central preview: layout was checked only against the ALTON PassageBlock at 390px and 1280px (docs/ap/englit-material-audit.md section 6)",
+   "archetype": "lt_real_short_rs14",
+   "topic": "U4.2",
+   "skill": "2.B",
+   "calculator": "na",
+   "set_intro": "Public-domain source text — Katherine Mansfield, Miss Brill (opening), The Garden Party, and Other Stories (Gutenberg eBook #1429; collection published 1922, story first published in The Athenaeum, 1920). The file does not state the printing, so the exact edition is UNVERIFIED\nMiss Brill (opening)\nby Katherine Mansfield\nThe following passage from a short story is by Katherine Mansfield (1920). This is an excerpt.\n\n```passage\n    Although it was so brilliantly fine—the blue sky\npowdered with gold and great spots of light like white\nwine splashed over the Jardins Publiques—Miss Brill was\nglad that she had decided on her fur. The air was\nmotionless, but when you opened your mouth there was\njust a faint chill, like a chill from a glass of iced\nwater before you sip, and now and again a leaf came\ndrifting—from nowhere, from the sky. Miss Brill put up\nher hand and touched her fur. Dear little thing! It was\nnice to feel it again. She had taken it out of its box\nthat afternoon, shaken out the moth-powder, given it a\ngood brush, and rubbed the life back into the dim little\neyes. “What has been happening to me?” said the sad\nlittle eyes. Oh, how sweet it was to see them snap at\nher again from the red eiderdown!... But the nose, which\nwas of some black composition, wasn’t at all firm. It\nmust have had a knock, somehow. Never mind—a little dab\nof black sealing-wax when the time came—when it was\nabsolutely necessary.... Little rogue! Yes, she really\nfelt like that about it. Little rogue biting its tail\njust by her left ear. She could have taken it off and\nlaid it on her lap and stroked it. She felt a tingling\nin her hands and arms, but that came from walking, she\nsupposed. And when she breathed, something light and\nsad—no, not sad, exactly—something gentle seemed to move\nin her bosom.\n\n    There were a number of people out this afternoon,\nfar more than last Sunday. And the band sounded louder\nand gayer. That was because the Season had begun. For\nalthough the band played all the year round on Sundays,\nout of season it was never the same. It was like some\none playing with only the family to listen; it didn’t\ncare how it played if there weren’t any strangers\npresent. Wasn’t the conductor wearing a new coat, too?\nShe was sure it was new. He scraped with his foot and\nflapped his arms like a rooster about to crow, and the\nbandsmen sitting in the green rotunda blew out their\ncheeks and glared at the music. Now there came a little\n“flutey” bit—very pretty!—a little chain of bright\ndrops. She was sure it would be repeated. It was; she\nlifted her head and smiled.\n\n    Only two people shared her “special” seat: a fine\nold man in a velvet coat, his hands clasped over a huge\ncarved walking-stick, and a big old woman, sitting\nupright, with a roll of knitting on her embroidered\napron. They did not speak. This was disappointing, for\nMiss Brill always looked forward to the conversation.\nShe had become really quite expert, she thought, at\nlistening as though she didn’t listen, at sitting in\nother people’s lives just for a minute while they talked\nround her.\n\n    She glanced, sideways, at the old couple. Perhaps\nthey would go soon. Last Sunday, too, hadn’t been as\ninteresting as usual. An Englishman and his wife, he\nwearing a dreadful Panama hat and she button boots. And\nshe’d gone on the whole time about how she ought to wear\nspectacles; she knew she needed them; but that it was no\ngood getting any; they’d be sure to break and they’d\nnever keep on. And he’d been so patient. He’d suggested\neverything—gold rims, the kind that curved round your\nears, little pads inside the bridge. No, nothing would\nplease her. “They’ll always be sliding down my nose!”\nMiss Brill had wanted to shake her.\n\n    The old people sat on the bench, still as statues.\nNever mind, there was always the crowd to watch. To and\nfro, in front of the flower-beds and the band rotunda,\nthe couples and groups paraded, stopped to talk, to\ngreet, to buy a handful of flowers from the old beggar\nwho had his tray fixed to the railings. Little children\nran among them, swooping and laughing; little boys with\nbig white silk bows under their chins, little girls,\nlittle French dolls, dressed up in velvet and lace. And\nsometimes a tiny staggerer came suddenly rocking into\nthe open from under the trees, stopped, stared, as\nsuddenly sat down “flop,” until its small high-stepping\nmother, like a young hen, rushed scolding to its rescue.\nOther people sat on the benches and green chairs, but\nthey were nearly always the same, Sunday after Sunday,\nand—Miss Brill had often noticed—there was something\nfunny about nearly all of them. They were odd, silent,\nnearly all old, and from the way they stared they looked\nas though they’d just come from dark little rooms or\neven—even cupboards!\n```",
+   "lt_passage": {
+    "form": "prose",
+    "group": "short",
+    "title": "Miss Brill (opening)",
+    "headnote": "The following passage from a short story is by Katherine Mansfield (1920). This is an excerpt.",
+    "stanzas": [
+     [
+      "    Although it was so brilliantly fine—the blue sky",
+      "powdered with gold and great spots of light like white",
+      "wine splashed over the Jardins Publiques—Miss Brill was",
+      "glad that she had decided on her fur. The air was",
+      "motionless, but when you opened your mouth there was",
+      "just a faint chill, like a chill from a glass of iced",
+      "water before you sip, and now and again a leaf came",
+      "drifting—from nowhere, from the sky. Miss Brill put up",
+      "her hand and touched her fur. Dear little thing! It was",
+      "nice to feel it again. She had taken it out of its box",
+      "that afternoon, shaken out the moth-powder, given it a",
+      "good brush, and rubbed the life back into the dim little",
+      "eyes. “What has been happening to me?” said the sad",
+      "little eyes. Oh, how sweet it was to see them snap at",
+      "her again from the red eiderdown!... But the nose, which",
+      "was of some black composition, wasn’t at all firm. It",
+      "must have had a knock, somehow. Never mind—a little dab",
+      "of black sealing-wax when the time came—when it was",
+      "absolutely necessary.... Little rogue! Yes, she really",
+      "felt like that about it. Little rogue biting its tail",
+      "just by her left ear. She could have taken it off and",
+      "laid it on her lap and stroked it. She felt a tingling",
+      "in her hands and arms, but that came from walking, she",
+      "supposed. And when she breathed, something light and",
+      "sad—no, not sad, exactly—something gentle seemed to move",
+      "in her bosom."
+     ],
+     [
+      "    There were a number of people out this afternoon,",
+      "far more than last Sunday. And the band sounded louder",
+      "and gayer. That was because the Season had begun. For",
+      "although the band played all the year round on Sundays,",
+      "out of season it was never the same. It was like some",
+      "one playing with only the family to listen; it didn’t",
+      "care how it played if there weren’t any strangers",
+      "present. Wasn’t the conductor wearing a new coat, too?",
+      "She was sure it was new. He scraped with his foot and",
+      "flapped his arms like a rooster about to crow, and the",
+      "bandsmen sitting in the green rotunda blew out their",
+      "cheeks and glared at the music. Now there came a little",
+      "“flutey” bit—very pretty!—a little chain of bright",
+      "drops. She was sure it would be repeated. It was; she",
+      "lifted her head and smiled."
+     ],
+     [
+      "    Only two people shared her “special” seat: a fine",
+      "old man in a velvet coat, his hands clasped over a huge",
+      "carved walking-stick, and a big old woman, sitting",
+      "upright, with a roll of knitting on her embroidered",
+      "apron. They did not speak. This was disappointing, for",
+      "Miss Brill always looked forward to the conversation.",
+      "She had become really quite expert, she thought, at",
+      "listening as though she didn’t listen, at sitting in",
+      "other people’s lives just for a minute while they talked",
+      "round her."
+     ],
+     [
+      "    She glanced, sideways, at the old couple. Perhaps",
+      "they would go soon. Last Sunday, too, hadn’t been as",
+      "interesting as usual. An Englishman and his wife, he",
+      "wearing a dreadful Panama hat and she button boots. And",
+      "she’d gone on the whole time about how she ought to wear",
+      "spectacles; she knew she needed them; but that it was no",
+      "good getting any; they’d be sure to break and they’d",
+      "never keep on. And he’d been so patient. He’d suggested",
+      "everything—gold rims, the kind that curved round your",
+      "ears, little pads inside the bridge. No, nothing would",
+      "please her. “They’ll always be sliding down my nose!”",
+      "Miss Brill had wanted to shake her."
+     ],
+     [
+      "    The old people sat on the bench, still as statues.",
+      "Never mind, there was always the crowd to watch. To and",
+      "fro, in front of the flower-beds and the band rotunda,",
+      "the couples and groups paraded, stopped to talk, to",
+      "greet, to buy a handful of flowers from the old beggar",
+      "who had his tray fixed to the railings. Little children",
+      "ran among them, swooping and laughing; little boys with",
+      "big white silk bows under their chins, little girls,",
+      "little French dolls, dressed up in velvet and lace. And",
+      "sometimes a tiny staggerer came suddenly rocking into",
+      "the open from under the trees, stopped, stared, as",
+      "suddenly sat down “flop,” until its small high-stepping",
+      "mother, like a young hen, rushed scolding to its rescue.",
+      "Other people sat on the benches and green chairs, but",
+      "they were nearly always the same, Sunday after Sunday,",
+      "and—Miss Brill had often noticed—there was something",
+      "funny about nearly all of them. They were odd, silent,",
+      "nearly all old, and from the way they stared they looked",
+      "as though they’d just come from dark little rooms or",
+      "even—even cupboards!"
+     ]
+    ],
+    "line_count": 83
+   },
+   "provenance": {
+    "kind": "public_domain",
+    "registry_id": "mansfield-miss-brill",
+    "author": "Katherine Mansfield",
+    "translator": null,
+    "year": 1920,
+    "repository": "Project Gutenberg (gutenberg.org)",
+    "url": "https://www.gutenberg.org/ebooks/1429",
+    "reuse_basis": "United States public domain: story published 1920/1922; author died 1923. The repository states the eBook is not protected by U.S. copyright; the text is reproduced without the repository's trademark or license header.",
+    "text_sha256": "d2443bcd5e845a18a77cdb58a5ea696d02e901838d3d54f3395479e48adef51c",
+    "excerpt": {
+     "unit": "paragraph",
+     "from": 1,
+     "to": 5,
+     "whole_work": false,
+     "note": "Opening paragraphs 1-5 of the story (about 780 words), from 'Although it was so brilliantly fine' to 'Never mind, there was always the crowd to watch'; title omitted."
+    },
+    "modifications": [
+     "Repository hard-wrap rejoined into paragraphs.",
+     "Removed italic underscore markup.",
+     "Title omitted."
+    ]
+   },
+   "text_map": {
+    "central_idea": "On a bright, faintly chilly Sunday in the Jardins Publiques, Miss Brill fusses fondly over her old fur, enjoys the band, listens in on strangers, and passes judgment on the people around her. The narration stays close to her thoughts. Through it the reader sees a solitary, aging woman whose affection, eavesdropping, and verdicts on 'odd, silent' old bench-sitters reveal a loneliness and a resemblance to them that she does not admit.",
+    "speaker_or_narrator": "A third-person narrator limited to Miss Brill, often slipping into free indirect discourse that takes on her exclamations, questions, and self-corrections, so the narrator's report and her own thoughts blend together.",
+    "structure_and_shifts": [
+     {
+      "quote": "Miss Brill put up her hand and touched her fur",
+      "from": "description of the bright, chilly park",
+      "to": "intimate, affectionate attention to the worn fur"
+     },
+     {
+      "quote": "There were a number of people out this afternoon",
+      "from": "private communion with the fur",
+      "to": "public scene of the band and the Season"
+     },
+     {
+      "quote": "Only two people shared her",
+      "from": "enjoyment of the music",
+      "to": "disappointment at the silent couple on her seat"
+     },
+     {
+      "quote": "Last Sunday, too, hadn",
+      "from": "present scene",
+      "to": "flashback to the Englishman and his wife"
+     },
+     {
+      "quote": "Never mind, there was always the crowd to watch",
+      "from": "recollection of last Sunday",
+      "to": "panorama of the crowd and the old bench-sitters she judges"
+     }
+    ],
+    "devices": [
+     {
+      "device": "simile",
+      "quote": "great spots of light like white wine splashed",
+      "function": "Makes the sunlight seem festive and intoxicating, matching Miss Brill's heightened mood."
+     },
+     {
+      "device": "simile",
+      "quote": "like a chill from a glass of iced",
+      "function": "Introduces a faint coolness under the brilliance and explains why she wears the fur."
+     },
+     {
+      "device": "personification",
+      "quote": "said the sad little eyes",
+      "function": "Turns the fur into a living companion and shows how much affection Miss Brill gives it."
+     },
+     {
+      "device": "free_indirect_discourse",
+      "quote": "no, not sad, exactly",
+      "function": "Takes on her self-correction, letting the reader sense a sadness she pushes away."
+     },
+     {
+      "device": "simile",
+      "quote": "It was like some one playing with only the family",
+      "function": "Pictures the band as a performer who needs an audience of strangers, in keeping with her theatrical view of the park."
+     },
+     {
+      "device": "simile",
+      "quote": "flapped his arms like a rooster about to crow",
+      "function": "Gives a comic, fond picture of the conductor."
+     },
+     {
+      "device": "flashback",
+      "quote": "An Englishman and his wife, he",
+      "function": "Shows her strong but silent involvement in strangers' lives."
+     },
+     {
+      "device": "diction",
+      "quote": "the couples and groups paraded, stopped to talk",
+      "function": "Casts the crowd as a show put on for the watcher."
+     },
+     {
+      "device": "irony",
+      "quote": "They were odd, silent, nearly all old",
+      "function": "Her description of the others fits her, a solitary regular on a bench, though she does not see it."
+     },
+     {
+      "device": "imagery",
+      "quote": "from dark little rooms or",
+      "function": "Ends on images of confinement that recall the fur taken out of its box."
+     }
+    ],
+    "skills_supported": [
+     {
+      "skill": "2.B",
+      "why_supported": "The opening weather sets a bright but faintly chilly mood.",
+      "quote": "just a faint chill, like a chill from a glass"
+     },
+     {
+      "skill": "6.C",
+      "why_supported": "The fur's eyes speak and it is called a 'little rogue'.",
+      "quote": "said the sad little eyes. Oh, how sweet it was"
+     },
+     {
+      "skill": "1.A",
+      "why_supported": "Her plan for the damaged nose shows her habit of putting things off.",
+      "quote": "a little dab of black sealing-wax when the time came"
+     },
+     {
+      "skill": "4.D",
+      "why_supported": "Her self-explanations and self-corrections hold back emotion.",
+      "quote": "but that came from walking, she supposed"
+     },
+     {
+      "skill": "4.B",
+      "why_supported": "Free indirect questions and certainties take on her voice.",
+      "quote": "She was sure it was new. He scraped with his foot"
+     },
+     {
+      "skill": "6.A",
+      "why_supported": "Simile comparing the off-season band to playing for family.",
+      "quote": "It was like some one playing with only the family"
+     },
+     {
+      "skill": "4.C",
+      "why_supported": "Qualifying words color the tone of her self-praise.",
+      "quote": "She had become really quite expert, she thought, at"
+     },
+     {
+      "skill": "1.E",
+      "why_supported": "Her impatience contradicts her pose as a detached listener.",
+      "quote": "Miss Brill had wanted to shake her."
+     },
+     {
+      "skill": "5.B",
+      "why_supported": "The connotation of 'paraded'.",
+      "quote": "the couples and groups paraded, stopped to talk"
+     },
+     {
+      "skill": "3.D",
+      "why_supported": "The lively children contrast with the silent old people.",
+      "quote": "They were odd, silent, nearly all old, and from"
+     },
+     {
+      "skill": "3.C",
+      "why_supported": "The final sentence ends on an image of confinement.",
+      "quote": "from the way they stared they looked"
+     },
+     {
+      "skill": "7.B",
+      "why_supported": "A thesis about the whole passage's method and meaning.",
+      "quote": "something gentle seemed to move"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "lt_short_2B",
+     "topic": "U4.2",
+     "skill": "2.B",
+     "cognitive": "explain",
+     "stem": "The description of the weather in the opening sentences, including the comparison in line 6, primarily serves to",
+     "options": [
+      {
+       "text": "show that Miss Brill is too chilled to enjoy any of the afternoon's pleasures",
+       "why": "This fixes on the word 'chill'. She actually enjoys the music and smiles.",
+       "value": null,
+       "label": "lexical_trap"
+      },
+      {
+       "text": "explain why Miss Brill comes to the park only during the summer months",
+       "why": "Nothing in the passage limits her visits to summer.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "suggest that the park is gloomy and that the brightness is only an illusion",
+       "why": "The day is explicitly 'brilliantly fine'. The chill is faint and does not cancel the brightness.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "establish a bright, festive day that carries a faint undertone of coolness",
+       "why": "The 'brilliantly fine' day with light 'like white wine' still has 'a faint chill', which is why she is glad of her fur.",
+       "value": null,
+       "label": "correct"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"establish a bright, festive day that carries a faint undertone of coolness\". The 'brilliantly fine' day with light 'like white wine' still has 'a faint chill', which is why she is glad of her fur.\n\"show that Miss Brill is too chilled to enjoy any of the afternoon's pleasures\" is incorrect: This fixes on the word 'chill'. She actually enjoys the music and smiles.\n\"explain why Miss Brill comes to the park only during the summer months\" is incorrect: Nothing in the passage limits her visits to summer.\n\"suggest that the park is gloomy and that the brightness is only an illusion\" is incorrect: The day is explicitly 'brilliantly fine'. The chill is faint and does not cancel the brightness.",
+     "est_seconds": 60,
+     "evidence_quotes": [
+      "just a faint chill, like a chill from a glass",
+      "Although it was so brilliantly fine"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 6,
+       "to": 6
+      }
+     },
+     "devices_used": [
+      "simile",
+      "imagery"
+     ],
+     "real_text": {
+      "registry_id": "mansfield-miss-brill",
+      "skill": "2.B",
+      "key_evidence": {
+       "quote": "just a faint chill, like a chill from a glass",
+       "from": 6,
+       "to": 6,
+       "ref": "line 6",
+       "unit": "paragraph 1"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "lexical_trap",
+        "why": "This fixes on the word 'chill'. She actually enjoys the music and smiles.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "she lifted her head and smiled",
+         "from": 40,
+         "to": 41,
+         "ref": "lines 40-41",
+         "unit": "paragraph 2"
+        }
+       },
+       {
+        "index": 1,
+        "label": "unsupported",
+        "why": "Nothing in the passage limits her visits to summer.",
+        "evidence_kind": "absence",
+        "evidence": null
+       },
+       {
+        "index": 2,
+        "label": "reversal",
+        "why": "The day is explicitly 'brilliantly fine'. The chill is faint and does not cancel the brightness.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Although it was so brilliantly fine",
+         "from": 1,
+         "to": 1,
+         "ref": "line 1",
+         "unit": "paragraph 1"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        3,
+        3
+       ],
+       "adversary": "weak",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 3,
+       "panel_agree": true,
+       "score": 0.87,
+       "band": "medium",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.87,
+      "band": "medium",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 3,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_short_6C",
+     "topic": "U7.3",
+     "skill": "6.C",
+     "cognitive": "explain",
+     "stem": "The personification of the fur in lines 13-14 chiefly suggests",
+     "options": [
+      {
+       "text": "that the fur is literally a live animal Miss Brill has carried into the park",
+       "why": "The nose is 'of some black composition'. The fur is an object she imagines as alive.",
+       "value": null,
+       "label": "literal_for_figurative"
+      },
+      {
+       "text": "that Miss Brill fears the fur's decay mirrors a sinister threat lurking in the park",
+       "why": "The passage shows no fear and no threat in the park.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "that Miss Brill is ashamed of the fur and wishes she could afford a new one",
+       "why": "She is delighted to wear it again. Nothing suggests shame.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "that Miss Brill treats the worn fur as a cherished, almost living companion",
+       "why": "She 'rubbed the life back' into its eyes, imagines it speaking, and calls it 'Dear little thing', which casts it as a beloved companion.",
+       "value": null,
+       "label": "correct"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"that Miss Brill treats the worn fur as a cherished, almost living companion\". She 'rubbed the life back' into its eyes, imagines it speaking, and calls it 'Dear little thing', which casts it as a beloved companion.\n\"that the fur is literally a live animal Miss Brill has carried into the park\" is incorrect: The nose is 'of some black composition'. The fur is an object she imagines as alive.\n\"that Miss Brill fears the fur's decay mirrors a sinister threat lurking in the park\" is incorrect: The passage shows no fear and no threat in the park.\n\"that Miss Brill is ashamed of the fur and wishes she could afford a new one\" is incorrect: She is delighted to wear it again. Nothing suggests shame.",
+     "est_seconds": 60,
+     "evidence_quotes": [
+      "rubbed the life back into the dim little",
+      "Dear little thing!"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 13,
+       "to": 14
+      }
+     },
+     "devices_used": [
+      "personification"
+     ],
+     "real_text": {
+      "registry_id": "mansfield-miss-brill",
+      "skill": "6.C",
+      "key_evidence": {
+       "quote": "rubbed the life back into the dim little",
+       "from": 12,
+       "to": 12,
+       "ref": "line 12",
+       "unit": "paragraph 1"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "literal_for_figurative",
+        "why": "The nose is 'of some black composition'. The fur is an object she imagines as alive.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "which was of some black composition",
+         "from": 15,
+         "to": 16,
+         "ref": "lines 15-16",
+         "unit": "paragraph 1"
+        }
+       },
+       {
+        "index": 1,
+        "label": "unsupported",
+        "why": "The passage shows no fear and no threat in the park.",
+        "evidence_kind": "absence",
+        "evidence": null
+       },
+       {
+        "index": 2,
+        "label": "reversal",
+        "why": "She is delighted to wear it again. Nothing suggests shame.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "It was nice to feel it again",
+         "from": 9,
+         "to": 10,
+         "ref": "lines 9-10",
+         "unit": "paragraph 1"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        3,
+        3
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 3,
+       "panel_agree": true,
+       "score": 1,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 1,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 3,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_short_1A",
+     "topic": "U1.1",
+     "skill": "1.A",
+     "cognitive": "identify",
+     "stem": "Miss Brill's response to the damaged nose of the fur (lines 17-18) most strongly suggests that she",
+     "options": [
+      {
+       "text": "is skilled at mending her clothes and takes pride in it",
+       "why": "This seizes on 'sealing-wax'. The text shows no skill or pride, only a vague guess about a knock and a makeshift fix.",
+       "value": null,
+       "label": "lexical_trap"
+      },
+      {
+       "text": "has grown tired of the fur and plans to discard it",
+       "why": "Her fondness for it is clear and she has no plan to discard it.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "is inclined to put off facing small signs of decline",
+       "why": "'Never mind' and 'when it was absolutely necessary' show her postponing the repair and brushing the wear aside.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "is anxious to repair the fur before anyone notices",
+       "why": "She explicitly delays the repair until it is 'absolutely necessary'.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"is inclined to put off facing small signs of decline\". 'Never mind' and 'when it was absolutely necessary' show her postponing the repair and brushing the wear aside.\n\"is skilled at mending her clothes and takes pride in it\" is incorrect: This seizes on 'sealing-wax'. The text shows no skill or pride, only a vague guess about a knock and a makeshift fix.\n\"has grown tired of the fur and plans to discard it\" is incorrect: Her fondness for it is clear and she has no plan to discard it.\n\"is anxious to repair the fur before anyone notices\" is incorrect: She explicitly delays the repair until it is 'absolutely necessary'.",
+     "est_seconds": 50,
+     "evidence_quotes": [
+      "a little dab of black sealing-wax when the time came",
+      "when it was absolutely necessary"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 17,
+       "to": 18
+      }
+     },
+     "devices_used": [
+      "free_indirect_discourse"
+     ],
+     "real_text": {
+      "registry_id": "mansfield-miss-brill",
+      "skill": "1.A",
+      "key_evidence": {
+       "quote": "a little dab of black sealing-wax when the time came",
+       "from": 17,
+       "to": 18,
+       "ref": "lines 17-18",
+       "unit": "paragraph 1"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "lexical_trap",
+        "why": "This seizes on 'sealing-wax'. The text shows no skill or pride, only a vague guess about a knock and a makeshift fix.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "It must have had a knock, somehow.",
+         "from": 16,
+         "to": 17,
+         "ref": "lines 16-17",
+         "unit": "paragraph 1"
+        }
+       },
+       {
+        "index": 1,
+        "label": "unsupported",
+        "why": "Her fondness for it is clear and she has no plan to discard it.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Dear little thing!",
+         "from": 9,
+         "to": 9,
+         "ref": "line 9",
+         "unit": "paragraph 1"
+        }
+       },
+       {
+        "index": 3,
+        "label": "reversal",
+        "why": "She explicitly delays the repair until it is 'absolutely necessary'.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "when it was absolutely necessary",
+         "from": 18,
+         "to": 19,
+         "ref": "lines 18-19",
+         "unit": "paragraph 1"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        2,
+        2
+       ],
+       "adversary": "weak",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 2,
+       "panel_agree": true,
+       "score": 0.829,
+       "band": "medium",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.829,
+      "band": "medium",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 2,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_short_4D",
+     "topic": "U7.1",
+     "skill": "4.D",
+     "cognitive": "evaluate",
+     "stem": "The narration in lines 23-24 and line 25 most clearly signals that Miss Brill",
+     "options": [
+      {
+       "text": "openly admits a deep sadness about her solitary life",
+       "why": "She takes the word 'sad' back instead of admitting it.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "is deliberately misleading the narrator about her own mood",
+       "why": "Miss Brill does not address the narrator. The narration shows her own self-deception, not a deliberate lie.",
+       "value": null,
+       "label": "misread_speaker"
+      },
+      {
+       "text": "is physically exhausted from her long walk to the park",
+       "why": "This accepts her own explanation at face value. The 'something gentle' moving in her bosom points to feeling, not tiredness.",
+       "value": null,
+       "label": "literal_for_figurative"
+      },
+      {
+       "text": "explains away feelings she is reluctant to acknowledge",
+       "why": "She credits the tingling to walking ('she supposed') and takes back 'sad' in favor of 'gentle', so the reader senses an emotion she resists.",
+       "value": null,
+       "label": "correct"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"explains away feelings she is reluctant to acknowledge\". She credits the tingling to walking ('she supposed') and takes back 'sad' in favor of 'gentle', so the reader senses an emotion she resists.\n\"openly admits a deep sadness about her solitary life\" is incorrect: She takes the word 'sad' back instead of admitting it.\n\"is deliberately misleading the narrator about her own mood\" is incorrect: Miss Brill does not address the narrator. The narration shows her own self-deception, not a deliberate lie.\n\"is physically exhausted from her long walk to the park\" is incorrect: This accepts her own explanation at face value. The 'something gentle' moving in her bosom points to feeling, not tiredness.",
+     "est_seconds": 75,
+     "evidence_quotes": [
+      "but that came from walking, she supposed",
+      "no, not sad, exactly"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 23,
+       "to": 24
+      },
+      "r2": {
+       "from": 25,
+       "to": 25
+      }
+     },
+     "devices_used": [
+      "free_indirect_discourse"
+     ],
+     "real_text": {
+      "registry_id": "mansfield-miss-brill",
+      "skill": "4.D",
+      "key_evidence": {
+       "quote": "but that came from walking, she supposed",
+       "from": 23,
+       "to": 24,
+       "ref": "lines 23-24",
+       "unit": "paragraph 1"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "reversal",
+        "why": "She takes the word 'sad' back instead of admitting it.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "no, not sad, exactly",
+         "from": 25,
+         "to": 25,
+         "ref": "line 25",
+         "unit": "paragraph 1"
+        }
+       },
+       {
+        "index": 1,
+        "label": "misread_speaker",
+        "why": "Miss Brill does not address the narrator. The narration shows her own self-deception, not a deliberate lie.",
+        "evidence_kind": "absence",
+        "evidence": null
+       },
+       {
+        "index": 2,
+        "label": "literal_for_figurative",
+        "why": "This accepts her own explanation at face value. The 'something gentle' moving in her bosom points to feeling, not tiredness.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "something gentle seemed to move",
+         "from": 25,
+         "to": 25,
+         "ref": "line 25",
+         "unit": "paragraph 1"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        3,
+        3
+       ],
+       "adversary": "weak",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 3,
+       "panel_agree": true,
+       "score": 0.87,
+       "band": "medium",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.87,
+      "band": "medium",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 3,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_short_4B",
+     "topic": "U4.3",
+     "skill": "4.B",
+     "cognitive": "explain",
+     "stem": "The sentence \"She was sure it was new\" (line 35), following the question about the conductor's coat, chiefly has the effect of",
+     "options": [
+      {
+       "text": "voicing Miss Brill's eager guesses, so her confidence seems endearing yet unverified",
+       "why": "The narration takes on her voice, a question followed by her own certainty, so the reader shares her eagerness and also notices that nothing confirms it.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "exposing Miss Brill as a cruel gossip who mocks all the people she observes in the park",
+       "why": "Her response to the band is delighted and approving, not cruel.",
+       "value": null,
+       "label": "wrong_tone"
+      },
+      {
+       "text": "shifting abruptly to the conductor's point of view to reveal his pride in his appearance",
+       "why": "The conductor is seen only from outside, through her eyes.",
+       "value": null,
+       "label": "wrong_scope"
+      },
+      {
+       "text": "presenting an objective report that the conductor has in fact bought a new coat",
+       "why": "The certainty belongs to Miss Brill ('She was sure'), not to an objective narrator.",
+       "value": null,
+       "label": "misread_speaker"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"voicing Miss Brill's eager guesses, so her confidence seems endearing yet unverified\". The narration takes on her voice, a question followed by her own certainty, so the reader shares her eagerness and also notices that nothing confirms it.\n\"exposing Miss Brill as a cruel gossip who mocks all the people she observes in the park\" is incorrect: Her response to the band is delighted and approving, not cruel.\n\"shifting abruptly to the conductor's point of view to reveal his pride in his appearance\" is incorrect: The conductor is seen only from outside, through her eyes.\n\"presenting an objective report that the conductor has in fact bought a new coat\" is incorrect: The certainty belongs to Miss Brill ('She was sure'), not to an objective narrator.",
+     "est_seconds": 70,
+     "evidence_quotes": [
+      "She was sure it was new."
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 35,
+       "to": 35
+      }
+     },
+     "devices_used": [
+      "free_indirect_discourse"
+     ],
+     "real_text": {
+      "registry_id": "mansfield-miss-brill",
+      "skill": "4.B",
+      "key_evidence": {
+       "quote": "She was sure it was new.",
+       "from": 35,
+       "to": 35,
+       "ref": "line 35",
+       "unit": "paragraph 2"
+      },
+      "distractor_evidence": [
+       {
+        "index": 1,
+        "label": "wrong_tone",
+        "why": "Her response to the band is delighted and approving, not cruel.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "she lifted her head and smiled",
+         "from": 40,
+         "to": 41,
+         "ref": "lines 40-41",
+         "unit": "paragraph 2"
+        }
+       },
+       {
+        "index": 2,
+        "label": "wrong_scope",
+        "why": "The conductor is seen only from outside, through her eyes.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "flapped his arms like a rooster about to crow",
+         "from": 36,
+         "to": 36,
+         "ref": "line 36",
+         "unit": "paragraph 2"
+        }
+       },
+       {
+        "index": 3,
+        "label": "misread_speaker",
+        "why": "The certainty belongs to Miss Brill ('She was sure'), not to an objective narrator.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "She was sure it was new.",
+         "from": 35,
+         "to": 35,
+         "ref": "line 35",
+         "unit": "paragraph 2"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        0,
+        0
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 0,
+       "panel_agree": true,
+       "score": 0.959,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.959,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 0,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_short_6A",
+     "topic": "U7.3",
+     "skill": "6.A",
+     "cognitive": "identify",
+     "stem": "The simile in lines 31-32, comparing the off-season band to someone playing for family, primarily serves to",
+     "options": [
+      {
+       "text": "suggest that the band plays its best only when strangers are watching",
+       "why": "The band 'didn't care how it played' without strangers present, so its effort depends on an audience.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "suggest that Miss Brill prefers the quiet music played out of season",
+       "why": "She welcomes the band sounding 'louder and gayer' now that the Season has begun.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "suggest that the band resents performing for the crowds of the Season",
+       "why": "The simile implies the band plays better for crowds, not that it resents them.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "suggest that the bandsmen are related to one another by blood or marriage",
+       "why": "The family is part of the comparison. Nothing says the bandsmen are related.",
+       "value": null,
+       "label": "literal_for_figurative"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"suggest that the band plays its best only when strangers are watching\". The band 'didn't care how it played' without strangers present, so its effort depends on an audience.\n\"suggest that Miss Brill prefers the quiet music played out of season\" is incorrect: She welcomes the band sounding 'louder and gayer' now that the Season has begun.\n\"suggest that the band resents performing for the crowds of the Season\" is incorrect: The simile implies the band plays better for crowds, not that it resents them.\n\"suggest that the bandsmen are related to one another by blood or marriage\" is incorrect: The family is part of the comparison. Nothing says the bandsmen are related.",
+     "est_seconds": 55,
+     "evidence_quotes": [
+      "any strangers present",
+      "care how it played if there"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 31,
+       "to": 32
+      }
+     },
+     "devices_used": [
+      "simile"
+     ],
+     "real_text": {
+      "registry_id": "mansfield-miss-brill",
+      "skill": "6.A",
+      "key_evidence": {
+       "quote": "any strangers present",
+       "from": 33,
+       "to": 34,
+       "ref": "lines 33-34",
+       "unit": "paragraph 2"
+      },
+      "distractor_evidence": [
+       {
+        "index": 1,
+        "label": "reversal",
+        "why": "She welcomes the band sounding 'louder and gayer' now that the Season has begun.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "the band sounded louder and gayer",
+         "from": 28,
+         "to": 29,
+         "ref": "lines 28-29",
+         "unit": "paragraph 2"
+        }
+       },
+       {
+        "index": 2,
+        "label": "unsupported",
+        "why": "The simile implies the band plays better for crowds, not that it resents them.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "That was because the Season had begun.",
+         "from": 29,
+         "to": 29,
+         "ref": "line 29",
+         "unit": "paragraph 2"
+        }
+       },
+       {
+        "index": 3,
+        "label": "literal_for_figurative",
+        "why": "The family is part of the comparison. Nothing says the bandsmen are related.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "the bandsmen sitting in the green rotunda",
+         "from": 36,
+         "to": 37,
+         "ref": "lines 36-37",
+         "unit": "paragraph 2"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        0,
+        0
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 0,
+       "panel_agree": true,
+       "score": 0.959,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.959,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 0,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_short_4C",
+     "topic": "U4.3",
+     "skill": "4.C",
+     "cognitive": "identify",
+     "stem": "In line 48, the phrase \"she thought\" and the words \"really quite expert\" convey a tone best described as",
+     "options": [
+      {
+       "text": "bitterly regretful, voicing her wish to stop eavesdropping",
+       "why": "She looks forward to the conversation and has no wish to stop listening.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "wholly admiring, endorsing her skill as a gifted social observer",
+       "why": "This catches her pride but ignores the qualifying 'she thought', which keeps the narration at a distance.",
+       "value": null,
+       "label": "partially_right"
+      },
+      {
+       "text": "gently ironic, conveying her pride while hinting at its pathos",
+       "why": "'She thought' quietly qualifies her pride, and a skill of living in others' lives 'just for a minute' suggests how lonely she is.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "harshly mocking, exposing her as a meddling and nosy busybody",
+       "why": "The narration is mild and sympathetic. She never interferes, she only listens.",
+       "value": null,
+       "label": "wrong_tone"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"gently ironic, conveying her pride while hinting at its pathos\". 'She thought' quietly qualifies her pride, and a skill of living in others' lives 'just for a minute' suggests how lonely she is.\n\"bitterly regretful, voicing her wish to stop eavesdropping\" is incorrect: She looks forward to the conversation and has no wish to stop listening.\n\"wholly admiring, endorsing her skill as a gifted social observer\" is incorrect: This catches her pride but ignores the qualifying 'she thought', which keeps the narration at a distance.\n\"harshly mocking, exposing her as a meddling and nosy busybody\" is incorrect: The narration is mild and sympathetic. She never interferes, she only listens.",
+     "est_seconds": 55,
+     "evidence_quotes": [
+      "really quite expert, she thought",
+      "just for a minute while they talked"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 48,
+       "to": 48
+      }
+     },
+     "devices_used": [
+      "diction",
+      "irony"
+     ],
+     "real_text": {
+      "registry_id": "mansfield-miss-brill",
+      "skill": "4.C",
+      "key_evidence": {
+       "quote": "just for a minute while they talked",
+       "from": 50,
+       "to": 50,
+       "ref": "line 50",
+       "unit": "paragraph 3"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "reversal",
+        "why": "She looks forward to the conversation and has no wish to stop listening.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "always looked forward to the conversation",
+         "from": 47,
+         "to": 47,
+         "ref": "line 47",
+         "unit": "paragraph 3"
+        }
+       },
+       {
+        "index": 1,
+        "label": "partially_right",
+        "why": "This catches her pride but ignores the qualifying 'she thought', which keeps the narration at a distance.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "really quite expert, she thought",
+         "from": 48,
+         "to": 48,
+         "ref": "line 48",
+         "unit": "paragraph 3"
+        }
+       },
+       {
+        "index": 3,
+        "label": "wrong_tone",
+        "why": "The narration is mild and sympathetic. She never interferes, she only listens.",
+        "evidence_kind": "absence",
+        "evidence": null
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        2,
+        2
+       ],
+       "adversary": "weak",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 2,
+       "panel_agree": true,
+       "score": 0.87,
+       "band": "medium",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.87,
+      "band": "medium",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 2,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_short_1E",
+     "topic": "U7.1",
+     "skill": "1.E",
+     "cognitive": "explain",
+     "stem": "Miss Brill's reaction to the Englishwoman (line 63) reveals a complexity in her character because it",
+     "options": [
+      {
+       "text": "shows her sympathy for the wife's anxiety about needing spectacles",
+       "why": "She is exasperated with the wife, who refuses every suggestion, not sympathetic to her.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "shows intense feeling beneath her quiet, unobtrusive listening",
+       "why": "She prides herself on listening unnoticed, yet she 'wanted to shake' a stranger, which shows strong hidden involvement.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "shows that she dislikes the English and avoids them in the park",
+       "why": "Her irritation is with one woman, and nothing suggests she avoids English people.",
+       "value": null,
+       "label": "too_broad"
+      },
+      {
+       "text": "shows that she actually confronted the couple about the spectacles",
+       "why": "She only 'had wanted' to shake the woman. She took no action.",
+       "value": null,
+       "label": "literal_for_figurative"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"shows intense feeling beneath her quiet, unobtrusive listening\". She prides herself on listening unnoticed, yet she 'wanted to shake' a stranger, which shows strong hidden involvement.\n\"shows her sympathy for the wife's anxiety about needing spectacles\" is incorrect: She is exasperated with the wife, who refuses every suggestion, not sympathetic to her.\n\"shows that she dislikes the English and avoids them in the park\" is incorrect: Her irritation is with one woman, and nothing suggests she avoids English people.\n\"shows that she actually confronted the couple about the spectacles\" is incorrect: She only 'had wanted' to shake the woman. She took no action.",
+     "est_seconds": 65,
+     "evidence_quotes": [
+      "Miss Brill had wanted to shake her.",
+      "listening as though"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 63,
+       "to": 63
+      }
+     },
+     "devices_used": [
+      "flashback",
+      "free_indirect_discourse"
+     ],
+     "real_text": {
+      "registry_id": "mansfield-miss-brill",
+      "skill": "1.E",
+      "key_evidence": {
+       "quote": "Miss Brill had wanted to shake her.",
+       "from": 63,
+       "to": 63,
+       "ref": "line 63",
+       "unit": "paragraph 4"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "reversal",
+        "why": "She is exasperated with the wife, who refuses every suggestion, not sympathetic to her.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "No, nothing would please her.",
+         "from": 61,
+         "to": 62,
+         "ref": "lines 61-62",
+         "unit": "paragraph 4"
+        }
+       },
+       {
+        "index": 2,
+        "label": "too_broad",
+        "why": "Her irritation is with one woman, and nothing suggests she avoids English people.",
+        "evidence_kind": "absence",
+        "evidence": null
+       },
+       {
+        "index": 3,
+        "label": "literal_for_figurative",
+        "why": "She only 'had wanted' to shake the woman. She took no action.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "had wanted to shake",
+         "from": 63,
+         "to": 63,
+         "ref": "line 63",
+         "unit": "paragraph 4"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        1,
+        1
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 1,
+       "panel_agree": true,
+       "score": 0.959,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.959,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 1,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "likely"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_short_7B",
+     "topic": "U4.4",
+     "skill": "7.B",
+     "cognitive": "evaluate",
+     "stem": "Which of the following statements is the most defensible thesis about the passage as a whole?",
+     "options": [
+      {
+       "text": "Through vivid images of the park, Mansfield portrays Miss Brill as a contented woman wholly at peace with her solitary life.",
+       "why": "The imagery is vivid, but her disappointment and her suppressed sadness undercut the idea that she is wholly content.",
+       "value": null,
+       "label": "partially_right"
+      },
+      {
+       "text": "Through narration steeped in Miss Brill's own fancies, Mansfield lets readers glimpse a loneliness she cannot name.",
+       "why": "Free indirect narration records her fondness for the fur, her eavesdropping, and her self-corrections, which reveal a solitude she explains away.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "By mocking the elderly bench-sitters, Mansfield shows contempt for the old and for those who live entirely alone.",
+       "why": "The judgment of the old people is Miss Brill's, not the author's. The irony actually falls on her.",
+       "value": null,
+       "label": "misread_speaker"
+      },
+      {
+       "text": "Mansfield uses the crowded public park to argue that modern city life inevitably destroys the bonds of family.",
+       "why": "The passage makes no such sweeping argument about modern life or the family.",
+       "value": null,
+       "label": "too_broad"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"Through narration steeped in Miss Brill's own fancies, Mansfield lets readers glimpse a loneliness she cannot name.\". Free indirect narration records her fondness for the fur, her eavesdropping, and her self-corrections, which reveal a solitude she explains away.\n\"Through vivid images of the park, Mansfield portrays Miss Brill as a contented woman wholly at peace with her solitary life.\" is incorrect: The imagery is vivid, but her disappointment and her suppressed sadness undercut the idea that she is wholly content.\n\"By mocking the elderly bench-sitters, Mansfield shows contempt for the old and for those who live entirely alone.\" is incorrect: The judgment of the old people is Miss Brill's, not the author's. The irony actually falls on her.\n\"Mansfield uses the crowded public park to argue that modern city life inevitably destroys the bonds of family.\" is incorrect: The passage makes no such sweeping argument about modern life or the family.",
+     "est_seconds": 90,
+     "evidence_quotes": [
+      "but that came from walking, she supposed",
+      "They were odd, silent, nearly all old"
+     ],
+     "ref_lines": {},
+     "devices_used": [
+      "free_indirect_discourse",
+      "irony",
+      "personification"
+     ],
+     "real_text": {
+      "registry_id": "mansfield-miss-brill",
+      "skill": "7.B",
+      "key_evidence": {
+       "quote": "but that came from walking, she supposed",
+       "from": 23,
+       "to": 24,
+       "ref": "lines 23-24",
+       "unit": "paragraph 1"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "partially_right",
+        "why": "The imagery is vivid, but her disappointment and her suppressed sadness undercut the idea that she is wholly content.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "This was disappointing, for Miss Brill",
+         "from": 46,
+         "to": 47,
+         "ref": "lines 46-47",
+         "unit": "paragraph 3"
+        }
+       },
+       {
+        "index": 2,
+        "label": "misread_speaker",
+        "why": "The judgment of the old people is Miss Brill's, not the author's. The irony actually falls on her.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Miss Brill had often noticed",
+         "from": 79,
+         "to": 79,
+         "ref": "line 79",
+         "unit": "paragraph 5"
+        }
+       },
+       {
+        "index": 3,
+        "label": "too_broad",
+        "why": "The passage makes no such sweeping argument about modern life or the family.",
+        "evidence_kind": "absence",
+        "evidence": null
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        1,
+        1
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 1,
+       "panel_agree": true,
+       "score": 1,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 1,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 1,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ]
+     }
+    }
+   ],
+   "excluded_items": [
+    {
+     "index": 8,
+     "skill": "5.B",
+     "stem": "In context, the word \"paraded\" ([[r1]]) primarily suggests that Miss Brill",
+     "reasons": []
+    },
+    {
+     "index": 9,
+     "skill": "3.D",
+     "stem": "The contrast between the children who \"ran among them, swooping and laughing\" and the bench-sitters described in [[r1]] primarily serves to",
+     "reasons": []
+    },
+    {
+     "index": 10,
+     "skill": "3.C",
+     "stem": "Which of the following best describes the function of the passage's final sentence ([[r1]])?",
+     "reasons": []
+    }
+   ],
+   "assignable_size": true,
+   "set_note": ""
+  }
+ }
+]
