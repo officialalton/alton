@@ -21,7 +21,7 @@ for (const [sid, items] of sets) {
   // FRQ 번호 순(규칙 있는 과목만)
   const c = frqOrderComplies(subj, frqTypes); if (c !== null && frqTypes.length) rec.frqOfficialOrderOk = c;
   // USH/WH: SAQ1→2→3, DBQ(frq1)→LEQ(frq2)
-  if (subj === "ap_us_history" || subj === "ap_world_history") rec.historyFrqOrderOk = by("ap_saq").map((i) => i.tpl).join() === "saq1,saq2,saq3" && by("ap_frq").map((i) => i.tpl).join() === "dbq,leq";
+  if (subj === "ap_us_history" || subj === "ap_world_history" || subj === "ap_european_history") rec.historyFrqOrderOk = by("ap_saq").map((i) => i.tpl).join() === "saq1,saq2,saq3" && by("ap_frq").map((i) => i.tpl).join() === "dbq,leq";
   // Lang: 읽기 묶음 → 쓰기 묶음(CED Sample Exam: 첫 묶음 읽기, 두 번째 묶음 쓰기)
   if (subj === "ap_english_language") { const kinds = by("ap_mc").map((i) => elangSectionOf(i.skill_primary)); const lastR = kinds.lastIndexOf("reading"), firstW = kinds.indexOf("writing"); rec.langReadingBeforeWritingOk = firstW < 0 || lastR < firstW; }
   // 참고 지표(공식 규칙 아님): MC 단원 오름차순 비율 = 인접 쌍 중 단원이 줄어들지 않는 비율

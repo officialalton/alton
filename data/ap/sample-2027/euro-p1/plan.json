@@ -1,0 +1,152 @@
+{
+ "specs": [
+  {
+   "id": "e101",
+   "exam": "EU1",
+   "unit": 1,
+   "stim": "primary_text",
+   "theme": "Machiavelli on whether a ruler should be loved or feared",
+   "sources": [
+    {
+     "id": "eu-txt-prince-1532",
+     "context": "Niccolo Machiavelli was a Florentine writer and former government official; he wrote this treatise on rulers in 1513, and it was first printed in 1532."
+    }
+   ],
+   "skills": [
+    "2.B",
+    "3.A",
+    "5.B"
+   ],
+   "nItems": 3,
+   "seed": 1101
+  },
+  {
+   "id": "e102",
+   "exam": "EU1",
+   "unit": 1,
+   "stim": "image",
+   "theme": "A printed world map of 1507 that shows Ptolemy, Vespucci and the lands across the Atlantic",
+   "sources": [
+    {
+     "id": "eu-img-waldseemuller-1507",
+     "context": "This world map was printed in 1507 in Saint-Die, in Lorraine, by the mapmaker Martin Waldseemuller; the only known surviving copy is in the Library of Congress."
+    }
+   ],
+   "skills": [
+    "2.A",
+    "4.B",
+    "1.A"
+   ],
+   "nItems": 3,
+   "seed": 1102
+  },
+  {
+   "id": "e106",
+   "exam": "EU1",
+   "unit": 3,
+   "stim": "paired_text",
+   "theme": "Hobbes and Locke on the state of nature",
+   "sources": [
+    {
+     "id": "eu-txt-hobbes-1651",
+     "context": "Thomas Hobbes was an English philosopher; he published this book in 1651, a few years after the English Civil War."
+    },
+    {
+     "id": "eu-txt-locke-1690",
+     "context": "John Locke was an English philosopher; he published this book in 1689-1690, soon after the Glorious Revolution."
+    }
+   ],
+   "skills": [
+    "3.C",
+    "3.A",
+    "5.A"
+   ],
+   "nItems": 3,
+   "seed": 1106
+  },
+  {
+   "id": "e111",
+   "exam": "EU1",
+   "unit": 6,
+   "stim": "quantitative",
+   "theme": "Pig iron production in the United States, Britain and Germany, 1865-1907",
+   "sources": [
+    {
+     "id": "eu-tab-pigiron-1907",
+     "context": "The Encyclopaedia Britannica published this table in 1911 in its article on iron and steel; the figures are thousands of long tons of pig iron."
+    }
+   ],
+   "skills": [
+    "1.A",
+    "3.B",
+    "4.B"
+   ],
+   "nItems": 3,
+   "seed": 1111
+  }
+ ],
+ "summary": {
+  "sets": 36,
+  "items": 110,
+  "byExam": {
+   "EU1": {
+    "sets": 18,
+    "items": 55,
+    "units": {
+     "1": 6,
+     "2": 6,
+     "3": 6,
+     "4": 6,
+     "5": 6,
+     "6": 6,
+     "7": 6,
+     "8": 6,
+     "9": 7
+    },
+    "stim": {
+     "primary_text": 8,
+     "image": 2,
+     "secondary_text": 5,
+     "paired_text": 2,
+     "quantitative": 1
+    },
+    "skillCats": {
+     "1": 7,
+     "2": 8,
+     "3": 18,
+     "4": 11,
+     "5": 11
+    }
+   },
+   "EU2": {
+    "sets": 18,
+    "items": 55,
+    "units": {
+     "1": 6,
+     "2": 6,
+     "3": 6,
+     "4": 6,
+     "5": 6,
+     "6": 6,
+     "7": 6,
+     "8": 6,
+     "9": 7
+    },
+    "stim": {
+     "primary_text": 7,
+     "secondary_text": 6,
+     "paired_text": 2,
+     "quantitative": 1,
+     "image": 2
+    },
+    "skillCats": {
+     "1": 7,
+     "2": 8,
+     "3": 16,
+     "4": 12,
+     "5": 12
+    }
+   }
+  }
+ }
+}

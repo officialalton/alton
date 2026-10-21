@@ -1,0 +1,1124 @@
+[
+ {
+  "id": "eu2_saq1",
+  "spec": {
+   "id": "eu2_saq1",
+   "exam": "EU2",
+   "template": "saq1",
+   "era": 3,
+   "units": [
+    6
+   ],
+   "focus": "Russia's reforms after the Crimean War and their consequences for the peasantry and the state",
+   "sources": [
+    {
+     "id": "eu-txt-cs-soviet-emancipation",
+     "context": "This reference book was written for the U.S. government in the late 1980s; the passage describes Russia in 1861."
+    }
+   ],
+   "seed": 2201
+  },
+  "payload": {
+   "schema_version": "whap-frq-1",
+   "task_type": "saq",
+   "template": "saq1",
+   "era": 3,
+   "units": [
+    6
+   ],
+   "title": "The Emancipation of the Russian Serfs, 1861, and Its Consequences",
+   "prompt": {
+    "scenario": "In the period c. 1853 to c. 1914, the Russian Empire's rulers tried to modernize the state after the defeat in the Crimean War. They began with the emancipation of the serfs in 1861, and the results shaped relations between the peasantry, the landowning nobility and the tsarist government for the next fifty years.",
+    "task": "Using the excerpt, answer (a), (b), and (c).",
+    "requirements": [
+     "Each part requires a response of one to three sentences.",
+     "Part A must be based on the excerpt.",
+     "Parts B and C must use specific historical evidence from the years named in the part, not only the examples in the excerpt."
+    ],
+    "parts": [
+     {
+      "label": "A",
+      "prompt": "Briefly describe ONE claim the excerpt makes about how the emancipation of the serfs was carried out or what it achieved.",
+      "points": 1
+     },
+     {
+      "label": "B",
+      "prompt": "Briefly explain ONE specific historical development or circumstance from the period 1853 to 1861 that helps explain why the Russian government decided to emancipate the serfs. Do not use a development that the excerpt names.",
+      "points": 1
+     },
+     {
+      "label": "C",
+      "prompt": "Briefly explain ONE specific way the Russian state responded to the problems of the peasantry or to opposition to the regime in the period 1861 to 1914, other than the emancipation itself.",
+      "points": 1
+     }
+    ]
+   },
+   "sources": [
+    {
+     "id": "A",
+     "kind": "secondary_text",
+     "title": "Soviet Union: A Country Study (excerpt on the emancipation of the serfs in 1861)",
+     "attribution": "Raymond E. Zickel, ed., Federal Research Division, Library of Congress, 1991 (research completed 1989). Library of Congress, Federal Research Division (Country Studies; full text via Internet Archive OCR). Reuse: public domain (U.S. government work, 17 U.S.C. 105; the Library of Congress states all other text and graphics are in the public domain). excerpted (2 segments joined by [...]); whitespace normalized; OCR line-break hyphenation rejoined; running page headers and cross-reference notes removed; no wording changed.",
+     "context": "This reference book was written for the U.S. government in the late 1980s; the passage describes Russia in 1861.",
+     "real_data": true,
+     "source_registry_id": "eu-txt-cs-soviet-emancipation",
+     "source_sha256": "b056e57f03df12449eb65f929f546c4eb9e2dfa3f7070590ed59348dfaf1b23f",
+     "body": "In 1861 Alexander II proclaimed the emancipation of about 20 million privately held serfs. Local commissions, which were dominated by landlords, effected emancipation by giving land and limited freedom to the serfs. The former serfs usually remained in the village commune, or mir, but were required to make redemption payments, which were stretched out over a period of almost fifty years, to the government. [...] Neither of the government’s visions was realistic, and both the former serfs and the former owners of serfs were dissatisfied with the outcome of emancipation.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry eu-txt-cs-soviet-emancipation"
+     }
+    }
+   ],
+   "rubric": {
+    "rubric_id": "whap-v1",
+    "total_points": 3,
+    "rows": [
+     {
+      "row_id": "a",
+      "name": "Part A",
+      "max": 1,
+      "descriptors": {
+       "0": "The response does not describe a claim the excerpt actually makes, misreads the excerpt, or only restates the date and number of serfs freed without describing how emancipation worked or what it achieved.",
+       "1": "The response accurately describes one claim from the excerpt about how emancipation was implemented or how it turned out, such as landlord-dominated commissions, limited freedom, the mir, long-term redemption payments, or dissatisfaction on both sides."
+      },
+      "task_specific": "The response accurately describes a claim the excerpt makes about how emancipation was carried out or what it achieved. Examples: landlord-dominated local commissions carried it out; the serfs received land but only limited freedom; former serfs usually stayed in the village commune (mir); they had to make redemption payments to the government over almost fifty years; both former serfs and former owners were dissatisfied."
+     },
+     {
+      "row_id": "b",
+      "name": "Part B",
+      "max": 1,
+      "descriptors": {
+       "0": "The response names no relevant development, gives one from outside 1853 to 1861 without connecting it to the decision, only repeats the excerpt, or offers no explanation of how the development led to emancipation.",
+       "1": "The response identifies a specific, accurate development from 1853 to 1861 and explains how it pushed the government toward emancipation."
+      },
+      "task_specific": "The response explains a specific development from 1853 to 1861 that helps account for the government's decision to emancipate the serfs. The development must not be one the excerpt names. Acceptable examples include defeat in the Crimean War (1853 to 1856) exposing military and economic backwardness; repeated peasant disturbances and the fear of revolt from below; the economic inefficiency of serf labor compared with the industrializing West; and Alexander II's belief that reform from above was better than upheaval from below."
+     },
+     {
+      "row_id": "c",
+      "name": "Part C",
+      "max": 1,
+      "descriptors": {
+       "0": "The response names no specific state response, gives one outside 1861 to 1914, only restates the emancipation, or does not explain how the measure related to the peasantry or to opposition.",
+       "1": "The response accurately identifies a specific government measure or policy from 1861 to 1914 and explains how it addressed peasant problems or opposition to the regime."
+      },
+      "task_specific": "The response explains a specific state response, from 1861 to 1914, to peasant problems or to opposition, other than the 1861 emancipation. Acceptable examples include the zemstvo reform of 1864; the judicial reform of 1864; the military reforms that set up universal conscription in 1874; the repression that followed the assassination of Alexander II in 1881; the land captains created under Alexander III; the Peasant Land Bank; the October Manifesto and the Duma in 1905; the ending of redemption payments after the 1905 Revolution; and Stolypin's agrarian reforms, which let peasants leave the commune."
+     }
+    ],
+    "scoring_notes": [
+     "Each part is scored on its own, and a response can earn 0 to 3 points in total.",
+     "In Part A the excerpt says that neither of the government's visions was realistic but does not describe those visions in the quoted text. Credit a response that reports this claim of unrealistic expectations. Do not require students to say what the visions were, and do not reward invented details about them.",
+     "In Part B a response that only mentions redemption payments, the mir or landlord commissions does not earn the point, because the excerpt already names these.",
+     "In Part C, accept either reforming or repressive measures if the response ties them accurately to the peasantry or to opposition to the regime. Minor date slips do not cost the point when the measure is clearly identified and placed in the right period.",
+     "ALTON reference — not official AP scoring"
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [],
+    "contextualization_ideas": [
+     "The Crimean War defeat as the trigger for the Great Reforms",
+     "Comparison with Western European industrialization and the abolition of serfdom elsewhere in Europe earlier in the century",
+     "The growth of revolutionary movements as a reaction to limited reform"
+    ],
+    "outside_evidence": [
+     "Zemstvo reform of 1864",
+     "Judicial reform of 1864",
+     "Milyutin's military reform of 1874",
+     "Populism and the People's Will",
+     "Assassination of Alexander II in 1881",
+     "Counter-reforms of Alexander III",
+     "Revolution of 1905 and the October Manifesto",
+     "Stolypin's agrarian reforms"
+    ],
+    "reasoning_types": [
+     "Sourcing and claim identification (Part A)",
+     "Causation (Part B)",
+     "Causation and continuity and change over time (Part C)"
+    ],
+    "doc_uses": [
+     {
+      "source_id": "Soviet Union: A Country Study excerpt",
+      "usable_for": "Part A claims about how emancipation was implemented (landlord commissions, limited freedom, the mir, redemption payments) and its mixed outcome",
+      "sourcing": "A secondary reference work written for the U.S. government in the late 1980s, completed in 1989 near the end of the Cold War. It is a summary survey, not an archival study, and it compresses complex outcomes into general claims."
+     }
+    ],
+    "saq_answers": {
+     "a": [
+      "The excerpt claims that the local commissions carrying out emancipation were dominated by landlords, so the nobility shaped the terms of the settlement.",
+      "The excerpt says the serfs received land but only limited freedom, which means emancipation did not make them fully independent citizens.",
+      "The excerpt notes that former serfs usually stayed in the village commune, or mir, and had to make redemption payments to the government over almost fifty years.",
+      "The excerpt argues that the outcome satisfied no one, since both former serfs and former serf owners were unhappy with it."
+     ],
+     "b": [
+      "Russia's defeat in the Crimean War (1853 to 1856) showed that a serf-based army and economy could not match Britain and France. Leaders came to see abolishing serfdom as necessary for military and economic modernization.",
+      "Peasant disturbances in the 1850s made Alexander II fear rebellion. In 1856 he told the nobility it was better to end serfdom from above than to wait for it to be overthrown from below.",
+      "Serf labor was inefficient compared with the free-labor, industrializing economies of Western Europe. Reformers argued that freeing the serfs would create a mobile workforce and encourage economic growth.",
+      "The Treaty of Paris (1856) lowered Russia's standing as a great power, and this humiliation convinced officials around the new tsar that deep internal reform was needed."
+     ],
+     "c": [
+      "In 1864 the state created zemstvos, elected local assemblies that handled schools, roads and public health in the countryside, which gave some local participation to a society without serfdom.",
+      "After Alexander II was assassinated in 1881, Alexander III turned to repression and counter-reform. He strengthened the police and later appointed land captains, nobles who supervised peasant affairs, to tighten control over the villages.",
+      "In response to the Revolution of 1905, which included widespread peasant revolts, the government issued the October Manifesto creating a Duma and ended the redemption payments that the emancipation had imposed.",
+      "Stolypin's agrarian reforms after 1906 allowed peasants to leave the mir and form consolidated private farms. The aim was a class of prosperous, loyal peasants who would support the monarchy."
+     ]
+    },
+    "common_pitfalls": [
+     "In Part B, using redemption payments, the mir or landlord commissions, which the excerpt already names.",
+     "Stating that the excerpt explains what the government's two visions were, when the quoted text does not.",
+     "Claiming that emancipation gave peasants full ownership of land with no obligations, which contradicts the excerpt.",
+     "In Part C, choosing Soviet-era measures from after 1914, such as collectivization, which fall outside the period.",
+     "Confusing the emancipation of private serfs with later measures or giving it the wrong date.",
+     "Naming a reform without explaining how it related to the peasantry or to opposition."
+    ],
+    "facts": [
+     "Alexander II issued the emancipation of the serfs in 1861.",
+     "The Crimean War was fought from 1853 to 1856 and ended with the Treaty of Paris in 1856, a defeat for Russia.",
+     "Alexander II told the Moscow nobility in 1856 that it was better to abolish serfdom from above than to wait for it to abolish itself from below.",
+     "Zemstvos, elected local self-government bodies, were created in 1864. The judicial reform of 1864 introduced jury trials and public courts.",
+     "Universal military service was introduced in 1874 under War Minister Dmitry Milyutin.",
+     "Populists (narodniki) went to the countryside in 1874, and the People's Will organization assassinated Alexander II in 1881.",
+     "Alexander III pursued counter-reform policies, including the land captains, who were introduced in 1889.",
+     "The Revolution of 1905 included widespread peasant unrest. The October Manifesto of 1905 promised a legislative Duma.",
+     "Redemption payments were abolished after the 1905 Revolution and ended in 1907.",
+     "Peter Stolypin, prime minister from 1906 to 1911, carried out agrarian reforms that allowed peasants to leave the commune and consolidate their holdings."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_authored_from_real_sources",
+    "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+   }
+  },
+  "fact": []
+ },
+ {
+  "id": "eu2_saq2",
+  "spec": {
+   "id": "eu2_saq2",
+   "exam": "EU2",
+   "template": "saq2",
+   "era": 1,
+   "units": [
+    1
+   ],
+   "focus": "European exploration and the creation of Atlantic empires in the late fifteenth century (the author is an explorer reporting to his sponsors)",
+   "sources": [
+    {
+     "id": "eu-txt-columbus-1493",
+     "context": "Christopher Columbus was an Italian-born navigator sailing for the Spanish crown; he wrote this letter in 1493 on the voyage home from his first voyage across the Atlantic."
+    }
+   ],
+   "seed": 2202
+  },
+  "payload": {
+   "schema_version": "whap-frq-1",
+   "task_type": "saq",
+   "template": "saq2",
+   "era": 1,
+   "units": [
+    1
+   ],
+   "title": "Columbus Reports on Española, 1493",
+   "prompt": {
+    "scenario": "In the period c. 1450 to c. 1600, European states began sponsoring voyages across the Atlantic, and explorers sent reports back to the rulers who had paid for those voyages.",
+    "task": "Using the excerpt, answer (a), (b), and (c).",
+    "requirements": [
+     "Each part requires a brief answer of one to three sentences.",
+     "Part A must be based on what the excerpt says.",
+     "Parts B and C require specific historical evidence from the years named in each part."
+    ],
+    "parts": [
+     {
+      "label": "A",
+      "prompt": "Briefly describe ONE claim Columbus makes in the excerpt about the value of Española to the Spanish monarchs.",
+      "points": 1
+     },
+     {
+      "label": "B",
+      "prompt": "Briefly explain ONE historical development in Europe or the Mediterranean in the period 1450 to 1500 that helps explain why the Spanish crown sponsored Columbus's voyage. Do not use gold or trade with the great Khan, which the excerpt already mentions.",
+      "points": 1
+     },
+     {
+      "label": "C",
+      "prompt": "Briefly explain ONE economic effect that Spanish colonization of the Americas had on Europe in the period 1500 to 1600.",
+      "points": 1
+     }
+    ]
+   },
+   "sources": [
+    {
+     "id": "A",
+     "kind": "primary_text",
+     "title": "Letter of Columbus on the first voyage (excerpt on Espanola)",
+     "attribution": "Christopher Columbus (letter of 1493; English translation by R. H. Major, 1847), 1493 (text); 1847 (Major translation). Project Gutenberg eBook #77820. Reuse: public domain in the United States (published before 1929). excerpted (2 segments joined by [...]); whitespace normalized; no wording changed; italic markup (underscores) removed.",
+     "context": "Christopher Columbus was an Italian-born navigator sailing for the Spanish crown; he wrote this letter in 1493 on the voyage home from his first voyage across the Atlantic.",
+     "real_data": true,
+     "source_registry_id": "eu-txt-columbus-1493",
+     "source_sha256": "e138fbb33d7fe24a2c904415cd70f77906a88e154052a68bb2ee62a3018dd3ac",
+     "body": "Española is a wonder. Its mountains and plains, and meadows, and fields, are so beautiful and rich for planting and sowing, and rearing cattle of all kinds, and for building towns and villages. The harbours on the coast, and the number and size and wholesomeness of the rivers, most of them bearing gold, surpass anything that would be believed by one who had not seen them. [...] Although I have taken possession of all these islands in the name of their Highnesses, and they are all more abundant in wealth than I am able to express; and although I hold them all for their Highnesses, so that they can dispose of them quite as absolutely as they can of the kingdoms of Castile, yet there was one large town in Española of which especially I took possession, situated in a locality well adapted for the working of the gold mines, and for all kinds of commerce, either with the main land on this side, or with that beyond which is the land of the great Khan, with which there will be vast commerce and great profit.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry eu-txt-columbus-1493"
+     }
+    }
+   ],
+   "rubric": {
+    "rubric_id": "whap-v1",
+    "total_points": 3,
+    "rows": [
+     {
+      "row_id": "a",
+      "name": "Part A",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no claim from the excerpt, only restates the attribution, or describes something the excerpt does not say.",
+       "1": "The response accurately describes one claim the excerpt makes about the value of Española to the Spanish monarchs."
+      },
+      "task_specific": "Describes one claim from the excerpt about the worth of Española to Ferdinand and Isabella, for example its farmland, harbors, gold-bearing rivers, the crown's full possession of the islands, or its expected commercial value."
+     },
+     {
+      "row_id": "b",
+      "name": "Part B",
+      "max": 1,
+      "descriptors": {
+       "0": "The response names no development, uses only the excerpt's own examples, falls outside 1450 to 1500, or gives no link to the sponsorship.",
+       "1": "The response explains one accurate development from 1450 to 1500 and connects it to the Spanish crown's decision to fund the voyage."
+      },
+      "task_specific": "Explains one specific development from 1450 to 1500 that helps account for Spanish sponsorship of the voyage, such as the conquest of Granada, Portuguese success along the African coast, Ottoman power in the eastern Mediterranean, or the dynastic union of Castile and Aragon. Gold and trade with the great Khan alone do not earn the point."
+     },
+     {
+      "row_id": "c",
+      "name": "Part C",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no effect, an effect only in the Americas with no European link, an inaccurate claim, or one outside 1500 to 1600.",
+       "1": "The response explains one accurate economic effect in Europe of Spanish colonization in the period 1500 to 1600."
+      },
+      "task_specific": "Explains one economic effect in Europe of Spanish colonization between 1500 and 1600, such as the flow of American silver, inflation linked to that silver, the Seville trade monopoly under the Casa de Contratación, or the arrival of new crops in the Columbian Exchange."
+     }
+    ],
+    "scoring_notes": [
+     "Score each part on its own merits; a weak answer in one part does not cancel a strong answer in another.",
+     "In Part A, a paraphrase of the excerpt is enough if it clearly identifies a claim about value, such as wealth, land, gold, harbors, sovereignty, or trade.",
+     "In Part B, a bare label (for example, Reconquista) without a connection to the voyage does not earn the point.",
+     "In Part C, accept a statement that American silver contributed to sixteenth-century inflation. Do not require a claim that it was the only cause.",
+     "Responses do not have to be written in complete paragraphs, but they must explain more than a single name or date.",
+     "ALTON reference — not official AP scoring"
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [],
+    "contextualization_ideas": [
+     "Iberian competition for routes to Asia after Portuguese progress along Africa",
+     "The end of the Reconquista and the growth of royal power under Ferdinand and Isabella",
+     "Renaissance navigational and cartographic knowledge and the spread of printing, which let the letter circulate widely"
+    ],
+    "outside_evidence": [
+     "Treaty of Tordesillas, 1494",
+     "Papal bulls of 1493 issued by Alexander VI",
+     "Encomienda system",
+     "Casa de Contratación, 1503",
+     "Potosí silver mines",
+     "Price revolution",
+     "Columbian Exchange",
+     "Portuguese trading posts along the West African coast"
+    ],
+    "reasoning_types": [
+     "Sourcing and point of view (Part A)",
+     "Causation (Part B)",
+     "Causation: effects (Part C)"
+    ],
+    "doc_uses": [
+     {
+      "source_id": "Columbus letter 1493",
+      "usable_for": "Shows the economic and political motives behind early Spanish Atlantic expansion: land for settlement, gold, royal sovereignty, and hoped-for trade with Asia.",
+      "sourcing": "Written by the explorer to report to the crown that sponsored him; his praise of the island's wealth reflects his interest in proving the voyage a success and winning further backing, so it is not independent evidence of conditions on Española."
+     }
+    ],
+    "saq_answers": {
+     "a": [
+      "Columbus claims that the mountains, plains, and meadows of Española are rich enough for planting, sowing, and raising cattle, so the island could support Spanish farming and settlement.",
+      "Columbus claims that most of the island's rivers carry gold and that the town he took is well placed for working gold mines, which promises wealth to the crown.",
+      "Columbus claims he has taken possession of the islands for Ferdinand and Isabella, who can dispose of them as absolutely as they do the kingdoms of Castile.",
+      "Columbus claims that Española is a good base for commerce with the mainland and with the land of the great Khan, which would bring vast profit."
+     ],
+     "b": [
+      "In January 1492 Ferdinand and Isabella completed the conquest of Granada, the last Muslim kingdom in Iberia, which freed royal attention and resources for new ventures and fed a crusading idea of expanding Christian rule.",
+      "Portugal's voyages down the African coast, especially Bartolomeu Dias rounding the Cape of Good Hope in 1488, gave Portugal a likely sea route to Asia, so Castile had reason to back a rival westward route.",
+      "After the Ottoman capture of Constantinople in 1453, Ottoman power in the eastern Mediterranean made Europeans keen to find routes to Asian spices that did not pass through Muslim-controlled intermediaries.",
+      "The marriage of Ferdinand of Aragon and Isabella of Castile united the two crowns' interests and strengthened royal power, so the monarchy could sponsor expensive overseas ventures in search of revenue."
+     ],
+     "c": [
+      "Large amounts of silver from American mines such as Potosí, found in 1545, flowed into Spain and paid for Habsburg wars and debts, and much of it moved on to bankers elsewhere in Europe.",
+      "The arrival of American bullion contributed to the price revolution, a long rise in prices across sixteenth-century Europe that hurt people living on fixed incomes and wages.",
+      "The crown set up the Casa de Contratación in Seville in 1503 to control trade with the Americas, so Seville became a major commercial center for transatlantic trade.",
+      "The Columbian Exchange brought American crops such as maize and potatoes to Europe, where they gradually spread and eventually became important food crops."
+     ]
+    },
+    "common_pitfalls": [
+     "Treating Columbus's praise of the island as neutral, reliable description and not as a report shaped by his wish to please his sponsors and secure more support.",
+     "In Part B, using gold or the great Khan, which the excerpt already names, without a separate development.",
+     "In Part B, citing events after 1500, such as Cortés in Mexico, which cannot explain a 1492 decision.",
+     "In Part C, describing only effects on Indigenous peoples in the Americas without linking them to Europe's economy.",
+     "Claiming that American silver alone caused all sixteenth-century inflation.",
+     "Saying Columbus reached Asia or knew he had found a new continent."
+    ],
+    "facts": [
+     "Columbus sailed from Palos in August 1492 under the sponsorship of Ferdinand and Isabella and reached the Bahamas in October 1492.",
+     "Columbus wrote the letter in early 1493 on the voyage home, and it was printed in several languages within months.",
+     "Granada fell to Ferdinand and Isabella in January 1492.",
+     "Bartolomeu Dias rounded the Cape of Good Hope in 1488, and Vasco da Gama reached India in 1498.",
+     "Constantinople fell to the Ottomans in 1453.",
+     "The Treaty of Tordesillas of 1494 divided newly claimed lands outside Europe between Castile and Portugal along a line west of the Cape Verde Islands.",
+     "The Casa de Contratación was founded in Seville in 1503.",
+     "Silver was found at Potosí in 1545.",
+     "The Taíno population of Hispaniola fell sharply in the decades after 1492 because of epidemic disease, forced labor, and violence."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_authored_from_real_sources",
+    "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+   }
+  },
+  "fact": [
+   {
+    "where": "saq_answers.b (third answer) and Part B rubric text ('Ottoman power in the eastern Mediterranean')",
+    "kind": "contested",
+    "detail": "The claim that the Ottoman capture of Constantinople in 1453 pushed Europeans to seek new routes because the spice trade was cut off by Muslim intermediaries is a long-standing textbook explanation that many historians now dispute: the spice trade continued to reach Europe through Mamluk Egypt and Venice after 1453, and the Venetian-Levantine trade was flourishing in the later 15th century. Presenting the 'Ottoman blockade' thesis as a settled explanation for Castile's 1492 decision is contested; the answer/rubric should at least frame it as a traditional interpretation or stress desire to bypass Venetian-Mamluk middlemen rather than a 1453 'cutoff'."
+   }
+  ]
+ },
+ {
+  "id": "eu2_saq3",
+  "spec": {
+   "id": "eu2_saq3",
+   "exam": "EU2",
+   "template": "saq3",
+   "era": 4,
+   "units": [
+    9
+   ],
+   "focus": "The division of Berlin and the confrontation between the United States and the Soviet Union in 1961 (the sign in the photograph is not readable; make no claims about its words)",
+   "sources": [
+    {
+     "id": "eu-img-checkpoint-charlie-1961",
+     "context": "A U.S. Army photographer took this picture in June 1961 at a crossing point between the American sector of West Berlin and East Berlin."
+    }
+   ],
+   "seed": 2203
+  },
+  "payload": {
+   "schema_version": "whap-frq-1",
+   "task_type": "saq",
+   "template": "saq3",
+   "era": 4,
+   "units": [
+    9
+   ],
+   "title": "A U.S. Tank at Checkpoint Charlie: Berlin and the Cold War, 1945-1990",
+   "prompt": {
+    "scenario": "In the period c. 1945-1990, Berlin stood divided inside Soviet-controlled eastern Germany, and the city's sector boundaries became one of the places where the military power of the United States and the Soviet bloc met face to face. The photograph below was taken by a U.S. Army photographer in 1961 at a crossing point between the American sector of West Berlin and East Berlin.",
+    "task": "Using the image, answer (a), (b), and (c).",
+    "requirements": [
+     "Each part requires ONE specific, accurate answer.",
+     "Part A must draw on what can actually be seen in the photograph.",
+     "Parts B and C must use specific historical evidence from the years named in each part.",
+     "The sign in the photograph cannot be read; responses do not need to and should not rely on its wording."
+    ],
+    "parts": [
+     {
+      "label": "A",
+      "prompt": "Briefly describe ONE feature of the photograph that shows the division of Berlin as a point of military confrontation during the Cold War.",
+      "points": 1
+     },
+     {
+      "label": "B",
+      "prompt": "Briefly explain ONE specific historical development in the period 1945-1961 that helps explain why United States military forces were present at the boundary between West Berlin and East Berlin, as shown in the photograph.",
+      "points": 1
+     },
+     {
+      "label": "C",
+      "prompt": "Briefly explain ONE specific way the division of Germany or Berlin changed in the period 1969-1990.",
+      "points": 1
+     }
+    ]
+   },
+   "sources": [
+    {
+     "id": "A",
+     "kind": "image",
+     "title": "A U.S. tank at Checkpoint Charlie, Berlin",
+     "attribution": "U.S. Army photo, 1961 (June 15). Wikimedia Commons (file page records the source institution and public-domain tag). Reuse: public domain (U.S. government work, 17 U.S.C. 105). unmodified except Wikimedia Commons' scaled JPEG rendering of the file (upload.wikimedia.org thumbnail, 1280 px wide at most).",
+     "context": "A U.S. Army photographer took this picture in June 1961 at a crossing point between the American sector of West Berlin and East Berlin.",
+     "real_data": true,
+     "source_registry_id": "eu-img-checkpoint-charlie-1961",
+     "source_sha256": "120918d251c0c5a52bd0d740874c61f95b4b5b18e7c3e64d9ba05bdb7681678d",
+     "body": "A black-and-white photograph taken from above of a street in Berlin: a large U.S. Army tank with a white star on its turret and a blade on its front, its crew heads showing from the hatches, is parked across the foreground; beyond it, across a paved sidewalk and a lawn, several uniformed men stand near a lamp, a barrier gate and a large sign on posts, and a Volkswagen van is parked at the upper left.",
+     "image": {
+      "path": "ap-sources/eu-img-checkpoint-charlie-1961/image.jpg",
+      "alt": "A black-and-white photograph taken from above of a street in Berlin: a large U.S. Army tank with a white star on its turret and a blade on its front, its crew heads showing from the hatches, is parked across the foreground; beyond it, across a paved sidewalk and a lawn, several uniformed men stand near a lamp, a barrier gate and a large sign on posts, and a Volkswagen van is parked at the upper left.",
+      "credit": "U.S. tank at Checkpoint Charlie, Berlin, U.S. Army photo, 1961. Wikimedia Commons (public domain)."
+     },
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry eu-img-checkpoint-charlie-1961"
+     }
+    }
+   ],
+   "rubric": {
+    "rubric_id": "whap-v1",
+    "total_points": 3,
+    "rows": [
+     {
+      "row_id": "a",
+      "name": "Part A",
+      "max": 1,
+      "descriptors": {
+       "0": "The response does not describe a feature that can be seen in the photograph, only restates the caption, or makes no link to division or confrontation.",
+       "1": "The response accurately describes one visible feature of the photograph and connects it to the military standoff or division at the Berlin crossing point."
+      },
+      "task_specific": "Describe a visible feature of the photograph linked to Cold War confrontation in divided Berlin, such as the armed U.S. Army tank marked with a white star stationed at the crossing point, the crew ready in the hatches, the tank set at a boundary line in the street facing uniformed men on the far side, or the barrier gate marking a controlled crossing."
+     },
+     {
+      "row_id": "b",
+      "name": "Part B",
+      "max": 1,
+      "descriptors": {
+       "0": "The response names no specific development, gives one outside 1945-1961, gives an inaccurate one, or does not explain how it relates to U.S. forces at the Berlin boundary.",
+       "1": "The response explains one accurate, specific development from 1945-1961 and shows how it helps account for U.S. forces at the boundary between West and East Berlin."
+      },
+      "task_specific": "Explain a specific development from 1945-1961 that accounts for the U.S. military presence at the sector boundary, such as the postwar four-power occupation of Germany and Berlin, the Berlin Blockade and Airlift of 1948-1949, the creation of two German states in 1949, the founding of NATO and the Warsaw Pact, the flight of East Germans to the West through Berlin, Khrushchev's 1958 demand that the Western powers leave Berlin, or the building of the Berlin Wall in August 1961."
+     },
+     {
+      "row_id": "c",
+      "name": "Part C",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no specific change, gives one outside 1969-1990, is inaccurate, or describes only continuity without explaining a change.",
+       "1": "The response explains one accurate, specific change in the division of Germany or Berlin between 1969 and 1990."
+      },
+      "task_specific": "Explain a specific change in the division of Germany or Berlin between 1969 and 1990, such as Willy Brandt's Ostpolitik and the 1972 Basic Treaty, the 1971 Four Power Agreement on Berlin, the 1975 Helsinki Final Act, Gorbachev's reforms and the 1989 revolutions in Eastern Europe, Hungary opening its border with Austria in 1989, the opening of the Berlin Wall on 9 November 1989, or German reunification on 3 October 1990."
+     }
+    ],
+    "scoring_notes": [
+     "Each part is scored on its own; a strong answer in one part does not make up for a missing answer in another.",
+     "For part A, accept a reasonable reading of the uniformed men across the line as East German or Soviet-bloc personnel, but the point must rest on something visible (tank, star marking, crew, boundary line, barrier, men on the far side). Do not credit claims about the words on the sign, which cannot be read.",
+     "For part B, the Berlin Wall's construction in August 1961 is acceptable. Answers about events after 1961 do not earn the point.",
+     "For part C, answers about the Wall still standing without any change do not earn the point. Events from 1969 to 1990 that changed relations between the two German states or the status of Berlin are acceptable.",
+     "A response may be brief, but it must go beyond naming a term to show how it answers the question.",
+     "ALTON reference — not official AP scoring"
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [],
+    "contextualization_ideas": [
+     "Postwar occupation of Germany and the breakdown of wartime Allied cooperation.",
+     "The division of Europe into NATO and Warsaw Pact blocs.",
+     "Economic contrast between West Germany and East Germany and emigration from East to West."
+    ],
+    "outside_evidence": [
+     "Berlin Blockade and Airlift, 1948-1949",
+     "Founding of the FRG and GDR, 1949",
+     "Khrushchev's 1958 Berlin demand",
+     "Construction of the Berlin Wall, August 1961",
+     "Ostpolitik and the 1972 Basic Treaty",
+     "Helsinki Final Act, 1975",
+     "Opening of the Berlin Wall, November 1989; reunification, October 1990"
+    ],
+    "reasoning_types": [
+     "Sourcing and analysis of a visual source (part A)",
+     "Causation (part B)",
+     "Continuity and change over time (part C)"
+    ],
+    "saq_answers": {
+     "a": [
+      "The photograph shows a U.S. Army tank, marked with a white star, parked right at the crossing point, which shows that the line between the American sector and East Berlin was guarded by the United States military.",
+      "The tank sits next to a painted line in the street with its crew in the hatches, while uniformed men stand on the far side, so the two sides of the Cold War faced each other across a few meters of street.",
+      "The barrier gate and the guards show that movement between West and East Berlin was controlled at a checkpoint, and the armored tank shows that this control was backed by military force."
+     ],
+     "b": [
+      "After 1945 the Allies divided Berlin into four sectors, so U.S. troops stayed in the American sector of West Berlin as an occupying power even though the city lay inside the Soviet zone.",
+      "The Berlin Blockade of 1948-1949, broken by the U.S. and British airlift, showed that the United States would defend its position in West Berlin, which explains a continued U.S. military presence there.",
+      "Because large numbers of East Germans fled west through Berlin in the 1950s, East Germany built the Berlin Wall in August 1961, which turned the sector boundary into a fortified border where U.S. and Eastern bloc forces stood face to face.",
+      "Khrushchev's 1958 demand that the Western powers leave Berlin caused a long crisis in which the United States kept troops in the city to show that it would not withdraw."
+     ],
+     "c": [
+      "Under Willy Brandt's Ostpolitik, West Germany signed the Basic Treaty with East Germany in 1972, and the two states accepted each other's existence, which eased tensions even though Germany stayed divided.",
+      "The 1971 Four Power Agreement on Berlin made Western access to West Berlin more secure and made it easier for West Berliners to visit the East.",
+      "In 1989, as Gorbachev refused to use Soviet force to prop up Eastern bloc governments and Hungary opened its border with Austria, East Germans fled and protested, and the Berlin Wall was opened on 9 November 1989.",
+      "Germany was reunified on 3 October 1990, when the territory of the former German Democratic Republic joined the Federal Republic, ending the division shown in the photograph."
+     ]
+    },
+    "common_pitfalls": [
+     "Claiming to know the words on the sign, which cannot be read.",
+     "Asserting without care that the photograph shows a specific dated event, such as the October 1961 tank standoff; the credit line dates the photograph only to 1961.",
+     "For part B, saying the Wall was built in 1949 or mixing up the Berlin Blockade with the building of the Wall.",
+     "For part C, discussing events before 1969, such as Kennedy's 1963 Berlin speech, or describing the Wall's fall without accurate dating.",
+     "Describing the uniformed men as Soviet soldiers as if that were certain; the image does not show this clearly.",
+     "Answering in general terms about the Cold War without a specific development tied to Berlin or Germany."
+    ],
+    "facts": [
+     "After the Second World War, the Allies divided Germany into four occupation zones and Berlin, which lay inside the Soviet zone, into four sectors.",
+     "The Soviet Union blockaded the western sectors of Berlin in 1948-1949, and the United States and Britain supplied the city by air until the blockade was lifted.",
+     "The Federal Republic of Germany and the German Democratic Republic were founded in 1949.",
+     "NATO was founded in 1949 and the Warsaw Pact in 1955.",
+     "Large numbers of East Germans left for the West in the 1950s, and Berlin was a main route of escape.",
+     "In 1958 Khrushchev demanded that the Western powers withdraw from Berlin and that it become a free city.",
+     "East German authorities began building the Berlin Wall on 13 August 1961.",
+     "Checkpoint Charlie was the crossing point between the American sector and East Berlin used by Allied personnel and foreigners.",
+     "Willy Brandt pursued Ostpolitik, and the two German states signed the Basic Treaty in 1972; the Four Power Agreement on Berlin was signed in 1971.",
+     "The Berlin Wall was opened on 9 November 1989, and Germany was reunified on 3 October 1990."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_authored_from_real_sources",
+    "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+   }
+  },
+  "fact": [
+   {
+    "where": "Credit line 'U.S. Army photo, 1961 (June 15)' / Context / common_pitfalls ('the credit line dates the photograph only to 1961')",
+    "kind": "inconsistent_with_documents",
+    "detail": "The 15 June 1961 date cannot be right for this image and is contradicted elsewhere in the material. Checkpoint Charlie as a guarded crossing with barrier gate and tanks existed only after the Wall went up on 13 August 1961; the dozer-bladed M48 at the crossing is characteristic of the October 1961 tank confrontation, and the propaganda sign partly legible in the photo ('Niemand hat die Absicht, eine Mauer zu errichten' - Ulbricht's 15 June 1961 statement) was erected after the Wall was built. 15 June 1961 appears to be the date of the quoted statement, not of the photograph. The pitfalls text also says the credit line dates the photo 'only to 1961', which conflicts with the stated June 15 date, and sample answer B's claim that the Wall 'turned the sector boundary into a fortified border... as shown' only works if the photo postdates August 1961. The pitfall that the sign's words 'cannot be read' is also overstated, since the Ulbricht quotation and the reversed 'NIEMAND' at top left are partly legible."
+   }
+  ]
+ },
+ {
+  "id": "eu2_dbq",
+  "spec": {
+   "id": "eu2_dbq",
+   "exam": "EU2",
+   "template": "dbq",
+   "era": 3,
+   "units": [
+    4,
+    5,
+    6,
+    7,
+    9
+   ],
+   "focus": "Evaluate the extent to which ideas and political movements changed the legal and social position of women in Europe between 1762 and 1914",
+   "sources": [
+    {
+     "id": "eu-txt-emile-1762",
+     "context": "Jean-Jacques Rousseau was a writer born in Geneva who lived mostly in France; he published this book on education in 1762."
+    },
+    {
+     "id": "eu-txt-wollstonecraft-1792",
+     "context": "Mary Wollstonecraft was an English writer; she published this book in 1792."
+    },
+    {
+     "id": "eu-txt-mill-subjection-1869",
+     "context": "John Stuart Mill was an English philosopher and, from 1865 to 1868, a member of Parliament; he published this book in 1869."
+    },
+    {
+     "id": "eu-txt-engels-1884",
+     "context": "Friedrich Engels was a German socialist who lived in England; he published this book in 1884, the year after the death of Karl Marx."
+    },
+    {
+     "id": "eu-img-lowndes-suffrage-1909",
+     "context": "Mary Lowndes designed this poster in 1909 for a British women's suffrage organization."
+    },
+    {
+     "id": "eu-txt-fawcett-1912",
+     "context": "Millicent Garrett Fawcett was president of the National Union of Women's Suffrage Societies, a British group that used peaceful methods; she published this book in 1912."
+    },
+    {
+     "id": "eu-txt-pankhurst-1914",
+     "context": "Emmeline Pankhurst founded the Women's Social and Political Union in Manchester in 1903; she published this autobiography in 1914."
+    }
+   ],
+   "seed": 2204
+  },
+  "payload": {
+   "schema_version": "whap-frq-1",
+   "task_type": "dbq",
+   "template": "dbq",
+   "era": 3,
+   "units": [
+    4,
+    5,
+    6,
+    7,
+    9
+   ],
+   "title": "Ideas, Movements, and the Position of Women in Europe, 1762 to 1914",
+   "prompt": {
+    "scenario": "Between the publication of Rousseau's Emile in 1762 and the outbreak of the First World War in 1914, European writers argued over whether women's place in society came from nature, from law and custom, or from economic systems. In the later nineteenth century, especially in Britain, organized movements began campaigning for women's rights, including the right to vote. The seven documents below include philosophical works, a socialist analysis, a suffrage poster, and accounts written by two leaders of the British suffrage campaign.",
+    "task": "Evaluate the extent to which ideas and political movements changed the legal and social position of women in Europe between 1762 and 1914.",
+    "requirements": [
+     "Respond to the prompt with a historically defensible thesis or claim that establishes a line of reasoning.",
+     "Describe a broader historical context relevant to the prompt.",
+     "Support an argument in response to the prompt using at least four documents.",
+     "Use at least one additional piece of specific historical evidence (beyond that found in the documents) relevant to an argument about the prompt.",
+     "For at least two documents, explain how or why the document's point of view, purpose, historical situation, and/or audience is relevant to an argument.",
+     "Use evidence to corroborate, qualify, or modify an argument that addresses the prompt."
+    ]
+   },
+   "sources": [
+    {
+     "id": "1",
+     "kind": "primary_text",
+     "title": "Emile, Book V (excerpt on women's nature and role)",
+     "attribution": "Jean-Jacques Rousseau (1762; English translation by Barbara Foxley, 1911), 1762 (text); 1911 (Foxley translation). Project Gutenberg eBook #5427. Reuse: public domain in the United States (published before 1929). excerpted (1 segment); whitespace normalized; no wording changed.",
+     "context": "Jean-Jacques Rousseau was a writer born in Geneva who lived mostly in France; he published this book on education in 1762.",
+     "real_data": true,
+     "source_registry_id": "eu-txt-emile-1762",
+     "source_sha256": "abbafcb5d8478cb6b170815594051819ad282d3bf2ff229e52044cce586fe013",
+     "body": "If woman is made to please and to be in subjection to man, she ought to make herself pleasing in his eyes and not provoke him to anger; her strength is in her charms, by their means she should compel him to discover and use his strength. The surest way of arousing this strength is to make it necessary by resistance. Thus pride comes to the help of desire and each exults in the other's victory. This is the origin of attack and defence, of the boldness of one sex and the timidity of the other, and even of the shame and modesty with which nature has armed the weak for the conquest of the strong.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry eu-txt-emile-1762"
+     }
+    },
+    {
+     "id": "2",
+     "kind": "primary_text",
+     "title": "A Vindication of the Rights of Woman (excerpt answering Rousseau)",
+     "attribution": "Mary Wollstonecraft, 1792. Project Gutenberg eBook #3420. Reuse: public domain in the United States (published before 1929). excerpted (1 segment); whitespace normalized; no wording changed.",
+     "context": "Mary Wollstonecraft was an English writer; she published this book in 1792.",
+     "real_data": true,
+     "source_registry_id": "eu-txt-wollstonecraft-1792",
+     "source_sha256": "4bca9d538f242443711389e1fcb94d18765162fcd183a511d33f25b240a8a0f0",
+     "body": "but they would be more respectable members of society, and discharge the important duties of life by the light of their own reason. \"Educate women like men,\" says Rousseau, \"and the more they resemble our sex the less power will they have over us.\" This is the very point I aim at. I do not wish them to have power over men; but over themselves.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry eu-txt-wollstonecraft-1792"
+     }
+    },
+    {
+     "id": "3",
+     "kind": "primary_text",
+     "title": "The Subjection of Women, chapter I (excerpt)",
+     "attribution": "John Stuart Mill, 1869. Project Gutenberg eBook #27083. Reuse: public domain in the United States (published before 1929). excerpted (2 segments joined by [...]); whitespace normalized; no wording changed.",
+     "context": "John Stuart Mill was an English philosopher and, from 1865 to 1868, a member of Parliament; he published this book in 1869.",
+     "real_data": true,
+     "source_registry_id": "eu-txt-mill-subjection-1869",
+     "source_sha256": "0e084ad6ebc092ab91203e851c0fea6db3a1cf7754f5bdac42575c0893581df7",
+     "body": "That the principle which regulates the existing social relations between the two sexes--the legal subordination of one sex to the other--is wrong in itself, and now one of the chief hindrances to human improvement; and that it ought to be replaced by a principle of perfect equality, admitting no power or privilege on the one side, nor disability on the other. [...] So long as an opinion is strongly rooted in the feelings, it gains rather than loses in stability by having a preponderating weight of argument against it.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry eu-txt-mill-subjection-1869"
+     }
+    },
+    {
+     "id": "4",
+     "kind": "primary_text",
+     "title": "The Origin of the Family, Private Property and the State (excerpt on monogamy and class)",
+     "attribution": "Friedrich Engels (1884; English translation by Ernest Untermann, 1902), 1884 (text); 1902 (Untermann translation). Project Gutenberg eBook #33111. Reuse: public domain in the United States (published before 1929). excerpted (1 segment); whitespace normalized; no wording changed.",
+     "context": "Friedrich Engels was a German socialist who lived in England; he published this book in 1884, the year after the death of Karl Marx.",
+     "real_data": true,
+     "source_registry_id": "eu-txt-engels-1884",
+     "source_sha256": "52e1bc59afc34b32e96a5368924cf182a7ccd8f2df482ae3c767791a7e5c9318",
+     "body": "In an old unpublished manuscript written by Marx and myself in 1846, I find the following passage: \"The first division of labor is that of man and wife in breeding children.\" And to-day I may add: The first class antagonism appearing in history coincides with the development of the antagonism of man and wife in monogamy, and the first class oppression with that of the female by the male sex. Monogamy was a great historical progress. But by the side of slavery and private property it marks at the same time that epoch which, reaching down to our days, takes with all progress also a step backwards, relatively speaking, and develops the welfare and advancement of one by the woe and submission of the other.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry eu-txt-engels-1884"
+     }
+    },
+    {
+     "id": "5",
+     "title": "Justice demands the vote (suffrage poster)",
+     "attribution": "Mary Lowndes (designer), Artists' Suffrage League, 1909. Wikimedia Commons (file page records the source institution and public-domain tag). Reuse: public domain (1909 work). unmodified except Wikimedia Commons' scaled JPEG rendering of the file (upload.wikimedia.org thumbnail, 1280 px wide at most).",
+     "context": "Mary Lowndes designed this poster in 1909 for a British women's suffrage organization.",
+     "real_data": true,
+     "source_registry_id": "eu-img-lowndes-suffrage-1909",
+     "source_sha256": "27024a6b0aaa78db49491116114a8bf0402c7e498467c4db99169a3d977aec80",
+     "body": "A color poster with red banners across the top reading 'Justice demands the vote': on the left a young woman in a red tunic holds a banner pole and shields her eyes with one hand, behind her a hooded figure in a long brown cloak holds out a pair of balance scales whose pans hang uneven at the right.",
+     "image": {
+      "path": "ap-sources/eu-img-lowndes-suffrage-1909/image.jpg",
+      "alt": "A color poster with red banners across the top reading 'Justice demands the vote': on the left a young woman in a red tunic holds a banner pole and shields her eyes with one hand, behind her a hooded figure in a long brown cloak holds out a pair of balance scales whose pans hang uneven at the right.",
+      "credit": "Justice demands the vote, Mary Lowndes, 1909. Wikimedia Commons (public domain)."
+     },
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry eu-img-lowndes-suffrage-1909"
+     }
+    },
+    {
+     "id": "6",
+     "kind": "primary_text",
+     "title": "Women's Suffrage: A Short History of a Great Movement, chapter I (excerpt on the founding societies)",
+     "attribution": "Millicent Garrett Fawcett (1912), 1912. Project Gutenberg eBook #48614. Reuse: public domain in the United States (published before 1929). excerpted (2 segments joined by [...]); whitespace normalized; no wording changed.",
+     "context": "Millicent Garrett Fawcett was president of the National Union of Women's Suffrage Societies, a British group that used peaceful methods; she published this book in 1912.",
+     "real_data": true,
+     "source_registry_id": "eu-txt-fawcett-1912",
+     "source_sha256": "169d0f793e7056d802ae4f6a56747d0fc5c7c3c36850b74925f49bfa0ef04bab",
+     "body": "Five important societies came into existence almost simultaneously in London, Manchester, Edinburgh, Bristol, and Birmingham, and as they almost immediately devised a plan for combining individual responsibility with united action, they formed the nucleus of the National Union of Women's Suffrage Societies, which has become the largest organisation of the kind in the United Kingdom, and in October 1911 numbered 305 societies, a number which is constantly and rapidly increasing. [...] It has been remarked that the successful conduct of every great change needs the combination of the spirit of order with the spirit of audacity. It was the good fortune of the women's movement in England to secure both these.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry eu-txt-fawcett-1912"
+     }
+    },
+    {
+     "id": "7",
+     "kind": "primary_text",
+     "title": "My Own Story, chapter on the founding of the Women's Social and Political Union (excerpt)",
+     "attribution": "Emmeline Pankhurst (1914), 1914. Project Gutenberg eBook #34856. Reuse: public domain in the United States (published before 1929). excerpted (2 segments joined by [...]); whitespace normalized; no wording changed.",
+     "context": "Emmeline Pankhurst founded the Women's Social and Political Union in Manchester in 1903; she published this autobiography in 1914.",
+     "real_data": true,
+     "source_registry_id": "eu-txt-pankhurst-1914",
+     "source_sha256": "4e273674365d0e51dbd9c131cb7a65d015955bfa999c94adcd8bebce292ed178",
+     "body": "We resolved to limit our membership exclusively to women, to keep ourselves absolutely free from any party affiliation, and to be satisfied with nothing but action on our question. Deeds, not words, was to be our permanent motto. [...] To such a pass had the women's suffrage cause come in my country that the old leaders, who had done such fine educational work in the past, were now seemingly content with expressions of sympathy and regret on the part of hypocritical politicians.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry eu-txt-pankhurst-1914"
+     }
+    }
+   ],
+   "rubric": {
+    "rubric_id": "whap-v1",
+    "total_points": 7,
+    "rows": [
+     {
+      "row_id": "thesis",
+      "name": "Thesis/claim",
+      "max": 1,
+      "descriptors": {},
+      "task_specific": ""
+     },
+     {
+      "row_id": "context",
+      "name": "Contextualization",
+      "max": 1,
+      "descriptors": {},
+      "task_specific": ""
+     },
+     {
+      "row_id": "docs",
+      "name": "Evidence from the documents",
+      "max": 2,
+      "descriptors": {},
+      "task_specific": ""
+     },
+     {
+      "row_id": "outside",
+      "name": "Evidence beyond the documents",
+      "max": 1,
+      "descriptors": {},
+      "task_specific": ""
+     },
+     {
+      "row_id": "sourcing",
+      "name": "Sourcing (point of view, purpose, situation, audience)",
+      "max": 1,
+      "descriptors": {},
+      "task_specific": ""
+     },
+     {
+      "row_id": "complexity",
+      "name": "Complex understanding",
+      "max": 1,
+      "descriptors": {},
+      "task_specific": ""
+     }
+    ],
+    "scoring_notes": [
+     "ALTON reference — not official AP scoring"
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [
+     "Ideas and movements made a strong and spreading case against women's legal subordination between 1762 and 1914, moving from Wollstonecraft's call for rational education to Mill's demand for perfect equality to a mass suffrage campaign. Even so, they changed women's legal position only partly: by 1914 there were property and education reforms, but in most of Europe, including Britain and France, women still had no national vote.",
+     "The biggest change of the period was in women's social and political activity, not in the law. By 1914 women had built large organizations and used both peaceful and militant tactics, but ideas of natural female difference like Rousseau's stayed strong, as Mill and Engels both recognized.",
+     "Ideas and movements changed women's position unevenly because reformers did not agree on what caused women's subordination. Liberals such as Wollstonecraft and Mill blamed law and education, Engels blamed property and class, and suffragists split over constitutional or militant methods. The splits widened the debate, but they also slowed legal change."
+    ],
+    "contextualization_ideas": [
+     "Enlightenment debates about reason and natural rights, together with the French Revolution, raised the question of whether universal rights included women. The Napoleonic Code of 1804 then wrote wives' legal dependence on their husbands into law in France and other areas Napoleon controlled.",
+     "Industrialization separated home from workplace and spread the middle-class ideal of separate spheres, in which women were tied to domestic life. At the same time, protective laws such as the British Mines Act of 1842 and Factory Act of 1844 limited women's paid labor.",
+     "In Britain the parliamentary franchise was widened for men by the Reform Acts of 1832, 1867, and 1884, all of which left women out. This gave the women's suffrage movement its target, and organized socialism also grew across Europe in the same years."
+    ],
+    "outside_evidence": [
+     "Olympe de Gouges published the Declaration of the Rights of Woman and of the Female Citizen in 1791 and was executed in 1793 during the Terror.",
+     "The French Civil Code (Napoleonic Code) of 1804 required a wife's obedience to her husband and limited married women's control of property.",
+     "The British Married Women's Property Acts of 1870 and 1882 expanded married women's right to own and control property.",
+     "In 1867 John Stuart Mill proposed an amendment to the Second Reform Act that would have replaced the word man with person; it was defeated.",
+     "The Matrimonial Causes Act of 1857 moved divorce in England to a civil court, though the grounds were unequal for wives and husbands.",
+     "Girton College was founded in 1869 as a college for women associated with Cambridge, which shows expanded access to higher education.",
+     "Josephine Butler led a campaign against the Contagious Diseases Acts, which were repealed in 1886.",
+     "Finland, then a Grand Duchy within the Russian Empire, granted women the vote in national elections in 1906, and Norway followed in 1913.",
+     "The British government passed the Prisoners (Temporary Discharge for Ill-Health) Act in 1913, known as the Cat and Mouse Act, in response to hunger-striking suffragettes.",
+     "Emily Wilding Davison, a WSPU militant, died after running onto the course at the 1913 Epsom Derby.",
+     "August Bebel's Woman and Socialism (1879) and Clara Zetkin's work in the socialist women's movement connected women's emancipation to socialism; International Women's Day was proposed at a socialist women's conference in Copenhagen in 1910."
+    ],
+    "reasoning_types": [
+     "Continuity and change over time",
+     "Causation",
+     "Comparison"
+    ],
+    "doc_uses": [
+     {
+      "source_id": "1",
+      "usable_for": "Shows an influential Enlightenment argument that women were naturally made to please men and be subject to them, which could be used to justify their exclusion from public and legal equality.",
+      "sourcing": "The context line says Rousseau wrote this in a book on education published in 1762. That matters because he presents women's subordination as a matter of nature that education should follow, not as something law created, so his view could shape how readers raised and judged girls."
+     },
+     {
+      "source_id": "2",
+      "usable_for": "Shows a direct challenge to Rousseau: women should be educated to use their own reason and have power over themselves, so ideas were already contesting women's subordination in the 1790s.",
+      "sourcing": "The title and text show Wollstonecraft answering Rousseau by name. Writing in 1792, during the debates of the revolutionary era over rights, she aims to use Enlightenment reason against an Enlightenment writer. Her demand is for self-government, not for power over men, which shapes how far her argument goes."
+     },
+     {
+      "source_id": "3",
+      "usable_for": "States that women's legal subordination is wrong and calls for perfect equality, but also admits that opinions rooted in feeling stay stable even when the arguments go against them, which helps explain slow legal change.",
+      "sourcing": "The context line says Mill was a member of Parliament from 1865 to 1868, so he knew how hard it was to change the law. His remark about deeply rooted opinion reads as an explanation of why argument alone had not been enough by 1869."
+     },
+     {
+      "source_id": "4",
+      "usable_for": "Gives a socialist explanation that ties women's oppression to monogamy, private property, and class, suggesting that legal or voting reforms alone would not end subordination.",
+      "sourcing": "Engels was a German socialist who published in 1884, the year after Marx died, and he cites a manuscript he wrote with Marx. His purpose is to fit women's position into a Marxist theory of class, so he sees the issue as economic rather than mainly legal."
+     },
+     {
+      "source_id": "5",
+      "usable_for": "Shows the suffrage movement presenting the vote as a matter of justice, with the uneven scales suggesting that women's exclusion upset the balance.",
+      "sourcing": "The context line says Mary Lowndes designed the poster in 1909 for a British women's suffrage organization. It is persuasion aimed at the public, so it presents a moral argument and does not describe how much had actually changed."
+     },
+     {
+      "source_id": "6",
+      "usable_for": "Shows the growth of organized, peaceful suffrage campaigning: the National Union grew from five local societies to 305 by October 1911, so the movement had become a large public force.",
+      "sourcing": "Fawcett was president of the National Union, which used peaceful methods, so she had reason to stress its size and steady growth. Writing in 1912, she also gives credit to the spirit of audacity next to order, which may be a careful way to speak about the militants while keeping her own group's methods central."
+     },
+     {
+      "source_id": "7",
+      "usable_for": "Shows the turn to militant action ('Deeds, not words') and frustration that earlier leaders had won only sympathy from politicians, which suggests that decades of argument had not produced the vote.",
+      "sourcing": "Pankhurst founded the WSPU in 1903 and published this autobiography in 1914, so she had reason to justify her own methods and to describe the older leaders as too content. Her account of politicians as hypocritical reflects her point of view as a militant leader."
+     }
+    ],
+    "evidence_map": [
+     {
+      "line": "Ideas from the Enlightenment onward increasingly challenged women's subordination and laid the intellectual basis for later movements.",
+      "supports": [
+       "2",
+       "3",
+       "4"
+      ],
+      "complicates": [
+       "1"
+      ]
+     },
+     {
+      "line": "Beliefs about women's natural role and deep social custom limited how far women's legal and social position changed by 1914.",
+      "supports": [
+       "1",
+       "3",
+       "4",
+       "7"
+      ],
+      "complicates": [
+       "6"
+      ]
+     },
+     {
+      "line": "Political movements turned ideas into mass organized action and greatly expanded women's public role, even though Britain had not granted women the national vote by 1914.",
+      "supports": [
+       "5",
+       "6",
+       "7"
+      ],
+      "complicates": [
+       "4"
+      ]
+     },
+     {
+      "line": "Reformers disagreed about the causes of women's subordination and about methods, which widened the debate but split the push for change.",
+      "supports": [
+       "3",
+       "4",
+       "6",
+       "7"
+      ],
+      "complicates": [
+       "2"
+      ]
+     }
+    ],
+    "common_pitfalls": [
+     "Claiming that British women won the vote before 1914; national suffrage came only in 1918 for some women and in 1928 on equal terms with men.",
+     "Treating Rousseau as a supporter of women's equality just because he was an Enlightenment writer.",
+     "Summarizing each document in order without judging the extent of change.",
+     "Treating Pankhurst's description of the older leaders, or Fawcett's account of her union's growth, as neutral fact without considering who wrote it.",
+     "Talking only about the vote and ignoring changes in property, marriage, education, or work.",
+     "Saying Engels wanted only the vote; his document links women's oppression to property and class.",
+     "Using events after 1914 as if they were changes inside the period."
+    ],
+    "facts": [
+     "Rousseau's Emile was published in 1762.",
+     "Wollstonecraft's A Vindication of the Rights of Woman was published in 1792.",
+     "Mill's The Subjection of Women was published in 1869; Mill sat in Parliament from 1865 to 1868.",
+     "Engels published The Origin of the Family, Private Property and the State in 1884, the year after Marx died in 1883.",
+     "Mary Lowndes designed the Justice demands the vote poster in 1909 for a British suffrage organization.",
+     "According to Fawcett, the National Union of Women's Suffrage Societies numbered 305 societies in October 1911.",
+     "Emmeline Pankhurst founded the Women's Social and Political Union in Manchester in 1903, and its motto was Deeds, not words.",
+     "Women in Britain did not have the parliamentary vote by 1914."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_authored_from_real_sources",
+    "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+   }
+  },
+  "fact": [
+   {
+    "where": "pack",
+    "kind": "other",
+    "detail": "not_checked"
+   }
+  ]
+ },
+ {
+  "id": "eu2_leq",
+  "spec": {
+   "id": "eu2_leq",
+   "exam": "EU2",
+   "template": "leq",
+   "era": 1,
+   "units": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "focus": "The effects of religious change and religious conflict on European politics and society, c. 1450 to c. 1789",
+   "sources": [],
+   "seed": 2205
+  },
+  "payload": {
+   "schema_version": "whap-frq-1",
+   "task_type": "leq",
+   "template": "leq",
+   "era": 1,
+   "units": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "title": "LEQ: Religious Change, Religious Conflict, and the Growth of State Authority in Europe, c. 1450 to c. 1789",
+   "prompt": {
+    "scenario": "From the late fifteenth century to the late eighteenth century, the religious unity of Latin Christendom broke apart. Protestant reform movements, the Catholic response, and a long series of religious wars and settlements reshaped how Europeans were governed and how they lived alongside neighbors of different faiths.",
+    "task": "Evaluate the extent to which religious change and religious conflict increased the power of European rulers over their subjects from c. 1450 to c. 1789. You are not expected to address the entire time period.",
+    "requirements": [
+     "Respond to the prompt with a historically defensible thesis or claim that establishes a line of reasoning.",
+     "Describe a broader historical context relevant to the prompt.",
+     "Support an argument in response to the prompt using at least two pieces of specific and relevant evidence.",
+     "Use historical reasoning (causation, comparison, or continuity and change) to frame or structure an argument that addresses the prompt.",
+     "Use evidence to corroborate, qualify, or modify an argument that addresses the prompt, demonstrating a complex understanding."
+    ]
+   },
+   "sources": [],
+   "rubric": {
+    "rubric_id": "whap-v1",
+    "total_points": 6,
+    "rows": [
+     {
+      "row_id": "thesis",
+      "name": "Thesis/claim",
+      "max": 1,
+      "descriptors": {},
+      "task_specific": ""
+     },
+     {
+      "row_id": "context",
+      "name": "Contextualization",
+      "max": 1,
+      "descriptors": {},
+      "task_specific": ""
+     },
+     {
+      "row_id": "evidence",
+      "name": "Evidence",
+      "max": 2,
+      "descriptors": {},
+      "task_specific": ""
+     },
+     {
+      "row_id": "analysis",
+      "name": "Analysis and reasoning",
+      "max": 2,
+      "descriptors": {},
+      "task_specific": ""
+     }
+    ],
+    "scoring_notes": [
+     "ALTON reference — not official AP scoring"
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [
+     "Religious change greatly increased rulers' power from the sixteenth century onward because princes and monarchs took control of church property, clergy, and doctrine, as in the English Act of Supremacy and the Peace of Augsburg principle that the ruler chose his territory's faith; yet the same conflicts produced armed resistance, so this power was often won only after costly wars.",
+     "Religious conflict increased royal power only to a limited extent: it fueled noble and popular resistance in the French Wars of Religion, the Dutch Revolt, and the English Civil War, and lasting gains in state authority came mainly when rulers ended religious warfare through settlements such as the Edict of Nantes and the Peace of Westphalia, which placed political order above confessional unity.",
+     "From c. 1450 to c. 1648 religious change mostly strengthened rulers by tying religious conformity to political loyalty, but from c. 1648 to c. 1789 the exhaustion left by religious war and the Enlightenment critique of persecution pushed many states toward toleration, so rulers kept their authority over churches while giving up some of their power to dictate belief."
+    ],
+    "contextualization_ideas": [
+     "Before the Reformation, rulers were already bargaining with the papacy for control over their national churches, as in the Concordat of Bologna (1516), which gave the French king the right to nominate bishops, and the Spanish monarchs' control of the Inquisition founded in 1478.",
+     "Renaissance humanism, its call to return to original sources, and the printing press spread criticism of clerical abuses and made it possible for reform ideas to reach a wide audience quickly after 1517.",
+     "Throughout the period, rulers were building more centralized states with larger armies, bureaucracies, and tax systems, and religion gave them a way to define loyal subjects and justify that expansion."
+    ],
+    "outside_evidence": [
+     "Martin Luther's Ninety-Five Theses (1517) and his appeal to German princes, such as Frederick the Wise of Saxony, to protect and promote reform.",
+     "The German Peasants' War (1524 to 1525), in which peasants used reform ideas to make social demands and Luther sided with the princes who crushed the revolt.",
+     "Henry VIII's Act of Supremacy (1534) making the English monarch head of the Church of England, followed by the dissolution of the monasteries and the transfer of their lands.",
+     "The Peace of Augsburg (1555), which allowed each prince in the Holy Roman Empire to choose Lutheranism or Catholicism for his territory.",
+     "The French Wars of Religion, including the St. Bartholomew's Day Massacre (1572), and Henry IV's Edict of Nantes (1598), which granted Huguenots limited toleration.",
+     "The Dutch Revolt against Philip II of Spain, in which religious grievances combined with resistance to Habsburg taxation and centralization.",
+     "The Thirty Years' War (1618 to 1648), which began with the Defenestration of Prague, and the Peace of Westphalia (1648), which recognized Calvinism and confirmed princes' authority over religion in their territories.",
+     "Cardinal Richelieu's siege of La Rochelle (1628) and the Peace of Alais (1629), which removed the Huguenots' fortified towns and political privileges while keeping religious toleration.",
+     "Louis XIV's revocation of the Edict of Nantes through the Edict of Fontainebleau (1685), which pushed many Huguenots to leave France.",
+     "The English Civil War (1642 to 1651) and the Glorious Revolution (1688), followed by the Toleration Act (1689) and the Bill of Rights, which limited royal power and granted limited toleration to Protestant dissenters.",
+     "The Catholic Reformation: the Council of Trent (1545 to 1563), the Jesuit order (approved 1540), and the Index of Prohibited Books, often backed by Catholic rulers.",
+     "The expulsion of Jews from Spain in 1492 as an example of a monarchy enforcing religious uniformity.",
+     "Enlightenment arguments for toleration, such as John Locke's Letter Concerning Toleration (1689) and Voltaire's Treatise on Tolerance (1763) written after the Calas affair.",
+     "Joseph II's Edict of Toleration (1781) in the Habsburg lands and the papal suppression of the Jesuits in 1773 after pressure from Catholic monarchs."
+    ],
+    "reasoning_types": [
+     "Causation: explaining how religious change led rulers to gain control over churches, property, and subjects' religious lives, and how it also caused rebellion and war.",
+     "Continuity and change: tracing how the link between religious conformity and political loyalty persisted or weakened between the sixteenth and eighteenth centuries.",
+     "Comparison: contrasting Protestant and Catholic states, or states that enforced uniformity (Spain, France after 1685) with states that accepted pluralism (Dutch Republic, England after 1689)."
+    ],
+    "common_pitfalls": [
+     "Narrating the Reformation's theology or Luther's biography without connecting it to rulers' power over subjects.",
+     "Assuming religious change only strengthened rulers and ignoring resistance by nobles, towns, and peasants, or the limits imposed by settlements.",
+     "Treating the whole period as uniform rather than recognizing differences between the sixteenth century and the eighteenth century.",
+     "Confusing dates or settlements, such as attributing the recognition of Calvinism to the Peace of Augsburg rather than the Peace of Westphalia.",
+     "Presenting a single cause, such as religion alone, as the explanation for complex wars like the Thirty Years' War, which also involved dynastic and territorial rivalries.",
+     "Writing about American colonial religious history instead of European developments."
+    ],
+    "facts": [
+     "Luther posted or circulated the Ninety-Five Theses in 1517.",
+     "The Act of Supremacy of 1534 named Henry VIII supreme head of the Church of England.",
+     "The Peace of Augsburg of 1555 allowed princes of the Holy Roman Empire to choose between Lutheranism and Catholicism for their lands.",
+     "The Council of Trent met between 1545 and 1563.",
+     "The St. Bartholomew's Day Massacre took place in 1572.",
+     "Henry IV issued the Edict of Nantes in 1598, and Louis XIV revoked it in 1685.",
+     "The Thirty Years' War lasted from 1618 to 1648 and ended with the Peace of Westphalia, which recognized Calvinism.",
+     "The Glorious Revolution occurred in 1688, and the Toleration Act was passed in 1689.",
+     "Joseph II issued an Edict of Toleration in 1781."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_authored_from_real_sources",
+    "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+   }
+  },
+  "fact": [
+   {
+    "where": "pack",
+    "kind": "other",
+    "detail": "not_checked"
+   }
+  ]
+ }
+]

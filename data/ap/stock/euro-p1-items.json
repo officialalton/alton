@@ -1,0 +1,1132 @@
+[
+ {
+  "cellId": "ap_european_history-e101",
+  "apSubjectCode": "ap_european_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_european_history-e101-k0",
+  "keywordCode": "1.2",
+  "unitCode": "1",
+  "skillPrimary": "3.A",
+  "structure": "shared_stimulus_set",
+  "archetype": "euro_e101",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   }
+  ],
+  "gateOverride": "euro-p1-2026-10-20",
+  "run": "euro-p1",
+  "stockKey": "euro-p1:ap_european_history-e101-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "euro-p1-2026-10-20",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_european_history",
+  "itemFamilyId": "fam:euro-p1:ap_european_history-e101-k0",
+  "canonicalKey": "euro-p1:ap_european_history-e101-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_european_history:1.2",
+  "sharedWith": [],
+  "stockCell": "ap_european_history|1.2|3.A|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "euro-p1",
+    "gateVersion": "euro-p1-2026-10-20",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "eu-txt-prince-1532"
+  ],
+  "exam": "EU1",
+  "payload": {
+   "archetype": "euro_e101",
+   "topic": "1.2",
+   "skill": "3.A",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(primary source)\nThe Prince, chapter XVII: Concerning cruelty and clemency, and whether it is better to be loved than feared (excerpt)\nNiccolo Machiavelli (written 1513, published 1532; English translation by W. K. Marriott, 1908), 1513 (text); 1908 (Marriott translation). Project Gutenberg eBook #1232. Reuse: public domain in the United States (published before 1929). excerpted (3 segments joined by [...]); whitespace normalized; no wording changed.\nContext: Niccolo Machiavelli was a Florentine writer and former government official; he wrote this treatise on rulers in 1513, and it was first printed in 1532.\n\n\"Upon this a question arises: whether it be better to be loved than feared or feared than loved? It may be answered that one should wish to be both, but, because it is difficult to unite them in one person, it is much safer to be feared than loved, when, of the two, either must be dispensed with. [...] men have less scruple in offending one who is beloved than one who is feared, for love is preserved by the link of obligation which, owing to the baseness of men, is broken at every opportunity for their advantage; but fear preserves you by a dread of punishment which never fails. [...] Nevertheless a prince ought to inspire fear in such a way that, if he does not win love, he avoids hatred; because he can endure very well being feared whilst he is not hated, which will always be as long as he abstains from the property of his citizens and subjects and from their women.\"",
+   "euro_set": {
+    "unit": 1,
+    "stim_type": "primary_text",
+    "theme": "Machiavelli on whether a ruler should be loved or feared",
+    "title": "Machiavelli on whether a ruler should be loved or feared",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "primary_text",
+      "title": "The Prince, chapter XVII: Concerning cruelty and clemency, and whether it is better to be loved than feared (excerpt)",
+      "attribution": "Niccolo Machiavelli (written 1513, published 1532; English translation by W. K. Marriott, 1908), 1513 (text); 1908 (Marriott translation). Project Gutenberg eBook #1232. Reuse: public domain in the United States (published before 1929). excerpted (3 segments joined by [...]); whitespace normalized; no wording changed.",
+      "context": "Niccolo Machiavelli was a Florentine writer and former government official; he wrote this treatise on rulers in 1513, and it was first printed in 1532.",
+      "real_data": true,
+      "source_registry_id": "eu-txt-prince-1532",
+      "source_sha256": "d1b70acd0e15eb5a21f6d74e58e46490bf58ef1688048e6cba071eb651b98480"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "euro_e101_3A",
+     "topic": "1.2",
+     "skill": "3.A",
+     "stem": "According to the excerpt, which of the following limits how a prince should use fear?",
+     "options": [
+      {
+       "text": "He must use fear only against foreign enemies and never against his own citizens and subjects",
+       "why": "The excerpt is about inspiring fear in a prince's own citizens and subjects. It does not limit fear to foreign enemies.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "He must obtain the blessing of the pope, since only spiritual authority can make subjects fear punishment",
+       "why": "The excerpt says nothing about religious approval. It ties fear to the dread of punishment.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "He must avoid being hated, which requires leaving his subjects' property and women alone",
+       "why": "The last sentence says a prince can be feared safely as long as he is not hated, and that he avoids hatred by staying away from his subjects' property and women.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "He must win the love of his subjects first, since bonds of obligation are the surest support of rule",
+       "why": "The excerpt says the bond of obligation is broken at every opportunity. It treats fear, not love, as the more dependable support.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"He must avoid being hated, which requires leaving his subjects' property and women alone\". The last sentence says a prince can be feared safely as long as he is not hated, and that he avoids hatred by staying away from his subjects' property and women.\n\"He must use fear only against foreign enemies and never against his own citizens and subjects\" is incorrect: The excerpt is about inspiring fear in a prince's own citizens and subjects. It does not limit fear to foreign enemies.\n\"He must obtain the blessing of the pope, since only spiritual authority can make subjects fear punishment\" is incorrect: The excerpt says nothing about religious approval. It ties fear to the dread of punishment.\n\"He must win the love of his subjects first, since bonds of obligation are the surest support of rule\" is incorrect: The excerpt says the bond of obligation is broken at every opportunity. It treats fear, not love, as the more dependable support.",
+     "est_seconds": 50,
+     "facts": [
+      "The Prince was written in 1513 and first printed in 1532, after Machiavelli's death in 1527."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.A",
+      "key_evidence_in_source": "The final sentence names avoiding hatred, by leaving subjects' property and women alone, as the condition for being feared safely.",
+      "evidence_quote": "he can endure very well being feared whilst he is not hated, which will always be as long as he abstains from the property of his citizens"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 2
+     }
+    },
+    {
+     "archetype": "euro_e101_5B",
+     "topic": "1.2",
+     "skill": "5.B",
+     "stem": "Compared with medieval advice books for kings, Machiavelli's argument in the excerpt differed most in that it",
+     "options": [
+      {
+       "text": "claimed that rulers held power by divine right and answered for their actions to God alone",
+       "why": "The excerpt does not base the prince's authority on God. It bases his security on fear of punishment.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "insisted that a ruler's first duty was to defend the Church and punish heretics within his realm",
+       "why": "This describes the religious duties that medieval writers stressed. It is not the secular concern with security found in the excerpt.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "judged a ruler's conduct by whether it kept him in power rather than by Christian morality",
+       "why": "Medieval mirrors for princes urged rulers to practice Christian virtues. Machiavelli judges fear and love only by which is 'safer' for the prince. This secular, practical approach is a mark of Renaissance political thought.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "argued that kings should be chosen by assemblies of nobles and clergy rather than by hereditary succession",
+       "why": "The excerpt says nothing about how rulers are chosen. It is only about how a prince keeps his subjects' obedience.",
+       "value": null,
+       "label": "unsupported_by_source"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"judged a ruler's conduct by whether it kept him in power rather than by Christian morality\". Medieval mirrors for princes urged rulers to practice Christian virtues. Machiavelli judges fear and love only by which is 'safer' for the prince. This secular, practical approach is a mark of Renaissance political thought.\n\"claimed that rulers held power by divine right and answered for their actions to God alone\" is incorrect: The excerpt does not base the prince's authority on God. It bases his security on fear of punishment.\n\"insisted that a ruler's first duty was to defend the Church and punish heretics within his realm\" is incorrect: This describes the religious duties that medieval writers stressed. It is not the secular concern with security found in the excerpt.\n\"argued that kings should be chosen by assemblies of nobles and clergy rather than by hereditary succession\" is incorrect: The excerpt says nothing about how rulers are chosen. It is only about how a prince keeps his subjects' obedience.",
+     "est_seconds": 60,
+     "facts": [
+      "Medieval mirrors for princes advised rulers to govern according to Christian virtues.",
+      "The Prince (written 1513) is widely seen as an early secular, practical analysis of political power."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "5.B",
+      "key_evidence_in_source": "Machiavelli judges fear and love only by which is safer for the prince, not by moral or religious standards.",
+      "evidence_quote": "it is much safer to be feared than loved"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 2
+     }
+    },
+    {
+     "archetype": "euro_e101_4B",
+     "topic": "1.1",
+     "skill": "4.B",
+     "stem": "Which of the following historical contexts best explains the excerpt's concern with how a prince can keep his subjects from turning against him?",
+     "options": [
+      {
+       "text": "German princes were seizing church lands after converting to Lutheranism in the 1520s and 1530s",
+       "why": "These events came after 1513 and happened in the German lands, not in Machiavelli's Italy.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "Italian states faced unstable regimes and French and Spanish invasions after 1494",
+       "why": "In 1513 the Italian states were fighting the Italian Wars, and Florence had seen its government change in 1494 and again in 1512. This instability helps explain the excerpt's focus on keeping a prince secure.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The Thirty Years' War had devastated central Europe and weakened the authority of the Holy Roman Emperor",
+       "why": "The Thirty Years' War (1618 to 1648) began more than a century after the treatise was written.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "England and France were exhausted by the Hundred Years' War and by noble revolts over taxation",
+       "why": "The Hundred Years' War ended in 1453 and was fought outside Italy. It does not explain a Florentine treatise of 1513.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"Italian states faced unstable regimes and French and Spanish invasions after 1494\". In 1513 the Italian states were fighting the Italian Wars, and Florence had seen its government change in 1494 and again in 1512. This instability helps explain the excerpt's focus on keeping a prince secure.\n\"German princes were seizing church lands after converting to Lutheranism in the 1520s and 1530s\" is incorrect: These events came after 1513 and happened in the German lands, not in Machiavelli's Italy.\n\"The Thirty Years' War had devastated central Europe and weakened the authority of the Holy Roman Emperor\" is incorrect: The Thirty Years' War (1618 to 1648) began more than a century after the treatise was written.\n\"England and France were exhausted by the Hundred Years' War and by noble revolts over taxation\" is incorrect: The Hundred Years' War ended in 1453 and was fought outside Italy. It does not explain a Florentine treatise of 1513.",
+     "est_seconds": 55,
+     "facts": [
+      "Charles VIII of France invaded Italy in 1494, beginning the Italian Wars.",
+      "The Medici were expelled from Florence in 1494 and returned to power in 1512."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.B",
+      "key_evidence_in_source": "The 1513 date and the Florentine origin in the context line place the text in the period of the Italian Wars and Florence's changes of regime.",
+      "evidence_quote": "men have less scruple in offending one who is beloved than one who is feared"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 1
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ },
+ {
+  "cellId": "ap_european_history-e102",
+  "apSubjectCode": "ap_european_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_european_history-e102-k0",
+  "keywordCode": "1.1",
+  "unitCode": "1",
+  "skillPrimary": "2.A",
+  "structure": "shared_stimulus_set",
+  "archetype": "euro_e102",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "basic_learning"
+   }
+  ],
+  "gateOverride": "euro-p1-2026-10-20",
+  "run": "euro-p1",
+  "stockKey": "euro-p1:ap_european_history-e102-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "euro-p1-2026-10-20",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_european_history",
+  "itemFamilyId": "fam:euro-p1:ap_european_history-e102-k0",
+  "canonicalKey": "euro-p1:ap_european_history-e102-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_european_history:1.1",
+  "sharedWith": [],
+  "stockCell": "ap_european_history|1.1|2.A|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "euro-p1",
+    "gateVersion": "euro-p1-2026-10-20",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "eu-img-waldseemuller-1507"
+  ],
+  "exam": "EU1",
+  "payload": {
+   "archetype": "euro_e102",
+   "topic": "1.1",
+   "skill": "2.A",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(map)\nUniversalis cosmographia (the Waldseemuller world map, assembled from twelve sheets)\nMartin Waldseemuller, 1507. Wikimedia Commons (file page records the source institution and public-domain tag). Reuse: public domain (16th-century work). unmodified except Wikimedia Commons' scaled JPEG rendering of the file (upload.wikimedia.org thumbnail, 1280 px wide at most).\nContext: This world map was printed in 1507 in Saint-Die, in Lorraine, by the mapmaker Martin Waldseemuller; the only known surviving copy is in the Library of Congress.\n\nThe image for this source is shown below. Select the image to open it full size.",
+   "stimulus": {
+    "kind": "image",
+    "description": "A black-and-white printed world map made of twelve joined sheets in three rows of four, with Latin captions along the bottom reading 'Universalis cosmographia secundum Ptholomaei traditionem et Americi Vespucii aliorumque lustrationes'; two portraits in the top row face each other beneath Latin labels (a seated figure holding a small globe on the left under the name of Ptolemy, and a standing figure on the right under the name of Americus Vespucius), the large middle sheets show Europe, the Mediterranean, Africa with an elephant, and Asia in detail, and a narrow strip of coastline at the far left edge shows the lands across the Atlantic.",
+    "data": {
+     "path": "ap-sources/eu-img-waldseemuller-1507/image.jpg",
+     "alt": "A black-and-white printed world map made of twelve joined sheets in three rows of four, with Latin captions along the bottom reading 'Universalis cosmographia secundum Ptholomaei traditionem et Americi Vespucii aliorumque lustrationes'; two portraits in the top row face each other beneath Latin labels (a seated figure holding a small globe on the left under the name of Ptolemy, and a standing figure on the right under the name of Americus Vespucius), the large middle sheets show Europe, the Mediterranean, Africa with an elephant, and Asia in detail, and a narrow strip of coastline at the far left edge shows the lands across the Atlantic.",
+     "credit": "Universalis cosmographia, Martin Waldseemuller, 1507. Library of Congress, via Wikimedia Commons (public domain)."
+    }
+   },
+   "euro_set": {
+    "unit": 1,
+    "stim_type": "image",
+    "theme": "A printed world map of 1507 that shows Ptolemy, Vespucci and the lands across the Atlantic",
+    "title": "A printed world map of 1507 that shows Ptolemy, Vespucci and the lands across the Atlantic",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "image",
+      "title": "Universalis cosmographia (the Waldseemuller world map, assembled from twelve sheets)",
+      "attribution": "Martin Waldseemuller, 1507. Wikimedia Commons (file page records the source institution and public-domain tag). Reuse: public domain (16th-century work). unmodified except Wikimedia Commons' scaled JPEG rendering of the file (upload.wikimedia.org thumbnail, 1280 px wide at most).",
+      "context": "This world map was printed in 1507 in Saint-Die, in Lorraine, by the mapmaker Martin Waldseemuller; the only known surviving copy is in the Library of Congress.",
+      "real_data": true,
+      "source_registry_id": "eu-img-waldseemuller-1507",
+      "source_sha256": "61eb2459e3df0503e2078c178fa20f02bd6ca04d9468c68cfbba5eb2badc73e1"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "euro_e102_2A",
+     "topic": "1.1",
+     "skill": "2.A",
+     "stem": "The portraits of Ptolemy and Vespucci and the map's Latin title together suggest which of the following about the mapmaker's purpose?",
+     "options": [
+      {
+       "text": "To give Portuguese pilots precise sailing directions for the route around Africa to the Indian Ocean",
+       "why": "The map is a printed twelve-sheet world cosmography with classical portraits, not a navigational chart, and nothing ties it to Portuguese pilots.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "To join the authority of ancient geography with reports from recent ocean voyages",
+       "why": "The title names both the tradition of Ptolemy and the lustrationes (surveys or voyages) of Vespucci and others, and the two figures are shown as equal partners. The map combines classical learning with new information from the Atlantic voyages.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "To mark the papal line of demarcation dividing newly found lands between the crowns of Spain and Portugal",
+       "why": "Nothing in the title, portraits or context links the map to the Spanish-Portuguese division of 1493 and 1494. The map was printed in Lorraine, not for either Iberian crown.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "To reject classical geography by replacing Ptolemy's outdated picture of the world with new firsthand observations",
+       "why": "Ptolemy is honored with a portrait and named in the title as a foundation of the map, so the map builds on classical geography instead of rejecting it.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"To join the authority of ancient geography with reports from recent ocean voyages\". The title names both the tradition of Ptolemy and the lustrationes (surveys or voyages) of Vespucci and others, and the two figures are shown as equal partners. The map combines classical learning with new information from the Atlantic voyages.\n\"To give Portuguese pilots precise sailing directions for the route around Africa to the Indian Ocean\" is incorrect: The map is a printed twelve-sheet world cosmography with classical portraits, not a navigational chart, and nothing ties it to Portuguese pilots.\n\"To mark the papal line of demarcation dividing newly found lands between the crowns of Spain and Portugal\" is incorrect: Nothing in the title, portraits or context links the map to the Spanish-Portuguese division of 1493 and 1494. The map was printed in Lorraine, not for either Iberian crown.\n\"To reject classical geography by replacing Ptolemy's outdated picture of the world with new firsthand observations\" is incorrect: Ptolemy is honored with a portrait and named in the title as a foundation of the map, so the map builds on classical geography instead of rejecting it.",
+     "est_seconds": 60,
+     "facts": [
+      "Ptolemy's Geography, a second-century Greek work, was a major authority for Renaissance mapmakers.",
+      "Amerigo Vespucci made voyages to the coast of South America around 1499 to 1502, and accounts of them circulated in print."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "2.A",
+      "key_evidence_in_source": "The Latin title along the bottom and the paired portraits of Ptolemy and Vespucci show that the map draws on both ancient tradition and recent voyages.",
+      "evidence_quote": "Universalis cosmographia secundum Ptholomaei traditionem et Americi Vespucii aliorumque lustrationes"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 1
+     }
+    },
+    {
+     "archetype": "euro_e102_4B",
+     "topic": "1.4",
+     "skill": "4.B",
+     "stem": "The production of this twelve-sheet map in Saint-Die in 1507 is best understood in the context of which broader development?",
+     "options": [
+      {
+       "text": "The publication of Copernicus's heliocentric theory, which led scholars to redraw the universe and the earth",
+       "why": "Copernicus published On the Revolutions in 1543, decades after 1507. The map also follows Ptolemy's tradition rather than a new cosmology.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The Peace of Westphalia's recognition of sovereign states, which prompted new maps of fixed borders",
+       "why": "The Peace of Westphalia was signed in 1648, more than a century after this map was printed.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The Protestant Reformation, which encouraged printers to issue works in vernacular languages for ordinary readers",
+       "why": "The Reformation began in 1517, ten years after this map was printed, and the map's captions are in Latin, not a vernacular language.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The spread of printing presses across Europe after the mid-fifteenth century",
+       "why": "The map is a printed work made in a small town in Lorraine about fifty years after Gutenberg. It shows how printing had spread and allowed maps and geographic knowledge to circulate in multiple copies.",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"The spread of printing presses across Europe after the mid-fifteenth century\". The map is a printed work made in a small town in Lorraine about fifty years after Gutenberg. It shows how printing had spread and allowed maps and geographic knowledge to circulate in multiple copies.\n\"The publication of Copernicus's heliocentric theory, which led scholars to redraw the universe and the earth\" is incorrect: Copernicus published On the Revolutions in 1543, decades after 1507. The map also follows Ptolemy's tradition rather than a new cosmology.\n\"The Peace of Westphalia's recognition of sovereign states, which prompted new maps of fixed borders\" is incorrect: The Peace of Westphalia was signed in 1648, more than a century after this map was printed.\n\"The Protestant Reformation, which encouraged printers to issue works in vernacular languages for ordinary readers\" is incorrect: The Reformation began in 1517, ten years after this map was printed, and the map's captions are in Latin, not a vernacular language.",
+     "est_seconds": 55,
+     "facts": [
+      "Johannes Gutenberg developed movable-type printing in Mainz around 1450.",
+      "By 1500, printing presses were operating in many towns across Europe."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.B",
+      "key_evidence_in_source": "The context line says the map was printed in 1507 in Saint-Die, which places it in the spread of printing in the decades after Gutenberg.",
+      "evidence_quote": ""
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 3
+     }
+    },
+    {
+     "archetype": "euro_e102_1A",
+     "topic": "1.2",
+     "skill": "1.A",
+     "stem": "The placement of Ptolemy, an ancient Greek geographer, in a portrait in the map's top row most directly reflects which development?",
+     "options": [
+      {
+       "text": "The Northern Renaissance painters' interest in realistic scenes of peasant life and landscape",
+       "why": "Northern artists did paint realistic scenes, but that does not explain why a mapmaker would honor an ancient Greek geographic authority.",
+       "value": null,
+       "label": "true_but_not_responsive"
+      },
+      {
+       "text": "The humanist revival of classical Greek and Roman texts",
+       "why": "Renaissance humanists recovered, translated and studied ancient texts, including Ptolemy's Geography. Honoring Ptolemy on the map shows the authority these texts held for scholars around 1500.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The Counter-Reformation's effort to defend Church authority through the Index of Prohibited Books",
+       "why": "The Counter-Reformation and the papal Index came decades after 1507, and they have nothing to do with honoring an ancient geographer.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The medieval Scholastic synthesis of Aristotle with Christian theology in universities",
+       "why": "Scholasticism peaked in the thirteenth century and centered on Aristotle and theology. The Renaissance recovery of Ptolemy's Geography in Latin was a humanist project of the fifteenth century.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"The humanist revival of classical Greek and Roman texts\". Renaissance humanists recovered, translated and studied ancient texts, including Ptolemy's Geography. Honoring Ptolemy on the map shows the authority these texts held for scholars around 1500.\n\"The Northern Renaissance painters' interest in realistic scenes of peasant life and landscape\" is incorrect: Northern artists did paint realistic scenes, but that does not explain why a mapmaker would honor an ancient Greek geographic authority.\n\"The Counter-Reformation's effort to defend Church authority through the Index of Prohibited Books\" is incorrect: The Counter-Reformation and the papal Index came decades after 1507, and they have nothing to do with honoring an ancient geographer.\n\"The medieval Scholastic synthesis of Aristotle with Christian theology in universities\" is incorrect: Scholasticism peaked in the thirteenth century and centered on Aristotle and theology. The Renaissance recovery of Ptolemy's Geography in Latin was a humanist project of the fifteenth century.",
+     "est_seconds": 45,
+     "facts": [
+      "Ptolemy's Geography was translated from Greek into Latin in Florence in the early fifteenth century.",
+      "Renaissance humanism emphasized the recovery and study of classical texts."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "1.A",
+      "key_evidence_in_source": "A seated figure holding a globe appears in the top row under Ptolemy's name, and the title credits the tradition of Ptolemy.",
+      "evidence_quote": "secundum Ptholomaei traditionem"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 1
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ },
+ {
+  "cellId": "ap_european_history-e106",
+  "apSubjectCode": "ap_european_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_european_history-e106-k0",
+  "keywordCode": "3.8",
+  "unitCode": "3",
+  "skillPrimary": "3.C",
+  "structure": "shared_stimulus_set",
+  "archetype": "euro_e106",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "basic_learning"
+   }
+  ],
+  "gateOverride": "euro-p1-2026-10-20",
+  "run": "euro-p1",
+  "stockKey": "euro-p1:ap_european_history-e106-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "euro-p1-2026-10-20",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_european_history",
+  "itemFamilyId": "fam:euro-p1:ap_european_history-e106-k0",
+  "canonicalKey": "euro-p1:ap_european_history-e106-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_european_history:3.8",
+  "sharedWith": [],
+  "stockCell": "ap_european_history|3.8|3.C|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "euro-p1",
+    "gateVersion": "euro-p1-2026-10-20",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "eu-txt-hobbes-1651",
+   "eu-txt-locke-1690"
+  ],
+  "exam": "EU1",
+  "payload": {
+   "archetype": "euro_e106",
+   "topic": "3.8",
+   "skill": "3.C",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\nSource A (primary source)\nLeviathan, chapter 13: Of the natural condition of mankind (excerpt)\nThomas Hobbes, 1651. Project Gutenberg eBook #3207. Reuse: public domain in the United States (published before 1929). excerpted (2 segments joined by [...]); whitespace normalized; no wording changed.\nContext: Thomas Hobbes was an English philosopher; he published this book in 1651, a few years after the English Civil War.\n\n\"Hereby it is manifest, that during the time men live without a common Power to keep them all in awe, they are in that condition which is called Warre; and such a warre, as is of every man, against every man. [...] Whatsoever therefore is consequent to a time of Warre, where every man is Enemy to every man; the same is consequent to the time, wherein men live without other security, than what their own strength, and their own invention shall furnish them withall. In such condition, there is no place for Industry; because the fruit thereof is uncertain; and consequently no Culture of the Earth; no Navigation, nor use of the commodities that may be imported by Sea; no commodious Building; no Instruments of moving, and removing such things as require much force; no Knowledge of the face of the Earth; no account of Time; no Arts; no Letters; no Society; and which is worst of all, continuall feare, and danger of violent death; And the life of man, solitary, poore, nasty, brutish, and short.\"\n\n———\n\nSource B (primary source)\nSecond Treatise of Government, chapter II: Of the state of nature (excerpt)\nJohn Locke, 1690. Project Gutenberg eBook #7370. Reuse: public domain in the United States (published before 1929). excerpted (2 segments joined by [...]); whitespace normalized; no wording changed.\nContext: John Locke was an English philosopher; he published this book in 1689-1690, soon after the Glorious Revolution.\n\n\"TO understand political power right, and derive it from its original, we must consider, what state all men are naturally in, and that is, a state of perfect freedom to order their actions, and dispose of their possessions and persons, as they think fit, within the bounds of the law of nature, without asking leave, or depending upon the will of any other man. [...] The state of nature has a law of nature to govern it, which obliges every one: and reason, which is that law, teaches all mankind, who will but consult it, that being all equal and independent, no one ought to harm another in his life, health, liberty, or possessions\"",
+   "euro_set": {
+    "unit": 3,
+    "stim_type": "paired_text",
+    "theme": "Hobbes and Locke on the state of nature",
+    "title": "Hobbes and Locke on the state of nature",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "primary_text",
+      "title": "Leviathan, chapter 13: Of the natural condition of mankind (excerpt)",
+      "attribution": "Thomas Hobbes, 1651. Project Gutenberg eBook #3207. Reuse: public domain in the United States (published before 1929). excerpted (2 segments joined by [...]); whitespace normalized; no wording changed.",
+      "context": "Thomas Hobbes was an English philosopher; he published this book in 1651, a few years after the English Civil War.",
+      "real_data": true,
+      "source_registry_id": "eu-txt-hobbes-1651",
+      "source_sha256": "52d5ed8d3c2342fc97d32d385a0d0fc649cd77f8def4a2a4bba65c2cf37b0653"
+     },
+     {
+      "id": "B",
+      "kind": "primary_text",
+      "title": "Second Treatise of Government, chapter II: Of the state of nature (excerpt)",
+      "attribution": "John Locke, 1690. Project Gutenberg eBook #7370. Reuse: public domain in the United States (published before 1929). excerpted (2 segments joined by [...]); whitespace normalized; no wording changed.",
+      "context": "John Locke was an English philosopher; he published this book in 1689-1690, soon after the Glorious Revolution.",
+      "real_data": true,
+      "source_registry_id": "eu-txt-locke-1690",
+      "source_sha256": "625cd7d15e1475b7ab3ca786df5962b86bffd7a55c5d6705c4c91d9023c09ba5"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "euro_e106_3C",
+     "topic": "3.8",
+     "skill": "3.C",
+     "stem": "Which of the following best describes a difference between how Source A and Source B portray the condition of people living without government?",
+     "options": [
+      {
+       "text": "Both argue that people in it hold no rights to their possessions, so property exists only by grant of a ruler",
+       "why": "Locke says people may dispose of their possessions and that no one ought to harm another's possessions. That is the opposite of this claim.",
+       "value": null,
+       "label": "misattributed"
+      },
+      {
+       "text": "Both describe it as an actual historical age that ended when the first Christian kingdoms were founded in Europe",
+       "why": "Neither excerpt dates the state of nature or ties it to Christian kingdoms. Both treat it as a condition to reason about.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "Source A sees it as freedom governed by reason, while Source B sees it as a war of every man against every man",
+       "why": "This swaps the two authors. The war image is Hobbes's, and the law of reason is Locke's.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Source A sees it as a state of war, while Source B sees it as freedom bounded by a law of reason",
+       "why": "Hobbes calls it a war of every man against every man. Locke calls it a state of perfect freedom within the bounds of a law of nature, which is reason.",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"Source A sees it as a state of war, while Source B sees it as freedom bounded by a law of reason\". Hobbes calls it a war of every man against every man. Locke calls it a state of perfect freedom within the bounds of a law of nature, which is reason.\n\"Both argue that people in it hold no rights to their possessions, so property exists only by grant of a ruler\" is incorrect: Locke says people may dispose of their possessions and that no one ought to harm another's possessions. That is the opposite of this claim.\n\"Both describe it as an actual historical age that ended when the first Christian kingdoms were founded in Europe\" is incorrect: Neither excerpt dates the state of nature or ties it to Christian kingdoms. Both treat it as a condition to reason about.\n\"Source A sees it as freedom governed by reason, while Source B sees it as a war of every man against every man\" is incorrect: This swaps the two authors. The war image is Hobbes's, and the law of reason is Locke's.",
+     "est_seconds": 60,
+     "facts": [
+      "Hobbes published Leviathan in 1651 and described the natural condition of mankind as a war of all against all.",
+      "Locke's Second Treatise of Government (1689-1690) described a state of nature governed by a law of nature known through reason."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.C",
+      "key_evidence_in_source": "Source A's 'Warre... of every man, against every man' contrasts with Source B's 'state of perfect freedom... within the bounds of the law of nature.'",
+      "evidence_quote": "The state of nature has a law of nature to govern it, which obliges every one"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 3
+     }
+    },
+    {
+     "archetype": "euro_e106_3A",
+     "topic": "3.2",
+     "skill": "3.A",
+     "stem": "In Source A, Hobbes claims that when people live without a common power to keep them in awe,",
+     "options": [
+      {
+       "text": "seaborne commerce would flourish because no government would collect customs duties on imported goods",
+       "why": "Hobbes says there would be no navigation and no use of goods imported by sea.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "the clergy would take on the task of keeping order and preserving the arts and letters of society",
+       "why": "The excerpt never mentions the clergy, and it says there would be no arts or letters at all.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "industry, trade, and learning cannot develop because their rewards are uncertain",
+       "why": "Hobbes says there is no place for Industry because its fruit is uncertain. He then lists no navigation, no arts, no letters and no society.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "people would cooperate freely in farming and trade, since reason teaches them not to harm one another",
+       "why": "This is closer to Locke's reasoning in Source B. Hobbes denies that there would be any Culture of the Earth or trade.",
+       "value": null,
+       "label": "misattributed"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"industry, trade, and learning cannot develop because their rewards are uncertain\". Hobbes says there is no place for Industry because its fruit is uncertain. He then lists no navigation, no arts, no letters and no society.\n\"seaborne commerce would flourish because no government would collect customs duties on imported goods\" is incorrect: Hobbes says there would be no navigation and no use of goods imported by sea.\n\"the clergy would take on the task of keeping order and preserving the arts and letters of society\" is incorrect: The excerpt never mentions the clergy, and it says there would be no arts or letters at all.\n\"people would cooperate freely in farming and trade, since reason teaches them not to harm one another\" is incorrect: This is closer to Locke's reasoning in Source B. Hobbes denies that there would be any Culture of the Earth or trade.",
+     "est_seconds": 45,
+     "facts": [
+      "In Leviathan (1651), Hobbes argued that without a sovereign power, insecurity would prevent industry, agriculture, trade and learning."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.A",
+      "key_evidence_in_source": "Hobbes links the absence of a common power to the absence of industry, because its fruit is uncertain.",
+      "evidence_quote": "there is no place for Industry; because the fruit thereof is uncertain"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 2
+     }
+    },
+    {
+     "archetype": "euro_e106_5A",
+     "topic": "3.2",
+     "skill": "5.A",
+     "stem": "Locke's view in Source B that people are naturally free, equal, and independent is most closely connected to which development in England in the late 1680s?",
+     "options": [
+      {
+       "text": "the Bill of Rights of 1689, which placed legal limits on the powers of the crown",
+       "why": "Locke published soon after the Glorious Revolution. The 1689 Bill of Rights limited royal power, which fits his argument that power comes from free and equal individuals.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Oliver Cromwell's rule as Lord Protector in the 1650s, backed by the power of the New Model Army",
+       "why": "The Protectorate was a 1650s military-backed regime. It came before the settlement that Locke's work came out alongside.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "the restoration of the Stuart monarchy in 1660, when Charles II was invited back to take the throne",
+       "why": "The Restoration took place in 1660, not the late 1680s, and it brought back the monarchy rather than limiting it.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "Charles I's personal rule of the 1630s, when he governed for years without summoning Parliament",
+       "why": "Personal rule asserted royal prerogative rather than limits on the crown, and it came decades earlier.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"the Bill of Rights of 1689, which placed legal limits on the powers of the crown\". Locke published soon after the Glorious Revolution. The 1689 Bill of Rights limited royal power, which fits his argument that power comes from free and equal individuals.\n\"Oliver Cromwell's rule as Lord Protector in the 1650s, backed by the power of the New Model Army\" is incorrect: The Protectorate was a 1650s military-backed regime. It came before the settlement that Locke's work came out alongside.\n\"the restoration of the Stuart monarchy in 1660, when Charles II was invited back to take the throne\" is incorrect: The Restoration took place in 1660, not the late 1680s, and it brought back the monarchy rather than limiting it.\n\"Charles I's personal rule of the 1630s, when he governed for years without summoning Parliament\" is incorrect: Personal rule asserted royal prerogative rather than limits on the crown, and it came decades earlier.",
+     "est_seconds": 50,
+     "facts": [
+      "The English Bill of Rights (1689) limited royal power after the Glorious Revolution of 1688-1689.",
+      "Locke's Second Treatise was published in 1689-1690."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "5.A",
+      "key_evidence_in_source": "The context line places Locke's work soon after the Glorious Revolution, and the text grounds political power in people's natural freedom and equality.",
+      "evidence_quote": "being all equal and independent, no one ought to harm another in his life, health, liberty, or possessions"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "likely"
+       }
+      ],
+      "panel_choice": 0
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ },
+ {
+  "cellId": "ap_european_history-e111",
+  "apSubjectCode": "ap_european_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_european_history-e111-k0",
+  "keywordCode": "6.3",
+  "unitCode": "6",
+  "skillPrimary": "1.A",
+  "structure": "shared_stimulus_set",
+  "archetype": "euro_e111",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   }
+  ],
+  "gateOverride": "euro-p1-2026-10-20",
+  "run": "euro-p1",
+  "stockKey": "euro-p1:ap_european_history-e111-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "euro-p1-2026-10-20",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_european_history",
+  "itemFamilyId": "fam:euro-p1:ap_european_history-e111-k0",
+  "canonicalKey": "euro-p1:ap_european_history-e111-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_european_history:6.3",
+  "sharedWith": [],
+  "stockCell": "ap_european_history|6.3|1.A|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "euro-p1",
+    "gateVersion": "euro-p1-2026-10-20",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "eu-tab-pigiron-1907"
+  ],
+  "exam": "EU1",
+  "payload": {
+   "archetype": "euro_e111",
+   "topic": "6.3",
+   "skill": "1.A",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(table)\nProduction of pig iron, 1865-1907 (thousands of long tons)\nEncyclopaedia Britannica, 11th edition (1911), article 'Iron and Steel' by Henry Marion Howe, Table VI, 1911 (data for 1865-1907). Wikisource (English Wikisource transcription of the Encyclopaedia Britannica, 11th edition, 1911). Reuse: public domain (published before 1929). six rows copied from Table VI of the article (years 1865-1907); thousands separators added to all figures for readability (the transcription prints some without); no values changed or recomputed.\nContext: The Encyclopaedia Britannica published this table in 1911 in its article on iron and steel; the figures are thousands of long tons of pig iron.\n\nThe table for this source is shown below.",
+   "stimulus": {
+    "kind": "table",
+    "description": "Production of pig iron, 1865-1907 (thousands of long tons)",
+    "data": {
+     "columns": [
+      "Year",
+      "United States",
+      "Great Britain",
+      "Germany and Luxemburg",
+      "The World"
+     ],
+     "rows": [
+      [
+       "1865",
+       "832",
+       "4,825",
+       "972",
+       "9,250"
+      ],
+      [
+       "1870",
+       "1,665",
+       "5,964",
+       "1,369",
+       "11,900"
+      ],
+      [
+       "1880",
+       "3,835",
+       "7,749",
+       "2,685",
+       "17,950"
+      ],
+      [
+       "1890",
+       "9,203",
+       "7,904",
+       "4,583",
+       "27,157"
+      ],
+      [
+       "1900",
+       "13,789",
+       "8,960",
+       "8,386",
+       "38,973"
+      ],
+      [
+       "1907",
+       "25,781",
+       "9,924",
+       "12,672",
+       "59,721"
+      ]
+     ]
+    }
+   },
+   "euro_set": {
+    "unit": 6,
+    "stim_type": "quantitative",
+    "theme": "Pig iron production in the United States, Britain and Germany, 1865-1907",
+    "title": "Pig iron production in the United States, Britain and Germany, 1865-1907",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "table",
+      "title": "Production of pig iron, 1865-1907 (thousands of long tons)",
+      "attribution": "Encyclopaedia Britannica, 11th edition (1911), article 'Iron and Steel' by Henry Marion Howe, Table VI, 1911 (data for 1865-1907). Wikisource (English Wikisource transcription of the Encyclopaedia Britannica, 11th edition, 1911). Reuse: public domain (published before 1929). six rows copied from Table VI of the article (years 1865-1907); thousands separators added to all figures for readability (the transcription prints some without); no values changed or recomputed.",
+      "context": "The Encyclopaedia Britannica published this table in 1911 in its article on iron and steel; the figures are thousands of long tons of pig iron.",
+      "real_data": true,
+      "source_registry_id": "eu-tab-pigiron-1907",
+      "source_sha256": "9bc59a09f7e140ecdfd243f142b87187c2b5f8738a2fd602cd78f1fb7b3493e8"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "euro_e111_1A",
+     "topic": "6.3",
+     "skill": "1.A",
+     "stem": "The overall trend in pig iron production shown in the table from 1865 to 1907 best illustrates which of the following developments?",
+     "options": [
+      {
+       "text": "The spread of heavy industry that ended Britain's early industrial lead",
+       "why": "The table shows American and German output rising far faster than British output, which reflects the Second Industrial Revolution spreading heavy industry to rival states.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The shift of European industry from iron toward textiles as the leading growth sector",
+       "why": "The shift actually went the other way: textiles led the first industrial revolution, and iron, steel and chemicals led the later phase.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Britain's ability to keep its share of world iron output through free-trade policies",
+       "why": "Britain's share fell over the period. By 1907 the United States and Germany both produced more than Britain did.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "The revival of rural cottage production of metal goods under the putting-out system",
+       "why": "The putting-out system belongs to proto-industrialization before the factory age. Pig iron output on this scale came from large blast furnaces.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"The spread of heavy industry that ended Britain's early industrial lead\". The table shows American and German output rising far faster than British output, which reflects the Second Industrial Revolution spreading heavy industry to rival states.\n\"The shift of European industry from iron toward textiles as the leading growth sector\" is incorrect: The shift actually went the other way: textiles led the first industrial revolution, and iron, steel and chemicals led the later phase.\n\"Britain's ability to keep its share of world iron output through free-trade policies\" is incorrect: Britain's share fell over the period. By 1907 the United States and Germany both produced more than Britain did.\n\"The revival of rural cottage production of metal goods under the putting-out system\" is incorrect: The putting-out system belongs to proto-industrialization before the factory age. Pig iron output on this scale came from large blast furnaces.",
+     "est_seconds": 50,
+     "facts": [
+      "The United States passed Britain in pig iron output around 1890.",
+      "Germany passed Britain in pig iron output in the early 1900s."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "1.A",
+      "key_evidence_in_source": "The rows for 1865 and 1907 show British output overtaken by the United States and Germany.",
+      "evidence_quote": "Production of pig iron, 1865-1907 (thousands of long tons)"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "likely"
+       },
+       {
+        "choice": 0,
+        "confidence": "likely"
+       }
+      ],
+      "panel_choice": 0
+     }
+    },
+    {
+     "archetype": "euro_e111_3B",
+     "topic": "6.3",
+     "skill": "3.B",
+     "stem": "Which of the following pieces of evidence from the table would best support a claim that Britain lost its industrial preeminence between 1865 and 1907?",
+     "options": [
+      {
+       "text": "British pig iron output was larger in 1907 than it had been in 1865, showing steady growth",
+       "why": "Growth in absolute terms does not show a loss of preeminence. If anything, it qualifies the claim.",
+       "value": null,
+       "label": "true_but_not_responsive"
+      },
+      {
+       "text": "Germany's output rose faster than American output over the period covered by the table",
+       "why": "The table shows American output growing much more than German output between 1865 and 1907.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "British output in 1865 was larger than that of the United States and Germany combined",
+       "why": "This figure is accurate, but it shows Britain's lead at the start of the period, not its later decline.",
+       "value": null,
+       "label": "true_but_not_responsive"
+      },
+      {
+       "text": "By 1907 both the United States and Germany produced more pig iron than Britain",
+       "why": "Britain started the period far ahead, and being passed by both rivals in 1907 shows it had lost its relative position.",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"By 1907 both the United States and Germany produced more pig iron than Britain\". Britain started the period far ahead, and being passed by both rivals in 1907 shows it had lost its relative position.\n\"British pig iron output was larger in 1907 than it had been in 1865, showing steady growth\" is incorrect: Growth in absolute terms does not show a loss of preeminence. If anything, it qualifies the claim.\n\"Germany's output rose faster than American output over the period covered by the table\" is incorrect: The table shows American output growing much more than German output between 1865 and 1907.\n\"British output in 1865 was larger than that of the United States and Germany combined\" is incorrect: This figure is accurate, but it shows Britain's lead at the start of the period, not its later decline.",
+     "est_seconds": 55,
+     "facts": [
+      "British pig iron output rose in absolute terms between 1865 and 1907 but was overtaken by the United States and Germany."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.B",
+      "key_evidence_in_source": "Students compare the 1907 row for the three countries with the 1865 row.",
+      "evidence_quote": ""
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "likely"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 3
+     }
+    },
+    {
+     "archetype": "euro_e111_4B",
+     "topic": "6.2",
+     "skill": "4.B",
+     "stem": "The growth in German pig iron production shown in the table after 1870 is best understood in the context of which of the following developments?",
+     "options": [
+      {
+       "text": "Bismarck's sickness and accident insurance laws, which were passed to win workers away from socialism",
+       "why": "These laws were real reforms of the 1880s, but they were a response to industrialization, not a cause of growth in iron output.",
+       "value": null,
+       "label": "true_but_not_responsive"
+      },
+      {
+       "text": "Napoleon's Continental System, which shielded German workshops from British imports",
+       "why": "The Continental System dates from 1806 to 1814, decades before the period in the table.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The Frankfurt Parliament's success in creating a unified liberal German state in 1848",
+       "why": "The Frankfurt Parliament failed in 1848-1849. Germany was unified later, under Prussian leadership.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Unification in 1871 and the annexation of the iron ore fields of Lorraine",
+       "why": "Unification created a large national market, and the Treaty of Frankfurt (1871) gave Germany the iron ore fields of Lorraine, which fed its blast furnaces.",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"Unification in 1871 and the annexation of the iron ore fields of Lorraine\". Unification created a large national market, and the Treaty of Frankfurt (1871) gave Germany the iron ore fields of Lorraine, which fed its blast furnaces.\n\"Bismarck's sickness and accident insurance laws, which were passed to win workers away from socialism\" is incorrect: These laws were real reforms of the 1880s, but they were a response to industrialization, not a cause of growth in iron output.\n\"Napoleon's Continental System, which shielded German workshops from British imports\" is incorrect: The Continental System dates from 1806 to 1814, decades before the period in the table.\n\"The Frankfurt Parliament's success in creating a unified liberal German state in 1848\" is incorrect: The Frankfurt Parliament failed in 1848-1849. Germany was unified later, under Prussian leadership.",
+     "est_seconds": 55,
+     "facts": [
+      "Germany was unified in 1871.",
+      "The Treaty of Frankfurt (1871) gave Germany Alsace and part of Lorraine."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.B",
+      "key_evidence_in_source": "The German figures rise sharply in the rows after 1865.",
+      "evidence_quote": ""
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 3
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ }
+]

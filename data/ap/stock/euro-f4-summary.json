@@ -1,0 +1,139 @@
+{
+ "run": "euro-f4",
+ "generatedAt": "2026-10-20",
+ "passed": [
+  "euro-f4:ap_european_history-eu1_saq2-k0",
+  "euro-f4:ap_european_history-eu2_saq3-k0"
+ ],
+ "rejected": [],
+ "audit": [
+  {
+   "id": "eu1_saq2",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "eu1_saq2",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "eu1_saq2",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "eu2_saq3",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "eu2_saq3",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "eu2_saq3",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 2,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "anachronism:The Berlin Wall was built in August 1961, not in the 1950s. The sentence places the Wall's construction in the wrong dec",
+      "contested:Presented as settled causation, this is inaccurate/contested. The Wall was opened on 9 November 1989 as a result of mass"
+     ]
+    },
+    {
+     "k": 1,
+     "total": 1,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The response states that German reunification followed the collapse of the Soviet Union in 1991 ('when the Soviet Union "
+     ]
+    },
+    {
+     "k": 2,
+     "total": 1,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The sample states that 'in 1968 the Soviet Union let Germany come back together' and that the Berlin Wall was taken down"
+     ]
+    },
+    {
+     "k": 3,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 4,
+     "total": 1,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:States the Berlin Wall was torn down in the 1970s. The Wall was opened on 9 November 1989 and demolished thereafter; Ger"
+     ]
+    },
+    {
+     "k": 5,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 5
+  }
+ ]
+}

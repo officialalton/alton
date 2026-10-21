@@ -1,0 +1,1156 @@
+[
+ {
+  "id": "eu1_saq1",
+  "spec": {
+   "id": "eu1_saq1",
+   "exam": "EU1",
+   "template": "saq1",
+   "era": 4,
+   "units": [
+    9
+   ],
+   "focus": "Reform and Soviet control in Eastern Europe in the 1960s (the Prague Spring of 1968)",
+   "sources": [
+    {
+     "id": "eu-txt-cs-czech-1989",
+     "context": "This reference book was written for the U.S. government in the 1980s; the passage describes the spring of 1968 in Czechoslovakia."
+    }
+   ],
+   "seed": 2101
+  },
+  "payload": {
+   "schema_version": "whap-frq-1",
+   "task_type": "saq",
+   "template": "saq1",
+   "era": 4,
+   "units": [
+    9
+   ],
+   "title": "The Prague Spring Action Program and the Limits of Reform in the Soviet Bloc",
+   "prompt": {
+    "scenario": "In the period c. 1953 to 1989, communist parties in Eastern Europe tried at several points to reform the system the Soviet Union had imposed after the Second World War, and each time they had to work out how far change could go without provoking Soviet intervention. In 1968 the Communist Party of Czechoslovakia (KSC) under Alexander Dubcek launched the best-known of these efforts, the Prague Spring.",
+    "task": "Using the excerpt, answer (a), (b), and (c).",
+    "requirements": [
+     "Responses to part A must draw on what the excerpt actually says.",
+     "Responses to parts B and C must use specific historical evidence that is not already named in the excerpt.",
+     "Responses to part C must name a country other than Czechoslovakia and stay within the years 1953 to 1989."
+    ],
+    "parts": [
+     {
+      "label": "A",
+      "prompt": "Briefly describe ONE way the excerpt shows that the Action Program of April 1968 tried to change communist rule in Czechoslovakia while keeping limits on that change.",
+      "points": 1
+     },
+     {
+      "label": "B",
+      "prompt": "Briefly explain ONE specific historical development in the Soviet bloc in the period 1953 to 1968 that helps explain why Czechoslovak reformers rejected Stalinism but still reaffirmed their alliance with the Soviet Union.",
+      "points": 1
+     },
+     {
+      "label": "C",
+      "prompt": "Briefly explain ONE similarity or difference between how the Prague Spring ended and how a reform or opposition movement in another Eastern European country (not Czechoslovakia) ended in the period 1953 to 1989.",
+      "points": 1
+     }
+    ]
+   },
+   "sources": [
+    {
+     "id": "A",
+     "kind": "secondary_text",
+     "title": "Czechoslovakia: A Country Study (excerpt on the Action Program of April 1968)",
+     "attribution": "Ihor Gawdiak, ed., Federal Research Division, Library of Congress, 1989 (research completed 1987). Library of Congress, Federal Research Division (Country Studies; full text via Internet Archive OCR). Reuse: public domain (U.S. government work, 17 U.S.C. 105; the Library of Congress states all other text and graphics are in the public domain). excerpted (1 segment); whitespace normalized; OCR line-break hyphenation rejoined; no wording changed.",
+     "context": "This reference book was written for the U.S. government in the 1980s; the passage describes the spring of 1968 in Czechoslovakia.",
+     "real_data": true,
+     "source_registry_id": "eu-txt-cs-czech-1989",
+     "source_sha256": "be16ed60dd68fac455c817964884a98c5a79f191cf8ee4f498c8ef9162c03804",
+     "body": "In April the KSC Presidium adopted the Action Program that had been drafted by a coalition headed by Dubcek and made up of reformers, moderates, centrists, and conservatives. The program proposed a \"new model of socialism,\" profoundly \"democratic\" and \"national,\" that is, adapted to Czechoslovak conditions. The National Front and the electoral system were to be democratized, and Czechoslovakia was to be federalized. Freedom of assembly and expression would be guaranteed in constitutional law. The New Economic Model was to be implemented. The Action Program also reaffirmed the Czechoslovak alliance with the Soviet Union and other socialist states. The reform movement, which rejected Stalinism as the road to communism, remained committed to communism as a goal. The Action Program stipulated that reform must proceed under KSC direction.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry eu-txt-cs-czech-1989"
+     }
+    }
+   ],
+   "rubric": {
+    "rubric_id": "whap-v1",
+    "total_points": 3,
+    "rows": [
+     {
+      "row_id": "a",
+      "name": "Part A",
+      "max": 1,
+      "descriptors": {
+       "0": "The response does not describe a reform alongside a limit drawn from the excerpt, misreads the excerpt (for example, by saying it called for leaving the Warsaw Pact or ending communist rule), or only restates the prompt.",
+       "1": "The response accurately describes a change the excerpt says the Action Program proposed and connects it to a limit or boundary the excerpt states."
+      },
+      "task_specific": "The response describes a reform named in the excerpt (a democratized National Front and electoral system, federalization, constitutional guarantees of free assembly and expression, the New Economic Model, a democratic and national model of socialism) together with a limit the excerpt names (the alliance with the Soviet Union and other socialist states reaffirmed, communism kept as the goal, reform kept under KSC direction), or describes the excerpt's broader point that the program rejected Stalinism without rejecting communism."
+     },
+     {
+      "row_id": "b",
+      "name": "Part B",
+      "max": 1,
+      "descriptors": {
+       "0": "The response names no relevant development, uses only what the excerpt already says, falls outside 1953 to 1968, or does not link the development to rejecting Stalinism or keeping the alliance.",
+       "1": "The response explains a specific, accurate development from 1953 to 1968 and shows how it helps account for rejecting Stalinism, reaffirming the Soviet alliance, or both."
+      },
+      "task_specific": "The response explains a specific development from 1953 to 1968, not already named in the excerpt, that made rejecting Stalinism possible or made loyalty to the Soviet alliance seem necessary. Strong examples are Khrushchev's 1956 Secret Speech and de-Stalinization, the Soviet crushing of the 1956 Hungarian Revolution after Imre Nagy announced Hungary would leave the Warsaw Pact, the 1956 Polish crisis in which Gomulka won room for reform by keeping Poland in the bloc, and the Warsaw Pact's existence from 1955 as the Soviet security framework."
+     },
+     {
+      "row_id": "c",
+      "name": "Part C",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no other country, describes another movement inaccurately, describes the other case without comparing it to Czechoslovakia, or falls outside 1953 to 1989.",
+       "1": "The response accurately explains a similarity or difference between how the Prague Spring ended and how a named movement in another Eastern European country ended between 1953 and 1989."
+      },
+      "task_specific": "The response names a reform or opposition movement in another Eastern European country between 1953 and 1989, states accurately how it ended, and makes an explicit comparison with the end of the Prague Spring (the Warsaw Pact invasion of August 1968, the Brezhnev Doctrine, and normalization under Husak)."
+     }
+    ],
+    "scoring_notes": [
+     "Each part is worth 1 point and is scored on its own; a mistake in one part does not cancel credit in another.",
+     "For part A, students may quote or paraphrase the excerpt, but they must pair a change with a limit or clearly describe the program's double character; just listing reforms is not enough.",
+     "For part B, accept Dubcek's replacement of Novotny as party leader in January 1968 only when the response uses it to explain why reformers rejected Stalinist methods or kept the alliance, since the excerpt already names Dubcek.",
+     "For part C, the August 1968 invasion may serve as the Czechoslovak half of the comparison, but the response must name and accurately describe a second case.",
+     "Do not reward claims that the Action Program aimed to restore capitalism or multiparty democracy; the excerpt says the reformers stayed committed to communism and to KSC direction.",
+     "ALTON reference — not official AP scoring"
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [],
+    "contextualization_ideas": [
+     "Soviet domination of Eastern Europe after 1945, including the 1948 communist takeover in Czechoslovakia.",
+     "De-Stalinization after 1953 and the uneven reform and repression that followed across the bloc.",
+     "Economic slowdown in centrally planned economies in the 1960s, which led to proposals such as the New Economic Model."
+    ],
+    "outside_evidence": [
+     "Khrushchev's Secret Speech, 1956",
+     "Hungarian Revolution and Soviet intervention, 1956",
+     "Polish October and Gomulka, 1956",
+     "Warsaw Pact invasion of Czechoslovakia, August 1968",
+     "Brezhnev Doctrine, 1968",
+     "Normalization under Husak from 1969",
+     "Martial law in Poland, December 1981",
+     "Round Table talks and June 1989 Polish elections",
+     "Velvet Revolution, 1989"
+    ],
+    "reasoning_types": [
+     "Sourcing and claims analysis (part A)",
+     "Causation (part B)",
+     "Comparison (part C)"
+    ],
+    "doc_uses": [
+     {
+      "source_id": "Czechoslovakia: A Country Study (1989)",
+      "usable_for": "Part A: identifying the reforms the Action Program proposed and the limits it placed on them (Soviet alliance, communist goal, KSC direction).",
+      "sourcing": "A Library of Congress reference study written for the US government in the 1980s, while the Cold War was still going on, looking back at 1968. It is a secondary summary, not a 1968 document. Its quotation marks around democratic and national may mark these as the program's own terms."
+     }
+    ],
+    "evidence_map": [
+     {
+      "line": "Reform proceeding under KSC direction and alliance reaffirmed",
+      "supports": [
+       "The reformers wanted to change the system from inside without breaking with Moscow."
+      ],
+      "complicates": [
+       "The Warsaw Pact invaded anyway in August 1968, which suggests Soviet leaders saw freer expression and a weaker party monopoly as a threat no matter what loyalty the program declared."
+      ]
+     }
+    ],
+    "saq_answers": {
+     "a": [
+      "The excerpt says the Action Program would democratize the National Front and the electoral system and guarantee freedom of assembly and expression in constitutional law, but it also required that reform proceed under KSC direction, so the Communist Party kept its leading role.",
+      "The program called for a new model of socialism adapted to Czechoslovak conditions, including federalization, yet it reaffirmed the alliance with the Soviet Union and other socialist states, so the national road would stay inside the Soviet bloc.",
+      "According to the excerpt, the reformers rejected Stalinism as the road to communism but stayed committed to communism as a goal, which means they wanted to change the methods of communist rule, not end it.",
+      "The excerpt says the program would put the New Economic Model into practice to change how the economy was run, but it presented this as part of building socialism under party leadership, not as a move to a market system outside communism."
+     ],
+     "b": [
+      "Khrushchev's Secret Speech of 1956 denounced Stalin's crimes and began de-Stalinization across the bloc, which made it acceptable for communists to reject Stalinist methods while staying loyal to Moscow.",
+      "In 1956 the Soviet Union crushed the Hungarian Revolution after Imre Nagy announced Hungary would leave the Warsaw Pact. This showed Czechoslovak reformers that breaking with the alliance would bring invasion, so they reaffirmed it.",
+      "During the Polish October of 1956, Gomulka won some domestic reforms by assuring Moscow that Poland would stay in the Warsaw Pact and remain communist. That offered a model of reform that kept the alliance.",
+      "After Novotny, a leader tied to the Stalinist era, was replaced by Dubcek in January 1968, reformers in the party could openly criticize past repression. Because the Soviet Union still dominated the Warsaw Pact, set up in 1955, they had to stress their loyalty to it."
+     ],
+     "c": [
+      "Similarity: like the Prague Spring in August 1968, the Hungarian Revolution of 1956 was ended by Soviet military force, which showed that Moscow would use troops to stop reform it judged dangerous.",
+      "Difference: Hungary's Nagy government announced it would leave the Warsaw Pact in 1956, while the Action Program reaffirmed the alliance. Even so, both were crushed by Soviet-led armies, which suggests Moscow feared any loss of party control, not just a formal break.",
+      "Difference: Poland's Solidarity movement was suppressed in December 1981 when Jaruzelski declared martial law, a crackdown by Polish authorities, whereas the Prague Spring was ended by a foreign Warsaw Pact invasion.",
+      "Difference: in 1989 Poland's opposition reached a settlement through the Round Table talks and won partly free elections, and under Gorbachev the Soviet Union did not intervene, unlike in 1968 when the Brezhnev Doctrine was used to justify invasion."
+     ]
+    },
+    "common_pitfalls": [
+     "Describing the Prague Spring as an attempt to leave the Soviet bloc or abolish communism, which contradicts the excerpt's statements about the alliance and KSC direction.",
+     "Listing reforms in part A without naming any limit the excerpt places on them.",
+     "Using in part B only things the excerpt already names, such as the New Economic Model or the Action Program itself.",
+     "Using events after 1968, such as the invasion, in part B, which asks about 1953 to 1968.",
+     "Writing about Czechoslovakia twice in part C instead of naming a second country, or describing the other case without an explicit comparison.",
+     "Treating a US government reference work as if it were a primary source from 1968 itself.",
+     "Confusing the 1956 Hungarian Revolution with the 1956 Polish October, or saying Poland was invaded in 1956 or 1981."
+    ],
+    "facts": [
+     "Alexander Dubcek replaced Antonin Novotny as first secretary of the Communist Party of Czechoslovakia in January 1968.",
+     "The KSC Presidium adopted the Action Program in April 1968.",
+     "In February 1956, at the Twentieth Party Congress, Nikita Khrushchev denounced Stalin's crimes in the so-called Secret Speech.",
+     "In 1956 Soviet forces crushed the Hungarian Revolution after Imre Nagy's government announced that Hungary would leave the Warsaw Pact; Janos Kadar was then installed.",
+     "In October 1956 Wladyslaw Gomulka came to power in Poland and obtained some domestic concessions while keeping Poland in the Warsaw Pact.",
+     "The Warsaw Pact was founded in 1955.",
+     "Warsaw Pact forces led by the Soviet Union invaded Czechoslovakia on the night of 20 to 21 August 1968; Romania did not take part.",
+     "The Brezhnev Doctrine, stated in 1968, claimed the right of socialist states to intervene when socialism was threatened in a fellow socialist country.",
+     "Gustav Husak replaced Dubcek as party leader in April 1969, and the period of normalization followed.",
+     "Czechoslovakia became a federation of Czech and Slovak republics from January 1969, one of the few reforms of 1968 that survived.",
+     "In June 1953 a workers' uprising in East Germany was put down with Soviet troops.",
+     "General Wojciech Jaruzelski declared martial law in Poland in December 1981 to suppress Solidarity, without a Soviet invasion.",
+     "Under Gorbachev the Soviet Union did not intervene against the revolutions of 1989; Poland held partly free elections in June 1989 after Round Table talks.",
+     "The Velvet Revolution ended communist rule in Czechoslovakia in late 1989; Vaclav Havel became president in December 1989."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_authored_from_real_sources",
+    "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+   }
+  },
+  "fact": [
+   {
+    "where": "saq_answers.b[1] and Part B rubric (Hungary 1956)",
+    "kind": "contested",
+    "detail": "The answer and rubric frame the Soviet crushing of Hungary as a consequence of Nagy's announced withdrawal from the Warsaw Pact ('breaking with the alliance would bring invasion'). The chronology is accurate (announcement 1 Nov, final assault 4 Nov), but archival evidence (the Malin notes) shows the Soviet Presidium decided on full intervention on 31 October, before Nagy's declaration of neutrality, and Soviet troops had already intervened on 24 October. Presenting the withdrawal as the cause of the invasion is a simplification; better phrased as how contemporaries perceived it."
+   }
+  ]
+ },
+ {
+  "id": "eu1_saq2",
+  "spec": {
+   "id": "eu1_saq2",
+   "exam": "EU1",
+   "template": "saq2",
+   "era": 2,
+   "units": [
+    5
+   ],
+   "focus": "Ideas about war, peace and the power of states in Europe in the late eighteenth century (the document is a philosopher's proposal, not a description of events)",
+   "sources": [
+    {
+     "id": "eu-txt-kant-1795",
+     "context": "Immanuel Kant was a German philosopher who taught at the University of Konigsberg in Prussia; he published this essay in 1795."
+    }
+   ],
+   "seed": 2102
+  },
+  "payload": {
+   "schema_version": "whap-frq-1",
+   "task_type": "saq",
+   "template": "saq2",
+   "era": 2,
+   "units": [
+    5
+   ],
+   "title": "Kant on Standing Armies in Perpetual Peace (1795)",
+   "prompt": {
+    "scenario": "In the period c. 1648 to c. 1815, European states built up large permanent armies, and Enlightenment writers argued about whether that military competition made war more or less likely. In 1795 the Prussian philosopher Immanuel Kant proposed conditions for a lasting peace among states.",
+    "task": "Using the excerpt, answer (a), (b), and (c).",
+    "requirements": [
+     "Each part requires a brief response of one to three sentences that answers the specific task.",
+     "Parts B and C must use specific historical evidence from the years named in the part, not only the content of the excerpt."
+    ],
+    "parts": [
+     {
+      "label": "A",
+      "prompt": "Briefly describe ONE argument Kant makes in the excerpt about why standing armies should be abolished.",
+      "points": 1
+     },
+     {
+      "label": "B",
+      "prompt": "Briefly explain ONE specific historical development in Europe in the period 1700 to 1795 that supports Kant's claim that competition among states in maintaining armies placed heavy burdens on those states or led to war. Do not use examples named in the excerpt.",
+      "points": 1
+     },
+     {
+      "label": "C",
+      "prompt": "Briefly explain ONE specific historical development in Europe in the period 1795 to 1815 that shows that European states did not follow Kant's proposal to abolish standing armies, or that shows a different approach to keeping peace among states.",
+      "points": 1
+     }
+    ]
+   },
+   "sources": [
+    {
+     "id": "A",
+     "kind": "primary_text",
+     "title": "Perpetual Peace, first preliminary article 3 (excerpt on standing armies)",
+     "attribution": "Immanuel Kant (1795; English translation by Mary Campbell Smith, 1903), 1795 (text); 1903 (Campbell Smith translation). Project Gutenberg eBook #50922. Reuse: public domain in the United States (published before 1929). excerpted (1 segment); whitespace normalized; no wording changed; italic markup (underscores) removed.",
+     "context": "Immanuel Kant was a German philosopher who taught at the University of Konigsberg in Prussia; he published this essay in 1795.",
+     "real_data": true,
+     "source_registry_id": "eu-txt-kant-1795",
+     "source_sha256": "126dd5b5037e70c7ef7939249319ae1e1f7a2836c302e92fdcdb143764f8dc29",
+     "body": "Standing armies (miles perpetuus) shall be abolished in course of time.” For they are always threatening other states with war by appearing to be in constant readiness to fight. They incite the various states to outrival one another in the number of their soldiers, and to this number no limit can be set. Now, since owing to the sums devoted to this purpose, peace at last becomes even more oppressive than a short war, these standing armies are themselves the cause of wars of aggression, undertaken in order to get rid of this burden. To which we must add that the practice of hiring men to kill or to be killed seems to imply a use of them as mere machines and instruments in the hand of another (namely, the state) which cannot easily be reconciled with the right of humanity in our own person.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry eu-txt-kant-1795"
+     }
+    }
+   ],
+   "rubric": {
+    "rubric_id": "whap-v1",
+    "total_points": 3,
+    "rows": [
+     {
+      "row_id": "a",
+      "name": "Part A",
+      "max": 1,
+      "descriptors": {
+       "0": "The response does not accurately describe an argument from the excerpt, only repeats its wording without explaining it, or gives a claim the text does not make.",
+       "1": "The response accurately describes one of Kant's arguments against standing armies in its own words."
+      },
+      "task_specific": "Correctly describes one argument from the excerpt: armies kept in readiness threaten neighbors; they set off an arms competition with no limit; their cost makes peace more burdensome than a short war and so prompts wars of aggression; or paying men to kill or be killed treats people as mere instruments of the state, against the right of humanity."
+     },
+     {
+      "row_id": "b",
+      "name": "Part B",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no specific development, uses one outside 1700 to 1795, or does not connect it to the burdens of military competition or to war.",
+       "1": "The response explains a specific, accurate development from 1700 to 1795 and shows how it supports Kant's claim about military burdens or war."
+      },
+      "task_specific": "Explains a specific development from 1700 to 1795, not named in the excerpt, that shows the cost of military competition or its connection to war, for example Prussian army growth and the invasion of Silesia, debt from the Seven Years' War, or the French fiscal crisis before 1789."
+     },
+     {
+      "row_id": "c",
+      "name": "Part C",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no specific development, uses one outside 1795 to 1815, or does not explain how it departed from Kant's proposal or offered another approach to peace.",
+       "1": "The response explains a specific, accurate development from 1795 to 1815 and shows how it departed from Kant's proposal or reflected another approach to peace."
+      },
+      "task_specific": "Explains a specific development from 1795 to 1815 showing that standing armies continued or grew, such as French conscription, the Napoleonic armies, or Prussian military reform after 1806, or showing another approach to peace such as the balance-of-power settlement at the Congress of Vienna or the Quadruple Alliance."
+     }
+    ],
+    "scoring_notes": [
+     "Each part earns one point on its own; a weak answer to one part does not lower the score on another.",
+     "In part A, a response that only quotes the excerpt without explaining it should not earn the point.",
+     "In part B, accept developments in any European state if the response links army size, military spending or rivalry to financial strain or to the outbreak of war.",
+     "In part C, a response may describe the expansion of armies or a different peace-keeping method; either earns the point if it is accurate and tied to the task.",
+     "Do not reward claims that a single cause by itself produced the French Revolution or any war; responses may present military spending as one contributing factor.",
+     "ALTON reference — not official AP scoring"
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [],
+    "contextualization_ideas": [
+     "Eighteenth-century absolutist states such as Prussia, Austria and France kept large permanent armies paid by state taxation.",
+     "Enlightenment writers, including the Abbe de Saint-Pierre earlier in the century, proposed plans for lasting peace among European states.",
+     "Kant wrote during the wars of the French Revolution, in the year Prussia left the war against France."
+    ],
+    "outside_evidence": [
+     "Prussian canton system of recruitment",
+     "Hiring of German soldiers from Hesse-Kassel by Britain during the American Revolution",
+     "Napoleonic conscription and the Grande Armee",
+     "Concert of Europe after 1815"
+    ],
+    "reasoning_types": [
+     "Sourcing and analysis of argument",
+     "Causation",
+     "Continuity and change"
+    ],
+    "saq_answers": {
+     "a": [
+      "Kant argues that standing armies threaten other states simply by being always ready to fight, so their existence creates a constant danger of war.",
+      "Kant argues that standing armies push states into a competition to have more soldiers than their rivals, and this competition has no natural limit.",
+      "Kant argues that the cost of keeping armies makes peace so expensive that states may start wars of aggression to escape the burden.",
+      "Kant argues on moral grounds that paying soldiers to kill or be killed treats human beings as tools or machines of the state, which goes against the rights of humanity."
+     ],
+     "b": [
+      "Frederick William I greatly enlarged the Prussian army, and Frederick II used that army to invade Silesia in 1740, starting the War of the Austrian Succession. This supports Kant's claim that a large army kept ready for war can lead to aggressive war.",
+      "The Seven Years' War (1756 to 1763) left France and Britain with heavy debts. This shows the financial burden of great-power military rivalry that Kant describes.",
+      "French spending on wars, including the Seven Years' War and support for the American Revolution, added to a royal debt crisis that led Louis XVI to call the Estates-General in 1789. This shows how military costs could strain a state.",
+      "Prussia, Austria and Russia used their military power to partition Poland in 1772, 1793 and 1795. This supports Kant's view that powerful armed states threatened weaker neighbors."
+     ],
+     "c": [
+      "The French revolutionary government declared the levee en masse in 1793, and the Jourdan Law of 1798 made conscription regular. France built mass armies instead of abolishing them.",
+      "Napoleon led huge armies across Europe, including the invasion of Russia in 1812 with hundreds of thousands of soldiers. Standing armies grew far larger than in Kant's time.",
+      "After defeat at Jena and Auerstedt in 1806, Prussian reformers such as Scharnhorst and Gneisenau rebuilt and modernized the army. Prussia strengthened its military rather than giving it up.",
+      "At the Congress of Vienna (1814 to 1815) the great powers tried to keep peace through a balance of power and the Quadruple Alliance, not by abolishing armies. This was a different approach from Kant's."
+     ]
+    },
+    "common_pitfalls": [
+     "Treating Kant's essay as a description of real events instead of a philosophical proposal.",
+     "In part A, only restating the opening sentence that armies shall be abolished without explaining one of his reasons.",
+     "Using examples from the wrong years, such as the First World War or the Thirty Years' War.",
+     "Saying that Kant witnessed battles or served as a soldier, which the source does not support.",
+     "Claiming that military spending alone caused the French Revolution."
+    ],
+    "facts": [
+     "Immanuel Kant published Perpetual Peace in 1795 while at Konigsberg in Prussia.",
+     "Prussia made a separate peace with revolutionary France at Basel in 1795.",
+     "Frederick II of Prussia invaded Silesia in 1740.",
+     "The Seven Years' War lasted from 1756 to 1763.",
+     "Louis XVI called the Estates-General, which met in 1789, during a fiscal crisis.",
+     "Poland was partitioned in 1772, 1793 and 1795.",
+     "France declared the levee en masse in 1793.",
+     "Prussia was defeated at Jena and Auerstedt in 1806.",
+     "The Congress of Vienna met in 1814 to 1815."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_authored_from_real_sources",
+    "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+   }
+  },
+  "fact": [
+   {
+    "where": "EXPECTED FEATURES > saq_answers > b, fourth answer",
+    "kind": "inaccurate",
+    "detail": "States that 'Prussia, Austria and Russia' partitioned Poland in 1772, 1793 and 1795. Austria did not take part in the Second Partition of 1793, which was carried out by Prussia and Russia alone; Austria participated only in 1772 and 1795."
+   },
+   {
+    "where": "EXPECTED FEATURES > saq_answers > c, first answer (and Part C rubric)",
+    "kind": "inconsistent_with_documents",
+    "detail": "The sample answer leads with the levée en masse of 1793, which falls outside the 1795–1815 window the prompt requires for part C; the rubric itself awards 0 for a development 'outside 1795 to 1815'. Only the Jourdan Law of 1798 portion of this answer fits the task, so the model answer as written is internally inconsistent with the rubric."
+   }
+  ]
+ },
+ {
+  "id": "eu1_saq3",
+  "spec": {
+   "id": "eu1_saq3",
+   "exam": "EU1",
+   "template": "saq3",
+   "era": 1,
+   "units": [
+    1
+   ],
+   "focus": "Portuguese overseas expansion, long-distance trade and the spread of information through printing around 1500 (the image is a print with a caption; make no claims about details the caption does not state)",
+   "sources": [
+    {
+     "id": "eu-img-durer-rhinoceros-1515",
+     "context": "Albrecht Durer was a German artist from Nuremberg; he made this print in 1515 after hearing about an Indian rhinoceros sent to the king of Portugal."
+    }
+   ],
+   "seed": 2103
+  },
+  "payload": {
+   "schema_version": "whap-frq-1",
+   "task_type": "saq",
+   "template": "saq3",
+   "era": 1,
+   "units": [
+    1
+   ],
+   "title": "Durer's Rhinoceros (1515): Portuguese Expansion, Trade, and Print",
+   "prompt": {
+    "scenario": "In the period c. 1450 to c. 1600, Portuguese voyages opened a sea route between Europe and Asia, and the printing press changed how news and images moved within Europe. The Nuremberg artist Albrecht Durer made this woodcut in 1515 after hearing about an Indian rhinoceros sent to the king of Portugal.",
+    "task": "Using the image, answer (a), (b), and (c).",
+    "requirements": [
+     "Each part requires only one answer.",
+     "Parts B and C must use specific historical evidence from the years named in each part.",
+     "For part B, do not simply repeat that the animal came from India or was sent to the king of Portugal; explain a development that made this possible."
+    ],
+    "parts": [
+     {
+      "label": "A",
+      "prompt": "Briefly describe ONE feature of the image that shows how Europeans in the early 1500s pictured or understood an animal from Asia.",
+      "points": 1
+     },
+     {
+      "label": "B",
+      "prompt": "Briefly explain ONE specific development in Portuguese overseas expansion in the period c. 1450 to c. 1550 that helps explain how an animal from India could reach the king of Portugal around 1515.",
+      "points": 1
+     },
+     {
+      "label": "C",
+      "prompt": "Briefly explain ONE other way, besides prints of animals, that the printing press affected the spread of information or ideas in Europe in the period c. 1450 to c. 1600.",
+      "points": 1
+     }
+    ]
+   },
+   "sources": [
+    {
+     "id": "A",
+     "kind": "image",
+     "title": "The Rhinoceros (woodcut with German caption)",
+     "attribution": "Albrecht Durer, 1515. Wikimedia Commons (file page records the source institution and public-domain tag). Reuse: public domain (16th-century work; digital image released under CC0). unmodified except Wikimedia Commons' scaled JPEG rendering of the file (upload.wikimedia.org thumbnail, 1280 px wide at most).",
+     "context": "Albrecht Durer was a German artist from Nuremberg; he made this print in 1515 after hearing about an Indian rhinoceros sent to the king of Portugal.",
+     "real_data": true,
+     "source_registry_id": "eu-img-durer-rhinoceros-1515",
+     "source_sha256": "db38b6d12fe00183cb589c6ea5bde533d3b74ead95ffddadb79ef97482a1faa3",
+     "body": "A black-and-white woodcut of a rhinoceros seen from the side, drawn with a plated, armor-like hide covered in rings and scales, a small second horn on its shoulders and a large curved horn on its nose; the year '1515' and the word 'RHINOCERVS' with the artist's monogram are printed at the upper right, and several lines of German text run across the top.",
+     "image": {
+      "path": "ap-sources/eu-img-durer-rhinoceros-1515/image.jpg",
+      "alt": "A black-and-white woodcut of a rhinoceros seen from the side, drawn with a plated, armor-like hide covered in rings and scales, a small second horn on its shoulders and a large curved horn on its nose; the year '1515' and the word 'RHINOCERVS' with the artist's monogram are printed at the upper right, and several lines of German text run across the top.",
+      "credit": "The Rhinoceros, Albrecht Durer, 1515. National Gallery of Art, via Wikimedia Commons (CC0)."
+     },
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry eu-img-durer-rhinoceros-1515"
+     }
+    }
+   ],
+   "rubric": {
+    "rubric_id": "whap-v1",
+    "total_points": 3,
+    "rows": [
+     {
+      "row_id": "a",
+      "name": "Part A",
+      "max": 1,
+      "descriptors": {
+       "0": "The response does not describe a feature of the image, describes something not shown, or gives only a general statement such as 'it is a rhinoceros' without linking it to how Europeans understood the animal.",
+       "1": "The response accurately describes one feature of the woodcut and connects it to how Europeans pictured or understood the animal, such as an imagined armored hide drawn from secondhand reports."
+      },
+      "task_specific": "Describe one visible feature of the woodcut that reveals how Europeans pictured an Asian animal, such as the plated, armor-like hide, the scaly legs, the small extra horn on the shoulders, or the presentation of the animal with a Latin name and date as if it were an accurate report."
+     },
+     {
+      "row_id": "b",
+      "name": "Part B",
+      "max": 1,
+      "descriptors": {
+       "0": "The response names no specific development, is inaccurate (for example, credits Columbus with reaching India), falls outside the period, or only restates the source.",
+       "1": "The response explains one accurate, specific Portuguese development from c. 1450 to c. 1550 and shows how it connected Portugal to India by sea."
+      },
+      "task_specific": "Explain one specific development in Portuguese expansion c. 1450 to c. 1550 that made direct contact with India possible, such as Vasco da Gama's voyage around Africa to Calicut in 1498, the taking of Goa in 1510 or Malacca in 1511 under Afonso de Albuquerque, the network of fortified trading posts in the Indian Ocean, or earlier voyages down the African coast such as Dias rounding the Cape of Good Hope in 1488."
+     },
+     {
+      "row_id": "c",
+      "name": "Part C",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no specific example, offers only a vague claim such as 'more people could read,' is inaccurate, or merely repeats the rhinoceros print.",
+       "1": "The response explains one accurate, specific way printing spread information or ideas in Europe in the period, with a concrete example."
+      },
+      "task_specific": "Explain one specific effect of printing on the spread of information or ideas in Europe c. 1450 to c. 1600 other than animal prints, such as the rapid spread of Luther's writings after 1517, the printing of vernacular Bibles, wide circulation of Columbus's 1493 letter about his voyage, printed illustrated scientific works such as Vesalius's 1543 anatomy, or printed humanist editions of classical texts."
+     }
+    ],
+    "scoring_notes": [
+     "Students are not expected to read the German caption; part A should be scored on visible features of the image and the context line.",
+     "Do not award part A for claims that Durer saw the animal himself; the context line says he made the print after hearing about it.",
+     "Do not penalize minor date discrepancies concerning the animal's arrival; score part B on the Portuguese development explained.",
+     "Parts B and C each need a specific development, not a general statement about exploration or literacy.",
+     "ALTON reference — not official AP scoring"
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [],
+    "contextualization_ideas": [
+     "Portugal's crown-sponsored sea route to Asia and its effort to control the spice trade.",
+     "Growth of printing centers such as Nuremberg in the late fifteenth century.",
+     "Renaissance curiosity about nature and collecting rare objects."
+    ],
+    "outside_evidence": [
+     "Treaty of Tordesillas, 1494",
+     "Vasco da Gama's voyage, 1497 to 1499",
+     "Luther's printed pamphlets after 1517",
+     "Vesalius, 1543"
+    ],
+    "reasoning_types": [
+     "Sourcing and analysis of an image",
+     "Causation",
+     "Contextualization"
+    ],
+    "saq_answers": {
+     "a": [
+      "The rhinoceros is drawn with a hide of overlapping plates that look like a suit of armor, showing that the artist pictured an unfamiliar animal by comparing it with things Europeans already knew.",
+      "The legs are covered in scale-like patterns and there is a small extra horn on the animal's shoulders, suggesting that the image was built from secondhand description and imagination rather than direct observation.",
+      "The print gives the animal a Latin label, RHINOCERVS, and the date 1515, presenting the image as a factual, up-to-date report about a rare creature from Asia.",
+      "The animal fills the whole sheet as a curiosity to be studied, which shows strong European interest in exotic creatures from lands reached by sea."
+     ],
+     "b": [
+      "Vasco da Gama sailed around the Cape of Good Hope and reached Calicut in 1498, opening a direct sea route from Portugal to India that let goods and animals be shipped to Lisbon.",
+      "Afonso de Albuquerque captured Goa in 1510, giving Portugal a permanent base on the Indian coast from which ships regularly sailed to Lisbon.",
+      "Portugal built a network of fortified trading posts in the Indian Ocean, including Malacca, taken in 1511, so the crown could control part of the spice trade and receive luxury goods and diplomatic gifts from Asia.",
+      "In the fifteenth century, Portuguese voyages sponsored by the crown moved down the West African coast, and Bartolomeu Dias rounded the Cape of Good Hope in 1488, which prepared the way for the sea route to India."
+     ],
+     "c": [
+      "Martin Luther's Ninety-Five Theses and later pamphlets, from 1517 on, were printed and spread quickly across the German lands, helping the Protestant Reformation reach a wide audience.",
+      "Printed Bibles in vernacular languages, such as Luther's German translation, let more lay people read scripture themselves.",
+      "Columbus's 1493 letter describing his voyage was printed and reprinted in several cities, spreading news of lands across the Atlantic within months.",
+      "Vesalius's illustrated anatomy, On the Fabric of the Human Body (1543), used printed images to spread new medical knowledge in identical copies across Europe."
+     ]
+    },
+    "common_pitfalls": [
+     "Claiming that Durer saw the rhinoceros in person.",
+     "Assuming students can read the German caption, or inventing what it says.",
+     "Mixing up Portuguese and Spanish voyages, for example claiming Columbus reached India.",
+     "Giving vague answers such as 'trade increased' or 'more people could read' without a specific example.",
+     "For part C, using the rhinoceros print again instead of another example."
+    ],
+    "facts": [
+     "Albrecht Durer was a German artist based in Nuremberg; the woodcut is dated 1515.",
+     "An Indian rhinoceros reached Lisbon in 1515 as a gift to King Manuel I of Portugal.",
+     "Durer did not see the animal; he worked from a written description and sketch sent from Lisbon.",
+     "Vasco da Gama reached Calicut in 1498.",
+     "Afonso de Albuquerque took Goa in 1510 and Malacca in 1511.",
+     "Bartolomeu Dias rounded the Cape of Good Hope in 1488.",
+     "Gutenberg's movable-type printing began in Mainz around 1450.",
+     "Woodcuts could be printed many times, so one image could circulate widely."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_authored_from_real_sources",
+    "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+   }
+  },
+  "fact": []
+ },
+ {
+  "id": "eu1_dbq",
+  "spec": {
+   "id": "eu1_dbq",
+   "exam": "EU1",
+   "template": "dbq",
+   "era": 3,
+   "units": [
+    7,
+    8
+   ],
+   "focus": "Evaluate the extent to which diplomatic agreements between 1881 and 1925 were aimed at preserving peace and security rather than at advancing the interests of individual states",
+   "sources": [
+    {
+     "id": "eu-txt-threeemperors-1881",
+     "context": "Germany, Austria-Hungary and Russia signed this secret treaty in June 1881."
+    },
+    {
+     "id": "eu-txt-francorussian-1892",
+     "context": "French and Russian army officers signed this secret military convention in August 1892."
+    },
+    {
+     "id": "eu-txt-anglorussian-1907",
+     "context": "Britain and Russia signed this agreement in August 1907 about Persia, Afghanistan and Tibet."
+    },
+    {
+     "id": "eu-txt-versailles231-1919",
+     "context": "Germany and the Allied and Associated Powers signed this treaty on June 28, 1919, at Versailles, France."
+    },
+    {
+     "id": "eu-img-orpen-versailles-1919",
+     "context": "William Orpen was a British painter who served as an official war artist; he painted this scene of the signing of the Versailles treaty in 1919."
+    },
+    {
+     "id": "eu-txt-kaiser-1922",
+     "context": "Wilhelm II was German emperor from 1888 until he abdicated in November 1918; he wrote his memoirs in exile in the Netherlands."
+    },
+    {
+     "id": "eu-txt-locarno-1925",
+     "context": "Germany, France, Belgium, Britain and Italy initialed this treaty at Locarno, Switzerland, in October 1925."
+    }
+   ],
+   "seed": 2104
+  },
+  "payload": {
+   "schema_version": "whap-frq-1",
+   "task_type": "dbq",
+   "template": "dbq",
+   "era": 3,
+   "units": [
+    7,
+    8
+   ],
+   "title": "Peace, Security, or Self-Interest? European Diplomatic Agreements, 1881 to 1925",
+   "prompt": {
+    "scenario": "Between the 1880s and the 1920s, European governments signed a long series of secret alliances, colonial settlements, and peace treaties. Some of these agreements spoke the language of neutrality, localizing conflict, and guaranteeing frontiers. Others committed armies to mobilize, divided spheres of influence, or assigned blame and costs to a defeated enemy. The seven documents that follow come from governments, a British war artist, and a former German emperor.",
+    "task": "Evaluate the extent to which diplomatic agreements between 1881 and 1925 were aimed at preserving peace and security rather than at advancing the interests of individual states.",
+    "requirements": [
+     "Respond to the prompt with a historically defensible thesis or claim that establishes a line of reasoning.",
+     "Describe a broader historical context relevant to the prompt.",
+     "Support an argument in response to the prompt using at least four documents.",
+     "Use at least one additional piece of specific historical evidence (beyond that found in the documents) relevant to an argument about the prompt.",
+     "For at least two documents, explain how or why the document's point of view, purpose, historical situation, and/or audience is relevant to an argument.",
+     "Use evidence to corroborate, qualify, or modify an argument that addresses the prompt."
+    ]
+   },
+   "sources": [
+    {
+     "id": "1",
+     "kind": "primary_text",
+     "title": "The Three Emperors' League, articles 1-2 (excerpt)",
+     "attribution": "The governments of Austria-Hungary, Germany and Russia (treaty of 18 June 1881), 1881 (June 18). Avalon Project, Yale Law School (transcription). Reuse: public domain (published before 1929). excerpted (2 segments joined by [...]); whitespace normalized; no wording changed.",
+     "context": "Germany, Austria-Hungary and Russia signed this secret treaty in June 1881.",
+     "real_data": true,
+     "source_registry_id": "eu-txt-threeemperors-1881",
+     "source_sha256": "48473df2ec6f274f29b8ca05b98747cd6559ad64ec97afe9c0aabee643491e02",
+     "body": "ARTICLE 1. In case one of the High Contracting Parties should find itself at war with a fourth Great Power, the two others shall maintain towards it a benevolent neutrality and shall devote their efforts to the localization of the conflict. [...] ARTICLE 2. Russia, in agreement with Germany, declares her firm resolution to respect the interests arising from the new position assured to Austria-Hungary by the Treaty of Berlin. The three Courts, desirous of avoiding all discord between them, engage to take account of their respective interests in the Balkan Peninsula.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry eu-txt-threeemperors-1881"
+     }
+    },
+    {
+     "id": "2",
+     "kind": "primary_text",
+     "title": "The Franco-Russian Alliance Military Convention, articles 1-2 (excerpt)",
+     "attribution": "The French and Russian general staffs, on behalf of their governments (convention of 18 August 1892), 1892 (August 18). Avalon Project, Yale Law School (transcription). Reuse: public domain (published before 1929). excerpted (2 segments joined by [...]); whitespace normalized; no wording changed.",
+     "context": "French and Russian army officers signed this secret military convention in August 1892.",
+     "real_data": true,
+     "source_registry_id": "eu-txt-francorussian-1892",
+     "source_sha256": "30454bf2350b6772acefdfc74366104a4bb01242a07fa439a7cf6af7f6d94ade",
+     "body": "1. If France is attacked by Germany, or by Italy supported by Germany, Russia shall employ all her available forces to attack Germany. If Russia is attacked by Germany, or by Austria supported by Germany, France shall employ all her available forces to attack Germany. [...] 2. In case the forces of the Triple Alliance, or of any one of the Powers belonging to it, should be mobilized, France and Russia, at the first news of this event and without previous agreement being necessary, shall mobilize immediately and simultaneously the whole of their forces, and shall transport them as far as possible to their frontiers.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry eu-txt-francorussian-1892"
+     }
+    },
+    {
+     "id": "3",
+     "kind": "primary_text",
+     "title": "The Anglo-Russian Convention of 1907 on Persia (excerpt on British commitments)",
+     "attribution": "The governments of Great Britain and Russia (convention of 31 August 1907), 1907 (August 31). Avalon Project, Yale Law School (transcription). Reuse: public domain (published before 1929). excerpted (1 segment); whitespace normalized; no wording changed; the transcription's '\\emdash' formatting code replaced by a dash.",
+     "context": "Britain and Russia signed this agreement in August 1907 about Persia, Afghanistan and Tibet.",
+     "real_data": true,
+     "source_registry_id": "eu-txt-anglorussian-1907",
+     "source_sha256": "704417f119cd9f2227638c57809a9e377ebe3d4828f9a87c84ae9b3f8bc8bb63",
+     "body": "Great Britain engages not to seek for herself, and not to support in favour of British subjects, or in favour of the subjects of third Powers, any Concessions of a political or commercial nature -  such as Concessions for railways, banks, telegraphs, roads, transport, insurance, etc. -- beyond a line starting from Kasr-i-Shirin, passing through Isfahan, Yezd, Kakhk, and ending at a point on the Persian frontier at the intersection of the Russian and Afghan frontiers, and not to oppose, directly or indirectly, demands for similar Concessions in this region which are supported by the Russian Government.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry eu-txt-anglorussian-1907"
+     }
+    },
+    {
+     "id": "4",
+     "kind": "primary_text",
+     "title": "Treaty of Versailles, Part VIII (Reparation), articles 231-232 (excerpt)",
+     "attribution": "The Allied and Associated Powers and Germany (treaty signed 28 June 1919), 1919 (June 28). Avalon Project, Yale Law School (transcription). Reuse: public domain (published before 1929). excerpted (1 segment); whitespace normalized; no wording changed.",
+     "context": "Germany and the Allied and Associated Powers signed this treaty on June 28, 1919, at Versailles, France.",
+     "real_data": true,
+     "source_registry_id": "eu-txt-versailles231-1919",
+     "source_sha256": "dc9ae206aac066bdee5445cb8289e3d890bef8f2d000e86733e5eb21bb0aabdc",
+     "body": "ARTICLE 231. The Allied and Associated Governments affirm and Germany accepts the responsibility of Germany and her allies for causing all the loss and damage to which the Allied and Associated Governments and their nationals have been subjected as a consequence of the war imposed upon them by the aggression of Germany and her allies. ARTICLE: 232. The Allied and Associated Governments recognise that the resources of Germany are not adequate, after taking into account permanent diminutions of such resources which will result from other provisions of the present Treaty, to make complete reparation for all such loss and damage.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry eu-txt-versailles231-1919"
+     }
+    },
+    {
+     "id": "5",
+     "kind": "image",
+     "title": "The Signing of Peace in the Hall of Mirrors, Versailles, 28th June 1919",
+     "attribution": "William Orpen, 1919. Wikimedia Commons (file page records the source institution and public-domain tag). Reuse: public domain (1919 work). unmodified except Wikimedia Commons' scaled JPEG rendering of the file (upload.wikimedia.org thumbnail, 1280 px wide at most).",
+     "context": "William Orpen was a British painter who served as an official war artist; he painted this scene of the signing of the Versailles treaty in 1919.",
+     "real_data": true,
+     "source_registry_id": "eu-img-orpen-versailles-1919",
+     "source_sha256": "5babf77c0be09dbab497a9ac61fb9ce8002be9454e97f613fb4fdebfa711eb74",
+     "body": "A painting of the interior of a grand hall with gilded ceiling decoration and three tall arched windows of mirrors; at the bottom of the picture men in dark formal clothes and a few in uniform sit and stand around a long green-covered table, with one man in the foreground leaning over a desk to sign a paper while others watch; a small Latin-style inscription reading 'Le roy gouverne' is visible above the central window.",
+     "image": {
+      "path": "ap-sources/eu-img-orpen-versailles-1919/image.jpg",
+      "alt": "A painting of the interior of a grand hall with gilded ceiling decoration and three tall arched windows of mirrors; at the bottom of the picture men in dark formal clothes and a few in uniform sit and stand around a long green-covered table, with one man in the foreground leaning over a desk to sign a paper while others watch; a small Latin-style inscription reading 'Le roy gouverne' is visible above the central window.",
+      "credit": "The Signing of Peace in the Hall of Mirrors, Versailles, William Orpen, 1919. Imperial War Museum, via Wikimedia Commons (public domain)."
+     },
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry eu-img-orpen-versailles-1919"
+     }
+    },
+    {
+     "id": "6",
+     "kind": "primary_text",
+     "title": "The Kaiser's Memoirs, chapter XIV: The Question of Guilt (excerpt)",
+     "attribution": "Wilhelm II, former German emperor (memoirs written in exile; English edition 1922), 1922. Project Gutenberg eBook #43522. Reuse: public domain in the United States (published before 1929). excerpted (1 segment); whitespace normalized; no wording changed.",
+     "context": "Wilhelm II was German emperor from 1888 until he abdicated in November 1918; he wrote his memoirs in exile in the Netherlands.",
+     "real_data": true,
+     "source_registry_id": "eu-txt-kaiser-1922",
+     "source_sha256": "879e6e27d908915c57a1c13d025d6ee5df990178e7b3240a36e73b941042b134",
+     "body": "The general situation of the German Empire in the period before the war had become continually more brilliant, and for that very reason continually more difficult from the point of view of foreign politics. Unprecedented progress in industry, commerce, and world traffic had made Germany prosperous. The curve of our development tended steadily upward. The concomitant of this peaceful penetration of a considerable part of the world's markets, to which German diligence and our achievements justly entitled us, was bound to be disagreeable to older nations of the world, particularly to England.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry eu-txt-kaiser-1922"
+     }
+    },
+    {
+     "id": "7",
+     "kind": "primary_text",
+     "title": "Treaty of Mutual Guarantee (Locarno Pact), articles 1-2 (excerpt)",
+     "attribution": "Germany, Belgium, France, Great Britain and Italy (treaty initialed 16 October 1925), 1925 (October 16). Avalon Project, Yale Law School (transcription). Reuse: public domain (published before 1929). excerpted (2 segments joined by [...]); whitespace normalized; no wording changed.",
+     "context": "Germany, France, Belgium, Britain and Italy initialed this treaty at Locarno, Switzerland, in October 1925.",
+     "real_data": true,
+     "source_registry_id": "eu-txt-locarno-1925",
+     "source_sha256": "1746bca513108f2d6f4a1bb76423d78e3771b8dde93669fc5aae326b62bbc1db",
+     "body": "ARTICLE 1. The High Contracting Parties collectively and severally guarantee, in the manner provided in the following Articles, the maintenance of the territorial status quo resulting from the frontiers between Germany and Belgium and between Germany and France, and the inviolability of the said frontiers as fixed by or in pursuance of the Treaty of Peace signed at Versailles on June 28, 1919 , and also the observance of the stipulations of Articles 42 and 43 of the said treaty concerning the demilitarised zone. [...] ARTICLE 2. Germany and Belgium, and also Germany and France, mutually undertake that they will in no case attack or invade each other or resort to war against each other.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry eu-txt-locarno-1925"
+     }
+    }
+   ],
+   "rubric": {
+    "rubric_id": "whap-v1",
+    "total_points": 7,
+    "rows": [
+     {
+      "row_id": "thesis",
+      "name": "Thesis/claim",
+      "max": 1,
+      "descriptors": {
+       "0": "Restates the prompt, gives no defensible claim, or makes a claim with no line of reasoning about peace versus state interests.",
+       "1": "Offers a defensible claim about the extent to which the agreements aimed at peace and security or at state interests, with a line of reasoning such as change over time or the overlap between security and self-interest."
+      },
+      "task_specific": "A claim that takes a position on how far the agreements of 1881 to 1925 aimed at peace and security versus individual state interests, and sets up a line of reasoning, for example by separating the pre-1914 alliance system from the postwar settlements, or by arguing that states pursued security through self-interest."
+     },
+     {
+      "row_id": "context",
+      "name": "Contextualization",
+      "max": 1,
+      "descriptors": {
+       "0": "Gives no relevant context, or only a passing phrase.",
+       "1": "Describes a broader development before or during the period that bears on why states made these agreements, and connects it to the argument."
+      },
+      "task_specific": "Places the agreements in a wider setting, such as the German unification of 1871 and Bismarck's effort to isolate France, Balkan instability after the Congress of Berlin, imperial competition in Africa and Asia, or the destruction of the First World War and the postwar search for security."
+     },
+     {
+      "row_id": "docs",
+      "name": "Evidence from the documents",
+      "max": 2,
+      "descriptors": {
+       "0": "Uses fewer than three documents accurately, or only quotes them without connecting them to the topic.",
+       "1": "Accurately describes the content of at least three documents in a way that relates to the topic.",
+       "2": "Uses the content of at least four documents to support an argument about peace and security versus state interests."
+      },
+      "task_specific": "Uses what the documents actually say, for example Document 1's pledge of benevolent neutrality and localization, Document 2's mobilization clause, Document 3's line dividing concessions in Persia, Document 4's assignment of responsibility, and Document 7's guarantee of the western frontiers."
+     },
+     {
+      "row_id": "outside",
+      "name": "Evidence beyond the documents",
+      "max": 1,
+      "descriptors": {
+       "0": "Gives no outside evidence, or only a vague reference.",
+       "1": "Uses at least one specific, accurate piece of outside evidence and explains how it supports the argument."
+      },
+      "task_specific": "Brings in at least one specific fact not in the documents, such as the Reinsurance Treaty of 1887, the Entente Cordiale of 1904, the Moroccan crises, the Bosnian annexation crisis of 1908, the Schlieffen Plan, the League of Nations, the Ruhr occupation of 1923, or the Dawes Plan of 1924."
+     },
+     {
+      "row_id": "sourcing",
+      "name": "Sourcing (point of view, purpose, situation, audience)",
+      "max": 1,
+      "descriptors": {
+       "0": "Gives no sourcing, or only identifies the author or date without explaining why it matters.",
+       "1": "For at least two documents, explains how the point of view, purpose, historical situation or audience affects the argument."
+      },
+      "task_specific": "Explains why point of view, purpose, situation or audience matters, for example that Documents 1 and 2 were secret, that Document 2 was written by general staffs, that Document 6 is an exiled ruler's self-defense in a chapter on the guilt question, or that Document 5 was painted by a British official war artist in a palace connected with French royal power and with the proclamation of the German Empire."
+     },
+     {
+      "row_id": "complexity",
+      "name": "Complex understanding",
+      "max": 1,
+      "descriptors": {
+       "0": "Gives a one-sided or simple argument.",
+       "1": "Corroborates, qualifies or modifies the argument with evidence, for example by explaining several kinds of motive, change over time, or the limits of peace-oriented language in the agreements."
+      },
+      "task_specific": "Shows a complex understanding, for example by arguing that security and self-interest were often the same aim, by tracing change from the secret alliances to the public guarantees of Locarno, or by weighing documents that cut against the thesis."
+     }
+    ],
+    "scoring_notes": [
+     "Students may define peace and security as Europe-wide stability or as the safety of a single state; either is acceptable if the essay applies its definition consistently.",
+     "Document 5 should be read from what is visible: a formal signing in an ornate hall, with Allied delegates facing the viewer and the signing figures in the foreground shown largely from behind. Do not reward claims about figures that the student cannot support.",
+     "Article 231 does not use the words war guilt; that label came from later debate. Students who use the label should not lose credit, but precise readers may note the distinction.",
+     "A thesis that the agreements changed over time, from secret alliances to open frontier guarantees, is acceptable as long as it answers the question of extent.",
+     "ALTON reference — not official AP scoring"
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [
+     "Before 1914 most agreements put the security and interests of individual states ahead of general peace. Documents 2 and 3 show states lining up military forces and dividing spheres of influence. After the war, Locarno (Document 7) did more to aim at shared security, even though it rested on a Versailles settlement that had been imposed on Germany.",
+     "The agreements aimed at security in the narrow sense of each state's safety against rivals, so peace and self-interest were seldom opposed. The neutrality of the Three Emperors' League, the mobilization clauses of the Franco-Russian convention, and the frontier guarantee at Locarno each protected the signers while presenting stability as the goal.",
+     "The agreements mostly served the interests of the strongest states. The 1881 and 1907 agreements settled great-power quarrels at the expense of Balkan peoples and of Persia, and the Versailles terms placed responsibility and costs on Germany. Peace was a by-product of managing power rather than the main aim, a point that Wilhelm II's self-serving account (Document 6) also illustrates."
+    ],
+    "contextualization_ideas": [
+     "German unification in 1871 and the French loss of Alsace-Lorraine led Bismarck to build alliances that would keep France isolated and stop Austria-Hungary and Russia from going to war over the Balkans.",
+     "The decline of Ottoman power and the Congress of Berlin of 1878 left rival Austrian and Russian ambitions in the Balkans, which later agreements tried to manage.",
+     "The new imperialism and Weltpolitik sharpened competition overseas. After the First World War, the scale of the losses and the founding of the League of Nations pushed statesmen toward collective security, though fear of renewed German power remained."
+    ],
+    "outside_evidence": [
+     "The Dual Alliance of 1879 between Germany and Austria-Hungary became the Triple Alliance when Italy joined in 1882.",
+     "After the Three Emperors' League lapsed in 1887, Bismarck signed the Reinsurance Treaty with Russia. Germany did not renew it in 1890, after Wilhelm II dismissed Bismarck.",
+     "In the Entente Cordiale of 1904, Britain and France settled colonial disputes, with British influence in Egypt and French influence in Morocco recognized. The 1907 Anglo-Russian Convention then completed the Triple Entente.",
+     "The First Moroccan Crisis led to the Algeciras Conference of 1906, and the Second Moroccan Crisis followed in 1911. In both, German pressure drew Britain and France closer together.",
+     "In 1908 Austria-Hungary annexed Bosnia-Herzegovina, which it had occupied under the Treaty of Berlin, setting off a crisis with Serbia and Russia.",
+     "The German Schlieffen Plan expected a two-front war against France and Russia, which shows that general staffs planned around rival alliance blocs.",
+     "The Treaty of Versailles included the Covenant of the League of Nations, a demilitarized Rhineland, and limits on the German army. In 1921 the reparations bill was set at 132 billion gold marks.",
+     "France and Belgium occupied the Ruhr in 1923 over missed reparations payments, and the Dawes Plan of 1924 rescheduled the payments before the Locarno agreements.",
+     "At Locarno, Germany's western borders were guaranteed but its eastern borders with Poland and Czechoslovakia were not. Germany joined the League of Nations in 1926.",
+     "John Maynard Keynes criticized the reparations terms in The Economic Consequences of the Peace (1919)."
+    ],
+    "reasoning_types": [
+     "Causation",
+     "Continuity and change over time",
+     "Comparison"
+    ],
+    "doc_uses": [
+     {
+      "source_id": "1",
+      "usable_for": "Peace-oriented language: benevolent neutrality, localizing conflict, and avoiding discord in the Balkans. It also shows the three empires protecting their own Balkan interests, including Austria-Hungary's position under the Treaty of Berlin.",
+      "sourcing": "The context line calls it a secret treaty among three monarchies. Secrecy means it was written for governments, not the public, so its stated aims reflect what the courts actually agreed to protect: their own interests and their relations with one another."
+     },
+     {
+      "source_id": "2",
+      "usable_for": "Shows agreements that prepared for war against a named rival bloc. The clause on immediate and simultaneous mobilization suggests security by deterrence, but also an automatic path toward wider war.",
+      "sourcing": "It was signed by army officers for their governments and kept secret. Military planners wrote it to win a future war against Germany and the Triple Alliance, so its main concern is national military security rather than general peace."
+     },
+     {
+      "source_id": "3",
+      "usable_for": "Shows two great powers easing their imperial rivalry by dividing zones for concessions in Persia. This reduced the risk of conflict between Britain and Russia while advancing their own economic and political interests.",
+      "sourcing": "The context line says the agreement covered Persia, Afghanistan and Tibet, and Persia did not sign it. It was written between two empires settling their own disputes, so peace between the signers came at the expense of a third country's sovereignty."
+     },
+     {
+      "source_id": "4",
+      "usable_for": "Shows a peace treaty that assigned responsibility for all loss and damage to Germany and its allies. This can be read as a pursuit of security and compensation by the victors, or as punishment that undermined lasting peace.",
+      "sourcing": "The victorious Allied and Associated Powers wrote it and Germany was required to accept it. Its point of view is the winners', and its claims about aggression and responsibility served their demand for reparation."
+     },
+     {
+      "source_id": "5",
+      "usable_for": "Presents the Versailles signing as a solemn, orderly act of peacemaking in a grand setting. It can support the claim that the settlement was staged as the victors' peace.",
+      "sourcing": "Orpen was a British official war artist, so the painting reflects the outlook of a victorious power. The Hall of Mirrors, with its French royal inscription, was also where the German Empire was proclaimed in 1871, and the setting gave the signing symbolic meaning for French and Allied audiences."
+     },
+     {
+      "source_id": "6",
+      "usable_for": "Shows the German imperial view that Germany's economic expansion was peaceful and that its rise provoked envious rivals, especially England. It can be used to discuss the commercial and imperial rivalries behind the alliance system.",
+      "sourcing": "Wilhelm II wrote in exile after abdicating, in a chapter titled The Question of Guilt, so his purpose was to defend himself and Germany against blame. That makes the excerpt useful evidence of perspective, not a neutral account of prewar diplomacy."
+     },
+     {
+      "source_id": "7",
+      "usable_for": "Shows a mutual guarantee of Germany's western frontiers and a pledge by Germany, France and Belgium not to attack one another. It is the strongest evidence of an agreement aimed at collective peace and security.",
+      "sourcing": "Germany signed it as an equal partner rather than as a defeated power accepting dictated terms, which sets it apart from Document 4. Yet it upheld frontiers and a demilitarized zone set at Versailles, so it also served French and Belgian security interests."
+     }
+    ],
+    "evidence_map": [
+     {
+      "line": "Many agreements explicitly aimed to limit war and keep great-power peace",
+      "supports": [
+       "1",
+       "7"
+      ],
+      "complicates": [
+       "2",
+       "4"
+      ]
+     },
+     {
+      "line": "Alliances and settlements mainly advanced the security and power of particular states against rivals",
+      "supports": [
+       "2",
+       "3",
+       "6"
+      ],
+      "complicates": [
+       "7"
+      ]
+     },
+     {
+      "line": "The postwar settlement mixed the pursuit of security with the victors' interests and the punishment of Germany",
+      "supports": [
+       "4",
+       "5",
+       "7"
+      ],
+      "complicates": [
+       "6"
+      ]
+     },
+     {
+      "line": "Great powers kept peace among themselves by dividing up the interests of weaker regions and peoples",
+      "supports": [
+       "1",
+       "3"
+      ],
+      "complicates": [
+       "2"
+      ]
+     }
+    ],
+    "common_pitfalls": [
+     "Treating every agreement as either purely peaceful or purely selfish, without noticing that security and self-interest often overlapped.",
+     "Claiming that the alliance system alone caused the First World War, rather than treating it as one contributing factor among several.",
+     "Describing the Orpen painting with names or details the student cannot actually see, or saying that the inscription is Latin.",
+     "Taking Wilhelm II's memoir at face value without considering that he was defending himself in exile.",
+     "Saying that Article 231 uses the words war guilt, or that Locarno guaranteed Germany's eastern borders.",
+     "Summarizing the documents in order without building an argument about the extent of peace-oriented aims."
+    ],
+    "facts": [
+     "The Three Emperors' League treaty was signed on 18 June 1881, renewed in 1884, and lapsed in 1887.",
+     "The Franco-Russian military convention was signed in August 1892 and was in force as an alliance by 1894.",
+     "The Anglo-Russian Convention of 31 August 1907 dealt with Persia, Afghanistan and Tibet.",
+     "The Treaty of Versailles was signed on 28 June 1919 in the Hall of Mirrors, where the German Empire had been proclaimed in January 1871.",
+     "The Locarno treaties were initialed in October 1925 and signed in London in December 1925.",
+     "Wilhelm II abdicated in November 1918 and lived in exile in the Netherlands."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_authored_from_real_sources",
+    "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+   }
+  },
+  "fact": [
+   {
+    "where": "IMAGE (5) DESCRIPTION — \"a small Latin-style inscription reading 'Le roy gouverne'\"",
+    "kind": "inaccurate",
+    "detail": "The inscription in the Hall of Mirrors ceiling cartouche ('Le Roy gouverne par lui-même') is French, not Latin. Calling it 'Latin-style' is wrong and also contradicts the practice material's own common_pitfalls entry, which warns against 'saying that the inscription is Latin', and the Document 5 sourcing note, which correctly calls it a 'French royal inscription'."
+   }
+  ]
+ },
+ {
+  "id": "eu1_leq",
+  "spec": {
+   "id": "eu1_leq",
+   "exam": "EU1",
+   "template": "leq",
+   "era": 2,
+   "units": [
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "focus": "Changes and continuities in the relationship between rulers and their subjects in Europe, c. 1648 to c. 1914 (state power, individual rights and political participation)",
+   "sources": [],
+   "seed": 2105
+  },
+  "payload": {
+   "schema_version": "whap-frq-1",
+   "task_type": "leq",
+   "template": "leq",
+   "era": 2,
+   "units": [
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "title": "Rulers and Subjects in Europe, c. 1648 to c. 1914: State Power, Rights and Political Participation",
+   "prompt": {
+    "scenario": "Between the end of the Thirty Years' War and the eve of the First World War, European governments took on new powers to tax, police, educate and mobilize their populations. Over the same years, political writers, revolutionaries and reformers raised new claims about the rights of individuals and about who should have a voice in government. Some monarchies kept much of their authority, while others shared power with elected assemblies or were overthrown.",
+    "task": "Evaluate the extent to which the relationship between rulers and their subjects in Europe changed from c. 1648 to c. 1914. You are not expected to address the entire time period.",
+    "requirements": [
+     "Respond to the prompt with a historically defensible thesis or claim that establishes a line of reasoning.",
+     "Describe a broader historical context relevant to the prompt.",
+     "Support an argument in response to the prompt using at least two pieces of specific and relevant evidence.",
+     "Use historical reasoning (continuity and change) to frame or structure an argument that addresses the prompt.",
+     "Use evidence to show a complex understanding of the prompt, for example by explaining both change and continuity, by comparing different states or regions, or by connecting the development to other periods."
+    ]
+   },
+   "sources": [],
+   "rubric": {
+    "rubric_id": "whap-v1",
+    "total_points": 6,
+    "rows": [
+     {
+      "row_id": "thesis",
+      "name": "Thesis/claim",
+      "max": 1,
+      "descriptors": {
+       "0": "The response restates the prompt, has no defensible claim, or makes a claim that does not judge the extent of change.",
+       "1": "The response makes a defensible claim about the extent of change or continuity in ruler-subject relations that sets up a line of reasoning, placed in the introduction or conclusion."
+      },
+      "task_specific": "A claim that judges how far the ruler-subject relationship changed between c. 1648 and c. 1914 and points to a line of reasoning, for example that rights and participation widened while state power kept growing, or that change was large in western Europe but limited in the eastern empires."
+     },
+     {
+      "row_id": "context",
+      "name": "Contextualization",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no relevant context or only a passing phrase.",
+       "1": "The response describes a broader historical development before, during or after the period and explicitly ties it to the question of rulers and subjects."
+      },
+      "task_specific": "A description of broader developments that shaped ruler-subject relations, such as the seventeenth-century crises and religious wars that encouraged absolutist claims, the Enlightenment critique of arbitrary power, or industrialization and urban growth that produced new classes demanding a political voice."
+     },
+     {
+      "row_id": "evidence",
+      "name": "Evidence",
+      "max": 2,
+      "descriptors": {
+       "0": "The response gives no specific evidence relevant to the prompt.",
+       "1": "The response names at least two specific pieces of relevant evidence but does not use them to support an argument.",
+       "2": "The response uses at least two specific pieces of relevant evidence to support an argument about the extent of change in ruler-subject relations."
+      },
+      "task_specific": "Specific examples such as Louis XIV's court at Versailles, the English Bill of Rights of 1689, the reforms of Joseph II, the Declaration of the Rights of Man and of the Citizen, the Napoleonic Code, the Reform Acts in Britain, the revolutions of 1848, the emancipation of the Russian serfs in 1861, universal male suffrage for the German Reichstag, or the Russian Duma after 1905."
+     },
+     {
+      "row_id": "analysis",
+      "name": "Analysis and reasoning",
+      "max": 2,
+      "descriptors": {
+       "0": "The response lists events or describes rulers without using continuity and change reasoning.",
+       "1": "The response uses continuity and change reasoning to frame or structure an argument, though the analysis may be uneven or one-sided.",
+       "2": "The response shows a complex understanding, for example by explaining both what changed and what persisted, by contrasting western and eastern Europe, or by showing how expanded rights and stronger states developed together, backed by evidence."
+      },
+      "task_specific": "Use of continuity and change to structure the argument, and a complex understanding shown by weighing change against continuity, comparing regions or states, or noting that greater participation often came with stronger state power."
+     }
+    ],
+    "scoring_notes": [
+     "Students may focus on any part of the period; an essay running only from c. 1789 to c. 1914, or only from c. 1648 to c. 1815, can still earn every point if it judges the extent of change.",
+     "The thesis has to judge extent; a claim that the relationship simply changed earns no credit unless it says how much or in what way.",
+     "Credit evidence from any European state, including the Ottoman and Russian empires, and from European colonies where subjects' rights or participation are discussed.",
+     "The complexity point can be earned through a thread running through the whole essay or through a well-developed counterargument; one sentence of qualification is not enough on its own.",
+     "ALTON reference — not official AP scoring"
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [
+     "Between 1648 and 1914 the basis of rulers' authority shifted a great deal from divine right toward constitutions, written rights and elected parliaments, especially in Britain and France. Even so, state power over subjects kept growing through bureaucracies, conscription and mass schooling, so subjects gained a voice without escaping more intensive government.",
+     "The relationship changed significantly in western Europe, where the Glorious Revolution, the French Revolution and the British Reform Acts widened rights and participation. It changed much less in central and eastern Europe, where Prussian, Austrian and Russian monarchs kept real power even after granting limited assemblies such as the Reichstag and the Duma.",
+     "Change was real but limited: by 1914 most European men could vote for some kind of assembly, and serfdom had been abolished across Europe. Still, monarchs, aristocrats and propertied elites often controlled governments, women were mostly kept out of national politics, and rulers repeatedly cut back rights after revolutions, as in 1815 and after 1848."
+    ],
+    "contextualization_ideas": [
+     "The religious wars and political crises of the seventeenth century, including the Thirty Years' War, the English Civil War and the Fronde, led many rulers and theorists such as Hobbes to argue that strong central authority was needed to keep order. This set the starting point of absolutist claims in 1648.",
+     "Enlightenment writers such as Locke, Montesquieu and Rousseau questioned arbitrary rule and argued for natural rights, the separation of powers and popular sovereignty. These ideas shaped both enlightened absolutism and the revolutions after 1789.",
+     "Industrialization and urbanization in the nineteenth century created a large middle class and an industrial working class. Both demanded political representation, and their demands encouraged suffrage reform, labor parties and state social welfare."
+    ],
+    "outside_evidence": [
+     "Louis XIV of France centralized royal power, used intendants to carry out royal policy in the provinces, drew the nobility to the court at Versailles, and revoked the Edict of Nantes in 1685, ending legal toleration for Huguenots.",
+     "The Glorious Revolution of 1688 and the English Bill of Rights of 1689 limited the English monarchy, requiring parliamentary consent for taxation and for keeping a standing army in peacetime.",
+     "Frederick II of Prussia, an enlightened absolutist, restricted the use of judicial torture and supported religious toleration while keeping absolute authority and relying on the Junker nobility.",
+     "Joseph II of the Habsburg Monarchy issued the Patent of Toleration in 1781 and abolished personal serfdom in his lands, but his centralizing reforms met strong resistance, and some were reversed after his death.",
+     "Catherine the Great of Russia crushed the Pugachev Rebellion of 1773 to 1775 and issued the Charter of the Nobility in 1785, which confirmed noble privileges and left serfdom in place.",
+     "In 1789 the French National Assembly adopted the Declaration of the Rights of Man and of the Citizen, which declared that sovereignty resides in the nation and set out rights such as legal equality and liberty.",
+     "The Napoleonic Code of 1804 established legal equality for men and protected property, but it strengthened fathers' authority over wives and children. Napoleon's rule also relied on censorship and a powerful police.",
+     "After 1815 the Concert of Europe and Metternich's Carlsbad Decrees of 1819 restricted the press and universities in the German states in an attempt to suppress liberal and nationalist movements.",
+     "Britain's Great Reform Act of 1832 redistributed parliamentary seats and widened the franchise to more of the middle class. The Chartists' demands for universal male suffrage were rejected, but later Reform Acts in 1867 and 1884 extended the vote to many working men.",
+     "During the revolutions of 1848, the Frankfurt Parliament tried to write a liberal constitution for a united Germany. France adopted universal male suffrage and elected Louis Napoleon president, and he later made himself emperor.",
+     "Alexander II emancipated the Russian serfs in 1861. Later, after the Revolution of 1905, Nicholas II issued the October Manifesto and created the Duma, but he kept wide powers under the Fundamental Laws of 1906.",
+     "The German Empire of 1871 elected its Reichstag by universal male suffrage, yet the chancellor answered to the emperor. In the 1880s Bismarck introduced health, accident and old-age insurance partly to win workers away from socialism, while his Anti-Socialist Laws restricted the Social Democrats.",
+     "The French Third Republic's Ferry laws of the 1880s created free, compulsory, secular primary education, which expanded the state's role in shaping citizens.",
+     "Women gained the vote in national elections in Finland in 1906 and Norway in 1913, while suffragists in Britain such as the Women's Social and Political Union campaigned for the vote without winning it before 1914."
+    ],
+    "reasoning_types": [
+     "Continuity and change over time (primary reasoning skill)",
+     "Comparison of western and eastern European states",
+     "Causation, as a supporting skill explaining why change occurred"
+    ],
+    "common_pitfalls": [
+     "Describing absolutism or the French Revolution in detail without judging the extent of change across the period.",
+     "Treating change as steady or uniform across Europe and ignoring the setbacks after 1815 and 1848 and the differences between western and eastern Europe.",
+     "Assuming more voting rights meant less state power, and missing that conscription, taxation, policing and schooling grew alongside participation.",
+     "Calling enlightened absolutists democratic or constitutional rulers, when they kept absolute authority.",
+     "Claiming universal suffrage existed by 1914 without noting that women were mostly excluded and that many systems had property qualifications or weighted voting.",
+     "Drifting into the First World War or the twentieth century without connecting it to the prompt."
+    ],
+    "facts": [
+     "The Peace of Westphalia was signed in 1648.",
+     "The English Bill of Rights dates from 1689.",
+     "Louis XIV revoked the Edict of Nantes in 1685.",
+     "Joseph II's Patent of Toleration was issued in 1781.",
+     "The Declaration of the Rights of Man and of the Citizen was adopted in 1789.",
+     "The Napoleonic Code was promulgated in 1804.",
+     "The Carlsbad Decrees were issued in 1819.",
+     "The British Great Reform Act was passed in 1832, and further Reform Acts followed in 1867 and 1884.",
+     "Revolutions broke out across much of Europe in 1848.",
+     "Russian serfs were emancipated in 1861.",
+     "The German Empire was proclaimed in 1871 with a Reichstag elected by universal male suffrage.",
+     "The Russian October Manifesto of 1905 led to the creation of the Duma.",
+     "Finland granted women the vote in national elections in 1906 and Norway in 1913."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_authored_from_real_sources",
+    "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+   }
+  },
+  "fact": []
+ }
+]

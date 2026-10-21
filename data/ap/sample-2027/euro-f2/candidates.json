@@ -1,0 +1,525 @@
+[
+ {
+  "cellId": "ap_european_history-eu2_saq1",
+  "apSubjectCode": "ap_european_history",
+  "kind": "frq_bundle",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_european_history-eu2_saq1-k0",
+  "keywordCode": "6.1",
+  "unitCode": "6",
+  "skillPrimary": "3.C",
+  "structure": "frq_multipart",
+  "archetype": "eurofrq_eu2_saq1",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "gateOverride": "euro-f2-2026-10-20",
+  "run": "euro-f2",
+  "stockKey": "euro-f2:ap_european_history-eu2_saq1-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "euro-f2-2026-10-20",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_european_history",
+  "itemFamilyId": "fam:euro-f2:ap_european_history-eu2_saq1-k0",
+  "canonicalKey": "euro-f2:ap_european_history-eu2_saq1-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_european_history:6.1",
+  "sharedWith": [],
+  "stockCell": "ap_european_history|6.1|3.C|frq_multipart|na",
+  "history": [
+   {
+    "run": "euro-f2",
+    "gateVersion": "euro-f2-2026-10-20",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "eu-txt-cs-soviet-emancipation"
+  ],
+  "exam": "EU2",
+  "payload": {
+   "archetype": "eurofrq_eu2_saq1",
+   "template": "saq1",
+   "topic": "6.1",
+   "extra_topics": [],
+   "skill": "3.C",
+   "representative_skill": "3.C",
+   "calculator": "na",
+   "title": "The Emancipation of the Russian Serfs, 1861, and Its Consequences",
+   "set_intro": "Historical source (real document)\n(secondary source)\nSoviet Union: A Country Study (excerpt on the emancipation of the serfs in 1861)\nRaymond E. Zickel, ed., Federal Research Division, Library of Congress, 1991 (research completed 1989). Library of Congress, Federal Research Division (Country Studies; full text via Internet Archive OCR). Reuse: public domain (U.S. government work, 17 U.S.C. 105; the Library of Congress states all other text and graphics are in the public domain). excerpted (2 segments joined by [...]); whitespace normalized; OCR line-break hyphenation rejoined; running page headers and cross-reference notes removed; no wording changed.\nContext: This reference book was written for the U.S. government in the late 1980s; the passage describes Russia in 1861.\n\n\"In 1861 Alexander II proclaimed the emancipation of about 20 million privately held serfs. Local commissions, which were dominated by landlords, effected emancipation by giving land and limited freedom to the serfs. The former serfs usually remained in the village commune, or mir, but were required to make redemption payments, which were stretched out over a period of almost fifty years, to the government. [...] Neither of the government’s visions was realistic, and both the former serfs and the former owners of serfs were dissatisfied with the outcome of emancipation.\"",
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Briefly describe ONE claim the excerpt makes about how the emancipation of the serfs was carried out or what it achieved.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.C"
+     ],
+     "topic_codes": [
+      "6.1"
+     ],
+     "model_answer": "The excerpt claims that the local commissions carrying out emancipation were dominated by landlords, so the nobility shaped the terms of the settlement.",
+     "rubric_rows": [
+      {
+       "row_id": "a",
+       "points": 1,
+       "criterion": "The response accurately describes a claim the excerpt makes about how emancipation was carried out or what it achieved. Examples: landlord-dominated local commissions carried it out; the serfs received land but only limited freedom; former serfs usually stayed in the village commune (mir); they had to make redemption payments to the government over almost fifty years; both former serfs and former owners were dissatisfied.",
+       "required_elements": [
+        "The excerpt claims that the local commissions carrying out emancipation were dominated by landlords, so the nobility shaped the terms of the settlement.",
+        "The excerpt says the serfs received land but only limited freedom, which means emancipation did not make them fully independent citizens.",
+        "The excerpt notes that former serfs usually stayed in the village commune, or mir, and had to make redemption payments to the government over almost fifty years.",
+        "The excerpt argues that the outcome satisfied no one, since both former serfs and former serf owners were unhappy with it."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Briefly explain ONE specific historical development or circumstance from the period 1853 to 1861 that helps explain why the Russian government decided to emancipate the serfs. Do not use a development that the excerpt names.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.C"
+     ],
+     "topic_codes": [
+      "6.1"
+     ],
+     "model_answer": "Russia's defeat in the Crimean War (1853 to 1856) showed that a serf-based army and economy could not match Britain and France. Leaders came to see abolishing serfdom as necessary for military and economic modernization.",
+     "rubric_rows": [
+      {
+       "row_id": "b",
+       "points": 1,
+       "criterion": "The response explains a specific development from 1853 to 1861 that helps account for the government's decision to emancipate the serfs. The development must not be one the excerpt names. Acceptable examples include defeat in the Crimean War (1853 to 1856) exposing military and economic backwardness; repeated peasant disturbances and the fear of revolt from below; the economic inefficiency of serf labor compared with the industrializing West; and Alexander II's belief that reform from above was better than upheaval from below.",
+       "required_elements": [
+        "Russia's defeat in the Crimean War (1853 to 1856) showed that a serf-based army and economy could not match Britain and France. Leaders came to see abolishing serfdom as necessary for military and economic modernization.",
+        "Peasant disturbances in the 1850s made Alexander II fear rebellion. In 1856 he told the nobility it was better to end serfdom from above than to wait for it to be overthrown from below.",
+        "Serf labor was inefficient compared with the free-labor, industrializing economies of Western Europe. Reformers argued that freeing the serfs would create a mobile workforce and encourage economic growth.",
+        "The Treaty of Paris (1856) lowered Russia's standing as a great power, and this humiliation convinced officials around the new tsar that deep internal reform was needed."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Briefly explain ONE specific way the Russian state responded to the problems of the peasantry or to opposition to the regime in the period 1861 to 1914, other than the emancipation itself.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.C"
+     ],
+     "topic_codes": [
+      "6.1"
+     ],
+     "model_answer": "In 1864 the state created zemstvos, elected local assemblies that handled schools, roads and public health in the countryside, which gave some local participation to a society without serfdom.",
+     "rubric_rows": [
+      {
+       "row_id": "c",
+       "points": 1,
+       "criterion": "The response explains a specific state response, from 1861 to 1914, to peasant problems or to opposition, other than the 1861 emancipation. Acceptable examples include the zemstvo reform of 1864; the judicial reform of 1864; the military reforms that set up universal conscription in 1874; the repression that followed the assassination of Alexander II in 1881; the land captains created under Alexander III; the Peasant Land Bank; the October Manifesto and the Duma in 1905; the ending of redemption payments after the 1905 Revolution; and Stolypin's agrarian reforms, which let peasants leave the commune.",
+       "required_elements": [
+        "In 1864 the state created zemstvos, elected local assemblies that handled schools, roads and public health in the countryside, which gave some local participation to a society without serfdom.",
+        "After Alexander II was assassinated in 1881, Alexander III turned to repression and counter-reform. He strengthened the police and later appointed land captains, nobles who supervised peasant affairs, to tighten control over the villages.",
+        "In response to the Revolution of 1905, which included widespread peasant revolts, the government issued the October Manifesto creating a Duma and ended the redemption payments that the emancipation had imposed.",
+        "Stolypin's agrarian reforms after 1906 allowed peasants to leave the mir and form consolidated private farms. The aim was a class of prosperous, loyal peasants who would support the monarchy."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "reference_text": "Scoring guide (ALTON reference — not official AP scoring). This question is worth 3 points.\nPart A (0-1): The response accurately describes a claim the excerpt makes about how emancipation was carried out or what it achieved. Examples: landlord-dominated local commissions carried it out; the serfs received land but only limited freedom; former serfs usually stayed in the village commune (mir); they had to make redemption payments to the government over almost fifty years; both former serfs and former owners were dissatisfied.\n   - 1: The response accurately describes one claim from the excerpt about how emancipation was implemented or how it turned out, such as landlord-dominated commissions, limited freedom, the mir, long-term redemption payments, or dissatisfaction on both sides.\n   - 0: The response does not describe a claim the excerpt actually makes, misreads the excerpt, or only restates the date and number of serfs freed without describing how emancipation worked or what it achieved.\nPart B (0-1): The response explains a specific development from 1853 to 1861 that helps account for the government's decision to emancipate the serfs. The development must not be one the excerpt names. Acceptable examples include defeat in the Crimean War (1853 to 1856) exposing military and economic backwardness; repeated peasant disturbances and the fear of revolt from below; the economic inefficiency of serf labor compared with the industrializing West; and Alexander II's belief that reform from above was better than upheaval from below.\n   - 1: The response identifies a specific, accurate development from 1853 to 1861 and explains how it pushed the government toward emancipation.\n   - 0: The response names no relevant development, gives one from outside 1853 to 1861 without connecting it to the decision, only repeats the excerpt, or offers no explanation of how the development led to emancipation.\nPart C (0-1): The response explains a specific state response, from 1861 to 1914, to peasant problems or to opposition, other than the 1861 emancipation. Acceptable examples include the zemstvo reform of 1864; the judicial reform of 1864; the military reforms that set up universal conscription in 1874; the repression that followed the assassination of Alexander II in 1881; the land captains created under Alexander III; the Peasant Land Bank; the October Manifesto and the Duma in 1905; the ending of redemption payments after the 1905 Revolution; and Stolypin's agrarian reforms, which let peasants leave the commune.\n   - 1: The response accurately identifies a specific government measure or policy from 1861 to 1914 and explains how it addressed peasant problems or opposition to the regime.\n   - 0: The response names no specific state response, gives one outside 1861 to 1914, only restates the emancipation, or does not explain how the measure related to the peasantry or to opposition.\nNote: Each part is scored on its own, and a response can earn 0 to 3 points in total.\nNote: In Part A the excerpt says that neither of the government's visions was realistic but does not describe those visions in the quoted text. Credit a response that reports this claim of unrealistic expectations. Do not require students to say what the visions were, and do not reward invented details about them.\nNote: In Part B a response that only mentions redemption payments, the mir or landlord commissions does not earn the point, because the excerpt already names these.\nNote: In Part C, accept either reforming or repressive measures if the response ties them accurately to the peasantry or to opposition to the regime. Minor date slips do not cost the point when the measure is clearly identified and placed in the right period.\nNote: ALTON reference — not official AP scoring\nAcceptable answers for A: The excerpt claims that the local commissions carrying out emancipation were dominated by landlords, so the nobility shaped the terms of the settlement. / The excerpt says the serfs received land but only limited freedom, which means emancipation did not make them fully independent citizens. / The excerpt notes that former serfs usually stayed in the village commune, or mir, and had to make redemption payments to the government over almost fifty years. / The excerpt argues that the outcome satisfied no one, since both former serfs and former serf owners were unhappy with it.\nAcceptable answers for B: Russia's defeat in the Crimean War (1853 to 1856) showed that a serf-based army and economy could not match Britain and France. Leaders came to see abolishing serfdom as necessary for military and economic modernization. / Peasant disturbances in the 1850s made Alexander II fear rebellion. In 1856 he told the nobility it was better to end serfdom from above than to wait for it to be overthrown from below. / Serf labor was inefficient compared with the free-labor, industrializing economies of Western Europe. Reformers argued that freeing the serfs would create a mobile workforce and encourage economic growth. / The Treaty of Paris (1856) lowered Russia's standing as a great power, and this humiliation convinced officials around the new tsar that deep internal reform was needed.\nAcceptable answers for C: In 1864 the state created zemstvos, elected local assemblies that handled schools, roads and public health in the countryside, which gave some local participation to a society without serfdom. / After Alexander II was assassinated in 1881, Alexander III turned to repression and counter-reform. He strengthened the police and later appointed land captains, nobles who supervised peasant affairs, to tighten control over the villages. / In response to the Revolution of 1905, which included widespread peasant revolts, the government issued the October Manifesto creating a Duma and ended the redemption payments that the emancipation had imposed. / Stolypin's agrarian reforms after 1906 allowed peasants to leave the mir and form consolidated private farms. The aim was a class of prosperous, loyal peasants who would support the monarchy.\n\nSample response, high score (3/3; Part A 1, Part B 1, Part C 1):\n(A) The excerpt claims that emancipation was carried out in a way that favored the landlords, because the local commissions that put it into effect \"were dominated by landlords.\" As a result the serfs got land but only limited freedom: they usually stayed tied to the village commune (mir) and had to make redemption payments to the government for almost fifty years.\n\n(B) Russia's defeat in the Crimean War (1853-1856) showed the government how far behind Britain and France it had fallen. The serf-based army and economy could not match industrialized enemies, and Russia lacked railroads to move troops and supplies to the front. Alexander II decided that freeing the serfs was necessary to modernize the economy and build a stronger army. He also feared peasant revolts, and in 1856 he told the nobles it was better to abolish serfdom from above than to wait for it to be abolished from below.\n\n(C) After the Revolution of 1905, Prime Minister Pyotr Stolypin's agrarian reforms (starting in 1906) let peasants leave the mir and consolidate their strips into private farms. The government had already ended redemption payments after the revolution. Stolypin hoped to create a class of prosperous, independent peasants who would support the tsar instead of joining revolutionaries, so the reforms were meant to answer both peasant land hunger and opposition to the regime. At the same time he used harsh repression, including field courts-martial that executed many suspected rebels.\n   - \"were dominated by landlords\" - Correctly reports a claim the excerpt actually makes about how emancipation was carried out (landlord-dominated commissions). Earns the point.\n   - \"had to make redemption payments to the government for almost fifty years\" - Adds accurate details from the excerpt (the mir, redemption payments) that show what emancipation actually achieved.\n   - \"Russia's defeat in the Crimean War (1853-1856)\" - A specific, accurately dated development that falls inside 1853-1861 and is not one the excerpt names.\n   - \"better to abolish serfdom from above than to wait for it to be abolished from below\" - Explains how the development pushed the government toward emancipation (military backwardness, fear of revolt). Earns the point.\n   - \"let peasants leave the mir and consolidate their strips into private farms\" - Names a specific state measure from 1861-1914 (Stolypin's reforms) and describes it accurately.\n   - \"support the tsar instead of joining revolutionaries\" - Ties the measure to both peasant problems and opposition to the regime. Earns the point.\n\nSample response, middle score (2/3; Part A 1, Part B 1, Part C 0):\n(A) The excerpt claims that the serfs did not get a clean break from their situation after 1861. Even though they received land and some freedom, they had to make redemption payments to the government, and these payments were stretched out over almost fifty years. So emancipation left the former serfs paying for their land for a very long time.\n\n(B) One development that helps explain emancipation is Russia's defeat in the Crimean War, which lasted from 1853 to 1856. Russia lost to Britain and France, and the war showed that the Russian army was badly equipped and could not move troops and supplies well because Russia had almost no railroads. The army was made up of serf conscripts and the economy was based on serf labor, so Alexander II and his advisers concluded that serfdom was holding Russia back as a great power. This pushed the government to free the serfs so that Russia could modernize and catch up with the West.\n\n(C) After 1861 the Russian state responded to problems in different ways. The government made some reforms and later there was a Duma. These changes were meant to deal with the unhappiness in Russia and with people who were against the tsar. Over time the tsars tried different things, some reforming and some harsher, but there was still a lot of opposition by 1914.\n   - \"they had to make redemption payments to the government, and these payments were stretched out over almost fifty years\" - Accurately reports a claim the excerpt makes about how emancipation worked (long redemption payments), and says what it meant for former serfs. Earns the Part A point.\n   - \"Russia's defeat in the Crimean War, which lasted from 1853 to 1856\" - Names a specific development within 1853-1861 that the excerpt does not mention, so it is eligible for Part B.\n   - \"the Russian army was badly equipped and could not move troops and supplies well because Russia had almost no railroads\" - Gives accurate specific evidence of how the defeat exposed backwardness.\n   - \"so Alexander II and his advisers concluded that serfdom was holding Russia back as a great power\" - Explains the link from the war to the decision to emancipate, which is what earns the Part B point.\n   - \"The government made some reforms and later there was a Duma.\" - Too vague. It does not identify which reforms or say when the Duma was created (the 1905 October Manifesto). Merely mentioning a Duma is not a specific measure explained, so it earns no Part C credit.\n   - \"These changes were meant to deal with the unhappiness in Russia and with people who were against the tsar.\" - Generic claim with no explanation of how any particular measure addressed peasant problems or opposition. It does not name a specific response, so Part C earns 0.\n\nSample response, low score (1/3; Part A 1, Part B 0, Part C 0):\n(A) The excerpt claims that the emancipation was carried out by local commissions that were dominated by landlords, and that the serfs were given land but only limited freedom. So the nobles had a lot of say in how it worked, and the serfs did not get a full break from their old situation.\n\n(B) One reason the government freed the serfs was that Russia was having a lot of problems at that time. Russia was behind other countries and the government knew something needed to change. Alexander II wanted to make Russia stronger so it could compete with the other powers in Europe, so he decided to end serfdom.\n\n(C) After 1861 the Russian government tried to deal with opposition. The tsar made some reforms and also used the police against people who were against the government. This helped the government keep control of the country and made the peasants and other groups less of a problem for the tsar.\n   - \"carried out by local commissions that were dominated by landlords\" - Accurately reports a claim directly from the excerpt about how emancipation was carried out (landlord-dominated commissions). This earns the Part A point.\n   - \"the serfs were given land but only limited freedom\" - A second accurate claim from the excerpt, reinforcing the Part A credit. It is still restating the source, but it correctly describes how emancipation worked.\n   - \"Russia was having a lot of problems at that time\" - Too vague. It names no specific development from 1853 to 1861 such as the Crimean War defeat or peasant unrest, so Part B earns no credit.\n   - \"Russia was behind other countries and the government knew something needed to change\" - A general statement of backwardness with no specific event and no explanation of how it led to the decision to emancipate. It does not meet the Part B standard.\n   - \"The tsar made some reforms and also used the police against people who were against the government\" - No specific measure is identified (for example the zemstvo reform of 1864, the land captains, or Stolypin's reforms), and no date is given. This is too general for Part C credit.\n   - \"This helped the government keep control of the country\" - The response never explains how a particular policy addressed peasant problems or opposition, so it gives only an outcome with no specific evidence. Part C earns no credit.",
+   "whap_frq": {
+    "schema_version": "whap-frq-1",
+    "task_type": "saq",
+    "template": "saq1",
+    "era": 3,
+    "units": [
+     6
+    ],
+    "title": "The Emancipation of the Russian Serfs, 1861, and Its Consequences",
+    "prompt": {
+     "scenario": "In the period c. 1853 to c. 1914, the Russian Empire's rulers tried to modernize the state after the defeat in the Crimean War. They began with the emancipation of the serfs in 1861, and the results shaped relations between the peasantry, the landowning nobility and the tsarist government for the next fifty years.",
+     "task": "Using the excerpt, answer (a), (b), and (c).",
+     "requirements": [
+      "Each part requires a response of one to three sentences.",
+      "Part A must be based on the excerpt.",
+      "Parts B and C must use specific historical evidence from the years named in the part, not only the examples in the excerpt."
+     ],
+     "parts": [
+      {
+       "label": "A",
+       "prompt": "Briefly describe ONE claim the excerpt makes about how the emancipation of the serfs was carried out or what it achieved.",
+       "points": 1
+      },
+      {
+       "label": "B",
+       "prompt": "Briefly explain ONE specific historical development or circumstance from the period 1853 to 1861 that helps explain why the Russian government decided to emancipate the serfs. Do not use a development that the excerpt names.",
+       "points": 1
+      },
+      {
+       "label": "C",
+       "prompt": "Briefly explain ONE specific way the Russian state responded to the problems of the peasantry or to opposition to the regime in the period 1861 to 1914, other than the emancipation itself.",
+       "points": 1
+      }
+     ]
+    },
+    "sources": [
+     {
+      "id": "A",
+      "kind": "secondary_text",
+      "title": "Soviet Union: A Country Study (excerpt on the emancipation of the serfs in 1861)",
+      "attribution": "Raymond E. Zickel, ed., Federal Research Division, Library of Congress, 1991 (research completed 1989). Library of Congress, Federal Research Division (Country Studies; full text via Internet Archive OCR). Reuse: public domain (U.S. government work, 17 U.S.C. 105; the Library of Congress states all other text and graphics are in the public domain). excerpted (2 segments joined by [...]); whitespace normalized; OCR line-break hyphenation rejoined; running page headers and cross-reference notes removed; no wording changed.",
+      "context": "This reference book was written for the U.S. government in the late 1980s; the passage describes Russia in 1861.",
+      "real_data": true,
+      "source_registry_id": "eu-txt-cs-soviet-emancipation",
+      "source_sha256": "b056e57f03df12449eb65f929f546c4eb9e2dfa3f7070590ed59348dfaf1b23f",
+      "body": "In 1861 Alexander II proclaimed the emancipation of about 20 million privately held serfs. Local commissions, which were dominated by landlords, effected emancipation by giving land and limited freedom to the serfs. The former serfs usually remained in the village commune, or mir, but were required to make redemption payments, which were stretched out over a period of almost fifty years, to the government. [...] Neither of the government’s visions was realistic, and both the former serfs and the former owners of serfs were dissatisfied with the outcome of emancipation.",
+      "provenance": {
+       "kind": "real_historical_source",
+       "real_data": true,
+       "note": "registry eu-txt-cs-soviet-emancipation"
+      }
+     }
+    ],
+    "rubric": {
+     "rubric_id": "whap-v1",
+     "total_points": 3,
+     "rows": [
+      {
+       "row_id": "a",
+       "name": "Part A",
+       "max": 1,
+       "descriptors": {
+        "0": "The response does not describe a claim the excerpt actually makes, misreads the excerpt, or only restates the date and number of serfs freed without describing how emancipation worked or what it achieved.",
+        "1": "The response accurately describes one claim from the excerpt about how emancipation was implemented or how it turned out, such as landlord-dominated commissions, limited freedom, the mir, long-term redemption payments, or dissatisfaction on both sides."
+       },
+       "task_specific": "The response accurately describes a claim the excerpt makes about how emancipation was carried out or what it achieved. Examples: landlord-dominated local commissions carried it out; the serfs received land but only limited freedom; former serfs usually stayed in the village commune (mir); they had to make redemption payments to the government over almost fifty years; both former serfs and former owners were dissatisfied."
+      },
+      {
+       "row_id": "b",
+       "name": "Part B",
+       "max": 1,
+       "descriptors": {
+        "0": "The response names no relevant development, gives one from outside 1853 to 1861 without connecting it to the decision, only repeats the excerpt, or offers no explanation of how the development led to emancipation.",
+        "1": "The response identifies a specific, accurate development from 1853 to 1861 and explains how it pushed the government toward emancipation."
+       },
+       "task_specific": "The response explains a specific development from 1853 to 1861 that helps account for the government's decision to emancipate the serfs. The development must not be one the excerpt names. Acceptable examples include defeat in the Crimean War (1853 to 1856) exposing military and economic backwardness; repeated peasant disturbances and the fear of revolt from below; the economic inefficiency of serf labor compared with the industrializing West; and Alexander II's belief that reform from above was better than upheaval from below."
+      },
+      {
+       "row_id": "c",
+       "name": "Part C",
+       "max": 1,
+       "descriptors": {
+        "0": "The response names no specific state response, gives one outside 1861 to 1914, only restates the emancipation, or does not explain how the measure related to the peasantry or to opposition.",
+        "1": "The response accurately identifies a specific government measure or policy from 1861 to 1914 and explains how it addressed peasant problems or opposition to the regime."
+       },
+       "task_specific": "The response explains a specific state response, from 1861 to 1914, to peasant problems or to opposition, other than the 1861 emancipation. Acceptable examples include the zemstvo reform of 1864; the judicial reform of 1864; the military reforms that set up universal conscription in 1874; the repression that followed the assassination of Alexander II in 1881; the land captains created under Alexander III; the Peasant Land Bank; the October Manifesto and the Duma in 1905; the ending of redemption payments after the 1905 Revolution; and Stolypin's agrarian reforms, which let peasants leave the commune."
+      }
+     ],
+     "scoring_notes": [
+      "Each part is scored on its own, and a response can earn 0 to 3 points in total.",
+      "In Part A the excerpt says that neither of the government's visions was realistic but does not describe those visions in the quoted text. Credit a response that reports this claim of unrealistic expectations. Do not require students to say what the visions were, and do not reward invented details about them.",
+      "In Part B a response that only mentions redemption payments, the mir or landlord commissions does not earn the point, because the excerpt already names these.",
+      "In Part C, accept either reforming or repressive measures if the response ties them accurately to the peasantry or to opposition to the regime. Minor date slips do not cost the point when the measure is clearly identified and placed in the right period.",
+      "ALTON reference — not official AP scoring"
+     ]
+    },
+    "expected_features": {
+     "defensible_theses": [],
+     "contextualization_ideas": [
+      "The Crimean War defeat as the trigger for the Great Reforms",
+      "Comparison with Western European industrialization and the abolition of serfdom elsewhere in Europe earlier in the century",
+      "The growth of revolutionary movements as a reaction to limited reform"
+     ],
+     "outside_evidence": [
+      "Zemstvo reform of 1864",
+      "Judicial reform of 1864",
+      "Milyutin's military reform of 1874",
+      "Populism and the People's Will",
+      "Assassination of Alexander II in 1881",
+      "Counter-reforms of Alexander III",
+      "Revolution of 1905 and the October Manifesto",
+      "Stolypin's agrarian reforms"
+     ],
+     "reasoning_types": [
+      "Sourcing and claim identification (Part A)",
+      "Causation (Part B)",
+      "Causation and continuity and change over time (Part C)"
+     ],
+     "doc_uses": [
+      {
+       "source_id": "Soviet Union: A Country Study excerpt",
+       "usable_for": "Part A claims about how emancipation was implemented (landlord commissions, limited freedom, the mir, redemption payments) and its mixed outcome",
+       "sourcing": "A secondary reference work written for the U.S. government in the late 1980s, completed in 1989 near the end of the Cold War. It is a summary survey, not an archival study, and it compresses complex outcomes into general claims."
+      }
+     ],
+     "saq_answers": {
+      "a": [
+       "The excerpt claims that the local commissions carrying out emancipation were dominated by landlords, so the nobility shaped the terms of the settlement.",
+       "The excerpt says the serfs received land but only limited freedom, which means emancipation did not make them fully independent citizens.",
+       "The excerpt notes that former serfs usually stayed in the village commune, or mir, and had to make redemption payments to the government over almost fifty years.",
+       "The excerpt argues that the outcome satisfied no one, since both former serfs and former serf owners were unhappy with it."
+      ],
+      "b": [
+       "Russia's defeat in the Crimean War (1853 to 1856) showed that a serf-based army and economy could not match Britain and France. Leaders came to see abolishing serfdom as necessary for military and economic modernization.",
+       "Peasant disturbances in the 1850s made Alexander II fear rebellion. In 1856 he told the nobility it was better to end serfdom from above than to wait for it to be overthrown from below.",
+       "Serf labor was inefficient compared with the free-labor, industrializing economies of Western Europe. Reformers argued that freeing the serfs would create a mobile workforce and encourage economic growth.",
+       "The Treaty of Paris (1856) lowered Russia's standing as a great power, and this humiliation convinced officials around the new tsar that deep internal reform was needed."
+      ],
+      "c": [
+       "In 1864 the state created zemstvos, elected local assemblies that handled schools, roads and public health in the countryside, which gave some local participation to a society without serfdom.",
+       "After Alexander II was assassinated in 1881, Alexander III turned to repression and counter-reform. He strengthened the police and later appointed land captains, nobles who supervised peasant affairs, to tighten control over the villages.",
+       "In response to the Revolution of 1905, which included widespread peasant revolts, the government issued the October Manifesto creating a Duma and ended the redemption payments that the emancipation had imposed.",
+       "Stolypin's agrarian reforms after 1906 allowed peasants to leave the mir and form consolidated private farms. The aim was a class of prosperous, loyal peasants who would support the monarchy."
+      ]
+     },
+     "common_pitfalls": [
+      "In Part B, using redemption payments, the mir or landlord commissions, which the excerpt already names.",
+      "Stating that the excerpt explains what the government's two visions were, when the quoted text does not.",
+      "Claiming that emancipation gave peasants full ownership of land with no obligations, which contradicts the excerpt.",
+      "In Part C, choosing Soviet-era measures from after 1914, such as collectivization, which fall outside the period.",
+      "Confusing the emancipation of private serfs with later measures or giving it the wrong date.",
+      "Naming a reform without explaining how it related to the peasantry or to opposition."
+     ],
+     "facts": [
+      "Alexander II issued the emancipation of the serfs in 1861.",
+      "The Crimean War was fought from 1853 to 1856 and ended with the Treaty of Paris in 1856, a defeat for Russia.",
+      "Alexander II told the Moscow nobility in 1856 that it was better to abolish serfdom from above than to wait for it to abolish itself from below.",
+      "Zemstvos, elected local self-government bodies, were created in 1864. The judicial reform of 1864 introduced jury trials and public courts.",
+      "Universal military service was introduced in 1874 under War Minister Dmitry Milyutin.",
+      "Populists (narodniki) went to the countryside in 1874, and the People's Will organization assassinated Alexander II in 1881.",
+      "Alexander III pursued counter-reform policies, including the land captains, who were introduced in 1889.",
+      "The Revolution of 1905 included widespread peasant unrest. The October Manifesto of 1905 promised a legislative Duma.",
+      "Redemption payments were abolished after the 1905 Revolution and ended in 1907.",
+      "Peter Stolypin, prime minister from 1906 to 1911, carried out agrarian reforms that allowed peasants to leave the commune and consolidate their holdings."
+     ]
+    },
+    "samples": [
+     {
+      "tier": "high",
+      "target_total": 3,
+      "essay": "(A) The excerpt claims that emancipation was carried out in a way that favored the landlords, because the local commissions that put it into effect \"were dominated by landlords.\" As a result the serfs got land but only limited freedom: they usually stayed tied to the village commune (mir) and had to make redemption payments to the government for almost fifty years.\n\n(B) Russia's defeat in the Crimean War (1853-1856) showed the government how far behind Britain and France it had fallen. The serf-based army and economy could not match industrialized enemies, and Russia lacked railroads to move troops and supplies to the front. Alexander II decided that freeing the serfs was necessary to modernize the economy and build a stronger army. He also feared peasant revolts, and in 1856 he told the nobles it was better to abolish serfdom from above than to wait for it to be abolished from below.\n\n(C) After the Revolution of 1905, Prime Minister Pyotr Stolypin's agrarian reforms (starting in 1906) let peasants leave the mir and consolidate their strips into private farms. The government had already ended redemption payments after the revolution. Stolypin hoped to create a class of prosperous, independent peasants who would support the tsar instead of joining revolutionaries, so the reforms were meant to answer both peasant land hunger and opposition to the regime. At the same time he used harsh repression, including field courts-martial that executed many suspected rebels.",
+      "word_count": 240,
+      "rubric_scores": {
+       "a": 1,
+       "b": 1,
+       "c": 1,
+       "total": 3
+      },
+      "annotations": [
+       {
+        "quote": "were dominated by landlords",
+        "comment": "Correctly reports a claim the excerpt actually makes about how emancipation was carried out (landlord-dominated commissions). Earns the point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "had to make redemption payments to the government for almost fifty years",
+        "comment": "Adds accurate details from the excerpt (the mir, redemption payments) that show what emancipation actually achieved.",
+        "row_id": "a"
+       },
+       {
+        "quote": "Russia's defeat in the Crimean War (1853-1856)",
+        "comment": "A specific, accurately dated development that falls inside 1853-1861 and is not one the excerpt names.",
+        "row_id": "b"
+       },
+       {
+        "quote": "better to abolish serfdom from above than to wait for it to be abolished from below",
+        "comment": "Explains how the development pushed the government toward emancipation (military backwardness, fear of revolt). Earns the point.",
+        "row_id": "b"
+       },
+       {
+        "quote": "let peasants leave the mir and consolidate their strips into private farms",
+        "comment": "Names a specific state measure from 1861-1914 (Stolypin's reforms) and describes it accurately.",
+        "row_id": "c"
+       },
+       {
+        "quote": "support the tsar instead of joining revolutionaries",
+        "comment": "Ties the measure to both peasant problems and opposition to the regime. Earns the point.",
+        "row_id": "c"
+       }
+      ]
+     },
+     {
+      "tier": "mid",
+      "target_total": 2,
+      "essay": "(A) The excerpt claims that the serfs did not get a clean break from their situation after 1861. Even though they received land and some freedom, they had to make redemption payments to the government, and these payments were stretched out over almost fifty years. So emancipation left the former serfs paying for their land for a very long time.\n\n(B) One development that helps explain emancipation is Russia's defeat in the Crimean War, which lasted from 1853 to 1856. Russia lost to Britain and France, and the war showed that the Russian army was badly equipped and could not move troops and supplies well because Russia had almost no railroads. The army was made up of serf conscripts and the economy was based on serf labor, so Alexander II and his advisers concluded that serfdom was holding Russia back as a great power. This pushed the government to free the serfs so that Russia could modernize and catch up with the West.\n\n(C) After 1861 the Russian state responded to problems in different ways. The government made some reforms and later there was a Duma. These changes were meant to deal with the unhappiness in Russia and with people who were against the tsar. Over time the tsars tried different things, some reforming and some harsher, but there was still a lot of opposition by 1914.",
+      "word_count": 227,
+      "rubric_scores": {
+       "a": 1,
+       "b": 1,
+       "c": 0,
+       "total": 2
+      },
+      "annotations": [
+       {
+        "quote": "they had to make redemption payments to the government, and these payments were stretched out over almost fifty years",
+        "comment": "Accurately reports a claim the excerpt makes about how emancipation worked (long redemption payments), and says what it meant for former serfs. Earns the Part A point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "Russia's defeat in the Crimean War, which lasted from 1853 to 1856",
+        "comment": "Names a specific development within 1853-1861 that the excerpt does not mention, so it is eligible for Part B.",
+        "row_id": "b"
+       },
+       {
+        "quote": "the Russian army was badly equipped and could not move troops and supplies well because Russia had almost no railroads",
+        "comment": "Gives accurate specific evidence of how the defeat exposed backwardness.",
+        "row_id": "b"
+       },
+       {
+        "quote": "so Alexander II and his advisers concluded that serfdom was holding Russia back as a great power",
+        "comment": "Explains the link from the war to the decision to emancipate, which is what earns the Part B point.",
+        "row_id": "b"
+       },
+       {
+        "quote": "The government made some reforms and later there was a Duma.",
+        "comment": "Too vague. It does not identify which reforms or say when the Duma was created (the 1905 October Manifesto). Merely mentioning a Duma is not a specific measure explained, so it earns no Part C credit.",
+        "row_id": "c"
+       },
+       {
+        "quote": "These changes were meant to deal with the unhappiness in Russia and with people who were against the tsar.",
+        "comment": "Generic claim with no explanation of how any particular measure addressed peasant problems or opposition. It does not name a specific response, so Part C earns 0.",
+        "row_id": "c"
+       }
+      ]
+     },
+     {
+      "tier": "low",
+      "target_total": 1,
+      "essay": "(A) The excerpt claims that the emancipation was carried out by local commissions that were dominated by landlords, and that the serfs were given land but only limited freedom. So the nobles had a lot of say in how it worked, and the serfs did not get a full break from their old situation.\n\n(B) One reason the government freed the serfs was that Russia was having a lot of problems at that time. Russia was behind other countries and the government knew something needed to change. Alexander II wanted to make Russia stronger so it could compete with the other powers in Europe, so he decided to end serfdom.\n\n(C) After 1861 the Russian government tried to deal with opposition. The tsar made some reforms and also used the police against people who were against the government. This helped the government keep control of the country and made the peasants and other groups less of a problem for the tsar.",
+      "word_count": 161,
+      "rubric_scores": {
+       "a": 1,
+       "b": 0,
+       "c": 0,
+       "total": 1
+      },
+      "annotations": [
+       {
+        "quote": "carried out by local commissions that were dominated by landlords",
+        "comment": "Accurately reports a claim directly from the excerpt about how emancipation was carried out (landlord-dominated commissions). This earns the Part A point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "the serfs were given land but only limited freedom",
+        "comment": "A second accurate claim from the excerpt, reinforcing the Part A credit. It is still restating the source, but it correctly describes how emancipation worked.",
+        "row_id": "a"
+       },
+       {
+        "quote": "Russia was having a lot of problems at that time",
+        "comment": "Too vague. It names no specific development from 1853 to 1861 such as the Crimean War defeat or peasant unrest, so Part B earns no credit.",
+        "row_id": "b"
+       },
+       {
+        "quote": "Russia was behind other countries and the government knew something needed to change",
+        "comment": "A general statement of backwardness with no specific event and no explanation of how it led to the decision to emancipate. It does not meet the Part B standard.",
+        "row_id": "b"
+       },
+       {
+        "quote": "The tsar made some reforms and also used the police against people who were against the government",
+        "comment": "No specific measure is identified (for example the zemstvo reform of 1864, the land captains, or Stolypin's reforms), and no date is given. This is too general for Part C credit.",
+        "row_id": "c"
+       },
+       {
+        "quote": "This helped the government keep control of the country",
+        "comment": "The response never explains how a particular policy addressed peasant problems or opposition, so it gives only an outcome with no specific evidence. Part C earns no credit.",
+        "row_id": "c"
+       }
+      ]
+     }
+    ],
+    "provenance": {
+     "kind": "alton_authored_from_real_sources",
+     "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+    }
+   },
+   "design": {
+    "source_fixed_first": true,
+    "documents_chosen_before_prompt": true
+   },
+   "verification": {
+    "fact_checker": "claude-fable-5-1",
+    "graders": [
+     "claude-opus-5-5",
+     "claude-sonnet-5-5"
+    ],
+    "fact_flags": [],
+    "sample_totals": {
+     "high": 3,
+     "mid": 2,
+     "low": 1
+    },
+    "bands": {
+     "high": [
+      3,
+      3
+     ],
+     "mid": [
+      2,
+      2
+     ],
+     "low": [
+      1,
+      1
+     ]
+    }
+   }
+  }
+ },
+ {
+  "__rejected": true,
+  "specId": "eu2_saq2",
+  "reason": "sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate; fact_contested"
+ },
+ {
+  "__rejected": true,
+  "specId": "eu2_saq3",
+  "reason": "sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate"
+ },
+ {
+  "__rejected": true,
+  "specId": "eu2_dbq",
+  "reason": "dbq_no_visual_document; rubric_row_thesis_descriptor_0_missing; rubric_row_thesis_descriptor_1_missing; rubric_row_thesis_task_specific_missing; rubric_row_context_descriptor_0_missing; rubric_row_context_descriptor_1_missing; rubric_row_context_task_specific_missing; rubric_row_docs_descriptor_0_missing; rubric_row_docs_descriptor_1_missing; rubric_row_docs_descriptor_2_missing; rubric_row_docs_task_specific_missing; rubric_row_outside_descriptor_0_missing; rubric_row_outside_descriptor_1_missing; rubric_row_outside_task_specific_missing; rubric_row_sourcing_descriptor_0_missing; rubric_row_sourcing_descriptor_1_missing; rubric_row_sourcing_task_specific_missing; rubric_row_complexity_descriptor_0_missing; rubric_row_complexity_descriptor_1_missing; rubric_row_complexity_task_specific_missing; sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candida"
+ },
+ {
+  "__rejected": true,
+  "specId": "eu2_leq",
+  "reason": "rubric_row_thesis_descriptor_0_missing; rubric_row_thesis_descriptor_1_missing; rubric_row_thesis_task_specific_missing; rubric_row_context_descriptor_0_missing; rubric_row_context_descriptor_1_missing; rubric_row_context_task_specific_missing; rubric_row_evidence_descriptor_0_missing; rubric_row_evidence_descriptor_1_missing; rubric_row_evidence_descriptor_2_missing; rubric_row_evidence_task_specific_missing; rubric_row_analysis_descriptor_0_missing; rubric_row_analysis_descriptor_1_missing; rubric_row_analysis_descriptor_2_missing; rubric_row_analysis_task_specific_missing; sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate"
+ }
+]

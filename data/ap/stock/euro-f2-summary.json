@@ -1,0 +1,145 @@
+{
+ "run": "euro-f2",
+ "generatedAt": "2026-10-20",
+ "passed": [
+  "euro-f2:ap_european_history-eu2_saq1-k0"
+ ],
+ "rejected": [
+  {
+   "__rejected": true,
+   "specId": "eu2_saq2",
+   "reason": "sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate; fact_contested"
+  },
+  {
+   "__rejected": true,
+   "specId": "eu2_saq3",
+   "reason": "sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate"
+  },
+  {
+   "__rejected": true,
+   "specId": "eu2_dbq",
+   "reason": "dbq_no_visual_document; rubric_row_thesis_descriptor_0_missing; rubric_row_thesis_descriptor_1_missing; rubric_row_thesis_task_specific_missing; rubric_row_context_descriptor_0_missing; rubric_row_context_descriptor_1_missing; rubric_row_context_task_specific_missing; rubric_row_docs_descriptor_0_missing; rubric_row_docs_descriptor_1_missing; rubric_row_docs_descriptor_2_missing; rubric_row_docs_task_specific_missing; rubric_row_outside_descriptor_0_missing; rubric_row_outside_descriptor_1_missing; rubric_row_outside_task_specific_missing; rubric_row_sourcing_descriptor_0_missing; rubric_row_sourcing_descriptor_1_missing; rubric_row_sourcing_task_specific_missing; rubric_row_complexity_descriptor_0_missing; rubric_row_complexity_descriptor_1_missing; rubric_row_complexity_task_specific_missing; sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candida"
+  },
+  {
+   "__rejected": true,
+   "specId": "eu2_leq",
+   "reason": "rubric_row_thesis_descriptor_0_missing; rubric_row_thesis_descriptor_1_missing; rubric_row_thesis_task_specific_missing; rubric_row_context_descriptor_0_missing; rubric_row_context_descriptor_1_missing; rubric_row_context_task_specific_missing; rubric_row_evidence_descriptor_0_missing; rubric_row_evidence_descriptor_1_missing; rubric_row_evidence_descriptor_2_missing; rubric_row_evidence_task_specific_missing; rubric_row_analysis_descriptor_0_missing; rubric_row_analysis_descriptor_1_missing; rubric_row_analysis_descriptor_2_missing; rubric_row_analysis_task_specific_missing; sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate"
+  }
+ ],
+ "audit": [
+  {
+   "id": "eu2_saq1",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "eu2_saq1",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "eu2_saq1",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "eu2_saq2",
+   "tier": "high",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "eu2_saq2",
+   "tier": "mid",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "eu2_saq2",
+   "tier": "low",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "eu2_saq3",
+   "tier": "high",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "eu2_saq3",
+   "tier": "mid",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "eu2_saq3",
+   "tier": "low",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "eu2_dbq",
+   "tier": "high",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "eu2_dbq",
+   "tier": "mid",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "eu2_dbq",
+   "tier": "low",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "eu2_leq",
+   "tier": "high",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "eu2_leq",
+   "tier": "mid",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "eu2_leq",
+   "tier": "low",
+   "options": [],
+   "chosen": null
+  }
+ ]
+}
