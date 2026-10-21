@@ -23,6 +23,7 @@ export type Finish = {
   status: Status; model?: string | null; scores?: Record<string, unknown> | null; rationale?: Record<string, unknown> | null;
   attemptsMade?: number; nextRetryAt?: string | null; lastError?: string | null; /** 토큰·비용은 이번 실행의 증분 — 저장소가 이전 값에 합산한다 */ inputTokens?: number; outputTokens?: number; costUsd?: number;
   /** reserveBudget 이 돌려준 예약 id — 있으면 실비로 정산(비용 0 이면 해제) */ reservationId?: string;
+  /** 호출이 진행 중 끊겨(타임아웃·예외) 실제 비용을 알 수 없다 — 예약을 정산하지 않고 'unsettled'(월 합계 유지·관리자 확인 대상)로 남긴다. 행의 비용·토큰도 건드리지 않는다. */ costUnknown?: boolean;
 };
 /** 저장소 경계(실제 구현은 store.ts, service_role). claim 은 원자적이어야 한다: pending 이거나 재시도 시각이 지난 failed 일 때만 processing 으로 바꾸고 true. */
 export interface EssayStore {
@@ -31,6 +32,8 @@ export interface EssayStore {
   finish(key: EssayKey, f: Finish): Promise<void>;
   /** 월 예산 원자적 예약(선택 구현): 월 지출(확정+유효 예약)+amountUsd 가 budgetUsd 이하일 때만 예약 id 를 돌려준다. 동시 요청이 같은 잔여 예산을 보고 함께 실행하는 것을 막는다. */
   reserveBudget?(key: EssayKey, amountUsd: number, budgetUsd: number): Promise<{ ok: true; reservationId: string } | { ok: false }>;
+  /** 모델 호출 시작 직전 예약에 'call_started' 를 남긴다(선택 구현). false = 예약이 이미 만료돼 해제된 예산이므로 호출하면 안 된다. 표시 이후에는 정산이 없어도 만료로 해제되지 않는다. */
+  markCallStarted?(key: EssayKey, reservationId: string): Promise<boolean>;
 }
 export type Deps = { store: EssayStore; client: GraderClient; now?: () => Date };
 export type Job = EssayKey & { taskPrompt: string; sources: { id: string; title?: string; body: string }[]; essay: string; anchors: Anchor[]; /** 생략 = englang-v2 */ rubricId?: string; taskType?: "saq" | "dbq" | "leq" | string; scoringNotes?: string };
@@ -82,14 +85,22 @@ export async function processEssay(deps: Deps, job: Job): Promise<Outcome> {
     }
     reservationId = r.reservationId;
   }
+  if (reservationId && store.markCallStarted && !(await store.markCallStarted(key, reservationId))) {
+    // 예약이 만료돼 이미 해제된 예산 — 호출 없이 예약을 0 으로 정리하고 바로 다시 시도할 수 있게 둔다(시도 횟수 소모 없음).
+    await store.finish(key, { status: "failed", lastError: "reservation_expired", attemptsMade: row.attemptsMade, nextRetryAt: now().toISOString(), costUsd: 0, inputTokens: 0, outputTokens: 0, reservationId });
+    return { status: "failed", error: "reservation_expired" };
+  }
   let inTok = 0, outTok = 0, model: string | null = null;
+  let inFlight = false; // grade() 호출 중에만 true — 이 구간에서 던져진 예외는 청구 여부·금액을 알 수 없다
   try {
     const runs: GraderOutput[] = [];
     for (let i = 0; i < 2; i++) {
       // 모델이 도구 입력의 필드(주로 마지막 행)를 가끔 빠뜨린다(실측: englit 18건 중 2건) — 한 번만 다시 호출한다(비용은 합산).
       let v: ReturnType<typeof validateGraderOutput> = { ok: false, reason: "not_run" };
       for (let a = 0; a < 2 && !v.ok; a++) {
+        inFlight = true;
         const r = await client.grade({ system: prompt.system, user: prompt.user, maxOutputTokens: l.maxOutputTokensPerEssay, rubricRows: def.rows });
+        inFlight = false;
         inTok += r.inputTokens; outTok += r.outputTokens; model = r.model;
         v = validateGraderOutput(r.output, def.rows);
       }
@@ -106,10 +117,12 @@ export async function processEssay(deps: Deps, job: Job): Promise<Outcome> {
     return { status: "done", total, disagreement };
   } catch (e) {
     const code = errCode(e);
+    // 호출 중 끊겼고(GraderRefusal 은 네트워크 호출 전 거부라 제외) 예약이 있으면 비용 미확정 — 정산·해제하지 않고 unsettled 로 남긴다.
+    const costUnknown = inFlight && !(e instanceof GraderRefusal) && !!reservationId;
     const terminal = code === "flag_off" || code === "no_key" ? false : attemptsMade >= MAX_ATTEMPTS;
     const status: Status = terminal ? "dead" : "failed";
     await store.finish(key, {
-      status, model, attemptsMade, lastError: code, inputTokens: inTok, outputTokens: outTok, costUsd: costUsd(inTok, outTok, l), reservationId,
+      status, model, attemptsMade, lastError: code, inputTokens: inTok, outputTokens: outTok, costUsd: costUsd(inTok, outTok, l), reservationId, ...(costUnknown ? { costUnknown: true } : {}),
       nextRetryAt: terminal ? null : new Date(now().getTime() + backoffMs(attemptsMade)).toISOString(),
     });
     return { status, error: code };

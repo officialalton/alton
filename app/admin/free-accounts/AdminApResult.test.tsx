@@ -16,6 +16,7 @@ vi.mock("@/lib/essay-grading/actions", () => ({ enqueueEssayGradingAction: vi.fn
 vi.mock("@/app/components/ProblemErrorReportButton", () => ({ default: () => <button type="button">Report a problem</button> }));
 
 import { getApAttemptViewForAdminAction } from "../free-accounts-actions";
+import { unscoredLabel } from "@/lib/free-accounts/unscored-label";
 import AdminApResultView from "./AdminApResultView";
 
 const mc = (i: number, ok: boolean) => ({ setItemId: `m${i}`, section: "ap_mc", format: "mc", question: "Q", options: ["a", "b"], correctIndex: 0, response: ok ? "0" : "1", correct: ok, parts: null, satDomain: "ap:U1.1" });
@@ -53,7 +54,36 @@ describe("getApAttemptViewForAdminAction", () => {
   });
 });
 
+describe("getApAttemptViewForAdminAction scoring-version split", () => {
+  const run = async (rows: { rubric_version: string; model: string | null; status: string; last_error: string | null }[]) => {
+    requireAdmin.mockResolvedValueOnce({ supabase: sb(false, rows as never) });
+    loadDetail.mockResolvedValueOnce(detail()); loadScores.mockResolvedValueOnce([]);
+    return getApAttemptViewForAdminAction("att1");
+  };
+  const r = (status: string, last_error: string | null = null, model: string | null = null) => ({ rubric_version: "englang-v2", model, status, last_error });
+  it("done 1 + skipped(empty) 2: only done counts as model scoring", async () => {
+    const v = await run([r("done", null, "m1"), r("skipped", "empty"), r("skipped", "empty")]);
+    expect(v?.versions).toEqual([{ rubricVersion: "englang-v2", model: "m1", rows: 1 }]);
+    expect(v?.unscored).toEqual([{ label: "submitted blank response → 0 points (no model call)", rows: 2 }]);
+  });
+  it("other skip reasons and waiting/failed rows get their own labels, never a model row", async () => {
+    const v = await run([r("skipped", "too_short"), r("skipped", "daily_cap"), r("pending"), r("failed", "daily_cap"), r("failed", "x"), r("dead")]);
+    expect(v?.versions).toEqual([]);
+    expect(v?.unscored?.map((u) => u.label)).toEqual([
+      "response too short → not scored (no model call)", "daily scoring limit reached → not scored", "waiting to be scored",
+      "waiting for scoring limit reset", "scoring failed, will retry", "scoring failed (no more retries)"]);
+  });
+  it("unknown skip reason is shown as-is", () => { expect(unscoredLabel("skipped", "weird")).toContain("weird"); });
+});
+
 describe("AdminApResultView", () => {
+  it("renders skipped(empty) separately from the model line", () => {
+    render(<AdminApResultView view={{ detail: detail(), essayScores: [], essayAi: true, isTestAccount: false, versions: [{ rubricVersion: "englang-v2", model: "m1", rows: 1 }], unscored: [{ label: "submitted blank response → 0 points (no model call)", rows: 2 }] }} />);
+    const meta = screen.getByTestId("admin-ap-meta");
+    expect(meta).toHaveTextContent("Rubric englang-v2 · model m1 · 1 scored part");
+    expect(meta).toHaveTextContent("2 parts: submitted blank response → 0 points (no model call)");
+    expect(meta).not.toHaveTextContent("model not recorded");
+  });
   it("shows the AP result (not SAT), unscored FRQ status, read-only and no version record", () => {
     render(<AdminApResultView view={{ detail: detail(), essayScores: [], essayAi: false, isTestAccount: false, versions: [] }} />);
     expect(screen.getByTestId("admin-ap-result")).toBeInTheDocument();

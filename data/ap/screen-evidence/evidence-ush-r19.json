@@ -2,7 +2,7 @@
  "schema": "ap-screen-evidence/v3",
  "generator": "playwright",
  "limitations": "Automated screen check (Playwright): covers display, input, answer/explanation exposure and clipping only. It does NOT verify graph meaning, figure correctness, or naturalness of wording — that still needs human review.",
- "generatedAt": "2026-10-21T18:05:08.418Z",
+ "generatedAt": "2026-10-21T19:48:28.548Z",
  "entries": [
   {
    "candidate_key": "ush-real-e:ap_us_history-real_e_harriot-k0",
@@ -5376,47 +5376,6 @@
    }
   },
   {
-   "candidate_key": "ush-real-f:ap_us_history-real_f_saq1-k0",
-   "checker_kind": "automated",
-   "content_hash": "c20c6c2a7f86fd43e6718c3d361bb60e87888aaca67bb1eee5f055b5fc457a94",
-   "problem_version_id": "bd737d27-f490-4b5f-ac3c-3ef3ea28bd67",
-   "kind": "frq_bundle",
-   "viewport": "390x844",
-   "screenshot": "docs/ap/screen-evidence/ush-real-fg/ush-real-f_ap_us_history-real_f_saq1-k0-390x844.jpg",
-   "timestamp": "2026-10-21T18:05:00.918Z",
-   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
-   "checks": {
-    "options_visible": {
-     "result": "pass",
-     "note": "3/3 FRQ parts visible"
-    },
-    "figure_rendered": {
-     "result": "na",
-     "note": "no figure/table required by this item (gate: no render spec)"
-    },
-    "no_clipping": {
-     "result": "pass",
-     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
-    },
-    "no_answer_before_submit": {
-     "result": "pass",
-     "note": "no explanation/correct-answer text on screen before submit"
-    },
-    "frq_input_works": {
-     "result": "pass",
-     "note": "typed into 3 part input(s), value retained"
-    },
-    "stimulus_no_raw_tex": {
-     "result": "pass",
-     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
-    },
-    "result_no_raw_tex": {
-     "result": "pass",
-     "note": "explanation math rendered (no raw TeX tokens)"
-    }
-   }
-  },
-  {
    "candidate_key": "ush-real-f:ap_us_history-real_f_saq2-k0",
    "checker_kind": "automated",
    "content_hash": "3f76a239091930f50a3d75b21b98edc10debd33c8df607d8d84a0fcb7bfe5ff6",
@@ -5622,47 +5581,6 @@
    }
   },
   {
-   "candidate_key": "ush-real-f:ap_us_history-real_f_saq1-k0",
-   "checker_kind": "automated",
-   "content_hash": "c20c6c2a7f86fd43e6718c3d361bb60e87888aaca67bb1eee5f055b5fc457a94",
-   "problem_version_id": "bd737d27-f490-4b5f-ac3c-3ef3ea28bd67",
-   "kind": "frq_bundle",
-   "viewport": "1280x800",
-   "screenshot": "docs/ap/screen-evidence/ush-real-fg/ush-real-f_ap_us_history-real_f_saq1-k0-1280x800.jpg",
-   "timestamp": "2026-10-21T18:05:05.627Z",
-   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
-   "checks": {
-    "options_visible": {
-     "result": "pass",
-     "note": "3/3 FRQ parts visible"
-    },
-    "figure_rendered": {
-     "result": "na",
-     "note": "no figure/table required by this item (gate: no render spec)"
-    },
-    "no_clipping": {
-     "result": "pass",
-     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
-    },
-    "no_answer_before_submit": {
-     "result": "pass",
-     "note": "no explanation/correct-answer text on screen before submit"
-    },
-    "frq_input_works": {
-     "result": "pass",
-     "note": "typed into 3 part input(s), value retained"
-    },
-    "stimulus_no_raw_tex": {
-     "result": "pass",
-     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
-    },
-    "result_no_raw_tex": {
-     "result": "pass",
-     "note": "explanation math rendered (no raw TeX tokens)"
-    }
-   }
-  },
-  {
    "candidate_key": "ush-real-f:ap_us_history-real_f_saq2-k0",
    "checker_kind": "automated",
    "content_hash": "3f76a239091930f50a3d75b21b98edc10debd33c8df607d8d84a0fcb7bfe5ff6",
@@ -5741,6 +5659,88 @@
     "result_no_raw_tex": {
      "result": "pass",
      "note": "no explanation text on result screen"
+    }
+   }
+  },
+  {
+   "candidate_key": "ush-real-f:ap_us_history-real_f_saq1-k0",
+   "checker_kind": "automated",
+   "content_hash": "9582f84b9ab38d8bb0f2fbf0c469f5ec36bd8daaeb35e90db62849a8e2d745d6",
+   "problem_version_id": "1fc414ac-6158-47e1-b6f4-cd9c71db509a",
+   "kind": "frq_bundle",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/ush-real-fg/ush-real-f_ap_us_history-real_f_saq1-k0-390x844.jpg",
+   "timestamp": "2026-10-21T19:48:19.313Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "3/3 FRQ parts visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "pass",
+     "note": "typed into 3 part input(s), value retained"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "ush-real-f:ap_us_history-real_f_saq1-k0",
+   "checker_kind": "automated",
+   "content_hash": "9582f84b9ab38d8bb0f2fbf0c469f5ec36bd8daaeb35e90db62849a8e2d745d6",
+   "problem_version_id": "1fc414ac-6158-47e1-b6f4-cd9c71db509a",
+   "kind": "frq_bundle",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/ush-real-fg/ush-real-f_ap_us_history-real_f_saq1-k0-1280x800.jpg",
+   "timestamp": "2026-10-21T19:48:26.213Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "3/3 FRQ parts visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "pass",
+     "note": "typed into 3 part input(s), value retained"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
     }
    }
   }

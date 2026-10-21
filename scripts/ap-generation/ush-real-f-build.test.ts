@@ -47,5 +47,13 @@ describe("US3 real-source FRQ (Stage F)", () => {
     const textual = { ...u, sources: [{ ...u.sources[0], kind: "primary_text" as const }] } as UshFrqPayload;
     expect(frqViolations(textual).join()).toMatch(/saq3_needs_non_text_source/);
   });
+  it("SAQ1 flags Dunning's interpretation and places Du Bois in context without hinting at the answer to part A, and the B/C rubric separates repetition from added outside facts", () => {
+    const q = SAQS_F[0]; const rec = saqRecord(q); const intro = String(rec.payload.set_intro);
+    expect(intro).toMatch(/racial prejudices of its time and has since been widely criticized/); expect(intro).toMatch(/early challenge to the then-dominant view of Reconstruction/);
+    for (const o of q.order) expect(o.context).not.toMatch(/hostil|protect|guardian|rights|intrusion|oppress|great task|repudiat/i);
+    const u = rec.payload.ush_frq as UshFrqPayload;
+    for (const id of ["b", "c"]) { const t = u.rubric.rows.find((r) => r.row_id === id)!.task_specific; expect(t).toMatch(/only repeats/); expect(t).toMatch(/not an exhaustive list/); expect(t).toMatch(/Naming an event without|naming an event without/); }
+    expect(reg.get("txt-dubois-1910")!.excerpt_segments![0]).toMatch(/^It must not be forgotten/); // original order: p. 782 before p. 783
+  });
   it("stock file exists once the final stage has run", () => { expect(existsSync("data/ap/stock/ush-real-f-items.json")).toBe(true); });
 });
