@@ -89,7 +89,7 @@ export const AP_NEW_SUBJECTS: readonly string[] = [
   "ap_comparative_government_and_politics", "ap_human_geography", "ap_computer_science_principles", "ap_european_history", "ap_precalculus",
 ];
 /** 신규 과목 중 세트가 공개돼 공개 과목 페이지·/practice-tests 목록·sitemap·랜딩에 노출하는 과목. 과목의 첫 세트를 공개할 때 총괄이 여기에 한 줄 추가한다(그 밖의 코드 변경 없음). */
-export const AP_NEW_SUBJECTS_PUBLIC: readonly string[] = [];
+export const AP_NEW_SUBJECTS_PUBLIC: readonly string[] = ["ap_physics_c_mechanics", "ap_physics_c_electricity_and_magnetism", "ap_precalculus", "ap_european_history"];
 /** 아직 공개하지 않는 신규 과목(자동 계산: AP_NEW_SUBJECTS − AP_NEW_SUBJECTS_PUBLIC). */
 export const AP_PENDING_PUBLIC_SUBJECTS: readonly string[] = AP_NEW_SUBJECTS.filter((c) => !AP_NEW_SUBJECTS_PUBLIC.includes(c));
 export const isApPublicSubject = (code: string) => !AP_PENDING_PUBLIC_SUBJECTS.includes(code);
