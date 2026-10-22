@@ -66,3 +66,12 @@
 - 증거·적재: 격리 스택 `ALTON_appz8`로 36후보·78항목 화면 증거(실패 0), 관리자 12배치 ①–④(render-check에 `phys-t5mc10/11/12/s4/s6`가 빠져 있어 추가 후 재실행).
 - 학생 화면(Production, 테스트22): 목록 "AP Physics 1 5", 시작, 42문항 구성, 1번 문항(강을 가로지르는 배의 속도) 확인. 이후 문항·FRQ·Preview 미확인. 새 테스트 응시(미제출, 정리 대기): `aae2a3d5-8b0f-4575-89b3-9acfa2631ee9`.
 - 원장 $568.6353(합집합 후 `ledger-total.ts`, 이번 작업 유료 호출 0). 진행 중 예약 0. LT5는 처리 안 함(코디네이터 지시: 유료 배치 2개 대기).
+
+## LT5 공개 (2026-10-22, 코디네이터 v3 재료)
+- **AP English Literature — Practice Exam 5**: 공개(`4cf9f1f2-3547-4b7f-b7fd-033becfa3ab7`, 문항 58 = MC 55(5 묶음) + FRQ 3, 무료). 같은 과목 다른 공개 세트와 겹치는 문항 0(DB 쿼리). 풀 모의고사 75·부분 3. 최신 DB 초안 검증: MC 55, FRQ 3, items 58, problems 0.
+- 구성: MC 묶음 Coal Merchant's(시), Danner Account(단편), Kitchen Room(희곡), Wharton *The Other Two*(단편), Hughes *The Weary Blues*(시). FRQ q1 Frost *Mending Wall*, q2 *The Pupil at Harrowgate Lodge*, q3 *The Unfinished Debt*.
+- 엄격 쌍둥이 게이트(키 접두사 `audit-wuel:…`로 저장된 공개 항목은 키 차단이 걸러내지 못하므로 내용으로 비교): 현재 공개 LT1–LT4 DB 내용과 지문 앞부분 문장 순서 유사도 0.10–0.24(같은 지문 없음), MC 질문 문장은 다른 지문의 일반 질문 틀과만 높게 나옴(지문별 내용이 다름). ALTON 원본 3 묶음(Coal Merchant's·Danner Account·Kitchen Room)은 공개 ALTON 원본 지문(Harlan Narrows Crossing, Tenney Street, The Patience, Canon One, Trackbed, Bench in Vrana Square, Accession 4471-B, The Fen Parish)과 제목·장면 모두 다르다. FRQ: Mending Wall은 공개 FRQ 시(God's Grandeur, An Old Man's Winter Night 등)와 다른 작품이고 MC 지문에도 없다. q3 *The Unfinished Debt*(과거 잘못의 속죄)는 Exam 4 *The Debt and the Door*(가족·공동체 의무 대 개인의 자유)와 '빚'이라는 비유어만 같고 과제·소재가 다르다 → 독립. 다른 q3(Shared Secret·House That Holds·Ambition and Belonging)와도 다르다.
+- 증거: 격리 스택 `ALTON_appa9`로 FRQ 2개(rf23·fc8) 화면 증거 4항목(실패 0). 관리자 ①–④: Mending Wall·fc8 배치 적재·렌더·화면·변환 완료(나머지 키는 이미 변환 상태).
+- 학생 화면(Production, 테스트22): 목록 "AP English Literature 5", 시작, 55문항 구성, 첫 묶음(Danner Account) 확인. 이후 문항·FRQ·Preview 미확인.
+- **테스트 응시 정리 실행**: `docs/ops/test-attempt-cleanup-2026-10-22-b.sql`(테스트 계정·미제출·새 공개 세트 6개로 한정, 보호 검사 포함)을 실행해 CH4·CS4·CS5·PS5·PH5·LT5 테스트 응시(6건)를 삭제했다. 실제 학생 응시 22건 그대로, 남은 테스트 응시 0(이 6개 세트 기준). 답안·채점·비용 기록은 없었다.
+- 원장 $572.7657(합집합 후 `ledger-total.ts`, 이번 작업 유료 호출 0), 상한 730/740.
