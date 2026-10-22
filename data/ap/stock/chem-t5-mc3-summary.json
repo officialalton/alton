@@ -1,0 +1,38 @@
+{
+ "runs": [
+  "chem-t5-mc3"
+ ],
+ "rows": 12,
+ "passed": 6,
+ "rejected": 6,
+ "passRate": 0.5,
+ "singles": {
+  "candidates": 12
+ },
+ "unitsPassed": {
+  "1": 1,
+  "3": 2,
+  "8": 3
+ },
+ "figPassed": {
+  "none": 6
+ },
+ "figAll": {
+  "none": 12
+ },
+ "figPassRate": {
+  "none": "6/12"
+ },
+ "renderTypesPassed": {
+  "none": 6
+ },
+ "archetypesPassed": {
+  "ch_t5i_p2_oxide_formula_procedure": 1,
+  "ch_t5i_p4_evaporation_forces": 1,
+  "ch_t5i_p4_heating_curve": 1,
+  "ch_t5i_ka_from_ph": 3
+ },
+ "costUsd": {
+  "chem-t5-mc3": 0.3709
+ }
+}

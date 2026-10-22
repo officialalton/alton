@@ -22,3 +22,6 @@ STAGE_T5_FRQ4 = ['chf_short_imf_dissolving', 'chf_short_solid_types']
 
 # 4차 FRQ(CH5 bonding 칸 대체): chem-t5-frq5 실행 대상
 STAGE_T5_FRQ5 = ['chf_short_resonance_bond_order']
+
+# CH5 단독 4칸 대체: chem-t5-mc3 실행 대상
+STAGE_T5_MC3 = ['ch_t5i_p2_oxide_formula_procedure', 'ch_t5i_p4_evaporation_forces', 'ch_t5i_p4_heating_curve', 'ch_t5i_ka_from_ph']
