@@ -30,6 +30,8 @@ async function main() {
   ex("구조 동일", look); ex("원형+토픽 동일", sameKey); ex("원형만 동일(허용)", archOnly);
   const recov = new Set<string>((JSON.parse(readFileSync(`data/ap/stock/lookalike-recheck-${subj}.json`, "utf-8")) as { recoverable: string[] }).recoverable); // lookalike-recheck.ts: 자료·조건·과제가 달라 복구된 후보
   const blocked = new Set<string>([...pubKeys, ...look.map((c) => c.key), ...sameKey.map((c) => c.key)].filter((k) => !recov.has(k)));
+  // 구조 동일(숫자·문자열만 다른 변형) 쌍 점검에서 나온 추가 차단 키(코드 수준 비교는 fam 군집이 놓친다).
+  for (const f of arg("--extra-block").split(",").filter(Boolean)) for (const st of (JSON.parse(readFileSync(f, "utf-8")) as { sets: { mcA?: string[]; frqA?: string[] }[] }).sets) for (const k of [...(st.mcA ?? []), ...(st.frqA ?? [])]) blocked.add(k);
   const { out } = solve(ids, blocked, pubSig);
   const bad = verify(out, blocked);
   console.log(`독립 검증기 위반: ${bad.length ? bad.join("; ") : "0"}`);
