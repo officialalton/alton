@@ -1,0 +1,64 @@
+[
+ {
+  "key": "ap_computer_science_a-f01-k0",
+  "cellId": "ap_computer_science_a-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Ceiling division of minutes by 60 using integers.",
+     "final_answer": "public static int hoursCharged(int minutes) { return (minutes + 59) / 60; }",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "Get the charged hours. Charge 4 per hour for the first 2 hours and 3 per hour after that, then cap the total at 20.",
+     "final_answer": "public static int totalFee(int minutes) { int h = hoursCharged(minutes); int fee; if (h <= 2) fee = 4 * h; else fee = 8 + 3 * (h - 2); return Math.min(fee, 20); }",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item is topically sound, but the rubric is tied to one implementation and would mis-score valid solutions, so it fails on key/scoring.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item fits 2.4/2.A: it asks the student to write nested and compound conditionals and to reuse a helper method."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The rubric rows for part (a) require the elements \"minutes / 60\", \"minutes % 60 != 0\" and \"hours++ inside the condition\". The independent solver's valid one-line answer (minutes + 59) / 60 would fail A1 and A2 under these required elements, and alt_solutions is empty. Row A1 also combines two behaviors (the division and the leftover test), which breaks the one-behavior-per-row rule. Row B1 likewise combines the helper call and the 4-dollar rate. The point total of 7 differs from the fixed 9-point FRQ structure. In part (b), requiring \"8 + 3 * (h - 2)\" is too rigid, because equivalent forms such as 3 * h + 2 are valid."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus is clear and complete, with the specification, preconditions and examples all given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no MC distractors. The rubric lists common errors for each row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is reasonable, but the 7 total points do not match the fixed 9-point FRQ structure."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Two-part write-the-method item. Part (a) needs a ceiling division with integers, handling the exact-multiple boundary (120 -> 2) and 0. Part (b) needs reuse of hoursCharged, a two-tier fee with a conditional split at 2 hours, and a cap at 20. Concept depth and step count match a typical AP CSA FRQ-style item. Computation is trivial and the reading is short. Difficulty comes from the integer-division subtlety and boundary cases, which are allowed levers.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ }
+]

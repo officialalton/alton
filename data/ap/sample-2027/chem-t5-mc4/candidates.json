@@ -1,0 +1,2812 @@
+[
+ {
+  "candidateKey": "ap_chemistry-m01-k0",
+  "cellId": "ap_chemistry-m01",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "1.7",
+  "unitCode": "1",
+  "skillPrimary": "6.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5j_p6_ionization_anomaly",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Conceptual MCQ on the Mg/Al first ionization energy anomaly. The student must recall electron configurations (Mg 3s2, Al 3s2 3p1), identify subshell energy and penetration as the governing relationship rather than nuclear charge alone, and link this to the observed IE. Distractors target common misconceptions (same number of shells, wrong subshell, wrong proton count). There is no computation or heavy reading, and the item is within Unit 1 scope. Difficulty comes from legitimate conceptual discrimination, which makes it suitable for a full mock exam at moderate difficulty.",
+  "payload": {
+   "archetype": "ch_t5j_p6_ionization_anomaly",
+   "topic": "1.7",
+   "skill": "6.D",
+   "calculator": "allowed",
+   "stem": "The first ionization energy of aluminum (578 kJ/mol) is lower than that of magnesium (738 kJ/mol), even though aluminum has the larger nuclear charge. Which statement best explains this observation?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Aluminum atoms are larger than magnesium atoms because they have more electron shells.",
+     "why": "Both atoms have three shells, so the shell count does not explain the lower ionization energy of Al.",
+     "value": null
+    },
+    {
+     "text": "The outermost electron of Al is in a 3p subshell, which is higher in energy and farther from the nucleus than the 3s subshell of Mg, so it is easier to remove.",
+     "why": "A 3p electron is held less tightly than a 3s electron because it is less penetrating, which outweighs the added proton.",
+     "value": null
+    },
+    {
+     "text": "The outermost electron of Al is paired in a 3s orbital, so repulsion removes it more easily.",
+     "why": "The outermost electron of Al is a single 3p electron, not a paired 3s electron.",
+     "value": null
+    },
+    {
+     "text": "Aluminum has fewer protons than magnesium, so its nucleus attracts electrons less strongly.",
+     "why": "Aluminum has 13 protons and magnesium has 12, so the nuclear charge is larger for aluminum.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 70,
+   "facts": [
+    "The first ionization energy of aluminum (578 kJ/mol) is lowe"
+   ],
+   "blueprint": {
+    "id": "ch_t5j_p6_ionization_anomaly",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "explain an exception to the general trend of ionization energy across a period using subshell energy or electron pairing",
+    "topic": "1.7",
+    "skill": "6.D",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: explain an exception to the general trend of ionization energy across a period using subshell energy or electron pairing",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Both atoms have three shells, so the shell count does not explain the lower ionization energy of Al."
+     },
+     {
+      "id": "m2",
+      "description": "The outermost electron of Al is a single 3p electron, not a paired 3s electron."
+     },
+     {
+      "id": "m3",
+      "description": "Aluminum has 13 protons and magnesium has 12, so the nuclear charge is larger for aluminum."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "apply a chemical principle to a specific case and reject plausible misconceptions"
+   },
+   "seed": 15100,
+   "pack_id": "ch_t5j_p6_ionization_anomaly-s15100",
+   "explanation_en": "The correct answer is The outermost electron of Al is in a 3p subshell, which is higher in energy and farther from the nucleus than the 3s subshell of Mg, so it is easier to remove.. A 3p electron is held less tightly than a 3s electron because it is less penetrating, which outweighs the added proton.\nAluminum atoms are larger than magnesium atoms because they have more electron shells. is incorrect: Both atoms have three shells, so the shell count does not explain the lower ionization energy of Al.\nThe outermost electron of Al is paired in a 3s orbital, so repulsion removes it more easily. is incorrect: The outermost electron of Al is a single 3p electron, not a paired 3s electron.\nAluminum has fewer protons than magnesium, so its nucleus attracts electrons less strongly. is incorrect: Aluminum has 13 protons and magnesium has 12, so the nuclear charge is larger for aluminum."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5j_p6_ionization_anomaly",
+   "facts": [
+    "The first ionization energy of aluminum (578 kJ/mol) is lowe"
+   ],
+   "seed": 15100
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 60-70 seconds, no calculation, typical AP reading load.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A sound conceptual item with a unique key, distinct distractors and appropriate scope, so it passes."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Conceptual MCQ on the Mg/Al first ionization energy anomaly. The student must recall electron configurations (Mg 3s2, Al 3s2 3p1), identify subshell energy and penetration as the governing relationship rather than nuclear charge alone, and link this to the observed IE. Distractors target common misconceptions (same number of shells, wrong subshell, wrong proton count). There is no computation or heavy reading, and the item is within Unit 1 scope. Difficulty comes from legitimate conceptual discrimination, which makes it suitable for a full mock exam at moderate difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m01-k1",
+  "cellId": "ap_chemistry-m01",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "1.7",
+  "unitCode": "1",
+  "skillPrimary": "6.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5j_p6_ionization_anomaly",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Classic conceptual anomaly (P vs S first IE) requiring recall of configurations (3p3 vs 3p4) and selecting the paired-electron repulsion justification over plausible distractors (fewer protons, smaller radius, 4s). No computation, minimal reading, in scope for 1.5/1.7. Moderate conceptual depth typical of AP exam MCQs; suitable for full mocks.",
+  "payload": {
+   "archetype": "ch_t5j_p6_ionization_anomaly",
+   "topic": "1.7",
+   "skill": "6.D",
+   "calculator": "allowed",
+   "stem": "The first ionization energy of sulfur (1000 kJ/mol) is lower than that of phosphorus (1012 kJ/mol), even though sulfur has the larger nuclear charge. Which statement best explains this observation?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Sulfur has fewer protons than phosphorus, so its nucleus attracts electrons less strongly.",
+     "why": "Sulfur has 16 protons and phosphorus has 15, so sulfur has the larger nuclear charge.",
+     "value": null
+    },
+    {
+     "text": "Sulfur atoms have a smaller radius than phosphorus atoms, so the outer electrons are held more weakly.",
+     "why": "A smaller radius generally raises, not lowers, the ionization energy.",
+     "value": null
+    },
+    {
+     "text": "A 3p orbital of sulfur holds a pair of electrons, and the repulsion between the paired electrons makes one of them easier to remove than an unpaired electron of phosphorus.",
+     "why": "Electron–electron repulsion in a doubly occupied 3p orbital lowers the energy needed to remove an electron.",
+     "value": null
+    },
+    {
+     "text": "The outermost electron of sulfur is in a 4s subshell, which is farther from the nucleus.",
+     "why": "The outermost electrons of sulfur are in the 3p subshell, as in phosphorus.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 70,
+   "facts": [
+    "The first ionization energy of sulfur (1000 kJ/mol) is lower"
+   ],
+   "blueprint": {
+    "id": "ch_t5j_p6_ionization_anomaly",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "explain an exception to the general trend of ionization energy across a period using subshell energy or electron pairing",
+    "topic": "1.7",
+    "skill": "6.D",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: explain an exception to the general trend of ionization energy across a period using subshell energy or electron pairing",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Sulfur has 16 protons and phosphorus has 15, so sulfur has the larger nuclear charge."
+     },
+     {
+      "id": "m2",
+      "description": "A smaller radius generally raises, not lowers, the ionization energy."
+     },
+     {
+      "id": "m3",
+      "description": "The outermost electrons of sulfur are in the 3p subshell, as in phosphorus."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "apply a chemical principle to a specific case and reject plausible misconceptions"
+   },
+   "seed": 15101,
+   "pack_id": "ch_t5j_p6_ionization_anomaly-s15101",
+   "explanation_en": "The correct answer is A 3p orbital of sulfur holds a pair of electrons, and the repulsion between the paired electrons makes one of them easier to remove than an unpaired electron of phosphorus.. Electron–electron repulsion in a doubly occupied 3p orbital lowers the energy needed to remove an electron.\nSulfur has fewer protons than phosphorus, so its nucleus attracts electrons less strongly. is incorrect: Sulfur has 16 protons and phosphorus has 15, so sulfur has the larger nuclear charge.\nSulfur atoms have a smaller radius than phosphorus atoms, so the outer electrons are held more weakly. is incorrect: A smaller radius generally raises, not lowers, the ionization energy.\nThe outermost electron of sulfur is in a 4s subshell, which is farther from the nucleus. is incorrect: The outermost electrons of sulfur are in the 3p subshell, as in phosphorus."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5j_p6_ionization_anomaly",
+   "facts": [
+    "The first ionization energy of sulfur (1000 kJ/mol) is lower"
+   ],
+   "seed": 15101
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 1.7 exception to ionization energy trend; justification with a chemical principle fits skill 6.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the unique correct explanation (3p4 pairing repulsion). Values are realistic."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct misconceptions (nuclear charge, radius, wrong subshell) and each is explained. The correct option is a bit longer, which is minor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, with low reading load and no arithmetic. This matches the reference pattern."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key is correct and unique, the distractors are distinct, and the scope fits topic 1.7 with skill 6.D. Passes."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Classic conceptual anomaly (P vs S first IE) requiring recall of configurations (3p3 vs 3p4) and selecting the paired-electron repulsion justification over plausible distractors (fewer protons, smaller radius, 4s). No computation, minimal reading, in scope for 1.5/1.7. Moderate conceptual depth typical of AP exam MCQs; suitable for full mocks.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m01-k2",
+  "cellId": "ap_chemistry-m01",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "1.7",
+  "unitCode": "1",
+  "skillPrimary": "6.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5j_p6_ionization_anomaly",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Conceptual item on the Al vs. Mg first ionization energy anomaly. The student must recall electron configurations (Mg 3s2, Al 3s2 3p1), recognize that the 3p electron is higher in energy and better shielded by the 3s electrons, and reject distractors (same number of shells, false claim of fewer protons, incorrect 3s pairing for Al). This is a standard exam-style justification that goes beyond simple recall of the general periodic trend, but it needs no computation and has a short stem. The wording is unambiguous and the content is in scope for Unit 1.7.",
+  "payload": {
+   "archetype": "ch_t5j_p6_ionization_anomaly",
+   "topic": "1.7",
+   "skill": "6.D",
+   "calculator": "allowed",
+   "stem": "The first ionization energy of aluminum (578 kJ/mol) is lower than that of magnesium (738 kJ/mol), even though aluminum has the larger nuclear charge. Which statement best explains this observation?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The outermost electron of Al is in a 3p subshell, which is higher in energy and farther from the nucleus than the 3s subshell of Mg, so it is easier to remove.",
+     "why": "A 3p electron is held less tightly than a 3s electron because it is less penetrating, which outweighs the added proton.",
+     "value": null
+    },
+    {
+     "text": "Aluminum atoms are larger than magnesium atoms because they have more electron shells.",
+     "why": "Both atoms have three shells, so the shell count does not explain the lower ionization energy of Al.",
+     "value": null
+    },
+    {
+     "text": "The outermost electron of Al is paired in a 3s orbital, so repulsion removes it more easily.",
+     "why": "The outermost electron of Al is a single 3p electron, not a paired 3s electron.",
+     "value": null
+    },
+    {
+     "text": "Aluminum has fewer protons than magnesium, so its nucleus attracts electrons less strongly.",
+     "why": "Aluminum has 13 protons and magnesium has 12, so the nuclear charge is larger for aluminum.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 70,
+   "facts": [
+    "The first ionization energy of aluminum (578 kJ/mol) is lowe"
+   ],
+   "blueprint": {
+    "id": "ch_t5j_p6_ionization_anomaly",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "explain an exception to the general trend of ionization energy across a period using subshell energy or electron pairing",
+    "topic": "1.7",
+    "skill": "6.D",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: explain an exception to the general trend of ionization energy across a period using subshell energy or electron pairing",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Both atoms have three shells, so the shell count does not explain the lower ionization energy of Al."
+     },
+     {
+      "id": "m2",
+      "description": "The outermost electron of Al is a single 3p electron, not a paired 3s electron."
+     },
+     {
+      "id": "m3",
+      "description": "Aluminum has 13 protons and magnesium has 12, so the nuclear charge is larger for aluminum."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "apply a chemical principle to a specific case and reject plausible misconceptions"
+   },
+   "seed": 15102,
+   "pack_id": "ch_t5j_p6_ionization_anomaly-s15102",
+   "explanation_en": "The correct answer is The outermost electron of Al is in a 3p subshell, which is higher in energy and farther from the nucleus than the 3s subshell of Mg, so it is easier to remove.. A 3p electron is held less tightly than a 3s electron because it is less penetrating, which outweighs the added proton.\nAluminum atoms are larger than magnesium atoms because they have more electron shells. is incorrect: Both atoms have three shells, so the shell count does not explain the lower ionization energy of Al.\nThe outermost electron of Al is paired in a 3s orbital, so repulsion removes it more easily. is incorrect: The outermost electron of Al is a single 3p electron, not a paired 3s electron.\nAluminum has fewer protons than magnesium, so its nucleus attracts electrons less strongly. is incorrect: Aluminum has 13 protons and magnesium has 12, so the nuclear charge is larger for aluminum."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5j_p6_ionization_anomaly",
+   "facts": [
+    "The first ionization energy of aluminum (578 kJ/mol) is lowe"
+   ],
+   "seed": 15102
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 70 seconds, with no arithmetic, typical of an AP Chemistry MC item.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound and in scope. It has a unique key, distinct distractors with explanations, and appropriate load. The only weakness is that the key is the longest option."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Conceptual item on the Al vs. Mg first ionization energy anomaly. The student must recall electron configurations (Mg 3s2, Al 3s2 3p1), recognize that the 3p electron is higher in energy and better shielded by the 3s electrons, and reject distractors (same number of shells, false claim of fewer protons, incorrect 3s pairing for Al). This is a standard exam-style justification that goes beyond simple recall of the general periodic trend, but it needs no computation and has a short stem. The wording is unambiguous and the content is in scope for Unit 1.7.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m02-k0",
+  "cellId": "ap_chemistry-m02",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "3.7",
+  "unitCode": "3",
+  "skillPrimary": "2.C",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5j_p2_standard_solution_procedure",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Standard introductory procedure item: identify that a solution of known molarity is made by dissolving solute and diluting to the mark in a volumetric flask. The mass is given in the options and takes one quick check (0.100 mol/L x 0.2500 L x 58.44 g/mol = 1.461 g). Distractors differ in clear ways (10x mass error, adding solvent volume to solute, beaker or cylinder instead of volumetric flask). Little reading, minimal computation, no representation changes.",
+  "payload": {
+   "archetype": "ch_t5j_p2_standard_solution_procedure",
+   "topic": "3.7",
+   "skill": "2.C",
+   "calculator": "allowed",
+   "stem": "A student needs 250.0 mL of a 0.100 M NaCl solution from solid NaCl. Which procedure is most appropriate for making the solution accurately?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Add 1.461 g of NaCl to a 250.0 mL graduated cylinder, then add 250.0 mL of water and stir until it dissolves.",
+     "why": "Adding 250.0 mL of water to the solid makes more than 250.0 mL of solution, so the concentration is too low.",
+     "value": null
+    },
+    {
+     "text": "Dissolve 1.461 g of NaCl in water in a beaker, transfer it to a 250.0 mL volumetric flask with rinsings, and fill to the mark.",
+     "why": "Dissolving first, transferring completely, and filling to the calibration mark gives exactly 250.0 mL of solution with the intended amount of solute.",
+     "value": null
+    },
+    {
+     "text": "Dissolve 14.61 g of NaCl in water and dilute the solution to 250.0 mL in a volumetric flask.",
+     "why": "Using 14.61 g gives a concentration ten times too large.",
+     "value": null
+    },
+    {
+     "text": "Add 1.461 g of NaCl to a beaker and fill the beaker with water until it reaches the 250 mL line on its side.",
+     "why": "A beaker's markings are not accurate enough to prepare a solution of a precise concentration.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 70,
+   "facts": [
+    "A student needs 250.0 mL of a 0.100 M NaCl solution from sol"
+   ],
+   "blueprint": {
+    "id": "ch_t5j_p2_standard_solution_procedure",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "choose an accurate procedure for preparing a standard solution by direct weighing or dilution",
+    "topic": "3.7",
+    "skill": "2.C",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: choose an accurate procedure for preparing a standard solution by direct weighing or dilution",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Adding 250.0 mL of water to the solid makes more than 250.0 mL of solution, so the concentration is too low."
+     },
+     {
+      "id": "m2",
+      "description": "Using 14.61 g gives a concentration ten times too large."
+     },
+     {
+      "id": "m3",
+      "description": "A beaker's markings are not accurate enough to prepare a solution of a precise concentration."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "apply a chemical principle to a specific case and reject plausible misconceptions"
+   },
+   "seed": 15100,
+   "pack_id": "ch_t5j_p2_standard_solution_procedure-s15100",
+   "explanation_en": "The correct answer is Dissolve 1.461 g of NaCl in water in a beaker, transfer it to a 250.0 mL volumetric flask with rinsings, and fill to the mark.. Dissolving first, transferring completely, and filling to the calibration mark gives exactly 250.0 mL of solution with the intended amount of solute.\nAdd 1.461 g of NaCl to a 250.0 mL graduated cylinder, then add 250.0 mL of water and stir until it dissolves. is incorrect: Adding 250.0 mL of water to the solid makes more than 250.0 mL of solution, so the concentration is too low.\nDissolve 14.61 g of NaCl in water and dilute the solution to 250.0 mL in a volumetric flask. is incorrect: Using 14.61 g gives a concentration ten times too large.\nAdd 1.461 g of NaCl to a beaker and fill the beaker with water until it reaches the 250 mL line on its side. is incorrect: A beaker's markings are not accurate enough to prepare a solution of a precise concentration."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5j_p2_standard_solution_procedure",
+   "facts": [
+    "A student needs 250.0 mL of a 0.100 M NaCl solution from sol"
+   ],
+   "seed": 15100
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item. Key B is unique (1.461 g NaCl, dissolve, transfer with rinsings, fill volumetric flask to the mark). Each distractor encodes a distinct error (volume of solvent, mass off by 10x, beaker imprecision). Fits 3.7 and skill 2.C, with a short reading and calculation load.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard introductory procedure item: identify that a solution of known molarity is made by dissolving solute and diluting to the mark in a volumetric flask. The mass is given in the options and takes one quick check (0.100 mol/L x 0.2500 L x 58.44 g/mol = 1.461 g). Distractors differ in clear ways (10x mass error, adding solvent volume to solute, beaker or cylinder instead of volumetric flask). Little reading, minimal computation, no representation changes.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m02-k1",
+  "cellId": "ap_chemistry-m02",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "3.7",
+  "unitCode": "3",
+  "skillPrimary": "2.C",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5j_p2_standard_solution_procedure",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single governing relationship (M1V1 = M2V2) with trivial mental arithmetic (10.0 mL). The second step is recognizing that a volumetric flask filled to the mark gives the correct final volume, rather than adding 100 mL of water to the aliquot. Distractors are clearly wrong in volume or technique. There is no stimulus and very little reading, so it is suited to foundational practice rather than a full mock.",
+  "payload": {
+   "archetype": "ch_t5j_p2_standard_solution_procedure",
+   "topic": "3.7",
+   "skill": "2.C",
+   "calculator": "allowed",
+   "stem": "A student has 1.00 M HCl and needs 100.0 mL of 0.100 M HCl. Which procedure is most appropriate for the dilution?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Pour 100.0 mL of the 1.00 M HCl into a beaker that holds 10.00 mL of water and stir the mixture.",
+     "why": "This produces a solution that is far more concentrated than 0.100 M.",
+     "value": null
+    },
+    {
+     "text": "Pour 10.00 mL of the 1.00 M HCl into a beaker that holds 100.0 mL of water and stir the mixture.",
+     "why": "This makes about 110 mL of solution, so the concentration is below 0.100 M, and the volumes are not measured accurately.",
+     "value": null
+    },
+    {
+     "text": "Pipet 10.00 mL of the 1.00 M HCl into a 100.0 mL volumetric flask that holds some water, then add water to the mark.",
+     "why": "The moles of HCl in 10.00 mL of 1.00 M acid are 0.0100 mol, which gives 0.100 M in 100.0 mL, and a pipet and flask measure the volumes accurately.",
+     "value": null
+    },
+    {
+     "text": "Pipet 1.00 mL of the 1.00 M HCl into a 100.0 mL volumetric flask and add water to the mark.",
+     "why": "This makes 0.0100 M HCl, which is ten times too dilute.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 70,
+   "facts": [
+    "A student has 1.00 M HCl and needs 100.0 mL of 0.100 M HCl. "
+   ],
+   "blueprint": {
+    "id": "ch_t5j_p2_standard_solution_procedure",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "choose an accurate procedure for preparing a standard solution by direct weighing or dilution",
+    "topic": "3.7",
+    "skill": "2.C",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: choose an accurate procedure for preparing a standard solution by direct weighing or dilution",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "This produces a solution that is far more concentrated than 0.100 M."
+     },
+     {
+      "id": "m2",
+      "description": "This makes about 110 mL of solution, so the concentration is below 0.100 M, and the volumes are not measured accurately."
+     },
+     {
+      "id": "m3",
+      "description": "This makes 0.0100 M HCl, which is ten times too dilute."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "apply a chemical principle to a specific case and reject plausible misconceptions"
+   },
+   "seed": 15101,
+   "pack_id": "ch_t5j_p2_standard_solution_procedure-s15101",
+   "explanation_en": "The correct answer is Pipet 10.00 mL of the 1.00 M HCl into a 100.0 mL volumetric flask that holds some water, then add water to the mark.. The moles of HCl in 10.00 mL of 1.00 M acid are 0.0100 mol, which gives 0.100 M in 100.0 mL, and a pipet and flask measure the volumes accurately.\nPour 100.0 mL of the 1.00 M HCl into a beaker that holds 10.00 mL of water and stir the mixture. is incorrect: This produces a solution that is far more concentrated than 0.100 M.\nPour 10.00 mL of the 1.00 M HCl into a beaker that holds 100.0 mL of water and stir the mixture. is incorrect: This makes about 110 mL of solution, so the concentration is below 0.100 M, and the volumes are not measured accurately.\nPipet 1.00 mL of the 1.00 M HCl into a 100.0 mL volumetric flask and add water to the mark. is incorrect: This makes 0.0100 M HCl, which is ten times too dilute."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5j_p2_standard_solution_procedure",
+   "facts": [
+    "A student has 1.00 M HCl and needs 100.0 mL of 0.100 M HCl. "
+   ],
+   "seed": 15101
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Dilution procedure selection fits 3.7 and skill 2.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is the unique procedure giving 0.100 M in 100.0 mL."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions; all options explained. The correct option is slightly longer, a minor point."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, with minimal arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item. The key is unique, the distractors are distinct, and the scope and skill fit. Accept."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single governing relationship (M1V1 = M2V2) with trivial mental arithmetic (10.0 mL). The second step is recognizing that a volumetric flask filled to the mark gives the correct final volume, rather than adding 100 mL of water to the aliquot. Distractors are clearly wrong in volume or technique. There is no stimulus and very little reading, so it is suited to foundational practice rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m02-k2",
+  "cellId": "ap_chemistry-m02",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "3.7",
+  "unitCode": "3",
+  "skillPrimary": "2.C",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5j_p2_standard_solution_procedure",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item on preparing a molar solution. The student checks a given mass against M x V x molar mass and picks volumetric glassware with final volume dilution to the mark. Distractors differ in clear, standard ways (wrong mass, wrong glassware, solvent volume vs. solution volume). Little reading, minimal calculation, and no representation changes. It aligns with skill 2.C but is below typical full-mock difficulty.",
+  "payload": {
+   "archetype": "ch_t5j_p2_standard_solution_procedure",
+   "topic": "3.7",
+   "skill": "2.C",
+   "calculator": "allowed",
+   "stem": "A student needs 250.0 mL of a 0.100 M NaCl solution from solid NaCl. Which procedure is most appropriate for making the solution accurately?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Dissolve 1.461 g of NaCl in water in a beaker, transfer it to a 250.0 mL volumetric flask with rinsings, and fill to the mark.",
+     "why": "Dissolving first, transferring completely, and filling to the calibration mark gives exactly 250.0 mL of solution with the intended amount of solute.",
+     "value": null
+    },
+    {
+     "text": "Add 1.461 g of NaCl to a 250.0 mL graduated cylinder, then add 250.0 mL of water and stir until it dissolves.",
+     "why": "Adding 250.0 mL of water to the solid makes more than 250.0 mL of solution, so the concentration is too low.",
+     "value": null
+    },
+    {
+     "text": "Dissolve 14.61 g of NaCl in water and dilute the solution to 250.0 mL in a volumetric flask.",
+     "why": "Using 14.61 g gives a concentration ten times too large.",
+     "value": null
+    },
+    {
+     "text": "Add 1.461 g of NaCl to a beaker and fill the beaker with water until it reaches the 250 mL line on its side.",
+     "why": "A beaker's markings are not accurate enough to prepare a solution of a precise concentration.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 70,
+   "facts": [
+    "A student needs 250.0 mL of a 0.100 M NaCl solution from sol"
+   ],
+   "blueprint": {
+    "id": "ch_t5j_p2_standard_solution_procedure",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "choose an accurate procedure for preparing a standard solution by direct weighing or dilution",
+    "topic": "3.7",
+    "skill": "2.C",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: choose an accurate procedure for preparing a standard solution by direct weighing or dilution",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Adding 250.0 mL of water to the solid makes more than 250.0 mL of solution, so the concentration is too low."
+     },
+     {
+      "id": "m2",
+      "description": "Using 14.61 g gives a concentration ten times too large."
+     },
+     {
+      "id": "m3",
+      "description": "A beaker's markings are not accurate enough to prepare a solution of a precise concentration."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "apply a chemical principle to a specific case and reject plausible misconceptions"
+   },
+   "seed": 15102,
+   "pack_id": "ch_t5j_p2_standard_solution_procedure-s15102",
+   "explanation_en": "The correct answer is Dissolve 1.461 g of NaCl in water in a beaker, transfer it to a 250.0 mL volumetric flask with rinsings, and fill to the mark.. Dissolving first, transferring completely, and filling to the calibration mark gives exactly 250.0 mL of solution with the intended amount of solute.\nAdd 1.461 g of NaCl to a 250.0 mL graduated cylinder, then add 250.0 mL of water and stir until it dissolves. is incorrect: Adding 250.0 mL of water to the solid makes more than 250.0 mL of solution, so the concentration is too low.\nDissolve 14.61 g of NaCl in water and dilute the solution to 250.0 mL in a volumetric flask. is incorrect: Using 14.61 g gives a concentration ten times too large.\nAdd 1.461 g of NaCl to a beaker and fill the beaker with water until it reaches the 250 mL line on its side. is incorrect: A beaker's markings are not accurate enough to prepare a solution of a precise concentration."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5j_p2_standard_solution_procedure",
+   "facts": [
+    "A student needs 250.0 mL of a 0.100 M NaCl solution from sol"
+   ],
+   "seed": 15102
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item asks which procedure prepares a standard solution accurately, which fits topic 3.7 and skill 2.C. The key (1.461 g in a volumetric flask, filled to the mark) is the unique defensible answer. Each distractor encodes a distinct misconception: adding the full volume of water, a tenfold mass error, and inaccurate beaker markings. The stem is complete and needs no stimulus. The item is short and has no arithmetic burden beyond what the options already give.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Choosing a standard-solution preparation procedure matches 3.7 and skill 2.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0.02500 mol × 58.44 g/mol = 1.461 g. Only option A has the correct mass and the correct technique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and every quantity is given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "All three wrong options are explained, and each reflects a different realistic error."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, with low reading load and no needless arithmetic."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item on preparing a molar solution. The student checks a given mass against M x V x molar mass and picks volumetric glassware with final volume dilution to the mark. Distractors differ in clear, standard ways (wrong mass, wrong glassware, solvent volume vs. solution volume). Little reading, minimal calculation, and no representation changes. It aligns with skill 2.C but is below typical full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m03-k0",
+  "cellId": "ap_chemistry-m03",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "4.9",
+  "unitCode": "4",
+  "skillPrimary": "4.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5j_p4_displacement_model",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: identify electron transfer in a Cl2/Br- displacement reaction. Requires recognizing that Br- is oxidized to Br2 and Cl2 is reduced to Cl-, with distractors targeting reversed roles, covalent sharing, and spectator-ion misconceptions. No calculation, no stimulus, minimal reading, and only one or two reasoning steps, so it suits foundational learning rather than a full-mock exam item.",
+  "payload": {
+   "archetype": "ch_t5j_p4_displacement_model",
+   "topic": "4.9",
+   "skill": "4.A",
+   "calculator": "allowed",
+   "stem": "Chlorine gas is bubbled through a colorless solution of sodium bromide, and the solution turns orange as Br₂ forms. Which particle-level statement best describes the change?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Br⁻ ions gain electrons to form Br₂ molecules, and Cl₂ molecules lose electrons to form Cl⁻ ions.",
+     "why": "Forming Br₂ from Br⁻ requires a loss of electrons, so it is oxidation.",
+     "value": null
+    },
+    {
+     "text": "Cl₂ molecules gain electrons to form Cl⁻ ions, and Br⁻ ions lose electrons to form Br₂ molecules.",
+     "why": "Chlorine is reduced and bromide is oxidized, so electrons transfer from Br⁻ to Cl₂.",
+     "value": null
+    },
+    {
+     "text": "Cl₂ molecules and Br⁻ ions share electrons to form BrCl molecules.",
+     "why": "The orange color is from Br₂, and the change is an electron transfer rather than sharing to form BrCl.",
+     "value": null
+    },
+    {
+     "text": "Na⁺ ions gain electrons from Cl₂ and form sodium atoms.",
+     "why": "Sodium ions are spectators here and are not reduced.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 70,
+   "facts": [
+    "Chlorine gas is bubbled through a colorless solution of sodi"
+   ],
+   "blueprint": {
+    "id": "ch_t5j_p4_displacement_model",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "describe an electron-transfer displacement reaction at the particle level",
+    "topic": "4.9",
+    "skill": "4.A",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: describe an electron-transfer displacement reaction at the particle level",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Forming Br₂ from Br⁻ requires a loss of electrons, so it is oxidation."
+     },
+     {
+      "id": "m2",
+      "description": "The orange color is from Br₂, and the change is an electron transfer rather than sharing to form BrCl."
+     },
+     {
+      "id": "m3",
+      "description": "Sodium ions are spectators here and are not reduced."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "apply a chemical principle to a specific case and reject plausible misconceptions"
+   },
+   "seed": 15100,
+   "pack_id": "ch_t5j_p4_displacement_model-s15100",
+   "explanation_en": "The correct answer is Cl₂ molecules gain electrons to form Cl⁻ ions, and Br⁻ ions lose electrons to form Br₂ molecules.. Chlorine is reduced and bromide is oxidized, so electrons transfer from Br⁻ to Cl₂.\nBr⁻ ions gain electrons to form Br₂ molecules, and Cl₂ molecules lose electrons to form Cl⁻ ions. is incorrect: Forming Br₂ from Br⁻ requires a loss of electrons, so it is oxidation.\nCl₂ molecules and Br⁻ ions share electrons to form BrCl molecules. is incorrect: The orange color is from Br₂, and the change is an electron transfer rather than sharing to form BrCl.\nNa⁺ ions gain electrons from Cl₂ and form sodium atoms. is incorrect: Sodium ions are spectators here and are not reduced."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5j_p4_displacement_model",
+   "facts": [
+    "Chlorine gas is bubbled through a colorless solution of sodi"
+   ],
+   "seed": 15100
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 4.9: identifying oxidation and reduction in a displacement reaction at the particle level. It is a model-analysis task and fits the topic and skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option B is the unique correct answer: Cl2 is reduced and Br- is oxidized. A is the reverse, C proposes BrCl, and D claims Na+ is reduced. The independent solver also chose B."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear, and the data object is empty as intended."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions: reversed electron flow, sharing instead of transfer, and Na+ reduced. The explanation addresses each wrong option. Options are similar in length and parallel in format."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, with no calculation. This matches the typical AP load for a conceptual item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. It has a unique key, plausible distinct distractors, and is in scope for 4.9 with skill 4.A. It is a clean, short conceptual redox item."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: identify electron transfer in a Cl2/Br- displacement reaction. Requires recognizing that Br- is oxidized to Br2 and Cl2 is reduced to Cl-, with distractors targeting reversed roles, covalent sharing, and spectator-ion misconceptions. No calculation, no stimulus, minimal reading, and only one or two reasoning steps, so it suits foundational learning rather than a full-mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m03-k1",
+  "cellId": "ap_chemistry-m03",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "4.9",
+  "unitCode": "4",
+  "skillPrimary": "4.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5j_p4_displacement_model",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: identify oxidation (Cu loses electrons to form blue Cu2+) and reduction (Ag+ gains electrons to form Ag) from macroscopic observations. No calculation. Requires linking observation (silver crystals, blue color) to a particle-level electron-transfer description, with distractors based on reversed electron direction, spectator ion involvement, and wrong species dissolving. About 2 reasoning steps, with one representation change from macroscopic to particulate. Reading is short and wording is unambiguous, so the difficulty does not come from unfair sources.",
+  "payload": {
+   "archetype": "ch_t5j_p4_displacement_model",
+   "topic": "4.9",
+   "skill": "4.A",
+   "calculator": "allowed",
+   "stem": "A strip of copper metal is placed in a colorless solution of silver nitrate. After some time, silver crystals form on the strip and the solution becomes blue. Which particle-level statement best describes the change?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Cu atoms gain electrons from NO₃⁻ ions to form Cu²⁺ ions.",
+     "why": "Nitrate ions are spectators and electrons are not gained when Cu²⁺ forms.",
+     "value": null
+    },
+    {
+     "text": "Ag⁺ ions lose electrons to form Ag atoms, and Cu atoms gain electrons to form Cu²⁺ ions.",
+     "why": "Forming Ag atoms from Ag⁺ ions requires a gain of electrons, so it is reduction.",
+     "value": null
+    },
+    {
+     "text": "Cu atoms lose electrons to form Cu²⁺ ions in solution, and Ag⁺ ions gain electrons to form Ag atoms on the strip.",
+     "why": "Copper is oxidized and silver ions are reduced, which accounts for the blue Cu²⁺ and the silver crystals.",
+     "value": null
+    },
+    {
+     "text": "Ag atoms from the strip dissolve to make the solution blue.",
+     "why": "The blue color comes from Cu²⁺ ions, and no silver was on the strip at the start.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 70,
+   "facts": [
+    "A strip of copper metal is placed in a colorless solution of"
+   ],
+   "blueprint": {
+    "id": "ch_t5j_p4_displacement_model",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "describe an electron-transfer displacement reaction at the particle level",
+    "topic": "4.9",
+    "skill": "4.A",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: describe an electron-transfer displacement reaction at the particle level",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Nitrate ions are spectators and electrons are not gained when Cu²⁺ forms."
+     },
+     {
+      "id": "m2",
+      "description": "Forming Ag atoms from Ag⁺ ions requires a gain of electrons, so it is reduction."
+     },
+     {
+      "id": "m3",
+      "description": "The blue color comes from Cu²⁺ ions, and no silver was on the strip at the start."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "apply a chemical principle to a specific case and reject plausible misconceptions"
+   },
+   "seed": 15101,
+   "pack_id": "ch_t5j_p4_displacement_model-s15101",
+   "explanation_en": "The correct answer is Cu atoms lose electrons to form Cu²⁺ ions in solution, and Ag⁺ ions gain electrons to form Ag atoms on the strip.. Copper is oxidized and silver ions are reduced, which accounts for the blue Cu²⁺ and the silver crystals.\nCu atoms gain electrons from NO₃⁻ ions to form Cu²⁺ ions. is incorrect: Nitrate ions are spectators and electrons are not gained when Cu²⁺ forms.\nAg⁺ ions lose electrons to form Ag atoms, and Cu atoms gain electrons to form Cu²⁺ ions. is incorrect: Forming Ag atoms from Ag⁺ ions requires a gain of electrons, so it is reduction.\nAg atoms from the strip dissolve to make the solution blue. is incorrect: The blue color comes from Cu²⁺ ions, and no silver was on the strip at the start."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5j_p4_displacement_model",
+   "facts": [
+    "A strip of copper metal is placed in a colorless solution of"
+   ],
+   "seed": 15101
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 seconds, needs no calculation, has low reading load and has four parallel statement options. The calculator designation does not matter here.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, correct particle-level redox question with a unique key and distinct distractors. It fits the 4.9/4.A scope and the typical MC time and load."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: identify oxidation (Cu loses electrons to form blue Cu2+) and reduction (Ag+ gains electrons to form Ag) from macroscopic observations. No calculation. Requires linking observation (silver crystals, blue color) to a particle-level electron-transfer description, with distractors based on reversed electron direction, spectator ion involvement, and wrong species dissolving. About 2 reasoning steps, with one representation change from macroscopic to particulate. Reading is short and wording is unambiguous, so the difficulty does not come from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m03-k2",
+  "cellId": "ap_chemistry-m03",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "4.9",
+  "unitCode": "4",
+  "skillPrimary": "4.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5j_p4_displacement_model",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept redox identification: Br2 forms from Br-, so Br- is oxidized (loses electrons) and Cl2 is reduced. No computation, no stimulus, minimal reading. Distractors are standard (reversed direction, covalent sharing, Na+ reduction). Foundational recognition of electron transfer rather than multistep exam-level analysis.",
+  "payload": {
+   "archetype": "ch_t5j_p4_displacement_model",
+   "topic": "4.9",
+   "skill": "4.A",
+   "calculator": "allowed",
+   "stem": "Chlorine gas is bubbled through a colorless solution of sodium bromide, and the solution turns orange as Br₂ forms. Which particle-level statement best describes the change?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Cl₂ molecules gain electrons to form Cl⁻ ions, and Br⁻ ions lose electrons to form Br₂ molecules.",
+     "why": "Chlorine is reduced and bromide is oxidized, so electrons transfer from Br⁻ to Cl₂.",
+     "value": null
+    },
+    {
+     "text": "Br⁻ ions gain electrons to form Br₂ molecules, and Cl₂ molecules lose electrons to form Cl⁻ ions.",
+     "why": "Forming Br₂ from Br⁻ requires a loss of electrons, so it is oxidation.",
+     "value": null
+    },
+    {
+     "text": "Cl₂ molecules and Br⁻ ions share electrons to form BrCl molecules.",
+     "why": "The orange color is from Br₂, and the change is an electron transfer rather than sharing to form BrCl.",
+     "value": null
+    },
+    {
+     "text": "Na⁺ ions gain electrons from Cl₂ and form sodium atoms.",
+     "why": "Sodium ions are spectators here and are not reduced.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 70,
+   "facts": [
+    "Chlorine gas is bubbled through a colorless solution of sodi"
+   ],
+   "blueprint": {
+    "id": "ch_t5j_p4_displacement_model",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "describe an electron-transfer displacement reaction at the particle level",
+    "topic": "4.9",
+    "skill": "4.A",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: describe an electron-transfer displacement reaction at the particle level",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Forming Br₂ from Br⁻ requires a loss of electrons, so it is oxidation."
+     },
+     {
+      "id": "m2",
+      "description": "The orange color is from Br₂, and the change is an electron transfer rather than sharing to form BrCl."
+     },
+     {
+      "id": "m3",
+      "description": "Sodium ions are spectators here and are not reduced."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "apply a chemical principle to a specific case and reject plausible misconceptions"
+   },
+   "seed": 15102,
+   "pack_id": "ch_t5j_p4_displacement_model-s15102",
+   "explanation_en": "The correct answer is Cl₂ molecules gain electrons to form Cl⁻ ions, and Br⁻ ions lose electrons to form Br₂ molecules.. Chlorine is reduced and bromide is oxidized, so electrons transfer from Br⁻ to Cl₂.\nBr⁻ ions gain electrons to form Br₂ molecules, and Cl₂ molecules lose electrons to form Cl⁻ ions. is incorrect: Forming Br₂ from Br⁻ requires a loss of electrons, so it is oxidation.\nCl₂ molecules and Br⁻ ions share electrons to form BrCl molecules. is incorrect: The orange color is from Br₂, and the change is an electron transfer rather than sharing to form BrCl.\nNa⁺ ions gain electrons from Cl₂ and form sodium atoms. is incorrect: Sodium ions are spectators here and are not reduced."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5j_p4_displacement_model",
+   "facts": [
+    "Chlorine gas is bubbled through a colorless solution of sodi"
+   ],
+   "seed": 15102
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Particle-level description of an electron-transfer displacement reaction fits 4.9 and 4.A (explain using a model). No later-unit content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the unique correct statement. B reverses oxidation and reduction. C describes sharing to form BrCl, which is wrong. D has Na+ reduced, which is wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete, and the orange color cue is given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions: reversed electron direction, sharing instead of transfer, and spectator ion reduced. Each wrong option is explained. Option lengths are parallel."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, no calculation, light reading load. Typical of AP conceptual items. The 'calculator allowed' label is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous conceptual MC on redox in a halogen displacement reaction. It has a unique key and distinct distractors, and it is suitable for the exam. Pass."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept redox identification: Br2 forms from Br-, so Br- is oxidized (loses electrons) and Cl2 is reduced. No computation, no stimulus, minimal reading. Distractors are standard (reversed direction, covalent sharing, Na+ reduction). Foundational recognition of electron transfer rather than multistep exam-level analysis.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m04-k0",
+  "cellId": "ap_chemistry-m04",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "8.5",
+  "unitCode": "8",
+  "skillPrimary": "5.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5j_ka_from_titration_table",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student must read the table, use the 40 mL equivalence point to find the half-equivalence volume (20 mL), recognize pH = pKa there, and convert pKa to Ka with a single antilog. Several data rows serve as distractors, and the options include the pKa itself and misreadings from other volumes. Concept depth is moderate, arithmetic is minimal, and the wording is unambiguous.",
+  "payload": {
+   "archetype": "ch_t5j_ka_from_titration_table",
+   "topic": "8.5",
+   "skill": "5.D",
+   "calculator": "allowed",
+   "stem": "A student titrates a weak monoprotic acid with NaOH and records the data in the table. The equivalence point is reached at $40\\text{ mL}$. What is the value of K_a for the acid?",
+   "stimulus": {
+    "kind": "table",
+    "description": "Titration of a weak monoprotic acid with NaOH: pH during the titration",
+    "data": {
+     "x_label": "Volume of NaOH added (mL)",
+     "columns": [
+      "Volume of NaOH added (mL)",
+      "pH"
+     ],
+     "y_label": "pH",
+     "rows": [
+      [
+       "10",
+       "3.72"
+      ],
+      [
+       "20",
+       "4.20"
+      ],
+      [
+       "30",
+       "4.68"
+      ],
+      [
+       "40",
+       "equivalence point"
+      ]
+     ]
+    }
+   },
+   "options": [
+    {
+     "text": "$0.0000631$",
+     "why": "At 20 mL (half the equivalence volume) [HA] = [A⁻], so pH = pKa = 4.20 and Ka = 10^(−4.20) = 6.31 × 10⁻⁵.",
+     "value": "6.3095735e-5"
+    },
+    {
+     "text": "$0.0000210$",
+     "why": "Takes the pH at the last listed volume before the equivalence point as the pKa.",
+     "value": "2.1031911e-5"
+    },
+    {
+     "text": "$0.000189$",
+     "why": "Takes the pH at the first listed volume as the pKa.",
+     "value": "0.00018928720"
+    },
+    {
+     "text": "$4.20$",
+     "why": "Reports the pKa itself instead of Ka.",
+     "value": "4.2000000"
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 100,
+   "facts": [
+    "pKa=4.2",
+    "Va=40.0"
+   ],
+   "blueprint": {
+    "id": "ch_t5j_ka_from_titration_table",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "Ka of a weak acid from the pH at the half-equivalence point in titration data",
+    "topic": "8.5",
+    "skill": "5.D",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: Ka of a weak acid from the pH at the half-equivalence point in titration data",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Takes the pH at the last listed volume before the equivalence point as the pKa."
+     },
+     {
+      "id": "m2",
+      "description": "Takes the pH at the first listed volume as the pKa."
+     },
+     {
+      "id": "m3",
+      "description": "Reports the pKa itself instead of Ka."
+     }
+    ],
+    "verification": {
+     "independent_path": "pKa = pH at half-equivalence read from the table vs Henderson–Hasselbalch fit",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "find the half-equivalence volume in the table and read the pH there"
+   },
+   "seed": 15100,
+   "pack_id": "ch_t5j_ka_from_titration_table-s15100",
+   "explanation_en": "The correct answer is $0.0000631$. At 20 mL (half the equivalence volume) [HA] = [A⁻], so pH = pKa = 4.20 and Ka = 10^(−4.20) = 6.31 × 10⁻⁵.\n$0.0000210$ is incorrect: Takes the pH at the last listed volume before the equivalence point as the pKa.\n$0.000189$ is incorrect: Takes the pH at the first listed volume as the pKa.\n$4.20$ is incorrect: Reports the pKa itself instead of Ka."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5j_ka_from_titration_table",
+   "facts": [
+    "pKa=4.2",
+    "Va=40.0"
+   ],
+   "seed": 15100
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reading half-equivalence pH from titration table and converting pKa to Ka; fits 8.5 / 5.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Half-equivalence at 20 mL gives pH = pKa = 4.20, Ka = 6.31e-5. Table is self-consistent with Henderson-Hasselbalch; unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data complete. Minor: K_a not in LaTeX and options in decimal form instead of scientific notation, but unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct misconception (wrong pH read at 30 mL or 10 mL, reporting pKa) and all are explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 s, one table read and one calculator step, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: unique key (6.31e-5), complete table, distinct distractors, and a typical AP load. The only flaws are cosmetic (stem notation and decimal option format)."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the table, use the 40 mL equivalence point to find the half-equivalence volume (20 mL), recognize pH = pKa there, and convert pKa to Ka with a single antilog. Several data rows serve as distractors, and the options include the pKa itself and misreadings from other volumes. Concept depth is moderate, arithmetic is minimal, and the wording is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m04-k1",
+  "cellId": "ap_chemistry-m04",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "8.5",
+  "unitCode": "8",
+  "skillPrimary": "5.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5j_ka_from_titration_table",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "The student must identify the half-equivalence point (20 mL, half of 40 mL) from the table, recognize that pH = pKa there, and take one antilog to get Ka = 1.74e-5. This is a single core concept with one table read and a one-step computation. The distractors are the pKa itself and the antilogs of the other table pH values. The wording is unambiguous and the data are internally consistent.",
+  "payload": {
+   "archetype": "ch_t5j_ka_from_titration_table",
+   "topic": "8.5",
+   "skill": "5.D",
+   "calculator": "allowed",
+   "stem": "A student titrates a weak monoprotic acid with NaOH and records the data in the table. The equivalence point is reached at $40\\text{ mL}$. What is the value of K_a for the acid?",
+   "stimulus": {
+    "kind": "table",
+    "description": "Titration of a weak monoprotic acid with NaOH: pH during the titration",
+    "data": {
+     "x_label": "Volume of NaOH added (mL)",
+     "columns": [
+      "Volume of NaOH added (mL)",
+      "pH"
+     ],
+     "y_label": "pH",
+     "rows": [
+      [
+       "10",
+       "4.28"
+      ],
+      [
+       "20",
+       "4.76"
+      ],
+      [
+       "30",
+       "5.24"
+      ],
+      [
+       "40",
+       "equivalence point"
+      ]
+     ]
+    }
+   },
+   "options": [
+    {
+     "text": "$4.76$",
+     "why": "Reports the pKa itself instead of Ka.",
+     "value": "4.7600000"
+    },
+    {
+     "text": "$0.0000521$",
+     "why": "Takes the pH at the first listed volume as the pKa.",
+     "value": "5.2134025e-5"
+    },
+    {
+     "text": "$0.0000174$",
+     "why": "At 20 mL (half the equivalence volume) [HA] = [A⁻], so pH = pKa = 4.76 and Ka = 10^(−4.76) = 1.74 × 10⁻⁵.",
+     "value": "1.7378008e-5"
+    },
+    {
+     "text": "$0.00000579$",
+     "why": "Takes the pH at the last listed volume before the equivalence point as the pKa.",
+     "value": "5.7926694e-6"
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 100,
+   "facts": [
+    "pKa=4.76",
+    "Va=40.0"
+   ],
+   "blueprint": {
+    "id": "ch_t5j_ka_from_titration_table",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "Ka of a weak acid from the pH at the half-equivalence point in titration data",
+    "topic": "8.5",
+    "skill": "5.D",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: Ka of a weak acid from the pH at the half-equivalence point in titration data",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Reports the pKa itself instead of Ka."
+     },
+     {
+      "id": "m2",
+      "description": "Takes the pH at the first listed volume as the pKa."
+     },
+     {
+      "id": "m3",
+      "description": "Takes the pH at the last listed volume before the equivalence point as the pKa."
+     }
+    ],
+    "verification": {
+     "independent_path": "pKa = pH at half-equivalence read from the table vs Henderson–Hasselbalch fit",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "find the half-equivalence volume in the table and read the pH there"
+   },
+   "seed": 15101,
+   "pack_id": "ch_t5j_ka_from_titration_table-s15101",
+   "explanation_en": "The correct answer is $0.0000174$. At 20 mL (half the equivalence volume) [HA] = [A⁻], so pH = pKa = 4.76 and Ka = 10^(−4.76) = 1.74 × 10⁻⁵.\n$4.76$ is incorrect: Reports the pKa itself instead of Ka.\n$0.0000521$ is incorrect: Takes the pH at the first listed volume as the pKa.\n$0.00000579$ is incorrect: Takes the pH at the last listed volume before the equivalence point as the pKa."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5j_ka_from_titration_table",
+   "facts": [
+    "pKa=4.76",
+    "Va=40.0"
+   ],
+   "seed": 15101
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 8.5 half-equivalence reading from titration data; skill 5.D fits (read table, identify half-equivalence, compute Ka)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Half of 40 mL is 20 mL, pH 4.76, Ka 1.74e-5. Table is internally consistent with Henderson-Hasselbalch. Unique key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data complete with labels; equivalence volume given in stem. Wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode pKa-vs-Ka, wrong row reading (10 mL, 30 mL); explanations present for each. The explanation text omits nothing material."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-100 seconds, calculator allowed, minimal arithmetic (one 10^-x). Decimal options are slightly awkward but fine."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item: Ka from half-equivalence pH in a titration table; unique key, distinct distractors, appropriate load."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The student must identify the half-equivalence point (20 mL, half of 40 mL) from the table, recognize that pH = pKa there, and take one antilog to get Ka = 1.74e-5. This is a single core concept with one table read and a one-step computation. The distractors are the pKa itself and the antilogs of the other table pH values. The wording is unambiguous and the data are internally consistent.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m04-k2",
+  "cellId": "ap_chemistry-m04",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "8.5",
+  "unitCode": "8",
+  "skillPrimary": "5.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5j_ka_from_titration_table",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single standard idea: half-equivalence volume (10 mL, half of 20 mL) gives pH = pKa = 3.75, then Ka = 10^-3.75 with one calculator step. Requires a table read and a halving step, but there is no multi-step equilibrium calculation. Distractors correspond to using the wrong table row or reporting pKa. Fair, unambiguous wording and minimal arithmetic.",
+  "payload": {
+   "archetype": "ch_t5j_ka_from_titration_table",
+   "topic": "8.5",
+   "skill": "5.D",
+   "calculator": "allowed",
+   "stem": "A student titrates a weak monoprotic acid with NaOH and records the data in the table. The equivalence point is reached at $20\\text{ mL}$. What is the value of K_a for the acid?",
+   "stimulus": {
+    "kind": "table",
+    "description": "Titration of a weak monoprotic acid with NaOH: pH during the titration",
+    "data": {
+     "x_label": "Volume of NaOH added (mL)",
+     "columns": [
+      "Volume of NaOH added (mL)",
+      "pH"
+     ],
+     "y_label": "pH",
+     "rows": [
+      [
+       "5",
+       "3.27"
+      ],
+      [
+       "10",
+       "3.75"
+      ],
+      [
+       "15",
+       "4.23"
+      ],
+      [
+       "20",
+       "equivalence point"
+      ]
+     ]
+    }
+   },
+   "options": [
+    {
+     "text": "$0.000178$",
+     "why": "At 10 mL (half the equivalence volume) [HA] = [A⁻], so pH = pKa = 3.75 and Ka = 10^(−3.75) = 1.78 × 10⁻⁴.",
+     "value": "0.00017782794"
+    },
+    {
+     "text": "$3.75$",
+     "why": "Reports the pKa itself instead of Ka.",
+     "value": "3.7500000"
+    },
+    {
+     "text": "$0.000533$",
+     "why": "Takes the pH at the first listed volume as the pKa.",
+     "value": "0.00053348382"
+    },
+    {
+     "text": "$0.0000593$",
+     "why": "Takes the pH at the last listed volume before the equivalence point as the pKa.",
+     "value": "5.9275980e-5"
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 100,
+   "facts": [
+    "pKa=3.75",
+    "Va=20.0"
+   ],
+   "blueprint": {
+    "id": "ch_t5j_ka_from_titration_table",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "Ka of a weak acid from the pH at the half-equivalence point in titration data",
+    "topic": "8.5",
+    "skill": "5.D",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: Ka of a weak acid from the pH at the half-equivalence point in titration data",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Reports the pKa itself instead of Ka."
+     },
+     {
+      "id": "m2",
+      "description": "Takes the pH at the first listed volume as the pKa."
+     },
+     {
+      "id": "m3",
+      "description": "Takes the pH at the last listed volume before the equivalence point as the pKa."
+     }
+    ],
+    "verification": {
+     "independent_path": "pKa = pH at half-equivalence read from the table vs Henderson–Hasselbalch fit",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "find the half-equivalence volume in the table and read the pH there"
+   },
+   "seed": 15102,
+   "pack_id": "ch_t5j_ka_from_titration_table-s15102",
+   "explanation_en": "The correct answer is $0.000178$. At 10 mL (half the equivalence volume) [HA] = [A⁻], so pH = pKa = 3.75 and Ka = 10^(−3.75) = 1.78 × 10⁻⁴.\n$3.75$ is incorrect: Reports the pKa itself instead of Ka.\n$0.000533$ is incorrect: Takes the pH at the first listed volume as the pKa.\n$0.0000593$ is incorrect: Takes the pH at the last listed volume before the equivalence point as the pKa."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5j_ka_from_titration_table",
+   "facts": [
+    "pKa=3.75",
+    "Va=20.0"
+   ],
+   "seed": 15102
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60-100 seconds, with light calculation and a typical AP format.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A sound, unique-key item that reads the half-equivalence pH from a titration table to get Ka. The distractors are distinct and the load is appropriate. Option B is a minor format inconsistency."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single standard idea: half-equivalence volume (10 mL, half of 20 mL) gives pH = pKa = 3.75, then Ka = 10^-3.75 with one calculator step. Requires a table read and a halving step, but there is no multi-step equilibrium calculation. Distractors correspond to using the wrong table row or reporting pKa. Fair, unambiguous wording and minimal arithmetic.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m05-k0",
+  "cellId": "ap_chemistry-m05",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "8.3",
+  "unitCode": "8",
+  "skillPrimary": "5.F",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5j_ammonium_ph",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Requires recognizing that the salt's cation is a weak acid, converting Kb to Ka via Kw, applying the x<<c approximation, and computing pH. Multi-step but standard for AP; the arithmetic is modest and the wording is clear. Distractors reflect common misconceptions (treating the salt as a base, strong acid, or neutral).",
+  "payload": {
+   "archetype": "ch_t5j_ammonium_ph",
+   "topic": "8.3",
+   "skill": "5.F",
+   "calculator": "allowed",
+   "stem": "What is the pH of a $0.2\\text{ M}$ solution of a salt that contains the cation of a weak base with K_b = $6.3 × 10⁻⁵$ and a chloride ion? (K_w = 1.0 × 10⁻¹⁴ at 25 °C; the approximation x << c may be used.)",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$11.6$",
+     "why": "Uses Kb directly as if the cation were a weak base.",
+     "value": "11.550185"
+    },
+    {
+     "text": "$5.25$",
+     "why": "Ka = Kw/Kb = 1.59 × 10⁻¹⁰; [H⁺] = √(Ka c) = 5.63 × 10⁻⁶ M; pH = 5.25.",
+     "value": "5.2491553"
+    },
+    {
+     "text": "$0.699$",
+     "why": "Uses the concentration as [H⁺].",
+     "value": "0.69897000"
+    },
+    {
+     "text": "$7.00$",
+     "why": "Treats the salt as neutral and reports pH 7.00.",
+     "value": "7.0000000"
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 110,
+   "facts": [
+    "c=0.2",
+    "Kb=6.3e-05"
+   ],
+   "blueprint": {
+    "id": "ch_t5j_ammonium_ph",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "pH of a solution of the conjugate acid of a weak base using Ka = Kw/Kb",
+    "topic": "8.3",
+    "skill": "5.F",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: pH of a solution of the conjugate acid of a weak base using Ka = Kw/Kb",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Uses Kb directly as if the cation were a weak base."
+     },
+     {
+      "id": "m2",
+      "description": "Uses the concentration as [H⁺]."
+     },
+     {
+      "id": "m3",
+      "description": "Treats the salt as neutral and reports pH 7.00."
+     }
+    ],
+    "verification": {
+     "independent_path": "sympy exact Ka and pH vs direct formula",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "convert Kb of the base to Ka of its conjugate acid before solving for [H⁺]"
+   },
+   "seed": 15100,
+   "pack_id": "ch_t5j_ammonium_ph-s15100",
+   "explanation_en": "The correct answer is $5.25$. Ka = Kw/Kb = 1.59 × 10⁻¹⁰; [H⁺] = √(Ka c) = 5.63 × 10⁻⁶ M; pH = 5.25.\n$11.6$ is incorrect: Uses Kb directly as if the cation were a weak base.\n$0.699$ is incorrect: Uses the concentration as [H⁺].\n$7.00$ is incorrect: Treats the salt as neutral and reports pH 7.00."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5j_ammonium_ph",
+   "facts": [
+    "c=0.2",
+    "Kb=6.3e-05"
+   ],
+   "seed": 15100
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Weak-base conjugate acid pH via Ka=Kw/Kb fits 8.3 and 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "pH 5.25 is unique and correct; the other options correspond to distinct errors."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. Wording is clear, assumptions (Kw, x<<c) are stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (Kb used directly, concentration as [H+], neutral salt); each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical length and calculator load, about 110 s."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and has distinct distractors with a complete explanation. Accept."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires recognizing that the salt's cation is a weak acid, converting Kb to Ka via Kw, applying the x<<c approximation, and computing pH. Multi-step but standard for AP; the arithmetic is modest and the wording is clear. Distractors reflect common misconceptions (treating the salt as a base, strong acid, or neutral).",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m05-k1",
+  "cellId": "ap_chemistry-m05",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "8.3",
+  "unitCode": "8",
+  "skillPrimary": "5.F",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5j_ammonium_ph",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The student must recognize that the salt of a weak base's conjugate acid is acidic, convert Kb to Ka using Kw, apply the x<<c approximation, and compute pH. This takes about four reasoning steps with a modest calculation. Distractors correspond to real misconceptions (strong acid, neutral salt, treating the salt as a base). The wording is clear and the approximation is stated, so no unfair difficulty sources are present.",
+  "payload": {
+   "archetype": "ch_t5j_ammonium_ph",
+   "topic": "8.3",
+   "skill": "5.F",
+   "calculator": "allowed",
+   "stem": "What is the pH of a $0.5\\text{ M}$ solution of a salt that contains the cation of a weak base with K_b = $6.3 × 10⁻⁵$ and a chloride ion? (K_w = 1.0 × 10⁻¹⁴ at 25 °C; the approximation x << c may be used.)",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$0.301$",
+     "why": "Uses the concentration as [H⁺].",
+     "value": "0.30103000"
+    },
+    {
+     "text": "$7.00$",
+     "why": "Treats the salt as neutral and reports pH 7.00.",
+     "value": "7.0000000"
+    },
+    {
+     "text": "$11.7$",
+     "why": "Uses Kb directly as if the cation were a weak base.",
+     "value": "11.749155"
+    },
+    {
+     "text": "$5.05$",
+     "why": "Ka = Kw/Kb = 1.59 × 10⁻¹⁰; [H⁺] = √(Ka c) = 8.91 × 10⁻⁶ M; pH = 5.05.",
+     "value": "5.0501853"
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 110,
+   "facts": [
+    "c=0.5",
+    "Kb=6.3e-05"
+   ],
+   "blueprint": {
+    "id": "ch_t5j_ammonium_ph",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "pH of a solution of the conjugate acid of a weak base using Ka = Kw/Kb",
+    "topic": "8.3",
+    "skill": "5.F",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: pH of a solution of the conjugate acid of a weak base using Ka = Kw/Kb",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Uses the concentration as [H⁺]."
+     },
+     {
+      "id": "m2",
+      "description": "Treats the salt as neutral and reports pH 7.00."
+     },
+     {
+      "id": "m3",
+      "description": "Uses Kb directly as if the cation were a weak base."
+     }
+    ],
+    "verification": {
+     "independent_path": "sympy exact Ka and pH vs direct formula",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "convert Kb of the base to Ka of its conjugate acid before solving for [H⁺]"
+   },
+   "seed": 15101,
+   "pack_id": "ch_t5j_ammonium_ph-s15101",
+   "explanation_en": "The correct answer is $5.05$. Ka = Kw/Kb = 1.59 × 10⁻¹⁰; [H⁺] = √(Ka c) = 8.91 × 10⁻⁶ M; pH = 5.05.\n$0.301$ is incorrect: Uses the concentration as [H⁺].\n$7.00$ is incorrect: Treats the salt as neutral and reports pH 7.00.\n$11.7$ is incorrect: Uses Kb directly as if the cation were a weak base."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5j_ammonium_ph",
+   "facts": [
+    "c=0.5",
+    "Kb=6.3e-05"
+   ],
+   "seed": 15101
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Weak base conjugate acid pH via Ka=Kw/Kb; fits 8.3 and 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Ka=1.59e-10, [H+]=8.91e-6, pH=5.05; unique answer, assumptions stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem complete with Kw and approximation."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical length and calculator load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clear, well-constructed item with distinct distractors; passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must recognize that the salt of a weak base's conjugate acid is acidic, convert Kb to Ka using Kw, apply the x<<c approximation, and compute pH. This takes about four reasoning steps with a modest calculation. Distractors correspond to real misconceptions (strong acid, neutral salt, treating the salt as a base). The wording is clear and the approximation is stated, so no unfair difficulty sources are present.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m05-k2",
+  "cellId": "ap_chemistry-m05",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "8.3",
+  "unitCode": "8",
+  "skillPrimary": "5.F",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5j_ammonium_ph",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The solver must recognize that the cation of a weak base is a weak acid, convert Kb to Ka using Kw, apply the x << c approximation, and convert [H+] to pH. This tests the choice of governing relationship plus a short calculation. Distractors correspond to common misconceptions: strong acid, weak base, neutral salt. Arithmetic is short and the wording is unambiguous. It is in scope for topic 8.3 and typical of a mock-exam item.",
+  "payload": {
+   "archetype": "ch_t5j_ammonium_ph",
+   "topic": "8.3",
+   "skill": "5.F",
+   "calculator": "allowed",
+   "stem": "What is the pH of a $0.1\\text{ M}$ solution of a salt that contains the cation of a weak base with K_b = $1.8 × 10⁻⁵$ and a chloride ion? (K_w = 1.0 × 10⁻¹⁴ at 25 °C; the approximation x << c may be used.)",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$5.13$",
+     "why": "Ka = Kw/Kb = 5.56 × 10⁻¹⁰; [H⁺] = √(Ka c) = 7.45 × 10⁻⁶ M; pH = 5.13.",
+     "value": "5.1276363"
+    },
+    {
+     "text": "$1.00$",
+     "why": "Uses the concentration as [H⁺].",
+     "value": "1.0000000"
+    },
+    {
+     "text": "$11.1$",
+     "why": "Uses Kb directly as if the cation were a weak base.",
+     "value": "11.127636"
+    },
+    {
+     "text": "$7.00$",
+     "why": "Treats the salt as neutral and reports pH 7.00.",
+     "value": "7.0000000"
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 110,
+   "facts": [
+    "c=0.1",
+    "Kb=1.8e-05"
+   ],
+   "blueprint": {
+    "id": "ch_t5j_ammonium_ph",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "pH of a solution of the conjugate acid of a weak base using Ka = Kw/Kb",
+    "topic": "8.3",
+    "skill": "5.F",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: pH of a solution of the conjugate acid of a weak base using Ka = Kw/Kb",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Uses the concentration as [H⁺]."
+     },
+     {
+      "id": "m2",
+      "description": "Uses Kb directly as if the cation were a weak base."
+     },
+     {
+      "id": "m3",
+      "description": "Treats the salt as neutral and reports pH 7.00."
+     }
+    ],
+    "verification": {
+     "independent_path": "sympy exact Ka and pH vs direct formula",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "convert Kb of the base to Ka of its conjugate acid before solving for [H⁺]"
+   },
+   "seed": 15102,
+   "pack_id": "ch_t5j_ammonium_ph-s15102",
+   "explanation_en": "The correct answer is $5.13$. Ka = Kw/Kb = 5.56 × 10⁻¹⁰; [H⁺] = √(Ka c) = 7.45 × 10⁻⁶ M; pH = 5.13.\n$1.00$ is incorrect: Uses the concentration as [H⁺].\n$11.1$ is incorrect: Uses Kb directly as if the cation were a weak base.\n$7.00$ is incorrect: Treats the salt as neutral and reports pH 7.00."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5j_ammonium_ph",
+   "facts": [
+    "c=0.1",
+    "Kb=1.8e-05"
+   ],
+   "seed": 15102
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Weak acid (conjugate acid of weak base) equilibrium calculation, fits 8.3 / 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "5.13 unique; approximation stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; all data in stem, wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions; each wrong option explained. The 11.1 explanation is slightly loose (it is the pH of the base itself)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 s, calculator allowed, no needless arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clear, in-scope MC item on the pH of a weak-base conjugate acid salt. Distractors are plausible, and only the 11.1 explanation wording is slightly loose."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The solver must recognize that the cation of a weak base is a weak acid, convert Kb to Ka using Kw, apply the x << c approximation, and convert [H+] to pH. This tests the choice of governing relationship plus a short calculation. Distractors correspond to common misconceptions: strong acid, weak base, neutral salt. Arithmetic is short and the wording is unambiguous. It is in scope for topic 8.3 and typical of a mock-exam item.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m06-k0",
+  "cellId": "ap_chemistry-m06",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "8.5",
+  "unitCode": "8",
+  "skillPrimary": "5.F",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5j_equivalence_ph",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Multi-step but standard: find equivalence volume via stoichiometry, account for dilution, recognize that the conjugate base governs pH, convert Ka to Kb, solve for [OH-] with the stated approximation, convert pOH to pH. Distractors map to common conceptual errors. Arithmetic is modest and wording is unambiguous.",
+  "payload": {
+   "archetype": "ch_t5j_equivalence_ph",
+   "topic": "8.5",
+   "skill": "5.F",
+   "calculator": "allowed",
+   "stem": "A $50\\text{ mL}$ sample of $0.05\\text{ M}$ weak monoprotic acid HA (K_a = $6.8 × 10⁻⁴$) is titrated with $0.2\\text{ M}$ NaOH. What is the pH at the equivalence point? (K_w = 1.0 × 10⁻¹⁴ at 25 °C; the approximation x << c may be used.)",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$7.88$",
+     "why": "At equivalence n(A⁻) = 0.00250 mol in 62.5 mL, so [A⁻] = 0.0400 M; Kb = Kw/Ka = 1.47 × 10⁻¹¹; [OH⁻] = √(Kb c) = 7.67 × 10⁻⁷ M; pH = 14 − 6.12 = 7.88.",
+     "value": "7.8847755"
+    },
+    {
+     "text": "$6.12$",
+     "why": "Reports the pOH instead of the pH.",
+     "value": "6.1152245"
+    },
+    {
+     "text": "$7.00$",
+     "why": "Reports the pH of a neutral solution, 7.00, because the acid and base have reacted completely.",
+     "value": "7.0000000"
+    },
+    {
+     "text": "$2.28$",
+     "why": "Uses Ka in place of Kb when finding the hydroxide ion concentration.",
+     "value": "2.2827155"
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 130,
+   "facts": [
+    "Ka=0.00068",
+    "Ma=0.05",
+    "Va=50.0",
+    "Mb=0.2"
+   ],
+   "blueprint": {
+    "id": "ch_t5j_equivalence_ph",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "pH at the equivalence point of a weak acid–strong base titration from the hydrolysis of the conjugate base",
+    "topic": "8.5",
+    "skill": "5.F",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: pH at the equivalence point of a weak acid–strong base titration from the hydrolysis of the conjugate base",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Reports the pOH instead of the pH."
+     },
+     {
+      "id": "m2",
+      "description": "Reports the pH of a neutral solution, 7.00, because the acid and base have reacted completely."
+     },
+     {
+      "id": "m3",
+      "description": "Uses Ka in place of Kb when finding the hydroxide ion concentration."
+     }
+    ],
+    "verification": {
+     "independent_path": "sympy exact Kb and pH vs direct formula",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "recognize that the conjugate base controls the pH at the equivalence point"
+   },
+   "seed": 15100,
+   "pack_id": "ch_t5j_equivalence_ph-s15100",
+   "explanation_en": "The correct answer is $7.88$. At equivalence n(A⁻) = 0.00250 mol in 62.5 mL, so [A⁻] = 0.0400 M; Kb = Kw/Ka = 1.47 × 10⁻¹¹; [OH⁻] = √(Kb c) = 7.67 × 10⁻⁷ M; pH = 14 − 6.12 = 7.88.\n$6.12$ is incorrect: Reports the pOH instead of the pH.\n$7.00$ is incorrect: Reports the pH of a neutral solution, 7.00, because the acid and base have reacted completely.\n$2.28$ is incorrect: Uses Ka in place of Kb when finding the hydroxide ion concentration."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5j_equivalence_ph",
+   "facts": [
+    "Ka=0.00068",
+    "Ma=0.05",
+    "Va=50.0",
+    "Mb=0.2"
+   ],
+   "seed": 15100
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 8.5 equivalence-point pH of a weak acid with a strong base; skill 5.F calculation of an unknown. Governing relationship (conjugate base hydrolysis) is the dominant demand."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "7.88 is unique and correct. Other options are non-chemically-derived pOH, neutral pH, or Ka misuse."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. Stem gives all quantities, Kw, and permits the approximation. Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (pOH vs pH, neutral at equivalence, Ka for Kb), each explained. Minor: the 2.28 option is really a pOH-type number, but the explanation is still adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 2 minutes, calculator allowed, modest arithmetic, typical for AP Chemistry."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item. The key 7.88 is unique and the distractors map to distinct misconceptions. It is within scope, with the stem fully specified and calculator use appropriate."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-step but standard: find equivalence volume via stoichiometry, account for dilution, recognize that the conjugate base governs pH, convert Ka to Kb, solve for [OH-] with the stated approximation, convert pOH to pH. Distractors map to common conceptual errors. Arithmetic is modest and wording is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m06-k1",
+  "cellId": "ap_chemistry-m06",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "8.5",
+  "unitCode": "8",
+  "skillPrimary": "5.F",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5j_equivalence_ph",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Requires recognizing that the equivalence-point pH is set by hydrolysis of the conjugate base A-. Steps: moles HA, equivalence volume, total volume and diluted [A-], Kb from Ka and Kw, [OH-] by the x<<c approximation, then pOH to pH. The numbers are clean and the wording is unambiguous. Typical multi-step AP titration calculation.",
+  "payload": {
+   "archetype": "ch_t5j_equivalence_ph",
+   "topic": "8.5",
+   "skill": "5.F",
+   "calculator": "allowed",
+   "stem": "A $40\\text{ mL}$ sample of $0.05\\text{ M}$ weak monoprotic acid HA (K_a = $4.0 × 10⁻⁵$) is titrated with $0.2\\text{ M}$ NaOH. What is the pH at the equivalence point? (K_w = 1.0 × 10⁻¹⁴ at 25 °C; the approximation x << c may be used.)",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$2.90$",
+     "why": "Uses Ka in place of Kb when finding the hydroxide ion concentration.",
+     "value": "2.8979400"
+    },
+    {
+     "text": "$5.50$",
+     "why": "Reports the pOH instead of the pH.",
+     "value": "5.5000000"
+    },
+    {
+     "text": "$7.00$",
+     "why": "Reports the pH of a neutral solution, 7.00, because the acid and base have reacted completely.",
+     "value": "7.0000000"
+    },
+    {
+     "text": "$8.50$",
+     "why": "At equivalence n(A⁻) = 0.00200 mol in 50.0 mL, so [A⁻] = 0.0400 M; Kb = Kw/Ka = 2.50 × 10⁻¹⁰; [OH⁻] = √(Kb c) = 3.16 × 10⁻⁶ M; pH = 14 − 5.50 = 8.50.",
+     "value": "8.5000000"
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 130,
+   "facts": [
+    "Ka=4e-05",
+    "Ma=0.05",
+    "Va=40.0",
+    "Mb=0.2"
+   ],
+   "blueprint": {
+    "id": "ch_t5j_equivalence_ph",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "pH at the equivalence point of a weak acid–strong base titration from the hydrolysis of the conjugate base",
+    "topic": "8.5",
+    "skill": "5.F",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: pH at the equivalence point of a weak acid–strong base titration from the hydrolysis of the conjugate base",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Uses Ka in place of Kb when finding the hydroxide ion concentration."
+     },
+     {
+      "id": "m2",
+      "description": "Reports the pOH instead of the pH."
+     },
+     {
+      "id": "m3",
+      "description": "Reports the pH of a neutral solution, 7.00, because the acid and base have reacted completely."
+     }
+    ],
+    "verification": {
+     "independent_path": "sympy exact Kb and pH vs direct formula",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "recognize that the conjugate base controls the pH at the equivalence point"
+   },
+   "seed": 15101,
+   "pack_id": "ch_t5j_equivalence_ph-s15101",
+   "explanation_en": "The correct answer is $8.50$. At equivalence n(A⁻) = 0.00200 mol in 50.0 mL, so [A⁻] = 0.0400 M; Kb = Kw/Ka = 2.50 × 10⁻¹⁰; [OH⁻] = √(Kb c) = 3.16 × 10⁻⁶ M; pH = 14 − 5.50 = 8.50.\n$2.90$ is incorrect: Uses Ka in place of Kb when finding the hydroxide ion concentration.\n$5.50$ is incorrect: Reports the pOH instead of the pH.\n$7.00$ is incorrect: Reports the pH of a neutral solution, 7.00, because the acid and base have reacted completely."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5j_equivalence_ph",
+   "facts": [
+    "Ka=4e-05",
+    "Ma=0.05",
+    "Va=40.0",
+    "Mb=0.2"
+   ],
+   "seed": 15101
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 8.5 equivalence-point pH of a weak acid titrated with a strong base; the skill is calculating an unknown. Single equivalence point, so within scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key of 8.50 is the unique answer. Moles, total volume, concentration, Kb, [OH-], pOH and pH all check out."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem gives all the quantities, plus Kw and the approximation to use."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are 2.90 (Ka used in place of Kb, which reproduces exactly), 5.50 (pOH reported as pH) and 7.00 (neutral solution assumed). They are distinct misconceptions, and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is about 130 seconds, which is appropriate. The calculator is allowed and the numbers are clean."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope and well-formed, with distinct distractors. It passes."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires recognizing that the equivalence-point pH is set by hydrolysis of the conjugate base A-. Steps: moles HA, equivalence volume, total volume and diluted [A-], Kb from Ka and Kw, [OH-] by the x<<c approximation, then pOH to pH. The numbers are clean and the wording is unambiguous. Typical multi-step AP titration calculation.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m06-k2",
+  "cellId": "ap_chemistry-m06",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "8.5",
+  "unitCode": "8",
+  "skillPrimary": "5.F",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5j_equivalence_ph",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_distractor_explanation",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Requires recognizing that the equivalence point of a weak acid/strong base titration is governed by conjugate base hydrolysis. Steps: mol HA, equivalence volume, total volume dilution, [A-], Kb from Kw/Ka, [OH-] by the x<<c approximation, pOH, pH. Distractors target common misconceptions (pH 7, initial pH, pOH/pH confusion). Arithmetic is modest and the approximation is stated, so there are no unfair difficulty sources.",
+  "payload": {
+   "archetype": "ch_t5j_equivalence_ph",
+   "topic": "8.5",
+   "skill": "5.F",
+   "calculator": "allowed",
+   "stem": "A $40\\text{ mL}$ sample of $0.1\\text{ M}$ weak monoprotic acid HA (K_a = $1.8 × 10⁻⁵$) is titrated with $0.2\\text{ M}$ NaOH. What is the pH at the equivalence point? (K_w = 1.0 × 10⁻¹⁴ at 25 °C; the approximation x << c may be used.)",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$7.00$",
+     "why": "Reports the pH of a neutral solution, 7.00, because the acid and base have reacted completely.",
+     "value": "7.0000000"
+    },
+    {
+     "text": "$2.96$",
+     "why": "Uses Ka in place of Kb when finding the hydroxide ion concentration.",
+     "value": "2.9604094"
+    },
+    {
+     "text": "$8.78$",
+     "why": "At equivalence n(A⁻) = 0.00400 mol in 60.0 mL, so [A⁻] = 0.0667 M; Kb = Kw/Ka = 5.56 × 10⁻¹⁰; [OH⁻] = √(Kb c) = 6.09 × 10⁻⁶ M; pH = 14 − 5.22 = 8.78.",
+     "value": "8.7843181"
+    },
+    {
+     "text": "$5.22$",
+     "why": "Reports the pOH instead of the pH.",
+     "value": "5.2156819"
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 130,
+   "facts": [
+    "Ka=1.8e-05",
+    "Ma=0.1",
+    "Va=40.0",
+    "Mb=0.2"
+   ],
+   "blueprint": {
+    "id": "ch_t5j_equivalence_ph",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "pH at the equivalence point of a weak acid–strong base titration from the hydrolysis of the conjugate base",
+    "topic": "8.5",
+    "skill": "5.F",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: pH at the equivalence point of a weak acid–strong base titration from the hydrolysis of the conjugate base",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Reports the pH of a neutral solution, 7.00, because the acid and base have reacted completely."
+     },
+     {
+      "id": "m2",
+      "description": "Uses Ka in place of Kb when finding the hydroxide ion concentration."
+     },
+     {
+      "id": "m3",
+      "description": "Reports the pOH instead of the pH."
+     }
+    ],
+    "verification": {
+     "independent_path": "sympy exact Kb and pH vs direct formula",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "recognize that the conjugate base controls the pH at the equivalence point"
+   },
+   "seed": 15102,
+   "pack_id": "ch_t5j_equivalence_ph-s15102",
+   "explanation_en": "The correct answer is $8.78$. At equivalence n(A⁻) = 0.00400 mol in 60.0 mL, so [A⁻] = 0.0667 M; Kb = Kw/Ka = 5.56 × 10⁻¹⁰; [OH⁻] = √(Kb c) = 6.09 × 10⁻⁶ M; pH = 14 − 5.22 = 8.78.\n$7.00$ is incorrect: Reports the pH of a neutral solution, 7.00, because the acid and base have reacted completely.\n$2.96$ is incorrect: Uses Ka in place of Kb when finding the hydroxide ion concentration.\n$5.22$ is incorrect: Reports the pOH instead of the pH."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5j_equivalence_ph",
+   "facts": [
+    "Ka=1.8e-05",
+    "Ma=0.1",
+    "Va=40.0",
+    "Mb=0.2"
+   ],
+   "seed": 15102
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The multi-step calculation is typical of an AP calculator item, and the load is reasonable at about 130 seconds.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is chemically sound and the key is unique and correct. It fails on distractor explanation: the rationale for 2.96 ('uses Ka in place of Kb') yields a pOH, not a pH. As written, the 2.96 distractor mislabels a pOH-as-pH style error and blurs the distinction from the 5.22 distractor. The distractor rationale or the distractor value should be revised."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires recognizing that the equivalence point of a weak acid/strong base titration is governed by conjugate base hydrolysis. Steps: mol HA, equivalence volume, total volume dilution, [A-], Kb from Kw/Ka, [OH-] by the x<<c approximation, pOH, pH. Distractors target common misconceptions (pH 7, initial pH, pOH/pH confusion). Arithmetic is modest and the approximation is stated, so there are no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ }
+]

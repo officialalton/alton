@@ -16,3 +16,11 @@ STAGE_T5_MC5 = ['cs_fib_calls_trace', 'cs_reverse_digits_trace', 'cs_array_max_f
 STAGE_T5_MC6 = ['cs_pair_count_trace', 'cs_flag_scan_trace']
 
 STAGE_T5_MC7 = ['cs_grade_chain_trace', 'cs_trim_until_char_trace']
+
+STAGE_T5_FRQ6 = ['csf_methods_parking']
+
+STAGE_T5_FRQ7 = ['csf_methods_parking']
+
+STAGE_T5_FRQ8 = ['csf_methods_parking']
+
+STAGE_T5_FRQ9 = ['csf_methods_parking']

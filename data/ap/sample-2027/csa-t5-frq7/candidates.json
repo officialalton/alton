@@ -1,0 +1,487 @@
+[
+ {
+  "candidateKey": "ap_computer_science_a-f01-k0",
+  "cellId": "ap_computer_science_a-f01",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "frq_bundle",
+  "keywordCode": "2.4",
+  "unitCode": "2",
+  "skillPrimary": "2.A",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "csf_methods_parking",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_key_scoring; reference_pattern_mismatch",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Two-part write-the-method item. Part (a) needs a ceiling division with integers, handling the exact-multiple boundary (120 -> 2) and 0. Part (b) needs reuse of hoursCharged, a two-tier fee with a conditional split at 2 hours, and a cap at 20. Concept depth and step count match a typical AP CSA FRQ-style item. Computation is trivial and the reading is short. Difficulty comes from the integer-division subtlety and boundary cases, which are allowed levers.",
+  "payload": {
+   "archetype": "csf_methods_parking",
+   "template": "q1",
+   "topic": "2.4",
+   "extra_topics": [
+    "1.9",
+    "2.5"
+   ],
+   "skill": "2.A",
+   "representative_skill": "2.A",
+   "calculator": "not_allowed",
+   "title": "ParkingFee: charged hours and a tiered fee with a maximum",
+   "stimulus": {
+    "kind": "text",
+    "description": "A parking garage is writing a class ParkingFee with two static methods that compute the charge for a stay measured in whole minutes.\n```java\npublic class ParkingFee {\n    /** Returns the number of hours charged for a stay of the given number of minutes.\n     *  Any fraction of an hour counts as a full hour, and 0 minutes is 0 hours. Precondition: minutes >= 0. */\n    public static int hoursCharged(int minutes) { /* part (a) */ }\n\n    /** Returns the total fee, in dollars, for a stay of the given number of minutes.\n     *  The first two charged hours cost 4 dollars each, every additional charged hour costs 3 dollars,\n     *  and the total never exceeds 20 dollars. Precondition: minutes >= 0. */\n    public static int totalFee(int minutes) { /* part (b) */ }\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Write the method hoursCharged, which returns the number of hours charged for a stay of the given number of minutes. Any fraction of an hour counts as a full hour. For example, hoursCharged(61) returns 2, hoursCharged(120) returns 2, and hoursCharged(0) returns 0. Complete the method hoursCharged.",
+     "points": 3,
+     "response_mode": "code",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "One correct implementation (ALTON reference answer):\n```java\n    public static int hoursCharged(int minutes) {\n        int hours = minutes / 60;\n        if (minutes % 60 != 0) {\n            hours++;\n        }\n        return hours;\n    }\n```",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Computes the number of whole hours with integer division by 60; Detects leftover minutes (minutes % 60 != 0, or an equivalent test).",
+       "required_elements": [
+        "minutes / 60",
+        "minutes % 60 != 0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "divides by 100",
+        "uses double division without a cast",
+        "tests minutes % 60 == 1",
+        "ignores the leftover"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Adds exactly one hour only when there are leftover minutes (exact multiples of 60 and 0 are not rounded up)",
+       "required_elements": [
+        "hours++ inside the condition"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "always adds an hour",
+        "adds an hour for exact multiples"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Returns the resulting int hour count",
+       "required_elements": [
+        "return hours"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "returns the minutes",
+        "returns a boolean"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      }
+     ]
+    },
+    {
+     "label": "b",
+     "prompt": "Write the method totalFee, which returns the total fee, in dollars, for a stay of the given number of minutes. The first two charged hours cost 4 dollars each, every additional charged hour costs 3 dollars, and the total never exceeds 20 dollars. You must use hoursCharged appropriately to receive full credit. For example, totalFee(125) returns 11, because 3 hours are charged: 4 + 4 + 3. Complete the method totalFee.",
+     "points": 4,
+     "response_mode": "code",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "One correct implementation (ALTON reference answer):\n```java\n    public static int totalFee(int minutes) {\n        int h = hoursCharged(minutes);\n        int fee;\n        if (h <= 2) {\n            fee = 4 * h;\n        } else {\n            fee = 8 + 3 * (h - 2);\n        }\n        if (fee > 20) {\n            fee = 20;\n        }\n        return fee;\n    }\n```",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Calls hoursCharged with the number of minutes to get the charged hours; Charges 4 dollars per hour for up to two charged hours.",
+       "required_elements": [
+        "hoursCharged(minutes)",
+        "4 * h when h <= 2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "recomputes the hours with minutes / 60",
+        "uses 3 dollars for the first two hours"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Charges 3 dollars for each charged hour after the second, added to the first two hours' fee",
+       "required_elements": [
+        "8 + 3 * (h - 2)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "charges 3 dollars for every hour"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "B3",
+       "points": 1,
+       "criterion": "Applies the 20-dollar maximum so that the result never exceeds 20",
+       "required_elements": [
+        "fee > 20 ... fee = 20, or Math.min"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "no maximum is applied"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "B4",
+       "points": 1,
+       "criterion": "Returns the fee as an int in every case (including 0 minutes)",
+       "required_elements": [
+        "return fee"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "leaves the fee uninitialized on a path"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      }
+     ]
+    }
+   ],
+   "total_points": 7,
+   "est_minutes": 22,
+   "facts": [
+    "cases=17"
+   ],
+   "expected_values": [],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "self_check_tests": [
+    {
+     "part": "a",
+     "call": "return ParkingFee.hoursCharged(0);",
+     "expected": "0"
+    },
+    {
+     "part": "a",
+     "call": "return ParkingFee.hoursCharged(1);",
+     "expected": "1"
+    },
+    {
+     "part": "a",
+     "call": "return ParkingFee.hoursCharged(59);",
+     "expected": "1"
+    },
+    {
+     "part": "a",
+     "call": "return ParkingFee.hoursCharged(60);",
+     "expected": "1"
+    },
+    {
+     "part": "a",
+     "call": "return ParkingFee.hoursCharged(61);",
+     "expected": "2"
+    },
+    {
+     "part": "a",
+     "call": "return ParkingFee.hoursCharged(120);",
+     "expected": "2"
+    },
+    {
+     "part": "a",
+     "call": "return ParkingFee.hoursCharged(121);",
+     "expected": "3"
+    },
+    {
+     "part": "a",
+     "call": "return ParkingFee.hoursCharged(600);",
+     "expected": "10"
+    },
+    {
+     "part": "b",
+     "call": "return ParkingFee.totalFee(0);",
+     "expected": "0"
+    },
+    {
+     "part": "b",
+     "call": "return ParkingFee.totalFee(30);",
+     "expected": "4"
+    },
+    {
+     "part": "b",
+     "call": "return ParkingFee.totalFee(60);",
+     "expected": "4"
+    },
+    {
+     "part": "b",
+     "call": "return ParkingFee.totalFee(90);",
+     "expected": "8"
+    },
+    {
+     "part": "b",
+     "call": "return ParkingFee.totalFee(125);",
+     "expected": "11"
+    },
+    {
+     "part": "b",
+     "call": "return ParkingFee.totalFee(181);",
+     "expected": "14"
+    },
+    {
+     "part": "b",
+     "call": "return ParkingFee.totalFee(300);",
+     "expected": "17"
+    },
+    {
+     "part": "b",
+     "call": "return ParkingFee.totalFee(480);",
+     "expected": "20"
+    },
+    {
+     "part": "b",
+     "call": "return ParkingFee.totalFee(1000);",
+     "expected": "20"
+    }
+   ],
+   "verification": {
+    "variants": 9,
+    "wrong_failures": [
+     8,
+     7,
+     7,
+     3,
+     2,
+     4,
+     4
+    ]
+   },
+   "blueprint": {
+    "id": "csf_methods_parking",
+    "subject": "ap_computer_science_a",
+    "kind": "frq_bundle",
+    "concept": "Methods and control structures: rounding up with integer arithmetic, tiered fees with conditionals, and reusing a helper method",
+    "topic": "2.4",
+    "skill": "2.A",
+    "student_thinking": [
+     "Round the minutes up to charged hours with integer division and a remainder test",
+     "Apply two rates and a maximum with conditionals while reusing hoursCharged"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "the reference and an alternative pass every test; each wrong solution fails at least one",
+      "evidence": "java test run"
+     }
+    ],
+    "material": {
+     "type": "code",
+     "must_include": [
+      "class or method skeleton",
+      "specification with examples"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "javac+java compile and run reference, alternative and wrong solutions; expected values from Python",
+     "method": "javac+java unit tests + python reference"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "2.4"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "One correct implementation (ALTON reference answer):\n```java\n    public static int hoursCharged(int minutes) {\n        int hours = minutes / 60;\n        if (minutes % 60 != 0) {\n            hours++;\n        }\n        return hours;\n    }\n```"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Computes the number of whole hours with integer division by 60; Detects leftover minutes (minutes % 60 != 0, or an equivalent test).",
+        "elements": [
+         "minutes / 60",
+         "minutes % 60 != 0"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Adds exactly one hour only when there are leftover minutes (exact multiples of 60 and 0 are not rounded up)",
+        "elements": [
+         "hours++ inside the condition"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Returns the resulting int hour count",
+        "elements": [
+         "return hours"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "b",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "2.4"
+      ],
+      "points": 4,
+      "accepted_answers": [
+       "One correct implementation (ALTON reference answer):\n```java\n    public static int totalFee(int minutes) {\n        int h = hoursCharged(minutes);\n        int fee;\n        if (h <= 2) {\n            fee = 4 * h;\n        } else {\n            fee = 8 + 3 * (h - 2);\n        }\n        if (fee > 20) {\n            fee = 20;\n        }\n        return fee;\n    }\n```"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Calls hoursCharged with the number of minutes to get the charged hours; Charges 4 dollars per hour for up to two charged hours.",
+        "elements": [
+         "hoursCharged(minutes)",
+         "4 * h when h <= 2"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Charges 3 dollars for each charged hour after the second, added to the first two hours' fee",
+        "elements": [
+         "8 + 3 * (h - 2)"
+        ]
+       },
+       {
+        "row_id": "B3",
+        "points": 1,
+        "criterion": "Applies the 20-dollar maximum so that the result never exceeds 20",
+        "elements": [
+         "fee > 20 ... fee = 20, or Math.min"
+        ]
+       },
+       {
+        "row_id": "B4",
+        "points": 1,
+        "criterion": "Returns the fee as an int in every case (including 0 minutes)",
+        "elements": [
+         "return fee"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 7,
+    "judgment_demand": "write correct Java for the stated specification"
+   },
+   "seed": 14100,
+   "pack_id": "csf_methods_parking-s14100"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "csf_methods_parking",
+   "facts": [
+    "cases=17"
+   ],
+   "seed": 14100
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item is topically sound, but the rubric is tied to one implementation and would mis-score valid solutions, so it fails on key/scoring.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item fits 2.4/2.A: it asks the student to write nested and compound conditionals and to reuse a helper method."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The rubric rows for part (a) require the elements \"minutes / 60\", \"minutes % 60 != 0\" and \"hours++ inside the condition\". The independent solver's valid one-line answer (minutes + 59) / 60 would fail A1 and A2 under these required elements, and alt_solutions is empty. Row A1 also combines two behaviors (the division and the leftover test), which breaks the one-behavior-per-row rule. Row B1 likewise combines the helper call and the 4-dollar rate. The point total of 7 differs from the fixed 9-point FRQ structure. In part (b), requiring \"8 + 3 * (h - 2)\" is too rigid, because equivalent forms such as 3 * h + 2 are valid."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus is clear and complete, with the specification, preconditions and examples all given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no MC distractors. The rubric lists common errors for each row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is reasonable, but the 7 total points do not match the fixed 9-point FRQ structure."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Two-part write-the-method item. Part (a) needs a ceiling division with integers, handling the exact-multiple boundary (120 -> 2) and 0. Part (b) needs reuse of hoursCharged, a two-tier fee with a conditional split at 2 hours, and a cap at 20. Concept depth and step count match a typical AP CSA FRQ-style item. Computation is trivial and the reading is short. Difficulty comes from the integer-division subtlety and boundary cases, which are allowed levers.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ }
+]
