@@ -1,6 +1,8 @@
 // 5세트 채우기(2026-10-21 오너 정리) CS A·Psychology 부족분: 세트 간 금지 = 동일 문항 + 구조 look-alike(fam 군집, Psychology 는 같은 질문·정답 sig 포함). 원형 id 전체 차단은 하지 않는다.
 //   npx tsx scripts/ap-generation/topup-structure-block.ts csa|psych --sets CS4,CS5 [--write-report <경로>]  (읽기 전용·무료·DB 없음)
 import { readFileSync, writeFileSync } from "node:fs";
+import { loadRaws, sameStructure } from "./structure-compare";
+const RAW = loadRaws();
 const subj = process.argv[2]; const arg = (n: string, d = "") => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : d; };
 type It = { key: string; kind: string; shared: boolean; fam: string; archetype: string; members: { topic?: string }[]; sig?: string };
 async function main() {
@@ -10,12 +12,12 @@ async function main() {
   if (subj === "csa") {
     const { loadCsPool } = await import("./cs-pool"); const m = await import("./cs-assign");
     all = loadCsPool({ requireScreen: false }).all as unknown as It[];
-    solve = (i, bl) => { const o: any[] = []; const b = new Set(bl); const ba = new Set<string>(); for (const id of i) { const one = m.solveCsSets([id], all as any, { timeMs: 120000, blocked: b, blockedArchetypes: ba, preferExamPrep: true, disjoint: false }); o.push(...one.out); for (const it of [...one.out[0].singles, ...one.out[0].sets, ...one.out[0].frq]) b.add(it.key); for (const it of [...one.out[0].sets, ...one.out[0].frq]) ba.add(it.archetype); for (const a of one.out[0].virtualSetArchetypes) ba.add(a); for (const v of one.out[0].frqVirtual) if (v.archetype) ba.add(v.archetype); } return { out: o, x: 1 }; };
+    solve = (i, bl) => { const o: any[] = []; const b = new Set(bl); const ba = new Set<string>(); for (const id of i) { const one = m.solveCsSets([id], all as any, { timeMs: 120000, blocked: b, blockedArchetypes: ba, preferExamPrep: true, disjoint: false }); o.push(...one.out); for (const it of [...one.out[0].singles, ...one.out[0].sets, ...one.out[0].frq]) { b.add(it.key); for (const c of all as any[]) if (RAW.get(c.key) && RAW.get(it.key) && sameStructure(RAW.get(c.key)!, RAW.get(it.key)!)) b.add(c.key); } for (const it of [...one.out[0].sets, ...one.out[0].frq]) ba.add(it.archetype); for (const a of one.out[0].virtualSetArchetypes) ba.add(a); for (const v of one.out[0].frqVirtual) if (v.archetype) ba.add(v.archetype); } return { out: o, x: 1 }; };
     verify = (r, b) => m.verifyCsAssignment(r, b, { disjoint: false }); rep = m.toReportSet;
   } else {
     const { loadPsychPool } = await import("./psych-pool"); const m = await import("./psych-assign");
     all = loadPsychPool({ requireScreen: false }).all as unknown as It[];
-    solve = (i, bl, sigs) => { const o: any[] = []; const b = new Set(bl); const sg = new Set(sigs); const ba = new Set<string>(); for (const id of i) { const one = m.solvePsychSets([id], all as any, { timeMs: 120000, blocked: b, blockedArchetypes: ba, blockedSigs: sg, preferExamPrep: true }); o.push(...one.out); for (const it of [...one.out[0].singles, ...one.out[0].sets, ...one.out[0].frq]) { b.add(it.key); if (it.sig) sg.add(it.sig); } for (const it of [...one.out[0].sets, ...one.out[0].frq]) ba.add(it.archetype); for (const a of one.out[0].virtualSetArchetypes) ba.add(a); for (const v of one.out[0].frqVirtual) if (v.archetype) ba.add(v.archetype); } return { out: o, x: 1 }; };
+    solve = (i, bl, sigs) => { const o: any[] = []; const b = new Set(bl); const sg = new Set(sigs); const ba = new Set<string>(); for (const id of i) { const one = m.solvePsychSets([id], all as any, { timeMs: 120000, blocked: b, blockedArchetypes: ba, blockedSigs: sg, preferExamPrep: true }); o.push(...one.out); for (const it of [...one.out[0].singles, ...one.out[0].sets, ...one.out[0].frq]) { b.add(it.key); for (const c of all as any[]) if (RAW.get(c.key) && RAW.get(it.key) && sameStructure(RAW.get(c.key)!, RAW.get(it.key)!)) b.add(c.key); if (it.sig) sg.add(it.sig); } for (const it of [...one.out[0].sets, ...one.out[0].frq]) ba.add(it.archetype); for (const a of one.out[0].virtualSetArchetypes) ba.add(a); for (const v of one.out[0].frqVirtual) if (v.archetype) ba.add(v.archetype); } return { out: o, x: 1 }; };
     verify = (r, b) => m.verifyPsychAssignment(r, b); rep = m.toReportSet;
   }
   const pubItems = all.filter((c) => pubKeys.has(c.key));

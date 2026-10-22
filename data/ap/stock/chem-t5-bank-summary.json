@@ -1,0 +1,81 @@
+{
+ "runs": [
+  "chem-t5-bank"
+ ],
+ "rows": 168,
+ "passed": 42,
+ "rejected": 126,
+ "passRate": 0.25,
+ "singles": {
+  "candidates": 168
+ },
+ "unitsPassed": {
+  "1": 5,
+  "2": 4,
+  "3": 12,
+  "4": 3,
+  "6": 5,
+  "7": 2,
+  "8": 7,
+  "9": 4
+ },
+ "figPassed": {
+  "none": 42
+ },
+ "figAll": {
+  "none": 168
+ },
+ "figPassRate": {
+  "none": "42/168"
+ },
+ "renderTypesPassed": {
+  "none": 42
+ },
+ "archetypesPassed": {
+  "ch_t5_p1_conjugate_pairs": 1,
+  "ch_t5_p1_effective_charge": 1,
+  "ch_t5_p1_imf_picture": 1,
+  "ch_t5_p1_ionic_lattice": 1,
+  "ch_t5_p1_lewis_electron_count": 1,
+  "ch_t5_p1_mass_spectrum_peaks": 1,
+  "ch_t5_p1_metal_particles": 1,
+  "ch_t5_p1_mole_particles": 1,
+  "ch_t5_p1_pes_subshell_count": 1,
+  "ch_t5_p1_reaction_energy": 1,
+  "ch_t5_p1_solution_particles": 1,
+  "ch_t5_p1_strong_acid_particles": 1,
+  "ch_t5_p1_vsepr_shape": 1,
+  "ch_t5_p1_weak_base_particles": 1,
+  "ch_t5_p2_beer_procedure": 1,
+  "ch_t5_p2_gas_error": 1,
+  "ch_t5_p2_pes_predict": 1,
+  "ch_t5_p2_redox_procedure": 1,
+  "ch_t5_p2_solubility_procedure": 1,
+  "ch_t5_p2_stoich_question": 1,
+  "ch_t5_p4_acid_strength_structure": 1,
+  "ch_t5_p4_bond_enthalpy": 1,
+  "ch_t5_p4_cell_direction": 1,
+  "ch_t5_p4_energy_diagram": 1,
+  "ch_t5_p4_entropy_sign": 1,
+  "ch_t5_p4_k_magnitude": 1,
+  "ch_t5_p4_k_temperature": 1,
+  "ch_t5_p4_kinetic_control": 1,
+  "ch_t5_p4_nonideal_gas": 1,
+  "ch_t5_p4_ph_pka_species": 1,
+  "ch_t5_p4_phase_heat": 1,
+  "ch_t5_p4_phase_particles": 1,
+  "ch_t5_p4_reaction_type": 1,
+  "ch_t5_p4_solid_properties": 1,
+  "ch_t5_p4_solution_representation": 1,
+  "ch_t5_p4_specific_heat": 1,
+  "ch_t5_p4_spontaneity_signs": 1,
+  "ch_t5_p6_acid_strength_claim": 1,
+  "ch_t5_p6_buffer_claim": 1,
+  "ch_t5_p6_imf_claim": 1,
+  "ch_t5_p6_kmt_claim": 1,
+  "ch_t5_p6_solubility_claim": 1
+ },
+ "costUsd": {
+  "chem-t5-bank": 4.9722
+ }
+}

@@ -1,0 +1,227 @@
+[
+ {
+  "key": "ap_computer_science_a-m01-k0",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "90->A, 78->C, 81->B, 55 and 68 add nothing; out=\"ACB\", length 3",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "ACB 3"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Else-if chain tracing in a loop; matches 2.4/3.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "ACB 3 is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are distinct; ABCB 4 is weakly motivated but acceptable. Explanation covers each option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, short code, no arithmetic load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean tracing item with a unique key. Acceptable distractors, though ABCB 4 is weakly motivated."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single enhanced for loop over 5 elements with an if/else-if chain and no final else. The only subtlety is that values below 70 append nothing, so the string length is 3. The trace is short with no arithmetic, and the distractors are plausible but easy to rule out with a careful trace. This is a straightforward tracing item for 2.4, below typical full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m01-k1",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "85->B,81->C,68,55 skipped,94->A; out=BCA length 3",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "BCA 3"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Else-if chain in a loop, tracing output; fits 2.4/3.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "BCA 3 is correct and unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete compilable code, clear stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are distinct and plausible; the m1 rationale for BCAB 4 is a bit loose but acceptable. All wrong options are explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short trace, 5 iterations, typical load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope tracing item with a unique key and reasonable distractors; the rationale for BCAB 4 is slightly loose but not disqualifying."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single enhanced-for loop over 5 elements with one if/else-if chain and no final else. Student traces each value; the only subtlety is that values failing every condition append nothing, plus the out.length() check. Short trace, no arithmetic, one representation. Fits the skill 3.A basic tracing level, below a full-mock exam_prep item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m02-k0",
+  "cellId": "ap_computer_science_a-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The loop removes 7 characters from the end (m,h,t,i,r,o,g) until the last character is 'l', leaving \"al\".",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "al 7"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Plain string-trim trace; no run-time comparison of statement execution counts, so it does not fit topic 2.12."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "al 7 is correct and unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Option '9' has a different format from the other options and its rationale (tests first character) would give 'algorithm 0'. 'al 14' does not follow from its stated misconception. The exception option is unrealistic given the length guard. Rationales do not match the values."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Format giveaway: option 9 is a bare number among string outputs. Distractors are implausible."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the item does not address 2.12 (run-time comparison), and the distractors are poor: mismatched formats and rationales that do not produce the listed values."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Single while loop trace over a 9-character string with a short-circuit length guard, substring(0, len-1) boundary handling, and a counter. About 7 simple iterations, an answer of \"al 7\", and plausible distractors (exception, wrong format, doubled count). Typical AP-style tracing item; the concept depth is moderate and the reading and computation load are low. (Note: the item's topic tag, informal run-time comparison, is only loosely matched, but the skill tested is code tracing.)",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m02-k1",
+  "cellId": "ap_computer_science_a-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Removes m,a,r,g (4 cuts) until last char is 'o': prints pro 4",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "pro 4"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key \"pro 4\" is correct and unique. The item fails on topic fit (it is a string-trim trace, not a 2.12 run-time comparison) and on distractors. Option \"7\" breaks the output format, and the distractor rationales do not match what the mutated code would print (pro 8 and 7 are not produced by the stated misconceptions, and the exception claim is dubious given the length guard).",
+   "scope_skill": {
+    "pass": false,
+    "notes": "The dominant demand is a string loop trace, not informal run-time comparison of statements (2.12). There is no statement-count or efficiency reasoning."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Traced the code: it prints \"pro 4\". The key is correct and unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The rationales do not match the options. \"pro 8\" cannot come from the count misconception, and \"7\" cannot come from testing the first character. The exception option is not a plausible result given the length guard. Option B is a bare number, while the others are strings, which makes it a format giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Short while-loop trace over a 7-character string: 4 iterations remove 'm','a','r','g' until the last char is 'o', giving \"pro 4\". Uses only charAt/substring/length with a simple short-circuit condition. Few steps, no representation changes, minimal reading and arithmetic. Distractors are weak (cuts of 8 or a bare 7 are implausible, and no exception can occur since length is checked first). Fair and unambiguous, but it does not target run-time comparison, so it fits a basic learning check rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ }
+]

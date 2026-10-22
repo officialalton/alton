@@ -1,0 +1,36 @@
+{
+ "runs": [
+  "chem-t5-sets2"
+ ],
+ "rows": 9,
+ "passed": 6,
+ "rejected": 3,
+ "passRate": 0.667,
+ "singles": {
+  "candidates": 0
+ },
+ "unitsPassed": {
+  "6": 4,
+  "7": 2
+ },
+ "figPassed": {
+  "none": 6
+ },
+ "figAll": {
+  "none": 9
+ },
+ "figPassRate": {
+  "none": "6/9"
+ },
+ "renderTypesPassed": {
+  "ap_table": 6
+ },
+ "archetypesPassed": {
+  "chs_t5_hess_table_set_q1": 2,
+  "chs_t5_ksp_table_set_q1": 2,
+  "chs_t5_metal_specific_heat_set_q1": 2
+ },
+ "costUsd": {
+  "chem-t5-sets2": 0.523
+ }
+}

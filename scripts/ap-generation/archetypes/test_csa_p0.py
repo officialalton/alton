@@ -108,7 +108,7 @@ class TestIndependentPath(unittest.TestCase):
 class TestMcArchetypes(unittest.TestCase):
     def test_library_size(self):
         self.assertGreaterEqual(len(MC), 80)  # 2026-10-13: 두 번 풀 모의고사(겹침 0)용으로 약 34개 구조 추가
-        self.assertEqual(len(SETS), 7)  # 4 + 3 sets added for CS3 (2026-10-19, csa_p0_x4.py)
+        self.assertEqual(len(SETS), 11)  # 4 + 3 sets added for CS3 (2026-10-19, csa_p0_x4.py) + 4 for CS4/CS5 (2026-10-21, csa_p0_t5d.py)
 
     def test_deterministic(self):
         for n in MC + SETS:
@@ -207,7 +207,7 @@ class TestMcArchetypes(unittest.TestCase):
 @unittest.skipUnless(J.java_available(), "JDK not available")
 class TestFrq(unittest.TestCase):
     def test_four_official_types(self):
-        want = {"q1": 4, "q2": 4, "q3": 4, "q4": 4}  # 유형마다 시나리오 4개: 파일럿 1 + 풀 모의고사 2회 + 보충 1
+        want = {"q1": 6, "q2": 5, "q3": 6, "q4": 6}  # 기존 유형마다 4개 + 2026-10-21 신규 7개(q1 2, q2 1, q3 2, q4 2)
         got = {}
         for n in FRQ:
             p = packs(n, 1)[0]
@@ -326,7 +326,7 @@ class TestPaidRunPlan(unittest.TestCase):
     def test_mc_batches_plus_pilot_cover_the_whole_library_once(self):
         pilot = R.CSA_STAGES["csa_p1_a"]
         batches = [R.CSA_STAGES[f"csa_s2_mc_{x}"] for x in "abc"]
-        allx = pilot + [n for b in batches for n in b] + sorted(set(R.CSA_STAGES["csa_x_a"] + R.CSA_STAGES["csa_x_c"] + R.CSA_STAGES["csa_x_e"]))  # CS3 신규 원형(2026-10-19)
+        allx = pilot + [n for b in batches for n in b] + sorted(set(R.CSA_STAGES["csa_x_a"] + R.CSA_STAGES["csa_x_c"] + R.CSA_STAGES["csa_x_e"])) + R.CSA_STAGES["csa_t5_mc"] + R.CSA_STAGES["csa_t5_sets"]  # CS3 신규 원형(2026-10-19) + CS4/CS5 신규 원형(2026-10-21)
         self.assertEqual(len(allx), len(set(allx)), "배치끼리 원형이 겹친다")
         self.assertEqual(sorted(allx), sorted(MC + SETS))
         for b in batches:
@@ -335,7 +335,7 @@ class TestPaidRunPlan(unittest.TestCase):
     def test_frq_batches_plus_pilot_cover_all_scenarios_with_three_per_type_pair_per_batch(self):
         pilot = R.CSA_STAGES["csa_p1_frq"]
         a, b = R.CSA_STAGES["csa_s2_frq_a"], R.CSA_STAGES["csa_s2_frq_b"]
-        allx = pilot + a + b
+        allx = pilot + a + b + R.CSA_STAGES["csa_t5_frq"]  # + 2026-10-21 신규 시나리오 7개
         self.assertEqual(sorted(allx), sorted(FRQ)); self.assertEqual(len(allx), len(set(allx)))
         tmpl = lambda names: sorted(packs(n, 1)[0]["template"] for n in names)  # noqa: E731
         self.assertEqual(tmpl(a), ["q1", "q1", "q1", "q2", "q2", "q2"]); self.assertEqual(tmpl(b), ["q3", "q3", "q3", "q4", "q4", "q4"])

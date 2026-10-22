@@ -1,0 +1,657 @@
+[
+ {
+  "key": "ap_chemistry-m01-k0",
+  "cellId": "ap_chemistry-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Heating to constant mass: if two weighings in a row agree, no more water is coming off, so the sample is fully dehydrated.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "Reheat and reweigh until two successive masses agree."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is too easy and its distractors are implausible, so it is of low discrimination for AP. The calculator designation is irrelevant because the item has no computation. Timing is fine.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and in scope, but the distractors are implausible and the key is the longest option. This makes the item too easy and a poor fit for AP exam quality. Fail on distractor quality and exam suitability."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step recognition of the heating-to-constant-mass procedure for hydrate analysis (skill 2.C). No computation, no data representation, and short, unambiguous wording. Distractors are plainly flawed procedures, so the concept depth and reasoning demand are low. Suitable for basic learning rather than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_chemistry-m01-k1",
+  "cellId": "ap_chemistry-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Reheat and weigh again until two masses in a row agree (heating to constant mass)",
+     "brief_reasoning": "Heating to constant mass shows that no more water is being driven off.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 30-70 seconds with no calculation, which is fine. The calculator designation is irrelevant here, and the item is a standard lab-procedure question. Distractor D is trivially wrong, but the item is acceptable overall.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A valid, simple procedure-identification item on heating a hydrate to constant mass. The key is unique and the explanations are complete. The distractors are weak and the key is longer than the other options, but the item passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept procedure recognition (heating to constant mass in hydrate analysis). One reasoning step, no calculation, no representation change. Distractors are clearly flawed practices. Aligned with skill 2.C but at an introductory level, so it is suited to basic learning rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_chemistry-m01-k2",
+  "cellId": "ap_chemistry-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Heating to constant mass (two successive weighings that agree) confirms that all the water is gone.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "Reheat and reweigh until two successive masses agree"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Heating to constant mass for a hydrate formula is core 1.3 lab procedure; the dominant demand is choosing the procedure (2.C)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only the reheat-and-reweigh-to-constant-mass option is defensible; the others are clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct flawed procedure (fixed time, hot weighing, adding water), and the explanation addresses each. The add-water option is weak but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-70 seconds, with no calculation and a low reading load. Fits AP lab-procedure items."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A sound, standard procedure item with a unique key and distinct distractors. The key is the longest option, which is a minor cue, and the add-water distractor is weak. Pass."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item tests one familiar lab concept, heating to constant mass, to ensure complete dehydration of a hydrate. It needs a single reasoning step: pick the procedure that verifies no further mass loss. There is no calculation, no data or graph to read, and no representation change. The distractors (a fixed short heating time, weighing hot, adding water) are clearly flawed, so the item is a straightforward procedure-identification check. It is below the multi-step depth expected for full mock exam items. The difficulty is not inflated by unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_chemistry-m02-k0",
+  "cellId": "ap_chemistry-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "Higher surface tension at the same temperature means stronger intermolecular attractions. At the same temperature the average kinetic energy is the same, and no covalent bonds are broken at the surface.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 seconds, has no calculation, and has a light reading load. The calculator designation is harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unambiguous conceptual item linking surface tension to intermolecular force strength. The key is unique and each distractor is distinct and explained. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept qualitative item: higher surface tension corresponds to stronger intermolecular forces. No calculation, no stimulus, and no representation changes. Distractors are easy to rule out: same temperature means equal average kinetic energy, the reversed-relationship option is wrong, and the covalent-bond option confuses intramolecular and intermolecular forces. This is a direct recall-and-apply item for topic 3.1 and fits skill 4.C at a basic level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_chemistry-m02-k1",
+  "cellId": "ap_chemistry-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "The forces between molecules of X are stronger than those between molecules of Y.",
+     "brief_reasoning": "Higher surface tension means stronger intermolecular attractions. Both liquids are at the same temperature, so their average kinetic energy is the same. Covalent bonds inside the molecules are not broken at the surface.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, unambiguous 3.1 item linking surface tension to intermolecular force strength. Distractors are distinct misconceptions, and the explanation covers every wrong option. It is slightly easy and recall-based, but acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Connects the macroscopic property (surface tension) to particulate-level forces, within topic 3.1. Mostly recall, but acceptable for 4.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear and the options are parallel."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors target distinct misconceptions (bond breaking, reversed relationship, kinetic energy at the same temperature), and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, no arithmetic, light reading load."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept qualitative item: higher surface tension implies stronger intermolecular forces. Distractors address common misconceptions (covalent bonds breaking, inverted relationship, kinetic energy), but the equal-temperature statement eliminates the kinetic energy option. No calculation, no data representation, and minimal reading. It is a direct recall/conceptual link in topic 3.1 with little multi-step reasoning, which is below the typical exam-prep level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_chemistry-m02-k2",
+  "cellId": "ap_chemistry-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Higher surface tension means stronger intermolecular attractions. Both liquids are at the same temperature, so their average kinetic energy is the same. Covalent bonds inside the molecules are not broken at the surface.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.1: relating surface tension to the strength of intermolecular forces. The item is in scope. Skill 4.C (connecting a macroscopic property to the particulate level) fits, though the demand is mostly recall of a single fact."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the unique defensible answer. A is the reverse of the correct relationship. B is false because surface tension does not involve breaking covalent bonds. D is false because the liquids are at the same temperature, so their average KE is equal."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear, and 'same temperature' is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions: reversed relationship, intramolecular bonds confused with intermolecular forces, and temperature confused with KE. The explanation addresses each wrong option. The correct option is slightly longer than the others, but only mildly so."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60 seconds, has no calculation, and the options are short and parallel."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a sound, simple conceptual item. The key is unique, the distractors are distinct, and it is within scope. It is low in difficulty, but acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-step conceptual recall: higher surface tension corresponds to stronger intermolecular forces. There is no stimulus, no calculation and no representation change. The distractors target common misconceptions (reversed relationship, intramolecular vs intermolecular, temperature vs kinetic energy) but do not add reasoning depth. This is a foundational topic 3.1 item, not mock-exam complexity.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_chemistry-m03-k0",
+  "cellId": "ap_chemistry-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "While the temperature holds at 100 °C, the vapor is condensing. Intermolecular attractions form and release energy, but the temperature, and so the average kinetic energy, stays the same.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "A"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Cooling-curve plateau interpreted at the particulate level fits 3.3 and skill 4.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is unique and correct. B, C, and D are clearly wrong. The 1 atm assumption is standard."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is slightly awkward but clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "B and C encode distinct misconceptions and each option is explained. D is weak and implausible, and option A is longer than the others, which is a mild giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, with no calculation needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and in scope. Minor issues are the longer correct option (a length giveaway) and the weak distractor D. It passes with those notes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept conceptual item: the temperature plateau during cooling indicates a phase change (condensation), with constant average KE and decreasing PE as attractions form. Distractors are standard misconceptions. No computation, no graph or table reading, minimal reading, and one short linking step. This suits foundational learning rather than a full-mock item. The difficulty comes from fair sources only.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m03-k1",
+  "cellId": "ap_chemistry-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "At the 100 °C plateau the vapor is condensing. Energy is released as intermolecular attractions form, and because the temperature stays constant, the average kinetic energy does not change.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Heating/cooling curve plateau interpreted at the particulate level (KE constant, PE changing) fits topic 3.3 and skill 4.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the only correct statement. At 1 atm, water vapor cooled from 110 to 80 °C plateaus at 100 °C during condensation. Pressure is not stated, but 100 °C implies normal boiling point. Options B, C and D are clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear. 'Cooled to 80 °C' is slightly odd, since the plateau is the only feature asked about, but it is not harmful."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception: molecules stop moving, KE decreases during the plateau, and bonds within molecules break. Each is explained. Option A is longer than the others, a mild length cue. Option B is fairly implausible."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, no calculation, typical conceptual MC load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, unambiguous conceptual item on the plateau of a cooling curve. The key is unique and the distractors map to distinct misconceptions. Minor weaknesses are that option A is longer than the others and option B is weak, but neither is disqualifying."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept conceptual item: the temperature plateau during cooling signals a phase change (condensation), where energy released goes to forming attractions and average KE stays constant. There is no computation or data to read, and the distractors target standard misconceptions (molecules stop, KE decreases, covalent bonds break). It requires recalling the cooling-curve idea and linking particle-level behavior to temperature, which is introductory for topic 3.3.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m03-k2",
+  "cellId": "ap_chemistry-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "While the temperature holds steady at 100 °C, the vapor is condensing. Attractions form between molecules and energy is released. Because temperature doesn't change, average kinetic energy doesn't change either.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Links particulate energy (KE/PE) to the macroscopic plateau in a cooling curve; fits 3.3 and 4.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is the unique correct answer: condensation at the 100 °C plateau, constant average KE, energy released as attractions form."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear. 1 atm is implicit but standard."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "A (KE decreasing), B (molecules stop), and D (bond breaking) are distinct misconceptions, each explained. B is weak and the key is the longest option, which are minor flaws."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick conceptual item, about 60 seconds, no calculation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound conceptual item with a unique correct key and explained distractors. Minor flaws: option B is implausible, and the key is the longest option. Acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall and application: temperature is constant during a phase change (condensation), so average kinetic energy is unchanged while intermolecular attractions form and energy is released. No calculation, no stimulus to interpret, and the short stem is unambiguous. Distractors are common misconceptions, and identifying the plateau as condensation takes only one or two reasoning steps. This suits foundational practice rather than full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m04-k0",
+  "cellId": "ap_chemistry-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "[H+]=10^-3.1=7.94e-4; Ka=x^2/(0.15)≈4.2e-6",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "4.23e-6"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Ka from pH of weak acid; topic 8.3, skill 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key C = 4.23e-6 is unique; the x^2/c approximation gives about 4.20e-6, still only matching C."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete. Decimal option format is slightly awkward but fine."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct error patterns, each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical load, calculator allowed, about 100 s."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean standard Ka-from-pH item with a unique key and distinct distractors; passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard single-step weak acid equilibrium: convert pH to [H+] via 10^-pH, build the ICE table, and compute Ka = x^2/(C - x) (about 4.23e-6). Core 8.3 skill with short, clean arithmetic and no extra reading or conceptual twist. Distractors correspond to typical errors (inverted expression, forgetting to square). Fits foundational practice rather than full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_chemistry-m04-k1",
+  "cellId": "ap_chemistry-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "[H+]=10^-3.1=7.94e-4 M; Ka=x^2/(0.05-x)=6.31e-7/0.0492≈1.28e-5",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "1.28e-5"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Ka from pH, topic 8.3, skill 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key C = 1.28e-5 verified; unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete. Decimal option formatting is slightly awkward but clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct named errors, and each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical load, calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound standard Ka-from-pH item; the key is correct and unique, and the distractors are distinct."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard weak acid Ka-from-pH problem: convert pH to [H+], set up ICE table, apply Ka expression with the usual approximation. Short arithmetic, clear wording, in-scope for 8.3. Distractors reflect common errors (using initial concentration as x, forgetting to divide, inverting).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_chemistry-m04-k2",
+  "cellId": "ap_chemistry-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "[H+]=10^-3.4=3.98e-4 M; Ka=x^2/(0.15-x)≈1.58e-7/0.15≈1.06e-6",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "1.06e-6"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Ka from pH of weak acid, topic 8.3, calculation skill 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key 1.06e-6 is unique; the approximation and the exact expression agree."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete. Options use mixed decimal notation, which is awkward but acceptable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor matches its stated misconception; the explanation covers each wrong option. Option C (77.1) is implausible for a weak acid, a minor weakness."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, calculator allowed, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, standard Ka-from-pH item. The key is unique and the distractors map to named errors. Option formatting (long decimals) is a minor issue only."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard single-concept routine: convert pH to [H+], use an ICE setup with x << 0.15, and compute Ka = x^2/0.15 ≈ 1.06e-6. The stem is short and the wording unambiguous. The calculation is modest (one antilog, one square, one division). Distractors map to common errors, so the item checks core 8.3 understanding rather than exam-level multi-step synthesis.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ }
+]

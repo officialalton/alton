@@ -1,0 +1,1690 @@
+[
+ {
+  "key": "ap_chemistry-m01-k0",
+  "cellId": "ap_chemistry-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "A chemical change makes a new substance, and a new substance has different characteristic properties like solubility and melting point. Being in the same container tells you nothing. The masses won't match because a gas escapes. How it looks in dim light doesn't matter.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Choosing a testable question to distinguish physical from chemical change fits 4.4 and skill 2.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is the unique valid test, since only changed properties indicate a new substance. B is not decisive because mass differs in either change when gas escapes."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Every wrong option is explained. A and D are weak and implausible, and D is oddly worded, but the explanations are acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short reading load, about 70 seconds, no arithmetic needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key (C) is unique and the item is in scope and appropriately short. Distractors A and D are weak but acceptable, so the item passes with minor reservations."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks which question is testable for deciding chemical vs. physical change. The correct option (C) compares the properties of the product to those of the reactant, such as solubility and melting point. The distractors are clearly weaker: container location is irrelevant, exact mass equality is a flawed criterion since a gas escapes, and the color under dim light is not a test of change. The item takes one concept (new substances with different properties indicate a chemical change) and about one reasoning step. It has no calculation, no representation change, and a short stem. Its difficulty is not inflated by unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_chemistry-m01-k1",
+  "cellId": "ap_chemistry-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "Whether a change is physical or chemical depends on whether the substance's identity changes. If it's still H2O with the same composition and properties, the change was physical. Changes in volume, temperature, or the container used don't decide this.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 4.4 (physical vs. chemical change) and skill 2.A (identify a testable question) are targeted directly. The dominant demand is choosing the question that tests identity change."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the unique defensible answer, since identity and formula of the substance distinguish chemical from physical change. Volume, temperature and container are non-diagnostic."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (volume, temperature, container) and the explanation addresses each one. The correct option is longer than the others, which is a minor length cue, but the options are not so lopsided that it acts as a giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60 seconds, needs no calculation, and has a low reading load. The calculator designation is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous conceptual question with a unique key and distinct distractors. The answer option is somewhat longer than the others, which is minor. It is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: distinguishing physical from chemical change by whether substance identity (formula/properties) is retained. No computation, no stimulus, short stem. The correct option directly states the defining criterion; distractors (volume change, temperature change, open container) are plausible but non-diagnostic. Only one reasoning step is needed, and no representation changes occur. Mapped to skill 2.A, it requires selecting the testable question tied to the definition, which is introductory-level recall and application.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_chemistry-m01-k2",
+  "cellId": "ap_chemistry-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "instant_reject_missing_condition"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "Whether a change is physical or chemical depends on whether the substance's identity (its composition) stays the same. A change in volume or temperature, or whether the container was open, doesn't tell you that.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits 4.4 and 2.A."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Key says 'same chemical formula and properties', but ice and liquid water differ in physical properties (density, rigidity, etc.). The 'and properties' wording makes the key not strictly true and potentially rejectable by a careful student."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are distinct and explained, though the volume and temperature distractors are the same type of misconception, and the key is noticeably longer."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short and suitable; calculator is irrelevant."
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is on topic and the structure is fine, but the key option claims water keeps 'the same properties' after freezing and melting. That is chemically inaccurate (physical properties differ between ice and liquid), so the key is flawed. The wording should be limited to identity and chemical formula."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall and application: physical changes preserve substance identity (formula and properties). One reasoning step, no computation, no representation changes, short stem, and clearly irrelevant distractors (volume, container, temperature). Fits introductory topic 4.4 and skill 2.A without added complexity.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 35
+  }
+ },
+ {
+  "key": "ap_chemistry-m02-k0",
+  "cellId": "ap_chemistry-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_distractor_explanation",
+   "instant_reject_missing_condition"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Dissolving is endothermic, and the heat absorbed scales with how much salt dissolves. If you double the salt in the same mass of water, it absorbs about twice the energy, so the temperature drops more (assuming all the salt dissolves).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item fits topic 6.1 (endothermic dissolving) and skill 2.B, because the student predicts how the result scales with the amount of salt. It uses only unit 6 content."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Option C is the intended key, but the stem never says that all the added salt dissolves. Past the solubility limit, extra salt would not absorb extra energy and the temperature drop would stop growing. The stem also does not say the initial salt amount was fully dissolved. The model assumption is therefore unstated. In the independent solver's reasoning, it had to add 'assuming all the salt dissolves' to reach C."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear, but it omits the full-dissolution assumption noted under key_scoring."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The 'why' text for option B ('The process absorbs energy, so more salt absorbs more energy') supports the key rather than rebutting B's claim that energy is released. It does not name B's actual error, which is treating the process as exothermic. The explanation for A is also generic. The misconception labels are muddled, so the explanations do not clearly address each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is short, about 60 seconds, with no calculation."
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The scope and format are fine. The stem does not state that all the salt dissolves, and doubling the salt could exceed solubility, so a needed condition is missing. The distractor explanations are also weak, especially the one for option B. Fail."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept qualitative prediction: a temperature decrease indicates an endothermic dissolution, and doubling the salt in the same water absorbs more heat, giving a larger temperature drop. It requires no calculation or representation changes, and the distractors target common misconceptions. This is appropriate for introductory topic 6.1 learning rather than a full-mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m02-k1",
+  "cellId": "ap_chemistry-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "About 4.0 °C",
+     "brief_reasoning": "With twice the volume at the same concentrations, twice as many moles react, so q doubles. The mass being heated also doubles. Since ΔT = q/(mc), the temperature rise stays about the same.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.1 exothermic mixing, 2.B prediction of how temperature change scales."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Doubling the volume doubles q and doubles the mass, so the rise is unchanged. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear and the insulated cup is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (extra solution absorbs energy, mass ignored, same concentration means no change). The explanation covers every option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-70 seconds, conceptual, no arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A sound conceptual item with a unique key and distinct distractors. It is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single conceptual proportional-reasoning prediction: doubling the volumes at the same concentrations doubles both the energy released and the mass absorbing it, so the temperature change stays about the same (intensive vs. extensive quantities). There is no computation, no data to read, and no representation change. The distractors are common misconceptions (the temperature change doubles, the temperature change halves, no change at all). This is a foundational check of the q = mcΔT relationship and exothermic energy release.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m02-k2",
+  "cellId": "ap_chemistry-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "About 4.0 °C",
+     "brief_reasoning": "Doubling both volumes at the same concentrations doubles the moles that react, so q doubles. The mass of solution also doubles, so ΔT = q/(mc) stays the same.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.1 prediction (2.B) about scaling of temperature change with amount; fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique correct answer: q and mass both double so delta T is unchanged. Assumes negligible heat absorbed by the cup, which the insulated cup implies."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct wrong predictions (halved, zero, doubled), each explained. The key is the longest option, and the explanations for the 2.0 and 8.0 distractors overlap somewhat."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, no arithmetic, typical MC load. Somewhat easy."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Acceptable. A clean conceptual prediction item with a unique key and three distinct distractors. Minor weaknesses are that the key is the longest option and two distractor explanations overlap, and the item is easy for its target skill."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single proportional-reasoning prediction: doubling reactant amounts doubles heat released, but the mass being heated also doubles, so the temperature change is unchanged (intensive vs. extensive). No calculation, no stimulus, and minimal reading. Distractors reflect common misconceptions. The wording is clear and in scope, so the item is a basic conceptual check rather than a full-mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m03-k0",
+  "cellId": "ap_chemistry-m03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_distractor_explanation",
+   "instant_reject_multiple_correct"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Calorimetry needs the solution's mass (from its volume), its initial temperature and its highest temperature to find q = mcΔT. You also need a known amount of reactant so you can get ΔH per mole.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Procedure selection for calorimetry; fits 6.6/2.C."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "C is the best choice, but it does not give the concentration of CuSO4, so moles of reaction and the limiting reactant are undefined; the key is not strictly the only defensible answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Distractors are weak and obviously wrong. The correct option is the longest and most detailed, a length giveaway. Explanations are terse."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Time and reading load are fine; no calculation is needed."
+   },
+   "instant_reject": [
+    "multiple_correct"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Fails: C is clearly the best option, but the stem leaves the amounts of reactants unspecified, so the key is not guaranteed unique. The correct option is also a length giveaway and the distractors are weak. Fail when unsure."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The student must recognize which measurements a coffee-cup calorimetry experiment needs (solution volume/mass, initial and final temperature, known amount of reactant). The distractors are clearly off-target, and no calculation or representation change is needed. This is a single-step procedure identification that fits introductory topic 6.6 and skill 2.C.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_chemistry-m03-k1",
+  "cellId": "ap_chemistry-m03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "To use q = mcΔT you need to know the amounts, use an insulated container so little heat is lost, and record ΔT. Moles of acid and base come from the known volumes and concentrations.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Choosing a calorimetry procedure for enthalpy of neutralization fits 2.C and sits in Unit 6 (6.4/6.6). Within scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the only procedure that supplies the moles, mass, and temperature change needed. Unique and defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear, though 'best' is slightly loose. It is acceptable."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The distractors are implausible and trivially wrong. Option B records volume only, C measures nothing, and D uses an indicator color change. None encodes a realistic misconception, such as an open versus insulated vessel with the other data present, or omitting the initial temperature while measuring the rest. The key is also much longer and more detailed than the others, which is a length giveaway. The explanations are present for each option but they are generic."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Time and load are fine, but the item is too easy and fixed-bank in character. An AP-style item would offer procedures that each differ in a subtle, plausible way, such as a closed versus open cup, one temperature versus two, or the heat-release sign."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and has a unique key. It fails on distractor quality (implausible options, key length giveaway) and on low discrimination, so it is not suitable for the exam as written."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The student picks the calorimetry procedure that measures what is needed for enthalpy of neutralization: known amounts, an insulated vessel, and initial and maximum temperatures. The distractors each omit essential measurements or use irrelevant data. The item needs one conceptual step, no computation, no representation change, and minimal reading. It is a straightforward introductory item on skill 2.C.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_chemistry-m03-k2",
+  "cellId": "ap_chemistry-m03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Calorimetry needs known amounts (to get moles), an insulated container, and the temperature change (initial and maximum) to calculate q = mcΔT, then ΔH per mole.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "D"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Procedure for measuring neutralization enthalpy fits 6.6 and skill 2.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is the unique defensible answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Distractors are implausible and not distinct misconceptions: A and C both omit measured quantities, and B (indicator color) is irrelevant. The key is the longest and most detailed option, a length giveaway. Realistic flawed procedures are missing, such as no insulation, no initial temperature, or unknown concentration."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Too easy and transparent for AP; the answer can be found by length and detail alone without chemistry reasoning."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the scope fits, but the distractors are weak and not realistic, and the correct option is a length giveaway. The item needs plausible flawed procedures with parallel length to be exam suitable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step procedure identification: choose the calorimetry setup (known volumes and concentrations, insulated cup, initial and maximum temperature) that matches measuring enthalpy of neutralization. Distractors are clearly flawed. No computation, no representation changes, short reading, and unambiguous wording.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_chemistry-m04-k0",
+  "cellId": "ap_chemistry-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Calorimetry: the heat lost by the known mass of warm water (m·c·ΔT) equals the heat needed to melt the ice plus the heat to warm the meltwater to the final temperature. Divide by the ice mass to get the heat per gram. Only option C measures all the needed quantities.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.5 with skill 2.C: choosing a procedure that yields the heat of fusion. Calorimetry is prerequisite and in scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is the only option giving all the measurements needed: ice mass, water mass, and initial and final temperatures. The other options each lack key data. One could argue the hot plate option works if power were known, but the power is not given, so it is not workable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear. The stem says 'best', which is acceptable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor has a distinct flaw (time without power, missing masses, volume), and each is explained. The key is noticeably longer than the other options, a minor length giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, no calculation needed, typical of AP Chemistry experimental-design items."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a valid procedure-selection question for 6.5 and skill 2.C. The key is unique and each distractor is explained. The only weakness is that the key is longer than the other options, which is minor and does not justify rejection."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept procedure selection: recognizing that calorimetry (known masses of ice and water, insulation, initial and final water temperatures) is needed to find heat of fusion per gram. Distractors are clearly flawed (no masses, timing on hot plate, volume only). No computation, minimal reading, no representation changes. Aligned to skill 2.C but at a foundational level, so it suits basic learning more than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m04-k1",
+  "cellId": "ap_chemistry-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Energy Q = P·t, and L = Q/m_evaporated, so you need the power, the heating time, and the mass that evaporates.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "A"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is too easy and can be solved by test-wiseness alone, since the longest option is correct and the others contain obvious junk. It does not match the rigor of AP Chemistry procedure-identification items, which would typically use realistic alternatives such as measuring the temperature change or using the specific heat.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item is in scope. It fails on distractor quality (implausible options, a length giveaway, and explanations that do not address each wrong option) and on exam suitability, because it is trivially easy and lacks realistic misconception-based options."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The student identifies that heat = power × time and that the mass vaporized gives ΔHvap per unit mass. This is one conceptual step with obviously irrelevant distractors, no calculation, no data to read, and no representation change. It is appropriate for foundational practice on procedure-to-question alignment rather than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m04-k2",
+  "cellId": "ap_chemistry-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Heat supplied is Q = P·t, and L = Q/m_evaporated. So you need the power, the heating time, and the mass that evaporates.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "D"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.5 (energy of phase changes) with skill 2.C: choosing the procedure and measurements that answer the question. The target skill is the dominant demand."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is the only set that gives the energy supplied (P x t) and the mass vaporized. The other options each omit a required measurement or include irrelevant ones. One minor caveat: heat losses are not mentioned, but the stem asks which measurements are needed, so this does not change the key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed, and the stem is clear. 'Electric heater of known power' is stated explicitly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor omits a different required quantity or adds an irrelevant one, and the explanation covers all three. The 'why' texts are somewhat generic. The correct option is longest, which is a slight length cue, but the difference is small."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short reading and a quick decision, within the 60-100 second range. No calculation is needed, so the calculator designation is not an issue."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean procedure-selection question for topic 6.5 and skill 2.C. It has a unique key, plausible distractors that each omit a different needed quantity, and appropriate length. The distractor rationales are somewhat generic, but not enough to fail the item."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks which measurements are needed for a heat of vaporization experiment. The student identifies q = P·t = m·ΔH_vap and picks the option listing power, time, and mass evaporated. The distractors are plainly irrelevant (color, room temperature, container volume) or incomplete. There is no computation, no representation change, and little reading. The item is a single-concept recognition task and is below typical full-mock complexity.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_chemistry-m05-k0",
+  "cellId": "ap_chemistry-m05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Hess's law: enthalpy is a state function, so if the target equation is the sum of the two measured reactions, its ΔH is the sum of their ΔH values. Calorimetry data can't tell you the mechanism, the rate or K.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.9 Hess's law with a 'testable question' framing fits skill 2.A reasonably well; no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the unique defensible answer; the other options ask for mechanism, rate, or K, none of which can be obtained from the enthalpy data described."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are distinct (mechanism, rate, K), and each is explained in the rationale."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The correct option is the only one that contains the conditional 'if its equation equals the sum of the two measured reactions' and the only one that matches the stem's Hess-law setup. This makes it a clear giveaway. The distractors are implausible on their face and trivially dismissed, so the item is too easy and weakly discriminating for AP. The distractors also mix data sources inconsistently (temperatures, heats, masses), which reads as artificial."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the scope is fine. The item fails on suitability because the correct option is longer and carries a conditional that the distractors lack, and the distractors are too weak to discriminate. Revise the options so they are parallel and plausible, for example by giving all four a similar conditional structure."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recognition: identify that Hess's law lets combined reaction enthalpies answer a question about the enthalpy change of a third reaction. Distractors (mechanism, rate, equilibrium constant) are clearly unrelated to enthalpy. No computation, no data representation, and the wording is short and unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_chemistry-m05-k1",
+  "cellId": "ap_chemistry-m05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Which fuel releases more energy per mole when it burns completely?",
+     "brief_reasoning": "With equal moles burned, the temperature rise of the same water shows the heat released per mole, so you can compare energy released per mole. Calorimetry does not tell you bond strengths, activation energy or reaction rate.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Tagged 6.9 Hess's Law, but the item only tests calorimetry (6.4) and Hess's law is never needed. Skill 2.A is fine."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the unique defensible answer, but only if the water masses are equal, and the stem does not say so."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stem never says the same mass of water (or the same calorimeter) is used for both fuels. That condition appears only in the rationale, yet the key depends on it."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions (bond strength, activation energy, rate) and each is explained."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The reading and time load is fine, but the item does not assess the Hess's law topic it is labeled with."
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Reject. The item does not test Hess's law (it is calorimetry, 6.4), and the stem omits the condition that the water mass is the same for both fuels, which the key requires."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step conceptual item: a calorimeter temperature rise measures heat released, and with equal moles this lets the student compare energy per mole. The distractors (bond strength, activation energy, rate) need data not provided, so they are eliminated quickly. There is no computation, no stimulus to read, and no representation change. The item also does not engage Hess's Law, so it is low in depth for a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_chemistry-m05-k2",
+  "cellId": "ap_chemistry-m05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "instant_reject_missing_condition"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Equal moles burned; temperature rise of water gives heat released, so you can compare energy released per mole. The data say nothing about bond strengths, rate, or activation energy.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "Which fuel releases more energy per mole when it burns completely?"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Skill 2.A (identify a testable question) is matched. The topic label 6.9 is weak, though. The item is about calorimetry (6.4) and enthalpy of combustion. It never asks the student to combine reactions or apply Hess's law, so the dominant demand is not Hess's law."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key (option D) is the only question that a temperature rise from equal moles of fuel can answer. The other options ask for bond strengths, rate, or activation energy, which these data do not give. One small gap: the stem does not say the water mass and calorimeter are identical in both trials. The option rationale assumes the same mass of water, and the stem never states it."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear, but the missing condition 'same mass of water in both trials' should be added so that comparing temperature rises is valid."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors cover distinct misconceptions: bond strength, rate, and activation energy. The explanation addresses each one. The key is the only option phrased as an energy comparison, which is a mild giveaway, but its length is similar to the others."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is short, needs no calculation, and takes about 60 seconds. The calculator designation is harmless."
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item is short. It should be revised because the stem omits that the same mass of water is used in both trials, which the rationale relies on. The item also tests calorimetry more than Hess's law, so the 6.9 label fits poorly."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single conceptual step: a calorimeter temperature rise gives heat released, so the data answer an energy-per-mole question. The distractors (bond strength, rate, activation energy) are clearly not measured by calorimetry. There is no computation, no stimulus and minimal reading. The item aligns more with topics 6.4/6.6 than 6.9, though it is still within Unit 6.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_chemistry-m06-k0",
+  "cellId": "ap_chemistry-m06",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Percent yield needs the known mass of the limiting reactant (CuSO4) to get the theoretical yield, plus the actual dry mass of the Cu(OH)2 isolated by filtering and drying.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is quick to read and no calculation is needed, so the calculator designation is irrelevant but harmless. It is on the easy side but acceptable.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is chemically correct with a unique key and is in scope. It fails on distractor quality: the key is visibly the longest and most detailed option, two distractors are implausible, and the explanation for option B does not match its actual flaw. The item needs distractors that are parallel in length and encode realistic, distinct procedural errors."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: recognize that percent yield requires the measured mass of dry isolated product and the theoretical mass from stoichiometry. Distractors are clearly flawed (wet mass, color only, no masses). No calculation, no table or graph, no representation change, and short reading. Aligns with skill 2.C but at a low depth, so it suits basic learning rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_chemistry-m06-k1",
+  "cellId": "ap_chemistry-m06",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "The balanced equation is Mg + 2HCl → MgCl2 + H2. Find moles of Mg from its mass divided by molar mass, and moles of HCl from molarity times volume. Then compare them using the 1:2 mole ratio.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is too easy and obvious for AP. Three options are implausible straw men, and the correct option can be spotted without any chemistry reasoning. It does not match the quality of an AP-style procedure-selection item, which would use realistic alternative procedures such as measuring the mass of H2 produced or using the mass ratio directly.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the scope fits, but the distractors are transparent straw men. Two of them (color and temperature) are essentially the same idea, and the \"without any calculation\" phrasing gives the answer away. The item is not suitable for AP as written."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: recognize that finding a limiting reactant requires converting measured quantities to moles and comparing them with the balanced-equation ratio. Distractors are clearly inappropriate procedures (color, mass vs. mass without moles, temperature). No calculation, minimal reading, and no representation changes; it is aligned with skill 2.C but pitched at foundational level, not full-mock exam difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_chemistry-m06-k2",
+  "cellId": "ap_chemistry-m06",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Mg + 2HCl → MgCl2 + H2. To find the limiting reactant, convert the Mg mass to moles (mass ÷ molar mass) and the HCl to moles (M × V). Then compare those amounts using the 1:2 mole ratio.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "D"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Limiting reactant procedure fits 4.5 and skill 2.C (identify a procedure aligned to a question). On topic."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is the unique defensible answer. However the stem never gives the balanced equation, and the key mentions a '1 : 2 mole ratio' that the student must infer for Mg + HCl; this is a mild unstated assumption but derivable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. Wording is clear, though 'mass of the HCl solution' is an odd phrasing, and the 1:2 ratio appears only in the key."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Distractors A and B are trivially absurd (color, temperature) and each explicitly includes 'without any calculation / without comparing amounts', which telegraphs wrongness. Option D is the only one that mentions moles and the mole ratio, and its form is longer and more specific, so it is a giveaway. Only C encodes a real misconception (comparing masses). Explanations are adequate but A and B do not encode realistic misconceptions."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Too easy and recall-like for AP. The answer can be chosen with no chemistry reasoning because the correct option is the only one describing a quantitative mole-based method. It does not require applying the principle to specific data, and it leaks the ratio. It is weaker than the AP reference pattern for a skill 2.C item, which would offer realistic competing procedures (for example, measuring gas volume vs mass of product vs titration)."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the scope fits, but the item fails on distractor quality and exam suitability. Options A and B are implausible and flagged with 'without...' phrases. Option D is the only one with moles and a mole ratio, so it can be picked without chemistry reasoning. The item needs plausible competing procedures that each encode a distinct misconception."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: identify that the limiting reactant is found by converting measured amounts to moles and comparing them with the balanced-equation ratio (Mg + 2HCl). The distractors (color, temperature, raw mass comparison) are clearly flawed, so there is little discrimination beyond recalling the basic stoichiometry method. There is no calculation, data reading, or multi-step linkage, and the reading load is minimal.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_chemistry-m07-k0",
+  "cellId": "ap_chemistry-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "H₂ is limiting; 6 H₂ consume 2 N₂, leaving 2 N₂",
+     "brief_reasoning": "6 H2 × (1 N2/3 H2) = 2 N2 needed < 4 available, so H2 limiting, 2 N2 excess, 4 NH3 formed.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, unambiguous limiting-reactant item. H2 is limiting because 6 H2 needs only 2 N2 and 4 N2 are available. Distractors encode distinct misconceptions and the explanation covers each one.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem mentions a diagram, but the particle counts are given in text and the stimulus is \"none\". The item is complete as written."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept limiting reactant item using small whole-number particle counts. The student applies the 1:3 N2:H2 ratio once (6 H2 needs 2 N2), then evaluates the claims against it. The main distractor is the common misconception that fewer molecules means limiting. There is no real computation, reading load is minimal, and the wording is clear, so this fits foundational practice rather than full-mock rigor.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m07-k1",
+  "cellId": "ap_chemistry-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "3 O2 need 1.5 CH4 at a 2:1 ratio. There are 4 CH4, so O2 runs out first and is the limiting reactant.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Limiting reactant from the mole ratio is squarely topic 4.5. The task asks which statement is consistent with the balanced equation, which fits skill 4.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is the only correct option. 3 O2 need 1.5 CH4, and 4 CH4 are present, so O2 is limiting. B, C and D are each clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem gives all the quantities and the balanced equation."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions: adding counts, assuming the more abundant reactant is limiting, and relying on equation order. The explanation addresses every option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 70 seconds, no arithmetic burden, and the calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous limiting-reactant model-consistency question. The key is unique, the distractors are distinct, and the load is appropriate for AP."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept limiting reactant item with particle counts. The student applies the 1:2 CH4:O2 ratio once (3 O2 needs 1.5 CH4) and rejects three misconception-based distractors (summing counts, choosing the larger count, choosing the first-listed species). No multi-step computation, no representation changes, minimal reading. Wording is clear and all content is in Unit 4.5 scope, so this is suited to foundational learning rather than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m07-k2",
+  "cellId": "ap_chemistry-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "O₂ is limiting",
+     "brief_reasoning": "3 O₂ need only 1.5 CH₄ (1:2 ratio); 4 CH₄ present, so O₂ runs out first.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Limiting reactant from a particle count and mole ratio is squarely topic 4.5. Evaluating statements for consistency with the balanced equation fits skill 4.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is the unique defensible answer. A is wrong (sum is meaningless and CH4 is in excess). B is wrong (equation order is irrelevant). C is wrong (CH4 is in excess, so it is not limiting)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. All quantities and the balanced equation are in the stem, and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions: summing counts, equation order, and more molecules meaning limiting. The explanation addresses each wrong option. The explanation for C is slightly vague but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, with minimal reading and no arithmetic burden, which fits a typical AP MC item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean and passes all five criteria. The key is unique and correct, the distractors reflect distinct misconceptions, and the scope and skill fit is good."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept limiting reactant item with small whole-number particle counts. The student applies the 1:2 mole ratio once (3 O2 reacts with 1.5 CH4) and evaluates four claims, with distractors based on common misconceptions. No real computation, no representation change, and minimal reading. It is a foundational check of stoichiometric ratio reasoning rather than an exam-level multistep task.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m08-k0",
+  "cellId": "ap_chemistry-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Mg goes from 0 to +2 (loses electrons, so it is oxidized). O goes from 0 to -2 (gains electrons, so it is reduced), which makes O2 the oxidizing agent.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "Mg is oxidized; O2 is the oxidizing agent"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 4.9 identifying oxidized species and oxidizing agent from oxidation numbers. Skill 4.A is fit, though the item is very basic recall."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the unique correct answer: Mg is oxidized and O2 is the oxidizing agent. The other options are each clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. The reaction is given in the stem and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors map to named misconceptions: oxidized species mislabeled as the oxidizing agent, O2 wrongly said to be oxidized, and no electron transfer. The explanation addresses each. Option C is somewhat longer than the others, and option D is weak (obviously implausible), but neither is a major giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, no calculation, four options. The calculator designation is harmless. The item is easy, but suitable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a correct, clear, simple redox identification question with a unique key and distinct distractors. It is low in difficulty but acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall item: identify the oxidized species (Mg, 0 to +2) and the oxidizing agent (O2, which gains electrons) in a classic synthesis redox reaction. It requires one or two short reasoning steps, with no computation, no representation changes, and minimal reading. The distractors target common confusions (mixing up oxidized species and oxidizing agent), which is appropriate for foundational learning rather than full-mock exam prep. There is no stimulus or quantitative model analysis, so it is below typical AP exam depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_chemistry-m08-k1",
+  "cellId": "ap_chemistry-m08",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Zn is oxidized from 0 to +2 and gives its electrons to H+, which makes Zn the reducing agent.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "Zn"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is too trivial for AP Chemistry. It has no model or representation to analyze and no judgment demand beyond a definition, and it is solvable in a few seconds.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the distractors are weak and the key is a reasoning giveaway. The item is a trivial definition recall below AP difficulty for a model-analysis skill. Fail."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall and application: assign oxidation numbers in a simple, familiar single-displacement reaction and identify the species oxidized as the reducing agent. There is no computation, no stimulus to read, and a very short stem. The distractors are common misconceptions (mixing up oxidizing and reducing agents, product versus reactant, charge alone). This is suited to introductory learning of topic 4.9, not full-mock exam depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_chemistry-m08-k2",
+  "cellId": "ap_chemistry-m08",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Zn's oxidation number goes from 0 to +2, so it loses electrons and is oxidized. That makes Zn the reducing agent.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "Zn"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is a very low-level recall question for AP. Option D is the longest and the only one with a fully correct oxidation-number rationale, and options A and B can be eliminated trivially. The calculator is irrelevant. This is weaker than a typical AP item, which would normally ask the student to evaluate a particle diagram, a data table, or a claim. The item is acceptable but at the low end of exam suitability.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The chemistry is correct and the key is unique. The item is trivially easy and its correct option is a length giveaway, so it fails exam suitability, though it has no instant-reject conditions."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step identification of the reducing agent from oxidation number changes in a simple, familiar single-displacement reaction. There is no computation, no stimulus to read, and minimal reading. Distractors target common misconceptions (product, charge, oxidizing vs. reducing agent). This is foundational recall and application, below the typical full-mock exam_prep level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_chemistry-m09-k0",
+  "cellId": "ap_chemistry-m09",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "The temperature dropped, so the water gave up energy to the dissolving process. That makes the process endothermic.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.1, claim from observation; matches 6.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is uniquely correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Option D is a weak, implausible distractor and its 'why' text is garbled. B's explanation does not clearly name the sign-reversal misconception. Option C is slightly the longest."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, appropriate load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and well sized. It fails on distractor quality: D is a weak, implausible distractor with a garbled rationale, and B's explanation is muddled. Fail when unsure, so this should be revised."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item on 6.1: a drop in the surroundings' temperature means the process absorbs energy, so it is endothermic. One reasoning step, no computation, no representation change, short and unambiguous wording. Distractors reflect common misconceptions (direction of energy flow, 'small change means no change', bond breaking in water) but are not tricky. It fits foundational practice better than full-mock exam_prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m09-k1",
+  "cellId": "ap_chemistry-m09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "The temperature went up, so the reaction released energy into the solution, which means it is exothermic (ΔH < 0). Choice B is wrong because energy is transferred, not 'produced.' Choices C and D give the wrong sign.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.1 claim from a temperature observation; matches skill 6.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is the unique correct claim; B, C and D are each defensibly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (energy produced, reversed temperature-to-energy direction, reversed ΔH sign); the explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick conceptual item, about 60-70 s, with no needless arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, correct conceptual item. The key is unique and the distractors are distinct. It is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: a temperature rise in an insulated mixture means energy flowed from system to surroundings, so the reaction is exothermic. Students only choose the claim with valid reasoning. The distractors are common misconceptions (energy is produced, wrong sign, surroundings vs system ΔH). There is no calculation, data table, or representation change. Wording is clear and short.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_chemistry-m09-k2",
+  "cellId": "ap_chemistry-m09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "The temperature rise means the reaction released heat into the solution (the surroundings), so the reaction is exothermic and ΔH < 0. Option A is wrong because energy is not created. Option B gets the sign of ΔH wrong. Option C contradicts the observation.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.1 claim from temperature observation; skill 6.A fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is the unique correct claim; A, B, C each flawed."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear. The mixture is the surroundings, which is implied by the insulated cup."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions; each wrong option is explained. The key is slightly longer than the others, a minor issue."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, no arithmetic; appropriate load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A sound, simple claim item with a unique key and distinct distractors. The only weakness is the mild length giveaway on the key. Acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: a temperature rise in an insulated mixture indicates an exothermic reaction. Students identify the correct claim and reject distractors that misuse energy conservation ('produces energy'), reverse the endothermic/exothermic label, or confuse the sign of the surroundings' energy change with ΔH of the system. No computation, graph, or unit conversion is needed, and the wording is unambiguous and short. It is a foundational check of 6.1 vocabulary and system/surroundings reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m10-k0",
+  "cellId": "ap_chemistry-m10",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "This follows from Hess's law. You can picture the reaction as two steps: first the reactants break down into their elements (that step's enthalpy is −ΣΔHf of the reactants), then the elements combine to form the products (+ΣΔHf of the products). Enthalpy is a state function, so the result doesn't depend on the path taken.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.8 with skill 6.D: the student justifies the ΔH = Σ ΔHf(products) − Σ ΔHf(reactants) claim using the state-function and Hess's law path through the elements. This is in scope and the dominant demand is argumentation."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the only statement that correctly justifies the claim. A is the definition of bond-breaking enthalpy, not formation. B is false because elements in their standard states have ΔHf = 0. D is false because the comparison of products and reactants depends on the reaction."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the stem is self-contained and clear. The calculator designation is allowed, which is harmless because the item involves no calculation."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions: confusing formation with bond breaking, claiming elements have nonzero ΔHf, and claiming products always have higher ΔHf. The explanation addresses each wrong option. The key is noticeably longer than the other options, which is a mild length cue."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Reading load is short, the time is about 70 seconds, and it is a typical AP-style claim-justification item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound conceptual justification question on enthalpy of formation with a unique correct key, distinct distractors and appropriate length. The only minor flaw is that the key is longer than the distractors, which does not warrant rejection."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Conceptual recall and recognition of the justification for the enthalpy-of-formation method (path independence and state function). No computation or representation change. Distractors target clear misconceptions: bond enthalpy confusion, elements' ΔHf° being zero, and an unsupported always-higher claim. One short reasoning step suits foundational 6.8 understanding, below typical full-mock difficulty. Difficulty does not come from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m10-k1",
+  "cellId": "ap_chemistry-m10",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Graphite is carbon's standard state, so its ΔHf° = 0. That makes ΔH° = ΔHf°(diamond) − 0.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "A"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.8 with skill 6.D: justify a claim using the standard-state reference concept."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is the unique correct answer. Graphite is the standard state, so its enthalpy of formation is 0 and ΔH° equals ΔHf of diamond. B, C and D are each wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions and each is explained. The explanation for B is thin, and option A is longer than the others, a mild length cue."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, no arithmetic, and a consistent calculator designation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound conceptual justification question on standard-state enthalpy of formation. The key is unique and the distractors are distinct. Minor weaknesses are the thin explanation for option B and the longer correct option."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept definitional check: formation enthalpy is defined relative to the standard-state reference form (graphite), so the reaction is diamond's formation reaction. One reasoning step, no computation, no representation changes. Distractors target common misconceptions (all elements have ΔHf°=0, forms have equal enthalpy, graphite is more energetic). Below the multi-step demand of a full-mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m10-k2",
+  "cellId": "ap_chemistry-m10",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "Graphite is carbon's standard state, so its ΔHf° is 0. That makes ΔH° = ΔHf°(diamond) − 0 = ΔHf°(diamond).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.8 reference-state reasoning, justified as a claim (6.D). Fits scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is the unique correct justification. A is false (graphite is the reference form, so its formation enthalpy is zero, and diamond's is positive). B is false because the two forms differ in enthalpy. C is false because only the standard-state form is zero."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception. The explanation for A is slightly weak: it does not say that graphite has the lower enthalpy of formation. The 'why' text is acceptable, though the stated misconception for A is not the exact error. Option D is noticeably longer than the others, a mild length cue."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, no calculation, typical conceptual MC. Calculator designation is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Valid, unambiguous conceptual justification item on enthalpy of formation. Only minor distractor-explanation and length-cue issues, which do not warrant rejection."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single core concept: elements in their reference (standard) state have ΔHf° = 0, so for graphite -> diamond, ΔH° = ΔHf°(diamond). Requires recognizing graphite as the reference form and linking to the claim. No computation, table, or representation change. Distractors are common misconceptions (all elements zero, reversed energetics), but the item is short and clear, which suits foundational learning more than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ }
+]

@@ -1,0 +1,41 @@
+{
+ "runs": [
+  "chem-t5-frq3"
+ ],
+ "rows": 13,
+ "passed": 7,
+ "rejected": 6,
+ "passRate": 0.538,
+ "singles": {
+  "candidates": 13
+ },
+ "unitsPassed": {
+  "4": 2,
+  "5": 2,
+  "7": 1,
+  "8": 2
+ },
+ "figPassed": {
+  "none": 7
+ },
+ "figAll": {
+  "none": 13
+ },
+ "figPassRate": {
+  "none": "7/13"
+ },
+ "renderTypesPassed": {
+  "text": 5,
+  "ap_table": 2
+ },
+ "archetypesPassed": {
+  "chf_long_redox_titration": 1,
+  "chf_long_initial_rates": 2,
+  "chf_long_gravimetric": 1,
+  "chf_short_weak_acid_ka": 2,
+  "chf_short_ice_table": 1
+ },
+ "costUsd": {
+  "chem-t5-frq3": 0.566
+ }
+}

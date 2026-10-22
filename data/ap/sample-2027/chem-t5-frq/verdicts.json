@@ -1,0 +1,511 @@
+[
+ {
+  "key": "ap_chemistry-f01-k0",
+  "cellId": "ap_chemistry-f01",
+  "passed": false,
+  "reasons": [
+   "part_B_calculation_without_answer_row"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_chemistry-f01-k1",
+  "cellId": "ap_chemistry-f01",
+  "passed": false,
+  "reasons": [
+   "part_B_calculation_without_answer_row"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_chemistry-f02-k0",
+  "cellId": "ap_chemistry-f02",
+  "passed": false,
+  "reasons": [
+   "part_B_calculation_without_answer_row",
+   "part_C_calculation_without_answer_row"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_chemistry-f02-k1",
+  "cellId": "ap_chemistry-f02",
+  "passed": false,
+  "reasons": [
+   "part_B_calculation_without_answer_row",
+   "part_C_calculation_without_answer_row"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_chemistry-f03-k0",
+  "cellId": "ap_chemistry-f03",
+  "passed": false,
+  "reasons": [
+   "generator_defect:table_row_width_mismatch"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_chemistry-f03-k1",
+  "cellId": "ap_chemistry-f03",
+  "passed": false,
+  "reasons": [
+   "generator_defect:table_row_width_mismatch"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_chemistry-f04-k0",
+  "cellId": "ap_chemistry-f04",
+  "passed": false,
+  "reasons": [
+   "part_B_calculation_without_answer_row",
+   "generator_defect:table_row_width_mismatch"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_chemistry-f04-k1",
+  "cellId": "ap_chemistry-f04",
+  "passed": false,
+  "reasons": [
+   "part_B_calculation_without_answer_row",
+   "generator_defect:table_row_width_mismatch"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_chemistry-f05-k0",
+  "cellId": "ap_chemistry-f05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "n(Ba2+)=0.0750 L×0.100 M=0.00750 mol; n(SO4^2-)=0.0250 L×0.500 M=0.0125 mol; 1:1 ratio so BaCl2 runs out first",
+     "final_answer": "BaCl2 is the limiting reactant (0.00750 mol Ba2+ < 0.0125 mol SO4^2-)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "0.00750 mol BaSO4 × 233.39 g/mol",
+     "final_answer": "1.75 g BaSO4",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Ions in solution: 0.0600 mol before; Ba2+ and SO4^2- leave as solid, removing 0.0150 mol; 0.0450 mol remain; Na+ and Cl- are spectators",
+     "final_answer": "Correct: the moles of ions in solution drop from 0.0600 to 0.0450 mol because 0.00750 mol each of Ba2+ and SO4^2- leave solution as solid BaSO4",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound short FRQ on a precipitation limiting reactant. The keys are unique and correct, and the rubric is consistent. The scope and load are appropriate for a 4-point short question.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits 4.4 with 4.5 and 3.7. Parts A and B are 5.F, and part C is a reasoning link to a claim."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys verified. BaCl2 is limiting, the mass is 1.75 g, and the claim in C is correct. Rubric rows are consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and states the completion assumption."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Free response; the listed common errors are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light arithmetic, calculator allowed, appropriate time load."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style FRQ: limiting reactant via M×V with mL-to-L conversion and 1:1 stoichiometry, a single mass calculation with the molar mass of BaSO4, and a conceptual claim evaluation linking the net ionic equation to the change in ion count. Arithmetic is clean, wording is unambiguous, and reading load is low. Difficulty comes from legitimate levers (choosing the governing relationship, unit conversion, one reasoning step linking a result to a claim), which suits full mocks.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_chemistry-f05-k1",
+  "cellId": "ap_chemistry-f05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "n(CaCl2)=0.0500 L×0.200 M=0.0100 mol Ca2+; n(Na2CO3)=0.0500 L×0.300 M=0.0150 mol CO3^2-. The ratio is 1:1, so Ca2+ runs out first.",
+     "final_answer": "CaCl2 (Ca2+) is the limiting reactant",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "0.0100 mol CaCO3 × 100.09 g/mol",
+     "final_answer": "1.00 g CaCO3",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Ca2+ and CO3^2- leave the solution as solid CaCO3. Na+ and Cl- are spectator ions and stay. Total ions go from 0.0750 mol to 0.0550 mol, a drop of 0.0200 mol.",
+     "final_answer": "Yes, the claim is correct: 0.0100 mol Ca2+ and 0.0100 mol CO3^2- leave the solution as solid CaCO3, so the ions in solution drop from 0.0750 mol to 0.0550 mol.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The keys are correct, and the 1/2/1 short-question structure and the load are appropriate. It fails on stimulus completeness: the data object is empty, and the topic label for parts A and B is a stretch.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A and B are limiting-reactant and mass calculations (5.F) and fit 4.4/4.5. Part C is a conceptual claim about ions leaving solution (6.E). The bundle may span 4.4, 4.5 and 3.7."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are unique and correct: CaCl2 is limiting, the mass is 1.001 g, and the ion count falls from 0.0750 mol to 0.0550 mol. The rubric rows are consistent. Row C1's required elements are somewhat rigid for matching free-text answers."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stimulus is a text-only scenario with empty data, which is complete enough because the values are in the description. Part C does not state that spectator ions remain, though the answer is still unambiguous. The failure on this criterion is for the empty data object as the machine-readable specification."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Free-response item; there are no multiple-choice distractors. The listed common errors are realistic misconceptions."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The arithmetic is light, a calculator is allowed, and the 4 points in about 9 minutes is reasonable."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Typical AP FRQ-style item. Requires mL to L conversion, mole calculation, limiting reactant comparison using 1:1 stoichiometry, mass from moles, and a short conceptual justification about ion count change in precipitation. Arithmetic is short and clean, wording is unambiguous, and the content is in scope for topics 4.4, 4.5 and 3.7. Difficulty comes from legitimate levers (choosing the governing relationship, unit conversion, one reasoning step linking a result to a claim).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_chemistry-f06-k0",
+  "cellId": "ap_chemistry-f06",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring",
+   "criterion_failed_distractor_explanation",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Solid NaCl is an ionic lattice of Na+ and Cl− ions held together by strong electrostatic attractions (ionic bonding).",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Ion–ion (ionic/Coulombic) attractions between Na+ and Cl− ions in the crystal lattice"
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Dissolving breaks Na+–Cl− attractions and some H2O hydrogen bonds. It forms strong ion–dipole attractions between the ions and polar water molecules. These new attractions are comparable in strength to the ones broken, and mixing increases entropy.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Yes, NaCl dissolves significantly. Before mixing there are ion–ion attractions in NaCl and hydrogen bonds in water. After mixing, strong ion–dipole attractions form: the partially negative O atoms of water surround Na+, and the partially positive H atoms surround Cl−. These ion–dipole attractions are comparable in strength to the ion–ion attractions and hydrogen bonds that are broken, so the energy needed to separate the ions is mostly recovered. The increase in disorder then favors dissolving."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Dissolving NaCl is slightly endothermic: breaking the lattice takes a bit more energy than hydration releases. Adding heat supplies that energy, so solubility increases.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Dissolving NaCl is slightly endothermic, because more energy is needed to break the ionic lattice and separate water molecules than is released when ion–dipole attractions form. Heating supplies this energy, and the higher kinetic energy of the water molecules helps them pull ions out of the lattice, so the equilibrium shifts toward more dissolved solute."
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item fails on skill fit, because nothing assesses representing data and phenomena (3.A). It also fails on key and scoring, because part C is chemically weak and hedged (NaCl solubility is nearly temperature-independent) and the rubric is keyword-based. The common_errors entries are generic and not tied to named misconceptions.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "The target skill is 3.A (representation with graphs, scale and units), but no part asks for or reads a representation. The parts are identify, predict and explain, and the stimulus states that no particle diagram is provided. Part A is a recall question tagged 3.A."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The part C model answer hedges with \"endothermic or the increased kinetic energy\", which is vague. NaCl solubility barely changes with temperature, so the premise is chemically weak. Rubric B2 rewards the keywords \"attractions\" and \"pure substances\" and does not require ion–dipole attractions to be named. The rubric rows are keyword-based and permit loose answers."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus is a short text description and is clear. It is complete for text-only parts."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The common_errors entries are generic, for example \"names a force that does not apply\", and are not tied to specific named misconceptions. The item has no explanation of wrong answers."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is fine at about 9 minutes with no calculation. The calculator designation is irrelevant but harmless."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Short, qualitative recall-and-explain item on core topic 3.1/3.8 content: identify ionic bonding in NaCl, predict dissolving via ion-dipole attractions compared with ionic attractions, and explain a temperature effect on solubility in energy terms. There is no calculation, graph, or table, so no data reading or representation changes. The skill 3.A target (representing phenomena with graphs, scale, units) is barely engaged, since no graph or data is supplied, so the item is a poor fit for that skill, but it is not hard. Reasoning is brief and uses standard textbook statements. Part C is slightly open-ended (endothermic dissolution vs. kinetic energy), but it is still routine. The item is better suited to foundational practice than to full mocks. Difficulty does not come from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 180
+  }
+ },
+ {
+  "key": "ap_chemistry-f06-k1",
+  "cellId": "ap_chemistry-f06",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:C:flagged",
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "CH3OH has an O–H bond, so its molecules can hydrogen bond with each other. Hydrogen bonding is the strongest attraction in the pure liquid; London dispersion and dipole–dipole forces are also present.",
+     "final_answer": "Hydrogen bonding",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Before mixing, CH3OH molecules hydrogen bond with each other, and H2O molecules hydrogen bond with each other. After mixing, CH3OH and H2O hydrogen bond with each other, and these new attractions are about as strong as the ones broken. Overcoming the old attractions costs about as much energy as forming the new ones releases, and mixing increases entropy, so dissolving is favorable.",
+     "final_answer": "Yes. CH3OH dissolves to a large extent; in fact it mixes with water in all proportions. Hydrogen bonds between CH3OH and H2O replace similar hydrogen bonds within each pure substance.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The standard textbook answer would be that dissolving takes in energy, so a higher temperature favors it. Another possible answer is that faster-moving particles have more energy to overcome the attractions between solute molecules. But the scenario doesn't hold up: methanol and water mix in all proportions, so there is no saturation limit and no leftover solute for heating to dissolve. Also, mixing methanol with water releases a little heat, which would mean heating slightly works against dissolving, not for it.",
+     "final_answer": "Expected answer: at a higher temperature, particles have more kinetic energy, which helps overcome the attractions between solute molecules. This assumes dissolving takes in energy, so heating would favor it. However, the observation in the question contradicts how methanol actually behaves in water.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "CH3OH and H2O mix in all proportions, so there is never undissolved CH3OH for heating to dissolve. Mixing them also releases a little heat, so heating would not increase solubility. The premise of the question is physically wrong for this pair of substances."
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "wrong_key",
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Rejected. Part C rests on a false premise: methanol and water are miscible in all proportions, so heating cannot dissolve more solute, and the mixing is slightly exothermic, so the endothermic claim in the key is wrong. The item also does not target skill 3.A, because it has no representation or graph demand.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Dominant skill is not 3.A representation. No graph, diagram or units are involved, and the item is recall and justification. Part C is tagged 6.E."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part C's key says dissolving is endothermic, but CH3OH-H2O mixing is slightly exothermic and the two are miscible in all proportions. The observation that more solute dissolves on heating is physically impossible. The rubric also accepts non-unique answers (kinetic energy or entropy)."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stimulus has empty data. It mentions particle diagrams that are not provided. The phrase 'dissolves to a significant extent' is misleading for fully miscible liquids."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "This is a free-response item with no distractors. Common-error notes are generic."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The flawed premise in part C makes it unsuitable for an exam. Students who know that methanol and water are miscible would be penalized."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Three short conceptual recall and justification tasks: identify hydrogen bonding in CH3OH, apply like-dissolves-like by comparing solute-solute, solvent-solvent and solute-solvent attractions, and give a brief energy explanation for increased dissolving on heating. No data, graph, or calculation. Concept depth is moderate and routine. Weak alignment with skill 3.A (no graph, scale, or units to represent), and Part C has an unstated assumption (endothermic dissolution; methanol and water are miscible, so 'more solute dissolves' is a slightly awkward premise) that should be clarified.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_chemistry-f07-k0",
+  "cellId": "ap_chemistry-f07",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "instant_reject_wrong_key",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Kc = [C]/([A][B]). Forming 0.2 M of C uses up 0.2 M of A and 0.2 M of B, so [A] = 1 − 0.2 = 0.8 M and [B] = 0.6 − 0.2 = 0.4 M.",
+     "final_answer": "Kc = [C]/([A][B]); [A] = 0.80 M, [B] = 0.40 M",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Kc = 0.2/(0.8 × 0.4) = 0.2/0.32 = 0.625.",
+     "final_answer": "Kc = 0.625 (about 0.63)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Setting z/(0.5 − z)² = 0.625 gives z² − 2.6z + 0.25 = 0. The physically valid root is z = 0.10 M. That is less than 0.20 M. The first experiment started with larger reactant concentrations, so the denominator (the product [A][B]) is larger. Because of that, more C has to form to bring Q up to Kc. Starting with lower concentrations gives less C at equilibrium.",
+     "final_answer": "Kc = z/(0.5 − z)² = 0.625, so z = 0.10 M. This is less than the 0.20 M of C in experiment 1, which started with larger concentrations.",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "The wording 'when the starting concentrations are larger overall' is awkward, but it can still be read as comparing against experiment 1, which had the larger starting concentrations."
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "wrong_key",
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Parts A and B are correct. Part C is flawed: the phrase \"when the starting concentrations are larger overall\" contradicts the setup, since experiment 2 starts lower than experiment 1. The model answer says larger starting amounts give larger z yet cites z ≈ 0.100 M, which is less than 0.2 M. The rubric never requires the correct direction (z less than 0.2 M), so the key is inconsistent and the scoring unsound.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A and B fit 7.7 and 5.F. Part C asks for no calculation, so it does not target 5.F."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part C's model answer is internally contradictory (claims a larger z while citing 0.100 M, which is smaller than 0.2 M). The rubric does not state the correct direction."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Part C's wording is ambiguous and misleading about which experiment has larger starting concentrations."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to this free-response item; the listed common errors are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Time and calculator load are appropriate."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard 1:1:1 ICE-table problem. Part A requires the K expression and equilibrium concentrations from stoichiometry. Part B is a single substitution to get Kc = 0.625. Part C requires writing z/(0.5-z)^2 = Kc (no solving) and a qualitative justification that lower starting concentrations favor the side with more gas moles, so z < 0.2. Concepts are core Unit 7 (7.4, 7.7), reasoning is short, and arithmetic is light. Minor wording flaw: part C says 'larger overall' although the second experiment's starting concentrations are smaller. This could confuse students but is not an intended difficulty lever.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_chemistry-f07-k1",
+  "cellId": "ap_chemistry-f07",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:C:flagged",
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Kc=[C]/([A][B]). x=0.1 M of C forms, so 0.1 M each of A and B is used up: [A]=[B]=0.5−0.1=0.4 M.",
+     "final_answer": "Kc=[C]/([A][B]); [A]=0.4 M, [B]=0.4 M",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Kc = 0.1/(0.4×0.4) = 0.625.",
+     "final_answer": "Kc = 0.625 (about 0.63)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Kc = z/((1−z)(0.25−z)) = 0.625. This rearranges to z^2 − 2.85z + 0.25 = 0, so z ≈ 0.091 M, which is less than 0.1 M. The product of the starting concentrations is 1×0.25 = 0.25, the same as 0.5×0.5. B is the limiting reactant and runs low, so less C forms even though the total starting concentration is larger.",
+     "final_answer": "0.625 = z/((1−z)(0.25−z)); z ≈ 0.091 M, which is less than 0.1 M",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The wording 'starting concentrations are larger overall' hints that z should be bigger. But the product [A]0[B]0 is the same (0.25) in both experiments, and with B limiting, z actually comes out smaller (about 0.091 M versus 0.1 M). The 'larger overall' reasoning is misleading, and a rubric based on it would give the wrong answer."
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "wrong_key"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Part C's key is wrong. With A0 = 1 M and B0 = 0.25 M, z ≈ 0.091 M, which is less than the first experiment's 0.1 M, yet the model answer and rubric claim a larger z from larger starting concentrations. The stem wording \"larger overall\" is misleading, and Part C is a justification that does not match the 5.F target.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Part C is a qualitative justification tagged 6.D/6.E, and its premise is flawed. Parts A and B fit 5.F."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part C key and rubric row C1 reward a false claim. The model answer contradicts its own z ≈ 0.091 M, which is below 0.1 M."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The phrase \"when the starting concentrations are larger overall\" is misleading because B starts lower than in the first experiment. \"Rigid container\" is unused."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Part C's common error (\"says Kc changes\") misses the real error, which is the false claim the rubric itself rewards."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Parts A and B are fine for the exam, but Part C is unsound."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Parts A and B are routine ICE-table and Kc calculations (basic level). Part C requires setting up the equilibrium expression in terms of z (a quadratic that is only written, not solved) and then judging how z compares with 0.1 M. That judgment needs either a Q vs K check at z = 0.1 (Q ≈ 0.74 > 0.625, so z < 0.1) or a limiting-reagent argument. This one extra reasoning step linking a result to a claim is an allowed lever. The arithmetic is short and clean, and the stimulus is brief. Part C's wording ('larger overall') is slightly loose and could be tightened, but it does not make the item hard for unfair reasons.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 270
+  }
+ }
+]

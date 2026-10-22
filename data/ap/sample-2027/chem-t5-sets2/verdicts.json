@@ -1,0 +1,993 @@
+[
+ {
+  "key": "ap_chemistry-m01-k0-q1",
+  "cellId": "ap_chemistry-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "A→B (-92) + reverse of C→B, i.e. B→C (-180) = -272 kJ/mol",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "-272 kJ"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Short, about 60 to 100 seconds, with no needless arithmetic.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, correct Hess's law item with a unique key and distinct sign-error distractors."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept Hess's Law item: reverse one reaction (flip sign) and add two enthalpy values (-92 + -180 = -272). Minimal reading, trivial arithmetic, one table read. Distractors map to sign-handling errors. Suitable for basic learning rather than full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m01-k0-q2",
+  "cellId": "ap_chemistry-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "A→C = (-92) + (-180) = -272 kJ/mol; times 0.25 mol = -68.0 kJ",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "-68.0 kJ"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Hess's law combination of two reactions plus mole scaling; fits 6.9 and 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A->C = -92 + (-180) = -272 kJ/mol; x0.25 = -68.0 kJ. Unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete and clear; 1:1 stoichiometry makes per-mole units unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct, realistic error (no reversal, sign flip, ignoring moles); explanation covers all three."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, light arithmetic, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. The key of -68.0 kJ is correct, and each distractor encodes a distinct misconception."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing Hess's Law, reversing one reaction (sign flip), summing the enthalpies, and scaling by 0.25 mol. The arithmetic is simple and the reading load is low. Distractors map to plausible errors (no reversal, no scaling, sign mistakes). Multi-step but within the unit scope, suitable as a standard mock-exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_chemistry-m01-k1-q1",
+  "cellId": "ap_chemistry-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "-397 kJ",
+     "brief_reasoning": "A→B (-285) plus reverse of C→B (-112) gives -397 kJ/mol.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Hess's law with reversal and addition; fits 6.9 and 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A→C = -285 + (-112) = -397; unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data is complete and clear; the stem states all species are gases."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors (+397, -285, -173) encode distinct misconceptions, and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, with minimal arithmetic; consistent with the calculator designation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, clean and in scope. It has distinct distractors and a typical time load, so it passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single Hess's law combination: reverse one reaction (flip sign) and add to the other. Two-number arithmetic, small table, no unit conversions or extra reasoning. Distractors target sign errors. Appropriate for introductory practice rather than full mock exam difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m01-k1-q2",
+  "cellId": "ap_chemistry-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Hess's law: A→C = -285 - 112 = -397 kJ/mol; ×0.5 = -198.5 ≈ -198 kJ",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "-198 kJ"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The half-integer result forced into a rounded option creates avoidable ambiguity. Otherwise the time and load are fine.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The chemistry is correct (A→C = -397 kJ/mol, so 0.5 mol gives -198.5 kJ). However, the key is rounded to -198 kJ from an exact -198.5, which is ambiguous with -199, and the distractor \"198 kJ\" carries the same magnitude value. No distractor targets the Hess reversal error. Fail on key precision and distractor quality."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard Hess's law routine: read the table, reverse the C→B reaction and flip its sign, add the two enthalpies to get -397 kJ/mol for A→C, then scale by 0.5 mol to get about -198 kJ. Distractors target a sign error, forgetting the mole scaling, and scaling in the wrong direction. Arithmetic is light and the wording is clear, so the difficulty comes from the concept and the multi-step reasoning, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_chemistry-m01-k2-q1",
+  "cellId": "ap_chemistry-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Hess's law: A→B (-393) plus reverse of C→B (-76) gives -469 kJ/mol.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "-469 kJ"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Hess's law with two reactions, one reversal; fits 6.9 / 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "-393 + (-76) = -469; unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete and unambiguous; states all gases at the same T and P."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct sign/reversal errors; each explained and consistent with its value."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, minimal arithmetic, appropriate load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean Hess's law item with distinct distractors; acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-step Hess's Law application: reverse the second reaction (flip its sign) and add it to the first, giving -393 - 76 = -469 kJ. The arithmetic is trivial and the reading load is minimal. Distractors target the common error of not reversing the reaction or flipping the wrong sign. This is a foundational skill check, not multi-step exam-level reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m01-k2-q2",
+  "cellId": "ap_chemistry-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "A→C = -393 + (-76) = -469 kJ/mol; ×2 = -938 kJ",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "-938 kJ"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Hess's law (reverse one reaction, add, scale by 2 mol) fits 6.9 and 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A→B -393 plus B→C -76 gives -469 kJ/mol, so -938 kJ for 2 mol. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and the wording is clear. The kJ/mol units per reaction are acceptable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct errors: dividing instead of multiplying, a sign flip, and ignoring the amount. The explanation addresses each wrong option. It lacks an explicit Hess derivation for the key, which is a minor weakness."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The reading and arithmetic load is low and typical of the AP exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and suitable. The distractors are reasonable, though none captures the Hess error of failing to reverse the second reaction. Pass."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept Hess's law item: reverse one reaction (sign flip), add the two enthalpies, and scale by 2 mol. The numbers are small integers, the table is trivial to read, and the distractors target common slips (not doubling, halving, sign error). It is straightforward for a topic-level check and below full-mock depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_chemistry-m02-k0-q1",
+  "cellId": "ap_chemistry-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Q=[Ag+][Cl-]=(3.0e-3)(8.0e-3)=2.4e-5",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "2.40 × 10⁻⁵"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Q for AgCl from concentrations is core 7.11, skill 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "2.40e-5 is the unique correct answer; distractors differ."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete with units and the no-solid assumption is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct error and the explanation covers all of them."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, low reading load, calculator allowed is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, correct, simple Q calculation with distinct distractors. Passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step item: read two concentrations from a table and multiply them to get Q = [Ag+][Cl-] = 2.4e-5. The relationship is cued by the stem, there is no Ksp comparison or precipitation claim, and the arithmetic is minimal. Distractors reflect a ratio and a squared-ion error. This tests basic recall and application of the ion-product expression.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m02-k0-q2",
+  "cellId": "ap_chemistry-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Q=(3.0e-3)(8.0e-3)=2.4e-5; Q/Ksp=2.4e-5/1.8e-10≈1.33e5",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "133000"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Q vs Ksp calculation fits 7.11 and 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Q/Ksp = 1.33e5 is correct and unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete; concentrations are post-mixing so no dilution step is needed. Options are written without scientific notation, which is awkward."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Distractors are artificial arithmetic slips (dividing a single concentration or the sum) rather than realistic chemistry misconceptions. They span many orders of magnitude, making the key easy to spot. The explanation covers each option."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Asking for Q/Ksp as a huge number in decimal form is unlike AP style. AP would ask whether a precipitate forms, or use scientific notation. Options like 0.00000750 and 61100000 are unwieldy."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the stimulus is complete. The distractors are artificial arithmetic slips and the decimal-notation options are not AP style, so the item fails on distractor quality and exam suitability."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: read two ion concentrations from a table, compute Q = [Ag+][Cl-] = 2.4e-5, then divide by Ksp to get about 1.33e5. Only one governing relationship, short calculator arithmetic with clean numbers, and minimal reading. The ratio step is a small extension beyond a plain Q vs Ksp comparison but not enough for exam_prep depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_chemistry-m02-k1-q1",
+  "cellId": "ap_chemistry-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Q=[Pb2+][SO4 2-]=(5.0e-5)(1.0e-3)=5.0e-8",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "5.00 × 10⁻⁸"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Short, light calculation load, suitable timing.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean, if simple. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step application of the ion product expression Q = [Pb2+][SO4 2-] for a 1:1 salt. The student reads two values from a table and multiplies them in scientific notation to get 5.0e-8. The distractors target common errors (adding the concentrations, taking a square root, mishandling exponents). It requires no Ksp comparison, no stoichiometric exponents, and no multi-step setup, so it is at the introductory level for topic 7.11.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m02-k1-q2",
+  "cellId": "ap_chemistry-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Q=[Pb2+][SO4 2-]=5.0e-5*1.0e-3=5.0e-8; Q/Ksp=5.0e-8/2.5e-8=2.00",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "2.00"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Short, simple arithmetic, and consistent with the calculator designation.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, correct, unambiguous Q/Ksp item with distinct distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: read two ion concentrations from a table, write Q for a 1:1 salt, multiply, and divide by Ksp. Arithmetic is clean (5.0e-8 / 2.5e-8 = 2.00). Only about three reasoning steps, with no stoichiometric exponents, dilution, or common-ion complications. Fits an introductory 7.11 practice item rather than a full-mock exam-level item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m02-k2-q1",
+  "cellId": "ap_chemistry-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Q=[Ag+][Br-]=(2.0e-4)(4.0e-4)=8.0e-8",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "8.00 × 10⁻⁸"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Computing the ion product Q for AgBr from a table of concentrations fits 7.11 and 5.F; the demand is simple but on target."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Q = (2.0e-4)(4.0e-4) = 8.00e-8; the key is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has both ion concentrations and the stem states the assumption. The option 'value' fields are internal scaled metadata, not student-facing."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct error (square root of the product, ratio, square of one concentration), and the explanation addresses every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60-100 seconds with minimal arithmetic and a calculator is allowed. It is on the easy side but typical for a computation item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, clear and in scope, with distinct distractors and a unique key. It is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item has one step. The student reads two concentrations from a small table and recognizes that Q = [Ag+][Br-] for AgBr, then multiplies 2.0e-4 by 4.0e-4 to get 8.0e-8. There is no Ksp comparison, no stoichiometric coefficients, no unit conversion and no dilution. The distractors map to plausible errors: the square root of the product, the ratio of concentrations, and an arithmetic slip. The arithmetic is trivial and the reading load is minimal. It stays in scope for 7.11 and skill 5.F.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_chemistry-m02-k2-q2",
+  "cellId": "ap_chemistry-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Q=[Ag+][Br-]=8.0e-8; Q/Ksp=8.0e-8/5.0e-13=1.6e5",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "160000"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Q vs Ksp calculation fits 7.11 and skill 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Q=8.0e-8, Q/Ksp=1.6e5; unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete; the stem states that concentrations are post-mixing and no solid has formed. The plain-integer option format is awkward and scientific notation would be better."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors (square root, sum/Ksp, single concentration/Ksp) are distinct, and each is explained in the rationale."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, calculator-friendly, typical load. Options written as long integers instead of scientific notation is a minor formatting issue."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, with a unique key and distinct distractors, and is suitable for 7.11. The only issue is that the options should be written in scientific notation."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept routine: read two ion concentrations from a table, write Q = [Ag+][Br-] for a 1:1 salt, multiply, and divide by Ksp in scientific notation (Q = 8.0e-8; Q/Ksp = 1.6e5). No stoichiometric exponents, no coupled equilibria, minimal reading. Distractors reflect common exponent or expression errors.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m03-k0-q1",
+  "cellId": "ap_chemistry-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "q = 150 g × 4.18 J/(g·°C) × 4.3 °C = 2696 J, about 2700 J",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "2700 J"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Calorimetry q=mcΔT with a table read; fits 6.4/5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "150*4.18*4.3=2696 J, which rounds to 2700 J. Unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete. The metal's specific heat is not needed because the question asks only for the heat gained by the water."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions: metal's ΔT, missing mass, final temperature used as ΔT. All wrong options are explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, calculator allowed, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean, with a unique key, distinct distractors and a suitable load. Accept."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step application of q = mcΔT. The student reads the water's mass and temperatures from the table, computes ΔT = 4.3 °C, and multiplies (150 × 4.18 × 4.3 ≈ 2700 J). The only trap is picking the water's values rather than the metal's. No unit conversion, no multi-step linking, and the arithmetic is short.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m03-k0-q2",
+  "cellId": "ap_chemistry-m03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "q_water=150*4.18*4.3=2696 J; c=2696/(100*69.7)=0.387 J/g°C",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "0.387 J/(g °C)"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Calorimetry calculation fits 6.4 and 5.F."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Key 0.387 is correct only if c_water = 4.18 J/(g °C) is assumed, and that value is not given anywhere."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The table lacks the specific heat of water, which is required. The stem repeats the no-heat-loss assumption redundantly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained, and the numbers check out."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Time and calculator load are typical of the exam."
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item is chemically sound and the arithmetic is correct. However, it never gives the specific heat of water (4.18 J/(g °C)), which the solution requires, so a needed condition is missing. The item should state that value in the stem or table."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard coffee-cup calorimetry: the student must choose q_metal = -q_water, compute two temperature changes (4.3 and 69.7 °C), calculate q for water, and solve for c of the metal. Water's specific heat (4.18) must be recalled, which is standard AP content. The calculation is 3-4 steps with modest arithmetic, and the answer is 0.387 J/(g °C). The distractors reflect plausible errors such as a wrong ΔT or using water's c. This is typical AP exam difficulty and not basic recall.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_chemistry-m03-k1-q1",
+  "cellId": "ap_chemistry-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "q = m c ΔT = 150 g × 4.18 J/(g°C) × (22.4−21) = 877.8 ≈ 878 J",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "878 J"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Calorimetry q=mcΔT calculation fits 6.4 / 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "878 J is unique and correct; distractors are clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete; assumptions stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct misconception and is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, calculator-appropriate, typical load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean single-step calorimetry item with distinct distractors; acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step application of q = mcΔT to the water using table values. The only extra work is computing ΔT = 1.4 °C and ignoring the metal data. Distractors map to common errors (wrong mass, wrong ΔT, omitted mass). Arithmetic is short and there are no unit conversions or claim-linking steps.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m03-k1-q2",
+  "cellId": "ap_chemistry-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The water gains q = 150 × 4.184 × 1.4 = 878.6 J. The metal loses the same heat, so c = 878.6 / (50 × 72.6) = 0.242 J/(g °C).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "0.242 J/(g °C)"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.4 calorimetry, a 5.F calculation of specific heat from the table."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key 0.242 is correct and unique. Each distractor value matches its stated error."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete. c of water is not stated, but it is standard knowledge and on the AP reference. The 'no heat lost' assumption is repeated in the stem, which is a minor redundancy."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct, realistic errors, and each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Appropriate load for about 100 seconds, with a calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A correct, standard calorimetry item with a unique key and sound distractors. Stating c of water in the stem would be a small improvement, but it does not block acceptance."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard calorimetry calculation: read the table, compute two temperature changes, apply q = mcΔT to the water, set q_metal = -q_water, and solve for the metal's specific heat. It takes a few steps, but the concept is core. The arithmetic is short, and the 4.18 J/(g °C) value for water is on the AP reference sheet. The wording is clear, with stated assumptions. The distractors correspond to plausible errors (using the wrong ΔT, inverting the ratio).",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_chemistry-m03-k2-q1",
+  "cellId": "ap_chemistry-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "q = m c ΔT = 100 g × 4.18 J/(g·°C) × (31.4 − 24) °C = 3093 J ≈ 3090 J",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "3090 J"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.4 calorimetry, skill 5.F: calculate q = mcΔT from table values."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "q = 100 × 4.18 × 7.4 = 3093 J ≈ 3090 J. Unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete; assumptions stated; wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor matches a distinct, verified misconception: metal ΔT, metal mass, final temperature. The explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Single-step calculation, about 100 s, with a calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key (3090 J) is unique and correct, the stimulus is complete, and the three distractors encode distinct misconceptions that I verified numerically. Scope and skill fit topic 6.4 and skill 5.F."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-relationship item: read water mass and temperatures from the table, compute ΔT = 7.4 °C, and apply q = mcΔT. The distractors reflect common errors (wrong mass or wrong ΔT). There is no unit conversion and no extra reasoning step linking the result to a claim, and the arithmetic is short and clean. This is a direct application of the formula.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m03-k2-q2",
+  "cellId": "ap_chemistry-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "q_water=100(4.184)(7.4)=3096 J; c=3096/(50×68.6)=0.902 J/(g°C)",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "0.902 J/(g °C)"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.4 calorimetry, calculating an unknown specific heat. Fits skill 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key 0.902 is the only option near the computed value of about 0.903. The rationale's 3090 J is slightly rounded (the true value is 3096 J), which is a minor inconsistency."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete. The specific heat of water is standard reference knowledge. The assumption is stated, redundantly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct, named error and the explanation covers all three."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical time and load, and a calculator is allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A sound, standard calorimetry item. The key is correct and the distractors are distinct. The only flaw is a minor rounding of q in the rationale (3090 J versus the exact 3096 J), which does not affect the key."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard two-body calorimetry: choose q_metal = -q_water, compute water heat (100 x 4.18 x 7.4), compute metal delta T (68.6), solve for c = 0.902. Requires reading a table, selecting the governing relationship, and recalling c of water. Arithmetic is short, wording is clear, and the distractors reflect real errors (mass swap, factor of 2). This is a typical full-mock calculation item, not purely introductory and not advanced.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ }
+]

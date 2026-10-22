@@ -1,0 +1,41 @@
+{
+ "runs": [
+  "chem-t5-frq2"
+ ],
+ "rows": 22,
+ "passed": 7,
+ "rejected": 15,
+ "passRate": 0.318,
+ "singles": {
+  "candidates": 22
+ },
+ "unitsPassed": {
+  "1": 4,
+  "5": 1,
+  "9": 2
+ },
+ "figPassed": {
+  "none": 7
+ },
+ "figAll": {
+  "none": 22
+ },
+ "figPassRate": {
+  "none": "7/22"
+ },
+ "renderTypesPassed": {
+  "text": 6,
+  "ap_table": 1
+ },
+ "archetypesPassed": {
+  "chf_long_electrolysis": 1,
+  "chf_short_ionization_energy": 1,
+  "chf_long_nernst_cell": 1,
+  "chf_long_mechanism_halflife": 1,
+  "chf_short_configuration_ions": 2,
+  "chf_short_empirical_formula": 1
+ },
+ "costUsd": {
+  "chem-t5-frq2": 0.9364
+ }
+}

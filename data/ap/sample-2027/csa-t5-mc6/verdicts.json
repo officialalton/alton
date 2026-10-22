@@ -1,0 +1,226 @@
+[
+ {
+  "key": "ap_computer_science_a-m01-k0",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "With i<=j: the sum is 7 for (1,6),(2,5),(3,4), and the product is 8 for (2,4). That makes 4 pairs.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "4"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Trace of about 21 iterations with few matches, which is reasonable for the time.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key 4 is correct and unique, and the distractors are distinct and realistic. The one weakness is that the topic label 2.12 is loose, but the item is acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Nested loop with inner bound dependent on i and a compound OR condition. Student must enumerate qualifying pairs (1,6), (2,5), (2,4), (3,4) and avoid counting symmetric pairs (which would give 8). Typical AP-style tracing item, with pruning making it manageable without a long mechanical trace. All scope-appropriate content, no unfair difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m01-k1",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "j>=i pairs summing to 6: (1,5),(2,4),(3,3); product 7 impossible within 1..6. Count=3.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "3"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The trace is short, about 21 iterations with simple conditions. No calculator is needed.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, with a unique key of 3 and well-motivated distractors. It is a reasonable nested-loop trace; the only weakness is a loose fit to the 2.12 label."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Nested loop with a dependent inner bound (j starts at i) and a compound condition. The solver must enumerate the pairs with i<=j and i+j==6: (1,5), (2,4), (3,3). The i*j==7 clause is a near-miss trap, since (1,7) is out of range because j<=6. The (3,3) pair is easy to double count or miss. The answer is 3. The trace is short, the arithmetic is trivial, and the reading load is low. The item fits nested iteration better than the 2.12 run-time comparison label, but it is a fair skill 3.A trace.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m02-k0",
+  "cellId": "ap_computer_science_a-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Running sums are 2, 8, 13. When sum hits 13 (>12), found is set to true and i is incremented to 3, then the loop stops.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "3 13"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Labeled topic 2.11 Nested Iteration, but the code is a single while loop with no nested loops. Skill 3.A tracing fits, but the topic does not (belongs to 2.7/2.9)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Trace gives 3 13; unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code is complete, compilable, and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors map to plausible misconceptions (full scan, index off-by-one, stop before add); each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short trace, about 95 seconds, no calculator load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well formed (key 3 13), but it is tagged 2.11 Nested Iteration while containing no nested iteration, so it fails the scope/topic fit criterion."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single while loop with a compound condition and a flag, traced for 3 iterations with small integer sums. The only subtlety is that i++ runs after found is set (distractor 2 13). The item does not involve nested iteration, so it does not match the stated topic 2.11, though the skill (tracing statement execution order) is the right one. Reading and computation load are low.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m02-k1",
+  "cellId": "ap_computer_science_a-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "sum 5,6,15; found after third element, i incremented to 3. Prints 3 15.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "3 15"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Tagged 2.11 Nested Iteration but the code has a single while loop with a flag and no nested loops; the dominant topic is 2.7 while loops. Skill 3.A fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Trace gives 3 15; the key is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The code is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The `3 6` rationale is incoherent: it does not correspond to a real misconception about stopping before the add. The key explanation is tautological."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The time and load are appropriate, with no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the item does not assess topic 2.11 Nested Iteration because the code has no nested loops. One distractor rationale is also weak. Fail on scope mismatch."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single while loop with a compound condition and a flag; only 3 iterations to trace. Correct output is \"3 15\" (i is incremented after found is set). Distractors target the off-by-one on i and the sum value. Concept depth is shallow and the computation is trivial. Note: the item contains no nested iteration, so it does not match the stated topic 2.11; it fits 2.7 (while loops) instead.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ }
+]

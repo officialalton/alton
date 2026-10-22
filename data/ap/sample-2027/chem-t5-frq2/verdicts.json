@@ -1,0 +1,1497 @@
+[
+ {
+  "key": "ap_chemistry-f01-k0",
+  "cellId": "ap_chemistry-f01",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:A:numeric"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "n(MnO4-) = 0.02160 L × 0.0300 M = 6.48×10^-4 mol. The mole ratio is 5 Fe2+ : 1 MnO4-, so n(Fe2+) = 5 × 6.48×10^-4 = 3.24×10^-3 mol.",
+     "final_answer": "6.48×10^-4 mol MnO4-; 3.24×10^-3 mol Fe2+",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Total Fe = 3.24×10^-3 × (100.00/25.00) = 1.296×10^-2 mol. Mass = 1.296×10^-2 × 55.85 g/mol = 0.724 g. Percent = 0.724 g / 1.000 g = 72.4%.",
+     "final_answer": "72.4% Fe",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "MnO4- is deep purple and Mn2+ is nearly colorless. Before the endpoint, each drop of MnO4- reacts and the purple fades. Once all the Fe2+ is used up, one extra drop of MnO4- stays unreacted, so the solution turns a pale pink/purple that lasts. KMnO4 acts as its own indicator.",
+     "final_answer": "The endpoint is the first lasting pale pink color from excess MnO4- (KMnO4 is self-indicating).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The bubble took up volume in the buret tip. When it leaves, the buret reading goes down without that liquid entering the flask. So the recorded volume is larger than the volume actually delivered. Too many moles of MnO4- are calculated, which gives too many moles of Fe and a mass percent that is too high.",
+     "final_answer": "Too high",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Mn goes from +7 in MnO4- to +2 in Mn2+, so it gains electrons and is reduced. The species that is reduced is the oxidizing agent. Fe goes from +2 to +3, so it is oxidized.",
+     "final_answer": "MnO4- (permanganate) is the oxidizing agent",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound 10-point long FRQ on a permanganate titration. The calculations, endpoint reasoning, buret-bubble error direction and oxidizing-agent identification are each unambiguous and match their own tagged skills. Rubric rows are 1 point each with sensible dependencies. The load is typical, within about 23 minutes for 10 points, and uses a calculator appropriately.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The dominant demand is titration stoichiometry (4.6, with 4.5 and 4.4), and the parts match their own tagged skills. Part E on oxidation numbers (4.9) is a light addition within Unit 4 and is acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are unique and consistent. Part A gives 6.480e-4 mol MnO4- and 3.240e-3 mol Fe2+. Part B gives 72.4%. Part D is correct: a bubble that leaves the tip makes the recorded volume too large, so the mass percent is too high. The rubric rows are consistent with the model answers."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete: sample mass, dilution volume, aliquot, concentration, balanced equation and endpoint volume are all given. The empty data object is fine for a text stimulus. The molar mass of Fe is not stated but is standard periodic-table data."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no distractors. The rubric rows list common errors, such as skipping the mL-to-L conversion, using a 1:1 ratio, and dividing by the aliquot mass."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of an AP long FRQ: modest arithmetic and short written justifications. A calculator is allowed, which is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ-style titration. It combines a mole-ratio calculation from a balanced equation, a dilution/aliquot scale-up, and mass percent. It also needs three short conceptual justifications: the self-indicating MnO4- endpoint, the direction of a buret bubble error, and the oxidizing agent from oxidation numbers. Each step is moderate and the arithmetic is short and clean. The wording is clear and everything is in Unit 4 scope. Difficulty comes from linking several routine steps and claims, not from heavy computation or reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_chemistry-f01-k1",
+  "cellId": "ap_chemistry-f01",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:A:numeric"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "n(MnO4-) = 0.0200 M × 0.02420 L = 4.84×10^-4 mol. The mole ratio is 1:5, so n(Fe2+) = 5 × 4.84×10^-4 = 2.42×10^-3 mol.",
+     "final_answer": "4.84×10^-4 mol MnO4-; 2.42×10^-3 mol Fe2+",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "The 25.00 mL portion is 1/4 of the 100.00 mL solution, so total Fe = 4 × 2.42×10^-3 = 9.68×10^-3 mol. Mass = 9.68×10^-3 × 55.85 = 0.541 g. Percent = 0.541/0.800 × 100.",
+     "final_answer": "67.6% Fe",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "MnO4- acts as its own indicator. It is deep purple, while Mn2+ is nearly colorless. Before the endpoint, added MnO4- is used up right away and the color disappears. Just past the equivalence point, a small excess of MnO4- leaves a faint pink/purple color that stays. That lasting pale pink is the endpoint.",
+     "final_answer": "The endpoint is the first faint pink color from excess MnO4- that persists.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "When the bubble leaves the tip, part of the volume change read on the buret is the bubble, not solution delivered. The recorded volume of KMnO4 is therefore larger than the true volume. This makes the calculated moles of MnO4-, and so of Fe, too large.",
+     "final_answer": "Too high",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "In MnO4-, Mn has oxidation number +7. It becomes +2 in Mn2+, so Mn gains electrons and is reduced. Meanwhile Fe goes from +2 to +3 and is oxidized. The species that is reduced is the oxidizing agent.",
+     "final_answer": "MnO4- (permanganate) is the oxidizing agent",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard permanganate titration long FRQ with five 2-point parts. Each part is in Unit 4 scope and matches its own skill. Keys are unique, the stimulus is complete, and the common-error notes are realistic. The load is typical of a 10-point question.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A and B cover 4.6 and 4.5 stoichiometry. Part C covers endpoint detection. Part D covers buret error direction. Part E covers oxidation numbers (4.9, in Unit 4)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are unique and agree with the independent solver. The molar mass of iron comes from the periodic table, and the tolerance is adequate."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives the mass, volumes, concentration and balanced equation. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The rubric rows list realistic common errors, such as a 1:1 ratio, a missing mL-to-L conversion and using the aliquot instead of the whole sample."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of a 10-point long question, with light arithmetic and a calculator allowed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part titration item with a standard AP structure: mole ratio stoichiometry with mL to L conversion, aliquot scaling (25 mL of 100 mL) to mass percent, a self-indicating endpoint explanation, a buret error direction argument, and oxidizing agent identification via oxidation numbers. Each part needs 2-3 steps with modest arithmetic and a clear, unambiguous setup. It is within the Unit 4 scope (4.5, 4.6, 4.9) and uses only allowed difficulty levers, so it fits full-mock exam prep rather than basic learning or advanced supplement.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_chemistry-f02-k0",
+  "cellId": "ap_chemistry-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Q=It=2.00 A×3600 s; n=Q/F",
+     "final_answer": "7200 C (7.20×10^3 C); 0.0746 mol e⁻",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Cu2+ + 2e- → Cu; 0.07462/2=0.03731 mol ×63.55 g/mol",
+     "final_answer": "2.37 g Cu",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "n O2 = 0.07462/4 = 0.01866 mol; V=nRT/P=0.01866(0.08206)(298)/1.00",
+     "final_answer": "0.456 L O2",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Cu2+ gains electrons (reduction) to form Cu; reduction occurs at the cathode (negative electrode in electrolytic cell)",
+     "final_answer": "Cathode (negative electrode), because Cu2+ is reduced there",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Same mass requires same moles e- and thus same charge Q=It; doubling I halves t",
+     "final_answer": "30 minutes",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard, correct 10-point electrolysis FRQ. Keys are verified and the rubric rows are consistent. The stem is complete, with a minor omission of an explicit 100% efficiency statement. The task load is appropriate and the scope is correct.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A-C target 9.11 and 5.F; D and E are related and fit their own tagged skills."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique answers, consistent rubric rows with dependencies."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text-only stimulus is complete. Efficiency is not stated but is the standard assumption."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to FRQ; common errors are listed per row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The calculator is allowed, there is no heavy arithmetic, and the load is typical of a long FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part electrolysis item. It requires choosing Q=It, converting minutes to seconds, using mole ratios (2 e- per Cu, 4 e- per O2), applying PV=nRT, identifying the cathode from reduction, and a proportional prediction (double the current gives half the time). The arithmetic is short and the wording is unambiguous. Every lever is in scope and the difficulty is at typical AP FRQ level, not basic single-step and not advanced.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_chemistry-f02-k1",
+  "cellId": "ap_chemistry-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Q = It = 2.00 A × 2700 s = 5400 C; moles of e⁻ = 5400/96485",
+     "final_answer": "5.40×10^3 C; 0.0560 mol e⁻",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Cu2+ + 2e⁻ → Cu, so mol Cu = 0.05597/2 = 0.02798 mol; × 63.55 g/mol",
+     "final_answer": "1.78 g Cu",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "mol O2 = 0.05597/4 = 0.01399 mol; V = nRT/P = 0.01399 × 0.08206 × 298 / 1.00",
+     "final_answer": "0.342 L O₂",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Cu2+ gains electrons (reduction), and reduction happens at the cathode, the electrode connected to the negative terminal of the power source.",
+     "final_answer": "Cathode (negative electrode), because Cu²⁺ + 2e⁻ → Cu is a reduction",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "The same mass of Cu needs the same charge (same moles of e⁻). Since Q = It, doubling I halves t.",
+     "final_answer": "22.5 minutes (half the original time)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The electrolysis bundle is correct and in scope. The solver's answers match the key for all five parts, and the rubric rows are consistent. Minor notes: the stem does not state 100% efficiency, and the rubric wording is slightly rigid in parts D and E.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part electrolysis FRQ: q=It with min-to-s conversion, mole ratios (2 e- per Cu, 4 e- per O2), ideal gas law for O2 volume, conceptual cathode identification, and a proportional-reasoning prediction for doubled current. Each step is routine and in Unit 9 scope; the demand comes from chaining steps and switching between computation and justification, not from long arithmetic or ambiguity.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 7,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_chemistry-f03-k0",
+  "cellId": "ap_chemistry-f03",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:C:numeric"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Experiments 1 and 2: [A] doubles while [B] stays the same, and the rate goes up 4 times (2^2), so the reaction is second order in A. Experiments 1 and 3: [B] doubles while [A] stays the same, and the rate doubles, so it is first order in B. Experiment 4 agrees (rate up 8 times).",
+     "final_answer": "Second order in A; first order in B",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "k = 4.0e-5 / ((0.1)^2 × 0.1) = 0.040",
+     "final_answer": "rate = k[A]^2[B]; k = 4.0×10^-2 M^-2 s^-1",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "rate = 0.040 × (0.3)^2 × 0.15",
+     "final_answer": "5.4×10^-4 M/s",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Kinetic molecular theory",
+     "final_answer": "At a higher temperature the molecules have more kinetic energy. They collide more often, and a larger fraction of collisions have energy at or above the activation energy. More collisions with the right orientation succeed, so k increases.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "A single elementary step A + B would give rate = k[A][B], which is first order in A. The data show second order in A.",
+     "final_answer": "No. A single step A + B → products predicts rate = k[A][B], but the measured rate law is k[A]^2[B], so the proposal does not match.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The initial-rates bundle is consistent. The orders are 2 in A and 1 in B, k = 0.04 M^-2 s^-1, and the predicted rate is 5.4e-4 M/s. Parts span 5.2, 5.3 and 5.5 content with 10 points total, and the independent solver agrees. Rubric rows are mostly one point each, and the keyword-based rows in parts D and E are slightly weak but acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part fits its own tagged skill. Parts B and C are 5.F calculations. Parts D and E are within the allowed related topics."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are unique and verified. Row dependencies are sensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, and the description states one temperature."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no distractors. Common errors are listed per row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical, calculator use is allowed, and the arithmetic is light."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style multi-part initial-rates FRQ. Requires a table read, proportional reasoning for orders, k with units, a prediction from the rate law, a collision-model explanation, and a link between the rate law and the elementary-step claim. Numbers are clean, scope is within Unit 5 (5.2, 5.5, 5.4/5.7), and there is no Arrhenius calculation or calculus. Difficulty comes from legitimate conceptual levers only.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_chemistry-f03-k1",
+  "cellId": "ap_chemistry-f03",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:C:numeric"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Experiments 1 and 2: [A] doubles while [B] stays the same, and the rate goes up 4 times (2^2), so the reaction is second order in A. Experiments 1 and 3: [B] doubles while [A] stays the same, and the rate doubles, so it is first order in B. Experiment 4 agrees: 2^2 × 2 = 8 times the rate of experiment 1.",
+     "final_answer": "Second order in A; first order in B",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Using experiment 1: k = 3.5e-3 / (0.1^2 × 0.1) = 3.5",
+     "final_answer": "rate = k[A]^2[B]; k = 3.5 M^-2 s^-1",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "rate = 3.5 × (0.05)^2 × 0.4 = 3.5e-3 M/s",
+     "final_answer": "3.5×10^-3 M/s",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "At a higher temperature the molecules have a higher average kinetic energy. So a larger fraction of collisions have energy at least equal to the activation energy, and collisions also happen more often. This means more collisions per unit time are successful, so k increases.",
+     "final_answer": "More collisions have energy ≥ Ea (and collisions are more frequent), so more of them succeed and k increases",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "A single elementary step A + B would give rate = k[A][B], which is first order in A. The experiments show second order in A, so the proposal does not match.",
+     "final_answer": "Not consistent: the step predicts rate = k[A][B], but the observed rate law is k[A]^2[B]",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a standard initial-rates FRQ with a consistent table, a unique key and scope within Unit 5. Minor issues are narrow phrase-matching in some rubric rows and an empty unit field for k in expected_values.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part fits its own tagged skill within Unit 5 (5.2, 5.3, 5.5); no Arrhenius calculation or later-unit content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is verified: orders 2 and 1, k = 3.5 M⁻² s⁻¹, predicted rate 3.5e-3 M/s. Row B2 is flagged as a units row while the expected_values unit field is empty (minor metadata inconsistency)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and clear. The same-temperature condition is stated only as \"at one temperature\"."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to free response; the listed common errors are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load fits a 10-point long question, with light arithmetic and a calculator allowed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ-style initial-rates item. It requires reading a table to find orders by proportional comparison, writing the rate law and computing k with units, a direct substitution to predict a rate, a collision-model explanation of the temperature effect, and a check of a one-step mechanism against the rate law. Arithmetic is clean and short, reading load is low, and nothing is out of scope or ambiguous. The depth and number of linked steps suit full mock exams rather than basic learning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_chemistry-f04-k0",
+  "cellId": "ap_chemistry-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Big jump from IE1 (496) to IE2 (4562), about 9 times larger, so the second electron comes from the inner core shell. That means 1 valence electron.",
+     "final_answer": "1 valence electron; the large jump between IE1 and IE2 shows the 2nd electron is removed from a core n=2 shell",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "4562/496",
+     "final_answer": "≈9.20",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Same period means the same shell and similar shielding. A larger nuclear charge gives a stronger Coulombic attraction (F ∝ q1q2/r²) and a smaller radius.",
+     "final_answer": "Greater: the higher effective nuclear charge at a similar or smaller distance means a stronger attraction to the valence electron, so more energy is needed to remove it",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound short FRQ (4 points, split 2/1/1): the valence electron count read from the IE jump, the ratio 9.2, and a Coulomb's law prediction. Na is the first element of period 3, so any later element in the period has a greater IE1 and the part C key is unique. The model answer's \"in general\" hedge is slightly loose but acceptable. Rubric rows are consistent with the model answers.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 1.7/1.6 in scope; the parts use their own tagged skills, which is acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are verified. Part C is valid because the element is Na, the first in its period."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete with units and labels; the atomic number is given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Common errors are listed for each rubric row and are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short load, a simple calculation, and a calculator is allowed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style multi-part item. Part A needs a table read and identification of the large IE jump to infer 1 valence electron, with a justification. Part B is a single simple division (4562/496, about 9.2). Part C needs a qualitative Coulomb's law argument (greater nuclear charge, similar shielding within a period, higher IE1). Concept depth is moderate, there are few steps, the reading load is light, and everything is in Unit 1 scope. The item is above pure recall but below advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_chemistry-f04-k1",
+  "cellId": "ap_chemistry-f04",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:C:flagged",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "instant_reject_multiple_correct",
+   "instant_reject_missing_condition"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "There are 2 valence electrons. IE1 (738) and IE2 (1,451) are fairly close. IE3 (7,733) is about 5.3 times IE2. This big jump shows the third electron comes from a filled inner (n=2) shell that sits closer to the nucleus and is less shielded. So only 2 electrons are in the valence shell, which fits Mg.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "2 valence electrons; the large jump between IE2 and IE3 shows the third electron comes from an inner core shell"
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "7733 / 1451 = 5.33",
+     "ambiguous_or_flawed": false,
+     "final_answer": "≈5.33"
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The expected answer is 'greater'. Electrons added across the same period go into the same shell, so they are about the same distance from the nucleus and shielding barely changes. With a larger nuclear charge, Coulomb's law (F ∝ q1q2/r²) gives a stronger attraction on the outer electron, so IE1 is higher. However, aluminum (Z=13) is in the same period, has a larger nuclear charge, and has a lower IE1 (577 kJ/mol). Its outer electron is in the 3p subshell, which is higher in energy and better shielded.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "Not every period-3 element with a larger nuclear charge has a higher IE1 than Mg. Al (577 kJ/mol) is lower than Mg (738 kJ/mol), so the answer depends on which element is meant. The prompt does not say.",
+     "final_answer": "Greater (for most later period-3 elements). Al is an exception."
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "multiple_correct",
+    "missing_condition"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Parts A and B are fine. Part C is flawed: for Mg, a same-period element with larger nuclear charge (Al) has a lower IE1, so 'greater' is not uniquely correct and the prompt lacks the condition needed to make it so. Reject unless C is rewritten, for example by naming a specific element or stating an explicit condition such as the same subshell.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A and B are in scope for 1.7/1.6 reasoning with a table. Part C is also in scope for topic, but see the key issue."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part C is not uniquely keyed. For Mg, the next same-period element Al has a larger nuclear charge but a lower IE1 (577 vs 738 kJ/mol), because of the 3p subshell. The rubric accepts only 'greater', and the model answer itself hedges with 'in general'."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Table data is complete. However, part C's wording 'a second element in the same period has a larger nuclear charge' is ambiguous and does not specify which element or restrict the comparison, so the prediction is not well defined."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to the FRQ format; the common-error notes in the rubric are adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light and typical for a 4-point short FRQ; the calculation is trivial."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard successive-IE item. Part A reads the large jump between IE2 and IE3 to infer 2 valence electrons. Part B is a single division (about 5.33). Part C applies Coulomb's law qualitatively to the periodic trend in IE1. Concepts are core Unit 1 content, with few steps, no heavy computation, and little reading. Minor caveat: the Mg/Al IE1 exception could confuse some learners, since 'same period, larger nuclear charge' is not tied to a specific element.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_chemistry-f05-k0",
+  "cellId": "ap_chemistry-f05",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:B:numeric"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Silver ions combine with chloride ions to form solid AgCl.",
+     "final_answer": "Ag+(aq) + Cl-(aq) → AgCl(s)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Moles of AgCl = 1.250 g / 143.32 g/mol. The mole ratio of Cl to AgCl is 1:1, so mass of Cl = moles × 35.45 g/mol.",
+     "final_answer": "8.72×10^-3 mol AgCl; 0.309 g Cl",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Mass percent Cl = 0.3092 g / 0.600 g × 100.",
+     "final_answer": "51.5% Cl",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Water left in the precipitate makes its measured mass too high. That gives too many calculated moles of AgCl, so the calculated mass of Cl is also too high.",
+     "final_answer": "The calculated percent Cl will be too high, because the leftover water is counted as AgCl and inflates the precipitate mass.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "With too little AgNO3, AgNO3 is the limiting reactant, so not all the chloride precipitates. Less AgCl forms, so the calculated percent comes out too low.",
+     "final_answer": "The calculated percent will be too low. With too little Ag+, not all the Cl- precipitates, so the AgCl mass underrepresents the chloride in the sample.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, complete gravimetric chloride analysis long FRQ (10 points). Keys are unique and consistent with the rubric, the stimulus is complete, and the load is typical of an AP long question.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part fits its own tagged skill. Dominant demand is topic 4.5 stoichiometry, with 4.2 and error analysis as related topics."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are correct and unique. Rubric rows are consistent and the dependencies are sensible. In part E, a student who says AgNO3 is limiting would likely still earn the justification row."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives the sample mass, precipitate mass, and molar masses. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response bundle, so there are no distractors. Common errors are listed per rubric row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The arithmetic is calculator-friendly and the 10-point grain is typical of an AP long question."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part gravimetric analysis: write net ionic equation, use 1:1 mole ratio from AgCl to Cl-, compute mass of Cl and mass percent, then two qualitative error-analysis claims (wet precipitate inflates mass; insufficient Ag+ lowers precipitate mass). Arithmetic is short and clean with given molar masses. Concept depth is moderate and typical of AP free-response; wording is unambiguous and no out-of-scope knowledge is needed.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_chemistry-f05-k1",
+  "cellId": "ap_chemistry-f05",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:B:numeric",
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "final_answer": "Ag+(aq) + Cl-(aq) → AgCl(s)",
+     "brief_reasoning": "Only the ions that form the precipitate are included; the spectator ions (nitrate and the salt's cation) are left out.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "final_answer": "n(AgCl) = 8.722×10^-3 mol; mass of Cl = 0.309 g",
+     "brief_reasoning": "Moles AgCl = 1.250 g / 143.32 g/mol. AgCl and Cl react 1:1, so mass Cl = 8.722×10^-3 mol × 35.45 g/mol = 0.3092 g.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "final_answer": "41.2% Cl",
+     "brief_reasoning": "Mass percent = 0.3092 g / 0.750 g × 100 = 41.2%.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "final_answer": "The calculated percent will be too high.",
+     "brief_reasoning": "Leftover water makes the measured precipitate mass too large. That gives too many calculated moles of AgCl, so the calculated chloride mass and percent are both too high.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "final_answer": "The calculated percent will be too low.",
+     "brief_reasoning": "With too little AgNO3, some Cl- stays dissolved instead of precipitating. Less AgCl forms, so the calculated moles and mass of Cl are too small and the percent comes out lower than the true value.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Chemistry and numbers are correct, but part E's prompt does not ask for a direction while the rubric awards E1 for \"too low\". The prompt should ask students to predict the effect and explain, to match the rubric.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits topic 4.5 with related topics 3.7 and 1.4. Each part is tagged with its own skill. Part A (net ionic equation) is topic 4.2, which is in Unit 4 scope."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part E's prompt says only \"Explain why the calculated mass percent would be incorrect\". Row E1 awards a point for stating \"too low\", which the prompt does not require. Students could lose the point despite a valid explanation. Parts A-D keys are correct and consistent with the rubric rows."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete, and the empty data object is acceptable for a text stimulus. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to a free-response item. The rubric's common-error notes are adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A 10-point long question of about 23 minutes with moderate reading and calculator load. This is typical for the AP exam."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part gravimetric analysis FRQ. Requires a net ionic equation, a mass-to-mole-to-mass chain (1.250 g / 143.32 = 0.00872 mol AgCl; x 35.45 = 0.309 g Cl), mass percent (about 41.2%), and two qualitative error-analysis items (wet precipitate gives high %Cl; insufficient Ag+ gives low %Cl). Concepts are in scope (4.5, 3.7, 1.4). Arithmetic is short with given rounded values, and wording is unambiguous. Difficulty comes from chaining steps and reasoning about experimental error, not from heavy computation or reading, which fits a full-mock level item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_chemistry-f06-k0",
+  "cellId": "ap_chemistry-f06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "E°cell = E°cathode − E°anode = 0.34 − (−0.44) = +0.78 V. Fe is oxidized, so Fe is the anode.",
+     "final_answer": "E°cell = +0.78 V; anode = Fe electrode",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "ΔG° = −nFE° = −(2)(96485)(0.78) = −1.51×10^5 J",
+     "final_answer": "ΔG° ≈ −151 kJ/mol rxn",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "E = 0.78 − (0.0592/2)log10 = 0.78 − 0.0296",
+     "final_answer": "E ≈ 0.75 V",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Oxidation happens at Fe, so electrons leave Fe and reach Cu through the wire. Anions in the salt bridge move toward the anode to balance the Fe²⁺ being produced there.",
+     "final_answer": "Electrons move from the Fe anode to the Cu cathode through the external wire. Anions in the salt bridge move toward the Fe/Fe²⁺ (anode) compartment.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Q = [Fe²⁺]/[Cu²⁺]. Lowering [Cu²⁺] makes Q larger, so log Q increases and E decreases. This means the forward reaction has a smaller driving force.",
+     "final_answer": "The cell potential decreases because Q increases.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound 10-point long FRQ on cell potential, ΔG° from E°, Nernst, ion and electron flow, and a concentration change. Keys are unique and consistent with the rubric. Q = 10 is stated, so part C is well defined. The Cu²⁺ decrease in E correctly raises Q. Two 1-point parts with explicit conditions fit the format. Load is moderate and calculator use is appropriate.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A-C target 5.F and 9.9/9.10 content. D and E use their own tagged skills (5.B/6.E and 2.B/6.E), which is acceptable. All content is within Unit 9."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All answers are unique and verified. The rubric rows are consistent with the model answers and the dependencies are sensible. Minor: E2 requires the phrase \"Nernst equation\", which is slightly rigid, but it is acceptable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives the potentials, F and the Nernst form. The empty data object is fine for a text-only stimulus. Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not an MC item. The rubric lists common errors (adding potentials, n = 1, natural log, the wrong anion direction)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Load is typical for a long FRQ, with simple arithmetic and no excess reading."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Five short, independent parts covering standard Unit 9 routines: E°cell and anode identification, ΔG° = -nFE° with a J-to-kJ conversion, one Nernst calculation with a given equation and Q, salt bridge/electron flow, and a qualitative Q-shift prediction. Each part needs one to three steps, the numbers are clean, and the reading load is light. This is typical full-mock FRQ difficulty: more than introductory recall, but no deep multi-concept synthesis.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_chemistry-f06-k1",
+  "cellId": "ap_chemistry-f06",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "E°cell = 0.34 − (−0.44). Fe is oxidized, so Fe is the anode.",
+     "final_answer": "E°cell = +0.78 V; the anode is the Fe electrode",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "ΔG° = −nFE° = −2(96485)(0.78) = −150,517 J",
+     "final_answer": "ΔG° ≈ −151 kJ/mol rxn",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "E = 0.78 − (0.0592/2) log 5 = 0.78 − 0.0207",
+     "final_answer": "E ≈ 0.76 V (0.759 V)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Electrons leave the anode, where Fe is oxidized. Anions move toward the anode compartment to balance the Fe²⁺ being made there.",
+     "final_answer": "Electrons flow through the external wire from the Fe anode to the Cu cathode. Salt-bridge anions move toward the Fe/Fe²⁺ (anode) compartment.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Q = [Fe²⁺]/[Cu²⁺], so lowering [Cu²⁺] raises Q. A larger log Q makes E smaller, so the forward reaction is less favorable.",
+     "final_answer": "The cell potential decreases, because Q = [Fe²⁺]/[Cu²⁺] increases and E = E° − (0.0592/2) log Q gets smaller.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The chemistry and numeric keys are correct and the structure fits a 10-point long question. Failed on scoring: rubric rows C1 and E2 require literal strings, and part C is a plug-in calculation with a given Q, so scoring is brittle and demand is low.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A to C target 5.F in topics 9.8 to 9.10. Part D is topic 9.8 content and part E is Nernst reasoning, both acceptable. Part C gives Q directly, so it is a minimal plug-in calculation."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "All answers are chemically correct. Rubric rows C1 (\"E = E0 - (0.0592/n) log Q\" as a literal string) and E2 (the phrase \"Nernst equation\") tie scoring to exact wording and would reject valid equivalent responses. Row D1's element \"from anode to cathode\" is similarly loose."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives the E° values, F and the Nernst equation, which is sufficient. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item with no distractors. The listed common errors are plausible."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Ten points in about 23 minutes with a calculator allowed is typical for a long question, and the load is reasonable."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "This is a typical AP-style multi-part FRQ on a galvanic cell. It covers E°cell and anode identification, ΔG° = -nFE°, the Nernst equation with a given Q, the direction of electron and ion flow, and a qualitative Le Chatelier/Nernst prediction. Each part is a standard, single-concept application with rounded numbers and an explicit formula sheet (F and the Nernst form are provided). The concept depth is moderate and sits squarely within Unit 9 scope (9.8-9.10). The main load comes from choosing the right relationship and managing a unit conversion (J to kJ). Arithmetic is short and the wording is unambiguous, so difficulty does not come from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_chemistry-f07-k0",
+  "cellId": "ap_chemistry-f07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "The slow elementary step X → Y + Z sets the rate, so the rate law follows its molecularity.",
+     "final_answer": "rate = k[X], with k = 0.0347 min⁻¹. Step 1 (X → Y + Z, the slow step) is the rate-determining step.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Y is formed in step 1 and used up in step 2, so it does not appear in the overall equation.",
+     "final_answer": "Y is an intermediate because it is produced in step 1 and consumed in step 2.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "For a first-order reaction, t½ = ln2/k = 0.693/0.0347 ≈ 20.0 min. Since 0.0625 = (1/2)^4, it takes 4 half-lives.",
+     "final_answer": "t½ ≈ 20.0 min; time to reach 0.0625[X]₀ ≈ 80 min",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "[X] = 0.8·e^(−0.0347×60) = 0.8 × 0.125 ≈ 0.100 M. This matches 3 half-lives (60 min ÷ 20 min).",
+     "final_answer": "≈0.100 M",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "A catalyst provides a pathway with a lower activation energy. The reactants and products are unchanged, so ΔH is unchanged. By the Arrhenius equation, a lower Ea gives a larger k.",
+     "final_answer": "Activation energy decreases; ΔH stays the same; the rate constant k increases, so the reaction is faster.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable overall. The mechanism, rate law, half-life and concentration values are consistent, and the solver agreed. The one weakness is part E, where row E1 bundles three claims into one point and omits the rate-constant claim from its required elements.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts map to Unit 5 topics 5.7, 5.5, 5.8, with part E fitting 5.11, which is in scope. Parts C and D target skill 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All numeric keys are consistent with the stem. Row E1 is slightly loose because it covers three claims in one point and its required elements leave out the rate constant."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete, with the mechanism, k, and the initial concentration all given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ, not applicable. The rubric rows list common errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is about 23 minutes for 10 points, and the arithmetic is clean. Part D partly repeats the skill used in part C."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part item integrating mechanism concepts (rate law from slow step, intermediate identification), first-order half-life and integrated rate law calculations, and a catalyst explanation. Numbers are clean (t1/2 = 20 min; 1/16 = 4 half-lives; 60 min = 3 half-lives), so the arithmetic is light. The challenge comes from selecting the correct relationship and connecting the mechanism to the kinetics, which is typical of a full-mock free-response question. All content is in scope, with no Arrhenius calculation and no calculus derivation.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_chemistry-f07-k1",
+  "cellId": "ap_chemistry-f07",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Slow step is unimolecular in X and governs rate",
+     "final_answer": "Rate = k[X], k = 0.0462 min^-1; Step 1 (X → Y + Z) is the rate-determining step because it is slow; its rate law matches the observed first order in X.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Y formed in step 1, consumed in step 2",
+     "final_answer": "Y is an intermediate: produced in step 1 and consumed in step 2, so it does not appear in the overall equation X → Z + W.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "t1/2 = ln2/k; 1/16 = 4 half-lives",
+     "final_answer": "t1/2 = 0.693/0.0462 = 15.0 min; 0.0625 = (1/2)^4 so t = 4 × 15.0 = 60.0 min.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "[X] = 2e^{-0.0462×60} = 2e^{-2.772}",
+     "final_answer": "[X] = 0.125 M",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Catalyst lowers Ea only",
+     "final_answer": "Catalyst provides alternate pathway with lower activation energy; ΔH unchanged (state function, same reactants/products); rate constant increases (Arrhenius: smaller Ea gives larger k), so reaction is faster.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Calculations are correct and the scope fits. However, rubric row E1 is inconsistent: its criterion requires three claims (Ea decreases, k increases, ΔH unchanged), but its required elements omit \"k increases\", so scoring is ambiguous. Part D largely duplicates C3 (60 min = 4 half-lives), and part E is tagged with a non-standard skill code 6.E.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts C and D target 5.F with first-order relations. Part E is catalysis (5.11) and is tagged with a skill code 6.E that does not match the framework."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "E1 bundles three claims in one point, but required_elements list only lower Ea and ΔH unchanged. This is inconsistent and could lead to uneven scoring. Numeric keys are fine."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and clear. The initial concentration \"2 M\" is written with stray LaTeX, which is a minor formatting issue."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The free-response model answers and common errors are adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of a long free-response question. Part D is nearly redundant with C3."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part item integrating mechanism-to-rate-law reasoning (slow step, intermediate), first-order half-life and integrated rate calculations with clean numbers (t1/2 = 15 min, 1/16 = 4 half-lives, 0.125 M after 60 min), and conceptual catalyst effects (lower Ea, unchanged delta H, larger k). Each part is individually modest, but the combination across related topics 5.7, 5.8, 5.3 and 5.11 matches a typical AP free-response multi-part item suitable for full mocks. Scope-compliant: no Arrhenius calculations and no calculus derivations. Arithmetic is light, wording is unambiguous, and reading load is small.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_chemistry-f08-k0",
+  "cellId": "ap_chemistry-f08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Co Z=27: 1s2 2s2 2p6 3s2 3p6 4s2 3d7 = [Ar]4s2 3d7",
+     "final_answer": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁷ ([Ar] 4s² 3d⁷)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Remove the 4s electrons first: [Ar]3d7. Seven electrons in five d orbitals (Hund's rule) leave 3 unpaired (free-ion ground state).",
+     "final_answer": "[Ar] 3d⁷ (1s² 2s² 2p⁶ 3s² 3p⁶ 3d⁷); 3 unpaired electrons",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Losing both 4s electrons removes the outermost n=4 shell, so the outer electrons are now in n=3, closer to the nucleus. The proton count stays the same with fewer electrons, so there is less electron-electron repulsion and each electron feels a larger effective nuclear charge.",
+     "final_answer": "Co²⁺ has lost its 4s electrons, so its outermost electrons are in the n=3 shell, closer to the nucleus. With the same 27 protons and fewer electrons, there is less electron-electron repulsion and a greater effective nuclear charge per electron, so the ion is smaller.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria with no reject conditions. It is a standard Co and Co2+ configuration question, and each part is within Topic 1.5 (with 1.7 for the radius part). The answers are unambiguous: [Ar]4s2 3d7 for Co, [Ar]3d7 for Co2+ with 3 unpaired electrons, and the loss of the outer shell plus greater effective nuclear charge for the smaller radius. The independent solver agrees. The 1/2/1 split fits the short-question grain, and the minimal stimulus is fine for a text-only context. Two minor points do not affect the verdict. Part C's rubric requires both \"fewer shells\" and \"effective nuclear charge\" in a single 1-point row, which is acceptable. The tag 6.E on part C is a labeling quirk that is tolerable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A, writing the Co configuration, is Topic 1.5. Part B, the ion configuration and unpaired electron count, is also Topic 1.5. Part C, the ion radius, is a Topic 1.7 link and fits the allowed span of 1.5 to 1.7. Each part is judged against its own tagged skill. There is no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The answers are unique and correct. The rubric rows are consistent, and B2 depends on B1. Part B's model answer includes a parenthetical rationale, but the rows only require the configuration and the count of 3."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text-only stimulus names the species, and the parts are clearly worded. Empty data is acceptable because no figure is needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. Common errors are listed per row, such as filling 3d before 4s and removing 3d electrons first."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light and no calculator is needed, which is consistent with the \"allowed\" designation. The 9-minute estimate is reasonable for a 4-point short question."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Concept depth is moderate. Part A is routine recall of the aufbau configuration of Co. Part B has the one real conceptual hurdle: a transition metal cation loses its 4s electrons before its 3d electrons, giving [Ar]3d7, and the unpaired count (3) follows from applying Hund's rule to the 3d subshell. Part C needs a short explanation of the radius change, citing fewer electrons and less electron-electron repulsion with the same nuclear charge, and loss of the outer 4s shell. No arithmetic is needed and the stimulus is minimal. The item stays within Unit 1 scope, uses only subshell labels, and has no unfair difficulty sources. It suits a full mock as a mid-level 1.A item, though the calculator is not needed. It is harder than a pure recall item because of the ion-configuration trap and the unpaired-electron step, but well short of advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 200
+  }
+ },
+ {
+  "key": "ap_chemistry-f08-k1",
+  "cellId": "ap_chemistry-f08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Fe has Z=26",
+     "final_answer": "1s2 2s2 2p6 3s2 3p6 4s2 3d6 ([Ar]4s2 3d6)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Remove the two 4s electrons first, then one 3d electron. That leaves a half-filled d5 set with one electron in each d orbital.",
+     "final_answer": "Fe3+: 1s2 2s2 2p6 3s2 3p6 3d5 ([Ar]3d5); 5 unpaired electrons",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Fe3+ has lost all of its 4s electrons, so its outermost electrons are in n=3, closer to the nucleus. The nuclear charge (26 protons) stays the same while there are fewer electrons, so there is less electron-electron repulsion and each remaining electron feels a stronger effective nuclear charge. This pulls the electrons in closer.",
+     "final_answer": "Fe3+ lost its 4s electrons, so its outermost shell is n=3 instead of n=4. The same 26 protons attract fewer electrons, which means less repulsion and a higher effective nuclear charge per electron, so the ion is smaller.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, unambiguous short FRQ (1/2/1 split, 4 points) on Fe and Fe3+ configuration, unpaired electrons, and ionic radius. Within the 1.5-1.7 scope. The text-only stimulus is complete. Rubric rows are consistent with the model answers.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ on electron configurations. Part A is recall of the Fe configuration. Part B adds the conceptual step that 4s electrons are lost before 3d in forming Fe3+, then counting unpaired electrons in 3d5 (Hund's rule). Part C is a brief explanation of why a cation is smaller (lost outer shell, greater effective nuclear charge per electron, less repulsion). There is no arithmetic, the reading load is minimal, and the wording is unambiguous. It is within Unit 1 scope and sits at the easier end of exam_prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_chemistry-f09-k0",
+  "cellId": "ap_chemistry-f09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Assume 100 g: C 40.0/12.01=3.33 mol, H 6.7/1.008=6.65 mol, O 53.3/16.00=3.33 mol; divide by 3.33 gives 1:2:1.",
+     "final_answer": "CH2O",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Empirical mass 30.03 g/mol; 90.1/30.03=3.00.",
+     "final_answer": "C3H6O3",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Same empirical formula means same mole ratio of atoms, so mass ratios and percent composition are identical (e.g., CH2O and C6H12O6 both 40.0% C).",
+     "final_answer": "Yes, the claim is correct.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The 4-point short FRQ (2/1/1) on empirical and molecular formulas fits topic 1.3 and skill 5.F. Keys are correct and match the independent solver. The rubric is consistent, and the load is appropriate for a short question.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A (5.F/3.C) and Part B (5.F) fit topic 1.3 and the target skill. Part C is a short justification part, acceptable in a mixed-skill short question."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The percentages sum to 100%. The answers CH2O, C3H6O3 and \"claim correct\" are unique and defensible. Row A1 lists 6.66 for H, while exact atomic masses give 6.65, a minor point given the two-significant-figure H percentage. The units_row flag on A1 is a harmless oddity."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and the wording is clear. No figure data is required."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The listed common errors are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of a 4-point short question, with a calculator allowed. The scenario is a standard textbook compound."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-step routine: percent to mass to moles to mole ratio gives the empirical formula CH2O. Dividing the molar mass by the empirical formula mass (~3) gives C3H6O3. A short claim justification then links the result to percent composition. Numbers are clean, reading is minimal and the content is in scope for topics 1.3, 1.1 and 3.4. The difficulty comes from chaining steps and choosing the governing relationship, not from long arithmetic or unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_chemistry-f09-k1",
+  "cellId": "ap_chemistry-f09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Take a 100 g sample. C: 40.0/12.01 = 3.33 mol; H: 6.7/1.008 = 6.65 mol; O: 53.3/16.00 = 3.33 mol. Dividing each by 3.33 gives a 1:2:1 ratio.",
+     "final_answer": "CH2O",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "The empirical formula mass is 30.03 g/mol, and 120.1/30.03 = 4, so multiply CH2O by 4.",
+     "final_answer": "C4H8O4",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Percent composition depends only on the ratio of atoms. Compounds with the same empirical formula have the same ratio, so their mass percents are the same. For example, CH2O and C6H12O6 are both 40.0% C.",
+     "final_answer": "Yes, the claim is correct. The same empirical formula means the same mole ratio of elements, so the mass percentages are the same.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a standard empirical/molecular formula short question worth 4 points, split 2/1/1, with a text stimulus that is complete. The keys are unique and correct (CH2O, C4H8O4, claim correct), and the independent solver agreed. The rubric rows are well formed, and the arithmetic load is light.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part fits topic 1.3 (with 1.1 and 3.4) and its own tagged skill. Part C is a justification, which is acceptable for its tagged skills."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Part A moles are 3.33, 6.66 and 3.33, giving CH2O. Part B gives C4H8O4. Part C: the claim is correct. Rubric rows are consistent, and A2 depends on A1."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The percentages sum to 100% and the molar mass is given. The text stimulus needs no data object."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no options. Common errors are listed in the rubric rows."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 9 minutes for a 4-point short question is reasonable. A calculator is allowed and the arithmetic is minimal."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style sequence: assume 100 g, convert mass percentages to moles, find the simplest whole-number ratio (CH2O), scale by the molar mass ratio (about 4) to get C4H8O4, then justify a claim about percent composition being identical for compounds sharing an empirical formula. The numbers are clean and the reading load is light. Difficulty comes from the multi-step routine and a brief conceptual justification, all within Unit 1 scope (topics 1.1 and 1.3).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_chemistry-f10-k0",
+  "cellId": "ap_chemistry-f10",
+  "passed": false,
+  "reasons": [
+   "bundle_ref:part_A_references_missing_part_i",
+   "bundle_ref:part_B_references_missing_part_i"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_chemistry-f10-k1",
+  "cellId": "ap_chemistry-f10",
+  "passed": false,
+  "reasons": [
+   "bundle_ref:part_A_references_missing_part_i",
+   "bundle_ref:part_B_references_missing_part_i"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_chemistry-f11-k0",
+  "cellId": "ap_chemistry-f11",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:A:numeric"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "HOCl ⇌ H+ + OCl-; Ka=[H+][OCl-]/[HOCl]=x²/(0.5−x)≈x²/0.5; x=√(1.5e-8)",
+     "final_answer": "Ka = [H+][ClO-]/[HClO]; [H+] ≈ 1.2 × 10⁻⁴ M",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "-log(1.22e-4)",
+     "final_answer": "pH ≈ 3.91",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "1.22e-4/0.5 ×100",
+     "final_answer": "≈ 0.024% (2.4 × 10⁻²%)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard weak-acid Ka, pH and percent-ionization short FRQ (2/1/1 points). The approximation is explicitly permitted, the numbers are consistent, and the load is appropriate. Minor concerns: the rubric's numeric tolerance for Part C (0.0245 vs 0.024) is unspecified, and the units_row flag on A2 has no separate units row.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are correct and unique. The approximation is allowed in the stem. Tolerance for the C1 numeric row is unspecified, so a rounded 0.024% might be marked wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Routine single-pathway weak acid calculation: write Ka expression, apply x<<c approximation (explicitly allowed), take one square root, convert to pH, then compute percent ionization. Governing relationship is obvious, no table/graph reading, no proportional-reasoning or claim-linking step. Light arithmetic with clean numbers. Suited to foundational practice rather than full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_chemistry-f11-k1",
+  "cellId": "ap_chemistry-f11",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:A:numeric"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Ka=[H+][ClO-]/[HClO]; x=sqrt(3.0e-8×0.05)=sqrt(1.5e-9)",
+     "final_answer": "Ka = [H+][A-]/[HA]; [H+] ≈ 3.9 × 10^-5 M",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "-log(3.87e-5)",
+     "final_answer": "pH ≈ 4.41",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "3.87e-5/0.05×100",
+     "final_answer": "≈ 0.077%",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard weak-acid calculation (equilibrium expression, [H+], pH, percent ionization). Numbers are correct and the small-x approximation is valid. Minor risks: rubric tolerance for percent ionization (0.077/0.078/0.0775) is unspecified, and the item is routine.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is correct and unique. The tolerance for part C is null, so rounded student answers such as 0.078% may need to be accepted. This is minor."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard single-species weak acid ICE calculation with the x << c approximation explicitly allowed. The steps are Ka expression, x = sqrt(Ka*c), pH = -log[H+], and percent ionization. There is one governing relationship, short arithmetic, minimal reading, and no linking claim or proportional-reasoning step, so it is a foundational skill-practice item rather than a full-mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 180
+  }
+ }
+]

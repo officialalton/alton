@@ -1,0 +1,6082 @@
+[
+ {
+  "candidateKey": "ap_chemistry-f01-k0",
+  "cellId": "ap_chemistry-f01",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "frq_bundle",
+  "keywordCode": "4.6",
+  "unitCode": "4",
+  "skillPrimary": "5.F",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "chf_long_redox_titration",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "part_B_calculation_without_answer_row",
+  "difficultyProvisional": null,
+  "difficultyRationale": null,
+  "payload": {
+   "archetype": "chf_long_redox_titration",
+   "template": "long",
+   "topic": "4.6",
+   "extra_topics": [
+    "4.5",
+    "4.4"
+   ],
+   "skill": "5.F",
+   "representative_skill": "5.F",
+   "calculator": "allowed",
+   "title": "Permanganate titration of iron in an ore",
+   "stimulus": {
+    "kind": "text",
+    "description": "A student dissolves a $0.800\\text{ g}$ sample of iron ore in acid so that all of the iron is present as Fe²⁺ and dilutes the solution to $100.00\\text{ mL}$. A $25.00\\text{ mL}$ portion is titrated with $0.0250\\text{ M}$ KMnO₄. The balanced equation is MnO₄⁻ + 5 Fe²⁺ + 8 H⁺ → Mn²⁺ + 5 Fe³⁺ + 4 H₂O. The endpoint is reached after $18.40\\text{ mL}$ of KMnO₄ has been added.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Calculate the number of moles of MnO₄⁻ added at the endpoint and the number of moles of Fe²⁺ in the $25.00\\text{ mL}$ portion.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F",
+      "3.C"
+     ],
+     "model_answer": "n(MnO₄⁻) = (0.0250 M)(0.01840 L) = 4.600e-04 mol; n(Fe²⁺) = 5 × 4.600e-04 = 2.300e-03 mol.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Calculates the moles of MnO₄⁻ (about 4.600e-04 mol)",
+       "required_elements": [
+        "4.600e-04"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the volume in mL without converting to liters"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Multiplies by 5 for the moles of Fe²⁺ (about 2.300e-03 mol)",
+       "required_elements": [
+        "2.300e-03"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses a 1:1 mole ratio"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Calculate the mass percent of iron in the ore sample.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F",
+      "3.C"
+     ],
+     "model_answer": "The 100.00 mL solution holds 4 × 2.300e-03 = 9.200e-03 mol Fe, which is 0.5138 g; mass percent = 0.5138/0.800 × 100 = 64.2%.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Scales the moles of Fe²⁺ from the 25.00 mL portion to the 100.00 mL solution (about 9.200e-03 mol)",
+       "required_elements": [
+        "9.200e-03"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses only the moles in the 25.00 mL portion"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Converts to the mass of iron and divides by the ore mass (about 64.2%)",
+       "required_elements": [
+        "64.2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "divides by the mass of the portion instead of the whole sample"
+       ],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "No indicator was added to the flask. Explain how the student can still identify the endpoint.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "4.B",
+      "6.E"
+     ],
+     "model_answer": "MnO₄⁻ is purple and is reduced to nearly colorless Mn²⁺ while Fe²⁺ remains; once all of the Fe²⁺ has reacted, the first excess drop of MnO₄⁻ leaves a faint persistent pink color.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "States that the endpoint is the first persistent pink or purple color",
+       "required_elements": [
+        "persistent pink"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says the solution becomes colorless at the endpoint"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Justifies that MnO₄⁻ is consumed (reduced to colorless Mn²⁺) until the Fe²⁺ is gone, so the excess MnO₄⁻ colors the solution",
+       "required_elements": [
+        "excess MnO4-",
+        "Fe2+ is gone"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says Fe²⁺ itself produces the pink color"
+       ],
+       "requires_row_id": "C1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "A bubble was trapped in the tip of the buret before the titration and left the tip during the titration. Will the calculated mass percent of iron be too high, too low, or unaffected? Justify your answer.",
+     "points": 2,
+     "response_mode": "predict",
+     "skill_codes": [
+      "2.B",
+      "6.E"
+     ],
+     "model_answer": "Too high: the bubble volume is counted as titrant delivered, so the recorded volume is larger than the volume that reacted.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "States that the mass percent of iron will be too high",
+       "required_elements": [
+        "too high"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says it will be too low"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Justifies that the buret reading overstates the volume of KMnO₄ that reacted, which overstates the moles of Fe²⁺",
+       "required_elements": [
+        "recorded volume larger",
+        "overstates moles"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says the concentration of KMnO₄ changes"
+       ],
+       "requires_row_id": "D1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    },
+    {
+     "label": "E",
+     "prompt": "Identify the oxidizing agent in the reaction and justify your answer using oxidation numbers.",
+     "points": 2,
+     "response_mode": "justify",
+     "skill_codes": [
+      "5.B",
+      "6.E"
+     ],
+     "model_answer": "MnO₄⁻ is the oxidizing agent: the oxidation number of Mn decreases from +7 to +2, so MnO₄⁻ is reduced and oxidizes Fe²⁺.",
+     "rubric_rows": [
+      {
+       "row_id": "E1",
+       "points": 1,
+       "criterion": "Identifies MnO₄⁻ as the oxidizing agent",
+       "required_elements": [
+        "MnO4-"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "identifies Fe²⁺ as the oxidizing agent"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "E2",
+       "points": 1,
+       "criterion": "Cites the change in the oxidation number of Mn from +7 to +2, showing that it is reduced",
+       "required_elements": [
+        "+7 to +2",
+        "reduced"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the oxidation number of iron without noting that it increases"
+       ],
+       "requires_row_id": "E1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 23,
+   "facts": [
+    "M=0.025",
+    "V=18.4",
+    "ore=0.8",
+    "nMn=4.600000e-04",
+    "pct=64.2275"
+   ],
+   "expected_values": [
+    {
+     "part": "A",
+     "quantity": "moles Fe2+ in portion",
+     "value": 0.0023,
+     "unit": "mol",
+     "tolerance": 0.000023
+    },
+    {
+     "part": "B",
+     "quantity": "mass percent iron",
+     "value": 64.2275,
+     "unit": "%",
+     "tolerance": 0.2
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "chf_long_redox_titration",
+    "subject": "ap_chemistry",
+    "kind": "frq_bundle",
+    "concept": "Redox titration stoichiometry, scaling from an aliquot, endpoint detection, error analysis, and oxidation numbers",
+    "topic": "4.6",
+    "skill": "5.F",
+    "student_thinking": [
+     "Use the mole ratio from the balanced equation",
+     "Scale the aliquot to the whole sample and compute a mass percent",
+     "Reason about the endpoint, the buret error and the oxidizing agent"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the iron is completely converted to Fe²⁺",
+      "evidence": "the stimulus states it"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "balanced equation",
+      "volumes and concentration"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "exact fractions for moles and mass percent; oxidation numbers by rule",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "5.F",
+       "3.C"
+      ],
+      "topics": [
+       "4.6"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "n(MnO₄⁻) = (0.0250 M)(0.01840 L) = 4.600e-04 mol; n(Fe²⁺) = 5 × 4.600e-04 = 2.300e-03 mol."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Calculates the moles of MnO₄⁻ (about 4.600e-04 mol)",
+        "elements": [
+         "4.600e-04"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Multiplies by 5 for the moles of Fe²⁺ (about 2.300e-03 mol)",
+        "elements": [
+         "2.300e-03"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "5.F",
+       "3.C"
+      ],
+      "topics": [
+       "4.6"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "The 100.00 mL solution holds 4 × 2.300e-03 = 9.200e-03 mol Fe, which is 0.5138 g; mass percent = 0.5138/0.800 × 100 = 64.2%."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Scales the moles of Fe²⁺ from the 25.00 mL portion to the 100.00 mL solution (about 9.200e-03 mol)",
+        "elements": [
+         "9.200e-03"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Converts to the mass of iron and divides by the ore mass (about 64.2%)",
+        "elements": [
+         "64.2"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "4.B",
+       "6.E"
+      ],
+      "topics": [
+       "4.6"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "MnO₄⁻ is purple and is reduced to nearly colorless Mn²⁺ while Fe²⁺ remains; once all of the Fe²⁺ has reacted, the first excess drop of MnO₄⁻ leaves a faint persistent pink color."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "States that the endpoint is the first persistent pink or purple color",
+        "elements": [
+         "persistent pink"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Justifies that MnO₄⁻ is consumed (reduced to colorless Mn²⁺) until the Fe²⁺ is gone, so the excess MnO₄⁻ colors the solution",
+        "elements": [
+         "excess MnO4-",
+         "Fe2+ is gone"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "2.B",
+       "6.E"
+      ],
+      "topics": [
+       "4.6"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "Too high: the bubble volume is counted as titrant delivered, so the recorded volume is larger than the volume that reacted."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "States that the mass percent of iron will be too high",
+        "elements": [
+         "too high"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Justifies that the buret reading overstates the volume of KMnO₄ that reacted, which overstates the moles of Fe²⁺",
+        "elements": [
+         "recorded volume larger",
+         "overstates moles"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "E",
+      "skills": [
+       "5.B",
+       "6.E"
+      ],
+      "topics": [
+       "4.6"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "MnO₄⁻ is the oxidizing agent: the oxidation number of Mn decreases from +7 to +2, so MnO₄⁻ is reduced and oxidizes Fe²⁺."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "E1",
+        "points": 1,
+        "criterion": "Identifies MnO₄⁻ as the oxidizing agent",
+        "elements": [
+         "MnO4-"
+        ]
+       },
+       {
+        "row_id": "E2",
+        "points": 1,
+        "criterion": "Cites the change in the oxidation number of Mn from +7 to +2, showing that it is reduced",
+        "elements": [
+         "+7 to +2",
+         "reduced"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "judgment_demand": [
+     "law_selection",
+     "justification",
+     "representation_reading"
+    ]
+   },
+   "seed": 14500,
+   "pack_id": "chf_long_redox_titration-s14500"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "chf_long_redox_titration",
+   "facts": [
+    "M=0.025",
+    "V=18.4",
+    "ore=0.8",
+    "nMn=4.600000e-04",
+    "pct=64.2275"
+   ],
+   "seed": 14500
+  },
+  "review": null,
+  "difficulty": null
+ },
+ {
+  "candidateKey": "ap_chemistry-f01-k1",
+  "cellId": "ap_chemistry-f01",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "frq_bundle",
+  "keywordCode": "4.6",
+  "unitCode": "4",
+  "skillPrimary": "5.F",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "chf_long_redox_titration",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "part_B_calculation_without_answer_row",
+  "difficultyProvisional": null,
+  "difficultyRationale": null,
+  "payload": {
+   "archetype": "chf_long_redox_titration",
+   "template": "long",
+   "topic": "4.6",
+   "extra_topics": [
+    "4.5",
+    "4.4"
+   ],
+   "skill": "5.F",
+   "representative_skill": "5.F",
+   "calculator": "allowed",
+   "title": "Permanganate titration of iron in an ore",
+   "stimulus": {
+    "kind": "text",
+    "description": "A student dissolves a $1.000\\text{ g}$ sample of iron ore in acid so that all of the iron is present as Fe²⁺ and dilutes the solution to $100.00\\text{ mL}$. A $25.00\\text{ mL}$ portion is titrated with $0.0300\\text{ M}$ KMnO₄. The balanced equation is MnO₄⁻ + 5 Fe²⁺ + 8 H⁺ → Mn²⁺ + 5 Fe³⁺ + 4 H₂O. The endpoint is reached after $18.40\\text{ mL}$ of KMnO₄ has been added.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Calculate the number of moles of MnO₄⁻ added at the endpoint and the number of moles of Fe²⁺ in the $25.00\\text{ mL}$ portion.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F",
+      "3.C"
+     ],
+     "model_answer": "n(MnO₄⁻) = (0.0300 M)(0.01840 L) = 5.520e-04 mol; n(Fe²⁺) = 5 × 5.520e-04 = 2.760e-03 mol.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Calculates the moles of MnO₄⁻ (about 5.520e-04 mol)",
+       "required_elements": [
+        "5.520e-04"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the volume in mL without converting to liters"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Multiplies by 5 for the moles of Fe²⁺ (about 2.760e-03 mol)",
+       "required_elements": [
+        "2.760e-03"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses a 1:1 mole ratio"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Calculate the mass percent of iron in the ore sample.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F",
+      "3.C"
+     ],
+     "model_answer": "The 100.00 mL solution holds 4 × 2.760e-03 = 1.104e-02 mol Fe, which is 0.6166 g; mass percent = 0.6166/1.000 × 100 = 61.7%.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Scales the moles of Fe²⁺ from the 25.00 mL portion to the 100.00 mL solution (about 1.104e-02 mol)",
+       "required_elements": [
+        "1.104e-02"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses only the moles in the 25.00 mL portion"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Converts to the mass of iron and divides by the ore mass (about 61.7%)",
+       "required_elements": [
+        "61.7"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "divides by the mass of the portion instead of the whole sample"
+       ],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "No indicator was added to the flask. Explain how the student can still identify the endpoint.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "4.B",
+      "6.E"
+     ],
+     "model_answer": "MnO₄⁻ is purple and is reduced to nearly colorless Mn²⁺ while Fe²⁺ remains; once all of the Fe²⁺ has reacted, the first excess drop of MnO₄⁻ leaves a faint persistent pink color.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "States that the endpoint is the first persistent pink or purple color",
+       "required_elements": [
+        "persistent pink"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says the solution becomes colorless at the endpoint"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Justifies that MnO₄⁻ is consumed (reduced to colorless Mn²⁺) until the Fe²⁺ is gone, so the excess MnO₄⁻ colors the solution",
+       "required_elements": [
+        "excess MnO4-",
+        "Fe2+ is gone"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says Fe²⁺ itself produces the pink color"
+       ],
+       "requires_row_id": "C1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "A bubble was trapped in the tip of the buret before the titration and left the tip during the titration. Will the calculated mass percent of iron be too high, too low, or unaffected? Justify your answer.",
+     "points": 2,
+     "response_mode": "predict",
+     "skill_codes": [
+      "2.B",
+      "6.E"
+     ],
+     "model_answer": "Too high: the bubble volume is counted as titrant delivered, so the recorded volume is larger than the volume that reacted.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "States that the mass percent of iron will be too high",
+       "required_elements": [
+        "too high"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says it will be too low"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Justifies that the buret reading overstates the volume of KMnO₄ that reacted, which overstates the moles of Fe²⁺",
+       "required_elements": [
+        "recorded volume larger",
+        "overstates moles"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says the concentration of KMnO₄ changes"
+       ],
+       "requires_row_id": "D1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    },
+    {
+     "label": "E",
+     "prompt": "Identify the oxidizing agent in the reaction and justify your answer using oxidation numbers.",
+     "points": 2,
+     "response_mode": "justify",
+     "skill_codes": [
+      "5.B",
+      "6.E"
+     ],
+     "model_answer": "MnO₄⁻ is the oxidizing agent: the oxidation number of Mn decreases from +7 to +2, so MnO₄⁻ is reduced and oxidizes Fe²⁺.",
+     "rubric_rows": [
+      {
+       "row_id": "E1",
+       "points": 1,
+       "criterion": "Identifies MnO₄⁻ as the oxidizing agent",
+       "required_elements": [
+        "MnO4-"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "identifies Fe²⁺ as the oxidizing agent"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "E2",
+       "points": 1,
+       "criterion": "Cites the change in the oxidation number of Mn from +7 to +2, showing that it is reduced",
+       "required_elements": [
+        "+7 to +2",
+        "reduced"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the oxidation number of iron without noting that it increases"
+       ],
+       "requires_row_id": "E1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 23,
+   "facts": [
+    "M=0.03",
+    "V=18.4",
+    "ore=1.0",
+    "nMn=5.520000e-04",
+    "pct=61.6584"
+   ],
+   "expected_values": [
+    {
+     "part": "A",
+     "quantity": "moles Fe2+ in portion",
+     "value": 0.00276,
+     "unit": "mol",
+     "tolerance": 0.0000276
+    },
+    {
+     "part": "B",
+     "quantity": "mass percent iron",
+     "value": 61.6584,
+     "unit": "%",
+     "tolerance": 0.2
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "chf_long_redox_titration",
+    "subject": "ap_chemistry",
+    "kind": "frq_bundle",
+    "concept": "Redox titration stoichiometry, scaling from an aliquot, endpoint detection, error analysis, and oxidation numbers",
+    "topic": "4.6",
+    "skill": "5.F",
+    "student_thinking": [
+     "Use the mole ratio from the balanced equation",
+     "Scale the aliquot to the whole sample and compute a mass percent",
+     "Reason about the endpoint, the buret error and the oxidizing agent"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the iron is completely converted to Fe²⁺",
+      "evidence": "the stimulus states it"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "balanced equation",
+      "volumes and concentration"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "exact fractions for moles and mass percent; oxidation numbers by rule",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "5.F",
+       "3.C"
+      ],
+      "topics": [
+       "4.6"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "n(MnO₄⁻) = (0.0300 M)(0.01840 L) = 5.520e-04 mol; n(Fe²⁺) = 5 × 5.520e-04 = 2.760e-03 mol."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Calculates the moles of MnO₄⁻ (about 5.520e-04 mol)",
+        "elements": [
+         "5.520e-04"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Multiplies by 5 for the moles of Fe²⁺ (about 2.760e-03 mol)",
+        "elements": [
+         "2.760e-03"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "5.F",
+       "3.C"
+      ],
+      "topics": [
+       "4.6"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "The 100.00 mL solution holds 4 × 2.760e-03 = 1.104e-02 mol Fe, which is 0.6166 g; mass percent = 0.6166/1.000 × 100 = 61.7%."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Scales the moles of Fe²⁺ from the 25.00 mL portion to the 100.00 mL solution (about 1.104e-02 mol)",
+        "elements": [
+         "1.104e-02"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Converts to the mass of iron and divides by the ore mass (about 61.7%)",
+        "elements": [
+         "61.7"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "4.B",
+       "6.E"
+      ],
+      "topics": [
+       "4.6"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "MnO₄⁻ is purple and is reduced to nearly colorless Mn²⁺ while Fe²⁺ remains; once all of the Fe²⁺ has reacted, the first excess drop of MnO₄⁻ leaves a faint persistent pink color."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "States that the endpoint is the first persistent pink or purple color",
+        "elements": [
+         "persistent pink"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Justifies that MnO₄⁻ is consumed (reduced to colorless Mn²⁺) until the Fe²⁺ is gone, so the excess MnO₄⁻ colors the solution",
+        "elements": [
+         "excess MnO4-",
+         "Fe2+ is gone"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "2.B",
+       "6.E"
+      ],
+      "topics": [
+       "4.6"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "Too high: the bubble volume is counted as titrant delivered, so the recorded volume is larger than the volume that reacted."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "States that the mass percent of iron will be too high",
+        "elements": [
+         "too high"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Justifies that the buret reading overstates the volume of KMnO₄ that reacted, which overstates the moles of Fe²⁺",
+        "elements": [
+         "recorded volume larger",
+         "overstates moles"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "E",
+      "skills": [
+       "5.B",
+       "6.E"
+      ],
+      "topics": [
+       "4.6"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "MnO₄⁻ is the oxidizing agent: the oxidation number of Mn decreases from +7 to +2, so MnO₄⁻ is reduced and oxidizes Fe²⁺."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "E1",
+        "points": 1,
+        "criterion": "Identifies MnO₄⁻ as the oxidizing agent",
+        "elements": [
+         "MnO4-"
+        ]
+       },
+       {
+        "row_id": "E2",
+        "points": 1,
+        "criterion": "Cites the change in the oxidation number of Mn from +7 to +2, showing that it is reduced",
+        "elements": [
+         "+7 to +2",
+         "reduced"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "judgment_demand": [
+     "law_selection",
+     "justification",
+     "representation_reading"
+    ]
+   },
+   "seed": 14501,
+   "pack_id": "chf_long_redox_titration-s14501"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "chf_long_redox_titration",
+   "facts": [
+    "M=0.03",
+    "V=18.4",
+    "ore=1.0",
+    "nMn=5.520000e-04",
+    "pct=61.6584"
+   ],
+   "seed": 14501
+  },
+  "review": null,
+  "difficulty": null
+ },
+ {
+  "candidateKey": "ap_chemistry-f02-k0",
+  "cellId": "ap_chemistry-f02",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "frq_bundle",
+  "keywordCode": "9.11",
+  "unitCode": "9",
+  "skillPrimary": "5.F",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "chf_long_electrolysis",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "part_B_calculation_without_answer_row; part_C_calculation_without_answer_row",
+  "difficultyProvisional": null,
+  "difficultyRationale": null,
+  "payload": {
+   "archetype": "chf_long_electrolysis",
+   "template": "long",
+   "topic": "9.11",
+   "extra_topics": [
+    "9.9",
+    "9.8"
+   ],
+   "skill": "5.F",
+   "representative_skill": "5.F",
+   "calculator": "allowed",
+   "title": "Electrolysis of copper sulfate solution",
+   "stimulus": {
+    "kind": "text",
+    "description": "A student electrolyzes $1.0\\text{ M}$ CuSO₄(aq) between two inert electrodes, using a constant current of $2.50\\text{ A}$ for $20\\text{ minutes}$. Copper metal forms on one electrode, and a gas forms on the other. Use F = 96,485 C/mol e⁻.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Calculate the total charge, in coulombs, and the number of moles of electrons that flow.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F",
+      "3.C"
+     ],
+     "model_answer": "q = It = (2.50 A)(1200 s) = 3000 C; n(e⁻) = 3000/96,485 = 0.0311 mol.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Calculates the charge (3000 C) using the time in seconds",
+       "required_elements": [
+        "3000"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the time in minutes"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Divides by the Faraday constant (about 0.0311 mol e⁻)",
+       "required_elements": [
+        "0.0311"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "multiplies by the Faraday constant"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Calculate the mass of copper that forms.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F",
+      "3.C"
+     ],
+     "model_answer": "Cu²⁺ + 2 e⁻ → Cu, so n(Cu) = 0.0311/2 = 0.0155 mol and the mass is 0.99 g.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Uses two moles of electrons per mole of Cu (about 0.0155 mol Cu)",
+       "required_elements": [
+        "0.0155"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "assumes one mole of electrons per mole of Cu"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Converts to the mass of copper (about 0.99 g)",
+       "required_elements": [
+        "0.99"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits the molar mass"
+       ],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "The gas formed at the other electrode is O₂, from 2 H₂O → O₂ + 4 H⁺ + 4 e⁻. Calculate the volume of O₂ at 298 K and 1.00 atm.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F",
+      "3.C"
+     ],
+     "model_answer": "n(O₂) = 0.0311/4 = 0.00777 mol; V = nRT/P = (0.00777)(0.08206)(298)/1.00 = 0.190 L.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Uses four moles of electrons per mole of O₂ (about 0.00777 mol)",
+       "required_elements": [
+        "0.00777"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses two moles of electrons per mole of O₂"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Applies PV = nRT for about 0.190 L",
+       "required_elements": [
+        "0.190"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the temperature in °C"
+       ],
+       "requires_row_id": "C1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Identify the electrode at which copper forms and justify your answer.",
+     "points": 2,
+     "response_mode": "justify",
+     "skill_codes": [
+      "5.B",
+      "6.E"
+     ],
+     "model_answer": "Copper forms at the cathode: Cu²⁺ gains electrons and is reduced, and reduction occurs at the cathode.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Identifies the electrode at which copper forms as the cathode",
+       "required_elements": [
+        "cathode"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "identifies the anode"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Justifies with Cu²⁺ gaining electrons (reduction), which occurs at the cathode",
+       "required_elements": [
+        "Cu2+ gains electrons",
+        "reduction"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says oxidation occurs at the cathode"
+       ],
+       "requires_row_id": "D1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    },
+    {
+     "label": "E",
+     "prompt": "The student repeats the electrolysis with the current doubled. Predict the time needed to deposit the same mass of copper and justify your answer.",
+     "points": 2,
+     "response_mode": "predict",
+     "skill_codes": [
+      "2.B",
+      "6.E"
+     ],
+     "model_answer": "Half as long: the same mass requires the same charge, q = It, so doubling the current halves the time.",
+     "rubric_rows": [
+      {
+       "row_id": "E1",
+       "points": 1,
+       "criterion": "States that the time needed is half as long",
+       "required_elements": [
+        "half"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says the time stays the same"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "E2",
+       "points": 1,
+       "criterion": "Justifies that the same mass needs the same total charge and q = It",
+       "required_elements": [
+        "same charge",
+        "q = It"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says the mass depends only on the current"
+       ],
+       "requires_row_id": "E1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 23,
+   "facts": [
+    "I=2.5",
+    "t=1200.0",
+    "ne=0.031093",
+    "mCu=0.9880",
+    "VO2=0.1901"
+   ],
+   "expected_values": [
+    {
+     "part": "A",
+     "quantity": "moles of electrons",
+     "value": 0.031092915997305282,
+     "unit": "mol",
+     "tolerance": 0.0003109291599730528
+    },
+    {
+     "part": "B",
+     "quantity": "mass of copper",
+     "value": 0.9879774058143753,
+     "unit": "g",
+     "tolerance": 0.02
+    },
+    {
+     "part": "C",
+     "quantity": "volume of O2",
+     "value": 0.1900856091620459,
+     "unit": "L",
+     "tolerance": 0.02
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "chf_long_electrolysis",
+    "subject": "ap_chemistry",
+    "kind": "frq_bundle",
+    "concept": "Charge, moles of electrons, mass of metal, gas volume, electrode identification, and a proportional prediction",
+    "topic": "9.11",
+    "skill": "5.F",
+    "student_thinking": [
+     "Convert current and time to charge and moles of electrons",
+     "Use the half-reaction stoichiometry for the metal and the gas",
+     "Identify the electrode and reason about the charge needed"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the current is constant and the efficiency is 100 percent",
+      "evidence": "the stimulus states the constant current"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "current and time",
+      "half-reactions"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "exact fractions for charge and moles; ideal gas law recomputed from the fractions",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "5.F",
+       "3.C"
+      ],
+      "topics": [
+       "9.11"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "q = It = (2.50 A)(1200 s) = 3000 C; n(e⁻) = 3000/96,485 = 0.0311 mol."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Calculates the charge (3000 C) using the time in seconds",
+        "elements": [
+         "3000"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Divides by the Faraday constant (about 0.0311 mol e⁻)",
+        "elements": [
+         "0.0311"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "5.F",
+       "3.C"
+      ],
+      "topics": [
+       "9.11"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "Cu²⁺ + 2 e⁻ → Cu, so n(Cu) = 0.0311/2 = 0.0155 mol and the mass is 0.99 g."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Uses two moles of electrons per mole of Cu (about 0.0155 mol Cu)",
+        "elements": [
+         "0.0155"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Converts to the mass of copper (about 0.99 g)",
+        "elements": [
+         "0.99"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "5.F",
+       "3.C"
+      ],
+      "topics": [
+       "9.11"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "n(O₂) = 0.0311/4 = 0.00777 mol; V = nRT/P = (0.00777)(0.08206)(298)/1.00 = 0.190 L."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Uses four moles of electrons per mole of O₂ (about 0.00777 mol)",
+        "elements": [
+         "0.00777"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Applies PV = nRT for about 0.190 L",
+        "elements": [
+         "0.190"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "5.B",
+       "6.E"
+      ],
+      "topics": [
+       "9.11"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "Copper forms at the cathode: Cu²⁺ gains electrons and is reduced, and reduction occurs at the cathode."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Identifies the electrode at which copper forms as the cathode",
+        "elements": [
+         "cathode"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Justifies with Cu²⁺ gaining electrons (reduction), which occurs at the cathode",
+        "elements": [
+         "Cu2+ gains electrons",
+         "reduction"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "E",
+      "skills": [
+       "2.B",
+       "6.E"
+      ],
+      "topics": [
+       "9.11"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "Half as long: the same mass requires the same charge, q = It, so doubling the current halves the time."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "E1",
+        "points": 1,
+        "criterion": "States that the time needed is half as long",
+        "elements": [
+         "half"
+        ]
+       },
+       {
+        "row_id": "E2",
+        "points": 1,
+        "criterion": "Justifies that the same mass needs the same total charge and q = It",
+        "elements": [
+         "same charge",
+         "q = It"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "judgment_demand": [
+     "law_selection",
+     "justification",
+     "representation_reading"
+    ]
+   },
+   "seed": 14500,
+   "pack_id": "chf_long_electrolysis-s14500"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "chf_long_electrolysis",
+   "facts": [
+    "I=2.5",
+    "t=1200.0",
+    "ne=0.031093",
+    "mCu=0.9880",
+    "VO2=0.1901"
+   ],
+   "seed": 14500
+  },
+  "review": null,
+  "difficulty": null
+ },
+ {
+  "candidateKey": "ap_chemistry-f02-k1",
+  "cellId": "ap_chemistry-f02",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "frq_bundle",
+  "keywordCode": "9.11",
+  "unitCode": "9",
+  "skillPrimary": "5.F",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "chf_long_electrolysis",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "part_B_calculation_without_answer_row; part_C_calculation_without_answer_row",
+  "difficultyProvisional": null,
+  "difficultyRationale": null,
+  "payload": {
+   "archetype": "chf_long_electrolysis",
+   "template": "long",
+   "topic": "9.11",
+   "extra_topics": [
+    "9.9",
+    "9.8"
+   ],
+   "skill": "5.F",
+   "representative_skill": "5.F",
+   "calculator": "allowed",
+   "title": "Electrolysis of copper sulfate solution",
+   "stimulus": {
+    "kind": "text",
+    "description": "A student electrolyzes $1.0\\text{ M}$ CuSO₄(aq) between two inert electrodes, using a constant current of $1.50\\text{ A}$ for $60\\text{ minutes}$. Copper metal forms on one electrode, and a gas forms on the other. Use F = 96,485 C/mol e⁻.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Calculate the total charge, in coulombs, and the number of moles of electrons that flow.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F",
+      "3.C"
+     ],
+     "model_answer": "q = It = (1.50 A)(3600 s) = 5400 C; n(e⁻) = 5400/96,485 = 0.0560 mol.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Calculates the charge (5400 C) using the time in seconds",
+       "required_elements": [
+        "5400"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the time in minutes"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Divides by the Faraday constant (about 0.0560 mol e⁻)",
+       "required_elements": [
+        "0.0560"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "multiplies by the Faraday constant"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Calculate the mass of copper that forms.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F",
+      "3.C"
+     ],
+     "model_answer": "Cu²⁺ + 2 e⁻ → Cu, so n(Cu) = 0.0560/2 = 0.0280 mol and the mass is 1.78 g.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Uses two moles of electrons per mole of Cu (about 0.0280 mol Cu)",
+       "required_elements": [
+        "0.0280"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "assumes one mole of electrons per mole of Cu"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Converts to the mass of copper (about 1.78 g)",
+       "required_elements": [
+        "1.78"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits the molar mass"
+       ],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "The gas formed at the other electrode is O₂, from 2 H₂O → O₂ + 4 H⁺ + 4 e⁻. Calculate the volume of O₂ at 298 K and 1.00 atm.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F",
+      "3.C"
+     ],
+     "model_answer": "n(O₂) = 0.0560/4 = 0.01399 mol; V = nRT/P = (0.01399)(0.08206)(298)/1.00 = 0.342 L.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Uses four moles of electrons per mole of O₂ (about 0.01399 mol)",
+       "required_elements": [
+        "0.01399"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses two moles of electrons per mole of O₂"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Applies PV = nRT for about 0.342 L",
+       "required_elements": [
+        "0.342"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the temperature in °C"
+       ],
+       "requires_row_id": "C1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Identify the electrode at which copper forms and justify your answer.",
+     "points": 2,
+     "response_mode": "justify",
+     "skill_codes": [
+      "5.B",
+      "6.E"
+     ],
+     "model_answer": "Copper forms at the cathode: Cu²⁺ gains electrons and is reduced, and reduction occurs at the cathode.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Identifies the electrode at which copper forms as the cathode",
+       "required_elements": [
+        "cathode"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "identifies the anode"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Justifies with Cu²⁺ gaining electrons (reduction), which occurs at the cathode",
+       "required_elements": [
+        "Cu2+ gains electrons",
+        "reduction"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says oxidation occurs at the cathode"
+       ],
+       "requires_row_id": "D1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    },
+    {
+     "label": "E",
+     "prompt": "The student repeats the electrolysis with the current doubled. Predict the time needed to deposit the same mass of copper and justify your answer.",
+     "points": 2,
+     "response_mode": "predict",
+     "skill_codes": [
+      "2.B",
+      "6.E"
+     ],
+     "model_answer": "Half as long: the same mass requires the same charge, q = It, so doubling the current halves the time.",
+     "rubric_rows": [
+      {
+       "row_id": "E1",
+       "points": 1,
+       "criterion": "States that the time needed is half as long",
+       "required_elements": [
+        "half"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says the time stays the same"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "E2",
+       "points": 1,
+       "criterion": "Justifies that the same mass needs the same total charge and q = It",
+       "required_elements": [
+        "same charge",
+        "q = It"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says the mass depends only on the current"
+       ],
+       "requires_row_id": "E1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 23,
+   "facts": [
+    "I=1.5",
+    "t=3600.0",
+    "ne=0.055967",
+    "mCu=1.7784",
+    "VO2=0.3422"
+   ],
+   "expected_values": [
+    {
+     "part": "A",
+     "quantity": "moles of electrons",
+     "value": 0.055967248795149506,
+     "unit": "mol",
+     "tolerance": 0.0005596724879514951
+    },
+    {
+     "part": "B",
+     "quantity": "mass of copper",
+     "value": 1.7783593304658756,
+     "unit": "g",
+     "tolerance": 0.02
+    },
+    {
+     "part": "C",
+     "quantity": "volume of O2",
+     "value": 0.3421540964916826,
+     "unit": "L",
+     "tolerance": 0.02
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "chf_long_electrolysis",
+    "subject": "ap_chemistry",
+    "kind": "frq_bundle",
+    "concept": "Charge, moles of electrons, mass of metal, gas volume, electrode identification, and a proportional prediction",
+    "topic": "9.11",
+    "skill": "5.F",
+    "student_thinking": [
+     "Convert current and time to charge and moles of electrons",
+     "Use the half-reaction stoichiometry for the metal and the gas",
+     "Identify the electrode and reason about the charge needed"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the current is constant and the efficiency is 100 percent",
+      "evidence": "the stimulus states the constant current"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "current and time",
+      "half-reactions"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "exact fractions for charge and moles; ideal gas law recomputed from the fractions",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "5.F",
+       "3.C"
+      ],
+      "topics": [
+       "9.11"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "q = It = (1.50 A)(3600 s) = 5400 C; n(e⁻) = 5400/96,485 = 0.0560 mol."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Calculates the charge (5400 C) using the time in seconds",
+        "elements": [
+         "5400"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Divides by the Faraday constant (about 0.0560 mol e⁻)",
+        "elements": [
+         "0.0560"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "5.F",
+       "3.C"
+      ],
+      "topics": [
+       "9.11"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "Cu²⁺ + 2 e⁻ → Cu, so n(Cu) = 0.0560/2 = 0.0280 mol and the mass is 1.78 g."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Uses two moles of electrons per mole of Cu (about 0.0280 mol Cu)",
+        "elements": [
+         "0.0280"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Converts to the mass of copper (about 1.78 g)",
+        "elements": [
+         "1.78"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "5.F",
+       "3.C"
+      ],
+      "topics": [
+       "9.11"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "n(O₂) = 0.0560/4 = 0.01399 mol; V = nRT/P = (0.01399)(0.08206)(298)/1.00 = 0.342 L."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Uses four moles of electrons per mole of O₂ (about 0.01399 mol)",
+        "elements": [
+         "0.01399"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Applies PV = nRT for about 0.342 L",
+        "elements": [
+         "0.342"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "5.B",
+       "6.E"
+      ],
+      "topics": [
+       "9.11"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "Copper forms at the cathode: Cu²⁺ gains electrons and is reduced, and reduction occurs at the cathode."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Identifies the electrode at which copper forms as the cathode",
+        "elements": [
+         "cathode"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Justifies with Cu²⁺ gaining electrons (reduction), which occurs at the cathode",
+        "elements": [
+         "Cu2+ gains electrons",
+         "reduction"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "E",
+      "skills": [
+       "2.B",
+       "6.E"
+      ],
+      "topics": [
+       "9.11"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "Half as long: the same mass requires the same charge, q = It, so doubling the current halves the time."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "E1",
+        "points": 1,
+        "criterion": "States that the time needed is half as long",
+        "elements": [
+         "half"
+        ]
+       },
+       {
+        "row_id": "E2",
+        "points": 1,
+        "criterion": "Justifies that the same mass needs the same total charge and q = It",
+        "elements": [
+         "same charge",
+         "q = It"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "judgment_demand": [
+     "law_selection",
+     "justification",
+     "representation_reading"
+    ]
+   },
+   "seed": 14501,
+   "pack_id": "chf_long_electrolysis-s14501"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "chf_long_electrolysis",
+   "facts": [
+    "I=1.5",
+    "t=3600.0",
+    "ne=0.055967",
+    "mCu=1.7784",
+    "VO2=0.3422"
+   ],
+   "seed": 14501
+  },
+  "review": null,
+  "difficulty": null
+ },
+ {
+  "candidateKey": "ap_chemistry-f03-k0",
+  "cellId": "ap_chemistry-f03",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "frq_bundle",
+  "keywordCode": "5.2",
+  "unitCode": "5",
+  "skillPrimary": "5.F",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "chf_long_initial_rates",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "generator_defect:table_row_width_mismatch",
+  "difficultyProvisional": null,
+  "difficultyRationale": null,
+  "payload": {
+   "archetype": "chf_long_initial_rates",
+   "template": "long",
+   "topic": "5.2",
+   "extra_topics": [
+    "5.3",
+    "5.5"
+   ],
+   "skill": "5.F",
+   "representative_skill": "5.F",
+   "calculator": "allowed",
+   "title": "Method of initial rates and the rate law",
+   "stimulus": {
+    "kind": "table",
+    "description": "Initial rates for A + B → products at one temperature",
+    "data": {
+     "x_label": "Experiment",
+     "columns": [
+      "[A]₀ (M)",
+      "[B]₀ (M)",
+      "Initial rate (M/s)"
+     ],
+     "y_label": "Initial rate (M/s)",
+     "rows": [
+      [
+       "1",
+       "0.1",
+       "0.1",
+       "1.250e-04"
+      ],
+      [
+       "2",
+       "0.2",
+       "0.1",
+       "2.500e-04"
+      ],
+      [
+       "3",
+       "0.1",
+       "0.2",
+       "2.500e-04"
+      ],
+      [
+       "4",
+       "0.2",
+       "0.2",
+       "5.000e-04"
+      ]
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Determine the order of the reaction with respect to A and with respect to B. Justify each answer with the data.",
+     "points": 3,
+     "response_mode": "determine",
+     "skill_codes": [
+      "5.B",
+      "3.C"
+     ],
+     "model_answer": "Doubling [A] with [B] fixed multiplies the rate by 2, so the order in A is 1; doubling [B] with [A] fixed multiplies the rate by 2, so the order in B is 1.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Finds the order 1 in A by comparing experiments 1 and 2 (rate ratio 2)",
+       "required_elements": [
+        "1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "compares experiments in which both concentrations change"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Finds the order 1 in B by comparing experiments 1 and 3 (rate ratio 2)",
+       "required_elements": [
+        "1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the coefficient from the equation"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Relates each rate ratio to the factor by which the concentration changed",
+       "required_elements": [
+        "rate ratio",
+        "concentration doubled"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "gives the orders without using the data"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Write the rate law for the reaction and calculate the value of the rate constant, including units.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F"
+     ],
+     "model_answer": "rate = k[A]^1[B]^1; k = 1.250e-04/((0.1)^1(0.1)^1) = 0.0125 M⁻¹ s⁻¹.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Writes rate = k[A]^1[B]^1",
+       "required_elements": [
+        "rate = k[A]^1[B]^1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "includes a product or a concentration with the wrong exponent"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Calculates k (about 0.0125 M⁻¹ s⁻¹) with units",
+       "required_elements": [
+        "0.0125"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits the units of k"
+       ],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Calculate the initial rate when [A]₀ = 0.15 M and [B]₀ = 0.3 M.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F"
+     ],
+     "model_answer": "rate = (0.0125)(0.15)^1(0.3)^1 = 5.625e-04 M/s.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Substitutes the concentrations into the rate law",
+       "required_elements": [
+        "0.15",
+        "0.3"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the concentrations of experiment 1"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Calculates the rate (about 5.625e-04 M/s)",
+       "required_elements": [
+        "5.625e-04"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "adds the terms instead of multiplying"
+       ],
+       "requires_row_id": "C1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "The temperature is increased and the experiments are repeated. The rate constant increases. Explain this increase in terms of the molecules that react.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "6.E"
+     ],
+     "model_answer": "A larger fraction of collisions has energy at least equal to the activation energy at the higher temperature, so more collisions are effective and the rate constant is larger.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "States that a larger fraction of collisions has enough energy to react",
+       "required_elements": [
+        "larger fraction",
+        "enough energy"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says the activation energy decreases"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Connects the energy to the activation energy at the higher temperature",
+       "required_elements": [
+        "activation energy",
+        "higher temperature"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says the concentration of the reactants increases"
+       ],
+       "requires_row_id": "D1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    },
+    {
+     "label": "E",
+     "prompt": "A student proposes that the reaction occurs in a single elementary step A + B → products. Is the proposal consistent with the rate law? Justify your answer.",
+     "points": 1,
+     "response_mode": "justify",
+     "skill_codes": [
+      "4.B",
+      "6.E"
+     ],
+     "model_answer": "Consistent: for a single elementary step the rate law would be rate = k[A][B], which matches the experimental rate law.",
+     "rubric_rows": [
+      {
+       "row_id": "E1",
+       "points": 1,
+       "criterion": "States that the proposal is consistent because an elementary step has orders equal to its coefficients, rate = k[A][B]",
+       "required_elements": [
+        "elementary step",
+        "coefficients"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "decides from the coefficient of the overall equation without considering the experimental orders"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 23,
+   "facts": [
+    "a=1",
+    "b=1",
+    "k=0.0125",
+    "A1=0.1",
+    "B1=0.1",
+    "newA=0.15",
+    "newB=0.3",
+    "rnew=5.6250e-04"
+   ],
+   "expected_values": [
+    {
+     "part": "B",
+     "quantity": "rate constant",
+     "value": 0.0125,
+     "unit": "",
+     "tolerance": 0.00025
+    },
+    {
+     "part": "C",
+     "quantity": "new initial rate",
+     "value": 0.0005625,
+     "unit": "M/s",
+     "tolerance": 0.000011249999999999999
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "chf_long_initial_rates",
+    "subject": "ap_chemistry",
+    "kind": "frq_bundle",
+    "concept": "Orders from controlled comparisons of initial rates, the rate law and k, a predicted rate, the effect of temperature, and consistency with an elementary step",
+    "topic": "5.2",
+    "skill": "5.F",
+    "student_thinking": [
+     "Compare experiments in which only one concentration changes",
+     "Write the rate law and solve for k with its units",
+     "Explain the temperature effect and test the proposed step"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the temperature is the same in every experiment",
+      "evidence": "the stimulus states it"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "initial concentrations",
+      "initial rates"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "logs of exact rate ratios give the orders; k recomputed from every experiment",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "5.B",
+       "3.C"
+      ],
+      "topics": [
+       "5.2"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Doubling [A] with [B] fixed multiplies the rate by 2, so the order in A is 1; doubling [B] with [A] fixed multiplies the rate by 2, so the order in B is 1."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Finds the order 1 in A by comparing experiments 1 and 2 (rate ratio 2)",
+        "elements": [
+         "1"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Finds the order 1 in B by comparing experiments 1 and 3 (rate ratio 2)",
+        "elements": [
+         "1"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Relates each rate ratio to the factor by which the concentration changed",
+        "elements": [
+         "rate ratio",
+         "concentration doubled"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "5.F"
+      ],
+      "topics": [
+       "5.2"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "rate = k[A]^1[B]^1; k = 1.250e-04/((0.1)^1(0.1)^1) = 0.0125 M⁻¹ s⁻¹."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Writes rate = k[A]^1[B]^1",
+        "elements": [
+         "rate = k[A]^1[B]^1"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Calculates k (about 0.0125 M⁻¹ s⁻¹) with units",
+        "elements": [
+         "0.0125"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "5.F"
+      ],
+      "topics": [
+       "5.2"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "rate = (0.0125)(0.15)^1(0.3)^1 = 5.625e-04 M/s."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Substitutes the concentrations into the rate law",
+        "elements": [
+         "0.15",
+         "0.3"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Calculates the rate (about 5.625e-04 M/s)",
+        "elements": [
+         "5.625e-04"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "6.E"
+      ],
+      "topics": [
+       "5.2"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "A larger fraction of collisions has energy at least equal to the activation energy at the higher temperature, so more collisions are effective and the rate constant is larger."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "States that a larger fraction of collisions has enough energy to react",
+        "elements": [
+         "larger fraction",
+         "enough energy"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Connects the energy to the activation energy at the higher temperature",
+        "elements": [
+         "activation energy",
+         "higher temperature"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "E",
+      "skills": [
+       "4.B",
+       "6.E"
+      ],
+      "topics": [
+       "5.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "Consistent: for a single elementary step the rate law would be rate = k[A][B], which matches the experimental rate law."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "E1",
+        "points": 1,
+        "criterion": "States that the proposal is consistent because an elementary step has orders equal to its coefficients, rate = k[A][B]",
+        "elements": [
+         "elementary step",
+         "coefficients"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "judgment_demand": [
+     "law_selection",
+     "justification",
+     "representation_reading"
+    ]
+   },
+   "seed": 14500,
+   "pack_id": "chf_long_initial_rates-s14500"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "chf_long_initial_rates",
+   "facts": [
+    "a=1",
+    "b=1",
+    "k=0.0125",
+    "A1=0.1",
+    "B1=0.1",
+    "newA=0.15",
+    "newB=0.3",
+    "rnew=5.6250e-04"
+   ],
+   "seed": 14500
+  },
+  "review": null,
+  "difficulty": null
+ },
+ {
+  "candidateKey": "ap_chemistry-f03-k1",
+  "cellId": "ap_chemistry-f03",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "frq_bundle",
+  "keywordCode": "5.2",
+  "unitCode": "5",
+  "skillPrimary": "5.F",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "chf_long_initial_rates",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "generator_defect:table_row_width_mismatch",
+  "difficultyProvisional": null,
+  "difficultyRationale": null,
+  "payload": {
+   "archetype": "chf_long_initial_rates",
+   "template": "long",
+   "topic": "5.2",
+   "extra_topics": [
+    "5.3",
+    "5.5"
+   ],
+   "skill": "5.F",
+   "representative_skill": "5.F",
+   "calculator": "allowed",
+   "title": "Method of initial rates and the rate law",
+   "stimulus": {
+    "kind": "table",
+    "description": "Initial rates for A + B → products at one temperature",
+    "data": {
+     "x_label": "Experiment",
+     "columns": [
+      "[A]₀ (M)",
+      "[B]₀ (M)",
+      "Initial rate (M/s)"
+     ],
+     "y_label": "Initial rate (M/s)",
+     "rows": [
+      [
+       "1",
+       "0.1",
+       "0.1",
+       "4.000e-05"
+      ],
+      [
+       "2",
+       "0.2",
+       "0.1",
+       "8.000e-05"
+      ],
+      [
+       "3",
+       "0.1",
+       "0.2",
+       "1.600e-04"
+      ],
+      [
+       "4",
+       "0.2",
+       "0.2",
+       "3.200e-04"
+      ]
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Determine the order of the reaction with respect to A and with respect to B. Justify each answer with the data.",
+     "points": 3,
+     "response_mode": "determine",
+     "skill_codes": [
+      "5.B",
+      "3.C"
+     ],
+     "model_answer": "Doubling [A] with [B] fixed multiplies the rate by 2, so the order in A is 1; doubling [B] with [A] fixed multiplies the rate by 4, so the order in B is 2.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Finds the order 1 in A by comparing experiments 1 and 2 (rate ratio 2)",
+       "required_elements": [
+        "1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "compares experiments in which both concentrations change"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Finds the order 2 in B by comparing experiments 1 and 3 (rate ratio 4)",
+       "required_elements": [
+        "2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the coefficient from the equation"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Relates each rate ratio to the factor by which the concentration changed",
+       "required_elements": [
+        "rate ratio",
+        "concentration doubled"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "gives the orders without using the data"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Write the rate law for the reaction and calculate the value of the rate constant, including units.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F"
+     ],
+     "model_answer": "rate = k[A]^1[B]^2; k = 4.000e-05/((0.1)^1(0.1)^2) = 0.04 M⁻² s⁻¹.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Writes rate = k[A]^1[B]^2",
+       "required_elements": [
+        "rate = k[A]^1[B]^2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "includes a product or a concentration with the wrong exponent"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Calculates k (about 0.04 M⁻² s⁻¹) with units",
+       "required_elements": [
+        "0.04"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits the units of k"
+       ],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Calculate the initial rate when [A]₀ = 0.3 M and [B]₀ = 0.15 M.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F"
+     ],
+     "model_answer": "rate = (0.04)(0.3)^1(0.15)^2 = 2.700e-04 M/s.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Substitutes the concentrations into the rate law",
+       "required_elements": [
+        "0.3",
+        "0.15"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the concentrations of experiment 1"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Calculates the rate (about 2.700e-04 M/s)",
+       "required_elements": [
+        "2.700e-04"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "adds the terms instead of multiplying"
+       ],
+       "requires_row_id": "C1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "The temperature is increased and the experiments are repeated. The rate constant increases. Explain this increase in terms of the molecules that react.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "6.E"
+     ],
+     "model_answer": "A larger fraction of collisions has energy at least equal to the activation energy at the higher temperature, so more collisions are effective and the rate constant is larger.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "States that a larger fraction of collisions has enough energy to react",
+       "required_elements": [
+        "larger fraction",
+        "enough energy"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says the activation energy decreases"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Connects the energy to the activation energy at the higher temperature",
+       "required_elements": [
+        "activation energy",
+        "higher temperature"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says the concentration of the reactants increases"
+       ],
+       "requires_row_id": "D1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    },
+    {
+     "label": "E",
+     "prompt": "A student proposes that the reaction occurs in a single elementary step A + B → products. Is the proposal consistent with the rate law? Justify your answer.",
+     "points": 1,
+     "response_mode": "justify",
+     "skill_codes": [
+      "4.B",
+      "6.E"
+     ],
+     "model_answer": "Not consistent: for a single elementary step the rate law would be rate = k[A][B], which does not match the experimental orders 1 and 2.",
+     "rubric_rows": [
+      {
+       "row_id": "E1",
+       "points": 1,
+       "criterion": "States that the proposal is not consistent because an elementary step has orders equal to its coefficients, rate = k[A][B]",
+       "required_elements": [
+        "elementary step",
+        "coefficients"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "decides from the coefficient of the overall equation without considering the experimental orders"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 23,
+   "facts": [
+    "a=1",
+    "b=2",
+    "k=0.04",
+    "A1=0.1",
+    "B1=0.1",
+    "newA=0.3",
+    "newB=0.15",
+    "rnew=2.7000e-04"
+   ],
+   "expected_values": [
+    {
+     "part": "B",
+     "quantity": "rate constant",
+     "value": 0.04,
+     "unit": "",
+     "tolerance": 0.0008
+    },
+    {
+     "part": "C",
+     "quantity": "new initial rate",
+     "value": 0.00027,
+     "unit": "M/s",
+     "tolerance": 0.0000054
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "chf_long_initial_rates",
+    "subject": "ap_chemistry",
+    "kind": "frq_bundle",
+    "concept": "Orders from controlled comparisons of initial rates, the rate law and k, a predicted rate, the effect of temperature, and consistency with an elementary step",
+    "topic": "5.2",
+    "skill": "5.F",
+    "student_thinking": [
+     "Compare experiments in which only one concentration changes",
+     "Write the rate law and solve for k with its units",
+     "Explain the temperature effect and test the proposed step"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the temperature is the same in every experiment",
+      "evidence": "the stimulus states it"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "initial concentrations",
+      "initial rates"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "logs of exact rate ratios give the orders; k recomputed from every experiment",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "5.B",
+       "3.C"
+      ],
+      "topics": [
+       "5.2"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Doubling [A] with [B] fixed multiplies the rate by 2, so the order in A is 1; doubling [B] with [A] fixed multiplies the rate by 4, so the order in B is 2."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Finds the order 1 in A by comparing experiments 1 and 2 (rate ratio 2)",
+        "elements": [
+         "1"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Finds the order 2 in B by comparing experiments 1 and 3 (rate ratio 4)",
+        "elements": [
+         "2"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Relates each rate ratio to the factor by which the concentration changed",
+        "elements": [
+         "rate ratio",
+         "concentration doubled"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "5.F"
+      ],
+      "topics": [
+       "5.2"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "rate = k[A]^1[B]^2; k = 4.000e-05/((0.1)^1(0.1)^2) = 0.04 M⁻² s⁻¹."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Writes rate = k[A]^1[B]^2",
+        "elements": [
+         "rate = k[A]^1[B]^2"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Calculates k (about 0.04 M⁻² s⁻¹) with units",
+        "elements": [
+         "0.04"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "5.F"
+      ],
+      "topics": [
+       "5.2"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "rate = (0.04)(0.3)^1(0.15)^2 = 2.700e-04 M/s."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Substitutes the concentrations into the rate law",
+        "elements": [
+         "0.3",
+         "0.15"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Calculates the rate (about 2.700e-04 M/s)",
+        "elements": [
+         "2.700e-04"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "6.E"
+      ],
+      "topics": [
+       "5.2"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "A larger fraction of collisions has energy at least equal to the activation energy at the higher temperature, so more collisions are effective and the rate constant is larger."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "States that a larger fraction of collisions has enough energy to react",
+        "elements": [
+         "larger fraction",
+         "enough energy"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Connects the energy to the activation energy at the higher temperature",
+        "elements": [
+         "activation energy",
+         "higher temperature"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "E",
+      "skills": [
+       "4.B",
+       "6.E"
+      ],
+      "topics": [
+       "5.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "Not consistent: for a single elementary step the rate law would be rate = k[A][B], which does not match the experimental orders 1 and 2."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "E1",
+        "points": 1,
+        "criterion": "States that the proposal is not consistent because an elementary step has orders equal to its coefficients, rate = k[A][B]",
+        "elements": [
+         "elementary step",
+         "coefficients"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "judgment_demand": [
+     "law_selection",
+     "justification",
+     "representation_reading"
+    ]
+   },
+   "seed": 14501,
+   "pack_id": "chf_long_initial_rates-s14501"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "chf_long_initial_rates",
+   "facts": [
+    "a=1",
+    "b=2",
+    "k=0.04",
+    "A1=0.1",
+    "B1=0.1",
+    "newA=0.3",
+    "newB=0.15",
+    "rnew=2.7000e-04"
+   ],
+   "seed": 14501
+  },
+  "review": null,
+  "difficulty": null
+ },
+ {
+  "candidateKey": "ap_chemistry-f04-k0",
+  "cellId": "ap_chemistry-f04",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "frq_bundle",
+  "keywordCode": "1.7",
+  "unitCode": "1",
+  "skillPrimary": "1.A",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "chf_short_ionization_energy",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "part_B_calculation_without_answer_row; generator_defect:table_row_width_mismatch",
+  "difficultyProvisional": null,
+  "difficultyRationale": null,
+  "payload": {
+   "archetype": "chf_short_ionization_energy",
+   "template": "short",
+   "topic": "1.7",
+   "extra_topics": [
+    "1.6",
+    "1.4"
+   ],
+   "skill": "1.A",
+   "representative_skill": "1.A",
+   "calculator": "allowed",
+   "title": "Successive ionization energies of a main-group element (atomic number 13)",
+   "stimulus": {
+    "kind": "table",
+    "description": "Successive ionization energies of a main-group element (atomic number 13)",
+    "data": {
+     "x_label": "Ionization",
+     "columns": [
+      "Energy (kJ/mol)"
+     ],
+     "y_label": "Energy (kJ/mol)",
+     "rows": [
+      [
+       "IE1",
+       "578"
+      ],
+      [
+       "IE2",
+       "1,817"
+      ],
+      [
+       "IE3",
+       "2,745"
+      ],
+      [
+       "IE4",
+       "11,577"
+      ]
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Identify the number of valence electrons of the element. Justify your answer with the data.",
+     "points": 2,
+     "response_mode": "justify",
+     "skill_codes": [
+      "1.A",
+      "6.E"
+     ],
+     "model_answer": "3 valence electrons: the energy increases sharply between IE3 and IE4 (2,745 to 11,577 kJ/mol), because the next electron comes from a filled inner shell closer to the nucleus.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "States 3 valence electrons",
+       "required_elements": [
+        "3"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "chooses the number of the largest ionization energy"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Cites the large jump between IE3 and IE4 as the removal of an electron from an inner shell",
+       "required_elements": [
+        "large jump",
+        "inner shell"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says the energy increases because the atom is smaller"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Calculate the ratio IE4/IE3 for the element.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "3.C"
+     ],
+     "model_answer": "11,577/2,745 = 4.2.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Divides the energies to get about 4.2",
+       "required_elements": [
+        "4.2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "subtracts the energies instead of dividing"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "A second element in the same period has a larger nuclear charge. Predict whether its first ionization energy is greater or less than the first ionization energy of this element, and justify your answer with Coulomb's law.",
+     "points": 1,
+     "response_mode": "predict",
+     "skill_codes": [
+      "1.B",
+      "6.E"
+     ],
+     "model_answer": "Greater in general: a larger nuclear charge at a similar distance attracts the valence electrons more strongly, so more energy is needed to remove one.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Predicts a greater first ionization energy and cites the stronger attraction from the larger nuclear charge at a similar distance",
+       "required_elements": [
+        "greater",
+        "nuclear charge"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says the larger nuclear charge increases the shielding"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 4,
+   "est_minutes": 9,
+   "facts": [
+    "el=aluminum",
+    "Z=13",
+    "valence=3"
+   ],
+   "expected_values": [
+    {
+     "part": "B",
+     "quantity": "ratio of energies",
+     "value": 4.217486338797814,
+     "unit": "",
+     "tolerance": 0.05
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "chf_short_ionization_energy",
+    "subject": "ap_chemistry",
+    "kind": "frq_bundle",
+    "concept": "Valence electrons from successive ionization energies, a ratio of energies, and a Coulomb's law prediction",
+    "topic": "1.7",
+    "skill": "1.A",
+    "student_thinking": [
+     "Locate the large jump in the successive energies",
+     "Compute the ratio of the two energies",
+     "Use the nuclear charge to predict the trend"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the energies are for the gaseous atom",
+      "evidence": "the data table"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "successive ionization energies"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "the position of the jump found with a ratio search and with the valence count",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "1.A",
+       "6.E"
+      ],
+      "topics": [
+       "1.7"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "3 valence electrons: the energy increases sharply between IE3 and IE4 (2,745 to 11,577 kJ/mol), because the next electron comes from a filled inner shell closer to the nucleus."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "States 3 valence electrons",
+        "elements": [
+         "3"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Cites the large jump between IE3 and IE4 as the removal of an electron from an inner shell",
+        "elements": [
+         "large jump",
+         "inner shell"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "3.C"
+      ],
+      "topics": [
+       "1.7"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "11,577/2,745 = 4.2."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Divides the energies to get about 4.2",
+        "elements": [
+         "4.2"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "1.B",
+       "6.E"
+      ],
+      "topics": [
+       "1.7"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "Greater in general: a larger nuclear charge at a similar distance attracts the valence electrons more strongly, so more energy is needed to remove one."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Predicts a greater first ionization energy and cites the stronger attraction from the larger nuclear charge at a similar distance",
+        "elements": [
+         "greater",
+         "nuclear charge"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 4,
+    "judgment_demand": [
+     "representation_reading",
+     "justification"
+    ]
+   },
+   "seed": 14500,
+   "pack_id": "chf_short_ionization_energy-s14500"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "chf_short_ionization_energy",
+   "facts": [
+    "el=aluminum",
+    "Z=13",
+    "valence=3"
+   ],
+   "seed": 14500
+  },
+  "review": null,
+  "difficulty": null
+ },
+ {
+  "candidateKey": "ap_chemistry-f04-k1",
+  "cellId": "ap_chemistry-f04",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "frq_bundle",
+  "keywordCode": "1.7",
+  "unitCode": "1",
+  "skillPrimary": "1.A",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "chf_short_ionization_energy",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "part_B_calculation_without_answer_row; generator_defect:table_row_width_mismatch",
+  "difficultyProvisional": null,
+  "difficultyRationale": null,
+  "payload": {
+   "archetype": "chf_short_ionization_energy",
+   "template": "short",
+   "topic": "1.7",
+   "extra_topics": [
+    "1.6",
+    "1.4"
+   ],
+   "skill": "1.A",
+   "representative_skill": "1.A",
+   "calculator": "allowed",
+   "title": "Successive ionization energies of a main-group element (atomic number 11)",
+   "stimulus": {
+    "kind": "table",
+    "description": "Successive ionization energies of a main-group element (atomic number 11)",
+    "data": {
+     "x_label": "Ionization",
+     "columns": [
+      "Energy (kJ/mol)"
+     ],
+     "y_label": "Energy (kJ/mol)",
+     "rows": [
+      [
+       "IE1",
+       "496"
+      ],
+      [
+       "IE2",
+       "4,562"
+      ],
+      [
+       "IE3",
+       "6,910"
+      ],
+      [
+       "IE4",
+       "9,543"
+      ]
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Identify the number of valence electrons of the element. Justify your answer with the data.",
+     "points": 2,
+     "response_mode": "justify",
+     "skill_codes": [
+      "1.A",
+      "6.E"
+     ],
+     "model_answer": "1 valence electron: the energy increases sharply between IE1 and IE2 (496 to 4,562 kJ/mol), because the next electron comes from a filled inner shell closer to the nucleus.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "States 1 valence electron",
+       "required_elements": [
+        "1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "chooses the number of the largest ionization energy"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Cites the large jump between IE1 and IE2 as the removal of an electron from an inner shell",
+       "required_elements": [
+        "large jump",
+        "inner shell"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says the energy increases because the atom is smaller"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Calculate the ratio IE2/IE1 for the element.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "3.C"
+     ],
+     "model_answer": "4,562/496 = 9.2.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Divides the energies to get about 9.2",
+       "required_elements": [
+        "9.2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "subtracts the energies instead of dividing"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "A second element in the same period has a larger nuclear charge. Predict whether its first ionization energy is greater or less than the first ionization energy of this element, and justify your answer with Coulomb's law.",
+     "points": 1,
+     "response_mode": "predict",
+     "skill_codes": [
+      "1.B",
+      "6.E"
+     ],
+     "model_answer": "Greater in general: a larger nuclear charge at a similar distance attracts the valence electrons more strongly, so more energy is needed to remove one.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Predicts a greater first ionization energy and cites the stronger attraction from the larger nuclear charge at a similar distance",
+       "required_elements": [
+        "greater",
+        "nuclear charge"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says the larger nuclear charge increases the shielding"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 4,
+   "est_minutes": 9,
+   "facts": [
+    "el=sodium",
+    "Z=11",
+    "valence=1"
+   ],
+   "expected_values": [
+    {
+     "part": "B",
+     "quantity": "ratio of energies",
+     "value": 9.19758064516129,
+     "unit": "",
+     "tolerance": 0.05
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "chf_short_ionization_energy",
+    "subject": "ap_chemistry",
+    "kind": "frq_bundle",
+    "concept": "Valence electrons from successive ionization energies, a ratio of energies, and a Coulomb's law prediction",
+    "topic": "1.7",
+    "skill": "1.A",
+    "student_thinking": [
+     "Locate the large jump in the successive energies",
+     "Compute the ratio of the two energies",
+     "Use the nuclear charge to predict the trend"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the energies are for the gaseous atom",
+      "evidence": "the data table"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "successive ionization energies"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "the position of the jump found with a ratio search and with the valence count",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "1.A",
+       "6.E"
+      ],
+      "topics": [
+       "1.7"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "1 valence electron: the energy increases sharply between IE1 and IE2 (496 to 4,562 kJ/mol), because the next electron comes from a filled inner shell closer to the nucleus."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "States 1 valence electron",
+        "elements": [
+         "1"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Cites the large jump between IE1 and IE2 as the removal of an electron from an inner shell",
+        "elements": [
+         "large jump",
+         "inner shell"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "3.C"
+      ],
+      "topics": [
+       "1.7"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "4,562/496 = 9.2."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Divides the energies to get about 9.2",
+        "elements": [
+         "9.2"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "1.B",
+       "6.E"
+      ],
+      "topics": [
+       "1.7"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "Greater in general: a larger nuclear charge at a similar distance attracts the valence electrons more strongly, so more energy is needed to remove one."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Predicts a greater first ionization energy and cites the stronger attraction from the larger nuclear charge at a similar distance",
+        "elements": [
+         "greater",
+         "nuclear charge"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 4,
+    "judgment_demand": [
+     "representation_reading",
+     "justification"
+    ]
+   },
+   "seed": 14501,
+   "pack_id": "chf_short_ionization_energy-s14501"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "chf_short_ionization_energy",
+   "facts": [
+    "el=sodium",
+    "Z=11",
+    "valence=1"
+   ],
+   "seed": 14501
+  },
+  "review": null,
+  "difficulty": null
+ },
+ {
+  "candidateKey": "ap_chemistry-f05-k0",
+  "cellId": "ap_chemistry-f05",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "frq_bundle",
+  "keywordCode": "4.4",
+  "unitCode": "4",
+  "skillPrimary": "5.F",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "chf_short_precip_limiting",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard AP-style FRQ: limiting reactant via M×V with mL-to-L conversion and 1:1 stoichiometry, a single mass calculation with the molar mass of BaSO4, and a conceptual claim evaluation linking the net ionic equation to the change in ion count. Arithmetic is clean, wording is unambiguous, and reading load is low. Difficulty comes from legitimate levers (choosing the governing relationship, unit conversion, one reasoning step linking a result to a claim), which suits full mocks.",
+  "payload": {
+   "archetype": "chf_short_precip_limiting",
+   "template": "short",
+   "topic": "4.4",
+   "extra_topics": [
+    "4.5",
+    "3.7"
+   ],
+   "skill": "5.F",
+   "representative_skill": "5.F",
+   "calculator": "allowed",
+   "title": "Precipitation with a limiting reactant",
+   "stimulus": {
+    "kind": "text",
+    "description": "A student mixes $75.0\\text{ mL}$ of $0.100\\text{ M}$ BaCl₂(aq) with $25.0\\text{ mL}$ of $0.500\\text{ M}$ Na₂SO₄(aq). A precipitate of BaSO₄ forms. Assume that the reaction goes to completion.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Determine which reactant is the limiting reactant. Show your work.",
+     "points": 2,
+     "response_mode": "determine",
+     "skill_codes": [
+      "5.F",
+      "3.C"
+     ],
+     "model_answer": "n(BaCl₂) = 0.0075 mol and n(Na₂SO₄) = 0.0125 mol; the stoichiometry needs 1 mol Na₂SO₄ per mol BaCl₂, so the limiting reactant is BaCl₂.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Calculates the moles of each reactant (0.0075 mol and 0.0125 mol)",
+       "required_elements": [
+        "0.0075",
+        "0.0125"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses volumes in mL"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Compares the moles using the mole ratio and identifies BaCl₂ as limiting",
+       "required_elements": [
+        "BaCl₂"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "compares the molarities instead of the moles"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Calculate the mass of BaSO₄ that forms.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F"
+     ],
+     "model_answer": "0.0075 mol × 233.4 g/mol = 1.750 g.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Uses the limiting reactant to find about 1.750 g",
+       "required_elements": [
+        "1.750"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the moles of the excess reactant"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "A student claims that the total number of moles of ions in the solution decreases during the precipitation. Is the claim correct? Justify your answer.",
+     "points": 1,
+     "response_mode": "justify",
+     "skill_codes": [
+      "4.B",
+      "6.E"
+     ],
+     "model_answer": "Correct: ions that form the solid leave the solution, so there are fewer moles of dissolved ions.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "States that the claim is correct because ions are removed from the solution as the solid forms",
+       "required_elements": [
+        "ions removed",
+        "solid forms"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says that the mass of the ions decreases because mass is lost"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 4,
+   "est_minutes": 9,
+   "facts": [
+    "salt=BaCl₂",
+    "V1=75.0",
+    "M1=0.1",
+    "V2=25.0",
+    "M2=0.5",
+    "mprod=1.7505"
+   ],
+   "expected_values": [
+    {
+     "part": "B",
+     "quantity": "mass of precipitate",
+     "value": 1.7505,
+     "unit": "g",
+     "tolerance": 0.02
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "chf_short_precip_limiting",
+    "subject": "ap_chemistry",
+    "kind": "frq_bundle",
+    "concept": "Moles from volume and molarity, the limiting reactant by mole ratio, the mass of precipitate, and ions leaving the solution",
+    "topic": "4.4",
+    "skill": "5.F",
+    "student_thinking": [
+     "Find moles of each solution",
+     "Compare with the mole ratio",
+     "Convert the limiting amount to mass"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the reaction goes to completion",
+      "evidence": "the stimulus states it"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "volumes",
+      "molarities"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "extent of reaction from exact fractions for both reactants",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "5.F",
+       "3.C"
+      ],
+      "topics": [
+       "4.4"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "n(BaCl₂) = 0.0075 mol and n(Na₂SO₄) = 0.0125 mol; the stoichiometry needs 1 mol Na₂SO₄ per mol BaCl₂, so the limiting reactant is BaCl₂."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Calculates the moles of each reactant (0.0075 mol and 0.0125 mol)",
+        "elements": [
+         "0.0075",
+         "0.0125"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Compares the moles using the mole ratio and identifies BaCl₂ as limiting",
+        "elements": [
+         "BaCl₂"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "5.F"
+      ],
+      "topics": [
+       "4.4"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "0.0075 mol × 233.4 g/mol = 1.750 g."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Uses the limiting reactant to find about 1.750 g",
+        "elements": [
+         "1.750"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "4.B",
+       "6.E"
+      ],
+      "topics": [
+       "4.4"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "Correct: ions that form the solid leave the solution, so there are fewer moles of dissolved ions."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "States that the claim is correct because ions are removed from the solution as the solid forms",
+        "elements": [
+         "ions removed",
+         "solid forms"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 4,
+    "judgment_demand": [
+     "law_selection",
+     "justification"
+    ]
+   },
+   "seed": 14500,
+   "pack_id": "chf_short_precip_limiting-s14500"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "chf_short_precip_limiting",
+   "facts": [
+    "salt=BaCl₂",
+    "V1=75.0",
+    "M1=0.1",
+    "V2=25.0",
+    "M2=0.5",
+    "mprod=1.7505"
+   ],
+   "seed": 14500
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound short FRQ on a precipitation limiting reactant. The keys are unique and correct, and the rubric is consistent. The scope and load are appropriate for a 4-point short question.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits 4.4 with 4.5 and 3.7. Parts A and B are 5.F, and part C is a reasoning link to a claim."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys verified. BaCl2 is limiting, the mass is 1.75 g, and the claim in C is correct. Rubric rows are consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and states the completion assumption."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Free response; the listed common errors are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light arithmetic, calculator allowed, appropriate time load."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style FRQ: limiting reactant via M×V with mL-to-L conversion and 1:1 stoichiometry, a single mass calculation with the molar mass of BaSO4, and a conceptual claim evaluation linking the net ionic equation to the change in ion count. Arithmetic is clean, wording is unambiguous, and reading load is low. Difficulty comes from legitimate levers (choosing the governing relationship, unit conversion, one reasoning step linking a result to a claim), which suits full mocks.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-f05-k1",
+  "cellId": "ap_chemistry-f05",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "frq_bundle",
+  "keywordCode": "4.4",
+  "unitCode": "4",
+  "skillPrimary": "5.F",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "chf_short_precip_limiting",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_stimulus_expression",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Typical AP FRQ-style item. Requires mL to L conversion, mole calculation, limiting reactant comparison using 1:1 stoichiometry, mass from moles, and a short conceptual justification about ion count change in precipitation. Arithmetic is short and clean, wording is unambiguous, and the content is in scope for topics 4.4, 4.5 and 3.7. Difficulty comes from legitimate levers (choosing the governing relationship, unit conversion, one reasoning step linking a result to a claim).",
+  "payload": {
+   "archetype": "chf_short_precip_limiting",
+   "template": "short",
+   "topic": "4.4",
+   "extra_topics": [
+    "4.5",
+    "3.7"
+   ],
+   "skill": "5.F",
+   "representative_skill": "5.F",
+   "calculator": "allowed",
+   "title": "Precipitation with a limiting reactant",
+   "stimulus": {
+    "kind": "text",
+    "description": "A student mixes $50.0\\text{ mL}$ of $0.200\\text{ M}$ CaCl₂(aq) with $50.0\\text{ mL}$ of $0.300\\text{ M}$ Na₂CO₃(aq). A precipitate of CaCO₃ forms. Assume that the reaction goes to completion.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Determine which reactant is the limiting reactant. Show your work.",
+     "points": 2,
+     "response_mode": "determine",
+     "skill_codes": [
+      "5.F",
+      "3.C"
+     ],
+     "model_answer": "n(CaCl₂) = 0.0100 mol and n(Na₂CO₃) = 0.0150 mol; the stoichiometry needs 1 mol Na₂CO₃ per mol CaCl₂, so the limiting reactant is CaCl₂.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Calculates the moles of each reactant (0.0100 mol and 0.0150 mol)",
+       "required_elements": [
+        "0.0100",
+        "0.0150"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses volumes in mL"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Compares the moles using the mole ratio and identifies CaCl₂ as limiting",
+       "required_elements": [
+        "CaCl₂"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "compares the molarities instead of the moles"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Calculate the mass of CaCO₃ that forms.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F"
+     ],
+     "model_answer": "0.0100 mol × 100.1 g/mol = 1.001 g.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Uses the limiting reactant to find about 1.001 g",
+       "required_elements": [
+        "1.001"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the moles of the excess reactant"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "A student claims that the total number of moles of ions in the solution decreases during the precipitation. Is the claim correct? Justify your answer.",
+     "points": 1,
+     "response_mode": "justify",
+     "skill_codes": [
+      "4.B",
+      "6.E"
+     ],
+     "model_answer": "Correct: ions that form the solid leave the solution, so there are fewer moles of dissolved ions.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "States that the claim is correct because ions are removed from the solution as the solid forms",
+       "required_elements": [
+        "ions removed",
+        "solid forms"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says that the mass of the ions decreases because mass is lost"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 4,
+   "est_minutes": 9,
+   "facts": [
+    "salt=CaCl₂",
+    "V1=50.0",
+    "M1=0.2",
+    "V2=50.0",
+    "M2=0.3",
+    "mprod=1.0010"
+   ],
+   "expected_values": [
+    {
+     "part": "B",
+     "quantity": "mass of precipitate",
+     "value": 1.0010000000000001,
+     "unit": "g",
+     "tolerance": 0.02
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "chf_short_precip_limiting",
+    "subject": "ap_chemistry",
+    "kind": "frq_bundle",
+    "concept": "Moles from volume and molarity, the limiting reactant by mole ratio, the mass of precipitate, and ions leaving the solution",
+    "topic": "4.4",
+    "skill": "5.F",
+    "student_thinking": [
+     "Find moles of each solution",
+     "Compare with the mole ratio",
+     "Convert the limiting amount to mass"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the reaction goes to completion",
+      "evidence": "the stimulus states it"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "volumes",
+      "molarities"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "extent of reaction from exact fractions for both reactants",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "5.F",
+       "3.C"
+      ],
+      "topics": [
+       "4.4"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "n(CaCl₂) = 0.0100 mol and n(Na₂CO₃) = 0.0150 mol; the stoichiometry needs 1 mol Na₂CO₃ per mol CaCl₂, so the limiting reactant is CaCl₂."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Calculates the moles of each reactant (0.0100 mol and 0.0150 mol)",
+        "elements": [
+         "0.0100",
+         "0.0150"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Compares the moles using the mole ratio and identifies CaCl₂ as limiting",
+        "elements": [
+         "CaCl₂"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "5.F"
+      ],
+      "topics": [
+       "4.4"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "0.0100 mol × 100.1 g/mol = 1.001 g."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Uses the limiting reactant to find about 1.001 g",
+        "elements": [
+         "1.001"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "4.B",
+       "6.E"
+      ],
+      "topics": [
+       "4.4"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "Correct: ions that form the solid leave the solution, so there are fewer moles of dissolved ions."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "States that the claim is correct because ions are removed from the solution as the solid forms",
+        "elements": [
+         "ions removed",
+         "solid forms"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 4,
+    "judgment_demand": [
+     "law_selection",
+     "justification"
+    ]
+   },
+   "seed": 14501,
+   "pack_id": "chf_short_precip_limiting-s14501"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "chf_short_precip_limiting",
+   "facts": [
+    "salt=CaCl₂",
+    "V1=50.0",
+    "M1=0.2",
+    "V2=50.0",
+    "M2=0.3",
+    "mprod=1.0010"
+   ],
+   "seed": 14501
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The keys are correct, and the 1/2/1 short-question structure and the load are appropriate. It fails on stimulus completeness: the data object is empty, and the topic label for parts A and B is a stretch.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A and B are limiting-reactant and mass calculations (5.F) and fit 4.4/4.5. Part C is a conceptual claim about ions leaving solution (6.E). The bundle may span 4.4, 4.5 and 3.7."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are unique and correct: CaCl2 is limiting, the mass is 1.001 g, and the ion count falls from 0.0750 mol to 0.0550 mol. The rubric rows are consistent. Row C1's required elements are somewhat rigid for matching free-text answers."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stimulus is a text-only scenario with empty data, which is complete enough because the values are in the description. Part C does not state that spectator ions remain, though the answer is still unambiguous. The failure on this criterion is for the empty data object as the machine-readable specification."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Free-response item; there are no multiple-choice distractors. The listed common errors are realistic misconceptions."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The arithmetic is light, a calculator is allowed, and the 4 points in about 9 minutes is reasonable."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Typical AP FRQ-style item. Requires mL to L conversion, mole calculation, limiting reactant comparison using 1:1 stoichiometry, mass from moles, and a short conceptual justification about ion count change in precipitation. Arithmetic is short and clean, wording is unambiguous, and the content is in scope for topics 4.4, 4.5 and 3.7. Difficulty comes from legitimate levers (choosing the governing relationship, unit conversion, one reasoning step linking a result to a claim).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-f06-k0",
+  "cellId": "ap_chemistry-f06",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "frq_bundle",
+  "keywordCode": "3.1",
+  "unitCode": "3",
+  "skillPrimary": "3.A",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "chf_short_imf_dissolving",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_scope_skill; criterion_failed_key_scoring; criterion_failed_distractor_explanation; reference_pattern_mismatch",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Short, qualitative recall-and-explain item on core topic 3.1/3.8 content: identify ionic bonding in NaCl, predict dissolving via ion-dipole attractions compared with ionic attractions, and explain a temperature effect on solubility in energy terms. There is no calculation, graph, or table, so no data reading or representation changes. The skill 3.A target (representing phenomena with graphs, scale, units) is barely engaged, since no graph or data is supplied, so the item is a poor fit for that skill, but it is not hard. Reasoning is brief and uses standard textbook statements. Part C is slightly open-ended (endothermic dissolution vs. kinetic energy), but it is still routine. The item is better suited to foundational practice than to full mocks. Difficulty does not come from unfair sources.",
+  "payload": {
+   "archetype": "chf_short_imf_dissolving",
+   "template": "short",
+   "topic": "3.1",
+   "extra_topics": [
+    "3.2",
+    "3.8"
+   ],
+   "skill": "3.A",
+   "representative_skill": "3.A",
+   "calculator": "allowed",
+   "title": "Intermolecular forces and dissolving",
+   "stimulus": {
+    "kind": "text",
+    "description": "A student attempts to dissolve NaCl in H₂O. Both substances are at 25 °C. Particle diagrams are not provided.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Identify the strongest type of intermolecular or interparticle attraction in pure NaCl.",
+     "points": 1,
+     "response_mode": "identify",
+     "skill_codes": [
+      "3.A"
+     ],
+     "model_answer": "The strongest attraction is ionic bonds.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "States ionic bonds",
+       "required_elements": [
+        "ionic bonds"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "names a force that does not apply to this substance"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Predict whether NaCl dissolves to a significant extent in H₂O. Justify your prediction by comparing the attractions before and after mixing.",
+     "points": 2,
+     "response_mode": "predict",
+     "skill_codes": [
+      "3.A",
+      "6.E"
+     ],
+     "model_answer": "It dissolves: ion–dipole attractions between the ions and water molecules compensate for the energy needed to separate the ions.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Predicts that NaCl dissolves",
+       "required_elements": [
+        "dissolves"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "decides from the molar mass"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Compares the new attractions between solute and solvent with the attractions in the pure substances",
+       "required_elements": [
+        "attractions",
+        "pure substances"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "states that like dissolves like without comparing the attractions"
+       ],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "The student heats the mixture and observes that more solute dissolves. Explain this observation in terms of energy.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "6.E"
+     ],
+     "model_answer": "Dissolving is endothermic or the increased kinetic energy helps separate particles; at a higher temperature more particles have the energy needed to overcome attractions in the solute.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Relates the higher temperature to particles having more energy to separate the solute particles, or the entropy-favored mixing",
+       "required_elements": [
+        "more energy",
+        "separate particles"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says heating creates new attractions between the solute and the solvent"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 4,
+   "est_minutes": 9,
+   "facts": [
+    "solute=NaCl",
+    "solvent=H₂O",
+    "dissolves=True"
+   ],
+   "expected_values": [],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "chf_short_imf_dissolving",
+    "subject": "ap_chemistry",
+    "kind": "frq_bundle",
+    "concept": "Identify attractions, predict solubility by comparing attractions, and explain the effect of temperature",
+    "topic": "3.1",
+    "skill": "3.A",
+    "student_thinking": [
+     "Identify the strongest attraction in the pure solute",
+     "Compare the attractions before and after mixing",
+     "Relate temperature to the energy of the particles"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the substances are at the same temperature",
+      "evidence": "the stimulus states it"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "solute and solvent"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "tabulated polarity and attraction types for the four pairs",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "3.A"
+      ],
+      "topics": [
+       "3.1"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "The strongest attraction is ionic bonds."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "States ionic bonds",
+        "elements": [
+         "ionic bonds"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "3.A",
+       "6.E"
+      ],
+      "topics": [
+       "3.1"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "It dissolves: ion–dipole attractions between the ions and water molecules compensate for the energy needed to separate the ions."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Predicts that NaCl dissolves",
+        "elements": [
+         "dissolves"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Compares the new attractions between solute and solvent with the attractions in the pure substances",
+        "elements": [
+         "attractions",
+         "pure substances"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "6.E"
+      ],
+      "topics": [
+       "3.1"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "Dissolving is endothermic or the increased kinetic energy helps separate particles; at a higher temperature more particles have the energy needed to overcome attractions in the solute."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Relates the higher temperature to particles having more energy to separate the solute particles, or the entropy-favored mixing",
+        "elements": [
+         "more energy",
+         "separate particles"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 4,
+    "judgment_demand": [
+     "representation_reading",
+     "justification"
+    ]
+   },
+   "seed": 14500,
+   "pack_id": "chf_short_imf_dissolving-s14500"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "chf_short_imf_dissolving",
+   "facts": [
+    "solute=NaCl",
+    "solvent=H₂O",
+    "dissolves=True"
+   ],
+   "seed": 14500
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item fails on skill fit, because nothing assesses representing data and phenomena (3.A). It also fails on key and scoring, because part C is chemically weak and hedged (NaCl solubility is nearly temperature-independent) and the rubric is keyword-based. The common_errors entries are generic and not tied to named misconceptions.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "The target skill is 3.A (representation with graphs, scale and units), but no part asks for or reads a representation. The parts are identify, predict and explain, and the stimulus states that no particle diagram is provided. Part A is a recall question tagged 3.A."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The part C model answer hedges with \"endothermic or the increased kinetic energy\", which is vague. NaCl solubility barely changes with temperature, so the premise is chemically weak. Rubric B2 rewards the keywords \"attractions\" and \"pure substances\" and does not require ion–dipole attractions to be named. The rubric rows are keyword-based and permit loose answers."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus is a short text description and is clear. It is complete for text-only parts."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The common_errors entries are generic, for example \"names a force that does not apply\", and are not tied to specific named misconceptions. The item has no explanation of wrong answers."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is fine at about 9 minutes with no calculation. The calculator designation is irrelevant but harmless."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Short, qualitative recall-and-explain item on core topic 3.1/3.8 content: identify ionic bonding in NaCl, predict dissolving via ion-dipole attractions compared with ionic attractions, and explain a temperature effect on solubility in energy terms. There is no calculation, graph, or table, so no data reading or representation changes. The skill 3.A target (representing phenomena with graphs, scale, units) is barely engaged, since no graph or data is supplied, so the item is a poor fit for that skill, but it is not hard. Reasoning is brief and uses standard textbook statements. Part C is slightly open-ended (endothermic dissolution vs. kinetic energy), but it is still routine. The item is better suited to foundational practice than to full mocks. Difficulty does not come from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 180
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-f06-k1",
+  "cellId": "ap_chemistry-f06",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "frq_bundle",
+  "keywordCode": "3.1",
+  "unitCode": "3",
+  "skillPrimary": "3.A",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "chf_short_imf_dissolving",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "solver_disagrees:C:flagged; criterion_failed_scope_skill; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability; instant_reject_wrong_key; instant_reject_missing_condition; reference_pattern_mismatch",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Three short conceptual recall and justification tasks: identify hydrogen bonding in CH3OH, apply like-dissolves-like by comparing solute-solute, solvent-solvent and solute-solvent attractions, and give a brief energy explanation for increased dissolving on heating. No data, graph, or calculation. Concept depth is moderate and routine. Weak alignment with skill 3.A (no graph, scale, or units to represent), and Part C has an unstated assumption (endothermic dissolution; methanol and water are miscible, so 'more solute dissolves' is a slightly awkward premise) that should be clarified.",
+  "payload": {
+   "archetype": "chf_short_imf_dissolving",
+   "template": "short",
+   "topic": "3.1",
+   "extra_topics": [
+    "3.2",
+    "3.8"
+   ],
+   "skill": "3.A",
+   "representative_skill": "3.A",
+   "calculator": "allowed",
+   "title": "Intermolecular forces and dissolving",
+   "stimulus": {
+    "kind": "text",
+    "description": "A student attempts to dissolve CH₃OH in H₂O. Both substances are at 25 °C. Particle diagrams are not provided.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Identify the strongest type of intermolecular or interparticle attraction in pure CH₃OH.",
+     "points": 1,
+     "response_mode": "identify",
+     "skill_codes": [
+      "3.A"
+     ],
+     "model_answer": "The strongest attraction is hydrogen bonding.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "States hydrogen bonding",
+       "required_elements": [
+        "hydrogen bonding"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "names a force that does not apply to this substance"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Predict whether CH₃OH dissolves to a significant extent in H₂O. Justify your prediction by comparing the attractions before and after mixing.",
+     "points": 2,
+     "response_mode": "predict",
+     "skill_codes": [
+      "3.A",
+      "6.E"
+     ],
+     "model_answer": "It dissolves: the attractions between CH₃OH and H₂O (hydrogen bonds) are comparable to the hydrogen bonds in each pure liquid.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Predicts that CH₃OH dissolves",
+       "required_elements": [
+        "dissolves"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "decides from the molar mass"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Compares the new attractions between solute and solvent with the attractions in the pure substances",
+       "required_elements": [
+        "attractions",
+        "pure substances"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "states that like dissolves like without comparing the attractions"
+       ],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "The student heats the mixture and observes that more solute dissolves. Explain this observation in terms of energy.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "6.E"
+     ],
+     "model_answer": "Dissolving is endothermic or the increased kinetic energy helps separate particles; at a higher temperature more particles have the energy needed to overcome attractions in the solute.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Relates the higher temperature to particles having more energy to separate the solute particles, or the entropy-favored mixing",
+       "required_elements": [
+        "more energy",
+        "separate particles"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says heating creates new attractions between the solute and the solvent"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 4,
+   "est_minutes": 9,
+   "facts": [
+    "solute=CH₃OH",
+    "solvent=H₂O",
+    "dissolves=True"
+   ],
+   "expected_values": [],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "chf_short_imf_dissolving",
+    "subject": "ap_chemistry",
+    "kind": "frq_bundle",
+    "concept": "Identify attractions, predict solubility by comparing attractions, and explain the effect of temperature",
+    "topic": "3.1",
+    "skill": "3.A",
+    "student_thinking": [
+     "Identify the strongest attraction in the pure solute",
+     "Compare the attractions before and after mixing",
+     "Relate temperature to the energy of the particles"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the substances are at the same temperature",
+      "evidence": "the stimulus states it"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "solute and solvent"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "tabulated polarity and attraction types for the four pairs",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "3.A"
+      ],
+      "topics": [
+       "3.1"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "The strongest attraction is hydrogen bonding."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "States hydrogen bonding",
+        "elements": [
+         "hydrogen bonding"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "3.A",
+       "6.E"
+      ],
+      "topics": [
+       "3.1"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "It dissolves: the attractions between CH₃OH and H₂O (hydrogen bonds) are comparable to the hydrogen bonds in each pure liquid."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Predicts that CH₃OH dissolves",
+        "elements": [
+         "dissolves"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Compares the new attractions between solute and solvent with the attractions in the pure substances",
+        "elements": [
+         "attractions",
+         "pure substances"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "6.E"
+      ],
+      "topics": [
+       "3.1"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "Dissolving is endothermic or the increased kinetic energy helps separate particles; at a higher temperature more particles have the energy needed to overcome attractions in the solute."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Relates the higher temperature to particles having more energy to separate the solute particles, or the entropy-favored mixing",
+        "elements": [
+         "more energy",
+         "separate particles"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 4,
+    "judgment_demand": [
+     "representation_reading",
+     "justification"
+    ]
+   },
+   "seed": 14501,
+   "pack_id": "chf_short_imf_dissolving-s14501"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "chf_short_imf_dissolving",
+   "facts": [
+    "solute=CH₃OH",
+    "solvent=H₂O",
+    "dissolves=True"
+   ],
+   "seed": 14501
+  },
+  "review": {
+   "instant_reject": [
+    "wrong_key",
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Rejected. Part C rests on a false premise: methanol and water are miscible in all proportions, so heating cannot dissolve more solute, and the mixing is slightly exothermic, so the endothermic claim in the key is wrong. The item also does not target skill 3.A, because it has no representation or graph demand.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Dominant skill is not 3.A representation. No graph, diagram or units are involved, and the item is recall and justification. Part C is tagged 6.E."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part C's key says dissolving is endothermic, but CH3OH-H2O mixing is slightly exothermic and the two are miscible in all proportions. The observation that more solute dissolves on heating is physically impossible. The rubric also accepts non-unique answers (kinetic energy or entropy)."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stimulus has empty data. It mentions particle diagrams that are not provided. The phrase 'dissolves to a significant extent' is misleading for fully miscible liquids."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "This is a free-response item with no distractors. Common-error notes are generic."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The flawed premise in part C makes it unsuitable for an exam. Students who know that methanol and water are miscible would be penalized."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Three short conceptual recall and justification tasks: identify hydrogen bonding in CH3OH, apply like-dissolves-like by comparing solute-solute, solvent-solvent and solute-solvent attractions, and give a brief energy explanation for increased dissolving on heating. No data, graph, or calculation. Concept depth is moderate and routine. Weak alignment with skill 3.A (no graph, scale, or units to represent), and Part C has an unstated assumption (endothermic dissolution; methanol and water are miscible, so 'more solute dissolves' is a slightly awkward premise) that should be clarified.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-f07-k0",
+  "cellId": "ap_chemistry-f07",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "frq_bundle",
+  "keywordCode": "7.7",
+  "unitCode": "7",
+  "skillPrimary": "5.F",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "chf_short_ice_table",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_key_scoring; criterion_failed_stimulus_expression; instant_reject_wrong_key; instant_reject_missing_condition; reference_pattern_mismatch",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Standard 1:1:1 ICE-table problem. Part A requires the K expression and equilibrium concentrations from stoichiometry. Part B is a single substitution to get Kc = 0.625. Part C requires writing z/(0.5-z)^2 = Kc (no solving) and a qualitative justification that lower starting concentrations favor the side with more gas moles, so z < 0.2. Concepts are core Unit 7 (7.4, 7.7), reasoning is short, and arithmetic is light. Minor wording flaw: part C says 'larger overall' although the second experiment's starting concentrations are smaller. This could confuse students but is not an intended difficulty lever.",
+  "payload": {
+   "archetype": "chf_short_ice_table",
+   "template": "short",
+   "topic": "7.7",
+   "extra_topics": [
+    "7.5",
+    "7.4"
+   ],
+   "skill": "5.F",
+   "representative_skill": "5.F",
+   "calculator": "allowed",
+   "title": "ICE table and equilibrium concentrations",
+   "stimulus": {
+    "kind": "text",
+    "description": "For the gas-phase reaction A(g) + B(g) ⇌ C(g), a student starts a rigid container with $1\\text{ M}$ of A and $0.6\\text{ M}$ of B and no C. At equilibrium at a fixed temperature, the concentration of C is $0.2\\text{ M}$.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Write the equilibrium constant expression and calculate the equilibrium concentrations of A and B.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F",
+      "3.C"
+     ],
+     "model_answer": "[A] = 1 − 0.2 = 0.8 M and [B] = 0.6 − 0.2 = 0.4 M, because each mole of C formed uses one mole of A and one of B.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Writes Kc = [C]/([A][B])",
+       "required_elements": [
+        "Kc = [C]/([A][B])"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "puts the reactants in the numerator"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Calculates [A] = 0.8 M and [B] = 0.4 M",
+       "required_elements": [
+        "0.8",
+        "0.4"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "subtracts twice the change"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Calculate the value of Kc.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F"
+     ],
+     "model_answer": "Kc = 0.2/((0.8)(0.4)) = 0.625.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Substitutes into the expression for about 0.625",
+       "required_elements": [
+        "0.625"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the initial concentrations"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "A second experiment at the same temperature starts with $0.5\\text{ M}$ of A and $0.5\\text{ M}$ of B and no C. The equilibrium concentration of C is z. Write an equation that relates z to Kc and state whether z is greater or less than the concentration of C in the first experiment when the starting concentrations are larger overall. Justify your answer.",
+     "points": 1,
+     "response_mode": "justify",
+     "skill_codes": [
+      "6.D",
+      "6.E"
+     ],
+     "model_answer": "Kc = z/((A₀ − z)(B₀ − z)); a larger starting amount of reactants gives a larger z because the reaction must shift further toward C to restore the same K (z ≈ 0.100 M here).",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Writes Kc = z/((A₀ − z)(B₀ − z)) and links larger starting concentrations to a larger equilibrium concentration of C",
+       "required_elements": [
+        "Kc = z",
+        "larger starting concentrations"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says Kc changes with the starting concentrations"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 4,
+   "est_minutes": 9,
+   "facts": [
+    "A0=1.0",
+    "B0=0.6",
+    "x=0.2",
+    "K=0.6250"
+   ],
+   "expected_values": [
+    {
+     "part": "B",
+     "quantity": "Kc",
+     "value": 0.625,
+     "unit": "",
+     "tolerance": 0.0125
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "chf_short_ice_table",
+    "subject": "ap_chemistry",
+    "kind": "frq_bundle",
+    "concept": "Equilibrium concentrations from the change in a product, Kc, and the effect of the starting amounts",
+    "topic": "7.7",
+    "skill": "5.F",
+    "student_thinking": [
+     "Use the stoichiometry of the change",
+     "Substitute equilibrium concentrations into Kc",
+     "Reason about a second experiment with the same K"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the temperature is fixed",
+      "evidence": "the stimulus states it"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "initial concentrations",
+      "equilibrium concentration of C"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "Kc from exact fractions; the second experiment solved by bisection",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "5.F",
+       "3.C"
+      ],
+      "topics": [
+       "7.7"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "[A] = 1 − 0.2 = 0.8 M and [B] = 0.6 − 0.2 = 0.4 M, because each mole of C formed uses one mole of A and one of B."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Writes Kc = [C]/([A][B])",
+        "elements": [
+         "Kc = [C]/([A][B])"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Calculates [A] = 0.8 M and [B] = 0.4 M",
+        "elements": [
+         "0.8",
+         "0.4"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "5.F"
+      ],
+      "topics": [
+       "7.7"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "Kc = 0.2/((0.8)(0.4)) = 0.625."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Substitutes into the expression for about 0.625",
+        "elements": [
+         "0.625"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "6.D",
+       "6.E"
+      ],
+      "topics": [
+       "7.7"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "Kc = z/((A₀ − z)(B₀ − z)); a larger starting amount of reactants gives a larger z because the reaction must shift further toward C to restore the same K (z ≈ 0.100 M here)."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Writes Kc = z/((A₀ − z)(B₀ − z)) and links larger starting concentrations to a larger equilibrium concentration of C",
+        "elements": [
+         "Kc = z",
+         "larger starting concentrations"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 4,
+    "judgment_demand": [
+     "law_selection",
+     "justification"
+    ]
+   },
+   "seed": 14500,
+   "pack_id": "chf_short_ice_table-s14500"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "chf_short_ice_table",
+   "facts": [
+    "A0=1.0",
+    "B0=0.6",
+    "x=0.2",
+    "K=0.6250"
+   ],
+   "seed": 14500
+  },
+  "review": {
+   "instant_reject": [
+    "wrong_key",
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Parts A and B are correct. Part C is flawed: the phrase \"when the starting concentrations are larger overall\" contradicts the setup, since experiment 2 starts lower than experiment 1. The model answer says larger starting amounts give larger z yet cites z ≈ 0.100 M, which is less than 0.2 M. The rubric never requires the correct direction (z less than 0.2 M), so the key is inconsistent and the scoring unsound.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A and B fit 7.7 and 5.F. Part C asks for no calculation, so it does not target 5.F."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part C's model answer is internally contradictory (claims a larger z while citing 0.100 M, which is smaller than 0.2 M). The rubric does not state the correct direction."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Part C's wording is ambiguous and misleading about which experiment has larger starting concentrations."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to this free-response item; the listed common errors are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Time and calculator load are appropriate."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard 1:1:1 ICE-table problem. Part A requires the K expression and equilibrium concentrations from stoichiometry. Part B is a single substitution to get Kc = 0.625. Part C requires writing z/(0.5-z)^2 = Kc (no solving) and a qualitative justification that lower starting concentrations favor the side with more gas moles, so z < 0.2. Concepts are core Unit 7 (7.4, 7.7), reasoning is short, and arithmetic is light. Minor wording flaw: part C says 'larger overall' although the second experiment's starting concentrations are smaller. This could confuse students but is not an intended difficulty lever.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-f07-k1",
+  "cellId": "ap_chemistry-f07",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "frq_bundle",
+  "keywordCode": "7.7",
+  "unitCode": "7",
+  "skillPrimary": "5.F",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "chf_short_ice_table",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "solver_disagrees:C:flagged; criterion_failed_scope_skill; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability; instant_reject_wrong_key; reference_pattern_mismatch",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Parts A and B are routine ICE-table and Kc calculations (basic level). Part C requires setting up the equilibrium expression in terms of z (a quadratic that is only written, not solved) and then judging how z compares with 0.1 M. That judgment needs either a Q vs K check at z = 0.1 (Q ≈ 0.74 > 0.625, so z < 0.1) or a limiting-reagent argument. This one extra reasoning step linking a result to a claim is an allowed lever. The arithmetic is short and clean, and the stimulus is brief. Part C's wording ('larger overall') is slightly loose and could be tightened, but it does not make the item hard for unfair reasons.",
+  "payload": {
+   "archetype": "chf_short_ice_table",
+   "template": "short",
+   "topic": "7.7",
+   "extra_topics": [
+    "7.5",
+    "7.4"
+   ],
+   "skill": "5.F",
+   "representative_skill": "5.F",
+   "calculator": "allowed",
+   "title": "ICE table and equilibrium concentrations",
+   "stimulus": {
+    "kind": "text",
+    "description": "For the gas-phase reaction A(g) + B(g) ⇌ C(g), a student starts a rigid container with $0.5\\text{ M}$ of A and $0.5\\text{ M}$ of B and no C. At equilibrium at a fixed temperature, the concentration of C is $0.1\\text{ M}$.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Write the equilibrium constant expression and calculate the equilibrium concentrations of A and B.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F",
+      "3.C"
+     ],
+     "model_answer": "[A] = 0.5 − 0.1 = 0.4 M and [B] = 0.5 − 0.1 = 0.4 M, because each mole of C formed uses one mole of A and one of B.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Writes Kc = [C]/([A][B])",
+       "required_elements": [
+        "Kc = [C]/([A][B])"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "puts the reactants in the numerator"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Calculates [A] = 0.4 M and [B] = 0.4 M",
+       "required_elements": [
+        "0.4",
+        "0.4"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "subtracts twice the change"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Calculate the value of Kc.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F"
+     ],
+     "model_answer": "Kc = 0.1/((0.4)(0.4)) = 0.625.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Substitutes into the expression for about 0.625",
+       "required_elements": [
+        "0.625"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the initial concentrations"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "A second experiment at the same temperature starts with $1\\text{ M}$ of A and $0.25\\text{ M}$ of B and no C. The equilibrium concentration of C is z. Write an equation that relates z to Kc and state whether z is greater or less than the concentration of C in the first experiment when the starting concentrations are larger overall. Justify your answer.",
+     "points": 1,
+     "response_mode": "justify",
+     "skill_codes": [
+      "6.D",
+      "6.E"
+     ],
+     "model_answer": "Kc = z/((A₀ − z)(B₀ − z)); a larger starting amount of reactants gives a larger z because the reaction must shift further toward C to restore the same K (z ≈ 0.091 M here).",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Writes Kc = z/((A₀ − z)(B₀ − z)) and links larger starting concentrations to a larger equilibrium concentration of C",
+       "required_elements": [
+        "Kc = z",
+        "larger starting concentrations"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says Kc changes with the starting concentrations"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 4,
+   "est_minutes": 9,
+   "facts": [
+    "A0=0.5",
+    "B0=0.5",
+    "x=0.1",
+    "K=0.6250"
+   ],
+   "expected_values": [
+    {
+     "part": "B",
+     "quantity": "Kc",
+     "value": 0.6249999999999999,
+     "unit": "",
+     "tolerance": 0.012499999999999997
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "chf_short_ice_table",
+    "subject": "ap_chemistry",
+    "kind": "frq_bundle",
+    "concept": "Equilibrium concentrations from the change in a product, Kc, and the effect of the starting amounts",
+    "topic": "7.7",
+    "skill": "5.F",
+    "student_thinking": [
+     "Use the stoichiometry of the change",
+     "Substitute equilibrium concentrations into Kc",
+     "Reason about a second experiment with the same K"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the temperature is fixed",
+      "evidence": "the stimulus states it"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "initial concentrations",
+      "equilibrium concentration of C"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "Kc from exact fractions; the second experiment solved by bisection",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "5.F",
+       "3.C"
+      ],
+      "topics": [
+       "7.7"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "[A] = 0.5 − 0.1 = 0.4 M and [B] = 0.5 − 0.1 = 0.4 M, because each mole of C formed uses one mole of A and one of B."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Writes Kc = [C]/([A][B])",
+        "elements": [
+         "Kc = [C]/([A][B])"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Calculates [A] = 0.4 M and [B] = 0.4 M",
+        "elements": [
+         "0.4",
+         "0.4"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "5.F"
+      ],
+      "topics": [
+       "7.7"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "Kc = 0.1/((0.4)(0.4)) = 0.625."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Substitutes into the expression for about 0.625",
+        "elements": [
+         "0.625"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "6.D",
+       "6.E"
+      ],
+      "topics": [
+       "7.7"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "Kc = z/((A₀ − z)(B₀ − z)); a larger starting amount of reactants gives a larger z because the reaction must shift further toward C to restore the same K (z ≈ 0.091 M here)."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Writes Kc = z/((A₀ − z)(B₀ − z)) and links larger starting concentrations to a larger equilibrium concentration of C",
+        "elements": [
+         "Kc = z",
+         "larger starting concentrations"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 4,
+    "judgment_demand": [
+     "law_selection",
+     "justification"
+    ]
+   },
+   "seed": 14501,
+   "pack_id": "chf_short_ice_table-s14501"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "chf_short_ice_table",
+   "facts": [
+    "A0=0.5",
+    "B0=0.5",
+    "x=0.1",
+    "K=0.6250"
+   ],
+   "seed": 14501
+  },
+  "review": {
+   "instant_reject": [
+    "wrong_key"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Part C's key is wrong. With A0 = 1 M and B0 = 0.25 M, z ≈ 0.091 M, which is less than the first experiment's 0.1 M, yet the model answer and rubric claim a larger z from larger starting concentrations. The stem wording \"larger overall\" is misleading, and Part C is a justification that does not match the 5.F target.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Part C is a qualitative justification tagged 6.D/6.E, and its premise is flawed. Parts A and B fit 5.F."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part C key and rubric row C1 reward a false claim. The model answer contradicts its own z ≈ 0.091 M, which is below 0.1 M."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The phrase \"when the starting concentrations are larger overall\" is misleading because B starts lower than in the first experiment. \"Rigid container\" is unused."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Part C's common error (\"says Kc changes\") misses the real error, which is the false claim the rubric itself rewards."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Parts A and B are fine for the exam, but Part C is unsound."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Parts A and B are routine ICE-table and Kc calculations (basic level). Part C requires setting up the equilibrium expression in terms of z (a quadratic that is only written, not solved) and then judging how z compares with 0.1 M. That judgment needs either a Q vs K check at z = 0.1 (Q ≈ 0.74 > 0.625, so z < 0.1) or a limiting-reagent argument. This one extra reasoning step linking a result to a claim is an allowed lever. The arithmetic is short and clean, and the stimulus is brief. Part C's wording ('larger overall') is slightly loose and could be tightened, but it does not make the item hard for unfair reasons.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 270
+  }
+ }
+]

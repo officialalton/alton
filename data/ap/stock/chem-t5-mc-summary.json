@@ -1,0 +1,58 @@
+{
+ "runs": [
+  "chem-t5-mc"
+ ],
+ "rows": 93,
+ "passed": 40,
+ "rejected": 53,
+ "passRate": 0.43,
+ "singles": {
+  "candidates": 93
+ },
+ "unitsPassed": {
+  "3": 11,
+  "5": 8,
+  "7": 11,
+  "8": 8,
+  "9": 2
+ },
+ "figPassed": {
+  "none": 40
+ },
+ "figAll": {
+  "none": 93
+ },
+ "figPassRate": {
+  "none": "40/93"
+ },
+ "renderTypesPassed": {
+  "none": 40
+ },
+ "archetypesPassed": {
+  "ch_t5_beer_lambert_conc": 2,
+  "ch_t5_buffer_ratio_for_ph": 1,
+  "ch_t5_combined_gas_volume": 1,
+  "ch_t5_common_ion_solubility": 2,
+  "ch_t5_dalton_partial": 3,
+  "ch_t5_delta_g_from_k": 2,
+  "ch_t5_graham_ratio": 1,
+  "ch_t5_ice_hi_formation": 1,
+  "ch_t5_ideal_gas_moles": 2,
+  "ch_t5_k_reverse_doubled": 1,
+  "ch_t5_kc_from_concentrations": 3,
+  "ch_t5_kp_from_kc": 3,
+  "ch_t5_percent_ionization": 1,
+  "ch_t5_ph_after_dilution": 3,
+  "ch_t5_ph_weak_base": 1,
+  "ch_t5_poh_to_h": 1,
+  "ch_t5_qsp_after_mixing": 1,
+  "ch_t5_rate_factor_order": 2,
+  "ch_t5_rate_from_law": 3,
+  "ch_t5_stock_dilution_volume": 2,
+  "ch_t5_titration_equivalence_volume": 1,
+  "ch_t5_zero_order_time": 3
+ },
+ "costUsd": {
+  "chem-t5-mc": 2.7703
+ }
+}
