@@ -3,17 +3,47 @@
   {
    "id": "CS4",
    "mcA": [
+    "csa-s2-mc-a:ap_computer_science_a-m03-k0",
+    "csa-s2-short-mc:ap_computer_science_a-m07-k0",
     "csa-x-a:ap_computer_science_a-m03-k1",
+    "csa-x-a:ap_computer_science_a-m05-k2",
+    "csa-x-b:ap_computer_science_a-m16-k1",
+    "csa-x-a:ap_computer_science_a-m10-k1",
     "csa-x-a:ap_computer_science_a-m11-k2",
     "csa-x-a:ap_computer_science_a-m12-k2",
+    "csa-x-a:ap_computer_science_a-m13-k0",
     "csa-x-a:ap_computer_science_a-m14-k2",
     "csa-x-a:ap_computer_science_a-m21-k0",
     "csa-x-a:ap_computer_science_a-m38-k0",
     "csa-s2-mc-c:ap_computer_science_a-m22-k0",
-    "csa-p1-a:ap_computer_science_a-m19-k1"
+    "csa-p1-a:ap_computer_science_a-m19-k1",
+    "csa-x-a:ap_computer_science_a-m24-k1",
+    "csa-x-a:ap_computer_science_a-m27-k2",
+    "csa-x-a:ap_computer_science_a-m28-k2",
+    "csa-x-a:ap_computer_science_a-m31-k2",
+    "csa-x-a:ap_computer_science_a-m36-k0",
+    "csa-x-a:ap_computer_science_a-m37-k1"
    ],
    "mcB": [],
    "virtual": [
+    {
+     "set": "CS4",
+     "part": "A",
+     "unit": 4,
+     "practice": 2,
+     "skill": "2.A",
+     "archetype": "cs_array_shift_left_completion",
+     "topic": "4.5"
+    },
+    {
+     "set": "CS4",
+     "part": "A",
+     "unit": 4,
+     "practice": 2,
+     "skill": "2.A",
+     "archetype": "cs_array_swap_completion",
+     "topic": "4.5"
+    },
     {
      "set": "CS4",
      "part": "A",
@@ -31,33 +61,6 @@
      "skill": "2.A",
      "archetype": "cs_arraylist_double_completion",
      "topic": "4.10"
-    },
-    {
-     "set": "CS4",
-     "part": "A",
-     "unit": 1,
-     "practice": 2,
-     "skill": "2.A",
-     "archetype": "cs_ceil_pages_completion",
-     "topic": "1.11"
-    },
-    {
-     "set": "CS4",
-     "part": "A",
-     "unit": 2,
-     "practice": 4,
-     "skill": "4.A",
-     "archetype": "cs_describe_int",
-     "topic": "2.9"
-    },
-    {
-     "set": "CS4",
-     "part": "A",
-     "unit": 2,
-     "practice": 4,
-     "skill": "4.A",
-     "archetype": "cs_describe_string",
-     "topic": "2.10"
     },
     {
      "set": "CS4",
@@ -80,24 +83,6 @@
     {
      "set": "CS4",
      "part": "A",
-     "unit": 4,
-     "practice": 3,
-     "skill": "3.A",
-     "archetype": "cs_insertion_sort_pass_trace",
-     "topic": "4.15"
-    },
-    {
-     "set": "CS4",
-     "part": "A",
-     "unit": 4,
-     "practice": 3,
-     "skill": "3.A",
-     "archetype": "cs_linear_search_comparisons",
-     "topic": "4.14"
-    },
-    {
-     "set": "CS4",
-     "part": "A",
      "unit": 1,
      "practice": 2,
      "skill": "2.A",
@@ -107,29 +92,11 @@
     {
      "set": "CS4",
      "part": "A",
-     "unit": 2,
+     "unit": 3,
      "practice": 4,
      "skill": "4.B",
-     "archetype": "cs_postcondition_char_count",
-     "topic": "2.10"
-    },
-    {
-     "set": "CS4",
-     "part": "A",
-     "unit": 2,
-     "practice": 4,
-     "skill": "4.B",
-     "archetype": "cs_postcondition_loop",
-     "topic": "2.9"
-    },
-    {
-     "set": "CS4",
-     "part": "A",
-     "unit": 2,
-     "practice": 4,
-     "skill": "4.B",
-     "archetype": "cs_precondition_string",
-     "topic": "2.10"
+     "archetype": "cs_precondition_class",
+     "topic": "3.5"
     },
     {
      "set": "CS4",
@@ -144,15 +111,6 @@
      "set": "CS4",
      "part": "A",
      "unit": 4,
-     "practice": 3,
-     "skill": "3.C",
-     "archetype": "cs_recursion_calls_count",
-     "topic": "4.16"
-    },
-    {
-     "set": "CS4",
-     "part": "A",
-     "unit": 4,
      "practice": 2,
      "skill": "2.A",
      "archetype": "cs_recursion_completion",
@@ -161,38 +119,11 @@
     {
      "set": "CS4",
      "part": "A",
-     "unit": 4,
+     "unit": 2,
      "practice": 3,
      "skill": "3.C",
-     "archetype": "cs_recursion_digit_sum_trace",
-     "topic": "4.17"
-    },
-    {
-     "set": "CS4",
-     "part": "A",
-     "unit": 4,
-     "practice": 3,
-     "skill": "3.C",
-     "archetype": "cs_recursion_string",
-     "topic": "4.17"
-    },
-    {
-     "set": "CS4",
-     "part": "A",
-     "unit": 4,
-     "practice": 3,
-     "skill": "3.C",
-     "archetype": "cs_recursion_trace",
-     "topic": "4.16"
-    },
-    {
-     "set": "CS4",
-     "part": "A",
-     "unit": 4,
-     "practice": 3,
-     "skill": "3.C",
-     "archetype": "cs_recursive_binary_trace",
-     "topic": "4.17"
+     "archetype": "cs_return_early",
+     "topic": "2.3"
     },
     {
      "set": "CS4",
@@ -206,20 +137,29 @@
     {
      "set": "CS4",
      "part": "A",
-     "unit": 4,
+     "unit": 2,
      "practice": 3,
      "skill": "3.A",
-     "archetype": "cs_selection_sort_pass",
-     "topic": "4.15"
+     "archetype": "cs_short_circuit",
+     "topic": "2.5"
     },
     {
      "set": "CS4",
      "part": "A",
-     "unit": 3,
-     "practice": 2,
-     "skill": "2.B",
-     "archetype": "cs_static_completion",
-     "topic": "3.7"
+     "unit": 2,
+     "practice": 3,
+     "skill": "3.C",
+     "archetype": "cs_string_algorithm",
+     "topic": "2.10"
+    },
+    {
+     "set": "CS4",
+     "part": "A",
+     "unit": 2,
+     "practice": 3,
+     "skill": "3.C",
+     "archetype": "cs_string_loop_trace",
+     "topic": "2.10"
     },
     {
      "set": "CS4",
@@ -229,42 +169,6 @@
      "skill": "2.A",
      "archetype": "cs_string_method_completion",
      "topic": "1.15"
-    },
-    {
-     "set": "CS4",
-     "part": "A",
-     "unit": 1,
-     "practice": 3,
-     "skill": "3.B",
-     "archetype": "cs_string_methods",
-     "topic": "1.15"
-    },
-    {
-     "set": "CS4",
-     "part": "A",
-     "unit": 1,
-     "practice": 3,
-     "skill": "3.C",
-     "archetype": "cs_substring_index_trace",
-     "topic": "1.15"
-    },
-    {
-     "set": "CS4",
-     "part": "A",
-     "unit": 1,
-     "practice": 3,
-     "skill": "3.D",
-     "archetype": "cs_uninitialized_use",
-     "topic": "1.4"
-    },
-    {
-     "set": "CS4",
-     "part": "A",
-     "unit": 2,
-     "practice": 3,
-     "skill": "3.A",
-     "archetype": "cs_while_sentinel_trace",
-     "topic": "2.7"
     },
     {
      "set": "CS4",
@@ -316,9 +220,16 @@
   {
    "id": "CS5",
    "mcA": [
+    "csa-s2-mc-a:ap_computer_science_a-m03-k1",
+    "csa-s2-mc-a:ap_computer_science_a-m14-k0",
     "csa-x-a:ap_computer_science_a-m12-k0",
+    "csa-x-a:ap_computer_science_a-m13-k1",
+    "csa-x-a:ap_computer_science_a-m15-k0",
     "csa-x-a:ap_computer_science_a-m21-k2",
-    "csa-s2-mc-c:ap_computer_science_a-m22-k1"
+    "csa-s2-mc-c:ap_computer_science_a-m22-k1",
+    "csa-x-a:ap_computer_science_a-m24-k0",
+    "csa-x-a:ap_computer_science_a-m27-k0",
+    "csa-x-a:ap_computer_science_a-m28-k0"
    ],
    "mcB": [],
    "virtual": [
@@ -362,10 +273,28 @@
      "set": "CS5",
      "part": "A",
      "unit": 3,
-     "practice": 2,
-     "skill": "2.B",
-     "archetype": "cs_constructor_completion",
+     "practice": 3,
+     "skill": "3.D",
+     "archetype": "cs_compile_error_calls",
+     "topic": "3.3"
+    },
+    {
+     "set": "CS5",
+     "part": "A",
+     "unit": 3,
+     "practice": 3,
+     "skill": "3.B",
+     "archetype": "cs_default_values_trace",
      "topic": "3.4"
+    },
+    {
+     "set": "CS5",
+     "part": "A",
+     "unit": 2,
+     "practice": 4,
+     "skill": "4.A",
+     "archetype": "cs_describe_string",
+     "topic": "2.10"
     },
     {
      "set": "CS5",
@@ -379,56 +308,11 @@
     {
      "set": "CS5",
      "part": "A",
-     "unit": 3,
-     "practice": 2,
-     "skill": "2.C",
-     "archetype": "cs_helper_completion",
-     "topic": "3.5"
-    },
-    {
-     "set": "CS5",
-     "part": "A",
-     "unit": 3,
-     "practice": 2,
-     "skill": "2.C",
-     "archetype": "cs_helper_use_completion",
-     "topic": "3.5"
-    },
-    {
-     "set": "CS5",
-     "part": "A",
      "unit": 4,
      "practice": 2,
      "skill": "2.A",
      "archetype": "cs_insertion_completion",
      "topic": "4.15"
-    },
-    {
-     "set": "CS5",
-     "part": "A",
-     "unit": 3,
-     "practice": 2,
-     "skill": "2.C",
-     "archetype": "cs_instance_helper_completion",
-     "topic": "3.5"
-    },
-    {
-     "set": "CS5",
-     "part": "A",
-     "unit": 2,
-     "practice": 3,
-     "skill": "3.A",
-     "archetype": "cs_nested_loops_count",
-     "topic": "2.11"
-    },
-    {
-     "set": "CS5",
-     "part": "A",
-     "unit": 2,
-     "practice": 3,
-     "skill": "3.A",
-     "archetype": "cs_nested_triangle",
-     "topic": "2.11"
     },
     {
      "set": "CS5",
@@ -451,6 +335,15 @@
     {
      "set": "CS5",
      "part": "A",
+     "unit": 2,
+     "practice": 2,
+     "skill": "2.A",
+     "archetype": "cs_palindrome_completion",
+     "topic": "2.10"
+    },
+    {
+     "set": "CS5",
+     "part": "A",
      "unit": 1,
      "practice": 3,
      "skill": "3.C",
@@ -463,17 +356,17 @@
      "unit": 2,
      "practice": 4,
      "skill": "4.B",
-     "archetype": "cs_postcondition_loop",
-     "topic": "2.9"
+     "archetype": "cs_postcondition_char_count",
+     "topic": "2.10"
     },
     {
      "set": "CS5",
      "part": "A",
-     "unit": 4,
+     "unit": 2,
      "practice": 4,
      "skill": "4.B",
-     "archetype": "cs_precondition_list",
-     "topic": "4.9"
+     "archetype": "cs_postcondition_loop",
+     "topic": "2.9"
     },
     {
      "set": "CS5",
@@ -497,10 +390,28 @@
      "set": "CS5",
      "part": "A",
      "unit": 2,
+     "practice": 2,
+     "skill": "2.A",
+     "archetype": "cs_remove_char_completion",
+     "topic": "2.10"
+    },
+    {
+     "set": "CS5",
+     "part": "A",
+     "unit": 3,
      "practice": 3,
      "skill": "3.C",
-     "archetype": "cs_return_early",
-     "topic": "2.3"
+     "archetype": "cs_return_reference",
+     "topic": "3.6"
+    },
+    {
+     "set": "CS5",
+     "part": "A",
+     "unit": 3,
+     "practice": 3,
+     "skill": "3.A",
+     "archetype": "cs_scope_trace",
+     "topic": "3.8"
     },
     {
      "set": "CS5",
@@ -515,27 +426,9 @@
      "set": "CS5",
      "part": "A",
      "unit": 2,
-     "practice": 3,
-     "skill": "3.A",
-     "archetype": "cs_short_circuit",
-     "topic": "2.5"
-    },
-    {
-     "set": "CS5",
-     "part": "A",
-     "unit": 3,
      "practice": 2,
-     "skill": "2.B",
-     "archetype": "cs_static_completion",
-     "topic": "3.7"
-    },
-    {
-     "set": "CS5",
-     "part": "A",
-     "unit": 2,
-     "practice": 3,
-     "skill": "3.C",
-     "archetype": "cs_string_algorithm",
+     "skill": "2.A",
+     "archetype": "cs_string_completion",
      "topic": "2.10"
     },
     {
@@ -550,33 +443,6 @@
     {
      "set": "CS5",
      "part": "A",
-     "unit": 2,
-     "practice": 3,
-     "skill": "3.C",
-     "archetype": "cs_string_count_pattern",
-     "topic": "2.10"
-    },
-    {
-     "set": "CS5",
-     "part": "A",
-     "unit": 1,
-     "practice": 3,
-     "skill": "3.B",
-     "archetype": "cs_string_equals_compare",
-     "topic": "1.15"
-    },
-    {
-     "set": "CS5",
-     "part": "A",
-     "unit": 2,
-     "practice": 3,
-     "skill": "3.C",
-     "archetype": "cs_string_loop_trace",
-     "topic": "2.10"
-    },
-    {
-     "set": "CS5",
-     "part": "A",
      "unit": 1,
      "practice": 3,
      "skill": "3.B",
@@ -586,11 +452,20 @@
     {
      "set": "CS5",
      "part": "A",
-     "unit": 1,
+     "unit": 2,
+     "practice": 2,
+     "skill": "2.A",
+     "archetype": "cs_sum_until_negative_completion",
+     "topic": "2.7"
+    },
+    {
+     "set": "CS5",
+     "part": "A",
+     "unit": 3,
      "practice": 3,
-     "skill": "3.C",
-     "archetype": "cs_substring_index_trace",
-     "topic": "1.15"
+     "skill": "3.B",
+     "archetype": "cs_this_shadow",
+     "topic": "3.9"
     },
     {
      "set": "CS5",
@@ -605,28 +480,17 @@
      "set": "CS5",
      "part": "A",
      "unit": 2,
-     "practice": 3,
-     "skill": "3.A",
-     "archetype": "cs_while_sentinel_trace",
-     "topic": "2.7"
-    },
-    {
-     "set": "CS5",
-     "part": "A",
-     "unit": 2,
-     "practice": 3,
-     "skill": "3.A",
-     "archetype": "cs_while_trace",
+     "practice": 2,
+     "skill": "2.A",
+     "archetype": "cs_while_completion",
      "topic": "2.7"
     }
    ],
    "virtualSets": [
     4,
-    4,
     4
    ],
    "virtualSetArchetypes": [
-    "css_above_mean_set",
     "css_array_set",
     "css_list_set"
    ],
