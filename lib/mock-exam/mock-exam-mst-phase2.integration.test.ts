@@ -72,19 +72,19 @@ beforeAll(() => {
 });
 
 describe("배정 가능 플래그(difficulty 파생)", () => {
-  it("easy·medium → M1/lower, medium·hard → higher", () => {
+  it("easy·medium·hard → M1/lower(20262100000680: R&W hard 도 허용), medium·hard → higher", () => {
     const setId = newSet("flags", "{}");
     const ids = (["easy", "medium", "hard"] as const).map((d, i) => {
       const p = problem(100 + i, { domain: "rw_craft_structure", skill: skillA, difficulty: d });
       return addItem(setId, p, { domain: "rw_craft_structure", skill: skillA, difficulty: d });
     });
     const rows = psql(`select difficulty || ':' || m1_eligible || ':' || m2_higher_eligible || ':' || m2_lower_eligible from mock_exam_set_items where id in ('${ids.join("','")}') order by difficulty;`).split("\n");
-    expect(rows).toEqual(["easy:true:false:true", "hard:false:true:false", "medium:true:true:true"]);
+    expect(rows).toEqual(["easy:true:false:true", "hard:true:true:true", "medium:true:true:true"]);
   });
 });
 
-describe("배정 가능 플래그: 수학 hard 는 M1·lower 도 허용(20262100000630), R&W 는 종전 그대로", () => {
-  it("math hard -> m1/lower/higher 모두 true, rw hard -> higher 만 true, math easy -> higher false", () => {
+describe("배정 가능 플래그: 수학 hard(20262100000630)·R&W hard(20262100000680) 는 M1·lower 도 허용", () => {
+  it("math hard · rw hard -> m1/lower/higher 모두 true, math easy -> higher false", () => {
     const setId = newSet("math-hard-flags", "{}");
     const mk = (n: number, section: "math" | "rw", difficulty: string) => {
       const domain = section === "math" ? "algebra" : "rw_craft_structure";
@@ -97,7 +97,7 @@ describe("배정 가능 플래그: 수학 hard 는 M1·lower 도 허용(20262100
     };
     const ids = [mk(1, "math", "hard"), mk(2, "rw", "hard"), mk(3, "math", "easy")];
     const rows = psql(`select section || ':' || difficulty || ':' || m1_eligible || ':' || m2_lower_eligible || ':' || m2_higher_eligible from mock_exam_set_items where id in ('${ids.join("','")}') order by section, difficulty;`).split("\n");
-    expect(rows).toEqual(["math:easy:true:true:false", "math:hard:true:true:true", "rw:hard:false:false:true"]);
+    expect(rows).toEqual(["math:easy:true:true:false", "math:hard:true:true:true", "rw:hard:true:true:true"]);
   });
 });
 

@@ -4,6 +4,8 @@
 
 읽는 순서: `../CLAUDE.md` → `POLICY-DECISIONS.md` 최신 정정 → 이 문서 → `BRANCH-WORKFLOW.md`. 상세 근거·발견 사항은 [전반 점검표](qa/alton-overview-audit-2026-10-21.md). 종전 CURRENT 전체는 [원문 이력](history/CURRENT-archive-before-2026-10-21-overview.md)에 보존했다. 과거 완료·미적용·예산·URL을 현재 값으로 재사용하지 않는다.
 
+- **[2026-10-22] SAT R&W Hard 보강 C안 완료**: 공개 SAT 30세트 새 버전(R&W M1·M2 쉬운에 Hard 약 10.5%, 171문항 교체·이전 버전 보존), 마이그레이션 `20262100000680` 적용, SAT 장부 $23.607. 확인 범위: DB·검증 함수·관리자 미리보기 + Production 학생 화면 1문항(Test 1 R&W M1 8번). 라우팅 임계값·점수 환산은 미보정, 난이도 라벨은 학생 데이터 보정 전. 테스트 응시 `28ddc49c…` 정리 대기. 상세 [rw-hard-topup](sat/rw-hard-topup-2026-10-22.md).
+
 ## 1. 서비스·환경
 
 | 항목 | 현재 기준 / 확인 범위 |
