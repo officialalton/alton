@@ -71,7 +71,7 @@ export default async function SubjectPage({ params }: Props) {
 
         <h2>Exam format</h2>
         <p>About {m.totalMinutes} minutes and {m.totalQuestions} {m.kind === "ap" ? "questions and prompts" : "questions"} in total.</p>
-        <div className="overflow-x-auto">
+        <div className="hidden sm:block overflow-x-auto">
           <table className="w-full text-left text-[14px]">
             <thead>
               <tr><th scope="col">Section</th><th scope="col">Time</th><th scope="col">Questions</th><th scope="col">Format</th></tr>
@@ -83,6 +83,15 @@ export default async function SubjectPage({ params }: Props) {
             </tbody>
           </table>
         </div>
+        <ul className="sm:hidden list-none m-0 p-0 flex flex-col gap-3" aria-label="Exam format by section">
+          {m.rows.map((r) => (
+            <li key={r.label} className="border border-[var(--p-line)] p-4 flex flex-col gap-1">
+              <strong className="text-[15px]">{r.label}</strong>
+              <span className="text-[13.5px]">{r.minutes} min · {r.count} {r.count === 1 ? "question" : "questions"}</span>
+              <span className="text-[13.5px] text-[var(--p-slate)]">{r.note}</span>
+            </li>
+          ))}
+        </ul>
 
         {m.units.length > 0 && (
           <>

@@ -21,7 +21,7 @@ export default function LandingView({ dest, availability = EMPTY_AVAILABILITY }:
       <main>
         {/* Hero (paper) */}
         <section>
-          <div className="p-wrap pt-14 md:pt-20 pb-16 md:pb-24 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,480px)] gap-14 lg:gap-16 items-center">
+          <div className="p-wrap pt-10 md:pt-20 pb-12 md:pb-24 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,480px)] gap-10 lg:gap-16 items-center">
             <div className="flex flex-col gap-7">
               <Eyebrow>{sentenceCase(HERO.eyebrow)}</Eyebrow>
               <h1 className="p-h1">

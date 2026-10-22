@@ -11,7 +11,7 @@ export default function AvailabilityCard({ data }: { data: LandingAvailability }
   const coming = Object.keys(AP_SUBJECT_NAME).filter((c) => !have.has(c)).map((c) => apSubjectLabel(c)).filter((l): l is string => !!l);
   return (
     <section aria-label="Practice test availability" className="relative w-full max-w-[520px] lg:ml-auto">
-      <div className="p-doc !gap-6">
+      <div className="p-doc !gap-5 sm:!gap-6 !p-5 sm:!p-6">
         <div className="flex items-center justify-between border-b border-[var(--p-line)] pb-4 gap-3">
           <strong className="p-serif text-[22px] font-normal">{C.title}</strong>
           <span className="p-label !text-[10.5px] flex items-center gap-1.5"><span aria-hidden="true" className="p-live-dot" />{C.updated}</span>
@@ -30,7 +30,7 @@ export default function AvailabilityCard({ data }: { data: LandingAvailability }
         {data.ap.length > 0 && (
           <div className="flex flex-col gap-3">
             <span className="p-label">{C.apLabel}</span>
-            <ul className="list-none m-0 p-0 flex flex-col gap-2.5">
+            <ul className="list-none m-0 p-0 flex flex-col gap-2 sm:gap-2.5">
               {data.ap.map((a) => (
                 <li key={a.subject} className="flex items-baseline justify-between gap-3">
                   <span className="text-[14.5px] font-semibold">{a.label}</span>
@@ -46,7 +46,18 @@ export default function AvailabilityCard({ data }: { data: LandingAvailability }
           {coming.length > 0 && <p className="m-0 text-[13px] leading-[1.7] text-[var(--p-mute)]">{coming.join(" · ")}</p>}
           <p className="m-0 text-[13px] italic text-[var(--p-slate)]">{C.roadmap}</p>
         </div>
-        <div className="flex flex-col gap-3 border-t border-[var(--p-line)] pt-5">
+        <details className="md:hidden border-t border-[var(--p-line)] pt-4"><summary className="cursor-pointer list-none flex items-center justify-between p-label">{C.visionLabel}<span aria-hidden="true">+</span></summary><div className="flex flex-col gap-3 pt-3">
+                    <p className="m-0 p-serif text-[20px] leading-[1.25]">{C.visionHeadline}</p>
+          <ul className="list-none m-0 p-0 flex flex-col gap-2.5">
+            {C.vision.map((v) => (
+              <li key={v.t} className="flex gap-2.5 text-[13px] leading-[1.6]">
+                <span aria-hidden="true" className="p-live-dot mt-[7px] shrink-0" />
+                <span><strong className="font-semibold">{v.t}.</strong> <span className="text-[var(--p-slate)]">{v.d}</span></span>
+              </li>
+            ))}
+          </ul>
+        </div></details>
+        <div className="hidden md:flex flex-col gap-3 border-t border-[var(--p-line)] pt-5">
           <span className="p-label">{C.visionLabel}</span>
           <p className="m-0 p-serif text-[20px] leading-[1.25]">{C.visionHeadline}</p>
           <ul className="list-none m-0 p-0 flex flex-col gap-2.5">
