@@ -1,11 +1,11 @@
 # AP 그림 렌더링 게이트 결과
 
-생성: 2026-10-22T07:43:13.315Z · 대상: data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + stats-s1-items.json + stats-s2a-items.json + stats-s2b-items.json + stats-s3a-items.json + stats-s3b-items.json + stats-r19-p3-items.json + stats-r19-p4-items.json + stats-r19-p5-items.json + phys-p1a-items.json + phys-p1a2-items.json + phys-p1b-items.json + phys-s2-items.json + phys-s3-items.json + phys-s4-items.json + phys-s5a-items.json + phys-s5s-items.json + phys-s5f-items.json + phys-s5b-items.json + phys-s5g-items.json + phys-s5h-items.json + chem-p1a-items.json + chem-p1a2-items.json + chem-p1b-items.json + chem-s2f-items.json + chem-s2ma-items.json + chem-s2mb-items.json + chem-s2mc-items.json + chem-c3a-items.json + chem-c3b-items.json + chem-c3f-items.json + chem-c3g-items.json + chem-t5-bank-items.json + chem-t5-bank2-items.json + chem-t5-frq-items.json + chem-t5-frq2-items.json + chem-t5-frq3-items.json + chem-t5-frq4-items.json + chem-t5-frq5-items.json + chem-t5-mc-items.json + chem-t5-mc2-items.json + chem-t5-mc3-items.json + chem-t5-sets-items.json + chem-t5-sets2-items.json + micro-p1a-items.json + micro-p1b-items.json + micro-p2f-items.json + micro-p2a-items.json + micro-p2b-items.json + micro-p2c-items.json + micro-p2d-items.json + csa-aud1015-items.json + csa-p1a-items.json + csa-p1b-items.json + csa-s2a-items.json + csa-s2b-items.json + csa-s2c-items.json + csa-s2fa-items.json + csa-s2fb-items.json + csa-s2sf-items.json + csa-s2sm-items.json + csa-t5-frq-items.json + csa-t5-frq2-items.json + csa-t5-frq3-items.json + csa-t5-frq4-items.json + csa-t5-frq7-items.json + csa-t5-frq8-items.json + csa-t5-frq9-items.json + csa-t5-mc-items.json + csa-t5-mc2-items.json + csa-t5-mc3-items.json + csa-t5-mc4-items.json + csa-t5-mc5-items.json + csa-t5-mc6-items.json + csa-t5-mc7-items.json + csa-t5-sets-items.json + csa-t5-sets2-items.json + csa-xa-items.json + csa-xb-items.json + csa-xc-items.json + csa-xd-items.json + csa-xe-items.json + csa-xf-items.json + el-long-items.json + el-p1-items.json + el-p2a-items.json + el-p2b-items.json + el-r19a-items.json + el-r19ext-items.json + el-r19ext2-items.json + el-r19f-items.json + el-r19f2-items.json + el-r19f3-items.json + el-r19f5-items.json + el-r19m-items.json + el-rv-items.json + el-s2a-items.json + el-s2b-items.json + lt-p0-items.json + lt-p1a-items.json + lt-p1b-items.json + lt-p1c-items.json + lt-r19q3-items.json + lt-r20q3-items.json + lt-real-1-items.json + lt-real-2-items.json + lt-real-3-items.json + lt-real-4-items.json + lt-real-5-items.json + bio-b34a-items.json + bio-b34b-items.json + bio-b34bf-items.json + bio-b34bs-items.json + bio-b34c-items.json + bio-b34d-items.json + bio-b34e-items.json + bio-b34f-items.json + bio-p1a-items.json + bio-p1b-items.json + bio-r1-items.json + bio-r2-items.json + bio-r3-items.json + bio-r4-items.json + bio-s2a-items.json + bio-s2b-items.json + bio-s2c-items.json + bio-v2a-items.json + bio-v2b-items.json + bio-v2c-items.json + bio-v3a-items.json + bio-v3b-items.json + bio-v3c-items.json + macro-fga-items.json + macro-hard-a-items.json + macro-hard-b-items.json + macro-p1a-items.json + macro-p1b-items.json + macro-p2a-items.json + macro-p2b-items.json + macro-p2f-items.json + macro-p3-items.json + macro-xa-items.json + macro-xb-items.json + macro-xc-items.json + macro-xd-items.json + macro-xf-items.json + macro-y-items.json + macro-yb-items.json + psych-hard-a-items.json + psych-hard-b-items.json + psych-p1a-items.json + psych-p1b-items.json + psych-p2a-items.json + psych-p3a-items.json + psych-p3b-items.json + psych-p4a-items.json + psych-r19-items.json + psych-t5-frq-items.json + psych-t5-frq2-items.json + psych-t5-mc-items.json + psych-t5-mc2-items.json + psych-t5-sets-items.json + psych-t5-sets2-items.json + psych-t5-sets3-items.json + psych-t5-sets4-items.json + psych-t5-sets5-items.json + psych-t5-sets6-items.json + psych-t5-sets7-items.json + ush-p1a-items.json + ush-p1b-items.json + ush-p2a-items.json + ush-p3a-items.json + ush-r19f-items.json + ush-r19f4-items.json + ush-real-a-items.json + ush-real-b-items.json + ush-real-c-items.json + ush-real-d-items.json + ush-real-e-items.json + ush-real-f-items.json + ush-real-g-items.json + wh-f1-items.json + wh-f2-items.json + wh-f3-items.json + wh-f4-items.json + wh-m1-items.json + wh-m2-items.json + wh-p1-items.json + wh-r19-f-items.json + wh-r19-f2-items.json + wh-r19-f3-items.json + wh-r19-f4-items.json + wh-r19-f5-items.json + wh-r19-f6-items.json + wh-r19-f7-items.json + wh-r19-m-items.json + wh-r20-f-items.json + wh-r20-m-items.json + wh-r21-f-items.json + wh-r22-f-items.json + wh-r23-f-items.json + wh-r24-f-items.json + euro-f1-items.json + euro-f2-items.json + euro-f3-items.json + euro-f4-items.json + euro-m1-items.json + euro-m2-items.json + euro-m3-items.json + euro-p1-items.json + audit-wuel-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json + supp-r3a-items.json + supp-r3b-items.json + supp-r3b2-items.json + supp-r3c-items.json + supp-r3c2-items.json + supp-fix1015-items.json + supp-fix1019-items.json + supp-aud1015-items.json + supp-aud1015b-items.json + bcx1-items.json + micro-s5a-items.json + micro-s5b-items.json + micro-s5c-items.json + micro-s5d-items.json + micro-s6a-items.json + micro-s6b-items.json + physc-a-items.json + physc-c-items.json + physc-d-items.json + physc-e-items.json + physc-f-items.json + physc-g-items.json + physc-h-items.json + physc-i-items.json + physc-k-items.json + physc-m-items.json + physc-s-items.json + physe-a-items.json + physe-b-items.json + physe-c-items.json + physe-d-items.json + physe-f-items.json + physe-fix1-items.json + physe-fix2-items.json + physe-fix3-items.json + physe-s-items.json + pre-a-items.json + pre-b-items.json + pre-f-items.json (9465행)
+생성: 2026-10-22T16:15:31.888Z · 대상: data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + stats-s1-items.json + stats-s2a-items.json + stats-s2b-items.json + stats-s3a-items.json + stats-s3b-items.json + stats-r19-p3-items.json + stats-r19-p4-items.json + stats-r19-p5-items.json + phys-p1a-items.json + phys-p1a2-items.json + phys-p1b-items.json + phys-s2-items.json + phys-s3-items.json + phys-s4-items.json + phys-s5a-items.json + phys-t5f2-items.json + phys-t5mc3-items.json + phys-t5mc4-items.json + phys-t5mc5-items.json + phys-t5mc6-items.json + phys-t5s3-items.json + phys-t5f3-items.json + phys-s5s-items.json + phys-s5f-items.json + phys-s5b-items.json + phys-s5g-items.json + phys-s5h-items.json + chem-p1a-items.json + chem-p1a2-items.json + chem-p1b-items.json + chem-s2f-items.json + chem-s2ma-items.json + chem-s2mb-items.json + chem-s2mc-items.json + chem-c3a-items.json + chem-c3b-items.json + chem-c3f-items.json + chem-c3g-items.json + chem-t5-bank-items.json + chem-t5-bank2-items.json + chem-t5-frq-items.json + chem-t5-frq2-items.json + chem-t5-frq3-items.json + chem-t5-frq4-items.json + chem-t5-frq5-items.json + chem-t5-mc-items.json + chem-t5-mc2-items.json + chem-t5-mc3-items.json + chem-t5-sets-items.json + chem-t5-sets2-items.json + micro-p1a-items.json + micro-p1b-items.json + micro-p2f-items.json + micro-p2a-items.json + micro-p2b-items.json + micro-p2c-items.json + micro-p2d-items.json + csa-aud1015-items.json + csa-p1a-items.json + csa-p1b-items.json + csa-s2a-items.json + csa-s2b-items.json + csa-s2c-items.json + csa-s2fa-items.json + csa-s2fb-items.json + csa-s2sf-items.json + csa-s2sm-items.json + csa-t5-frq-items.json + csa-t5-frq2-items.json + csa-t5-frq3-items.json + csa-t5-frq4-items.json + csa-t5-frq7-items.json + csa-t5-frq8-items.json + csa-t5-frq9-items.json + csa-t5-mc-items.json + csa-t5-mc2-items.json + csa-t5-mc3-items.json + csa-t5-mc4-items.json + csa-t5-mc5-items.json + csa-t5-mc6-items.json + csa-t5-mc7-items.json + csa-t5-sets-items.json + csa-t5-sets2-items.json + csa-xa-items.json + csa-xb-items.json + csa-xc-items.json + csa-xd-items.json + csa-xe-items.json + csa-xf-items.json + el-long-items.json + el-p1-items.json + el-p2a-items.json + el-p2b-items.json + el-r19a-items.json + el-r19ext-items.json + el-r19ext2-items.json + el-r19f-items.json + el-r19f2-items.json + el-r19f3-items.json + el-r19f5-items.json + el-r19m-items.json + el-rv-items.json + el-s2a-items.json + el-s2b-items.json + lt-p0-items.json + lt-p1a-items.json + lt-p1b-items.json + lt-p1c-items.json + lt-r19q3-items.json + lt-r20q3-items.json + lt-real-1-items.json + lt-real-2-items.json + lt-real-3-items.json + lt-real-4-items.json + lt-real-5-items.json + lt-real-6-items.json + lt-t5q3-items.json + bio-b34a-items.json + bio-b34b-items.json + bio-b34bf-items.json + bio-b34bs-items.json + bio-b34c-items.json + bio-b34d-items.json + bio-b34e-items.json + bio-b34f-items.json + bio-p1a-items.json + bio-p1b-items.json + bio-r1-items.json + bio-r2-items.json + bio-r3-items.json + bio-r4-items.json + bio-s2a-items.json + bio-s2b-items.json + bio-s2c-items.json + bio-v2a-items.json + bio-v2b-items.json + bio-v2c-items.json + bio-v3a-items.json + bio-v3b-items.json + bio-v3c-items.json + macro-fga-items.json + macro-hard-a-items.json + macro-hard-b-items.json + macro-p1a-items.json + macro-p1b-items.json + macro-p2a-items.json + macro-p2b-items.json + macro-p2f-items.json + macro-p3-items.json + macro-xa-items.json + macro-xb-items.json + macro-xc-items.json + macro-xd-items.json + macro-xf-items.json + macro-y-items.json + macro-yb-items.json + psych-hard-a-items.json + psych-hard-b-items.json + psych-p1a-items.json + psych-p1b-items.json + psych-p2a-items.json + psych-p3a-items.json + psych-p3b-items.json + psych-p4a-items.json + psych-r19-items.json + psych-t5-frq-items.json + psych-t5-frq2-items.json + psych-t5-mc-items.json + psych-t5-mc2-items.json + psych-t5-sets-items.json + psych-t5-sets2-items.json + psych-t5-sets3-items.json + psych-t5-sets4-items.json + psych-t5-sets5-items.json + psych-t5-sets6-items.json + psych-t5-sets7-items.json + ush-p1a-items.json + ush-p1b-items.json + ush-p2a-items.json + ush-p3a-items.json + ush-r19f-items.json + ush-r19f4-items.json + ush-real-a-items.json + ush-real-b-items.json + ush-real-c-items.json + ush-real-d-items.json + ush-real-e-items.json + ush-real-f-items.json + ush-real-g-items.json + wh-f1-items.json + wh-f2-items.json + wh-f3-items.json + wh-f4-items.json + wh-m1-items.json + wh-m2-items.json + wh-p1-items.json + wh-r19-f-items.json + wh-r19-f2-items.json + wh-r19-f3-items.json + wh-r19-f4-items.json + wh-r19-f5-items.json + wh-r19-f6-items.json + wh-r19-f7-items.json + wh-r19-m-items.json + wh-r20-f-items.json + wh-r20-m-items.json + wh-r21-f-items.json + wh-r22-f-items.json + wh-r23-f-items.json + wh-r24-f-items.json + euro-f1-items.json + euro-f2-items.json + euro-f3-items.json + euro-f4-items.json + euro-m1-items.json + euro-m2-items.json + euro-m3-items.json + euro-p1-items.json + audit-wuel-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json + supp-r3a-items.json + supp-r3b-items.json + supp-r3b2-items.json + supp-r3c-items.json + supp-r3c2-items.json + supp-fix1015-items.json + supp-fix1019-items.json + supp-aud1015-items.json + supp-aud1015b-items.json + bcx1-items.json + micro-s5a-items.json + micro-s5b-items.json + micro-s5c-items.json + micro-s5d-items.json + micro-s6a-items.json + micro-s6b-items.json + physc-a-items.json + physc-c-items.json + physc-d-items.json + physc-e-items.json + physc-f-items.json + physc-g-items.json + physc-h-items.json + physc-i-items.json + physc-k-items.json + physc-m-items.json + physc-s-items.json + physe-a-items.json + physe-b-items.json + physe-c-items.json + physe-d-items.json + physe-f-items.json + physe-fix1-items.json + physe-fix2-items.json + physe-fix3-items.json + physe-s-items.json + pre-a-items.json + pre-b-items.json + pre-f-items.json (9617행)
 
 ## 전체
 
-- 전체 9465행: 통과 2470 / 실패 35 / 해당 없음(그림·표 없음) 6960
-- 현재 재고 중 게시 후보 상태(auto_passed + needs_revalidation) 5879행: 통과 1486 / 실패 11 / 해당 없음 4382
+- 전체 9617행: 통과 2500 / 실패 35 / 해당 없음(그림·표 없음) 7082
+- 현재 재고 중 게시 후보 상태(auto_passed + needs_revalidation) 5984행: 통과 1509 / 실패 11 / 해당 없음 4464
 
 ## 유형별(렌더 유형)
 
@@ -23,7 +23,7 @@
 | ap_graph:calc_piecewise_limits | 7 | 7 | 0 | 0 |
 | ap_graph:calc_region_between_curves | 24 | 24 | 0 | 0 |
 | ap_graph:econ_curves | 159 | 159 | 0 | 0 |
-| ap_graph:phys_line | 150 | 150 | 0 | 0 |
+| ap_graph:phys_line | 156 | 156 | 0 | 0 |
 | ap_stat_chart:bar | 31 | 31 | 0 | 0 |
 | ap_stat_chart:boxplot | 9 | 9 | 0 | 0 |
 | ap_stat_chart:curve | 7 | 7 | 0 | 0 |
@@ -34,15 +34,15 @@
 | ap_stat_chart:table | 54 | 54 | 0 | 0 |
 | ap_stat_chart:tree | 6 | 6 | 0 | 0 |
 | ap_stat_chart:two_way | 28 | 28 | 0 | 0 |
-| ap_table | 1426 | 1408 | 18 | 0 |
+| ap_table | 1450 | 1432 | 18 | 0 |
 | ap_table:given_info | 70 | 70 | 0 | 0 |
 | ap_table:multi_panel | 29 | 29 | 0 | 0 |
 | ap_table:payoff_matrix | 18 | 18 | 0 | 0 |
 | figure_choice:ap_diagram:phys_scene | 8 | 6 | 2 | 0 |
 | image:static | 36 | 36 | 0 | 0 |
-| none | 5841 | 0 | 14 | 5827 |
+| none | 5957 | 0 | 14 | 5943 |
 | none(diagram_text_only) | 1 | 0 | 0 | 1 |
-| text | 1132 | 0 | 0 | 1132 |
+| text | 1138 | 0 | 0 | 1138 |
 
 ## 과목별
 
@@ -53,11 +53,11 @@
 | ap_microeconomics | 703 | 323 | 0 | 380 |
 | ap_calculus_bc | 263 | 49 | 0 | 214 |
 | ap_statistics | 475 | 199 | 0 | 276 |
-| ap_physics_1 | 578 | 154 | 2 | 422 |
+| ap_physics_1 | 728 | 184 | 2 | 542 |
 | ap_chemistry | 1116 | 160 | 7 | 949 |
 | ap_computer_science_a | 650 | 0 | 0 | 650 |
 | ap_english_language | 118 | 6 | 0 | 112 |
-| ap_english_literature | 48 | 0 | 0 | 48 |
+| ap_english_literature | 50 | 0 | 0 | 50 |
 | ap_macroeconomics | 796 | 230 | 0 | 566 |
 | ap_psychology | 675 | 122 | 4 | 549 |
 | ap_us_history | 155 | 29 | 1 | 125 |
@@ -69,9 +69,9 @@
 
 ## 그림 필요 분류(그림이 있어야 풀리는가)
 
-- required(그림·표가 있어야 풀림): 2275
-- supporting(보조 자료, 본문에도 정보 있음): 216
-- text_only(본문만으로 충분): 6974
+- required(그림·표가 있어야 풀림): 2299
+- supporting(보조 자료, 본문에도 정보 있음): 222
+- text_only(본문만으로 충분): 7096
 
 ## 실패 사유 코드
 
@@ -88,10 +88,10 @@
 
 | 코드 | 건수 |
 |---|---:|
-| table_no_title | 1145 |
+| table_no_title | 1169 |
 | table_units_missing | 819 |
 | axis_units_missing | 186 |
-| data_not_rendered | 147 |
+| data_not_rendered | 156 |
 | stimulus_json_repaired | 93 |
 | axis_range_derived | 35 |
 | points_only_curve | 24 |
