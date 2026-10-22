@@ -10,6 +10,18 @@ from csa_p0_t5a import _comp, _add
 import csa_java as J
 
 
+def _show(call):
+    """클래스 추적 문항의 본문에 보여 줄 호출 코드: 마지막 return 문을 출력 문으로 바꾼다(문제 본문에 코드 표기, 검토기 지적)."""
+    lines = call.strip().split("\n")
+    last = lines[-1]
+    if last.startswith("return "):
+        lines[-1] = "System.out.println(" + last[len("return "):].rstrip(";") + ");"
+    return "```java\n" + "\n".join(lines) + "\n```"
+
+
+STEM_SHOW = "What is printed as a result of executing the following code segment?\n"
+
+
 # ===================== 단원 1 코드 완성 (Practice 2) =====================
 _add("cs_str_initials", "1.15",
      "class NameTools {\n    /** Returns the initials of first and last, each followed by a period, for example \"J.S.\". Assume both Strings are not empty and begin with an uppercase letter. */\n    public static String initials(String first, String last) {\n/*BODY*/\n    }\n}",
@@ -20,7 +32,7 @@ _add("cs_str_initials", "1.15",
       ("return last.substring(0, 1) + \".\" + first.substring(0, 1) + \".\";", False, "Reverses the order of the two initials.")],
      [("return NameTools.initials(\"Jane\", \"Smith\");", "J.S."), ("return NameTools.initials(\"Al\", \"Wu\");", "A.W."), ("return NameTools.initials(\"Maria\", \"Lopez\");", "M.L.")],
      "extract the first letter of a String with substring", "substring(0, 1) returns the first character as a String, and the initials are joined in the required order.", "each candidate compiled and run on three name pairs")
-_add("cs_math_distance", "1.12",
+_add("cs_math_distance", "1.11",
      "class GeoTools {\n    /** Returns the distance between the points (x1, y1) and (x2, y2). */\n    public static double distance(int x1, int y1, int x2, int y2) {\n/*BODY*/\n    }\n}",
      "The method distance is intended to return the straight-line distance between the points (x1, y1) and (x2, y2). Which of the following can replace /* missing code */ so that distance works as intended?",
      [("return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));", True, None),
@@ -151,7 +163,7 @@ def cs_math_functions(rng):
             {"why": "Believes Math.abs leaves a negative number unchanged.", "swap": ("Math.abs(a)", "a")},
             {"why": "Reads Math.sqrt(d) as d divided by 2.", "swap": ("Math.sqrt(d)", "d / 2.0")},
             {"why": "Swaps the base and the exponent in Math.pow.", "swap": ("Math.pow(b, c)", "Math.pow(c, b)")}]
-    return mk(rng, "cs_math_functions", "1.12", "3.A", STEM_OUT, code, muts=muts, py=py, concept="Math.abs, Math.pow and Math.sqrt return values and their double results",
+    return mk(rng, "cs_math_functions", "1.11", "3.A", STEM_OUT, code, muts=muts, py=py, concept="Math.abs, Math.pow and Math.sqrt return values and their double results",
               path="javac+java output vs Python math", kwhy=f"Math.abs(-{n}) is {n}; Math.pow({b}, {c}) is the double {float(b ** c)}; Math.sqrt({d}) is the double {float(math.isqrt(d))}.")
 
 
@@ -243,7 +255,7 @@ def cs_while_digit_product(rng):
         if ch != "0":
             p *= int(ch)
     muts = [{"why": "Multiplies by every digit, including 0, so the product becomes 0.", "swap": ("if (d != 0) {\n        p *= d;\n    }", "p *= d;")},
-            {"why": "Adds the digits instead of multiplying them.", "swap": ("p *= d;", "p += d;")},
+            {"why": "Adds each digit to the starting value 1 instead of multiplying by it.", "swap": ("p *= d;", "p += d;")},
             {"why": "Uses the quotient instead of the last digit.", "swap": ("int d = n % 10;", "int d = n / 10 % 10;")},
             {"why": "Starts the product at 0.", "swap": ("int p = 1;", "int p = 0;")}]
     return mk(rng, "cs_while_digit_product", "2.10", "3.A", STEM_OUT, code, muts=muts, py=str(p), concept="a while loop that extracts digits and skips zeros",
@@ -261,7 +273,7 @@ def cs_for_step_down(rng):
             {"why": "Believes the loop stops at the last value that was added, so i keeps that value.", "call": f"int total = 0;\nint i;\nint last = 0;\nfor (i = {a}; i > {bnd}; i -= {c}) {{\n    total += i;\n    last = i;\n}}\nSystem.out.println(total + \" \" + last);"},
             {"why": "Includes the bound in the loop condition.", "swap": (f"i > {bnd}", f"i >= {bnd}")},
             {"why": "Steps by one instead of by the given amount.", "swap": (f"i -= {c}", "i--")}]
-    return mk(rng, "cs_for_step_down", "2.12", "3.A", STEM_OUT, code, muts=muts, py=f"{t} {i}", concept="a counting-down for loop with a step, and the value of the loop variable after the loop ends",
+    return mk(rng, "cs_for_step_down", "2.8", "3.A", STEM_OUT, code, muts=muts, py=f"{t} {i}", concept="a counting-down for loop with a step, and the value of the loop variable after the loop ends",
               path="javac+java output vs Python while loop", kwhy=f"The loop adds {a}, {a - c}, ... while i > {bnd}; when it stops, i has already been decreased to {i}.")
 
 
@@ -305,7 +317,7 @@ def cs_tally_state_trace(rng):
             {"why": "Believes count is replaced by step instead of increased.", "swap": ("count += step;", "count = step;")},
             {"why": "Believes step decreases after each hit.", "swap": ("step++;", "step--;")},
             {"why": "Believes the constructor also adds the starting step to count.", "swap": ("step = s;", "step = s;\n        count = s;")}]
-    return mk(rng, "cs_tally_state_trace", "3.5", "3.B", "What value is returned by the code segment?", shown, call=call, muts=muts, py=str(v), concept="instance variables keep their updated values across method calls",
+    return mk(rng, "cs_tally_state_trace", "3.5", "3.B", STEM_SHOW + _show(call), shown, call=call, muts=muts, py=str(v), concept="instance variables keep their updated values across method calls",
               path="javac+java output vs Python state simulation", kwhy=f"The three calls add {a}, {a + 1} and {a + 2} to count, giving {v}.")
 
 
@@ -319,7 +331,7 @@ def cs_static_counter_trace(rng):
             {"why": "Believes next is increased by 2 for each new object.", "swap": ("next++;", "next += 2;")},
             {"why": "Believes the id is assigned after the shared counter is increased.", "swap": ("id = next;\n        next++;", "next++;\n        id = next;")},
             {"why": "Believes peek returns the id of the last ticket.", "swap": ("return next;", "return next - 1;")}]
-    return mk(rng, "cs_static_counter_trace", "3.7", "3.B", "What value is returned by the code segment?", shown, call=call, muts=muts, py=py, concept="a static variable is shared by all objects of the class",
+    return mk(rng, "cs_static_counter_trace", "3.7", "3.B", STEM_SHOW + _show(call), shown, call=call, muts=muts, py=py, concept="a static variable is shared by all objects of the class",
               path="javac+java output vs Python simulation of a shared counter", kwhy=f"The ids are {a}, {a + 1} and {a + 2}, and the shared counter ends at {a + 3}.")
 
 
@@ -333,7 +345,7 @@ def cs_alias_box_trace(rng):
             {"why": "Believes new Box(a.v) is another reference to a.", "call": f"Box a = new Box({a});\nBox b = a;\nb.v += {b};\nBox c = a;\nc.v *= 2;\nreturn a.v + \" \" + b.v + \" \" + c.v;"},
             {"why": "Believes b is a separate copy of a but builds c from b.", "call": f"Box a = new Box({a});\nBox b = new Box(a.v);\nb.v += {b};\nBox c = new Box(b.v);\nc.v *= 2;\nreturn a.v + \" \" + b.v + \" \" + c.v;"},
             {"why": "Reads c.v *= 2 as adding 2.", "call": f"Box a = new Box({a});\nBox b = a;\nb.v += {b};\nBox c = new Box(a.v);\nc.v += 2;\nreturn a.v + \" \" + b.v + \" \" + c.v;"}]
-    return mk(rng, "cs_alias_box_trace", "3.6", "3.B", "What value is returned by the code segment?", shown, call=call, muts=muts, py=py, concept="two variables can refer to the same object, while new creates a separate object",
+    return mk(rng, "cs_alias_box_trace", "3.6", "3.B", STEM_SHOW + _show(call), shown, call=call, muts=muts, py=py, concept="two variables can refer to the same object, while new creates a separate object",
               path="javac+java output vs Python reference semantics", kwhy="b is another name for the object that a refers to, so the change appears through both; c is a separate object created from a's value.")
 
 
@@ -347,7 +359,7 @@ def cs_param_pass_trace(rng):
             {"why": "Believes the method cannot change the contents of an array that is passed to it.", "call": f"int n = {a};\nint m = Calc.twice(n);\nint[] arr = {{{b}}};\nreturn n + \" \" + m + \" \" + arr[0];"},
             {"why": "Believes the call to twice returns the unchanged argument.", "call": f"int n = {a};\nint m = n;\nint[] arr = {{{b}}};\nCalc.bump(arr);\nreturn n + \" \" + m + \" \" + arr[0];"},
             {"why": "Believes bump doubles the element instead of increasing it by one.", "call": f"int n = {a};\nint m = Calc.twice(n);\nint[] arr = {{{b}}};\nCalc.bump(arr);\nreturn n + \" \" + m + \" \" + (arr[0] * 2 - 2);"}]
-    return mk(rng, "cs_param_pass_trace", "3.8", "3.B", "What value is returned by the code segment?", shown, call=call, muts=muts, py=py, concept="a primitive argument is copied, while an array argument shares its contents with the caller",
+    return mk(rng, "cs_param_pass_trace", "3.8", "3.B", STEM_SHOW + _show(call), shown, call=call, muts=muts, py=py, concept="a primitive argument is copied, while an array argument shares its contents with the caller",
               path="javac+java output vs Python semantics of pass-by-value", kwhy=f"twice changes only its own copy of n, so n stays {a} and m is {a * 2}; bump changes the shared array element to {b + 1}.")
 
 
@@ -361,7 +373,7 @@ def cs_constructor_chain_trace(rng):
             {"why": "Believes award replaces the points instead of adding to them.", "swap": ("pts += d;", "pts = d;")},
             {"why": "Believes the two-argument constructor ignores its second parameter.", "swap": ("pts = p;", "pts = 10;")},
             {"why": "Believes the name and the points are separated by a space in show.", "swap": ("name + \":\" + pts", "name + \" \" + pts")}]
-    return mk(rng, "cs_constructor_chain_trace", "3.5", "3.B", "What value is returned by the code segment?", shown, call=call, muts=muts, py=py, concept="a constructor calling another constructor with this(...), and updating instance state",
+    return mk(rng, "cs_constructor_chain_trace", "3.5", "3.B", STEM_SHOW + _show(call), shown, call=call, muts=muts, py=py, concept="a constructor calling another constructor with this(...), and updating instance state",
               path="javac+java output vs Python simulation", kwhy=f"The one-argument constructor passes 10 points, so ann has {10 + a} after the award; bo starts with {b} and has {b + a}.")
 
 

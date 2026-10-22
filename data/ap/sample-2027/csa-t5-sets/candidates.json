@@ -1,0 +1,2003 @@
+[
+ {
+  "candidateKey": "ap_computer_science_a-m01-k0",
+  "cellId": "ap_computer_science_a-m01",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "mc",
+  "keywordCode": "4.5",
+  "unitCode": "4",
+  "skillPrimary": "3.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "not_allowed",
+  "archetype": "css_t5_array_set_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Single loop over adjacent pairs counting descents; 5 simple comparisons. Loop bound a.length-1 is a mild off-by-one lever. Straightforward trace with no aliasing, casting, or representation changes; fits core learning of array algorithms rather than full-mock difficulty.",
+  "payload": {
+   "archetype": "css_t5_array_set",
+   "topic": "4.5",
+   "skill": "3.B",
+   "calculator": "not_allowed",
+   "set_intro": "Consider the following method, which examines an array of integers and returns an int result.",
+   "stimulus": {
+    "kind": "text",
+    "description": "```java\nclass Probe {\n    public static int mystery(int[] a) {\n        int c = 0;\n        for (int i = 0; i < a.length - 1; i++) {\n            if (a[i] > a[i + 1]) {\n                c++;\n            }\n        }\n        return c;\n    }\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "items": [
+    {
+     "archetype": "css_t5_array_set_q1",
+     "topic": "4.5",
+     "skill": "3.B",
+     "stem": "What is returned by the call Probe.mystery(new int[] { 7, 1, 2, 4, 1, 6 })?",
+     "options": [
+      {
+       "text": "5",
+       "why": "Compares each value with the first value instead of with the next value.",
+       "value": "5"
+      },
+      {
+       "text": "6",
+       "why": "Returns the largest drop between neighbors instead of the number of drops.",
+       "value": "6"
+      },
+      {
+       "text": "2",
+       "why": "The loop counts the positions where a value is larger than the one after it; here there are 2. Tracing the code gives 2.",
+       "value": "2"
+      },
+      {
+       "text": "3",
+       "why": "Counts the positions where a value is smaller than the next value.",
+       "value": "3"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is 2. The loop counts the positions where a value is larger than the one after it; here there are 2. Tracing the code gives 2.\n5 is incorrect: Compares each value with the first value instead of with the next value.\n6 is incorrect: Returns the largest drop between neighbors instead of the number of drops.\n3 is incorrect: Counts the positions where a value is smaller than the next value.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "css_t5_array_set_q1",
+      "subject": "ap_computer_science_a",
+      "kind": "mc",
+      "concept": "trace a scan that compares each element with its next neighbor",
+      "topic": "4.5",
+      "skill": "3.B",
+      "student_thinking": [
+       "trace the code or reason about its behavior without running it",
+       "compare the result with each option and rule out the named misconceptions"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "not_allowed",
+      "key_conditions": [
+       {
+        "condition": "the key is the output of compiling and running the code with the JDK",
+        "evidence": "javac and java run"
+       },
+       {
+        "condition": "a second implementation in Python gives the same value",
+        "evidence": "python reference"
+       }
+      ],
+      "material": {
+       "type": "code",
+       "must_include": [
+        "the code segment"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Compares each value with the first value instead of with the next value."
+       },
+       {
+        "id": "m2",
+        "description": "Returns the largest drop between neighbors instead of the number of drops."
+       },
+       {
+        "id": "m3",
+        "description": "Counts the positions where a value is smaller than the next value."
+       }
+      ],
+      "verification": {
+       "independent_path": "javac+java output vs Python scan",
+       "method": "javac+java execution + python reference"
+      },
+      "judgment_demand": "trace the code and avoid the named misconception"
+     }
+    },
+    {
+     "archetype": "css_t5_array_set_q2",
+     "topic": "4.5",
+     "skill": "4.A",
+     "stem": "Which of the following best describes the value returned by the method mystery for any non-empty array a?",
+     "options": [
+      {
+       "text": "It returns the length of the longest run of decreasing values.",
+       "why": "For {3, 2, 1} the longest decreasing run has 3 values, but the method returns 2, the number of adjacent drops.",
+       "value": null
+      },
+      {
+       "text": "It returns the number of positions whose value is larger than the next value.",
+       "why": "For {3, 2, 1} it returns 2, and for {1, 2, 3} or {5, 5, 5} it returns 0.",
+       "value": null
+      },
+      {
+       "text": "It returns 1 if the array is in decreasing order and 0 otherwise.",
+       "why": "For {4, 1, 4, 1} the array is not decreasing, but the method returns 2, so it counts drops.",
+       "value": null
+      },
+      {
+       "text": "It returns the number of positions whose value is smaller than the next value.",
+       "why": "For {3, 2, 1} that count would be 0, but the method returns 2.",
+       "value": null
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is It returns the number of positions whose value is larger than the next value.. For {3, 2, 1} it returns 2, and for {1, 2, 3} or {5, 5, 5} it returns 0.\nIt returns the length of the longest run of decreasing values. is incorrect: For {3, 2, 1} the longest decreasing run has 3 values, but the method returns 2, the number of adjacent drops.\nIt returns 1 if the array is in decreasing order and 0 otherwise. is incorrect: For {4, 1, 4, 1} the array is not decreasing, but the method returns 2, so it counts drops.\nIt returns the number of positions whose value is smaller than the next value. is incorrect: For {3, 2, 1} that count would be 0, but the method returns 2.",
+     "est_seconds": 80,
+     "blueprint": {
+      "id": "css_t5_array_set_q2",
+      "subject": "ap_computer_science_a",
+      "kind": "mc",
+      "concept": "describe what a scan of adjacent pairs counts",
+      "topic": "4.5",
+      "skill": "4.A",
+      "student_thinking": [
+       "read the code and decide which statement about it is true",
+       "compare the result with each option and rule out the named misconceptions"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "not_allowed",
+      "key_conditions": [
+       {
+        "condition": "each claim was checked by compiling or running the code with the JDK",
+        "evidence": "javac and java run"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "For {3, 2, 1} the longest decreasing run has 3 values, but the method returns 2, the number of adjacent drops."
+       },
+       {
+        "id": "m2",
+        "description": "For {4, 1, 4, 1} the array is not decreasing, but the method returns 2, so it counts drops."
+       },
+       {
+        "id": "m3",
+        "description": "For {3, 2, 1} that count would be 0, but the method returns 2."
+       }
+      ],
+      "verification": {
+       "independent_path": "java runs on four arrays",
+       "method": "javac+java execution of every claim"
+      },
+      "judgment_demand": "separate the true statement from the named misconceptions"
+     }
+    }
+   ],
+   "set_size": 2,
+   "est_seconds": 175,
+   "facts": [
+    "a=[7, 1, 2, 4, 1, 6]",
+    "key=2"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "css_t5_array_set_q1",
+   "facts": [
+    "a=[7, 1, 2, 4, 1, 6]",
+    "key=2"
+   ],
+   "seed": 13100
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Array traversal algorithm, trace output; fits 4.5/3.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Trace gives 2; unique correct option."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Code complete and compilable; call fully specified in stem."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Distractors 3 (increases) and 6 (largest drop) are distinct and realistic; 5 rationale is loosely worded (compare first element against all others gives 5) but still defensible and explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short trace, typical AP MC load, no calculator."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Correct, clean array-trace item with a unique key and plausible distractors. The explanation for option 5 is a little imprecise but acceptable."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "About 80 seconds, short code, four parallel options, no calculator.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "A clean describe-the-code item. The key is unique and the distractors are distinct and refutable, and the item fits scope and time."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single loop over adjacent pairs counting descents; 5 simple comparisons. Loop bound a.length-1 is a mild off-by-one lever. Straightforward trace with no aliasing, casting, or representation changes; fits core learning of array algorithms rather than full-mock difficulty.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 5,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Students must describe a standard adjacent-pair comparison loop (count of descents). The loop bound a.length - 1 and the a[i + 1] access make the boundary plausible to misjudge. Distractors are near-misses: longest run vs. count, boolean flag vs. count, and the reversed comparison direction. The code is short with no arithmetic or heavy reading, so this is a typical mid-level exam item rather than a first-exposure or stretch item.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_computer_science_a-m01-k1",
+  "cellId": "ap_computer_science_a-m01",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "mc",
+  "keywordCode": "4.5",
+  "unitCode": "4",
+  "skillPrimary": "3.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "not_allowed",
+  "archetype": "css_t5_array_set_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Single-loop trace over 6 adjacent pairs counting descents; the bound a.length - 1 and the pair comparison require care but there is no heavy computation or reading. Standard AP-style array-algorithm tracing with plausible near-miss distractors (3, 6, 2). Answer is 4.",
+  "payload": {
+   "archetype": "css_t5_array_set",
+   "topic": "4.5",
+   "skill": "3.B",
+   "calculator": "not_allowed",
+   "set_intro": "Consider the following method, which examines an array of integers and returns an int result.",
+   "stimulus": {
+    "kind": "text",
+    "description": "```java\nclass Probe {\n    public static int mystery(int[] a) {\n        int c = 0;\n        for (int i = 0; i < a.length - 1; i++) {\n            if (a[i] > a[i + 1]) {\n                c++;\n            }\n        }\n        return c;\n    }\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "items": [
+    {
+     "archetype": "css_t5_array_set_q1",
+     "topic": "4.5",
+     "skill": "3.B",
+     "stem": "What is returned by the call Probe.mystery(new int[] { 7, 4, 2, 3, 6, 3, 1 })?",
+     "options": [
+      {
+       "text": "2",
+       "why": "Counts the positions where a value is smaller than the next value.",
+       "value": "2"
+      },
+      {
+       "text": "4",
+       "why": "The loop counts the positions where a value is larger than the one after it; here there are 4. Tracing the code gives 4.",
+       "value": "4"
+      },
+      {
+       "text": "3",
+       "why": "Returns the largest drop between neighbors instead of the number of drops.",
+       "value": "3"
+      },
+      {
+       "text": "6",
+       "why": "Compares each value with the first value instead of with the next value.",
+       "value": "6"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is 4. The loop counts the positions where a value is larger than the one after it; here there are 4. Tracing the code gives 4.\n2 is incorrect: Counts the positions where a value is smaller than the next value.\n3 is incorrect: Returns the largest drop between neighbors instead of the number of drops.\n6 is incorrect: Compares each value with the first value instead of with the next value.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "css_t5_array_set_q1",
+      "subject": "ap_computer_science_a",
+      "kind": "mc",
+      "concept": "trace a scan that compares each element with its next neighbor",
+      "topic": "4.5",
+      "skill": "3.B",
+      "student_thinking": [
+       "trace the code or reason about its behavior without running it",
+       "compare the result with each option and rule out the named misconceptions"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "not_allowed",
+      "key_conditions": [
+       {
+        "condition": "the key is the output of compiling and running the code with the JDK",
+        "evidence": "javac and java run"
+       },
+       {
+        "condition": "a second implementation in Python gives the same value",
+        "evidence": "python reference"
+       }
+      ],
+      "material": {
+       "type": "code",
+       "must_include": [
+        "the code segment"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Counts the positions where a value is smaller than the next value."
+       },
+       {
+        "id": "m2",
+        "description": "Returns the largest drop between neighbors instead of the number of drops."
+       },
+       {
+        "id": "m3",
+        "description": "Compares each value with the first value instead of with the next value."
+       }
+      ],
+      "verification": {
+       "independent_path": "javac+java output vs Python scan",
+       "method": "javac+java execution + python reference"
+      },
+      "judgment_demand": "trace the code and avoid the named misconception"
+     }
+    },
+    {
+     "archetype": "css_t5_array_set_q2",
+     "topic": "4.5",
+     "skill": "4.A",
+     "stem": "Which of the following best describes the value returned by the method mystery for any non-empty array a?",
+     "options": [
+      {
+       "text": "It returns the number of positions whose value is larger than the next value.",
+       "why": "For {3, 2, 1} it returns 2, and for {1, 2, 3} or {5, 5, 5} it returns 0.",
+       "value": null
+      },
+      {
+       "text": "It returns the number of positions whose value is smaller than the next value.",
+       "why": "For {3, 2, 1} that count would be 0, but the method returns 2.",
+       "value": null
+      },
+      {
+       "text": "It returns the length of the longest run of decreasing values.",
+       "why": "For {3, 2, 1} the longest decreasing run has 3 values, but the method returns 2, the number of adjacent drops.",
+       "value": null
+      },
+      {
+       "text": "It returns 1 if the array is in decreasing order and 0 otherwise.",
+       "why": "For {4, 1, 4, 1} the array is not decreasing, but the method returns 2, so it counts drops.",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is It returns the number of positions whose value is larger than the next value.. For {3, 2, 1} it returns 2, and for {1, 2, 3} or {5, 5, 5} it returns 0.\nIt returns the number of positions whose value is smaller than the next value. is incorrect: For {3, 2, 1} that count would be 0, but the method returns 2.\nIt returns the length of the longest run of decreasing values. is incorrect: For {3, 2, 1} the longest decreasing run has 3 values, but the method returns 2, the number of adjacent drops.\nIt returns 1 if the array is in decreasing order and 0 otherwise. is incorrect: For {4, 1, 4, 1} the array is not decreasing, but the method returns 2, so it counts drops.",
+     "est_seconds": 80,
+     "blueprint": {
+      "id": "css_t5_array_set_q2",
+      "subject": "ap_computer_science_a",
+      "kind": "mc",
+      "concept": "describe what a scan of adjacent pairs counts",
+      "topic": "4.5",
+      "skill": "4.A",
+      "student_thinking": [
+       "read the code and decide which statement about it is true",
+       "compare the result with each option and rule out the named misconceptions"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "not_allowed",
+      "key_conditions": [
+       {
+        "condition": "each claim was checked by compiling or running the code with the JDK",
+        "evidence": "javac and java run"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "For {3, 2, 1} that count would be 0, but the method returns 2."
+       },
+       {
+        "id": "m2",
+        "description": "For {3, 2, 1} the longest decreasing run has 3 values, but the method returns 2, the number of adjacent drops."
+       },
+       {
+        "id": "m3",
+        "description": "For {4, 1, 4, 1} the array is not decreasing, but the method returns 2, so it counts drops."
+       }
+      ],
+      "verification": {
+       "independent_path": "java runs on four arrays",
+       "method": "javac+java execution of every claim"
+      },
+      "judgment_demand": "separate the true statement from the named misconceptions"
+     }
+    }
+   ],
+   "set_size": 2,
+   "est_seconds": 175,
+   "facts": [
+    "a=[7, 4, 2, 3, 6, 3, 1]",
+    "key=4"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "css_t5_array_set_q1",
+   "facts": [
+    "a=[7, 4, 2, 3, 6, 3, 1]",
+    "key=4"
+   ],
+   "seed": 13101
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Array traversal tracing, 4.5/3.B, fits."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Trace gives 4; unique."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Code complete and compilable; call given in stem."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor matches a verified misconception value (2 ascents, 3 max drop, 6 compare to first)."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "7-element trace, about 90 seconds, no calculator."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Correct, clean item with distinct realistic distractors; passes all criteria."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Describes the behavior of an adjacent-pair array scan; fits 4.5 and 4.A with no later-unit content."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Option A is the unique correct statement. B, C and D are each false by a concrete counterexample. Wording 'positions' is slightly loose, since the last index never counts, but A is still the best answer."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Code is complete and compiles. The stem states a non-empty array, so the length-1 case is covered."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Distractors reflect distinct misconceptions: reversed comparison, run length versus drop count, and boolean sortedness. The options are parallel and similar in length, and the explanation covers each wrong option."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 80 seconds, no calculator, low reading load."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is a clean, correct description-of-code question with one unique key and distinct misconception distractors. The only blemish is the slightly loose word 'positions' in the key option. It passes all five criteria."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "exam_prep",
+    "rationale": "Single-loop trace over 6 adjacent pairs counting descents; the bound a.length - 1 and the pair comparison require care but there is no heavy computation or reading. Standard AP-style array-algorithm tracing with plausible near-miss distractors (3, 6, 2). Answer is 4.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 7,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 75
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Single loop over adjacent pairs with a counter. The student must read the a.length - 1 bound, the a[i] > a[i+1] comparison, and the counter, then choose among near-miss descriptions (reversed comparison, longest run, boolean check). It needs no long trace or heavy arithmetic. It is a standard AP-style code-behavior item on the easier end, with plausible distractors that need careful reading of the comparison direction and counting versus run-length semantics.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_computer_science_a-m02-k0",
+  "cellId": "ap_computer_science_a-m02",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "mc",
+  "keywordCode": "3.5",
+  "unitCode": "3",
+  "skillPrimary": "3.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "not_allowed",
+  "archetype": "css_t5_cart_set_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_distractor_explanation; set_item_1:criterion_failed_distractor_explanation; set_item_2:criterion_failed_distractor_explanation",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Short trace of a simple method: sum 70, discount 70*20/100=14, return 56. The only subtlety is operator order in integer arithmetic. Distractors are the discount alone or a partial sum. Little reading, simple arithmetic, a single concept (writing and tracing a method with an instance variable).",
+  "payload": {
+   "archetype": "css_t5_cart_set",
+   "topic": "3.5",
+   "skill": "3.B",
+   "calculator": "not_allowed",
+   "set_intro": "Consider the following Cart class, which keeps the prices of items and a discount percentage.",
+   "stimulus": {
+    "kind": "text",
+    "description": "```java\nclass Cart {\n    private ArrayList<Integer> prices;\n    private int pct;\n    public Cart(int discountPct) {\n        prices = new ArrayList<Integer>();\n        pct = discountPct;\n    }\n    public void add(int price) {\n        prices.add(price);\n    }\n    public int total() {\n        int t = 0;\n        for (int p : prices) {\n            t += p;\n        }\n        return t - t * pct / 100;\n    }\n    // other methods not shown\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "items": [
+    {
+     "archetype": "css_t5_cart_set_q1",
+     "topic": "3.5",
+     "skill": "3.B",
+     "stem": "What is printed as a result of executing the following code segment?\n```java\nCart c = new Cart(20);\nc.add(20);\nc.add(20);\nc.add(30);\nSystem.out.println(c.total());\n```",
+     "options": [
+      {
+       "text": "45",
+       "why": "Believes the discount is applied to each price before the total, with integer rounding of each part.",
+       "value": "45"
+      },
+      {
+       "text": "50",
+       "why": "Believes the discount is subtracted as a flat amount equal to pct.",
+       "value": "50"
+      },
+      {
+       "text": "56",
+       "why": "The prices total 70, and the discount of 20 percent is 14, so total returns 56. Tracing the code gives 56.",
+       "value": "56"
+      },
+      {
+       "text": "14",
+       "why": "Believes the method returns only the discount amount.",
+       "value": "14"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is 56. The prices total 70, and the discount of 20 percent is 14, so total returns 56. Tracing the code gives 56.\n45 is incorrect: Believes the discount is applied to each price before the total, with integer rounding of each part.\n50 is incorrect: Believes the discount is subtracted as a flat amount equal to pct.\n14 is incorrect: Believes the method returns only the discount amount.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "css_t5_cart_set_q1",
+      "subject": "ap_computer_science_a",
+      "kind": "mc",
+      "concept": "trace an ArrayList field that is totalled with a percentage discount using integer arithmetic",
+      "topic": "3.5",
+      "skill": "3.B",
+      "student_thinking": [
+       "trace the code or reason about its behavior without running it",
+       "compare the result with each option and rule out the named misconceptions"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "not_allowed",
+      "key_conditions": [
+       {
+        "condition": "the key is the output of compiling and running the code with the JDK",
+        "evidence": "javac and java run"
+       },
+       {
+        "condition": "a second implementation in Python gives the same value",
+        "evidence": "python reference"
+       }
+      ],
+      "material": {
+       "type": "code",
+       "must_include": [
+        "the code segment"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Believes the discount is applied to each price before the total, with integer rounding of each part."
+       },
+       {
+        "id": "m2",
+        "description": "Believes the discount is subtracted as a flat amount equal to pct."
+       },
+       {
+        "id": "m3",
+        "description": "Believes the method returns only the discount amount."
+       }
+      ],
+      "verification": {
+       "independent_path": "javac+java output vs Python simulation",
+       "method": "javac+java execution + python reference"
+      },
+      "judgment_demand": "trace the code and avoid the named misconception"
+     }
+    },
+    {
+     "archetype": "css_t5_cart_set_q2",
+     "topic": "3.5",
+     "skill": "2.B",
+     "stem": "The Cart class needs a method mostExpensive that returns the largest price in the cart, or 0 if the cart is empty. Which of the following implementations of mostExpensive works as intended?",
+     "options": [
+      {
+       "text": "```\npublic int mostExpensive() {\n        int best = 0;\n        for (int p : prices) {\n            if (p > best) {\n            best = p;\n            }\n        }\n        return best;\n    }\n```",
+       "why": "A running best that starts at 0 and is replaced by any larger price gives the maximum, and stays 0 for an empty cart.",
+       "value": null
+      },
+      {
+       "text": "```\npublic int mostExpensive() {\n        return prices.get(prices.size() - 1);\n    }\n```",
+       "why": "Returns the last price added, which is not necessarily the largest (and throws an exception for an empty cart).",
+       "value": null
+      },
+      {
+       "text": "```\npublic int mostExpensive() {\n        int best = 0;\n        for (int p : prices) {\n            if (p < best) {\n            best = p;\n            }\n        }\n        return best;\n    }\n```",
+       "why": "Looks for a price smaller than best, which starts at 0, so it always returns 0.",
+       "value": null
+      },
+      {
+       "text": "```\npublic int mostExpensive() {\n        int best = 0;\n        for (int p : prices) {\n            best += p;\n        }\n        return best;\n    }\n```",
+       "why": "Adds all of the prices instead of finding the largest.",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is ```\npublic int mostExpensive() {\n        int best = 0;\n        for (int p : prices) {\n            if (p > best) {\n            best = p;\n            }\n        }\n        return best;\n    }\n```. A running best that starts at 0 and is replaced by any larger price gives the maximum, and stays 0 for an empty cart.\n```\npublic int mostExpensive() {\n        return prices.get(prices.size() - 1);\n    }\n``` is incorrect: Returns the last price added, which is not necessarily the largest (and throws an exception for an empty cart).\n```\npublic int mostExpensive() {\n        int best = 0;\n        for (int p : prices) {\n            if (p < best) {\n            best = p;\n            }\n        }\n        return best;\n    }\n``` is incorrect: Looks for a price smaller than best, which starts at 0, so it always returns 0.\n```\npublic int mostExpensive() {\n        int best = 0;\n        for (int p : prices) {\n            best += p;\n        }\n        return best;\n    }\n``` is incorrect: Adds all of the prices instead of finding the largest.",
+     "est_seconds": 100,
+     "blueprint": {
+      "id": "css_t5_cart_set_q2",
+      "subject": "ap_computer_science_a",
+      "kind": "mc",
+      "concept": "write a maximum-finding method over an ArrayList field",
+      "topic": "3.5",
+      "skill": "2.B",
+      "student_thinking": [
+       "read the code and decide which candidate satisfies the specification for every input",
+       "compare the result with each option and rule out the named misconceptions"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "not_allowed",
+      "key_conditions": [
+       {
+        "condition": "the key passes every test case when compiled and run",
+        "evidence": "javac and java run"
+       },
+       {
+        "condition": "each distractor fails at least one test case",
+        "evidence": "java test run"
+       }
+      ],
+      "material": {
+       "type": "code",
+       "must_include": [
+        "the code segment"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Returns the last price added, which is not necessarily the largest (and throws an exception for an empty cart)."
+       },
+       {
+        "id": "m2",
+        "description": "Looks for a price smaller than best, which starts at 0, so it always returns 0."
+       },
+       {
+        "id": "m3",
+        "description": "Adds all of the prices instead of finding the largest."
+       }
+      ],
+      "verification": {
+       "independent_path": "each implementation compiled into the class and run on carts with the largest price first, last and in the middle, and on an empty cart",
+       "method": "javac+java unit tests + python reference tests"
+      },
+      "judgment_demand": "test candidates against boundary cases"
+     }
+    }
+   ],
+   "set_size": 2,
+   "est_seconds": 195,
+   "facts": [
+    "key=56"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "css_t5_cart_set_q1",
+   "facts": [
+    "key=56"
+   ],
+   "seed": 13100
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Method tracing with a class and ArrayList field fits 3.5/3.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Sum 70, discount 14, result 56; the key is unique and correct."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The code is complete; the ArrayList import is omitted, which is acceptable on AP-style items."
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": "Option 45 claims per-item discounting with integer rounding, but that gives 16+16+24 = 56, not 45, so the stated misconception does not produce the option. The explanation for 45 is false, and the distractor is implausible. The explanation for the key is also tautological (it says that tracing gives 56)."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "The load is low and appropriate."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The key 56 is correct and the scope is fine, but the distractor 45 has a mismatched misconception rationale: per-price discounting actually yields 56. The distractor explanation is therefore inaccurate and the item fails on distractor quality."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Writing a max-finding method over an ArrayList field is a Topic 3.5 and Skill 2.B task. It uses a class field, a loop and a return value. No out-of-scope content."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Option A is the only one that works. Starting best at 0 is correct for an empty cart. It also assumes non-negative prices, which is reasonable for prices but is not stated in the stem."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The class is complete and compilable apart from the missing ArrayList import, which is standard in AP code. The stem is clear. The code fences inside the option text are a rendering concern only."
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": "The distractors are distinct (last element, minimum search, sum) and each is explained. However, B and D are very weak: the sum and the last element are obviously not a maximum. The \"<\" mutation in C is the only plausible near-miss. The set lacks a realistic boundary misconception, such as starting best at a wrong initial value."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Reading load is short, the options are parallel, and it takes about 90 seconds. It is a standard AP-style method-writing item."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound and the key is unique and correct. The main weakness is that the distractors are easy to rule out. The stem also does not state that prices are non-negative, though the zero-for-empty-cart requirement makes that a reasonable default. I passed it with that caveat, but the distractor-quality failure means the item is not clean."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Short trace of a simple method: sum 70, discount 70*20/100=14, return 56. The only subtlety is operator order in integer arithmetic. Distractors are the discount alone or a partial sum. Little reading, simple arithmetic, a single concept (writing and tracing a method with an instance variable).",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 4,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Choose the correct max-finding method among four short candidates. Distractors are clearly wrong: last element, wrong comparison direction (<), and summation. The 0 initial value is valid because the stem implies non-negative prices and an empty cart returns 0. Only one short loop pattern to recognize, with no tracing of long loops or tricky subtleties.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_computer_science_a-m02-k1",
+  "cellId": "ap_computer_science_a-m02",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "mc",
+  "keywordCode": "3.5",
+  "unitCode": "3",
+  "skillPrimary": "3.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "not_allowed",
+  "archetype": "css_t5_cart_set_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_distractor_explanation; set_item_1:criterion_failed_distractor_explanation",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Simple class with a for-each sum and one discount expression. The student traces four add calls, sums to 130, and evaluates 130 - 130*50/100 = 65. Integer division and precedence are present but do not truncate, so the conceptual demand is low. The item tests basic method tracing and is not a full-mock target.",
+  "payload": {
+   "archetype": "css_t5_cart_set",
+   "topic": "3.5",
+   "skill": "3.B",
+   "calculator": "not_allowed",
+   "set_intro": "Consider the following Cart class, which keeps the prices of items and a discount percentage.",
+   "stimulus": {
+    "kind": "text",
+    "description": "```java\nclass Cart {\n    private ArrayList<Integer> prices;\n    private int pct;\n    public Cart(int discountPct) {\n        prices = new ArrayList<Integer>();\n        pct = discountPct;\n    }\n    public void add(int price) {\n        prices.add(price);\n    }\n    public int total() {\n        int t = 0;\n        for (int p : prices) {\n            t += p;\n        }\n        return t - t * pct / 100;\n    }\n    // other methods not shown\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "items": [
+    {
+     "archetype": "css_t5_cart_set_q1",
+     "topic": "3.5",
+     "skill": "3.B",
+     "stem": "What is printed as a result of executing the following code segment?\n```java\nCart c = new Cart(50);\nc.add(30);\nc.add(40);\nc.add(40);\nc.add(20);\nSystem.out.println(c.total());\n```",
+     "options": [
+      {
+       "text": "65",
+       "why": "The prices total 130, and the discount of 50 percent is 65, so total returns 65. Tracing the code gives 65.",
+       "value": "65"
+      },
+      {
+       "text": "33",
+       "why": "Believes the discount is applied to each price before the total, with integer rounding of each part.",
+       "value": "33"
+      },
+      {
+       "text": "130",
+       "why": "Believes the total ignores the discount.",
+       "value": "130"
+      },
+      {
+       "text": "80",
+       "why": "Believes the discount is subtracted as a flat amount equal to pct.",
+       "value": "80"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is 65. The prices total 130, and the discount of 50 percent is 65, so total returns 65. Tracing the code gives 65.\n33 is incorrect: Believes the discount is applied to each price before the total, with integer rounding of each part.\n130 is incorrect: Believes the total ignores the discount.\n80 is incorrect: Believes the discount is subtracted as a flat amount equal to pct.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "css_t5_cart_set_q1",
+      "subject": "ap_computer_science_a",
+      "kind": "mc",
+      "concept": "trace an ArrayList field that is totalled with a percentage discount using integer arithmetic",
+      "topic": "3.5",
+      "skill": "3.B",
+      "student_thinking": [
+       "trace the code or reason about its behavior without running it",
+       "compare the result with each option and rule out the named misconceptions"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "not_allowed",
+      "key_conditions": [
+       {
+        "condition": "the key is the output of compiling and running the code with the JDK",
+        "evidence": "javac and java run"
+       },
+       {
+        "condition": "a second implementation in Python gives the same value",
+        "evidence": "python reference"
+       }
+      ],
+      "material": {
+       "type": "code",
+       "must_include": [
+        "the code segment"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Believes the discount is applied to each price before the total, with integer rounding of each part."
+       },
+       {
+        "id": "m2",
+        "description": "Believes the total ignores the discount."
+       },
+       {
+        "id": "m3",
+        "description": "Believes the discount is subtracted as a flat amount equal to pct."
+       }
+      ],
+      "verification": {
+       "independent_path": "javac+java output vs Python simulation",
+       "method": "javac+java execution + python reference"
+      },
+      "judgment_demand": "trace the code and avoid the named misconception"
+     }
+    },
+    {
+     "archetype": "css_t5_cart_set_q2",
+     "topic": "3.5",
+     "skill": "2.B",
+     "stem": "The Cart class needs a method mostExpensive that returns the largest price in the cart, or 0 if the cart is empty. Which of the following implementations of mostExpensive works as intended?",
+     "options": [
+      {
+       "text": "```\npublic int mostExpensive() {\n        int best = 0;\n        for (int p : prices) {\n            if (p > best) {\n            best = p;\n            }\n        }\n        return best;\n    }\n```",
+       "why": "A running best that starts at 0 and is replaced by any larger price gives the maximum, and stays 0 for an empty cart.",
+       "value": null
+      },
+      {
+       "text": "```\npublic int mostExpensive() {\n        return prices.get(prices.size() - 1);\n    }\n```",
+       "why": "Returns the last price added, which is not necessarily the largest (and throws an exception for an empty cart).",
+       "value": null
+      },
+      {
+       "text": "```\npublic int mostExpensive() {\n        int best = 0;\n        for (int p : prices) {\n            best += p;\n        }\n        return best;\n    }\n```",
+       "why": "Adds all of the prices instead of finding the largest.",
+       "value": null
+      },
+      {
+       "text": "```\npublic int mostExpensive() {\n        int best = 0;\n        for (int p : prices) {\n            if (p < best) {\n            best = p;\n            }\n        }\n        return best;\n    }\n```",
+       "why": "Looks for a price smaller than best, which starts at 0, so it always returns 0.",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is ```\npublic int mostExpensive() {\n        int best = 0;\n        for (int p : prices) {\n            if (p > best) {\n            best = p;\n            }\n        }\n        return best;\n    }\n```. A running best that starts at 0 and is replaced by any larger price gives the maximum, and stays 0 for an empty cart.\n```\npublic int mostExpensive() {\n        return prices.get(prices.size() - 1);\n    }\n``` is incorrect: Returns the last price added, which is not necessarily the largest (and throws an exception for an empty cart).\n```\npublic int mostExpensive() {\n        int best = 0;\n        for (int p : prices) {\n            best += p;\n        }\n        return best;\n    }\n``` is incorrect: Adds all of the prices instead of finding the largest.\n```\npublic int mostExpensive() {\n        int best = 0;\n        for (int p : prices) {\n            if (p < best) {\n            best = p;\n            }\n        }\n        return best;\n    }\n``` is incorrect: Looks for a price smaller than best, which starts at 0, so it always returns 0.",
+     "est_seconds": 100,
+     "blueprint": {
+      "id": "css_t5_cart_set_q2",
+      "subject": "ap_computer_science_a",
+      "kind": "mc",
+      "concept": "write a maximum-finding method over an ArrayList field",
+      "topic": "3.5",
+      "skill": "2.B",
+      "student_thinking": [
+       "read the code and decide which candidate satisfies the specification for every input",
+       "compare the result with each option and rule out the named misconceptions"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "not_allowed",
+      "key_conditions": [
+       {
+        "condition": "the key passes every test case when compiled and run",
+        "evidence": "javac and java run"
+       },
+       {
+        "condition": "each distractor fails at least one test case",
+        "evidence": "java test run"
+       }
+      ],
+      "material": {
+       "type": "code",
+       "must_include": [
+        "the code segment"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Returns the last price added, which is not necessarily the largest (and throws an exception for an empty cart)."
+       },
+       {
+        "id": "m2",
+        "description": "Adds all of the prices instead of finding the largest."
+       },
+       {
+        "id": "m3",
+        "description": "Looks for a price smaller than best, which starts at 0, so it always returns 0."
+       }
+      ],
+      "verification": {
+       "independent_path": "each implementation compiled into the class and run on carts with the largest price first, last and in the middle, and on an empty cart",
+       "method": "javac+java unit tests + python reference tests"
+      },
+      "judgment_demand": "test candidates against boundary cases"
+     }
+    }
+   ],
+   "set_size": 2,
+   "est_seconds": 195,
+   "facts": [
+    "key=65"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "css_t5_cart_set_q1",
+   "facts": [
+    "key=65"
+   ],
+   "seed": 13101
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Tracing a method with an ArrayList field and integer arithmetic fits 3.5/3.B; easy but in scope."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "130 - 130*50/100 = 65; the key is unique and correct."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Code is complete and clear; the import is omitted as is typical."
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": "Distractor 33 is not produced by its stated misconception: discounting each price with integer division gives a total of 65 (or 90 if one sums the discounted prices), never 33. The explanation text is generic and does not compute the wrong values. The key explanation is circular ('Tracing gives 65')."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Time and load are appropriate."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The key 65 is correct and the item is in scope, but distractor 33 does not follow from its claimed misconception and the explanations are generic and circular, so the distractor and explanation criterion fails."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Writing an accessor/max-finding method over an ArrayList field fits 3.5 and 2.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "A is the unique correct option under non-negative prices; B, C, D each fail tests. The non-negativity of prices is not stated in the stem, but it is natural for prices."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The code is complete and clear. Minor indentation inconsistency in the options and the unused total() method add slight reading load."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "The distractors encode distinct misconceptions (last element, sum, reversed comparison), and the explanation covers each."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short and typical in difficulty and length for an AP CSA MC item."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "A sound, simple method-writing item with a unique key and distinct distractors. The only weakness is that non-negative prices are implicit rather than stated, which is acceptable in context. Pass."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Simple class with a for-each sum and one discount expression. The student traces four add calls, sums to 130, and evaluates 130 - 130*50/100 = 65. Integer division and precedence are present but do not truncate, so the conceptual demand is low. The item tests basic method tracing and is not a full-mock target.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 4,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Standard max-finding loop in an instance method. Distractors are clearly wrong: last element, sum, and min with the comparison reversed. Only one pass over the code is needed to pick the right one. The cart class has an unused discount field and constructor, which adds minimal reading. No tricky boundary or aliasing involved, and the empty-cart case is handled naturally by initializing to 0.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_computer_science_a-m03-k0",
+  "cellId": "ap_computer_science_a-m03",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "mc",
+  "keywordCode": "3.5",
+  "unitCode": "3",
+  "skillPrimary": "3.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "not_allowed",
+  "archetype": "css_t5_garage_set_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_distractor_explanation; set_item_1:criterion_failed_distractor_explanation",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Short trace of park/leave on a 3-element array. Requires noticing that leave() frees a middle slot, which park() then reuses, and that the final park() fails because the garage is full. Only about 6 steps, no arithmetic, and one representation. A standard topic 3.5 method-tracing item that is not tricky.",
+  "payload": {
+   "archetype": "css_t5_garage_set",
+   "topic": "3.5",
+   "skill": "3.B",
+   "calculator": "not_allowed",
+   "set_intro": "Consider the following Garage class, which keeps track of parking slots in an array.",
+   "stimulus": {
+    "kind": "text",
+    "description": "```java\nclass Garage {\n    private int[] slots;\n    private int used;\n    public Garage(int n) {\n        slots = new int[n];\n    }\n    public boolean park(int id) {\n        for (int i = 0; i < slots.length; i++) {\n            if (slots[i] == 0) {\n                slots[i] = id;\n                used++;\n                return true;\n            }\n        }\n        return false;\n    }\n    public void leave(int id) {\n        for (int i = 0; i < slots.length; i++) {\n            if (slots[i] == id) {\n                slots[i] = 0;\n                used--;\n            }\n        }\n    }\n    // other methods not shown\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "items": [
+    {
+     "archetype": "css_t5_garage_set_q1",
+     "topic": "3.5",
+     "skill": "3.B",
+     "stem": "What is returned by the following code segment?\n```java\nGarage g = new Garage(3);\nboolean p0 = g.park(28);\nboolean p1 = g.park(37);\nboolean p2 = g.park(18);\ng.leave(37);\nboolean q1 = g.park(17);\nboolean q2 = g.park(20);\nreturn p2 + \" \" + q1 + \" \" + q2;\n```",
+     "options": [
+      {
+       "text": "`false false false`",
+       "why": "Believes park places the car in the last free slot, so nothing changes for the count.",
+       "value": null
+      },
+      {
+       "text": "`true false false`",
+       "why": "Believes a car that leaves does not free its slot.",
+       "value": null
+      },
+      {
+       "text": "`true true false`",
+       "why": "The last car parked, the car that leaves frees exactly one slot, and the next parking attempts fill free slots in index order until none is left. Tracing the code gives true true false.",
+       "value": null
+      },
+      {
+       "text": "`true true true`",
+       "why": "Believes park never fails when the garage is full.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is `true true false`. The last car parked, the car that leaves frees exactly one slot, and the next parking attempts fill free slots in index order until none is left. Tracing the code gives true true false.\n`false false false` is incorrect: Believes park places the car in the last free slot, so nothing changes for the count.\n`true false false` is incorrect: Believes a car that leaves does not free its slot.\n`true true true` is incorrect: Believes park never fails when the garage is full.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "css_t5_garage_set_q1",
+      "subject": "ap_computer_science_a",
+      "kind": "mc",
+      "concept": "trace object state through park and leave calls on an array field",
+      "topic": "3.5",
+      "skill": "3.B",
+      "student_thinking": [
+       "trace the code or reason about its behavior without running it",
+       "compare the result with each option and rule out the named misconceptions"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "not_allowed",
+      "key_conditions": [
+       {
+        "condition": "the key is the output of compiling and running the code with the JDK",
+        "evidence": "javac and java run"
+       },
+       {
+        "condition": "a second implementation in Python gives the same value",
+        "evidence": "python reference"
+       }
+      ],
+      "material": {
+       "type": "code",
+       "must_include": [
+        "the code segment"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Believes park places the car in the last free slot, so nothing changes for the count."
+       },
+       {
+        "id": "m2",
+        "description": "Believes a car that leaves does not free its slot."
+       },
+       {
+        "id": "m3",
+        "description": "Believes park never fails when the garage is full."
+       }
+      ],
+      "verification": {
+       "independent_path": "javac+java output vs Python simulation",
+       "method": "javac+java execution + python reference"
+      },
+      "judgment_demand": "trace the code and avoid the named misconception"
+     }
+    },
+    {
+     "archetype": "css_t5_garage_set_q2",
+     "topic": "3.5",
+     "skill": "2.B",
+     "stem": "The Garage class needs a method occupied that returns the number of slots that currently hold a car. Which of the following implementations of occupied works as intended?",
+     "options": [
+      {
+       "text": "```\npublic int occupied() {\n        int c = 0;\n        for (int i = 0; i < slots.length; i++) {\n            if (slots[i] != 0) {\n            c++;\n            }\n        }\n        return c;\n    }\n```",
+       "why": "Counting the slots whose value is not 0 over every index gives the number of parked cars.",
+       "value": null
+      },
+      {
+       "text": "```\npublic int occupied() {\n        return slots.length;\n    }\n```",
+       "why": "Returns the number of slots, not the number that are occupied.",
+       "value": null
+      },
+      {
+       "text": "```\npublic int occupied() {\n        int c = 0;\n        for (int i = 0; i < slots.length; i++) {\n            if (slots[i] == 0) {\n            c++;\n            }\n        }\n        return c;\n    }\n```",
+       "why": "Counts the empty slots instead of the occupied slots.",
+       "value": null
+      },
+      {
+       "text": "```\npublic int occupied() {\n        int c = 0;\n        for (int i = 0; i < slots.length - 1; i++) {\n            if (slots[i] != 0) {\n            c++;\n            }\n        }\n        return c;\n    }\n```",
+       "why": "Stops one slot early, so the last slot is never counted.",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is ```\npublic int occupied() {\n        int c = 0;\n        for (int i = 0; i < slots.length; i++) {\n            if (slots[i] != 0) {\n            c++;\n            }\n        }\n        return c;\n    }\n```. Counting the slots whose value is not 0 over every index gives the number of parked cars.\n```\npublic int occupied() {\n        return slots.length;\n    }\n``` is incorrect: Returns the number of slots, not the number that are occupied.\n```\npublic int occupied() {\n        int c = 0;\n        for (int i = 0; i < slots.length; i++) {\n            if (slots[i] == 0) {\n            c++;\n            }\n        }\n        return c;\n    }\n``` is incorrect: Counts the empty slots instead of the occupied slots.\n```\npublic int occupied() {\n        int c = 0;\n        for (int i = 0; i < slots.length - 1; i++) {\n            if (slots[i] != 0) {\n            c++;\n            }\n        }\n        return c;\n    }\n``` is incorrect: Stops one slot early, so the last slot is never counted.",
+     "est_seconds": 100,
+     "blueprint": {
+      "id": "css_t5_garage_set_q2",
+      "subject": "ap_computer_science_a",
+      "kind": "mc",
+      "concept": "write a counting method that traverses an array field of an object",
+      "topic": "3.5",
+      "skill": "2.B",
+      "student_thinking": [
+       "read the code and decide which candidate satisfies the specification for every input",
+       "compare the result with each option and rule out the named misconceptions"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "not_allowed",
+      "key_conditions": [
+       {
+        "condition": "the key passes every test case when compiled and run",
+        "evidence": "javac and java run"
+       },
+       {
+        "condition": "each distractor fails at least one test case",
+        "evidence": "java test run"
+       }
+      ],
+      "material": {
+       "type": "code",
+       "must_include": [
+        "the code segment"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Returns the number of slots, not the number that are occupied."
+       },
+       {
+        "id": "m2",
+        "description": "Counts the empty slots instead of the occupied slots."
+       },
+       {
+        "id": "m3",
+        "description": "Stops one slot early, so the last slot is never counted."
+       }
+      ],
+      "verification": {
+       "independent_path": "each implementation compiled into the class and run on full, partly filled and empty garages",
+       "method": "javac+java unit tests + python reference tests"
+      },
+      "judgment_demand": "test candidates against boundary cases"
+     }
+    }
+   ],
+   "set_size": 2,
+   "est_seconds": 195,
+   "facts": [
+    "key=true true false"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "css_t5_garage_set_q1",
+   "facts": [
+    "key=true true false"
+   ],
+   "seed": 13100
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Tracing object state through park/leave methods fits 3.5 and skill 3.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Trace gives true true false, which is unique and matches the key."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Code is complete. 'Returned' with a top-level return is slightly loose but understandable."
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": "Option 0 (false false false) has a rationale ('last free slot, nothing changes for the count') that does not produce that output and is not a coherent misconception. p2 being false is implausible with 3 slots and 3 cars. The explanation for it does not truly explain why it is wrong."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Time and load are typical for an AP CSA item."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The key is correct and the item fits the scope and is suitable for the exam. It fails on distractor quality: option 0's stated misconception does not match its output and is not realistic. The rationale should be rewritten, or the distractor replaced with a realistic one (for example, a version where leave fails to free the slot, or where park fills from the end)."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Writing a counting method over an array field fits 3.5/2.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "A is the only option that counts nonzero slots over the full array; B, C, D each fail tests."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Class code is complete and compilable; the stem is clear."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct misconceptions (capacity, inverted condition, off-by-one), each explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short, about 100 seconds, no calculator load."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound, with a unique key and distinct distractors, and it is suitable for the exam."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Short trace of park/leave on a 3-element array. Requires noticing that leave() frees a middle slot, which park() then reuses, and that the final park() fails because the garage is full. Only about 6 steps, no arithmetic, and one representation. A standard topic 3.5 method-tracing item that is not tricky.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 6,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 75
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "The item asks which of four short method bodies counts the nonzero slots. Option A is the straightforward count. The distractors are clear near-misses: returning the array length, counting empty slots instead, and an off-by-one loop bound that skips the last slot. The solver needs one array traversal pattern and the fact that 0 means empty, which the park method shows. There are about 3 reasoning steps, no arithmetic, and no representation changes. Reading load is low because the class is short and the preconditions are clear. This is a routine method-writing check.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 0,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_computer_science_a-m04-k0",
+  "cellId": "ap_computer_science_a-m04",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "mc",
+  "keywordCode": "4.9",
+  "unitCode": "4",
+  "skillPrimary": "3.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "not_allowed",
+  "archetype": "css_t5_list_set_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Single-concept trace of a short dedup method using enhanced for, contains, and add on a 6-element list. Correct answer [5, 2, 3] requires recognizing that order of first occurrence is preserved. Distractors (sorted, missing first element, no dedup) are plausible but the trace is short and has no aliasing, casting, or boundary subtleties.",
+  "payload": {
+   "archetype": "css_t5_list_set",
+   "topic": "4.9",
+   "skill": "3.B",
+   "calculator": "not_allowed",
+   "set_intro": "Consider the following method, which processes an ArrayList of Integer objects and returns an ArrayList.",
+   "stimulus": {
+    "kind": "text",
+    "description": "```java\nclass Probe {\n    public static ArrayList<Integer> mystery(ArrayList<Integer> list) {\n        ArrayList<Integer> r = new ArrayList<Integer>();\n        for (int v : list) {\n            if (!r.contains(v)) {\n                r.add(v);\n            }\n        }\n        return r;\n    }\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "items": [
+    {
+     "archetype": "css_t5_list_set_q1",
+     "topic": "4.9",
+     "skill": "3.B",
+     "stem": "What is returned by the call Probe.mystery(list), where list contains 5, 2, 2, 2, 3, 3 in that order?",
+     "options": [
+      {
+       "text": "`[2, 3, 5]`",
+       "why": "Believes the method sorts the values as well as removing duplicates.",
+       "value": null
+      },
+      {
+       "text": "`[2, 3]`",
+       "why": "Believes the method returns the repeated values.",
+       "value": null
+      },
+      {
+       "text": "`[5, 2, 3]`",
+       "why": "Each value is added to the result only if it is not already there, so the first occurrences are kept in order. Tracing the code gives [5, 2, 3].",
+       "value": null
+      },
+      {
+       "text": "`[5, 2, 2, 2, 3, 3]`",
+       "why": "Believes the method returns the original list unchanged.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is `[5, 2, 3]`. Each value is added to the result only if it is not already there, so the first occurrences are kept in order. Tracing the code gives [5, 2, 3].\n`[2, 3, 5]` is incorrect: Believes the method sorts the values as well as removing duplicates.\n`[2, 3]` is incorrect: Believes the method returns the repeated values.\n`[5, 2, 2, 2, 3, 3]` is incorrect: Believes the method returns the original list unchanged.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "css_t5_list_set_q1",
+      "subject": "ap_computer_science_a",
+      "kind": "mc",
+      "concept": "trace a method that removes repeated values from an ArrayList while keeping the first occurrence",
+      "topic": "4.9",
+      "skill": "3.B",
+      "student_thinking": [
+       "trace the code or reason about its behavior without running it",
+       "compare the result with each option and rule out the named misconceptions"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "not_allowed",
+      "key_conditions": [
+       {
+        "condition": "the key is the output of compiling and running the code with the JDK",
+        "evidence": "javac and java run"
+       },
+       {
+        "condition": "a second implementation in Python gives the same value",
+        "evidence": "python reference"
+       }
+      ],
+      "material": {
+       "type": "code",
+       "must_include": [
+        "the code segment"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Believes the method sorts the values as well as removing duplicates."
+       },
+       {
+        "id": "m2",
+        "description": "Believes the method returns the repeated values."
+       },
+       {
+        "id": "m3",
+        "description": "Believes the method returns the original list unchanged."
+       }
+      ],
+      "verification": {
+       "independent_path": "javac+java output vs Python list simulation",
+       "method": "javac+java execution + python reference"
+      },
+      "judgment_demand": "trace the code and avoid the named misconception"
+     }
+    },
+    {
+     "archetype": "css_t5_list_set_q2",
+     "topic": "4.9",
+     "skill": "4.A",
+     "stem": "Which of the following best describes the value returned by the method mystery?",
+     "options": [
+      {
+       "text": "It returns a new list with each distinct value of list once, in the order of first appearance.",
+       "why": "For [3, 2, 3, 1, 2] it returns [3, 2, 1].",
+       "value": null
+      },
+      {
+       "text": "It removes the duplicate values from list itself and returns list.",
+       "why": "The method builds and returns a new list; the original list is not changed.",
+       "value": null
+      },
+      {
+       "text": "It returns a new list with each distinct value of list once, in increasing order.",
+       "why": "For [3, 2, 3, 1, 2] the result is [3, 2, 1], not [1, 2, 3]; the method does not sort.",
+       "value": null
+      },
+      {
+       "text": "It returns a new list with only the values that appear more than once in list.",
+       "why": "For [3, 2, 3, 1, 2] the result is [3, 2, 1], which includes 1, a value that appears only once.",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is It returns a new list with each distinct value of list once, in the order of first appearance.. For [3, 2, 3, 1, 2] it returns [3, 2, 1].\nIt removes the duplicate values from list itself and returns list. is incorrect: The method builds and returns a new list; the original list is not changed.\nIt returns a new list with each distinct value of list once, in increasing order. is incorrect: For [3, 2, 3, 1, 2] the result is [3, 2, 1], not [1, 2, 3]; the method does not sort.\nIt returns a new list with only the values that appear more than once in list. is incorrect: For [3, 2, 3, 1, 2] the result is [3, 2, 1], which includes 1, a value that appears only once.",
+     "est_seconds": 80,
+     "blueprint": {
+      "id": "css_t5_list_set_q2",
+      "subject": "ap_computer_science_a",
+      "kind": "mc",
+      "concept": "describe what a loop with contains and add builds",
+      "topic": "4.9",
+      "skill": "4.A",
+      "student_thinking": [
+       "read the code and decide which statement about it is true",
+       "compare the result with each option and rule out the named misconceptions"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "not_allowed",
+      "key_conditions": [
+       {
+        "condition": "each claim was checked by compiling or running the code with the JDK",
+        "evidence": "javac and java run"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "The method builds and returns a new list; the original list is not changed."
+       },
+       {
+        "id": "m2",
+        "description": "For [3, 2, 3, 1, 2] the result is [3, 2, 1], not [1, 2, 3]; the method does not sort."
+       },
+       {
+        "id": "m3",
+        "description": "For [3, 2, 3, 1, 2] the result is [3, 2, 1], which includes 1, a value that appears only once."
+       }
+      ],
+      "verification": {
+       "independent_path": "java runs on four lists",
+       "method": "javac+java execution of every claim"
+      },
+      "judgment_demand": "separate the true statement from the named misconceptions"
+     }
+    }
+   ],
+   "set_size": 2,
+   "est_seconds": 175,
+   "facts": [
+    "a=[5, 2, 2, 2, 3, 3]",
+    "key=[5, 2, 3]"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "css_t5_list_set_q1",
+   "facts": [
+    "a=[5, 2, 2, 2, 3, 3]",
+    "key=[5, 2, 3]"
+   ],
+   "seed": 13100
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "ArrayList traversal with contains/add, tracing output; fits 4.9 and 3.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "[5, 2, 3] is the unique correct result."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Code is complete and the stem is clear."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct misconceptions (sorted, only repeats, unchanged); each is explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short trace, no calculator, typical load."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is a clean, correct trace of a dedupe method over an ArrayList, with a unique key, parallel options and adequate distractor explanations. It passes all five criteria."
+   },
+   {
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item passes all five criteria. It is a standard describe-the-behavior item on an ArrayList traversal using an enhanced for loop with contains and add.",
+    "scope_skill": {
+     "pass": true,
+     "notes": "The dominant demand is describing what an ArrayList traversal builds, which fits topic 4.9 and skill 4.A. contains and add on ArrayList are in scope for Unit 4."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Option A is the only correct claim. The method returns a new list of distinct values in first-appearance order and leaves the original list unchanged. contains uses equals, so Integer comparison works as expected."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The code is complete and compact. The stem is clear, and the code needs no extra data to be understood."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor encodes a distinct misconception: modifying the original list, sorting the result, and keeping only repeated values. The explanation addresses each wrong option with a concrete example."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "The item takes about 80 seconds, has a light reading load, and needs no calculator."
+    }
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept trace of a short dedup method using enhanced for, contains, and add on a 6-element list. Correct answer [5, 2, 3] requires recognizing that order of first occurrence is preserved. Distractors (sorted, missing first element, no dedup) are plausible but the trace is short and has no aliasing, casting, or boundary subtleties.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 6,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Item asks the student to describe the behavior of a common ArrayList traversal idiom (dedupe via contains). The student must trace that r only adds unseen values, so order of first appearance is preserved, the original list is not modified, and no sorting occurs. Distractors are plausible near-misses (mutating the input, sorted output, only duplicates), requiring genuine verification rather than recall. In scope for 4.9 and skill 4.A, with minimal reading and no computation.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 4,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 75
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_computer_science_a-m04-k1",
+  "cellId": "ap_computer_science_a-m04",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "mc",
+  "keywordCode": "4.9",
+  "unitCode": "4",
+  "skillPrimary": "3.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "not_allowed",
+  "archetype": "css_t5_list_set_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student traces an enhanced for loop that removes duplicates using contains/add on an ArrayList<Integer>, preserving first-occurrence order. It takes 7 short iterations, requires knowing contains uses equals semantics, and has near-miss distractors on order and on which values are kept. The item is straightforward but appropriate for a full mock; reading and computation loads are low, and no unfair difficulty sources are present.",
+  "payload": {
+   "archetype": "css_t5_list_set",
+   "topic": "4.9",
+   "skill": "3.B",
+   "calculator": "not_allowed",
+   "set_intro": "Consider the following method, which processes an ArrayList of Integer objects and returns an ArrayList.",
+   "stimulus": {
+    "kind": "text",
+    "description": "```java\nclass Probe {\n    public static ArrayList<Integer> mystery(ArrayList<Integer> list) {\n        ArrayList<Integer> r = new ArrayList<Integer>();\n        for (int v : list) {\n            if (!r.contains(v)) {\n                r.add(v);\n            }\n        }\n        return r;\n    }\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "items": [
+    {
+     "archetype": "css_t5_list_set_q1",
+     "topic": "4.9",
+     "skill": "3.B",
+     "stem": "What is returned by the call Probe.mystery(list), where list contains 3, 3, 4, 4, 2, 6, 2 in that order?",
+     "options": [
+      {
+       "text": "`[3, 3, 4, 4, 2, 6, 2]`",
+       "why": "Believes the method returns the original list unchanged.",
+       "value": null
+      },
+      {
+       "text": "`[3, 4, 6, 2]`",
+       "why": "Believes the method keeps the last occurrence of each value.",
+       "value": null
+      },
+      {
+       "text": "`[3, 4, 2, 6]`",
+       "why": "Each value is added to the result only if it is not already there, so the first occurrences are kept in order. Tracing the code gives [3, 4, 2, 6].",
+       "value": null
+      },
+      {
+       "text": "`[3, 4, 2]`",
+       "why": "Believes the method returns the repeated values.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is `[3, 4, 2, 6]`. Each value is added to the result only if it is not already there, so the first occurrences are kept in order. Tracing the code gives [3, 4, 2, 6].\n`[3, 3, 4, 4, 2, 6, 2]` is incorrect: Believes the method returns the original list unchanged.\n`[3, 4, 6, 2]` is incorrect: Believes the method keeps the last occurrence of each value.\n`[3, 4, 2]` is incorrect: Believes the method returns the repeated values.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "css_t5_list_set_q1",
+      "subject": "ap_computer_science_a",
+      "kind": "mc",
+      "concept": "trace a method that removes repeated values from an ArrayList while keeping the first occurrence",
+      "topic": "4.9",
+      "skill": "3.B",
+      "student_thinking": [
+       "trace the code or reason about its behavior without running it",
+       "compare the result with each option and rule out the named misconceptions"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "not_allowed",
+      "key_conditions": [
+       {
+        "condition": "the key is the output of compiling and running the code with the JDK",
+        "evidence": "javac and java run"
+       },
+       {
+        "condition": "a second implementation in Python gives the same value",
+        "evidence": "python reference"
+       }
+      ],
+      "material": {
+       "type": "code",
+       "must_include": [
+        "the code segment"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Believes the method returns the original list unchanged."
+       },
+       {
+        "id": "m2",
+        "description": "Believes the method keeps the last occurrence of each value."
+       },
+       {
+        "id": "m3",
+        "description": "Believes the method returns the repeated values."
+       }
+      ],
+      "verification": {
+       "independent_path": "javac+java output vs Python list simulation",
+       "method": "javac+java execution + python reference"
+      },
+      "judgment_demand": "trace the code and avoid the named misconception"
+     }
+    },
+    {
+     "archetype": "css_t5_list_set_q2",
+     "topic": "4.9",
+     "skill": "4.A",
+     "stem": "Which of the following best describes the value returned by the method mystery?",
+     "options": [
+      {
+       "text": "It returns a new list with each distinct value of list once, in the order of first appearance.",
+       "why": "For [3, 2, 3, 1, 2] it returns [3, 2, 1].",
+       "value": null
+      },
+      {
+       "text": "It returns a new list with only the values that appear more than once in list.",
+       "why": "For [3, 2, 3, 1, 2] the result is [3, 2, 1], which includes 1, a value that appears only once.",
+       "value": null
+      },
+      {
+       "text": "It returns a new list with each distinct value of list once, in increasing order.",
+       "why": "For [3, 2, 3, 1, 2] the result is [3, 2, 1], not [1, 2, 3]; the method does not sort.",
+       "value": null
+      },
+      {
+       "text": "It removes the duplicate values from list itself and returns list.",
+       "why": "The method builds and returns a new list; the original list is not changed.",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is It returns a new list with each distinct value of list once, in the order of first appearance.. For [3, 2, 3, 1, 2] it returns [3, 2, 1].\nIt returns a new list with only the values that appear more than once in list. is incorrect: For [3, 2, 3, 1, 2] the result is [3, 2, 1], which includes 1, a value that appears only once.\nIt returns a new list with each distinct value of list once, in increasing order. is incorrect: For [3, 2, 3, 1, 2] the result is [3, 2, 1], not [1, 2, 3]; the method does not sort.\nIt removes the duplicate values from list itself and returns list. is incorrect: The method builds and returns a new list; the original list is not changed.",
+     "est_seconds": 80,
+     "blueprint": {
+      "id": "css_t5_list_set_q2",
+      "subject": "ap_computer_science_a",
+      "kind": "mc",
+      "concept": "describe what a loop with contains and add builds",
+      "topic": "4.9",
+      "skill": "4.A",
+      "student_thinking": [
+       "read the code and decide which statement about it is true",
+       "compare the result with each option and rule out the named misconceptions"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "not_allowed",
+      "key_conditions": [
+       {
+        "condition": "each claim was checked by compiling or running the code with the JDK",
+        "evidence": "javac and java run"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "For [3, 2, 3, 1, 2] the result is [3, 2, 1], which includes 1, a value that appears only once."
+       },
+       {
+        "id": "m2",
+        "description": "For [3, 2, 3, 1, 2] the result is [3, 2, 1], not [1, 2, 3]; the method does not sort."
+       },
+       {
+        "id": "m3",
+        "description": "The method builds and returns a new list; the original list is not changed."
+       }
+      ],
+      "verification": {
+       "independent_path": "java runs on four lists",
+       "method": "javac+java execution of every claim"
+      },
+      "judgment_demand": "separate the true statement from the named misconceptions"
+     }
+    }
+   ],
+   "set_size": 2,
+   "est_seconds": 175,
+   "facts": [
+    "a=[3, 3, 4, 4, 2, 6, 2]",
+    "key=[3, 4, 2, 6]"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "css_t5_list_set_q1",
+   "facts": [
+    "a=[3, 3, 4, 4, 2, 6, 2]",
+    "key=[3, 4, 2, 6]"
+   ],
+   "seed": 13101
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "ArrayList for-each traversal with contains/add; tracing output matches 4.9 / 3.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Trace gives [3, 4, 2, 6]; unique correct option."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Complete code, clear question and a specified input list."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Distinct misconceptions (unchanged list, last occurrence, repeated values); the last one is slightly contrived but acceptable. All wrong options are explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short trace of 7 elements, about 90 seconds, parallel option format."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is correct, in scope, and exam-appropriate. The key [3, 4, 2, 6] is unique, and the distractors are plausible."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Traversal of ArrayList with contains/add; describe behavior, fits 4.9/4.A."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Option A unique correct; others are false."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Code complete and clear."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct misconceptions, each explained with a concrete example."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short, typical AP load."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Sound item: remove-duplicates-by-copy description; unique key, good distractors, appropriate scope."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "exam_prep",
+    "rationale": "Student traces an enhanced for loop that removes duplicates using contains/add on an ArrayList<Integer>, preserving first-occurrence order. It takes 7 short iterations, requires knowing contains uses equals semantics, and has near-miss distractors on order and on which values are kept. The item is straightforward but appropriate for a full mock; reading and computation loads are low, and no unfair difficulty sources are present.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 7,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 75
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single short method using a standard dedupe-with-contains pattern. Students only need to see that r is a new list, that values are added in traversal order if not already present, and that the input is unchanged. The distractors (duplicates only, sorted, in-place modification) are each ruled out by a direct reading of the code. No tracing with changed bounds, aliasing, or numeric subtleties. This tests basic comprehension of an ArrayList traversal and sits below full-mock exam depth.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   }
+  ]
+ }
+]

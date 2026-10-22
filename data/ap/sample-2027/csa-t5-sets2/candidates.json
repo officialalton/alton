@@ -1,0 +1,866 @@
+[
+ {
+  "candidateKey": "ap_computer_science_a-m01-k0",
+  "cellId": "ap_computer_science_a-m01",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "mc",
+  "keywordCode": "3.5",
+  "unitCode": "3",
+  "skillPrimary": "3.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "not_allowed",
+  "archetype": "css_t5_cart_set_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single method trace: a for-each sum of 4 values, then one integer expression (t - t*pct/100). The only subtleties are operator order and distinguishing the discount amount (28) from the final total (52). Arithmetic is small and clean; this is standard topic 3.5 tracing, appropriate for basic learning.",
+  "payload": {
+   "archetype": "css_t5_cart_set",
+   "topic": "3.5",
+   "skill": "3.B",
+   "calculator": "not_allowed",
+   "set_intro": "Consider the following Cart class, which keeps the prices of items and a discount percentage.",
+   "stimulus": {
+    "kind": "text",
+    "description": "```java\nclass Cart {\n    private ArrayList<Integer> prices;\n    private int pct;\n    public Cart(int discountPct) {\n        prices = new ArrayList<Integer>();\n        pct = discountPct;\n    }\n    public void add(int price) {\n        prices.add(price);\n    }\n    public int total() {\n        int t = 0;\n        for (int p : prices) {\n            t += p;\n        }\n        return t - t * pct / 100;\n    }\n    // other methods not shown\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "items": [
+    {
+     "archetype": "css_t5_cart_set_q1",
+     "topic": "3.5",
+     "skill": "3.B",
+     "stem": "What is printed as a result of executing the following code segment?\n```java\nCart c = new Cart(35);\nc.add(29);\nc.add(11);\nc.add(29);\nc.add(11);\nSystem.out.println(c.total());\n```",
+     "options": [
+      {
+       "text": "80",
+       "why": "Believes the total ignores the discount.",
+       "value": "80"
+      },
+      {
+       "text": "45",
+       "why": "Believes the discount is subtracted as a flat amount equal to pct.",
+       "value": "45"
+      },
+      {
+       "text": "28",
+       "why": "Believes the method returns only the discount amount.",
+       "value": "28"
+      },
+      {
+       "text": "52",
+       "why": "The prices total 80, and the discount of 35 percent is 28, so total returns 52. Tracing the code gives 52.",
+       "value": "52"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is 52. The prices total 80, and the discount of 35 percent is 28, so total returns 52. Tracing the code gives 52.\n80 is incorrect: Believes the total ignores the discount.\n45 is incorrect: Believes the discount is subtracted as a flat amount equal to pct.\n28 is incorrect: Believes the method returns only the discount amount.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "css_t5_cart_set_q1",
+      "subject": "ap_computer_science_a",
+      "kind": "mc",
+      "concept": "trace an ArrayList field that is totalled with a percentage discount using integer arithmetic",
+      "topic": "3.5",
+      "skill": "3.B",
+      "student_thinking": [
+       "trace the code or reason about its behavior without running it",
+       "compare the result with each option and rule out the named misconceptions"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "not_allowed",
+      "key_conditions": [
+       {
+        "condition": "the key is the output of compiling and running the code with the JDK",
+        "evidence": "javac and java run"
+       },
+       {
+        "condition": "a second implementation in Python gives the same value",
+        "evidence": "python reference"
+       }
+      ],
+      "material": {
+       "type": "code",
+       "must_include": [
+        "the code segment"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Believes the total ignores the discount."
+       },
+       {
+        "id": "m2",
+        "description": "Believes the discount is subtracted as a flat amount equal to pct."
+       },
+       {
+        "id": "m3",
+        "description": "Believes the method returns only the discount amount."
+       }
+      ],
+      "verification": {
+       "independent_path": "javac+java output vs Python simulation",
+       "method": "javac+java execution + python reference"
+      },
+      "judgment_demand": "trace the code and avoid the named misconception"
+     }
+    },
+    {
+     "archetype": "css_t5_cart_set_q2",
+     "topic": "3.5",
+     "skill": "2.B",
+     "stem": "The Cart class needs a method mostExpensive that returns the largest price in the cart, or 0 if the cart is empty. Which of the following implementations of mostExpensive works as intended?",
+     "options": [
+      {
+       "text": "```\npublic int mostExpensive() {\n        int best = 0;\n        for (int p : prices) {\n            if (p < best) {\n            best = p;\n            }\n        }\n        return best;\n    }\n```",
+       "why": "Looks for a price smaller than best, which starts at 0, so it always returns 0.",
+       "value": null
+      },
+      {
+       "text": "```\npublic int mostExpensive() {\n        int best = 0;\n        for (int p : prices) {\n            best += p;\n        }\n        return best;\n    }\n```",
+       "why": "Adds all of the prices instead of finding the largest.",
+       "value": null
+      },
+      {
+       "text": "```\npublic int mostExpensive() {\n        int best = 0;\n        for (int p : prices) {\n            if (p > best) {\n            best = p;\n            }\n        }\n        return best;\n    }\n```",
+       "why": "A running best that starts at 0 and is replaced by any larger price gives the maximum, and stays 0 for an empty cart.",
+       "value": null
+      },
+      {
+       "text": "```\npublic int mostExpensive() {\n        return prices.get(prices.size() - 1);\n    }\n```",
+       "why": "Returns the last price added, which is not necessarily the largest (and throws an exception for an empty cart).",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is ```\npublic int mostExpensive() {\n        int best = 0;\n        for (int p : prices) {\n            if (p > best) {\n            best = p;\n            }\n        }\n        return best;\n    }\n```. A running best that starts at 0 and is replaced by any larger price gives the maximum, and stays 0 for an empty cart.\n```\npublic int mostExpensive() {\n        int best = 0;\n        for (int p : prices) {\n            if (p < best) {\n            best = p;\n            }\n        }\n        return best;\n    }\n``` is incorrect: Looks for a price smaller than best, which starts at 0, so it always returns 0.\n```\npublic int mostExpensive() {\n        int best = 0;\n        for (int p : prices) {\n            best += p;\n        }\n        return best;\n    }\n``` is incorrect: Adds all of the prices instead of finding the largest.\n```\npublic int mostExpensive() {\n        return prices.get(prices.size() - 1);\n    }\n``` is incorrect: Returns the last price added, which is not necessarily the largest (and throws an exception for an empty cart).",
+     "est_seconds": 100,
+     "blueprint": {
+      "id": "css_t5_cart_set_q2",
+      "subject": "ap_computer_science_a",
+      "kind": "mc",
+      "concept": "write a maximum-finding method over an ArrayList field",
+      "topic": "3.5",
+      "skill": "2.B",
+      "student_thinking": [
+       "read the code and decide which candidate satisfies the specification for every input",
+       "compare the result with each option and rule out the named misconceptions"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "not_allowed",
+      "key_conditions": [
+       {
+        "condition": "the key passes every test case when compiled and run",
+        "evidence": "javac and java run"
+       },
+       {
+        "condition": "each distractor fails at least one test case",
+        "evidence": "java test run"
+       }
+      ],
+      "material": {
+       "type": "code",
+       "must_include": [
+        "the code segment"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Looks for a price smaller than best, which starts at 0, so it always returns 0."
+       },
+       {
+        "id": "m2",
+        "description": "Adds all of the prices instead of finding the largest."
+       },
+       {
+        "id": "m3",
+        "description": "Returns the last price added, which is not necessarily the largest (and throws an exception for an empty cart)."
+       }
+      ],
+      "verification": {
+       "independent_path": "each implementation compiled into the class and run on carts with the largest price first, last and in the middle, and on an empty cart",
+       "method": "javac+java unit tests + python reference tests"
+      },
+      "judgment_demand": "test candidates against boundary cases"
+     }
+    }
+   ],
+   "set_size": 2,
+   "est_seconds": 195,
+   "facts": [
+    "key=52"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "css_t5_cart_set_q1",
+   "facts": [
+    "key=52"
+   ],
+   "seed": 13400
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Traces a class with ArrayList field and a method computing a discounted total; fits 3.5/3.B, no out-of-scope content."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "80-28=52; unique correct answer; options distinct."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Code is complete and compilable in context; the stem refers to the class in the stimulus. Import omitted as is typical for AP."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor maps to a named misconception (ignore discount, flat subtraction, discount only). Explanation covers every wrong option, though the key explanation is terse."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 95 seconds, light arithmetic, no calculator; low-moderate difficulty, acceptable."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Correct, clean trace item with a unique key and distinct misconception-based distractors. Fits topic 3.5/skill 3.B and is suitable for the exam."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Writing a max-finding method over an ArrayList field matches topic 3.5 and skill 2.B; no out-of-scope content."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "C is the unique correct option. A always returns 0, B returns the sum, and D fails for an empty cart and returns only the last price. Negative prices are not addressed in the stem, but the 0 for empty cart rule and the price context make this acceptable."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The class code is complete and clear. The unused pct and total are minor extra reading but are plausible context."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "The three distractors encode distinct misconceptions (reversed comparison, summing instead of maximum, last element only), and the explanation covers each."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short, with no calculator and no arithmetic load. Time is typical for the AP exam."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item passes all five criteria. C is the unique correct implementation, and each distractor reflects a distinct misconception. The only blemish is that the stem does not state that prices are non-negative, which is minor given the empty-cart rule."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single method trace: a for-each sum of 4 values, then one integer expression (t - t*pct/100). The only subtleties are operator order and distinguishing the discount amount (28) from the final total (52). Arithmetic is small and clean; this is standard topic 3.5 tracing, appropriate for basic learning.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 5,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 75
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept item: write a max-finding method over an ArrayList field. Distractors are clear near-misses (inverted comparison, summing, last element failing on empty cart). The empty-cart requirement is a mild boundary check. Reading and computation load are minimal, with no tracing beyond a quick scan of each option.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_computer_science_a-m01-k1",
+  "cellId": "ap_computer_science_a-m01",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "mc",
+  "keywordCode": "3.5",
+  "unitCode": "3",
+  "skillPrimary": "3.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "not_allowed",
+  "archetype": "css_t5_cart_set_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Short class trace: construct a Cart, add three prices, sum to 75, then compute 75*35/100 with integer truncation (2625/100 = 26) and subtract to get 49. The main lever is integer-division truncation and the order of operations, with distractors for the discount alone (26) and no discount (75). The reading load is low and the arithmetic is small enough to do without a calculator.",
+  "payload": {
+   "archetype": "css_t5_cart_set",
+   "topic": "3.5",
+   "skill": "3.B",
+   "calculator": "not_allowed",
+   "set_intro": "Consider the following Cart class, which keeps the prices of items and a discount percentage.",
+   "stimulus": {
+    "kind": "text",
+    "description": "```java\nclass Cart {\n    private ArrayList<Integer> prices;\n    private int pct;\n    public Cart(int discountPct) {\n        prices = new ArrayList<Integer>();\n        pct = discountPct;\n    }\n    public void add(int price) {\n        prices.add(price);\n    }\n    public int total() {\n        int t = 0;\n        for (int p : prices) {\n            t += p;\n        }\n        return t - t * pct / 100;\n    }\n    // other methods not shown\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "items": [
+    {
+     "archetype": "css_t5_cart_set_q1",
+     "topic": "3.5",
+     "skill": "3.B",
+     "stem": "What is printed as a result of executing the following code segment?\n```java\nCart c = new Cart(35);\nc.add(23);\nc.add(35);\nc.add(17);\nSystem.out.println(c.total());\n```",
+     "options": [
+      {
+       "text": "49",
+       "why": "The prices total 75, and the discount of 35 percent is 26, so total returns 49. Tracing the code gives 49.",
+       "value": "49"
+      },
+      {
+       "text": "26",
+       "why": "Believes the method returns only the discount amount.",
+       "value": "26"
+      },
+      {
+       "text": "75",
+       "why": "Believes the total ignores the discount.",
+       "value": "75"
+      },
+      {
+       "text": "40",
+       "why": "Believes the discount is subtracted as a flat amount equal to pct.",
+       "value": "40"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is 49. The prices total 75, and the discount of 35 percent is 26, so total returns 49. Tracing the code gives 49.\n26 is incorrect: Believes the method returns only the discount amount.\n75 is incorrect: Believes the total ignores the discount.\n40 is incorrect: Believes the discount is subtracted as a flat amount equal to pct.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "css_t5_cart_set_q1",
+      "subject": "ap_computer_science_a",
+      "kind": "mc",
+      "concept": "trace an ArrayList field that is totalled with a percentage discount using integer arithmetic",
+      "topic": "3.5",
+      "skill": "3.B",
+      "student_thinking": [
+       "trace the code or reason about its behavior without running it",
+       "compare the result with each option and rule out the named misconceptions"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "not_allowed",
+      "key_conditions": [
+       {
+        "condition": "the key is the output of compiling and running the code with the JDK",
+        "evidence": "javac and java run"
+       },
+       {
+        "condition": "a second implementation in Python gives the same value",
+        "evidence": "python reference"
+       }
+      ],
+      "material": {
+       "type": "code",
+       "must_include": [
+        "the code segment"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Believes the method returns only the discount amount."
+       },
+       {
+        "id": "m2",
+        "description": "Believes the total ignores the discount."
+       },
+       {
+        "id": "m3",
+        "description": "Believes the discount is subtracted as a flat amount equal to pct."
+       }
+      ],
+      "verification": {
+       "independent_path": "javac+java output vs Python simulation",
+       "method": "javac+java execution + python reference"
+      },
+      "judgment_demand": "trace the code and avoid the named misconception"
+     }
+    },
+    {
+     "archetype": "css_t5_cart_set_q2",
+     "topic": "3.5",
+     "skill": "2.B",
+     "stem": "The Cart class needs a method mostExpensive that returns the largest price in the cart, or 0 if the cart is empty. Which of the following implementations of mostExpensive works as intended?",
+     "options": [
+      {
+       "text": "```\npublic int mostExpensive() {\n        int best = 0;\n        for (int p : prices) {\n            if (p > best) {\n            best = p;\n            }\n        }\n        return best;\n    }\n```",
+       "why": "A running best that starts at 0 and is replaced by any larger price gives the maximum, and stays 0 for an empty cart.",
+       "value": null
+      },
+      {
+       "text": "```\npublic int mostExpensive() {\n        return prices.get(prices.size() - 1);\n    }\n```",
+       "why": "Returns the last price added, which is not necessarily the largest (and throws an exception for an empty cart).",
+       "value": null
+      },
+      {
+       "text": "```\npublic int mostExpensive() {\n        int best = 0;\n        for (int p : prices) {\n            best += p;\n        }\n        return best;\n    }\n```",
+       "why": "Adds all of the prices instead of finding the largest.",
+       "value": null
+      },
+      {
+       "text": "```\npublic int mostExpensive() {\n        int best = 0;\n        for (int p : prices) {\n            if (p < best) {\n            best = p;\n            }\n        }\n        return best;\n    }\n```",
+       "why": "Looks for a price smaller than best, which starts at 0, so it always returns 0.",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is ```\npublic int mostExpensive() {\n        int best = 0;\n        for (int p : prices) {\n            if (p > best) {\n            best = p;\n            }\n        }\n        return best;\n    }\n```. A running best that starts at 0 and is replaced by any larger price gives the maximum, and stays 0 for an empty cart.\n```\npublic int mostExpensive() {\n        return prices.get(prices.size() - 1);\n    }\n``` is incorrect: Returns the last price added, which is not necessarily the largest (and throws an exception for an empty cart).\n```\npublic int mostExpensive() {\n        int best = 0;\n        for (int p : prices) {\n            best += p;\n        }\n        return best;\n    }\n``` is incorrect: Adds all of the prices instead of finding the largest.\n```\npublic int mostExpensive() {\n        int best = 0;\n        for (int p : prices) {\n            if (p < best) {\n            best = p;\n            }\n        }\n        return best;\n    }\n``` is incorrect: Looks for a price smaller than best, which starts at 0, so it always returns 0.",
+     "est_seconds": 100,
+     "blueprint": {
+      "id": "css_t5_cart_set_q2",
+      "subject": "ap_computer_science_a",
+      "kind": "mc",
+      "concept": "write a maximum-finding method over an ArrayList field",
+      "topic": "3.5",
+      "skill": "2.B",
+      "student_thinking": [
+       "read the code and decide which candidate satisfies the specification for every input",
+       "compare the result with each option and rule out the named misconceptions"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "not_allowed",
+      "key_conditions": [
+       {
+        "condition": "the key passes every test case when compiled and run",
+        "evidence": "javac and java run"
+       },
+       {
+        "condition": "each distractor fails at least one test case",
+        "evidence": "java test run"
+       }
+      ],
+      "material": {
+       "type": "code",
+       "must_include": [
+        "the code segment"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Returns the last price added, which is not necessarily the largest (and throws an exception for an empty cart)."
+       },
+       {
+        "id": "m2",
+        "description": "Adds all of the prices instead of finding the largest."
+       },
+       {
+        "id": "m3",
+        "description": "Looks for a price smaller than best, which starts at 0, so it always returns 0."
+       }
+      ],
+      "verification": {
+       "independent_path": "each implementation compiled into the class and run on carts with the largest price first, last and in the middle, and on an empty cart",
+       "method": "javac+java unit tests + python reference tests"
+      },
+      "judgment_demand": "test candidates against boundary cases"
+     }
+    }
+   ],
+   "set_size": 2,
+   "est_seconds": 195,
+   "facts": [
+    "key=49"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "css_t5_cart_set_q1",
+   "facts": [
+    "key=49"
+   ],
+   "seed": 13401
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Traces a method with a field and ArrayList, in Unit 3 scope, skill 3.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "75 - 26 = 49 is the unique correct answer."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Code is complete and the stem is clear. The ArrayList import is omitted, as is typical on the exam."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor maps to a distinct misconception (26 is the discount only, 75 ignores the discount, 40 subtracts pct flat). The explanations are terse but cover every option."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 95 seconds, no calculator needed, arithmetic is light."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Correct, clean trace item with a unique key and distinct distractors. The only weakness is the thin, slightly circular key explanation, so I am passing it."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Writing a method that returns a value from an instance field (ArrayList) fits 3.5 and skill 2.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "A is the unique correct option. B fails for non-last max and empty cart, C sums, D always returns 0."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The class code is complete and the spec is clear. The ArrayList import is omitted, as is normal for AP. Option indentation is slightly uneven but harmless."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct misconceptions (last element, accumulate, wrong comparison), and each is explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short code, about 90 seconds, no calculator needed, four parallel options."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound, with a unique key, plausible distractors, and appropriate scope. It passes all five criteria."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "exam_prep",
+    "rationale": "Short class trace: construct a Cart, add three prices, sum to 75, then compute 75*35/100 with integer truncation (2625/100 = 26) and subtract to get 49. The main lever is integer-division truncation and the order of operations, with distractors for the discount alone (26) and no discount (75). The reading load is low and the arithmetic is small enough to do without a calculator.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 5,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 90
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "This is a standard max-in-list method written inside a class. Only one option is a correct running-maximum loop with a 0 default. The distractors are clearly wrong: the last element, a sum, and a minimum. The solver needs one concept, no computation, and no representation changes. The empty-cart case is handled by the initial value of 0, and prices are implicitly positive, so there is no subtle boundary trap. This fits introductory practice for writing methods, not a full mock exam.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 0,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_computer_science_a-m02-k0",
+  "cellId": "ap_computer_science_a-m02",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "mc",
+  "keywordCode": "3.5",
+  "unitCode": "3",
+  "skillPrimary": "3.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "not_allowed",
+  "archetype": "css_t5_garage_set_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Short trace of park/leave on a 4-slot array; one freed slot is reused, then the garage is full. Single concept (method behavior with instance state), no tricky subtleties, minimal reading and computation.",
+  "payload": {
+   "archetype": "css_t5_garage_set",
+   "topic": "3.5",
+   "skill": "3.B",
+   "calculator": "not_allowed",
+   "set_intro": "Consider the following Garage class, which keeps track of parking slots in an array.",
+   "stimulus": {
+    "kind": "text",
+    "description": "```java\nclass Garage {\n    private int[] slots;\n    private int used;\n    public Garage(int n) {\n        slots = new int[n];\n    }\n    public boolean park(int id) {\n        for (int i = 0; i < slots.length; i++) {\n            if (slots[i] == 0) {\n                slots[i] = id;\n                used++;\n                return true;\n            }\n        }\n        return false;\n    }\n    public void leave(int id) {\n        for (int i = 0; i < slots.length; i++) {\n            if (slots[i] == id) {\n                slots[i] = 0;\n                used--;\n            }\n        }\n    }\n    // other methods not shown\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "items": [
+    {
+     "archetype": "css_t5_garage_set_q1",
+     "topic": "3.5",
+     "skill": "3.B",
+     "stem": "What is returned by the following code segment?\n```java\nGarage g = new Garage(4);\nboolean p0 = g.park(33);\nboolean p1 = g.park(37);\nboolean p2 = g.park(31);\nboolean p3 = g.park(11);\ng.leave(33);\nboolean q1 = g.park(15);\nboolean q2 = g.park(28);\nreturn p3 + \" \" + q1 + \" \" + q2;\n```",
+     "options": [
+      {
+       "text": "`true true true`",
+       "why": "Believes park never fails when the garage is full.",
+       "value": null
+      },
+      {
+       "text": "`true false false`",
+       "why": "Believes a car that leaves does not free its slot.",
+       "value": null
+      },
+      {
+       "text": "`false true false`",
+       "why": "Believes a car can park only when the garage is completely empty.",
+       "value": null
+      },
+      {
+       "text": "`true true false`",
+       "why": "The last car parked, the car that leaves frees exactly one slot, and the next parking attempts fill free slots in index order until none is left. Tracing the code gives true true false.",
+       "value": null
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is `true true false`. The last car parked, the car that leaves frees exactly one slot, and the next parking attempts fill free slots in index order until none is left. Tracing the code gives true true false.\n`true true true` is incorrect: Believes park never fails when the garage is full.\n`true false false` is incorrect: Believes a car that leaves does not free its slot.\n`false true false` is incorrect: Believes a car can park only when the garage is completely empty.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "css_t5_garage_set_q1",
+      "subject": "ap_computer_science_a",
+      "kind": "mc",
+      "concept": "trace object state through park and leave calls on an array field",
+      "topic": "3.5",
+      "skill": "3.B",
+      "student_thinking": [
+       "trace the code or reason about its behavior without running it",
+       "compare the result with each option and rule out the named misconceptions"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "not_allowed",
+      "key_conditions": [
+       {
+        "condition": "the key is the output of compiling and running the code with the JDK",
+        "evidence": "javac and java run"
+       },
+       {
+        "condition": "a second implementation in Python gives the same value",
+        "evidence": "python reference"
+       }
+      ],
+      "material": {
+       "type": "code",
+       "must_include": [
+        "the code segment"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Believes park never fails when the garage is full."
+       },
+       {
+        "id": "m2",
+        "description": "Believes a car that leaves does not free its slot."
+       },
+       {
+        "id": "m3",
+        "description": "Believes a car can park only when the garage is completely empty."
+       }
+      ],
+      "verification": {
+       "independent_path": "javac+java output vs Python simulation",
+       "method": "javac+java execution + python reference"
+      },
+      "judgment_demand": "trace the code and avoid the named misconception"
+     }
+    },
+    {
+     "archetype": "css_t5_garage_set_q2",
+     "topic": "3.5",
+     "skill": "2.B",
+     "stem": "The Garage class needs a method occupied that returns the number of slots that currently hold a car. Which of the following implementations of occupied works as intended?",
+     "options": [
+      {
+       "text": "```\npublic int occupied() {\n        return slots.length;\n    }\n```",
+       "why": "Returns the number of slots, not the number that are occupied.",
+       "value": null
+      },
+      {
+       "text": "```\npublic int occupied() {\n        int c = 0;\n        for (int i = 0; i < slots.length; i++) {\n            if (slots[i] == 0) {\n            c++;\n            }\n        }\n        return c;\n    }\n```",
+       "why": "Counts the empty slots instead of the occupied slots.",
+       "value": null
+      },
+      {
+       "text": "```\npublic int occupied() {\n        int c = 0;\n        for (int i = 0; i < slots.length; i++) {\n            if (slots[i] != 0) {\n            c++;\n            }\n        }\n        return c;\n    }\n```",
+       "why": "Counting the slots whose value is not 0 over every index gives the number of parked cars.",
+       "value": null
+      },
+      {
+       "text": "```\npublic int occupied() {\n        int c = 0;\n        for (int i = 0; i < slots.length - 1; i++) {\n            if (slots[i] != 0) {\n            c++;\n            }\n        }\n        return c;\n    }\n```",
+       "why": "Stops one slot early, so the last slot is never counted.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is ```\npublic int occupied() {\n        int c = 0;\n        for (int i = 0; i < slots.length; i++) {\n            if (slots[i] != 0) {\n            c++;\n            }\n        }\n        return c;\n    }\n```. Counting the slots whose value is not 0 over every index gives the number of parked cars.\n```\npublic int occupied() {\n        return slots.length;\n    }\n``` is incorrect: Returns the number of slots, not the number that are occupied.\n```\npublic int occupied() {\n        int c = 0;\n        for (int i = 0; i < slots.length; i++) {\n            if (slots[i] == 0) {\n            c++;\n            }\n        }\n        return c;\n    }\n``` is incorrect: Counts the empty slots instead of the occupied slots.\n```\npublic int occupied() {\n        int c = 0;\n        for (int i = 0; i < slots.length - 1; i++) {\n            if (slots[i] != 0) {\n            c++;\n            }\n        }\n        return c;\n    }\n``` is incorrect: Stops one slot early, so the last slot is never counted.",
+     "est_seconds": 100,
+     "blueprint": {
+      "id": "css_t5_garage_set_q2",
+      "subject": "ap_computer_science_a",
+      "kind": "mc",
+      "concept": "write a counting method that traverses an array field of an object",
+      "topic": "3.5",
+      "skill": "2.B",
+      "student_thinking": [
+       "read the code and decide which candidate satisfies the specification for every input",
+       "compare the result with each option and rule out the named misconceptions"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "not_allowed",
+      "key_conditions": [
+       {
+        "condition": "the key passes every test case when compiled and run",
+        "evidence": "javac and java run"
+       },
+       {
+        "condition": "each distractor fails at least one test case",
+        "evidence": "java test run"
+       }
+      ],
+      "material": {
+       "type": "code",
+       "must_include": [
+        "the code segment"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Returns the number of slots, not the number that are occupied."
+       },
+       {
+        "id": "m2",
+        "description": "Counts the empty slots instead of the occupied slots."
+       },
+       {
+        "id": "m3",
+        "description": "Stops one slot early, so the last slot is never counted."
+       }
+      ],
+      "verification": {
+       "independent_path": "each implementation compiled into the class and run on full, partly filled and empty garages",
+       "method": "javac+java unit tests + python reference tests"
+      },
+      "judgment_demand": "test candidates against boundary cases"
+     }
+    }
+   ],
+   "set_size": 2,
+   "est_seconds": 195,
+   "facts": [
+    "key=true true false"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "css_t5_garage_set_q1",
+   "facts": [
+    "key=true true false"
+   ],
+   "seed": 13400
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Tracing object state through method calls on an array field fits topic 3.5 and skill 3.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Trace gives true true false; the key is unique."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The code is complete and compiles. Minor wording issue: 'returned by' a bare segment containing a return statement is slightly unnatural; 'printed' would be cleaner."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor encodes a named misconception, and the explanation covers every wrong option."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short trace, about 95 seconds, no calculator needed."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The key is correct, the item is in scope, and the distractors are distinct. The only issue is the minor wording of 'returned by' a code segment that ends in a return statement."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Writing a counting method over an array field; fits 3.5 / 2.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Option C is the unique correct implementation; 0 is the empty sentinel in the given code. Ids being nonzero is implied, not stated, which is a minor concern."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Class code is complete and compilable; wording is clear. Minor indentation oddity in options."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct misconceptions (capacity, inverted condition, off-by-one); each is explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 100 seconds, no arithmetic, typical AP style."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Sound item: the key is unique and the distractors are distinct. The only concern is that nonzero ids are implied rather than stated, which is minor. Pass."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Short trace of park/leave on a 4-slot array; one freed slot is reused, then the garage is full. Single concept (method behavior with instance state), no tricky subtleties, minimal reading and computation.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 8,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 90
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept item: write a simple counting method over an array. Distractors are obvious near-misses (returns capacity, counts empty slots, off-by-one bound). Requires one short scan of the class and one check of each option; no tracing, aliasing, or arithmetic. Fits foundational method-writing practice rather than full-mock difficulty.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   }
+  ]
+ }
+]

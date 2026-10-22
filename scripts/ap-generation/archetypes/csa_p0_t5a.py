@@ -197,7 +197,7 @@ _add("cs_array_max_jump", "4.4",
       ("for (int i = 1; i < a.length; i++) {\n    best += Math.abs(a[i] - a[i - 1]);\n}", False, "Adds all of the differences instead of keeping the largest.")],
      [("return ArrTools.maxJump(new int[] {1, 5, 2, 9});", "7"), ("return ArrTools.maxJump(new int[] {4, 4});", "0"), ("return ArrTools.maxJump(new int[] {9, 3});", "6"), ("return ArrTools.maxJump(new int[] {5});", "0"), ("return ArrTools.maxJump(new int[] {2, 6, 3, 4});", "4")],
      "compare adjacent array elements with an absolute difference", "Math.abs of each adjacent difference is compared with the best value so far.", "each candidate compiled and run with decreasing values and short arrays")
-_add("cs_string_array_longest", "4.6",
+_add("cs_string_array_longest", "4.5",
      "class WordTools {\n    /** Returns the longest String in words. If several are longest, returns the first of them. Assume words has at least one element. */\n    public static String longest(String[] words) {\n        String best = words[0];\n/*BODY*/\n        return best;\n    }\n}",
      "The method longest is intended to return the longest String in the array words, and the first of them if there is a tie. Which of the following can replace /* missing code */ so that longest works as intended?",
      [("for (String w : words) {\n    if (w.length() > best.length()) {\n        best = w;\n    }\n}", True, None),

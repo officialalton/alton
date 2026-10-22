@@ -2161,7 +2161,7 @@
  },
  {
   "id": "cs_abs_diff_completion",
-  "topic": "1.12",
+  "topic": "1.11",
   "skill": "2.A",
   "calculator": "not_allowed",
   "stimulus": "text",
@@ -2521,7 +2521,7 @@
  },
  {
   "id": "cs_for_step_down",
-  "topic": "2.12",
+  "topic": "2.8",
   "skill": "3.A",
   "calculator": "not_allowed",
   "stimulus": "text",
@@ -2670,23 +2670,8 @@
   ]
  },
  {
-  "id": "cs_loop_break_trace",
-  "topic": "2.12",
-  "skill": "3.A",
-  "calculator": "not_allowed",
-  "stimulus": "text",
-  "verifiedBy": [
-   "javac+java output vs Python loop with continue and break"
-  ],
-  "misconceptions": [
-   "Stops before adding the value that passes the limit.",
-   "Adds the skipped values too.",
-   "Treats continue like break."
-  ]
- },
- {
   "id": "cs_math_distance",
-  "topic": "1.12",
+  "topic": "1.11",
   "skill": "2.A",
   "calculator": "not_allowed",
   "stimulus": "text",
@@ -2701,7 +2686,7 @@
  },
  {
   "id": "cs_math_functions",
-  "topic": "1.12",
+  "topic": "1.11",
   "skill": "3.A",
   "calculator": "not_allowed",
   "stimulus": "text",
@@ -2799,7 +2784,7 @@
    "java runs on valid and invalid start and length values"
   ],
   "misconceptions": [
-   "This is stronger than needed (start + len may equal s.length()) and it does not rule out a negative start.",
+   "This is stronger than needed (start + len may equal s.length()), although it does exclude negative values of start and len.",
    "This does not prevent start + len from passing the end, as slice(\"hello\", 3, 4) shows.",
    "This is stronger than needed and also incomplete: it does not stop start + len from exceeding s.length()."
   ]
@@ -2911,7 +2896,7 @@
  },
  {
   "id": "cs_string_array_longest",
-  "topic": "4.6",
+  "topic": "4.5",
   "skill": "2.A",
   "calculator": "not_allowed",
   "stimulus": "text",
@@ -3010,7 +2995,7 @@
   ],
   "misconceptions": [
    "Uses the quotient instead of the last digit.",
-   "Adds the digits instead of multiplying them.",
+   "Adds each digit to the starting value 1 instead of multiplying by it.",
    "Multiplies by every digit, including 0, so the product becomes 0."
   ]
  },

@@ -1,0 +1,61 @@
+[
+ {
+  "key": "ap_computer_science_a-f01-k0",
+  "cellId": "ap_computer_science_a-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Loop: add n%10 to sum, then n/=10, until n is 0. If n is 0 the loop never runs, so it returns 0.",
+     "final_answer": "public static int digitSum(int n) {\n    int sum = 0;\n    while (n > 0) {\n        sum += n % 10;\n        n /= 10;\n    }\n    return sum;\n}",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "Start at start and add 1 until n % digitSum(n) == 0. For n >= 1 the digit sum is at least 1, so we never divide by zero. Every number from 1 to 9 is Harshad, and Harshad numbers come often enough that the loop ends.",
+     "final_answer": "public static int firstHarshad(int start) {\n    int n = start;\n    while (n % digitSum(n) != 0) {\n        n++;\n    }\n    return n;\n}",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a two-part FRQ on digit extraction and reuse of a helper method. It fits topics 2.10, 1.9 and 2.9 and skill 2.A, and both reference solutions are correct and match the rubric rows.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Digit extraction with % and /, a while loop, and a call to a helper method are all within Unit 2 and match skill 2.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The rubric rows are one behavior each and are consistent with the model answers. The total of 7 points (3 + 4) differs from the usual 9-point FRQ. The subject notes describe four questions of 9 points each, so this is a material deviation, but the part grains of 3 and 4 are fine. For part (a), row A1 bundles two behaviors (the loop condition and n % 10) into one point. That is a minor flaw."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The skeleton and the examples are clear. Preconditions are stated (n >= 0 and start >= 1), which also rules out division by zero in part (b)."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ item with no options. The rubric rows list common errors that match the wrong solutions that were tested."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is typical of an FRQ part. No calculator is needed. The 22-minute estimate is only an internal reference."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Two-part FRQ-style item: (a) is the standard digit-extraction loop with % and /; (b) requires a search loop that reuses digitSum and tests divisibility. Concepts are squarely in Unit 2 scope (while loops, selection, integer arithmetic, method reuse). Reading is short, no long computation, preconditions are clear (digit sum is positive for start >= 1, so no divide-by-zero). Moderate difficulty from composing the two methods and getting loop bounds right, which is typical for a full mock FRQ.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ }
+]

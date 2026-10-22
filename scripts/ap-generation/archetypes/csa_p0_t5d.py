@@ -33,7 +33,7 @@ def css_t5_garage_set(rng):
     q1v, q2v = park(ids[n]), park(ids[n + 1])
     py = f"true {str(q1v).lower()} {str(q2v).lower()}"
     muts = [{"why": "Believes a car that leaves does not free its slot.", "swap": ("slots[i] = 0;\n                used--;", "used--;")},
-            {"why": "Believes park places the car in the last free slot, so nothing changes for the count.", "swap": ("if (slots[i] == 0) {", "if (slots[i] != 0) {")},
+            {"why": "Believes a car can park only when the garage is completely empty.", "swap": ("if (slots[i] == 0) {", "if (used == 0) {")},
             {"why": "Believes park never fails when the garage is full.", "swap": ("        return false;\n    }\n    public void leave", "        return true;\n    }\n    public void leave")},
             {"why": "Believes leave frees every slot.", "swap": ("if (slots[i] == id) {", "if (slots[i] != id) {")}]
     q1 = mk(rng, "css_t5_garage_set_q1", "3.5", "3.B", "What is returned by the following code segment?\n```java\n" + stm + "\n```", shown, call=stm, muts=muts, py=py, stim_code=False, concept="trace object state through park and leave calls on an array field",
@@ -56,13 +56,13 @@ CART = "class Cart {\n    private ArrayList<Integer> prices;\n    private int pc
 
 @retry_any
 def css_t5_cart_set(rng):
-    pct = rng.choice([10, 20, 25, 50])
-    pr = [rng.choice([10, 20, 30, 40, 50, 60]) for _ in range(rng.randint(3, 4))]
+    pct = rng.choice([15, 30, 35, 45])
+    pr = [rng.choice([11, 17, 23, 29, 35, 44]) for _ in range(rng.randint(3, 4))]
     shown = CART.replace("/*BODY*/", "    // other methods not shown")
     stm = f"Cart c = new Cart({pct});\n" + "\n".join(f"c.add({p});" for p in pr) + "\nSystem.out.println(c.total());"
     t = sum(pr); py = str(t - t * pct // 100)
     muts = [{"why": "Believes the discount is subtracted as a flat amount equal to pct.", "swap": ("return t - t * pct / 100;", "return t - pct;")},
-            {"why": "Believes the discount is applied to each price before the total, with integer rounding of each part.", "swap": ("t += p;", "t += p - p * pct / 100;")},
+            {"why": "Rounds the discount up instead of truncating it.", "swap": ("return t - t * pct / 100;", "return t - (int) Math.ceil(t * pct / 100.0);")},
             {"why": "Believes the total ignores the discount.", "swap": ("return t - t * pct / 100;", "return t;")},
             {"why": "Believes the method returns only the discount amount.", "swap": ("return t - t * pct / 100;", "return t * pct / 100;")}]
     q1 = mk(rng, "css_t5_cart_set_q1", "3.5", "3.B", "What is printed as a result of executing the following code segment?\n```java\n" + stm + "\n```", shown, call=stm, muts=muts, py=py, stim_code=False, concept="trace an ArrayList field that is totalled with a percentage discount using integer arithmetic",

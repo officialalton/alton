@@ -94,7 +94,7 @@ d("AP Computer Science A P0 archetypes (Python generators run against the JDK, 2
       expect(plan.ok).toBe(true);
       if (plan.ok) expect((plan.items[0].statements as { mode: string }[]).every((s) => s.mode === "code")).toBe(true);
     }
-    expect(byTemplate).toEqual({ q1: 4, q2: 4, q3: 4, q4: 4 });
+    expect(byTemplate).toEqual({ q1: 6, q2: 5, q3: 6, q4: 6 });
     for (const t of ["q1", "q2", "q3", "q4"]) total += out.frqPacks[out.frq.find((n) => out.frqPacks[n][0].template === t)!][0].total_points;
     expect(total).toBe(25);
     expect(csaGuide.frqTemplates.map((t) => t.id).sort()).toEqual([...out.frq].sort());
