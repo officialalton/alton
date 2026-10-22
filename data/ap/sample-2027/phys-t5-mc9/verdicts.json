@@ -1,0 +1,172 @@
+[
+ {
+  "key": "ap_physics_1-m01-k0",
+  "cellId": "ap_physics_1-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "resembles_known_exam_item"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "With constant acceleration from rest, average speed is v/2. Average speed = 200 m / 12 s = 16.67 m/s, so v = 33.3 m/s.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "33.3 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": ""
+   },
+   "notes": "Single step, about 90 seconds, light arithmetic, calculator allowed.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": "",
+   "matches_reference_pattern": "<parameter name=\"value\">false",
+   "resembles_known_exam_item": "<parameter name=\"value\">false",
+   "summary": "The item is correct and well formed, but it does not assess topic 1.4 (Reference Frames and Relative Motion). It is generic constant-acceleration kinematics, so it fails the scope/topic criterion."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single constant-acceleration kinematics problem from rest. Choose d = 1/2 a t^2 (or v_avg = d/t with v = 2 v_avg), then compute v. Two short steps, simple numbers, no representation change, and distractors that match common errors such as reporting acceleration or using d/t. The item does not exercise reference frames, but its difficulty is low and fair.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k1",
+  "cellId": "ap_physics_1-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Constant acceleration from rest: average speed = 20 m/s = v/2, so v = 40 m/s.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "40.0 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Item is constant-acceleration kinematics (topic 1.5/1.6 content). It has no reference frame or relative motion element, so it does not match topic 1.4. Skill 2.B fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "40.0 m/s is correct and unique; conditions stated in the stem."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are distinct and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, clean numbers, calculator not needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well formed, but it assesses constant-acceleration kinematics rather than reference frames and relative motion (topic 1.4). It fails the scope/topic fit."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept constant-acceleration kinematics from rest: find a from d = 1/2 a t^2, then v = a t (or use average speed doubled). Two short steps, clean numbers, no representation changes, minimal reading. Distractors include the acceleration (4.00) and plausible slips. Note: the item does not address reference frames or relative motion, so it mismatches the stated topic 1.4, though this does not make it harder.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k2",
+  "cellId": "ap_physics_1-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Average speed = 60/6 = 10 m/s. With constant acceleration from rest, final speed = 2 × average = 20 m/s.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "20.0 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Item is single-object constant-acceleration kinematics (topic 1.5/1.6), with no reference frame or relative motion at all. It does not assess topic 1.4."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "20.0 m/s is correct and unique; conditions are stated in the stem."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct slips, and the explanation covers each wrong option. The sqrt(2d/t) distractor is dimensionally odd but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical time and reading load; calculator use is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is well built and its key is correct, but it tests constant-acceleration kinematics rather than reference frames and relative motion. It fails the topic 1.4 scope criterion."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept constant-acceleration kinematics from rest. Solver picks x = 1/2 a t^2 (or the average-velocity shortcut) and then v = a t. There are two short steps, no representation change, minimal reading, and clean arithmetic. The distractors are plausible errors such as confusing average speed with final speed. The item does not actually assess reference frames (topic 1.4), but that is a content-alignment note, not a difficulty issue.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ }
+]

@@ -1,0 +1,164 @@
+[
+ {
+  "key": "ap_physics_1-m01-k0",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "With constant acceleration from rest, the final speed is twice the average speed: v = 2d/t = 160/6 = 26.7 m/s.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "26.7 m/s"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, unambiguous constant-acceleration item. The key 26.7 m/s is unique, the distractors are distinct misconceptions, and the load is appropriate.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires selecting the constant-acceleration model from rest, finding a from x = 1/2 a t^2 and then v = a t (or recognizing v_final = 2 v_avg). Two-step reasoning with a conceptual trap (average speed vs. final speed). Short reading, simple arithmetic, in scope, with no ambiguity.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k1",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "d = (v/2)t, so v = 2d/t = 2(60)/12 = 10.0 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "10.0 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Constant-acceleration kinematics from rest, Unit 1 scope; selects the pathway (average speed is half the final speed), matching 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique answer 10.0 m/s. The stem states constant acceleration, start from rest, straight and level track."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed; the wording is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (mixed-up square root, halving instead of doubling, average speed taken as final speed); all are explained and there is no format giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, light arithmetic, calculator allowed and consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: in scope, uniquely keyed, clear, with distinct distractors and typical exam load. Accept."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept constant-acceleration problem from rest. Pick x = 1/2 a t^2 (or v_avg = 2x/t, with v_final = 2 v_avg), then compute. Clean numbers, minimal reading, no graph or representation change. Distractors map to typical errors (average speed, halving, square root). Appropriate for foundational practice rather than full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k2",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "With constant acceleration from rest, the average speed is 60/6 = 10 m/s. The final speed is twice the average, so v = 20.0 m/s.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "20.0 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Constant-acceleration kinematics from rest, in Unit 1 and topic 1.2. One computational pathway matches skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "v = 2d/t = 20 m/s is the unique correct answer. The stem states the constant acceleration and the start from rest."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct, realistic error, and the explanation covers all three. The 4.47 rationale is slightly vague but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short item with light arithmetic. The calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique, the distractors are distinct, and the scope and load are appropriate. I recommend accepting it."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept constant-acceleration problem from rest. Student picks d = 1/2 a t^2 (or average velocity = d/t, final speed = 2 x average) and computes v. Two short steps with clean numbers, no graph or representation translation, minimal reading. Distractors reflect common errors (acceleration instead of speed, wrong division). Fits foundational practice for topic 1.2 rather than full-mock level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ }
+]

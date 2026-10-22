@@ -1,0 +1,842 @@
+[
+ {
+  "candidateKey": "ap_physics_1-m01-k0",
+  "cellId": "ap_physics_1-m01",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "1.5",
+  "unitCode": "1",
+  "skillPrimary": "2.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "phs_t5d_kick_height_set_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "set_item_2:criterion_failed_distractor_explanation; criterion_failed_distractor_explanation",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Single-concept projectile item: horizontal velocity is constant and vertical velocity is zero at the apex, so the speed is v cos(53°) = 14.4 m/s. It needs one vector decomposition and one conceptual recognition. Distractors reflect common misconceptions (full speed, sine vs. cosine, half). There is no multi-step setup, no representation translation, and light arithmetic.",
+  "payload": {
+   "archetype": "phs_t5d_kick_height_set",
+   "topic": "1.5",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "set_intro": "A soccer ball is kicked from a level field with an initial speed of $24\\text{ m/s}$ at an angle of $53^\\circ$ above the horizontal. The ball lands on the same level field. Air resistance is negligible.",
+   "stimulus": {
+    "kind": "text",
+    "description": "A soccer ball is kicked from a level field with an initial speed of $24\\text{ m/s}$ at an angle of $53^\\circ$ above the horizontal. The ball lands on the same level field. Air resistance is negligible."
+   },
+   "items": [
+    {
+     "archetype": "phs_t5d_kick_height_set_q1",
+     "topic": "1.5",
+     "skill": "2.B",
+     "stem": "What is the speed of the ball at the highest point of its flight?",
+     "options": [
+      {
+       "text": "$24.0\\text{ m/s}$",
+       "why": "Reports the full launch speed, assuming the speed does not change on the way up.",
+       "value": "24.000000"
+      },
+      {
+       "text": "$12.0\\text{ m/s}$",
+       "why": "Halves the launch speed, assuming the ball has lost half of its speed at the top.",
+       "value": "12.000000"
+      },
+      {
+       "text": "$19.2\\text{ m/s}$",
+       "why": "Reports the vertical component of the launch velocity instead of the horizontal one.",
+       "value": "19.167252"
+      },
+      {
+       "text": "$14.4\\text{ m/s}$",
+       "why": "At the top the vertical velocity is zero and the horizontal velocity has not changed, so the speed is $v_0\\cos\\theta=(24)\\cos 53^\\circ=14.4\\text{ m/s}$.",
+       "value": "14.443561"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is $14.4\\text{ m/s}$. At the top the vertical velocity is zero and the horizontal velocity has not changed, so the speed is $v_0\\cos\\theta=(24)\\cos 53^\\circ=14.4\\text{ m/s}$.\n$24.0\\text{ m/s}$ is incorrect: Reports the full launch speed, assuming the speed does not change on the way up.\n$12.0\\text{ m/s}$ is incorrect: Halves the launch speed, assuming the ball has lost half of its speed at the top.\n$19.2\\text{ m/s}$ is incorrect: Reports the vertical component of the launch velocity instead of the horizontal one.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "phs_t5d_kick_height_set_q1",
+      "subject": "ap_physics_1",
+      "kind": "mc",
+      "concept": "Two questions about one ball kicked at an angle from level ground",
+      "topic": "1.5",
+      "skill": "2.B",
+      "student_thinking": [
+       "Split the launch velocity into horizontal and vertical components",
+       "Use that the horizontal velocity is constant while the vertical velocity changes at $g$"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the field is level and air resistance is negligible",
+        "evidence": "the shared stimulus states the field is level and air resistance is negligible"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Reports the full launch speed, assuming the speed does not change on the way up."
+       },
+       {
+        "id": "m2",
+        "description": "Halves the launch speed, assuming the ball has lost half of its speed at the top."
+       },
+       {
+        "id": "m3",
+        "description": "Reports the vertical component of the launch velocity instead of the horizontal one."
+       }
+      ],
+      "verification": {
+       "independent_path": "components from sine and cosine; a bisection root finder on the vertical equation recomputes the time of flight and the horizontal speed is checked constant",
+       "method": "sympy symbolic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "law_selection"
+      ]
+     }
+    },
+    {
+     "archetype": "phs_t5d_kick_height_set_q2",
+     "topic": "1.5",
+     "skill": "2.B",
+     "stem": "What is the maximum height above the field that the ball reaches?",
+     "options": [
+      {
+       "text": "$10.6\\text{ m}$",
+       "why": "Uses the horizontal component, $v_x^2/(2g)$.",
+       "value": "10.643696"
+      },
+      {
+       "text": "$18.7\\text{ m}$",
+       "why": "At the highest point the vertical velocity is zero, so $H=(v_0\\sin\\theta)^2/(2g)=(19.2)^2/(2\\cdot 9.8)=18.7\\text{ m}$.",
+       "value": "18.744059"
+      },
+      {
+       "text": "$29.4\\text{ m}$",
+       "why": "Ignores the angle and uses the full launch speed, $v_0^2/(2g)$.",
+       "value": "29.387755"
+      },
+      {
+       "text": "$75.0\\text{ m}$",
+       "why": "Multiplies the vertical component by the whole time of flight, $v_yT$, which is twice the distance risen.",
+       "value": "74.976236"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is $18.7\\text{ m}$. At the highest point the vertical velocity is zero, so $H=(v_0\\sin\\theta)^2/(2g)=(19.2)^2/(2\\cdot 9.8)=18.7\\text{ m}$.\n$10.6\\text{ m}$ is incorrect: Uses the horizontal component, $v_x^2/(2g)$.\n$29.4\\text{ m}$ is incorrect: Ignores the angle and uses the full launch speed, $v_0^2/(2g)$.\n$75.0\\text{ m}$ is incorrect: Multiplies the vertical component by the whole time of flight, $v_yT$, which is twice the distance risen.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "phs_t5d_kick_height_set_q2",
+      "subject": "ap_physics_1",
+      "kind": "mc",
+      "concept": "Two questions about one ball kicked at an angle from level ground",
+      "topic": "1.5",
+      "skill": "2.B",
+      "student_thinking": [
+       "Split the launch velocity into horizontal and vertical components",
+       "Use that the horizontal velocity is constant while the vertical velocity changes at $g$"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the field is level and air resistance is negligible",
+        "evidence": "the shared stimulus states the field is level and air resistance is negligible"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Uses the horizontal component, $v_x^2/(2g)$."
+       },
+       {
+        "id": "m2",
+        "description": "Ignores the angle and uses the full launch speed, $v_0^2/(2g)$."
+       },
+       {
+        "id": "m3",
+        "description": "Multiplies the vertical component by the whole time of flight, $v_yT$, which is twice the distance risen."
+       }
+      ],
+      "verification": {
+       "independent_path": "components from sine and cosine; a bisection root finder on the vertical equation recomputes the time of flight and the horizontal speed is checked constant",
+       "method": "sympy symbolic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "law_selection"
+      ]
+     }
+    }
+   ],
+   "set_size": 2,
+   "est_seconds": 190,
+   "facts": [
+    "v0=24.0",
+    "theta=53"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phs_t5d_kick_height_set_q1",
+   "facts": [
+    "v0=24.0",
+    "theta=53"
+   ],
+   "seed": 14901
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "14.4 m/s = 24cos53 is unique and correct."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Complete, clear text stem; assumptions stated."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Distinct misconceptions (constant speed, vertical component, halving); all wrong options explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 95 s, calculator allowed, minimal arithmetic."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound: unique correct key, complete stem, distinct distractors, and a typical time load. It is somewhat easy but acceptable."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Projectile motion components, Unit 1 topic 1.5, skill 2.B fits."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "18.7 m is correct and unique; conditions stated."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Text-only stimulus is complete and clear."
+    },
+    "distractor_explanation": {
+     "pass": false,
+     "notes": "The v_y*T distractor is described as twice the distance risen, but v_y*T is actually four times the rise (74.98 vs 18.74). The explanation is factually wrong for that option. The distractors are otherwise distinct and realistic."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Typical time and load."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound and the key is correct. The only defect is that the explanation for the 75.0 m distractor wrongly says v_y*T is twice the distance risen; it is four times, so the rationale needs correcting. I failed the distractor/explanation criterion on that basis."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept projectile item: horizontal velocity is constant and vertical velocity is zero at the apex, so the speed is v cos(53°) = 14.4 m/s. It needs one vector decomposition and one conceptual recognition. Distractors reflect common misconceptions (full speed, sine vs. cosine, half). There is no multi-step setup, no representation translation, and light arithmetic.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 0,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Requires choosing projectile kinematics, resolving the velocity into components, and applying vy^2 = 2gh at the peak. Few steps and light arithmetic. Distractors match common errors (cos instead of sin, full speed instead of vertical component). Clear wording, in scope, standard exam-level item.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 90
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_physics_1-m01-k1",
+  "cellId": "ap_physics_1-m01",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "1.5",
+  "unitCode": "1",
+  "skillPrimary": "2.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "phs_t5d_kick_height_set_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: at the apex vertical velocity is zero and horizontal velocity is constant, so speed = v0 cos(theta) = 16 cos 53° ≈ 9.63 m/s. It needs one vector component calculation and one conceptual recognition. The distractors are the sine component (12.8), half the initial speed (8.00) and an arbitrary value (3.22). The wording is clear and the arithmetic is short.",
+  "payload": {
+   "archetype": "phs_t5d_kick_height_set",
+   "topic": "1.5",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "set_intro": "A soccer ball is kicked from a level field with an initial speed of $16\\text{ m/s}$ at an angle of $53^\\circ$ above the horizontal. The ball lands on the same level field. Air resistance is negligible.",
+   "stimulus": {
+    "kind": "text",
+    "description": "A soccer ball is kicked from a level field with an initial speed of $16\\text{ m/s}$ at an angle of $53^\\circ$ above the horizontal. The ball lands on the same level field. Air resistance is negligible."
+   },
+   "items": [
+    {
+     "archetype": "phs_t5d_kick_height_set_q1",
+     "topic": "1.5",
+     "skill": "2.B",
+     "stem": "What is the speed of the ball at the highest point of its flight?",
+     "options": [
+      {
+       "text": "$3.22\\text{ m/s}$",
+       "why": "Subtracts the vertical component from the launch speed.",
+       "value": "3.2218318"
+      },
+      {
+       "text": "$8.00\\text{ m/s}$",
+       "why": "Halves the launch speed, assuming the ball has lost half of its speed at the top.",
+       "value": "8.0000000"
+      },
+      {
+       "text": "$12.8\\text{ m/s}$",
+       "why": "Reports the vertical component of the launch velocity instead of the horizontal one.",
+       "value": "12.778168"
+      },
+      {
+       "text": "$9.63\\text{ m/s}$",
+       "why": "At the top the vertical velocity is zero and the horizontal velocity has not changed, so the speed is $v_0\\cos\\theta=(16)\\cos 53^\\circ=9.63\\text{ m/s}$.",
+       "value": "9.6290404"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is $9.63\\text{ m/s}$. At the top the vertical velocity is zero and the horizontal velocity has not changed, so the speed is $v_0\\cos\\theta=(16)\\cos 53^\\circ=9.63\\text{ m/s}$.\n$3.22\\text{ m/s}$ is incorrect: Subtracts the vertical component from the launch speed.\n$8.00\\text{ m/s}$ is incorrect: Halves the launch speed, assuming the ball has lost half of its speed at the top.\n$12.8\\text{ m/s}$ is incorrect: Reports the vertical component of the launch velocity instead of the horizontal one.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "phs_t5d_kick_height_set_q1",
+      "subject": "ap_physics_1",
+      "kind": "mc",
+      "concept": "Two questions about one ball kicked at an angle from level ground",
+      "topic": "1.5",
+      "skill": "2.B",
+      "student_thinking": [
+       "Split the launch velocity into horizontal and vertical components",
+       "Use that the horizontal velocity is constant while the vertical velocity changes at $g$"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the field is level and air resistance is negligible",
+        "evidence": "the shared stimulus states the field is level and air resistance is negligible"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Subtracts the vertical component from the launch speed."
+       },
+       {
+        "id": "m2",
+        "description": "Halves the launch speed, assuming the ball has lost half of its speed at the top."
+       },
+       {
+        "id": "m3",
+        "description": "Reports the vertical component of the launch velocity instead of the horizontal one."
+       }
+      ],
+      "verification": {
+       "independent_path": "components from sine and cosine; a bisection root finder on the vertical equation recomputes the time of flight and the horizontal speed is checked constant",
+       "method": "sympy symbolic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "law_selection"
+      ]
+     }
+    },
+    {
+     "archetype": "phs_t5d_kick_height_set_q2",
+     "topic": "1.5",
+     "skill": "2.B",
+     "stem": "What is the maximum height above the field that the ball reaches?",
+     "options": [
+      {
+       "text": "$8.33\\text{ m}$",
+       "why": "At the highest point the vertical velocity is zero, so $H=(v_0\\sin\\theta)^2/(2g)=(12.8)^2/(2\\cdot 9.8)=8.33\\text{ m}$.",
+       "value": "8.3306929"
+      },
+      {
+       "text": "$16.7\\text{ m}$",
+       "why": "Drops the factor of two, $v_y^2/g$.",
+       "value": "16.661386"
+      },
+      {
+       "text": "$20.9\\text{ m}$",
+       "why": "Uses the time to the top and the launch speed, $v_0\\,t_{top}$, ignoring that the climb slows down.",
+       "value": "20.862315"
+      },
+      {
+       "text": "$33.3\\text{ m}$",
+       "why": "Multiplies the vertical component by the whole time of flight, $v_yT$, which is twice the distance risen.",
+       "value": "33.322772"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is $8.33\\text{ m}$. At the highest point the vertical velocity is zero, so $H=(v_0\\sin\\theta)^2/(2g)=(12.8)^2/(2\\cdot 9.8)=8.33\\text{ m}$.\n$16.7\\text{ m}$ is incorrect: Drops the factor of two, $v_y^2/g$.\n$20.9\\text{ m}$ is incorrect: Uses the time to the top and the launch speed, $v_0\\,t_{top}$, ignoring that the climb slows down.\n$33.3\\text{ m}$ is incorrect: Multiplies the vertical component by the whole time of flight, $v_yT$, which is twice the distance risen.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "phs_t5d_kick_height_set_q2",
+      "subject": "ap_physics_1",
+      "kind": "mc",
+      "concept": "Two questions about one ball kicked at an angle from level ground",
+      "topic": "1.5",
+      "skill": "2.B",
+      "student_thinking": [
+       "Split the launch velocity into horizontal and vertical components",
+       "Use that the horizontal velocity is constant while the vertical velocity changes at $g$"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the field is level and air resistance is negligible",
+        "evidence": "the shared stimulus states the field is level and air resistance is negligible"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Drops the factor of two, $v_y^2/g$."
+       },
+       {
+        "id": "m2",
+        "description": "Uses the time to the top and the launch speed, $v_0\\,t_{top}$, ignoring that the climb slows down."
+       },
+       {
+        "id": "m3",
+        "description": "Multiplies the vertical component by the whole time of flight, $v_yT$, which is twice the distance risen."
+       }
+      ],
+      "verification": {
+       "independent_path": "components from sine and cosine; a bisection root finder on the vertical equation recomputes the time of flight and the horizontal speed is checked constant",
+       "method": "sympy symbolic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "law_selection"
+      ]
+     }
+    }
+   ],
+   "set_size": 2,
+   "est_seconds": 190,
+   "facts": [
+    "v0=16.0",
+    "theta=53"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phs_t5d_kick_height_set_q1",
+   "facts": [
+    "v0=16.0",
+    "theta=53"
+   ],
+   "seed": 14902
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Projectile motion component analysis, Unit 1 topic 1.5. Skill 2.B is met with a short computation pathway."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "16cos53° = 9.63 m/s is unique and correct. The level field and negligible air resistance are stated. The other options are distinct values."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The text stimulus is complete and clear. All conditions are stated and no figure is needed."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each wrong option has a named error: subtraction of the vertical component, halving the speed, and swapping sine for cosine. The explanation covers each one. The 3.22 m/s distractor is somewhat artificial but acceptable."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "The item takes about 60-95 seconds and the calculator load is trivial. Options are parallel numeric values."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is a clean, correct projectile question with a unique key and distinct distractor misconceptions. It is suitable for the exam, and I found no instant-reject conditions."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Projectile maximum height from components; fits topic 1.5 and skill 2.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "8.33 m is unique and correct. Explanation's rounded 12.8 gives 8.36, a minor inconsistency, though the unrounded value gives 8.33."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Text stem is complete, with level field and negligible air resistance stated; g is standard."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct misconceptions, each explained, with values matching their formulas."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 95 seconds, calculator allowed, no needless arithmetic."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is correct, in scope, and well formed. The only flaw is that the explanation's rounded 12.8 gives 8.36 m rather than 8.33 m, which is minor."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept item: at the apex vertical velocity is zero and horizontal velocity is constant, so speed = v0 cos(theta) = 16 cos 53° ≈ 9.63 m/s. It needs one vector component calculation and one conceptual recognition. The distractors are the sine component (12.8), half the initial speed (8.00) and an arbitrary value (3.22). The wording is clear and the arithmetic is short.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept projectile item: resolve the initial velocity into components, then apply v^2 = v0^2 - 2g*h at the apex. Two reasoning steps, no graphs or multi-part linking, and short arithmetic. The wording is clear and the model assumptions (level field, no air resistance) are stated. The distractors correspond to common slips (a missing factor of 2, a doubled or quadrupled value). It is a routine skill 2.B calculation and is easier than a typical full-mock item.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 75
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_physics_1-m01-k2",
+  "cellId": "ap_physics_1-m01",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "1.5",
+  "unitCode": "1",
+  "skillPrimary": "2.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "phs_t5d_kick_height_set_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: at the apex vertical velocity is zero, so speed equals the constant horizontal component, 25cos53° = 15 m/s. Requires one component calculation and recognizing that horizontal velocity is constant. Distractors reflect common misconceptions (full speed, vertical component, half speed). Minimal reading and arithmetic.",
+  "payload": {
+   "archetype": "phs_t5d_kick_height_set",
+   "topic": "1.5",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "set_intro": "A soccer ball is kicked from a level field with an initial speed of $25\\text{ m/s}$ at an angle of $53^\\circ$ above the horizontal. The ball lands on the same level field. Air resistance is negligible.",
+   "stimulus": {
+    "kind": "text",
+    "description": "A soccer ball is kicked from a level field with an initial speed of $25\\text{ m/s}$ at an angle of $53^\\circ$ above the horizontal. The ball lands on the same level field. Air resistance is negligible."
+   },
+   "items": [
+    {
+     "archetype": "phs_t5d_kick_height_set_q1",
+     "topic": "1.5",
+     "skill": "2.B",
+     "stem": "What is the speed of the ball at the highest point of its flight?",
+     "options": [
+      {
+       "text": "$15.0\\text{ m/s}$",
+       "why": "At the top the vertical velocity is zero and the horizontal velocity has not changed, so the speed is $v_0\\cos\\theta=(25)\\cos 53^\\circ=15.0\\text{ m/s}$.",
+       "value": "15.045376"
+      },
+      {
+       "text": "$25.0\\text{ m/s}$",
+       "why": "Reports the full launch speed, assuming the speed does not change on the way up.",
+       "value": "25.000000"
+      },
+      {
+       "text": "$20.0\\text{ m/s}$",
+       "why": "Reports the vertical component of the launch velocity instead of the horizontal one.",
+       "value": "19.965888"
+      },
+      {
+       "text": "$12.5\\text{ m/s}$",
+       "why": "Halves the launch speed, assuming the ball has lost half of its speed at the top.",
+       "value": "12.500000"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is $15.0\\text{ m/s}$. At the top the vertical velocity is zero and the horizontal velocity has not changed, so the speed is $v_0\\cos\\theta=(25)\\cos 53^\\circ=15.0\\text{ m/s}$.\n$25.0\\text{ m/s}$ is incorrect: Reports the full launch speed, assuming the speed does not change on the way up.\n$20.0\\text{ m/s}$ is incorrect: Reports the vertical component of the launch velocity instead of the horizontal one.\n$12.5\\text{ m/s}$ is incorrect: Halves the launch speed, assuming the ball has lost half of its speed at the top.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "phs_t5d_kick_height_set_q1",
+      "subject": "ap_physics_1",
+      "kind": "mc",
+      "concept": "Two questions about one ball kicked at an angle from level ground",
+      "topic": "1.5",
+      "skill": "2.B",
+      "student_thinking": [
+       "Split the launch velocity into horizontal and vertical components",
+       "Use that the horizontal velocity is constant while the vertical velocity changes at $g$"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the field is level and air resistance is negligible",
+        "evidence": "the shared stimulus states the field is level and air resistance is negligible"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Reports the full launch speed, assuming the speed does not change on the way up."
+       },
+       {
+        "id": "m2",
+        "description": "Reports the vertical component of the launch velocity instead of the horizontal one."
+       },
+       {
+        "id": "m3",
+        "description": "Halves the launch speed, assuming the ball has lost half of its speed at the top."
+       }
+      ],
+      "verification": {
+       "independent_path": "components from sine and cosine; a bisection root finder on the vertical equation recomputes the time of flight and the horizontal speed is checked constant",
+       "method": "sympy symbolic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "law_selection"
+      ]
+     }
+    },
+    {
+     "archetype": "phs_t5d_kick_height_set_q2",
+     "topic": "1.5",
+     "skill": "2.B",
+     "stem": "What is the maximum height above the field that the ball reaches?",
+     "options": [
+      {
+       "text": "$11.5\\text{ m}$",
+       "why": "Uses the horizontal component, $v_x^2/(2g)$.",
+       "value": "11.549149"
+      },
+      {
+       "text": "$40.7\\text{ m}$",
+       "why": "Drops the factor of two, $v_y^2/g$.",
+       "value": "40.677212"
+      },
+      {
+       "text": "$81.4\\text{ m}$",
+       "why": "Multiplies the vertical component by the whole time of flight, $v_yT$, which is twice the distance risen.",
+       "value": "81.354423"
+      },
+      {
+       "text": "$20.3\\text{ m}$",
+       "why": "At the highest point the vertical velocity is zero, so $H=(v_0\\sin\\theta)^2/(2g)=(20.0)^2/(2\\cdot 9.8)=20.3\\text{ m}$.",
+       "value": "20.338606"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is $20.3\\text{ m}$. At the highest point the vertical velocity is zero, so $H=(v_0\\sin\\theta)^2/(2g)=(20.0)^2/(2\\cdot 9.8)=20.3\\text{ m}$.\n$11.5\\text{ m}$ is incorrect: Uses the horizontal component, $v_x^2/(2g)$.\n$40.7\\text{ m}$ is incorrect: Drops the factor of two, $v_y^2/g$.\n$81.4\\text{ m}$ is incorrect: Multiplies the vertical component by the whole time of flight, $v_yT$, which is twice the distance risen.",
+     "est_seconds": 95,
+     "blueprint": {
+      "id": "phs_t5d_kick_height_set_q2",
+      "subject": "ap_physics_1",
+      "kind": "mc",
+      "concept": "Two questions about one ball kicked at an angle from level ground",
+      "topic": "1.5",
+      "skill": "2.B",
+      "student_thinking": [
+       "Split the launch velocity into horizontal and vertical components",
+       "Use that the horizontal velocity is constant while the vertical velocity changes at $g$"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "the field is level and air resistance is negligible",
+        "evidence": "the shared stimulus states the field is level and air resistance is negligible"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Uses the horizontal component, $v_x^2/(2g)$."
+       },
+       {
+        "id": "m2",
+        "description": "Drops the factor of two, $v_y^2/g$."
+       },
+       {
+        "id": "m3",
+        "description": "Multiplies the vertical component by the whole time of flight, $v_yT$, which is twice the distance risen."
+       }
+      ],
+      "verification": {
+       "independent_path": "components from sine and cosine; a bisection root finder on the vertical equation recomputes the time of flight and the horizontal speed is checked constant",
+       "method": "sympy symbolic + independent numeric path"
+      },
+      "judgment_demand": [
+       "representation_reading",
+       "law_selection"
+      ]
+     }
+    }
+   ],
+   "set_size": 2,
+   "est_seconds": 190,
+   "facts": [
+    "v0=25.0",
+    "theta=53"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phs_t5d_kick_height_set_q1",
+   "facts": [
+    "v0=25.0",
+    "theta=53"
+   ],
+   "seed": 14903
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Topic 1.5 projectile components. The calculation is a single step, but it is a legitimate use of 2.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "The key of 15.0 m/s is unique. The level field and negligible air resistance are both stated."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The text stimulus is complete and clear."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "The distractors are distinct: full launch speed, vertical component, and half the launch speed. The explanation addresses each wrong option."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "The task takes about 60-95 seconds, the reading load is light, and a calculator is allowed. The item is somewhat easy."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Correct, clear item with one dominant skill and distinct distractors. It is slightly easy but acceptable."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Projectile components and max height; fits 1.5 / 2.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "H=(25 sin53)^2/(2*9.8)=20.3 m; key index 3 correct and unique."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Text stimulus complete; conditions stated."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct misconceptions, each explained; the explanation covers every wrong option."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 95 s, calculator allowed, light arithmetic."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Correct, clean standard projectile max-height item with distinct distractors. Passes all five criteria."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept item: at the apex vertical velocity is zero, so speed equals the constant horizontal component, 25cos53° = 15 m/s. Requires one component calculation and recognizing that horizontal velocity is constant. Distractors reflect common misconceptions (full speed, vertical component, half speed). Minimal reading and arithmetic.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 0,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 60
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept projectile item: resolve the initial velocity into a vertical component, then apply v_y^2 = v_y0^2 - 2g*h at the apex. Two to three steps, short text stimulus, light calculator arithmetic. Distractors correspond to common errors (using the horizontal component, dropping the factor of 2). The wording is unambiguous and nothing out of scope is needed. This is a routine skill 2.B application, which suits early learning and basic practice more than a full-mock discriminating item.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 75
+   }
+  ]
+ }
+]

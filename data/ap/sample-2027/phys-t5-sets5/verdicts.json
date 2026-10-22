@@ -1,0 +1,332 @@
+[
+ {
+  "key": "ap_physics_1-m01-k0-q1",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "At the top only the horizontal part of the velocity remains: 24 cos60 = 12.0 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "12.0 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Projectile motion components, topic 1.5; a simple but valid calculation with units for 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "12.0 m/s is unique and correct; the assumptions are stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stem is complete and clear; no figure is needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception and the explanation addresses every wrong option. The 3.22 m/s option is somewhat contrived but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short single-step item typical of AP Physics 1; calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean, correct and in scope, with a unique key and distinct distractors. It is lightweight for skill 2.B, but it passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept projectile item: at the apex the vertical velocity is zero and the horizontal component stays constant, so speed = 24 cos60° = 12.0 m/s. It needs one vector resolution and no multi-step pathway. The distractors are the sine component, the full speed, and a stray value. The reading load is minimal and the arithmetic is trivial.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k0-q2",
+  "cellId": "ap_physics_1-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "H=(24 sin60)^2/(2*9.8)=432/19.6≈22.0 m",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "22.0 m"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Projectile max height from components; fits 1.5 / 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "22.0 m is correct and unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Text stem complete; level field and negligible air resistance stated."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The 25.5 m option's stated misconception (v0*t/2) does not produce 25.45: v0*t/2 = 24*2.12 = 50.9 m. The value is actually v0*t/4. The explanation misdescribes the error, so the distractor rationale is inaccurate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical load, about 90 s, calculator fine."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item is suitable, but the explanation for the 25.5 m distractor is wrong. The value equals v0*t/4, not v0*t/2 (which would be about 50.9 m), so the misconception text does not match the value. Fix the distractor's value or its rationale before use."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept projectile item: resolve the initial velocity into its vertical component, then apply vy^2 = vy0^2 - 2g*H at the top. The distractors map to common errors (cos instead of sin, missing factor of 2). Two or three steps, short stem, light arithmetic, no unfair difficulty sources. This is a routine entry-level calculation rather than a full-mock-level multi-step item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k1-q1",
+  "cellId": "ap_physics_1-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "At the highest point the vertical velocity is zero, so speed = vx = 20cos37° ≈ 16.0 m/s.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "16.0 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "In scope for topic 1.5 (projectile motion). The demand is mostly conceptual recall with one component calculation, so the 2.B computational pathway is thin."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "16.0 m/s is unique and correct (v0 cos37 = 15.97)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Text-only stem is complete and clear, with level field and negligible air resistance stated. The blueprint refers to a shared stimulus and two questions, which is a minor inconsistency, but the stem is standalone."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors 20 and 12.0 encode named misconceptions. The 7.96 option (20 minus the vertical component) is a contrived error, but it is acceptable. The explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Too easy and low-demand for an AP Physics 1 multiple-choice item that targets skill 2.B. It is essentially one recalled fact plus a single cosine, so it is below the typical AP difficulty. The contrived subtraction distractor adds little."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and in scope, with a unique key and a complete stem. It fails on exam suitability because it is too low-demand for skill 2.B and has one contrived distractor. This is a marginal fail."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: at the apex vertical velocity is zero and horizontal velocity is constant, so speed = v0 cos(37°) = 16 m/s. It needs one component calculation and a conceptual recognition about the apex. Distractors reflect common errors (using sin, using the full speed, or a calculator-mode slip). Short text, trivial arithmetic, unambiguous wording, in scope. This is more suitable for foundational learning than for a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k1-q2",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "H=(20 sin37)^2/(2*9.8)=(12.04)^2/19.6≈7.39 m",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "7.39 m"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Projectile motion with component analysis is squarely topic 1.5; the task is to select and compute with the vertical component, which fits 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "7.39 m is the unique correct answer. The other options correspond to explicit errors."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem is complete and clear. The level field, negligible air resistance, and standard g are all specified. No figure is needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (dropped factor of 2, horizontal component, ignoring the angle). The explanation addresses each wrong option. Option lengths and formats are parallel."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, a single-step formula, a calculator is allowed, and the reading load is low."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A correct, clean standard projectile max-height item. The key is unique, the distractors are distinct misconceptions, and the scope and load are appropriate. Passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept projectile problem: resolve initial velocity into components using sin37°, then apply vy^2 = vy0^2 - 2g*h with vy = 0 at the peak. Few steps, one representation change (vector to components), short text, light arithmetic. Distractors map to plausible errors (forgetting the 1/2 factor, using the full speed, skipping the sine). It is a routine application suited to initial learning rather than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k2-q1",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "At the top the vertical velocity is zero, so speed = horizontal component = 20cos53° ≈ 12.0 m/s.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "12.0 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Projectile motion at the apex; component reasoning plus one cosine calculation fits 1.5 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "20cos53° = 12.0 m/s; unique correct answer; level field and negligible air resistance stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Text stem is complete and clear; no figure needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Explanations are given for every wrong option. The 4.03 m/s distractor (launch speed minus vertical component) is a weakly realistic misconception, but it is acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-95 seconds; short reading load; calculator use is minimal and consistent with the designation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well scoped. Its only minor weakness is the contrived 4.03 m/s distractor, which does not warrant rejection."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: at the apex the vertical velocity is zero, so speed equals the horizontal component, 20 cos53° ≈ 12.0 m/s. It needs one vector decomposition and one calculator evaluation. Distractors map to common misconceptions (full speed, vertical component). Reading and computation are minimal, so it is suited to foundational practice rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k2-q2",
+  "cellId": "ap_physics_1-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "vy=20sin53=16 m/s; H=vy^2/(2g)=256/19.6≈13.0 m",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "13.0 m"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Projectile max height with components fits topic 1.5 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "13.0 m is the unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Stem is complete and clear; no figure is needed."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The 16.3 m option is explained as v0*t/2, but that gives about 32.6 m, so the stated misconception does not produce the value. The explanation is wrong for that distractor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Time and load are typical of an AP item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item is in scope, but the explanation for the 16.3 m distractor is wrong: v0*t/2 gives about 32.6 m, not 16.3 m. The item fails on distractor explanation until that misconception and its value are made consistent."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Resolve the initial velocity into components, choose the vertical kinematics equation (vy=0 at the top), and compute H = (v0 sin53)^2/(2g) ≈ 13 m. Distractors map to common errors (omitting the factor of 2, skipping the component resolution, doubling). Standard projectile problem with short arithmetic and clear wording.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ }
+]

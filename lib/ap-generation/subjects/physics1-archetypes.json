@@ -330,6 +330,21 @@
   ]
  },
  {
+  "id": "ph_t5d_final_speed_from_distance",
+  "topic": "1.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solves the two kinematic equations for the acceleration and the final speed together; the speed is recomputed as twice the average speed"
+  ],
+  "misconceptions": [
+   "Uses $v=\\sqrt{2d/t}$ by mixing the kinematic equations.",
+   "Halves the average speed instead of doubling it, $d/(2t)$.",
+   "Reports the acceleration $2d/t^2$ in place of the final speed."
+  ]
+ },
+ {
   "id": "ph_atwood_tension",
   "topic": "2.5",
   "skill": "2.B",
@@ -655,7 +670,7 @@
   ],
   "misconceptions": [
    "Overlooks that $f$ rises from $2.50\\text{ N}$ to $19.89\\text{ N}$ as the normal force increases.",
-   "Tests the difference instead of the ratio, but for these data $N-f$ varies from $2.5$ to $20.1$ N.",
+   "Tests the difference instead of the ratio, but for these data $N-f$ varies from $2.50$ to $20.1$ N.",
    "Reads the reciprocal ratio $N/f$ as the coefficient of kinetic friction, which is defined as $f/N$."
   ]
  },
@@ -670,7 +685,7 @@
   ],
   "misconceptions": [
    "Reads the reciprocal $x/F$ as the spring constant, which is defined as $F/x$.",
-   "Tests the product instead of the ratio, but for these data $Fx$ increases from $0.032$ to $1.79$ J.",
+   "Tests the product instead of the ratio, but for these data $Fx$ increases from $0.0320$ to $1.79$ J.",
    "Mistakes an increasing force for an increasing spring constant, but the ratio of force to stretch is constant."
   ]
  },
@@ -729,9 +744,9 @@
    "the force balance is solved for each block and the values are sorted and compared with the floating-point ordering"
   ],
   "misconceptions": [
-   "Adds the extra force to the weight for every block, including the block that is pulled upward and the block on the incline.",
-   "Ranks by the weight of the blocks, as if the normal force always equals the weight.",
-   "Ranks in the reverse of the correct order."
+   "Adds the extra force to the weight for both of the blocks that have a force applied, including the block that is pulled upward.",
+   "Ranks in the reverse of the correct order.",
+   "Ranks by the weight of the blocks, as if the normal force always equals the weight."
   ]
  },
  {
@@ -912,6 +927,36 @@
    "Divides by the mass of the lower block only, as if the upper block did not accelerate with it.",
    "Gives the acceleration of the blocks instead of the friction force.",
    "Assumes that the friction force on the upper block equals the whole applied force."
+  ]
+ },
+ {
+  "id": "ph_t5d_belt_static_friction",
+  "topic": "2.7",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solves $f=ma$ for the friction force and a numeric check confirms that it is below the maximum static friction"
+  ],
+  "misconceptions": [
+   "Uses the weight of the box $mg$ as the friction force.",
+   "Uses the largest possible static friction $\\mu_smg$, forgetting that static friction takes only the value needed.",
+   "Multiplies the coefficient of friction by the acceleration and the mass, $\\mu_s ma$."
+  ]
+ },
+ {
+  "id": "ph_t5d_pred_belt_friction_scaling",
+  "topic": "2.7",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the ratio of $m(ka)$ to $ma$ is solved symbolically and with a linear solve, and the new friction is checked against the maximum static friction"
+  ],
+  "misconceptions": [
+   "Says the friction force is unchanged because the coefficient of static friction and the weight did not change.",
+   "Squares the factor, as if the friction force were proportional to the square of the acceleration.",
+   "Inverts the factor, thinking a larger acceleration needs a smaller friction force."
   ]
  },
  {
@@ -1510,7 +1555,7 @@
   ],
   "misconceptions": [
    "Reads the table as an inverse relationship although the kinetic energy increases with the speed.",
-   "Tests the ratio $K/v$ for a direct proportion, but for these data it increases from $0.5$ to $3.01$.",
+   "Tests the ratio $K/v$ for a direct proportion, but for these data it increases from $0.500$ to $3.01$.",
    "Mistakes a quadratic increase for a doubling for each unit of speed."
   ]
  },
@@ -1856,7 +1901,7 @@
   "misconceptions": [
    "Internal forces change the motion of the parts of a system; they only leave the momentum of the whole system unchanged.",
    "Takes equal and opposite forces to mean equal speeds, ignoring the different masses.",
-   "Inverts the mass ratio so that the heavier rifle moves faster than the bullet."
+   "Inverts the mass ratio, so that the heavier rifle would move faster than the lighter bullet."
   ]
  },
  {
@@ -1884,9 +1929,9 @@
    "exact fractions of the change in momentum are sorted and compared with the floating-point ordering"
   ],
   "misconceptions": [
-   "Ranks by the initial momentum of each ball, ignoring what happens in the collision.",
-   "Ranks by the kinetic energy before the collision.",
-   "Ranks by the final momentum of each ball, ignoring the change in direction."
+   "Ranks by the initial speed of the balls alone, ignoring the masses.",
+   "Ranks by the final momentum of each ball, ignoring the change in direction.",
+   "Ranks by the initial momentum of each ball, ignoring what happens in the collision."
   ]
  },
  {
@@ -2514,9 +2559,9 @@
    "energy conservation with the kinetic energy split into translation and rotation gives the acceleration through v squared = 2 a s, which agrees with the force and torque solution, and the printed option is evaluated by a TeX evaluator"
   ],
   "misconceptions": [
-   "Uses the wrong rotational inertia factor, so the share of the energy in rotation is too large.",
-   "Uses the wrong rotational inertia factor, so the share of the energy in rotation is too small.",
-   "Uses the cosine of the angle, which is the component of gravity perpendicular to the incline."
+   "Uses the cosine of the angle, which is the component of gravity perpendicular to the incline.",
+   "Uses the moment of inertia of a hoop, $mR^2$ instead of the moment of inertia given in the problem.",
+   "Treats the object as sliding without friction, so all of the gravitational work becomes translational kinetic energy."
   ]
  },
  {
@@ -3129,9 +3174,9 @@
    "the rate of increase of pressure with depth is integrated numerically and compared with the symbolic formula, and the printed option is evaluated by a TeX evaluator"
   ],
   "misconceptions": [
-   "Divides by the area instead of multiplying by it.",
+   "Gives only the force of the atmosphere on one side of the hatch.",
    "Uses the absolute pressure to find the net force, although the air inside pushes on the hatch with the atmospheric pressure from the other side.",
-   "Uses the depth squared in the pressure of the fluid."
+   "Uses the average of the zero gauge pressure at the surface and the gauge pressure at the depth $h$."
   ]
  },
  {
@@ -3454,7 +3499,7 @@
   "topic": "4.2",
   "skill": "2.B",
   "calculator": "allowed",
-  "stimulus": "graph",
+  "stimulus": "none",
   "verifiedBy": [
    "exact fractions for the area versus numpy integration of a dense resampling; the speed from the impulse-momentum equation"
   ],
@@ -3469,7 +3514,7 @@
   "topic": "4.2",
   "skill": "2.B",
   "calculator": "allowed",
-  "stimulus": "graph",
+  "stimulus": "none",
   "verifiedBy": [
    "exact fractions for the area versus numpy integration of a dense resampling; the speed from the impulse-momentum equation"
   ],
@@ -3484,7 +3529,7 @@
   "topic": "5.6",
   "skill": "2.B",
   "calculator": "allowed",
-  "stimulus": "graph",
+  "stimulus": "none",
   "verifiedBy": [
    "exact fractions for the area versus numpy integration; the angular acceleration from the torque and the moment of inertia"
   ],
@@ -3499,7 +3544,7 @@
   "topic": "5.6",
   "skill": "2.B",
   "calculator": "allowed",
-  "stimulus": "graph",
+  "stimulus": "none",
   "verifiedBy": [
    "exact fractions for the area versus numpy integration; the angular acceleration from the torque and the moment of inertia"
   ],
@@ -3514,7 +3559,7 @@
   "topic": "8.2",
   "skill": "2.B",
   "calculator": "allowed",
-  "stimulus": "table",
+  "stimulus": "none",
   "verifiedBy": [
    "a least-squares slope through the origin and the mean of the ratios P over d agree on the density within two percent"
   ],
@@ -3529,7 +3574,7 @@
   "topic": "8.2",
   "skill": "2.B",
   "calculator": "allowed",
-  "stimulus": "table",
+  "stimulus": "none",
   "verifiedBy": [
    "a least-squares slope through the origin and the mean of the ratios P over d agree on the density within two percent"
   ],
@@ -3544,7 +3589,7 @@
   "topic": "5.1",
   "skill": "3.B",
   "calculator": "allowed",
-  "stimulus": "graph",
+  "stimulus": "none",
   "verifiedBy": [
    "the slope of each segment is computed exactly and by numerical differentiation"
   ],
@@ -3559,7 +3604,7 @@
   "topic": "5.1",
   "skill": "3.B",
   "calculator": "allowed",
-  "stimulus": "graph",
+  "stimulus": "none",
   "verifiedBy": [
    "exact fractions for the areas versus numpy integration of a dense resampling"
   ],
@@ -3627,6 +3672,96 @@
    "Reports the magnitude of the acceleration, forgetting to divide by $g$.",
    "Divides $g$ by the acceleration, inverting the ratio.",
    "Divides the acceleration by $2g$."
+  ]
+ },
+ {
+  "id": "phs_t5d_angled_kick_set_q1",
+  "topic": "1.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "components from sine and cosine; a bisection root finder on the vertical equation recomputes the time of flight and the horizontal speed is checked constant"
+  ],
+  "misconceptions": [
+   "Subtracts the vertical component from the launch speed.",
+   "Halves the launch speed, assuming the ball has lost half of its speed at the top.",
+   "Reports the full launch speed, assuming the speed does not change on the way up."
+  ]
+ },
+ {
+  "id": "phs_t5d_angled_kick_set_q2",
+  "topic": "1.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "components from sine and cosine; a bisection root finder on the vertical equation recomputes the time of flight and the horizontal speed is checked constant"
+  ],
+  "misconceptions": [
+   "Uses the full launch speed in $2v_0/g$ as if the ball were kicked straight up.",
+   "Divides $v_y$ by $2g$.",
+   "Gives the time to reach the highest point only, $v_y/g$, not the whole flight."
+  ]
+ },
+ {
+  "id": "phs_t5d_perp_pulls_set_q1",
+  "topic": "2.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the perpendicular components are added as vectors with numpy and the acceleration vector is the net force divided by the mass"
+  ],
+  "misconceptions": [
+   "Subtracts the smaller force from the larger one, as if they were opposite.",
+   "Averages the two forces.",
+   "Adds the magnitudes of the two forces as if they pointed in the same direction."
+  ]
+ },
+ {
+  "id": "phs_t5d_perp_pulls_set_q2",
+  "topic": "2.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the perpendicular components are added as vectors with numpy and the acceleration vector is the net force divided by the mass"
+  ],
+  "misconceptions": [
+   "Divides only the larger force by the mass.",
+   "Divides the sum of the magnitudes by the mass.",
+   "Divides the net force by twice the mass."
+  ]
+ },
+ {
+  "id": "phs_t5d_kick_height_set_q1",
+  "topic": "1.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "components from sine and cosine; a bisection root finder on the vertical equation recomputes the time of flight and the horizontal speed is checked constant"
+  ],
+  "misconceptions": [
+   "Subtracts the vertical component from the launch speed.",
+   "Halves the launch speed, assuming the ball has lost half of its speed at the top.",
+   "Reports the full launch speed, assuming the speed does not change on the way up."
+  ]
+ },
+ {
+  "id": "phs_t5d_kick_height_set_q2",
+  "topic": "1.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "components from sine and cosine; a bisection root finder on the vertical equation recomputes the time of flight and the horizontal speed is checked constant"
+  ],
+  "misconceptions": [
+   "Multiplies the vertical component by the whole time of flight, $v_yT$, which is twice the distance risen.",
+   "Uses the time to the top and the launch speed, $v_0\\,t_{top}$, ignoring that the climb slows down.",
+   "Ignores the angle and uses the full launch speed, $v_0^2/(2g)$."
   ]
  }
 ]
