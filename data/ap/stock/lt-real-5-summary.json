@@ -1,0 +1,49 @@
+{
+ "run": "lt-real-5",
+ "generatedAt": "2026-10-22",
+ "executions": [
+  "englit-real-9"
+ ],
+ "passed": [
+  {
+   "stockKey": "lt-real-5:ap_english_literature-real-rs32-k0",
+   "replaces": "LT5 (new exam)"
+  },
+  {
+   "stockKey": "lt-real-5:ap_english_literature-real-rs33-k0",
+   "replaces": "LT5 (new exam)"
+  },
+  {
+   "stockKey": "lt-real-5:ap_english_literature-real-rs34-k0",
+   "replaces": "LT5 (new exam)"
+  }
+ ],
+ "selection": {
+  "sets": [
+   "rs32",
+   "rs33",
+   "rs34"
+  ],
+  "candidates": [
+   21,
+   12,
+   22
+  ],
+  "sizes": {
+   "rs32": 13,
+   "rs33": 8,
+   "rs34": 12
+  },
+  "longGroupChosen": "l02",
+  "categories": {
+   "1": 11,
+   "2": 4,
+   "3": 10,
+   "4": 13,
+   "5": 7,
+   "6": 5,
+   "7": 5
+  },
+  "note": "LT5 item subsets chosen by integer programming so the full exam composition (MC 55, genre counts, 7 category bounds) is met together with existing groups p06 and l02"
+ }
+}

@@ -1,0 +1,32 @@
+{
+ "run": "wh-r21-f",
+ "generatedAt": "2026-10-21",
+ "passed": [],
+ "rejected": [
+  {
+   "__rejected": true,
+   "specId": "wh4_saq3",
+   "reason": "sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate; fact_misdescribes_source"
+  }
+ ],
+ "audit": [
+  {
+   "id": "wh4_saq3",
+   "tier": "high",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh4_saq3",
+   "tier": "mid",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh4_saq3",
+   "tier": "low",
+   "options": [],
+   "chosen": null
+  }
+ ]
+}
