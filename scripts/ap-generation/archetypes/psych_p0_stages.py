@@ -27,3 +27,14 @@ STAGE_P3_FRQ = ["psf_ebq_service", "psf_ebq_spacing", "psf_ebq_team_bonus"]
 
 # P4: 검토기 지적을 한 번 더 고친 세트 5개 + 연구 방법 원형 6개(단원 4·5 부족 칸)
 STAGE_P4_MC = ["pss_u1_twin_reading", "pss_u3_language_longitudinal", "pss_u4_initiation_club", "pss_u3_attachment_style", "pss_u2_eyewitness_speed", "ps_r_casestudy_confidential", "ps_r_personality_design", "ps_r_replication", "ps_r_survey_wording", "ps_r_therapy_ethics", "ps_r_therapy_placebo"]
+
+
+# 2026-10-21 5세트 채우기(PS3~PS5) 신규 원형: 단독 30(단원 1·3·4·5 개념 15 + 연구 방법 15) · 공유 세트 12 · FRQ 4(별도 목록 STAGE_FRQ_T5)
+STAGE_T5_MC = ['ps_r5_attrition', 'ps_r5_dependent_confound', 'ps_r5_exercise_experiment', 'ps_r5_gender_play_opdef', 'ps_r5_gratitude_design', 'ps_r5_group_comparison', 'ps_r5_growth_designs', 'ps_r5_hassles_correlation', 'ps_r5_helplessness_debrief', 'ps_r5_irb_withdraw', 'ps_r5_modeling_experiment', 'ps_r5_parenting_correlation', 'ps_r5_prevalence_bias', 'ps_r5_selfselection', 'ps_r5_stress_opdef', 'ps_t5_assimilation_accommodation', 'ps_t5_compliance_techniques', 'ps_t5_dsm_icd', 'ps_t5_facial_feedback', 'ps_t5_gender_socialization', 'ps_t5_habituation', 'ps_t5_heritability_confusion', 'ps_t5_maturation_motor', 'ps_t5_sex_gender_terms', 'ps_t5_sleep_myths', 'ps_t5_taste_aversion_prep', 'ps_t5_temperament', 'ps_t5_therapeutic_alliance', 'ps_t5_unconditional_regard', 'ps_t5_vicarious_reinforcement']
+STAGE_T5_SETS = []
+
+# 2차 재작성 세트(검토기 지적 반영): psych-t5-sets2 실행 대상
+STAGE_T5_SETS2 = ['pss_t5b_u1_sleep_restriction', 'pss_t5b_u1_split_brain_comparison', 'pss_t5b_u5_antidepressant_trial', 'pss_t5b_u5_exam_cortisol', 'pss_t5b_u5_gratitude_three_groups', 'pss_t5b_u5_twin_concordance']
+
+# 3차: PS5 마지막 칸(단원 2 연구 방법)
+STAGE_T5_MC2 = ['ps_r5_misinformation_design', 'ps_r5_study_confound', 'ps_r5_test_reliability', 'ps_r5_test_validity', 'ps_r5_testing_effect_opdef']

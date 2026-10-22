@@ -36,10 +36,10 @@ d("AP Computer Science A P0 archetypes (Python generators run against the JDK, 2
   const out = (r.status === 0 ? JSON.parse(r.stdout) : { names: [], frq: [], packs: {}, frqPacks: {} }) as { names: string[]; frq: string[]; packs: Record<string, Pk[]>; frqPacks: Record<string, (FrqPack & { self_check_tests: unknown[]; blueprint: Partial<Blueprint> })[]> };
   const flat = (n: string) => out.packs[n].flatMap((p) => (p.items ?? [p]).map((q) => ({ ...q, stimulus: q.stimulus ?? p.stimulus, set_intro: (p as unknown as { set_intro?: string }).set_intro })));
 
-  it("registers the singles and the two-item sets (4 original + 3 added for CS3), covers all 4 units, and the guide JSON lists the same ids", () => {
+  it("registers the singles and the two-item sets (4 original + 3 added for CS3 + 4 added for CS4/CS5), covers all 4 units, and the guide JSON lists the same ids", () => {
     expect(r.status).toBe(0);
     expect(out.names.filter((n) => n.startsWith("cs_")).length).toBeGreaterThanOrEqual(80);
-    expect(out.names.filter((n) => n.startsWith("css_"))).toHaveLength(7);
+    expect(out.names.filter((n) => n.startsWith("css_"))).toHaveLength(11);
     const ids = csaGuide.archetypes.map((a) => a.id).sort();
     const expected = out.names.flatMap((n) => flat(n).slice(0, out.packs[n][0].items ? 2 : 1).map((q) => q.archetype)).sort();
     expect(ids).toEqual(expected);
@@ -94,7 +94,7 @@ d("AP Computer Science A P0 archetypes (Python generators run against the JDK, 2
       expect(plan.ok).toBe(true);
       if (plan.ok) expect((plan.items[0].statements as { mode: string }[]).every((s) => s.mode === "code")).toBe(true);
     }
-    expect(byTemplate).toEqual({ q1: 4, q2: 4, q3: 4, q4: 4 });
+    expect(byTemplate).toEqual({ q1: 6, q2: 5, q3: 6, q4: 6 });
     for (const t of ["q1", "q2", "q3", "q4"]) total += out.frqPacks[out.frq.find((n) => out.frqPacks[n][0].template === t)!][0].total_points;
     expect(total).toBe(25);
     expect(csaGuide.frqTemplates.map((t) => t.id).sort()).toEqual([...out.frq].sort());

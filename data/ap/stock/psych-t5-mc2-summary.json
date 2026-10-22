@@ -1,0 +1,57 @@
+{
+ "runs": [
+  "psych-t5-mc2"
+ ],
+ "rows": 10,
+ "passed": 6,
+ "rejected": 4,
+ "passRate": 0.6,
+ "mc": {
+  "rows": 10,
+  "passed": 6,
+  "passRate": 0.6
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "2": 6
+ },
+ "skillsPassed": {
+  "2.B": 4,
+  "2.C": 2
+ },
+ "figPassed": {
+  "none": 6
+ },
+ "figAll": {
+  "none": 10
+ },
+ "figPassRate": {
+  "none": "6/10"
+ },
+ "renderTypesPassed": {
+  "none": 6
+ },
+ "archetypesPassed": {
+  "ps_r5_misinformation_design": 1,
+  "ps_r5_study_confound": 2,
+  "ps_r5_test_reliability": 2,
+  "ps_r5_testing_effect_opdef": 1
+ },
+ "archetypesAll": {
+  "ps_r5_misinformation_design": 2,
+  "ps_r5_study_confound": 2,
+  "ps_r5_test_reliability": 2,
+  "ps_r5_test_validity": 2,
+  "ps_r5_testing_effect_opdef": 2
+ },
+ "failedArchetypes": [
+  "ps_r5_test_validity"
+ ],
+ "costUsd": {
+  "psych-t5-mc2": 0.1537
+ }
+}

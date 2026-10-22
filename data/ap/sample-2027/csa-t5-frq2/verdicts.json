@@ -1,0 +1,226 @@
+[
+ {
+  "key": "ap_computer_science_a-f01-k0",
+  "cellId": "ap_computer_science_a-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Take the last digit with n % 10 and add it to the sum, then drop it with n /= 10. Repeat while n > 0. If n is 0 the loop never runs, so the method returns 0.",
+     "final_answer": "public static int digitSum(int n) {\n    int sum = 0;\n    while (n > 0) {\n        sum += n % 10;\n        n /= 10;\n    }\n    return sum;\n}",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "Start at start and count upward. Return the first number that its digitSum divides evenly. Because start >= 1, every digit sum is at least 1, so there is no division by zero. The loop always ends because 10 is a Harshad number, so one is always reached.",
+     "final_answer": "public static int firstHarshad(int start) {\n    int k = start;\n    while (k % digitSum(k) != 0) {\n        k++;\n    }\n    return k;\n}",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The code and keys are correct, but the bundle totals 7 points instead of the required 9. Part (b) is labeled 2.C against the bundle skill 2.A. Some rubric rows combine two behaviors in one point. Fail on format deviation.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Part (a) matches 2.10/2.A. Part (b) is labeled skill 2.C, while the item's declared skill is 2.A. Part (b) is mostly loop and method reuse (2.9 and 1.9), which the bundle is allowed to span. The bundle skill label and the part skill are inconsistent."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The reference solution is correct and the independent solver matched it. The rubric rows each judge one behavior. Row A1 merges two behaviors (the loop condition and n % 10) into one point. B1 also merges the start value and the loop. Total points are 3+4=7."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus is clear and complete. The preconditions are stated. The data object only carries variant and language, which is acceptable for a code skeleton."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Common errors are listed per rubric row. This is adequate for a free-response item."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The fixed format is four 9-point questions, but this bundle totals 7 points, so it is not a 9-point Methods and Control Structures question. The 22-minute estimate is not penalized. The load is otherwise reasonable, with no calculator needed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Two-part FRQ-style item. Part (a) is the standard digit-extraction loop using % 10 and / 10, with the n = 0 case handled naturally. Part (b) needs a loop that searches upward from start, a call to digitSum, and a divisibility test with %. The method-reuse requirement and the loop-boundary and termination reasoning go beyond a basic-learning exercise. Each part is short and uses no unusual constructs. Reading load is low, and no long arithmetic is needed to trace or verify the work. The difficulty comes from algorithm design, not from unfair sources. This matches the length and depth of a full-mock free-response question on integer and String-style algorithm implementation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_computer_science_a-f02-k0",
+  "cellId": "ap_computer_science_a-f02",
+  "passed": false,
+  "reasons": [
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Use two private int fields. use() takes the smaller of amount and level, subtracts it from level, and returns it.",
+     "final_answer": "public class Battery {\n    private int level;\n    private int cycles;\n\n    public Battery(int startLevel) {\n        level = startLevel;\n        cycles = 0;\n    }\n\n    public int use(int amount) {\n        int used = Math.min(amount, level);\n        level -= used;\n        return used;\n    }\n\n    public void recharge() {\n        level = 100;\n        cycles++;\n    }\n\n    public int getLevel() { return level; }\n\n    public int getCycles() { return cycles; }\n\n    public boolean isLow() { return level < 20; }\n}",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound Class Design FRQ on topics 3.3-3.5. The specification is precise, the preconditions are stated, and the rubric rows are one behavior each, with the A1 header and constructor row the only combined one. The solver's Math.min solution is valid and earns every row. The deviation from the pattern is that the item is a single 7-point part, where the official format is a 9-point question; this stays a material deviation but is not a correctness defect.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Writing a class with a constructor and methods is 2.B and falls in Unit 3, with no inheritance involved."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The behaviors and boundary cases are fully specified: 20 is not low, and the level is clamped at 0. The reference and the alternative solution both pass the tests. Row A2 is slightly loose about alternatives but accepts Math.min."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The skeleton in the stimulus lists the method signatures, and the prompt gives the full specification. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The rubric lists common errors for each row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of a Class Design FRQ. The item totals 7 points rather than 9, and the 22 estimated minutes is only an internal reference."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Typical AP CSA FRQ Q2 style class-writing task. The student must declare private instance variables, write a constructor, and implement six short methods. The main reasoning is in use(): clamp the level at 0 and return the amount actually used (the smaller of amount and the current level), a plausible boundary error. The other methods are direct translations of the spec (recharge increments the cycle counter, isLow is a < 20 comparison). The spec is complete and unambiguous, with no heavy reading, arithmetic or out-of-scope content. This fits a full-mock target, not basic learning and not an advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_computer_science_a-f03-k0",
+  "cellId": "ap_computer_science_a-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Go through the list from the front. For each position i, look at every later position j. If names.get(j) equals names.get(i), remove it and don't move j forward. Earlier elements are never removed, so the first copy of each name stays and the order is kept.",
+     "final_answer": "public static void removeLaterDuplicates(ArrayList<String> names) {\n    for (int i = 0; i < names.size(); i++) {\n        int j = i + 1;\n        while (j < names.size()) {\n            if (names.get(j).equals(names.get(i))) {\n                names.remove(j);\n            } else {\n                j++;\n            }\n        }\n    }\n}",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A valid ArrayList removal FRQ that fits topic 4.10 and skill 2.A. The key and the rubric are consistent, and an alternative solution is accepted.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Writing an ArrayList removal algorithm is squarely 4.10 and skill 2.A. It also draws on 4.8 and 4.9, which the bundle covers. It uses no out-of-scope collections or utility classes."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The reference and the independent solver's forward nested-loop solution are both valid. The rubric rows each target one behavior and accept either direction of traversal. Rows A1 and A3 each combine two sub-behaviors, which is acceptable. The self-checks cover empty, single, all-equal and mixed lists."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The method signature, the specification and the example are complete, and the wording is clear. The method modifies the list in place, and the item states this."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The rubric's common_errors cover the main misconceptions: == instead of equals, skipping an element after a removal, removing the earlier occurrence, and building a new list instead of changing the given one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A 5-point free-response question is a reasonable load for a method-writing task. No calculator is needed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Write-code item requiring a traversal with removal. The student must handle index shifting after remove (decrement the index or traverse backward) and compare Strings with equals rather than ==. It needs a nested-loop or indexOf-against-prefix design while preserving first-occurrence order and mutating the list in place. These are the typical off-by-one and aliasing-style subtleties of an AP FRQ ArrayList method. Reading load is small, there is no arithmetic, and everything is in scope for 4.8-4.10. The difficulty comes from legitimate concept depth rather than unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_computer_science_a-f04-k0",
+  "cellId": "ap_computer_science_a-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Go through the grid column by column. Start each column's minimum at the value in row 0, then compare it with the value in every later row and keep the smaller one.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "public static int[] columnMins(int[][] grid) {\n    int[] mins = new int[grid[0].length];\n    for (int c = 0; c < grid[0].length; c++) {\n        int min = grid[0][c];\n        for (int r = 1; r < grid.length; r++) {\n            if (grid[r][c] < min) {\n                min = grid[r][c];\n            }\n        }\n        mins[c] = min;\n    }\n    return mins;\n}"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable. It is a column-wise 2D traversal that writes a min-per-column method, which fits topic 4.12 (with 4.13 and 4.5) and skill 2.A. The precondition is stated, the example is correct, and the rubric rows each judge one behavior. The independent solver's solution matches the reference. A 6-point single-part FRQ is a smaller grain than the usual 9-point question, but the fixed-format rule allows it.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Column-major traversal with a running minimum is squarely in 4.12/4.13, and the item asks the student to write code, which is skill 2.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The reference and the independent solver's solution are equivalent. A Math.min alternative is allowed by the rubric. Row A5 (works for any rectangular size) is a general-correctness row rather than a single code element, but it is still gradable against the tests."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The method header, precondition, and example are complete and clearly worded."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The rubric's common_errors cover the realistic mistakes: swapped indexes, initializing to 0, stopping one row early, and using grid.length for the array size."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for an AP CS A FRQ part. No calculator is needed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style 2D array algorithm. Students must create a result array sized by the number of columns, initialize each minimum correctly (from row 0 or Integer.MAX_VALUE), and traverse column-wise with the loops in the right order (or row-wise with per-column updates). The plausible pitfalls are using grid.length instead of grid[0].length for the result size, and swapping row and column indices. The task is within Unit 4 scope (4.12/4.13/4.5), the precondition is clearly stated, there is little reading, and no heavy computation, so the difficulty is fair and appropriate for full-mock use.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ }
+]

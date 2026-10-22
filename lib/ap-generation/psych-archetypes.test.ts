@@ -88,8 +88,8 @@ d("AP Psychology archetypes (Python generators, 2 seeds each)", () => {
     expect(figs).toBeGreaterThanOrEqual(20);
   });
 
-  it("registers the FRQ scenarios (4 Article Analysis + 4 Evidence-Based) and passes the FRQ gates", () => {
-    expect(out.frq.length).toBe(8);
+  it("registers the FRQ scenarios (6 Article Analysis + 6 Evidence-Based) and passes the FRQ gates", () => {
+    expect(out.frq.length).toBe(12);
     const fails: { n: string; what: string; codes: string[] }[] = [];
     for (const n of out.frq) for (const p of out.frqPacks[n]) {
       expect(p.total_points).toBe(7);

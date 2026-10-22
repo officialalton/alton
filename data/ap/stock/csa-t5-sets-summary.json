@@ -1,0 +1,54 @@
+{
+ "runs": [
+  "csa-t5-sets"
+ ],
+ "rows": 7,
+ "passed": 4,
+ "rejected": 3,
+ "passRate": 0.571,
+ "mc": {
+  "rows": 7,
+  "passed": 4,
+  "passRate": 0.571
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "4": 4
+ },
+ "skillsPassed": {
+  "3.B": 4
+ },
+ "figPassed": {
+  "text": 4
+ },
+ "figAll": {
+  "text": 7
+ },
+ "figPassRate": {
+  "text": "4/7"
+ },
+ "renderTypesPassed": {
+  "text": 4
+ },
+ "archetypesPassed": {
+  "css_t5_array_set": 2,
+  "css_t5_list_set": 2
+ },
+ "archetypesAll": {
+  "css_t5_array_set": 2,
+  "css_t5_cart_set": 2,
+  "css_t5_garage_set": 1,
+  "css_t5_list_set": 2
+ },
+ "failedArchetypes": [
+  "css_t5_cart_set",
+  "css_t5_garage_set"
+ ],
+ "costUsd": {
+  "csa-t5-sets": 0.4353
+ }
+}

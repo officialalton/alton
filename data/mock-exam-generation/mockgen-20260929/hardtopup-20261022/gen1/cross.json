@@ -1,0 +1,4548 @@
+{
+ "summary": {
+  "sat_rw": {
+   "cand": 158,
+   "genFail": 1,
+   "formatFail": 0,
+   "detPass": 135,
+   "crossScored": 135,
+   "correct": {
+    "agree": 123,
+    "of": 135,
+    "fablePass": 128,
+    "opusPass": 126
+   },
+   "compliance": {
+    "agree": 130,
+    "of": 135,
+    "fablePass": 133,
+    "opusPass": 130
+   },
+   "hardFit": {
+    "agree": 83,
+    "of": 135,
+    "fablePass": 113,
+    "opusPass": 61
+   },
+   "adoptedBoth": 54,
+   "adoptedOneOnly": 59,
+   "yieldBoth": 0.342,
+   "costUsd": 23.607,
+   "costPerAdoptedBoth": 0.437,
+   "fableOnlyPass": 55,
+   "opusOnlyPass": 4
+  },
+  "sat_math": {
+   "cand": 0,
+   "genFail": 0,
+   "formatFail": 0,
+   "detPass": 0,
+   "crossScored": 0,
+   "correct": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "compliance": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "hardFit": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "adoptedBoth": 0,
+   "adoptedOneOnly": 0,
+   "yieldBoth": 0,
+   "costUsd": 0,
+   "costPerAdoptedBoth": null,
+   "fableOnlyPass": 0,
+   "opusOnlyPass": 0
+  },
+  "adoptedHardFableRule": {
+   "total": 103,
+   "rw": 103,
+   "math": 0,
+   "correctBothRequired": true
+  }
+ },
+ "items": [
+  {
+   "cid": "recipe-boundaries-00",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": "boundaries_dangling_modifier_subject_matching",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "분사구문 \"Trained at first only to assist him in the darkroom\"의 의미적 대상은 Lola Álvarez Bravo이며 A만 이에 일치. B(사진, 사물/저작물 범주), C(수식어 내부 명사 darkroom), D(him이 가리키는 남편 자신)는 모두 문법적으로 완전한 문장이지만 수식 대상과 불일치. 모든 선택지 주어가 단수라 수일치로는 변별 불가하고, D는 'him'의 지시 대상을 파악해야 배제되므로 medium 이상의 의미적 추론이 요구됨. 후행 \"eventually becoming...\"도 A에서만 자연스럽게 연결됨. 사실 관계: Lola가 남편 Manuel의 암실 보조로 사진을 배웠고 멕시코 최초의 여성 포토저널리스트 중 하나라는 점은 사실과 부합. \"1920년대에 이미 국제적으로 전시\"는 다소 느슨한 표현이나 문항 판정에 영향 없는 수준.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "선택지 4개 모두 문법적으로 완전하고 단수 주어라서 수일치로는 정답을 고를 수 없다. D(남편)는 사람이지만 수식어 속 대명사 him이 남편을 가리킨다는 점을 알아야 걸러낼 수 있다. 문미의 분사구 'eventually becoming one of the first women'도 사람 주어, 그것도 여성 주어를 요구하므로 근거가 하나 더 있다. 1920년대에 Manuel의 작품이 이미 해외에서 전시되고 있었다는 서술은 시기상 다소 이른 듯하지만, 문항 판정에 영향을 줄 정도는 아니다.",
+    "issue": ""
+   },
+   "cost": 0.187562
+  },
+  {
+   "cid": "recipe-boundaries-01",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": "boundaries_clause_relation_punctuation_choice",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "independent_clause_boundary_judgment",
+     "inserted_modifier_vs_clause_discrimination"
+    ],
+    "note": "B(세미콜론)는 문법적으로 옳고 C(콤마 스플라이스), D(주어-동사 사이 세미콜론)는 명확한 오답이다. 그러나 A(', but the creatures appear')는 쉼표+등위접속사로 두 독립절을 잇는 문법적으로 완전히 적법한 구조이며, 'but'의 의미 적합성은 '표준 영어 규범' 문항에서 판별 기준이 되기 어렵다. 실제 SAT boundaries 문항은 오답이 모두 문법적으로 결함이 있도록 설계되므로, 본 문항은 정답이 둘로 읽힐 수 있는 이중정답(ambiguity) 결함이 있다. 지문 자체는 'however', 'if only faintly' 등 삽입어 구분과 절 경계 판단을 요구하여 hard 수준의 사고를 포함하나, 그 추가 난이도의 일부가 문법이 아닌 의미 판단에서 나오는 점이 문제다. 형식상 선지 D의 앞 공백 두 칸 등 사소한 표기 불일치도 있다.",
+    "issue": "해설 자체는 B를 일관되게 뒷받침하나, A를 '의미 관계(대조)가 맞지 않는다'는 이유로만 배제한다. 이는 문법 규범(conventions of Standard English)이 아니라 의미·수사 판단에 의존하는 배제이므로 근거가 약하다. [블라인드: B 선택, 복수정답 가능]"
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "independent_clause_boundary_judgment"
+    ],
+    "note": "A는 문법상 맞는 쉼표+but 구조이지만 대조 관계가 논리에 맞지 않아 탈락한다. 그래서 절 사이의 논리 관계(부연)까지 따져 구두점을 골라야 한다. 'however'와 'if only faintly' 같은 삽입어도 판단을 방해하는 요소로 작동한다.",
+    "issue": ""
+   },
+   "cost": 0.22277799999999998
+  },
+  {
+   "cid": "recipe-boundaries-02",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": "boundaries_insert_vs_clause_break",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "inserted_modifier_vs_clause_discrimination",
+     "independent_clause_boundary_judgment"
+    ],
+    "note": "빈칸 앞 'Some species ... moistened'와 뒤 'others continue ...'는 모두 완전한 독립절이므로 세미콜론으로 분리하고, 뒤 절을 이끄는 연결부사 'in addition' 뒤에 쉼표를 두는 A가 정답. B는 쉼표/세미콜론 비대칭 배치로 경계를 잘못 잡음, C는 콤마 스플라이스, D는 연결부사 뒤 쉼표 누락(‘in addition others’로 오독 가능). 문장 앞부분의 진짜 삽입구 'after spending years completely dried out'이 같은 쉼표 쌍 구조로 제시되어 C를 유인하는 설계이므로, 삽입어와 절 경계를 구분하는 추가 사고가 요구됨. 해설은 정답과 수치·논리적으로 일치하며 모순 없음. 지의류의 건조 내성·저온 광합성은 사실에 부합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "정답 A는 맞음. 세미콜론+접속부사+쉼표를 고르는 전형적인 SAT 문항임. 첫 절 안에 삽입구 'after spending years completely dried out'이 들어 있지만 빈칸과 떨어져 있어서 판별을 실제로 어렵게 만들지는 않음. B는 의미상 'in addition'을 첫 절에 붙이기 어색해 쉽게 걸러짐. 오답 구성도 표준적이라 medium 수준을 넘는 추가 사고는 사실상 필요 없음. 5번 항목은 D(앞에만 세미콜론, 뒤 쉼표 없음)로 충족한 것으로 봄. 해설은 정확함.",
+    "issue": ""
+   },
+   "cost": 0.199116
+  },
+  {
+   "cid": "recipe-boundaries-03",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": "boundaries_dangling_modifier_subject_matching",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "문두 분사구 \"Trained in Europe but unwilling to separate...\"는 사람(Rebouças)만 수식 가능. A만 주어가 의미적으로 일치하며, B는 소유격으로 Rebouças 이름을 포함해 매력적인 함정(저작물 vs 사람), C·D는 사물/집단으로 범주 불일치. 모든 선택지가 과거형 동사라 수일치로 변별 불가. 사실관계(Rebouças: 유럽 수학, 리우 부두·상수도 설계, 1880년대 노예제 폐지 운동) 문제 없음. 해설은 정답을 정확히 뒷받침하고 내부 모순 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "선택지가 모두 과거형 argued/demonstrated이므로 수일치로는 정답을 가를 수 없다. B는 소유격을 쓴 함정이다. 사람 대신 저작물을 주어로 둔 선택지라 의미상 수식 대상을 따져야 한다. Rebouças의 행적(노예제 폐지 운동, 리우 인프라 설계)도 사실과 맞다.",
+    "issue": ""
+   },
+   "cost": 0.17164799999999997
+  },
+  {
+   "cid": "recipe-boundaries-04",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": "boundaries_clause_relation_punctuation_choice",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "independent_clause_boundary_judgment"
+    ],
+    "note": "정답 A는 옳고(두 독립절, 대조 관계, 쉼표+but), C는 콤마 스플라이스, D는 세미콜론 위치 오류로 체크리스트는 모두 충족. 사실관계(Mosquito Bay 와편모조류, 달 없는 밤에 가장 잘 보임)도 정확. 다만 형식상 결함: 오답 B(moon, so the)는 '쉼표+등위접속사' 구조로 Standard English 관습에는 완전히 부합하며, 문제는 의미(인과 vs 대조)에 있다. 질문 지문이 \"conforms to the conventions of Standard English\"인 boundaries 문항에서 접속사 의미로 변별하는 선택지는 실제 SAT 관행(접속사 의미 변별은 transitions 유형)과 어긋나 정답 유일성이 흔들린다. B를 구두점 오류 선택지(예: \"moon; but the\" 또는 \"moon but the\")로 바꾸는 것이 바람직하다.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "independent_clause_boundary_judgment"
+    ],
+    "note": "B는 형식상 맞는 문장이라 접속사 의미(대조/인과)를 따져야만 걸러진다. actually를 근거로 대조 관계를 추론해야 하므로 medium 수준보다 사고가 더 필요하다. D의 세미콜론은 절 경계가 아닌 자리에 놓였다. 모슬린 베이가 달 없는 밤에 가장 밝다는 내용은 사실과 맞다.",
+    "issue": ""
+   },
+   "cost": 0.18098
+  },
+  {
+   "cid": "recipe-boundaries-05",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": "boundaries_insert_vs_clause_break",
+   "detIssues": [
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.054564
+  },
+  {
+   "cid": "recipe-boundaries-06",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": "boundaries_dangling_modifier_subject_matching",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "문두 분사구 \"Convinced that...\"의 의미적 주체(신념을 가진 사람)는 Portinho이며 A만 주어가 일치. B는 소유격 함정(Portinho's plans), C는 지문 속 그럴듯한 복수명사, D는 수동태 by-구 함정으로 모두 문법적으로 완전한 문장. 동사가 과거형이라 수일치로는 구별 불가. 사실관계(Portinho·Reidy·Pedregulho·현재 거주)는 대체로 타당하며 특정 완공 연도를 단정하지 않아 오류 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "정답 A가 옳다. B(소유격+저작물)와 C(지문에 나오는 다른 사람)는 그럴듯한 함정이고, D는 수동태 by구 함정이다. 1930년대에 활동을 시작했다는 서술은 대체로 사실에 부합한다(Pedregulho는 1940~50년대에 지어짐). 다만 사실 오류로 볼 정도는 아니다. 전형적인 medium 수준보다 함정이 정교하다.",
+    "issue": "B 해설의 \"사람과 비슷하지만\"이라는 표현이 다소 어색하지만 논리 오류는 없다."
+   },
+   "cost": 0.1556748
+  },
+  {
+   "cid": "recipe-boundaries-07",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": "boundaries_clause_relation_punctuation_choice",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "independent_clause_boundary_judgment",
+     "inserted_modifier_vs_clause_discrimination"
+    ],
+    "note": "콜론 뒤에 이어지는 첫 절이 복합 서술어('lose ... and shrivel ...')로 길게 이어지고, 둘째 절이 전치사구 'within hours of a soaking rain,'로 시작해 절 경계가 가려져 있어 경계 식별 자체에 추가 사고가 필요함. 대조 관계 판단으로 yet 선택, C 콤마 스플라이스, D 세미콜론 오위치 모두 레시피에 부합. 다만 B('for')는 문법적으로는 성립하고 의미(인과)만 어긋나는 오답이라 순수 관례 문항으로서는 판별 근거가 다소 의미 의존적임(치명적이지 않음). 부활고사리(resurrection fern) 사실관계도 정확함.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "independent_clause_boundary_judgment"
+    ],
+    "note": "문장 안에 이미 콜론이 있어서, 그 뒤 절 경계에서 구두점을 고르는 판단이 조금 더 까다롭다. 또 'yet'과 'for' 둘 다 형식상 맞는 쉼표+등위접속사라서 대조인지 인과인지 의미로 구별해야 한다. 다만 이런 논리적 오답은 B 하나뿐이고 C·D는 전형적인 오답이라, hard 난이도로는 경계선 수준이다.",
+    "issue": ""
+   },
+   "cost": 0.1798512
+  },
+  {
+   "cid": "recipe-boundaries-08",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": "boundaries_insert_vs_clause_break",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "inserted_modifier_vs_clause_discrimination",
+     "independent_clause_boundary_judgment"
+    ],
+    "note": "빈칸 앞은 \"The samples that she sealed ... months\"라는 주어구(관계절 포함)이며 본동사는 뒤의 \"revived\"이므로 however는 주어-동사 사이 삽입어 → \", however,\"(C)가 맞음. A/B는 앞뒤 모두 조각문, D는 비대칭 쉼표. 정답·해설 모두 정확. 다만 체크리스트 4항(콤마 스플라이스 오답)은 설계상 존재하지 않음 — 삽입어가 주어와 동사 사이에 들어가는 구조라 두 독립절이 없어 콤마 스플라이스 오답을 만들 수 없는 설계임. 관계절 \"she sealed ... months\"를 독립절로 오인하게 하는 함정은 hard 특성(inserted_modifier_vs_clause_discrimination)에 부합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "inserted_modifier_vs_clause_discrimination"
+    ],
+    "note": "빈칸 앞은 관계절이 붙은 주어구이고 본동사는 revived이므로, 대칭 쉼표를 쓴 C가 정답이다. 그런데 'she sealed ... months'는 겉보기에 완전한 절 같아서 함정으로 잘 작동한다. 체크리스트 4번은 충족하지 못했다. 이 문항은 앞뒤가 독립절이 아니므로, 선택지 가운데 콤마 스플라이스는 하나도 없다. A·B는 조각문 오류이고 D는 쉼표 비대칭 오류다.",
+    "issue": ""
+   },
+   "cost": 0.19745
+  },
+  {
+   "cid": "recipe-boundaries-09",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": "boundaries_dangling_modifier_subject_matching",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "문두 분사구 \"Having compared dozens of trial batches under a spectrometer\"의 논리적 주어는 비교 행위자인 Ferrante이며, A만 이를 충족한다. B(Ferrante's laboratory notes)는 소유격으로 사람과 인접해 보이지만 주어는 기록물이라 현수 수식어가 되고, C(goblets)는 비교 대상이지 행위자가 아니며, D(the conclusion)는 추상명사로 수식어와 무관하다. 네 선택지 모두 독립적으로는 문법적으로 완전하고 수일치도 모두 정상이어서 의미적 수식 관계 추론 없이는 정답을 가려낼 수 없다. 해설은 정답을 정확히 뒷받침하며 모순이 없다. 인물은 가상이고 비소가 유리 청징제로 쓰였다는 서술도 역사적으로 무리가 없어 사실 오류 없음. 형식(지문+표준 질문+4지선다) 적합, 저작권 의심 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "정답 A가 맞다. B(Ferrante's laboratory notes)는 소유격으로 사람 이름을 넣어 사람처럼 보이게 만든 함정이고, 사물/저작물이라 범주가 다르다. 네 선택지 모두 문법적으로 완전한 문장이라 수일치만으로는 답을 가릴 수 없다. 다만 전형적인 현수 수식어 문항이라 hard 수준으로는 경계선에 있다.",
+    "issue": "C 해설에서 술잔을 '비교를 당한 대상'이라고 했지만, 지문에서 비교된 것은 trial batches다. 정답 논리에는 영향이 없는 사소한 부정확함이다."
+   },
+   "cost": 0.1669428
+  },
+  {
+   "cid": "recipe-boundaries-10",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": "boundaries_clause_relation_punctuation_choice",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "independent_clause_boundary_judgment"
+    ],
+    "note": "두 절 모두 완전한 독립절이며, 'simply stores more fuel' 대 'also shrinks its digestive organs'의 대조가 문맥상 분명하다. 정답 ', but'은 구조·의미 모두 적합. B는 구두점 형식은 맞지만 인과 관계(so)가 의미와 충돌하여 절 간 논리 관계까지 판단해야 하는 유의미한 오답. C는 콤마 스플라이스, D는 직함과 이름 사이(절 경계 아님)에 세미콜론. 사실관계(큰뒷부리도요의 체중 증가, Piersma의 소화기관 축소 연구, 11,000km 이상 무착륙 비행) 문제 없음. 해설도 정답과 일치하며 모순 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "정답 A는 옳다. 해설도 정확하다. 다만 오답의 성격이 전형적이다. C는 콤마 스플라이스, D는 직함과 이름 사이에 세미콜론을 넣은 형태라 바로 걸러진다. B(so)만 논리 관계 판단을 요구하는데, 'simply…also'라는 단서가 분명해서 대조 관계가 쉽게 드러난다. 그래서 independent_clause_boundary_judgment가 말하는 여러 구두점 전략(세미콜론·마침표 등) 비교는 실제로 일어나지 않는다. 결국 이 문항은 접속사 하나를 고르는 수준으로, 일반적인 medium 문항을 넘지 않는다.",
+    "issue": ""
+   },
+   "cost": 0.1709432
+  },
+  {
+   "cid": "recipe-boundaries-11",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": "boundaries_insert_vs_clause_break",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "inserted_modifier_vs_clause_discrimination",
+     "independent_clause_boundary_judgment"
+    ],
+    "note": "정답 B 검증: 'Measured relative to body size, one of the loudest animals on Earth' = 분사구 + 주어(동사 없음), 'is the greater bulldog bat…' = 동사구(주어 없음). 따라서 전체가 하나의 독립절이며 however는 주어-동사 사이 삽입어 → 쉼표 쌍이 정답. A(세미콜론)·C(마침표)는 양쪽 모두 fragment, D는 쉼표 비대칭. 해설 논리 정확. 체크리스트 4항(콤마 스플라이스 오답)은 미충족 — 앞뒤가 독립절이 아닌 설계라 콤마 스플라이스 오답이 구조상 존재하지 않음(A·C는 fragment형 오답). 앞 문장의 'so …' 흐름과 긴 주어구가 however를 절 경계로 오인하게 유도하므로 삽입어 vs 절 경계 판별 사고가 실제로 요구되어 hard 적합. 사실 관계(greater bulldog bat 135dB 초과, 어식성)는 알려진 보고와 부합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "inserted_modifier_vs_clause_discrimination"
+    ],
+    "note": "정답 B가 맞다. 빈칸 앞은 분사구와 주어구뿐이라 본동사가 없고, 동사 'is'는 빈칸 뒤에 온다. 따라서 문장 전체가 하나의 독립절이며 however는 주어와 동사 사이에 낀 삽입어다. 문두의 분사구와 쉼표 때문에 앞부분이 절처럼 보이도록 설계되어 있어, 삽입어를 절 경계로 오인하지 않는 판단이 실제로 필요하다. 체크리스트 4는 충족하지 못한다. 어느 보기에도 두 독립절을 쉼표로만 잇는 콤마 스플라이스가 없다. A와 C는 동사 없는 부분과 주어 없는 부분을 갈라 불완전한 문장을 만드는 오류이고, D는 쉼표가 비대칭인 오류다. 큰불독박쥐(greater bulldog bat)의 반향정위 소리가 약 135~140dB에 이른다는 서술은 사실과 부합한다.",
+    "issue": ""
+   },
+   "cost": 0.217738
+  },
+  {
+   "cid": "recipe-boundaries-12",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": "boundaries_dangling_modifier_subject_matching",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "'Unlike most glassblowers…, who pressed…,' 비교구문의 논리적 대상은 사람(유리공예가)이며 C의 주어 Varga만 이에 대응한다. A(Varga's vases: 소유격 함정·사물), B(furnace: 단수 사물, Varga가 목적어로 포함), D(visitors: 사람이지만 비교 대상과 무관, Varga가 목적어로 포함)는 모두 문법적으로 완전한 절이면서 수일치로는 걸러지지 않아 의미적 수식 대상 판단을 요구한다. 뒤따르는 'a practice that made her output small' 동격구도 C와 자연스럽게 연결된다. 해설과 정답 일치, 사실·저작권 문제 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "A의 소유격 함정(Varga's vases)과 who절이 끼어 있어 수식 대상이 멀리 떨어져 있다는 점 때문에 의미적 대상을 추론해야 함. 네 선택지 모두 문법적으로 완전하고 수일치로는 구분이 안 됨.",
+    "issue": ""
+   },
+   "cost": 0.16787480000000002
+  },
+  {
+   "cid": "recipe-boundaries-13",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": "boundaries_clause_relation_punctuation_choice",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "independent_clause_boundary_judgment"
+    ],
+    "note": "검산: 앞 절 \"Okafor expected the coral fragments ... to weaken within a few months\"(관계절 'she transplanted into ...'가 내포된 긴 독립절)와 뒤 절 \"most of them grew faster there than ...\"는 모두 독립절이며 '약해질 것으로 예상 → 오히려 더 빨리 자람'의 대조 관계이므로 ', but'(A)이 정답. B는 형식은 맞으나 인과 접속사 so가 논리에 어긋남, C는 콤마 스플라이스, D는 'most; of them'으로 주어구 내부에 세미콜론이 들어가 절 경계가 아님. 해설은 정답을 정확히 뒷받침하며 모순 없음. 가상 인물·일반적 산호 생태 서술로 사실 오류·저작권 문제 없음. 내포된 관계절과 부정사구로 첫 절의 종결 지점을 파악해야 하고, 구두점뿐 아니라 접속사의 논리 관계(but vs so)까지 비교·선택해야 하므로 전형적 medium보다 추가 사고를 요구함. 참고: B처럼 접속사 의미 차이로 오답을 만드는 것은 실제 SAT boundaries 문항에서는 드물고 transitions 성격이 섞이지만, 레시피 체크리스트 3이 이를 전제하므로 형식상 허용 범위로 판단.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "independent_clause_boundary_judgment"
+    ],
+    "note": "구두점 형식만 보면 A와 B 모두 성립하므로 but과 so 중 어느 것이 맞는지 논리 관계로 판단해야 함(대조인지 인과인지). D는 오답이 너무 뻔해 난도가 다소 약함. 보조 의견: 앞 절의 'within a few months' 다음에 오는 내용이 맞는 수식 대상인지 혼동할 여지는 없음.",
+    "issue": ""
+   },
+   "cost": 0.1710732
+  },
+  {
+   "cid": "recipe-boundaries-14",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": "boundaries_insert_vs_clause_break",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "inserted_modifier_vs_clause_discrimination",
+     "independent_clause_boundary_judgment"
+    ],
+    "note": "정답 A 검산 일치: 빈칸 앞은 관계절(\"that the animal produces while drying out\")을 품은 긴 주어 명사구일 뿐 독립절이 아니며, 본동사 forms가 빈칸 뒤에 있으므로 in fact는 주어-동사 사이 삽입어 → 쌍쉼표가 유일하게 적법. B는 세미콜론 양쪽이 모두 불완전(앞은 동사 없음, 뒤는 주어 없음), C·D는 쉼표 비대칭. 해설은 정확하고 모순 없음. 타디그레이드 건조 단백질(CAHS 등)의 유리질 매트릭스 형성과 백신 보존 연구 언급도 사실에 부합. 체크리스트 4번 미충족: 오답 중 콤마 스플라이스(두 독립절을 쉼표로만 연결)에 해당하는 선택지가 없음 — B는 세미콜론 단편, C·D는 비대칭 쉼표. hard 적합성: 관계절 내부의 \"the animal produces\"를 독립절 동사로 오인하게 만드는 함정이 있어 삽입어 vs 절 경계 판별 사고를 실제로 요구함.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "inserted_modifier_vs_clause_discrimination"
+    ],
+    "note": "정답 A는 맞음. 빈칸 앞이 관계절을 포함한 주어 명사구일 뿐이고 본동사 forms가 빈칸 뒤에 오므로, in fact는 주어와 동사 사이의 삽입어임. 관계절 안의 'the animal produces'가 독립절처럼 보이도록 만든 함정이 있어 medium 수준을 넘는 판별이 필요함. 다만 빈칸 앞이 독립절이 아니어서 콤마 스플라이스가 되는 선택지가 구조상 나올 수 없음(B는 세미콜론 오용, C·D는 쉼표 비대칭). 따라서 4번 항목은 충족되지 않음. 5번 항목은 C와 D가 충족함.",
+    "issue": ""
+   },
+   "cost": 0.20615
+  },
+  {
+   "cid": "recipe-boundaries-15",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": "boundaries_dangling_modifier_subject_matching",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "문두 분사구 'Working from live specimens... in his studio'의 논리적 행위자는 사람 Blaschka이며, A만 이를 충족. B(Blaschka's glass models)는 수식 대상과 밀접하지만 범주(사람 vs 작품)가 달라 의미 추론을 요구하는 양질의 오답이고, C는 수식어 내부 명사(tanks)를 끌어와 연결된 듯 보이게 한 함정, D는 앞 문장 명사 재활용. 네 선택지 모두 과거시제 단일 동사로 수일치·시제 단서가 없어 의미적 연결 추론만으로 판별해야 함. 해설은 정답과 오답 근거를 모두 정확히 설명하며 모순 없음. Leopold Blaschka의 드레스덴 활동·해양무척추동물 유리모형 제작은 사실에 부합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "정답과 해설은 정확하다. 다만 오답이 너무 쉽게 걸러진다. 'his studio'라는 명시적 단서가 있고, C와 D는 무생물 주어라서 바로 탈락한다. B만 어느 정도 매력적이어서 전형적인 medium 수준의 dangling modifier 문항에 가깝다. 실화(Leopold·Rudolf Blaschka 부자)를 단순화한 내용이지만, Leopold 단독으로 기술해도 사실 오류로 보기는 어렵다.",
+    "issue": ""
+   },
+   "cost": 0.15685880000000002
+  },
+  {
+   "cid": "recipe-boundaries-16",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": "boundaries_clause_relation_punctuation_choice",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "independent_clause_boundary_judgment"
+    ],
+    "note": "두 절(\"A survey ... found that ... nearby\" / \"the lichen appears to act ...\") 모두 독립절이며, 앞 절은 관찰 근거, 뒤 절은 결론이므로 \", so\"가 적합. C는 콤마 스플라이스, D는 the와 lichen 사이 세미콜론으로 체크리스트 4·5 충족. B는 문법적으로는 적법하고 의미(대조 vs 인과)로만 배제되므로 순수 conventions 문항보다 transitions 성격이 일부 섞여 있음—레시피(항목 2·3)가 이를 허용하므로 통과로 판정하되 참고 사항으로 기록. 해설은 정답과 오답 사유를 정확히 뒷받침하며 모순 없음. 이끼의 석회암 보호 효과는 실제 연구와 부합해 사실 오류 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "independent_clause_boundary_judgment"
+    ],
+    "note": "A와 B는 둘 다 문법적으로 맞는 쉼표+등위접속사 구조여서, 근거→결론(인과) 관계를 보고 so와 yet 중 하나를 골라야 한다. 이 의미 판단이 구두점 필요 여부만 묻는 문항 이상의 사고를 요구한다. 다만 so와 yet의 차이가 비교적 분명해 hard 문항으로는 쉬운 편이다.",
+    "issue": ""
+   },
+   "cost": 0.17626920000000001
+  },
+  {
+   "cid": "recipe-boundaries-17",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": "boundaries_insert_vs_clause_break",
+   "detIssues": [
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.03411
+  },
+  {
+   "cid": "recipe-boundaries-18",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": "boundaries_dangling_modifier_subject_matching",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "문두 분사구문 \"Fleeing Vienna... and arriving with... her notebooks\"의 의미상 주어는 Rie이며, A만이 이에 일치한다. B(Rie's pottery), C(the British art world), D(her notebooks)는 모두 과거시제 동사로 문법적으로 완전한 문장을 이루지만 수식 대상과 어긋나는 dangling modifier가 된다. 특히 B는 Rie의 소유격 형태로 근접 오답, D는 수식어구 안에 등장한 명사를 주어로 재사용해 의미적 연결 추론을 요구하므로 수일치·시제만으로는 가려낼 수 없다. Lucie Rie의 1938년 빈→런던 이주, Albion Mews 작업실, 80대까지의 작업, 화산암풍 유약 등 사실관계도 문제없음. 해설은 각 오답의 논리적 오류를 정확히 지적하며 정답과 모순 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "분사구문 두 개가 이어진 복합 수식어 구조다. 오답은 소유격 함정(Rie's pottery), 무관한 집단 명사(the British art world), 수식어 안에 나온 명사를 주어로 재활용한 경우(her notebooks)로 구성된다. 오답 셋 모두 문장으로 완결되고 수일치로는 가려지지 않으므로, 수식어가 누구를 가리키는지 의미로 따져야 답을 고를 수 있다. 정답 A는 빈칸 뒤 'a studio'와 결합해 문장이 완결된다.",
+    "issue": ""
+   },
+   "cost": 0.16195279999999998
+  },
+  {
+   "cid": "recipe-boundaries-19",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": "boundaries_clause_relation_punctuation_choice",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "independent_clause_boundary_judgment"
+    ],
+    "note": "첫 절은 'expected … to bleach within weeks, since the water … reef site'까지 이어지는 긴 독립절(종속 since절 포함)이고 둘째 절 'the corals survived …'도 독립절. 예상(백화)과 결과(생존)의 대조이므로 ', but'(C)이 정확. A는 so로 인과가 되어 의미 모순, B는 콤마 스플라이스, D는 세미콜론이 but 뒤라는 비경계 위치에 놓임. 수험자는 긴 선행 절 속의 since 종속절을 경계로 오인하지 않고 전체 절 경계를 찾은 뒤, 접속사 의미(so vs but)까지 판단해야 하므로 구두점 위치만 묻는 medium 수준을 넘는다. 해설은 정답을 논리적으로 뒷받침하며 모순 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "independent_clause_boundary_judgment"
+    ],
+    "note": "since 종속절이 앞 절 끝에 붙어 있어 절 경계를 찾기가 조금 더 어렵다. A를 배제하려면 대조와 인과를 구분하는 논리 판단이 필요해서 medium보다는 약간 높다. 다만 선택지 구성은 전형적이라 hard 수준으로는 경계선에 있다. D는 but 뒤에 세미콜론을 잘못 둔 오답으로, 5번 항목을 충족한다.",
+    "issue": "D 해설의 \"세미콜론 뒤에 등위접속사 없이 두 절을 잇는 것도 아니고\"라는 문장이 다소 모호하지만, 결론(but 뒤 세미콜론은 잘못)은 맞다."
+   },
+   "cost": 0.1752232
+  },
+  {
+   "cid": "recipe-boundaries-20",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": "boundaries_insert_vs_clause_break",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "inserted_modifier_vs_clause_discrimination",
+     "independent_clause_boundary_judgment"
+    ],
+    "note": "형식 결함: 지문의 빈칸이 'the fringe-lipped bat of Central American rainforests ______' 뒤에 있는데, 모든 선택지가 'bat'으로 시작해 삽입 시 'rainforests bat, in fact, tracks'처럼 'bat'이 중복된다. 빈칸은 'the fringe-lipped ______ túngara frogs'로 놓이거나 선택지에서 'bat'을 제거해야 한다. 구조 설계 자체(Although 종속절 + 주절, in fact 삽입어, A 세미콜론 오용, B 콤마 스플라이스, C 비대칭 쉼표)와 해설은 의도된 정답 D를 정확히 뒷받침한다. 삽입어를 절 경계로 착각하게 만드는 A 오답이 있어 medium 이상의 절 구조 판단을 요구한다.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "inserted_modifier_vs_clause_discrimination"
+    ],
+    "note": "문두 Although 종속절 때문에 앞부분이 독립절처럼 보여 세미콜론 오답(A)이 매력적으로 작동한다. 삽입어 앞뒤가 주어·동사 사이임을 판별해야 하므로 hard 특성을 충족한다. 다만 B·C는 전형적인 함정이라 난이도 상승 폭은 크지 않다.",
+    "issue": ""
+   },
+   "cost": 0.197208
+  },
+  {
+   "cid": "recipe-command_of_evidence_quant-00",
+   "skill": "command_of_evidence_quant",
+   "system": "sat_rw",
+   "recipeId": "command_of_evidence_quant_two_point_combine",
+   "detIssues": [
+    "contract:contract_evidence",
+    "contract:contract_rw_table",
+    "contract:contract_rw_data"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.034196
+  },
+  {
+   "cid": "recipe-command_of_evidence_quant-01",
+   "skill": "command_of_evidence_quant",
+   "system": "sat_rw",
+   "recipeId": "command_of_evidence_quant_trend_matches_claim",
+   "detIssues": [
+    "contract:contract_evidence",
+    "contract:contract_rw_data"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.044796
+  },
+  {
+   "cid": "recipe-command_of_evidence_quant-02",
+   "skill": "command_of_evidence_quant",
+   "system": "sat_rw",
+   "recipeId": "command_of_evidence_quant_scope_limit_check",
+   "detIssues": [
+    "contract:contract_evidence",
+    "contract:contract_rw_data"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.035236
+  },
+  {
+   "cid": "recipe-command_of_evidence_quant-03",
+   "skill": "command_of_evidence_quant",
+   "system": "sat_rw",
+   "recipeId": "command_of_evidence_quant_two_point_combine",
+   "detIssues": [
+    "contract:contract_evidence",
+    "contract:contract_rw_table",
+    "contract:contract_rw_data"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.052203599999999996
+  },
+  {
+   "cid": "recipe-command_of_evidence_quant-04",
+   "skill": "command_of_evidence_quant",
+   "system": "sat_rw",
+   "recipeId": "command_of_evidence_quant_trend_matches_claim",
+   "detIssues": [
+    "contract:contract_evidence",
+    "contract:contract_rw_data"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.0283596
+  },
+  {
+   "cid": "recipe-command_of_evidence_quant-05",
+   "skill": "command_of_evidence_quant",
+   "system": "sat_rw",
+   "recipeId": "command_of_evidence_quant_scope_limit_check",
+   "detIssues": [
+    "contract:contract_evidence",
+    "contract:contract_rw_data"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.0366176
+  },
+  {
+   "cid": "recipe-command_of_evidence_text-00",
+   "skill": "command_of_evidence_text",
+   "system": "sat_rw",
+   "recipeId": "command_of_evidence_text_multi_source_two_variable_combine",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_source_integration",
+     "causal_reasoning_over_correlation",
+     "hypothetical_construction",
+     "claim_evidence_precision_matching"
+    ],
+    "note": "가설이 '화합물이 원인, 질김은 원인 아님'이라는 이중 주장이므로 A만이 두 변수를 분리(통제)하여 지지한다. B는 화합물 변수만 보면 정답처럼 보이는 교란 함정(질김과 공변)으로 체크리스트 3·5 충족, C는 반대 변수 단독 결론, D는 자료에 없는 거리 변수. 해설의 논리와 정답 일치, 사실 오류 없음, 형식 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "causal_reasoning_over_correlation",
+     "claim_evidence_precision_matching",
+     "multi_source_integration"
+    ],
+    "note": "B는 교란 변수가 섞인 매력적 오답으로 인과 판단을 요구한다. 다만 A가 다른 선택지보다 눈에 띄게 길고 자세해서 길이만 보고 정답을 짐작할 수 있다는 약점이 있다.",
+    "issue": ""
+   },
+   "cost": 0.14349
+  },
+  {
+   "cid": "recipe-command_of_evidence_text-01",
+   "skill": "command_of_evidence_text",
+   "system": "sat_rw",
+   "recipeId": "command_of_evidence_text_causal_vs_correlation_judgment",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "causal_reasoning_over_correlation",
+     "hypothetical_construction",
+     "claim_evidence_precision_matching"
+    ],
+    "note": "지문은 상관(파랑비늘돔 풍부 ↔ 해조류 적음)만 제시하고 가설과 두 가지 대안(역인과, 제3요인)을 명시. A는 통제된 배제 실험으로 해류·영양 조건을 고정한 채 파랑비늘돔 접근만 차단해 역인과와 제3요인을 동시에 배제하므로 가설을 가장 직접 지지. B는 상관의 확대(인과 착각), C는 역인과 지지, D는 제3요인(해류) 지지로 각각 레시피 오답 역할에 정확히 대응. 해설은 정답·오답 논리를 정확히 뒷받침하며 모순 없음. 과학적 사실(parrotfish grazing exclusion 실험 결과)도 실제 생태학과 부합. 형식·길이·어조는 디지털 SAT 기준에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "causal_reasoning_over_correlation"
+    ],
+    "note": "정답 A는 통제된 배제 실험으로, 역방향 설명과 교란 변수 설명을 모두 배제하므로 옳다. 다만 지문이 두 가지 대안 설명(역방향, 해류라는 제3요인)을 직접 적어 두었기 때문에 C와 D는 그 설명을 그대로 옮긴 것이 되어 쉽게 걸러진다. B도 전형적인 '더 큰 상관' 오답이다. 결국 학생이 스스로 인과 방향과 교란 변수를 찾아낼 필요가 없어, 전형적인 medium 수준의 인과 판별 문항에 머문다. 5번의 '무관한 원인'은 엄밀히 말하면 '교란 변수'이지만 충족으로 보았다.",
+    "issue": ""
+   },
+   "cost": 0.16561199999999998
+  },
+  {
+   "cid": "recipe-command_of_evidence_text-02",
+   "skill": "command_of_evidence_text",
+   "system": "sat_rw",
+   "recipeId": "command_of_evidence_text_hypothesis_supporting_evidence_construction",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "causal_reasoning_over_correlation",
+     "claim_evidence_precision_matching",
+     "hypothetical_construction"
+    ],
+    "note": "지문은 Okafor의 가설(에너지/정직한 신호)과 관찰(40분 전 노래 시작)만 제시하고 뒷받침 증거는 없음. A는 먹이 보충(에너지 조작)→노래 증가라는 인과 실험 결과이며 바람 조건을 통제해 경쟁 음향 설명을 배제하므로 가설 구조에 정확히 부합. B는 경쟁(음향) 설명을 지지해 가설을 약화, C는 지문 관찰의 재진술, D는 무관. 정답·해설 모두 타당. 다만 C·D가 쉽게 배제되어 난이도는 hard 중 낮은 편이며, 추가 사고는 주로 A의 '통제 조건'과 인과 방향 판단에서 나옴.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "causal_reasoning_over_correlation",
+     "hypothetical_construction"
+    ],
+    "note": "A는 먹이 조작과 바람 조건 통제가 함께 들어 있어 인과를 직접 지지하므로 정답이 맞다. B는 경쟁 가설의 전제를 지지할 뿐이며, 엄밀한 의미의 반박 오답이 아니다. D는 너무 쉽게 걸러지는 오답이라 변별력이 약하다.",
+    "issue": "해설은 B를 '가설을 반박하는 결과'라고 하며 B가 Okafor의 가설을 '약화한다'고 쓴다. 그러나 고요한 공기에서 소리가 더 멀리 간다는 사실은 에너지 신호 가설과 함께 성립할 수 있다. B는 경쟁 설명의 전제를 지지할 뿐 가설을 직접 반박하지 않는다."
+   },
+   "cost": 0.192704
+  },
+  {
+   "cid": "recipe-command_of_evidence_text-03",
+   "skill": "command_of_evidence_text",
+   "system": "sat_rw",
+   "recipeId": "command_of_evidence_text_multi_source_two_variable_combine",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_source_integration",
+     "hypothetical_construction",
+     "claim_evidence_precision_matching"
+    ],
+    "note": "가설은 '포식성 고객 × 관찰자 존재'의 상호작용(둘 다 있어야 효과)이며, A만이 관찰자 부재 시 포식성 효과 없음 + 관찰자 존재 시 포식성 효과 있음이라는 상호작용 패턴을 제시한다. B·C는 각각 포식성·관찰자 단일 주효과만 보여 '한 조건만으로는 부족'이라는 주장과 충돌하는 매력적 함정이고, D는 지문에 없는 기생충 양이라는 제3 변수를 도입한다. 해설은 정답과 오답 근거를 정확히 설명하며 모순 없음. 실제 청소어 연구(Bshary 등)에 기반한 소재이나 문항은 독창적 구성으로 저작권 우려 없음. 사실 오류 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "claim_evidence_precision_matching",
+     "multi_source_integration"
+    ],
+    "note": "두 조건이 함께 작용한다는 상호작용 가설에 맞는 근거를 고르는 문항입니다. B와 C는 한 조건만 반영한 그럴듯한 오답이고, D는 가설 밖의 변수를 씁니다. 그래프나 표 없이 텍스트만 있지만 변수 두 개를 결합해야 풀 수 있습니다.",
+    "issue": "해설은 A가 '결합 조건에서만 효과가 나타난다'고 하지만, A는 비포식성 고객에서 관찰자만 있을 때 효과가 있는지 직접 말하지 않습니다. 사소한 과장이며 정답 판정에는 영향이 없습니다."
+   },
+   "cost": 0.1805084
+  },
+  {
+   "cid": "recipe-command_of_evidence_text-04",
+   "skill": "command_of_evidence_text",
+   "system": "sat_rw",
+   "recipeId": "command_of_evidence_text_causal_vs_correlation_judgment",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "causal_reasoning_over_correlation",
+     "hypothetical_construction",
+     "claim_evidence_precision_matching"
+    ],
+    "note": "지문은 40개 습지의 상관(홍합 밀도↔풀 높이)만 제시하고, 가설(홍합→풀)과 비평가의 두 대안(역인과, 조수 영양분이라는 공통 원인)을 명시. B는 무작위 배정 실험으로 역인과를, 구획 간 조수 영양분 동일로 제3요인을 각각 배제한 뒤 효과를 보여 가설을 직접 지지 — 정답 타당. A는 상관 반복(지역별 통제해도 방향·구획 내 영양분 차이 미해결), C는 역인과 지지, D는 공통 원인 지지로 각각 오답 역할이 명확하며 서로 구분됨. 해설은 정답과 오답 논거를 모순 없이 뒷받침. 다만 정답 B가 보기 중 가장 길고 조건 서술이 상세해 길이 단서가 약간 생기는 점은 사소한 형식적 아쉬움(치명적이지 않음). 사실 오류·저작권 의심 없음. 난이도는 단순 복잡성이 아니라 두 대안 설명을 동시에 배제하는 증거를 가상으로 구성·선별해야 하는 사고에서 나옴.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "causal_reasoning_over_correlation",
+     "claim_evidence_precision_matching"
+    ],
+    "note": "B는 무작위 배정과 영양분 통제로 역인과와 공통원인을 모두 배제하므로 정답이 맞다. D는 지문에 나온 공통원인(교란변수)이며 무관한 원인이 아니므로 5번 항목은 엄밀히 미충족이다. 상관이 유지된다는 A, 역인과인 C는 적절한 오답이다.",
+    "issue": ""
+   },
+   "cost": 0.1693848
+  },
+  {
+   "cid": "recipe-command_of_evidence_text-05",
+   "skill": "command_of_evidence_text",
+   "system": "sat_rw",
+   "recipeId": "command_of_evidence_text_hypothesis_supporting_evidence_construction",
+   "detIssues": [
+    "contract:contract_answer_leak"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.0273952
+  },
+  {
+   "cid": "recipe-command_of_evidence_text-06",
+   "skill": "command_of_evidence_text",
+   "system": "sat_rw",
+   "recipeId": "command_of_evidence_text_multi_source_two_variable_combine",
+   "detIssues": [
+    "contract:contract_answer_leak"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.0271364
+  },
+  {
+   "cid": "recipe-command_of_evidence_text-07",
+   "skill": "command_of_evidence_text",
+   "system": "sat_rw",
+   "recipeId": "command_of_evidence_text_causal_vs_correlation_judgment",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "causal_reasoning_over_correlation",
+     "hypothetical_construction",
+     "claim_evidence_precision_matching"
+    ],
+    "note": "지문은 상관 패턴과 가설, 비판자의 역인과 제기만 제시하고 인과를 사실로 단정하지 않음. A는 원인 조작·영양염 통제·대조군을 갖춘 실험 결과로 역인과와 교란변수를 동시에 배제해 유일하게 가설을 직접 지지함. B(상관 반복), C(역인과 지지), D(제3요인 인 농도)는 각각 레시피의 오답 유형에 정확히 대응하며 모두 명확히 배제 가능. 해설은 정답·오답 논리를 수치/논리 모순 없이 뒷받침함. Chara의 알렐로파시 작용은 실제 생태학 연구와 부합하여 사실 오류 없음. 연구자는 가상 인물로 저작권 우려 없음. 난이도는 단순 복잡성이 아니라 인과 방향·대안 설명·실험 설계 요건을 판별하는 추가 사고에서 비롯됨.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "causal_reasoning_over_correlation",
+     "claim_evidence_precision_matching"
+    ],
+    "note": "정답 A가 옳다. 원인을 직접 조작하고, 영양염을 통제하고, 대조군과 비교하므로 역인과와 교란변수를 모두 배제한다. B는 상관을 인과로 바꿔 읽은 오답, C는 인과 방향을 뒤집은 오답, D는 제3의 원인(교란변수)을 끌어온 오답으로 역할이 분명하다. D는 '무관한 원인'이라기보다 교란변수에 가깝지만 체크리스트 의도에는 부합한다. 자료가 하나뿐이어서 hard 특성인 multi-source integration은 충족하지 않는다. 또 A가 유일한 실험 설계라서 다소 눈에 띄므로 hard 경계선상에 있는 문항이다.",
+    "issue": "해설은 A가 '차축조가 원인'이라는 점을 뒷받침한다고 보는데, 이 판단은 맞다. 다만 브란트가 제안한 구체적 메커니즘인 화학물질 분비까지 A가 직접 입증하지는 못한다는 점은 해설에서 다루지 않는다. 사소한 누락이다."
+   },
+   "cost": 0.17845880000000003
+  },
+  {
+   "cid": "recipe-command_of_evidence_text-08",
+   "skill": "command_of_evidence_text",
+   "system": "sat_rw",
+   "recipeId": "command_of_evidence_text_hypothesis_supporting_evidence_construction",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_source_integration",
+     "causal_reasoning_over_correlation",
+     "hypothetical_construction",
+     "claim_evidence_precision_matching"
+    ],
+    "note": "지문은 Okonjo의 가설과 그 근거(야행성)만 제시하고 열 반사 기능을 입증하는 증거는 없음. 정답 A는 배경색(어두운 모래에서도 창백)과 온도(가장 더운 곳이 가장 창백)라는 두 변수를 동시에 결합해 위장 설명을 배제하면서 열 조절 설명을 지지하는 새로운 가상 결과로, 가설의 논리 구조에 정확히 부합. B는 배경 매칭이 온도와 무관하게 나타나 위장 가설을 지지(반박 오답), C는 지문의 야행성 사실 재진술, D는 무관. 학생은 '배경 vs 온도' 두 변수를 분리해 인과 방향을 판단해야 하므로 medium을 넘어서는 사고 요구. 사소한 점: A에서 어두운 모래 개체군이 '더 서늘한' 곳인데도 '똑같이 창백'한 것은 열 가설과 완벽히 일치하진 않으나, 위장 가설 배제와 최고온 지점 최대 창백이라는 핵심 증거로 정답 판별에 지장 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "causal_reasoning_over_correlation",
+     "hypothetical_construction",
+     "claim_evidence_precision_matching"
+    ],
+    "note": "A는 배경색과 온도를 서로 떼어 놓고 비교한다. 어두운 모래 위에서도 피부가 창백하게 유지된다는 점은 위장 설명을 약화하고, 가장 더운 곳의 개체군이 가장 창백하다는 점은 열 반사 기능을 지지한다. 따라서 정답 A는 옳고 해설도 일관적이다. 다만 지문에 이미 '낮에 활동하는 시각 포식자가 밤에는 거의 활동하지 않는다'는 뒷받침 관찰이 들어 있으므로, 체크리스트 1번(지문에 가설만 있고 증거는 없음)은 엄밀히 보면 충족되지 않는다. C는 그 관찰을 다시 말한 재진술형 오답 역할을 한다.",
+    "issue": ""
+   },
+   "cost": 0.1722032
+  },
+  {
+   "cid": "recipe-command_of_evidence_text-09",
+   "skill": "command_of_evidence_text",
+   "system": "sat_rw",
+   "recipeId": "command_of_evidence_text_multi_source_two_variable_combine",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_source_integration",
+     "hypothetical_construction",
+     "claim_evidence_precision_matching"
+    ],
+    "note": "가설이 두 요인의 '결합 필요성'(상호작용)을 명시하고, 정답 C만이 두 조건 동시 충족 시에만 생존율이 높고 단일 조건은 무조건과 유사하다는 상호작용 패턴을 제시해 가설 전체(두 부분)를 뒷받침한다. A·B는 각각 단일 변수의 주효과를 'regardless of'로 제시해 가설의 '어느 하나만으로는 부족' 부분과 충돌하는 매력적 함정이며, D는 지문에 없는 수온 변수로 대안 설명을 제시한다. 해설은 정답·오답 근거를 정확히 서술하며 모순 없음. 지문·선택지 형식은 디지털 SAT 표준에 부합하고, 가상의 연구자·연구로 저작권 우려 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "hypothetical_construction",
+     "claim_evidence_precision_matching",
+     "multi_source_integration"
+    ],
+    "note": "상호작용(공동 필요조건) 가설을 검증하는 구조. A·B는 단일 변수 함정이고 D는 지문에 없는 변수를 쓴 오답이다. 다만 C가 가설 문장을 거의 그대로 되풀이해서 정답이 다소 쉽게 드러난다.",
+    "issue": ""
+   },
+   "cost": 0.14831439999999999
+  },
+  {
+   "cid": "recipe-cross_text_connections-00",
+   "skill": "cross_text_connections",
+   "system": "sat_rw",
+   "recipeId": "cross_text_stance_inference_unstated_rebuttal",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "cross_text_stance_inference",
+     "calibrated_claim_strength"
+    ],
+    "note": "Text 2는 Text 1을 직접 언급하지 않으며, 정답 A는 Delgado의 전제(진드기 없는 군체는 저농도 화학물질을 견딤)를 Text 1의 '금지하면 대부분 회복' 결론에 적용해야만 도출되는 미명시 반응 추론이다. A의 'may not' 수준의 절제된 강도도 적절. B는 Text 1 반복, C는 Text 2 결론 단순 재진술(연결 없음), D는 본문 외 경제 쟁점으로 오답 기능이 분명하다. 해설은 정답·오답 근거를 정확히 뒷받침하며 모순 없음. 지문은 창작 서술로 저작권 우려 없고 사실 오류 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "cross_text_stance_inference",
+     "perspective_bound_evaluation"
+    ],
+    "note": "A가 가장 좋은 답이다. Delgado의 전제(진드기가 없으면 저농도 노출을 견딤)를 Text 1의 '금지하면 대부분 회복된다'는 결론에 적용해야 하므로 입장 추론이 필요하다. 다만 C는 Text 2의 결론을 그대로 옮긴 함정인데, '단일 요인 아님'이 Text 1에 대한 반응으로도 성립해 정답 시비 여지가 있다. 또 A가 길고 구체적이어서 눈에 띄므로 실제 난도는 hard 하한에 가깝다. B는 Text 1을 반복하고, D는 본문에 없는 쟁점을 끌어온다.",
+    "issue": "C를 오답으로 보는 해설의 근거('금지 효과에 대한 입장을 드러내지 않는다')가 약하다. '어떤 단일 요인도 아니다'라는 말은 Text 1의 단일 원인 전제를 사실상 반박하는 것으로 읽힐 수 있다."
+   },
+   "cost": 0.189968
+  },
+  {
+   "cid": "recipe-cross_text_connections-01",
+   "skill": "cross_text_connections",
+   "system": "sat_rw",
+   "recipeId": "cross_text_stance_inference_weak_point_target",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "cross_text_stance_inference",
+     "perspective_bound_evaluation"
+    ],
+    "note": "Text 1: 결론(가정 내 직조 붕괴)과 근거(직기 추 감소, 양 뼈 감소)가 구분됨. Text 2는 Text 1의 '추 감소 = 직조 감소' 가정만을 흔들며, 연대(C)나 공방 구매(B)에는 관여하지 않음. D는 Text 2가 오히려 동의하는 전제(경사추식 직기는 추로 날실을 당김)로 적절한 함정. Text 2가 Text 1을 직접 언급하지 않으므로 반응을 스스로 추론해야 하며, Text 1의 논증 구조를 유지한 채 어느 고리가 약한지 평가해야 함. 다만 양 뼈 감소라는 부수 근거는 Text 2가 다루지 않아 완전 반박은 아님을 'questioning the assumption'이라는 적정 강도로 처리함. 해설도 정답을 정확히 뒷받침함.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "cross_text_stance_inference",
+     "two_sided_position_synthesis"
+    ],
+    "note": "Text 2는 Text 1을 직접 언급하지 않으므로, 대체 직기 기술이 'loom weight 감소 = 직조 감소'라는 가정을 약화한다는 점을 스스로 추론해야 한다. D는 Text 2가 동의하는 전제(추 방식 직기는 추가 필요하다)를 미끼로 활용한다. 다만 Text 1의 양 뼈 감소 같은 보조 근거를 Text 2가 다루지 않는 점은 남는다. 그래도 A의 '가정을 문제 삼는다'는 강도는 적절하다.",
+    "issue": ""
+   },
+   "cost": 0.15414
+  },
+  {
+   "cid": "recipe-cross_text_connections-02",
+   "skill": "cross_text_connections",
+   "system": "sat_rw",
+   "recipeId": "perspective_bound_evaluation_author_criterion",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "cross_text_stance_inference",
+     "perspective_bound_evaluation",
+     "calibrated_claim_strength"
+    ],
+    "note": "Text 1의 기준(개입 중단 후 자립 여부)이 명시되어 있고, Text 2는 2021년 측정 시점까지 계절별 해수 펌핑과 매년 침입종 제거가 계속된 상태에서 성공을 선언했으므로 A가 유일하게 Okafor 관점에서 도출된다. B는 Rinaldi 팀의 가시적 지표 기준, C는 성공 인정+일반화 반대로 두 관점 혼합(염도 차이는 지문 근거 없음), D는 '기간이 짧다'는 일반론으로 Okafor의 실제 쟁점(개입 지속)과 다르며 'any ecological study'로 과도하게 일반화됨. 해설은 정답과 각 오답의 구조를 정확히 설명하고 모순 없음. 모든 인물·프로젝트는 가상으로 저작권 문제 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "perspective_bound_evaluation"
+    ],
+    "note": "정답과 해설은 정확하다. 다만 Text 1의 기준이 명시적으로 서술되어 있고(개입 중단 후 자립), Text 2도 펌핑·제초가 계속되었다고 직접 밝혀 연결이 너무 투명하다. 'gardened, not restored'라는 표현이 사실상 답을 알려 준다. 오답 B는 Okafor의 'quick greening says little'과 정면으로 어긋나 쉽게 걸러지고, D의 기간 논리도 금방 배제된다. 미묘한 강도 차이나 명시되지 않은 입장을 추론할 필요가 없어 전형적인 medium 수준이다.",
+    "issue": ""
+   },
+   "cost": 0.16827
+  },
+  {
+   "cid": "recipe-cross_text_connections-03",
+   "skill": "cross_text_connections",
+   "system": "sat_rw",
+   "recipeId": "cross_text_stance_inference_unstated_rebuttal",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "cross_text_stance_inference",
+     "calibrated_claim_strength"
+    ],
+    "note": "Text 2는 Text 1을 언급하지 않으며, 정답 A는 Text 2의 모델 결과(번식 부족 > 개체 사망)를 Text 1의 로드킬 중심 결론에 적용해 추론해야 도출된다. B는 Text 1 반복, D는 본문에 없는 질병 쟁점, C는 Text 2 권고의 단순 재진술로 Text 1 결론에 대한 반응이 아님. 해설은 정답과 오답 근거를 정확히 뒷받침하며 모순 없음. 가상 연구자 사용, 저작권 문제 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "cross_text_stance_inference",
+     "perspective_bound_evaluation"
+    ],
+    "note": "정답 A는 Text 2의 모델 결과(이동 제한에 따른 번식 부족이 개체 사망보다 개체군 감소를 더 많이 설명함)에서 추론해야 하며, 지문에 직접 쓰여 있지 않다. B는 Text 1을 반복하고, D는 지문에 없는 쟁점(질병, 조사 정확도)을 끌어온다. C는 Text 2의 권고를 되풀이할 뿐 Text 1의 결론에 대한 반응을 보여 주지 못하는 '기능-내용 혼동' 함정인데, 매력도가 다소 약하다.",
+    "issue": ""
+   },
+   "cost": 0.1454136
+  },
+  {
+   "cid": "recipe-cross_text_connections-04",
+   "skill": "cross_text_connections",
+   "system": "sat_rw",
+   "recipeId": "cross_text_stance_inference_weak_point_target",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "cross_text_stance_inference",
+     "perspective_bound_evaluation",
+     "calibrated_claim_strength"
+    ],
+    "note": "Text 1은 관찰(마모 차이)–가정(마모=가공 시간=가공량)–결론(전문 제빵 집단, 지역 최초 사례)이 명확히 층위로 구분되어 있고, Text 2(Demir)는 재질·곡물에 따라 동일 시간에도 마모가 4배까지 달라진다는 실험으로 오직 '마모 차이→가공량 차이' 가정만 직접 흔든다. B가 그 가정을 정확히 지목하며 정답으로 성립. A는 결론(간접 영향에 불과하고 '지역 최초'는 Demir가 언급 안 함), C는 Demir가 다투지 않는 관찰 사실, D는 Demir가 오히려 동의하는 내용으로 각각 기능하는 오답. 해설은 정답·오답 모두 논리적으로 일관되며 수치 인용(4배)도 본문과 일치. Demir의 반응이 본문에 명시되지 않아 수험자가 관점을 유지한 채 Text 1의 논증 구조를 층위별로 평가해야 하므로 hard 특성 충족. 난이도가 길이나 계산량이 아닌 논증 구조 분석에서 온다.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "정답 B는 맞다. Demir의 실험은 마모 차이를 가공량 차이로 읽는 가정을 직접 겨냥한다. 다만 이 문항은 전형적인 '가정 식별' medium 구조다. 결론(A), 관찰(C), Text 2가 동의하는 부분(D)으로 짠 오답 구성은 정형화된 패턴이고, Text 2가 Text 1의 근거 문장('heavier wear reflects more hours')을 거의 그대로 반박하고 있어 입장을 추론할 부담이 작다. 입장 강도의 미묘한 차이를 가려내거나 두 관점을 종합해야 하는 요소도 부족하다.",
+    "issue": "사소한 문제: D 해설에서 돌의 재질을 '사용 방식'에 넣었는데, 엄밀히 말해 재질은 돌을 어떻게 썼느냐가 아니라 돌의 속성이다. 정답 논리에는 영향이 없다."
+   },
+   "cost": 0.17836000000000002
+  },
+  {
+   "cid": "recipe-cross_text_connections-05",
+   "skill": "cross_text_connections",
+   "system": "sat_rw",
+   "recipeId": "perspective_bound_evaluation_author_criterion",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "cross_text_stance_inference",
+     "perspective_bound_evaluation",
+     "calibrated_claim_strength"
+    ],
+    "note": "Text 1의 기준(타 지역·타 조건에서의 재현 관찰)이 명시되어 있고, Text 2는 단일 석호 결과이므로 B가 유일하게 Text 1 관점에서 도출된다. A는 Text 2 저자의 기준(정밀 관찰·대안 배제)으로 평가한 오답, C는 두 관점을 혼합한 오답, D는 본문 근거 없는 외부 상식. Text 1에 Okafor 연구에 대한 직접 언급이 없어 반응을 스스로 추론해야 하며, '단일 관찰=유망한 단서'라는 입장 강도가 B의 'premature'와 정확히 맞고 C의 'partly justified'와 미묘하게 구분된다. 해설은 정답과 오답 근거를 정확히 뒷받침한다. 가상 연구자(Okafor)이며 저작권 우려 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "perspective_bound_evaluation"
+    ],
+    "note": "정답은 맞고 레시피 항목도 모두 충족한다. 다만 Text 1이 기준(다른 산호초에서도 재현될 것)을 명시하고 Text 2는 단일 석호 사례라서 바로 대응되므로 medium 수준의 전형적 문항이다. 오답도 약하다. D는 어느 텍스트에도 근거가 없어 쉽게 걸러지고, C의 'partly'는 Text 1의 단정적 어조와 분명히 맞지 않는다. 입장의 미묘한 강도 차이를 가려내야 하는 함정이 없다.",
+    "issue": ""
+   },
+   "cost": 0.1380376
+  },
+  {
+   "cid": "recipe-cross_text_connections-06",
+   "skill": "cross_text_connections",
+   "system": "sat_rw",
+   "recipeId": "cross_text_stance_inference_unstated_rebuttal",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "cross_text_stance_inference"
+    ],
+    "note": "Text 2는 Whitlock이나 소음 인과를 직접 반박하지 않고, 자갈 지붕 교체가 소음 증가 지역과 시기적·공간적으로 겹친다는 사실만 제시한다. 수험자는 이 겹침이 Text 1의 상관→인과 추론을 흔드는 교란 변수임을 스스로 추론해야 하므로 명시되지 않은 입장 추론이 요구된다. A는 Text 1 반복, C는 Text 2 입장의 과장(의무화 요구 없음), D는 본문 밖 쟁점으로 오답 설계가 적절. 정답 B 옳고 해설 모순 없음. 실제 쏙독새의 자갈 지붕 둥지 및 지붕 재료 교체로 인한 감소도 사실과 부합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "cross_text_stance_inference"
+    ],
+    "note": "정답은 맞다. 다만 이 문항은 '상관관계와 교란 요인'을 묻는 전형적인 medium 구조다. Text 2가 마지막 구절 'the very areas that have also grown louder'에서 교란 요인을 사실상 대놓고 제시해서, 따로 추론할 부분이 거의 없다. 오답도 약하다. A는 Text 1을 그대로 반복했고, C는 범위를 넘는 정책 요구이며, D는 본문에 없는 쟁점이다. 셋 다 쉽게 제거된다. 정답과 강도만 미묘하게 다른 매력적 오답(예: '소음이 전혀 무관하다'고 단정하는 선택지)이 없어서 calibrated_claim_strength 측면의 hard 요건을 충족하지 못한다.",
+    "issue": "C 해설에서 '지붕 교체가 중요'를 Text 2의 '결론'이라고 했지만, Text 2는 이를 명시하지 않고 암시만 한다. 사소한 표현 문제다."
+   },
+   "cost": 0.1600696
+  },
+  {
+   "cid": "recipe-cross_text_connections-07",
+   "skill": "cross_text_connections",
+   "system": "sat_rw",
+   "recipeId": "cross_text_stance_inference_weak_point_target",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "cross_text_stance_inference",
+     "perspective_bound_evaluation"
+    ],
+    "note": "Text 1은 관찰(얇은 벽·얕은 기초) → 가정(투자 감소=단기 거주 예상) → 결론(이탈 예상, 가뭄 원인)으로 구조가 분명하고, Text 2는 Text 1을 직접 언급하지 않은 채 건조기 자체는 전제로 받아들이면서 가정만을 민족지 사례로 약화시킨다. 수험자는 Text 2의 입장을 스스로 추론해 논증의 어느 층위(관찰/가정/결론)를 겨냥하는지 구분해야 하므로 hard 적합. C는 Text 2가 동의하는 부분, D는 Text 2가 의심하지 않는 관찰로 오답 설계가 적절. A의 \"eventually abandoned\" 문구가 Text 1의 실제 결론(예상)과 약간 어긋나는 점은 사소한 흠이나 정답 판별에는 영향 없음.",
+    "issue": "경미: 해설은 A를 '결론 자체'라고 하지만 Text 1의 결론은 '떠날 것을 예상했다'이지 '실제로 떠났다'가 아니므로 A의 문구(\"eventually abandoned\")는 Text 1의 결론을 약간 확장한 표현이다. 다만 Text 2가 이를 문제 삼지 않는다는 핵심 논리는 유효하다."
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "Text 2가 'not because they plan to leave'라고 명시적으로 반박하므로, Text 2의 입장을 따로 추론할 필요가 거의 없다. 오답도 결론, 동의하는 부분, 관찰 사실로 쉽게 갈려 입장의 미묘한 강도 차이를 가릴 일이 없다. 전형적인 medium 수준의 가정 식별 문항이다.",
+    "issue": "A 해설은 '실제로 떠났다'를 Text 1의 결론이라고 부르지만, Text 1의 결론은 주민들이 떠날 것을 '예상했다'는 것이다. 사소한 부정확함이며 정답 근거에는 영향이 없다."
+   },
+   "cost": 0.193024
+  },
+  {
+   "cid": "recipe-cross_text_connections-08",
+   "skill": "cross_text_connections",
+   "system": "sat_rw",
+   "recipeId": "perspective_bound_evaluation_author_criterion",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "cross_text_stance_inference",
+     "perspective_bound_evaluation",
+     "calibrated_claim_strength"
+    ],
+    "note": "Text 1의 기준(개입 중단 후 자기 유지성)이 명시되어 있고, Text 2의 결론은 '매년 비료'라는 지속 관리 아래의 결과이므로 그 기준으로 '성급하다'는 판정이 유일하게 도출된다. B는 '거부'가 아닌 '성급'으로 강도가 적절히 조정되어 있다. A는 Reis 팀의 기준(빠르고 큰 피복 증가)으로 평가한 오답, C는 단기 우세 인정+관리 확대 권고로 두 관점을 섞은 오답, D는 외적 일반화 비판으로 Varga 기준과 무관하다. 해설은 정답과 오답 근거를 모순 없이 뒷받침한다. 가상의 연구·인물이며 저작권 의심 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "perspective_bound_evaluation",
+     "cross_text_stance_inference"
+    ],
+    "note": "Varga의 자기 유지성 기준을 Reis의 결론에 적용해야 하는 문항이다. Text 2가 비료 중단 이후의 결과를 다루지 않는다는 점은 본문에 직접 쓰여 있지 않아 독자가 추론해야 한다. 오답 A는 Reis 팀의 기준(빠르고 큰 피복 증가)으로 평가한 것이고, C는 두 관점을 섞은 것이며, D는 기준과 무관한 일반화 비판이다. 다만 A가 Varga의 기준과 너무 노골적으로 부딪혀서 함정으로서 끄는 힘은 다소 약하다.",
+    "issue": ""
+   },
+   "cost": 0.1572896
+  },
+  {
+   "cid": "recipe-cross_text_connections-09",
+   "skill": "cross_text_connections",
+   "system": "sat_rw",
+   "recipeId": "cross_text_stance_inference_unstated_rebuttal",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "cross_text_stance_inference",
+     "perspective_bound_evaluation"
+    ],
+    "note": "정답 B는 Text 2의 실험 전제(장식 재배치에도 방문 거의 불변)에서 Text 1의 핵심 가정(암컷이 바우어 자체로 평가)에 대한 반응을 추론해야 하므로 타당. 다만 D는 Ellison의 결론을 그대로 진술하는데, '대안적 기능 제시'도 일종의 응답으로 읽힐 여지가 있어 B와의 변별이 다소 좁음 — B가 Text 1 주장에 직접 맞서는 증거를 담고 있어 최선답으로 성립하나, 경계가 더 분명하면 좋음. B의 'at all'은 '거의 불변' 근거 대비 약간 강하지만 '질문을 제기한다'는 완화 표현으로 허용 범위. 실제 연구자/연구는 가상으로 보이며 저작권 문제 없음.",
+    "issue": " [블라인드: B 선택, 복수정답 가능]"
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "cross_text_stance_inference",
+     "perspective_bound_evaluation"
+    ],
+    "note": "B는 장식 재배치 실험에서 바로 나오며 Text 1의 핵심 가정을 직접 겨냥한다. D(무대 기능 주장)도 Ellison이 Text 1에 내놓을 만한 대안적 반응으로 읽힐 여지가 있어 약간 모호하다. 그래도 D는 Text 1이 가정한 '장식 평가'를 직접 다루지 않으므로 B가 최선의 답이다. 난이도는 Text 2 결론만 되풀이하는 D라는 함정을 걸러내는 데서 오며, 전형적인 hard 상단보다는 조금 낮은 수준이다.",
+    "issue": ""
+   },
+   "cost": 0.1964756
+  },
+  {
+   "cid": "recipe-cross_text_connections-10",
+   "skill": "cross_text_connections",
+   "system": "sat_rw",
+   "genFail": true,
+   "cost": 0.02872
+  },
+  {
+   "cid": "recipe-cross_text_connections-11",
+   "skill": "cross_text_connections",
+   "system": "sat_rw",
+   "recipeId": "perspective_bound_evaluation_author_criterion",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "cross_text_stance_inference",
+     "perspective_bound_evaluation",
+     "calibrated_claim_strength"
+    ],
+    "note": "Text 1 기준(자립 가능 여부)이 명시되어 있고, Text 2의 '무기한 연간 이식' 계획이 그 기준에 정확히 저촉되므로 B가 유일하게 Ibarra의 관점에서 도출된다. A는 Vance의 지표로 평가한 오답, C는 두 관점 혼합(기간 기준은 어느 텍스트에도 없음), D는 결론은 같지만 근거가 Ibarra의 기준(자립)이 아닌 비용 효율성으로 미묘하게 어긋나 calibrated 판별을 요구한다. 다만 D는 Text 1의 'ongoing cost' 언급 때문에 매력적인 오답으로 적절히 기능한다. 형식·사실 문제 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "perspective_bound_evaluation",
+     "cross_text_stance_inference"
+    ],
+    "note": "정답 B는 자립 기준에서 바로 도출된다. D는 Ibarra가 언급한 'ongoing cost'를 판단 근거로 바꿔치기한 오답이라, 결론은 같고 근거만 다른 선택지를 가려내야 한다. 다만 Text 2가 '무기한 지속'을 명시해 기준을 대입하기가 비교적 쉬워서 hard 하한선에 가깝다.",
+    "issue": ""
+   },
+   "cost": 0.1382456
+  },
+  {
+   "cid": "recipe-cross_text_connections-12",
+   "skill": "cross_text_connections",
+   "system": "sat_rw",
+   "recipeId": "cross_text_stance_inference_unstated_rebuttal",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "cross_text_stance_inference",
+     "perspective_bound_evaluation",
+     "calibrated_claim_strength"
+    ],
+    "note": "Text 2는 Text 1을 언급하지 않으며, 정답 B는 Iturbe의 조사 결과(먹이원 유무가 농약 수준과 무관하게 군집 안정성을 결정)에서만 도출된다. '우선순위를 잘못 잡았을 수 있다(may misplace)'는 표현이 농약 무해 주장으로 과장되지 않아 강도 조절이 적절하다. A는 Text 1 반복, C는 Text 2 관찰의 단순 재진술(반응 아님), D는 본문 외 쟁점으로 오답 설계가 명확하다. 해설은 정답 논리와 각 오답 배제 이유를 정확히 뒷받침한다. 두 텍스트의 입장을 종합해 반응을 스스로 추론해야 하므로 hard 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "cross_text_stance_inference",
+     "perspective_bound_evaluation"
+    ],
+    "note": "Text 1의 권고에 Iturbe가 어떻게 반응할지는 본문에 나오지 않아 추론해야 한다. B의 'may misplace priorities'는 강도가 적절하게 조절되어 있다. C는 Text 2 내용을 되풀이할 뿐 반응이 아니라서 기능과 내용을 혼동하게 만드는 함정이다. 다만 A와 D는 쉽게 걸러져 변별력은 보통 수준이다.",
+    "issue": ""
+   },
+   "cost": 0.1526936
+  },
+  {
+   "cid": "recipe-cross_text_connections-13",
+   "skill": "cross_text_connections",
+   "system": "sat_rw",
+   "recipeId": "cross_text_stance_inference_weak_point_target",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "cross_text_stance_inference",
+     "calibrated_claim_strength"
+    ],
+    "note": "Text 1의 가정(\"수확이 허락하면 항아리를 가득 채웠을 것\")·관찰(잔여물 감소, 항아리 형태 불변)·결론(식량 부족→포기)이 명확히 구분되고, Text 2는 '저장량≠수확량'으로 가정 하나만 직접 충돌하며 D(장기 점토 항아리 의존)는 명시적으로 동의한다. A는 결론을 직접 반박하는 것으로 과대 해석하는 함정으로 기능해 강도 보정이 요구된다. 사소한 점: D의 \"premise\"는 Text 1에 명시 전제로 서술되진 않으나 local clay 항아리 사용에서 충분히 함의되어 문제 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "cross_text_stance_inference",
+     "two_sided_position_synthesis"
+    ],
+    "note": "Text 2는 Arslan을 직접 언급하지 않으므로, 어떤 부분에 이의를 제기할지는 추론해야 함. 정답 B는 '저장량=수확량' 가정을 정확히 겨냥함. D는 Text 2가 동의하는 부분이고, C는 무관한 세부, A는 가정이 아닌 결론을 고르게 하는 함정임. 다만 Arslan의 \"would have filled to capacity\"와 Text 2의 \"kept well below capacity\"가 표현상 상당히 직접 대응해서 추론 부담은 중상 수준임.",
+    "issue": ""
+   },
+   "cost": 0.156982
+  },
+  {
+   "cid": "recipe-cross_text_connections-14",
+   "skill": "cross_text_connections",
+   "system": "sat_rw",
+   "recipeId": "perspective_bound_evaluation_author_criterion",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "perspective_bound_evaluation",
+     "cross_text_stance_inference"
+    ],
+    "note": "Text 1 기준(개입 중단 후 지속성)이 명시되어 있고, Text 2의 매년 제거 구획은 개입이 계속된 상태의 수치이므로 Okafor 관점에서 '시기상조'(B)가 유일하게 도출된다. A는 Text 2 연구자의 수치 기준을 그대로 적용한 오답, C는 수치 비교와 노동 비용을 섞은 절충형 오답, D는 본문에 근거 없는 일반 비판으로 구조가 레시피에 부합한다. 한 가지 미세 지적: Okafor는 한 번 심고 방치한 구획이 오히려 '복원'에 가깝다고 볼 수도 있으나, 선택지에 그 방향이 없어 B가 최선임이 명확하다. 해설은 정답과 오답 근거를 정확히 뒷받침하며 모순 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "perspective_bound_evaluation"
+    ],
+    "note": "정답 B는 맞다. A의 '거의 두 배'(68 대 35, 약 1.94배)도 수치상 정확하다. 다만 Okafor의 기준이 본문에 명시적으로 드러나 있고, Text 2의 연간 제거가 지속적인 개입이라는 점도 표면에서 바로 보인다. 그래서 기준을 그대로 대응시키기만 하면 정답이 나오며, 전형적인 medium 수준이다. 오답의 함정도 약하다. C는 Text 1에 없는 비용 요소를 끌어들여 쉽게 배제되고, D는 근거가 없는 일반론이다. 미묘한 강도 차이나 명시되지 않은 입장을 추론해야 하는 부분이 없다.",
+    "issue": ""
+   },
+   "cost": 0.1643696
+  },
+  {
+   "cid": "recipe-cross_text_connections-15",
+   "skill": "cross_text_connections",
+   "system": "sat_rw",
+   "recipeId": "cross_text_stance_inference_unstated_rebuttal",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "cross_text_stance_inference",
+     "calibrated_claim_strength"
+    ],
+    "note": "Kildare의 '농약 피해는 영양 조건에 따라 달라진다'는 전제를 Text 1의 '규제가 핵심 전략'이라는 결론에 적용해야만 A가 도출된다. A는 'could overstate', 'alone'으로 강도가 적절히 조정되어 있다. B는 Text 1 반복, C는 Text 2 결론만 되풀이하며 Text 1에 대한 반응을 담지 않는 부분 일치 함정, D는 본문 외 쟁점(꿀벌·관리 수분매개자). 다만 C가 Kildare의 실제 입장을 정확히 진술하므로 수험자에게 '반응'으로 읽힐 여지가 있어 변별력은 중간 수준이나, 문항 성립에는 문제 없음. 해설은 정답·오답 근거를 모순 없이 뒷받침한다.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "cross_text_stance_inference",
+     "calibrated_claim_strength"
+    ],
+    "note": "정답 A는 Text 2의 전제를 Text 1의 결론에 적용해야 나온다. 표현 강도도 'could overstate'와 'alone'으로 적절히 조절되어 있다. C는 Text 2를 그대로 되풀이한 강한 함정이지만, Text 1의 결론에는 반응하지 않으므로 오답으로 정당하다. B와 D는 쉽게 걸러진다. 그래서 hard로서는 경계선이지만 수용 가능하다.",
+    "issue": "A 해설은 Text 1의 시험이 꽃 자원을 '통제하지 않았다'고 단정하지만, Text 1에는 통제 여부가 나오지 않는다. 선택지 A의 '~했을 수 있다(may have)'보다 강한 표현이다. 사소한 문제다."
+   },
+   "cost": 0.1832536
+  },
+  {
+   "cid": "recipe-form_structure_sense-00",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_dangling_modifier_agent_trace",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "A는 'Having spent three winters recording...'의 행위자(Vos)를 주어로 두며 'concluded, in a report..., that' 구조도 문법적으로 완결됨. B(무생물 logbooks), C(배경 기관), D(보조 인물 captains)는 모두 현수 수식어를 만듦. D는 사람 주어라 의미상 유혹이 커서 단순 인접 일치를 넘어 문맥 전체에서 실제 행위자를 추적해야 하므로 hard 적합. 다만 C·D는 '기관/선장도 겨울을 보내며 기록했을 수 있다'는 반론 여지가 약간 있으나, 'according to Vos's report'·'who assisted Vos'가 Vos를 주체로 명시하므로 판별 가능. 가상 인물·사건으로 사실 오류 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "A는 문법상 옳다. B(logbooks)와 C(기관)는 행위자가 될 수 없어 현수 수식어가 되므로 오답으로 분명하다. 하지만 D의 trawler captains는 사람이고, 자기 트롤선에서 가시성을 기록했다고 읽어도 무리가 없다. 따라서 D도 문법·논리 모두 성립해 복수 정답이 될 수 있다. 오답 3은 '그럴듯하지만 틀린' 수준을 넘어 사실상 정답으로도 성립하므로 문항 결함이다. 지문에 Vos가 직접 측정했다는 정보를 넣어야 정답이 하나로 정해진다.",
+    "issue": "해설은 3년 겨울 동안 가시성을 기록한 사람이 Vos라고 단정하지만, 지문에는 그런 내용이 없다. Vos는 선택지에만 나온다. D를 배제하는 근거('도왔을 뿐', 'confirmed'가 논리에 맞지 않음)는 지문에 없는 전제에 기대고 있다."
+   },
+   "cost": 0.194656
+  },
+  {
+   "cid": "recipe-form_structure_sense-01",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_clause_logic_first_punctuation",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "clause_relation_punctuation"
+    ],
+    "note": "빈칸 앞뒤 모두 독립절(두 번째 절은 'in field tests…, where…,' 전치사구+관계절이 삽입되어 주어 'the same coating'이 늦게 등장)이며, 실험실 성공 vs 현장 실패의 대조 관계가 문맥으로 명확하다. D(; however,)만 형식·논리 모두 충족. B는 형식은 맞으나 인과(therefore)로 논리 오류, C는 콤마 스플라이스, A는 and+however 연결어 중복(및 나열 의미로 대조와 불일치). 해설의 설명도 정답·오답 모두와 일치한다. 삽입구로 인해 두 번째 절의 독립성을 식별한 뒤 논리관계→구두점 순으로 판단해야 하므로 전형적 medium(단순 콤마 스플라이스 식별)보다 추가 사고가 필요하다. 다만 B의 '반대 논리관계'는 엄밀히 역접의 반대라기보다 인과 오류이나 체크리스트 취지(잘못된 논리관계 접속사)는 충족한다.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "정답 D는 옳고 레시피 항목 5개를 모두 충족한다. 다만 대조 관계가 '2년 넘게 녹 없음'과 '4개월 만에 실패'로 너무 뚜렷하다. 오답도 전형적인 3종(콤마 스플라이스, therefore, 접속어 중복)이라 의미 판단이 어렵지 않다. 두 번째 절 안의 where 삽입절은 길이만 늘릴 뿐이어서 전형적인 medium 수준으로 본다. hard 특성 clause_relation_punctuation은 형식만 갖추었고 실제로 추가 사고를 요구하지는 않는다.",
+    "issue": "A 설명에서 'and는 대조와 맞지 않는다'는 부분은 덧붙인 근거로 다소 약하다. 그래도 정답 판정에는 영향이 없다."
+   },
+   "cost": 0.181124
+  },
+  {
+   "cid": "recipe-form_structure_sense-02",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_tense_consistency_across_quote",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "tense_agreement_across_context"
+    ],
+    "note": "인용문 내 세 절(walked, sketched, ___)의 병렬 단순과거와 일치하는 D recorded가 정답임을 직접 확인. A는 현재형(시제 불일치), B는 병렬 중 유일한 진행형, C는 바깥 문장의 returned/summarized를 기준으로 보면 국소적으로 그럴듯하지만 인용문 내부의 동시 연속 행위와 어긋남 → 체크리스트 5항 모두 충족. 인용문-주절 간 시제 층위를 구분해야 하므로 medium 이상의 사고를 요구. 사소한 사항: 세 언어(Spanish, Zapotec, Latin)로 기록했는데 \"bilingual sketchbooks\"로 표현된 점은 수치상 약간 부정확하나 정답·문법 판단에 영향 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "tense_agreement_across_context"
+    ],
+    "note": "정답 D는 옳다. 다만 지문 안에서 모순이 있다. 인용문에서는 식물 이름을 스페인어·사포텍어·라틴어 세 언어로 기록했다고 하는데, 뒤 문장은 'bilingual sketchbooks'라고 부른다(세 언어이므로 trilingual이 맞다). 난이도 측면에서는 앞의 두 동사(walked, sketched)가 모두 단순과거라 병렬 구조만 봐도 답이 바로 나온다. C(had recorded)가 바깥 문장과의 시제 관계 때문에 약간 헷갈릴 뿐, 같은 skill의 일반적인 medium 문항보다 더 깊은 사고를 요구한다고 보기는 어렵다.",
+    "issue": ""
+   },
+   "cost": 0.173806
+  },
+  {
+   "cid": "recipe-form_structure_sense-03",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_dangling_modifier_agent_trace",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching",
+     "possessive_head_noun_trap"
+    ],
+    "note": "문두 분사구 'Studying the looms...'의 행위자는 Field이며 C만 Field를 주절 주어로 둔다. A는 Field 이름이 소유격으로 포함돼 있어 head noun이 'notes'임을 식별해야 하는 함정이고, B는 배경 명사 주어에 더해 'to have ... was memorized'로 비문, D는 사람 명사이나 행위자가 아니며 '도제가 teacher→apprentice 구전을 발견했다'는 의미도 어색. Margaret Field는 실제 가나에서 활동한 인류학자이나 켄테 연구 세부는 가공으로 보이며 사실 오류 수준은 아님. 해설은 정답과 오답 근거를 정확히 설명함.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "정답 C가 맞다. A는 소유격 함정으로 주어가 notes가 되고, B는 수동태라 workshops가 주어가 되면서 'to have'도 뒤 절과 이어지지 않는다. D는 행위자가 맞지 않는다. 다만 소유격 's 함정, 배경 명사, 다른 인물이라는 오답 구성은 분사구문 수식 오류 문항의 전형적인 medium 패턴이다. 정답을 고르려면 의미상 행위자를 추적해야 하지만, 문장 하나 안에서 바로 확인되므로 추가 사고 단계가 거의 없다. 실존 인물 Margaret Field(가나에서 활동했고 주로 Ga 종교를 연구함)에게 kente 연구를 귀속시킨 점은 지어낸 내용일 수 있으니 확인을 권한다.",
+    "issue": ""
+   },
+   "cost": 0.17084319999999997
+  },
+  {
+   "cid": "recipe-form_structure_sense-04",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_clause_logic_first_punctuation",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "clause_relation_punctuation",
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "정답 D는 분사구 'never once leaving...'가 주절 주어 'a single female'을 수식하는 구조로 문법·논리 모두 충족. A는 콤마 스플라이스, B는 접속어 중복으로 명확한 오답. 다만 C의 because는 '반대 논리관계'가 아닌 '무관한 인과 접속사'이며 문법적으로는 성립 가능한 종속절이어서 체크리스트 4항은 미충족. 사실관계(G. boreopacifica 53개월 포란, MBARI 관찰)는 정확.",
+    "issue": "C 해설에서 '알을 지킨 결과에 가깝기 때문에 논리 관계가 뒤집힌다'는 표현은 과장임. 실제 두 내용은 인과가 아니라 부연 관계이므로 because가 '뒤집힌' 것이 아니라 단순히 부적절한 것. 또한 C는 종속절 구조로 문법적으로는 성립 가능하여 배제 근거가 의미(및 'was never once leaving' 진행형의 어색함)에만 의존함."
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "clause_relation_punctuation"
+    ],
+    "note": "정답 D는 맞다. 문장 끝의 분사구를 apparently와 콤마로 앞 절에 붙여 만든 전형적인 medium 수준 구조다. A는 콤마 스플라이스, B는 접속어 중복이다. 다만 C(because)는 문법상 성립하고 논리만 어색하다. 그래서 문법 관례 문항의 오답으로는 약하다. 수식어의 주체를 추적하거나 문맥 전체를 따져야 하는 hard 요소도 없다.",
+    "issue": "C는 문법적으로 가능한 문장이라 의미가 이상하다는 이유로만 배제된다. 해설은 이 선택지가 Standard English 관례 문항에서는 문법 오류가 아니라는 점을 다루지 않는다."
+   },
+   "cost": 0.1791604
+  },
+  {
+   "cid": "recipe-form_structure_sense-05",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_tense_consistency_across_quote",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "tense_agreement_across_context"
+    ],
+    "note": "정답 D 검산: \"she had transcribed ..., identified ..., and arranged ...\"로 조동사 had에 걸리는 과거분사 3항 병렬이 성립하며 \"By the end of that year\" 과거완료 문맥과 일치. A는 인용문의 현재시제(unfold/find)에 끌린 오답, B는 병렬 중 하나만 -ing, C는 인용문 내 \"has heard\"와 국소적으로 호응하나 had 병렬·과거완료 문맥과 불일치. 해설의 논리·수치 모순 없음. 인용문 시제 간섭을 거슬러 서술부의 had 병렬을 추적해야 하므로 전형적 medium 동사형 문항보다 추가 문맥 판단을 요구함. 다만 난이도 상승폭은 크지 않은 편(가상 인물 Maria Teixeira로 사실 오류 소지 없음).",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "had transcribed, identified, and arranged라는 병렬 구조만 확인하면 바로 풀린다. 인용문 속 현재 시제(unfold, find)와 현재완료(has heard)는 오답을 고르게 만드는 유인 장치일 뿐이고, 인용문 밖 서술은 처음부터 과거완료로 분명하다. 따라서 전형적인 medium 수준의 병렬·시제 문항이며, 맥락 전체에 걸친 시제 판단이 실제로 필요하지는 않다.",
+    "issue": "\"과거완료 시제 'By the end of that year'\"라는 표현이 부정확하다. 이 구는 시제가 아니라 과거완료를 요구하는 시간 부사구다. 정답 논리에는 영향이 없다."
+   },
+   "cost": 0.1632536
+  },
+  {
+   "cid": "recipe-form_structure_sense-06",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_dangling_modifier_agent_trace",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching",
+     "overgeneralization_scope_control"
+    ],
+    "note": "분사구 'Having spent three seasons photographing…'의 실제 행위자는 Arakaki이며 A만 주절 주어로 배치. B는 무생물 photographs(인접 명사 유도), C는 앞 문장의 배경 명사 Survey, D는 사람 주어이나 'newly hired'가 세 시즌 촬영과 모순되어 의미 판별이 필요함. 오답 D가 형태상 적법한 인간 주어라 단순 '사람/무생물' 기준으로는 풀 수 없어 medium 이상의 의미 추적을 요구. 해설은 정답을 정확히 뒷받침하며 모순 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "A는 정답으로 성립한다. 다만 D는 표준 영어 문법 규칙(conventions) 위반이 아니라 의미상 그럴듯하지 않다는 이유로만 오답이 된다. 'newly hired'가 '세 시즌'과 모순된다는 점이다. 그래서 conventions 문항의 오답으로서 방어력이 약하고, 실제 SAT 기준에서는 복수 정답 시비가 생길 수 있다. B와 C는 전형적인 무생물 주어 오류다.",
+    "issue": "D 해설에서 '세 시즌 촬영한 사람은 Arakaki'라고 단정하지만, 지문에는 그런 근거가 없다. Arakaki는 선택지에서 처음 등장한다. D는 문법적으로 현수 수식어가 아니며, 'newly hired'와 '세 시즌'이 의미상 어긋난다는 점에만 기대고 있다. 해설은 이 점을 명시하지 않는다."
+   },
+   "cost": 0.17987720000000001
+  },
+  {
+   "cid": "recipe-form_structure_sense-07",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_clause_logic_first_punctuation",
+   "detIssues": [
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.025478400000000002
+  },
+  {
+   "cid": "recipe-form_structure_sense-08",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_tense_consistency_across_quote",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "tense_agreement_across_context"
+    ],
+    "note": "인용문 내부의 gathered, wedged와 병렬인 세 번째 동사이므로 단순과거 tended(A)가 정답이며 검산상 옳다. B는 현재완료로 인용문 시제와 충돌, C는 병렬 항목 중 하나만 -ing로 형태가 달라지며 정동사 역할 불가, D는 바깥 문장의 had taught/had와 국소적으로 어울려 보이나 인용문 내 순차 사건에서 과거완료를 쓸 근거가 없어 전체 맥락과 어긋난다. 바깥 문장의 과거완료를 미끼로 삼아 인용문 경계를 넘어 시제 일관성을 판단하게 하므로 medium 이상의 추가 사고를 요구한다. 해설은 정답을 정확히 뒷받침하며 내부 모순 없음. 인물·사건은 가상으로 사실 오류·저작권 문제 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "정답 A는 맞다. gathered, wedged, tended가 같은 단순과거로 병렬을 이루고, 해설에도 오류가 없다. 다만 문항의 핵심은 'and'로 이어진 세 동사의 병렬 구조를 맞추는 것으로, 전형적인 medium 수준이다. D는 바깥 문장의 had taught에 끌리도록 만든 함정이지만 인용문 안만 보면 바로 배제된다. 그래서 문맥 전체에 걸친 시제 판단을 실제로 요구하지는 않으며, hard 특성인 tense_agreement_across_context가 충분히 구현되지 않았다.",
+    "issue": ""
+   },
+   "cost": 0.1584516
+  },
+  {
+   "cid": "recipe-form_structure_sense-09",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_dangling_modifier_agent_trace",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "문두 분사구문 'Having spent two winters recording these singers'의 의미상 주어는 녹음 행위자 Merlo이며, D만 이를 주절 주어로 둠. A(인접 무생물 tapes), B(배경 명사+수동태로 행위자 은폐), C(녹음 대상인 가수 측 명사, 사람이라 그럴듯함)는 모두 dangling. 특히 C는 '사람 명사=행위자'라는 단순 휴리스틱을 깨뜨려 의미상 행위자 판별을 요구하므로 medium을 넘는 사고를 요구함. 정답·해설·형식 모두 적합.",
+    "issue": "C 해설에서 'bassu는 사람'이라고 했으나 지문은 bassu를 'bass voice'(성부)로 정의함. 다만 가수 역할을 가리키는 관용적 용법으로 해석 가능하여 논리적 결함은 아님."
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "정답 D가 옳고 해설도 일관된다. 다만 SAT 표준 dangling modifier 문항의 전형적 구조다. Merlo를 행위 주어로 둔 선택지가 D 하나뿐이어서 '녹음한 사람=주어' 판단만으로 바로 풀린다. C(사람 명사)가 약간의 함정이 되지만, 문맥 전체에서 행위자를 추적해야 하는 hard 수준의 추가 사고로 보기는 어렵다.",
+    "issue": ""
+   },
+   "cost": 0.1792252
+  },
+  {
+   "cid": "recipe-form_structure_sense-10",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_clause_logic_first_punctuation",
+   "detIssues": [
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.023658400000000003
+  },
+  {
+   "cid": "recipe-form_structure_sense-11",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_tense_consistency_across_quote",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "tense_agreement_across_context",
+     "병렬구조 전체 추적 후 국소적 과거완료 유혹(before he arrived) 배제"
+    ],
+    "note": "인용문 내 swept, sorted, ___ 병렬이 명확하고 정답 D polished가 유일하게 시제·형태 모두 일치. A는 현재시제(인용 시제 불일치), B는 분사형(병렬 파괴), C had polished는 'before he arrived'만 보면 그럴듯하나 동일 주어의 단순과거 나열과 어긋나는 국소적 함정으로 레시피 요건 충족. 해설의 각 오답 근거도 정확. 가상 인물·상황으로 저작권 문제 없음. 다만 hard 수준으로는 비교적 수월한 편이며, 난이도는 주로 오답 C의 함정에서 발생함.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "tense_agreement_across_context"
+    ],
+    "note": "swept, sorted, polished로 단순과거 병렬이 이루어진다. C는 before절 때문에 그럴듯한 함정이 된다. 다만 병렬 단서가 바로 앞에 있어 hard로서는 다소 약하다.",
+    "issue": ""
+   },
+   "cost": 0.1394636
+  },
+  {
+   "cid": "recipe-form_structure_sense-12",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_dangling_modifier_agent_trace",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "분사구문 \"Having tested ... in small crucibles over a single winter\"의 행위자는 앞 문장의 \"its master\"로 지문 전체에서 추적해야 하며, C만 장인을 주어로 두어 정답이 옳다. A는 인접 무생물 명사 crucibles, B는 배경 명사 ledgers(Seguso는 that절 내부에 묻힘), D는 사람이지만 실험 주체가 아닌 apprentice를 주어로 두어 각각 현수수식어가 된다. 시제·구두점도 문제없고 해설은 정답과 오답 근거를 정확히 설명한다. 소다회 부족 시 식물재(saltwort/barilla) 사용은 역사적으로 타당하며, 2019년 장부 발견·Bruno Seguso는 허구적 설정으로 사실 오류로 보기 어렵다. 형식은 SAT 표준에 부합하고 저작권 의심 없음. 단순 인접 일치가 아닌 의미상 행위자 판별(특히 D의 인간 오답)을 요구하므로 hard 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "C는 실험 행위자인 장인을 주절 주어로 삼으므로 정답입니다. D는 사람 주어라서 그럴듯해 보입니다. 이를 걸러내려면 앞 문장의 'its master handled'를 근거로 실제 행위자를 추적해야 하므로, 형태만 보는 수준을 넘는 판단이 필요합니다. 다만 A와 B는 무생물 주어라서 쉽게 제거되므로, hard 난이도로서는 하한선에 가깝습니다.",
+    "issue": "A 해설에서 crucibles를 '수식어구 바로 앞의' 명사라고 했지만, 실제로는 수식어구 안에 있는 명사입니다. 사소한 표현 부정확입니다."
+   },
+   "cost": 0.1695512
+  },
+  {
+   "cid": "recipe-form_structure_sense-13",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_clause_logic_first_punctuation",
+   "detIssues": [
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.0267584
+  },
+  {
+   "cid": "recipe-form_structure_sense-14",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_tense_consistency_across_quote",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "tense_agreement_across_context"
+    ],
+    "note": "정답 A(saw) 검산 결과 옳음: 인용문 내 'sank, watched, and then ___'의 과거시제 3항 병렬이므로 단순과거가 필요. C(have seen)=인용문과 어긋나는 시제, D(seeing)=병렬 항목 하나만 비정형, B(see)=후행 문장의 현재시제(still guides, plans)에만 국소적으로 부합하는 오답으로 체크리스트 5개 항목은 모두 충족. 해설도 정답을 정확히 뒷받침하며 모순 없음. 가상 인물·인터뷰로 저작권 문제 없음. 다만 hard 적합성 측면에서는 빈칸 바로 앞 같은 절 안에 'sank', 'watched'가 명시되어 있어 수험생이 인용문-주절 간 시제 관계를 문맥 전체에서 판단할 필요 없이 인접 병렬 단서만으로 즉시 해결 가능하다. 현재시제 프레임 문장이 인용문 뒤에 배치되어 있고 인용문 내부 단서가 압도적이므로, 전형적 medium 병렬·시제 문항과 실질적인 사고량 차이가 없어 'tense_agreement_across_context' 특성이 명목상으로만 반영됨.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "tense_agreement_across_context"
+    ],
+    "note": "'sank, watched, and then ___'의 병렬이 빈칸 바로 앞에 붙어 있어서, 인용문 밖 문맥을 따지지 않아도 'saw'가 바로 정해진다. B는 마지막 문장의 현재시제를 노린 함정이지만 인접한 병렬 단서가 너무 강하다. C와 D도 흔한 medium 수준의 오답이다. 형식과 정답, 해설에는 문제가 없지만 hard 수준의 추가 사고는 사실상 요구하지 않는다.",
+    "issue": ""
+   },
+   "cost": 0.1721156
+  },
+  {
+   "cid": "recipe-form_structure_sense-15",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_dangling_modifier_agent_trace",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "문두 분사구 'Examining the cracked cores...'의 행위자는 사람(Dansgaard)이어야 하며, C만 주절 주어로 이를 둔다. A(polarized light, 분사구 내 인접 무생물), B(배경 명사 Greenland ice sheet), D(fractures, 문법적으로 완결되나 의미상 관찰 불가)가 각각 레시피 역할을 수행. 세 오답 모두 문법적으로 완전한 절을 이루어 단순 형태 매칭이 아닌 의미상 행위자 추적을 요구함. Dansgaard가 코펜하겐 기반 그린란드 빙하코어 연구자였다는 배경은 사실과 부합하며, 균열-화산재 층 서사는 구성된 내용이나 명백한 사실 오류는 아님. 해설은 정답·오답 근거를 정확히 서술.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "정답 C는 옳고, 레시피 다섯 항목도 모두 충족한다. 다만 사람인 선택지는 C 하나뿐이고 A, B, D는 모두 무생물(빛, 빙상, 균열)이라서, '사람이 살펴본다'는 점만 확인하면 바로 풀린다. 의미상 행위자를 추적하는 단계가 따로 필요 없는 전형적인 medium 수준의 현수 수식어 문항이다. hard 문항이 되려면 그럴듯한 사람 명사나 집단 명사를 함정으로 두어야 한다. 사실관계: Dansgaard가 덴마크 물리학자이자 빙하코어 연구자인 것은 맞다. 다만 균열이 화산재 층을 따라 났다는 세부 내용은 확인할 수 없는 각색으로 보인다.",
+    "issue": ""
+   },
+   "cost": 0.1663792
+  },
+  {
+   "cid": "recipe-form_structure_sense-16",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_clause_logic_first_punctuation",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": false,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "clause_relation_punctuation"
+    ],
+    "note": "정답 C(; however,)는 두 독립절의 대조 관계와 세미콜론+접속부사+콤마 형식을 모두 충족하며 B(인과 역전), D(but however 중복)는 적절한 오답이다. 그러나 선택지 A ', samples'를 빈칸에 넣으면 'lifeless, samples samples drawn...'으로 단어가 중복되어 콤마 스플라이스가 아닌 명백한 문장 파손으로 탈락한다. 이는 선택지 설계 오류(빈칸 뒤 본문의 'samples'와 선택지 내용이 겹침)로 실제 SAT 형식에 맞지 않으며 오답 1이 '순수한 콤마 스플라이스' 기능을 못 한다. 난이도 면에서도 대조 관계가 'appeared lifeless' vs 'actively dividing'으로 매우 명시적이고 문장 결합 단계가 단일하여 전형적 medium 수준이며, 레시피의 hard 특성(수식어 주체 추적, 다단계 추론, 문맥 전체 시제 일관성 등)을 추가로 요구하지 않는다. 수정 불가 판정이므로 hard 부적합 및 형식 결함으로 판정.",
+    "issue": "해설 자체는 정답 C를 정확히 뒷받침하나, A 설명에서 'samples가 반복되어 문장이 성립하지 않는다'고 스스로 인정하듯 오답 A가 콤마 스플라이스 외에 단어 중복이라는 문항 제작상 결함으로 탈락하는 점을 해설이 그대로 노출함."
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "선택지 A ', samples'를 빈칸에 넣으면 빈칸 뒤 'samples'와 겹쳐 'lifeless, samples samples drawn'이 된다. 순수한 콤마 스플라이스 오답이 아니고 단어 중복 때문에 바로 탈락하는 선택지라 형식 결함이다. A는 ','만 두는 것으로 고쳐야 한다. 대조 관계가 너무 분명하고(lifeless 대 actively dividing) 세미콜론+however 패턴도 전형적이라 medium 수준이다. 의미 판단을 더 깊게 요구하는 hard 요소는 없다.",
+    "issue": "해설은 C를 제대로 뒷받침한다. 다만 A에서 'samples'가 반복되는 것을 '문장이 성립하지 않는다'고만 짚고 지나가, 선택지 자체의 결함을 인정한 셈이 된다. B의 인과를 대조와 '정반대'라고 부른 것은 엄밀하지 않지만 큰 문제는 아니다."
+   },
+   "cost": 0.18573640000000002
+  },
+  {
+   "cid": "recipe-form_structure_sense-17",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_tense_consistency_across_quote",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "tense_agreement_across_context",
+     "direct vs. indirect speech frame distinction",
+     "parallel structure across three coordinated clauses with 'by the time' past-perfect anchoring"
+    ],
+    "note": "정답 D 검산: 'she explained that by the time she arrived' 간접화법 과거 틀 + 'had retreated, had closed'와 병렬 → 'had scattered' 유일하게 적합. A는 인용문의 현재형을 그대로 옮긴 함정(체크리스트 3은 '인용문 시제를 간접화법에 잘못 적용한 오답'으로 기능적으로 충족), B는 병렬 중 하나만 비정형, C는 'before she could'와 국소적으로 어울리지만 선후관계 역전. 해설에 모순·오계산 없음. 직접 인용과 간접 화법의 시제 전환을 문맥 전체에서 추적해야 하므로 medium 초과.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "tense_agreement_across_context"
+    ],
+    "note": "인용문의 현재형과 간접화법의 과거완료 병렬을 구분해야 하므로 문맥 전체에 걸친 시제 판단이 필요함. 'Ruth Okafor'는 가상 인물로 보이나 실존 주장으로 쓰인 것은 아님. 'by the time ... before she could even unpack'은 시점 표현이 겹쳐 다소 중복되지만 문법 오류는 아님.",
+    "issue": ""
+   },
+   "cost": 0.15769360000000002
+  },
+  {
+   "cid": "recipe-form_structure_sense-18",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_dangling_modifier_agent_trace",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "정답 A만 분사구 'Having spent three winters recording...'의 의미상 주어(Kaneshiro)를 주절 주어로 둠. B(catalog), C(textiles), D(conservators)는 모두 현수수식. 앞 문장의 분열문(it was ... Kaneshiro whose fieldwork)과 분사구 내 'the weavers', 사람 명사 'conservators' 등이 추적 부담을 더해 medium 이상. 오답 B가 엄밀한 '인접 명사' 오류 유도는 아니며(분사구 내 weavers를 쓴 오답 없음) 전형적 '산출물 주어' 오답에 가깝다는 점만 참고.",
+    "issue": "B 설명에서 'a dye catalog'를 \"분사구 내용과 가장 가까운 무생물 명사\"라고 했으나 catalog는 분사구 안에 등장하지 않는 명사다(분사구 내 인접 명사는 weavers/yellows and rusts). 논리적 판정 자체는 옳지만 표현이 부정확함."
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "정답 A가 맞다. 기록한 행위자인 Kaneshiro를 주절의 주어로 둔 선택지는 A뿐이다. 다만 전형적인 medium 수준의 현수 수식어 문항이다. B·C는 수동태와 by구 때문에 오답이 쉽게 드러나고, D의 conservators는 분명히 행위자가 아니다. B는 지문 속 인접 명사(weavers/plants)를 이용한 일치 오류가 아니므로 3번 항목을 충족하지 못한다. 행위자를 추적하는 단계도 짧고, 문장 길이 외에 추가로 요구되는 사고가 없다.",
+    "issue": "B의 'a dye catalog'를 '분사구 내용과 가장 가까운 명사'라고 했지만, 이 명사는 분사구에 나오지 않는다. 설명이 다소 느슨하지만 정답 판단에는 영향이 없다."
+   },
+   "cost": 0.1860352
+  },
+  {
+   "cid": "recipe-form_structure_sense-19",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_clause_logic_first_punctuation",
+   "detIssues": [
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.024358400000000002
+  },
+  {
+   "cid": "recipe-form_structure_sense-20",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_tense_consistency_across_quote",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "tense_agreement_across_context"
+    ],
+    "note": "정답 D(scan)는 인용문 내 병렬 서술어 pack/dry와 형태·시제가 일치하므로 옳다. 해설은 각 오답을 체크리스트 역할대로 설명하며 모순 없음. 지문 바깥의 과거 서술(began, described)과 인용문 내부 현재 습관 서술을 구분해야 하므로 단순 병렬 문항보다 추가 판단이 요구된다. 다만 오답 C(had scanned)의 '국소적 타당성'은 다소 약해 사실상 시제 오류 변형에 가깝고, 빈칸 양옆에 pack/dry가 인접해 있어 난이도 상승폭은 제한적이다. 사실 관계: Mexia의 1929년 아마존 탐사·카누 이동·평생 표본 수(약 145,000점 이상, '65,000 이상'은 참)는 오류 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "tense_agreement_across_context"
+    ],
+    "note": "정답 D는 맞다. pack, ___, and dry가 병렬로 놓여 있어 단순현재가 바로 정해진다. 바깥 서술의 과거 시제(began, described)가 함정 구실을 하긴 하지만 병렬 동사 pack/dry가 바로 옆에 있어서 국소적 단서만으로 풀린다. 따라서 문맥 전체를 따져야 하는 hard 수준의 시제 판단에는 이르지 못하고 전형적인 medium 병렬 문항에 가깝다. 인용문은 실존 인물 Mexia의 말처럼 쓰였지만 실제 출처 없이 지어낸 것으로 보이니 주의가 필요하다. Mexia의 아마존 탐사(1929~1931년, 카누 이동)와 관련된 사실 서술에는 문제가 없다. 다만 일반적으로 알려진 평생 채집량은 약 145,000점이어서 'more than 65,000'은 틀린 말은 아니어도 크게 낮춰 잡은 수치다.",
+    "issue": ""
+   },
+   "cost": 0.1817656
+  },
+  {
+   "cid": "recipe-form_structure_sense-21",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_dangling_modifier_agent_trace",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "검산: 도입 분사구 \"Having spent... recording... and comparing...\"의 행위자는 사람(Velez)이어야 하므로 D만 주절 주어로 적합. A(inconsistencies, Velez는 삽입구), B(dispute, Velez는 수동태 by-구), C(oral histories, Velez의 조수는 수식어 내부)는 모두 Velez 이름을 포함해 주어처럼 보이게 유도하지만 실제 주어는 비행위자 명사로 dangling 발생. B는 \"was traced ... in a 2009 study that...\" 구조도 부자연스러움. 해설에서 A의 주어를 \"federal surveys\"로 요약한 점은 엄밀히는 \"inconsistencies\"이지만 논지에 영향 없음. 오답 세 개 모두에 Velez 이름이 포함되어 단순 이름 탐색이 아닌 실제 주어 추적을 요구하므로 medium 이상. Hotevilla는 실제 Hopi 마을이고 연구자·연구는 가상 설정으로 사실 오류로 보기 어려움.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "전형적인 현수 수식어 문항이다. 사람 행위자를 주어로 둔 선택지가 D 하나뿐이어서 즉시 정답이 가려진다. A와 C는 무생물 주어, B는 수동태라 쉽게 소거된다. 난이도는 지문 길이에서 오며, 의미상 행위자를 추적하는 깊이 있는 사고는 필요하지 않다.",
+    "issue": "A 해설은 주어를 'federal surveys'라고 했지만, 문법상 중심어는 'inconsistencies'다. 사소한 부정확함이고 결론에는 영향이 없다."
+   },
+   "cost": 0.18433719999999998
+  },
+  {
+   "cid": "recipe-inferences-00",
+   "skill": "inferences",
+   "system": "sat_rw",
+   "recipeId": "inferences_theory_direction_reversal",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "theory_to_case_application",
+     "evidence_sufficiency_evaluation"
+    ],
+    "note": "가설(영양 부족 → 방어 투자 증가)이 명시되어 있고, 질소 고갈 화강암 지대 = 영양 부족 조건으로 매핑하면 A가 유일하게 방향을 유지한 예측임. B는 방향 뒤집기, C는 인과 역전, D는 가설과 무관한 제3요인이며 '같은 유충·비슷한 섭식률'이라는 통제 조건과 충돌하므로 배제됨. 해설은 정답·오답 논리를 정확히 뒷받침하며 모순 없음. 다만 정답 A가 B·D보다 짧고 단순하며 B가 'since...'로 근거를 덧붙여 과잉 설명 티가 나는 점은 경미한 단서 노출 가능성 있음. 난이도는 매핑이 비교적 직접적('nitrogen-depleted'→'nutrient-poor')이어서 hard 중 하위권에 해당하나, 통제 조건을 활용한 D 배제와 방향 유지 판단이 요구되어 medium 전형 이상으로 판정.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "theory_to_case_application"
+    ],
+    "note": "이론을 사례에 그대로 대응시키기만 하면 되는 문항이다(질소 고갈 = 영양 부족 → 방어 물질 증가). 정답 A는 지문의 가설 문장을 바꿔 말한 수준이다. B는 이유 문구까지 붙어 있어 오답임이 쉽게 드러나고, C·D는 이론의 범위를 벗어난 것이 분명하다. 대응시키는 단계가 한 번뿐이고 함정도 약해서 전형적인 medium 수준이며 hard에는 미달한다.",
+    "issue": "D 해설에서 '같은 유충에게 비슷한 비율로 먹힌다'는 사실이 유충의 지역 적응 가능성을 엄밀히 '배제'하지는 않는다(같은 종이어도 국지 개체군이 적응할 수 있음). 그래도 정답 판정에는 지장이 없다."
+   },
+   "cost": 0.18171199999999998
+  },
+  {
+   "cid": "recipe-inferences-01",
+   "skill": "inferences",
+   "system": "sat_rw",
+   "recipeId": "inferences_graph_text_combine",
+   "detIssues": [
+    "contract:contract_figure_required"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.043576
+  },
+  {
+   "cid": "recipe-inferences-02",
+   "skill": "inferences",
+   "system": "sat_rw",
+   "recipeId": "inferences_claim_support_or_undermine",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "evidence_sufficiency_evaluation"
+    ],
+    "note": "가설과 두 가지 예측 조건이 명확히 제시되고, 정답 A는 '템포가 작업 속도에 따라 변함'과 '강박이 당기기 주기와 일치' 두 조건을 모두 직접 충족한다. C(가사 소재)는 관련 있어 보이지만 무관한 사실, B(축제에서 일정 템포)는 반대 방향 사실, D는 배경 정보로 레시피 체크리스트는 모두 충족. 해설도 정답과 논리적으로 일치한다. 다만 hard 적합성은 부족하다: 네 선택지 중 리듬·템포를 언급하는 것이 A뿐이어서 지문의 조건과 표면 단어만 대조해도 정답이 드러나며, B도 '지지처럼 위장'된 정도가 약해 쉽게 배제된다. 이론을 사례에 적용하면서 방향을 뒤집는 함정, 다중 자료 통합, 반례 기반 일반화 등 hard 특성이 실제로 요구되지 않아 전형적 medium 수준의 증거 충분성 판단에 머문다.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "지문이 예측 조건 두 가지(강박이 당기는 주기와 맞음, 작업 속도에 따른 템포 변화)를 명시하고, A가 이를 거의 그대로 다시 말한다. 그래서 키워드만 맞춰도 정답을 고를 수 있는 전형적인 medium 수준이다. B는 의례적 사용을 시사해 오히려 가설과 맞지 않는 쪽이지만, 지지 근거처럼 위장된 매력적인 오답은 아니다. 이론을 사례에 적용하면서 관계 방향을 뒤집게 만드는 함정이나 증거 충분성을 판단하는 미묘함이 부족해 hard로 보기 어렵다.",
+    "issue": "B 해설은 '템포가 작업과 무관함을 보여 준다'고 다소 과하게 말한다. 축제에서 템포가 일정하다는 사실만으로 작업 중 템포가 어떤지는 알 수 없다. 정답 판단에는 영향이 없는 사소한 문제다."
+   },
+   "cost": 0.18274200000000002
+  },
+  {
+   "cid": "recipe-inferences-03",
+   "skill": "inferences",
+   "system": "sat_rw",
+   "recipeId": "inferences_theory_direction_reversal",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "theory_to_case_application"
+    ],
+    "note": "이론 문장(\"the greater the density of crushing predators..., the thicker the shells\")이 명시되어 있고, Arden(가재 많음) vs Bellmore(가재 적음)라는 새 사례에 적용하는 구조로 체크리스트 5항목을 모두 충족한다. 정답 A는 이론 방향 그대로, B는 방향 뒤집기, C는 인과 역전, D는 지문이 명시적으로 배제한 칼슘 차이를 근거로 삼아 오답으로 확정된다. 해설도 정답과 일치하며 모순이 없다. 다만 hard 적합성 측면에서는 약하다: 이론이 \"greater density → thicker shells\"로 거의 답을 직접 서술하고, 사례도 '가재 abundant vs rare'로 일대일 대응되어 추가 추론 단계(예: 반증 사례 처리, 복수 자료 통합, 증거 충분성 판단)가 요구되지 않는다. 오답 B·D는 각각 이론 서술과 지문 명시 사실(\"similar... calcium levels\")에 정면으로 어긋나 비교적 쉽게 제거된다. 전형적 medium 수준의 이론→사례 적용 문항으로 판단된다.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "theory_to_case_application"
+    ],
+    "note": "지문이 '포식자 밀도가 높을수록 껍데기가 두꺼워진다'는 방향을 직접 밝히고, 사례도 많다/드물다로 단순하게 대응된다. 그래서 한 단계만 적용하면 정답이 나온다. 오답도 너무 쉽게 걸러진다. B는 방향을 뒤집었고, C는 시제와 인과가 어색하며, D는 지문 내용과 정면으로 어긋난다. 전형적인 medium 수준이며 hard로 보기에는 추가 사고가 부족하다.",
+    "issue": "D 해설의 '칼슘은 이 이론이 설명하는 변수도 아니다'라는 부분은 조금 부정확하다. 이론은 칼슘을 껍데기 생성 비용으로 언급하기 때문이다. 다만 정답을 뒷받침하는 논리에는 지장이 없다."
+   },
+   "cost": 0.1482304
+  },
+  {
+   "cid": "recipe-inferences-04",
+   "skill": "inferences",
+   "system": "sat_rw",
+   "recipeId": "inferences_graph_text_combine",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_source_integration",
+     "counterexample_driven_generalization",
+     "evidence_sufficiency_evaluation"
+    ],
+    "note": "검산: 밀도순 Alder<Birch<Cedar<Dogwood. 껍데기 0.31→0.42→0.39→0.55로 Cedar가 Birch보다 얇음(0.39<0.42), 알 수 58→47→36→29로 단조 감소. 가설의 두 예측 중 껍데기 부분에서 Cedar만 이탈 → A 정답. B는 알 수 열만(표 단일 자료), C는 가설 텍스트만으로 예측, D는 Alder–Birch 쌍을 잘못 연결(실제로 가설과 일치). 해설 수치·논리 일치. 사소한 점: 스템 \"If Okafor's hypothesis is correct in its full form, the data indicate that…\"는 '가설을 온전히 적용하면'의 의미로 읽히나 약간 어색함(판정에는 영향 없음). 두 열을 모두 대조해 예외를 찾아야 하므로 medium 이상.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_source_integration",
+     "counterexample_driven_generalization",
+     "evidence_sufficiency_evaluation"
+    ],
+    "note": "검산 결과: 포식자 밀도는 Cedar(2.7)가 Birch(1.1)보다 높은데 껍데기는 Cedar 0.39mm로 Birch 0.42mm보다 얇습니다. 알 수(36<47)는 예측과 맞으므로 A가 정답입니다. 가설의 두 변수(껍데기 두께, 알 수)를 모두 확인해야 예외를 찾을 수 있어 medium보다 한 단계 더 사고를 요구합니다. 오답 구성: B는 시각 자료만 사용(알 수 열), C는 텍스트만 사용, D는 Birch–Alder 비교를 잘못 연결한 것입니다. 사소한 점: 문두 'If Okafor's hypothesis is correct in its full form, the data indicate that'는 다소 어색합니다. 전제가 '가설이 옳다면'인데 결론이 데이터의 예외를 가리키기 때문입니다. 다만 정답 판정에는 영향이 없습니다.",
+    "issue": ""
+   },
+   "cost": 0.1865556
+  },
+  {
+   "cid": "recipe-inferences-05",
+   "skill": "inferences",
+   "system": "sat_rw",
+   "recipeId": "inferences_claim_support_or_undermine",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "evidence_sufficiency_evaluation"
+    ],
+    "note": "정답·해설·사실관계(보헤미아 칼륨유리/베네치아 소다유리) 모두 정확하고 레시피 4항목도 충족. 다만 지문 마지막 문장이 '두 레시피 사이의 중간 조성'이라는 예측을 명시적으로 적어 주어, 정답 A는 그 문장의 거의 그대로의 재진술임. 수험자가 이론을 사례에 스스로 적용하거나 방향을 추론할 필요가 없어 hard 특성(theory_to_case_application 등)이 실제로 요구되지 않음. B의 역방향 위장은 양질이나, 전체적으로 전형적 medium 수준의 매칭 문항.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "지문이 \"중간 화학 조성\"이라는 예측을 직접 진술하고 정답 A가 이를 거의 그대로 반복하므로, 이론-사례 적용이나 방향 판단에 추가 사고가 필요 없다. 표현 대응만으로 풀리는 medium 수준이다. B는 반대 방향 위장, C는 관련 있어 보이는 무관 사실로 레시피는 충족한다.",
+    "issue": ""
+   },
+   "cost": 0.147396
+  },
+  {
+   "cid": "recipe-inferences-06",
+   "skill": "inferences",
+   "system": "sat_rw",
+   "recipeId": "inferences_theory_direction_reversal",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "theory_to_case_application",
+     "evidence_sufficiency_evaluation"
+    ],
+    "note": "지문에 포식 압력→껍데기 두께의 방향성 이론이 명시되고, 두 호수(Ormsby: 가재 풍부 / Vell: 가재 희소)라는 새 사례에 적용하는 구조. 정답 A는 이론 방향 그대로. B는 '자원 여유'라는 그럴듯한 근거로 방향을 반전한 함정, C는 인과 역전, D는 지문에서 통제된 제3요인(칼슘·수질 유사)으로 지문 정보와 모순. 해설은 정답을 정확히 뒷받침하며 오답 분류도 적절. 칼슘 통제 조건을 읽고 D를 배제해야 하므로 medium을 넘는 사고를 요구. 형식·저작권·사실 문제 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "theory_to_case_application"
+    ],
+    "note": "이론을 사례에 그대로 한 번 대입하면 끝나는 문항이다. 오답 B는 지문 내용과 정면으로 어긋나고, C와 D도 쉽게 제거되므로 전형적인 medium 수준에 해당한다. 함정이 약하고 다른 자료와 결합하거나 반례를 고려할 필요도 없어 hard 기준에는 미달한다.",
+    "issue": ""
+   },
+   "cost": 0.1355684
+  },
+  {
+   "cid": "recipe-inferences-07",
+   "skill": "inferences",
+   "system": "sat_rw",
+   "recipeId": "inferences_graph_text_combine",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "theory_to_case_application",
+     "multi_source_integration"
+    ],
+    "note": "표(0→41, 12→38, 35→9, 60→7)와 임계값 가설을 결합하면 영향이 거의 없는 구간은 0~12, 급감은 12~35 사이에서 발생하므로 임계값은 12 초과 35 이하 → A 정답 검산 일치. B는 표만 읽은 단조 감소 결론(0→12, 35→60 구간의 미미한 변화와도 불일치), C는 가설 문장만 확장한 제거·회복 추론, D는 급감 구간을 Hollin–Wexmere로 잘못 짝지은 오답으로 체크리스트 전 항목 충족. 가설의 '임계값' 개념을 구체 수치 구간에 적용해야 하며 두 자료를 모두 참조해야만 도출 가능하므로 medium 이상의 사고를 요구함. 해설에 모순·오계산 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_source_integration",
+     "theory_to_case_application"
+    ],
+    "note": "임계값 가설을 표의 급감 구간(12→35)에 적용해 구간을 추론해야 함. D는 인접 구간 오연결 함정으로 적절함. 12에서 41→38로 약간 줄어든 것도 '영향 거의 없음'에 부합함.",
+    "issue": ""
+   },
+   "cost": 0.15374559999999998
+  },
+  {
+   "cid": "recipe-inferences-08",
+   "skill": "inferences",
+   "system": "sat_rw",
+   "recipeId": "inferences_claim_support_or_undermine",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "evidence_sufficiency_evaluation",
+     "theory_to_case_application"
+    ],
+    "note": "가설→예측(텍스트 추적 vs 환경 추적)이 명시되고, A는 환경을 통제한 상태에서 텍스트 변수만 달라지는 사례로 예측을 직접 충족. B는 반대 방향(환경 반영) 함정, C는 배경 정보, D는 시점 정보로 무관. 해설의 각 선택지 분석이 논리적으로 일관되며 모순 없음. 답 A 확정 가능하고 가상의 역사가(Okafor) 설정으로 사실 오류·저작권 문제 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "evidence_sufficiency_evaluation",
+     "theory_to_case_application"
+    ],
+    "note": "A는 환경 조건을 고정하고 원본 텍스트만 달리하는 통제 비교라서, 이를 알아보는 데 추가 사고가 필요하다. B는 반대 방향 함정, C·D는 관련 있어 보이지만 무관한 사실이다. 다만 지문이 예측('track the texts... rather than the conditions')을 명시하고 있어 난이도는 hard 하한선 수준이다.",
+    "issue": ""
+   },
+   "cost": 0.127052
+  },
+  {
+   "cid": "recipe-inferences-09",
+   "skill": "inferences",
+   "system": "sat_rw",
+   "recipeId": "inferences_theory_direction_reversal",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "theory_to_case_application",
+     "evidence_sufficiency_evaluation"
+    ],
+    "note": "이론(체류 시간↑ → 분산 거리↑)이 명시되어 있고, 두 관목이라는 새 사례에 적용하는 구조가 명확함. A는 방향을 그대로 유지한 올바른 추론. B는 방향을 뒤집으면서 '소화 손상'이라는 그럴듯한 외부 근거를 덧붙여 함정 역할을 충분히 함. C는 새의 이동 거리가 체류 시간을 결정한다고 인과를 역전시킴. D는 섭식 빈도라는 이론 밖 변수를 끌어와 화합물 역할을 무시함. 해설은 정답과 오답 구조를 정확히 설명하며 모순 없음. 과육 내 완하/변비 유발 화합물이 조류 장 체류 시간에 영향을 준다는 전제는 실제 생태학 연구와 부합. 형식(빈칸 완성 + 'most logically completes') 적합. 'seedlings establish'와 'seeds deposited' 간 미세한 표현 차이가 있으나 '평균적으로'라는 조건 하에 추론으로 수용 가능.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "theory_to_case_application"
+    ],
+    "note": "정답 A가 맞다. 체류를 늘리는 화합물이 들어 있으면 체류 시간이 길어지고, 이론상 분산 거리도 길어지므로 묘목이 모체에서 더 멀리 자리 잡는다. 체크리스트 5개 항목도 모두 충족한다. B는 방향을 뒤집은 오답이고, C는 원인과 결과를 바꾼 오답이다. 하지만 지문 안에 이론 문장이 직접 나와 있고 이를 한 번만 적용하면 답이 나온다. 그래프·표를 함께 읽는 과정, 반증 사례, 근거가 충분한지 따지는 과정이 없다. 함정도 너무 뻔하다. B는 방향만 뒤집었고, C와 D는 두 관목을 비교하지도 않는다. 그래서 전형적인 medium 수준의 이론 적용 문항에 가깝다. 난이도가 있다면 지문 길이와 어휘에서만 나온다. 종자 '퇴적'에서 묘목 '정착'으로 넘어가는 비약이 조금 있지만 정답 판정에는 지장이 없다.",
+    "issue": ""
+   },
+   "cost": 0.1618504
+  },
+  {
+   "cid": "recipe-inferences-10",
+   "skill": "inferences",
+   "system": "sat_rw",
+   "recipeId": "inferences_graph_text_combine",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "theory_to_case_application",
+     "multi_source_integration",
+     "counterexample_driven_generalization"
+    ],
+    "note": "정답 A 검산 일치(토양 8°C 도달 C 5/12 vs B 5/20 = 8일 차, 개화도 8일 차). B는 표상 지연 8일 동일로 반박, C는 A·B·D 추세와 반대, D는 A 지점 수치 오귀속. 남향 예외(C)를 가설로 설명하는 반증 사례 적용 구조라 medium 이상. 해설 모순 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": false,
+    "comp": false,
+    "fit": false,
+    "which": [
+     "multi_source_integration"
+    ],
+    "note": "정답 A는 검산 결과 옳다. C 지점은 5/12, B 지점은 5/20에 토양이 8°C에 도달해 8일 차이가 나고, 개화일도 8일 차이가 난다. 다만 표에서 B와 C 두 행만 비교하면 답이 바로 나와 전형적인 medium 수준이다. 반례 사례인 C 지점은 텍스트에서 이미 '예외'라고 해석해 주기 때문에 추가로 추론할 부담이 없다. 오답 B는 표와 모순되므로 '시각 자료만 사용한 결론'에 해당하지 않는다. 오답 C도 텍스트만 사용한 결론이라기보다 그냥 틀린 일반화이므로 체크리스트 3·4번은 충족되지 않는다.",
+    "issue": "B를 '표만 보고 가설 무시'로 분류해 놓고 곧바로 표와 맞지 않는다고 설명해 자기모순이다. 표만 쓴 결론이라면 표와 맞아야 한다. C도 '가설만 보고 표 무시'로 분류했지만, 가설은 고도와 토양 온도의 관계를 전혀 말하지 않으므로 텍스트만으로 나오는 결론이라고 보기 어렵다."
+   },
+   "cost": 0.1776376
+  },
+  {
+   "cid": "recipe-inferences-11",
+   "skill": "inferences",
+   "system": "sat_rw",
+   "recipeId": "inferences_claim_support_or_undermine",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "theory_to_case_application",
+     "evidence_sufficiency_evaluation"
+    ],
+    "note": "가설(독립 필사)과 그에 따른 예측(각 사본에 고유 오류 존재, 공유 오류는 원본 유래)이 명확히 제시됨. A는 Bruges에 고유 오류가 전혀 없고 Ghent가 Bruges의 오류를 모두 포함하는 '상위집합' 패턴으로, 독립 필사가 아니라 Ghent가 Bruges를 베꼈음을 시사하여 가설을 직접 약화함. 엄밀히 '필사자가 오류를 전혀 내지 않았을 가능성'이 논리적으로 남지만, 지문 첫 문장(필사자들은 흔히 오류를 냄)과 선택지 간 비교에서 A가 가장 직접적인 약화 근거임은 분명함. B는 공유 오류가 원본 유래라는 가설 예측과 부합하여 오히려 지지(반대 방향 위장), C는 양피지 공방 차이로 전승 관계와 무관하나 '독립성'처럼 보이는 함정, D는 일반 배경 정보. 해설은 정답·오답 논리를 정확히 뒷받침하며 모순 없음. 오류 패턴을 계통 관계로 역추론해야 하므로 medium 이상의 이론-사례 적용과 증거 충분성 판단을 요구함.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "theory_to_case_application",
+     "evidence_sufficiency_evaluation"
+    ],
+    "note": "A는 두 사본이 독립적으로 필사됐다면 각 사본에 고유 오류가 있어야 한다는 함의를 이끌어내야 풀 수 있다. 지문은 이 함의를 직접 말하지 않는다. 그래서 단순 대조로는 풀리지 않는다. B는 방향을 뒤집은 함정이다. 실제로는 가설을 지지하지만, 오류 공유가 곧 서로 베꼈다는 뜻이라고 착각하면 약화 근거로 고르게 된다. 엄밀히 보면 Bruges 필사자가 고유 오류를 하나도 만들지 않았을 가능성도 있다. 그래도 A가 가장 직접적으로 가설을 약화한다.",
+    "issue": ""
+   },
+   "cost": 0.181584
+  },
+  {
+   "cid": "recipe-rhetorical_synthesis-00",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": "rhetorical_synthesis_dual_fact_merge",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_source_goal_integration",
+     "purpose_scope_calibration"
+    ],
+    "note": "A는 두 생물의 빛 용도를 whereas로 정확히 대조하며 노트 내용에 충실. B는 한쪽만, C는 대조 구조이나 목표(용도)가 아닌 서식지·색 비교로 purpose_scope_calibration 요구, D는 노트에 없는 내용. 오답 C가 '대조'라는 형식은 갖추되 초점이 어긋나 있어 단순 사실 선택 이상의 목적 범위 판단을 요구함. 실제 생물학적 사실(반딧불오징어 서식지·청색광, 철도벌레 적색광·남미 서식)도 정확. 다만 오답 B가 다소 쉽게 배제되어 hard 상한선은 아님.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "전형적인 medium 수준의 대조 문항이다. 정답 A만 '빛의 용도'를 두 생물 모두에 대해 대조하고 있어 쉽게 판별된다. C는 다른 속성(서식지·빛의 색)을 대조하고, D는 노트에 없는 내용을 넣었으며, B는 한쪽만 다룬다. 모두 표준적인 오답 유형이다. 확실성 수준 구분, 독자 배경 고려, 관계 방향 판단 같은 hard 특성은 요구되지 않는다. 노트 첫 줄(luciferin)은 정보 수 채우기용 방해 요소일 뿐이다.",
+    "issue": ""
+   },
+   "cost": 0.13898000000000002
+  },
+  {
+   "cid": "recipe-rhetorical_synthesis-01",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": "rhetorical_synthesis_goal_scope_match",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_source_goal_integration",
+     "purpose_scope_calibration"
+    ],
+    "note": "목표가 '범위(range)'이므로 두 가지 서로 다른 극한 조건(−272°C, 우주 진공)을 건조 상태라는 공통 전제와 함께 통합한 A만이 부합. B는 단일 사례(지나치게 구체적), C는 일반 소개(지나치게 포괄적), D는 무관. 사실관계(−272°C 생존 보고, 2007 FOTON-M3 우주 노출 실험, Goeze 1773) 모두 정확. 사소한 점: 노트는 'some tardigrades'인데 A는 'tardigrades'로 일반화했으나 SAT 관행상 허용 범위. C의 'have interested scientists for centuries'는 노트에 직접 없으나 1773 기술에서 추론 가능하며 오답이므로 문제 없음. 난이도는 전형적 수준에 가깝지만 세 노트를 하나의 문장으로 종합해야 하는 점에서 medium 이상으로 판단.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "정답은 맞고 해설도 일관적이다. 다만 극한 조건 두 가지(극저온, 진공)를 모두 담은 선택지가 A 하나뿐이고 C와 D는 주제에서 확연히 벗어나 있다. 그래서 '범위'라는 단어만 보고 바로 풀 수 있는 전형적인 medium 수준의 문항이다. B는 단일 사례로서 매력적인 오답이지만, 실제로 종합하거나 범위를 판단하는 사고를 요구하지는 않는다.",
+    "issue": ""
+   },
+   "cost": 0.16232600000000003
+  },
+  {
+   "cid": "recipe-rhetorical_synthesis-02",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": "rhetorical_synthesis_certainty_level_choice",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "claim_certainty_discrimination",
+     "relation_direction_judgment",
+     "multi_source_goal_integration"
+    ],
+    "note": "노트에 직접 측정된 확정적 결과(탄소 2.3배)와 잠정적 결과(달팽이 상관관계 + 미검증 가설)가 함께 제시됨. 정답 C는 'tended to'의 상관관계와 'perhaps/yet to be tested'의 가설 지위를 정확히 보존. A는 상관→인과, 가설→'showed'로 과잉 일반화; B는 확정 측정치를 'might/somewhat'로 축소하고 달팽이 목표도 미충족; D는 2019년 별도 연구의 뿌리 산소 방출 메커니즘을 달팽이에 잘못 귀속시킨 교차 소스 혼동 오답. 인과 방향·확실성 수준·다중 메모 간 귀속을 동시에 판별해야 하므로 medium을 넘는 사고 요구. 해설은 정답 및 각 오답 사유와 정확히 일치.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "claim_certainty_discrimination",
+     "multi_source_goal_integration"
+    ],
+    "note": "C는 상관관계와 아직 검증되지 않은 가설이라는 점을 모두 정확히 반영한다. A는 과잉 일반화한 오답, B는 확실성을 축소한 오답이며 B는 주제에서도 벗어난다. D는 다른 연구의 메커니즘과 섞어 놓은 오답이다. B가 목표에서 벗어나 있어 쉽게 제거된다는 점은 다소 약하지만, A와 D를 가르려면 확실성 수준과 출처를 구분해야 하므로 hard로 볼 수 있다.",
+    "issue": ""
+   },
+   "cost": 0.18575
+  },
+  {
+   "cid": "recipe-rhetorical_synthesis-03",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": "rhetorical_synthesis_dual_fact_merge",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_source_goal_integration",
+     "purpose_scope_calibration",
+     "relation_direction_judgment"
+    ],
+    "note": "노트 5개 중 ALMA 측은 2·3번 노트를 인과로 연결(고도→수증기 회피)해야 '이유'가 도출되고, SKA 측은 5번 노트에서 이유를 추출해야 하므로 다중 메모 종합이 필요하다. C는 두 망원경을 대조 구조로 제시하지만 '위치'와 '이유'의 목표 범위 차이를 판별해야 하는 매력적 오답이며, D는 노트에 없는 'also at high elevation'을 끼워넣어 대조를 흐린다. 정답 A는 whereas로 두 부지 선정 이유를 정확히 대조한다. 사실 관계(ALMA 약 5,000m Chajnantor, SKA-Low Murchison 전파 간섭 최소)도 실제와 부합. 형식 정상.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "전형적인 medium 수준의 대조 문항이다. 정답은 'whereas'와 '이유'를 함께 담은 유일한 선택지라서 표면적인 단서만으로도 쉽게 고를 수 있다. B는 한쪽 망원경만 다루고, C는 이유 없이 위치만 비교하며, D는 노트에 없는 정보를 덧붙여서 각각 바로 걸러진다. 따라서 목적 범위 조정이나 확실성 판별 같은 hard 특성이 실질적으로 요구되지 않는다.",
+    "issue": ""
+   },
+   "cost": 0.1350784
+  },
+  {
+   "cid": "recipe-rhetorical_synthesis-04",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": "rhetorical_synthesis_goal_scope_match",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_source_goal_integration",
+     "purpose_scope_calibration",
+     "relation_direction_judgment"
+    ],
+    "note": "목표 '접근 방식의 변화 강조'가 명확하며, 정답 A는 노트 2·3을 Although로 대비·통합해 변화의 방향(단일 나무 띠→복원 방식 모자이크)을 정확히 드러낸다. B는 니제르 단일 성과로 지나치게 구체적, C는 연도·자금·활동을 모두 묶은 개관으로 지나치게 포괄적, D는 자금 구조라는 무관 초점에 'since 2007'로 시간성을 가장한 매력적 오답이다. 해설은 각 오답의 결함을 정확히 지적하고 모순 없음. 사실 관계(2007 AU 출범, 약 8,000km, 세네갈~지부티, 니제르 약 500만 ha 재생)도 공지된 자료와 부합. 단순 사실 선택이 아니라 두 노트를 대비 구조로 종합해야 하므로 medium 이상의 사고를 요구하며, 난이도가 계산량·길이에서 오지 않는다.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "정답이 맞다. 변화를 드러내는 문장은 'Although ... first envisioned ... has since become' 구조를 가진 A뿐이다. 그러나 오답 셋 모두 '변화'를 전혀 언급하지 않아 키워드만 대조해도 바로 걸러진다. 그래서 목표 범위를 따져 보는 판단(purpose_scope_calibration)이 실제로는 필요하지 않다. 정답 A는 노트 두 항목을 합친 것이지만 그 결합이 뻔해서 전형적인 medium 수준이다. 확실성 수준 구분이나 관계 방향 판단 같은 함정도 없다. 오답 C에 'many restoration activities'가 들어 있지만 변화를 뜻하는 표현이 없어 함정으로 작동하지 못한다.",
+    "issue": ""
+   },
+   "cost": 0.1385036
+  },
+  {
+   "cid": "recipe-rhetorical_synthesis-05",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": "rhetorical_synthesis_certainty_level_choice",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "claim_certainty_discrimination",
+     "multi_source_goal_integration"
+    ],
+    "note": "노트 3(직접 계수, 확정)과 노트 4·5(잠정)가 명확히 구분되어 있고 A가 이를 정확히 반영. B는 과잉 일반화(인과 단정), C는 확실성 과도 축소, D는 수치·불확실성 뒤바꿈으로 네 선지 모두 기능적으로 구별됨. 해설 수치·논리 일치. 가상의 연구자 이름 사용으로 저작권 문제 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "claim_certainty_discrimination"
+    ],
+    "note": "정답은 맞고 해설도 정확하다. 다만 오답 구조가 너무 뻔하다. B는 과잉 일반화, C는 확실성 과소 표현, D는 사실을 뒤바꾼 오답이라 쉽게 걸러진다. 노트의 '41%, directly counted'와 'remains uncertain'이 신호를 그대로 드러내서 표면적인 단서 대조만으로 풀린다. 확정/잠정 구분은 이 레시피의 기본 요구일 뿐이고, 그 이상의 사고(목적 범위 판단, 관계 방향 판별 등)는 요구하지 않는다. 그래서 전형적인 medium 문항 수준이다.",
+    "issue": ""
+   },
+   "cost": 0.1246628
+  },
+  {
+   "cid": "recipe-rhetorical_synthesis-06",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": "rhetorical_synthesis_dual_fact_merge",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_source_goal_integration",
+     "relation_direction_judgment",
+     "purpose_scope_calibration"
+    ],
+    "note": "노트 6개 중 목표(건조한 공기의 '서로 다른 이유')에 맞는 두 원인(고도 vs 추위)을 골라 대비해야 하며, C처럼 두 망원경을 모두 다루지만 초점이 다른 선택지가 유혹지로 기능해 단순 사실 선택을 넘어선다. A는 노트 사실과 일치하고 B(한쪽만), C(초점 불일치), D(노트 외 내용·왜곡) 모두 명확히 배제 가능. 사실 정보(ALMA 5,000m·66안테나, SPT 2,800m·10m 단일 접시, 남극 건조 공기)도 실제와 부합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "relation_direction_judgment",
+     "multi_source_goal_integration"
+    ],
+    "note": "C는 두 대상을 비교하지만 목표와 무관한 축(안테나 수·고도)을 다루는 그럴듯한 오답이라, '서로 다른 이유'라는 인과 축을 골라내야 한다. 다만 정답 A에 쓰인 'owes', 'relies instead' 같은 표현이 목표 문구와 거의 그대로 겹쳐서 난이도는 hard의 하한 수준이다.",
+    "issue": ""
+   },
+   "cost": 0.1316404
+  },
+  {
+   "cid": "recipe-rhetorical_synthesis-07",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": "rhetorical_synthesis_goal_scope_match",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_source_goal_integration",
+     "purpose_scope_calibration",
+     "relation_direction_judgment"
+    ],
+    "note": "정답 A는 수달→게→갯민숭달팽이→조류 제거→잘피 확장이라는 4단계 영양 연쇄(메모 2·3·4)를 한 문장으로 통합하고, 목표의 핵심 대비('despite poor water quality')를 'even though nutrient pollution persisted'로 정확히 반영한다. B는 먹이 관계의 단일 고리만(결과·수질 대비 누락, 과도 구체), C는 생물 목록 개관(과도 포괄), D는 출판 정보·철새(무관)로 분류가 명확하다. Hughes 2013 PNAS 연구, 1980년대 수달 복귀 등 사실 관계도 실제와 부합. 다만 D가 수달·잘피를 전혀 언급하지 않아 소거가 다소 쉬운 편이며, B와 A의 변별이 주요 난이도 요소다. hard 특성 중 multi_source 통합과 'despite' 관계 방향 판별을 실제로 요구하므로 hard 적합 판정.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "정답 A만 '이익'과 '수질 불량에도 불구하고'라는 두 요소를 모두 담고 있다. B, C, D는 'despite' 대비가 전혀 없어 키워드 대조만으로 바로 걸러진다. 그래서 여러 메모를 종합해야 하는 것처럼 보이지만 실제로는 전형적인 medium 수준이다. 오답이 정답과 겨룰 만큼 그럴듯하지 않고, 수준을 정밀하게 맞춰야 할 필요도 없다. B는 '지나치게 구체적'이라기보다 결과가 빠진 불완전한 진술에 가깝다.",
+    "issue": ""
+   },
+   "cost": 0.1684176
+  },
+  {
+   "cid": "recipe-rhetorical_synthesis-08",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": "rhetorical_synthesis_certainty_level_choice",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "claim_certainty_discrimination",
+     "multi_source_goal_integration"
+    ],
+    "note": "노트에 확정(직접 측정 40cm)과 잠정(모델 추정 30%, 불확실성 큼, 추가 데이터 필요)이 명확히 구분됨. A는 'measured' + 'suggests/might/pending' 으로 확실성 수준을 정확히 반영. B는 과잉 일반화(showed…reduce), C는 확정 사실을 'may have trapped'로 과소 축소, D는 Mehta의 해초지 결과(침식 완화)를 Castellanos 연구로 잘못 귀속(출처 혼동 오답). 해설은 각 선지 판정과 일치하며 모순 없음. 형식(노트 5개, 목표 진술, 4지선다) 적합. 다중 출처 구분(Mehta vs Castellanos)과 확실성 등급 판별을 동시에 요구하므로 medium 이상.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "claim_certainty_discrimination",
+     "multi_source_goal_integration"
+    ],
+    "note": "두 결과의 확실성 수준을 각각 따로 맞춰야 하고, D는 다른 연구 출처(Mehta)를 섞어 넣는 함정이라 medium보다 한 단계 더 생각해야 한다. 다만 B의 'showed'와 C의 'may have'처럼 단서가 비교적 눈에 띄어서 hard 기준에서는 하한선에 가깝다.",
+    "issue": ""
+   },
+   "cost": 0.1409928
+  },
+  {
+   "cid": "recipe-rhetorical_synthesis-09",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": "rhetorical_synthesis_dual_fact_merge",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_source_goal_integration",
+     "purpose_scope_calibration",
+     "relation_direction_judgment"
+    ],
+    "note": "정답 A는 행동(적혈구 간 저장)→결과(투명도 증가)→이익(포식자 회피)의 인과를 정확히 통합. B는 행동만, C는 비교 목적으로 방향이 어긋남, D는 정답과 거의 동일하나 '낮과 밤 모두'라는 노트 밖 과잉 범위를 덧붙여 미세한 범위 판별을 요구하므로 medium 이상의 사고가 필요. 과학적 수치(89%, 61%, Centrolenidae 분포)는 2022년 Science 연구와 일치.",
+    "issue": "C에 대해 '두 사실을 결합했지만'이라는 표현이 다소 느슨함(C는 투명도 사실과 청어 사실을 결합했을 뿐 핵심 행동인 혈액 저장은 빠져 있음). 그러나 이어지는 설명(행동→위장 인과를 설명하지 않음)으로 오답 근거는 정확히 제시되므로 모순은 아님."
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "A는 행동(원인)과 위장 효과(결과)를 함께 담고 있어 정답이다. 그러나 정답을 고르려면 핵심 단어 '수면 행동 → 위장 효과'를 맞추기만 하면 된다. B(사실 하나만 담음), C(비교로 목표에서 벗어남), D(노트에 없는 정보 추가)는 모두 전형적인 오답 유형이라 쉽게 걸러진다. 확실성 수준 구분, 관계의 방향 판단, 정보 범위 조정 같은 hard 특성을 실제로 요구하지 않으므로 medium 수준의 문항이다.",
+    "issue": "사소한 문제: D 해설에서 '노트에 따르면 이 효과는 잠잘 때에만 나타난다'고 했지만, 노트에는 '잠잘 때'라고만 되어 있고 '잠잘 때에만'이라는 한정은 없다. D가 틀린 이유는 노트에 없는 정보를 덧붙였기 때문이라는 점만으로 충분하므로, 정답 판정에는 영향이 없다."
+   },
+   "cost": 0.17401439999999999
+  },
+  {
+   "cid": "recipe-rhetorical_synthesis-10",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": "rhetorical_synthesis_goal_scope_match",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "purpose_scope_calibration",
+     "relation_direction_judgment"
+    ],
+    "note": "정답 C는 갈대 부패(원인)→몇 주마다 새 갈대 추가(지속적 노력)라는 인과를 결합해 목표에 정확히 부합. A는 구조·고정 방식이라는 정적 세부를 '유지'로 오인하게 하는 유효한 지나치게 구체적 오답, B는 위치·역사·현대 변화를 개관하는 지나치게 포괄적 오답, D는 목표와 무관. 노트 사실(티티카카호 위치, 토토라, 푸노)은 정확. C의 'rebuilt from the top'은 노트의 'add fresh layers to the surface'의 수용 가능한 환언. 다만 난이도는 hard 중 하한에 가까움(정답 단서가 비교적 직접적).",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "정답 C만 노트 4(갈대가 썩어 몇 주마다 덧대야 함)를 사용하고, 오답들은 모두 그 정보를 아예 다루지 않음. 따라서 '반복적 노력' 키워드만 맞추면 바로 풀리는 전형적 medium 문항임. 여러 노트를 종합하거나 범위를 보정할 필요가 없어 hard 특성이 없음. 'rebuilt from the top'은 'add fresh layers'를 약간 확대한 표현이나 허용 범위임.",
+    "issue": ""
+   },
+   "cost": 0.1495696
+  },
+  {
+   "cid": "recipe-rhetorical_synthesis-11",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": "rhetorical_synthesis_certainty_level_choice",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "claim_certainty_discrimination",
+     "multi_source_goal_integration",
+     "purpose_scope_calibration"
+    ],
+    "note": "C correctly states pitch as definitive ('found') and breeding success as tentative with caveat. A overreaches (causal claim via traffic noise), B under-hedges a directly measured result (and adds unsupported 'slightly'), D substitutes an irrelevant finding (timing delay). Requires distinguishing certainty levels across two findings and filtering distractor notes; appropriate for hard.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "claim_certainty_discrimination",
+     "multi_source_goal_integration"
+    ],
+    "note": "C는 음높이를 확정적으로, 번식 결과를 잠정적으로 정확히 표현함. A는 과잉 일반화·인과 과장, B는 확실성 과소, D는 목표와 무관한 정보 대체로 함정 구성이 적절함. 다만 목표 문장에 'certain'이 명시돼 단서가 직접적이어서 hard 난이도로서는 경계선 수준임.",
+    "issue": ""
+   },
+   "cost": 0.1541528
+  },
+  {
+   "cid": "recipe-rhetorical_synthesis-12",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": "rhetorical_synthesis_dual_fact_merge",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_source_goal_integration",
+     "purpose_scope_calibration"
+    ],
+    "note": "C는 노트 3·5를 결합하고 '대부분의 탄소가 토양/퇴적물에 있다'에서 '땅속, 살아있는 식물이 아님'이라는 공통점을 추상화해야 함. B는 '공통점'이기는 하나 탄소 저장이라는 목표 초점에서 벗어난 공통점이라 범위 판별이 필요하고, D는 실제로 사실인 외부 정보(열대우림 대비 저장량)를 끌어들여 매력적인 오답으로 작동. 단일 사실 선택을 넘어서는 종합 요구가 있어 medium 이상으로 판단. 세부: 해초 퇴적물을 'below ground'로 묶은 표현은 약간 느슨하지만 허용 범위.",
+    "issue": "D 해설의 '사실을 왜곡한다'는 표현은 다소 과함(노트에 없는 내용을 추가한 것이지 노트 내용을 왜곡한 것은 아님). 판정 논리 자체는 일관됨."
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "정답은 C가 맞다. '살아 있는 식물이 아니라'는 표현은 노트의 'most ... in soils/sediments'에서 합리적으로 추론할 수 있는 범위다. 다만 구조가 전형적인 medium 수준이다. A는 한쪽 사실만 담았고, B는 목표와 다른 사실을 묶었으며, D는 노트 밖 정보를 넣은 오답이라 바로 걸러진다. 목표 범위를 조정하거나 확실성 수준을 구분하는 등 hard 수준의 추가 사고는 사실상 요구하지 않는다.",
+    "issue": "D 해설에서 '사실을 왜곡한다'는 표현은 조금 부정확하다. D는 노트를 왜곡한 것이 아니라 노트에 없는 정보를 덧붙인 것이다. 정답 판정에는 영향이 없다."
+   },
+   "cost": 0.1775904
+  },
+  {
+   "cid": "recipe-rhetorical_synthesis-13",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": "rhetorical_synthesis_goal_scope_match",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "multi_source_goal_integration"
+    ],
+    "note": "정답 B는 노트 4·5를 인과적으로 결합해 목표를 정확히 충족하며 사실관계(1926–2013, 블랙마운틴/Albers, 1947 멕시코 톨루카 루프 와이어 바구니 기법, SF School of the Arts 개명)도 정확하다. 다만 '공예 전통(바구니 짜기 기법)'을 언급하는 선택지가 B 하나뿐이라 문항 지시문의 키워드만으로 즉시 정답이 식별된다. A는 '지나치게 구체적'이라기보다 결과만 서술한 불완전 선택지이고, C·D는 초점 자체가 달라 유혹력이 낮다. 두 노트를 통합하는 구조는 갖췄으나 변별 사고 요구량이 전형적 medium 수준을 넘지 않아 hard 적합성은 미달로 판정한다.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "전형적인 medium 문항이다. 정답 B만 '공예 전통(바구니 짜기 기법)'과 '대표 조각'을 함께 담고 있고, A·C·D는 각각 원인 누락, 초점 상실, 무관한 내용이어서 쉽게 제거된다. B가 두 메모를 결합하긴 하지만, 키워드를 대조하는 것만으로 풀 수 있어 hard 특성(목적 범위 판단, 여러 정보의 통합 등)을 실질적으로 요구하지 않는다. A는 '지나치게 구체적'이라기보다 원인이 빠진 문장이지만 레시피 항목은 충족하는 것으로 본다.",
+    "issue": ""
+   },
+   "cost": 0.1635736
+  },
+  {
+   "cid": "recipe-rhetorical_synthesis-14",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": "rhetorical_synthesis_certainty_level_choice",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "claim_certainty_discrimination",
+     "multi_source_goal_integration"
+    ],
+    "note": "노트에 확정적(직접 계수) 진술과 잠정적(상관관계·인과 불명) 진술이 공존하고, C만이 두 수준을 정확히 반영한다. A는 인과로 과잉 일반화, B는 확정 사실을 과도하게 약화, D는 Berg의 별개 연구를 Lindqvist에 귀속시킨 출처 혼동 오답으로 매력적이다. 해설은 정답과 오답 사유를 정확히 설명하며 모순 없음. 가상의 연구자·수치라 사실 오류 문제 없음. 단일 사실 선택을 넘어 두 결과의 확실성 수준 차별화와 출처 구분을 동시에 요구하므로 hard 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "claim_certainty_discrimination",
+     "multi_source_goal_integration"
+    ],
+    "note": "두 결과의 확실성을 각각 다르게 표현해야 하는 이중 보정 문항. B는 확정 사실을 약화하고 A는 상관을 인과로 과장한다. D는 출처를 혼동한 함정으로, 연구 귀속까지 판단하게 만든다. 다만 A·B의 문장 구조가 비교적 눈에 띄어 hard로서는 중상 수준이다.",
+    "issue": ""
+   },
+   "cost": 0.1360528
+  },
+  {
+   "cid": "recipe-rhetorical_synthesis-15",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": "rhetorical_synthesis_dual_fact_merge",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "purpose_scope_calibration",
+     "multi_source_goal_integration",
+     "relation_direction_judgment"
+    ],
+    "note": "정답 A는 두 망원경의 지리적 위치와 고도를 모두 종합해 'far higher than'으로 위치 차이를 명시하므로 목표에 부합. B는 ALMA 단독 정보(한쪽만), C는 '차이'를 대비하지만 비교 축이 위치가 아닌 운영 시작 연도라 목표 범위 오판을 유도하는 양질의 오답, D는 노트에 없는 인과 추론(습한 공기가 대부분 차단)을 덧붙임. 사실 관계(ALMA 차이난토르 고원 약 5,000m·2013년 본격 운영, VLA 산아구스틴 평원 약 2,100m·1980년) 정확. 해설은 각 선지 판정 근거를 정확히 기술하며 모순 없음. 노트에 6개 사실 중 4개를 선별·통합해야 하고 C처럼 '차이'이지만 축이 다른 오답을 걸러야 하므로 전형적 medium보다 목적 범위 판별이 추가로 요구됨.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "전형적인 medium 수준의 비교형 문항이다. 정답 A만 두 대상의 위치 차이를 비교한다. B는 한쪽만 담았고, C는 비교 차원이 틀렸고, D는 노트에 없는 인과를 덧붙였다. 오답이 모두 쉽게 걸러져서 목적 범위 조정이나 확실성 구분 같은 hard 특성이 실질적으로 요구되지 않는다.",
+    "issue": ""
+   },
+   "cost": 0.1546564
+  },
+  {
+   "cid": "recipe-rhetorical_synthesis-16",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": "rhetorical_synthesis_goal_scope_match",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_source_goal_integration",
+     "purpose_scope_calibration",
+     "relation_direction_judgment"
+    ],
+    "note": "정답 A는 개입(2005년 Kok-Aral 댐)과 회복 결과(수위 상승·어류 복귀)를 인과적으로 결합하고 '쇠퇴하던 호수'라는 맥락도 담아 '부분적 역전'이라는 목표에 정확히 부합한다. B는 댐이 빠진 지나치게 세부적인 선택지, C는 댐을 언급하지만 '다르게 영향'으로 회복 방향을 흐린 포괄적 개관, D는 쇠퇴 원인만 다뤄 목표와 무관하다. 특히 C가 개입 정보를 포함하고 있어 단순 키워드 매칭으로는 풀리지 않고, 회복이라는 방향성 판별과 범위 조정이 필요하므로 hard 특성을 충족한다. 노트·사실 관계(Kok-Aral 댐 2005년 완공, 북아랄 수위 회복, 어류 복귀)도 실제와 부합한다.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_source_goal_integration",
+     "purpose_scope_calibration"
+    ],
+    "note": "정답 A는 개입(댐), 범위(북부만), 회복(수위·어류)을 함께 묶는다. C는 포괄적이지만 그럴듯한 오답이어서 범위를 따져 보게 만든다. B는 너무 세부적이고 D는 주제에서 벗어난다. 다만 B와 D는 비교적 쉽게 걸러진다.",
+    "issue": ""
+   },
+   "cost": 0.1595116
+  },
+  {
+   "cid": "recipe-rhetorical_synthesis-17",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": "rhetorical_synthesis_certainty_level_choice",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "claim_certainty_discrimination",
+     "multi_source_goal_integration"
+    ],
+    "note": "노트에 DNA로 확인된 확정 사실(크르카강 수달의 신호가재 섭식)과 잠정적 추정(확산 억제 가능성, '시사하지만 입증 못함')이 함께 제시되고, A는 두 층위를 정확히 반영한다. B는 64% 수치를 근거로 확산 억제를 '보여주었다'고 과잉 일반화, C는 확정 사실을 'might'로 축소, D는 사바강 결과(주로 토종 어류)를 크르카강에 잘못 귀속해 각각 명확히 오답이다. 해설은 정답·오답 근거를 모순 없이 뒷받침한다. 확실성 수준 구분과 두 강의 정보 분리라는 추가 사고를 요구하므로 medium을 넘는다. 다만 A의 'though her data do not establish this'가 노트 문구를 거의 그대로 옮겨 단서가 다소 직접적인 점은 난이도를 약간 낮추는 요인이다. 가공 연구자 사용과 신호가재의 슬로베니아 침입종 지위는 사실적 문제 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "claim_certainty_discrimination",
+     "multi_source_goal_integration"
+    ],
+    "note": "확정 진술(DNA 확인)과 잠정 진술(확산 억제 시사)을 구분하는 문항으로, 과잉 일반화(B), 확실성 과소화(C), 강 혼동(D) 오답이 고르게 설계됨. D는 강을 혼동한 사실 오류라 확실성 판단 없이도 걸러지고, B·C도 노트 문구와 대조하면 비교적 쉽게 제거돼 hard로서는 경계선 수준임.",
+    "issue": ""
+   },
+   "cost": 0.1604608
+  },
+  {
+   "cid": "recipe-rhetorical_synthesis-18",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": "rhetorical_synthesis_dual_fact_merge",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "purpose_scope_calibration",
+     "claim_certainty_discrimination",
+     "relation_direction_judgment"
+    ],
+    "note": "정답 A는 두 동물의 식단 대처(씨앗 수분 vs 농축 소변)를 'Whereas'로 정확히 대조하며 노트 표현(most→largely)을 과장 없이 반영. B는 한쪽만, C는 두 동물을 묶었으나 공통점(서식지·당뇨 연구)이라 '대조' 목표와 어긋남, D는 rarely→never, '담수 전부 공급' 등 노트에 없는/왜곡된 내용. 특히 C(목표 범위 판별)와 D(확실성 과장 탐지)가 매력적 오답으로 기능해 medium 이상의 사고를 요구. 사실 측면: 노트 1의 '아시아·북아프리카'는 두 종의 분포를 합쳐 서술한 것으로 허용 가능, 소변 농축 '약 4배'도 대략적 수치로 무리 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "전형적인 medium 수준이다. 대조형 정답(Whereas)이 표면 구조만으로 바로 식별된다. B는 한쪽 대상만 다루고, C는 주제에서 벗어나며, D는 never/entirely 같은 절대어로 쉽게 배제된다. 확실성 구분이나 범위 조정 같은 추가 사고가 실질적으로 필요하지 않다. D의 과장 표현이 너무 눈에 띄어 함정 역할을 하지 못한다.",
+    "issue": ""
+   },
+   "cost": 0.1765484
+  },
+  {
+   "cid": "recipe-rhetorical_synthesis-19",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": "rhetorical_synthesis_goal_scope_match",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_source_goal_integration",
+     "purpose_scope_calibration",
+     "relation_direction_judgment"
+    ],
+    "note": "목표(수리 방식의 '특별함' 강조)가 명확하고, 정답 A는 노트 3·4를 '손상을 숨기는 일반 수리'와의 대비 구조로 종합해 목적 범위에 정확히 맞는다. B는 재료·공정만 나열한 과잉 구체, C는 기원·재료·일화를 망라한 과잉 포괄 개관, D는 수리 방식이 아닌 인기를 부각하는 초점 이탈 오답으로 각각 기능한다. 특히 D가 '눈에 띄는 사실'이라는 점에서 그럴듯한 유인가 역할을 해, 수험생이 '수리 방식 자체의 특이성'과 '기법의 인기'를 구분해야 하므로 medium을 넘는 범위 판별이 요구된다. 사실 관계(우루시 옻칠, 금분, 아시카가 요시마사 15세기 후반 기원설)도 정확하며 해설과 정답이 일치한다.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "purpose_scope_calibration"
+    ],
+    "note": "정답은 타당하다. 다만 전형적인 medium 수준이다. 정답에만 'Unlike ... hide damage' 대비 구조와 'distinctive'를 직접 가리키는 표현이 있어서 키워드 대응만으로 바로 고를 수 있다. 오답 B·C·D도 쉽게 소거된다. 확실성 구분, 관계 방향 판단 같은 추가 사고를 요구하지 않는다.",
+    "issue": ""
+   },
+   "cost": 0.16007960000000002
+  },
+  {
+   "cid": "recipe-rhetorical_synthesis-20",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": "rhetorical_synthesis_certainty_level_choice",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "claim_certainty_discrimination",
+     "multi_source_goal_integration",
+     "purpose_scope_calibration"
+    ],
+    "note": "정답 A는 'confirmed' 실험 결과를 'showed'로, 인과를 입증하지 못한 현장 조사를 'suggest—though they do not prove—may'로 표현해 목표에 정확히 부합. B는 과잉 일반화(proved/draw), C는 확정 결과 축소(hints/might), D는 노트에 없는 해석('less able to resist')을 끌어오고 노트가 잠정적이라 명시한 산호초 패턴 대신 단순 관찰 사실을 잠정 진술로 바꿔 오답으로 성립. 네 번째 노트의 \"client fish' protective mucus\"는 \"client fish's\"의 오타로 보이나 정답 판정에는 영향 없음. 가공 연구자(Teresa Okafor)로 저작권·사실 오류 문제 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "claim_certainty_discrimination"
+    ],
+    "note": "정답 A는 맞다. 다만 이 문항은 전형적인 medium 수준이다. B와 C는 'proved'와 'hints'라는 어휘만 보고도 쉽게 제외되고, 확정적 진술과 잠정적 진술이 노트에서 'confirmed', 'could not show', 'further experiments are needed'로 직접 표시되어 있다. D도 노트에 없는 해석이라 쉽게 걸러진다. 여러 정보를 종합하거나 목적에 맞게 범위를 판단하는 등 hard 수준의 추가 사고는 거의 요구되지 않는다.",
+    "issue": "D 해설의 \"다른 연구 내용과 혼동했다\"는 표현은 다소 부정확하지만(실제로는 노트에 없는 해석을 덧붙인 것이 문제임) 결론은 맞다."
+   },
+   "cost": 0.16763679999999997
+  },
+  {
+   "cid": "recipe-rhetorical_synthesis-21",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": "rhetorical_synthesis_dual_fact_merge",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_source_goal_integration",
+     "purpose_scope_calibration"
+    ],
+    "note": "정답 A는 두 망원경 각각의 부지 특징과 그로 인한 이점을 모두 결합해 목표 충족. B는 ALMA만(한쪽 사실), C는 두 망원경 모두 언급하나 '이점'이 빠져 목표 미달(매력적 오답), D는 '도시 전파 간섭 차단'이라는 노트 외 내용 포함. 사실관계(ALMA 5,000m Chajnantor, Arecibo 305m 싱크홀) 정확. 6개 노트 중 목표에 맞는 정보(부지 특징+이점)를 골라 두 대상에 대해 동시에 종합해야 하므로 medium 이상의 사고 요구. 다만 D가 두 이점을 동일 원인으로 묶어 비교적 쉽게 배제되는 점은 난도를 다소 낮춤.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "정답은 타당하다. 다만 문항 구조가 전형적인 medium 수준이다. B는 한쪽만 담았고, C는 이점이 빠진 나열이며, D는 노트에 없는 내용이어서 오답이 곧바로 걸러진다. 정답은 'both telescopes' + 'benefited'라는 키워드만 맞춰 보면 바로 고를 수 있다. 확실성 구분, 관계 방향 판단, 범위 조정 같은 추가 사고는 요구되지 않고, 길이만 늘어난 수준이다.",
+    "issue": ""
+   },
+   "cost": 0.1436144
+  },
+  {
+   "cid": "recipe-text_structure_purpose-00",
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "recipeId": "text_structure_purpose_chain_role_synthesis",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_step_logical_chain_integration",
+     "evidence_role_discrimination"
+    ],
+    "note": "지문은 기존 가정 → Diallo의 의문 관찰 → 재생 실험(밑줄) → 영역 신호 결론의 4단계 구조. 정답 A는 밑줄 문장이 앞 관찰을 잇고 뒤 결론을 뒷받침하는 실험 결과임을 정확히 기술하며, 이는 앞뒤 단계를 모두 연결해야 확정된다. B는 직전 문장(최초 의문 관찰)의 역할, D는 마지막 문장(전체 결론)의 역할로 인접 단계·전체 목적 혼동형 오답으로 설계됨. C는 암컷이 녹음을 무시했다는 결과와 정면 배치. 해설은 각 선택지 판정을 지문 근거로 정확히 뒷받침하며 모순 없음. 가상의 연구자/실험이지만 village weaver가 서아프리카 조류라는 배경은 사실과 부합. 문장 길이는 적정하고 난이도는 단계 연결에서 비롯됨. 다만 A가 유일하게 '근거' 역할을 기술하는 선택지라 단계 역할만 파악하면 비교적 빨리 좁혀지는 점은 상위 hard 대비 다소 평이할 수 있음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_step_logical_chain_integration",
+     "evidence_role_discrimination"
+    ],
+    "note": "지문은 기존 가정 → 반례 관찰 → 실험 → 결론의 4단계로 짜여 있다. A는 실험의 앞 단계(관찰)와 뒤 단계(결론)를 모두 연결해야 정답으로 확정된다. 오답도 각각 역할이 분명하다. B는 바로 앞 단계의 역할, C는 근거 방향을 뒤집은 것, D는 개별 문장 기능과 전체 결론을 혼동한 것이다. 지문 길이도 적절하다.",
+    "issue": "사소한 점: 해설은 실험이 앞 관찰을 '확인하려는' 것이라고 하지만, 실제로는 그 관찰이 낳은 의문(가설)을 검증하는 실험이다. 정답 판단에는 영향이 없다."
+   },
+   "cost": 0.188514
+  },
+  {
+   "cid": "recipe-text_structure_purpose-01",
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "recipeId": "text_structure_purpose_stance_contrast_inference",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "inter_text_perspective_inference",
+     "reversed_relation_resistance",
+     "evidence_role_discrimination"
+    ],
+    "note": "Ortiz(홍수 원인)와 Okafor(정치적 붕괴, 점진적 쇠퇴) 두 입장이 명확히 구분됨. 밑줄 문장은 실트층 퇴적 '이전'에 거주 가옥이 절반 가까이 감소했다는 자료로, 명시적 반박 없이 Ortiz의 인과 설명을 시간 순서상 무력화함 — A가 정확. B는 시간 순서를 뒤집어 입장을 바꾼 오답, C는 Okafor 방법론만 보고 신뢰성 비교를 지어낸 오답, D는 지문에 없는 절충 입장을 창작한 오답으로 레시피 요건 충족. 두 입장의 시간 관계 비교와 암묵적 함의 추론이 필요하므로 medium 수준을 넘는 hard 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "inter_text_perspective_inference",
+     "reversed_relation_resistance",
+     "evidence_role_discrimination"
+    ],
+    "note": "정답 A가 옳음. 실트층보다 감소가 먼저 일어났다는 시간 순서를 근거로 Ortiz의 인과 주장을 암묵적으로 반박한다는 점을 추론해야 함. B는 시간 순서를 뒤집은 오답, C는 Okafor 쪽만 본 데다 지문에 없는 신뢰성 비교를 덧붙인 오답, D는 지어낸 절충 입장. 매력적인 오답의 강도는 다소 약하지만 hard 수준으로 인정 가능.",
+    "issue": ""
+   },
+   "cost": 0.16353
+  },
+  {
+   "cid": "recipe-text_structure_purpose-02",
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "recipeId": "text_structure_purpose_evidence_scope_match",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "evidence_role_discrimination",
+     "multi_step_logical_chain_integration",
+     "reversed_relation_resistance"
+    ],
+    "note": "밑줄 문장은 지지 근거(오후 2.1°C)와 한계(야간 소멸, 공간적 미검출)를 동시에 담고 있어, 수험자가 '가정 → 실험 → 제한된 결과 → 좁혀진 결론'의 논리 사슬을 재구성해야 정답 A를 고를 수 있다. B는 범위 과장, C는 야간 결과를 무시한 부분 반영(어느 시간대든), D는 나무→냉각 인과를 뒤집은 선택지로 레시피 오답 유형을 모두 충족한다. 지문의 Phoenix 실험은 가상의 연구자 설정으로 저작권·사실 오류 소지 없음. 해설은 정답과 오답 근거를 정확히 설명하며 모순 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "evidence_role_discrimination"
+    ],
+    "note": "정답은 맞지만 오답이 너무 쉽게 걸러진다. B는 밑줄 문장 내용과 정면으로 어긋나고, C의 '어느 시간대든'은 지문의 '야간 소멸'과 바로 충돌한다. D는 지문에 근거가 전혀 없는 인과 역전이다. A만 '한계'와 '좁은 역할'을 모두 담고 있어 표면 대조만으로 고를 수 있으므로 전형적 medium 수준이다. 공간 한계만 빠뜨린 부분 반영 선택지처럼, 정답과 미세하게 다른 함정이 없다.",
+    "issue": ""
+   },
+   "cost": 0.149074
+  },
+  {
+   "cid": "recipe-text_structure_purpose-03",
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "recipeId": "text_structure_purpose_chain_role_synthesis",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_step_logical_chain_integration",
+     "evidence_role_discrimination",
+     "reversed_relation_resistance"
+    ],
+    "note": "지문은 가정(단일 종·햇빛 차단)→2021 조사의 외견상 반박→유전자 분석(두 종)→결론(반박 무효, 종별 검증)의 4단계 사슬을 가짐. 밑줄 문장은 조사의 반박이 의존하던 '단일 종' 전제를 무너뜨려 마지막 문장을 예비하므로 A가 정확히 옳음. B는 관계 방향을 뒤집은 오답(반박 강화 vs 약화), C는 직전 문장의 기능, D는 개별 기능을 전체 목적으로 격상한 오답으로 레시피 요건에 부합. 해설은 정답 및 오답 근거를 논리적으로 일관되게 설명하며 오류 없음. 가상 시나리오로 사실 오류·저작권 문제 없음. 문항 형식은 디지털 SAT 표준에 부합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_step_logical_chain_integration",
+     "evidence_role_discrimination",
+     "reversed_relation_resistance"
+    ],
+    "note": "밑줄 문장은 조사 결과가 반증으로 성립하려면 필요했던 '단일 종' 전제를 무너뜨리고, 이어지는 결론으로 연결된다. 그래서 정답 A가 유일하게 옳다. B는 문장의 역할을 반대로 읽었고, C는 바로 앞 문장의 역할과 혼동했으며, D는 지문 전체 목적을 왜곡했다. A의 '여전히 검증할 수 있다'는 표현은 마지막 문장의 '종별로 검증 중이다'와 일치한다. 다만 D는 너무 쉽게 배제되는 약한 오답이다.",
+    "issue": ""
+   },
+   "cost": 0.16507599999999997
+  },
+  {
+   "cid": "recipe-text_structure_purpose-04",
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "recipeId": "text_structure_purpose_stance_contrast_inference",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "inter_text_perspective_inference",
+     "multi_step_logical_chain_integration",
+     "evidence_role_discrimination",
+     "reversed_relation_resistance"
+    ],
+    "note": "Weiss(생리적 한계·감수되는 오류)와 Okafor(거리별 산포 변화 관찰)의 입장이 명확히 구분되고, 지문은 \"Okafor has not responded directly\"라고 명시해 반응을 추론하도록 요구함. 밑줄 문장은 산포 패턴(가까움=넓음, 멂=좁음)과 먹이원 형태(넓은 꽃밭 vs 단일 나무)를 연결하는 두 번째 단계의 근거로, 이를 종합해야 \"산포가 목표물 크기에 맞춰 조정된다 → 단순 오류가 아님\"이라는 결론에 도달하므로 A가 유일하게 타당. B는 동일 근거를 반대 결론으로 연결한 입장 뒤바꿈, C는 Weiss의 근거로 오인한 한쪽 입장 오답, D는 지문에 없는 측정 방법 왜곡을 지어낸 오답. 해설과 정답 일치, 사실 오류·저작권 문제 없음. 실제 꿀벌 연구(Tautz/Weihmann 등의 tuned-error 가설)와 유사한 소재이나 인물명과 서술은 가공이며 특정 저작물 복제로 보이지 않음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_step_logical_chain_integration",
+     "inter_text_perspective_inference",
+     "reversed_relation_resistance"
+    ],
+    "note": "정답 A가 맞다. 이를 고르려면 세 가지를 연결해야 한다. 산포는 먹이원이 가까울수록 크고, 가까운 먹이원은 넓은 꽃밭이며, 그렇다면 산포는 목표물의 크기에 맞춘 적응으로 볼 수 있다. 여기서 Weiss의 '감수하는 오류'설을 Okafor가 반박할 것이라는 점을 간접적으로 추론해야 한다. B는 입장을 뒤집은 오답, C는 한쪽 입장만 근거로 삼은 오답, D는 지문에 없는 내용을 지어낸 오답이다.",
+    "issue": ""
+   },
+   "cost": 0.17716600000000002
+  },
+  {
+   "cid": "recipe-text_structure_purpose-05",
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "recipeId": "text_structure_purpose_evidence_scope_match",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_step_logical_chain_integration",
+     "evidence_role_discrimination",
+     "reversed_relation_resistance"
+    ],
+    "note": "밑줄 문장은 '전체 차량 통행량 불변'이라는 선행 결과와 대비(however)되며, '대안이 실현 가능한 특정 범주'라는 조건부·좁은 결론의 직접 근거로 기능한다. A는 가정(넓음)-결과(불변)-추가 발견(특정 범주)-결론(조건부)의 4단계 사슬을 정확히 반영. B는 범주→전반 과장, C는 결론과의 연결 부정(축소), D는 '도로→카고바이크 전환'을 뒤집은 인과 역전으로 각 오답 유형이 명확히 분리됨. 정답 도출에 가정·null 결과·conclusion 세 요소를 동시에 추적해야 하므로 medium을 넘어서는 통합 사고를 요구. 지문·선택지 형식 및 해설 모두 일관.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "evidence_role_discrimination",
+     "reversed_relation_resistance",
+     "multi_step_logical_chain_integration"
+    ],
+    "note": "정답 A가 옳다. 근거 범위(배송 차량, 대안이 실현 가능한 경우)와 결론 범위가 일치한다. B는 과장, D는 인과 역전 오답이다. C는 근거를 결론과 무관하다고 보는 오답이라 '근거의 일부만 반영한 좁은 해석' 항목을 엄밀히 충족하지 못한다. A만 'narrower'와 조건부 표현을 써서 다소 눈에 띄지만, hard 수준으로는 수용 가능하다.",
+    "issue": "C를 '부분 반영·축소'로 분류했지만, 실제로는 근거의 일부만 반영한 좁은 해석이라기보다 무관성 오답에 가깝다. 다만 해설이 정답을 뒷받침하는 논리 자체에는 문제가 없다."
+   },
+   "cost": 0.1682652
+  },
+  {
+   "cid": "recipe-transitions-00",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": "transitions_purpose_filter_sentence",
+   "detIssues": [
+    "contract:contract_transition_parallel"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.036208
+  },
+  {
+   "cid": "recipe-transitions-01",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": "transitions_contradictory_evidence_synthesis",
+   "detIssues": [
+    "contract:contract_transition_parallel"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.045664
+  },
+  {
+   "cid": "recipe-transitions-02",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": "transitions_distant_referent_link",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "non_local_referent_tracking",
+     "multi_step_logical_inference"
+    ],
+    "note": "정답 A 타당: 'it'=Saltbush이며, 잎 유지→수분 손실 많을 것이라는 암묵적 기대(첫 문장의 sagebrush 원리에서 도출)와 실제 결과의 대비. 다만 'surprisingly'가 강한 단서로 작용해 추론 부담이 다소 줄어드는 점은 약점. 삽입구 'rooted right beside the sagebrush'로 인접 명사 오인 유도 설계는 충족. 사실관계(sagebrush 여름 낙엽, saltbush 소금 결정 반사) 문제 없음.",
+    "issue": "해설이 'it' 바로 앞의 명사를 sagebrush라 했으나 실제 직전 명사는 'months'이며 sagebrush는 삽입구 안에 있음(경미한 표현 부정확, 논리에는 영향 없음)."
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "'it'는 바로 앞 문장의 주어 Saltbush를 가리키는데, 이는 매우 자연스러운 지시라서 비국소적 지시 추적이라는 설계 의도가 거의 구현되지 않았다. 문항은 결국 '잎 유지 → 예상 밖의 적은 수분 손실'을 잇는 전형적인 양보 전환어 문항으로, medium 수준이다. 'Likewise'는 sagebrush와 결과가 비슷하다는 점에서 어느 정도 그럴듯하지만, 'surprisingly'가 대비를 분명히 하므로 정답 A는 유일하게 성립한다.",
+    "issue": "B 해설의 논리가 약하다. 'Likewise'는 같은 방식을 요구하지 않고 결과(적은 수분 손실)가 비슷하기만 하면 되므로, 'saltbush는 잎을 떨어뜨리지 않아 같은 방식이 아니다'라는 반박은 불완전하다. B를 배제하는 진짜 근거는 'surprisingly'와, 바로 앞 문장(잎 유지)과의 대비 관계다."
+   },
+   "cost": 0.20166
+  },
+  {
+   "cid": "recipe-transitions-03",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": "transitions_purpose_filter_sentence",
+   "detIssues": [
+    "contract:contract_transition_parallel"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.027479200000000002
+  },
+  {
+   "cid": "recipe-transitions-04",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": "transitions_contradictory_evidence_synthesis",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_step_logical_inference"
+    ],
+    "note": "정답 D 타당: 마지막 문장은 직전 문장을 반박하지 않고(A 배제) 두 관찰을 통합해 결론을 내리므로 'Taken together,'가 적절. A는 'Yet'으로 이미 처리된 대조를 반복 적용하는 함정으로 잘 작동함. 다만 체크리스트 3('한쪽 관찰만 반영한 전환어')에 해당하는 오답이 실질적으로 없음—B는 예시 오류, C는 유사 추가 오류로 모두 '한쪽 관찰 반영'과는 거리가 있음. 'Therefore' 류가 정답과 경합할 수 있어 배제한 것으로 보이나 그 결과 레시피 항목 3이 비어 있음. Slabbekoorn의 도시 박새 음높이 연구는 실존하며 지문 서술은 원문 복제 아님.",
+    "issue": "B(For example)를 '둘째 관찰 하나만 반영한 오답'으로 분류한 근거가 약함. 'For example'은 어느 한 관찰을 반영하는 전환어가 아니라 단순 예시 오류이며, 해설 자체의 핵심 논리(마지막 문장이 사례가 아니라 결론)는 맞지만 레시피 역할 부여는 억지스러움."
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_step_logical_inference"
+    ],
+    "note": "정답 D는 타당하다. 다만 'Yet'으로 이미 대조가 드러나 있어서 However가 꽤 매력적인 오답이 되고, 이것이 난이도를 만든다. 한쪽 관찰만 반영한 오답 설계는 약하다. B는 실제로는 관계 유형이 틀린 오답이다. 'Thus/Therefore' 같은 다른 결론 전환어가 선택지에 없으므로 정답은 유일하다.",
+    "issue": "B를 '둘째 관찰 하나만 반영한 오답'이라고 했는데 실제 설명은 예시 관계가 맞지 않는다는 내용이다. 한쪽 관찰만 반영했다는 분류가 다소 억지스럽지만, 정답을 뒷받침하는 논리 자체에는 문제가 없다."
+   },
+   "cost": 0.19994
+  },
+  {
+   "cid": "recipe-transitions-05",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": "transitions_distant_referent_link",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": false,
+    "fit": false,
+    "which": [],
+    "note": "정답 D는 타당하고 해설도 일관됨. 그러나 '비인접 지시 대상 추론' 설계가 실질적으로 작동하지 않음: 마지막 문장의 주어 'the first species'가 문두에 명시되어 있고 관계절 'whose petals…'는 그 바로 뒤에 붙어 있어 지시 관계에 구조적 거리나 모호성이 없음. 'these closed blossoms'는 관계절 내부의 부사적 위치 정보일 뿐이라 수험자가 이를 주어로 오인할 가능성이 낮고, 따라서 정답 도출이 지시 대상 파악에 의존하지 않음(체크리스트 1·2 미충족). 'The first species… / The second…' 병렬 구조만으로 By contrast가 즉시 드러나 전형적 medium 수준. Likewise 오답은 '옆에 자란다→비슷하다'는 매우 약한 유인력. 사실 관계(제비꽃의 폐쇄화 자가수분)는 허용 범위.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "정답 D는 맞다. 하지만 주어 'the first species'가 문장 맨 앞에 명시되어 있어서 지시 대상을 찾는 데 실질적인 어려움이 없다. 삽입된 수식어는 방해 요소 역할만 한다. 정답이 지시 대상 파악에 의존하지도 않는다. 어느 쪽을 지시 대상으로 보든 '스스로 수분 vs 벌 필요'라는 대조가 분명하기 때문이다. 결과적으로 전형적인 medium 수준의 대조 전환어 문항이며, non_local_referent_tracking의 hard 특성을 실제로 구현하지 못했다.",
+    "issue": "A 오답 해설('closed blossoms를 비교 대상으로 잘못 잡아 비슷하다고 봄')이 억지스럽다. 비교 대상을 그렇게 잡더라도 수분 방식은 여전히 반대이므로 오답 논리가 약하다."
+   },
+   "cost": 0.20003160000000003
+  },
+  {
+   "cid": "recipe-transitions-06",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": "transitions_purpose_filter_sentence",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "정답 B는 옳고 해설도 일관됨. 그러나 '결함으로 여겼다 → 그럼에도 일부러 남겼다'는 인접 문장 간 표면적 대조로 바로 풀리며, 'deliberately'가 강한 단서를 줌. A(As a result)와 D(Consequently)는 사실상 동의어라 둘 다 자동 소거되고, A가 '저가 장비'라는 부수적 사실과 그럴듯하게 연결된다는 해설 주장은 실제 문맥상 설득력이 약함(앞 문장 핵심은 장비가 아니라 archivists의 평가). 글의 목적(작업 도구로서 기록) 설정은 있으나 정답 선택에 그 추상적 목적 판단이 실제로 요구되지 않아 medium 수준에 머묾.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "정답 B는 맞다. '결함으로 여겨졌다'에 '그럼에도 의도적으로 남겼다'가 이어지는 전형적인 양보 관계이며, deliberately와 leave uncut이 강한 단서가 된다. 그러나 As a result와 Consequently가 같은 뜻이라 둘 다 탈락시키는 소거법만으로 정답이 거의 드러나므로 오답 설계가 약하다. 또 A가 부수적 사실(저가 장비)과 실제로 연결되도록 설계되지 않아 체크리스트 3번을 충족하지 못한다. 결국 '목적 대 결과' 구분 없이도 표면적 대조만 보면 풀리므로, 전형적인 medium 수준의 양보 전환어 문항이다.",
+    "issue": "A와 D를 서로 다른 이유로 오답 처리했지만, 두 선택지는 사실상 같은 뜻의 인과 전환어여서 A와 D의 구분이 억지스럽다."
+   },
+   "cost": 0.1786992
+  },
+  {
+   "cid": "recipe-transitions-07",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": "transitions_contradictory_evidence_synthesis",
+   "detIssues": [
+    "contract:contract_transition_parallel"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.0339
+  },
+  {
+   "cid": "recipe-transitions-08",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": "transitions_distant_referent_link",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "non_local_referent_tracking"
+    ],
+    "note": "앞 문장(눈을 유지한 위쪽 도롱뇽)과 마지막 문장(눈을 잃은 깊은 곳 도롱뇽)의 대비이므로 'By contrast'가 유일하게 타당. 삽입구 'like the blind cavefish'가 인접 유사성 신호로 작용해 A(Similarly)를 유인하며, B는 문법적으로만 자연스러운 인과 오답, D는 주제 전체를 지시 대상으로 오인한 오답으로 레시피 요건을 충족. 문장은 짧고 단순하며 사실 관계(오자크 동굴 도롱뇽·눈먼 동굴어)도 무리 없음. 해설은 정답과 오답 근거를 모순 없이 뒷받침함. 가상의 인물 사용으로 저작권 우려 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "non_local_referent_tracking"
+    ],
+    "note": "삽입된 비교구 'like the blind cavefish'가 Similarly 쪽으로 유도하는 함정이다. 전환어는 이 비교구가 아니라 앞 문장의 위쪽 도롱뇽과의 관계를 기준으로 골라야 한다. 다만 눈을 유지한 집단과 눈을 잃은 집단의 대비가 꽤 분명해서 hard 수준으로는 경계선에 가깝다.",
+    "issue": "D 해설의 '지문 전체 주제인 두 집단을 지시 대상으로 삼았다'는 오답 근거 설명은 다소 억지스럽지만, 정답 근거와 충돌하지는 않는다."
+   },
+   "cost": 0.1681456
+  },
+  {
+   "cid": "recipe-transitions-09",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": "transitions_purpose_filter_sentence",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "goal_vs_content_discrimination",
+     "abstract_relation_beyond_surface_contrast"
+    ],
+    "note": "정답 B 검산: 마지막 문장(단어 목록 적음·대화 400시간 많음)은 둘째 문장의 목적(사전이 아니라 실제 사용 기록)의 귀결이므로 Accordingly가 유일하게 타당. A(Nevertheless)는 첫 문장의 부수 정보(소액 지원금·두 시즌)에 걸어 '제약에도 불구하고'로 읽히게 유도하는 함정으로, 핵심 강조점(아카이브의 구성)과 어긋남 — 체크리스트 3 충족. C는 유사 사례 추가, D는 시간 관계로 논리 방향 오류 — 체크리스트 4 충족. 해설은 정답·오답 근거를 정확히 설명하며 모순 없음. 문장 길이·어휘는 표준 수준. 참고: 'Tuwali'는 실제 필리핀 이푸가오 계열 언어명(화자 수 수만 명)이며 가공 인물·수치와 결합되어 있음 — 가공 시나리오로 보아 사실 오류로 판정하지는 않으나, 출제 시 가공 언어명 사용이 더 안전함.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "goal_vs_content_discrimination"
+    ],
+    "note": "첫 문장의 자원 제약(적은 지원금, 두 시즌)이 '그런데도 400시간'이라는 Nevertheless 오독을 유도함. 정답을 고르려면 마지막 문장이 기록의 양이 아니라 구성(단어 목록은 적고 대화는 많음)을 말하고 있으며, 그것이 둘째 문장의 목표와 맞아떨어진다는 점을 알아야 함. 목적과 결과를 가려내는 hard 특성이 제대로 구현됨. Similarly와 Earlier는 비교적 쉽게 걸러짐.",
+    "issue": ""
+   },
+   "cost": 0.1868052
+  },
+  {
+   "cid": "recipe-transitions-10",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": "transitions_contradictory_evidence_synthesis",
+   "detIssues": [
+    "contract:contract_transition_parallel"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.03588
+  },
+  {
+   "cid": "recipe-transitions-11",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": "transitions_distant_referent_link",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "non_local_referent_tracking",
+     "multi_step_logical_inference"
+    ],
+    "note": "정답 D 타당: 첫 문장의 예측(절벽 개체가 늦게 핌)과 마지막 문장의 결과(3월 말, 4월 초보다 빠름)를 대조. 'those same winds'가 인접 명사(tall rocks)가 아닌 첫 문장의 ocean winds를 가리키게 설계되어 비국소 지시 추적을 요구하며, 날짜 비교(late March < early April)로 예측 반박을 확인하는 소규모 다단계 추론 포함. B(Therefore)는 분사구 'battered by those same winds'를 원인으로 오독하면 문법적으로 자연스러운 전형적 오답, A(Similarly)는 인접 문장만 보고 '개화했다'는 유사성으로 오독한 오답. 다만 'well ahead of'라는 명시적 단서로 대조가 비교적 투명해 hard 중 하위 수준.",
+    "issue": "'well ahead of their sheltered relatives'가 첫 문장을 가리킨다고 했으나 실제 직접 지시 대상은 바로 앞 문장의 cove plants(첫 문장에서도 소개됨)로, 사소한 부정확성이나 논리 전개에는 영향 없음."
+   },
+   "opus": {
+    "correct": true,
+    "comp": false,
+    "fit": false,
+    "which": [],
+    "note": "'those same winds'가 바로 앞의 'tall rocks'가 아니라 첫 문장의 바람을 가리켜서 멀리 떨어진 지시 대상이라는 장치는 형식적으로 있습니다. 하지만 정답을 고르는 데 그 지시 관계를 파악할 필요는 없습니다. 'Lena Ortiz predicted ... later'와 'well ahead of their sheltered relatives'만 봐도 예측과 결과가 반대라는 점이 곧바로 드러납니다. A는 인접 명사를 지시 대상으로 잘못 본 오답이 아니라 단순히 유사성으로 읽은 오답이라서 체크리스트 3번을 충족하지 못합니다. 'Contrary to expectations'는 전형적인 medium 문항의 예측-반박 구조이고, 지문에 'predicted'라는 명시적 단서가 있어서 hard 수준의 추가 사고를 요구하지 않습니다.",
+    "issue": ""
+   },
+   "cost": 0.1959036
+  },
+  {
+   "cid": "recipe-transitions-12",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": "transitions_purpose_filter_sentence",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "goal_vs_content_discrimination",
+     "non_local_referent_tracking"
+    ],
+    "note": "첫 문장의 '목적은 집계가 아니라 귀소성'이라는 강조점을 두 문장 떨어진 빈칸까지 추적해야 하며, 바로 앞 문장의 인상적 개체 수 감소(부수적 사실)에 끌려 A(Consequently)를 고르지 않도록 설계됨. 'Even so'는 '감소라는 눈에 띄는 결과에도 불구하고 핵심 발견은 원래 목적인 귀소성'이라는 구조에 유일하게 부합. C는 재진술 아님, D는 유사 관계 아님. 해설의 오답 분석도 정확. 문장 길이는 다소 길지만 어휘·구문은 SAT 표준 범위.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "goal_vs_content_discrimination"
+    ],
+    "note": "정답은 B입니다. 앞 문장은 표지 작업 규모와 개체 수 감소라는 부수적 결과를 다룹니다. 마지막 문장은 '그럼에도' 가장 중요한 발견이 원래 목적이던 귀소성이었다고 초점을 되돌리므로 양보 관계가 맞습니다. A는 서식지 축소라는 부수적 사실에 끌리는 인과 오답, C는 재진술 오답, D는 유사 오답입니다. 목적과 내용을 가려내는 요소가 있어 hard 특성 하나는 충족합니다. 다만 'most significant finding'이라는 표현이 대조를 꽤 직접적으로 드러내서 medium과의 차이는 크지 않습니다.",
+    "issue": ""
+   },
+   "cost": 0.1729152
+  },
+  {
+   "cid": "recipe-transitions-13",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": "transitions_contradictory_evidence_synthesis",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_step_logical_inference",
+     "abstract_relation_beyond_surface_contrast"
+    ],
+    "note": "실험실(백화 저항성 우수)과 현장(성장 느림)이라는 상충 관찰 뒤에 '트레이드오프' 종합 결론이 이어지므로 'Taken together,'가 정답. A는 한쪽만 반영한 양보, B는 단순 대조, C는 예시로 부적합. 해설은 정답과 오답 근거를 모순 없이 서술하며, 지문은 창작 연구자(Lena Okafor)를 쓴 정성적 서술로 저작권·사실 오류 문제 없음. 두 관찰 종합 및 단순 대조와의 변별을 요구하므로 medium 이상의 사고를 요구함.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_step_logical_inference",
+     "abstract_relation_beyond_surface_contrast"
+    ],
+    "note": "실험실 결과와 현장 결과가 서로 어긋나는 상황에서 둘을 종합해 트레이드오프라는 결론을 끌어내야 하는 문항이다. 'Even so'는 장점 쪽으로 기울어 한쪽 관찰만 반영한 오답이고, 'By contrast'는 단순 대조형 오답이라 오답 설계가 적절하다. 'however'가 이미 대조를 표시하고 있어 B를 걸러내기 쉽다는 점은 다소 아쉽지만, hard 문항으로 받아들일 만하다.",
+    "issue": ""
+   },
+   "cost": 0.13502599999999998
+  },
+  {
+   "cid": "recipe-transitions-14",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": "transitions_distant_referent_link",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "abstract_relation_beyond_surface_contrast",
+     "non_local_referent_tracking"
+    ],
+    "note": "정답 D는 성립하나, 'Instead'의 대조 대상이 직전 문장이 아니라 brittlebush의 '잎 떨구기' 전략이라 다소 거리가 멀고, '수분 손실 줄임'이라는 공통 목표 때문에 A(Similarly)가 꽤 강한 경쟁지로 작동함(의도된 함정이긴 함). 'it'이 cacti가 아닌 creosote bush임을 추적해야 하는 비국소 지시 설계는 있으나, 그 오인이 특정 오답(C)으로 자연스럽게 이어지지 않아 체크리스트 3은 약함. 사실 관계(creosote 수지 코팅, brittlebush 건기 낙엽)는 정확.",
+    "issue": "C 오답 근거로 \"it을 cacti로 오인\"을 제시하나, cacti로 오인해도 'For example'이 자연스럽게 도출되지 않아 근거가 억지스러움. 'Instead'가 직전 문장(잎 유지)이 아닌 두 문장 앞의 brittlebush 전략과 대조된다는 점을 더 명시적으로 설명했어야 함."
+   },
+   "opus": {
+    "correct": true,
+    "comp": false,
+    "fit": false,
+    "which": [],
+    "note": "정답 D(Instead)는 타당하다. 잎을 떨구는 전략 대신 잎을 유지하며 코팅하는 대안 전략이라는 관계가 성립한다. 다만 지시 대상 함정이 성립하지 않는다. 'it'은 단수라서 복수인 cacti와 혼동될 여지가 없고, 그 결과 non-local referent tracking이 실제로 요구되지 않는다. 결국 전형적인 '두 대상의 전략 대조' 문항으로, medium 수준이다.",
+    "issue": "C 해설은 'it'을 cacti로 잘못 본다고 설명하지만, cacti는 복수형이라 단수 'it'과 맞지 않는다. 그래서 이 오답 논리는 설득력이 약하다."
+   },
+   "cost": 0.2079596
+  },
+  {
+   "cid": "recipe-transitions-15",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": "transitions_purpose_filter_sentence",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "goal_vs_content_discrimination",
+     "non_local_referent_tracking"
+    ],
+    "note": "검산: 앞 문장 'a different standard'는 일반 진술이고 마지막 문장은 그 기준(새 여왕벌 생산)을 구체화하므로 'Specifically'가 유일하게 성립. A는 직전의 '7% 수확 증가·기관 관심'이라는 부수적 결과에 끌려 인과로 오독하게 만드는 함정, B는 'however'로 이미 대조가 완료된 뒤 중복 대조라 방향 오류, D는 유사 사례 추가가 아니므로 오류. 수험자는 첫 문장의 '목적(서식지)'과 셋째 문장의 '다른 기준'을 떨어진 거리에서 연결하고, 결과(수확량)가 아닌 목적에 부합하는 정보로 판단해야 하므로 medium을 넘는 사고를 요구함. 해설은 정답·오답 근거 모두 논리적으로 일관되며 오류 없음. 문장 길이·어휘는 적정 수준.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "goal_vs_content_discrimination"
+    ],
+    "note": "수확량 증가라는 부수적 결과(A의 유혹)와 벌 개체군 자립이라는 원래 목적을 구별해야 한다. 'a different standard'를 구체화하는 Specifically만 성립하고, Nevertheless는 앞 문장과 대조 관계가 없으므로 방향이 틀린 선택지이며 Similarly는 새 사례를 더하는 전환어라 맞지 않는다.",
+    "issue": ""
+   },
+   "cost": 0.17062719999999998
+  },
+  {
+   "cid": "recipe-transitions-16",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": "transitions_contradictory_evidence_synthesis",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_step_logical_inference",
+     "abstract_relation_beyond_surface_contrast"
+    ],
+    "note": "실험실(공격 증가)과 야외(생존 증가)라는 상반된 두 관찰이 제시되고, 마지막 문장이 둘을 결합한 '미끼' 해석을 내리므로 'Taken together,'가 유일하게 적합. A는 직전 문장과의 대립이 없어 탈락, C는 결론이 야외 결과 하나의 '결과'가 아니라 두 관찰의 종합적 해석이므로 부적합, D는 유사 사례 추가가 아니므로 탈락. 'Yet'이 이미 앞 문장에서 대조를 소비한 구조가 A 배제를 뒷받침함. 해설은 정답·오답 근거를 정확히 서술. 파란 꼬리 미끼 가설은 실제 파충류학 가설과 일치하며 사실 오류 없음. C가 다소 그럴듯한 오답이나 '해석 vs 결과' 구분으로 변별 가능.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_step_logical_inference"
+    ],
+    "note": "실험실과 야외 관찰이 서로 모순되어 보이는데, 결론(공격을 끌어들이되 꼬리로 돌림)은 두 관찰을 모두 필요로 하므로 'Taken together,'가 유일하게 맞다. 'Consequently,'는 앞 문장만 근거로 삼는 오답, 'Even so,'는 단순 대조 오답으로 레시피에 맞게 짜였다. 다만 'Consequently,'도 그럴듯하게 들릴 여지가 조금 있다.",
+    "issue": ""
+   },
+   "cost": 0.17095
+  },
+  {
+   "cid": "recipe-transitions-17",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": "transitions_distant_referent_link",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": false,
+    "fit": false,
+    "which": [
+     "goal_vs_content_discrimination"
+    ],
+    "note": "정답 B는 타당하고 A·C는 명백히 배제되며 D만 다소 그럴듯함. 그러나 레시피 핵심인 비국소 지시 관계(non_local_referent_tracking)가 실제로 구현되지 않음: 'unlike the beetles it targets, the lizard...'에서 비교 주체는 바로 인접한 the lizard이므로 떨어진 요소를 추적할 필요가 없음. 오답 A를 '인접 명사 오인'으로 설명한 것도 억지스러움(A는 단순 재진술 오류). 결과적으로 전형적 medium 수준의 '강조 추가' 전환어 문항에 그침. 사실 관계(가상의 연구자·종)는 허구 설정으로 오류 아님.",
+    "issue": "해설이 'unlike the beetles'가 \"인접 명사 beetles가 아니라 the lizard를 설명한다\"고 서술하나, 'unlike X, Y' 구문에서 비교 주체 Y(the lizard)는 바로 뒤에 인접해 있어 '떨어진 지시 대상'이라는 주장이 실제 문장 구조와 맞지 않음. 정답 근거 자체(새벽 사냥 전략을 가능케 하는 핵심 조건 추가 → Crucially)와 오답 배제 논리는 모순 없이 정답을 뒷받침함."
+   },
+   "opus": {
+    "correct": true,
+    "comp": false,
+    "fit": false,
+    "which": [],
+    "note": "'unlike the beetles it targets, the lizard'에서 수식어구는 바로 뒤에 오는 주어 the lizard를 수식하는 일반적인 구조다. 그래서 지시 대상을 추적하는 부담이 거의 없고, '떨어진 요소 지시' 설계로 보기 어렵다. 또 정답 'Crucially'는 지시 대상을 파악하지 않아도 앞 문장의 전략에 핵심 조건을 덧붙인다는 관계만으로 고를 수 있다. 오답 C·D도 쉽게 배제된다. 따라서 정답은 맞지만 난도는 medium 수준이다.",
+    "issue": "D 해설은 '첫 문장을 기준으로 삼은 양보'라고 설명하는데, 이 설명이 다소 억지스럽다. 하지만 결론과 모순되지는 않는다."
+   },
+   "cost": 0.1985156
+  },
+  {
+   "cid": "recipe-transitions-18",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": "transitions_purpose_filter_sentence",
+   "detIssues": [
+    "contract:contract_transition_parallel"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.0246392
+  },
+  {
+   "cid": "recipe-transitions-19",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": "transitions_contradictory_evidence_synthesis",
+   "detIssues": [
+    "contract:contract_transition_parallel"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.0353
+  },
+  {
+   "cid": "recipe-transitions-20",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": "transitions_distant_referent_link",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": false,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "non_local_referent_tracking(약하게)"
+    ],
+    "note": "C(Moreover)는 두 번째 예상 밖 발견을 덧붙이는 가장 표준적인 전환어로 정답 자체는 성립한다. 그러나 A(Similarly)가 \"앞 발견과 마찬가지로 예상 밖\"이라는 독해로 충분히 성립해 정답 유일성이 약하다(핵심 결함). 'a pattern ... also not predicted'가 절 전체를 지시하도록 설계된 점과 B가 인접 명사 'wash plants' 기반 대조 함정인 점은 레시피에 부합하나, 실제 요구 사고는 전형적 medium 추가 전환어 문항 수준이며 hard 특성(목적·내용 구분, 다단계 추론, 추상적 관계)은 사실상 구현되지 않았다. 체크리스트 2(정답이 지시 대상 파악에 의존)는 'also'만 봐도 추가/유사로 좁혀지므로 지시 대상 추적이 정답 도출에 결정적이지 않아 미충족으로 판정.",
+    "issue": "A(Similarly) 배제 근거가 부정확하다. \"Similarly는 서로 다른 두 대상을 비교할 때만 쓴다\"는 규칙은 사실이 아니며, 같은 대상에 대한 평행적 사실(둘 다 예상 밖의 결과)을 잇는 데 Similarly가 쓰일 수 있다. 'also not predicted'는 오히려 두 발견의 유사성을 명시하므로 A가 상당히 방어 가능하고, 해설은 이를 설득력 있게 배제하지 못한다. B·D 배제 논리는 타당하다."
+   },
+   "opus": {
+    "correct": true,
+    "comp": false,
+    "fit": false,
+    "which": [],
+    "note": "정답 C는 맞다(같은 집단에서 나온 두 번째 의외의 발견을 덧붙이는 관계). 다만 떨어진 지시 대상을 찾는 설계가 약하다. 'also not predicted'는 바로 앞 문장의 결과를 가리키므로 멀리 있는 요소를 추적할 필요가 없다. 정답도 지시 대상 파악보다는 전형적인 '추가 vs 대조/인과' 구분으로 풀린다. Similarly도 어느 정도 그럴듯한 경쟁 선택지라 변별력이 다소 모호하다. 전체적으로 medium 수준의 전환어 문항이다.",
+    "issue": "Similarly 오답 근거('서로 다른 두 대상' 비교에만 쓰인다)가 다소 과장됨. Similarly는 같은 대상에 대한 두 개의 평행한 사실(예상 밖 결과 두 가지)에도 쓰일 수 있어 근거가 약하다."
+   },
+   "cost": 0.20170760000000001
+  },
+  {
+   "cid": "recipe-words_in_context-00",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": "words_in_context_reversal_signal",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "reversed_relation_inference"
+    ],
+    "note": "통념(한 번 쓰고 버림)→However→증거→in fact 구조와 오답 설계(A 통념 방향, B 같은 방향 약한 강도, D 제3의 의미)는 레시피를 충족하며 정답 C(durable)도 옳다. 해설의 '같은 날'은 '같은 날(edge)'로 읽혀 오류 아님. 다만 빈칸 바로 뒤 'kept and maintained over long periods'가 정답을 거의 직접 제시해 역전 추론 부담이 작고, 부정어 층·다중 근거 통합·확신도 조정 등 hard 특성이 추가로 요구되지 않아 전형적 medium 수준에 머문다.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "reversed_relation_inference"
+    ],
+    "note": "정답 C는 옳다. 다만 빈칸 바로 뒤의 'kept and maintained over long periods'가 거의 정의처럼 정답을 직접 알려 주어서, 통념이 뒤집히는 구조를 추론하지 않아도 풀 수 있다. 오답 A의 disposable도 통념('discarded after a single use')을 그대로 다시 쓴 말이라 쉽게 걸러진다. 따라서 전형적인 medium 수준으로 판단한다.",
+    "issue": "B(makeshift)를 '통념과 같은 방향에 강도만 약하다'고 설명했는데, 엄밀히 보면 makeshift는 '조잡하다/임시변통이다'라는 다른 측면이다. 그래도 정답을 뒷받침하는 논리에는 문제가 없다."
+   },
+   "cost": 0.170536
+  },
+  {
+   "cid": "recipe-words_in_context-01",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": "words_in_context_negation_polarity",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "reversed_relation_inference",
+     "negation_layer_processing",
+     "discourse_stage_structuring"
+    ],
+    "note": "'not a mark of detachment but rather of ______' 구조와 콜론 뒤 근거(cherishes so deeply / overwhelmed by grief)가 devotion을 정확히 뒷받침한다. A는 부정 무시 오답, B는 극성 재반전 오답, D는 형태 유사 오답으로 레시피에 부합. 간결함(terseness)이 무심함이 아니라 애착의 결과라는 표면 증거의 역전 해석과 비평가 통념→반박→설명의 단계 구조 파악이 필요하다. 다만 'cherishes so deeply'가 비교적 직접적인 단서라 hard 중에서는 난도가 낮은 편(경계선).",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "'not X but rather Y' 구조가 그대로 드러나 있고, 콜론 뒤의 'cherishes so deeply'가 답을 직접 알려 준다. 오답도 쉽게 지워진다. indifference는 앞 문장에 그대로 나오는 단어이고, deviation은 맥락과 관계없는 형태 유사 함정이다. 그래서 전형적인 medium 수준의 부정·대조 문항이다. 문장이 길어 보이는 것 말고는 hard다운 추가 사고(이중부정 역산, 다단계 추론 등)가 없다.",
+    "issue": ""
+   },
+   "cost": 0.172294
+  },
+  {
+   "cid": "recipe-words_in_context-02",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": "words_in_context_stage_shift",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "reversed_relation_inference",
+     "discourse_stage_structuring"
+    ],
+    "note": "두 단계 구조(통설 소개 → however로 반박)가 명확하고, 빈칸은 두 번째 단계 시작부에 위치. 'disputes'가 'contending… rather than merely recording'과 정합. A는 첫 단계 통설 지지어, C는 형용사구로 품사 불일치, B는 중립어. 해설의 각 오답 설명도 정확. 다만 C 'doubtful of'가 문법적으로 즉시 배제되므로 변별력이 다소 약하고, 'however' 단서가 비교적 직접적이어서 hard 중에서는 중하 수준.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "전형적인 'however + 통설 반박' 구조라 'however' 하나만 보면 바로 풀린다. C는 문법적으로 곧바로 탈락하고 A는 역접과 정면으로 어긋나며 B는 너무 중립적이어서, 실제로 경쟁하는 선택지가 없다. 단일 단서로 답이 정해지므로 다중 증거 종합, 부정 처리, 확신도 조정 같은 hard 특성이 필요하지 않다. 체감 난이도는 medium 이하이고, 어렵게 느껴진다면 지문 길이와 어휘 때문일 뿐이다.",
+    "issue": ""
+   },
+   "cost": 0.131208
+  },
+  {
+   "cid": "recipe-words_in_context-03",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": "words_in_context_reversal_signal",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "reversed_relation_inference"
+    ],
+    "note": "정답 C는 통념(고정)→however→증거(계속 변화) 구조와 'far from being locked in place'로 명확히 결정되며 해설도 일관됨. 다만 오답 구성이 약함: A·B 모두 통념 방향(stable/rigid)이고 D는 무관 어휘라, 정답과 같은 방향이면서 강도·정밀도만 다른 오답(예: erratic, chaotic 등)이 없어 체크리스트 4 미충족. 'far from being locked in place'가 답을 거의 직접 제시해 전환 관계 파악 외의 추가 사고(확신도 조정, 다중 근거 통합, 부정 층위 처리)가 요구되지 않아 전형적 medium 수준을 넘지 못함.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "reversed_relation_inference"
+    ],
+    "note": "정답과 해설은 맞고, 레시피 체크리스트 5개 항목도 모두 충족한다. 다만 통념을 뒤집는 구조가 지나치게 드러나 있다. however에 더해 'far from being locked in place'가 바로 반대어를 넣으라고 알려 주고, 바로 앞 문장의 'add, drop, and reorder'가 '변한다'는 뜻을 직접 보여 준다. 그래서 단서 하나만으로 답이 정해져 전형적인 medium 수준에 그친다. 오답 A·B는 통념 방향이라 바로 제외되고, D는 쟁점과 관계없는 단어라 매력도가 낮다. 부정어 층위 처리, 확신도 조정, 여러 단서 종합 같은 hard 특성은 나타나지 않는다.",
+    "issue": ""
+   },
+   "cost": 0.16487
+  },
+  {
+   "cid": "recipe-words_in_context-04",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": "words_in_context_negation_polarity",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "reversed_relation_inference"
+    ],
+    "note": "정답 pliant는 'not rigid, but rather ___' 및 콜론 뒤 'a living set of agreements... continually renegotiated'로 명확히 확정됨. 그러나 빈칸 바로 옆의 단일 부정+대조 구조와 콜론 동격 설명만으로 답이 결정되어 이중부정 재구성·다중 증거 통합·확신도 조정 등의 hard 특성이 실제로 요구되지 않음. 글의 통념→반박 구조는 존재하나 빈칸 해결에 필수적이지 않음. A와 C가 사실상 동일 극성 유사어라 변별력도 낮음. 전형적 medium 수준 문항으로 판정.",
+    "issue": "C(immutable)를 '이중 뒤집기' 오답으로 설명하지만 실질적으로 A(inflexible)와 동일 극성·동일 기능의 유사어라 구분 논리가 다소 인위적임. 모순은 아님."
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "'not rigid, but rather ___' 한 문장만 읽어도 정답이 정해진다. A·C·D가 모두 rigid와 같은 쪽 의미이거나 같은 쪽으로 보이는 단어라서, pliant 하나만 반대 극성으로 바로 눈에 띈다. 통념이 뒤집히는 구조나 다단계 담화 처리가 실제 풀이에 필요하지 않다. 전형적인 medium 수준이다.",
+    "issue": "A와 C를 서로 다른 오류 유형(부정 무시, 이중 반전)으로 나눴지만, 둘 다 rigid와 같은 뜻이고 같은 이유로 제거된다. 구분이 인위적이지만 정답 근거와 모순되지는 않는다."
+   },
+   "cost": 0.1691152
+  },
+  {
+   "cid": "recipe-words_in_context-05",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": "words_in_context_stage_shift",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "reversed_relation_inference",
+     "discourse_stage_structuring"
+    ],
+    "note": "두 단계 구조(통설 소개 → however 이후 반박 증거)가 명확하고, 빈칸은 두 번째 단계 시작부의 타동사 자리. 'unsettle this portrait'가 콜론 뒤 이동 증거와 논리적으로 일치하며 정답 옳음. A) corroborate는 첫 단계(통설 지지)에 어울리는 역방향 오답, C) contrary to는 의미는 반박이나 품사 불일치, B) contain은 중립 동사로 관계 미표시. 해설의 문법·의미 설명 모두 정확. 통설 vs 새 증거의 관계 역전을 파악하고 표면상 '기록이 그림을 담는다(contain)'는 유혹을 넘어야 하므로 medium 이상. 다만 '상당수'라는 확신도 단서에 대응하는 과강/과약 오답(예: refute)은 없어 confidence_calibration까지는 요구하지 않음. Jeremy Boulton은 실존 초기근대 이주사 연구자로 사실 오류로 볼 만한 내용 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "정답 D(unsettle)는 맞고 해설에도 오류가 없다. 다만 구조가 'however' 하나로 통념과 반증을 대조하는 전형적인 medium 문항이다. 오답도 쉽게 걸러진다. A는 방향이 정반대이고, C는 품사 때문에 문장이 성립하지 않으며, B는 의미가 중립적이다. 그래서 더 생각할 거리가 없다. 부정을 여러 겹 처리하거나, 확신도를 맞추거나, 여러 증거를 종합해야 하는 요소가 전혀 없다. 따라서 hard 문항으로 보기에는 부족하다.",
+    "issue": ""
+   },
+   "cost": 0.170094
+  },
+  {
+   "cid": "recipe-words_in_context-06",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": "words_in_context_reversal_signal",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "reversed_relation_inference"
+    ],
+    "note": "정답 A는 타당하고 해설도 일관됨. 그러나 (1) 빈칸 문장 자체에 'rather than preserved intact'가 명시되어 있어 However 이후 증거를 종합하지 않아도 '변했다' 방향이 즉시 드러나며, (2) 정답과 같은 방향(변화)에서 강도만 다른 오답(예: radically transformed, slightly altered 류)이 없어 B·C·D 모두 쉽게 배제됨. 체크리스트 4항은 '통념 방향의 강도 차이'로만 구현되어 정답 방향 변별을 요구하지 않음. 부정어 층위·확신도 조정·다중 증거 통합 등 hard 특성은 사실상 작동하지 않아 medium 수준 문항으로 판정.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "정답은 유일하고 해설도 정확하다. 다만 빈칸 바로 뒤의 'rather than preserved intact'가 반대 방향을 직접 알려 주고, However 뒤 증거도 '크게 달랐다(differed substantially)'로 노골적이다. 그래서 역전 관계를 추론할 필요 없이 표면 대조만 보고 바로 풀린다. 오답 B·C는 통념 방향이라 쉽게 지워지고, D는 쟁점과 무관하다. 부정을 겹겹이 풀거나 확신도를 맞추거나 여러 단서를 종합할 필요도 없어서 전형적인 medium 수준이다.",
+    "issue": ""
+   },
+   "cost": 0.16390000000000002
+  },
+  {
+   "cid": "recipe-words_in_context-07",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": "words_in_context_negation_polarity",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "정답·해설·형식 모두 문제 없음(pliant = 유연한, 'not inflexible but rather ___' + 'bending its rules'로 명확히 지지). 레시피 체크리스트 5항목 전부 충족. 다만 hard 적합성은 미달: 부정어 한 겹에 빈칸 직후 'bending its rules…'라는 직접적 재진술(gloss)이 붙어 있어 단일 문장만으로 즉시 해결되며, 통념 반박 구조(misread→court disputes)도 빈칸 추론에 추가 부담을 주지 않음. 오답 A·D는 같은 극성(엄격함)으로 변별력이 낮고, C(compliant)만 약간의 근접 오답 역할. 전형적 medium 수준의 '부정어+but rather' 문항으로, 제시된 hard 특성(reversed_relation_inference, negation_layer_processing, discourse_stage_structuring, multi_evidence_integration, confidence_calibration) 중 실질적으로 요구되는 것이 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "negation_layer_processing"
+    ],
+    "note": "정답 B는 옳고 해설도 일관됨. 다만 'not inflexible but rather ___' 구문 하나에 'bending its rules'라는 직접적인 바꿔 말하기가 붙어 있어서, 극성을 한 번만 뒤집으면 바로 풀림. 이건 전형적인 medium 수준임. A와 D는 둘 다 '엄격' 쪽 극성이라 사실상 같은 함정이 둘이고, 이중 뒤집기 함정으로서의 변별력이 약함. 통념→반박 구조(misread, appear strict, yet)가 있긴 하지만 빈칸 문장만으로 답이 정해지므로 hard 특성을 실제로 요구하지 않음.",
+    "issue": ""
+   },
+   "cost": 0.16602920000000002
+  },
+  {
+   "cid": "recipe-words_in_context-08",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": "words_in_context_stage_shift",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "reversed_relation_inference",
+     "discourse_stage_structuring"
+    ],
+    "note": "1단계(기존 구애 과시 해석) → 2단계(Madden의 도둑질·파괴 관찰로 수컷 간 경쟁 강조)의 반박 구조가 명확하고, 빈칸은 2단계 첫머리에 위치. 'Complicating this account'는 뒤따르는 주어 Madden을 수식하는 분사구로 문법·기능 모두 적합. A는 1단계 논조용 오답, D는 수동형으로 주어 관계가 뒤집히는 품사/기능 오답, B는 대조 신호 없는 중립어. 'at least as much as'라는 완화된 결론과 '복잡하게 만든다'는 강도도 일치. Madden의 bowerbird 장식 절도·파괴 연구는 실제 존재하며 사실 오류 없음. 저작권 의심 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "discourse_stage_structuring"
+    ],
+    "note": "정답 C가 맞고 해설도 일관됨. 다만 대조 단서(steal, wreck, suggesting… at least as much as)가 매우 노골적이어서 전형적인 medium 수준의 '기존 설명→반박' 문항에 그친다. D는 능동/수동 문법 차이로만 걸러지고, B는 중립적 표현이라 쉽게 탈락한다. 사실관계 우려: 새틴바우어새 수컷이 경쟁자의 장식을 훔치고 바우어를 파괴한다는 연구는 주로 Gerald Borgia의 업적이다. Joah Madden은 주로 점박이바우어새 등을 연구했으므로 연구자 귀속이 부정확할 가능성이 있다.",
+    "issue": ""
+   },
+   "cost": 0.168338
+  },
+  {
+   "cid": "recipe-words_in_context-09",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": "words_in_context_reversal_signal",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "reversed_relation_inference",
+     "negation_layer_processing"
+    ],
+    "note": "정답 C(integral to)는 통념(rare, incidental, no purpose) → however → 증거(regular, distinct types vs intruders, adjusted to mates) → 'Far from being a curiosity' 구조에서 유일하게 결정되며 해설도 정확하다. 다만 체크리스트 4 미충족: B(only marginally relevant to)는 A와 마찬가지로 통념 방향 어휘이므로, 정답 방향이면서 강도만 어긋나는 교란지(예: 과도하게 단정적인 'the sole basis of' 류)가 없어 confidence_calibration을 요구하지 않는다. D는 단순 어휘 유인(imitation 재활용)이라 쉽게 배제된다. 전체 구조는 통념→however→Far from 전환으로 medium 전형 범위 안이며, 'Far from being'의 부정층 처리 외에 추가 사고(다중 근거 통합, 담화 단계 구조화, 확신도 조정)를 실제로 요구하지 않아 hard로 보기 어렵다.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "reversed_relation_inference"
+    ],
+    "note": "정답 C가 맞고 해설에도 문제가 없다. 다만 'however'와 'Far from being a curiosity'라는 전환 신호가 두 번이나 명시되어 있어 반대 방향 추론이 거의 자동으로 이루어진다. A와 B는 둘 다 통념 방향이라 쉽게 함께 제거되고, D는 의미상 명백히 어긋난다. 부정어를 거쳐 극성을 역산하거나, 여러 단서를 통합하거나, 확신도를 맞춰야 하는 요소가 없다. 전형적인 medium 수준의 통념 반전 문항이다.",
+    "issue": ""
+   },
+   "cost": 0.18175
+  },
+  {
+   "cid": "recipe-words_in_context-10",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": "words_in_context_negation_polarity",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "negation_layer_processing"
+    ],
+    "note": "'not destructive, but rather ___' 구조가 명시적이고, 선택지 4개 중 긍정 극성 어휘가 B 하나뿐이며(A·C는 모두 부정 유의어, D는 생태 맥락과 무관한 음상 유사어), 지문의 근거(덤불 제거·양분 환원·발아)가 '재생'을 직접 서술하므로 통념 역전 구조가 있어도 실제 요구 사고는 단일 부정어 처리 수준에 그침. 정답·형식·사실 관계는 문제없으나 hard 특성(reversed_relation_inference, multi_evidence_integration 등)이 실질적으로 작동하지 않아 medium 수준 문항으로 판정.",
+    "issue": "C 'corrosive'를 '극성을 이중으로 뒤집은 오답'이라 설명하지만 실제로는 A와 마찬가지로 destructive의 단순 유의어에 불과해 해설의 오답 유형 구분이 다소 작위적임. 정답 근거 자체는 정확함."
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "정답 B는 맞다. 다만 'not destructive, but rather' 한 문장만 읽어도 긍정 극성이 바로 정해지고, 지문의 근거(덤불 제거·양분 순환·발아)도 직설적이다. 부정 극성 오답 두 개(A, C)는 극성만 확인하면 바로 지워지고, D는 철자가 비슷한 함정일 뿐이다. 그래서 전형적인 medium 수준이며, 통념 역전 구조는 있지만 빈칸 판단에 추가 추론이 필요하지 않다.",
+    "issue": "C가 '이중 반전' 오답이라는 설명은 억지다. corrosive는 A와 마찬가지로 destructive와 같은 부정 극성의 유의어일 뿐이고, 'not A but B'를 이중으로 뒤집어 읽는 실제 오독 과정과 연결되지 않는다. 결국 A와 C는 같은 논리의 오답이다."
+   },
+   "cost": 0.17233920000000003
+  },
+  {
+   "cid": "recipe-words_in_context-11",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": "words_in_context_stage_shift",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "reversed_relation_inference",
+     "discourse_stage_structuring",
+     "confidence_calibration"
+    ],
+    "note": "1단계(실험 결과·논평가의 찬사)→2단계('however' 반박, 콜론 뒤 국소 규칙 근거)로 명확히 구분되며 빈칸은 2단계 첫 문장에 위치. 'overstates'는 콜론 뒤 근거(예측 불필요)와 정확히 부합. A 'celebrates'는 1단계 찬사에 어울리는 역방향 오답, C 'hyperbolic'은 의미 유사하나 형용사로 품사 불일치, B 'addresses'는 중립어로 평가 기능 부재. 점균류 도쿄 실험(Tero et al. 2010)과 유량 기반 관 굵기 조절 메커니즘 서술은 사실에 부합. 'suggests'라는 완화된 확신도도 'overstates'의 강도와 조응. 해설은 정답을 정확히 뒷받침하며 모순 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "discourse_stage_structuring",
+     "reversed_relation_inference"
+    ],
+    "note": "however가 찬사→반박 전환을 표시하고, 콜론 뒤 국소 규칙 근거가 overstates를 뒷받침한다. 1단계에 어울리는 오답 celebrates, 품사가 어긋나는 오답 hyperbolic, 중립어 addresses로 구성되어 있다. 품사 오답은 문법만으로도 제거되어 변별력이 약하지만 레시피에 부합한다. Tokyo 철도망 실험(Tero et al. 2010)은 사실과 일치한다.",
+    "issue": ""
+   },
+   "cost": 0.166192
+  },
+  {
+   "cid": "recipe-words_in_context-12",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": "words_in_context_reversal_signal",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "reversed_relation_inference",
+     "confidence_calibration"
+    ],
+    "note": "통념(이끼=위협/산이 돌을 부식) → 'However' + 비교 증거(이끼 없는 면이 더 침식, 이끼층이 풍화 충격 흡수) → 'actually'로 역전 결론. shield가 유일하게 성립. corrode(통념 방향), discolor(같은 피해 방향·약한 강도), colonize(사실이나 논점 무관)로 오답 설계 적절. 'suggest/in many settings'의 추측 톤과 shield의 중립적 강도가 어울림. 다만 'absorb the impact of weathering' 단서가 상당히 직접적이어서 hard 중 난이도는 낮은 편.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "reversed_relation_inference"
+    ],
+    "note": "정답은 하나로 정해지고 해설도 일관된다. 다만 구조가 전형적인 medium 수준이다. 통념 하나를 However가 뒤집고, 'absorb the impact of weathering'이 shield를 거의 직접 가리킨다. 부정 층위, 확신도 조정, 여러 단서 통합은 요구되지 않는다. 오답도 매력이 약하다. corrode는 통념 그대로이고, discolor는 손상과 같은 방향이면서 강도만 약하며, colonize는 논점과 무관하다. 그래서 오답을 쉽게 지울 수 있다. 결국 역전 관계를 추론하는 사고도 표면 단서 하나로 해결되므로 hard에는 미달이다.",
+    "issue": ""
+   },
+   "cost": 0.148174
+  },
+  {
+   "cid": "recipe-words_in_context-13",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": "words_in_context_negation_polarity",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "negation_layer_processing"
+    ],
+    "note": "정답 compelled는 'not a voluntary gift ... but rather' 구조와 콜론 뒤 근거(openly demand, social pressure few could withstand)에 의해 명확히 지지됨. 오답 설계(discretionary=부정 무시, elective=이중 뒤집기, complied=형태 유사)와 해설이 일치하며, complied의 문법적 부적합 설명도 타당. 다만 난이도 측면에서 'not X but rather Y' 단일 구조와 콜론 뒤 직접적 근거만으로 즉시 극성이 결정되어, 통념 반전(early accounts→Marlowe)은 장식적 수준이고 여러 정보원 통합이나 확신도 조정이 요구되지 않음. 전형적 medium 수준을 실질적으로 넘지 못함.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "not voluntary but rather ___ 구조이고 콜론 뒤에 요구와 압력이라는 근거가 직접 주어진다. 그래서 compelled가 곧바로 정해지는 전형적인 medium 수준이다. A와 C는 둘 다 voluntary의 동의어라서 오답 다양성이 낮다. D는 문법상 성립하지 않아 쉽게 제거된다. 체크리스트 4번의 이중 반전 오답은 실질적으로 구현되지 않았다.",
+    "issue": "C 해설의 '이중 반전' 논리가 억지스럽다. 극성을 두 번 뒤집은 결과가 결국 A와 같은 '자발적' 극성이어서 A와 C가 사실상 같은 유형의 오답이 된다. 그래도 정답 판단과 모순되지는 않는다."
+   },
+   "cost": 0.1709212
+  },
+  {
+   "cid": "recipe-words_in_context-14",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": "words_in_context_stage_shift",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "reversed_relation_inference",
+     "discourse_stage_structuring"
+    ],
+    "note": "1단계(기존 통념: 단순 장식)와 2단계(Van Duzer의 반증: 박물학 문헌 모사·실제 목격 해역 배치)가 명확히 구분되며, 빈칸은 2단계 첫 동사 자리. 'showing that...' 이하 증거가 통념을 뒤집으므로 D 'challenges'가 정확. A 'embellishes'는 1단계의 ornament/flourishes 어감과 어울리는 함정, B 'revisits'는 방향성이 없어 덜 정밀, C 'contrary to'는 반대 의미는 맞으나 전치사구로 본동사 자리에 올 수 없음. Chet Van Duzer의 Sea Monsters on Medieval and Renaissance Maps(2013) 주장과 사실적으로 부합. 지문은 독창적 작성으로 저작권 우려 없음. 난이도는 통념→반박 관계 역전 파악과 서술 단계 구조화에서 나오며 단순 복잡성에 의존하지 않음. 다만 선택지 품사가 혼재(C)하는 점은 실제 SAT 관행과 다소 다르나 레시피 요구사항이므로 형식상 허용.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "\"For decades, historians treated... as mere ornament\"에서 \"Van Duzer + 반증\"으로 이어지는 구조는 전형적인 통념-반박 패턴이라 medium 수준이다. 'challenges'는 바로 떠오르는 답이다. 'contrary to'는 품사 때문에 문법적으로 곧바로 제외된다. 'embellishes'도 의미가 맞지 않아 쉽게 걸러진다. 남는 경쟁 오답은 'revisits' 하나뿐인데, 뒤에 오는 증거가 명백한 반박이라서 이것도 쉽게 탈락한다. 역전 관계 추론이나 단계 구조화를 요구하긴 하지만 그 정도가 표면적이어서 hard에 필요한 추가 사고에는 미치지 못한다.",
+    "issue": ""
+   },
+   "cost": 0.16302
+  },
+  {
+   "cid": "recipe-words_in_context-15",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": "words_in_context_reversal_signal",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": false,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "reversed_relation_inference"
+    ],
+    "note": "정답 C(widespread)는 'rare' 통념을 however 이후 60% 증거로 뒤집는 구조에 정확히 부합하며 해설도 일관됨. 다만 체크리스트 4(정답과 같은 방향이되 강도만 다른 오답, 예: universal/ubiquitous)가 없음—A·B 모두 통념 방향, D는 무관 의미. 'Rather than being a curious exception'이 빈칸 바로 앞에서 답을 거의 명시해 주어 역전 추론 부담이 거의 없고, 60%라는 확신도 단서를 활용한 강도 구별(confidence_calibration)도 요구되지 않아 전형적 medium 수준. 사실 관계: Odom 등의 암컷 노래 조사는 2014년(Nature Communications, 71% 종)으로 '2019년 조사'는 연도 오류이며 실명 연구자를 인용한 만큼 수정 필요.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "reversed_relation_inference"
+    ],
+    "note": "정답 C는 옳다. 다만 사실관계가 부정확하다. Odom 연구진의 대표적인 조사는 2014년 Nature Communications 논문이며, 데이터가 있는 종의 약 71%에서 암컷이 노래한다고 보고했다. 따라서 지문의 '2019 survey'라는 연도 표기는 틀렸다. 또한 해당 연구는 온대 지역에 한정되지 않았다. 'Rather than being a curious exception'이 정답 방향을 직접 알려 주고 60%라는 수치도 단서가 명백해서, 전환어를 한 번만 처리하면 답이 정해지는 전형적 medium 수준이다. 오답도 쉽게 제거된다(D는 무관한 의미이고 A·B는 exception과 같은 뜻이다).",
+    "issue": "'C 외에 D'라는 표현이 어색하지만 논리 오류는 아님."
+   },
+   "cost": 0.17659399999999997
+  },
+  {
+   "cid": "recipe-words_in_context-16",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": "words_in_context_negation_polarity",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "negation_layer_processing"
+    ],
+    "note": "정답 D(gradual) 타당, 해설 일관, 오답 설계(precipitous=부정 무시, stagnant=이중 반전, gratuitous=형태 유사)도 체크리스트 충족. 다만 'not abrupt but rather ___' 뒤에 콜론으로 근거(100년간 10년마다 소수 감소)가 바로 제시되어 abrupt의 단순 반의어를 고르면 끝나는 구조라, 단일 부정 처리 이상의 추가 사고(관계 역전 추론·다중 근거 통합·확신도 보정 등)를 실제로 요구하지 않음. 전형적 medium 수준.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "'not abrupt but rather ___'만 보면 바로 gradual이 나온다. 오답도 약하다. precipitous는 abrupt의 동의어라 곧바로 지워지고, gratuitous는 철자만 비슷한 미끼다. stagnant는 '쇠퇴'와 맞지 않는다. 통념이 뒤집히는 구조는 표면에만 있고, 정답을 고를 때 여러 근거를 종합하거나 부정을 거듭 처리할 필요가 없다. 전형적인 medium 수준이다.",
+    "issue": ""
+   },
+   "cost": 0.15989520000000002
+  },
+  {
+   "cid": "recipe-words_in_context-17",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": "words_in_context_stage_shift",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "reversed_relation_inference",
+     "discourse_stage_structuring"
+    ],
+    "note": "첫 단계(기존 통념: 부정확성=감수 비용) → 두 번째 단계(Lin의 실험: '오류'가 오히려 수확 증대)로 구조가 명확히 분리되고, 빈칸은 두 번째 단계 첫 문장의 동사 자리에 있다. 콜론 뒤 증거가 기존 해석과 정반대 방향이므로 'contests'가 유일하게 정밀하다. A는 첫 단계의 합의 형성에 어울리는 단어, C는 의미는 유사하나 형용사로 품사 불일치, B는 중립적이라 반박 강도를 담지 못한다. 따옴표 처리된 \"error\"와 actually improves가 관계 역전 단서로 작동해 medium 이상의 추론을 요구한다. 가상 연구자 설정이며 실제 '조정된 오차' 가설과도 충돌하지 않는다.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "reversed_relation_inference"
+    ],
+    "note": "정답 D는 맞음. 통념→반박 구조가 'For decades… concluded'와 콜론 뒤 '\"error\" actually improves'로 너무 분명하게 드러나 있음. 품사가 다른 C(contrary)는 문법만 봐도 지워지고, A는 극성이 정반대라 바로 탈락함. 실질적인 경쟁 오답은 B(revisits)뿐인데, 이것도 콜론 뒤의 강한 반박 때문에 쉽게 배제됨. 같은 skill의 전형적인 medium 수준이며 hard 특성은 표면적으로만 나타남. 또 실제 SAT에서는 선택지 품사를 통일하는 것이 관례라, 레시피 5번 때문에 생긴 이 품사 불일치 오답은 정식 형식과 다소 어긋남.",
+    "issue": ""
+   },
+   "cost": 0.160206
+  },
+  {
+   "cid": "recipe-words_in_context-18",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": "words_in_context_reversal_signal",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "reversed_relation_inference"
+    ],
+    "note": "정답 C는 'however' 이후 증거와 'rather than marginal'의 대조 구조로 유일하게 결정되며 해설도 정확하다. 다만 체크리스트 4항(정답과 같은 방향이되 강도만 다른 오답)에 해당하는 선택지가 없다: A·B는 모두 통념 방향, D는 무관한 미적 어휘여서 정답 방향의 강도 변별 오답이 부재하다(해설은 B를 '통념 방향 강도 완화'로 설명하지만 이는 3항 중복). 또한 'rather than marginal'이 직접적인 반의어 단서를 제공해 통념 반전 추론이 거의 표면에서 끝나므로 전형적 medium 수준이며, negation layer·multi-evidence·confidence calibration 등 hard 특성은 요구되지 않는다.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "reversed_relation_inference"
+    ],
+    "note": "정답은 옳고 해설도 일관됨. 다만 'rather than marginal'이 반의어 프레임을 직접 주고 있어서, 통념이 역전된다는 걸 따로 추론하지 않아도 marginal의 반대말만 찾으면 integral이 바로 나옴. 오답도 쉽게 걸러짐: melodious는 쟁점과 무관하고, derivative·occasional은 증거와 정면으로 충돌함. 그래서 전형적인 medium 수준이고 hard에는 미달.",
+    "issue": ""
+   },
+   "cost": 0.160422
+  },
+  {
+   "cid": "recipe-words_in_context-19",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": "words_in_context_negation_polarity",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "reversed_relation_inference",
+     "negation_layer_processing",
+     "discourse_stage_structuring"
+    ],
+    "note": "'is not X but rather Y' 구조에 'chose to exclude'라는 결정적 단서가 같은 문장에 있어 극성 판단 가능. 통념(무지)→반박(의도적 생략)의 역전 구조를 읽어야 하며, A는 부정 무시, B는 이중 반전, D는 형태 유사 오답으로 선택지 설계가 적절. deliberate는 'omission'을 자연스럽게 수식하고 'chose to exclude'와 정확히 일치. 해설도 각 오답 논리와 일치하며 모순 없음. 가상의 학자 인용이라 사실 오류 소지 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "정답 C는 맞고 해설도 정확하다. 다만 빈칸 바로 뒤 콜론절에 'workshops chose to exclude'라는 직접적인 단서가 있다. 그래서 not A but rather B 구조를 재구성하지 않아도 '의도적'이 바로 나온다. 통념이 뒤집힌다는 틀(once assumed → complicates)은 있지만 답을 고르는 데 꼭 필요하지 않다. D(deliberative)는 철자가 비슷한 함정일 뿐이고 정밀한 의미 판별을 요구하지 않는다. 전형적인 medium 수준이다.",
+    "issue": ""
+   },
+   "cost": 0.1506172
+  },
+  {
+   "cid": "recipe-words_in_context-20",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": "words_in_context_stage_shift",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "reversed_relation_inference",
+     "discourse_stage_structuring"
+    ],
+    "note": "1단계(통념: 마지못해 도시에 살며 겨우 연명) → 2단계(Scott 데이터: 안정된 영역·더 많은 새끼·귀향 거부)로 명확히 구분되고, 빈칸은 2단계 첫 문장에 위치. 'data'가 복수이므로 overturn의 수 일치도 적절. A) corroborate는 1단계 통념에 어울리는 오답, C) contrary to는 의미는 유사하나 전치사구로 본동사가 사라지는 품사 오답, B) accompany는 중립어로 논리 관계를 드러내지 못함. 정답 유일성 확보. Dawn Scott은 실제 영국 도시여우 연구자이며 서술 내용은 통상적 연구 결과와 상충하지 않음. 해설도 정답과 오답 근거를 정확히 뒷받침함.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "reversed_relation_inference",
+     "discourse_stage_structuring"
+    ],
+    "note": "'For decades X라고 여겨졌다 → 새 데이터가 ___' 구조는 전형적인 통념 반박 패턴이다. 뒤따르는 근거도 모두 한 방향으로 명확하다. B는 관계를 나타내지 못하는 중립어이고 C는 문법상 바로 탈락하므로, 실제로 경쟁하는 오답은 A 하나뿐이다. 극성만 확인하면 정답이 나오므로 medium 수준이고, hard로서 추가 사고를 요구하지 않는다.",
+    "issue": "A를 '1단계 통념에만 어울리는 단어'라고 한 설명이 다소 느슨하지만, 논리 전개에는 문제가 없다."
+   },
+   "cost": 0.16321400000000003
+  },
+  {
+   "cid": "recipe-words_in_context-21",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": "words_in_context_reversal_signal",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "reversed_relation_inference"
+    ],
+    "note": "정답·해설·형식은 문제없음. 통념(fixed at birth) → however → 반박 증거(dropped/borrowed/rearranged) → 결론(far more ___ than believed) 구조가 명시적이고, 정답 malleable이 유일하게 성립. 다만 체크리스트 4 미충족: 정답과 같은 방향(변화 쪽)이면서 강도만 다른 오답이 없다. A·B 모두 통념 방향이고 D는 무관한 제3 의미라, 수험자는 '통념 vs 반대'만 구분하면 되므로 정밀한 강도 판별 부담이 없다. 전환어가 노골적이고 증거 문장이 직접적으로 변화를 서술하며 부정어 처리·다중 단서 통합·확신도 조정 등 hard 특성도 요구되지 않아 전형적인 medium 수준. hard 승격 불가.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "통념(fixed at birth) → however → 반증(dropped/borrowed/rearranged)의 구조가 너무 명시적이다. 'far more ___ than researchers had believed'와 증거 세 가지만 보면 malleable이 바로 정해진다. 부정어 층위, 확신도 조정, 다중 정보 통합 같은 추가 사고가 없어서 전형적인 medium 수준의 역전 문항에 해당한다. 오답 A·B는 둘 다 통념 방향이라 쉽게 지울 수 있고, D는 쟁점과 무관하다. 4번 항목은 B를 A와 같은 방향의 약한 단어로 본다는 전제에서 충족으로 판정했다.",
+    "issue": ""
+   },
+   "cost": 0.16813799999999998
+  }
+ ]
+}

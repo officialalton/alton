@@ -1,0 +1,114 @@
+{
+ "runs": [
+  "psych-t5-mc"
+ ],
+ "rows": 60,
+ "passed": 28,
+ "rejected": 32,
+ "passRate": 0.467,
+ "mc": {
+  "rows": 60,
+  "passed": 28,
+  "passRate": 0.467
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "1": 1,
+  "3": 9,
+  "4": 3,
+  "5": 15
+ },
+ "skillsPassed": {
+  "2.B": 6,
+  "2.A": 4,
+  "2.C": 2,
+  "2.D": 1,
+  "1.A": 14,
+  "1.B": 1
+ },
+ "figPassed": {
+  "none": 28
+ },
+ "figAll": {
+  "none": 60
+ },
+ "figPassRate": {
+  "none": "28/60"
+ },
+ "renderTypesPassed": {
+  "none": 28
+ },
+ "archetypesPassed": {
+  "ps_r5_attrition": 1,
+  "ps_r5_dependent_confound": 1,
+  "ps_r5_exercise_experiment": 1,
+  "ps_r5_gratitude_design": 2,
+  "ps_r5_group_comparison": 2,
+  "ps_r5_hassles_correlation": 1,
+  "ps_r5_irb_withdraw": 1,
+  "ps_r5_modeling_experiment": 1,
+  "ps_r5_prevalence_bias": 1,
+  "ps_r5_stress_opdef": 2,
+  "ps_t5_assimilation_accommodation": 2,
+  "ps_t5_compliance_techniques": 2,
+  "ps_t5_facial_feedback": 1,
+  "ps_t5_gender_socialization": 1,
+  "ps_t5_heritability_confusion": 1,
+  "ps_t5_maturation_motor": 1,
+  "ps_t5_sex_gender_terms": 1,
+  "ps_t5_taste_aversion_prep": 1,
+  "ps_t5_therapeutic_alliance": 1,
+  "ps_t5_unconditional_regard": 2,
+  "ps_t5_vicarious_reinforcement": 2
+ },
+ "archetypesAll": {
+  "ps_r5_attrition": 2,
+  "ps_r5_dependent_confound": 2,
+  "ps_r5_exercise_experiment": 2,
+  "ps_r5_gender_play_opdef": 2,
+  "ps_r5_gratitude_design": 2,
+  "ps_r5_group_comparison": 2,
+  "ps_r5_growth_designs": 2,
+  "ps_r5_hassles_correlation": 2,
+  "ps_r5_helplessness_debrief": 2,
+  "ps_r5_irb_withdraw": 2,
+  "ps_r5_modeling_experiment": 2,
+  "ps_r5_parenting_correlation": 2,
+  "ps_r5_prevalence_bias": 2,
+  "ps_r5_selfselection": 2,
+  "ps_r5_stress_opdef": 2,
+  "ps_t5_assimilation_accommodation": 2,
+  "ps_t5_compliance_techniques": 2,
+  "ps_t5_dsm_icd": 2,
+  "ps_t5_facial_feedback": 2,
+  "ps_t5_gender_socialization": 2,
+  "ps_t5_habituation": 2,
+  "ps_t5_heritability_confusion": 2,
+  "ps_t5_maturation_motor": 2,
+  "ps_t5_sex_gender_terms": 2,
+  "ps_t5_sleep_myths": 2,
+  "ps_t5_taste_aversion_prep": 2,
+  "ps_t5_temperament": 2,
+  "ps_t5_therapeutic_alliance": 2,
+  "ps_t5_unconditional_regard": 2,
+  "ps_t5_vicarious_reinforcement": 2
+ },
+ "failedArchetypes": [
+  "ps_r5_gender_play_opdef",
+  "ps_r5_growth_designs",
+  "ps_r5_helplessness_debrief",
+  "ps_r5_parenting_correlation",
+  "ps_r5_selfselection",
+  "ps_t5_dsm_icd",
+  "ps_t5_habituation",
+  "ps_t5_sleep_myths",
+  "ps_t5_temperament"
+ ],
+ "costUsd": {
+  "psych-t5-mc": 0.9486
+ }
+}

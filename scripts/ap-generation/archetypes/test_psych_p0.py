@@ -48,9 +48,9 @@ class TestLibrary(unittest.TestCase):
     def test_counts(self):
         self.assertGreaterEqual(len(MC), 150)
         self.assertGreaterEqual(len(SETS), 20)
-        self.assertEqual(len(FRQ), 8)
-        self.assertEqual(len([n for n in FRQ if n.startswith("psf_aaq_")]), 4)
-        self.assertEqual(len([n for n in FRQ if n.startswith("psf_ebq_")]), 4)
+        self.assertEqual(len(FRQ), 12)
+        self.assertEqual(len([n for n in FRQ if n.startswith("psf_aaq_")]), 6)
+        self.assertEqual(len([n for n in FRQ if n.startswith("psf_ebq_")]), 6)
 
     def test_every_archetype_builds_and_is_seed_deterministic(self):
         for n in MC + SETS + FRQ:

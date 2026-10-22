@@ -1,0 +1,82 @@
+{
+ "runs": [
+  "csa-t5-mc2"
+ ],
+ "rows": 30,
+ "passed": 20,
+ "rejected": 10,
+ "passRate": 0.667,
+ "mc": {
+  "rows": 30,
+  "passed": 20,
+  "passRate": 0.667
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "1": 4,
+  "2": 3,
+  "3": 12,
+  "4": 1
+ },
+ "skillsPassed": {
+  "3.B": 12,
+  "3.A": 4,
+  "2.A": 3,
+  "4.B": 1
+ },
+ "figPassed": {
+  "text": 20
+ },
+ "figAll": {
+  "text": 30
+ },
+ "figPassRate": {
+  "text": "20/30"
+ },
+ "renderTypesPassed": {
+  "text": 20
+ },
+ "archetypesPassed": {
+  "cs_account_state_trace": 2,
+  "cs_alias_box_trace": 2,
+  "cs_array_field_trace": 1,
+  "cs_constructor_chain_trace": 2,
+  "cs_param_pass_trace": 1,
+  "cs_static_counter_trace": 2,
+  "cs_tally_state_trace": 2,
+  "cs_math_functions": 2,
+  "cs_math_distance": 1,
+  "cs_abs_diff_completion": 1,
+  "cs_for_step_down": 1,
+  "cs_while_digit_product": 1,
+  "cs_string_array_longest": 1,
+  "cs_precondition_sublist": 1
+ },
+ "archetypesAll": {
+  "cs_account_state_trace": 2,
+  "cs_alias_box_trace": 2,
+  "cs_array_field_trace": 2,
+  "cs_constructor_chain_trace": 2,
+  "cs_param_pass_trace": 2,
+  "cs_static_counter_trace": 2,
+  "cs_tally_state_trace": 2,
+  "cs_math_functions": 2,
+  "cs_math_distance": 2,
+  "cs_abs_diff_completion": 2,
+  "cs_for_step_down": 2,
+  "cs_while_digit_product": 2,
+  "cs_while_steps_trace": 2,
+  "cs_string_array_longest": 2,
+  "cs_precondition_sublist": 2
+ },
+ "failedArchetypes": [
+  "cs_while_steps_trace"
+ ],
+ "costUsd": {
+  "csa-t5-mc2": 0.838
+ }
+}
