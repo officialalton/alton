@@ -23,3 +23,16 @@
 - 화면 점검에서 `stimulus_no_raw_tex`(`$...\text{ %}$`의 `%`가 LaTeX 주석이 되어 원문 수식이 학생 화면에 보임) 실패 3건: `chem-ch3-mc:ap_chemistry-m63-k2`, `chem-t5-mc:ap_chemistry-m20-k0`, `chem-t5-mc2:ap_chemistry-m18-k2`. 이 후보는 관리자 ③에서 "허용되지 않는 건너뜀"이라 배치 전체 적재를 중단시키므로 `chem-t5-mc`·`chem-t5-mc2`의 pass-keys에서 뺐다(내용 수정은 하지 않았다 — 고치려면 `\%`로 바꾼 새 해시와 증거 재생성이 필요).
 - 변환 시 표준 렌더링 검증 실패(지문이 그림을 가리키는데 그림 없음) 3건: `chem-ch3-mc:ap_chemistry-m51-k0`, `chem-t5-bank:ap_chemistry-m33-k1`, `chem-t5-bank2:ap_chemistry-m07-k0`. 증거가 없어 건너뜀으로 처리된다.
 - 위 6건과 오너 판단 보류 2건(`chem-s2-f3:f01-k2`, `chem-ch3-mc:m13-k0`), 내용 대조로 확인한 쌍둥이 2건(`chem-t5-bank:m46-k0`는 공개 Exam 3의 에탄올 입자 그림 문항과 같은 문항, `chem-s2-m-b:m22-k0`는 공개 Exam 1·2의 탄산·질산 이온 결합 길이 평가 문항과 같은 틀)은 `data/ap/stock/blocked-chem-defects-20261022.json`로 CH4·CH5 배정에서 제외했다(`chem-structure-block.ts --extra-block`).
+
+## 결과 (2026-10-22 05:17Z) — CH4·CS4 공개, CH5·CS5 보류
+- **AP Chemistry — Practice Exam 4**: 공개(`856cfaad-6c1a-468e-9b16-c6c097a680a0`, 문항 67 = MC 60(단독 56 + 2문항 세트 2) + FRQ 7, 05:14:19Z, 무료). 같은 과목 다른 공개 세트와 겹치는 문제 0(DB 쿼리).
+- **AP Computer Science A — Practice Exam 4**: 공개(`b25f8cae-c334-496d-a1e9-7971d1c369e3`, 문항 46 = MC 42 + FRQ 4, 05:17:31Z, 무료). 겹침 0.
+- **CH5 미공개**: v2 배정에서 결함·쌍둥이·판단 보류 후보를 막으면 단독 6칸(1단원 반지름 추세, 3단원 용해 절차, 4단원 산화환원 모형, 8단원 적정점·약산 pH·Ka(pH))이 부족. 계산상 조립 불가.
+- **CS5 미공개**: FRQ 1개(`csa-t5-frq4:ap_computer_science_a-f01-k0`, DigitTools digitSum + firstHarshad)의 부분 (a)가 공개 Exam 2 DigitTools의 부분 (a)와 같은 메서드·같은 시그니처·같은 조건(digitSum(int n), n >= 0)이다. 부분 (b)는 다르지만 한 문항의 일부가 쌍둥이이므로 독립으로 세지 않았다 → FRQ 1개 부족. MC·세트는 코드 토큰 마스킹 비교에서 공개 세트와 쌍둥이 없음.
+- **내용 대조로 제외한 Chemistry 쌍둥이**: `chem-t5-bank:m46-k0`(에탄올 수용액 입자 그림 = 공개 Exam 3과 같은 문항), `chem-s2-m-b:m22-k0`(오존 결합 길이 모형 평가 = 공개 Exam 1 탄산·Exam 2 질산 이온과 같은 틀). 렌더/변환 결함 6 + 오너 판단 보류 2 + 증거 없는 3(`m64-k1`, `m12-k0`, `m16-k0`은 증거를 새로 만들어 CH4에 사용)은 위 기록 참고.
+- **FRQ 경계 사례(독립으로 판정, 부분 겹침 기록)**: Nernst 전지(공개 #2의 E°cell·ΔG° 부분과 겹치고 Nernst Q가 새로움 — 자료·추론이 다르다고 판정), 약산 Ka(공개 적정 문항 부분 A와 pH 계산이 겹침), 이온화 에너지·전자 배치(공개 PES와 원자 구조 자료로 겹침), ICE 표·공명(공개 평형·Lewis 문항과 일부 겹침). 이 FRQ들은 CH4(공명·ICE·전자 배치 포함)/CH5(미공개)에 들어 있다.
+- **CS A FRQ**: CS4의 averagePositive(공개 Exam 1 ReviewStats와 같은 필터·평균 골격이나 자료·조건이 다름), flipRows(공개 GridShift와 변환이 다름), Stock 클래스(공개 클래스 설계 FRQ와 책임이 다름)는 독립으로 판정(경계 기록).
+- **학생 화면(Production, 학생 테스트22)**: CH4 — 목록(Chemistry 4세트), 시작, 60문항 구성, 1번 문항(수화물 오차) 확인. CS4 — 목록, 시작, 42문항, 1번 문항 코드 표시 확인. FRQ·이후 문항·Preview는 보지 않았다. 확인용 새 테스트 응시 2건(제출 안 함, 정리 대기): CH4 `5a18e9ff-18a6-4706-9870-8394258bc78c`, CS4 `04ffc137-f1ec-4bff-a6bd-aaf614a91d6e`.
+- **풀 모의고사 공개 수(DB)**: 71, 부분 연습 3(mc_practice 2 + frq_practice 1).
+- **원장**: 누적 $556.9358(이번 작업 유료 호출 0, 진행 중 예약 0). 상한 730/740으로 갱신(`ledger-total.ts`, `ledger-summary.json`).
+- **도구 변경**: `chem-structure-block.ts --extra-block`, `local-demo-seed.ts --skip-convert-failures`, `render-check.ts`에 chem-t5-* 추가, 배치 26개 등록(chem-t5-* 12 + 복구 1 + csa-t5-* 13) — 화면 증거 파일 `evidence-chem-t5.json`·`evidence-csa-t5.json`.
