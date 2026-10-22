@@ -9,9 +9,9 @@
    "measured bond lengths and enthalpies (longest and lowest) vs the rule that bond strength falls down a group"
   ],
   "misconceptions": [
-   "HCl has a shorter (127 pm) and stronger (about 431 kJ/mol) H–X bond than HI (161 pm, about 299 kJ/mol), so its bond is harder to break.",
-   "HBr has a shorter (141 pm) and stronger (about 366 kJ/mol) H–X bond than HI (161 pm, about 299 kJ/mol), so its bond is harder to break.",
-   "HF has a shorter (92 pm) and stronger (about 567 kJ/mol) H–X bond than HI (161 pm, about 299 kJ/mol), so its bond is harder to break. It is also the most electronegative halogen, which makes the bond strongest rather than weakest."
+   "HCl has a shorter (127 pm) and stronger (about 431 kJ/mol) H\u2013X bond than HI (161 pm, about 299 kJ/mol), so its bond is harder to break.",
+   "HBr has a shorter (141 pm) and stronger (about 366 kJ/mol) H\u2013X bond than HI (161 pm, about 299 kJ/mol), so its bond is harder to break.",
+   "HF has a shorter (92 pm) and stronger (about 567 kJ/mol) H\u2013X bond than HI (161 pm, about 299 kJ/mol), so its bond is harder to break. It is also the most electronegative halogen, which makes the bond strongest rather than weakest."
   ]
  },
  {
@@ -81,7 +81,7 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "proportional scaling from A = εbc with sympy vs numeric recomputation of ε and the new b and c"
+   "proportional scaling from A = \u03b5bc with sympy vs numeric recomputation of \u03b5 and the new b and c"
   ],
   "misconceptions": [
    "Squares the change factor instead of applying it once.",
@@ -114,9 +114,9 @@
    "difference from a Pauling table vs argmax over the four bonds"
   ],
   "misconceptions": [
-   "The electronegativity difference of the S–I bond is only 0.08, smaller than the 1.78 of the most polar bond, so its electrons are shared more evenly.",
-   "The electronegativity difference of the Br–F bond is only 1.02, smaller than the 1.78 of the most polar bond, so its electrons are shared more evenly.",
-   "The electronegativity difference of the Br–Si bond is only 1.06, smaller than the 1.78 of the most polar bond, so its electrons are shared more evenly."
+   "The electronegativity difference of the S\u2013I bond is only 0.08, smaller than the 1.78 of the most polar bond, so its electrons are shared more evenly.",
+   "The electronegativity difference of the Br\u2013F bond is only 1.02, smaller than the 1.78 of the most polar bond, so its electrons are shared more evenly.",
+   "The electronegativity difference of the Br\u2013Si bond is only 1.06, smaller than the 1.78 of the most polar bond, so its electrons are shared more evenly."
   ]
  },
  {
@@ -141,7 +141,7 @@
   "calculator": "allowed",
   "stimulus": "table",
   "verifiedBy": [
-   "Henderson–Hasselbalch pH values vs an exact charge-balance equilibrium solved by bisection; the strong-acid pH from excess hydroxide"
+   "Henderson\u2013Hasselbalch pH values vs an exact charge-balance equilibrium solved by bisection; the strong-acid pH from excess hydroxide"
   ],
   "misconceptions": [
    "Assumes equal starting pH means equal resistance to added base.",
@@ -186,7 +186,7 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "sympy solve of q = -nΔH vs the generating enthalpy recovered within temperature rounding"
+   "sympy solve of q = -n\u0394H vs the generating enthalpy recovered within temperature rounding"
   ],
   "misconceptions": [
    "Reports the heat in kJ without dividing by the moles of salt.",
@@ -204,9 +204,9 @@
    "the enthalpy formula recomputed with each altered recorded value shows which errors lower the magnitude"
   ],
   "misconceptions": [
-   "A final temperature read 1.0 °C too high makes ΔT larger than the true change, so the calculated heat and the magnitude of ΔH are too high.",
-   "Recording 110 g of water when only 100 g is present makes the calculated heat q = mcΔT larger, so the magnitude of ΔH is too high.",
-   "Recording 4.50 g when 5.00 g dissolved makes the calculated moles of salt smaller, so the heat per mole, and the magnitude of ΔH, is too high."
+   "A final temperature read 1.0 \u00b0C too high makes \u0394T larger than the true change, so the calculated heat and the magnitude of \u0394H are too high.",
+   "Recording 110 g of water when only 100 g is present makes the calculated heat q = mc\u0394T larger, so the magnitude of \u0394H is too high.",
+   "Recording 4.50 g when 5.00 g dissolved makes the calculated moles of salt smaller, so the heat per mole, and the magnitude of \u0394H, is too high."
   ]
  },
  {
@@ -216,10 +216,10 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "exact arithmetic with sympy vs numpy evaluation of -nFE°"
+   "exact arithmetic with sympy vs numpy evaluation of -nFE\u00b0"
   ],
   "misconceptions": [
-   "Omits the negative sign in ΔG° = -nFE°.",
+   "Omits the negative sign in \u0394G\u00b0 = -nFE\u00b0.",
    "Leaves the energy in joules per mole.",
    "Does not multiply by the number of electrons transferred."
   ]
@@ -414,9 +414,9 @@
    "Z from the van der Waals equation by root finding vs the first-order estimate (b - a/RT)P; both pick the same gas"
   ],
   "misconceptions": [
-   "CH4 has a van der Waals attraction constant of a = 2.25 L²·atm/mol², smaller than the 3.59 of CO2, so it stays closer to ideal behavior.",
-   "Ne has a van der Waals attraction constant of a = 0.211 L²·atm/mol², smaller than the 3.59 of CO2, so it stays closer to ideal behavior.",
-   "O2 has a van der Waals attraction constant of a = 1.38 L²·atm/mol², smaller than the 3.59 of CO2, so it stays closer to ideal behavior."
+   "CH4 has a van der Waals attraction constant of a = 2.25 L\u00b2\u00b7atm/mol\u00b2, smaller than the 3.59 of CO2, so it stays closer to ideal behavior.",
+   "Ne has a van der Waals attraction constant of a = 0.211 L\u00b2\u00b7atm/mol\u00b2, smaller than the 3.59 of CO2, so it stays closer to ideal behavior.",
+   "O2 has a van der Waals attraction constant of a = 1.38 L\u00b2\u00b7atm/mol\u00b2, smaller than the 3.59 of CO2, so it stays closer to ideal behavior."
   ]
  },
  {
@@ -471,11 +471,11 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "closed-form exp(-ΔG°/RT) with sympy vs numpy exp"
+   "closed-form exp(-\u0394G\u00b0/RT) with sympy vs numpy exp"
   ],
   "misconceptions": [
    "Uses the base-ten logarithm in place of the natural logarithm.",
-   "Uses ΔG° as the equilibrium constant.",
+   "Uses \u0394G\u00b0 as the equilibrium constant.",
    "Uses kilojoules without converting to joules."
   ]
  },
@@ -486,12 +486,12 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "sign pattern table vs direct evaluation of the sign of ΔG at a very low and a very high temperature"
+   "sign pattern table vs direct evaluation of the sign of \u0394G at a very low and a very high temperature"
   ],
   "misconceptions": [
-   "This pattern requires ΔH° to be positive and ΔS° to be negative, but the reaction has ΔH° = +90 kJ/mol (positive) and ΔS° = +180 J/(mol·K) (positive).",
-   "This pattern requires ΔH° to be negative and ΔS° to be negative, but the reaction has ΔH° = +90 kJ/mol (positive) and ΔS° = +180 J/(mol·K) (positive).",
-   "This pattern requires ΔH° to be negative and ΔS° to be positive, but the reaction has ΔH° = +90 kJ/mol (positive) and ΔS° = +180 J/(mol·K) (positive)."
+   "This pattern requires \u0394H\u00b0 to be positive and \u0394S\u00b0 to be negative, but the reaction has \u0394H\u00b0 = +90 kJ/mol (positive) and \u0394S\u00b0 = +180 J/(mol\u00b7K) (positive).",
+   "This pattern requires \u0394H\u00b0 to be negative and \u0394S\u00b0 to be negative, but the reaction has \u0394H\u00b0 = +90 kJ/mol (positive) and \u0394S\u00b0 = +180 J/(mol\u00b7K) (positive).",
+   "This pattern requires \u0394H\u00b0 to be negative and \u0394S\u00b0 to be positive, but the reaction has \u0394H\u00b0 = +90 kJ/mol (positive) and \u0394S\u00b0 = +180 J/(mol\u00b7K) (positive)."
   ]
  },
  {
@@ -501,12 +501,12 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "sympy solution of ΔH - TΔS = 0 vs bisection on ΔG(T)"
+   "sympy solution of \u0394H - T\u0394S = 0 vs bisection on \u0394G(T)"
   ],
   "misconceptions": [
-   "Converts ΔS to kJ as well as ΔH, which makes the answer a factor of 10⁶ too large.",
+   "Converts \u0394S to kJ as well as \u0394H, which makes the answer a factor of 10\u2076 too large.",
    "Does not convert kilojoules to joules.",
-   "Inverts the ratio, dividing ΔS by ΔH instead of ΔH by ΔS."
+   "Inverts the ratio, dividing \u0394S by \u0394H instead of \u0394H by \u0394S."
   ]
  },
  {
@@ -579,7 +579,7 @@
    "sympy solution of the quadratic vs bisection on the equilibrium expression"
   ],
   "misconceptions": [
-   "Writes the expression with [B] instead of [B]² (leaves out the square) and solves it exactly.",
+   "Writes the expression with [B] instead of [B]\u00b2 (leaves out the square) and solves it exactly.",
    "Reports the equilibrium concentration of A.",
    "Applies the small-x approximation even though the change is not negligible compared with the initial concentration."
   ]
@@ -641,7 +641,7 @@
   "misconceptions": [
    "bromothymol blue changes color between pH 6.0 and 7.6, near pH 7, but the equivalence point is at pH 8.3, outside that range.",
    "alizarin yellow R changes color between pH 10.1 and 12.0, which does not include the equivalence-point pH of 8.3.",
-   "methyl orange (pH 3.1–4.4) has a range that contains the pKa-related value 3.5, but the equivalence point is at pH 8.3."
+   "methyl orange (pH 3.1\u20134.4) has a range that contains the pKa-related value 3.5, but the equivalence point is at pH 8.3."
   ]
  },
  {
@@ -955,7 +955,7 @@
   ],
   "misconceptions": [
    "The temperature change of the solution does show the direction of the heat flow.",
-   "An endothermic process has a positive ΔH.",
+   "An endothermic process has a positive \u0394H.",
    "An exothermic process raises the temperature of the solution."
   ]
  },
@@ -1071,7 +1071,7 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "ΔH − TΔS vs ΔH minus the product found by root solving"
+   "\u0394H \u2212 T\u0394S vs \u0394H minus the product found by root solving"
   ],
   "misconceptions": [
    "Adds the entropy term instead of subtracting it.",
@@ -1391,7 +1391,7 @@
   "misconceptions": [
    "HF is the acid, not its conjugate base.",
    "Water acts as the base here.",
-   "H3O⁺ is the conjugate acid of water."
+   "H3O\u207a is the conjugate acid of water."
   ]
  },
  {
@@ -1404,7 +1404,7 @@
    "fixed fact bank checked against CED"
   ],
   "misconceptions": [
-   "ΔH is a difference of the two energies and is not their sum.",
+   "\u0394H is a difference of the two energies and is not their sum.",
    "The values are subtracted.",
    "The sign is reversed, because bond formation releases the larger energy."
   ]
@@ -1436,7 +1436,7 @@
   "misconceptions": [
    "This would raise the pH further.",
    "A base is neutralized by an acid and not by its conjugate base.",
-   "A⁻ does not react with a base."
+   "A\u207b does not react with a base."
   ]
  },
  {
@@ -1496,7 +1496,7 @@
   "misconceptions": [
    "The species has an incorrect formula for a conjugate.",
    "H3PO4 has two more protons.",
-   "PO4³⁻ is the conjugate base of HPO4²⁻."
+   "PO4\u00b3\u207b is the conjugate base of HPO4\u00b2\u207b."
   ]
  },
  {
@@ -1525,7 +1525,7 @@
   ],
   "misconceptions": [
    "The reverse reaction also has a barrier.",
-   "The two activation energies differ by the value of ΔH.",
+   "The two activation energies differ by the value of \u0394H.",
    "The barrier from the lower-energy side is larger."
   ]
  },
@@ -1584,7 +1584,7 @@
    "sympy quadratic solve vs bisection on the equilibrium condition"
   ],
   "misconceptions": [
-   "Ignores the loss of N2O4 and solves (2x)² = K c₀.",
+   "Ignores the loss of N2O4 and solves (2x)\u00b2 = K c\u2080.",
    "Uses the starting concentration of N2O4 as the equilibrium concentration of NO2.",
    "Uses x instead of 2x for the concentration of the product."
   ]
@@ -1600,7 +1600,7 @@
   ],
   "misconceptions": [
    "Both molecules are nonpolar, so neither has a dipole to explain the difference.",
-   "Neither contains an O–H, N–H or F–H bond.",
+   "Neither contains an O\u2013H, N\u2013H or F\u2013H bond.",
    "Both have the same molar mass."
   ]
  },
@@ -1629,7 +1629,7 @@
    "fixed fact bank checked against CED"
   ],
   "misconceptions": [
-   "A⁻ can accept a proton, so it is a base.",
+   "A\u207b can accept a proton, so it is a base.",
    "The Kb of the conjugate base depends on the Ka of its acid.",
    "The conjugate pairs have opposite trends."
   ]
@@ -1645,8 +1645,8 @@
   ],
   "misconceptions": [
    "Carbon is the central atom of the ion.",
-   "The charge of −2 must be shown on the atoms.",
-   "This gives 24 electrons but a formal charge distribution that does not equal the −2 charge of the ion."
+   "The charge of \u22122 must be shown on the atoms.",
+   "This gives 24 electrons but a formal charge distribution that does not equal the \u22122 charge of the ion."
   ]
  },
  {
@@ -1705,7 +1705,7 @@
   ],
   "misconceptions": [
    "An atom becomes an ion by gaining electrons, not by changing its protons.",
-   "S²⁻ has two more electrons than S.",
+   "S\u00b2\u207b has two more electrons than S.",
    "The nuclear charge does not change."
   ]
  },
@@ -1734,9 +1734,9 @@
    "fixed fact bank checked against CED"
   ],
   "misconceptions": [
-   "Sn⁴⁺ is the oxidized product.",
-   "Fe²⁺ is the reduced product.",
-   "Fe³⁺ gains electrons, so it is the oxidizing agent."
+   "Sn\u2074\u207a is the oxidized product.",
+   "Fe\u00b2\u207a is the reduced product.",
+   "Fe\u00b3\u207a gains electrons, so it is the oxidizing agent."
   ]
  },
  {
@@ -1764,9 +1764,9 @@
    "fixed fact bank checked against CED 9.3"
   ],
   "misconceptions": [
-   "At high T the −TΔS term can exceed ΔH, so ΔG becomes negative.",
-   "At low T the positive ΔH dominates the small −TΔS term.",
-   "The positive ΔH opposes spontaneity at low T, so the reaction is not spontaneous at every temperature."
+   "At high T the \u2212T\u0394S term can exceed \u0394H, so \u0394G becomes negative.",
+   "At low T the positive \u0394H dominates the small \u2212T\u0394S term.",
+   "The positive \u0394H opposes spontaneity at low T, so the reaction is not spontaneous at every temperature."
   ]
  },
  {
@@ -1929,9 +1929,9 @@
    "pH of each solution from the exact charge balance vs ordering by Ka; the orders agree"
   ],
   "misconceptions": [
-   "HCOOH has the second-largest Ka (1.8 × 10⁻⁴), not the largest (4.5 × 10⁻⁴ for HNO2), so it dissociates less at the same concentration and its solution has a higher pH than that of HNO2.",
-   "HOCl has the smallest Ka (3.0 × 10⁻⁸), so its solution has the highest pH; choosing it reverses the relationship between Ka and pH.",
-   "C6H5COOH has the third-largest Ka (6.3 × 10⁻⁵), not the largest (4.5 × 10⁻⁴ for HNO2), so it dissociates less at the same concentration and its solution has a higher pH than that of HNO2."
+   "HCOOH has the second-largest Ka (1.8 \u00d7 10\u207b\u2074), not the largest (4.5 \u00d7 10\u207b\u2074 for HNO2), so it dissociates less at the same concentration and its solution has a higher pH than that of HNO2.",
+   "HOCl has the smallest Ka (3.0 \u00d7 10\u207b\u2078), so its solution has the highest pH; choosing it reverses the relationship between Ka and pH.",
+   "C6H5COOH has the third-largest Ka (6.3 \u00d7 10\u207b\u2075), not the largest (4.5 \u00d7 10\u207b\u2074 for HNO2), so it dissociates less at the same concentration and its solution has a higher pH than that of HNO2."
   ]
  },
  {
@@ -1945,8 +1945,8 @@
   ],
   "misconceptions": [
    "Computes the energy of a mole of photons.",
-   "Reports the frequency c/λ instead of the energy.",
-   "Omits Planck's constant (c/λ in wrong units)."
+   "Reports the frequency c/\u03bb instead of the energy.",
+   "Omits Planck's constant (c/\u03bb in wrong units)."
   ]
  },
  {
@@ -2065,7 +2065,7 @@
   ],
   "misconceptions": [
    "HCl is ionized completely in water.",
-   "The chloride ion from the acid must be shown and the OH⁻ ions are not produced by the acid.",
+   "The chloride ion from the acid must be shown and the OH\u207b ions are not produced by the acid.",
    "That diagram shows a weak acid that is only partly ionized."
   ]
  },
@@ -2095,7 +2095,7 @@
   ],
   "misconceptions": [
    "The strong acid produces CH3COOH from acetate and does not use it up.",
-   "The buffer removes most of the added H3O⁺ by reacting it with acetate.",
+   "The buffer removes most of the added H3O\u207a by reacting it with acetate.",
    "The acetate ions are used up by the added acid and so they become fewer."
   ]
  },
@@ -2111,7 +2111,7 @@
   "misconceptions": [
    "A salt is a lattice of ions and not separate molecules.",
    "The ratio is reversed; two fluoride ions balance one calcium ion.",
-   "Equal numbers would not balance the charge of 2+ against 1−."
+   "Equal numbers would not balance the charge of 2+ against 1\u2212."
   ]
  },
  {
@@ -2334,8 +2334,8 @@
    "sympy power of ten vs float"
   ],
   "misconceptions": [
-   "Uses the difference pH − pKa as the ratio.",
-   "Uses 10^(pH) instead of 10^(pH − pKa).",
+   "Uses the difference pH \u2212 pKa as the ratio.",
+   "Uses 10^(pH) instead of 10^(pH \u2212 pKa).",
    "Takes the ratio equal to the pH divided by the pKa."
   ]
  },
@@ -2426,7 +2426,7 @@
   "misconceptions": [
    "Forgets to convert joules to kilojoules.",
    "Leaves out the number of electrons transferred.",
-   "Uses a positive sign, ΔG° = +nFE°."
+   "Uses a positive sign, \u0394G\u00b0 = +nFE\u00b0."
   ]
  },
  {
@@ -2454,8 +2454,8 @@
    "exact rational vs float"
   ],
   "misconceptions": [
-   "Uses ΔG = ΔH + TΔS with the wrong sign for the entropy term.",
-   "Forgets to convert ΔS from J to kJ.",
+   "Uses \u0394G = \u0394H + T\u0394S with the wrong sign for the entropy term.",
+   "Forgets to convert \u0394S from J to kJ.",
    "Divides the entropy change by T instead of multiplying it by T."
   ]
  },
@@ -2501,7 +2501,7 @@
   "misconceptions": [
    "Uses (1/2) times the number of half-lives.",
    "Uses 1/n as the fraction remaining.",
-   "Subtracts the fraction decayed incorrectly, using 1 − 1/n."
+   "Subtracts the fraction decayed incorrectly, using 1 \u2212 1/n."
   ]
  },
  {
@@ -2531,7 +2531,7 @@
   "misconceptions": [
    "Divides the fraction remaining by the rate constant.",
    "Uses log10 instead of the natural logarithm.",
-   "Uses the second-order relationship (1/frac − 1)/k."
+   "Uses the second-order relationship (1/frac \u2212 1)/k."
   ]
  },
  {
@@ -2726,7 +2726,7 @@
   "misconceptions": [
    "HA is weak and does not ionize completely.",
    "A buffer limits the pH change by consuming the added base.",
-   "A⁻ is a base and does not react with additional base."
+   "A\u207b is a base and does not react with additional base."
   ]
  },
  {
@@ -2740,8 +2740,8 @@
   ],
   "misconceptions": [
    "HCN is the acid; it is not its own conjugate base.",
-   "H₂O is the base that accepts the proton, not the conjugate base of HCN.",
-   "H₃O⁺ is the conjugate acid of H₂O."
+   "H\u2082O is the base that accepts the proton, not the conjugate base of HCN.",
+   "H\u2083O\u207a is the conjugate acid of H\u2082O."
   ]
  },
  {
@@ -2919,7 +2919,7 @@
    "fixed fact bank checked against CED"
   ],
   "misconceptions": [
-   "A⁻ ions have formed from the reaction and must also be present.",
+   "A\u207b ions have formed from the reaction and must also be present.",
    "Hydroxide is consumed by the acid before the equivalence point.",
    "These are present only in very small, equal amounts in a neutral solution."
   ]
@@ -2950,7 +2950,7 @@
   ],
   "misconceptions": [
    "For a weak acid the un-ionized molecules outnumber the ions.",
-   "Each A⁻ ion is accompanied by an H₃O⁺ ion, and a weak acid is mostly un-ionized.",
+   "Each A\u207b ion is accompanied by an H\u2083O\u207a ion, and a weak acid is mostly un-ionized.",
    "That describes complete ionization, a strong acid."
   ]
  },
@@ -3086,7 +3086,7 @@
   "misconceptions": [
    "A color change does not measure the heat released.",
    "The volume alone does not give the heat released.",
-   "Without the amounts and the initial temperature, ΔH cannot be calculated."
+   "Without the amounts and the initial temperature, \u0394H cannot be calculated."
   ]
  },
  {
@@ -3251,7 +3251,7 @@
   "misconceptions": [
    "A higher oxidation number of chlorine goes with the stronger acid.",
    "The number of oxygen atoms changes the acid strength.",
-   "Fewer oxygen atoms make the O–H bond less polarized."
+   "Fewer oxygen atoms make the O\u2013H bond less polarized."
   ]
  },
  {
@@ -3280,7 +3280,7 @@
   ],
   "misconceptions": [
    "Electrons flow because the half-cells differ in reduction potential.",
-   "Mg²⁺ has the lower reduction potential and is not reduced in this cell.",
+   "Mg\u00b2\u207a has the lower reduction potential and is not reduced in this cell.",
    "Silver has the greater reduction potential and is reduced."
   ]
  },
@@ -3310,7 +3310,7 @@
   ],
   "misconceptions": [
    "Gases are produced from a liquid, which increases the entropy.",
-   "The number of moles of gas does not change, so ΔS is small.",
+   "The number of moles of gas does not change, so \u0394S is small.",
    "Two moles of gas become four moles of gas, an increase in entropy."
   ]
  },
@@ -3489,9 +3489,9 @@
    "fixed fact bank checked against CED"
   ],
   "misconceptions": [
-   "Zn²⁺ is a product formed by oxidation of Zn.",
+   "Zn\u00b2\u207a is a product formed by oxidation of Zn.",
    "The reducing agent is a reactant, not a product.",
-   "H⁺ is reduced, so it is the oxidizing agent."
+   "H\u207a is reduced, so it is the oxidizing agent."
   ]
  },
  {
@@ -3549,9 +3549,9 @@
    "fixed fact bank checked against CED"
   ],
   "misconceptions": [
-   "At low temperature the favorable ΔH makes ΔG negative.",
-   "At high temperature the unfavorable −TΔS term makes ΔG positive.",
-   "A negative ΔS is unfavorable and its effect grows with temperature."
+   "At low temperature the favorable \u0394H makes \u0394G negative.",
+   "At high temperature the unfavorable \u2212T\u0394S term makes \u0394G positive.",
+   "A negative \u0394S is unfavorable and its effect grows with temperature."
   ]
  },
  {
@@ -3609,7 +3609,7 @@
    "fixed fact bank checked against CED"
   ],
   "misconceptions": [
-   "A gain of energy by the surroundings means ΔH < 0 for the reaction.",
+   "A gain of energy by the surroundings means \u0394H < 0 for the reaction.",
    "Energy is transferred, not produced.",
    "An increase in the temperature of the surroundings shows energy released, not absorbed."
   ]
@@ -3624,7 +3624,7 @@
    "fixed fact bank checked against CED"
   ],
   "misconceptions": [
-   "The two forms differ in enthalpy, so ΔH° is not zero.",
+   "The two forms differ in enthalpy, so \u0394H\u00b0 is not zero.",
    "Graphite is the reference form and has an enthalpy of formation of zero.",
    "Only the standard-state form of the element has a zero enthalpy of formation, which is graphite for carbon."
   ]
@@ -3641,7 +3641,7 @@
   "misconceptions": [
    "The sign depends on the direction of the original reaction.",
    "Reversal changes the sign and keeps the magnitude.",
-   "The sign of ΔH depends on the direction between states."
+   "The sign of \u0394H depends on the direction between states."
   ]
  },
  {
@@ -3759,7 +3759,7 @@
    "sympy square root vs direct formula"
   ],
   "misconceptions": [
-   "Forgets the square root and uses [H+] = Ka × c.",
+   "Forgets the square root and uses [H+] = Ka \u00d7 c.",
    "Reports the pOH rather than the pH.",
    "Sets [H+] equal to Ka instead of solving for x."
   ]
@@ -3775,8 +3775,8 @@
   ],
   "misconceptions": [
    "Takes [H+] equal to the square root of Kb c and reports that pH.",
-   "Uses Kb directly as [OH−].",
-   "Treats the weak base as strong, so [OH−] equals the formal concentration."
+   "Uses Kb directly as [OH\u2212].",
+   "Treats the weak base as strong, so [OH\u2212] equals the formal concentration."
   ]
  },
  {
@@ -3790,7 +3790,7 @@
   ],
   "misconceptions": [
    "Multiplies the wavelength by hc instead of dividing.",
-   "Uses E = h/λ and leaves out the speed of light.",
+   "Uses E = h/\u03bb and leaves out the speed of light.",
    "Uses the wavelength in nanometers without converting to meters."
   ]
  },
@@ -3804,9 +3804,9 @@
    "sympy power vs float power"
   ],
   "misconceptions": [
-   "Uses [H+] = 10^(−pOH) as if pOH were the pH.",
-   "Uses 14 + pOH instead of 14 − pOH.",
-   "Reports [OH−] instead of [H+]."
+   "Uses [H+] = 10^(\u2212pOH) as if pOH were the pH.",
+   "Uses 14 + pOH instead of 14 \u2212 pOH.",
+   "Reports [OH\u2212] instead of [H+]."
   ]
  },
  {
@@ -3909,7 +3909,7 @@
    "sympy log vs math.log10"
   ],
   "misconceptions": [
-   "Takes the pH as −log of the base concentration.",
+   "Takes the pH as \u2212log of the base concentration.",
    "Subtracts the pOH from 7 instead of 14.",
    "Ignores the second hydroxide per formula unit."
   ]
@@ -3954,9 +3954,9 @@
    "sympy exact ratio vs direct formula"
   ],
   "misconceptions": [
-   "Divides the initial concentration by [H⁺] squared.",
-   "Uses [H⁺] times the initial concentration.",
-   "Uses the pH value instead of [H⁺] in the expression."
+   "Divides the initial concentration by [H\u207a] squared.",
+   "Uses [H\u207a] times the initial concentration.",
+   "Uses the pH value instead of [H\u207a] in the expression."
   ]
  },
  {
@@ -3999,7 +3999,7 @@
    "fixed fact bank checked against CED"
   ],
   "misconceptions": [
-   "Molecules in a liquid keep moving at 100 °C.",
+   "Molecules in a liquid keep moving at 100 \u00b0C.",
    "Condensation is a physical change and does not break bonds within molecules.",
    "The temperature is constant, so the average kinetic energy is constant."
   ]
@@ -4015,7 +4015,7 @@
   ],
   "misconceptions": [
    "Treats the salt as neutral and reports pH 7.00.",
-   "Uses the concentration as [H⁺].",
+   "Uses the concentration as [H\u207a].",
    "Uses Kb directly as if the cation were a weak base."
   ]
  },
@@ -4041,7 +4041,7 @@
   "calculator": "allowed",
   "stimulus": "table",
   "verifiedBy": [
-   "pKa = pH at half-equivalence read from the table vs Henderson–Hasselbalch fit"
+   "pKa = pH at half-equivalence read from the table vs Henderson\u2013Hasselbalch fit"
   ],
   "misconceptions": [
    "Takes the pH at the last listed volume before the equivalence point as the pKa.",
@@ -4074,9 +4074,9 @@
    "fixed fact bank checked against CED"
   ],
   "misconceptions": [
-   "The blue color comes from Cu²⁺ ions, and no silver was on the strip at the start.",
-   "Nitrate ions are spectators and electrons are not gained when Cu²⁺ forms.",
-   "Forming Ag atoms from Ag⁺ ions requires a gain of electrons, so it is reduction."
+   "The blue color comes from Cu\u00b2\u207a ions, and no silver was on the strip at the start.",
+   "Nitrate ions are spectators and electrons are not gained when Cu\u00b2\u207a forms.",
+   "Forming Ag atoms from Ag\u207a ions requires a gain of electrons, so it is reduction."
   ]
  },
  {
@@ -4116,7 +4116,7 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "KE(avg) = (3/2)kT with KE = ½mv² (speed ratio from the masses) vs the root-mean-square speed formula sqrt(3RT/M) for each gas"
+   "KE(avg) = (3/2)kT with KE = \u00bdmv\u00b2 (speed ratio from the masses) vs the root-mean-square speed formula sqrt(3RT/M) for each gas"
   ],
   "misconceptions": [
    "Believes the same temperature means the same speed for every gas.",
@@ -4161,12 +4161,42 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "electron-domain count from (valence electrons + bonded monovalent atoms − charge)/2 vs the shape table keyed by (domains, lone pairs)"
+   "electron-domain count from (valence electrons + bonded monovalent atoms \u2212 charge)/2 vs the shape table keyed by (domains, lone pairs)"
   ],
   "misconceptions": [
    "Believes the larger charge decides which ion has the lone pair.",
    "Believes every central atom bonded to oxygen has a lone pair.",
    "Ignores the lone pair on the central atom."
+  ]
+ },
+ {
+  "id": "ch_t5m_q_after_volume_change",
+  "topic": "7.10",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "recompute Q from the scaled concentrations vs Q = K\u00b7f^(\u0394n_gas) from the coefficients"
+  ],
+  "misconceptions": [
+   "Reads Q > K backward and picks the opposite direction.",
+   "Assumes Q scales linearly with the concentration change and ignores the exponents, so both the value and the direction come out wrong.",
+   "Believes that a constant K means Q cannot change, so volume changes cause no shift."
+  ]
+ },
+ {
+  "id": "ch_t5m_small_k_equilibrium",
+  "topic": "7.7",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact quadratic solution of the ICE expression vs the simplified square-root approximation"
+  ],
+  "misconceptions": [
+   "Treats the numerical value of Kc as a concentration instead of a ratio of concentrations.",
+   "Drops the initial concentration from the expression, treating the square root of Kc as the answer.",
+   "Mishandles the coefficient when converting the change x into the equilibrium concentration."
   ]
  },
  {
@@ -4311,7 +4341,7 @@
   "calculator": "allowed",
   "stimulus": "table",
   "verifiedBy": [
-   "ranking of the liquids by the computed 25 °C vapor pressure vs the reverse ranking by boiling point (Trouton + Clausius–Clapeyron)"
+   "ranking of the liquids by the computed 25 \u00b0C vapor pressure vs the reverse ranking by boiling point (Trouton + Clausius\u2013Clapeyron)"
   ],
   "misconceptions": [
    "Confuses intermolecular forces with the covalent bonds inside molecules.",
@@ -4359,9 +4389,9 @@
    "measured viscosities vs the count of -OH groups (ties broken by molecular size); the same liquid wins"
   ],
   "misconceptions": [
-   "acetone has 0 –OH groups per molecule, fewer than the 3 of glycerol, so its molecules attract each other less strongly and it flows more easily.",
-   "water has 2 –OH groups per molecule, fewer than the 3 of glycerol, so its molecules attract each other less strongly and it flows more easily.",
-   "methanol has 1 –OH group per molecule, fewer than the 3 of glycerol, so its molecules attract each other less strongly and it flows more easily."
+   "acetone has 0 \u2013OH groups per molecule, fewer than the 3 of glycerol, so its molecules attract each other less strongly and it flows more easily.",
+   "water has 2 \u2013OH groups per molecule, fewer than the 3 of glycerol, so its molecules attract each other less strongly and it flows more easily.",
+   "methanol has 1 \u2013OH group per molecule, fewer than the 3 of glycerol, so its molecules attract each other less strongly and it flows more easily."
   ]
  },
  {
@@ -4389,7 +4419,7 @@
    "sympy solution of the quadratic x^2 + Ka x - Ka c = 0 vs bisection on the full charge balance including water"
   ],
   "misconceptions": [
-   "Takes the square root of Ka as [H⁺], leaving out the initial concentration.",
+   "Takes the square root of Ka as [H\u207a], leaving out the initial concentration.",
    "Reports the pOH of the solution.",
    "Uses the pKa of the acid as the pH of the solution."
   ]
@@ -4461,12 +4491,12 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "least squares of ΔG° against T vs the two-point slope"
+   "least squares of \u0394G\u00b0 against T vs the two-point slope"
   ],
   "misconceptions": [
    "Forgets to convert kJ to J.",
-   "Divides a single value of ΔG° by its temperature.",
-   "Reports ΔS° with the right magnitude but the wrong sign."
+   "Divides a single value of \u0394G\u00b0 by its temperature.",
+   "Reports \u0394S\u00b0 with the right magnitude but the wrong sign."
   ]
  },
  {
@@ -4476,12 +4506,12 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "least squares of ΔG° against T vs the two-point slope"
+   "least squares of \u0394G\u00b0 against T vs the two-point slope"
   ],
   "misconceptions": [
-   "Takes the ΔG° at 300 K as ΔH°.",
-   "Subtracts the TΔS° term from ΔG° instead of adding it.",
-   "Takes the ΔG° at 500 K as ΔH°."
+   "Takes the \u0394G\u00b0 at 300 K as \u0394H\u00b0.",
+   "Subtracts the T\u0394S\u00b0 term from \u0394G\u00b0 instead of adding it.",
+   "Takes the \u0394G\u00b0 at 500 K as \u0394H\u00b0."
   ]
  },
  {
@@ -4556,7 +4586,7 @@
   "misconceptions": [
    "Reverses both reactions before adding them.",
    "Adds the two values without reversing the second reaction.",
-   "Reports only the ΔH° of the first reaction."
+   "Reports only the \u0394H\u00b0 of the first reaction."
   ]
  },
  {
@@ -4571,7 +4601,7 @@
   "misconceptions": [
    "Does not reverse the second reaction, and then scales by the number of moles.",
    "Changes the sign of the final enthalpy change.",
-   "Ignores the amount of A that reacts and reports ΔH° of the target reaction."
+   "Ignores the amount of A that reacts and reports \u0394H\u00b0 of the target reaction."
   ]
  },
  {

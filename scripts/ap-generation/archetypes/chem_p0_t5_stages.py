@@ -34,3 +34,6 @@ STAGE_T5_MC5 = ['ch_t5k_valve_mixing']
 
 # CH5 가상 4칸 대체(엄격 쌍둥이 관문 뒤): chem-t5-mc6 실행 대상
 STAGE_T5_MC6 = ['ch_t5l_kmt_claim', 'ch_t5l_vapor_pressure_claim', 'ch_t5l_viscosity_model', 'ch_t5l_vsepr_compare']
+
+# CH5 단원 7 단독 2칸 대체(Q 값 계산 쌍둥이 교체): chem-t5-mc8 실행 대상(chem-t5-mc7 은 2A⇌B 부피 변화 변형이 공개 Exam 4 와 같은 장면이라 폐기)
+STAGE_T5_MC8 = ['ch_t5m_q_after_volume_change', 'ch_t5m_small_k_equilibrium']
