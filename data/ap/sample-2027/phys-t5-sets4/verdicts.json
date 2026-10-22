@@ -1,0 +1,652 @@
+[
+ {
+  "key": "ap_physics_1-m01-k0-q1",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "9.63 m/s",
+     "brief_reasoning": "At the highest point only the horizontal component remains: 16cos53° = 9.63 m/s.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "2D projectile motion, component decomposition and constant horizontal velocity; fits 1.5 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "16cos53 = 9.63 m/s is unique and correct under the stated assumptions."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Text stimulus is complete and clear; level field and negligible air resistance are stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (full speed, difference of speed and vertical component, vertical component); the explanation addresses each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, one calculator step, typical load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, correct projectile MC with a unique key and well-motivated distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: at the apex the vertical velocity is zero and the horizontal velocity is constant, so speed = v0 cos(theta) = 16 cos53° ≈ 9.63 m/s. It needs one conceptual recognition and one component calculation. Distractors map to common errors (initial speed, sine component). There is no representation change or multi-step chain, and the reading load is minimal.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k0-q2",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "t = 2 v0 sinθ / g = 2(16)(0.7986)/9.8 ≈ 2.61 s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "2.61 s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Time of flight for angled launch from level ground; components plus vertical kinematics. In scope for topic 1.5 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "t=2*16*sin53/9.8=2.61 s. Level field and negligible air resistance are stated, so the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Text stimulus is complete and clear. Quantities and conditions are stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions: half flight time, v0/g with no angle, 2v0/g with no angle. The explanation addresses every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 s, one calculator step, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and has well-differentiated distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept projectile problem on level ground: resolve the initial velocity into its vertical component, then apply t = 2*vy0/g. Needs about 3 steps, with simple arithmetic and plausible distractors (apex time, cosine component). It is a straightforward application of the 2.B routine with no extra linking steps or representation translation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k1-q1",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "At the highest point only the horizontal velocity remains: 16 cos37° ≈ 12.8 m/s.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "12.8 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Projectile components at the apex; fits topic 1.5 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "16cos37=12.78, which rounds to 12.8. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text is complete and clear, with the level field and negligible air resistance stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions, and the explanation covers each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60-95 seconds, has four parallel value options, and is calculator-appropriate."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and well formed, with distinct distractors. It is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: at the apex vertical velocity is zero, so speed equals the constant horizontal component, 16 cos37° ≈ 12.8 m/s. Requires one component calculation and recognizing the apex condition. Distractors target sin/cos confusion, full speed, and a halving misconception. Short text, minimal arithmetic, no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k1-q2",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "1.97 s",
+     "brief_reasoning": "t = 2v sinθ/g = 2(16)(0.602)/9.8 ≈ 1.97 s",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Projectile time of flight via components; Unit 1 topic 1.5, skill 2.B fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "t=2v sinθ/g=1.965 s is unique; distractors correspond to distinct wrong formulas."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Text-only stimulus is complete: speed, angle, level field, negligible air resistance."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a distinct named misconception and the explanation addresses all three."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 s, calculator allowed, simple arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean projectile time-of-flight item with distinct distractors and appropriate load."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept projectile problem: resolve the velocity into its vertical component, then apply the symmetric flight-time relation t = 2v_y/g. Few steps, small numbers, short text, and the distractors correspond to common errors (using cos, halving the time). It is a standard introductory item that needs no extra linking step or multi-representation reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k2-q1",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "At the top, vy=0, so speed = vx = 25cos37° ≈ 20.0 m/s.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "20.0 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Projectile components, topic 1.5; calculation with units fits 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "25cos37=19.97 ≈ 20.0; unique correct answer; conditions stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Text stimulus complete and clear; no figure needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (sin vs cos, halving, subtraction); each wrong option explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 s, one calculation, calculator allowed; typical load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean projectile-component question. The key is unique and correct, the distractors are distinct, and the load is typical of the exam. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: at the apex vertical velocity is zero, so speed equals the horizontal component v0 cos(37°) = 20 m/s. Requires one vector decomposition and one conceptual recognition. Minimal reading, trivial arithmetic, no representation changes. Distractors map to common errors (sin vs cos, halving, misc.).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k2-q2",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "t = 2 v0 sin37° / g = 2(25)(0.602)/9.8 ≈ 3.07 s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "3.07 s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Components plus vertical-motion law selection; Unit 1 projectile motion, skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "3.07 s is unique and correct; other options are distinct errors."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Text stimulus duplicates the stem but is complete; level field and negligible air resistance are stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct named misconception and is explained; explanations are brief but adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 s, calculator allowed, no needless arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a correct, clean projectile time-of-flight question with a unique key and well-motivated distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept projectile problem: resolve the initial velocity into components, take vy = 25 sin37° ≈ 15 m/s, then use symmetry (t = 2vy/g) for a level landing. Light arithmetic and clear wording. Distractors reflect common errors (time to apex only, wrong trig function), which test understanding without adding unfair difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_1-m02-k0-q1",
+  "cellId": "ap_physics_1-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Perpendicular forces: sqrt(30^2+120^2)=sqrt(15300)≈124 N",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "124 N"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. The key (124 N, from the perpendicular vector sum) is unique and correct. The distractors encode distinct misconceptions: subtracting the forces, averaging them, and adding the magnitudes. It is a short, standard task that is realistic for a calculator-allowed exam.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item is on topic 2.2: it asks for the net force from two force vectors. It is a calculation with units (skill 2.B). The 50 kg mass is unused, but it is harmless context."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "sqrt(30^2+120^2) = 123.7 N, which rounds to 124 N. Frictionless ice and no other horizontal force are stated in the stem. No other option is defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus is text only and is complete. The wording is clear US English, and the forces and their directions are given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a distinct named misconception and an explanation. The options are parallel and the key is not given away by its length. The \"75.0 N\" label has a minor precision inconsistency, but this does not matter."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 95 seconds, which is typical of an AP Physics 1 multiple-choice question, and the calculator load is minimal."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: add two perpendicular force vectors using the Pythagorean theorem to find the net force magnitude (about 123.7 N, i.e. 124 N). The distractors correspond to subtracting the forces (90 N) and adding them as scalars (150 N). The mass is an unneeded detail. There is one reasoning step, a short computation, and no representation change, so it suits basic learning rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_1-m02-k0-q2",
+  "cellId": "ap_physics_1-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Fnet = sqrt(30^2+120^2) = 123.7 N; a = 123.7/50 = 2.47 m/s^2",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "2.47 m/s^2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Newton's 2nd law with perpendicular vector addition; fits 2.5/2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key 2.47 m/s^2 is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Text stimulus complete; assumptions stated. Stimulus duplicates the stem."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Explanation writes 124/50=2.47 (actually 2.48) and omits the vector-addition step sqrt(30^2+120^2). The 'twice the mass' distractor is not a realistic misconception."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, calculator-appropriate."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item is in scope and suitable. It fails on the explanation, which has an arithmetic and rounding inconsistency (124/50 = 2.48, not 2.47) and skips the vector-addition step. One distractor (net force over twice the mass) is also unrealistic."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: add two perpendicular forces vectorially (Pythagorean theorem), then apply a = F_net/m. Key is 2.47 m/s^2. The main trap is adding the magnitudes algebraically (3.00). Few reasoning steps, no representation change, minimal reading, and a single calculator step. This is a routine introductory application of Newton's second law with no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_1-m02-k1-q1",
+  "cellId": "ap_physics_1-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Perpendicular forces: sqrt(40^2+80^2)=sqrt(8000)=89.4 N",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "89.4 N"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Vector addition of perpendicular forces to find net force fits topic 2.2 (forces, net force) and skill 2.B (calculation with a logical pathway). Dominant demand is correct vector combination. The mass of 20 kg is unused, but it is harmless."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key of 89.4 N is unique and correct. Frictionless ice and no other horizontal forces are stated, and east and north are perpendicular."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and clear, and no figure is needed. It duplicates the stem, which is redundant but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct errors: averaging, using only the larger force, and adding magnitudes. The explanation addresses each one. The 80 N distractor is a weaker misconception, but still acceptable. There is no length giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-95 seconds, with light arithmetic and a calculator allowed. The extra mass is a mild distractor and is typical of exam items. The question is very easy, but it is acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, correct, single-skill item on net force from perpendicular pulls. The key is unique, the distractors are distinct, and the load is appropriate. Pass."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step vector addition of two perpendicular forces using the Pythagorean theorem. The reading load is minimal and the mass is extraneous. The distractors target common errors: averaging, taking the larger force only, and scalar addition. It checks foundational net-force understanding and does not require multi-step reasoning, so it is better suited to basic learning than to a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_1-m02-k1-q2",
+  "cellId": "ap_physics_1-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The two forces are perpendicular, so Fnet = sqrt(40^2+80^2) = 89.4 N. Then a = 89.4/20 = 4.47 m/s^2.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "4.47 m/s^2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Newton's second law with perpendicular vector addition; fits 2.5 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique answer 4.47 m/s^2, matches key index 3."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete text stimulus, directions and assumptions stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, calculator allowed, appropriate load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean, in-scope item with distinct distractors; passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires recognizing that forces are perpendicular vectors, computing the net force by the Pythagorean theorem (about 89.4 N), then applying Newton's second law (a = F_net/m, about 4.47 m/s^2). Distractors reflect common errors: using only one force, adding magnitudes as scalars, or mishandling the resultant. Concept depth is moderate, arithmetic is light, wording is clear, and the context is in scope. The item is typical of a full-mock multiple-choice question.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m02-k2-q1",
+  "cellId": "ap_physics_1-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The two forces are perpendicular, so add them as vectors: sqrt(90^2+50^2)=sqrt(10600)≈103 N",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "103 N"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Net force from perpendicular forces; fits 2.2 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "103 N is unique and correct; the distractors are clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Text stem is complete, with directions, frictionless ice and no other horizontal force stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a distinct named misconception and the explanation covers each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, light load, calculator use is appropriate."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean item. The mass is an unused extra datum, which is acceptable, and the distractors are somewhat simple. Pass."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step vector addition of two perpendicular forces using the Pythagorean theorem (sqrt(90^2+50^2) ≈ 103 N). The mass is an extraneous detail. Distractors reflect common errors (averaging, subtracting, using one force). There is no representation change, the reading load is minimal, and the arithmetic is short. This fits foundational learning more than a full mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_1-m02-k2-q2",
+  "cellId": "ap_physics_1-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Fnet=sqrt(90^2+50^2)=102.96 N; a=Fnet/m=5.15 m/s^2",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "5.15 m/s^2"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct and unique key (5.15 m/s^2). Distractors encode distinct errors (force difference, doubled mass, larger force only). The item is in scope and has a suitable load and a calculator-appropriate format. Pass.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Applies Newton's second law to a net force from perpendicular vectors. This is topic 2.5 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Fnet = sqrt(90^2+50^2) = 102.96 N, so a = 5.148 m/s^2, which rounds to 5.15 m/s^2. Frictionless ice and no other horizontal force are stated, so the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and unambiguous. All conditions are stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has its own misconception explanation. The explanations are brief but sufficient."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 s with a calculator. The load is typical for AP Physics 1."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: add two perpendicular forces via Pythagorean theorem, then apply a = F_net/m. Correct answer 5.15 m/s^2. Distractors reflect common errors (subtracting forces, using one force, halving). Little reading, short arithmetic, no representation translation beyond a vector sum; suited to basic learning rather than full-mock exam depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ }
+]

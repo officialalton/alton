@@ -1,0 +1,467 @@
+[
+ {
+  "candidateKey": "ap_physics_1-m01-k0",
+  "cellId": "ap_physics_1-m01",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "1.2",
+  "unitCode": "1",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ph_t5d_final_speed_from_distance",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Requires selecting the constant-acceleration model from rest, finding a from x = 1/2 a t^2 and then v = a t (or recognizing v_final = 2 v_avg). Two-step reasoning with a conceptual trap (average speed vs. final speed). Short reading, simple arithmetic, in scope, with no ambiguity.",
+  "payload": {
+   "archetype": "ph_t5d_final_speed_from_distance",
+   "topic": "1.2",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "A sled starts from rest and speeds up at a constant rate along a straight, level track. It travels $80\\text{ m}$ in the first $6\\text{ s}$ of its motion. What is the speed of the sled at the end of those $6\\text{ s}$?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$13.3\\text{ m/s}$",
+     "why": "Reports the average speed $d/t$ as the final speed, forgetting that the speed was growing steadily from zero.",
+     "value": "13.333333"
+    },
+    {
+     "text": "$26.7\\text{ m/s}$",
+     "why": "With constant acceleration from rest the average speed is half the final speed, so $d=\\tfrac12vt$ and $v=2d/t=2(80)/(6)=26.7\\text{ m/s}$.",
+     "value": "26.666667"
+    },
+    {
+     "text": "$6.67\\text{ m/s}$",
+     "why": "Halves the average speed instead of doubling it, $d/(2t)$.",
+     "value": "6.6666667"
+    },
+    {
+     "text": "$5.16\\text{ m/s}$",
+     "why": "Uses $v=\\sqrt{2d/t}$ by mixing the kinematic equations.",
+     "value": "5.1639778"
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 95,
+   "facts": [
+    "d=80.0",
+    "t=6.0"
+   ],
+   "blueprint": {
+    "id": "ph_t5d_final_speed_from_distance",
+    "subject": "ap_physics_1",
+    "kind": "mc",
+    "concept": "Final speed of an object that starts from rest with a constant acceleration, from its displacement and elapsed time",
+    "topic": "1.2",
+    "skill": "2.B",
+    "student_thinking": [
+     "Recognize that for constant acceleration from rest the average speed is half the final speed",
+     "Use $d=\\tfrac12(0+v)t$ to solve for $v$"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the acceleration is constant and the sled starts from rest",
+      "evidence": "the stem states the sled starts from rest and speeds up at a constant rate"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Reports the average speed $d/t$ as the final speed, forgetting that the speed was growing steadily from zero."
+     },
+     {
+      "id": "m2",
+      "description": "Halves the average speed instead of doubling it, $d/(2t)$."
+     },
+     {
+      "id": "m3",
+      "description": "Uses $v=\\sqrt{2d/t}$ by mixing the kinematic equations."
+     }
+    ],
+    "verification": {
+     "independent_path": "sympy solves the two kinematic equations for the acceleration and the final speed together; the speed is recomputed as twice the average speed",
+     "method": "sympy symbolic + independent numeric path"
+    },
+    "judgment_demand": [
+     "law_selection",
+     "quantitative_comparison"
+    ]
+   },
+   "seed": 14500,
+   "pack_id": "ph_t5d_final_speed_from_distance-s14500",
+   "explanation_en": "The correct answer is $26.7\\text{ m/s}$. With constant acceleration from rest the average speed is half the final speed, so $d=\\tfrac12vt$ and $v=2d/t=2(80)/(6)=26.7\\text{ m/s}$.\n$13.3\\text{ m/s}$ is incorrect: Reports the average speed $d/t$ as the final speed, forgetting that the speed was growing steadily from zero.\n$6.67\\text{ m/s}$ is incorrect: Halves the average speed instead of doubling it, $d/(2t)$.\n$5.16\\text{ m/s}$ is incorrect: Uses $v=\\sqrt{2d/t}$ by mixing the kinematic equations."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ph_t5d_final_speed_from_distance",
+   "facts": [
+    "d=80.0",
+    "t=6.0"
+   ],
+   "seed": 14500
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, unambiguous constant-acceleration item. The key 26.7 m/s is unique, the distractors are distinct misconceptions, and the load is appropriate.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires selecting the constant-acceleration model from rest, finding a from x = 1/2 a t^2 and then v = a t (or recognizing v_final = 2 v_avg). Two-step reasoning with a conceptual trap (average speed vs. final speed). Short reading, simple arithmetic, in scope, with no ambiguity.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-m01-k1",
+  "cellId": "ap_physics_1-m01",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "1.2",
+  "unitCode": "1",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ph_t5d_final_speed_from_distance",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept constant-acceleration problem from rest. Pick x = 1/2 a t^2 (or v_avg = 2x/t, with v_final = 2 v_avg), then compute. Clean numbers, minimal reading, no graph or representation change. Distractors map to typical errors (average speed, halving, square root). Appropriate for foundational practice rather than full-mock difficulty.",
+  "payload": {
+   "archetype": "ph_t5d_final_speed_from_distance",
+   "topic": "1.2",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "A sled starts from rest and speeds up at a constant rate along a straight, level track. It travels $60\\text{ m}$ in the first $12\\text{ s}$ of its motion. What is the speed of the sled at the end of those $12\\text{ s}$?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$10.0\\text{ m/s}$",
+     "why": "With constant acceleration from rest the average speed is half the final speed, so $d=\\tfrac12vt$ and $v=2d/t=2(60)/(12)=10.0\\text{ m/s}$.",
+     "value": "10.000000"
+    },
+    {
+     "text": "$3.16\\text{ m/s}$",
+     "why": "Uses $v=\\sqrt{2d/t}$ by mixing the kinematic equations.",
+     "value": "3.1622777"
+    },
+    {
+     "text": "$2.50\\text{ m/s}$",
+     "why": "Halves the average speed instead of doubling it, $d/(2t)$.",
+     "value": "2.5000000"
+    },
+    {
+     "text": "$5.00\\text{ m/s}$",
+     "why": "Reports the average speed $d/t$ as the final speed, forgetting that the speed was growing steadily from zero.",
+     "value": "5.0000000"
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 95,
+   "facts": [
+    "d=60.0",
+    "t=12.0"
+   ],
+   "blueprint": {
+    "id": "ph_t5d_final_speed_from_distance",
+    "subject": "ap_physics_1",
+    "kind": "mc",
+    "concept": "Final speed of an object that starts from rest with a constant acceleration, from its displacement and elapsed time",
+    "topic": "1.2",
+    "skill": "2.B",
+    "student_thinking": [
+     "Recognize that for constant acceleration from rest the average speed is half the final speed",
+     "Use $d=\\tfrac12(0+v)t$ to solve for $v$"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the acceleration is constant and the sled starts from rest",
+      "evidence": "the stem states the sled starts from rest and speeds up at a constant rate"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Uses $v=\\sqrt{2d/t}$ by mixing the kinematic equations."
+     },
+     {
+      "id": "m2",
+      "description": "Halves the average speed instead of doubling it, $d/(2t)$."
+     },
+     {
+      "id": "m3",
+      "description": "Reports the average speed $d/t$ as the final speed, forgetting that the speed was growing steadily from zero."
+     }
+    ],
+    "verification": {
+     "independent_path": "sympy solves the two kinematic equations for the acceleration and the final speed together; the speed is recomputed as twice the average speed",
+     "method": "sympy symbolic + independent numeric path"
+    },
+    "judgment_demand": [
+     "law_selection",
+     "quantitative_comparison"
+    ]
+   },
+   "seed": 14501,
+   "pack_id": "ph_t5d_final_speed_from_distance-s14501",
+   "explanation_en": "The correct answer is $10.0\\text{ m/s}$. With constant acceleration from rest the average speed is half the final speed, so $d=\\tfrac12vt$ and $v=2d/t=2(60)/(12)=10.0\\text{ m/s}$.\n$3.16\\text{ m/s}$ is incorrect: Uses $v=\\sqrt{2d/t}$ by mixing the kinematic equations.\n$2.50\\text{ m/s}$ is incorrect: Halves the average speed instead of doubling it, $d/(2t)$.\n$5.00\\text{ m/s}$ is incorrect: Reports the average speed $d/t$ as the final speed, forgetting that the speed was growing steadily from zero."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ph_t5d_final_speed_from_distance",
+   "facts": [
+    "d=60.0",
+    "t=12.0"
+   ],
+   "seed": 14501
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Constant-acceleration kinematics from rest, Unit 1 scope; selects the pathway (average speed is half the final speed), matching 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique answer 10.0 m/s. The stem states constant acceleration, start from rest, straight and level track."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed; the wording is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (mixed-up square root, halving instead of doubling, average speed taken as final speed); all are explained and there is no format giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, light arithmetic, calculator allowed and consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: in scope, uniquely keyed, clear, with distinct distractors and typical exam load. Accept."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept constant-acceleration problem from rest. Pick x = 1/2 a t^2 (or v_avg = 2x/t, with v_final = 2 v_avg), then compute. Clean numbers, minimal reading, no graph or representation change. Distractors map to typical errors (average speed, halving, square root). Appropriate for foundational practice rather than full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-m01-k2",
+  "cellId": "ap_physics_1-m01",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "1.2",
+  "unitCode": "1",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ph_t5d_final_speed_from_distance",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept constant-acceleration problem from rest. Student picks d = 1/2 a t^2 (or average velocity = d/t, final speed = 2 x average) and computes v. Two short steps with clean numbers, no graph or representation translation, minimal reading. Distractors reflect common errors (acceleration instead of speed, wrong division). Fits foundational practice for topic 1.2 rather than full-mock level.",
+  "payload": {
+   "archetype": "ph_t5d_final_speed_from_distance",
+   "topic": "1.2",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "A sled starts from rest and speeds up at a constant rate along a straight, level track. It travels $60\\text{ m}$ in the first $6\\text{ s}$ of its motion. What is the speed of the sled at the end of those $6\\text{ s}$?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$4.47\\text{ m/s}$",
+     "why": "Uses $v=\\sqrt{2d/t}$ by mixing the kinematic equations.",
+     "value": "4.4721360"
+    },
+    {
+     "text": "$5.00\\text{ m/s}$",
+     "why": "Halves the average speed instead of doubling it, $d/(2t)$.",
+     "value": "5.0000000"
+    },
+    {
+     "text": "$3.33\\text{ m/s}$",
+     "why": "Reports the acceleration $2d/t^2$ in place of the final speed.",
+     "value": "3.3333333"
+    },
+    {
+     "text": "$20.0\\text{ m/s}$",
+     "why": "With constant acceleration from rest the average speed is half the final speed, so $d=\\tfrac12vt$ and $v=2d/t=2(60)/(6)=20.0\\text{ m/s}$.",
+     "value": "20.000000"
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 95,
+   "facts": [
+    "d=60.0",
+    "t=6.0"
+   ],
+   "blueprint": {
+    "id": "ph_t5d_final_speed_from_distance",
+    "subject": "ap_physics_1",
+    "kind": "mc",
+    "concept": "Final speed of an object that starts from rest with a constant acceleration, from its displacement and elapsed time",
+    "topic": "1.2",
+    "skill": "2.B",
+    "student_thinking": [
+     "Recognize that for constant acceleration from rest the average speed is half the final speed",
+     "Use $d=\\tfrac12(0+v)t$ to solve for $v$"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the acceleration is constant and the sled starts from rest",
+      "evidence": "the stem states the sled starts from rest and speeds up at a constant rate"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Uses $v=\\sqrt{2d/t}$ by mixing the kinematic equations."
+     },
+     {
+      "id": "m2",
+      "description": "Halves the average speed instead of doubling it, $d/(2t)$."
+     },
+     {
+      "id": "m3",
+      "description": "Reports the acceleration $2d/t^2$ in place of the final speed."
+     }
+    ],
+    "verification": {
+     "independent_path": "sympy solves the two kinematic equations for the acceleration and the final speed together; the speed is recomputed as twice the average speed",
+     "method": "sympy symbolic + independent numeric path"
+    },
+    "judgment_demand": [
+     "law_selection",
+     "quantitative_comparison"
+    ]
+   },
+   "seed": 14502,
+   "pack_id": "ph_t5d_final_speed_from_distance-s14502",
+   "explanation_en": "The correct answer is $20.0\\text{ m/s}$. With constant acceleration from rest the average speed is half the final speed, so $d=\\tfrac12vt$ and $v=2d/t=2(60)/(6)=20.0\\text{ m/s}$.\n$4.47\\text{ m/s}$ is incorrect: Uses $v=\\sqrt{2d/t}$ by mixing the kinematic equations.\n$5.00\\text{ m/s}$ is incorrect: Halves the average speed instead of doubling it, $d/(2t)$.\n$3.33\\text{ m/s}$ is incorrect: Reports the acceleration $2d/t^2$ in place of the final speed."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ph_t5d_final_speed_from_distance",
+   "facts": [
+    "d=60.0",
+    "t=6.0"
+   ],
+   "seed": 14502
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Constant-acceleration kinematics from rest, in Unit 1 and topic 1.2. One computational pathway matches skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "v = 2d/t = 20 m/s is the unique correct answer. The stem states the constant acceleration and the start from rest."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct, realistic error, and the explanation covers all three. The 4.47 rationale is slightly vague but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short item with light arithmetic. The calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique, the distractors are distinct, and the scope and load are appropriate. I recommend accepting it."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept constant-acceleration problem from rest. Student picks d = 1/2 a t^2 (or average velocity = d/t, final speed = 2 x average) and computes v. Two short steps with clean numbers, no graph or representation translation, minimal reading. Distractors reflect common errors (acceleration instead of speed, wrong division). Fits foundational practice for topic 1.2 rather than full-mock level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ }
+]

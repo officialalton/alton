@@ -1,0 +1,474 @@
+[
+ {
+  "candidateKey": "ap_physics_1-m01-k0",
+  "cellId": "ap_physics_1-m01",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "2.7",
+  "unitCode": "2",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ph_t5d_belt_static_friction",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "One-step application of Newton's second law where static friction supplies the net horizontal force (f = ma = 15 x 1.5 = 22.5 N). The main conceptual hurdle is not defaulting to f = mu*N, which is a standard misconception check for topic 2.7. There is no representation change, the arithmetic is trivial, and the wording is clear. This is closer to core concept learning than to a multi-step full-mock item.",
+  "payload": {
+   "archetype": "ph_t5d_belt_static_friction",
+   "topic": "2.7",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "A $15\\text{ kg}$ box rests on a horizontal conveyor belt. The belt speeds up from rest with a constant acceleration of $1.5\\text{ m/s}^2$, and the box does not slip on the belt. The coefficient of static friction between the box and the belt is $0.6$. What is the magnitude of the friction force that the belt exerts on the box?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$147\\text{ N}$",
+     "why": "Uses the weight of the box $mg$ as the friction force.",
+     "value": "147.00000"
+    },
+    {
+     "text": "$22.5\\text{ N}$",
+     "why": "The belt's friction is the only horizontal force on the box and the box accelerates with the belt, so $f=ma=(15)(1.5)=22.5\\text{ N}$. It is below the maximum static friction $88.2\\text{ N}$, so the box does not slip.",
+     "value": "22.500000"
+    },
+    {
+     "text": "$13.5\\text{ N}$",
+     "why": "Multiplies the coefficient of friction by the acceleration and the mass, $\\mu_s ma$.",
+     "value": "13.500000"
+    },
+    {
+     "text": "$1.00\\text{ N}$",
+     "why": "Divides the acceleration by the mass instead of multiplying.",
+     "value": "1.0000000"
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 100,
+   "facts": [
+    "m=15.0",
+    "a=1.5",
+    "mu=0.6"
+   ],
+   "blueprint": {
+    "id": "ph_t5d_belt_static_friction",
+    "subject": "ap_physics_1",
+    "kind": "mc",
+    "concept": "Static friction supplies only the net force needed to accelerate a box that does not slip on an accelerating belt",
+    "topic": "2.7",
+    "skill": "2.B",
+    "student_thinking": [
+     "Identify friction from the belt as the only horizontal force on the box",
+     "Apply Newton's second law instead of using the maximum static friction"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the box does not slip on the belt",
+      "evidence": "the stem states that the box does not slip on the belt"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Uses the weight of the box $mg$ as the friction force."
+     },
+     {
+      "id": "m2",
+      "description": "Multiplies the coefficient of friction by the acceleration and the mass, $\\mu_s ma$."
+     },
+     {
+      "id": "m3",
+      "description": "Divides the acceleration by the mass instead of multiplying."
+     }
+    ],
+    "verification": {
+     "independent_path": "sympy solves $f=ma$ for the friction force and a numeric check confirms that it is below the maximum static friction",
+     "method": "sympy symbolic + independent numeric path"
+    },
+    "judgment_demand": [
+     "law_selection",
+     "quantitative_comparison"
+    ]
+   },
+   "seed": 14600,
+   "pack_id": "ph_t5d_belt_static_friction-s14600",
+   "explanation_en": "The correct answer is $22.5\\text{ N}$. The belt's friction is the only horizontal force on the box and the box accelerates with the belt, so $f=ma=(15)(1.5)=22.5\\text{ N}$. It is below the maximum static friction $88.2\\text{ N}$, so the box does not slip.\n$147\\text{ N}$ is incorrect: Uses the weight of the box $mg$ as the friction force.\n$13.5\\text{ N}$ is incorrect: Multiplies the coefficient of friction by the acceleration and the mass, $\\mu_s ma$.\n$1.00\\text{ N}$ is incorrect: Divides the acceleration by the mass instead of multiplying."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ph_t5d_belt_static_friction",
+   "facts": [
+    "m=15.0",
+    "a=1.5",
+    "mu=0.6"
+   ],
+   "seed": 14600
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.7 static friction with Newton's second law; one-step mathematical routine, skill 2.B fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "No slip means f = ma = 22.5 N, which is below the maximum static friction of 88.2 N. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear: horizontal belt, constant acceleration, no slipping, and mu given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct errors (mg, mu*m*a, a/m), and each wrong option is explained. The mu*m*a distractor is a plausible blend error. The maximum static friction (mu*m*g = 88.2 N) would have been a more realistic distractor than a/m, but this is minor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-100 seconds, light arithmetic, calculator allowed, typical of AP Physics 1."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean one-step item testing that static friction supplies the net force and is not equal to its maximum. The key is unique and the distractors are distinct and explained. Passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-step application of Newton's second law where static friction supplies the net horizontal force (f = ma = 15 x 1.5 = 22.5 N). The main conceptual hurdle is not defaulting to f = mu*N, which is a standard misconception check for topic 2.7. There is no representation change, the arithmetic is trivial, and the wording is clear. This is closer to core concept learning than to a multi-step full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-m01-k1",
+  "cellId": "ap_physics_1-m01",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "2.7",
+  "unitCode": "2",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ph_t5d_belt_static_friction",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The student must see that static friction supplies the net force, so f = ma = 22.5 N, rather than using f = mu*N. The distractor 88.2 N is the maximum static friction, and the student can check that the actual friction is below it. The item tests one core concept discrimination with short arithmetic and a short, unambiguous stem, which fits a typical AP exam item.",
+  "payload": {
+   "archetype": "ph_t5d_belt_static_friction",
+   "topic": "2.7",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "A $15\\text{ kg}$ box rests on a horizontal conveyor belt. The belt speeds up from rest with a constant acceleration of $1.5\\text{ m/s}^2$, and the box does not slip on the belt. The coefficient of static friction between the box and the belt is $0.6$. What is the magnitude of the friction force that the belt exerts on the box?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$1.00\\text{ N}$",
+     "why": "Divides the acceleration by the mass instead of multiplying.",
+     "value": "1.0000000"
+    },
+    {
+     "text": "$22.5\\text{ N}$",
+     "why": "The belt's friction is the only horizontal force on the box and the box accelerates with the belt, so $f=ma=(15)(1.5)=22.5\\text{ N}$. It is below the maximum static friction $88.2\\text{ N}$, so the box does not slip.",
+     "value": "22.500000"
+    },
+    {
+     "text": "$13.5\\text{ N}$",
+     "why": "Multiplies the coefficient of friction by the acceleration and the mass, $\\mu_s ma$.",
+     "value": "13.500000"
+    },
+    {
+     "text": "$88.2\\text{ N}$",
+     "why": "Uses the largest possible static friction $\\mu_smg$, forgetting that static friction takes only the value needed.",
+     "value": "88.200000"
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 100,
+   "facts": [
+    "m=15.0",
+    "a=1.5",
+    "mu=0.6"
+   ],
+   "blueprint": {
+    "id": "ph_t5d_belt_static_friction",
+    "subject": "ap_physics_1",
+    "kind": "mc",
+    "concept": "Static friction supplies only the net force needed to accelerate a box that does not slip on an accelerating belt",
+    "topic": "2.7",
+    "skill": "2.B",
+    "student_thinking": [
+     "Identify friction from the belt as the only horizontal force on the box",
+     "Apply Newton's second law instead of using the maximum static friction"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the box does not slip on the belt",
+      "evidence": "the stem states that the box does not slip on the belt"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Divides the acceleration by the mass instead of multiplying."
+     },
+     {
+      "id": "m2",
+      "description": "Multiplies the coefficient of friction by the acceleration and the mass, $\\mu_s ma$."
+     },
+     {
+      "id": "m3",
+      "description": "Uses the largest possible static friction $\\mu_smg$, forgetting that static friction takes only the value needed."
+     }
+    ],
+    "verification": {
+     "independent_path": "sympy solves $f=ma$ for the friction force and a numeric check confirms that it is below the maximum static friction",
+     "method": "sympy symbolic + independent numeric path"
+    },
+    "judgment_demand": [
+     "law_selection",
+     "quantitative_comparison"
+    ]
+   },
+   "seed": 14601,
+   "pack_id": "ph_t5d_belt_static_friction-s14601",
+   "explanation_en": "The correct answer is $22.5\\text{ N}$. The belt's friction is the only horizontal force on the box and the box accelerates with the belt, so $f=ma=(15)(1.5)=22.5\\text{ N}$. It is below the maximum static friction $88.2\\text{ N}$, so the box does not slip.\n$1.00\\text{ N}$ is incorrect: Divides the acceleration by the mass instead of multiplying.\n$13.5\\text{ N}$ is incorrect: Multiplies the coefficient of friction by the acceleration and the mass, $\\mu_s ma$.\n$88.2\\text{ N}$ is incorrect: Uses the largest possible static friction $\\mu_smg$, forgetting that static friction takes only the value needed."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ph_t5d_belt_static_friction",
+   "facts": [
+    "m=15.0",
+    "a=1.5",
+    "mu=0.6"
+   ],
+   "seed": 14601
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.7 static friction with Newton's second law; fits skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "f=ma=22.5 N is unique and is below the maximum static friction of 88.2 N."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each addressed in the explanation."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, one-step task with light arithmetic; calculator use is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean and passes all five criteria. It has a unique correct key, distinct distractors, and suitable exam load."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must see that static friction supplies the net force, so f = ma = 22.5 N, rather than using f = mu*N. The distractor 88.2 N is the maximum static friction, and the student can check that the actual friction is below it. The item tests one core concept discrimination with short arithmetic and a short, unambiguous stem, which fits a typical AP exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-m01-k2",
+  "cellId": "ap_physics_1-m01",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "2.7",
+  "unitCode": "2",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ph_t5d_belt_static_friction",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The box does not slip, so static friction is the net force and f = ma = 15 N. The solver must recognize that static friction is below its maximum (not mu*N = 58.8 N), which is the common misconception the distractors target (58.8 N, 98 N, and 9.00 N). Concept depth is moderate, the arithmetic is trivial, and there is little reading, so the difficulty comes from the concept and not from unfair sources.",
+  "payload": {
+   "archetype": "ph_t5d_belt_static_friction",
+   "topic": "2.7",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "A $10\\text{ kg}$ box rests on a horizontal conveyor belt. The belt speeds up from rest with a constant acceleration of $1.5\\text{ m/s}^2$, and the box does not slip on the belt. The coefficient of static friction between the box and the belt is $0.6$. What is the magnitude of the friction force that the belt exerts on the box?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$58.8\\text{ N}$",
+     "why": "Uses the largest possible static friction $\\mu_smg$, forgetting that static friction takes only the value needed.",
+     "value": "58.800000"
+    },
+    {
+     "text": "$9.00\\text{ N}$",
+     "why": "Multiplies the coefficient of friction by the acceleration and the mass, $\\mu_s ma$.",
+     "value": "9.0000000"
+    },
+    {
+     "text": "$15.0\\text{ N}$",
+     "why": "The belt's friction is the only horizontal force on the box and the box accelerates with the belt, so $f=ma=(10)(1.5)=15.0\\text{ N}$. It is below the maximum static friction $58.8\\text{ N}$, so the box does not slip.",
+     "value": "15.000000"
+    },
+    {
+     "text": "$98.0\\text{ N}$",
+     "why": "Uses the weight of the box $mg$ as the friction force.",
+     "value": "98.000000"
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 100,
+   "facts": [
+    "m=10.0",
+    "a=1.5",
+    "mu=0.6"
+   ],
+   "blueprint": {
+    "id": "ph_t5d_belt_static_friction",
+    "subject": "ap_physics_1",
+    "kind": "mc",
+    "concept": "Static friction supplies only the net force needed to accelerate a box that does not slip on an accelerating belt",
+    "topic": "2.7",
+    "skill": "2.B",
+    "student_thinking": [
+     "Identify friction from the belt as the only horizontal force on the box",
+     "Apply Newton's second law instead of using the maximum static friction"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the box does not slip on the belt",
+      "evidence": "the stem states that the box does not slip on the belt"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Uses the largest possible static friction $\\mu_smg$, forgetting that static friction takes only the value needed."
+     },
+     {
+      "id": "m2",
+      "description": "Multiplies the coefficient of friction by the acceleration and the mass, $\\mu_s ma$."
+     },
+     {
+      "id": "m3",
+      "description": "Uses the weight of the box $mg$ as the friction force."
+     }
+    ],
+    "verification": {
+     "independent_path": "sympy solves $f=ma$ for the friction force and a numeric check confirms that it is below the maximum static friction",
+     "method": "sympy symbolic + independent numeric path"
+    },
+    "judgment_demand": [
+     "law_selection",
+     "quantitative_comparison"
+    ]
+   },
+   "seed": 14602,
+   "pack_id": "ph_t5d_belt_static_friction-s14602",
+   "explanation_en": "The correct answer is $15.0\\text{ N}$. The belt's friction is the only horizontal force on the box and the box accelerates with the belt, so $f=ma=(10)(1.5)=15.0\\text{ N}$. It is below the maximum static friction $58.8\\text{ N}$, so the box does not slip.\n$58.8\\text{ N}$ is incorrect: Uses the largest possible static friction $\\mu_smg$, forgetting that static friction takes only the value needed.\n$9.00\\text{ N}$ is incorrect: Multiplies the coefficient of friction by the acceleration and the mass, $\\mu_s ma$.\n$98.0\\text{ N}$ is incorrect: Uses the weight of the box $mg$ as the friction force."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ph_t5d_belt_static_friction",
+   "facts": [
+    "m=10.0",
+    "a=1.5",
+    "mu=0.6"
+   ],
+   "seed": 14602
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60-100 seconds and involves one step with simple arithmetic. The calculator designation is consistent.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound, standard static-friction question on a conveyor belt. It has a unique key, distinct misconception distractors, and a suitable load. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The box does not slip, so static friction is the net force and f = ma = 15 N. The solver must recognize that static friction is below its maximum (not mu*N = 58.8 N), which is the common misconception the distractors target (58.8 N, 98 N, and 9.00 N). Concept depth is moderate, the arithmetic is trivial, and there is little reading, so the difficulty comes from the concept and not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ }
+]

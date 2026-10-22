@@ -1,0 +1,164 @@
+[
+ {
+  "key": "ap_physics_1-m01-k0",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "4 times as large",
+     "brief_reasoning": "Static friction is the only horizontal force on the box, so f = ma. Quadrupling a quadruples f (5 N to 20 N), and 20 N is below the 58.8 N maximum, so the box still grips.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.7 static friction as the net force on a non-slipping box (f = ma), with a proportional-reasoning prediction. Fits skill 2.D, and nothing from a later unit is used."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "With no slipping, friction is the only horizontal force, so f = ma and the ratio is 4. The new friction is 20 N, below the 58.8 N maximum, so the no-slip condition is consistent. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear and complete: mass, acceleration, coefficient and the no-slip condition in both cases are all stated. The inertial lab frame is implied."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors (0.25, 16, 2) encode distinct misconceptions, and the explanation addresses each one. The options are short, parallel and similar in length."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds with no arithmetic burden. The difficulty is low but still reasonable for a proportional-reasoning item, and the calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous proportional-reasoning question on static friction. The key is correct, the distractors are distinct, and the load is typical. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: with no slipping, static friction is the net force (f = ma), so friction scales linearly with acceleration, giving a factor of 4. The main hurdle is avoiding the misconception of using f = μN (factor of 1). Only one proportional-reasoning step, minimal reading and arithmetic, no representation changes.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k1",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Static friction provides the box's acceleration, so f = ma. Quadrupling a quadruples f: 12 N becomes 48 N, which is below the 147 N maximum, so the box still doesn't slip.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "4 times as large"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Static friction as net force, proportional prediction; fits 2.7 and 2.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key 4x unique; new friction 48 N is below the 147 N max, and the stem states no slip."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions (inverse, square, unchanged); each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, low reading load, calculator not needed but allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean proportional-reasoning question on static friction. The key is unique and correct, the distractors are distinct, and the load is appropriate."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One governing-law choice (static friction supplies the net force, f = ma, not f = mu*N) and one proportional step (4x acceleration gives 4x friction). No arithmetic is needed. The distractor f = mu*N is a standard misconception check, and the extra numbers (mass, mu) are mild distractors. Wording is clear and unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k2",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "4 times as large",
+     "brief_reasoning": "Static friction provides f=ma, so f grows by the same factor as a: 4 times. The new acceleration is 2.4 m/s², which is below μg≈5.9 m/s², so the box does not slip.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Static friction as net force, proportional prediction; fits 2.7/2.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "4x is unique and correct; new a=2.4 < mu g=5.88, so no-slip is consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; wording clear and conditions stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct misconceptions (f=mu N constant, squaring, half factor); explanation covers each. The half-factor one is slightly weak."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 60-95 s, no arithmetic burden."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean. The key (4x) is unique, the no-slip condition is verified, and the distractors are reasonable. It is on the easy side but acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item needs one governing-law choice: static friction supplies the net force, so f = ma and friction scales linearly with acceleration, giving 4x. The distractors are f = μN (same as before) and a squared dependence (16x). The extraneous mass and μ add a mild conceptual trap, but there is one reasoning step, no representation change and trivial arithmetic. This is a standard single-concept proportional prediction suited to initial learning rather than full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ }
+]
