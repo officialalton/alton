@@ -28,7 +28,8 @@ async function main() {
   console.log(`[${subj}] 공개 문항 ${pubItems.length}/${pubKeys.size}, 공개 군 ${pubFam.size}, 재고(공개 제외) ${rest.length}: 구조 동일(look-alike) ${look.length}, 원형+토픽 동일 ${sameKey.length}, 원형만 동일(구조·토픽 다름, 허용) ${archOnly.length}`);
   const ex = (t: string, xs: It[]) => { console.log(`## ${t}`); for (const c of xs.slice(0, 2)) { const p = pubItems.find((q) => q.fam === c.fam || (c.sig && q.sig === c.sig)) ?? pubItems.find((q) => q.archetype === c.archetype); console.log(`- ${c.key} [${c.archetype} ${c.members[0]?.topic}] ↔ 공개 ${p?.key} [${p?.archetype} ${p?.members[0]?.topic}]`); } };
   ex("구조 동일", look); ex("원형+토픽 동일", sameKey); ex("원형만 동일(허용)", archOnly);
-  const blocked = new Set<string>([...pubKeys, ...look.map((c) => c.key), ...sameKey.map((c) => c.key)]);
+  const recov = new Set<string>((JSON.parse(readFileSync(`data/ap/stock/lookalike-recheck-${subj}.json`, "utf-8")) as { recoverable: string[] }).recoverable); // lookalike-recheck.ts: 자료·조건·과제가 달라 복구된 후보
+  const blocked = new Set<string>([...pubKeys, ...look.map((c) => c.key), ...sameKey.map((c) => c.key)].filter((k) => !recov.has(k)));
   const { out } = solve(ids, blocked, pubSig);
   const bad = verify(out, blocked);
   console.log(`독립 검증기 위반: ${bad.length ? bad.join("; ") : "0"}`);

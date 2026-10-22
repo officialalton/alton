@@ -1,0 +1,50 @@
+{
+ "runs": [
+  "psych-t5-frq"
+ ],
+ "rows": 4,
+ "passed": 3,
+ "rejected": 1,
+ "passRate": 0.75,
+ "mc": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "frq": {
+  "rows": 4,
+  "passed": 3,
+  "passRate": 0.75
+ },
+ "unitsPassed": {},
+ "skillsPassed": {},
+ "figPassed": {
+  "table": 3
+ },
+ "figAll": {
+  "table": 4
+ },
+ "figPassRate": {
+  "table": "3/4"
+ },
+ "renderTypesPassed": {
+  "ap_table": 3
+ },
+ "archetypesPassed": {
+  "psf_aaq_token_homework": 1,
+  "psf_aaq_support_stress": 1,
+  "psf_ebq_like_counts": 1
+ },
+ "archetypesAll": {
+  "psf_aaq_token_homework": 1,
+  "psf_aaq_support_stress": 1,
+  "psf_ebq_school_start": 1,
+  "psf_ebq_like_counts": 1
+ },
+ "failedArchetypes": [
+  "psf_ebq_school_start"
+ ],
+ "costUsd": {
+  "psych-t5-frq": 0.1116
+ }
+}

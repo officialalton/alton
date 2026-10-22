@@ -20,7 +20,8 @@ const nCase = Number(arg("--cases", "3"));
 const show = (title: string, xs: ChemItem[]) => { console.log(`## ${title}`); for (const c of xs.slice(0, nCase)) { const p = pubItems.find((q) => q.fam === c.fam) ?? pubItems.find((q) => q.archetype === c.archetype); console.log(`- 후보 ${stem(c)} [${c.archetype} ${c.members[0]?.topic}] ↔ 공개 ${p ? stem(p) + ` [${p.archetype} ${p.members[0]?.topic}]` : "?"}`); } };
 show("구조 동일(금지)", lookAlike); show("원형+토픽 동일(보수적 금지)", sameKey); show("원형만 동일, 토픽·구조 다름(허용)", strictOnly);
 // 배정
-const blockedKeys = new Set<string>([...pub, ...lookAlike.map((c) => c.key), ...sameKey.map((c) => c.key)]);
+const recov = new Set<string>((JSON.parse(readFileSync("data/ap/stock/lookalike-recheck-chem.json", "utf-8")) as { recoverable: string[] }).recoverable); // lookalike-recheck.ts: 자료·조건·과제가 달라 복구된 후보
+const blockedKeys = new Set<string>([...pub, ...lookAlike.map((c) => c.key), ...sameKey.map((c) => c.key)].filter((k) => !recov.has(k)));
 // 새로 쓸 칸(가상)은 라이브러리 원형을 다시 쓸 수 있다(원형 재사용은 금지가 아니다). 단 만들어진 문항이 공개 문항과 구조 look-alike 가 아니어야 하며 생성 뒤 군집 검사로 확인한다.
 void LIB_SINGLES; void LIB_SETS;
 const ids = arg("--sets", "CH4,CH5").split(",");
