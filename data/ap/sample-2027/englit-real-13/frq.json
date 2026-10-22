@@ -1,0 +1,202 @@
+[
+ {
+  "id": "rf23",
+  "payload": {
+   "schema_version": "lit-frq-1",
+   "task_type": "poetry_analysis",
+   "template": "q1",
+   "title": "Poetry Analysis: Mending Wall",
+   "prompt": {
+    "lead": "The following poem is \"Mending Wall\" by Robert Frost (1914). In this poem, the speaker describes the yearly spring job of rebuilding a stone wall with his neighbor and thinks about why the two of them keep it.",
+    "task": "Read the poem closely. Then write an essay in which you analyze how Robert Frost uses poetic elements and techniques to convey the speaker's divided attitude toward the wall, which he mocks as needless yet calls his neighbor to rebuild every year, and toward the neighbor, whose inherited certainty he both looks down on and cannot shake.",
+    "requirements": [
+     "Respond to the prompt with a thesis that offers a defensible interpretation of the poem.",
+     "Use specific evidence from the poem, and explain how that evidence supports your line of reasoning.",
+     "Explain how multiple poetic elements and techniques contribute to the meaning you describe.",
+     "Write clearly, with appropriate grammar and punctuation."
+    ]
+   },
+   "passage": {
+    "form": "poem",
+    "title": "Mending Wall",
+    "attribution": "by Robert Frost",
+    "headnote": "The following poem is by Robert Frost (1914).",
+    "stanzas": [
+     [
+      "SOMETHING there is that doesn't love a wall,",
+      "That sends the frozen-ground-swell under it,",
+      "And spills the upper boulders in the sun;",
+      "And makes gaps even two can pass abreast.",
+      "The work of hunters is another thing:",
+      "I have come after them and made repair",
+      "Where they have left not one stone on a stone,",
+      "But they would have the rabbit out of hiding,",
+      "To please the yelping dogs. The gaps I mean,",
+      "No one has seen them made or heard them made,",
+      "But at spring mending-time we find them there.",
+      "I let my neighbour know beyond the hill;",
+      "And on a day we meet to walk the line",
+      "And set the wall between us once again.",
+      "We keep the wall between us as we go.",
+      "To each the boulders that have fallen to each.",
+      "And some are loaves and some so nearly balls",
+      "We have to use a spell to make them balance:",
+      "\"Stay where you are until our backs are turned!\"",
+      "We wear our fingers rough with handling them.",
+      "Oh, just another kind of out-door game,",
+      "One on a side. It comes to little more:",
+      "There where it is we do not need the wall:",
+      "He is all pine and I am apple orchard.",
+      "My apple trees will never get across",
+      "And eat the cones under his pines, I tell him.",
+      "He only says, \"Good fences make good neighbours.\"",
+      "Spring is the mischief in me, and I wonder",
+      "If I could put a notion in his head:",
+      "\"Why do they make good neighbours? Isn't it",
+      "Where there are cows? But here there are no cows.",
+      "Before I built a wall I'd ask to know",
+      "What I was walling in or walling out,",
+      "And to whom I was like to give offence.",
+      "Something there is that doesn't love a wall,",
+      "That wants it down.\" I could say \"Elves\" to him,",
+      "But it's not elves exactly, and I'd rather",
+      "He said it for himself. I see him there",
+      "Bringing a stone grasped firmly by the top",
+      "In each hand, like an old-stone savage armed.",
+      "He moves in darkness as it seems to me,",
+      "Not of woods only and the shade of trees.",
+      "He will not go behind his father's saying,",
+      "And he likes having thought of it so well",
+      "He says again, \"Good fences make good neighbours.\""
+     ]
+    ],
+    "line_count": 45,
+    "provenance": {
+     "kind": "public_domain",
+     "author_alias": "Robert Frost",
+     "year_alias": 1914,
+     "registry_id": "frost-mending-wall",
+     "source_url": "https://www.gutenberg.org/ebooks/3026"
+    }
+   },
+   "rubric": {
+    "total_points": 6,
+    "rows": [
+     {
+      "row_id": "A",
+      "name": "Thesis",
+      "max": 1,
+      "descriptors": {
+       "0": "No defensible thesis: the response only restates the prompt, summarizes or describes the text, makes a comment that does not answer the prompt, or never states an interpretation that needs to be defended.",
+       "1": "The response states a defensible interpretation that answers the prompt (it may take more than one sentence and may appear anywhere in the essay)."
+      },
+      "task_specific": "A defensible thesis must say something about the speaker's divided or complicated attitude, toward the wall, the neighbor, or both, and should hint at how the poem shows that division. Good examples: the speaker questions the wall yet starts the repair every year, or his teasing hides a fear of the neighbor's closed, inherited thinking. A thesis does not earn the point if it only says the poem is about walls or barriers, only says the speaker is against the wall and the neighbor is for it, or only lists devices with no claim about attitude. The thesis may appear anywhere in the essay but must be clear and arguable."
+     },
+     {
+      "row_id": "B",
+      "name": "Evidence and commentary",
+      "max": 4,
+      "descriptors": {
+       "0": "Restates the thesis or the prompt, repeats given information, or offers irrelevant material; no usable evidence or commentary.",
+       "1": "Evidence is mostly general; the response summarizes or paraphrases and does not explain how the evidence supports an argument.",
+       "2": "Some specific, relevant evidence, mixed with generalities. Explains how some evidence relates to the argument, but no line of reasoning is established or it is faulty.",
+       "3": "Specific evidence for the claims in a line of reasoning, and explains how some of that evidence supports the line of reasoning, including how at least one literary element or technique contributes to meaning.",
+       "4": "Specific evidence supports every claim in a line of reasoning, the commentary consistently explains how the evidence supports it, and it explains how multiple literary elements or techniques contribute to meaning. Errors that interfere with communication prevent this level."
+      },
+      "task_specific": "Strong responses use specific evidence and explain how it shows the speaker's divided stance. Key evidence: the personified 'Something' that 'doesn't love a wall'; the irony that 'I let my neighbour know'; the shared work and the repeated 'between us'; calling the job 'just another kind of out-door game'; the half-serious 'spell' and the 'Elves' he won't quite name; the pine and apple contrast; the 'old-stone savage armed' simile and the 'darkness' image; and the neighbor's repeated proverb, which frames the end of the poem. A 4 links several of these to a line of reasoning that traces how the attitude changes, for example from playful rule-following to sharper judgment once the neighbor is seen as 'armed' and moving 'in darkness.' A 3 explains relevant evidence but unevenly. A 2 mostly summarizes or names devices with thin commentary. A 1 offers little more than restatement."
+     },
+     {
+      "row_id": "C",
+      "name": "Sophistication",
+      "max": 1,
+      "descriptors": {
+       "0": "Does not meet the criteria for the point: contextualizing is limited to sweeping generalities, other readings are only hinted at, complexity is oversimplified, or elaborate language does not advance the argument.",
+       "1": "Shows sophistication of thought or develops a complex literary argument, sustained through the essay (not a phrase): explores tensions or complexities in the text, situates the interpretation in a broader context, accounts for alternative interpretations, or uses a consistently vivid and persuasive style."
+      },
+      "task_specific": "Sophistication can be shown by exploring tension that the poem leaves unresolved. Examples: the speaker who mocks 'his father's saying' is himself relying on a saying ('Something there is') and on a 'spell.' The speaker's teasing is a kind of wall of its own, since he would 'rather / He said it for himself' and never says his question out loud. The neighbor's proverb gets the last word, and the poem lets it stand without refuting it. An essay can also earn the point by weighing the gap between the speaker's warmth in the shared work and his condescension in the 'savage' simile. Merely mentioning that walls can be both good and bad, or adding outside political allegory, does not earn the point unless it is grounded in the text and sustained."
+     }
+    ],
+    "scoring_notes": [
+     "Do not reward claims about Frost's biography or intentions beyond the text and headnote.",
+     "Treating the speaker as simply anti-wall, without dealing with his starting and joining the repair, usually limits Row B and blocks Row C.",
+     "Accept readings that sympathize with the neighbor if they are supported by evidence, such as the proverb's last-word position or the speaker's condescension.",
+     "Correct naming of device terms is not required. Reward accurate explanation of how a choice works.",
+     "The speaker's quoted words to the neighbor (lines 30 to 36) are imagined speech he says he 'could' use. Responses that notice that he never says them earn credit for precision."
+    ]
+   },
+   "expected_features": {
+    "defensible_positions": [
+     "The speaker mocks the wall as useless, yet he is the one who calls the neighbor to rebuild it, so his skepticism lives alongside real attachment to the ritual and to the contact it allows.",
+     "The speaker's playful, mischievous tone hides real judgment: by the end the neighbor appears as an 'old-stone savage armed' who 'moves in darkness,' a shift from teasing to unease.",
+     "The poem sets two inherited sayings against each other, the speaker's 'Something there is' and the neighbor's proverb, which suggests that the speaker is also bound by belief and that neither man fully reasons for himself.",
+     "The wall is both a divider and the only thing that brings the two men together, so the speaker's attitude is divided because the wall both separates them and connects them.",
+     "The speaker's refusal to say his objection out loud ('I'd rather / He said it for himself') builds its own barrier, which complicates his criticism of the neighbor's closed mind."
+    ],
+    "devices": [
+     {
+      "device": "personification",
+      "quote": "Something there is that doesn't love a wall",
+      "effect": "Giving a vague, unnamed force its own will makes the speaker's opposition to the wall seem natural and almost mystical, while also hiding that it is his own wish."
+     },
+     {
+      "device": "irony",
+      "quote": "I let my neighbour know beyond the hill;",
+      "effect": "The man who questions the wall is the one who starts its repair, which shows his divided attitude."
+     },
+     {
+      "device": "repetition",
+      "quote": "We keep the wall between us as we go.",
+      "effect": "Repeating 'between us' from the line before stresses that the shared work is also a separation. They cooperate only from opposite sides."
+     },
+     {
+      "device": "metaphor",
+      "quote": "Oh, just another kind of out-door game,",
+      "effect": "Calling the repair a game makes it look trivial and fun, which shows the speaker's amused distance but also his enjoyment of the shared activity."
+     },
+     {
+      "device": "juxtaposition",
+      "quote": "He is all pine and I am apple orchard.",
+      "effect": "The speaker defines the two men by their trees, a contrast that supports his argument that no wall is needed while still marking how different they are."
+     },
+     {
+      "device": "refrain",
+      "quote": "Good fences make good neighbours.",
+      "effect": "The neighbor's repeated proverb frames the second half of the poem and gets the last word, showing his unshaken certainty and the speaker's failure to change it."
+     },
+     {
+      "device": "simile",
+      "quote": "like an old-stone savage armed",
+      "effect": "Comparing the neighbor to a primitive armed figure turns the speaker's teasing into condescension and a sense of threat."
+     },
+     {
+      "device": "imagery",
+      "quote": "He moves in darkness as it seems to me,",
+      "effect": "The darkness stretches from literal shade to mental darkness, while 'as it seems to me' admits this is only the speaker's view."
+     },
+     {
+      "device": "diction",
+      "quote": "Spring is the mischief in me",
+      "effect": "Calling his challenge 'mischief' frames it as play rather than conviction, which shows his unwillingness to argue seriously."
+     }
+    ],
+    "common_pitfalls": [
+     "Reducing the poem to a simple conflict in which the speaker is right and the neighbor is wrong, and ignoring the speaker's part in rebuilding the wall.",
+     "Treating 'Good fences make good neighbours' as the poem's moral, or as the speaker's own belief, without analysis.",
+     "Summarizing the wall-mending scene instead of analyzing how specific choices show attitude.",
+     "Missing that the speech in lines 30 to 36 is only imagined and never said to the neighbor.",
+     "Applying outside political or historical allegory about borders that the text does not support.",
+     "Listing devices without connecting them to the speaker's divided attitude."
+    ]
+   },
+   "samples": [],
+   "blueprint": {
+    "central_idea": "The speaker questions the wall and the neighbor's inherited proverb, yet he starts and joins the yearly rebuilding. His teasing skepticism turns into unease about the neighbor's closed mind, while the poem quietly suggests that the speaker relies on sayings and builds barriers of his own.",
+    "complexity": "Division and connection are tangled together: the wall separates the men and is also their only shared ritual, and the speaker's playful tone both hides and reveals judgment. The neighbor's refrain gets the last word without being refuted, so the poem leaves open whether the speaker's skepticism is wiser or just another set of fixed habits."
+   },
+   "provenance": {
+    "kind": "original",
+    "note": "Real public-domain text (registry frost-mending-wall); rubric guidance and sample essays are ALTON-authored, not official College Board material."
+   }
+  }
+ }
+]

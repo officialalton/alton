@@ -1,0 +1,268 @@
+[
+ {
+  "id": "fc6",
+  "plan": {
+   "id": "fc6",
+   "type": "literary_argument",
+   "seedText": "the way a character's silence or withheld speech reveals what the character cannot admit to others or to themselves",
+   "era": "mid-twentieth century",
+   "seed": 20601
+  },
+  "payload": {
+   "schema_version": "lit-frq-1",
+   "task_type": "literary_argument",
+   "template": "q3",
+   "title": "Literary Argument: The Withheld Word",
+   "prompt": {
+    "lead": "In many works of fiction, what a character won't say matters as much as anything said aloud. A son changes the subject whenever his dead father comes up. A wife answers every question except the one her husband actually asked. A witness stays quiet while someone else takes the blame. Withheld speech like this can protect the speaker, punish a listener, or keep alive a story the character needs to believe. It can also cut the character off from the people and the truths that silence was supposed to keep safe. Silence lets a character hide, and it also gives the character away, often to everyone but the character.",
+    "task": "Either from your own reading or from the list below, choose a work of fiction in which a character's silence or refusal to speak reveals something the character cannot admit to others or to themselves. Then, in a well-written essay, analyze how the character's silence and its complex nature contributes to an interpretation of the work as a whole. Do not merely summarize the plot.",
+    "requirements": [
+     "State a defensible thesis about how the idea in the prompt contributes to an interpretation of the work as a whole.",
+     "Support the argument with specific, accurate evidence from the work you chose, and explain how that evidence supports your line of reasoning.",
+     "Do not merely summarize the plot.",
+     "Write clearly, with appropriate grammar and punctuation."
+    ]
+   },
+   "works_list": [
+    {
+     "title": "To the Lighthouse",
+     "author": "Virginia Woolf"
+    },
+    {
+     "title": "Invisible Man",
+     "author": "Ralph Ellison"
+    },
+    {
+     "title": "The Metamorphosis",
+     "author": "Franz Kafka"
+    },
+    {
+     "title": "The Awakening",
+     "author": "Kate Chopin"
+    },
+    {
+     "title": "Jane Eyre",
+     "author": "Charlotte Bronte"
+    },
+    {
+     "title": "The Tempest",
+     "author": "William Shakespeare"
+    },
+    {
+     "title": "Mrs Dalloway",
+     "author": "Virginia Woolf"
+    },
+    {
+     "title": "Beloved",
+     "author": "Toni Morrison"
+    },
+    {
+     "title": "The Stranger",
+     "author": "Albert Camus"
+    },
+    {
+     "title": "Oedipus Rex",
+     "author": "Sophocles"
+    },
+    {
+     "title": "Pride and Prejudice",
+     "author": "Jane Austen"
+    },
+    {
+     "title": "Othello",
+     "author": "William Shakespeare"
+    },
+    {
+     "title": "The Kite Runner",
+     "author": "Khaled Hosseini"
+    },
+    {
+     "title": "Their Eyes Were Watching God",
+     "author": "Zora Neale Hurston"
+    },
+    {
+     "title": "Heart of Darkness",
+     "author": "Joseph Conrad"
+    },
+    {
+     "title": "Brave New World",
+     "author": "Aldous Huxley"
+    },
+    {
+     "title": "Things Fall Apart",
+     "author": "Chinua Achebe"
+    },
+    {
+     "title": "Macbeth",
+     "author": "William Shakespeare"
+    },
+    {
+     "title": "Never Let Me Go",
+     "author": "Kazuo Ishiguro"
+    },
+    {
+     "title": "The Namesake",
+     "author": "Jhumpa Lahiri"
+    },
+    {
+     "title": "The Great Gatsby",
+     "author": "F. Scott Fitzgerald"
+    },
+    {
+     "title": "The Importance of Being Earnest",
+     "author": "Oscar Wilde"
+    },
+    {
+     "title": "The Bluest Eye",
+     "author": "Toni Morrison"
+    },
+    {
+     "title": "Hamlet",
+     "author": "William Shakespeare"
+    },
+    {
+     "title": "The Remains of the Day",
+     "author": "Kazuo Ishiguro"
+    },
+    {
+     "title": "The Handmaid's Tale",
+     "author": "Margaret Atwood"
+    },
+    {
+     "title": "Middlemarch",
+     "author": "George Eliot"
+    },
+    {
+     "title": "A Streetcar Named Desire",
+     "author": "Tennessee Williams"
+    },
+    {
+     "title": "A Raisin in the Sun",
+     "author": "Lorraine Hansberry"
+    },
+    {
+     "title": "Frankenstein",
+     "author": "Mary Shelley"
+    },
+    {
+     "title": "The God of Small Things",
+     "author": "Arundhati Roy"
+    },
+    {
+     "title": "Crime and Punishment",
+     "author": "Fyodor Dostoevsky"
+    },
+    {
+     "title": "Great Expectations",
+     "author": "Charles Dickens"
+    },
+    {
+     "title": "Death of a Salesman",
+     "author": "Arthur Miller"
+    },
+    {
+     "title": "Song of Solomon",
+     "author": "Toni Morrison"
+    },
+    {
+     "title": "The Color Purple",
+     "author": "Alice Walker"
+    },
+    {
+     "title": "One Hundred Years of Solitude",
+     "author": "Gabriel Garcia Marquez"
+    },
+    {
+     "title": "Anna Karenina",
+     "author": "Leo Tolstoy"
+    },
+    {
+     "title": "Wuthering Heights",
+     "author": "Emily Bronte"
+    },
+    {
+     "title": "A Doll's House",
+     "author": "Henrik Ibsen"
+    }
+   ],
+   "rubric": {
+    "total_points": 6,
+    "rows": [
+     {
+      "row_id": "A",
+      "name": "Thesis",
+      "max": 1,
+      "descriptors": {
+       "0": "No defensible thesis: the response only restates the prompt, summarizes or describes the text, makes a comment that does not answer the prompt, or never states an interpretation that needs to be defended.",
+       "1": "The response states a defensible interpretation that answers the prompt (it may take more than one sentence and may appear anywhere in the essay)."
+      },
+      "task_specific": "A defensible thesis names what the silence hides or reveals and connects it to an interpretation of the work as a whole. One example would be 'the narrator's refusal to speak of his brother's death exposes guilt that he protects and that consumes him.' Saying only that a character is silent, or simply restating the prompt, does not earn the point. A thesis that names only a work and a character, with no claim about meaning, does not earn the point either."
+     },
+     {
+      "row_id": "B",
+      "name": "Evidence and commentary",
+      "max": 4,
+      "descriptors": {
+       "0": "Restates the thesis or the prompt, repeats given information, or offers irrelevant material; no usable evidence or commentary.",
+       "1": "Evidence is mostly general; the response summarizes or paraphrases and does not explain how the evidence supports an argument.",
+       "2": "Some specific, relevant evidence, mixed with generalities. Explains how some evidence relates to the argument, but no line of reasoning is established or it is faulty.",
+       "3": "Specific evidence for the claims in a line of reasoning, and explains how some of that evidence supports the line of reasoning, including how at least one literary element or technique contributes to meaning.",
+       "4": "Specific evidence supports every claim in a line of reasoning, the commentary consistently explains how the evidence supports it, and it explains how multiple literary elements or techniques contribute to meaning. Errors that interfere with communication prevent this level."
+      },
+      "task_specific": "Strong responses point to specific moments of withheld speech: evasions, changes of subject, pauses, and unspoken letters or confessions. They explain how each moment shows what the character cannot admit. Commentary should trace how the silence develops or carries consequences across the work and tie it back to the thesis. Responses that mostly retell the plot, or that offer evidence with only general claims about secrecy, should score no higher than 2. Scores of 3 or 4 need consistent explanation of how the silence works and what it means."
+     },
+     {
+      "row_id": "C",
+      "name": "Sophistication",
+      "max": 1,
+      "descriptors": {
+       "0": "Does not meet the criteria for the point: contextualizing is limited to sweeping generalities, other readings are only hinted at, complexity is oversimplified, or elaborate language does not advance the argument.",
+       "1": "Shows sophistication of thought or develops a complex literary argument, sustained through the essay (not a phrase): explores tensions or complexities in the text, situates the interpretation in a broader context, accounts for alternative interpretations, or uses a consistently vivid and persuasive style."
+      },
+      "task_specific": "Sophistication might mean exploring the double-edged nature of the silence, for example showing that it is loyalty and cowardice at once. It might mean considering how the reader becomes the only one who hears what goes unsaid, or placing the silence within social or historical constraints. A single phrase gesturing at complexity does not earn the point. The insight must be developed throughout the response."
+     }
+    ],
+    "scoring_notes": [
+     "Any work of fiction of literary merit, from any period or culture, is acceptable.",
+     "The silence may be complete or partial, such as evasion or a deliberate omission.",
+     "Do not reward naming the work's title or author; reward analysis of the silence.",
+     "For the literary argument question the evidence comes from the work the student chooses: it must be specific and accurate, and the commentary must explain how the named concept contributes to an interpretation of the whole work rather than summarize the plot."
+    ]
+   },
+   "expected_features": {
+    "lines_of_reasoning": [
+     "Silence as self-deception: a character who never names a loss or a failure shows the reader how deeply they deny it. This fits, for example, a novel narrated by an aging servant who talks around his regrets.",
+     "Silence as complicity: a character who says nothing while an injustice happens is shown to share in it, as in stories of communities that look away from cruelty.",
+     "Silence as resistance: refusing to speak to people in power keeps the character's integrity intact but costs them connection or safety. This fits stories of prisoners or of colonized and oppressed characters.",
+     "Silence as protection of others: keeping a secret to spare someone else becomes a burden that warps the relationships it was meant to protect, as in family sagas built around a hidden parentage or crime.",
+     "Silence passed down through generations: unspoken trauma reaches the children anyway, as in novels about migration, war, or slavery where the parents never tell the story.",
+     "Silence and gender or social constraint: characters who are forbidden to speak their desire show it through gesture and evasion, as in courtship novels of earlier centuries.",
+     "Silence broken: the moment of speech reframes everything that came before, and the earlier silence turns out to have been the work's real subject."
+    ],
+    "defensible_positions": [
+     "The character's silence is a form of self-protection that ends up isolating them and so becomes self-punishment.",
+     "Silence in the work is a defensible moral choice even though it causes harm.",
+     "The work invites readers to hear what the character cannot say, and that shifts the moral judgment onto the reader.",
+     "The work treats silence as shared and cultural rather than only personal."
+    ],
+    "common_pitfalls": [
+     "Summarizing the plot instead of analyzing how specific moments of silence work.",
+     "Choosing a work where silence is incidental and forcing it to fit the prompt.",
+     "Treating silence as simply good or simply bad, which ignores its complex nature.",
+     "Analyzing silence only within one scene without connecting it to an interpretation of the whole work.",
+     "Confusing a quiet personality with a meaningful refusal to speak."
+    ]
+   },
+   "samples": [],
+   "blueprint": {
+    "concept": "Withheld speech as both concealment and confession",
+    "central_idea": "Silence protects a character from a truth while exposing that truth to the reader and sometimes to other characters, so the protection costs the character something.",
+    "complexity": "Silence can be self-protection, loyalty, resistance, or cowardice. One silence may be several of these at once, and how it is judged depends on who is listening and what the silence is hiding."
+   },
+   "provenance": {
+    "kind": "original",
+    "note": "ALTON original practice material; fictional writers, titles and works. Q3 lists real published works for student choice."
+   }
+  }
+ }
+]
