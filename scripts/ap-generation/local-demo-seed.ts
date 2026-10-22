@@ -61,8 +61,10 @@ async function seed() {
       values (${q(key)}, ${q(RUN)}, '${subj[c.apSubjectCode]}', ${q(c.apSubjectCode)}, ${q(c.kind)}, ${q(c.keywordCode)}, '1.A', ${q(c.kind === "mc" ? "standalone" : "frq_multipart")}, 'select', 'exact', ${q(c.difficultyProvisional ?? "exam_prep")}, ${q(JSON.stringify(c.payload))}::jsonb, 'auto_passed', ${q(c.calculator === "required" || c.calculator === "not_allowed" ? c.calculator : "na")}, true);`);
     psql(`select ap_set_verification(${q(key)}, true, null, ${q(JSON.stringify({ demo: true }))}::jsonb, '${admin}');`);
     psql(`select ap_set_verification(${q(key)}, null, true, ${q(JSON.stringify({ demo: true, note: "local demo seed" }))}::jsonb, '${admin}');`);
-    const res = await convertCandidate(conn.db as never, { ...c, candidateKey: key } as CandidateRow, purpose, admin);
-    console.log(key, purpose, res.status, (res as { reason?: string }).reason ?? "");
+    let res: { status: string; reason?: string };
+    try { res = await convertCandidate(conn.db as never, { ...c, candidateKey: key } as CandidateRow, purpose, admin) as { status: string; reason?: string }; }
+    catch (e) { if (!process.argv.includes("--skip-convert-failures")) throw e; console.log(`CONVERT_FAIL ${c.stockKey} ${(e instanceof Error ? e.message : String(e)).slice(0, 160)}`); psql(`delete from ap_candidate_items where candidate_key = ${q(key)};`); continue; }
+    console.log(key, purpose, res.status, res.reason ?? "");
     byKey.set(key, c.apSubjectCode);
   }
   // 세트: 과목별(데모용 소형 구조 — 공식 문항 수 아님)
