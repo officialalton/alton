@@ -1,0 +1,193 @@
+[
+ {
+  "id": "rf22",
+  "payload": {
+   "schema_version": "lit-frq-1",
+   "task_type": "poetry_analysis",
+   "template": "q1",
+   "title": "Poetry Analysis: The Darkling Thrush",
+   "prompt": {
+    "lead": "The following poem is \"The Darkling Thrush\" by Thomas Hardy (1900). In this poem, the speaker describes standing alone at a gate on a desolate winter evening, seeing the landscape as the corpse of a dying century, until the sudden song of an old, frail thrush interrupts his gloom.",
+    "task": "Read the poem closely. Then write an essay in which you analyze how Thomas Hardy uses poetic elements and techniques to convey the speaker's tense, divided response to a joy he hears but cannot share, as a world he has pictured as dead is challenged by a hope he can only guess at and never fully take on as his own.",
+    "requirements": [
+     "Respond to the prompt with a thesis that offers a defensible interpretation of the poem.",
+     "Use specific evidence from the poem, and explain how that evidence supports your line of reasoning.",
+     "Explain how multiple poetic elements and techniques contribute to the meaning you describe.",
+     "Write clearly, with appropriate grammar and punctuation."
+    ]
+   },
+   "passage": {
+    "form": "poem",
+    "title": "The Darkling Thrush",
+    "attribution": "by Thomas Hardy",
+    "headnote": "The following poem is by Thomas Hardy (1902).",
+    "stanzas": [
+     [
+      "I LEANT upon a coppice gate",
+      "When Frost was spectre-gray,",
+      "And Winter’s dregs made desolate",
+      "The weakening eye of day.",
+      "The tangled bine-stems scored the sky",
+      "Like strings from broken lyres,",
+      "And all mankind that haunted nigh",
+      "Had sought their household fires."
+     ],
+     [
+      "The land’s sharp features seemed to be",
+      "The Century’s corpse outleant,",
+      "His crypt the cloudy canopy,",
+      "The wind his death-lament.",
+      "The ancient pulse of germ and birth",
+      "Was shrunken hard and dry,",
+      "And every spirit upon earth",
+      "Seemed fervourless as I."
+     ],
+     [
+      "At once a voice outburst among",
+      "The bleak twigs overhead",
+      "In a full-hearted evensong",
+      "Of joy illimited;",
+      "An aged thrush, frail, gaunt, and small,",
+      "In blast-beruffled plume,",
+      "Had chosen thus to fling his soul",
+      "Upon the growing gloom."
+     ],
+     [
+      "So little cause for carollings",
+      "Of such ecstatic sound",
+      "Was written on terrestrial things",
+      "Afar or nigh around,",
+      "That I could think there trembled through",
+      "His happy good-night air",
+      "Some blessed Hope, whereof he knew",
+      "And I was unaware."
+     ]
+    ],
+    "line_count": 32,
+    "provenance": {
+     "kind": "public_domain",
+     "author_alias": "Thomas Hardy",
+     "year_alias": 1902,
+     "registry_id": "hardy-darkling-thrush",
+     "source_url": "https://www.gutenberg.org/ebooks/3168"
+    }
+   },
+   "rubric": {
+    "total_points": 6,
+    "rows": [
+     {
+      "row_id": "A",
+      "name": "Thesis",
+      "max": 1,
+      "descriptors": {
+       "0": "No defensible thesis: the response only restates the prompt, summarizes or describes the text, makes a comment that does not answer the prompt, or never states an interpretation that needs to be defended.",
+       "1": "The response states a defensible interpretation that answers the prompt (it may take more than one sentence and may appear anywhere in the essay)."
+      },
+      "task_specific": "A defensible thesis makes an arguable claim about how the speaker responds to the gap between the dead landscape and the thrush's joy. Examples: the speaker admits a hope exists but places it outside himself, or the song unsettles his despair without overturning it. Theses that only summarize (a sad man hears a bird and feels better), only list devices, or say the poem is simply hopeful or simply despairing, with no tension, do not earn the point. The thesis may be more than one sentence but must appear in one place."
+     },
+     {
+      "row_id": "B",
+      "name": "Evidence and commentary",
+      "max": 4,
+      "descriptors": {
+       "0": "Restates the thesis or the prompt, repeats given information, or offers irrelevant material; no usable evidence or commentary.",
+       "1": "Evidence is mostly general; the response summarizes or paraphrases and does not explain how the evidence supports an argument.",
+       "2": "Some specific, relevant evidence, mixed with generalities. Explains how some evidence relates to the argument, but no line of reasoning is established or it is faulty.",
+       "3": "Specific evidence for the claims in a line of reasoning, and explains how some of that evidence supports the line of reasoning, including how at least one literary element or technique contributes to meaning.",
+       "4": "Specific evidence supports every claim in a line of reasoning, the commentary consistently explains how the evidence supports it, and it explains how multiple literary elements or techniques contribute to meaning. Errors that interfere with communication prevent this level."
+      },
+      "task_specific": "Strong responses trace the movement across the poem. The first two stanzas build a world of decay through death imagery (spectre-gray frost, corpse, crypt, death-lament, broken lyres). Stanza three turns with 'At once' and sets the bird's frailty ('aged,' 'frail, gaunt, and small') against the unlimited joy of its song. The last stanza hedges with 'So little cause,' 'I could think,' 'Some,' and 'unaware.' Commentary should explain how each choice builds the divided attitude, for example how 'fervourless as I' shows the speaker reading his own mood into the world, or how 'fling his soul' makes the song a deliberate act of will. A 4 needs well-chosen evidence and commentary that keeps tying details back to the line of reasoning. A 3 explains some evidence but is uneven. A 2 mostly summarizes or names devices with little explanation. A 1 offers little relevant evidence."
+     },
+     {
+      "row_id": "C",
+      "name": "Sophistication",
+      "max": 1,
+      "descriptors": {
+       "0": "Does not meet the criteria for the point: contextualizing is limited to sweeping generalities, other readings are only hinted at, complexity is oversimplified, or elaborate language does not advance the argument.",
+       "1": "Shows sophistication of thought or develops a complex literary argument, sustained through the essay (not a phrase): explores tensions or complexities in the text, situates the interpretation in a broader context, accounts for alternative interpretations, or uses a consistently vivid and persuasive style."
+      },
+      "task_specific": "Sophistication might look like this: seeing that the bleak landscape is partly the speaker's projection, so the bird's song tests his way of seeing as well as the world itself. Exploring the religious language (evensong, carollings, blessed Hope) and its uneasy fit with a speaker who stays 'unaware.' Reading the ending's grammar as making hope an inference the speaker never reaches himself. Or noticing the irony that the most frail creature in the poem is the one who sings with full heart. The insight must run through the whole argument, not appear in one sentence or rest on unsupported claims about the poet's life or beliefs."
+     }
+    ],
+    "scoring_notes": [
+     "Do not reward or penalize references to historical context beyond the text. The poem itself suggests the end of a century, and that is enough.",
+     "Readings that call the ending hopeful are acceptable if they deal with the hedging language. Readings that call it bleak are acceptable if they explain what the song does to the speaker.",
+     "Correctly naming devices earns no credit by itself. Credit goes to commentary that explains what the devices do.",
+     "Accept either name for the shift in stanza three (volta or turn) if it is analyzed."
+    ]
+   },
+   "expected_features": {
+    "defensible_positions": [
+     "The speaker admits hope may exist but cannot share it, so the poem ends in a kind of isolation, not consolation.",
+     "The bleak first half shows the speaker projecting his own lifelessness onto the world ('fervourless as I'), and the thrush exposes the limits of that view.",
+     "The thrush's frailty makes its joy an act of will rather than a response to its conditions, so hope in the poem is something chosen, not something earned or proven.",
+     "The religious language near the end opens the idea of faith, but the hedging grammar keeps the speaker at a skeptical distance from it.",
+     "The poem moves from certainty about decay to uncertainty about hope, so the speaker's real change is from closed despair to open doubt."
+    ],
+    "devices": [
+     {
+      "device": "personification",
+      "quote": "Frost was spectre-gray",
+      "effect": "The capitalized, ghostly Frost makes the setting seem haunted and lifeless from the start, which sets up the death imagery."
+     },
+     {
+      "device": "simile",
+      "quote": "Like strings from broken lyres",
+      "effect": "Comparing the vines to broken lyres suggests music and poetry have failed. This sets up the irony of the song that follows."
+     },
+     {
+      "device": "extended_metaphor",
+      "quote": "His crypt the cloudy canopy",
+      "effect": "Turning the whole landscape into a burial scene (corpse, crypt, death-lament) makes the despair total and seemingly final."
+     },
+     {
+      "device": "diction",
+      "quote": "Seemed fervourless as I",
+      "effect": "'Seemed' and the comparison to 'I' show that the speaker reads the world through his own mood, so the bleakness is partly his projection."
+     },
+     {
+      "device": "volta",
+      "quote": "At once a voice outburst among",
+      "effect": "The sudden 'At once' and the energetic 'outburst' break into the slow, deathly mood and start the poem's central conflict."
+     },
+     {
+      "device": "juxtaposition",
+      "quote": "An aged thrush, frail, gaunt, and small,",
+      "effect": "The bird's frailty is set against its 'joy illimited.' Its joy cannot come from its condition, which makes the song seem willed or mysterious."
+     },
+     {
+      "device": "alliteration",
+      "quote": "Upon the growing gloom",
+      "effect": "The repeated g sounds weigh the darkness down against the bird's defiant act of flinging its song into it."
+     },
+     {
+      "device": "syntax",
+      "quote": "That I could think there trembled through",
+      "effect": "The conditional, hedged phrasing presents hope only as a possibility the speaker guesses at, not a conviction he holds."
+     },
+     {
+      "device": "irony",
+      "quote": "And I was unaware.",
+      "effect": "The final line names a hope and in the same breath shuts the speaker out of it, so the ending stays divided."
+     }
+    ],
+    "common_pitfalls": [
+     "Reading the poem as a simple shift from sadness to happiness and ignoring the speaker's final 'unaware.'",
+     "Summarizing the stanzas in order without connecting the details to the speaker's divided attitude.",
+     "Listing devices (alliteration, personification) without explaining what they do.",
+     "Building the argument on outside claims about the poet's beliefs or the historical era that the text does not support.",
+     "Treating the thrush purely as a symbol and ignoring the stress on its physical frailty."
+    ]
+   },
+   "samples": [],
+   "blueprint": {
+    "central_idea": "Faced with a world he has imagined as dead, the speaker hears a frail bird sing with unlimited joy. He grants that a hope might exist, but only as something the bird seems to know and he does not.",
+    "complexity": "The shift in the poem is real but incomplete. The bleakness of the first half is partly the speaker's projection, the bird's joy has no visible cause, and the closing language reaches toward faith while the hedged grammar holds the speaker at a distance. Readers can argue for qualified hope, deepened isolation, or open doubt."
+   },
+   "provenance": {
+    "kind": "original",
+    "note": "Real public-domain text (registry hardy-darkling-thrush); rubric guidance and sample essays are ALTON-authored, not official College Board material."
+   }
+  }
+ }
+]

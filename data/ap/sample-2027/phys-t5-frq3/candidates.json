@@ -1,0 +1,1664 @@
+[
+ {
+  "candidateKey": "ap_physics_1-f01-k0",
+  "cellId": "ap_physics_1-f01",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "frq_bundle",
+  "keywordCode": "2.7",
+  "unitCode": "2",
+  "skillPrimary": "2.B",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "phf_mr_rope_crate",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Multi-part FRQ in the style of AP Physics 1 Unit 2. It requires a complete FBD with four forces, the key insight that the normal force is reduced by T sin(theta), a symbolic derivation using Newton's second law along two axes, a short numeric evaluation, and a qualitative justification of how friction changes with angle. Concepts are in scope and the arithmetic is light. Difficulty comes from legitimate levers (choosing the governing law, FBD representation, one additional reasoning step), not from unfair sources.",
+  "payload": {
+   "archetype": "phf_mr_rope_crate",
+   "template": "mr",
+   "topic": "2.7",
+   "extra_topics": [
+    "2.2",
+    "2.5"
+   ],
+   "skill": "2.B",
+   "representative_skill": "2.B",
+   "calculator": "allowed",
+   "title": "Crate pulled by a rope at an angle across a rough floor",
+   "stimulus": {
+    "kind": "text",
+    "description": "A crate of mass $m=10\\text{ kg}$ is pulled across a rough horizontal floor by a rope that exerts a force of magnitude $T=60\\text{ N}$ at an angle $\\theta=20^\\circ$ above the horizontal. The coefficient of kinetic friction between the crate and the floor is $\\mu=0.25$. The crate speeds up as it slides.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "On the dot below, which represents the crate, draw and label the forces (not components) that act on the crate while it slides. Each force must be represented by a distinct arrow starting on the dot.",
+     "points": 3,
+     "response_mode": "diagram",
+     "skill_codes": [
+      "1.A",
+      "1.C"
+     ],
+     "model_answer": "Four arrows from the dot: weight straight down, the normal force straight up, the rope force up and to the right at the angle $\\theta$, and kinetic friction to the left. The normal force is shorter than the weight because the rope pulls partly upward.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Draws and labels all four forces: weight (down), normal force (up), rope tension (up and to the right) and kinetic friction (left), with no extra force",
+       "required_elements": [
+        "weight",
+        "normal",
+        "tension",
+        "friction"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "adds a force of motion",
+        "omits the normal force"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "diagram"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Directions are correct: the rope force at the angle above the horizontal toward the direction of motion and friction opposite to the motion",
+       "required_elements": [
+        "directions"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "draws friction in the direction of motion"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "diagram"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "The normal force arrow is shorter than the weight arrow because the rope has an upward component",
+       "required_elements": [
+        "normal shorter than weight"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "draws the normal force equal to the weight"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "diagram"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Derive an expression for the magnitude of the acceleration of the crate in terms of $m$, $T$, $\\theta$, $\\mu$, and fundamental constants.",
+     "points": 3,
+     "response_mode": "derive",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "Vertical: $N+T\\sin\\theta=mg$ so $N=mg-T\\sin\\theta$. Horizontal: $T\\cos\\theta-\\mu N=ma$, so $a=\\dfrac{T\\cos\\theta-\\mu(mg-T\\sin\\theta)}{m}$.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Applies the vertical equilibrium condition to find the normal force: $N=mg-T\\sin\\theta$",
+       "required_elements": [
+        "N = m g - T sin theta"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses N = m g"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Writes Newton's second law along the floor: $T\\cos\\theta-\\mu N=ma$",
+       "required_elements": [
+        "T cos theta - mu N = m a"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the full tension in the horizontal equation"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "B3",
+       "points": 1,
+       "criterion": "Combines the equations to the correct expression for $a$",
+       "required_elements": [
+        "(T cos theta - mu (m g - T sin theta))/m"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits the upward component of the rope force from the normal force"
+       ],
+       "requires_row_id": "B2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Calculate the magnitude of the acceleration of the crate for $m=10\\text{ kg}$, $T=60\\text{ N}$, $\\theta=20^\\circ$ and $\\mu=0.25$.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "2.B"
+     ],
+     "model_answer": "$N=77.5\\text{ N}$, $f=19.4\\text{ N}$ and $a=(56.4-19.4)/10\\approx 3.70\\text{ m/s}^2$.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Calculates the normal force (about 77 newtons) from the expression in part B",
+       "required_elements": [
+        "77"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses mg as the normal force"
+       ],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Calculates an acceleration of about 3.70 with units of meters per second squared",
+       "required_elements": [
+        "3.70",
+        "m/s^2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the weight as the normal force"
+       ],
+       "requires_row_id": "B3",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "The rope is raised so that the angle increases by $10^\\circ$, while the tension stays the same and the crate keeps sliding. Does the magnitude of the kinetic friction force increase, decrease, or stay the same? Justify your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.B",
+      "3.C"
+     ],
+     "model_answer": "The friction force decreases. A larger angle gives the rope a larger upward component $T\\sin\\theta$, which lowers the normal force $N=mg-T\\sin\\theta$, and $f=\\mu N$ decreases.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "States that the kinetic friction force decreases",
+       "required_elements": [
+        "decreases"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "states that friction stays the same because the crate weighs the same"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Justifies that the larger upward component of the rope force reduces the normal force, and friction is proportional to the normal force",
+       "required_elements": [
+        "smaller normal force"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "argues only that the horizontal component of the tension decreases"
+       ],
+       "requires_row_id": "D1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 22,
+   "facts": [
+    "m=10.0",
+    "T=60.0",
+    "theta=20",
+    "mu=0.25",
+    "N=77.479",
+    "f=19.370",
+    "a=3.7012"
+   ],
+   "expected_values": [
+    {
+     "part": "C",
+     "quantity": "normal force",
+     "value": 77.47879140045987,
+     "unit": "N",
+     "tolerance": 0.9297454968055184
+    },
+    {
+     "part": "C",
+     "quantity": "acceleration",
+     "value": 3.7011859397039535,
+     "unit": "m/s^2",
+     "tolerance": 0.06
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "phf_mr_rope_crate",
+    "subject": "ap_physics_1",
+    "kind": "frq_bundle",
+    "concept": "Newton's second law with an angled applied force and kinetic friction, and how the normal force and friction change with the angle",
+    "topic": "2.7",
+    "skill": "2.B",
+    "student_thinking": [
+     "Draw all four forces on the crate",
+     "Use the vertical equation to find the normal force and the horizontal equation for the acceleration",
+     "Predict how raising the rope angle changes friction"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the rope force has constant magnitude and the crate stays on the floor",
+      "evidence": "the stimulus gives a constant tension and states that the crate slides along the floor"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "the mass",
+      "the rope force and angle",
+      "the coefficient of friction"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "the three unknowns N, f and a are solved as a linear system with numpy and compared with the closed-form expressions",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "1.A",
+       "1.C"
+      ],
+      "topics": [
+       "2.7"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Four arrows from the dot: weight straight down, the normal force straight up, the rope force up and to the right at the angle $\\theta$, and kinetic friction to the left. The normal force is shorter than the weight because the rope pulls partly upward."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Draws and labels all four forces: weight (down), normal force (up), rope tension (up and to the right) and kinetic friction (left), with no extra force",
+        "elements": [
+         "weight",
+         "normal",
+         "tension",
+         "friction"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Directions are correct: the rope force at the angle above the horizontal toward the direction of motion and friction opposite to the motion",
+        "elements": [
+         "directions"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "The normal force arrow is shorter than the weight arrow because the rope has an upward component",
+        "elements": [
+         "normal shorter than weight"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "2.7"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Vertical: $N+T\\sin\\theta=mg$ so $N=mg-T\\sin\\theta$. Horizontal: $T\\cos\\theta-\\mu N=ma$, so $a=\\dfrac{T\\cos\\theta-\\mu(mg-T\\sin\\theta)}{m}$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Applies the vertical equilibrium condition to find the normal force: $N=mg-T\\sin\\theta$",
+        "elements": [
+         "N = m g - T sin theta"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Writes Newton's second law along the floor: $T\\cos\\theta-\\mu N=ma$",
+        "elements": [
+         "T cos theta - mu N = m a"
+        ]
+       },
+       {
+        "row_id": "B3",
+        "points": 1,
+        "criterion": "Combines the equations to the correct expression for $a$",
+        "elements": [
+         "(T cos theta - mu (m g - T sin theta))/m"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "2.B"
+      ],
+      "topics": [
+       "2.7"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "$N=77.5\\text{ N}$, $f=19.4\\text{ N}$ and $a=(56.4-19.4)/10\\approx 3.70\\text{ m/s}^2$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Calculates the normal force (about 77 newtons) from the expression in part B",
+        "elements": [
+         "77"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Calculates an acceleration of about 3.70 with units of meters per second squared",
+        "elements": [
+         "3.70",
+         "m/s^2"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "3.B",
+       "3.C"
+      ],
+      "topics": [
+       "2.7"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "The friction force decreases. A larger angle gives the rope a larger upward component $T\\sin\\theta$, which lowers the normal force $N=mg-T\\sin\\theta$, and $f=\\mu N$ decreases."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "States that the kinetic friction force decreases",
+        "elements": [
+         "decreases"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Justifies that the larger upward component of the rope force reduces the normal force, and friction is proportional to the normal force",
+        "elements": [
+         "smaller normal force"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "judgment_demand": [
+     "representation_reading",
+     "symbolic_reasoning",
+     "justification"
+    ]
+   },
+   "seed": 13700,
+   "pack_id": "phf_mr_rope_crate-s13700"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phf_mr_rope_crate",
+   "facts": [
+    "m=10.0",
+    "T=60.0",
+    "theta=20",
+    "mu=0.25",
+    "N=77.479",
+    "f=19.370",
+    "a=3.7012"
+   ],
+   "seed": 13700
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle is correct and consistent: the parts sum to 10 points, N = 77.5 N and a = 3.70 m/s^2 check out, and the scope is Unit 2 friction. Minor note: g is not stated in the stem, so a student using g = 10 would fall outside the tolerance. The standard g = 9.8 assumption applies, so this is not disqualifying.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part fits its own skill and Unit 2 scope: free-body diagram, derivation, calculation and a qualitative friction prediction."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys and rubric rows are consistent and the dependencies are sensible. The g = 10 alternative would fall outside the stated tolerance."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete; the empty data object is fine because the student draws the diagram."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item with no options. The common errors listed per row are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of an AP FRQ and a calculator is appropriate."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ in the style of AP Physics 1 Unit 2. It requires a complete FBD with four forces, the key insight that the normal force is reduced by T sin(theta), a symbolic derivation using Newton's second law along two axes, a short numeric evaluation, and a qualitative justification of how friction changes with angle. Concepts are in scope and the arithmetic is light. Difficulty comes from legitimate levers (choosing the governing law, FBD representation, one additional reasoning step), not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-f01-k1",
+  "cellId": "ap_physics_1-f01",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "frq_bundle",
+  "keywordCode": "2.7",
+  "unitCode": "2",
+  "skillPrimary": "2.B",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "phf_mr_rope_crate",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard multi-part FRQ on angled-pull friction. It needs an FBD, Newton's 2nd law in two axes, and recognition that the normal force is reduced by the vertical tension component. Then comes a numeric substitution and a qualitative follow-up on how N and friction change with angle. The concepts are in scope and typical for AP Physics 1. Arithmetic is light, wording is clear, and there is no out-of-scope content, so it fits full-mock level.",
+  "payload": {
+   "archetype": "phf_mr_rope_crate",
+   "template": "mr",
+   "topic": "2.7",
+   "extra_topics": [
+    "2.2",
+    "2.5"
+   ],
+   "skill": "2.B",
+   "representative_skill": "2.B",
+   "calculator": "allowed",
+   "title": "Crate pulled by a rope at an angle across a rough floor",
+   "stimulus": {
+    "kind": "text",
+    "description": "A crate of mass $m=12\\text{ kg}$ is pulled across a rough horizontal floor by a rope that exerts a force of magnitude $T=60\\text{ N}$ at an angle $\\theta=30^\\circ$ above the horizontal. The coefficient of kinetic friction between the crate and the floor is $\\mu=0.2$. The crate speeds up as it slides.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "On the dot below, which represents the crate, draw and label the forces (not components) that act on the crate while it slides. Each force must be represented by a distinct arrow starting on the dot.",
+     "points": 3,
+     "response_mode": "diagram",
+     "skill_codes": [
+      "1.A",
+      "1.C"
+     ],
+     "model_answer": "Four arrows from the dot: weight straight down, the normal force straight up, the rope force up and to the right at the angle $\\theta$, and kinetic friction to the left. The normal force is shorter than the weight because the rope pulls partly upward.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Draws and labels all four forces: weight (down), normal force (up), rope tension (up and to the right) and kinetic friction (left), with no extra force",
+       "required_elements": [
+        "weight",
+        "normal",
+        "tension",
+        "friction"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "adds a force of motion",
+        "omits the normal force"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "diagram"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Directions are correct: the rope force at the angle above the horizontal toward the direction of motion and friction opposite to the motion",
+       "required_elements": [
+        "directions"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "draws friction in the direction of motion"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "diagram"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "The normal force arrow is shorter than the weight arrow because the rope has an upward component",
+       "required_elements": [
+        "normal shorter than weight"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "draws the normal force equal to the weight"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "diagram"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Derive an expression for the magnitude of the acceleration of the crate in terms of $m$, $T$, $\\theta$, $\\mu$, and fundamental constants.",
+     "points": 3,
+     "response_mode": "derive",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "Vertical: $N+T\\sin\\theta=mg$ so $N=mg-T\\sin\\theta$. Horizontal: $T\\cos\\theta-\\mu N=ma$, so $a=\\dfrac{T\\cos\\theta-\\mu(mg-T\\sin\\theta)}{m}$.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Applies the vertical equilibrium condition to find the normal force: $N=mg-T\\sin\\theta$",
+       "required_elements": [
+        "N = m g - T sin theta"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses N = m g"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Writes Newton's second law along the floor: $T\\cos\\theta-\\mu N=ma$",
+       "required_elements": [
+        "T cos theta - mu N = m a"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the full tension in the horizontal equation"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "B3",
+       "points": 1,
+       "criterion": "Combines the equations to the correct expression for $a$",
+       "required_elements": [
+        "(T cos theta - mu (m g - T sin theta))/m"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits the upward component of the rope force from the normal force"
+       ],
+       "requires_row_id": "B2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Calculate the magnitude of the acceleration of the crate for $m=12\\text{ kg}$, $T=60\\text{ N}$, $\\theta=30^\\circ$ and $\\mu=0.2$.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "2.B"
+     ],
+     "model_answer": "$N=87.6\\text{ N}$, $f=17.5\\text{ N}$ and $a=(52.0-17.5)/12\\approx 2.87\\text{ m/s}^2$.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Calculates the normal force (about 88 newtons) from the expression in part B",
+       "required_elements": [
+        "88"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses mg as the normal force"
+       ],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Calculates an acceleration of about 2.87 with units of meters per second squared",
+       "required_elements": [
+        "2.87",
+        "m/s^2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the weight as the normal force"
+       ],
+       "requires_row_id": "B3",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "The rope is raised so that the angle increases by $15^\\circ$, while the tension stays the same and the crate keeps sliding. Does the magnitude of the kinetic friction force increase, decrease, or stay the same? Justify your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.B",
+      "3.C"
+     ],
+     "model_answer": "The friction force decreases. A larger angle gives the rope a larger upward component $T\\sin\\theta$, which lowers the normal force $N=mg-T\\sin\\theta$, and $f=\\mu N$ decreases.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "States that the kinetic friction force decreases",
+       "required_elements": [
+        "decreases"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "states that friction stays the same because the crate weighs the same"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Justifies that the larger upward component of the rope force reduces the normal force, and friction is proportional to the normal force",
+       "required_elements": [
+        "smaller normal force"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "argues only that the horizontal component of the tension decreases"
+       ],
+       "requires_row_id": "D1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 22,
+   "facts": [
+    "m=12.0",
+    "T=60.0",
+    "theta=30",
+    "mu=0.2",
+    "N=87.600",
+    "f=17.520",
+    "a=2.8701"
+   ],
+   "expected_values": [
+    {
+     "part": "C",
+     "quantity": "normal force",
+     "value": 87.60000000000001,
+     "unit": "N",
+     "tolerance": 1.0512000000000001
+    },
+    {
+     "part": "C",
+     "quantity": "acceleration",
+     "value": 2.8701270189221932,
+     "unit": "m/s^2",
+     "tolerance": 0.06
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "phf_mr_rope_crate",
+    "subject": "ap_physics_1",
+    "kind": "frq_bundle",
+    "concept": "Newton's second law with an angled applied force and kinetic friction, and how the normal force and friction change with the angle",
+    "topic": "2.7",
+    "skill": "2.B",
+    "student_thinking": [
+     "Draw all four forces on the crate",
+     "Use the vertical equation to find the normal force and the horizontal equation for the acceleration",
+     "Predict how raising the rope angle changes friction"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the rope force has constant magnitude and the crate stays on the floor",
+      "evidence": "the stimulus gives a constant tension and states that the crate slides along the floor"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "the mass",
+      "the rope force and angle",
+      "the coefficient of friction"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "the three unknowns N, f and a are solved as a linear system with numpy and compared with the closed-form expressions",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "1.A",
+       "1.C"
+      ],
+      "topics": [
+       "2.7"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Four arrows from the dot: weight straight down, the normal force straight up, the rope force up and to the right at the angle $\\theta$, and kinetic friction to the left. The normal force is shorter than the weight because the rope pulls partly upward."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Draws and labels all four forces: weight (down), normal force (up), rope tension (up and to the right) and kinetic friction (left), with no extra force",
+        "elements": [
+         "weight",
+         "normal",
+         "tension",
+         "friction"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Directions are correct: the rope force at the angle above the horizontal toward the direction of motion and friction opposite to the motion",
+        "elements": [
+         "directions"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "The normal force arrow is shorter than the weight arrow because the rope has an upward component",
+        "elements": [
+         "normal shorter than weight"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "2.7"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Vertical: $N+T\\sin\\theta=mg$ so $N=mg-T\\sin\\theta$. Horizontal: $T\\cos\\theta-\\mu N=ma$, so $a=\\dfrac{T\\cos\\theta-\\mu(mg-T\\sin\\theta)}{m}$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Applies the vertical equilibrium condition to find the normal force: $N=mg-T\\sin\\theta$",
+        "elements": [
+         "N = m g - T sin theta"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Writes Newton's second law along the floor: $T\\cos\\theta-\\mu N=ma$",
+        "elements": [
+         "T cos theta - mu N = m a"
+        ]
+       },
+       {
+        "row_id": "B3",
+        "points": 1,
+        "criterion": "Combines the equations to the correct expression for $a$",
+        "elements": [
+         "(T cos theta - mu (m g - T sin theta))/m"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "2.B"
+      ],
+      "topics": [
+       "2.7"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "$N=87.6\\text{ N}$, $f=17.5\\text{ N}$ and $a=(52.0-17.5)/12\\approx 2.87\\text{ m/s}^2$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Calculates the normal force (about 88 newtons) from the expression in part B",
+        "elements": [
+         "88"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Calculates an acceleration of about 2.87 with units of meters per second squared",
+        "elements": [
+         "2.87",
+         "m/s^2"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "3.B",
+       "3.C"
+      ],
+      "topics": [
+       "2.7"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "The friction force decreases. A larger angle gives the rope a larger upward component $T\\sin\\theta$, which lowers the normal force $N=mg-T\\sin\\theta$, and $f=\\mu N$ decreases."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "States that the kinetic friction force decreases",
+        "elements": [
+         "decreases"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Justifies that the larger upward component of the rope force reduces the normal force, and friction is proportional to the normal force",
+        "elements": [
+         "smaller normal force"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "judgment_demand": [
+     "representation_reading",
+     "symbolic_reasoning",
+     "justification"
+    ]
+   },
+   "seed": 13701,
+   "pack_id": "phf_mr_rope_crate-s13701"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phf_mr_rope_crate",
+   "facts": [
+    "m=12.0",
+    "T=60.0",
+    "theta=30",
+    "mu=0.2",
+    "N=87.600",
+    "f=17.520",
+    "a=2.8701"
+   ],
+   "seed": 13701
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard angled-rope friction FRQ. Total is 10 points, consistent with the Mathematical Routines weight. The key is unique and consistent with the independent solver (a = 2.87 m/s^2 with g = 9.8). Part D is unambiguous because the normal force stays positive at 45°. The scope stays within Unit 2.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topics 2.7, 2.2 and 2.5 are in scope. Each part is judged against its own skill; Part C targets 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Rubric rows are consistent with the model answers. Dependencies (C1 on B1, C2 on B3, D2 on D1) are sensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete with all values. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The common_errors per row encode realistic misconceptions (N = mg, full tension in the horizontal equation, friction in the direction of motion)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Load is typical for the exam, with light arithmetic and a calculator allowed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ on angled-pull friction. It needs an FBD, Newton's 2nd law in two axes, and recognition that the normal force is reduced by the vertical tension component. Then comes a numeric substitution and a qualitative follow-up on how N and friction change with angle. The concepts are in scope and typical for AP Physics 1. Arithmetic is light, wording is clear, and there is no out-of-scope content, so it fits full-mock level.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-f01-k2",
+  "cellId": "ap_physics_1-f01",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "frq_bundle",
+  "keywordCode": "2.7",
+  "unitCode": "2",
+  "skillPrimary": "2.B",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "phf_mr_rope_crate",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_exam_suitability; reference_pattern_mismatch",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard multi-part FRQ combining a free-body diagram, Newton's second law in two dimensions, and kinetic friction with a reduced normal force from the angled pull. Part D adds a qualitative reasoning step (a larger angle reduces N, so f decreases). The arithmetic is short and the wording is unambiguous. Difficulty comes only from allowed levers: choosing the law, translating the FBD to equations, and one claim-justification step.",
+  "payload": {
+   "archetype": "phf_mr_rope_crate",
+   "template": "mr",
+   "topic": "2.7",
+   "extra_topics": [
+    "2.2",
+    "2.5"
+   ],
+   "skill": "2.B",
+   "representative_skill": "2.B",
+   "calculator": "allowed",
+   "title": "Crate pulled by a rope at an angle across a rough floor",
+   "stimulus": {
+    "kind": "text",
+    "description": "A crate of mass $m=10\\text{ kg}$ is pulled across a rough horizontal floor by a rope that exerts a force of magnitude $T=50\\text{ N}$ at an angle $\\theta=20^\\circ$ above the horizontal. The coefficient of kinetic friction between the crate and the floor is $\\mu=0.3$. The crate speeds up as it slides.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "On the dot below, which represents the crate, draw and label the forces (not components) that act on the crate while it slides. Each force must be represented by a distinct arrow starting on the dot.",
+     "points": 3,
+     "response_mode": "diagram",
+     "skill_codes": [
+      "1.A",
+      "1.C"
+     ],
+     "model_answer": "Four arrows from the dot: weight straight down, the normal force straight up, the rope force up and to the right at the angle $\\theta$, and kinetic friction to the left. The normal force is shorter than the weight because the rope pulls partly upward.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Draws and labels all four forces: weight (down), normal force (up), rope tension (up and to the right) and kinetic friction (left), with no extra force",
+       "required_elements": [
+        "weight",
+        "normal",
+        "tension",
+        "friction"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "adds a force of motion",
+        "omits the normal force"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "diagram"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Directions are correct: the rope force at the angle above the horizontal toward the direction of motion and friction opposite to the motion",
+       "required_elements": [
+        "directions"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "draws friction in the direction of motion"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "diagram"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "The normal force arrow is shorter than the weight arrow because the rope has an upward component",
+       "required_elements": [
+        "normal shorter than weight"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "draws the normal force equal to the weight"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "diagram"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Derive an expression for the magnitude of the acceleration of the crate in terms of $m$, $T$, $\\theta$, $\\mu$, and fundamental constants.",
+     "points": 3,
+     "response_mode": "derive",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "Vertical: $N+T\\sin\\theta=mg$ so $N=mg-T\\sin\\theta$. Horizontal: $T\\cos\\theta-\\mu N=ma$, so $a=\\dfrac{T\\cos\\theta-\\mu(mg-T\\sin\\theta)}{m}$.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Applies the vertical equilibrium condition to find the normal force: $N=mg-T\\sin\\theta$",
+       "required_elements": [
+        "N = m g - T sin theta"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses N = m g"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Writes Newton's second law along the floor: $T\\cos\\theta-\\mu N=ma$",
+       "required_elements": [
+        "T cos theta - mu N = m a"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the full tension in the horizontal equation"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "B3",
+       "points": 1,
+       "criterion": "Combines the equations to the correct expression for $a$",
+       "required_elements": [
+        "(T cos theta - mu (m g - T sin theta))/m"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits the upward component of the rope force from the normal force"
+       ],
+       "requires_row_id": "B2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Calculate the magnitude of the acceleration of the crate for $m=10\\text{ kg}$, $T=50\\text{ N}$, $\\theta=20^\\circ$ and $\\mu=0.3$.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "2.B"
+     ],
+     "model_answer": "$N=80.9\\text{ N}$, $f=24.3\\text{ N}$ and $a=(47.0-24.3)/10\\approx 2.27\\text{ m/s}^2$.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Calculates the normal force (about 81 newtons) from the expression in part B",
+       "required_elements": [
+        "81"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses mg as the normal force"
+       ],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Calculates an acceleration of about 2.27 with units of meters per second squared",
+       "required_elements": [
+        "2.27",
+        "m/s^2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the weight as the normal force"
+       ],
+       "requires_row_id": "B3",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "The rope is raised so that the angle increases by $15^\\circ$, while the tension stays the same and the crate keeps sliding. Does the magnitude of the kinetic friction force increase, decrease, or stay the same? Justify your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.B",
+      "3.C"
+     ],
+     "model_answer": "The friction force decreases. A larger angle gives the rope a larger upward component $T\\sin\\theta$, which lowers the normal force $N=mg-T\\sin\\theta$, and $f=\\mu N$ decreases.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "States that the kinetic friction force decreases",
+       "required_elements": [
+        "decreases"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "states that friction stays the same because the crate weighs the same"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Justifies that the larger upward component of the rope force reduces the normal force, and friction is proportional to the normal force",
+       "required_elements": [
+        "smaller normal force"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "argues only that the horizontal component of the tension decreases"
+       ],
+       "requires_row_id": "D1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 22,
+   "facts": [
+    "m=10.0",
+    "T=50.0",
+    "theta=20",
+    "mu=0.3",
+    "N=80.899",
+    "f=24.270",
+    "a=2.2715"
+   ],
+   "expected_values": [
+    {
+     "part": "C",
+     "quantity": "normal force",
+     "value": 80.89899283371656,
+     "unit": "N",
+     "tolerance": 0.9707879140045987
+    },
+    {
+     "part": "C",
+     "quantity": "acceleration",
+     "value": 2.2714933189180453,
+     "unit": "m/s^2",
+     "tolerance": 0.06
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "phf_mr_rope_crate",
+    "subject": "ap_physics_1",
+    "kind": "frq_bundle",
+    "concept": "Newton's second law with an angled applied force and kinetic friction, and how the normal force and friction change with the angle",
+    "topic": "2.7",
+    "skill": "2.B",
+    "student_thinking": [
+     "Draw all four forces on the crate",
+     "Use the vertical equation to find the normal force and the horizontal equation for the acceleration",
+     "Predict how raising the rope angle changes friction"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the rope force has constant magnitude and the crate stays on the floor",
+      "evidence": "the stimulus gives a constant tension and states that the crate slides along the floor"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "the mass",
+      "the rope force and angle",
+      "the coefficient of friction"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "the three unknowns N, f and a are solved as a linear system with numpy and compared with the closed-form expressions",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "1.A",
+       "1.C"
+      ],
+      "topics": [
+       "2.7"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Four arrows from the dot: weight straight down, the normal force straight up, the rope force up and to the right at the angle $\\theta$, and kinetic friction to the left. The normal force is shorter than the weight because the rope pulls partly upward."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Draws and labels all four forces: weight (down), normal force (up), rope tension (up and to the right) and kinetic friction (left), with no extra force",
+        "elements": [
+         "weight",
+         "normal",
+         "tension",
+         "friction"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Directions are correct: the rope force at the angle above the horizontal toward the direction of motion and friction opposite to the motion",
+        "elements": [
+         "directions"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "The normal force arrow is shorter than the weight arrow because the rope has an upward component",
+        "elements": [
+         "normal shorter than weight"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "2.7"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Vertical: $N+T\\sin\\theta=mg$ so $N=mg-T\\sin\\theta$. Horizontal: $T\\cos\\theta-\\mu N=ma$, so $a=\\dfrac{T\\cos\\theta-\\mu(mg-T\\sin\\theta)}{m}$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Applies the vertical equilibrium condition to find the normal force: $N=mg-T\\sin\\theta$",
+        "elements": [
+         "N = m g - T sin theta"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Writes Newton's second law along the floor: $T\\cos\\theta-\\mu N=ma$",
+        "elements": [
+         "T cos theta - mu N = m a"
+        ]
+       },
+       {
+        "row_id": "B3",
+        "points": 1,
+        "criterion": "Combines the equations to the correct expression for $a$",
+        "elements": [
+         "(T cos theta - mu (m g - T sin theta))/m"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "2.B"
+      ],
+      "topics": [
+       "2.7"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "$N=80.9\\text{ N}$, $f=24.3\\text{ N}$ and $a=(47.0-24.3)/10\\approx 2.27\\text{ m/s}^2$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Calculates the normal force (about 81 newtons) from the expression in part B",
+        "elements": [
+         "81"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Calculates an acceleration of about 2.27 with units of meters per second squared",
+        "elements": [
+         "2.27",
+         "m/s^2"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "3.B",
+       "3.C"
+      ],
+      "topics": [
+       "2.7"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "The friction force decreases. A larger angle gives the rope a larger upward component $T\\sin\\theta$, which lowers the normal force $N=mg-T\\sin\\theta$, and $f=\\mu N$ decreases."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "States that the kinetic friction force decreases",
+        "elements": [
+         "decreases"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Justifies that the larger upward component of the rope force reduces the normal force, and friction is proportional to the normal force",
+        "elements": [
+         "smaller normal force"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "judgment_demand": [
+     "representation_reading",
+     "symbolic_reasoning",
+     "justification"
+    ]
+   },
+   "seed": 13702,
+   "pack_id": "phf_mr_rope_crate-s13702"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phf_mr_rope_crate",
+   "facts": [
+    "m=10.0",
+    "T=50.0",
+    "theta=20",
+    "mu=0.3",
+    "N=80.899",
+    "f=24.270",
+    "a=2.2715"
+   ],
+   "seed": 13702
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The physics and keys are correct and in scope. The weak points are the part C numeric tolerance under g = 9.8 versus 10 m/s^2, the undefined dot figure for part A, and the point weighting, where the target skill 2.B is only 2 of 10 points. I am failing it on exam suitability and pattern fit, conservatively.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topics 2.7, 2.2 and 2.5 are all in scope. Parts are tagged 1.A/1.C, 2.A, 2.B and 3.B/3.C, which is acceptable because each part is judged on its own skill. The calculation in part C targets 2.B. The bundle is dominated by the angled force and friction."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are correct and unique. Part C gives 2.27 m/s^2 with g = 9.8 m/s^2, and the standard assumption is stated in the model. Part D's claim, that friction decreases, is correct. The C2 rubric row requires 2.27 but gives no tolerance. A student using g = 10 m/s^2 gets about 2.2 m/s^2, which could be marked wrong. The tolerance should be stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus is complete and clear, and \"the crate speeds up\" gives the direction of motion. The data object is empty, which is fine for a text stimulus. Part A refers to \"the dot below\" but no figure is specified. The dot needs to be provided for the diagram response."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "There are no MC options. The rubric common errors are realistic and distinct, for example using N = mg and friction in the direction of motion."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The total is 10 points, which does not match the stated weights: the Mathematical Routines type should be 10, and that is met, but the part split of 3/3/2/2 has no part worth more than 3 points. Estimated time is 22 minutes. Part B (derive) is labeled 2.A inside a 2.B-targeted bundle, which is acceptable. Part C is worth only 2 points, so the targeted 2.B skill is a small share of the bundle. The load is heavy, with a free-body diagram, a derivation, a calculation and a justification, but it is plausible for AP Physics 1."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ combining a free-body diagram, Newton's second law in two dimensions, and kinetic friction with a reduced normal force from the angled pull. Part D adds a qualitative reasoning step (a larger angle reduces N, so f decreases). The arithmetic is short and the wording is unambiguous. Difficulty comes only from allowed levers: choosing the law, translating the FBD to equations, and one claim-justification step.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ }
+]

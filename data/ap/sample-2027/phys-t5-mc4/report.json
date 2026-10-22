@@ -1,0 +1,35 @@
+{
+ "run": "phys-t5-mc4",
+ "subject": "ap_physics_1",
+ "generatedAt": "2026-10-22T06:13:44.765Z",
+ "totalCostUsd": 1.2,
+ "newSpendSinceBaseline": 1.31,
+ "cap": 50,
+ "calls": 117,
+ "candidates": 39,
+ "mcCandidates": 39,
+ "frqCandidates": 0,
+ "passedAll": 26,
+ "adopted": 13,
+ "mcAdopted": 13,
+ "frqAdopted": 0,
+ "reserve": 13,
+ "yield": 0.333,
+ "costPerAdopted": 0.092,
+ "callsPerAdopted": 9,
+ "duplicateRejected": 11,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 0,
+  "template": 39
+ },
+ "rejectionReasons": {
+  "criterion_failed_distractor_explanation": 2,
+  "criterion_failed_key_scoring": 1,
+  "criterion_failed_stimulus_expression": 1,
+  "instant_reject_multiple_correct": 1,
+  "reference_pattern_mismatch": 1,
+  "duplicate_gate_near_duplicate": 11
+ },
+ "unfilledCells": []
+}

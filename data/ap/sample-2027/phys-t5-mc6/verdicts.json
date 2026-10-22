@@ -1,0 +1,499 @@
+[
+ {
+  "key": "ap_physics_1-m01-k0",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Using a_t = alpha*r: A = 0.60, B = 1.80, C = 0.80, D = 0.50 m/s^2, so B > C > A > D.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "B > C > A > D"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "a_t = alpha r comparison across four scenarios fits 5.2 and skill 2.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique correct ranking B > C > A > D; no ties; key verified."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem gives all data. The parenthetical is slightly awkward but clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (radius only, alpha only, alpha/r), each matching its ranking; explanation covers every option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, light arithmetic, calculator allowed and consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean ranking question on a_t = alpha r. The key is unique and correct, and each distractor reflects a distinct misconception. The item passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single relation a_t = alpha*r applied to four cases with simple one-step products (0.60, 1.80, 0.80, 0.50 m/s^2), then ordered. No representation change, light reading, minimal concept depth; the only trap is ranking by alpha or r alone. Better suited to basic learning than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k1",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "a_t=alpha*r: A=2.0, D=1.8, C=0.5, B=0.4 m/s^2",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "A > D > C > B"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "a_t=alpha r ranking across scenarios; topic 5.2, skill 2.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique correct ranking A>D>C>B."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete. The parenthetical is slightly awkward but clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor matches a distinct misconception (alpha/r, alpha alone, r alone); all are explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, light arithmetic, calculator use is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key is unique, the three distractors each encode a distinct misconception, and the load is appropriate for AP Physics 1."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One direct relation a_t = alpha*r applied to four scenarios with simple one-step products (2.0, 0.4, 0.5, 1.8), then a ranking. No representation change, no multi-step reasoning, and little reading. Distractors catch ranking by alpha alone or by r alone. Suitable for introductory practice rather than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k2",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "a_t = αr: A=1.0, B=2.0, C=0.6, D=1.2 m/s², so B > D > A > C",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "B > D > A > C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 75 seconds, simple arithmetic, calculator allowed, light reading load.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean ranking item on a_t = αr. The key is unique and the distractors encode distinct misconceptions. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single relation a_t = alpha*r applied to four scenarios with simple one-digit products, then ranked. Little concept depth beyond linking angular and tangential acceleration; no representation change or multi-step reasoning. Suitable for basic learning rather than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_1-m02-k0",
+  "cellId": "ap_physics_1-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The momenta are equal and opposite, so KE is inversely proportional to mass. The 0.5 kg cart gets 2/3 of the 6 J, which is 4 J.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "4.00 J"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Momentum conservation in an explosion with a proportional prediction of the energy split fits topic 4.3 and skill 2.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "4.00 J is the unique correct answer. Equal and opposite momenta give K proportional to 1/m, so the lighter cart gets 2/3 of 6 J."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem wording 'equal kinetic energy because their masses are equal' is slightly imprecise, since momentum conservation is the real reason, but it is not wrong."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The 5.82 J distractor is an odd value with no derivation. Its stated misconception ('gives all of the energy to the lighter cart') would give 6 J, not 5.82 J, so the rationale does not match the value. The explanation for that option only repeats this mismatched text."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The reading and calculation load is short and typical of the exam. Calculator use is allowed but not needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item is in scope, but the 5.82 J distractor is unjustified and its rationale does not match its value. The stem also gives a loose reason for the equal split. Fail on distractor quality."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must see that equal and opposite momenta (from conservation of momentum) mean KE is proportional to 1/m, so the energy splits in the ratio 2:1. This takes one proportional-reasoning prediction and one link between momentum and energy. The arithmetic is trivial and the reading is short. Distractors include the equal-split intuition (3 J) and the inverse split (2 J).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m02-k1",
+  "cellId": "ap_physics_1-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The carts have equal and opposite momenta, and KE = p²/2m, so KE is inversely proportional to mass. With masses of 1 kg and 4 kg the KE ratio is 4:1, so the lighter cart gets (4/5)(8 J) = 6.40 J.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "6.40 J"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Momentum conservation leading to an energy-sharing prediction; fits 4.3 and 2.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "6.40 J is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The 7.76 J option is explained as 'all of the energy to the lighter cart', but all of the energy is 8 J. The value does not match its stated misconception, so the distractor is arbitrary and incoherent."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 s, light load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item is in scope. The 7.76 J distractor does not match its rationale ('all the energy' would be 8 J), so the distractor and explanation criterion fails. Fix by changing it to 8.00 J or by giving it a coherent misconception."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires recognizing that momentum conservation gives equal and opposite momenta, then using KE = p^2/2m to see that KE is inversely proportional to mass, so the energy splits 4:1 and the lighter cart gets 4/5 of 8 J = 6.40 J. This is a proportional-reasoning prediction with a conceptual link between momentum and energy. The arithmetic is trivial and the reading load is low. The distractors (7.76 J, 1.60 J, 4.00 J) target common errors such as assuming equal KE or splitting by the wrong fraction.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m02-k2",
+  "cellId": "ap_physics_1-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The carts have equal and opposite momenta. Since KE = p²/2m, each cart's KE is inversely proportional to its mass. The lighter cart gets 2/3 of 6 J, which is 4 J.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "4.00 J"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 90 seconds with light reading, and calculator use is trivial.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The physics, key and scope are sound. The distractors are flawed: the 5.82 J option does not match its stated rationale of \"all of the energy\" (6 J), it is an arbitrary number, and the 2.00 J rationale uses unexplained internal notation. Fail on distractor quality."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires recognizing that momentum conservation gives equal and opposite momenta, then using KE = p^2/(2m) to see KE is inversely proportional to mass, and splitting the 6 J in a 2:1 ratio to get 4 J for the lighter cart. This is one proportional-reasoning prediction (skill 2.D) with a conceptual law choice and trivial arithmetic. The wording is clear and in scope, and the distractors reflect common misconceptions (equal KE, or KE split incorrectly).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m03-k0",
+  "cellId": "ap_physics_1-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D: the work is the same on both pistons, 6.00 J",
+     "brief_reasoning": "Work on the small piston is 20 N × 0.3 m = 6 J. The large piston gets 10 times the force (200 N) but moves 1/10 the distance (0.03 m), so the work done on it is also 6 J.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Hydraulic lift with Pascal's principle and volume conservation, linked to energy/work, is in scope for 8.4. The dominant demand is applying a law to justify a claim (3.B)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "W1 = 6 J, F2 = 200 N, d2 = 0.03 m, W2 = 6 J. Only D is correct. The stem states incompressible fluid and negligible friction."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete, with areas, force, distance and assumptions given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct misconceptions: energy loss, work scaling with force, and pressure/force confusion. The explanation covers each. Option C's rationale is slightly muddled but still distinct."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, trivial arithmetic. The key is the longest option and carries the numeric value, a minor giveaway that is tolerable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A sound, in-scope claim-justification item with a unique key and distinct distractors. The only weakness is a minor length giveaway on the key option, so it passes."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires applying Pascal's principle and incompressibility (volume conservation) to get a 10x force and 1/10 distance, then linking these to work and energy conservation to judge the claim. About 3 reasoning steps with proportional reasoning, simple arithmetic (20 N x 0.3 m = 6 J), short wording, and no unfair difficulty sources. This is typical of a mid-level AP exam conceptual item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m03-k1",
+  "cellId": "ap_physics_1-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D: equal work, 9.00 J",
+     "brief_reasoning": "Small piston: W = 30 × 0.3 = 9 J. Large piston: force is 600 N and it moves 0.015 m because the displaced volume is the same, so W = 9 J.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Takes about 90 seconds with light arithmetic. The calculator is not really needed, which is acceptable. Reading load is modest.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound claim-and-justification question on hydraulic lift energy conservation. The key is unique and correct, and the distractors map to distinct misconceptions. The only weakness is that the key is the longest option."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires applying Pascal's principle together with incompressibility and energy conservation to judge a claim about work. The solver must find the force ratio (20), infer the distance ratio (1/20) from fluid volume conservation, and compare work on both pistons (9 J each). Distractors target common misconceptions (force multiplication implies more work, energy loss despite negligible friction, reversed roles). Arithmetic is minimal, wording is clear, and there is no extraneous reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m03-k2",
+  "cellId": "ap_physics_1-m03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Small piston: W = 20 N × 0.2 m = 4 J. Large piston: force = 400 N, distance = 0.01 m (equal volumes), so W = 4 J. The work is the same for both.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Pascal's principle plus volume conservation and energy, argued as a claim; fits 8.4 and 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Work is 4 J on both pistons; C is the unique correct option and the stem gives the needed conditions."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed; the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions, all explained. Option A's reasoning ('pushed with more pressure') is somewhat muddled."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Minor: the key is much longer than the distractors and contains the number 4.00 J, which is a length giveaway. Otherwise the load is appropriate."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The physics and key are correct and in scope. The key is noticeably longer than the distractors, which is a giveaway, and option A is awkwardly worded. I recommend equalizing the option lengths and fixing option A before use."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing Pascal's principle and incompressibility (volume conservation) together with the work-energy idea. The solver finds F2 = 400 N and d2 = 0.01 m, then checks that W = 4 J on both pistons. Distractors reflect common misconceptions (force multiplication implies energy multiplication, or energy loss). Arithmetic is minimal and the wording is clear, so no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ }
+]

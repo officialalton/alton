@@ -1,0 +1,164 @@
+[
+ {
+  "key": "ap_physics_1-m01-k0",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "Sphere: I = 0.064 kg·m², α = 31.25 rad/s², ω = 187.5 rad/s. Disk: I = 0.08 kg·m², α = 25 rad/s², ω = 150 rad/s. With the same torque, the smaller I gives the larger α, so the sphere spins faster.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.6 with claim and justification via alpha = tau/I; rotational inertia of a sphere and a disk is given-shape content and in scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is unique and correct: 187.5 rad/s for the sphere vs 150 rad/s for the disk. The key text writes 187, which is a slight rounding quirk (187.5 would round to 188)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete: mass, radius, torque, time, start from rest, frictionless axles."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions and each is explained. The key is the only option with numbers and is the longest, a mild giveaway. Distractor 2 mentions rotational energy while its explanation refers to inertia vs speed, which is loosely matched."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, calculator allowed, light arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and in scope. Minor issues: the key is the longest and only numeric option, and 187.5 is written as 187. It is acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must apply tau = I*alpha with omega = alpha*t, retrieve the sphere and disk rotational inertia formulas (on the AP reference sheet), compute or reason proportionally that I_sphere < I_disk, and then pick the option whose justification is valid. Distractors target common errors: confusing rotational inertia with energy storage, misreading the time of application, and assuming mass and radius alone determine the outcome. The arithmetic is short and the numbers are clean. The stated 187 rad/s is a slightly rounded 187.5. The item is within Unit 5 scope and has no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 100
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k1",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "I_sphere=0.256 kg m^2, I_disk=0.32 kg m^2; omega=tau*t/I gives 58.6 vs 46.9 rad/s.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Applies tau=I*alpha with given-shape rotational inertia and justifies a claim; in scope for 5.6 and skill 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified: I_sphere=0.256, I_disk=0.32, omega 58.6 vs 46.9 rad/s. D is the unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. The stem is complete: same torque, same time, start from rest, frictionless axles through the centers."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception, and the explanation addresses each wrong option. The key is the longest option, a minor length cue."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, light arithmetic, and the calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is correct and unique, the distractors are distinct misconceptions, the topic and skill fit, and the load is typical of an AP MC item."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing tau = I*alpha, recalling the sphere and disk rotational inertia formulas (on the AP reference sheet), comparing the two angular accelerations, and linking the result to angular speed through rotational kinematics. Distractors target plausible misconceptions (larger I means faster, different times, same mass and radius means same motion). The arithmetic is short and clean (I = 0.256 and 0.32 kg m^2; omega = 58.6 and 46.9 rad/s). The wording is unambiguous and the reading load is low. The item is in scope for Unit 5 and consistent with a full-mock target.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k2",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "I_sphere=0.032, I_disk=0.04 kg m^2; alpha=tau/I gives omega=187.5 vs 150 rad/s.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.6 with rotational inertia of given shapes; claim plus justification fits 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique correct answer C. 187.5 is truncated to 187 in the option, a minor imprecision that does not affect the comparison."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem gives all conditions: frictionless, constant torque, start from rest."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions and each is explained. The key is the longest option, a slight giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Reasonable load, calculator allowed, no heavy arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item with a unique key and in-scope physics. Minor issues: 187.5 is written as 187, and the key option is the longest. Pass."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must choose tau_net = I*alpha, recall the rotational inertias of a solid sphere (2/5 mr^2) and a solid disk (1/2 mr^2), compare them, and link alpha to omega via omega = alpha*t to justify a claim. Distractors target plausible misconceptions (same mass and radius implies same motion, energy storage, time of action). Arithmetic is short and clean, reading load is low, and all content is in Unit 5 scope. This is a typical full-mock multi-step item. Minor note: 187.5 rad/s is stated as 187 rad/s in option C, a small rounding quirk that does not affect the answer.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ }
+]
