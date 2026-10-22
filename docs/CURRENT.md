@@ -4,6 +4,7 @@
 
 읽는 순서: `../CLAUDE.md` → `POLICY-DECISIONS.md` 최신 정정 → 이 문서 → `BRANCH-WORKFLOW.md`. 상세 근거·발견 사항은 [전반 점검표](qa/alton-overview-audit-2026-10-21.md). 종전 CURRENT 전체는 [원문 이력](history/CURRENT-archive-before-2026-10-21-overview.md)에 보존했다. 과거 완료·미적용·예산·URL을 현재 값으로 재사용하지 않는다.
 
+- **[2026-10-22 PH5·LT5 엄격 게이트]** 둘 다 미공개. PH5 부족: 단원 1 단독 1 + 2문항 세트 2(단원 1·2), LT5 부족: 시 FRQ(Darkling Thrush가 Exam 3 MC 지문과 같은 작품)·q3 프롬프트 교체(상세 `docs/ap/operator-checkpoint-2026-10-22.md`). 원장 $567.1786.
 - **[2026-10-22 08:12Z] AP 공개 현황(DB 집계)**: 풀 모의고사 **73**, 부분 연습 3(mc 2 + frq 1). 과목별 풀 모의고사: Biology 5, Calc AB 3, Calc BC 5, Chemistry 4, CS A 4, English Language 5, Eng Lit 4, European History 2, Macro 3, Micro 3, Physics 1 4, Physics C E&M 5, Physics C Mechanics 5, Precalculus 5, Psychology 5, Statistics 5, US History 3, World History 3. 오늘 공개: Chemistry 4(`856cfaad`), CS A 4(`b25f8cae`), Psychology 3·4·5. **CS A 5(`7c42225c`)는 CS4와의 구조 쌍둥이 7개 이상으로 보관 처리**(되돌릴 수 있음, 실제 응시 0). 공개 뒤 재점검에서 CH4·CS4·PS3·PS4에도 쌍둥이가 확인돼 교체 대상 목록은 `docs/ap/post-publish-twin-audit-2026-10-22.md`. CH5는 unit 3.4 기체 단독 1개 부족으로 차단. PH5·LT5는 이번 라운드 처리 안 함(엄격한 쌍둥이 점검 게이트를 먼저 적용, `docs/ap/structure-rule-scope.md`). 원장 누적 $557.9848(상한 730/740).
 - **[2026-10-22] SAT R&W Hard 보강 C안 완료**: 공개 SAT 30세트 새 버전(R&W M1·M2 쉬운에 Hard 약 10.5%, 171문항 교체·이전 버전 보존), 마이그레이션 `20262100000680` 적용, SAT 장부 $23.607. 확인 범위: DB·검증 함수·관리자 미리보기 + Production 학생 화면 1문항(Test 1 R&W M1 8번). 라우팅 임계값·점수 환산은 미보정, 난이도 라벨은 학생 데이터 보정 전. 테스트 응시 `28ddc49c…` 정리 대기. 상세 [rw-hard-topup](sat/rw-hard-topup-2026-10-22.md).
 
