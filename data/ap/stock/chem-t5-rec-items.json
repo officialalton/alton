@@ -1,0 +1,4073 @@
+[
+ {
+  "candidateKey": "ap_chemistry-m04-k2",
+  "cellId": "ap_chemistry-m04",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "3.5",
+  "unitCode": "3",
+  "skillPrimary": "6.E",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_gas_particle_claim",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept conceptual item: Boyle's law explained by KMT. The student only needs to recognize that constant T means constant average kinetic energy and that a smaller volume increases the collision frequency with the walls. The distractors are standard misconceptions, with no computation, no stimulus to read, and minimal reading. There are few reasoning steps and one representation shift (macroscopic to particulate), so it suits foundational learning more than a full mock exam.",
+  "payload": {
+   "archetype": "ch_gas_particle_claim",
+   "topic": "3.5",
+   "skill": "6.E",
+   "calculator": "allowed",
+   "stem": "A student explains that when the volume of a gas sample is halved at constant temperature, the pressure of the gas increases. Which statement best justifies the claim at the particulate level?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The pressure increases because the particles themselves expand when the sample is changed, so they fill more of the space.",
+     "why": "Believes particles themselves expand.",
+     "value": null
+    },
+    {
+     "text": "The pressure increases because the particles attract each other more strongly, so they push harder against the walls.",
+     "why": "Attributes the pressure change to stronger attractions.",
+     "value": null
+    },
+    {
+     "text": "The pressure increases because the individual particles become heavier, so each collision transfers more momentum.",
+     "why": "Believes the mass of a particle changes.",
+     "value": null
+    },
+    {
+     "text": "The pressure increases because the particles collide with the walls more often because they are closer together, while their average speed is unchanged.",
+     "why": "Pressure comes from the frequency and force of particle collisions with the container walls.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 70,
+   "facts": [
+    "scenario=1"
+   ],
+   "blueprint": {
+    "id": "ch_gas_particle_claim",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "particulate-level justification of a macroscopic gas-law trend",
+    "topic": "3.5",
+    "skill": "6.E",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: particulate-level justification of a macroscopic gas-law trend",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Believes particles themselves expand."
+     },
+     {
+      "id": "m2",
+      "description": "Attributes the pressure change to stronger attractions."
+     },
+     {
+      "id": "m3",
+      "description": "Believes the mass of a particle changes."
+     }
+    ],
+    "verification": {
+     "independent_path": "the ideal gas relation predicts a pressure increase in each scenario (numeric) and the collision explanation is keyed to the changed variable",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "connect collisions per second and force per collision to the pressure"
+   },
+   "seed": 13002,
+   "pack_id": "ch_gas_particle_claim-s13002",
+   "explanation_en": "The correct answer is The pressure increases because the particles collide with the walls more often because they are closer together, while their average speed is unchanged.. Pressure comes from the frequency and force of particle collisions with the container walls.\nThe pressure increases because the particles themselves expand when the sample is changed, so they fill more of the space. is incorrect: Believes particles themselves expand.\nThe pressure increases because the particles attract each other more strongly, so they push harder against the walls. is incorrect: Attributes the pressure change to stronger attractions.\nThe pressure increases because the individual particles become heavier, so each collision transfers more momentum. is incorrect: Believes the mass of a particle changes."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_gas_particle_claim",
+   "facts": [
+    "scenario=1"
+   ],
+   "seed": 13002
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 70 seconds, no calculation, typical of the AP conceptual style. The calculator designation is harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unambiguous conceptual item on the KMT explanation of Boyle's law. The key is unique, the distractors are distinct misconceptions, and the load is appropriate. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept conceptual item: Boyle's law explained by KMT. The student only needs to recognize that constant T means constant average kinetic energy and that a smaller volume increases the collision frequency with the walls. The distractors are standard misconceptions, with no computation, no stimulus to read, and minimal reading. There are few reasoning steps and one representation shift (macroscopic to particulate), so it suits foundational learning more than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "chem-ch3-mc",
+  "stockKey": "chem-ch3-mc:ap_chemistry-m04-k2",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": true,
+  "family": "ap_chemistry",
+  "itemFamilyId": "fam:chem-ch3-mc:ap_chemistry-m04-k0",
+  "canonicalKey": "chem-ch3-mc:ap_chemistry-m04-k2",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_chemistry:3.5",
+  "sharedWith": [],
+  "stockCell": "ap_chemistry|3.5|6.E|standalone|na",
+  "history": [
+   {
+    "run": "chem-ch3-mc",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_chemistry-m07-k0",
+  "cellId": "ap_chemistry-m07",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "1.3",
+  "unitCode": "1",
+  "skillPrimary": "6.G",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_hydrate_error",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept qualitative item. The student must recognize that damp hydrate inflates the initial mass, so mass lost (initial minus final) exceeds the true water of hydration and the calculated percent water is too high. This takes about two reasoning steps with no calculation, table, or graph. The distractors are plausible but easily eliminated: molar mass change, the opposite direction, and no effect. The wording is clear with no unstated assumptions and a minimal reading load.",
+  "payload": {
+   "archetype": "ch_hydrate_error",
+   "topic": "1.3",
+   "skill": "6.G",
+   "calculator": "allowed",
+   "stem": "A student determines the percent by mass of water in a sample of copper(II) sulfate pentahydrate by heating it to constant mass in a crucible. The student weighs the hydrate when it is damp with water on the outside of the crystals, before heating. How does this error affect the calculated percent by mass of water in the hydrate?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The calculated percent water is too high because the molar mass of the hydrate changes during the experiment.",
+     "why": "Attributes the effect to a changed molar mass instead of the recorded masses.",
+     "value": null
+    },
+    {
+     "text": "The calculated percent water is too low because the mass of water lost, found by subtraction, is calculated to be smaller than the true mass of water in the sample.",
+     "why": "Reverses the effect of the error on the mass of water found by subtraction.",
+     "value": null
+    },
+    {
+     "text": "The calculated percent water is too high because the mass of water lost, found by subtraction, is calculated to be larger than the true mass of water in the sample.",
+     "why": "Track how the error changes the recorded mass of the hydrate or of the anhydrous solid.",
+     "value": null
+    },
+    {
+     "text": "The calculated percent water is unaffected because the masses used in the calculation do not change.",
+     "why": "Believes this error does not change the masses used in the calculation.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 90,
+   "facts": [
+    "hydrate=CuSO4",
+    "n=5",
+    "mh=2.5",
+    "scenario=surface_water",
+    "true=36.0767",
+    "rec=39.6950",
+    "effect=high"
+   ],
+   "blueprint": {
+    "id": "ch_hydrate_error",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "effect of an experimental error in a heating-to-constant-mass experiment on the calculated percent water",
+    "topic": "1.3",
+    "skill": "6.G",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: effect of an experimental error in a heating-to-constant-mass experiment on the calculated percent water",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Attributes the effect to a changed molar mass instead of the recorded masses."
+     },
+     {
+      "id": "m2",
+      "description": "Reverses the effect of the error on the mass of water found by subtraction."
+     },
+     {
+      "id": "m3",
+      "description": "Believes this error does not change the masses used in the calculation."
+     }
+    ],
+    "verification": {
+     "independent_path": "percent water recomputed from the altered recorded masses (exact fractions) vs the same recomputation in floating point compared with the true value",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "trace the error to the recorded masses and then to the mass of water found by subtraction"
+   },
+   "seed": 13000,
+   "pack_id": "ch_hydrate_error-s13000",
+   "explanation_en": "The correct answer is The calculated percent water is too high because the mass of water lost, found by subtraction, is calculated to be larger than the true mass of water in the sample.. Track how the error changes the recorded mass of the hydrate or of the anhydrous solid.\nThe calculated percent water is too high because the molar mass of the hydrate changes during the experiment. is incorrect: Attributes the effect to a changed molar mass instead of the recorded masses.\nThe calculated percent water is too low because the mass of water lost, found by subtraction, is calculated to be smaller than the true mass of water in the sample. is incorrect: Reverses the effect of the error on the mass of water found by subtraction.\nThe calculated percent water is unaffected because the masses used in the calculation do not change. is incorrect: Believes this error does not change the masses used in the calculation."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_hydrate_error",
+   "facts": [
+    "hydrate=CuSO4",
+    "n=5",
+    "mh=2.5",
+    "scenario=surface_water",
+    "true=36.0767",
+    "rec=39.6950",
+    "effect=high"
+   ],
+   "seed": 13000
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 1.3 hydrate percent water; 6.G error effect on result. Fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is unique: extra surface water is lost on heating, inflating the mass of water by subtraction and the percent water."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct misconceptions (molar mass change, reversed direction, no effect). The correct-answer explanation is a hint rather than a full reason, a minor weakness."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds, no calculation; typical AP style."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound conceptual error-analysis item with a unique correct key and plausible distractors; the explanation of the correct option is thin but acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept qualitative item. The student must recognize that damp hydrate inflates the initial mass, so mass lost (initial minus final) exceeds the true water of hydration and the calculated percent water is too high. This takes about two reasoning steps with no calculation, table, or graph. The distractors are plausible but easily eliminated: molar mass change, the opposite direction, and no effect. The wording is clear with no unstated assumptions and a minimal reading load.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "chem-ch3-mc",
+  "stockKey": "chem-ch3-mc:ap_chemistry-m07-k0",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "ap_chemistry",
+  "itemFamilyId": "fam:chem-ch3-mc:ap_chemistry-m07-k0",
+  "canonicalKey": "chem-ch3-mc:ap_chemistry-m07-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_chemistry:1.3",
+  "sharedWith": [],
+  "stockCell": "ap_chemistry|1.3|6.G|standalone|na",
+  "history": [
+   {
+    "run": "chem-ch3-mc",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_chemistry-m12-k0",
+  "cellId": "ap_chemistry-m12",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "5.6",
+  "unitCode": "5",
+  "skillPrimary": "4.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_n_catalyst_profile",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recall: a catalyst lowers activation energy via an alternate pathway without changing the enthalpy change, the equilibrium constant, or the reactant and product energies. Distractors are common misconceptions that can be eliminated directly. No graph reading, computation, or multi-step linkage is required, so it is below full-mock exam_prep level.",
+  "payload": {
+   "archetype": "ch_n_catalyst_profile",
+   "topic": "5.6",
+   "skill": "4.B",
+   "calculator": "allowed",
+   "stem": "A catalyst is added to a reaction at constant temperature and increases the rate of both the forward and reverse reactions. Which statement best describes the effect on the energy profile?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The catalyst provides a pathway with a lower activation energy, and the enthalpy change of the reaction stays the same.",
+     "why": "A catalyst lowers Ea for both directions without changing the energies of the reactants and products.",
+     "value": null
+    },
+    {
+     "text": "The catalyst changes the equilibrium constant so that more product forms.",
+     "why": "A catalyst does not change K; it only speeds the approach to equilibrium.",
+     "value": null
+    },
+    {
+     "text": "The catalyst lowers the energy of the products, so the reaction becomes more exothermic.",
+     "why": "A catalyst does not change ΔH.",
+     "value": null
+    },
+    {
+     "text": "The catalyst raises the energy of the reactants so that more of them can cross the barrier.",
+     "why": "A catalyst does not change the energy of the reactants.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 70,
+   "facts": [
+    "A catalyst is added to a reaction at constant temperature an"
+   ],
+   "blueprint": {
+    "id": "ch_n_catalyst_profile",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "describe how a catalyst changes a reaction energy profile",
+    "topic": "5.6",
+    "skill": "4.B",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: describe how a catalyst changes a reaction energy profile",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "A catalyst does not change K; it only speeds the approach to equilibrium."
+     },
+     {
+      "id": "m2",
+      "description": "A catalyst does not change ΔH."
+     },
+     {
+      "id": "m3",
+      "description": "A catalyst does not change the energy of the reactants."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED 5.6",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "apply a chemical principle to a specific case and reject plausible misconceptions"
+   },
+   "seed": 13000,
+   "pack_id": "ch_n_catalyst_profile-s13000",
+   "explanation_en": "The correct answer is The catalyst provides a pathway with a lower activation energy, and the enthalpy change of the reaction stays the same.. A catalyst lowers Ea for both directions without changing the energies of the reactants and products.\nThe catalyst changes the equilibrium constant so that more product forms. is incorrect: A catalyst does not change K; it only speeds the approach to equilibrium.\nThe catalyst lowers the energy of the products, so the reaction becomes more exothermic. is incorrect: A catalyst does not change ΔH.\nThe catalyst raises the energy of the reactants so that more of them can cross the barrier. is incorrect: A catalyst does not change the energy of the reactants."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_n_catalyst_profile",
+   "facts": [
+    "A catalyst is added to a reaction at constant temperature an"
+   ],
+   "seed": 13000
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is a quick conceptual question of about 60 seconds with no calculation, which is typical for the AP exam. The calculator designation is harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean conceptual item on how a catalyst affects the energy profile. It has a unique key and distinct, realistic distractors, and it is suitable for the exam. The correct option is slightly longer, which is a negligible cue."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall: a catalyst lowers activation energy via an alternate pathway without changing the enthalpy change, the equilibrium constant, or the reactant and product energies. Distractors are common misconceptions that can be eliminated directly. No graph reading, computation, or multi-step linkage is required, so it is below full-mock exam_prep level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "chem-ch3-mc",
+  "stockKey": "chem-ch3-mc:ap_chemistry-m12-k0",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "ap_chemistry",
+  "itemFamilyId": "fam:chem-ch3-mc:ap_chemistry-m12-k0",
+  "canonicalKey": "chem-ch3-mc:ap_chemistry-m12-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_chemistry:5.6",
+  "sharedWith": [],
+  "stockCell": "ap_chemistry|5.6|4.B|standalone|na",
+  "history": [
+   {
+    "run": "chem-ch3-mc",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_chemistry-m16-k0",
+  "cellId": "ap_chemistry-m16",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "9.8",
+  "unitCode": "9",
+  "skillPrimary": "4.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_n_galvanic_flow",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Conceptual recall of galvanic cell basics: oxidation at the anode, electron flow through the wire from anode to cathode, and salt bridge ion migration. It needs no computation, no data, and only one or two reasoning steps. The distractors are common misconceptions, but the item is introductory and below full-mock difficulty.",
+  "payload": {
+   "archetype": "ch_n_galvanic_flow",
+   "topic": "9.8",
+   "skill": "4.A",
+   "calculator": "allowed",
+   "stem": "A galvanic cell is built with a zinc electrode in 1 M Zn²⁺ and a copper electrode in 1 M Cu²⁺ connected by a salt bridge. Which statement correctly describes the cell?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Electrons flow through the wire from the zinc anode to the copper cathode, where Cu²⁺ is reduced.",
+     "why": "Zinc is oxidized at the anode and the electrons travel through the wire to the cathode.",
+     "value": null
+    },
+    {
+     "text": "Cations in the salt bridge move toward the zinc electrode to balance the charge.",
+     "why": "Cations move toward the cathode, where positive charge is being used up.",
+     "value": null
+    },
+    {
+     "text": "Electrons flow through the salt bridge from the copper electrode to the zinc electrode.",
+     "why": "Electrons travel through the wire and the ions travel through the salt bridge.",
+     "value": null
+    },
+    {
+     "text": "Reduction occurs at the zinc electrode, so it is the cathode.",
+     "why": "Zinc is oxidized and so it is the anode.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 70,
+   "facts": [
+    "A galvanic cell is built with a zinc electrode in 1 M Zn²⁺ a"
+   ],
+   "blueprint": {
+    "id": "ch_n_galvanic_flow",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "describe electron and ion flow in a galvanic cell",
+    "topic": "9.8",
+    "skill": "4.A",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: describe electron and ion flow in a galvanic cell",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Cations move toward the cathode, where positive charge is being used up."
+     },
+     {
+      "id": "m2",
+      "description": "Electrons travel through the wire and the ions travel through the salt bridge."
+     },
+     {
+      "id": "m3",
+      "description": "Zinc is oxidized and so it is the anode."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED 9.8 and 9.9",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "apply a chemical principle to a specific case and reject plausible misconceptions"
+   },
+   "seed": 13000,
+   "pack_id": "ch_n_galvanic_flow-s13000",
+   "explanation_en": "The correct answer is Electrons flow through the wire from the zinc anode to the copper cathode, where Cu²⁺ is reduced.. Zinc is oxidized at the anode and the electrons travel through the wire to the cathode.\nCations in the salt bridge move toward the zinc electrode to balance the charge. is incorrect: Cations move toward the cathode, where positive charge is being used up.\nElectrons flow through the salt bridge from the copper electrode to the zinc electrode. is incorrect: Electrons travel through the wire and the ions travel through the salt bridge.\nReduction occurs at the zinc electrode, so it is the cathode. is incorrect: Zinc is oxidized and so it is the anode."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_n_galvanic_flow",
+   "facts": [
+    "A galvanic cell is built with a zinc electrode in 1 M Zn²⁺ a"
+   ],
+   "seed": 13000
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 9.8 galvanic cell electron and ion flow; applying the model to a specific case is acceptable for 4.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the unique correct statement; B, C and D are each clearly wrong for a galvanic cell."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete; the standard Zn/Cu knowledge assumed is typical for AP."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct named misconception (cation direction, electrons in salt bridge, anode/cathode swap). The explanation covers every option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, four parallel options, no arithmetic load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, standard galvanic-cell flow question with a unique key and distinct misconception distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Conceptual recall of galvanic cell basics: oxidation at the anode, electron flow through the wire from anode to cathode, and salt bridge ion migration. It needs no computation, no data, and only one or two reasoning steps. The distractors are common misconceptions, but the item is introductory and below full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "chem-ch3-mc",
+  "stockKey": "chem-ch3-mc:ap_chemistry-m16-k0",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "ap_chemistry",
+  "itemFamilyId": "fam:chem-ch3-mc:ap_chemistry-m16-k0",
+  "canonicalKey": "chem-ch3-mc:ap_chemistry-m16-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_chemistry:9.8",
+  "sharedWith": [],
+  "stockCell": "ap_chemistry|9.8|4.A|standalone|na",
+  "history": [
+   {
+    "run": "chem-ch3-mc",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_chemistry-m28-k0",
+  "cellId": "ap_chemistry-m28",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "4.9",
+  "unitCode": "4",
+  "skillPrimary": "4.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_n_oxidation_number",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recall and application: assign oxidation numbers for Zn and Cu2+, then identify oxidation, reduction, and the oxidizing agent in a standard single-replacement reaction. Distractors are common definition-swap misconceptions. No computation, minimal reading, and little multi-step reasoning, so it is below full-mock exam_prep depth.",
+  "payload": {
+   "archetype": "ch_n_oxidation_number",
+   "topic": "4.9",
+   "skill": "4.A",
+   "calculator": "allowed",
+   "stem": "In the reaction Zn(s) + Cu²⁺(aq) → Zn²⁺(aq) + Cu(s), which statement is correct?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Zn is oxidized because its oxidation number increases from 0 to +2, and Cu²⁺ is the oxidizing agent.",
+     "why": "Loss of electrons raises the oxidation number; the species that is reduced is the oxidizing agent.",
+     "value": null
+    },
+    {
+     "text": "Neither species changes oxidation number, because the charges balance.",
+     "why": "Balanced charge does not mean that the oxidation numbers stay the same.",
+     "value": null
+    },
+    {
+     "text": "Zn is reduced because it gains electrons, and Cu²⁺ is the reducing agent.",
+     "why": "Zinc loses electrons, so it is oxidized.",
+     "value": null
+    },
+    {
+     "text": "Cu²⁺ is oxidized because its oxidation number decreases from +2 to 0.",
+     "why": "A decrease in oxidation number is reduction.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 70,
+   "facts": [
+    "In the reaction Zn(s) + Cu²⁺(aq) → Zn²⁺(aq) + Cu(s), which s"
+   ],
+   "blueprint": {
+    "id": "ch_n_oxidation_number",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "assign oxidation numbers and identify the species oxidized and reduced",
+    "topic": "4.9",
+    "skill": "4.A",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: assign oxidation numbers and identify the species oxidized and reduced",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Balanced charge does not mean that the oxidation numbers stay the same."
+     },
+     {
+      "id": "m2",
+      "description": "Zinc loses electrons, so it is oxidized."
+     },
+     {
+      "id": "m3",
+      "description": "A decrease in oxidation number is reduction."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED 4.9",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "apply a chemical principle to a specific case and reject plausible misconceptions"
+   },
+   "seed": 13000,
+   "pack_id": "ch_n_oxidation_number-s13000",
+   "explanation_en": "The correct answer is Zn is oxidized because its oxidation number increases from 0 to +2, and Cu²⁺ is the oxidizing agent.. Loss of electrons raises the oxidation number; the species that is reduced is the oxidizing agent.\nNeither species changes oxidation number, because the charges balance. is incorrect: Balanced charge does not mean that the oxidation numbers stay the same.\nZn is reduced because it gains electrons, and Cu²⁺ is the reducing agent. is incorrect: Zinc loses electrons, so it is oxidized.\nCu²⁺ is oxidized because its oxidation number decreases from +2 to 0. is incorrect: A decrease in oxidation number is reduction."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_n_oxidation_number",
+   "facts": [
+    "In the reaction Zn(s) + Cu²⁺(aq) → Zn²⁺(aq) + Cu(s), which s"
+   ],
+   "seed": 13000
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 4.9 is addressed directly: assigning oxidation numbers and identifying the species oxidized and reduced. Skill 4.A is applied to a specific reaction, and no later-unit content is involved."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the only correct statement. B, C and D each contradict the oxidation-number changes in the reaction."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The reaction is fully given in the stem, so no stimulus is needed. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode three distinct misconceptions: charge balance means no change in oxidation number, oxidation and reduction are swapped for Zn, and a decrease in oxidation number is oxidation. The explanation addresses each wrong option. The correct option is the longest, but only slightly, and the length is not a strong giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 70 seconds with no calculation, which is acceptable for a conceptual item even though the calculator is designated as allowed. The scenario is a very standard Zn/Cu²⁺ reaction and is generic rather than a specific released item. The item is somewhat easy but suitable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean, unambiguous redox identification item with one correct answer and three distinct misconception distractors. No instant-reject condition applies."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall and application: assign oxidation numbers for Zn and Cu2+, then identify oxidation, reduction, and the oxidizing agent in a standard single-replacement reaction. Distractors are common definition-swap misconceptions. No computation, minimal reading, and little multi-step reasoning, so it is below full-mock exam_prep depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "chem-ch3-mc",
+  "stockKey": "chem-ch3-mc:ap_chemistry-m28-k0",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "ap_chemistry",
+  "itemFamilyId": "fam:chem-ch3-mc:ap_chemistry-m28-k0",
+  "canonicalKey": "chem-ch3-mc:ap_chemistry-m28-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_chemistry:4.9",
+  "sharedWith": [],
+  "stockCell": "ap_chemistry|4.9|4.A|standalone|na",
+  "history": [
+   {
+    "run": "chem-ch3-mc",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_chemistry-m29-k0",
+  "cellId": "ap_chemistry-m29",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "3.8",
+  "unitCode": "3",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_n_particulate_solution",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recall: ionic compounds dissociate in water and water molecules orient oppositely around cations and anions (ion-dipole). No calculation, no stimulus, and short unambiguous wording. Distractors are common misconceptions (atoms instead of ions, undissociated units, uniform water orientation). It sits squarely in topic 3.8, skill 1.A, but is too direct for a full-mock exam_prep item.",
+  "payload": {
+   "archetype": "ch_n_particulate_solution",
+   "topic": "3.8",
+   "skill": "1.A",
+   "calculator": "allowed",
+   "stem": "A particulate diagram of a solution of NaCl in water should show which of the following?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Separated Na⁺ and Cl⁻ ions, hydrated by water molecules that are oriented oppositely around each ion.",
+     "why": "Ion-dipole attractions hydrate the dissolved ions with opposite orientations.",
+     "value": null
+    },
+    {
+     "text": "Sodium atoms and chlorine atoms separated by water molecules.",
+     "why": "The solute is present as ions and not as neutral atoms.",
+     "value": null
+    },
+    {
+     "text": "Intact NaCl units dispersed among the water molecules.",
+     "why": "NaCl is an ionic compound that dissociates into ions in water.",
+     "value": null
+    },
+    {
+     "text": "Separated Na⁺ and Cl⁻ ions with the water molecules all oriented the same way.",
+     "why": "Water molecules orient differently around cations and anions.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 70,
+   "facts": [
+    "A particulate diagram of a solution of NaCl in water should "
+   ],
+   "blueprint": {
+    "id": "ch_n_particulate_solution",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "choose a correct particulate model of a solution",
+    "topic": "3.8",
+    "skill": "1.A",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: choose a correct particulate model of a solution",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "The solute is present as ions and not as neutral atoms."
+     },
+     {
+      "id": "m2",
+      "description": "NaCl is an ionic compound that dissociates into ions in water."
+     },
+     {
+      "id": "m3",
+      "description": "Water molecules orient differently around cations and anions."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED 3.8",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "apply a chemical principle to a specific case and reject plausible misconceptions"
+   },
+   "seed": 13000,
+   "pack_id": "ch_n_particulate_solution-s13000",
+   "explanation_en": "The correct answer is Separated Na⁺ and Cl⁻ ions, hydrated by water molecules that are oriented oppositely around each ion.. Ion-dipole attractions hydrate the dissolved ions with opposite orientations.\nSodium atoms and chlorine atoms separated by water molecules. is incorrect: The solute is present as ions and not as neutral atoms.\nIntact NaCl units dispersed among the water molecules. is incorrect: NaCl is an ionic compound that dissociates into ions in water.\nSeparated Na⁺ and Cl⁻ ions with the water molecules all oriented the same way. is incorrect: Water molecules orient differently around cations and anions."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_n_particulate_solution",
+   "facts": [
+    "A particulate diagram of a solution of NaCl in water should "
+   ],
+   "seed": 13000
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is the unique correct choice; B, C and D are each clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed for a conceptual 'should show' question. Option A's phrase 'oppositely around each ion' is slightly ambiguous but does not affect the key."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions are encoded and each wrong option is explained. The correct option is longer than the others, which is a mild giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, with no calculation load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable. It has a unique key and distinct misconceptions in the distractors. Its minor weaknesses are the longer correct option and slightly ambiguous wording in option A."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall: ionic compounds dissociate in water and water molecules orient oppositely around cations and anions (ion-dipole). No calculation, no stimulus, and short unambiguous wording. Distractors are common misconceptions (atoms instead of ions, undissociated units, uniform water orientation). It sits squarely in topic 3.8, skill 1.A, but is too direct for a full-mock exam_prep item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "chem-ch3-mc",
+  "stockKey": "chem-ch3-mc:ap_chemistry-m29-k0",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "ap_chemistry",
+  "itemFamilyId": "fam:chem-ch3-mc:ap_chemistry-m29-k0",
+  "canonicalKey": "chem-ch3-mc:ap_chemistry-m29-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_chemistry:3.8",
+  "sharedWith": [],
+  "stockCell": "ap_chemistry|3.8|1.A|standalone|na",
+  "history": [
+   {
+    "run": "chem-ch3-mc",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_chemistry-m30-k2",
+  "cellId": "ap_chemistry-m30",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "4.5",
+  "unitCode": "4",
+  "skillPrimary": "5.F",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_n_percent_yield",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept stoichiometry: convert grams of Zn to moles, apply the 1:1 mole ratio, convert to theoretical mass of ZnS, then compute percent yield. The wording is clear and no representation changes are needed. Distractors reflect common errors (inverted ratio, wrong scaling), and the arithmetic is short and manageable with a calculator.",
+  "payload": {
+   "archetype": "ch_n_percent_yield",
+   "topic": "4.5",
+   "skill": "5.F",
+   "calculator": "allowed",
+   "stem": "The reaction Zn + S → ZnS is carried out with excess of the second reactant and $4\\text{ g}$ of Zn. The mass of product collected is $5.25\\text{ g}$. What is the percent yield? (Molar masses in g/mol: Zn 65.38, ZnS 97.44.)",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$88.1\\%$",
+     "why": "The theoretical yield is 4 g / 65.38 g/mol x (1/1) x 97.44 g/mol = 5.96 g, so the percent yield is 5.25 / 5.96 x 100 = 88.1%.",
+     "value": "88.065733"
+    },
+    {
+     "text": "$114\\%$",
+     "why": "Divides the theoretical yield by the actual yield.",
+     "value": "113.55154"
+    },
+    {
+     "text": "$0.881\\%$",
+     "why": "Forgets to multiply by 100 and reports the fraction.",
+     "value": "0.88065733"
+    },
+    {
+     "text": "$131\\%$",
+     "why": "Compares the actual mass of product with the mass of the reactant that was used.",
+     "value": "131.25000"
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 90,
+   "facts": [
+    "r=Zn",
+    "m=4.0",
+    "act=5.25"
+   ],
+   "blueprint": {
+    "id": "ch_n_percent_yield",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "percent yield from a balanced equation, a limiting reactant mass and a collected mass",
+    "topic": "4.5",
+    "skill": "5.F",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: percent yield from a balanced equation, a limiting reactant mass and a collected mass",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Divides the theoretical yield by the actual yield."
+     },
+     {
+      "id": "m2",
+      "description": "Forgets to multiply by 100 and reports the fraction."
+     },
+     {
+      "id": "m3",
+      "description": "Compares the actual mass of product with the mass of the reactant that was used."
+     }
+    ],
+    "verification": {
+     "independent_path": "exact-fraction theoretical yield vs a stepwise float calculation",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "use the mole ratio of the balanced equation, then compare actual and theoretical masses"
+   },
+   "seed": 13002,
+   "pack_id": "ch_n_percent_yield-s13002",
+   "explanation_en": "The correct answer is $88.1\\%$. The theoretical yield is 4 g / 65.38 g/mol x (1/1) x 97.44 g/mol = 5.96 g, so the percent yield is 5.25 / 5.96 x 100 = 88.1%.\n$114\\%$ is incorrect: Divides the theoretical yield by the actual yield.\n$0.881\\%$ is incorrect: Forgets to multiply by 100 and reports the fraction.\n$131\\%$ is incorrect: Compares the actual mass of product with the mass of the reactant that was used."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_n_percent_yield",
+   "facts": [
+    "r=Zn",
+    "m=4.0",
+    "act=5.25"
+   ],
+   "seed": 13002
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Percent yield from a balanced equation: topic 4.5 stoichiometry, skill 5.F calculation of an unknown."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "88.1% is correct and unique; Zn is limiting because the second reactant is in excess; the 1:1 ratio follows from the balanced equation."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. Molar masses are given and the stem is complete. '4 g' has one significant figure, a minor issue."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct error: inverted ratio, missing x100, or actual mass divided by reactant mass (5.25/4 = 131%). The explanation addresses each option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, calculator allowed, short and clear, with a standard four-option format."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a correct, clean percent-yield question with a unique key and distinct distractors. It is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept stoichiometry: convert grams of Zn to moles, apply the 1:1 mole ratio, convert to theoretical mass of ZnS, then compute percent yield. The wording is clear and no representation changes are needed. Distractors reflect common errors (inverted ratio, wrong scaling), and the arithmetic is short and manageable with a calculator.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "chem-ch3-mc",
+  "stockKey": "chem-ch3-mc:ap_chemistry-m30-k2",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": true,
+  "family": "ap_chemistry",
+  "itemFamilyId": "fam:chem-ch3-mc:ap_chemistry-m30-k0",
+  "canonicalKey": "chem-ch3-mc:ap_chemistry-m30-k2",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_chemistry:4.5",
+  "sharedWith": [],
+  "stockCell": "ap_chemistry|4.5|5.F|standalone|na",
+  "history": [
+   {
+    "run": "chem-ch3-mc",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_chemistry-m32-k0",
+  "cellId": "ap_chemistry-m32",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "2.7",
+  "unitCode": "2",
+  "skillPrimary": "4.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_n_polarity_molecule",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recall: tetrahedral geometry from 4 bonding domains leads to cancelling bond dipoles. One or two reasoning steps, no computation, no representation changes, short stem. Distractors are clearly wrong (equal electronegativity, Cl-Cl sharing, lone pair on C). This is a foundational VSEPR/polarity item, below typical full-mock difficulty.",
+  "payload": {
+   "archetype": "ch_n_polarity_molecule",
+   "topic": "2.7",
+   "skill": "4.A",
+   "calculator": "allowed",
+   "stem": "Carbon tetrachloride, CCl4, has polar C–Cl bonds, but the molecule is nonpolar. Which statement best explains this?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The four polar bonds are arranged symmetrically in a tetrahedron, so their bond dipoles cancel.",
+     "why": "A tetrahedral arrangement of identical bonds gives a zero net dipole.",
+     "value": null
+    },
+    {
+     "text": "The chlorine atoms share their electrons equally with each other, so the molecule has no dipole.",
+     "why": "The bonding electrons are shared between C and Cl and not between the chlorine atoms.",
+     "value": null
+    },
+    {
+     "text": "The C–Cl bonds are really nonpolar because carbon and chlorine have the same electronegativity.",
+     "why": "Chlorine is more electronegative than carbon, so the bonds are polar.",
+     "value": null
+    },
+    {
+     "text": "The molecule has a lone pair on the carbon atom that cancels the bond dipoles.",
+     "why": "Carbon in CCl4 has no lone pair; the cancelation comes from the symmetric shape.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 70,
+   "facts": [
+    "Carbon tetrachloride, CCl4, has polar C–Cl bonds, but the mo"
+   ],
+   "blueprint": {
+    "id": "ch_n_polarity_molecule",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "relate molecular shape and bond polarity to the polarity of a molecule",
+    "topic": "2.7",
+    "skill": "4.A",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: relate molecular shape and bond polarity to the polarity of a molecule",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "The bonding electrons are shared between C and Cl and not between the chlorine atoms."
+     },
+     {
+      "id": "m2",
+      "description": "Chlorine is more electronegative than carbon, so the bonds are polar."
+     },
+     {
+      "id": "m3",
+      "description": "Carbon in CCl4 has no lone pair; the cancelation comes from the symmetric shape."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED 2.7",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "apply a chemical principle to a specific case and reject plausible misconceptions"
+   },
+   "seed": 13000,
+   "pack_id": "ch_n_polarity_molecule-s13000",
+   "explanation_en": "The correct answer is The four polar bonds are arranged symmetrically in a tetrahedron, so their bond dipoles cancel.. A tetrahedral arrangement of identical bonds gives a zero net dipole.\nThe chlorine atoms share their electrons equally with each other, so the molecule has no dipole. is incorrect: The bonding electrons are shared between C and Cl and not between the chlorine atoms.\nThe C–Cl bonds are really nonpolar because carbon and chlorine have the same electronegativity. is incorrect: Chlorine is more electronegative than carbon, so the bonds are polar.\nThe molecule has a lone pair on the carbon atom that cancels the bond dipoles. is incorrect: Carbon in CCl4 has no lone pair; the cancelation comes from the symmetric shape."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_n_polarity_molecule",
+   "facts": [
+    "Carbon tetrachloride, CCl4, has polar C–Cl bonds, but the mo"
+   ],
+   "seed": 13000
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Relating molecular shape (tetrahedral VSEPR geometry) and bond polarity to molecular polarity fits topic 2.7 and the model-analysis skill. It needs no later-unit content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the only correct explanation. B, C and D are each factually wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and self-contained."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions: electron sharing between the Cl atoms, equal electronegativity, and a lone pair on carbon. The explanation addresses each wrong option. Option B is somewhat contrived, and the key is slightly longer than the others, but that is a minor giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60 seconds, needs no calculation, and matches the reference MC format."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound, standard shape-and-polarity question with a unique key and distinct distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall: tetrahedral geometry from 4 bonding domains leads to cancelling bond dipoles. One or two reasoning steps, no computation, no representation changes, short stem. Distractors are clearly wrong (equal electronegativity, Cl-Cl sharing, lone pair on C). This is a foundational VSEPR/polarity item, below typical full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "chem-ch3-mc",
+  "stockKey": "chem-ch3-mc:ap_chemistry-m32-k0",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "ap_chemistry",
+  "itemFamilyId": "fam:chem-ch3-mc:ap_chemistry-m32-k0",
+  "canonicalKey": "chem-ch3-mc:ap_chemistry-m32-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_chemistry:2.7",
+  "sharedWith": [],
+  "stockCell": "ap_chemistry|2.7|4.A|standalone|na",
+  "history": [
+   {
+    "run": "chem-ch3-mc",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_chemistry-m32-k1",
+  "cellId": "ap_chemistry-m32",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "2.7",
+  "unitCode": "2",
+  "skillPrimary": "4.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_n_polarity_molecule",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: determine geometry from VSEPR (trigonal planar vs trigonal pyramidal) and link symmetry to dipole cancellation. No computation, minimal reading, and distractors target common misconceptions (atom count, B-F bond polarity, lone pair on B). Fits foundational understanding of topic 2.7 rather than multi-step exam-level reasoning.",
+  "payload": {
+   "archetype": "ch_n_polarity_molecule",
+   "topic": "2.7",
+   "skill": "4.A",
+   "calculator": "allowed",
+   "stem": "Ammonia, NH3, is a polar molecule, whereas boron trifluoride, BF3, is nonpolar. Which statement best explains this?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "NH3 is polar because it has more atoms than BF3.",
+     "why": "The number of atoms does not determine polarity; the geometry does.",
+     "value": null
+    },
+    {
+     "text": "The B–F bonds are nonpolar because boron and fluorine have similar electronegativities.",
+     "why": "Fluorine is far more electronegative than boron, so the B–F bonds are very polar.",
+     "value": null
+    },
+    {
+     "text": "BF3 is symmetric, so its dipoles cancel, but the lone pair on nitrogen makes NH3 asymmetric.",
+     "why": "A lone pair makes the NH3 shape asymmetric; BF3 has no lone pair on boron and is symmetric.",
+     "value": null
+    },
+    {
+     "text": "BF3 has a lone pair on the boron atom that cancels the dipoles.",
+     "why": "Boron in BF3 has no lone pair; the shape is symmetric.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 70,
+   "facts": [
+    "Ammonia, NH3, is a polar molecule, whereas boron trifluoride"
+   ],
+   "blueprint": {
+    "id": "ch_n_polarity_molecule",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "relate molecular shape and bond polarity to the polarity of a molecule",
+    "topic": "2.7",
+    "skill": "4.A",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: relate molecular shape and bond polarity to the polarity of a molecule",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "The number of atoms does not determine polarity; the geometry does."
+     },
+     {
+      "id": "m2",
+      "description": "Fluorine is far more electronegative than boron, so the B–F bonds are very polar."
+     },
+     {
+      "id": "m3",
+      "description": "Boron in BF3 has no lone pair; the shape is symmetric."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED 2.7",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "apply a chemical principle to a specific case and reject plausible misconceptions"
+   },
+   "seed": 13001,
+   "pack_id": "ch_n_polarity_molecule-s13001",
+   "explanation_en": "The correct answer is BF3 is symmetric, so its dipoles cancel, but the lone pair on nitrogen makes NH3 asymmetric.. A lone pair makes the NH3 shape asymmetric; BF3 has no lone pair on boron and is symmetric.\nNH3 is polar because it has more atoms than BF3. is incorrect: The number of atoms does not determine polarity; the geometry does.\nThe B–F bonds are nonpolar because boron and fluorine have similar electronegativities. is incorrect: Fluorine is far more electronegative than boron, so the B–F bonds are very polar.\nBF3 has a lone pair on the boron atom that cancels the dipoles. is incorrect: Boron in BF3 has no lone pair; the shape is symmetric."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_n_polarity_molecule",
+   "facts": [
+    "Ammonia, NH3, is a polar molecule, whereas boron trifluoride"
+   ],
+   "seed": 13001
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Relating molecular shape and bond polarity to molecular polarity is squarely within topic 2.7 and skill 4.A (applying a model to explain a property)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the unique correct answer. BF3 is symmetric, so its bond dipoles cancel. The lone pair on N makes NH3 asymmetric. The other options are factually false."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and self-contained."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (atom count, similar electronegativity, a lone pair on B), and the explanation addresses each one. Option C is the longest, but the length difference is modest."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, no calculation, typical AP reading load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, correct 2.7 conceptual question with a unique key and distinct distractor misconceptions. It is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: determine geometry from VSEPR (trigonal planar vs trigonal pyramidal) and link symmetry to dipole cancellation. No computation, minimal reading, and distractors target common misconceptions (atom count, B-F bond polarity, lone pair on B). Fits foundational understanding of topic 2.7 rather than multi-step exam-level reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "chem-ch3-mc",
+  "stockKey": "chem-ch3-mc:ap_chemistry-m32-k1",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": true,
+  "family": "ap_chemistry",
+  "itemFamilyId": "fam:chem-ch3-mc:ap_chemistry-m32-k0",
+  "canonicalKey": "chem-ch3-mc:ap_chemistry-m32-k1",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_chemistry:2.7",
+  "sharedWith": [],
+  "stockCell": "ap_chemistry|2.7|4.A|standalone|na",
+  "history": [
+   {
+    "run": "chem-ch3-mc",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_chemistry-m42-k0",
+  "cellId": "ap_chemistry-m42",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "2.1",
+  "unitCode": "2",
+  "skillPrimary": "6.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_o_conductivity_claim",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: link the conductivity-by-state observation to ionic bonding (ions immobile in the solid lattice, mobile in the melt). The distractors target common misconceptions (no charges, delocalized electrons, molecular substance) but are easy to eliminate with introductory knowledge. No computation or representation changes are needed, so this is a foundational claim-selection question rather than a full-mock item.",
+  "payload": {
+   "archetype": "ch_o_conductivity_claim",
+   "topic": "2.1",
+   "skill": "6.A",
+   "calculator": "allowed",
+   "stem": "A student observes that solid NaCl does not conduct electricity but molten NaCl does. Which claim is best supported by this evidence?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Charged ions are present in NaCl and conduct only when they are free to move in the liquid.",
+     "why": "Conduction requires mobile charge carriers.",
+     "value": null
+    },
+    {
+     "text": "NaCl has no charged particles in either state.",
+     "why": "The conduction of the liquid shows the presence of charge carriers.",
+     "value": null
+    },
+    {
+     "text": "NaCl contains delocalized electrons that are free only in the liquid.",
+     "why": "Ionic solids do not contain delocalized electrons.",
+     "value": null
+    },
+    {
+     "text": "NaCl is a molecular substance that becomes ionic when it melts.",
+     "why": "The ions already exist in the solid, where they are fixed in the lattice.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 70,
+   "facts": [
+    "A student observes that solid NaCl does not conduct electric"
+   ],
+   "blueprint": {
+    "id": "ch_o_conductivity_claim",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "make a claim about bonding from conductivity and physical properties",
+    "topic": "2.1",
+    "skill": "6.A",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: make a claim about bonding from conductivity and physical properties",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "The conduction of the liquid shows the presence of charge carriers."
+     },
+     {
+      "id": "m2",
+      "description": "Ionic solids do not contain delocalized electrons."
+     },
+     {
+      "id": "m3",
+      "description": "The ions already exist in the solid, where they are fixed in the lattice."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "apply a chemical principle to a specific case and reject plausible misconceptions"
+   },
+   "seed": 13000,
+   "pack_id": "ch_o_conductivity_claim-s13000",
+   "explanation_en": "The correct answer is Charged ions are present in NaCl and conduct only when they are free to move in the liquid.. Conduction requires mobile charge carriers.\nNaCl has no charged particles in either state. is incorrect: The conduction of the liquid shows the presence of charge carriers.\nNaCl contains delocalized electrons that are free only in the liquid. is incorrect: Ionic solids do not contain delocalized electrons.\nNaCl is a molecular substance that becomes ionic when it melts. is incorrect: The ions already exist in the solid, where they are fixed in the lattice."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_o_conductivity_claim",
+   "facts": [
+    "A student observes that solid NaCl does not conduct electric"
+   ],
+   "seed": 13000
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 seconds, needs no calculation, and its reading load is light.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean, standard conceptual item on ionic conduction. It has a unique key, plausible distractors, and appropriate scope."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: link the conductivity-by-state observation to ionic bonding (ions immobile in the solid lattice, mobile in the melt). The distractors target common misconceptions (no charges, delocalized electrons, molecular substance) but are easy to eliminate with introductory knowledge. No computation or representation changes are needed, so this is a foundational claim-selection question rather than a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "chem-ch3-mc",
+  "stockKey": "chem-ch3-mc:ap_chemistry-m42-k0",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "ap_chemistry",
+  "itemFamilyId": "fam:chem-ch3-mc:ap_chemistry-m42-k0",
+  "canonicalKey": "chem-ch3-mc:ap_chemistry-m42-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_chemistry:2.1",
+  "sharedWith": [],
+  "stockCell": "ap_chemistry|2.1|6.A|standalone|na",
+  "history": [
+   {
+    "run": "chem-ch3-mc",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_chemistry-m42-k2",
+  "cellId": "ap_chemistry-m42",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "2.1",
+  "unitCode": "2",
+  "skillPrimary": "6.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_o_conductivity_claim",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item. The student matches two macroscopic properties (solid-state electrical conductivity and malleability) to metallic bonding as delocalized electrons around cations. Distractors are eliminated by standard property-bond associations: ionic solids are brittle and do not conduct as solids, network covalent solids are hard and brittle, and molecular solids are poor conductors. It takes one short reasoning step, with no calculation, no representation change, and no extra reading. The skill 6.A claim is straightforward.",
+  "payload": {
+   "archetype": "ch_o_conductivity_claim",
+   "topic": "2.1",
+   "skill": "6.A",
+   "calculator": "allowed",
+   "stem": "A student finds that a solid element conducts electricity in the solid state and is malleable. Which claim is best supported by this evidence?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The element is an ionic solid, with oppositely charged ions in a lattice.",
+     "why": "Ionic solids do not conduct in the solid state and are brittle.",
+     "value": null
+    },
+    {
+     "text": "The element is a network covalent solid, with atoms joined by covalent bonds.",
+     "why": "Network solids are hard and brittle and generally do not conduct.",
+     "value": null
+    },
+    {
+     "text": "The element is a molecular solid, with weak forces between the molecules.",
+     "why": "A molecular solid is soft and a poor conductor.",
+     "value": null
+    },
+    {
+     "text": "The element is a metal, with a lattice of cations surrounded by delocalized valence electrons.",
+     "why": "Metals conduct because their valence electrons are mobile and are malleable because the electron sea allows the layers to slide.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 70,
+   "facts": [
+    "A student finds that a solid element conducts electricity in"
+   ],
+   "blueprint": {
+    "id": "ch_o_conductivity_claim",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "make a claim about bonding from conductivity and physical properties",
+    "topic": "2.1",
+    "skill": "6.A",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: make a claim about bonding from conductivity and physical properties",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Ionic solids do not conduct in the solid state and are brittle."
+     },
+     {
+      "id": "m2",
+      "description": "Network solids are hard and brittle and generally do not conduct."
+     },
+     {
+      "id": "m3",
+      "description": "A molecular solid is soft and a poor conductor."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "apply a chemical principle to a specific case and reject plausible misconceptions"
+   },
+   "seed": 13002,
+   "pack_id": "ch_o_conductivity_claim-s13002",
+   "explanation_en": "The correct answer is The element is a metal, with a lattice of cations surrounded by delocalized valence electrons.. Metals conduct because their valence electrons are mobile and are malleable because the electron sea allows the layers to slide.\nThe element is an ionic solid, with oppositely charged ions in a lattice. is incorrect: Ionic solids do not conduct in the solid state and are brittle.\nThe element is a network covalent solid, with atoms joined by covalent bonds. is incorrect: Network solids are hard and brittle and generally do not conduct.\nThe element is a molecular solid, with weak forces between the molecules. is incorrect: A molecular solid is soft and a poor conductor."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_o_conductivity_claim",
+   "facts": [
+    "A student finds that a solid element conducts electricity in"
+   ],
+   "seed": 13002
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.1 (metallic bonding, properties linked to bond type) with skill 6.A (make a claim from evidence). The dominant demand is claiming a bonding type from conductivity and malleability."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only the metal option fits both a solid that conducts and is malleable. Graphite is a network-like solid that conducts, but it is not malleable, and the stem says 'element', so the metal key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors target distinct solid types (ionic, network covalent, molecular), and the explanation addresses each one. The key option is the longest, which is a mild length cue. Option wording is parallel."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 70 seconds, needs no calculation, and matches the typical AP style of a single-claim selection."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous claim-from-evidence question on metallic bonding. It has a unique key and distinct distractors, so it is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item. The student matches two macroscopic properties (solid-state electrical conductivity and malleability) to metallic bonding as delocalized electrons around cations. Distractors are eliminated by standard property-bond associations: ionic solids are brittle and do not conduct as solids, network covalent solids are hard and brittle, and molecular solids are poor conductors. It takes one short reasoning step, with no calculation, no representation change, and no extra reading. The skill 6.A claim is straightforward.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "chem-ch3-mc",
+  "stockKey": "chem-ch3-mc:ap_chemistry-m42-k2",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": true,
+  "family": "ap_chemistry",
+  "itemFamilyId": "fam:chem-ch3-mc:ap_chemistry-m42-k0",
+  "canonicalKey": "chem-ch3-mc:ap_chemistry-m42-k2",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_chemistry:2.1",
+  "sharedWith": [],
+  "stockCell": "ap_chemistry|2.1|6.A|standalone|na",
+  "history": [
+   {
+    "run": "chem-ch3-mc",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_chemistry-m43-k2",
+  "cellId": "ap_chemistry-m43",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "8.1",
+  "unitCode": "8",
+  "skillPrimary": "4.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_o_conj_pair",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recall of the Brønsted-Lowry conjugate pair definition. The solver adds one H+ to HPO4²⁻ to get H2PO4⁻. No computation, no stimulus, and minimal reading. Distractors reflect common misconceptions (the deprotonated species, the most protonated species, and an invalid formula). Skill 4.A is applied only at a basic level, with one reasoning step and no representation changes.",
+  "payload": {
+   "archetype": "ch_o_conj_pair",
+   "topic": "8.1",
+   "skill": "4.A",
+   "calculator": "allowed",
+   "stem": "Which of the following is the conjugate acid of HPO4²⁻?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "PO4³⁻, because it has a higher charge.",
+     "why": "PO4³⁻ is the conjugate base of HPO4²⁻.",
+     "value": null
+    },
+    {
+     "text": "H3PO4, because it has the most hydrogen atoms.",
+     "why": "H3PO4 has two more protons.",
+     "value": null
+    },
+    {
+     "text": "HPO4⁻, because the charge is smaller.",
+     "why": "The species has an incorrect formula for a conjugate.",
+     "value": null
+    },
+    {
+     "text": "H2PO4⁻, because it gains a proton from HPO4²⁻.",
+     "why": "A conjugate acid has one more proton.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 70,
+   "facts": [
+    "Which of the following is the conjugate acid of HPO4²⁻?"
+   ],
+   "blueprint": {
+    "id": "ch_o_conj_pair",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "identify conjugate acid-base pairs",
+    "topic": "8.1",
+    "skill": "4.A",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: identify conjugate acid-base pairs",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "PO4³⁻ is the conjugate base of HPO4²⁻."
+     },
+     {
+      "id": "m2",
+      "description": "H3PO4 has two more protons."
+     },
+     {
+      "id": "m3",
+      "description": "The species has an incorrect formula for a conjugate."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "apply a chemical principle to a specific case and reject plausible misconceptions"
+   },
+   "seed": 13002,
+   "pack_id": "ch_o_conj_pair-s13002",
+   "explanation_en": "The correct answer is H2PO4⁻, because it gains a proton from HPO4²⁻.. A conjugate acid has one more proton.\nPO4³⁻, because it has a higher charge. is incorrect: PO4³⁻ is the conjugate base of HPO4²⁻.\nH3PO4, because it has the most hydrogen atoms. is incorrect: H3PO4 has two more protons.\nHPO4⁻, because the charge is smaller. is incorrect: The species has an incorrect formula for a conjugate."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_o_conj_pair",
+   "facts": [
+    "Which of the following is the conjugate acid of HPO4²⁻?"
+   ],
+   "seed": 13002
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A correct, unambiguous conjugate acid item. The key is unique and the distractors are explained. Option C is a weak misconception because HPO4⁻ is not a valid formula, but this does not fail the item.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Conjugate acid-base pair identification fits topic 8.1. Skill 4.A is applied in a simple recall-like way, but acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "H2PO4- is the unique conjugate acid of HPO4 2-. Other options are clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode the conjugate base (PO4 3-), over-protonation (H3PO4) and an invalid formula. The invalid-formula option is weak but acceptable. Each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, with no calculation. The \"because\" clauses make the options slightly long, but that is acceptable."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall of the Brønsted-Lowry conjugate pair definition. The solver adds one H+ to HPO4²⁻ to get H2PO4⁻. No computation, no stimulus, and minimal reading. Distractors reflect common misconceptions (the deprotonated species, the most protonated species, and an invalid formula). Skill 4.A is applied only at a basic level, with one reasoning step and no representation changes.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "chem-ch3-mc",
+  "stockKey": "chem-ch3-mc:ap_chemistry-m43-k2",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": true,
+  "family": "ap_chemistry",
+  "itemFamilyId": "fam:chem-ch3-mc:ap_chemistry-m43-k1",
+  "canonicalKey": "chem-ch3-mc:ap_chemistry-m43-k2",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_chemistry:8.1",
+  "sharedWith": [],
+  "stockCell": "ap_chemistry|8.1|4.A|standalone|na",
+  "history": [
+   {
+    "run": "chem-ch3-mc",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_chemistry-m45-k2",
+  "cellId": "ap_chemistry-m45",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "6.6",
+  "unitCode": "6",
+  "skillPrimary": "4.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_o_energy_diagram",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept conceptual item: for an endothermic reaction the products sit higher in energy than the reactants, so Ea(forward) = Ea(reverse) + ΔH is larger than Ea(reverse). It needs one mental energy-diagram model and one reasoning step, with no computation, no data reading and minimal text. The distractors are plausible misconceptions (absorbing energy implies a smaller Ea, a catalyst changes the comparison, Ea = 0), but none adds depth. This is recall and application of a basic energy-diagram relationship, below typical full-mock complexity.",
+  "payload": {
+   "archetype": "ch_o_energy_diagram",
+   "topic": "6.6",
+   "skill": "4.A",
+   "calculator": "allowed",
+   "stem": "For an endothermic reaction, how does the activation energy of the forward reaction compare with that of the reverse reaction?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The forward activation energy is smaller, because the reaction absorbs energy.",
+     "why": "The barrier from the lower-energy side is larger.",
+     "value": null
+    },
+    {
+     "text": "They are equal, because a catalyst is not present.",
+     "why": "The two activation energies differ by the value of ΔH.",
+     "value": null
+    },
+    {
+     "text": "The activation energy of the reverse reaction is zero.",
+     "why": "The reverse reaction also has a barrier.",
+     "value": null
+    },
+    {
+     "text": "The forward Ea is greater, because the products are higher in energy than the reactants.",
+     "why": "Ea(forward) = Ea(reverse) + ΔH.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 70,
+   "facts": [
+    "For an endothermic reaction, how does the activation energy "
+   ],
+   "blueprint": {
+    "id": "ch_o_energy_diagram",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "interpret reaction energy diagrams for activation energy and enthalpy change",
+    "topic": "6.6",
+    "skill": "4.A",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: interpret reaction energy diagrams for activation energy and enthalpy change",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "The barrier from the lower-energy side is larger."
+     },
+     {
+      "id": "m2",
+      "description": "The two activation energies differ by the value of ΔH."
+     },
+     {
+      "id": "m3",
+      "description": "The reverse reaction also has a barrier."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "apply a chemical principle to a specific case and reject plausible misconceptions"
+   },
+   "seed": 13002,
+   "pack_id": "ch_o_energy_diagram-s13002",
+   "explanation_en": "The correct answer is The forward Ea is greater, because the products are higher in energy than the reactants.. Ea(forward) = Ea(reverse) + ΔH.\nThe forward activation energy is smaller, because the reaction absorbs energy. is incorrect: The barrier from the lower-energy side is larger.\nThey are equal, because a catalyst is not present. is incorrect: The two activation energies differ by the value of ΔH.\nThe activation energy of the reverse reaction is zero. is incorrect: The reverse reaction also has a barrier."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_o_energy_diagram",
+   "facts": [
+    "For an endothermic reaction, how does the activation energy "
+   ],
+   "seed": 13002
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "It takes about 30-70 seconds with no calculation. The calculator designation is irrelevant but harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, uniquely keyed and in scope. Minor weaknesses are the loose fit to the 6.6 topic, a mild length giveaway on the key and a weak catalyst distractor."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept conceptual item: for an endothermic reaction the products sit higher in energy than the reactants, so Ea(forward) = Ea(reverse) + ΔH is larger than Ea(reverse). It needs one mental energy-diagram model and one reasoning step, with no computation, no data reading and minimal text. The distractors are plausible misconceptions (absorbing energy implies a smaller Ea, a catalyst changes the comparison, Ea = 0), but none adds depth. This is recall and application of a basic energy-diagram relationship, below typical full-mock complexity.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "chem-ch3-mc",
+  "stockKey": "chem-ch3-mc:ap_chemistry-m45-k2",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": true,
+  "family": "ap_chemistry",
+  "itemFamilyId": "fam:chem-ch3-mc:ap_chemistry-m45-k1",
+  "canonicalKey": "chem-ch3-mc:ap_chemistry-m45-k2",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_chemistry:6.6",
+  "sharedWith": [],
+  "stockCell": "ap_chemistry|6.6|4.A|standalone|na",
+  "history": [
+   {
+    "run": "chem-ch3-mc",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_chemistry-m55-k0",
+  "cellId": "ap_chemistry-m55",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "1.4",
+  "unitCode": "1",
+  "skillPrimary": "2.E",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_o_mixture_error",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept qualitative error analysis. A hot crucible gives an artificially low final mass from convection currents, so the apparent mass lost is larger and the percent water is too high. This takes one or two reasoning steps with no computation or representation change. The distractors are plausible but easy to rule out, and the item is clearly worded and within Unit 1.4 scope.",
+  "payload": {
+   "archetype": "ch_o_mixture_error",
+   "topic": "1.4",
+   "skill": "2.E",
+   "calculator": "allowed",
+   "stem": "In an experiment to find the mass percent of water in a hydrate, a student weighed the crucible and sample after heating but did not let it cool. The mass reading was too low because of rising air currents. How does this error affect the calculated percent of water?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Too high, because the apparent final mass is low and so the mass lost seems larger.",
+     "why": "A low final mass makes the mass loss look too large.",
+     "value": null
+    },
+    {
+     "text": "The calculated percent water is too low, because the initial mass is too high.",
+     "why": "The initial mass was measured correctly.",
+     "value": null
+    },
+    {
+     "text": "The calculated percent water is too low, because the final mass is too low.",
+     "why": "A lower final mass increases the calculated mass lost.",
+     "value": null
+    },
+    {
+     "text": "There is no effect, because the same crucible is used for both masses.",
+     "why": "The error is in the final mass and does not cancel.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 70,
+   "facts": [
+    "In an experiment to find the mass percent of water in a hydr"
+   ],
+   "blueprint": {
+    "id": "ch_o_mixture_error",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "identify the effect of an experimental error on a calculated mass percent",
+    "topic": "1.4",
+    "skill": "2.E",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: identify the effect of an experimental error on a calculated mass percent",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "The initial mass was measured correctly."
+     },
+     {
+      "id": "m2",
+      "description": "A lower final mass increases the calculated mass lost."
+     },
+     {
+      "id": "m3",
+      "description": "The error is in the final mass and does not cancel."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "apply a chemical principle to a specific case and reject plausible misconceptions"
+   },
+   "seed": 13000,
+   "pack_id": "ch_o_mixture_error-s13000",
+   "explanation_en": "The correct answer is Too high, because the apparent final mass is low and so the mass lost seems larger.. A low final mass makes the mass loss look too large.\nThe calculated percent water is too low, because the initial mass is too high. is incorrect: The initial mass was measured correctly.\nThe calculated percent water is too low, because the final mass is too low. is incorrect: A lower final mass increases the calculated mass lost.\nThere is no effect, because the same crucible is used for both masses. is incorrect: The error is in the final mass and does not cancel."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_o_mixture_error",
+   "facts": [
+    "In an experiment to find the mass percent of water in a hydr"
+   ],
+   "seed": 13000
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Hydrate mass percent error analysis fits 1.4 and skill 2.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Low final mass gives larger apparent mass loss, so percent water is too high. Unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. Stem is clear and gives the error direction explicitly. Minor option phrasing inconsistency (key starts 'Too high', others 'The calculated percent water is...')."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode wrong initial mass, reversed direction, and cancellation misconceptions. Explanations cover each option, though terse; doubled period in the key line."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 60-70 seconds, typical AP error-analysis item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound error-direction item on hydrate percent water. Key is correct and unique. Minor stylistic inconsistency in option wording and a cosmetic doubled period in the explanation, but acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept qualitative error analysis. A hot crucible gives an artificially low final mass from convection currents, so the apparent mass lost is larger and the percent water is too high. This takes one or two reasoning steps with no computation or representation change. The distractors are plausible but easy to rule out, and the item is clearly worded and within Unit 1.4 scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "chem-ch3-mc",
+  "stockKey": "chem-ch3-mc:ap_chemistry-m55-k0",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "ap_chemistry",
+  "itemFamilyId": "fam:chem-ch3-mc:ap_chemistry-m55-k0",
+  "canonicalKey": "chem-ch3-mc:ap_chemistry-m55-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_chemistry:1.4",
+  "sharedWith": [],
+  "stockCell": "ap_chemistry|1.4|2.E|standalone|na",
+  "history": [
+   {
+    "run": "chem-ch3-mc",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_chemistry-m64-k1",
+  "cellId": "ap_chemistry-m64",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "1.7",
+  "unitCode": "1",
+  "skillPrimary": "6.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_radius_trend",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "This is a single-concept recall and justification item. The student identifies that Be and O are in the same period, so the atom with lower effective nuclear charge (Be) has the larger radius, and then picks the matching explanation. Only one or two reasoning steps are needed. There is no stimulus, computation or representation change. The distractors are plain misconceptions: swapping the atoms, or claiming more protons gives a larger cloud. The item is short and clearly worded, and everything it asks falls within Unit 1 scope.",
+  "payload": {
+   "archetype": "ch_radius_trend",
+   "topic": "1.7",
+   "skill": "6.D",
+   "calculator": "allowed",
+   "stem": "Which atom has the larger atomic radius, Be or O, and why?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Be, because its nucleus has a smaller effective nuclear charge acting on the same shell, so the valence electrons are held less tightly.",
+     "why": "The trend follows shell number within a group and effective nuclear charge across a period.",
+     "value": null
+    },
+    {
+     "text": "O, because its nucleus has a smaller effective nuclear charge acting on the same shell, so the valence electrons are held less tightly.",
+     "why": "Right reason applied to the wrong atom.",
+     "value": null
+    },
+    {
+     "text": "O, because it has more protons, so the electron cloud is larger.",
+     "why": "Both the atom and the reason are reversed.",
+     "value": null
+    },
+    {
+     "text": "Be, because it has more protons, so the electron cloud is larger.",
+     "why": "Treats more protons as making an atom larger.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 75,
+   "facts": [
+    "a=Be",
+    "b=O",
+    "larger=Be"
+   ],
+   "blueprint": {
+    "id": "ch_radius_trend",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "justify the larger atomic radius using shells and effective nuclear charge",
+    "topic": "1.7",
+    "skill": "6.D",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: justify the larger atomic radius using shells and effective nuclear charge",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Right reason applied to the wrong atom."
+     },
+     {
+      "id": "m2",
+      "description": "Both the atom and the reason are reversed."
+     },
+     {
+      "id": "m3",
+      "description": "Treats more protons as making an atom larger."
+     }
+    ],
+    "verification": {
+     "independent_path": "rule from period and group positions vs tabulated radii agree",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "choose between shell number and effective nuclear charge as the deciding factor"
+   },
+   "seed": 13001,
+   "pack_id": "ch_radius_trend-s13001",
+   "explanation_en": "The correct answer is Be, because its nucleus has a smaller effective nuclear charge acting on the same shell, so the valence electrons are held less tightly.. The trend follows shell number within a group and effective nuclear charge across a period.\nO, because its nucleus has a smaller effective nuclear charge acting on the same shell, so the valence electrons are held less tightly. is incorrect: Right reason applied to the wrong atom.\nO, because it has more protons, so the electron cloud is larger. is incorrect: Both the atom and the reason are reversed.\nBe, because it has more protons, so the electron cloud is larger. is incorrect: Treats more protons as making an atom larger."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_radius_trend",
+   "facts": [
+    "a=Be",
+    "b=O",
+    "larger=Be"
+   ],
+   "seed": 13001
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Takes about 60-75 seconds, needs no calculation, and its format is typical of AP claim-and-justification items.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unambiguous 1.7 justification item with one correct claim-and-reason option and distinct misconception distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "This is a single-concept recall and justification item. The student identifies that Be and O are in the same period, so the atom with lower effective nuclear charge (Be) has the larger radius, and then picks the matching explanation. Only one or two reasoning steps are needed. There is no stimulus, computation or representation change. The distractors are plain misconceptions: swapping the atoms, or claiming more protons gives a larger cloud. The item is short and clearly worded, and everything it asks falls within Unit 1 scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "chem-ch3-mc",
+  "stockKey": "chem-ch3-mc:ap_chemistry-m64-k1",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "ap_chemistry",
+  "itemFamilyId": "fam:chem-ch3-mc:ap_chemistry-m64-k1",
+  "canonicalKey": "chem-ch3-mc:ap_chemistry-m64-k1",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_chemistry:1.7",
+  "sharedWith": [],
+  "stockCell": "ap_chemistry|1.7|6.D|standalone|na",
+  "history": [
+   {
+    "run": "chem-ch3-mc",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_chemistry-m03-k0",
+  "cellId": "ap_chemistry-m03",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "2.2",
+  "unitCode": "2",
+  "skillPrimary": "4.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_o_bond_order_length",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recall: relate bond order (single, double, triple) to bond length, then match the correct ordering and justification. No stimulus, no calculation, minimal reading, and distractors are easily eliminated. It does not use a potential energy curve or a proportional prediction, so it falls below full-mock exam-prep depth. The difficulty comes from the concept itself, not from unfair sources.",
+  "payload": {
+   "archetype": "ch_o_bond_order_length",
+   "topic": "2.2",
+   "skill": "4.A",
+   "calculator": "allowed",
+   "stem": "Which of the following correctly ranks the carbon–carbon bonds in C2H6, C2H4 and C2H2 in order of increasing bond length?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "C2H6 < C2H4 < C2H2, because more bonds make the atoms repel more.",
+     "why": "A higher bond order shortens the bond.",
+     "value": null
+    },
+    {
+     "text": "C2H2 = C2H4 = C2H6, because all of them join two carbon atoms.",
+     "why": "The bond length depends on the bond order, not only on the atoms joined.",
+     "value": null
+    },
+    {
+     "text": "C2H2 < C2H4 < C2H6, because a higher bond order gives a shorter bond.",
+     "why": "The bond order increases from a single to a triple bond, and the nuclei move closer together.",
+     "value": null
+    },
+    {
+     "text": "C2H4 < C2H2 < C2H6, because a double bond is the shortest.",
+     "why": "A triple bond is shorter than a double bond.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 70,
+   "facts": [
+    "Which of the following correctly ranks the carbon–carbon bon"
+   ],
+   "blueprint": {
+    "id": "ch_o_bond_order_length",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "relate bond order to bond length and bond energy",
+    "topic": "2.2",
+    "skill": "4.A",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: relate bond order to bond length and bond energy",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "A higher bond order shortens the bond."
+     },
+     {
+      "id": "m2",
+      "description": "The bond length depends on the bond order, not only on the atoms joined."
+     },
+     {
+      "id": "m3",
+      "description": "A triple bond is shorter than a double bond."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED 2.2",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "apply a chemical principle to a specific case and reject plausible misconceptions"
+   },
+   "seed": 14000,
+   "pack_id": "ch_o_bond_order_length-s14000",
+   "explanation_en": "The correct answer is C2H2 < C2H4 < C2H6, because a higher bond order gives a shorter bond.. The bond order increases from a single to a triple bond, and the nuclei move closer together.\nC2H6 < C2H4 < C2H2, because more bonds make the atoms repel more. is incorrect: A higher bond order shortens the bond.\nC2H2 = C2H4 = C2H6, because all of them join two carbon atoms. is incorrect: The bond length depends on the bond order, not only on the atoms joined.\nC2H4 < C2H2 < C2H6, because a double bond is the shortest. is incorrect: A triple bond is shorter than a double bond."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_o_bond_order_length",
+   "facts": [
+    "Which of the following correctly ranks the carbon–carbon bon"
+   ],
+   "seed": 14000
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Bond order versus bond length is in the 2.2 scope. The task is explaining a property from a given model, which fits skill 4.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the unique correct answer. Both the ranking and the reasoning in it are correct. The other options have wrong rankings."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception: reversed order, bond length independent of bond order, and double bond shorter than triple. Every wrong option is explained. The \"why\" text for option A is terse. It reads as a statement of the correct principle rather than naming the error, but it is still acceptable. The options are parallel in length and format."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 30-70 seconds and involves no calculation. Its recall-based demand is low. The \"calculator allowed\" label is irrelevant to this item but harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean, correct item on bond order and bond length. It has a unique key, distinct distractors and a low reading load."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall: relate bond order (single, double, triple) to bond length, then match the correct ordering and justification. No stimulus, no calculation, minimal reading, and distractors are easily eliminated. It does not use a potential energy curve or a proportional prediction, so it falls below full-mock exam-prep depth. The difficulty comes from the concept itself, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "chem-ch3-mcr2",
+  "stockKey": "chem-ch3-mcr2:ap_chemistry-m03-k0",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "ap_chemistry",
+  "itemFamilyId": "fam:chem-ch3-mcr2:ap_chemistry-m03-k0",
+  "canonicalKey": "chem-ch3-mcr2:ap_chemistry-m03-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_chemistry:2.2",
+  "sharedWith": [],
+  "stockCell": "ap_chemistry|2.2|4.A|standalone|na",
+  "history": [
+   {
+    "run": "chem-ch3-mcr2",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_chemistry-m09-k1",
+  "cellId": "ap_chemistry-m09",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "5.8",
+  "unitCode": "5",
+  "skillPrimary": "5.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_o_mechanism_step",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: the rate law follows from the slow (rate-determining) step, giving rate = k[X][Y] and first order in Y. It needs one reasoning step, with no computation or representation change. The distractors target standard misconceptions (stoichiometric coefficient, fast-step involvement, data needed). It is too direct for a full mock exam and suits foundational practice.",
+  "payload": {
+   "archetype": "ch_o_mechanism_step",
+   "topic": "5.8",
+   "skill": "5.B",
+   "calculator": "allowed",
+   "stem": "A mechanism has two steps: (1) X + Y → Z (slow); (2) Z + Y → P (fast). The overall reaction is X + 2 Y → P. What is the order of the reaction in Y?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Zero order in Y, because Y is also used in the fast step.",
+     "why": "Y takes part in the slow step, so the rate depends on [Y].",
+     "value": null
+    },
+    {
+     "text": "Second order in Y, because the overall equation has 2 Y.",
+     "why": "The overall coefficients do not set the order.",
+     "value": null
+    },
+    {
+     "text": "First order in Y, because only one Y takes part in the slow step.",
+     "why": "The order is set by the slow step and not by the overall equation.",
+     "value": null
+    },
+    {
+     "text": "The order cannot be found without experimental data.",
+     "why": "A mechanism with a slow step gives the rate law that it predicts.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 70,
+   "facts": [
+    "A mechanism has two steps: (1) X + Y → Z (slow); (2) Z + Y →"
+   ],
+   "blueprint": {
+    "id": "ch_o_mechanism_step",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "derive the rate law from a mechanism with a slow step",
+    "topic": "5.8",
+    "skill": "5.B",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: derive the rate law from a mechanism with a slow step",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Y takes part in the slow step, so the rate depends on [Y]."
+     },
+     {
+      "id": "m2",
+      "description": "The overall coefficients do not set the order."
+     },
+     {
+      "id": "m3",
+      "description": "A mechanism with a slow step gives the rate law that it predicts."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED 5.8",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "apply a chemical principle to a specific case and reject plausible misconceptions"
+   },
+   "seed": 14001,
+   "pack_id": "ch_o_mechanism_step-s14001",
+   "explanation_en": "The correct answer is First order in Y, because only one Y takes part in the slow step.. The order is set by the slow step and not by the overall equation.\nZero order in Y, because Y is also used in the fast step. is incorrect: Y takes part in the slow step, so the rate depends on [Y].\nSecond order in Y, because the overall equation has 2 Y. is incorrect: The overall coefficients do not set the order.\nThe order cannot be found without experimental data. is incorrect: A mechanism with a slow step gives the rate law that it predicts."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_o_mechanism_step",
+   "facts": [
+    "A mechanism has two steps: (1) X + Y → Z (slow); (2) Z + Y →"
+   ],
+   "seed": 14001
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.8 slow-step rate law; the selection of the governing rule fits 5.B adequately."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Slow step X+Y gives rate=k[X][Y]; first order in Y is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct misconceptions (fast step, overall coefficient, needs data); each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, short, typical of AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and cleanly written. It has a unique key and distinct distractors, and it is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: the rate law follows from the slow (rate-determining) step, giving rate = k[X][Y] and first order in Y. It needs one reasoning step, with no computation or representation change. The distractors target standard misconceptions (stoichiometric coefficient, fast-step involvement, data needed). It is too direct for a full mock exam and suits foundational practice.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "chem-ch3-mcr2",
+  "stockKey": "chem-ch3-mcr2:ap_chemistry-m09-k1",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": true,
+  "family": "ap_chemistry",
+  "itemFamilyId": "fam:chem-ch3-mcr2:ap_chemistry-m09-k1",
+  "canonicalKey": "chem-ch3-mcr2:ap_chemistry-m09-k1",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_chemistry:5.8",
+  "sharedWith": [],
+  "stockCell": "ap_chemistry|5.8|5.B|standalone|na",
+  "history": [
+   {
+    "run": "chem-ch3-mcr2",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_chemistry-m10-k0",
+  "cellId": "ap_chemistry-m10",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "4.2",
+  "unitCode": "4",
+  "skillPrimary": "6.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_o_precip_claim",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Recall of solubility rules for a classic precipitation reaction (Pb(NO3)2 + KI gives yellow PbI2). Distractors are easily eliminated: a gas cannot be a solid, KNO3 is soluble, and \"no reaction\" contradicts the observed solid. One or two reasoning steps, no computation, minimal reading. The claim-selection skill is satisfied only at an elementary level.",
+  "payload": {
+   "archetype": "ch_o_precip_claim",
+   "topic": "4.2",
+   "skill": "6.A",
+   "calculator": "allowed",
+   "stem": "A student mixes solutions of Pb(NO3)2 and KI and observes a yellow solid. Which claim is best supported?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "A precipitate of KNO3 formed, because potassium and nitrate ions are present.",
+     "why": "All nitrates and potassium salts are soluble.",
+     "value": null
+    },
+    {
+     "text": "A gas formed, which is seen as a yellow solid.",
+     "why": "A solid is a precipitate and not a gas.",
+     "value": null
+    },
+    {
+     "text": "PbI2 precipitated, because lead(II) iodide is insoluble in water.",
+     "why": "The yellow solid is lead(II) iodide.",
+     "value": null
+    },
+    {
+     "text": "No reaction occurred, because the ions are all soluble.",
+     "why": "The formation of a solid shows a reaction.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 70,
+   "facts": [
+    "A student mixes solutions of Pb(NO3)2 and KI and observes a "
+   ],
+   "blueprint": {
+    "id": "ch_o_precip_claim",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "make a claim about precipitation from solubility rules and observations",
+    "topic": "4.2",
+    "skill": "6.A",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: make a claim about precipitation from solubility rules and observations",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "All nitrates and potassium salts are soluble."
+     },
+     {
+      "id": "m2",
+      "description": "A solid is a precipitate and not a gas."
+     },
+     {
+      "id": "m3",
+      "description": "The formation of a solid shows a reaction."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "apply a chemical principle to a specific case and reject plausible misconceptions"
+   },
+   "seed": 14000,
+   "pack_id": "ch_o_precip_claim-s14000",
+   "explanation_en": "The correct answer is PbI2 precipitated, because lead(II) iodide is insoluble in water.. The yellow solid is lead(II) iodide.\nA precipitate of KNO3 formed, because potassium and nitrate ions are present. is incorrect: All nitrates and potassium salts are soluble.\nA gas formed, which is seen as a yellow solid. is incorrect: A solid is a precipitate and not a gas.\nNo reaction occurred, because the ions are all soluble. is incorrect: The formation of a solid shows a reaction."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_o_precip_claim",
+   "facts": [
+    "A student mixes solutions of Pb(NO3)2 and KI and observes a "
+   ],
+   "seed": 14000
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Claim from solubility rules and observation fits 4.2 and 6.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "PbI2 is the unique correct claim; others contradict observation or solubility rules."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct misconceptions (KNO3 precipitate, gas confusion, no reaction); the explanations are terse but cover each option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds. It is on the easy side, but it is a typical AP-style claim item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is valid with a unique key and distinct distractors, and its difficulty is low but acceptable. It passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Recall of solubility rules for a classic precipitation reaction (Pb(NO3)2 + KI gives yellow PbI2). Distractors are easily eliminated: a gas cannot be a solid, KNO3 is soluble, and \"no reaction\" contradicts the observed solid. One or two reasoning steps, no computation, minimal reading. The claim-selection skill is satisfied only at an elementary level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "chem-ch3-mcr2",
+  "stockKey": "chem-ch3-mcr2:ap_chemistry-m10-k0",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "ap_chemistry",
+  "itemFamilyId": "fam:chem-ch3-mcr2:ap_chemistry-m10-k0",
+  "canonicalKey": "chem-ch3-mcr2:ap_chemistry-m10-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_chemistry:4.2",
+  "sharedWith": [],
+  "stockCell": "ap_chemistry|4.2|6.A|standalone|na",
+  "history": [
+   {
+    "run": "chem-ch3-mcr2",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_chemistry-m11-k3",
+  "cellId": "ap_chemistry-m11",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "4.9",
+  "unitCode": "4",
+  "skillPrimary": "4.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_o_redox_agent",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recall item. The student compares oxidation states of Fe and Sn from reactant to product, sees that Sn2+ goes to Sn4+ (oxidized), and concludes it is the reducing agent. There is no computation or representation change, and the reading load is minimal. The distractors target common misconceptions (products, charge magnitude, mixing up loss and gain of electrons) but do not add depth.",
+  "payload": {
+   "archetype": "ch_o_redox_agent",
+   "topic": "4.9",
+   "skill": "4.A",
+   "calculator": "allowed",
+   "stem": "In the reaction 2 Fe³⁺(aq) + Sn²⁺(aq) → 2 Fe²⁺(aq) + Sn⁴⁺(aq), which species is the reducing agent?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Fe²⁺, because it is a product.",
+     "why": "Fe²⁺ is the reduced product.",
+     "value": null
+    },
+    {
+     "text": "Sn⁴⁺, because it has the higher charge.",
+     "why": "Sn⁴⁺ is the oxidized product.",
+     "value": null
+    },
+    {
+     "text": "Fe³⁺, because it loses electrons.",
+     "why": "Fe³⁺ gains electrons, so it is the oxidizing agent.",
+     "value": null
+    },
+    {
+     "text": "Sn²⁺, because it loses electrons and is oxidized.",
+     "why": "The reducing agent is oxidized.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 70,
+   "facts": [
+    "In the reaction 2 Fe³⁺(aq) + Sn²⁺(aq) → 2 Fe²⁺(aq) + Sn⁴⁺(aq"
+   ],
+   "blueprint": {
+    "id": "ch_o_redox_agent",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "identify oxidizing and reducing agents and redox reactions",
+    "topic": "4.9",
+    "skill": "4.A",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: identify oxidizing and reducing agents and redox reactions",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Fe²⁺ is the reduced product."
+     },
+     {
+      "id": "m2",
+      "description": "Sn⁴⁺ is the oxidized product."
+     },
+     {
+      "id": "m3",
+      "description": "Fe³⁺ gains electrons, so it is the oxidizing agent."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "apply a chemical principle to a specific case and reject plausible misconceptions"
+   },
+   "seed": 14003,
+   "pack_id": "ch_o_redox_agent-s14003",
+   "explanation_en": "The correct answer is Sn²⁺, because it loses electrons and is oxidized.. The reducing agent is oxidized.\nFe²⁺, because it is a product. is incorrect: Fe²⁺ is the reduced product.\nSn⁴⁺, because it has the higher charge. is incorrect: Sn⁴⁺ is the oxidized product.\nFe³⁺, because it loses electrons. is incorrect: Fe³⁺ gains electrons, so it is the oxidizing agent."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_o_redox_agent",
+   "facts": [
+    "In the reaction 2 Fe³⁺(aq) + Sn²⁺(aq) → 2 Fe²⁺(aq) + Sn⁴⁺(aq"
+   ],
+   "seed": 14003
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Identifying the reducing agent is directly topic 4.9; the model-analysis skill is applied in a simple way."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Sn2+ is oxidized (+2 to +4) and is the reducing agent; the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The equation is complete and clearly worded."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Option C encodes a clear misconception (confusing oxidizing and reducing agent). Options A and B are weaker, and the key is the longest option, but the explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is quick, has no arithmetic load, and is low in difficulty but acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and in scope. Its distractors are somewhat weak and it is easy, but it is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall item. The student compares oxidation states of Fe and Sn from reactant to product, sees that Sn2+ goes to Sn4+ (oxidized), and concludes it is the reducing agent. There is no computation or representation change, and the reading load is minimal. The distractors target common misconceptions (products, charge magnitude, mixing up loss and gain of electrons) but do not add depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "chem-ch3-mcr2",
+  "stockKey": "chem-ch3-mcr2:ap_chemistry-m11-k3",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": true,
+  "family": "ap_chemistry",
+  "itemFamilyId": "fam:chem-ch3-mcr2:ap_chemistry-m11-k1",
+  "canonicalKey": "chem-ch3-mcr2:ap_chemistry-m11-k3",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_chemistry:4.9",
+  "sharedWith": [],
+  "stockCell": "ap_chemistry|4.9|4.A|standalone|na",
+  "history": [
+   {
+    "run": "chem-ch3-mcr2",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_chemistry-m13-k3",
+  "cellId": "ap_chemistry-m13",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "9.3",
+  "unitCode": "9",
+  "skillPrimary": "5.F",
+  "structure": "shared_stimulus_set",
+  "calculator": "allowed",
+  "archetype": "chs_gibbs_temperature_set_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student must recognize ΔG° = ΔH° − TΔS° as a linear relationship, read the table to find the slope (−12 kJ per 100 K), recognize ΔS° = −slope, and convert kJ to J. Clean numbers, minimal reading, and no long arithmetic. Distractors target sign and unit errors. Appropriate for a full mock on skill 5.F.",
+  "payload": {
+   "archetype": "chs_gibbs_temperature_set",
+   "topic": "9.3",
+   "skill": "5.F",
+   "calculator": "allowed",
+   "set_intro": "The table gives the standard free energy change, ΔG°, of one reaction at three temperatures. Assume that ΔH° and ΔS° of the reaction do not change with temperature.",
+   "stimulus": {
+    "kind": "table",
+    "description": "Standard free energy change of a reaction at three temperatures",
+    "data": {
+     "x_label": "Temperature (K)",
+     "columns": [
+      "Temperature (K)",
+      "ΔG° (kJ/mol)"
+     ],
+     "y_label": "ΔG° (kJ/mol)",
+     "rows": [
+      [
+       "300",
+       "144.0"
+      ],
+      [
+       "400",
+       "132.0"
+      ],
+      [
+       "500",
+       "120.0"
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "chs_gibbs_temperature_set_q1",
+     "topic": "9.3",
+     "skill": "5.F",
+     "stem": "What is the standard entropy change, ΔS°, of the reaction, in J/(mol K)? Assume that ΔH° and ΔS° do not change with temperature.",
+     "options": [
+      {
+       "text": "$120\\text{ J/(mol K)}$",
+       "why": "ΔG° = ΔH° − TΔS°, so the slope of ΔG° against T is −ΔS°: (120.0 − 144.0) kJ / 200 K = -0.1200 kJ/(mol K), so ΔS° = 120 J/(mol K).",
+       "value": "120.00000"
+      },
+      {
+       "text": "$-120\\text{ J/(mol K)}$",
+       "why": "Reports ΔS° with the right magnitude but the wrong sign.",
+       "value": "-120.00000"
+      },
+      {
+       "text": "$480\\text{ J/(mol K)}$",
+       "why": "Divides a single value of ΔG° by its temperature.",
+       "value": "480.00000"
+      },
+      {
+       "text": "$0.120\\text{ J/(mol K)}$",
+       "why": "Forgets to convert kJ to J.",
+       "value": "0.12000000"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is $120\\text{ J/(mol K)}$. ΔG° = ΔH° − TΔS°, so the slope of ΔG° against T is −ΔS°: (120.0 − 144.0) kJ / 200 K = -0.1200 kJ/(mol K), so ΔS° = 120 J/(mol K).\n$-120\\text{ J/(mol K)}$ is incorrect: Reports ΔS° with the right magnitude but the wrong sign.\n$480\\text{ J/(mol K)}$ is incorrect: Divides a single value of ΔG° by its temperature.\n$0.120\\text{ J/(mol K)}$ is incorrect: Forgets to convert kJ to J.",
+     "est_seconds": 105,
+     "blueprint": {
+      "id": "chs_gibbs_temperature_set_q1",
+      "subject": "ap_chemistry",
+      "kind": "mc",
+      "concept": "ΔS° and ΔH° from a linear ΔG° versus T table",
+      "topic": "9.3",
+      "skill": "5.F",
+      "student_thinking": [
+       "Decide which chemical relationship or representation applies: ΔS° and ΔH° from a linear ΔG° versus T table",
+       "Carry out or interpret the result and match it against the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "ΔH° and ΔS° are independent of temperature",
+        "evidence": "the stem states the assumption"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "temperatures",
+        "free energies"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Reports ΔS° with the right magnitude but the wrong sign."
+       },
+       {
+        "id": "m2",
+        "description": "Divides a single value of ΔG° by its temperature."
+       },
+       {
+        "id": "m3",
+        "description": "Forgets to convert kJ to J."
+       }
+      ],
+      "verification": {
+       "independent_path": "least squares of ΔG° against T vs the two-point slope",
+       "method": "sympy/exact + independent numeric path"
+      },
+      "judgment_demand": "read the slope and intercept of ΔG° = ΔH° − TΔS°"
+     }
+    },
+    {
+     "archetype": "chs_gibbs_temperature_set_q2",
+     "topic": "9.3",
+     "skill": "5.F",
+     "stem": "What is the standard enthalpy change, ΔH°, of the reaction, in kJ/mol? Assume that ΔH° and ΔS° do not change with temperature.",
+     "options": [
+      {
+       "text": "$120\\text{ kJ/mol}$",
+       "why": "Takes the ΔG° at 500 K as ΔH°.",
+       "value": "120.00000"
+      },
+      {
+       "text": "$132\\text{ kJ/mol}$",
+       "why": "Averages the three values of ΔG°.",
+       "value": "132.00000"
+      },
+      {
+       "text": "$144\\text{ kJ/mol}$",
+       "why": "Takes the ΔG° at 300 K as ΔH°.",
+       "value": "144.00000"
+      },
+      {
+       "text": "$180\\text{ kJ/mol}$",
+       "why": "At 300 K, ΔH° = ΔG° + TΔS° = 144.0 + (300)(0.120) = 180 kJ/mol.",
+       "value": "180.00000"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is $180\\text{ kJ/mol}$. At 300 K, ΔH° = ΔG° + TΔS° = 144.0 + (300)(0.120) = 180 kJ/mol.\n$120\\text{ kJ/mol}$ is incorrect: Takes the ΔG° at 500 K as ΔH°.\n$132\\text{ kJ/mol}$ is incorrect: Averages the three values of ΔG°.\n$144\\text{ kJ/mol}$ is incorrect: Takes the ΔG° at 300 K as ΔH°.",
+     "est_seconds": 105,
+     "blueprint": {
+      "id": "chs_gibbs_temperature_set_q2",
+      "subject": "ap_chemistry",
+      "kind": "mc",
+      "concept": "ΔS° and ΔH° from a linear ΔG° versus T table",
+      "topic": "9.3",
+      "skill": "5.F",
+      "student_thinking": [
+       "Decide which chemical relationship or representation applies: ΔS° and ΔH° from a linear ΔG° versus T table",
+       "Carry out or interpret the result and match it against the four options"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "allowed",
+      "key_conditions": [
+       {
+        "condition": "ΔH° and ΔS° are independent of temperature",
+        "evidence": "the stem states the assumption"
+       }
+      ],
+      "material": {
+       "type": "table",
+       "must_include": [
+        "temperatures",
+        "free energies"
+       ]
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Takes the ΔG° at 500 K as ΔH°."
+       },
+       {
+        "id": "m2",
+        "description": "Averages the three values of ΔG°."
+       },
+       {
+        "id": "m3",
+        "description": "Takes the ΔG° at 300 K as ΔH°."
+       }
+      ],
+      "verification": {
+       "independent_path": "least squares of ΔG° against T vs the two-point slope",
+       "method": "sympy/exact + independent numeric path"
+      },
+      "judgment_demand": "read the slope and intercept of ΔG° = ΔH° − TΔS°"
+     }
+    }
+   ],
+   "set_size": 2,
+   "est_seconds": 210,
+   "facts": [
+    "dH=180.0",
+    "dS=120.0"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "chs_gibbs_temperature_set_q1",
+   "facts": [
+    "dH=180.0",
+    "dS=120.0"
+   ],
+   "seed": 14004
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Topic 9.3 with skill 5.F. The student must choose ΔG° = ΔH° − TΔS°, read the slope of ΔG° against T, and convert kJ to J. This is in scope and appropriate."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "The data are exactly linear: the slope is -0.120 kJ/(mol K), so ΔS° = +120 J/(mol K). The key is unique, and the temperature-independence assumption is stated."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table is complete, with a header, units and three rows. The stem repeats the assumption sentence, which is minor redundancy and not an error."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "The distractors encode a sign error, a unit error and a single-point division. The 480 distractor is weak, since 144000/300 = 480 only if ΔG° is converted to J and divided by T, which is a plausible but crude error. All wrong options are explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "The item takes about 60-100 s, involves little arithmetic, and a calculator is allowed. The options are short, parallel values."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound and in scope. It has a unique key and a complete table, and its distractors encode distinct errors. The 480 distractor is the weakest but still acceptable."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Topic 9.3 with 5.F. The student finds the slope, then the intercept, from a ΔG° versus T table."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "ΔS° = 0.12 kJ/(mol·K) and ΔH° = 180 kJ/mol. Unique answer, and the assumption is stated."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The table is complete with temperature and ΔG° columns. The stem repeats the assumption sentence, which is minor redundancy."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor corresponds to a distinct named misconception, and the explanation addresses every wrong option. The distractors are somewhat simple and none encodes a sign or unit error."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short two-step calculation with a calculator allowed, well within typical time."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Sound item. The key of 180 kJ/mol is correct and unique, the table is complete, and the distractors map to distinct misconceptions."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "exam_prep",
+    "rationale": "Student must recognize ΔG° = ΔH° − TΔS° as a linear relationship, read the table to find the slope (−12 kJ per 100 K), recognize ΔS° = −slope, and convert kJ to J. Clean numbers, minimal reading, and no long arithmetic. Distractors target sign and unit errors. Appropriate for a full mock on skill 5.F.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 3,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 75
+   },
+   {
+    "label": "exam_prep",
+    "rationale": "Student must pick ΔG = ΔH - TΔS, read the table to get the slope (-ΔS) from the changes in ΔG with T, then back-solve ΔH at one temperature. Clean numbers, small computation, with a table-to-equation representation change. Distractors are the table values. Within Unit 9.3 scope and the allowed difficulty levers.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 4,
+    "representation_changes": 2,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 100
+   }
+  ],
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "chem-ch3-mcr2",
+  "stockKey": "chem-ch3-mcr2:ap_chemistry-m13-k3",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": true,
+  "family": "ap_chemistry",
+  "itemFamilyId": "fam:chem-ch3-mcr2:ap_chemistry-m13-k0",
+  "canonicalKey": "chem-ch3-mcr2:ap_chemistry-m13-k3",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_chemistry:9.3",
+  "sharedWith": [],
+  "stockCell": "ap_chemistry|9.3|5.F|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "chem-ch3-mcr2",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_chemistry-m18-k0",
+  "cellId": "ap_chemistry-m18",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "3.1",
+  "unitCode": "3",
+  "skillPrimary": "4.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_q_imf_property",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept application: larger nonpolar molecules have stronger London dispersion forces, which lowers vapor pressure. Students must link size to IMF strength and then to volatility, and reject distractors that reverse or misapply the logic. There is no computation and no stimulus to interpret. The reading load is minimal and the wording is unambiguous. It is a core topic 3.1 recall-and-apply item, more suitable for foundational practice than for full mocks.",
+  "payload": {
+   "archetype": "ch_q_imf_property",
+   "topic": "3.1",
+   "skill": "4.A",
+   "calculator": "allowed",
+   "stem": "CH4, C2H6 and C3H8 are nonpolar gases. Which of the following correctly ranks them by their vapor pressure at the same temperature, from lowest to highest?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "CH4 < C2H6 < C3H8, because the larger molecules escape more easily from the liquid.",
+     "why": "Larger molecules with stronger forces escape less easily.",
+     "value": null
+    },
+    {
+     "text": "C2H6 < CH4 < C3H8, because the forces are strongest in the middle molecule.",
+     "why": "The strength of the dispersion forces rises steadily with the number of electrons.",
+     "value": null
+    },
+    {
+     "text": "C3H8 < C2H6 < CH4, because the larger molecules have stronger dispersion forces.",
+     "why": "Stronger attractions between the molecules lower the vapor pressure.",
+     "value": null
+    },
+    {
+     "text": "All three have the same vapor pressure, because all are nonpolar.",
+     "why": "Nonpolar molecules still differ in the strength of dispersion forces.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 70,
+   "facts": [
+    "CH4, C2H6 and C3H8 are nonpolar gases. Which of the followin"
+   ],
+   "blueprint": {
+    "id": "ch_q_imf_property",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "rank properties of substances from the strength of their intermolecular forces",
+    "topic": "3.1",
+    "skill": "4.A",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: rank properties of substances from the strength of their intermolecular forces",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Larger molecules with stronger forces escape less easily."
+     },
+     {
+      "id": "m2",
+      "description": "The strength of the dispersion forces rises steadily with the number of electrons."
+     },
+     {
+      "id": "m3",
+      "description": "Nonpolar molecules still differ in the strength of dispersion forces."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED 3.1",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "apply a chemical principle to a specific case and reject plausible misconceptions"
+   },
+   "seed": 14000,
+   "pack_id": "ch_q_imf_property-s14000",
+   "explanation_en": "The correct answer is C3H8 < C2H6 < CH4, because the larger molecules have stronger dispersion forces.. Stronger attractions between the molecules lower the vapor pressure.\nCH4 < C2H6 < C3H8, because the larger molecules escape more easily from the liquid. is incorrect: Larger molecules with stronger forces escape less easily.\nC2H6 < CH4 < C3H8, because the forces are strongest in the middle molecule. is incorrect: The strength of the dispersion forces rises steadily with the number of electrons.\nAll three have the same vapor pressure, because all are nonpolar. is incorrect: Nonpolar molecules still differ in the strength of dispersion forces."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_q_imf_property",
+   "facts": [
+    "CH4, C2H6 and C3H8 are nonpolar gases. Which of the followin"
+   ],
+   "seed": 14000
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.1: ranking vapor pressure from dispersion force strength. Single dominant skill, applying a model to predict a property."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key C3H8 < C2H6 < CH4 is correct and unique. The vapor pressure order is CH4 > C2H6 > C3H8 at the same temperature. The other options are wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear. One small flaw is that the stem calls them gases while asking about vapor pressure 'from the liquid', which is acceptable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions: reversed trend, non-monotonic trend, and nonpolar means identical. The explanation covers each. The 'why' texts are generic restatements. Option A's 'why' is acceptable. Option B's 'why' only states the correct principle rather than naming the error, but it is adequate. Option lengths are similar, so there is no giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, conceptual, no calculation. Typical of AP Chemistry multiple choice."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A correct, clean 3.1 item with a unique key and distinct distractors. No instant-reject conditions apply, so it passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept application: larger nonpolar molecules have stronger London dispersion forces, which lowers vapor pressure. Students must link size to IMF strength and then to volatility, and reject distractors that reverse or misapply the logic. There is no computation and no stimulus to interpret. The reading load is minimal and the wording is unambiguous. It is a core topic 3.1 recall-and-apply item, more suitable for foundational practice than for full mocks.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "chem-ch3-mcr2",
+  "stockKey": "chem-ch3-mcr2:ap_chemistry-m18-k0",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "ap_chemistry",
+  "itemFamilyId": "fam:chem-ch3-mcr2:ap_chemistry-m18-k0",
+  "canonicalKey": "chem-ch3-mcr2:ap_chemistry-m18-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_chemistry:3.1",
+  "sharedWith": [],
+  "stockCell": "ap_chemistry|3.1|4.A|standalone|na",
+  "history": [
+   {
+    "run": "chem-ch3-mcr2",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_chemistry-m19-k2",
+  "cellId": "ap_chemistry-m19",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "5.1",
+  "unitCode": "5",
+  "skillPrimary": "4.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_q_rate_relationship",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "One-step application of stoichiometric coefficient ratios to relate rates of appearance (NO2 rate = 4 x O2 rate). No representation changes, minimal reading, trivial arithmetic. Distractors target common misconceptions (equal rates, inverted ratio, wrong species coefficient). Fits foundational 5.1 content rather than full-mock difficulty.",
+  "payload": {
+   "archetype": "ch_q_rate_relationship",
+   "topic": "5.1",
+   "skill": "4.B",
+   "calculator": "allowed",
+   "stem": "For the reaction 2 N2O5 → 4 NO2 + O2, the rate of appearance of O2 is 1.0 x 10⁻⁴ M/s. What is the rate of appearance of NO2?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "4.0 x 10⁻⁴ M/s, because 4 mol of NO2 form for each mole of O2.",
+     "why": "The rates are in the ratio of the coefficients.",
+     "value": null
+    },
+    {
+     "text": "1.0 x 10⁻⁴ M/s, because all species change at the same rate.",
+     "why": "The rate of change of each species depends on its coefficient.",
+     "value": null
+    },
+    {
+     "text": "2.5 x 10⁻⁵ M/s, because the ratio is inverted.",
+     "why": "More moles of NO2 form per mole of O2, so the rate is larger.",
+     "value": null
+    },
+    {
+     "text": "2.0 x 10⁻⁴ M/s, because the coefficient of N2O5 is 2.",
+     "why": "The ratio of NO2 to O2 is 4 to 1.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 70,
+   "facts": [
+    "For the reaction 2 N2O5 → 4 NO2 + O2, the rate of appearance"
+   ],
+   "blueprint": {
+    "id": "ch_q_rate_relationship",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "relate the rates of change of the species in a reaction through the coefficients",
+    "topic": "5.1",
+    "skill": "4.B",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: relate the rates of change of the species in a reaction through the coefficients",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "The rate of change of each species depends on its coefficient."
+     },
+     {
+      "id": "m2",
+      "description": "More moles of NO2 form per mole of O2, so the rate is larger."
+     },
+     {
+      "id": "m3",
+      "description": "The ratio of NO2 to O2 is 4 to 1."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED 5.1",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "apply a chemical principle to a specific case and reject plausible misconceptions"
+   },
+   "seed": 14002,
+   "pack_id": "ch_q_rate_relationship-s14002",
+   "explanation_en": "The correct answer is 4.0 x 10⁻⁴ M/s, because 4 mol of NO2 form for each mole of O2.. The rates are in the ratio of the coefficients.\n1.0 x 10⁻⁴ M/s, because all species change at the same rate. is incorrect: The rate of change of each species depends on its coefficient.\n2.5 x 10⁻⁵ M/s, because the ratio is inverted. is incorrect: More moles of NO2 form per mole of O2, so the rate is larger.\n2.0 x 10⁻⁴ M/s, because the coefficient of N2O5 is 2. is incorrect: The ratio of NO2 to O2 is 4 to 1."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_q_rate_relationship",
+   "facts": [
+    "For the reaction 2 N2O5 → 4 NO2 + O2, the rate of appearance"
+   ],
+   "seed": 14002
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.1 rate relationships via coefficients; skill tag 4.B is a loose fit but acceptable (apply principle, reject misconceptions)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Rate NO2 = 4 x rate O2 = 4.0e-4 M/s; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions: equal rates, inverted ratio, wrong coefficient used. Each wrong option explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, one-step, about 70 s, no calculator burden."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, unambiguous 5.1 item with a unique key and distinct distractors. The 4.B skill tag is a loose fit, but not disqualifying."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-step application of stoichiometric coefficient ratios to relate rates of appearance (NO2 rate = 4 x O2 rate). No representation changes, minimal reading, trivial arithmetic. Distractors target common misconceptions (equal rates, inverted ratio, wrong species coefficient). Fits foundational 5.1 content rather than full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "chem-ch3-mcr2",
+  "stockKey": "chem-ch3-mcr2:ap_chemistry-m19-k2",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": true,
+  "family": "ap_chemistry",
+  "itemFamilyId": "fam:chem-ch3-mcr2:ap_chemistry-m19-k1",
+  "canonicalKey": "chem-ch3-mcr2:ap_chemistry-m19-k2",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_chemistry:5.1",
+  "sharedWith": [],
+  "stockCell": "ap_chemistry|5.1|4.B|standalone|na",
+  "history": [
+   {
+    "run": "chem-ch3-mcr2",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ]
+ }
+]
