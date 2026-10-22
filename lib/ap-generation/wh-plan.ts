@@ -2,8 +2,8 @@
 // 이 파일은 동결 구성 해시 대상이다. 각 자료의 context 는 ALTON 이 쓴 한 줄(사건·청중, 사실만)이며 학생 화면에 자료 출처 표기와 함께 표시된다.
 export type WhSrcRef = { id: string; context: string };
 export type WhStim = "primary_text" | "secondary_text" | "paired_text" | "quantitative" | "image";
-export type WhSetSpec = { id: string; exam: "WH1" | "WH2" | "WH3"; unit: number; stim: WhStim; theme: string; sources: WhSrcRef[]; skills: string[]; nItems: number; seed: number };
-export type WhFrqSpec = { id: string; exam: "WH1" | "WH2" | "WH3"; template: "saq1" | "saq2" | "saq3" | "dbq" | "leq"; era: number; units: number[]; focus: string; sources: WhSrcRef[]; seed: number };
+export type WhSetSpec = { id: string; exam: "WH1" | "WH2" | "WH3" | "WH4"; unit: number; stim: WhStim; theme: string; sources: WhSrcRef[]; skills: string[]; nItems: number; seed: number };
+export type WhFrqSpec = { id: string; exam: "WH1" | "WH2" | "WH3" | "WH4"; template: "saq1" | "saq2" | "saq3" | "dbq" | "leq"; era: number; units: number[]; focus: string; sources: WhSrcRef[]; seed: number };
 
 /** 자료별 한 줄 맥락(사실만). */
 export const CTX: Record<string, string> = {
@@ -90,8 +90,25 @@ Object.assign(CTX, {
   "txt-cs-soviet-1991": "This reference book was written for the U.S. government in 1991, before the Soviet Union ended.",
   "txt-cs-brazil-1998": "This reference book was written for the U.S. government; the passage describes Brazil in the early 1990s.",
 });
+// 2026-10-22 WH4(5세트 채우기): 도시 시장·무굴 정의·향신료 무역·계약론·증기선·보수 사료·탈식민 협상·시장화 이행 자료. 자료는 data/ap/wh-sources/registry.json(매니페스트 wh-sources-manifest-r20.json).
+Object.assign(CTX, {
+  "img-qingming-bridge-12c": "This detail comes from a long handscroll traditionally dated to the early 12th century and attributed to Zhang Zeduan, a painter of the Song dynasty; it shows people and goods moving around a bridge on a river in a Chinese city.",
+  "txt-jahangir-1605": "Jahangir became the Mughal emperor in 1605; in his memoirs he describes the orders he issued at the start of his reign.",
+  "txt-cs-bangladesh-1989": "This reference book was written for the U.S. government in the late 1980s; this passage summarizes the history of Bengal, now mostly Bangladesh, before British rule.",
+  "txt-genoese-pilot-1521": "This anonymous account by a pilot who sailed with Magellan's fleet describes the arrival at Tidore, one of the Spice Islands in what is now Indonesia, in November 1521; the voyage had begun in Spain in 1519.",
+  "txt-locke-1690": "John Locke was an English philosopher whose Two Treatises of Government were published in 1689-1690; this passage is about how political communities begin.",
+  "txt-rousseau-1762": "Jean-Jacques Rousseau was a writer from Geneva who published The Social Contract in 1762.",
+  "txt-nemesis-1844": "Captain William Hall commanded the iron steamer Nemesis, which was built in 1839 for the East India Company and sent to China, where it served in the First Opium War; this book about its voyages was published in London in 1844.",
+  "txt-giles-1912": "Herbert Giles was a British professor of Chinese at the University of Cambridge; he published this history of the Manchu dynasty in 1912.",
+  "txt-cs-algeria-1994": "This reference book was written for the U.S. government in the early 1990s; this passage describes how the war between France and the Algerian independence movement ended in 1962.",
+  "txt-cs-russia-1998": "This reference book was written for the U.S. government in the 1990s; this passage describes the sale of state-owned businesses in Russia after the end of the Soviet Union.",
+  "txt-cs-singapore-1991": "This reference book was written for the U.S. government around 1990; this passage describes society in Singapore, an island country in Southeast Asia that became independent in 1965.",
+  "img-printing-shop-1568": "This woodcut by Jost Amman was published in 1568 in a book that illustrated trades and crafts in German-speaking lands; it shows a printing workshop.",
+  "txt-luther-1517": "Martin Luther, a German monk and professor of theology, wrote these statements in 1517 for a public academic debate about indulgences, certificates the Catholic Church granted that were said to reduce punishment for sins.",
+  "txt-meiji-constitution-1889": "The Meiji Emperor issued this speech and Japan's first modern constitution in February 1889, about two decades after the Meiji Restoration of 1868.",
+});
 const S = (id: string): WhSrcRef => ({ id, context: CTX[id] });
-const set = (id: string, exam: "WH1" | "WH2" | "WH3", unit: number, stim: WhStim, theme: string, srcs: string[], skills: string[], seed: number): WhSetSpec => ({ id, exam, unit, stim, theme, sources: srcs.map(S), skills, nItems: skills.length, seed });
+const set = (id: string, exam: "WH1" | "WH2" | "WH3" | "WH4", unit: number, stim: WhStim, theme: string, srcs: string[], skills: string[], seed: number): WhSetSpec => ({ id, exam, unit, stim, theme, sources: srcs.map(S), skills, nItems: skills.length, seed });
 
 export const WH_SETS: WhSetSpec[] = [
   // ── WH1 ──
@@ -143,9 +160,20 @@ export const WH_SETS: WhSetSpec[] = [
   set("w314", "WH3", 8, "image", "The Earth seen from lunar orbit and the rise of global environmental awareness", ["img-earthrise-1968"], ["2.A", "3.A", "4.B", "5.B"], 3314),
   set("w315", "WH3", 8, "secondary_text", "The Green Revolution and rice self-sufficiency in Indonesia", ["txt-cs-indonesia-2011"], ["1.B", "3.A", "3.D", "4.B"], 3315),
   set("w316", "WH3", 9, "secondary_text", "Family planning, Confucian values and rapid modernization in South Korea", ["txt-cs-korea-1992"], ["1.B", "3.A", "4.A", "5.B"], 3316),
+  // ── WH4 (2026-10-22) ──
+  set("w401", "WH4", 1, "image", "Commerce, bridges and daily life in a large Song-dynasty city", ["img-qingming-bridge-12c"], ["2.A", "3.A", "4.B", "5.A"], 4401),
+  set("w402", "WH4", 3, "primary_text", "A Mughal emperor's first orders on justice, trade and roads", ["txt-jahangir-1605"], ["2.B", "3.A", "4.A", "5.B"], 4402),
+  set("w403", "WH4", 3, "secondary_text", "Provincial autonomy in Bengal under the Delhi Sultanate and the Mughal Empire", ["txt-cs-bangladesh-1989"], ["1.B", "3.A", "3.D", "4.B"], 4403),
+  set("w404", "WH4", 4, "primary_text", "Buying cloves in the Spice Islands at the end of the first voyage around the world", ["txt-genoese-pilot-1521"], ["1.A", "2.B", "3.B", "4.A"], 4404),
+  set("w405", "WH4", 5, "paired_text", "Consent and legitimate authority: Locke and Rousseau on how political communities begin", ["txt-locke-1690", "txt-rousseau-1762"], ["3.C", "3.D", "4.A", "5.B"], 4405),
+  set("w406", "WH4", 6, "primary_text", "Iron steamers as tools of British power in Asia, 1840s", ["txt-nemesis-1844"], ["1.B", "2.B", "4.B", "5.A"], 4406),
+  set("w407", "WH4", 6, "secondary_text", "A British scholar's explanation of the Boxer movement in China in 1912", ["txt-giles-1912"], ["1.B", "2.B", "3.D", "5.B"], 4407),
+  set("w408", "WH4", 8, "secondary_text", "Negotiating the end of French rule in Algeria, 1961-1962", ["txt-cs-algeria-1994"], ["1.B", "3.A", "4.B", "5.B"], 4408),
+  set("w409", "WH4", 9, "secondary_text", "Selling state enterprises in post-Soviet Russia", ["txt-cs-russia-1998"], ["1.A", "3.A", "4.B"], 4409),
+  set("w410", "WH4", 9, "secondary_text", "Cosmopolitan society and national identity in Singapore", ["txt-cs-singapore-1991"], ["1.B", "3.A", "4.A"], 4410),
 ];
 
-const F = (id: string, exam: "WH1" | "WH2" | "WH3", template: WhFrqSpec["template"], era: number, units: number[], focus: string, srcs: string[], seed: number): WhFrqSpec => ({ id, exam, template, era, units, focus, sources: srcs.map(S), seed });
+const F = (id: string, exam: "WH1" | "WH2" | "WH3" | "WH4", template: WhFrqSpec["template"], era: number, units: number[], focus: string, srcs: string[], seed: number): WhFrqSpec => ({ id, exam, template, era, units, focus, sources: srcs.map(S), seed });
 export const WH_FRQS: WhFrqSpec[] = [
   F("wh1_saq1", "WH1", "saq1", 4, [8], "Superpower rivalry and the end of European control in the Middle East in the 1950s (Suez crisis)", ["txt-cs-egypt-1991"], 2101),
   F("wh1_saq2", "WH1", "saq2", 1, [2], "The Black Death as a disease that moved along trade routes, and its social and economic effects in Europe and the Mediterranean (do not tie the plague to the fall of any particular dynasty)", ["txt-boccaccio-plague-1353"], 3122),
@@ -163,6 +191,8 @@ export const WH_FRQS: WhFrqSpec[] = [
   F("wh3_saq3", "WH3", "saq3", 3, [6], "Art, trade and cultural exchange in early 19th-century Japan, as seen in a woodblock print sold widely at home and later abroad (make no claims about the full series beyond the single print shown)", ["img-hokusai-wave-1831"], 4303),
   F("wh3_dbq", "WH3", "dbq", 3, [5, 6, 7, 8, 9], "How and why understandings of the relationship between human activity and the natural environment changed from the mid-19th century to the early 21st century (the documents run from 1864 to the 2020s: Marsh is a mid-19th-century voice, Muir and Arrhenius are turn-of-the-20th-century voices, the photograph is from 1936, the Soviet and Brazilian studies are from the 1990s; never call Muir a mid-19th-century observer, and do not describe Marsh as concerned only with local damage)", ["txt-marsh-1864", "txt-muir-1901", "txt-arrhenius-1908", "img-dustbowl-1936", "tab-noaa-co2-mlo", "txt-cs-soviet-1991", "txt-cs-brazil-1998"], 4334),
   F("wh3_leq", "WH3", "leq", 1, [2, 3, 4], "State and community responses to famine, disease and environmental stress, c. 1200 to c. 1750 (use only well-established facts; for the Americas name the specific region and its own labor system)", [], 4315),
+  F("wh4_saq2", "WH4", "saq2", 3, [6], "Japan's adoption of a written constitution and an elected lower house under the Meiji government, and the limits placed on that assembly (use only well-established facts: the Meiji Restoration of 1868, the 1889 constitution, the Imperial Diet)", ["txt-meiji-constitution-1889"], 4902),
+  F("wh4_saq3", "WH4", "saq3", 2, [4], "The spread of printing and printed books in 16th-century Europe, as shown in a woodcut of a printing workshop from a 1568 book of trades (make no claims about the rest of the book beyond the single woodcut shown; keep every example to Europe; do not claim that printing was unknown elsewhere)", ["img-printing-shop-1568"], 4923),
 ];
 export const whSetsOf = (exam?: string) => WH_SETS.filter((s) => !exam || s.exam === exam);
 export const whPlanSummary = () => ({ sets: WH_SETS.length, items: WH_SETS.reduce((a, s) => a + s.nItems, 0), byExam: Object.fromEntries(["WH1", "WH2"].map((e) => [e, { sets: whSetsOf(e).length, items: whSetsOf(e).reduce((a, s) => a + s.nItems, 0), units: whSetsOf(e).reduce<Record<string, number>>((o, s) => { o[s.unit] = (o[s.unit] ?? 0) + s.nItems; return o; }, {}), stim: whSetsOf(e).reduce<Record<string, number>>((o, s) => { o[s.stim] = (o[s.stim] ?? 0) + 1; return o; }, {}), skillCats: whSetsOf(e).reduce<Record<string, number>>((o, s) => { for (const k of s.skills) o[k[0]] = (o[k[0]] ?? 0) + 1; return o; }, {}) }])) });

@@ -1,0 +1,3154 @@
+[
+ {
+  "cellId": "ap_world_history-w401",
+  "apSubjectCode": "ap_world_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_world_history-w401-k0",
+  "keywordCode": "1.1",
+  "unitCode": "1",
+  "skillPrimary": "2.A",
+  "structure": "shared_stimulus_set",
+  "archetype": "wh_w401",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   }
+  ],
+  "gateOverride": "wh-r20-m-2026-10-22",
+  "run": "wh-r20-m",
+  "stockKey": "wh-r20-m:ap_world_history-w401-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "wh-r20-m-2026-10-22",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_world_history",
+  "itemFamilyId": "fam:wh-r20-m:ap_world_history-w401-k0",
+  "canonicalKey": "wh-r20-m:ap_world_history-w401-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_world_history:1.1",
+  "sharedWith": [],
+  "stockCell": "ap_world_history|1.1|2.A|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "wh-r20-m",
+    "gateVersion": "wh-r20-m-2026-10-22",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "img-qingming-bridge-12c"
+  ],
+  "exam": "WH4",
+  "payload": {
+   "archetype": "wh_w401",
+   "topic": "1.1",
+   "skill": "2.A",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(painting)\nAlong the River During the Qingming Festival (detail of the original scroll showing a wooden arched bridge)\nZhang Zeduan, Song dynasty painter, Early 12th century (original handscroll; Commons records c. 1085-1145). Wikimedia Commons (file page records the source and public-domain tag). Reuse: public domain (12th-century work). unmodified except Wikimedia Commons' scaled 1280-pixel-wide JPEG rendering of a detail of the scroll.\nContext: This detail comes from a long handscroll traditionally dated to the early 12th century and attributed to Zhang Zeduan, a painter of the Song dynasty; it shows people and goods moving around a bridge on a river in a Chinese city.\n\nThe image for this source is shown below. Select the image to open it full size.",
+   "stimulus": {
+    "kind": "image",
+    "description": "A detail of a Chinese handscroll painted in ink and color on silk: a crowded wooden arched bridge crosses a river; people, market stalls with umbrellas, carts and pack animals fill the street beside it, cargo boats float on the river, and tiled roofs fill the foreground.",
+    "data": {
+     "path": "ap-sources/img-qingming-bridge-12c/image.jpg",
+     "alt": "A detail of a Chinese handscroll painted in ink and color on silk: a crowded wooden arched bridge crosses a river; people, market stalls with umbrellas, carts and pack animals fill the street beside it, cargo boats float on the river, and tiled roofs fill the foreground.",
+     "credit": "Zhang Zeduan, Along the River During the Qingming Festival (detail), early 12th century. Via Wikimedia Commons (public domain)."
+    }
+   },
+   "wh_set": {
+    "unit": 1,
+    "stim_type": "image",
+    "theme": "Commerce, bridges and daily life in a large Song-dynasty city",
+    "title": "Commerce, bridges and daily life in a large Song-dynasty city",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "image",
+      "title": "Along the River During the Qingming Festival (detail of the original scroll showing a wooden arched bridge)",
+      "attribution": "Zhang Zeduan, Song dynasty painter, Early 12th century (original handscroll; Commons records c. 1085-1145). Wikimedia Commons (file page records the source and public-domain tag). Reuse: public domain (12th-century work). unmodified except Wikimedia Commons' scaled 1280-pixel-wide JPEG rendering of a detail of the scroll.",
+      "context": "This detail comes from a long handscroll traditionally dated to the early 12th century and attributed to Zhang Zeduan, a painter of the Song dynasty; it shows people and goods moving around a bridge on a river in a Chinese city.",
+      "real_data": true,
+      "source_registry_id": "img-qingming-bridge-12c",
+      "source_sha256": "8ea4f9c8640e0d0020637aac6e7fdec034e352b788642e5f3294878b1802bb9b"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "wh_w401_2A",
+     "topic": "1.1",
+     "skill": "2.A",
+     "stem": "The scene in Zhang Zeduan's early 12th-century painting most directly reflects which historical situation in China?",
+     "options": [
+      {
+       "text": "A decline of markets as Confucian officials banned private trade in cities",
+       "why": "Private urban trade grew under the Song, and the painting shows thriving markets, not a decline.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "The isolation of Chinese ports after Ming rulers ended the voyages of Zheng He",
+       "why": "Zheng He's voyages ended in the 1430s, long after the Song painting was made.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The disruption of Chinese cities following the Mongol conquest of the Southern Song",
+       "why": "The Mongols completed their conquest of the Song in 1279, more than a century after this early 12th-century painting.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "A period of commercial expansion and urban growth in China",
+       "why": "The crowded bridge, market stalls, carts and cargo boats show a busy commercial city. That matches the well-documented commercial and urban growth of the Song dynasty, which ruled from 960 to 1279.",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"A period of commercial expansion and urban growth in China\". The crowded bridge, market stalls, carts and cargo boats show a busy commercial city. That matches the well-documented commercial and urban growth of the Song dynasty, which ruled from 960 to 1279.\n\"A decline of markets as Confucian officials banned private trade in cities\" is incorrect: Private urban trade grew under the Song, and the painting shows thriving markets, not a decline.\n\"The isolation of Chinese ports after Ming rulers ended the voyages of Zheng He\" is incorrect: Zheng He's voyages ended in the 1430s, long after the Song painting was made.\n\"The disruption of Chinese cities following the Mongol conquest of the Southern Song\" is incorrect: The Mongols completed their conquest of the Song in 1279, more than a century after this early 12th-century painting.",
+     "est_seconds": 50,
+     "facts": [
+      "The Song dynasty ruled China from 960 to 1279.",
+      "Song China saw major growth in commerce and in the size of its cities."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "2.A",
+      "key_evidence_in_source": "The market stalls, the crowds and the loaded boats around the bridge show commercial bustle, and the credit line dates the painting to the Song dynasty in the early 12th century.",
+      "evidence_quote": ""
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 3
+     }
+    },
+    {
+     "archetype": "wh_w401_3A",
+     "topic": "1.1",
+     "skill": "3.A",
+     "stem": "Which of the following best describes the main idea the painting conveys about the city it depicts?",
+     "options": [
+      {
+       "text": "City life depended on trade moved by both river boats and road traffic",
+       "why": "The detail sets cargo boats on the river beside carts, pack animals and porters on the bridge and the street. Together they show water and land transport feeding the city's commerce.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The city was preparing its walls and troops to resist a nomadic invasion",
+       "why": "No soldiers or fortifications appear in the detail. The scene is commercial and peaceful.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "City streets were reserved mainly for Buddhist monks traveling to monastery shrines",
+       "why": "The figures are porters, vendors and travelers with goods, not a religious procession.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "City life centered on state ceremonies led by Confucian scholar-officials",
+       "why": "The image shows ordinary traders and laborers at work, not official ceremonies.",
+       "value": null,
+       "label": "unsupported_by_source"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"City life depended on trade moved by both river boats and road traffic\". The detail sets cargo boats on the river beside carts, pack animals and porters on the bridge and the street. Together they show water and land transport feeding the city's commerce.\n\"The city was preparing its walls and troops to resist a nomadic invasion\" is incorrect: No soldiers or fortifications appear in the detail. The scene is commercial and peaceful.\n\"City streets were reserved mainly for Buddhist monks traveling to monastery shrines\" is incorrect: The figures are porters, vendors and travelers with goods, not a religious procession.\n\"City life centered on state ceremonies led by Confucian scholar-officials\" is incorrect: The image shows ordinary traders and laborers at work, not official ceremonies.",
+     "est_seconds": 45,
+     "facts": [
+      "Song cities relied on river and canal transport as well as overland traffic to bring in goods."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.A",
+      "key_evidence_in_source": "Loaded cargo boats on the river appear alongside carts, pack animals and crowds of porters on the bridge and at the market stalls.",
+      "evidence_quote": ""
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 0
+     }
+    },
+    {
+     "archetype": "wh_w401_4B",
+     "topic": "1.1",
+     "skill": "4.B",
+     "stem": "The cargo boats on the river in the painting are best understood in the context of which broader development in Song China?",
+     "options": [
+      {
+       "text": "State limits on private trade that confined sales to official walled markets",
+       "why": "The strict official market system of the Tang broke down under the Song, and commerce spread into the streets, as the painting shows.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Growing internal trade on canals and rivers linking regions of China",
+       "why": "Song China's economy depended on waterways such as the Grand Canal, which carried grain and goods between south and north. The river traffic in the painting fits this pattern.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Caravan trade on the Silk Roads expanding under the protection of the Pax Mongolica",
+       "why": "The Pax Mongolica belongs to the 13th and 14th centuries. It also involved overland caravans, not river boats.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "Imperial treasure fleets dominating Indian Ocean trade under Admiral Zheng He",
+       "why": "Zheng He's fleets sailed from 1405 to 1433 under the Ming, not during the Song.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"Growing internal trade on canals and rivers linking regions of China\". Song China's economy depended on waterways such as the Grand Canal, which carried grain and goods between south and north. The river traffic in the painting fits this pattern.\n\"State limits on private trade that confined sales to official walled markets\" is incorrect: The strict official market system of the Tang broke down under the Song, and commerce spread into the streets, as the painting shows.\n\"Caravan trade on the Silk Roads expanding under the protection of the Pax Mongolica\" is incorrect: The Pax Mongolica belongs to the 13th and 14th centuries. It also involved overland caravans, not river boats.\n\"Imperial treasure fleets dominating Indian Ocean trade under Admiral Zheng He\" is incorrect: Zheng He's fleets sailed from 1405 to 1433 under the Ming, not during the Song.",
+     "est_seconds": 50,
+     "facts": [
+      "The Grand Canal, completed under the Sui dynasty in the early 7th century, linked northern and southern China.",
+      "Under the Song, internal trade along canals and rivers expanded greatly."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.B",
+      "key_evidence_in_source": "Several cargo boats crowd the river beneath and beside the bridge, which shows that the city's commerce relied on water transport.",
+      "evidence_quote": ""
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 1
+     }
+    },
+    {
+     "archetype": "wh_w401_1B",
+     "topic": "1.1",
+     "skill": "1.B",
+     "stem": "Which of the following most directly helped Song China feed the large urban populations suggested by the crowded street in the painting?",
+     "options": [
+      {
+       "text": "Fast-ripening Champa rice that raised harvests in southern China",
+       "why": "Champa rice, brought from Southeast Asia in the early 11th century, allowed more than one harvest a year. The extra food supported population growth and large cities under the Song.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Enclosure of common lands that pushed displaced peasants into the cities",
+       "why": "Enclosure was a British development of later centuries, not a cause of Song urban growth.",
+       "value": null,
+       "label": "misattributed"
+      },
+      {
+       "text": "Grain sent as tribute from Central Asian oases under Mongol imperial rule",
+       "why": "Song China fed itself mainly from its own rice-growing south, not with Central Asian grain, and Mongol rule came later.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "Maize and sweet potatoes introduced from the Americas by Iberian traders",
+       "why": "American crops reached China through the Columbian Exchange in the 16th century, long after the Song.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"Fast-ripening Champa rice that raised harvests in southern China\". Champa rice, brought from Southeast Asia in the early 11th century, allowed more than one harvest a year. The extra food supported population growth and large cities under the Song.\n\"Enclosure of common lands that pushed displaced peasants into the cities\" is incorrect: Enclosure was a British development of later centuries, not a cause of Song urban growth.\n\"Grain sent as tribute from Central Asian oases under Mongol imperial rule\" is incorrect: Song China fed itself mainly from its own rice-growing south, not with Central Asian grain, and Mongol rule came later.\n\"Maize and sweet potatoes introduced from the Americas by Iberian traders\" is incorrect: American crops reached China through the Columbian Exchange in the 16th century, long after the Song.",
+     "est_seconds": 45,
+     "facts": [
+      "Champa rice was introduced into Song China from Southeast Asia in the early 11th century.",
+      "Song China's population grew substantially during the dynasty."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "1.B",
+      "key_evidence_in_source": "The dense crowds on the bridge and in the street suggest a large urban population that needed a steady food supply.",
+      "evidence_quote": ""
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 0
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ },
+ {
+  "cellId": "ap_world_history-w402",
+  "apSubjectCode": "ap_world_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_world_history-w402-k0",
+  "keywordCode": "3.2",
+  "unitCode": "3",
+  "skillPrimary": "2.B",
+  "structure": "shared_stimulus_set",
+  "archetype": "wh_w402",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   }
+  ],
+  "gateOverride": "wh-r20-m-2026-10-22",
+  "run": "wh-r20-m",
+  "stockKey": "wh-r20-m:ap_world_history-w402-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "wh-r20-m-2026-10-22",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_world_history",
+  "itemFamilyId": "fam:wh-r20-m:ap_world_history-w402-k0",
+  "canonicalKey": "wh-r20-m:ap_world_history-w402-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_world_history:3.2",
+  "sharedWith": [],
+  "stockCell": "ap_world_history|3.2|2.B|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "wh-r20-m",
+    "gateVersion": "wh-r20-m-2026-10-22",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "txt-jahangir-1605"
+  ],
+  "exam": "WH4",
+  "payload": {
+   "archetype": "wh_w402",
+   "topic": "3.2",
+   "skill": "2.B",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(primary source)\nThe Tuzuk-i-Jahangiri (Memoirs of Jahangir), vol. 1: the Chain of Justice and the first four orders of the reign (excerpt)\nJahangir, Mughal emperor (translated by Alexander Rogers, edited by Henry Beveridge), Memoirs written 1605-1624; translation published London: Royal Asiatic Society, 1909 (vol. 1). Project Gutenberg eBook #53674. Reuse: public domain in the United States (published before 1929). excerpted (1 segment); whitespace normalized; editorial footnote markers removed; no wording changed.\nContext: Jahangir became the Mughal emperor in 1605; in his memoirs he describes the orders he issued at the start of his reign.\n\n\"After my accession, the first order that I gave was for the fastening up of the Chain of Justice, so that if those engaged in the administration of justice should delay or practise hypocrisy in the matter of those seeking justice, the oppressed might come to this chain and shake it so that its noise might attract attention. Its fashion was this: I ordered them to make a chain of pure gold, 30 gaz in length and containing 60 bells. Its weight was 4 Indian maunds, equal to 42 `Iraqi maunds. One end of it they made fast to the battlements of the Shah Burj of the fort at Agra and the other to a stone post fixed on the bank of the river. I also gave twelve orders to be observed as rules of conduct (dasturu-l-`amal) in all my dominions-- (1) Forbidding the levy of cesses under the names of tamgha and mir bahri (river tolls), and other burdens which the jagirdars of every province and district had imposed for their own profit. (2) On roads where thefts and robberies took place, which roads might be at a little distance from habitations, the jagirdars of the neighbourhood should build sara'is (public rest-houses), mosques, and dig wells, which might stimulate population, and people might settle down in those sara'is. If these should be near a khalisa estate (under direct State management), the administrator (mutasaddi) of that place should execute the work. (3) The bales of merchants should not be opened on the roads without informing them and obtaining their leave. (4) In my dominions if anyone, whether unbeliever or Musalman, should die, his property and effects should be left for his heirs, and no one should interfere with them. If he should have no heir, they should appoint inspectors and separate guardians to guard the property, so that its value might be expended in lawful expenditure, such as the building of mosques and sara'is, the repair of broken bridges, and the digging of tanks and wells.\"",
+   "wh_set": {
+    "unit": 3,
+    "stim_type": "primary_text",
+    "theme": "A Mughal emperor's first orders on justice, trade and roads",
+    "title": "A Mughal emperor's first orders on justice, trade and roads",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "primary_text",
+      "title": "The Tuzuk-i-Jahangiri (Memoirs of Jahangir), vol. 1: the Chain of Justice and the first four orders of the reign (excerpt)",
+      "attribution": "Jahangir, Mughal emperor (translated by Alexander Rogers, edited by Henry Beveridge), Memoirs written 1605-1624; translation published London: Royal Asiatic Society, 1909 (vol. 1). Project Gutenberg eBook #53674. Reuse: public domain in the United States (published before 1929). excerpted (1 segment); whitespace normalized; editorial footnote markers removed; no wording changed.",
+      "context": "Jahangir became the Mughal emperor in 1605; in his memoirs he describes the orders he issued at the start of his reign.",
+      "real_data": true,
+      "source_registry_id": "txt-jahangir-1605",
+      "source_sha256": "454e5ee5c23b81cd7b8c76170cee709d022fb7f06d9c800c0ec9f5559c226b7b"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "wh_w402_2B",
+     "topic": "3.2",
+     "skill": "2.B",
+     "stem": "Which of the following best explains Jahangir's purpose in describing the Chain of Justice in his memoirs?",
+     "options": [
+      {
+       "text": "To explain new rules for promoting officials through the ranks of the mansabdari system",
+       "why": "The mansabdari ranking system was real, but the chain concerns petitions for justice, not the promotion of officials.",
+       "value": null,
+       "label": "true_but_not_responsive"
+      },
+      {
+       "text": "To invite European trading companies to settle at Agra under the emperor's direct protection",
+       "why": "The excerpt never mentions Europeans. The chain is aimed at the emperor's own oppressed subjects.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "To present himself as a just ruler who shielded subjects from abusive officials",
+       "why": "Jahangir says the chain let 'the oppressed' get his attention if officials delayed justice or acted with hypocrisy. Recording it as his first order presents the new emperor as personally guarding justice, which supported the legitimacy of his reign.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "To announce that Mughal law would henceforth follow strict Sharia rules over the Hindu majority",
+       "why": "Nothing in the excerpt imposes strict religious law. The inheritance order applies to 'unbeliever or Musalman' alike.",
+       "value": null,
+       "label": "unsupported_by_source"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"To present himself as a just ruler who shielded subjects from abusive officials\". Jahangir says the chain let 'the oppressed' get his attention if officials delayed justice or acted with hypocrisy. Recording it as his first order presents the new emperor as personally guarding justice, which supported the legitimacy of his reign.\n\"To explain new rules for promoting officials through the ranks of the mansabdari system\" is incorrect: The mansabdari ranking system was real, but the chain concerns petitions for justice, not the promotion of officials.\n\"To invite European trading companies to settle at Agra under the emperor's direct protection\" is incorrect: The excerpt never mentions Europeans. The chain is aimed at the emperor's own oppressed subjects.\n\"To announce that Mughal law would henceforth follow strict Sharia rules over the Hindu majority\" is incorrect: Nothing in the excerpt imposes strict religious law. The inheritance order applies to 'unbeliever or Musalman' alike.",
+     "est_seconds": 60,
+     "facts": [
+      "Jahangir ruled the Mughal Empire from 1605 to 1627.",
+      "Agra was a principal Mughal capital and fortress in the early 1600s."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "2.B",
+      "key_evidence_in_source": "The chain is described as a way for the oppressed to reach the emperor when officials delayed or practised hypocrisy.",
+      "evidence_quote": "the oppressed might come to this chain and shake it so that its noise might attract attention"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 2
+     }
+    },
+    {
+     "archetype": "wh_w402_3A",
+     "topic": "3.2",
+     "skill": "3.A",
+     "stem": "Which of the following claims does Jahangir make about the jagirdars in the excerpt?",
+     "options": [
+      {
+       "text": "Their land assignments should be abolished and placed entirely under khalisa management",
+       "why": "The excerpt mentions khalisa lands only for roads that lie near them. It does not abolish jagirs.",
+       "value": null,
+       "label": "overstated"
+      },
+      {
+       "text": "Some had imposed tolls and cesses on their own authority for private profit",
+       "why": "The first rule forbids the tamgha, the river tolls and 'other burdens' that the jagirdars had imposed 'for their own profit.'",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "They had failed to collect the tamgha and river tolls owed to the imperial treasury",
+       "why": "Jahangir bans these levies. He does not complain that they went uncollected.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "They had been robbing merchant caravans themselves along remote imperial roads",
+       "why": "The excerpt mentions robberies on roads, but it tells jagirdars to build rest-houses there. It does not accuse them of the robberies.",
+       "value": null,
+       "label": "unsupported_by_source"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"Some had imposed tolls and cesses on their own authority for private profit\". The first rule forbids the tamgha, the river tolls and 'other burdens' that the jagirdars had imposed 'for their own profit.'\n\"Their land assignments should be abolished and placed entirely under khalisa management\" is incorrect: The excerpt mentions khalisa lands only for roads that lie near them. It does not abolish jagirs.\n\"They had failed to collect the tamgha and river tolls owed to the imperial treasury\" is incorrect: Jahangir bans these levies. He does not complain that they went uncollected.\n\"They had been robbing merchant caravans themselves along remote imperial roads\" is incorrect: The excerpt mentions robberies on roads, but it tells jagirdars to build rest-houses there. It does not accuse them of the robberies.",
+     "est_seconds": 50,
+     "facts": [
+      "Jagirdars were Mughal officials assigned the revenue of specific lands (jagirs).",
+      "Khalisa lands were revenue lands managed directly by the Mughal state."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.A",
+      "key_evidence_in_source": "Order (1) bans cesses that jagirdars had imposed for their own profit.",
+      "evidence_quote": "other burdens which the jagirdars of every province and district had imposed for their own profit"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 1
+     }
+    },
+    {
+     "archetype": "wh_w402_4A",
+     "topic": "3.2",
+     "skill": "4.A",
+     "stem": "Jahangir's orders protecting merchants' bales and building rest-houses along roads are best understood in the context of which development in the period c. 1450 to c. 1750?",
+     "options": [
+      {
+       "text": "Mughal India's large export trade in textiles, which drew in silver",
+       "why": "Mughal India was a major producer and exporter of cotton textiles, and silver flowed in to pay for them. Safe roads, sara'is and limits on interference with merchants supported this commerce.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The Ming dynasty's ban on private maritime trade to limit contact with foreigners",
+       "why": "The Ming maritime trade ban was a Chinese policy and does not explain Mughal road and merchant regulations.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "The British East India Company's takeover of tax collection in Bengal after Plassey",
+       "why": "Plassey (1757) and the Company's revenue rights in Bengal (1765) came long after Jahangir's reign.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The collapse of overland trade across Eurasia after the end of the Mongol khanates",
+       "why": "The Mongol khanates broke apart in the 1300s, well before this period, and overland trade went on in Mughal India. The orders assume an active trade.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"Mughal India's large export trade in textiles, which drew in silver\". Mughal India was a major producer and exporter of cotton textiles, and silver flowed in to pay for them. Safe roads, sara'is and limits on interference with merchants supported this commerce.\n\"The Ming dynasty's ban on private maritime trade to limit contact with foreigners\" is incorrect: The Ming maritime trade ban was a Chinese policy and does not explain Mughal road and merchant regulations.\n\"The British East India Company's takeover of tax collection in Bengal after Plassey\" is incorrect: Plassey (1757) and the Company's revenue rights in Bengal (1765) came long after Jahangir's reign.\n\"The collapse of overland trade across Eurasia after the end of the Mongol khanates\" is incorrect: The Mongol khanates broke apart in the 1300s, well before this period, and overland trade went on in Mughal India. The orders assume an active trade.",
+     "est_seconds": 60,
+     "facts": [
+      "Mughal India exported large quantities of cotton textiles in the 1600s and received silver in payment.",
+      "The Battle of Plassey took place in 1757."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.A",
+      "key_evidence_in_source": "Orders (2) and (3) protect travel and merchants' goods on roads.",
+      "evidence_quote": "The bales of merchants should not be opened on the roads without informing them and obtaining their leave."
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "likely"
+       },
+       {
+        "choice": 0,
+        "confidence": "likely"
+       }
+      ],
+      "panel_choice": 0
+     }
+    },
+    {
+     "archetype": "wh_w402_5B",
+     "topic": "3.3",
+     "skill": "5.B",
+     "stem": "Jahangir's order that the property of any subject, 'whether unbeliever or Musalman,' pass to his heirs is most consistent with which earlier Mughal development?",
+     "options": [
+      {
+       "text": "Babur's founding of the dynasty after defeating the Delhi Sultanate at Panipat in 1526",
+       "why": "Babur did found the dynasty at Panipat, but that conquest has nothing to do with equal inheritance rights for Muslims and non-Muslims.",
+       "value": null,
+       "label": "true_but_not_responsive"
+      },
+      {
+       "text": "The adoption of the Ottoman devshirme system to recruit non-Muslim boys for state service",
+       "why": "The devshirme was an Ottoman practice, not a Mughal one.",
+       "value": null,
+       "label": "misattributed"
+      },
+      {
+       "text": "Akbar's policies accommodating non-Muslims, such as abolishing the jizya",
+       "why": "Jahangir's father Akbar ended the jizya (1579) and courted Hindu elites. Applying the inheritance rule to Muslims and non-Muslims alike continues that accommodating approach.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Aurangzeb's reimposition of the jizya tax on non-Muslim subjects in 1679",
+       "why": "Aurangzeb's reimposition came after Jahangir's reign, not before, and it reversed accommodation rather than continuing it.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"Akbar's policies accommodating non-Muslims, such as abolishing the jizya\". Jahangir's father Akbar ended the jizya (1579) and courted Hindu elites. Applying the inheritance rule to Muslims and non-Muslims alike continues that accommodating approach.\n\"Babur's founding of the dynasty after defeating the Delhi Sultanate at Panipat in 1526\" is incorrect: Babur did found the dynasty at Panipat, but that conquest has nothing to do with equal inheritance rights for Muslims and non-Muslims.\n\"The adoption of the Ottoman devshirme system to recruit non-Muslim boys for state service\" is incorrect: The devshirme was an Ottoman practice, not a Mughal one.\n\"Aurangzeb's reimposition of the jizya tax on non-Muslim subjects in 1679\" is incorrect: Aurangzeb's reimposition came after Jahangir's reign, not before, and it reversed accommodation rather than continuing it.",
+     "est_seconds": 60,
+     "facts": [
+      "Akbar (ruled 1556-1605) ended the jizya on non-Muslims, by most accounts in 1579.",
+      "Aurangzeb reimposed the jizya in 1679.",
+      "Babur defeated the Delhi Sultanate at the First Battle of Panipat in 1526."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "5.B",
+      "key_evidence_in_source": "Order (4) protects inheritances for both non-Muslims and Muslims without distinction.",
+      "evidence_quote": "if anyone, whether unbeliever or Musalman, should die, his property and effects should be left for his heirs"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "likely"
+       }
+      ],
+      "panel_choice": 2
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ },
+ {
+  "cellId": "ap_world_history-w403",
+  "apSubjectCode": "ap_world_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_world_history-w403-k0",
+  "keywordCode": "3.2",
+  "unitCode": "3",
+  "skillPrimary": "1.B",
+  "structure": "shared_stimulus_set",
+  "archetype": "wh_w403",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   }
+  ],
+  "gateOverride": "wh-r20-m-2026-10-22",
+  "run": "wh-r20-m",
+  "stockKey": "wh-r20-m:ap_world_history-w403-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "wh-r20-m-2026-10-22",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_world_history",
+  "itemFamilyId": "fam:wh-r20-m:ap_world_history-w403-k0",
+  "canonicalKey": "wh-r20-m:ap_world_history-w403-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_world_history:3.2",
+  "sharedWith": [],
+  "stockCell": "ap_world_history|3.2|1.B|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "wh-r20-m",
+    "gateVersion": "wh-r20-m-2026-10-22",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "txt-cs-bangladesh-1989"
+  ],
+  "exam": "WH4",
+  "payload": {
+   "archetype": "wh_w403",
+   "topic": "3.2",
+   "skill": "1.B",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(secondary source)\nBangladesh: A Country Study (excerpt on Bengal under the Delhi Sultanate and the Mughals)\nJames Heitzman and Robert L. Worden, eds., Federal Research Division, Library of Congress, 1989 (research completed 1988). Library of Congress, Federal Research Division (Country Studies; full text via Internet Archive OCR). Reuse: public domain (U.S. government work, 17 U.S.C. 105). excerpted (1 segment); whitespace normalized; OCR line-break hyphenation rejoined; no wording changed.\nContext: This reference book was written for the U.S. government in the late 1980s; this passage summarizes the history of Bengal, now mostly Bangladesh, before British rule.\n\n\"Bengal was loosely associated with the Delhi Sultanate, established in 1206, and paid a tribute in war elephants in order to maintain autonomy. In 1341 Bengal became independent from Delhi, and Dhaka was established as the seat of the governors of independent Bengal. Turks ruled Bengal for several decades before the conquest of Dhaka by forces of the Mughal emperor Akbar the Great (1556-1605) in 1576. Bengal remained a Mughal province until the beginning of the decline of the Mughal Empire in the eighteenth century. Under the Mughals, the political integration of Bengal with the rest of the subcontinent began, but Bengal was never truly subjugated. It was always too remote from the center of government in Delhi. Because lines of communications were poor, local governors found it easy to ignore imperial directives and maintain their independence.\"",
+   "wh_set": {
+    "unit": 3,
+    "stim_type": "secondary_text",
+    "theme": "Provincial autonomy in Bengal under the Delhi Sultanate and the Mughal Empire",
+    "title": "Provincial autonomy in Bengal under the Delhi Sultanate and the Mughal Empire",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "secondary_text",
+      "title": "Bangladesh: A Country Study (excerpt on Bengal under the Delhi Sultanate and the Mughals)",
+      "attribution": "James Heitzman and Robert L. Worden, eds., Federal Research Division, Library of Congress, 1989 (research completed 1988). Library of Congress, Federal Research Division (Country Studies; full text via Internet Archive OCR). Reuse: public domain (U.S. government work, 17 U.S.C. 105). excerpted (1 segment); whitespace normalized; OCR line-break hyphenation rejoined; no wording changed.",
+      "context": "This reference book was written for the U.S. government in the late 1980s; this passage summarizes the history of Bengal, now mostly Bangladesh, before British rule.",
+      "real_data": true,
+      "source_registry_id": "txt-cs-bangladesh-1989",
+      "source_sha256": "ab1c9dd49013e2bee803c485f547e8cc717c1f9cf9ba571547f38c0d3abc5c8d"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "wh_w403_1B",
+     "topic": "3.2",
+     "skill": "1.B",
+     "stem": "After Akbar's forces conquered Bengal in 1576, the political integration described in the excerpt most likely involved which of the following Mughal administrative practices?",
+     "options": [
+      {
+       "text": "Requiring Hindu landholders in conquered provinces to convert to Sunni Islam in order to keep their estates",
+       "why": "Akbar was known for religious tolerance and for including non-Muslims in his government. He did not require landholders to convert.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Selecting provincial officials through Confucian civil service examinations held in the imperial capital",
+       "why": "Civil service examinations were used in Ming and Qing China, not in the Mughal Empire.",
+       "value": null,
+       "label": "misattributed"
+      },
+      {
+       "text": "Recruiting Christian boys through the devshirme to staff provincial governments and the elite janissary corps",
+       "why": "The devshirme was an Ottoman practice, not a Mughal one.",
+       "value": null,
+       "label": "misattributed"
+      },
+      {
+       "text": "Appointing ranked mansabdars to govern provinces and collect land revenue for the emperor",
+       "why": "Akbar organized imperial service through the mansabdar system. Ranked officials governed provinces such as Bengal and gathered land revenue for the center, which is how integration of a newly conquered province began.",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"Appointing ranked mansabdars to govern provinces and collect land revenue for the emperor\". Akbar organized imperial service through the mansabdar system. Ranked officials governed provinces such as Bengal and gathered land revenue for the center, which is how integration of a newly conquered province began.\n\"Requiring Hindu landholders in conquered provinces to convert to Sunni Islam in order to keep their estates\" is incorrect: Akbar was known for religious tolerance and for including non-Muslims in his government. He did not require landholders to convert.\n\"Selecting provincial officials through Confucian civil service examinations held in the imperial capital\" is incorrect: Civil service examinations were used in Ming and Qing China, not in the Mughal Empire.\n\"Recruiting Christian boys through the devshirme to staff provincial governments and the elite janissary corps\" is incorrect: The devshirme was an Ottoman practice, not a Mughal one.",
+     "est_seconds": 55,
+     "facts": [
+      "Akbar's forces conquered Bengal in 1576.",
+      "Akbar organized Mughal officials into the ranked mansabdar system in the late 1500s.",
+      "Akbar abolished the jizya tax on non-Muslims in 1579 (some sources say 1564) and included Hindu Rajputs in his administration."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "1.B",
+      "key_evidence_in_source": "The excerpt says that political integration of Bengal began under the Mughals after Akbar's 1576 conquest, and the question asks how that integration was carried out.",
+      "evidence_quote": "Under the Mughals, the political integration of Bengal with the rest of the subcontinent began"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 3
+     }
+    },
+    {
+     "archetype": "wh_w403_3A",
+     "topic": "3.2",
+     "skill": "3.A",
+     "stem": "Which of the following best describes the authors' explanation for why Bengal was never truly subjugated by the Mughal Empire?",
+     "options": [
+      {
+       "text": "The Mughal conquest fully absorbed Bengal into a centralized state whose officials closely obeyed imperial orders",
+       "why": "This is the opposite of the excerpt's claim that Bengal was never truly subjugated.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Bengal's growing wealth from overseas textile trade with European merchants was the main source of its independence",
+       "why": "Bengal's textile trade was real, but the excerpt attributes the province's independence to geography and communications, not to trade wealth.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "Bengal's governors won independence by defeating Mughal armies in a series of open battles after 1576",
+       "why": "The excerpt mentions no battles after 1576. It describes governors quietly ignoring directives, not military victories.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "Bengal's distance from Delhi and poor communications let local governors act independently",
+       "why": "The authors explicitly blame remoteness and poor communications, which made it easy for local governors to ignore imperial directives.",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"Bengal's distance from Delhi and poor communications let local governors act independently\". The authors explicitly blame remoteness and poor communications, which made it easy for local governors to ignore imperial directives.\n\"The Mughal conquest fully absorbed Bengal into a centralized state whose officials closely obeyed imperial orders\" is incorrect: This is the opposite of the excerpt's claim that Bengal was never truly subjugated.\n\"Bengal's growing wealth from overseas textile trade with European merchants was the main source of its independence\" is incorrect: Bengal's textile trade was real, but the excerpt attributes the province's independence to geography and communications, not to trade wealth.\n\"Bengal's governors won independence by defeating Mughal armies in a series of open battles after 1576\" is incorrect: The excerpt mentions no battles after 1576. It describes governors quietly ignoring directives, not military victories.",
+     "est_seconds": 40,
+     "facts": [
+      "Delhi was a principal Mughal capital, far to the northwest of Bengal.",
+      "Bengal was a Mughal province (subah) from the late 1500s into the 1700s."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.A",
+      "key_evidence_in_source": "The final two sentences give remoteness from Delhi and poor lines of communication as the reasons governors could keep their independence.",
+      "evidence_quote": "It was always too remote from the center of government in Delhi. Because lines of communications were poor"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 3
+     }
+    },
+    {
+     "archetype": "wh_w403_3D",
+     "topic": "3.2",
+     "skill": "3.D",
+     "stem": "Which of the following, if true, would most directly support the excerpt's argument that Bengal's local governors maintained their independence from the Mughal center?",
+     "options": [
+      {
+       "text": "Portuguese merchants established trading posts along the Bengal coast in the 1500s to buy cotton cloth and rice",
+       "why": "European trade in Bengal is real, but it has nothing to do with whether governors obeyed Delhi.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "Aurangzeb led Mughal armies south in the 1680s and annexed the Deccan sultanates of Bijapur and Golconda to the empire",
+       "why": "This shows the empire expanding in the south. It does not support the claim about Bengali autonomy and, if anything, points to strong central power.",
+       "value": null,
+       "label": "true_but_not_responsive"
+      },
+      {
+       "text": "In the early 1700s, Bengal's nawabs ran provincial revenue and appointments with little oversight from Delhi",
+       "why": "Under Murshid Quli Khan and his successors in the early 1700s, the nawabs of Bengal ran the province with growing independence from Delhi. This directly supports the claim that governors ignored the imperial center.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Akbar's officials surveyed farmland across northern India and fixed tax rates collected for the imperial treasury in Delhi",
+       "why": "Akbar's revenue reforms show central power in the northern heartland. They say nothing about governors in Bengal acting on their own.",
+       "value": null,
+       "label": "true_but_not_responsive"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"In the early 1700s, Bengal's nawabs ran provincial revenue and appointments with little oversight from Delhi\". Under Murshid Quli Khan and his successors in the early 1700s, the nawabs of Bengal ran the province with growing independence from Delhi. This directly supports the claim that governors ignored the imperial center.\n\"Portuguese merchants established trading posts along the Bengal coast in the 1500s to buy cotton cloth and rice\" is incorrect: European trade in Bengal is real, but it has nothing to do with whether governors obeyed Delhi.\n\"Aurangzeb led Mughal armies south in the 1680s and annexed the Deccan sultanates of Bijapur and Golconda to the empire\" is incorrect: This shows the empire expanding in the south. It does not support the claim about Bengali autonomy and, if anything, points to strong central power.\n\"Akbar's officials surveyed farmland across northern India and fixed tax rates collected for the imperial treasury in Delhi\" is incorrect: Akbar's revenue reforms show central power in the northern heartland. They say nothing about governors in Bengal acting on their own.",
+     "est_seconds": 55,
+     "facts": [
+      "Murshid Quli Khan governed Bengal in the early 1700s and became its first nawab around 1717, with growing autonomy from Delhi.",
+      "Aurangzeb annexed Bijapur (1686) and Golconda (1687).",
+      "The Portuguese set up trading posts in Bengal in the 1500s."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.D",
+      "key_evidence_in_source": "The excerpt argues that local governors ignored imperial directives, so evidence of eighteenth-century nawabs governing with little oversight would support it.",
+      "evidence_quote": "local governors found it easy to ignore imperial directives and maintain their independence"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 2
+     }
+    },
+    {
+     "archetype": "wh_w403_4B",
+     "topic": "3.2",
+     "skill": "4.B",
+     "stem": "The excerpt's reference to the beginning of Mughal decline in the eighteenth century is best understood in the context of which broader development?",
+     "options": [
+      {
+       "text": "The Portuguese seizure of Goa in 1510, which gave a European power its first fortified base on the Indian coast",
+       "why": "The capture of Goa happened before the Mughal Empire was founded in 1526, so it cannot explain eighteenth-century decline.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The rise of regional powers such as the Marathas after the death of Aurangzeb in 1707",
+       "why": "After Aurangzeb died in 1707, Maratha expansion and increasingly independent provincial governors broke Mughal central power. This is the decline the excerpt refers to.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The emergence of Sikhism in Punjab in the 1500s as a devotional faith that drew on Hindu and Muslim traditions",
+       "why": "The founding of Sikhism was a sixteenth-century religious development. It does not explain the political breakup of the 1700s.",
+       "value": null,
+       "label": "true_but_not_responsive"
+      },
+      {
+       "text": "The Indian Rebellion of 1857, after which the British exiled the last Mughal emperor and ended the dynasty",
+       "why": "The 1857 rebellion came long after the decline began. It marks the formal end of the dynasty, not the start of its eighteenth-century decline.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"The rise of regional powers such as the Marathas after the death of Aurangzeb in 1707\". After Aurangzeb died in 1707, Maratha expansion and increasingly independent provincial governors broke Mughal central power. This is the decline the excerpt refers to.\n\"The Portuguese seizure of Goa in 1510, which gave a European power its first fortified base on the Indian coast\" is incorrect: The capture of Goa happened before the Mughal Empire was founded in 1526, so it cannot explain eighteenth-century decline.\n\"The emergence of Sikhism in Punjab in the 1500s as a devotional faith that drew on Hindu and Muslim traditions\" is incorrect: The founding of Sikhism was a sixteenth-century religious development. It does not explain the political breakup of the 1700s.\n\"The Indian Rebellion of 1857, after which the British exiled the last Mughal emperor and ended the dynasty\" is incorrect: The 1857 rebellion came long after the decline began. It marks the formal end of the dynasty, not the start of its eighteenth-century decline.",
+     "est_seconds": 45,
+     "facts": [
+      "Aurangzeb died in 1707.",
+      "The Marathas expanded their power across much of India in the 1700s.",
+      "The British exiled the last Mughal emperor, Bahadur Shah II, after the 1857 rebellion."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.B",
+      "key_evidence_in_source": "The excerpt dates the end of Bengal's status as a Mughal province to the start of Mughal decline in the eighteenth century, and the question asks students to place that decline in context.",
+      "evidence_quote": "Bengal remained a Mughal province until the beginning of the decline of the Mughal Empire in the eighteenth century"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 1
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ },
+ {
+  "cellId": "ap_world_history-w404",
+  "apSubjectCode": "ap_world_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_world_history-w404-k0",
+  "keywordCode": "4.2",
+  "unitCode": "4",
+  "skillPrimary": "1.A",
+  "structure": "shared_stimulus_set",
+  "archetype": "wh_w404",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   }
+  ],
+  "gateOverride": "wh-r20-m-2026-10-22",
+  "run": "wh-r20-m",
+  "stockKey": "wh-r20-m:ap_world_history-w404-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "wh-r20-m-2026-10-22",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_world_history",
+  "itemFamilyId": "fam:wh-r20-m:ap_world_history-w404-k0",
+  "canonicalKey": "wh-r20-m:ap_world_history-w404-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_world_history:4.2",
+  "sharedWith": [],
+  "stockCell": "ap_world_history|4.2|1.A|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "wh-r20-m",
+    "gateVersion": "wh-r20-m-2026-10-22",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "txt-genoese-pilot-1521"
+  ],
+  "exam": "WH4",
+  "payload": {
+   "archetype": "wh_w404",
+   "topic": "4.2",
+   "skill": "1.A",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(primary source)\nNavigation and Voyage which Fernando de Magalhaens made from Seville to Maluco in the year 1519, by a Genoese pilot (excerpt on the arrival at Tidore)\nAn anonymous Genoese pilot who sailed in Magellan's fleet (translated by Lord Stanley of Alderley, Hakluyt Society), Voyage of 1519-1522; translation published London: Hakluyt Society, 1874. Project Gutenberg eBook #74723. Reuse: public domain in the United States (published before 1929). excerpted (1 segment); whitespace normalized; editorial footnote markers and italic underscores removed; no wording changed.\nContext: This anonymous account by a pilot who sailed with Magellan's fleet describes the arrival at Tidore, one of the Spice Islands in what is now Indonesia, in November 1521; the voyage had begun in Spain in 1519.\n\n\"As soon as they arrived at the island of Tydor, which is in half a degree, the King thereof did them great honour, which could not be exceeded: there they treated with the King for their cargo, and the King engaged to give them a cargo and whatever there was in the country for their money, and they settled to give for the bahar of cloves fourteen ells of yellow cloth of twenty-seven tem, which are worth in Castile a ducat the ell; of red cloth of the same kind ten ells; they also gave thirty ells of Brittany linen cloth, and for each of these quantities they received a bahar of cloves, likewise for thirty knives eight bahars: having thus settled all the above mentioned prices, the inhabitants of the country gave them information that further on, in another island near, there was a Portuguese man. This island might be two leagues distant, and it was named Targatell; this man was the chief person of Maluco; there we now have got a fortress. They then wrote letters to the said Portuguese, to come and speak with them, to which he answered that he did not dare, because the King of the country forbade it; that if they obtained permission from the King he would come at once; this permission they soon got, and the Portuguese came to speak with them. They gave him an account of the prices which they had settled, at which he was amazed, and said that on that account the King had ordered him not to come, as they did not know the truth about the prices of the country; and whilst they were thus taking in cargo there arrived the King of Baraham, which is near there, and said that he wished to be a vassal of the King of Castile, and also that he had got four hundred bahars of cloves, and that he had sold it to the King of Portugal, and that they had bought it, but that he had not yet delivered it, and if they wished for it, he would give it all to them; to which the captains answered that if he brought it to them, and came with it, they would buy it, but otherwise not.\"",
+   "wh_set": {
+    "unit": 4,
+    "stim_type": "primary_text",
+    "theme": "Buying cloves in the Spice Islands at the end of the first voyage around the world",
+    "title": "Buying cloves in the Spice Islands at the end of the first voyage around the world",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "primary_text",
+      "title": "Navigation and Voyage which Fernando de Magalhaens made from Seville to Maluco in the year 1519, by a Genoese pilot (excerpt on the arrival at Tidore)",
+      "attribution": "An anonymous Genoese pilot who sailed in Magellan's fleet (translated by Lord Stanley of Alderley, Hakluyt Society), Voyage of 1519-1522; translation published London: Hakluyt Society, 1874. Project Gutenberg eBook #74723. Reuse: public domain in the United States (published before 1929). excerpted (1 segment); whitespace normalized; editorial footnote markers and italic underscores removed; no wording changed.",
+      "context": "This anonymous account by a pilot who sailed with Magellan's fleet describes the arrival at Tidore, one of the Spice Islands in what is now Indonesia, in November 1521; the voyage had begun in Spain in 1519.",
+      "real_data": true,
+      "source_registry_id": "txt-genoese-pilot-1521",
+      "source_sha256": "506dc6aabe0735c17cfab95816a0ae29ab19fdba413d841b6c0c066422322be2"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "wh_w404_1A",
+     "topic": "4.2",
+     "skill": "1.A",
+     "stem": "The trade at Tidore described in the excerpt best illustrates which of the following developments of the period from 1450 to 1750?",
+     "options": [
+      {
+       "text": "European conquest of large inland territories across mainland Southeast Asia",
+       "why": "The excerpt shows Europeans bargaining with local kings and depending on their goodwill. Europeans at this time held only scattered coastal posts and did not rule large inland territories.",
+       "value": null,
+       "label": "overstated"
+      },
+      {
+       "text": "The transfer of American food crops to Asian farming regions through Pacific trade",
+       "why": "The excerpt is about cloth and knives traded for cloves, not crop transfers. Regular trans-Pacific exchange began only with the Manila galleons after 1565.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "Iberian efforts to reach Asian spice sources directly by sea",
+       "why": "Magellan's fleet sailed for Castile to reach the Moluccas by a western sea route and bought cloves directly from the King of Tidore. Like Portugal's earlier Indian Ocean voyages, it aimed to get around the middlemen who controlled the overland and Mediterranean spice routes.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Chartered joint-stock companies taking control of the Indonesian clove trade",
+       "why": "The Dutch East India Company was founded in 1602 and took over the clove trade later in the 1600s. The 1521 fleet was a royal Castilian expedition, not a company venture.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"Iberian efforts to reach Asian spice sources directly by sea\". Magellan's fleet sailed for Castile to reach the Moluccas by a western sea route and bought cloves directly from the King of Tidore. Like Portugal's earlier Indian Ocean voyages, it aimed to get around the middlemen who controlled the overland and Mediterranean spice routes.\n\"European conquest of large inland territories across mainland Southeast Asia\" is incorrect: The excerpt shows Europeans bargaining with local kings and depending on their goodwill. Europeans at this time held only scattered coastal posts and did not rule large inland territories.\n\"The transfer of American food crops to Asian farming regions through Pacific trade\" is incorrect: The excerpt is about cloth and knives traded for cloves, not crop transfers. Regular trans-Pacific exchange began only with the Manila galleons after 1565.\n\"Chartered joint-stock companies taking control of the Indonesian clove trade\" is incorrect: The Dutch East India Company was founded in 1602 and took over the clove trade later in the 1600s. The 1521 fleet was a royal Castilian expedition, not a company venture.",
+     "est_seconds": 50,
+     "facts": [
+      "Magellan's expedition left Spain in 1519 under the Castilian crown and reached the Moluccas in 1521.",
+      "The surviving ship Victoria returned to Spain in 1522, completing the first circumnavigation.",
+      "The Dutch East India Company was founded in 1602."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "1.A",
+      "key_evidence_in_source": "The fleet negotiates with the King of Tidore for a cargo of cloves after sailing from Seville, which shows a European state seeking direct access to spices.",
+      "evidence_quote": "there they treated with the King for their cargo, and the King engaged to give them a cargo"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 2
+     }
+    },
+    {
+     "archetype": "wh_w404_2B",
+     "topic": "4.2",
+     "skill": "2.B",
+     "stem": "The pilot carefully records how many ells of cloth and how many knives bought each bahar of cloves. This focus most likely reflects that",
+     "options": [
+      {
+       "text": "the expedition aimed to bring spices back to Castile at a profit",
+       "why": "The pilot gives exact rates of exchange and the value of the cloth in Castile. That fits a voyage sent to bring back profitable cloves, which were valuable in European markets.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Castile hoped to sell American silver for Asian spices in Maluku markets",
+       "why": "The fleet paid in cloth and knives. Large flows of American silver into Asia began after the Potosi strike of 1545 and the Manila galleon trade.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "European cloth was more valued in Maluku than in any other Asian market",
+       "why": "The excerpt gives prices only at Tidore and makes no comparison with other Asian markets.",
+       "value": null,
+       "label": "overstated"
+      },
+      {
+       "text": "the fleet was sent mainly to convert the rulers of Maluku to Christianity",
+       "why": "Religion is never mentioned in the excerpt. The pilot's attention is on prices and cargo, not on conversion.",
+       "value": null,
+       "label": "unsupported_by_source"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"the expedition aimed to bring spices back to Castile at a profit\". The pilot gives exact rates of exchange and the value of the cloth in Castile. That fits a voyage sent to bring back profitable cloves, which were valuable in European markets.\n\"Castile hoped to sell American silver for Asian spices in Maluku markets\" is incorrect: The fleet paid in cloth and knives. Large flows of American silver into Asia began after the Potosi strike of 1545 and the Manila galleon trade.\n\"European cloth was more valued in Maluku than in any other Asian market\" is incorrect: The excerpt gives prices only at Tidore and makes no comparison with other Asian markets.\n\"the fleet was sent mainly to convert the rulers of Maluku to Christianity\" is incorrect: Religion is never mentioned in the excerpt. The pilot's attention is on prices and cargo, not on conversion.",
+     "est_seconds": 55,
+     "facts": [
+      "Cloves grew in the Moluccas and were among the most valuable spices in European trade in the early 1500s.",
+      "Silver from Potosi, discovered in 1545, later became a major means of paying for Asian goods."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "2.B",
+      "key_evidence_in_source": "The pilot lists exact amounts of cloth and knives per bahar and notes what the cloth was worth in Castile, which shows a commercial purpose.",
+      "evidence_quote": "fourteen ells of yellow cloth of twenty-seven tem, which are worth in Castile a ducat the ell"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "likely"
+       }
+      ],
+      "panel_choice": 0
+     }
+    },
+    {
+     "archetype": "wh_w404_4A",
+     "topic": "4.4",
+     "skill": "4.A",
+     "stem": "Which of the following developments most directly explains why a Portuguese man was already living near Tidore when Magellan's fleet arrived in 1521?",
+     "options": [
+      {
+       "text": "Portugal's seizure of Malacca in 1511 and push into Asian sea trade",
+       "why": "After Portugal took Malacca in 1511, Portuguese ships went on to the Moluccas. That explains why a Portuguese man was on a nearby island before the Castilians arrived.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The Dutch East India Company's capture of Portuguese posts in the islands",
+       "why": "The Dutch seized Portuguese posts in the Moluccas in the 1600s, long after 1521.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The Ming treasure fleets that carried Chinese envoys to Southeast Asian ports",
+       "why": "Zheng He's voyages ended in 1433. They were Chinese ventures and have no connection to the Portuguese presence in Maluku.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The Treaty of Zaragoza of 1529 assigning the Spice Islands to Portugal",
+       "why": "The treaty came eight years after 1521, so it cannot explain a Portuguese presence already there that year.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"Portugal's seizure of Malacca in 1511 and push into Asian sea trade\". After Portugal took Malacca in 1511, Portuguese ships went on to the Moluccas. That explains why a Portuguese man was on a nearby island before the Castilians arrived.\n\"The Dutch East India Company's capture of Portuguese posts in the islands\" is incorrect: The Dutch seized Portuguese posts in the Moluccas in the 1600s, long after 1521.\n\"The Ming treasure fleets that carried Chinese envoys to Southeast Asian ports\" is incorrect: Zheng He's voyages ended in 1433. They were Chinese ventures and have no connection to the Portuguese presence in Maluku.\n\"The Treaty of Zaragoza of 1529 assigning the Spice Islands to Portugal\" is incorrect: The treaty came eight years after 1521, so it cannot explain a Portuguese presence already there that year.",
+     "est_seconds": 50,
+     "facts": [
+      "Portugal captured Malacca in 1511.",
+      "Portuguese ships reached the Moluccas soon after the capture of Malacca, by about 1512.",
+      "Zheng He's last voyage ended in 1433."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.A",
+      "key_evidence_in_source": "The excerpt says a Portuguese man was already the chief person on a nearby island in 1521, which points students to earlier Portuguese expansion into Asian waters.",
+      "evidence_quote": "in another island near, there was a Portuguese man"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 0
+     }
+    },
+    {
+     "archetype": "wh_w404_5B",
+     "topic": "4.4",
+     "skill": "5.B",
+     "stem": "In the decade after the voyage, the competing Castilian and Portuguese claims to Maluku cloves seen in the excerpt were most directly settled by which agreement?",
+     "options": [
+      {
+       "text": "The Treaty of Zaragoza, in which Castile gave up its claim to the islands",
+       "why": "The excerpt shows Castile and Portugal competing over the same cloves and the same local rulers. In the Treaty of Zaragoza (1529), Charles V gave up Castile's claim to the Moluccas in return for a Portuguese payment.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The Peace of Westphalia, which ended religious wars among European states",
+       "why": "The Peace of Westphalia (1648) ended the Thirty Years' War and had nothing to do with Iberian claims in Asia.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "The Iberian Union, which placed Portugal under the Spanish king from 1580",
+       "why": "The union came half a century later, after a succession crisis in Portugal, and it was not a settlement of the clove dispute.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The Treaty of Tordesillas, which first divided newly found lands between the two crowns",
+       "why": "Tordesillas was signed in 1494, before the voyage. Its line did not settle which crown owned the Moluccas on the other side of the world, which is why a dispute arose.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"The Treaty of Zaragoza, in which Castile gave up its claim to the islands\". The excerpt shows Castile and Portugal competing over the same cloves and the same local rulers. In the Treaty of Zaragoza (1529), Charles V gave up Castile's claim to the Moluccas in return for a Portuguese payment.\n\"The Peace of Westphalia, which ended religious wars among European states\" is incorrect: The Peace of Westphalia (1648) ended the Thirty Years' War and had nothing to do with Iberian claims in Asia.\n\"The Iberian Union, which placed Portugal under the Spanish king from 1580\" is incorrect: The union came half a century later, after a succession crisis in Portugal, and it was not a settlement of the clove dispute.\n\"The Treaty of Tordesillas, which first divided newly found lands between the two crowns\" is incorrect: Tordesillas was signed in 1494, before the voyage. Its line did not settle which crown owned the Moluccas on the other side of the world, which is why a dispute arose.",
+     "est_seconds": 50,
+     "facts": [
+      "The Treaty of Zaragoza (1529) gave Portugal the Moluccas in exchange for a payment to Charles V.",
+      "The Treaty of Tordesillas was signed in 1494.",
+      "The Iberian Union began in 1580."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "5.B",
+      "key_evidence_in_source": "The King of Baraham had sold cloves to Portugal but offered them to the Castilians and asked to become a vassal of Castile, which shows the rival Iberian claims.",
+      "evidence_quote": "he wished to be a vassal of the King of Castile"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 0
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ },
+ {
+  "cellId": "ap_world_history-w405",
+  "apSubjectCode": "ap_world_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_world_history-w405-k0",
+  "keywordCode": "5.1",
+  "unitCode": "5",
+  "skillPrimary": "3.C",
+  "structure": "shared_stimulus_set",
+  "archetype": "wh_w405",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   }
+  ],
+  "gateOverride": "wh-r20-m-2026-10-22",
+  "run": "wh-r20-m",
+  "stockKey": "wh-r20-m:ap_world_history-w405-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "wh-r20-m-2026-10-22",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_world_history",
+  "itemFamilyId": "fam:wh-r20-m:ap_world_history-w405-k0",
+  "canonicalKey": "wh-r20-m:ap_world_history-w405-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_world_history:5.1",
+  "sharedWith": [],
+  "stockCell": "ap_world_history|5.1|3.C|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "wh-r20-m",
+    "gateVersion": "wh-r20-m-2026-10-22",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "txt-locke-1690",
+   "txt-rousseau-1762"
+  ],
+  "exam": "WH4",
+  "payload": {
+   "archetype": "wh_w405",
+   "topic": "5.1",
+   "skill": "3.C",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\nSource A (primary source)\nSecond Treatise of Government, ch. VIII 'Of the Beginning of Political Societies', section 95 (excerpt)\nJohn Locke, 1690 (published in the Two Treatises of Government). Project Gutenberg eBook #7370. Reuse: public domain in the United States (published before 1929). excerpted (1 segment); whitespace normalized; no wording changed.\nContext: John Locke was an English philosopher whose Two Treatises of Government were published in 1689-1690; this passage is about how political communities begin.\n\n\"MEN being, as has been said, by nature, all free, equal, and independent, no one can be put out of this estate, and subjected to the political power of another, without his own consent. The only way whereby any one divests himself of his natural liberty, and puts on the bonds of civil society, is by agreeing with other men to join and unite into a community for their comfortable, safe, and peaceable living one amongst another, in a secure enjoyment of their properties, and a greater security against any, that are not of it. This any number of men may do, because it injures not the freedom of the rest; they are left as they were in the liberty of the state of nature.\"\n\n———\n\nSource B (primary source)\nThe Social Contract, Book I, chapter I 'Subject of the First Book' (excerpt, G. D. H. Cole translation)\nJean-Jacques Rousseau (translated by G. D. H. Cole), 1762 (French original); Cole translation first published in Everyman's Library, J. M. Dent & Sons, 1913 (the repository file does not print the year). Project Gutenberg eBook #46333. Reuse: public domain in the United States (published before 1929) (translation published 1913; this year is not printed in the repository file and is UNVERIFIED there). excerpted (1 segment); whitespace normalized; no wording changed.\nContext: Jean-Jacques Rousseau was a writer from Geneva who published The Social Contract in 1762.\n\n\"Man is born free; and everywhere he is in chains. One thinks himself the master of others, and still remains a greater slave than they. How did this change come about? I do not know. What can make it legitimate? That question I think I can answer. If I took into account only force, and the effects derived from it, I should say: \"As long as a people is compelled to obey, and obeys, it does well; as soon as it can shake off the yoke, and shakes it off, it does still better; for, regaining its liberty by the same right as took it away, either it is justified in resuming it, or there was no justification for those who took it away.\" But the social order is a sacred right which is the basis of all other rights. Nevertheless, this right does not come from nature, and must therefore be founded on conventions.\"",
+   "wh_set": {
+    "unit": 5,
+    "stim_type": "paired_text",
+    "theme": "Consent and legitimate authority: Locke and Rousseau on how political communities begin",
+    "title": "Consent and legitimate authority: Locke and Rousseau on how political communities begin",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "primary_text",
+      "title": "Second Treatise of Government, ch. VIII 'Of the Beginning of Political Societies', section 95 (excerpt)",
+      "attribution": "John Locke, 1690 (published in the Two Treatises of Government). Project Gutenberg eBook #7370. Reuse: public domain in the United States (published before 1929). excerpted (1 segment); whitespace normalized; no wording changed.",
+      "context": "John Locke was an English philosopher whose Two Treatises of Government were published in 1689-1690; this passage is about how political communities begin.",
+      "real_data": true,
+      "source_registry_id": "txt-locke-1690",
+      "source_sha256": "90f074e42be5d39b7f1864d76882961dcd750421ef464a5ae478ef32f8dd9786"
+     },
+     {
+      "id": "B",
+      "kind": "primary_text",
+      "title": "The Social Contract, Book I, chapter I 'Subject of the First Book' (excerpt, G. D. H. Cole translation)",
+      "attribution": "Jean-Jacques Rousseau (translated by G. D. H. Cole), 1762 (French original); Cole translation first published in Everyman's Library, J. M. Dent & Sons, 1913 (the repository file does not print the year). Project Gutenberg eBook #46333. Reuse: public domain in the United States (published before 1929) (translation published 1913; this year is not printed in the repository file and is UNVERIFIED there). excerpted (1 segment); whitespace normalized; no wording changed.",
+      "context": "Jean-Jacques Rousseau was a writer from Geneva who published The Social Contract in 1762.",
+      "real_data": true,
+      "source_registry_id": "txt-rousseau-1762",
+      "source_sha256": "d3584252cc60b5d27c51641bcd871afefb3c14e9641df609b887f6afb1f23caf"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "wh_w405_3C",
+     "topic": "5.1",
+     "skill": "3.C",
+     "stem": "Which of the following best describes a similarity between the arguments in Source A and Source B about political authority?",
+     "options": [
+      {
+       "text": "Source A defends rule by a landed nobility, while Source B calls for the abolition of all private property.",
+       "why": "Neither excerpt defends noble rule or calls for abolishing property. Locke treats secure property as one reason people form a community.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "Both hold that humans in a state of nature lived in constant war, so only an absolute ruler can keep order.",
+       "why": "This is the view of Thomas Hobbes. Locke here describes people in the state of nature as free, equal and independent.",
+       "value": null,
+       "label": "misattributed"
+      },
+      {
+       "text": "Both hold that hereditary monarchs receive their authority from God and must be obeyed without question.",
+       "why": "This is divine-right theory, the very view both authors reject by grounding authority in consent or convention.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Both hold that rightful political authority rests on agreement among people, not force.",
+       "why": "Locke says no one can be subjected to political power without his own consent. Rousseau says force cannot make power legitimate and that the social order must be founded on conventions.",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"Both hold that rightful political authority rests on agreement among people, not force.\". Locke says no one can be subjected to political power without his own consent. Rousseau says force cannot make power legitimate and that the social order must be founded on conventions.\n\"Source A defends rule by a landed nobility, while Source B calls for the abolition of all private property.\" is incorrect: Neither excerpt defends noble rule or calls for abolishing property. Locke treats secure property as one reason people form a community.\n\"Both hold that humans in a state of nature lived in constant war, so only an absolute ruler can keep order.\" is incorrect: This is the view of Thomas Hobbes. Locke here describes people in the state of nature as free, equal and independent.\n\"Both hold that hereditary monarchs receive their authority from God and must be obeyed without question.\" is incorrect: This is divine-right theory, the very view both authors reject by grounding authority in consent or convention.",
+     "est_seconds": 60,
+     "facts": [
+      "Locke's Second Treatise (1690) argued that political society rests on the consent of free and equal individuals.",
+      "Rousseau's The Social Contract (1762) argued that legitimate authority rests on convention, not force or nature."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.C",
+      "key_evidence_in_source": "Locke requires consent, and Rousseau says the social order is founded on conventions, not on nature or force.",
+      "evidence_quote": "this right does not come from nature, and must therefore be founded on conventions"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 3
+     }
+    },
+    {
+     "archetype": "wh_w405_3D",
+     "topic": "5.1",
+     "skill": "3.D",
+     "stem": "Which of the following arguments, made by some European writers in the 1600s and 1700s, would most directly challenge the claims in both sources?",
+     "options": [
+      {
+       "text": "Sovereignty belongs to the nation as a whole, so laws should express the general will of its citizens.",
+       "why": "This idea of popular sovereignty and the general will comes from Rousseau and supports, rather than refutes, the sources.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Kings hold authority directly from God, not from any agreement among their subjects.",
+       "why": "Divine-right theorists such as Robert Filmer and Bishop Bossuet said royal power came from God. That denies both Locke's consent and Rousseau's conventions as the basis of authority.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Free markets allocate goods better than state regulation, so governments should leave trade alone.",
+       "why": "Laissez-faire economic thought, as in Adam Smith, deals with trade policy, not with where political legitimacy comes from.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "Governments are formed chiefly to protect the natural rights of life, liberty, and property of their members.",
+       "why": "This restates Locke's own position, so it supports the sources and does not challenge them.",
+       "value": null,
+       "label": "true_but_not_responsive"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"Kings hold authority directly from God, not from any agreement among their subjects.\". Divine-right theorists such as Robert Filmer and Bishop Bossuet said royal power came from God. That denies both Locke's consent and Rousseau's conventions as the basis of authority.\n\"Sovereignty belongs to the nation as a whole, so laws should express the general will of its citizens.\" is incorrect: This idea of popular sovereignty and the general will comes from Rousseau and supports, rather than refutes, the sources.\n\"Free markets allocate goods better than state regulation, so governments should leave trade alone.\" is incorrect: Laissez-faire economic thought, as in Adam Smith, deals with trade policy, not with where political legitimacy comes from.\n\"Governments are formed chiefly to protect the natural rights of life, liberty, and property of their members.\" is incorrect: This restates Locke's own position, so it supports the sources and does not challenge them.",
+     "est_seconds": 60,
+     "facts": [
+      "Robert Filmer's Patriarcha (published 1680) defended the divine and patriarchal right of kings, and Locke's First Treatise was written to refute it.",
+      "Bishop Jacques-Benigne Bossuet defended divine-right absolutism under Louis XIV in the late 1600s."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.D",
+      "key_evidence_in_source": "Both sources deny that authority comes from nature or force and root it in consent, so a theory of authority given by God would contradict them.",
+      "evidence_quote": "no one can be put out of this estate, and subjected to the political power of another, without his own consent"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 1
+     }
+    },
+    {
+     "archetype": "wh_w405_4A",
+     "topic": "5.1",
+     "skill": "4.A",
+     "stem": "Which of the following developments in England most directly provided the historical context for Source A?",
+     "options": [
+      {
+       "text": "The break with the Roman Catholic Church under Henry VIII and the founding of the Church of England",
+       "why": "The English Reformation under Henry VIII happened in the 1530s, more than a century before Locke's work.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The rise of steam-powered textile factories and the workers' protests they provoked in the cities",
+       "why": "Factory industrialization began in the late 1700s, long after the 1690 publication.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The Chartist movement's mass petitions demanding universal male suffrage and secret ballots",
+       "why": "Chartism took place in the 1830s and 1840s, about 150 years after Locke wrote.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "Parliament's struggles with Stuart kings, ending in the Glorious Revolution of 1688",
+       "why": "The Two Treatises were published in 1689-1690, just after Parliament replaced James II with William and Mary. Locke's theory of consent was used to justify that change of rulers.",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"Parliament's struggles with Stuart kings, ending in the Glorious Revolution of 1688\". The Two Treatises were published in 1689-1690, just after Parliament replaced James II with William and Mary. Locke's theory of consent was used to justify that change of rulers.\n\"The break with the Roman Catholic Church under Henry VIII and the founding of the Church of England\" is incorrect: The English Reformation under Henry VIII happened in the 1530s, more than a century before Locke's work.\n\"The rise of steam-powered textile factories and the workers' protests they provoked in the cities\" is incorrect: Factory industrialization began in the late 1700s, long after the 1690 publication.\n\"The Chartist movement's mass petitions demanding universal male suffrage and secret ballots\" is incorrect: Chartism took place in the 1830s and 1840s, about 150 years after Locke wrote.",
+     "est_seconds": 50,
+     "facts": [
+      "In the Glorious Revolution of 1688-1689, Parliament replaced James II with William III and Mary II.",
+      "The English Bill of Rights of 1689 limited royal power.",
+      "Locke's Two Treatises of Government were published in 1689-1690."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.A",
+      "key_evidence_in_source": "The context line dates Locke's English work to 1689-1690, the years of the Glorious Revolution.",
+      "evidence_quote": ""
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 3
+     }
+    },
+    {
+     "archetype": "wh_w405_5B",
+     "topic": "5.2",
+     "skill": "5.B",
+     "stem": "Ideas such as those in both sources most directly influenced which of the following developments in the period 1750 to 1900?",
+     "options": [
+      {
+       "text": "The Qing Self-Strengthening Movement's effort to adopt Western arms while preserving Confucian rule",
+       "why": "Self-strengthening borrowed Western technology while rejecting political change. It was not based on theories of consent.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "British factory legislation limiting the working hours of children employed in textile mills",
+       "why": "The Factory Acts responded to industrial working conditions, not to debates about where political authority comes from.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "The Meiji constitution of 1889, which declared the emperor sacred and the source of sovereignty",
+       "why": "The Meiji constitution placed sovereignty in the emperor rather than in the consent of the people, so it reflects the opposite principle.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Creole leaders' arguments justifying independence from Spanish rule in South America",
+       "why": "Leaders such as Simon Bolivar drew on Enlightenment ideas of popular sovereignty and consent to argue against Spanish colonial rule in the 1810s and 1820s.",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"Creole leaders' arguments justifying independence from Spanish rule in South America\". Leaders such as Simon Bolivar drew on Enlightenment ideas of popular sovereignty and consent to argue against Spanish colonial rule in the 1810s and 1820s.\n\"The Qing Self-Strengthening Movement's effort to adopt Western arms while preserving Confucian rule\" is incorrect: Self-strengthening borrowed Western technology while rejecting political change. It was not based on theories of consent.\n\"British factory legislation limiting the working hours of children employed in textile mills\" is incorrect: The Factory Acts responded to industrial working conditions, not to debates about where political authority comes from.\n\"The Meiji constitution of 1889, which declared the emperor sacred and the source of sovereignty\" is incorrect: The Meiji constitution placed sovereignty in the emperor rather than in the consent of the people, so it reflects the opposite principle.",
+     "est_seconds": 55,
+     "facts": [
+      "Spanish American independence movements led by creoles such as Simon Bolivar won independence in the 1810s and 1820s.",
+      "Bolivar's Jamaica Letter (1815) drew on Enlightenment political ideas.",
+      "The Meiji constitution of 1889 vested sovereignty in the emperor."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "5.B",
+      "key_evidence_in_source": "Both sources argue that authority imposed without consent is illegitimate, and revolutionaries in the Americas used this idea to justify independence.",
+      "evidence_quote": "as soon as it can shake off the yoke, and shakes it off, it does still better"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "likely"
+       }
+      ],
+      "panel_choice": 3
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ },
+ {
+  "cellId": "ap_world_history-w406",
+  "apSubjectCode": "ap_world_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_world_history-w406-k0",
+  "keywordCode": "6.2",
+  "unitCode": "6",
+  "skillPrimary": "1.B",
+  "structure": "shared_stimulus_set",
+  "archetype": "wh_w406",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "basic_learning"
+   }
+  ],
+  "gateOverride": "wh-r20-m-2026-10-22",
+  "run": "wh-r20-m",
+  "stockKey": "wh-r20-m:ap_world_history-w406-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "wh-r20-m-2026-10-22",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_world_history",
+  "itemFamilyId": "fam:wh-r20-m:ap_world_history-w406-k0",
+  "canonicalKey": "wh-r20-m:ap_world_history-w406-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_world_history:6.2",
+  "sharedWith": [],
+  "stockCell": "ap_world_history|6.2|1.B|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "wh-r20-m",
+    "gateVersion": "wh-r20-m-2026-10-22",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "txt-nemesis-1844"
+  ],
+  "exam": "WH4",
+  "payload": {
+   "archetype": "wh_w406",
+   "topic": "6.2",
+   "skill": "1.B",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(primary source)\nNarrative of the Voyages and Services of the Nemesis from 1840 to 1843, ch. I (excerpt on the first iron steamer built for the East India Company)\nCaptain W. H. Hall, R.N., with notes by W. D. Bernard, 1844 (London: Henry Colburn). Project Gutenberg eBook #43669. Reuse: public domain in the United States (published before 1929). excerpted (1 segment); whitespace normalized; no wording changed.\nContext: Captain William Hall commanded the iron steamer Nemesis, which was built in 1839 for the East India Company and sent to China, where it served in the First Opium War; this book about its voyages was published in London in 1844.\n\n\"this was considered an extremely favourable opportunity for testing the advantages or otherwise of iron steam-vessels; and the numerous rivers along the coast of China, hitherto very imperfectly known, and almost totally unsurveyed, presented an admirable field for these experiments. If successful there, it might be readily inferred that their utility in the fine rivers and along the shores of Hindostan, and other portions of the Company's territories, would be demonstrated, and by degrees a very powerful steam fleet would become an invaluable addition to the already vast resources of the Indian government. Orders were therefore given for the immediate building of several stout iron steamers, to be constructed with peculiar reference to their employment in river navigation. They were all to be adequately armed and manned, and no reasonable expense was to be spared in fitting them out in a manner best adapted to the particular object sought to be attained by them. No iron steamer had ever yet doubled the Cape of Good Hope; their qualities, therefore, remained yet to be tested in the stormy seas about Southern Africa; and various questions respecting the errors of the compasses, the effects of lightning, &c., upon vessels of this description, remained still imperfectly solved, particularly in reference to those tropical regions, where the great phenomena of nature are exhibited in a more intense and dangerous degree.\"",
+   "wh_set": {
+    "unit": 6,
+    "stim_type": "primary_text",
+    "theme": "Iron steamers as tools of British power in Asia, 1840s",
+    "title": "Iron steamers as tools of British power in Asia, 1840s",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "primary_text",
+      "title": "Narrative of the Voyages and Services of the Nemesis from 1840 to 1843, ch. I (excerpt on the first iron steamer built for the East India Company)",
+      "attribution": "Captain W. H. Hall, R.N., with notes by W. D. Bernard, 1844 (London: Henry Colburn). Project Gutenberg eBook #43669. Reuse: public domain in the United States (published before 1929). excerpted (1 segment); whitespace normalized; no wording changed.",
+      "context": "Captain William Hall commanded the iron steamer Nemesis, which was built in 1839 for the East India Company and sent to China, where it served in the First Opium War; this book about its voyages was published in London in 1844.",
+      "real_data": true,
+      "source_registry_id": "txt-nemesis-1844",
+      "source_sha256": "a27ce792639ec5b9de31863eeca145f2cc40ff0b370834453b03dc0aee6741fe"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "wh_w406_1B",
+     "topic": "6.2",
+     "skill": "1.B",
+     "stem": "The plan described in the excerpt to build \"a very powerful steam fleet\" best illustrates which of the following processes in the nineteenth century?",
+     "options": [
+      {
+       "text": "Industrial demand for raw cotton led British firms to replace Indian textile exports with cotton grown in Egypt",
+       "why": "Demand for raw materials was a real feature of the period, but the excerpt is about military steam technology, not cotton supply.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "Industrial advances in steam and iron gave Europeans new military tools for expanding control in Asia",
+       "why": "The excerpt describes armed iron steamers built to add to the resources of the Company's Indian government and tested in China. Industrial technology of this kind gave European states a military edge that supported imperial expansion.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "British naval patrols used new steam vessels mainly to suppress the Atlantic slave trade off the coast of West Africa",
+       "why": "British anti-slave-trade patrols did take place, but the excerpt is about Company steamers meant for China and India, not West Africa.",
+       "value": null,
+       "label": "true_but_not_responsive"
+      },
+      {
+       "text": "Qing officials adopted Western steamships and arsenals to strengthen the Chinese state against foreign pressure in the 1860s",
+       "why": "The Self-Strengthening Movement was a Chinese response that came decades later. The excerpt describes British East India Company plans, not Qing ones.",
+       "value": null,
+       "label": "misattributed"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"Industrial advances in steam and iron gave Europeans new military tools for expanding control in Asia\". The excerpt describes armed iron steamers built to add to the resources of the Company's Indian government and tested in China. Industrial technology of this kind gave European states a military edge that supported imperial expansion.\n\"Industrial demand for raw cotton led British firms to replace Indian textile exports with cotton grown in Egypt\" is incorrect: Demand for raw materials was a real feature of the period, but the excerpt is about military steam technology, not cotton supply.\n\"British naval patrols used new steam vessels mainly to suppress the Atlantic slave trade off the coast of West Africa\" is incorrect: British anti-slave-trade patrols did take place, but the excerpt is about Company steamers meant for China and India, not West Africa.\n\"Qing officials adopted Western steamships and arsenals to strengthen the Chinese state against foreign pressure in the 1860s\" is incorrect: The Self-Strengthening Movement was a Chinese response that came decades later. The excerpt describes British East India Company plans, not Qing ones.",
+     "est_seconds": 60,
+     "facts": [
+      "The Nemesis, an iron steamer, was built in 1839 for the East India Company.",
+      "Steam-powered gunboats such as the Nemesis were used by Britain in the First Opium War (1839-1842)."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "1.B",
+      "key_evidence_in_source": "The excerpt describes armed iron steamers intended to become a steam fleet serving the Company's Indian government.",
+      "evidence_quote": "by degrees a very powerful steam fleet would become an invaluable addition to the already vast resources of the Indian government"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 1
+     }
+    },
+    {
+     "archetype": "wh_w406_2B",
+     "topic": "6.1",
+     "skill": "2.B",
+     "stem": "Hall's description of China's coastal rivers as \"an admirable field for these experiments\" most likely reflects which point of view?",
+     "options": [
+      {
+       "text": "A critic of the opium trade who argued that the war was damaging Britain's moral standing in Asia",
+       "why": "The excerpt says nothing critical about opium or the war. It speaks approvingly of the steamers' potential.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "A British officer viewing the war in China as a chance to test tools for extending Company power",
+       "why": "Hall commanded the Nemesis in the First Opium War. He treats China's rivers as a testing ground whose results could be applied to the Company's territories, which reflects a British imperial point of view.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "A merchant mainly concerned with surveying China's rivers to expand legitimate tea exports to Britain",
+       "why": "The rivers are mentioned as a place to test armed vessels, not as trade routes. The author was a naval commander, not a merchant.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "A Qing official alarmed that armed foreign steamers could move far up rivers and threaten inland Chinese cities",
+       "why": "The author was a British naval officer, not a Chinese official. The excerpt presents the steamers' river capability as an advantage, not a threat.",
+       "value": null,
+       "label": "misattributed"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"A British officer viewing the war in China as a chance to test tools for extending Company power\". Hall commanded the Nemesis in the First Opium War. He treats China's rivers as a testing ground whose results could be applied to the Company's territories, which reflects a British imperial point of view.\n\"A critic of the opium trade who argued that the war was damaging Britain's moral standing in Asia\" is incorrect: The excerpt says nothing critical about opium or the war. It speaks approvingly of the steamers' potential.\n\"A merchant mainly concerned with surveying China's rivers to expand legitimate tea exports to Britain\" is incorrect: The rivers are mentioned as a place to test armed vessels, not as trade routes. The author was a naval commander, not a merchant.\n\"A Qing official alarmed that armed foreign steamers could move far up rivers and threaten inland Chinese cities\" is incorrect: The author was a British naval officer, not a Chinese official. The excerpt presents the steamers' river capability as an advantage, not a threat.",
+     "est_seconds": 55,
+     "facts": [
+      "William Hall commanded the Nemesis during the First Opium War (1839-1842)."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "2.B",
+      "key_evidence_in_source": "The author, a British commander, frames China's unsurveyed rivers as a place to test steamers whose success would benefit the Company's territories.",
+      "evidence_quote": "presented an admirable field for these experiments"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 1
+     }
+    },
+    {
+     "archetype": "wh_w406_4B",
+     "topic": "6.5",
+     "skill": "4.B",
+     "stem": "Sending armed iron steamers to China around 1840, as described in the excerpt, is best understood in the context of which broader development?",
+     "options": [
+      {
+       "text": "Russian expansion across Central Asia that alarmed British officials responsible for India",
+       "why": "Rivalry with Russia in Central Asia was real, but it does not explain why Britain sent river steamers to fight in China.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "Meiji reforms in Japan that created a modern navy modeled closely on the British Royal Navy",
+       "why": "The Meiji Restoration began in 1868, decades after the Nemesis was built. It also concerns Japan, not British action in China.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The Taiping Rebellion, a massive uprising that challenged Qing rule across southern and central China",
+       "why": "The Taiping Rebellion began in 1850, after the voyages of 1840 to 1843 described in the source.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "British efforts to force the Qing to open trade, especially to opium grown in India",
+       "why": "The Nemesis was sent to China for the First Opium War. Britain fought that war to protect the opium trade from British India and to force wider access to Chinese markets.",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"British efforts to force the Qing to open trade, especially to opium grown in India\". The Nemesis was sent to China for the First Opium War. Britain fought that war to protect the opium trade from British India and to force wider access to Chinese markets.\n\"Russian expansion across Central Asia that alarmed British officials responsible for India\" is incorrect: Rivalry with Russia in Central Asia was real, but it does not explain why Britain sent river steamers to fight in China.\n\"Meiji reforms in Japan that created a modern navy modeled closely on the British Royal Navy\" is incorrect: The Meiji Restoration began in 1868, decades after the Nemesis was built. It also concerns Japan, not British action in China.\n\"The Taiping Rebellion, a massive uprising that challenged Qing rule across southern and central China\" is incorrect: The Taiping Rebellion began in 1850, after the voyages of 1840 to 1843 described in the source.",
+     "est_seconds": 55,
+     "facts": [
+      "Britain fought the First Opium War (1839-1842) after the Qing tried to suppress the opium trade.",
+      "Much of the opium sold in China was grown in British-controlled India."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.B",
+      "key_evidence_in_source": "The context line says the Nemesis was sent to China and served in the First Opium War, and the excerpt links China operations to the Company's Indian government.",
+      "evidence_quote": "the numerous rivers along the coast of China, hitherto very imperfectly known, and almost totally unsurveyed"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 3
+     }
+    },
+    {
+     "archetype": "wh_w406_5A",
+     "topic": "6.2",
+     "skill": "5.A",
+     "stem": "The use of armed steamers described in the excerpt is most similar to which later nineteenth-century development?",
+     "options": [
+      {
+       "text": "The Meiji government's abolition of samurai privileges in order to build a national conscript army",
+       "why": "This was an internal Japanese military reform, not an industrial power using steam technology to coerce another state.",
+       "value": null,
+       "label": "true_but_not_responsive"
+      },
+      {
+       "text": "The Ottoman Tanzimat reforms, which reorganized law and administration along European lines",
+       "why": "The Tanzimat was a defensive reform program inside the Ottoman Empire. It has nothing to do with naval coercion abroad.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "The US use of steam warships to pressure Japan into opening its ports in the 1850s",
+       "why": "Commodore Perry's steam-powered squadron (1853-1854) also used industrial naval technology to force an Asian state to open to trade, which parallels the steamers' role in China.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The Sepoy Rebellion of 1857, in which Indian soldiers rose against East India Company rule",
+       "why": "This was resistance against Company power, not a use of technology to extend it.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"The US use of steam warships to pressure Japan into opening its ports in the 1850s\". Commodore Perry's steam-powered squadron (1853-1854) also used industrial naval technology to force an Asian state to open to trade, which parallels the steamers' role in China.\n\"The Meiji government's abolition of samurai privileges in order to build a national conscript army\" is incorrect: This was an internal Japanese military reform, not an industrial power using steam technology to coerce another state.\n\"The Ottoman Tanzimat reforms, which reorganized law and administration along European lines\" is incorrect: The Tanzimat was a defensive reform program inside the Ottoman Empire. It has nothing to do with naval coercion abroad.\n\"The Sepoy Rebellion of 1857, in which Indian soldiers rose against East India Company rule\" is incorrect: This was resistance against Company power, not a use of technology to extend it.",
+     "est_seconds": 50,
+     "facts": [
+      "Commodore Matthew Perry led US steam warships to Japan in 1853-1854, leading to the Treaty of Kanagawa (1854)."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "5.A",
+      "key_evidence_in_source": "The excerpt describes armed, well-funded steamers sent to operate against an Asian state's coasts and rivers.",
+      "evidence_quote": "They were all to be adequately armed and manned"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 2
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ },
+ {
+  "cellId": "ap_world_history-w407",
+  "apSubjectCode": "ap_world_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_world_history-w407-k0",
+  "keywordCode": "6.5",
+  "unitCode": "6",
+  "skillPrimary": "1.B",
+  "structure": "shared_stimulus_set",
+  "archetype": "wh_w407",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   }
+  ],
+  "gateOverride": "wh-r20-m-2026-10-22",
+  "run": "wh-r20-m",
+  "stockKey": "wh-r20-m:ap_world_history-w407-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "wh-r20-m-2026-10-22",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_world_history",
+  "itemFamilyId": "fam:wh-r20-m:ap_world_history-w407-k0",
+  "canonicalKey": "wh-r20-m:ap_world_history-w407-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_world_history:6.5",
+  "sharedWith": [],
+  "stockCell": "ap_world_history|6.5|1.B|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "wh-r20-m",
+    "gateVersion": "wh-r20-m-2026-10-22",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "txt-giles-1912"
+  ],
+  "exam": "WH4",
+  "payload": {
+   "archetype": "wh_w407",
+   "topic": "6.5",
+   "skill": "1.B",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(secondary source)\nChina and the Manchus (excerpt on the Boxer movement of 1899-1900)\nHerbert A. Giles, professor of Chinese at Cambridge, 1912 (Cambridge University Press). Project Gutenberg eBook #2156. Reuse: public domain in the United States (published before 1929). excerpted (1 segment); whitespace normalized; no wording changed.\nContext: Herbert Giles was a British professor of Chinese at the University of Cambridge; he published this history of the Manchu dynasty in 1912.\n\n\"There was great unrest, especially in Shantung, due, it was said, to ill-feeling between the people at large and converts to Christianity, and at any rate aggravated by recent foreign acquisitions of Chinese territory. It was thus that what was originally one of the periodical anti-dynastic risings, with the usual scion of the Ming dynasty as figure-head, lost sight of its objective and became a bloodthirsty anti-foreign outbreak. The story of the siege of the Legations has been written from many points of view; and most people know all they want to know of the two summer months in 1900, the merciless bombardment of a thousand foreigners, with their women and children, cooped up in a narrow space, and also of the awful butchery of missionaries, men, women, and children alike, which took place at the capital of Shansi. Whatever may have been the origin of the movement, there can be little doubt that it was taken over by the Manchus, with the complicity of the Empress Dowager, as a means of getting rid of all the foreigners in China.\"",
+   "wh_set": {
+    "unit": 6,
+    "stim_type": "secondary_text",
+    "theme": "A British scholar's explanation of the Boxer movement in China in 1912",
+    "title": "A British scholar's explanation of the Boxer movement in China in 1912",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "secondary_text",
+      "title": "China and the Manchus (excerpt on the Boxer movement of 1899-1900)",
+      "attribution": "Herbert A. Giles, professor of Chinese at Cambridge, 1912 (Cambridge University Press). Project Gutenberg eBook #2156. Reuse: public domain in the United States (published before 1929). excerpted (1 segment); whitespace normalized; no wording changed.",
+      "context": "Herbert Giles was a British professor of Chinese at the University of Cambridge; he published this history of the Manchu dynasty in 1912.",
+      "real_data": true,
+      "source_registry_id": "txt-giles-1912",
+      "source_sha256": "a54d01229283a17b40c8cd457c5c2fbe33b6182ebdb43585e21e621aa7833745"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "wh_w407_1B",
+     "topic": "6.5",
+     "skill": "1.B",
+     "stem": "The \"recent foreign acquisitions of Chinese territory\" that Giles mentions are best explained as part of which of the following processes?",
+     "options": [
+      {
+       "text": "Western states replacing Qing governors with their own officials and ruling China's coastal provinces as formal colonies",
+       "why": "The foreign powers held leaseholds, treaty ports and spheres of influence. China was never divided into formal colonies, and Qing officials still governed the provinces.",
+       "value": null,
+       "label": "overstated"
+      },
+      {
+       "text": "Japan's creation of the puppet state of Manchukuo in northeastern China after its army seized Manchuria in 1931",
+       "why": "Manchukuo was created in 1932, decades after the events of 1899-1900 and after Giles published his book in 1912.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "European powers and Japan seizing leaseholds and spheres of influence after China's 1895 defeat by Japan",
+       "why": "After the Sino-Japanese War, the powers scrambled for concessions in 1897-1898. Germany's seizure of Jiaozhou Bay in Shandong (Shantung) fits Giles's link between new territorial losses and unrest in that province.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Britain's annexation of Hong Kong Island under the Treaty of Nanjing that ended the First Opium War in 1842",
+       "why": "Hong Kong Island was ceded in 1842, more than fifty years before the Boxer unrest, so it was not one of the recent acquisitions Giles describes.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"European powers and Japan seizing leaseholds and spheres of influence after China's 1895 defeat by Japan\". After the Sino-Japanese War, the powers scrambled for concessions in 1897-1898. Germany's seizure of Jiaozhou Bay in Shandong (Shantung) fits Giles's link between new territorial losses and unrest in that province.\n\"Western states replacing Qing governors with their own officials and ruling China's coastal provinces as formal colonies\" is incorrect: The foreign powers held leaseholds, treaty ports and spheres of influence. China was never divided into formal colonies, and Qing officials still governed the provinces.\n\"Japan's creation of the puppet state of Manchukuo in northeastern China after its army seized Manchuria in 1931\" is incorrect: Manchukuo was created in 1932, decades after the events of 1899-1900 and after Giles published his book in 1912.\n\"Britain's annexation of Hong Kong Island under the Treaty of Nanjing that ended the First Opium War in 1842\" is incorrect: Hong Kong Island was ceded in 1842, more than fifty years before the Boxer unrest, so it was not one of the recent acquisitions Giles describes.",
+     "est_seconds": 60,
+     "facts": [
+      "Japan defeated China in the Sino-Japanese War of 1894-1895.",
+      "Germany seized Jiaozhou Bay in Shandong in 1897 and obtained a lease there in 1898, part of the scramble for concessions in which other powers also gained leaseholds."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "1.B",
+      "key_evidence_in_source": "Giles ties unrest in Shantung to 'recent foreign acquisitions of Chinese territory', which points to the leaseholds of 1897-1898.",
+      "evidence_quote": "aggravated by recent foreign acquisitions of Chinese territory"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 2
+     }
+    },
+    {
+     "archetype": "wh_w407_2B",
+     "topic": "6.3",
+     "skill": "2.B",
+     "stem": "Giles's account of the events of 1900 most likely reflects which of the following points of view?",
+     "options": [
+      {
+       "text": "A Qing official's effort to shield the Empress Dowager from foreign blame for the attacks on foreigners",
+       "why": "Giles was a Cambridge professor, not a Qing official, and he accuses the Empress Dowager of complicity rather than defending her.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "A British scholar's sympathy for foreign victims and readiness to blame the Qing court",
+       "why": "Giles was a British professor. He stresses the suffering of besieged foreigners and murdered missionaries and blames the Manchus and the Empress Dowager for taking over the movement.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "A socialist's view of the uprising as a class struggle of peasants against Chinese landlords",
+       "why": "The excerpt never discusses landlords or class conflict. It explains the movement through dynastic politics, hostility toward Christian converts and anti-foreign feeling.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "A Chinese nationalist's praise of the Boxers as patriots resisting Western and Japanese imperialism",
+       "why": "Giles calls the movement a 'bloodthirsty anti-foreign outbreak', which is the opposite of praise. The credit line also identifies him as British.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"A British scholar's sympathy for foreign victims and readiness to blame the Qing court\". Giles was a British professor. He stresses the suffering of besieged foreigners and murdered missionaries and blames the Manchus and the Empress Dowager for taking over the movement.\n\"A Qing official's effort to shield the Empress Dowager from foreign blame for the attacks on foreigners\" is incorrect: Giles was a Cambridge professor, not a Qing official, and he accuses the Empress Dowager of complicity rather than defending her.\n\"A socialist's view of the uprising as a class struggle of peasants against Chinese landlords\" is incorrect: The excerpt never discusses landlords or class conflict. It explains the movement through dynastic politics, hostility toward Christian converts and anti-foreign feeling.\n\"A Chinese nationalist's praise of the Boxers as patriots resisting Western and Japanese imperialism\" is incorrect: Giles calls the movement a 'bloodthirsty anti-foreign outbreak', which is the opposite of praise. The credit line also identifies him as British.",
+     "est_seconds": 60,
+     "facts": [
+      "Herbert Giles was a British professor of Chinese at Cambridge who published China and the Manchus in 1912.",
+      "Boxers besieged the foreign legations in Beijing in the summer of 1900."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "2.B",
+      "key_evidence_in_source": "The credit line identifies the author as a British Cambridge scholar, and the text dwells on foreign victims and blames the Empress Dowager.",
+      "evidence_quote": "taken over by the Manchus, with the complicity of the Empress Dowager, as a means of getting rid of all the foreigners"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 1
+     }
+    },
+    {
+     "archetype": "wh_w407_3D",
+     "topic": "6.3",
+     "skill": "3.D",
+     "stem": "Which of the following pieces of evidence would most directly support Giles's claim that the Manchu court took over the Boxer movement?",
+     "options": [
+      {
+       "text": "Treaties signed in 1858 and 1860 gave Christian missionaries the right to preach in China's interior",
+       "why": "This helps explain the anger toward converts that Giles mentions, but it is not evidence that the court took over the movement.",
+       "value": null,
+       "label": "true_but_not_responsive"
+      },
+      {
+       "text": "Boxer recruits practiced martial arts and rituals that they believed made them immune to foreign bullets",
+       "why": "This describes the Boxers' own beliefs and practices. It says nothing about whether the Manchu court took control of the movement.",
+       "value": null,
+       "label": "true_but_not_responsive"
+      },
+      {
+       "text": "Several governors in southern China ignored the court's orders and kept their provinces at peace with foreigners",
+       "why": "This is accurate, but it shows that many Qing officials refused to join the anti-foreign campaign. It weakens Giles's claim rather than supporting it.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "The Qing court declared war on the foreign powers in June 1900 as Boxers besieged the legations",
+       "why": "The court's declaration of war, issued while Boxers were attacking foreigners in Beijing, shows the dynasty adopting the movement's anti-foreign aims. This backs Giles's claim of court complicity.",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"The Qing court declared war on the foreign powers in June 1900 as Boxers besieged the legations\". The court's declaration of war, issued while Boxers were attacking foreigners in Beijing, shows the dynasty adopting the movement's anti-foreign aims. This backs Giles's claim of court complicity.\n\"Treaties signed in 1858 and 1860 gave Christian missionaries the right to preach in China's interior\" is incorrect: This helps explain the anger toward converts that Giles mentions, but it is not evidence that the court took over the movement.\n\"Boxer recruits practiced martial arts and rituals that they believed made them immune to foreign bullets\" is incorrect: This describes the Boxers' own beliefs and practices. It says nothing about whether the Manchu court took control of the movement.\n\"Several governors in southern China ignored the court's orders and kept their provinces at peace with foreigners\" is incorrect: This is accurate, but it shows that many Qing officials refused to join the anti-foreign campaign. It weakens Giles's claim rather than supporting it.",
+     "est_seconds": 70,
+     "facts": [
+      "In June 1900 the Qing court under Empress Dowager Cixi declared war on the foreign powers.",
+      "Several governors in southern and central China refused to carry out the court's anti-foreign orders in 1900."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.D",
+      "key_evidence_in_source": "Giles's final sentence claims the Manchus and the Empress Dowager took over the movement, and the court's declaration of war is direct evidence for that claim.",
+      "evidence_quote": "it was taken over by the Manchus, with the complicity of the Empress Dowager"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 3
+     }
+    },
+    {
+     "archetype": "wh_w407_5B",
+     "topic": "6.8",
+     "skill": "5.B",
+     "stem": "The events described in the excerpt most directly contributed to which of the following developments in the early 1900s?",
+     "options": [
+      {
+       "text": "The launch of the Self-Strengthening Movement, in which Qing officials built arsenals and modern shipyards",
+       "why": "The Self-Strengthening Movement began in the 1860s, decades before the Boxer crisis, so it could not have been caused by it.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "A large indemnity under the 1901 Boxer Protocol that further weakened the Qing before its fall",
+       "why": "After foreign troops relieved the legations, the 1901 Boxer Protocol forced China to pay a huge indemnity. This drained the treasury and discredited the dynasty, which fell in 1911-1912.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The Taiping Rebellion's attempt to replace Qing rule with a Heavenly Kingdom inspired by Christian teaching",
+       "why": "The Taiping Rebellion took place from 1850 to 1864, long before the events of 1900.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The withdrawal of foreign powers from their Chinese spheres of influence after the legations were relieved",
+       "why": "The intervention increased foreign influence. The powers kept their spheres and won the right to station troops in Beijing.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"A large indemnity under the 1901 Boxer Protocol that further weakened the Qing before its fall\". After foreign troops relieved the legations, the 1901 Boxer Protocol forced China to pay a huge indemnity. This drained the treasury and discredited the dynasty, which fell in 1911-1912.\n\"The launch of the Self-Strengthening Movement, in which Qing officials built arsenals and modern shipyards\" is incorrect: The Self-Strengthening Movement began in the 1860s, decades before the Boxer crisis, so it could not have been caused by it.\n\"The Taiping Rebellion's attempt to replace Qing rule with a Heavenly Kingdom inspired by Christian teaching\" is incorrect: The Taiping Rebellion took place from 1850 to 1864, long before the events of 1900.\n\"The withdrawal of foreign powers from their Chinese spheres of influence after the legations were relieved\" is incorrect: The intervention increased foreign influence. The powers kept their spheres and won the right to station troops in Beijing.",
+     "est_seconds": 60,
+     "facts": [
+      "The Boxer Protocol of 1901 required China to pay a large indemnity to the foreign powers.",
+      "The Qing dynasty was overthrown in the revolution of 1911-1912."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "5.B",
+      "key_evidence_in_source": "The excerpt describes the 1900 siege of the legations and the anti-foreign violence that led to the foreign intervention and the Boxer Protocol.",
+      "evidence_quote": "the siege of the Legations"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 1
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ },
+ {
+  "cellId": "ap_world_history-w408",
+  "apSubjectCode": "ap_world_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_world_history-w408-k0",
+  "keywordCode": "8.5",
+  "unitCode": "8",
+  "skillPrimary": "1.B",
+  "structure": "shared_stimulus_set",
+  "archetype": "wh_w408",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   }
+  ],
+  "gateOverride": "wh-r20-m-2026-10-22",
+  "run": "wh-r20-m",
+  "stockKey": "wh-r20-m:ap_world_history-w408-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "wh-r20-m-2026-10-22",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_world_history",
+  "itemFamilyId": "fam:wh-r20-m:ap_world_history-w408-k0",
+  "canonicalKey": "wh-r20-m:ap_world_history-w408-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_world_history:8.5",
+  "sharedWith": [],
+  "stockCell": "ap_world_history|8.5|1.B|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "wh-r20-m",
+    "gateVersion": "wh-r20-m-2026-10-22",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "txt-cs-algeria-1994"
+  ],
+  "exam": "WH4",
+  "payload": {
+   "archetype": "wh_w408",
+   "topic": "8.5",
+   "skill": "1.B",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(secondary source)\nAlgeria: A Country Study (excerpt on the Evian Accords and independence)\nHelen Chapin Metz, ed., Federal Research Division, Library of Congress, 1994 (research completed 1993). Library of Congress, Federal Research Division (Country Studies; full text via Internet Archive OCR). Reuse: public domain (U.S. government work, 17 U.S.C. 105). excerpted (1 segment); whitespace normalized; OCR line-break hyphenation rejoined; running page header removed; no wording changed.\nContext: This reference book was written for the U.S. government in the early 1990s; this passage describes how the war between France and the Algerian independence movement ended in 1962.\n\n\"Talks with the FLN reopened at Evian in May 1961; after several false starts, the French government decreed that a cease-fire would take effect on March 19, 1962. In their final form, the Evian Accords allowed the colons equal legal protection with Algerians over a three-year period. These rights included respect for property, participation in public affairs, and a full range of civil and cultural rights. At the end of that period, however, Europeans would be obliged to become Algerian citizens or be classified as aliens with the attendant loss of rights. The French electorate approved the Evian Accords by an overwhelming 91 percent vote in a referendum held in June 1962. During the three months between the cease-fire and the French referendum on Algeria, the OAS unleashed a new terrorist campaign. The OAS sought to provoke a major breach in the cease-fire by the FLN but the terrorism now was aimed also against the French army and police enforcing the accords as well as against Muslims. It was the most wanton carnage that Algeria had witnessed in eight years of savage warfare. OAS operatives set off an average of 120 bombs per day in March, with targets including hospitals and schools. Ultimately, the terrorism failed in its objectives, and the OAS and the FLN concluded a truce on June 17, 1962. In the same month, more than 350,000 colons left Algeria. Within a year, 1.4 million refugees, including almost the entire Jewish community and some pro-French Muslims, had joined the exodus to France. Fewer than 30,000 Europeans chose to remain. On July 1, 1962, some 6 million of a total Algerian electorate of 6.5 million cast their ballots in the referendum on independence. The vote was nearly unanimous. De Gaulle pronounced Algeria an independent country on July 3.\"",
+   "wh_set": {
+    "unit": 8,
+    "stim_type": "secondary_text",
+    "theme": "Negotiating the end of French rule in Algeria, 1961-1962",
+    "title": "Negotiating the end of French rule in Algeria, 1961-1962",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "secondary_text",
+      "title": "Algeria: A Country Study (excerpt on the Evian Accords and independence)",
+      "attribution": "Helen Chapin Metz, ed., Federal Research Division, Library of Congress, 1994 (research completed 1993). Library of Congress, Federal Research Division (Country Studies; full text via Internet Archive OCR). Reuse: public domain (U.S. government work, 17 U.S.C. 105). excerpted (1 segment); whitespace normalized; OCR line-break hyphenation rejoined; running page header removed; no wording changed.",
+      "context": "This reference book was written for the U.S. government in the early 1990s; this passage describes how the war between France and the Algerian independence movement ended in 1962.",
+      "real_data": true,
+      "source_registry_id": "txt-cs-algeria-1994",
+      "source_sha256": "ea70372843a3f13654da83894ac822574b5ab4248494de51c4af59b899ecd6a4"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "wh_w408_1B",
+     "topic": "8.5",
+     "skill": "1.B",
+     "stem": "Which of the following best explains why so many colons left Algeria in 1962, as described in the excerpt?",
+     "options": [
+      {
+       "text": "Postwar economic growth in France drew workers from across the Mediterranean into factories in Paris, Lyon and other cities.",
+       "why": "France's postwar boom did attract labor migrants, but it does not explain a sudden flight of settlers timed to the cease-fire and independence.",
+       "value": null,
+       "label": "true_but_not_responsive"
+      },
+      {
+       "text": "Settlers expected to lose their privileged position once rule passed to the Muslim majority after a bitter war.",
+       "why": "The excerpt says Europeans would have to become Algerian citizens or be treated as aliens with fewer rights. After more than a century of settler dominance and eight years of war, most colons would not live as a minority in an FLN-led state.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "A League of Nations plan required population exchanges between new states, as Greece and Turkey had done in 1923.",
+       "why": "The Greek-Turkish exchange belongs to the interwar period, and the League of Nations no longer existed in 1962. No exchange plan applied to Algeria.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The Evian Accords required the French government to deport all European residents from Algeria within three years.",
+       "why": "The accords did the opposite. They guaranteed colons property, civil and political rights for three years and then let them choose Algerian citizenship.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"Settlers expected to lose their privileged position once rule passed to the Muslim majority after a bitter war.\". The excerpt says Europeans would have to become Algerian citizens or be treated as aliens with fewer rights. After more than a century of settler dominance and eight years of war, most colons would not live as a minority in an FLN-led state.\n\"Postwar economic growth in France drew workers from across the Mediterranean into factories in Paris, Lyon and other cities.\" is incorrect: France's postwar boom did attract labor migrants, but it does not explain a sudden flight of settlers timed to the cease-fire and independence.\n\"A League of Nations plan required population exchanges between new states, as Greece and Turkey had done in 1923.\" is incorrect: The Greek-Turkish exchange belongs to the interwar period, and the League of Nations no longer existed in 1962. No exchange plan applied to Algeria.\n\"The Evian Accords required the French government to deport all European residents from Algeria within three years.\" is incorrect: The accords did the opposite. They guaranteed colons property, civil and political rights for three years and then let them choose Algerian citizenship.",
+     "est_seconds": 55,
+     "facts": [
+      "French colonization of Algeria began in 1830.",
+      "The Algerian War of Independence lasted from 1954 to 1962."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "1.B",
+      "key_evidence_in_source": "The excerpt says that after three years Europeans had to become Algerian citizens or become aliens, and it describes the exodus that followed.",
+      "evidence_quote": "Europeans would be obliged to become Algerian citizens or be classified as aliens with the attendant loss of rights"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 1
+     }
+    },
+    {
+     "archetype": "wh_w408_3A",
+     "topic": "8.5",
+     "skill": "3.A",
+     "stem": "According to the excerpt, which of the following best describes the outcome of the OAS campaign of 1962?",
+     "options": [
+      {
+       "text": "It caused the worst violence of the war but did not break the cease-fire or stop independence.",
+       "why": "The author calls the campaign the worst carnage of the eight-year war but says it failed in its objectives. The OAS made a truce with the FLN in June, and independence followed in July.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "It targeted Muslim civilians only, avoiding attacks on the French army and police that were enforcing the accords.",
+       "why": "The excerpt says the terror was also aimed at the French army and police enforcing the accords.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "It was secretly directed by de Gaulle's government to pressure the FLN into granting settlers permanent rights.",
+       "why": "The OAS was a settler and dissident military group that opposed de Gaulle's policy and attacked French forces. It was not an instrument of the French government.",
+       "value": null,
+       "label": "misattributed"
+      },
+      {
+       "text": "It provoked the FLN into abandoning the cease-fire, which delayed Algerian independence until the late 1960s.",
+       "why": "The author says the OAS tried to provoke a break in the cease-fire and failed. Independence was declared on July 3, 1962.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"It caused the worst violence of the war but did not break the cease-fire or stop independence.\". The author calls the campaign the worst carnage of the eight-year war but says it failed in its objectives. The OAS made a truce with the FLN in June, and independence followed in July.\n\"It targeted Muslim civilians only, avoiding attacks on the French army and police that were enforcing the accords.\" is incorrect: The excerpt says the terror was also aimed at the French army and police enforcing the accords.\n\"It was secretly directed by de Gaulle's government to pressure the FLN into granting settlers permanent rights.\" is incorrect: The OAS was a settler and dissident military group that opposed de Gaulle's policy and attacked French forces. It was not an instrument of the French government.\n\"It provoked the FLN into abandoning the cease-fire, which delayed Algerian independence until the late 1960s.\" is incorrect: The author says the OAS tried to provoke a break in the cease-fire and failed. Independence was declared on July 3, 1962.",
+     "est_seconds": 45,
+     "facts": [
+      "The OAS was formed in 1961 by settlers and dissident French army officers who opposed Algerian independence.",
+      "Algeria became independent in July 1962."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.A",
+      "key_evidence_in_source": "The author judges that the OAS terror failed and notes the OAS-FLN truce of June 17, 1962.",
+      "evidence_quote": "Ultimately, the terrorism failed in its objectives, and the OAS and the FLN concluded a truce on June 17, 1962."
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 0
+     }
+    },
+    {
+     "archetype": "wh_w408_4B",
+     "topic": "8.5",
+     "skill": "4.B",
+     "stem": "The end of French rule in Algeria described in the excerpt is best understood in the context of which broader development?",
+     "options": [
+      {
+       "text": "Weakened European powers' retreat from empire as nationalist movements grew after the Second World War",
+       "why": "France came out of the Second World War weakened and lost Indochina in 1954. Around 1960 it gave up most of its African colonies, and the Algerian settlement was part of this wider European retreat from empire.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Pan-Arab efforts to unite Arab states, such as the 1958 union of Egypt and Syria in the United Arab Republic",
+       "why": "The United Arab Republic was a real pan-Arab project, but Algeria never joined it, and it does not explain France's withdrawal.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "The partition of Africa among European powers that had been arranged at the Berlin Conference in the 1880s",
+       "why": "The Berlin Conference of 1884-1885 was about creating empires in Africa, not ending them.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "A Cold War agreement in which the United States and Soviet Union divided former colonies into spheres of influence",
+       "why": "No superpower agreement divided the former colonies. The excerpt describes a settlement between France and the FLN.",
+       "value": null,
+       "label": "unsupported_by_source"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"Weakened European powers' retreat from empire as nationalist movements grew after the Second World War\". France came out of the Second World War weakened and lost Indochina in 1954. Around 1960 it gave up most of its African colonies, and the Algerian settlement was part of this wider European retreat from empire.\n\"Pan-Arab efforts to unite Arab states, such as the 1958 union of Egypt and Syria in the United Arab Republic\" is incorrect: The United Arab Republic was a real pan-Arab project, but Algeria never joined it, and it does not explain France's withdrawal.\n\"The partition of Africa among European powers that had been arranged at the Berlin Conference in the 1880s\" is incorrect: The Berlin Conference of 1884-1885 was about creating empires in Africa, not ending them.\n\"A Cold War agreement in which the United States and Soviet Union divided former colonies into spheres of influence\" is incorrect: No superpower agreement divided the former colonies. The excerpt describes a settlement between France and the FLN.",
+     "est_seconds": 50,
+     "facts": [
+      "France was defeated at Dien Bien Phu in Indochina in 1954.",
+      "In 1960, many French colonies in sub-Saharan Africa became independent."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.B",
+      "key_evidence_in_source": "The excerpt describes a European power negotiating its withdrawal from a colony after a long war with a nationalist movement.",
+      "evidence_quote": "Talks with the FLN reopened at Evian in May 1961"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 0
+     }
+    },
+    {
+     "archetype": "wh_w408_2B",
+     "topic": "8.5",
+     "skill": "2.B",
+     "stem": "Based on the context line and the passage, the author most likely wrote this passage in order to",
+     "options": [
+      {
+       "text": "give U.S. officials background on how Algeria won independence from France",
+       "why": "The context line says the reference book was written for the U.S. government in the early 1990s. The passage gives a factual, chronological account of how the war ended.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "urge Washington to send military aid to the FLN during its war against the French army",
+       "why": "The war ended in 1962, long before this early-1990s reference work, and the passage does not argue for any policy.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "defend the OAS campaign as a justified response to the loss of settler property rights",
+       "why": "The author condemns the OAS campaign as wanton carnage and says it failed.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "persuade French voters to approve the Evian Accords in the June 1962 referendum",
+       "why": "The text was written about thirty years after the 1962 referendum, for the U.S. government rather than French voters.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"give U.S. officials background on how Algeria won independence from France\". The context line says the reference book was written for the U.S. government in the early 1990s. The passage gives a factual, chronological account of how the war ended.\n\"urge Washington to send military aid to the FLN during its war against the French army\" is incorrect: The war ended in 1962, long before this early-1990s reference work, and the passage does not argue for any policy.\n\"defend the OAS campaign as a justified response to the loss of settler property rights\" is incorrect: The author condemns the OAS campaign as wanton carnage and says it failed.\n\"persuade French voters to approve the Evian Accords in the June 1962 referendum\" is incorrect: The text was written about thirty years after the 1962 referendum, for the U.S. government rather than French voters.",
+     "est_seconds": 40,
+     "facts": [
+      "The Evian Accords were signed in March 1962 and approved by French voters in a referendum in 1962."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "2.B",
+      "key_evidence_in_source": "The context line says the book was a reference work written for the U.S. government in the early 1990s.",
+      "evidence_quote": ""
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 0
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ },
+ {
+  "cellId": "ap_world_history-w409",
+  "apSubjectCode": "ap_world_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_world_history-w409-k0",
+  "keywordCode": "9.4",
+  "unitCode": "9",
+  "skillPrimary": "1.A",
+  "structure": "shared_stimulus_set",
+  "archetype": "wh_w409",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   }
+  ],
+  "gateOverride": "wh-r20-m-2026-10-22",
+  "run": "wh-r20-m",
+  "stockKey": "wh-r20-m:ap_world_history-w409-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "wh-r20-m-2026-10-22",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_world_history",
+  "itemFamilyId": "fam:wh-r20-m:ap_world_history-w409-k0",
+  "canonicalKey": "wh-r20-m:ap_world_history-w409-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_world_history:9.4",
+  "sharedWith": [],
+  "stockCell": "ap_world_history|9.4|1.A|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "wh-r20-m",
+    "gateVersion": "wh-r20-m-2026-10-22",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "txt-cs-russia-1998"
+  ],
+  "exam": "WH4",
+  "payload": {
+   "archetype": "wh_w409",
+   "topic": "9.4",
+   "skill": "1.A",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(secondary source)\nRussia: A Country Study (excerpt on voucher privatization in the 1990s)\nGlenn E. Curtis, ed., Federal Research Division, Library of Congress, 1998 (research completed 1996). Library of Congress, Federal Research Division (Country Studies; full text via Internet Archive OCR). Reuse: public domain (U.S. government work, 17 U.S.C. 105). excerpted (1 segment); whitespace normalized; OCR line-break hyphenation rejoined; running page header removed; no wording changed.\nContext: This reference book was written for the U.S. government in the 1990s; this passage describes the sale of state-owned businesses in Russia after the end of the Soviet Union.\n\n\"By the end of June 1994, the voucher privatization program had completed its first phase. It succeeded in transferring ownership of 70 percent of Russia's large and medium-sized enterprises to private hands and in privatizing about 90 percent of small enterprises. By that time, 96 percent of the vouchers issued in 1992 had been used by their owners to buy shares in firms directly, invest in investment funds, or sell on the secondary markets. According to the organizers of the voucher system, some 14,000 firms employing about two-thirds of the industrial labor force had moved into private hands. The next phase of the privatization program called for direct cash sales of shares in remaining state enterprises. That phase would complete the transfer of state enterprises and would add to government revenues. After that procedure met stiff opposition in the State Duma, Yeltsin implemented it by decree in July 1994.\"",
+   "wh_set": {
+    "unit": 9,
+    "stim_type": "secondary_text",
+    "theme": "Selling state enterprises in post-Soviet Russia",
+    "title": "Selling state enterprises in post-Soviet Russia",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "secondary_text",
+      "title": "Russia: A Country Study (excerpt on voucher privatization in the 1990s)",
+      "attribution": "Glenn E. Curtis, ed., Federal Research Division, Library of Congress, 1998 (research completed 1996). Library of Congress, Federal Research Division (Country Studies; full text via Internet Archive OCR). Reuse: public domain (U.S. government work, 17 U.S.C. 105). excerpted (1 segment); whitespace normalized; OCR line-break hyphenation rejoined; running page header removed; no wording changed.",
+      "context": "This reference book was written for the U.S. government in the 1990s; this passage describes the sale of state-owned businesses in Russia after the end of the Soviet Union.",
+      "real_data": true,
+      "source_registry_id": "txt-cs-russia-1998",
+      "source_sha256": "2dbc8346632ac6c7b8322578a0aa36b55d92acfc164388b7b9de75813f01c3c5"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "wh_w409_1A",
+     "topic": "9.4",
+     "skill": "1.A",
+     "stem": "The privatization program described in the excerpt best illustrates which of the following developments?",
+     "options": [
+      {
+       "text": "The nationalization of foreign-owned enterprises by newly independent states after decolonization",
+       "why": "Nationalization moves ownership to the state, which is the reverse of the transfer to private owners in the excerpt.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "The adoption of import substitution policies to protect national industries in Latin America",
+       "why": "Import substitution was a mid-century Latin American strategy that relied on state protection. It has nothing to do with selling off Russian state firms.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "The shift from state-directed economies toward market economies after the Cold War",
+       "why": "The passage describes state enterprises in post-Soviet Russia passing into private hands, which is part of the move from a Soviet command economy to a market economy after 1991.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The expansion of state ownership of industry under Soviet Five-Year Plans in the 1930s",
+       "why": "Stalin's Five-Year Plans increased state control. They belong to an earlier period and run opposite to the privatization described.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"The shift from state-directed economies toward market economies after the Cold War\". The passage describes state enterprises in post-Soviet Russia passing into private hands, which is part of the move from a Soviet command economy to a market economy after 1991.\n\"The nationalization of foreign-owned enterprises by newly independent states after decolonization\" is incorrect: Nationalization moves ownership to the state, which is the reverse of the transfer to private owners in the excerpt.\n\"The adoption of import substitution policies to protect national industries in Latin America\" is incorrect: Import substitution was a mid-century Latin American strategy that relied on state protection. It has nothing to do with selling off Russian state firms.\n\"The expansion of state ownership of industry under Soviet Five-Year Plans in the 1930s\" is incorrect: Stalin's Five-Year Plans increased state control. They belong to an earlier period and run opposite to the privatization described.",
+     "est_seconds": 45,
+     "facts": [
+      "The Soviet Union dissolved in December 1991.",
+      "Russia began mass voucher privatization in 1992 under President Boris Yeltsin."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "1.A",
+      "key_evidence_in_source": "The excerpt reports that most Russian enterprises were transferred from the state to private owners after the Soviet collapse.",
+      "evidence_quote": "transferring ownership of 70 percent of Russia's large and medium-sized enterprises to private hands"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 2
+     }
+    },
+    {
+     "archetype": "wh_w409_3A",
+     "topic": "9.4",
+     "skill": "3.A",
+     "stem": "Which of the following claims does the excerpt make about Russian privatization by the middle of 1994?",
+     "options": [
+      {
+       "text": "Most large and medium-sized state enterprises had been moved into private ownership",
+       "why": "The excerpt states that 70 percent of large and medium-sized enterprises had been transferred to private hands by June 1994.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The State Duma enthusiastically endorsed cash sales of shares in remaining state firms",
+       "why": "According to the excerpt, the Duma put up stiff opposition, and Yeltsin then used a decree.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Privatization concentrated ownership in the hands of a few wealthy financiers known as oligarchs",
+       "why": "Historians do discuss the rise of oligarchs in 1990s Russia, but this excerpt never mentions them or makes that claim.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "Most vouchers issued in 1992 remained unused because citizens distrusted the new firms",
+       "why": "The excerpt says 96 percent of the vouchers had already been used, sold or invested.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"Most large and medium-sized state enterprises had been moved into private ownership\". The excerpt states that 70 percent of large and medium-sized enterprises had been transferred to private hands by June 1994.\n\"The State Duma enthusiastically endorsed cash sales of shares in remaining state firms\" is incorrect: According to the excerpt, the Duma put up stiff opposition, and Yeltsin then used a decree.\n\"Privatization concentrated ownership in the hands of a few wealthy financiers known as oligarchs\" is incorrect: Historians do discuss the rise of oligarchs in 1990s Russia, but this excerpt never mentions them or makes that claim.\n\"Most vouchers issued in 1992 remained unused because citizens distrusted the new firms\" is incorrect: The excerpt says 96 percent of the vouchers had already been used, sold or invested.",
+     "est_seconds": 40,
+     "facts": [
+      "Russian vouchers were distributed to citizens beginning in 1992.",
+      "The State Duma became Russia's lower house of parliament under the 1993 constitution."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.A",
+      "key_evidence_in_source": "The opening sentences give the 70 percent figure for large and medium-sized enterprises as the program's achievement.",
+      "evidence_quote": "It succeeded in transferring ownership of 70 percent of Russia's large and medium-sized enterprises to private hands"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 0
+     }
+    },
+    {
+     "archetype": "wh_w409_4B",
+     "topic": "9.4",
+     "skill": "4.B",
+     "stem": "The privatization described in the excerpt is best understood as part of which broader context of the late twentieth century?",
+     "options": [
+      {
+       "text": "The spread of Green Revolution farming techniques that raised grain yields in developing nations",
+       "why": "The Green Revolution was a real agricultural change in the twentieth century, but it has no connection to the ownership of Russian industry.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "The expansion of government economic planning in response to the Great Depression of the 1930s",
+       "why": "Depression-era planning increased the state's economic role, so it comes from the wrong period and points in the opposite direction.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "A global wave of decolonization that created dozens of new states across Africa and Asia",
+       "why": "Decolonization happened mainly from the 1940s to the 1970s. It concerned political independence, not post-Soviet economic restructuring.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "A worldwide turn toward free-market policies and reduced state economic roles",
+       "why": "From the 1980s on, many governments, both capitalist and formerly communist, sold state enterprises and liberalized their economies. Russia's privatization belongs to this global trend.",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"A worldwide turn toward free-market policies and reduced state economic roles\". From the 1980s on, many governments, both capitalist and formerly communist, sold state enterprises and liberalized their economies. Russia's privatization belongs to this global trend.\n\"The spread of Green Revolution farming techniques that raised grain yields in developing nations\" is incorrect: The Green Revolution was a real agricultural change in the twentieth century, but it has no connection to the ownership of Russian industry.\n\"The expansion of government economic planning in response to the Great Depression of the 1930s\" is incorrect: Depression-era planning increased the state's economic role, so it comes from the wrong period and points in the opposite direction.\n\"A global wave of decolonization that created dozens of new states across Africa and Asia\" is incorrect: Decolonization happened mainly from the 1940s to the 1970s. It concerned political independence, not post-Soviet economic restructuring.",
+     "est_seconds": 50,
+     "facts": [
+      "Governments such as Margaret Thatcher's in Britain (1979-1990) privatized state industries in the 1980s.",
+      "After 1989-1991, former communist states in Eastern Europe and the Soviet Union moved toward market economies."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.B",
+      "key_evidence_in_source": "The excerpt describes moving state enterprises into private ownership and selling shares for cash, which fits the global free-market turn.",
+      "evidence_quote": "The next phase of the privatization program called for direct cash sales of shares in remaining state enterprises."
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 3
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ },
+ {
+  "cellId": "ap_world_history-w410",
+  "apSubjectCode": "ap_world_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_world_history-w410-k0",
+  "keywordCode": "9.6",
+  "unitCode": "9",
+  "skillPrimary": "1.B",
+  "structure": "shared_stimulus_set",
+  "archetype": "wh_w410",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "basic_learning"
+   }
+  ],
+  "gateOverride": "wh-r20-m-2026-10-22",
+  "run": "wh-r20-m",
+  "stockKey": "wh-r20-m:ap_world_history-w410-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "wh-r20-m-2026-10-22",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_world_history",
+  "itemFamilyId": "fam:wh-r20-m:ap_world_history-w410-k0",
+  "canonicalKey": "wh-r20-m:ap_world_history-w410-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_world_history:9.6",
+  "sharedWith": [],
+  "stockCell": "ap_world_history|9.6|1.B|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "wh-r20-m",
+    "gateVersion": "wh-r20-m-2026-10-22",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "txt-cs-singapore-1991"
+  ],
+  "exam": "WH4",
+  "payload": {
+   "archetype": "wh_w410",
+   "topic": "9.6",
+   "skill": "1.B",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(secondary source)\nSingapore: A Country Study (excerpt on cosmopolitan culture and national identity)\nBarbara Leitch LePoer, ed., Federal Research Division, Library of Congress, 1991 (research completed 1989). Library of Congress, Federal Research Division (Country Studies; full text via Internet Archive OCR). Reuse: public domain (U.S. government work, 17 U.S.C. 105). excerpted (1 segment); whitespace normalized; OCR line-break hyphenation rejoined; running page header removed; one OCR quotation-mark error corrected; no wording changed.\nContext: This reference book was written for the U.S. government around 1990; this passage describes society in Singapore, an island country in Southeast Asia that became independent in 1965.\n\n\"In contrast to many countries of the region, Singapore's avowed social values were secular, democratic (within certain limits), and nondiscriminatory. The content of the distinctive \"Singaporean identity\" and the proper balance between cosmopolitan and traditional values were issues that both preoccupied the leadership and would continue to shape the society in the 1990s. There was much public discussion of social identity, ethnicity, and the proper relation of Singaporeans to worldwide popular culture. Such discussion, often initiated by political leaders, tended to dichotomize habits and behavior into mutually exclusive \"Asian\" or \"Western\" categories. The initial premise was that Singapore should be a modernized but not a Westernized society, and that it would be a mistake for Singaporeans to become so thoroughly Westernized and cosmopolitan as to lose touch with their Asian roots and values.\"",
+   "wh_set": {
+    "unit": 9,
+    "stim_type": "secondary_text",
+    "theme": "Cosmopolitan society and national identity in Singapore",
+    "title": "Cosmopolitan society and national identity in Singapore",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "secondary_text",
+      "title": "Singapore: A Country Study (excerpt on cosmopolitan culture and national identity)",
+      "attribution": "Barbara Leitch LePoer, ed., Federal Research Division, Library of Congress, 1991 (research completed 1989). Library of Congress, Federal Research Division (Country Studies; full text via Internet Archive OCR). Reuse: public domain (U.S. government work, 17 U.S.C. 105). excerpted (1 segment); whitespace normalized; OCR line-break hyphenation rejoined; running page header removed; one OCR quotation-mark error corrected; no wording changed.",
+      "context": "This reference book was written for the U.S. government around 1990; this passage describes society in Singapore, an island country in Southeast Asia that became independent in 1965.",
+      "real_data": true,
+      "source_registry_id": "txt-cs-singapore-1991",
+      "source_sha256": "cbc3856e32078dd2bcf19ba96d1607d54c0a1257eb46f83d6daf5146c2fe9979"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "wh_w410_1B",
+     "topic": "9.6",
+     "skill": "1.B",
+     "stem": "The concern described in the excerpt about \"the proper relation of Singaporeans to worldwide popular culture\" is best explained by which development of the late twentieth century?",
+     "options": [
+      {
+       "text": "The expansion of Christian missionary schooling under British colonial rule in the Straits Settlements",
+       "why": "Missionary schooling belongs to the colonial period before 1965. It does not explain the debates about worldwide popular culture in the late 1980s and 1990s.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The worldwide spread of mass media and consumer entertainment, much of it from the United States",
+       "why": "Starting after 1945, film, television, music, and consumer brands, many of them American, spread worldwide. That spread made the \"worldwide popular culture\" the passage mentions a live issue for Singapore's leaders.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The circulation of Maoist revolutionary posters and slogans promoted abroad by China during the Cultural Revolution years",
+       "why": "Maoist propaganda was political material from Asia. It was not the global Western popular culture the passage describes.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "The export of Soviet socialist realist art and film to newly independent states across Southeast Asia during the Cold War",
+       "why": "Soviet cultural exports were real, but they were not the popular culture Singapore's leaders worried about. The passage sets Asian roots against Western influence, not Soviet influence.",
+       "value": null,
+       "label": "unrelated_development"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"The worldwide spread of mass media and consumer entertainment, much of it from the United States\". Starting after 1945, film, television, music, and consumer brands, many of them American, spread worldwide. That spread made the \"worldwide popular culture\" the passage mentions a live issue for Singapore's leaders.\n\"The expansion of Christian missionary schooling under British colonial rule in the Straits Settlements\" is incorrect: Missionary schooling belongs to the colonial period before 1965. It does not explain the debates about worldwide popular culture in the late 1980s and 1990s.\n\"The circulation of Maoist revolutionary posters and slogans promoted abroad by China during the Cultural Revolution years\" is incorrect: Maoist propaganda was political material from Asia. It was not the global Western popular culture the passage describes.\n\"The export of Soviet socialist realist art and film to newly independent states across Southeast Asia during the Cold War\" is incorrect: Soviet cultural exports were real, but they were not the popular culture Singapore's leaders worried about. The passage sets Asian roots against Western influence, not Soviet influence.",
+     "est_seconds": 50,
+     "facts": [
+      "After 1945, American films, television, and music spread widely around the world.",
+      "Singapore became an independent country in 1965."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "1.B",
+      "key_evidence_in_source": "The passage says there was public discussion of how Singaporeans should relate to worldwide popular culture.",
+      "evidence_quote": "the proper relation of Singaporeans to worldwide popular culture"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 1
+     }
+    },
+    {
+     "archetype": "wh_w410_3A",
+     "topic": "9.6",
+     "skill": "3.A",
+     "stem": "According to the excerpt, public discussion of identity in Singapore around 1990 tended to do which of the following?",
+     "options": [
+      {
+       "text": "Encourage Singaporeans to become fully Westernized in order to compete in the global economy",
+       "why": "The passage says it would be a mistake for Singaporeans to become so Westernized that they lost touch with their Asian roots.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Originate mainly among opposition groups protesting the government's discriminatory ethnic policies",
+       "why": "The passage says political leaders often started these discussions, and it calls Singapore's stated values nondiscriminatory.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "Sort behavior into separate Asian and Western categories, often at leaders' prompting",
+       "why": "The passage says these discussions were often started by political leaders and tended to split habits into separate \"Asian\" or \"Western\" categories.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Reject modernization entirely in favor of restoring precolonial village customs and economies",
+       "why": "The passage says Singapore should be \"modernized\" but not Westernized, so leaders did not reject modernization.",
+       "value": null,
+       "label": "overstated"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"Sort behavior into separate Asian and Western categories, often at leaders' prompting\". The passage says these discussions were often started by political leaders and tended to split habits into separate \"Asian\" or \"Western\" categories.\n\"Encourage Singaporeans to become fully Westernized in order to compete in the global economy\" is incorrect: The passage says it would be a mistake for Singaporeans to become so Westernized that they lost touch with their Asian roots.\n\"Originate mainly among opposition groups protesting the government's discriminatory ethnic policies\" is incorrect: The passage says political leaders often started these discussions, and it calls Singapore's stated values nondiscriminatory.\n\"Reject modernization entirely in favor of restoring precolonial village customs and economies\" is incorrect: The passage says Singapore should be \"modernized\" but not Westernized, so leaders did not reject modernization.",
+     "est_seconds": 40,
+     "facts": [
+      "Lee Kuan Yew served as Singapore's prime minister from 1959 to 1990."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.A",
+      "key_evidence_in_source": "The passage says the discussion was often started by political leaders and divided behavior into Asian or Western categories.",
+      "evidence_quote": "tended to dichotomize habits and behavior into mutually exclusive \"Asian\" or \"Western\" categories"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 2
+     }
+    },
+    {
+     "archetype": "wh_w410_4A",
+     "topic": "9.9",
+     "skill": "4.A",
+     "stem": "Which historical situation most directly helps explain why Singapore's leaders after 1965 were preoccupied with defining a distinctive \"Singaporean identity\"?",
+     "options": [
+      {
+       "text": "Singapore's leaders were responding to the collapse of the Soviet Union and the end of the Cold War in 1991",
+       "why": "The research for the book was finished in 1989, and the concern with identity began long before the Soviet Union collapsed in 1991.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "Singapore was a new state whose population mixed Chinese, Malay, and Indian communities",
+       "why": "Singapore became independent in 1965 after leaving Malaysia, and its population was made up of several ethnic communities. Leaders wanted a shared national identity that would sit above those ethnic loyalties.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Singapore joined Indonesia, Malaysia, Thailand, and the Philippines in founding ASEAN as a regional bloc in 1967",
+       "why": "Singapore did help found ASEAN in 1967. However, regional diplomatic cooperation does not explain why leaders were focused on national identity inside the country.",
+       "value": null,
+       "label": "true_but_not_responsive"
+      },
+      {
+       "text": "Singapore had been occupied by Japanese forces during the Second World War until Japan's surrender in 1945",
+       "why": "The Japanese occupation did happen, but it ended two decades before independence. It does not explain the later debates over Asian and Western values.",
+       "value": null,
+       "label": "true_but_not_responsive"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"Singapore was a new state whose population mixed Chinese, Malay, and Indian communities\". Singapore became independent in 1965 after leaving Malaysia, and its population was made up of several ethnic communities. Leaders wanted a shared national identity that would sit above those ethnic loyalties.\n\"Singapore's leaders were responding to the collapse of the Soviet Union and the end of the Cold War in 1991\" is incorrect: The research for the book was finished in 1989, and the concern with identity began long before the Soviet Union collapsed in 1991.\n\"Singapore joined Indonesia, Malaysia, Thailand, and the Philippines in founding ASEAN as a regional bloc in 1967\" is incorrect: Singapore did help found ASEAN in 1967. However, regional diplomatic cooperation does not explain why leaders were focused on national identity inside the country.\n\"Singapore had been occupied by Japanese forces during the Second World War until Japan's surrender in 1945\" is incorrect: The Japanese occupation did happen, but it ended two decades before independence. It does not explain the later debates over Asian and Western values.",
+     "est_seconds": 50,
+     "facts": [
+      "Singapore separated from Malaysia and became independent in 1965.",
+      "Singapore's population is mainly made up of Chinese, Malay, and Indian communities."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.A",
+      "key_evidence_in_source": "The context line gives the 1965 independence date, and the passage mentions ethnicity and the leadership's concern with a Singaporean identity.",
+      "evidence_quote": "The content of the distinctive \"Singaporean identity\""
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "likely"
+       },
+       {
+        "choice": 1,
+        "confidence": "likely"
+       }
+      ],
+      "panel_choice": 1
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ }
+]

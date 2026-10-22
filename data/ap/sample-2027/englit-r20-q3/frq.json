@@ -1,0 +1,293 @@
+[
+ {
+  "id": "fc4",
+  "plan": {
+   "id": "fc4",
+   "type": "literary_argument",
+   "seedText": "the tension between obligation to family or community and the pursuit of personal freedom",
+   "era": "contemporary",
+   "seed": 20401
+  },
+  "payload": {
+   "schema_version": "lit-frq-1",
+   "task_type": "literary_argument",
+   "template": "q3",
+   "title": "The Debt and the Door",
+   "prompt": {
+    "lead": "Many works of fiction place a character between what is owed to others and what the self wants. A son may stay on to run a failing farm after his father's stroke. A daughter may refuse the marriage her family has arranged and pay for it with exile. A young person may leave a small town for the city, only to find that the town's habits and loyalties came along. Such stories rarely let either side win cleanly. A duty can hold a life together or choke it, and freedom can be a rescue or a quiet desertion. Often the character cannot tell which is which until it is too late.",
+    "task": "Either from your own reading or from the list below, choose a work of fiction in which a character feels torn between obligation to family or community and the pursuit of personal freedom. Then, in a well-written essay, analyze how the character's divided loyalties and the choice, or refusal to choose, that results contributes to an interpretation of the work as a whole. Do not merely summarize the plot.",
+    "requirements": [
+     "State a defensible thesis about how the idea in the prompt contributes to an interpretation of the work as a whole.",
+     "Support the argument with specific, accurate evidence from the work you chose, and explain how that evidence supports your line of reasoning.",
+     "Do not merely summarize the plot.",
+     "Write clearly, with appropriate grammar and punctuation."
+    ]
+   },
+   "works_list": [
+    {
+     "title": "Beloved",
+     "author": "Toni Morrison"
+    },
+    {
+     "title": "The Stranger",
+     "author": "Albert Camus"
+    },
+    {
+     "title": "Oedipus Rex",
+     "author": "Sophocles"
+    },
+    {
+     "title": "Pride and Prejudice",
+     "author": "Jane Austen"
+    },
+    {
+     "title": "Othello",
+     "author": "William Shakespeare"
+    },
+    {
+     "title": "The Kite Runner",
+     "author": "Khaled Hosseini"
+    },
+    {
+     "title": "Their Eyes Were Watching God",
+     "author": "Zora Neale Hurston"
+    },
+    {
+     "title": "Heart of Darkness",
+     "author": "Joseph Conrad"
+    },
+    {
+     "title": "Brave New World",
+     "author": "Aldous Huxley"
+    },
+    {
+     "title": "Things Fall Apart",
+     "author": "Chinua Achebe"
+    },
+    {
+     "title": "Macbeth",
+     "author": "William Shakespeare"
+    },
+    {
+     "title": "Never Let Me Go",
+     "author": "Kazuo Ishiguro"
+    },
+    {
+     "title": "The Namesake",
+     "author": "Jhumpa Lahiri"
+    },
+    {
+     "title": "The Great Gatsby",
+     "author": "F. Scott Fitzgerald"
+    },
+    {
+     "title": "The Importance of Being Earnest",
+     "author": "Oscar Wilde"
+    },
+    {
+     "title": "The Bluest Eye",
+     "author": "Toni Morrison"
+    },
+    {
+     "title": "Hamlet",
+     "author": "William Shakespeare"
+    },
+    {
+     "title": "The Remains of the Day",
+     "author": "Kazuo Ishiguro"
+    },
+    {
+     "title": "The Handmaid's Tale",
+     "author": "Margaret Atwood"
+    },
+    {
+     "title": "Middlemarch",
+     "author": "George Eliot"
+    },
+    {
+     "title": "A Streetcar Named Desire",
+     "author": "Tennessee Williams"
+    },
+    {
+     "title": "A Raisin in the Sun",
+     "author": "Lorraine Hansberry"
+    },
+    {
+     "title": "Frankenstein",
+     "author": "Mary Shelley"
+    },
+    {
+     "title": "The God of Small Things",
+     "author": "Arundhati Roy"
+    },
+    {
+     "title": "Crime and Punishment",
+     "author": "Fyodor Dostoevsky"
+    },
+    {
+     "title": "Great Expectations",
+     "author": "Charles Dickens"
+    },
+    {
+     "title": "Death of a Salesman",
+     "author": "Arthur Miller"
+    },
+    {
+     "title": "Song of Solomon",
+     "author": "Toni Morrison"
+    },
+    {
+     "title": "The Color Purple",
+     "author": "Alice Walker"
+    },
+    {
+     "title": "One Hundred Years of Solitude",
+     "author": "Gabriel Garcia Marquez"
+    },
+    {
+     "title": "Anna Karenina",
+     "author": "Leo Tolstoy"
+    },
+    {
+     "title": "Wuthering Heights",
+     "author": "Emily Bronte"
+    },
+    {
+     "title": "A Doll's House",
+     "author": "Henrik Ibsen"
+    },
+    {
+     "title": "To the Lighthouse",
+     "author": "Virginia Woolf"
+    },
+    {
+     "title": "Invisible Man",
+     "author": "Ralph Ellison"
+    },
+    {
+     "title": "The Metamorphosis",
+     "author": "Franz Kafka"
+    },
+    {
+     "title": "The Awakening",
+     "author": "Kate Chopin"
+    },
+    {
+     "title": "Jane Eyre",
+     "author": "Charlotte Bronte"
+    },
+    {
+     "title": "The Tempest",
+     "author": "William Shakespeare"
+    },
+    {
+     "title": "Mrs Dalloway",
+     "author": "Virginia Woolf"
+    }
+   ],
+   "rubric": {
+    "total_points": 6,
+    "rows": [
+     {
+      "row_id": "A",
+      "name": "Thesis",
+      "max": 1,
+      "descriptors": {
+       "0": "No defensible thesis: the response only restates the prompt, summarizes or describes the text, makes a comment that does not answer the prompt, or never states an interpretation that needs to be defended.",
+       "1": "The response states a defensible interpretation that answers the prompt (it may take more than one sentence and may appear anywhere in the essay)."
+      },
+      "task_specific": "The thesis must make a defensible claim about how the character's divided loyalties shape the meaning of the whole work, for example that the work presents freedom as a necessary betrayal. Simply restating the prompt does not earn the point. Neither does saying that a character faces a hard choice, or summarizing the character's decision without interpreting it. The thesis may be more than one sentence but must appear in one place in the essay."
+     },
+     {
+      "row_id": "B",
+      "name": "Evidence and commentary",
+      "max": 4,
+      "descriptors": {
+       "0": "Restates the thesis or the prompt, repeats given information, or offers irrelevant material; no usable evidence or commentary.",
+       "1": "Evidence is mostly general; the response summarizes or paraphrases and does not explain how the evidence supports an argument.",
+       "2": "Some specific, relevant evidence, mixed with generalities. Explains how some evidence relates to the argument, but no line of reasoning is established or it is faulty.",
+       "3": "Specific evidence for the claims in a line of reasoning, and explains how some of that evidence supports the line of reasoning, including how at least one literary element or technique contributes to meaning.",
+       "4": "Specific evidence supports every claim in a line of reasoning, the commentary consistently explains how the evidence supports it, and it explains how multiple literary elements or techniques contribute to meaning. Errors that interfere with communication prevent this level."
+      },
+      "task_specific": "Strong responses use specific, accurate references, such as particular scenes, objects, dialogue, or foil characters, that show both the pull of obligation and the pull of freedom. Commentary must explain how this evidence develops the interpretation; just retelling events is plot summary and is limited to 2 points at most. A 4 requires a consistent line of reasoning in which each piece of evidence advances the claim about the work as a whole. A 3 has sound evidence and commentary that is not always linked. A 1-2 is mostly summary or general statements."
+     },
+     {
+      "row_id": "C",
+      "name": "Sophistication",
+      "max": 1,
+      "descriptors": {
+       "0": "Does not meet the criteria for the point: contextualizing is limited to sweeping generalities, other readings are only hinted at, complexity is oversimplified, or elaborate language does not advance the argument.",
+       "1": "Shows sophistication of thought or develops a complex literary argument, sustained through the essay (not a phrase): explores tensions or complexities in the text, situates the interpretation in a broader context, accounts for alternative interpretations, or uses a consistently vivid and persuasive style."
+      },
+      "task_specific": "Award the point to a response that explores the complexity of the conflict across the whole essay. Examples: showing that duty is both love and constraint, that the self seeking freedom was formed by the community, or that the work deliberately refuses to resolve the conflict. The point can also go to a response that places the conflict in a broader cultural or historical context, or that writes with a consistently vivid, persuasive style. A single sentence that mentions complexity does not earn it."
+     }
+    ],
+    "scoring_notes": [
+     "Any work of fiction of literary merit is acceptable; do not reward or penalize a response for its choice of work.",
+     "A minor factual error about the work should not count against the response unless it weakens the argument.",
+     "A response that treats obligation versus freedom as purely one-sided can still earn Row B points but rarely earns Row C.",
+     "For the literary argument question the evidence comes from the work the student chooses: it must be specific and accurate, and the commentary must explain how the named concept contributes to an interpretation of the whole work rather than summarize the plot."
+    ]
+   },
+   "expected_features": {
+    "lines_of_reasoning": [
+     "Duty as identity: in a story about an eldest son who takes over the family shop, staying is self-erasure, but it is also the only self he knows, so the work questions the idea of a true self that lies outside the community.",
+     "Freedom as betrayal: in a novel about an emigrant who prospers abroad, success comes with guilt toward the people left behind, which suggests that no freedom is ever fully paid for.",
+     "Arranged marriage or inheritance plots: a daughter's refusal exposes how the community's rules work, and what she loses shows how much it costs to change them.",
+     "Return narratives: a character comes home and finds that freedom was partly an illusion, because the values they fled shaped what they did with their freedom.",
+     "Divided pairs or foils: two siblings or friends each make the opposite choice, and the work shows the losses on both sides instead of naming a winner.",
+     "Delayed or refused choice: a character who never decides, or who decides too late, suggests that indecision itself becomes a fate.",
+     "Collective obligation: in works about a colonized, immigrant, or persecuted community, leaving can look like abandoning a shared struggle, which makes private freedom a political question.",
+     "Tragic resolution: in a drama where a character's choice ends in death or ruin, the work shows that the community cannot make room for individuality, or that the individual cannot exist without the community."
+    ],
+    "defensible_positions": [
+     "The work suggests that obligation, though confining, gives life its meaning.",
+     "The work argues that freedom requires a loss that the character never stops mourning.",
+     "The work shows that duty and desire cannot be separated, because the self is formed by the community it resists.",
+     "The work criticizes communities that turn love into control."
+    ],
+    "common_pitfalls": [
+     "Summarizing the plot of the leaving or staying instead of analyzing what the conflict means.",
+     "Treating the conflict as one-sided (duty is bad, freedom is good) when the work presents it as complex.",
+     "Forcing a work to fit when the character has no real competing obligation.",
+     "Writing about the character's feelings without connecting them to the meaning of the work as a whole.",
+     "Choosing poetry or nonfiction, or a work whose details the student cannot recall accurately."
+    ],
+    "devices": [
+     {
+      "device": "juxtaposition",
+      "quote": "(student-selected) scenes of home placed against scenes of escape",
+      "effect": "shows what each choice gains and loses"
+     },
+     {
+      "device": "motif",
+      "quote": "(student-selected) recurring letters, meals, or journeys",
+      "effect": "follows how the pull of obligation persists over time"
+     }
+    ]
+   },
+   "samples": [],
+   "blueprint": {
+    "concept": "obligation versus personal freedom",
+    "central_idea": "Fiction often presents duty and freedom as mutually defining rather than simply opposed: each costs something, and the work's meaning comes from how it weighs that cost.",
+    "complexity": "Obligation can be love or coercion, and freedom can be self-realization or abandonment. Many works refuse to resolve this, or show that the community shapes the self that wants to escape it.",
+    "devices": [
+     {
+      "device": "symbol",
+      "quote": "(student-selected) e.g., a threshold, road, house, or inherited object",
+      "function": "embodies the pull of staying or leaving"
+     },
+     {
+      "device": "contrast",
+      "quote": "(student-selected) e.g., a sibling who stays against one who leaves",
+      "function": "externalizes the internal division"
+     }
+    ]
+   },
+   "provenance": {
+    "kind": "original",
+    "note": "ALTON original practice material; fictional writers, titles and works. Q3 lists real published works for student choice."
+   }
+  }
+ }
+]

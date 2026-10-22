@@ -1,0 +1,101 @@
+{
+ "runs": [
+  "englit-r20-q3"
+ ],
+ "rows": 1,
+ "passed": 1,
+ "rejected": 0,
+ "mcSets": {
+  "rows": 0,
+  "passed": 0
+ },
+ "frqSets": {
+  "rows": 1,
+  "passed": 1
+ },
+ "mcItems": {
+  "generated": 0,
+  "deterministicPass": 0,
+  "solversAgree": 0,
+  "finalPass": 0,
+  "firstPassRate": 0
+ },
+ "failureReasons": {},
+ "keyConfidence": {
+  "items": 0,
+  "high": 0,
+  "medium": 0,
+  "mean": 0
+ },
+ "categoriesPassed": {},
+ "skillsPassed": {},
+ "renderTypesPassed": {
+  "none": 1
+ },
+ "frqAudit": [
+  {
+   "id": "fc4",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 6,
+     "spread": 0,
+     "factualErrorGraders": 0
+    },
+    {
+     "k": 1,
+     "total": 6,
+     "spread": 1,
+     "factualErrorGraders": 0
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "fc4",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 4,
+     "spread": 0,
+     "factualErrorGraders": 0
+    },
+    {
+     "k": 1,
+     "total": 5,
+     "spread": 1,
+     "factualErrorGraders": 1
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "fc4",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 2,
+     "spread": 1,
+     "factualErrorGraders": 1
+    },
+    {
+     "k": 1,
+     "total": 2,
+     "spread": 0,
+     "factualErrorGraders": 0
+    }
+   ],
+   "chosen": 1
+  }
+ ],
+ "costUsd": {
+  "englit-r20-q3": {
+   "frq-gen": 0.0329,
+   "frq-grade": 0.4695,
+   "frq-samples": 0.112
+  }
+ }
+}

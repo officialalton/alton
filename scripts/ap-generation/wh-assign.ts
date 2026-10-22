@@ -2,7 +2,7 @@
 //   npx tsx scripts/ap-generation/wh-assign.ts --sets WH1[,WH2] [--time-ms 120000] [--write-report data/ap/stock/exact-assign-worldhistory-wh1-wh2.json] [--files wh-p1a-items,...] [--no-screen] [--highs]
 // 조건(lib/ap-exam/wh-rules.ts): MC 55 = 3–4문항 세트 14–18개, 단원(Period) 범위(2–4/3–5/5–10×6/2–4), 자료 유형 최소(paired≥1·quantitative≥1·primary≥5·secondary≥2), 스킬 범주 1–5 각 ≥3·6.x 금지,
 //   FRQ 5 = saq1·saq2·saq3(서로 다른 시대)·dbq·leq 각 1. 두 시험 사이 같은 후보 0, 문항군(주제)은 두 시험을 합쳐 1 번. 가상 칸 없음: 재고만으로 불가능하면 해 없음.
-import { writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import { solveMip, type Cons } from "../../lib/ap-exam/ilp";
 import { WH_FRQ_COUNT, WH_FRQ_TEMPLATES, WH_FULL_TARGET, WH_MC_COUNT, WH_SET_COUNT, WH_SET_SIZE, WH_SKILL_CATEGORY_MIN, WH_STIM_MIN, WH_STIM_TYPES, whUnitBounds, verifyWhFullComposition, type WhSetItem } from "../../lib/ap-exam/wh-rules";
 import { loadWhPool, type WhItem } from "./wh-pool";
@@ -74,8 +74,9 @@ export function unitSummary(r: WhResult) { const c: Record<string, number> = {};
 function main() {
   const ids = arg("--sets", "WH1,WH2").split(",").filter(Boolean); const TIME = Number(arg("--time-ms", "120000")); const files = arg("--files") ? arg("--files").split(",") : undefined;
   const { pool } = loadWhPool({ requireScreen: !has("--no-screen"), files }); const log = (s: string) => console.error(s);
-  const m = solveWhSets(ids, pool, { timeMs: TIME, log, highs: has("--highs"), mcOnly: has("--mc-only") });
-  const bad = m.res.x.length ? verifyWhAssignment(m.out).filter((v) => !has("--mc-only") || !/frq/.test(v)) : ["해 없음(재고만으로 공식 구조를 채울 수 없음)"];
+  const blocked = new Set<string>(); for (const f of arg("--block-file").split(",").filter(Boolean)) for (const st of (JSON.parse(readFileSync(f, "utf-8")) as { sets: { mcA?: string[]; mcB?: string[]; frqA?: string[]; frqB?: string[] }[] }).sets) for (const k of [...(st.mcA ?? []), ...(st.mcB ?? []), ...(st.frqA ?? []), ...(st.frqB ?? [])]) blocked.add(k); // DB 공개 세트가 쓰는 키(blocked-db-*.json)
+  const m = solveWhSets(ids, pool, { timeMs: TIME, log, blocked, highs: has("--highs"), mcOnly: has("--mc-only") });
+  const bad = m.res.x.length ? verifyWhAssignment(m.out, blocked).filter((v) => !has("--mc-only") || !/frq/.test(v)) : ["해 없음(재고만으로 공식 구조를 채울 수 없음)"];
   const cnt = (f: (c: WhItem) => boolean) => pool.filter(f).length;
   console.log(`# wh-assign sets=${ids.join(",")} 재고 MC 세트 ${cnt((c) => c.kind === "mc")} (문항 ${pool.filter((c) => c.kind === "mc").reduce((a, c) => a + c.members.length, 0)}) FRQ ${cnt((c) => c.kind === "frq")} (${WH_FRQ_TEMPLATES.map((t) => `${t}:${cnt((c) => c.template === t)}`).join(" ")})`);
   console.log(`status=${m.res.status} 목적값(단원 목표 이탈)=${m.res.obj}`);

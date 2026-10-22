@@ -1,0 +1,503 @@
+[
+ {
+  "cellId": "ap_world_history-wh4_saq2",
+  "apSubjectCode": "ap_world_history",
+  "kind": "frq_bundle",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_world_history-wh4_saq2-k0",
+  "keywordCode": "6.1",
+  "unitCode": "6",
+  "skillPrimary": "3.A",
+  "structure": "frq_multipart",
+  "archetype": "whfrq_wh4_saq2",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "gateOverride": "wh-r20-f-2026-10-22",
+  "run": "wh-r20-f",
+  "stockKey": "wh-r20-f:ap_world_history-wh4_saq2-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "wh-r20-f-2026-10-22",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_world_history",
+  "itemFamilyId": "fam:wh-r20-f:ap_world_history-wh4_saq2-k0",
+  "canonicalKey": "wh-r20-f:ap_world_history-wh4_saq2-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_world_history:6.1",
+  "sharedWith": [],
+  "stockCell": "ap_world_history|6.1|3.A|frq_multipart|na",
+  "history": [
+   {
+    "run": "wh-r20-f",
+    "gateVersion": "wh-r20-f-2026-10-22",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "txt-meiji-constitution-1889"
+  ],
+  "exam": "WH4",
+  "payload": {
+   "archetype": "whfrq_wh4_saq2",
+   "template": "saq2",
+   "topic": "6.1",
+   "extra_topics": [],
+   "skill": "3.A",
+   "representative_skill": "3.A",
+   "calculator": "na",
+   "title": "The Meiji Constitution of 1889: An Elected Assembly Within Imperial Limits",
+   "set_intro": "Historical source (real document)\n(primary source)\nImperial Speech on the promulgation of the Constitution of the Empire of Japan, 1889 (excerpt)\nMeiji Emperor of Japan (English translation in The Constitution of Japan: With the Laws Appertaining Thereto, and the Imperial Oath and Speech, 1889), 1889 (promulgated February 11, 1889). Wikisource (English Wikisource transcription of the 1889 English-language edition). Reuse: public domain in the United States (published before 1929). excerpted (2 segments joined by [...]); text extracted from the Wikisource page (revision 13263409) and whitespace normalized; no wording changed.\nContext: The Meiji Emperor issued this speech and Japan's first modern constitution in February 1889, about two decades after the Meiji Restoration of 1868.\n\n\"Having, by virtue of the glories of Our Ancestors, ascended the throne of a lineal succession unbroken for ages eternal; desiring to promote the welfare of, and to give development to, the moral and intellectual faculties of Our beloved subjects, the very same that have been favoured with the benevolent care and affectionate vigilance of Our Ancestors; and hoping to maintain the prosperity of the State, in concert with Our people and with their support, We hereby promulgate, in pursuance of Our Imperial Rescript of the 12th day of the 10th month of the 14th year of Meiji, a fundamental law of State, to exhibit the principles by which We are to be guided in Our conduct, and to point out to what Our descendants and Our subjects and their descendants are forever to conform. The rights of sovereignty of the State, We have inherited from Our Ancestors, and We shall bequeath them to Our descendants. Neither We nor they shall in future fail to wield them, in accordance with the provisions of the Constitution hereby granted. We now declare to respect and protect the security of the rights and of the property of Our people, and to secure to them the complete enjoyment of the same, within the extent of the provisions of the present Constitution and of the law. [...] The Imperial Diet shall first be convoked for the 23rd year of Meiji, and the time of its opening shall be the date when the present Constitution comes into force. When in the future it may become necessary to amend any of the provisions of the present Constitution, We or Our succcessors shall assume the initiative right, and submit a project for the same to the Imperial Diet. The Imperial Diet shall pass its vote upon it, according to the conditions imposed by the present Constitution, and in no otherwise shall Our descendants or Our subjects be permitted to attempt any alteration thereof.\"",
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Briefly describe ONE way the excerpt shows the emperor keeping authority over the constitutional system he announces.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.A"
+     ],
+     "topic_codes": [
+      "6.1"
+     ],
+     "model_answer": "The speech says the emperor inherited the rights of sovereignty from his ancestors and will pass them to his descendants, so authority comes from the imperial line and not from the people.",
+     "rubric_rows": [
+      {
+       "row_id": "a",
+       "points": 1,
+       "criterion": "Describes a feature of the speech showing that the emperor keeps authority, such as the claim that sovereignty is inherited from imperial ancestors, the presentation of the constitution as something the emperor grants, rights protected only within the limits of the constitution and the law, or the emperor alone holding the right to propose amendments.",
+       "required_elements": [
+        "The speech says the emperor inherited the rights of sovereignty from his ancestors and will pass them to his descendants, so authority comes from the imperial line and not from the people.",
+        "The emperor calls the document the constitution 'hereby granted,' presenting it as a gift from the throne and not as an agreement with his subjects.",
+        "The emperor promises to protect his subjects' rights and property only 'within the extent of the provisions of the present Constitution and of the law,' so those rights have limits set from above.",
+        "Only the emperor or his successors may propose amendments, and the Diet may only vote on them, so the elected body cannot start changes to the constitution."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Briefly explain ONE specific historical development in Japan in the period 1868 to 1890 that helps explain why the Meiji government created a constitution and an elected assembly. Do not use the Imperial Rescript mentioned in the excerpt as your answer.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.A"
+     ],
+     "topic_codes": [
+      "6.1"
+     ],
+     "model_answer": "The Freedom and People's Rights Movement of the 1870s and 1880s, led by figures such as Itagaki Taisuke, petitioned for an elected national assembly and pushed the government to set up representative institutions on its own terms.",
+     "rubric_rows": [
+      {
+       "row_id": "b",
+       "points": 1,
+       "criterion": "Explains a specific development in Japan from 1868 to 1890, other than the 1881 Imperial Rescript, that helps explain the adoption of a constitution and an elected assembly, such as the Freedom and People's Rights Movement, the goal of revising the unequal treaties, Ito Hirobumi's study of European (especially German) constitutions, or the 1868 Charter Oath's promise of deliberative assemblies.",
+       "required_elements": [
+        "The Freedom and People's Rights Movement of the 1870s and 1880s, led by figures such as Itagaki Taisuke, petitioned for an elected national assembly and pushed the government to set up representative institutions on its own terms.",
+        "The Meiji government wanted to revise the unequal treaties signed with Western powers in the 1850s and 1860s, and a Western-style constitution and legislature helped show that Japan was a modern state that deserved equal treatment.",
+        "In the early 1880s Ito Hirobumi studied European constitutions, especially in Germany, and the German model of a strong monarch with a limited parliament shaped the 1889 constitution.",
+        "The Charter Oath of 1868 promised that deliberative assemblies would be established and that matters would be decided by public discussion, which gave reformers grounds to demand a national assembly."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Briefly explain ONE similarity OR ONE difference between Japan's constitutional reform of 1889 and constitutional reform in the Ottoman Empire in the period 1839 to 1900.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.A"
+     ],
+     "topic_codes": [
+      "6.1"
+     ],
+     "model_answer": "Similarity: the Ottoman constitution of 1876 and the Meiji constitution of 1889 were both issued by monarchs from above, not won by a popular revolution, and both kept major powers with the ruler.",
+     "rubric_rows": [
+      {
+       "row_id": "c",
+       "points": 1,
+       "criterion": "Explains an accurate similarity or difference with the Ottoman constitutional reform of 1876 or the Tanzimat era, such as both constitutions being granted by a monarch, both being shaped in part by Western pressure and models, or the contrast that Abdulhamid II suspended the Ottoman constitution and parliament in 1878 while the Imperial Diet kept meeting after 1890.",
+       "required_elements": [
+        "Similarity: the Ottoman constitution of 1876 and the Meiji constitution of 1889 were both issued by monarchs from above, not won by a popular revolution, and both kept major powers with the ruler.",
+        "Similarity: both reforms came as states facing Western pressure tried to strengthen themselves by adopting European-style legal and political institutions, as with the Ottoman Tanzimat reforms and the Meiji reforms.",
+        "Difference: Sultan Abdulhamid II suspended the Ottoman constitution and closed parliament in 1878, while Japan's Imperial Diet first met in 1890 and kept meeting through the rest of the century.",
+        "Difference: the Ottoman constitutional period of the 1870s ended quickly and gave way to Abdulhamid II's personal rule, while in Japan the constitution stayed in force and parties in the elected lower house kept clashing with the government over budgets."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "reference_text": "Scoring guide (ALTON reference — not official AP scoring). This question is worth 3 points.\nPart A (0-1): Describes a feature of the speech showing that the emperor keeps authority, such as the claim that sovereignty is inherited from imperial ancestors, the presentation of the constitution as something the emperor grants, rights protected only within the limits of the constitution and the law, or the emperor alone holding the right to propose amendments.\n   - 1: The response accurately describes one way the excerpt shows the emperor keeping authority, tied to what the speech actually says.\n   - 0: The response does not describe a feature of the excerpt that shows imperial authority, or it misreads the excerpt (for example, saying the people or the Diet wrote the constitution).\nPart B (0-1): Explains a specific development in Japan from 1868 to 1890, other than the 1881 Imperial Rescript, that helps explain the adoption of a constitution and an elected assembly, such as the Freedom and People's Rights Movement, the goal of revising the unequal treaties, Ito Hirobumi's study of European (especially German) constitutions, or the 1868 Charter Oath's promise of deliberative assemblies.\n   - 1: The response explains one accurate, specific development from 1868 to 1890 and shows how it helps account for the constitution or the elected assembly.\n   - 0: The response names no relevant development, uses only the 1881 Rescript, gives an inaccurate development, or does not connect the development to the constitution or the assembly.\nPart C (0-1): Explains an accurate similarity or difference with the Ottoman constitutional reform of 1876 or the Tanzimat era, such as both constitutions being granted by a monarch, both being shaped in part by Western pressure and models, or the contrast that Abdulhamid II suspended the Ottoman constitution and parliament in 1878 while the Imperial Diet kept meeting after 1890.\n   - 1: The response explains one accurate similarity or difference between the Japanese and Ottoman constitutional reforms in the named period.\n   - 0: The response gives no accurate comparison, describes only one state, or makes an inaccurate claim about Ottoman reform.\nNote: Each part is scored on its own; a response can earn 0 to 3 points.\nNote: In Part A, a quotation alone does not earn the point; the response must say how the quoted words show imperial authority.\nNote: In Part B, responses that describe the limited voting rights or the appointed House of Peers describe the system created rather than a cause; credit them only if they explain why the government designed the assembly this way, such as following a German model that kept power with the monarch.\nNote: In Part C, the comparison must address both states; a correct statement about Japan alone earns no point.\nNote: ALTON reference — not official AP scoring\nAcceptable answers for A: The speech says the emperor inherited the rights of sovereignty from his ancestors and will pass them to his descendants, so authority comes from the imperial line and not from the people. / The emperor calls the document the constitution 'hereby granted,' presenting it as a gift from the throne and not as an agreement with his subjects. / The emperor promises to protect his subjects' rights and property only 'within the extent of the provisions of the present Constitution and of the law,' so those rights have limits set from above. / Only the emperor or his successors may propose amendments, and the Diet may only vote on them, so the elected body cannot start changes to the constitution.\nAcceptable answers for B: The Freedom and People's Rights Movement of the 1870s and 1880s, led by figures such as Itagaki Taisuke, petitioned for an elected national assembly and pushed the government to set up representative institutions on its own terms. / The Meiji government wanted to revise the unequal treaties signed with Western powers in the 1850s and 1860s, and a Western-style constitution and legislature helped show that Japan was a modern state that deserved equal treatment. / In the early 1880s Ito Hirobumi studied European constitutions, especially in Germany, and the German model of a strong monarch with a limited parliament shaped the 1889 constitution. / The Charter Oath of 1868 promised that deliberative assemblies would be established and that matters would be decided by public discussion, which gave reformers grounds to demand a national assembly.\nAcceptable answers for C: Similarity: the Ottoman constitution of 1876 and the Meiji constitution of 1889 were both issued by monarchs from above, not won by a popular revolution, and both kept major powers with the ruler. / Similarity: both reforms came as states facing Western pressure tried to strengthen themselves by adopting European-style legal and political institutions, as with the Ottoman Tanzimat reforms and the Meiji reforms. / Difference: Sultan Abdulhamid II suspended the Ottoman constitution and closed parliament in 1878, while Japan's Imperial Diet first met in 1890 and kept meeting through the rest of the century. / Difference: the Ottoman constitutional period of the 1870s ended quickly and gave way to Abdulhamid II's personal rule, while in Japan the constitution stayed in force and parties in the elected lower house kept clashing with the government over budgets.\n\nSample response, high score (3/3; Part A 1, Part B 1, Part C 1):\n(A) The excerpt shows the emperor keeping authority because he says only he and his successors \"shall assume the initiative right\" to propose amendments to the constitution. The Diet can vote on an amendment, but it cannot start one, and no one else is \"permitted to attempt any alteration.\" So the emperor controls how the constitutional system can ever change.\n\n(B) One development that explains the constitution is the Freedom and People's Rights Movement of the 1870s and 1880s. Activists like Itagaki Taisuke petitioned the government for an elected national assembly and formed political parties. The Meiji leaders felt this pressure, so they agreed to create a constitution and an elected Diet, but they wrote it themselves to keep it under their control.\n\n(C) One difference is that Japan's constitution lasted, while the Ottoman constitution of 1876 was quickly suspended. Sultan Abdulhamid II suspended the Ottoman constitution and closed parliament in 1878, only about two years after it was issued. In Japan the Imperial Diet first met in 1890 and kept meeting regularly after that, so Japan's constitutional system kept working.\n   - \"only he and his successors \"shall assume the initiative right\" to propose amendments\" - Ties a specific line of the excerpt to imperial control over amendments, which earns the point.\n   - \"So the emperor controls how the constitutional system can ever change.\" - Says how the quote shows authority instead of just quoting it, as the rubric note requires.\n   - \"Freedom and People's Rights Movement of the 1870s and 1880s\" - Names an accurate, specific development from inside 1868-1890 that is not the 1881 Rescript.\n   - \"so they agreed to create a constitution and an elected Diet\" - Shows how the movement's pressure caused the constitution and the assembly, which earns the point.\n   - \"Sultan Abdulhamid II suspended the Ottoman constitution and closed parliament in 1878\" - Makes an accurate claim about Ottoman reform within the named period.\n   - \"In Japan the Imperial Diet first met in 1890 and kept meeting regularly after that\" - Covers Japan as well, which completes a two-sided difference and earns the point.\n\nSample response, middle score (2/3; Part A 1, Part B 1, Part C 0):\n(A) The excerpt shows the emperor keeping authority because he says that he inherited the rights of sovereignty from his ancestors and that he will pass them on to his descendants. This means the power does not come from the people or from the new constitution, it comes from the imperial line. He also says the constitution is something \"We hereby promulgate\" and \"granted,\" so the emperor is the one giving it to the people, not the people making it.\n\n(B) One development was the Freedom and People's Rights Movement in the 1870s and 1880s. Former samurai and other leaders like Itagaki Taisuke wanted a national assembly and a say in government, because the early Meiji government was run by a small group from certain domains. They held meetings and sent petitions asking for an elected assembly. The government felt pressure from this movement, so it promised a constitution and a Diet, and it wrote the constitution in a way that let the government set the terms and keep control instead of giving in fully to the movement.\n\n(C) Japan's constitution and the Ottoman reforms were both about modernizing and trying to become stronger. Both empires wanted to deal with the Western powers, who were strong at that time. The Ottomans also had reforms in the 1800s that tried to change the government, and these were similar to what Japan did because both were trying to reform their governments.\n   - \"he inherited the rights of sovereignty from his ancestors and that he will pass them on to his descendants\" - Accurately describes a feature of the excerpt (inherited sovereignty) and says what it shows about imperial authority. Earns the point.\n   - \"the constitution is something \"We hereby promulgate\" and \"granted,\"\" - Extra accurate support: the constitution is presented as a grant from the emperor. The response explains what the quote shows, so it is not a bare quotation.\n   - \"Freedom and People's Rights Movement in the 1870s and 1880s\" - Names a specific, accurate development within 1868 to 1890 that is not the 1881 Rescript.\n   - \"They held meetings and sent petitions asking for an elected assembly. The government felt pressure from this movement, so it promised a constitution and a Diet\" - Connects the movement to the creation of the constitution and the assembly, which is the causal link the rubric requires. Earns the point.\n   - \"Both empires wanted to deal with the Western powers, who were strong at that time.\" - Too vague. It does not name the Ottoman constitution of 1876 or the Tanzimat, or explain how Western pressure shaped either reform. A general statement about both states does not earn the point.\n   - \"The Ottomans also had reforms in the 1800s that tried to change the government\" - Only says the Ottomans had reforms without specific evidence (no Tanzimat, no 1876 constitution, no 1878 suspension). The similarity is restated rather than explained, so no credit.\n\nSample response, low score (1/3; Part A 1, Part B 0, Part C 0):\n(A) The excerpt shows the emperor keeping authority because he says the rights of sovereignty were inherited from his ancestors and he will pass them on to his descendants. This means the power belongs to the emperor and his family line and did not come from the people or the Diet. The constitution is also something he \"hereby promulgates\" and grants, so he is the one giving it.\n\n(B) One development that helps explain the constitution was that Japan was changing a lot in the Meiji period. The government wanted to modernize and become strong like the Western countries, so it made many reforms. Having a constitution and an assembly was part of becoming a modern country, and this is why the Meiji government created them.\n\n(C) One difference is that Japan's constitution in 1889 gave the emperor a lot of power and the Diet had limited power. The emperor was seen as sacred and descended from the ancestors, and the constitution kept the government strong. The constitution made Japan a stronger country and the Diet was elected by only some men.\n   - \"the rights of sovereignty were inherited from his ancestors and he will pass them on to his descendants\" - Accurate description of a feature of the speech (inherited sovereignty) and explains that it places power with the emperor, not the people. Earns the point.\n   - \"The constitution is also something he \"hereby promulgates\" and grants, so he is the one giving it.\" - Adds a second correct link between the wording and imperial authority; reinforces the point.\n   - \"Japan was changing a lot in the Meiji period\" - Too general. Names no specific development such as the Freedom and People's Rights Movement, treaty revision, Ito's study of European constitutions, or the Charter Oath. No credit.\n   - \"Having a constitution and an assembly was part of becoming a modern country\" - Restates the outcome as the reason without explaining how any specific event led to the constitution. No credit.\n   - \"One difference is that Japan's constitution in 1889 gave the emperor a lot of power\" - Describes only Japan. The Ottoman Empire (1876 constitution, Tanzimat, suspension in 1878) is never mentioned, so there is no comparison. No credit.",
+   "whap_frq": {
+    "schema_version": "whap-frq-1",
+    "task_type": "saq",
+    "template": "saq2",
+    "era": 3,
+    "units": [
+     6
+    ],
+    "title": "The Meiji Constitution of 1889: An Elected Assembly Within Imperial Limits",
+    "prompt": {
+     "scenario": "In the period c. 1868 to c. 1900, the Meiji government of Japan carried out wide-ranging reforms after the Meiji Restoration of 1868. In 1889 it issued a written constitution that created the Imperial Diet, a national legislature with an elected lower house, while keeping strong powers in the hands of the emperor and his government.",
+     "task": "Using the excerpt, answer (a), (b), and (c).",
+     "requirements": [
+      "Each part must be answered with a specific, historically accurate statement.",
+      "Part A must rely on what the excerpt says.",
+      "Parts B and C must use evidence beyond the excerpt from the years named in each part."
+     ],
+     "parts": [
+      {
+       "label": "A",
+       "prompt": "Briefly describe ONE way the excerpt shows the emperor keeping authority over the constitutional system he announces.",
+       "points": 1
+      },
+      {
+       "label": "B",
+       "prompt": "Briefly explain ONE specific historical development in Japan in the period 1868 to 1890 that helps explain why the Meiji government created a constitution and an elected assembly. Do not use the Imperial Rescript mentioned in the excerpt as your answer.",
+       "points": 1
+      },
+      {
+       "label": "C",
+       "prompt": "Briefly explain ONE similarity OR ONE difference between Japan's constitutional reform of 1889 and constitutional reform in the Ottoman Empire in the period 1839 to 1900.",
+       "points": 1
+      }
+     ]
+    },
+    "sources": [
+     {
+      "id": "A",
+      "kind": "primary_text",
+      "title": "Imperial Speech on the promulgation of the Constitution of the Empire of Japan, 1889 (excerpt)",
+      "attribution": "Meiji Emperor of Japan (English translation in The Constitution of Japan: With the Laws Appertaining Thereto, and the Imperial Oath and Speech, 1889), 1889 (promulgated February 11, 1889). Wikisource (English Wikisource transcription of the 1889 English-language edition). Reuse: public domain in the United States (published before 1929). excerpted (2 segments joined by [...]); text extracted from the Wikisource page (revision 13263409) and whitespace normalized; no wording changed.",
+      "context": "The Meiji Emperor issued this speech and Japan's first modern constitution in February 1889, about two decades after the Meiji Restoration of 1868.",
+      "real_data": true,
+      "source_registry_id": "txt-meiji-constitution-1889",
+      "source_sha256": "8834d4f1bd8b53a0f816ae51a5f2238bb63a9d6c73a557ad04af32bee9dc47ca",
+      "body": "Having, by virtue of the glories of Our Ancestors, ascended the throne of a lineal succession unbroken for ages eternal; desiring to promote the welfare of, and to give development to, the moral and intellectual faculties of Our beloved subjects, the very same that have been favoured with the benevolent care and affectionate vigilance of Our Ancestors; and hoping to maintain the prosperity of the State, in concert with Our people and with their support, We hereby promulgate, in pursuance of Our Imperial Rescript of the 12th day of the 10th month of the 14th year of Meiji, a fundamental law of State, to exhibit the principles by which We are to be guided in Our conduct, and to point out to what Our descendants and Our subjects and their descendants are forever to conform. The rights of sovereignty of the State, We have inherited from Our Ancestors, and We shall bequeath them to Our descendants. Neither We nor they shall in future fail to wield them, in accordance with the provisions of the Constitution hereby granted. We now declare to respect and protect the security of the rights and of the property of Our people, and to secure to them the complete enjoyment of the same, within the extent of the provisions of the present Constitution and of the law. [...] The Imperial Diet shall first be convoked for the 23rd year of Meiji, and the time of its opening shall be the date when the present Constitution comes into force. When in the future it may become necessary to amend any of the provisions of the present Constitution, We or Our succcessors shall assume the initiative right, and submit a project for the same to the Imperial Diet. The Imperial Diet shall pass its vote upon it, according to the conditions imposed by the present Constitution, and in no otherwise shall Our descendants or Our subjects be permitted to attempt any alteration thereof.",
+      "provenance": {
+       "kind": "real_historical_source",
+       "real_data": true,
+       "note": "registry txt-meiji-constitution-1889"
+      }
+     }
+    ],
+    "rubric": {
+     "rubric_id": "whap-v1",
+     "total_points": 3,
+     "rows": [
+      {
+       "row_id": "a",
+       "name": "Part A",
+       "max": 1,
+       "descriptors": {
+        "0": "The response does not describe a feature of the excerpt that shows imperial authority, or it misreads the excerpt (for example, saying the people or the Diet wrote the constitution).",
+        "1": "The response accurately describes one way the excerpt shows the emperor keeping authority, tied to what the speech actually says."
+       },
+       "task_specific": "Describes a feature of the speech showing that the emperor keeps authority, such as the claim that sovereignty is inherited from imperial ancestors, the presentation of the constitution as something the emperor grants, rights protected only within the limits of the constitution and the law, or the emperor alone holding the right to propose amendments."
+      },
+      {
+       "row_id": "b",
+       "name": "Part B",
+       "max": 1,
+       "descriptors": {
+        "0": "The response names no relevant development, uses only the 1881 Rescript, gives an inaccurate development, or does not connect the development to the constitution or the assembly.",
+        "1": "The response explains one accurate, specific development from 1868 to 1890 and shows how it helps account for the constitution or the elected assembly."
+       },
+       "task_specific": "Explains a specific development in Japan from 1868 to 1890, other than the 1881 Imperial Rescript, that helps explain the adoption of a constitution and an elected assembly, such as the Freedom and People's Rights Movement, the goal of revising the unequal treaties, Ito Hirobumi's study of European (especially German) constitutions, or the 1868 Charter Oath's promise of deliberative assemblies."
+      },
+      {
+       "row_id": "c",
+       "name": "Part C",
+       "max": 1,
+       "descriptors": {
+        "0": "The response gives no accurate comparison, describes only one state, or makes an inaccurate claim about Ottoman reform.",
+        "1": "The response explains one accurate similarity or difference between the Japanese and Ottoman constitutional reforms in the named period."
+       },
+       "task_specific": "Explains an accurate similarity or difference with the Ottoman constitutional reform of 1876 or the Tanzimat era, such as both constitutions being granted by a monarch, both being shaped in part by Western pressure and models, or the contrast that Abdulhamid II suspended the Ottoman constitution and parliament in 1878 while the Imperial Diet kept meeting after 1890."
+      }
+     ],
+     "scoring_notes": [
+      "Each part is scored on its own; a response can earn 0 to 3 points.",
+      "In Part A, a quotation alone does not earn the point; the response must say how the quoted words show imperial authority.",
+      "In Part B, responses that describe the limited voting rights or the appointed House of Peers describe the system created rather than a cause; credit them only if they explain why the government designed the assembly this way, such as following a German model that kept power with the monarch.",
+      "In Part C, the comparison must address both states; a correct statement about Japan alone earns no point.",
+      "ALTON reference — not official AP scoring"
+     ]
+    },
+    "expected_features": {
+     "defensible_theses": [],
+     "contextualization_ideas": [
+      "Western pressure after the arrival of Commodore Perry in 1853 and the unequal treaties that followed.",
+      "Meiji state-building reforms such as the abolition of the domains in 1871 and universal military conscription in 1873.",
+      "Constitutional movements elsewhere in the nineteenth century, including the Ottoman Tanzimat and the 1876 constitution."
+     ],
+     "outside_evidence": [
+      "Freedom and People's Rights Movement",
+      "Itagaki Taisuke and the founding of political parties in the 1880s",
+      "Ito Hirobumi's study of European constitutions",
+      "Charter Oath of 1868",
+      "Revision of the unequal treaties",
+      "Ottoman constitution of 1876 and its suspension in 1878"
+     ],
+     "reasoning_types": [
+      "Sourcing and analysis of a primary text",
+      "Causation",
+      "Comparison"
+     ],
+     "doc_uses": [
+      {
+       "source_id": "Imperial Speech on the promulgation of the Constitution, 1889",
+       "usable_for": "Showing that the constitution was presented as a grant from the emperor, with sovereignty rooted in the imperial line and amendment power reserved to the throne.",
+       "sourcing": "An official speech issued in the emperor's name when the constitution was promulgated, read here in the 1889 official English translation; the emperor's point of view shows in his language of ancestral sovereignty and of rights 'granted' within limits."
+      }
+     ],
+     "saq_answers": {
+      "a": [
+       "The speech says the emperor inherited the rights of sovereignty from his ancestors and will pass them to his descendants, so authority comes from the imperial line and not from the people.",
+       "The emperor calls the document the constitution 'hereby granted,' presenting it as a gift from the throne and not as an agreement with his subjects.",
+       "The emperor promises to protect his subjects' rights and property only 'within the extent of the provisions of the present Constitution and of the law,' so those rights have limits set from above.",
+       "Only the emperor or his successors may propose amendments, and the Diet may only vote on them, so the elected body cannot start changes to the constitution."
+      ],
+      "b": [
+       "The Freedom and People's Rights Movement of the 1870s and 1880s, led by figures such as Itagaki Taisuke, petitioned for an elected national assembly and pushed the government to set up representative institutions on its own terms.",
+       "The Meiji government wanted to revise the unequal treaties signed with Western powers in the 1850s and 1860s, and a Western-style constitution and legislature helped show that Japan was a modern state that deserved equal treatment.",
+       "In the early 1880s Ito Hirobumi studied European constitutions, especially in Germany, and the German model of a strong monarch with a limited parliament shaped the 1889 constitution.",
+       "The Charter Oath of 1868 promised that deliberative assemblies would be established and that matters would be decided by public discussion, which gave reformers grounds to demand a national assembly."
+      ],
+      "c": [
+       "Similarity: the Ottoman constitution of 1876 and the Meiji constitution of 1889 were both issued by monarchs from above, not won by a popular revolution, and both kept major powers with the ruler.",
+       "Similarity: both reforms came as states facing Western pressure tried to strengthen themselves by adopting European-style legal and political institutions, as with the Ottoman Tanzimat reforms and the Meiji reforms.",
+       "Difference: Sultan Abdulhamid II suspended the Ottoman constitution and closed parliament in 1878, while Japan's Imperial Diet first met in 1890 and kept meeting through the rest of the century.",
+       "Difference: the Ottoman constitutional period of the 1870s ended quickly and gave way to Abdulhamid II's personal rule, while in Japan the constitution stayed in force and parties in the elected lower house kept clashing with the government over budgets."
+      ]
+     },
+     "common_pitfalls": [
+      "Saying the Meiji constitution created a democracy with popular sovereignty; the excerpt places sovereignty in the imperial line.",
+      "Using the 1881 rescript in Part B, which the excerpt already refers to.",
+      "Describing the Diet as fully elected; only the lower house was elected.",
+      "Giving events after 1890 in Part B or outside 1839 to 1900 in Part C.",
+      "Writing about Ottoman reform alone in Part C without comparing it to Japan.",
+      "Quoting the excerpt in Part A without explaining how the words show imperial authority."
+     ],
+     "facts": [
+      "The Meiji Restoration of 1868 restored formal political authority to the emperor and ended the Tokugawa shogunate.",
+      "The Charter Oath of 1868 promised deliberative assemblies.",
+      "An imperial rescript of 1881 promised a national assembly by 1890.",
+      "The Constitution of the Empire of Japan was promulgated on February 11, 1889.",
+      "The Imperial Diet first met in 1890 (the 23rd year of Meiji).",
+      "The Diet had two houses: an elected House of Representatives and a House of Peers made up largely of nobles and appointed members.",
+      "Voting for the lower house was limited to adult men who paid a high level of direct taxes, about 1 percent of the population in the first election.",
+      "Under the constitution ministers were responsible to the emperor, not to the Diet, and the emperor held supreme command of the army and navy.",
+      "Ito Hirobumi led the drafting of the constitution and drew on German constitutional models.",
+      "The Ottoman constitution was issued in 1876 and suspended by Abdulhamid II in 1878."
+     ]
+    },
+    "samples": [
+     {
+      "tier": "high",
+      "target_total": 3,
+      "essay": "(A) The excerpt shows the emperor keeping authority because he says only he and his successors \"shall assume the initiative right\" to propose amendments to the constitution. The Diet can vote on an amendment, but it cannot start one, and no one else is \"permitted to attempt any alteration.\" So the emperor controls how the constitutional system can ever change.\n\n(B) One development that explains the constitution is the Freedom and People's Rights Movement of the 1870s and 1880s. Activists like Itagaki Taisuke petitioned the government for an elected national assembly and formed political parties. The Meiji leaders felt this pressure, so they agreed to create a constitution and an elected Diet, but they wrote it themselves to keep it under their control.\n\n(C) One difference is that Japan's constitution lasted, while the Ottoman constitution of 1876 was quickly suspended. Sultan Abdulhamid II suspended the Ottoman constitution and closed parliament in 1878, only about two years after it was issued. In Japan the Imperial Diet first met in 1890 and kept meeting regularly after that, so Japan's constitutional system kept working.",
+      "word_count": 181,
+      "rubric_scores": {
+       "a": 1,
+       "b": 1,
+       "c": 1,
+       "total": 3
+      },
+      "annotations": [
+       {
+        "quote": "only he and his successors \"shall assume the initiative right\" to propose amendments",
+        "comment": "Ties a specific line of the excerpt to imperial control over amendments, which earns the point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "So the emperor controls how the constitutional system can ever change.",
+        "comment": "Says how the quote shows authority instead of just quoting it, as the rubric note requires.",
+        "row_id": "a"
+       },
+       {
+        "quote": "Freedom and People's Rights Movement of the 1870s and 1880s",
+        "comment": "Names an accurate, specific development from inside 1868-1890 that is not the 1881 Rescript.",
+        "row_id": "b"
+       },
+       {
+        "quote": "so they agreed to create a constitution and an elected Diet",
+        "comment": "Shows how the movement's pressure caused the constitution and the assembly, which earns the point.",
+        "row_id": "b"
+       },
+       {
+        "quote": "Sultan Abdulhamid II suspended the Ottoman constitution and closed parliament in 1878",
+        "comment": "Makes an accurate claim about Ottoman reform within the named period.",
+        "row_id": "c"
+       },
+       {
+        "quote": "In Japan the Imperial Diet first met in 1890 and kept meeting regularly after that",
+        "comment": "Covers Japan as well, which completes a two-sided difference and earns the point.",
+        "row_id": "c"
+       }
+      ]
+     },
+     {
+      "tier": "mid",
+      "target_total": 2,
+      "essay": "(A) The excerpt shows the emperor keeping authority because he says that he inherited the rights of sovereignty from his ancestors and that he will pass them on to his descendants. This means the power does not come from the people or from the new constitution, it comes from the imperial line. He also says the constitution is something \"We hereby promulgate\" and \"granted,\" so the emperor is the one giving it to the people, not the people making it.\n\n(B) One development was the Freedom and People's Rights Movement in the 1870s and 1880s. Former samurai and other leaders like Itagaki Taisuke wanted a national assembly and a say in government, because the early Meiji government was run by a small group from certain domains. They held meetings and sent petitions asking for an elected assembly. The government felt pressure from this movement, so it promised a constitution and a Diet, and it wrote the constitution in a way that let the government set the terms and keep control instead of giving in fully to the movement.\n\n(C) Japan's constitution and the Ottoman reforms were both about modernizing and trying to become stronger. Both empires wanted to deal with the Western powers, who were strong at that time. The Ottomans also had reforms in the 1800s that tried to change the government, and these were similar to what Japan did because both were trying to reform their governments.",
+      "word_count": 239,
+      "rubric_scores": {
+       "a": 1,
+       "b": 1,
+       "c": 0,
+       "total": 2
+      },
+      "annotations": [
+       {
+        "quote": "he inherited the rights of sovereignty from his ancestors and that he will pass them on to his descendants",
+        "comment": "Accurately describes a feature of the excerpt (inherited sovereignty) and says what it shows about imperial authority. Earns the point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "the constitution is something \"We hereby promulgate\" and \"granted,\"",
+        "comment": "Extra accurate support: the constitution is presented as a grant from the emperor. The response explains what the quote shows, so it is not a bare quotation.",
+        "row_id": "a"
+       },
+       {
+        "quote": "Freedom and People's Rights Movement in the 1870s and 1880s",
+        "comment": "Names a specific, accurate development within 1868 to 1890 that is not the 1881 Rescript.",
+        "row_id": "b"
+       },
+       {
+        "quote": "They held meetings and sent petitions asking for an elected assembly. The government felt pressure from this movement, so it promised a constitution and a Diet",
+        "comment": "Connects the movement to the creation of the constitution and the assembly, which is the causal link the rubric requires. Earns the point.",
+        "row_id": "b"
+       },
+       {
+        "quote": "Both empires wanted to deal with the Western powers, who were strong at that time.",
+        "comment": "Too vague. It does not name the Ottoman constitution of 1876 or the Tanzimat, or explain how Western pressure shaped either reform. A general statement about both states does not earn the point.",
+        "row_id": "c"
+       },
+       {
+        "quote": "The Ottomans also had reforms in the 1800s that tried to change the government",
+        "comment": "Only says the Ottomans had reforms without specific evidence (no Tanzimat, no 1876 constitution, no 1878 suspension). The similarity is restated rather than explained, so no credit.",
+        "row_id": "c"
+       }
+      ]
+     },
+     {
+      "tier": "low",
+      "target_total": 1,
+      "essay": "(A) The excerpt shows the emperor keeping authority because he says the rights of sovereignty were inherited from his ancestors and he will pass them on to his descendants. This means the power belongs to the emperor and his family line and did not come from the people or the Diet. The constitution is also something he \"hereby promulgates\" and grants, so he is the one giving it.\n\n(B) One development that helps explain the constitution was that Japan was changing a lot in the Meiji period. The government wanted to modernize and become strong like the Western countries, so it made many reforms. Having a constitution and an assembly was part of becoming a modern country, and this is why the Meiji government created them.\n\n(C) One difference is that Japan's constitution in 1889 gave the emperor a lot of power and the Diet had limited power. The emperor was seen as sacred and descended from the ancestors, and the constitution kept the government strong. The constitution made Japan a stronger country and the Diet was elected by only some men.",
+      "word_count": 182,
+      "rubric_scores": {
+       "a": 1,
+       "b": 0,
+       "c": 0,
+       "total": 1
+      },
+      "annotations": [
+       {
+        "quote": "the rights of sovereignty were inherited from his ancestors and he will pass them on to his descendants",
+        "comment": "Accurate description of a feature of the speech (inherited sovereignty) and explains that it places power with the emperor, not the people. Earns the point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "The constitution is also something he \"hereby promulgates\" and grants, so he is the one giving it.",
+        "comment": "Adds a second correct link between the wording and imperial authority; reinforces the point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "Japan was changing a lot in the Meiji period",
+        "comment": "Too general. Names no specific development such as the Freedom and People's Rights Movement, treaty revision, Ito's study of European constitutions, or the Charter Oath. No credit.",
+        "row_id": "b"
+       },
+       {
+        "quote": "Having a constitution and an assembly was part of becoming a modern country",
+        "comment": "Restates the outcome as the reason without explaining how any specific event led to the constitution. No credit.",
+        "row_id": "b"
+       },
+       {
+        "quote": "One difference is that Japan's constitution in 1889 gave the emperor a lot of power",
+        "comment": "Describes only Japan. The Ottoman Empire (1876 constitution, Tanzimat, suspension in 1878) is never mentioned, so there is no comparison. No credit.",
+        "row_id": "c"
+       }
+      ]
+     }
+    ],
+    "provenance": {
+     "kind": "alton_authored_from_real_sources",
+     "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+    }
+   },
+   "design": {
+    "source_fixed_first": true,
+    "documents_chosen_before_prompt": true
+   },
+   "verification": {
+    "fact_checker": "claude-fable-5-1",
+    "graders": [
+     "claude-opus-5-5",
+     "claude-sonnet-5-5"
+    ],
+    "fact_flags": [],
+    "sample_totals": {
+     "high": 3,
+     "mid": 2,
+     "low": 1
+    },
+    "bands": {
+     "high": [
+      3,
+      3
+     ],
+     "mid": [
+      2,
+      2
+     ],
+     "low": [
+      1,
+      1
+     ]
+    }
+   }
+  }
+ },
+ {
+  "__rejected": true,
+  "specId": "wh4_saq3",
+  "reason": "saq3_needs_non_text_source; sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate"
+ }
+]
