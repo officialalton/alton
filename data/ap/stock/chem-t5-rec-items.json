@@ -4069,5 +4069,364 @@
     "reasons": null
    }
   ]
+ },
+ {
+  "candidateKey": "ap_chemistry-m29-k1",
+  "cellId": "ap_chemistry-m29",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "3.8",
+  "unitCode": "3",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_n_particulate_solution",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recall and application: ionic solid dissociation into Mg2+ and 2 Cl- with hydration. Distractors are wrong charges, wrong ratio, or undissociated molecules. No computation, short stem, no graph or table. Calculator is irrelevant.",
+  "payload": {
+   "archetype": "ch_n_particulate_solution",
+   "topic": "3.8",
+   "skill": "1.A",
+   "calculator": "allowed",
+   "stem": "Which of the following particulate representations best shows what happens when solid MgCl2 dissolves in water?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Two Mg⁺ ions and one Cl²⁻ ion are shown for each formula unit.",
+     "why": "The charges are wrong: magnesium forms 2+ and chloride 1−.",
+     "value": null
+    },
+    {
+     "text": "One Mg²⁺ ion and one Cl⁻ ion are shown for each formula unit.",
+     "why": "The formula unit contains two chloride ions.",
+     "value": null
+    },
+    {
+     "text": "One Mg²⁺ ion and two Cl⁻ ions per formula unit, each hydrated by water molecules.",
+     "why": "MgCl2 dissociates into one Mg²⁺ and two Cl⁻.",
+     "value": null
+    },
+    {
+     "text": "Intact MgCl2 molecules are shown surrounded by water.",
+     "why": "An ionic compound does not remain as molecules in water.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 70,
+   "facts": [
+    "Which of the following particulate representations best show"
+   ],
+   "blueprint": {
+    "id": "ch_n_particulate_solution",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "choose a correct particulate model of a solution",
+    "topic": "3.8",
+    "skill": "1.A",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: choose a correct particulate model of a solution",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "The charges are wrong: magnesium forms 2+ and chloride 1−."
+     },
+     {
+      "id": "m2",
+      "description": "The formula unit contains two chloride ions."
+     },
+     {
+      "id": "m3",
+      "description": "An ionic compound does not remain as molecules in water."
+     }
+    ],
+    "verification": {
+     "independent_path": "fixed fact bank checked against CED 3.8",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "apply a chemical principle to a specific case and reject plausible misconceptions"
+   },
+   "seed": 13001,
+   "pack_id": "ch_n_particulate_solution-s13001",
+   "explanation_en": "The correct answer is One Mg²⁺ ion and two Cl⁻ ions per formula unit, each hydrated by water molecules.. MgCl2 dissociates into one Mg²⁺ and two Cl⁻.\nTwo Mg⁺ ions and one Cl²⁻ ion are shown for each formula unit. is incorrect: The charges are wrong: magnesium forms 2+ and chloride 1−.\nOne Mg²⁺ ion and one Cl⁻ ion are shown for each formula unit. is incorrect: The formula unit contains two chloride ions.\nIntact MgCl2 molecules are shown surrounded by water. is incorrect: An ionic compound does not remain as molecules in water."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_n_particulate_solution",
+   "facts": [
+    "Which of the following particulate representations best show"
+   ],
+   "seed": 13001
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 30-70 seconds with no calculation, which suits the exam. It is somewhat easy, but it is a standard 3.8 conceptual item.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous particulate-model question on MgCl2 dissolving. It has a single correct answer, and each distractor reflects a distinct misconception. It is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall and application: ionic solid dissociation into Mg2+ and 2 Cl- with hydration. Distractors are wrong charges, wrong ratio, or undissociated molecules. No computation, short stem, no graph or table. Calculator is irrelevant.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "chem-ch3-mc",
+  "stockKey": "chem-ch3-mc:ap_chemistry-m29-k1",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": true,
+  "family": "ap_chemistry",
+  "itemFamilyId": "fam:chem-ch3-mc:ap_chemistry-m29-k0",
+  "canonicalKey": "chem-ch3-mc:ap_chemistry-m29-k1",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_chemistry:3.8",
+  "sharedWith": [],
+  "stockCell": "ap_chemistry|3.8|1.A|standalone|na",
+  "history": [
+   {
+    "run": "chem-ch3-mc",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_chemistry-m01-k0",
+  "cellId": "ap_chemistry-m01",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "5.3",
+  "unitCode": "5",
+  "skillPrimary": "5.F",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_n_second_order_time",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Direct application of the second-order integrated rate law 1/[A] = 1/[A]0 + kt, which is on the reference sheet. It takes two reciprocals, a subtraction and a division with clean numbers. There is no graph, no unit conversion and no linking claim. The main skill is recognizing second order from the stem. The 2A coefficient is a mild distraction but does not change the standard approach.",
+  "payload": {
+   "archetype": "ch_n_second_order_time",
+   "topic": "5.3",
+   "skill": "5.F",
+   "calculator": "allowed",
+   "stem": "The reaction 2 A → products is second order in A with a rate constant of $0.1\\text{ L/(mol s)}$. How long does it take for the concentration of A to fall from $0.2\\text{ M}$ to $0.04\\text{ M}$?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$16.1\\text{ s}$",
+     "why": "Uses the first-order integrated rate law.",
+     "value": "16.094379"
+    },
+    {
+     "text": "$200\\text{ s}$",
+     "why": "For second order 1/[A] = 1/[A]0 + kt, so t = (1/0.04 − 1/0.2)/0.1 = 200 s.",
+     "value": "200.00000"
+    },
+    {
+     "text": "$0.400\\text{ s}$",
+     "why": "Divides the final concentration by the rate constant.",
+     "value": "0.40000000"
+    },
+    {
+     "text": "$1.60\\text{ s}$",
+     "why": "Subtracts the concentrations and divides by the rate constant.",
+     "value": "1.6000000"
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 85,
+   "facts": [
+    "k=0.1",
+    "A0=0.2",
+    "A=0.04"
+   ],
+   "blueprint": {
+    "id": "ch_n_second_order_time",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "time for a second-order concentration change from the integrated rate law",
+    "topic": "5.3",
+    "skill": "5.F",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: time for a second-order concentration change from the integrated rate law",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Uses the first-order integrated rate law."
+     },
+     {
+      "id": "m2",
+      "description": "Divides the final concentration by the rate constant."
+     },
+     {
+      "id": "m3",
+      "description": "Subtracts the concentrations and divides by the rate constant."
+     }
+    ],
+    "verification": {
+     "independent_path": "1/[A] = 1/[A]0 + kt solved directly vs bisection on the concentration curve",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "choose the integrated rate law that matches the order"
+   },
+   "seed": 14000,
+   "pack_id": "ch_n_second_order_time-s14000",
+   "explanation_en": "The correct answer is $200\\text{ s}$. For second order 1/[A] = 1/[A]0 + kt, so t = (1/0.04 − 1/0.2)/0.1 = 200 s.\n$16.1\\text{ s}$ is incorrect: Uses the first-order integrated rate law.\n$0.400\\text{ s}$ is incorrect: Divides the final concentration by the rate constant.\n$1.60\\text{ s}$ is incorrect: Subtracts the concentrations and divides by the rate constant."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_n_second_order_time",
+   "facts": [
+    "k=0.1",
+    "A0=0.2",
+    "A=0.04"
+   ],
+   "seed": 14000
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Integrated second-order rate law, topic 5.3, skill 5.F; no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "t=(25-5)/0.1=200 s; unique correct answer under the standard convention."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem gives all quantities."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors map to distinct named misconceptions (first-order law, final concentration over k, subtracting concentrations over k) and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 s, simple arithmetic, calculator allowed, typical AP MC."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean second-order integrated rate law calculation with a correct key of 200 s and three distinct misconception distractors. The \"2 A\" stoichiometry is a very minor potential ambiguity, but the standard AP convention resolves it."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct application of the second-order integrated rate law 1/[A] = 1/[A]0 + kt, which is on the reference sheet. It takes two reciprocals, a subtraction and a division with clean numbers. There is no graph, no unit conversion and no linking claim. The main skill is recognizing second order from the stem. The 2A coefficient is a mild distraction but does not change the standard approach.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  },
+  "gateOverride": "v2-code-first-final-2026-10-08",
+  "run": "chem-ch3-mcr2",
+  "stockKey": "chem-ch3-mcr2:ap_chemistry-m01-k0",
+  "pipeline": "code_first_v2",
+  "validation": "auto_passed",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "legacyReserve": false,
+  "family": "ap_chemistry",
+  "itemFamilyId": "fam:chem-ch3-mcr2:ap_chemistry-m01-k0",
+  "canonicalKey": "chem-ch3-mcr2:ap_chemistry-m01-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_chemistry:5.3",
+  "sharedWith": [],
+  "stockCell": "ap_chemistry|5.3|5.F|standalone|na",
+  "history": [
+   {
+    "run": "chem-ch3-mcr2",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ]
  }
 ]
