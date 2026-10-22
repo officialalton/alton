@@ -175,7 +175,7 @@
   ],
   "misconceptions": [
    "Averages all three trials, including the trial that is far from the others.",
-   "Uses only the final buret reading of the first trial.",
+   "Uses the largest volume delivered.",
    "Averages the three final readings."
   ]
  },
@@ -264,9 +264,9 @@
    "mean of the three temperature changes (exact) vs the sign of each trial's change"
   ],
   "misconceptions": [
-   "Uses trial-to-trial variation rather than the sign of the temperature change.",
-   "Reverses the link between the sign of ΔT and the direction of energy flow.",
-   "Dismisses consistent data from three trials."
+   "Confuses reaching a steady temperature with no energy transfer between the process and the solution.",
+   "Reverses the link between the direction of the temperature change and the direction of energy flow.",
+   "Treats ordinary trial-to-trial scatter as a reason to ignore three trials that all show the same direction of change."
   ]
  },
  {
@@ -745,8 +745,8 @@
   ],
   "misconceptions": [
    "Believes that a change in concentration or volume changes the value of K, which depends only on temperature.",
-   "For this disturbance halving the volume doubles both concentrations, so Q = [B]^2/[A]^1 is multiplied by 2^(2 − 1) = 2, so Q is not smaller than K and the system does not shift toward the products.",
-   "For this disturbance halving the volume doubles both concentrations, so Q = [B]^2/[A]^1 is multiplied by 2^(2 − 1) = 2, so Q is not equal to K and the system does not stay at equilibrium."
+   "After this disturbance Q is larger than K, not smaller than K, so the system does not shift toward the products.",
+   "After this disturbance Q is larger than K, not equal to K, so the system does not stay at equilibrium."
   ]
  },
  {
@@ -771,12 +771,12 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "2(bonds + lone pairs) compared with the valence electron count; the diagram is inconsistent by construction"
+   "2(bonds + lone pairs) compared with the valence electron count; the student's drawing is inconsistent by construction"
   ],
   "misconceptions": [
    "Counts only the bonding electrons, forgetting the lone pairs.",
    "Accepts extra electrons because they are placed on the central atom.",
-   "Assumes the diagram is right without counting its electrons."
+   "Assumes the student's drawing is right without counting its electrons."
   ]
  },
  {
@@ -4110,6 +4110,66 @@
   ]
  },
  {
+  "id": "ch_t5l_kmt_claim",
+  "topic": "3.5",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "KE(avg) = (3/2)kT with KE = ½mv² (speed ratio from the masses) vs the root-mean-square speed formula sqrt(3RT/M) for each gas"
+  ],
+  "misconceptions": [
+   "Believes the same temperature means the same speed for every gas.",
+   "Believes a larger mass gives a larger kinetic energy at the same temperature.",
+   "Attributes a speed difference to attraction between atoms of an ideal gas."
+  ]
+ },
+ {
+  "id": "ch_t5l_vapor_pressure_claim",
+  "topic": "3.1",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "dynamic-equilibrium rate argument vs the Boltzmann-type fraction of molecules above the escape energy"
+  ],
+  "misconceptions": [
+   "Believes evaporative cooling cancels a surface-area effect.",
+   "Believes molecules in the interior, not at the surface, escape.",
+   "Believes vapor pressure depends on the container volume and not on temperature and forces."
+  ]
+ },
+ {
+  "id": "ch_t5l_viscosity_model",
+  "topic": "3.1",
+  "skill": "4.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "kinetic-energy-versus-attraction argument checked against the measured trend vs the Arrhenius-type temperature dependence of flow"
+  ],
+  "misconceptions": [
+   "Believes a warmed liquid becomes a gas with no attractions.",
+   "Believes warming changes the mass of a molecule.",
+   "Confuses breaking intermolecular attractions with breaking covalent bonds."
+  ]
+ },
+ {
+  "id": "ch_t5l_vsepr_compare",
+  "topic": "2.7",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "electron-domain count from (valence electrons + bonded monovalent atoms − charge)/2 vs the shape table keyed by (domains, lone pairs)"
+  ],
+  "misconceptions": [
+   "Believes the larger charge decides which ion has the lone pair.",
+   "Believes every central atom bonded to oxygen has a lone pair.",
+   "Ignores the lone pair on the central atom."
+  ]
+ },
+ {
   "id": "ch_testable_question",
   "topic": "3.13",
   "skill": "2.A",
@@ -4494,9 +4554,9 @@
    "exact rational vs float"
   ],
   "misconceptions": [
-   "Reports only the first value.",
+   "Reverses both reactions before adding them.",
    "Adds the two values without reversing the second reaction.",
-   "Reverses the first reaction instead of the second."
+   "Reports only the ΔH° of the first reaction."
   ]
  },
  {
@@ -4509,7 +4569,7 @@
    "exact rational vs float"
   ],
   "misconceptions": [
-   "Uses the enthalpy change for the wrong reaction.",
+   "Does not reverse the second reaction, and then scales by the number of moles.",
    "Changes the sign of the final enthalpy change.",
    "Ignores the amount of A that reacts and reports ΔH° of the target reaction."
   ]
@@ -4526,7 +4586,7 @@
   "misconceptions": [
    "Divides one concentration by the other.",
    "Adds the two concentrations instead of multiplying them.",
-   "Uses the Ksp value as the ion product."
+   "Takes the square root of the product of the concentrations."
   ]
  },
  {
@@ -4540,8 +4600,8 @@
   ],
   "misconceptions": [
    "Inverts the ratio and divides Ksp by Q.",
-   "Uses Q alone as the ratio.",
-   "Subtracts Ksp from Q instead of dividing Q by Ksp."
+   "Divides the sum of the two concentrations by Ksp.",
+   "Divides the first ion concentration alone by Ksp."
   ]
  },
  {
@@ -4554,9 +4614,9 @@
    "exact rational vs float"
   ],
   "misconceptions": [
-   "Uses the specific heat of the metal in place of the specific heat of water.",
-   "Uses the temperature of the metal instead of the temperature change of the water.",
-   "Uses the mass of the metal and the temperature change of the water."
+   "Uses the temperature change of the metal instead of the temperature change of the water.",
+   "Uses the final temperature of the mixture instead of the temperature change of the water.",
+   "Uses the mass of the metal in place of the mass of the water."
   ]
  },
  {

@@ -31,3 +31,6 @@ STAGE_T5_MC4 = ['ch_t5j_p6_ionization_anomaly', 'ch_t5j_p2_standard_solution_pro
 
 # CH5 3.4 기체 단독 1칸 대체: chem-t5-mc5 실행 대상
 STAGE_T5_MC5 = ['ch_t5k_valve_mixing']
+
+# CH5 가상 4칸 대체(엄격 쌍둥이 관문 뒤): chem-t5-mc6 실행 대상
+STAGE_T5_MC6 = ['ch_t5l_kmt_claim', 'ch_t5l_vapor_pressure_claim', 'ch_t5l_viscosity_model', 'ch_t5l_vsepr_compare']
