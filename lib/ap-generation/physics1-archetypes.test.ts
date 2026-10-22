@@ -32,7 +32,7 @@ d("AP Physics 1 P0 archetypes (Python generators, 3 seeds each)", () => {
 
   it("registers 186 single archetypes + 9 sets covering all 8 units, and the guide JSON lists the same ids", () => {
     expect(r.status).toBe(0);
-    expect(out.names).toHaveLength(195); // 2026-10-19 PH5·PH6 새 원형: 단독 +51, 세트 +4
+    expect(out.names).toHaveLength(231); // 2026-10-19 PH5·PH6 새 원형: 단독 +51, 세트 +4; 2026-10-22 PH5 구조 독립 보충: 단독 +34(phys_p0_t5 4 + t5b 12 + t5c 18), 세트 +2
     const ids = physicsGuide.archetypes.map((a) => a.id);
     const expected = out.names.flatMap((n) => flat(n).slice(0, out.packs[n][0].items ? 2 : 1).map((q) => q.archetype));
     expect(ids).toEqual(expected);

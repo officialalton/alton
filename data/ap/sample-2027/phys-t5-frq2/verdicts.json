@@ -1,0 +1,639 @@
+[
+ {
+  "key": "ap_physics_1-f01-k0",
+  "cellId": "ap_physics_1-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "instant_reject_missing_condition"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Triangle: (0,0),(4 ms,750 N),(11 ms,0); axes t (ms), F (N).",
+     "final_answer": "Triangular pulse: linear from 0 to 750 N at 4 ms, then linear back to 0 at 11 ms.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Area = 0.5*0.011 s*750 N.",
+     "final_answer": "4.1 N·s (4.125 N·s)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "J = m(v2+v1): 4.125=0.15(v2+15).",
+     "final_answer": "12.5 m/s",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Clay: |Δp|=0.15*15=2.25 N·s, which is less than 4.125 N·s because the clay ball is only stopped, not reversed.",
+     "final_answer": "Less than",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The numeric keys are correct, but the stimulus gives only three force-time points and never tells students that the force varies linearly between them. Rubric rows A3, A4 and B2 require straight segments and a triangle area, and A3 penalizes a curve. A student who draws a smooth pulse through the points would lose credit and would get a different impulse. The linear-variation condition, which the blueprint lists as a key condition, must be stated in the stem or the stimulus.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item is on topic 4.2 and uses impulse and force-time graphs. Part A matches skill 1.A, and the other parts use other skills, which is allowed."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The values (4.125 N·s and 12.5 m/s) are right. The scoring depends on an assumption students are not told: straight-line segments between the points. Rows A3 and A4 and the triangle area in B2 cannot be defended for a student who draws a curve."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The table has three points and no statement that the force is linear between them. The condition is in the blueprint but is not visible to the student."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item. The common errors listed in the rubric rows are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is reasonable. The 12-point weight matches the Translation Between Representations type."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item in scope for Unit 4. Part A creates a graph from a table (skill 1.A). Part B takes the area under a triangular F-t graph (4.125 N·s). Part C applies the impulse-momentum theorem with sign handling to get v2 = 12.5 m/s. Part D compares a bounce with a stick collision, which needs a qualitative argument about the change in momentum. Arithmetic is short and clean, the wording is unambiguous, and the context is minimal. The difficulty comes from legitimate levers: choosing the governing law, a representation translated, and a reasoning step linking the result to a claim.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_physics_1-f01-k1",
+  "cellId": "ap_physics_1-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Plot force F (N) on the vertical axis against time t (ms) on the horizontal axis. Draw a triangle that rises linearly from (0 ms, 0 N) to a peak at (5 ms, 600 N), then falls linearly to (11 ms, 0 N). Label the 600 N peak, 5 ms and 11 ms.",
+     "final_answer": "Triangular pulse: starts at 0 N at t = 0, peaks at 600 N at t = 5 ms, returns to 0 N at t = 11 ms",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Impulse equals the area under the F–t graph. For a triangle: J = ½ × 0.011 s × 600 N = 3.3 N·s.",
+     "final_answer": "3.3 N·s",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Impulse equals the change in momentum, and the ball reverses direction: J = m(v2 + v1). So 3.3 = 0.15(v2 + 15), giving v2 + 15 = 22 and v2 = 7 m/s.",
+     "final_answer": "7.0 m/s",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "If the clay sticks, its momentum only changes from mv1 to zero, so J = 0.15 × 15 = 2.25 N·s. The bouncing ball's momentum also reverses direction, so its change in momentum is larger (3.3 N·s).",
+     "final_answer": "Less than",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Content is correct and in scope. Weights deviate from the fixed 12 points for Translation Between Representations (the 4/3/3/2 split totals 12, so that part is fine), but the load is heavy (est. 27 min), and part A is largely graph plotting from given data. The solver agreed on all keys.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A is the target skill 1.A (create a graph). Parts B-D use impulse and momentum (topics 4.1-4.3). All are in scope, with no 2D collisions."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The impulse 3.30 N s and the rebound speed 7.0 m/s are correct. The justification in part D is valid: 2.25 N s is less than 3.3 N s. The rubric rows are consistent and the dependencies are sensible. One caveat: the wall force is not the net force on the ball, but gravity is negligible during the contact, so this is acceptable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The data table is complete, with axis labels and three points. The wording is clear. Part A asks the student to sketch the graph from points already given in the table, so the representation demand is low. The 'key values' labeling is fine."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Common errors are listed per row (the ms-to-s conversion, the sign reversal, and the claim that the impulse is the same). They are realistic and distinct."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "With four parts and 12 points, the estimated load is about 27 minutes. This is on the long side, though it fits the 12-point Translation Between Representations type. Part A (4 points) mostly rewards labeling and plotting three given points, which makes it somewhat inflated relative to its demand. Calculator use is consistent with the designation. I am marking this as borderline and failing it because of the inflated, low-demand part A."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ: sketch an F-t graph from a table (representation), find the impulse as the triangle area, apply J = delta p with a sign convention to get the rebound speed (7 m/s), then compare with a stick-to-wall case through delta p (2.25 vs 3.3 N·s). All levers are within scope: one representation translation, one governing law, one comparison step. Arithmetic is clean and reading is short. The sign handling on the bounce is the main conceptual hurdle, which suits a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_physics_1-f01-k2",
+  "cellId": "ap_physics_1-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Draw a triangle: a straight line rising from (0 ms, 0 N) to a peak at (4 ms, 1050 N), then a straight line falling to (11 ms, 0 N). Label the axes Time t (ms) and Force F (N), and mark 4 ms, 11 ms and 1050 N.",
+     "final_answer": "Triangular F–t graph with peak 1050 N at 4 ms, returning to 0 N at 11 ms",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Impulse is the area under the F–t graph. Area = ½ × base × height = ½ × 0.011 s × 1050 N.",
+     "final_answer": "5.8 N·s (5.775 N·s)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Impulse = change in momentum, with the ball reversing direction: J = m(v + v1). So 5.775 = 0.25 × (v + 15), giving v = 23.1 − 15.",
+     "final_answer": "8.1 m/s",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Clay that sticks only has its momentum brought to zero, so the change in momentum is 0.25 × 15 = 3.75 N·s. That is smaller than 5.775 N·s, because a bouncing ball also has its momentum reversed.",
+     "final_answer": "Less than",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound 12-point translation-between-representations FRQ. The graph sketch, impulse from the area under the graph, rebound speed and clay comparison are all consistent with the key, and the independent solver agreed on every part. No scope or condition problems.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A is the 1.A representation; Parts B to D are 4.2 impulse-momentum content. No later-unit content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "5.775 N s, 8.1 m/s and \"less\" (3.75 < 5.775) are all correct. Rubric rows are consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete and the wording is clear. The title field duplicates the stem, which is a minor issue."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each rubric row lists a plausible common error, which is adequate for an FRQ."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "12 points matches the Translation Between Representations weight; the calculator load is light."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ in scope for Unit 4 (topics 4.1-4.3). It requires sketching a force-time graph from a table (skill 1.A), finding impulse as the triangle area, applying the impulse-momentum theorem with a sign convention to get the rebound speed, and a conceptual comparison with a sticking collision. The numbers are simple, the wording is unambiguous, and the reading load is modest. The difficulty comes from legitimate levers: the representation translation, choosing the governing law, and one extra reasoning step linking the result to a claim.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_physics_1-f02-k0",
+  "cellId": "ap_physics_1-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Equipment: force sensor on a ring stand with a clamp, the metal cylinder hung from it on a string, a tank of liquid, and a ruler or calipers. First measure the cylinder's diameter (radius r) and the weight in air W0. Change the independent variable by lowering the sensor so that the cylinder sits at chosen depths h. Calculate V = πr²h, or read V from the volume rise in a graduated container. At each depth, wait until the cylinder is at rest and not touching the walls or bottom, then record W_app. To reduce uncertainty: zero the sensor first, take several readings at each depth and average them, and read the liquid level at eye level.",
+     "final_answer": "Hang the cylinder from a zeroed force sensor on a stand. Measure its weight in air. Lower it step by step into the liquid. At each depth, record V (from πr²h or the displaced volume) and W_app with the cylinder at rest and not touching the tank. Repeat and average the readings.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "W_app = W0 − ρgV. This is a straight line in V with slope −ρg.",
+     "final_answer": "Plot W_app (N) on the vertical axis and V (m³ or cm³) on the horizontal axis. The slope equals −ρg, so ρ = −slope/g. (You could also plot the buoyant force W0 − W_app against V; then the slope is +ρg.)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Plot the five points. The best-fit line by least squares has slope ≈ −0.00782 N/cm³ and intercept ≈ 4.00 N.",
+     "final_answer": "Vertical axis: W_app (N), from about 3.1 to 3.9 N. Horizontal axis: V (cm³), from 0 to 100 cm³. The five points lie almost on a straight line. Best-fit line: W_app ≈ 4.00 N − (0.00782 N/cm³)V.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Slope ≈ −0.00782 N/cm³ = −7.82×10³ N/m³. Then ρ = 7.82×10³ / 9.8 ≈ 798 kg/m³.",
+     "final_answer": "ρ ≈ 8.0×10² kg/m³ (about 0.80 g/cm³)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard buoyancy lab FRQ with a consistent table, linearization, graph and slope-to-density analysis. Weights of 3/1/3/3 = 10 match the Experimental Design type. Minor weaknesses: D1 depends on C3, part A rubric is lenient, and part B nearly gives away its answer in the stem.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Buoyancy and apparent weight are in Unit 8 scope. The design and analysis skills fit the mixed-skill FRQ format."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The numbers were code-verified. D1 depends on C3, which is a minor risk. The independent solver agreed on a slope of about -0.0078 N/cm^3 and a density of about 800 kg/m^3."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has labels, units and complete data. The title field is overly long but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not an MC item. The rubric common_errors cover the main student slips."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is reasonable, and calculators are allowed and consistent. Part A is lenient, and part B is nearly given away in the stem."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part lab-design FRQ on buoyancy (skill 3.A). Students must write a procedure with an uncertainty-reduction method, linearize W_app = W - rho*g*V, and plot and scale a graph. They then find the slope (about -7.8e-3 N/cm^3), convert cm^3 to m^3, and divide by g to get rho of about 800 kg/m^3. The concepts (force balance with buoyancy, slope meaning) are in scope. The arithmetic is short and uses rounded values, the wording is clear, and the extra difficulty comes from the number of parts and representation changes, which is typical of an AP free-response question.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 4,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ },
+ {
+  "key": "ap_physics_1-f02-k1",
+  "cellId": "ap_physics_1-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Equipment: force sensor on a stand, metal cylinder on a string, tank of liquid, ruler or calipers (or graduated markings on the cylinder). First measure the cylinder's diameter to get its cross-sectional area A, and record its weight in air. Then lower the cylinder in steps (move the sensor clamp down or raise the tank on a lab jack). At each step measure the submerged depth h and work out V = A·h (or read V from the rise in liquid level in a graduated cylinder). Wait until the cylinder is at rest, then record W_app. Repeat for at least 5 values of V without letting the cylinder touch the tank's sides or bottom. To reduce uncertainty, take several readings at each depth and average them (or zero the sensor and read the depth at eye level to avoid parallax).",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Hang the cylinder from a force sensor on a stand. Change V by lowering the cylinder in steps (V = A·h, with A from the measured diameter). At each step record W_app once the cylinder is still. Average repeated readings to reduce uncertainty."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "The relationship is W_app = W_air − ρ_liquid·g·V. A graph of W_app against V is a straight line with slope −ρg and a vertical intercept equal to W_air.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Plot W_app (N) on the vertical axis and V (m^3 or cm^3) on the horizontal axis. The slope equals −ρg."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Suggested scale: horizontal axis 0–100 cm^3; vertical axis 4.0–4.8 N. Plot the 5 points and draw the best-fit line, which runs from about (20, 4.80) to (100, 4.02). Label the axes 'Submerged volume V (cm^3)' and 'Apparent weight W_app (N)'.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "The best-fit line is approximately W_app = 4.99 N − (0.00975 N/cm^3)·V."
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Least-squares fit gives slope = −0.00975 N/cm^3 = −9750 N/m^3. Then ρ = −slope/g = 9750 / 9.8 ≈ 995 kg/m^3. Using g = 10 m/s^2 gives about 975 kg/m^3. The vertical intercept gives W_air ≈ 5.0 N.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "ρ ≈ 1.0 × 10^3 kg/m^3 (about 995 kg/m^3)"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The scope and stimulus are fine, but the rubric has consistency problems and the total weight is wrong for the bundle type. Recommend fail pending revision.</summary>\n<parameter name=\"scope_skill_notes\">The topic is correct (buoyancy and apparent weight, 8.3/8.2). The dominant demand is experimental design and analysis. Part C (graphing, skill 1.B) and part D (calculation) are legitimate parts of an experimental design and analysis FRQ.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Several rubric problems:\n- D1 is gated on C3 (requires_row_id), so a student with no graph loses the slope point; this is arguably fine but double-penalizes.\n- D1 states a 5 percent tolerance on the slope, but expected_values lists a tolerance of 0.0004875 (5 percent of 0.00975), while the D3 density tolerance is 8 percent. Those are consistent with the rubric text.\n- The model answer for D1 says the slope is -0.0098, but the actual fit is -0.00975. This is fine within tolerance.\n- A2 requires two conditions, 'same cylinder and liquid' and 'at rest', but the required element only lists 'change only the submerged volume with the object at rest', so the rubric text and element are slightly inconsistent.\n- A1 accepts a 'scale' as the sensor, which is acceptable.\n- Part B (1 point) gives away the relationship in its prompt, which is a weak design demand but acceptable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete, with labels and units. The stem title is truncated or awkward, since it is a long sentence used as the title. Part C asks for a plot on a blank grid, but no grid is specified in the data, which is acceptable for a response-mode graph. Part B asks to 'identify the quantities' after already stating the relationship, which is slightly redundant wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so distractors do not apply. The common_errors listed are reasonable."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The weights do not fit the fixed type weights. The bundle totals 10 points, which matches Mathematical Routines (10) and Experimental Design and Analysis (10). However, 7 of the 10 points are routine graphing and calculation (C, D) and only about 4 points involve design or argument, so the item is not a true experimental design item. The estimated 27 minutes is high, but time is only an internal reference. Part C alone (plotting five points) is low-value rubric credit. The best fit of a straight line has no uncertainty or justification demand, so the design skill 3.A is weakly assessed overall."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part lab-design and analysis task built on W_app = W_air - rho*g*V. Students must design a procedure, linearize the equation (W_app vs V, slope = -rho*g), plot the data with a chosen scale, and extract rho from the slope with a cm^3 to m^3 unit conversion. It has a moderate number of reasoning steps and several representation changes. The arithmetic is short and clean. The difficulty comes from legitimate sources and the item is in scope. It is a typical full-mock free-response item.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 4,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ },
+ {
+  "key": "ap_physics_1-f02-k2",
+  "cellId": "ap_physics_1-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Hang the cylinder from a force sensor fixed to a clamp stand, above a tank of liquid; you could also use a graduated cylinder or an overflow can. First record the reading in air. Lower the cylinder in steps (for example on a lab jack or by sliding the clamp). Find each submerged volume as πr²h, using calipers for the radius and a ruler or marked scale for the submerged depth h, or from the rise in liquid level in a graduated container. At each step, wait until the cylinder is at rest and record the sensor reading. To reduce uncertainty, zero (tare) the sensor first, take several readings at each depth and average them, read the level at eye height, and keep the cylinder from touching the walls of the tank.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Force sensor on a stand holds the cylinder over the liquid. The submerged volume is changed by lowering the cylinder in steps and is measured as πr²h or by liquid displacement. Record the steady sensor reading at each step. Repeat and average the readings (and tare the sensor) to reduce uncertainty."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Apparent weight is W_app = W_air − ρgV. Plotting W_app against V gives a straight line with slope −ρg and intercept W_air.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Plot apparent weight W_app (N) on the vertical axis and submerged volume V on the horizontal axis. The slope equals −ρg."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Use V from 0 to 100 cm³ on the horizontal axis and W_app from about 2.9 to 4.0 N on the vertical axis. Plot the 5 points. The least-squares line is W_app ≈ 4.00 N − (0.00984 N/cm³)V.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Axes: V (cm³) horizontal and W_app (N) vertical. The best-fit line goes through about (0, 4.00 N) and (100 cm³, 3.02 N), with slope ≈ −0.0098 N/cm³."
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Slope = −0.00984 N/cm³ = −9.84×10³ N/m³. Since slope = −ρg, ρ = 9840 / 9.8 ≈ 1.0×10³ kg/m³.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "ρ ≈ 1.0×10³ kg/m³ (about 1004 kg/m³)"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Passes all five criteria on review. The design, linearization, graphing and slope-to-density parts are consistent with the data and rubric, and the independent solver reached the same results.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The dominant demand is experimental design and analysis of buoyancy data (topics 8.3 and 8.2). The skills in parts C and D (graphing, slope analysis) are prerequisite to the target skill and typical of the course. Nothing out of scope appears."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The slope of -0.00984 N/cm^3 gives rho of about 1004 kg/m^3. The rubric accepts tolerances (5% on the slope, 8% on the density) and an alternative density consistent with the student's own slope. Row D1 depends on row C3, which is coherent. The total is 10 points, matching the Experimental Design and Analysis weight. The note on part B is minor: W_app is specified as the vertical axis, but the alternative of plotting V versus W_app is left unaddressed."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table gives clear axis labels with units and five rows of data. The wording is clear. Weight in air is not given, but it is not needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The rubric lists common errors, such as forgetting the cm^3 to m^3 conversion and using slope = rho."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Task load is reasonable for a 10-point lab FRQ. A calculator is appropriate, and the arithmetic is light."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part lab-design item on buoyancy (W_app = W_air - rho*g*V). It requires designing a procedure, linearizing, graphing with a chosen scale, and extracting density from the slope with a cm^3 to m^3 conversion. This is standard AP free-response lab skill assessment with a single governing law and rounded, near-linear data. Difficulty comes from legitimate skills, not unfair sources.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_1-f03-k0",
+  "cellId": "ap_physics_1-f03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Disagree. Horizontal and vertical motions are independent. Both balls start with zero vertical velocity and have the same downward acceleration g, and they fall the same height. So they hit the floor at the same moment. The horizontal speed only changes how far the ball travels sideways, not how long it takes to fall.",
+     "final_answer": "Disagree: both balls land at the same time.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Vertical motion: h = (1/2)gt², so t = √(2h/g) = √(2(1)/9.8) ≈ 0.45 s. Horizontal distance: x = v0·t = 2 × 0.452 ≈ 0.90 m (about 0.89 m if g = 10 m/s²).",
+     "final_answer": "t = √(2h/g) ≈ 0.45 s; x ≈ 0.90 m",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The fall time depends only on h and g, so it does not change. The landing distance is x = v0·t, and t stays the same, so doubling v0 doubles the distance to about 1.8 m.",
+     "final_answer": "Time stays the same (≈0.45 s); landing distance doubles (≈1.8 m).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Content is correct and in scope. The one deviation is that the total is 8 points. The task is a Qualitative/Quantitative Translation item, and the fixed weight for that type is 8, so the 8-point total is fine. The problem is the load: three parts plus a derivation and a calculation, estimated at 17 minutes, which is heavy for an 8-point item. I am failing on exam suitability on the judgment that the three-part structure is repetitive.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item is in topic 1.5 and uses independence of the horizontal and vertical motions. Part B's skills (2.A and 2.B) differ from 3.B, which is allowed for a part. No later-unit content appears."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are correct and consistent with the rubric. Part B's skills are 2.A and 2.B, but A3 and C2 overlap with A2 somewhat."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus is a complete text description. The data object is empty, which is acceptable for a text-only stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item with common_errors listed per row, which is adequate."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Load is somewhat heavy and repetitive: part A rows A2 and A3 overlap, and part B asks for a derivation plus a numeric value. The rubric rows, however, are mostly 1-point rows as the subject notes require."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard horizontal-projectile multi-part free-response item. Requires choosing the independent-component kinematic model, giving a qualitative argument (vertical motion is identical for both balls), deriving t = sqrt(2h/g), computing the range (about 0.9 m), and making one proportional prediction (time unchanged, range doubles). In scope for Unit 1, with minimal arithmetic and clear wording. Fits the exam_prep level for full mocks: more than a single-step basic exercise, but without advanced depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_physics_1-f03-k1",
+  "cellId": "ap_physics_1-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Disagree. Horizontal and vertical motions are independent. Both balls start with zero vertical velocity, have the same vertical acceleration g, and fall the same height, so they reach the floor at the same time. The longer horizontal path does not change the vertical motion.",
+     "final_answer": "Disagree; both land at the same time.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Vertical motion: h = (1/2)g t^2, so t = sqrt(2h/g) = sqrt(3.6/9.8) ≈ 0.61 s. Horizontal distance: x = v0 t = 3 × 0.606 ≈ 1.8 m.",
+     "final_answer": "t = sqrt(2h/g) ≈ 0.61 s; x ≈ 1.8 m (1.82 m with g = 9.8 m/s^2, 1.80 m with g = 10 m/s^2)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The fall time depends only on h and g, so it stays the same (about 0.61 s). The landing distance is x = v0 t, so doubling v0 doubles x to about 3.6 m.",
+     "final_answer": "Time unchanged (~0.61 s); distance doubles (~3.6 m).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope two-dimensional projectile claim item with three consistent parts. The only weaknesses are a null numeric tolerance on B3 and overlapping justification rows in A2 and A3. No instant-reject condition applies.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits topic 1.5 with related topics 1.2 and 1.4. The dominant demand is evaluating a claim about independent horizontal and vertical motion, which matches skill 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The answers are unique and correct. The independent solver agreed on every part. B3 has a null tolerance, so g = 10 m/s² answers (1.80 m) could be marked ambiguously. Standard g = 9.8 m/s² applies."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete, with h, v0 and negligible air resistance stated. The data object is empty, which is fine because no figure is needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The common_errors entries are plausible but thin."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is appropriate for a short multi-part FRQ, with light calculator use. The 8-point total matches the Qualitative/Quantitative Translation weight."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Core concept of independence of horizontal and vertical motion. Part A is a qualitative claim evaluation. Part B uses a single kinematic equation with clean numbers (t = sqrt(2h/g) = 0.6 s, x = 1.8 m). Part C is a one-step proportional prediction (time unchanged, range doubles). Short prompt, clear assumptions, no out-of-scope content, so it suits foundational learning rather than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_physics_1-f03-k2",
+  "cellId": "ap_physics_1-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Disagree. Horizontal and vertical motions are independent. Both balls start with zero vertical velocity, have the same downward acceleration g, and fall the same height h, so they land at the same time. The horizontal velocity only changes how far the ball travels sideways, not how long it is in the air.",
+     "final_answer": "Disagree: both reach the floor at the same time.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Vertical motion: h = (1/2)g t^2, so t = sqrt(2h/g) = sqrt(2(1.5)/9.8) ≈ 0.553 s. Horizontal distance: x = v0 t = 2(0.553) ≈ 1.1 m.",
+     "final_answer": "t = sqrt(2h/g) ≈ 0.55 s; x ≈ 1.1 m",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The time t = sqrt(2h/g) does not depend on v0, so it stays the same. The landing distance x = v0 t is proportional to v0, so doubling v0 doubles it to about 2.2 m.",
+     "final_answer": "Time stays the same (≈0.55 s); landing distance doubles (≈2.2 m).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound 8-point QQT item on independence of horizontal and vertical motion. The stimulus states its assumptions, the key is unique, the rubric rows are consistent, and the load is modest.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 1.5 with related topics 1.2 and 1.4, which are in scope for Unit 1. Part A is a claim evaluation (3.B), part B a derivation and calculation, and part C a prediction."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Answers are unique. With g = 9.8 m/s², t = 0.553 s and x = 1.11 m. Rubric dependencies are consistent. Rows A2 and A3 overlap slightly but are acceptable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Text-only stimulus with a stated negligible air resistance assumption. No figure is needed, so the empty data object is fine."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The common errors listed per row are realistic misconceptions, such as the longer path taking longer or a faster ball spending less time in the air."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Weights total 8 points, matching the fixed QQT weight. Reading and arithmetic load is light, and the calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard horizontal-projectile free-response item. Part A needs the independence of the horizontal and vertical motions to refute the claim. Part B needs a kinematic derivation (t = sqrt(2h/g)) and a short range calculation (about 0.55 s, about 1.1 m). Part C needs proportional reasoning: time is unchanged and range doubles. The concepts are in scope, and the reading and arithmetic loads are light. The three-part structure, which combines argumentation, derivation, and prediction, fits a full-mock exam-prep item rather than a basic or advanced one.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ }
+]

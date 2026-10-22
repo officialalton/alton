@@ -1,0 +1,948 @@
+[
+ {
+  "candidateKey": "ap_physics_1-m01-k0",
+  "cellId": "ap_physics_1-m01",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "2.7",
+  "unitCode": "2",
+  "skillPrimary": "2.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ph_t5_sym_stacked_blocks_friction",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Symbolic derivation requiring choice of system, whole-system Newton's second law for the shared acceleration, then applying it to the upper block to identify static friction as the net force. Concept depth is moderate, with no arithmetic burden, short wording, and unambiguous setup (frictionless table, no slipping). Distractors target common errors (F, a without m, wrong denominator). It fits skill 2.A and is a typical mock-exam multiple-choice item.",
+  "payload": {
+   "archetype": "ph_t5_sym_stacked_blocks_friction",
+   "topic": "2.7",
+   "skill": "2.A",
+   "calculator": "allowed",
+   "stem": "A block of mass $m$ rests on top of a block of mass $M$, which rests on a horizontal frictionless table. A horizontal force of magnitude $F$ pushes the lower block, and the upper block does not slip on it. Which of the following is the magnitude of the friction force that the lower block exerts on the upper block?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$F$",
+     "why": "Assumes that the friction force on the upper block equals the whole applied force.",
+     "value": null
+    },
+    {
+     "text": "$\\frac{F}{M+m}$",
+     "why": "Gives the acceleration of the blocks instead of the friction force.",
+     "value": null
+    },
+    {
+     "text": "$\\frac{mF}{M+m}$",
+     "why": "Both blocks have the acceleration $a=F/(M+m)$. The only horizontal force on the upper block is static friction, so $f=ma=\\dfrac{mF}{M+m}$.",
+     "value": null
+    },
+    {
+     "text": "$\\frac{mF}{M}$",
+     "why": "Divides by the mass of the lower block only, as if the upper block did not accelerate with it.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 90,
+   "facts": [
+    "m=2.0",
+    "M=4.0",
+    "F=12.0"
+   ],
+   "blueprint": {
+    "id": "ph_t5_sym_stacked_blocks_friction",
+    "subject": "ap_physics_1",
+    "kind": "mc",
+    "concept": "Static friction force on the upper block of two stacked blocks that accelerate together",
+    "topic": "2.7",
+    "skill": "2.A",
+    "student_thinking": [
+     "Find the common acceleration of the two blocks from Newton's second law for the system",
+     "Apply Newton's second law to the upper block, whose only horizontal force is friction"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the upper block does not slip and the table is frictionless",
+      "evidence": "the stem says the upper block does not slip and the table is frictionless"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Assumes that the friction force on the upper block equals the whole applied force."
+     },
+     {
+      "id": "m2",
+      "description": "Gives the acceleration of the blocks instead of the friction force."
+     },
+     {
+      "id": "m3",
+      "description": "Divides by the mass of the lower block only, as if the upper block did not accelerate with it."
+     }
+    ],
+    "verification": {
+     "independent_path": "a linear solve of the two Newton equations gives the friction force and the printed option is evaluated by a TeX evaluator",
+     "method": "sympy symbolic + independent numeric path"
+    },
+    "judgment_demand": [
+     "law_selection",
+     "symbolic_reasoning"
+    ]
+   },
+   "seed": 13900,
+   "pack_id": "ph_t5_sym_stacked_blocks_friction-s13900",
+   "explanation_en": "The correct answer is $\\frac{mF}{M+m}$. Both blocks have the acceleration $a=F/(M+m)$. The only horizontal force on the upper block is static friction, so $f=ma=\\dfrac{mF}{M+m}$.\n$F$ is incorrect: Assumes that the friction force on the upper block equals the whole applied force.\n$\\frac{F}{M+m}$ is incorrect: Gives the acceleration of the blocks instead of the friction force.\n$\\frac{mF}{M}$ is incorrect: Divides by the mass of the lower block only, as if the upper block did not accelerate with it."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ph_t5_sym_stacked_blocks_friction",
+   "facts": [
+    "m=2.0",
+    "M=4.0",
+    "F=12.0"
+   ],
+   "seed": 13900
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.7 and skill 2.A fit: a symbolic derivation using Newton's second law and static friction, within Unit 2."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key mF/(M+m) is unique and the stem has all needed conditions."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception and each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short symbolic MC of about 90 seconds with no arithmetic load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable. The key is correct and unique, the scope fits topic 2.7, the distractors are distinct and each is explained, and it is a generic textbook stacked-blocks form rather than a released AP item."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Symbolic derivation requiring choice of system, whole-system Newton's second law for the shared acceleration, then applying it to the upper block to identify static friction as the net force. Concept depth is moderate, with no arithmetic burden, short wording, and unambiguous setup (frictionless table, no slipping). Distractors target common errors (F, a without m, wrong denominator). It fits skill 2.A and is a typical mock-exam multiple-choice item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-m01-k1",
+  "cellId": "ap_physics_1-m01",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "2.7",
+  "unitCode": "2",
+  "skillPrimary": "2.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ph_t5_sym_stacked_blocks_friction",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Requires choosing the system (both blocks) to find the common acceleration a = F/(M+m), then applying Newton's second law to the upper block, where static friction is the only horizontal force, to get f = mF/(M+m). Two to three reasoning steps with symbolic manipulation only, fitting skill 2.A. Wording is clear and the model assumptions are stated (frictionless table, no slipping). Distractors map to plausible misconceptions. No heavy arithmetic or extra reading.",
+  "payload": {
+   "archetype": "ph_t5_sym_stacked_blocks_friction",
+   "topic": "2.7",
+   "skill": "2.A",
+   "calculator": "allowed",
+   "stem": "A block of mass $m$ rests on top of a block of mass $M$, which rests on a horizontal frictionless table. A horizontal force of magnitude $F$ pushes the lower block, and the upper block does not slip on it. Which of the following is the magnitude of the friction force that the lower block exerts on the upper block?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$F$",
+     "why": "Assumes that the friction force on the upper block equals the whole applied force.",
+     "value": null
+    },
+    {
+     "text": "$\\frac{mF}{M+m}$",
+     "why": "Both blocks have the acceleration $a=F/(M+m)$. The only horizontal force on the upper block is static friction, so $f=ma=\\dfrac{mF}{M+m}$.",
+     "value": null
+    },
+    {
+     "text": "$\\frac{F}{M+m}$",
+     "why": "Gives the acceleration of the blocks instead of the friction force.",
+     "value": null
+    },
+    {
+     "text": "$\\frac{mF}{M}$",
+     "why": "Divides by the mass of the lower block only, as if the upper block did not accelerate with it.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 90,
+   "facts": [
+    "m=3.0",
+    "M=4.0",
+    "F=30.0"
+   ],
+   "blueprint": {
+    "id": "ph_t5_sym_stacked_blocks_friction",
+    "subject": "ap_physics_1",
+    "kind": "mc",
+    "concept": "Static friction force on the upper block of two stacked blocks that accelerate together",
+    "topic": "2.7",
+    "skill": "2.A",
+    "student_thinking": [
+     "Find the common acceleration of the two blocks from Newton's second law for the system",
+     "Apply Newton's second law to the upper block, whose only horizontal force is friction"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the upper block does not slip and the table is frictionless",
+      "evidence": "the stem says the upper block does not slip and the table is frictionless"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Assumes that the friction force on the upper block equals the whole applied force."
+     },
+     {
+      "id": "m2",
+      "description": "Gives the acceleration of the blocks instead of the friction force."
+     },
+     {
+      "id": "m3",
+      "description": "Divides by the mass of the lower block only, as if the upper block did not accelerate with it."
+     }
+    ],
+    "verification": {
+     "independent_path": "a linear solve of the two Newton equations gives the friction force and the printed option is evaluated by a TeX evaluator",
+     "method": "sympy symbolic + independent numeric path"
+    },
+    "judgment_demand": [
+     "law_selection",
+     "symbolic_reasoning"
+    ]
+   },
+   "seed": 13901,
+   "pack_id": "ph_t5_sym_stacked_blocks_friction-s13901",
+   "explanation_en": "The correct answer is $\\frac{mF}{M+m}$. Both blocks have the acceleration $a=F/(M+m)$. The only horizontal force on the upper block is static friction, so $f=ma=\\dfrac{mF}{M+m}$.\n$F$ is incorrect: Assumes that the friction force on the upper block equals the whole applied force.\n$\\frac{F}{M+m}$ is incorrect: Gives the acceleration of the blocks instead of the friction force.\n$\\frac{mF}{M}$ is incorrect: Divides by the mass of the lower block only, as if the upper block did not accelerate with it."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ph_t5_sym_stacked_blocks_friction",
+   "facts": [
+    "m=3.0",
+    "M=4.0",
+    "F=30.0"
+   ],
+   "seed": 13901
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60-90 seconds, needs no calculation, and its load is typical of the AP exam.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unique-key symbolic question on static friction with stacked blocks. It has plausible distractors and suits the exam, so it passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing the system (both blocks) to find the common acceleration a = F/(M+m), then applying Newton's second law to the upper block, where static friction is the only horizontal force, to get f = mF/(M+m). Two to three reasoning steps with symbolic manipulation only, fitting skill 2.A. Wording is clear and the model assumptions are stated (frictionless table, no slipping). Distractors map to plausible misconceptions. No heavy arithmetic or extra reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-m01-k2",
+  "cellId": "ap_physics_1-m01",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "2.7",
+  "unitCode": "2",
+  "skillPrimary": "2.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ph_t5_sym_stacked_blocks_friction",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Symbolic two-step Newton's second law: apply it to the combined system to get a = F/(M+m), then to the upper block, where static friction is the only horizontal force, giving f = mF/(M+m). It requires choosing the system and identifying static friction as the net force. No arithmetic, clear wording, in scope. Typical of a full-mock item.",
+  "payload": {
+   "archetype": "ph_t5_sym_stacked_blocks_friction",
+   "topic": "2.7",
+   "skill": "2.A",
+   "calculator": "allowed",
+   "stem": "A block of mass $m$ rests on top of a block of mass $M$, which rests on a horizontal frictionless table. A horizontal force of magnitude $F$ pushes the lower block, and the upper block does not slip on it. Which of the following is the magnitude of the friction force that the lower block exerts on the upper block?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$\\frac{mF}{M}$",
+     "why": "Divides by the mass of the lower block only, as if the upper block did not accelerate with it.",
+     "value": null
+    },
+    {
+     "text": "$F$",
+     "why": "Assumes that the friction force on the upper block equals the whole applied force.",
+     "value": null
+    },
+    {
+     "text": "$\\frac{F}{M+m}$",
+     "why": "Gives the acceleration of the blocks instead of the friction force.",
+     "value": null
+    },
+    {
+     "text": "$\\frac{mF}{M+m}$",
+     "why": "Both blocks have the acceleration $a=F/(M+m)$. The only horizontal force on the upper block is static friction, so $f=ma=\\dfrac{mF}{M+m}$.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 90,
+   "facts": [
+    "m=3.0",
+    "M=2.0",
+    "F=12.0"
+   ],
+   "blueprint": {
+    "id": "ph_t5_sym_stacked_blocks_friction",
+    "subject": "ap_physics_1",
+    "kind": "mc",
+    "concept": "Static friction force on the upper block of two stacked blocks that accelerate together",
+    "topic": "2.7",
+    "skill": "2.A",
+    "student_thinking": [
+     "Find the common acceleration of the two blocks from Newton's second law for the system",
+     "Apply Newton's second law to the upper block, whose only horizontal force is friction"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the upper block does not slip and the table is frictionless",
+      "evidence": "the stem says the upper block does not slip and the table is frictionless"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Divides by the mass of the lower block only, as if the upper block did not accelerate with it."
+     },
+     {
+      "id": "m2",
+      "description": "Assumes that the friction force on the upper block equals the whole applied force."
+     },
+     {
+      "id": "m3",
+      "description": "Gives the acceleration of the blocks instead of the friction force."
+     }
+    ],
+    "verification": {
+     "independent_path": "a linear solve of the two Newton equations gives the friction force and the printed option is evaluated by a TeX evaluator",
+     "method": "sympy symbolic + independent numeric path"
+    },
+    "judgment_demand": [
+     "law_selection",
+     "symbolic_reasoning"
+    ]
+   },
+   "seed": 13902,
+   "pack_id": "ph_t5_sym_stacked_blocks_friction-s13902",
+   "explanation_en": "The correct answer is $\\frac{mF}{M+m}$. Both blocks have the acceleration $a=F/(M+m)$. The only horizontal force on the upper block is static friction, so $f=ma=\\dfrac{mF}{M+m}$.\n$\\frac{mF}{M}$ is incorrect: Divides by the mass of the lower block only, as if the upper block did not accelerate with it.\n$F$ is incorrect: Assumes that the friction force on the upper block equals the whole applied force.\n$\\frac{F}{M+m}$ is incorrect: Gives the acceleration of the blocks instead of the friction force."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ph_t5_sym_stacked_blocks_friction",
+   "facts": [
+    "m=3.0",
+    "M=2.0",
+    "F=12.0"
+   ],
+   "seed": 13902
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Static friction with a symbolic derivation via Newton's second law for the system and the upper block; fits 2.7 / 2.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key mF/(M+m) is the unique correct answer. The stem states no slip, a frictionless table, and a horizontal push on the lower block."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear and unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions are encoded, and the explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, one dominant skill, and no arithmetic load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, clean and in scope, so it passes on all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Symbolic two-step Newton's second law: apply it to the combined system to get a = F/(M+m), then to the upper block, where static friction is the only horizontal force, giving f = mF/(M+m). It requires choosing the system and identifying static friction as the net force. No arithmetic, clear wording, in scope. Typical of a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-m02-k0",
+  "cellId": "ap_physics_1-m02",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "6.5",
+  "unitCode": "6",
+  "skillPrimary": "2.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ph_t5_pred_rolling_speed_scaling",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: energy conservation for rolling without slipping gives v = sqrt(10gh/7), so mass and radius cancel and v scales as sqrt(h). Quadrupling h doubles v, giving 5.29 m/s. It needs one proportional-reasoning step, plus recognizing that the distractor information (mass, radius) is irrelevant. Arithmetic is trivial and the reading load is minimal. Distractors reflect common misconceptions (linear scaling with h, including mass, no dependence at all).",
+  "payload": {
+   "archetype": "ph_t5_pred_rolling_speed_scaling",
+   "topic": "6.5",
+   "skill": "2.D",
+   "calculator": "allowed",
+   "stem": "A solid sphere rolls without slipping from rest down an incline from a height of $0.5\\text{ m}$ and reaches the bottom with a speed of $2.65\\text{ m/s}$. A second solid sphere with $3$ times the mass and $2$ times the radius rolls without slipping from rest down the same incline from a height $4$ times as great. What is the best prediction of the speed of the second sphere at the bottom?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$10.6\\text{ m/s}$",
+     "why": "Scales the speed with the height factor to the first power.",
+     "value": "10.583005"
+    },
+    {
+     "text": "$5.29\\text{ m/s}$",
+     "why": "For a solid sphere $mgh=\\tfrac12mv^2+\\tfrac12\\left(\\tfrac25mR^2\\right)\\omega^2$ gives $v=\\sqrt{10gh/7}$, which does not depend on the mass or the radius, so $v\\propto\\sqrt{h}$: $2.65\\text{ m/s}\\times\\sqrt{4}=5.29\\text{ m/s}$.",
+     "value": "5.2915026"
+    },
+    {
+     "text": "$9.17\\text{ m/s}$",
+     "why": "Includes the factor for the mass, as if a heavier sphere rolls faster.",
+     "value": "9.1651514"
+    },
+    {
+     "text": "$2.65\\text{ m/s}$",
+     "why": "Leaves the speed unchanged because the mass and radius changed.",
+     "value": "2.6457513"
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 85,
+   "facts": [
+    "fh=4",
+    "fm=3",
+    "fR=2",
+    "h=0.5"
+   ],
+   "blueprint": {
+    "id": "ph_t5_pred_rolling_speed_scaling",
+    "subject": "ap_physics_1",
+    "kind": "mc",
+    "concept": "Predicting the speed of a rolling sphere at the bottom of an incline when the mass, the radius and the height change",
+    "topic": "6.5",
+    "skill": "2.D",
+    "student_thinking": [
+     "Write energy conservation with translational and rotational kinetic energy for a solid sphere",
+     "Notice that the mass and the radius cancel and the speed scales with the square root of the height"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "both spheres are uniform solid spheres that roll without slipping",
+      "evidence": "the stem says both spheres are solid and roll without slipping"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Scales the speed with the height factor to the first power."
+     },
+     {
+      "id": "m2",
+      "description": "Includes the factor for the mass, as if a heavier sphere rolls faster."
+     },
+     {
+      "id": "m3",
+      "description": "Leaves the speed unchanged because the mass and radius changed."
+     }
+    ],
+    "verification": {
+     "independent_path": "the speeds are computed from energy conservation with the rotational inertia factor and their ratio is compared with the square root of the height factor",
+     "method": "sympy symbolic + independent numeric path"
+    },
+    "judgment_demand": [
+     "scaling_prediction"
+    ]
+   },
+   "seed": 13900,
+   "pack_id": "ph_t5_pred_rolling_speed_scaling-s13900",
+   "explanation_en": "The correct answer is $5.29\\text{ m/s}$. For a solid sphere $mgh=\\tfrac12mv^2+\\tfrac12\\left(\\tfrac25mR^2\\right)\\omega^2$ gives $v=\\sqrt{10gh/7}$, which does not depend on the mass or the radius, so $v\\propto\\sqrt{h}$: $2.65\\text{ m/s}\\times\\sqrt{4}=5.29\\text{ m/s}$.\n$10.6\\text{ m/s}$ is incorrect: Scales the speed with the height factor to the first power.\n$9.17\\text{ m/s}$ is incorrect: Includes the factor for the mass, as if a heavier sphere rolls faster.\n$2.65\\text{ m/s}$ is incorrect: Leaves the speed unchanged because the mass and radius changed."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ph_t5_pred_rolling_speed_scaling",
+   "facts": [
+    "fh=4",
+    "fm=3",
+    "fR=2",
+    "h=0.5"
+   ],
+   "seed": 13900
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Rolling energy scaling, predicting a factor of change; fits 6.5 and 2.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "v=sqrt(10gh/7) is independent of m and R, so 4x the height gives 2x the speed: 5.29 m/s. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem states solid spheres, rolling without slipping, and a common incline, so all conditions are given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (first-power height scaling, mass dependence, no change). The explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, light reading load, trivial arithmetic, calculator designation consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, correct scaling item with a unique key and distinct distractors. It is within scope and has a suitable load."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: energy conservation for rolling without slipping gives v = sqrt(10gh/7), so mass and radius cancel and v scales as sqrt(h). Quadrupling h doubles v, giving 5.29 m/s. It needs one proportional-reasoning step, plus recognizing that the distractor information (mass, radius) is irrelevant. Arithmetic is trivial and the reading load is minimal. Distractors reflect common misconceptions (linear scaling with h, including mass, no dependence at all).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-m02-k1",
+  "cellId": "ap_physics_1-m02",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "6.5",
+  "unitCode": "6",
+  "skillPrimary": "2.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ph_t5_pred_rolling_speed_scaling",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student must choose energy conservation including rotational KE, recognize that mass and radius cancel for same-shape rolling objects (v = sqrt(10gh/7) for a solid sphere), and apply a square-root proportional scaling to height (factor sqrt(2)). Distractors on mass and radius test conceptual understanding of functional dependence. Light arithmetic, short stem, no ambiguity; typical full-mock difficulty.",
+  "payload": {
+   "archetype": "ph_t5_pred_rolling_speed_scaling",
+   "topic": "6.5",
+   "skill": "2.D",
+   "calculator": "allowed",
+   "stem": "A solid sphere rolls without slipping from rest down an incline from a height of $1.5\\text{ m}$ and reaches the bottom with a speed of $4.58\\text{ m/s}$. A second solid sphere with $3$ times the mass and $2$ times the radius rolls without slipping from rest down the same incline from a height $2$ times as great. What is the best prediction of the speed of the second sphere at the bottom?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$4.58\\text{ m/s}$",
+     "why": "Leaves the speed unchanged because the mass and radius changed.",
+     "value": "4.5825757"
+    },
+    {
+     "text": "$6.48\\text{ m/s}$",
+     "why": "For a solid sphere $mgh=\\tfrac12mv^2+\\tfrac12\\left(\\tfrac25mR^2\\right)\\omega^2$ gives $v=\\sqrt{10gh/7}$, which does not depend on the mass or the radius, so $v\\propto\\sqrt{h}$: $4.58\\text{ m/s}\\times\\sqrt{2}=6.48\\text{ m/s}$.",
+     "value": "6.4807407"
+    },
+    {
+     "text": "$9.17\\text{ m/s}$",
+     "why": "Scales the speed with the height factor to the first power.",
+     "value": "9.1651514"
+    },
+    {
+     "text": "$11.2\\text{ m/s}$",
+     "why": "Includes the factor for the mass, as if a heavier sphere rolls faster.",
+     "value": "11.224972"
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 85,
+   "facts": [
+    "fh=2",
+    "fm=3",
+    "fR=2",
+    "h=1.5"
+   ],
+   "blueprint": {
+    "id": "ph_t5_pred_rolling_speed_scaling",
+    "subject": "ap_physics_1",
+    "kind": "mc",
+    "concept": "Predicting the speed of a rolling sphere at the bottom of an incline when the mass, the radius and the height change",
+    "topic": "6.5",
+    "skill": "2.D",
+    "student_thinking": [
+     "Write energy conservation with translational and rotational kinetic energy for a solid sphere",
+     "Notice that the mass and the radius cancel and the speed scales with the square root of the height"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "both spheres are uniform solid spheres that roll without slipping",
+      "evidence": "the stem says both spheres are solid and roll without slipping"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Leaves the speed unchanged because the mass and radius changed."
+     },
+     {
+      "id": "m2",
+      "description": "Scales the speed with the height factor to the first power."
+     },
+     {
+      "id": "m3",
+      "description": "Includes the factor for the mass, as if a heavier sphere rolls faster."
+     }
+    ],
+    "verification": {
+     "independent_path": "the speeds are computed from energy conservation with the rotational inertia factor and their ratio is compared with the square root of the height factor",
+     "method": "sympy symbolic + independent numeric path"
+    },
+    "judgment_demand": [
+     "scaling_prediction"
+    ]
+   },
+   "seed": 13901,
+   "pack_id": "ph_t5_pred_rolling_speed_scaling-s13901",
+   "explanation_en": "The correct answer is $6.48\\text{ m/s}$. For a solid sphere $mgh=\\tfrac12mv^2+\\tfrac12\\left(\\tfrac25mR^2\\right)\\omega^2$ gives $v=\\sqrt{10gh/7}$, which does not depend on the mass or the radius, so $v\\propto\\sqrt{h}$: $4.58\\text{ m/s}\\times\\sqrt{2}=6.48\\text{ m/s}$.\n$4.58\\text{ m/s}$ is incorrect: Leaves the speed unchanged because the mass and radius changed.\n$9.17\\text{ m/s}$ is incorrect: Scales the speed with the height factor to the first power.\n$11.2\\text{ m/s}$ is incorrect: Includes the factor for the mass, as if a heavier sphere rolls faster."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ph_t5_pred_rolling_speed_scaling",
+   "facts": [
+    "fh=2",
+    "fm=3",
+    "fR=2",
+    "h=1.5"
+   ],
+   "seed": 13901
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Rolling without slipping energy conservation; proportional prediction matches 2.D and topic 6.5."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "v = sqrt(10gh/7) is independent of m and R, so v scales as sqrt(h) and the answer is 6.48 m/s. Unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem states solid spheres, rolling without slipping, and starting from rest."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions (no change, linear height scaling, extra mass factor), and the explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 85 seconds, minimal arithmetic, calculator designation consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean proportional-reasoning item on rolling. The key is unique and correct, the distractors are distinct, and there are no scope issues."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must choose energy conservation including rotational KE, recognize that mass and radius cancel for same-shape rolling objects (v = sqrt(10gh/7) for a solid sphere), and apply a square-root proportional scaling to height (factor sqrt(2)). Distractors on mass and radius test conceptual understanding of functional dependence. Light arithmetic, short stem, no ambiguity; typical full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-m02-k2",
+  "cellId": "ap_physics_1-m02",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "6.5",
+  "unitCode": "6",
+  "skillPrimary": "2.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ph_t5_pred_rolling_speed_scaling",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Rolling energy conservation gives v = sqrt(10gh/7) for a solid sphere; mass and radius cancel, so v scales with sqrt(h). Height 9x gives speed 3x, so 3 x 3.74 = 11.2 m/s. One governing law, one proportional-reasoning step, and distractor variables to ignore. Minimal arithmetic and reading, no representation change.",
+  "payload": {
+   "archetype": "ph_t5_pred_rolling_speed_scaling",
+   "topic": "6.5",
+   "skill": "2.D",
+   "calculator": "allowed",
+   "stem": "A solid sphere rolls without slipping from rest down an incline from a height of $1\\text{ m}$ and reaches the bottom with a speed of $3.74\\text{ m/s}$. A second solid sphere with $2$ times the mass and $2$ times the radius rolls without slipping from rest down the same incline from a height $9$ times as great. What is the best prediction of the speed of the second sphere at the bottom?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$11.2\\text{ m/s}$",
+     "why": "For a solid sphere $mgh=\\tfrac12mv^2+\\tfrac12\\left(\\tfrac25mR^2\\right)\\omega^2$ gives $v=\\sqrt{10gh/7}$, which does not depend on the mass or the radius, so $v\\propto\\sqrt{h}$: $3.74\\text{ m/s}\\times\\sqrt{9}=11.2\\text{ m/s}$.",
+     "value": "11.224972"
+    },
+    {
+     "text": "$22.4\\text{ m/s}$",
+     "why": "Includes the factor for the radius, as if a larger sphere rolls faster.",
+     "value": "22.449944"
+    },
+    {
+     "text": "$33.7\\text{ m/s}$",
+     "why": "Scales the speed with the height factor to the first power.",
+     "value": "33.674917"
+    },
+    {
+     "text": "$3.74\\text{ m/s}$",
+     "why": "Leaves the speed unchanged because the mass and radius changed.",
+     "value": "3.7416574"
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 85,
+   "facts": [
+    "fh=9",
+    "fm=2",
+    "fR=2",
+    "h=1.0"
+   ],
+   "blueprint": {
+    "id": "ph_t5_pred_rolling_speed_scaling",
+    "subject": "ap_physics_1",
+    "kind": "mc",
+    "concept": "Predicting the speed of a rolling sphere at the bottom of an incline when the mass, the radius and the height change",
+    "topic": "6.5",
+    "skill": "2.D",
+    "student_thinking": [
+     "Write energy conservation with translational and rotational kinetic energy for a solid sphere",
+     "Notice that the mass and the radius cancel and the speed scales with the square root of the height"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "both spheres are uniform solid spheres that roll without slipping",
+      "evidence": "the stem says both spheres are solid and roll without slipping"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Includes the factor for the radius, as if a larger sphere rolls faster."
+     },
+     {
+      "id": "m2",
+      "description": "Scales the speed with the height factor to the first power."
+     },
+     {
+      "id": "m3",
+      "description": "Leaves the speed unchanged because the mass and radius changed."
+     }
+    ],
+    "verification": {
+     "independent_path": "the speeds are computed from energy conservation with the rotational inertia factor and their ratio is compared with the square root of the height factor",
+     "method": "sympy symbolic + independent numeric path"
+    },
+    "judgment_demand": [
+     "scaling_prediction"
+    ]
+   },
+   "seed": 13902,
+   "pack_id": "ph_t5_pred_rolling_speed_scaling-s13902",
+   "explanation_en": "The correct answer is $11.2\\text{ m/s}$. For a solid sphere $mgh=\\tfrac12mv^2+\\tfrac12\\left(\\tfrac25mR^2\\right)\\omega^2$ gives $v=\\sqrt{10gh/7}$, which does not depend on the mass or the radius, so $v\\propto\\sqrt{h}$: $3.74\\text{ m/s}\\times\\sqrt{9}=11.2\\text{ m/s}$.\n$22.4\\text{ m/s}$ is incorrect: Includes the factor for the radius, as if a larger sphere rolls faster.\n$33.7\\text{ m/s}$ is incorrect: Scales the speed with the height factor to the first power.\n$3.74\\text{ m/s}$ is incorrect: Leaves the speed unchanged because the mass and radius changed."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ph_t5_pred_rolling_speed_scaling",
+   "facts": [
+    "fh=9",
+    "fm=2",
+    "fR=2",
+    "h=1.0"
+   ],
+   "seed": 13902
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Rolling without slipping energy scaling; proportional reasoning fits 2.D and topic 6.5."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "v = sqrt(10gh/7) independent of m and R; 3x height-root gives 11.2 m/s uniquely."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear, both spheres solid and rolling without slipping."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (radius factor, linear height scaling, unchanged); each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 85 s, minimal arithmetic, calculator designation consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean scaling item on rolling without slipping; key unique, distractors distinct, suitable load."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Rolling energy conservation gives v = sqrt(10gh/7) for a solid sphere; mass and radius cancel, so v scales with sqrt(h). Height 9x gives speed 3x, so 3 x 3.74 = 11.2 m/s. One governing law, one proportional-reasoning step, and distractor variables to ignore. Minimal arithmetic and reading, no representation change.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ }
+]

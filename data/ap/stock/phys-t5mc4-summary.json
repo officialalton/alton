@@ -1,0 +1,52 @@
+{
+ "runs": [
+  "phys-t5-mc4"
+ ],
+ "rows": 39,
+ "passed": 26,
+ "rejected": 13,
+ "passRate": 0.667,
+ "singles": {
+  "candidates": 39
+ },
+ "unitsPassed": {
+  "1": 6,
+  "2": 4,
+  "3": 5,
+  "4": 1,
+  "6": 1,
+  "7": 3,
+  "8": 6
+ },
+ "figPassed": {
+  "none": 26
+ },
+ "figAll": {
+  "none": 39
+ },
+ "figPassRate": {
+  "none": "26/39"
+ },
+ "renderTypesPassed": {
+  "none": 18,
+  "ap_table": 8
+ },
+ "archetypesPassed": {
+  "ph_t5_rank_projectile_range": 3,
+  "ph_t5_evid_range_speed_data": 3,
+  "ph_t5_claim_com_explosion": 1,
+  "ph_t5_evid_centripetal_speed_data": 3,
+  "ph_t5_sym_block_ramp_friction_speed": 1,
+  "ph_t5_sym_drop_onto_spring": 1,
+  "ph_t5_pred_power_speed": 3,
+  "ph_t5_sym_ballistic_pendulum": 1,
+  "ph_t5_claim_rolling_race": 1,
+  "ph_t5_pred_shm_max_speed": 3,
+  "ph_t5_rank_buoyant_force": 3,
+  "ph_t5_claim_container_pressure": 1,
+  "ph_t5_evid_pressure_depth_data": 2
+ },
+ "costUsd": {
+  "phys-t5-mc4": 1.3056
+ }
+}

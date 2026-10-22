@@ -44,3 +44,17 @@
 - 미반영·미커밋 변경 없음(모든 변경 integration·review에 푸시). 격리 스택 모두 정지, `config.toml` 원복.
 - 재개 절차: (1) 교체 재고를 만든 뒤 `post-publish-twin-audit` 목록으로 새 버전 초안 교체(관리자 'AP 재고 관리' → AB/AP 세트 새 버전), (2) CH5는 unit 3.4 기체 문항 1개 작성 후 `chem-structure-block.ts --extra-block data/ap/stock/blocked-chem-defects-20261022.json` + CH4 키 차단으로 재배정, (3) 공개 전 `structure-rule-scope.md`의 엄격 게이트를 먼저 수행, (4) PH5·LT5는 `ap-topup-p1-lt-wh` 병합(ledger.json 합집합·keys-file.ts 충돌 해결) 뒤에.
 - 테스트 응시 정리 대기(미제출, 테스트 계정): CH4 `5a18e9ff-18a6-4706-9870-8394258bc78c`, CS4 `04ffc137-f1ec-4bff-a6bd-aaf614a91d6e`, CS5 `be9004fc-dcb5-4395-b7b0-2a85b53f710e`, PS5 `86f54d8b-3195-402b-82c2-f49694adc20d`, 이전 실행분(PC5·BI5·EL5·LT4·PS3·PS4·SAT·US3)은 기존 목록.
+
+## PH5·LT5 엄격 게이트 결과 (2026-10-22, 둘 다 미공개 — "계산상 조립 가능"이 아니라 부족분 있음)
+- 통합본 병합 후 원장 누적 **$567.1786**(이번 처리 유료 호출 0). 상한 730/740.
+### Physics 1 PH5 (`exact-assign-phys-ph5-structure.json`)
+- 공개 Physics 1 Exam 1–4의 객관식 168개와 문장 순서 유사도(숫자·LaTeX 가림)로 비교하고 상위 쌍을 읽었다.
+- 코디네이터 배정의 쌍둥이: `phys-s3-a:ap_physics_1-m26-k1`(스케이터 팔 접기 각운동량·회전 운동 에너지)는 공개 Exam 2의 스케이터(관성 5→1.25, 운동 에너지 배율)와 같은 장면·조건·풀이(L 보존)이고 질문 형식만 다르다 → **쌍둥이**. `phys-t5-mc4:m05-k0`(경사에서 거리 d 뒤 속력)는 Exam 1 하강 가속도 문항과 같은 자유물체도에서 일-에너지 한 단계가 더해진 것이라 질문·풀이가 달라 **독립(경계)**. `phys-s5n-mc:m43-k1`(자유낙하 시간)은 Exam 3 던진 공 총 시간과 식이 달라 **독립**. FRQ 4개(로프로 당기는 상자, 벽 충돌 충격량, 겉보기 무게 실험, 떨어뜨린/수평 발사 공 주장)는 공개 FRQ 16개와 소재·과제가 달라 독립.
+- 공개 키와 숫자만 다른 변형(유사도 0.65 이상)을 재고 505개 중 **291개 차단**하고(`/tmp` 차단 목록 → `data/ap/stock/blocked-twins-phys1-strict-20261022.json`은 0.8 이상 272개) 다시 풀면 **단독 37 + 가상 1(단원 1), 2문항 세트 가상 2(단원 1, 단원 2), FRQ 4(가상 0)**. 부족분: 단원 1 단독 1개, 2문항 세트 2개(단원 1·2) = 5문항.
+- 참고: 0.8 이상만 막으면 가상 2세트(단원 1·2)뿐이지만 0.69–0.76 구간에 Atwood 도르래(3·5 kg ↔ Exam 2 2·6 kg), 같은 시나리오 완전 비탄성 충돌(Exam 3), 컨테이너 액체 압력(Exam 1) 등 숫자만 다른 쌍둥이가 남는다.
+### Eng Lit LT5 (`exact-assign-englit-lt5-structure.json`)
+- MC 지문 5개: Danner Account(s05), Wharton *The Other Two*(rs32), Room Above the Coal Merchant's(p06), Hughes *The Weary Blues*(rs33), The Kitchen Room(l01). 현재 공개 LT1–LT4의 MC 지문 목록과 제목·저자로 대조: 겹치는 지문 없음.
+- FRQ: q1 Hardy *The Darkling Thrush* — **공개 Exam 3의 객관식 지문(같은 시, 13문항)과 같은 작품**이다. 과제(시 분석 에세이 vs 객관식)는 다르지만 같은 지문을 이미 읽은 응시자가 생기므로 독립으로 세지 않았다. q2 *The Pupil at Harrowgate Lodge*(ALTON 원본 소설): 공개 FRQ 지문과 제목·장면 모두 달라 독립. q3 *The Place That Holds a Character*: 공개 Exam 2(*The House That Holds*, 집이 배경 이상의 의미) · Exam 4(*The Debt and the Door*, 실패한 농장과 빚)와 주제가 겹치는 개념형 프롬프트(경계, 독립으로 세지 않음).
+- 부족분: FRQ q1(시) 1개, q3 1개 — 대체 지문·프롬프트가 필요. MC 5개 지문은 독립이라 새 항목은 필요 없다.
+### 다음 작업
+- PH5: 단원 1 단독 1개 + 2문항 세트 2개를 작성한 뒤 재배정. LT5: 시 FRQ 1개와 q3 프롬프트 1개를 교체(또는 q3는 경계로 판단해 유지).

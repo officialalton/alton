@@ -1,0 +1,42 @@
+{
+ "runs": [
+  "phys-t5-mc6",
+  "phys-t5-mc7",
+  "phys-t5-mc8"
+ ],
+ "rows": 15,
+ "passed": 9,
+ "rejected": 6,
+ "passRate": 0.6,
+ "singles": {
+  "candidates": 15
+ },
+ "unitsPassed": {
+  "4": 2,
+  "5": 5,
+  "8": 2
+ },
+ "figPassed": {
+  "none": 9
+ },
+ "figAll": {
+  "none": 15
+ },
+ "figPassRate": {
+  "none": "9/15"
+ },
+ "renderTypesPassed": {
+  "none": 9
+ },
+ "archetypesPassed": {
+  "ph_t5_rank_rim_tangential_accel": 3,
+  "ph_t5_claim_hydraulic_work": 2,
+  "ph_t5_pred_cart_split_energy": 2,
+  "ph_t5_claim_same_torque_two_wheels": 2
+ },
+ "costUsd": {
+  "phys-t5-mc6": 0.2698,
+  "phys-t5-mc7": 0.0885,
+  "phys-t5-mc8": 0.101
+ }
+}

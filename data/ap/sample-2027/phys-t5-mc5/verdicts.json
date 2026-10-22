@@ -1,0 +1,327 @@
+[
+ {
+  "key": "ap_physics_1-m01-k0",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Because the upper block does not slip, both blocks move together with acceleration a = F/(M+m). The only horizontal force on the upper block is friction, so f = ma = mF/(M+m).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "mF/(M+m)"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.7 and skill 2.A fit: a symbolic derivation using Newton's second law and static friction, within Unit 2."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key mF/(M+m) is unique and the stem has all needed conditions."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception and each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short symbolic MC of about 90 seconds with no arithmetic load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable. The key is correct and unique, the scope fits topic 2.7, the distractors are distinct and each is explained, and it is a generic textbook stacked-blocks form rather than a released AP item."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Symbolic derivation requiring choice of system, whole-system Newton's second law for the shared acceleration, then applying it to the upper block to identify static friction as the net force. Concept depth is moderate, with no arithmetic burden, short wording, and unambiguous setup (frictionless table, no slipping). Distractors target common errors (F, a without m, wrong denominator). It fits skill 2.A and is a typical mock-exam multiple-choice item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k1",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "mF/(M+m)",
+     "brief_reasoning": "Both blocks share acceleration a = F/(M+m). The only horizontal force on the upper block is friction, so f = ma = mF/(M+m).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60-90 seconds, needs no calculation, and its load is typical of the AP exam.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unique-key symbolic question on static friction with stacked blocks. It has plausible distractors and suits the exam, so it passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing the system (both blocks) to find the common acceleration a = F/(M+m), then applying Newton's second law to the upper block, where static friction is the only horizontal force, to get f = mF/(M+m). Two to three reasoning steps with symbolic manipulation only, fitting skill 2.A. Wording is clear and the model assumptions are stated (frictionless table, no slipping). Distractors map to plausible misconceptions. No heavy arithmetic or extra reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k2",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Since there is no slipping, the two blocks move together with a = F/(M+m). Friction is the only horizontal force on the upper block, so f = m·a = mF/(M+m).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "mF/(M+m)"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Static friction with a symbolic derivation via Newton's second law for the system and the upper block; fits 2.7 / 2.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key mF/(M+m) is the unique correct answer. The stem states no slip, a frictionless table, and a horizontal push on the lower block."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear and unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions are encoded, and the explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, one dominant skill, and no arithmetic load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, clean and in scope, so it passes on all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Symbolic two-step Newton's second law: apply it to the combined system to get a = F/(M+m), then to the upper block, where static friction is the only horizontal force, giving f = mF/(M+m). It requires choosing the system and identifying static friction as the net force. No arithmetic, clear wording, in scope. Typical of a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m02-k0",
+  "cellId": "ap_physics_1-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "For a solid sphere rolling without slipping, v=sqrt(10gh/7), which doesn't depend on mass or radius. Four times the height gives twice the speed: 5.29 m/s.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "5.29 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Rolling energy scaling, predicting a factor of change; fits 6.5 and 2.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "v=sqrt(10gh/7) is independent of m and R, so 4x the height gives 2x the speed: 5.29 m/s. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem states solid spheres, rolling without slipping, and a common incline, so all conditions are given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (first-power height scaling, mass dependence, no change). The explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, light reading load, trivial arithmetic, calculator designation consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, correct scaling item with a unique key and distinct distractors. It is within scope and has a suitable load."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: energy conservation for rolling without slipping gives v = sqrt(10gh/7), so mass and radius cancel and v scales as sqrt(h). Quadrupling h doubles v, giving 5.29 m/s. It needs one proportional-reasoning step, plus recognizing that the distractor information (mass, radius) is irrelevant. Arithmetic is trivial and the reading load is minimal. Distractors reflect common misconceptions (linear scaling with h, including mass, no dependence at all).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_1-m02-k1",
+  "cellId": "ap_physics_1-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "6.48 m/s",
+     "brief_reasoning": "For a solid sphere, v = sqrt(10gh/7), so mass and radius cancel. Doubling h multiplies v by sqrt2: 4.58 × 1.414 = 6.48 m/s.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Rolling without slipping energy conservation; proportional prediction matches 2.D and topic 6.5."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "v = sqrt(10gh/7) is independent of m and R, so v scales as sqrt(h) and the answer is 6.48 m/s. Unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem states solid spheres, rolling without slipping, and starting from rest."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions (no change, linear height scaling, extra mass factor), and the explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 85 seconds, minimal arithmetic, calculator designation consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean proportional-reasoning item on rolling. The key is unique and correct, the distractors are distinct, and there are no scope issues."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must choose energy conservation including rotational KE, recognize that mass and radius cancel for same-shape rolling objects (v = sqrt(10gh/7) for a solid sphere), and apply a square-root proportional scaling to height (factor sqrt(2)). Distractors on mass and radius test conceptual understanding of functional dependence. Light arithmetic, short stem, no ambiguity; typical full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_1-m02-k2",
+  "cellId": "ap_physics_1-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "11.2 m/s",
+     "brief_reasoning": "For a solid sphere rolling without slipping, v = sqrt(10gh/7), which does not depend on mass or radius. Nine times the height gives 3 times the speed: 3 × 3.74 = 11.2 m/s.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Rolling without slipping energy scaling; proportional reasoning fits 2.D and topic 6.5."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "v = sqrt(10gh/7) independent of m and R; 3x height-root gives 11.2 m/s uniquely."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear, both spheres solid and rolling without slipping."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (radius factor, linear height scaling, unchanged); each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 85 s, minimal arithmetic, calculator designation consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean scaling item on rolling without slipping; key unique, distractors distinct, suitable load."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Rolling energy conservation gives v = sqrt(10gh/7) for a solid sphere; mass and radius cancel, so v scales with sqrt(h). Height 9x gives speed 3x, so 3 x 3.74 = 11.2 m/s. One governing law, one proportional-reasoning step, and distractor variables to ignore. Minimal arithmetic and reading, no representation change.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ }
+]

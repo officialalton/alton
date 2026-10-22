@@ -1,0 +1,525 @@
+[
+ {
+  "key": "ap_physics_1-f01-k0",
+  "cellId": "ap_physics_1-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Draw four arrows starting on the dot: gravity mg pointing straight down, normal force N pointing straight up, tension T pointing 30° above the horizontal in the direction of motion, and kinetic friction f pointing horizontally against the motion.",
+     "final_answer": "Four forces: weight (down), normal (up), tension (30° above horizontal, forward), kinetic friction (horizontal, backward)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Vertical forces balance, so N = mg − T sinθ. Kinetic friction is f = μN. Newton's second law along the horizontal gives ma = T cosθ − μ(mg − T sinθ).",
+     "final_answer": "a = [T cosθ − μ(mg − T sinθ)]/m",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "N = 78.4 − 20 = 58.4 N, so f = 14.6 N. Net force = 34.64 − 14.6 = 20.04 N, so a = 20.04/8 ≈ 2.5 m/s². With g = 10 m/s² the answer is about 2.4 m/s².",
+     "final_answer": "≈2.5 m/s²",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Raising the angle increases T sinθ, the upward part of the tension (from 20 N to 28.3 N). That lowers the normal force, N = mg − T sinθ, from 58.4 N to 50.1 N. Since f = μN, friction drops from 14.6 N to 12.5 N.",
+     "final_answer": "Decreases",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The physics, key and rubric are correct and the stimulus is complete. The bundle fails the skill-fit criterion because it is labeled 2.B (Mathematical Routines) but only Part C (2 of 10 points) assesses 2.B. Part B is a derivation (2.A), Part A is a diagram, and Part D is a justification. Topic 2.4 is also only loosely matched.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "The content is Unit 2 (Newton's laws, friction, FBD) and in scope, but the bundle is labeled Mathematical Routines (2.B) at 10 points. Part C is the only 2.B part, worth 2 points, and Parts A, B and D are 1.A/1.C, 2.A and 3.B/3.C. The dominant demand of the bundle is therefore not the target skill. Part B is a derivation, which is 2.A (selecting and deriving an expression), not a numeric 2.B routine. Topic 2.4 (Newton's First Law) is only loosely matched, because the crate accelerates and the main law used is the second law."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "N = 58.4 N and a = 2.51 m/s^2 with g = 9.8 are correct. Part D (friction decreases) is unique and correct. The rubric rows are consistent and the dependencies are sensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete: mass, tension, angle, mu, and the statement that the crate speeds up. The empty data object is acceptable for a text-only stimulus. Part A asks for a diagram on a dot, and the response mode is stated. The wording is clear. g = 9.8 is a standard assumption."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The common errors listed per row are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for a multi-part Physics 1 FRQ. The calculator use is trivial and consistent with the allowed designation. The total of 10 points matches the Mathematical Routines weight."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style multi-part FRQ in scope for Unit 2 (2.4/2.2/2.5). It requires an FBD with four forces and no component arrows, applying equilibrium in the vertical direction to find N = mg - T sin(theta), then Newton's second law horizontally to derive a = [T cos(theta) - mu(mg - T sin(theta))]/m. Part C is a short substitution giving about 2.5 m/s^2, and Part D asks for a qualitative proportional-reasoning justification that N and friction decrease as theta increases. The item has several steps and representation changes but modest reading and arithmetic, and the wording is unambiguous. This level suits a full mock exam rather than basic learning or an advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_physics_1-f01-k1",
+  "cellId": "ap_physics_1-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Four forces act on the crate: weight mg pointing straight down, normal force N pointing straight up, tension T along the rope at 25° above the horizontal in the direction of motion, and kinetic friction f pointing horizontally opposite the motion.",
+     "final_answer": "Four arrows starting on the dot: Weight (mg) down; Normal force (N) up; Tension (T) at 25° above the horizontal, forward; Kinetic friction (f_k) horizontal, backward. The normal arrow should be a bit shorter than the weight arrow.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Vertical: N + T sinθ = mg, so N = mg − T sinθ. Friction: f = μN. Horizontal: T cosθ − μ(mg − T sinθ) = ma.",
+     "final_answer": "a = [T cosθ − μ(mg − T sinθ)]/m = [T(cosθ + μ sinθ) − μmg]/m",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "T cos25° = 45.3 N. N = 117.6 − 21.1 = 96.5 N. f = 0.2 × 96.5 = 19.3 N. Net force = 45.3 − 19.3 = 26.0 N. a = 26.0 N / 12 kg ≈ 2.17 m/s². Using g = 10 m/s² instead gives about 2.13 m/s².",
+     "final_answer": "a ≈ 2.2 m/s² (2.17 m/s² with g = 9.8 m/s²)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Friction is f = μ(mg − T sinθ). At the new angle of 35°, T sinθ is larger (28.7 N instead of 21.1 N), so the normal force is smaller and friction drops. The crate stays on the floor because 28.7 N is less than mg.",
+     "final_answer": "It decreases. The larger upward part of the tension lowers the normal force, and f_k = μN.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. It is a 10-point Mathematical Routines bundle spanning topics 2.4, 2.2 and 2.5, and its point grain is allowed. Each part is judged against its own skill. Part C is the 2.B target and is a two-step calculation (normal force, then acceleration). The independent solver agrees with every key.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "All content is in Unit 2: free-body diagram, Newton's second law with an angled force and kinetic friction, and the effect on the normal force. Part C carries the 2.B skill. The other parts use 1.A/1.C, 2.A and 3.B/3.C, which is acceptable for a bundle."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are unique and consistent. Rubric dependencies (C1 requires B1, C2 requires B3) are coherent. The 10-point total is correct (3+3+2+2). The key for D is unambiguous because the crate stays on the floor: at 35 degrees T sin(theta) is about 28.7 N, which is less than mg. The stem also states that the crate speeds up, and the answers are consistent with that."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus gives m, T, theta and mu, and assumes g = 9.8 m/s^2 (standard model assumption). The empty data object is acceptable for a text-only stimulus. Part A uses a diagram response on a dot, and the wording is clear. The rubric rows are mostly 1 point each, and A3 keeps the normal-versus-weight comparison explicit."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item with no options. The rubric rows list common errors (using N = mg, using the full tension horizontally, adding a force of motion), which serve the same purpose."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is about 22 minutes for 10 points, which is reasonable for a Physics 1 Mathematical Routines FRQ. The arithmetic is light and a calculator is allowed, with consistent designation."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style multi-part dynamics item. It requires drawing an FBD with four forces, resolving the tension into components, recognizing that the normal force is reduced by the vertical tension component, applying f=mu*N, and using Newton's second law horizontally. Part C is a short numeric substitution (a approx 2.2 m/s^2). Part D is a conceptual proportional-reasoning justification (a larger angle means a smaller N and so smaller friction). The scope is within Unit 2 (2.2, 2.4, 2.5). The arithmetic is light, the wording is unambiguous, and the reading load is low, so the difficulty comes from legitimate multi-step reasoning and representation changes rather than unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_physics_1-f01-k2",
+  "cellId": "ap_physics_1-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Four forces: weight mg downward, normal force N upward, tension T at 35° above horizontal in direction of motion, kinetic friction f horizontal opposite motion.",
+     "final_answer": "Arrows from dot: Fg (down), FN (up), T (up-forward at 35°), fk (horizontal, opposite motion)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Vertical: N = mg − T sinθ. Horizontal: T cosθ − μN = ma.",
+     "final_answer": "a = [T cosθ − μ(mg − T sinθ)]/m = (T(cosθ + μ sinθ))/m − μg",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "N = 98 − 22.9 = 75.1 N; f = 15.0 N; T cosθ = 32.8 N; a = 17.8/10.",
+     "final_answer": "a ≈ 1.8 m/s² (1.78 with g=9.8; 1.74 with g=10)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "f = μN = μ(mg − T sinθ). Going from 35° to 50° raises sinθ, so the vertical part of the tension grows (30.6 N, still less than mg, so the crate stays on the floor). The normal force gets smaller, so friction does too.",
+     "final_answer": "Decreases: the larger vertical tension component reduces the normal force, and f = μN.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The four-part crate bundle is in scope for Unit 2 (topics 2.4, 2.2, 2.5). The keys are unique and consistent with the independent solver, and the rubric rows are coherent for a 10-point item. The stimulus is complete and the task load is reasonable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part matches its own skill: FBD, derivation, calculation (2.B), and claim with justification. All content is within Unit 2."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "N=75.1 N and a=1.78 m/s^2 are correct. At 50° the crate stays on the floor, so friction decreases. Points sum to 10."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "All needed values are given. The crate is stated to speed up, which fixes the direction of friction. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to this free-response item. The common-error entries in the rubric are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical, and calculator use is allowed and consistent. The 22-minute estimate is an internal reference only."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style FRQ on Newton's laws with friction. Requires drawing a free-body diagram (4 forces), resolving the angled tension, finding N = mg - T sinθ, applying f = μN and Newton's second law, then a single substitution and a qualitative proportional-reasoning justification linking angle to normal force and friction. The concepts are in scope, the arithmetic is short, and the wording is unambiguous, so the difficulty comes from legitimate multi-step reasoning and representation changes rather than from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_physics_1-f02-k0",
+  "cellId": "ap_physics_1-f02",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:A:flagged,B:flagged,C:flagged",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Triangular F–t graph. Horizontal axis is time t (ms), vertical axis is force F (N). Straight lines join (0, 0), the peak at (5 ms, 800 N) and (13 ms, 0).",
+     "final_answer": "Triangle with its peak of 800 N at 5 ms, returning to zero at 13 ms",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The data lead to a physically impossible rebound speed; see part C."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Impulse equals the area under the F–t graph: J = ½(0.013 s)(800 N) = 5.2 N·s.",
+     "final_answer": "5.2 N·s",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The data are inconsistent; see part C."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Take the incoming direction as negative. J = m(v_f − v_i), so 5.2 = 0.15(v_f + 8), which gives v_f ≈ 26.7 m/s. That is faster than the 8 m/s incoming speed, so a passive, stationary wall would be adding kinetic energy. That is impossible.",
+     "final_answer": "About 26.7 m/s by calculation, but this is not physically possible",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The force data are not consistent with v1 = 8 m/s. The rebound speed can be at most 8 m/s, so the impulse can be at most 2.4 N·s, yet the graph gives 5.2 N·s. The peak force or contact time is likely wrong."
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "If the clay sticks, the impulse is just enough to stop the ball: m·v1 = 1.2 N·s. A bounce needs a larger momentum change, enough to stop the ball and then send it back the other way.",
+     "final_answer": "Less than",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "wrong_key",
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The force-time data (800 N peak, 13 ms contact) give an impulse of 5.2 N·s. For an 8 m/s ball hitting a stationary wall, the maximum possible impulse is 2mv1 = 2.4 N·s. The model answer in part C is a 26.7 m/s rebound, which violates energy conservation. The scenario is physically impossible, so the key for C (and the consistency of B and D) is not defensible. Fail.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 4.2 and skill 1.A fit well: sketching a force-time graph and using area as impulse."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The rebound speed of 26.7 m/s exceeds the incoming 8 m/s. A passive wall cannot add kinetic energy (4.8 J in, about 53 J out). The keyed answers in B and C rest on inconsistent data."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The table data are complete and renderable, but the values are inconsistent with the stated mass and speed. The stem also lacks a statement that would make the data physically valid."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The rubric common_errors are reasonable (slope instead of area, sign change missed, unit conversion). This is an FRQ, so there are no options."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "An impossible physical scenario is not exam-suitable, even though the load and calculator use are typical."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item covering impulse as the area under a force-time graph, the impulse-momentum theorem with a sign reversal on bounce, and a qualitative comparison to a perfectly inelastic stick. The representation skill is met by sketching the graph from the table. The arithmetic is short (triangle area 5.2 N·s, then v2 ≈ 26.7 m/s). The main trap is the sign convention in part C. Note for the author: the 26.7 m/s rebound speed is physically unrealistic, since it is greater than the 8 m/s incoming speed. Consider changing the peak force or the contact time. This is a data-realism flaw, not a difficulty source.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_physics_1-f02-k1",
+  "cellId": "ap_physics_1-f02",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:A:flagged,B:flagged,C:flagged",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Plot the points (0,0), (5 ms,1000 N), (11 ms,0) and join them with straight lines to make a triangle. Label the axes t (ms) and F (N), and mark the peak of 1000 N at 5 ms and the end of contact at 11 ms.",
+     "final_answer": "Triangular force–time graph: peak 1000 N at 5 ms, contact ends at 11 ms",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The data give an impulse that would make the ball leave faster than it arrived, so the ball would gain kinetic energy from a passive wall. That is not physically possible."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Impulse is the area under the F–t graph: J = ½(0.011 s)(1000 N) = 5.5 N·s.",
+     "final_answer": "5.5 N·s",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "Same inconsistency as in part A."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Take the bounce direction as positive. Then J = m·v2 − m·(−v1), so 5.5 = 0.15·v2 + 1.8. This gives 0.15·v2 = 3.7 and v2 ≈ 24.7 m/s. That is about twice the 12 m/s incoming speed, which breaks energy conservation for a passive wall.",
+     "final_answer": "≈24.7 m/s (physically impossible: the ball would leave faster than it arrived)",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The data contradict the physics. A wall cannot make the rebound speed larger than 12 m/s. For a physical bounce the impulse would have to be at most 3.6 N·s."
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The clay only has to be brought to rest, so J = Δp = 0 − (−1.8) = 1.8 N·s. The bouncing ball's momentum must be stopped and then reversed, so its impulse is larger.",
+     "final_answer": "Less than",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "wrong_key"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Reject. The force-time data give an impulse of 5.5 N s, which exceeds the physical maximum of 2mv1 = 3.6 N s. The keyed rebound speed of 24.7 m/s is faster than the 12 m/s incoming speed, so the ball would gain energy from a passive wall. The scenario is physically inconsistent.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 4.2 and skill 1.A (graph creation) fit well."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The keyed rebound speed of 24.7 m/s is more than twice the incoming 12 m/s. The ball would gain kinetic energy (10.8 J to about 45.7 J) from a stationary wall, which is physically impossible. The maximum physical impulse is 2mv1 = 3.6 N s, but the data give 5.5 N s. The keyed answers follow from the numbers but contradict the physics."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The force data (peak 1000 N, 11 ms) are inconsistent with the stated mass and speed for a ball bouncing off a wall."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. Common errors are listed in the rubric rows."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "An exam item cannot ship with a physically impossible result (energy gain), because strong students would notice it."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item is a standard 1D impulse-momentum FRQ. The table is translated into a triangular force-time graph, and the area under it gives the impulse (5.5 N·s). The sign convention for a bounce is then needed to find the rebound speed (~24.7 m/s). The last part compares the impulse for a bounce with the impulse for a stick (less, because the momentum change is smaller). All content is in Unit 4 scope. The arithmetic is short and the wording is unambiguous, so the difficulty comes from legitimate levers: a representation change, the sign convention and a reasoned comparison.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_physics_1-f02-k2",
+  "cellId": "ap_physics_1-f02",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:A:flagged,B:flagged,C:flagged",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "reference_pattern_mismatch",
+   "difficulty_from_unfair_sources"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Plot F (N) against t (ms) as a triangle: a straight line up from (0,0) to a peak of 1000 N at 5 ms, then a straight line down to 0 at 11 ms.",
+     "final_answer": "Triangular pulse: peak 1000 N at t = 5 ms, contact ends at t = 11 ms; axes labeled Force F (N) and Time t (ms)",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The data lead to a physically impossible result in part C."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "The impulse is the area under the F–t graph: J = ½(0.011 s)(1000 N) = 5.5 N·s.",
+     "final_answer": "5.5 N·s",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "This impulse does not match a realistic bounce."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Take toward the wall as negative. J = m(v2 + v1), so 5.5 = 0.2(v2 + 8), giving v2 = 19.5 m/s. That is faster than the incoming 8 m/s, so a passive wall would have added kinetic energy, which is impossible. Even a perfectly elastic bounce only needs J = 3.2 N·s.",
+     "final_answer": "19.5 m/s (physically impossible: more than the 8 m/s incoming speed)",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The force data give an impulse too large to be consistent with the stated mass and speed; the rebound would gain kinetic energy."
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "If the clay sticks, its momentum change is only from mv1 to 0, so J = 0.2 × 8 = 1.6 N·s. A bounce reverses the velocity, so its momentum change, and therefore its impulse, is always larger than if the ball stops.",
+     "final_answer": "Less than",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "wrong_key"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item fails because the force-time data give an impulse of 5.5 N·s, which implies a 19.5 m/s rebound from an 8 m/s impact. This violates energy conservation for a passive wall (the maximum elastic impulse is 3.2 N·s). The stimulus and the keyed answers in parts B, C and D are physically inconsistent.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 4.2 and skill 1.A are on target. The graph, the area as impulse, and the impulse-momentum theorem are all in scope."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The keyed rebound speed of 19.5 m/s is physically impossible. Incoming KE is 6.4 J and the outgoing KE would be about 38 J. The maximum elastic impulse is 3.2 N·s, but the graph gives 5.5 N·s. The key follows the arithmetic but contradicts the stated conditions."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The force data (peak 1000 N, 11 ms) are inconsistent with m = 0.2 kg and v1 = 8 m/s. The solver also flagged the data as unrealistic."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item with no distractors. The common-error notes are reasonable."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "An exam item cannot have a rebound speed more than twice the incoming speed. The load is acceptable, but the physical inconsistency makes the item unusable."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Intended difficulty is typical exam prep: build a force-time graph from three points, find the area as impulse, apply the impulse-momentum theorem with sign convention, and compare against a perfectly inelastic case. The concepts are in scope for topic 4.2 and the arithmetic is light. However, the data are inconsistent. The triangle area is 5.5 N·s, which implies an exit speed of 19.5 m/s from an 8 m/s incoming speed, and exceeds the maximum possible impulse of 3.2 N·s for a bounce at 8 m/s. Part D's comparison therefore contradicts the premise. This needs fixing, for example by using a peak force of about 300 N, before use.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": true,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_physics_1-f03-k0",
+  "cellId": "ap_physics_1-f03",
+  "passed": false,
+  "reasons": [
+   "unwrapped_math:part_D_answer:tex-command"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_physics_1-f03-k1",
+  "cellId": "ap_physics_1-f03",
+  "passed": false,
+  "reasons": [
+   "unwrapped_math:part_D_answer:tex-command"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_physics_1-f03-k2",
+  "cellId": "ap_physics_1-f03",
+  "passed": false,
+  "reasons": [
+   "unwrapped_math:part_D_answer:tex-command"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_physics_1-f04-k0",
+  "cellId": "ap_physics_1-f04",
+  "passed": false,
+  "reasons": [
+   "bundle_ref:part_B_mentions_table_but_stimulus_is_text",
+   "bundle_ref:part_C_mentions_table_but_stimulus_is_text"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_physics_1-f04-k1",
+  "cellId": "ap_physics_1-f04",
+  "passed": false,
+  "reasons": [
+   "bundle_ref:part_B_mentions_table_but_stimulus_is_text",
+   "bundle_ref:part_C_mentions_table_but_stimulus_is_text"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_physics_1-f04-k2",
+  "cellId": "ap_physics_1-f04",
+  "passed": false,
+  "reasons": [
+   "bundle_ref:part_B_mentions_table_but_stimulus_is_text",
+   "bundle_ref:part_C_mentions_table_but_stimulus_is_text"
+  ],
+  "soft": []
+ }
+]

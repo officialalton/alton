@@ -1,0 +1,470 @@
+[
+ {
+  "candidateKey": "ap_physics_1-m01-k0",
+  "cellId": "ap_physics_1-m01",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "4.3",
+  "unitCode": "4",
+  "skillPrimary": "2.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ph_t5_pred_cart_split_energy",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Requires choosing momentum conservation (equal and opposite momenta), relating KE to p^2/2m, and predicting how the 4 J divides inversely with mass (4/5 to the lighter cart = 3.20 J). Conceptually non-trivial with a proportional-reasoning step, but arithmetic and reading are minimal and all within Unit 4 scope. Distractors reflect common errors (swapped share, no change, all energy).",
+  "payload": {
+   "archetype": "ph_t5_pred_cart_split_energy",
+   "topic": "4.3",
+   "skill": "2.D",
+   "calculator": "allowed",
+   "stem": "Two carts of equal mass $0.5\\text{ kg}$ at rest on a frictionless track are pushed apart by a compressed spring between them. The spring releases a total of $4\\text{ J}$ of energy, which becomes kinetic energy of the carts, and the carts have equal kinetic energy because their masses are equal: $2.00\\text{ J}$ each. In a second trial one of the carts is replaced by a cart with $4$ times the mass, and the spring releases the same $4\\text{ J}$. What is the best prediction of the kinetic energy of the lighter cart in the second trial?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$0.800\\text{ J}$",
+     "why": "Gives the lighter cart the inverse share, $E/(1+f)$.",
+     "value": "0.80000000"
+    },
+    {
+     "text": "$4.00\\text{ J}$",
+     "why": "Gives all of the energy to the lighter cart.",
+     "value": "4.0000000"
+    },
+    {
+     "text": "$2.00\\text{ J}$",
+     "why": "Gives the lighter cart the same share as before, ignoring the larger mass of the other cart.",
+     "value": "2.0000000"
+    },
+    {
+     "text": "$3.20\\text{ J}$",
+     "why": "Momentum is conserved, so $mv_1=(4m)v_2$ and $v_1=4v_2$. The kinetic energies are in the ratio $K_1:K_2=4:1$, so the lighter cart has the fraction $4/(4+1)$ of $4\\text{ J}$, which is $3.20\\text{ J}$.",
+     "value": "3.2000000"
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 90,
+   "facts": [
+    "f=4",
+    "m=0.5",
+    "E=4.0"
+   ],
+   "blueprint": {
+    "id": "ph_t5_pred_cart_split_energy",
+    "subject": "ap_physics_1",
+    "kind": "mc",
+    "concept": "Predicting how the released energy is shared between two carts of different mass pushed apart by a spring",
+    "topic": "4.3",
+    "skill": "2.D",
+    "student_thinking": [
+     "Use conservation of momentum to relate the two speeds",
+     "Find the ratio of the kinetic energies and apply it to the total energy"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the carts start at rest on a frictionless track and all of the spring energy becomes kinetic energy",
+      "evidence": "the stem says the carts start at rest on a frictionless track and the spring energy becomes kinetic energy"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Gives the lighter cart the inverse share, $E/(1+f)$."
+     },
+     {
+      "id": "m2",
+      "description": "Gives all of the energy to the lighter cart."
+     },
+     {
+      "id": "m3",
+      "description": "Gives the lighter cart the same share as before, ignoring the larger mass of the other cart."
+     }
+    ],
+    "verification": {
+     "independent_path": "the speeds are found by solving the momentum and energy equations together and the kinetic energy of the lighter cart is compared with the closed-form fraction",
+     "method": "sympy symbolic + independent numeric path"
+    },
+    "judgment_demand": [
+     "scaling_prediction"
+    ]
+   },
+   "seed": 14100,
+   "pack_id": "ph_t5_pred_cart_split_energy-s14100",
+   "explanation_en": "The correct answer is $3.20\\text{ J}$. Momentum is conserved, so $mv_1=(4m)v_2$ and $v_1=4v_2$. The kinetic energies are in the ratio $K_1:K_2=4:1$, so the lighter cart has the fraction $4/(4+1)$ of $4\\text{ J}$, which is $3.20\\text{ J}$.\n$0.800\\text{ J}$ is incorrect: Gives the lighter cart the inverse share, $E/(1+f)$.\n$4.00\\text{ J}$ is incorrect: Gives all of the energy to the lighter cart.\n$2.00\\text{ J}$ is incorrect: Gives the lighter cart the same share as before, ignoring the larger mass of the other cart."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ph_t5_pred_cart_split_energy",
+   "facts": [
+    "f=4",
+    "m=0.5",
+    "E=4.0"
+   ],
+   "seed": 14100
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Momentum conservation with proportional reasoning of KE vs mass; Unit 4.3, skill 2.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "3.20 J is unique and correct (4/5 of 4 J)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem states all conditions (at rest, frictionless, all spring energy becomes kinetic energy)."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained; the 0.800 J wording is formulaic but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 s, light reading, no heavy arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item with a correct, unique key and clear conditions. The distractors are distinct and each is explained. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing momentum conservation (equal and opposite momenta), relating KE to p^2/2m, and predicting how the 4 J divides inversely with mass (4/5 to the lighter cart = 3.20 J). Conceptually non-trivial with a proportional-reasoning step, but arithmetic and reading are minimal and all within Unit 4 scope. Distractors reflect common errors (swapped share, no change, all energy).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-m01-k1",
+  "cellId": "ap_physics_1-m01",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "4.3",
+  "unitCode": "4",
+  "skillPrimary": "2.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ph_t5_pred_cart_split_energy",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Requires recognizing that equal and opposite momenta follow from conservation of momentum, then using KE = p^2/(2m) to see that KE is inversely proportional to mass, and splitting the 8 J in a 3:1 ratio. The result is 6 J for the lighter cart. Distractors reflect common misconceptions (equal KE regardless of mass, inverted ratio). The arithmetic is trivial, the reading is short, and the scenario is unambiguous and in scope.",
+  "payload": {
+   "archetype": "ph_t5_pred_cart_split_energy",
+   "topic": "4.3",
+   "skill": "2.D",
+   "calculator": "allowed",
+   "stem": "Two carts of equal mass $2\\text{ kg}$ at rest on a frictionless track are pushed apart by a compressed spring between them. The spring releases a total of $8\\text{ J}$ of energy, which becomes kinetic energy of the carts, and the carts have equal kinetic energy because their masses are equal: $4.00\\text{ J}$ each. In a second trial one of the carts is replaced by a cart with $3$ times the mass, and the spring releases the same $8\\text{ J}$. What is the best prediction of the kinetic energy of the lighter cart in the second trial?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$4.00\\text{ J}$",
+     "why": "Gives the lighter cart the same share as before, ignoring the larger mass of the other cart.",
+     "value": "4.0000000"
+    },
+    {
+     "text": "$2.00\\text{ J}$",
+     "why": "Gives the lighter cart the inverse share, $E/(1+f)$.",
+     "value": "2.0000000"
+    },
+    {
+     "text": "$8.00\\text{ J}$",
+     "why": "Gives all of the energy to the lighter cart.",
+     "value": "8.0000000"
+    },
+    {
+     "text": "$6.00\\text{ J}$",
+     "why": "Momentum is conserved, so $mv_1=(3m)v_2$ and $v_1=3v_2$. The kinetic energies are in the ratio $K_1:K_2=3:1$, so the lighter cart has the fraction $3/(3+1)$ of $8\\text{ J}$, which is $6.00\\text{ J}$.",
+     "value": "6.0000000"
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 90,
+   "facts": [
+    "f=3",
+    "m=2.0",
+    "E=8.0"
+   ],
+   "blueprint": {
+    "id": "ph_t5_pred_cart_split_energy",
+    "subject": "ap_physics_1",
+    "kind": "mc",
+    "concept": "Predicting how the released energy is shared between two carts of different mass pushed apart by a spring",
+    "topic": "4.3",
+    "skill": "2.D",
+    "student_thinking": [
+     "Use conservation of momentum to relate the two speeds",
+     "Find the ratio of the kinetic energies and apply it to the total energy"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the carts start at rest on a frictionless track and all of the spring energy becomes kinetic energy",
+      "evidence": "the stem says the carts start at rest on a frictionless track and the spring energy becomes kinetic energy"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Gives the lighter cart the same share as before, ignoring the larger mass of the other cart."
+     },
+     {
+      "id": "m2",
+      "description": "Gives the lighter cart the inverse share, $E/(1+f)$."
+     },
+     {
+      "id": "m3",
+      "description": "Gives all of the energy to the lighter cart."
+     }
+    ],
+    "verification": {
+     "independent_path": "the speeds are found by solving the momentum and energy equations together and the kinetic energy of the lighter cart is compared with the closed-form fraction",
+     "method": "sympy symbolic + independent numeric path"
+    },
+    "judgment_demand": [
+     "scaling_prediction"
+    ]
+   },
+   "seed": 14101,
+   "pack_id": "ph_t5_pred_cart_split_energy-s14101",
+   "explanation_en": "The correct answer is $6.00\\text{ J}$. Momentum is conserved, so $mv_1=(3m)v_2$ and $v_1=3v_2$. The kinetic energies are in the ratio $K_1:K_2=3:1$, so the lighter cart has the fraction $3/(3+1)$ of $8\\text{ J}$, which is $6.00\\text{ J}$.\n$4.00\\text{ J}$ is incorrect: Gives the lighter cart the same share as before, ignoring the larger mass of the other cart.\n$2.00\\text{ J}$ is incorrect: Gives the lighter cart the inverse share, $E/(1+f)$.\n$8.00\\text{ J}$ is incorrect: Gives all of the energy to the lighter cart."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ph_t5_pred_cart_split_energy",
+   "facts": [
+    "f=3",
+    "m=2.0",
+    "E=8.0"
+   ],
+   "seed": 14101
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Momentum conservation leading to the energy split, with a proportional prediction. Fits 4.3 and 2.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "6 J is unique and correct (3/4 of 8 J)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. The stem is clear, and the model assumptions (rest, frictionless) are stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are distinct and plausible. The 2.00 J explanation uses the undefined symbols E/(1+f), which is a minor wording flaw. The explanation covers all wrong options."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short and calculator-light, about 90 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and in scope, with a unique key and plausible distractors. The only flaw is a minor one: the undefined variables E and f in the 2.00 J distractor explanation."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires recognizing that equal and opposite momenta follow from conservation of momentum, then using KE = p^2/(2m) to see that KE is inversely proportional to mass, and splitting the 8 J in a 3:1 ratio. The result is 6 J for the lighter cart. Distractors reflect common misconceptions (equal KE regardless of mass, inverted ratio). The arithmetic is trivial, the reading is short, and the scenario is unambiguous and in scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-m01-k2",
+  "cellId": "ap_physics_1-m01",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "4.3",
+  "unitCode": "4",
+  "skillPrimary": "2.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ph_t5_pred_cart_split_energy",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Requires recognizing that momentum conservation gives equal-magnitude momenta, then using KE = p^2/2m to split the 4 J inversely to mass (4:1), giving 3.20 J to the lighter cart. Conceptually demanding (the common trap is assuming equal KE or equal speeds), but there are few steps and light arithmetic. This matches the skill 2.D proportional prediction.",
+  "payload": {
+   "archetype": "ph_t5_pred_cart_split_energy",
+   "topic": "4.3",
+   "skill": "2.D",
+   "calculator": "allowed",
+   "stem": "Two carts of equal mass $1\\text{ kg}$ at rest on a frictionless track are pushed apart by a compressed spring between them. The spring releases a total of $4\\text{ J}$ of energy, which becomes kinetic energy of the carts, and the carts have equal kinetic energy because their masses are equal: $2.00\\text{ J}$ each. In a second trial one of the carts is replaced by a cart with $4$ times the mass, and the spring releases the same $4\\text{ J}$. What is the best prediction of the kinetic energy of the lighter cart in the second trial?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$3.20\\text{ J}$",
+     "why": "Momentum is conserved, so $mv_1=(4m)v_2$ and $v_1=4v_2$. The kinetic energies are in the ratio $K_1:K_2=4:1$, so the lighter cart has the fraction $4/(4+1)$ of $4\\text{ J}$, which is $3.20\\text{ J}$.",
+     "value": "3.2000000"
+    },
+    {
+     "text": "$0.800\\text{ J}$",
+     "why": "Gives the lighter cart the inverse share, $E/(1+f)$.",
+     "value": "0.80000000"
+    },
+    {
+     "text": "$2.00\\text{ J}$",
+     "why": "Gives the lighter cart the same share as before, ignoring the larger mass of the other cart.",
+     "value": "2.0000000"
+    },
+    {
+     "text": "$4.00\\text{ J}$",
+     "why": "Gives all of the energy to the lighter cart.",
+     "value": "4.0000000"
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 90,
+   "facts": [
+    "f=4",
+    "m=1.0",
+    "E=4.0"
+   ],
+   "blueprint": {
+    "id": "ph_t5_pred_cart_split_energy",
+    "subject": "ap_physics_1",
+    "kind": "mc",
+    "concept": "Predicting how the released energy is shared between two carts of different mass pushed apart by a spring",
+    "topic": "4.3",
+    "skill": "2.D",
+    "student_thinking": [
+     "Use conservation of momentum to relate the two speeds",
+     "Find the ratio of the kinetic energies and apply it to the total energy"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the carts start at rest on a frictionless track and all of the spring energy becomes kinetic energy",
+      "evidence": "the stem says the carts start at rest on a frictionless track and the spring energy becomes kinetic energy"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Gives the lighter cart the inverse share, $E/(1+f)$."
+     },
+     {
+      "id": "m2",
+      "description": "Gives the lighter cart the same share as before, ignoring the larger mass of the other cart."
+     },
+     {
+      "id": "m3",
+      "description": "Gives all of the energy to the lighter cart."
+     }
+    ],
+    "verification": {
+     "independent_path": "the speeds are found by solving the momentum and energy equations together and the kinetic energy of the lighter cart is compared with the closed-form fraction",
+     "method": "sympy symbolic + independent numeric path"
+    },
+    "judgment_demand": [
+     "scaling_prediction"
+    ]
+   },
+   "seed": 14102,
+   "pack_id": "ph_t5_pred_cart_split_energy-s14102",
+   "explanation_en": "The correct answer is $3.20\\text{ J}$. Momentum is conserved, so $mv_1=(4m)v_2$ and $v_1=4v_2$. The kinetic energies are in the ratio $K_1:K_2=4:1$, so the lighter cart has the fraction $4/(4+1)$ of $4\\text{ J}$, which is $3.20\\text{ J}$.\n$0.800\\text{ J}$ is incorrect: Gives the lighter cart the inverse share, $E/(1+f)$.\n$2.00\\text{ J}$ is incorrect: Gives the lighter cart the same share as before, ignoring the larger mass of the other cart.\n$4.00\\text{ J}$ is incorrect: Gives all of the energy to the lighter cart."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ph_t5_pred_cart_split_energy",
+   "facts": [
+    "f=4",
+    "m=1.0",
+    "E=4.0"
+   ],
+   "seed": 14102
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Conservation of momentum in a spring-push-apart (explosion) scenario, with a proportional-reasoning prediction. This fits 4.3 and skill 2.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Equal and opposite momenta give K proportional to 1/m, so the energy splits 4:1 and the lighter cart gets 3.2 J. The key is unique. Initial rest, a frictionless track, and all spring energy becoming kinetic energy are stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear. The stem gives away part of the setup by stating the first-trial split as a fact, but this is not misleading."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are 0.8 J (inverse share), 2.0 J (unchanged) and 4.0 J (all the energy). All are distinct and numerically plausible. The explanation covers every option, but the wording is terse and templated (E/(1+f))."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, light reading, with no heavy arithmetic. This matches the reference pattern for an MC item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable. It has a unique correct key (3.20 J), is in scope for topic 4.3 and skill 2.D, and has distinct distractors, each explained. The distractor explanations are terse but adequate."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires recognizing that momentum conservation gives equal-magnitude momenta, then using KE = p^2/2m to split the 4 J inversely to mass (4:1), giving 3.20 J to the lighter cart. Conceptually demanding (the common trap is assuming equal KE or equal speeds), but there are few steps and light arithmetic. This matches the skill 2.D proportional prediction.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ }
+]

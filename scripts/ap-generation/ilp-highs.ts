@@ -13,7 +13,7 @@ export function solveMipHighs(p: Problem, o: { timeMs: number; log?: (s: string)
     const f = path.join(dir, "p.json");
     writeFileSync(f, JSON.stringify({ n: p.n, obj: p.obj, cons: p.cons, integer: p.integer, binary: p.binary ?? [], timeMs: o.timeMs }));
     const r = spawnSync(AP_PYTHON, ["-I", path.resolve(__dirname, "ilp_highs.py"), f], { encoding: "utf-8", maxBuffer: 256 * 1024 * 1024, timeout: o.timeMs + 60000 });
-    if (r.status !== 0) throw new Error(`HiGHS 풀이 실패: ${(r.stderr ?? "").slice(-300)}`);
+    if (r.status !== 0) throw new Error(`HiGHS 풀이 실패(status ${r.status}, signal ${r.signal ?? "-"}${r.error ? `, ${r.error.message}` : ""}): ${(r.stderr ?? "").slice(-300)}`);
     const out = JSON.parse(r.stdout) as { status: HighsResult["status"]; obj: number | null; x: number[]; message: string };
     o.log?.(`HiGHS: ${out.status} ${out.message}`);
     return { status: out.status, obj: out.obj ?? Infinity, nodes: 0, x: out.x };

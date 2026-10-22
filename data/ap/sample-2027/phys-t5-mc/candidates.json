@@ -1,0 +1,1859 @@
+[
+ {
+  "candidateKey": "ap_physics_1-m01-k0",
+  "cellId": "ap_physics_1-m01",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "1.2",
+  "unitCode": "1",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ph_cliff_throw_speed",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Requires choosing the constant-acceleration kinematic equation (or energy conservation) and handling sign and direction correctly, since the ball lands 15 m below its launch point. Computation is short and the wording is unambiguous. Distractors reflect common sign and conceptual errors. This is a standard exam-level item for skill 2.B.",
+  "payload": {
+   "archetype": "ph_cliff_throw_speed",
+   "topic": "1.2",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "A ball is thrown straight up with a speed of $10\\text{ m/s}$ from the edge of a cliff that is $15\\text{ m}$ above the ground. The ball misses the cliff on the way down and lands on the ground below. Air resistance is negligible. What is the speed of the ball just before it lands?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$19.8\\text{ m/s}$",
+     "why": "On the way down the ball passes the launch point with speed $10\\text{ m/s}$ downward, so $v^2=v_0^2+2gh=100+2(9.8)(15)$ and $v=19.8\\text{ m/s}$.",
+     "value": "19.849433"
+    },
+    {
+     "text": "$17.1\\text{ m/s}$",
+     "why": "Ignores the initial speed, using only the speed gained in falling the cliff height.",
+     "value": "17.146428"
+    },
+    {
+     "text": "$13.9\\text{ m/s}$",
+     "why": "Subtracts the squares: $\\sqrt{2gh-v_0^2}$.",
+     "value": "13.928388"
+    },
+    {
+     "text": "$10.0\\text{ m/s}$",
+     "why": "Uses the initial speed only, assuming the ball returns to the launch speed at the ground.",
+     "value": "10.000000"
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 105,
+   "facts": [
+    "v0=10.0",
+    "h=15.0"
+   ],
+   "blueprint": {
+    "id": "ph_cliff_throw_speed",
+    "subject": "ap_physics_1",
+    "kind": "mc",
+    "concept": "Constant-acceleration kinematics for a ball thrown upward from a height",
+    "topic": "1.2",
+    "skill": "2.B",
+    "student_thinking": [
+     "Recognize that the ball passes the launch height going down with the launch speed",
+     "Use $v^2=v_0^2+2gh$ over the cliff height"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the only acceleration is $g$ downward",
+      "evidence": "the problem states air resistance is negligible"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Ignores the initial speed, using only the speed gained in falling the cliff height."
+     },
+     {
+      "id": "m2",
+      "description": "Subtracts the squares: $\\sqrt{2gh-v_0^2}$."
+     },
+     {
+      "id": "m3",
+      "description": "Uses the initial speed only, assuming the ball returns to the launch speed at the ground."
+     }
+    ],
+    "verification": {
+     "independent_path": "sympy solves $v^2=v_0^2+2gh$; a bisection root finder on the displacement equation recomputes the flight time and the final speed",
+     "method": "sympy symbolic + independent numeric path"
+    },
+    "judgment_demand": [
+     "law_selection"
+    ]
+   },
+   "seed": 13100,
+   "pack_id": "ph_cliff_throw_speed-s13100",
+   "explanation_en": "The correct answer is $19.8\\text{ m/s}$. On the way down the ball passes the launch point with speed $10\\text{ m/s}$ downward, so $v^2=v_0^2+2gh=100+2(9.8)(15)$ and $v=19.8\\text{ m/s}$.\n$17.1\\text{ m/s}$ is incorrect: Ignores the initial speed, using only the speed gained in falling the cliff height.\n$13.9\\text{ m/s}$ is incorrect: Subtracts the squares: $\\sqrt{2gh-v_0^2}$.\n$10.0\\text{ m/s}$ is incorrect: Uses the initial speed only, assuming the ball returns to the launch speed at the ground."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ph_cliff_throw_speed",
+   "facts": [
+    "v0=10.0",
+    "h=15.0"
+   ],
+   "seed": 13100
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "One-dimensional constant-acceleration kinematics, in Unit 1 scope. The dominant demand is choosing the governing equation and computing."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "v = sqrt(394) = 19.85 m/s, which rounds to 19.8 m/s. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear, and air resistance is stated as negligible."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions, and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of an AP MC item, the arithmetic is light, and calculator use is allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key of 19.8 m/s is correct, the distractors are distinct, and the scope and skill fit is good."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing the constant-acceleration kinematic equation (or energy conservation) and handling sign and direction correctly, since the ball lands 15 m below its launch point. Computation is short and the wording is unambiguous. Distractors reflect common sign and conceptual errors. This is a standard exam-level item for skill 2.B.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-m01-k1",
+  "cellId": "ap_physics_1-m01",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "1.2",
+  "unitCode": "1",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ph_cliff_throw_speed",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Requires choosing the time-independent kinematics equation (or symmetry plus a second stage) and handling sign conventions for an upward launch from a cliff. Computation is short (225 + 392, then a square root), wording is unambiguous, and there is no extra reading. Distractors reflect plausible errors, such as 15 m/s from symmetry alone, or omitting or mishandling the initial speed. This is a typical mid-level AP Physics 1 kinematics item.",
+  "payload": {
+   "archetype": "ph_cliff_throw_speed",
+   "topic": "1.2",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "A ball is thrown straight up with a speed of $15\\text{ m/s}$ from the edge of a cliff that is $20\\text{ m}$ above the ground. The ball misses the cliff on the way down and lands on the ground below. Air resistance is negligible. What is the speed of the ball just before it lands?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$34.8\\text{ m/s}$",
+     "why": "Adds the initial speed to the speed gained in the fall.",
+     "value": "34.798990"
+    },
+    {
+     "text": "$24.8\\text{ m/s}$",
+     "why": "On the way down the ball passes the launch point with speed $15\\text{ m/s}$ downward, so $v^2=v_0^2+2gh=225+2(9.8)(20)$ and $v=24.8\\text{ m/s}$.",
+     "value": "24.839485"
+    },
+    {
+     "text": "$15.0\\text{ m/s}$",
+     "why": "Uses the initial speed only, assuming the ball returns to the launch speed at the ground.",
+     "value": "15.000000"
+    },
+    {
+     "text": "$19.8\\text{ m/s}$",
+     "why": "Ignores the initial speed, using only the speed gained in falling the cliff height.",
+     "value": "19.798990"
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 105,
+   "facts": [
+    "v0=15.0",
+    "h=20.0"
+   ],
+   "blueprint": {
+    "id": "ph_cliff_throw_speed",
+    "subject": "ap_physics_1",
+    "kind": "mc",
+    "concept": "Constant-acceleration kinematics for a ball thrown upward from a height",
+    "topic": "1.2",
+    "skill": "2.B",
+    "student_thinking": [
+     "Recognize that the ball passes the launch height going down with the launch speed",
+     "Use $v^2=v_0^2+2gh$ over the cliff height"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the only acceleration is $g$ downward",
+      "evidence": "the problem states air resistance is negligible"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Adds the initial speed to the speed gained in the fall."
+     },
+     {
+      "id": "m2",
+      "description": "Uses the initial speed only, assuming the ball returns to the launch speed at the ground."
+     },
+     {
+      "id": "m3",
+      "description": "Ignores the initial speed, using only the speed gained in falling the cliff height."
+     }
+    ],
+    "verification": {
+     "independent_path": "sympy solves $v^2=v_0^2+2gh$; a bisection root finder on the displacement equation recomputes the flight time and the final speed",
+     "method": "sympy symbolic + independent numeric path"
+    },
+    "judgment_demand": [
+     "law_selection"
+    ]
+   },
+   "seed": 13101,
+   "pack_id": "ph_cliff_throw_speed-s13101",
+   "explanation_en": "The correct answer is $24.8\\text{ m/s}$. On the way down the ball passes the launch point with speed $15\\text{ m/s}$ downward, so $v^2=v_0^2+2gh=225+2(9.8)(20)$ and $v=24.8\\text{ m/s}$.\n$34.8\\text{ m/s}$ is incorrect: Adds the initial speed to the speed gained in the fall.\n$15.0\\text{ m/s}$ is incorrect: Uses the initial speed only, assuming the ball returns to the launch speed at the ground.\n$19.8\\text{ m/s}$ is incorrect: Ignores the initial speed, using only the speed gained in falling the cliff height."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ph_cliff_throw_speed",
+   "facts": [
+    "v0=15.0",
+    "h=20.0"
+   ],
+   "seed": 13101
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Constant-acceleration 1D kinematics with a reasoning step (ball returns to launch point with the same speed). Fits topic 1.2 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "v = sqrt(617) = 24.8 m/s is the unique correct answer. The conditions are stated: negligible air resistance, g = 9.8 m/s²."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the wording is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (adding speeds, assuming the ball lands at the launch speed, ignoring the initial speed). All wrong options are explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 105 seconds, light arithmetic, and the calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and well constructed, with a unique key and distinct distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing the time-independent kinematics equation (or symmetry plus a second stage) and handling sign conventions for an upward launch from a cliff. Computation is short (225 + 392, then a square root), wording is unambiguous, and there is no extra reading. Distractors reflect plausible errors, such as 15 m/s from symmetry alone, or omitting or mishandling the initial speed. This is a typical mid-level AP Physics 1 kinematics item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-m01-k2",
+  "cellId": "ap_physics_1-m01",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "1.2",
+  "unitCode": "1",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ph_cliff_throw_speed",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Single-concept constant-acceleration problem. The student must choose the time-independent kinematics equation v^2 = v0^2 + 2a*dy (or use the symmetry of the up-and-down path) and handle signs with dy = -15 m. Computation is short (144 + 294 = 438, sqrt = 20.9). Distractors reflect plausible errors such as adding speeds or omitting v0. Reading load is minimal and no out-of-scope knowledge is needed. This is a standard AP-style item at the easier end of exam-prep.",
+  "payload": {
+   "archetype": "ph_cliff_throw_speed",
+   "topic": "1.2",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "A ball is thrown straight up with a speed of $12\\text{ m/s}$ from the edge of a cliff that is $15\\text{ m}$ above the ground. The ball misses the cliff on the way down and lands on the ground below. Air resistance is negligible. What is the speed of the ball just before it lands?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$29.1\\text{ m/s}$",
+     "why": "Adds the initial speed to the speed gained in the fall.",
+     "value": "29.146428"
+    },
+    {
+     "text": "$12.2\\text{ m/s}$",
+     "why": "Subtracts the squares: $\\sqrt{2gh-v_0^2}$.",
+     "value": "12.247449"
+    },
+    {
+     "text": "$17.1\\text{ m/s}$",
+     "why": "Ignores the initial speed, using only the speed gained in falling the cliff height.",
+     "value": "17.146428"
+    },
+    {
+     "text": "$20.9\\text{ m/s}$",
+     "why": "On the way down the ball passes the launch point with speed $12\\text{ m/s}$ downward, so $v^2=v_0^2+2gh=144+2(9.8)(15)$ and $v=20.9\\text{ m/s}$.",
+     "value": "20.928450"
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 105,
+   "facts": [
+    "v0=12.0",
+    "h=15.0"
+   ],
+   "blueprint": {
+    "id": "ph_cliff_throw_speed",
+    "subject": "ap_physics_1",
+    "kind": "mc",
+    "concept": "Constant-acceleration kinematics for a ball thrown upward from a height",
+    "topic": "1.2",
+    "skill": "2.B",
+    "student_thinking": [
+     "Recognize that the ball passes the launch height going down with the launch speed",
+     "Use $v^2=v_0^2+2gh$ over the cliff height"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the only acceleration is $g$ downward",
+      "evidence": "the problem states air resistance is negligible"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Adds the initial speed to the speed gained in the fall."
+     },
+     {
+      "id": "m2",
+      "description": "Subtracts the squares: $\\sqrt{2gh-v_0^2}$."
+     },
+     {
+      "id": "m3",
+      "description": "Ignores the initial speed, using only the speed gained in falling the cliff height."
+     }
+    ],
+    "verification": {
+     "independent_path": "sympy solves $v^2=v_0^2+2gh$; a bisection root finder on the displacement equation recomputes the flight time and the final speed",
+     "method": "sympy symbolic + independent numeric path"
+    },
+    "judgment_demand": [
+     "law_selection"
+    ]
+   },
+   "seed": 13102,
+   "pack_id": "ph_cliff_throw_speed-s13102",
+   "explanation_en": "The correct answer is $20.9\\text{ m/s}$. On the way down the ball passes the launch point with speed $12\\text{ m/s}$ downward, so $v^2=v_0^2+2gh=144+2(9.8)(15)$ and $v=20.9\\text{ m/s}$.\n$29.1\\text{ m/s}$ is incorrect: Adds the initial speed to the speed gained in the fall.\n$12.2\\text{ m/s}$ is incorrect: Subtracts the squares: $\\sqrt{2gh-v_0^2}$.\n$17.1\\text{ m/s}$ is incorrect: Ignores the initial speed, using only the speed gained in falling the cliff height."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ph_cliff_throw_speed",
+   "facts": [
+    "v0=12.0",
+    "h=15.0"
+   ],
+   "seed": 13102
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "1D constant-acceleration kinematics, in Unit 1 scope; law selection plus calculation fits 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "v=sqrt(144+294)=20.93 m/s; the key is unique and conditions are stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed; the wording is clear and the model assumptions are stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (adding the speeds, subtracting the squares, ignoring the initial speed); the explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical load, short arithmetic, calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and well constructed, and its distractors each encode a distinct misconception. I recommend accepting it."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Single-concept constant-acceleration problem. The student must choose the time-independent kinematics equation v^2 = v0^2 + 2a*dy (or use the symmetry of the up-and-down path) and handle signs with dy = -15 m. Computation is short (144 + 294 = 438, sqrt = 20.9). Distractors reflect plausible errors such as adding speeds or omitting v0. Reading load is minimal and no out-of-scope knowledge is needed. This is a standard AP-style item at the easier end of exam-prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-m02-k0",
+  "cellId": "ap_physics_1-m02",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "2.4",
+  "unitCode": "2",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ph_wall_press_friction",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The student must apply equilibrium (Newton's first law) to the block, set static friction equal to the weight, recognize that the normal force equals the applied horizontal force F, and solve F = mg/(mu) = 24.5 N. This needs the conceptual link between F and the normal force, plus an implicit free-body diagram. The arithmetic is simple, the wording is unambiguous, and the content is within the Unit 2 scope. The distractors match plausible errors (mu*mg, 1/mu). The difficulty is moderate and conceptual, suitable for full mocks.",
+  "payload": {
+   "archetype": "ph_wall_press_friction",
+   "topic": "2.4",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "A $1\\text{ kg}$ block is held at rest against a rough vertical wall by a horizontal force $F$ that presses the block against the wall. The coefficient of static friction between the block and the wall is $0.4$. What is the minimum magnitude of $F$ that keeps the block from sliding down?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$24.5\\text{ N}$",
+     "why": "The wall supplies a normal force $N=F$, so the largest static friction is $\\mu F$. Holding the block requires $\\mu F=mg$, so $F=mg/\\mu=24.5\\text{ N}$.",
+     "value": "24.500000"
+    },
+    {
+     "text": "$3.92\\text{ N}$",
+     "why": "Multiplies the weight by the coefficient of friction, $\\mu mg$, instead of dividing.",
+     "value": "3.9200000"
+    },
+    {
+     "text": "$7.00\\text{ N}$",
+     "why": "Divides the weight by $\\mu+1$, a mistaken combination.",
+     "value": "7.0000000"
+    },
+    {
+     "text": "$2.50\\text{ N}$",
+     "why": "Divides the mass by the coefficient of friction without multiplying by $g$.",
+     "value": "2.5000000"
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 100,
+   "facts": [
+    "m=1.0",
+    "mu=0.4"
+   ],
+   "blueprint": {
+    "id": "ph_wall_press_friction",
+    "subject": "ap_physics_1",
+    "kind": "mc",
+    "concept": "Static friction balances the weight when the normal force is supplied by a horizontal push",
+    "topic": "2.4",
+    "skill": "2.B",
+    "student_thinking": [
+     "Identify that the normal force equals the horizontal push",
+     "Set the maximum static friction equal to the weight"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the block is on the verge of sliding",
+      "evidence": "the question asks for the minimum force that keeps the block from sliding"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Multiplies the weight by the coefficient of friction, $\\mu mg$, instead of dividing."
+     },
+     {
+      "id": "m2",
+      "description": "Divides the weight by $\\mu+1$, a mistaken combination."
+     },
+     {
+      "id": "m3",
+      "description": "Divides the mass by the coefficient of friction without multiplying by $g$."
+     }
+    ],
+    "verification": {
+     "independent_path": "sympy solves $\\mu F=mg$ for $F$ and the value is recomputed with plain arithmetic",
+     "method": "sympy symbolic + independent numeric path"
+    },
+    "judgment_demand": [
+     "law_selection",
+     "quantitative_comparison"
+    ]
+   },
+   "seed": 13100,
+   "pack_id": "ph_wall_press_friction-s13100",
+   "explanation_en": "The correct answer is $24.5\\text{ N}$. The wall supplies a normal force $N=F$, so the largest static friction is $\\mu F$. Holding the block requires $\\mu F=mg$, so $F=mg/\\mu=24.5\\text{ N}$.\n$3.92\\text{ N}$ is incorrect: Multiplies the weight by the coefficient of friction, $\\mu mg$, instead of dividing.\n$7.00\\text{ N}$ is incorrect: Divides the weight by $\\mu+1$, a mistaken combination.\n$2.50\\text{ N}$ is incorrect: Divides the mass by the coefficient of friction without multiplying by $g$."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ph_wall_press_friction",
+   "facts": [
+    "m=1.0",
+    "mu=0.4"
+   ],
+   "seed": 13100
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Static friction balancing weight with a horizontal push as the normal force is a Unit 2 topic (Newton's first law, equilibrium, friction). The dominant demand is selecting the governing relation and computing a quantity, which fits 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "F = mg/μ = 9.8/0.4 = 24.5 N is unique. The standard g = 9.8 m/s^2 is the default model assumption. The stem asks for the minimum force, which sets up the verge-of-sliding condition."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear. A figure would be optional, but the text fully specifies the setup (horizontal force, vertical wall)."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are 3.92 (μmg), 7.00 (mg/(1+μ)) and 2.50 (m/μ), each tied to a distinct error. The 7.00 distractor is somewhat contrived but still distinct. The explanation covers every wrong option. All options have the same format and similar length, so there is no giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 60-100 seconds, with a light calculation. The calculator is allowed and the load is typical of the exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unambiguous wall-press static friction item with a unique key of 24.5 N and distinct distractors. It is in scope and suitable for the exam."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must apply equilibrium (Newton's first law) to the block, set static friction equal to the weight, recognize that the normal force equals the applied horizontal force F, and solve F = mg/(mu) = 24.5 N. This needs the conceptual link between F and the normal force, plus an implicit free-body diagram. The arithmetic is simple, the wording is unambiguous, and the content is within the Unit 2 scope. The distractors match plausible errors (mu*mg, 1/mu). The difficulty is moderate and conceptual, suitable for full mocks.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-m02-k1",
+  "cellId": "ap_physics_1-m02",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "2.4",
+  "unitCode": "2",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ph_wall_press_friction",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student must apply equilibrium in two directions (friction = mg vertically, N = F horizontally), then use the static friction threshold f = μN to solve F = mg/μ. Distractors map to plausible errors (omitting μ, multiplying instead of dividing). Clear wording, simple arithmetic, no heavy reading; difficulty comes from selecting the governing relationships and linking them, which is appropriate for a full mock.",
+  "payload": {
+   "archetype": "ph_wall_press_friction",
+   "topic": "2.4",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "A $3\\text{ kg}$ block is held at rest against a rough vertical wall by a horizontal force $F$ that presses the block against the wall. The coefficient of static friction between the block and the wall is $0.5$. What is the minimum magnitude of $F$ that keeps the block from sliding down?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$29.4\\text{ N}$",
+     "why": "Sets the force equal to the weight, ignoring the coefficient of friction.",
+     "value": "29.400000"
+    },
+    {
+     "text": "$58.8\\text{ N}$",
+     "why": "The wall supplies a normal force $N=F$, so the largest static friction is $\\mu F$. Holding the block requires $\\mu F=mg$, so $F=mg/\\mu=58.8\\text{ N}$.",
+     "value": "58.800000"
+    },
+    {
+     "text": "$6.00\\text{ N}$",
+     "why": "Divides the mass by the coefficient of friction without multiplying by $g$.",
+     "value": "6.0000000"
+    },
+    {
+     "text": "$14.7\\text{ N}$",
+     "why": "Multiplies the weight by the coefficient of friction, $\\mu mg$, instead of dividing.",
+     "value": "14.700000"
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 100,
+   "facts": [
+    "m=3.0",
+    "mu=0.5"
+   ],
+   "blueprint": {
+    "id": "ph_wall_press_friction",
+    "subject": "ap_physics_1",
+    "kind": "mc",
+    "concept": "Static friction balances the weight when the normal force is supplied by a horizontal push",
+    "topic": "2.4",
+    "skill": "2.B",
+    "student_thinking": [
+     "Identify that the normal force equals the horizontal push",
+     "Set the maximum static friction equal to the weight"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the block is on the verge of sliding",
+      "evidence": "the question asks for the minimum force that keeps the block from sliding"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Sets the force equal to the weight, ignoring the coefficient of friction."
+     },
+     {
+      "id": "m2",
+      "description": "Divides the mass by the coefficient of friction without multiplying by $g$."
+     },
+     {
+      "id": "m3",
+      "description": "Multiplies the weight by the coefficient of friction, $\\mu mg$, instead of dividing."
+     }
+    ],
+    "verification": {
+     "independent_path": "sympy solves $\\mu F=mg$ for $F$ and the value is recomputed with plain arithmetic",
+     "method": "sympy symbolic + independent numeric path"
+    },
+    "judgment_demand": [
+     "law_selection",
+     "quantitative_comparison"
+    ]
+   },
+   "seed": 13101,
+   "pack_id": "ph_wall_press_friction-s13101",
+   "explanation_en": "The correct answer is $58.8\\text{ N}$. The wall supplies a normal force $N=F$, so the largest static friction is $\\mu F$. Holding the block requires $\\mu F=mg$, so $F=mg/\\mu=58.8\\text{ N}$.\n$29.4\\text{ N}$ is incorrect: Sets the force equal to the weight, ignoring the coefficient of friction.\n$6.00\\text{ N}$ is incorrect: Divides the mass by the coefficient of friction without multiplying by $g$.\n$14.7\\text{ N}$ is incorrect: Multiplies the weight by the coefficient of friction, $\\mu mg$, instead of dividing."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ph_wall_press_friction",
+   "facts": [
+    "m=3.0",
+    "mu=0.5"
+   ],
+   "seed": 13101
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Equilibrium with static friction; two-step calculation; Unit 2 content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "F = mg/mu = 58.8 N is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; wording is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (F = mg, m/mu, mu*mg), each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical load, calculator allowed, no needless arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, clear and well matched to the reference pattern. It has a unique key and distinct distractors, so it passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must apply equilibrium in two directions (friction = mg vertically, N = F horizontally), then use the static friction threshold f = μN to solve F = mg/μ. Distractors map to plausible errors (omitting μ, multiplying instead of dividing). Clear wording, simple arithmetic, no heavy reading; difficulty comes from selecting the governing relationships and linking them, which is appropriate for a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-m02-k2",
+  "cellId": "ap_physics_1-m02",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "2.4",
+  "unitCode": "2",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ph_wall_press_friction",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The student must see that the block is in equilibrium, so static friction balances weight (f = mg), that the applied horizontal force equals the normal force, and that the minimum force occurs at f = mu*N, giving F = mg/mu = 49 N. This takes a mental free-body diagram, choosing the governing law, and a simple calculation. The distractors reflect common errors such as multiplying by mu instead of dividing. The reading and arithmetic loads are minimal and the scope is within Unit 2.",
+  "payload": {
+   "archetype": "ph_wall_press_friction",
+   "topic": "2.4",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "A $2\\text{ kg}$ block is held at rest against a rough vertical wall by a horizontal force $F$ that presses the block against the wall. The coefficient of static friction between the block and the wall is $0.4$. What is the minimum magnitude of $F$ that keeps the block from sliding down?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$5.00\\text{ N}$",
+     "why": "Divides the mass by the coefficient of friction without multiplying by $g$.",
+     "value": "5.0000000"
+    },
+    {
+     "text": "$7.84\\text{ N}$",
+     "why": "Multiplies the weight by the coefficient of friction, $\\mu mg$, instead of dividing.",
+     "value": "7.8400000"
+    },
+    {
+     "text": "$14.0\\text{ N}$",
+     "why": "Divides the weight by $\\mu+1$, a mistaken combination.",
+     "value": "14.000000"
+    },
+    {
+     "text": "$49.0\\text{ N}$",
+     "why": "The wall supplies a normal force $N=F$, so the largest static friction is $\\mu F$. Holding the block requires $\\mu F=mg$, so $F=mg/\\mu=49.0\\text{ N}$.",
+     "value": "49.000000"
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 100,
+   "facts": [
+    "m=2.0",
+    "mu=0.4"
+   ],
+   "blueprint": {
+    "id": "ph_wall_press_friction",
+    "subject": "ap_physics_1",
+    "kind": "mc",
+    "concept": "Static friction balances the weight when the normal force is supplied by a horizontal push",
+    "topic": "2.4",
+    "skill": "2.B",
+    "student_thinking": [
+     "Identify that the normal force equals the horizontal push",
+     "Set the maximum static friction equal to the weight"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the block is on the verge of sliding",
+      "evidence": "the question asks for the minimum force that keeps the block from sliding"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Divides the mass by the coefficient of friction without multiplying by $g$."
+     },
+     {
+      "id": "m2",
+      "description": "Multiplies the weight by the coefficient of friction, $\\mu mg$, instead of dividing."
+     },
+     {
+      "id": "m3",
+      "description": "Divides the weight by $\\mu+1$, a mistaken combination."
+     }
+    ],
+    "verification": {
+     "independent_path": "sympy solves $\\mu F=mg$ for $F$ and the value is recomputed with plain arithmetic",
+     "method": "sympy symbolic + independent numeric path"
+    },
+    "judgment_demand": [
+     "law_selection",
+     "quantitative_comparison"
+    ]
+   },
+   "seed": 13102,
+   "pack_id": "ph_wall_press_friction-s13102",
+   "explanation_en": "The correct answer is $49.0\\text{ N}$. The wall supplies a normal force $N=F$, so the largest static friction is $\\mu F$. Holding the block requires $\\mu F=mg$, so $F=mg/\\mu=49.0\\text{ N}$.\n$5.00\\text{ N}$ is incorrect: Divides the mass by the coefficient of friction without multiplying by $g$.\n$7.84\\text{ N}$ is incorrect: Multiplies the weight by the coefficient of friction, $\\mu mg$, instead of dividing.\n$14.0\\text{ N}$ is incorrect: Divides the weight by $\\mu+1$, a mistaken combination."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ph_wall_press_friction",
+   "facts": [
+    "m=2.0",
+    "mu=0.4"
+   ],
+   "seed": 13102
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Equilibrium with static friction and normal force from a horizontal push; fits Topic 2.4 and skill 2.B, all content in Unit 2."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "F = mg/mu = 49.0 N is unique and correct under the standard g = 9.8 m/s^2 assumption."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct, realistic errors (m/mu, mu*mg, mg/(mu+1)). The explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light arithmetic, typical MC load, and the calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, standard wall-press friction problem. The key of 49.0 N is unique, the distractors are distinct, and the item is in scope and suitable for the exam."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must see that the block is in equilibrium, so static friction balances weight (f = mg), that the applied horizontal force equals the normal force, and that the minimum force occurs at f = mu*N, giving F = mg/mu = 49 N. This takes a mental free-body diagram, choosing the governing law, and a simple calculation. The distractors reflect common errors such as multiplying by mu instead of dividing. The reading and arithmetic loads are minimal and the scope is within Unit 2.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-m03-k0",
+  "cellId": "ap_physics_1-m03",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "2.5",
+  "unitCode": "2",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ph_two_ropes_sign",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard equilibrium problem. Student must choose Newton's second law with a=0, resolve tension into vertical components using the angle from the horizontal, account for two ropes, and solve 2T sin40 = mg. The distractors correspond to common errors (ignoring the angle, forgetting the factor of 2, mixing sin and cos). Short wording, simple arithmetic, in-scope content, no unfair difficulty.",
+  "payload": {
+   "archetype": "ph_two_ropes_sign",
+   "topic": "2.5",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "A sign of mass $10\\text{ kg}$ hangs at rest from two light ropes. The two ropes are attached to the same ceiling and each makes an angle of $40^\\circ$ with the horizontal, on opposite sides of the sign. What is the magnitude of the tension in each rope?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$76.2\\text{ N}$",
+     "why": "The vertical components of the two tensions support the weight: $2T\\sin\\theta=mg$, so $T=mg/(2\\sin\\theta)=76.2\\text{ N}$.",
+     "value": "76.230468"
+    },
+    {
+     "text": "$49.0\\text{ N}$",
+     "why": "Divides the weight equally between the ropes, forgetting the angle: $mg/2$.",
+     "value": "49.000000"
+    },
+    {
+     "text": "$58.4\\text{ N}$",
+     "why": "Reports the horizontal component of the tension instead of the tension.",
+     "value": "58.395926"
+    },
+    {
+     "text": "$152\\text{ N}$",
+     "why": "Uses the full weight divided by the sine, treating one rope as carrying the whole load.",
+     "value": "152.46094"
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 110,
+   "facts": [
+    "m=10.0",
+    "theta=40"
+   ],
+   "blueprint": {
+    "id": "ph_two_ropes_sign",
+    "subject": "ap_physics_1",
+    "kind": "mc",
+    "concept": "Vertical force balance for an object supported by two symmetric ropes at an angle",
+    "topic": "2.5",
+    "skill": "2.B",
+    "student_thinking": [
+     "Resolve each tension into vertical and horizontal components",
+     "Set the sum of the vertical components equal to the weight"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the sign is at rest and the ropes are symmetric",
+      "evidence": "the stem states the sign is at rest and the ropes make equal angles"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Divides the weight equally between the ropes, forgetting the angle: $mg/2$."
+     },
+     {
+      "id": "m2",
+      "description": "Reports the horizontal component of the tension instead of the tension."
+     },
+     {
+      "id": "m3",
+      "description": "Uses the full weight divided by the sine, treating one rope as carrying the whole load."
+     }
+    ],
+    "verification": {
+     "independent_path": "a linear solve of the horizontal and vertical force-balance equations for the two tensions gives equal tensions equal to $mg/(2\\sin\\theta)$",
+     "method": "sympy symbolic + independent numeric path"
+    },
+    "judgment_demand": [
+     "law_selection",
+     "symbolic_reasoning"
+    ]
+   },
+   "seed": 13100,
+   "pack_id": "ph_two_ropes_sign-s13100",
+   "explanation_en": "The correct answer is $76.2\\text{ N}$. The vertical components of the two tensions support the weight: $2T\\sin\\theta=mg$, so $T=mg/(2\\sin\\theta)=76.2\\text{ N}$.\n$49.0\\text{ N}$ is incorrect: Divides the weight equally between the ropes, forgetting the angle: $mg/2$.\n$58.4\\text{ N}$ is incorrect: Reports the horizontal component of the tension instead of the tension.\n$152\\text{ N}$ is incorrect: Uses the full weight divided by the sine, treating one rope as carrying the whole load."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ph_two_ropes_sign",
+   "facts": [
+    "m=10.0",
+    "theta=40"
+   ],
+   "seed": 13100
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Force balance with components in equilibrium; fits Newton's second law and the calculation routine."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "T = mg/(2 sin40°) = 76.2 N, unique and correct with g = 9.8."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete: at rest, light ropes, angle measured from the horizontal, symmetric."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors 49.0, 58.4 and 152 each match a distinct, realistic error (mg/2, horizontal component, mg/sin), and the explanation addresses every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 110 s, a calculator is allowed, and the arithmetic is light."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean. The key is verified, the distractors encode distinct misconceptions, and the stem is unambiguous. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard equilibrium problem. Student must choose Newton's second law with a=0, resolve tension into vertical components using the angle from the horizontal, account for two ropes, and solve 2T sin40 = mg. The distractors correspond to common errors (ignoring the angle, forgetting the factor of 2, mixing sin and cos). Short wording, simple arithmetic, in-scope content, no unfair difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-m03-k1",
+  "cellId": "ap_physics_1-m03",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "2.5",
+  "unitCode": "2",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ph_two_ropes_sign",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Symmetric two-rope static equilibrium: the student must mentally build a free-body diagram, resolve tension into vertical components, set net force to zero (Newton's 2nd law with a=0), and solve 2T sin30° = mg. The wording is unambiguous, the arithmetic is short and clean (196 N), and the distractors map to common errors (cos vs sin, forgetting the factor of 2). This is a typical mid-level mock-exam item, not pure recall and not advanced.",
+  "payload": {
+   "archetype": "ph_two_ropes_sign",
+   "topic": "2.5",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "A sign of mass $20\\text{ kg}$ hangs at rest from two light ropes. The two ropes are attached to the same ceiling and each makes an angle of $30^\\circ$ with the horizontal, on opposite sides of the sign. What is the magnitude of the tension in each rope?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$113\\text{ N}$",
+     "why": "Uses the cosine of the angle with the horizontal instead of the sine: $mg/(2\\cos\\theta)$.",
+     "value": "113.16065"
+    },
+    {
+     "text": "$196\\text{ N}$",
+     "why": "The vertical components of the two tensions support the weight: $2T\\sin\\theta=mg$, so $T=mg/(2\\sin\\theta)=196\\text{ N}$.",
+     "value": "196.00000"
+    },
+    {
+     "text": "$170\\text{ N}$",
+     "why": "Reports the horizontal component of the tension instead of the tension.",
+     "value": "169.74098"
+    },
+    {
+     "text": "$98.0\\text{ N}$",
+     "why": "Divides the weight equally between the ropes, forgetting the angle: $mg/2$.",
+     "value": "98.000000"
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 110,
+   "facts": [
+    "m=20.0",
+    "theta=30"
+   ],
+   "blueprint": {
+    "id": "ph_two_ropes_sign",
+    "subject": "ap_physics_1",
+    "kind": "mc",
+    "concept": "Vertical force balance for an object supported by two symmetric ropes at an angle",
+    "topic": "2.5",
+    "skill": "2.B",
+    "student_thinking": [
+     "Resolve each tension into vertical and horizontal components",
+     "Set the sum of the vertical components equal to the weight"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the sign is at rest and the ropes are symmetric",
+      "evidence": "the stem states the sign is at rest and the ropes make equal angles"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Uses the cosine of the angle with the horizontal instead of the sine: $mg/(2\\cos\\theta)$."
+     },
+     {
+      "id": "m2",
+      "description": "Reports the horizontal component of the tension instead of the tension."
+     },
+     {
+      "id": "m3",
+      "description": "Divides the weight equally between the ropes, forgetting the angle: $mg/2$."
+     }
+    ],
+    "verification": {
+     "independent_path": "a linear solve of the horizontal and vertical force-balance equations for the two tensions gives equal tensions equal to $mg/(2\\sin\\theta)$",
+     "method": "sympy symbolic + independent numeric path"
+    },
+    "judgment_demand": [
+     "law_selection",
+     "symbolic_reasoning"
+    ]
+   },
+   "seed": 13101,
+   "pack_id": "ph_two_ropes_sign-s13101",
+   "explanation_en": "The correct answer is $196\\text{ N}$. The vertical components of the two tensions support the weight: $2T\\sin\\theta=mg$, so $T=mg/(2\\sin\\theta)=196\\text{ N}$.\n$113\\text{ N}$ is incorrect: Uses the cosine of the angle with the horizontal instead of the sine: $mg/(2\\cos\\theta)$.\n$170\\text{ N}$ is incorrect: Reports the horizontal component of the tension instead of the tension.\n$98.0\\text{ N}$ is incorrect: Divides the weight equally between the ropes, forgetting the angle: $mg/2$."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ph_two_ropes_sign",
+   "facts": [
+    "m=20.0",
+    "theta=30"
+   ],
+   "seed": 13101
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Static equilibrium with force components under Newton's second law; fits topic 2.5 and the skill of computing an unknown quantity with units."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "T = mg/(2 sin30°) = 196 N is unique and correct; the other options come from distinct errors."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No figure is needed. The verbal description is complete: at rest, light ropes, symmetric 30° angles to the horizontal."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception and the explanation addresses every wrong option. Minor weakness: 30° makes T = mg, so a guess of T = weight is also correct."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, light arithmetic, calculator allowed, typical of the exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: a standard two-rope equilibrium problem with a unique key of 196 N and distinct distractors. The only weakness is that the 30° angle makes T equal mg, which is minor."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Symmetric two-rope static equilibrium: the student must mentally build a free-body diagram, resolve tension into vertical components, set net force to zero (Newton's 2nd law with a=0), and solve 2T sin30° = mg. The wording is unambiguous, the arithmetic is short and clean (196 N), and the distractors map to common errors (cos vs sin, forgetting the factor of 2). This is a typical mid-level mock-exam item, not pure recall and not advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-m03-k2",
+  "cellId": "ap_physics_1-m03",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "2.5",
+  "unitCode": "2",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ph_two_ropes_sign",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Static equilibrium with two symmetric ropes. The student must draw or visualize a free-body diagram, resolve tension into vertical components using the angle from the horizontal (sin, not cos), apply Newton's second law with a = 0 (2T sin25° = mg), and solve. The distractors match common errors: dropping the factor of 2 (278 N), using mg/2 (58.8 N), and a trig slip (126 N). The arithmetic is short with a calculator, the wording is unambiguous, and everything is in Unit 2 scope. It is a typical full-mock item rather than a basic or advanced one.",
+  "payload": {
+   "archetype": "ph_two_ropes_sign",
+   "topic": "2.5",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "A sign of mass $12\\text{ kg}$ hangs at rest from two light ropes. The two ropes are attached to the same ceiling and each makes an angle of $25^\\circ$ with the horizontal, on opposite sides of the sign. What is the magnitude of the tension in each rope?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$126\\text{ N}$",
+     "why": "Reports the horizontal component of the tension instead of the tension.",
+     "value": "126.09701"
+    },
+    {
+     "text": "$58.8\\text{ N}$",
+     "why": "Divides the weight equally between the ropes, forgetting the angle: $mg/2$.",
+     "value": "58.800000"
+    },
+    {
+     "text": "$278\\text{ N}$",
+     "why": "Uses the full weight divided by the sine, treating one rope as carrying the whole load.",
+     "value": "278.26531"
+    },
+    {
+     "text": "$139\\text{ N}$",
+     "why": "The vertical components of the two tensions support the weight: $2T\\sin\\theta=mg$, so $T=mg/(2\\sin\\theta)=139\\text{ N}$.",
+     "value": "139.13265"
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 110,
+   "facts": [
+    "m=12.0",
+    "theta=25"
+   ],
+   "blueprint": {
+    "id": "ph_two_ropes_sign",
+    "subject": "ap_physics_1",
+    "kind": "mc",
+    "concept": "Vertical force balance for an object supported by two symmetric ropes at an angle",
+    "topic": "2.5",
+    "skill": "2.B",
+    "student_thinking": [
+     "Resolve each tension into vertical and horizontal components",
+     "Set the sum of the vertical components equal to the weight"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the sign is at rest and the ropes are symmetric",
+      "evidence": "the stem states the sign is at rest and the ropes make equal angles"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Reports the horizontal component of the tension instead of the tension."
+     },
+     {
+      "id": "m2",
+      "description": "Divides the weight equally between the ropes, forgetting the angle: $mg/2$."
+     },
+     {
+      "id": "m3",
+      "description": "Uses the full weight divided by the sine, treating one rope as carrying the whole load."
+     }
+    ],
+    "verification": {
+     "independent_path": "a linear solve of the horizontal and vertical force-balance equations for the two tensions gives equal tensions equal to $mg/(2\\sin\\theta)$",
+     "method": "sympy symbolic + independent numeric path"
+    },
+    "judgment_demand": [
+     "law_selection",
+     "symbolic_reasoning"
+    ]
+   },
+   "seed": 13102,
+   "pack_id": "ph_two_ropes_sign-s13102",
+   "explanation_en": "The correct answer is $139\\text{ N}$. The vertical components of the two tensions support the weight: $2T\\sin\\theta=mg$, so $T=mg/(2\\sin\\theta)=139\\text{ N}$.\n$126\\text{ N}$ is incorrect: Reports the horizontal component of the tension instead of the tension.\n$58.8\\text{ N}$ is incorrect: Divides the weight equally between the ropes, forgetting the angle: $mg/2$.\n$278\\text{ N}$ is incorrect: Uses the full weight divided by the sine, treating one rope as carrying the whole load."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ph_two_ropes_sign",
+   "facts": [
+    "m=12.0",
+    "theta=25"
+   ],
+   "seed": 13102
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Static equilibrium with force components under Newton's second law (net force zero), a Unit 2 topic. Dominant demand is resolving tensions and computing T."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "T = mg/(2 sin25°) = 139 N is the unique correct option. The stem states rest, symmetric angles and light ropes."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear and all conditions are given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions: horizontal component, mg/2, and mg/sin. Each is explained and each value matches the computation."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, calculator allowed, one trig step. Typical load for an AP Physics 1 item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well formed. The key is unique, the distractors are realistic and distinct, and the scope and load are appropriate."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Static equilibrium with two symmetric ropes. The student must draw or visualize a free-body diagram, resolve tension into vertical components using the angle from the horizontal (sin, not cos), apply Newton's second law with a = 0 (2T sin25° = mg), and solve. The distractors match common errors: dropping the factor of 2 (278 N), using mg/2 (58.8 N), and a trig slip (126 N). The arithmetic is short with a calculator, the wording is unambiguous, and everything is in Unit 2 scope. It is a typical full-mock item rather than a basic or advanced one.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-m04-k0",
+  "cellId": "ap_physics_1-m04",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "8.2",
+  "unitCode": "8",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ph_u_tube_oil",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "One-step application of pressure balance in a U-tube (rho_oil*h_oil = rho_water*h_water), giving 10.8 cm. Requires recognizing that pressures are equal at the interface level, but no representation change, no multi-step linkage, and trivial arithmetic. Distractors target common errors (inverted ratio, summing heights, decimal slip). Fits the unit scope, with no out-of-scope content.",
+  "payload": {
+   "archetype": "ph_u_tube_oil",
+   "topic": "8.2",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "A U-shaped tube open at both ends contains water (density $1000\\text{ kg/m}^3$). Oil of density $900\\text{ kg/m}^3$ is poured into one arm until the oil column is $12\\text{ cm}$ tall. The oil does not mix with the water. The liquids are at rest. How high is the water column above the oil-water interface in the other arm?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$10.8\\text{ cm}$",
+     "why": "At the level of the interface the pressure is the same in both arms: $\\rho_og h_o=\\rho_wg h_w$, so $h_w=(900)(12)/1000=10.8\\text{ cm}$.",
+     "value": "10.800000"
+    },
+    {
+     "text": "$13.3\\text{ cm}$",
+     "why": "Inverts the density ratio: $h_o\\rho_w/\\rho_o$.",
+     "value": "13.333333"
+    },
+    {
+     "text": "$22.8\\text{ cm}$",
+     "why": "Adds the two column heights.",
+     "value": "22.800000"
+    },
+    {
+     "text": "$1.20\\text{ cm}$",
+     "why": "Uses the difference of the densities, $h_o(\\rho_w-\\rho_o)/\\rho_w$.",
+     "value": "1.2000000"
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 105,
+   "facts": [
+    "rho_o=900.0",
+    "h_o=12.0"
+   ],
+   "blueprint": {
+    "id": "ph_u_tube_oil",
+    "subject": "ap_physics_1",
+    "kind": "mc",
+    "concept": "Equal pressure at the same level in a connected fluid at rest",
+    "topic": "8.2",
+    "skill": "2.B",
+    "student_thinking": [
+     "Recognize that the pressure at the oil-water interface level is the same in both arms",
+     "Equate $\\rho_o g h_o$ and $\\rho_w g h_w$"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the liquids are at rest and both arms are open to the atmosphere",
+      "evidence": "the stem states the tube is open at both ends and the liquids are at rest"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Inverts the density ratio: $h_o\\rho_w/\\rho_o$."
+     },
+     {
+      "id": "m2",
+      "description": "Adds the two column heights."
+     },
+     {
+      "id": "m3",
+      "description": "Uses the difference of the densities, $h_o(\\rho_w-\\rho_o)/\\rho_w$."
+     }
+    ],
+    "verification": {
+     "independent_path": "sympy solves $\\rho_wh_w=\\rho_oh_o$ and the height is recomputed with plain arithmetic",
+     "method": "sympy symbolic + independent numeric path"
+    },
+    "judgment_demand": [
+     "law_selection",
+     "quantitative_comparison"
+    ]
+   },
+   "seed": 13100,
+   "pack_id": "ph_u_tube_oil-s13100",
+   "explanation_en": "The correct answer is $10.8\\text{ cm}$. At the level of the interface the pressure is the same in both arms: $\\rho_og h_o=\\rho_wg h_w$, so $h_w=(900)(12)/1000=10.8\\text{ cm}$.\n$13.3\\text{ cm}$ is incorrect: Inverts the density ratio: $h_o\\rho_w/\\rho_o$.\n$22.8\\text{ cm}$ is incorrect: Adds the two column heights.\n$1.20\\text{ cm}$ is incorrect: Uses the difference of the densities, $h_o(\\rho_w-\\rho_o)/\\rho_w$."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ph_u_tube_oil",
+   "facts": [
+    "rho_o=900.0",
+    "h_o=12.0"
+   ],
+   "seed": 13100
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Pressure at depth / equal pressure at same level in static fluid; fits 8.2 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "10.8 cm is the unique correct answer; conditions (open both ends, at rest, immiscible) are stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No figure needed; the wording is clear and the geometry is unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (inverted ratio, sum of heights, density difference); every wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-105 seconds, minimal arithmetic, calculator designation consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key is unique, it is in scope, the distractors are distinct, and it is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-step application of pressure balance in a U-tube (rho_oil*h_oil = rho_water*h_water), giving 10.8 cm. Requires recognizing that pressures are equal at the interface level, but no representation change, no multi-step linkage, and trivial arithmetic. Distractors target common errors (inverted ratio, summing heights, decimal slip). Fits the unit scope, with no out-of-scope content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-m04-k1",
+  "cellId": "ap_physics_1-m04",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "8.2",
+  "unitCode": "8",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ph_u_tube_oil",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: equate pressures at the oil-water interface level in a static U-tube, giving h = (900/1000)(20 cm) = 18.0 cm. Requires choosing the governing idea and one short proportional calculation. No representation change, light reading, simple arithmetic. Distractors reflect common errors (inverted ratio, ignoring density, adding heights).",
+  "payload": {
+   "archetype": "ph_u_tube_oil",
+   "topic": "8.2",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "A U-shaped tube open at both ends contains water (density $1000\\text{ kg/m}^3$). Oil of density $900\\text{ kg/m}^3$ is poured into one arm until the oil column is $20\\text{ cm}$ tall. The oil does not mix with the water. The liquids are at rest. How high is the water column above the oil-water interface in the other arm?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$22.2\\text{ cm}$",
+     "why": "Inverts the density ratio: $h_o\\rho_w/\\rho_o$.",
+     "value": "22.222222"
+    },
+    {
+     "text": "$38.0\\text{ cm}$",
+     "why": "Adds the two column heights.",
+     "value": "38.000000"
+    },
+    {
+     "text": "$18.0\\text{ cm}$",
+     "why": "At the level of the interface the pressure is the same in both arms: $\\rho_og h_o=\\rho_wg h_w$, so $h_w=(900)(20)/1000=18.0\\text{ cm}$.",
+     "value": "18.000000"
+    },
+    {
+     "text": "$20.0\\text{ cm}$",
+     "why": "Assumes the two columns have the same height.",
+     "value": "20.000000"
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 105,
+   "facts": [
+    "rho_o=900.0",
+    "h_o=20.0"
+   ],
+   "blueprint": {
+    "id": "ph_u_tube_oil",
+    "subject": "ap_physics_1",
+    "kind": "mc",
+    "concept": "Equal pressure at the same level in a connected fluid at rest",
+    "topic": "8.2",
+    "skill": "2.B",
+    "student_thinking": [
+     "Recognize that the pressure at the oil-water interface level is the same in both arms",
+     "Equate $\\rho_o g h_o$ and $\\rho_w g h_w$"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the liquids are at rest and both arms are open to the atmosphere",
+      "evidence": "the stem states the tube is open at both ends and the liquids are at rest"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Inverts the density ratio: $h_o\\rho_w/\\rho_o$."
+     },
+     {
+      "id": "m2",
+      "description": "Adds the two column heights."
+     },
+     {
+      "id": "m3",
+      "description": "Assumes the two columns have the same height."
+     }
+    ],
+    "verification": {
+     "independent_path": "sympy solves $\\rho_wh_w=\\rho_oh_o$ and the height is recomputed with plain arithmetic",
+     "method": "sympy symbolic + independent numeric path"
+    },
+    "judgment_demand": [
+     "law_selection",
+     "quantitative_comparison"
+    ]
+   },
+   "seed": 13101,
+   "pack_id": "ph_u_tube_oil-s13101",
+   "explanation_en": "The correct answer is $18.0\\text{ cm}$. At the level of the interface the pressure is the same in both arms: $\\rho_og h_o=\\rho_wg h_w$, so $h_w=(900)(20)/1000=18.0\\text{ cm}$.\n$22.2\\text{ cm}$ is incorrect: Inverts the density ratio: $h_o\\rho_w/\\rho_o$.\n$38.0\\text{ cm}$ is incorrect: Adds the two column heights.\n$20.0\\text{ cm}$ is incorrect: Assumes the two columns have the same height."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ph_u_tube_oil",
+   "facts": [
+    "rho_o=900.0",
+    "h_o=20.0"
+   ],
+   "seed": 13101
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Pressure at depth / equal pressure at same level in static fluid; calculation pathway fits 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "18.0 cm is unique and correct; open arms and rest stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions; explanation addresses each option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, simple arithmetic, calculator allowed consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound U-tube item; the key of 18.0 cm follows from equal pressure at the interface level. Distractors are distinct and the item is exam-suitable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: equate pressures at the oil-water interface level in a static U-tube, giving h = (900/1000)(20 cm) = 18.0 cm. Requires choosing the governing idea and one short proportional calculation. No representation change, light reading, simple arithmetic. Distractors reflect common errors (inverted ratio, ignoring density, adding heights).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-m04-k2",
+  "cellId": "ap_physics_1-m04",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "mc",
+  "keywordCode": "8.2",
+  "unitCode": "8",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ph_u_tube_oil",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: equate pressures at the oil-water interface level (rho_oil*h_oil = rho_water*h_water), giving 9.6 cm. One governing-law choice and one short calculation, with plausible distractors from inverting the ratio or subtracting heights. No heavy reading or arithmetic; wording is clear.",
+  "payload": {
+   "archetype": "ph_u_tube_oil",
+   "topic": "8.2",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "A U-shaped tube open at both ends contains water (density $1000\\text{ kg/m}^3$). Oil of density $800\\text{ kg/m}^3$ is poured into one arm until the oil column is $12\\text{ cm}$ tall. The oil does not mix with the water. The liquids are at rest. How high is the water column above the oil-water interface in the other arm?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$21.6\\text{ cm}$",
+     "why": "Adds the two column heights.",
+     "value": "21.600000"
+    },
+    {
+     "text": "$15.0\\text{ cm}$",
+     "why": "Inverts the density ratio: $h_o\\rho_w/\\rho_o$.",
+     "value": "15.000000"
+    },
+    {
+     "text": "$2.40\\text{ cm}$",
+     "why": "Uses the difference of the densities, $h_o(\\rho_w-\\rho_o)/\\rho_w$.",
+     "value": "2.4000000"
+    },
+    {
+     "text": "$9.60\\text{ cm}$",
+     "why": "At the level of the interface the pressure is the same in both arms: $\\rho_og h_o=\\rho_wg h_w$, so $h_w=(800)(12)/1000=9.60\\text{ cm}$.",
+     "value": "9.6000000"
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 105,
+   "facts": [
+    "rho_o=800.0",
+    "h_o=12.0"
+   ],
+   "blueprint": {
+    "id": "ph_u_tube_oil",
+    "subject": "ap_physics_1",
+    "kind": "mc",
+    "concept": "Equal pressure at the same level in a connected fluid at rest",
+    "topic": "8.2",
+    "skill": "2.B",
+    "student_thinking": [
+     "Recognize that the pressure at the oil-water interface level is the same in both arms",
+     "Equate $\\rho_o g h_o$ and $\\rho_w g h_w$"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the liquids are at rest and both arms are open to the atmosphere",
+      "evidence": "the stem states the tube is open at both ends and the liquids are at rest"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Adds the two column heights."
+     },
+     {
+      "id": "m2",
+      "description": "Inverts the density ratio: $h_o\\rho_w/\\rho_o$."
+     },
+     {
+      "id": "m3",
+      "description": "Uses the difference of the densities, $h_o(\\rho_w-\\rho_o)/\\rho_w$."
+     }
+    ],
+    "verification": {
+     "independent_path": "sympy solves $\\rho_wh_w=\\rho_oh_o$ and the height is recomputed with plain arithmetic",
+     "method": "sympy symbolic + independent numeric path"
+    },
+    "judgment_demand": [
+     "law_selection",
+     "quantitative_comparison"
+    ]
+   },
+   "seed": 13102,
+   "pack_id": "ph_u_tube_oil-s13102",
+   "explanation_en": "The correct answer is $9.60\\text{ cm}$. At the level of the interface the pressure is the same in both arms: $\\rho_og h_o=\\rho_wg h_w$, so $h_w=(800)(12)/1000=9.60\\text{ cm}$.\n$21.6\\text{ cm}$ is incorrect: Adds the two column heights.\n$15.0\\text{ cm}$ is incorrect: Inverts the density ratio: $h_o\\rho_w/\\rho_o$.\n$2.40\\text{ cm}$ is incorrect: Uses the difference of the densities, $h_o(\\rho_w-\\rho_o)/\\rho_w$."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ph_u_tube_oil",
+   "facts": [
+    "rho_o=800.0",
+    "h_o=12.0"
+   ],
+   "seed": 13102
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Pressure at depth and equal pressure at same level in a fluid at rest; in scope for 8.2. A short computational pathway fits skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key 9.60 cm is unique under the stated conditions: open at both ends, at rest, immiscible. The interface-level pressure balance gives h_w = 800*12/1000 = 9.6 cm."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear and complete; the oil height is measured from the interface and the stem asks for the water height above the interface."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions (adding heights, inverting the density ratio, using the density difference). The explanation addresses each one. No length or format giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 105 seconds, one dominant skill, light arithmetic, a generic textbook scenario, and calculator use is allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous U-tube pressure-balance problem with a correct unique key and distinct, well-explained distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: equate pressures at the oil-water interface level (rho_oil*h_oil = rho_water*h_water), giving 9.6 cm. One governing-law choice and one short calculation, with plausible distractors from inverting the ratio or subtracting heights. No heavy reading or arithmetic; wording is clear.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ }
+]
