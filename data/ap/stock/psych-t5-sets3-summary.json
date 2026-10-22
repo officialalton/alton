@@ -1,0 +1,52 @@
+{
+ "runs": [
+  "psych-t5-sets3"
+ ],
+ "rows": 3,
+ "passed": 1,
+ "rejected": 2,
+ "passRate": 0.333,
+ "mc": {
+  "rows": 3,
+  "passed": 1,
+  "passRate": 0.333
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "5": 1
+ },
+ "skillsPassed": {
+  "3.C": 1
+ },
+ "figPassed": {
+  "table": 1
+ },
+ "figAll": {
+  "table": 3
+ },
+ "figPassRate": {
+  "table": "1/3"
+ },
+ "renderTypesPassed": {
+  "ap_table": 1
+ },
+ "archetypesPassed": {
+  "pss_t5c_u5_light_therapy": 1
+ },
+ "archetypesAll": {
+  "pss_t5c_u5_coping_survey": 1,
+  "pss_t5c_u5_exposure_trial": 1,
+  "pss_t5c_u5_light_therapy": 1
+ },
+ "failedArchetypes": [
+  "pss_t5c_u5_coping_survey",
+  "pss_t5c_u5_exposure_trial"
+ ],
+ "costUsd": {
+  "psych-t5-sets3": 0.1319
+ }
+}
