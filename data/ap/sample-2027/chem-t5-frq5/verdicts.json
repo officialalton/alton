@@ -1,0 +1,197 @@
+[
+ {
+  "key": "ap_chemistry-f01-k0",
+  "cellId": "ap_chemistry-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Two resonance structures: O=O–O and O–O=O. In each, the central O has one lone pair, a double bond and a single bond (formal charge +1). The double-bonded terminal O has 2 lone pairs (formal charge 0), and the single-bonded terminal O has 3 lone pairs (formal charge −1). Total electrons: 3 bonding pairs (6 e⁻) + 6 lone pairs (12 e⁻) = 18 e⁻. Every atom has an octet. The two structures differ only in where the double bond is, so more than one acceptable structure exists.",
+     "final_answer": "[O=O–O ↔ O–O=O]: central O has 1 lone pair (+1); the double-bonded end O has 2 lone pairs (0); the single-bonded end O has 3 lone pairs (−1). There are two equivalent resonance structures.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Across both structures there are 3 bonds in total between the central atom and the 2 outer atoms (one double + one single). Average bond order = 3/2 = 1.5.",
+     "final_answer": "1.5",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The real molecule is a resonance hybrid, so both O–O bonds are identical with bond order 1.5. That is between a single bond (1) and a double bond (2). A higher bond order means a shorter bond, so the length falls between the two.",
+     "final_answer": "Both bonds are equal in length: shorter than a typical O–O single bond and longer than a typical O=O double bond, because their bond order is 1.5.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard O3 resonance short FRQ (2/1/1 points). Chemistry is correct, rubric rows are consistent, and the load is appropriate. Minor weaknesses: \"all of the Lewis structures\" wording in Part A is slightly loose, and formal charge is not asked despite the topic name. Neither is disqualifying.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Resonance, bond order and bond length are within 2.6/2.5; per-part skills are reasonable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Answers are unique and correct; A1/A2 and B1 are consistent. C1 bundles several elements in one row, which is acceptable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Text stimulus is complete; drawing is answered on paper."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "N/A for FRQ; common errors are listed per row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light load, roughly 4 points in a few minutes; the calculator is barely needed."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard introductory resonance task on ozone. Draw two equivalent Lewis structures, average the bond order to 1.5, and conclude the bond length is intermediate between single and double. Few steps, trivial arithmetic, minimal reading, all within Unit 2 scope. No unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_chemistry-f01-k1",
+  "cellId": "ap_chemistry-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "There are 24 valence electrons. C is in the center with one C=O double bond and two C–O single bonds. The double-bonded O has 2 lone pairs and a formal charge of 0. Each single-bonded O has 3 lone pairs and a formal charge of −1. C has 4 bonds and a formal charge of 0. Every atom has an octet. The double bond can sit on any of the three O atoms, so there are 3 equivalent resonance structures that differ only in where the electrons are, not where the atoms are. The whole structure is put in brackets with a 2− charge.",
+     "final_answer": "There are 3 equivalent resonance structures: [O=C(–O⁻)(–O⁻)]²⁻, with the double bond moved to each of the three O atoms in turn.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Across the resonance structures there are 4 bonding pairs shared over 3 C–O bonds, so each bond has order 4/3.",
+     "final_answer": "Bond order = 4/3 ≈ 1.33",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Because of resonance (delocalized electrons), all three C–O bonds are identical. Each has a bond order of 4/3, which is between 1 and 2. A higher bond order means a shorter bond.",
+     "final_answer": "All three C–O bonds are the same length. They are shorter than a typical C–O single bond and longer than a typical C=O double bond, because the bond order of 1.33 is between 1 and 2.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard carbonate resonance short FRQ (2/1/1). The key is unique and the solver agreed. The scope is correct and the load is light. The drawing part needs no figure data.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Classic AP resonance FRQ in three parts. Part A is drawing the Lewis structures for CO3 2- (one C=O and two C-O in three equivalent arrangements) with the correct electron count and charges. Part B is a simple average bond order of 4/3. Part C is a qualitative prediction that the bonds are intermediate in length, justified by delocalization. The concepts are core Unit 2 (2.5, 2.6) and the item stays within scope. Reading load is minimal and there is no long arithmetic. Part A has the most reasoning (electron counting, octet checking, recognizing equivalent structures), and Parts B and C each add one linking step. The item is not ambiguous and does not depend on out-of-scope knowledge, so it fits the exam_prep target for full mocks.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_chemistry-f01-k2",
+  "cellId": "ap_chemistry-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Three equivalent resonance structures: N central with one N=O double bond (O has 2 lone pairs) and two N–O single bonds (each O has 3 lone pairs, formal charge −1); N formal charge +1. The double bond can be placed on any of the three O atoms, giving 3 structures, each with 24 electrons and full octets. Overall charge 1−, shown in brackets.",
+     "final_answer": "3 equivalent resonance structures; the N=O double bond moves among the three O atoms",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Total bonds 4 spread over 3 N–O positions: 4/3.",
+     "final_answer": "4/3 ≈ 1.33",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Resonance makes the bonds delocalized and all the same, with bond order 1.33. That is between 1 and 2, so the length falls between the two.",
+     "final_answer": "All three N–O bonds are the same length. They are shorter than a typical N–O single bond and longer than a typical N=O double bond, because the bond order of 4/3 is between 1 and 2.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item fits topic 2.6 with spans into 2.5, is unambiguous, and is complete and well scoped as a 4-point short free-response question. The NO3- keys are correct: 3 resonance forms, bond order 4/3, and a length between single and double. The independent solver agrees. No instant-reject condition applies.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Resonance, bond order and bond length are the core of 2.6. Part A uses the allowed 2.5 Lewis diagram skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are unique and correct, and the rubric rows are consistent with the prompts. Part A's 2-point split (one structure, then the other forms) is reasonable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus gives the species, the valence electron count and the connectivity. An empty data object is acceptable because the parts ask for a drawing. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to free response. The rubric lists a plausible common error for each row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The question is a 2/1/1 split with light reading and trivial arithmetic. The calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part resonance item. Part A requires constructing the octet-obeying Lewis structures and showing multiple equivalent resonance forms. Part B is a one-step average bond order (4/3). Part C links bond order to bond length with a justification (delocalization gives intermediate length). Concepts are core Unit 2 (2.5/2.6), the wording is clear, and the arithmetic is trivial. This is typical AP free-response-style content for full mocks and not advanced. Difficulty comes from legitimate conceptual reasoning only.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ }
+]

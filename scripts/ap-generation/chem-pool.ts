@@ -26,7 +26,7 @@ export function chemExamCount(r: { kind: string; difficultyProvisional?: string 
 }
 
 /** 2026-10-19 새 FRQ 시나리오(두 번째 벌)가 채우는 칸: 긴 문항 3칸·짧은 문항 4칸(유형 칸은 배점 구조일 뿐 주제를 정하지 않는다). */
-const FRQ_SLOT: Record<string, string> = { chf_long_buffer: "chf_long_titration", chf_long_ksp: "chf_long_thermo", chf_long_calorimetry: "chf_long_kinetics", chf_short_massspec: "chf_short_pes", chf_short_gas_mix: "chf_short_stoich", chf_short_solution: "chf_short_bonding", chf_short_neutral: "chf_short_equilibrium" };
+const FRQ_SLOT: Record<string, string> = { chf_long_buffer: "chf_long_titration", chf_long_ksp: "chf_long_thermo", chf_long_calorimetry: "chf_long_kinetics", chf_short_massspec: "chf_short_pes", chf_short_gas_mix: "chf_short_stoich", chf_short_solution: "chf_short_bonding", chf_short_neutral: "chf_short_equilibrium", chf_long_redox_titration: "chf_long_titration", chf_long_electrolysis: "chf_long_thermo", chf_long_initial_rates: "chf_long_kinetics", chf_short_ionization_energy: "chf_short_pes", chf_short_precip_limiting: "chf_short_stoich", chf_short_imf_dissolving: "chf_short_bonding", chf_short_ice_table: "chf_short_equilibrium", chf_long_gravimetric: "chf_long_titration", chf_long_nernst_cell: "chf_long_thermo", chf_long_mechanism_halflife: "chf_long_kinetics", chf_short_configuration_ions: "chf_short_pes", chf_short_empirical_formula: "chf_short_stoich", chf_short_solid_types: "chf_short_bonding", chf_short_weak_acid_ka: "chf_short_equilibrium", chf_short_resonance_bond_order: "chf_short_bonding" };
 
 export function loadChemPool(opts: { requireScreen?: boolean; files?: string[] } = {}) {
   const scan = new Set((JSON.parse(readFileSync("data/ap/stock/defect-scan.json", "utf-8")) as { key: string }[]).map((r) => r.key));

@@ -7,3 +7,18 @@ STAGE_T5_BANK2 = ['ch_t5_p2_change_test', 'ch_t5_p2_cold_pack_predict', 'ch_t5_p
 
 # CH5 세트 재작성(검토기 지적: 오답 설명이 값과 맞지 않음 → 설명·오답 수정): chem-t5-sets2 실행 대상
 STAGE_T5_SETS2 = ['chs_t5_hess_table_set', 'chs_t5_ksp_table_set', 'chs_t5_metal_specific_heat_set']
+
+# CH4 새 시나리오 FRQ 7종: chem-t5-frq 실행 대상
+STAGE_T5_FRQ = ['chf_long_redox_titration', 'chf_long_electrolysis', 'chf_long_initial_rates', 'chf_short_ionization_energy', 'chf_short_precip_limiting', 'chf_short_imf_dissolving', 'chf_short_ice_table']
+
+# CH5 새 시나리오 FRQ 7종: chem-t5-frq2 실행 대상
+STAGE_T5_FRQ2 = ['chf_long_redox_titration', 'chf_long_electrolysis', 'chf_long_initial_rates', 'chf_short_ionization_energy', 'chf_long_gravimetric', 'chf_long_nernst_cell', 'chf_long_mechanism_halflife', 'chf_short_configuration_ions', 'chf_short_empirical_formula', 'chf_short_solid_types', 'chf_short_weak_acid_ka']
+
+# 2차 FRQ 재작성(수치 비교 기대값 정리·표현 수정): chem-t5-frq3 실행 대상
+STAGE_T5_FRQ3 = ['chf_long_redox_titration', 'chf_long_initial_rates', 'chf_long_gravimetric', 'chf_short_weak_acid_ka', 'chf_short_solid_types', 'chf_short_imf_dissolving', 'chf_short_ice_table']
+
+# 3차 FRQ(분자간 힘 표·고체 유형 재작성): chem-t5-frq4 실행 대상
+STAGE_T5_FRQ4 = ['chf_short_imf_dissolving', 'chf_short_solid_types']
+
+# 4차 FRQ(CH5 bonding 칸 대체): chem-t5-frq5 실행 대상
+STAGE_T5_FRQ5 = ['chf_short_resonance_bond_order']

@@ -70,8 +70,8 @@ d("AP Chemistry P0 archetypes (Python generators, 2 seeds each)", () => {
     expect(diagrams).toBeGreaterThanOrEqual(5);
   });
 
-  it("registers the 14 FRQ types (two forms of 3 long x 10 + 4 short x 4 = 46 points) and passes the FRQ gates", () => {
-    expect([...out.frq].sort()).toEqual(["chf_long_buffer", "chf_long_calorimetry", "chf_long_kinetics", "chf_long_ksp", "chf_long_thermo", "chf_long_titration", "chf_short_bonding", "chf_short_equilibrium", "chf_short_gas_mix", "chf_short_massspec", "chf_short_neutral", "chf_short_pes", "chf_short_solution", "chf_short_stoich"]);
+  it("registers the 28 FRQ types (four forms of 3 long x 10 + 4 short x 4 = 46 points) and passes the FRQ gates", () => {
+    expect([...out.frq].sort()).toEqual(["chf_long_buffer", "chf_long_calorimetry", "chf_long_electrolysis", "chf_long_gravimetric", "chf_long_initial_rates", "chf_long_kinetics", "chf_long_ksp", "chf_long_mechanism_halflife", "chf_long_nernst_cell", "chf_long_redox_titration", "chf_long_thermo", "chf_long_titration", "chf_short_bonding", "chf_short_configuration_ions", "chf_short_empirical_formula", "chf_short_equilibrium", "chf_short_gas_mix", "chf_short_ice_table", "chf_short_imf_dissolving", "chf_short_ionization_energy", "chf_short_massspec", "chf_short_neutral", "chf_short_pes", "chf_short_precip_limiting", "chf_short_solid_types", "chf_short_solution", "chf_short_stoich", "chf_short_weak_acid_ka"]);
     const w: Record<string, number> = { long: 10, short: 4 };
     let total = 0;
     for (const n of out.frq) for (const p of out.frqPacks[n]) {
@@ -81,7 +81,7 @@ d("AP Chemistry P0 archetypes (Python generators, 2 seeds each)", () => {
       expect({ n, reasons: [...gateFrq("ap_chemistry", p, skills, { requirePartTopics: false }), ...calibrateFrq(p, "ap_chemistry")] }).toEqual({ n, reasons: [] });
     }
     for (const n of out.frq) total += out.frqPacks[n][0].total_points;
-    expect(total).toBe(92); // 두 벌(각 46점)
+    expect(total).toBe(184); // 네 벌(각 46점)
   });
 
   it("the Python suite (determinism, no duplicate structures, numeric truth, figure checks, skill/unit range ILP) passes", () => {

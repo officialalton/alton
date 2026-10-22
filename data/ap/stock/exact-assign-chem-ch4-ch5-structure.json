@@ -66,52 +66,17 @@
    "virtual": [],
    "virtualSets": [],
    "virtualSetArchetypes": [],
-   "frqA": [],
-   "frqB": [],
-   "frqVirtual": [
-    {
-     "set": "CH4",
-     "part": "A",
-     "native": false,
-     "type": "chf_long_titration"
-    },
-    {
-     "set": "CH4",
-     "part": "A",
-     "native": false,
-     "type": "chf_long_thermo"
-    },
-    {
-     "set": "CH4",
-     "part": "A",
-     "native": false,
-     "type": "chf_long_kinetics"
-    },
-    {
-     "set": "CH4",
-     "part": "A",
-     "native": false,
-     "type": "chf_short_pes"
-    },
-    {
-     "set": "CH4",
-     "part": "A",
-     "native": false,
-     "type": "chf_short_stoich"
-    },
-    {
-     "set": "CH4",
-     "part": "A",
-     "native": false,
-     "type": "chf_short_bonding"
-    },
-    {
-     "set": "CH4",
-     "part": "A",
-     "native": false,
-     "type": "chf_short_equilibrium"
-    }
+   "frqA": [
+    "chem-t5-frq3:ap_chemistry-f01-k0",
+    "chem-t5-frq2:ap_chemistry-f02-k0",
+    "chem-t5-frq3:ap_chemistry-f02-k1",
+    "chem-t5-frq2:ap_chemistry-f08-k1",
+    "chem-t5-frq2:ap_chemistry-f09-k0",
+    "chem-t5-frq5:ap_chemistry-f01-k1",
+    "chem-t5-frq3:ap_chemistry-f07-k0"
    ],
+   "frqB": [],
+   "frqVirtual": [],
    "subject": "ap_chemistry"
   },
   {
@@ -209,52 +174,17 @@
    ],
    "virtualSets": [],
    "virtualSetArchetypes": [],
-   "frqA": [],
-   "frqB": [],
-   "frqVirtual": [
-    {
-     "set": "CH5",
-     "part": "A",
-     "native": false,
-     "type": "chf_long_titration"
-    },
-    {
-     "set": "CH5",
-     "part": "A",
-     "native": false,
-     "type": "chf_long_thermo"
-    },
-    {
-     "set": "CH5",
-     "part": "A",
-     "native": false,
-     "type": "chf_long_kinetics"
-    },
-    {
-     "set": "CH5",
-     "part": "A",
-     "native": false,
-     "type": "chf_short_pes"
-    },
-    {
-     "set": "CH5",
-     "part": "A",
-     "native": false,
-     "type": "chf_short_stoich"
-    },
-    {
-     "set": "CH5",
-     "part": "A",
-     "native": false,
-     "type": "chf_short_bonding"
-    },
-    {
-     "set": "CH5",
-     "part": "A",
-     "native": false,
-     "type": "chf_short_equilibrium"
-    }
+   "frqA": [
+    "chem-t5-frq3:ap_chemistry-f03-k0",
+    "chem-t5-frq2:ap_chemistry-f06-k0",
+    "chem-t5-frq2:ap_chemistry-f07-k0",
+    "chem-t5-frq2:ap_chemistry-f04-k0",
+    "chem-t5-frq:ap_chemistry-f05-k0",
+    "chem-t5-frq4:ap_chemistry-f02-k1",
+    "chem-t5-frq3:ap_chemistry-f04-k0"
    ],
+   "frqB": [],
+   "frqVirtual": [],
    "subject": "ap_chemistry"
   }
  ],
