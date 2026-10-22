@@ -1,0 +1,653 @@
+[
+ {
+  "key": "ap_chemistry-m01-k0",
+  "cellId": "ap_chemistry-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Average KE = (3/2)kT, so it depends only on temperature. Since KE = ½mv², the lower-mass H₂ molecules must have a higher average speed to have the same KE as O₂.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "A"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Squarely 3.5 KMT: average KE depends only on temperature, speed depends on mass. A justification item fits skill 6.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is uniquely correct. B contradicts equal KE, C and D are false. Stem states equal KE, which is consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained. Option lengths are similar. The key is slightly longer, but that is not a giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Conceptual, about 60-100 seconds, no calculation needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, unambiguous KMT justification item with a unique key and distinct distractors."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept conceptual item: average KE depends only on temperature, so the lighter molecules have higher speed. No computation or stimulus. Distractors are clearly wrong and the correct option nearly restates the standard KMT relationship. Only one reasoning link (equal KE with different mass implies different speed), which is below typical full-mock exam_prep depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m01-k1",
+  "cellId": "ap_chemistry-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "KE avg ∝ T, so it doubles when T goes from 200 K to 400 K. Speed ∝ sqrt(T), so it goes up by a factor of √2 ≈ 1.41.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.5 KMT: KE proportional to T and v proportional to sqrt(T). Skill 6.E is met because the student must justify a claim linking the particulate scale (speed, mass) to the macroscopic scale (temperature)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is the unique correct justification: KE doubles and speed rises by sqrt(2), about 1.41. The claim as worded (KE doubles, speed increases by less than 2) is true, so A, B and C each give a flawed justification or wrongly reject a true claim. The rigid container and the fact that mass does not change with T make D unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear, giving the gas, the temperatures and a rigid container."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct named misconception (wall collisions reduce KE, mass changes with T, speed proportional to T), and the explanation addresses each one. The key is the longest option, a slight length cue, but the other options are also long and similar in length, so this is acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Reading load is moderate, and the item can be done in about 100 seconds with no calculation beyond a square root of 2. The calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound KMT claim-justification question with a unique key, distinct misconception distractors, and an appropriate load. Accept."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires recalling that average KE is proportional to Kelvin temperature and that speed scales with the square root of KE (at constant mass), then selecting the justification that links the particulate-level relationships to the macroscopic temperature change. One proportional-reasoning step (sqrt(2) is about 1.4) and a claim-justification step. Distractors target common misconceptions (energy loss in collisions, mass change, speed proportional to T). Typical AP argumentation item, with no heavy arithmetic or reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m01-k2",
+  "cellId": "ap_chemistry-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "Average KE = (3/2)kT depends only on temperature. Since KE = ½mv², the lower-mass H₂ molecules must have a higher average speed.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.5 KMT, skill 6.E: justifying a macroscopic claim (same KE, different speed) with particulate reasoning. In scope, with no later-unit content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is uniquely correct: average KE depends only on T, and KE = 1/2 mv^2 means lighter molecules move faster. A is false because collisions with the walls do not slow the gas on average. C wrongly says H2 has larger KE. D wrongly says same T means same speed."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete, and the standard assumptions are implied."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct named misconception, and the explanation addresses every wrong option. The explanation's speed-ratio calculation (about 4.0) goes beyond what the item requires but is accurate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Takes about 60-100 seconds, with a typical reading load and no calculation needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean KMT justification question. The key is unique and correct, each distractor targets a distinct misconception, and the load is appropriate. Accept."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept conceptual item: average KE depends only on temperature, so at equal KE the lighter H2 must have the higher speed. No computation, no stimulus, and short options. Distractors target common misconceptions but do not add steps. Mainly a recall and one-step justification, below typical full-mock complexity.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m02-k0",
+  "cellId": "ap_chemistry-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "At a higher temperature, the Maxwell-Boltzmann distribution shifts so that a larger fraction of molecules have kinetic energy above the escape threshold. That raises the evaporation rate, so the vapor builds to a higher pressure before the condensation rate matches it. The other options are wrong: B says the attractions vanish entirely, C says every molecule gains exactly the same energy, and D says heating creates new molecules.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.1 (vapor pressure and the evaporation/condensation link to IMFs and kinetic energy). Skill 6.E fits: the student justifies a macroscopic claim by particle-level reasoning. No later-unit content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the only defensible justification. B contradicts the stem's stated premise that IMFs do not change. C and D are factually wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the data object is empty. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct named misconception and the explanation addresses every wrong option. The key is slightly more mechanistic, but the options are similar in length and no giveaway is evident. The 'why' fields are brief but adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The reading load is short and fits roughly 60-100 seconds. No calculation is required, so the calculator designation is not an issue."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean 6.E claim-justification on vapor pressure. It has a unique key and three distinct misconception distractors, and it needs no data, so it passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept conceptual item on temperature, kinetic energy distribution, and vapor pressure equilibrium. No computation or data representation. The correct option is the standard textbook explanation, and the distractors contain clear misconceptions (IMFs vanish, all molecules gain identical energy, new molecules created). It takes about 2-3 reasoning steps (higher T, more molecules with enough KE to escape, higher evaporation rate, higher pressure needed to equalize condensation rate). That is below full-mock exam_prep depth, which usually requires a representation change or proportional reasoning. It is in scope for topic 3.1/3.3 and fairly worded. The correct option is somewhat longer than the others, which is a minor test-wiseness cue.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m02-k1",
+  "cellId": "ap_chemistry-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "The rates of evaporation and condensation both go up in proportion to surface area. So they become equal at the same vapor concentration, which means the same pressure.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable. B is the unique correct justification (equal rates of evaporation and condensation both scale with surface area). The distractors are distinct misconceptions, and the explanation covers each one. The item is a short conceptual claim-justification with no stimulus and no needless load. Distractors A and D use absolute language, which is a minor weakness.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept conceptual item: at dynamic equilibrium, a larger surface area scales evaporation and condensation rates equally, so equilibrium vapor pressure is unchanged. No computation, no representation change. Distractors are clearly flawed (center-only escape, an unexplained cooling effect, volume-only dependence). The argumentation skill is present but needs only one linking step.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m02-k2",
+  "cellId": "ap_chemistry-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "At a higher temperature, the Maxwell-Boltzmann distribution shifts so a larger fraction of molecules have enough energy to overcome the intermolecular forces. Evaporation speeds up, so the vapor has to reach a higher concentration (higher pressure) before condensation matches it again.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Justifying a macroscopic vapor-pressure claim from particle-level energy distributions fits 6.E. The vapor-pressure content borders 3.3 but is tied to 3.1 through intermolecular forces."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique defensible answer. C contradicts the stem premise, and A and D are physically incorrect."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear, though D is slightly clumsy."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions are encoded and each wrong option is explained. The distractors are fairly obviously wrong, and C is eliminated by the stem alone."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item has no calculation and a reasonable reading load, and fits in about 100 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, unambiguous claim-justification MC with a unique key. The distractors are somewhat weak, and C is eliminated by the stem premise alone. It passes with minor reservations."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept conceptual item: link higher temperature to a larger fraction of molecules able to escape, giving a higher equilibrium vapor pressure. No computation or representation change. Distractors contain clear misconceptions (uniform energy, IMFs vanishing, creation of molecules), so the correct option is identifiable with one reasoning step. Fits the 6.E argumentation skill at an introductory level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m03-k0",
+  "cellId": "ap_chemistry-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "Warming raises the average kinetic energy of the molecules. More of them can then overcome the intermolecular attractions holding them to their neighbors, so they slide past one another more easily and the viscosity drops. The other choices are wrong: warming does not break covalent bonds, the liquid does not turn into a gas with zero viscosity, and molecules do not get heavier.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60-90 seconds, needs no calculation, and its reading load is light. The long options are slightly wordy but acceptable.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean conceptual item with a unique key and distinct misconception distractors. It fits topic 3.1 and skill 4.C, and no acceptance criterion fails."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept conceptual item: link higher temperature to greater average kinetic energy overcoming intermolecular attractions, lowering viscosity. No calculation, no stimulus. Distractors are clear misconceptions (breaking covalent bonds, turning into a gas, molecules becoming heavier) and are easily eliminated. Requires one particulate-to-macroscopic link, which is recall-level for Unit 3.1; below typical full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m03-k1",
+  "cellId": "ap_chemistry-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "When the temperature goes up, the molecules have more kinetic energy on average. That makes it easier for them to overcome the intermolecular forces (hydrogen bonding), so they flow past each other more easily and viscosity drops. The other choices are wrong: molecules don't get heavier, viscosity doesn't reach zero, and covalent bonds inside the molecules don't break.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "No calculation is needed and the reading load is light, so it can be answered in about 60-100 seconds. The options are sentence-length, which is typical for model-evaluation items.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean conceptual item on a particle-level model of viscosity versus temperature. The key is unique, the distractors map to distinct misconceptions, and it is in scope. It passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: connect the decreasing viscosity trend with temperature to the particle-level idea that higher kinetic energy lets molecules overcome intermolecular attractions. No computation is needed, the data are only a quick trend read, and the distractors are clearly wrong (mass change, gas with zero attractions, covalent bond breaking). It fits foundational understanding of topic 3.1 rather than multi-step exam-level reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m03-k2",
+  "cellId": "ap_chemistry-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "When the temperature rises, the average kinetic energy of the molecules goes up. More molecules can then overcome the intermolecular attractions to their neighbours and slide past each other, so the viscosity drops. The other options wrongly say the liquid has no attractions left, that covalent bonds break, or that the molecules get heavier.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item links viscosity, a macroscopic property, to a particle-level model of kinetic energy and intermolecular attractions, which fits topic 3.1 and skill 4.C. Option B is the only correct model. Each distractor encodes a distinct misconception, and the explanation addresses every wrong option. No stimulus is needed, and the reading load and timing are typical for an AP item.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The viscosity-versus-temperature explanation uses intermolecular forces and kinetic energy, which is squarely within 3.1 and skill 4.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is unique. Option A (viscosity falling to zero, a gas with no attractions), option C (covalent bonds break) and option D (molecules become heavier) are each clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors map to distinct named misconceptions, and the explanation addresses each one. The options are similar in length and format, so there is no giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60-100 seconds, needs no calculation, and has a single dominant skill."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept conceptual item: link temperature, average kinetic energy, and overcoming intermolecular attractions to lower viscosity. Distractors are clearly wrong (liquid becomes a gas with zero viscosity, covalent bonds break, molecules get heavier). No calculation, no stimulus, minimal reading, one reasoning step connecting particle-level behavior to a macroscopic property.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m04-k0",
+  "cellId": "ap_chemistry-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "SO3: 24 valence e-, sulfur has 3 domains and no lone pair, so it is trigonal planar. SO3^2-: 26 e-, sulfur has 3 bonds and 1 lone pair, so it is trigonal pyramidal.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The reading load is light, about 60-100 seconds, with no calculator needed. Matches the typical AP style.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, unambiguous VSEPR comparison item with a unique key and distinct misconception-based distractors. It is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct application of VSEPR: count electron domains on S in SO3 (3 domains, trigonal planar) and SO3^2- (4 domains with one lone pair, trigonal pyramidal). Requires a Lewis structure for each species and a domain-to-shape mapping, but no calculation, graph reading, or multi-part linking. Distractors rely on common misconceptions (bonded atoms alone determine shape, lone pair always present or removed by charge) and are easy to rule out. Short stem, no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m04-k1",
+  "cellId": "ap_chemistry-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Carbonate: C has 3 electron domains and no lone pair, so it is trigonal planar. Chlorate: Cl has 3 bonds and 1 lone pair (26 valence electrons), so it is trigonal pyramidal.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "B"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "VSEPR shape comparison for CO3^2- and ClO3^-. Squarely topic 2.7 and a fair fit for skill 4.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is correct: carbonate is trigonal planar and chlorate is trigonal pyramidal. Chlorate with all single bonds has 3 bonds and 1 lone pair, and this is the standard AP treatment. The other options contain false statements. The independent solver chose B."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception, and the explanation addresses each wrong option. Option B is longer than the others, but all four options are similar in length and format. The domain-count formula in the explanation for ClO3^- is a little odd but gives the correct result."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, with no arithmetic burden. The long justification clauses in the options are slightly wordy but acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound VSEPR comparison with a unique key and distinct distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must build Lewis structures for two polyatomic ions (valence electron counting with charge), count electron domains including lone pairs, and map to VSEPR shapes, recognizing that the same number of bonded atoms can give different shapes. Requires the governing model (VSEPR) and a comparison step, but there is no computation, reading is minimal, and the wording is unambiguous. Distractors target common misconceptions (bonded atoms alone determine shape; charge determines lone pairs). Appropriate for a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_chemistry-m04-k2",
+  "cellId": "ap_chemistry-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "SO3 has 24 valence electrons, so S has three bonding domains and no lone pair, which makes it trigonal planar. SO3^2- has 26 valence electrons, so S has three bonds plus one lone pair. Four electron domains with one lone pair gives a trigonal pyramidal shape.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "B"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Standard 2.7 VSEPR comparison; skill 4.A fit."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique correct answer: SO3 trigonal planar, SO3^2- trigonal pyramidal."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions; explanation covers each option. The notes on distractors are terse but adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds, no arithmetic, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope VSEPR comparison with a unique key and distinct distractors; acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must derive Lewis structures for SO3 and SO3^2- (valence electron count including charge), count electron domains on S, and map domains/lone pairs to molecular geometry, then compare. Concept is core VSEPR, with plausible misconception distractors (ignoring lone pairs, charge removing lone pair). Reading and computation are minimal; difficulty comes from legitimate conceptual steps, so it fits a full-mock item rather than basic recall or advanced extension.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ }
+]

@@ -1,9 +1,9 @@
 {
  "run": "_frozen_check",
- "subject": "ap_computer_science_a",
- "generatorCommit": "75f32aad1+dirty",
+ "subject": "ap_chemistry",
+ "generatorCommit": "e1b596910+dirty",
  "gateVersion": "v2-code-first-final-2026-10-08",
- "reviewerPromptHash": "5a92f4256749",
+ "reviewerPromptHash": "43adcd3f3c8d",
  "difficultyPromptHash": "9bda2250d42c",
  "flags": {
   "flatReview": true,
@@ -12,7 +12,7 @@
   "legacyItems": false,
   "repair": false
  },
- "arm": "frozen v1-csa-t5-frq9",
+ "arm": "frozen v1-chem-t5-mc6",
  "parserHash": "7528bbe8cdfc",
  "models": {
   "gen": "claude-sonnet-5-5",
@@ -35,9 +35,9 @@
  },
  "seeds": {
   "first": [
-   14300
+   15300
   ],
   "note": "seed0 = first seed tried per archetype; packs.json records pack_id = archetype-sSEED"
  },
- "frozenAt": "2026-10-22T07:29:39.456Z"
+ "frozenAt": "2026-10-22T18:50:42.109Z"
 }

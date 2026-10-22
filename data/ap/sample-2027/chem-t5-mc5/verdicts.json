@@ -1,0 +1,164 @@
+[
+ {
+  "key": "ap_chemistry-m01-k0",
+  "cellId": "ap_chemistry-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Boyle's law for each gas into 5 L: Ar 2(4)/5=1.6, CH4 1.5(1)/5=0.3; total 1.90 atm",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "1.90 atm"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Ideal gas law applied to mixing at constant T; dominant skill is calculating an unknown (5.F), no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key 1.90 atm is unique and correct: (2*4+1.5*1)/5."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem gives all quantities, temperature, volumes, ideal behavior and no reaction."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (add pressures, sum of pressures over total volume, ignore second gas). Each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 105 s, light arithmetic, calculator allowed, typical AP style."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key is unique and correct, the distractors encode distinct errors, and it is in scope for 3.4 and suited to the exam. No defects found."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Correct answer 1.90 atm. Requires recognizing that each gas expands into the total 5 L at constant T and n, so P1V1 = P2V2 per gas (Ar: 2×4/5 = 1.6 atm; CH4: 1.5×1/5 = 0.3 atm), then summing the partial pressures (Dalton). It has two simple proportional calculations and one addition, with no unit conversions, no table or graph reading, and short wording. Distractors reflect common errors (summing the initial pressures, reporting only the Ar partial pressure). It is a standard single-concept application, appropriate for learning rather than a full-mock challenge.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_chemistry-m01-k1",
+  "cellId": "ap_chemistry-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Use Boyle's law for each gas: He partial pressure = 1.6×4/5 = 1.28 atm; Ar partial pressure = 0.3×1/5 = 0.06 atm; total = 1.34 atm",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "1.34 atm"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Ideal gas law mixing calculation fits 3.4 and 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "1.34 atm is unique and correct; solver agrees."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; all conditions stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained; options parallel."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 s, light arithmetic, calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, unambiguous gas-mixing item with a unique key and distinct distractors."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must recognize that each gas expands into the total volume at constant T (Boyle's law / n conserved), find each partial pressure (1.6x4/5 = 1.28 atm and 0.3x1/5 = 0.06 atm), and sum them via Dalton's law. This requires conceptual selection of the relationship and multiple steps, but the arithmetic is simple and the wording is clear. Distractors reflect plausible errors (averaging, summing without volume scaling). This is typical of a standard AP exam-level item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_chemistry-m01-k2",
+  "cellId": "ap_chemistry-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Boyle's law for each gas: P_H2=1.2*4/9=0.533, P_CO2=0.5*5/9=0.278; total 7.3/9=0.811 atm",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "0.811 atm"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Ideal gas law / partial pressures at constant T and fixed volumes. Computing an unknown from known quantities matches 5.F. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key 0.811 atm is unique and correct. The stem states constant T, rigid flasks, ideal behavior and no reaction. The distractor values are all distinct from the key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clearly worded."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct errors: ignoring the second gas, dividing summed pressures by total volume, and adding pressures. The explanation addresses each one. One minor weakness is that 0.189 is (1.2+0.5)/9, which is a plausible but somewhat contrived error."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 105 seconds, with simple arithmetic and a calculator permitted. The task load is typical of an AP item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, unambiguous and in scope for 3.4 and skill 5.F. The distractors encode distinct misconceptions and the explanation covers each wrong option. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires recognizing that each gas expands into the combined 9 L volume (Boyle/ideal gas law at constant n and T), computing each partial pressure, and summing by Dalton's law. Distractors map to plausible errors. Arithmetic is simple and the wording is unambiguous, so the difficulty comes from the concepts and not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 100
+  }
+ }
+]

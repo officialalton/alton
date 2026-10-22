@@ -1,0 +1,1805 @@
+[
+ {
+  "candidateKey": "ap_chemistry-m01-k0",
+  "cellId": "ap_chemistry-m01",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "3.5",
+  "unitCode": "3",
+  "skillPrimary": "6.E",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5l_kmt_claim",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept conceptual item: average KE depends only on temperature, so the lighter molecules have higher speed. No computation or stimulus. Distractors are clearly wrong and the correct option nearly restates the standard KMT relationship. Only one reasoning link (equal KE with different mass implies different speed), which is below typical full-mock exam_prep depth.",
+  "payload": {
+   "archetype": "ch_t5l_kmt_claim",
+   "topic": "3.5",
+   "skill": "6.E",
+   "calculator": "allowed",
+   "stem": "A student claims that, at the same temperature, hydrogen molecules (H₂) in one container and oxygen molecules (O₂) in another container have the same average kinetic energy, yet the H₂ molecules move faster on average. Which statement best justifies the claim?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Average kinetic energy depends only on temperature, so the lighter H₂ molecules must move faster than the heavier O₂ molecules to have the same kinetic energy.",
+     "why": "At one temperature, KE(avg) = (3/2)kT is the same for both gases, and with KE = ½mv² the speed ratio v(H₂)/v(O₂) = sqrt(32.00/2.016) ≈ 4.0, so the lighter molecules are faster.",
+     "value": null
+    },
+    {
+     "text": "The lighter H₂ molecules have a larger average kinetic energy at the same temperature, and the extra kinetic energy is why they move faster than the O₂ molecules.",
+     "why": "Believes particles with less mass have more kinetic energy at the same temperature.",
+     "value": null
+    },
+    {
+     "text": "The O₂ molecules strike the container walls more often, and each collision transfers kinetic energy to the walls, which slows them below the speed of the H₂ molecules.",
+     "why": "Confuses collision frequency with a loss of particle speed.",
+     "value": null
+    },
+    {
+     "text": "At the same temperature every gas has the same average speed, and the two gases differ only in how far apart their molecules are in each container.",
+     "why": "Believes the same temperature means the same average speed for every gas.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 100,
+   "facts": [
+    "speed ratio=3.98"
+   ],
+   "blueprint": {
+    "id": "ch_t5l_kmt_claim",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "justify a claim about equal average kinetic energy and different average speeds of gas particles using the kinetic molecular theory",
+    "topic": "3.5",
+    "skill": "6.E",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: justify a claim about equal average kinetic energy and different average speeds of gas particles using the kinetic molecular theory",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Believes particles with less mass have more kinetic energy at the same temperature."
+     },
+     {
+      "id": "m2",
+      "description": "Confuses collision frequency with a loss of particle speed."
+     },
+     {
+      "id": "m3",
+      "description": "Believes the same temperature means the same average speed for every gas."
+     }
+    ],
+    "verification": {
+     "independent_path": "KE(avg) = (3/2)kT with KE = ½mv² (speed ratio from the masses) vs the root-mean-square speed formula sqrt(3RT/M) for each gas",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "separate what depends only on temperature (kinetic energy) from what also depends on mass (speed), then justify the claim"
+   },
+   "seed": 15300,
+   "pack_id": "ch_t5l_kmt_claim-s15300",
+   "explanation_en": "The correct answer is Average kinetic energy depends only on temperature, so the lighter H₂ molecules must move faster than the heavier O₂ molecules to have the same kinetic energy.. At one temperature, KE(avg) = (3/2)kT is the same for both gases, and with KE = ½mv² the speed ratio v(H₂)/v(O₂) = sqrt(32.00/2.016) ≈ 4.0, so the lighter molecules are faster.\nThe lighter H₂ molecules have a larger average kinetic energy at the same temperature, and the extra kinetic energy is why they move faster than the O₂ molecules. is incorrect: Believes particles with less mass have more kinetic energy at the same temperature.\nThe O₂ molecules strike the container walls more often, and each collision transfers kinetic energy to the walls, which slows them below the speed of the H₂ molecules. is incorrect: Confuses collision frequency with a loss of particle speed.\nAt the same temperature every gas has the same average speed, and the two gases differ only in how far apart their molecules are in each container. is incorrect: Believes the same temperature means the same average speed for every gas."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5l_kmt_claim",
+   "facts": [
+    "speed ratio=3.98"
+   ],
+   "seed": 15300
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Squarely 3.5 KMT: average KE depends only on temperature, speed depends on mass. A justification item fits skill 6.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is uniquely correct. B contradicts equal KE, C and D are false. Stem states equal KE, which is consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained. Option lengths are similar. The key is slightly longer, but that is not a giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Conceptual, about 60-100 seconds, no calculation needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, unambiguous KMT justification item with a unique key and distinct distractors."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept conceptual item: average KE depends only on temperature, so the lighter molecules have higher speed. No computation or stimulus. Distractors are clearly wrong and the correct option nearly restates the standard KMT relationship. Only one reasoning link (equal KE with different mass implies different speed), which is below typical full-mock exam_prep depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m01-k1",
+  "cellId": "ap_chemistry-m01",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "3.5",
+  "unitCode": "3",
+  "skillPrimary": "6.E",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5l_kmt_claim",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Requires recalling that average KE is proportional to Kelvin temperature and that speed scales with the square root of KE (at constant mass), then selecting the justification that links the particulate-level relationships to the macroscopic temperature change. One proportional-reasoning step (sqrt(2) is about 1.4) and a claim-justification step. Distractors target common misconceptions (energy loss in collisions, mass change, speed proportional to T). Typical AP argumentation item, with no heavy arithmetic or reading.",
+  "payload": {
+   "archetype": "ch_t5l_kmt_claim",
+   "topic": "3.5",
+   "skill": "6.E",
+   "calculator": "allowed",
+   "stem": "A sample of nitrogen gas in a rigid container is heated from 200 K to 400 K. A student claims that the average kinetic energy of the molecules doubles, but the average speed of the molecules increases by a factor of less than 2. Which statement best justifies the claim?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The molecules lose some of their kinetic energy in collisions with the container walls, so the average kinetic energy increases by less than a factor of 2 overall.",
+     "why": "Believes collisions with the walls reduce the average kinetic energy.",
+     "value": null
+    },
+    {
+     "text": "The molecules become heavier as the temperature rises, so the same increase in kinetic energy produces a smaller increase in the speed of the molecules.",
+     "why": "Believes the mass of a particle changes with temperature.",
+     "value": null
+    },
+    {
+     "text": "The average speed is proportional to the Kelvin temperature, so the speed also doubles with the temperature, and the part of the claim about the speed is therefore incorrect.",
+     "why": "Believes speed rather than kinetic energy is proportional to temperature.",
+     "value": null
+    },
+    {
+     "text": "The average kinetic energy is proportional to the Kelvin temperature, so it doubles, and since kinetic energy depends on speed squared, the speed rises by only about 1.4.",
+     "why": "KE(avg) ∝ T, so it changes by a factor of 2; KE = ½mv² makes v ∝ sqrt(T), so the speed changes by sqrt(2) ≈ 1.41.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 100,
+   "facts": [
+    "ke ratio=2.0; speed ratio=1.41"
+   ],
+   "blueprint": {
+    "id": "ch_t5l_kmt_claim",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "justify a claim about equal average kinetic energy and different average speeds of gas particles using the kinetic molecular theory",
+    "topic": "3.5",
+    "skill": "6.E",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: justify a claim about equal average kinetic energy and different average speeds of gas particles using the kinetic molecular theory",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Believes collisions with the walls reduce the average kinetic energy."
+     },
+     {
+      "id": "m2",
+      "description": "Believes the mass of a particle changes with temperature."
+     },
+     {
+      "id": "m3",
+      "description": "Believes speed rather than kinetic energy is proportional to temperature."
+     }
+    ],
+    "verification": {
+     "independent_path": "KE(avg) = (3/2)kT with KE = ½mv² (speed ratio from the masses) vs the root-mean-square speed formula sqrt(3RT/M) for each gas",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "separate what depends only on temperature (kinetic energy) from what also depends on mass (speed), then justify the claim"
+   },
+   "seed": 15301,
+   "pack_id": "ch_t5l_kmt_claim-s15301",
+   "explanation_en": "The correct answer is The average kinetic energy is proportional to the Kelvin temperature, so it doubles, and since kinetic energy depends on speed squared, the speed rises by only about 1.4.. KE(avg) ∝ T, so it changes by a factor of 2; KE = ½mv² makes v ∝ sqrt(T), so the speed changes by sqrt(2) ≈ 1.41.\nThe molecules lose some of their kinetic energy in collisions with the container walls, so the average kinetic energy increases by less than a factor of 2 overall. is incorrect: Believes collisions with the walls reduce the average kinetic energy.\nThe molecules become heavier as the temperature rises, so the same increase in kinetic energy produces a smaller increase in the speed of the molecules. is incorrect: Believes the mass of a particle changes with temperature.\nThe average speed is proportional to the Kelvin temperature, so the speed also doubles with the temperature, and the part of the claim about the speed is therefore incorrect. is incorrect: Believes speed rather than kinetic energy is proportional to temperature."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5l_kmt_claim",
+   "facts": [
+    "ke ratio=2.0; speed ratio=1.41"
+   ],
+   "seed": 15301
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.5 KMT: KE proportional to T and v proportional to sqrt(T). Skill 6.E is met because the student must justify a claim linking the particulate scale (speed, mass) to the macroscopic scale (temperature)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is the unique correct justification: KE doubles and speed rises by sqrt(2), about 1.41. The claim as worded (KE doubles, speed increases by less than 2) is true, so A, B and C each give a flawed justification or wrongly reject a true claim. The rigid container and the fact that mass does not change with T make D unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear, giving the gas, the temperatures and a rigid container."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct named misconception (wall collisions reduce KE, mass changes with T, speed proportional to T), and the explanation addresses each one. The key is the longest option, a slight length cue, but the other options are also long and similar in length, so this is acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Reading load is moderate, and the item can be done in about 100 seconds with no calculation beyond a square root of 2. The calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound KMT claim-justification question with a unique key, distinct misconception distractors, and an appropriate load. Accept."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires recalling that average KE is proportional to Kelvin temperature and that speed scales with the square root of KE (at constant mass), then selecting the justification that links the particulate-level relationships to the macroscopic temperature change. One proportional-reasoning step (sqrt(2) is about 1.4) and a claim-justification step. Distractors target common misconceptions (energy loss in collisions, mass change, speed proportional to T). Typical AP argumentation item, with no heavy arithmetic or reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m01-k2",
+  "cellId": "ap_chemistry-m01",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "3.5",
+  "unitCode": "3",
+  "skillPrimary": "6.E",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5l_kmt_claim",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept conceptual item: average KE depends only on temperature, so at equal KE the lighter H2 must have the higher speed. No computation, no stimulus, and short options. Distractors target common misconceptions but do not add steps. Mainly a recall and one-step justification, below typical full-mock complexity.",
+  "payload": {
+   "archetype": "ch_t5l_kmt_claim",
+   "topic": "3.5",
+   "skill": "6.E",
+   "calculator": "allowed",
+   "stem": "A student claims that, at the same temperature, hydrogen molecules (H₂) in one container and oxygen molecules (O₂) in another container have the same average kinetic energy, yet the H₂ molecules move faster on average. Which statement best justifies the claim?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The O₂ molecules strike the container walls more often, and each collision transfers kinetic energy to the walls, which slows them below the speed of the H₂ molecules.",
+     "why": "Confuses collision frequency with a loss of particle speed.",
+     "value": null
+    },
+    {
+     "text": "Average kinetic energy depends only on temperature, so the lighter H₂ molecules must move faster than the heavier O₂ molecules to have the same kinetic energy.",
+     "why": "At one temperature, KE(avg) = (3/2)kT is the same for both gases, and with KE = ½mv² the speed ratio v(H₂)/v(O₂) = sqrt(32.00/2.016) ≈ 4.0, so the lighter molecules are faster.",
+     "value": null
+    },
+    {
+     "text": "The lighter H₂ molecules have a larger average kinetic energy at the same temperature, and the extra kinetic energy is why they move faster than the O₂ molecules.",
+     "why": "Believes particles with less mass have more kinetic energy at the same temperature.",
+     "value": null
+    },
+    {
+     "text": "At the same temperature every gas has the same average speed, and the two gases differ only in how far apart their molecules are in each container.",
+     "why": "Believes the same temperature means the same average speed for every gas.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 100,
+   "facts": [
+    "speed ratio=3.98"
+   ],
+   "blueprint": {
+    "id": "ch_t5l_kmt_claim",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "justify a claim about equal average kinetic energy and different average speeds of gas particles using the kinetic molecular theory",
+    "topic": "3.5",
+    "skill": "6.E",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: justify a claim about equal average kinetic energy and different average speeds of gas particles using the kinetic molecular theory",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Confuses collision frequency with a loss of particle speed."
+     },
+     {
+      "id": "m2",
+      "description": "Believes particles with less mass have more kinetic energy at the same temperature."
+     },
+     {
+      "id": "m3",
+      "description": "Believes the same temperature means the same average speed for every gas."
+     }
+    ],
+    "verification": {
+     "independent_path": "KE(avg) = (3/2)kT with KE = ½mv² (speed ratio from the masses) vs the root-mean-square speed formula sqrt(3RT/M) for each gas",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "separate what depends only on temperature (kinetic energy) from what also depends on mass (speed), then justify the claim"
+   },
+   "seed": 15302,
+   "pack_id": "ch_t5l_kmt_claim-s15302",
+   "explanation_en": "The correct answer is Average kinetic energy depends only on temperature, so the lighter H₂ molecules must move faster than the heavier O₂ molecules to have the same kinetic energy.. At one temperature, KE(avg) = (3/2)kT is the same for both gases, and with KE = ½mv² the speed ratio v(H₂)/v(O₂) = sqrt(32.00/2.016) ≈ 4.0, so the lighter molecules are faster.\nThe O₂ molecules strike the container walls more often, and each collision transfers kinetic energy to the walls, which slows them below the speed of the H₂ molecules. is incorrect: Confuses collision frequency with a loss of particle speed.\nThe lighter H₂ molecules have a larger average kinetic energy at the same temperature, and the extra kinetic energy is why they move faster than the O₂ molecules. is incorrect: Believes particles with less mass have more kinetic energy at the same temperature.\nAt the same temperature every gas has the same average speed, and the two gases differ only in how far apart their molecules are in each container. is incorrect: Believes the same temperature means the same average speed for every gas."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5l_kmt_claim",
+   "facts": [
+    "speed ratio=3.98"
+   ],
+   "seed": 15302
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.5 KMT, skill 6.E: justifying a macroscopic claim (same KE, different speed) with particulate reasoning. In scope, with no later-unit content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is uniquely correct: average KE depends only on T, and KE = 1/2 mv^2 means lighter molecules move faster. A is false because collisions with the walls do not slow the gas on average. C wrongly says H2 has larger KE. D wrongly says same T means same speed."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete, and the standard assumptions are implied."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct named misconception, and the explanation addresses every wrong option. The explanation's speed-ratio calculation (about 4.0) goes beyond what the item requires but is accurate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Takes about 60-100 seconds, with a typical reading load and no calculation needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean KMT justification question. The key is unique and correct, each distractor targets a distinct misconception, and the load is appropriate. Accept."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept conceptual item: average KE depends only on temperature, so at equal KE the lighter H2 must have the higher speed. No computation, no stimulus, and short options. Distractors target common misconceptions but do not add steps. Mainly a recall and one-step justification, below typical full-mock complexity.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m02-k0",
+  "cellId": "ap_chemistry-m02",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "3.1",
+  "unitCode": "3",
+  "skillPrimary": "6.E",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5l_vapor_pressure_claim",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept conceptual item on temperature, kinetic energy distribution, and vapor pressure equilibrium. No computation or data representation. The correct option is the standard textbook explanation, and the distractors contain clear misconceptions (IMFs vanish, all molecules gain identical energy, new molecules created). It takes about 2-3 reasoning steps (higher T, more molecules with enough KE to escape, higher evaporation rate, higher pressure needed to equalize condensation rate). That is below full-mock exam_prep depth, which usually requires a representation change or proportional reasoning. It is in scope for topic 3.1/3.3 and fairly worded. The correct option is somewhat longer than the others, which is a minor test-wiseness cue.",
+  "payload": {
+   "archetype": "ch_t5l_vapor_pressure_claim",
+   "topic": "3.1",
+   "skill": "6.E",
+   "calculator": "allowed",
+   "stem": "A student claims that heating a liquid in a sealed container increases its equilibrium vapor pressure even though the intermolecular forces in the liquid do not change. Which statement best justifies the claim?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "At the higher temperature more molecules have enough kinetic energy to escape the liquid, so the gas needs a higher pressure before condensation matches evaporation.",
+     "why": "Raising the temperature shifts the distribution of kinetic energies, so more molecules exceed the energy needed to escape; equilibrium is reached at a higher gas pressure.",
+     "value": null
+    },
+    {
+     "text": "The attractions between the liquid molecules become much weaker as the sample is heated, so the molecules of the liquid no longer attract one another at all as they are heated.",
+     "why": "Believes intermolecular forces disappear or change with temperature.",
+     "value": null
+    },
+    {
+     "text": "Every molecule in the liquid gains exactly the same extra kinetic energy, so all of the molecules are able to escape at once and the pressure rises very sharply.",
+     "why": "Believes all molecules have the same energy and all can escape.",
+     "value": null
+    },
+    {
+     "text": "Heating creates additional molecules of the substance in the container, so the pressure of the gas rises whether or not any more liquid evaporates at all.",
+     "why": "Believes heating creates new molecules.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 100,
+   "facts": [
+    "temperature raises vapor pressure"
+   ],
+   "blueprint": {
+    "id": "ch_t5l_vapor_pressure_claim",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "justify a claim about equilibrium vapor pressure using the rates of evaporation and condensation and the distribution of kinetic energies",
+    "topic": "3.1",
+    "skill": "6.E",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: justify a claim about equilibrium vapor pressure using the rates of evaporation and condensation and the distribution of kinetic energies",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Believes intermolecular forces disappear or change with temperature."
+     },
+     {
+      "id": "m2",
+      "description": "Believes all molecules have the same energy and all can escape."
+     },
+     {
+      "id": "m3",
+      "description": "Believes heating creates new molecules."
+     }
+    ],
+    "verification": {
+     "independent_path": "dynamic-equilibrium rate argument vs the Boltzmann-type fraction of molecules above the escape energy",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "connect a macroscopic vapor-pressure claim to the particle-level rates and energies instead of to the strength of the attractions"
+   },
+   "seed": 15300,
+   "pack_id": "ch_t5l_vapor_pressure_claim-s15300",
+   "explanation_en": "The correct answer is At the higher temperature more molecules have enough kinetic energy to escape the liquid, so the gas needs a higher pressure before condensation matches evaporation.. Raising the temperature shifts the distribution of kinetic energies, so more molecules exceed the energy needed to escape; equilibrium is reached at a higher gas pressure.\nThe attractions between the liquid molecules become much weaker as the sample is heated, so the molecules of the liquid no longer attract one another at all as they are heated. is incorrect: Believes intermolecular forces disappear or change with temperature.\nEvery molecule in the liquid gains exactly the same extra kinetic energy, so all of the molecules are able to escape at once and the pressure rises very sharply. is incorrect: Believes all molecules have the same energy and all can escape.\nHeating creates additional molecules of the substance in the container, so the pressure of the gas rises whether or not any more liquid evaporates at all. is incorrect: Believes heating creates new molecules."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5l_vapor_pressure_claim",
+   "facts": [
+    "temperature raises vapor pressure"
+   ],
+   "seed": 15300
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.1 (vapor pressure and the evaporation/condensation link to IMFs and kinetic energy). Skill 6.E fits: the student justifies a macroscopic claim by particle-level reasoning. No later-unit content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the only defensible justification. B contradicts the stem's stated premise that IMFs do not change. C and D are factually wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the data object is empty. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct named misconception and the explanation addresses every wrong option. The key is slightly more mechanistic, but the options are similar in length and no giveaway is evident. The 'why' fields are brief but adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The reading load is short and fits roughly 60-100 seconds. No calculation is required, so the calculator designation is not an issue."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean 6.E claim-justification on vapor pressure. It has a unique key and three distinct misconception distractors, and it needs no data, so it passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept conceptual item on temperature, kinetic energy distribution, and vapor pressure equilibrium. No computation or data representation. The correct option is the standard textbook explanation, and the distractors contain clear misconceptions (IMFs vanish, all molecules gain identical energy, new molecules created). It takes about 2-3 reasoning steps (higher T, more molecules with enough KE to escape, higher evaporation rate, higher pressure needed to equalize condensation rate). That is below full-mock exam_prep depth, which usually requires a representation change or proportional reasoning. It is in scope for topic 3.1/3.3 and fairly worded. The correct option is somewhat longer than the others, which is a minor test-wiseness cue.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m02-k1",
+  "cellId": "ap_chemistry-m02",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "3.1",
+  "unitCode": "3",
+  "skillPrimary": "6.E",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5l_vapor_pressure_claim",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept conceptual item: at dynamic equilibrium, a larger surface area scales evaporation and condensation rates equally, so equilibrium vapor pressure is unchanged. No computation, no representation change. Distractors are clearly flawed (center-only escape, an unexplained cooling effect, volume-only dependence). The argumentation skill is present but needs only one linking step.",
+  "payload": {
+   "archetype": "ch_t5l_vapor_pressure_claim",
+   "topic": "3.1",
+   "skill": "6.E",
+   "calculator": "allowed",
+   "stem": "A student claims that, at constant temperature, doubling the surface area of a liquid in a sealed container does not change the equilibrium vapor pressure of the liquid. Which statement best justifies the claim?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Only the molecules at the center of the liquid can escape into the gas, so the surface area of the liquid is irrelevant to the rate of evaporation.",
+     "why": "Believes molecules in the interior, not at the surface, escape.",
+     "value": null
+    },
+    {
+     "text": "A larger surface area doubles both the rate of evaporation and the rate of condensation, so the pressure at which the two rates are equal stays the same.",
+     "why": "At equilibrium the rates of evaporation and condensation are equal; both scale with the surface area, so the equilibrium vapor pressure is set by the temperature and the intermolecular forces.",
+     "value": null
+    },
+    {
+     "text": "The extra surface area cools the liquid by exactly the amount needed to keep the equilibrium vapor pressure from changing as the surface is enlarged.",
+     "why": "Believes evaporative cooling cancels a surface-area effect.",
+     "value": null
+    },
+    {
+     "text": "The vapor pressure depends only on the volume of the container, so changing the surface area of the liquid cannot have any effect on the vapor pressure of the liquid.",
+     "why": "Believes vapor pressure depends on the container volume and not on temperature and forces.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 100,
+   "facts": [
+    "surface area does not change equilibrium vapor pressure"
+   ],
+   "blueprint": {
+    "id": "ch_t5l_vapor_pressure_claim",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "justify a claim about equilibrium vapor pressure using the rates of evaporation and condensation and the distribution of kinetic energies",
+    "topic": "3.1",
+    "skill": "6.E",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: justify a claim about equilibrium vapor pressure using the rates of evaporation and condensation and the distribution of kinetic energies",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Believes molecules in the interior, not at the surface, escape."
+     },
+     {
+      "id": "m2",
+      "description": "Believes evaporative cooling cancels a surface-area effect."
+     },
+     {
+      "id": "m3",
+      "description": "Believes vapor pressure depends on the container volume and not on temperature and forces."
+     }
+    ],
+    "verification": {
+     "independent_path": "dynamic-equilibrium rate argument vs the Boltzmann-type fraction of molecules above the escape energy",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "connect a macroscopic vapor-pressure claim to the particle-level rates and energies instead of to the strength of the attractions"
+   },
+   "seed": 15301,
+   "pack_id": "ch_t5l_vapor_pressure_claim-s15301",
+   "explanation_en": "The correct answer is A larger surface area doubles both the rate of evaporation and the rate of condensation, so the pressure at which the two rates are equal stays the same.. At equilibrium the rates of evaporation and condensation are equal; both scale with the surface area, so the equilibrium vapor pressure is set by the temperature and the intermolecular forces.\nOnly the molecules at the center of the liquid can escape into the gas, so the surface area of the liquid is irrelevant to the rate of evaporation. is incorrect: Believes molecules in the interior, not at the surface, escape.\nThe extra surface area cools the liquid by exactly the amount needed to keep the equilibrium vapor pressure from changing as the surface is enlarged. is incorrect: Believes evaporative cooling cancels a surface-area effect.\nThe vapor pressure depends only on the volume of the container, so changing the surface area of the liquid cannot have any effect on the vapor pressure of the liquid. is incorrect: Believes vapor pressure depends on the container volume and not on temperature and forces."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5l_vapor_pressure_claim",
+   "facts": [
+    "surface area does not change equilibrium vapor pressure"
+   ],
+   "seed": 15301
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable. B is the unique correct justification (equal rates of evaporation and condensation both scale with surface area). The distractors are distinct misconceptions, and the explanation covers each one. The item is a short conceptual claim-justification with no stimulus and no needless load. Distractors A and D use absolute language, which is a minor weakness.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept conceptual item: at dynamic equilibrium, a larger surface area scales evaporation and condensation rates equally, so equilibrium vapor pressure is unchanged. No computation, no representation change. Distractors are clearly flawed (center-only escape, an unexplained cooling effect, volume-only dependence). The argumentation skill is present but needs only one linking step.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m02-k2",
+  "cellId": "ap_chemistry-m02",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "3.1",
+  "unitCode": "3",
+  "skillPrimary": "6.E",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5l_vapor_pressure_claim",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept conceptual item: link higher temperature to a larger fraction of molecules able to escape, giving a higher equilibrium vapor pressure. No computation or representation change. Distractors contain clear misconceptions (uniform energy, IMFs vanishing, creation of molecules), so the correct option is identifiable with one reasoning step. Fits the 6.E argumentation skill at an introductory level.",
+  "payload": {
+   "archetype": "ch_t5l_vapor_pressure_claim",
+   "topic": "3.1",
+   "skill": "6.E",
+   "calculator": "allowed",
+   "stem": "A student claims that heating a liquid in a sealed container increases its equilibrium vapor pressure even though the intermolecular forces in the liquid do not change. Which statement best justifies the claim?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Every molecule in the liquid gains exactly the same extra kinetic energy, so all of the molecules are able to escape at once and the pressure rises very sharply.",
+     "why": "Believes all molecules have the same energy and all can escape.",
+     "value": null
+    },
+    {
+     "text": "At the higher temperature more molecules have enough kinetic energy to escape the liquid, so the gas needs a higher pressure before condensation matches evaporation.",
+     "why": "Raising the temperature shifts the distribution of kinetic energies, so more molecules exceed the energy needed to escape; equilibrium is reached at a higher gas pressure.",
+     "value": null
+    },
+    {
+     "text": "The attractions between the liquid molecules become much weaker as the sample is heated, so the molecules of the liquid no longer attract one another at all as they are heated.",
+     "why": "Believes intermolecular forces disappear or change with temperature.",
+     "value": null
+    },
+    {
+     "text": "Heating creates additional molecules of the substance in the container, so the pressure of the gas rises whether or not any more liquid evaporates at all.",
+     "why": "Believes heating creates new molecules.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 100,
+   "facts": [
+    "temperature raises vapor pressure"
+   ],
+   "blueprint": {
+    "id": "ch_t5l_vapor_pressure_claim",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "justify a claim about equilibrium vapor pressure using the rates of evaporation and condensation and the distribution of kinetic energies",
+    "topic": "3.1",
+    "skill": "6.E",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: justify a claim about equilibrium vapor pressure using the rates of evaporation and condensation and the distribution of kinetic energies",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Believes all molecules have the same energy and all can escape."
+     },
+     {
+      "id": "m2",
+      "description": "Believes intermolecular forces disappear or change with temperature."
+     },
+     {
+      "id": "m3",
+      "description": "Believes heating creates new molecules."
+     }
+    ],
+    "verification": {
+     "independent_path": "dynamic-equilibrium rate argument vs the Boltzmann-type fraction of molecules above the escape energy",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "connect a macroscopic vapor-pressure claim to the particle-level rates and energies instead of to the strength of the attractions"
+   },
+   "seed": 15302,
+   "pack_id": "ch_t5l_vapor_pressure_claim-s15302",
+   "explanation_en": "The correct answer is At the higher temperature more molecules have enough kinetic energy to escape the liquid, so the gas needs a higher pressure before condensation matches evaporation.. Raising the temperature shifts the distribution of kinetic energies, so more molecules exceed the energy needed to escape; equilibrium is reached at a higher gas pressure.\nEvery molecule in the liquid gains exactly the same extra kinetic energy, so all of the molecules are able to escape at once and the pressure rises very sharply. is incorrect: Believes all molecules have the same energy and all can escape.\nThe attractions between the liquid molecules become much weaker as the sample is heated, so the molecules of the liquid no longer attract one another at all as they are heated. is incorrect: Believes intermolecular forces disappear or change with temperature.\nHeating creates additional molecules of the substance in the container, so the pressure of the gas rises whether or not any more liquid evaporates at all. is incorrect: Believes heating creates new molecules."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5l_vapor_pressure_claim",
+   "facts": [
+    "temperature raises vapor pressure"
+   ],
+   "seed": 15302
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Justifying a macroscopic vapor-pressure claim from particle-level energy distributions fits 6.E. The vapor-pressure content borders 3.3 but is tied to 3.1 through intermolecular forces."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique defensible answer. C contradicts the stem premise, and A and D are physically incorrect."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear, though D is slightly clumsy."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions are encoded and each wrong option is explained. The distractors are fairly obviously wrong, and C is eliminated by the stem alone."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item has no calculation and a reasonable reading load, and fits in about 100 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, unambiguous claim-justification MC with a unique key. The distractors are somewhat weak, and C is eliminated by the stem premise alone. It passes with minor reservations."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept conceptual item: link higher temperature to a larger fraction of molecules able to escape, giving a higher equilibrium vapor pressure. No computation or representation change. Distractors contain clear misconceptions (uniform energy, IMFs vanishing, creation of molecules), so the correct option is identifiable with one reasoning step. Fits the 6.E argumentation skill at an introductory level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m03-k0",
+  "cellId": "ap_chemistry-m03",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "3.1",
+  "unitCode": "3",
+  "skillPrimary": "4.C",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5l_viscosity_model",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept conceptual item: link higher temperature to greater average kinetic energy overcoming intermolecular attractions, lowering viscosity. No calculation, no stimulus. Distractors are clear misconceptions (breaking covalent bonds, turning into a gas, molecules becoming heavier) and are easily eliminated. Requires one particulate-to-macroscopic link, which is recall-level for Unit 3.1; below typical full-mock difficulty.",
+  "payload": {
+   "archetype": "ch_t5l_viscosity_model",
+   "topic": "3.1",
+   "skill": "4.C",
+   "calculator": "allowed",
+   "stem": "Honey flows much more easily after it is warmed in a water bath. Which particle-level model best explains the decrease in viscosity?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Warming raises the average kinetic energy of the molecules, so more of them overcome the attractions to neighbors and slide past one another, lowering the viscosity.",
+     "why": "Higher kinetic energy lets more molecules overcome the intermolecular attractions, so the molecules slide past one another more easily and the viscosity drops.",
+     "value": null
+    },
+    {
+     "text": "Warming breaks the covalent bonds inside the molecules, so the molecules become much smaller and are able to flow past one another more easily than they could before.",
+     "why": "Confuses breaking intermolecular attractions with breaking covalent bonds.",
+     "value": null
+    },
+    {
+     "text": "Warming spreads the molecules apart until the liquid behaves like a gas with no attractions left, so the viscosity of the liquid falls to a value of zero.",
+     "why": "Believes a warmed liquid becomes a gas with no attractions.",
+     "value": null
+    },
+    {
+     "text": "Warming makes each molecule heavier, so the liquid moves downhill faster under gravity and the measured viscosity of the liquid becomes smaller as a result.",
+     "why": "Believes warming changes the mass of a molecule.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 100,
+   "facts": [
+    "honey warmed flows more easily"
+   ],
+   "blueprint": {
+    "id": "ch_t5l_viscosity_model",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "explain the decrease of viscosity with temperature using a particle-level model of kinetic energy and intermolecular attractions",
+    "topic": "3.1",
+    "skill": "4.C",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: explain the decrease of viscosity with temperature using a particle-level model of kinetic energy and intermolecular attractions",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Confuses breaking intermolecular attractions with breaking covalent bonds."
+     },
+     {
+      "id": "m2",
+      "description": "Believes a warmed liquid becomes a gas with no attractions."
+     },
+     {
+      "id": "m3",
+      "description": "Believes warming changes the mass of a molecule."
+     }
+    ],
+    "verification": {
+     "independent_path": "kinetic-energy-versus-attraction argument checked against the measured trend vs the Arrhenius-type temperature dependence of flow",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "use a particle-level model with kinetic energy and attractions between molecules, and reject explanations that change bonds, masses or phase"
+   },
+   "seed": 15300,
+   "pack_id": "ch_t5l_viscosity_model-s15300",
+   "explanation_en": "The correct answer is Warming raises the average kinetic energy of the molecules, so more of them overcome the attractions to neighbors and slide past one another, lowering the viscosity.. Higher kinetic energy lets more molecules overcome the intermolecular attractions, so the molecules slide past one another more easily and the viscosity drops.\nWarming breaks the covalent bonds inside the molecules, so the molecules become much smaller and are able to flow past one another more easily than they could before. is incorrect: Confuses breaking intermolecular attractions with breaking covalent bonds.\nWarming spreads the molecules apart until the liquid behaves like a gas with no attractions left, so the viscosity of the liquid falls to a value of zero. is incorrect: Believes a warmed liquid becomes a gas with no attractions.\nWarming makes each molecule heavier, so the liquid moves downhill faster under gravity and the measured viscosity of the liquid becomes smaller as a result. is incorrect: Believes warming changes the mass of a molecule."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5l_viscosity_model",
+   "facts": [
+    "honey warmed flows more easily"
+   ],
+   "seed": 15300
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60-90 seconds, needs no calculation, and its reading load is light. The long options are slightly wordy but acceptable.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean conceptual item with a unique key and distinct misconception distractors. It fits topic 3.1 and skill 4.C, and no acceptance criterion fails."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept conceptual item: link higher temperature to greater average kinetic energy overcoming intermolecular attractions, lowering viscosity. No calculation, no stimulus. Distractors are clear misconceptions (breaking covalent bonds, turning into a gas, molecules becoming heavier) and are easily eliminated. Requires one particulate-to-macroscopic link, which is recall-level for Unit 3.1; below typical full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m03-k1",
+  "cellId": "ap_chemistry-m03",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "3.1",
+  "unitCode": "3",
+  "skillPrimary": "4.C",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5l_viscosity_model",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: connect the decreasing viscosity trend with temperature to the particle-level idea that higher kinetic energy lets molecules overcome intermolecular attractions. No computation is needed, the data are only a quick trend read, and the distractors are clearly wrong (mass change, gas with zero attractions, covalent bond breaking). It fits foundational understanding of topic 3.1 rather than multi-step exam-level reasoning.",
+  "payload": {
+   "archetype": "ch_t5l_viscosity_model",
+   "topic": "3.1",
+   "skill": "4.C",
+   "calculator": "allowed",
+   "stem": "The viscosity of liquid water is measured at three temperatures: 1.31 mPa·s at 10 °C, 0.65 mPa·s at 40 °C, and 0.40 mPa·s at 70 °C. Which particle-level model best explains this trend?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Warming makes each molecule heavier, so the liquid moves downhill faster under gravity and the measured viscosity of the liquid becomes smaller as a result.",
+     "why": "Believes warming changes the mass of a molecule.",
+     "value": null
+    },
+    {
+     "text": "Warming raises the average kinetic energy of the molecules, so more of them overcome the attractions to neighbors and slide past one another, lowering the viscosity.",
+     "why": "Higher kinetic energy lets more molecules overcome the intermolecular attractions, so the molecules slide past one another more easily and the viscosity drops.",
+     "value": null
+    },
+    {
+     "text": "Warming spreads the molecules apart until the liquid behaves like a gas with no attractions left, so the viscosity of the liquid falls to a value of zero.",
+     "why": "Believes a warmed liquid becomes a gas with no attractions.",
+     "value": null
+    },
+    {
+     "text": "Warming breaks the covalent bonds inside the molecules, so the molecules become much smaller and are able to flow past one another more easily than they could before.",
+     "why": "Confuses breaking intermolecular attractions with breaking covalent bonds.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 100,
+   "facts": [
+    "water viscosity falls from 1.31 to 0.40 mPa·s between 10 and 70 °C"
+   ],
+   "blueprint": {
+    "id": "ch_t5l_viscosity_model",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "explain the decrease of viscosity with temperature using a particle-level model of kinetic energy and intermolecular attractions",
+    "topic": "3.1",
+    "skill": "4.C",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: explain the decrease of viscosity with temperature using a particle-level model of kinetic energy and intermolecular attractions",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Believes warming changes the mass of a molecule."
+     },
+     {
+      "id": "m2",
+      "description": "Believes a warmed liquid becomes a gas with no attractions."
+     },
+     {
+      "id": "m3",
+      "description": "Confuses breaking intermolecular attractions with breaking covalent bonds."
+     }
+    ],
+    "verification": {
+     "independent_path": "kinetic-energy-versus-attraction argument checked against the measured trend vs the Arrhenius-type temperature dependence of flow",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "use a particle-level model with kinetic energy and attractions between molecules, and reject explanations that change bonds, masses or phase"
+   },
+   "seed": 15301,
+   "pack_id": "ch_t5l_viscosity_model-s15301",
+   "explanation_en": "The correct answer is Warming raises the average kinetic energy of the molecules, so more of them overcome the attractions to neighbors and slide past one another, lowering the viscosity.. Higher kinetic energy lets more molecules overcome the intermolecular attractions, so the molecules slide past one another more easily and the viscosity drops.\nWarming makes each molecule heavier, so the liquid moves downhill faster under gravity and the measured viscosity of the liquid becomes smaller as a result. is incorrect: Believes warming changes the mass of a molecule.\nWarming spreads the molecules apart until the liquid behaves like a gas with no attractions left, so the viscosity of the liquid falls to a value of zero. is incorrect: Believes a warmed liquid becomes a gas with no attractions.\nWarming breaks the covalent bonds inside the molecules, so the molecules become much smaller and are able to flow past one another more easily than they could before. is incorrect: Confuses breaking intermolecular attractions with breaking covalent bonds."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5l_viscosity_model",
+   "facts": [
+    "water viscosity falls from 1.31 to 0.40 mPa·s between 10 and 70 °C"
+   ],
+   "seed": 15301
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "No calculation is needed and the reading load is light, so it can be answered in about 60-100 seconds. The options are sentence-length, which is typical for model-evaluation items.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean conceptual item on a particle-level model of viscosity versus temperature. The key is unique, the distractors map to distinct misconceptions, and it is in scope. It passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: connect the decreasing viscosity trend with temperature to the particle-level idea that higher kinetic energy lets molecules overcome intermolecular attractions. No computation is needed, the data are only a quick trend read, and the distractors are clearly wrong (mass change, gas with zero attractions, covalent bond breaking). It fits foundational understanding of topic 3.1 rather than multi-step exam-level reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m03-k2",
+  "cellId": "ap_chemistry-m03",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "3.1",
+  "unitCode": "3",
+  "skillPrimary": "4.C",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5l_viscosity_model",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept conceptual item: link temperature, average kinetic energy, and overcoming intermolecular attractions to lower viscosity. Distractors are clearly wrong (liquid becomes a gas with zero viscosity, covalent bonds break, molecules get heavier). No calculation, no stimulus, minimal reading, one reasoning step connecting particle-level behavior to a macroscopic property.",
+  "payload": {
+   "archetype": "ch_t5l_viscosity_model",
+   "topic": "3.1",
+   "skill": "4.C",
+   "calculator": "allowed",
+   "stem": "Honey flows much more easily after it is warmed in a water bath. Which particle-level model best explains the decrease in viscosity?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Warming spreads the molecules apart until the liquid behaves like a gas with no attractions left, so the viscosity of the liquid falls to a value of zero.",
+     "why": "Believes a warmed liquid becomes a gas with no attractions.",
+     "value": null
+    },
+    {
+     "text": "Warming raises the average kinetic energy of the molecules, so more of them overcome the attractions to neighbors and slide past one another, lowering the viscosity.",
+     "why": "Higher kinetic energy lets more molecules overcome the intermolecular attractions, so the molecules slide past one another more easily and the viscosity drops.",
+     "value": null
+    },
+    {
+     "text": "Warming breaks the covalent bonds inside the molecules, so the molecules become much smaller and are able to flow past one another more easily than they could before.",
+     "why": "Confuses breaking intermolecular attractions with breaking covalent bonds.",
+     "value": null
+    },
+    {
+     "text": "Warming makes each molecule heavier, so the liquid moves downhill faster under gravity and the measured viscosity of the liquid becomes smaller as a result.",
+     "why": "Believes warming changes the mass of a molecule.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 100,
+   "facts": [
+    "honey warmed flows more easily"
+   ],
+   "blueprint": {
+    "id": "ch_t5l_viscosity_model",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "explain the decrease of viscosity with temperature using a particle-level model of kinetic energy and intermolecular attractions",
+    "topic": "3.1",
+    "skill": "4.C",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: explain the decrease of viscosity with temperature using a particle-level model of kinetic energy and intermolecular attractions",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Believes a warmed liquid becomes a gas with no attractions."
+     },
+     {
+      "id": "m2",
+      "description": "Confuses breaking intermolecular attractions with breaking covalent bonds."
+     },
+     {
+      "id": "m3",
+      "description": "Believes warming changes the mass of a molecule."
+     }
+    ],
+    "verification": {
+     "independent_path": "kinetic-energy-versus-attraction argument checked against the measured trend vs the Arrhenius-type temperature dependence of flow",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "use a particle-level model with kinetic energy and attractions between molecules, and reject explanations that change bonds, masses or phase"
+   },
+   "seed": 15302,
+   "pack_id": "ch_t5l_viscosity_model-s15302",
+   "explanation_en": "The correct answer is Warming raises the average kinetic energy of the molecules, so more of them overcome the attractions to neighbors and slide past one another, lowering the viscosity.. Higher kinetic energy lets more molecules overcome the intermolecular attractions, so the molecules slide past one another more easily and the viscosity drops.\nWarming spreads the molecules apart until the liquid behaves like a gas with no attractions left, so the viscosity of the liquid falls to a value of zero. is incorrect: Believes a warmed liquid becomes a gas with no attractions.\nWarming breaks the covalent bonds inside the molecules, so the molecules become much smaller and are able to flow past one another more easily than they could before. is incorrect: Confuses breaking intermolecular attractions with breaking covalent bonds.\nWarming makes each molecule heavier, so the liquid moves downhill faster under gravity and the measured viscosity of the liquid becomes smaller as a result. is incorrect: Believes warming changes the mass of a molecule."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5l_viscosity_model",
+   "facts": [
+    "honey warmed flows more easily"
+   ],
+   "seed": 15302
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item links viscosity, a macroscopic property, to a particle-level model of kinetic energy and intermolecular attractions, which fits topic 3.1 and skill 4.C. Option B is the only correct model. Each distractor encodes a distinct misconception, and the explanation addresses every wrong option. No stimulus is needed, and the reading load and timing are typical for an AP item.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The viscosity-versus-temperature explanation uses intermolecular forces and kinetic energy, which is squarely within 3.1 and skill 4.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is unique. Option A (viscosity falling to zero, a gas with no attractions), option C (covalent bonds break) and option D (molecules become heavier) are each clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors map to distinct named misconceptions, and the explanation addresses each one. The options are similar in length and format, so there is no giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60-100 seconds, needs no calculation, and has a single dominant skill."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept conceptual item: link temperature, average kinetic energy, and overcoming intermolecular attractions to lower viscosity. Distractors are clearly wrong (liquid becomes a gas with zero viscosity, covalent bonds break, molecules get heavier). No calculation, no stimulus, minimal reading, one reasoning step connecting particle-level behavior to a macroscopic property.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m04-k0",
+  "cellId": "ap_chemistry-m04",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "2.7",
+  "unitCode": "2",
+  "skillPrimary": "4.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5l_vsepr_compare",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Direct application of VSEPR: count electron domains on S in SO3 (3 domains, trigonal planar) and SO3^2- (4 domains with one lone pair, trigonal pyramidal). Requires a Lewis structure for each species and a domain-to-shape mapping, but no calculation, graph reading, or multi-part linking. Distractors rely on common misconceptions (bonded atoms alone determine shape, lone pair always present or removed by charge) and are easy to rule out. Short stem, no unfair difficulty sources.",
+  "payload": {
+   "archetype": "ch_t5l_vsepr_compare",
+   "topic": "2.7",
+   "skill": "4.A",
+   "calculator": "allowed",
+   "stem": "Sulfur trioxide, SO₃, and the sulfite ion, SO₃²⁻, each have three oxygen atoms bonded to a central sulfur atom. Which statement correctly compares their shapes?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "SO₃ is trigonal planar because sulfur has three electron domains and no lone pair, while SO₃²⁻ is trigonal pyramidal because sulfur has four domains with one lone pair.",
+     "why": "SO₃: (6 + 0 − 0)/2 = 3 domains, no lone pair, trigonal planar. SO₃²⁻: (6 + 0 + 2)/2 = 4 domains, three bonds and one lone pair, trigonal pyramidal.",
+     "value": null
+    },
+    {
+     "text": "Both are trigonal planar because the central sulfur atom in each species is bonded to three oxygen atoms, and bonded atoms alone decide the shape of each species.",
+     "why": "Ignores the lone pair on the central atom.",
+     "value": null
+    },
+    {
+     "text": "SO₃ is trigonal pyramidal and SO₃²⁻ is trigonal planar because the extra negative charge removes the lone pair from the sulfur atom in the sulfite ion.",
+     "why": "Reverses the effect of the added electrons.",
+     "value": null
+    },
+    {
+     "text": "Both are trigonal pyramidal because a sulfur atom that is bonded to oxygen always carries a lone pair of electrons, so each species has the same trigonal pyramid shape in the end.",
+     "why": "Believes sulfur always has a lone pair.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 100,
+   "facts": [
+    "domains 3 and 4"
+   ],
+   "blueprint": {
+    "id": "ch_t5l_vsepr_compare",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "compare the shapes of two species with the same number of bonded atoms but different numbers of lone pairs using VSEPR",
+    "topic": "2.7",
+    "skill": "4.A",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: compare the shapes of two species with the same number of bonded atoms but different numbers of lone pairs using VSEPR",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Ignores the lone pair on the central atom."
+     },
+     {
+      "id": "m2",
+      "description": "Reverses the effect of the added electrons."
+     },
+     {
+      "id": "m3",
+      "description": "Believes sulfur always has a lone pair."
+     }
+    ],
+    "verification": {
+     "independent_path": "electron-domain count from (valence electrons + bonded monovalent atoms − charge)/2 vs the shape table keyed by (domains, lone pairs)",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "count the electron domains and lone pairs of each central atom, then use them to name the shapes"
+   },
+   "seed": 15300,
+   "pack_id": "ch_t5l_vsepr_compare-s15300",
+   "explanation_en": "The correct answer is SO₃ is trigonal planar because sulfur has three electron domains and no lone pair, while SO₃²⁻ is trigonal pyramidal because sulfur has four domains with one lone pair.. SO₃: (6 + 0 − 0)/2 = 3 domains, no lone pair, trigonal planar. SO₃²⁻: (6 + 0 + 2)/2 = 4 domains, three bonds and one lone pair, trigonal pyramidal.\nBoth are trigonal planar because the central sulfur atom in each species is bonded to three oxygen atoms, and bonded atoms alone decide the shape of each species. is incorrect: Ignores the lone pair on the central atom.\nSO₃ is trigonal pyramidal and SO₃²⁻ is trigonal planar because the extra negative charge removes the lone pair from the sulfur atom in the sulfite ion. is incorrect: Reverses the effect of the added electrons.\nBoth are trigonal pyramidal because a sulfur atom that is bonded to oxygen always carries a lone pair of electrons, so each species has the same trigonal pyramid shape in the end. is incorrect: Believes sulfur always has a lone pair."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5l_vsepr_compare",
+   "facts": [
+    "domains 3 and 4"
+   ],
+   "seed": 15300
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The reading load is light, about 60-100 seconds, with no calculator needed. Matches the typical AP style.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, unambiguous VSEPR comparison item with a unique key and distinct misconception-based distractors. It is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct application of VSEPR: count electron domains on S in SO3 (3 domains, trigonal planar) and SO3^2- (4 domains with one lone pair, trigonal pyramidal). Requires a Lewis structure for each species and a domain-to-shape mapping, but no calculation, graph reading, or multi-part linking. Distractors rely on common misconceptions (bonded atoms alone determine shape, lone pair always present or removed by charge) and are easy to rule out. Short stem, no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m04-k1",
+  "cellId": "ap_chemistry-m04",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "2.7",
+  "unitCode": "2",
+  "skillPrimary": "4.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5l_vsepr_compare",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student must build Lewis structures for two polyatomic ions (valence electron counting with charge), count electron domains including lone pairs, and map to VSEPR shapes, recognizing that the same number of bonded atoms can give different shapes. Requires the governing model (VSEPR) and a comparison step, but there is no computation, reading is minimal, and the wording is unambiguous. Distractors target common misconceptions (bonded atoms alone determine shape; charge determines lone pairs). Appropriate for a full mock exam.",
+  "payload": {
+   "archetype": "ch_t5l_vsepr_compare",
+   "topic": "2.7",
+   "skill": "4.A",
+   "calculator": "allowed",
+   "stem": "The carbonate ion, CO₃²⁻, and the chlorate ion, ClO₃⁻, each have three oxygen atoms bonded to a central atom. Which statement correctly compares their shapes?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Both are trigonal pyramidal because a central atom that is bonded to oxygen always carries a lone pair of electrons, so each ion has the same trigonal pyramid shape in the end.",
+     "why": "Believes every central atom bonded to oxygen has a lone pair.",
+     "value": null
+    },
+    {
+     "text": "CO₃²⁻ is trigonal planar because carbon has three electron domains and no lone pair, while ClO₃⁻ is trigonal pyramidal because chlorine has four domains with one lone pair.",
+     "why": "CO₃²⁻: (4 + 0 + 2)/2 = 3 domains, no lone pair, trigonal planar. ClO₃⁻: (7 + 0 + 1)/2 = 4 domains, three bonds and one lone pair, trigonal pyramidal.",
+     "value": null
+    },
+    {
+     "text": "CO₃²⁻ is trigonal pyramidal and ClO₃⁻ is trigonal planar because the ion with the larger negative charge must be the one that carries the lone pair on its central atom.",
+     "why": "Believes the larger charge decides which ion has the lone pair.",
+     "value": null
+    },
+    {
+     "text": "Both are trigonal planar because the central atom in each ion is bonded to three oxygen atoms, and bonded atoms alone decide the shape of each ion.",
+     "why": "Ignores the lone pair on the central atom.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 100,
+   "facts": [
+    "domains 3 and 4"
+   ],
+   "blueprint": {
+    "id": "ch_t5l_vsepr_compare",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "compare the shapes of two species with the same number of bonded atoms but different numbers of lone pairs using VSEPR",
+    "topic": "2.7",
+    "skill": "4.A",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: compare the shapes of two species with the same number of bonded atoms but different numbers of lone pairs using VSEPR",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Believes every central atom bonded to oxygen has a lone pair."
+     },
+     {
+      "id": "m2",
+      "description": "Believes the larger charge decides which ion has the lone pair."
+     },
+     {
+      "id": "m3",
+      "description": "Ignores the lone pair on the central atom."
+     }
+    ],
+    "verification": {
+     "independent_path": "electron-domain count from (valence electrons + bonded monovalent atoms − charge)/2 vs the shape table keyed by (domains, lone pairs)",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "count the electron domains and lone pairs of each central atom, then use them to name the shapes"
+   },
+   "seed": 15301,
+   "pack_id": "ch_t5l_vsepr_compare-s15301",
+   "explanation_en": "The correct answer is CO₃²⁻ is trigonal planar because carbon has three electron domains and no lone pair, while ClO₃⁻ is trigonal pyramidal because chlorine has four domains with one lone pair.. CO₃²⁻: (4 + 0 + 2)/2 = 3 domains, no lone pair, trigonal planar. ClO₃⁻: (7 + 0 + 1)/2 = 4 domains, three bonds and one lone pair, trigonal pyramidal.\nBoth are trigonal pyramidal because a central atom that is bonded to oxygen always carries a lone pair of electrons, so each ion has the same trigonal pyramid shape in the end. is incorrect: Believes every central atom bonded to oxygen has a lone pair.\nCO₃²⁻ is trigonal pyramidal and ClO₃⁻ is trigonal planar because the ion with the larger negative charge must be the one that carries the lone pair on its central atom. is incorrect: Believes the larger charge decides which ion has the lone pair.\nBoth are trigonal planar because the central atom in each ion is bonded to three oxygen atoms, and bonded atoms alone decide the shape of each ion. is incorrect: Ignores the lone pair on the central atom."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5l_vsepr_compare",
+   "facts": [
+    "domains 3 and 4"
+   ],
+   "seed": 15301
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "VSEPR shape comparison for CO3^2- and ClO3^-. Squarely topic 2.7 and a fair fit for skill 4.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is correct: carbonate is trigonal planar and chlorate is trigonal pyramidal. Chlorate with all single bonds has 3 bonds and 1 lone pair, and this is the standard AP treatment. The other options contain false statements. The independent solver chose B."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception, and the explanation addresses each wrong option. Option B is longer than the others, but all four options are similar in length and format. The domain-count formula in the explanation for ClO3^- is a little odd but gives the correct result."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, with no arithmetic burden. The long justification clauses in the options are slightly wordy but acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound VSEPR comparison with a unique key and distinct distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must build Lewis structures for two polyatomic ions (valence electron counting with charge), count electron domains including lone pairs, and map to VSEPR shapes, recognizing that the same number of bonded atoms can give different shapes. Requires the governing model (VSEPR) and a comparison step, but there is no computation, reading is minimal, and the wording is unambiguous. Distractors target common misconceptions (bonded atoms alone determine shape; charge determines lone pairs). Appropriate for a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m04-k2",
+  "cellId": "ap_chemistry-m04",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "2.7",
+  "unitCode": "2",
+  "skillPrimary": "4.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5l_vsepr_compare",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student must derive Lewis structures for SO3 and SO3^2- (valence electron count including charge), count electron domains on S, and map domains/lone pairs to molecular geometry, then compare. Concept is core VSEPR, with plausible misconception distractors (ignoring lone pairs, charge removing lone pair). Reading and computation are minimal; difficulty comes from legitimate conceptual steps, so it fits a full-mock item rather than basic recall or advanced extension.",
+  "payload": {
+   "archetype": "ch_t5l_vsepr_compare",
+   "topic": "2.7",
+   "skill": "4.A",
+   "calculator": "allowed",
+   "stem": "Sulfur trioxide, SO₃, and the sulfite ion, SO₃²⁻, each have three oxygen atoms bonded to a central sulfur atom. Which statement correctly compares their shapes?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "SO₃ is trigonal pyramidal and SO₃²⁻ is trigonal planar because the extra negative charge removes the lone pair from the sulfur atom in the sulfite ion.",
+     "why": "Reverses the effect of the added electrons.",
+     "value": null
+    },
+    {
+     "text": "SO₃ is trigonal planar because sulfur has three electron domains and no lone pair, while SO₃²⁻ is trigonal pyramidal because sulfur has four domains with one lone pair.",
+     "why": "SO₃: (6 + 0 − 0)/2 = 3 domains, no lone pair, trigonal planar. SO₃²⁻: (6 + 0 + 2)/2 = 4 domains, three bonds and one lone pair, trigonal pyramidal.",
+     "value": null
+    },
+    {
+     "text": "Both are trigonal planar because the central sulfur atom in each species is bonded to three oxygen atoms, and bonded atoms alone decide the shape of each species.",
+     "why": "Ignores the lone pair on the central atom.",
+     "value": null
+    },
+    {
+     "text": "Both are trigonal pyramidal because a sulfur atom that is bonded to oxygen always carries a lone pair of electrons, so each species has the same trigonal pyramid shape in the end.",
+     "why": "Believes sulfur always has a lone pair.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 100,
+   "facts": [
+    "domains 3 and 4"
+   ],
+   "blueprint": {
+    "id": "ch_t5l_vsepr_compare",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "compare the shapes of two species with the same number of bonded atoms but different numbers of lone pairs using VSEPR",
+    "topic": "2.7",
+    "skill": "4.A",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: compare the shapes of two species with the same number of bonded atoms but different numbers of lone pairs using VSEPR",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Reverses the effect of the added electrons."
+     },
+     {
+      "id": "m2",
+      "description": "Ignores the lone pair on the central atom."
+     },
+     {
+      "id": "m3",
+      "description": "Believes sulfur always has a lone pair."
+     }
+    ],
+    "verification": {
+     "independent_path": "electron-domain count from (valence electrons + bonded monovalent atoms − charge)/2 vs the shape table keyed by (domains, lone pairs)",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "count the electron domains and lone pairs of each central atom, then use them to name the shapes"
+   },
+   "seed": 15302,
+   "pack_id": "ch_t5l_vsepr_compare-s15302",
+   "explanation_en": "The correct answer is SO₃ is trigonal planar because sulfur has three electron domains and no lone pair, while SO₃²⁻ is trigonal pyramidal because sulfur has four domains with one lone pair.. SO₃: (6 + 0 − 0)/2 = 3 domains, no lone pair, trigonal planar. SO₃²⁻: (6 + 0 + 2)/2 = 4 domains, three bonds and one lone pair, trigonal pyramidal.\nSO₃ is trigonal pyramidal and SO₃²⁻ is trigonal planar because the extra negative charge removes the lone pair from the sulfur atom in the sulfite ion. is incorrect: Reverses the effect of the added electrons.\nBoth are trigonal planar because the central sulfur atom in each species is bonded to three oxygen atoms, and bonded atoms alone decide the shape of each species. is incorrect: Ignores the lone pair on the central atom.\nBoth are trigonal pyramidal because a sulfur atom that is bonded to oxygen always carries a lone pair of electrons, so each species has the same trigonal pyramid shape in the end. is incorrect: Believes sulfur always has a lone pair."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5l_vsepr_compare",
+   "facts": [
+    "domains 3 and 4"
+   ],
+   "seed": 15302
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Standard 2.7 VSEPR comparison; skill 4.A fit."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique correct answer: SO3 trigonal planar, SO3^2- trigonal pyramidal."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions; explanation covers each option. The notes on distractors are terse but adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds, no arithmetic, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope VSEPR comparison with a unique key and distinct distractors; acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must derive Lewis structures for SO3 and SO3^2- (valence electron count including charge), count electron domains on S, and map domains/lone pairs to molecular geometry, then compare. Concept is core VSEPR, with plausible misconception distractors (ignoring lone pairs, charge removing lone pair). Reading and computation are minimal; difficulty comes from legitimate conceptual steps, so it fits a full-mock item rather than basic recall or advanced extension.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ }
+]

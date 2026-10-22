@@ -28,3 +28,9 @@ STAGE_T5_MC3 = ['ch_t5i_p2_oxide_formula_procedure', 'ch_t5i_p4_evaporation_forc
 
 # CH5 단독 6칸 대체 2부: chem-t5-mc4 실행 대상
 STAGE_T5_MC4 = ['ch_t5j_p6_ionization_anomaly', 'ch_t5j_p2_standard_solution_procedure', 'ch_t5j_p4_displacement_model', 'ch_t5j_ka_from_titration_table', 'ch_t5j_ammonium_ph', 'ch_t5j_equivalence_ph']
+
+# CH5 3.4 기체 단독 1칸 대체: chem-t5-mc5 실행 대상
+STAGE_T5_MC5 = ['ch_t5k_valve_mixing']
+
+# CH5 가상 4칸 대체(엄격 쌍둥이 관문 뒤): chem-t5-mc6 실행 대상
+STAGE_T5_MC6 = ['ch_t5l_kmt_claim', 'ch_t5l_vapor_pressure_claim', 'ch_t5l_viscosity_model', 'ch_t5l_vsepr_compare']
